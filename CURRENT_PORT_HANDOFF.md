@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-04. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit e4751c2c); ignored gate logs may
+history (the preceding handoff is in commit 8e175656); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -66,6 +66,8 @@ Five complete history/display and indirect stream upgrades retain that
 translated count and raise source-timed entries to 456.
 Ten complete older render-parent upgrades retain that translated count
 and raise source-timed entries to 465.
+Seventeen complete face/segment/grid/block stream-parent upgrades retain
+that translated count and raise source-timed entries to 481.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -73,6 +75,36 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 526 translated of the seeded 624 plus sixty-six source-only entries remain
+  registered: 592 rows, 481 source-timed (415 translated plus sixty-six
+  source-only). Seventeen complete face-stream upgrades own 773 unique /
+  99 shared boundaries and thirteen distinct / fifteen per-owner child
+  sites, with original direct/indirect callers sealed. All 557,056 whole
+  CPU/PC/full-SR/all-RAM calls pass; both controlled and original-child
+  calls cover every boundary for every owner. Frozen-clock fixtures use
+  degenerate geometry or original behind-view rejection and make no active
+  fill/outline/DMA claim. Ordered packets and terminal hardware match with
+  zero fixture writes. Actual dispatch passes 52,224 calls, exact
+  classification, complete boundary coverage and all guards. Normal C
+  passes every owner: 22,333 shadow / 26,010 sandbox. All 36,236 isolated
+  live frames and RAM seals match. Shared runtime/CPU/bus/arithmetic/
+  classification/observer and earlier completed domains are unchanged;
+  all 32 older generator families are byte-identical. Local DMA passes
+  773 / 24,736; fresh combined DMA and independent union pass 27,064 /
+  866,048 (previous 26,324 plus 773, overlap 33). GNU/MSVC Release pass;
+  build/ is 1.637 GiB. Full 592-row gate passes 568,446 shadow /
+  443,868 sandbox, zero mismatches, exact seals and poison frames.
+  Family exact through 600; ALL remains 416/361. Old batches 53/54 are
+  removed; C21060 in batch57 remains byte-identical and still needs complete
+  integration. See analysis/routines/native_c_face_stream_parents.md and
+  analysis/figures/native_face_stream_parents_checkpoint.json for exact
+  seals and per-recording classifications. Next fourteen tested/list/grid/
+  lattice face and edge owners have 533 unique / 294 shared boundaries and
+  original callers sealed in analysis/data/face_list_parents_scope_inventory.json.
+  Selected-segment indirect calls, older adapters, C2C392 computed transfer,
+  C1612C graphics-wait integration and the complete original cold/indirect/
+  callback graph remain game-function work. Goal is not complete.
 
 - 526 translated of the seeded 624 plus sixty-six source-only entries remain
   registered: 592 rows, 465 source-timed (399 translated plus sixty-six
@@ -1803,10 +1835,11 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
    is 526/624 translated plus sixty-six source-only callable entries. Next
-   reconstruct C30764/C309B6/C30B5C/C30D34/C30F78/C3112A/C31A64/C31ACC from
-   analysis/data/hud_parent_scope_inventory.json
-   (595 unique / 63 shared boundaries, actual incoming calls sealed),
-   preserving shared digit/fault tails and actual child return PCs. The six
+   reconstruct the fourteen tested/list/grid/lattice face and edge owners
+   sealed in analysis/data/face_list_parents_scope_inventory.json (533
+   unique / 294 shared boundaries). The seventeen segment/face/grid/block
+   parents and previous HUD-parent inventory are now complete. Continue
+   preserving original shared tails and actual child return PCs. The six
    stream/numeric/marker owners and two A0-base store upgrades are complete;
    original marker fixtures retain their bounded screen/plane limits and
    both strict recording rejections. The six new projection/readout owners and four shared projector

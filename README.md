@@ -16,14 +16,24 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
+Seventeen complete face-stream upgrades pass 557,056 full CPU/PC/SR/RAM
+calls, all 773 owned boundaries with both controlled and original children,
+and 52,224 dispatch calls. Independent normal C passes every owner: 22,333
+shadow / 26,010 sandbox. All 36,236 isolated live frames and seals match;
+combined DMA passes 27,064 / 866,048. Source-timed entries rise to 481. See
+[face-stream proof](analysis/routines/native_c_face_stream_parents.md).
+Next fourteen tested/list/grid/lattice face and edge owners have 533 unique /
+294 shared boundaries. Complete original function and callback coverage
+remains open; Kickstart services and timing remain deferred.
+
 Ten complete older rendering-parent upgrades pass 327,680 full CPU/PC/SR/
 RAM calls, all 1,101 controlled source boundaries and 30,720 bounded dispatch
 calls. Independent normal C passes every owner: 57,634 shadow / 62,893
 sandbox. All 36,236 isolated live frames and RAM seals match; combined DMA
 passes 26,324 / 842,368. Source-timed entries rise to 465. See
 [render-parent proof](analysis/routines/native_c_render_parents.md).
-Next seventeen face/segment/grid/block stream parents have 773 distinct and
-99 shared source boundaries. Full game-function and callback coverage remains open.
+Those seventeen face-stream parents are now complete as described above.
+Full game-function and callback coverage remains open.
 
 Five complete history/display and indirect stream upgrades pass 163,840
 full CPU/PC/SR/RAM calls, all 643 controlled source boundaries and 15,360

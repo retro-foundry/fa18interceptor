@@ -1,0 +1,4050 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "8e175656",
+  "new_registered_owners": [],
+  "upgraded_registered_owners": [
+    "C2129C",
+    "C212B0",
+    "C211DC",
+    "C2131C",
+    "C20E4E",
+    "C20E40",
+    "C21490",
+    "C2139E",
+    "C21412",
+    "C20F10",
+    "C20EC4",
+    "C20D68",
+    "C20904",
+    "C21A20",
+    "C217EA",
+    "C2159E",
+    "C210E6"
+  ],
+  "registered_translated_entries": 526,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 592,
+  "registered_timing_entries": 481,
+  "registered_translated_timing_entries": 415,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/face_stream_parents_source_scope.json",
+      "sha256": "06fa9a649a58041b2e2ec40cedaac8f48627d48662d20d55cd4a9759a181b55f"
+    },
+    "unique_instructions": 773,
+    "shared_within_batch": 99,
+    "distinct_child_sites": 13,
+    "child_sites_by_owner": 15,
+    "actual_original_callability": {
+      "C2129C": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "012C",
+          "slot": "C1FE14",
+          "bytes": "00c2129c",
+          "target": "C2129C",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": []
+        }
+      ],
+      "C212B0": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0034",
+          "slot": "C1FD1C",
+          "bytes": "00c212b0",
+          "target": "C212B0",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C212B0"
+            ]
+          ]
+        }
+      ],
+      "C211DC": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "002C",
+          "slot": "C1FD14",
+          "bytes": "00c211dc",
+          "target": "C211DC",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C211DC"
+            ]
+          ]
+        }
+      ],
+      "C2131C": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0038",
+          "slot": "C1FD20",
+          "bytes": "00c2131c",
+          "target": "C2131C",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C2131C"
+            ]
+          ]
+        }
+      ],
+      "C20E4E": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0078",
+          "slot": "C1FD60",
+          "bytes": "00c20e4e",
+          "target": "C20E4E",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20E4E"
+            ]
+          ]
+        }
+      ],
+      "C20E40": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "006C",
+          "slot": "C1FD54",
+          "bytes": "00c20e40",
+          "target": "C20E40",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20E40"
+            ]
+          ]
+        }
+      ],
+      "C21490": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0024",
+          "slot": "C1FD0C",
+          "bytes": "00c21490",
+          "target": "C21490",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C21490"
+            ]
+          ]
+        }
+      ],
+      "C2139E": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "003C",
+          "slot": "C1FD24",
+          "bytes": "00c2139e",
+          "target": "C2139E",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C2139E"
+            ]
+          ]
+        }
+      ],
+      "C21412": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0040",
+          "slot": "C1FD28",
+          "bytes": "00c21412",
+          "target": "C21412",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C21412"
+            ]
+          ]
+        }
+      ],
+      "C20F10": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "008C",
+          "slot": "C1FD74",
+          "bytes": "00c20f10",
+          "target": "C20F10",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20F10"
+            ]
+          ]
+        }
+      ],
+      "C20EC4": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0088",
+          "slot": "C1FD70",
+          "bytes": "00c20ec4",
+          "target": "C20EC4",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20EC4"
+            ]
+          ]
+        }
+      ],
+      "C20D68": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0058",
+          "slot": "C1FD40",
+          "bytes": "00c20d68",
+          "target": "C20D68",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20D68"
+            ]
+          ]
+        }
+      ],
+      "C20904": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "004C",
+          "slot": "C1FD34",
+          "bytes": "00c20904",
+          "target": "C20904",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20904"
+            ]
+          ]
+        }
+      ],
+      "C21A20": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00D4",
+          "slot": "C1FDBC",
+          "bytes": "00c21a20",
+          "target": "C21A20",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": []
+        }
+      ],
+      "C217EA": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00A4",
+          "slot": "C1FD8C",
+          "bytes": "00c217ea",
+          "target": "C217EA",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C217EA"
+            ]
+          ]
+        }
+      ],
+      "C2159E": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "001C",
+          "slot": "C1FD04",
+          "bytes": "00c2159e",
+          "target": "C2159E",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C2159E"
+            ]
+          ]
+        }
+      ],
+      "C210E6": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "005C",
+          "slot": "C1FD44",
+          "bytes": "00c210e6",
+          "target": "C210E6",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C210E6"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 557056,
+  "controlled_child_completed_calls": 278528,
+  "real_child_completed_calls": 278528,
+  "fixture_coverage": [
+    {
+      "owner": "C2129C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 37,
+      "observed_owner_pcs": 37,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C2129C.log",
+        "sha256": "d3f195cb181a5710aa9d17c0da5e434ba40ff5c0dda2e70934be00b419f55f09"
+      }
+    },
+    {
+      "owner": "C212B0",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 31,
+      "observed_owner_pcs": 31,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C212B0.log",
+        "sha256": "7ab95ad760e66988820b13e51a4997517cdc7b383277528f4f9484ad7263b1cc"
+      }
+    },
+    {
+      "owner": "C211DC",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C211DC.log",
+        "sha256": "688e23cfdbef5396209bd6003cb6a7827847ea7812cfe836c4265920544b1add"
+      }
+    },
+    {
+      "owner": "C2131C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C2131C.log",
+        "sha256": "a827ba77ba999fa16974f09a9e9c5110ca5d35a46bbd5a5cb081a3ced522abef"
+      }
+    },
+    {
+      "owner": "C20E4E",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C20E4E.log",
+        "sha256": "8f000a6e179721b324466bb035ab9ca17ee2448ce8951e8923f0499a82e649e2"
+      }
+    },
+    {
+      "owner": "C20E40",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C20E40.log",
+        "sha256": "4417bd243abbad871701ff11a24c7655ad24a9de501cc43ec6a631f7859906f4"
+      }
+    },
+    {
+      "owner": "C21490",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 33,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C21490.log",
+        "sha256": "a53e05a11c37e6a6bda8b2be58bf898a0f11cae4e8c8d88ae5e609b4c6ccfd35"
+      }
+    },
+    {
+      "owner": "C2139E",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C2139E.log",
+        "sha256": "0e59d9bd78a55e11cc2008c4afcfd7d36d139f861085adfe835e1b5590f1d1d3"
+      }
+    },
+    {
+      "owner": "C21412",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C21412.log",
+        "sha256": "fcaa3d4a8367067518de223defb59869838e654c3bcb92bfa4bd9492410a7e9e"
+      }
+    },
+    {
+      "owner": "C20F10",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C20F10.log",
+        "sha256": "60eef98f82fdc58debff0aeca555e9a95704ac8dd1e7f38803da45aac6c562b7"
+      }
+    },
+    {
+      "owner": "C20EC4",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 66,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C20EC4.log",
+        "sha256": "e53d4e934b62aeb5045560d252914f56fb1c49145b11ae22ae886e2594717627"
+      }
+    },
+    {
+      "owner": "C20D68",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 59,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C20D68.log",
+        "sha256": "64dd9f7b8e6b6561a3ffb2eed3c96eb67ff12274508fe5aa981757bdd2443e8f"
+      }
+    },
+    {
+      "owner": "C20904",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 91,
+      "observed_owner_pcs": 91,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C20904.log",
+        "sha256": "ed4e42d5b0c9390393581c5a0344cb675c9b150d54bc6141f776c0b0e24d0cbe"
+      }
+    },
+    {
+      "owner": "C21A20",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 92,
+      "observed_owner_pcs": 92,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C21A20.log",
+        "sha256": "4da003628dd344e6b95189b2f4d15600ff6777307e3cb8f79117ae21de3ff351"
+      }
+    },
+    {
+      "owner": "C217EA",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C217EA.log",
+        "sha256": "bcf01594cc03bea420522d38f016c5492a846d987abaf49c2b4cb9617568a2c7"
+      }
+    },
+    {
+      "owner": "C2159E",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C2159E.log",
+        "sha256": "f22d5dacf706aecb7eaa318e6a646b96fa77888c6c60789ae9d1022c93f7bdf1"
+      }
+    },
+    {
+      "owner": "C210E6",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_contract_C210E6.log",
+        "sha256": "72f5d535403d34367e9aabc576d76fcfb15d7f4e01b32cc63e9492ee1b456e2a"
+      }
+    },
+    {
+      "owner": "C2129C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 37,
+      "observed_owner_pcs": 37,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C2129C.log",
+        "sha256": "bc6f0f4bc1c7ed90e123f4c9410affbffc8ed328c7303cd652cfe1ca6f2d3fe9"
+      }
+    },
+    {
+      "owner": "C212B0",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 31,
+      "observed_owner_pcs": 31,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C212B0.log",
+        "sha256": "b48a1d5366817751c91e8e32932592a15443db8d46dc3d53b4c164e90cd9a642"
+      }
+    },
+    {
+      "owner": "C211DC",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C211DC.log",
+        "sha256": "9b2afd8b182ffb8549d93bf835fb4c4822ff36dafb4e336745e5129309cecb41"
+      }
+    },
+    {
+      "owner": "C2131C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C2131C.log",
+        "sha256": "0061f74aad5d5b9de733a7f31c08d97745b27941df3c902067b34d889e6f00ca"
+      }
+    },
+    {
+      "owner": "C20E4E",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C20E4E.log",
+        "sha256": "b58b702a0b6345c4fcc53f072d7b27e9c90afba7f40991db131fae9bb2f808f2"
+      }
+    },
+    {
+      "owner": "C20E40",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C20E40.log",
+        "sha256": "2375e61668b2c6787423b998f4caf60edd5125ff48cc8a92bf14b428a03975e0"
+      }
+    },
+    {
+      "owner": "C21490",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 33,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C21490.log",
+        "sha256": "9e90e75ec5004dd07b5e225139546d891da90267b574bad6eded41b3115f1d67"
+      }
+    },
+    {
+      "owner": "C2139E",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C2139E.log",
+        "sha256": "d91459e10f54deb712126c9fe646a07e3408c3ad03567d660b60d65c408f79a5"
+      }
+    },
+    {
+      "owner": "C21412",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C21412.log",
+        "sha256": "bb699636978a53bbcb1cb1023a116c09c710700a0f7cc1786dffd8785979d1f1"
+      }
+    },
+    {
+      "owner": "C20F10",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C20F10.log",
+        "sha256": "bff1f5d7184ce53e6252188d08fef34f75c1263333c3fa0581402771b27ef71e"
+      }
+    },
+    {
+      "owner": "C20EC4",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 66,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C20EC4.log",
+        "sha256": "cd4d4b0b74dc2ea077d5cfe51a7c914956c500f89cc33a8ed7c9c9fc20ac4ab3"
+      }
+    },
+    {
+      "owner": "C20D68",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 59,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C20D68.log",
+        "sha256": "76cee0bb9128d73ede267c39446a4433aae82a28115155fe8e610da401c27df0"
+      }
+    },
+    {
+      "owner": "C20904",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 91,
+      "observed_owner_pcs": 91,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C20904.log",
+        "sha256": "74fde42591a619c0186a667a3bd6dda5ada60019d244871e6b80142d9ac68a3c"
+      }
+    },
+    {
+      "owner": "C21A20",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 92,
+      "observed_owner_pcs": 92,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C21A20.log",
+        "sha256": "5597abec15dcfa83325752144770c55aa36d3fbbde5f4e7678eeda501ff38797"
+      }
+    },
+    {
+      "owner": "C217EA",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C217EA.log",
+        "sha256": "b7be40b0047701ee2b61d3051a120429cd17d55961c0cebf4c16ceb42cdcbede"
+      }
+    },
+    {
+      "owner": "C2159E",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C2159E.log",
+        "sha256": "7aaa39d79b2ceb3f5eabb22216383762dedd7e76a43428cee87122055e2fd4c1"
+      }
+    },
+    {
+      "owner": "C210E6",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_real_C210E6.log",
+        "sha256": "db03d7f60dfa1878a98fc9f4c48e0624dcc327dccecdf572441ef64c0b53143d"
+      }
+    }
+  ],
+  "controlled_union_pcs": 773,
+  "real_child_union_pcs": 773,
+  "actual_dispatch_completed_calls": 52224,
+  "dispatch_fixtures": [
+    {
+      "owner": "C2129C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 37,
+      "observed_owner_pcs": 37,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2129C_on.log",
+        "sha256": "ac19c63c59aca5e65e5fa7a988a2bc577c7fef3bf7b33bf7b6f201aeda891ebd"
+      }
+    },
+    {
+      "owner": "C2129C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 37,
+      "observed_owner_pcs": 37,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2129C_shadow.log",
+        "sha256": "ac19c63c59aca5e65e5fa7a988a2bc577c7fef3bf7b33bf7b6f201aeda891ebd"
+      }
+    },
+    {
+      "owner": "C2129C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 37,
+      "observed_owner_pcs": 37,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2129C_sandbox.log",
+        "sha256": "ac19c63c59aca5e65e5fa7a988a2bc577c7fef3bf7b33bf7b6f201aeda891ebd"
+      }
+    },
+    {
+      "owner": "C212B0",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 31,
+      "observed_owner_pcs": 31,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C212B0_on.log",
+        "sha256": "084602a86098284a5a438955054d96c4645664608c1f52d005212f69d8556b12"
+      }
+    },
+    {
+      "owner": "C212B0",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 31,
+      "observed_owner_pcs": 31,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C212B0_shadow.log",
+        "sha256": "084602a86098284a5a438955054d96c4645664608c1f52d005212f69d8556b12"
+      }
+    },
+    {
+      "owner": "C212B0",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 31,
+      "observed_owner_pcs": 31,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C212B0_sandbox.log",
+        "sha256": "084602a86098284a5a438955054d96c4645664608c1f52d005212f69d8556b12"
+      }
+    },
+    {
+      "owner": "C211DC",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C211DC_on.log",
+        "sha256": "959cf739aaed14ac8c3e41a2f27e1ff900bd5aa5d228ae47bf7464edfb75e650"
+      }
+    },
+    {
+      "owner": "C211DC",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C211DC_shadow.log",
+        "sha256": "959cf739aaed14ac8c3e41a2f27e1ff900bd5aa5d228ae47bf7464edfb75e650"
+      }
+    },
+    {
+      "owner": "C211DC",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 21,
+      "observed_owner_pcs": 21,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C211DC_sandbox.log",
+        "sha256": "959cf739aaed14ac8c3e41a2f27e1ff900bd5aa5d228ae47bf7464edfb75e650"
+      }
+    },
+    {
+      "owner": "C2131C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2131C_on.log",
+        "sha256": "4ee75f93e4086dc7d1dabbad681a73118fb6968e616883b01af41eba0f15120d"
+      }
+    },
+    {
+      "owner": "C2131C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2131C_shadow.log",
+        "sha256": "4ee75f93e4086dc7d1dabbad681a73118fb6968e616883b01af41eba0f15120d"
+      }
+    },
+    {
+      "owner": "C2131C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2131C_sandbox.log",
+        "sha256": "4ee75f93e4086dc7d1dabbad681a73118fb6968e616883b01af41eba0f15120d"
+      }
+    },
+    {
+      "owner": "C20E4E",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20E4E_on.log",
+        "sha256": "62f05b4a65337879ef32a76bb5dec851f502ed58f0719cd602a8c9375a83b9f5"
+      }
+    },
+    {
+      "owner": "C20E4E",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20E4E_shadow.log",
+        "sha256": "62f05b4a65337879ef32a76bb5dec851f502ed58f0719cd602a8c9375a83b9f5"
+      }
+    },
+    {
+      "owner": "C20E4E",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 35,
+      "observed_owner_pcs": 35,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20E4E_sandbox.log",
+        "sha256": "62f05b4a65337879ef32a76bb5dec851f502ed58f0719cd602a8c9375a83b9f5"
+      }
+    },
+    {
+      "owner": "C20E40",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20E40_on.log",
+        "sha256": "66e75a31889320a914c60b3a7eba9348466f5dcf8831dd15c9fb311e3f898bf3"
+      }
+    },
+    {
+      "owner": "C20E40",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20E40_shadow.log",
+        "sha256": "66e75a31889320a914c60b3a7eba9348466f5dcf8831dd15c9fb311e3f898bf3"
+      }
+    },
+    {
+      "owner": "C20E40",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 36,
+      "observed_owner_pcs": 36,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20E40_sandbox.log",
+        "sha256": "66e75a31889320a914c60b3a7eba9348466f5dcf8831dd15c9fb311e3f898bf3"
+      }
+    },
+    {
+      "owner": "C21490",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 33,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21490_on.log",
+        "sha256": "10ee41ac9d3a72324444e5a2bfb72b3c5e354d493080b5b6f132ba8f94c2bf2c"
+      }
+    },
+    {
+      "owner": "C21490",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 33,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21490_shadow.log",
+        "sha256": "10ee41ac9d3a72324444e5a2bfb72b3c5e354d493080b5b6f132ba8f94c2bf2c"
+      }
+    },
+    {
+      "owner": "C21490",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 33,
+      "observed_owner_pcs": 33,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21490_sandbox.log",
+        "sha256": "10ee41ac9d3a72324444e5a2bfb72b3c5e354d493080b5b6f132ba8f94c2bf2c"
+      }
+    },
+    {
+      "owner": "C2139E",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2139E_on.log",
+        "sha256": "8503d2d4bddd94602fd747288e20a5059d06e98bddccf4ae3d0eda9aa284869d"
+      }
+    },
+    {
+      "owner": "C2139E",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2139E_shadow.log",
+        "sha256": "8503d2d4bddd94602fd747288e20a5059d06e98bddccf4ae3d0eda9aa284869d"
+      }
+    },
+    {
+      "owner": "C2139E",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 32,
+      "observed_owner_pcs": 32,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2139E_sandbox.log",
+        "sha256": "8503d2d4bddd94602fd747288e20a5059d06e98bddccf4ae3d0eda9aa284869d"
+      }
+    },
+    {
+      "owner": "C21412",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21412_on.log",
+        "sha256": "16084c738291e82cfa1b2cdcd67b3f8f07f76b0f1edebb2d2d2f2de943525948"
+      }
+    },
+    {
+      "owner": "C21412",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21412_shadow.log",
+        "sha256": "16084c738291e82cfa1b2cdcd67b3f8f07f76b0f1edebb2d2d2f2de943525948"
+      }
+    },
+    {
+      "owner": "C21412",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 41,
+      "observed_owner_pcs": 41,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21412_sandbox.log",
+        "sha256": "16084c738291e82cfa1b2cdcd67b3f8f07f76b0f1edebb2d2d2f2de943525948"
+      }
+    },
+    {
+      "owner": "C20F10",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20F10_on.log",
+        "sha256": "10a20bd510133b542c8883db5ed4921c49ae00f1b75f11571972a2eabb22d6b3"
+      }
+    },
+    {
+      "owner": "C20F10",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20F10_shadow.log",
+        "sha256": "10a20bd510133b542c8883db5ed4921c49ae00f1b75f11571972a2eabb22d6b3"
+      }
+    },
+    {
+      "owner": "C20F10",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20F10_sandbox.log",
+        "sha256": "10a20bd510133b542c8883db5ed4921c49ae00f1b75f11571972a2eabb22d6b3"
+      }
+    },
+    {
+      "owner": "C20EC4",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 66,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20EC4_on.log",
+        "sha256": "2f630ee1af5297e775edab08723b6cff84f814e79a90187515152f73aa0c4fe6"
+      }
+    },
+    {
+      "owner": "C20EC4",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 66,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20EC4_shadow.log",
+        "sha256": "2f630ee1af5297e775edab08723b6cff84f814e79a90187515152f73aa0c4fe6"
+      }
+    },
+    {
+      "owner": "C20EC4",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 66,
+      "observed_owner_pcs": 66,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20EC4_sandbox.log",
+        "sha256": "2f630ee1af5297e775edab08723b6cff84f814e79a90187515152f73aa0c4fe6"
+      }
+    },
+    {
+      "owner": "C20D68",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 59,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20D68_on.log",
+        "sha256": "7850c1ead91abc699b656d1ec288eb9a676bd806497b301c7b570d8ab9415d00"
+      }
+    },
+    {
+      "owner": "C20D68",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 59,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20D68_shadow.log",
+        "sha256": "7850c1ead91abc699b656d1ec288eb9a676bd806497b301c7b570d8ab9415d00"
+      }
+    },
+    {
+      "owner": "C20D68",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 59,
+      "observed_owner_pcs": 59,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20D68_sandbox.log",
+        "sha256": "7850c1ead91abc699b656d1ec288eb9a676bd806497b301c7b570d8ab9415d00"
+      }
+    },
+    {
+      "owner": "C20904",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 91,
+      "observed_owner_pcs": 91,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20904_on.log",
+        "sha256": "75f0ad4d88c33fa534ef309bb5795eff4495ab5d5a4f7e100c8d40b5f038d6a3"
+      }
+    },
+    {
+      "owner": "C20904",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 91,
+      "observed_owner_pcs": 91,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20904_shadow.log",
+        "sha256": "75f0ad4d88c33fa534ef309bb5795eff4495ab5d5a4f7e100c8d40b5f038d6a3"
+      }
+    },
+    {
+      "owner": "C20904",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 91,
+      "observed_owner_pcs": 91,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C20904_sandbox.log",
+        "sha256": "75f0ad4d88c33fa534ef309bb5795eff4495ab5d5a4f7e100c8d40b5f038d6a3"
+      }
+    },
+    {
+      "owner": "C21A20",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 92,
+      "observed_owner_pcs": 92,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21A20_on.log",
+        "sha256": "71bc3e5fbfcc74af66701934547fc9860bbb3493c43799d5288517ec39d9508c"
+      }
+    },
+    {
+      "owner": "C21A20",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 92,
+      "observed_owner_pcs": 92,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21A20_shadow.log",
+        "sha256": "71bc3e5fbfcc74af66701934547fc9860bbb3493c43799d5288517ec39d9508c"
+      }
+    },
+    {
+      "owner": "C21A20",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 92,
+      "observed_owner_pcs": 92,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C21A20_sandbox.log",
+        "sha256": "71bc3e5fbfcc74af66701934547fc9860bbb3493c43799d5288517ec39d9508c"
+      }
+    },
+    {
+      "owner": "C217EA",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C217EA_on.log",
+        "sha256": "cc29c8a884d355a98b79518a47ab281c1aa9c1268c3dccdecc695094359b8f91"
+      }
+    },
+    {
+      "owner": "C217EA",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C217EA_shadow.log",
+        "sha256": "cc29c8a884d355a98b79518a47ab281c1aa9c1268c3dccdecc695094359b8f91"
+      }
+    },
+    {
+      "owner": "C217EA",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 77,
+      "observed_owner_pcs": 77,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C217EA_sandbox.log",
+        "sha256": "cc29c8a884d355a98b79518a47ab281c1aa9c1268c3dccdecc695094359b8f91"
+      }
+    },
+    {
+      "owner": "C2159E",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2159E_on.log",
+        "sha256": "9325bd2d0fce77547fcc76b1b4e46c956ecd9586b92436e1a2d9b22d9dec66f2"
+      }
+    },
+    {
+      "owner": "C2159E",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2159E_shadow.log",
+        "sha256": "9325bd2d0fce77547fcc76b1b4e46c956ecd9586b92436e1a2d9b22d9dec66f2"
+      }
+    },
+    {
+      "owner": "C2159E",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C2159E_sandbox.log",
+        "sha256": "9325bd2d0fce77547fcc76b1b4e46c956ecd9586b92436e1a2d9b22d9dec66f2"
+      }
+    },
+    {
+      "owner": "C210E6",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C210E6_on.log",
+        "sha256": "5728b08c2d20b49ad79af7c0de9739f190afd7eae08cb203c0d0d838139a4e4f"
+      }
+    },
+    {
+      "owner": "C210E6",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C210E6_shadow.log",
+        "sha256": "5728b08c2d20b49ad79af7c0de9739f190afd7eae08cb203c0d0d838139a4e4f"
+      }
+    },
+    {
+      "owner": "C210E6",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 72,
+      "observed_owner_pcs": 72,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_stream_parents_dispatch_C210E6_sandbox.log",
+        "sha256": "5728b08c2d20b49ad79af7c0de9739f190afd7eae08cb203c0d0d838139a4e4f"
+      }
+    }
+  ],
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "ordered_custom_writes": 0,
+    "original_children_use_no_draw_bounds": true,
+    "active_drawing_is_not_claimed_by_frozen_clock_fixtures": true,
+    "active_drawing_recording_checks_independent": true,
+    "shared_machine_observer_unchanged": true
+  },
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C2129C": {
+          "calls": 835,
+          "compared": 788,
+          "matched": 788,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 47
+        },
+        "C212B0": {
+          "calls": 16054,
+          "compared": 14832,
+          "matched": 14832,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1222
+        },
+        "C211DC": {
+          "calls": 905,
+          "compared": 823,
+          "matched": 823,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 82
+        },
+        "C2131C": {
+          "calls": 1123,
+          "compared": 1020,
+          "matched": 1020,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 103
+        },
+        "C20E4E": {
+          "calls": 1888,
+          "compared": 1690,
+          "matched": 1690,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 198
+        },
+        "C20E40": {
+          "calls": 24,
+          "compared": 22,
+          "matched": 22,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 2
+        },
+        "C21490": {
+          "calls": 193,
+          "compared": 190,
+          "matched": 190,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 3
+        },
+        "C2139E": {
+          "calls": 316,
+          "compared": 260,
+          "matched": 260,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 56
+        },
+        "C21412": {
+          "calls": 174,
+          "compared": 154,
+          "matched": 154,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 20
+        },
+        "C20F10": {
+          "calls": 93,
+          "compared": 93,
+          "matched": 93,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20EC4": {
+          "calls": 292,
+          "compared": 290,
+          "matched": 290,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 2
+        },
+        "C20D68": {
+          "calls": 1012,
+          "compared": 919,
+          "matched": 919,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 93
+        },
+        "C20904": {
+          "calls": 965,
+          "compared": 807,
+          "matched": 807,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 158
+        },
+        "C21A20": {
+          "calls": 187,
+          "compared": 185,
+          "matched": 185,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 2
+        },
+        "C217EA": {
+          "calls": 12,
+          "compared": 12,
+          "matched": 12,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2159E": {
+          "calls": 254,
+          "compared": 235,
+          "matched": 235,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 19
+        },
+        "C210E6": {
+          "calls": 13,
+          "compared": 13,
+          "matched": 13,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      },
+      "sandbox": {
+        "C2129C": {
+          "calls": 837,
+          "compared": 837,
+          "matched": 837,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C212B0": {
+          "calls": 17379,
+          "compared": 17379,
+          "matched": 17379,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C211DC": {
+          "calls": 905,
+          "compared": 905,
+          "matched": 905,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2131C": {
+          "calls": 1123,
+          "compared": 1123,
+          "matched": 1123,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20E4E": {
+          "calls": 1888,
+          "compared": 1888,
+          "matched": 1888,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20E40": {
+          "calls": 24,
+          "compared": 24,
+          "matched": 24,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C21490": {
+          "calls": 193,
+          "compared": 193,
+          "matched": 193,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2139E": {
+          "calls": 316,
+          "compared": 316,
+          "matched": 316,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C21412": {
+          "calls": 174,
+          "compared": 174,
+          "matched": 174,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20F10": {
+          "calls": 93,
+          "compared": 93,
+          "matched": 93,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20EC4": {
+          "calls": 292,
+          "compared": 292,
+          "matched": 292,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20D68": {
+          "calls": 1759,
+          "compared": 1759,
+          "matched": 1759,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20904": {
+          "calls": 561,
+          "compared": 561,
+          "matched": 561,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C21A20": {
+          "calls": 187,
+          "compared": 187,
+          "matched": 187,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C217EA": {
+          "calls": 12,
+          "compared": 12,
+          "matched": 12,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2159E": {
+          "calls": 254,
+          "compared": 254,
+          "matched": 254,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C210E6": {
+          "calls": 13,
+          "compared": 13,
+          "matched": 13,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "shadow_matches": 22333,
+    "sandbox_matches": 26010,
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C212B0",
+            "name": "draw_segment_pairs",
+            "calls": 11228,
+            "compared": 10411,
+            "matched": 10411,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 817,
+            "mean_cycles": 9022,
+            "busy_input_calls": 10411,
+            "busy_input_reads": 252633
+          },
+          {
+            "entry": "C2129C",
+            "name": "draw_segment_pairs_near",
+            "calls": 835,
+            "compared": 788,
+            "matched": 788,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 47,
+            "mean_cycles": 6402,
+            "busy_input_calls": 788,
+            "busy_input_reads": 32502
+          },
+          {
+            "entry": "C211DC",
+            "name": "draw_segment_run",
+            "calls": 905,
+            "compared": 823,
+            "matched": 823,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 82,
+            "mean_cycles": 11965,
+            "busy_input_calls": 823,
+            "busy_input_reads": 15552
+          },
+          {
+            "entry": "C2131C",
+            "name": "draw_offset_segments",
+            "calls": 1123,
+            "compared": 1020,
+            "matched": 1020,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 103,
+            "mean_cycles": 10522,
+            "busy_input_calls": 1020,
+            "busy_input_reads": 42964
+          },
+          {
+            "entry": "C20E4E",
+            "name": "draw_parallelogram_face",
+            "calls": 1888,
+            "compared": 1690,
+            "matched": 1690,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 198,
+            "mean_cycles": 11554,
+            "busy_input_calls": 1690,
+            "busy_input_reads": 29661
+          },
+          {
+            "entry": "C20E40",
+            "name": "draw_parallelogram_face_2",
+            "calls": 24,
+            "compared": 22,
+            "matched": 22,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 9585,
+            "busy_input_calls": 22,
+            "busy_input_reads": 88
+          },
+          {
+            "entry": "C21490",
+            "name": "draw_parallelogram_face_near",
+            "calls": 193,
+            "compared": 190,
+            "matched": 190,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 1089,
+            "busy_input_calls": 190,
+            "busy_input_reads": 55
+          },
+          {
+            "entry": "C2139E",
+            "name": "draw_offset_face",
+            "calls": 316,
+            "compared": 260,
+            "matched": 260,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 56,
+            "mean_cycles": 20959,
+            "busy_input_calls": 260,
+            "busy_input_reads": 8836
+          },
+          {
+            "entry": "C21412",
+            "name": "draw_mixed_face",
+            "calls": 174,
+            "compared": 154,
+            "matched": 154,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 20,
+            "mean_cycles": 10941,
+            "busy_input_calls": 154,
+            "busy_input_reads": 1130
+          },
+          {
+            "entry": "C20F10",
+            "name": "extend_parallelograms",
+            "calls": 93,
+            "compared": 93,
+            "matched": 93,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 394,
+            "busy_input_calls": 93,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20EC4",
+            "name": "extend_parallelograms_scaled",
+            "calls": 292,
+            "compared": 290,
+            "matched": 290,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 630,
+            "busy_input_calls": 290,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20D68",
+            "name": "draw_segment_grid",
+            "calls": 473,
+            "compared": 394,
+            "matched": 394,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 79,
+            "mean_cycles": 15329,
+            "busy_input_calls": 394,
+            "busy_input_reads": 11592
+          },
+          {
+            "entry": "C20904",
+            "name": "draw_segment_lattice",
+            "calls": 352,
+            "compared": 311,
+            "matched": 311,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 41,
+            "mean_cycles": 20454,
+            "busy_input_calls": 311,
+            "busy_input_reads": 13081
+          },
+          {
+            "entry": "C21A20",
+            "name": "offset_block_copies",
+            "calls": 187,
+            "compared": 185,
+            "matched": 185,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 1211,
+            "busy_input_calls": 185,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C217EA",
+            "name": "extend_block_scaled",
+            "calls": 12,
+            "compared": 12,
+            "matched": 12,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 851,
+            "busy_input_calls": 12,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2159E",
+            "name": "draw_side_face",
+            "calls": 254,
+            "compared": 235,
+            "matched": 235,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 19,
+            "mean_cycles": 10562,
+            "busy_input_calls": 235,
+            "busy_input_reads": 1616
+          },
+          {
+            "entry": "C210E6",
+            "name": "draw_quad_strip",
+            "calls": 13,
+            "compared": 13,
+            "matched": 13,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 21570,
+            "busy_input_calls": 13,
+            "busy_input_reads": 114
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2129C_C212B0_C211DC_C2131C_C20E4E_C20E40_C21490_C2139E_C21412_C20F10_C20EC4_C20D68_C20904_C21A20_C217EA_C2159E_C210E6_demo01_shadow.json",
+          "sha256": "7c3ae66b8eba6db8d8c12690195bcd6700c4524db321d18d1e8c586b09c6084d"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C212B0",
+            "name": "draw_segment_pairs",
+            "calls": 3581,
+            "compared": 3247,
+            "matched": 3247,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 334,
+            "mean_cycles": 12247,
+            "busy_input_calls": 3247,
+            "busy_input_reads": 66079
+          },
+          {
+            "entry": "C2129C",
+            "name": "draw_segment_pairs_near",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C211DC",
+            "name": "draw_segment_run",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2131C",
+            "name": "draw_offset_segments",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E4E",
+            "name": "draw_parallelogram_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E40",
+            "name": "draw_parallelogram_face_2",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21490",
+            "name": "draw_parallelogram_face_near",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2139E",
+            "name": "draw_offset_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21412",
+            "name": "draw_mixed_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20F10",
+            "name": "extend_parallelograms",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20EC4",
+            "name": "extend_parallelograms_scaled",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20D68",
+            "name": "draw_segment_grid",
+            "calls": 241,
+            "compared": 230,
+            "matched": 230,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 11,
+            "mean_cycles": 8873,
+            "busy_input_calls": 230,
+            "busy_input_reads": 7293
+          },
+          {
+            "entry": "C20904",
+            "name": "draw_segment_lattice",
+            "calls": 584,
+            "compared": 468,
+            "matched": 468,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 116,
+            "mean_cycles": 18069,
+            "busy_input_calls": 468,
+            "busy_input_reads": 9654
+          },
+          {
+            "entry": "C21A20",
+            "name": "offset_block_copies",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C217EA",
+            "name": "extend_block_scaled",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2159E",
+            "name": "draw_side_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C210E6",
+            "name": "draw_quad_strip",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2129C_C212B0_C211DC_C2131C_C20E4E_C20E40_C21490_C2139E_C21412_C20F10_C20EC4_C20D68_C20904_C21A20_C217EA_C2159E_C210E6_qual_carrier_success_shadow.json",
+          "sha256": "107e95a160ad7a045550531f62ac3c0ed82c3b28a6b4220831ff9b4441e52461"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C212B0",
+            "name": "draw_segment_pairs",
+            "calls": 1245,
+            "compared": 1174,
+            "matched": 1174,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 71,
+            "mean_cycles": 11911,
+            "busy_input_calls": 1174,
+            "busy_input_reads": 38962
+          },
+          {
+            "entry": "C2129C",
+            "name": "draw_segment_pairs_near",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C211DC",
+            "name": "draw_segment_run",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2131C",
+            "name": "draw_offset_segments",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E4E",
+            "name": "draw_parallelogram_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E40",
+            "name": "draw_parallelogram_face_2",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21490",
+            "name": "draw_parallelogram_face_near",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2139E",
+            "name": "draw_offset_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21412",
+            "name": "draw_mixed_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20F10",
+            "name": "extend_parallelograms",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20EC4",
+            "name": "extend_parallelograms_scaled",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20D68",
+            "name": "draw_segment_grid",
+            "calls": 298,
+            "compared": 295,
+            "matched": 295,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 2748,
+            "busy_input_calls": 295,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20904",
+            "name": "draw_segment_lattice",
+            "calls": 29,
+            "compared": 28,
+            "matched": 28,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 4459,
+            "busy_input_calls": 28,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21A20",
+            "name": "offset_block_copies",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C217EA",
+            "name": "extend_block_scaled",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2159E",
+            "name": "draw_side_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C210E6",
+            "name": "draw_quad_strip",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2129C_C212B0_C211DC_C2131C_C20E4E_C20E40_C21490_C2139E_C21412_C20F10_C20EC4_C20D68_C20904_C21A20_C217EA_C2159E_C210E6_qual_fail_crashes_shadow.json",
+          "sha256": "60c4ee0deaf5205687e4b313d134c93602cd108448cb2e9cb91ebf4461c98de2"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C212B0",
+            "name": "draw_segment_pairs",
+            "calls": 11223,
+            "compared": 11223,
+            "matched": 11223,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 8254,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2129C",
+            "name": "draw_segment_pairs_near",
+            "calls": 837,
+            "compared": 837,
+            "matched": 837,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4382,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C211DC",
+            "name": "draw_segment_run",
+            "calls": 905,
+            "compared": 905,
+            "matched": 905,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 11920,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2131C",
+            "name": "draw_offset_segments",
+            "calls": 1123,
+            "compared": 1123,
+            "matched": 1123,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 8787,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E4E",
+            "name": "draw_parallelogram_face",
+            "calls": 1888,
+            "compared": 1888,
+            "matched": 1888,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 9727,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E40",
+            "name": "draw_parallelogram_face_2",
+            "calls": 24,
+            "compared": 24,
+            "matched": 24,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 9486,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21490",
+            "name": "draw_parallelogram_face_near",
+            "calls": 193,
+            "compared": 193,
+            "matched": 193,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1211,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2139E",
+            "name": "draw_offset_face",
+            "calls": 316,
+            "compared": 316,
+            "matched": 316,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 12901,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21412",
+            "name": "draw_mixed_face",
+            "calls": 174,
+            "compared": 174,
+            "matched": 174,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 10403,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20F10",
+            "name": "extend_parallelograms",
+            "calls": 93,
+            "compared": 93,
+            "matched": 93,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 400,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20EC4",
+            "name": "extend_parallelograms_scaled",
+            "calls": 292,
+            "compared": 292,
+            "matched": 292,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 633,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20D68",
+            "name": "draw_segment_grid",
+            "calls": 471,
+            "compared": 471,
+            "matched": 471,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 15268,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20904",
+            "name": "draw_segment_lattice",
+            "calls": 352,
+            "compared": 352,
+            "matched": 352,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 18799,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21A20",
+            "name": "offset_block_copies",
+            "calls": 187,
+            "compared": 187,
+            "matched": 187,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1209,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C217EA",
+            "name": "extend_block_scaled",
+            "calls": 12,
+            "compared": 12,
+            "matched": 12,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 839,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2159E",
+            "name": "draw_side_face",
+            "calls": 254,
+            "compared": 254,
+            "matched": 254,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 8844,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C210E6",
+            "name": "draw_quad_strip",
+            "calls": 13,
+            "compared": 13,
+            "matched": 13,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 20640,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2129C_C212B0_C211DC_C2131C_C20E4E_C20E40_C21490_C2139E_C21412_C20F10_C20EC4_C20D68_C20904_C21A20_C217EA_C2159E_C210E6_demo01_sandbox.json",
+          "sha256": "288119990706725cd77a3df7b92df328e2b1b91e0f42f4b31e7afc9356d9dbe1"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C212B0",
+            "name": "draw_segment_pairs",
+            "calls": 4911,
+            "compared": 4911,
+            "matched": 4911,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 9619,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2129C",
+            "name": "draw_segment_pairs_near",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C211DC",
+            "name": "draw_segment_run",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2131C",
+            "name": "draw_offset_segments",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E4E",
+            "name": "draw_parallelogram_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E40",
+            "name": "draw_parallelogram_face_2",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21490",
+            "name": "draw_parallelogram_face_near",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2139E",
+            "name": "draw_offset_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21412",
+            "name": "draw_mixed_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20F10",
+            "name": "extend_parallelograms",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20EC4",
+            "name": "extend_parallelograms_scaled",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20D68",
+            "name": "draw_segment_grid",
+            "calls": 990,
+            "compared": 990,
+            "matched": 990,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2706,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20904",
+            "name": "draw_segment_lattice",
+            "calls": 180,
+            "compared": 180,
+            "matched": 180,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4485,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21A20",
+            "name": "offset_block_copies",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C217EA",
+            "name": "extend_block_scaled",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2159E",
+            "name": "draw_side_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C210E6",
+            "name": "draw_quad_strip",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2129C_C212B0_C211DC_C2131C_C20E4E_C20E40_C21490_C2139E_C21412_C20F10_C20EC4_C20D68_C20904_C21A20_C217EA_C2159E_C210E6_qual_carrier_success_sandbox.json",
+          "sha256": "5a96b9a9b65b3720f5c9695f16027150cfa159ead8977d461abcd74e06c521f1"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C212B0",
+            "name": "draw_segment_pairs",
+            "calls": 1245,
+            "compared": 1245,
+            "matched": 1245,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 11143,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2129C",
+            "name": "draw_segment_pairs_near",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C211DC",
+            "name": "draw_segment_run",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2131C",
+            "name": "draw_offset_segments",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E4E",
+            "name": "draw_parallelogram_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20E40",
+            "name": "draw_parallelogram_face_2",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21490",
+            "name": "draw_parallelogram_face_near",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2139E",
+            "name": "draw_offset_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21412",
+            "name": "draw_mixed_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20F10",
+            "name": "extend_parallelograms",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20EC4",
+            "name": "extend_parallelograms_scaled",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20D68",
+            "name": "draw_segment_grid",
+            "calls": 298,
+            "compared": 298,
+            "matched": 298,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2762,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20904",
+            "name": "draw_segment_lattice",
+            "calls": 29,
+            "compared": 29,
+            "matched": 29,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4332,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21A20",
+            "name": "offset_block_copies",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C217EA",
+            "name": "extend_block_scaled",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2159E",
+            "name": "draw_side_face",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C210E6",
+            "name": "draw_quad_strip",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C2129C_C212B0_C211DC_C2131C_C20E4E_C20E40_C21490_C2139E_C21412_C20F10_C20EC4_C20D68_C20904_C21A20_C217EA_C2159E_C210E6_qual_fail_crashes_sandbox.json",
+          "sha256": "35bbdf1b3d7c448dbe4ad6eb9009d531078b76f06889359ce88e6828d5b43485"
+        }
+      }
+    ],
+    "each_owner_has_completed_comparisons": true
+  },
+  "instruction_dma": {
+    "local_instructions": 773,
+    "local_cases": 24736,
+    "previous_unique_instructions": 26324,
+    "overlap_instructions": 33,
+    "combined_unique_instructions": 27064,
+    "combined_cases": 866048,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 32,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_menu_context_math.h",
+      "sha256": "1bbc8394e94f2eaa3a8678bb56381bf3b143af05c9a84283ba034188a7978b4e"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    },
+    {
+      "path": "port/game/render_parents.c",
+      "sha256": "6e0cfacf58d8dd2a2cb2464e9b939aa9ae3ee85e70c3dec1c2831194a0338857"
+    },
+    {
+      "path": "port/game/render_parents.h",
+      "sha256": "ebda35faa6d5411682fa4feb0efda618130ce11966c12aebf898293200744cc7"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents.c",
+      "sha256": "60dbc5d45f603b4953ab2975f18d69f4e82a7a7d8fdefd7b67eaf51d1115aa88"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents_math.h",
+      "sha256": "a56b8367cd08440e2579d280c77499794c475cf14370a2a5a904f60bc38ac151"
+    },
+    {
+      "path": "port/game/hud_history_stream.c",
+      "sha256": "0ed4005248c2505986f6414140b17f986007bee2c24f79739fa4358bf2c39146"
+    },
+    {
+      "path": "port/game/hud_history_stream.h",
+      "sha256": "d24936b40e4db6404ce6c1d0565180d737bbae0eddc2da7395420a164a9c0211"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream.c",
+      "sha256": "a8547b097febb8baf72c0883bff9d876cd67569c1dfd05c89e57d1574dff3a35"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream_math.h",
+      "sha256": "5b13917cc0efd7913dc9d540544e80791269412bac89bcc9db293ea1c07a3f1e"
+    },
+    {
+      "path": "port/game/hud_projection_parents.c",
+      "sha256": "39d02a229e36d0bc370f6597542aa0f6e3e356d8590696431242f0dd519ee6e9"
+    },
+    {
+      "path": "port/game/hud_projection_parents.h",
+      "sha256": "4da55f5eeece8103522f7e93fda78d2b0ba435a88c7d71911f42e907a444293b"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents.c",
+      "sha256": "3e49372a466d37b5af7431b104ee3d9a3632bd2dc61ca9d8e9e7bd07f6f76456"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents_math.h",
+      "sha256": "2ce71c38f5760e27a112dd6bcf81564b845a9cbce3e0036b0fea5992448c4113"
+    },
+    {
+      "path": "port/game/hud_text_helpers.c",
+      "sha256": "f26adc5ba6cfa96edcdef2fcc48447c4ab9c79cbaaf7b982ebd985a9b61c8f68"
+    },
+    {
+      "path": "port/game/hud_text_helpers.h",
+      "sha256": "11c1b8f11d0dd0bc96360261bc192d73f921f22fc6f32a4f8d580604b8938493"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers.c",
+      "sha256": "6d82850c0d2ba62da9ac036b13d11cec3224c8b340d74a063af80b3e04e63290"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers_math.h",
+      "sha256": "6c5c6028b6934c94c0a01bf4ac201ab634575be14ba0e1b113f3147744463bac"
+    }
+  ],
+  "full_gate": {
+    "rows": 592,
+    "recordings": 3,
+    "shadow_matches": 568446,
+    "sandbox_matches": 443868,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308147,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "da2a470160c15ba03519b2766e5721f11c75064715372fa695f7213032a8a5bc"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207396,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "28d8cf9754a9800ea64e7fdd33da71dd31734b36079da1b69d763708627f33df"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52903,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "f46577982f10eb59d80bca1531062579213f397f8f56a79469e2fbdf9b12b864"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150619,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "0f4be8c54a8fd5560286618be8c24a5dbdd3eb399716260ca3c286cfc822c718"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 248003,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "d756b9d1bd609e66ca706549b3c9ce2cddc84b87067fec57312d450a80177603"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45246,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "1c75e4173cf982a027645382a5acead9c26ecffb2d29d3ce5693463e04a8d7b6"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1758202640,
+    "build_gib": 1.637
+  },
+  "removed_old_glue": [
+    "port/game/glue/glue_batch53.c",
+    "port/game/glue/glue_batch54.c"
+  ],
+  "remaining_export_bodies_unchanged": {
+    "int glue_C21060(void)": "dc2a786bf2002fe65414502a10d64e9920d63f77b43eceb446bd5deda3fabfba"
+  },
+  "limits": [
+    "Controlled and original-child calls cover every owned boundary and compare full CPU/PC/SR/all RAM. Controlled children compare complete entry CPU/SR/RAM and change all returned registers except source-owned frame/stack.",
+    "Original children receive degenerate geometry or source behind-view rejection. Frozen-clock fixtures make no active fill/outline/DMA claim; independently sealed recordings exercise actual drawing.",
+    "Original table slots/caller bytes are sealed without asserting the whole selector domain or inventing a guard.",
+    "Fourteen tested/list/grid/lattice face and edge owners, selected-segment indirect calls, older adapters and the complete original cold/indirect/callback graph remain game-function work.",
+    "C2C392 computed transfer and C1612C graphics-wait integration remain unresolved. ALL416/361, Copper fade and Kickstart services are deferred."
+  ],
+  "next": {
+    "entries": [
+      "C1FF0A",
+      "C2005C",
+      "C20100",
+      "C21060",
+      "C20C38",
+      "C20C22",
+      "C20A52",
+      "C20A40",
+      "C20002",
+      "C2084A",
+      "C2082A",
+      "C219AE",
+      "C21C4C",
+      "C21C2E"
+    ],
+    "unique_instructions": 533,
+    "shared_instructions": 294,
+    "manifest": {
+      "path": "analysis/data/face_list_parents_scope_inventory.json",
+      "sha256": "432fd06d63383e0659b777bdc762aa30e17d3bda5b30cc014bec410aab9f03b3"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/face_stream_parents.c",
+      "sha256": "915aea7c0c184578a562b33e1a0bb186cdcf452299ce9fe8047db8a1f935ad77"
+    },
+    {
+      "path": "port/game/face_stream_parents.h",
+      "sha256": "6a8dce7e88d38f307a3e663d9ac793afe6d03554aa54475c15bd64b908bd34a6"
+    },
+    {
+      "path": "port/game/glue/glue_batch57.c",
+      "sha256": "39828aa15e126b42070b1dc449bdf39f306145d61f760406d32b3f23c2324384"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "a29a4635ec5795f477b0f26315c1996d8f11aea933841f61b1d40a1e6e083db5"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "c1515e11f6df81a6e3112acf9ca9014c4f794aae404d3d0cef75070c75f753f5"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "fe2cec4139dfafd0aca871a7f72a4914c8ea571f8037a109fdb68b36fd935482"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "b8e82f638f058f209e4422acfcbd77d066e511ee4a7627ccfcae5dbf79d9386b"
+    },
+    {
+      "path": "port/game/glue/glue_face_stream_parents.c",
+      "sha256": "f88361881c4aee493435d349bbaafcdf533f8b386158b09d8dc790a6c134aefc"
+    },
+    {
+      "path": "port/game/glue/glue_face_stream_parents.h",
+      "sha256": "120f487d06c7f125054b0d3022768e86ec6541a46ad87710f7bc4ed7e4cfd9e1"
+    },
+    {
+      "path": "port/game/glue/glue_face_stream_parents_math.h",
+      "sha256": "f7d7fcb2c3cef09614f0ea89464a9b59524e2f46f631d531df2dcbad21d5a21c"
+    },
+    {
+      "path": "port/game/glue/glue_face_stream_parents_step.c",
+      "sha256": "08fd359adf8f71bceb235346a224d3c53fcfadb1e954f931ac4629bef693ccf7"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_face_stream_parents_scope.py",
+      "sha256": "1a87d96ffbe364fe1e22c7cf3ac9ee29842c76397ffd9779a23a3b9e19efdaf6"
+    },
+    {
+      "path": "tools/recomp/audit_face_stream_parents_source.py",
+      "sha256": "1da05bea1cbd3b042cc7a1279bcf7a98dc15ba11f8bb28ad3da405d6e21490ef"
+    },
+    {
+      "path": "tools/recomp/check_face_stream_parents.py",
+      "sha256": "0134093801cbfccae32a436128d95b73fd577e152131311740f1ec9104d89231"
+    },
+    {
+      "path": "tools/recomp/check_face_stream_parents_dispatch.py",
+      "sha256": "a9bd1df287b4aee474b32724d488d9a98827efccb598d291dddca09c69a884a5"
+    },
+    {
+      "path": "tools/recomp/face_stream_parents_bus_budget.c",
+      "sha256": "fcdb2e7ca6c4c5f858c8613701667dc0c7b95c05a44f2236fe6447dffd1ef8f0"
+    },
+    {
+      "path": "tools/recomp/face_stream_parents_contract_children.c",
+      "sha256": "4642adf756fe54aed00601a829548b6de20fd2b8dbf95dfd790f39d5d5afddf6"
+    },
+    {
+      "path": "tools/recomp/face_stream_parents_contract_oracle.c",
+      "sha256": "8e920f9e05ed36fd257d44f563a88a5344ca6c2e5be99e5157e59d70417874e0"
+    },
+    {
+      "path": "tools/recomp/face_stream_parents_dispatch_oracle.c",
+      "sha256": "62b94875693a889a84d6cc66cf424690201d4bca79721a4c4d060a79cb6879c5"
+    },
+    {
+      "path": "tools/recomp/face_stream_parents_fixture.h",
+      "sha256": "43a5dc1b5d10788a8114c80721f53a6f3510cd3bf09797b64a171e1b256e9d11"
+    },
+    {
+      "path": "tools/recomp/face_stream_parents_oracle.c",
+      "sha256": "472da95ee6bc475ce56e0c2c066018829e1e69d5eb1c1e0e4062ba3e336e45b8"
+    },
+    {
+      "path": "tools/recomp/audit_face_list_parents_scope.py",
+      "sha256": "c03117a0b5d76d09e6c5bb1067fc85bdb6dd080a4af8269c587ecf619a4dea63"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/face_stream_parents_build_probe.log",
+      "sha256": "edce9acd82085f23fd7692d3904b6fb2780cebca6e63be8e47434968cf52e486"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_contract_probe.log",
+      "sha256": "9d7a6c8b5a1115195c441336fa1e82e9d0bc5ec705a9f941ae33123932ad1f8b"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_contract_full.log",
+      "sha256": "b305f699733516408d4e56e01c15d696422332ba0706c0ac53a301e4c9f8230f"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_real_probe.log",
+      "sha256": "2df807af9edb750bcd72ea03a0dcbd9a723cc27172b38a80df486000b5a85806"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_real_probe2.log",
+      "sha256": "1e487f4023d061ab8771882691a20f4f3150cd2eca34f478cdbd55ff226d84c8"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_real_full.log",
+      "sha256": "f0bad65bd445050cd3f1836d874565d523fe855511cab0a6ac3a02e773efccdf"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_dispatch_full.log",
+      "sha256": "e7ad1391254b3cb5b428a800980e968413b9a66a01132f04a7a57cce662d0040"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_dma_local.log",
+      "sha256": "da69b6f0cedf0473d2e38d029fa7f7bf582124f83d8801e60920e0ba5843024d"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_dma_union.log",
+      "sha256": "817d01f70dd71eb3d2ce3037b218d84c8ed2a7ee02eecc4d245bf59bbec89455"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_compatibility.log",
+      "sha256": "fea6f9ca5a6e68872b3735d6f885440986f005f61c49c70ef7bace1020e3a473"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_normal_build.log",
+      "sha256": "47e7708d8bb57f92b03b989bf85be598d957d8b75f6810a1e75c114631098bff"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_msvc.log",
+      "sha256": "f13909ec72709b40cbda0bb692d0ea1fc7f1c87a229b71fdfa3b29a89262b9e4"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_msvc_configure.log",
+      "sha256": "abe78f40cb4e351f258ce6e5060b480fb20b75562210216f75f3177e13c8fe2b"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_ports_gate.log",
+      "sha256": "0c86fee4dd3b165442252d3116353e6d28eab02356ea9f83c1db760668e8a370"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_timing.log",
+      "sha256": "2fbc3369ed47f6d777dbc77c4314e2f945f4bb0b87061d42a0dc611aec07222a"
+    },
+    {
+      "path": "build/recomp/face_stream_parents_whole_call.log",
+      "sha256": "d7b8a6046d628bd2c7333b03c9560d254d4429028957446ab78e9e9384728e88"
+    }
+  ],
+  "retained_failed_proofs": []
+}

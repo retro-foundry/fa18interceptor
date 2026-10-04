@@ -1,0 +1,5307 @@
+{
+  "state": "captures/native/demo01/state.bin",
+  "state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "scope": "static owner flow: follow jumps, stop at returns; calls are child boundaries",
+  "owners": {
+    "C1FF0A": {
+      "instruction_count": 16,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C1FF0A",
+        "C1FF10",
+        "C1FF16",
+        "C1FF1A",
+        "C1FF1E",
+        "C1FF22",
+        "C1FF26",
+        "C1FF2A",
+        "C1FF2E",
+        "C1FF32",
+        "C1FF34",
+        "C1FF36",
+        "C1FF3C",
+        "C1FF3E",
+        "C1FF40",
+        "C1FF44"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C1FF36",
+          "target": "C1FB82",
+          "return_pc": "C1FF3C"
+        }
+      ]
+    },
+    "C2005C": {
+      "instruction_count": 54,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C2005C",
+        "C20062",
+        "C20064",
+        "C20066",
+        "C2006C",
+        "C2006E",
+        "C20070",
+        "C20074",
+        "C20076",
+        "C20078",
+        "C2007A",
+        "C2007C",
+        "C20080",
+        "C20082",
+        "C20084",
+        "C20086",
+        "C20088",
+        "C2008A",
+        "C2008E",
+        "C20090",
+        "C20092",
+        "C20094",
+        "C20096",
+        "C20098",
+        "C2009C",
+        "C200A0",
+        "C200A2",
+        "C200A4",
+        "C200A6",
+        "C200A8",
+        "C200AE",
+        "C200B0",
+        "C200B2",
+        "C200B4",
+        "C200B8",
+        "C200BE",
+        "C200C0",
+        "C200C2",
+        "C200C6",
+        "C200C8",
+        "C200CA",
+        "C200CC",
+        "C200D0",
+        "C200D2",
+        "C200D4",
+        "C200D8",
+        "C200DA",
+        "C200DC",
+        "C200E2",
+        "C200E6",
+        "C200EC",
+        "C200F0",
+        "C200F2",
+        "C200F4"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C200B8",
+          "target": "C1FB82",
+          "return_pc": "C200BE"
+        },
+        {
+          "pc": "C200E6",
+          "target": "C2469E",
+          "return_pc": "C200EC"
+        }
+      ]
+    },
+    "C20100": {
+      "instruction_count": 53,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C200F6",
+        "C200FA",
+        "C200FE",
+        "C20100",
+        "C20104",
+        "C20108",
+        "C2010E",
+        "C20110",
+        "C20112",
+        "C20114",
+        "C20116",
+        "C20118",
+        "C2011E",
+        "C20124",
+        "C20126",
+        "C20128",
+        "C2012C",
+        "C20130",
+        "C20132",
+        "C20134",
+        "C20138",
+        "C2013C",
+        "C20140",
+        "C20142",
+        "C20144",
+        "C20148",
+        "C2014C",
+        "C20150",
+        "C20152",
+        "C20154",
+        "C20158",
+        "C2015C",
+        "C20160",
+        "C20164",
+        "C20166",
+        "C2016C",
+        "C2016E",
+        "C20170",
+        "C20172",
+        "C20178",
+        "C2017A",
+        "C2017C",
+        "C20180",
+        "C20182",
+        "C20184",
+        "C20186",
+        "C20188",
+        "C2018E",
+        "C20190",
+        "C20196",
+        "C2019A",
+        "C2019C",
+        "C2019E"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C20172",
+          "target": "C1FB82",
+          "return_pc": "C20178"
+        },
+        {
+          "pc": "C20190",
+          "target": "C2469E",
+          "return_pc": "C20196"
+        }
+      ]
+    },
+    "C21060": {
+      "instruction_count": 39,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C21060",
+        "C21064",
+        "C2106C",
+        "C21070",
+        "C21074",
+        "C21076",
+        "C21078",
+        "C21080",
+        "C21084",
+        "C2108E",
+        "C21090",
+        "C21092",
+        "C21096",
+        "C2109C",
+        "C210A2",
+        "C210A6",
+        "C210A8",
+        "C210AA",
+        "C210AC",
+        "C210B0",
+        "C210B2",
+        "C210B4",
+        "C210B6",
+        "C210BA",
+        "C210BC",
+        "C210BE",
+        "C210C0",
+        "C210C4",
+        "C210C6",
+        "C210C8",
+        "C210CA",
+        "C210CC",
+        "C210CE",
+        "C210D4",
+        "C210D8",
+        "C210DA",
+        "C210DC",
+        "C210E0",
+        "C210E4"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C210CE",
+          "target": "C246A0",
+          "return_pc": "C210D4"
+        }
+      ]
+    },
+    "C20C38": {
+      "instruction_count": 83,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C20C38",
+        "C20C3C",
+        "C20C44",
+        "C20C48",
+        "C20C4C",
+        "C20C50",
+        "C20C52",
+        "C20C5A",
+        "C20C60",
+        "C20C62",
+        "C20C66",
+        "C20C6A",
+        "C20C6E",
+        "C20C72",
+        "C20C76",
+        "C20C7A",
+        "C20C7E",
+        "C20C82",
+        "C20C88",
+        "C20C8C",
+        "C20C8E",
+        "C20C92",
+        "C20C96",
+        "C20C9C",
+        "C20CA0",
+        "C20CA6",
+        "C20CAC",
+        "C20CAE",
+        "C20CB0",
+        "C20CB4",
+        "C20CB6",
+        "C20CB8",
+        "C20CBA",
+        "C20CBC",
+        "C20CC2",
+        "C20CC6",
+        "C20CCA",
+        "C20CCE",
+        "C20CD4",
+        "C20CDA",
+        "C20CDE",
+        "C20CE0",
+        "C20CE2",
+        "C20CE4",
+        "C20CE6",
+        "C20CE8",
+        "C20CEA",
+        "C20CEC",
+        "C20CEE",
+        "C20CF0",
+        "C20CF4",
+        "C20CF8",
+        "C20CFC",
+        "C20D00",
+        "C20D04",
+        "C20D08",
+        "C20D0C",
+        "C20D10",
+        "C20D14",
+        "C20D1A",
+        "C20D1C",
+        "C20D1E",
+        "C20D20",
+        "C20D22",
+        "C20D24",
+        "C20D26",
+        "C20D28",
+        "C20D2A",
+        "C20D2C",
+        "C20D30",
+        "C20D34",
+        "C20D38",
+        "C20D3C",
+        "C20D40",
+        "C20D46",
+        "C20D4A",
+        "C20D4E",
+        "C20D52",
+        "C20D56",
+        "C20D5A",
+        "C20D5E",
+        "C20D62",
+        "C20D66"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C20D40",
+          "target": "C246A0",
+          "return_pc": "C20D46"
+        }
+      ]
+    },
+    "C20C22": {
+      "instruction_count": 80,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C20C22",
+        "C20C26",
+        "C20C30",
+        "C20C36",
+        "C20C5A",
+        "C20C60",
+        "C20C62",
+        "C20C66",
+        "C20C6A",
+        "C20C6E",
+        "C20C72",
+        "C20C76",
+        "C20C7A",
+        "C20C7E",
+        "C20C82",
+        "C20C88",
+        "C20C8C",
+        "C20C8E",
+        "C20C92",
+        "C20C96",
+        "C20C9C",
+        "C20CA0",
+        "C20CA6",
+        "C20CAC",
+        "C20CAE",
+        "C20CB0",
+        "C20CB4",
+        "C20CB6",
+        "C20CB8",
+        "C20CBA",
+        "C20CBC",
+        "C20CC2",
+        "C20CC6",
+        "C20CCA",
+        "C20CCE",
+        "C20CD4",
+        "C20CDA",
+        "C20CDE",
+        "C20CE0",
+        "C20CE2",
+        "C20CE4",
+        "C20CE6",
+        "C20CE8",
+        "C20CEA",
+        "C20CEC",
+        "C20CEE",
+        "C20CF0",
+        "C20CF4",
+        "C20CF8",
+        "C20CFC",
+        "C20D00",
+        "C20D04",
+        "C20D08",
+        "C20D0C",
+        "C20D10",
+        "C20D14",
+        "C20D1A",
+        "C20D1C",
+        "C20D1E",
+        "C20D20",
+        "C20D22",
+        "C20D24",
+        "C20D26",
+        "C20D28",
+        "C20D2A",
+        "C20D2C",
+        "C20D30",
+        "C20D34",
+        "C20D38",
+        "C20D3C",
+        "C20D40",
+        "C20D46",
+        "C20D4A",
+        "C20D4E",
+        "C20D52",
+        "C20D56",
+        "C20D5A",
+        "C20D5E",
+        "C20D62",
+        "C20D66"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C20D40",
+          "target": "C246A0",
+          "return_pc": "C20D46"
+        }
+      ]
+    },
+    "C20A52": {
+      "instruction_count": 134,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C20A52",
+        "C20A5A",
+        "C20A5E",
+        "C20A62",
+        "C20A66",
+        "C20A68",
+        "C20A70",
+        "C20A76",
+        "C20A78",
+        "C20A7C",
+        "C20A80",
+        "C20A84",
+        "C20A88",
+        "C20A8C",
+        "C20A8E",
+        "C20A92",
+        "C20A96",
+        "C20A98",
+        "C20A9C",
+        "C20AA0",
+        "C20AA6",
+        "C20AA8",
+        "C20AAA",
+        "C20AAC",
+        "C20AB0",
+        "C20AB2",
+        "C20AB4",
+        "C20AB6",
+        "C20ABA",
+        "C20ABE",
+        "C20AC2",
+        "C20AC8",
+        "C20ACC",
+        "C20ACE",
+        "C20AD0",
+        "C20AD2",
+        "C20AD6",
+        "C20ADA",
+        "C20ADE",
+        "C20AE4",
+        "C20AE8",
+        "C20AEE",
+        "C20AF4",
+        "C20AF6",
+        "C20AF8",
+        "C20AFA",
+        "C20AFC",
+        "C20B02",
+        "C20B06",
+        "C20B0A",
+        "C20B0E",
+        "C20B14",
+        "C20B1A",
+        "C20B1E",
+        "C20B20",
+        "C20B22",
+        "C20B24",
+        "C20B26",
+        "C20B28",
+        "C20B2A",
+        "C20B2C",
+        "C20B2E",
+        "C20B30",
+        "C20B34",
+        "C20B38",
+        "C20B3C",
+        "C20B40",
+        "C20B44",
+        "C20B48",
+        "C20B4E",
+        "C20B50",
+        "C20B52",
+        "C20B54",
+        "C20B56",
+        "C20B58",
+        "C20B5A",
+        "C20B5C",
+        "C20B5E",
+        "C20B60",
+        "C20B64",
+        "C20B68",
+        "C20B6C",
+        "C20B70",
+        "C20B74",
+        "C20B7A",
+        "C20B7E",
+        "C20B82",
+        "C20B86",
+        "C20B8A",
+        "C20B8C",
+        "C20B8E",
+        "C20B90",
+        "C20B92",
+        "C20B98",
+        "C20B9C",
+        "C20BA0",
+        "C20BA4",
+        "C20BAA",
+        "C20BB0",
+        "C20BB6",
+        "C20BB8",
+        "C20BBA",
+        "C20BBC",
+        "C20BBE",
+        "C20BC0",
+        "C20BC2",
+        "C20BC4",
+        "C20BC6",
+        "C20BC8",
+        "C20BCC",
+        "C20BD0",
+        "C20BD4",
+        "C20BD8",
+        "C20BDC",
+        "C20BE2",
+        "C20BE8",
+        "C20BEA",
+        "C20BEC",
+        "C20BEE",
+        "C20BF0",
+        "C20BF2",
+        "C20BF4",
+        "C20BF6",
+        "C20BF8",
+        "C20BFA",
+        "C20BFE",
+        "C20C02",
+        "C20C06",
+        "C20C0A",
+        "C20C10",
+        "C20C14",
+        "C20C18",
+        "C20C1C",
+        "C20C20"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C20B74",
+          "target": "C246A0",
+          "return_pc": "C20B7A"
+        },
+        {
+          "pc": "C20C0A",
+          "target": "C246A0",
+          "return_pc": "C20C10"
+        }
+      ]
+    },
+    "C20A40": {
+      "instruction_count": 131,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C20A40",
+        "C20A4A",
+        "C20A50",
+        "C20A70",
+        "C20A76",
+        "C20A78",
+        "C20A7C",
+        "C20A80",
+        "C20A84",
+        "C20A88",
+        "C20A8C",
+        "C20A8E",
+        "C20A92",
+        "C20A96",
+        "C20A98",
+        "C20A9C",
+        "C20AA0",
+        "C20AA6",
+        "C20AA8",
+        "C20AAA",
+        "C20AAC",
+        "C20AB0",
+        "C20AB2",
+        "C20AB4",
+        "C20AB6",
+        "C20ABA",
+        "C20ABE",
+        "C20AC2",
+        "C20AC8",
+        "C20ACC",
+        "C20ACE",
+        "C20AD0",
+        "C20AD2",
+        "C20AD6",
+        "C20ADA",
+        "C20ADE",
+        "C20AE4",
+        "C20AE8",
+        "C20AEE",
+        "C20AF4",
+        "C20AF6",
+        "C20AF8",
+        "C20AFA",
+        "C20AFC",
+        "C20B02",
+        "C20B06",
+        "C20B0A",
+        "C20B0E",
+        "C20B14",
+        "C20B1A",
+        "C20B1E",
+        "C20B20",
+        "C20B22",
+        "C20B24",
+        "C20B26",
+        "C20B28",
+        "C20B2A",
+        "C20B2C",
+        "C20B2E",
+        "C20B30",
+        "C20B34",
+        "C20B38",
+        "C20B3C",
+        "C20B40",
+        "C20B44",
+        "C20B48",
+        "C20B4E",
+        "C20B50",
+        "C20B52",
+        "C20B54",
+        "C20B56",
+        "C20B58",
+        "C20B5A",
+        "C20B5C",
+        "C20B5E",
+        "C20B60",
+        "C20B64",
+        "C20B68",
+        "C20B6C",
+        "C20B70",
+        "C20B74",
+        "C20B7A",
+        "C20B7E",
+        "C20B82",
+        "C20B86",
+        "C20B8A",
+        "C20B8C",
+        "C20B8E",
+        "C20B90",
+        "C20B92",
+        "C20B98",
+        "C20B9C",
+        "C20BA0",
+        "C20BA4",
+        "C20BAA",
+        "C20BB0",
+        "C20BB6",
+        "C20BB8",
+        "C20BBA",
+        "C20BBC",
+        "C20BBE",
+        "C20BC0",
+        "C20BC2",
+        "C20BC4",
+        "C20BC6",
+        "C20BC8",
+        "C20BCC",
+        "C20BD0",
+        "C20BD4",
+        "C20BD8",
+        "C20BDC",
+        "C20BE2",
+        "C20BE8",
+        "C20BEA",
+        "C20BEC",
+        "C20BEE",
+        "C20BF0",
+        "C20BF2",
+        "C20BF4",
+        "C20BF6",
+        "C20BF8",
+        "C20BFA",
+        "C20BFE",
+        "C20C02",
+        "C20C06",
+        "C20C0A",
+        "C20C10",
+        "C20C14",
+        "C20C18",
+        "C20C1C",
+        "C20C20"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C20B74",
+          "target": "C246A0",
+          "return_pc": "C20B7A"
+        },
+        {
+          "pc": "C20C0A",
+          "target": "C246A0",
+          "return_pc": "C20C10"
+        }
+      ]
+    },
+    "C20002": {
+      "instruction_count": 51,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C20002",
+        "C20008",
+        "C2000E",
+        "C20014",
+        "C20018",
+        "C2001C",
+        "C20020",
+        "C20024",
+        "C20028",
+        "C2002C",
+        "C20030",
+        "C20036",
+        "C20038",
+        "C2003A",
+        "C2003C",
+        "C2003E",
+        "C20040",
+        "C20046",
+        "C20048",
+        "C2004A",
+        "C2004C",
+        "C2004E",
+        "C20050",
+        "C20052",
+        "C20054",
+        "C20056",
+        "C2005A",
+        "C200AE",
+        "C200B0",
+        "C200B2",
+        "C200B4",
+        "C200B8",
+        "C200BE",
+        "C200C0",
+        "C200C2",
+        "C200C6",
+        "C200C8",
+        "C200CA",
+        "C200CC",
+        "C200D0",
+        "C200D2",
+        "C200D4",
+        "C200D8",
+        "C200DA",
+        "C200DC",
+        "C200E2",
+        "C200E6",
+        "C200EC",
+        "C200F0",
+        "C200F2",
+        "C200F4"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C200B8",
+          "target": "C1FB82",
+          "return_pc": "C200BE"
+        },
+        {
+          "pc": "C200E6",
+          "target": "C2469E",
+          "return_pc": "C200EC"
+        }
+      ]
+    },
+    "C2084A": {
+      "instruction_count": 43,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C2084A",
+        "C2084C",
+        "C2084E",
+        "C20850",
+        "C20852",
+        "C20854",
+        "C20856",
+        "C20858",
+        "C2085C",
+        "C20862",
+        "C20866",
+        "C2086A",
+        "C20870",
+        "C20872",
+        "C20876",
+        "C2087C",
+        "C20880",
+        "C20886",
+        "C2088A",
+        "C2088C",
+        "C2088E",
+        "C20890",
+        "C20892",
+        "C20894",
+        "C20896",
+        "C20898",
+        "C2089A",
+        "C208A0",
+        "C208AA",
+        "C208AC",
+        "C208B2",
+        "C208B6",
+        "C208B8",
+        "C208BC",
+        "C208BE",
+        "C208C2",
+        "C208C4",
+        "C208C8",
+        "C208CA",
+        "C208CC",
+        "C208CE",
+        "C208D0",
+        "C208D2"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C2085C",
+          "target": "C2574A",
+          "return_pc": "C20862"
+        },
+        {
+          "pc": "C20880",
+          "target": "C2574A",
+          "return_pc": "C20886"
+        }
+      ]
+    },
+    "C2082A": {
+      "instruction_count": 52,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C20826",
+        "C20828",
+        "C2082A",
+        "C20830",
+        "C20834",
+        "C20836",
+        "C20840",
+        "C20842",
+        "C20848",
+        "C2084A",
+        "C2084C",
+        "C2084E",
+        "C20850",
+        "C20852",
+        "C20854",
+        "C20856",
+        "C20858",
+        "C2085C",
+        "C20862",
+        "C20866",
+        "C2086A",
+        "C20870",
+        "C20872",
+        "C20876",
+        "C2087C",
+        "C20880",
+        "C20886",
+        "C2088A",
+        "C2088C",
+        "C2088E",
+        "C20890",
+        "C20892",
+        "C20894",
+        "C20896",
+        "C20898",
+        "C2089A",
+        "C208A0",
+        "C208AA",
+        "C208AC",
+        "C208B2",
+        "C208B6",
+        "C208B8",
+        "C208BC",
+        "C208BE",
+        "C208C2",
+        "C208C4",
+        "C208C8",
+        "C208CA",
+        "C208CC",
+        "C208CE",
+        "C208D0",
+        "C208D2"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C2085C",
+          "target": "C2574A",
+          "return_pc": "C20862"
+        },
+        {
+          "pc": "C20880",
+          "target": "C2574A",
+          "return_pc": "C20886"
+        }
+      ]
+    },
+    "C219AE": {
+      "instruction_count": 38,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C219AE",
+        "C219B4",
+        "C219B6",
+        "C219B8",
+        "C219BE",
+        "C219C4",
+        "C219C6",
+        "C219C8",
+        "C219CA",
+        "C219CC",
+        "C219D0",
+        "C219D2",
+        "C219D4",
+        "C219D6",
+        "C219DC",
+        "C219DE",
+        "C219E0",
+        "C219E2",
+        "C219E8",
+        "C219EA",
+        "C219EC",
+        "C219EE",
+        "C219F0",
+        "C219F2",
+        "C219F4",
+        "C219FA",
+        "C21A00",
+        "C21A06",
+        "C21A0A",
+        "C21A0E",
+        "C21A10",
+        "C21A12",
+        "C21A14",
+        "C21A16",
+        "C21A18",
+        "C21A1A",
+        "C21A1C",
+        "C21A1E"
+      ],
+      "child_call_sites": []
+    },
+    "C21C4C": {
+      "instruction_count": 23,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C21C4C",
+        "C21C52",
+        "C21C54",
+        "C21C56",
+        "C21C58",
+        "C21C5A",
+        "C21C5C",
+        "C21C5E",
+        "C21C60",
+        "C21C62",
+        "C21C64",
+        "C21C6A",
+        "C21C6C",
+        "C21C6E",
+        "C21C70",
+        "C21C72",
+        "C21C74",
+        "C21C76",
+        "C21C78",
+        "C21C7A",
+        "C21C7C",
+        "C21C82",
+        "C21C84"
+      ],
+      "child_call_sites": []
+    },
+    "C21C2E": {
+      "instruction_count": 30,
+      "additional_cold_instructions": 0,
+      "source_pcs": [
+        "C21C2E",
+        "C21C34",
+        "C21C3A",
+        "C21C3E",
+        "C21C40",
+        "C21C44",
+        "C21C4A",
+        "C21C4C",
+        "C21C52",
+        "C21C54",
+        "C21C56",
+        "C21C58",
+        "C21C5A",
+        "C21C5C",
+        "C21C5E",
+        "C21C60",
+        "C21C62",
+        "C21C64",
+        "C21C6A",
+        "C21C6C",
+        "C21C6E",
+        "C21C70",
+        "C21C72",
+        "C21C74",
+        "C21C76",
+        "C21C78",
+        "C21C7A",
+        "C21C7C",
+        "C21C82",
+        "C21C84"
+      ],
+      "child_call_sites": [
+        {
+          "pc": "C21C40",
+          "target": "C21C4C",
+          "return_pc": "C21C44"
+        }
+      ]
+    }
+  },
+  "unique_instruction_count": 533,
+  "shared_instruction_count": 294,
+  "owned_pc_and_source_bytes_sha256": "15ed51a76924205dfaf31fc722dfb88bbdf6b7f7a09578ee63b596da2e5e6335",
+  "instructions": [
+    {
+      "pc": "C1FF0A",
+      "length": 6,
+      "bytes": "41f900c4bf94",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf94.l, A0"
+    },
+    {
+      "pc": "C1FF10",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C1FF16",
+      "length": 4,
+      "bytes": "4c9a0007",
+      "opcode": "4C9A",
+      "instruction": "movem.w (A2)+, D0-D2"
+    },
+    {
+      "pc": "C1FF1A",
+      "length": 4,
+      "bytes": "20f30000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D0.w), (A0)+"
+    },
+    {
+      "pc": "C1FF1E",
+      "length": 4,
+      "bytes": "30f30004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D0.w), (A0)+"
+    },
+    {
+      "pc": "C1FF22",
+      "length": 4,
+      "bytes": "20f31000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C1FF26",
+      "length": 4,
+      "bytes": "30f31004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C1FF2A",
+      "length": 4,
+      "bytes": "20f32000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D2.w), (A0)+"
+    },
+    {
+      "pc": "C1FF2E",
+      "length": 4,
+      "bytes": "30f32004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D2.w), (A0)+"
+    },
+    {
+      "pc": "C1FF32",
+      "length": 2,
+      "bytes": "365a",
+      "opcode": "365A",
+      "instruction": "movea.w (A2)+, A3"
+    },
+    {
+      "pc": "C1FF34",
+      "length": 2,
+      "bytes": "3e0b",
+      "opcode": "3E0B",
+      "instruction": "move.w  A3, D7"
+    },
+    {
+      "pc": "C1FF36",
+      "length": 6,
+      "bytes": "4eb900c1fb82",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c1fb82.l"
+    },
+    {
+      "pc": "C1FF3C",
+      "length": 2,
+      "bytes": "6602",
+      "opcode": "6602",
+      "instruction": "bne     $c1ff40"
+    },
+    {
+      "pc": "C1FF3E",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C1FF40",
+      "length": 4,
+      "bytes": "d4fc0012",
+      "opcode": "D4FC",
+      "instruction": "adda.w  #$12, A2"
+    },
+    {
+      "pc": "C1FF44",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C20002",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C20008",
+      "length": 6,
+      "bytes": "41f900c4bf90",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf90.l, A0"
+    },
+    {
+      "pc": "C2000E",
+      "length": 6,
+      "bytes": "20fc00000004",
+      "opcode": "20FC",
+      "instruction": "move.l  #$4, (A0)+"
+    },
+    {
+      "pc": "C20014",
+      "length": 4,
+      "bytes": "4c9a000e",
+      "opcode": "4C9A",
+      "instruction": "movem.w (A2)+, D1-D3"
+    },
+    {
+      "pc": "C20018",
+      "length": 4,
+      "bytes": "20f31000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C2001C",
+      "length": 4,
+      "bytes": "30f31004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C20020",
+      "length": 4,
+      "bytes": "20f32000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D2.w), (A0)+"
+    },
+    {
+      "pc": "C20024",
+      "length": 4,
+      "bytes": "30f32004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D2.w), (A0)+"
+    },
+    {
+      "pc": "C20028",
+      "length": 4,
+      "bytes": "20f33000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D3.w), (A0)+"
+    },
+    {
+      "pc": "C2002C",
+      "length": 4,
+      "bytes": "30f33004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D3.w), (A0)+"
+    },
+    {
+      "pc": "C20030",
+      "length": 6,
+      "bytes": "4ca800fcffee",
+      "opcode": "4CA8",
+      "instruction": "movem.w (-$12,A0), D2-D7"
+    },
+    {
+      "pc": "C20036",
+      "length": 2,
+      "bytes": "3004",
+      "opcode": "3004",
+      "instruction": "move.w  D4, D0"
+    },
+    {
+      "pc": "C20038",
+      "length": 2,
+      "bytes": "c047",
+      "opcode": "C047",
+      "instruction": "and.w   D7, D0"
+    },
+    {
+      "pc": "C2003A",
+      "length": 2,
+      "bytes": "9a42",
+      "opcode": "9A42",
+      "instruction": "sub.w   D2, D5"
+    },
+    {
+      "pc": "C2003C",
+      "length": 2,
+      "bytes": "9c43",
+      "opcode": "9C43",
+      "instruction": "sub.w   D3, D6"
+    },
+    {
+      "pc": "C2003E",
+      "length": 2,
+      "bytes": "9e44",
+      "opcode": "9E44",
+      "instruction": "sub.w   D4, D7"
+    },
+    {
+      "pc": "C20040",
+      "length": 6,
+      "bytes": "4ca8001cfffa",
+      "opcode": "4CA8",
+      "instruction": "movem.w (-$6,A0), D2-D4"
+    },
+    {
+      "pc": "C20046",
+      "length": 2,
+      "bytes": "c044",
+      "opcode": "C044",
+      "instruction": "and.w   D4, D0"
+    },
+    {
+      "pc": "C20048",
+      "length": 2,
+      "bytes": "9445",
+      "opcode": "9445",
+      "instruction": "sub.w   D5, D2"
+    },
+    {
+      "pc": "C2004A",
+      "length": 2,
+      "bytes": "9646",
+      "opcode": "9646",
+      "instruction": "sub.w   D6, D3"
+    },
+    {
+      "pc": "C2004C",
+      "length": 2,
+      "bytes": "9847",
+      "opcode": "9847",
+      "instruction": "sub.w   D7, D4"
+    },
+    {
+      "pc": "C2004E",
+      "length": 2,
+      "bytes": "c044",
+      "opcode": "C044",
+      "instruction": "and.w   D4, D0"
+    },
+    {
+      "pc": "C20050",
+      "length": 2,
+      "bytes": "6c04",
+      "opcode": "6C04",
+      "instruction": "bge     $c20056"
+    },
+    {
+      "pc": "C20052",
+      "length": 2,
+      "bytes": "70ff",
+      "opcode": "70FF",
+      "instruction": "moveq   #-$1, D0"
+    },
+    {
+      "pc": "C20054",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C20056",
+      "length": 4,
+      "bytes": "4890001c",
+      "opcode": "4890",
+      "instruction": "movem.w D2-D4, (A0)"
+    },
+    {
+      "pc": "C2005A",
+      "length": 2,
+      "bytes": "6052",
+      "opcode": "6052",
+      "instruction": "bra     $c200ae"
+    },
+    {
+      "pc": "C2005C",
+      "length": 6,
+      "bytes": "41f900c4bf90",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf90.l, A0"
+    },
+    {
+      "pc": "C20062",
+      "length": 2,
+      "bytes": "4258",
+      "opcode": "4258",
+      "instruction": "clr.w   (A0)+"
+    },
+    {
+      "pc": "C20064",
+      "length": 2,
+      "bytes": "5448",
+      "opcode": "5448",
+      "instruction": "addq.w  #2, A0"
+    },
+    {
+      "pc": "C20066",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C2006C",
+      "length": 2,
+      "bytes": "7e03",
+      "opcode": "7E03",
+      "instruction": "moveq   #$3, D7"
+    },
+    {
+      "pc": "C2006E",
+      "length": 2,
+      "bytes": "321a",
+      "opcode": "321A",
+      "instruction": "move.w  (A2)+, D1"
+    },
+    {
+      "pc": "C20070",
+      "length": 4,
+      "bytes": "49f31000",
+      "opcode": "49F3",
+      "instruction": "lea     (A3,D1.w), A4"
+    },
+    {
+      "pc": "C20074",
+      "length": 2,
+      "bytes": "20dc",
+      "opcode": "20DC",
+      "instruction": "move.l  (A4)+, (A0)+"
+    },
+    {
+      "pc": "C20076",
+      "length": 2,
+      "bytes": "3c14",
+      "opcode": "3C14",
+      "instruction": "move.w  (A4), D6"
+    },
+    {
+      "pc": "C20078",
+      "length": 2,
+      "bytes": "30c6",
+      "opcode": "30C6",
+      "instruction": "move.w  D6, (A0)+"
+    },
+    {
+      "pc": "C2007A",
+      "length": 2,
+      "bytes": "321a",
+      "opcode": "321A",
+      "instruction": "move.w  (A2)+, D1"
+    },
+    {
+      "pc": "C2007C",
+      "length": 4,
+      "bytes": "49f31000",
+      "opcode": "49F3",
+      "instruction": "lea     (A3,D1.w), A4"
+    },
+    {
+      "pc": "C20080",
+      "length": 2,
+      "bytes": "20dc",
+      "opcode": "20DC",
+      "instruction": "move.l  (A4)+, (A0)+"
+    },
+    {
+      "pc": "C20082",
+      "length": 2,
+      "bytes": "30d4",
+      "opcode": "30D4",
+      "instruction": "move.w  (A4), (A0)+"
+    },
+    {
+      "pc": "C20084",
+      "length": 2,
+      "bytes": "cc54",
+      "opcode": "CC54",
+      "instruction": "and.w   (A4), D6"
+    },
+    {
+      "pc": "C20086",
+      "length": 2,
+      "bytes": "321a",
+      "opcode": "321A",
+      "instruction": "move.w  (A2)+, D1"
+    },
+    {
+      "pc": "C20088",
+      "length": 2,
+      "bytes": "6d0e",
+      "opcode": "6D0E",
+      "instruction": "blt     $c20098"
+    },
+    {
+      "pc": "C2008A",
+      "length": 4,
+      "bytes": "49f31000",
+      "opcode": "49F3",
+      "instruction": "lea     (A3,D1.w), A4"
+    },
+    {
+      "pc": "C2008E",
+      "length": 2,
+      "bytes": "20dc",
+      "opcode": "20DC",
+      "instruction": "move.l  (A4)+, (A0)+"
+    },
+    {
+      "pc": "C20090",
+      "length": 2,
+      "bytes": "30d4",
+      "opcode": "30D4",
+      "instruction": "move.w  (A4), (A0)+"
+    },
+    {
+      "pc": "C20092",
+      "length": 2,
+      "bytes": "cc54",
+      "opcode": "CC54",
+      "instruction": "and.w   (A4), D6"
+    },
+    {
+      "pc": "C20094",
+      "length": 2,
+      "bytes": "5247",
+      "opcode": "5247",
+      "instruction": "addq.w  #1, D7"
+    },
+    {
+      "pc": "C20096",
+      "length": 2,
+      "bytes": "60ee",
+      "opcode": "60EE",
+      "instruction": "bra     $c20086"
+    },
+    {
+      "pc": "C20098",
+      "length": 4,
+      "bytes": "02417fff",
+      "opcode": "0241",
+      "instruction": "andi.w  #$7fff, D1"
+    },
+    {
+      "pc": "C2009C",
+      "length": 4,
+      "bytes": "49f31000",
+      "opcode": "49F3",
+      "instruction": "lea     (A3,D1.w), A4"
+    },
+    {
+      "pc": "C200A0",
+      "length": 2,
+      "bytes": "20dc",
+      "opcode": "20DC",
+      "instruction": "move.l  (A4)+, (A0)+"
+    },
+    {
+      "pc": "C200A2",
+      "length": 2,
+      "bytes": "30d4",
+      "opcode": "30D4",
+      "instruction": "move.w  (A4), (A0)+"
+    },
+    {
+      "pc": "C200A4",
+      "length": 2,
+      "bytes": "cc54",
+      "opcode": "CC54",
+      "instruction": "and.w   (A4), D6"
+    },
+    {
+      "pc": "C200A6",
+      "length": 2,
+      "bytes": "6d4a",
+      "opcode": "6D4A",
+      "instruction": "blt     $c200f2"
+    },
+    {
+      "pc": "C200A8",
+      "length": 6,
+      "bytes": "33c700c4bf92",
+      "opcode": "33C7",
+      "instruction": "move.w  D7, $c4bf92.l"
+    },
+    {
+      "pc": "C200AE",
+      "length": 2,
+      "bytes": "365a",
+      "opcode": "365A",
+      "instruction": "movea.w (A2)+, A3"
+    },
+    {
+      "pc": "C200B0",
+      "length": 2,
+      "bytes": "3e0b",
+      "opcode": "3E0B",
+      "instruction": "move.w  A3, D7"
+    },
+    {
+      "pc": "C200B2",
+      "length": 2,
+      "bytes": "6d28",
+      "opcode": "6D28",
+      "instruction": "blt     $c200dc"
+    },
+    {
+      "pc": "C200B4",
+      "length": 4,
+      "bytes": "526effce",
+      "opcode": "526E",
+      "instruction": "addq.w  #1, (-$32,A6)"
+    },
+    {
+      "pc": "C200B8",
+      "length": 6,
+      "bytes": "4eb900c1fb82",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c1fb82.l"
+    },
+    {
+      "pc": "C200BE",
+      "length": 2,
+      "bytes": "670c",
+      "opcode": "670C",
+      "instruction": "beq     $c200cc"
+    },
+    {
+      "pc": "C200C0",
+      "length": 2,
+      "bytes": "320b",
+      "opcode": "320B",
+      "instruction": "move.w  A3, D1"
+    },
+    {
+      "pc": "C200C2",
+      "length": 4,
+      "bytes": "02414000",
+      "opcode": "0241",
+      "instruction": "andi.w  #$4000, D1"
+    },
+    {
+      "pc": "C200C6",
+      "length": 2,
+      "bytes": "672a",
+      "opcode": "672A",
+      "instruction": "beq     $c200f2"
+    },
+    {
+      "pc": "C200C8",
+      "length": 2,
+      "bytes": "3e1a",
+      "opcode": "3E1A",
+      "instruction": "move.w  (A2)+, D7"
+    },
+    {
+      "pc": "C200CA",
+      "length": 2,
+      "bytes": "6010",
+      "opcode": "6010",
+      "instruction": "bra     $c200dc"
+    },
+    {
+      "pc": "C200CC",
+      "length": 4,
+      "bytes": "526effcc",
+      "opcode": "526E",
+      "instruction": "addq.w  #1, (-$34,A6)"
+    },
+    {
+      "pc": "C200D0",
+      "length": 2,
+      "bytes": "320b",
+      "opcode": "320B",
+      "instruction": "move.w  A3, D1"
+    },
+    {
+      "pc": "C200D2",
+      "length": 2,
+      "bytes": "3e01",
+      "opcode": "3E01",
+      "instruction": "move.w  D1, D7"
+    },
+    {
+      "pc": "C200D4",
+      "length": 4,
+      "bytes": "02414000",
+      "opcode": "0241",
+      "instruction": "andi.w  #$4000, D1"
+    },
+    {
+      "pc": "C200D8",
+      "length": 2,
+      "bytes": "6702",
+      "opcode": "6702",
+      "instruction": "beq     $c200dc"
+    },
+    {
+      "pc": "C200DA",
+      "length": 2,
+      "bytes": "544a",
+      "opcode": "544A",
+      "instruction": "addq.w  #2, A2"
+    },
+    {
+      "pc": "C200DC",
+      "length": 6,
+      "bytes": "33c700c45954",
+      "opcode": "33C7",
+      "instruction": "move.w  D7, $c45954.l"
+    },
+    {
+      "pc": "C200E2",
+      "length": 4,
+      "bytes": "48e70064",
+      "opcode": "48E7",
+      "instruction": "movem.l A1-A2/A5, -(A7)"
+    },
+    {
+      "pc": "C200E6",
+      "length": 6,
+      "bytes": "4eb900c2469e",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2469e.l"
+    },
+    {
+      "pc": "C200EC",
+      "length": 4,
+      "bytes": "4cdf2600",
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, A1-A2/A5"
+    },
+    {
+      "pc": "C200F0",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C200F2",
+      "length": 2,
+      "bytes": "70ff",
+      "opcode": "70FF",
+      "instruction": "moveq   #-$1, D0"
+    },
+    {
+      "pc": "C200F4",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C200F6",
+      "length": 4,
+      "bytes": "4cdf2200",
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, A1/A5"
+    },
+    {
+      "pc": "C200FA",
+      "length": 4,
+      "bytes": "302eff82",
+      "opcode": "302E",
+      "instruction": "move.w  (-$7e,A6), D0"
+    },
+    {
+      "pc": "C200FE",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C20100",
+      "length": 4,
+      "bytes": "48e70044",
+      "opcode": "48E7",
+      "instruction": "movem.l A1/A5, -(A7)"
+    },
+    {
+      "pc": "C20104",
+      "length": 4,
+      "bytes": "426eff82",
+      "opcode": "426E",
+      "instruction": "clr.w   (-$7e,A6)"
+    },
+    {
+      "pc": "C20108",
+      "length": 6,
+      "bytes": "427900c4bf90",
+      "opcode": "4279",
+      "instruction": "clr.w   $c4bf90.l"
+    },
+    {
+      "pc": "C2010E",
+      "length": 2,
+      "bytes": "285a",
+      "opcode": "285A",
+      "instruction": "movea.l (A2)+, A4"
+    },
+    {
+      "pc": "C20110",
+      "length": 2,
+      "bytes": "321a",
+      "opcode": "321A",
+      "instruction": "move.w  (A2)+, D1"
+    },
+    {
+      "pc": "C20112",
+      "length": 2,
+      "bytes": "6de2",
+      "opcode": "6DE2",
+      "instruction": "blt     $c200f6"
+    },
+    {
+      "pc": "C20114",
+      "length": 2,
+      "bytes": "2f0c",
+      "opcode": "2F0C",
+      "instruction": "move.l  A4, -(A7)"
+    },
+    {
+      "pc": "C20116",
+      "length": 2,
+      "bytes": "d8c1",
+      "opcode": "D8C1",
+      "instruction": "adda.w  D1, A4"
+    },
+    {
+      "pc": "C20118",
+      "length": 6,
+      "bytes": "41f900c4bf94",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf94.l, A0"
+    },
+    {
+      "pc": "C2011E",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C20124",
+      "length": 2,
+      "bytes": "7e03",
+      "opcode": "7E03",
+      "instruction": "moveq   #$3, D7"
+    },
+    {
+      "pc": "C20126",
+      "length": 2,
+      "bytes": "321c",
+      "opcode": "321C",
+      "instruction": "move.w  (A4)+, D1"
+    },
+    {
+      "pc": "C20128",
+      "length": 4,
+      "bytes": "20f31000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C2012C",
+      "length": 4,
+      "bytes": "3c331004",
+      "opcode": "3C33",
+      "instruction": "move.w  ($4,A3,D1.w), D6"
+    },
+    {
+      "pc": "C20130",
+      "length": 2,
+      "bytes": "30c6",
+      "opcode": "30C6",
+      "instruction": "move.w  D6, (A0)+"
+    },
+    {
+      "pc": "C20132",
+      "length": 2,
+      "bytes": "321c",
+      "opcode": "321C",
+      "instruction": "move.w  (A4)+, D1"
+    },
+    {
+      "pc": "C20134",
+      "length": 4,
+      "bytes": "20f31000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C20138",
+      "length": 4,
+      "bytes": "30f31004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C2013C",
+      "length": 4,
+      "bytes": "cc68fffe",
+      "opcode": "CC68",
+      "instruction": "and.w   (-$2,A0), D6"
+    },
+    {
+      "pc": "C20140",
+      "length": 2,
+      "bytes": "321c",
+      "opcode": "321C",
+      "instruction": "move.w  (A4)+, D1"
+    },
+    {
+      "pc": "C20142",
+      "length": 2,
+      "bytes": "6d10",
+      "opcode": "6D10",
+      "instruction": "blt     $c20154"
+    },
+    {
+      "pc": "C20144",
+      "length": 4,
+      "bytes": "20f31000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C20148",
+      "length": 4,
+      "bytes": "30f31004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C2014C",
+      "length": 4,
+      "bytes": "cc68fffe",
+      "opcode": "CC68",
+      "instruction": "and.w   (-$2,A0), D6"
+    },
+    {
+      "pc": "C20150",
+      "length": 2,
+      "bytes": "5247",
+      "opcode": "5247",
+      "instruction": "addq.w  #1, D7"
+    },
+    {
+      "pc": "C20152",
+      "length": 2,
+      "bytes": "60ec",
+      "opcode": "60EC",
+      "instruction": "bra     $c20140"
+    },
+    {
+      "pc": "C20154",
+      "length": 4,
+      "bytes": "02417fff",
+      "opcode": "0241",
+      "instruction": "andi.w  #$7fff, D1"
+    },
+    {
+      "pc": "C20158",
+      "length": 4,
+      "bytes": "20f31000",
+      "opcode": "20F3",
+      "instruction": "move.l  (A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C2015C",
+      "length": 4,
+      "bytes": "30f31004",
+      "opcode": "30F3",
+      "instruction": "move.w  ($4,A3,D1.w), (A0)+"
+    },
+    {
+      "pc": "C20160",
+      "length": 4,
+      "bytes": "cc68fffe",
+      "opcode": "CC68",
+      "instruction": "and.w   (-$2,A0), D6"
+    },
+    {
+      "pc": "C20164",
+      "length": 2,
+      "bytes": "6d36",
+      "opcode": "6D36",
+      "instruction": "blt     $c2019c"
+    },
+    {
+      "pc": "C20166",
+      "length": 6,
+      "bytes": "33c700c4bf92",
+      "opcode": "33C7",
+      "instruction": "move.w  D7, $c4bf92.l"
+    },
+    {
+      "pc": "C2016C",
+      "length": 2,
+      "bytes": "365c",
+      "opcode": "365C",
+      "instruction": "movea.w (A4)+, A3"
+    },
+    {
+      "pc": "C2016E",
+      "length": 2,
+      "bytes": "3e0b",
+      "opcode": "3E0B",
+      "instruction": "move.w  A3, D7"
+    },
+    {
+      "pc": "C20170",
+      "length": 2,
+      "bytes": "6d16",
+      "opcode": "6D16",
+      "instruction": "blt     $c20188"
+    },
+    {
+      "pc": "C20172",
+      "length": 6,
+      "bytes": "4eb900c1fb82",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c1fb82.l"
+    },
+    {
+      "pc": "C20178",
+      "length": 2,
+      "bytes": "670c",
+      "opcode": "670C",
+      "instruction": "beq     $c20186"
+    },
+    {
+      "pc": "C2017A",
+      "length": 2,
+      "bytes": "320b",
+      "opcode": "320B",
+      "instruction": "move.w  A3, D1"
+    },
+    {
+      "pc": "C2017C",
+      "length": 4,
+      "bytes": "02414000",
+      "opcode": "0241",
+      "instruction": "andi.w  #$4000, D1"
+    },
+    {
+      "pc": "C20180",
+      "length": 2,
+      "bytes": "671a",
+      "opcode": "671A",
+      "instruction": "beq     $c2019c"
+    },
+    {
+      "pc": "C20182",
+      "length": 2,
+      "bytes": "3e1c",
+      "opcode": "3E1C",
+      "instruction": "move.w  (A4)+, D7"
+    },
+    {
+      "pc": "C20184",
+      "length": 2,
+      "bytes": "6002",
+      "opcode": "6002",
+      "instruction": "bra     $c20188"
+    },
+    {
+      "pc": "C20186",
+      "length": 2,
+      "bytes": "3e0b",
+      "opcode": "3E0B",
+      "instruction": "move.w  A3, D7"
+    },
+    {
+      "pc": "C20188",
+      "length": 6,
+      "bytes": "33c700c45954",
+      "opcode": "33C7",
+      "instruction": "move.w  D7, $c45954.l"
+    },
+    {
+      "pc": "C2018E",
+      "length": 2,
+      "bytes": "2f0a",
+      "opcode": "2F0A",
+      "instruction": "move.l  A2, -(A7)"
+    },
+    {
+      "pc": "C20190",
+      "length": 6,
+      "bytes": "4eb900c2469e",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2469e.l"
+    },
+    {
+      "pc": "C20196",
+      "length": 4,
+      "bytes": "816eff82",
+      "opcode": "816E",
+      "instruction": "or.w    D0, (-$7e,A6)"
+    },
+    {
+      "pc": "C2019A",
+      "length": 2,
+      "bytes": "245f",
+      "opcode": "245F",
+      "instruction": "movea.l (A7)+, A2"
+    },
+    {
+      "pc": "C2019C",
+      "length": 2,
+      "bytes": "285f",
+      "opcode": "285F",
+      "instruction": "movea.l (A7)+, A4"
+    },
+    {
+      "pc": "C2019E",
+      "length": 4,
+      "bytes": "6000ff70",
+      "opcode": "6000",
+      "instruction": "bra     $c20110"
+    },
+    {
+      "pc": "C20826",
+      "length": 2,
+      "bytes": "7000",
+      "opcode": "7000",
+      "instruction": "moveq   #$0, D0"
+    },
+    {
+      "pc": "C20828",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C2082A",
+      "length": 6,
+      "bytes": "267900c45a32",
+      "opcode": "2679",
+      "instruction": "movea.l $c45a32.l, A3"
+    },
+    {
+      "pc": "C20830",
+      "length": 4,
+      "bytes": "d6fc000a",
+      "opcode": "D6FC",
+      "instruction": "adda.w  #$a, A3"
+    },
+    {
+      "pc": "C20834",
+      "length": 2,
+      "bytes": "d6da",
+      "opcode": "D6DA",
+      "instruction": "adda.w  (A2)+, A3"
+    },
+    {
+      "pc": "C20836",
+      "length": 10,
+      "bytes": "0cb9fffffec000c45a78",
+      "opcode": "0CB9",
+      "instruction": "cmpi.l  #-$140, $c45a78.l"
+    },
+    {
+      "pc": "C20840",
+      "length": 2,
+      "bytes": "6fe4",
+      "opcode": "6FE4",
+      "instruction": "ble     $c20826"
+    },
+    {
+      "pc": "C20842",
+      "length": 6,
+      "bytes": "4a3900c4586c",
+      "opcode": "4A39",
+      "instruction": "tst.b   $c4586c.l"
+    },
+    {
+      "pc": "C20848",
+      "length": 2,
+      "bytes": "66dc",
+      "opcode": "66DC",
+      "instruction": "bne     $c20826"
+    },
+    {
+      "pc": "C2084A",
+      "length": 2,
+      "bytes": "3a1b",
+      "opcode": "3A1B",
+      "instruction": "move.w  (A3)+, D5"
+    },
+    {
+      "pc": "C2084C",
+      "length": 2,
+      "bytes": "3e1b",
+      "opcode": "3E1B",
+      "instruction": "move.w  (A3)+, D7"
+    },
+    {
+      "pc": "C2084E",
+      "length": 2,
+      "bytes": "9a5b",
+      "opcode": "9A5B",
+      "instruction": "sub.w   (A3)+, D5"
+    },
+    {
+      "pc": "C20850",
+      "length": 2,
+      "bytes": "9e5b",
+      "opcode": "9E5B",
+      "instruction": "sub.w   (A3)+, D7"
+    },
+    {
+      "pc": "C20852",
+      "length": 2,
+      "bytes": "4445",
+      "opcode": "4445",
+      "instruction": "neg.w   D5"
+    },
+    {
+      "pc": "C20854",
+      "length": 2,
+      "bytes": "4447",
+      "opcode": "4447",
+      "instruction": "neg.w   D7"
+    },
+    {
+      "pc": "C20856",
+      "length": 2,
+      "bytes": "4246",
+      "opcode": "4246",
+      "instruction": "clr.w   D6"
+    },
+    {
+      "pc": "C20858",
+      "length": 4,
+      "bytes": "303c0100",
+      "opcode": "303C",
+      "instruction": "move.w  #$100, D0"
+    },
+    {
+      "pc": "C2085C",
+      "length": 6,
+      "bytes": "4eb900c2574a",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2574a.l"
+    },
+    {
+      "pc": "C20862",
+      "length": 4,
+      "bytes": "48a70700",
+      "opcode": "48A7",
+      "instruction": "movem.w D5-D7, -(A7)"
+    },
+    {
+      "pc": "C20866",
+      "length": 4,
+      "bytes": "3a2effda",
+      "opcode": "3A2E",
+      "instruction": "move.w  (-$26,A6), D5"
+    },
+    {
+      "pc": "C2086A",
+      "length": 6,
+      "bytes": "9a7900c45b2a",
+      "opcode": "9A79",
+      "instruction": "sub.w   $c45b2a.l, D5"
+    },
+    {
+      "pc": "C20870",
+      "length": 2,
+      "bytes": "4246",
+      "opcode": "4246",
+      "instruction": "clr.w   D6"
+    },
+    {
+      "pc": "C20872",
+      "length": 4,
+      "bytes": "3e2effde",
+      "opcode": "3E2E",
+      "instruction": "move.w  (-$22,A6), D7"
+    },
+    {
+      "pc": "C20876",
+      "length": 6,
+      "bytes": "9e7900c45b2e",
+      "opcode": "9E79",
+      "instruction": "sub.w   $c45b2e.l, D7"
+    },
+    {
+      "pc": "C2087C",
+      "length": 4,
+      "bytes": "303c0100",
+      "opcode": "303C",
+      "instruction": "move.w  #$100, D0"
+    },
+    {
+      "pc": "C20880",
+      "length": 6,
+      "bytes": "4eb900c2574a",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c2574a.l"
+    },
+    {
+      "pc": "C20886",
+      "length": 4,
+      "bytes": "4c9f0007",
+      "opcode": "4C9F",
+      "instruction": "movem.w (A7)+, D0-D2"
+    },
+    {
+      "pc": "C2088A",
+      "length": 2,
+      "bytes": "c1c5",
+      "opcode": "C1C5",
+      "instruction": "muls.w  D5, D0"
+    },
+    {
+      "pc": "C2088C",
+      "length": 2,
+      "bytes": "c3c6",
+      "opcode": "C3C6",
+      "instruction": "muls.w  D6, D1"
+    },
+    {
+      "pc": "C2088E",
+      "length": 2,
+      "bytes": "c5c7",
+      "opcode": "C5C7",
+      "instruction": "muls.w  D7, D2"
+    },
+    {
+      "pc": "C20890",
+      "length": 2,
+      "bytes": "d480",
+      "opcode": "D480",
+      "instruction": "add.l   D0, D2"
+    },
+    {
+      "pc": "C20892",
+      "length": 2,
+      "bytes": "d481",
+      "opcode": "D481",
+      "instruction": "add.l   D1, D2"
+    },
+    {
+      "pc": "C20894",
+      "length": 2,
+      "bytes": "6c02",
+      "opcode": "6C02",
+      "instruction": "bge     $c20898"
+    },
+    {
+      "pc": "C20896",
+      "length": 2,
+      "bytes": "4482",
+      "opcode": "4482",
+      "instruction": "neg.l   D2"
+    },
+    {
+      "pc": "C20898",
+      "length": 2,
+      "bytes": "e882",
+      "opcode": "E882",
+      "instruction": "asr.l   #4, D2"
+    },
+    {
+      "pc": "C2089A",
+      "length": 6,
+      "bytes": "47f900c208d4",
+      "opcode": "47F9",
+      "instruction": "lea     $c208d4.l, A3"
+    },
+    {
+      "pc": "C208A0",
+      "length": 10,
+      "bytes": "0cb9ffffff8000c45a78",
+      "opcode": "0CB9",
+      "instruction": "cmpi.l  #-$80, $c45a78.l"
+    },
+    {
+      "pc": "C208AA",
+      "length": 2,
+      "bytes": "6e06",
+      "opcode": "6E06",
+      "instruction": "bgt     $c208b2"
+    },
+    {
+      "pc": "C208AC",
+      "length": 6,
+      "bytes": "47f900c208ec",
+      "opcode": "47F9",
+      "instruction": "lea     $c208ec.l, A3"
+    },
+    {
+      "pc": "C208B2",
+      "length": 4,
+      "bytes": "302effd8",
+      "opcode": "302E",
+      "instruction": "move.w  (-$28,A6), D0"
+    },
+    {
+      "pc": "C208B6",
+      "length": 2,
+      "bytes": "e840",
+      "opcode": "E840",
+      "instruction": "asr.w   #4, D0"
+    },
+    {
+      "pc": "C208B8",
+      "length": 4,
+      "bytes": "0c40000a",
+      "opcode": "0C40",
+      "instruction": "cmpi.w  #$a, D0"
+    },
+    {
+      "pc": "C208BC",
+      "length": 2,
+      "bytes": "6f04",
+      "opcode": "6F04",
+      "instruction": "ble     $c208c2"
+    },
+    {
+      "pc": "C208BE",
+      "length": 4,
+      "bytes": "303c000b",
+      "opcode": "303C",
+      "instruction": "move.w  #$b, D0"
+    },
+    {
+      "pc": "C208C2",
+      "length": 2,
+      "bytes": "d040",
+      "opcode": "D040",
+      "instruction": "add.w   D0, D0"
+    },
+    {
+      "pc": "C208C4",
+      "length": 4,
+      "bytes": "32330000",
+      "opcode": "3233",
+      "instruction": "move.w  (A3,D0.w), D1"
+    },
+    {
+      "pc": "C208C8",
+      "length": 2,
+      "bytes": "b441",
+      "opcode": "B441",
+      "instruction": "cmp.w   D1, D2"
+    },
+    {
+      "pc": "C208CA",
+      "length": 2,
+      "bytes": "6d04",
+      "opcode": "6D04",
+      "instruction": "blt     $c208d0"
+    },
+    {
+      "pc": "C208CC",
+      "length": 2,
+      "bytes": "7000",
+      "opcode": "7000",
+      "instruction": "moveq   #$0, D0"
+    },
+    {
+      "pc": "C208CE",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C208D0",
+      "length": 2,
+      "bytes": "70ff",
+      "opcode": "70FF",
+      "instruction": "moveq   #-$1, D0"
+    },
+    {
+      "pc": "C208D2",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C20A40",
+      "length": 10,
+      "bytes": "23fc000fffff00c456e6",
+      "opcode": "23FC",
+      "instruction": "move.l  #$fffff, $c456e6.l"
+    },
+    {
+      "pc": "C20A4A",
+      "length": 6,
+      "bytes": "33da00c45954",
+      "opcode": "33DA",
+      "instruction": "move.w  (A2)+, $c45954.l"
+    },
+    {
+      "pc": "C20A50",
+      "length": 2,
+      "bytes": "601e",
+      "opcode": "601E",
+      "instruction": "bra     $c20a70"
+    },
+    {
+      "pc": "C20A52",
+      "length": 8,
+      "bytes": "33fc000d00c45954",
+      "opcode": "33FC",
+      "instruction": "move.w  #$d, $c45954.l"
+    },
+    {
+      "pc": "C20A5A",
+      "length": 4,
+      "bytes": "303c0002",
+      "opcode": "303C",
+      "instruction": "move.w  #$2, D0"
+    },
+    {
+      "pc": "C20A5E",
+      "length": 4,
+      "bytes": "323c0000",
+      "opcode": "323C",
+      "instruction": "move.w  #$0, D1"
+    },
+    {
+      "pc": "C20A62",
+      "length": 4,
+      "bytes": "343c0002",
+      "opcode": "343C",
+      "instruction": "move.w  #$2, D2"
+    },
+    {
+      "pc": "C20A66",
+      "length": 2,
+      "bytes": "4243",
+      "opcode": "4243",
+      "instruction": "clr.w   D3"
+    },
+    {
+      "pc": "C20A68",
+      "length": 8,
+      "bytes": "48b9000f00c456e6",
+      "opcode": "48B9",
+      "instruction": "movem.w D0-D3, $c456e6.l"
+    },
+    {
+      "pc": "C20A70",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C20A76",
+      "length": 2,
+      "bytes": "d6da",
+      "opcode": "D6DA",
+      "instruction": "adda.w  (A2)+, A3"
+    },
+    {
+      "pc": "C20A78",
+      "length": 4,
+      "bytes": "3d52ffc8",
+      "opcode": "3D52",
+      "instruction": "move.w  (A2), (-$38,A6)"
+    },
+    {
+      "pc": "C20A7C",
+      "length": 4,
+      "bytes": "3d5affc6",
+      "opcode": "3D5A",
+      "instruction": "move.w  (A2)+, (-$3a,A6)"
+    },
+    {
+      "pc": "C20A80",
+      "length": 4,
+      "bytes": "48e70064",
+      "opcode": "48E7",
+      "instruction": "movem.l A1-A2/A5, -(A7)"
+    },
+    {
+      "pc": "C20A84",
+      "length": 4,
+      "bytes": "4c9b007e",
+      "opcode": "4C9B",
+      "instruction": "movem.w (A3)+, D1-D6"
+    },
+    {
+      "pc": "C20A88",
+      "length": 4,
+      "bytes": "49eb0006",
+      "opcode": "49EB",
+      "instruction": "lea     ($6,A3), A4"
+    },
+    {
+      "pc": "C20A8C",
+      "length": 2,
+      "bytes": "9253",
+      "opcode": "9253",
+      "instruction": "sub.w   (A3), D1"
+    },
+    {
+      "pc": "C20A8E",
+      "length": 4,
+      "bytes": "946b0002",
+      "opcode": "946B",
+      "instruction": "sub.w   ($2,A3), D2"
+    },
+    {
+      "pc": "C20A92",
+      "length": 4,
+      "bytes": "966b0004",
+      "opcode": "966B",
+      "instruction": "sub.w   ($4,A3), D3"
+    },
+    {
+      "pc": "C20A96",
+      "length": 2,
+      "bytes": "9853",
+      "opcode": "9853",
+      "instruction": "sub.w   (A3), D4"
+    },
+    {
+      "pc": "C20A98",
+      "length": 4,
+      "bytes": "9a6b0002",
+      "opcode": "9A6B",
+      "instruction": "sub.w   ($2,A3), D5"
+    },
+    {
+      "pc": "C20A9C",
+      "length": 4,
+      "bytes": "9c6b0004",
+      "opcode": "9C6B",
+      "instruction": "sub.w   ($4,A3), D6"
+    },
+    {
+      "pc": "C20AA0",
+      "length": 6,
+      "bytes": "48ae007effba",
+      "opcode": "48AE",
+      "instruction": "movem.w D1-D6, (-$46,A6)"
+    },
+    {
+      "pc": "C20AA6",
+      "length": 2,
+      "bytes": "e244",
+      "opcode": "E244",
+      "instruction": "asr.w   #1, D4"
+    },
+    {
+      "pc": "C20AA8",
+      "length": 2,
+      "bytes": "e245",
+      "opcode": "E245",
+      "instruction": "asr.w   #1, D5"
+    },
+    {
+      "pc": "C20AAA",
+      "length": 2,
+      "bytes": "e246",
+      "opcode": "E246",
+      "instruction": "asr.w   #1, D6"
+    },
+    {
+      "pc": "C20AAC",
+      "length": 4,
+      "bytes": "4c93000e",
+      "opcode": "4C93",
+      "instruction": "movem.w (A3), D1-D3"
+    },
+    {
+      "pc": "C20AB0",
+      "length": 2,
+      "bytes": "9244",
+      "opcode": "9244",
+      "instruction": "sub.w   D4, D1"
+    },
+    {
+      "pc": "C20AB2",
+      "length": 2,
+      "bytes": "9445",
+      "opcode": "9445",
+      "instruction": "sub.w   D5, D2"
+    },
+    {
+      "pc": "C20AB4",
+      "length": 2,
+      "bytes": "9646",
+      "opcode": "9646",
+      "instruction": "sub.w   D6, D3"
+    },
+    {
+      "pc": "C20AB6",
+      "length": 4,
+      "bytes": "d26effba",
+      "opcode": "D26E",
+      "instruction": "add.w   (-$46,A6), D1"
+    },
+    {
+      "pc": "C20ABA",
+      "length": 4,
+      "bytes": "d46effbc",
+      "opcode": "D46E",
+      "instruction": "add.w   (-$44,A6), D2"
+    },
+    {
+      "pc": "C20ABE",
+      "length": 4,
+      "bytes": "d66effbe",
+      "opcode": "D66E",
+      "instruction": "add.w   (-$42,A6), D3"
+    },
+    {
+      "pc": "C20AC2",
+      "length": 6,
+      "bytes": "48ae000effb4",
+      "opcode": "48AE",
+      "instruction": "movem.w D1-D3, (-$4c,A6)"
+    },
+    {
+      "pc": "C20AC8",
+      "length": 4,
+      "bytes": "4c94000e",
+      "opcode": "4C94",
+      "instruction": "movem.w (A4), D1-D3"
+    },
+    {
+      "pc": "C20ACC",
+      "length": 2,
+      "bytes": "9244",
+      "opcode": "9244",
+      "instruction": "sub.w   D4, D1"
+    },
+    {
+      "pc": "C20ACE",
+      "length": 2,
+      "bytes": "9445",
+      "opcode": "9445",
+      "instruction": "sub.w   D5, D2"
+    },
+    {
+      "pc": "C20AD0",
+      "length": 2,
+      "bytes": "9646",
+      "opcode": "9646",
+      "instruction": "sub.w   D6, D3"
+    },
+    {
+      "pc": "C20AD2",
+      "length": 4,
+      "bytes": "d26effba",
+      "opcode": "D26E",
+      "instruction": "add.w   (-$46,A6), D1"
+    },
+    {
+      "pc": "C20AD6",
+      "length": 4,
+      "bytes": "d46effbc",
+      "opcode": "D46E",
+      "instruction": "add.w   (-$44,A6), D2"
+    },
+    {
+      "pc": "C20ADA",
+      "length": 4,
+      "bytes": "d66effbe",
+      "opcode": "D66E",
+      "instruction": "add.w   (-$42,A6), D3"
+    },
+    {
+      "pc": "C20ADE",
+      "length": 6,
+      "bytes": "48ae000effae",
+      "opcode": "48AE",
+      "instruction": "movem.w D1-D3, (-$52,A6)"
+    },
+    {
+      "pc": "C20AE4",
+      "length": 4,
+      "bytes": "426eff82",
+      "opcode": "426E",
+      "instruction": "clr.w   (-$7e,A6)"
+    },
+    {
+      "pc": "C20AE8",
+      "length": 6,
+      "bytes": "41f900c4bf90",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf90.l, A0"
+    },
+    {
+      "pc": "C20AEE",
+      "length": 6,
+      "bytes": "20fc00000004",
+      "opcode": "20FC",
+      "instruction": "move.l  #$4, (A0)+"
+    },
+    {
+      "pc": "C20AF4",
+      "length": 2,
+      "bytes": "4244",
+      "opcode": "4244",
+      "instruction": "clr.w   D4"
+    },
+    {
+      "pc": "C20AF6",
+      "length": 2,
+      "bytes": "4245",
+      "opcode": "4245",
+      "instruction": "clr.w   D5"
+    },
+    {
+      "pc": "C20AF8",
+      "length": 2,
+      "bytes": "4246",
+      "opcode": "4246",
+      "instruction": "clr.w   D6"
+    },
+    {
+      "pc": "C20AFA",
+      "length": 2,
+      "bytes": "6012",
+      "opcode": "6012",
+      "instruction": "bra     $c20b0e"
+    },
+    {
+      "pc": "C20AFC",
+      "length": 6,
+      "bytes": "4cae0070ffa8",
+      "opcode": "4CAE",
+      "instruction": "movem.w (-$58,A6), D4-D6"
+    },
+    {
+      "pc": "C20B02",
+      "length": 4,
+      "bytes": "d86effc0",
+      "opcode": "D86E",
+      "instruction": "add.w   (-$40,A6), D4"
+    },
+    {
+      "pc": "C20B06",
+      "length": 4,
+      "bytes": "da6effc2",
+      "opcode": "DA6E",
+      "instruction": "add.w   (-$3e,A6), D5"
+    },
+    {
+      "pc": "C20B0A",
+      "length": 4,
+      "bytes": "dc6effc4",
+      "opcode": "DC6E",
+      "instruction": "add.w   (-$3c,A6), D6"
+    },
+    {
+      "pc": "C20B0E",
+      "length": 6,
+      "bytes": "48ae0070ffa8",
+      "opcode": "48AE",
+      "instruction": "movem.w D4-D6, (-$58,A6)"
+    },
+    {
+      "pc": "C20B14",
+      "length": 6,
+      "bytes": "41f900c4bf94",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf94.l, A0"
+    },
+    {
+      "pc": "C20B1A",
+      "length": 4,
+      "bytes": "4c93000e",
+      "opcode": "4C93",
+      "instruction": "movem.w (A3), D1-D3"
+    },
+    {
+      "pc": "C20B1E",
+      "length": 2,
+      "bytes": "e244",
+      "opcode": "E244",
+      "instruction": "asr.w   #1, D4"
+    },
+    {
+      "pc": "C20B20",
+      "length": 2,
+      "bytes": "e245",
+      "opcode": "E245",
+      "instruction": "asr.w   #1, D5"
+    },
+    {
+      "pc": "C20B22",
+      "length": 2,
+      "bytes": "e246",
+      "opcode": "E246",
+      "instruction": "asr.w   #1, D6"
+    },
+    {
+      "pc": "C20B24",
+      "length": 2,
+      "bytes": "d244",
+      "opcode": "D244",
+      "instruction": "add.w   D4, D1"
+    },
+    {
+      "pc": "C20B26",
+      "length": 2,
+      "bytes": "d445",
+      "opcode": "D445",
+      "instruction": "add.w   D5, D2"
+    },
+    {
+      "pc": "C20B28",
+      "length": 2,
+      "bytes": "d646",
+      "opcode": "D646",
+      "instruction": "add.w   D6, D3"
+    },
+    {
+      "pc": "C20B2A",
+      "length": 2,
+      "bytes": "3801",
+      "opcode": "3801",
+      "instruction": "move.w  D1, D4"
+    },
+    {
+      "pc": "C20B2C",
+      "length": 2,
+      "bytes": "3a02",
+      "opcode": "3A02",
+      "instruction": "move.w  D2, D5"
+    },
+    {
+      "pc": "C20B2E",
+      "length": 2,
+      "bytes": "3c03",
+      "opcode": "3C03",
+      "instruction": "move.w  D3, D6"
+    },
+    {
+      "pc": "C20B30",
+      "length": 4,
+      "bytes": "d86effba",
+      "opcode": "D86E",
+      "instruction": "add.w   (-$46,A6), D4"
+    },
+    {
+      "pc": "C20B34",
+      "length": 4,
+      "bytes": "da6effbc",
+      "opcode": "DA6E",
+      "instruction": "add.w   (-$44,A6), D5"
+    },
+    {
+      "pc": "C20B38",
+      "length": 4,
+      "bytes": "dc6effbe",
+      "opcode": "DC6E",
+      "instruction": "add.w   (-$42,A6), D6"
+    },
+    {
+      "pc": "C20B3C",
+      "length": 4,
+      "bytes": "4890007e",
+      "opcode": "4890",
+      "instruction": "movem.w D1-D6, (A0)"
+    },
+    {
+      "pc": "C20B40",
+      "length": 4,
+      "bytes": "d0fc000c",
+      "opcode": "D0FC",
+      "instruction": "adda.w  #$c, A0"
+    },
+    {
+      "pc": "C20B44",
+      "length": 4,
+      "bytes": "4c940070",
+      "opcode": "4C94",
+      "instruction": "movem.w (A4), D4-D6"
+    },
+    {
+      "pc": "C20B48",
+      "length": 6,
+      "bytes": "4cae000effa8",
+      "opcode": "4CAE",
+      "instruction": "movem.w (-$58,A6), D1-D3"
+    },
+    {
+      "pc": "C20B4E",
+      "length": 2,
+      "bytes": "e241",
+      "opcode": "E241",
+      "instruction": "asr.w   #1, D1"
+    },
+    {
+      "pc": "C20B50",
+      "length": 2,
+      "bytes": "e242",
+      "opcode": "E242",
+      "instruction": "asr.w   #1, D2"
+    },
+    {
+      "pc": "C20B52",
+      "length": 2,
+      "bytes": "e243",
+      "opcode": "E243",
+      "instruction": "asr.w   #1, D3"
+    },
+    {
+      "pc": "C20B54",
+      "length": 2,
+      "bytes": "d841",
+      "opcode": "D841",
+      "instruction": "add.w   D1, D4"
+    },
+    {
+      "pc": "C20B56",
+      "length": 2,
+      "bytes": "da42",
+      "opcode": "DA42",
+      "instruction": "add.w   D2, D5"
+    },
+    {
+      "pc": "C20B58",
+      "length": 2,
+      "bytes": "dc43",
+      "opcode": "DC43",
+      "instruction": "add.w   D3, D6"
+    },
+    {
+      "pc": "C20B5A",
+      "length": 2,
+      "bytes": "3204",
+      "opcode": "3204",
+      "instruction": "move.w  D4, D1"
+    },
+    {
+      "pc": "C20B5C",
+      "length": 2,
+      "bytes": "3405",
+      "opcode": "3405",
+      "instruction": "move.w  D5, D2"
+    },
+    {
+      "pc": "C20B5E",
+      "length": 2,
+      "bytes": "3606",
+      "opcode": "3606",
+      "instruction": "move.w  D6, D3"
+    },
+    {
+      "pc": "C20B60",
+      "length": 4,
+      "bytes": "d26effba",
+      "opcode": "D26E",
+      "instruction": "add.w   (-$46,A6), D1"
+    },
+    {
+      "pc": "C20B64",
+      "length": 4,
+      "bytes": "d46effbc",
+      "opcode": "D46E",
+      "instruction": "add.w   (-$44,A6), D2"
+    },
+    {
+      "pc": "C20B68",
+      "length": 4,
+      "bytes": "d66effbe",
+      "opcode": "D66E",
+      "instruction": "add.w   (-$42,A6), D3"
+    },
+    {
+      "pc": "C20B6C",
+      "length": 4,
+      "bytes": "4890007e",
+      "opcode": "4890",
+      "instruction": "movem.w D1-D6, (A0)"
+    },
+    {
+      "pc": "C20B70",
+      "length": 4,
+      "bytes": "48e70018",
+      "opcode": "48E7",
+      "instruction": "movem.l A3-A4, -(A7)"
+    },
+    {
+      "pc": "C20B74",
+      "length": 6,
+      "bytes": "4eb900c246a0",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c246a0.l"
+    },
+    {
+      "pc": "C20B7A",
+      "length": 4,
+      "bytes": "816eff82",
+      "opcode": "816E",
+      "instruction": "or.w    D0, (-$7e,A6)"
+    },
+    {
+      "pc": "C20B7E",
+      "length": 4,
+      "bytes": "4cdf1800",
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, A3-A4"
+    },
+    {
+      "pc": "C20B82",
+      "length": 4,
+      "bytes": "536effc8",
+      "opcode": "536E",
+      "instruction": "subq.w  #1, (-$38,A6)"
+    },
+    {
+      "pc": "C20B86",
+      "length": 4,
+      "bytes": "6e00ff74",
+      "opcode": "6E00",
+      "instruction": "bgt     $c20afc"
+    },
+    {
+      "pc": "C20B8A",
+      "length": 2,
+      "bytes": "4244",
+      "opcode": "4244",
+      "instruction": "clr.w   D4"
+    },
+    {
+      "pc": "C20B8C",
+      "length": 2,
+      "bytes": "4245",
+      "opcode": "4245",
+      "instruction": "clr.w   D5"
+    },
+    {
+      "pc": "C20B8E",
+      "length": 2,
+      "bytes": "4246",
+      "opcode": "4246",
+      "instruction": "clr.w   D6"
+    },
+    {
+      "pc": "C20B90",
+      "length": 2,
+      "bytes": "6012",
+      "opcode": "6012",
+      "instruction": "bra     $c20ba4"
+    },
+    {
+      "pc": "C20B92",
+      "length": 6,
+      "bytes": "4cae0070ffa8",
+      "opcode": "4CAE",
+      "instruction": "movem.w (-$58,A6), D4-D6"
+    },
+    {
+      "pc": "C20B98",
+      "length": 4,
+      "bytes": "d86effc0",
+      "opcode": "D86E",
+      "instruction": "add.w   (-$40,A6), D4"
+    },
+    {
+      "pc": "C20B9C",
+      "length": 4,
+      "bytes": "da6effc2",
+      "opcode": "DA6E",
+      "instruction": "add.w   (-$3e,A6), D5"
+    },
+    {
+      "pc": "C20BA0",
+      "length": 4,
+      "bytes": "dc6effc4",
+      "opcode": "DC6E",
+      "instruction": "add.w   (-$3c,A6), D6"
+    },
+    {
+      "pc": "C20BA4",
+      "length": 6,
+      "bytes": "48ae0070ffa8",
+      "opcode": "48AE",
+      "instruction": "movem.w D4-D6, (-$58,A6)"
+    },
+    {
+      "pc": "C20BAA",
+      "length": 6,
+      "bytes": "41f900c4bf94",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf94.l, A0"
+    },
+    {
+      "pc": "C20BB0",
+      "length": 6,
+      "bytes": "4cae000effb4",
+      "opcode": "4CAE",
+      "instruction": "movem.w (-$4c,A6), D1-D3"
+    },
+    {
+      "pc": "C20BB6",
+      "length": 2,
+      "bytes": "e244",
+      "opcode": "E244",
+      "instruction": "asr.w   #1, D4"
+    },
+    {
+      "pc": "C20BB8",
+      "length": 2,
+      "bytes": "e245",
+      "opcode": "E245",
+      "instruction": "asr.w   #1, D5"
+    },
+    {
+      "pc": "C20BBA",
+      "length": 2,
+      "bytes": "e246",
+      "opcode": "E246",
+      "instruction": "asr.w   #1, D6"
+    },
+    {
+      "pc": "C20BBC",
+      "length": 2,
+      "bytes": "9244",
+      "opcode": "9244",
+      "instruction": "sub.w   D4, D1"
+    },
+    {
+      "pc": "C20BBE",
+      "length": 2,
+      "bytes": "9445",
+      "opcode": "9445",
+      "instruction": "sub.w   D5, D2"
+    },
+    {
+      "pc": "C20BC0",
+      "length": 2,
+      "bytes": "9646",
+      "opcode": "9646",
+      "instruction": "sub.w   D6, D3"
+    },
+    {
+      "pc": "C20BC2",
+      "length": 2,
+      "bytes": "3801",
+      "opcode": "3801",
+      "instruction": "move.w  D1, D4"
+    },
+    {
+      "pc": "C20BC4",
+      "length": 2,
+      "bytes": "3a02",
+      "opcode": "3A02",
+      "instruction": "move.w  D2, D5"
+    },
+    {
+      "pc": "C20BC6",
+      "length": 2,
+      "bytes": "3c03",
+      "opcode": "3C03",
+      "instruction": "move.w  D3, D6"
+    },
+    {
+      "pc": "C20BC8",
+      "length": 4,
+      "bytes": "986effba",
+      "opcode": "986E",
+      "instruction": "sub.w   (-$46,A6), D4"
+    },
+    {
+      "pc": "C20BCC",
+      "length": 4,
+      "bytes": "9a6effbc",
+      "opcode": "9A6E",
+      "instruction": "sub.w   (-$44,A6), D5"
+    },
+    {
+      "pc": "C20BD0",
+      "length": 4,
+      "bytes": "9c6effbe",
+      "opcode": "9C6E",
+      "instruction": "sub.w   (-$42,A6), D6"
+    },
+    {
+      "pc": "C20BD4",
+      "length": 4,
+      "bytes": "4890007e",
+      "opcode": "4890",
+      "instruction": "movem.w D1-D6, (A0)"
+    },
+    {
+      "pc": "C20BD8",
+      "length": 4,
+      "bytes": "d0fc000c",
+      "opcode": "D0FC",
+      "instruction": "adda.w  #$c, A0"
+    },
+    {
+      "pc": "C20BDC",
+      "length": 6,
+      "bytes": "4cae0070ffae",
+      "opcode": "4CAE",
+      "instruction": "movem.w (-$52,A6), D4-D6"
+    },
+    {
+      "pc": "C20BE2",
+      "length": 6,
+      "bytes": "4cae000effa8",
+      "opcode": "4CAE",
+      "instruction": "movem.w (-$58,A6), D1-D3"
+    },
+    {
+      "pc": "C20BE8",
+      "length": 2,
+      "bytes": "e241",
+      "opcode": "E241",
+      "instruction": "asr.w   #1, D1"
+    },
+    {
+      "pc": "C20BEA",
+      "length": 2,
+      "bytes": "e242",
+      "opcode": "E242",
+      "instruction": "asr.w   #1, D2"
+    },
+    {
+      "pc": "C20BEC",
+      "length": 2,
+      "bytes": "e243",
+      "opcode": "E243",
+      "instruction": "asr.w   #1, D3"
+    },
+    {
+      "pc": "C20BEE",
+      "length": 2,
+      "bytes": "9841",
+      "opcode": "9841",
+      "instruction": "sub.w   D1, D4"
+    },
+    {
+      "pc": "C20BF0",
+      "length": 2,
+      "bytes": "9a42",
+      "opcode": "9A42",
+      "instruction": "sub.w   D2, D5"
+    },
+    {
+      "pc": "C20BF2",
+      "length": 2,
+      "bytes": "9c43",
+      "opcode": "9C43",
+      "instruction": "sub.w   D3, D6"
+    },
+    {
+      "pc": "C20BF4",
+      "length": 2,
+      "bytes": "3204",
+      "opcode": "3204",
+      "instruction": "move.w  D4, D1"
+    },
+    {
+      "pc": "C20BF6",
+      "length": 2,
+      "bytes": "3405",
+      "opcode": "3405",
+      "instruction": "move.w  D5, D2"
+    },
+    {
+      "pc": "C20BF8",
+      "length": 2,
+      "bytes": "3606",
+      "opcode": "3606",
+      "instruction": "move.w  D6, D3"
+    },
+    {
+      "pc": "C20BFA",
+      "length": 4,
+      "bytes": "926effba",
+      "opcode": "926E",
+      "instruction": "sub.w   (-$46,A6), D1"
+    },
+    {
+      "pc": "C20BFE",
+      "length": 4,
+      "bytes": "946effbc",
+      "opcode": "946E",
+      "instruction": "sub.w   (-$44,A6), D2"
+    },
+    {
+      "pc": "C20C02",
+      "length": 4,
+      "bytes": "966effbe",
+      "opcode": "966E",
+      "instruction": "sub.w   (-$42,A6), D3"
+    },
+    {
+      "pc": "C20C06",
+      "length": 4,
+      "bytes": "4890007e",
+      "opcode": "4890",
+      "instruction": "movem.w D1-D6, (A0)"
+    },
+    {
+      "pc": "C20C0A",
+      "length": 6,
+      "bytes": "4eb900c246a0",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c246a0.l"
+    },
+    {
+      "pc": "C20C10",
+      "length": 4,
+      "bytes": "536effc6",
+      "opcode": "536E",
+      "instruction": "subq.w  #1, (-$3a,A6)"
+    },
+    {
+      "pc": "C20C14",
+      "length": 4,
+      "bytes": "6e00ff7c",
+      "opcode": "6E00",
+      "instruction": "bgt     $c20b92"
+    },
+    {
+      "pc": "C20C18",
+      "length": 4,
+      "bytes": "4cdf2600",
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, A1-A2/A5"
+    },
+    {
+      "pc": "C20C1C",
+      "length": 4,
+      "bytes": "302eff82",
+      "opcode": "302E",
+      "instruction": "move.w  (-$7e,A6), D0"
+    },
+    {
+      "pc": "C20C20",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C20C22",
+      "length": 4,
+      "bytes": "48e70044",
+      "opcode": "48E7",
+      "instruction": "movem.l A1/A5, -(A7)"
+    },
+    {
+      "pc": "C20C26",
+      "length": 10,
+      "bytes": "23fc000fffff00c456e6",
+      "opcode": "23FC",
+      "instruction": "move.l  #$fffff, $c456e6.l"
+    },
+    {
+      "pc": "C20C30",
+      "length": 6,
+      "bytes": "33da00c45954",
+      "opcode": "33DA",
+      "instruction": "move.w  (A2)+, $c45954.l"
+    },
+    {
+      "pc": "C20C36",
+      "length": 2,
+      "bytes": "6022",
+      "opcode": "6022",
+      "instruction": "bra     $c20c5a"
+    },
+    {
+      "pc": "C20C38",
+      "length": 4,
+      "bytes": "48e70044",
+      "opcode": "48E7",
+      "instruction": "movem.l A1/A5, -(A7)"
+    },
+    {
+      "pc": "C20C3C",
+      "length": 8,
+      "bytes": "33fc000d00c45954",
+      "opcode": "33FC",
+      "instruction": "move.w  #$d, $c45954.l"
+    },
+    {
+      "pc": "C20C44",
+      "length": 4,
+      "bytes": "303c0002",
+      "opcode": "303C",
+      "instruction": "move.w  #$2, D0"
+    },
+    {
+      "pc": "C20C48",
+      "length": 4,
+      "bytes": "323c0000",
+      "opcode": "323C",
+      "instruction": "move.w  #$0, D1"
+    },
+    {
+      "pc": "C20C4C",
+      "length": 4,
+      "bytes": "343c0002",
+      "opcode": "343C",
+      "instruction": "move.w  #$2, D2"
+    },
+    {
+      "pc": "C20C50",
+      "length": 2,
+      "bytes": "4243",
+      "opcode": "4243",
+      "instruction": "clr.w   D3"
+    },
+    {
+      "pc": "C20C52",
+      "length": 8,
+      "bytes": "48b9000f00c456e6",
+      "opcode": "48B9",
+      "instruction": "movem.w D0-D3, $c456e6.l"
+    },
+    {
+      "pc": "C20C5A",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C20C60",
+      "length": 2,
+      "bytes": "d6da",
+      "opcode": "D6DA",
+      "instruction": "adda.w  (A2)+, A3"
+    },
+    {
+      "pc": "C20C62",
+      "length": 4,
+      "bytes": "3d5affc8",
+      "opcode": "3D5A",
+      "instruction": "move.w  (A2)+, (-$38,A6)"
+    },
+    {
+      "pc": "C20C66",
+      "length": 4,
+      "bytes": "4c9b007e",
+      "opcode": "4C9B",
+      "instruction": "movem.w (A3)+, D1-D6"
+    },
+    {
+      "pc": "C20C6A",
+      "length": 4,
+      "bytes": "926b0006",
+      "opcode": "926B",
+      "instruction": "sub.w   ($6,A3), D1"
+    },
+    {
+      "pc": "C20C6E",
+      "length": 4,
+      "bytes": "946b0008",
+      "opcode": "946B",
+      "instruction": "sub.w   ($8,A3), D2"
+    },
+    {
+      "pc": "C20C72",
+      "length": 4,
+      "bytes": "966b000a",
+      "opcode": "966B",
+      "instruction": "sub.w   ($a,A3), D3"
+    },
+    {
+      "pc": "C20C76",
+      "length": 4,
+      "bytes": "986b0006",
+      "opcode": "986B",
+      "instruction": "sub.w   ($6,A3), D4"
+    },
+    {
+      "pc": "C20C7A",
+      "length": 4,
+      "bytes": "9a6b0008",
+      "opcode": "9A6B",
+      "instruction": "sub.w   ($8,A3), D5"
+    },
+    {
+      "pc": "C20C7E",
+      "length": 4,
+      "bytes": "9c6b000a",
+      "opcode": "9C6B",
+      "instruction": "sub.w   ($a,A3), D6"
+    },
+    {
+      "pc": "C20C82",
+      "length": 6,
+      "bytes": "48ae007effba",
+      "opcode": "48AE",
+      "instruction": "movem.w D1-D6, (-$46,A6)"
+    },
+    {
+      "pc": "C20C88",
+      "length": 4,
+      "bytes": "4c9b000e",
+      "opcode": "4C9B",
+      "instruction": "movem.w (A3)+, D1-D3"
+    },
+    {
+      "pc": "C20C8C",
+      "length": 2,
+      "bytes": "9253",
+      "opcode": "9253",
+      "instruction": "sub.w   (A3), D1"
+    },
+    {
+      "pc": "C20C8E",
+      "length": 4,
+      "bytes": "946b0002",
+      "opcode": "946B",
+      "instruction": "sub.w   ($2,A3), D2"
+    },
+    {
+      "pc": "C20C92",
+      "length": 4,
+      "bytes": "966b0004",
+      "opcode": "966B",
+      "instruction": "sub.w   ($4,A3), D3"
+    },
+    {
+      "pc": "C20C96",
+      "length": 6,
+      "bytes": "48ae000effae",
+      "opcode": "48AE",
+      "instruction": "movem.w D1-D3, (-$52,A6)"
+    },
+    {
+      "pc": "C20C9C",
+      "length": 4,
+      "bytes": "426eff82",
+      "opcode": "426E",
+      "instruction": "clr.w   (-$7e,A6)"
+    },
+    {
+      "pc": "C20CA0",
+      "length": 6,
+      "bytes": "41f900c4bf90",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf90.l, A0"
+    },
+    {
+      "pc": "C20CA6",
+      "length": 6,
+      "bytes": "20fc00000004",
+      "opcode": "20FC",
+      "instruction": "move.l  #$4, (A0)+"
+    },
+    {
+      "pc": "C20CAC",
+      "length": 2,
+      "bytes": "6002",
+      "opcode": "6002",
+      "instruction": "bra     $c20cb0"
+    },
+    {
+      "pc": "C20CAE",
+      "length": 2,
+      "bytes": "5c4b",
+      "opcode": "5C4B",
+      "instruction": "addq.w  #6, A3"
+    },
+    {
+      "pc": "C20CB0",
+      "length": 4,
+      "bytes": "3d5affc6",
+      "opcode": "3D5A",
+      "instruction": "move.w  (A2)+, (-$3a,A6)"
+    },
+    {
+      "pc": "C20CB4",
+      "length": 2,
+      "bytes": "4244",
+      "opcode": "4244",
+      "instruction": "clr.w   D4"
+    },
+    {
+      "pc": "C20CB6",
+      "length": 2,
+      "bytes": "4245",
+      "opcode": "4245",
+      "instruction": "clr.w   D5"
+    },
+    {
+      "pc": "C20CB8",
+      "length": 2,
+      "bytes": "4246",
+      "opcode": "4246",
+      "instruction": "clr.w   D6"
+    },
+    {
+      "pc": "C20CBA",
+      "length": 2,
+      "bytes": "6012",
+      "opcode": "6012",
+      "instruction": "bra     $c20cce"
+    },
+    {
+      "pc": "C20CBC",
+      "length": 6,
+      "bytes": "4cae0070ffa8",
+      "opcode": "4CAE",
+      "instruction": "movem.w (-$58,A6), D4-D6"
+    },
+    {
+      "pc": "C20CC2",
+      "length": 4,
+      "bytes": "d86effc0",
+      "opcode": "D86E",
+      "instruction": "add.w   (-$40,A6), D4"
+    },
+    {
+      "pc": "C20CC6",
+      "length": 4,
+      "bytes": "da6effc2",
+      "opcode": "DA6E",
+      "instruction": "add.w   (-$3e,A6), D5"
+    },
+    {
+      "pc": "C20CCA",
+      "length": 4,
+      "bytes": "dc6effc4",
+      "opcode": "DC6E",
+      "instruction": "add.w   (-$3c,A6), D6"
+    },
+    {
+      "pc": "C20CCE",
+      "length": 6,
+      "bytes": "48ae0070ffa8",
+      "opcode": "48AE",
+      "instruction": "movem.w D4-D6, (-$58,A6)"
+    },
+    {
+      "pc": "C20CD4",
+      "length": 6,
+      "bytes": "41f900c4bf94",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf94.l, A0"
+    },
+    {
+      "pc": "C20CDA",
+      "length": 4,
+      "bytes": "4c93000e",
+      "opcode": "4C93",
+      "instruction": "movem.w (A3), D1-D3"
+    },
+    {
+      "pc": "C20CDE",
+      "length": 2,
+      "bytes": "e244",
+      "opcode": "E244",
+      "instruction": "asr.w   #1, D4"
+    },
+    {
+      "pc": "C20CE0",
+      "length": 2,
+      "bytes": "e245",
+      "opcode": "E245",
+      "instruction": "asr.w   #1, D5"
+    },
+    {
+      "pc": "C20CE2",
+      "length": 2,
+      "bytes": "e246",
+      "opcode": "E246",
+      "instruction": "asr.w   #1, D6"
+    },
+    {
+      "pc": "C20CE4",
+      "length": 2,
+      "bytes": "d244",
+      "opcode": "D244",
+      "instruction": "add.w   D4, D1"
+    },
+    {
+      "pc": "C20CE6",
+      "length": 2,
+      "bytes": "d445",
+      "opcode": "D445",
+      "instruction": "add.w   D5, D2"
+    },
+    {
+      "pc": "C20CE8",
+      "length": 2,
+      "bytes": "d646",
+      "opcode": "D646",
+      "instruction": "add.w   D6, D3"
+    },
+    {
+      "pc": "C20CEA",
+      "length": 2,
+      "bytes": "3801",
+      "opcode": "3801",
+      "instruction": "move.w  D1, D4"
+    },
+    {
+      "pc": "C20CEC",
+      "length": 2,
+      "bytes": "3a02",
+      "opcode": "3A02",
+      "instruction": "move.w  D2, D5"
+    },
+    {
+      "pc": "C20CEE",
+      "length": 2,
+      "bytes": "3c03",
+      "opcode": "3C03",
+      "instruction": "move.w  D3, D6"
+    },
+    {
+      "pc": "C20CF0",
+      "length": 4,
+      "bytes": "d86effba",
+      "opcode": "D86E",
+      "instruction": "add.w   (-$46,A6), D4"
+    },
+    {
+      "pc": "C20CF4",
+      "length": 4,
+      "bytes": "da6effbc",
+      "opcode": "DA6E",
+      "instruction": "add.w   (-$44,A6), D5"
+    },
+    {
+      "pc": "C20CF8",
+      "length": 4,
+      "bytes": "dc6effbe",
+      "opcode": "DC6E",
+      "instruction": "add.w   (-$42,A6), D6"
+    },
+    {
+      "pc": "C20CFC",
+      "length": 4,
+      "bytes": "4890007e",
+      "opcode": "4890",
+      "instruction": "movem.w D1-D6, (A0)"
+    },
+    {
+      "pc": "C20D00",
+      "length": 4,
+      "bytes": "d0fc000c",
+      "opcode": "D0FC",
+      "instruction": "adda.w  #$c, A0"
+    },
+    {
+      "pc": "C20D04",
+      "length": 4,
+      "bytes": "4c930070",
+      "opcode": "4C93",
+      "instruction": "movem.w (A3), D4-D6"
+    },
+    {
+      "pc": "C20D08",
+      "length": 4,
+      "bytes": "d86effae",
+      "opcode": "D86E",
+      "instruction": "add.w   (-$52,A6), D4"
+    },
+    {
+      "pc": "C20D0C",
+      "length": 4,
+      "bytes": "da6effb0",
+      "opcode": "DA6E",
+      "instruction": "add.w   (-$50,A6), D5"
+    },
+    {
+      "pc": "C20D10",
+      "length": 4,
+      "bytes": "dc6effb2",
+      "opcode": "DC6E",
+      "instruction": "add.w   (-$4e,A6), D6"
+    },
+    {
+      "pc": "C20D14",
+      "length": 6,
+      "bytes": "4cae000effa8",
+      "opcode": "4CAE",
+      "instruction": "movem.w (-$58,A6), D1-D3"
+    },
+    {
+      "pc": "C20D1A",
+      "length": 2,
+      "bytes": "e241",
+      "opcode": "E241",
+      "instruction": "asr.w   #1, D1"
+    },
+    {
+      "pc": "C20D1C",
+      "length": 2,
+      "bytes": "e242",
+      "opcode": "E242",
+      "instruction": "asr.w   #1, D2"
+    },
+    {
+      "pc": "C20D1E",
+      "length": 2,
+      "bytes": "e243",
+      "opcode": "E243",
+      "instruction": "asr.w   #1, D3"
+    },
+    {
+      "pc": "C20D20",
+      "length": 2,
+      "bytes": "d841",
+      "opcode": "D841",
+      "instruction": "add.w   D1, D4"
+    },
+    {
+      "pc": "C20D22",
+      "length": 2,
+      "bytes": "da42",
+      "opcode": "DA42",
+      "instruction": "add.w   D2, D5"
+    },
+    {
+      "pc": "C20D24",
+      "length": 2,
+      "bytes": "dc43",
+      "opcode": "DC43",
+      "instruction": "add.w   D3, D6"
+    },
+    {
+      "pc": "C20D26",
+      "length": 2,
+      "bytes": "3204",
+      "opcode": "3204",
+      "instruction": "move.w  D4, D1"
+    },
+    {
+      "pc": "C20D28",
+      "length": 2,
+      "bytes": "3405",
+      "opcode": "3405",
+      "instruction": "move.w  D5, D2"
+    },
+    {
+      "pc": "C20D2A",
+      "length": 2,
+      "bytes": "3606",
+      "opcode": "3606",
+      "instruction": "move.w  D6, D3"
+    },
+    {
+      "pc": "C20D2C",
+      "length": 4,
+      "bytes": "d26effba",
+      "opcode": "D26E",
+      "instruction": "add.w   (-$46,A6), D1"
+    },
+    {
+      "pc": "C20D30",
+      "length": 4,
+      "bytes": "d46effbc",
+      "opcode": "D46E",
+      "instruction": "add.w   (-$44,A6), D2"
+    },
+    {
+      "pc": "C20D34",
+      "length": 4,
+      "bytes": "d66effbe",
+      "opcode": "D66E",
+      "instruction": "add.w   (-$42,A6), D3"
+    },
+    {
+      "pc": "C20D38",
+      "length": 4,
+      "bytes": "4890007e",
+      "opcode": "4890",
+      "instruction": "movem.w D1-D6, (A0)"
+    },
+    {
+      "pc": "C20D3C",
+      "length": 4,
+      "bytes": "48e70030",
+      "opcode": "48E7",
+      "instruction": "movem.l A2-A3, -(A7)"
+    },
+    {
+      "pc": "C20D40",
+      "length": 6,
+      "bytes": "4eb900c246a0",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c246a0.l"
+    },
+    {
+      "pc": "C20D46",
+      "length": 4,
+      "bytes": "816eff82",
+      "opcode": "816E",
+      "instruction": "or.w    D0, (-$7e,A6)"
+    },
+    {
+      "pc": "C20D4A",
+      "length": 4,
+      "bytes": "4cdf0c00",
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, A2-A3"
+    },
+    {
+      "pc": "C20D4E",
+      "length": 4,
+      "bytes": "536effc6",
+      "opcode": "536E",
+      "instruction": "subq.w  #1, (-$3a,A6)"
+    },
+    {
+      "pc": "C20D52",
+      "length": 4,
+      "bytes": "6e00ff68",
+      "opcode": "6E00",
+      "instruction": "bgt     $c20cbc"
+    },
+    {
+      "pc": "C20D56",
+      "length": 4,
+      "bytes": "536effc8",
+      "opcode": "536E",
+      "instruction": "subq.w  #1, (-$38,A6)"
+    },
+    {
+      "pc": "C20D5A",
+      "length": 4,
+      "bytes": "6e00ff52",
+      "opcode": "6E00",
+      "instruction": "bgt     $c20cae"
+    },
+    {
+      "pc": "C20D5E",
+      "length": 4,
+      "bytes": "4cdf2200",
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, A1/A5"
+    },
+    {
+      "pc": "C20D62",
+      "length": 4,
+      "bytes": "302eff82",
+      "opcode": "302E",
+      "instruction": "move.w  (-$7e,A6), D0"
+    },
+    {
+      "pc": "C20D66",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C21060",
+      "length": 4,
+      "bytes": "48e70044",
+      "opcode": "48E7",
+      "instruction": "movem.l A1/A5, -(A7)"
+    },
+    {
+      "pc": "C21064",
+      "length": 8,
+      "bytes": "33fc000c00c45954",
+      "opcode": "33FC",
+      "instruction": "move.w  #$c, $c45954.l"
+    },
+    {
+      "pc": "C2106C",
+      "length": 4,
+      "bytes": "303c0008",
+      "opcode": "303C",
+      "instruction": "move.w  #$8, D0"
+    },
+    {
+      "pc": "C21070",
+      "length": 4,
+      "bytes": "323c0008",
+      "opcode": "323C",
+      "instruction": "move.w  #$8, D1"
+    },
+    {
+      "pc": "C21074",
+      "length": 2,
+      "bytes": "4242",
+      "opcode": "4242",
+      "instruction": "clr.w   D2"
+    },
+    {
+      "pc": "C21076",
+      "length": 2,
+      "bytes": "4243",
+      "opcode": "4243",
+      "instruction": "clr.w   D3"
+    },
+    {
+      "pc": "C21078",
+      "length": 8,
+      "bytes": "48b9000f00c456e6",
+      "opcode": "48B9",
+      "instruction": "movem.w D0-D3, $c456e6.l"
+    },
+    {
+      "pc": "C21080",
+      "length": 4,
+      "bytes": "426eff82",
+      "opcode": "426E",
+      "instruction": "clr.w   (-$7e,A6)"
+    },
+    {
+      "pc": "C21084",
+      "length": 10,
+      "bytes": "23fc0000000400c4bf90",
+      "opcode": "23FC",
+      "instruction": "move.l  #$4, $c4bf90.l"
+    },
+    {
+      "pc": "C2108E",
+      "length": 2,
+      "bytes": "321a",
+      "opcode": "321A",
+      "instruction": "move.w  (A2)+, D1"
+    },
+    {
+      "pc": "C21090",
+      "length": 2,
+      "bytes": "6d4a",
+      "opcode": "6D4A",
+      "instruction": "blt     $c210dc"
+    },
+    {
+      "pc": "C21092",
+      "length": 4,
+      "bytes": "4c9a001c",
+      "opcode": "4C9A",
+      "instruction": "movem.w (A2)+, D2-D4"
+    },
+    {
+      "pc": "C21096",
+      "length": 6,
+      "bytes": "41f900c4bf94",
+      "opcode": "41F9",
+      "instruction": "lea     $c4bf94.l, A0"
+    },
+    {
+      "pc": "C2109C",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C210A2",
+      "length": 4,
+      "bytes": "49f31000",
+      "opcode": "49F3",
+      "instruction": "lea     (A3,D1.w), A4"
+    },
+    {
+      "pc": "C210A6",
+      "length": 2,
+      "bytes": "20dc",
+      "opcode": "20DC",
+      "instruction": "move.l  (A4)+, (A0)+"
+    },
+    {
+      "pc": "C210A8",
+      "length": 2,
+      "bytes": "3c14",
+      "opcode": "3C14",
+      "instruction": "move.w  (A4), D6"
+    },
+    {
+      "pc": "C210AA",
+      "length": 2,
+      "bytes": "30c6",
+      "opcode": "30C6",
+      "instruction": "move.w  D6, (A0)+"
+    },
+    {
+      "pc": "C210AC",
+      "length": 4,
+      "bytes": "49f32000",
+      "opcode": "49F3",
+      "instruction": "lea     (A3,D2.w), A4"
+    },
+    {
+      "pc": "C210B0",
+      "length": 2,
+      "bytes": "20dc",
+      "opcode": "20DC",
+      "instruction": "move.l  (A4)+, (A0)+"
+    },
+    {
+      "pc": "C210B2",
+      "length": 2,
+      "bytes": "30d4",
+      "opcode": "30D4",
+      "instruction": "move.w  (A4), (A0)+"
+    },
+    {
+      "pc": "C210B4",
+      "length": 2,
+      "bytes": "cc54",
+      "opcode": "CC54",
+      "instruction": "and.w   (A4), D6"
+    },
+    {
+      "pc": "C210B6",
+      "length": 4,
+      "bytes": "49f33000",
+      "opcode": "49F3",
+      "instruction": "lea     (A3,D3.w), A4"
+    },
+    {
+      "pc": "C210BA",
+      "length": 2,
+      "bytes": "20dc",
+      "opcode": "20DC",
+      "instruction": "move.l  (A4)+, (A0)+"
+    },
+    {
+      "pc": "C210BC",
+      "length": 2,
+      "bytes": "30d4",
+      "opcode": "30D4",
+      "instruction": "move.w  (A4), (A0)+"
+    },
+    {
+      "pc": "C210BE",
+      "length": 2,
+      "bytes": "cc54",
+      "opcode": "CC54",
+      "instruction": "and.w   (A4), D6"
+    },
+    {
+      "pc": "C210C0",
+      "length": 4,
+      "bytes": "49f34000",
+      "opcode": "49F3",
+      "instruction": "lea     (A3,D4.w), A4"
+    },
+    {
+      "pc": "C210C4",
+      "length": 2,
+      "bytes": "20dc",
+      "opcode": "20DC",
+      "instruction": "move.l  (A4)+, (A0)+"
+    },
+    {
+      "pc": "C210C6",
+      "length": 2,
+      "bytes": "30d4",
+      "opcode": "30D4",
+      "instruction": "move.w  (A4), (A0)+"
+    },
+    {
+      "pc": "C210C8",
+      "length": 2,
+      "bytes": "cc54",
+      "opcode": "CC54",
+      "instruction": "and.w   (A4), D6"
+    },
+    {
+      "pc": "C210CA",
+      "length": 2,
+      "bytes": "6dc2",
+      "opcode": "6DC2",
+      "instruction": "blt     $c2108e"
+    },
+    {
+      "pc": "C210CC",
+      "length": 2,
+      "bytes": "2f0a",
+      "opcode": "2F0A",
+      "instruction": "move.l  A2, -(A7)"
+    },
+    {
+      "pc": "C210CE",
+      "length": 6,
+      "bytes": "4eb900c246a0",
+      "opcode": "4EB9",
+      "instruction": "jsr     $c246a0.l"
+    },
+    {
+      "pc": "C210D4",
+      "length": 4,
+      "bytes": "816eff82",
+      "opcode": "816E",
+      "instruction": "or.w    D0, (-$7e,A6)"
+    },
+    {
+      "pc": "C210D8",
+      "length": 2,
+      "bytes": "245f",
+      "opcode": "245F",
+      "instruction": "movea.l (A7)+, A2"
+    },
+    {
+      "pc": "C210DA",
+      "length": 2,
+      "bytes": "60b2",
+      "opcode": "60B2",
+      "instruction": "bra     $c2108e"
+    },
+    {
+      "pc": "C210DC",
+      "length": 4,
+      "bytes": "4cdf2200",
+      "opcode": "4CDF",
+      "instruction": "movem.l (A7)+, A1/A5"
+    },
+    {
+      "pc": "C210E0",
+      "length": 4,
+      "bytes": "302eff82",
+      "opcode": "302E",
+      "instruction": "move.w  (-$7e,A6), D0"
+    },
+    {
+      "pc": "C210E4",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C219AE",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C219B4",
+      "length": 2,
+      "bytes": "301a",
+      "opcode": "301A",
+      "instruction": "move.w  (A2)+, D0"
+    },
+    {
+      "pc": "C219B6",
+      "length": 2,
+      "bytes": "321a",
+      "opcode": "321A",
+      "instruction": "move.w  (A2)+, D1"
+    },
+    {
+      "pc": "C219B8",
+      "length": 6,
+      "bytes": "4cb300380000",
+      "opcode": "4CB3",
+      "instruction": "movem.w (A3,D0.w), D3-D5"
+    },
+    {
+      "pc": "C219BE",
+      "length": 6,
+      "bytes": "4cb300071000",
+      "opcode": "4CB3",
+      "instruction": "movem.w (A3,D1.w), D0-D2"
+    },
+    {
+      "pc": "C219C4",
+      "length": 2,
+      "bytes": "d6da",
+      "opcode": "D6DA",
+      "instruction": "adda.w  (A2)+, A3"
+    },
+    {
+      "pc": "C219C6",
+      "length": 2,
+      "bytes": "9043",
+      "opcode": "9043",
+      "instruction": "sub.w   D3, D0"
+    },
+    {
+      "pc": "C219C8",
+      "length": 2,
+      "bytes": "9244",
+      "opcode": "9244",
+      "instruction": "sub.w   D4, D1"
+    },
+    {
+      "pc": "C219CA",
+      "length": 2,
+      "bytes": "9445",
+      "opcode": "9445",
+      "instruction": "sub.w   D5, D2"
+    },
+    {
+      "pc": "C219CC",
+      "length": 4,
+      "bytes": "4c930038",
+      "opcode": "4C93",
+      "instruction": "movem.w (A3), D3-D5"
+    },
+    {
+      "pc": "C219D0",
+      "length": 2,
+      "bytes": "d640",
+      "opcode": "D640",
+      "instruction": "add.w   D0, D3"
+    },
+    {
+      "pc": "C219D2",
+      "length": 2,
+      "bytes": "d841",
+      "opcode": "D841",
+      "instruction": "add.w   D1, D4"
+    },
+    {
+      "pc": "C219D4",
+      "length": 2,
+      "bytes": "da42",
+      "opcode": "DA42",
+      "instruction": "add.w   D2, D5"
+    },
+    {
+      "pc": "C219D6",
+      "length": 6,
+      "bytes": "48ab00380012",
+      "opcode": "48AB",
+      "instruction": "movem.w D3-D5, ($12,A3)"
+    },
+    {
+      "pc": "C219DC",
+      "length": 2,
+      "bytes": "e240",
+      "opcode": "E240",
+      "instruction": "asr.w   #1, D0"
+    },
+    {
+      "pc": "C219DE",
+      "length": 2,
+      "bytes": "e241",
+      "opcode": "E241",
+      "instruction": "asr.w   #1, D1"
+    },
+    {
+      "pc": "C219E0",
+      "length": 2,
+      "bytes": "e242",
+      "opcode": "E242",
+      "instruction": "asr.w   #1, D2"
+    },
+    {
+      "pc": "C219E2",
+      "length": 6,
+      "bytes": "4cab10f80006",
+      "opcode": "4CAB",
+      "instruction": "movem.w ($6,A3), D3-D7/A4"
+    },
+    {
+      "pc": "C219E8",
+      "length": 2,
+      "bytes": "d640",
+      "opcode": "D640",
+      "instruction": "add.w   D0, D3"
+    },
+    {
+      "pc": "C219EA",
+      "length": 2,
+      "bytes": "d841",
+      "opcode": "D841",
+      "instruction": "add.w   D1, D4"
+    },
+    {
+      "pc": "C219EC",
+      "length": 2,
+      "bytes": "da42",
+      "opcode": "DA42",
+      "instruction": "add.w   D2, D5"
+    },
+    {
+      "pc": "C219EE",
+      "length": 2,
+      "bytes": "dc40",
+      "opcode": "DC40",
+      "instruction": "add.w   D0, D6"
+    },
+    {
+      "pc": "C219F0",
+      "length": 2,
+      "bytes": "de41",
+      "opcode": "DE41",
+      "instruction": "add.w   D1, D7"
+    },
+    {
+      "pc": "C219F2",
+      "length": 2,
+      "bytes": "d8c2",
+      "opcode": "D8C2",
+      "instruction": "adda.w  D2, A4"
+    },
+    {
+      "pc": "C219F4",
+      "length": 6,
+      "bytes": "48ab10f80018",
+      "opcode": "48AB",
+      "instruction": "movem.w D3-D7/A4, ($18,A3)"
+    },
+    {
+      "pc": "C219FA",
+      "length": 6,
+      "bytes": "47f900c46184",
+      "opcode": "47F9",
+      "instruction": "lea     $c46184.l, A3"
+    },
+    {
+      "pc": "C21A00",
+      "length": 6,
+      "bytes": "d6f900c459b6",
+      "opcode": "D6F9",
+      "instruction": "adda.w  $c459b6.l, A3"
+    },
+    {
+      "pc": "C21A06",
+      "length": 4,
+      "bytes": "122b007c",
+      "opcode": "122B",
+      "instruction": "move.b  ($7c,A3), D1"
+    },
+    {
+      "pc": "C21A0A",
+      "length": 4,
+      "bytes": "08810007",
+      "opcode": "0881",
+      "instruction": "bclr    #$7, D1"
+    },
+    {
+      "pc": "C21A0E",
+      "length": 2,
+      "bytes": "e801",
+      "opcode": "E801",
+      "instruction": "asr.b   #4, D1"
+    },
+    {
+      "pc": "C21A10",
+      "length": 2,
+      "bytes": "4881",
+      "opcode": "4881",
+      "instruction": "ext.w   D1"
+    },
+    {
+      "pc": "C21A12",
+      "length": 2,
+      "bytes": "d241",
+      "opcode": "D241",
+      "instruction": "add.w   D1, D1"
+    },
+    {
+      "pc": "C21A14",
+      "length": 2,
+      "bytes": "3001",
+      "opcode": "3001",
+      "instruction": "move.w  D1, D0"
+    },
+    {
+      "pc": "C21A16",
+      "length": 2,
+      "bytes": "e741",
+      "opcode": "E741",
+      "instruction": "asl.w   #3, D1"
+    },
+    {
+      "pc": "C21A18",
+      "length": 2,
+      "bytes": "9240",
+      "opcode": "9240",
+      "instruction": "sub.w   D0, D1"
+    },
+    {
+      "pc": "C21A1A",
+      "length": 2,
+      "bytes": "d4c1",
+      "opcode": "D4C1",
+      "instruction": "adda.w  D1, A2"
+    },
+    {
+      "pc": "C21A1C",
+      "length": 2,
+      "bytes": "7000",
+      "opcode": "7000",
+      "instruction": "moveq   #$0, D0"
+    },
+    {
+      "pc": "C21A1E",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    },
+    {
+      "pc": "C21C2E",
+      "length": 6,
+      "bytes": "47f900c46184",
+      "opcode": "47F9",
+      "instruction": "lea     $c46184.l, A3"
+    },
+    {
+      "pc": "C21C34",
+      "length": 6,
+      "bytes": "303900c459b6",
+      "opcode": "3039",
+      "instruction": "move.w  $c459b6.l, D0"
+    },
+    {
+      "pc": "C21C3A",
+      "length": 4,
+      "bytes": "064000a4",
+      "opcode": "0640",
+      "instruction": "addi.w  #$a4, D0"
+    },
+    {
+      "pc": "C21C3E",
+      "length": 2,
+      "bytes": "d6c0",
+      "opcode": "D6C0",
+      "instruction": "adda.w  D0, A3"
+    },
+    {
+      "pc": "C21C40",
+      "length": 4,
+      "bytes": "6100000a",
+      "opcode": "6100",
+      "instruction": "bsr     $c21c4c"
+    },
+    {
+      "pc": "C21C44",
+      "length": 6,
+      "bytes": "47f900c48390",
+      "opcode": "47F9",
+      "instruction": "lea     $c48390.l, A3"
+    },
+    {
+      "pc": "C21C4A",
+      "length": 2,
+      "bytes": "d6da",
+      "opcode": "D6DA",
+      "instruction": "adda.w  (A2)+, A3"
+    },
+    {
+      "pc": "C21C4C",
+      "length": 6,
+      "bytes": "4cab003f0000",
+      "opcode": "4CAB",
+      "instruction": "movem.w ($0,A3), D0-D5"
+    },
+    {
+      "pc": "C21C52",
+      "length": 2,
+      "bytes": "9640",
+      "opcode": "9640",
+      "instruction": "sub.w   D0, D3"
+    },
+    {
+      "pc": "C21C54",
+      "length": 2,
+      "bytes": "9841",
+      "opcode": "9841",
+      "instruction": "sub.w   D1, D4"
+    },
+    {
+      "pc": "C21C56",
+      "length": 2,
+      "bytes": "9a42",
+      "opcode": "9A42",
+      "instruction": "sub.w   D2, D5"
+    },
+    {
+      "pc": "C21C58",
+      "length": 2,
+      "bytes": "e243",
+      "opcode": "E243",
+      "instruction": "asr.w   #1, D3"
+    },
+    {
+      "pc": "C21C5A",
+      "length": 2,
+      "bytes": "e244",
+      "opcode": "E244",
+      "instruction": "asr.w   #1, D4"
+    },
+    {
+      "pc": "C21C5C",
+      "length": 2,
+      "bytes": "e245",
+      "opcode": "E245",
+      "instruction": "asr.w   #1, D5"
+    },
+    {
+      "pc": "C21C5E",
+      "length": 2,
+      "bytes": "d043",
+      "opcode": "D043",
+      "instruction": "add.w   D3, D0"
+    },
+    {
+      "pc": "C21C60",
+      "length": 2,
+      "bytes": "d244",
+      "opcode": "D244",
+      "instruction": "add.w   D4, D1"
+    },
+    {
+      "pc": "C21C62",
+      "length": 2,
+      "bytes": "d445",
+      "opcode": "D445",
+      "instruction": "add.w   D5, D2"
+    },
+    {
+      "pc": "C21C64",
+      "length": 6,
+      "bytes": "48ab0007001e",
+      "opcode": "48AB",
+      "instruction": "movem.w D0-D2, ($1e,A3)"
+    },
+    {
+      "pc": "C21C6A",
+      "length": 2,
+      "bytes": "9043",
+      "opcode": "9043",
+      "instruction": "sub.w   D3, D0"
+    },
+    {
+      "pc": "C21C6C",
+      "length": 2,
+      "bytes": "9244",
+      "opcode": "9244",
+      "instruction": "sub.w   D4, D1"
+    },
+    {
+      "pc": "C21C6E",
+      "length": 2,
+      "bytes": "9445",
+      "opcode": "9445",
+      "instruction": "sub.w   D5, D2"
+    },
+    {
+      "pc": "C21C70",
+      "length": 2,
+      "bytes": "e243",
+      "opcode": "E243",
+      "instruction": "asr.w   #1, D3"
+    },
+    {
+      "pc": "C21C72",
+      "length": 2,
+      "bytes": "e244",
+      "opcode": "E244",
+      "instruction": "asr.w   #1, D4"
+    },
+    {
+      "pc": "C21C74",
+      "length": 2,
+      "bytes": "e245",
+      "opcode": "E245",
+      "instruction": "asr.w   #1, D5"
+    },
+    {
+      "pc": "C21C76",
+      "length": 2,
+      "bytes": "d043",
+      "opcode": "D043",
+      "instruction": "add.w   D3, D0"
+    },
+    {
+      "pc": "C21C78",
+      "length": 2,
+      "bytes": "d244",
+      "opcode": "D244",
+      "instruction": "add.w   D4, D1"
+    },
+    {
+      "pc": "C21C7A",
+      "length": 2,
+      "bytes": "d445",
+      "opcode": "D445",
+      "instruction": "add.w   D5, D2"
+    },
+    {
+      "pc": "C21C7C",
+      "length": 6,
+      "bytes": "48ab00070024",
+      "opcode": "48AB",
+      "instruction": "movem.w D0-D2, ($24,A3)"
+    },
+    {
+      "pc": "C21C82",
+      "length": 2,
+      "bytes": "7000",
+      "opcode": "7000",
+      "instruction": "moveq   #$0, D0"
+    },
+    {
+      "pc": "C21C84",
+      "length": 2,
+      "bytes": "4e75",
+      "opcode": "4E75",
+      "instruction": "rts"
+    }
+  ],
+  "actual_original_callability": {
+    "C1FF0A": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "010C",
+        "slot": "C1FDF4",
+        "bytes": "00c1ff0a",
+        "target": "C1FF0A",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": []
+      }
+    ],
+    "C2005C": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "000C",
+        "slot": "C1FCF4",
+        "bytes": "00c2005c",
+        "target": "C2005C",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C2005C"
+          ]
+        ]
+      }
+    ],
+    "C20100": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "00DC",
+        "slot": "C1FDC4",
+        "bytes": "00c20100",
+        "target": "C20100",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C20100"
+          ]
+        ]
+      }
+    ],
+    "C21060": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "0044",
+        "slot": "C1FD2C",
+        "bytes": "00c21060",
+        "target": "C21060",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C21060"
+          ]
+        ]
+      },
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "0048",
+        "slot": "C1FD30",
+        "bytes": "00c21060",
+        "target": "C21060",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C21060"
+          ]
+        ]
+      }
+    ],
+    "C20C38": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "0054",
+        "slot": "C1FD3C",
+        "bytes": "00c20c38",
+        "target": "C20C38",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C20C38"
+          ]
+        ]
+      }
+    ],
+    "C20C22": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "00E4",
+        "slot": "C1FDCC",
+        "bytes": "00c20c22",
+        "target": "C20C22",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C20C22"
+          ]
+        ]
+      }
+    ],
+    "C20A52": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "0050",
+        "slot": "C1FD38",
+        "bytes": "00c20a52",
+        "target": "C20A52",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": []
+      }
+    ],
+    "C20A40": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "0080",
+        "slot": "C1FD68",
+        "bytes": "00c20a40",
+        "target": "C20A40",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C20A40"
+          ]
+        ]
+      }
+    ],
+    "C20002": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "0114",
+        "slot": "C1FDFC",
+        "bytes": "00c20002",
+        "target": "C20002",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C20002"
+          ]
+        ]
+      }
+    ],
+    "C2084A": [
+      {
+        "pc": "C1EFDC",
+        "return_pc": "C1EFE2",
+        "instruction": "jsr     $c2084a.l",
+        "bytes": "4eb900c2084a"
+      }
+    ],
+    "C2082A": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "007C",
+        "slot": "C1FD64",
+        "bytes": "00c2082a",
+        "target": "C2082A",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C2082A"
+          ]
+        ]
+      }
+    ],
+    "C219AE": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "00D0",
+        "slot": "C1FDB8",
+        "bytes": "00c219ae",
+        "target": "C219AE",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": []
+      }
+    ],
+    "C21C4C": [
+      {
+        "pc": "C21C40",
+        "return_pc": "C21C44",
+        "instruction": "bsr     $c21c4c",
+        "bytes": "6100000a"
+      }
+    ],
+    "C21C2E": [
+      {
+        "kind": "original table slot",
+        "call_pc": "C1F942",
+        "return_pc": "C1F944",
+        "table": "C1FCE8",
+        "selector_offset": "00B0",
+        "slot": "C1FD98",
+        "bytes": "00c21c2e",
+        "target": "C21C2E",
+        "caller_instructions": [
+          {
+            "pc": "C1F934",
+            "instruction": "andi.w  #$3fff, D0",
+            "bytes": "02403fff"
+          },
+          {
+            "pc": "C1F938",
+            "instruction": "lea     $c1fce8.l, A0",
+            "bytes": "41f900c1fce8"
+          },
+          {
+            "pc": "C1F93E",
+            "instruction": "movea.l (A0,D0.w), A0",
+            "bytes": "20700000"
+          },
+          {
+            "pc": "C1F942",
+            "instruction": "jsr     (A0)",
+            "bytes": "4e90"
+          }
+        ],
+        "observed_edges": [
+          [
+            "C1F944",
+            "C21C2E"
+          ]
+        ]
+      }
+    ]
+  },
+  "indirect_edge_authority": {
+    "path": "port/recomp/generated/recomp_edges.json",
+    "sha256": "87acac24fa83c28e35b3df6353b5deae11b6f47f9b0ddbebfce648a540dad424"
+  },
+  "classification": {
+    "purpose": "Next complete tested/list/grid/lattice face and edge stream-parent upgrades",
+    "implementation": false,
+    "os_service_replacement": false,
+    "whole_dispatch_table_extent_claimed": false,
+    "selector_guard_added": false
+  }
+}
