@@ -70,6 +70,13 @@ aircraft prompts and verifies active C10DAE/CONTEXT_STARTED state with pause
 cleared at two checkpoints. Original player coordinates and cockpit pixels
 advance. The frontend recording is `tools/amiga/fixtures/freeflight_runway.e9k`.
 
+`--missions` verifies all four currently selectable mission entries reach
+active, unpaused flight and advance both player coordinates and cockpit pixels.
+`--restart` verifies active mission -> SHIFT-ESC -> main menu -> second active
+mission in one process, using `tools/amiga/fixtures/mission_restart.e9k`.
+Both checks pass GNU/MSVC with zero ROM/fault counters. Progression-gated
+modes 7/8, mission outcomes and original guest teardown remain unverified.
+
 Complete mission outcomes, restart and game teardown still need coverage and
 any remaining services. Unknown operations continue to fail with their
 caller, service, target and machine time. Faster flight simulation and smoother

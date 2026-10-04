@@ -40,6 +40,8 @@ def main():
     parser.add_argument("--modes", action="store_true", help="also exercise menu and mission selections")
     parser.add_argument("--outcomes", action="store_true", help="also replay qualification failure and persist its log")
     parser.add_argument("--flight", action="store_true", help="also verify free-flight startup and changing flight state/pixels")
+    parser.add_argument("--missions", action="store_true", help="also verify all four mission entries reach changing active flight")
+    parser.add_argument("--restart", action="store_true", help="also leave active mission flight and start another mission")
     args = parser.parse_args()
     runner = args.runner.resolve()
     adf = ROOT / "local/media/fa18.adf"
@@ -66,6 +68,13 @@ def main():
             assert len(ram) >= 0x100000
             print(f"{name}: {frames} frames, mode={ram[offset(0xC458A6)]}, zero ROM/fault counters", flush=True)
             return ram, stats[0]
+
+        def active_flight(name, ram, mode):
+            assert ram[offset(0xC458A6)] == mode, (name, "wrong flight mode")
+            assert ram[offset(0xC457B4)] == 1 and ram[offset(0xC457AD)] == 0, (name, "inactive or paused")
+            assert struct.unpack_from(">I", ram, offset(0xC1820C))[0] == 0xC10DAE, (name, "wrong callback")
+            return (ram[offset(0xC46184 + 12):offset(0xC46184 + 24)],
+                (work / f"{name}.ppm").read_bytes())
 
         # The flight-log screen labels 1 as update, SHIFT-2 as reset. The
         # original C16406 clears all 39 words; C1643A writes those 78 bytes
@@ -101,12 +110,7 @@ def main():
             for frame in (4900, 5300):
                 name = f"free-flight-{frame}"
                 ram, _ = run(name, frame, events, name)
-                assert ram[offset(0xC458A6)] == 1
-                assert ram[offset(0xC457B4)] == 1 and ram[offset(0xC457AD)] == 0
-                assert struct.unpack_from(">I", ram, offset(0xC1820C))[0] == 0xC10DAE
-                position = ram[offset(0xC46184 + 12):offset(0xC46184 + 24)]
-                pixels = (work / f"{name}.ppm").read_bytes()
-                checkpoints.append((position, pixels))
+                checkpoints.append(active_flight(name, ram, 1))
             assert checkpoints[0][0] != checkpoints[1][0], "player coordinates did not advance"
             assert checkpoints[0][1] != checkpoints[1][1], "flight image did not change"
             print("Free-flight runway/aircraft selections reach active cockpit; original player coordinates and pixels advance", flush=True)
@@ -149,6 +153,44 @@ def main():
             assert struct.unpack_from(">I", loaded, offset(0xC1820C))[0] == 0xC115BA
             assert record(loaded) == saved_log
             print("Qualification: three original reset passes, failure message path, main-menu return; full nonzero log save/reload matches", flush=True)
+
+        if args.missions:
+            for index in range(1, 5):
+                # Complete the original confirmation and aircraft prompts.
+                # Earlier --modes checks stopped at the entry screen.
+                events = keys((1800, 32), (2200, 54), (2700, 281 + index),
+                    (2900, 32), (3100, 13), (3400, 32), (3600, 13),
+                    (3900, 49), (4200, 32), (4400, 13),
+                    (4600, 291), (4640, 291), (4680, 291))
+                checkpoints = []
+                for frame in (5600, 6000):
+                    name = f"mission-{index}-flight-{frame}"
+                    ram, _ = run(name, frame, events, name)
+                    checkpoints.append(active_flight(name, ram, index + 2))
+                assert checkpoints[0][0] != checkpoints[1][0], (index, "player coordinates did not advance")
+                assert checkpoints[0][1] != checkpoints[1][1], (index, "flight image did not change")
+            print("All four mission entries reach active/unpaused flight; player coordinates and cockpit pixels advance", flush=True)
+
+        if args.restart:
+            source = (ROOT / "tools/amiga/fixtures/mission_restart.e9k").read_text().splitlines()
+            assert source[0] == "E9K_INPUT_V1"
+            events = [(int(row[1]), int(row[3]), int(row[6])) for line in source[1:] if (row := line.split())]
+            name = "restart-first-flight"
+            ram, _ = run(name, 5600, events, name)
+            first = active_flight(name, ram, 3)
+            # SHIFT-ESC at 6,200 returns from actual flight, not its entry map.
+            name = "restart-menu"
+            ram, _ = run(name, 6500, events, name)
+            assert ram[offset(0xC458A6)] == 0
+            assert struct.unpack_from(">I", ram, offset(0xC1820C))[0] == 0xC0FCB4
+            # This prefix runs the complete first flight/return/reselection in
+            # one process, so the second active checkpoint exercises resource
+            # reuse. Each independent checkpoint uses its own fresh save dir.
+            name = "restart-second-flight"
+            ram, _ = run(name, 10500, events, name)
+            second = active_flight(name, ram, 4)
+            assert first != second
+            print("Active mission flight -> SHIFT-ESC -> main menu -> second active mission succeeds in one process", flush=True)
 
         if args.modes:
             for key, expected in ((2, 1), (3, 2), (4, 0x7D), (5, 9), (6, 0), (7, 6), (8, 0)):

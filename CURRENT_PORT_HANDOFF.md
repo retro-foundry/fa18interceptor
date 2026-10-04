@@ -39,10 +39,10 @@ whole-game acceptance remains:
 | Checkpoint | Verified state |
 | --- | --- |
 | Original ADF launch with no ROM or savestate | GNU/MSVC Release isolated ADF-only tests pass through splash, credits, keyboard input and main-menu access and demo rendering |
-| Menus and every reachable game mode from clean launch | Menu selections reach free flight, training, qualification, mission selection and flight log; all selectable mission entry screens exercised. Active-flight coverage and complete outcomes/progression remain pending |
+| Menus and every reachable game mode from clean launch | Menu selections reach free flight, training, qualification, mission selection and flight log; all four currently available mission entries reach changing active flight. Modes 7/8 and complete outcomes/progression remain pending |
 | Flight and postflight with original behavior and timing | GNU/MSVC free-flight location/aircraft choices reach active cockpit with advancing original player coordinates and pixels. New-tour qualification controls execute three reset passes, original failure-message callbacks, menu return and log update. Carrier success and complete mission outcomes remain pending; exact timing deferred |
 | Save/load round trips using `--save-dir` | GNU/MSVC game UI reset/update writes original 78-byte config; fresh launch matches all 78 saved bytes. ADF hash unchanged |
-| Restart and clean exit | Host window close stops before another frame, produces diagnostics, releases host resources and reports save-close failures; original guest teardown/restart still pending |
+| Restart and clean exit | Active mission -> SHIFT-ESC -> main menu -> second active mission passes GNU/MSVC. Host close emits diagnostics and releases resources; original guest teardown remains pending |
 | Zero ROM reads/fetches and unsupported services over all scenarios | Zero over startup/demo, menu/mission-start and flight-log persistence checkpoints; full outcomes/progression/exit pending |
 
 The loose host layer is in `port/amiga/host_compat.{h,c}` and
@@ -96,6 +96,32 @@ sample shows ample host budget; fresh game updates remain paced by guest code.
 Carrier replay now enters flight after adding the missing Return confirmation,
 but neither frame-shifted nor loop-shifted controls achieve success. Qualification
 success remains unproved; do not count these probes as carrier-landing coverage.
+
+`check_romfree_game_paths.py --missions` completes each F1-F4 entry's
+confirmation/aircraft prompts and verifies active C10DAE, CONTEXT_STARTED=1,
+PAUSE_A=0 at frames 5,600 and 6,000, with changing player coordinates and pixels.
+GNU/MSVC pass all four modes (3-6) with zero ROM/fault counters. `--restart`
+uses `tools/amiga/fixtures/mission_restart.e9k`: active first mission at 5,600,
+main-menu C0FCB4/mode zero at 6,500 after SHIFT-ESC, then a second active mission
+(mode 4) at 10,500. The final checkpoint executes the whole transition in one
+process and exercises resource reuse. No guest RAM/CPU injection is used.
+
+Modes 7/8 are gated by saved progression. `indexed_commands.c` checks the
+availability byte at MODE_TABLE+0x12+mode-1 before selecting these function-key
+routes. F5/F6 probes using the original ADF record do not select modes 7/8;
+later numeric input falls through to mode 3. Do not count these as higher-mode
+coverage. The original ROM-backed carrier recording still reaches its exact
+12,353-frame/8,038-iteration full RAM/CPU seal
+b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30.
+Its 78-byte final qualification record does not unlock modes 7/8, so it is
+insufficient as a saved progression fixture for those branches.
+
+A test-only Chip-memory starvation probe observes normal zero allocation
+returns, then an invalid game PC with a runtime fault. It does not prove clean
+guest failure teardown. Cause/source parity remains unproved; the probe was
+not promoted to a passing test or an inherited-bug claim. Ignored evidence is
+`build/amiga/allocation-failure.trace`. Keep graceful startup-error teardown
+and allocation failure as outstanding acceptance work.
 
 Next: verify mission outcomes/progression, restart and clean
 exit; complete only services reached by those paths, retaining reusable state

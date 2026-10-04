@@ -62,6 +62,16 @@ save round trips pass. Game UI reset/save and nonzero qualification-failure
 logs now reload all 78 bytes on GNU/MSVC. Complete mode/guest-exit acceptance
 remains pending. This is compatibility progress, not a measured speedup.
 
+Functional acceptance now also covers all four currently available mission
+entries with changing active flight, and a full first-flight/menu/second-flight
+restart sequence on GNU/MSVC. Higher modes 7/8 require evidence-backed saved
+progression; direct F5/F6 selection remains gated by the original availability
+bytes in `indexed_commands.c`. Do not remove that gameplay gate to gain coverage.
+A cold Chip-memory starvation probe returns zero from allocations and later
+faults at an invalid PC. It does not prove graceful game teardown, and its
+source/oracle cause is still unproved. Existing neutral failure-return contracts
+remain valid; whole-game startup-error cleanup needs focused investigation.
+
 The first clean launch found 42 captured OS RAM translations among the 624
 generated entries. ROM-free code ownership now excludes those functions,
 including wrappers inlined into generated routines. Only original non-BSS Hunk
