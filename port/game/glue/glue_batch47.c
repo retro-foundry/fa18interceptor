@@ -91,12 +91,7 @@ int glue_C13C0A(void) {
 }
 
 /* $C21C4C: A3 points; D0 = 0 (MOVEQ). */
-int glue_C21C4C(void) {
-    split_edge(A(3));
-    D(0) = 0;
-    flags_logic_l(0);
-    return glue_return();
-}
+
 
 /* $C1FED4: A2 stream; D0 = 0 with MOVEQ's flags. */
 int glue_C1FED4(void) {

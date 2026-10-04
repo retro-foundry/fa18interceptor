@@ -1,0 +1,45 @@
+#ifndef FA18_GLUE_FACE_LIST_PARENTS_H
+#define FA18_GLUE_FACE_LIST_PARENTS_H
+int glue_C1FF0A(void);
+int glue_C1FF0A_complete_step(void);
+int glue_C1FF0A_owns(uint32_t pc);
+int glue_C2005C(void);
+int glue_C2005C_complete_step(void);
+int glue_C2005C_owns(uint32_t pc);
+int glue_C20100(void);
+int glue_C20100_complete_step(void);
+int glue_C20100_owns(uint32_t pc);
+int glue_C21060(void);
+int glue_C21060_complete_step(void);
+int glue_C21060_owns(uint32_t pc);
+int glue_C20C38(void);
+int glue_C20C38_complete_step(void);
+int glue_C20C38_owns(uint32_t pc);
+int glue_C20C22(void);
+int glue_C20C22_complete_step(void);
+int glue_C20C22_owns(uint32_t pc);
+int glue_C20A52(void);
+int glue_C20A52_complete_step(void);
+int glue_C20A52_owns(uint32_t pc);
+int glue_C20A40(void);
+int glue_C20A40_complete_step(void);
+int glue_C20A40_owns(uint32_t pc);
+int glue_C20002(void);
+int glue_C20002_complete_step(void);
+int glue_C20002_owns(uint32_t pc);
+int glue_C2084A(void);
+int glue_C2084A_complete_step(void);
+int glue_C2084A_owns(uint32_t pc);
+int glue_C2082A(void);
+int glue_C2082A_complete_step(void);
+int glue_C2082A_owns(uint32_t pc);
+int glue_C219AE(void);
+int glue_C219AE_complete_step(void);
+int glue_C219AE_owns(uint32_t pc);
+int glue_C21C4C(void);
+int glue_C21C4C_complete_step(void);
+int glue_C21C4C_owns(uint32_t pc);
+int glue_C21C2E(void);
+int glue_C21C2E_complete_step(void);
+int glue_C21C2E_owns(uint32_t pc);
+#endif

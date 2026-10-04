@@ -69,63 +69,11 @@ int glue_C2ED70(void) {
 
 /* $C2084A's body, A3 the edge; the frame words -$26/-$22/-$28(A6) are the
  * eye x and z and the range. */
-static void alignment_regs(int result) {
-    int16_t eye_x = rd_s16(A(6) - 0x26), eye_z = rd_s16(A(6) - 0x22), range = rd_s16(A(6) - 0x28);
-    int16_t n1[3];
-    gaddr e = A(3);
-    int k;
 
-    SET_W(D(5), (uint16_t)-(int16_t)(rd_s16(e) - rd_s16(e + 4)));
-    SET_W(D(7), (uint16_t)-(int16_t)(rd_s16(e + 2) - rd_s16(e + 6)));
-    A(3) = e + 8;
-    SET_W(D(6), 0);
-    SET_W(D(0), 0x100);
-    normalize_registers();
-    for (k = 0; k < 3; k++) n1[k] = W(5 + k);
-    SET_W(D(5), (uint16_t)(eye_x - rd_s16(BOUND_OFFSET_X)));
-    SET_W(D(6), 0);
-    SET_W(D(7), (uint16_t)(eye_z - rd_s16(BOUND_OFFSET_Z)));
-    SET_W(D(0), 0x100);
-    normalize_registers();
-    for (k = 0; k < 3; k++) D(k) = (uint32_t)((int32_t)n1[k] * W(5 + k));
-    {
-        int32_t first = (int32_t)(D(2) + D(0));
-        D(2) = (uint32_t)first + D(1);
-        if ((int64_t)first + (int32_t)D(1) < 0) D(2) = 0u - D(2);
-        D(2) = (uint32_t)((int32_t)D(2) >> 4);
-    }
-    A(3) = rd_s32(PROJECTION_Y) > -0x80 ? ALIGNMENT_NEAR : ALIGNMENT_FAR;
-    SET_W(D(0), (uint16_t)(range >> 4));
-    if (W(0) > 10) SET_W(D(0), 11);
-    SET_W(D(0), (uint16_t)(W(0) * 2));
-    SET_W(D(1), rd_u16(A(3) + SEXT(D(0))));
-    D(0) = (uint32_t)result;
-    flags_logic_l(D(0));
-}
 
-int glue_C2084A(void) {
-    int16_t eye_x = rd_s16(A(6) - 0x26), eye_z = rd_s16(A(6) - 0x22), range = rd_s16(A(6) - 0x28);
-    int result = edge_alignment(A(3), eye_x, eye_z, range);
-    alignment_regs(result);
-    return glue_return();
-}
 
-int glue_C2082A(void) {
-    int16_t eye_x = rd_s16(A(6) - 0x26), eye_z = rd_s16(A(6) - 0x22), range = rd_s16(A(6) - 0x28);
-    gaddr stream = A(2);
-    int result;
 
-    A(3) = rd_u32(BOUND_RECORD) + 0xA + SEXT(rd_u16(A(2)));
-    result = edge_alignment_test(&stream, eye_x, eye_z, range);
-    A(2) = stream;
-    if (rd_s32(PROJECTION_Y) <= -0x140 || rd_u8(ATTITUDE_NEAR)) {
-        D(0) = 0;
-        flags_logic_l(0);
-    } else {
-        alignment_regs(result);
-    }
-    return glue_return();
-}
+
 
 void plot_registers(gaddr masks, gaddr writers); /* glue_batch33.c */
 

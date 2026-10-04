@@ -16,14 +16,24 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
+Fourteen complete face-list/edge upgrades pass 458,752 full CPU/PC/SR/RAM
+calls, all 533 owned boundaries with both controlled and original children,
+and 43,008 dispatch calls. Independent normal C passes every owner: 70,334
+shadow / 92,495 sandbox (including an isolated C21C4C check; the initial
+batch's zero-call rejection is retained). All 36,236 isolated live frames
+and seals match; combined DMA passes 27,543 / 881,376. Source-timed entries
+rise to 494. See [face-list/edge proof](analysis/routines/native_c_face_list_parents.md).
+Next fifteen ground/HUD mark/panel/blit parents have 1,352 unique boundaries.
+Full original function and callback coverage remains open; Kickstart services
+and timing remain deferred.
+
 Seventeen complete face-stream upgrades pass 557,056 full CPU/PC/SR/RAM
 calls, all 773 owned boundaries with both controlled and original children,
 and 52,224 dispatch calls. Independent normal C passes every owner: 22,333
 shadow / 26,010 sandbox. All 36,236 isolated live frames and seals match;
 combined DMA passes 27,064 / 866,048. Source-timed entries rise to 481. See
 [face-stream proof](analysis/routines/native_c_face_stream_parents.md).
-Next fourteen tested/list/grid/lattice face and edge owners have 533 unique /
-294 shared boundaries. Complete original function and callback coverage
+Those fourteen face-list/edge owners are now complete as described above. Complete original function and callback coverage
 remains open; Kickstart services and timing remain deferred.
 
 Ten complete older rendering-parent upgrades pass 327,680 full CPU/PC/SR/

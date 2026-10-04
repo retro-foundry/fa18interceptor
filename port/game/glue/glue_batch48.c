@@ -161,19 +161,3 @@ int glue_C2CE82(void) {
 }
 
 /* $C21C2E: A2 stream. The second split's registers, then D0 = 0 (MOVEQ). */
-int glue_C21C2E(void) {
-    gaddr a2 = A(2), points = WORKSPACES + SEXT(rd_u16(a2));
-    int k;
-    split_record_and_stream_edges(&a2);
-    A(2) = a2;
-    A(3) = points;
-    for (k = 0; k < 3; k++) {
-        int16_t p = rd_s16(points + (gaddr)(2 * k)), mid = rd_s16(points + 0x1E + (gaddr)(2 * k));
-        int16_t half = (int16_t)(mid - p), quarter = (int16_t)(half >> 1);
-        D(k) = (SEXT(p) & 0xFFFF0000u) | (uint16_t)(p + quarter);
-        D(3 + k) = (SEXT(rd_u16(points + 6 + (gaddr)(2 * k))) & 0xFFFF0000u) | (uint16_t)quarter;
-    }
-    D(0) = 0;
-    flags_logic_l(0);
-    return glue_return();
-}

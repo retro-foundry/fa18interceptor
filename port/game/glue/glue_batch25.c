@@ -65,37 +65,7 @@ int glue_C33186(void) {
 }
 
 /* $C219AE: A2 stream. Every register is live after it. */
-int glue_C219AE(void) {
-    gaddr stream = A(2), bank = WORKSPACES, target;
-    int16_t a = rd_s16(stream), b = rd_s16(stream + 2);
-    uint32_t pb[3], p6[6];
-    int16_t e[3];
-    int i, steps;
 
-    target = bank + (gaddr)(int32_t)rd_s16(stream + 4);
-    for (i = 0; i < 3; i++) {
-        pb[i] = (uint32_t)(int32_t)rd_s16(bank + (gaddr)(int32_t)b + (gaddr)(2 * i));
-        e[i] = (int16_t)(pb[i] - (uint32_t)rd_u16(bank + (gaddr)(int32_t)a + (gaddr)(2 * i)));
-    }
-    for (i = 0; i < 6; i++) p6[i] = (uint32_t)(int32_t)rd_s16(target + 6 + (gaddr)(2 * i));
-    A(2) = derive_edge_vertices(stream);
-
-    /* D0-D2 = the edge (halved), high words from the MOVEM.W load of b. */
-    D(2) = (pb[2] & 0xFFFF0000u) | (uint16_t)(e[2] >> 1);
-    /* D3-D7/A4: +$06/+$0C words (sign-extended) plus the halved edge. */
-    D(3) = (p6[0] & 0xFFFF0000u) | (uint16_t)(p6[0] + (uint32_t)(e[0] >> 1));
-    D(4) = (p6[1] & 0xFFFF0000u) | (uint16_t)(p6[1] + (uint32_t)(e[1] >> 1));
-    D(5) = (p6[2] & 0xFFFF0000u) | (uint16_t)(p6[2] + (uint32_t)(e[2] >> 1));
-    D(6) = (p6[3] & 0xFFFF0000u) | (uint16_t)(p6[3] + (uint32_t)(e[0] >> 1));
-    D(7) = (p6[4] & 0xFFFF0000u) | (uint16_t)(p6[4] + (uint32_t)(e[1] >> 1));
-    A(4) = p6[5] + (uint32_t)(int32_t)(int16_t)(e[2] >> 1);
-    A(3) = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
-    steps = (int8_t)(rd_u8(A(3) + 0x7C) & 0x7F) >> 4;
-    D(1) = (pb[1] & 0xFFFF0000u) | (uint16_t)(14 * steps);
-    D(0) = 0;
-    flags_logic_l(0);
-    return glue_return();
-}
 
 /* $C2FD22: the buffer pointers end past their buffers; D0.w = $FFFF. */
 void clear_render_buffers_registers(void) {

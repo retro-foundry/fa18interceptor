@@ -434,7 +434,7 @@ const FA18Port fa18_ports[] = {
     {0xC17C62, glue_C17C62, "play_main_engine", 0, 0, glue_C17C62_step, 0xC17CF6},
     {0xC17D6E, glue_C17D6E, "slide_main_engine", 0, 0, glue_C17D6E_step, 0xC17DAA},
     {0xC3316A, glue_C3316A, "play_tone", 0, 0, glue_C3316A_step, 0xC331CE},
-    {0xC219AE, glue_C219AE, "derive_edge_vertices", 400},
+    {0xC219AE, glue_C219AE, "derive_edge_vertices", 0, 0, glue_C219AE_complete_step, 0xC21A20, 1, 0, glue_C219AE_owns},
     {0xC2FD22, glue_C2FD22, "clear_render_buffers", 0, 0, glue_C2FD22_step, 0xC2FD8C},
     {0xC3040C, glue_C3040C, "blit_mask_between_planes", 0, 0, glue_C3040C_step, 0xC30466, 0, 0xC301F0},
     {0xC1EBE0, glue_C1EBE0, "grid_relative_position", 0, 0, glue_C1EBE0_step, 0xC1EC3A},
@@ -526,7 +526,7 @@ const FA18Port fa18_ports[] = {
     {0xC25A6A, glue_C25A6A, "record_flight_input", 250},
     {0xC33DA4, glue_C33DA4, "take_warning_events", 80},
     {0xC13C0A, glue_C13C0A, "ease_record_58", 400},
-    {0xC21C4C, glue_C21C4C, "split_edge", 300},
+    {0xC21C4C, glue_C21C4C, "split_edge", 0, 0, glue_C21C4C_complete_step, 0xC21C86, 1, 0, glue_C21C4C_owns},
     {0xC1FED4, glue_C1FED4, "skip_word_for_mode_57", 50},
     {0xC345A0, glue_C345A0, "plot_ring", 20000},
     /* batch 48: coloured face, stored-normal test, record steering, view rotation, edge split */
@@ -537,13 +537,13 @@ const FA18Port fa18_ports[] = {
     {0xC2CA26, glue_C2CA26, "steer_record_turn", 200},
     {0xC2CB86, glue_C2CB86, "steer_record_pitch", 150},
     {0xC2CE82, glue_C2CE82, "rotate_by_view_matrix", 700},
-    {0xC21C2E, glue_C21C2E, "split_record_and_stream_edges", 700},
+    {0xC21C2E, glue_C21C2E, "split_record_and_stream_edges", 0, 0, glue_C21C2E_complete_step, 0xC21C86, 1, 0, glue_C21C2E_owns},
     /* batch 49: projected segment, top-plane crossing, in-sight flag, edge alignment */
     {0xC2ED70, glue_C2ED70, "draw_projected_segment", 3000},
     {0xC2F128, glue_C2F128, "clip_to_view_plane", 0, 0, glue_C2F128_step, 0xC2F1B8, 0, 0xC2EE44},
     {0xC2436A, glue_C2436A, "update_main_loop_record_sight", 0, 0, glue_C2436A_step, 0xC243F2, 0, 0xC24368, glue_C2436A_owns},
-    {0xC2084A, glue_C2084A, "edge_alignment", 3000},
-    {0xC2082A, glue_C2082A, "edge_alignment_test", 3000},
+    {0xC2084A, glue_C2084A, "edge_alignment", 0, 0, glue_C2084A_complete_step, 0xC208D4, 1, 0, glue_C2084A_owns},
+    {0xC2082A, glue_C2082A, "edge_alignment_test", 0, 0, glue_C2082A_complete_step, 0xC208D4, 1, 0xC20826, glue_C2082A_owns},
     /* batch 50: symbol plot */
     {0xC348B2, glue_C348B2, "plot_symbol", 4000},
     /* batch 51-52: clipped segment, ground points, voices, messages, observer, stages, long table, alert, start position, typed code */
@@ -663,18 +663,18 @@ const FA18Port fa18_ports[] = {
     /* bound points */
     {0xC1F99A, glue_C1F99A, "transform_bound_points", 0, 0, glue_C1F99A_complete_step, 0xC1FB82, 1, 0, glue_C1F99A_owns},
     /* draw_stream.c */
-    {0xC1FF0A, glue_C1FF0A, "test_stream_face", 240},
+    {0xC1FF0A, glue_C1FF0A, "test_stream_face", 0, 0, glue_C1FF0A_complete_step, 0xC1FF46, 1, 0, glue_C1FF0A_owns},
     /* draw_stream.c */
-    {0xC2005C, glue_C2005C, "draw_tested_face", 0, 0, glue_C2005C_step, 0xC200F6},
-    {0xC20100, glue_C20100, "draw_indexed_face_list", 620},
+    {0xC2005C, glue_C2005C, "draw_tested_face", 0, 0, glue_C2005C_complete_step, 0xC200F6, 1, 0, glue_C2005C_owns},
+    {0xC20100, glue_C20100, "draw_indexed_face_list", 0, 0, glue_C20100_complete_step, 0xC201A0, 1, 0xC200F6, glue_C20100_owns},
     /* draw_stream.c face loops */
-    {0xC21060, glue_C21060, "draw_quad_list", 900},
-    {0xC20C38, glue_C20C38, "draw_face_grid", 1200},
-    {0xC20C22, glue_C20C22, "draw_face_grid_plain", 1200},
-    {0xC20A52, glue_C20A52, "draw_face_lattice", 1600},
-    {0xC20A40, glue_C20A40, "draw_face_lattice_plain", 1600},
+    {0xC21060, glue_C21060, "draw_quad_list", 0, 0, glue_C21060_complete_step, 0xC210E6, 1, 0, glue_C21060_owns},
+    {0xC20C38, glue_C20C38, "draw_face_grid", 0, 0, glue_C20C38_complete_step, 0xC20D68, 1, 0, glue_C20C38_owns},
+    {0xC20C22, glue_C20C22, "draw_face_grid_plain", 0, 0, glue_C20C22_complete_step, 0xC20D68, 1, 0, glue_C20C22_owns},
+    {0xC20A52, glue_C20A52, "draw_face_lattice", 0, 0, glue_C20A52_complete_step, 0xC20C22, 1, 0, glue_C20A52_owns},
+    {0xC20A40, glue_C20A40, "draw_face_lattice_plain", 0, 0, glue_C20A40_complete_step, 0xC20C22, 1, 0, glue_C20A40_owns},
     /* draw_stream.c */
-    {0xC20002, glue_C20002, "draw_tested_parallelogram", 420},
+    {0xC20002, glue_C20002, "draw_tested_parallelogram", 0, 0, glue_C20002_complete_step, 0xC200F6, 1, 0, glue_C20002_owns},
     /* control_records.c */
     {0xC1D3F4, glue_C1D3F4, "expand_cell_templates", 0, 0, glue_C1D3F4_step, 0xC1D722, 0, 0xC1D3F4},
     /* hud_bars.c */

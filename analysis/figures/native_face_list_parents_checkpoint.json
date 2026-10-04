@@ -1,0 +1,3602 @@
+{
+  "date": "2026-10-04",
+  "preceding_commit": "51fb22b2",
+  "new_registered_owners": [],
+  "upgraded_registered_owners": [
+    "C1FF0A",
+    "C2005C",
+    "C20100",
+    "C21060",
+    "C20C38",
+    "C20C22",
+    "C20A52",
+    "C20A40",
+    "C20002",
+    "C2084A",
+    "C2082A",
+    "C219AE",
+    "C21C4C",
+    "C21C2E"
+  ],
+  "registered_translated_entries": 526,
+  "seeded_translation_entries": 624,
+  "registered_source_only_entries": 66,
+  "registered_total_entries": 592,
+  "registered_timing_entries": 494,
+  "registered_translated_timing_entries": 428,
+  "registered_source_only_timing_entries": 66,
+  "source": {
+    "manifest": {
+      "path": "analysis/data/face_list_parents_source_scope.json",
+      "sha256": "5e10edc876d34e13f3999851e547a0d5f49a55aa0d8b4a69df54bf9d3359d3d4"
+    },
+    "unique_instructions": 533,
+    "shared_within_batch": 294,
+    "distinct_child_sites": 12,
+    "child_sites_by_owner": 19,
+    "actual_original_callability": {
+      "C1FF0A": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "010C",
+          "slot": "C1FDF4",
+          "bytes": "00c1ff0a",
+          "target": "C1FF0A",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": []
+        }
+      ],
+      "C2005C": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "000C",
+          "slot": "C1FCF4",
+          "bytes": "00c2005c",
+          "target": "C2005C",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C2005C"
+            ]
+          ]
+        }
+      ],
+      "C20100": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00DC",
+          "slot": "C1FDC4",
+          "bytes": "00c20100",
+          "target": "C20100",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20100"
+            ]
+          ]
+        }
+      ],
+      "C21060": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0044",
+          "slot": "C1FD2C",
+          "bytes": "00c21060",
+          "target": "C21060",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C21060"
+            ]
+          ]
+        },
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0048",
+          "slot": "C1FD30",
+          "bytes": "00c21060",
+          "target": "C21060",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C21060"
+            ]
+          ]
+        }
+      ],
+      "C20C38": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0054",
+          "slot": "C1FD3C",
+          "bytes": "00c20c38",
+          "target": "C20C38",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20C38"
+            ]
+          ]
+        }
+      ],
+      "C20C22": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00E4",
+          "slot": "C1FDCC",
+          "bytes": "00c20c22",
+          "target": "C20C22",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20C22"
+            ]
+          ]
+        }
+      ],
+      "C20A52": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0050",
+          "slot": "C1FD38",
+          "bytes": "00c20a52",
+          "target": "C20A52",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": []
+        }
+      ],
+      "C20A40": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0080",
+          "slot": "C1FD68",
+          "bytes": "00c20a40",
+          "target": "C20A40",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20A40"
+            ]
+          ]
+        }
+      ],
+      "C20002": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "0114",
+          "slot": "C1FDFC",
+          "bytes": "00c20002",
+          "target": "C20002",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C20002"
+            ]
+          ]
+        }
+      ],
+      "C2084A": [
+        {
+          "pc": "C1EFDC",
+          "return_pc": "C1EFE2",
+          "instruction": "jsr     $c2084a.l",
+          "bytes": "4eb900c2084a"
+        }
+      ],
+      "C2082A": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "007C",
+          "slot": "C1FD64",
+          "bytes": "00c2082a",
+          "target": "C2082A",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C2082A"
+            ]
+          ]
+        }
+      ],
+      "C219AE": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00D0",
+          "slot": "C1FDB8",
+          "bytes": "00c219ae",
+          "target": "C219AE",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": []
+        }
+      ],
+      "C21C4C": [
+        {
+          "pc": "C21C40",
+          "return_pc": "C21C44",
+          "instruction": "bsr     $c21c4c",
+          "bytes": "6100000a"
+        }
+      ],
+      "C21C2E": [
+        {
+          "kind": "original table slot",
+          "call_pc": "C1F942",
+          "return_pc": "C1F944",
+          "table": "C1FCE8",
+          "selector_offset": "00B0",
+          "slot": "C1FD98",
+          "bytes": "00c21c2e",
+          "target": "C21C2E",
+          "caller_instructions": [
+            {
+              "pc": "C1F934",
+              "instruction": "andi.w  #$3fff, D0",
+              "bytes": "02403fff"
+            },
+            {
+              "pc": "C1F938",
+              "instruction": "lea     $c1fce8.l, A0",
+              "bytes": "41f900c1fce8"
+            },
+            {
+              "pc": "C1F93E",
+              "instruction": "movea.l (A0,D0.w), A0",
+              "bytes": "20700000"
+            },
+            {
+              "pc": "C1F942",
+              "instruction": "jsr     (A0)",
+              "bytes": "4e90"
+            }
+          ],
+          "observed_edges": [
+            [
+              "C1F944",
+              "C21C2E"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "completed_fixture_calls": 458752,
+  "controlled_child_completed_calls": 229376,
+  "real_child_completed_calls": 229376,
+  "fixture_coverage": [
+    {
+      "owner": "C1FF0A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 16,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C1FF0A.log",
+        "sha256": "6212c72172a9f696730a9e30923eac2989f5771f0cab1662e186340b0d483222"
+      }
+    },
+    {
+      "owner": "C2005C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 54,
+      "observed_owner_pcs": 54,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C2005C.log",
+        "sha256": "63a7e0e6901467acf70a88a792cbfc816a2e4eec34e5194e8af5666c4a5fb0b9"
+      }
+    },
+    {
+      "owner": "C20100",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 53,
+      "observed_owner_pcs": 53,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C20100.log",
+        "sha256": "8835f389e10f5fd5832bcf2110633f74c1a20ab6e27815e9e3a0cd44290cf55c"
+      }
+    },
+    {
+      "owner": "C21060",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C21060.log",
+        "sha256": "c3565428a24474146c6e4f627f9cd2d790e9791e2c1395c6b9f9e5bf95a9fb63"
+      }
+    },
+    {
+      "owner": "C20C38",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C20C38.log",
+        "sha256": "a1037dd75883dc2ceeb8a4daa075e19f88633f53de05eb0fc96bf9d926392dde"
+      }
+    },
+    {
+      "owner": "C20C22",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 80,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C20C22.log",
+        "sha256": "554d22d8eeabfc946b62f10761702e6b5cd4c6f44faffff837420e22f2075233"
+      }
+    },
+    {
+      "owner": "C20A52",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 134,
+      "observed_owner_pcs": 134,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C20A52.log",
+        "sha256": "2a8fa665d08ed67e2014afe117d7c4c8ed7a1382ed9ff175b499594a503087fd"
+      }
+    },
+    {
+      "owner": "C20A40",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 131,
+      "observed_owner_pcs": 131,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C20A40.log",
+        "sha256": "a49ca2dbaafb05fc3378c9951ef06f6df24e76b12e061fcc25d218c5dd200005"
+      }
+    },
+    {
+      "owner": "C20002",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C20002.log",
+        "sha256": "e9f137520080fc035f1425bb502f5168a49c594545735e47742c5f67e6732a65"
+      }
+    },
+    {
+      "owner": "C2084A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 43,
+      "observed_owner_pcs": 43,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C2084A.log",
+        "sha256": "5707ace34c0825f30cf8a41cf8baa8dd78e6430847ef136349514ee7c0acf676"
+      }
+    },
+    {
+      "owner": "C2082A",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 52,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C2082A.log",
+        "sha256": "ec77654ce2568e75335c1021b47f347ae037d44d7b8cb56e3712e67be4c1ab14"
+      }
+    },
+    {
+      "owner": "C219AE",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C219AE.log",
+        "sha256": "1eb89ecb0e6bcaf3bbf3ad926b7fef4ab2416e6f66558b0a7a197820c0c55eec"
+      }
+    },
+    {
+      "owner": "C21C4C",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 23,
+      "observed_owner_pcs": 23,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C21C4C.log",
+        "sha256": "d9627c26ebf51f35bfc59e95b69038c9b661395ddba5b93993f07270a505df58"
+      }
+    },
+    {
+      "owner": "C21C2E",
+      "kind": "contract",
+      "completed_calls": 16384,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_contract_C21C2E.log",
+        "sha256": "722c524e69a9abdf7ee5c0becc101d579fc5ad6c8e8abc1543f6db6918cc6ead"
+      }
+    },
+    {
+      "owner": "C1FF0A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 16,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C1FF0A.log",
+        "sha256": "19a39b8bca338cb2b85b72af95a3be8a3d37747cf3a83e136b4d39800a44fe7f"
+      }
+    },
+    {
+      "owner": "C2005C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 54,
+      "observed_owner_pcs": 54,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C2005C.log",
+        "sha256": "9583e4a89c1ed850598ce1ed9ea1a2aefbb59824611d9d69a9f9216167e3903c"
+      }
+    },
+    {
+      "owner": "C20100",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 53,
+      "observed_owner_pcs": 53,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C20100.log",
+        "sha256": "cbb757a69c302e76cfda472ce26b2db2696f4d257e2ab2071298b1ebc0e369b5"
+      }
+    },
+    {
+      "owner": "C21060",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C21060.log",
+        "sha256": "de04cd24f381c83b612f475e3609222bae779ffa090e20c511edfbaea1c1b695"
+      }
+    },
+    {
+      "owner": "C20C38",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C20C38.log",
+        "sha256": "54883e4570877fb350b46fdd67d03fe58cb64def6242f5f80215a5dc13cbe5fe"
+      }
+    },
+    {
+      "owner": "C20C22",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 80,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C20C22.log",
+        "sha256": "314fe9a16b60a89d54d0e5d8a867a732329ae0416c7f6450a94e9b109bde2e00"
+      }
+    },
+    {
+      "owner": "C20A52",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 134,
+      "observed_owner_pcs": 134,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C20A52.log",
+        "sha256": "84a3fc687bd7be77daa6956db60cc204a4107a2f7ce5d8dc7831d24c0f6eb43e"
+      }
+    },
+    {
+      "owner": "C20A40",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 131,
+      "observed_owner_pcs": 131,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C20A40.log",
+        "sha256": "800f3b66098e39169ebba2ef31f2e63ddbec38135694dfc39b376e163f9ae096"
+      }
+    },
+    {
+      "owner": "C20002",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C20002.log",
+        "sha256": "35ae4cdfdbd1ed04de8c27b98dd215642655c3cb697febcb36d477d6b8d601a2"
+      }
+    },
+    {
+      "owner": "C2084A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 43,
+      "observed_owner_pcs": 43,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C2084A.log",
+        "sha256": "b1d08f08210dd615289eb5a43402865fab189935fbc0a6f2c454bb46710b2464"
+      }
+    },
+    {
+      "owner": "C2082A",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 52,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C2082A.log",
+        "sha256": "b0ca9b195d71c8f21d33cca3a3e231d4c526bb6406e587d8e140c99215c527a5"
+      }
+    },
+    {
+      "owner": "C219AE",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C219AE.log",
+        "sha256": "888211858f3cdbfd88b358530d3c3d90d44c10b41ba954bac4d6251b0dfb24f7"
+      }
+    },
+    {
+      "owner": "C21C4C",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 23,
+      "observed_owner_pcs": 23,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C21C4C.log",
+        "sha256": "9da2c3712ea658f14c1f685019c97cc82d8f7e2cac1598f5d8283a0fcb24b041"
+      }
+    },
+    {
+      "owner": "C21C2E",
+      "kind": "real",
+      "completed_calls": 16384,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_real_C21C2E.log",
+        "sha256": "5d47023a5a997adc04b85fde9a1699df358dd724200c36b85e2bb146f575c2c7"
+      }
+    }
+  ],
+  "controlled_union_pcs": 533,
+  "real_child_union_pcs": 533,
+  "actual_dispatch_completed_calls": 43008,
+  "dispatch_fixtures": [
+    {
+      "owner": "C1FF0A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 3,
+      "hardware_free": 1021,
+      "owner_pcs": 16,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C1FF0A_on.log",
+        "sha256": "a2794bca7a897630df6a3775a3a588121de423a17625938763f738df06bba933"
+      }
+    },
+    {
+      "owner": "C1FF0A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 3,
+      "hardware_free": 1021,
+      "owner_pcs": 16,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C1FF0A_shadow.log",
+        "sha256": "a2794bca7a897630df6a3775a3a588121de423a17625938763f738df06bba933"
+      }
+    },
+    {
+      "owner": "C1FF0A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 3,
+      "hardware_free": 1021,
+      "owner_pcs": 16,
+      "observed_owner_pcs": 16,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C1FF0A_sandbox.log",
+        "sha256": "a2794bca7a897630df6a3775a3a588121de423a17625938763f738df06bba933"
+      }
+    },
+    {
+      "owner": "C2005C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 54,
+      "observed_owner_pcs": 54,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2005C_on.log",
+        "sha256": "d7f8bf94a1487ed6dc01acc6998206a05ab2370e890f3cf4335f87019571a40b"
+      }
+    },
+    {
+      "owner": "C2005C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 54,
+      "observed_owner_pcs": 54,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2005C_shadow.log",
+        "sha256": "d7f8bf94a1487ed6dc01acc6998206a05ab2370e890f3cf4335f87019571a40b"
+      }
+    },
+    {
+      "owner": "C2005C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 54,
+      "observed_owner_pcs": 54,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2005C_sandbox.log",
+        "sha256": "d7f8bf94a1487ed6dc01acc6998206a05ab2370e890f3cf4335f87019571a40b"
+      }
+    },
+    {
+      "owner": "C20100",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 53,
+      "observed_owner_pcs": 53,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20100_on.log",
+        "sha256": "7b96245dcfc23df75bfae7a9ff0538164deb4be21072c834780f114dadd95e2d"
+      }
+    },
+    {
+      "owner": "C20100",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 53,
+      "observed_owner_pcs": 53,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20100_shadow.log",
+        "sha256": "7b96245dcfc23df75bfae7a9ff0538164deb4be21072c834780f114dadd95e2d"
+      }
+    },
+    {
+      "owner": "C20100",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 53,
+      "observed_owner_pcs": 53,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20100_sandbox.log",
+        "sha256": "7b96245dcfc23df75bfae7a9ff0538164deb4be21072c834780f114dadd95e2d"
+      }
+    },
+    {
+      "owner": "C21060",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21060_on.log",
+        "sha256": "d25b7a61e83495d692eeb4007acee7786a253cdaea107ee0dce5bdc0869d28f0"
+      }
+    },
+    {
+      "owner": "C21060",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21060_shadow.log",
+        "sha256": "d25b7a61e83495d692eeb4007acee7786a253cdaea107ee0dce5bdc0869d28f0"
+      }
+    },
+    {
+      "owner": "C21060",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 39,
+      "observed_owner_pcs": 39,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21060_sandbox.log",
+        "sha256": "d25b7a61e83495d692eeb4007acee7786a253cdaea107ee0dce5bdc0869d28f0"
+      }
+    },
+    {
+      "owner": "C20C38",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20C38_on.log",
+        "sha256": "c887ac3399ee351d1e556139f1905a074e1c9c70814f8d3de402f619de309a4e"
+      }
+    },
+    {
+      "owner": "C20C38",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20C38_shadow.log",
+        "sha256": "c887ac3399ee351d1e556139f1905a074e1c9c70814f8d3de402f619de309a4e"
+      }
+    },
+    {
+      "owner": "C20C38",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 83,
+      "observed_owner_pcs": 83,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20C38_sandbox.log",
+        "sha256": "c887ac3399ee351d1e556139f1905a074e1c9c70814f8d3de402f619de309a4e"
+      }
+    },
+    {
+      "owner": "C20C22",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 80,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20C22_on.log",
+        "sha256": "b7db83055248bbd55e3143cbf983b023f652aae0ca8230c0e7b8fe65cf04f458"
+      }
+    },
+    {
+      "owner": "C20C22",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 80,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20C22_shadow.log",
+        "sha256": "b7db83055248bbd55e3143cbf983b023f652aae0ca8230c0e7b8fe65cf04f458"
+      }
+    },
+    {
+      "owner": "C20C22",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 80,
+      "observed_owner_pcs": 80,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20C22_sandbox.log",
+        "sha256": "b7db83055248bbd55e3143cbf983b023f652aae0ca8230c0e7b8fe65cf04f458"
+      }
+    },
+    {
+      "owner": "C20A52",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 134,
+      "observed_owner_pcs": 134,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20A52_on.log",
+        "sha256": "2bc0821ef61661230a9b1d2a267f92a71697592eac0e83a85da46074e9776516"
+      }
+    },
+    {
+      "owner": "C20A52",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 134,
+      "observed_owner_pcs": 134,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20A52_shadow.log",
+        "sha256": "2bc0821ef61661230a9b1d2a267f92a71697592eac0e83a85da46074e9776516"
+      }
+    },
+    {
+      "owner": "C20A52",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 134,
+      "observed_owner_pcs": 134,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20A52_sandbox.log",
+        "sha256": "2bc0821ef61661230a9b1d2a267f92a71697592eac0e83a85da46074e9776516"
+      }
+    },
+    {
+      "owner": "C20A40",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 131,
+      "observed_owner_pcs": 131,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20A40_on.log",
+        "sha256": "0ec3fccdc0a739b02d08c25cf46a2831f564a9046d44436f086b41cb29916070"
+      }
+    },
+    {
+      "owner": "C20A40",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 131,
+      "observed_owner_pcs": 131,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20A40_shadow.log",
+        "sha256": "0ec3fccdc0a739b02d08c25cf46a2831f564a9046d44436f086b41cb29916070"
+      }
+    },
+    {
+      "owner": "C20A40",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 131,
+      "observed_owner_pcs": 131,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20A40_sandbox.log",
+        "sha256": "0ec3fccdc0a739b02d08c25cf46a2831f564a9046d44436f086b41cb29916070"
+      }
+    },
+    {
+      "owner": "C20002",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20002_on.log",
+        "sha256": "e58cfc7c6544d4a45aa3a70e2cfb7138eb92816ec2e2485c08ed98cd6ffee9dd"
+      }
+    },
+    {
+      "owner": "C20002",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20002_shadow.log",
+        "sha256": "e58cfc7c6544d4a45aa3a70e2cfb7138eb92816ec2e2485c08ed98cd6ffee9dd"
+      }
+    },
+    {
+      "owner": "C20002",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 1,
+      "hardware_free": 1023,
+      "owner_pcs": 51,
+      "observed_owner_pcs": 51,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C20002_sandbox.log",
+        "sha256": "e58cfc7c6544d4a45aa3a70e2cfb7138eb92816ec2e2485c08ed98cd6ffee9dd"
+      }
+    },
+    {
+      "owner": "C2084A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 43,
+      "observed_owner_pcs": 43,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2084A_on.log",
+        "sha256": "90879617bd0913b259a03e460d29df2f0b2b7b39e251396e8e401dcef6c1837a"
+      }
+    },
+    {
+      "owner": "C2084A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 43,
+      "observed_owner_pcs": 43,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2084A_shadow.log",
+        "sha256": "90879617bd0913b259a03e460d29df2f0b2b7b39e251396e8e401dcef6c1837a"
+      }
+    },
+    {
+      "owner": "C2084A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 43,
+      "observed_owner_pcs": 43,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2084A_sandbox.log",
+        "sha256": "90879617bd0913b259a03e460d29df2f0b2b7b39e251396e8e401dcef6c1837a"
+      }
+    },
+    {
+      "owner": "C2082A",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 52,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2082A_on.log",
+        "sha256": "210500085c630e772d1f36903aba9d064f659cb97c031ebbb786c8372c5b5bf1"
+      }
+    },
+    {
+      "owner": "C2082A",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 52,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2082A_shadow.log",
+        "sha256": "210500085c630e772d1f36903aba9d064f659cb97c031ebbb786c8372c5b5bf1"
+      }
+    },
+    {
+      "owner": "C2082A",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 52,
+      "observed_owner_pcs": 52,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C2082A_sandbox.log",
+        "sha256": "210500085c630e772d1f36903aba9d064f659cb97c031ebbb786c8372c5b5bf1"
+      }
+    },
+    {
+      "owner": "C219AE",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C219AE_on.log",
+        "sha256": "38882ce2d6bb4abc6cf8d1b456e66dd15f261fb95d9de47bcae0054964918b38"
+      }
+    },
+    {
+      "owner": "C219AE",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C219AE_shadow.log",
+        "sha256": "38882ce2d6bb4abc6cf8d1b456e66dd15f261fb95d9de47bcae0054964918b38"
+      }
+    },
+    {
+      "owner": "C219AE",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 38,
+      "observed_owner_pcs": 38,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C219AE_sandbox.log",
+        "sha256": "38882ce2d6bb4abc6cf8d1b456e66dd15f261fb95d9de47bcae0054964918b38"
+      }
+    },
+    {
+      "owner": "C21C4C",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 23,
+      "observed_owner_pcs": 23,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21C4C_on.log",
+        "sha256": "0059eaf5ef748af104e47fe3e9ec02650d80688a6647624c1da718deb1e375c4"
+      }
+    },
+    {
+      "owner": "C21C4C",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 23,
+      "observed_owner_pcs": 23,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21C4C_shadow.log",
+        "sha256": "0059eaf5ef748af104e47fe3e9ec02650d80688a6647624c1da718deb1e375c4"
+      }
+    },
+    {
+      "owner": "C21C4C",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 23,
+      "observed_owner_pcs": 23,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21C4C_sandbox.log",
+        "sha256": "0059eaf5ef748af104e47fe3e9ec02650d80688a6647624c1da718deb1e375c4"
+      }
+    },
+    {
+      "owner": "C21C2E",
+      "mode": "on",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21C2E_on.log",
+        "sha256": "3a583d3e4c7d86c5773c4694c0cf5a105eb13515664071ebab110d1e7495f4e0"
+      }
+    },
+    {
+      "owner": "C21C2E",
+      "mode": "shadow",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21C2E_shadow.log",
+        "sha256": "3a583d3e4c7d86c5773c4694c0cf5a105eb13515664071ebab110d1e7495f4e0"
+      }
+    },
+    {
+      "owner": "C21C2E",
+      "mode": "sandbox",
+      "completed_calls": 1024,
+      "hardware_bearing": 0,
+      "hardware_free": 1024,
+      "owner_pcs": 30,
+      "observed_owner_pcs": 30,
+      "unobserved_owner_pcs": [],
+      "ordered_custom_writes": 0,
+      "log": {
+        "path": "build/recomp/face_list_parents_dispatch_C21C2E_sandbox.log",
+        "sha256": "3a583d3e4c7d86c5773c4694c0cf5a105eb13515664071ebab110d1e7495f4e0"
+      }
+    }
+  ],
+  "hardware_proof": {
+    "ordered_packets_and_terminal_state_checked": true,
+    "ordered_custom_writes": 0,
+    "original_children_use_no_draw_bounds": true,
+    "active_drawing_is_not_claimed_by_frozen_clock_fixtures": true,
+    "active_drawing_recording_checks_independent": true,
+    "shared_machine_observer_unchanged": true
+  },
+  "normal_c_recordings": {
+    "totals": {
+      "shadow": {
+        "C1FF0A": {
+          "calls": 1003,
+          "compared": 997,
+          "matched": 997,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 6
+        },
+        "C2005C": {
+          "calls": 69463,
+          "compared": 65784,
+          "matched": 65784,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 3679
+        },
+        "C20100": {
+          "calls": 187,
+          "compared": 127,
+          "matched": 127,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 60
+        },
+        "C21060": {
+          "calls": 876,
+          "compared": 730,
+          "matched": 730,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 146
+        },
+        "C20C38": {
+          "calls": 174,
+          "compared": 114,
+          "matched": 114,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 60
+        },
+        "C20C22": {
+          "calls": 123,
+          "compared": 59,
+          "matched": 59,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 64
+        },
+        "C20A52": {
+          "calls": 187,
+          "compared": 54,
+          "matched": 54,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 133
+        },
+        "C20A40": {
+          "calls": 1107,
+          "compared": 793,
+          "matched": 793,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 314
+        },
+        "C20002": {
+          "calls": 1003,
+          "compared": 983,
+          "matched": 983,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 20
+        },
+        "C2084A": {
+          "calls": 69,
+          "compared": 67,
+          "matched": 67,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 2
+        },
+        "C2082A": {
+          "calls": 109,
+          "compared": 109,
+          "matched": 109,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C219AE": {
+          "calls": 187,
+          "compared": 187,
+          "matched": 187,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C21C4C": {
+          "calls": 166,
+          "compared": 165,
+          "matched": 165,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1
+        },
+        "C21C2E": {
+          "calls": 166,
+          "compared": 165,
+          "matched": 165,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1
+        }
+      },
+      "sandbox": {
+        "C1FF0A": {
+          "calls": 1671,
+          "compared": 1671,
+          "matched": 1671,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2005C": {
+          "calls": 85373,
+          "compared": 85373,
+          "matched": 85373,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20100": {
+          "calls": 187,
+          "compared": 187,
+          "matched": 187,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C21060": {
+          "calls": 877,
+          "compared": 877,
+          "matched": 877,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20C38": {
+          "calls": 174,
+          "compared": 174,
+          "matched": 174,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20C22": {
+          "calls": 123,
+          "compared": 123,
+          "matched": 123,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20A52": {
+          "calls": 187,
+          "compared": 187,
+          "matched": 187,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20A40": {
+          "calls": 1535,
+          "compared": 1535,
+          "matched": 1535,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C20002": {
+          "calls": 1671,
+          "compared": 1671,
+          "matched": 1671,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2084A": {
+          "calls": 69,
+          "compared": 69,
+          "matched": 69,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C2082A": {
+          "calls": 109,
+          "compared": 109,
+          "matched": 109,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C219AE": {
+          "calls": 187,
+          "compared": 187,
+          "matched": 187,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C21C4C": {
+          "calls": 166,
+          "compared": 166,
+          "matched": 166,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        },
+        "C21C2E": {
+          "calls": 166,
+          "compared": 166,
+          "matched": 166,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    "shadow_matches": 70334,
+    "sandbox_matches": 92495,
+    "reports": [
+      {
+        "recording": "demo01",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C219AE",
+            "name": "derive_edge_vertices",
+            "calls": 187,
+            "compared": 187,
+            "matched": 187,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 452,
+            "busy_input_calls": 187,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C2E",
+            "name": "split_record_and_stream_edges",
+            "calls": 166,
+            "compared": 165,
+            "matched": 165,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 520,
+            "busy_input_calls": 165,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2084A",
+            "name": "edge_alignment",
+            "calls": 69,
+            "compared": 67,
+            "matched": 67,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 3396,
+            "busy_input_calls": 67,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2082A",
+            "name": "edge_alignment_test",
+            "calls": 109,
+            "compared": 109,
+            "matched": 109,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3321,
+            "busy_input_calls": 109,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF0A",
+            "name": "test_stream_face",
+            "calls": 232,
+            "compared": 232,
+            "matched": 232,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1123,
+            "busy_input_calls": 232,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2005C",
+            "name": "draw_tested_face",
+            "calls": 39348,
+            "compared": 36854,
+            "matched": 36854,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2494,
+            "mean_cycles": 7576,
+            "busy_input_calls": 36854,
+            "busy_input_reads": 219155
+          },
+          {
+            "entry": "C20100",
+            "name": "draw_indexed_face_list",
+            "calls": 187,
+            "compared": 127,
+            "matched": 127,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 60,
+            "mean_cycles": 42646,
+            "busy_input_calls": 127,
+            "busy_input_reads": 2605
+          },
+          {
+            "entry": "C21060",
+            "name": "draw_quad_list",
+            "calls": 876,
+            "compared": 730,
+            "matched": 730,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 146,
+            "mean_cycles": 22701,
+            "busy_input_calls": 730,
+            "busy_input_reads": 24923
+          },
+          {
+            "entry": "C20C38",
+            "name": "draw_face_grid",
+            "calls": 174,
+            "compared": 114,
+            "matched": 114,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 60,
+            "mean_cycles": 39272,
+            "busy_input_calls": 114,
+            "busy_input_reads": 1150
+          },
+          {
+            "entry": "C20C22",
+            "name": "draw_face_grid_plain",
+            "calls": 123,
+            "compared": 59,
+            "matched": 59,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 64,
+            "mean_cycles": 46447,
+            "busy_input_calls": 59,
+            "busy_input_reads": 1031
+          },
+          {
+            "entry": "C20A52",
+            "name": "draw_face_lattice",
+            "calls": 187,
+            "compared": 54,
+            "matched": 54,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 133,
+            "mean_cycles": 50594,
+            "busy_input_calls": 54,
+            "busy_input_reads": 1629
+          },
+          {
+            "entry": "C20A40",
+            "name": "draw_face_lattice_plain",
+            "calls": 220,
+            "compared": 153,
+            "matched": 153,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 67,
+            "mean_cycles": 42927,
+            "busy_input_calls": 153,
+            "busy_input_reads": 1245
+          },
+          {
+            "entry": "C20002",
+            "name": "draw_tested_parallelogram",
+            "calls": 232,
+            "compared": 223,
+            "matched": 223,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 9,
+            "mean_cycles": 4186,
+            "busy_input_calls": 223,
+            "busy_input_reads": 250
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF0A_C2005C_C20100_C21060_C20C38_C20C22_C20A52_C20A40_C20002_C2084A_C2082A_C219AE_C21C4C_C21C2E_demo01_shadow.json",
+          "sha256": "bcc934200701e209186e3b46526cd3ad2311a9de1f1b0b7ed932c2ca09c771e4"
+        },
+        "isolated_rows": [
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 166,
+            "compared": 165,
+            "matched": 165,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 1,
+            "mean_cycles": 215,
+            "busy_input_calls": 165,
+            "busy_input_reads": 0
+          }
+        ],
+        "isolated_report": {
+          "path": "build/recomp/whole_call_C21C4C_demo01_shadow.json",
+          "sha256": "fc854ba2a5964d3b578e75c45997de66df1bb73fd5ec0ce83510380c77eb4c58"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C219AE",
+            "name": "derive_edge_vertices",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C2E",
+            "name": "split_record_and_stream_edges",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2084A",
+            "name": "edge_alignment",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2082A",
+            "name": "edge_alignment_test",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF0A",
+            "name": "test_stream_face",
+            "calls": 420,
+            "compared": 417,
+            "matched": 417,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 1121,
+            "busy_input_calls": 417,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2005C",
+            "name": "draw_tested_face",
+            "calls": 25080,
+            "compared": 24127,
+            "matched": 24127,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 953,
+            "mean_cycles": 4694,
+            "busy_input_calls": 24127,
+            "busy_input_reads": 40656
+          },
+          {
+            "entry": "C20100",
+            "name": "draw_indexed_face_list",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21060",
+            "name": "draw_quad_list",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C38",
+            "name": "draw_face_grid",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C22",
+            "name": "draw_face_grid_plain",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A52",
+            "name": "draw_face_lattice",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A40",
+            "name": "draw_face_lattice_plain",
+            "calls": 589,
+            "compared": 345,
+            "matched": 345,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 244,
+            "mean_cycles": 45456,
+            "busy_input_calls": 345,
+            "busy_input_reads": 1357
+          },
+          {
+            "entry": "C20002",
+            "name": "draw_tested_parallelogram",
+            "calls": 420,
+            "compared": 411,
+            "matched": 411,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 9,
+            "mean_cycles": 4628,
+            "busy_input_calls": 411,
+            "busy_input_reads": 515
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF0A_C2005C_C20100_C21060_C20C38_C20C22_C20A52_C20A40_C20002_C2084A_C2082A_C219AE_C21C4C_C21C2E_qual_carrier_success_shadow.json",
+          "sha256": "161cf5a1a71b70e27e5bdc2d89bdb32e75c0919e17489e603c74036c59b57c8a"
+        },
+        "isolated_rows": [
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "isolated_report": {
+          "path": "build/recomp/whole_call_C21C4C_qual_carrier_success_shadow.json",
+          "sha256": "3e6a425129f8389776fc225bd5b3e1baf4127432446b44d949a8c322f52cf430"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "shadow",
+        "rows": [
+          {
+            "entry": "C219AE",
+            "name": "derive_edge_vertices",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C2E",
+            "name": "split_record_and_stream_edges",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2084A",
+            "name": "edge_alignment",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2082A",
+            "name": "edge_alignment_test",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF0A",
+            "name": "test_stream_face",
+            "calls": 351,
+            "compared": 348,
+            "matched": 348,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 1109,
+            "busy_input_calls": 348,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2005C",
+            "name": "draw_tested_face",
+            "calls": 5035,
+            "compared": 4803,
+            "matched": 4803,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 232,
+            "mean_cycles": 1734,
+            "busy_input_calls": 4803,
+            "busy_input_reads": 9136
+          },
+          {
+            "entry": "C20100",
+            "name": "draw_indexed_face_list",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21060",
+            "name": "draw_quad_list",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C38",
+            "name": "draw_face_grid",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C22",
+            "name": "draw_face_grid_plain",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A52",
+            "name": "draw_face_lattice",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A40",
+            "name": "draw_face_lattice_plain",
+            "calls": 298,
+            "compared": 295,
+            "matched": 295,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 3,
+            "mean_cycles": 15684,
+            "busy_input_calls": 295,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20002",
+            "name": "draw_tested_parallelogram",
+            "calls": 351,
+            "compared": 349,
+            "matched": 349,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 2,
+            "mean_cycles": 357,
+            "busy_input_calls": 349,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF0A_C2005C_C20100_C21060_C20C38_C20C22_C20A52_C20A40_C20002_C2084A_C2082A_C219AE_C21C4C_C21C2E_qual_fail_crashes_shadow.json",
+          "sha256": "dcc15b6a0a1a42258917071c9301e600a5f913550f6834b3ea53cbab8bb20f4e"
+        },
+        "isolated_rows": [
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "isolated_report": {
+          "path": "build/recomp/whole_call_C21C4C_qual_fail_crashes_shadow.json",
+          "sha256": "3e6a425129f8389776fc225bd5b3e1baf4127432446b44d949a8c322f52cf430"
+        }
+      },
+      {
+        "recording": "demo01",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C219AE",
+            "name": "derive_edge_vertices",
+            "calls": 187,
+            "compared": 187,
+            "matched": 187,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 453,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C2E",
+            "name": "split_record_and_stream_edges",
+            "calls": 166,
+            "compared": 166,
+            "matched": 166,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 521,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2084A",
+            "name": "edge_alignment",
+            "calls": 69,
+            "compared": 69,
+            "matched": 69,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3808,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2082A",
+            "name": "edge_alignment_test",
+            "calls": 109,
+            "compared": 109,
+            "matched": 109,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 3263,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF0A",
+            "name": "test_stream_face",
+            "calls": 221,
+            "compared": 221,
+            "matched": 221,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1123,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2005C",
+            "name": "draw_tested_face",
+            "calls": 39227,
+            "compared": 39227,
+            "matched": 39227,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 6549,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20100",
+            "name": "draw_indexed_face_list",
+            "calls": 187,
+            "compared": 187,
+            "matched": 187,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 41832,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21060",
+            "name": "draw_quad_list",
+            "calls": 877,
+            "compared": 877,
+            "matched": 877,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 16140,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C38",
+            "name": "draw_face_grid",
+            "calls": 174,
+            "compared": 174,
+            "matched": 174,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 45260,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C22",
+            "name": "draw_face_grid_plain",
+            "calls": 123,
+            "compared": 123,
+            "matched": 123,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 67298,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A52",
+            "name": "draw_face_lattice",
+            "calls": 187,
+            "compared": 187,
+            "matched": 187,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 61591,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A40",
+            "name": "draw_face_lattice_plain",
+            "calls": 209,
+            "compared": 209,
+            "matched": 209,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 50168,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20002",
+            "name": "draw_tested_parallelogram",
+            "calls": 221,
+            "compared": 221,
+            "matched": 221,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 4440,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF0A_C2005C_C20100_C21060_C20C38_C20C22_C20A52_C20A40_C20002_C2084A_C2082A_C219AE_C21C4C_C21C2E_demo01_sandbox.json",
+          "sha256": "d47e1c6568db916ad883050efd84cce792515c9e8372c09241e057048211b57c"
+        },
+        "isolated_rows": [
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 166,
+            "compared": 166,
+            "matched": 166,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 215,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "isolated_report": {
+          "path": "build/recomp/whole_call_C21C4C_demo01_sandbox.json",
+          "sha256": "3d57c644e5fe73fa46bcd363d5b5f7b4fe78fc9d73984468b3ca34100daede59"
+        }
+      },
+      {
+        "recording": "qual_carrier_success",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C219AE",
+            "name": "derive_edge_vertices",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C2E",
+            "name": "split_record_and_stream_edges",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2084A",
+            "name": "edge_alignment",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2082A",
+            "name": "edge_alignment_test",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF0A",
+            "name": "test_stream_face",
+            "calls": 1099,
+            "compared": 1099,
+            "matched": 1099,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1113,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2005C",
+            "name": "draw_tested_face",
+            "calls": 41111,
+            "compared": 41111,
+            "matched": 41111,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1911,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20100",
+            "name": "draw_indexed_face_list",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21060",
+            "name": "draw_quad_list",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C38",
+            "name": "draw_face_grid",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C22",
+            "name": "draw_face_grid_plain",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A52",
+            "name": "draw_face_lattice",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A40",
+            "name": "draw_face_lattice_plain",
+            "calls": 1028,
+            "compared": 1028,
+            "matched": 1028,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 15790,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20002",
+            "name": "draw_tested_parallelogram",
+            "calls": 1099,
+            "compared": 1099,
+            "matched": 1099,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 360,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF0A_C2005C_C20100_C21060_C20C38_C20C22_C20A52_C20A40_C20002_C2084A_C2082A_C219AE_C21C4C_C21C2E_qual_carrier_success_sandbox.json",
+          "sha256": "bc46b3c4343b245df0deb2333b02c86954ebeab53fb96916ffb8f0b0f171a074"
+        },
+        "isolated_rows": [
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "isolated_report": {
+          "path": "build/recomp/whole_call_C21C4C_qual_carrier_success_sandbox.json",
+          "sha256": "3e6a425129f8389776fc225bd5b3e1baf4127432446b44d949a8c322f52cf430"
+        }
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "mode": "sandbox",
+        "rows": [
+          {
+            "entry": "C219AE",
+            "name": "derive_edge_vertices",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21C2E",
+            "name": "split_record_and_stream_edges",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2084A",
+            "name": "edge_alignment",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2082A",
+            "name": "edge_alignment_test",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C1FF0A",
+            "name": "test_stream_face",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 1131,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C2005C",
+            "name": "draw_tested_face",
+            "calls": 5035,
+            "compared": 5035,
+            "matched": 5035,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 2189,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20100",
+            "name": "draw_indexed_face_list",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C21060",
+            "name": "draw_quad_list",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C38",
+            "name": "draw_face_grid",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20C22",
+            "name": "draw_face_grid_plain",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A52",
+            "name": "draw_face_lattice",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20A40",
+            "name": "draw_face_lattice_plain",
+            "calls": 298,
+            "compared": 298,
+            "matched": 298,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 15966,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C20002",
+            "name": "draw_tested_parallelogram",
+            "calls": 351,
+            "compared": 351,
+            "matched": 351,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 371,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "report": {
+          "path": "build/recomp/whole_call_C1FF0A_C2005C_C20100_C21060_C20C38_C20C22_C20A52_C20A40_C20002_C2084A_C2082A_C219AE_C21C4C_C21C2E_qual_fail_crashes_sandbox.json",
+          "sha256": "926830f75145ad861f3c439bc894edef1ebd6a00212103662f4bd71ca3a1b7c7"
+        },
+        "isolated_rows": [
+          {
+            "entry": "C21C4C",
+            "name": "split_edge",
+            "calls": 0,
+            "compared": 0,
+            "matched": 0,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 0,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "isolated_report": {
+          "path": "build/recomp/whole_call_C21C4C_qual_fail_crashes_sandbox.json",
+          "sha256": "3e6a425129f8389776fc225bd5b3e1baf4127432446b44d949a8c322f52cf430"
+        }
+      }
+    ],
+    "each_owner_has_completed_comparisons": true
+  },
+  "instruction_dma": {
+    "local_instructions": 533,
+    "local_cases": 17056,
+    "previous_unique_instructions": 27064,
+    "overlap_instructions": 54,
+    "combined_unique_instructions": 27543,
+    "combined_cases": 881376,
+    "fresh_combined_run": true,
+    "independent_union_verified": true
+  },
+  "older_generator_outputs_unchanged": 33,
+  "shared_files_unchanged": [
+    {
+      "path": "port/recomp/recomp_ports.c",
+      "sha256": "e76df70a2a502cddac7a2a72a86da9ce0016244a15667fcde0c2700ada30afdb"
+    },
+    {
+      "path": "port/recomp/recomp_runtime.c",
+      "sha256": "43211e84bb4b2a28e2c25887602cc4d5d907fc6c9eed7a09fc94fb304622c0c7"
+    },
+    {
+      "path": "port/machine/machine.c",
+      "sha256": "362fe76d09e2c274cc7d228a8d8feb7614289589ca89a81f55018570a077562b"
+    },
+    {
+      "path": "port/machine/bus.c",
+      "sha256": "e2a55e2c2b8df0240fd8fc98770affb99581e3597aeec92720d6d000abfb3f96"
+    },
+    {
+      "path": "port/machine/blitter.c",
+      "sha256": "ae0a586e2bf1fb3756c5a6bc70d68adb508041d6d89d54f46b4871c0c0fbf8f9"
+    },
+    {
+      "path": "port/game/memory.h",
+      "sha256": "141a28d0592489fde925cc53e5ee7bc8e7429c36b110626e17c811c00b71c6f8"
+    },
+    {
+      "path": "port/game/glue/glue.h",
+      "sha256": "134b1c98dde3693d937f97a1ae20157f3607ae4d86a455b07c729948f2b54138"
+    },
+    {
+      "path": "port/game/glue/glue_step.h",
+      "sha256": "44ad8c78429d302cdf7dc3ee948d7a3bb56be51024dec6b7aa2b4573ef7b9550"
+    },
+    {
+      "path": "port/game/glue/glue_renderer_step_math.h",
+      "sha256": "4ea71418466e98119437ec0ab77e4bd04e8df7db9799a9e44a13d5022d53d8ab"
+    },
+    {
+      "path": "port/game/glue/glue_menu_context_math.h",
+      "sha256": "1bbc8394e94f2eaa3a8678bb56381bf3b143af05c9a84283ba034188a7978b4e"
+    },
+    {
+      "path": "port/game/glue/glue_child_call.c",
+      "sha256": "86f54f645b4eea5486a5929c17de12d2f186ad829f001bcc3795086f3cd04aea"
+    },
+    {
+      "path": "tools/recomp/active_planes_step_oracle.c",
+      "sha256": "5e8da7dab940c888e588b2bc31ad4e1723c415dddd323617580136362c8d73e6"
+    },
+    {
+      "path": "tools/recomp/structural_write_log.c",
+      "sha256": "8a09dcc62ddf743b5ddd8c6434fe9f55b780f7e790daec37534be562bde787be"
+    },
+    {
+      "path": "tools/recomp/hud_stream_hardware_log.c",
+      "sha256": "0087e35de2642ac60f20671f98b421ece2ff0107d03a5cb13b6638e822340c0b"
+    },
+    {
+      "path": "tools/recomp/hud_stream_machine_variant.py",
+      "sha256": "5563109f81d3fae45a347290b92b8955a7d506bb0fe4c285231e90bd2f652331"
+    },
+    {
+      "path": "tools/recomp/hud_stream_blitter_state.c",
+      "sha256": "fed0d2efad5c189d5c19f84c9fbc3f8fd4ec9fbc036d9104058175c5305febc2"
+    },
+    {
+      "path": "tools/recomp/check_whole_call_glue.py",
+      "sha256": "529cd533902b363b5e96e4e50184544c522a89b36dd1cfc670b39ada2f5ebce5"
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd"
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c"
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e"
+    },
+    {
+      "path": "port/game/face_stream_parents.c",
+      "sha256": "915aea7c0c184578a562b33e1a0bb186cdcf452299ce9fe8047db8a1f935ad77"
+    },
+    {
+      "path": "port/game/face_stream_parents.h",
+      "sha256": "6a8dce7e88d38f307a3e663d9ac793afe6d03554aa54475c15bd64b908bd34a6"
+    },
+    {
+      "path": "port/game/glue/glue_face_stream_parents.c",
+      "sha256": "f88361881c4aee493435d349bbaafcdf533f8b386158b09d8dc790a6c134aefc"
+    },
+    {
+      "path": "port/game/glue/glue_face_stream_parents_math.h",
+      "sha256": "f7d7fcb2c3cef09614f0ea89464a9b59524e2f46f631d531df2dcbad21d5a21c"
+    },
+    {
+      "path": "port/game/render_parents.c",
+      "sha256": "6e0cfacf58d8dd2a2cb2464e9b939aa9ae3ee85e70c3dec1c2831194a0338857"
+    },
+    {
+      "path": "port/game/render_parents.h",
+      "sha256": "ebda35faa6d5411682fa4feb0efda618130ce11966c12aebf898293200744cc7"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents.c",
+      "sha256": "60dbc5d45f603b4953ab2975f18d69f4e82a7a7d8fdefd7b67eaf51d1115aa88"
+    },
+    {
+      "path": "port/game/glue/glue_render_parents_math.h",
+      "sha256": "a56b8367cd08440e2579d280c77499794c475cf14370a2a5a904f60bc38ac151"
+    },
+    {
+      "path": "port/game/hud_history_stream.c",
+      "sha256": "0ed4005248c2505986f6414140b17f986007bee2c24f79739fa4358bf2c39146"
+    },
+    {
+      "path": "port/game/hud_history_stream.h",
+      "sha256": "d24936b40e4db6404ce6c1d0565180d737bbae0eddc2da7395420a164a9c0211"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream.c",
+      "sha256": "a8547b097febb8baf72c0883bff9d876cd67569c1dfd05c89e57d1574dff3a35"
+    },
+    {
+      "path": "port/game/glue/glue_hud_history_stream_math.h",
+      "sha256": "5b13917cc0efd7913dc9d540544e80791269412bac89bcc9db293ea1c07a3f1e"
+    },
+    {
+      "path": "port/game/hud_projection_parents.c",
+      "sha256": "39d02a229e36d0bc370f6597542aa0f6e3e356d8590696431242f0dd519ee6e9"
+    },
+    {
+      "path": "port/game/hud_projection_parents.h",
+      "sha256": "4da55f5eeece8103522f7e93fda78d2b0ba435a88c7d71911f42e907a444293b"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents.c",
+      "sha256": "3e49372a466d37b5af7431b104ee3d9a3632bd2dc61ca9d8e9e7bd07f6f76456"
+    },
+    {
+      "path": "port/game/glue/glue_hud_projection_parents_math.h",
+      "sha256": "2ce71c38f5760e27a112dd6bcf81564b845a9cbce3e0036b0fea5992448c4113"
+    },
+    {
+      "path": "port/game/hud_text_helpers.c",
+      "sha256": "f26adc5ba6cfa96edcdef2fcc48447c4ab9c79cbaaf7b982ebd985a9b61c8f68"
+    },
+    {
+      "path": "port/game/hud_text_helpers.h",
+      "sha256": "11c1b8f11d0dd0bc96360261bc192d73f921f22fc6f32a4f8d580604b8938493"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers.c",
+      "sha256": "6d82850c0d2ba62da9ac036b13d11cec3224c8b340d74a063af80b3e04e63290"
+    },
+    {
+      "path": "port/game/glue/glue_hud_text_helpers_math.h",
+      "sha256": "6c5c6028b6934c94c0a01bf4ac201ab634575be14ba0e1b113f3147744463bac"
+    }
+  ],
+  "full_gate": {
+    "rows": 592,
+    "recordings": 3,
+    "shadow_matches": 568446,
+    "sandbox_matches": 443868,
+    "mismatches": 0,
+    "seals_exact": true,
+    "poison_frames_identical": true,
+    "reports": [
+      {
+        "mode": "shadow",
+        "recording": "demo01",
+        "matched": 308147,
+        "report": {
+          "path": "build/recomp/ports_report_demo01.json",
+          "sha256": "8b12cbfdf8eafdd74f8d024962cdad8f34ae041066c22f937d2953f111ccb069"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_carrier_success",
+        "matched": 207396,
+        "report": {
+          "path": "build/recomp/ports_report_qual_carrier_success.json",
+          "sha256": "9f46abb652e93d894e9b8e9fec102e6e8900437f52b38e827144359d55c4d0f5"
+        }
+      },
+      {
+        "mode": "shadow",
+        "recording": "qual_fail_crashes",
+        "matched": 52903,
+        "report": {
+          "path": "build/recomp/ports_report_qual_fail_crashes.json",
+          "sha256": "5c745fc0c9ff630746949929a49070721f9b1e7aa59d3441621bb8c78989d968"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "demo01",
+        "matched": 150619,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_demo01.json",
+          "sha256": "0f4be8c54a8fd5560286618be8c24a5dbdd3eb399716260ca3c286cfc822c718"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_carrier_success",
+        "matched": 248003,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_carrier_success.json",
+          "sha256": "d756b9d1bd609e66ca706549b3c9ce2cddc84b87067fec57312d450a80177603"
+        }
+      },
+      {
+        "mode": "sandbox",
+        "recording": "qual_fail_crashes",
+        "matched": 45246,
+        "report": {
+          "path": "build/recomp/ports_report_sandbox_qual_fail_crashes.json",
+          "sha256": "1c75e4173cf982a027645382a5acead9c26ecffb2d29d3ce5693463e04a8d7b6"
+        }
+      }
+    ]
+  },
+  "isolated_live": {
+    "frames": 36236,
+    "recordings": 3,
+    "rgb444_exact": true,
+    "final_ram_seals_exact": true
+  },
+  "timing_probe": {
+    "frames": 600,
+    "family_exact": true,
+    "all_first_difference_frame": 416,
+    "all_different_pixels": 361
+  },
+  "builds": {
+    "gnu_headless": "pass",
+    "msvc_release": "pass",
+    "build_bytes": 1799659926,
+    "build_gib": 1.676
+  },
+  "removed_old_glue": [
+    "port/game/glue/glue_batch57.c",
+    "port/game/glue/glue_batch58.c",
+    "port/game/glue/glue_batch66.c"
+  ],
+  "remaining_export_bodies_unchanged": {
+    "port/game/glue/glue_batch25.c:int glue_C17C62(void)": "4b8d00098053e7aa765475b23cf3143403b6bce6863c9d7c80dd44d25241a2e8",
+    "port/game/glue/glue_batch25.c:int glue_C17D6E(void)": "79d5d7885d5d293d71bf92913707b4affe2dcfddf5d3b539caf8ca927f3cc5d9",
+    "port/game/glue/glue_batch25.c:int glue_C3316A(void)": "6039f89c3855edb8da6d78e0ffa468976b35d6f4b64fe1c261ab2325c6d2aecd",
+    "port/game/glue/glue_batch25.c:int glue_C33180(void)": "0965e4ab226482c4e311dbd13c8a66bb8e04d8da76af31c3e2435b9290acbe57",
+    "port/game/glue/glue_batch25.c:int glue_C3318E(void)": "481f7bcdaf24737e146ba551a6c6c7d1af9c38becbd4e25f67ef621f5ff6a2bc",
+    "port/game/glue/glue_batch25.c:int glue_C33186(void)": "6116946a1b6591a29ec5825d22f39e67a45759e25b24fe068a5127fb5d7f70c8",
+    "port/game/glue/glue_batch25.c:void clear_render_buffers_registers(void)": "865f8c5f0f6f50ac0d9a202a3537af437cab9df1704c610d863130849860c540",
+    "port/game/glue/glue_batch25.c:int glue_C2FD22(void)": "bb234a9af73d397d48bbf8a6fe3c3aea1667323590d26e65a1e5eac8cb55ed18",
+    "port/game/glue/glue_batch25.c:void mask_between_registers(void)": "6f185c7cb6c9ce6e3a8bd55def3850778412a348cdea4e59a5acf7207d4446d0",
+    "port/game/glue/glue_batch25.c:int glue_C3040C(void)": "08b3815e2082d9394e09440c5680cc6fb95fc79c7d89e468300e18cde76cdcbe",
+    "port/game/glue/glue_batch25.c:int glue_C1EBE0(void)": "a6aef9c3eb4d290c2c67250469670240c669cfb8f0256a9c11e69be436430703",
+    "port/game/glue/glue_batch25.c:void append_list_point_registers(int apply)": "feb478fc2ea181f47fd27251696b2a5ec1fa54976705bcf46241a9dc135e0bbc",
+    "port/game/glue/glue_batch25.c:int glue_C25876(void)": "759d47ab094a027bc5b405161c94831b5afa713bd5c9a78c8f027c14dc15f467",
+    "port/game/glue/glue_batch25.c:int glue_C2F582(void)": "bf1b21bfc3f848db7cc2f366ea4d67dcdb3ff18e5f6d0b214627a496f8d32ba6",
+    "port/game/glue/glue_batch47.c:int glue_C1B4D0(void)": "d06c6ac668e307445881ba820fbb201962e9b40d634eb0ee0fe7bb479db9464d",
+    "port/game/glue/glue_batch47.c:int glue_C1B4D4(void)": "0428b5ca0ed57d7152c72165d1c6364abb9934d5299c084b8bc6a1ba8748ca2a",
+    "port/game/glue/glue_batch47.c:int glue_C1B4D8(void)": "adfb4590f0ea4790b1d222295b84576a8e4ca7ffcc7a69aabf0a260c50002d29",
+    "port/game/glue/glue_batch47.c:int glue_C1B4DE(void)": "f139b87f87cdc637e546d03f90f98b4bae003eafc44d0fb73fc01a552c8da0e2",
+    "port/game/glue/glue_batch47.c:int glue_C1B50C(void)": "dc662f93b4fcade0441786a73bdfd24ff676563266503b031740622fa96a4885",
+    "port/game/glue/glue_batch47.c:int glue_C1B510(void)": "d507a9c12d27b15ba4aa82f2b4c6a56faaacf88298384c18f5458887a58b63d3",
+    "port/game/glue/glue_batch47.c:int glue_C1B514(void)": "486ef2f6eb76c868bb8fbc0ba6923334862d626d87e85e447312518a670ced9f",
+    "port/game/glue/glue_batch47.c:int glue_C1B558(void)": "acd0b3ab773fce5bf539ebe96b08651333d5a5f226e16e0bbee384ee3343e4cc",
+    "port/game/glue/glue_batch47.c:int glue_C1B55C(void)": "aa667f02d20cde4e189d53f96a9dfa5736b1999c9ec9fcc4ba49fa76316954b5",
+    "port/game/glue/glue_batch47.c:int glue_C1B560(void)": "cad03fb5249214b24ac6abf2d043d3eff269be2c622ccbce02c9c4328163f209",
+    "port/game/glue/glue_batch47.c:int glue_C25A6A(void)": "d53ae5ec01df4fd6dbc64f573ff834c66f6778097a1bc95da11d0a11d1648157",
+    "port/game/glue/glue_batch47.c:int glue_C33DA4(void)": "348ba9b206439bcf908260483e87acd19311049a5592c4b9ecbbdb5ef1fc53ff",
+    "port/game/glue/glue_batch47.c:int glue_C13C0A(void)": "804b89835272ca70aeb54ffa9ddd2ce8b0fad6e8774f6a8ded6535bd9a678159",
+    "port/game/glue/glue_batch47.c:int glue_C1FED4(void)": "f1e632ac1ffab7bb5fb844630ab7feb4bb23037357cf2c71b9971e2965fa0e34",
+    "port/game/glue/glue_batch48.c:int glue_C099AA(void)": "ad828293d0c9e3bb36ab236eba2bdf23fe3b2ac80a9ea1eaeaadc5b7dc1f68c3",
+    "port/game/glue/glue_batch48.c:int glue_C1FB9C(void)": "4797b32b0e70b9a5195f1d201f0fb0e0e65c9c2e5e571e840dec8324bd75a8ba",
+    "port/game/glue/glue_batch48.c:int glue_C2CAA0(void)": "7374717f4088a562a4253dd0a3bac9527d65a3ea6a3161839a0785add8b0e45b",
+    "port/game/glue/glue_batch48.c:int glue_C2CA92(void)": "2231a3edb9576817d2ad10c7daa5c830f1c6c4d7fb6ea9340f3e2014ced65d14",
+    "port/game/glue/glue_batch48.c:int glue_C2CA26(void)": "f68dca28f21be9408a90afc681e3c07ead95a7c29f7dcc191ff9cd2cf3d0cfe0",
+    "port/game/glue/glue_batch48.c:int glue_C2CB86(void)": "f95af6379a0e8c01f173f24ec6dedd3b9b5cbe844c2ccbd53e1e74124d7567f7",
+    "port/game/glue/glue_batch48.c:int glue_C2CE82(void)": "214cd3824fb013d6d37bfc2e2e741bb1ea36dc2a986549066766eca5da84ee56",
+    "port/game/glue/glue_batch49.c:void projected_segment_registers(void)": "313f6c48e1d9f26a9fa26b6a24b17d25e78ce5b0d6316e1cfcb4c3f7676a0646",
+    "port/game/glue/glue_batch49.c:int glue_C2ED70(void)": "199bf56bdfa7b97985c6467ea49670eae4286e15a0d254040045d08059cd8268",
+    "port/game/glue/glue_batch49.c:void symbol_registers(void)": "f8646e75c0bc663b48653a2b95fe8a2ec7af051273e72c2e32e43535d280c73d",
+    "port/game/glue/glue_batch49.c:int glue_C348B2(void)": "680abfcf2691426fc35fd25f2921314446525f991a0a7b5cda3f2a9ff036681c"
+  },
+  "limits": [
+    "Controlled and original-child calls cover every owned boundary and compare full CPU/PC/SR/all RAM. Controlled children compare complete entry CPU/SR/RAM and change all returned registers except source-owned frame/stack.",
+    "Original children receive degenerate geometry or source behind-view rejection. Frozen-clock fixtures make no active fill/outline/DMA claim; independently sealed recordings exercise actual drawing.",
+    "Original table slots/caller bytes are sealed without asserting the whole selector domain or inventing a guard.",
+    "Fifteen ground/HUD mark/panel/blit parents, selected-segment indirect calls, older adapters and the complete original cold/indirect/callback graph remain game-function work.",
+    "C2C392 computed transfer and C1612C graphics-wait integration remain unresolved. ALL416/361, Copper fade and Kickstart services are deferred."
+  ],
+  "next": {
+    "entries": [
+      "C098C6",
+      "C09952",
+      "C099F6",
+      "C099AA",
+      "C332FE",
+      "C34146",
+      "C34066",
+      "C342D0",
+      "C347F2",
+      "C33DC8",
+      "C322EE",
+      "C3003A",
+      "C304FA",
+      "C345A0",
+      "C348B2"
+    ],
+    "unique_instructions": 1352,
+    "shared_instructions": 0,
+    "manifest": {
+      "path": "analysis/data/hud_render_parents_scope_inventory.json",
+      "sha256": "6eff295f0a149619406a2f4c0675f7c7dfaaa83102a4b0c4a22e7d0055f6efd7"
+    }
+  },
+  "implementation_files": [
+    {
+      "path": "port/game/face_list_parents.c",
+      "sha256": "bb1315ef387286dda4d3cfd1bb730571d1392ad18de21fa4538b64d3ee36270d"
+    },
+    {
+      "path": "port/game/face_list_parents.h",
+      "sha256": "781984b033b6b8ca686a0cd5459e17eb2ebfef6111ddf9d9554241b7c5d1e324"
+    },
+    {
+      "path": "port/game/glue/ports.c",
+      "sha256": "35e4ce121e7f59f12f410a4e42e333ee1e7272021ade76e21c027928671b8a9d"
+    },
+    {
+      "path": "port/game/glue/ports_glue.h",
+      "sha256": "cc6d9c03b140b17a6567706eb77a6fe3ca540fa35a881a87aaf3c79bf6fdc90a"
+    },
+    {
+      "path": "tools/recomp/make_command_dispatch_step.py",
+      "sha256": "f0ff5e948d96097d8a54d06eafd0096049d7dd8072ff68e8d52dfe068f0ce81f"
+    },
+    {
+      "path": "tools/recomp/check_active_planes_step.py",
+      "sha256": "b1fe90f9f0fd053e200ff54cacc507503d045399cf33399c103459302661fd73"
+    },
+    {
+      "path": "port/game/glue/glue_face_list_parents.c",
+      "sha256": "79c930c281db724b7f3836d87b838af9632e3f4103de4e13ef4becd7516724e2"
+    },
+    {
+      "path": "port/game/glue/glue_face_list_parents.h",
+      "sha256": "07ebb8fdc0800c8fa1ec1161bad034c23740e06df245e2d7ee7877b448ade91d"
+    },
+    {
+      "path": "port/game/glue/glue_face_list_parents_math.h",
+      "sha256": "ef1e9b2106e05343a50f77940125934b5b23b0c66fe8d6c828da8379b92700a5"
+    },
+    {
+      "path": "port/game/glue/glue_face_list_parents_step.c",
+      "sha256": "c3113cfc7a8d71cc81b62a982c8d81ef08265fb865da4220cf1951c83f3ec01c"
+    },
+    {
+      "path": "port/game/glue/glue_batch25.c",
+      "sha256": "379ce16feef432a18df4f1e23c3fa97cc4c56cc4e53ce8f5c4196782b813c4f0"
+    },
+    {
+      "path": "port/game/glue/glue_batch47.c",
+      "sha256": "4fc55be4d84d0c7b2dac443708d29ea023ef503b1a4b221ae7856e53370a6418"
+    },
+    {
+      "path": "port/game/glue/glue_batch48.c",
+      "sha256": "89eefcd48f9cf2e2253e36f24b1c75ce6e67dfc9ab4e9e920920ee93b54156a7"
+    },
+    {
+      "path": "port/game/glue/glue_batch49.c",
+      "sha256": "fb3b73120c2130693c80fed97b607f70d93d471609e2ab159562c1290aba68fd"
+    }
+  ],
+  "proof_files": [
+    {
+      "path": "tools/recomp/audit_face_list_parents_scope.py",
+      "sha256": "c03117a0b5d76d09e6c5bb1067fc85bdb6dd080a4af8269c587ecf619a4dea63"
+    },
+    {
+      "path": "tools/recomp/audit_face_list_parents_source.py",
+      "sha256": "77c0d3c599b255f46bbb6941fea2bfeab67154b34e7232152e9cc626a43cefa2"
+    },
+    {
+      "path": "tools/recomp/check_face_list_parents.py",
+      "sha256": "344292d10f54c016f01ace418cde9c6ef307afd59a20e22469396bd1946270ab"
+    },
+    {
+      "path": "tools/recomp/check_face_list_parents_dispatch.py",
+      "sha256": "54353f6fb72ffa6901620030b212148b4df452718aa6f757e221aca3e9745967"
+    },
+    {
+      "path": "tools/recomp/face_list_parents_bus_budget.c",
+      "sha256": "c7b137fccf2161bdaddd81c45e708f7d7897e9cb28c7edd198a8e0489c281ba7"
+    },
+    {
+      "path": "tools/recomp/face_list_parents_contract_children.c",
+      "sha256": "de3bc9308179b49189c4d4a52f2f90c20700b4dff3c30a2166186317a45bebc9"
+    },
+    {
+      "path": "tools/recomp/face_list_parents_contract_oracle.c",
+      "sha256": "ceb04197ca0f4cf0712f8da0abacaddddc56ad0d3b9a526cb0ac703db7607d32"
+    },
+    {
+      "path": "tools/recomp/face_list_parents_dispatch_oracle.c",
+      "sha256": "5137c139bbe7edd322ec8304698e28918b30e8361e2a2c8e60213c905ac3f031"
+    },
+    {
+      "path": "tools/recomp/face_list_parents_fixture.h",
+      "sha256": "9a274a41f1143443922364ca8efd4fb089e6c0926deafb27d0a104f1aab67db2"
+    },
+    {
+      "path": "tools/recomp/face_list_parents_oracle.c",
+      "sha256": "c50ae782292e4b0eb90bdd6fcacd4f87d99987eda072265278b498d68aa21803"
+    },
+    {
+      "path": "tools/recomp/verify_face_list_parents_recordings.py",
+      "sha256": "91f962aab17ca0f3effc6127b9751ad3cfde533bf222688712226557c0fa9835"
+    },
+    {
+      "path": "tools/recomp/audit_hud_render_parents_scope.py",
+      "sha256": "f8455e3db06c5fb7d106e52e6bb7ee5beb8b012a316cb67908c7432117cd82df"
+    }
+  ],
+  "raw_logs": [
+    {
+      "path": "build/recomp/face_list_parents_build_probe.log",
+      "sha256": "2d94e33eecbb6453049f0eac85d802ca7dbd775a4896821c4d1b264a89aa2fa8"
+    },
+    {
+      "path": "build/recomp/face_list_parents_contract_probe.log",
+      "sha256": "b5d6ebd70c10892353a45d9019b045c2546d9cbab2b77765d62e30ecf7540973"
+    },
+    {
+      "path": "build/recomp/face_list_parents_contract_full.log",
+      "sha256": "94adf8db241206b16874163d519627c0ba3ea6876e3aaffbaab5bc2b2c10222b"
+    },
+    {
+      "path": "build/recomp/face_list_parents_real_probe.log",
+      "sha256": "15b567eb4c486a2a1870028f8793ec14858dfba96fe25ca0ca5c265b1e46404e"
+    },
+    {
+      "path": "build/recomp/face_list_parents_real_full.log",
+      "sha256": "fe7d1048d5aac59787c711d7dbcfa5893e853952d83ec7d38d6e866a1546f055"
+    },
+    {
+      "path": "build/recomp/face_list_parents_dispatch_full.log",
+      "sha256": "d5e88fb85da205832d7c701e679b6d1a816774ff1bad79a11be4c09aab7b1f32"
+    },
+    {
+      "path": "build/recomp/face_list_parents_dma_local.log",
+      "sha256": "f8eb1ef2678b9e6b9a939172f7ab159b6d30a3d10d7f5ef2fadcc1496ed71bb0"
+    },
+    {
+      "path": "build/recomp/face_list_parents_dma_union.log",
+      "sha256": "92ac0dac18f9ad7f849689af34c60adae3cee77c88fa2bf8bd5cede557bf7e3a"
+    },
+    {
+      "path": "build/recomp/face_list_parents_compatibility.log",
+      "sha256": "a584e9f0369ee52c88e71d5493c225068ce23a09e23ba8df38cba3472a031158"
+    },
+    {
+      "path": "build/recomp/face_list_parents_normal_build.log",
+      "sha256": "b3f49b9ed7edf62dfac6c1fa3378267842a280a4ead4e78ca2306720d40a33bd"
+    },
+    {
+      "path": "build/recomp/face_list_parents_msvc.log",
+      "sha256": "0c687c0973c73505b50cc199b160bf28d0d12d1c28e8ff475a85e26a3d27081e"
+    },
+    {
+      "path": "build/recomp/face_list_parents_msvc_configure.log",
+      "sha256": "b1230b53b1ac2e7c2d8f2a4e8a96a1fa196d8c1eb352423aedfdc722fd76bf6a"
+    },
+    {
+      "path": "build/recomp/face_list_parents_ports_gate.log",
+      "sha256": "0c86fee4dd3b165442252d3116353e6d28eab02356ea9f83c1db760668e8a370"
+    },
+    {
+      "path": "build/recomp/face_list_parents_live_gate.log",
+      "sha256": "9c02db1dcff545d318043ceed16f197aaa382dfa8e8a58786282d66dd4ba0384"
+    },
+    {
+      "path": "build/recomp/face_list_parents_timing.log",
+      "sha256": "d24158afda94a918d9b26aa2034d9456fa427a2bfa10e9028b77ec231accacdf"
+    },
+    {
+      "path": "build/recomp/face_list_parents_whole_call.log",
+      "sha256": "01aa43923bc52d5a47f064fe1c465f1a5e402f7cccb26a14160b15010c377e16"
+    },
+    {
+      "path": "build/recomp/face_list_parents_split_isolated.log",
+      "sha256": "08e559e8ed3b35a28759ce5a9afa2fc554caf14e949587fd86443cddb2d719a3"
+    },
+    {
+      "path": "build/recomp/face_list_parents_recordings_verified.log",
+      "sha256": "24dc20689cbc61b0a0f0dbe346c8649ef7905fedab80d7a5e14a68b26a7d4973"
+    }
+  ],
+  "retained_failed_proofs": [
+    {
+      "path": "build/recomp/face_list_parents_whole_call.log",
+      "sha256": "01aa43923bc52d5a47f064fe1c465f1a5e402f7cccb26a14160b15010c377e16"
+    }
+  ],
+  "normal_split_isolated": {
+    "owner": "C21C4C",
+    "shadow_matches": 165,
+    "sandbox_matches": 166,
+    "batch_zero_call_rejection_retained": true
+  }
+}
