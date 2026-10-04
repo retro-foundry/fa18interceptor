@@ -13,9 +13,23 @@ profile supplies checked Hunk addresses and explicit process/library ABI
 identifiers. No Kickstart ROM, UAE state, captured RAM or SDK is read at runtime.
 The save directory defaults to `local/saves`.
 
-The target currently reaches the first OpenLibrary wrapper and stops with its
-caller, target, machine time and zero ROM read/fetch counters. It is a startup
-development target; menus, gameplay and persistence are not accepted yet.
+The target now loads the splash and credits, accepts keyboard input and pilot
+name entry, and renders the demo from a clean ADF launch. GNU and MSVC Release
+pass the isolated launch smoke test, with zero ROM reads, ROM instruction
+fetches and unsupported services. Run `python tools/amiga/check_romfree_launcher.py`
+to reproduce it. This is functional smoke coverage, not acceptance of every mode.
+
+Host compatibility supplies libraries, reserved-region allocation, DOS files
+and directory enumeration, writable save overlays, View/Copper construction,
+keyboard requests and timer queries/waits. Existing C interrupt and graphics
+wait services run guest callbacks on the chipset timeline. New services use a
+coarse execution charge. The original game startup and gameplay code still run.
+
+Save/load through the game UI, all mission modes, restart and game teardown
+still need coverage and any remaining services. Host file round trips already
+pass portable component tests. Unknown operations continue to fail with their
+caller, service, target and machine time. Faster flight simulation and smoother
+presentation remain performance work; no measured speedup is claimed here.
 
 Current work prioritizes behavior-level compatibility and playable performance.
 Exact OS timing is deferred in `../../analysis/routines/romfree_exact_followup.md`.

@@ -48,6 +48,8 @@ int amiga_exec_bootstrap(const AmigaGuestMemory *m,const AmigaExecBootstrap *s,
     amiga_store_be32(base+AMIGA_EXEC_THIS_TASK,s->task);
     word(base+AMIGA_EXEC_ID_NEST_CNT,0xFFFF);
     empty(m,s->exec_base+AMIGA_EXEC_MEMORY_LIST);
+    empty(m,s->exec_base+AMIGA_EXEC_RESOURCE_LIST); empty(m,s->exec_base+AMIGA_EXEC_DEVICE_LIST);
+    empty(m,s->exec_base+AMIGA_EXEC_LIBRARY_LIST); empty(m,s->exec_base+AMIGA_EXEC_PORTS);
     empty(m,s->exec_base+AMIGA_EXEC_TASK_READY); empty(m,s->exec_base+AMIGA_EXEC_TASK_WAIT);
     for (unsigned i=0;i<5;++i) empty(m,s->exec_base+AMIGA_EXEC_SOFT_INTS+16*i);
     for (size_t i=0;i<s->vector_count;++i) {

@@ -9,6 +9,7 @@
 #include "m68kcpu.h"
 #include "recomp_runtime.h"
 #include "../os/rom_audit_adapter.h"
+#include "../os/host_compat_adapter.h"
 
 FA18Machine *fa18_machine;
 
@@ -585,6 +586,7 @@ unsigned int m68k_read_disassembler_32(unsigned int a) { return fa18_bus_read32(
 /* ---- input --------------------------------------------------------------- */
 
 void fa18_machine_key(FA18Machine *m, int rawkey, int down) {
+    if (m->runtime_guard.enabled && fa18_os_host_key((unsigned)rawkey,down)) return;
     int next = (m->keyboard_tail + 1) % (int)sizeof m->keyboard_queue;
     if (next == m->keyboard_head) return;
     m->keyboard_queue[m->keyboard_tail] = (uint8_t)((rawkey & 0x7F) | (down ? 0 : 0x80));
@@ -622,6 +624,7 @@ static void keyboard_line(FA18Machine *m) {
 /* ---- frame loop ---------------------------------------------------------- */
 
 static void start_line(FA18Machine *m) {
+    if (m->runtime_guard.enabled) fa18_os_host_tick(m->cycle);
     if (m->vpos == 0) {
         fa18_copper_restart(m);
         fa18_raise_interrupt(m, 5);

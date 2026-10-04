@@ -5,7 +5,9 @@
 #include "placement.h"
 #include "../amiga/hunk_loader.h"
 #include "../amiga/exec_bootstrap.h"
+#include "../amiga/abi_13.h"
 #include "../os/service_dispatch_adapter.h"
+#include "../os/host_compat_adapter.h"
 #include "recomp_runtime.h"
 #include "m68kcpu.h"
 #include <stdio.h>
@@ -14,22 +16,11 @@
 static int fail(char *error,size_t size,const char *why) {
     if (error && size) snprintf(error,size,"ROM-free launch: %s",why); return 0;
 }
-static int pending_wrapper(void *context) {
-    (void)context;
-    amiga_runtime_guard_unsupported(&fa18_machine->runtime_guard,REG_PPC,REG_PC,(uint64_t)fa18_machine_now());
-    fa18_machine_runtime_fault(); return 0;
-}
-static const AmigaService pending_ram_services[]={
-    {0xC06550,0xC06552,0xC06550,"exec.AllocMem.wrapper",1,pending_wrapper,NULL},
-    {0xC0655A,0xC0655C,0xC0655A,"exec.OpenLibrary.wrapper",1,pending_wrapper,NULL},
-    {0xC06564,0xC06566,0xC06564,"exec.OpenDevice.wrapper",1,pending_wrapper,NULL},
-    {0xC0656E,0xC06570,0xC0656E,"exec.CloseLibrary.wrapper",1,pending_wrapper,NULL},
-    {0xC06578,0xC0657A,0xC06578,"exec.CloseDevice.wrapper",1,pending_wrapper,NULL},
-    {0xC06582,0xC06584,0xC06582,"exec.RemLibrary.wrapper",1,pending_wrapper,NULL},
-    {0xC0658C,0xC0658E,0xC0658C,"exec.RemDevice.wrapper",1,pending_wrapper,NULL}
-};
 void fa18_romfree_close(FA18RomFreeProfile *p) {
-    if (p) { amiga_hunks_free(&p->image); amiga_ofs_close(&p->adf); memset(p,0,sizeof *p); }
+    if (p) {
+        fa18_os_host_compat_detach(); amiga_host_close(p->compat); free(p->compat);
+        amiga_hunks_free(&p->image); amiga_ofs_close(&p->adf); memset(p,0,sizeof *p);
+    }
 }
 int fa18_romfree_load(FA18RomFreeProfile *p,FA18Machine *m,const char *adf_path,
                       const char *save_directory,int use_recomp,char *error,size_t error_size) {
@@ -89,7 +80,51 @@ int fa18_romfree_load(FA18RomFreeProfile *p,FA18Machine *m,const char *adf_path,
     /* Only the already proved implementations. No signature/opcode/operand
      * reads from ROM are performed to enable them in a clean profile. */
     for (unsigned i=0;i<FA18_SERVICE_COUNT;++i) fa18_service_enable(i,1);
-    if (!fa18_services_install_extra(pending_ram_services,sizeof pending_ram_services/sizeof pending_ram_services[0]) ||
+    p->compat=calloc(1,sizeof *p->compat);
+    AmigaHostRegion reserved[sizeof fa18_placements/sizeof fa18_placements[0]+4];
+    size_t reserved_count=0;
+    reserved[reserved_count++]=(AmigaHostRegion){0,0x1000,0};
+    reserved[reserved_count++]=(AmigaHostRegion){0xC00000,0x4C2,0};
+    reserved[reserved_count++]=(AmigaHostRegion){0xC54028,0x10DC,0};
+    reserved[reserved_count++]=(AmigaHostRegion){0xC7E000,0x2000,0};
+    for (unsigned i=0;i<p->image.count;++i)
+        reserved[reserved_count++]=(AmigaHostRegion){fa18_placements[i].payload_base-8,fa18_placements[i].allocation_size,0};
+    if (!p->compat || !amiga_host_init(p->compat,&memory,&p->adf,save_directory,reserved,reserved_count)) {
+        fa18_romfree_close(p); return fail(error,error_size,"cannot initialize host compatibility memory");
+    }
+    p->compat->libraries[AMIGA_HOST_EXEC]=process.exec_base;
+    /* Non-CLI process handoff with one executable argument. The embedding
+     * host owns this process, so no desktop reply port is required. */
+    uint32_t message=amiga_host_alloc(p->compat,48,0x10004),argument=message+40;
+    uint8_t *msg=amiga_guest_range(&memory,message,48);
+    uint32_t list=process.task+AMIGA_PROCESS_MSG_PORT+AMIGA_PORT_MESSAGES;
+    if (!message || !msg) { fa18_romfree_close(p); return fail(error,error_size,"cannot allocate startup message"); }
+    amiga_store_be32(msg,list+4); amiga_store_be32(msg+4,list); msg[8]=5; msg[19]=40;
+    amiga_store_be32(msg+20,process.task); amiga_store_be32(msg+24,p->segment_list);
+    amiga_store_be32(msg+28,1); amiga_store_be32(msg+36,argument);
+    amiga_store_be32(msg+40,amiga_host_lock(p->compat,"")); amiga_store_be32(msg+44,process.task_name_address);
+    amiga_store_be32(amiga_guest_range(&memory,list,4),message);
+    amiga_store_be32(amiga_guest_range(&memory,list+8,4),message);
+    amiga_store_be32(amiga_guest_range(&memory,process.task+AMIGA_TASK_SIGNALS_RECEIVED,4),0x100);
+    /* Explicit server lists and CPU exception/IRQ identifiers. Only pointers
+     * and empty packed structures are installed, never captured OS code/data. */
+    for (unsigned vector=2;vector<64;++vector)
+        amiga_store_be32(amiga_guest_range(&memory,vector*4,4),0xEF4000+vector*2);
+    amiga_store_be32(amiga_guest_range(&memory,0x20,4),0xFC090E);
+    static const uint32_t irq_roots[]={0xFC0C8E,0xFC0CE2,0xFC0D14,0xFC0D6C,0xFC0DFA,0xFC0E40,0xFC0E86};
+    for (unsigned level=0;level<7;++level)
+        amiga_store_be32(amiga_guest_range(&memory,0x64+level*4,4),irq_roots[level]);
+    uint32_t interrupt_lists=amiga_host_alloc(p->compat,16*24,0x10004);
+    if (!interrupt_lists) { fa18_romfree_close(p); return fail(error,error_size,"cannot initialize interrupt server lists"); }
+    for (unsigned bit=0;bit<16;++bit) {
+        uint32_t head=interrupt_lists+bit*24;
+        uint8_t *h=amiga_guest_range(&memory,head,24);
+        amiga_store_be32(h,head+4); amiga_store_be32(h+8,head);
+        h[18]=(uint8_t)((1u<<bit)>>8); h[19]=(uint8_t)(1u<<bit);
+        uint8_t *v=amiga_guest_range(&memory,process.exec_base+AMIGA_EXEC_INT_VECTORS+bit*12,12);
+        amiga_store_be32(v,head); amiga_store_be32(v+4,bit==2?0xFC13BC:0xFC1338);
+    }
+    if (!fa18_os_host_compat_install(p->compat,fa18_exec_vectors,sizeof fa18_exec_vectors/sizeof fa18_exec_vectors[0]) ||
         !fa18_machine_prepare_run(m,error,error_size)) {
         fa18_romfree_close(p); return fail(error,error_size,"cannot install service profile or prepare machine DMA");
     }

@@ -261,7 +261,9 @@ void fa18_ports_note_source_write(uint32_t address,int size) {
 /* The instruction before the routine entry must be the JSR/BSR that called
  * it; branches and fall-through into a routine start are not calls. */
 static int entered_by_call(void) {
-    uint16_t op = fa18_bus_read16(REG_PPC);
+    /* ROM-free services supply their timing opcode in IR. Reading the caller
+     * address here would inspect removed OS instructions during a callback. */
+    uint16_t op = fa18_machine->runtime_guard.enabled ? (uint16_t)REG_IR : fa18_bus_read16(REG_PPC);
     return (op & 0xFF00) == 0x6100 || (op & 0xFFC0) == 0x4E80;
 }
 

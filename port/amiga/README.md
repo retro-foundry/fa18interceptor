@@ -85,6 +85,19 @@ disk-derived Hunk installation, capture an Engine9000 power-on entry, and compar
 C service phases with original instructions. Captured RAM/ROM belongs only in
 ignored test evidence. No captured RAM is used to initialize this library.
 
-This library is a foundation, not a complete AmigaOS replacement. Interceptor
-still needs Exec, graphics, device and DOS service work before `fa18_romfree`
-can run the whole game without Kickstart.
+This library implements the services needed so far, not all of AmigaOS.
+Interceptor now reaches visible clean startup and its demo. Further service
+coverage and game-level persistence/exit checks remain before whole-game
+ROM independence is accepted.
+- `host_compat.h`: behavior-level host allocation outside caller-reserved
+  regions, synthetic library vectors, ADF-backed file handles and a writable
+  save overlay, locks/current directories, metadata and merged directory
+  enumeration, keyboard events and matrix state. Guest structures remain
+  packed. Files retain short reads, seek positions and original byte formats.
+  Host bookkeeping and I/O replace Amiga task/packet execution. Device timing,
+  signal delivery and CPU entry/return conventions belong to the adapter.
+- `host_graphics.h`: construct intermediate CopLists and Chip-RAM OCS lists
+  from guest ViewPort/BitMap/ColorMap structures; patch palette moves and free
+  owned lists. The embedding chipset installs them for vertical blank. This
+  supports the game's current display paths, with exact 1.3 layout/timing,
+  interlace, complex viewport merging and extended modes deferred.

@@ -332,7 +332,13 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         }
         fa18_bus_finish(REG_PC);
         fa18_bus_instruction();
-        if (fa18_machine_service()) break;
+        if (fa18_machine_service()) {
+            /* The clean runner ends this frame before fetching the next
+             * instruction, including a resumable OS phase at a ROM identifier.
+             * Retain the reference runner's established frame convention. */
+            if (fa18_machine->runtime_guard.enabled) { m68k_yield_from_instruction_hook(); return; }
+            break;
+        }
         fa18_bus_instruction();
         before = fa18_cycle_origin - GET_CYCLES();
         if (fa18_ports_resume_step()) {

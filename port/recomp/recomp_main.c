@@ -19,6 +19,7 @@
 #include "../os/exec_interrupt_adapter.h"
 #ifdef FA18_ROMFREE_MAIN
 #include "../romfree/profile.h"
+#include "../os/host_compat_adapter.h"
 #endif
 
 #ifndef FA18_ROMFREE_MAIN
@@ -137,7 +138,11 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
     }
     SDL_RenderSetLogicalSize(ren, FA18_SCREEN_W, FA18_SCREEN_H);
     deadline = SDL_GetTicks64();
-    while (running && (frames <= 0 || frame < frames)) {
+    while (running && (frames <= 0 || frame < frames)
+#ifdef FA18_ROMFREE_MAIN
+           && !fa18_os_host_exited()
+#endif
+    ) {
         SDL_Event e;
         int p;
         while (SDL_PollEvent(&e)) {
@@ -413,7 +418,11 @@ int main(int argc, char **argv) {
 #endif
     }
     if (rgb_path && !(rgb = fopen(rgb_path, "wb"))) { fprintf(stderr, "cannot write %s\n", rgb_path); return 1; }
-    for (i = 0; to_end ? fa18_loop_iterations() < fa18_loop_replay_end() : i < frames; i++) {
+    for (i = 0; (to_end ? fa18_loop_iterations() < fa18_loop_replay_end() : i < frames)
+#ifdef FA18_ROMFREE_MAIN
+         && !fa18_os_host_exited()
+#endif
+         ; i++) {
         /* Events recorded for a frame are delivered before that frame runs. */
         fa18_replay_apply(&replay, m, start_frame + i + 1);
         if (i == 0 && restore_lead) { fa18_machine_run_frame(m); fa18_loop_frame(); }
@@ -483,7 +492,7 @@ int main(int argc, char **argv) {
                "\"generated_share\": %.4f, \"dispatches\": %llu, \"interpreted_game_instructions\": %llu, "
                "\"code_writes\": %llu, \"disabled_functions\": %d, \"blits\": %llu, \"line_blits\": %llu, "
                "\"nonblack_pixels\": %d, \"pc\": \"%06X\", \"iterations\": %ld}\n",
-               to_end ? i : frames, use_recomp, (unsigned long long)total, (unsigned long long)gen,
+               i, use_recomp, (unsigned long long)total, (unsigned long long)gen,
                total ? (double)gen / (double)total : 0.0, (unsigned long long)fa18_recomp_stats.dispatches,
                (unsigned long long)fa18_recomp_stats.interpreted_game,
                (unsigned long long)fa18_recomp_stats.code_writes, fa18_recomp_stats.disabled_functions,

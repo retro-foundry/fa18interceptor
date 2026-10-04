@@ -33,17 +33,39 @@ inventory alone does not satisfy that objective.
 
 Report progress against these acceptance checkpoints. The informal 25% and
 30% chat estimates had no measured denominator and should not be reused.
-Current reusable services are tested component progress; none of the following
-whole-game ROM-free checkpoints has passed yet:
+Current reusable services and isolated startup/demo smoke tests pass. Further
+whole-game acceptance remains:
 
 | Checkpoint | Verified state |
 | --- | --- |
-| Original ADF launch with no ROM or savestate | Target built; original startup reaches OpenLibrary wrapper C0655A and fails explicitly; menus pending |
-| Menus and every reachable game mode from clean launch | Pending |
+| Original ADF launch with no ROM or savestate | GNU/MSVC Release isolated ADF-only tests pass through splash, credits, keyboard/pilot-name entry and demo rendering |
+| Menus and every reachable game mode from clean launch | Credits/input/demo smoke passes; complete menu/mode coverage pending |
 | Flight and postflight with original behavior and timing | Pending; existing ROM-backed recordings remain the oracle |
-| Save/load round trips using `--save-dir` | Pending |
+| Save/load round trips using `--save-dir` | Portable ADF/host-overlay component round trips pass; game UI scenarios pending |
 | Restart and clean exit | Pending |
-| Zero ROM reads/fetches and unsupported services over all scenarios | Proven for implemented service fixtures, pending for the whole game |
+| Zero ROM reads/fetches and unsupported services over all scenarios | Zero across isolated startup/credits/demo runs; remaining modes/persistence/exit pending |
+
+The loose host layer is in `port/amiga/host_compat.{h,c}` and
+`host_graphics.{h,c}`; its CPU/chipset adapter is `port/os/host_compat_adapter.c`.
+The latter patches library vectors to synthetic service identifiers and keeps
+unknown commands fatal. No OS instruction bytes, captured RAM or SDK headers
+are used. The original game files and gameplay still supply behavior. LoadView
+publishes Copper lists for vertical blank; restarting the Copper on every
+main-loop call caused repeated text and has been corrected.
+
+New neutral contracts cover allocation/reservations, libraries, short reads,
+seeks, file failures, save overlays, directory iteration, keyboard matrix/events
+and bitmap/palette Copper construction. Six neutral CTests pass GNU/MSVC Release;
+the 406-file native gate and 100-frame C/ROM reference smoke for all three
+recordings also pass. Full exact service/recording gates were not rerun for this
+behavior-level batch. No performance speedup has yet been measured.
+
+Next: exercise the actual menu selections, postflight, persistence, restart and
+exit; complete only services reached by those paths, retaining reusable state
+outside the game profile. Timer/keyboard reads can remain pending; the single
+process waits while chipset interrupts continue. Gameport event completion,
+additional device commands and library operations remain explicit unsupported
+paths where not implemented. Exact work is tracked in the follow-up note.
 
 ## Historical objective and order (superseded above)
 

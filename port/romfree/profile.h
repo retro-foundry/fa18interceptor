@@ -3,11 +3,13 @@
 #include "../machine/startup.h"
 #include "../amiga/ofs.h"
 #include "../amiga/hunk.h"
+#include "../amiga/host_compat.h"
 typedef struct {
     AmigaOfs adf;
     AmigaHunks image;
     uint32_t segment_list;
     const char *save_directory;
+    AmigaHostCompat *compat;
 } FA18RomFreeProfile;
 /* Original disk image -> checked Hunk placement -> explicit process handoff.
  * Does not read ROMs, savestates, extracted assets or captured RAM. Unknown
