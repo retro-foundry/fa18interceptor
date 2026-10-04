@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-04. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 609bb849); ignored gate logs may
+history (the preceding handoff is in commit 9cfd7b1d); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
@@ -56,6 +56,8 @@ Six complete stream/numeric/marker owners and two store upgrades now raise
 translated coverage to 526/624 and source-timed entries to 418.
 Eight complete display-parent upgrades retain that translated count and raise
 source-timed entries to 426.
+Thirteen complete readout, cue and status upgrades retain that translated count
+and raise source-timed entries to 439.
 Sixty-six original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -63,6 +65,41 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- 526 of 624 translated entries plus sixty-six source-only callable entries
+  remain registered: 592 rows and 439 source-timed entries (373 translated,
+  sixty-six source-only). Complete upgrades C31F4C/C3201A/C3212A/C32178/
+  C321D2/C32260/C31EB6/C31C60/C31D16/C31E6C/C31D64/C33F54/C328A8 own
+  606 unique / 70 shared boundaries, with original incoming calls and 31
+  distinct / 43 per-owner child sites sealed. All 425,984 whole calls pass
+  full CPU/PC/SR/all-RAM: 16,384 controlled and 16,384 original-child calls
+  per owner. Controlled coverage is 120/120, 135/135, 84/84, 88/88, 98/98,
+  98/98, 36/36, 48/48, 23/23, 18/18, 64/64, 14/14 and 143/143; union
+  606/606. Original-child fixtures use original clipped bounds and context
+  select zero. Coverage is 71/120, 88/135, 60/84, 64/88, 75/98, 75/98,
+  3/36, 48/48, 23/23, 18/18, 64/64, 14/14 and 120/143. They do not prove
+  context, active DMA, glyph or fault paths. Ordered Custom packets and
+  terminal hardware state match; these bounded fixtures have zero writes.
+  Actual ON/shadow/sandbox passes 39,936 completed bounded fixtures with
+  exact hardware-free classification and all guards. Independent normal C
+  passes every owner: 32,575 shadow / 33,952 sandbox matches. Active drawing
+  is independently checked on all 36,236 isolated live frames and RAM seals.
+  Existing source-first DMACONR contracts remain. Shared CPU/bus/arithmetic,
+  classification, runtime and test observer are unchanged; all 27 older
+  generator outputs are byte-identical. Local DMA passes 606 / 19,392;
+  fresh combined DMA and independent union pass 24,478 / 783,296 (previous
+  23,942 plus 606, overlap 70). GNU/MSVC Release pass; build/ is 1.45 GiB.
+  Full 592-row gate passes 568,440 shadow / 443,868 sandbox matches, zero
+  mismatches, exact seals and poison frames. Family exact through frame 600;
+  ALL remains 416/361. See analysis/routines/native_c_hud_readout_parents.md
+  and analysis/figures/native_hud_readout_parents_checkpoint.json for exact
+  hashes, per-owner coverage, retained build failures and proof limits.
+  Next complete eight cache/text helpers C31C20/C3271A/C32726/C32736/
+  C32794/C32AA4/C32AA6/C32AB4: 182 unique / 141 shared boundaries and
+  original incoming calls in analysis/data/hud_text_helper_scope_inventory.json.
+  Older projection parents, remaining HUD helpers, C2C392's computed transfer,
+  C1612C graphics-wait integration and full original game-call/callback coverage
+  remain open. No service replacement or timing-only work is selected.
 
 - 526 of 624 translated entries plus sixty-six source-only callable entries
   remain registered: 592 rows and 426 source-timed entries (360 translated,

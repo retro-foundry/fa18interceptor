@@ -1,0 +1,42 @@
+#ifndef FA18_GLUE_HUD_READOUT_PARENTS_H
+#define FA18_GLUE_HUD_READOUT_PARENTS_H
+int glue_C31F4C(void);
+int glue_C31F4C_complete_step(void);
+int glue_C31F4C_owns(uint32_t pc);
+int glue_C3201A(void);
+int glue_C3201A_complete_step(void);
+int glue_C3201A_owns(uint32_t pc);
+int glue_C3212A(void);
+int glue_C3212A_complete_step(void);
+int glue_C3212A_owns(uint32_t pc);
+int glue_C32178(void);
+int glue_C32178_complete_step(void);
+int glue_C32178_owns(uint32_t pc);
+int glue_C321D2(void);
+int glue_C321D2_complete_step(void);
+int glue_C321D2_owns(uint32_t pc);
+int glue_C32260(void);
+int glue_C32260_complete_step(void);
+int glue_C32260_owns(uint32_t pc);
+int glue_C31EB6(void);
+int glue_C31EB6_complete_step(void);
+int glue_C31EB6_owns(uint32_t pc);
+int glue_C31C60(void);
+int glue_C31C60_complete_step(void);
+int glue_C31C60_owns(uint32_t pc);
+int glue_C31D16(void);
+int glue_C31D16_complete_step(void);
+int glue_C31D16_owns(uint32_t pc);
+int glue_C31E6C(void);
+int glue_C31E6C_complete_step(void);
+int glue_C31E6C_owns(uint32_t pc);
+int glue_C31D64(void);
+int glue_C31D64_complete_step(void);
+int glue_C31D64_owns(uint32_t pc);
+int glue_C33F54(void);
+int glue_C33F54_complete_step(void);
+int glue_C33F54_owns(uint32_t pc);
+int glue_C328A8(void);
+int glue_C328A8_complete_step(void);
+int glue_C328A8_owns(uint32_t pc);
+#endif

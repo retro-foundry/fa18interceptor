@@ -16,7 +16,18 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
-Eight complete HUD display-parent upgrades pass 262,144 full CPU/PC/SR/RAM
+Thirteen complete HUD readout, cue and status upgrades pass 425,984 full
+CPU/PC/SR/RAM calls, all 606 controlled source boundaries and 39,936 bounded
+actual dispatch fixtures. Independent normal C passes every owner: 32,575
+shadow / 33,952 sandbox comparisons. All 36,236 isolated live frames and RAM
+seals match. Frozen-clock original-child fixtures retain explicit clipping
+and context limits. Combined DMA passes 24,478 boundaries / 783,296 cases;
+source-timed entries rise to 439. See
+[readout parent proof](analysis/routines/native_c_hud_readout_parents.md).
+The next eight cache and text helpers have 182 unique / 141 shared sealed
+boundaries. Original game-function and callback coverage remains open.
+
+The preceding eight complete HUD display-parent upgrades pass 262,144 full CPU/PC/SR/RAM
 calls, all 595 controlled source boundaries and 6,144 bounded actual dispatch
 fixtures. Independent normal C passes all eight owners: 27,001 shadow /
 41,163 sandbox comparisons. All 36,236 isolated live frames and RAM seals
@@ -24,8 +35,7 @@ match. Frozen-clock original-child fixtures retain explicit no-draw limits;
 active drawing is checked independently on the recordings. Combined DMA
 passes 23,942 boundaries / 766,144 cases; source-timed entries rise to 426.
 See [HUD parent proof](analysis/routines/native_c_hud_parents.md).
-The next thirteen readout, cue and status parents have 606 unique / 70 shared
-sealed boundaries. Original game-function and callback coverage remains open.
+Their thirteen readout, cue and status successors are complete as described above. Original game-function and callback coverage remains open.
 
 The preceding six complete stream/numeric/marker owners and two store upgrades pass 262,144
 whole CPU/PC/SR/RAM calls, ordered Custom writes and terminal hardware state.
