@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include "../amiga/runtime_guard.h"
 
 /* Minimal A500 PAL OCS machine for running the original game code: 512 KiB
  * Chip RAM at $000000, 512 KiB Slow RAM at $C00000, Kickstart 1.3 at
@@ -73,11 +74,18 @@ typedef struct {
     uint16_t last_screen[FA18_SCREEN_W * FA18_SCREEN_H]; /* last completed frame */
     uint64_t unmapped_reads, unmapped_writes;
     uint64_t blits, line_blits;
+    AmigaRuntimeGuard runtime_guard;
 } FA18Machine;
 
 extern FA18Machine *fa18_machine;
 /* BLTSIZE as written just before the last polygon draw began. */
 extern uint16_t fa18_bltsize_at_draw_start;
+
+/* Also usable by differential fixtures; checks occur before touching ROM.
+ * This does not initialize OS state or enable unproved services. */
+void fa18_machine_require_romfree(FA18Machine *m);
+void fa18_machine_runtime_fault(void);
+void fa18_machine_require_supported_target(uint32_t caller,uint32_t target);
 
 int fa18_machine_load_state(FA18Machine *m, const uint8_t *state, size_t size,
                             const uint8_t *rom, size_t rom_size, char *error, size_t error_size);

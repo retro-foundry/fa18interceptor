@@ -1,5 +1,5 @@
-/* Kickstart 1.3 graphics.library WaitBOVP CPU bridge. The nested VBeamPos
- * call at $FC5E90 remains on the ordinary vector/interpreter path. */
+/* Kickstart 1.3 graphics.library WaitBOVP service phases. Nested VBeamPos
+ * retains its guest stack and vector call, without fetching ROM bytes. */
 #include "graphics_wait_bovp.h"
 
 #include <string.h>
@@ -8,6 +8,7 @@
 #include "m68kops.h"
 #include "bus.h"
 #include "machine.h"
+#include "service_phase.h"
 
 int fa18_os_wait_bovp_signature_matches(const uint8_t *rom) {
     static const uint8_t source[] = {
@@ -24,9 +25,8 @@ int fa18_os_wait_bovp_signature_matches(const uint8_t *rom) {
     return rom && memcmp(rom + 0x5E58, source, sizeof source) == 0;
 }
 
-static uint32_t displacement_address(uint32_t base) {
-    int16_t displacement = (int16_t)m68k_read_immediate_16(REG_PC);
-    REG_PC += 2;
+static uint32_t displacement_address(uint32_t base, int16_t displacement) {
+    fa18_service_extension_words(1);
     return base + displacement;
 }
 
@@ -56,8 +56,7 @@ static void cmp_word(uint16_t source, uint16_t dest) {
 }
 
 static void push_saved_d2_d3(void) {
-    (void)m68k_read_immediate_16(REG_PC);
-    REG_PC += 2;
+    fa18_service_extension_words(1);
     REG_A[7] -= 4;
     m68k_write_memory_16(REG_A[7] + 2, (uint16_t)REG_D[3]);
     m68k_write_memory_16(REG_A[7], (uint16_t)(REG_D[3] >> 16));
@@ -68,8 +67,7 @@ static void push_saved_d2_d3(void) {
 }
 
 static void pop_saved_d2_d3(void) {
-    (void)m68k_read_immediate_16(REG_PC);
-    REG_PC += 2;
+    fa18_service_extension_words(1);
     REG_D[2] = m68k_read_memory_32(REG_A[7]);
     REG_A[7] += 4;
     REG_D[3] = m68k_read_memory_32(REG_A[7]);
@@ -85,17 +83,37 @@ int fa18_os_wait_bovp_step(void) {
         pc != 0xFC5E76u && pc != 0xFC5E7Cu && pc != 0xFC5E7Eu &&
         pc != 0xFC5E80u && pc != 0xFC5E84u && pc != 0xFC5E88u &&
         pc != 0xFC5E8Au && pc != 0xFC5E8Cu && pc != 0xFC5E8Eu &&
-        pc != 0xFC5E94u && pc != 0xFC5E96u && pc != 0xFC5E98u &&
+        pc != 0xFC5E90u && pc != 0xFC5E94u && pc != 0xFC5E96u && pc != 0xFC5E98u &&
         pc != 0xFC5E9Cu) return 0;
-    op = fa18_bus_read16(pc);
-    fa18_bus_begin(pc);
-    fa18_bus_fetch(pc);
-    REG_PPC = pc;
-    REG_IR = op;
-    REG_PC = pc + 2;
+    switch (pc) {
+    case 0xFC5E58u: op=0x3028; break;
+    case 0xFC5E5Cu: op=0x6008; break;
+    case 0xFC5E5Eu: op=0x206F; break;
+    case 0xFC5E62u: op=0x302F; break;
+    case 0xFC5E66u: op=0x48E7; break;
+    case 0xFC5E6Au: op=0x226E; break;
+    case 0xFC5E6Eu: op=0x362E; break;
+    case 0xFC5E72u: op=0x5343; break;
+    case 0xFC5E74u: op=0x3400; break;
+    case 0xFC5E76u: op=0x0828; break;
+    case 0xFC5E7Cu: op=0x6702; break;
+    case 0xFC5E7Eu: op=0xE242; break;
+    case 0xFC5E80u: op=0x3229; break;
+    case 0xFC5E84u: op=0xD268; break;
+    case 0xFC5E88u: op=0xD242; break;
+    case 0xFC5E8Au: op=0xB243; break;
+    case 0xFC5E8Cu: op=0x6F02; break;
+    case 0xFC5E8Eu: op=0x3203; break;
+    case 0xFC5E90u: op=0x4EAE; break;
+    case 0xFC5E94u: op=0xB240; break;
+    case 0xFC5E96u: op=0x6EE8; break;
+    case 0xFC5E98u: op=0x4CDF; break;
+    default: op=0x4E75; break;
+    }
+    fa18_service_begin(pc,(uint16_t)op);
     switch (pc) {
     case 0xFC5E58u:
-        result = m68k_read_memory_16(displacement_address(REG_A[0]));
+        result = m68k_read_memory_16(displacement_address(REG_A[0],0x1A));
         REG_D[0] = (REG_D[0] & 0xFFFF0000u) | result;
         word_flags((uint16_t)result);
         break;
@@ -103,10 +121,10 @@ int fa18_os_wait_bovp_step(void) {
         REG_PC = 0xFC5E66u;
         break;
     case 0xFC5E5Eu:
-        REG_A[0] = m68k_read_memory_32(displacement_address(REG_A[7]));
+        REG_A[0] = m68k_read_memory_32(displacement_address(REG_A[7],4));
         break;
     case 0xFC5E62u:
-        result = m68k_read_memory_16(displacement_address(REG_A[7]));
+        result = m68k_read_memory_16(displacement_address(REG_A[7],0xA));
         REG_D[0] = (REG_D[0] & 0xFFFF0000u) | result;
         word_flags((uint16_t)result);
         break;
@@ -114,10 +132,10 @@ int fa18_os_wait_bovp_step(void) {
         push_saved_d2_d3();
         break;
     case 0xFC5E6Au:
-        REG_A[1] = m68k_read_memory_32(displacement_address(REG_A[6]));
+        REG_A[1] = m68k_read_memory_32(displacement_address(REG_A[6],0x22));
         break;
     case 0xFC5E6Eu:
-        result = m68k_read_memory_16(displacement_address(REG_A[6]));
+        result = m68k_read_memory_16(displacement_address(REG_A[6],0xD4));
         REG_D[3] = (REG_D[3] & 0xFFFF0000u) | result;
         word_flags((uint16_t)result);
         break;
@@ -136,9 +154,8 @@ int fa18_os_wait_bovp_step(void) {
         word_flags((uint16_t)result);
         break;
     case 0xFC5E76u:
-        (void)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
-        address = displacement_address(REG_A[0]);
+        fa18_service_extension_words(1);
+        address = displacement_address(REG_A[0],0x10);
         FLAG_Z = m68k_read_memory_8(address) & 0x10u;
         break;
     case 0xFC5E7Cu:
@@ -154,12 +171,12 @@ int fa18_os_wait_bovp_step(void) {
         USE_CYCLES(2);
         break;
     case 0xFC5E80u:
-        result = m68k_read_memory_16(displacement_address(REG_A[1]));
+        result = m68k_read_memory_16(displacement_address(REG_A[1],0xC));
         REG_D[1] = (REG_D[1] & 0xFFFF0000u) | result;
         word_flags((uint16_t)result);
         break;
     case 0xFC5E84u:
-        add_word(&REG_D[1], m68k_read_memory_16(displacement_address(REG_A[0])));
+        add_word(&REG_D[1], m68k_read_memory_16(displacement_address(REG_A[0],0x1E)));
         break;
     case 0xFC5E88u:
         add_word(&REG_D[1], (uint16_t)REG_D[2]);
@@ -175,6 +192,10 @@ int fa18_os_wait_bovp_step(void) {
         result = (uint16_t)REG_D[3];
         REG_D[1] = (REG_D[1] & 0xFFFF0000u) | result;
         word_flags((uint16_t)result);
+        break;
+    case 0xFC5E90u:
+        address=displacement_address(REG_A[6],-0x180);
+        fa18_service_call(address);
         break;
     case 0xFC5E94u:
         cmp_word((uint16_t)REG_D[0], (uint16_t)REG_D[1]);

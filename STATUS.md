@@ -1,21 +1,23 @@
 # Status
 
-Updated 2026-10-03.
+Updated 2026-10-04.
 
-The active goal now stops after original game-function porting is complete and
-only Kickstart services and timing parity remain. Cold and indirect game owners
-must be reconciled before that stopping point. Do not continue into service
-replacement or standalone timing fixes after game-function porting is complete.
+The active objective is complete ROM independence: a separate `fa18_romfree`
+runner starting from the original ADF, preserving the existing CPU and chipset
+timeline. This supersedes the earlier deferral of OS work. The Amiga SDK is
+reference only; reusable compatibility foundations live in `port/amiga`.
+Whole-game ROM independence is unfinished; see `CURRENT_PORT_HANDOFF.md`.
 
 ## Summary
 
 | Area | State |
 | --- | --- |
 | Native game | Runs in an SDL2 window at 50 Hz; three sealed native recordings cover demo flight, successful carrier landing, and qualification failure |
-| Current proof | All 571 registered entries pass the three-recording shadow/sandbox/sealed-RAM/poison gate. Five complete motion helpers pass 163,840 all-CPU/PC/SR/RAM calls, all 229 source PCs with controlled and real children, and 3,840 dispatch fixtures. All five remain cold with parents omitted; the strict zero-comparison rejection is retained. C1612C remains inactive after frozen-reference failures. |
+| Current proof | Fresh full 614-row gate passes 571,427 shadow /458,087 sandbox, exact seals and poison frames. Implemented C services versus original ROM services match all 36,236 sealed recording frames, RGB444, final RAM and CPU cycles. ROM-independent service phases pass 74,240 CPU/DMA fixtures; FindTask/FindName pass another 9,216 complete calls. |
 | Translation | 624 routines, 34,309 instructions (seeded from the native recordings); ~70% of CPU cycles in translated code |
-| Recreated C source | 505/624 translated entries plus 66 original source-only callable entries: 571 rows. Full gate passes 567,984 shadow / 417,363 sandbox matches, zero mismatches and identical poison frames. Remaining game functions are open. C1612C remains unregistered pending frozen-event graphics-wait integration. See `CURRENT_PORT_HANDOFF.md`. |
-| Live C timing | 391 registered timing entries (325 translated plus 66 source-only). Local motion-helper proof passes 229 / 7,328. Fresh combined and independent union: 20,488 / 655,616, adding 229 PCs with no previous overlap. All 36,236 isolated live frames/seals match. ALL remains 416/361; fade is deferred. |
+| Recreated C source | 539/624 translated entries plus 75 source-only callable entries: 614 rows. Game-function reconciliation remains open, including C2C392 and C1612C. See `CURRENT_PORT_HANDOFF.md`. |
+| Live C timing | 543 registered timing entries. Combined DMA passes 30,239 instructions /967,648 fixtures. Display family exact through 600 frames; ALL retains the inherited frame-424 /34,144-pixel difference. |
+| ROM-free foundations | Independent SDK-free guest memory, OFS reader, Hunk loader, service registry, ROM audit and strict access guard. All 22 game-owned ADF resource hashes match; all 185 hunks /8,441 relocations match a true cold entry, with no changed original payload bytes. Four portable contracts pass GNU/MSVC Release. No `fa18_romfree` runner yet: clean OS initialization, remaining services, persistence and shutdown are pending. |
 | Control/flight batch | Complete C149BE/C23A7E and four upgraded helpers retain their checkpoint. Ten following flight-record owners and five motion helpers are now complete. Next four enclosing flight-dynamics owners: C25B66/C266AE/C28996/C28B16, 1,308 unique / zero shared boundaries and actual incoming calls. Related C2C392 needs computed-transfer reconciliation at C2C46E. |
 | Motion helpers batch | Complete C26322/C26352/C26C72/C26CC0/C26D8A: all 229 PCs, 163,840 completed CPU/PC/SR/RAM calls, two original child sites and 3,840 dispatch fixtures. Cold recording rows and generic rejection remain explicit. See `analysis/routines/native_c_flight_motion_helpers.md`. |
 | Flight-record actions batch | Ten complete owners: 575 unique / 245 shared PCs, 327,680 completed calls, two separately proved internal segments, 1,024 first-fault observations and 7,680 dispatch fixtures. Current counts and proof categories are in `analysis/figures/native_flight_record_actions_checkpoint.json`. |

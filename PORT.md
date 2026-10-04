@@ -67,8 +67,13 @@ is proven against.
 | E | OS replacement (Kickstart calls), cold boot from the ADF | Last: assess which services remain necessary after D and F; existing C shims are verified on three native sessions |
 
 The project work order is D, then F, then only the necessary parts of E.
-The current user-directed run stops after game-function porting is complete,
-with Kickstart/service and timing work recorded separately in the handoff.
+The 2026-10-04 user instruction authorizes ROM independence now: a separate
+`fa18_romfree` runner must start from the ADF without Kickstart or a savestate,
+retaining the CPU and chipset model and preserving original behavior. The
+Amiga SDK is reference-only. Loading and service facilities must be reusable
+across games, with Interceptor-specific configuration kept separate. See the
+active objective in CURRENT_PORT_HANDOFF.md; the older service deferral is
+superseded.
 
 ## Recreating game-source batches (stage D)
 

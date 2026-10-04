@@ -79,6 +79,7 @@ int fa18_recomp_enable_blitter_ownership_shim(void);
 int fa18_recomp_enable_exec_interrupt_shim(void);
 int fa18_recomp_enable_exec_get_msg_shim(void);
 int fa18_recomp_enable_potgo_shim(void);
+int fa18_recomp_enable_exec_task_lookup_shim(void);
 
 #ifdef FA18_RECOMP_GENERATED
 

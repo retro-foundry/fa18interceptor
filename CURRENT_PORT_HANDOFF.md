@@ -5,7 +5,24 @@ history (the preceding handoff is in commit 51fb22b2); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 
-## Objective and order
+## Active objective: ROM independence (2026-10-04)
+
+The user has authorized implementing the ROM-independence plan. This supersedes
+the earlier stopping point and deferral of OS work recorded below. Deliver a
+separate `fa18_romfree` runner that starts from the original ADF without a
+Kickstart image or UAE savestate. Retain the CPU/translation and chipset model
+for this milestone, and retain the ROM-backed runner as a validation oracle.
+Original behavior and the existing machine timeline remain the authority.
+
+The Amiga SDK is reference material only, not a build or runtime dependency.
+Reusable Amiga loading and compatibility facilities must be separated from
+Interceptor's addresses, resources, and startup configuration. Track unproved
+services explicitly; unsupported calls and ROM reads must fail with context.
+Completion requires launch, menus, flight, postflight, persistence and exit,
+with zero ROM reads/fetches and zero unsupported services. A loader or service
+inventory alone does not satisfy that objective.
+
+## Historical objective and order (superseded above)
 
 Recreate readable C for the whole game, proven against the original source and
 sealed native recordings. Work in related batches. The current stopping point
@@ -90,12 +107,11 @@ The latest user instruction defers the minor Copper-fade difference: keep its fr
 HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
-## Current handoff: display selection integration pending
+## Display-selection reference frozen before ROM-free work
 
-Handoff requested 2026-10-04. The last fully gated baseline is 0639fdee,
-record steering, described below. The current commit includes the implemented
-display-selection batch and targeted proofs, with integration gates still
-pending. Registration remains 539 translated +75 source-only =614 total,
+The display-selection implementation in c3ecdcf8 has completed its pending
+integration gates against the reference runtime, before shared machine changes.
+Registration remains 539 translated +75 source-only =614 total,
 543 source-timed. Do not infer full game completion from those counts.
 
 Seven owners C0D74A/C0D752/C0DAA0/C0DAD0/C0DAD4/C0DADC/C0DAE6 now use
@@ -109,15 +125,17 @@ increments covered by controlled calls and local DMA. Local DMA passes
 259/8,288; dispatch smoke passes 1,344 calls (64 per owner per mode).
 MSVC Release/GNU oracle builds and compatibility for 41 older generators pass.
 
-Resume the larger dispatch, normal-C recordings, combined DMA, full gate,
-isolated live and bounded timing validation before promoting this batch to
-the fully verified baseline. Exact commands, limitations and changed files
+Dispatch passes 21,504 calls (1,024 per owner per mode). Normal-C recording
+comparisons pass 12,396 shadow /7,437 sandbox. Combined DMA passes 30,239
+instructions /967,648 fixtures; the 259 display PCs already belong to the
+previous union. The full 614-row gate passes 571,427 shadow /458,087 sandbox,
+all seals and poison frames. All 36,236 isolated live frames and seals match.
+Family timing is exact through 600 frames; ALL retains the inherited first
+difference at frame 424 /34,144 pixels. Exact commands and changed files
 are in analysis/routines/native_c_display_record_selection.md; sealed local
 proof and implementation hashes are in
 analysis/figures/native_display_record_selection_checkpoint.json.
-The recordings verifier is prepared but requires pending 1,024-case dispatch
-and normal-C reports. All completed proof processes were collected before
-commit. Ignored build/recomp install/prepare scripts are one-shot; do not
+The recordings verifier passes. Ignored build/recomp install/prepare scripts are one-shot; do not
 rerun them. Use the committed checkers to reproduce proofs instead.
 
 C2C392 producer-domain evidence and the other game work listed below remain
@@ -125,9 +143,62 @@ open. Read-only local notes additionally cover C0E78A/C2F49C/C500D8 in
 build/recomp/remaining_game_services_read.{json,log} and
 build/recomp/audio_registration_read.log; none is newly implemented.
 Do not treat data following C500C8 as decoded game code. C500D8 needs original
-callback installation/callability evidence. No OS or timing-only work was
-started. Stop only when game-function work is complete and Kickstart/timing
-are all that remain.
+callback installation/callability evidence. These remain separately tracked
+game-port debts while the authorized ROM-independence work proceeds.
+
+## ROM-free implementation progress
+
+`port/amiga` builds independently with GNU and MSVC and requires no Amiga SDK,
+ROM, emulator, or game assets. It provides guest memory, Hunk relocation,
+read-only OFS files and metadata, ROM-dependency audit, a strict runtime guard,
+and a resumable service registry. The legacy disk and Hunk APIs remain
+compatible with the typed native port. SDK definitions are reference only.
+All four portable contract tests pass GNU and MSVC Release. The OFS reader
+matches all 22 game-owned resources against their original extraction hashes;
+the loader places all 185 hunks directly from the original ADF.
+
+The DOS segment-list inspector resolves all 185 hunks and verifies all 8,441
+relocations. A true Engine9000 power-on launch, using the sealed desktop inputs
+after 3,000 boot frames, stops at C0DEB0 on host frame 7,070. Its complete Hunk
+placement matches the warm recordings, with zero changed nonrelocated bytes.
+Only hashes, addresses, and register metadata are committed in
+`analysis/data/romfree_hunk_layout.json` and `romfree_cold_entry.json`; captured
+RAM stays under ignored `build/amiga` as oracle evidence.
+
+The seven existing service bridges and new Exec FindTask/FindName implementations
+now execute 145 C phases without reading ROM instruction or operand bytes.
+Nested calls preserve the original stack and vectors. The structural oracle
+passes 74,240 CPU/DMA fixtures with cleared
+ROM buffers, a strict access guard, full registers/SR/RAM, ordered memory and
+hardware accesses, and exact cycles. It corrected potgo's original low-word-
+first stack write. Blitter ownership's deeper helpers still execute ROM in the
+reference runner and need complete replacements.
+
+FindTask/FindName additionally pass 9,216 complete original-versus-C calls,
+including null, absent, prefix and case-sensitive queries, empty/nonempty task
+lists, interrupt depth boundaries, full CCR and display DMA. Original Engine9000
+contracts include the true game's FindTask caller returning to C0DEE2 and its
+nested FindName path. The shared dispatcher runs before interpreter opcode
+fetching; strict ROM access enforcement is available but cannot yet be enabled
+for a whole-game run because other service dependencies remain.
+
+The audit records nested ROM flow, CPU entry state, accesses, low-memory vector
+activity, and machine cycles. All three existing recording audits retain their
+final RAM seals; they are warm coverage, not proof of every game mode or clean
+startup. A separate 300-frame audit/non-audit comparison is byte-identical.
+
+`fa18_romfree` is not delivered yet. Exec foundations, interrupt/exception paths,
+graphics LoadView and helpers, devices, DOS persistence, evidence-backed OS
+initialization and shutdown remain. Whole-game zero-ROM acceptance is pending.
+The converted phases are integrated into the reference runner. GNU and MSVC
+Release builds pass. The fresh 614-row full gate passes 571,427 shadow /458,087
+sandbox comparisons, exact final seals and poison frames. C services versus
+original ROM services match all three sealed recordings over 36,236 frames,
+including every RGB444 byte, complete final RAM, CPU cycles and final PC.
+The reusable checker is `tools/amiga/check_service_recordings.py`; local results
+are `build/amiga/service-recordings/full.json`. These tests prove the replaced
+services under the existing runtime, not a clean ROM-free launch. Ordered
+full-recording interrupt/audio timelines and remaining game modes are pending.
 
 ## Verified baseline
 

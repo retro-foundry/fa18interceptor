@@ -26,6 +26,7 @@
 
 #include "m68kcpu.h"
 #include "m68kops.h"
+#include "../os/rom_audit_adapter.h"
 
 int fa18_bus_timing = 1;
 
@@ -373,7 +374,15 @@ static int is_jump(int op) {
 
 /* An instruction at `pc` starts. */
 void fa18_bus_begin(uint32_t pc) {
-    int op = fa18_bus_read16(pc), l;
+    if (fa18_machine->runtime_guard.enabled &&
+        !amiga_runtime_guard_fetch(&fa18_machine->runtime_guard,pc,(uint64_t)fa18_machine_now()))
+        fa18_machine_runtime_fault();
+    fa18_bus_begin_instruction(pc,fa18_bus_read16(pc));
+}
+
+void fa18_bus_begin_instruction(uint32_t pc, uint16_t opcode) {
+    int op=opcode, l;
+    fa18_rom_audit_instruction(pc);
     fa18_bus_finish(pc);
     access_index = 0;
     fetches = 0;

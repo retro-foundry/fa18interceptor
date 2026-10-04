@@ -41,6 +41,9 @@ def source_files(main: Path) -> list[Path]:
         Path("port/recomp/loop_input.c"), Path("port/machine/machine.c"),
         Path("port/machine/bus.c"), Path("port/machine/blitter.c"),
         Path("port/machine/display.c"), Path("port/machine/input.c"),
+        Path("port/amiga/rom_audit.c"),
+        Path("port/amiga/runtime_guard.c"),
+        Path("port/amiga/service_dispatch.c"),
     ]
     globbed: list[Path] = []
     for pattern in ("port/recomp/generated/*.c", "port/game/*.c",

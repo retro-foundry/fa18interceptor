@@ -1,5 +1,5 @@
-/* CPU bridge for Kickstart 1.3 potgo.resource WritePotgo. The nested Exec
- * calls at $FE44FC and $FE451C remain on the ordinary execution path. */
+/* ROM-independent phases of Kickstart 1.3 potgo.resource WritePotgo,
+ * including its nested Exec vector calls. */
 #include "potgo_glue.h"
 
 #include <string.h>
@@ -9,6 +9,7 @@
 #include "m68kops.h"
 #include "bus.h"
 #include "machine.h"
+#include "service_phase.h"
 
 int fa18_os_potgo_signature_matches(const uint8_t *rom) {
     static const uint8_t source[] = {
@@ -44,13 +45,22 @@ int fa18_os_potgo_step(void) {
         pc != 0xFE44F8u && pc != 0xFE4500u && pc != 0xFE4502u &&
         pc != 0xFE4506u && pc != 0xFE450Au && pc != 0xFE4510u &&
         pc != 0xFE4512u && pc != 0xFE4516u && pc != 0xFE4518u &&
-        pc != 0xFE4520u && pc != 0xFE4522u) return 0;
-    op = fa18_bus_read16(pc);
-    fa18_bus_begin(pc);
-    fa18_bus_fetch(pc);
-    REG_PPC = pc;
-    REG_IR = op;
-    REG_PC = pc + 2;
+        pc != 0xFE4520u && pc != 0xFE4522u && pc != 0xFE44FCu && pc != 0xFE451Cu) return 0;
+    switch (pc) {
+    case 0xFE44F2u: op=0xC041; break;
+    case 0xFE44F4u: op=0x4641; break;
+    case 0xFE44F6u: case 0xFE4516u: op=0x2F0E; break;
+    case 0xFE44F8u: case 0xFE4518u: op=0x2C6E; break;
+    case 0xFE44FCu: case 0xFE451Cu: op=0x4EAE; break;
+    case 0xFE4500u: case 0xFE4520u: op=0x2C5F; break;
+    case 0xFE4502u: op=0xC36E; break;
+    case 0xFE4506u: op=0x806E; break;
+    case 0xFE450Au: op=0x33C0; break;
+    case 0xFE4510u: op=0x4200; break;
+    case 0xFE4512u: op=0x3D40; break;
+    default: op=0x4E75; break;
+    }
+    fa18_service_begin(pc,(uint16_t)op);
     switch (pc) {
     case 0xFE44F2u:
         result = fa18_os_potgo_requested((uint16_t)REG_D[0], (uint16_t)REG_D[1]);
@@ -65,13 +75,15 @@ int fa18_os_potgo_step(void) {
     case 0xFE44F6u:
     case 0xFE4516u:
         REG_A[7] -= 4;
-        m68k_write_memory_32(REG_A[7], REG_A[6]);
+        /* MOVE.L An,-(A7): the low word precedes the high word on 68000. */
+        m68k_write_memory_16(REG_A[7]+2,(uint16_t)REG_A[6]);
+        m68k_write_memory_16(REG_A[7],(uint16_t)(REG_A[6]>>16));
         set_long_flags(REG_A[6]);
         break;
     case 0xFE44F8u:
     case 0xFE4518u:
-        address = REG_A[6] + (int16_t)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
+        fa18_service_extension_words(1);
+        address = REG_A[6] + 0x22u;
         REG_A[6] = m68k_read_memory_32(address);
         break;
     case 0xFE4500u:
@@ -80,22 +92,22 @@ int fa18_os_potgo_step(void) {
         REG_A[7] += 4;
         break;
     case 0xFE4502u:
-        address = REG_A[6] + (int16_t)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
+        fa18_service_extension_words(1);
+        address = REG_A[6] + 0x28u;
         result = fa18_os_potgo_retained(m68k_read_memory_16(address), (uint16_t)REG_D[1]);
         m68k_write_memory_16(address, result);
         set_word_flags(result);
         break;
     case 0xFE4506u:
-        address = REG_A[6] + (int16_t)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
+        fa18_service_extension_words(1);
+        address = REG_A[6] + 0x28u;
         result = fa18_os_potgo_merge((uint16_t)REG_D[0], m68k_read_memory_16(address));
         REG_D[0] = (REG_D[0] & 0xFFFF0000u) | result;
         set_word_flags(result);
         break;
     case 0xFE450Au:
-        address = m68k_read_immediate_32(REG_PC);
-        REG_PC += 4;
+        fa18_service_extension_words(2);
+        address=0xDFF034u;
         m68k_write_memory_16(address, (uint16_t)REG_D[0]);
         set_word_flags((uint16_t)REG_D[0]);
         break;
@@ -107,15 +119,19 @@ int fa18_os_potgo_step(void) {
         FLAG_C = CFLAG_CLEAR;
         break;
     case 0xFE4512u:
-        address = REG_A[6] + (int16_t)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
-        result = fa18_os_potgo_cached((uint16_t)REG_D[0]);
+        fa18_service_extension_words(1);
+        address = REG_A[6] + 0x28u;
+        result = (uint16_t)REG_D[0]; /* CLR.B is its own preceding phase. */
         m68k_write_memory_16(address, result);
         set_word_flags(result);
         break;
     case 0xFE4522u:
         REG_PC = m68k_read_memory_32(REG_A[7]);
         REG_A[7] += 4;
+        break;
+    case 0xFE44FCu: case 0xFE451Cu:
+        fa18_service_extension_words(1);
+        fa18_service_call(REG_A[6]-(pc==0xFE44FCu?120u:126u));
         break;
     }
     USE_CYCLES(CYC_INSTRUCTION[op]);

@@ -1,0 +1,39 @@
+{
+  "schema": "amiga.cold_entry.v1",
+  "power_on": true,
+  "restored_state": false,
+  "host_runs": 7070,
+  "engine_frames": 7070,
+  "cycle": 502184381,
+  "clock_unit": "OCS colour clocks (Engine9000 get_cycles / CYCLE_UNIT)",
+  "registers": {
+    "d0": 0,
+    "d1": 0,
+    "d2": 0,
+    "d3": 0,
+    "d4": 0,
+    "d5": 0,
+    "d6": 0,
+    "d7": 0,
+    "a0": 0,
+    "a1": 0,
+    "a2": 0,
+    "a3": 0,
+    "a4": 0,
+    "a5": 0,
+    "a6": 0,
+    "a7": 12931292,
+    "sr": 0,
+    "pc": 12639920
+  },
+  "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+  "engine_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+  "playback_sha256": "cc425e61ea3ab2d900d39a41fdcd83793791ad9d52771c09ffc98132b438341d",
+  "input_offset": 3000,
+  "files": {
+    "state.bin": "3adc2c744786c1d729ecd88f1c474b5272bc0f22814b30492e7dc06093abaf92",
+    "chip.bin": "d63204f300b268a3ca6afef6f40cc98b8f58ef29e968c6395b02ee34dcccc23a",
+    "slow.bin": "76979ff379e6235a9b8c5a82c793e3e76fa0373f53de62bcb614f49a55291932"
+  },
+  "captured_ram_is_runtime_input": false
+}

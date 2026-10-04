@@ -10,6 +10,7 @@
 #include "m68kops.h"
 #include "bus.h"
 #include "machine.h"
+#include "service_phase.h"
 
 int fa18_os_vbeam_signature_matches(const uint8_t *rom) {
     static const uint8_t source[] = {
@@ -24,16 +25,16 @@ int fa18_os_vbeam_signature_matches(const uint8_t *rom) {
 int fa18_os_vbeam_step(void) {
     uint32_t pc = REG_PC, op, value;
     if (pc != 0xFC5ECEu && pc != 0xFC5ED4u && pc != 0xFC5ED6u && pc != 0xFC5EDCu) return 0;
-    op = fa18_bus_read16(pc);
-    fa18_bus_begin(pc);
-    fa18_bus_fetch(pc);
-    REG_PPC = pc;
-    REG_IR = op;
-    REG_PC = pc + 2;
+    switch (pc) {
+    case 0xFC5ECEu: op=0x2039; break;
+    case 0xFC5ED4u: op=0xE080; break;
+    case 0xFC5ED6u: op=0x0280; break;
+    default: op=0x4E75; break;
+    }
+    fa18_service_begin(pc,(uint16_t)op);
     switch (pc) {
     case 0xFC5ECEu:
-        (void)m68k_read_immediate_32(REG_PC);
-        REG_PC += 4;
+        fa18_service_extension_words(2);
         REG_D[0] = m68k_read_memory_32(0xDFF004u);
         FLAG_N = NFLAG_32(REG_D[0]);
         FLAG_Z = REG_D[0];
@@ -50,8 +51,7 @@ int fa18_os_vbeam_step(void) {
         USE_CYCLES(16); /* 68000 ASR.L immediate: 2 cycles per shift. */
         break;
     case 0xFC5ED6u:
-        (void)m68k_read_immediate_32(REG_PC);
-        REG_PC += 4;
+        fa18_service_extension_words(2);
         REG_D[0] = fa18_os_vbeam_row(REG_D[0]);
         FLAG_N = NFLAG_32(REG_D[0]);
         FLAG_Z = REG_D[0];
@@ -83,20 +83,20 @@ int fa18_os_wait_blit_step(void) {
     if (pc != 0xFC5A58u && pc != 0xFC5A60u && pc != 0xFC5A68u &&
         pc != 0xFC5A6Au && pc != 0xFC5A6Cu && pc != 0xFC5A6Eu &&
         pc != 0xFC5A70u && pc != 0xFC5A78u && pc != 0xFC5A7Au) return 0;
-    op = fa18_bus_read16(pc);
-    fa18_bus_begin(pc);
-    fa18_bus_fetch(pc);
-    REG_PPC = pc;
-    REG_IR = op;
-    REG_PC = pc + 2;
+    switch (pc) {
+    case 0xFC5A58u: case 0xFC5A60u: case 0xFC5A70u: op=0x0839; break;
+    case 0xFC5A68u: op=0x6602; break;
+    case 0xFC5A78u: op=0x66F2; break;
+    case 0xFC5A6Cu: case 0xFC5A6Eu: op=0x4E71; break;
+    default: op=0x4E75; break;
+    }
+    fa18_service_begin(pc,(uint16_t)op);
     switch (pc) {
     case 0xFC5A58u:
     case 0xFC5A60u:
     case 0xFC5A70u:
-        (void)m68k_read_immediate_16(REG_PC); /* Source bit number: 6. */
-        REG_PC += 2;
-        address = m68k_read_immediate_32(REG_PC);
-        REG_PC += 4;
+        fa18_service_extension_words(3); /* Bit 6 in DMACONR. */
+        address=0xDFF002u;
         FLAG_Z = fa18_os_blitter_busy((uint8_t)m68k_read_memory_8(address));
         break;
     case 0xFC5A68u:

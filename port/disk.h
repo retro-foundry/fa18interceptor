@@ -6,10 +6,8 @@
 
 /* An AmigaDOS OFS floppy image (ADF). The game reads its executable, pictures
  * and text files from it. */
-typedef struct {
-    uint8_t *image;
-    size_t size;
-} FA18Disk;
+#include "amiga/ofs.h"
+typedef AmigaOfs FA18Disk;
 
 int fa18_disk_open(FA18Disk *disk, const char *path);
 void fa18_disk_close(FA18Disk *disk);

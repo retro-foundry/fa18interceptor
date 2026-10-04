@@ -8,6 +8,7 @@
 #include "m68kops.h"
 #include "bus.h"
 #include "machine.h"
+#include "service_phase.h"
 
 int fa18_os_exec_interrupt_signature_matches(const uint8_t *rom) {
     static const uint8_t source[] = {
@@ -34,13 +35,10 @@ int fa18_os_exec_get_msg_signature_matches(const uint8_t *rom) {
     return rom && memcmp(rom + 0x1BEA, source, sizeof source) == 0;
 }
 
-static void move_interrupt_word(void) {
-    uint16_t value = (uint16_t)m68k_read_immediate_16(REG_PC);
-    uint32_t address;
-    REG_PC += 2;
-    address = m68k_read_immediate_32(REG_PC);
-    REG_PC += 4;
-    m68k_write_memory_16(address, value);
+static void move_interrupt_word(int enable) {
+    uint16_t value=enable?0xC000u:0x4000u;
+    fa18_service_extension_words(3);
+    m68k_write_memory_16(0xDFF09Au, value);
     FLAG_N = NFLAG_16(value);
     FLAG_Z = value;
     FLAG_V = VFLAG_CLEAR;
@@ -48,11 +46,10 @@ static void move_interrupt_word(void) {
 }
 
 static void adjust_interrupt_depth(int enable) {
-    int16_t displacement = (int16_t)m68k_read_immediate_16(REG_PC);
-    uint32_t address = REG_A[6] + displacement;
+    uint32_t address = REG_A[6] + 0x126u;
     uint8_t old_depth, new_depth;
     uint32_t result;
-    REG_PC += 2;
+    fa18_service_extension_words(1);
     old_depth = (uint8_t)m68k_read_memory_8(address);
     new_depth = enable ? fa18_os_enable_depth(old_depth) : fa18_os_disable_depth(old_depth);
     result = enable ? (uint32_t)old_depth - 1u : (uint32_t)old_depth + 1u;
@@ -67,16 +64,18 @@ int fa18_os_exec_interrupt_step(void) {
     uint32_t pc = REG_PC, op;
     if (pc != 0xFC1428u && pc != 0xFC1430u && pc != 0xFC1434u &&
         pc != 0xFC1436u && pc != 0xFC143Au && pc != 0xFC143Cu && pc != 0xFC1444u) return 0;
-    op = fa18_bus_read16(pc);
-    fa18_bus_begin(pc);
-    fa18_bus_fetch(pc);
-    REG_PPC = pc;
-    REG_IR = op;
-    REG_PC = pc + 2;
+    switch (pc) {
+    case 0xFC1428u: case 0xFC143Cu: op=0x33FC; break;
+    case 0xFC1430u: op=0x522E; break;
+    case 0xFC1436u: op=0x532E; break;
+    case 0xFC143Au: op=0x6C08; break;
+    default: op=0x4E75; break;
+    }
+    fa18_service_begin(pc,(uint16_t)op);
     switch (pc) {
     case 0xFC1428u:
     case 0xFC143Cu:
-        move_interrupt_word();
+        move_interrupt_word(pc==0xFC143Cu);
         break;
     case 0xFC1430u:
     case 0xFC1436u:
@@ -103,20 +102,29 @@ int fa18_os_exec_get_msg_step(void) {
         pc != 0xFC1C00u && pc != 0xFC1C02u && pc != 0xFC1C04u &&
         pc != 0xFC1C08u && pc != 0xFC1C0Cu && pc != 0xFC1C0Eu &&
         pc != 0xFC1C16u) return 0;
-    op = fa18_bus_read16(pc);
-    fa18_bus_begin(pc);
-    fa18_bus_fetch(pc);
-    REG_PPC = pc;
-    REG_IR = op;
-    REG_PC = pc + 2;
+    switch (pc) {
+    case 0xFC1BEAu: op=0x41E8; break;
+    case 0xFC1BEEu: case 0xFC1C0Eu: op=0x33FC; break;
+    case 0xFC1BF6u: op=0x522E; break;
+    case 0xFC1BFAu: op=0x2250; break;
+    case 0xFC1BFCu: op=0x2011; break;
+    case 0xFC1BFEu: op=0x6708; break;
+    case 0xFC1C00u: op=0x2080; break;
+    case 0xFC1C02u: op=0xC189; break;
+    case 0xFC1C04u: op=0x2348; break;
+    case 0xFC1C08u: op=0x532E; break;
+    case 0xFC1C0Cu: op=0x6C08; break;
+    default: op=0x4E75; break;
+    }
+    fa18_service_begin(pc,(uint16_t)op);
     switch (pc) {
     case 0xFC1BEAu: /* The MsgPort message list begins at offset $14. */
-        REG_A[0] += (int16_t)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
+        fa18_service_extension_words(1);
+        REG_A[0] += 0x14u;
         break;
     case 0xFC1BEEu:
     case 0xFC1C0Eu:
-        move_interrupt_word();
+        move_interrupt_word(pc==0xFC1C0Eu);
         break;
     case 0xFC1BF6u:
     case 0xFC1C08u:
@@ -149,8 +157,8 @@ int fa18_os_exec_get_msg_step(void) {
         REG_A[1] = value;
         break;
     case 0xFC1C04u:
-        value = (uint32_t)(int16_t)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
+        fa18_service_extension_words(1);
+        value=4;
         m68k_write_memory_32(REG_A[1] + value, REG_A[0]);
         FLAG_N = NFLAG_32(REG_A[0]);
         FLAG_Z = REG_A[0];

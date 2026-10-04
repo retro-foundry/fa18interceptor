@@ -1,5 +1,5 @@
-/* CPU bridge for Kickstart 1.3 graphics.library OwnBlitter/DisownBlitter.
- * The internal JSR targets remain on the ordinary ROM path. */
+/* Service phases for Kickstart 1.3 OwnBlitter/DisownBlitter. Nested helper
+ * calls retain the original guest stack; their implementations are separate. */
 #include "graphics_blitter_ownership.h"
 
 #include <string.h>
@@ -9,6 +9,7 @@
 #include "m68kops.h"
 #include "bus.h"
 #include "machine.h"
+#include "service_phase.h"
 
 int fa18_os_blitter_ownership_signature_matches(const uint8_t *rom) {
     static const uint8_t source[] = {
@@ -32,9 +33,8 @@ int fa18_os_blitter_ownership_signature_matches(const uint8_t *rom) {
     return rom && memcmp(rom + 0x64BC, source, sizeof source) == 0;
 }
 
-static uint32_t displacement_address(uint32_t base) {
-    int16_t displacement = (int16_t)m68k_read_immediate_16(REG_PC);
-    REG_PC += 2;
+static uint32_t displacement_address(uint32_t base, int16_t displacement) {
+    fa18_service_extension_words(1);
     return base + displacement;
 }
 
@@ -53,7 +53,7 @@ static void long_flags(uint32_t value) {
 }
 
 static void adjust_depth(int disown) {
-    uint32_t address = displacement_address(REG_A[6]);
+    uint32_t address = displacement_address(REG_A[6],0xAA);
     uint16_t old = m68k_read_memory_16(address);
     uint32_t result = disown ? (uint32_t)old - 1u : (uint32_t)old + 1u;
     uint16_t next = disown ? fa18_os_disown_blitter_depth(old) : fa18_os_own_blitter_depth(old);
@@ -71,8 +71,7 @@ static void write_predecrement_long(uint32_t value) {
 }
 
 static void save_registers(void) {
-    (void)m68k_read_immediate_16(REG_PC);
-    REG_PC += 2;
+    fa18_service_extension_words(1);
     write_predecrement_long(REG_A[1]);
     write_predecrement_long(REG_A[0]);
     write_predecrement_long(REG_D[1]);
@@ -81,8 +80,7 @@ static void save_registers(void) {
 }
 
 static void restore_registers(void) {
-    (void)m68k_read_immediate_16(REG_PC);
-    REG_PC += 2;
+    fa18_service_extension_words(1);
     REG_D[0] = m68k_read_memory_32(REG_A[7]);
     REG_A[7] += 4;
     REG_D[1] = m68k_read_memory_32(REG_A[7]);
@@ -105,13 +103,27 @@ int fa18_os_blitter_ownership_step(void) {
         pc != 0xFC6500u && pc != 0xFC6508u && pc != 0xFC6510u &&
         pc != 0xFC6516u && pc != 0xFC6518u && pc != 0xFC651Cu &&
         pc != 0xFC651Eu && pc != 0xFC6528u && pc != 0xFC652Cu &&
-        pc != 0xFC6536u && pc != 0xFC653Au) return 0;
-    op = fa18_bus_read16(pc);
-    fa18_bus_begin(pc);
-    fa18_bus_fetch(pc);
-    REG_PPC = pc;
-    REG_IR = op;
-    REG_PC = pc + 2;
+        pc != 0xFC6536u && pc != 0xFC653Au && pc != 0xFC64C8u &&
+        pc != 0xFC64DEu && pc != 0xFC6522u && pc != 0xFC6530u) return 0;
+    switch (pc) {
+    case 0xFC64BCu: op=0x526E; break;
+    case 0xFC64C0u: op=0x6602; break;
+    case 0xFC64D4u: op=0x536E; break;
+    case 0xFC64D8u: op=0x6D60; break;
+    case 0xFC64C4u: case 0xFC64DAu: case 0xFC651Eu: case 0xFC652Cu: op=0x48E7; break;
+    case 0xFC64CEu: case 0xFC64E4u: case 0xFC6528u: case 0xFC6536u: op=0x4CDF; break;
+    case 0xFC64E8u: case 0xFC6518u: op=0x4AAE; break;
+    case 0xFC64ECu: op=0x672A; break;
+    case 0xFC64EEu: case 0xFC64F6u: op=0x0839; break;
+    case 0xFC64FEu: op=0x6608; break;
+    case 0xFC6500u: case 0xFC6508u: op=0x33FC; break;
+    case 0xFC6510u: op=0x006E; break;
+    case 0xFC6516u: op=0x6014; break;
+    case 0xFC651Cu: op=0x66D0; break;
+    case 0xFC64C8u: case 0xFC64DEu: case 0xFC6522u: case 0xFC6530u: op=0x4EB9; break;
+    default: op=0x4E75; break;
+    }
+    fa18_service_begin(pc,(uint16_t)op);
     switch (pc) {
     case 0xFC64BCu:
     case 0xFC64D4u:
@@ -139,7 +151,7 @@ int fa18_os_blitter_ownership_step(void) {
         break;
     case 0xFC64E8u:
     case 0xFC6518u:
-        long_flags(m68k_read_memory_32(displacement_address(REG_A[6])));
+        long_flags(m68k_read_memory_32(displacement_address(REG_A[6],pc==0xFC64E8u?0x3A:0x42)));
         break;
     case 0xFC64ECu:
         if (COND_EQ()) REG_PC = 0xFC6518u;
@@ -147,10 +159,8 @@ int fa18_os_blitter_ownership_step(void) {
         break;
     case 0xFC64EEu:
     case 0xFC64F6u:
-        (void)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
-        address = m68k_read_immediate_32(REG_PC);
-        REG_PC += 4;
+        fa18_service_extension_words(3);
+        address=0xDFF002u;
         FLAG_Z = fa18_os_blitter_busy((uint8_t)m68k_read_memory_8(address));
         break;
     case 0xFC64FEu:
@@ -159,17 +169,16 @@ int fa18_os_blitter_ownership_step(void) {
         break;
     case 0xFC6500u:
     case 0xFC6508u:
-        value = (uint16_t)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
-        address = m68k_read_immediate_32(REG_PC);
-        REG_PC += 4;
+        fa18_service_extension_words(3);
+        value=0x8040u;
+        address=pc==0xFC6500u?0xDFF09Cu:0xDFF09Au;
         m68k_write_memory_16(address, value);
         word_flags(value);
         break;
     case 0xFC6510u:
-        value = (uint16_t)m68k_read_immediate_16(REG_PC);
-        REG_PC += 2;
-        address = displacement_address(REG_A[6]);
+        fa18_service_extension_words(1);
+        value=2;
+        address = displacement_address(REG_A[6],0xA8);
         value |= m68k_read_memory_16(address);
         m68k_write_memory_16(address, value);
         word_flags(value);
@@ -180,6 +189,12 @@ int fa18_os_blitter_ownership_step(void) {
     case 0xFC651Cu:
         if (COND_NE()) REG_PC = 0xFC64EEu;
         else USE_CYCLES(CYC_BCC_NOTAKE_B);
+        break;
+    case 0xFC64C8u: case 0xFC64DEu: case 0xFC6522u: case 0xFC6530u:
+        fa18_service_extension_words(2);
+        address=pc==0xFC64C8u?0xFCF324u:pc==0xFC64DEu?0xFD3BC4u:
+                pc==0xFC6522u?0xFCF384u:0xFD3BD4u;
+        fa18_service_call(address);
         break;
     case 0xFC64C2u:
     case 0xFC64D2u:

@@ -7,6 +7,7 @@
 #include "bus.h"
 #include "m68kcpu.h"
 #include "recomp_runtime.h"
+#include "../os/rom_audit_adapter.h"
 
 FA18Machine *fa18_machine;
 
@@ -370,9 +371,42 @@ void fa18_custom_write(FA18Machine *m, uint32_t reg, uint16_t value) {
 static int is_custom(uint32_t a) { return a >= 0xDFF000 && a < 0xDFF200; }
 static int is_cia(uint32_t a) { return (a & 0xFF0000) == 0xBF0000; }
 
+void fa18_machine_require_romfree(FA18Machine *m) {
+    const AmigaForbiddenRange ranges[]={{0xF80000u,0x1000000u},{0xF00000u,0xF10000u}};
+    if (!amiga_runtime_guard_init(&m->runtime_guard,ranges,2)) abort();
+}
+
+void fa18_machine_runtime_fault(void) {
+    const AmigaRuntimeGuard *g=&fa18_machine->runtime_guard;
+    const AmigaRuntimeFault *f=&g->fault;
+    fprintf(stderr,"ROM-free runtime fault=%u caller=%06X pc=%06X target=%06X cycle=%llu service=%s entry=%06X "
+            "rom_reads=%llu rom_instruction_fetches=%llu unsupported_services=%llu\n",
+        (unsigned)f->kind,f->service.caller,f->pc,f->target,(unsigned long long)f->cycle,
+        f->service.name?f->service.name:"unclassified",f->service.entry,
+        (unsigned long long)g->rom_reads,(unsigned long long)g->rom_instruction_fetches,
+        (unsigned long long)g->unsupported_services);
+    exit(EXIT_FAILURE);
+}
+
+static void guard_read(uint32_t address,unsigned size) {
+    AmigaRuntimeGuard *g=&fa18_machine->runtime_guard;
+    if (g->enabled && !amiga_runtime_guard_read(g,REG_PPC,address,size,(uint64_t)fa18_machine_now()))
+        fa18_machine_runtime_fault();
+}
+
+void fa18_machine_require_supported_target(uint32_t caller,uint32_t target) {
+    AmigaRuntimeGuard *g=&fa18_machine->runtime_guard;
+    if (g->enabled && amiga_runtime_guard_contains(g,target&0xFFFFFFu,2)) {
+        g->service.caller=caller;
+        amiga_runtime_guard_unsupported(g,caller,target,(uint64_t)fa18_machine_now());
+        fa18_machine_runtime_fault();
+    }
+}
+
 uint8_t fa18_bus_read8(uint32_t a) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
+    guard_read(a,1);
     if (a < 0x200000) {
         VECTOR_READ(a);
         return m->chip[a & (FA18_CHIP_SIZE - 1)];
@@ -398,6 +432,7 @@ uint8_t fa18_bus_read8(uint32_t a) {
 uint16_t fa18_bus_read16(uint32_t a) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
+    guard_read(a,2);
     if (a < 0x200000) {
         a &= FA18_CHIP_SIZE - 1;
         VECTOR_READ(a);
@@ -525,21 +560,24 @@ static void cpu_words(uint32_t a, int words) {
     fa18_bus_access(a);
     if (words > 1) fa18_bus_access(a + 2);
 }
-unsigned int m68k_read_memory_8(unsigned int a) { cpu_words(a, 1); return fa18_bus_read8(a); }
-unsigned int m68k_read_memory_16(unsigned int a) { cpu_words(a, 1); return fa18_bus_read16(a); }
-unsigned int m68k_read_memory_32(unsigned int a) { cpu_words(a, 2); return fa18_bus_read32(a); }
-void m68k_write_memory_8(unsigned int a, unsigned int v) { cpu_words(a, 1); fa18_bus_write8(a, (uint8_t)v); }
-void m68k_write_memory_16(unsigned int a, unsigned int v) { cpu_words(a, 1); fa18_bus_write16(a, (uint16_t)v); }
-void m68k_write_memory_32(unsigned int a, unsigned int v) { cpu_words(a, 2); fa18_bus_write32(a, v); }
-unsigned int m68k_read_immediate_16(unsigned int a) { fa18_bus_fetch(a); return fa18_bus_read16(a); }
+unsigned int m68k_read_memory_8(unsigned int a) { unsigned v; cpu_words(a, 1); v=fa18_bus_read8(a); fa18_rom_audit_access(AMIGA_AUDIT_DATA_READ,a,1,v); return v; }
+unsigned int m68k_read_memory_16(unsigned int a) { unsigned v; cpu_words(a, 1); v=fa18_bus_read16(a); fa18_rom_audit_access(AMIGA_AUDIT_DATA_READ,a,2,v); return v; }
+unsigned int m68k_read_memory_32(unsigned int a) { unsigned v; cpu_words(a, 2); v=fa18_bus_read32(a); fa18_rom_audit_access(AMIGA_AUDIT_DATA_READ,a,4,v); return v; }
+void m68k_write_memory_8(unsigned int a, unsigned int v) { cpu_words(a, 1); fa18_bus_write8(a, (uint8_t)v); fa18_rom_audit_access(AMIGA_AUDIT_DATA_WRITE,a,1,(uint8_t)v); }
+void m68k_write_memory_16(unsigned int a, unsigned int v) { cpu_words(a, 1); fa18_bus_write16(a, (uint16_t)v); fa18_rom_audit_access(AMIGA_AUDIT_DATA_WRITE,a,2,(uint16_t)v); }
+void m68k_write_memory_32(unsigned int a, unsigned int v) { cpu_words(a, 2); fa18_bus_write32(a, v); fa18_rom_audit_access(AMIGA_AUDIT_DATA_WRITE,a,4,v); }
+unsigned int m68k_read_immediate_16(unsigned int a) { unsigned v; fa18_bus_fetch(a); v=fa18_bus_read16(a); fa18_rom_audit_access(AMIGA_AUDIT_PROGRAM_READ,a,2,v); return v; }
 unsigned int m68k_read_immediate_32(unsigned int a) {
+    unsigned v;
     fa18_bus_fetch(a);
     fa18_bus_fetch(a + 2);
-    return fa18_bus_read32(a);
+    v=fa18_bus_read32(a);
+    fa18_rom_audit_access(AMIGA_AUDIT_PROGRAM_READ,a,4,v);
+    return v;
 }
-unsigned int m68k_read_pcrelative_8(unsigned int a) { cpu_words(a, 1); return fa18_bus_read8(a); }
-unsigned int m68k_read_pcrelative_16(unsigned int a) { cpu_words(a, 1); return fa18_bus_read16(a); }
-unsigned int m68k_read_pcrelative_32(unsigned int a) { cpu_words(a, 2); return fa18_bus_read32(a); }
+unsigned int m68k_read_pcrelative_8(unsigned int a) { return m68k_read_memory_8(a); }
+unsigned int m68k_read_pcrelative_16(unsigned int a) { return m68k_read_memory_16(a); }
+unsigned int m68k_read_pcrelative_32(unsigned int a) { return m68k_read_memory_32(a); }
 unsigned int m68k_read_disassembler_16(unsigned int a) { return fa18_bus_read16(a); }
 unsigned int m68k_read_disassembler_32(unsigned int a) { return fa18_bus_read32(a); }
 

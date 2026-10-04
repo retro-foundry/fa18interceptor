@@ -22,6 +22,9 @@ int64_t fa18_bus_blit(int64_t start, const uint8_t *diagram, int steps_per_word,
 void fa18_bus_instruction(void);
 /* The instruction at `pc` starts; the next access is its opcode fetch. */
 void fa18_bus_begin(uint32_t pc);
+/* Source-backed C service phase: preserve bus timing without reading an opcode
+ * from the original ROM. `opcode` supplies timing classification only. */
+void fa18_bus_begin_instruction(uint32_t pc, uint16_t opcode);
 /* The previous instruction has completed and execution continues at
  * `pc`: charge a jump's deferred fetches. Called before chipset service. */
 void fa18_bus_finish(uint32_t pc);

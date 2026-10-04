@@ -11,6 +11,7 @@
 #include "input.h"
 #include "recomp_ports.h"
 #include "loop_input.h"
+#include "../os/rom_audit_adapter.h"
 
 static uint8_t *read_file(const char *path, size_t *size) {
     FILE *f = fopen(path, "rb");
@@ -51,6 +52,7 @@ static void usage(void) {
             "                   [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
             "                   [--profile OUT.json] [--edges OUT.json] [--poison]\n"
             "                   [--rom-transitions OUT.json] (RAM-to-ROM entry inventory)\n"
+            "                   [--rom-audit OUT.json] (ROM instructions, nested edges, data and vectors)\n"
             "                   [--no-os-vbeam] (use the ROM VBeamPos)\n"
             "                   [--no-os-waitblit] (use ROM graphics.library WaitBlit)\n"
             "                   [--no-os-waitbovp] (use ROM graphics.library WaitBOVP)\n"
@@ -58,6 +60,7 @@ static void usage(void) {
             "                   [--no-os-exec-interrupts] (use ROM Exec Disable/Enable)\n"
             "                   [--no-os-getmsg] (use ROM Exec GetMsg)\n"
             "                   [--no-os-potgo] (use ROM potgo.resource WritePotgo)\n"
+            "                   [--no-os-task-lookup] (use ROM Exec FindTask/FindName)\n"
             "                   [--record OUT.fa18in] (with --window)  [--input IN.fa18in [--to-end]]\n");
 }
 
@@ -168,6 +171,7 @@ int main(int argc, char **argv) {
     int to_end = 0;
     const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL, *edges_path = NULL;
     const char *rom_transitions_path = NULL;
+    const char *rom_audit_path = NULL;
     int os_vbeam = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_waitblit = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_waitbovp = -1; /* default C with recomp, ROM in interpreter-only mode */
@@ -175,6 +179,7 @@ int main(int argc, char **argv) {
     int os_exec_interrupts = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_getmsg = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_potgo = -1; /* default C with recomp, ROM in interpreter-only mode */
+    int os_task_lookup = -1;
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     FA18Replay replay = {0};
@@ -220,6 +225,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--profile") && i + 1 < argc) profile_path = argv[++i];
         else if (!strcmp(argv[i], "--edges") && i + 1 < argc) edges_path = argv[++i];
         else if (!strcmp(argv[i], "--rom-transitions") && i + 1 < argc) rom_transitions_path = argv[++i];
+        else if (!strcmp(argv[i], "--rom-audit") && i + 1 < argc) rom_audit_path = argv[++i];
         else if (!strcmp(argv[i], "--os-vbeam")) os_vbeam = 1;
         else if (!strcmp(argv[i], "--no-os-vbeam")) os_vbeam = 0;
         else if (!strcmp(argv[i], "--os-waitblit")) os_waitblit = 1;
@@ -234,6 +240,8 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--no-os-getmsg")) os_getmsg = 0;
         else if (!strcmp(argv[i], "--os-potgo")) os_potgo = 1;
         else if (!strcmp(argv[i], "--no-os-potgo")) os_potgo = 0;
+        else if (!strcmp(argv[i], "--os-task-lookup")) os_task_lookup = 1;
+        else if (!strcmp(argv[i], "--no-os-task-lookup")) os_task_lookup = 0;
         else if (!strcmp(argv[i], "--poison")) fa18_ports_set_poison(1);
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--record") && i + 1 < argc) record_path = argv[++i];
@@ -257,6 +265,7 @@ int main(int argc, char **argv) {
     if (os_exec_interrupts < 0) os_exec_interrupts = use_recomp;
     if (os_getmsg < 0) os_getmsg = use_recomp;
     if (os_potgo < 0) os_potgo = use_recomp;
+    if (os_task_lookup < 0) os_task_lookup = use_recomp;
     fa18_recomp_init(use_recomp);
     if (os_vbeam) fa18_recomp_enable_vbeam_shim();
     if (os_waitblit) fa18_recomp_enable_wait_blit_shim();
@@ -265,11 +274,16 @@ int main(int argc, char **argv) {
     if (os_exec_interrupts) fa18_recomp_enable_exec_interrupt_shim();
     if (os_getmsg) fa18_recomp_enable_exec_get_msg_shim();
     if (os_potgo) fa18_recomp_enable_potgo_shim();
+    if (os_task_lookup) fa18_recomp_enable_exec_task_lookup_shim();
     if (rom_transitions_path && !fa18_recomp_track_rom_transitions()) {
         fprintf(stderr, "cannot allocate ROM transition inventory\n");
         return 1;
     }
     fa18_ports_init(ports_mode, ports_only);
+    if (rom_audit_path && (ports_mode != FA18_PORTS_OFF || !fa18_rom_audit_open())) {
+        fprintf(stderr,"--rom-audit requires --ports off and an allocated inventory\n");
+        return 2;
+    }
     if (restore_lead < 0) restore_lead = replay_path != NULL && start_frame == 0;
     if (replay_path && !fa18_replay_load(&replay, replay_path)) {
         fprintf(stderr, "cannot read E9K_INPUT_V1 replay %s\n", replay_path);
@@ -295,6 +309,7 @@ int main(int argc, char **argv) {
     if (window) {
 #ifdef FA18_WITH_SDL
         int result = run_window(m, &replay, start_frame, frames, scale);
+        if (rom_audit_path && !fa18_rom_audit_finish(rom_audit_path)) return 1;
         if (!fa18_bus_trace_close()) return 1;
         fa18_loop_finish();
         fa18_replay_free(&replay);
@@ -337,6 +352,10 @@ int main(int argc, char **argv) {
     if (!fa18_bus_trace_close()) return 1;
     if (ppm && !write_ppm(ppm, m->last_screen)) { fprintf(stderr, "cannot write %s\n", ppm); return 1; }
     if (fallback) fa18_recomp_write_fallback_log(fallback);
+    if (rom_audit_path && !fa18_rom_audit_finish(rom_audit_path)) {
+        fprintf(stderr,"cannot finish ROM dependency inventory %s\n",rom_audit_path);
+        return 1;
+    }
     if (profile_path) fa18_recomp_write_profile(profile_path);
     if (edges_path) fa18_recomp_write_edges(edges_path);
     if (rom_transitions_path && !fa18_recomp_write_rom_transitions(rom_transitions_path)) {
