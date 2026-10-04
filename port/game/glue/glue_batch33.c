@@ -52,11 +52,7 @@ void plot_registers(gaddr masks, gaddr writers) {
     plot_registers_colour(masks, writers, rd_u16(CURRENT_COLOUR));
 }
 
-int glue_C2F5F4(void) {
-    plot_pixel((int16_t)D(0), (int16_t)D(1));
-    plot_registers(PIXEL_MASKS, PLOT_ROWS_1);
-    return glue_return();
-}
+
 
 /* $C2F60A at a word boundary plots x then x - 1 through $C2F5F4, with D0/D1
  * restored sign-extended from the stack in between. */
@@ -80,11 +76,7 @@ void pair_registers(void) {
     pair_registers_colour(rd_u16(CURRENT_COLOUR));
 }
 
-int glue_C2F60A(void) {
-    plot_pixel_pair((int16_t)D(0), (int16_t)D(1));
-    pair_registers();
-    return glue_return();
-}
+
 
 /* $C2F5D4: the body with D0.w/D1.w pushed round it and popped back (the
  * words only). */
@@ -96,11 +88,7 @@ void restored_plot_registers(void) {
     flags_logic_w(D(0));
 }
 
-int glue_C2F5D4(void) {
-    plot_pixel((int16_t)D(0), (int16_t)D(1));
-    restored_plot_registers();
-    return glue_return();
-}
+
 
 /* $C2F5C0: D0 moved by SPAN_ORIGIN_Y and D1 by REDRAW_STATE_WORD first;
  * a column outside 0..319 returns D2 = -1. */
@@ -116,11 +104,7 @@ void plot_in_view_registers(void) {
     restored_plot_registers();
 }
 
-int glue_C2F5C0(void) {
-    plot_pixel_in_view((int16_t)D(0), (int16_t)D(1));
-    plot_in_view_registers();
-    return glue_return();
-}
+
 
 /* $C2F64E: the body with the pair masks and two-row writers, D0.w/D1.w
  * pushed round it. */

@@ -40,11 +40,7 @@ void block_registers(void) {
     else plot_registers(PAIR_MASKS, PLOT_ROWS_2);
 }
 
-int glue_C2F66E(void) {
-    plot_pixel_block(W(0), W(1));
-    block_registers();
-    return glue_return();
-}
+
 
 /* $C347F2: the walk in D0/D1 (MOVE.B keeps the upper bytes) and A0. */
 

@@ -48,11 +48,7 @@ void clear_mask_registers(void) {
     flags_logic_w(size);
 }
 
-int glue_C304B2(void) {
-    clear_polygon_mask();
-    clear_mask_registers();
-    return glue_return();
-}
+
 
 /* $C305AA: D0-D3 = x0, y0, x1, y1 (words), A4.w = last row. Live outputs at
  * its call sites: D4 (low word), A1, and the D4/D5 high words, which the
@@ -160,16 +156,4 @@ void line_registers_to_row(int16_t last_row) {
         SET_W(D(5), line.shift + 0x0B00 + (((colour >> last_bit) & 1) ? 0xFA : 0x0A));
         D(7) = rd_u32(A(2) + (uint32_t)(4 * (3 - last_bit))) + (uint32_t)line.offset;
     }
-}
-
-int glue_C2FA78(void) {
-    draw_line_to_row((int16_t)D(0), (int16_t)D(1), (int16_t)D(2), (int16_t)D(3), 0xC7);
-    line_registers_to_row(0xC7);
-    return glue_return();
-}
-
-int glue_C2FA7E(void) {
-    draw_line((int16_t)D(0), (int16_t)D(1), (int16_t)D(2), (int16_t)D(3));
-    line_registers();
-    return glue_return();
 }

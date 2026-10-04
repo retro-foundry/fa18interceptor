@@ -212,10 +212,10 @@ const FA18Port fa18_ports[] = {
      glue_C31226_step, 0xC318F6, 0, 0xC31224},
     /* render_polygon.c */
     {0xC30466, glue_C30466, "composite_polygon_plane", 0, 0, glue_C30466_step, 0xC304FA},
-    {0xC304B2, glue_C304B2, "clear_polygon_mask", 0, 0, glue_C304B2_step, 0xC304FA},
+    {0xC304B2, glue_C304B2, "clear_polygon_mask", 0, 0, glue_C304B2_complete_step, 0xC304FA, 0, 0, glue_C304B2_owns},
     {0xC305AA, glue_C305AA, "draw_polygon_edge", 0, 0, glue_C305AA_step, 0xC306B4},
     /* render_line.c */
-    {0xC2FA7E, glue_C2FA7E, "draw_line", 0, 0, glue_C2FA7E_step, 0xC2FD22, 0, 0xC2FA70},
+    {0xC2FA7E, glue_C2FA7E, "draw_line", 0, 0, glue_C2FA7E_complete_step, 0xC2FD22, 0, 0xC2FA70, glue_C2FA7E_owns},
     /* fixed_math.c */
     {0xC2E6DA, glue_C2E6DA, "sin_cos", 0, 0, glue_C2E6DA_step, 0xC2E750},
     /* audio.c */
@@ -223,7 +223,7 @@ const FA18Port fa18_ports[] = {
     {0xC24FE8, glue_C24FE8, "fade_master_volume", 0, 0, glue_C24FE8_step, 0xC2502E, 0, 0xC24FE6},
     /* text.c */
     {0xC330FE, glue_C330FE, "plot_glyph8", 0, 0, glue_C330FE_step, 0xC3316A},
-    {0xC32806, glue_C32806, "plot_glyph3", 0, 0, glue_C32806_step, 0xC328A6},
+    {0xC32806, glue_C32806, "plot_glyph3", 0, 0, glue_C32806_complete_step, 0xC328A6, 0, 0, glue_C32806_owns},
     /* numbers.c, input.c, render_page.c */
     {0xC25A08, glue_C25A08, "pack_display_value", 0, 0, glue_C25A08_step, 0xC25A3E},
     {0xC1715C, glue_C1715C, "read_mouse_buttons", 0, 0, glue_C1715C_step, 0xC1718E},
@@ -233,7 +233,7 @@ const FA18Port fa18_ports[] = {
     /* fixed_math.c */
     {0xC15138, glue_C15138, "attenuate_control_record_offset", 0, 0, glue_C15138_step, 0xC1518C, 0, 0, glue_C15138_owns},
     /* render_span.c */
-    {0xC310E2, glue_C310E2, "bound_span", 80},
+    {0xC310E2, glue_C310E2, "bound_span", 0, 0, glue_C310E2_complete_step, 0xC31120, 0, 0, glue_C310E2_owns},
     /* control_records.c */
     {0xC1EBC0, glue_C1EBC0, "read_record_fields", 0, 0, glue_C1EBC0_step, 0xC1EBE0},
     {0xC230B0, glue_C230B0, "release_lost_selection", 0, 0, glue_C230B0_step, 0xC230E8},
@@ -467,8 +467,8 @@ const FA18Port fa18_ports[] = {
     {0xC06C02, glue_C06C02, "fault_hook", 0, 0, glue_C06C02_step, 0xC06C04},
     {0xC1D5D8, glue_C1D5D8, "file_records_by_level", 0, 0, glue_C1D5D8_step, 0xC1D722, 0, 0xC1D3F4},
     /* batch 33: pixel plots */
-    {0xC2F5F4, glue_C2F5F4, "plot_pixel", 0, 0, glue_C2F5F4_step, 0xC2FA78, 0, 0xC2F5C0},
-    {0xC2F60A, glue_C2F60A, "plot_pixel_pair", 0, 0, glue_C2F60A_step, 0xC2FA78, 0, 0xC2F5C0},
+    {0xC2F5F4, glue_C2F5F4, "plot_pixel", 0, 0, glue_C2F5F4_complete_step, 0xC2F8D0, 0, 0, glue_C2F5F4_owns},
+    {0xC2F60A, glue_C2F60A, "plot_pixel_pair", 0, 0, glue_C2F60A_complete_step, 0xC2F8D0, 0, 0, glue_C2F60A_owns},
     /* batch 34: polygon preparation */
     {0xC301F6, glue_C301F6, "prepare_polygon", 0, 0, glue_C301F6_step, 0xC30466, 0, 0xC301F0},
     /* batch 35: polygon submission */
@@ -578,7 +578,7 @@ const FA18Port fa18_ports[] = {
     /* batch 55: corner edges */
     {0xC2E758, glue_C2E758, "project_corner_edges", 0, 0, glue_C2E758_step, 0xC2EC68},
     /* batch 56: fixed-row line, text lines and digits */
-    {0xC2FA78, glue_C2FA78, "draw_line_to_row", 0, 0, glue_C2FA78_step, 0xC2FD22, 0, 0xC2FA70},
+    {0xC2FA78, glue_C2FA78, "draw_line_to_row", 0, 0, glue_C2FA78_complete_step, 0xC2FD22, 0, 0xC2FA70, glue_C2FA78_owns},
     {0xC32726, glue_C32726, "format_digits", 0, 0, glue_C32726_complete_step, 0xC32806, 1, 0, glue_C32726_owns},
     {0xC32AB4, glue_C32AB4, "draw_text_in_view", 0, 0, glue_C32AB4_complete_step, 0xC32BD2, 1, 0, glue_C32AB4_owns},
     {0xC32AA6, glue_C32AA6, "print_bcd_in_view", 0, 0, glue_C32AA6_complete_step, 0xC32BD2, 1, 0, glue_C32AA6_owns},
@@ -587,8 +587,8 @@ const FA18Port fa18_ports[] = {
     {0xC2159E, glue_C2159E, "draw_side_face", 0, 0, glue_C2159E_complete_step, 0xC2168A, 1, 0, glue_C2159E_owns},
     {0xC210E6, glue_C210E6, "draw_quad_strip", 0, 0, glue_C210E6_complete_step, 0xC211DC, 1, 0, glue_C210E6_owns},
     /* batch 59: cockpit readouts */
-    {0xC2F5C0, glue_C2F5C0, "plot_pixel_in_view", 0, 0, glue_C2F5C0_step, 0xC2FA78, 0, 0xC2F5C0},
-    {0xC2F5D4, glue_C2F5D4, "plot_pixel", 0, 0, glue_C2F5D4_step, 0xC2FA78, 0, 0xC2F5C0},
+    {0xC2F5C0, glue_C2F5C0, "plot_pixel_in_view", 0, 0, glue_C2F5C0_complete_step, 0xC2F626, 0, 0, glue_C2F5C0_owns},
+    {0xC2F5D4, glue_C2F5D4, "plot_pixel", 0, 0, glue_C2F5D4_complete_step, 0xC2F5F4, 0, 0, glue_C2F5D4_owns},
     {0xC31A64, glue_C31A64, "draw_record_class_digits", 0, 0, glue_C31A64_complete_step, 0xC32806, 1, 0, glue_C31A64_owns},
     {0xC31ACC, glue_C31ACC, "draw_record_scale_digits", 0, 0, glue_C31ACC_complete_step, 0xC32806, 1, 0xC31ACA, glue_C31ACC_owns},
     {0xC31F4C, glue_C31F4C, "draw_speed_readout", 0, 0, glue_C31F4C_complete_step, 0xC32806, 1, 0, glue_C31F4C_owns},
@@ -624,7 +624,7 @@ const FA18Port fa18_ports[] = {
     /* batch 61b: target box */
     {0xC342D0, glue_C342D0, "draw_target_box", 0, 0, glue_C342D0_complete_step, 0xC34540, 1, 0, glue_C342D0_owns},
     /* batch 61d: ring point, pixel block */
-    {0xC2F66E, glue_C2F66E, "plot_pixel_block", 0, 0, glue_C2F66E_step, 0xC2FA78, 0, 0xC2F5C0},
+    {0xC2F66E, glue_C2F66E, "plot_pixel_block", 0, 0, glue_C2F66E_complete_step, 0xC2FA70, 0, 0xC2F60A, glue_C2F66E_owns},
     {0xC347F2, glue_C347F2, "plot_ring_point", 0, 0, glue_C347F2_complete_step, 0xC348B0, 1, 0, glue_C347F2_owns},
     /* batch 61e: missile cue */
     {0xC33DC8, glue_C33DC8, "update_missile_cue", 0, 0, glue_C33DC8_complete_step, 0xC33F54, 1, 0xC33DA4, glue_C33DC8_owns},
@@ -639,7 +639,7 @@ const FA18Port fa18_ports[] = {
     /* batch 63d: HUD stage */
     {0xC332BC, glue_C332BC, "draw_postflight_hud", 0, 0, glue_C332BC_complete_step, 0xC332FC, 1, 0xC332B4, glue_C332BC_owns},
     /* polygon to row C7 */
-    {0xC301F0, glue_C301F0, "prepare_polygon_to_row", 0, 0, glue_C301F0_step, 0xC30466, 0, 0xC301F0},
+    {0xC301F0, glue_C301F0, "prepare_polygon_to_row", 0, 0, glue_C301F0_complete_step, 0xC3040C, 0, 0, glue_C301F0_owns},
     /* zone exit */
     {0xC28E28, glue_C28E28, "check_zone_exit", 0, 0, glue_C28E28_complete_step, 0xC28F16, 0, 0xC28E16, glue_C28E28_owns},
     /* shape */
@@ -753,7 +753,7 @@ const FA18Port fa18_ports[] = {
     {0xC2FA22, glue_C2FA22, "apply_planar_lane_masks", 0, 0xC2F764, glue_C2FA22_step, 0xC2FA3C},
     /* selected clipped segment sibling */
     {0xC1FFA4, glue_C1FFA4, "draw_selected_segment_near", 5500},
-    {0xC2FD8C, glue_C2FD8C, "submit_active_planes", 0, 0, glue_C2FD8C_step, 0xC2FF46, 1},
+    {0xC2FD8C, glue_C2FD8C, "submit_active_planes", 0, 0, glue_C2FD8C_complete_step, 0xC2FF46, 1, 0, glue_C2FD8C_owns},
     {0xC26322, glue_C26322, "project_record_motion", 0, 0, glue_C26322_step, 0xC26352, 0, 0xC26322, glue_C26322_owns},
     {0xC26352, glue_C26352, "publish_motion_slot", 0, 0, glue_C26352_step, 0xC2639C, 0, 0xC26352, glue_C26352_owns},
     {0xC26C72, glue_C26C72, "project_scene_motion", 0, 0, glue_C26C72_step, 0xC26CC0, 0, 0xC26C72, glue_C26C72_owns},

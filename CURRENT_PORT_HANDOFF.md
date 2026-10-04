@@ -80,6 +80,44 @@ Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
 
+- Twelve complete renderer-helper upgrades retain 526 translated plus
+  sixty-six source-only entries: 592 rows, now 510 source-timed (444
+  translated plus sixty-six source-only). The batch owns 971 unique / 392
+  shared boundaries and thirteen distinct / sixteen per-owner child sites.
+  All 393,216 complete CPU/PC/full-SR/all-RAM calls pass. Controlled whole
+  calls cover 964/971; four NEG arms and three first-plane busy-loop PCs
+  have 81,920 independent production-segment calls. Original-child union
+  is 947/971, with every missing PC explicit. Ordered Custom writes and
+  terminal hardware/latches match using real device clocks and initial
+  blits; fixture packet totals remain explicit. Original children execute
+  actual source bytes in whole-C proofs; actual dispatch independently uses
+  production generated-child continuations. All 36,864 dispatch calls pass;
+  each mode has zero hardware-bearing / 12,288 hardware-free classifications
+  and 90,368 actual Custom writes. Sandbox plane baseline uses the original
+  suppressed-write policy and commits original logged packets at return.
+  Guard checks prove admission/counting, not completion of a generated cold
+  source continuation. Normal C passes every owner: 423,745 shadow /
+  530,198 sandbox; the generic checker is unchanged. All 36,236 isolated
+  live frames and seals match. Full 592-row gate passes 568,446 shadow /
+  443,870 sandbox, exact seals and poison frames. Original busy-read opt-ins
+  are restored; retained failed gates had a one-byte C45927 counter drift.
+  Local DMA passes 971 /31,072; fresh combined DMA and independent union
+  pass 28,931 /925,792 (previous 28,849 plus 971, overlap 889). All thirty-five
+  older generators and shared core/observers remain unchanged. GNU/MSVC
+  Release pass; build/ is 1.816 GiB. Family exact through 600; ALL remains
+  424 /34,144 pixels. Remaining exports are unchanged; unused
+  glue_active_planes.c callbacks are removed. See
+  analysis/routines/native_c_render_leaf_helpers.md and
+  analysis/figures/native_render_leaf_helpers_checkpoint.json.
+  Next thirty-seven renderer entry helpers own 550 unique /235 shared
+  boundaries, sealed in analysis/data/render_entry_helpers_scope_inventory.json:
+  C2F688, square entries, C301F6, C330FE and all thirty-two original writer
+  callbacks. Twenty-nine are registered upgrades, C2F688 is an unregistered
+  seeded entry and seven callbacks have source-only table/jump evidence.
+  Selected-segment indirect calls, older adapters, C2C392, C1612C graphics-wait
+  integration and the full original cold/indirect/callback graph remain
+  game-function work. Goal is not complete.
+
 - 526 translated plus sixty-six source-only entries remain registered:
   592 rows, 509 source-timed (443 translated plus sixty-six source-only).
   Fifteen complete ground/HUD rendering upgrades own 1,352 unique / zero
@@ -103,8 +141,8 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   exact through 600; ALL now differs at 424 / 34,144 pixels, versus previous
   416/361; retained as deferred timing evidence. Remaining older export bodies
   are unchanged. See analysis/routines/native_c_hud_render_parents.md and
-  analysis/figures/native_hud_render_parents_checkpoint.json. Next twelve
-  renderer helpers have 971 unique / 392 shared boundaries, original callers
+  analysis/figures/native_hud_render_parents_checkpoint.json. Those twelve
+  renderer helpers are now complete as described above, with original callers
   and both sixteen-entry pixel-writer tables sealed in
   analysis/data/render_leaf_helpers_scope_inventory.json. Selected-segment
   indirect calls, older adapters, C2C392 computed transfer, C1612C graphics-wait
@@ -1899,9 +1937,10 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
    is 526/624 translated plus sixty-six source-only callable entries. Next
-   reconstruct the fifteen ground/HUD mark/panel/blit parents sealed in
-   analysis/data/hud_render_parents_scope_inventory.json (1,352 unique /
-   zero shared boundaries). The fourteen tested/list/grid/lattice face and
+   reconstruct the thirty-seven renderer entry/writer helpers sealed in
+   analysis/data/render_entry_helpers_scope_inventory.json (550 unique /
+   235 shared boundaries). The fifteen ground/HUD parents and twelve renderer
+   helpers are now complete. The fourteen tested/list/grid/lattice face and
    edge parents are now complete, including C21060. Continue
    preserving original shared tails and actual child return PCs. The six
    stream/numeric/marker owners and two A0-base store upgrades are complete;

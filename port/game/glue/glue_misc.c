@@ -94,20 +94,7 @@ int glue_C330FE(void) {
 
 /* $C32806: as $C330FE with a 3-pixel cell; D2.w bits 4-7 select clear (0),
  * inverse (bits 4-5 only) or draw (bits 6-7). */
-int glue_C32806(void) {
-    uint32_t d3_in = D(3);
-    int shift = (int)((D(2) >> 12) & 15), rows = glyph_rows();
-    uint16_t mode_bits = (uint16_t)(D(2) & 0xF0);
-    gaddr glyph = D(4), dest = D(1);
-    GlyphMode mode = !mode_bits ? GLYPH_CLEAR : (mode_bits & 0xC0) ? GLYPH_DRAW : GLYPH_INVERSE;
 
-    /* D3 holds the last row as it was before the write. */
-    uint32_t last = rd_u32(dest + (gaddr)((rows - 1) * 40));
-    plot_glyph3(glyph, dest, shift, rows, mode);
-
-    glyph_epilogue(d3_in, shift, rows, glyph, dest, last);
-    return glue_return();
-}
 
 /* $C25A08: no register inputs; saves and restores everything it uses. */
 int glue_C25A08(void) {

@@ -16,6 +16,17 @@ Hand-written C is replacing the translated routines in source-backed batches;
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
 
+Twelve complete renderer-helper upgrades pass 393,216 whole CPU/PC/SR/RAM
+calls and 81,920 independent production-segment calls. Controlled whole
+calls cover 964/971 boundaries; seven cold PCs have separate evidence.
+Actual dispatch passes 36,864 calls; normal C passes every owner: 423,745
+shadow / 530,198 sandbox. All 36,236 isolated live frames and seals match;
+combined DMA passes 28,931 / 925,792. Source-timed entries rise to 510.
+See [renderer-helper proof](analysis/routines/native_c_render_leaf_helpers.md).
+Family timing matches through 600; ALL remains 424 / 34,144 pixels.
+Thirty-seven renderer entries and writer callbacks are next; full original
+game-function and callback coverage remains open.
+
 Fifteen complete ground/HUD rendering upgrades pass 491,520 whole CPU/PC/SR/
 RAM calls and 32,768 independent production-segment calls. Controlled whole
 entry coverage is 1,350/1,352; the two cold branches have separate evidence.
@@ -24,7 +35,8 @@ shadow / 42,601 sandbox. All 36,236 isolated live frames and seals match;
 combined DMA passes 28,849 / 923,168. Source-timed entries rise to 509. See
 [ground/HUD proof](analysis/routines/native_c_hud_render_parents.md).
 Family timing matches through 600; ALL first differs at 424 / 34,144 pixels,
-retained as deferred timing evidence. Twelve renderer helpers are next.
+retained as deferred timing evidence. Those twelve renderer helpers are
+now complete as described above.
 Original game-function and callback coverage remains open.
 
 Fourteen complete face-list/edge upgrades pass 458,752 full CPU/PC/SR/RAM

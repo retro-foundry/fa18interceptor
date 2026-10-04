@@ -960,3 +960,5 @@ int glue_C1ECFC_step(void);
 #include "glue_face_list_parents.h"
 
 #include "glue_hud_render_parents.h"
+
+#include "glue_render_leaf_helpers.h"

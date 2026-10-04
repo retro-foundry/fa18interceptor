@@ -47,10 +47,7 @@ void bound_span_registers(void) {
     flags_logic_w(D(5));
 }
 
-int glue_C310E2(void) {
-    bound_span_registers();
-    return glue_return();
-}
+
 
 /* $C1EBC0: D1 high byte selects the record -> D2, D3, D4 fields; A2 record;
  * D1.w keeps the doubled index. */
