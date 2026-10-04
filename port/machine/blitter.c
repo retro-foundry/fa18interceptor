@@ -83,6 +83,12 @@ static void chip_write(FA18Machine *m, uint32_t a, uint16_t v) {
 /* Persistent blitter data registers across blits (UAE blt_info). */
 static uint16_t bltaold, bltbold, bltbhold, bltddat;
 
+/* A new machine starts with the same clear holding registers as a fresh
+ * process. Keep this explicit so a previous session cannot leak into startup. */
+void fa18_blitter_reset_data(void) {
+    bltaold=bltbold=bltbhold=bltddat=0;
+}
+
 static int area_blit(FA18Machine *m, int width, int height) {
     uint16_t con0 = R(0x040), con1 = R(0x042);
     uint8_t mt = (uint8_t)con0;

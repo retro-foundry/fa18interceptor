@@ -49,17 +49,33 @@ set(FA18_MAP_PACKET_CORE
     ../map_packet_depth_stage.c)
 add_library(fa18_map_packet_core STATIC ${FA18_MAP_PACKET_CORE})
 target_include_directories(fa18_map_packet_core PRIVATE ../)
-add_executable(fa18_recomp
-    recomp_main.c recomp_runtime.c recomp_ports.c
+add_library(fa18_runtime STATIC
+    recomp_runtime.c recomp_ports.c
     ../amiga/rom_audit.c ../amiga/runtime_guard.c ../amiga/service_dispatch.c ../amiga/exec_lists.c
     loop_input.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
     ${FA18_GAME} ${FA18_OS} ${FA18_GENERATED})
-target_include_directories(fa18_recomp PRIVATE . generated ../machine ../game ../game/glue ../os)
+target_include_directories(fa18_runtime PUBLIC . generated ../machine ../game ../game/glue ../os)
+target_compile_definitions(fa18_runtime PRIVATE _CRT_SECURE_NO_WARNINGS)
+target_link_libraries(fa18_runtime PUBLIC fa18_musashi fa18_map_packet_core)
+
+add_executable(fa18_recomp recomp_main.c)
 target_compile_definitions(fa18_recomp PRIVATE FA18_WITH_SDL SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
-target_link_libraries(fa18_recomp PRIVATE fa18_musashi fa18_map_packet_core SDL2-static)
+target_link_libraries(fa18_recomp PRIVATE fa18_runtime SDL2-static)
+
+include(CTest)
+if(BUILD_TESTING)
+    add_executable(fa18_machine_startup_test ../../tools/amiga/machine_startup_test.c)
+    target_link_libraries(fa18_machine_startup_test PRIVATE fa18_runtime)
+    if(MSVC)
+        target_compile_options(fa18_machine_startup_test PRIVATE /UNDEBUG)
+    else()
+        target_compile_options(fa18_machine_startup_test PRIVATE -UNDEBUG)
+    endif()
+    add_test(NAME fa18_clean_machine_startup COMMAND fa18_machine_startup_test)
+endif()
 if(MSVC)
     target_compile_definitions(fa18_musashi PRIVATE _CRT_SECURE_NO_WARNINGS)
     target_compile_options(fa18_musashi PRIVATE /w)
     # Generated routines are large label-heavy functions.
-    target_compile_options(fa18_recomp PRIVATE /bigobj)
+    target_compile_options(fa18_runtime PRIVATE /bigobj)
 endif()

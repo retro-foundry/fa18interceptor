@@ -1,4 +1,5 @@
 #include "machine.h"
+#include "startup.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -741,11 +742,11 @@ void fa18_machine_run_frame(FA18Machine *m) {
  * running one Copper frame on a scratch copy of the machine (the restored
  * display registers are usually whatever the Copper last left). The copy
  * cannot start blits: the Copper danger bit is cleared. */
-static void seed_dma_maps(FA18Machine *m) {
+static int seed_dma_maps(FA18Machine *m) {
     FA18Machine *copy = malloc(sizeof *copy);
     int64_t saved_end = blit_end, saved_event = fa18_next_event;
     int saved_pending = blit_pending, v;
-    if (!copy) return;
+    if (!copy) return 0;
     memcpy(copy, m, sizeof *copy);
     copy->copper_danger = 0;
     fa18_machine = copy;
@@ -760,6 +761,7 @@ static void seed_dma_maps(FA18Machine *m) {
     blit_pending = saved_pending;
     fa18_next_event = saved_event;
     update_irq(m);
+    return 1;
 }
 
 /* ---- UAE savestate ------------------------------------------------------- */
@@ -901,5 +903,73 @@ int fa18_machine_load_state(FA18Machine *m, const uint8_t *s, size_t size,
     seed_dma_maps(m);
     fa18_bus_line(m, m->vpos, line_start);
     fa18_bus_timing = 1;
+    return 1;
+}
+
+static int startup_ram_address(uint32_t address,int stack) {
+    uint32_t chip_end=FA18_CHIP_SIZE,slow_end=FA18_SLOW_BASE+FA18_SLOW_SIZE;
+    if (address&1) return 0;
+    return (stack?address<=chip_end:address<chip_end) ||
+        (address>=FA18_SLOW_BASE && (stack?address<=slow_end:address<slow_end));
+}
+void fa18_blitter_reset_data(void);
+int fa18_machine_init(FA18Machine *m,const FA18MachineStartup *startup,
+                      char *error,size_t error_size) {
+    if (!m || !startup ||
+        ((uintptr_t)startup<(uintptr_t)m+sizeof *m && (uintptr_t)m<(uintptr_t)startup+sizeof *startup) ||
+        startup->vpos>=FA18_PAL_LINES ||
+        startup->hpos>=FA18_LINE_CCKS || !startup_ram_address(startup->pc,0) ||
+        !startup_ram_address(startup->usp,1) || !startup_ram_address(startup->isp,1)) {
+        if (error && error_size) snprintf(error,error_size,"invalid clean machine CPU/stack/beam profile");
+        return 0;
+    }
+    /* Explicitly reset the CPU context as well as the chipset. m68k_init()
+     * alone only installs tables/callbacks and retains an old CPU's state. */
+    memset(&m68ki_cpu,0,sizeof m68ki_cpu);
+    memset(m,0,sizeof *m);
+    fa18_machine=m; in_execute=0;
+    fa18_cycle_origin=fa18_next_event=line_start=last_boundary=blit_end=0;
+    frame_done=line_started=blit_pending=0; total_lines=last_input_line=0;
+    blit_zero=1; bltsize_issued=fa18_bltsize_at_draw_start=0;
+    fa18_blitter_reset_data();
+    fa18_bus_reset(); fa18_bus_timing=0;
+    fa18_machine_require_romfree(m);
+    memcpy(m->custom,startup->custom,sizeof m->custom);
+    memcpy(m->cia,startup->cia,sizeof m->cia);
+    m->dmacon=m->custom[0x096/2]&0x07FF;
+    m->intena=m->custom[0x09A/2]; m->intreq=m->custom[0x09C/2];
+    m->adkcon=m->custom[0x09E/2];
+    m->joy0dat=m->custom[0x00A/2]; m->joy1dat=m->custom[0x00C/2];
+    m->mouse_x=m->joy0dat&0xFF; m->mouse_y=m->joy0dat>>8;
+    m->cop1lc=custom_long(m,0x080); m->cop2lc=custom_long(m,0x084);
+    for (unsigned i=0;i<6;++i) m->bplpt[i]=custom_long(m,0x0E0+i*4);
+    m->vpos=(int)startup->vpos; m->hpos=(int)startup->hpos;
+    line_start=-(int64_t)startup->hpos*2;
+    m->copper_pc=m->cop1lc;
+    m->copper_waiting=1; m->copper_wait_v=m->copper_wait_vmask=0x1FF;
+    m68k_init(); m68k_set_cpu_type(M68K_CPU_TYPE_68000); fa18_cpu_timing_init();
+    /* Reset vectors are read only from the cleared RAM bank. Install the
+     * program handoff afterwards; CPU reset time is not game startup time. */
+    m68k_pulse_reset(); RESET_CYCLES=0;
+    m68k_set_reg(M68K_REG_SR,startup->sr);
+    m68k_set_reg(M68K_REG_USP,startup->usp); m68k_set_reg(M68K_REG_ISP,startup->isp);
+    for (unsigned i=0;i<8;++i) m68k_set_reg((m68k_register_t)(M68K_REG_D0+i),startup->d[i]);
+    for (unsigned i=0;i<7;++i) m68k_set_reg((m68k_register_t)(M68K_REG_A0+i),startup->a[i]);
+    m68k_set_reg(M68K_REG_A7,startup->sr&0x2000?startup->isp:startup->usp);
+    m68k_set_reg(M68K_REG_PC,startup->pc);
+    update_irq(m); fa18_bus_line(m,m->vpos,line_start);
+    fa18_bus_timing=1;
+    return 1;
+}
+int fa18_machine_prepare_run(FA18Machine *m,char *error,size_t error_size) {
+    if (!m || m!=fa18_machine || !m->runtime_guard.enabled || m->cycle || m->frame || in_execute) {
+        if (error && error_size) snprintf(error,error_size,"DMA preparation requires a stopped clean machine before its first frame");
+        return 0;
+    }
+    if (!seed_dma_maps(m)) {
+        if (error && error_size) snprintf(error,error_size,"cannot allocate initial DMA prediction state");
+        return 0;
+    }
+    fa18_bus_line(m,m->vpos,line_start);
     return 1;
 }

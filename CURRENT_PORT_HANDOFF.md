@@ -204,6 +204,18 @@ startup. A separate 300-frame audit/non-audit comparison is byte-identical.
 `fa18_romfree` is not delivered yet. Remaining Exec foundations, interrupt/exception paths,
 graphics LoadView and helpers, devices, DOS persistence, evidence-backed OS
 initialization and shutdown remain. Whole-game zero-ROM acceptance is pending.
+
+Explicit machine construction is implemented in `port/machine/startup.h`:
+`fa18_machine_init` clears all banks and resets CPU/timeline/blitter state under
+the ROM guard; `fa18_machine_prepare_run` seeds DMA after separately installing
+assets and OS structures. The caller supplies verified CPU/device state. This
+does not initialize the game's OS or use captured RAM. GNU and MSVC Release
+constructor fixtures pass without reading ROMs, states or game assets, including
+repeat initialization, live frames, failure atomicity and blitter-state clearing.
+CMake now shares `fa18_runtime` between the oracle executable and constructor
+test. The post-extraction MSVC full C-service/ROM-service replay comparison
+matches all 36,236 frames and seals. See `analysis/routines/romfree_machine_startup.md`.
+
 The converted phases are integrated into the reference runner. GNU and MSVC
 Release builds pass. The fresh 614-row full gate passes 571,427 shadow /458,087
 sandbox comparisons, exact final seals and poison frames. C services versus

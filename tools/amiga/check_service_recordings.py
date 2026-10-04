@@ -38,9 +38,11 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runner",type=Path,default=ROOT/"build/recomp/fa18_recomp.exe")
     parser.add_argument("--frames",type=int,help="optional bounded smoke run instead of full recordings")
+    parser.add_argument("--output",type=Path,default=ROOT/"build/amiga/service-recordings",
+                        help="isolated directory for replay outputs and proof metadata")
     args=parser.parse_args()
     if args.frames is not None and args.frames<1:parser.error("positive frame bound required")
-    out=ROOT/"build/amiga/service-recordings";out.mkdir(parents=True,exist_ok=True)
+    out=args.output.resolve();out.mkdir(parents=True,exist_ok=True)
     rows=[]
     for capture in sorted((ROOT/"captures/native").iterdir()):
         if not (capture/"input.fa18in").is_file():continue
