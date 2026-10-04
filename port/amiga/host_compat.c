@@ -327,11 +327,13 @@ int amiga_host_examine(AmigaHostCompat *c,uint32_t lock,uint8_t *fib,size_t size
     } else { c->error=205; return 0; }
     c->error=0; return 1;
 }
-void amiga_host_close(AmigaHostCompat *c) {
-    if (!c) return;
-    for (unsigned i=0;i<64;++i) if (c->files[i].active) amiga_host_file_close(c,i+1);
+int amiga_host_close(AmigaHostCompat *c) {
+    if (!c) return 1;
+    int ok=1;
+    for (unsigned i=0;i<64;++i) if (c->files[i].active && !amiga_host_file_close(c,i+1)) ok=0;
     for (unsigned i=0;i<64;++i) if (c->locks[i].active) amiga_host_unlock(c,i+1);
     memset(c,0,sizeof *c);
+    return ok;
 }
 int amiga_host_add_tail(AmigaHostCompat *c,uint32_t list,uint32_t node) {
     uint8_t *l=amiga_guest_range(&c->memory,list,12),*n=amiga_guest_range(&c->memory,node,8);

@@ -42,6 +42,16 @@ any remaining services. Unknown operations continue to fail with their
 caller, service, target and machine time. Faster flight simulation and smoother
 presentation remain performance work; no measured speedup is claimed here.
 
+Closing the host window stops execution before another guest frame. Window
+and headless runs share final diagnostics and resource cleanup: requested RAM,
+PPM and profiling outputs are written, ROM counters are reported, open save
+files are flushed/closed, and host directory/device bookkeeping is released.
+Save-close failures produce a nonzero exit status. This host shutdown is
+separate from verifying the original guest's full device/library teardown.
+Build `fa18_window_shutdown_test` and run
+`python tools/amiga/check_romfree_window.py` to exercise a real SDL close event
+with the dummy display driver and compare final RAM/CPU/pixels to headless.
+
 Current work prioritizes behavior-level compatibility and playable performance.
 Exact OS timing is deferred in `../../analysis/routines/romfree_exact_followup.md`.
 The ROM-backed `fa18_recomp` target remains a separate oracle. Reusable loading

@@ -36,7 +36,9 @@ typedef struct {
 } AmigaHostCompat;
 int amiga_host_init(AmigaHostCompat *,const AmigaGuestMemory *,const AmigaOfs *,
                     const char *save_directory,const AmigaHostRegion *reserved,size_t count);
-void amiga_host_close(AmigaHostCompat *);
+/* Flush/close files, free directory scans, and discard pending guest work.
+ * Returns zero if any file could not be closed; cleanup still completes. */
+int amiga_host_close(AmigaHostCompat *);
 uint32_t amiga_host_alloc(AmigaHostCompat *,uint32_t size,uint32_t flags);
 int amiga_host_free(AmigaHostCompat *,uint32_t address,uint32_t size);
 uint32_t amiga_host_available(const AmigaHostCompat *,uint32_t flags);

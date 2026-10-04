@@ -16,5 +16,5 @@ typedef struct {
  * services remain fatal, including original OS wrappers residing in RAM. */
 int fa18_romfree_load(FA18RomFreeProfile *,FA18Machine *,const char *adf_path,
                       const char *save_directory,int use_recomp,char *,size_t);
-void fa18_romfree_close(FA18RomFreeProfile *);
+int fa18_romfree_close(FA18RomFreeProfile *);
 #endif

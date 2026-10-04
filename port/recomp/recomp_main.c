@@ -64,7 +64,7 @@ static void usage(void) {
             "                     [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
             "                     [--profile OUT.json] [--edges OUT.json] [--poison]\n"
             "                     [--rom-audit OUT.json] [--fallback-log OUT.json]\n"
-            "Current startup stops at unimplemented services; menus/flight/save/exit acceptance is pending.\n"
+            "ADF-only menu/demo and flight-log save/reload verified; full mission/teardown acceptance pending.\n"
 #else
             "usage: fa18_recomp --state STATE.bin --rom KICK13.rom [--frames N] [--ppm OUT.ppm]\n"
             "                   [--ppm-every DIR] [--rgb444 OUT.bin] [--no-recomp] [--fallback-log OUT.json]\n"
@@ -113,13 +113,15 @@ static int restore_lead =
 
 /* Live 50 Hz window. Keys go to the Amiga keyboard; clicking the window
  * captures the mouse, F12 releases it. Recorded replay events still apply. */
-static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int frames, int scale, int vsync) {
+static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int frames, int scale, int vsync,
+                      int *completed_frames) {
     SDL_Window *win;
     SDL_Renderer *ren;
     SDL_Texture *tex;
     static uint32_t argb[FA18_SCREEN_W * FA18_SCREEN_H];
     uint64_t deadline;
     int running = 1, frame = 0, grabbed = 0;
+    *completed_frames=0;
     SDL_SetMainReady();
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
         fprintf(stderr, "SDL initialization failed: %s\n", SDL_GetError());
@@ -132,6 +134,8 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
                                   FA18_SCREEN_H) : NULL;
     if (!tex) {
         fprintf(stderr, "SDL display creation failed: %s\n", SDL_GetError());
+        if (ren) SDL_DestroyRenderer(ren);
+        if (win) SDL_DestroyWindow(win);
         SDL_Quit();
         return 1;
     }
@@ -175,6 +179,7 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
             default: break;
             }
         }
+        if (!running) break;
         fa18_replay_apply(replay, m, start_frame + frame + 1);
         if (frame == 0 && restore_lead) { fa18_machine_run_frame(m); fa18_loop_frame(); }
         fa18_machine_run_frame(m);
@@ -197,6 +202,7 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
     SDL_Quit();
+    *completed_frames=frame;
     return 0;
 }
 #endif
@@ -233,6 +239,7 @@ int main(int argc, char **argv) {
 #endif
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
+    int run_result=0;
     /* Host-paced presentation avoids coupling PAL frames to a second clock.
      * Keep the reference runner's presentation default for existing users. */
     int vsync =
@@ -417,21 +424,12 @@ int main(int argc, char **argv) {
     }
     if (window) {
 #ifdef FA18_WITH_SDL
-        int result = run_window(m, &replay, start_frame, frames, scale, vsync);
-        if (rom_audit_path && !fa18_rom_audit_finish(rom_audit_path)) return 1;
-        if (!fa18_bus_trace_close()) return 1;
-        fa18_loop_finish();
-        fa18_replay_free(&replay);
-#ifdef FA18_ROMFREE_MAIN
-        fa18_romfree_close(&clean_profile);
-#endif
-        free(m);
-        return result;
+        run_result = run_window(m, &replay, start_frame, frames, scale, vsync, &i);
 #else
         fprintf(stderr, "--window needs the CMake build (SDL2)\n");
         return 2;
 #endif
-    }
+    } else {
     if (rgb_path && !(rgb = fopen(rgb_path, "wb"))) { fprintf(stderr, "cannot write %s\n", rgb_path); return 1; }
     for (i = 0; (to_end ? fa18_loop_iterations() < fa18_loop_replay_end() : i < frames)
 #ifdef FA18_ROMFREE_MAIN
@@ -466,6 +464,7 @@ int main(int argc, char **argv) {
         }
     }
     if (rgb) fclose(rgb);
+    }
     if (!fa18_bus_trace_close()) return 1;
     if (ppm && !write_ppm(ppm, m->last_screen)) { fprintf(stderr, "cannot write %s\n", ppm); return 1; }
     if (fallback) fa18_recomp_write_fallback_log(fallback);
@@ -519,8 +518,15 @@ int main(int argc, char **argv) {
         (unsigned long long)m->runtime_guard.rom_reads,
         (unsigned long long)m->runtime_guard.rom_instruction_fetches,
         (unsigned long long)m->runtime_guard.unsupported_services);
-    fa18_romfree_close(&clean_profile);
+    if (!run_result && clean_profile.compat && clean_profile.compat->exited)
+        run_result=clean_profile.compat->exit_code;
+    if (!fa18_romfree_close(&clean_profile)) {
+        fprintf(stderr,"cannot flush or close a save file during shutdown\n");
+        if (!run_result) run_result=1;
+    }
 #endif
+    fa18_loop_finish();
+    fa18_replay_free(&replay);
     free(m);
-    return 0;
+    return run_result;
 }

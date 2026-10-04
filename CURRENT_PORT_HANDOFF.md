@@ -42,7 +42,7 @@ whole-game acceptance remains:
 | Menus and every reachable game mode from clean launch | Menu selections reach free flight, training, qualification, mission selection and flight log; all selectable mission starts exercised. Complete outcomes/progression remain pending |
 | Flight and postflight with original behavior and timing | Pending; existing ROM-backed recordings remain the oracle |
 | Save/load round trips using `--save-dir` | GNU/MSVC game UI reset/update writes original 78-byte config; fresh launch matches all 78 saved bytes. ADF hash unchanged |
-| Restart and clean exit | Pending |
+| Restart and clean exit | Host window close stops before another frame, produces diagnostics, releases host resources and reports save-close failures; original guest teardown/restart still pending |
 | Zero ROM reads/fetches and unsupported services over all scenarios | Zero over startup/demo, menu/mission-start and flight-log persistence checkpoints; full outcomes/progression/exit pending |
 
 The loose host layer is in `port/amiga/host_compat.{h,c}` and
@@ -77,6 +77,18 @@ back to the main menu. These tests exercise original code through frontend
 input, without injecting guest state. The reset command writes an all-zero
 record; compare reload at frame 1800 before original name/tour entry changes
 record fields. Original C11720 increments record+4 on entering a new tour.
+
+Window and headless runners now share final outputs and cleanup. The SDL
+close-event fixture `fa18_window_shutdown_test` uses a dummy display and
+posts SDL_QUIT after a rendered frame; `check_romfree_window.py` verifies
+the actual frame count, full final RAM/CPU and pixels against an equivalent
+headless run. Both vsync settings honor frame limits and emit zero ROM/fault
+counters. Neutral shutdown tests leave a buffered save and directory scan
+open, then verify that cleanup flushes bytes, releases handles/scans and
+clears pending device/wait state. This proves host-resource shutdown, not
+the original game's guest library/device teardown sequence. A 6,800-frame
+qualification-control probe also remains fault-free; its exact outcome has
+not yet been established, so do not count it as qualification-failure proof.
 
 ## Historical objective and order (superseded above)
 

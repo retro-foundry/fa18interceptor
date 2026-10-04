@@ -16,11 +16,13 @@
 static int fail(char *error,size_t size,const char *why) {
     if (error && size) snprintf(error,size,"ROM-free launch: %s",why); return 0;
 }
-void fa18_romfree_close(FA18RomFreeProfile *p) {
+int fa18_romfree_close(FA18RomFreeProfile *p) {
+    int ok=1;
     if (p) {
-        fa18_os_host_compat_detach(); amiga_host_close(p->compat); free(p->compat);
+        fa18_os_host_compat_detach(); ok=amiga_host_close(p->compat); free(p->compat);
         amiga_hunks_free(&p->image); amiga_ofs_close(&p->adf); memset(p,0,sizeof *p);
     }
+    return ok;
 }
 int fa18_romfree_load(FA18RomFreeProfile *p,FA18Machine *m,const char *adf_path,
                       const char *save_directory,int use_recomp,char *error,size_t error_size) {

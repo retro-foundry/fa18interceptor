@@ -102,6 +102,15 @@ int main(void) {
     assert(amiga_host_free_copper(c,cl) && amiga_host_free_copper(c,cp) && c->used_count==before);
     assert(remove("host-compat-test-saves/pilot")==0);
     assert(remove("host-compat-test-saves/d/x")==0);
-    amiga_host_close(c); free(c); free(chip); free(fast); amiga_ofs_close(&disk);
+    h=amiga_host_open(c,"shutdown",1006); assert(h && amiga_host_write(c,h,"shutdown",8)==8);
+    lock=amiga_host_lock(c,""); assert(lock && amiga_host_examine(c,lock,fib,260));
+    c->pending_count=1; c->pending[0].request=0x200200; c->wait_kind=3;
+    assert(amiga_host_close(c));
+    assert(!c->pending_count && !c->wait_kind && !c->used_count && !c->memory.count);
+    for(unsigned i=0;i<64;++i) assert(!c->files[i].active && !c->files[i].data && !c->locks[i].active && !c->locks[i].entries);
+    FILE *closed=fopen("host-compat-test-saves/shutdown","rb"); assert(closed);
+    assert(fread(bytes,1,8,closed)==8 && !memcmp(bytes,"shutdown",8)); assert(!fclose(closed));
+    assert(!remove("host-compat-test-saves/shutdown") && amiga_host_close(c));
+    free(c); free(chip); free(fast); amiga_ofs_close(&disk);
     puts("Host memory, libraries, ADF/overlay files, directory enumeration, keyboard and Copper contracts pass"); return 0;
 }
