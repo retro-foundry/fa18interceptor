@@ -77,7 +77,9 @@ raise source-timed entries to 510. Thirty-seven complete renderer entries and
 writer callbacks now raise translated coverage to 527/624, source-only
 coverage to 73 and source-timed entries to 518. Twelve complete selected-
 segment, projection and crossing upgrades retain registration and raise
-source-timed entries to 521.
+source-timed entries to 521. Twelve complete corner/view owners raise
+translated coverage to 537/624 and source-timed entries to 531; C200F6
+retains aggregate tail timing, with its resumable boundaries in C20100.
 Seventy-three original source-only callable entries are additionally recreated,
 proven and activated; they do not increase the seeded 624-entry denominator.
 The latest user instruction defers the minor Copper-fade difference: keep its frame-313
@@ -85,6 +87,45 @@ HUD/countdown evidence for later and continue complete readable game batches.
 Do not make fade timing the next work item or weaken the normal parity gates.
 
 ## Verified baseline
+
+- Twelve complete corner/view owners raise registration to 537 translated
+  plus 73 source-only entries: 610 rows, 531 source-timed (458 translated
+  plus 73 source-only). Two existing owners are upgraded and ten seeded
+  owners newly registered. Scope is 515 unique /106 shared instructions,
+  25 distinct child contracts /31 per-owner sites, four sealed oracle arrays,
+  original static incoming transfers and the C2CE5E pair template.
+  All 393,216 whole CPU/PC/full-SR/all-RAM calls pass. Controlled union is
+  515/515; C2CD28 covers 102/139 and the missing shared 37 PCs are covered
+  by C2D082. Original-child union is 433/515; all missing PCs remain explicit.
+  Original C2EA02 non-returning behavior passes 16,384 observations of 64
+  branches; no game return or cap is supplied. Actual dispatch passes 34,816
+  calls: eleven owners in all three modes and C200F6 synchronous ON only.
+  Custom packets are 110,086 ON /107,526 shadow /107,526 sandbox;
+  source classifications are hardware-free and distinct from fixture packets.
+  C200F6 restores saved pointers above its RTS return. Its whole C tail is
+  proven with aggregate 40+16 cycles; C20100 already owns all three resumable
+  boundaries. The initial standalone pending-frame failure is retained.
+  Normal C passes C2E758/C2CE82/C2D082: 7,083 shadow /7,962 sandbox. Nine
+  owners are uncalled and have independent whole fixtures; the unchanged
+  checker rejection C2CCA0: no completed comparisons is retained.
+  Full 610-row gate passes 568,446/443,870, zero mismatches, exact seals and
+  identical poison frames. All 36,236 isolated live frames/seals match.
+  Local DMA passes 515/16,480; fresh combined DMA passes 29,300/937,600,
+  independently reconciled as previous 29,042 plus 515 minus overlap 257.
+  All 38 older generator recipes produce unchanged outputs; shared core,
+  observers and protected files remain unchanged. Historically stale committed
+  command-dispatch output is retained exactly. Older corner_edges_registers
+  replay remains unchanged for its enclosing display owner. GNU/MSVC Release
+  pass; build/ is 1.974 GiB. Family exact through 600; ALL remains 424/34,144.
+  See analysis/routines/native_c_corner_view.md and
+  analysis/figures/native_corner_view_checkpoint.json.
+  Next complete C12950/C131BE control-record selectors and magnitude dispatch,
+  including both original guarded computed target sets and shared-frame tails.
+  Their source is read; no next implementation or registration decision yet.
+  C2C392 table extent is unresolved (at least twenty valid pointers, not eight).
+  Other larger parents, older partial adapters, C1612C graphics-wait integration
+  and full original cold/indirect/callback reconciliation remain game work.
+  Goal is not complete. Kickstart services and timing remain deferred.
 
 - Twelve complete selected-segment/projection/crossing upgrades retain
   527 translated plus 73 source-only entries: 600 rows, now 521 source-timed
@@ -109,14 +150,9 @@ Do not make fade timing the next work item or weaken the normal parity gates.
   Family matches through 600; ALL remains 424/34,144. See
   analysis/routines/native_c_segment_projection.md and
   analysis/figures/native_segment_projection_checkpoint.json.
-  Next audit complete C2E758 corner projection, C2CE82 and the view-record
-  construction owners C2CCA0/C2CD28/C2CD94/C2D082/C2D3A4, with original
-  reject/return peers C200F6/C203CC/C2058E/C20826/C22C70. C2E758's full
-  source/current adapter is read; remaining original instruction reports are
-  retained under build/recomp/segment_projection_next_corner.log for reading.
-  No next implementation yet. Larger parents, older partial adapters, C2C392,
-  C1612C graphics-wait integration and full original cold/indirect/callback
-  reconciliation still prevent game-function completion. Goal is not complete.
+  Those twelve corner/view owners are now complete above. Larger parents,
+  older adapters, C2C392, C1612C graphics-wait integration and original
+  cold/indirect/callback reconciliation remain game work. Goal is not complete.
 
 - Thirty-seven complete renderer entries/writer callbacks raise registration
   to 527 translated plus 73 source-only entries: 600 rows, 518 source-timed
@@ -2004,8 +2040,8 @@ item 1's failing combined checkpoint rather than chasing another early gap.
    adjust average fees, counters or replay/frame conditions. C11BFC remains
    timing debt; the HUD list is not an automatic transcription queue.
 2. Complete readable game owners in related batches. The current baseline
-   is 527/624 translated plus seventy-three source-only callable entries,
-   600 rows and 521 source-timed. The thirty-seven renderer entry/writer
+   is 537/624 translated plus seventy-three source-only callable entries,
+   610 rows and 531 source-timed. The thirty-seven renderer entry/writer
    helpers and twelve selected-segment/projection/crossing upgrades are now
    complete. Next audit complete corner projection and view-record construction
    owners listed in the verified baseline; their original children and return

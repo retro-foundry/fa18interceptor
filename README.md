@@ -12,9 +12,21 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 The game runs natively as C. A mechanical translation of the original 68000
 code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
-527 translated game entries and seventy-three original source-only callable entries are
+537 translated game entries and seventy-three original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
+
+Twelve complete corner/view owners pass 393,216 whole CPU/PC/SR/RAM calls,
+covering all 515 boundaries in controlled union. The original non-returning
+branch passes 16,384 observations. Dispatch passes 34,816 calls; three owners
+pass normal C at 7,083 shadow /7,962 sandbox, while nine remain uncalled with
+independent whole proofs. C200F6 retains aggregate tail timing. All 36,236
+isolated live frames/seals match; combined DMA passes 29,300/937,600.
+Source-timed entries rise to 531. See
+[corner/view proof](analysis/routines/native_c_corner_view.md).
+Family exact through 600; ALL remains 424/34,144. Control-record selectors,
+older partial adapters and full original callback coverage remain open.
+Kickstart services and timing are deferred.
 
 Twelve complete selected-segment/projection/crossing upgrades pass 393,216
 whole CPU/PC/SR/RAM calls, covering all 663 boundaries with controlled children.
@@ -23,8 +35,8 @@ Dispatch passes 36,864 calls; every owner passes normal C:
 106,838 shadow /126,128 sandbox. All 36,236 isolated live frames/seals match;
 combined DMA passes 29,042/929,344. Source-timed entries rise to 521.
 See [segment projection proof](analysis/routines/native_c_segment_projection.md).
-Family exact through 600; ALL remains 424/34,144. Corner/view construction,
-older partial adapters and full original callback coverage remain open.
+Family exact through 600; ALL remains 424/34,144. Those corner/view owners
+are complete above; older adapters and original callback coverage remain open.
 Kickstart services and timing are deferred.
 
 Thirty-seven complete renderer entries and writer callbacks pass 1,212,416

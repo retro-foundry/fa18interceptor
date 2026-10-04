@@ -88,8 +88,5 @@ void corner_edges_registers(int apply_stack) {
     SET_W(D(0), 8);
 }
 
-int glue_C2E758(void) {
-    project_corner_edges();
-    corner_edges_registers(1);
-    return glue_return();
-}
+/* Complete C2E758 is in glue_corner_view.c. The older enclosing
+ * display owner still consumes corner_edges_registers until its upgrade. */

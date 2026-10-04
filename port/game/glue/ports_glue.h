@@ -964,3 +964,5 @@ int glue_C1ECFC_step(void);
 #include "glue_render_leaf_helpers.h"
 #include "glue_render_entry_helpers.h"
 #include "glue_segment_projection.h"
+
+#include "glue_corner_view.h"

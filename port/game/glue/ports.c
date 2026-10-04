@@ -536,7 +536,21 @@ const FA18Port fa18_ports[] = {
     {0xC2CA92, glue_C2CA92, "steer_record_roll", 80},
     {0xC2CA26, glue_C2CA26, "steer_record_turn", 200},
     {0xC2CB86, glue_C2CB86, "steer_record_pitch", 150},
-    {0xC2CE82, glue_C2CE82, "rotate_by_view_matrix", 700},
+    {0xC2CE82, glue_C2CE82, "rotate_by_view_matrix", 0, 0, glue_C2CE82_complete_step, 0xC2CEBE, 0, 0xC2CE82, glue_C2CE82_owns},
+    {0xC22C70, glue_C22C70, "return_render_hook", 0, 0, glue_C22C70_complete_step, 0xC22C72, 0, 0xC22C70, glue_C22C70_owns},
+    {0xC20826, glue_C20826, "reject_edge_alignment", 0, 0, glue_C20826_complete_step, 0xC2082A, 0, 0xC20826, glue_C20826_owns},
+    {0xC2058E, glue_C2058E, "reject_split_square", 0, 0, glue_C2058E_complete_step, 0xC20592, 0, 0xC2058E, glue_C2058E_owns},
+    {0xC203CC, glue_C203CC, "reject_square_faces", 0, 0, glue_C203CC_complete_step, 0xC203D0, 0, 0xC203CC, glue_C203CC_owns},
+    /* C200F6 restores two saved pointers before RTS. Its enclosing C20100
+     * continuation already owns all three boundaries. A standalone stepped
+     * call would mistake the saved A1 for a return address; retain the exact
+     * whole C tail here (40 base cycles plus 16 observed MOVEM cycles). */
+    {0xC200F6, glue_C200F6, "return_indexed_face_list", 40},
+    {0xC2D3A4, glue_C2D3A4, "view_coordinate_distance", 0, 0, glue_C2D3A4_complete_step, 0xC2D3FC, 0, 0xC2D3A4, glue_C2D3A4_owns},
+    {0xC2D082, glue_C2D082, "draw_view_layers", 0, 0, glue_C2D082_complete_step, 0xC2D16C, 0, 0xC2D080, glue_C2D082_owns},
+    {0xC2CD94, glue_C2CD94, "draw_view_record_pairs", 0, 0, glue_C2CD94_complete_step, 0xC2CE5E, 0, 0xC2CD94, glue_C2CD94_owns},
+    {0xC2CD28, glue_C2CD28, "draw_view_record_layers", 0, 0, glue_C2CD28_complete_step, 0xC2D16C, 0, 0xC2CCBA, glue_C2CD28_owns},
+    {0xC2CCA0, glue_C2CCA0, "test_view_record", 0, 0, glue_C2CCA0_complete_step, 0xC2CD28, 0, 0xC2CCA0, glue_C2CCA0_owns},
     {0xC21C2E, glue_C21C2E, "split_record_and_stream_edges", 0, 0, glue_C21C2E_complete_step, 0xC21C86, 1, 0, glue_C21C2E_owns},
     /* batch 49: projected segment, top-plane crossing, in-sight flag, edge alignment */
     {0xC2ED70, glue_C2ED70, "segment_projected", 0, 0, glue_C2ED70_complete_step, 0xC2EE44, 0, 0xC2ED6C, glue_C2ED70_owns},
@@ -576,7 +590,7 @@ const FA18Port fa18_ports[] = {
     {0xC21A20, glue_C21A20, "offset_block_copies", 0, 0, glue_C21A20_complete_step, 0xC21B38, 1, 0, glue_C21A20_owns},
     {0xC217EA, glue_C217EA, "extend_block_scaled", 0, 0, glue_C217EA_complete_step, 0xC218C8, 1, 0, glue_C217EA_owns},
     /* batch 55: corner edges */
-    {0xC2E758, glue_C2E758, "project_corner_edges", 0, 0, glue_C2E758_step, 0xC2EC68},
+    {0xC2E758, glue_C2E758, "project_corner_edges", 0, 0, glue_C2E758_complete_step, 0xC2EA5A, 0, 0xC2E758, glue_C2E758_owns},
     /* batch 56: fixed-row line, text lines and digits */
     {0xC2FA78, glue_C2FA78, "draw_line_to_row", 0, 0, glue_C2FA78_complete_step, 0xC2FD22, 0, 0xC2FA70, glue_C2FA78_owns},
     {0xC32726, glue_C32726, "format_digits", 0, 0, glue_C32726_complete_step, 0xC32806, 1, 0, glue_C32726_owns},

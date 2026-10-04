@@ -114,24 +114,4 @@ int glue_C2CB86(void) {
     return glue_return();
 }
 
-/* $C2CE82: D3-D5 the vector. Leaves the row products and sums as the
- * MULS / ADD.L / ASR.L sequence does; A0 past the matrix. */
-int glue_C2CE82(void) {
-    int16_t v[3];
-    int32_t out[3];
-    gaddr m = VIEW_ANGLE_MATRIX;
-    int k;
-    for (k = 0; k < 3; k++) v[k] = W(3 + k);
-    rotate_by_view_matrix(v, out);
-    SET_W(D(6), (uint16_t)out[0]);
-    D(0) = (uint32_t)((int32_t)rd_s16(m + 6) * v[0]);
-    D(1) = (uint32_t)((int32_t)rd_s16(m + 8) * v[1]);
-    D(2) = (uint32_t)out[1];
-    D(3) = (uint32_t)((int32_t)rd_s16(m + 12) * v[0]);
-    D(4) = (uint32_t)((int32_t)rd_s16(m + 14) * v[1]);
-    D(5) = (uint32_t)out[2];
-    A(0) = m + 18;
-    return glue_return();
-}
-
 /* $C21C2E: A2 stream. The second split's registers, then D0 = 0 (MOVEQ). */
