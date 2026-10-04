@@ -113,6 +113,7 @@ static int restore_lead =
 #define SDL_MAIN_HANDLED
 #endif
 #include <SDL.h>
+#include "frame_pacer.h"
 
 /* Live 50 Hz window. Keys go to the Amiga keyboard; clicking the window
  * captures the mouse, F12 releases it. Recorded replay events still apply. */
@@ -122,7 +123,8 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
     SDL_Renderer *ren;
     SDL_Texture *tex;
     static uint32_t argb[FA18_SCREEN_W * FA18_SCREEN_H];
-    uint64_t deadline;
+    FA18FramePacer pacer;
+    uint64_t frequency;
     int running = 1, frame = 0, grabbed = 0, result = 0;
     FILE *timing=NULL;
     double microseconds_per_tick=0;
@@ -165,7 +167,8 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
         memcpy(previous_screen,m->last_screen,sizeof previous_screen);
         fprintf(timing,"frame,input_us,simulation_us,convert_us,present_us,wait_us,total_us,screen_changed\n");
     }
-    deadline = SDL_GetTicks64();
+    frequency = SDL_GetPerformanceFrequency();
+    fa18_frame_pacer_init(&pacer, SDL_GetPerformanceCounter(), frequency);
     while (running && (frames <= 0 || frame < frames)
 #ifdef FA18_ROMFREE_MAIN
            && !fa18_os_host_exited()
@@ -229,9 +232,16 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
         SDL_RenderCopy(ren, tex, NULL, NULL);
         SDL_RenderPresent(ren);
         if (timing) ticks[4]=SDL_GetPerformanceCounter();
-        deadline += 20; /* 50 Hz PAL */
-        while (SDL_GetTicks64() < deadline) SDL_Delay(1);
-        if (SDL_GetTicks64() > deadline + 100) deadline = SDL_GetTicks64();
+        {
+            uint64_t now = SDL_GetPerformanceCounter();
+            uint64_t deadline = fa18_frame_pacer_next(&pacer, now);
+            while (now < deadline) {
+                /* Sleep through the bulk of the wait, then use the precise
+                 * clock for the final millisecond rather than oversleeping. */
+                if (deadline - now > frequency / 1000) SDL_Delay(1);
+                now = SDL_GetPerformanceCounter();
+            }
+        }
         if (timing) {
             ticks[5]=SDL_GetPerformanceCounter();
             if (fprintf(timing,"%d,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%d\n",frame,

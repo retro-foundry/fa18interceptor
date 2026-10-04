@@ -80,3 +80,23 @@ final C10DAE/active/unpaused state and zero ROM/fault counters confirm flight.
 Raw ignored artifacts: `build/amiga/qualification-flight.{csv,ram}`. This is
 an active scene/cockpit sample, not real-monitor cadence or an improved 3D rate.
 The host has spare frame budget while guest frame timing still limits updates.
+
+The window clock now uses SDL's performance counter instead of millisecond
+deadlines. Fractional ticks accumulate at 50 Hz without drift. Most waiting
+sleeps; the final millisecond uses the precise counter. After missing a whole
+period, scheduling debt resets instead of allowing the former five-period
+catch-up burst. No guest frames are dropped or guest timers accelerated.
+GNU/MSVC pacing fixtures cover fractional clocks, small lateness and long
+stalls; all nine MSVC CTests and SDL window checks pass. A 5,050-frame clean
+free-flight replay retains identical complete RAM/CPU to headless and zero
+ROM/fault counters. The final guest callback is C10DAE, active and unpaused.
+Dummy-display frames 4,901-5,050 average 4.841 ms simulation, 1.305 ms
+presentation and 20.160 ms total, with 20 screen changes and occasional host
+stalls (maximum total 40.351 ms). These measurements are a functional check,
+not a controlled before/after improvement or real-monitor smoothness proof.
+Raw artifacts: `build/amiga/pacing-flight.{csv,ram}`.
+
+Prioritize faster scene production and responsive presentation over exhaustive
+OS cycle parity. Keep timing discrepancies in the exact follow-up rather than
+blocking playable development. Raising the 3D rate should preserve the game's
+simulation time and rules; merely speeding up all game timers is insufficient.

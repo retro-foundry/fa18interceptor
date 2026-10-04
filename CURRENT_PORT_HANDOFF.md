@@ -23,6 +23,14 @@ only. Keep existing exact implementations/oracles; record remaining exact work
 in `analysis/routines/romfree_exact_followup.md`. Do not require exhaustive
 phase/recording parity before advancing the playable launch.
 
+Latest steering explicitly prioritizes faster/smoother play. High-resolution
+host pacing now limits catch-up after stalls, with fractional-clock/stall
+fixtures passing GNU/MSVC. All nine MSVC CTests and SDL window checks pass;
+5,050-frame active free flight has identical complete window/headless RAM/CPU
+and zero ROM/fault counters. This does not raise the original 3D update rate;
+scene production remains the next performance target. See the performance
+follow-up for measurements and limits.
+
 The Amiga SDK is reference material only, not a build or runtime dependency.
 Reusable Amiga loading and compatibility facilities must be separated from
 Interceptor's addresses, resources, and startup configuration. Track unproved

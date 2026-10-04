@@ -67,6 +67,8 @@ target_link_libraries(fa18_romfree PRIVATE fa18_runtime SDL2-static)
 
 include(CTest)
 if(BUILD_TESTING)
+    add_executable(fa18_frame_pacer_test ../../tools/amiga/frame_pacer_test.c)
+    add_test(NAME fa18_host_frame_pacing COMMAND fa18_frame_pacer_test)
     add_executable(fa18_host_gameport_test ../../tools/amiga/host_gameport_test.c)
     target_link_libraries(fa18_host_gameport_test PRIVATE fa18_runtime)
     add_test(NAME fa18_host_gameport_contract COMMAND fa18_host_gameport_test)

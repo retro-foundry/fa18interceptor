@@ -17,6 +17,11 @@ Window presentation defaults to host pacing at 50 Hz with monitor vsync off.
 Use `--window --vsync on` to select monitor synchronization (which can reduce
 tearing but adds display waits). This changes presentation only: it does not
 increase the original game's 3D update rate or change gameplay timing.
+Host deadlines use a high-resolution clock, retaining fractional ticks, with
+at most one millisecond of active waiting per frame. After a missed whole
+period the host clock resets, avoiding a backlog of rushed presentations.
+Every guest frame still executes; a slow host can therefore fall behind real
+time rather than skipping game updates.
 
 For window profiling, add `--frame-times frames.csv`. Each presented frame
 records input, CPU/chipset simulation, RGB conversion, SDL presentation, pacing
