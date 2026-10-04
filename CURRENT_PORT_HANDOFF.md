@@ -14,6 +14,15 @@ Kickstart image or UAE savestate. Retain the CPU/translation and chipset model
 for this milestone, and retain the ROM-backed runner as a validation oracle.
 Original behavior and the existing machine timeline remain the authority.
 
+Later 2026-10-04 steering changes the service milestone: build a looser,
+host-backed compatibility layer and prioritize a playable, faster, smoother
+ROM-free game. Exact service instruction cycles, incidental register effects
+and OS-owned memory layouts are deferred. Preserve game rules, useful guest
+ABI contracts, resources, callbacks and save formats. The SDK remains reference
+only. Keep existing exact implementations/oracles; record remaining exact work
+in `analysis/routines/romfree_exact_followup.md`. Do not require exhaustive
+phase/recording parity before advancing the playable launch.
+
 The Amiga SDK is reference material only, not a build or runtime dependency.
 Reusable Amiga loading and compatibility facilities must be separated from
 Interceptor's addresses, resources, and startup configuration. Track unproved
@@ -29,7 +38,7 @@ whole-game ROM-free checkpoints has passed yet:
 
 | Checkpoint | Verified state |
 | --- | --- |
-| Original ADF launch with no ROM or savestate | Pending; no `fa18_romfree` executable yet |
+| Original ADF launch with no ROM or savestate | Target built; original startup reaches OpenLibrary wrapper C0655A and fails explicitly; menus pending |
 | Menus and every reachable game mode from clean launch | Pending |
 | Flight and postflight with original behavior and timing | Pending; existing ROM-backed recordings remain the oracle |
 | Save/load round trips using `--save-dir` | Pending |
@@ -340,7 +349,13 @@ activity, and machine cycles. All three existing recording audits retain their
 final RAM seals; they are warm coverage, not proof of every game mode or clean
 startup. A separate 300-frame audit/non-audit comparison is byte-identical.
 
-`fa18_romfree` is not delivered yet. Remaining Exec foundations, interrupt/exception paths,
+`fa18_romfree` now builds from the shared runtime and starts the original ADF;
+its first unimplemented OpenLibrary wrapper remains fatal. GNU/MSVC Release
+construct all 185 hunks/8,441 relocations and the process CPU handoff with no
+ROM/state/SDK in an isolated directory. Both execution modes stop at C0655A,
+cycle 500, with zero ROM reads/fetches and one named unsupported service. Five
+portable contracts include process/vector preflight and atomic rejection.
+Remaining Exec foundations, interrupt/exception paths,
 graphics LoadView and helpers, devices, DOS persistence, evidence-backed OS
 initialization and shutdown remain. Whole-game zero-ROM acceptance is pending.
 

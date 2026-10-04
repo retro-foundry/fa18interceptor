@@ -1,5 +1,6 @@
 #ifndef FA18_SERVICE_DISPATCH_ADAPTER_H
 #define FA18_SERVICE_DISPATCH_ADAPTER_H
+#include "../amiga/service_dispatch.h"
 enum {
     FA18_SERVICE_VBEAM,FA18_SERVICE_WAIT_BLIT,FA18_SERVICE_WAIT_BOVP,
     FA18_SERVICE_BLITTER_OWNERSHIP,FA18_SERVICE_EXEC_INTERRUPTS,
@@ -20,4 +21,9 @@ void fa18_services_reset(void);
 void fa18_service_enable(unsigned service,int enabled);
 int fa18_services_step(void);
 int fa18_services_requires_outer_dispatch(void);
+/* Optional embedding/profile services (including explicit unsupported RAM
+ * kernel entries). All entries are copied; names/contexts must outlive use.
+ * Installation is atomic, rejects overlap with built-in services and permits
+ * at most 16 extra families. Reset discards this profile registry. */
+int fa18_services_install_extra(const AmigaService *,size_t count);
 #endif

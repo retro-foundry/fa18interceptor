@@ -39,7 +39,9 @@ ADAPTER(fa18_os_exec_soft_interrupts_step)
 /* Pinned 1.3 ABI identifiers, isolated from the neutral dispatcher. Disabled
  * until the reference runner verifies the corresponding source signature.
  * A future clean-start profile can activate proven implementations directly. */
-static AmigaService services[FA18_SERVICE_COUNT]={
+enum { EXTRA_SERVICES=16 };
+static size_t extra_count;
+static AmigaService services[FA18_SERVICE_COUNT+EXTRA_SERVICES]={
     {0xFC5ECE,0xFC5EDE,0xFC5ECE,"graphics.VBeamPos",0,fa18_os_vbeam_step_adapter,NULL},
     {0xFC5A58,0xFC5A7C,0xFC5A58,"graphics.WaitBlit",0,fa18_os_wait_blit_step_adapter,NULL},
     {0xFC5E58,0xFC5E9E,0xFC5E58,"graphics.WaitBOVP",0,fa18_os_wait_bovp_step_adapter,NULL},
@@ -66,13 +68,30 @@ static AmigaService services[FA18_SERVICE_COUNT]={
 };
 void fa18_services_reset(void) {
     for (unsigned i=0;i<FA18_SERVICE_COUNT;++i) services[i].enabled=0;
+    for (unsigned i=0;i<EXTRA_SERVICES;++i) services[FA18_SERVICE_COUNT+i]=(AmigaService){0};
+    extra_count=0;
+}
+int fa18_services_install_extra(const AmigaService *entries,size_t count) {
+    if ((!entries && count) || count>EXTRA_SERVICES) return 0;
+    for (size_t i=0;i<count;++i) {
+        const AmigaService *s=&entries[i];
+        if (!s->name || !s->step || s->start>=s->end || s->end>0x1000000 ||
+            s->entry<s->start || s->entry>=s->end) return 0;
+        for (size_t j=0;j<FA18_SERVICE_COUNT;++j)
+            if (s->start<services[j].end && services[j].start<s->end) return 0;
+        for (size_t j=0;j<i;++j)
+            if (s->start<entries[j].end && entries[j].start<s->end) return 0;
+    }
+    for (size_t i=0;i<count;++i) services[FA18_SERVICE_COUNT+i]=entries[i];
+    for (size_t i=count;i<EXTRA_SERVICES;++i) services[FA18_SERVICE_COUNT+i]=(AmigaService){0};
+    extra_count=count; return 1;
 }
 void fa18_service_enable(unsigned service,int enabled) {
     if (service>=FA18_SERVICE_COUNT) abort();
     services[service].enabled=enabled!=0;
 }
 int fa18_services_step(void) {
-    int result=amiga_services_step(services,FA18_SERVICE_COUNT,REG_PC,REG_PPC,&fa18_machine->runtime_guard);
+    int result=amiga_services_step(services,FA18_SERVICE_COUNT+extra_count,REG_PC,REG_PPC,&fa18_machine->runtime_guard);
     if (result<0) {
         fprintf(stderr,"invalid service registry at PC=%06X cycle=%llu\n",REG_PC,
                 (unsigned long long)fa18_machine_now());

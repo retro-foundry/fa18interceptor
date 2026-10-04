@@ -1,5 +1,5 @@
-/* fa18_recomp: run the translated game from a UAE savestate on the native
- * machine layer and write the resulting frames. */
+/* Shared headless/window runner. The reference target restores a UAE state;
+ * FA18_ROMFREE_MAIN loads the original ADF with an explicit process handoff. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,7 +17,11 @@
 #include "../os/exec_memory_adapter.h"
 #include "../os/exec_scheduler_adapter.h"
 #include "../os/exec_interrupt_adapter.h"
+#ifdef FA18_ROMFREE_MAIN
+#include "../romfree/profile.h"
+#endif
 
+#ifndef FA18_ROMFREE_MAIN
 static uint8_t *read_file(const char *path, size_t *size) {
     FILE *f = fopen(path, "rb");
     uint8_t *data;
@@ -32,6 +36,7 @@ static uint8_t *read_file(const char *path, size_t *size) {
     *size = (size_t)n;
     return data;
 }
+#endif
 
 static int write_ppm(const char *path, const uint16_t *pixels) {
     FILE *f = fopen(path, "wb");
@@ -50,6 +55,16 @@ static int write_ppm(const char *path, const uint16_t *pixels) {
 
 static void usage(void) {
     fprintf(stderr,
+#ifdef FA18_ROMFREE_MAIN
+            "usage: fa18_romfree --adf PATH [--save-dir PATH] [--window [--scale N]]\n"
+            "                     [--frames N] [--ppm OUT.ppm] [--ppm-every DIR] [--rgb444 OUT.bin]\n"
+            "                     [--record OUT.fa18in] [--input IN.fa18in [--to-end]]\n"
+            "                     [--replay RUN.e9k --start-frame N] [--no-recomp] [--ram-out OUT.bin]\n"
+            "                     [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
+            "                     [--profile OUT.json] [--edges OUT.json] [--poison]\n"
+            "                     [--rom-audit OUT.json] [--fallback-log OUT.json]\n"
+            "Current startup stops at unimplemented services; menus/flight/save/exit acceptance is pending.\n"
+#else
             "usage: fa18_recomp --state STATE.bin --rom KICK13.rom [--frames N] [--ppm OUT.ppm]\n"
             "                   [--ppm-every DIR] [--rgb444 OUT.bin] [--no-recomp] [--fallback-log OUT.json]\n"
             "                   [--ram-out OUT.bin] [--replay RUN.e9k --start-frame N]\n"
@@ -72,7 +87,9 @@ static void usage(void) {
             "                   [--no-os-scheduler] (use ROM Exec task switching and callbacks)\n"
             "                   [--no-os-irq-services] (use ROM Exec IRQ roots, vectors, servers and Cause)\n"
             "                   [--no-os-memory] (use ROM Exec memory-list services)\n"
-            "                   [--record OUT.fa18in] (with --window)  [--input IN.fa18in [--to-end]]\n");
+            "                   [--record OUT.fa18in] (with --window)  [--input IN.fa18in [--to-end]]\n"
+#endif
+            );
 }
 
 /* Engine9000 recordings start from a UAE restore, and UAE's first frame
@@ -80,7 +97,12 @@ static void usage(void) {
  * before the second frame's input is read. Replays reproduce that; a state
  * written mid-session by the bridge (no restore in the reference) does not
  * need it: pass --no-restore-lead. */
-static int restore_lead = -1;
+static int restore_lead =
+#ifdef FA18_ROMFREE_MAIN
+    0;
+#else
+    -1;
+#endif
 
 #ifdef FA18_WITH_SDL
 #ifndef SDL_MAIN_HANDLED
@@ -176,13 +198,20 @@ static int run_window(FA18Machine *m, FA18Replay *replay, int start_frame, int f
 #endif
 
 int main(int argc, char **argv) {
-    const char *state_path = NULL, *rom_path = NULL, *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL,
+#ifdef FA18_ROMFREE_MAIN
+    const char *adf_path=NULL,*save_directory="local/saves";
+    FA18RomFreeProfile clean_profile={0};
+#else
+    const char *state_path = NULL, *rom_path = NULL;
+#endif
+    const char *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL,
                *fallback = NULL, *ram_out = NULL;
     const char *record_path = NULL, *input_path = NULL;
     int to_end = 0;
     const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL, *edges_path = NULL;
     const char *rom_transitions_path = NULL;
     const char *rom_audit_path = NULL;
+#ifndef FA18_ROMFREE_MAIN
     int os_vbeam = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_waitblit = -1; /* default C with recomp, ROM in interpreter-only mode */
     int os_waitbovp = -1; /* default C with recomp, ROM in interpreter-only mode */
@@ -197,11 +226,14 @@ int main(int argc, char **argv) {
     int os_memory = -1;
     int os_scheduler = -1;
     int os_irq_services = -1;
+#endif
     FA18PortMode ports_mode = FA18_PORTS_OFF;
     int frames = 10, use_recomp = 1, i, start_frame = 0, window = 0, scale = 3;
     FA18Replay replay = {0};
+#ifndef FA18_ROMFREE_MAIN
     size_t state_size, rom_size;
     uint8_t *state, *rom;
+#endif
     char error[256];
     FA18Machine *m;
     FILE *rgb = NULL;
@@ -219,8 +251,13 @@ int main(int argc, char **argv) {
     }
 
     for (i = 1; i < argc; i++) {
+#ifdef FA18_ROMFREE_MAIN
+        if (!strcmp(argv[i], "--adf") && i + 1 < argc) adf_path = argv[++i];
+        else if (!strcmp(argv[i], "--save-dir") && i + 1 < argc) save_directory = argv[++i];
+#else
         if (!strcmp(argv[i], "--state") && i + 1 < argc) state_path = argv[++i];
         else if (!strcmp(argv[i], "--rom") && i + 1 < argc) rom_path = argv[++i];
+#endif
         else if (!strcmp(argv[i], "--frames") && i + 1 < argc) frames = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--ppm") && i + 1 < argc) ppm = argv[++i];
         else if (!strcmp(argv[i], "--ppm-every") && i + 1 < argc) ppm_dir = argv[++i];
@@ -243,6 +280,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--edges") && i + 1 < argc) edges_path = argv[++i];
         else if (!strcmp(argv[i], "--rom-transitions") && i + 1 < argc) rom_transitions_path = argv[++i];
         else if (!strcmp(argv[i], "--rom-audit") && i + 1 < argc) rom_audit_path = argv[++i];
+#ifndef FA18_ROMFREE_MAIN
         else if (!strcmp(argv[i], "--os-vbeam")) os_vbeam = 1;
         else if (!strcmp(argv[i], "--no-os-vbeam")) os_vbeam = 0;
         else if (!strcmp(argv[i], "--os-waitblit")) os_waitblit = 1;
@@ -271,13 +309,22 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--no-os-irq-services")) os_irq_services = 0;
         else if (!strcmp(argv[i], "--os-memory")) os_memory = 1;
         else if (!strcmp(argv[i], "--no-os-memory")) os_memory = 0;
+#endif
         else if (!strcmp(argv[i], "--poison")) fa18_ports_set_poison(1);
         else if (!strcmp(argv[i], "--scale") && i + 1 < argc) scale = atoi(argv[++i]);
         else if (!strcmp(argv[i], "--record") && i + 1 < argc) record_path = argv[++i];
         else if (!strcmp(argv[i], "--input") && i + 1 < argc) input_path = argv[++i];
         else if (!strcmp(argv[i], "--to-end")) to_end = 1;
+        else if (!strcmp(argv[i], "--help")) { usage(); return 0; }
         else { usage(); return 2; }
     }
+#ifdef FA18_ROMFREE_MAIN
+    if (!adf_path || !*save_directory) { usage(); return 2; }
+    m=calloc(1,sizeof *m);
+    if (!m || !fa18_romfree_load(&clean_profile,m,adf_path,save_directory,use_recomp,error,sizeof error)) {
+        fprintf(stderr,"%s\n",m?error:"cannot allocate machine"); free(m); return 1;
+    }
+#else
     if (!state_path || !rom_path) { usage(); return 2; }
     state = read_file(state_path, &state_size);
     rom = read_file(rom_path, &rom_size);
@@ -316,6 +363,7 @@ int main(int argc, char **argv) {
     if (os_memory) fa18_os_exec_memory_enable_reference();
     if (os_scheduler) fa18_os_exec_scheduler_enable_reference();
     if (os_irq_services) fa18_os_exec_interrupt_services_enable_reference();
+#endif
     if (rom_transitions_path && !fa18_recomp_track_rom_transitions()) {
         fprintf(stderr, "cannot allocate ROM transition inventory\n");
         return 1;
@@ -354,6 +402,10 @@ int main(int argc, char **argv) {
         if (!fa18_bus_trace_close()) return 1;
         fa18_loop_finish();
         fa18_replay_free(&replay);
+#ifdef FA18_ROMFREE_MAIN
+        fa18_romfree_close(&clean_profile);
+#endif
+        free(m);
         return result;
 #else
         fprintf(stderr, "--window needs the CMake build (SDL2)\n");
@@ -438,5 +490,13 @@ int main(int argc, char **argv) {
                (unsigned long long)m->blits, (unsigned long long)m->line_blits, nonblack,
                m68k_get_reg(NULL, M68K_REG_PC), fa18_loop_iterations());
     }
+#ifdef FA18_ROMFREE_MAIN
+    printf("{\"rom_reads\": %llu, \"rom_instruction_fetches\": %llu, \"unsupported_services\": %llu}\n",
+        (unsigned long long)m->runtime_guard.rom_reads,
+        (unsigned long long)m->runtime_guard.rom_instruction_fetches,
+        (unsigned long long)m->runtime_guard.unsupported_services);
+    fa18_romfree_close(&clean_profile);
+#endif
+    free(m);
     return 0;
 }

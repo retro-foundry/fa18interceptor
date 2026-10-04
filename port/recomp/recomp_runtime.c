@@ -80,6 +80,57 @@ void fa18_recomp_init(int enabled) {
     }
 }
 
+static int range_owned(const FA18RecompCodeRange *ranges, size_t count,
+                       uint32_t start, uint32_t end) {
+    for (size_t i = 0; i < count; ++i)
+        if (start >= ranges[i].start && end <= ranges[i].end) return 1;
+    return 0;
+}
+
+int fa18_recomp_restrict_code(const FA18RecompCodeRange *ranges, size_t count) {
+    if (!ranges || !count || !entry_map || !code_bits || !disabled || depth) return 0;
+    for (size_t i = 0; i < count; ++i) {
+        uint32_t start = ranges[i].start, end = ranges[i].end;
+        if (start >= end || end > 0x1000000 || fold(start) < 0 ||
+            fold(end - 1) - fold(start) != (int)(end - start - 1)) return 0;
+        for (size_t j = 0; j < i; ++j)
+            if (start < ranges[j].end && ranges[j].start < end) return 0;
+    }
+    uint8_t *owned = malloc((size_t)fa18_recomp_function_count);
+    if (!owned) return 0;
+    for (int i = 0; i < fa18_recomp_function_count; ++i) {
+        uint32_t pc = fa18_recomp_functions[i].entry;
+        owned[i] = (uint8_t)range_owned(ranges, count, pc, pc + 2);
+    }
+    for (int i = 0; i < fa18_recomp_span_count; ++i) {
+        const FA18RecompSpan *s = &fa18_recomp_spans[i];
+        if (!range_owned(ranges, count, s->start, s->end)) owned[s->function] = 0;
+    }
+    for (int i = 0; i < fa18_recomp_function_count; ++i)
+        if (!owned[i] && !disabled[i]) {
+            disabled[i] = 1;
+            ++fa18_recomp_stats.disabled_functions;
+        }
+    free(owned);
+    memset(entry_map, 0, SPACE / 2 * sizeof *entry_map);
+    memset(code_bits, 0, SPACE / 8);
+    if (!enabled_flag) return 1;
+    for (int i = 0; i < fa18_recomp_entry_count; ++i) {
+        const FA18RecompEntry *e = &fa18_recomp_entries[i];
+        int f = fold(e->pc);
+        if (f >= 0 && !disabled[e->function]) entry_map[f / 2] = (uint32_t)i + 1;
+    }
+    for (int i = 0; i < fa18_recomp_span_count; ++i) {
+        const FA18RecompSpan *s = &fa18_recomp_spans[i];
+        if (disabled[s->function]) continue;
+        for (uint32_t a = s->start; a < s->end; ++a) {
+            int f = fold(a);
+            if (f >= 0) code_bits[f >> 3] |= (uint8_t)(1u << (f & 7));
+        }
+    }
+    return 1;
+}
+
 int fa18_recomp_enable_vbeam_shim(void) {
     int enabled = fa18_os_vbeam_signature_matches(fa18_machine->rom);
     fa18_service_enable(FA18_SERVICE_VBEAM,enabled);

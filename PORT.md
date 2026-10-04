@@ -75,6 +75,11 @@ across games, with Interceptor-specific configuration kept separate. See the
 active objective in CURRENT_PORT_HANDOFF.md; the older service deferral is
 superseded.
 
+Later 2026-10-04 steering prioritizes a playable, faster ROM-free build using
+behavior-level host compatibility services. Exact OS timing/register side
+effects are deferred; existing exact fixtures remain a later validation oracle.
+See `analysis/routines/romfree_exact_followup.md` for the return work.
+
 ## Recreating game-source batches (stage D)
 
 1. Pick a related batch: `python tools/recomp/port_candidates.py` lists

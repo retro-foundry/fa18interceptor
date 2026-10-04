@@ -21,6 +21,7 @@
  *                       TRAP, line A/F, undecodable bytes). */
 
 #include <stdint.h>
+#include <stddef.h>
 
 #ifdef FA18_RECOMP_GENERATED
 #include "m68kcpu.h"
@@ -60,6 +61,12 @@ extern FA18RecompStats fa18_recomp_stats;
 
 /* enabled=0 runs the whole program on the interpreter (differential baseline). */
 void fa18_recomp_init(int enabled);
+/* Limit translations to original executable storage. A function is excluded
+ * if any of its spans is outside these disjoint guest-RAM ranges, including
+ * inlined system wrappers recorded with the reference machine. Call after
+ * initialization and before execution. Invalid ranges leave the map intact. */
+typedef struct { uint32_t start, end; } FA18RecompCodeRange;
+int fa18_recomp_restrict_code(const FA18RecompCodeRange *ranges, size_t count);
 void fa18_recomp_note_write(uint32_t address, int size);
 void fa18_recomp_begin_slice(void);
 int fa18_recomp_pending_cycles(void);

@@ -8,6 +8,7 @@ cmake_minimum_required(VERSION 3.16)
 project(fa18_recomp LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+add_subdirectory(../amiga ${CMAKE_CURRENT_BINARY_DIR}/amiga-compat)
 
 include(FetchContent)
 set(SDL_SHARED OFF CACHE BOOL "" FORCE)
@@ -51,16 +52,18 @@ add_library(fa18_map_packet_core STATIC ${FA18_MAP_PACKET_CORE})
 target_include_directories(fa18_map_packet_core PRIVATE ../)
 add_library(fa18_runtime STATIC
     recomp_runtime.c recomp_ports.c
-    ../amiga/rom_audit.c ../amiga/runtime_guard.c ../amiga/service_dispatch.c ../amiga/exec_lists.c ../amiga/exec_task_services.c ../amiga/exec_memory.c ../amiga/exec_context.c ../amiga/exec_scheduler.c ../amiga/exec_interrupt_services.c
     loop_input.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
     ${FA18_GAME} ${FA18_OS} ${FA18_GENERATED})
 target_include_directories(fa18_runtime PUBLIC . generated ../machine ../game ../game/glue ../os)
 target_compile_definitions(fa18_runtime PRIVATE _CRT_SECURE_NO_WARNINGS)
-target_link_libraries(fa18_runtime PUBLIC fa18_musashi fa18_map_packet_core)
+target_link_libraries(fa18_runtime PUBLIC fa18_musashi fa18_map_packet_core amiga_compat)
 
 add_executable(fa18_recomp recomp_main.c)
 target_compile_definitions(fa18_recomp PRIVATE FA18_WITH_SDL SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_recomp PRIVATE fa18_runtime SDL2-static)
+add_executable(fa18_romfree recomp_main.c ../romfree/profile.c)
+target_compile_definitions(fa18_romfree PRIVATE FA18_ROMFREE_MAIN FA18_WITH_SDL SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
+target_link_libraries(fa18_romfree PRIVATE fa18_runtime SDL2-static)
 
 include(CTest)
 if(BUILD_TESTING)

@@ -50,6 +50,10 @@ def source_files(main: Path) -> list[Path]:
         Path("port/amiga/exec_context.c"),
         Path("port/amiga/exec_scheduler.c"),
         Path("port/amiga/exec_interrupt_services.c"),
+        Path("port/amiga/exec_bootstrap.c"),
+        Path("port/amiga/guest_memory.c"),
+        Path("port/amiga/hunk_loader.c"),
+        Path("port/hunk.c"), Path("port/disk.c"),
     ]
     globbed: list[Path] = []
     for pattern in ("port/recomp/generated/*.c", "port/game/*.c",
@@ -77,9 +81,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--main", type=Path, default=DEFAULT_MAIN)
+    parser.add_argument("--romfree",action="store_true",help="build the clean ADF launcher")
     parser.add_argument("--replace-source", action="append", default=[], metavar="OLD=NEW")
     parser.add_argument("--jobs", type=int, default=8)
     args = parser.parse_args()
+    if args.romfree:
+        if args.main!=DEFAULT_MAIN:parser.error("--romfree uses the shared runner entry")
+        if args.output==DEFAULT_OUTPUT:args.output=Path("build/recomp/fa18_romfree.exe")
     if args.output.is_absolute() or args.main.is_absolute():
         parser.error("source and output paths must be relative to the repository")
     if args.jobs <= 0:
@@ -94,6 +102,7 @@ def main() -> int:
 
     check_duplicate_globals()
     original_sources = source_files(args.main)
+    if args.romfree: original_sources.append(Path("port/romfree/profile.c"))
     sources = [replacements.get(source, source) for source in original_sources]
     missing = [str(source) for source in sources if not (ROOT / source).is_file()]
     if missing:
@@ -104,6 +113,8 @@ def main() -> int:
 
     obj_root = Path("build/recomp/obj")
     objects = [obj_root / source.with_suffix(source.suffix + ".o") for source in sources]
+    if args.romfree:
+        objects[sources.index(args.main)]=obj_root/"port/recomp/recomp_main_romfree.c.o"
     ninja_file = Path("build/recomp") / (args.output.name + ".ninja")
     (ROOT / ninja_file).parent.mkdir(parents=True, exist_ok=True)
     for obj in objects:
@@ -118,12 +129,16 @@ def main() -> int:
         "  command = gcc $cflags -MMD -MF $out.d -c $in -o $out",
         "  depfile = $out.d",
         "  deps = gcc",
+        "rule cc_romfree",
+        "  command = gcc $cflags -DFA18_ROMFREE_MAIN -MMD -MF $out.d -c $in -o $out",
+        "  depfile = $out.d",
+        "  deps = gcc",
         "rule link",
         "  command = gcc $cflags -o $out @$out.rsp",
         "  rspfile = $out.rsp",
         "  rspfile_content = $in",
     ]
-    lines.extend(f"build {ninja_path(obj)}: cc {ninja_path(source)}"
+    lines.extend(f"build {ninja_path(obj)}: {'cc_romfree' if args.romfree and source==args.main else 'cc'} {ninja_path(source)}"
                  for source, obj in zip(sources, objects))
     lines.append(f"build {ninja_path(args.output)}: link " +
                  " ".join(ninja_path(obj) for obj in objects))
