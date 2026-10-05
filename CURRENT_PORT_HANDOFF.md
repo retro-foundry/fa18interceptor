@@ -217,6 +217,41 @@ effect owners, but still needs those data/host/runtime dependencies. The bounded
 native game does not call it yet; the playable reference remains emulated.
 The full emulation-free goal remains active. Commit each validated batch.
 
+Audio update progress: `port/audio_update.c/.h` now implements complete
+$C50158 voice updates, $C50212 sound-program execution, $C501E0 channel settings
+and $C24FE8 master fades with native state. It shares actual command voices,
+mutable program data, slots and fading; aliases in channel descriptors retain
+original update order. A program-ending tick still outputs and slides its
+original voice. Source signed clamps, slide/delay wrap, loop-zero behavior and
+fade-overflow branches are preserved.
+
+The user asked to build reusable components for future ports. The portable
+`port/voice_program.c/.h` executor and slide updates now build as the independent
+`port_voice_program` library, with no game/CPU/bus/ROM/SDL/hardware dependencies.
+Command voice/program-value types alias those canonical types. F/A-18 keeps
+selector import, output rules, channel binding and fades in its adapter.
+`port/REUSABLE_COMPONENTS.md` records this boundary and the existing generic
+OFS/HUNK interfaces. Extract further common modules when a real caller needs
+them, preserving game-specific behavior and original proofs.
+
+Validation passes 16,384 complete original calls and all 105/105 instruction
+boundaries, using all five original sound programs and real original children.
+All Chip/Slow RAM outside the original ABI stack $C7FD00..$C7FF00, complete
+RAM at each output/acknowledgement, ordered payloads and final channel/interrupt
+state match. Aliased/permuted slots, reordered output descriptors, idle/ending
+programs, slides and signed/overflow limits are covered. The command-effects
+regression still passes 12,288 calls and all 278 boundaries. GNU strict-warning
+core/audio contracts, GNU symbol inspection, MSVC builds and all ten input/audio
+CTests pass; the unchanged native guard passes 434 files. See
+`analysis/routines/native_audio_update.md` and its checkpoint.
+
+Continue with actual sample playback and tick scheduling, the $C1718E input
+callback and native registration/display services, original assets, and full
+native loop composition. Neither linking these libraries into the bounded
+native game nor their isolated proofs completes the game. Its loop still does
+not call the new command/audio components; the playable reference is emulated.
+The complete emulation-free goal remains active; commit each validated batch.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

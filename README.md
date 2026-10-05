@@ -39,8 +39,12 @@ comparisons, including every signed-index destination and shared-field alias.
 Both complete native command parents now pass 16,384 comparisons, including
 eject's nested publication and actual callback registration/removal bodies.
 The remaining command message/status/voice/space/sweep game children now pass
-12,288 original calls covering all 278 instruction boundaries. Host services,
-audio updates/playback, asset loading and full runtime integration remain open. See
+12,288 original calls covering all 278 instruction boundaries. Native audio
+program/update/output/fade owners add 16,384 comparisons at all 105 boundaries,
+with an independent portable voice-program core reusable by future ports.
+Host services, sample playback, asset loading and full runtime integration remain open. See
+[reusable components](port/REUSABLE_COMPONENTS.md),
+[native audio updates](analysis/routines/native_audio_update.md),
 [native command effects](analysis/routines/native_command_effects.md),
 [native command parents](analysis/routines/native_command_parent.md),
 [native queue publication](analysis/routines/native_command_queue.md),

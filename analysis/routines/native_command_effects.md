@@ -37,10 +37,12 @@ high/low byte. No duplicate flags are synchronized around calls.
 The audio owner requires actual imported voices, mutable program values,
 channel masks, seed and gates. Acknowledgement is an explicit native host
 service, with channel identity and original mask payload. The component
-implements game-side sound starts and releases; voice-program updates,
-samples, mixing/output, asset loading and full runtime composition are still
-pending. The command voice fields are shared with that future audio update
-owner, rather than mirrored in a second register representation.
+implements game-side sound starts and releases. Voice-program updates,
+slides, output settings and fading now have a real native owner in
+`audio_update.c`, using the independent `voice_program.c` core and the same
+voice objects/program values. See [native audio updates](native_audio_update.md).
+Samples, mixing/output, asset loading and full runtime composition remain
+pending. The voice fields are shared rather than mirrored in another state.
 
 Run `python tools/recomp/check_native_command_effects.py`. The validator seals
 the original state and every reachable instruction byte, then executes the

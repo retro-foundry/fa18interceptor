@@ -1,0 +1,35 @@
+{
+  "status": "validated_native_audio_update_playback_and_runtime_pending",
+  "entries": [
+    "C50158",
+    "C501E0",
+    "C50212",
+    "C24FE8"
+  ],
+  "cases": 16384,
+  "source_boundaries": 105,
+  "covered_boundaries": 105,
+  "uncovered_boundaries": [],
+  "native_cpu_dependency": false,
+  "child_contracts": false,
+  "comparison": "full Chip/Slow RAM except the original CPU ABI stack C7FD00..C7FF00, ordered period/volume output and acknowledgements, complete RAM at each output/acknowledgement, final native-output payloads applied only in validation",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "291ff160a96a1cde6634f6b8db64faa4769fa371653529239bff1cefc72feb8a",
+  "reports": [
+    "native audio update C50158: 4096 original calls matched RAM outside CPU ABI stack, channel state and 16080 ordered output/acknowledgement boundaries",
+    "native audio update C501E0: 4096 original calls matched RAM outside CPU ABI stack, channel state and 8192 ordered output/acknowledgement boundaries",
+    "native audio update C50212: 4096 original calls matched RAM outside CPU ABI stack, channel state and 162 ordered output/acknowledgement boundaries",
+    "native audio update C24FE8: 4096 original calls matched RAM outside CPU ABI stack, channel state and 0 ordered output/acknowledgement boundaries"
+  ],
+  "source_sha256": {
+    "port/voice_program.c": "7806d047ca2403d7a5ae4a6d1ad20fa6e5f316318c4f6c66a01fe97efd7e3541",
+    "port/voice_program.h": "b8eacc4eb5eb7ad613682c9687a38a67d21eb42d31542bda18aa347cf4638fe3",
+    "port/voice_program_contract_test.c": "7ffa9dca71335e2407042bce5b8d2cb58854e28dd79687112aafab8bda0ee3cb",
+    "port/audio_update.c": "a5bb0aa5f55777b892f4a9e163f8a476fa9fbc35a310d5f52c84f2dc6f1a1507",
+    "port/audio_update.h": "f6fd6ddf8b34147b75d20a1a1104f0f6e6871327d796c0c4324a52eed08d7227",
+    "port/audio_update_contract_test.c": "c40eaa1b0e7f0a00ecfef497a25af688ddcb089214a4d57e69e51b8a7538795e",
+    "port/command_effects.h": "86fefca51a9e011bcf30c4bba33e3307984d89f26542a249cf990d661bc24f20",
+    "tools/recomp/check_native_audio_update.py": "a1e0bffb819ea4182c65acce1d64e94324df7ea4011ede4303c9956c2f2fe331",
+    "tools/recomp/native_audio_update_oracle.c": "427cae5390e9a67aaddce7d7a56880d8b968ceaf4ea244fdc05cb4b788f9b480"
+  }
+}

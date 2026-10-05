@@ -35,8 +35,12 @@ comparisons covering all signed-index destinations and shared-field aliases.
 Both complete native command parents add 16,384 comparisons, including eject's
 nested publication and actual callback registration/removal bodies. The remaining
 command message/status/voice/space/sweep game children add 12,288 comparisons
-and cover all 278 original boundaries. Host services, audio updates/playback,
-original data loading and runtime integration remain open; see
+and cover all 278 original boundaries. Audio program/update/output/fade owners
+add 16,384 comparisons at all 105 boundaries. Their portable `voice_program`
+core builds independently for reuse; original selector/output/fade policy stays
+in the F/A-18 adapter. Host services, sample playback, original data loading and
+runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
+`analysis/routines/native_audio_update.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,

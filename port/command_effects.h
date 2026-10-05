@@ -2,20 +2,16 @@
 #define FA18_COMMAND_EFFECTS_H
 
 #include "command_dispatch.h"
+#include "voice_program.h"
 
-/* Command-written voice values. Sample data and the remaining voice fields
- * belong to the audio update/playback owner, which shares these voices. */
-typedef struct {
-    uint32_t period, volume, position, delay;
-} FA18CommandVoice;
+/* Shared command/audio-update voice values. Sample ownership is separate;
+ * command effects and the update loop write the same ordinary voice object. */
+typedef PortVoice FA18CommandVoice;
 
 /* Mutable values of the original sound-program instructions, in order.
  * Opcodes and sample data belong to the asset/audio owners. This is game
  * sound-program data, with no instruction pointer or CPU address space. */
-typedef struct {
-    uint32_t *values;
-    size_t count;
-} FA18CommandSoundProgram;
+typedef PortVoiceProgramValues FA18CommandSoundProgram;
 
 typedef struct {
     FA18CommandVoice *programmed_voice, *sweep_voice, *slots[4];
@@ -23,6 +19,7 @@ typedef struct {
     uint32_t random_seed;
     uint8_t volume_fading, tone_mute, effect_flags, sound6_mode;
     uint16_t interrupt_masks[4];
+    uint32_t master_volume, master_volume_target;
     /* Actual host audio acknowledgement; invoked even for an empty slot.
      * Import masks from the original channel descriptors. No bus is used. */
     void (*acknowledge)(void *context, unsigned channel, uint16_t mask);

@@ -30,6 +30,17 @@ add_library(fa18_command_input STATIC command_input.c indexed_controls.c flight_
 target_sources(fa18_command_input PRIVATE command_queue.c)
 target_sources(fa18_command_input PRIVATE command_dispatch.c command_dispatch_controls.c input_callback_registration.c)
 target_sources(fa18_command_input PRIVATE command_effects.c)
+target_sources(fa18_command_input PRIVATE audio_update.c)
+add_library(port_voice_program STATIC voice_program.c)
+target_link_libraries(fa18_command_input PRIVATE port_voice_program)
+
+add_executable(port_voice_program_contract_test voice_program_contract_test.c)
+target_link_libraries(port_voice_program_contract_test PRIVATE port_voice_program)
+add_test(NAME port_voice_program_contract COMMAND port_voice_program_contract_test)
+
+add_executable(fa18_audio_update_contract_test audio_update_contract_test.c)
+target_link_libraries(fa18_audio_update_contract_test PRIVATE fa18_command_input)
+add_test(NAME fa18_audio_update_contract COMMAND fa18_audio_update_contract_test)
 
 add_executable(fa18_command_effects_contract_test command_effects_contract_test.c)
 target_link_libraries(fa18_command_effects_contract_test PRIVATE fa18_command_input)

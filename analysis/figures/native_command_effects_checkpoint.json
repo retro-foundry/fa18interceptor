@@ -27,7 +27,7 @@
   ],
   "source_sha256": {
     "port/command_effects.c": "a96ba3c732f1b3967751e44ad0384ff26383172de481e2f7167e851037ae0f62",
-    "port/command_effects.h": "e6ca3a661832a44cc96efe2b49c04ee1a2d20ed9c6f51aebb5113d9070be6bb7",
+    "port/command_effects.h": "86fefca51a9e011bcf30c4bba33e3307984d89f26542a249cf990d661bc24f20",
     "port/command_effects_contract_test.c": "660c7fa5010ae0fb1a63882cae02637e1efaa0cf9a3c901dcb9b21c2786af2c9",
     "port/command_queue.c": "e7782730c22d283d6440cae5fa53698da21c089785f543a5f04d258b09c11bf8",
     "port/command_queue.h": "7cb82db6e674ff5bf466225142ca1876ccdb7f5570ccbb69eb694b8461821f66",
