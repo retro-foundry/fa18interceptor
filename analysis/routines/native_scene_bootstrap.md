@@ -1,11 +1,12 @@
 # Native scene bootstrap parent and resolved viewed identity
 
 `port/scene_bootstrap_native.c/.h` implements the complete `$C08F26` parent
-around four required, explicitly pending children: `$C09266` placement,
-`$C1C40C` gate construction, `$C1C63E` record update and `$C1C860` context
+around three required, explicitly pending children: `$C09266` placement,
+`$C1C63E` record update and `$C1C860` context
 refresh. It executes the actual native startup clear/enable, renderer clear,
 all-record/workspace clear, player preparation with its real mission-reset
-child, start-position tuple and observer child. No pending child has a
+child, start-position tuple, observer child and complete `$C1C40C` gate
+construction. No pending child has a
 default implementation. Completion status is separate from incidental
 original register outputs.
 
@@ -51,19 +52,21 @@ state. Pending complete child graphs still need their own semantic inputs,
 including any actual caller-frame fields required by context refresh.
 The adapter alone does not install bootstrap into the running game.
 
-Run `python tools/recomp/check_native_scene_bootstrap.py`. Three sets of
-4,096 calls cover **190/190** reachable original instruction boundaries:
+Run `python tools/recomp/check_native_scene_bootstrap.py`. Four sets of
+4,096 calls cover **291/291** reachable original instruction boundaries:
 the complete bootstrap parent, standalone player preparation and standalone
-startup clear using the resolved viewed owner. Standalone preparation covers
-the phase-nonzero branch that the parent's preceding clear makes unreachable.
-Only the four named children are contracted; every other actual original
+startup clear using the resolved viewed owner, and complete gate construction.
+Standalone preparation covers the phase-nonzero branch that the parent's
+preceding clear makes unreachable.
+Only the three named children are contracted; every other actual original
 child executes fully. All sixteen valid viewed identities and fifth-plane
 gate values 0/1/$80/$FF are exercised with varied records, workspace, globals,
 all ten supplied plane buffers and surrounding sentinels.
 
 Every Chip/Slow RAM byte matches, excluding only CPU ABI save/return stack
-`$C7FD00..$C7FF00` for bootstrap/preparation. Startup clear has no exclusions.
-Four ordered full-RAM child-entry snapshots and the placement word match.
+`$C7FD00..$C7FF00` for bootstrap/preparation/gate construction. Startup clear
+has no exclusions. Three ordered full-RAM child-entry snapshots and the
+placement word match.
 Independent mutations to viewed identity, message state, aircraft flags,
 observer origin, smoothed delta, scene limit, countdown and a depth tail
 propagate to later child entries. Contracted source children deliberately
@@ -83,7 +86,38 @@ game/test builds, six focused CTests and the unchanged 478-file native guard
 pass. Player/startup/queue/display regressions retain 122,880 comparisons at
 their complete 98/21/28/62 source boundaries; their checkpoint hashes match.
 
-Remaining work includes the four complete native children, unported record
+`template_bitmask_buffers.c/.h` now supplies the complete gate child using
+the same three mutable byte buffers as native game initialization and terrain
+consumers. All three 32-byte clears remain interleaved. Directory offsets
+must be positive signed words; a nonpositive offset stores $43/$44/$45 in
+the actual supplied error-word owner, then returns normally. The original
+`$C06C02` release-build hook is an actual RTS; it executes in the source proof
+and has no native side effects. Missing data or fields are distinct native
+failures, never misreported as those source faults.
+
+Negative list lengths skip. Positive odd lengths truncate after division by
+two. A length of 0 or 1 still executes 65,536 iterations, matching the source
+predecrement/DBRA loop. A bit's signed arithmetic quotient selects a longword
+before/after its row; the low five bits select the bit within that word.
+Cross-row and cross-axis writes reach the existing actual gate buffers.
+Writes before/after the three buffers require supplied canonical field views;
+there is no padding allocation or original-address lookup. Unsupported owners
+fail after preceding writes. Native callers with ordinary valid assets need
+no surrounding-field storage. All referenced storage and metadata must remain
+live at stable addresses.
+
+`fa18_bind_template_bitmask_streams` attaches offsets 0/$100/$200 directly to
+the original Hunk-66 payload without importing a copy or clearing output.
+The asset proof checks all **1,848** bytes against the sealed source, applying
+the recorded relocation targets only in validation. Raw disk-Hunk expansion
+then matches all 6,144 gate-buffer bytes from actual original execution.
+All **65,536** bit indices, negative/odd/0/1/$7FFF lengths, source faults on
+all axes, signed writes into neighbouring owners and preserved surrounding
+fields are covered. A placement-boundary mutation of the actual bound stream
+is consumed by the real gate child, proving that it does not cache its input.
+The legacy return-code initializer and bootstrap share the same algorithm.
+
+Remaining work includes the three complete native children, unported record
 consumers, the actual tenth-plane producer, scene initializer, original asset
 loading/checksum production, sample output and installed-stage scheduling.
 The native main does not invoke this graph; the playable reference still

@@ -80,11 +80,15 @@ all 98 reachable boundaries, including the actual all-record/workspace clear
 block with preserved tails. This proves the specified leaves/block, with
 the remaining native record consumers still pending.
 The complete native bootstrap parent now composes these actual available
-children around four required placement/gate/update/context child contracts.
-Another 12,288 comparisons cover all 190 boundaries, ordered child-entry
-states and the carried placement word. Viewed identity resolves to the live
+children and the complete gate builder around three required placement/update/
+context child contracts. Another 16,384 comparisons cover all 291 boundaries,
+ordered child-entry states and the carried placement word. The shared gate
+builder preserves signed adjacent-field writes, odd/zero list lengths and
+original fault returns. All 65,536 bit indices and all 1,848 Hunk-66 payload
+bytes are checked; a bound stream change reaches the real child. Viewed
+identity resolves to the live
 aircraft pointer; whole logical-word writes extend the independently reusable
-field component. The actual four child graphs and native main integration
+field component. The actual three child graphs and native main integration
 remain pending.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,

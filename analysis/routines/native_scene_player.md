@@ -79,7 +79,8 @@ Native MSVC game/test builds, five focused CTests and the unchanged native
 seals, implementation hashes, comparison scope and ownership limits.
 
 The later `$C08F26` parent composition now uses this bank's actual arrays and
-fields around four pending placement/gate/update/context child contracts.
+fields, with real gate construction around three pending placement/update/
+context child contracts.
 Viewed identity binds directly to the aircraft pointer through a logical
 startup word; see `native_scene_bootstrap.md` for that separate proof.
 Remaining native children must share these actual owners. Original

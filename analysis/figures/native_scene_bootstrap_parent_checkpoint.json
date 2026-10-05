@@ -1,17 +1,22 @@
 {
-  "status": "validated_complete_bootstrap_parent_around_four_required_pending_children",
+  "status": "validated_complete_bootstrap_parent_with_real_gate_child_and_three_required_pending_children",
   "complete_parent": "C08F26",
   "supplementary_entries": [
     "C09620",
-    "C090C2"
+    "C090C2",
+    "C1C40C"
   ],
-  "cases": 12288,
-  "source_boundaries": 190,
-  "covered_boundaries": 190,
+  "cases": 16384,
+  "source_boundaries": 291,
+  "covered_boundaries": 291,
   "native_cpu_dependency": false,
+  "gate_assets": {
+    "original_hunk_bytes": 1848,
+    "covered_bit_indices": 65536
+  },
+  "original_adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
   "child_contracts": [
     "C09266",
-    "C1C40C",
     "C1C63E",
     "C1C860"
   ],
@@ -21,24 +26,33 @@
     "C2FD22",
     "C09620 including C0840E",
     "C0910C",
-    "C0915A"
+    "C0915A",
+    "C1C40C including real C06C02 RTS fault hook"
   ],
-  "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620, no exclusion for C090C2. Four ordered child-entry RAM snapshots, explicit placement word, independent child mutations and named record owners compared.",
-  "coverage_cases": "all 16 valid viewed identities, whole-value clear to actual root pointer, all byte-phase branches via standalone C09620, initial/global/record/work variation, all ten supplied renderer planes with gate 0/1/80/FF, overlapping original text writes and preserved record/plane/depth tails",
-  "ownership_limit": "VIEW_RECORD resolves only offsets 512*index in the supplied 16-record bank; malformed/out-of-bank values fail. Child contracts prove parent sequencing, not child behavior. Actual placement/gate/update/refresh graphs, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
+  "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620/C1C40C; no exclusion for C090C2. Three ordered child-entry snapshots, explicit placement word, independent child mutations and named record owners compared.",
+  "coverage_cases": "all 16 valid viewed identities; both phase branches; ten renderer planes; real gate child, all 65536 bit indices, negative/odd/0/1/7FFF lengths, across-row/axis/adjacent-owner writes, source fault codes 43/44/45 and real RTS hook, all original Hunk-66 bytes with relocation-aware comparison and direct live stream binding, bound stream changed at placement boundary before real expansion",
+  "ownership_limit": "VIEW_RECORD accepts the supplied 16-record bank. Signed gate neighbours require actual bounded field owners; missing data is explicit. Child contracts prove parent sequencing, not child behavior. Actual placement/update/refresh graphs, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
   "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
-  "original_pc_bytes_sha256": "2208ece166cff92805e367387e83b72a645e289bac9173db106cacda56e77921",
+  "original_pc_bytes_sha256": "39faaccc54c0549322492492fcf9f1fee9fc2e1ae754af5cecd5ada44a81a895",
   "reports": [
-    "native bootstrap C08F26: 4096 calls match full RAM, live owners and 4 ordered child contracts per call",
+    "native bootstrap C08F26: 4096 calls match full RAM, live owners and 3 ordered child contracts per call",
     "native bootstrap C09620: 4096 calls match full RAM, live owners and 0 ordered child contracts per call",
-    "native bootstrap C090C2: 4096 calls match full RAM, live owners and 0 ordered child contracts per call"
+    "native bootstrap C090C2: 4096 calls match full RAM, live owners and 0 ordered child contracts per call",
+    "native bootstrap C1C40C: 4096 calls match full RAM, live owners and 0 ordered child contracts per call"
   ],
   "source_sha256": {
-    "port/scene_bootstrap_native.c": "20260a501bc019d77d73806de21d161f1079281c89b969d1800ebba0bda0b223",
-    "port/scene_bootstrap_native.h": "060142a238a2c7c57962cba9be1615f226dcef9f1eba5fcd6a841ba5868d6f5d",
+    "port/scene_bootstrap_native.c": "9cd64e1a66cd34c633ff169ad8692471ea1caf8f8ecebf363a2e890e82c6b8b2",
+    "port/scene_bootstrap_native.h": "5cc70c3bd22b851913da8240eb42d973c8c6b97d12cdca99dfaf0fd749574cde",
+    "port/template_bitmask_buffers.c": "d9af1df8869bb5cbb9305da4675f6f8791e94a9da525cbe4b055e9769cf36d15",
+    "port/template_bitmask_buffers.h": "706eefa68cbc95356a4537c7360a3fc6998a8eedc5b41a284c327be768be0c8a",
+    "port/template_bitmask_buffers_contract_test.c": "d8e99d2eb051e2d881f8a915854ace850d0f886d9e75855d1c7702273b4617be",
+    "tools/recomp/native_template_gate_fixture.h": "080e5ce710a0b7e3df183c29f0dde2e67aaf597d4bbec5d868c3f5611dea38dc",
+    "port/romfree/placement.h": "c9fda6e325693ffd53c1c2fb4513d3bfc90ddec695b3c4955bcaa058feda5977",
+    "port/disk.c": "8c3e3ab8e7f584aaecd5fadde1d616d6c0e9bf4f2d1f79b9042532c0bdb5d60e",
+    "port/hunk.c": "351c73c0aa48eea4b912a169c7f33cda1066b169bdba0355503255861d4bbf9b",
     "port/viewed_record_word.c": "2a282a58698345c1bfb586474ddbc948bd2a6d8d1eb891d14bf2943bc8e1c9a4",
     "port/viewed_record_word.h": "b0af0593b00ed947cb70cdf9c9333e81f67cf7ae7f4446843d42810975ce266f",
-    "port/scene_bootstrap_native_contract_test.c": "7ef842423960f7eb7c7d0ecaf7ec47d2ad290f53a4553cefb170414158e1e97b",
+    "port/scene_bootstrap_native_contract_test.c": "830b851ab286e2c0a1d11c2eff3cdf84df50f5dc42d9fcc6d1251c767f4dad87",
     "port/field_bytes.h": "abff8eb93f1a466555dbc8365ea76327b1239f3cb56d1d614005642e9b4a2fe8",
     "port/field_bytes_contract_test.c": "a76f6ffcbfde35e9b3a692e4cf5caefcf8d294b34b1f0bd21e642bfe0f316d65",
     "port/startup_ranges.c": "f9d116e5bfcae7375d79e050b180302ff652733de0726d3eb9ace2e65a3cc882",
@@ -53,7 +67,7 @@
     "port/scene_player_setup.h": "16810fb57fa7dad4816b21e520577b2a46865e5dda07c636fc75adb60deb3cc4",
     "port/context_command_controls.c": "94fd3576a278b1983883432eeb5f910aacedc8718025f78c429c1d98220ab5be",
     "tools/recomp/native_scene_player_oracle.c": "a3e1df3194f3520818c2723d951e8ed800087158c46436cfe88746f9d968e0e1",
-    "tools/recomp/check_native_scene_bootstrap.py": "7bc435c205e156598cecdca82035b6299ee98b046dbcfd0b4b195ae0a36d0154",
-    "tools/recomp/native_scene_bootstrap_oracle.c": "04ae0156760ceefcdb5c40d01c01141c7bb3d45b3e865593a96db1009b3696de"
+    "tools/recomp/check_native_scene_bootstrap.py": "0f33ecfb0ae7e111160af72b89124cdecb459394d9a26b8e232da4a099265291",
+    "tools/recomp/native_scene_bootstrap_oracle.c": "b128a21717ee165e50baf4f004d4be1396ed627d6a994b4f465b312cb87140eb"
   }
 }

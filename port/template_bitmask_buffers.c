@@ -2,46 +2,68 @@
 
 #include <string.h>
 
-static int16_t read_be16(const uint8_t *bytes) {
-    return (int16_t)((uint16_t)bytes[0] << 8 | bytes[1]);
+static int read_gate_source_word(const uint8_t *bytes,size_t count,size_t offset,uint16_t *value) {
+    if(!bytes || offset>count || count-offset<2) return 0;
+    *value=(uint16_t)(((unsigned)bytes[offset]<<8)|bytes[offset+1]); return 1;
 }
-
-static uint32_t read_be32(const uint8_t *bytes) {
-    return (uint32_t)bytes[0] << 24 | (uint32_t)bytes[1] << 16 |
-           (uint32_t)bytes[2] << 8 | bytes[3];
+static uint8_t *gate_axis_bytes(FA18TemplateBitmaskBuffers *b,unsigned axis) {
+    return axis==0?b->first:axis==1?b->second:b->third;
 }
-
-static void write_be32(uint8_t *bytes, uint32_t value) {
-    bytes[0] = (uint8_t)(value >> 24);
-    bytes[1] = (uint8_t)(value >> 16);
-    bytes[2] = (uint8_t)(value >> 8);
-    bytes[3] = (uint8_t)value;
+/* A bounded view of this domain's adjacent fields, not an address space. */
+static int gate_field(FA18TemplateBitmaskState *s,int offset,PortFieldByte *field) {
+    if(offset<0) {
+        size_t distance=(size_t)(-offset);
+        if(!s->before || distance>s->before_count) return 0;
+        *field=s->before[s->before_count-distance];
+    } else if(offset>=3*FA18_TEMPLATE_BITMASK_BYTES) {
+        size_t index=(size_t)(offset-3*FA18_TEMPLATE_BITMASK_BYTES);
+        if(!s->after || index>=s->after_count) return 0;
+        *field=s->after[index];
+    } else {
+        *field=(PortFieldByte){.byte=gate_axis_bytes(s->buffers,(unsigned)offset/FA18_TEMPLATE_BITMASK_BYTES)+
+            (unsigned)offset%FA18_TEMPLATE_BITMASK_BYTES};
+    }
+    return port_field_byte_valid(field);
 }
-
-static int expand_stream(const uint8_t *stream, size_t stream_size,
-                         uint8_t buffer[FA18_TEMPLATE_BITMASK_BYTES]) {
-    if (!stream || stream_size < FA18_TEMPLATE_BITMASK_ROWS * 2u) return -1;
-    for (size_t row = 0; row != FA18_TEMPLATE_BITMASK_ROWS; ++row) {
-        const int16_t relative = read_be16(stream + row * 2u);
-        uint8_t *destination = buffer + row * FA18_TEMPLATE_BITMASK_ROW_BYTES;
-        if (relative <= 0 || (size_t)relative > stream_size - 2u) return -1;
-        const uint8_t *items = stream + (uint16_t)relative;
-        const int16_t byte_count = read_be16(items);
-        if (byte_count < 0) continue;
-        if ((byte_count & 1) != 0 || byte_count == 0 ||
-            (size_t)byte_count > stream_size - (size_t)relative - 2u)
-            return -1;
-        for (size_t index = 0; index != (size_t)byte_count / 2u; ++index) {
-            const uint16_t bit = (uint16_t)read_be16(items + 2u + index * 2u);
-            const size_t word_offset = (size_t)(bit >> 5) * 4u;
-            uint32_t word;
-            if (word_offset + 4u > FA18_TEMPLATE_BITMASK_ROW_BYTES) return -1;
-            word = read_be32(destination + word_offset);
-            word |= UINT32_C(1) << (bit & 31u);
-            write_be32(destination + word_offset, word);
+static int set_gate_bit(FA18TemplateBitmaskState *s,unsigned axis,unsigned row,uint16_t bit) {
+    int signed_bit=bit<0x8000u?(int)bit:(int)bit-0x10000;
+    int word=signed_bit>=0?signed_bit/32:-((-signed_bit+31)/32);
+    int offset=(int)(axis*FA18_TEMPLATE_BITMASK_BYTES+row*FA18_TEMPLATE_BITMASK_ROW_BYTES)+4*word;
+    PortFieldByte fields[4]; uint32_t value=0; uint8_t byte; unsigned i;
+    for(i=0;i<4;++i) {
+        if(!gate_field(s,offset+(int)i,fields+i) || !port_read_field_byte(fields+i,&byte)) return 0;
+        value=(value<<8)|byte;
+    }
+    value|=UINT32_C(1)<<(bit&31u);
+    for(i=0;i<4;++i) if(!port_write_field_byte(fields+i,(uint8_t)(value>>(24-8*i)))) return 0;
+    return 1;
+}
+int fa18_run_template_bitmask_state(FA18TemplateBitmaskState *s) {
+    unsigned axis,row,block;
+    if(!s || !s->buffers) return 0;
+    /* Preserve the three interleaved original 32-byte clear stores. */
+    for(block=0;block<64;++block) for(axis=0;axis<3;++axis)
+        memset(gate_axis_bytes(s->buffers,axis)+32*block,0,32);
+    for(axis=0;axis<3;++axis) for(row=0;row<128;++row) {
+        uint16_t relative,length,bit; size_t cursor; unsigned count,i;
+        if(!read_gate_source_word(s->streams[axis],s->stream_sizes[axis],2*row,&relative)) return 0;
+        if(!relative || relative>=0x8000u) {
+            if(!s->error_word) return 0;
+            *s->error_word=(uint16_t)(0x43+axis);
+            /* Original release-build C06C02 is an actual RTS. */
+            return 1;
+        }
+        if(!read_gate_source_word(s->streams[axis],s->stream_sizes[axis],relative,&length)) return 0;
+        if(length>=0x8000u) continue;
+        count=length/2u;
+        if(!count) count=65536;
+        cursor=(size_t)relative+2;
+        for(i=0;i<count;++i,cursor+=2) {
+            if(!read_gate_source_word(s->streams[axis],s->stream_sizes[axis],cursor,&bit) ||
+               !set_gate_bit(s,axis,row,bit)) return 0;
         }
     }
-    return 0;
+    return 1;
 }
 
 int fa18_build_template_bitmask_buffers(const uint8_t *first_stream,
@@ -51,26 +73,28 @@ int fa18_build_template_bitmask_buffers(const uint8_t *first_stream,
                                         const uint8_t *third_stream,
                                         size_t third_size,
                                         FA18TemplateBitmaskBuffers *buffers) {
-    if (!buffers) return -1;
-    memset(buffers, 0, sizeof *buffers);
-    if (expand_stream(first_stream, first_size, buffers->first) != 0) return 0x43;
-    if (expand_stream(second_stream, second_size, buffers->second) != 0) return 0x44;
-    if (expand_stream(third_stream, third_size, buffers->third) != 0) return 0x45;
-    return 0;
+    uint16_t error=0;
+    FA18TemplateBitmaskState state={.streams={first_stream,second_stream,third_stream},
+        .stream_sizes={first_size,second_size,third_size},.buffers=buffers,.error_word=&error};
+    return fa18_run_template_bitmask_state(&state)?error:-1;
 }
 
+int fa18_bind_template_bitmask_streams(FA18TemplateBitmaskState *state,const FA18Hunks *hunks) {
+    const FA18HunkSegment *segment;
+    unsigned axis;
+    if (!state || !hunks || !hunks->segments || hunks->count <= FA18_TEMPLATE_BITMASK_HUNK) return 0;
+    segment = &hunks->segments[FA18_TEMPLATE_BITMASK_HUNK];
+    if (!segment->data || segment->size < FA18_TEMPLATE_BITMASK_STREAM_C_OFFSET+256) return 0;
+    for(axis=0;axis<3;++axis) {
+        state->streams[axis]=segment->data+axis*256;
+        state->stream_sizes[axis]=segment->size-axis*256;
+    }
+    return 1;
+}
 int fa18_initialize_template_bitmask_buffers(const FA18Hunks *hunks,
                                              FA18TemplateBitmaskBuffers *buffers) {
-    const FA18HunkSegment *segment;
-    if (!hunks || !buffers || hunks->count <= FA18_TEMPLATE_BITMASK_HUNK) return -1;
-    segment = &hunks->segments[FA18_TEMPLATE_BITMASK_HUNK];
-    if (!segment->data || segment->size <= FA18_TEMPLATE_BITMASK_STREAM_C_OFFSET)
-        return -1;
-    return fa18_build_template_bitmask_buffers(
-        segment->data + FA18_TEMPLATE_BITMASK_STREAM_A_OFFSET,
-        segment->size - FA18_TEMPLATE_BITMASK_STREAM_A_OFFSET,
-        segment->data + FA18_TEMPLATE_BITMASK_STREAM_B_OFFSET,
-        segment->size - FA18_TEMPLATE_BITMASK_STREAM_B_OFFSET,
-        segment->data + FA18_TEMPLATE_BITMASK_STREAM_C_OFFSET,
-        segment->size - FA18_TEMPLATE_BITMASK_STREAM_C_OFFSET, buffers);
+    uint16_t error=0;
+    FA18TemplateBitmaskState state={.buffers=buffers,.error_word=&error};
+    if(!fa18_bind_template_bitmask_streams(&state,hunks)) return -1;
+    return fa18_run_template_bitmask_state(&state)?error:-1;
 }

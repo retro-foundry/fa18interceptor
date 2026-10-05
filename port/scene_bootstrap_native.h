@@ -3,6 +3,7 @@
 #include "scene_player_setup.h"
 #include "viewed_record_word.h"
 #include "renderer_clear.h"
+#include "template_bitmask_buffers.h"
 
 typedef struct FA18NativeSceneBootstrap {
     FA18ContextCommandState *context;
@@ -10,6 +11,7 @@ typedef struct FA18NativeSceneBootstrap {
     FA18NativeStartupRanges *startup;
     FA18NativeViewedRecordWord *viewed_word;
     FA18NativeRendererClear *renderer;
+    FA18TemplateBitmaskState *gates;
     uint8_t *scene_limit,*previous_scene_limit,*context_state,*menu_transition;
     uint8_t *previous_state_byte,*byte_458be;
     uint16_t *menu_return_word,*word_4fda0,*countdown,*word_459a6,*word_459a8;
@@ -20,11 +22,10 @@ typedef struct FA18NativeSceneBootstrap {
 } FA18NativeSceneBootstrap;
 
 typedef struct {
-    /* Required actual complete children C09266, C1C40C, C1C63E, C1C860.
+    /* Required actual complete children C09266, C1C63E, C1C860.
      * Their native graphs remain pending. Completion status is separate from
      * incidental original CPU returns. No missing child is substituted. */
     int (*place_view)(void *context,FA18NativeSceneBootstrap *state,int16_t placement_word);
-    int (*build_gates)(void *context,FA18NativeSceneBootstrap *state);
     int (*update_records)(void *context,FA18NativeSceneBootstrap *state);
     int (*refresh_context)(void *context,FA18NativeSceneBootstrap *state);
     void *context;

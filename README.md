@@ -42,6 +42,12 @@ The remaining command message/status/voice/space/sweep game children now pass
 12,288 original calls covering all 278 instruction boundaries. Native audio
 program/update/output/fade owners add 16,384 comparisons at all 105 boundaries,
 with an independent portable voice-program core reusable by future ports.
+The native bootstrap parent now composes shared scene records, player setup
+and the complete original template gate builder, with three remaining child
+contracts. Its 16,384 comparisons cover all 291 source boundaries and every
+16-bit gate index; original Hunk-66 imports match actual source expansion.
+Native main integration and the complete playable native graph remain pending;
+see [the bootstrap proof](analysis/routines/native_scene_bootstrap.md).
 Host services, sample playback, asset loading and full runtime integration remain open. See
 [reusable components](port/REUSABLE_COMPONENTS.md),
 [native audio updates](analysis/routines/native_audio_update.md),

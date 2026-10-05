@@ -40,8 +40,16 @@ still use ordered high/low writes with no observer between them. This adds
 no concurrency guarantee. F/A-18's separate `viewed_record_word` adapter
 maps its sixteen actual aircraft objects to the original 512-byte offsets;
 that stride, record family and accepted domain stay game-specific. Its full
-bootstrap-parent proof covers 12,288 calls at all 190 boundaries, with four
+bootstrap-parent proof covers 16,384 calls at all 291 boundaries, with three
 explicit pending child contracts. See `../analysis/routines/native_scene_bootstrap.md`.
+
+The same field component now binds actual adjacent owners for the complete
+F/A-18 template gate builder. Signed indices can modify earlier/later rows,
+other axis buffers and supplied surrounding fields, with no duplicate packed
+owner. Bootstrap and native game initialization share that one builder and
+the existing terrain-consumer buffer format. Its 128-row geometry, source
+error codes and count rules remain F/A-18 policy; the generic field mechanism
+supplies none of them. Original Hunk-66 streams stay live caller-owned data.
 
 The independent `port_voice_selection` target supplies release/selection for
 those same `PortVoice` objects. Compile `voice_selection.c` with its header;

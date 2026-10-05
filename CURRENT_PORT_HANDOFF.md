@@ -6,7 +6,32 @@ also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
 
-Latest batch: complete native `$C08F26` parent now composes actual startup
+Latest batch: `$C1C40C` gate construction is now an actual native child of
+`$C08F26`, sharing the existing `template_bitmask_buffers` owner with the
+native game and terrain consumers. The former restricted decoder has been
+replaced by the complete source algorithm: negative lists skip, odd positive
+lengths truncate, lengths 0/1 consume 65,536 words, and signed bit indices
+can update neighbouring rows/axes or required adjacent field owners. Source
+faults write the actual error word and complete through the original RTS hook;
+missing data/owners fail explicitly, preserving preceding writes.
+
+Live stream binding uses original Hunk 66 without copying its values. All
+1,848 original payload bytes match the sealed source with relocation-aware
+comparison; raw disk expansion matches all three source gate buffers.
+Validation: 16,384 complete calls cover 291/291 original boundaries and all
+65,536 bit indices, including a bound stream changed before the real gate
+call. Only three children remain contracted: `$C09266`, `$C1C63E`, `$C1C860`.
+Strict GNU integration/symbol checks, native MSVC game/test builds, six focused
+CTests and the unchanged 478-file guard pass. See the updated
+`analysis/routines/native_scene_bootstrap.md` and its parent checkpoint.
+
+Next implement the actual placement/update/context children against the
+shared record bank and global owners. The tenth-plane producer, scene
+initializer, original loading/checksum production, sample output and native
+scheduling remain pending. Native main still does not call the new graph;
+the playable reference remains emulated.
+
+Preceding batch: complete native `$C08F26` parent now composes actual startup
 clear/enable, renderer clear, all-record/workspace clear, player preparation
 with its real reset child, start tuple and observer. Four required remaining
 children are explicit: `$C09266`, `$C1C40C`, `$C1C63E`, `$C1C860`. No child

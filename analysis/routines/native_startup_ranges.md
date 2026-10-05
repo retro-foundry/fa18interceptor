@@ -67,7 +67,8 @@ seals, implementation hashes and ownership limits; the queue/display
 checkpoints include the shared header and have been refreshed.
 
 The later bootstrap parent uses the shared control-record/workspace owners
-around four explicit remaining child contracts. The separate tenth renderer
+and real gate construction around three explicit remaining child contracts.
+The separate tenth renderer
 buffer producer, scene initializer, original loading/checksum production,
 installed-stage scheduling and sample output remain open. Native main still
 does not call the new graph; the playable reference remains emulated.
