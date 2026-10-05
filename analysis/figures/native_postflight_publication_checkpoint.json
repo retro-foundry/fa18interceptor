@@ -1,0 +1,55 @@
+{
+  "status": "complete_native_postflight_with_actual_publication_no_child_contracts",
+  "complete_entries": [
+    "C09E06",
+    "C09E98",
+    "C09EC4",
+    "C0A002",
+    "C0A15C",
+    "C0A1E0",
+    "C0A2F0",
+    "C0A334",
+    "C0A364",
+    "C0A12E",
+    "C0A3EA"
+  ],
+  "actual_children": [
+    "C230B0",
+    "C0A3EA",
+    "C0A12E",
+    "C1BEE8",
+    "C08324",
+    "C082B8",
+    "C1BA86",
+    "C1B906",
+    "C1C23C"
+  ],
+  "child_contracts": [],
+  "unreachable_arm_proof": "C1BEE8 sets mode zero for both view routes; unchanged kind test excludes class-30 zero-mode return; no intervening child changes kind/mode (actual zoom/redraw graphs sealed)",
+  "cases": 90112,
+  "cases_per_entry": 8192,
+  "source_boundaries": 481,
+  "covered_boundaries": 481,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; typed records and carried axis independently checked",
+  "native_cpu_dependency": false,
+  "limitations": "original parameter/state bindings and full native startup/frame integration pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "c31fc5a94d7c232ae40c60452eb381bb1e6a548ac28b55f600691c93cc629a0c",
+  "reports": [
+    "native post-flight/publication: 90112 complete calls match all game RAM, typed records and carried axis; actual view publication, zoom, redraw, queue, selection release/readiness/restoration; no child contracts"
+  ],
+  "source_sha256": {
+    "port/native_postflight.c": "de18690228f9a6df340320993c7b8c0b8dd0d0ba5ec5e5834393ab177cbaa3c9",
+    "port/native_postflight.h": "a4078af15bfb70b232ff5b98e6e80e960da6fbd05d5d624ee8203f4210af2664",
+    "port/native_context_publication.c": "f1d9ca26d1a968be38b93dcf62390c6687908e681be674e003aa9d050824417f",
+    "port/native_context_publication.h": "c1fe9d3cbb374d98aa5adcab49e8a56a4cf85696ea932556c583ec738c7df3f4",
+    "port/view_command_input.c": "04a1e13d51d196abbac0735e8e89f2550b112a4bca6ab5c137b6cce156780a14",
+    "port/view_command_controls.c": "8f31148ec0391b1efc8dd266ab22f83ddcf1b8e946d0e28bfc9257a07421ba71",
+    "port/command_queue.c": "a95d9a4ced4b0c6bb1a7aff8db063bad0955ca87864923eb9a52d324d5756d00",
+    "port/native_record_selection.c": "40be2b270316e02d1e4f5106d11a159701ced4d0cf017ef03252f49e842752f0",
+    "port/native_postflight_contract_test.c": "bec6a6956472b9a319a3a372c54906d24ef2b113ee2d88ec06d30fce14009b9e",
+    "tools/recomp/native_context_publication_oracle.c": "a713ff32910f279bd9971b113eb08c5080600731221e70d1d3f8a9aee603b247",
+    "tools/recomp/native_postflight_publication_oracle.c": "3994e8bfc8198e230ae7bf8275819ab89d3104b9675377a6dcba2e5fd3e5eff3",
+    "tools/recomp/check_native_postflight_publication.py": "354bdc8d7849728e36096c951c87420541e2e06ffce40b119a7838d4e293871e"
+  }
+}

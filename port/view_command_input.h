@@ -27,6 +27,10 @@ int fa18_is_view_input_command(enum CommandAction action);
  * and honors the original retain-state gate. */
 int fa18_set_native_zoom_maximum(FA18ViewCommandState *state);
 int fa18_request_native_cockpit_redraw(FA18ViewCommandState *state);
+/* Actual C1B906 body, before its queue tail; does not emit an input request.
+ * The optional carried axis shares the record scheduler's working value. */
+int fa18_select_native_zero_view_mode(FA18ViewCommandState *state,
+                                        const FA18ViewSpanOffsets *spans,uint32_t *axis);
 
 /* All 16 $C1B77C-$C1BB76 view/origin/zoom actions, before publication.
  * No machine, CPU, guest addresses or substitute child behavior.

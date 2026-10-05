@@ -15,6 +15,10 @@ typedef struct {
     FA18NativePostflight post; FA18PostflightTestStorage storage; FA18NativePostflightOps ops;
     uint8_t source[8192],workspace[512],table[1024],event,mode,limit,admitted,active,pair,actions[3];
     uint16_t slot,stride,selected,marker,pending;
+    FA18FlightCommandState flight; FA18ViewCommandState commands_view;
+    FA18ContextCommandState context; FA18CommandQueue queue;
+    FA18ViewSpanOffsets spans; FA18NativeContextPublication publication;
+    uint8_t neighbors[FA18_COMMAND_QUEUE_NEIGHBORS],keys[128]; uint16_t target;
     unsigned prepared; int complete;
 } Fixture;
 static int prepare(void *context,FA18NativePostflight *s,unsigned slot,uint16_t event,int seven) {
@@ -112,5 +116,37 @@ int main(void) {
     assert(!fa18_schedule_native_postflight(&f.post,FA18_POSTFLIGHT_SIX,0));
     initialize(&f); f.post.phase_fields=NULL;
     assert(!fa18_schedule_native_postflight(&f.post,FA18_POSTFLIGHT_FINISH,0));
+    /* Actual preparation, including a signed queue index reaching the live
+     * sequence phase. Parent must reread it before publishing its outcome. */
+    initialize(&f);
+    f.flight.commands=&f.input; f.flight.player=f.records.aircraft;
+    f.flight.viewed=f.records.aircraft;
+    f.commands_view.flight=&f.flight;
+    f.context=(FA18ContextCommandState){.view=&f.commands_view,.records=f.records.geometry,.record_count=16};
+    f.keys[1]=3;
+    assert(fa18_initialize_command_queue(&f.queue,&f.context,f.neighbors,sizeof f.neighbors,f.keys,sizeof f.keys));
+    f.publication=(FA18NativeContextPublication){&f.records,&f.context,&f.queue,&f.spans,&f.marker,&f.target};
+    f.post.publication=&f.publication; f.post.ops=NULL;
+    f.post.context_select=&f.input.origin_mode; f.selection.origin_enable=&f.input.origin_mode;
+    f.post.sequence_phase=&f.flight.sequence_phase;
+    f.post.view_side=&f.commands_view.detail_index;
+    f.post.refresh=&f.context.view_request; f.post.view_heading=&f.context.angle_history;
+    r=f.records.records+4; r->word_06=1; r->aircraft->flags=0x40;
+    r->aircraft->secondary_flags=0x80; r->geometry->angle=0x4567; f.event=1;
+    f.queue.translated_index=63; f.work.carried_axis=0x12345678;
+    assert(fa18_schedule_native_postflight(&f.post,FA18_POSTFLIGHT_FOUR,0));
+    assert(!f.prepared && !f.storage.phase && f.flight.sequence_phase==3);
+    assert(f.slot==4 && f.target==4 && f.flight.viewed==f.records.aircraft+4);
+    assert(f.context.angle_history==0x4567 && f.work.carried_axis==63);
+    assert(f.queue.raw[0]==1 && f.marker==0xffff && !f.event && !f.commands_view.emitted_requests);
+    /* Missing canonical aliases fail instead of running a contracted child. */
+    f.event=1; f.queue.taken=0; f.flight.sequence_phase=2;
+    f.post.refresh=&f.storage.refresh;
+    assert(!fa18_schedule_native_postflight(&f.post,FA18_POSTFLIGHT_FOUR,0));
+    assert(!f.prepared && !f.event && f.flight.sequence_phase==2);
+    f.records.input=NULL; f.flight.commands=NULL; f.queue.commands=NULL;
+    { uint32_t axis=0x12345678,published=0x87654321;
+      assert(!fa18_publish_native_context_record(&f.publication,1,4,&axis,&published));
+      assert(axis==0x12345678 && published==0x87654321); }
     return 0;
 }

@@ -2,6 +2,7 @@
 #define FA18_NATIVE_POSTFLIGHT_H
 #include "native_record_selection.h"
 #include "native_record_view.h"
+#include "native_context_publication.h"
 
 typedef enum {
     FA18_POSTFLIGHT_FINISH,FA18_POSTFLIGHT_THREE,FA18_POSTFLIGHT_FOUR,
@@ -10,7 +11,8 @@ typedef enum {
 } FA18NativePostflightMode;
 typedef struct FA18NativePostflight FA18NativePostflight;
 typedef struct {
-    /* Actual C1BEE8 view-publication boundary at the two preparation sites. */
+    /* Explicit parent-proof seam when publication is not yet bound.
+     * Production can bind the actual ordinary-state publication below. */
     int (*prepare)(void *context,FA18NativePostflight *state,unsigned slot,
                        uint16_t event,int seven);
     void *context;
@@ -21,6 +23,7 @@ struct FA18NativePostflight {
     const PortFieldWindow *parameters;
     FA18NativeRecordViewWork *view_work;
     const FA18NativePostflightOps *ops;
+    FA18NativeContextPublication *publication;
     const PortFieldByte *phase_fields;
     uint16_t *current_slot,*target_record,*dispatch_gate,*command_word,*view_heading;
     uint8_t *space_latch,*report_latch,*status,*blocked,*mode,*player_phase,*player_flags_f,

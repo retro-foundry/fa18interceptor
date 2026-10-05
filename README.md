@@ -62,8 +62,10 @@ owners; original-disk assets are checked separately. See
 Finish and all eight post-flight modes now run directly too, with actual
 selection release, readiness and view restoration. Their 90,112 source
 comparisons cover all 371 boundaries. Periodic and dispatch remain scheduler
-boundaries; actual view publication and original runtime bindings remain lower
-requirements. See [native post-flight scheduling](analysis/routines/native_postflight.md).
+boundaries; original runtime bindings remain required. Actual record-view
+publication now runs with native zoom, redraw and queue code. The connected
+post-flight proof covers 481 boundaries in 90,112 calls with no child contracts.
+See [native post-flight scheduling](analysis/routines/native_postflight.md).
 Host services, sample playback, asset loading and full runtime integration remain open. See
 [reusable components](port/REUSABLE_COMPONENTS.md),
 [native audio updates](analysis/routines/native_audio_update.md),

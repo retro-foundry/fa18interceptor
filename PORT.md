@@ -25,7 +25,9 @@ resolves the descriptors; indices reaching adjacent relocated words require
 explicit field owners. Native finish and all post-flight modes now add 90,112
 comparisons at all 371 boundaries, including actual selection release,
 readiness and view restoration. Periodic and dispatch remain scheduler children;
-actual view publication and complete startup field bindings remain required.
+actual view publication now has a native owner, including zoom/redraw/queue.
+Its connected post-flight proof covers 481 boundaries in 90,112 calls with no
+child contracts. Complete startup field bindings remain required.
 See `analysis/routines/native_record_action_placement.md`.
 See also `analysis/routines/native_postflight.md`.
 Reference `port/game` modules still use the machine bus; readable C alone does

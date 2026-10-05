@@ -138,8 +138,8 @@ static int signed_byte(uint8_t value) {
     return value < 128 ? (int)value : (int)value - 256;
 }
 
-int fa18_publish_native_command(FA18CommandQueue *q, uint32_t event,
-                                uint32_t *published_event) {
+int fa18_publish_native_command_with_axis(FA18CommandQueue *q, uint32_t event,
+                                uint32_t *published_event,uint32_t *axis) {
     uint8_t raw = (uint8_t)event;
     if (!q || !q->commands || !published_event) return 0;
     if (!q->taken && !(raw & 0x80u)) {
@@ -147,13 +147,16 @@ int fa18_publish_native_command(FA18CommandQueue *q, uint32_t event,
         if (signed_byte(q->count) < 10) {
             int index = signed_byte(q->write_index);
             uint8_t translated;
-            if (index >= 10) index = 0;
+            if (index >= 10) { index = 0; if(axis) *axis=0; }
+            if(axis) *axis=(*axis&0xffff0000u)|(uint16_t)index;
             if(!slot_write(&q->slots[RAW_FIRST+index], raw)) return 0;
             translated = q->key_table[raw];
             q->write_index = (uint8_t)(index+1);
+            if(axis) *axis=(*axis&0xffffff00u)|q->write_index;
             /* Read after the raw write, as in the original. */
             q->count = (uint8_t)(q->count+1);
             index = signed_byte(q->translated_index);
+            if(axis) *axis=(*axis&0xffff0000u)|(uint16_t)index;
             if(!slot_write(&q->slots[TRANSLATED_FIRST+index], translated)) return 0;
             event = (event & 0xffff0000u) | translated;
         }
@@ -163,4 +166,7 @@ int fa18_publish_native_command(FA18CommandQueue *q, uint32_t event,
     q->commands->other_modifier = 0;
     *published_event = event;
     return 1;
+}
+int fa18_publish_native_command(FA18CommandQueue *q,uint32_t event,uint32_t *published_event) {
+    return fa18_publish_native_command_with_axis(q,event,published_event,NULL);
 }

@@ -13,7 +13,43 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: complete native `$C09E06` finish and its eight mode owners now
+Latest batch: actual native `$C1BEE8` record-view publication, `$C1BA86`
+redraw/publication and `$C1B906` zero-view/publication now share the existing
+native view and queue owners. Post-flight invokes this actual owner when its
+`publication` is bound; it validates canonical origin, sequence phase, view-side,
+refresh, heading and marker aliases. Original index scaling/wrap, class-$30
+nested publication, signed queue indices and carried-axis changes are preserved.
+The target-index word is `$C458DC`, distinct from post-flight's `$C458C2` target
+offset. Zero-view preparation emits no input-request bit.
+
+Full publication proof passes 24,576 calls, all 122/122 boundaries, full game
+RAM, typed records, viewed identity, event and carried axis, with no child
+contracts. The connected post-flight proof passes 90,112 calls, all 481/481
+reachable boundaries, running actual publication/zoom/redraw/queue and actual
+release/readiness/restoration throughout, with no child contracts. Its fixture
+uses the shared queue owners, including `$C458B2` view detail, and independently
+checks typed fields against the source after RAM comparison. The composed
+native contract verifies an actual translated queue write reaching flight
+sequence phase; post-flight rereads phase three and suppresses its outcome.
+MSVC Release game/affected targets, strict GNU compilation, eight affected
+CTests and the unchanged 507-file native guard pass. See
+`analysis/routines/native_context_publication.md` and both new checkpoints.
+
+`FA18NativePostflightOps` remains the explicit seam for historical parent
+proofs whose `publication` is not bound. It is no longer a missing implementation:
+production must bind `FA18NativeContextPublication` and its original span/queue
+assets and canonical aliases. The full bootstrap fixture/production constructor
+still needs reconciliation as described below. Next continue periodic/dispatch
+and their actual lower owners, reuse publication for dispatch/pose, bind original
+startup state/assets and install the native startup/frame graph in main.
+Periodic source owner is `port/game/flight_dynamics.c:update_scene_regions`:
+eight `$C29720` regions, enter/active both call `$C28B16` at distinct return
+sites, followed by actual `$C28B34` spawning/dispatch. Placement/replacement
+uses `$C28F16` at three source sites; orientation uses `$C2D954`. Keep the
+original row/descriptor references and mutable record fields resolved to typed
+owners rather than importing the source `DynamicsState`/guest-address model.
+
+Preceding batch (`c1aef6df`): complete native `$C09E06` finish and its eight mode owners now
 replace the scheduler finish callback. Actual `$C230B0` release, `$C0A3EA`
 readiness and both `$C0A12E` restorations are direct ordinary-state operations.
 The generic phase word retains the original selection high byte after release;
@@ -31,8 +67,9 @@ whole-child contracts. See `analysis/routines/native_postflight.md` and its
 checkpoint.
 
 Two scheduler children remain: periodic `$C28996`, dispatch `$C23A7E`.
-Continue them and actual `$C1BEE8` publication, reusing the existing view and
-queue owners. Reconcile production startup/input aliases before native main:
+Continue them and bind the actual `$C1BEE8` publication owner, reusing the
+existing view and queue owners. Reconcile production startup/input aliases
+before native main:
 the current composed bootstrap fixture still has separately bound origin/event
 and sequence fields. In particular startup enable sets the queue's actual
 `input.origin_mode` ($C45785) to one, while its current control/origin fixture
@@ -146,8 +183,9 @@ still remain:
   message/sound/fault and motion-slot boundaries. History is direct.
 - `FA18NativeRecordControlOps`: tone eight, message posting and scene
   initialization beneath the direct control-stream owners.
-- `FA18NativePostflightOps`: actual `$C1BEE8` view publication, with source
-  slot/event/route inputs. Readiness, release and restoration are direct.
+- `FA18NativePostflightOps`: retained historical parent-proof seam when the
+  actual native publication owner is unbound. Production bindings remain
+  required; publication, readiness, release and restoration have native bodies.
 - `FA18NativeRecordViewOps`: normalization and source fault handling;
   `FA18NativeRecordRangeOps`: sound program four. These are true lower children.
 - `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
@@ -163,8 +201,8 @@ guest memory, and the machine/chipset runtime. Do not describe the port as
 emulation-free until native main owns startup, frame scheduling, rendering,
 audio, and input without those layers.
 
-Recommended next batch: finish the two scheduler children, actual view
-publication and startup-reachable
+Recommended next batch: finish the two scheduler children, bind actual view
+publication and complete startup-reachable
 pose/control children using their complete readable owners under `port/game/`.
 Preserve their true lower child boundaries and shared record mutations. Then
 connect original assets/state before installing the
@@ -174,8 +212,9 @@ and 854 direct opcode bindings; those numbers describe the compatibility
 runner, not completion of the ordinary-state native graph.
 
 Latest validation passed: MSVC Release `fa18_port`, strict GNU contracts,
-fifteen affected CTests and the unchanged native build guard over 505 files.
-The full post-flight proof covers 371/371 boundaries in 90,112 calls. The
+eight affected CTests and the unchanged native build guard over 507 files.
+The connected post-flight proof covers 481/481 reachable boundaries in 90,112
+calls with actual publication and no child contracts. The preceding
 historical bootstrap proof passes 16,384 calls at all 291/291 boundaries,
 still contracts old child boundaries and is sequencing
 evidence rather than proof of the new direct lower owners.

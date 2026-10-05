@@ -1,5 +1,13 @@
 # Native post-flight scheduling
 
+Actual view publication is now available through the optional `publication`
+owner. The connected proof, `check_native_postflight_publication.py`, passes
+90,112 calls at all 481 reachable source boundaries with no child contracts.
+It runs original publication/zoom/redraw/queue instructions and the actual
+native bodies, sharing canonical view and queue fields. The contracted proof
+below remains evidence of the separately tested parent boundary. Production
+must bind the actual owner. See `native_context_publication.md`.
+
 `port/native_postflight.c/.h` implements complete `$C09E06`, all eight dispatched
 mode owners, `$C0A12E` view restoration and `$C0A3EA` readiness. The native
 record scheduler now invokes finish directly. Only periodic and dispatch remain

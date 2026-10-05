@@ -72,7 +72,19 @@ static int record_mode(FA18NativePostflight *s,int seven) {
     } else if(!(r->aircraft->flags&0x40u)) {
         return *s->sequence_phase==3 || post_outcome(s,(r->byte_20&0x80u)?0xfd:0xfe,0);
     }
-    if(!s->ops || !s->ops->prepare || !s->ops->prepare(s->ops->context,s,*s->current_slot,event,seven)) return 0;
+    if(s->publication) {
+        FA18NativeContextPublication *p=s->publication; uint32_t published;
+        if(p->records!=s->records || !p->context || !p->context->view ||
+           !p->context->view->flight || p->context->view->flight->commands!=s->records->input ||
+           s->context_select!=&s->records->input->origin_mode ||
+           s->sequence_phase!=&p->context->view->flight->sequence_phase ||
+           s->view_side!=&p->context->view->detail_index ||
+           s->refresh!=&p->context->view_request || s->view_heading!=&p->context->angle_history ||
+           p->selection_marker!=s->selection->selection_marker ||
+           !fa18_publish_native_context_record(p,event,(int16_t)*s->current_slot,
+               &s->view_work->carried_axis,&published)) return 0;
+    } else if(!s->ops || !s->ops->prepare ||
+              !s->ops->prepare(s->ops->context,s,*s->current_slot,event,seven)) return 0;
     return *s->sequence_phase==3 || post_outcome(s,seven?0xfe:0xff,seven?7:4);
 }
 int fa18_restore_native_postflight_view(FA18NativePostflight *s,unsigned slot) {

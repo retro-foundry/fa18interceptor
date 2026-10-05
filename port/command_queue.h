@@ -50,5 +50,10 @@ int fa18_bind_command_queue_word(FA18CommandQueue *queue, unsigned offset,
  * field owners, retaining preceding stores and leaving the result unset. */
 int fa18_publish_native_command(FA18CommandQueue *queue, uint32_t event,
                                 uint32_t *published_event);
+/* Same publication with the live carried axis used by record/view owners.
+ * Signed queue indices replace its low word; the wrap-to-zero path clears
+ * the whole value. NULL retains the event-only interface above. */
+int fa18_publish_native_command_with_axis(FA18CommandQueue *queue,uint32_t event,
+                                            uint32_t *published_event,uint32_t *axis);
 
 #endif

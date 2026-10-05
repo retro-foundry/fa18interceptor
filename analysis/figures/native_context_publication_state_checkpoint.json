@@ -1,0 +1,44 @@
+{
+  "status": "complete_native_context_publication_no_child_contracts",
+  "complete_entries": [
+    "C1BEE8",
+    "C1BA86",
+    "C1B906"
+  ],
+  "actual_children": [
+    "C08324",
+    "C082B8",
+    "C1BA86",
+    "C1B906",
+    "C1C23C"
+  ],
+  "child_contracts": [],
+  "unreachable_arm_proof": "C1B906 clears D7 low byte then stores mode zero; no intervening child or mode write; signed mode-three arm C1BA28..C1BA60 excluded; all bytes sealed",
+  "cases": 24576,
+  "cases_per_entry": 8192,
+  "source_boundaries": 122,
+  "covered_boundaries": 122,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; typed records and carried axis independently checked",
+  "native_cpu_dependency": false,
+  "limitations": "caller must supply original span/queue data and canonical shared field bindings; full native startup/frame integration pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "5698fb4bc3add4f4def7ba26b6f39948af00aeb4746aaca07740cc5ec55db1c3",
+  "reports": [
+    "native context publication: 24576 complete calls match all game RAM, typed records, viewed identity, event and carried axis; no child contracts"
+  ],
+  "source_sha256": {
+    "port/native_context_publication.c": "f1d9ca26d1a968be38b93dcf62390c6687908e681be674e003aa9d050824417f",
+    "port/native_context_publication.h": "c1fe9d3cbb374d98aa5adcab49e8a56a4cf85696ea932556c583ec738c7df3f4",
+    "port/view_command_input.c": "04a1e13d51d196abbac0735e8e89f2550b112a4bca6ab5c137b6cce156780a14",
+    "port/view_command_input.h": "ad4ddffd1774af0b6ba573729c3203d9fec9668621dbbc9a802d7b43d31389c2",
+    "port/view_command_controls.c": "8f31148ec0391b1efc8dd266ab22f83ddcf1b8e946d0e28bfc9257a07421ba71",
+    "port/command_queue.c": "a95d9a4ced4b0c6bb1a7aff8db063bad0955ca87864923eb9a52d324d5756d00",
+    "port/command_queue.h": "6cfd5737cf965fa3978f8b7736bc5b11480cd522210e110beea660572b58f9ea",
+    "port/native_postflight.c": "de18690228f9a6df340320993c7b8c0b8dd0d0ba5ec5e5834393ab177cbaa3c9",
+    "port/native_postflight.h": "a4078af15bfb70b232ff5b98e6e80e960da6fbd05d5d624ee8203f4210af2664",
+    "port/native_postflight_contract_test.c": "bec6a6956472b9a319a3a372c54906d24ef2b113ee2d88ec06d30fce14009b9e",
+    "port/CMakeLists.txt": "295d85196af72ac73c77000b29606b5fa8c5381bce432f53749f3bb08b13592e",
+    "tools/recomp/native_context_publication_oracle.c": "a713ff32910f279bd9971b113eb08c5080600731221e70d1d3f8a9aee603b247",
+    "tools/recomp/check_native_context_publication.py": "635dbc218255d9bdfb0137ab00653108bc69848f663943e0ac22cc7c73fa6979"
+  }
+}
