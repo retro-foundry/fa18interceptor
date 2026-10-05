@@ -68,8 +68,10 @@ runner builds, the unchanged native guard passes 417 files and the original
 
 ## Remaining full-game work
 
-Implement the five context actions and actual aircraft/status/audio/spawn
-children, complete queue publication with signed-index alias ordering, load
+The five context actions and their actual geometry/observer children are now
+implemented as a native component; see `native_context_command_input.md`.
+Implement actual aircraft/status/audio/spawn children, complete queue
+publication with signed-index alias ordering and full parent dispatch, load
 the original records and tables, and compose the full native command owners
 into startup, menus, flight, scene/render/audio scheduling, outcomes,
 persistence and exit. The current native game links these components but

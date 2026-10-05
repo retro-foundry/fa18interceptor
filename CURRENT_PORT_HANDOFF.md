@@ -111,6 +111,28 @@ Continue with context actions, actual aircraft/audio/spawn children, queue
 publication, original data loading and full runtime composition. Linking the
 library into the bounded native runtime does not complete the game.
 
+Context progress: `port/context_command_input.c/.h` implements all five context
+actions. `context_command_controls.c` implements the actual local-to-world and
+observer-position children ($C091E0/$C0915A); both voice-release calls remain
+explicit audio dependencies. State shares view/aircraft/indexed owners and a
+queue-owned taken byte. Pose descriptors require original resolved records,
+preset words and grid pairs; unresolved data fails without invented positions.
+Native recorder destinations preserve the four-byte $FF terminator and source
+gate ordering. The context child enum moved unchanged into a CPU-free header.
+
+Validation passes 20,480 source comparisons with full RAM, events, ordered
+child inputs/states and parent/child stack writes matched. All 134/134 parent
+and 46/46 actual-child boundaries are covered; the original state seal is
+checked. Only voice-release children use test contracts. GNU strict-warning/
+MSVC contracts and all five input CTests pass, the GNU contract has no CPU/bus/
+machine symbols, native MSVC and reference MSVC ROM-free runners build, native
+guard passes 421 files and the unchanged ownership audit passes. See
+`analysis/routines/native_context_command_input.md` and its checkpoint.
+Continue with queue publication and complete native parent dispatch/reset/
+fault behavior, actual remaining children, original data loading and the full
+game loop. All four action families now have native components, but neither
+their presence nor linking them into the bounded runtime completes the game.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

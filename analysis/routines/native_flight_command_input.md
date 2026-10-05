@@ -77,7 +77,9 @@ Checkpoint: `analysis/figures/native_flight_command_input_checkpoint.json`.
 ## Remaining work
 
 Implement the actual status/audio, space-press, spawn and eject-publication
-children, context actions, and complete queue publication. The view action
+children and complete queue publication/parent dispatch. The context component
+now includes its actual geometry/observer children; see
+`native_context_command_input.md`. The view action
 family and its actual zoom/redraw children are now complete as a component;
 see `native_view_command_input.md`. Load
 real native records/assets and compose them into startup, menus, flight,

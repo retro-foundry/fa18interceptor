@@ -1,0 +1,40 @@
+{
+  "status": "validated_native_context_actions_full_runtime_integration_pending",
+  "actions": 5,
+  "cases": 20480,
+  "source_boundaries": 134,
+  "covered_boundaries": 134,
+  "child_source_boundaries": 46,
+  "covered_child_boundaries": 46,
+  "native_cpu_dependency": false,
+  "actual_children": [
+    "C091E0",
+    "C0915A"
+  ],
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "3c7ceaf40caed9f599fdacbcf5a527832b202a5385ca9e1b418b63793fa2079f",
+  "child_scope": "actual geometry/observer compared against original instructions; two voice-release calls use explicit test contracts",
+  "reports": [
+    "native context C1B664: 4096 actions matched full RAM, event and ordered child inputs/state; 3072 actual geometry/observer, 0 contracted audio children",
+    "native context C1B66C: 4096 actions matched full RAM, event and ordered child inputs/state; 3072 actual geometry/observer, 0 contracted audio children",
+    "native context C1B6C2: 4096 actions matched full RAM, event and ordered child inputs/state; 6144 actual geometry/observer, 0 contracted audio children",
+    "native context C1BF8C: 4096 actions matched full RAM, event and ordered child inputs/state; 0 actual geometry/observer, 1024 contracted audio children",
+    "native context C1C06E: 4096 actions matched full RAM, event and ordered child inputs/state; 0 actual geometry/observer, 1024 contracted audio children"
+  ],
+  "source_sha256": {
+    "port/context_command_input.c": "62f436c852924c1fa37ace2aa407d0f0b06d6d6c220fd4799ace5a414b31160e",
+    "port/context_command_input.h": "667b6514bd64990cb8c572ce07b397c10fe5d8d88c3197790da5018f79268e0c",
+    "port/context_command_types.h": "ac05a8c136e910095c94e822830461ffc270dcaf08dbe7d5d929b14611c5df10",
+    "port/context_command_controls.c": "94fd3576a278b1983883432eeb5f910aacedc8718025f78c429c1d98220ab5be",
+    "port/context_command_input_contract_test.c": "a9de79f44f60d696ec94a94fc32f2e80d7a733b64713e8f032d3a79df51e3be3",
+    "port/flight_command_input.h": "e1792cd6089d198ac51edc2539db7c4d1e2ea59f6339f814368b77ae3d5bf054",
+    "port/view_command_input.h": "a84d186104a39b64307538f6a43d6196295e915113b4a4118eddaef355e974a8",
+    "port/command_input.h": "221a9c9bbbb2072941ff1cf2fac578139c5e2f8ca2bba9be2918cfbd33b7f496",
+    "port/command_types.h": "ead9fc0ba9a37f0527e2275a65cf7dc1dfd96803fe64ae2020fef265cc3a14d3",
+    "port/indexed_controls.h": "5058d10d7d5775ccf1972e7e0a74c2c63723cdc81c4330ceed87ddf7b0b5d4af",
+    "tools/recomp/check_native_context_command_input.py": "f8f8afa69526e801067bfabb20d45dbe90109d77a905b0f1b03a6219cb876219",
+    "tools/recomp/native_context_command_input_oracle.c": "6ede39c53464214db3dbc6281bc53c9a2b803094a8be5324090f498a9bf11d2c",
+    "tools/recomp/context_commands_oracle.c": "e3afdca18f4594f021d8160c6de316bd5d950ecc6b44dba3f62c38c6d7e9c181",
+    "analysis\\data\\command_dispatch_source_scope.json": "b1d2c56f1d4a1ebedd6be089c3d1b55681604fb3cfa195032524368a8037fe74"
+  }
+}
