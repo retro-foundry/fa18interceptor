@@ -24,6 +24,13 @@ int main(void) {
     assert(!memcmp(bytes+0xa4,original+7*512+0xa4,512-0xa4));
     assert(fa18_reset_native_record_orientation(bank.records+7,angles,&data));
     assert(bank.aircraft[7].secondary_flags==0xa5a1);
+    bank.records[7].angle_first=123; bank.geometry[7].angle=456; bank.records[7].angle_third=789;
+    bank.records[7].forward[0][0]=111; bank.geometry[7].inverse[0][0]=222;
+    assert(fa18_publish_native_record_inverse_with_axis(bank.records+7,angles,&data,NULL));
+    assert(bank.records[7].angle_first==123 && bank.geometry[7].angle==456 && bank.records[7].angle_third==789);
+    assert(bank.records[7].forward[0][0]==111 && bank.geometry[7].inverse[0][0]==0x4000);
+    assert(bank.aircraft[7].secondary_flags==0xa5a1);
+    assert(fa18_publish_native_record_orientation(bank.records+7,angles,&data));
     /* Missing forward/inverse data must retain stores completed earlier. */
     angles[0]=0xffff;
     assert(!fa18_publish_native_record_orientation(bank.records+7,angles,&data));

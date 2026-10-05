@@ -29,8 +29,11 @@ including actual spawning, point publication and orientation. Its 40,960
 comparisons cover all 635 original boundaries with no child contracts; original
 region/descriptor data loaders resolve live hunk references. Native dispatch now replaces the final outer scheduler callback, including
 actual view-point classification and record/detail publication. Its source
-proof now covers 106,496 calls and all 1,094 reachable boundaries; only the true
-view fault contract remains. Actual native normalization shares the magnitude
+proof now covers 106,496 calls and all 1,095 reachable boundaries with no child
+contracts. The release fault hook is a sealed RTS; native error publication
+and continuation are direct. Pose now shares actual inverse-matrix publication,
+with 24,576 calls at all 804 boundaries and twelve remaining lower families.
+Actual native normalization shares the magnitude
 and output owners with view/range and active-origin adjustment. Its own proof
 covers 24,576 calls at all 98 boundaries; actual origin adjustment adds 32,768
 calls at all 143 boundaries with no child contracts. Original Hunk-8 magnitude

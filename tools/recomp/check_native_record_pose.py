@@ -8,9 +8,9 @@ from check_record_region_probe import ROOT, build_oracle, default_bash
 from recomp import classify, static_target
 
 ENTRY = 0xc25b66
-ENTRIES = (ENTRY, 0xc2651e)
-CHILDREN = (0xc2d970,0xc28e28,0xc2c392,0xc1b27e,0xc25704,0xc13d84,0xc2d408,
-            0xc149be,0xc26ebe,0xc17f8c,0xc06c02,0xc26322,0xc2b05a,0xc26352)
+ENTRIES = (ENTRY, 0xc2651e, 0xc2d970)
+CHILDREN = (0xc28e28,0xc2c392,0xc1b27e,0xc25704,0xc13d84,0xc2d408,
+            0xc149be,0xc26ebe,0xc17f8c,0xc26322,0xc2b05a,0xc26352)
 
 
 def main():
@@ -59,6 +59,8 @@ def main():
             pending.append(target)
         else:
             pending.append(pc+length)
+    if rows[0xc06c02]['bytes'] != '4e75':
+        raise RuntimeError('release fault hook is no longer the sealed RTS')
     directory = ROOT/'build/recomp'
     directory.mkdir(parents=True, exist_ok=True)
     header = '/* Sealed record-pose graph with actual motion-history child; validation only. */\n'
@@ -86,14 +88,18 @@ def main():
         if visited != expected:
             raise RuntimeError(f'uncovered boundaries: {sorted(expected-visited)}')
         paths = ['port/native_record_pose.c', 'port/native_record_pose.h',
+                 'port/native_record_orientation.c', 'port/native_record_orientation.h',
+                 'port/flight.c', 'port/flight.h', 'port/two_angle_matrix.c', 'port/two_angle_matrix.h',
+                 'port/native_scene_regions_test_support.h',
                  'port/native_record_pose_contract_test.c', 'port/native_record_pose_test_support.h',
                  'port/native_control_record_update.c', 'port/native_control_record_update.h',
                  'port/native_control_record_update_contract_test.c', 'port/CMakeLists.txt',
                  'port/native_record_update_stage_contract_test.c', 'port/scene_bootstrap_native_contract_test.c',
                  'tools/recomp/native_record_pose_oracle.c', 'tools/recomp/check_native_record_pose.py']
         checkpoint = {
-            'status': 'complete_native_record_pose_with_actual_motion_history',
-            'complete_entries': ['C25B66', 'C2651E'], 'actual_children': ['C2651E'],
+            'status': 'complete_native_record_pose_with_actual_history_inverse_and_release_fault',
+            'complete_entries': [f'{pc:06X}' for pc in ENTRIES], 'actual_children': ['C2651E','C2D970','C2E514','C2E6DA','C06C02'],
+            'release_fault_hook': {'pc':'C06C02','bytes':'4e75','effect':'return only'},
             'child_contracts': [f'{pc:06X}' for pc in CHILDREN],
             'unreachable_arm_proof': {'guard':guard,'excluded':'C26058-C26068',
                 'reason':'unchanged class byte is reloaded after its zero-class exit; second BNE must branch'},

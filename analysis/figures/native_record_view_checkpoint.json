@@ -1,5 +1,5 @@
 {
-  "status": "complete_native_record_view_with_actual_normalization_and_explicit_fault",
+  "status": "complete_native_record_view_no_child_contracts",
   "complete_entries": [
     "C23CA6",
     "C2574A",
@@ -11,19 +11,22 @@
     "C2574A",
     "C1D974"
   ],
-  "child_contracts": [
-    "C06C02 (fault, request mutation)"
-  ],
+  "child_contracts": [],
+  "release_fault_hook": {
+    "pc": "C06C02",
+    "bytes": "4e75",
+    "effect": "return only"
+  },
   "cases": 24576,
-  "source_boundaries": 481,
-  "covered_boundaries": 481,
+  "source_boundaries": 482,
+  "covered_boundaries": 482,
   "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; carried axis and companion identity; shared native record owners verified independently against original output",
   "native_cpu_dependency": false,
-  "limitations": "fault child remains explicit; normalization runs actual C2574A/C1D974; caller binds source view/status/zone assets; full native startup/frame graph pending",
+  "limitations": "caller binds source view/status/zone assets; proven source factor loops fail explicitly; full native startup/frame graph pending",
   "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
-  "original_pc_bytes_sha256": "ac3edf3c62501b96547576a1ff9d81e4f65537b02faaffd1b18d48bc2a3317b7",
+  "original_pc_bytes_sha256": "5d0b2b0fe1c28287d3c48746c5a249505074cdcca0f95586a583b562d0d708c8",
   "reports": [
-    "native record view: 24576 calls match all game RAM, carried axis and companion; 9104 actual normalizations/759 fault contracts"
+    "native record view: 24576 calls match all game RAM, carried axis and companion; 9104 actual normalizations/759 actual release fault returns; no child contracts"
   ],
   "source_sha256": {
     "port/native_vector_math.c": "98119a8ed53b7a5866cf9a2c05c8ee1832ea418acd582eed3bdcd5ca9c09c322",
@@ -31,12 +34,12 @@
     "port/scene_component_magnitude.c": "6d7a276d759859d00e790f4cf2b5216ac8d487251f85b5e4cd327ebcf5c7c5c2",
     "port/scene_component_magnitude.h": "c54699f1fdbf6bf825ffe518905531cdf72a13eccb9211e08e3db77a3dbc6e00",
     "tools/recomp/native_vector_math_fixture.h": "1042ba04237a5c50a8a74c738f08accfec231998404e923186d78dc0af42a18c",
-    "port/native_record_view.c": "9289a9297703f0fa542b704772546e4aba1f43afbd55a5a48a5b99996350c6f7",
-    "port/native_record_view.h": "6811ab036b7aea5c581c9371f69724a6e67302c2d84f92631108ff1a6d1374c4",
-    "port/native_control_record_update.c": "c2f1d26bca0343fbabba1f5be116a20f0129ee1e61631288825359a04529768a",
+    "port/native_record_view.c": "1ced66c2a7a0c9d1f40331fdc0e6d480d8848613cf16fbe63339cd520c418f38",
+    "port/native_record_view.h": "d258c9537d158aeb9fea2dd49751b8f195593cd15e1d4b8862e8b69717d933dc",
+    "port/native_control_record_update.c": "470b513fec1e9dae54ff94ca4f075c7f5e07632b6a80478a1fabe7265c857069",
     "port/native_control_record_update.h": "430a9ffb196104f50cef5c2daf20eaa05251d22157bf61163ea126f1a90b2279",
     "port/native_scene_records.c": "a285bb6b28d721153af0887e61a178620f8e1dbfd759bd54ab20e79bebc67096",
-    "tools/recomp/native_record_view_oracle.c": "816191b2c8eace614eb84c5235af54c5124bf31d82465379484b8800cc385fd6",
-    "tools/recomp/check_native_record_view.py": "3eca3d10fb296d7258f211e0b95cc6d6dc2afb54d7957b48981d6bcc853a255f"
+    "tools/recomp/native_record_view_oracle.c": "95519820b67d90e789a9d7ef6a4cf112a545b84cc9f97e9025a9fc235bdd6dd1",
+    "tools/recomp/check_native_record_view.py": "7085df015738d3513cd5e1fbcb16e994262f4d83432f17b0039b91e8fc8426d2"
   }
 }

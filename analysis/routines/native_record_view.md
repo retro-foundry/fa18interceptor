@@ -22,23 +22,26 @@ without clearing pending; other status exits clear it. Signed-overflow branches
 use the mathematical sign of the last word/long operation before subsequent
 wrapped comparisons. Products wrap in source order. Negative status rows read
 explicit preceding field owners. Fault children retain the published error word
-and may change live pending state before the parent resumes.
+and return directly through the sealed release hook, without changing pending
+state or the carried axis.
 
 `C2574A` normalization now invokes the actual native vector-math owner and
-`C1D974` magnitude body. Only `C06C02` fault handling remains an explicit lower
-boundary. Missing data/owners or a non-completing exhausted zone list fail
+`C1D974` magnitude body. The release fault hook `C06C02` is the single original
+`RTS` instruction (`4e75`). Its former callback surface is removed; error
+publication and subsequent source continuation are direct. Missing data/owners
+or a non-completing exhausted zone list fail
 explicitly; no child substitute is installed. The caller's viewer work retains
 a native record pointer for the record-consuming routes; source data-list
 cursors are not represented as fabricated aircraft pointers or as a guest bus.
 
 Validation: `python tools/recomp/check_native_record_view.py` passes 24,576
 original-byte calls across the view and both normalization entries at all
-481/481 graph boundaries, including actual placement, in-sight, normalization
+482/482 graph boundaries, including actual placement, in-sight, normalization
 and magnitude instruction children. Every Chip/Slow RAM byte matches
 except CPU ABI stack `$C7FD00..$C7FF00`; typed aircraft/matrix/position owners are
 checked independently. There are 9,104 actual normalization calls and 759
-controlled fault calls. Fault contracts preserve source errors and vary pending
-state and carried axis. They do not prove fault handling. Core normalization
+actual release fault returns. No child contracts remain. The graph and audit
+seal the release hook bytes explicitly. Core normalization
 entries also prove non-completing source factor loops; see `native_vector_math.md`.
 Fixtures cover all sixteen callers/viewers, shared caller/viewer identity,
 all parent routes, table advance/end/error, both zone lists, linked selection,
@@ -52,8 +55,8 @@ The subsequent `native_record_control` batch supplies the carried axis directly
 and removes root/secondary control callbacks. The subsequent `native_record_pose`
 batch makes pose and motion history direct. The subsequent placement/finish/regions/dispatch batches remove the outer
 scheduler callbacks. View work now returns the actual companion identity and
-full carried axis; actual normalization and the fault contract expose their returned axis.
+full carried axis; actual normalization and release fault behavior retain their source effects.
 The updated proof checks these outputs and independently compares typed
 records against original output. Native
 main still does not invoke this startup graph; full native runtime integration
-and the actual fault owner remain open.
+and original runtime bindings remain open.

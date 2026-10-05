@@ -3,21 +3,23 @@
 #define FA18_NATIVE_RECORD_POSE_TEST_SUPPORT_H
 #include "native_record_pose.h"
 #include "native_record_control.h"
+#include "run075_trig_asset.h"
 #include <assert.h>
 typedef struct {
     FA18NativeRecordMotionHistory history; FA18NativeRecordPoseOps ops;
+    FA18FlightTrigData trig;
     uint8_t history_bytes[128]; PortFieldByte fields[128];
     uint16_t selector,matrix_control,shown,grid_x,grid_z,error,collision_slot,damage;
     uint32_t events;
     uint8_t cell_only,activity,bar_redraw,view_decay,collision_enable,collision_inhibit;
     uint8_t cockpit_a,cockpit_b,report,failure,failure_view,request,request_clear,count,index;
-    unsigned calls[14]; int complete;
+    unsigned calls[12]; int complete;
 } FA18RecordPoseTestStorage;
 static int fa18_test_pose_child(void *context,FA18NativeRecordPose *state,
         FA18NativeRecordPoseChild child,const FA18NativeRecordPoseInput *in,
         FA18NativeRecordPoseResult *out) {
     FA18RecordPoseTestStorage *storage=context;
-    assert(state && in && out && child<14 && in->slot<16);
+    assert(state && in && out && child<12 && in->slot<16);
     ++storage->calls[child];
     if(child==FA18_POSE_MOTION_CANDIDATE) out->clear=1;
     return storage->complete;
@@ -31,8 +33,10 @@ static void fa18_test_bind_record_pose(FA18NativeRecordPose *s,FA18RecordPoseTes
     storage->fields[30]=(PortFieldByte){.unsigned_word=&storage->collision_slot,.shift=8};
     storage->fields[31]=(PortFieldByte){.unsigned_word=&storage->collision_slot};
     storage->history=(FA18NativeRecordMotionHistory){storage->fields,128,32};
+    storage->trig=(FA18FlightTrigData){.bytes=fa18_run075_trig_bytes,.byte_count=sizeof fa18_run075_trig_bytes};
     storage->ops=(FA18NativeRecordPoseOps){fa18_test_pose_child,storage}; storage->complete=1;
     *s=(FA18NativeRecordPose){.records=control->records,.ops=&storage->ops,.history=&storage->history,
+        .trig=&storage->trig,
         .current_slot=control->current_slot,.current_stride=stride,.target_slot=control->target_slot,
         .selector_word=&storage->selector,.matrix_control=&storage->matrix_control,
         .shown_message=&storage->shown,.grid_x=&storage->grid_x,.grid_z=&storage->grid_z,

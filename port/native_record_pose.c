@@ -95,10 +95,10 @@ int fa18_update_native_record_pose(FA18NativeRecordPose *s,unsigned slot) {
     if(!valid(s,slot)) return 0;
     r=s->records->records+slot; a=r->aircraft; in.slot=slot;
     if(*s->current_slot && *s->cell_only) {
+        uint16_t angles[3];
         if(!(a->flags&0x40u)) return 1;
-        in.angles[0]=(int16_t)r->angle_first; in.angles[1]=(int16_t)r->geometry->angle;
-        in.angles[2]=(int16_t)r->angle_third;
-        if(!consume(s,FA18_POSE_CELL_MATRIX,&in,&out)) return 0;
+        angles[0]=r->angle_first; angles[1]=r->geometry->angle; angles[2]=r->angle_third;
+        if(!fa18_publish_native_record_inverse_with_axis(r,angles,s->trig,NULL)) return 0;
         x=rotate_cell((uint32_t)(int32_t)(int16_t)r->word_0c);
         z=rotate_cell((uint32_t)(int32_t)(int16_t)r->word_0e);
         r->byte_0a=cell((uint16_t)x,(uint16_t)z); return 1;
@@ -287,7 +287,7 @@ collision_status:
         if(!timer(r,&countdown)) return 0;
         if((int16_t)countdown<=15) goto record_timer;
         *s->error_word=58;
-        if(!consume(s,FA18_POSE_FAULT,&in,&out)) return 0;
+        /* Original release hook C06C02 is RTS; continue with the timer. */
         goto record_timer;
     }
     kind=a->equipment_kind&0xf0u;

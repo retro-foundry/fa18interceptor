@@ -50,9 +50,12 @@ Native main integration and the complete playable native graph remain pending;
 see [the bootstrap proof](analysis/routines/native_scene_bootstrap.md).
 Native selected-range and record-view owners now run directly in its scheduler,
 with 8,192 range and 24,576 view/normalization original-byte comparisons and
-complete coverage of their 137/481 respective boundaries. Actual magnitude,
-point placement, in-sight and normalization children are direct; sound and
-fault children remain explicit. Native normalization and origin adjustment
+complete coverage of their 137/482 respective boundaries. Actual magnitude,
+point placement, in-sight, normalization and release fault behavior are direct;
+the range sound child remains explicit. View has no child contracts.
+Pose now runs the actual cell inverse matrix directly and preserves the release
+fault continuation, with 24,576 comparisons at all 804 boundaries and twelve
+remaining lower families. Native normalization and origin adjustment
 also have separate complete proofs covering 98/143 boundaries with no child
 contracts; their magnitude assets match all 258 original disk words. See
 [native vector math](analysis/routines/native_vector_math.md).
@@ -66,7 +69,7 @@ owners; original-disk assets are checked separately. See
 Finish and all eight post-flight modes now run directly too, with actual
 selection release, readiness and view restoration. Their 90,112 source
 comparisons cover all 371 boundaries. Native periodic and dispatch now complete
-the outer scheduler, with 40,960/106,496 comparisons at all 635/1,094 boundaries;
+the outer scheduler, with 40,960/106,496 comparisons at all 635/1,095 boundaries;
 original runtime bindings and lower owners remain required. Actual record-view
 publication now runs with native zoom, redraw and queue code. The connected
 post-flight proof covers 481 boundaries in 90,112 calls with no child contracts.

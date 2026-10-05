@@ -1,14 +1,23 @@
 {
-  "status": "complete_native_record_pose_with_actual_motion_history",
+  "status": "complete_native_record_pose_with_actual_history_inverse_and_release_fault",
   "complete_entries": [
     "C25B66",
-    "C2651E"
+    "C2651E",
+    "C2D970"
   ],
   "actual_children": [
-    "C2651E"
-  ],
-  "child_contracts": [
+    "C2651E",
     "C2D970",
+    "C2E514",
+    "C2E6DA",
+    "C06C02"
+  ],
+  "release_fault_hook": {
+    "pc": "C06C02",
+    "bytes": "4e75",
+    "effect": "return only"
+  },
+  "child_contracts": [
     "C28E28",
     "C2C392",
     "C1B27E",
@@ -18,7 +27,6 @@
     "C149BE",
     "C26EBE",
     "C17F8C",
-    "C06C02",
     "C26322",
     "C2B05A",
     "C26352"
@@ -69,30 +77,37 @@
     "excluded": "C26058-C26068",
     "reason": "unchanged class byte is reloaded after its zero-class exit; second BNE must branch"
   },
-  "cases": 16384,
+  "cases": 24576,
   "cases_per_entry": 8192,
-  "source_boundaries": 595,
-  "covered_boundaries": 595,
+  "source_boundaries": 804,
+  "covered_boundaries": 804,
   "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; shared native record owners verified independently",
   "native_cpu_dependency": false,
   "limitations": "motion/matrix/input/collision lower children remain explicit; runtime integration pending",
   "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
-  "original_pc_bytes_sha256": "8f90ca1d3267250705b136dccfe3dd41039cf5967246fad1346f4deb592c9e01",
+  "original_pc_bytes_sha256": "c769ceb3aee3053acd5f17b421f8788d3cce69b4034c5c1b03acda2c6fa2fa76",
   "reports": [
-    "native record pose: 16384 complete calls match all game RAM; child counts 44 2773 1053 2858 271 286 3827 1927 5626 3 46 388 388 907"
+    "native record pose: 24576 complete calls match all game RAM; 8236 actual inverse matrices/46 actual release fault returns; twelve child counts 2773 1053 2858 271 286 3827 1927 5626 3 388 388 907"
   ],
   "source_sha256": {
-    "port/native_record_pose.c": "5efe4c78e4ff79e233a635ae91b394abaeda76cc09727d9b85b21fd634399113",
-    "port/native_record_pose.h": "a885f78f21da21148d5fe7654f9d26d99d37cada0f1ec7ab786f62f22638877b",
-    "port/native_record_pose_contract_test.c": "744da7547f830a437eaf219696c5c911ecd90a4a076837114e45b74f1ad0581d",
-    "port/native_record_pose_test_support.h": "5dbb8291b5a74d0115dd242ee80e512592b23d02a4cc993f648367087e7204ee",
-    "port/native_control_record_update.c": "e01db518cd9b62c731b23ab60a4618463141a4961a42f67d4b6b045acdfd50ca",
-    "port/native_control_record_update.h": "0af63ba19cb79618eeee1e16685b34e76d6b64589c738b437bf02730b81f6045",
-    "port/native_control_record_update_contract_test.c": "1ebe3d88e7508366087127a827ee773a8c0ec070e75190e70b962a4c9b13ea8a",
-    "port/CMakeLists.txt": "6c67042268354d2128bb8586fc6c60ef3ea6c26f7d7466dd117effbe5bb5a3ef",
-    "port/native_record_update_stage_contract_test.c": "1564d871b073a8a9fabdff2310e0771a9f1b5ed421afb808fd76a2ebbbef0b26",
-    "port/scene_bootstrap_native_contract_test.c": "4c71cf2e64d340e82ecba4458bb4a7c9a756ee4bc4a8a50d3198e49cf453c980",
-    "tools/recomp/native_record_pose_oracle.c": "aa1cbbd375b2dccd94c074a8aa479a861ad8b9304826f82ff267231ab58cfa8f",
-    "tools/recomp/check_native_record_pose.py": "85613dc5a48d92b1816262ffff46c53ecba44cb26597cdfd41d82164860c257b"
+    "port/native_record_pose.c": "ed2ddfd91d015fe0081a9203da2547777ce53b20df569f21fb098e5782a2aa6f",
+    "port/native_record_pose.h": "34298819a2672650fbc450c3f77be57af8be04519c09a9ec5f83244ca3b81441",
+    "port/native_record_orientation.c": "d54a0798413a1e4473e366acf888ff0a85a904ddc02f8d42ad3971f6ca0707fc",
+    "port/native_record_orientation.h": "e8d8fa9ffe445bac2c1087b323d39d5c7b20608c0440ae1abe72b574e424fb01",
+    "port/flight.c": "7b0d810e3cca4300abba756658188e15b496a614af3ec843850880ceaa92d77a",
+    "port/flight.h": "a229d2da35303a77c7c87a9c5fd4ea45e7713f4c0a519d1651b8c8327459b2af",
+    "port/two_angle_matrix.c": "6cae389c9dd634348ea9cd507925da194a71d80a7b7282b856ff170a6b4797f1",
+    "port/two_angle_matrix.h": "a1c10aa9eef9c719712ae3b5af7eea28bb6fd9b9efba37b05cc151da81e16361",
+    "port/native_scene_regions_test_support.h": "f0004581be92a647bf59fc9f768d9871af6a289c6bff7677cf4cdd9881ef7ecc",
+    "port/native_record_pose_contract_test.c": "d48c1ea2d548d6e056303ae78dc1b1533f229c87a29a7f5182f1a09baa5dce64",
+    "port/native_record_pose_test_support.h": "b6cf5bd844e444d0b1f1c1a519d14618337ca65d5c610daff77e74471ff35d38",
+    "port/native_control_record_update.c": "470b513fec1e9dae54ff94ca4f075c7f5e07632b6a80478a1fabe7265c857069",
+    "port/native_control_record_update.h": "430a9ffb196104f50cef5c2daf20eaa05251d22157bf61163ea126f1a90b2279",
+    "port/native_control_record_update_contract_test.c": "231e8510eb6ecedd56a0792ee05ad99d6164d76c9a5f2d712a5c40922be8e524",
+    "port/CMakeLists.txt": "3e522173998c865a994585ec4224a90ed34fc2b28bd06dd14cb067d4d0b632d3",
+    "port/native_record_update_stage_contract_test.c": "06cf056002b9c8cc12b9c8a7194793df5d4ac0fd3cc816078fa37af346c9b5d8",
+    "port/scene_bootstrap_native_contract_test.c": "15d750c738bd242e16169554137859c2f200fc414de149f8813b5762e3c98c96",
+    "tools/recomp/native_record_pose_oracle.c": "7a6a1f8fa0502d9411d0311fcf9ed2fc3e4dd6af3e83ab192ca91f6621f92a3f",
+    "tools/recomp/check_native_record_pose.py": "6598ded176d1c0253d81b2f185e2d339139a31b8fba870e1a16d095b081c6545"
   }
 }

@@ -190,5 +190,7 @@ int main(void) {
     assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
     initialize(&f); f.vector_math.normalized=NULL;
     assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.pose.trig=NULL;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
     return 0;
 }

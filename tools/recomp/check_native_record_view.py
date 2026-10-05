@@ -8,7 +8,7 @@ from check_record_region_probe import ROOT, build_oracle, default_bash
 from recomp import classify, static_target
 
 ENTRIES = (0xc23ca6,0xc2574a,0xc25754)
-CHILDREN = (0xc06c02,)
+CHILDREN = ()
 
 
 def main():
@@ -45,6 +45,8 @@ def main():
             pending.append(target)
         else:
             pending.append(pc+length)
+    if rows[0xc06c02]['bytes'] != '4e75':
+        raise RuntimeError('release fault hook is no longer the sealed RTS')
     directory = ROOT/'build/recomp'
     directory.mkdir(parents=True, exist_ok=True)
     header = '/* Sealed record-view graph, actual placement and in-sight children; validation only. */\n'
@@ -76,13 +78,13 @@ def main():
                  'port/native_scene_records.c', 'tools/recomp/native_record_view_oracle.c',
                  'tools/recomp/check_native_record_view.py']
         checkpoint = {
-            'status': 'complete_native_record_view_with_actual_normalization_and_explicit_fault',
+            'status': 'complete_native_record_view_no_child_contracts',
             'complete_entries': [f'{pc:06X}' for pc in ENTRIES], 'actual_children': ['C091E0', 'C2436A', 'C2574A', 'C1D974'],
-            'child_contracts': ['C06C02 (fault, request mutation)'],
+            'child_contracts': [], 'release_fault_hook': {'pc':'C06C02','bytes':'4e75','effect':'return only'},
             'cases': args.cases*len(ENTRIES), 'source_boundaries': len(rows), 'covered_boundaries': len(visited),
             'comparison': 'all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; carried axis and companion identity; shared native record owners verified independently against original output',
             'native_cpu_dependency': False,
-            'limitations': 'fault child remains explicit; normalization runs actual C2574A/C1D974; caller binds source view/status/zone assets; full native startup/frame graph pending',
+            'limitations': 'caller binds source view/status/zone assets; proven source factor loops fail explicitly; full native startup/frame graph pending',
             'original_state_sha256': seal,
             'original_pc_bytes_sha256': hashlib.sha256(b''.join(
                 pc.to_bytes(4, 'big')+bytes.fromhex(row['bytes']) for pc, row in sorted(rows.items()))).hexdigest(),

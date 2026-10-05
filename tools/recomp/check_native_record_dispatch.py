@@ -8,7 +8,7 @@ from check_record_region_probe import ROOT, build_oracle, default_bash
 from recomp import classify, static_target
 
 ENTRIES = (0xc23a7e, 0xc23f4a, 0xc24458, 0xc24568, 0xc1b7a6, 0xc23ca6, 0xc1bee8, 0xc23ff8, 0xc1ba86, 0xc1b906, 0xc243f2, 0xc2574a, 0xc25754)
-CHILDREN = (0xc06c02,)
+CHILDREN = ()
 
 
 def main():
@@ -50,6 +50,8 @@ def main():
             pending.append(pc+length)
     if rows[0xc1b906]['bytes'] != '4207' or rows[0xc1b9cc]['bytes'] != '13c700c457a7' or rows[0xc1ba26]['bytes'] != '6d3c':
         raise RuntimeError('zero-mode branch proof changed')
+    if rows[0xc06c02]['bytes'] != '4e75':
+        raise RuntimeError('release fault hook is no longer the sealed RTS')
     directory = ROOT/'build/recomp'
     directory.mkdir(parents=True, exist_ok=True)
     header = '/* Sealed record-dispatch graph, actual placement and in-sight children; validation only. */\n'
@@ -81,13 +83,13 @@ def main():
                  'port/native_scene_records.c', 'port/command_queue.c', 'port/command_queue.h', 'port/view_command_controls.c', 'tools/recomp/native_record_dispatch_oracle.c',
                  'tools/recomp/check_native_record_dispatch.py']
         checkpoint = {
-            'status': 'complete_native_record_dispatch_with_actual_normalization_and_explicit_fault',
+            'status': 'complete_native_record_dispatch_no_child_contracts',
             'complete_entries': [f'{pc:06X}' for pc in ENTRIES], 'actual_children': ['C24568', 'C23CA6', 'C091E0', 'C2436A', 'C1D974', 'C2574A', 'C1BEE8', 'C1B7A6', 'C1C23C'],
-            'child_contracts': ['C06C02 (fault, request mutation)'],
+            'child_contracts': [], 'release_fault_hook': {'pc':'C06C02','bytes':'4e75','effect':'return only'},
             'cases': args.cases*len(ENTRIES), 'source_boundaries': len(rows), 'covered_boundaries': len(visited),
             'comparison': 'all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; carried axis, returned companion identity and decisions; typed record owners verified independently against original output',
             'native_cpu_dependency': False,
-            'limitations': 'fault child remains explicit; normalization runs actual C2574A/C1D974; caller binds source control/view/status/zone assets and live adjacent owners; only references in the supplied sixteen-record bank resolve; full native startup/frame graph pending',
+            'limitations': 'caller binds source control/view/status/zone assets and live adjacent owners; only references in the supplied sixteen-record bank resolve; proven source factor loops fail explicitly; full native startup/frame graph pending',
             'original_state_sha256': seal,
             'original_pc_bytes_sha256': hashlib.sha256(b''.join(
                 pc.to_bytes(4, 'big')+bytes.fromhex(row['bytes']) for pc, row in sorted(rows.items()))).hexdigest(),

@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-05. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit cf9cf747); ignored gate logs may
+history (the preceding handoff is in commit 73621613); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
@@ -13,7 +13,45 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: complete native `$C2574A`/`$C25754` normalization and actual
+Latest batch: record view and pose now use the actual release fault behavior.
+Sealed `$C06C02` is only `RTS` (`$4E75`). Error words still publish in source
+order, and the original continuation preserves carried axis/pending state.
+`FA18NativeRecordViewOps` is removed, and the pose fault child is removed.
+View and dispatch now have no lower child contracts.
+
+Pose's non-root cell route also runs actual `$C2D970` inverse-matrix publication
+through the shared orientation owner. Full orientation reuses that same body.
+The inverse entry preserves stored angles, forward matrix and flags. The
+scheduler validates that pose binds the region asset's same trig owner; missing
+data fails only when a source route reads it. Twelve actual pose lower families
+remain, down from fourteen; history, inverse and release fault behavior are direct.
+
+The expanded pose proof passes 24,576 calls across pose/history/inverse at all
+804 boundaries, including 8,236 actual inverse calls and 46 actual release fault
+returns. Independent typed owners, game RAM and inverse-entry carried axis match.
+Updated view covers 24,576 calls/482 boundaries and dispatch 106,496 calls/1,095
+boundaries, with actual normalization and release fault instructions. The
+orientation proof passes 12,288 calls/292 boundaries, all 65,536 lookup angles,
+and the original 1,802 Hunk-63 table bytes. The complete region proof passes
+40,960 calls at all 635 boundaries after the shared refactor. MSVC Release native game/affected builds, strict GNU
+compilation of thirteen affected units, ten affected CTests and the unchanged
+513-file native guard pass. See the view/dispatch/pose/orientation routine notes
+and checkpoints for exact reports.
+
+Next complete the matrix preparation/transforms and remaining startup-reachable
+pose/control owners, then reconcile canonical startup/input/queue aliases and
+original assets before installing the native startup/frame graph in main.
+Source inspection finds `$C2DAF2` calls `$C2E370`, a full-scale `$4000` matrix.
+The older `current_record_matrix.c` instead calls the `$C2E346`/`$100` builder,
+and its test mirrors that incorrect scale. Correct and prove this dependency
+before reusing it for native origin preparation. Actual origin transforms are
+`$C091A8` (preparation plus transform) and `$C091CE` (record inverse transform);
+`$C091F6-$C09248` supplies their shared wrapped products, shift and translation.
+Full active-origin adapter proof and bootstrap origin aliases remain required.
+Native main still does not invoke the complete graph; the playable ROM-free
+runner still uses Musashi, guest RAM and chipset state. The goal remains open.
+
+Preceding batch (`73621613`): complete native `$C2574A`/`$C25754` normalization and actual
 `$C1D974` magnitude now run directly in record view and selector-origin
 adjustment. Both normalization callback surfaces are removed. The native
 `$C29548` tail shares one implementation between terrain and active-origin
@@ -47,7 +85,7 @@ ten affected CTests and the unchanged 513-file native guard pass. Exact scope
 and source hashes are in `analysis/routines/native_vector_math.md` and the four
 math/origin/view/dispatch checkpoints.
 
-Next complete fault handling and startup-reachable pose/control owners,
+At that checkpoint the next work was fault handling and startup-reachable pose/control owners,
 reconcile canonical startup/input/queue aliases and original assets, then
 install the native startup/frame graph in main. Full active-origin parent
 adapter proof and the bootstrap origin alias gap remain. Native main does not
@@ -237,7 +275,7 @@ See `analysis/routines/native_record_pose.md` and its checkpoint. Composed
 bootstrap observations now occur at the matrix child inside root pose; scheduler
 contracts test actual action decay before readiness and direct secondary playback.
 
-Sound/messages, scene initialization, fault handling and actual
+Sound/messages, scene initialization and actual
 flight/collision/matrix/input remain lower
 requirements; they have not been replaced with substitutes.
 
@@ -294,15 +332,16 @@ still remain:
 - The outer scheduler uses actual native periodic, dispatch, placement and
   finish owners; `FA18NativeControlRecordOps` has been removed. Composed
   bootstrap contracts observe the matrix child inside root pose.
-- `FA18NativeRecordPoseOps`: fourteen matrix, control/input, flight/collision,
-  message/sound/fault and motion-slot boundaries. History is direct.
+- `FA18NativeRecordPoseOps`: twelve matrix, control/input, flight/collision,
+  message/sound and motion-slot boundaries. History and cell inverse are direct;
+  release fault handling is the source's sealed return.
 - `FA18NativeRecordControlOps`: tone eight, message posting and scene
   initialization beneath the direct control-stream owners.
 - `FA18NativePostflightOps`: retained historical parent-proof seam when the
   actual native publication owner is unbound. Production bindings remain
   required; publication, readiness, release and restoration have native bodies.
-- `FA18NativeRecordViewOps`: source fault handling; normalization is direct.
-  `FA18NativeRecordRangeOps`: sound program four. These are true lower children.
+- Record view has no callback surface: normalization and release fault behavior
+  are direct. `FA18NativeRecordRangeOps`: sound program four remains a true child.
 - `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
   the now-direct action selectors. They are route-dependent.
 - `FA18NativeSelectorOriginOps`: preparation, matrix A/B and regeneration.

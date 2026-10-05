@@ -1,12 +1,13 @@
 #ifndef FA18_NATIVE_RECORD_POSE_H
 #define FA18_NATIVE_RECORD_POSE_H
 #include "native_scene_records.h"
+#include "native_record_orientation.h"
 
 typedef enum {
-    FA18_POSE_CELL_MATRIX,FA18_POSE_SELECTED_RECORD,FA18_POSE_RECORD_ACTION,
+    FA18_POSE_SELECTED_RECORD,FA18_POSE_RECORD_ACTION,
     FA18_POSE_RECORD_CONTROLS,FA18_POSE_MESSAGE,FA18_POSE_RECORD_SELECTOR,
     FA18_POSE_RECORD_MATRIX,FA18_POSE_ROOT_FLIGHT,FA18_POSE_MOTION_CANDIDATE,
-    FA18_POSE_SOUND,FA18_POSE_FAULT,FA18_POSE_GROUND_PROJECTION,
+    FA18_POSE_SOUND,FA18_POSE_GROUND_PROJECTION,
     FA18_POSE_REGION_PROBE,FA18_POSE_MOTION_SLOT
 } FA18NativeRecordPoseChild;
 typedef struct {
@@ -15,7 +16,6 @@ typedef struct {
     uint16_t sound_arguments[2];
     uint32_t point[3]; /* motion candidate */
     uint32_t velocity[3]; /* ground projection */
-    int16_t angles[3]; /* cell matrix */
 } FA18NativeRecordPoseInput;
 typedef struct {
     uint16_t status;
@@ -35,6 +35,7 @@ struct FA18NativeRecordPose {
     FA18NativeSceneRecords *records;
     const FA18NativeRecordPoseOps *ops;
     const FA18NativeRecordMotionHistory *history;
+    const FA18FlightTrigData *trig;
     uint16_t *current_slot,*current_stride,*target_slot,*selector_word,*matrix_control;
     uint16_t *shown_message,*grid_x,*grid_z,*error_word,*collision_slot,*damage_count;
     uint32_t *events;
@@ -43,7 +44,8 @@ struct FA18NativeRecordPose {
     uint8_t *collision_report,*mission_failure,*failure_view,*request_flag,*request_clear;
     uint8_t *history_count,*history_index;
 };
-/* Complete C25B66 with actual C2651E history owner. Actual lower motion,
+/* Complete C25B66 with actual C2651E history, C2D970 inverse matrix and the
+ * sealed release fault return. Actual lower motion,
  * matrix, input and collision children remain route-dependent. */
 int fa18_update_native_record_pose(FA18NativeRecordPose *state,unsigned slot);
 int fa18_update_native_record_motion_history(FA18NativeRecordPose *state);

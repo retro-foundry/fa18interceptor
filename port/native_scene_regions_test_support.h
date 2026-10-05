@@ -21,5 +21,6 @@ static void fa18_test_bind_scene_regions(FA18NativeSceneRegions *regions,
         .admitted=update->view->admitted,.active=&storage->active,.reuse_jitter=&storage->reuse,
         .random_word=&storage->random,.jitter_x=&storage->jitter_x,.jitter_z=&storage->jitter_z};
     update->regions=regions;
+    update->pose->trig=&storage->assets.trig;
 }
 #endif

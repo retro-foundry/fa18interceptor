@@ -16,8 +16,8 @@ typedef struct {
 } FA18NativeRecordDispatch;
 
 /* Complete C23A7E, with actual C24568 classification, C23CA6 view, and
- * C1BEE8/C1B7A6 publication owners. Only the view's fault remains a lower
- * dependency. Completion and source pose decision are distinct. */
+ * C1BEE8/C1B7A6 publication owners, actual normalization and release fault
+ * behavior. Completion and source pose decision are distinct. */
 int fa18_dispatch_native_record(FA18NativeRecordDispatch *state,unsigned slot,
                                   unsigned companion_slot,int *decision);
 /* Complete original alternate entry C23F4A, including C243F2 tracking. */

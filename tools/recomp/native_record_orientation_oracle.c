@@ -90,7 +90,7 @@ int main(int argc,char **argv) {
             static const uint16_t boundary[]={0,1,0x7080,0x7081,0x8000,0xffff,0x1234,0xfffe};
             angles[i]=scenario<32?boundary[(scenario/4+i)%8]:(uint16_t)random_value();
             if(scenario%13==i) angles[i]=0;
-            REG_D[4+i]=angles[i]|(random_value()&0xffff0000u);
+            REG_D[(selected_entry==0xc2d970?5:4)+i]=angles[i]|(random_value()&0xffff0000u);
         }
         /* Test arbitrary adjacent words and every signed product, including
          * $8000*$8000 and wrapped accumulation, independently of ROM trig. */
@@ -103,6 +103,7 @@ int main(int argc,char **argv) {
         memcpy(m,before,sizeof *m);
         if(selected_entry==0xc2d954) ok=fa18_publish_native_record_orientation(native->bank.records+record,angles,&trig->data);
         else if(selected_entry==0xc2d94e) ok=fa18_reset_native_record_orientation(native->bank.records+record,angles,&trig->data);
+        else if(selected_entry==0xc2d970) ok=fa18_publish_native_record_inverse_with_axis(native->bank.records+record,angles,&trig->data,NULL);
         else return 1;
         if(!ok) return 1;
         store_scene(native);

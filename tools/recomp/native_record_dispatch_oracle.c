@@ -8,12 +8,7 @@
 #include "../../port/native_record_dispatch.c"
 #include "../../port/native_vector_math.c"
 #include "native_vector_math_fixture.h"
-static unsigned view_case,source_norms,source_faults,native_faults;
-static int view_fault(void *context,FA18NativeRecordView *s,uint32_t *axis) {
-    (void)context; if(!axis) return 0;
-    if(*s->error_word!=0x34 && *s->error_word!=0x35) return 0;
-    *axis=0xdef00000u+view_case; ++native_faults; *s->pending=(uint8_t)(view_case&1); return 1;
-}
+static unsigned view_case,source_norms,source_faults;
 static int original_view(void) {
     unsigned step,i;
     for(step=0;step<5000;++step) {
@@ -23,8 +18,7 @@ static int original_view(void) {
         if(pc==0xc2578a && !REG_D[0] && (int32_t)REG_D[1]>=0) return 2;
         if(pc==0xc06c02) {
             if(rd_u16(ERROR_CODE)!=0x34 && rd_u16(ERROR_CODE)!=0x35) return 0;
-            REG_D[4]=0xdef00000u+view_case; ++source_faults; wr_u8(FIRE_RECORD_PENDING,(uint8_t)(view_case&1));
-            REG_PC=m68ki_pull_32(); continue;
+            ++source_faults; /* Execute the sealed release RTS below. */
         }
         for(i=0;i<sizeof scene_source_bytes/sizeof scene_source_bytes[0];++i)
             if(scene_source_bytes[i].pc==pc) break;
@@ -199,7 +193,7 @@ int main(int argc,char **argv) {
     uint16_t stride,slot_word,tick,error_word,magnitude,marker,target;
     uint8_t event,mode,limit,pending,flag,created,admitted,redraw,cell,track,step,clear,choices[2];
     int16_t normalized[3]; FA18NativeRecordViewAssets assets; PortFieldWindow zone_window;
-    FA18NativeRecordViewOps ops={view_fault,NULL}; FA18NativeRecordView view;
+    FA18NativeRecordView view;
     FA18NativeRecordViewWork work; FA18NativeRecordRange range; FA18NativeContextPublication publication;
     FA18NativeVectorMath math; FA18NativeRecordDispatch dispatch; FA18ViewSpanOffsets spans;
     static const uint32_t entries[]={0xc23a7e,0xc23f4a,0xc24458,0xc24568,0xc1b7a6,0xc23ca6,0xc1bee8,0xc23ff8,0xc1ba86,0xc1b906,0xc243f2,0xc2574a,0xc25754};
@@ -249,7 +243,7 @@ int main(int argc,char **argv) {
            !fa18_bind_command_queue_byte(&native->queue,128+BAR_REDRAWS_F-KEY_RAW,&redraw)) return 1;
         for(i=0;i<3;++i) normalized[i]=rd_s16(NORMALIZED+2*i);
         math=(FA18NativeVectorMath){&table,&magnitude,normalized};
-        view=(FA18NativeRecordView){.records=&native->bank,.assets=&assets,.ops=&ops,.vector_math=&math,
+        view=(FA18NativeRecordView){.records=&native->bank,.assets=&assets,.vector_math=&math,
             .selected_record=&native->selected,.current_stride=&stride,.current_slot=&slot_word,.tick_word=&tick,.error_word=&error_word,
             .post_input_event=&native->commands.indexed.origin_gate_a,.mode=&mode,.limit=&limit,.pending=&pending,.view_flag=&flag,.created=&created,.admitted=&admitted,.normalized=normalized};
         (void)event;
@@ -314,8 +308,7 @@ int main(int argc,char **argv) {
         memcpy(m->chip,expected,FA18_CHIP_SIZE); memcpy(m->slow,expected+FA18_CHIP_SIZE,FA18_SLOW_SIZE);
         if(!verify_record_owners(native)) return 1;
     }
-    if(source_faults!=native_faults) return 1;
-    printf("native record dispatch: %u calls match game RAM, independent typed records, carried axis and decisions; %u actual normalizations/%u fault contracts\n",cases*(argc>2?1:13),source_norms,source_faults);
+    printf("native record dispatch: %u calls match game RAM, independent typed records, carried axis and decisions; %u actual normalizations/%u actual release fault returns; no child contracts\n",cases*(argc>2?1:13),source_norms,source_faults);
     printf("visited:"); for(i=0;i<sizeof scene_source_bytes/sizeof scene_source_bytes[0];++i)
         if(scene_seen[i]) printf(" %06X",scene_source_bytes[i].pc);
     puts(""); free(native); free(expected); free(before); free(base); free(m); return 0;

@@ -20,9 +20,9 @@ static int put32(FA18NativeSceneRecord *r,size_t at,uint32_t v) {
 static FA18NativeSceneRecord *record_offset(FA18NativeRecordView *s,uint16_t offset) {
     return offset%512u || offset/512u>=16?NULL:s->records->records+offset/512u;
 }
-static int fault(FA18NativeRecordView *s,FA18NativeRecordViewWork *w,uint16_t code) {
+static void publish_error(FA18NativeRecordView *s,uint16_t code) {
     *s->error_word=code;
-    return s->ops && s->ops->fault && s->ops->fault(s->ops->context,s,&w->carried_axis);
+    /* The original release hook C06C02 is exactly RTS ($4E75). */
 }
 static int publish_view(FA18NativeSceneRecord *r,const uint16_t words[4],uint32_t height) {
     unsigned i;
@@ -55,7 +55,7 @@ static int refresh_table(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18Na
           if(at>INT32_MAX-10) return 0;
           cursor=at+10;
           if(!port_field_window_s16(&s->assets->parameters,cursor,&next)) return 0;
-          if(next<0) return fault(s,w,0x35);
+          if(next<0) { publish_error(s,0x35); return 1; }
           at=cursor; }
     }
     if(!port_field_window_s16(&s->assets->parameters,(int32_t)at+10,&next)) return 0;
@@ -100,7 +100,7 @@ static int zone_view(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18Native
             if(from_zone) return 0;
             if(!get8(r,0x5d,&zone)) return 0;
             if((int8_t)zone<=0) {
-                if(!fault(s,w,0x34)) return 0;
+                publish_error(s,0x34);
                 *s->pending=0; return 1;
             }
             if(!s->assets->zones || (size_t)(zone-1)>=s->assets->zone_count) return 0;

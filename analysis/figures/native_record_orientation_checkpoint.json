@@ -1,8 +1,9 @@
 {
-  "status": "validated_complete_native_record_orientation_full_root_placement_pending",
+  "status": "complete_native_record_orientation_and_inverse_entries",
   "complete_entries": [
     "C2D954",
-    "C2D94E"
+    "C2D94E",
+    "C2D970"
   ],
   "actual_children": [
     "C2E47A",
@@ -10,7 +11,7 @@
     "C2E5F6",
     "C2E6DA"
   ],
-  "cases": 8192,
+  "cases": 12288,
   "lookup_angles": 65536,
   "source_boundaries": 292,
   "covered_boundaries": 292,
@@ -28,14 +29,17 @@
     "native orientation C2D954: 4096 complete calls match all game RAM and live matrix owners; no child contracts",
     "trig asset: 1802 original Hunk-63 quarter-table bytes match; live binding verified",
     "trig domain: all 65536 word angles match the actual original lookup; data unchanged",
-    "native orientation C2D94E: 4096 complete calls match all game RAM and live matrix owners; no child contracts"
+    "native orientation C2D94E: 4096 complete calls match all game RAM and live matrix owners; no child contracts",
+    "trig asset: 1802 original Hunk-63 quarter-table bytes match; live binding verified",
+    "trig domain: all 65536 word angles match the actual original lookup; data unchanged",
+    "native orientation C2D970: 4096 complete calls match all game RAM and live matrix owners; no child contracts"
   ],
   "source_sha256": {
-    "port/native_record_orientation.c": "e20a1bd8a4f72074711592c02bd156cfdd8b47023ec12f0b803e270bd9b7f88c",
-    "port/native_record_orientation.h": "0215a38cafa8a1efeb142abcefd7c85c400e7b42f945dfdc15e908c327fae5c7",
-    "port/native_record_orientation_contract_test.c": "811ba7edbd3d4efb1616c8d68572eef2857aefe2a3f971c9f98decb3bc702809",
-    "port/native_scene_records.c": "0021faac8536a63d56876a825305e6bec13f64b9d5104eb9fb43636e351cd89a",
-    "port/native_scene_records.h": "9ae7e572f7fe14cb08e312578ee0e7a9ba83bbbebad475ee7040262799c89de6",
+    "port/native_record_orientation.c": "d54a0798413a1e4473e366acf888ff0a85a904ddc02f8d42ad3971f6ca0707fc",
+    "port/native_record_orientation.h": "e8d8fa9ffe445bac2c1087b323d39d5c7b20608c0440ae1abe72b574e424fb01",
+    "port/native_record_orientation_contract_test.c": "8907a268b17310628c8cf710ac47cc4c0372b0855cea85aa407deb45fea6e27c",
+    "port/native_scene_records.c": "a285bb6b28d721153af0887e61a178620f8e1dbfd759bd54ab20e79bebc67096",
+    "port/native_scene_records.h": "e9aea0c92fffd3d86eeb1a3fd4d8401687e2a67423bff1e8ee48c7ecbd5103f7",
     "port/flight.c": "7b0d810e3cca4300abba756658188e15b496a614af3ec843850880ceaa92d77a",
     "port/flight.h": "a229d2da35303a77c7c87a9c5fd4ea45e7713f4c0a519d1651b8c8327459b2af",
     "port/two_angle_matrix.c": "6cae389c9dd634348ea9cd507925da194a71d80a7b7282b856ff170a6b4797f1",
@@ -45,8 +49,8 @@
     "port/record_matrix_update.h": "285d9303ff1f9ff45c97d66c8786c48c15459752258514c3932b6daf383110b7",
     "port/record_matrix_update_contract_test.c": "e07024b18dcbbf8608e0765c36001c2a046e224cc136385e9e079a3b719e275d",
     "port/flight_contract_test.c": "381c9ad8cf8762ff7618eed84ce9bf020276f565e7e376d6bbcf9bf279321ec1",
-    "tools/recomp/check_native_record_orientation.py": "5cca44d638d86038c7e24a39b4f0ed26f9e115f1f619e423c97d13bf74d4eb67",
-    "tools/recomp/native_record_orientation_oracle.c": "fe407ac17de42e23a051ed9ab663341cfa153a81e2fa390b4a6d87440224dc0c",
+    "tools/recomp/check_native_record_orientation.py": "7cd4e48fce53453c63c42162cf5398f9d6f9fbe7a9c7d8784fbbb1bffaf9297b",
+    "tools/recomp/native_record_orientation_oracle.c": "83a2e337b2799cd2f9f567754bd479147dad8216013062b547919c3a5ba15e3b",
     "tools/recomp/native_scene_player_oracle.c": "17c4e4887c26e35f6c5356c41228eccf16864a5893fcdc6704ca7fb8a07b8700"
   }
 }

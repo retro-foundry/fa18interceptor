@@ -1,4 +1,4 @@
-"""Prove both complete live-record orientation entries against sealed instructions."""
+"""Prove complete live-record orientation and inverse entries against sealed instructions."""
 import argparse
 import hashlib
 import json
@@ -7,7 +7,7 @@ from audit_command_dispatch import source_decoder
 from check_record_region_probe import ROOT, build_oracle, default_bash
 from recomp import classify, static_target
 
-ENTRIES = (0xc2d954, 0xc2d94e)
+ENTRIES = (0xc2d954, 0xc2d94e, 0xc2d970)
 
 
 def main():
@@ -80,7 +80,7 @@ def main():
                  "tools/recomp/check_native_record_orientation.py", "tools/recomp/native_record_orientation_oracle.c",
                  "tools/recomp/native_scene_player_oracle.c"]
         checkpoint = {
-            "status": "validated_complete_native_record_orientation_full_root_placement_pending",
+            "status": "complete_native_record_orientation_and_inverse_entries",
             "complete_entries": [f"{pc:06X}" for pc in ENTRIES],
             "actual_children": ["C2E47A", "C2E514", "C2E5F6", "C2E6DA"],
             "cases": args.cases*len(ENTRIES), "lookup_angles": 65536,

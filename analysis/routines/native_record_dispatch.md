@@ -27,19 +27,21 @@ numeric axis and companion-record identity. Heading and linked-selection paths
 can change the companion; the scheduler preserves that returned identity for
 subsequent groups. Projection, zone-table and linked-record paths also retain
 their actual returned axis. Normalization now runs the actual native vector-math
-owner; fault contracts expose the axis returned by that lower boundary.
+owner. The sealed release fault hook is a single `RTS`, so it preserves the
+carried axis and pending state without any callback dependency.
 
 `python tools/recomp/check_native_record_dispatch.py` compares thirteen complete
 entries, including shared view/link, publication and both normalization entries,
-in 106,496 calls. All 1,094 reachable instruction boundaries are covered. Each call compares all
+in 106,496 calls. All 1,095 reachable instruction boundaries are covered. Each call compares all
 Chip/Slow RAM except the CPU ABI stack `$C7FD00..$C7FF00`, the carried axis,
 returned companion identity and applicable decisions/events. Typed record
 owners are compared independently against original output after the RAM check.
 The mode-zero branch is pruned only after checking the sealed instructions that
 clear and publish zero; no queue or child can change it before its comparison.
 Actual view, normalization, magnitude, detail, zoom, redraw and queue bodies run
-throughout. There are 9,728 actual normalization calls and 774 fault contracts.
-Fault `$C06C02` is the only lower contract. Core normalization entries also
+throughout. There are 9,728 actual normalization calls and 774 actual release
+fault returns. No child contracts remain. The audit seals the hook's `4e75`
+bytes explicitly. Core normalization entries also
 prove source factor loops that cannot complete; see `native_vector_math.md`.
 
 The composed scheduler contract exercises actual expiry and pose suppression,

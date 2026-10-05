@@ -2,9 +2,12 @@
 
 `port/native_record_pose.c/.h` implements complete `$C25B66` and the actual
 `$C2651E` motion-history child against the shared sixteen-record bank. The
+cell route now runs actual `$C2D970` inverse-matrix publication through the
+shared orientation owner. The release fault hook `$C06C02` is exactly `RTS`
+(`$4E75`), so its error store and timer continuation need no callback. The
 scheduler calls pose directly for root and accepted dispatches. The authority
 is the sealed instruction graph, corroborated by
-`port/game/flight_dynamics.c`. Working inputs are angles, velocity, candidate
+`port/game/flight_dynamics.c`. Working lower inputs are velocity, candidate
 points, message/slot choices and sound arguments; no CPU register file or
 guest-memory interface is exposed.
 
@@ -29,18 +32,24 @@ the unchanged class byte is loaded, masked and tested twice, with a zero-class
 exit after the first test and a nonzero branch after the second. The audit
 checks all eight exact instructions before excluding that fall-through arm.
 
-Fourteen lower boundaries remain explicit: cell matrix (`C2D970`), zone/selected
-record (`C28E28`), record action (`C2C392`), controls (`C1B27E`), messages
+Twelve lower boundaries remain explicit: zone/selected record (`C28E28`),
+record action (`C2C392`), controls (`C1B27E`), messages
 (`C25704` at three actual return sites), selector (`C13D84`), matrix (`C2D408`),
-flight (`C149BE`), motion candidate (`C26EBE`), sound (`C17F8C`), fault
-(`C06C02`), ground projection (`C26322`), region probe (`C2B05A`) and motion
+flight (`C149BE`), motion candidate (`C26EBE`), sound (`C17F8C`),
+ground projection (`C26322`), region probe (`C2B05A`) and motion
 slot (`C26352`). Their successful contracts preserve caller identity, allow
 shared record mutations and return a separate candidate status/clear decision.
 Their actual native implementations remain open.
 
-Validation: `python tools/recomp/check_native_record_pose.py` passes 16,384
-complete calls (8,192 each for pose and history), at all 595/595 reachable
-original boundaries. Actual motion-history instructions run inside the pose
+The cell route precedes the event gate and uses the original three stored
+angles, publishing only the inverse matrix. Forward matrix, angles and flags
+stay unchanged by this child. The scheduler requires pose to share the region
+asset's trig owner. Unavailable trig fails on the matrix route with prior
+source-ordered writes retained; gated routes do not read it.
+
+Validation: `python tools/recomp/check_native_record_pose.py` passes 24,576
+complete calls (8,192 each for pose, history and inverse), at all 804/804 reachable
+original boundaries. Actual history, inverse-matrix and release fault instructions run inside the pose
 oracle. All Chip/Slow RAM matches except CPU ABI stack `C7FD00..C7FF00`;
 typed aircraft, matrix and position owners are independently verified. Fixtures
 cannot overwrite audited instruction bytes. They cover all sixteen callers,
@@ -48,18 +57,21 @@ cell and event routes, expiry, signs/overflow, packed positions, action decay,
 collision outcomes, warning suppression, history duplication/wrapping and
 negative rows with aliased metadata.
 
-Ordered child contracts check cell angles, candidate points, projection
+The suite executes 8,236 actual inverse matrices (44 within pose) and 46 actual
+release fault returns. Inverse-entry fixtures also compare the full carried
+numeric axis and cover arbitrary signed table words, high input bits, zero
+and boundary angles. Ordered child contracts check candidate points, projection
 velocities, message/slot choices, both sound arguments and original return
 sites. They vary live records, collision status/decision and region flags.
-Counts in enum order are 44/2773/1053/2858/271/286/3827/1927/5626/3/46/388/388/907.
+Counts in enum order are 2773/1053/2858/271/286/3827/1927/5626/3/388/388/907.
 These are parent contract comparisons, not proof of the actual lower children.
 See `analysis/figures/native_record_pose_checkpoint.json`.
 
-MSVC Release game and affected contracts, strict GNU compilation, thirteen
-affected CTests and the 501-file native build guard pass. Composed scheduler
+MSVC Release game and affected contracts, strict GNU compilation of thirteen
+affected units, ten affected CTests and the unchanged 513-file native build guard pass. Composed scheduler
 tests exercise real action decay before readiness, direct secondary playback,
 dispatch/pose decisions and shared-state rejection. Bootstrap assertions now
 observe the actual matrix child within root pose. The subsequent primary/secondary
-placement batch leaves three scheduler children: periodic, dispatch and finish.
+placement/finish/regions/dispatch batches remove the outer scheduler callbacks.
 See `native_record_action_placement.md`. The native
 main, original runtime asset/state bindings and actual lower owners remain open.

@@ -8,6 +8,12 @@ in the bank; the inverse remains the actual geometry object consumed by
 native command transformations. Byte views read these owners live, and
 their old packed positions hold no duplicate values. Record tails are preserved.
 
+The shared inverse body is now exposed as complete `$C2D970`, called directly
+by the native pose cell route. It accepts the three original numeric angles,
+publishes only the inverse matrix and optionally returns its carried axis.
+The full orientation entries reuse that same implementation. Stored angles,
+forward matrix and flags remain untouched by the inverse entry.
+
 The source saves `D1/D4-D6/A1` and restores `D1/D5-D7/A1`. Thus the inverse
 uses zero or `$7080 - original angle` for the same three original angles.
 Incoming `D7` is irrelevant. Placement's `$C2D954` preserves the secondary
@@ -35,7 +41,7 @@ angle or matrix stores. The legacy quarter-table API now rejects unavailable
 reads instead of indexing outside its supplied buffer.
 
 Run `python tools/recomp/check_native_record_orientation.py`. At 4,096 cases
-per record entry, 8,192 complete original calls match every game RAM byte
+per record entry, 12,288 complete original calls match every game RAM byte
 except the source CPU save stack `$C7FD00..$C7FF00`. All 292 source boundaries
 are visited with no child contracts. The original `$C2E47A`, `$C2E514`,
 `$C2E5F6`, and `$C2E6DA` children execute fully. Independent named matrix
@@ -49,15 +55,22 @@ quarter-table bytes match the ADF's Hunk 63, and a subsequent asset mutation
 reaches the bound native lookup. Captured RAM and Musashi appear only in
 the validation runner, never in these native owners.
 
-Strict GNU contracts and symbol checks, the native MSVC build, 83 focused
+The initial orientation batch passed strict GNU contracts and symbol checks,
+the native MSVC build, 83 focused
 scene/flight/matrix/terrain CTests and the unchanged 480-file native guard
 pass. The build also restores the existing scene-entry test's missing
 viewport-transition link dependency. Shared-record regression retains
 24,576 calls/98 boundaries; bootstrap retains 16,384 calls/291 boundaries,
 with the same three pending child contracts.
 
-This completes a required placement dependency. Full `$C09266` placement,
-`$C1C63E` record update, `$C1C860` context refresh, original data production,
-and native main-loop composition remain open. The ROM-free runner requires
+The current inverse/cell refactor passes MSVC Release native game/affected
+builds, strict GNU compilation of thirteen affected units, ten affected CTests
+and the unchanged 513-file native guard. Its connected pose proof passes
+24,576 calls at all 804 boundaries, including the full inverse entry. The
+complete region proof is rerun after sharing this inverse body.
+
+Placement, region spawning and the pose cell route now invoke these ordinary
+record owners directly. Startup assets/aliases, the remaining record update
+and context-refresh children, and native main-loop composition remain open. The ROM-free runner requires
 no Kickstart image but still uses the reference machine and CPU state;
 this batch does not claim a complete playable game without emulation.

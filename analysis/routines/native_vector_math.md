@@ -49,10 +49,10 @@ Validation on 2026-10-05:
 - `check_native_selector_origin_adjustment.py`: 32,768 calls, 143/143 boundaries,
   31,559 complete calls and the same 1,209 core-entry loops; no child contracts.
   All 8,192 origin-tail calls complete and match their live outputs.
-- Updated record-view proof: 24,576 calls, 481/481 boundaries, 9,104 actual
-  normalization calls and 759 explicit fault contracts.
-- Updated dispatch proof: 106,496 calls, 1,094/1,094 boundaries, 9,728 actual
-  normalization calls and 774 explicit fault contracts. Independent typed
+- Updated record-view proof: 24,576 calls, 482/482 boundaries, 9,104 actual
+  normalization calls and 759 actual release fault returns; no child contracts.
+- Updated dispatch proof: 106,496 calls, 1,095/1,095 boundaries, 9,728 actual
+  normalization calls and 774 actual release fault returns; no child contracts. Independent typed
   records, decisions and returned companion identity also match.
 - Selected-range proof rerun after the shared magnitude change: 8,192 calls,
   137/137 boundaries, actual magnitude and 3,277 explicit sound contracts.

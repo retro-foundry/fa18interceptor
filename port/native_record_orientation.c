@@ -9,20 +9,26 @@ static int orientation_terms(const FA18FlightTrigData *data,const uint16_t angle
             terms->sine+i,terms->cosine+i)!=0) return 0;
     return 1;
 }
-int fa18_publish_native_record_orientation_with_axis(FA18NativeSceneRecord *record,
+int fa18_publish_native_record_inverse_with_axis(FA18NativeSceneRecord *record,
     const uint16_t angles[3],const FA18FlightTrigData *data,uint32_t *axis) {
     FA18TrigTerms terms;
-    uint16_t original[3],inverse[3];
+    uint16_t inverse[3];
     unsigned i;
+    if(!record || !record->aircraft || !record->geometry || !angles || !data) return 0;
+    for(i=0;i<3;++i) inverse[i]=angles[i]?(uint16_t)(0x7080u-angles[i]):0;
+    if(!orientation_terms(data,inverse,&terms)) return 0;
+    if(axis) *axis=(uint16_t)terms.sine[2];
+    return fa18_compose_attitude_terms(&terms,record->geometry->inverse)==0;
+}
+int fa18_publish_native_record_orientation_with_axis(FA18NativeSceneRecord *record,
+    const uint16_t angles[3],const FA18FlightTrigData *data,uint32_t *axis) {
+    FA18TrigTerms terms; uint16_t original[3]; unsigned i;
     if(!record || !record->aircraft || !record->geometry || !angles || !data) return 0;
     /* Keep caller aliasing safe: publication can overwrite supplied angles. */
     for(i=0;i<3;++i) original[i]=angles[i];
     record->angle_first=original[0]; record->geometry->angle=original[1]; record->angle_third=original[2];
     if(!orientation_terms(data,original,&terms) || fa18_compose_rotation_terms(&terms,record->forward)!=0) return 0;
-    for(i=0;i<3;++i) inverse[i]=original[i]?(uint16_t)(0x7080u-original[i]):0;
-    if(!orientation_terms(data,inverse,&terms)) return 0;
-    if(axis) *axis=(uint16_t)terms.sine[2];
-    return fa18_compose_attitude_terms(&terms,record->geometry->inverse)==0;
+    return fa18_publish_native_record_inverse_with_axis(record,original,data,axis);
 }
 int fa18_publish_native_record_orientation(FA18NativeSceneRecord *record,
     const uint16_t angles[3],const FA18FlightTrigData *data) {

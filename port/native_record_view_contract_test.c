@@ -4,17 +4,13 @@
 
 typedef struct {
     FA18CommandInput input; FA18NativeSceneRecords records; FA18NativeRecordView view;
-    FA18NativeRecordViewWork work; FA18NativeRecordViewAssets assets; FA18NativeRecordViewOps ops;
+    FA18NativeRecordViewWork work; FA18NativeRecordViewAssets assets;
     uint8_t source[8192],workspace[512],parameters[32],status[256],list[32];
     uint16_t selected,stride,slot,tick,error,magnitude;
     FA18NativeVectorMath math; PortFieldWindow magnitude_table; uint8_t magnitude_bytes[2];
     uint8_t event,mode,limit,pending,flag,created,admitted;
-    int16_t normalized[3]; unsigned faults; int fail;
+    int16_t normalized[3];
 } Fixture;
-static int fault(void *context,FA18NativeRecordView *state,uint32_t *axis) {
-    Fixture *f=context; assert(state==&f->view && (f->error==0x34 || f->error==0x35));
-    assert(axis); ++f->faults; return !f->fail;
-}
 static void initialize(Fixture *f) {
     memset(f,0,sizeof *f);
     assert(fa18_import_native_scene_records(&f->records,&f->input,f->source,sizeof f->source,f->workspace,sizeof f->workspace));
@@ -25,8 +21,7 @@ static void initialize(Fixture *f) {
     f->magnitude_bytes[0]=0x40;
     f->magnitude_table=(PortFieldWindow){.bytes=f->magnitude_bytes,.byte_count=2};
     f->math=(FA18NativeVectorMath){&f->magnitude_table,&f->magnitude,f->normalized};
-    f->ops=(FA18NativeRecordViewOps){fault,f};
-    f->view=(FA18NativeRecordView){.records=&f->records,.assets=&f->assets,.ops=&f->ops,.vector_math=&f->math,
+    f->view=(FA18NativeRecordView){.records=&f->records,.assets=&f->assets,.vector_math=&f->math,
         .selected_record=&f->selected,.current_stride=&f->stride,.current_slot=&f->slot,
         .tick_word=&f->tick,.error_word=&f->error,.post_input_event=&f->event,.mode=&f->mode,
         .limit=&f->limit,.pending=&f->pending,.view_flag=&f->flag,.created=&f->created,
@@ -68,11 +63,11 @@ int main(void) {
     initialize(&f); r=f.records.records+1; r->aircraft->flags=0x1000;
     f.list[0]=f.list[1]=0xff; f.pending=7;
     assert(fa18_update_native_record_view(&f.view,1,&f.work));
-    assert(f.error==0x34 && f.faults==1 && !f.pending);
+    assert(f.error==0x34 && !f.pending);
     initialize(&f); r=f.records.records+1; r->aircraft->flags=0x1000;
-    f.list[0]=f.list[1]=0xff; f.fail=1; f.pending=7;
-    assert(!fa18_update_native_record_view(&f.view,1,&f.work));
-    assert(f.error==0x34 && f.pending==7);
+    f.list[0]=f.list[1]=0xff; f.pending=7; f.work.carried_axis=0x12345678;
+    assert(fa18_update_native_record_view(&f.view,1,&f.work));
+    assert(f.error==0x34 && !f.pending && f.work.carried_axis==0x12345678);
 
     initialize(&f); r=f.records.records+1; byte(&f,1,5,8); byte(&f,1,0x39,0x10);
     f.records.aircraft[1].secondary_flags=0x100; f.records.aircraft[1].flags=8;

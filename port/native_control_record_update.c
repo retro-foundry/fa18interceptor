@@ -102,6 +102,7 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
        s->regions->admitted!=s->view->admitted ||
        s->regions->pointer_groups!=s->placement->pointer_groups ||
        !s->regions->assets || s->regions->assets->parameters!=&s->view->assets->parameters ||
+       s->pose->trig!=&s->regions->assets->trig ||
        !s->dispatch || s->dispatch->view!=s->view || s->dispatch->view_work!=s->view_work ||
        s->dispatch->range!=s->range || s->dispatch->cell_only!=s->pose->cell_only ||
        s->dispatch->sequence_phase!=s->control->sequence_phase ||

@@ -49,8 +49,10 @@ int main(void) {
     f.records.aircraft[1].flags=0x40;
     f.records.records[1].word_0c=0x3f00; f.records.records[1].word_0e=0x200;
     assert(fa18_update_native_record_pose(&f.pose,1));
-    assert(f.storage.calls[FA18_POSE_CELL_MATRIX]==1 && f.records.records[1].byte_0a==12);
-    f.storage.complete=0;
+    assert(f.records.records[1].byte_0a==12 && f.records.geometry[1].inverse[0][0]==0x4000);
+    f.pose.ops=NULL;
+    assert(fa18_update_native_record_pose(&f.pose,1));
+    f.pose.trig=NULL;
     assert(!fa18_update_native_record_pose(&f.pose,1) && f.records.records[1].byte_0a==12);
 
     initialize(&f); f.inject_rates=1; f.storage.matrix_control=0x40;
