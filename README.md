@@ -26,65 +26,12 @@ required. See [static recompilation and return work](analysis/routines/static_re
 
 The active goal is the complete game without CPU or chipset emulation. The
 ROM-free runner needs no Kickstart image but still uses Musashi and the machine
-model. The separate CPU-free `port/` runtime remains incomplete. Indexed input
-actions have an ordinary-state implementation with 65,536 passing source
-comparisons. Complete keyboard/pending selection now passes another 32,768
-source comparisons and composes with those indexed actions in a CPU-free
-library. All 28 aircraft actions now pass 28,672 further comparisons, with real
-native direction, throttle-reset and space-release children. All 16 view/origin/
-zoom actions and both actual children now pass 32,768 further comparisons.
-All five context actions and their actual geometry/observer children now pass
-20,480 further comparisons. Native queue publication now passes 73,728
-comparisons, including every signed-index destination and shared-field alias.
-Both complete native command parents now pass 16,384 comparisons, including
-eject's nested publication and actual callback registration/removal bodies.
-The remaining command message/status/voice/space/sweep game children now pass
-12,288 original calls covering all 278 instruction boundaries. Native audio
-program/update/output/fade owners add 16,384 comparisons at all 105 boundaries,
-with an independent portable voice-program core reusable by future ports.
-The native bootstrap parent now composes shared scene records, player setup
-and the complete original template gate builder, with three remaining child
-contracts. Its 16,384 comparisons cover all 291 source boundaries and every
-16-bit gate index; original Hunk-66 imports match actual source expansion.
-Native main integration and the complete playable native graph remain pending;
-see [the bootstrap proof](analysis/routines/native_scene_bootstrap.md).
-Native selected-range and record-view owners now run directly in its scheduler,
-with 8,192 range and 24,576 view/normalization original-byte comparisons and
-complete coverage of their 137/482 respective boundaries. Actual magnitude,
-point placement, in-sight, normalization and release fault behavior are direct;
-the range sound child remains explicit. View has no child contracts.
-Pose now runs the actual cell inverse matrix directly and preserves the release
-fault continuation, with 24,576 comparisons at all 804 boundaries and twelve
-remaining lower families. Native normalization and origin adjustment
-also have separate complete proofs covering 98/143 boundaries with no child
-contracts; their magnitude assets match all 258 original disk words. See
-[native vector math](analysis/routines/native_vector_math.md).
-See [selected range](analysis/routines/native_record_range.md) and
-[record view](analysis/routines/native_record_view.md).
-Primary and secondary record placement now run directly in that scheduler,
-with 16,384 complete source comparisons covering all 172 boundaries and no
-child contracts. They share the startup descriptor bank and live record/global
-owners; original-disk assets are checked separately. See
-[native record placement](analysis/routines/native_record_action_placement.md).
-Finish and all eight post-flight modes now run directly too, with actual
-selection release, readiness and view restoration. Their 90,112 source
-comparisons cover all 371 boundaries. Native periodic and dispatch now complete
-the outer scheduler, with 40,960/106,496 comparisons at all 635/1,095 boundaries;
-original runtime bindings and lower owners remain required. Actual record-view
-publication now runs with native zoom, redraw and queue code. The connected
-post-flight proof covers 481 boundaries in 90,112 calls with no child contracts.
-See [native post-flight scheduling](analysis/routines/native_postflight.md).
-Host services, sample playback, asset loading and full runtime integration remain open. See
-[reusable components](port/REUSABLE_COMPONENTS.md),
-[native audio updates](analysis/routines/native_audio_update.md),
-[native command effects](analysis/routines/native_command_effects.md),
-[native command parents](analysis/routines/native_command_parent.md),
-[native queue publication](analysis/routines/native_command_queue.md),
-[native context actions](analysis/routines/native_context_command_input.md),
-[native view actions](analysis/routines/native_view_command_input.md),
-[native aircraft actions](analysis/routines/native_flight_command_input.md),
-[native command input](analysis/routines/native_command_input.md)
-and [native indexed controls](analysis/routines/native_indexed_controls.md).
+model. Work continues in `port/game/`, its glue and the active runtime.
+The abandoned top-level `fa18_port` implementation and its disconnected native
+replacement components have been removed. Only disk/Hunk loading, map-packet
+code and headers actually used by the current runners remain at the top level
+of `port/`; see [source ownership](port/README.md). Earlier standalone component
+proofs do not establish progress in the playable runner.
 
 The current display-selection handoff implements seven owners and passes
 229,376 whole-call comparisons, local DMA and dispatch smoke. Full integration
@@ -473,7 +420,7 @@ confirmed a fade starting and finishing two frames late. Source timing for
 the scene initializer has removed one delayed frame; one remains inherited
 from preceding HUD updates. See the
 [visible checkpoint](analysis/routines/native_frame_416_checkpoint.md) and
-[planning review](CURRENT_PORT_HANDOFF.md#planning-review-2026-10-02).
+[current work scope](CURRENT_PORT_HANDOFF.md#work-scope).
 
 See [STATUS.md](STATUS.md) for the numbers,
 [CURRENT_PORT_HANDOFF.md](CURRENT_PORT_HANDOFF.md) for the next steps, and
@@ -540,7 +487,7 @@ recordings) are not in git.
 | `captures/` | Sealed recordings (read-only; not in git) |
 | `analysis/` | Memory map, routine reports, inventories |
 | `pcode/`, `source_amiga/` | Earlier analysis products: P-code exports, byte-exact assembly |
-| `port/*.c` (top level) | The earlier bottom-up port (`fa18_port`), kept as source material |
+| `port/*.c` (top level) | Shared disk/Hunk and map-packet code used by the active runners; abandoned sources removed |
 
 ## Documents
 

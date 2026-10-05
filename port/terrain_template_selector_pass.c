@@ -1,2 +1,0 @@
-#include "terrain_template_selector_pass.h"
-int fa18_run_terrain_template_selector_pass(const FA18TerrainTemplateSelectorPassInput*i,FA18TerrainTemplateSelectorPassResult*r){FA18TerrainTemplateWorkspacePassInput w;if(!i||!r||fa18_resolve_terrain_template_cursor(i->hunks,&i->cursor_state,&r->cursor))return -1;w=(FA18TerrainTemplateWorkspacePassInput){&r->cursor.data,r->cursor.gate,r->cursor.gate_size,r->cursor.row_term,r->cursor.group_term,i->cursor_state.append_enable,i->workspace,i->workspace_size,i->append};return fa18_build_terrain_template_workspace(&w,&r->workspace);}

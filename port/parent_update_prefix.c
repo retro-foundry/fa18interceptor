@@ -1,3 +1,0 @@
-#include "parent_update_prefix.h"
-static int r(FA18ParentUpdatePrefixStage f,void*c){return f&&f(c)==0?0:-1;}
-int fa18_run_parent_update_prefix(FA18ParentUpdatePrefixState*s,const FA18ParentUpdatePrefixOps*o){if(!s||!o||!o->input_phase||!o->pre_input||!o->pre_update||!o->prepare||!o->indexed||!o->main_update)return -1;s->local_frame=s->frame_counter;if(r(o->input_phase,o->context)||r(o->pre_input,o->context)||r(o->pre_update,o->context))return -1;if(!s->skip_flag)return 0;s->stage_marker=8;if(r(o->prepare,o->context))return -1;s->stage_marker=16;return r(o->indexed,o->context)||r(o->main_update,o->context)?-1:0;}
