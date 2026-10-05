@@ -57,9 +57,13 @@ See [selected range](analysis/routines/native_record_range.md) and
 Primary and secondary record placement now run directly in that scheduler,
 with 16,384 complete source comparisons covering all 172 boundaries and no
 child contracts. They share the startup descriptor bank and live record/global
-owners; original-disk assets are checked separately. Periodic, dispatch and
-finish remain scheduler boundaries. See
+owners; original-disk assets are checked separately. See
 [native record placement](analysis/routines/native_record_action_placement.md).
+Finish and all eight post-flight modes now run directly too, with actual
+selection release, readiness and view restoration. Their 90,112 source
+comparisons cover all 371 boundaries. Periodic and dispatch remain scheduler
+boundaries; actual view publication and original runtime bindings remain lower
+requirements. See [native post-flight scheduling](analysis/routines/native_postflight.md).
 Host services, sample playback, asset loading and full runtime integration remain open. See
 [reusable components](port/REUSABLE_COMPONENTS.md),
 [native audio updates](analysis/routines/native_audio_update.md),

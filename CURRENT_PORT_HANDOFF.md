@@ -13,7 +13,39 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: complete native `$C2374C` primary and `$C2377E` secondary placement
+Latest batch: complete native `$C09E06` finish and its eight mode owners now
+replace the scheduler finish callback. Actual `$C230B0` release, `$C0A3EA`
+readiness and both `$C0A12E` restorations are direct ordinary-state operations.
+The generic phase word retains the original selection high byte after release;
+signed countdowns and distance-overflow behavior remain intact. Carried-axis
+updates survive distance processing, table loads and preparation mutations.
+Original-byte proof passes 90,112 calls (8,192 per eleven entries), all 371/371
+boundaries, full game RAM, independent typed records and axis comparisons.
+The one true lower `$C1BEE8` view-publication owner remains explicit at both
+source return sites: 1,334 contracts verify record/slot/event inputs and live
+phase/slot/record/axis mutations. Do not replace it with an invented action.
+MSVC Release game/affected contracts, strict GNU compilation, fifteen affected
+CTests and the 505-file native guard pass. The historical bootstrap parent
+proof also passes 16,384 calls at all 291/291 boundaries with its three original
+whole-child contracts. See `analysis/routines/native_postflight.md` and its
+checkpoint.
+
+Two scheduler children remain: periodic `$C28996`, dispatch `$C23A7E`.
+Continue them and actual `$C1BEE8` publication, reusing the existing view and
+queue owners. Reconcile production startup/input aliases before native main:
+the current composed bootstrap fixture still has separately bound origin/event
+and sequence fields. In particular startup enable sets the queue's actual
+`input.origin_mode` ($C45785) to one, while its current control/origin fixture
+uses a separate `context_select`. Sharing the actual owner will expose the
+remaining selector-origin children. `$C457AE` maps to `indexed.origin_gate_a`,
+`$C4582A` to flight sequence phase, `$C45790` to recorder state, `$C457BA` to
+the flight space latch, `$C457B4` to flight context-started, `$C457B5` to indexed
+origin gate B and `$C457AD` to flight pause. Preserve all source aliases rather
+than treating current partial fixture wiring as a completed startup constructor.
+Readiness now shares actual `indexed.pose_entry` ($C45848). Finish's phase,
+target and command fields share startup words/aircraft fields.
+
+Preceding batch (`246cd494`): complete native `$C2374C` primary and `$C2377E` secondary placement
 replace both scheduler callbacks, including paired routes. The actual shared
 copy/stores/launch tail writes through ordinary records and the root-placement
 descriptor bank. Aliased records reread the changed kind before table selection;
@@ -33,8 +65,7 @@ CTests and the 503-file native guard pass. See
 The updated historical bootstrap parent proof also passes 16,384 calls at all
 291/291 boundaries, retaining its three explicit whole-child contracts.
 
-Three scheduler children remain: periodic `$C28996`, dispatch `$C23A7E`, finish
-`$C09E06`. Complete these owners and startup-reachable pose/control children,
+Complete periodic/dispatch owners and startup-reachable pose/control children,
 then bind original startup assets/state and integrate native main. Dispatch
 shares the already-native record-view tail; preserve its carried-axis state.
 
@@ -108,13 +139,15 @@ The native bootstrap graph is direct through `$C08F26`, placement, template
 gates, `$C1C63E`, `$C22C80`, `$C29042`, and `$C1C860`. Explicit lower owners
 still remain:
 
-- `FA18NativeControlRecordOps`: periodic, dispatch and finish. Primary/secondary
-  placement is direct. Composed fresh-bootstrap contracts observe a true matrix
+- `FA18NativeControlRecordOps`: periodic and dispatch. Placement and finish are
+  direct. Composed fresh-bootstrap contracts observe a true matrix
   child inside root pose after direct root control/view/range.
 - `FA18NativeRecordPoseOps`: fourteen matrix, control/input, flight/collision,
   message/sound/fault and motion-slot boundaries. History is direct.
 - `FA18NativeRecordControlOps`: tone eight, message posting and scene
   initialization beneath the direct control-stream owners.
+- `FA18NativePostflightOps`: actual `$C1BEE8` view publication, with source
+  slot/event/route inputs. Readiness, release and restoration are direct.
 - `FA18NativeRecordViewOps`: normalization and source fault handling;
   `FA18NativeRecordRangeOps`: sound program four. These are true lower children.
 - `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
@@ -130,7 +163,8 @@ guest memory, and the machine/chipset runtime. Do not describe the port as
 emulation-free until native main owns startup, frame scheduling, rendering,
 audio, and input without those layers.
 
-Recommended next batch: finish the three scheduler children and startup-reachable
+Recommended next batch: finish the two scheduler children, actual view
+publication and startup-reachable
 pose/control children using their complete readable owners under `port/game/`.
 Preserve their true lower child boundaries and shared record mutations. Then
 connect original assets/state before installing the
@@ -140,8 +174,8 @@ and 854 direct opcode bindings; those numbers describe the compatibility
 runner, not completion of the ordinary-state native graph.
 
 Latest validation passed: MSVC Release `fa18_port`, strict GNU contracts,
-fourteen affected CTests and the unchanged native build guard over 503 files.
-The full placement source proof covers 172/172 boundaries. The
+fifteen affected CTests and the unchanged native build guard over 505 files.
+The full post-flight proof covers 371/371 boundaries in 90,112 calls. The
 historical bootstrap proof passes 16,384 calls at all 291/291 boundaries,
 still contracts old child boundaries and is sequencing
 evidence rather than proof of the new direct lower owners.

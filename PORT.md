@@ -22,8 +22,12 @@ Native primary/secondary record placement now shares the startup descriptor
 bank, records and mutable fields directly, with 16,384 original comparisons
 at all 172 boundaries and no child contracts. Its original-disk asset loader
 resolves the descriptors; indices reaching adjacent relocated words require
-explicit field owners. Periodic, dispatch and finish remain scheduler children.
+explicit field owners. Native finish and all post-flight modes now add 90,112
+comparisons at all 371 boundaries, including actual selection release,
+readiness and view restoration. Periodic and dispatch remain scheduler children;
+actual view publication and complete startup field bindings remain required.
 See `analysis/routines/native_record_action_placement.md`.
+See also `analysis/routines/native_postflight.md`.
 Reference `port/game` modules still use the machine bus; readable C alone does
 not remove this dependency. Ordinary-state modules in `port/` must be composed
 into the complete native game loop. The first current input component,

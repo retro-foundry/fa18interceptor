@@ -3,6 +3,7 @@
 #include "native_record_control_test_support.h"
 #include "native_record_pose_test_support.h"
 #include "native_record_action_placement_test_support.h"
+#include "native_postflight_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -17,6 +18,7 @@ typedef struct {
     FA18NativeRecordPose pose; FA18RecordPoseTestStorage pose_storage;
     FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
     FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
+    FA18NativePostflight postflight; FA18PostflightTestStorage post_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -41,7 +43,7 @@ typedef struct {
 static int control(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->control && child<3 && slot<16 && companion<16 && decision);
+    assert(state==&f->control && child<2 && slot<16 && companion<16 && decision);
     ++f->control_calls; *decision=0; return 1;
 }
 static int origin(void *context,FA18NativeSelectorOrigin *state,
@@ -87,6 +89,7 @@ static void initialize(Fixture *f) {
         .post_input_event=&f->event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};
+    fa18_test_bind_postflight(&f->postflight,&f->post_storage,&f->control);
     f->active=f->records.records; f->selector_ops=(FA18NativeSelectorOriginOps){origin,f};
     window=(PortFieldWindow){.bytes=f->selector_table,.byte_count=sizeof f->selector_table};
     f->selector_tables=(FA18NativeSelectorOriginTables){window,window,window,window};
@@ -110,12 +113,14 @@ static void initialize(Fixture *f) {
 int main(void) {
     static Fixture f; FA18NativeSceneRecord *record;
     initialize(&f); record=f.records.records+2;
+    f.placement_storage.space=3; f.post_storage.report=4;
     f.input=7; f.bias=0x10000000; f.long_mirror=0; f.detail=2;
     record->word_06=0x1235; record->word_08=0x4326; record->byte_0a=0x9a;
     put16(record,0x56,0x20); put16(record,0x58,0x40); put16(record,0x5a,0x100); record->word_6c=0x1001;
     assert(fa18_update_native_scene_records(&f.update));
     assert(f.mirror==7 && f.long_mirror==(int32_t)0xf0000000u && f.scaled==0x780);
-    assert(f.control_calls && !f.origin_calls && f.rate==3);
+    assert(!f.control_calls && !f.origin_calls && f.rate==3);
+    assert(!f.placement_storage.space && !f.post_storage.report);
     assert(f.word_x==0x1235 && f.word_z==0x4326 && f.fine_byte==0x9a);
     assert(f.coarse_byte==6 && f.view.update_mask==0x0b);
 
@@ -126,7 +131,7 @@ int main(void) {
     f.origin[1]=0x12345678;
     put16(record,0x56,0xc1); put16(record,0x58,0); put16(record,0x5a,0);
     assert(fa18_update_native_scene_records(&f.update));
-    assert(f.control_calls && f.origin_calls==1 && f.rate==1);
+    assert(!f.control_calls && f.origin_calls==1 && f.rate==1);
     assert(f.origin[1]==0x12345678 && f.word_x==0x42 && f.word_z==0x44);
     assert(f.fine_byte==15 && f.coarse_byte==13 && f.view.update_mask==0xff);
 

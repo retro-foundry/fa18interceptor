@@ -88,6 +88,17 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
        s->placement->fire_state!=s->control->stream_view_state ||
        s->placement->selector_word!=s->pose->selector_word ||
        s->placement->events!=s->pose->events || s->placement->limit!=s->view->limit ||
+       !s->postflight || s->postflight->records!=s->records || s->postflight->selection!=s->selection ||
+       !s->view->assets || s->postflight->parameters!=&s->view->assets->parameters ||
+       s->postflight->view_work!=s->view_work || s->postflight->current_slot!=s->current_slot ||
+       s->postflight->post_input_event!=s->post_input_event || s->postflight->mode!=s->view->mode ||
+       s->postflight->sequence_phase!=s->control->sequence_phase ||
+       s->postflight->view_side!=s->control->view_selector ||
+       s->postflight->context_select!=s->control->origin_enable ||
+       s->postflight->space_latch!=s->placement->space_latch || s->postflight->limit!=s->view->limit ||
+       s->postflight->admitted!=s->view->admitted || !s->records->input ||
+       s->postflight->ready_mode!=&s->records->input->indexed.pose_entry ||
+       s->postflight->status!=&s->records->input->indexed.cockpit_low_byte ||
        !s->ops || !s->ops->consume || !s->post_input_event ||
        !s->counter_first || !s->counter_second || !s->primary_gate || !s->secondary_gate ||
        !s->periodic_word || !s->current_slot || !s->current_stride) return 0;
@@ -119,5 +130,5 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     if(!active_record(s,8,0) || !paired_record(s,9,8) || !active_record(s,10,0) ||
        !paired_record(s,11,10) || !active_record(s,12,0) || !paired_record(s,13,12) ||
        !active_record(s,14,1) || !active_record(s,15,1)) return 0;
-    return child(s,FA18_RECORD_UPDATE_FINISH,15,0);
+    return fa18_schedule_native_postflight(s->postflight,FA18_POSTFLIGHT_FINISH,0);
 }

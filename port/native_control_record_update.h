@@ -8,10 +8,11 @@
 #include "native_record_control.h"
 #include "native_record_pose.h"
 #include "native_record_action_placement.h"
+#include "native_postflight.h"
 
 typedef enum {
     FA18_RECORD_UPDATE_PERIODIC,
-    FA18_RECORD_UPDATE_DISPATCH, FA18_RECORD_UPDATE_FINISH
+    FA18_RECORD_UPDATE_DISPATCH
 } FA18NativeControlRecordChild;
 
 typedef struct FA18NativeControlRecordUpdate FA18NativeControlRecordUpdate;
@@ -33,6 +34,7 @@ struct FA18NativeControlRecordUpdate {
     FA18NativeRecordControl *control;
     FA18NativeRecordPose *pose;
     FA18NativeRecordActionPlacement *placement;
+    FA18NativePostflight *postflight;
     const FA18NativeControlRecordOps *ops;
     uint8_t *post_input_event,*counter_first,*counter_second;
     uint8_t *primary_gate,*secondary_gate;

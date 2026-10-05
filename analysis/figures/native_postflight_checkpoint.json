@@ -1,0 +1,52 @@
+{
+  "status": "complete_native_postflight_with_actual_selection_ready_restore",
+  "complete_entries": [
+    "C09E06",
+    "C09E98",
+    "C09EC4",
+    "C0A002",
+    "C0A15C",
+    "C0A1E0",
+    "C0A2F0",
+    "C0A334",
+    "C0A364",
+    "C0A12E",
+    "C0A3EA"
+  ],
+  "actual_children": [
+    "C230B0",
+    "C0A3EA",
+    "C0A12E"
+  ],
+  "child_contracts": [
+    "C1BEE8 (view publication at C09FBC/C0A2BC)"
+  ],
+  "cases": 90112,
+  "cases_per_entry": 8192,
+  "source_boundaries": 371,
+  "covered_boundaries": 371,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; typed records and carried axis independently checked",
+  "native_cpu_dependency": false,
+  "limitations": "actual view publication and original parameter/state bindings remain required; full native startup/frame integration pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "69648343f1ea288276384e5cd8c577425be5de3995bfb79702024b973b8456aa",
+  "reports": [
+    "native post-flight: 90112 complete calls match all game RAM, typed records and carried axis; 1334 view-publication contracts; actual selection release/readiness/view restoration"
+  ],
+  "source_sha256": {
+    "port/native_postflight.c": "8cf71f4e2b42277e8145b1c1e6fa546844b86c60c34a974098535fc66b47d602",
+    "port/native_postflight.h": "8bbfb111d8032cdf4b960a1096885b0c33f14a108f6b584d93c75f4e5830f4e9",
+    "port/native_postflight_test_support.h": "360c1d8b2295ebc837da2a77515c5326509e3c3440f44d1537ca5863d2638953",
+    "port/native_postflight_contract_test.c": "c5d3eb486f524e2dc158cac40671f3656bd9d1bc32b0366f19d3100e977f0d48",
+    "port/native_control_record_update.c": "f7b4a41e9d849d757b1e367c7fdda682cb166c5cd9df49f0c7aa2130787cd027",
+    "port/native_control_record_update.h": "20b722bec3ee8fdce0c27dc760f8590869263a75e224593fe69e46be53fd7f44",
+    "port/native_control_record_update_contract_test.c": "a0992f7e00a3169d646b22fd0ea43c894ee2de2b144cfd693e0ee136a19463de",
+    "port/native_record_update_stage_contract_test.c": "755491ddd806afd72bda49d1dd85c72870035832b78a6e0b721fc4e6edd43037",
+    "port/scene_bootstrap_native.c": "b2322a61ef3710bdc31d0ac966bc8cf283c5db5c0705795336ee0edd01ed357c",
+    "port/scene_bootstrap_native_contract_test.c": "8510c0cb7d2c7989cca92d168e8415979894d372b11573a55a0f8d2f5a1498d5",
+    "port/CMakeLists.txt": "bdf0c291acef1af326d5c1caa77b37448a17e44bdddaca02a10164677151d977",
+    "port/native_record_selection.c": "40be2b270316e02d1e4f5106d11a159701ced4d0cf017ef03252f49e842752f0",
+    "tools/recomp/native_postflight_oracle.c": "efc84b5cfa2fa9d671d01c0453055faa8ed6cb5464885c9a6175a5b907f0a119",
+    "tools/recomp/check_native_postflight.py": "e20e4d94c1b5664af044e3c3d460ea2365a6a532dab2dcfadb576e094d7c3e77"
+  }
+}

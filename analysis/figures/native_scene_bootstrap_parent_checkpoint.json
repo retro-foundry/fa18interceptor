@@ -41,7 +41,7 @@
     "native bootstrap C1C40C: 4096 calls match full RAM, live owners and 0 ordered child contracts per call"
   ],
   "source_sha256": {
-    "port/scene_bootstrap_native.c": "f27cb8492a187586d10cf7792db8687032b27bf6b33a25c9053fdb4d2626a467",
+    "port/scene_bootstrap_native.c": "b2322a61ef3710bdc31d0ac966bc8cf283c5db5c0705795336ee0edd01ed357c",
     "port/scene_bootstrap_native.h": "dab16dde8c04ef6cb53835305fe2ec3ec233dfc601e4781c4e196a16b946eeb3",
     "port/template_bitmask_buffers.c": "d9af1df8869bb5cbb9305da4675f6f8791e94a9da525cbe4b055e9769cf36d15",
     "port/template_bitmask_buffers.h": "706eefa68cbc95356a4537c7360a3fc6998a8eedc5b41a284c327be768be0c8a",
@@ -52,7 +52,7 @@
     "port/hunk.c": "351c73c0aa48eea4b912a169c7f33cda1066b169bdba0355503255861d4bbf9b",
     "port/viewed_record_word.c": "2a282a58698345c1bfb586474ddbc948bd2a6d8d1eb891d14bf2943bc8e1c9a4",
     "port/viewed_record_word.h": "b0af0593b00ed947cb70cdf9c9333e81f67cf7ae7f4446843d42810975ce266f",
-    "port/scene_bootstrap_native_contract_test.c": "b21531980a821b713dd942a28abf93126768b8cbd18b5d92754da2531ed08043",
+    "port/scene_bootstrap_native_contract_test.c": "8510c0cb7d2c7989cca92d168e8415979894d372b11573a55a0f8d2f5a1498d5",
     "port/field_bytes.h": "abff8eb93f1a466555dbc8365ea76327b1239f3cb56d1d614005642e9b4a2fe8",
     "port/field_bytes_contract_test.c": "a76f6ffcbfde35e9b3a692e4cf5caefcf8d294b34b1f0bd21e642bfe0f316d65",
     "port/startup_ranges.c": "f9d116e5bfcae7375d79e050b180302ff652733de0726d3eb9ace2e65a3cc882",
@@ -68,6 +68,6 @@
     "port/context_command_controls.c": "94fd3576a278b1983883432eeb5f910aacedc8718025f78c429c1d98220ab5be",
     "tools/recomp/native_scene_player_oracle.c": "17c4e4887c26e35f6c5356c41228eccf16864a5893fcdc6704ca7fb8a07b8700",
     "tools/recomp/check_native_scene_bootstrap.py": "719067721f21b8174f6564835c17b009cbad0ad35e311ca88e897df41e748bf7",
-    "tools/recomp/native_scene_bootstrap_oracle.c": "6dd1e7c0f8b3e15cd57ab06dc1919aa116239233b0b8d39413afc1d9c32523b5"
+    "tools/recomp/native_scene_bootstrap_oracle.c": "db94784d2240ee2331de25ad4c2b4b2d0148c75612bcf9e06d72bebf997a0c12"
   }
 }

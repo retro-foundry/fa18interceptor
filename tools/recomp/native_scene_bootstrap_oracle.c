@@ -26,6 +26,7 @@ typedef struct {
     FA18NativeScenePlacement placement;
     FA18NativeRecordUpdateStage update;
     FA18NativeControlRecordUpdate control;
+    FA18NativePostflight postflight;
     FA18NativeRecordActionPlacement action_placement;
     FA18NativeScenePointerGroup pointer_groups[16];
     uint8_t fire_state;
@@ -125,6 +126,9 @@ static int boot_load(BootstrapState *s) {
      * Its shared descriptor/global bindings satisfy the current parent API;
      * this fixture does not claim execution of the lower startup graph. */
     s->update.control_records=&s->control; s->control.placement=&s->action_placement;
+    s->control.postflight=&s->postflight;
+    s->postflight=(FA18NativePostflight){.target_record=&p->flight.spawn_gate,
+        .command_word=&p->flight.command_word,.player_phase=&p->phase,.player_flags_f=p->flags+5};
     s->action_placement=(FA18NativeRecordActionPlacement){.pointer_groups=s->pointer_groups,
         .pointer_group_count=16,.warning_causes=&p->warnings,.events=&p->events,
         .fire_state=&s->fire_state,.scene_redraw=&p->view.update_mask,

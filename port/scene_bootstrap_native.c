@@ -1,7 +1,7 @@
 #include "scene_bootstrap_native.h"
 
 static int shared_bootstrap(const FA18NativeSceneBootstrap *s) {
-    FA18FlightCommandState *f; FA18NativeRecordActionPlacement *p;
+    FA18FlightCommandState *f; FA18NativeRecordActionPlacement *p; FA18NativePostflight *post;
     if(!s || !s->context || !s->context->view || !(f=s->context->view->flight) ||
        !f->commands || !s->player || s->player->flight!=f || !s->player->records ||
        s->player->records->input!=f->commands || !s->player->effects ||
@@ -15,6 +15,9 @@ static int shared_bootstrap(const FA18NativeSceneBootstrap *s) {
        p->warning_causes!=s->player->warning_causes || p->events!=s->player->event_bits ||
        p->fire_state!=s->placement->fire_state || p->scene_redraw!=&s->context->view->update_mask ||
        p->stores_redraw_a!=&f->weapon_mode_redraws || p->stores_redraw_b!=&f->weapon_redraws) return 0;
+    post=s->update->control_records->postflight;
+    if(!post || post->target_record!=&f->spawn_gate || post->command_word!=&f->command_word ||
+       post->player_phase!=s->player->phase || post->player_flags_f!=s->player->player_flags[5]) return 0;
     return f->player==s->player->records->aircraft &&
         s->context->records==s->player->records->geometry && s->context->record_count==16;
 }
@@ -51,6 +54,7 @@ int fa18_bind_native_scene_bootstrap(FA18NativeSceneBootstrap *s,FA18CommandQueu
     v=s->context->view; f=v->flight;
     if(q->commands!=f->commands) return 0;
     s->update->control_records->placement->viewed_record=words+0x1e;
+    s->update->control_records->postflight->phase_fields=words;
     for(i=0;i<count;i+=2) if(!port_field_word_pair_valid(words+i)) return 0;
     if(!import_word(words+2,&f->spawn_gate) || !import_word(words+6,&f->command_word) ||
        !import_byte(words+12,&f->commands->indexed.cockpit_high_byte) ||

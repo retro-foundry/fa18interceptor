@@ -3,6 +3,7 @@
 #include "native_record_control_test_support.h"
 #include "native_record_pose_test_support.h"
 #include "native_record_action_placement_test_support.h"
+#include "native_postflight_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -13,6 +14,7 @@ typedef struct {
     FA18NativeRecordPose pose; FA18RecordPoseTestStorage pose_storage;
     FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
     FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
+    FA18NativePostflight postflight; FA18PostflightTestStorage post_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -23,14 +25,14 @@ typedef struct {
     uint8_t selection_active,origin_enable,action_first,action_second,action_third,pair_override;
     uint16_t selected,selection_marker,action_pending;
     uint16_t periodic,slot,stride;
-    unsigned calls[3],action_calls[3],dispatch_mask;
+    unsigned calls[2],action_calls[3],dispatch_mask;
     FA18NativeControlRecordChild fail;
 } Fixture;
 
 static int consume(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->update && decision && child<3 && slot<16);
+    assert(state==&f->update && decision && child<2 && slot<16);
     assert(companion<16);
     ++f->calls[child];
     if(child==f->fail) return 0;
@@ -77,6 +79,7 @@ static void initialize(Fixture *f) {
         .post_input_event=&f->event,.counter_first=&f->first,.counter_second=&f->second,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->slot,.current_stride=&f->stride};
+    fa18_test_bind_postflight(&f->postflight,&f->post_storage,&f->update);
 }
 int main(void) {
     static Fixture f; unsigned i; uint16_t expected_dispatch;
@@ -92,7 +95,7 @@ int main(void) {
     for(i=0;i<15;++i) assert(!(f.records.aircraft[i].secondary_flags&1));
     assert(f.records.aircraft[15].secondary_flags==1 && f.first==1 && f.second==0x7e);
     assert(f.calls[FA18_RECORD_UPDATE_PERIODIC]==1);
-    assert(f.calls[FA18_RECORD_UPDATE_FINISH]==1);
+    assert(!f.placement_storage.space && !f.post_storage.report && !f.pair_override);
     assert(!(f.records.aircraft[5].flags&0x40) && !(f.records.aircraft[9].flags&0x40));
     assert(f.action_calls[FA18_RECORD_ACTION_MANOEUVRE]==2 && !f.pair_override);
     expected_dispatch=(uint16_t)((1u<<1)|(1u<<2)|(1u<<3)|(1u<<4)|(1u<<5)|(1u<<6)|(1u<<8)|
@@ -152,5 +155,17 @@ int main(void) {
     assert(f.records.records[4].byte_5f==1 && f.records.records[5].byte_5f==2);
     assert(f.records.aircraft[5].equipment_kind==1 && f.records.aircraft[5].flags==0x11c2);
     assert(f.placement_storage.groups[5].procedure && !f.placement_storage.pending);
+
+    /* Finish executes the actual mode-three owner after the native record
+     * updates; it needs no outer scheduler or preparation child. */
+    initialize(&f); f.event=1; f.view_mode=3; f.commands.indexed.cockpit_low_byte=0x40;
+    f.post_storage.flags_f=0x80; f.control_storage.phase=2;
+    f.placement_storage.space=3; f.post_storage.report=4;
+    assert(fa18_update_native_control_records(&f.update));
+    assert(f.post_storage.phase==0xff && f.control_storage.phase==3 && !f.post_storage.phase_word);
+    assert(f.post_storage.step==4 && f.post_storage.context_gate==1 && !f.dispatch_mask);
+    assert(!f.placement_storage.space && !f.post_storage.report);
+    initialize(&f); f.update.postflight=NULL;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
     return 0;
 }
