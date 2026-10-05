@@ -82,5 +82,9 @@ int main(void) {
     event = 0xfeedface;
     assert(!fa18_publish_native_command(NULL, 0, &event) && event == 0xfeedface);
     assert(!fa18_publish_native_command(&q, 0, NULL));
+    q.taken=0; q.count=0; q.write_index=0;
+    q.slots[128]=(PortFieldByte){0};
+    assert(!fa18_publish_native_command(&q,1,&event));
+    assert(q.taken==1 && !q.count && !q.write_index && event==0xfeedface);
     return 0;
 }

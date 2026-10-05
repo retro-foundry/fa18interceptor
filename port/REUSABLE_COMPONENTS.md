@@ -7,6 +7,7 @@ Game-specific adapters retain policy, asset interpretation and scheduling.
 
 | Component | Reusable interface | Current limits |
 | --- | --- | --- |
+| `field_bytes.h` | Header-only `PortFieldByte` views of caller-owned signed/unsigned 8/16/32-bit values, independent of host byte order. Shared by native command publication and startup clears. | Requires stable canonical integer owners and valid byte shifts. Supplies no original-address lookup, packed RAM, data import, pointer-identity conversion or game scheduling. |
 | `voice_program.c/.h` | Portable `PortVoice` state, named sound operations, waits/loops, slide updates and a program-ended callback. Builds with only the C standard library. | Uses unsigned 32-bit values and eight-byte program cursor units. It provides tick execution, not sample mixing or a device driver. |
 | `voice_selection.c/.h` | Caller-owned sound tables and channel slots, ordered release/publication and acknowledgements. Shared by native command sounds and menu sounds. Builds with the C standard library and `voice_program.h`. | Accepts already resolved voices and fixed-point volumes. It has no asset loader, game sound IDs, scheduler or sample output. |
 | `amiga/rgb4.c/.h` | Ordinary-buffer colour-map loading and CopIns/merged-list palette writes. Builds with only the C standard library. Both native callback and packed compatibility service use it. | Implements the existing host's RGB4 semantics and list data formats. Allocation, viewport construction, input scheduling and presentation remain caller-owned. |
@@ -19,6 +20,17 @@ core elsewhere, compile `voice_program.c` and include `voice_program.h`.
 An asset adapter supplies operation/value arrays and a caller-owned voice;
 the host schedules ticks and receives the end callback. There are no F/A-18
 globals, CPU registers, bus accesses, Kickstart requirements or SDL dependencies.
+
+The independent `port_field_bytes` interface target now shares the actual
+byte-of-value mechanism used by both command publication and startup clearing.
+Include `field_bytes.h`; it needs no linked object. Reads/writes preserve the
+other bits of a supplied integer, including signed words/longs, with explicit
+errors for missing or ambiguous owners and invalid shifts. Ordered fills
+retain preceding writes on failure. Each future game supplies its own field
+views, clear extents and semantic record bindings. The F/A-18 queue regression
+retains all 73,728 comparisons, and both complete startup leaves add 8,192
+comparisons at 21 original boundaries with no RAM exclusions/child contracts.
+See `../analysis/routines/native_startup_ranges.md` for ownership limits.
 
 The independent `port_voice_selection` target supplies release/selection for
 those same `PortVoice` objects. Compile `voice_selection.c` with its header;

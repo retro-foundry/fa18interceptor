@@ -2,6 +2,7 @@
 #define FA18_COMMAND_QUEUE_H
 
 #include "context_command_input.h"
+#include "field_bytes.h"
 
 enum { FA18_COMMAND_QUEUE_NEIGHBORS = 266, FA18_COMMAND_KEY_TABLE_SIZE = 128 };
 
@@ -10,11 +11,7 @@ enum { FA18_COMMAND_QUEUE_NEIGHBORS = 266, FA18_COMMAND_KEY_TABLE_SIZE = 128 };
  * by value, independent of the host's byte order. Unmodeled neighboring data
  * must be imported from the original game data, like the key translation table.
  * This bounded layout is not an address space or an instruction runtime. */
-typedef struct {
-    uint8_t *byte;
-    int16_t *word;
-    unsigned shift;
-} FA18CommandQueueByte;
+typedef PortFieldByte FA18CommandQueueByte;
 
 typedef struct {
     FA18CommandInput *commands;
@@ -49,7 +46,8 @@ int fa18_bind_command_queue_word(FA18CommandQueue *queue, unsigned offset,
 /* Complete $C1C23C-$C1C2B8 publication: signed count/index checks, original
  * write order, translation and unconditional modifier clearing. Queued events
  * retain the high word and replace the entire low word with the translation;
- * gated events retain their value. Returns 0 for invalid pointers. */
+ * gated events retain their value. Returns 0 for invalid pointers/missing
+ * field owners, retaining preceding stores and leaving the result unset. */
 int fa18_publish_native_command(FA18CommandQueue *queue, uint32_t event,
                                 uint32_t *published_event);
 

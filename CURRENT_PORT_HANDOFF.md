@@ -6,7 +6,30 @@ also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
 
-Latest batch: complete native `$C2FD22` renderer clear and `$C0FA04`, `$C0FA4C`,
+Latest batch: complete `$C090C2` startup clear and `$C090F2` enable leaves use
+live native queue bindings and a required caller-owned 52-word field view.
+`field_bytes.h` extracts a reusable, header-only byte-of-integer mechanism
+shared by command publication and startup clearing, with signed/unsigned
+word/long owners and no host-endian dependency. The standalone component
+has its own CMake interface target; missing owners fail explicitly.
+
+Validation: 8,192 startup calls cover 21/21 original boundaries and all RAM
+with no exclusions or child contracts. Queue regression retains 73,728 calls,
+28 boundaries and all 138 raw/256 translated destinations; renderer/display
+regression retains 16,384 calls/62 boundaries. Strict GNU tests/symbol checks,
+native MSVC game/test builds, eight focused CTests and the unchanged 470-file
+guard pass. See `analysis/routines/native_startup_ranges.md` and the refreshed
+startup/queue/display checkpoints.
+
+Full native `$C08F26` remains pending: bind complete control-record/workspace
+owners and actual remaining children. The supplied word view still contracts
+unported fields, including viewed-record offset/semantic geometry identity;
+do not claim a duplicated viewed pointer was updated. The tenth renderer
+buffer producer, scene initializer, loading/checksum production, sample output
+and installed-stage scheduling also remain open. Native main does not call
+the new graph; the playable reference remains emulated.
+
+Preceding batch: complete native `$C2FD22` renderer clear and `$C0FA04`, `$C0FA4C`,
 `$C0FA80` display stages use the actual shared graphics, command, viewport and
 controller owners. Queue binders attach the fifth-buffer and auxiliary flags;
 a signed-index publication reaches the same flag used by the clear. Preserve

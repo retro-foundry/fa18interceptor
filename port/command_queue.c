@@ -3,28 +3,19 @@
 
 enum { RAW_FIRST = 128, TRANSLATED_FIRST = 138 };
 
-static void slot_write(FA18CommandQueueByte *slot, uint8_t value) {
-    if (slot->byte) *slot->byte = value;
-    else {
-        uint16_t bits = (uint16_t)*slot->word;
-        bits = (uint16_t)((bits & ~(0xffu << slot->shift)) | ((unsigned)value << slot->shift));
-        *slot->word = (int16_t)(bits < 0x8000u ? (int32_t)bits : (int32_t)bits - 0x10000);
-    }
+static int slot_write(FA18CommandQueueByte *slot, uint8_t value) {
+    return port_write_field_byte(slot,value);
 }
 
 static void bind_byte(FA18CommandQueue *q, unsigned offset, uint8_t *value) {
-    q->slots[offset].byte = value;
-    q->slots[offset].word = NULL;
-    q->slots[offset].shift = 0;
+    q->slots[offset]=(PortFieldByte){.byte=value};
 }
 
 static void bind_word(FA18CommandQueue *q, unsigned offset, int16_t *value) {
     unsigned i;
     *value = 0; /* Both bytes are imported below; avoid reading an unset word. */
     for (i = 0; i < 2; ++i) {
-        q->slots[offset+i].byte = NULL;
-        q->slots[offset+i].word = value;
-        q->slots[offset+i].shift = i ? 0 : 8;
+        q->slots[offset+i]=(PortFieldByte){.word=value,.shift=i?0:8};
     }
 }
 
@@ -33,8 +24,7 @@ int fa18_bind_command_queue_byte(FA18CommandQueue *q,unsigned offset,uint8_t *ow
     uint8_t value;
     if(!q || !q->commands || !owner || offset>=FA18_COMMAND_QUEUE_NEIGHBORS) return 0;
     slot=&q->slots[offset];
-    if(!slot->byte && !slot->word) return 0;
-    value=slot->byte?*slot->byte:(uint8_t)((uint16_t)*slot->word>>slot->shift);
+    if(!port_read_field_byte(slot,&value)) return 0;
     *owner=value;
     bind_byte(q,offset,owner);
     return 1;
@@ -47,8 +37,7 @@ int fa18_bind_command_queue_word(FA18CommandQueue *q,unsigned offset,int16_t *ow
     for(i=0;i<2;++i) {
         const FA18CommandQueueByte *slot=&q->slots[offset+i];
         uint8_t byte;
-        if(!slot->byte && !slot->word) return 0;
-        byte=slot->byte?*slot->byte:(uint8_t)((uint16_t)*slot->word>>slot->shift);
+        if(!port_read_field_byte(slot,&byte)) return 0;
         bits=(uint16_t)((bits<<8)|byte);
     }
     /* Read both canonical bytes before bind_word clears/attaches the owner. */
@@ -140,7 +129,7 @@ int fa18_initialize_command_queue(FA18CommandQueue *q,
     bind_byte(q, 0xee, &f->flare_timer);
     bind_byte(q, 0xf7, &v->update_mask);
     for (i = 0; i < FA18_COMMAND_QUEUE_NEIGHBORS; ++i)
-        slot_write(&q->slots[i], q->neighbors[i]);
+        if(!slot_write(&q->slots[i], q->neighbors[i])) return 0;
     context->key_taken = &q->taken;
     return 1;
 }
@@ -159,13 +148,13 @@ int fa18_publish_native_command(FA18CommandQueue *q, uint32_t event,
             int index = signed_byte(q->write_index);
             uint8_t translated;
             if (index >= 10) index = 0;
-            slot_write(&q->slots[RAW_FIRST+index], raw);
+            if(!slot_write(&q->slots[RAW_FIRST+index], raw)) return 0;
             translated = q->key_table[raw];
             q->write_index = (uint8_t)(index+1);
             /* Read after the raw write, as in the original. */
             q->count = (uint8_t)(q->count+1);
             index = signed_byte(q->translated_index);
-            slot_write(&q->slots[TRANSLATED_FIRST+index], translated);
+            if(!slot_write(&q->slots[TRANSLATED_FIRST+index], translated)) return 0;
             event = (event & 0xffff0000u) | translated;
         }
     }

@@ -76,6 +76,7 @@ def main():
                  "port/post_input_display_stages.h", "port/post_input_display_contract_test.c",
                  "port/graphics_setup.c", "port/graphics_setup.h", "port/graphics_storage.c",
                  "port/graphics_storage.h", "port/command_queue.c", "port/command_queue.h",
+                 "port/field_bytes.h",
                  "port/stage_callback.h", "tools/recomp/check_native_post_input_display.py",
                  "tools/recomp/native_post_input_display_oracle.c"]
         checkpoint = {

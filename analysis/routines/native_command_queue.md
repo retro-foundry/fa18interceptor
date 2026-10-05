@@ -23,6 +23,15 @@ context's taken pointer to the queue. Owners must retain stable addresses.
 Future ports of neighboring globals must bind those globals to their owner
 in this initializer rather than maintain duplicate values.
 
+The byte-of-value mechanism is now the independent `field_bytes.h` component,
+also used by the two complete native startup range leaves. Queue slots retain
+their existing byte/signed-word owners through an alias of `PortFieldByte`;
+this core also supports supplied unsigned words and signed/unsigned longs.
+Missing destinations return an explicit error, retaining preceding writes
+and leaving the result unset. No address space or CPU state was introduced.
+Extraction regression retains all 73,728 calls, 28 boundaries and every raw/
+translated destination. See `native_startup_ranges.md` for reuse and limits.
+
 Validation runs `python tools/recomp/check_native_command_queue.py` against
 the sealed original demo state. Original source bytes are checked before any
 call executes. The oracle uses the actual original instructions, without

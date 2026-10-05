@@ -11,16 +11,18 @@
   "comparison": "all Chip/Slow RAM without exclusions, full event, canonical native owners; original instructions without child contracts",
   "report": "native command queue: 73728 calls matched full RAM, events and canonical owners; 28 boundaries; 138 raw and 256 translated destinations",
   "source_sha256": {
-    "port/command_queue.c": "33f5c8073da756dc67ea8371767778dbb561cc334b87eca6edb64af945b62d64",
-    "port/command_queue.h": "4cb234bbfa375c4596128845f65d369e6408702995c7a2e294fc827b79e45b3e",
-    "port/command_queue_contract_test.c": "2c397d0564f4667a39f46d2fdc97b6786ba206e01ae8f3ef5ee95fc4ae7e2422",
+    "port/command_queue.c": "dd1f1f6a046939903098708e095ed64e784ab02a6bb2d3c0e18ae378e6468e25",
+    "port/command_queue.h": "1795592dc406ee313e5a8756d175b3119b35e5f1c50ae19659021da44def3955",
+    "port/command_queue_contract_test.c": "83a4b78d10aa0437cdfa23556373cfc727f7c6c8ffe02b21ab26aea513e3f61a",
+    "port/field_bytes.h": "912b6012ded64bd77b0b910ffe3f1e88d544e5c5139a05cc0a186bc9e4593e3c",
+    "port/field_bytes_contract_test.c": "5ab4a00f5abd51da3d79314302f7b71a4d50d23c6919d842f60e6737d3653b11",
     "port/command_input.h": "37ad0f86cf22af73b5c07fb79107683c43268790031a107d218f1c535ed22d65",
     "port/indexed_controls.h": "ed89c6b7939725c4392dfc338844be83be8b86c32ce32eb3edab0a43c4fd0346",
     "port/flight_command_input.h": "0b18323d94f6f38eb2bebb4f3ab920c90f6c8b566542a27612e7997a751186fc",
     "port/view_command_input.h": "a84d186104a39b64307538f6a43d6196295e915113b4a4118eddaef355e974a8",
     "port/context_command_input.h": "667b6514bd64990cb8c572ce07b397c10fe5d8d88c3197790da5018f79268e0c",
     "tools/recomp/native_command_queue_oracle.c": "1a613e805754c5b488b6cfb69442c36f3a93bf8f2e7ad44af1818ddaae8352a4",
-    "tools/recomp/check_native_command_queue.py": "d8df74389e85990015326752e744c1e905fe9179754212ba59ee022a943860d7",
+    "tools/recomp/check_native_command_queue.py": "9bdd0b1c867a2a62e53a0649537dcb9c3d12b74a0a21782c07070f49dacfde5f",
     "tools/recomp/command_publication_oracle.c": "f96f5168aa40cf1f8d68633bf0031fb61d7c22c048ad62886a5bf72febfd5015",
     "analysis\\data\\command_dispatch_source_scope.json": "b1d2c56f1d4a1ebedd6be089c3d1b55681604fb3cfa195032524368a8037fe74"
   }

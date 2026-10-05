@@ -1,0 +1,31 @@
+{
+  "status": "validated_native_startup_range_leaves_full_record_ownership_and_bootstrap_pending",
+  "entries": [
+    "C090C2",
+    "C090F2"
+  ],
+  "cases": 8192,
+  "source_boundaries": 21,
+  "covered_boundaries": 21,
+  "native_cpu_dependency": false,
+  "child_contracts": [],
+  "comparison": "every Chip/Slow RAM byte with no exclusions; live queue and supplied typed word owners",
+  "ownership_limit": "Word references use existing spawn/command/cockpit/message/redraw owners; other words are supplied imports, including viewed-record offset. Complete native geometry/record identity and startup graph remain pending.",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "dd85df9bc380fb149e766393cf3aa9d147553b01f674038a1b9f4175e5259630",
+  "reports": [
+    "native startup C090C2: 4096 complete calls match all RAM with no exclusions or child contracts",
+    "native startup C090F2: 4096 complete calls match all RAM with no exclusions or child contracts"
+  ],
+  "source_sha256": {
+    "port/startup_ranges.c": "89e9fea8b4599e329404c90c775bd3f10f58a7bae018a909c9f9a72a72de132e",
+    "port/startup_ranges.h": "4000f5340b2fb065a5a27fd46f1ef73ef7fad093276dec432ae04aba645b61ad",
+    "port/startup_ranges_contract_test.c": "c57ba69bdaca352149f4a3d421daf9b154b34166e4916edb7788e5e3ea3a11ce",
+    "port/field_bytes.h": "912b6012ded64bd77b0b910ffe3f1e88d544e5c5139a05cc0a186bc9e4593e3c",
+    "port/field_bytes_contract_test.c": "5ab4a00f5abd51da3d79314302f7b71a4d50d23c6919d842f60e6737d3653b11",
+    "port/command_queue.c": "dd1f1f6a046939903098708e095ed64e784ab02a6bb2d3c0e18ae378e6468e25",
+    "port/command_queue.h": "1795592dc406ee313e5a8756d175b3119b35e5f1c50ae19659021da44def3955",
+    "tools/recomp/check_native_startup_ranges.py": "5c42e4eea12047f5cf09e565b2a6ce3857e1c6a42bfd473305be97a3fa27d0d8",
+    "tools/recomp/native_startup_ranges_oracle.c": "fd5ef9f52e556e8a5f27f8b6565291ad26b876452151332c3cdea045739aea42"
+  }
+}

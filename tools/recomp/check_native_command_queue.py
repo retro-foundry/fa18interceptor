@@ -47,6 +47,7 @@ def main():
         if visited != expected:
             raise RuntimeError(f"boundary mismatch: missing {sorted(expected-visited)}, extra {sorted(visited-expected)}")
         paths = ["port/command_queue.c", "port/command_queue.h", "port/command_queue_contract_test.c",
+                 "port/field_bytes.h", "port/field_bytes_contract_test.c",
                  "port/command_input.h", "port/indexed_controls.h", "port/flight_command_input.h",
                  "port/view_command_input.h", "port/context_command_input.h",
                  "tools/recomp/native_command_queue_oracle.c", "tools/recomp/check_native_command_queue.py",

@@ -67,6 +67,11 @@ The complete ten-stream renderer clear and three post-input display stages
 add 16,384 comparisons at all 62 boundaries, using the existing native planes
 and command/controller owners. The full scene initializer is explicitly
 contracted and the tenth clear buffer requires its actual startup producer.
+Both complete startup clear/enable leaves add 8,192 comparisons at all 21
+boundaries, with all RAM compared and no child contracts. Their live queue
+references share the independent `field_bytes.h` mechanism with command
+publication; all 73,728 queue comparisons still pass. Complete startup record
+and geometry ownership, including viewed-record identity, remains open.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
@@ -78,6 +83,7 @@ runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_audio_selection.md`,
 `analysis/routines/native_postflight_text.md`,
 `analysis/routines/native_post_input_display.md`,
+`analysis/routines/native_startup_ranges.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,
