@@ -6,7 +6,26 @@ also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
 
-Latest batch: complete native `$C0F812` checksum text/palette publisher and its
+Latest batch: complete native `$C2FD22` renderer clear and `$C0FA04`, `$C0FA4C`,
+`$C0FA80` display stages use the actual shared graphics, command, viewport and
+controller owners. Queue binders attach the fifth-buffer and auxiliary flags;
+a signed-index publication reaches the same flag used by the clear. Preserve
+the interleaved longword stores, per-iteration gate reads and conditional fifth
+cursor. Graphics setup supplies nine source pointers: the tenth (`$C456E2`)
+needs its actual separate startup owner, not a fabricated allocation/alias.
+
+Validation: 16,384 complete calls cover 62/62 source boundaries, including real
+clear children and gate aliases into A0/A4 buffer data. Only `$C0FAA4` uses a
+required scene-child contract; 1,638 entry states and independent shared-field
+changes match. Strict GNU integration/symbol checks, native MSVC game/test
+builds, six affected CTests and the unchanged 467-file guard pass. See
+`analysis/routines/native_post_input_display.md` and its sealed checkpoint.
+Full `$C08F26` bootstrap and canonical startup clear/control-record owners
+remain next, followed by actual scene children and installed-stage scheduling.
+Native main still does not call this graph; the playable reference remains
+emulated. This batch completes four routines, not the complete game.
+
+Preceding batch: complete native `$C0F812` checksum text/palette publisher and its
 actual `$C0F56A` formatter now use ordinary shared command, aircraft, display,
 countdown, callback and audio owners. Selector 97 binds directly to the actual
 mutable Hunk-64 descriptor; Hunk 21 supplies one source-order mode bank whose

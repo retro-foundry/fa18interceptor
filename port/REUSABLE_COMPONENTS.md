@@ -111,6 +111,15 @@ source-order bank for both its mode views and 32-word seed; no copied seed
 needs synchronization. Full bootstrap and scheduling remain required; see
 `../analysis/routines/native_postflight_text.md`.
 
+`renderer_clear` and `post_input_display_stages` now share the existing plane,
+command, viewport and controller owners instead of introducing new state to
+synchronize. Their ten-stream topology, live fifth flag and countdown/callback
+rules remain F/A-18 policy, so they are adapters rather than generic utilities.
+Future ports can reuse the underlying ordinary-buffer graphics cores without
+adopting these game rules. The complete original-instruction proof covers
+62 boundaries over 16,384 calls; see
+`../analysis/routines/native_post_input_display.md` for remaining dependencies.
+
 Planar rendering, projection and input modules remain candidates, with
 game-specific dimensions, tables or state still present. They should be
 extracted when another concrete caller establishes the common contract.

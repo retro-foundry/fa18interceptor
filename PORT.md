@@ -63,6 +63,10 @@ The complete native startup text/palette publisher and actual formatter add
 8,192 comparisons at all 221 boundaries, with bootstrap explicitly contracted.
 They bind the real mutable checksum descriptor and contiguous original seed;
 full bootstrap, checksum production and installed-stage integration remain open.
+The complete ten-stream renderer clear and three post-input display stages
+add 16,384 comparisons at all 62 boundaries, using the existing native planes
+and command/controller owners. The full scene initializer is explicitly
+contracted and the tenth clear buffer requires its actual startup producer.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
@@ -73,6 +77,7 @@ runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_audio_update.md`,
 `analysis/routines/native_audio_selection.md`,
 `analysis/routines/native_postflight_text.md`,
+`analysis/routines/native_post_input_display.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,

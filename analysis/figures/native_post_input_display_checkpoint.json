@@ -1,0 +1,45 @@
+{
+  "status": "validated_native_clear_and_display_stages_scene_child_and_full_runtime_pending",
+  "entries": [
+    "C2FD22",
+    "C0FA04",
+    "C0FA4C",
+    "C0FA80"
+  ],
+  "cases": 16384,
+  "source_boundaries": 62,
+  "covered_boundaries": 62,
+  "native_cpu_dependency": false,
+  "child_contracts": [
+    "C0FAA4 complete scene initialization graph pending; entry RAM and independently computed shared changes compared; incidental volatile CPU returns varied and ignored"
+  ],
+  "actual_children": [
+    "C2FD22 ten-stream clear fully executes original instructions"
+  ],
+  "comparison": "every Chip/Slow RAM byte except CPU ABI stack C7FD00..C7FF00; full game RAM at ordered scene-child entry",
+  "coverage_cases": "signed countdown boundaries, all viewport equality branches, flag values 0/1/80/FF, shared/shifted/overlapping plane spans, unused NULL A4, live fifth gate cleared by A0/A4, conditional fifth cursor, separate supplied tenth buffer",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "ab226586e9fc4bc24f0fec5e92808f3bfb05a4ace8881badb448bc345742be52",
+  "reports": [
+    "native display C2FD22: 4096 complete calls and 0 contracted scene entries match full RAM outside the CPU ABI stack",
+    "native display C0FA04: 4096 complete calls and 1638 contracted scene entries match full RAM outside the CPU ABI stack",
+    "native display C0FA4C: 4096 complete calls and 0 contracted scene entries match full RAM outside the CPU ABI stack",
+    "native display C0FA80: 4096 complete calls and 0 contracted scene entries match full RAM outside the CPU ABI stack"
+  ],
+  "source_sha256": {
+    "port/renderer_clear.c": "a7c2f7fc6c799a8cf0f697c651d124306b474cb24694ecf73a0f28207a620e51",
+    "port/renderer_clear.h": "9c62ebdc8846bb7c07b884142b94ddc871d7f09cbc2125c1ed934192f71ce76c",
+    "port/post_input_display_stages.c": "2c3ee6121d7e841cfe425d3634bb2b61ffacb7fb360a0eb072f1814d7ab2220f",
+    "port/post_input_display_stages.h": "502603eb8848d42e7797e6555592036224e57e8e9295e1def63012091644e74f",
+    "port/post_input_display_contract_test.c": "32d50e0727687c3e3beb8881e2d51b5b6c0e51fdeee5b978e1309338372186ee",
+    "port/graphics_setup.c": "239078ae8ec83f34b9f582f4f25fc61717883b19d559d6e7ec6902e1415359fe",
+    "port/graphics_setup.h": "6df4636345a83ec87a65969573a1939a6996e565776caea1e4f1336a293647c6",
+    "port/graphics_storage.c": "f166906fb9a34bcb293345b0558f0ab3d666d7bf00db66a4f3a10b320bc06f80",
+    "port/graphics_storage.h": "edf4f86363507b99d6c4d78fd0a3286ca7b9d52ad5272d706fa86018337e7e75",
+    "port/command_queue.c": "33f5c8073da756dc67ea8371767778dbb561cc334b87eca6edb64af945b62d64",
+    "port/command_queue.h": "4cb234bbfa375c4596128845f65d369e6408702995c7a2e294fc827b79e45b3e",
+    "port/stage_callback.h": "9c91a07e2798ec12bdd17b0bfa85532dfedc80138fc5628cdfe6769662f70982",
+    "tools/recomp/check_native_post_input_display.py": "6587ab5f8844fba63136e374d983513ccd691b2365bb4adc7c282e17579f1e5f",
+    "tools/recomp/native_post_input_display_oracle.c": "2457eb538e1b99aa3d64fdc1027789103aae2b258422fef8a8be766c1d6b3b80"
+  }
+}
