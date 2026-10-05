@@ -1,8 +1,59 @@
 # Current playable port handoff
 
-Updated 2026-10-05 following the user's source-ownership correction and request
-to remove the abandoned top-level port. This file supersedes earlier resume
-instructions; previous handoffs and removed source are preserved in git history.
+Updated 2026-10-05 following the user's source-ownership correction, cleanup and
+explicit instruction to prevent another costly detour. Read this handoff and
+`AGENTS.md` before continuing. This file supersedes earlier resume instructions;
+previous handoffs and removed source are preserved in git history.
+
+## What went wrong and must not recur
+
+About fourteen hours of elapsed work on 2026-10-05 expanded a separate gameplay
+implementation in the abandoned top-level `port/` tree. Its standalone proofs
+were reported as progress toward emulation independence without establishing
+that the playable runner called it. This wasted substantial user time and money.
+Some shared host components were integrated and remain useful; this does not
+excuse the disconnected gameplay work or its misleading progress reports.
+
+The user clarified that `port/game/` is the active port and requested deletion
+of the abandoned sources. Commit `0855f5d6` removed 759 tracked source/header
+files and the old build definition. Commit `e70a7014` moved the 48 retained
+dependencies into `port/game/` and updated builds, includes and active tools.
+Do not recover the deleted implementation as a parallel port or resume its
+bootstrap/pose/control-owner plan. Git history is reference evidence only.
+
+The unsupported three-to-six-week estimate was withdrawn. The later "0%" answer described
+the absence of a verified complete emulation-free gameplay path, not the amount
+of work completed; it was misleading as an overall progress percentage. Neither
+number is an accepted project estimate. The measured 614/699 (87.84%) figure is
+only readable routine reconstruction within the known inventory. It is neither
+whole-game discovery coverage nor emulation-independence completion.
+
+## Required checks before substantial implementation
+
+1. Verify the candidate implementation is compiled by
+   `port/recomp/CMakeLists.txt` or `scripts/build_recomp.py`, and trace its caller
+   from the actual runner entry. A library link alone does not establish use.
+2. Identify the specific CPU, guest-bus, generated-code or chipset dependency
+   the batch will remove, and the real startup/menu/flight scenario exercising
+   that change. Record the active caller and planned integration in this handoff.
+3. Make the first batch a small connected change exercised in the playable
+   runner. Do not accumulate more disconnected owner modules and expensive
+   component proofs while startup/frame integration remains absent.
+4. Validate the changed runner path and the relevant original behavior. Report
+   separately what is compiled, what is actually exercised, which dependency
+   was removed, and which dependencies remain. Standalone proofs alone do not
+   complete a runtime milestone.
+5. Reuse existing source and evidence. Run checks appropriate to the affected
+   behavior; repeat or broaden them only for new changes, failures or unresolved
+   concerns. The retired 249-test suite is not the active runner's acceptance
+   suite. Do not spend another long sequence validating the wrong target.
+
+Report useful progress regularly during execution. If evidence shows a batch
+is disconnected or targets the wrong build, correct the implementation direction
+before continuing it. Do not substitute routine counts, passing test counts,
+commit counts or elapsed time for a measured runtime result. Give any future
+time/effort estimate with its scope, assumptions and measured basis; do not
+invent an overall percentage or extrapolate a deadline from function counts.
 
 ## Work scope
 
@@ -68,10 +119,20 @@ See `analysis/routines/romfree_machine_startup.md`,
 
 ## Next work and validation
 
-Trace the real startup/frame graph through `port/game/` and the active runtime;
-remove CPU/guest-bus/chipset dependencies there in connected, source-backed
-changes. Reuse the retained shared code where it is actually called. Do not
-resume the removed standalone bootstrap/pose/control-owner plan.
+Before sustained implementation, document the real startup/frame call graph
+from `port/recomp/recomp_main.c` through machine execution and the registered
+`port/game/glue/ports.c` owners. Inspect `port/game/memory.h`, hardware access
+and child hooks for the remaining CPU/bus/chipset dependencies. Distinguish the
+44 deferred original ADF entries from the 41 reference wrappers; only the actual
+required game paths define the cutover work. The known inventory does not prove
+the complete original callback/call graph has been found.
+
+Use that evidence to choose the first small dependency-removal batch in the
+active runner. The intended milestone is clean launch into active flight with
+Musashi absent from that executable; it is not delivered yet. Chipset removal
+and complete game-mode acceptance remain additional requirements. Keep each
+change connected to the actual game/runtime call graph and record its measured
+result before extending the batch. Reuse retained shared code where called.
 
 Build the MSVC runners with `cmake -S port/recomp -B build/recomp-cmake` and
 `cmake --build build/recomp-cmake --config Release`. Headless GNU builds use
