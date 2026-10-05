@@ -24,7 +24,7 @@ typedef struct {
     uint8_t weapon_mode_redraws, weapon_redraws, shoot_cue, gear_message;
     uint8_t flare_count, chaff_count, flare_timer, chaff_timer, mission_flags;
     uint8_t ecm_enabled, sequence_phase, eject_flag;
-    uint8_t pause, context_started, stick_y, stick_x;
+    uint8_t pause, context_started, stick_y, stick_x, space_command_latch;
 } FA18FlightCommandState;
 
 typedef struct {
@@ -63,7 +63,7 @@ int fa18_apply_flight_input_command(FA18FlightCommandState *state,
 /* Actual ordinary-state leaves: direction commands ($C1B50C/$C1B558 family),
  * throttle reset ($C1B602) and space release ($C08394).
  * Returns 1 only for a handled child, 0 for another child or invalid pointers.
- * Audio, space-press and spawn children require their own native owners.
+ * Message/audio and space-press children use the command_effects.c owner.
  * Eject's $C1C214 child includes queue publication, not just its toggle. */
 int fa18_apply_flight_control_child(FA18FlightCommandState *state,
                                     enum FlightCommandChild child,

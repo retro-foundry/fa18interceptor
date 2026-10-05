@@ -28,6 +28,18 @@ static void bind_word(FA18CommandQueue *q, unsigned offset, int16_t *value) {
     }
 }
 
+int fa18_bind_command_queue_byte(FA18CommandQueue *q,unsigned offset,uint8_t *owner) {
+    FA18CommandQueueByte *slot;
+    uint8_t value;
+    if(!q || !q->commands || !owner || offset>=FA18_COMMAND_QUEUE_NEIGHBORS) return 0;
+    slot=&q->slots[offset];
+    if(!slot->byte && !slot->word) return 0;
+    value=slot->byte?*slot->byte:(uint8_t)((uint16_t)*slot->word>>slot->shift);
+    *owner=value;
+    bind_byte(q,offset,owner);
+    return 1;
+}
+
 int fa18_initialize_command_queue(FA18CommandQueue *q,
                                   FA18ContextCommandState *context,
                                   const uint8_t *neighbors, size_t neighbor_count,
@@ -69,6 +81,7 @@ int fa18_initialize_command_queue(FA18CommandQueue *q,
     bind_byte(q, 0x53, &f->context_started);
     bind_byte(q, 0x54, &c->indexed.origin_gate_b);
     bind_byte(q, 0x58, &f->next_target);
+    bind_byte(q, 0x59, &f->space_command_latch);
     bind_byte(q, 0x5f, &v->redraw_keep_state);
     bind_byte(q, 0x72, &c->return_state);
     bind_byte(q, 0x74, &c->event_counter);

@@ -25,7 +25,7 @@ typedef struct {
  X(c.message_state,MESSAGE_STATE_C) \
  X(f.weapon_pause,COMMAND_WEAPON_PAUSE) X(f.hud_mode,POST_INPUT_EXPIRED) \
  X(f.eject_flag,BAR_E_FLAG) X(f.pause,PAUSE_A) X(f.context_started,CONTEXT_STARTED) \
- X(f.next_target,COMMAND_NEXT_TARGET_FLAG) X(f.sequence_phase,SEQUENCE_PHASE) \
+ X(f.next_target,COMMAND_NEXT_TARGET_FLAG) X(f.space_command_latch,SPACE_COMMAND_LATCH) X(f.sequence_phase,SEQUENCE_PHASE) \
  X(f.stick_y,STICK_Y) X(f.trim_input,COMMAND_TRIM_INPUT) X(f.stick_x,STICK_X) \
  X(f.redraw_b,BAR_REDRAWS_B) X(f.redraw_c,BAR_REDRAWS_C) X(f.redraw_d,BAR_REDRAWS_D) \
  X(f.redraw_e,BAR_REDRAWS_E) X(f.scale_redraws,SCALE_REDRAWS) X(f.info_redraws,INFO_REDRAWS) \

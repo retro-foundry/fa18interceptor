@@ -29,14 +29,14 @@ space-release children directly. It adds the complete `$C1C214` eject toggle:
 the byte toggles between zero/nonzero, then publication runs inside that child.
 The parent resumes, writes its remaining flags and publishes again. The
 second publication respects the taken latch from the first. Required audio,
-space-press and spawn calls reach their explicit native owners; a missing or
+space-press and sound-sweep calls reach their explicit native owners; a missing or
 failing owner returns failure, preserving preceding original writes and
 leaving the outcome unassigned. This is not substitute child behavior.
 
 Run `python tools/recomp/check_native_command_dispatch.py`. The oracle checks
 the sealed original bytes, executes every parent instruction directly, and
 executes real control/eject-publication, zoom/redraw, geometry/observer,
-registration/removal and fault-RTS instructions. Audio, space-press, spawn
+registration/removal and fault-RTS instructions. Audio, space-press, sound sweep
 and host registration use explicit test contracts that alter real shared
 state and event words. At each child boundary, all RAM and semantic inputs
 are compared. Final checks compare every Chip/Slow RAM byte without exclusions,
@@ -57,10 +57,15 @@ game builds and the unchanged guard passes 428 files. Contracts check complete
 dispatch, inherited words, nested eject publication, view composition,
 modifier/wait/fault/reset exits and explicit child/service failures.
 
+The remaining message/status/voice/space/sweep game children now have real
+native owners in `command_effects.c`; see [native command effects](native_command_effects.md)
+for their separate original-instruction proof and composition requirements.
+The parent regression above retains its controlled contracts to test owner
+interfaces and shared-state effects. `$C25704` posts messages and `$C17F8C`
+starts sound 6; the earlier "spawn" label described neither routine accurately.
+
 The library is linked into the incomplete native runtime but is not called
-by its game loop. Remaining dependencies include actual `$C33186/$C3318E`
-sound/status, `$C0F4A6` voice release, `$C0833E` space press,
-`$C25704/$C17F8C` action/spawn children, `$C1718E` input callback and host
-registration services. Original data loading and the complete native game
-loop still require work. The playable reference runner remains emulated;
-this batch advances the full emulation-free objective without completing it.
+by its game loop. Remaining dependencies include `$C1718E` input callback,
+host registration/audio services, audio updates/playback, original data
+loading and the complete native game loop. The playable reference remains
+emulated; the full emulation-free objective is still unfinished.

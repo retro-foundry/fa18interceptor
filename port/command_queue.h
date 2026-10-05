@@ -36,6 +36,12 @@ int fa18_initialize_command_queue(FA18CommandQueue *queue,
                                   const uint8_t *neighbors, size_t neighbor_count,
                                   const uint8_t *key_table, size_t key_count);
 
+/* Attach a newly ported byte owner at a bounded neighboring-data offset.
+ * Import the current canonical value before rebinding, including word bytes.
+ * Returns 0 for an uninitialized queue or an invalid offset/owner. */
+int fa18_bind_command_queue_byte(FA18CommandQueue *queue, unsigned offset,
+                                 uint8_t *owner);
+
 /* Complete $C1C23C-$C1C2B8 publication: signed count/index checks, original
  * write order, translation and unconditional modifier clearing. Queued events
  * retain the high word and replace the entire low word with the translation;

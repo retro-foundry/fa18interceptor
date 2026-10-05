@@ -33,7 +33,8 @@ typedef struct {
 
 /* Real direction/throttle/space-release children and the complete $C1C214
  * eject toggle, including its nested publication. Returns 0 for other child
- * families or missing state. Audio/space-press/spawn need actual owners. */
+ * families or missing state. command_effects.c supplies the other game
+ * children with original data and a required host audio acknowledgement. */
 int fa18_is_native_flight_child(enum FlightCommandChild child);
 int fa18_apply_native_flight_child(FA18NativeCommandDispatcher *state,
                                    enum FlightCommandChild child,

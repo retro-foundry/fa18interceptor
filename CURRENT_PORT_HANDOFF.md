@@ -182,6 +182,41 @@ native runtime integration. Parent dispatch now has ordinary-state owners,
 but the bounded runtime does not call them yet. The reference game remains
 emulated and the complete emulation-free objective remains active.
 
+Command effects progress: `port/command_effects.c/.h` now supplies the actual
+remaining flight/context/indexed game children: space press ($C0833E), cockpit
+message post ($C25704), context-gated/direct status tones ($C33186/$C3318E),
+programmed tone start and its release/play/acknowledgement children, all-voice
+release ($C0F4A6), and sound-6 sweep ($C17F8C) with the original RNG and signed
+software divide. Correct the earlier "spawn" terminology: $C25704 posts
+messages and $C17F8C starts a sound; neither creates an entity. Historical
+child enum identities remain annotated for compatibility.
+
+Native owner initialization imports/rebinds the two queue-reachable audio
+bytes; flight owns the space latch and indexed state owns both cockpit bytes.
+Required original voice/program/channel data and a native host audio
+acknowledgement service must be supplied. The source software divider returns
+zero for a zero divisor and wraps overflow; it does not throw a CPU exception.
+
+Validation passes 12,288 original calls and all 278/278 instruction boundaries,
+with complete original sound/divide/RNG children and no child contracts.
+Full events, ordered audio acknowledgement payloads, interrupt results and
+all Chip/Slow RAM outside the original CPU ABI stack $C7FD00..$C7FF00 match;
+RAM is also checked at each acknowledgement. This explicit stack difference
+belongs only to validation, since native C uses its own ABI. The existing queue
+regression passes 73,728 calls and all destinations with an independent space
+latch mapping; the existing parent proof passes 16,384 calls with its controlled
+effect contracts unchanged. GNU strict-warning/MSVC native contracts and all
+eight command CTests pass; the GNU contract has no CPU/bus/machine symbols.
+Native MSVC game builds, and its unchanged guard passes 430 files. See
+`analysis/routines/native_command_effects.md` and its checkpoint.
+
+Continue with the actual $C1718E input callback and native registration service,
+audio voice-program updates and sample playback, original asset import, and
+complete native loop composition. The command library now has actual game
+effect owners, but still needs those data/host/runtime dependencies. The bounded
+native game does not call it yet; the playable reference remains emulated.
+The full emulation-free goal remains active. Commit each validated batch.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

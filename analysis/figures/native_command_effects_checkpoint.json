@@ -1,0 +1,39 @@
+{
+  "status": "validated_native_command_effects_audio_update_playback_and_runtime_pending",
+  "entries": [
+    "C0833E",
+    "C25704",
+    "C3318E",
+    "C33186",
+    "C0F4A6",
+    "C17F8C"
+  ],
+  "cases": 12288,
+  "source_boundaries": 278,
+  "covered_boundaries": 278,
+  "uncovered_boundaries": [],
+  "native_cpu_dependency": false,
+  "child_contracts": false,
+  "comparison": "full Chip/Slow RAM except the original CPU ABI stack C7FD00..C7FF00, full returned event, ordered audio acknowledgements and complete RAM at each acknowledgement; native hardware acknowledgement payloads applied only in validation",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "7441199913529b785f7aa903eb526b4ed28b26e047360c6700b64cef82bf8826",
+  "reports": [
+    "native command effects C0833E: 2048 original calls matched RAM outside CPU ABI stack, full events and 0 ordered audio acknowledgements",
+    "native command effects C25704: 2048 original calls matched RAM outside CPU ABI stack, full events and 0 ordered audio acknowledgements",
+    "native command effects C3318E: 2048 original calls matched RAM outside CPU ABI stack, full events and 1842 ordered audio acknowledgements",
+    "native command effects C33186: 2048 original calls matched RAM outside CPU ABI stack, full events and 918 ordered audio acknowledgements",
+    "native command effects C0F4A6: 2048 original calls matched RAM outside CPU ABI stack, full events and 8192 ordered audio acknowledgements",
+    "native command effects C17F8C: 2048 original calls matched RAM outside CPU ABI stack, full events and 1536 ordered audio acknowledgements"
+  ],
+  "source_sha256": {
+    "port/command_effects.c": "a96ba3c732f1b3967751e44ad0384ff26383172de481e2f7167e851037ae0f62",
+    "port/command_effects.h": "e6ca3a661832a44cc96efe2b49c04ee1a2d20ed9c6f51aebb5113d9070be6bb7",
+    "port/command_effects_contract_test.c": "660c7fa5010ae0fb1a63882cae02637e1efaa0cf9a3c901dcb9b21c2786af2c9",
+    "port/command_queue.c": "e7782730c22d283d6440cae5fa53698da21c089785f543a5f04d258b09c11bf8",
+    "port/command_queue.h": "7cb82db6e674ff5bf466225142ca1876ccdb7f5570ccbb69eb694b8461821f66",
+    "port/flight_command_input.h": "0b18323d94f6f38eb2bebb4f3ab920c90f6c8b566542a27612e7997a751186fc",
+    "port/indexed_controls.h": "ed89c6b7939725c4392dfc338844be83be8b86c32ce32eb3edab0a43c4fd0346",
+    "tools/recomp/check_native_command_effects.py": "7f37d03fbe3ecd5ebe243942506cc5123aeb9f569d6842cb4fe1f51b9a9dbd78",
+    "tools/recomp/native_command_effects_oracle.c": "9067cadfe2ee88462c2967730cd9d32b3bee77cad6e3c2afdd3271f0031dd6a9"
+  }
+}

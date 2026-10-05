@@ -38,7 +38,10 @@ All five context actions and their actual geometry/observer children now pass
 comparisons, including every signed-index destination and shared-field alias.
 Both complete native command parents now pass 16,384 comparisons, including
 eject's nested publication and actual callback registration/removal bodies.
-Other child backends, data loading and full runtime integration remain open. See
+The remaining command message/status/voice/space/sweep game children now pass
+12,288 original calls covering all 278 instruction boundaries. Host services,
+audio updates/playback, asset loading and full runtime integration remain open. See
+[native command effects](analysis/routines/native_command_effects.md),
 [native command parents](analysis/routines/native_command_parent.md),
 [native queue publication](analysis/routines/native_command_queue.md),
 [native context actions](analysis/routines/native_context_command_input.md),

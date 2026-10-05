@@ -30,7 +30,7 @@ typedef struct {
     uint8_t mode, mode_request, mode_gate;
     uint8_t enable_gate, enable_selection;
     uint8_t function_modifier, recorder_mode;
-    uint8_t cockpit_high_byte, pose_entry, pose_inhibit;
+    uint8_t cockpit_high_byte, cockpit_low_byte, pose_entry, pose_inhibit;
     uint8_t origin_detail, origin_gate_a, origin_gate_b;
     uint8_t function_level, control_record_level, player_ready;
     uint32_t playback_bytes;
