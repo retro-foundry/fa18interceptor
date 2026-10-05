@@ -1,5 +1,6 @@
 #include "scene_bootstrap_native.h"
 #include "run075_trig_asset.h"
+#include "native_record_control_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -11,6 +12,7 @@ typedef struct {
     FA18NativeSceneRecorder recorder; FA18NativeScenePlacement placement;
     FA18NativeRecordUpdateStage record_update; FA18NativeSelectorOrigin selector_origin;
     FA18NativeRecordSelection record_selection;
+    FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -49,9 +51,9 @@ static Fixture fixture;
 static int update(void *context,FA18NativeControlRecordUpdate *state,
                   FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context; uint8_t high,low; unsigned i;
-    assert(state==&f->control_update && decision && child<8 && slot<16 && companion<16);
+    assert(state==&f->control_update && decision && child<6 && slot<16 && companion<16);
     *decision=0;
-    if(child!=FA18_RECORD_UPDATE_ROOT_CONTROL) return 1;
+    if(child!=FA18_RECORD_UPDATE_POSE || slot!=0) return 1;
     assert(f->calls++==0 && f->context.origin_first==0x10c00000);
     assert(f->flight.viewed==f->records.aircraft && f->flight.player->flags==0x11c8);
     assert(f->countdown==5 && f->history==0x800 && f->transition==1 && f->phase==0);
@@ -118,9 +120,11 @@ static void initialize(Fixture *f) {
         .mode=&f->view_mode,.limit=&f->limit_byte,.pending=&f->view_pending,.view_flag=&f->view_flag,
         .created=&f->view_created,.admitted=&f->view_admitted,.normalized=f->normalized};
     f->view_work.viewer=f->records.records;
+    fa18_test_bind_record_control(&f->control_player,&f->control_storage,&f->records,
+        &f->view_work,&f->current_slot,&f->post_event,&f->view_mode);
     f->control_update=(FA18NativeControlRecordUpdate){.records=&f->records,
         .selection=&f->record_selection,.range=&f->range,.ops=&f->control_ops,
-        .view=&f->record_view,.view_work=&f->view_work,
+        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,
         .post_input_event=&f->post_event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary_gate,.secondary_gate=&f->secondary_gate,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};

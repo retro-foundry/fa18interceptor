@@ -35,7 +35,7 @@ static int active_record(FA18NativeControlRecordUpdate *s,unsigned slot,int forc
     if(!active(s,slot)) return 1;
     if(force) s->records->aircraft[slot].flags|=4;
     prepare(s,slot,s->companion_slot);
-    if(slot==4 && !child(s,FA18_RECORD_UPDATE_SECONDARY_CONTROL,slot,0)) return 0;
+    if(slot==4 && !fa18_update_native_record_stream(s->control,slot)) return 0;
     return dispatch_pose(s,slot);
 }
 static int paired_record(FA18NativeControlRecordUpdate *s,unsigned slot,unsigned companion) {
@@ -72,6 +72,9 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
        s->view->selected_record!=s->selection->selected_record ||
        s->view->current_stride!=s->current_stride || s->view->current_slot!=s->current_slot ||
        s->view->post_input_event!=s->post_input_event ||
+       !s->control || s->control->records!=s->records ||
+       s->control->view_work!=s->view_work || s->control->current_slot!=s->current_slot ||
+       s->control->post_input_event!=s->post_input_event || s->control->mode!=s->view->mode ||
        !s->ops || !s->ops->consume || !s->post_input_event ||
        !s->counter_first || !s->counter_second || !s->primary_gate || !s->secondary_gate ||
        !s->periodic_word || !s->current_slot || !s->current_stride) return 0;
@@ -90,7 +93,7 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     if(!record_word(root,0x4c,&countdown)) return 0;
     if(!*s->post_input_event && !set_record_word(root,0x4c,(uint16_t)(countdown-1u))) return 0;
     root->aircraft->flags&=0xfffd;
-    if(!child(s,FA18_RECORD_UPDATE_ROOT_CONTROL,0,0) ||
+    if(!fa18_update_native_record_control(s->control,0,s->companion_slot) ||
        !fa18_update_native_record_view(s->view,0,s->view_work) ||
        !fa18_classify_native_selected_range(s->range,0) ||
        !child(s,FA18_RECORD_UPDATE_POSE,0,0)) return 0;

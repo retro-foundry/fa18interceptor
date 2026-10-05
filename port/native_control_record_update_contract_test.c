@@ -1,5 +1,6 @@
 #include "native_control_record_update.h"
 
+#include "native_record_control_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -7,6 +8,7 @@ typedef struct {
     FA18CommandInput commands; FA18NativeSceneRecords records;
     FA18NativeControlRecordUpdate update; FA18NativeControlRecordOps ops;
     FA18NativeRecordSelection selection; FA18NativeRecordActionOps action_ops;
+    FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -17,14 +19,14 @@ typedef struct {
     uint8_t selection_active,origin_enable,action_first,action_second,action_third,pair_override;
     uint16_t selected,selection_marker,action_pending;
     uint16_t periodic,slot,stride;
-    unsigned calls[8],action_calls[3],dispatch_mask,pose_mask;
+    unsigned calls[6],action_calls[3],dispatch_mask,pose_mask;
     FA18NativeControlRecordChild fail;
 } Fixture;
 
 static int consume(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->update && decision && child<8 && slot<16);
+    assert(state==&f->update && decision && child<6 && slot<16);
     assert(companion<16);
     ++f->calls[child];
     if(child==f->fail) return 0;
@@ -60,8 +62,10 @@ static void initialize(Fixture *f) {
         .mode=&f->view_mode,.limit=&f->view_limit,.pending=&f->pending,.view_flag=&f->view_flag,
         .created=&f->created,.admitted=&f->admitted,.normalized=f->normalized};
     f->view_work.viewer=f->records.records;
+    fa18_test_bind_record_control(&f->control_player,&f->control_storage,&f->records,
+        &f->view_work,&f->slot,&f->event,&f->view_mode);
     f->update=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.range=&f->range,.ops=&f->ops,
-        .view=&f->record_view,.view_work=&f->view_work,
+        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,
         .post_input_event=&f->event,.counter_first=&f->first,.counter_second=&f->second,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->slot,.current_stride=&f->stride};
@@ -79,11 +83,9 @@ int main(void) {
     for(i=0;i<15;++i) assert(!(f.records.aircraft[i].secondary_flags&1));
     assert(f.records.aircraft[15].secondary_flags==1 && f.first==1 && f.second==0x7e);
     assert(f.calls[FA18_RECORD_UPDATE_PERIODIC]==1);
-    assert(f.calls[FA18_RECORD_UPDATE_ROOT_CONTROL]==1 &&
-           f.calls[FA18_RECORD_UPDATE_FINISH]==1);
+    assert(f.calls[FA18_RECORD_UPDATE_FINISH]==1);
     assert(f.calls[FA18_RECORD_UPDATE_SECONDARY_PLACE]==2);
-    assert(f.calls[FA18_RECORD_UPDATE_SECONDARY_CONTROL]==1 &&
-           f.action_calls[FA18_RECORD_ACTION_MANOEUVRE]==2 && !f.pair_override);
+    assert(f.action_calls[FA18_RECORD_ACTION_MANOEUVRE]==2 && !f.pair_override);
     expected_dispatch=(uint16_t)((1u<<1)|(1u<<2)|(1u<<3)|(1u<<4)|(1u<<5)|(1u<<6)|(1u<<8)|
         (1u<<9)|(1u<<12)|(1u<<13)|(1u<<14)|(1u<<15));
     assert(f.dispatch_mask==expected_dispatch && f.pose_mask==(expected_dispatch|1u));
@@ -96,5 +98,20 @@ int main(void) {
     initialize(&f); f.periodic=3; f.fail=FA18_RECORD_UPDATE_PERIODIC;
     assert(!fa18_update_native_control_records(&f.update));
     assert(f.records.work[0][4]==0xff && f.records.aircraft[0].secondary_flags==0);
+
+    /* Slot four now uses the actual shared stream player, before dispatch. */
+    initialize(&f); f.view_mode=125; f.records.records[0].word_6e=1;
+    f.records.aircraft[4].flags=0x40;
+    { uint8_t mode=3; assert(fa18_write_native_scene_record(f.records.records+4,5,&mode,1)); }
+    assert(fa18_update_native_control_records(&f.update));
+    { uint8_t mode; assert(fa18_read_native_scene_record(f.records.records+4,5,&mode,1)); assert(!mode); }
+    assert(f.records.aircraft[4].secondary_flags==0x100 && (f.dispatch_mask&(1u<<4)));
+
+    initialize(&f); f.update.control=NULL;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.control_player.view_work=NULL;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.control_player.mode=&f.primary;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
     return 0;
 }

@@ -1,5 +1,6 @@
 #include "native_record_update_stage.h"
 
+#include "native_record_control_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -11,6 +12,7 @@ typedef struct {
     FA18NativeControlRecordUpdate control;
     FA18NativeRecordSelection selection;
     FA18NativeControlRecordOps control_ops;
+    FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -35,7 +37,7 @@ typedef struct {
 static int control(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->control && child<8 && slot<16 && companion<16 && decision);
+    assert(state==&f->control && child<6 && slot<16 && companion<16 && decision);
     ++f->control_calls; *decision=0; return 1;
 }
 static int origin(void *context,FA18NativeSelectorOrigin *state,
@@ -70,8 +72,10 @@ static void initialize(Fixture *f) {
         .mode=&f->view_mode,.limit=&f->view_limit,.pending=&f->pending,.view_flag=&f->view_flag,
         .created=&f->created,.admitted=&f->admitted,.normalized=f->normalized};
     f->view_work.viewer=f->records.records;
+    fa18_test_bind_record_control(&f->control_player,&f->control_storage,&f->records,
+        &f->view_work,&f->current_slot,&f->event,&f->view_mode);
     f->control=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.range=&f->range,.ops=&f->control_ops,
-        .view=&f->record_view,.view_work=&f->view_work,
+        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,
         .post_input_event=&f->event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};

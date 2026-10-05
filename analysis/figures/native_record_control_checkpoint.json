@@ -1,0 +1,65 @@
+{
+  "status": "complete_native_record_control_with_explicit_tone_message_scene_children",
+  "complete_entries": [
+    "C23228",
+    "C233AA",
+    "C23578"
+  ],
+  "actual_children": [
+    "C091E0",
+    "C23578"
+  ],
+  "unreachable_arm_proof": {
+    "guard": [
+      [
+        12727112,
+        6,
+        "4a3900c457ae"
+      ],
+      [
+        12727118,
+        2,
+        "6658"
+      ],
+      [
+        12727120,
+        4,
+        "67000084"
+      ]
+    ],
+    "excluded": "C23354-C233A4",
+    "reason": "TST followed by adjacent complementary BNE/BEQ; complete entries cannot fall through"
+  },
+  "child_contracts": [
+    "C3316E (tone 8)",
+    "C25704 (messages)",
+    "C28722 (scene initialization)"
+  ],
+  "cases": 24576,
+  "cases_per_entry": 8192,
+  "source_boundaries": 263,
+  "covered_boundaries": 263,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; shared native record owners verified independently",
+  "native_cpu_dependency": false,
+  "limitations": "tone/message/scene children remain explicit; C23354 append is unreachable after the sealed BNE/BEQ pair; caller binds stream assets; full native startup/frame graph pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "b8b6a6725fa914995940da20ec290dcebd728e242d152cbb37ddac9491b5164f",
+  "reports": [
+    "native record control: 24576 complete calls match all game RAM and carried axis; tone/message/scene contracts 5361/12224/1201"
+  ],
+  "source_sha256": {
+    "port/native_record_control.c": "04ac7ed1df74584643341ebf8862a577b59753f5ffded63e3f87029d4ba455bd",
+    "port/native_record_control.h": "d03a9cc2555f33d0536ac9e5a36327152838b48cec4823b15a1d5952faf2db43",
+    "port/native_record_control_contract_test.c": "c475f5376bdb7fac9e41e01b0a7603f8ba2282bd650d71a63a5109f04cc67b76",
+    "port/native_record_control_test_support.h": "6c5985140fa46303f72f5e04e22aeff84239ee096a6e501d4d679ed2d0c633f8",
+    "port/native_control_record_update.c": "b1ebba04f1e6e696d872c8eea6b8660154ddff55de662441be9b0d9d265df1af",
+    "port/native_control_record_update.h": "e5a61d4883981b9036a5b1989dbcbc9807d87a0397eefc909dc1100ab5eb49ce",
+    "port/native_control_record_update_contract_test.c": "447024428d339ec6fffca143c7ae2cec35e651f3c976382ef1d3fc94be777ebd",
+    "port/CMakeLists.txt": "b4511ccd034fbe5568d146df4582143dd8a8d969d5f3312a4fac9152fef2e760",
+    "port/native_record_update_stage_contract_test.c": "36e4447d64dba9b03a684f9e4d72357059fe1f9a5be154357b4caead227a2369",
+    "port/scene_bootstrap_native_contract_test.c": "fbc61aba8bd3d653d5a150c4bc9a8c3b8f5461f85bec27569ea903d0eb15847c",
+    "port/native_scene_records.c": "a285bb6b28d721153af0887e61a178620f8e1dbfd759bd54ab20e79bebc67096",
+    "tools/recomp/native_record_control_oracle.c": "ffa26115168a4fb6d7e7dd891f43530006b347af316fe78d058ba8dc519e9607",
+    "tools/recomp/check_native_record_control.py": "bfb47b37a20f51fd7efee13ee02fec1d43521fed84855d66b2e837cb89e000c5"
+  }
+}

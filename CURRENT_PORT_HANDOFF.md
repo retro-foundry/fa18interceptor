@@ -13,7 +13,28 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: complete native `$C23CA6` record-view owner now replaces the
+Latest batch: complete native `$C23228` root control and `$C233AA` secondary
+control now replace both scheduler callbacks. Shared `$C233D6` stream playback,
+actual `$C23578` next-stream and `$C091E0` clone placement are ordinary-state
+operations. The full carried axis passes directly into the later view update;
+record/current-slot/event/mode/work bindings must remain shared. Original-byte
+proof passes 24,576 calls (8,192 per entry) at all 263/263 reachable boundaries,
+matching all game RAM, independent typed owners and the carried value. The
+append arm is provably unreachable from the complete entries; the audit seals
+the adjacent complementary branches. Tone/message/scene initialization remain
+explicit lower contracts (5,361/12,224/1,201 calls). MSVC Release game/affected
+contracts, strict GNU compilation, twelve affected CTests and the 499-file native
+build guard pass. See `analysis/routines/native_record_control.md` and its
+checkpoint. Composed bootstrap assertions now observe the root pose boundary.
+
+Six scheduler children remain: periodic, pose, primary/secondary placement,
+dispatch and finish. Next port complete `$C25B66` pose from the existing readable
+`port/game/flight_dynamics.c` owner, preserving actual motion, collision, matrix,
+input and timer children. Then finish scheduling, original startup asset/state
+bindings and native-main integration. Sound/messages and scene initialization
+remain actual lower dependencies, alongside normalization/fault handling.
+
+Preceding batch (commit `1f0f31d5`): complete native `$C23CA6` record-view owner now replaces the
 root-view scheduler callback. The actual `$C091E0` placement and `$C2436A`
 in-sight children are direct ordinary-state operations. Original `$FF` versus
 indexed-viewer guards, table/linked/zone routes, overflow branches, local
@@ -25,13 +46,6 @@ remain distinguished from actual-child proof. MSVC Release game/affected
 contracts, strict GNU view/scheduler contracts, eleven affected CTests and
 the 497-file native build guard pass. See
 `analysis/routines/native_record_view.md` and its checkpoint.
-
-The eight remaining scheduler children are periodic, root control, pose,
-primary/secondary placement, secondary control, dispatch and finish. Continue
-root control and pose in a connected batch, retaining the root-control
-producer of the view's carried axis word. Then finish scheduling, bind original
-startup assets/state, and integrate native main. Normalization/fault and sound
-remain actual lower dependencies; no substitutes have been installed.
 
 Preceding batch (commit `eaeb4c78`): complete native `$C244E2` selected-range owner and its actual
 `$C1D974` magnitude child now replace the root-marker scheduler callback.
@@ -56,10 +70,11 @@ The native bootstrap graph is direct through `$C08F26`, placement, template
 gates, `$C1C63E`, `$C22C80`, `$C29042`, and `$C1C860`. Explicit lower owners
 still remain:
 
-- `FA18NativeControlRecordOps`: periodic, root control,
-  pose, primary placement, secondary placement, secondary control, dispatch,
-  and finish. The composed fresh-bootstrap contract reaches root control,
-  root pose, and finish; view and range classification are now direct.
+- `FA18NativeControlRecordOps`: periodic, pose, primary placement, secondary
+  placement, dispatch and finish. Composed fresh-bootstrap contracts observe
+  root pose and finish after direct root control/view/range.
+- `FA18NativeRecordControlOps`: tone eight, message posting and scene
+  initialization beneath the direct control-stream owners.
 - `FA18NativeRecordViewOps`: normalization and source fault handling;
   `FA18NativeRecordRangeOps`: sound program four. These are true lower children.
 - `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
@@ -75,8 +90,8 @@ guest memory, and the machine/chipset runtime. Do not describe the port as
 emulation-free until native main owns startup, frame scheduling, rendering,
 audio, and input without those layers.
 
-Recommended next batch: port the startup-reachable root control/pose chain
-using the complete readable owners already under `port/game/`.
+Recommended next batch: port the startup-reachable pose chain (`C25B66`)
+using the complete readable `port/game/flight_dynamics.c` owner.
 Preserve their true lower child boundaries and shared record mutations. Then
 port finish scheduling and connect original assets/state before installing the
 graph in native main. The static-recomp audit currently reports 85 deferred

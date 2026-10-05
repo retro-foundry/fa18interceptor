@@ -24,6 +24,10 @@ The focused contract uses a mixed active/inactive bank to cover periodic work,
 readiness decisions, both placement groups, dispatch/pose routing, slot 7,
 forced flags, workspace wrapping, root countdown and a failed child after
 preceding stores. The parent is now a direct child of
-`native_record_update_stage`. Its periodic, control/view/marker/pose, place,
-dispatch and finish children remain explicit boundaries. The three action
+`native_record_update_stage`. Root/secondary control, view and range now call
+direct native owners; their records, current slot, event, mode and carried work
+must remain shared. A composed contract verifies direct secondary playback and
+invalid alias rejection. Six children remain: periodic, pose, primary/secondary
+placement, dispatch and finish. See `native_record_control.md`,
+`native_record_view.md` and `native_record_range.md`. The three action
 children below readiness also remain explicit. See `native_record_selection.md`.
