@@ -40,8 +40,8 @@ int fa18_flight_scale_motion_words(int16_t first, int16_t second,
 
 static int32_t arithmetic_shift_right(int32_t value, unsigned count) {
     if (value >= 0) return value >> count;
-    const int32_t magnitude = -value;
-    return -((magnitude + ((1 << count) - 1)) >> count);
+    const int64_t magnitude = -(int64_t)value;
+    return (int32_t)-((magnitude + ((INT64_C(1) << count) - 1)) >> count);
 }
 
 int fa18_flight_adjust_signed_word_pair(int16_t first, int16_t second,
@@ -83,66 +83,106 @@ static int16_t matrix_word(int32_t value) {
     return (int16_t)(uint16_t)value;
 }
 
-int fa18_flight_compose_attitude_matrix(const FA18FlightTrigState *trig,
-                                        int16_t output[3][3]) {
-    if (!trig || !output) return -1;
-    const int16_t d0 = trig->d0, d1 = trig->d1, d2 = trig->d2;
-    const int16_t d3 = trig->d3, d4 = trig->d4, d5 = trig->d5;
+static int32_t signed_long_bits(uint32_t bits) {
+    return bits<=INT32_MAX?(int32_t)bits:(int32_t)((int64_t)bits-INT64_C(4294967296));
+}
+static int32_t sum_wrap(int32_t a,int32_t b) {
+    return signed_long_bits((uint32_t)a+(uint32_t)b);
+}
+static int32_t difference_wrap(int32_t a,int32_t b) {
+    return signed_long_bits((uint32_t)a-(uint32_t)b);
+}
+int fa18_compose_attitude_terms(const FA18TrigTerms *terms,int16_t output[3][3]) {
+    if (!terms || !output) return -1;
+    const int16_t d0 = terms->sine[0], d1 = terms->cosine[0], d2 = terms->sine[1];
+    const int16_t d3 = terms->cosine[1], d4 = terms->sine[2], d5 = terms->cosine[2];
     output[0][0] = matrix_word(arithmetic_shift_right(
-        trig_product(d4, d0) * d2 - (int32_t)d5 * d3, 14));
+        difference_wrap((int32_t)d5*d3,(int32_t)matrix_word(trig_product(d4,d0))*d2),14));
     output[0][1] = matrix_word(-arithmetic_shift_right(
-        trig_product(d5, d0) * d2 + (int32_t)d4 * d3, 14));
+        sum_wrap((int32_t)matrix_word(trig_product(d5,d0))*d2,(int32_t)d4*d3),14));
     output[0][2] = matrix_word(trig_product(d1, d2));
     output[1][0] = matrix_word(trig_product(d4, d1));
     output[1][1] = matrix_word(trig_product(d5, d1));
     output[1][2] = matrix_word(d0);
     output[2][0] = matrix_word(-arithmetic_shift_right(
-        trig_product(d4, d0) * d3 + (int32_t)d5 * d2, 14));
+        sum_wrap((int32_t)matrix_word(trig_product(d4,d0))*d3,(int32_t)d5*d2),14));
     output[2][1] = matrix_word(arithmetic_shift_right(
-        trig_product(d5, d0) * d3 - (int32_t)d4 * d2, 14));
+        difference_wrap((int32_t)d4*d2,(int32_t)matrix_word(trig_product(d5,d0))*d3),14));
     output[2][2] = matrix_word(trig_product(d1, d3));
     return 0;
 }
 
-static int16_t trig_table_word(const FA18FlightTrigTable *table, int32_t offset) {
-    const uint16_t bits = ((uint16_t)table->bytes[offset] << 8) |
-                          table->bytes[offset + 1];
-    return bits <= INT16_MAX ? (int16_t)bits : (int16_t)((int32_t)bits - 65536);
+int fa18_flight_compose_attitude_matrix(const FA18FlightTrigState *trig,int16_t output[3][3]) {
+    FA18TrigTerms terms;
+    if(!trig) return -1;
+    terms=(FA18TrigTerms){{trig->d0,trig->d2,trig->d4},{trig->d1,trig->d3,trig->d5}};
+    return fa18_compose_attitude_terms(&terms,output);
 }
 
-static int lookup_pair(const FA18FlightTrigTable *table, int16_t angle,
-                       int16_t *sine, int16_t *cosine) {
-    if (!table || !table->bytes || table->byte_count < 0x70au ||
-        !sine || !cosine) return -1;
+static int16_t signed_word_bits(uint16_t bits) {
+    return bits<=INT16_MAX?(int16_t)bits:(int16_t)((int32_t)bits-65536);
+}
+static int trig_data_byte(const FA18FlightTrigData *data,int32_t offset,uint8_t *value) {
+    size_t index;
+    if(offset<0 && (size_t)-offset>data->quarter_offset) {
+        size_t distance=(size_t)-offset-data->quarter_offset;
+        if(!data->before || distance>data->before_count) return 0;
+        return port_read_field_byte(data->before+data->before_count-distance,value);
+    }
+    if(offset<0) index=data->quarter_offset-(size_t)-offset;
+    else {
+        if((size_t)offset>SIZE_MAX-data->quarter_offset) return 0;
+        index=data->quarter_offset+(size_t)offset;
+    }
+    if(index<data->byte_count) { *value=data->bytes[index]; return 1; }
+    index-=data->byte_count;
+    return data->after && index<data->after_count && port_read_field_byte(data->after+index,value);
+}
+static int trig_data_word(const FA18FlightTrigData *data,int32_t offset,int16_t *value) {
+    uint8_t high,low;
+    if(!trig_data_byte(data,offset,&high) || !trig_data_byte(data,offset+1,&low)) return 0;
+    *value=signed_word_bits((uint16_t)(((unsigned)high<<8)|low)); return 1;
+}
+int fa18_flight_lookup_trig_data(const FA18FlightTrigData *data,uint16_t angle,
+                                 int16_t *sine,int16_t *cosine) {
+    if (!data || !data->bytes || data->quarter_offset>data->byte_count ||
+        data->byte_count-data->quarter_offset < 0x70au || !sine || !cosine) return -1;
     const int32_t quadrant = 0x708;
     const int32_t half = 0xE10;
     const int32_t three_quarters = 0x1518;
     const int32_t full = 0x1C20;
-    const int32_t doubled = (uint16_t)angle * 2;
+    const int32_t doubled = signed_word_bits((uint16_t)(angle*2u));
     int32_t value_offset;
     int32_t cosine_offset;
+    int negate_sine=0,negate_cosine=0;
     if (doubled < quadrant) {
         value_offset = doubled;
-        cosine_offset = quadrant - doubled;
-        *sine = trig_table_word(table, value_offset);
-        *cosine = trig_table_word(table, cosine_offset);
+        cosine_offset = signed_word_bits((uint16_t)(quadrant-doubled));
     } else if (doubled < half) {
         value_offset = half - doubled;
         cosine_offset = doubled - quadrant;
-        *sine = trig_table_word(table, value_offset);
-        *cosine = (int16_t)-trig_table_word(table, cosine_offset);
+        negate_cosine=1;
     } else if (doubled < three_quarters) {
         value_offset = doubled - half;
         cosine_offset = three_quarters - doubled;
-        *sine = (int16_t)-trig_table_word(table, value_offset);
-        *cosine = (int16_t)-trig_table_word(table, cosine_offset);
+        negate_sine=negate_cosine=1;
     } else {
         value_offset = full - doubled;
         cosine_offset = doubled - three_quarters;
-        *sine = (int16_t)-trig_table_word(table, value_offset);
-        *cosine = trig_table_word(table, cosine_offset);
+        negate_sine=1;
     }
+    if(!trig_data_word(data,value_offset,sine)) return -1;
+    if(negate_sine) *sine=signed_word_bits((uint16_t)(0u-(uint16_t)*sine));
+    if(!trig_data_word(data,cosine_offset,cosine)) return -1;
+    if(negate_cosine) *cosine=signed_word_bits((uint16_t)(0u-(uint16_t)*cosine));
     return 0;
+}
+
+static int lookup_pair(const FA18FlightTrigTable *table,int16_t angle,int16_t *sine,int16_t *cosine) {
+    FA18FlightTrigData data;
+    if(!table) return -1;
+    data=(FA18FlightTrigData){.bytes=table->bytes,.byte_count=table->byte_count};
+    return fa18_flight_lookup_trig_data(&data,(uint16_t)angle,sine,cosine);
 }
 
 int fa18_flight_lookup_sine_cosine(const FA18FlightTrigTable *table,

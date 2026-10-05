@@ -54,8 +54,10 @@ int fa18_import_native_scene_records(FA18NativeSceneRecords *s,FA18CommandInput 
         bind_word(r,0x6c,&r->word_6c); bind_word(r,0x6e,&r->word_6e);
         bind_byte(r,0x71,&r->byte_71); bind_long(r,0x72,&r->long_72);
         bind_word(r,0x78,&r->word_78); bind_word(r,0x7e,&r->word_7e);
-        for(row=0;row<3;++row) for(column=0;column<3;++column)
+        for(row=0;row<3;++row) for(column=0;column<3;++column) {
+            bind_signed_word(r,0x80+6*row+2*column,&r->forward[row][column]);
             bind_signed_word(r,0x92+6*row+2*column,&r->geometry->inverse[row][column]);
+        }
     }
     memcpy(s->work,work,sizeof s->work); return 1;
 }

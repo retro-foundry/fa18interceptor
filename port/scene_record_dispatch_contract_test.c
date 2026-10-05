@@ -13,7 +13,7 @@ static int build(void *context, const int16_t input[3], int16_t output[3][3]) {
 }
 static int compose(void *context, const int16_t input[3], int16_t output[3][3]) {
     Log *log = context;
-    assert(++log->calls == 2 && !input[0] && !input[1] && input[2] == 0x7070);
+    assert(++log->calls == 2 && !input[0] && !input[1] && !input[2]);
     output[2][2] = 5;
     return 0;
 }

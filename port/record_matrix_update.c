@@ -11,9 +11,9 @@ int fa18_update_record_matrix(FA18RecordMatrixUpdateState *state,
     if (!state || !input || !ops || !ops->build || !ops->compose) return -1;
     const int16_t build_input[3] = { input->d4, input->d5, input->d6 };
     const int16_t compose_input[3] = {
+        input->d4 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d4) : 0,
         input->d5 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d5) : 0,
-        input->d6 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d6) : 0,
-        input->d7 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d7) : 0
+        input->d6 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d6) : 0
     };
     state->control_byte_03 &= (uint8_t)~4u;
     state->published[0] = input->d4;
@@ -28,9 +28,9 @@ int fa18_update_record_matrix_native(FA18RecordMatrixUpdateState *state,
                                      const FA18FlightTrigTable *trig_table) {
     if (!state || !input || !trig_table) return -1;
     const int16_t compose_input[3] = {
+        input->d4 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d4) : 0,
         input->d5 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d5) : 0,
-        input->d6 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d6) : 0,
-        input->d7 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d7) : 0
+        input->d6 ? (int16_t)((uint16_t)0x7080u - (uint16_t)input->d6) : 0
     };
     state->control_byte_03 &= (uint8_t)~4u;
     state->published[0] = input->d4;

@@ -41,7 +41,7 @@ static int matrix_build(void *context, const int16_t input[3], int16_t output[3]
 static int matrix_compose(void *context, const int16_t input[3], int16_t output[3][3]) {
     Log *log = context;
     assert(++log->matrix_calls == 2 &&
-           ((input[0] == 0x7082 && input[1] == 0x2b19 && !input[2]) ||
+           ((input[0] == 0x5e4c && input[1] == 0x7082 && input[2] == 0x2b19) ||
             (!input[0] && !input[1] && !input[2])));
     output[1][1] = 0x4000;
     return 0;

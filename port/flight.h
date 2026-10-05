@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include "field_bytes.h"
 
 /* Semantic replacement for the selected 512-byte flight record. Only fields
  * with a proven writer are exposed here; the record layout itself is not
@@ -47,6 +48,27 @@ typedef struct {
     const uint8_t *bytes;
     size_t byte_count;
 } FA18FlightTrigTable;
+
+/* Ordinary fixed-point sine/cosine values, in original three-angle order. */
+typedef struct {
+    int16_t sine[3], cosine[3];
+} FA18TrigTerms;
+
+/* Live original asset data, with the quarter-table position inside it.
+ * Reads outside that asset require explicitly bound adjacent field owners.
+ * No default trigonometric values or angle normalization are supplied. */
+typedef struct {
+    const uint8_t *bytes;
+    size_t byte_count, quarter_offset;
+    const PortFieldByte *before, *after;
+    size_t before_count, after_count;
+} FA18FlightTrigData;
+
+/* Complete word-angle lookup used by $C2E5F6/$C2E6DA, including signed
+ * displacement and doubled-word wrap. Returns -1 for missing source data. */
+int fa18_flight_lookup_trig_data(const FA18FlightTrigData *data,uint16_t angle,
+                                 int16_t *sine,int16_t *cosine);
+int fa18_compose_attitude_terms(const FA18TrigTerms *terms,int16_t output[3][3]);
 
 /* `$C1B410`: decode the packed control byte at the observed `$65` boundary. */
 int fa18_flight_update_control_lanes(FA18FlightControlLanes *lanes,

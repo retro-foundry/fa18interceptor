@@ -6,7 +6,32 @@ also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
 
-Latest batch: `$C1C40C` gate construction is now an actual native child of
+Latest batch: complete `$C2D954/$C2D94E` record orientation now publishes
+angles and both matrices directly into actual shared native records. Forward
+matrix fields now have named owners; inverse fields share the existing command
+geometry object. The older packet misread the reordered MOVEM restore and
+used incoming D7: both matrices actually use original D4/D5/D6. Placement's
+entry preserves the control flag; only `$C2D94E` clears it. The shared inverse
+math also corrects two reversed subtraction signs, low-word intermediate
+multiplication and signed overflow. Live Hunk-63 trig binding now preserves
+word wrapping and signed offsets; unavailable adjacent fields fail explicitly.
+
+Validation: 8,192 complete calls cover 292/292 original boundaries with all
+four actual matrix/lookup children and no child contracts. All 65,536 lookup
+word angles and 1,802 original quarter-table bytes match. Native GNU contracts,
+symbol checks, MSVC build, 83 focused CTests and the unchanged 480-file guard
+pass. Player and bootstrap regressions retain 24,576/16,384 comparisons with
+complete coverage. See `analysis/routines/native_record_orientation.md`.
+
+Next finish full `$C09266` root placement against shared records and required
+original recorder/template/grid data owners, then `$C1C63E/$C1C860`. The
+existing detached positive/negative placement packets contain additional
+cold-path inaccuracies; follow the sealed instructions instead of copying
+them around native execution. Native main still does not invoke this graph.
+The ROM-free runner requires no Kickstart ROM image, but uses CPU/machine
+emulation. A complete playable native game is still the active objective.
+
+Preceding batch: `$C1C40C` gate construction is now an actual native child of
 `$C08F26`, sharing the existing `template_bitmask_buffers` owner with the
 native game and terrain consumers. The former restricted decoder has been
 replaced by the complete source algorithm: negative lists skip, odd positive

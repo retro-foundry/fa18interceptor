@@ -15,7 +15,7 @@ static int build(void *context, const int16_t input[3], int16_t output[3][3]) {
 static int compose(void *context, const int16_t input[3], int16_t output[3][3]) {
     Log *log = context;
     assert(++log->calls == 2);
-    assert(input[0] == (int16_t)0x67c0 && input[1] == 0 && input[2] == (int16_t)0x67c0);
+    assert(input[0] == 0 && input[1] == (int16_t)0x67c0 && input[2] == 0);
     output[2][2] = 2;
     return 0;
 }

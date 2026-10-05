@@ -64,10 +64,10 @@ int main(void) {
                                       0x4000, 0x5000, 0x6000};
     int16_t attitude[3][3];
     assert(fa18_flight_compose_attitude_matrix(&trig, attitude) == 0);
-    assert(attitude[0][0] == -0x5100 && attitude[0][1] == -0x6200 &&
+    assert(attitude[0][0] == 0x5100 && attitude[0][1] == -0x6200 &&
            attitude[0][2] == 0x1800 && attitude[1][0] == 0x2800 &&
            attitude[1][1] == 0x3000 && attitude[1][2] == 0x1000 &&
-           attitude[2][0] == -0x5c00 && attitude[2][1] == -0x2400 &&
+           attitude[2][0] == -0x5c00 && attitude[2][1] == 0x2400 &&
            attitude[2][2] == 0x2000);
     const FA18FlightTrigTable trig_table = {
         fa18_run075_trig_bytes, sizeof fa18_run075_trig_bytes
@@ -81,7 +81,7 @@ int main(void) {
            pair.d0 == 0 && pair.d1 == 0x4000 && pair.d2 == 0 && pair.d3 == 0x4000);
     FA18FlightPose attitude_pose = {0};
     assert(fa18_flight_update_attitude(&trig_table, 0, 0, 0, &attitude_pose) == 0);
-    assert(attitude_pose.attitude[0][0] == -0x4000 &&
+    assert(attitude_pose.attitude[0][0] == 0x4000 &&
            attitude_pose.attitude[1][1] == 0x4000 &&
            attitude_pose.attitude[2][2] == 0x4000 &&
            attitude_pose.attitude[0][1] == 0 && attitude_pose.attitude[1][0] == 0);

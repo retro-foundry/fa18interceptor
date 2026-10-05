@@ -102,7 +102,10 @@ static int verify_record_owners(const SceneState *s) {
            g->command_record!=f || *s->bank.records[i].level!=rd_u8(a+0x2b)) return 0;
         for(j=0;j<3;++j) {
             if(g->position[j]!=rd_u32(a+0x14+4*j)) return 0;
-            for(k=0;k<3;++k) if(g->inverse[j][k]!=rd_s16(a+0x92+6*j+2*k)) return 0;
+            for(k=0;k<3;++k) {
+                if(g->inverse[j][k]!=rd_s16(a+0x92+6*j+2*k) ||
+                   s->bank.records[i].forward[j][k]!=rd_s16(a+0x80+6*j+2*k)) return 0;
+            }
         }
     }
     return s->flight.weapon_mode_redraws==rd_u8(COMMAND_WEAPON_MODE_REDRAWS) &&

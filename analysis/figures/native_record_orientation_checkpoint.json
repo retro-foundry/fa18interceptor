@@ -1,0 +1,52 @@
+{
+  "status": "validated_complete_native_record_orientation_full_root_placement_pending",
+  "complete_entries": [
+    "C2D954",
+    "C2D94E"
+  ],
+  "actual_children": [
+    "C2E47A",
+    "C2E514",
+    "C2E5F6",
+    "C2E6DA"
+  ],
+  "cases": 8192,
+  "lookup_angles": 65536,
+  "source_boundaries": 292,
+  "covered_boundaries": 292,
+  "native_cpu_dependency": false,
+  "child_contracts": [],
+  "comparison": "all Chip/Slow RAM excluding CPU ABI save stack C7FD00..C7FF00; independent live forward/inverse/angle owners for all sixteen records; actual original children executed",
+  "coverage_cases": "all word angles in standalone lookup, signed doubled-word wrap, arbitrary signed original table/adjacent words, original Hunk-63 quarter table (1802 bytes), live asset mutation, original D7/high register variation, zero-angle branches, sixteen selected records, low-word intermediate multiply and wrapped long arithmetic, control flag preservation/clear",
+  "ownership_limit": "Original assets/adjacent fields must be bound by actual producers; missing reads fail explicitly with preceding stores retained. Native main and full root placement/update/context graphs remain pending. Captured state and Musashi are validation only.",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "original_pc_bytes_sha256": "293b1e2ad55aa415c136cfb7b8ed1970bc6ca03bca714a4e3ba0d54b885ef412",
+  "reports": [
+    "trig asset: 1802 original Hunk-63 quarter-table bytes match; live binding verified",
+    "trig domain: all 65536 word angles match the actual original lookup; data unchanged",
+    "native orientation C2D954: 4096 complete calls match all game RAM and live matrix owners; no child contracts",
+    "trig asset: 1802 original Hunk-63 quarter-table bytes match; live binding verified",
+    "trig domain: all 65536 word angles match the actual original lookup; data unchanged",
+    "native orientation C2D94E: 4096 complete calls match all game RAM and live matrix owners; no child contracts"
+  ],
+  "source_sha256": {
+    "port/native_record_orientation.c": "e20a1bd8a4f72074711592c02bd156cfdd8b47023ec12f0b803e270bd9b7f88c",
+    "port/native_record_orientation.h": "0215a38cafa8a1efeb142abcefd7c85c400e7b42f945dfdc15e908c327fae5c7",
+    "port/native_record_orientation_contract_test.c": "811ba7edbd3d4efb1616c8d68572eef2857aefe2a3f971c9f98decb3bc702809",
+    "port/native_scene_records.c": "0021faac8536a63d56876a825305e6bec13f64b9d5104eb9fb43636e351cd89a",
+    "port/native_scene_records.h": "9ae7e572f7fe14cb08e312578ee0e7a9ba83bbbebad475ee7040262799c89de6",
+    "port/flight.c": "7b0d810e3cca4300abba756658188e15b496a614af3ec843850880ceaa92d77a",
+    "port/flight.h": "a229d2da35303a77c7c87a9c5fd4ea45e7713f4c0a519d1651b8c8327459b2af",
+    "port/two_angle_matrix.c": "6cae389c9dd634348ea9cd507925da194a71d80a7b7282b856ff170a6b4797f1",
+    "port/two_angle_matrix.h": "a1c10aa9eef9c719712ae3b5af7eea28bb6fd9b9efba37b05cc151da81e16361",
+    "port/field_bytes.h": "abff8eb93f1a466555dbc8365ea76327b1239f3cb56d1d614005642e9b4a2fe8",
+    "port/record_matrix_update.c": "67ad7a810b899a61b979391658c90d596f3edfa5b21d31ca75daa2319b738d4f",
+    "port/record_matrix_update.h": "285d9303ff1f9ff45c97d66c8786c48c15459752258514c3932b6daf383110b7",
+    "port/record_matrix_update_contract_test.c": "e07024b18dcbbf8608e0765c36001c2a046e224cc136385e9e079a3b719e275d",
+    "port/flight_contract_test.c": "381c9ad8cf8762ff7618eed84ce9bf020276f565e7e376d6bbcf9bf279321ec1",
+    "tools/recomp/check_native_record_orientation.py": "5cca44d638d86038c7e24a39b4f0ed26f9e115f1f619e423c97d13bf74d4eb67",
+    "tools/recomp/native_record_orientation_oracle.c": "fe407ac17de42e23a051ed9ab663341cfa153a81e2fa390b4a6d87440224dc0c",
+    "tools/recomp/native_scene_player_oracle.c": "17c4e4887c26e35f6c5356c41228eccf16864a5893fcdc6704ca7fb8a07b8700"
+  }
+}

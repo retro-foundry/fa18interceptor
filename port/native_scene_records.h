@@ -11,6 +11,7 @@ typedef struct {
     uint8_t *level;
     uint16_t word_60,angle_first,angle_third,word_6c,word_6e,word_78,word_7e,word_54,word_5a;
     uint32_t long_3e,long_42,long_46,long_50,long_56,long_72;
+    int16_t forward[3][3];
     /* Only unbound positions hold data here. Access through the field view;
      * mapped positions are zeroed after import, not duplicate scalar owners. */
     uint8_t unported[FA18_NATIVE_SCENE_RECORD_BYTES];

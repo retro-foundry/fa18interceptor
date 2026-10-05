@@ -90,6 +90,14 @@ identity resolves to the live
 aircraft pointer; whole logical-word writes extend the independently reusable
 field component. The actual three child graphs and native main integration
 remain pending.
+The placement dependency `$C2D954/$C2D94E` now publishes both matrices into
+actual shared native records, using live original trig data and required
+adjacent field owners. Its 8,192 complete calls cover all 292 boundaries,
+with four actual children and no contracts; all 65,536 lookup input words
+and 1,802 original quarter-table bytes match. This corrects the older
+packet's restore-order mistake and two inverse-matrix subtraction signs.
+See `analysis/routines/native_record_orientation.md`. Full root placement,
+record update and context refresh still require their actual native owners.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,

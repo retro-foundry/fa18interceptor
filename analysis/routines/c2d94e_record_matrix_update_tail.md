@@ -8,6 +8,9 @@ The byte-exact code clears bit 2 of record byte `$03`, writes `D4-D6` to record
 words `$66/$68/$6A`, then invokes `$C2E47A` with that triple and `A1 + $80`.
 After restoring the parent record pointer, it advances to `$92`, forms three
 values initialized to zero or `$7080 - D5/D6/D7`, and calls `$C2E514`.
+The save/restore lists differ: saved `D4-D6` restore into `D5-D7`.
+These inverse values therefore use the original `D4/D5/D6`, not the
+incoming `D5/D6/D7`. Incoming `D7` does not influence either matrix.
 
 This proves a record triple publication followed by two distinct matrix/transform
 consumers.  Their coordinate convention and field ownership remain unassigned.
@@ -18,9 +21,14 @@ consumers.  Their coordinate convention and field ownership remain unassigned.
 and ordering as `fa18_update_record_matrix`. Its caller owns the distinct
 `$C2E47A` build matrix and `$C2E514` alternate attitude matrix computations;
 the contract supplies those as required callbacks. It preserves the bit-2
-clear, D4--D6 publication, and `$7080 - D5/D6/D7` angle derivation before the
+clear, D4--D6 publication, and zero-or-`$7080 - original D4/D5/D6` angle derivation before the
 second callback. `record_matrix_update_contract_test` covers the run075
 `(D4,D5,D6,D7)=(0,$6FB8,0,0)` handoff and call order.
+The earlier packet and its test misread this restore ordering; the
+2026-10-05 correction is independently proved by both complete source entries,
+including all actual matrix/lookup children. `$C2D954` preserves the control
+bit; only `$C2D94E` clears it. New code uses the live native record owner in
+[`native_record_orientation.md`](native_record_orientation.md).
 
 ## run003 second-lane publication
 

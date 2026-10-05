@@ -62,6 +62,14 @@ int fa18_load_two_angle_trig_table(const FA18Hunks *hunks,
     return 0;
 }
 
+int fa18_load_native_trig_data(const FA18Hunks *hunks,FA18FlightTrigData *data) {
+    FA18FlightTrigTable quarter;
+    if(!data || fa18_load_two_angle_trig_table(hunks,&quarter)!=0) return -1;
+    *data=(FA18FlightTrigData){.bytes=hunks->segments[TRIG_TABLE_SEGMENT].data,
+        .byte_count=hunks->segments[TRIG_TABLE_SEGMENT].size,.quarter_offset=TRIG_TABLE_OFFSET};
+    return 0;
+}
+
 int fa18_build_two_angle_matrix(const FA18FlightTrigTable *table,
                                 int16_t first_angle, int16_t second_angle,
                                 int16_t output[3][3]) {
@@ -168,6 +176,15 @@ int fa18_build_rotation_matrix(const FA18FlightTrigTable *table,
     if (fa18_flight_lookup_two_sine_cosine(table, first, second, &trig) != 0 ||
         fa18_flight_lookup_sine_cosine(table, third, &trig.d4, &trig.d5) != 0)
         return -1;
+
+    const FA18TrigTerms terms={{trig.d0,trig.d2,trig.d4},{trig.d1,trig.d3,trig.d5}};
+    return fa18_compose_rotation_terms(&terms,output);
+}
+
+int fa18_compose_rotation_terms(const FA18TrigTerms *terms,int16_t output[3][3]) {
+    if(!terms || !output) return -1;
+    const FA18FlightTrigState trig={terms->sine[0],terms->cosine[0],terms->sine[1],
+        terms->cosine[1],terms->sine[2],terms->cosine[2]};
 
     int32_t term = long_asr((int32_t)trig.d2 * trig.d0, 14);
     term = mul_word_by_low(term, trig.d4);

@@ -19,7 +19,7 @@ static int build(void *context, const int16_t input[3], int16_t output[3][3]) {
 static int compose(void *context, const int16_t input[3], int16_t output[3][3]) {
     Log *log = context;
     assert(++log->calls == 2);
-    assert(input[0] == 0x00c8 && input[1] == 0 && input[2] == 0);
+    assert(input[0] == 0 && input[1] == 0x00c8 && input[2] == 0);
     output[2][2] = 2;
     return 0;
 }
@@ -51,7 +51,7 @@ int main(void) {
     assert(memcmp(native_state.build_matrix, expected_build,
                   sizeof expected_build) == 0);
     FA18FlightPose expected_pose = {0};
-    assert(fa18_flight_update_attitude(&trig_table, 0x00c8, 0, 0,
+    assert(fa18_flight_update_attitude(&trig_table, 0, 0x00c8, 0,
                                        &expected_pose) == 0);
     assert(memcmp(native_state.attitude_matrix, expected_pose.attitude,
                   sizeof expected_pose.attitude) == 0);

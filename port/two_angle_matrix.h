@@ -32,5 +32,8 @@ int fa18_compose_three_angle_matrix(const FA18FlightTrigTable *table,
 int fa18_build_rotation_matrix(const FA18FlightTrigTable *table,
                                int16_t first_angle, int16_t second_angle,
                                int16_t third_angle, int16_t output[3][3]);
+int fa18_compose_rotation_terms(const FA18TrigTerms *terms,int16_t output[3][3]);
+/* Bind the complete original Hunk 63; adjacent fields remain caller-owned. */
+int fa18_load_native_trig_data(const FA18Hunks *hunks,FA18FlightTrigData *data);
 
 #endif

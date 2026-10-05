@@ -61,12 +61,12 @@
     "port/command_queue.h": "1795592dc406ee313e5a8756d175b3119b35e5f1c50ae19659021da44def3955",
     "port/renderer_clear.c": "a7c2f7fc6c799a8cf0f697c651d124306b474cb24694ecf73a0f28207a620e51",
     "port/renderer_clear.h": "9c62ebdc8846bb7c07b884142b94ddc871d7f09cbc2125c1ed934192f71ce76c",
-    "port/native_scene_records.c": "8b46b8bebf7d143fb43d1dd4e21f764fcca2b6e22e54944f61376ca4f16e96b9",
-    "port/native_scene_records.h": "79a6ec9b4e67e25c850219c39b2661df8bf0f2ab9f994c78d9a43e707bdb4bfe",
+    "port/native_scene_records.c": "0021faac8536a63d56876a825305e6bec13f64b9d5104eb9fb43636e351cd89a",
+    "port/native_scene_records.h": "9ae7e572f7fe14cb08e312578ee0e7a9ba83bbbebad475ee7040262799c89de6",
     "port/scene_player_setup.c": "10e6ddcfa08d6dbd6b5fe368889a6f934c91651723bdb58d67c103dfe017421d",
     "port/scene_player_setup.h": "16810fb57fa7dad4816b21e520577b2a46865e5dda07c636fc75adb60deb3cc4",
     "port/context_command_controls.c": "94fd3576a278b1983883432eeb5f910aacedc8718025f78c429c1d98220ab5be",
-    "tools/recomp/native_scene_player_oracle.c": "a3e1df3194f3520818c2723d951e8ed800087158c46436cfe88746f9d968e0e1",
+    "tools/recomp/native_scene_player_oracle.c": "17c4e4887c26e35f6c5356c41228eccf16864a5893fcdc6704ca7fb8a07b8700",
     "tools/recomp/check_native_scene_bootstrap.py": "0f33ecfb0ae7e111160af72b89124cdecb459394d9a26b8e232da4a099265291",
     "tools/recomp/native_scene_bootstrap_oracle.c": "b128a21717ee165e50baf4f004d4be1396ed627d6a994b4f465b312cb87140eb"
   }
