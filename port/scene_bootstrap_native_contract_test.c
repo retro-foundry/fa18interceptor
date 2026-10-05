@@ -158,7 +158,7 @@ static void initialize(Fixture *f) {
     f->postflight.command_word=&f->flight.command_word;
     f->postflight.player_phase=&f->phase;
     f->postflight.player_flags_f=f->flags+5;
-    f->selector_origin=(FA18NativeSelectorOrigin){.vector_math=&f->vector_math,.records=&f->records,.origin=f->origin};
+    f->selector_origin=(FA18NativeSelectorOrigin){.trig=&f->region_storage.assets.trig,.vector_math=&f->vector_math,.records=&f->records,.origin=f->origin};
     f->record_update=(FA18NativeRecordUpdateStage){.records=&f->records,.view=&f->view,
         .control_records=&f->control_update,.origin_update=&f->selector_origin,
         .input_byte=&f->update_input,.input_byte_mirror=&f->update_mirror,.change_inhibit=&f->update_inhibit,

@@ -27,7 +27,7 @@
     "port/native_record_orientation.c": "d54a0798413a1e4473e366acf888ff0a85a904ddc02f8d42ad3971f6ca0707fc",
     "port/native_record_orientation.h": "e8d8fa9ffe445bac2c1087b323d39d5c7b20608c0440ae1abe72b574e424fb01",
     "port/native_scene_regions_contract_test.c": "1d56432c7e5b68814f88a4c06748675633ba3683de42589fe6743b85be90df98",
-    "port/CMakeLists.txt": "3e522173998c865a994585ec4224a90ed34fc2b28bd06dd14cb067d4d0b632d3",
+    "port/CMakeLists.txt": "05fb5a8189023880e7511c5d4812502adf68c5e2d916bb6915466ba5ed0880b2",
     "port/native_scene_placement.c": "10cb1002606a44b34262c393e6d9d3dfad187c91ca27b71c36b1be8e2ca0c7fe",
     "port/native_scene_placement.h": "d9a67febbaf81bfcf33a2ee6ad9d110bc10463e80d010788afe211f66bfe4f6f",
     "port/native_record_action_placement_contract_test.c": "ddafbe5206aebc590ff5e273e33b29b7a2c21e0030a1fedcc79cc9f24b6699cf",
@@ -35,8 +35,8 @@
     "port/native_control_record_update.h": "430a9ffb196104f50cef5c2daf20eaa05251d22157bf61163ea126f1a90b2279",
     "port/native_control_record_update_contract_test.c": "231e8510eb6ecedd56a0792ee05ad99d6164d76c9a5f2d712a5c40922be8e524",
     "port/native_scene_regions_test_support.h": "f0004581be92a647bf59fc9f768d9871af6a289c6bff7677cf4cdd9881ef7ecc",
-    "port/native_record_update_stage_contract_test.c": "06cf056002b9c8cc12b9c8a7194793df5d4ac0fd3cc816078fa37af346c9b5d8",
-    "port/scene_bootstrap_native_contract_test.c": "15d750c738bd242e16169554137859c2f200fc414de149f8813b5762e3c98c96",
+    "port/native_record_update_stage_contract_test.c": "ab29632c00c7ab745d96f9d6d1b80440b9477a5be34bd7a2559b88d2398370e4",
+    "port/scene_bootstrap_native_contract_test.c": "b9e7f8f8c068b917aa75caf5e795909c4cc52416f60a177d19c00051f17c975d",
     "tools/recomp/native_scene_regions_oracle.c": "e63a56784bd50273df55b052e85f7569dceff4230ee2688ae2f7e0ffc9b1b008",
     "tools/recomp/check_native_scene_regions.py": "d420a0449c9e6cdd3744b8fc445bfddd53f7d1cfe8cc55778b166ec5b526e720"
   }

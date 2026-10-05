@@ -26,8 +26,8 @@ int main(void) {
     state = (FA18CurrentRecordMatrixState){record, sizeof record, &trig, {{0}}};
     put16(record + 0x68, 0x7080);
     assert(fa18_build_current_record_matrix(&state) == 0);
-    assert(state.matrix[0][0] == 0x100 && state.matrix[1][1] == 0x100 &&
-           state.matrix[2][2] == 0x100);
+    assert(state.matrix[0][0] == 0x4000 && state.matrix[1][1] == 0x4000 &&
+           state.matrix[2][2] == 0x4000);
     put16(record + 0x68, 0);
     assert(fa18_build_current_record_matrix(&state) == 0);
     assert(state.matrix[0][0] != 0 || state.matrix[0][2] != 0);

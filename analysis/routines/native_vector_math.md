@@ -38,8 +38,9 @@ with scale 512 and publishes shared magnitude/output words. Candidate reduction,
 saved shift, signed scaling, smoothing, origin addition and masked/negated
 companion publication preserve source behavior. The tail API exposes its live
 arrays rather than CPU temporaries; its proof compares those arrays and all
-game RAM. The surrounding active-origin adapter retains four real lower
-families: matrix preparation, transforms A/B and candidate regeneration.
+game RAM. The surrounding active-origin adapter now runs actual matrix preparation,
+transforms A/B and candidate regeneration directly, with no child contracts.
+Its complete proof is documented in `native_selector_origin.md`.
 
 Validation on 2026-10-05:
 

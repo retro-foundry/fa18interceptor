@@ -1,5 +1,7 @@
 /* CPU, ROM and captured RAM are validation only. The native owner is pure C. */
+#ifndef FA18_SCENE_SOURCE_HEADER
 #define FA18_SCENE_SOURCE_HEADER "../../build/recomp/native_selector_origin_adjustment_source.h"
+#endif
 #define FA18_SCENE_PLAYER_HELPERS_ONLY
 #include "native_scene_player_oracle.c"
 #include "../../port/scene_component_magnitude.c"
@@ -25,7 +27,10 @@ static int original_vector(void) {
     }
     return 0;
 }
-int main(int argc,char **argv) {
+#ifndef FA18_ORIGIN_MATH_MAIN
+#define FA18_ORIGIN_MATH_MAIN main
+#endif
+int FA18_ORIGIN_MATH_MAIN(int argc,char **argv) {
     size_t state_size=0,rom_size=0; char error[256];
     uint8_t *state=read_file("captures/native/demo01/state.bin",&state_size);
     uint8_t *rom=read_file("local/system/kick13.rom",&rom_size);

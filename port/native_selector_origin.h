@@ -2,26 +2,11 @@
 #define FA18_NATIVE_SELECTOR_ORIGIN_H
 
 #include "field_window.h"
+#include "flight.h"
 #include "native_scene_records.h"
 #include "native_vector_math.h"
 
-typedef enum {
-    FA18_SELECTOR_ORIGIN_PREPARE,
-    FA18_SELECTOR_ORIGIN_MATRIX_A,
-    FA18_SELECTOR_ORIGIN_MATRIX_B,
-    FA18_SELECTOR_ORIGIN_REGENERATE
-} FA18NativeSelectorOriginChild;
-
 typedef struct FA18NativeSelectorOrigin FA18NativeSelectorOrigin;
-typedef struct {
-    /* Input and output are three ordinary signed components. PREPARE and
-     * REGENERATE receive no input; PREPARE has no output. */
-    int (*consume)(void *context,FA18NativeSelectorOrigin *state,
-                   FA18NativeSelectorOriginChild child,
-                   const int32_t input[3],int32_t output[3]);
-    void *context;
-} FA18NativeSelectorOriginOps;
-
 typedef struct {
     PortFieldWindow general,class_11,class_14,class_30;
 } FA18NativeSelectorOriginTables;
@@ -29,10 +14,10 @@ typedef struct {
 struct FA18NativeSelectorOrigin {
     FA18NativeSceneRecords *records;
     FA18NativeSceneRecord **active_record;
-    const FA18NativeSelectorOriginOps *ops;
     const FA18NativeVectorMath *vector_math;
+    const FA18FlightTrigData *trig;
+    int16_t (*matrix)[3]; /* shared full-scale C45C0E owner */
     const FA18NativeSelectorOriginTables *tables;
-    const int32_t *root_preset; /* three longs */
     int32_t *origin,*candidate,*smoothed_delta,*negated_companion; /* three each */
     int32_t *auxiliary_delta;
     uint16_t *angle_history,*status_word;
@@ -42,10 +27,13 @@ struct FA18NativeSelectorOrigin {
 };
 
 /* Complete C29042 active-origin function, including every internally reached
- * adjustment path through C295D0. The matrix builder, transforms,
- * regeneration remain explicit lower routines; normalization is direct.
- * Gate exits are
+ * adjustment path through C295D0. Matrix preparation, both transforms,
+ * normalization and candidate regeneration are direct. Gate exits are
  * successful source exits and retain the current origin. */
 int fa18_update_native_selector_origin(FA18NativeSelectorOrigin *state);
+/* Complete C2DAF2, C091A8 (prepared matrix) and C091CE (record inverse). */
+int fa18_prepare_native_selector_matrix(FA18NativeSelectorOrigin *state);
+int fa18_transform_native_selector_components(FA18NativeSelectorOrigin *state,
+    int prepared,const int32_t input[3],int32_t output[3]);
 
 #endif

@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-05. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 73621613); ignored gate logs may
+history (the preceding handoff is in commit 84f2ab3f); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
@@ -13,43 +13,58 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: record view and pose now use the actual release fault behavior.
-Sealed `$C06C02` is only `RTS` (`$4E75`). Error words still publish in source
-order, and the original continuation preserves carried axis/pending state.
-`FA18NativeRecordViewOps` is removed, and the pose fault child is removed.
-View and dispatch now have no lower child contracts.
+Latest batch: complete native active-origin `$C29042` now runs actual matrix
+preparation `$C2DAF2`, transforms `$C091A8/$C091CE`, normalization and starting-
+position regeneration `$C0910C` directly. `FA18NativeSelectorOriginOps` and all
+four remaining child families are removed. The starting-position routine was
+already native; its sealed body returns the actual fixed original tuple.
 
-Pose's non-root cell route also runs actual `$C2D970` inverse-matrix publication
-through the shared orientation owner. Full orientation reuses that same body.
-The inverse entry preserves stored angles, forward matrix and flags. The
-scheduler validates that pose binds the region asset's same trig owner; missing
-data fails only when a source route reads it. Twelve actual pose lower families
-remain, down from fourteen; history, inverse and release fault behavior are direct.
+Corrected `current_record_matrix.c`: original `$C2DAF2` calls `$C2E370`, with
+full `$4000` scale. The old helper instead used `$C2E346`/`$100`, and its test
+mirrored that error. The new value entry consumes the live native record angle
+and original trig data. Both transforms use actual wrapped products, shift and
+translation; the prepared entry saves input low words across repeated setup.
 
-The expanded pose proof passes 24,576 calls across pose/history/inverse at all
-804 boundaries, including 8,236 actual inverse calls and 46 actual release fault
-returns. Independent typed owners, game RAM and inverse-entry carried axis match.
-Updated view covers 24,576 calls/482 boundaries and dispatch 106,496 calls/1,095
-boundaries, with actual normalization and release fault instructions. The
-orientation proof passes 12,288 calls/292 boundaries, all 65,536 lookup angles,
-and the original 1,802 Hunk-63 table bytes. The complete region proof passes
-40,960 calls at all 635 boundaries after the shared refactor. MSVC Release native game/affected builds, strict GNU
-compilation of thirteen affected units, ten affected CTests and the unchanged
-513-file native guard pass. See the view/dispatch/pose/orientation routine notes
-and checkpoints for exact reports.
+Root presets now read the same root record's live position directly. Original
+auxiliary delta `$C45C4E` aliases the middle smoothed component `$C45C4A+4`;
+the owner requires that shared binding. Record-update validation also requires
+origin and pose to share the same trig owner, alongside existing math aliases.
 
-Next complete the matrix preparation/transforms and remaining startup-reachable
-pose/control owners, then reconcile canonical startup/input/queue aliases and
-original assets before installing the native startup/frame graph in main.
-Source inspection finds `$C2DAF2` calls `$C2E370`, a full-scale `$4000` matrix.
-The older `current_record_matrix.c` instead calls the `$C2E346`/`$100` builder,
-and its test mirrors that incorrect scale. Correct and prove this dependency
-before reusing it for native origin preparation. Actual origin transforms are
-`$C091A8` (preparation plus transform) and `$C091CE` (record inverse transform);
-`$C091F6-$C09248` supplies their shared wrapped products, shift and translation.
-Full active-origin adapter proof and bootstrap origin aliases remain required.
+The new complete proof passes 65,536 full-RAM calls across eight entries at all
+551 instruction boundaries, with no child contracts. All 32,768 parent/matrix
+calls complete, including 382 actual regeneration calls. Core math retains
+1,209 exactly proved original zero-factor loops. Every one of the 65,536 word
+angles additionally matches original full-scale matrix publication. Transform
+outputs and typed record owners match independently. The existing adjustment,
+pose and region proofs are rerun to refresh their exact source checkpoints.
+MSVC Release native game/affected builds, strict GNU compilation of seven
+changed units, eight affected CTests and the unchanged 513-file native guard
+pass. See `analysis/routines/native_selector_origin.md` and its new checkpoint.
+
+Next complete remaining startup-reachable pose/control owners and original
+origin table-window binding, then reconcile canonical startup/input/queue
+aliases before installing the native startup/frame graph in main.
+The existing Hunk layout maps the four origin tables to Hunk 26 offsets
+`$830/$86C/$8A8/$8E4` (general/class 11/class 14/class 30), size `$EB4`.
+Use this as a loader lead and prove the actual original disk bytes/relocations.
+Bootstrap origin fields versus command context origin fields still need canonical shared
+ownership; the descriptor's carried value needs its original producer binding.
 Native main still does not invoke the complete graph; the playable ROM-free
 runner still uses Musashi, guest RAM and chipset state. The goal remains open.
+
+Preceding batch (`84f2ab3f`): record view and pose use actual release fault
+behavior. Sealed `$C06C02` is only `RTS` (`$4E75`). Error publication and the
+original continuation preserve carried axis/pending state. View and dispatch
+have no lower contracts. Pose's non-root cell route runs actual `$C2D970`
+inverse publication through the shared orientation owner, preserving stored
+angles, forward matrix and flags. Twelve pose lower families remain.
+
+That batch passed pose 24,576 calls/804 boundaries (8,236 actual inverse calls,
+46 actual release fault returns), view 24,576/482 (9,104 normalizations, 759
+actual release fault returns), dispatch 106,496/1,095 (9,728 normalizations,
+774 actual release fault returns), orientation 12,288/292 plus all 65,536 lookup
+angles and original Hunk-63 bytes, and region 40,960/635. See their checkpoints
+and routine notes. Native-main integration remained pending.
 
 Preceding batch (`73621613`): complete native `$C2574A`/`$C25754` normalization and actual
 `$C1D974` magnitude now run directly in record view and selector-origin
@@ -344,8 +359,8 @@ still remain:
   are direct. `FA18NativeRecordRangeOps`: sound program four remains a true child.
 - `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
   the now-direct action selectors. They are route-dependent.
-- `FA18NativeSelectorOriginOps`: preparation, matrix A/B and regeneration.
-  Normalization and the complete adjustment tail are direct.
+- Active-origin has no callback surface: preparation, both transforms,
+  regeneration, normalization and the complete adjustment tail are direct.
 - `FA18NativeContextRefreshOps`: templates, sort, cache, condition A/B, and
   render.
 

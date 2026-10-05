@@ -29,10 +29,10 @@
     "port/scene_component_magnitude.h": "c54699f1fdbf6bf825ffe518905531cdf72a13eccb9211e08e3db77a3dbc6e00",
     "port/terrain_selector_origin_adjustment.c": "15fa838cc0d72be87ed1d9529847704b32d637dfbff021880ba3a28c9e6c3e31",
     "port/terrain_selector_origin_adjustment.h": "46af97295577d29ee7ce1026e54359b8076dd52e66375f004474872ac25edfdc",
-    "port/native_selector_origin.c": "366d8b28ba11fb31a2a05b40ebe091400136f6be691455e7af77f88fb2998221",
-    "port/native_selector_origin.h": "0b3bc3080dae272cb87de7e931f921f71e410d7953cfd56c51b41319ed5f5f7e",
+    "port/native_selector_origin.c": "eb70054c04cab8120828d854c98ca8389b36e9af8ac6058d5db2b79c84063340",
+    "port/native_selector_origin.h": "e3e80bdf6b100957111c41fa51cee9e89b11af0dac07fa9df48504dfa1a032e7",
     "tools/recomp/native_vector_math_fixture.h": "1042ba04237a5c50a8a74c738f08accfec231998404e923186d78dc0af42a18c",
-    "tools/recomp/native_selector_origin_adjustment_oracle.c": "ebb790fe039de305b1abc966ba41d6c64cd34581d797c1992e36843a32a8ebf9",
+    "tools/recomp/native_selector_origin_adjustment_oracle.c": "be6c605878caaddbba0287ab4299e39befff5d7c8e31dc221a74dc849571c723",
     "tools/recomp/check_native_selector_origin_adjustment.py": "4e4d061d243456b9ccf44773bdca0e8de220b854f1d3ad4b04fdbf1e13cd10eb"
   }
 }

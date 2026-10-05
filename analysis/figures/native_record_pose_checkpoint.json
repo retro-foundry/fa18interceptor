@@ -104,9 +104,9 @@
     "port/native_control_record_update.c": "470b513fec1e9dae54ff94ca4f075c7f5e07632b6a80478a1fabe7265c857069",
     "port/native_control_record_update.h": "430a9ffb196104f50cef5c2daf20eaa05251d22157bf61163ea126f1a90b2279",
     "port/native_control_record_update_contract_test.c": "231e8510eb6ecedd56a0792ee05ad99d6164d76c9a5f2d712a5c40922be8e524",
-    "port/CMakeLists.txt": "3e522173998c865a994585ec4224a90ed34fc2b28bd06dd14cb067d4d0b632d3",
-    "port/native_record_update_stage_contract_test.c": "06cf056002b9c8cc12b9c8a7194793df5d4ac0fd3cc816078fa37af346c9b5d8",
-    "port/scene_bootstrap_native_contract_test.c": "15d750c738bd242e16169554137859c2f200fc414de149f8813b5762e3c98c96",
+    "port/CMakeLists.txt": "05fb5a8189023880e7511c5d4812502adf68c5e2d916bb6915466ba5ed0880b2",
+    "port/native_record_update_stage_contract_test.c": "ab29632c00c7ab745d96f9d6d1b80440b9477a5be34bd7a2559b88d2398370e4",
+    "port/scene_bootstrap_native_contract_test.c": "b9e7f8f8c068b917aa75caf5e795909c4cc52416f60a177d19c00051f17c975d",
     "tools/recomp/native_record_pose_oracle.c": "7a6a1f8fa0502d9411d0311fcf9ed2fc3e4dd6af3e83ab192ca91f6621f92a3f",
     "tools/recomp/check_native_record_pose.py": "6598ded176d1c0253d81b2f185e2d339139a31b8fba870e1a16d095b081c6545"
   }

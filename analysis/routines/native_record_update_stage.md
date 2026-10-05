@@ -21,7 +21,10 @@ live record field view, preserving word negation and arithmetic-shift behavior
 without creating another packed persistent record.
 
 `$C22C80` record production and `$C29042` active-origin production are now
-direct native owners. Their individual game-specific children remain explicit.
+direct native owners. Active-origin preparation, transforms, normalization and regeneration are
+direct, with no remaining origin child contracts; record production retains
+its remaining pose/control children. Origin and pose must share the same trig
+owner, just as origin and view share the same vector-math owner.
 The record-update parent no longer has an operation table. The focused
 contract covers both parent routes, child mutation order, signed/high-word
 edges, rate classes and selector publication. The historical bootstrap oracle

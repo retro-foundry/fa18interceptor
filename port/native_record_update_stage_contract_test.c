@@ -1,4 +1,5 @@
 #include "native_record_update_stage.h"
+#include "run075_trig_asset.h"
 
 #include "native_record_control_test_support.h"
 #include "native_record_pose_test_support.h"
@@ -12,7 +13,7 @@
 typedef struct {
     FA18CommandInput commands; FA18FlightCommandState flight; FA18ViewCommandState view;
     FA18NativeSceneRecords records; FA18NativeRecordUpdateStage update;
-    FA18NativeSelectorOrigin selector; FA18NativeSelectorOriginOps selector_ops;
+    FA18NativeSelectorOrigin selector; int16_t matrix[3][3];
     FA18NativeSelectorOriginTables selector_tables; FA18NativeSceneRecord *active;
     FA18NativeControlRecordUpdate control;
     FA18NativeRecordSelection selection;
@@ -31,7 +32,7 @@ typedef struct {
     uint8_t source[16*512],work[16*32],selector_table[8];
     uint8_t input,mirror,inhibit,context_select,detail,coarse_byte,fine_byte,rate;
     int32_t bias,long_mirror,depth,origin[3];
-    int32_t candidate[3],smoothed[3],negated[3],root_preset[3],aux_delta;
+    int32_t candidate[3],smoothed[3],negated[3];
     uint16_t scaled,word_x,word_z;
     uint16_t angle_history,status;
     uint8_t origin_enable,gate_b,gate_a,gate_mode,origin_index,adjustment_mode;
@@ -40,16 +41,8 @@ typedef struct {
     uint8_t selection_active,action_first,action_second,action_third,pair_override;
     uint16_t periodic,current_slot,current_stride;
     uint16_t selected,selection_marker,action_pending;
-    unsigned origin_calls;
 } Fixture;
 
-static int origin(void *context,FA18NativeSelectorOrigin *state,
-                  FA18NativeSelectorOriginChild child,const int32_t input[3],int32_t output[3]) {
-    Fixture *f=context;
-    assert(state==&f->selector && child==FA18_SELECTOR_ORIGIN_PREPARE && !input && !output);
-    ++f->origin_calls;
-    return 1;
-}
 static void put16(FA18NativeSceneRecord *record,size_t offset,uint16_t value) {
     uint8_t bytes[2]={(uint8_t)(value>>8),(uint8_t)value};
     assert(fa18_write_native_scene_record(record,offset,bytes,2));
@@ -90,13 +83,14 @@ static void initialize(Fixture *f) {
     fa18_test_bind_postflight(&f->postflight,&f->post_storage,&f->control);
     fa18_test_bind_scene_regions(&f->regions,&f->region_storage,&f->control);
     fa18_test_bind_record_dispatch(&f->dispatch,&f->dispatch_storage,&f->control,NULL,NULL);
-    f->active=f->records.records; f->selector_ops=(FA18NativeSelectorOriginOps){origin,f};
+    f->active=f->records.records;
+    f->region_storage.assets.trig=(FA18FlightTrigData){.bytes=fa18_run075_trig_bytes,.byte_count=sizeof fa18_run075_trig_bytes};
     window=(PortFieldWindow){.bytes=f->selector_table,.byte_count=sizeof f->selector_table};
     f->selector_tables=(FA18NativeSelectorOriginTables){window,window,window,window};
     f->selector=(FA18NativeSelectorOrigin){.vector_math=&f->vector_math,.records=&f->records,.active_record=&f->active,
-        .ops=&f->selector_ops,.tables=&f->selector_tables,.root_preset=f->root_preset,
+        .trig=&f->region_storage.assets.trig,.matrix=f->matrix,.tables=&f->selector_tables,
         .origin=f->origin,.candidate=f->candidate,.smoothed_delta=f->smoothed,
-        .negated_companion=f->negated,.auxiliary_delta=&f->aux_delta,
+        .negated_companion=f->negated,.auxiliary_delta=f->smoothed+1,
         .angle_history=&f->angle_history,.status_word=&f->status,.enable=&f->origin_enable,
         .gate_b=&f->gate_b,.gate_a=&f->gate_a,.gate_mode=&f->gate_mode,.detail_mode=&f->detail,
         .detail_index=&f->origin_index,.adjustment_mode=&f->adjustment_mode,
@@ -119,7 +113,7 @@ int main(void) {
     put16(record,0x56,0x20); put16(record,0x58,0x40); put16(record,0x5a,0x100); record->word_6c=0x1001;
     assert(fa18_update_native_scene_records(&f.update));
     assert(f.mirror==7 && f.long_mirror==(int32_t)0xf0000000u && f.scaled==0x780);
-    assert(!f.origin_calls && f.rate==3);
+    assert(!f.matrix[1][1] && f.rate==3);
     assert(!f.placement_storage.space && !f.post_storage.report);
     assert(f.word_x==0x1235 && f.word_z==0x4326 && f.fine_byte==0x9a);
     assert(f.coarse_byte==6 && f.view.update_mask==0x0b);
@@ -131,13 +125,15 @@ int main(void) {
     f.origin[1]=0x12345678;
     put16(record,0x56,0xc1); put16(record,0x58,0); put16(record,0x5a,0);
     assert(fa18_update_native_scene_records(&f.update));
-    assert(f.origin_calls==1 && f.rate==1);
+    assert(f.matrix[1][1]==0x4000 && f.rate==1);
     assert(f.origin[1]==0x12345678 && f.word_x==0x42 && f.word_z==0x44);
     assert(f.fine_byte==15 && f.coarse_byte==13 && f.view.update_mask==0xff);
 
     initialize(&f); f.update.origin_update=NULL;
     assert(!fa18_update_native_scene_records(&f.update));
     initialize(&f); f.selector.vector_math=NULL; f.input=7;
-    assert(!fa18_update_native_scene_records(&f.update) && !f.mirror && !f.origin_calls);
+    assert(!fa18_update_native_scene_records(&f.update) && !f.mirror && !f.matrix[1][1]);
+    initialize(&f); f.selector.trig=&f.pose_storage.trig; f.input=7;
+    assert(!fa18_update_native_scene_records(&f.update) && !f.mirror && !f.matrix[1][1]);
     return 0;
 }

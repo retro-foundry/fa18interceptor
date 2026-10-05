@@ -1,5 +1,8 @@
 #include "native_selector_origin.h"
 #include "terrain_selector_origin_adjustment.h"
+#include "current_record_matrix.h"
+#include "matrix_transform_components.h"
+#include "scene_player_setup.h"
 
 #include <limits.h>
 
@@ -42,22 +45,36 @@ static int record_word(const FA18NativeSceneRecord *record,size_t offset,uint16_
     *value=(uint16_t)(((unsigned)bytes[0]<<8)|bytes[1]); return 1;
 }
 static int shared(const FA18NativeSelectorOrigin *s) {
-    return s && s->records && s->active_record && *s->active_record && s->ops && s->ops->consume &&
-        s->tables && s->root_preset && s->origin && s->candidate && s->smoothed_delta &&
+    return s && s->records && s->active_record && *s->active_record && s->trig && s->matrix &&
+        s->tables && s->origin && s->candidate && s->smoothed_delta &&
         s->negated_companion && s->auxiliary_delta && s->angle_history && s->status_word &&
         s->enable && s->gate_b && s->gate_a && s->gate_mode && s->detail_mode && s->detail_index &&
         s->adjustment_mode && s->threshold_flag && s->auxiliary_flag && s->variant_selector &&
-        s->detail_counter;
-}
-static int child(FA18NativeSelectorOrigin *s,FA18NativeSelectorOriginChild which,
-                 const int32_t input[3],int32_t output[3]) {
-    return s->ops->consume(s->ops->context,s,which,input,output);
+        s->detail_counter && s->auxiliary_delta==s->smoothed_delta+1;
 }
 static int owns_record(const FA18NativeSelectorOrigin *s,const FA18NativeSceneRecord *record) {
     unsigned slot;
     for(slot=0;slot<FA18_NATIVE_SCENE_RECORDS;++slot)
         if(record==s->records->records+slot) return 1;
     return 0;
+}
+int fa18_prepare_native_selector_matrix(FA18NativeSelectorOrigin *s) {
+    if(!s || !s->records || !s->active_record || !*s->active_record ||
+       !owns_record(s,*s->active_record) || !(*s->active_record)->geometry) return 0;
+    return fa18_build_current_record_matrix_value((*s->active_record)->geometry->angle,
+        s->trig,s->matrix)==0;
+}
+int fa18_transform_native_selector_components(FA18NativeSelectorOrigin *s,
+    int prepared,const int32_t input[3],int32_t output[3]) {
+    FA18NativeSceneRecord *record; int16_t words[3]; int32_t translation[3]; unsigned i;
+    if(!s || !s->records || !s->active_record || !(record=*s->active_record) ||
+       !owns_record(s,record) || !record->geometry || !input || !output) return 0;
+    /* C091A8 saves input low words across the repeated preparation call. */
+    for(i=0;i<3;++i) words[i]=(int16_t)input[i];
+    if(prepared && !fa18_prepare_native_selector_matrix(s)) return 0;
+    for(i=0;i<3;++i) translation[i]=(int32_t)record->geometry->position[i];
+    return fa18_calculate_matrix_transform_components(words,
+        (const int16_t (*)[3])(prepared?s->matrix:record->geometry->inverse),translation,output)==0;
 }
 static void companion(FA18NativeSelectorOrigin *s) {
     unsigned i;
@@ -81,7 +98,7 @@ static int small_candidate(FA18NativeSelectorOrigin *s,int alternate) {
     int positive=*s->variant_selector==1 || *s->variant_selector==2;
     input[0]=positive?6:-6; input[1]=alternate?1:4;
     input[2]=alternate?6:positive?3:-9;
-    if(!child(s,FA18_SELECTOR_ORIGIN_MATRIX_B,input,result)) return 0;
+    if(!fa18_transform_native_selector_components(s,0,input,result)) return 0;
     s->candidate[0]=result[0]; s->candidate[1]=result[1]; s->candidate[2]=result[2]; return 1;
 }
 static void countdown(FA18NativeSelectorOrigin *s) {
@@ -98,7 +115,7 @@ static int adjust(FA18NativeSelectorOrigin *s,int32_t delta[3],uint32_t amount,u
 }
 static int adjustment_mode(FA18NativeSelectorOrigin *s) {
     enum { FINALIZE, BLEND, PRESET, SMALL, ALTERNATE, ADJUST } route=FINALIZE;
-    int32_t delta[3],regenerated[3]; uint32_t amount,absolute[3]; unsigned i,shift=0;
+    int32_t delta[3]; uint32_t regenerated[3],amount,absolute[3]; unsigned i,shift=0;
     for(i=0;i<3;++i) { delta[i]=sub_long(s->candidate[i],s->origin[i]); absolute[i]=magnitude(delta[i]); }
     amount=absolute[0];
     if((int32_t)absolute[1]>(int32_t)amount) amount=absolute[1];
@@ -135,8 +152,8 @@ static int adjustment_mode(FA18NativeSelectorOrigin *s) {
             if(*s->auxiliary_delta<-0x100000 && (int32_t)amount>0x100000) { route=ADJUST; break; }
         }
         *s->detail_mode=3; *s->adjustment_mode=8;
-        if(!child(s,FA18_SELECTOR_ORIGIN_REGENERATE,0,regenerated)) return 0;
-        for(i=0;i<3;++i) s->candidate[i]=regenerated[i];
+        if(!fa18_native_scene_start_position(regenerated)) return 0;
+        for(i=0;i<3;++i) s->candidate[i]=signed_long(regenerated[i]);
         return 1;
     case 8:
         shift=14; if((int32_t)amount>0x800000) { route=ADJUST; break; }
@@ -145,7 +162,8 @@ static int adjustment_mode(FA18NativeSelectorOrigin *s) {
     default: return 0;
     }
     if(route==BLEND) blend(s);
-    else if(route==PRESET) for(i=0;i<3;++i) s->candidate[i]=s->root_preset[i];
+    else if(route==PRESET) for(i=0;i<3;++i)
+        s->candidate[i]=signed_long(s->records->geometry[0].position[i]);
     else if((route==SMALL || route==ALTERNATE) && !small_candidate(s,route==ALTERNATE)) return 0;
     if(route!=ADJUST && (int32_t)amount<=0x240) {
         if((int8_t)*s->detail_mode<6) return 1;
@@ -163,7 +181,7 @@ int fa18_update_native_selector_origin(FA18NativeSelectorOrigin *s) {
     FA18NativeSceneRecord *record; const PortFieldWindow *table;
     int32_t input[3],output[3]; int16_t word,angle,previous,change,floor;
     uint16_t floor_word; uint8_t type,index; int8_t enable; unsigned i;
-    if(!shared(s) || !child(s,FA18_SELECTOR_ORIGIN_PREPARE,0,0) ||
+    if(!shared(s) || !fa18_prepare_native_selector_matrix(s) ||
        !(record=*s->active_record) || !owns_record(s,record)) return 0;
     if(!*s->enable || !*s->gate_b || *s->gate_a) return 1;
     if(*s->gate_mode && !*s->detail_mode) {
@@ -192,8 +210,8 @@ int fa18_update_native_selector_origin(FA18NativeSelectorOrigin *s) {
         }
         input[i]=word;
     }
-    if(!child(s,(type&0xf0u)==0x30u || (index!=0 && index!=4)?
-              FA18_SELECTOR_ORIGIN_MATRIX_A:FA18_SELECTOR_ORIGIN_MATRIX_B,input,output)) return 0;
+    if(!fa18_transform_native_selector_components(s,
+        (type&0xf0u)==0x30u || (index!=0 && index!=4),input,output)) return 0;
     for(i=0;i<3;++i) s->candidate[i]=output[i];
     if(!record_word(record,0x4e,&floor_word)) return 0;
     floor=signed_word((uint16_t)(((record->byte_04&0xc0u)?floor_word:0)+7u));
