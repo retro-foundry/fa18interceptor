@@ -41,7 +41,8 @@ static int classify_rate(FA18NativeSceneRecord *record,uint8_t *rate) {
 static int shared(const FA18NativeRecordUpdateStage *s) {
     return s && s->records && s->view && s->view->flight && s->view->flight->commands &&
         s->records->input==s->view->flight->commands &&
-        s->view->flight->player==s->records->aircraft && s->ops && s->ops->update_records &&
+        s->view->flight->player==s->records->aircraft && s->control_records &&
+        s->control_records->records==s->records && s->ops &&
         s->input_byte && s->input_byte_mirror && s->change_inhibit && s->context_selection &&
         s->origin_detail_mode && s->selector_byte_coarse && s->selector_byte_fine && s->record_rate &&
         s->position_bias && s->long_mirror && s->projection_depth && s->origin && s->scaled_word &&
@@ -65,7 +66,7 @@ int fa18_update_native_scene_records(FA18NativeRecordUpdateStage *s) {
         if(*s->origin_detail_mode!=2) requests|=0x0b;
         *s->scaled_word=coarse;
     }
-    if(!s->ops->update_records(s->ops->context,s,&requests)) return 0;
+    if(!fa18_update_native_control_records(s->control_records)) return 0;
 
     if(!*s->context_selection) {
         record=viewed_record(s);

@@ -11,7 +11,25 @@ reuse existing owners and run validation for changed behavior/affected callers.
 The separate `amiga-recomp` project was inspected (13 existing tests pass),
 but the user did not request switching this port to its CPU/chipset runtime.
 
-Latest batch: complete `$C1C63E-$C1C7F4` record-update parent and its
+Latest batch: complete `$C22C80-$C230AE` sixteen-record scheduler now runs on
+the shared native record/workspace bank. It preserves all workspace word
+decrements, the slot-15 flag exception, signed byte countdowns, root countdown,
+slot 7's preparation-only route, forced flags for active slots 14/15, and the
+source companion-record identity retained between groups. Ready/dispatch
+decisions are explicit game results separate from child completion. `$C1C63E`
+now calls this owner directly, so the remaining lower boundaries are the
+individual record pose/placement children and `$C29042` active-origin producer.
+
+Validation: mixed active/inactive records exercise every scheduler family,
+both decision outcomes, periodic work, source ordering and child failure with
+preceding stores retained. Strict GNU and MSVC contracts and the composed
+bootstrap path pass. See `analysis/routines/native_control_record_update.md`.
+
+Next implement the startup-reachable record children in scheduler order,
+starting with selection release and the root control/view/marker/pose chain;
+then complete `$C29042` and `$C1C860`.
+
+Preceding batch: complete `$C1C63E-$C1C7F4` record-update parent and its
 `$C1C7F6` rate classifier now run on the live native record/view owners. The
 implementation preserves the unsigned key produced by `CLR.W/SWAP/ASR.L`,
 signed threshold crossing, selected-record identity, active-origin packing,
@@ -27,9 +45,7 @@ and MSVC builds, the composed bootstrap contract and the historical two-case
 parent oracle pass. A full original-instruction differential proof still needs
 the lower children. See `analysis/routines/native_record_update_stage.md`.
 
-Next complete `$C22C80` on the startup-reachable record state, then `$C29042`
-and `$C1C860`. Connect the resolved graph to native main after those owners are
-available.
+Next was `$C22C80`; that parent is completed by the latest batch above.
 
 Preceding batch: complete `$C09266-$C095BE` recorder reset and root placement now
 run directly against the shared native record bank. Both the positive grid
