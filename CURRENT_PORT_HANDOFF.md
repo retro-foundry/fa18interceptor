@@ -11,7 +11,27 @@ reuse existing owners and run validation for changed behavior/affected callers.
 The separate `amiga-recomp` project was inspected (13 existing tests pass),
 but the user did not request switching this port to its CPU/chipset runtime.
 
-Latest batch: complete `$C1C860-$C1CA2C` context refresh and `$C1CA82`
+Latest batch: complete hot `$C29042-$C295D0` active-origin production now runs
+on caller-owned native records, triples, scalar state and immutable field
+windows. The `$C1C63E` parent calls it directly, and its
+`FA18NativeRecordUpdateOps` callback layer is removed. Direct and matrix
+publication, angle/index handling, all nine adjustment modes, blends,
+presets, countdown, normalization, smoothing, floor clamping and companion
+publication retain the complete readable owner's source widths and ordering.
+Only the five actual lower routine families remain explicit: preparation,
+matrix A/B, regeneration and normalization.
+
+Validation: focused contracts cover direct, gated, matrix, adjustment and
+regeneration paths. Strict GNU warnings, MSVC Release builds, eight affected
+CTest contracts and the native build guard pass. The existing sealed `$C29042`
+proof remains authority for the readable owner; the new ordinary-state adapter
+does not yet have its own original-instruction differential harness. See
+`analysis/routines/native_selector_origin.md`.
+
+Next complete the startup-reachable individual `$C22C80` record children,
+then bind original startup assets/state and install this graph in native main.
+
+Preceding batch: complete `$C1C860-$C1CA2C` context refresh and `$C1CA82`
 record flagging now run on shared native owners. The parent preserves the
 signed position guard, original request nibble validation, selected/origin
 selector widths, child-mutated request rereads, frame gate ordering, condition
@@ -25,8 +45,8 @@ state and failure ordering. Strict GNU/MSVC builds, the composed bootstrap
 contract, affected CTests, the historical parent harness and the native build
 guard pass. See `analysis/routines/native_context_refresh.md`.
 
-Next complete `$C29042` and the individual `$C22C80` record children, then
-bind original startup assets/state and install this graph in native main.
+Next was `$C29042` and the individual `$C22C80` record children; `$C29042` is
+completed by the latest batch above.
 
 Preceding batch: complete `$C22C80-$C230AE` sixteen-record scheduler now runs on
 the shared native record/workspace bank. It preserves all workspace word

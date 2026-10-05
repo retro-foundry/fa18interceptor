@@ -118,7 +118,7 @@ fields are covered. A placement-boundary mutation of the actual bound stream
 is consumed by the real gate child, proving that it does not cache its input.
 The legacy return-code initializer and bootstrap share the same algorithm.
 
-Remaining work includes `$C29042`, the individual `$C22C80` children, plus unported record
+Remaining work includes the individual `$C22C80` children, plus unported record
 consumers, the actual tenth-plane producer, scene initializer, original asset
 loading/checksum production, sample output and installed-stage scheduling.
 The native main does not invoke this graph; the playable reference still

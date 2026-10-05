@@ -9,7 +9,7 @@ typedef struct {
     FA18NativeSceneRecords records; FA18NativeScenePlayerSetup player;
     FA18NativeScenePlacementAssets placement_assets; FA18NativeScenePointerGroup pointer_groups[16];
     FA18NativeSceneRecorder recorder; FA18NativeScenePlacement placement;
-    FA18NativeRecordUpdateStage record_update; FA18NativeRecordUpdateOps update_ops;
+    FA18NativeRecordUpdateStage record_update; FA18NativeSelectorOrigin selector_origin;
     FA18NativeControlRecordUpdate control_update; FA18NativeControlRecordOps control_ops;
     FA18NativeContextRefresh refresh; FA18NativeContextRefreshOps refresh_ops;
     FA18NativeStartupRanges startup; FA18NativeViewedRecordWord viewed;
@@ -100,9 +100,9 @@ static void initialize(Fixture *f) {
         .post_input_event=&f->post_event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary_gate,.secondary_gate=&f->secondary_gate,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};
-    f->update_ops=(FA18NativeRecordUpdateOps){.context=f};
+    f->selector_origin=(FA18NativeSelectorOrigin){.records=&f->records,.origin=f->origin};
     f->record_update=(FA18NativeRecordUpdateStage){.records=&f->records,.view=&f->view,
-        .control_records=&f->control_update,.ops=&f->update_ops,
+        .control_records=&f->control_update,.origin_update=&f->selector_origin,
         .input_byte=&f->update_input,.input_byte_mirror=&f->update_mirror,.change_inhibit=&f->update_inhibit,
         .context_selection=&f->context_select,.origin_detail_mode=&f->detail,
         .selector_byte_coarse=&f->selector_coarse,.selector_byte_fine=&f->selector_fine,.record_rate=&f->record_rate,

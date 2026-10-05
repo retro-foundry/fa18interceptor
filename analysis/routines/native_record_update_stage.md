@@ -20,11 +20,11 @@ signed and is not used by this path. Record-rate inputs are read through the
 live record field view, preserving word negation and arithmetic-shift behavior
 without creating another packed persistent record.
 
-`$C22C80` record production is now a direct native owner; its individual
-record children remain explicit. `$C29042` active-origin production remains
-an explicit complete callback. This moves the native boundary below both
-parents; it does not establish those children. The focused contract covers both parent
-routes, child mutation order, signed/high-word edges, rate classes and selector
-publication. The historical bootstrap oracle still contracts all three old
-child boundaries and remains sequencing evidence rather than a differential
-proof of this new direct owner.
+`$C22C80` record production and `$C29042` active-origin production are now
+direct native owners. Their individual game-specific children remain explicit.
+The record-update parent no longer has an operation table. The focused
+contract covers both parent routes, child mutation order, signed/high-word
+edges, rate classes and selector publication. The historical bootstrap oracle
+still contracts the old child boundaries and remains sequencing evidence
+rather than a differential proof of these new direct owners. See
+`native_selector_origin.md` for the active-origin state and validation limits.

@@ -42,7 +42,8 @@ static int shared(const FA18NativeRecordUpdateStage *s) {
     return s && s->records && s->view && s->view->flight && s->view->flight->commands &&
         s->records->input==s->view->flight->commands &&
         s->view->flight->player==s->records->aircraft && s->control_records &&
-        s->control_records->records==s->records && s->ops &&
+        s->control_records->records==s->records && s->origin_update &&
+        s->origin_update->records==s->records && s->origin_update->origin==s->origin &&
         s->input_byte && s->input_byte_mirror && s->change_inhibit && s->context_selection &&
         s->origin_detail_mode && s->selector_byte_coarse && s->selector_byte_fine && s->record_rate &&
         s->position_bias && s->long_mirror && s->projection_depth && s->origin && s->scaled_word &&
@@ -75,7 +76,7 @@ int fa18_update_native_scene_records(FA18NativeRecordUpdateStage *s) {
         *s->selector_byte_fine=record->byte_0a;
         *s->selector_byte_coarse=reverse_cell(record->word_06,record->word_08);
     } else {
-        if(!s->ops->update_origin || !s->ops->update_origin(s->ops->context,s,s->origin)) return 0;
+        if(!fa18_update_native_selector_origin(s->origin_update)) return 0;
         record=s->records->records;
         if(!classify_rate(record,s->record_rate)) return 0;
         x=(uint32_t)s->origin[0]&UINT32_C(0x1fffffff);
