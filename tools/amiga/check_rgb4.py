@@ -23,7 +23,7 @@ def main():
         raise RuntimeError("frozen validation body differs from the baseline host service")
     sources = ["tools/amiga/rgb4_compat_oracle.c", "port/amiga/host_graphics.c",
                "port/amiga/host_compat.c", "port/amiga/guest_memory.c",
-               "port/amiga/rgb4.c", "port/disk.c", "port/hunk.c"]
+               "port/amiga/rgb4.c", "port/amiga/viewport_list.c", "port/disk.c", "port/hunk.c"]
     directory = ROOT / "build/recomp"
     directory.mkdir(parents=True, exist_ok=True)
     exe = directory / "rgb4_compat_oracle.exe"

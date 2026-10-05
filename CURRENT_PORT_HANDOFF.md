@@ -325,6 +325,39 @@ bounded native main still does not invoke these input/audio owners; the
 playable reference remains emulated. The full goal is active and unfinished.
 Commit each validated batch.
 
+Viewport construction progress: `port/amiga/viewport_list.c/.h` now implements
+the accepted host's complete record building, colour append and MOVE/WAIT
+merge operations with ordinary geometry/bitmap fields and bounded buffers.
+Both packed MakeVPort/MrgCop adapters use it, retaining their allocation/free
+order, linked-list checks, descriptor updates and partial failures. Native
+`AmigaNativeViewportLists` owns actual internal/merged buffers and descriptors
+that bind directly to the callback's existing RGB4 backend. Source dimensions,
+plane buffers, palette data and game scheduling remain caller-owned.
+
+The native palette integration contract now constructs both lists from the
+renderer setup's actual five offsets into its owned page, executes the real
+callback/palette/fade graph and presents the resulting view from those native
+buffers. It checks old/new list targeting, higher colours, stable reload and
+hardware-buffer failures. Its explicit fixture pixels are validation data;
+the full native scene producer and game loop are still incomplete.
+
+Validation passes 16,384 construction and 16,384 merge comparisons against
+the frozen host code from commit 5671d334, matching returns, every fixture
+bank byte and full allocator/host state, including 24,733 partial/error paths.
+RGB4's 16,384 comparisons and both 4,096-case callback runs at all 198 source
+boundaries still pass. GNU strict-warning contracts and CPU/bus/machine/guest
+symbol inspection pass. Native/reference ROM-free MSVC builds, all sixteen
+affected native CTests and the host-compatibility contract pass. The unchanged
+native guard passes 445 files. This is accepted host-semantic fidelity, not
+an exact Kickstart layout/timing proof. See
+`analysis/routines/native_viewport_list.md` and its checkpoint.
+
+Continue with the original game graphics setup and data owners, active page
+publication and native input/tick scheduling, then full gameplay/audio
+integration. The native main still does not call these new owners and the
+playable reference remains emulated. The full goal remains active; commit
+each validated batch.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

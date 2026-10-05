@@ -9,17 +9,18 @@
   "report": "RGB4 extraction: 16384 calls match frozen host return and all buffer bytes (7014 success, 9370 partial/error paths)",
   "source_sha256": {
     "tools/amiga/rgb4_compat_oracle.c": "90c78e7c42bdab747c9fb74a17afd92748127a119576f52926f19d73b2910844",
-    "port/amiga/host_graphics.c": "a6ccde46042829c9b96eb7e62cc9685d4eb09ebcaae181cd7d2541f3b65e28d6",
+    "port/amiga/host_graphics.c": "f771e8497b9eecca38b02915f60dd0bc5df37af82a802b26b63db6d01ed0d0d8",
     "port/amiga/host_compat.c": "f7245a38bda5184a8405ff71dde2218df1cf75042f7e7d398a92133c62c81c57",
     "port/amiga/guest_memory.c": "34cc006389193abe6a05c841501205ab2b839a316a54c01bb959a7faf2a467ca",
     "port/amiga/rgb4.c": "c69c27c8096421a82ccbb5a063774c3b7bf11dee54ab85e2069c2e4524cd739a",
+    "port/amiga/viewport_list.c": "bc108a9aec864e14cac5f9b7302dd98e28fa0ca85b55fa6f56e41bdb0ee82ad4",
     "port/disk.c": "8c3e3ab8e7f584aaecd5fadde1d616d6c0e9bf4f2d1f79b9042532c0bdb5d60e",
     "port/hunk.c": "351c73c0aa48eea4b912a169c7f33cda1066b169bdba0355503255861d4bbf9b",
     "port/amiga/rgb4.h": "61a6b47e06847496e81cbd74e7065b81853ae1fe04516d5d4ff6eecc935b56c1",
     "port/amiga/rgb4_contract_test.c": "b9d96b48c635aac55c01290840d5e74915d174fcd2d4a4e9d794aeabd6fc8286",
     "port/input_palette.c": "5a306e83d40fb2c16666c64bf95e628e7f254f1ddbb5b0eb1c4e2daf70884315",
     "port/input_palette.h": "621033b0ba30c3f8b0980211abcc80069da07ef6b5ead52077fc921aedf31540",
-    "port/input_palette_contract_test.c": "dbcb2e5d770fef70e030d6beacb693897961948301ec87fac50387a0e78c9fd0",
-    "tools/amiga/check_rgb4.py": "47163a5abaf9e10ceff8a4e962dc6da669785827eb230270b220f4de12d2341e"
+    "port/input_palette_contract_test.c": "96c56c4e753df31bd98c8574b7b87a912a6af62616f58f2654cf86d24d798be2",
+    "tools/amiga/check_rgb4.py": "281b96b369f3cadd37216cbce63a0bf75b2ed3523892d7434ec203ec67f2b78b"
   }
 }

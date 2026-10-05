@@ -46,10 +46,14 @@ The actual callback RGB4 backend now uses the independent ordinary-buffer
 `amiga/rgb4` component shared with the reference host service. Another 4,096
 callback comparisons and 16,384 frozen-service comparisons validate this
 composition, including actual display-list changes after publication.
+Viewport construction and merging now share the independent ordinary-buffer
+`amiga/viewport_list` core, with 32,768 frozen-service comparisons and a native
+list owner connected to callback RGB4 updates and renderer-buffer presentation.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
 `analysis/routines/native_rgb4.md`,
+`analysis/routines/native_viewport_list.md`,
 `analysis/routines/native_audio_update.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,

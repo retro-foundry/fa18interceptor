@@ -34,10 +34,10 @@
     "port/command_queue.h": "4cb234bbfa375c4596128845f65d369e6408702995c7a2e294fc827b79e45b3e",
     "port/input_palette.c": "5a306e83d40fb2c16666c64bf95e628e7f254f1ddbb5b0eb1c4e2daf70884315",
     "port/input_palette.h": "621033b0ba30c3f8b0980211abcc80069da07ef6b5ead52077fc921aedf31540",
-    "port/input_palette_contract_test.c": "dbcb2e5d770fef70e030d6beacb693897961948301ec87fac50387a0e78c9fd0",
+    "port/input_palette_contract_test.c": "96c56c4e753df31bd98c8574b7b87a912a6af62616f58f2654cf86d24d798be2",
     "port/amiga/rgb4.c": "c69c27c8096421a82ccbb5a063774c3b7bf11dee54ab85e2069c2e4524cd739a",
     "port/amiga/rgb4.h": "61a6b47e06847496e81cbd74e7065b81853ae1fe04516d5d4ff6eecc935b56c1",
-    "port/amiga/host_graphics.c": "a6ccde46042829c9b96eb7e62cc9685d4eb09ebcaae181cd7d2541f3b65e28d6",
+    "port/amiga/host_graphics.c": "f771e8497b9eecca38b02915f60dd0bc5df37af82a802b26b63db6d01ed0d0d8",
     "tools/recomp/check_native_input_callback.py": "6409c0a8096629335e960b832a845472e05673b1e0f539c71722a39a3ae88fa9",
     "tools/recomp/native_input_callback_oracle.c": "8f258dcd34dcfc4794f27d8146b52cf02e7f2057a59b1f7990e7568145d1d0eb"
   }
