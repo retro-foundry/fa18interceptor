@@ -13,7 +13,27 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: complete native `$C244E2` selected-range owner and its actual
+Latest batch: complete native `$C23CA6` record-view owner now replaces the
+root-view scheduler callback. The actual `$C091E0` placement and `$C2436A`
+in-sight children are direct ordinary-state operations. Original `$FF` versus
+indexed-viewer guards, table/linked/zone routes, overflow branches, local
+points, shared matrix/position state and status publication are preserved.
+The true normalization/fault children remain explicit. Full original-byte
+proof passes 8,192 calls at all 383/383 boundaries with all game RAM and
+independent typed owners matching; 912 normalization and 759 fault contracts
+remain distinguished from actual-child proof. MSVC Release game/affected
+contracts, strict GNU view/scheduler contracts, eleven affected CTests and
+the 497-file native build guard pass. See
+`analysis/routines/native_record_view.md` and its checkpoint.
+
+The eight remaining scheduler children are periodic, root control, pose,
+primary/secondary placement, secondary control, dispatch and finish. Continue
+root control and pose in a connected batch, retaining the root-control
+producer of the view's carried axis word. Then finish scheduling, bind original
+startup assets/state, and integrate native main. Normalization/fault and sound
+remain actual lower dependencies; no substitutes have been installed.
+
+Preceding batch (commit `eaeb4c78`): complete native `$C244E2` selected-range owner and its actual
 `$C1D974` magnitude child now replace the root-marker scheduler callback.
 The nine remaining scheduler children are periodic, root control, root view,
 pose, primary/secondary placement, secondary control, dispatch and finish.
@@ -36,10 +56,12 @@ The native bootstrap graph is direct through `$C08F26`, placement, template
 gates, `$C1C63E`, `$C22C80`, `$C29042`, and `$C1C860`. Explicit lower owners
 still remain:
 
-- `FA18NativeControlRecordOps`: periodic, root control, root view,
+- `FA18NativeControlRecordOps`: periodic, root control,
   pose, primary placement, secondary placement, secondary control, dispatch,
   and finish. The composed fresh-bootstrap contract reaches root control,
-  root view, root pose, and finish; range classification is now direct.
+  root pose, and finish; view and range classification are now direct.
+- `FA18NativeRecordViewOps`: normalization and source fault handling;
+  `FA18NativeRecordRangeOps`: sound program four. These are true lower children.
 - `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
   the now-direct action selectors. They are route-dependent.
 - `FA18NativeSelectorOriginOps`: preparation, matrix A/B, regeneration, and
@@ -53,8 +75,8 @@ guest memory, and the machine/chipset runtime. Do not describe the port as
 emulation-free until native main owns startup, frame scheduling, rendering,
 audio, and input without those layers.
 
-Recommended next batch: port the startup-reachable root control/view/marker/
-pose chain using the complete readable owners already under `port/game/`.
+Recommended next batch: port the startup-reachable root control/pose chain
+using the complete readable owners already under `port/game/`.
 Preserve their true lower child boundaries and shared record mutations. Then
 port finish scheduling and connect original assets/state before installing the
 graph in native main. The static-recomp audit currently reports 85 deferred

@@ -48,6 +48,12 @@ contracts. Its 16,384 comparisons cover all 291 source boundaries and every
 16-bit gate index; original Hunk-66 imports match actual source expansion.
 Native main integration and the complete playable native graph remain pending;
 see [the bootstrap proof](analysis/routines/native_scene_bootstrap.md).
+Native selected-range and record-view owners now run directly in its scheduler,
+with 16,384 further original-byte comparisons and complete coverage of their
+137/383 respective boundaries. Actual magnitude, point placement and in-sight
+children are direct; sound, normalization and fault children remain explicit.
+See [selected range](analysis/routines/native_record_range.md) and
+[record view](analysis/routines/native_record_view.md).
 Host services, sample playback, asset loading and full runtime integration remain open. See
 [reusable components](port/REUSABLE_COMPONENTS.md),
 [native audio updates](analysis/routines/native_audio_update.md),

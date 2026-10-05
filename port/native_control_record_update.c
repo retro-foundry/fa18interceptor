@@ -68,6 +68,10 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     if(!s || !s->records || !s->selection || s->selection->records!=s->records ||
        !s->range || s->range->records!=s->records || s->range->selected_record!=s->selection->selected_record ||
        s->range->current_stride!=s->current_stride ||
+       !s->view || !s->view_work || s->view->records!=s->records ||
+       s->view->selected_record!=s->selection->selected_record ||
+       s->view->current_stride!=s->current_stride || s->view->current_slot!=s->current_slot ||
+       s->view->post_input_event!=s->post_input_event ||
        !s->ops || !s->ops->consume || !s->post_input_event ||
        !s->counter_first || !s->counter_second || !s->primary_gate || !s->secondary_gate ||
        !s->periodic_word || !s->current_slot || !s->current_stride) return 0;
@@ -87,7 +91,7 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     if(!*s->post_input_event && !set_record_word(root,0x4c,(uint16_t)(countdown-1u))) return 0;
     root->aircraft->flags&=0xfffd;
     if(!child(s,FA18_RECORD_UPDATE_ROOT_CONTROL,0,0) ||
-       !child(s,FA18_RECORD_UPDATE_ROOT_VIEW,0,0) ||
+       !fa18_update_native_record_view(s->view,0,s->view_work) ||
        !fa18_classify_native_selected_range(s->range,0) ||
        !child(s,FA18_RECORD_UPDATE_POSE,0,0)) return 0;
     for(slot=1;slot<4;++slot)

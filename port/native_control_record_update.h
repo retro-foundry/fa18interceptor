@@ -4,9 +4,10 @@
 #include "native_scene_records.h"
 #include "native_record_selection.h"
 #include "native_record_range.h"
+#include "native_record_view.h"
 
 typedef enum {
-    FA18_RECORD_UPDATE_PERIODIC, FA18_RECORD_UPDATE_ROOT_CONTROL, FA18_RECORD_UPDATE_ROOT_VIEW,
+    FA18_RECORD_UPDATE_PERIODIC, FA18_RECORD_UPDATE_ROOT_CONTROL,
     FA18_RECORD_UPDATE_POSE,
     FA18_RECORD_UPDATE_PRIMARY_PLACE, FA18_RECORD_UPDATE_SECONDARY_PLACE,
     FA18_RECORD_UPDATE_SECONDARY_CONTROL,
@@ -27,6 +28,8 @@ struct FA18NativeControlRecordUpdate {
     FA18NativeSceneRecords *records;
     FA18NativeRecordSelection *selection;
     FA18NativeRecordRange *range;
+    FA18NativeRecordView *view;
+    FA18NativeRecordViewWork *view_work;
     const FA18NativeControlRecordOps *ops;
     uint8_t *post_input_event,*counter_first,*counter_second;
     uint8_t *primary_gate,*secondary_gate;
@@ -34,7 +37,7 @@ struct FA18NativeControlRecordUpdate {
     unsigned companion_slot; /* source A2 identity retained between groups */
 };
 
-/* Complete C22C80-C230AE scheduler with direct selection/readiness leaves.
+/* Complete C22C80-C230AE scheduler with direct selection/readiness, view and range owners.
  * Remaining game-specific children operate on the same live bank. */
 int fa18_update_native_control_records(FA18NativeControlRecordUpdate *state);
 

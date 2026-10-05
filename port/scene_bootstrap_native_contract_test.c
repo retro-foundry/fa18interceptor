@@ -13,6 +13,10 @@ typedef struct {
     FA18NativeRecordSelection record_selection;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
+    FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
+    FA18NativeRecordViewAssets view_assets;
+    uint8_t view_pending,view_flag,view_created,view_admitted;
+    int16_t normalized[3];
     FA18NativeControlRecordUpdate control_update; FA18NativeControlRecordOps control_ops;
     FA18NativeContextRefresh refresh; FA18NativeContextRefreshOps refresh_ops;
     FA18NativeStartupRanges startup; FA18NativeViewedRecordWord viewed;
@@ -45,7 +49,7 @@ static Fixture fixture;
 static int update(void *context,FA18NativeControlRecordUpdate *state,
                   FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context; uint8_t high,low; unsigned i;
-    assert(state==&f->control_update && decision && child<9 && slot<16 && companion<16);
+    assert(state==&f->control_update && decision && child<8 && slot<16 && companion<16);
     *decision=0;
     if(child!=FA18_RECORD_UPDATE_ROOT_CONTROL) return 1;
     assert(f->calls++==0 && f->context.origin_first==0x10c00000);
@@ -108,8 +112,15 @@ static void initialize(Fixture *f) {
         .action_third=&f->action_third,.pair_override=&f->pair_override};
     f->range=(FA18NativeRecordRange){.records=&f->records,.selected_record=&f->selected,
         .current_stride=&f->current_stride,.magnitude=&f->range_magnitude,.bar_redraw_f=&f->range_redraw};
+    f->record_view=(FA18NativeRecordView){.records=&f->records,.assets=&f->view_assets,
+        .selected_record=&f->selected,.current_stride=&f->current_stride,.current_slot=&f->current_slot,
+        .tick_word=&f->periodic,.error_word=&f->error_word,.post_input_event=&f->post_event,
+        .mode=&f->view_mode,.limit=&f->limit_byte,.pending=&f->view_pending,.view_flag=&f->view_flag,
+        .created=&f->view_created,.admitted=&f->view_admitted,.normalized=f->normalized};
+    f->view_work.viewer=f->records.records;
     f->control_update=(FA18NativeControlRecordUpdate){.records=&f->records,
         .selection=&f->record_selection,.range=&f->range,.ops=&f->control_ops,
+        .view=&f->record_view,.view_work=&f->view_work,
         .post_input_event=&f->post_event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary_gate,.secondary_gate=&f->secondary_gate,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};

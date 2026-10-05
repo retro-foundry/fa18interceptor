@@ -13,6 +13,10 @@ typedef struct {
     FA18NativeControlRecordOps control_ops;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
+    FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
+    FA18NativeRecordViewAssets view_assets;
+    uint8_t view_mode,view_limit,pending,view_flag,created,admitted;
+    uint16_t error_word; int16_t normalized[3];
     uint8_t source[16*512],work[16*32],selector_table[8];
     uint8_t input,mirror,inhibit,context_select,detail,coarse_byte,fine_byte,rate;
     int32_t bias,long_mirror,depth,origin[3];
@@ -31,7 +35,7 @@ typedef struct {
 static int control(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->control && child<9 && slot<16 && companion<16 && decision);
+    assert(state==&f->control && child<8 && slot<16 && companion<16 && decision);
     ++f->control_calls; *decision=0; return 1;
 }
 static int origin(void *context,FA18NativeSelectorOrigin *state,
@@ -60,7 +64,14 @@ static void initialize(Fixture *f) {
         .action_third=&f->action_third,.pair_override=&f->pair_override};
     f->range=(FA18NativeRecordRange){.records=&f->records,.selected_record=&f->selected,
         .current_stride=&f->current_stride,.magnitude=&f->range_magnitude,.bar_redraw_f=&f->range_redraw};
+    f->record_view=(FA18NativeRecordView){.records=&f->records,.assets=&f->view_assets,
+        .selected_record=&f->selected,.current_stride=&f->current_stride,.current_slot=&f->current_slot,
+        .tick_word=&f->periodic,.error_word=&f->error_word,.post_input_event=&f->event,
+        .mode=&f->view_mode,.limit=&f->view_limit,.pending=&f->pending,.view_flag=&f->view_flag,
+        .created=&f->created,.admitted=&f->admitted,.normalized=f->normalized};
+    f->view_work.viewer=f->records.records;
     f->control=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.range=&f->range,.ops=&f->control_ops,
+        .view=&f->record_view,.view_work=&f->view_work,
         .post_input_event=&f->event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};
