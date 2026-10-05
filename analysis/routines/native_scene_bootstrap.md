@@ -1,9 +1,9 @@
 # Native scene bootstrap parent and resolved viewed identity
 
 `port/scene_bootstrap_native.c/.h` implements the complete `$C08F26` parent
-around two required, explicitly pending children: `$C1C63E` record update and
-`$C1C860` context refresh. `$C09266` recorder reset/root placement is now a
-direct native child. It executes the actual native startup clear/enable, renderer clear,
+around one required, explicitly pending child: `$C1C860` context refresh.
+`$C09266` recorder reset/root placement and `$C1C63E` record-update parent are
+now direct native children. It executes the actual native startup clear/enable, renderer clear,
 all-record/workspace clear, player preparation with its real mission-reset
 child, start-position tuple, observer child and complete `$C1C40C` gate
 construction. No pending child has a
@@ -118,7 +118,8 @@ fields are covered. A placement-boundary mutation of the actual bound stream
 is consumed by the real gate child, proving that it does not cache its input.
 The legacy return-code initializer and bootstrap share the same algorithm.
 
-Remaining work includes the two complete native children, unported record
+Remaining work includes the `$C1C860` child and the lower `$C22C80/$C29042`
+producers, plus unported record
 consumers, the actual tenth-plane producer, scene initializer, original asset
 loading/checksum production, sample output and installed-stage scheduling.
 The native main does not invoke this graph; the playable reference still

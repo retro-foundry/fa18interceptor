@@ -1,6 +1,7 @@
 #ifndef FA18_NATIVE_SCENE_BOOTSTRAP_H
 #define FA18_NATIVE_SCENE_BOOTSTRAP_H
 #include "native_scene_placement.h"
+#include "native_record_update_stage.h"
 #include "viewed_record_word.h"
 #include "renderer_clear.h"
 #include "template_bitmask_buffers.h"
@@ -9,6 +10,7 @@ typedef struct FA18NativeSceneBootstrap {
     FA18ContextCommandState *context;
     FA18NativeScenePlayerSetup *player;
     FA18NativeScenePlacement *placement;
+    FA18NativeRecordUpdateStage *update;
     FA18NativeStartupRanges *startup;
     FA18NativeViewedRecordWord *viewed_word;
     FA18NativeRendererClear *renderer;
@@ -23,10 +25,9 @@ typedef struct FA18NativeSceneBootstrap {
 } FA18NativeSceneBootstrap;
 
 typedef struct {
-    /* Required actual complete children C1C63E and C1C860.
-     * Their native graphs remain pending. Completion status is separate from
+    /* Required actual complete child C1C860.
+     * Its native graph remains pending. Completion status is separate from
      * incidental original CPU returns. No missing child is substituted. */
-    int (*update_records)(void *context,FA18NativeSceneBootstrap *state);
     int (*refresh_context)(void *context,FA18NativeSceneBootstrap *state);
     void *context;
 } FA18NativeSceneBootstrapOps;
@@ -39,7 +40,7 @@ int fa18_bind_native_scene_bootstrap(FA18NativeSceneBootstrap *state,
                                        FA18CommandQueue *queue,
                                        PortFieldByte *startup_words,size_t count);
 /* Complete C08F26 parent and real available children. C09266 placement is a
- * direct typed owner; only the two still-pending update children remain callbacks.
+ * direct typed owner; only the still-pending context refresh remains a callback.
  * Return 1 on completion, 0 on missing owner/child failure, preserving stores. */
 int fa18_bootstrap_native_scene(FA18NativeSceneBootstrap *state,
                                  const FA18NativeSceneBootstrapOps *ops);

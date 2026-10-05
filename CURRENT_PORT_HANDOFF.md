@@ -11,7 +11,27 @@ reuse existing owners and run validation for changed behavior/affected callers.
 The separate `amiga-recomp` project was inspected (13 existing tests pass),
 but the user did not request switching this port to its CPU/chipset runtime.
 
-Latest batch: complete `$C09266-$C095BE` recorder reset and root placement now
+Latest batch: complete `$C1C63E-$C1C7F4` record-update parent and its
+`$C1C7F6` rate classifier now run on the live native record/view owners. The
+implementation preserves the unsigned key produced by `CLR.W/SWAP/ASR.L`,
+signed threshold crossing, selected-record identity, active-origin packing,
+request guards and source store order. `$C08F26` calls this owner directly;
+only `$C1C860` remains at the bootstrap level. The larger `$C22C80` record
+producer and `$C29042` active-origin producer are explicit lower native
+boundaries, so they can be replaced independently without restoring a CPU
+state boundary around their parent.
+
+Validation: selected-record and active-origin contracts cover classification,
+wrapped fixed-point keys, source guards and live owner publication. Strict GNU
+and MSVC builds, the composed bootstrap contract and the historical two-case
+parent oracle pass. A full original-instruction differential proof still needs
+the lower children. See `analysis/routines/native_record_update_stage.md`.
+
+Next complete `$C22C80` on the startup-reachable record state, then `$C29042`
+and `$C1C860`. Connect the resolved graph to native main after those owners are
+available.
+
+Preceding batch: complete `$C09266-$C095BE` recorder reset and root placement now
 run directly against the shared native record bank. Both the positive grid
 route and negative selected-record route preserve 68000 word/long wrapping,
 the rejected-record retry pointer, descriptor-height handling, packed
@@ -30,7 +50,8 @@ bootstrap checkpoint remains parent-order evidence from when placement was a
 contract; a full original-instruction differential proof of this new child is
 still required. See `analysis/routines/native_scene_placement.md`.
 
-Next complete `$C1C63E/$C1C860`, then connect the resolved startup graph to
+Next was `$C1C63E/$C1C860`; `$C1C63E` is completed by the latest batch above,
+then connect the resolved startup graph to
 the native main. Native main still does not invoke this graph. The ROM-free
 runner requires no Kickstart ROM image, but still uses CPU/machine emulation.
 A complete playable native game remains the active objective.

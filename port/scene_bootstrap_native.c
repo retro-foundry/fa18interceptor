@@ -6,6 +6,7 @@ static int shared_bootstrap(const FA18NativeSceneBootstrap *s) {
        !f->commands || !s->player || s->player->flight!=f || !s->player->records ||
        s->player->records->input!=f->commands || !s->player->effects ||
        s->player->effects->context!=s->context || !s->placement || s->placement->player!=s->player ||
+       !s->update || s->update->records!=s->player->records || s->update->view!=s->context->view ||
        !s->startup || !s->viewed_word || !s->renderer || !s->gates) return 0;
     return f->player==s->player->records->aircraft &&
         s->context->records==s->player->records->geometry && s->context->record_count==16;
@@ -121,8 +122,8 @@ int fa18_bootstrap_native_scene(FA18NativeSceneBootstrap *s,
        !port_fill_field_bytes(s->startup->queue->slots+0xa9,28,0x20)) return 0;
     if(!fa18_place_native_scene_root(s->placement)) return 0;
     if(!fa18_run_template_bitmask_state(s->gates)) return 0;
-    if(!ops || !ops->update_records || !ops->update_records(ops->context,s)) return 0;
-    if(!ops->refresh_context || !ops->refresh_context(ops->context,s)) return 0;
+    if(!fa18_update_native_scene_records(s->update)) return 0;
+    if(!ops || !ops->refresh_context || !ops->refresh_context(ops->context,s)) return 0;
     return 1;
 }
 int fa18_native_scene_bootstrap_callback(void *context) {
