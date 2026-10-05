@@ -41,7 +41,9 @@ All six input CTests pass. The GNU contract has no CPU/bus/machine symbols;
 the native MSVC game builds and its unchanged guard passes 423 files.
 
 The component is linked into the native library but is not called by the
-incomplete native game loop. Complete parent dispatch/reset/fault owners,
-actual remaining audio/space/spawn/eject children, original data loading and
-full runtime integration remain unfinished. This proof does not complete the
+incomplete native game loop. Both native parent dispatch/reset/fault owners
+and the full eject publication child now compose it; see
+`native_command_parent.md`. Remaining audio/space/spawn/input callback and host
+registration backends, original data loading and full runtime integration
+remain unfinished. This proof does not complete the
 emulation-free game objective.

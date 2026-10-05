@@ -22,6 +22,12 @@ typedef struct {
  * Return 0 only for invalid pointers; no state changes occur on that error. */
 int fa18_select_keyboard_command(FA18CommandInput *state, uint32_t event,
                                  CommandRequest *request);
+/* Parent composition also needs the inherited action word. The block check
+ * replaces its low byte with the masked flags; indexed keys replace the word.
+ * Other routes retain it. This is semantic action input, not CPU state. */
+int fa18_select_keyboard_command_with_carry(FA18CommandInput *state, uint32_t event,
+                                             int16_t *carried_word,
+                                             CommandRequest *request);
 int fa18_select_pending_command(FA18CommandInput *state,
                                 CommandRequest *request);
 

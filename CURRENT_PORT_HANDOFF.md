@@ -155,6 +155,33 @@ children, original data loading and the full game loop remain open. Publication
 is linked into the native library but not yet called by the bounded runtime.
 Continue the active emulation-free goal and commit each validated batch.
 
+Parent progress: `port/command_dispatch.c/.h` now composes both complete native
+keyboard/pending parents with all four action families and queue publication.
+The selector preserves the inherited action word's block-mask/index writes.
+Empty/wait/modifier exits do not publish; invalid words store error $33 and
+the actual release-build fault RTS has no state effects. Reset calls the real
+native callback-removal/registration game bodies, with original type/priority,
+imported name and actual callback; host registration remains required.
+`command_dispatch_controls.c` adds the full eject toggle with its nested
+publication, alongside the real axis/throttle/space-release children.
+
+Validation passes 16,384 complete native parents against original instructions,
+matching all RAM without exclusions, published events, selection carries and
+ordered child inputs/state. Fixtures cover 985/1,104 parent boundaries and all
+125/125 actual-child boundaries. Remaining audio/space/spawn/host-registration
+children use explicit test contracts; they are not completed backends. Both
+selectors also pass their 32,768-call regression and all 317 prefix boundaries.
+GNU strict-warning/MSVC contracts and all seven input CTests pass. GNU symbol
+inspection finds no CPU/bus/machine references; native MSVC game builds and
+the unchanged guard passes 428 files. See `analysis/routines/native_command_parent.md`
+and `analysis/figures/native_command_parent_checkpoint.json`.
+
+Continue with actual remaining sound/status/voice/space/spawn children, the
+input callback and host registration services, original asset loading and full
+native runtime integration. Parent dispatch now has ordinary-state owners,
+but the bounded runtime does not call them yet. The reference game remains
+emulated and the complete emulation-free objective remains active.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

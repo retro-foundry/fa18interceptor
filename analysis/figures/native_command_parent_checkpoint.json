@@ -1,0 +1,40 @@
+{
+  "status": "validated_native_parents_remaining_child_backends_and_runtime_integration_pending",
+  "cases": 16384,
+  "source_boundaries": 1104,
+  "covered_boundaries": 985,
+  "child_source_boundaries": 125,
+  "covered_child_boundaries": 125,
+  "native_cpu_dependency": false,
+  "comparison": "all Chip/Slow RAM without exclusions, published events, selector carries, ordered child inputs and full RAM at each child boundary",
+  "child_scope": "actual direction/throttle/space-release/eject publication, zoom/redraw, geometry/observer, registration/removal and fault RTS instructions; explicit audio/space-press/spawn/host-registration contracts",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "0b65acd5910ef6c8b9347c6596c5aef2d16e43cf44ebb81524512cc2a635981b",
+  "reports": [
+    "native command dispatch C1AC28: 8192 complete parents matched full RAM, published events, selection carries and 2266 ordered child boundaries",
+    "native command dispatch C1AD74: 8192 complete parents matched full RAM, published events, selection carries and 527 ordered child boundaries"
+  ],
+  "source_sha256": {
+    "port/command_dispatch.c": "6317d6b03744a316e7e16619b556330a839935dc13dde5e62847fa47c1654b1a",
+    "port/command_dispatch.h": "1e30c5ce5e216313f7fde76bf6abcffe171a653eed06b637d60a03f29191e09b",
+    "port/command_dispatch_controls.c": "3643f48a4fdd4e20662ae3fe291be80e8d880b2354576453eff755569e3ffd15",
+    "port/input_callback_registration.c": "07c106945b98e68e757a9260a037c5ac597da1881ba50acef7cdb737fa32e738",
+    "port/input_callback_registration.h": "1a8b2ec0bfbe8af3d9b693f3c4256ba29020564ecc0d86fb3e485cde779c5275",
+    "port/command_dispatch_contract_test.c": "20e823227c7e3f70a206fef881b70c49d6e15ca56493ba1ee915156115214bb1",
+    "port/command_input.c": "6d3e8176f5882d036037ac5a2534bcb3cdfbca8ab4bf8738fab2abba4eb79b8e",
+    "port/command_input.h": "37ad0f86cf22af73b5c07fb79107683c43268790031a107d218f1c535ed22d65",
+    "port/command_queue.c": "90606938ed56b451644d39cff0eeda87bb14e70605958451a1d308ddbf1248c6",
+    "port/command_queue.h": "1bd38f0917fd97f7a8df47cd6f1e64c7510e595c243f4bd9e08cf1386a4d7073",
+    "port/indexed_controls.c": "2af203c471c85e80baa2b16a08169f27af140e09ec10691cd84cae56962b3620",
+    "port/flight_command_input.c": "e7b48d9d825ee08285474f58c71cd3da975888bca2b3fd5972232560997bb688",
+    "port/view_command_input.c": "44a9d8dbf79ad3ddb0bbba56dc8184aa8fb18b3221c12a0d04a0f507490665f3",
+    "port/view_command_controls.c": "8f31148ec0391b1efc8dd266ab22f83ddcf1b8e946d0e28bfc9257a07421ba71",
+    "port/context_command_input.c": "62f436c852924c1fa37ace2aa407d0f0b06d6d6c220fd4799ace5a414b31160e",
+    "port/context_command_controls.c": "94fd3576a278b1983883432eeb5f910aacedc8718025f78c429c1d98220ab5be",
+    "tools/recomp/native_command_dispatch_oracle.c": "efe35f92e7d217a202e1e13371c5c8568fbe91bba951b89c7f62250ee7f063b2",
+    "tools/recomp/native_command_dispatch_fields.h": "a179bf8f0c3b1cecf8e631c32a5212abccac2d67c1bf588231c81389397222f2",
+    "tools/recomp/check_native_command_dispatch.py": "9cba8bcff3b22e1ff445be428fba5cbbf36fba07dd9f4c8ae8635cdd5c2fd056",
+    "tools/recomp/command_dispatch_oracle.c": "f80df620f2a8c0ba6c42c40a5a5ba316ab82882e0dec6d8bef03de5a3c3bf23d",
+    "analysis\\data\\command_dispatch_source_scope.json": "b1d2c56f1d4a1ebedd6be089c3d1b55681604fb3cfa195032524368a8037fe74"
+  }
+}

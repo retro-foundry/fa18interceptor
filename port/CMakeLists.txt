@@ -28,6 +28,7 @@ target_sources(fa18_port PRIVATE polygon_clip_pipeline.c)
 
 add_library(fa18_command_input STATIC command_input.c indexed_controls.c flight_command_input.c view_command_input.c view_command_controls.c context_command_input.c context_command_controls.c)
 target_sources(fa18_command_input PRIVATE command_queue.c)
+target_sources(fa18_command_input PRIVATE command_dispatch.c command_dispatch_controls.c input_callback_registration.c)
 target_link_libraries(fa18_port PRIVATE fa18_command_input)
 
 add_executable(fa18_indexed_controls_contract_test indexed_controls_contract_test.c)
@@ -53,6 +54,10 @@ add_test(NAME fa18_context_command_input_contract COMMAND fa18_context_command_i
 add_executable(fa18_command_queue_contract_test command_queue_contract_test.c)
 target_link_libraries(fa18_command_queue_contract_test PRIVATE fa18_command_input)
 add_test(NAME fa18_command_queue_contract COMMAND fa18_command_queue_contract_test)
+
+add_executable(fa18_command_dispatch_contract_test command_dispatch_contract_test.c)
+target_link_libraries(fa18_command_dispatch_contract_test PRIVATE fa18_command_input)
+add_test(NAME fa18_command_dispatch_contract COMMAND fa18_command_dispatch_contract_test)
 target_sources(fa18_port PRIVATE polygon_display_pipeline.c projection.c offset_pair_segment_submission.c projected_segment_clip.c projected_segment_preparation.c)
 target_sources(fa18_port PRIVATE line_record_dispatch.c)
 target_sources(fa18_port PRIVATE map_packet_polygon_display.c)

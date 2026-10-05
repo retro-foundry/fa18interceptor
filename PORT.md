@@ -32,8 +32,10 @@ adds 16 actions and both actual zoom/redraw children, with 32,768 complete
 comparisons. All five context actions and their actual geometry/observer
 children add 20,480 comparisons. Native queue publication adds 73,728
 comparisons covering all signed-index destinations and shared-field aliases.
-Other children, complete parent dispatch, original data loading and runtime
-integration remain open; see `analysis/routines/native_command_queue.md`,
+Both complete native command parents add 16,384 comparisons, including eject's
+nested publication and actual callback registration/removal bodies. Other
+child backends, original data loading and runtime integration remain open; see
+`analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,
 `analysis/routines/native_flight_command_input.md` and
 `analysis/routines/native_command_input.md`.

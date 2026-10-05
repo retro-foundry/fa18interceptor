@@ -78,8 +78,10 @@ All four action components are implemented and validated; see
 `native_flight_command_input.md`, `native_view_command_input.md`,
 `native_context_command_input.md` and `native_indexed_controls.md` for child
 scopes and remaining dependencies. Port/combine the remaining actual native
-child owners. Port queue publication with the original signed-index
-alias/write ordering. Import the real mode/pose records and audio data from
+child owners. Native queue publication and both complete native parents now
+compose these components; see `native_command_queue.md` and
+`native_command_parent.md` for proofs and remaining child backends.
+Import the real mode/pose records and audio data from
 the original assets, compose status tones and other children, then replace
 the bounded key-1 path in the native game loop. The complete native loop also
 needs startup, update/scene/render scheduling, flight outcomes, persistence,

@@ -45,7 +45,7 @@ static const KeyRoute release_keys[]={
     {0xc0,COMMAND_SPACE_RELEASE}
 };
 
-static CommandRequest keyboard_request(FA18CommandInput *s,uint32_t raw) {
+static CommandRequest keyboard_request(FA18CommandInput *s,uint32_t raw,int16_t *carry) {
     CommandRequest request={COMMAND_QUEUE_ONLY,raw,0,0,0,0};
     uint8_t value,recorder;
     unsigned i;
@@ -78,6 +78,10 @@ static CommandRequest keyboard_request(FA18CommandInput *s,uint32_t raw) {
     if(request.detail_state) goto alternate_context;
     if(!compare(s->indexed.mode,2)) goto alternate_context;
     value=s->block_flags&0x0f;
+    if(carry) {
+        uint16_t bits=(uint16_t)(((uint16_t)*carry&0xff00u)|value);
+        *carry=(int16_t)(bits<0x8000u?(int32_t)bits:(int32_t)bits-0x10000);
+    }
 
     if(value) goto alternate_context;
     if(!compare(recorder,1)) goto alternate_context;
@@ -117,6 +121,7 @@ function_keys:
     for(i=0;i<sizeof indexed_keys;++i)
         if(!compare(value,indexed_keys[i])) {
             request.index=(int16_t)i; request.action=COMMAND_INDEXED;
+            if(carry) *carry=(int16_t)i;
              return request;
         }
 fallback_keys:
@@ -227,7 +232,12 @@ static CommandRequest pending_request(FA18CommandInput *s) {
 }
 int fa18_select_keyboard_command(FA18CommandInput *s,uint32_t event,CommandRequest *request) {
     if(!s || !request) return 0;
-    *request=keyboard_request(s,event); return 1;
+    *request=keyboard_request(s,event,NULL); return 1;
+}
+int fa18_select_keyboard_command_with_carry(FA18CommandInput *s,uint32_t event,
+                                             int16_t *carry,CommandRequest *request) {
+    if(!s || !carry || !request) return 0;
+    *request=keyboard_request(s,event,carry); return 1;
 }
 int fa18_select_pending_command(FA18CommandInput *s,CommandRequest *request) {
     if(!s || !request) return 0;

@@ -36,8 +36,10 @@ zoom actions and both actual children now pass 32,768 further comparisons.
 All five context actions and their actual geometry/observer children now pass
 20,480 further comparisons. Native queue publication now passes 73,728
 comparisons, including every signed-index destination and shared-field alias.
-Other children, complete parent dispatch, data loading and full runtime
-integration remain open. See
+Both complete native command parents now pass 16,384 comparisons, including
+eject's nested publication and actual callback registration/removal bodies.
+Other child backends, data loading and full runtime integration remain open. See
+[native command parents](analysis/routines/native_command_parent.md),
 [native queue publication](analysis/routines/native_command_queue.md),
 [native context actions](analysis/routines/native_context_command_input.md),
 [native view actions](analysis/routines/native_view_command_input.md),
