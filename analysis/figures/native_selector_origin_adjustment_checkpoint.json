@@ -1,0 +1,38 @@
+{
+  "status": "complete_native_selector_origin_adjustment_no_child_contracts",
+  "complete_entries": [
+    "C2574A",
+    "C25754",
+    "C1D974",
+    "C29548"
+  ],
+  "actual_children": [
+    "C2574A",
+    "C1D974"
+  ],
+  "child_contracts": [],
+  "cases": 32768,
+  "source_boundaries": 143,
+  "covered_boundaries": 143,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; core entries compare carried axis/full magnitude/completion; C29548 compares shared magnitude/normalized words and all smoothed/origin/negated outputs, not CPU temporaries",
+  "native_cpu_dependency": false,
+  "limitations": "original magnitude table/adjacent data must be bound; proven non-completing zero-factor source loops fail explicitly; full native startup/frame graph pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "a952feea4756d56b3deafa098eec4e62f2a408773b12e4247a925f3b26c64576",
+  "reports": [
+    "native selector-origin adjustment: 32768 calls match all game RAM, shared math words and adjusted origins; core entries also match full magnitude/carried axis; 31559 complete/1209 proven source loops; no child contracts"
+  ],
+  "source_sha256": {
+    "port/native_vector_math.c": "98119a8ed53b7a5866cf9a2c05c8ee1832ea418acd582eed3bdcd5ca9c09c322",
+    "port/native_vector_math.h": "e3338bac0a8d9abb41feb5d2b2de08ac027f905372cef139ac1eeadba9492052",
+    "port/scene_component_magnitude.c": "6d7a276d759859d00e790f4cf2b5216ac8d487251f85b5e4cd327ebcf5c7c5c2",
+    "port/scene_component_magnitude.h": "c54699f1fdbf6bf825ffe518905531cdf72a13eccb9211e08e3db77a3dbc6e00",
+    "port/terrain_selector_origin_adjustment.c": "15fa838cc0d72be87ed1d9529847704b32d637dfbff021880ba3a28c9e6c3e31",
+    "port/terrain_selector_origin_adjustment.h": "46af97295577d29ee7ce1026e54359b8076dd52e66375f004474872ac25edfdc",
+    "port/native_selector_origin.c": "366d8b28ba11fb31a2a05b40ebe091400136f6be691455e7af77f88fb2998221",
+    "port/native_selector_origin.h": "0b3bc3080dae272cb87de7e931f921f71e410d7953cfd56c51b41319ed5f5f7e",
+    "tools/recomp/native_vector_math_fixture.h": "1042ba04237a5c50a8a74c738f08accfec231998404e923186d78dc0af42a18c",
+    "tools/recomp/native_selector_origin_adjustment_oracle.c": "ebb790fe039de305b1abc966ba41d6c64cd34581d797c1992e36843a32a8ebf9",
+    "tools/recomp/check_native_selector_origin_adjustment.py": "4e4d061d243456b9ccf44773bdca0e8de220b854f1d3ad4b04fdbf1e13cd10eb"
+  }
+}

@@ -28,7 +28,9 @@ static int32_t asl_long(int32_t value, unsigned count) {
 int fa18_adjust_terrain_selector_origin(FA18TerrainSelectorOriginAdjustmentState *state) {
     int32_t candidate[3];
 
-    if (!state || !state->normalize)
+    uint32_t carried_axis;
+    if (!state || !state->vector_math || !state->candidate || !state->smoothed_delta ||
+        !state->origin || !state->negated_companion)
         return -1;
     for (unsigned axis = 0; axis != 3; ++axis)
         candidate[axis] = state->candidate[axis];
@@ -37,10 +39,11 @@ int fa18_adjust_terrain_selector_origin(FA18TerrainSelectorOriginAdjustmentState
             candidate[axis] = asr_long(candidate[axis], 2);
         state->magnitude = asr_long(state->magnitude, 2);
     }
-    if (state->normalize(state->normalize_context, 0x200, candidate) != 0)
+    carried_axis=state->shift;
+    if (!fa18_normalize_native_vector(state->vector_math,0x200,candidate,&carried_axis))
         return -1;
     for (unsigned axis = 0; axis != 3; ++axis)
-        candidate[axis] = asl_long(sign_extend_word(candidate[axis]), state->shift);
+        candidate[axis] = asl_long(sign_extend_word(state->vector_math->normalized[axis]), state->shift);
     if (state->smoothed_delta[0] || state->smoothed_delta[1] || state->smoothed_delta[2])
         for (unsigned axis = 0; axis != 3; ++axis)
             candidate[axis] = add_long(

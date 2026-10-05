@@ -6,14 +6,11 @@ typedef struct {
     FA18CommandInput input; FA18NativeSceneRecords records; FA18NativeRecordView view;
     FA18NativeRecordViewWork work; FA18NativeRecordViewAssets assets; FA18NativeRecordViewOps ops;
     uint8_t source[8192],workspace[512],parameters[32],status[256],list[32];
-    uint16_t selected,stride,slot,tick,error;
+    uint16_t selected,stride,slot,tick,error,magnitude;
+    FA18NativeVectorMath math; PortFieldWindow magnitude_table; uint8_t magnitude_bytes[2];
     uint8_t event,mode,limit,pending,flag,created,admitted;
-    int16_t normalized[3]; unsigned norms,faults; int fail;
+    int16_t normalized[3]; unsigned faults; int fail;
 } Fixture;
-static int normalize(void *context,FA18NativeRecordView *state,int16_t scale,const int32_t vector[3],int16_t out[3],uint32_t *axis) {
-    Fixture *f=context; assert(state==&f->view && scale==192 && vector);
-    assert(axis); ++f->norms; out[0]=-192; out[1]=out[2]=0; return !f->fail;
-}
 static int fault(void *context,FA18NativeRecordView *state,uint32_t *axis) {
     Fixture *f=context; assert(state==&f->view && (f->error==0x34 || f->error==0x35));
     assert(axis); ++f->faults; return !f->fail;
@@ -25,8 +22,11 @@ static void initialize(Fixture *f) {
         .parameters={.bytes=f->parameters,.byte_count=sizeof f->parameters},
         .status={.bytes=f->status,.byte_count=sizeof f->status},
         .primary_list={.bytes=f->list,.byte_count=sizeof f->list}};
-    f->ops=(FA18NativeRecordViewOps){normalize,fault,f};
-    f->view=(FA18NativeRecordView){.records=&f->records,.assets=&f->assets,.ops=&f->ops,
+    f->magnitude_bytes[0]=0x40;
+    f->magnitude_table=(PortFieldWindow){.bytes=f->magnitude_bytes,.byte_count=2};
+    f->math=(FA18NativeVectorMath){&f->magnitude_table,&f->magnitude,f->normalized};
+    f->ops=(FA18NativeRecordViewOps){fault,f};
+    f->view=(FA18NativeRecordView){.records=&f->records,.assets=&f->assets,.ops=&f->ops,.vector_math=&f->math,
         .selected_record=&f->selected,.current_stride=&f->stride,.current_slot=&f->slot,
         .tick_word=&f->tick,.error_word=&f->error,.post_input_event=&f->event,.mode=&f->mode,
         .limit=&f->limit,.pending=&f->pending,.view_flag=&f->flag,.created=&f->created,
@@ -77,9 +77,10 @@ int main(void) {
     initialize(&f); r=f.records.records+1; byte(&f,1,5,8); byte(&f,1,0x39,0x10);
     f.records.aircraft[1].secondary_flags=0x100; f.records.aircraft[1].flags=8;
     f.records.geometry[0].inverse[0][2]=f.records.geometry[1].inverse[0][2]=0x4000;
+    r->geometry->position[0]=0x10000;
     f.mode=5; f.pending=1; f.status[0]=0x12; f.status[1]=0x34; f.status[3]=2;
     assert(fa18_update_native_record_view(&f.view,1,&f.work));
-    assert(f.norms==1 && f.normalized[0]==-192 && (r->byte_04&0x20));
+    assert(f.magnitude==0x100 && f.normalized[0]==-192 && (r->byte_04&0x20));
     assert(word(&f,1,0x4c)==0x1234 && f.created==1 && f.admitted==1 && !f.pending);
     assert(!(r->aircraft->flags&8));
     return 0;

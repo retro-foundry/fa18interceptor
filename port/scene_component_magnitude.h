@@ -25,6 +25,9 @@ typedef struct {
 
 int fa18_load_scene_magnitude_table(const FA18Hunks *hunks,
                                     FA18LoadedSceneMagnitudeTable *table);
+/* Original Hunk-8 bytes, centred at the ratio table. Negative/overflowed
+ * indices remain inside the actual hunk or require explicit adjacent owners. */
+int fa18_load_scene_magnitude_window(const FA18Hunks *hunks,PortFieldWindow *window);
 
 /* `$C1D974-$C1D9D6`: table-assisted bound of three component words.  A
  * return of -1 represents a source DIVU exception or an unrepresentable
@@ -44,5 +47,9 @@ int fa18_scene_component_magnitude_window(const PortFieldWindow *table,
  * consumed by callers that retain it across subsequent operations. */
 int fa18_scene_component_magnitude_window_with_axis(const PortFieldWindow *table,
     int16_t x,int16_t y,int16_t z,int16_t *result,uint32_t *axis);
+/* Full numeric result used by C2574A: a clamp replaces the low word while
+ * retaining the original high bits. No instruction/CPU state is exposed. */
+int fa18_scene_component_magnitude_window_value(const PortFieldWindow *table,
+    int16_t x,int16_t y,int16_t z,uint32_t *result,uint32_t *axis);
 
 #endif

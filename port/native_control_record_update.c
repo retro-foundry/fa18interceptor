@@ -67,6 +67,9 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
        !s->range || s->range->records!=s->records || s->range->selected_record!=s->selection->selected_record ||
        s->range->current_stride!=s->current_stride ||
        !s->view || !s->view_work || s->view->records!=s->records ||
+       !s->view->vector_math || s->view->vector_math->table!=s->range->table ||
+       s->view->vector_math->magnitude!=s->range->magnitude ||
+       s->view->vector_math->normalized!=s->view->normalized ||
        s->view->selected_record!=s->selection->selected_record ||
        s->view->current_stride!=s->current_stride || s->view->current_slot!=s->current_slot ||
        s->view->post_input_event!=s->post_input_event ||

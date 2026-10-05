@@ -23,8 +23,8 @@ and masked/negated companion publication. Arithmetic helpers retain 68000
 word/long wrapping and arithmetic right shifts. Invalid mode or unavailable
 state fails explicitly after any source-ordered writes already completed.
 
-Five real lower routine families remain explicit: current-matrix preparation,
-matrix transforms A/B, candidate regeneration and vector normalization. Their
+Four real lower routine families remain explicit: current-matrix preparation,
+matrix transforms A/B and candidate regeneration. Their
 ordinary triples are separate from completion status. They can mutate the same
 live state before the parent resumes. The native component contains no CPU
 registers, guest addresses, bus, interpreter, or machine dependency.
@@ -34,5 +34,9 @@ registers, guest addresses, bus, interpreter, or machine dependency.
 contracts cover gate exit, direct publication, matrix selection and floor
 clamping, normalization/smoothing and regeneration. The existing sealed proof
 establishes the behavior of the readable authority; a direct differential
-harness for this ordinary-state adapter remains useful before final parity
-signoff.
+harness for the full ordinary-state adapter remains useful before final parity
+signoff. Its `$C29548` adjustment tail now shares the actual native vector-math
+owner with record view, removing the normalization child callback entirely.
+The tail's direct sealed-byte proof passes 32,768 calls across four entries at
+all 143 boundaries with no child contracts; all shared math/origin outputs and
+game RAM match. See `native_vector_math.md` for the arithmetic and exact scope.

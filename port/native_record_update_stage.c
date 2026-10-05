@@ -43,6 +43,8 @@ static int shared(const FA18NativeRecordUpdateStage *s) {
         s->records->input==s->view->flight->commands &&
         s->view->flight->player==s->records->aircraft && s->control_records &&
         s->control_records->records==s->records && s->origin_update &&
+        s->control_records->view && s->control_records->view->vector_math &&
+        s->origin_update->vector_math==s->control_records->view->vector_math &&
         s->origin_update->records==s->records && s->origin_update->origin==s->origin &&
         s->input_byte && s->input_byte_mirror && s->change_inhibit && s->context_selection &&
         s->origin_detail_mode && s->selector_byte_coarse && s->selector_byte_fine && s->record_rate &&

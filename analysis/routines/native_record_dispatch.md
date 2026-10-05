@@ -26,24 +26,26 @@ Completion and the source pose decision remain separate. View work returns the
 numeric axis and companion-record identity. Heading and linked-selection paths
 can change the companion; the scheduler preserves that returned identity for
 subsequent groups. Projection, zone-table and linked-record paths also retain
-their actual returned axis. Normalization and fault contracts now expose their
-axis output instead of assuming it is preserved.
+their actual returned axis. Normalization now runs the actual native vector-math
+owner; fault contracts expose the axis returned by that lower boundary.
 
-`python tools/recomp/check_native_record_dispatch.py` compares eleven complete
-entries, including shared view/link and publication entries, in 90,112 calls.
-All 1,035 reachable instruction boundaries are covered. Each call compares all
+`python tools/recomp/check_native_record_dispatch.py` compares thirteen complete
+entries, including shared view/link, publication and both normalization entries,
+in 106,496 calls. All 1,094 reachable instruction boundaries are covered. Each call compares all
 Chip/Slow RAM except the CPU ABI stack `$C7FD00..$C7FF00`, the carried axis,
 returned companion identity and applicable decisions/events. Typed record
 owners are compared independently against original output after the RAM check.
 The mode-zero branch is pruned only after checking the sealed instructions that
 clear and publish zero; no queue or child can change it before its comparison.
-Actual view, magnitude, detail, zoom, redraw and queue bodies run throughout.
-Normalization `$C2574A` and fault `$C06C02` are the only lower contracts.
+Actual view, normalization, magnitude, detail, zoom, redraw and queue bodies run
+throughout. There are 9,728 actual normalization calls and 774 fault contracts.
+Fault `$C06C02` is the only lower contract. Core normalization entries also
+prove source factor loops that cannot complete; see `native_vector_math.md`.
 
 The composed scheduler contract exercises actual expiry and pose suppression,
 source redraw, previous-work retention and invalid shared bindings. The existing
 view and selected-range proofs are rerun for the shared changes. Strict GNU
-compilation, affected MSVC Release builds/CTests and the unchanged 511-file
+compilation, affected MSVC Release builds/CTests and the unchanged 513-file
 native guard pass. Exact counts and source hashes are recorded in
 `analysis/figures/native_record_dispatch_checkpoint.json`.
 

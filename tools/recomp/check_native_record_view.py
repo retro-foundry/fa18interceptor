@@ -7,8 +7,8 @@ from audit_command_dispatch import source_decoder
 from check_record_region_probe import ROOT, build_oracle, default_bash
 from recomp import classify, static_target
 
-ENTRY = 0xc23ca6
-CHILDREN = (0xc2574a, 0xc06c02)
+ENTRIES = (0xc23ca6,0xc2574a,0xc25754)
+CHILDREN = (0xc06c02,)
 
 
 def main():
@@ -21,7 +21,7 @@ def main():
     seal = json.loads((ROOT/'analysis/data/command_dispatch_source_scope.json').read_text())['state_sha256']
     if hashlib.sha256(state).hexdigest() != seal:
         raise RuntimeError('original state seal differs')
-    rows, pending = {}, [ENTRY]
+    rows, pending = {}, list(ENTRIES)
     while pending:
         pc = pending.pop()
         if pc in CHILDREN or pc in rows:
@@ -71,18 +71,18 @@ def main():
         expected = {f'{pc:06X}' for pc in rows}
         if visited != expected:
             raise RuntimeError(f'uncovered boundaries: {sorted(expected-visited)}')
-        paths = ['port/native_record_view.c', 'port/native_record_view.h',
+        paths = ['port/native_vector_math.c', 'port/native_vector_math.h', 'port/scene_component_magnitude.c', 'port/scene_component_magnitude.h', 'tools/recomp/native_vector_math_fixture.h', 'port/native_record_view.c', 'port/native_record_view.h',
                  'port/native_control_record_update.c', 'port/native_control_record_update.h',
                  'port/native_scene_records.c', 'tools/recomp/native_record_view_oracle.c',
                  'tools/recomp/check_native_record_view.py']
         checkpoint = {
-            'status': 'complete_native_record_view_with_explicit_normalize_fault_children',
-            'complete_entries': ['C23CA6'], 'actual_children': ['C091E0', 'C2436A'],
-            'child_contracts': ['C2574A (normalize scale/input/output)', 'C06C02 (fault, request mutation)'],
-            'cases': args.cases, 'source_boundaries': len(rows), 'covered_boundaries': len(visited),
+            'status': 'complete_native_record_view_with_actual_normalization_and_explicit_fault',
+            'complete_entries': [f'{pc:06X}' for pc in ENTRIES], 'actual_children': ['C091E0', 'C2436A', 'C2574A', 'C1D974'],
+            'child_contracts': ['C06C02 (fault, request mutation)'],
+            'cases': args.cases*len(ENTRIES), 'source_boundaries': len(rows), 'covered_boundaries': len(visited),
             'comparison': 'all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; carried axis and companion identity; shared native record owners verified independently against original output',
             'native_cpu_dependency': False,
-            'limitations': 'normalization/fault children remain explicit; caller binds source view/status/zone assets; full native startup/frame graph pending',
+            'limitations': 'fault child remains explicit; normalization runs actual C2574A/C1D974; caller binds source view/status/zone assets; full native startup/frame graph pending',
             'original_state_sha256': seal,
             'original_pc_bytes_sha256': hashlib.sha256(b''.join(
                 pc.to_bytes(4, 'big')+bytes.fromhex(row['bytes']) for pc, row in sorted(rows.items()))).hexdigest(),

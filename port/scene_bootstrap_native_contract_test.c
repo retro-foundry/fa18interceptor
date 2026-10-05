@@ -22,7 +22,7 @@ typedef struct {
     FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
     FA18NativePostflight postflight; FA18PostflightTestStorage post_storage;
     FA18NativeSceneRegions regions; FA18SceneRegionsTestStorage region_storage;
-    FA18NativeRecordRange range;
+    FA18NativeRecordRange range; FA18NativeVectorMath vector_math;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
     FA18NativeRecordViewAssets view_assets;
@@ -127,6 +127,8 @@ static void initialize(Fixture *f) {
         .tick_word=&f->periodic,.error_word=&f->error_word,.post_input_event=&f->post_event,
         .mode=&f->view_mode,.limit=&f->limit_byte,.pending=&f->view_pending,.view_flag=&f->view_flag,
         .created=&f->view_created,.admitted=&f->view_admitted,.normalized=f->normalized};
+    f->vector_math=(FA18NativeVectorMath){f->range.table,&f->range_magnitude,f->normalized};
+    f->record_view.vector_math=&f->vector_math;
     f->view_work.viewer=f->records.records;
     fa18_test_bind_record_control(&f->control_player,&f->control_storage,&f->records,
         &f->view_work,&f->current_slot,&f->post_event,&f->view_mode);
@@ -156,7 +158,7 @@ static void initialize(Fixture *f) {
     f->postflight.command_word=&f->flight.command_word;
     f->postflight.player_phase=&f->phase;
     f->postflight.player_flags_f=f->flags+5;
-    f->selector_origin=(FA18NativeSelectorOrigin){.records=&f->records,.origin=f->origin};
+    f->selector_origin=(FA18NativeSelectorOrigin){.vector_math=&f->vector_math,.records=&f->records,.origin=f->origin};
     f->record_update=(FA18NativeRecordUpdateStage){.records=&f->records,.view=&f->view,
         .control_records=&f->control_update,.origin_update=&f->selector_origin,
         .input_byte=&f->update_input,.input_byte_mirror=&f->update_mirror,.change_inhibit=&f->update_inhibit,

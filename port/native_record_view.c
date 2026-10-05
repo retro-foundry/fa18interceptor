@@ -132,7 +132,8 @@ static int in_sight(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18NativeS
     if(!viewer || !get16(viewer,0x4a,&range)) return 0;
     if((int16_t)range>0x3000) goto clear;
     for(i=0;i<3;++i) vector[i]=(int32_t)(viewer->geometry->position[i]-r->geometry->position[i])>>8;
-    if(!s->ops || !s->ops->normalize || !s->ops->normalize(s->ops->context,s,0xc0,vector,s->normalized,&w->carried_axis)) return 0;
+    if(!s->vector_math || s->vector_math->normalized!=s->normalized ||
+       !fa18_normalize_native_vector(s->vector_math,0xc0,vector,&w->carried_axis)) return 0;
     for(i=0;i<3;++i) product[i]=(int32_t)viewer->geometry->inverse[i][2]*s->normalized[i];
     first=(int32_t)((uint32_t)product[2]+(uint32_t)product[0]);
     sum=(int32_t)((uint32_t)first+(uint32_t)product[1]);

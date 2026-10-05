@@ -1,4 +1,5 @@
 #include "native_selector_origin.h"
+#include "terrain_selector_origin_adjustment.h"
 
 #include <limits.h>
 
@@ -90,20 +91,10 @@ static void countdown(FA18NativeSelectorOrigin *s) {
     *s->status_word=(uint16_t)(*s->status_word|2u); *s->detail_mode=0;
 }
 static int adjust(FA18NativeSelectorOrigin *s,int32_t delta[3],uint32_t amount,unsigned shift) {
-    int32_t normalized[3]; unsigned i;
-    while((int32_t)amount>=0x4800) {
-        for(i=0;i<3;++i) delta[i]=asr_long(delta[i],2);
-        amount=(uint32_t)asr_long((int32_t)amount,2);
-    }
-    if(!child(s,FA18_SELECTOR_ORIGIN_NORMALIZE,delta,normalized)) return 0;
-    for(i=0;i<3;++i) delta[i]=shift_long(signed_word((uint16_t)normalized[i]),shift);
-    if(s->smoothed_delta[0] || s->smoothed_delta[1] || s->smoothed_delta[2])
-        for(i=0;i<3;++i) delta[i]=add_long(s->smoothed_delta[i],
-            asr_long(sub_long(delta[i],s->smoothed_delta[i]),1));
-    for(i=0;i<3;++i) {
-        s->smoothed_delta[i]=delta[i]; s->origin[i]=add_long(s->origin[i],delta[i]);
-    }
-    companion(s); return 1;
+    FA18TerrainSelectorOriginAdjustmentState state={.magnitude=(int32_t)amount,
+        .candidate=delta,.smoothed_delta=s->smoothed_delta,.origin=s->origin,
+        .negated_companion=s->negated_companion,.shift=(uint16_t)shift,.vector_math=s->vector_math};
+    return fa18_adjust_terrain_selector_origin(&state)==0;
 }
 static int adjustment_mode(FA18NativeSelectorOrigin *s) {
     enum { FINALIZE, BLEND, PRESET, SMALL, ALTERNATE, ADJUST } route=FINALIZE;

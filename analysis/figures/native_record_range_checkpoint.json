@@ -23,9 +23,9 @@
   "source_sha256": {
     "port/native_record_range.c": "16425602cea416e4f0df4951bb7fa8dc22f6d47c0ae3d41e1f2c50d568c14d67",
     "port/native_record_range.h": "0c41a47313378e113b4ce5b7731a3a391d1e25e17faa7b4dccafcebe2c9e3dd2",
-    "port/native_control_record_update.c": "d22350dbdbc94663de2191a7f7933b102e731826b72dde1a291ed1339ca801bc",
+    "port/native_control_record_update.c": "c2f1d26bca0343fbabba1f5be116a20f0129ee1e61631288825359a04529768a",
     "port/native_control_record_update.h": "430a9ffb196104f50cef5c2daf20eaa05251d22157bf61163ea126f1a90b2279",
-    "port/scene_component_magnitude.c": "1456da0b73cc7a0f520068ac03469bf88e8e85028642da0a79a326abb0655bfa",
+    "port/scene_component_magnitude.c": "6d7a276d759859d00e790f4cf2b5216ac8d487251f85b5e4cd327ebcf5c7c5c2",
     "tools/recomp/native_record_range_oracle.c": "315c78fc4eb533313ded6137f0f58d1a329b659b94326e92f917446f7a95d2e0",
     "tools/recomp/check_native_record_range.py": "796c997ba0d21d0f797996118921c5b7d83e8fdb52fa7b8227088dbb96ef7670"
   }

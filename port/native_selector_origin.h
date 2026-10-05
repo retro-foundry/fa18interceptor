@@ -3,13 +3,13 @@
 
 #include "field_window.h"
 #include "native_scene_records.h"
+#include "native_vector_math.h"
 
 typedef enum {
     FA18_SELECTOR_ORIGIN_PREPARE,
     FA18_SELECTOR_ORIGIN_MATRIX_A,
     FA18_SELECTOR_ORIGIN_MATRIX_B,
-    FA18_SELECTOR_ORIGIN_REGENERATE,
-    FA18_SELECTOR_ORIGIN_NORMALIZE
+    FA18_SELECTOR_ORIGIN_REGENERATE
 } FA18NativeSelectorOriginChild;
 
 typedef struct FA18NativeSelectorOrigin FA18NativeSelectorOrigin;
@@ -30,6 +30,7 @@ struct FA18NativeSelectorOrigin {
     FA18NativeSceneRecords *records;
     FA18NativeSceneRecord **active_record;
     const FA18NativeSelectorOriginOps *ops;
+    const FA18NativeVectorMath *vector_math;
     const FA18NativeSelectorOriginTables *tables;
     const int32_t *root_preset; /* three longs */
     int32_t *origin,*candidate,*smoothed_delta,*negated_companion; /* three each */
@@ -42,7 +43,8 @@ struct FA18NativeSelectorOrigin {
 
 /* Complete C29042 active-origin function, including every internally reached
  * adjustment path through C295D0. The matrix builder, transforms,
- * regeneration and normalizer remain explicit lower routines. Gate exits are
+ * regeneration remain explicit lower routines; normalization is direct.
+ * Gate exits are
  * successful source exits and retain the current origin. */
 int fa18_update_native_selector_origin(FA18NativeSelectorOrigin *state);
 

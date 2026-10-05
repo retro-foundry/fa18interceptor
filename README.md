@@ -49,9 +49,13 @@ contracts. Its 16,384 comparisons cover all 291 source boundaries and every
 Native main integration and the complete playable native graph remain pending;
 see [the bootstrap proof](analysis/routines/native_scene_bootstrap.md).
 Native selected-range and record-view owners now run directly in its scheduler,
-with 16,384 further original-byte comparisons and complete coverage of their
-137/383 respective boundaries. Actual magnitude, point placement and in-sight
-children are direct; sound, normalization and fault children remain explicit.
+with 8,192 range and 24,576 view/normalization original-byte comparisons and
+complete coverage of their 137/481 respective boundaries. Actual magnitude,
+point placement, in-sight and normalization children are direct; sound and
+fault children remain explicit. Native normalization and origin adjustment
+also have separate complete proofs covering 98/143 boundaries with no child
+contracts; their magnitude assets match all 258 original disk words. See
+[native vector math](analysis/routines/native_vector_math.md).
 See [selected range](analysis/routines/native_record_range.md) and
 [record view](analysis/routines/native_record_view.md).
 Primary and secondary record placement now run directly in that scheduler,
@@ -61,8 +65,9 @@ owners; original-disk assets are checked separately. See
 [native record placement](analysis/routines/native_record_action_placement.md).
 Finish and all eight post-flight modes now run directly too, with actual
 selection release, readiness and view restoration. Their 90,112 source
-comparisons cover all 371 boundaries. Periodic and dispatch remain scheduler
-boundaries; original runtime bindings remain required. Actual record-view
+comparisons cover all 371 boundaries. Native periodic and dispatch now complete
+the outer scheduler, with 40,960/106,496 comparisons at all 635/1,094 boundaries;
+original runtime bindings and lower owners remain required. Actual record-view
 publication now runs with native zoom, redraw and queue code. The connected
 post-flight proof covers 481 boundaries in 90,112 calls with no child contracts.
 See [native post-flight scheduling](analysis/routines/native_postflight.md).

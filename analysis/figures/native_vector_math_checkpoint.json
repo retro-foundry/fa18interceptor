@@ -1,0 +1,33 @@
+{
+  "status": "complete_native_vector_math_no_child_contracts",
+  "complete_entries": [
+    "C2574A",
+    "C25754",
+    "C1D974"
+  ],
+  "actual_children": [
+    "C1D974"
+  ],
+  "child_contracts": [],
+  "cases": 24576,
+  "source_boundaries": 98,
+  "covered_boundaries": 98,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; carried axis, full magnitude, shared magnitude/normalized owners and completing/non-completing outcomes",
+  "native_cpu_dependency": false,
+  "limitations": "original magnitude table/adjacent data must be bound; proven non-completing zero-factor source loops fail explicitly; full native startup/frame graph pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "bb9dad6b8eee074098a224b51a3cca1213a9cab48aee9e83fda01832f851bc94",
+  "reports": [
+    "magnitude assets: all 258 original Hunk-8 words match sealed source; full hunk window and preceding word bound",
+    "native vector math: 24576 calls match all game RAM, normalized words, full magnitude and carried axis; 23367 complete/1209 proven source loops; no child contracts"
+  ],
+  "source_sha256": {
+    "port/native_vector_math.c": "98119a8ed53b7a5866cf9a2c05c8ee1832ea418acd582eed3bdcd5ca9c09c322",
+    "port/native_vector_math.h": "e3338bac0a8d9abb41feb5d2b2de08ac027f905372cef139ac1eeadba9492052",
+    "port/scene_component_magnitude.c": "6d7a276d759859d00e790f4cf2b5216ac8d487251f85b5e4cd327ebcf5c7c5c2",
+    "port/scene_component_magnitude.h": "c54699f1fdbf6bf825ffe518905531cdf72a13eccb9211e08e3db77a3dbc6e00",
+    "tools/recomp/native_vector_math_fixture.h": "1042ba04237a5c50a8a74c738f08accfec231998404e923186d78dc0af42a18c",
+    "tools/recomp/native_vector_math_oracle.c": "f5c789ada14d3e552e86647d8c607a8ac2d199bdda9cc9a5dd0c793cd796e23a",
+    "tools/recomp/check_native_vector_math.py": "e8a005e927430d7a7df9866accc1aa22484d28df92b2d93e2560ec64b8988120"
+  }
+}

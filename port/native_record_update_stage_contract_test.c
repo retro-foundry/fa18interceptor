@@ -22,7 +22,7 @@ typedef struct {
     FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
     FA18NativePostflight postflight; FA18PostflightTestStorage post_storage;
     FA18NativeSceneRegions regions; FA18SceneRegionsTestStorage region_storage;
-    FA18NativeRecordRange range;
+    FA18NativeRecordRange range; FA18NativeVectorMath vector_math;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
     FA18NativeRecordViewAssets view_assets;
@@ -73,6 +73,8 @@ static void initialize(Fixture *f) {
         .tick_word=&f->periodic,.error_word=&f->error_word,.post_input_event=&f->event,
         .mode=&f->view_mode,.limit=&f->view_limit,.pending=&f->pending,.view_flag=&f->view_flag,
         .created=&f->created,.admitted=&f->admitted,.normalized=f->normalized};
+    f->vector_math=(FA18NativeVectorMath){f->range.table,&f->range_magnitude,f->normalized};
+    f->record_view.vector_math=&f->vector_math;
     f->view_work.viewer=f->records.records;
     fa18_test_bind_record_control(&f->control_player,&f->control_storage,&f->records,
         &f->view_work,&f->current_slot,&f->event,&f->view_mode);
@@ -91,7 +93,7 @@ static void initialize(Fixture *f) {
     f->active=f->records.records; f->selector_ops=(FA18NativeSelectorOriginOps){origin,f};
     window=(PortFieldWindow){.bytes=f->selector_table,.byte_count=sizeof f->selector_table};
     f->selector_tables=(FA18NativeSelectorOriginTables){window,window,window,window};
-    f->selector=(FA18NativeSelectorOrigin){.records=&f->records,.active_record=&f->active,
+    f->selector=(FA18NativeSelectorOrigin){.vector_math=&f->vector_math,.records=&f->records,.active_record=&f->active,
         .ops=&f->selector_ops,.tables=&f->selector_tables,.root_preset=f->root_preset,
         .origin=f->origin,.candidate=f->candidate,.smoothed_delta=f->smoothed,
         .negated_companion=f->negated,.auxiliary_delta=&f->aux_delta,
@@ -135,5 +137,7 @@ int main(void) {
 
     initialize(&f); f.update.origin_update=NULL;
     assert(!fa18_update_native_scene_records(&f.update));
+    initialize(&f); f.selector.vector_math=NULL; f.input=7;
+    assert(!fa18_update_native_scene_records(&f.update) && !f.mirror && !f.origin_calls);
     return 0;
 }

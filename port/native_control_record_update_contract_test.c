@@ -18,7 +18,7 @@ typedef struct {
     FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
     FA18NativePostflight postflight; FA18PostflightTestStorage post_storage;
     FA18NativeSceneRegions regions; FA18SceneRegionsTestStorage region_storage;
-    FA18NativeRecordRange range;
+    FA18NativeRecordRange range; FA18NativeVectorMath vector_math;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
     FA18NativeRecordViewAssets view_assets;
@@ -57,6 +57,8 @@ static void initialize(Fixture *f) {
         .mode=&f->view_mode,.limit=&f->view_limit,.pending=&f->pending,.view_flag=&f->view_flag,
         .created=&f->created,.admitted=&f->admitted,.normalized=f->normalized};
     for(unsigned i=1;i<16;++i) f->records.aircraft[i].equipment_kind=0x20;
+    f->vector_math=(FA18NativeVectorMath){f->range.table,&f->range_magnitude,f->normalized};
+    f->record_view.vector_math=&f->vector_math;
     f->view_work.viewer=f->records.records;
     fa18_test_bind_record_control(&f->control_player,&f->control_storage,&f->records,
         &f->view_work,&f->slot,&f->event,&f->view_mode);
@@ -183,6 +185,10 @@ int main(void) {
     assert(f.post_storage.step==4 && f.post_storage.context_gate==1);
     assert(!f.placement_storage.space && !f.post_storage.report);
     initialize(&f); f.update.postflight=NULL;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.vector_math.magnitude=&f.slot;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.vector_math.normalized=NULL;
     assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
     return 0;
 }

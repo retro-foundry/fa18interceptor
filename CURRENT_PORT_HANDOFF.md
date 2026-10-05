@@ -1,7 +1,7 @@
 # C port handoff
 
 Updated 2026-10-05. This is the current work state. Older notes remain in git
-history (the preceding handoff is in commit 51fb22b2); ignored gate logs may
+history (the preceding handoff is in commit cf9cf747); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
@@ -13,7 +13,48 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: complete native `$C23A7E` dispatch now replaces the scheduler's
+Latest batch: complete native `$C2574A`/`$C25754` normalization and actual
+`$C1D974` magnitude now run directly in record view and selector-origin
+adjustment. Both normalization callback surfaces are removed. The native
+`$C29548` tail shares one implementation between terrain and active-origin
+adapters, including actual shared magnitude/output publication, signed
+reduction, saved shift, smoothing and masked/negated origin publication.
+
+`FA18NativeVectorMath` binds the original magnitude field window, shared word
+and normalized triple. Scheduler validation requires its table/word to match
+range and its output to match view; record-update validation requires origin
+and view to share that same math owner. `fa18_load_scene_magnitude_window`
+binds all original Hunk-8 bytes centred at `$1710`. All 258 table words match
+the sealed source. Signed offsets outside the hunk still need explicit owners.
+
+Preserve full magnitude high bits when only its low word is clamped. MULU now
+uses defined unsigned wrapping before signed conversion, fixing C overflow
+exposed by the source proof. Zero scale preserves magnitude/axis and clears
+outputs. The original zero-factor upward search can repeat forever; native
+failure preserves its earlier writes and never fabricates completion.
+
+Validation passes 24,576 math calls at all 98 boundaries and 32,768 origin-tail/
+math calls at all 143 boundaries, with no child contracts. The 1,209 non-completing
+core cases are proved by an exact zero-factor invariant; every origin-tail case
+completes. Updated view passes 24,576 calls/481 boundaries (9,104 actual
+normalizations, 759 fault contracts). Updated dispatch passes 106,496 calls/
+1,094 boundaries (9,728 actual normalizations, 774 fault contracts), including
+all game RAM, typed records, carried axis, decisions and companion identity.
+Selected range is rerun after the shared magnitude change: 8,192 calls at all
+137 boundaries, with its 3,277 true sound contracts retained.
+MSVC Release native builds, strict GNU compilation of fifteen affected units,
+ten affected CTests and the unchanged 513-file native guard pass. Exact scope
+and source hashes are in `analysis/routines/native_vector_math.md` and the four
+math/origin/view/dispatch checkpoints.
+
+Next complete fault handling and startup-reachable pose/control owners,
+reconcile canonical startup/input/queue aliases and original assets, then
+install the native startup/frame graph in main. Full active-origin parent
+adapter proof and the bootstrap origin alias gap remain. Native main does not
+invoke the complete graph; the playable ROM-free runner still uses Musashi,
+guest RAM and chipset state. The full independence goal remains open.
+
+Preceding batch (`cf9cf747`): complete native `$C23A7E` dispatch now replaces the scheduler's
 last outer callback. `$C23F4A` unclassified processing, `$C243F2` tracking and
 `$C24458` selected-control targeting share the actual `$C24568` view-point
 classification, native `$C23CA6` view and `$C1BEE8`/`$C1B7A6` publication.
@@ -26,7 +67,7 @@ can read adjacent live fields, including the current record; callers must bind
 those owners through the control field window. View work now carries both the
 numeric axis and the actual companion-record identity. Linked selection and
 heading can change that companion; the scheduler consumes the returned identity.
-Normalization/fault contracts expose the axis they actually return. Magnitude
+Actual normalization and the fault contract expose the axis they return. Magnitude
 preserves DIVU's remainder in the high word of its returned axis.
 
 The complete proof checks 90,112 calls over eleven entries at all 1,035 reachable
@@ -34,13 +75,13 @@ source boundaries, full game RAM excluding only CPU ABI stack, independent typed
 records, decisions, carried axis and returned companion identity. The zero-view
 mode-zero branch is sealed explicitly, as in the preceding publication proof.
 Actual view/range/magnitude/publication/redraw/queue bodies run throughout;
-normalization and fault remain true lower contracts. The existing view and
+normalization and fault were true lower contracts at that checkpoint. The existing view and
 selected-range proofs are rerun after the shared changes. MSVC Release native
 builds, strict GNU compilation, affected CTests and the unchanged 511-file
 native guard pass. See `analysis/routines/native_record_dispatch.md` and its
 checkpoint for exact reports.
 
-Next complete the native normalization/fault and startup-reachable pose/control
+At that checkpoint the next work was native normalization/fault and startup-reachable pose/control
 owners, reconcile canonical startup/input/queue aliases and original assets,
 then install the native startup/frame graph in main. The full bootstrap still
 has the origin alias gap described below. The native main does not invoke this
@@ -196,7 +237,7 @@ See `analysis/routines/native_record_pose.md` and its checkpoint. Composed
 bootstrap observations now occur at the matrix child inside root pose; scheduler
 contracts test actual action decay before readiness and direct secondary playback.
 
-Sound/messages, scene initialization, normalization/fault and actual
+Sound/messages, scene initialization, fault handling and actual
 flight/collision/matrix/input remain lower
 requirements; they have not been replaced with substitutes.
 
@@ -260,12 +301,12 @@ still remain:
 - `FA18NativePostflightOps`: retained historical parent-proof seam when the
   actual native publication owner is unbound. Production bindings remain
   required; publication, readiness, release and restoration have native bodies.
-- `FA18NativeRecordViewOps`: normalization and source fault handling;
+- `FA18NativeRecordViewOps`: source fault handling; normalization is direct.
   `FA18NativeRecordRangeOps`: sound program four. These are true lower children.
 - `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
   the now-direct action selectors. They are route-dependent.
-- `FA18NativeSelectorOriginOps`: preparation, matrix A/B, regeneration, and
-  normalization.
+- `FA18NativeSelectorOriginOps`: preparation, matrix A/B and regeneration.
+  Normalization and the complete adjustment tail are direct.
 - `FA18NativeContextRefreshOps`: templates, sort, cache, condition A/B, and
   render.
 
@@ -284,7 +325,7 @@ entries, 539 readable translated entries, 75 readable source-only entries,
 and 854 direct opcode bindings; those numbers describe the compatibility
 runner, not completion of the ordinary-state native graph.
 
-Latest validation passed: MSVC Release `fa18_port`, strict GNU contracts,
+Earlier post-flight validation passed: MSVC Release `fa18_port`, strict GNU contracts,
 eight affected CTests and the unchanged native build guard over 507 files.
 The connected post-flight proof covers 481/481 reachable boundaries in 90,112
 calls with actual publication and no child contracts. The preceding

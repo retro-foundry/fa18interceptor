@@ -24,34 +24,36 @@ wrapped comparisons. Products wrap in source order. Negative status rows read
 explicit preceding field owners. Fault children retain the published error word
 and may change live pending state before the parent resumes.
 
-`C2574A` normalization and `C06C02` fault handling remain explicit lower
-boundaries. Missing data/owners or a non-completing exhausted zone list fail
+`C2574A` normalization now invokes the actual native vector-math owner and
+`C1D974` magnitude body. Only `C06C02` fault handling remains an explicit lower
+boundary. Missing data/owners or a non-completing exhausted zone list fail
 explicitly; no child substitute is installed. The caller's viewer work retains
 a native record pointer for the record-consuming routes; source data-list
 cursors are not represented as fabricated aircraft pointers or as a guest bus.
 
-Validation: `python tools/recomp/check_native_record_view.py` passes 8,192
-complete original-byte calls at all 383/383 graph boundaries, including actual
-placement and in-sight instruction children. Every Chip/Slow RAM byte matches
+Validation: `python tools/recomp/check_native_record_view.py` passes 24,576
+original-byte calls across the view and both normalization entries at all
+481/481 graph boundaries, including actual placement, in-sight, normalization
+and magnitude instruction children. Every Chip/Slow RAM byte matches
 except CPU ABI stack `$C7FD00..$C7FF00`; typed aircraft/matrix/position owners are
-checked independently. There are 912 controlled normalization calls and 759
-controlled fault calls. Normalization contracts check the scale, full component
-inputs and true return PC, then vary returned words. Fault contracts preserve
-source errors and vary pending state. They do not prove the lower children.
+checked independently. There are 9,104 actual normalization calls and 759
+controlled fault calls. Fault contracts preserve source errors and vary pending
+state and carried axis. They do not prove fault handling. Core normalization
+entries also prove non-completing source factor loops; see `native_vector_math.md`.
 Fixtures cover all sixteen callers/viewers, shared caller/viewer identity,
 all parent routes, table advance/end/error, both zone lists, linked selection,
 local-point modes, signed/overflowed coordinates, arbitrary matrices, in-sight
 accept/reject and status rows. See
 `analysis/figures/native_record_view_checkpoint.json`.
 
-MSVC Release native game and affected contracts, strict GNU view/scheduler
-contracts, eleven affected CTests and the 497-file native build guard pass.
+MSVC Release native game and affected contracts, strict GNU compilation,
+ten affected CTests and the unchanged 513-file native build guard pass.
 The subsequent `native_record_control` batch supplies the carried axis directly
 and removes root/secondary control callbacks. The subsequent `native_record_pose`
 batch makes pose and motion history direct. The subsequent placement/finish/regions/dispatch batches remove the outer
 scheduler callbacks. View work now returns the actual companion identity and
-full carried axis; normalization/fault contracts expose their returned axis.
+full carried axis; actual normalization and the fault contract expose their returned axis.
 The updated proof checks these outputs and independently compares typed
 records against original output. Native
 main still does not invoke this startup graph; full native runtime integration
-and the actual normalization/fault owners remain open.
+and the actual fault owner remain open.

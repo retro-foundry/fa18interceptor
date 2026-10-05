@@ -11,21 +11,20 @@ typedef struct {
     int32_t root_preset[3],origin[3],candidate[3],smoothed[3],negated[3],aux_delta;
     uint16_t angle_history,status;
     uint8_t enable,gate_b,gate_a,gate_mode,detail,index,mode,threshold,auxiliary,variant,counter;
-    unsigned calls[5];
+    unsigned calls[4];
+    FA18NativeVectorMath math; PortFieldWindow magnitude_table;
+    uint8_t magnitude_bytes[2]; uint16_t magnitude; int16_t normalized[3];
 } Fixture;
 
 static int consume(void *context,FA18NativeSelectorOrigin *state,
                    FA18NativeSelectorOriginChild child,const int32_t input[3],int32_t output[3]) {
-    Fixture *f=context; assert(state==&f->selector && child<5); ++f->calls[child];
+    Fixture *f=context; assert(state==&f->selector && child<4); ++f->calls[child];
     if(child==FA18_SELECTOR_ORIGIN_PREPARE) { assert(!input && !output); return 1; }
     assert(output);
     if(child==FA18_SELECTOR_ORIGIN_REGENERATE) {
         assert(!input); output[0]=7; output[1]=8; output[2]=9; return 1;
     }
     assert(input);
-    if(child==FA18_SELECTOR_ORIGIN_NORMALIZE) {
-        memcpy(output,input,3*sizeof *output); return 1;
-    }
     assert(input[0]==1 && input[1]==2 && input[2]==3);
     output[0]=0x1000; output[1]=-100; output[2]=0x3000; return 1;
 }
@@ -38,11 +37,14 @@ static void initialize(Fixture *f) {
     memset(f,0,sizeof *f);
     assert(fa18_import_native_scene_records(&f->records,&f->input,
         f->source,sizeof f->source,f->work,sizeof f->work));
+    f->magnitude_bytes[0]=0x40;
+    f->magnitude_table=(PortFieldWindow){.bytes=f->magnitude_bytes,.byte_count=2};
+    f->math=(FA18NativeVectorMath){&f->magnitude_table,&f->magnitude,f->normalized};
     f->active=f->records.records; f->ops=(FA18NativeSelectorOriginOps){consume,f};
     window=(PortFieldWindow){.bytes=f->table_bytes,.byte_count=sizeof f->table_bytes,.origin=0};
     f->tables=(FA18NativeSelectorOriginTables){window,window,window,window};
     f->selector=(FA18NativeSelectorOrigin){.records=&f->records,.active_record=&f->active,
-        .ops=&f->ops,.tables=&f->tables,.root_preset=f->root_preset,.origin=f->origin,
+        .ops=&f->ops,.vector_math=&f->math,.tables=&f->tables,.root_preset=f->root_preset,.origin=f->origin,
         .candidate=f->candidate,.smoothed_delta=f->smoothed,.negated_companion=f->negated,
         .auxiliary_delta=&f->aux_delta,.angle_history=&f->angle_history,.status_word=&f->status,
         .enable=&f->enable,.gate_b=&f->gate_b,.gate_a=&f->gate_a,.gate_mode=&f->gate_mode,
@@ -72,8 +74,8 @@ int main(void) {
 
     initialize(&f); f.enable=f.gate_b=1; f.detail=6; f.mode=5; f.candidate[0]=0x1000;
     assert(fa18_update_native_selector_origin(&f.selector));
-    assert(f.calls[FA18_SELECTOR_ORIGIN_NORMALIZE]==1 && f.origin[0]==0x2000 &&
-           f.smoothed[0]==0x2000 && f.negated[0]==-0x2000);
+    assert(f.magnitude==0x1000 && f.normalized[0]==512 && f.origin[0]==0x400 &&
+           f.smoothed[0]==0x400 && f.negated[0]==-0x400);
 
     initialize(&f); f.enable=f.gate_b=1; f.detail=3; f.mode=7; f.auxiliary=1;
     assert(fa18_update_native_selector_origin(&f.selector));
