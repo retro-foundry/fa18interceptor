@@ -1,4 +1,4 @@
-"""Compare native bootstrap with its real gate child and three explicit pending children."""
+"""Retain the sealed bootstrap-parent proof with three historical child contracts."""
 import argparse
 import hashlib
 import json
@@ -92,7 +92,7 @@ def main():
                  "tools/recomp/native_scene_player_oracle.c",
                  "tools/recomp/check_native_scene_bootstrap.py", "tools/recomp/native_scene_bootstrap_oracle.c"]
         checkpoint = {
-            "status": "validated_complete_bootstrap_parent_with_real_gate_child_and_three_required_pending_children",
+            "status": "historical_parent_proof_with_real_gate_and_three_child_contracts_placement_now_direct_in_product",
             "complete_parent": "C08F26", "supplementary_entries": ["C09620", "C090C2", "C1C40C"],
             "cases": args.cases*len(ENTRIES), "source_boundaries": len(rows), "covered_boundaries": len(visited),
             "native_cpu_dependency": False,
@@ -100,9 +100,9 @@ def main():
             "original_adf_sha256": hashlib.sha256((ROOT/"FA-18 Interceptor (1988)(Electronic Arts)[cr A-Ha].adf").read_bytes()).hexdigest(),
             "child_contracts": [f"{pc:06X}" for pc in sorted(CHILDREN)],
             "actual_children": ["C090C2", "C090F2", "C2FD22", "C09620 including C0840E", "C0910C", "C0915A", "C1C40C including real C06C02 RTS fault hook"],
-            "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620/C1C40C; no exclusion for C090C2. Three ordered child-entry snapshots, explicit placement word, independent child mutations and named record owners compared.",
+            "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620/C1C40C; no exclusion for C090C2. Three ordered historical child-entry snapshots, independent child mutations and named record owners compared.",
             "coverage_cases": "all 16 valid viewed identities; both phase branches; ten renderer planes; real gate child, all 65536 bit indices, negative/odd/0/1/7FFF lengths, across-row/axis/adjacent-owner writes, source fault codes 43/44/45 and real RTS hook, all original Hunk-66 bytes with relocation-aware comparison and direct live stream binding, bound stream changed at placement boundary before real expansion",
-            "ownership_limit": "VIEW_RECORD accepts the supplied 16-record bank. Signed gate neighbours require actual bounded field owners; missing data is explicit. Child contracts prove parent sequencing, not child behavior. Actual placement/update/refresh graphs, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
+            "ownership_limit": "VIEW_RECORD accepts the supplied 16-record bank. Signed gate neighbours require actual bounded field owners; missing data is explicit. This historical oracle still contracts placement and therefore proves only parent sequencing for that boundary; the product now calls its separately tested native placement owner directly. Update/refresh graphs, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
             "original_state_sha256": seal,
             "original_pc_bytes_sha256": hashlib.sha256(b"".join(pc.to_bytes(4, "big")+bytes.fromhex(row["bytes"]) for pc,row in sorted(rows.items()))).hexdigest(),
             "reports": reports, "source_sha256": {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in paths},

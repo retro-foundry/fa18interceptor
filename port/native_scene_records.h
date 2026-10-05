@@ -3,19 +3,21 @@
 #include "command_queue.h"
 
 enum { FA18_NATIVE_SCENE_RECORDS=16, FA18_NATIVE_SCENE_RECORD_BYTES=512,
-       FA18_NATIVE_SCENE_CLEAR_BYTES=164, FA18_NATIVE_SCENE_WORK_BYTES=32 };
+       FA18_NATIVE_SCENE_CLEAR_BYTES=164, FA18_NATIVE_SCENE_MAPPED_BYTES=186,
+       FA18_NATIVE_SCENE_WORK_BYTES=32 };
 typedef struct {
     FA18FlightCommandRecord *aircraft;
     FA18ContextCommandRecord *geometry;
-    uint8_t byte_21,level_storage,byte_5f,byte_71;
+    uint8_t byte_04,byte_0a,byte_0b,byte_20,byte_21,level_storage,byte_5f,byte_71,byte_7c,byte_7d;
     uint8_t *level;
-    uint16_t word_60,angle_first,angle_third,word_6c,word_6e,word_78,word_7e,word_54,word_5a;
-    uint32_t long_3e,long_42,long_46,long_50,long_56,long_72;
+    uint16_t word_06,word_08,word_0c,word_0e,word_60,angle_first,angle_third,
+        word_6c,word_6e,word_78,word_7e,word_54,word_5a,word_b8;
+    uint32_t long_10,long_3e,long_42,long_46,long_50,long_56,long_72;
     int16_t forward[3][3];
     /* Only unbound positions hold data here. Access through the field view;
      * mapped positions are zeroed after import, not duplicate scalar owners. */
     uint8_t unported[FA18_NATIVE_SCENE_RECORD_BYTES];
-    PortFieldByte fields[FA18_NATIVE_SCENE_CLEAR_BYTES];
+    PortFieldByte fields[FA18_NATIVE_SCENE_MAPPED_BYTES];
 } FA18NativeSceneRecord;
 typedef struct {
     FA18CommandInput *input;

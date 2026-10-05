@@ -158,6 +158,13 @@ and player setup remain F/A-18 policy; they belong in the adapter. Other
 ports can use the typed byte mechanism with their own layouts and owners.
 See `../analysis/routines/native_scene_player.md` for proof and limits.
 
+`field_window.h` builds on `field_bytes` with a signed logical origin inside
+immutable source data. Reads outside the source object require explicit
+adjacent field owners, so another port can bind tables whose 16-bit indexing
+wraps without adding a guest address space or hidden padding. F/A-18's scene
+placement uses it for pose, grid and relocated descriptor assets; those Hunk
+numbers, offsets and gameplay rules remain in `native_scene_placement`.
+
 Planar rendering, projection and input modules remain candidates, with
 game-specific dimensions, tables or state still present. They should be
 extracted when another concrete caller establishes the common contract.

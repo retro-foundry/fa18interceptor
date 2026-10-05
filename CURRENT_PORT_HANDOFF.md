@@ -11,7 +11,31 @@ reuse existing owners and run validation for changed behavior/affected callers.
 The separate `amiga-recomp` project was inspected (13 existing tests pass),
 but the user did not request switching this port to its CPU/chipset runtime.
 
-Latest batch: complete `$C2D954/$C2D94E` record orientation now publishes
+Latest batch: complete `$C09266-$C095BE` recorder reset and root placement now
+run directly against the shared native record bank. Both the positive grid
+route and negative selected-record route preserve 68000 word/long wrapping,
+the rejected-record retry pointer, descriptor-height handling, packed
+quadrants, target-point aliasing and the actual `$C091E0/$C2D954` children.
+Original Hunk 8/16/63/67 assets bind through immutable field windows and
+relocations; mutable scene pointer groups remain canonical caller-owned state.
+The `$C08F26` bootstrap calls this owner directly, so its placement callback
+and false carried-D7 input are gone. Only `$C1C63E` and `$C1C860` remain as
+explicit bootstrap child boundaries.
+
+Validation: focused positive and negative contracts exercise recorder reset,
+shared owners, fixed-point edge behavior, retry dependencies and startup
+composition. MSVC builds for the native executable and affected contracts,
+four focused CTests and the 483-file native build guard pass. The prior sealed
+bootstrap checkpoint remains parent-order evidence from when placement was a
+contract; a full original-instruction differential proof of this new child is
+still required. See `analysis/routines/native_scene_placement.md`.
+
+Next complete `$C1C63E/$C1C860`, then connect the resolved startup graph to
+the native main. Native main still does not invoke this graph. The ROM-free
+runner requires no Kickstart ROM image, but still uses CPU/machine emulation.
+A complete playable native game remains the active objective.
+
+Preceding batch: complete `$C2D954/$C2D94E` record orientation now publishes
 angles and both matrices directly into actual shared native records. Forward
 matrix fields now have named owners; inverse fields share the existing command
 geometry object. The older packet misread the reordered MOVEM restore and
@@ -28,13 +52,8 @@ symbol checks, MSVC build, 83 focused CTests and the unchanged 480-file guard
 pass. Player and bootstrap regressions retain 24,576/16,384 comparisons with
 complete coverage. See `analysis/routines/native_record_orientation.md`.
 
-Next finish full `$C09266` root placement against shared records and required
-original recorder/template/grid data owners, then `$C1C63E/$C1C860`. The
-existing detached positive/negative placement packets contain additional
-cold-path inaccuracies; follow the sealed instructions instead of copying
-them around native execution. Native main still does not invoke this graph.
-The ROM-free runner requires no Kickstart ROM image, but uses CPU/machine
-emulation. A complete playable native game is still the active objective.
+Next was full `$C09266` root placement; that work is completed by the latest
+batch above.
 
 Preceding batch: `$C1C40C` gate construction is now an actual native child of
 `$C08F26`, sharing the existing `template_bitmask_buffers` owner with the

@@ -7,7 +7,9 @@
 #include "../../port/renderer_clear.c"
 #include "../../port/viewed_record_word.c"
 #include "native_template_gate_fixture.h"
+#define fa18_place_native_scene_root boot_place_direct
 #include "../../port/scene_bootstrap_native.c"
+#undef fa18_place_native_scene_root
 
 enum { BOOT_PLANE_BYTES=8048, BOOT_RAM_BYTES=FA18_CHIP_SIZE+FA18_SLOW_SIZE };
 typedef struct {
@@ -17,6 +19,7 @@ typedef struct {
     FA18NativeGraphicsSetup graphics;
     FA18NativeGraphicsPlane planes[10];
     FA18NativeRendererClear renderer;
+    FA18NativeScenePlacement placement;
     FA18NativeSceneBootstrap bootstrap;
     GateOracleState gates;
     uint8_t buffers[10][BOOT_PLANE_BYTES],fifth;
@@ -24,12 +27,11 @@ typedef struct {
     uint16_t menu_return,word_4fda0,countdown,word_a6,word_a8,history,minimum,scales[2],depth[24];
     uint16_t words[52]; PortFieldByte fields[104];
     uint32_t message_queue,message_timer,valid[2],reference;
-    int16_t placement_word;
 } BootstrapState;
 static const uint32_t boot_children[]={0xc09266,0xc1c63e,0xc1c860};
 static uint8_t boot_child_ram[3][BOOT_RAM_BYTES];
-static int16_t source_placement_word;
 static unsigned boot_scenario,boot_source_calls,boot_native_calls;
+static BootstrapState *boot_native_active;
 static uint32_t boot_plane_address(unsigned i) { return 0x10000+0x2200*i; }
 static void boot_snapshot(uint8_t *out) {
     memcpy(out,fa18_machine->chip,FA18_CHIP_SIZE);
@@ -105,8 +107,8 @@ static int boot_load(BootstrapState *s) {
     p->view.line_last_row=rd_u16(LINE_LAST_ROW); p->view.span_origin=rd_u16(SPAN_ORIGIN);
     p->view.span_origin_y=rd_u16(SPAN_ORIGIN_Y); p->view.zoom_scale=rd_u16(ZOOM_SCALE);
     for(i=0;i<24;++i) s->depth[i]=rd_u16(DEPTH_VALUES+2*i);
-    s->placement_word=(int16_t)REG_D[7];
-    s->bootstrap=(FA18NativeSceneBootstrap){.context=&p->context,.player=&p->setup,.startup=&s->startup,
+    s->placement.player=&p->setup;
+    s->bootstrap=(FA18NativeSceneBootstrap){.context=&p->context,.player=&p->setup,.placement=&s->placement,.startup=&s->startup,
         .viewed_word=&s->viewed,.renderer=&s->renderer,.gates=&s->gates.state,.scene_limit=&s->scene_limit,.previous_scene_limit=&s->previous_limit,
         .context_state=&s->context_state,.menu_transition=&s->transition,.previous_state_byte=&s->previous_state,.byte_458be=&s->byte_be,
         .menu_return_word=&s->menu_return,.word_4fda0=&s->word_4fda0,.countdown=&s->countdown,
@@ -145,8 +147,9 @@ static int boot_child_native(BootstrapState *s,FA18NativeSceneBootstrap *parent,
     if(!boot_equal(boot_child_ram[child]) || !verify_record_owners(&s->scene)) return 0;
     boot_child_effect(s,child); return 1;
 }
-static int boot_place(void *context,FA18NativeSceneBootstrap *parent,int16_t word) {
-    return word==source_placement_word && boot_child_native(context,parent,0);
+int boot_place_direct(FA18NativeScenePlacement *placement) {
+    return boot_native_active && placement==&boot_native_active->placement &&
+        boot_child_native(boot_native_active,&boot_native_active->bootstrap,0);
 }
 static int boot_update(void *context,FA18NativeSceneBootstrap *parent) { return boot_child_native(context,parent,1); }
 static int boot_refresh(void *context,FA18NativeSceneBootstrap *parent) { return boot_child_native(context,parent,2); }
@@ -192,7 +195,6 @@ static int boot_original(void) {
         if(i<3) {
             if(selected_entry!=0xc08f26 || boot_source_calls++!=i) return 0;
             boot_snapshot(boot_child_ram[i]);
-            if(!i) source_placement_word=(int16_t)REG_D[7];
             boot_child_effect(NULL,i);
             /* Incidental child CPU outputs are deliberately unrelated to
              * completion status and semantic mutations. A6/A7 stay valid. */
@@ -225,7 +227,7 @@ int main(int argc,char **argv) {
     for(i=0;i<sizeof scene_source_bytes/sizeof scene_source_bytes[0];++i)
         for(j=0;j<scene_source_bytes[i].length;++j) if(rd_u8(scene_source_bytes[i].pc+j)!=scene_source_bytes[i].bytes[j]) return 1;
     for(scenario=0;scenario<cases;++scenario) {
-        int ok; FA18NativeSceneBootstrapOps ops={boot_place,boot_update,boot_refresh,native};
+        int ok; FA18NativeSceneBootstrapOps ops={boot_update,boot_refresh,native};
         boot_scenario=scenario; memcpy(m,base,sizeof *m); boot_fixture(scenario);
         if(!boot_load(native) || (selected_entry!=0xc1c40c && !verify_record_owners(&native->scene))) return 1;
         memcpy(before,m,sizeof *m); boot_snapshot(expected); boot_store(native);
@@ -238,8 +240,10 @@ int main(int argc,char **argv) {
             }
         boot_snapshot(expected); memcpy(m,before,sizeof *m);
         if(selected_entry==0xc08f26) {
-            FA18NativeSceneBootstrapCall call={&native->bootstrap,&ops,native->placement_word};
+            FA18NativeSceneBootstrapCall call={&native->bootstrap,&ops};
+            boot_native_active=native;
             ok=fa18_native_scene_bootstrap_callback(&call);
+            boot_native_active=NULL;
         } else if(selected_entry==0xc09620) ok=fa18_prepare_native_scene_player(&native->scene.setup);
         else if(selected_entry==0xc090c2) ok=fa18_clear_native_startup_ranges(&native->startup);
         else if(selected_entry==0xc1c40c) ok=fa18_run_template_bitmask_state(&native->gates.state);

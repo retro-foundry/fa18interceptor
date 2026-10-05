@@ -38,10 +38,13 @@ int fa18_import_native_scene_records(FA18NativeSceneRecords *s,FA18CommandInput 
         r->aircraft=s->aircraft+slot; r->geometry=s->geometry+slot;
         r->geometry->command_record=r->aircraft;
         memcpy(r->unported,source+slot*512,512);
-        for(i=0;i<164;++i) r->fields[i]=(PortFieldByte){.byte=r->unported+i};
+        for(i=0;i<FA18_NATIVE_SCENE_MAPPED_BYTES;++i) r->fields[i]=(PortFieldByte){.byte=r->unported+i};
         bind_word(r,0,&r->aircraft->flags); bind_word(r,2,&r->aircraft->secondary_flags);
+        bind_byte(r,4,&r->byte_04); bind_word(r,6,&r->word_06); bind_word(r,8,&r->word_08);
+        bind_byte(r,0x0a,&r->byte_0a); bind_byte(r,0x0b,&r->byte_0b);
+        bind_word(r,0x0c,&r->word_0c); bind_word(r,0x0e,&r->word_0e); bind_long(r,0x10,&r->long_10);
         for(i=0;i<3;++i) bind_long(r,0x14+4*i,r->geometry->position+i);
-        bind_byte(r,0x21,&r->byte_21);
+        bind_byte(r,0x20,&r->byte_20); bind_byte(r,0x21,&r->byte_21);
         r->level=slot?&r->level_storage:&input->indexed.control_record_level;
         bind_byte(r,0x2b,r->level);
         bind_long(r,0x3e,&r->long_3e); bind_long(r,0x42,&r->long_42); bind_long(r,0x46,&r->long_46);
@@ -53,11 +56,13 @@ int fa18_import_native_scene_records(FA18NativeSceneRecords *s,FA18CommandInput 
         bind_word(r,0x66,&r->angle_first); bind_word(r,0x68,&r->geometry->angle); bind_word(r,0x6a,&r->angle_third);
         bind_word(r,0x6c,&r->word_6c); bind_word(r,0x6e,&r->word_6e);
         bind_byte(r,0x71,&r->byte_71); bind_long(r,0x72,&r->long_72);
-        bind_word(r,0x78,&r->word_78); bind_word(r,0x7e,&r->word_7e);
+        bind_word(r,0x78,&r->word_78); bind_byte(r,0x7c,&r->byte_7c);
+        bind_byte(r,0x7d,&r->byte_7d); bind_word(r,0x7e,&r->word_7e);
         for(row=0;row<3;++row) for(column=0;column<3;++column) {
             bind_signed_word(r,0x80+6*row+2*column,&r->forward[row][column]);
             bind_signed_word(r,0x92+6*row+2*column,&r->geometry->inverse[row][column]);
         }
+        bind_word(r,0xb8,&r->word_b8);
     }
     memcpy(s->work,work,sizeof s->work); return 1;
 }
@@ -67,7 +72,7 @@ int fa18_read_native_scene_record(const FA18NativeSceneRecord *r,size_t offset,
     if(!r || !bytes || offset>512 || count>512-offset) return 0;
     for(i=0;i<count;++i) {
         size_t at=offset+i;
-        if(at<164) { if(!port_read_field_byte(r->fields+at,bytes+i)) return 0; }
+        if(at<FA18_NATIVE_SCENE_MAPPED_BYTES) { if(!port_read_field_byte(r->fields+at,bytes+i)) return 0; }
         else bytes[i]=r->unported[at];
     }
     return 1;
@@ -78,7 +83,7 @@ int fa18_write_native_scene_record(FA18NativeSceneRecord *r,size_t offset,
     if(!r || !bytes || offset>512 || count>512-offset) return 0;
     for(i=0;i<count;++i) {
         size_t at=offset+i;
-        if(at<164) { if(!port_write_field_byte(r->fields+at,bytes[i])) return 0; }
+        if(at<FA18_NATIVE_SCENE_MAPPED_BYTES) { if(!port_write_field_byte(r->fields+at,bytes[i])) return 0; }
         else r->unported[at]=bytes[i];
     }
     return 1;
