@@ -1,0 +1,47 @@
+{
+  "status": "validated_native_view_actions_full_runtime_integration_pending",
+  "actions": 16,
+  "cases": 32768,
+  "source_boundaries": 219,
+  "covered_boundaries": 219,
+  "child_source_boundaries": 24,
+  "covered_child_boundaries": 24,
+  "native_cpu_dependency": false,
+  "children": [
+    "C08324",
+    "C082B8"
+  ],
+  "child_scope": "both actual native children compared against original instructions; no controlled child replacements",
+  "reports": [
+    "native view command C1B7F0: 2048 actions matched full RAM, event and ordered child states; 0 real children",
+    "native view command C1B890: 2048 actions matched full RAM, event and ordered child states; 0 real children",
+    "native view command C1B7F8: 2048 actions matched full RAM, event and ordered child states; 0 real children",
+    "native view command C1B8F8: 2048 actions matched full RAM, event and ordered child states; 1536 real children",
+    "native view command C1B914: 2048 actions matched full RAM, event and ordered child states; 1344 real children",
+    "native view command C1B960: 2048 actions matched full RAM, event and ordered child states; 1504 real children",
+    "native view command C1B930: 2048 actions matched full RAM, event and ordered child states; 1440 real children",
+    "native view command C1B98A: 2048 actions matched full RAM, event and ordered child states; 1376 real children",
+    "native view command C1B9AC: 2048 actions matched full RAM, event and ordered child states; 1376 real children",
+    "native view command C1B79A: 2048 actions matched full RAM, event and ordered child states; 0 real children",
+    "native view command C1B7C2: 2048 actions matched full RAM, event and ordered child states; 0 real children",
+    "native view command C1B780: 2048 actions matched full RAM, event and ordered child states; 256 real children",
+    "native view command C1B7B6: 2048 actions matched full RAM, event and ordered child states; 0 real children",
+    "native view command C1BB66: 2048 actions matched full RAM, event and ordered child states; 0 real children",
+    "native view command C1BAE2: 2048 actions matched full RAM, event and ordered child states; 0 real children",
+    "native view command C1BB02: 2048 actions matched full RAM, event and ordered child states; 0 real children"
+  ],
+  "source_sha256": {
+    "port/view_command_input.c": "44a9d8dbf79ad3ddb0bbba56dc8184aa8fb18b3221c12a0d04a0f507490665f3",
+    "port/view_command_input.h": "a84d186104a39b64307538f6a43d6196295e915113b4a4118eddaef355e974a8",
+    "port/view_command_controls.c": "8f31148ec0391b1efc8dd266ab22f83ddcf1b8e946d0e28bfc9257a07421ba71",
+    "port/view_command_input_contract_test.c": "6f84acd282467381b9f9ae4ae9ffcd59c03ec4f2f052bf88ca1f0aaef7be51f4",
+    "port/flight_command_input.h": "e1792cd6089d198ac51edc2539db7c4d1e2ea59f6339f814368b77ae3d5bf054",
+    "port/command_input.h": "221a9c9bbbb2072941ff1cf2fac578139c5e2f8ca2bba9be2918cfbd33b7f496",
+    "port/command_types.h": "ead9fc0ba9a37f0527e2275a65cf7dc1dfd96803fe64ae2020fef265cc3a14d3",
+    "port/indexed_controls.h": "5058d10d7d5775ccf1972e7e0a74c2c63723cdc81c4330ceed87ddf7b0b5d4af",
+    "tools/recomp/check_native_view_command_input.py": "ade5c0e582fde51c5062b509fca5c2d76bc77931e9682732e06d89f6b7dace02",
+    "tools/recomp/native_view_command_input_oracle.c": "62b79435ca93901bbe4ad9c11ea6f7104ac997e8ac1909e1a3520622376750df",
+    "tools/recomp/view_commands_oracle.c": "7766ce67d1b964305eeee77472e46f8cd5c189eec2451a2687bb2c1522641ec3",
+    "analysis\\data\\command_dispatch_source_scope.json": "b1d2c56f1d4a1ebedd6be089c3d1b55681604fb3cfa195032524368a8037fe74"
+  }
+}

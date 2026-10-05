@@ -4,6 +4,7 @@ Updated 2026-10-05. This is the current work state. Older notes remain in git
 history (the preceding handoff is in commit 51fb22b2); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
+Commit completed, validated batches as work proceeds, as requested by the user.
 
 ## Active objective: complete the port without emulation (2026-10-05)
 
@@ -90,6 +91,25 @@ The library links into the incomplete native game but is not called by its
 loop yet. Continue with actual children, view/context actions, publication,
 data loading and full native game-loop integration; the overall goal remains
 active and unfinished.
+
+View progress: `port/view_command_input.c/.h` implements all 16 view/origin/zoom
+actions. `view_command_controls.c` implements their actual maximum-zoom and
+cockpit-redraw children ($C08324/$C082B8). State shares aircraft redraw counters,
+the pause/origin-range gate and command/indexed fields directly. Signed span
+indices use the original 256-byte surrounding-data window supplied by the
+asset owner; no offsets are invented. Queue publication remains separate.
+
+Validation passes 32,768 complete action comparisons with all RAM, full events,
+ordered child states and JSR stack writes matched; 219/219 parent and 24/24
+actual-child boundaries are covered. Both children execute their real original
+instructions in the oracle, with no controlled replacement children. GNU
+strict-warning/MSVC contracts and all four input CTests pass; GNU symbol
+inspection finds no CPU/bus/machine references. Native MSVC game builds,
+native guard passes 417 files, and the unchanged command ownership audit passes.
+See `analysis/routines/native_view_command_input.md` and its checkpoint.
+Continue with context actions, actual aircraft/audio/spawn children, queue
+publication, original data loading and full runtime composition. Linking the
+library into the bounded native runtime does not complete the game.
 
 ## Current function milestone: static recompilation (2026-10-05)
 

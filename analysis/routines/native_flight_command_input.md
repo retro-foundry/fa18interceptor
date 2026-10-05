@@ -77,7 +77,9 @@ Checkpoint: `analysis/figures/native_flight_command_input_checkpoint.json`.
 ## Remaining work
 
 Implement the actual status/audio, space-press, spawn and eject-publication
-children, view/context action families, and complete queue publication. Load
+children, context actions, and complete queue publication. The view action
+family and its actual zoom/redraw children are now complete as a component;
+see `native_view_command_input.md`. Load
 real native records/assets and compose them into startup, menus, flight,
 update/scene/render/audio scheduling, outcomes, persistence and exit. The
 playable ROM-free runner still uses Musashi and the chipset model. This module

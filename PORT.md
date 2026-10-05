@@ -27,9 +27,11 @@ complete selection prefixes, 32,768 passing source comparisons, shared ordinary
 state and indexed-action composition. The `fa18_command_input` library links
 without CPU or machine sources. `flight_command_input.c` adds all 28 aircraft
 actions and real axis/throttle-reset/space-release children, with 28,672 source
-comparisons and complete component coverage. Other children, view/context
-actions, publication, original mode/pose loading and runtime integration remain
-open; see `analysis/routines/native_flight_command_input.md` and
+comparisons and complete component coverage. The native view/origin/zoom family
+adds 16 actions and both actual zoom/redraw children, with 32,768 complete
+comparisons. Other children, context actions, publication, original data loading
+and runtime integration remain open; see `analysis/routines/native_view_command_input.md`,
+`analysis/routines/native_flight_command_input.md` and
 `analysis/routines/native_command_input.md`.
 
 ## Architecture

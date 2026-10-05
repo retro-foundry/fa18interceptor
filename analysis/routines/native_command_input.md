@@ -39,7 +39,8 @@ ignored or replaced with another command. No action/child/queue behavior is
 invented here.
 
 `fa18_command_input` builds as a static C library containing `command_input.c`,
-`indexed_controls.c` and now `flight_command_input.c`. All three native input
+`indexed_controls.c`, `flight_command_input.c`, `view_command_input.c` and
+`view_command_controls.c`. All four native input
 contract executables use this library;
 `fa18_port` links it too. The library has no CPU, guest-memory, SDL, ROM or
 machine dependency. Its component API is ready for the full native command
@@ -72,9 +73,9 @@ are recorded in `analysis/figures/native_command_input_checkpoint.json`.
 
 ## Remaining full-game work
 
-The flight action component is now implemented and validated; see
-`native_flight_command_input.md` for its child scope and remaining dependencies.
-Port/combine the view and context action families and remaining actual native
+The flight and view components are implemented and validated; see
+`native_flight_command_input.md` and `native_view_command_input.md` for their
+child scopes and remaining dependencies. Port/combine the context family and remaining actual native
 child owners. Port queue publication with the original signed-index
 alias/write ordering. Import the real mode/pose records and audio data from
 the original assets, compose status tones and other children, then replace
