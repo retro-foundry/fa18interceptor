@@ -4,7 +4,10 @@
 #undef main
 #include "../../port/voice_selection.c"
 #include "../../port/audio_selection.c"
-#include "../../build/recomp/native_audio_selection_source.h"
+#ifndef FA18_SELECTION_SOURCE_HEADER
+#define FA18_SELECTION_SOURCE_HEADER "../../build/recomp/native_audio_selection_source.h"
+#endif
+#include FA18_SELECTION_SOURCE_HEADER
 
 enum { TEST_VOICES=6, SOUNDS=37, ACK_LIMIT=8,
        ABI_STACK_FIRST=0xc7fd00, ABI_STACK_END=0xc7ff00 };
@@ -150,6 +153,7 @@ static int selection_original(void) {
     }
     return 0;
 }
+#ifndef FA18_AUDIO_SELECTION_HELPERS_ONLY
 int main(int argc,char **argv) {
     size_t state_size=0,rom_size=0;
     uint8_t *state=read_file("captures/native/demo01/state.bin",&state_size);
@@ -195,3 +199,4 @@ int main(int argc,char **argv) {
     free(expected); free(before); free(base); free(m);
     return 0;
 }
+#endif

@@ -59,6 +59,10 @@ imports from both original ILBM resources and Hunk 21 match all 320 words each.
 Native menu sound selection now shares ordinary audio owners with command
 effects and audio updates. Its independent `voice_selection` core is reused
 by both sound-start paths; 8,192 original comparisons cover all 110 boundaries.
+The complete native startup text/palette publisher and actual formatter add
+8,192 comparisons at all 221 boundaries, with bootstrap explicitly contracted.
+They bind the real mutable checksum descriptor and contiguous original seed;
+full bootstrap, checksum production and installed-stage integration remain open.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
@@ -68,6 +72,7 @@ runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_graphics_setup.md`,
 `analysis/routines/native_audio_update.md`,
 `analysis/routines/native_audio_selection.md`,
+`analysis/routines/native_postflight_text.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,

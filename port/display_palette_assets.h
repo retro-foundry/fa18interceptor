@@ -3,7 +3,9 @@
 #include "hunk.h"
 
 typedef struct {
-    uint16_t initial[32],static_words[32],mode_words[16][16];
+    /* Mode bank in original source order. Its first 32 words are also the
+     * complete $C0F812 seed; mode pointers select 16-word views of this bank. */
+    uint16_t initial[32],static_words[32],mode_words[256];
     const uint16_t *modes[16];
 } FA18DisplayPaletteAssets;
 /* Import the actual caller-selected inst5/frnt5 ILBM CMAP and Hunk 21's

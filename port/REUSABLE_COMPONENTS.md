@@ -102,6 +102,15 @@ future ports can reuse the ordinary-buffer cores with their own data owners.
 See `../analysis/routines/native_graphics_setup.md` for proof and remaining
 startup/scheduling work.
 
+`postflight_text` now binds the real mutable checksum descriptor and seeds the
+same display owner used by those cores. Its checksum sentinels, callback
+selection and unusual hex-field offsets are F/A-18 policy. `stage_callback.h`
+consolidates this game's controller identities so the native owners can be
+composed without conflicting types. The palette asset owner retains one raw
+source-order bank for both its mode views and 32-word seed; no copied seed
+needs synchronization. Full bootstrap and scheduling remain required; see
+`../analysis/routines/native_postflight_text.md`.
+
 Planar rendering, projection and input modules remain candidates, with
 game-specific dimensions, tables or state still present. They should be
 extracted when another concrete caller establishes the common contract.

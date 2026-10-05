@@ -1,0 +1,50 @@
+{
+  "status": "validated_native_complete_text_publisher_bootstrap_and_full_runtime_pending",
+  "entries": [
+    "C0F812",
+    "C0F56A"
+  ],
+  "cases": 8192,
+  "source_boundaries": 221,
+  "covered_boundaries": 221,
+  "native_cpu_dependency": false,
+  "child_contracts": [
+    "C08F26 bootstrap explicitly contracted; native graph not completed. Shared palette pointer, mode, transition, countdown and checksum changes supplied at this boundary; volatile CPU return registers varied independently."
+  ],
+  "actual_children": [
+    "C0F56A complete formatter",
+    "C17B96 menu sound",
+    "C17B2C sound selection",
+    "C17B08/C0F4A6 voice release",
+    "C4FFB0 acknowledgement"
+  ],
+  "comparison": "every Chip/Slow RAM byte except CPU ABI stack C7FD00..C7FF00 for parent, C7FD00..C7FF10 for standalone formatter including its rewritten by-value argument slots; full RAM before bootstrap and at ordered audio acknowledgements; final interrupt/custom register state",
+  "coverage_cases": "all 256 signed width bytes, source-order overlapping palette copies, bootstrap replacement pointers, all signature-test combinations, last mismatch zero selecting audio, both real menu sound branches and fading gates",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "4944e50ef716190ea335eafa3891776acb271b00af25f72836756241c8669963",
+  "reports": [
+    "native text C0F812: 4096 complete calls, full RAM, 13256 ordered acknowledgements and 4096 contracted bootstrap calls match",
+    "native text C0F56A: 4096 complete calls, full RAM, 0 ordered acknowledgements and 0 contracted bootstrap calls match"
+  ],
+  "source_sha256": {
+    "port/postflight_text.c": "0b21759aba6f2aff5ea4d3e3554ba1747b0a2f70a246e688a0b5835800e816b0",
+    "port/postflight_text.h": "9d288d12b9f900378d1a5d891e086a8321cd5b72c0727331fb480fe1c7beed33",
+    "port/postflight_text_contract_test.c": "80ee459d328f74f36d78d8e4da2f974097e8f09e874c358b0bd002135fc46903",
+    "port/hex_field.c": "8740196a9c1ca1f1aee967179b968961f8dfe5a357cdaa357316a1c7e68fbcd2",
+    "port/hex_field.h": "58ab7482ef1c521b764adc372a867583b4fe60ec6e11c1092d9b9f180b519e73",
+    "port/stage_callback.h": "9c91a07e2798ec12bdd17b0bfa85532dfedc80138fc5628cdfe6769662f70982",
+    "port/post_input_tick.h": "5c35dd28b2d9ada857f5baee32f4c64b35e0fd04d7c0379c62c2cca37d843a56",
+    "port/post_input_followup.h": "9bc5d9bd23eba86da87a9302bae744e8aade3170d5d641c8ee89f7ec62b648f4",
+    "port/display_palette_assets.c": "46a460d5dcdd3a970f6adaab7adc188d76d11e85600b2f06ba3eb4663bd3edbb",
+    "port/display_palette_assets.h": "969e4dc4b1930d5c1aeb01e1d2080352fdbd9856f630511b93a5e7efb1425812",
+    "port/menu_record.c": "dc32648181ad6632024f1036b2ca877062fff0d543398501e4f58d72646c0e9e",
+    "port/menu_record.h": "0501b233ede36c8e69684499f6a98f6245126dcfad5989d36f1acb33f4918ee0",
+    "port/audio_selection.c": "74d6ebf2b7b29ea0e20f69cc6018de02f10509417755b0c00b492e077e321808",
+    "port/audio_selection.h": "1c148ce6bd6f74b1a6a225a02f6b7dfd34b18172b34e0032f95bba52abbef2ab",
+    "port/voice_selection.c": "4929799a15a2139a88a0e191a2285aabd0cb6e491cf968cc4f348113636333ce",
+    "port/voice_selection.h": "ebae6ad839268381ffbd5338ad80e96986fa8a226527f03cc405ecf6a473def7",
+    "tools/recomp/check_native_postflight_text.py": "be0dc3ec0b79636a0d4839a0885f8f7dfbbeea30a120906e2c5dae753dce401f",
+    "tools/recomp/native_postflight_text_oracle.c": "cc7983fa5f80a43405d5e81df9d1b0bcaa27e11074ee8da5225da6a9a28205a6",
+    "tools/recomp/native_audio_selection_oracle.c": "27ec4f4eb05168abd52746b3f480822869a2064c4a40221097dd981687c8f9c2"
+  }
+}

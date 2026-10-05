@@ -7,15 +7,26 @@
   "words_per_import": 320,
   "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
   "original_disk_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
-  "comparison": "all 32 decoded initial palette words, 32 static words, and all 256 raw mode words against sealed original state; Hunk 21 and actual ILBM CMAP imports only",
+  "comparison": "all 32 decoded initial palette words, 32 static words and 256 raw mode words, including the contiguous first 32-word seed; 32 bytes of the real mutable selector-97 text against sealed original state; Hunk 21, Hunk 64 and actual ILBM CMAP imports only",
+  "text_descriptor_bytes": 32,
   "native_cpu_dependency": false,
-  "report": "native display assets: inst5 and frnt5 imports each match all 320 decoded/static/mode source words; raw high bits, owned pointers and truncated-resource rejection pass",
+  "report": "native display assets: inst5 and frnt5 imports each match all 320 decoded/static/mode words; contiguous 32-word seed, actual mutable selector-97 text, raw high bits, owned pointers and truncated-resource rejection pass",
   "source_sha256": {
-    "tools/recomp/display_palette_assets_oracle.c": "bb42de9aca4891e48e6bf0ddb0ea1e09f4c4cc22d660c0b599cb4599ea6ef9f6",
-    "port/display_palette_assets.c": "4117792a7b911d6877fc6cd9d8777f030d02bb01ea521d6c4d1576a4576bde2e",
+    "tools/recomp/display_palette_assets_oracle.c": "463d7e824bec00be7f4df10cb944090cf8c9327e4982caad11ffe9836ddd31ab",
+    "port/display_palette_assets.c": "46a460d5dcdd3a970f6adaab7adc188d76d11e85600b2f06ba3eb4663bd3edbb",
     "port/disk.c": "8c3e3ab8e7f584aaecd5fadde1d616d6c0e9bf4f2d1f79b9042532c0bdb5d60e",
     "port/hunk.c": "351c73c0aa48eea4b912a169c7f33cda1066b169bdba0355503255861d4bbf9b",
-    "port/display_palette_assets.h": "71a0511fa8f101ab35096ca32a948390922aa0b2c9e5a21b029706037050055f",
-    "tools/recomp/check_display_palette_assets.py": "8eac3ebdcc9a79689b282e66137d156d5c2fa3661b65a728536fdb41d501578c"
+    "port/menu_record.c": "dc32648181ad6632024f1036b2ca877062fff0d543398501e4f58d72646c0e9e",
+    "port/postflight_text.c": "0b21759aba6f2aff5ea4d3e3554ba1747b0a2f70a246e688a0b5835800e816b0",
+    "port/hex_field.c": "8740196a9c1ca1f1aee967179b968961f8dfe5a357cdaa357316a1c7e68fbcd2",
+    "port/audio_selection.c": "74d6ebf2b7b29ea0e20f69cc6018de02f10509417755b0c00b492e077e321808",
+    "port/voice_selection.c": "4929799a15a2139a88a0e191a2285aabd0cb6e491cf968cc4f348113636333ce",
+    "port/display_palette_assets.h": "969e4dc4b1930d5c1aeb01e1d2080352fdbd9856f630511b93a5e7efb1425812",
+    "port/postflight_text.h": "9d288d12b9f900378d1a5d891e086a8321cd5b72c0727331fb480fe1c7beed33",
+    "port/stage_callback.h": "9c91a07e2798ec12bdd17b0bfa85532dfedc80138fc5628cdfe6769662f70982",
+    "port/hex_field.h": "58ab7482ef1c521b764adc372a867583b4fe60ec6e11c1092d9b9f180b519e73",
+    "port/audio_selection.h": "1c148ce6bd6f74b1a6a225a02f6b7dfd34b18172b34e0032f95bba52abbef2ab",
+    "port/voice_selection.h": "ebae6ad839268381ffbd5338ad80e96986fa8a226527f03cc405ecf6a473def7",
+    "tools/recomp/check_display_palette_assets.py": "86f125b79e2b2140b0565747200a2313ae5b3e21a7099c1ffb2a1451e5e833eb"
   }
 }

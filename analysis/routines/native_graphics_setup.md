@@ -78,7 +78,9 @@ Exact Kickstart initialization/layout/timing remains a separate reference scope.
 `display_palette_assets.c/.h` imports the initial palette from the actual
 caller-selected `inst5`/`frnt5` ILBM CMAP, plus Hunk 21's 32 static words at
 offset 0x40 and all sixteen raw mode palettes at 0x80+(15-mode)*32. Pointer
-members are bound to the imported owner's actual arrays after copying.
+members are bound to views of one source-order bank after copying. The complete
+native `$C0F812` publisher now consumes its first 32 words as the actual dynamic
+seed; see `native_postflight_text.md` for its bootstrap dependency and proof.
 The original disk evidence in `analysis/disk_graphics_assets.md` establishes
 that both resources share the `$C1AA9C` palette; the splash palette differs.
 No last-loaded resource, mode default, dynamic seed or pixel content is invented.
@@ -89,6 +91,8 @@ both resources; each matches all **320** initial/static/mode words against
 the sealed source. Raw high-bit Hunk mutations, owned palette pointers and
 truncated-resource rejection also pass. Its reference fixture is generated
 only under ignored `build/recomp`; no palette snapshot enters production.
+The extended proof also checks the contiguous seed and 32 bytes of selector
+97's actual mutable descriptor in Hunk 64, with a write/read ownership check.
 
 The native integration contract constructs the source's two different list
 depths using real bounded storage, binds renderer pointers, presents their
@@ -103,7 +107,7 @@ Both outer display proofs still pass 8,192 calls and all 80 boundaries.
 
 Checkpoints are `native_graphics_setup_checkpoint.json` and
 `native_display_palette_assets_checkpoint.json` under `analysis/figures`.
-Actual startup loading order, dynamic-palette seeding, native waits/presentation
+Actual startup loading order/bootstrap and seed scheduling, native waits/presentation
 scheduling, full gameplay/update composition, audio playback and termination
 cleanup remain open. These components link into the native target, but its
 bounded main still does not invoke this graph. The playable reference remains

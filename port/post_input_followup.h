@@ -4,15 +4,8 @@
 #include <stdint.h>
 
 #include "viewport_mode.h"
+#include "stage_callback.h"
 
-typedef enum {
-    FA18_POST_INPUT_CALLBACK_FINISH_FOLLOWUP,
-    FA18_POST_INPUT_CALLBACK_AFTER_FINISH_FOLLOWUP,
-    FA18_POST_INPUT_CALLBACK_COMPLETE_FOLLOWUP,
-    /* `$C0FA80` installs `$C10C08`; its subsequent controller is a separate
-     * source owner, so retain this installed target without advancing it. */
-    FA18_POST_INPUT_CALLBACK_CONTINUE_AFTER_COMPLETE_FOLLOWUP
-} FA18PostInputCallback;
 
 /* Caller-owned direct state surrounding `$C0FA04`. */
 typedef struct {

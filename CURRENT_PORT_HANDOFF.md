@@ -6,7 +6,29 @@ also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
 
-Latest batch: native `$C17B96` menu audio and its actual sound-selection/release
+Latest batch: complete native `$C0F812` checksum text/palette publisher and its
+actual `$C0F56A` formatter now use ordinary shared command, aircraft, display,
+countdown, callback and audio owners. Selector 97 binds directly to the actual
+mutable Hunk-64 descriptor; Hunk 21 supplies one source-order mode bank whose
+first 32 words are the original seed. The conflicting native callback typedefs
+are consolidated in `stage_callback.h`. No bootstrap or next-stage substitute
+is supplied: complete native `$C08F26` and its actual child graph next.
+
+Validation: 8,192 calls cover 221/221 source boundaries (70 publisher, 41
+formatter, 110 real audio children), every signed width byte, palette-pointer
+replacement/forward overlaps and last-mismatch-zero audio selection. Only
+`$C08F26` uses an explicit child contract; 4,096 entry states and 13,256 actual
+audio acknowledgements match. Original disk imports match all 320 palette
+words and 32 descriptor bytes, with shared mutable text checked. GNU strict
+tests/symbol inspection, native MSVC build, three affected CTests and the
+unchanged 463-file guard pass. Audio-selection regression retains 8,192 calls
+and all 110 boundaries. See `analysis/routines/native_postflight_text.md` and
+its checkpoint for explicit CPU ABI exclusions and remaining dependencies.
+Complete bootstrap, loading/checksum production, installed stages, sample
+output and full native scheduling remain open. Native main still does not
+call the new graph; the playable reference remains emulated.
+
+Preceding batch: native `$C17B96` menu audio and its actual sound-selection/release
 children now use the same ordinary audio owner as command effects/updates.
 `port/voice_selection.c/.h` is an independently built reusable component shared
 by command sounds and menu sounds; game IDs, enable flags and volume conversion

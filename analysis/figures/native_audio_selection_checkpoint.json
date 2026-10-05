@@ -28,6 +28,6 @@
     "port/command_effects.c": "ef4fc732fed3a473507a5d95f2979b6723e408dc5fdf20930056a94c8cf6adc6",
     "port/command_effects.h": "e50e0b22bab91e2c97183e87818f3f3d72edb84fe899d74f8837cbb54daf4067",
     "tools/recomp/check_native_audio_selection.py": "63cba0039e0de786b15f8e0c4600cdbd3a393d32575385c996a1dbe835235f74",
-    "tools/recomp/native_audio_selection_oracle.c": "a7cf90301abefcd6cd124b3299907765785b93c00dd3ede2a2646eb50d61f5be"
+    "tools/recomp/native_audio_selection_oracle.c": "27ec4f4eb05168abd52746b3f480822869a2064c4a40221097dd981687c8f9c2"
   }
 }

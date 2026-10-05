@@ -2,16 +2,10 @@
 #define FA18_POST_INPUT_TICK_H
 
 #include <stdint.h>
+#include "stage_callback.h"
 
 /* Native names for the four concrete callback addresses selected by
  * `$C0F5F8-$C0F7D1`. The callback body remains an explicit owner boundary. */
-typedef enum {
-    FA18_POST_INPUT_CALLBACK_C0F920,
-    FA18_POST_INPUT_CALLBACK_C0F946,
-    FA18_POST_INPUT_CALLBACK_C1104C,
-    FA18_POST_INPUT_CALLBACK_C11078,
-    FA18_POST_INPUT_CALLBACK_EXISTING
-} FA18PostInputCallback;
 
 typedef struct {
     int8_t entry_guard, enable, signed_guard, later_guard;
