@@ -63,7 +63,7 @@ int fa18_update_copper_palette_moves(FA18CopperMutableInstructionStream *streams
                                      uint32_t palette_mask,
                                      uint32_t *updated_mask);
 
-/* Present a five-plane `$5200` state through caller-owned page buffers. The
+/* Present an original four/five-plane `$4200/$5200` state through native buffers. The
  * source's big-endian bit order is preserved. A complete 32-register Copper
  * palette state replaces the video palette; an incomplete list leaves the
  * caller palette intact rather than filling missing entries with guesses. */

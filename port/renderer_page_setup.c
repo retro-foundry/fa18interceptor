@@ -1,4 +1,5 @@
 #include "renderer_page_setup.h"
+#include "renderer_page_layout.h"
 
 #include <string.h>
 
@@ -18,23 +19,9 @@ int fa18_initialize_renderer_page_setup(FA18RendererPageSetup *setup) {
         setup->source[index] = plane_pointers[index];
     for (unsigned index = 0; index < 4; ++index)
         setup->source[5 + index] = setup->source[index];
-    setup->table_a[0] = setup->source[3];
-    setup->table_a[1] = setup->source[2];
-    setup->table_a[2] = setup->source[1];
-    setup->table_a[3] = setup->source[0];
-    setup->table_a[4] = setup->source[8];
-    setup->table_a[5] = setup->source[7];
-    setup->table_a[6] = setup->source[6];
-    setup->table_a[7] = setup->source[5];
-    setup->table_b[0] = setup->source[4];
-    setup->table_b[1] = setup->source[3];
-    setup->table_b[2] = setup->source[2];
-    setup->table_b[3] = setup->source[1];
-    setup->table_b[4] = setup->source[0];
-    setup->table_b[5] = setup->source[8];
-    setup->table_b[6] = setup->source[8];
-    setup->table_b[7] = setup->source[7];
-    setup->table_b[8] = setup->source[6];
-    setup->table_b[9] = setup->source[5];
+    for (unsigned index = 0; index < 8; ++index)
+        setup->table_a[index] = setup->source[fa18_renderer_table_a_order[index]];
+    for (unsigned index = 0; index < 10; ++index)
+        setup->table_b[index] = setup->source[fa18_renderer_table_b_order[index]];
     return 0;
 }

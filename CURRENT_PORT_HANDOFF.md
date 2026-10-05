@@ -403,6 +403,61 @@ The older bounded outer-loop wrapper retains separate metadata/callers;
 the native main still does not call this complete shared display graph.
 The playable reference remains emulated; the full goal remains unfinished.
 
+Graphics setup progress: `port/graphics_setup.c/.h` now implements the complete
+$C15DB4 initializer, actual $C2F4DE table child, and separate $C160D6 entry
+whose original BSR is at $C15D68. The initial four plane allocations retain
+their combined failure check; the fifth is separately allocated/checked.
+The second bitmap shares the lower four planes, with the exact renderer
+table orders now shared through `renderer_page_layout.h`. No second private
+five-plane display family is invented. The map receives the original raw
+32-word bank after dynamic allocation; the dynamic palette is not seeded by
+this routine. Map publication and list construction retain their source order.
+
+`graphics_storage.c/.h` supplies actual native plane/map/dynamic allocation and
+record/merge services using the existing reusable cores. Its shared family
+binds to the existing renderer's actual native buffers/offsets. Input and
+display continue to use the same live pair owners. The separate SHFCprList
+is now retained when the second entry clears LOFCprList/DspIns, as proved by
+the full-RAM oracle. The original ignores construction-operation results;
+native handled failures retain output/publication/page-reset order and record
+the failure. Allocation errors call the actual supplied termination boundary;
+startup cleanup remains outside this owner. Native list decoding/presentation
+now handles the original four/five-plane states while retaining blank-state
+decoder behavior.
+
+`display_palette_assets.c/.h` imports the initial palette from the actual
+caller-selected inst5/frnt5 ILBM, plus all raw static/mode words from Hunk 21.
+Disk evidence establishes that these two resources share $C1AA9C; splsh has
+a different palette. Original resource loading order and dynamic seeding are
+not synthesized. Run `python tools/recomp/check_display_palette_assets.py`:
+both actual original ADF resources independently match all 320 words against
+the sealed source, with raw high-bit and truncated-resource checks. Reference
+palette bytes are generated only under ignored build/recomp.
+
+`python tools/recomp/check_native_graphics_setup.py` passes 4,096 initializer
+invocations (1,024 normal, 3,072 terminating) and 1,024 second-entry calls,
+all 194 reachable source boundaries and 29,184 native service boundaries.
+Full Chip/Slow RAM outside the ABI stack matches at each boundary and return.
+Real native construction is compared with packed MakeVPort/MrgCop. The three
+static error return sites C15DDE/C15F88/C15FBE are recorded as unreachable:
+C50DE8 -> C522D0 -> C0DFE6 restores the startup stack at C0E028 and returns
+to the loader, not these caller sites. The termination contract stops there
+without claiming full native cleanup. Exact Kickstart semantics/timing remain
+separate from the accepted host initialization contracts.
+
+GNU strict-warning integration and asset binaries have no CPU/bus/machine/
+guest/host-service symbols. Native MSVC builds and all six affected CTests
+pass, including the original decoder's blank state. The unchanged guard
+passes 454 files. Both complete outer display proofs retain 8,192 matching
+calls and all 80 source boundaries. See `analysis/routines/native_graphics_setup.md`
+and the graphics/palette checkpoint files under `analysis/figures`.
+
+Continue with the actual startup/data loading order and dynamic-palette seed,
+native wait/presentation scheduling, full gameplay composition, sample playback
+and termination cleanup. The bounded native main still does not invoke this
+graph, and the playable reference remains emulated. The full goal is unfinished.
+Commit each validated batch.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

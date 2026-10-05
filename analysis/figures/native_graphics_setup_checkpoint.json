@@ -1,0 +1,50 @@
+{
+  "status": "validated_native_graphics_setup_full_startup_and_scheduler_pending",
+  "entries": [
+    "C15DB4",
+    "C160D6"
+  ],
+  "case_fixtures": 4096,
+  "actual_child": "C2F4DE renderer table layout",
+  "source_boundaries": 194,
+  "covered_boundaries": 194,
+  "native_cpu_dependency": false,
+  "comparison": "full Chip/Slow RAM outside ABI stack C7FD00..C7FF00 at each allocation/construction/termination boundary and final return; native object identities serialized only in validation",
+  "child_contracts": [
+    "OpenLibrary and initialization data use accepted host semantics",
+    "termination is a controlled nonreturning child; cleanup remains outside this owner"
+  ],
+  "terminal_fallthrough": {
+    "unreachable_parent_pcs": [
+      "C15DDE",
+      "C15F88",
+      "C15FBE"
+    ],
+    "evidence": "C50DE8 -> C522D0 -> C0DFE6, startup stack restoration at C0E028 then RTS at C0E032; these three return-site instructions are static bytes, not returning error paths"
+  },
+  "actual_native_backend": "native bounded plane/map/dynamic allocation and record/merge services; compared to explicit source allocation contracts and packed MakeVPort/MrgCop",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "358483483f8aea0df7f50e841d1e6b7e0ee68bb4a57a8bec2bc0bc4351147ecf",
+  "report": "native graphics setup: 4096 first-entry calls (1024 normal, 3072 terminating), 1024 second-entry calls matched full RAM outside ABI stack and 29184 native allocation/construction boundaries",
+  "source_sha256": {
+    "port/graphics_setup.c": "239078ae8ec83f34b9f582f4f25fc61717883b19d559d6e7ec6902e1415359fe",
+    "port/graphics_setup.h": "6df4636345a83ec87a65969573a1939a6996e565776caea1e4f1336a293647c6",
+    "port/graphics_storage.c": "f166906fb9a34bcb293345b0558f0ab3d666d7bf00db66a4f3a10b320bc06f80",
+    "port/graphics_storage.h": "edf4f86363507b99d6c4d78fd0a3286ca7b9d52ad5272d706fa86018337e7e75",
+    "port/graphics_setup_contract_test.c": "6cc6d726b03f57f1143b81a227a57c2110556ad7d7f93ee11d050d09a2235589",
+    "port/renderer_page_layout.h": "eeecbaa7799ebfb65d8103016c75af55c0a6d0c5a7a2b2eb618e75bf6cf43de2",
+    "port/renderer_page_setup.c": "bd6daf0f8f3dcb30182388c030839900d34c727eeeb836946d2d747b5a3d0bf8",
+    "port/input_callback.c": "391f1d4456d6b9e8eb476e029d071ac491804d85a8bdb63f5ede2c17c128d922",
+    "port/input_callback.h": "af9329abe8a8872703ce273d25842dcdc8b837af1ac64572204940bb6fa5f21c",
+    "port/amiga/viewport_list.c": "bc108a9aec864e14cac5f9b7302dd98e28fa0ca85b55fa6f56e41bdb0ee82ad4",
+    "port/amiga/rgb4.c": "c69c27c8096421a82ccbb5a063774c3b7bf11dee54ab85e2069c2e4524cd739a",
+    "port/amiga/host_graphics.c": "f771e8497b9eecca38b02915f60dd0bc5df37af82a802b26b63db6d01ed0d0d8",
+    "port/amiga/host_compat.c": "f7245a38bda5184a8405ff71dde2218df1cf75042f7e7d398a92133c62c81c57",
+    "port/amiga/guest_memory.c": "34cc006389193abe6a05c841501205ab2b839a316a54c01bb959a7faf2a467ca",
+    "port/five_plane_chip_binding.c": "d10a6fc5fd63f1d855f79ca4e76e151b4567f5eecc2cfd543969e1689efdc27b",
+    "port/five_plane_page.c": "e078edf803a3201a04ced5e3a856cb2f223d0fcb1c063859e7682a3ec5b4a76e",
+    "port/copper_page.c": "f2126d5626fd7ad27a259c9e675f876ac20fe370d19be1033ce56fed4cba07e5",
+    "tools/recomp/check_native_graphics_setup.py": "1025ee2feb6d9fe73134a282befa40e93d31b9bf0758a3fd391ee814930bcf19",
+    "tools/recomp/native_graphics_setup_oracle.c": "e19e15ced60500a8e8a49d55c6664a7fdf0cd32e7a166578353732d5bf0d6aaf"
+  }
+}

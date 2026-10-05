@@ -84,7 +84,10 @@ int fa18_decode_copper_page_at_vpos(const FA18CopperInstructionStream *streams,
 
 complete:
     if (!have_bplcon0) return -1;
-    for (unsigned plane = 0; plane < FA18_COPPER_PAGE_PLANES; ++plane) {
+    /* Retain the existing full-state decoder for blank/other BPLCON0 values.
+     * The actual second setup list provides only four active plane pairs. */
+    const unsigned depth = ((state->bplcon0 >> 12) & 7u) == 4 ? 4 : FA18_COPPER_PAGE_PLANES;
+    for (unsigned plane = 0; plane < depth; ++plane) {
         if (plane_fields[plane] != 3u) return -1;
         state->plane_pointers[plane] = (uint32_t)plane_high[plane] << 16 |
                                       plane_low[plane];
@@ -140,11 +143,12 @@ int fa18_present_copper_page(const FA18CopperPageState *state,
                              const FA18CopperPlaneBuffer *buffers,
                              size_t buffer_count, FA18Video *video) {
     const uint8_t *planes[FA18_COPPER_PAGE_PLANES];
+    unsigned depth;
 
-    if (!state || !buffers || !video ||
-        ((state->bplcon0 >> 12) & 7u) != FA18_COPPER_PAGE_PLANES)
-        return -1;
-    for (size_t plane = 0; plane < FA18_COPPER_PAGE_PLANES; ++plane) {
+    if (!state || !buffers || !video) return -1;
+    depth = (state->bplcon0 >> 12) & 7u;
+    if (depth != 4 && depth != FA18_COPPER_PAGE_PLANES) return -1;
+    for (size_t plane = 0; plane < depth; ++plane) {
         planes[plane] = find_plane_buffer(buffers, buffer_count,
                                           state->plane_pointers[plane]);
         if (!planes[plane]) return -1;
@@ -158,7 +162,7 @@ int fa18_present_copper_page(const FA18CopperPageState *state,
             for (int bit = 0; bit < 8; ++bit) {
                 const uint8_t mask = (uint8_t)(0x80u >> bit);
                 uint8_t colour_index = 0;
-                for (unsigned plane = 0; plane < FA18_COPPER_PAGE_PLANES; ++plane) {
+                for (unsigned plane = 0; plane < depth; ++plane) {
                     if (planes[plane][source] & mask)
                         colour_index |= (uint8_t)(1u << plane);
                 }

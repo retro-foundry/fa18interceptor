@@ -1,0 +1,21 @@
+{
+  "status": "validated_original_disk_palette_imports_startup_loading_order_pending",
+  "resources": [
+    "pix/inst5",
+    "pix/frnt5"
+  ],
+  "words_per_import": 320,
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_disk_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "comparison": "all 32 decoded initial palette words, 32 static words, and all 256 raw mode words against sealed original state; Hunk 21 and actual ILBM CMAP imports only",
+  "native_cpu_dependency": false,
+  "report": "native display assets: inst5 and frnt5 imports each match all 320 decoded/static/mode source words; raw high bits, owned pointers and truncated-resource rejection pass",
+  "source_sha256": {
+    "tools/recomp/display_palette_assets_oracle.c": "bb42de9aca4891e48e6bf0ddb0ea1e09f4c4cc22d660c0b599cb4599ea6ef9f6",
+    "port/display_palette_assets.c": "4117792a7b911d6877fc6cd9d8777f030d02bb01ea521d6c4d1576a4576bde2e",
+    "port/disk.c": "8c3e3ab8e7f584aaecd5fadde1d616d6c0e9bf4f2d1f79b9042532c0bdb5d60e",
+    "port/hunk.c": "351c73c0aa48eea4b912a169c7f33cda1066b169bdba0355503255861d4bbf9b",
+    "port/display_palette_assets.h": "71a0511fa8f101ab35096ca32a948390922aa0b2c9e5a21b029706037050055f",
+    "tools/recomp/check_display_palette_assets.py": "8eac3ebdcc9a79689b282e66137d156d5c2fa3661b65a728536fdb41d501578c"
+  }
+}

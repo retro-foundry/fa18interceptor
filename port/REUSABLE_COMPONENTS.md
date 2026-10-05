@@ -81,6 +81,15 @@ supports both this owner's 32-word loads and the input callback's 16-word
 loads. Synchronization/presentation stay with the embedding runtime; see
 `../analysis/routines/native_outer_display.md` for the source proof and limits.
 
+`graphics_setup`/`graphics_storage` now compose those independent list/RGB4
+mechanisms with this game's actual five-plane allocation and later shared
+four-plane display. `display_palette_assets` imports the original ILBM CMAP
+and Hunk palette data. This construction order, plane topology, table layout
+and palette selection are game policy. Keep them in the F/A-18 adapter;
+future ports can reuse the ordinary-buffer cores with their own data owners.
+See `../analysis/routines/native_graphics_setup.md` for proof and remaining
+startup/scheduling work.
+
 Planar rendering, projection and input modules remain candidates, with
 game-specific dimensions, tables or state still present. They should be
 extracted when another concrete caller establishes the common contract.

@@ -52,12 +52,17 @@ list owner connected to callback RGB4 updates and renderer-buffer presentation.
 The complete native outer display owner now shares those input/page/mode
 objects, with 8,192 original comparisons covering all 80 source boundaries
 and real 32-word RGB4 updates. Original synchronization services remain explicit.
+Native graphics setup now allocates the original five-plane family, builds
+both actual five/four-plane display pairs and shares the native display owner.
+Its 5,120 original invocations cover all 194 reachable boundaries. Palette
+imports from both original ILBM resources and Hunk 21 match all 320 words each.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
 `analysis/routines/native_rgb4.md`,
 `analysis/routines/native_viewport_list.md`,
 `analysis/routines/native_outer_display.md`,
+`analysis/routines/native_graphics_setup.md`,
 `analysis/routines/native_audio_update.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
