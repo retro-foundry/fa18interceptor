@@ -15,7 +15,7 @@ typedef enum {
 typedef struct FA18NativeControlRecordUpdate FA18NativeControlRecordUpdate;
 typedef struct {
     /* Return zero on unavailable/failing child. Decision is consumed only by
-     * ready and dispatch children and is separate from completion. */
+     * dispatch and is separate from completion. */
     int (*consume)(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,
                    unsigned companion_slot,int *decision);

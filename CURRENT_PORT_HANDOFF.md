@@ -11,6 +11,49 @@ reuse existing owners and run validation for changed behavior/affected callers.
 The separate `amiga-recomp` project was inspected (13 existing tests pass),
 but the user did not request switching this port to its CPU/chipset runtime.
 
+## Resume state
+
+Start from commits `80430049` (native record selection leaves) and `c9e6ae54`
+(native active-origin update). The expected working tree is clean except for
+the user's untracked `.vscode/` directory; do not stage or modify it. Continue
+committing completed, validated batches as work proceeds.
+
+The native bootstrap graph is direct through `$C08F26`, placement, template
+gates, `$C1C63E`, `$C22C80`, `$C29042`, and `$C1C860`. Explicit lower owners
+still remain:
+
+- `FA18NativeControlRecordOps`: periodic, root control, root view, root marker,
+  pose, primary placement, secondary placement, secondary control, dispatch,
+  and finish. The composed fresh-bootstrap contract reaches root control,
+  root view, root marker, root pose, and finish.
+- `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
+  the now-direct action selectors. They are route-dependent.
+- `FA18NativeSelectorOriginOps`: preparation, matrix A/B, regeneration, and
+  normalization.
+- `FA18NativeContextRefreshOps`: templates, sort, cache, condition A/B, and
+  render.
+
+The native main still does not construct or invoke this graph. The playable
+ROM-free runner does not require Kickstart, but still uses Musashi CPU state,
+guest memory, and the machine/chipset runtime. Do not describe the port as
+emulation-free until native main owns startup, frame scheduling, rendering,
+audio, and input without those layers.
+
+Recommended next batch: port the startup-reachable root control/view/marker/
+pose chain using the complete readable owners already under `port/game/`.
+Preserve their true lower child boundaries and shared record mutations. Then
+port finish scheduling and connect original assets/state before installing the
+graph in native main. The static-recomp audit currently reports 85 deferred
+entries, 539 readable translated entries, 75 readable source-only entries,
+and 854 direct opcode bindings; those numbers describe the compatibility
+runner, not completion of the ordinary-state native graph.
+
+Latest validation passed: MSVC Release `fa18_port`, strict GNU contracts, nine
+affected CTests, `python scripts/check_native_build.py` over 493 files, and the
+two-case historical bootstrap oracle (282/291 parent boundaries). The
+historical oracle still contracts old child boundaries and is sequencing
+evidence rather than proof of the new direct lower owners.
+
 Latest batch: `$C230B0`, `$C230E8`, `$C23116` and `$C231A2` now run directly
 inside the native control-record scheduler. Lost-selection release, both root
 action selectors and paired-record readiness use the live sixteen-record bank
