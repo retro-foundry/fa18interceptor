@@ -41,6 +41,10 @@ int fa18_initialize_command_queue(FA18CommandQueue *queue,
  * Returns 0 for an uninitialized queue or an invalid offset/owner. */
 int fa18_bind_command_queue_byte(FA18CommandQueue *queue, unsigned offset,
                                  uint8_t *owner);
+/* Import/rebind both big-endian bytes atomically with respect to owner
+ * initialization, including when that same word already owns the slots. */
+int fa18_bind_command_queue_word(FA18CommandQueue *queue, unsigned offset,
+                                 int16_t *owner);
 
 /* Complete $C1C23C-$C1C2B8 publication: signed count/index checks, original
  * write order, translation and unconditional modifier clearing. Queued events

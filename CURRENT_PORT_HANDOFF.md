@@ -252,6 +252,44 @@ native game nor their isolated proofs completes the game. Its loop still does
 not call the new command/audio components; the playable reference is emulated.
 The complete emulation-free goal remains active; commit each validated batch.
 
+Input callback progress: `port/input_callback.c/.h` now implements complete
+$C1718E mouse accumulation, viewport transitions and the actual master fade.
+Mouse Y shares the indexed throttle word; X/ticks attach to their canonical
+queue words. Original signed/wrapped counter deltas, negative-Y arithmetic
+halving when unready and signed/inverted bounds are preserved. Display data
+uses imported palettes and actual native pair pointers; missing owners fail
+after preserving prior source writes. An actual native LoadRGB4 backend and
+callback tick scheduling remain required.
+
+`port/viewport_transition.c/.h` now owns the source transition sequence once,
+used by both the full callback and the older bounded native viewport wrapper.
+It retains the selected palette and captured signed pair index across calls,
+rereads published pair values and copies sixteen terminal words sequentially,
+including overlaps. The older wrapper's stable branch now correctly loads
+the mutable palette buffer. This shared code retains F/A-18 policy; the
+independent voice-program library remains the general component for future
+ports. The reuse notes record this distinction.
+
+Validation passes 4,096 complete original callback/fade calls and all 198/198
+boundaries, with 2,048 ordered palette-service boundaries. All Chip/Slow RAM
+outside the original ABI stack $C7FD00..$C7FF00, palette identity/words, saved
+pair identities and source return match. Only LoadRGB4 is a controlled host
+contract; the complete original fade executes. Shared child-induced page,
+pair-table, palette, mode and fade changes are covered without mutating ABI
+locals. GNU strict-warning contracts, CPU/bus/machine symbol inspection,
+native MSVC builds and all thirteen affected CTests pass. The unchanged
+native guard passes 439 files; queue regression passes 73,728 calls and all
+28 publication boundaries. Both command parents still pass 16,384 calls,
+with their existing 985/1,104 parent and 125/125 actual-child coverage.
+See `analysis/routines/native_input_callback.md`
+and `analysis/figures/native_input_callback_checkpoint.json`.
+
+Continue with native scheduling/display services, sample playback, original
+asset imports and full gameplay composition. The bounded native loop still
+does not call these new input/audio owners; the playable reference remains
+emulated. The full emulation-free goal remains active and unfinished.
+Commit each validated batch as requested.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

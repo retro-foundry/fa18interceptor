@@ -40,6 +40,23 @@ int fa18_bind_command_queue_byte(FA18CommandQueue *q,unsigned offset,uint8_t *ow
     return 1;
 }
 
+int fa18_bind_command_queue_word(FA18CommandQueue *q,unsigned offset,int16_t *owner) {
+    uint16_t bits=0;
+    unsigned i;
+    if(!q || !q->commands || !owner || offset>=FA18_COMMAND_QUEUE_NEIGHBORS-1u) return 0;
+    for(i=0;i<2;++i) {
+        const FA18CommandQueueByte *slot=&q->slots[offset+i];
+        uint8_t byte;
+        if(!slot->byte && !slot->word) return 0;
+        byte=slot->byte?*slot->byte:(uint8_t)((uint16_t)*slot->word>>slot->shift);
+        bits=(uint16_t)((bits<<8)|byte);
+    }
+    /* Read both canonical bytes before bind_word clears/attaches the owner. */
+    bind_word(q,offset,owner);
+    *owner=bits<0x8000u?(int16_t)bits:(int16_t)((int)bits-0x10000);
+    return 1;
+}
+
 int fa18_initialize_command_queue(FA18CommandQueue *q,
                                   FA18ContextCommandState *context,
                                   const uint8_t *neighbors, size_t neighbor_count,

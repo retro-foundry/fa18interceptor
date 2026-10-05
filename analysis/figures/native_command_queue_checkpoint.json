@@ -11,8 +11,8 @@
   "comparison": "all Chip/Slow RAM without exclusions, full event, canonical native owners; original instructions without child contracts",
   "report": "native command queue: 73728 calls matched full RAM, events and canonical owners; 28 boundaries; 138 raw and 256 translated destinations",
   "source_sha256": {
-    "port/command_queue.c": "e7782730c22d283d6440cae5fa53698da21c089785f543a5f04d258b09c11bf8",
-    "port/command_queue.h": "7cb82db6e674ff5bf466225142ca1876ccdb7f5570ccbb69eb694b8461821f66",
+    "port/command_queue.c": "33f5c8073da756dc67ea8371767778dbb561cc334b87eca6edb64af945b62d64",
+    "port/command_queue.h": "4cb234bbfa375c4596128845f65d369e6408702995c7a2e294fc827b79e45b3e",
     "port/command_queue_contract_test.c": "2c397d0564f4667a39f46d2fdc97b6786ba206e01ae8f3ef5ee95fc4ae7e2422",
     "port/command_input.h": "37ad0f86cf22af73b5c07fb79107683c43268790031a107d218f1c535ed22d65",
     "port/indexed_controls.h": "ed89c6b7939725c4392dfc338844be83be8b86c32ce32eb3edab0a43c4fd0346",

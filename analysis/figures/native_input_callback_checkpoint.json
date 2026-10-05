@@ -1,0 +1,31 @@
+{
+  "status": "validated_native_input_callback_palette_backend_and_runtime_pending",
+  "entry": "C1718E",
+  "cases": 4096,
+  "source_boundaries": 198,
+  "covered_boundaries": 198,
+  "native_cpu_dependency": false,
+  "child_contracts": [
+    "C53EC0 LoadRGB4 service only; shared-owner changes, no ABI local mutation"
+  ],
+  "actual_children": [
+    "C24FE8 master-volume fade"
+  ],
+  "comparison": "full Chip/Slow RAM except original CPU ABI stack C7FD00..C7FF00; ordered palette pointer/16 words, saved display-pair identities and complete RAM at each palette call; final source return D0=0",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "c3a2b6c295e7199ce7d7448169f1f6c2f1cd967c79bad16495334706f1fec58a",
+  "report": "native input callback C1718E: 4096 original calls matched RAM outside CPU ABI stack, return and 2048 ordered palette boundaries",
+  "source_sha256": {
+    "port/input_callback.c": "b79fc4da21735e4d323d5fb85ea7e095e3894a28a3f65ccb84291c839ae0837e",
+    "port/input_callback.h": "81e7c45080eb96e736f2c9a7ba9c177e52bc02fe0d6279464d6e13d36e913aa5",
+    "port/input_callback_contract_test.c": "340e3a68a1c60bc32223fd5deb216d4e32418bdc70162de450871e9f6900b728",
+    "port/viewport_transition.c": "d26b61c5b8c1444dac07c32a14de9b0c169a7ba7e646b37e4fa38bcbc22d6eb4",
+    "port/viewport_transition.h": "e84807b7f607e171f80328bdc0228deda8305a8f16de24818693717cd5eac474",
+    "port/viewport_mode_state.h": "90277e90785cbb7209fea0875a65572d7d3f3ec0e447f564f3491c2a37f33667",
+    "port/audio_update.c": "a5bb0aa5f55777b892f4a9e163f8a476fa9fbc35a310d5f52c84f2dc6f1a1507",
+    "port/command_queue.c": "33f5c8073da756dc67ea8371767778dbb561cc334b87eca6edb64af945b62d64",
+    "port/command_queue.h": "4cb234bbfa375c4596128845f65d369e6408702995c7a2e294fc827b79e45b3e",
+    "tools/recomp/check_native_input_callback.py": "40587a1b3135cd33c09373f76cbd7c2fe241a213aa98301cf5bc1f3b7b24a5f4",
+    "tools/recomp/native_input_callback_oracle.c": "30e87b8554ba0d70d79eb093143b792f254a5bcc6ffe63364c514d9b0286af37"
+  }
+}

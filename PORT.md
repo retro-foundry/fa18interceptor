@@ -38,8 +38,13 @@ command message/status/voice/space/sweep game children add 12,288 comparisons
 and cover all 278 original boundaries. Audio program/update/output/fade owners
 add 16,384 comparisons at all 105 boundaries. Their portable `voice_program`
 core builds independently for reuse; original selector/output/fade policy stays
-in the F/A-18 adapter. Host services, sample playback, original data loading and
+in the F/A-18 adapter. The complete native mouse/viewport/fade callback adds
+4,096 comparisons at all 198 original boundaries. It shares mouse Y with
+throttle controls, attaches X/tick queue aliases and uses the same viewport
+transition implementation as the older native wrapper. Host services, sample
+playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
+`analysis/routines/native_input_callback.md`,
 `analysis/routines/native_audio_update.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,

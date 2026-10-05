@@ -6,13 +6,7 @@
 
 #include "outer_page_selector.h"
 #include "viewport_palette.h"
-
-typedef struct {
-    uint8_t current;
-    uint8_t target;
-    uint8_t countdown;
-    uint8_t state;
-} FA18ViewportModeState;
+#include "viewport_mode_state.h"
 
 /* Caller-owned equivalents of `$C4566C`, `$C182BA/$C182C2`, and `$C45660`.
  * The final buffer is required because `$C1718E` copies exactly the selected

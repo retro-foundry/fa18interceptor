@@ -66,6 +66,9 @@ int main(void) {
            !step.pointer_pair_published && !step.pointer_pair_publish_count &&
            !step.mode_words_copied);
     assert(copper_bytes[2] == 0x0a && copper_bytes[3] == 0x00);
+    copied.words[0]=0x0bcd;
+    assert(fa18_advance_viewport_mode(&state,&bindings,&exe,&stream,1,&step)==0);
+    assert(copper_bytes[2]==0x0b && copper_bytes[3]==0xcd);
     bindings.mode_palette_buffer = NULL;
     state.current = 8;
     state.target = 9;

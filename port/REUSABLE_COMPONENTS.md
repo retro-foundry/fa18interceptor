@@ -45,6 +45,15 @@ children executed fully. This establishes this game's adapter fidelity;
 another port still needs its own original-behavior fixtures. See
 `../analysis/routines/native_audio_update.md` for the precise comparison scope.
 
+`viewport_transition.c/.h` now owns one shared implementation used by both
+the complete native input callback and the bounded native viewport wrapper.
+Its interfaces accept imported palettes and actual publication/load owners,
+but its mode delays and load/publish order are F/A-18 rules. Keep those rules
+in this game's adapter when a future port establishes a common mechanism.
+The callback also shares mouse/throttle words directly with command input;
+there is no additional emulated state to synchronize. See
+`../analysis/routines/native_input_callback.md` for validation and limits.
+
 Planar rendering, projection and input modules remain candidates, with
 game-specific dimensions, tables or state still present. They should be
 extracted when another concrete caller establishes the common contract.
