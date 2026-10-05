@@ -5,6 +5,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 # This target has no SDK, ROM, SDL, Musashi, game, or savestate dependency.
 add_library(amiga_compat STATIC ../disk.c ../hunk.c guest_memory.c hunk_loader.c rom_audit.c runtime_guard.c service_dispatch.c exec_lists.c exec_task_services.c exec_memory.c exec_context.c exec_scheduler.c exec_interrupt_services.c exec_bootstrap.c host_compat.c host_graphics.c)
 target_sources(amiga_compat PRIVATE sha256.c)
+target_sources(amiga_compat PRIVATE rgb4.c)
 target_include_directories(amiga_compat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include(CTest)
 if(BUILD_TESTING)

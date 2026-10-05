@@ -1,5 +1,6 @@
 #include "host_graphics.h"
 #include "hunk.h"
+#include "rgb4.h"
 #include <string.h>
 static uint8_t *range(AmigaHostCompat *c,uint32_t a,uint32_t n) { return amiga_guest_range(&c->memory,a,n); }
 static void word(uint8_t *p,uint16_t v) { p[0]=(uint8_t)(v>>8); p[1]=(uint8_t)v; }
@@ -85,25 +86,32 @@ int amiga_host_merge_view(AmigaHostCompat *c,uint32_t view) {
     amiga_store_be32(header+4,allocation+16); word(header+8,(uint16_t)(at+1));
     amiga_store_be32(v+4,allocation); amiga_store_be32(v+8,allocation); return 1;
 }
+typedef struct { AmigaHostCompat *host; uint32_t address; } HostRgb4Hardware;
+static int write_rgb4_hardware(void *context,size_t instruction,uint16_t value) {
+    HostRgb4Hardware *h=context;
+    uint8_t *p=range(h->host,h->address+(uint32_t)instruction*4u+2u,2);
+    if(!p) return 0;
+    word(p,value); return 1;
+}
 int amiga_host_load_rgb4(AmigaHostCompat *c,uint32_t viewport,uint32_t colors,unsigned count) {
     uint8_t *vp=range(c,viewport,40); if (!vp) return 0;
     uint8_t *cm=range(c,amiga_be32(vp+4),8); if (!cm) return 0;
     if (count>amiga_be16(cm+2)) count=amiga_be16(cm+2);
     if (!count) return 1;
-    uint8_t *src=range(c,colors,count*2),*dst=range(c,amiga_be32(cm+4),count*2);
+    uint32_t destination=amiga_be32(cm+4);
+    uint8_t *src=range(c,colors,count*2),*dst=range(c,destination,count*2);
     if (!src || !dst) return 0;
-    memcpy(dst,src,count*2);
+    AmigaRgb4Palette palette={dst,count*2u};
+    if(!amiga_rgb4_copy(&palette,src,count*2u,count)) return 0;
     uint32_t list=amiga_be32(vp+8); if (!list) return 1;
     uint8_t *cl=range(c,list,32); if (!cl) return 0;
     unsigned entries=amiga_be16(cl+28); uint8_t *ins=range(c,amiga_be32(cl+12),entries*6);
     if (!ins) return 0;
     uint32_t hardware=amiga_be32(cl+20);
-    for (unsigned i=0;i<entries;++i) {
-        uint16_t reg=amiga_be16(ins+i*6+2);
-        if (!amiga_be16(ins+i*6) && reg>=0x180 && reg<0x180+count*2) {
-            uint16_t value=amiga_be16(dst+reg-0x180)&0xFFF; word(ins+i*6+4,value);
-            if (hardware) { uint8_t *hw=range(c,hardware+i*4+2,2); if (!hw) return 0; word(hw,value); }
-        }
-    }
-    return 1;
+    /* Packed CopIns may contain an odd register offset. Preserve its original
+     * byte read when the trailing byte exists in the same memory bank. */
+    if(range(c,destination,count*2u+1u)) ++palette.byte_count;
+    HostRgb4Hardware output={c,hardware};
+    AmigaRgb4CopperList copper={ins,entries*6u,entries,hardware?write_rgb4_hardware:NULL,&output};
+    return amiga_rgb4_patch(&palette,count,&copper);
 }

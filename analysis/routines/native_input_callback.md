@@ -31,12 +31,16 @@ overlap effects, and sets state to three. A stable nonzero state loads the
 dynamic buffer; it does not select the original mode palette again.
 
 `fa18_prepare_native_input_display` installs actual palette selection and
-pair publication around the required native LoadRGB4 service. Signed modes
+pair publication around a required native LoadRGB4 service. The actual
+ordinary-buffer service is now `input_palette.c`, using the shared RGB4
+component; see `native_rgb4.md`. Signed modes
 and pair indices resolve only within imported windows supplied by the owner.
 Pairs contain actual resolved native object pointers. Missing data or a
 failed service returns failure with preceding source writes preserved; no
 substitute palette or fabricated pointer is supplied. The host palette
 backend must still be integrated with the game's real display objects.
+The right-hand pair owner is ViewPort.DspIns (`display_list`); the viewport's
+ColorMap is a separate owner, preserved across both loads.
 
 The older wrapper retains its bounded mode 0..15 asset importer, copper
 streams and legacy page-publication metadata. Its stable branch now uses the
@@ -48,6 +52,9 @@ Run `python tools/recomp/check_native_input_callback.py`. The validator seals
 every reachable original instruction byte and executes the complete parent
 and actual fade instructions. **4,096 calls cover all 198 source boundaries**
 (178 parent and 20 fade), with 2,048 ordered palette-service boundaries.
+An additional 4,096-case run executes the actual RGB4 backend, covers all
+198 boundaries independently and matches colour-map/internal/merged-list
+buffers. There are 8,192 callback comparisons in the current checkpoint.
 Comparisons include every Chip/Slow RAM byte except the original CPU ABI stack
 `$C7FD00..$C7FF00`, full RAM at each palette call, palette address/identity and
 sixteen words, saved display-pair identities, argument count/viewport owner,
@@ -57,15 +64,18 @@ the validation executable.
 LoadRGB4 alone is a controlled host-service contract. Fixtures exercise shared
 draw-page changes, pair-table changes including overlapping original tables,
 palette-word changes, mode arrival and fade-gate changes. They do not change
-the parent's CPU ABI locals. Signed modes, counter wrapping, signed/inverted
+the parent's CPU ABI locals. This describes the first run; the second uses
+the actual native palette service against the packed host service, whose
+shared implementation has an independent frozen-body extraction proof.
+Signed modes, counter wrapping, signed/inverted
 bounds, countdown delays, stable reloads, terminal overlapping copies and
 extreme fade levels are included. This proves the game callback around a
-required host service; it does not prove an implemented native palette driver.
+required host service; exact Kickstart layout and timing remain separate.
 
 GNU strict-warning callback/wrapper contracts and GNU symbol inspection pass
-without CPU/bus/machine symbols. MSVC builds the native game and all thirteen
+without CPU/bus/machine symbols. MSVC builds the native game and all fifteen
 affected input/audio/viewport CTests pass. The unchanged native guard passes
-439 files. Queue regression passes 73,728 full-RAM comparisons and all 28
+443 files. Queue regression passes 73,728 full-RAM comparisons and all 28
 boundaries. Both command parents still pass 16,384 calls, retaining their
 985/1,104 parent and 125/125 actual-child coverage and separate checkpoint.
 The checkpoint is `analysis/figures/native_input_callback_checkpoint.json`.

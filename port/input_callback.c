@@ -29,7 +29,7 @@ static int publish_display_pair(void *context,int index) {
     int64_t offset=(int64_t)index-s->first_pair;
     if(offset<0 || (uint64_t)offset>=s->pair_count) return 0;
     s->saved_pair.view=s->pairs[offset].view;
-    s->saved_pair.palette=s->pairs[offset].palette;
+    s->saved_pair.display_list=s->pairs[offset].display_list;
     return 1;
 }
 int fa18_prepare_native_input_display(FA18NativeInputDisplay *s,FA18ViewportTransitionOps *ops) {

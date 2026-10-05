@@ -290,6 +290,41 @@ does not call these new input/audio owners; the playable reference remains
 emulated. The full emulation-free goal remains active and unfinished.
 Commit each validated batch as requested.
 
+Palette service progress: `port/amiga/rgb4.c/.h` now supplies an independent
+ordinary-buffer RGB4 component used by both the packed host service and the
+actual native callback backend, `port/input_palette.c/.h`. It clips to the
+actual map capacity, retains raw map words, masks only display-list payloads,
+and preserves ordered internal/merged-list writes and partial failures.
+It requires no CPU, guest-address access, machine, ROM, SDL or game state.
+Its native `amiga_rgb4` library is reusable by other ports.
+
+The source viewport layout proves the published right-hand pointer at
+$C18232 is ViewPort.DspIns (viewport $C1822A + 8); its ColorMap at $C1822E
+is separate. The native pair field is now named `display_list` accordingly.
+Both callback loads share the viewport ColorMap, while the second follows
+the list selected by the intervening publication. The earlier pair name did
+not change publication behavior, but was too ambiguous for backend ownership.
+
+Validation compares the exact pre-extraction service body from commit
+9645f4de: 16,384 calls match returns and all fixture bytes, including 9,370
+partial/error paths. The checker verifies the frozen body against git first.
+The callback proof now runs both its earlier 4,096 controlled-child fixtures
+and another 4,096 with the actual native RGB4 backend against the packed host
+service. Each covers all 198 source boundaries and matches RAM outside the
+original ABI stack; the latter also compares every colour-map/internal/merged
+list buffer. These are accepted behavior-level host semantics; exact Kickstart
+layout/timing remains separate. Standalone GNU strict-warning contracts and
+native symbol inspection pass. Native/reference ROM-free MSVC builds, all
+fifteen affected native CTests and the host-compatibility contract pass; the
+unchanged native guard passes 443 files. See `analysis/routines/native_rgb4.md`,
+`analysis/figures/native_rgb4_checkpoint.json` and the updated callback proof.
+
+Continue with actual native viewport/list construction, callback scheduling,
+original asset import, sample playback and full gameplay integration. The
+bounded native main still does not invoke these input/audio owners; the
+playable reference remains emulated. The full goal is active and unfinished.
+Commit each validated batch.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

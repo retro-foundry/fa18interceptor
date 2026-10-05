@@ -8,6 +8,7 @@ Game-specific adapters retain policy, asset interpretation and scheduling.
 | Component | Reusable interface | Current limits |
 | --- | --- | --- |
 | `voice_program.c/.h` | Portable `PortVoice` state, named sound operations, waits/loops, slide updates and a program-ended callback. Builds with only the C standard library. | Uses unsigned 32-bit values and eight-byte program cursor units. It provides tick execution, not sample mixing or a device driver. |
+| `amiga/rgb4.c/.h` | Ordinary-buffer colour-map loading and CopIns/merged-list palette writes. Builds with only the C standard library. Both native callback and packed compatibility service use it. | Implements the existing host's RGB4 semantics and list data formats. Allocation, viewport construction, input scheduling and presentation remain caller-owned. |
 | `amiga/ofs.h`, implementation in `disk.c` | `amiga_ofs_*` reads, file lookup, metadata, bounded range reads and directory scanning from OFS images. | Read-only OFS; DOS locks, volume prefixes and OS service behavior remain adapters. Implementation also contains the F/A-18 wrappers. |
 | `amiga/hunk.h`, implementation in `hunk.c` | `amiga_hunks_*` parses CODE/DATA/BSS, relocation records and pointer targets without executing original code. | Supports the loader's implemented HUNK types; native imports must still interpret each game's data. Implementation also contains the F/A-18 wrappers. |
 
@@ -24,7 +25,16 @@ Command effects share the core voice objects and mutable program values;
 their older type names are aliases, not duplicated state. Another game must
 supply its own adapter wherever its original behavior differs.
 
-The core returns specific invalid-argument/program results; it does not add
+The independent `amiga_rgb4` target accepts caller-owned palette/list buffers
+and an actual merged-list writer; it has no guest-address or machine dependency.
+`input_palette.c/.h` supplies F/A-18's sixteen-word callback adapter and uses
+the viewport's fixed ColorMap with its currently published DspIns list. The
+packed compatibility adapter resolves guest buffers separately. Run
+`python tools/amiga/check_rgb4.py` for the 16,384-case frozen-service comparison
+and `python tools/recomp/check_native_input_callback.py` for both complete
+callback comparisons. See `../analysis/routines/native_rgb4.md` for scope.
+
+The voice-program core returns specific invalid-argument/program results; it does not add
 an implicit terminator or substitute sound. Program-ended clears the supplied
 slot before the callback. Loop zero means unconditional jump, delays and
 slides wrap at 32 bits, and jumps/cursors must resolve to imported instructions.

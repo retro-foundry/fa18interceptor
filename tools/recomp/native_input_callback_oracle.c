@@ -9,6 +9,8 @@
 #undef signed_byte
 #include "../../port/viewport_transition.c"
 #include "../../port/input_callback.c"
+#include "../../port/input_palette.c"
+#include "../../port/amiga/host_graphics.h"
 #include "../../build/recomp/native_input_callback_source.h"
 
 enum { PALETTE_FIRST=0xc07710, PALETTE_WORDS=4112, PAIR_FIRST=0xc182ae,
@@ -23,7 +25,11 @@ typedef struct {
     uint16_t palettes[PALETTE_WORDS],stable[16];
     const uint16_t *modes[256];
     FA18NativeInputDisplayPair pairs[8];
-    int objects[12];
+    AmigaRgb4CopperList objects[12];
+    uint8_t color_map_bytes[64],copper_instructions[12][36],hardware[12][24];
+    AmigaRgb4HardwareList hardware_lists[12];
+    AmigaRgb4Palette color_map;
+    FA18NativeInputPalette palette_service;
     uint32_t stable_address;
 } NativeInput;
 typedef struct { FA18ViewportPalettePhase phase; uint32_t address; uint16_t words[16]; } PaletteEvent;
@@ -32,14 +38,16 @@ static uint8_t event_ram[2][FA18_CHIP_SIZE+FA18_SLOW_SIZE];
 static unsigned input_visited[sizeof input_source_bytes/sizeof input_source_bytes[0]];
 static unsigned source_count,native_count,total_events,case_number;
 static uint16_t sampled_pair;
+static int real_palette;
+static uint32_t rgb4_object_address(unsigned i) { return 0xc65000+0x100*i; }
 
 static void *resolve_object(NativeInput *s,uint32_t address) {
-    if(address<0xc65000 || address>=0xc65030 || ((address-0xc65000)&3)) abort();
-    return &s->objects[(address-0xc65000)/4];
+    if(address<0xc65000 || address>=0xc65c00 || ((address-0xc65000)&255)) abort();
+    return &s->objects[(address-0xc65000)/256];
 }
 static uint32_t export_object(NativeInput *s,void *object) {
     unsigned i;
-    for(i=0;i<12;++i) if(object==&s->objects[i]) return 0xc65000+4*i;
+    for(i=0;i<12;++i) if(object==&s->objects[i]) return rgb4_object_address(i);
     abort();
 }
 static void store_input(NativeInput *s) {
@@ -51,13 +59,20 @@ static void store_input(NativeInput *s) {
     wr_u8(0xc458a3,s->mode.countdown); wr_u8(TABLE_CLEAR_MODE,s->mode.state);
     wr_u16(DRAW_PAGE,s->display.draw_page);
     wr_u32(0xc1821c,export_object(s,s->display.saved_pair.view));
-    wr_u32(0xc18232,export_object(s,s->display.saved_pair.palette));
+    wr_u32(0xc18232,export_object(s,s->display.saved_pair.display_list));
     wr_u32(MASTER_VOLUME,s->audio.master_volume); wr_u32(MASTER_VOLUME_TARGET,s->audio.master_volume_target);
     wr_u8(VOLUME_FADING,s->audio.volume_fading);
     for(i=0;i<8;++i) wr_u32(PAIR_FIRST+4*i,export_object(s,s->pairs[i].view));
-    for(i=6;i<8;++i) wr_u32(PAIR_FIRST+4*i+8,export_object(s,s->pairs[i].palette));
+    for(i=6;i<8;++i) wr_u32(PAIR_FIRST+4*i+8,export_object(s,s->pairs[i].display_list));
     for(i=0;i<PALETTE_WORDS;++i) wr_u16(PALETTE_FIRST+2*i,s->palettes[i]);
     for(i=0;i<16;++i) wr_u16(s->stable_address+2*i,s->display.stable_palette[i]);
+    if(real_palette) {
+        memcpy(fa18_machine->slow+0xc66100-FA18_SLOW_BASE,s->color_map_bytes,64);
+        for(i=0;i<12;++i) {
+            memcpy(fa18_machine->slow+rgb4_object_address(i)+0x40-FA18_SLOW_BASE,s->copper_instructions[i],36);
+            memcpy(fa18_machine->slow+rgb4_object_address(i)+0x80-FA18_SLOW_BASE,s->hardware[i],24);
+        }
+    }
 }
 static int equal_input_ram(const uint8_t *expected) {
     unsigned i;
@@ -90,9 +105,9 @@ static void palette_effect(NativeInput *s,FA18ViewportPalettePhase phase,unsigne
     if((case_number&128) && phase==FA18_PALETTE_SECOND) {
         if(s) for(i=0;i<8;++i) {
             s->pairs[i].view=&s->objects[(i+3)%12];
-            s->pairs[i].palette=&s->objects[(i+5)%12];
+            s->pairs[i].display_list=&s->objects[(i+5)%12];
         }
-        else for(i=0;i<10;++i) wr_u32(PAIR_FIRST+4*i,0xc65000+4*((i+3)%12));
+        else for(i=0;i<10;++i) wr_u32(PAIR_FIRST+4*i,rgb4_object_address((i+3)%12));
     }
     if((case_number&64) && phase==FA18_PALETTE_FIRST) {
         uint32_t address=events[ordinal].address;
@@ -116,7 +131,9 @@ static int palette_load(void *context,FA18ViewportPalettePhase phase,const uint1
        !equal_input_ram(event_ram[native_count])) {
         fprintf(stderr,"case %u palette boundary %u differs (phase %u address %06X)\n",case_number,native_count,phase,address); exit(1);
     }
-    palette_effect(s,phase,native_count++);
+    ++native_count;
+    if(real_palette) return fa18_load_native_input_palette(&s->palette_service,phase,words);
+    palette_effect(s,phase,native_count-1);
     return 1;
 }
 static void load_input(NativeInput *s) {
@@ -142,6 +159,19 @@ static void load_input(NativeInput *s) {
     s->display.pairs=s->pairs; s->display.pair_count=8; s->display.first_pair=-3;
     s->display.mode_palettes=s->modes; s->display.mode_count=256; s->display.first_mode=-128;
     s->display.draw_page=rd_u16(DRAW_PAGE); s->display.load_palette=palette_load; s->display.context=s;
+    if(real_palette) {
+        for(i=0;i<12;++i) {
+            memcpy(s->copper_instructions[i],fa18_machine->slow+rgb4_object_address(i)+0x40-FA18_SLOW_BASE,36);
+            memcpy(s->hardware[i],fa18_machine->slow+rgb4_object_address(i)+0x80-FA18_SLOW_BASE,24);
+            s->hardware_lists[i]=(AmigaRgb4HardwareList){s->hardware[i],24};
+            s->objects[i]=(AmigaRgb4CopperList){s->copper_instructions[i],36,6,amiga_rgb4_write_hardware,&s->hardware_lists[i]};
+        }
+        memcpy(s->color_map_bytes,fa18_machine->slow+0xc66100-FA18_SLOW_BASE,64);
+        s->color_map=(AmigaRgb4Palette){s->color_map_bytes,64};
+        if(!fa18_bind_native_input_palette(&s->palette_service,&s->display,&s->color_map)) abort();
+        /* Validation observes entry RAM around the actual production backend. */
+        s->display.load_palette=palette_load; s->display.context=s;
+    }
     if(!fa18_prepare_native_input_display(&s->display,&s->ops)) abort();
 }
 static void input_fixture(unsigned scenario) {
@@ -162,8 +192,22 @@ static void input_fixture(unsigned scenario) {
     wr_u16(0xc081ae,(scenario&8)?0x7fff:0xff80); wr_u16(0xc081b2,(scenario&16)?0x8000:127);
     wr_u8(VIEWPORT_MODE,mode); wr_u8(VIEWPORT_TARGET,target);
     wr_u8(0xc458a3,bytes[(scenario/16)%8]); wr_u8(TABLE_CLEAR_MODE,(uint8_t)(scenario&2));
-    for(i=0;i<10;++i) wr_u32(PAIR_FIRST+4*i,0xc65000+4*i);
-    wr_u32(0xc1821c,0xc65028); wr_u32(0xc18232,0xc6502c);
+    for(i=0;i<10;++i) wr_u32(PAIR_FIRST+4*i,rgb4_object_address(i));
+    wr_u32(0xc1821c,rgb4_object_address(10)); wr_u32(0xc18232,rgb4_object_address(11));
+    if(real_palette) {
+        static const uint16_t regs[]={0x180,0x19e,0x1a0,0x182,0x100,0x180};
+        for(i=0;i<12;++i) {
+            unsigned j;
+            uint32_t a=rgb4_object_address(i);
+            wr_u32(a+12,a+0x40); wr_u32(a+20,a+0x80); wr_u16(a+28,6);
+            for(j=0;j<6;++j) {
+                wr_u16(a+0x40+6*j,(uint16_t)(j==3)); wr_u16(a+0x42+6*j,regs[j]);
+                wr_u16(a+0x44+6*j,(uint16_t)random_value()); wr_u32(a+0x80+4*j,random_value());
+            }
+        }
+        wr_u32(0xc1822e,0xc66000); wr_u16(0xc66002,32); wr_u32(0xc66004,0xc66100);
+        for(i=0;i<32;++i) wr_u16(0xc66100+2*i,(uint16_t)random_value());
+    }
     wr_u16(DRAW_PAGE,(uint16_t)(scenario&1));
     wr_u32(LONG_TABLE,(scenario&2048)?0xc08510+(15-signed_byte(target))*32+2:0xc60600);
     wr_u8(VOLUME_FADING,(scenario&64)?0xff:0);
@@ -186,7 +230,14 @@ static int original_input(void) {
             for(i=0;i<16;++i) events[source_count].words[i]=rd_u16(address+2*i);
             memcpy(event_ram[source_count],fa18_machine->chip,FA18_CHIP_SIZE);
             memcpy(event_ram[source_count]+FA18_CHIP_SIZE,fa18_machine->slow,FA18_SLOW_SIZE);
-            palette_effect(NULL,phase,source_count++);
+            ++source_count;
+            if(real_palette) {
+                AmigaGuestBank banks[]={{0,FA18_CHIP_SIZE,0,fa18_machine->chip},
+                    {FA18_SLOW_BASE,FA18_SLOW_SIZE,0,fa18_machine->slow}};
+                static AmigaHostCompat host;
+                host.memory=(AmigaGuestMemory){banks,2};
+                if(!amiga_host_load_rgb4(&host,0xc1822a,address,16)) return 0;
+            } else palette_effect(NULL,phase,source_count-1);
             REG_PC=m68ki_pull_32(); continue;
         }
         for(i=0;i<sizeof input_source_bytes/sizeof input_source_bytes[0];++i) if(input_source_bytes[i].pc==pc) break;
@@ -204,6 +255,7 @@ int main(int argc,char **argv) {
     uint8_t *expected=malloc(FA18_CHIP_SIZE+FA18_SLOW_SIZE);
     unsigned cases=argc>1?(unsigned)strtoul(argv[1],NULL,10):4096,i,r;
     char error[256];
+    real_palette=argc>2 && !strcmp(argv[2],"--real-palette");
     if(!state || !rom || !m || !base || !before || !expected || !cases) return 1;
     if(!fa18_machine_load_state(m,state,state_size,rom,rom_size,error,sizeof error)) return 1;
     free(state); free(rom); fa18_bus_timing=0; memcpy(base,m,sizeof *m);
@@ -222,7 +274,7 @@ int main(int argc,char **argv) {
         if(source_count!=native_count || !equal_input_ram(expected)) return 1;
         total_events+=native_count;
     }
-    printf("native input callback C1718E: %u original calls matched RAM outside CPU ABI stack, return and %u ordered palette boundaries\n",cases,total_events);
+    printf("native input callback C1718E%s: %u original calls matched RAM outside CPU ABI stack, return and %u ordered palette boundaries\n",real_palette?" with actual RGB4":"",cases,total_events);
     printf("visited:"); for(i=0;i<sizeof input_visited/sizeof input_visited[0];++i) if(input_visited[i]) printf(" %06X",input_source_bytes[i].pc); putchar('\n');
     free(expected); free(before); free(base); free(m); return 0;
 }

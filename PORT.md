@@ -41,10 +41,15 @@ core builds independently for reuse; original selector/output/fade policy stays
 in the F/A-18 adapter. The complete native mouse/viewport/fade callback adds
 4,096 comparisons at all 198 original boundaries. It shares mouse Y with
 throttle controls, attaches X/tick queue aliases and uses the same viewport
-transition implementation as the older native wrapper. Host services, sample
-playback, original data loading and
+transition implementation as the older native wrapper.
+The actual callback RGB4 backend now uses the independent ordinary-buffer
+`amiga/rgb4` component shared with the reference host service. Another 4,096
+callback comparisons and 16,384 frozen-service comparisons validate this
+composition, including actual display-list changes after publication.
+Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
+`analysis/routines/native_rgb4.md`,
 `analysis/routines/native_audio_update.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,

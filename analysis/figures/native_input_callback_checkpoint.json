@@ -1,9 +1,12 @@
 {
-  "status": "validated_native_input_callback_palette_backend_and_runtime_pending",
+  "status": "validated_native_input_callback_and_rgb4_runtime_integration_pending",
   "entry": "C1718E",
-  "cases": 4096,
+  "cases": 8192,
   "source_boundaries": 198,
-  "covered_boundaries": 198,
+  "covered_boundaries": [
+    198,
+    198
+  ],
   "native_cpu_dependency": false,
   "child_contracts": [
     "C53EC0 LoadRGB4 service only; shared-owner changes, no ABI local mutation"
@@ -11,21 +14,31 @@
   "actual_children": [
     "C24FE8 master-volume fade"
   ],
+  "rgb4_proof": "second run executes the actual native RGB4 backend versus the packed host service; host semantics independently compared with the frozen pre-extraction service, not exact Kickstart timing/layout",
   "comparison": "full Chip/Slow RAM except original CPU ABI stack C7FD00..C7FF00; ordered palette pointer/16 words, saved display-pair identities and complete RAM at each palette call; final source return D0=0",
   "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
   "original_pc_bytes_sha256": "c3a2b6c295e7199ce7d7448169f1f6c2f1cd967c79bad16495334706f1fec58a",
-  "report": "native input callback C1718E: 4096 original calls matched RAM outside CPU ABI stack, return and 2048 ordered palette boundaries",
+  "reports": [
+    "native input callback C1718E: 4096 original calls matched RAM outside CPU ABI stack, return and 2048 ordered palette boundaries",
+    "native input callback C1718E with actual RGB4: 4096 original calls matched RAM outside CPU ABI stack, return and 2048 ordered palette boundaries"
+  ],
   "source_sha256": {
-    "port/input_callback.c": "b79fc4da21735e4d323d5fb85ea7e095e3894a28a3f65ccb84291c839ae0837e",
-    "port/input_callback.h": "81e7c45080eb96e736f2c9a7ba9c177e52bc02fe0d6279464d6e13d36e913aa5",
-    "port/input_callback_contract_test.c": "340e3a68a1c60bc32223fd5deb216d4e32418bdc70162de450871e9f6900b728",
+    "port/input_callback.c": "9f222971bd7a0a3058c04889ffacf3dd7e97418608162a36bac25fb953841aac",
+    "port/input_callback.h": "aa18008e420b88f8f47addd4e517b84fca0f8ae86d14f8f3a6d6b810f6b8e83c",
+    "port/input_callback_contract_test.c": "62fb7f093971dfc4eb73b8709e3f9e655e44cfcfa2ba2527a5887646de38d00c",
     "port/viewport_transition.c": "d26b61c5b8c1444dac07c32a14de9b0c169a7ba7e646b37e4fa38bcbc22d6eb4",
     "port/viewport_transition.h": "e84807b7f607e171f80328bdc0228deda8305a8f16de24818693717cd5eac474",
     "port/viewport_mode_state.h": "90277e90785cbb7209fea0875a65572d7d3f3ec0e447f564f3491c2a37f33667",
     "port/audio_update.c": "a5bb0aa5f55777b892f4a9e163f8a476fa9fbc35a310d5f52c84f2dc6f1a1507",
     "port/command_queue.c": "33f5c8073da756dc67ea8371767778dbb561cc334b87eca6edb64af945b62d64",
     "port/command_queue.h": "4cb234bbfa375c4596128845f65d369e6408702995c7a2e294fc827b79e45b3e",
-    "tools/recomp/check_native_input_callback.py": "40587a1b3135cd33c09373f76cbd7c2fe241a213aa98301cf5bc1f3b7b24a5f4",
-    "tools/recomp/native_input_callback_oracle.c": "30e87b8554ba0d70d79eb093143b792f254a5bcc6ffe63364c514d9b0286af37"
+    "port/input_palette.c": "5a306e83d40fb2c16666c64bf95e628e7f254f1ddbb5b0eb1c4e2daf70884315",
+    "port/input_palette.h": "621033b0ba30c3f8b0980211abcc80069da07ef6b5ead52077fc921aedf31540",
+    "port/input_palette_contract_test.c": "dbcb2e5d770fef70e030d6beacb693897961948301ec87fac50387a0e78c9fd0",
+    "port/amiga/rgb4.c": "c69c27c8096421a82ccbb5a063774c3b7bf11dee54ab85e2069c2e4524cd739a",
+    "port/amiga/rgb4.h": "61a6b47e06847496e81cbd74e7065b81853ae1fe04516d5d4ff6eecc935b56c1",
+    "port/amiga/host_graphics.c": "a6ccde46042829c9b96eb7e62cc9685d4eb09ebcaae181cd7d2541f3b65e28d6",
+    "tools/recomp/check_native_input_callback.py": "6409c0a8096629335e960b832a845472e05673b1e0f539c71722a39a3ae88fa9",
+    "tools/recomp/native_input_callback_oracle.c": "8f258dcd34dcfc4794f27d8146b52cf02e7f2057a59b1f7990e7568145d1d0eb"
   }
 }

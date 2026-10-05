@@ -14,7 +14,9 @@ typedef struct {
     int16_t min_x, min_y, max_x, max_y;
 } FA18NativeInputCallbackState;
 
-typedef struct { void *view, *palette; } FA18NativeInputDisplayPair;
+/* Actual View.LOFCprList and ViewPort.DspIns owners. The viewport's ColorMap
+ * is separate; publication changes the display list read by LoadRGB4. */
+typedef struct { void *view, *display_list; } FA18NativeInputDisplayPair;
 typedef struct {
     uint16_t draw_page;
     FA18NativeInputDisplayPair saved_pair;

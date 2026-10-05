@@ -52,7 +52,7 @@ int main(void) {
     assert(callback.mouse_x==111 && commands.indexed.throttle==52 && callback.ticks==0);
     assert(callback.counter_x==5 && callback.counter_y==255 && !audio.master_volume);
     assert(mode.current==9 && mode.state==3 && calls.count==2);
-    assert(display.saved_pair.view==pairs[0].view && display.saved_pair.palette==pairs[0].palette);
+    assert(display.saved_pair.view==pairs[0].view && display.saved_pair.display_list==pairs[0].display_list);
     for(i=0;i<16;++i) assert(stable[i]==palette9[i] && stable[i+16]==0x5555);
     assert(fa18_advance_native_input_callback(&callback,0xff05,&ops) && calls.count==3);
 
