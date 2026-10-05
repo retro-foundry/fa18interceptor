@@ -11,7 +11,24 @@ reuse existing owners and run validation for changed behavior/affected callers.
 The separate `amiga-recomp` project was inspected (13 existing tests pass),
 but the user did not request switching this port to its CPU/chipset runtime.
 
-Latest batch: complete hot `$C29042-$C295D0` active-origin production now runs
+Latest batch: `$C230B0`, `$C230E8`, `$C23116` and `$C231A2` now run directly
+inside the native control-record scheduler. Lost-selection release, both root
+action selectors and paired-record readiness use the live sixteen-record bank
+and ordinary scalar owners. Paired readiness correctly consumes the retained
+companion slot corresponding to source A2. The scheduler callback surface is
+reduced from fourteen children to ten; only the three true action routines
+beneath these new leaves remain explicit.
+
+Validation: focused contracts cover retained/dropped selection, all action
+routes, override and normal pair decisions, partner exclusion and scheduler
+composition. Strict GNU and MSVC builds and nine affected CTests pass. See
+`analysis/routines/native_record_selection.md`.
+
+Next continue through the remaining startup-reachable root control/view/
+marker/pose chain, then bind original startup assets/state and install the
+graph in native main.
+
+Preceding batch: complete hot `$C29042-$C295D0` active-origin production now runs
 on caller-owned native records, triples, scalar state and immutable field
 windows. The `$C1C63E` parent calls it directly, and its
 `FA18NativeRecordUpdateOps` callback layer is removed. Direct and matrix
@@ -28,8 +45,8 @@ proof remains authority for the readable owner; the new ordinary-state adapter
 does not yet have its own original-instruction differential harness. See
 `analysis/routines/native_selector_origin.md`.
 
-Next complete the startup-reachable individual `$C22C80` record children,
-then bind original startup assets/state and install this graph in native main.
+Next was the startup-reachable individual `$C22C80` record children; four
+selection/readiness leaves are completed by the latest batch above.
 
 Preceding batch: complete `$C1C860-$C1CA2C` context refresh and `$C1CA82`
 record flagging now run on shared native owners. The parent preserves the

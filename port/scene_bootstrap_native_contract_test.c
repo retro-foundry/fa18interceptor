@@ -10,6 +10,7 @@ typedef struct {
     FA18NativeScenePlacementAssets placement_assets; FA18NativeScenePointerGroup pointer_groups[16];
     FA18NativeSceneRecorder recorder; FA18NativeScenePlacement placement;
     FA18NativeRecordUpdateStage record_update; FA18NativeSelectorOrigin selector_origin;
+    FA18NativeRecordSelection record_selection;
     FA18NativeControlRecordUpdate control_update; FA18NativeControlRecordOps control_ops;
     FA18NativeContextRefresh refresh; FA18NativeContextRefreshOps refresh_ops;
     FA18NativeStartupRanges startup; FA18NativeViewedRecordWord viewed;
@@ -22,6 +23,7 @@ typedef struct {
     uint8_t recorder_bytes[64],recorder_words[16],root_ready,bar_e,bar_redraw,fire,input_source;
     uint8_t update_input,update_mirror,update_inhibit,context_select,detail,selector_coarse,selector_fine,record_rate;
     uint8_t post_event,counter_a,counter_b,primary_gate,secondary_gate;
+    uint8_t action_first,action_second,action_third,pair_override;
     uint8_t prepared,alternate,cell_checks,view_mode,fixed_readouts,frame_gate;
     uint8_t limit_byte,previous_limit,context_state,transition,previous_byte,byte_be;
     uint16_t limit,selected,shown,marker,menu_return,word_4fda0,countdown,word_a6,word_a8,history,minimum,scales[2],depth[24],words[52];
@@ -31,6 +33,7 @@ typedef struct {
     int32_t update_long_mirror,projection_depth,origin[3];
     uint16_t context_record,key_a,key_b,grid_x,grid_z;
     uint16_t scaled,selector_x,selector_z;
+    uint16_t action_pending;
     uint16_t periodic,current_slot,current_stride;
     uint16_t refresh_timer,stage_selector,current_colour;
     uint32_t line_style;
@@ -40,9 +43,9 @@ static Fixture fixture;
 static int update(void *context,FA18NativeControlRecordUpdate *state,
                   FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context; uint8_t high,low; unsigned i;
-    assert(state==&f->control_update && decision && slot<16 && companion<16);
+    assert(state==&f->control_update && decision && child<10 && slot<16 && companion<16);
     *decision=0;
-    if(child!=FA18_RECORD_UPDATE_RELEASE_SELECTION) return 1;
+    if(child!=FA18_RECORD_UPDATE_ROOT_CONTROL) return 1;
     assert(f->calls++==0 && f->context.origin_first==0x10c00000);
     assert(f->flight.viewed==f->records.aircraft && f->flight.player->flags==0x11c8);
     assert(f->countdown==5 && f->history==0x800 && f->transition==1 && f->phase==0);
@@ -96,7 +99,13 @@ static void initialize(Fixture *f) {
         .target_point=f->target,.root_ready=&f->root_ready,.bar_e_flag=&f->bar_e,
         .bar_redraw_e=&f->bar_redraw,.fire_state=&f->fire,.input_source=&f->input_source};
     f->control_ops=(FA18NativeControlRecordOps){update,f};
-    f->control_update=(FA18NativeControlRecordUpdate){.records=&f->records,.ops=&f->control_ops,
+    f->record_selection=(FA18NativeRecordSelection){.records=&f->records,
+        .selected_record=&f->selected,.selection_marker=&f->marker,.action_pending=&f->action_pending,
+        .selection_active=&f->selection,.origin_enable=&f->context_select,
+        .action_first=&f->action_first,.action_second=&f->action_second,
+        .action_third=&f->action_third,.pair_override=&f->pair_override};
+    f->control_update=(FA18NativeControlRecordUpdate){.records=&f->records,
+        .selection=&f->record_selection,.ops=&f->control_ops,
         .post_input_event=&f->post_event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary_gate,.secondary_gate=&f->secondary_gate,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};

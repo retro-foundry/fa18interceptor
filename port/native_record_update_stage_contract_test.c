@@ -9,6 +9,7 @@ typedef struct {
     FA18NativeSelectorOrigin selector; FA18NativeSelectorOriginOps selector_ops;
     FA18NativeSelectorOriginTables selector_tables; FA18NativeSceneRecord *active;
     FA18NativeControlRecordUpdate control;
+    FA18NativeRecordSelection selection;
     FA18NativeControlRecordOps control_ops;
     uint8_t source[16*512],work[16*32],selector_table[8];
     uint8_t input,mirror,inhibit,context_select,detail,coarse_byte,fine_byte,rate;
@@ -19,14 +20,16 @@ typedef struct {
     uint8_t origin_enable,gate_b,gate_a,gate_mode,origin_index,adjustment_mode;
     uint8_t threshold,auxiliary,variant,counter;
     uint8_t event,counter_a,counter_b,primary,secondary;
+    uint8_t selection_active,action_first,action_second,action_third,pair_override;
     uint16_t periodic,current_slot,current_stride;
+    uint16_t selected,selection_marker,action_pending;
     unsigned control_calls,origin_calls;
 } Fixture;
 
 static int control(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->control && child<14 && slot<16 && companion<16 && decision);
+    assert(state==&f->control && child<10 && slot<16 && companion<16 && decision);
     ++f->control_calls; *decision=0; return 1;
 }
 static int origin(void *context,FA18NativeSelectorOrigin *state,
@@ -48,7 +51,12 @@ static void initialize(Fixture *f) {
     f->flight.commands=&f->commands; f->flight.player=f->records.aircraft;
     f->flight.viewed=f->records.aircraft+2; f->view.flight=&f->flight;
     f->control_ops=(FA18NativeControlRecordOps){control,f};
-    f->control=(FA18NativeControlRecordUpdate){.records=&f->records,.ops=&f->control_ops,
+    f->selection=(FA18NativeRecordSelection){.records=&f->records,.selected_record=&f->selected,
+        .selection_marker=&f->selection_marker,.action_pending=&f->action_pending,
+        .selection_active=&f->selection_active,.origin_enable=&f->origin_enable,
+        .action_first=&f->action_first,.action_second=&f->action_second,
+        .action_third=&f->action_third,.pair_override=&f->pair_override};
+    f->control=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.ops=&f->control_ops,
         .post_input_event=&f->event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};

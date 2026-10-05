@@ -19,13 +19,13 @@ static int dispatch_pose(FA18NativeControlRecordUpdate *s,unsigned slot) {
         (!decision || child(s,FA18_RECORD_UPDATE_POSE,slot,0));
 }
 static int group_record(FA18NativeControlRecordUpdate *s,unsigned slot,unsigned companion,uint8_t gate,
-                        FA18NativeControlRecordChild ready,FA18NativeControlRecordChild place) {
+                        int allow_release,FA18NativeControlRecordChild place) {
     int decision;
     prepare(s,slot,companion);
     if(!active(s,slot)) {
         if(gate) { if(!child(s,place,slot,0)) return 0; }
         else {
-            if(!child(s,ready,slot,&decision)) return 0;
+            if(!fa18_select_native_record_action(s->selection,allow_release,&decision)) return 0;
             if(!decision) return 1;
         }
     }
@@ -42,7 +42,7 @@ static int paired_record(FA18NativeControlRecordUpdate *s,unsigned slot,unsigned
     int decision;
     prepare(s,slot,companion);
     if(!active(s,slot)) {
-        if(!child(s,FA18_RECORD_UPDATE_PAIRED_READY,slot,&decision)) return 0;
+        if(!fa18_native_paired_record_ready(s->selection,companion,&decision)) return 0;
         if(!decision) return 1;
         if(!child(s,FA18_RECORD_UPDATE_SECONDARY_PLACE,slot,0)) return 0;
     }
@@ -65,7 +65,8 @@ static int set_record_word(FA18NativeSceneRecord *record,size_t offset,uint16_t 
 }
 int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     FA18NativeSceneRecord *root; uint16_t countdown; unsigned slot;
-    if(!s || !s->records || !s->ops || !s->ops->consume || !s->post_input_event ||
+    if(!s || !s->records || !s->selection || s->selection->records!=s->records ||
+       !s->ops || !s->ops->consume || !s->post_input_event ||
        !s->counter_first || !s->counter_second || !s->primary_gate || !s->secondary_gate ||
        !s->periodic_word || !s->current_slot || !s->current_stride) return 0;
     root=s->records->records;
@@ -78,7 +79,7 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
         if((int8_t)*s->counter_first>0) --*s->counter_first;
         if((int8_t)*s->counter_second>0) --*s->counter_second;
     }
-    if(!child(s,FA18_RECORD_UPDATE_RELEASE_SELECTION,0,0)) return 0;
+    if(!fa18_release_lost_native_selection(s->selection)) return 0;
     prepare(s,0,4);
     if(!record_word(root,0x4c,&countdown)) return 0;
     if(!*s->post_input_event && !set_record_word(root,0x4c,(uint16_t)(countdown-1u))) return 0;
@@ -88,10 +89,10 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
        !child(s,FA18_RECORD_UPDATE_ROOT_MARKER,0,0) ||
        !child(s,FA18_RECORD_UPDATE_POSE,0,0)) return 0;
     for(slot=1;slot<4;++slot)
-        if(!group_record(s,slot,0,*s->primary_gate,FA18_RECORD_UPDATE_PRIMARY_READY,
+        if(!group_record(s,slot,0,*s->primary_gate,1,
                          FA18_RECORD_UPDATE_PRIMARY_PLACE)) return 0;
     if(!active_record(s,4,0) ||
-       !group_record(s,5,4,*s->secondary_gate,FA18_RECORD_UPDATE_SECONDARY_READY,
+       !group_record(s,5,4,*s->secondary_gate,0,
                      FA18_RECORD_UPDATE_SECONDARY_PLACE) ||
        !active_record(s,6,0)) return 0;
     prepare(s,7,6); (void)active(s,7);
