@@ -8,6 +8,7 @@ Game-specific adapters retain policy, asset interpretation and scheduling.
 | Component | Reusable interface | Current limits |
 | --- | --- | --- |
 | `voice_program.c/.h` | Portable `PortVoice` state, named sound operations, waits/loops, slide updates and a program-ended callback. Builds with only the C standard library. | Uses unsigned 32-bit values and eight-byte program cursor units. It provides tick execution, not sample mixing or a device driver. |
+| `voice_selection.c/.h` | Caller-owned sound tables and channel slots, ordered release/publication and acknowledgements. Shared by native command sounds and menu sounds. Builds with the C standard library and `voice_program.h`. | Accepts already resolved voices and fixed-point volumes. It has no asset loader, game sound IDs, scheduler or sample output. |
 | `amiga/rgb4.c/.h` | Ordinary-buffer colour-map loading and CopIns/merged-list palette writes. Builds with only the C standard library. Both native callback and packed compatibility service use it. | Implements the existing host's RGB4 semantics and list data formats. Allocation, viewport construction, input scheduling and presentation remain caller-owned. |
 | `amiga/viewport_list.c/.h` | Viewport record construction, palette records, MOVE/WAIT merging and an owned native list pair that binds to RGB4. Packed and native callers share the core. | Uses the accepted host's list format and viewport rules. Actual plane buffers, game setup, allocation and presentation remain caller-owned; there is no CPU/Copper execution. |
 | `amiga/ofs.h`, implementation in `disk.c` | `amiga_ofs_*` reads, file lookup, metadata, bounded range reads and directory scanning from OFS images. | Read-only OFS; DOS locks, volume prefixes and OS service behavior remain adapters. Implementation also contains the F/A-18 wrappers. |
@@ -18,6 +19,17 @@ core elsewhere, compile `voice_program.c` and include `voice_program.h`.
 An asset adapter supplies operation/value arrays and a caller-owned voice;
 the host schedules ticks and receives the end callback. There are no F/A-18
 globals, CPU registers, bus accesses, Kickstart requirements or SDL dependencies.
+
+The independent `port_voice_selection` target supplies release/selection for
+those same `PortVoice` objects. Compile `voice_selection.c` with its header;
+there is no link dependency on the tick executor. It clears a slot before
+acknowledging, rereads the selected sound after that callback, then sets the
+volume and publishes/acknowledges the voice. Empty sounds do no work; a voice
+removed by the callback returns an explicit error after the release. F/A-18's
+`audio_selection` adapter owns sound IDs, flags, volume conversion and channel
+masks. Both command effects and the complete menu pair now use the core.
+The original-instruction proof covers all 110 boundaries over 8,192 calls;
+see `../analysis/routines/native_audio_selection.md` for scope and limits.
 
 The F/A-18 adapter is `audio_update.c/.h`. It decodes the original sound-program
 selectors, applies the game's signed period/master-volume rules, dispatches

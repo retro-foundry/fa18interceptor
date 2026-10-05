@@ -18,6 +18,7 @@ typedef struct {
     FA18CommandSoundProgram programmed, sweep;
     uint32_t random_seed;
     uint8_t volume_fading, tone_mute, effect_flags, sound6_mode;
+    uint8_t sound_flags;
     uint16_t interrupt_masks[4];
     uint32_t master_volume, master_volume_target;
     /* Actual host audio acknowledgement; invoked even for an empty slot.

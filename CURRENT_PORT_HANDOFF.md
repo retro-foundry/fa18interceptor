@@ -6,6 +6,25 @@ also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
 
+Latest batch: native `$C17B96` menu audio and its actual sound-selection/release
+children now use the same ordinary audio owner as command effects/updates.
+`port/voice_selection.c/.h` is an independently built reusable component shared
+by command sounds and menu sounds; game IDs, enable flags and volume conversion
+stay in `audio_selection`. The `$C0F812` text child's historical `PM_DELAY_TEXT`
+hook calls menu audio, not a wait. Complete the actual publisher/formatter and
+`$C08F26` bootstrap next, preserving original palette loading/seeding order.
+Do not count a palette-copy fragment or the linked library as a complete game.
+
+Validation: 8,192 source-instruction comparisons cover 110/110 boundaries and
+23,922 ordered acknowledgements, including shared table/flag/mask changes at
+host service boundaries. All actual original children execute. Command-effects
+regression passes 12,288 calls/278 boundaries; audio-update regression passes
+16,384 calls/105 boundaries. GNU strict tests and CPU/bus/machine/host symbol
+inspection, native MSVC build, four focused CTests and the unchanged 458-file
+native guard pass. See `analysis/routines/native_audio_selection.md` and its
+checkpoint. Sound asset loading, sample output, startup and full loop integration
+remain open; the playable reference is still emulated.
+
 ## Active objective: complete the port without emulation (2026-10-05)
 
 The current user goal is the complete C game without CPU or chipset emulation.

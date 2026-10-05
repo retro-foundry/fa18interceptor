@@ -1,30 +1,24 @@
 #include "command_effects.h"
+#include "audio_selection.h"
 
 static int valid_audio(const FA18CommandAudio *a) {
     return a && a->acknowledge && a->programmed.values && a->programmed.count>=10 &&
            a->sweep.values && a->sweep.count>=3;
 }
 
-static void acknowledge(FA18CommandAudio *a,unsigned channel) {
-    a->acknowledge(a->acknowledge_context,channel,a->interrupt_masks[channel]);
+static int release_voice(FA18CommandAudio *a,unsigned channel) {
+    return fa18_release_native_audio_channel(a,channel);
 }
 
-static void release_voice(FA18CommandAudio *a,unsigned channel) {
-    a->slots[channel]=NULL;
-    acknowledge(a,channel);
-}
-
-static void play_voice(FA18CommandAudio *a,FA18CommandVoice *voice,unsigned channel) {
-    release_voice(a,channel);
-    voice->volume=0;
-    a->slots[channel]=voice;
-    acknowledge(a,channel);
+static int play_voice(FA18CommandAudio *a,FA18CommandVoice *const *voice,unsigned channel) {
+    return fa18_select_native_sound(a,voice,1,0,channel,0);
 }
 
 int fa18_release_native_command_voices(FA18CommandAudio *a,uint32_t *result) {
     unsigned channel;
     if(!valid_audio(a) || !result) return 0;
-    for(channel=0;channel<4;++channel) release_voice(a,channel);
+    for(channel=0;channel<4;++channel)
+        if(!release_voice(a,channel)) return 0;
     *result=12;
     return 1;
 }
@@ -35,7 +29,7 @@ int fa18_play_native_status_tone(FA18CommandAudio *a,uint32_t *result) {
     /* $C3318E/$C3316A: the signed mute byte only suppresses positive values. */
     if(a->tone_mute==0 || a->tone_mute>=128) {
         if(a->programmed_voice) {
-            release_voice(a,3);
+            if(!release_voice(a,3)) return 0;
             p=a->programmed.values;
             pitch=a->volume_fading?2u:4u;
             p[0]=2; p[1]=1; p[2]=300u<<16; p[3]=pitch<<16; p[4]=1;
@@ -44,7 +38,7 @@ int fa18_play_native_status_tone(FA18CommandAudio *a,uint32_t *result) {
             p[9]=2;
             a->programmed_voice->position=0;
             a->programmed_voice->delay=1;
-            play_voice(a,a->programmed_voice,3);
+            if(!play_voice(a,&a->programmed_voice,3)) return 0;
         }
     }
     *result=2;
@@ -104,7 +98,7 @@ int fa18_start_native_sound6(FA18CommandEffects *e,uint32_t event,
         return 1;
     }
     if(!a->sweep_voice) { *result=event; return 1; }
-    release_voice(a,2);
+    if(!release_voice(a,2)) return 0;
     bits=(uint32_t)period<<16;
     a->sweep.values[0]=bits;
     bits=0u-bits;
@@ -116,7 +110,7 @@ int fa18_start_native_sound6(FA18CommandEffects *e,uint32_t event,
     a->sweep_voice->position=0;
     a->sweep_voice->period=(random_bits11(a)*4u+0x231eu)<<16;
     a->sweep_voice->delay=1;
-    play_voice(a,a->sweep_voice,2);
+    if(!play_voice(a,&a->sweep_voice,2)) return 0;
     *result=8;
     return 1;
 }

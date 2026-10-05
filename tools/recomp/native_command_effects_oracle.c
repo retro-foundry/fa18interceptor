@@ -4,6 +4,8 @@
 #undef main
 #include "../../port/command_queue.c"
 #include "../../port/command_effects.c"
+#include "../../port/voice_selection.c"
+#include "../../port/audio_selection.c"
 #include "../../build/recomp/native_command_effects_source.h"
 
 enum { VOICES=6, STACK_FIRST=0xc7fd00, STACK_END=0xc7ff00, MAX_ACKS=4 };

@@ -56,6 +56,9 @@ Native graphics setup now allocates the original five-plane family, builds
 both actual five/four-plane display pairs and shares the native display owner.
 Its 5,120 original invocations cover all 194 reachable boundaries. Palette
 imports from both original ILBM resources and Hunk 21 match all 320 words each.
+Native menu sound selection now shares ordinary audio owners with command
+effects and audio updates. Its independent `voice_selection` core is reused
+by both sound-start paths; 8,192 original comparisons cover all 110 boundaries.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
@@ -64,6 +67,7 @@ runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_outer_display.md`,
 `analysis/routines/native_graphics_setup.md`,
 `analysis/routines/native_audio_update.md`,
+`analysis/routines/native_audio_selection.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,
@@ -123,7 +127,7 @@ runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 | B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
 | C | Machine and frame parity with Engine9000 | historical emulator comparisons documented; current acceptance uses the sealed native recordings |
 | D | Readable C, proven in related batches | 539 readable translated + 85 explicitly deferred static entries cover the seeded 624; 75 additional readable source-only entries, 543 readable entries with source timing. Original callback scope remains follow-up work; see CURRENT_PORT_HANDOFF.md |
-| F | Native backend: plain C memory, direct drawing and audio | not started |
+| F | Native backend: plain C memory, direct drawing and audio | in progress; native components proven, full game integration and sample output pending |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | Last: assess which services remain necessary after D and F; existing C shims are verified on three native sessions |
 
 The project work order is D, then F, then only the necessary parts of E.
