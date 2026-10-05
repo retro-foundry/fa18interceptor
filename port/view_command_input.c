@@ -18,6 +18,10 @@ static void detail(FA18ViewCommandState *s,uint8_t value) {
     s->detail_index=value; s->update_mask=0xff;
     if(!s->fire_state) s->fire_state=0xff;
 }
+int fa18_set_native_view_detail(FA18ViewCommandState *s,uint8_t value) {
+    if(!s) return 0;
+    detail(s,value); return 1;
+}
 
 static void origin_range(FA18ViewCommandState *s,int increase) {
     FA18CommandInput *c=s->flight->commands;

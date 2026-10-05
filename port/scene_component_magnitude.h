@@ -40,5 +40,9 @@ int fa18_scene_component_magnitude(const FA18SceneMagnitudeTable *table,
  * also supports the source's negative/overflowed component lookup paths. */
 int fa18_scene_component_magnitude_window(const PortFieldWindow *table,
                                           int16_t x,int16_t y,int16_t z,int16_t *result);
+/* Same primitive, also returning the numeric final vertical-ratio operand
+ * consumed by callers that retain it across subsequent operations. */
+int fa18_scene_component_magnitude_window_with_axis(const PortFieldWindow *table,
+    int16_t x,int16_t y,int16_t z,int16_t *result,uint32_t *axis);
 
 #endif

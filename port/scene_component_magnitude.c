@@ -32,7 +32,7 @@ static int divu_word(uint32_t dividend, uint16_t divisor, uint32_t *destination)
     if (!divisor || !destination) return -1;
     const uint32_t quotient = dividend / divisor;
     if (quotient > UINT16_MAX) return 1;
-    *destination = (*destination & UINT32_C(0xffff0000)) | quotient;
+    *destination = ((dividend % divisor)<<16) | quotient;
     return 0;
 }
 
@@ -52,7 +52,7 @@ static int component_magnitude(const FA18SceneMagnitudeTable *table,const PortFi
                                    int16_t component_0,
                                    int16_t component_1,
                                    int16_t component_2,
-                                   int16_t *result) {
+                                   int16_t *result,uint32_t *axis) {
     if ((!table && !window) || !result) return -1;
     int16_t d2 = component_0;
     int32_t d3 = component_1;
@@ -89,6 +89,7 @@ static int component_magnitude(const FA18SceneMagnitudeTable *table,const PortFi
         vertical = swap;
     }
     planar = arithmetic_shift_right_long(planar, 14);
+    uint32_t ratio;
     if ((int16_t)planar) {
         uint32_t vertical_register = (uint32_t)vertical;
         const int division = divu_word(vertical_register, (uint16_t)planar,
@@ -97,9 +98,12 @@ static int component_magnitude(const FA18SceneMagnitudeTable *table,const PortFi
         vertical = (int32_t)vertical_register;
         vertical = arithmetic_shift_right_word((int16_t)vertical, 6);
         vertical = (int16_t)((uint16_t)vertical << 1);
+        ratio=(vertical_register&UINT32_C(0xffff0000))|(uint16_t)vertical;
     } else {
         vertical = 0;
+        ratio=0;
     }
+    if(axis) *axis=ratio;
     if (table_word(table,window, (int16_t)vertical, &lookup) != 0) return -1;
     const uint32_t scalar_product = (uint32_t)(uint16_t)planar * lookup;
     const int32_t scalar = arithmetic_shift_right_long(
@@ -110,9 +114,13 @@ static int component_magnitude(const FA18SceneMagnitudeTable *table,const PortFi
 
 int fa18_scene_component_magnitude(const FA18SceneMagnitudeTable *table,
                                    int16_t x,int16_t y,int16_t z,int16_t *result) {
-    return component_magnitude(table,NULL,x,y,z,result);
+    return component_magnitude(table,NULL,x,y,z,result,NULL);
 }
 int fa18_scene_component_magnitude_window(const PortFieldWindow *table,
                                           int16_t x,int16_t y,int16_t z,int16_t *result) {
-    return component_magnitude(NULL,table,x,y,z,result);
+    return component_magnitude(NULL,table,x,y,z,result,NULL);
+}
+int fa18_scene_component_magnitude_window_with_axis(const PortFieldWindow *table,
+    int16_t x,int16_t y,int16_t z,int16_t *result,uint32_t *axis) {
+    return component_magnitude(NULL,table,x,y,z,result,axis);
 }

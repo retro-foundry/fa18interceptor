@@ -31,6 +31,8 @@ int fa18_request_native_cockpit_redraw(FA18ViewCommandState *state);
  * The optional carried axis shares the record scheduler's working value. */
 int fa18_select_native_zero_view_mode(FA18ViewCommandState *state,
                                         const FA18ViewSpanOffsets *spans,uint32_t *axis);
+/* Actual C1B7CC detail body, with no input-request publication. */
+int fa18_set_native_view_detail(FA18ViewCommandState *state,uint8_t value);
 
 /* All 16 $C1B77C-$C1BB76 view/origin/zoom actions, before publication.
  * No machine, CPU, guest addresses or substitute child behavior.

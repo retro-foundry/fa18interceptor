@@ -11,14 +11,14 @@ static int16_t norm_word(unsigned i) {
     static const int16_t words[]={0,-192,192,-32768,32767};
     return words[(view_case/16+i)%5];
 }
-static int normalize(void *context,FA18NativeRecordView *s,int16_t scale,const int32_t components[3],int16_t output[3]) {
+static int normalize(void *context,FA18NativeRecordView *s,int16_t scale,const int32_t components[3],int16_t output[3],uint32_t *axis) {
     unsigned i; (void)context; (void)s;
-    if(scale!=192) return 0;
+    if(scale!=192 || !axis) return 0;
     for(i=0;i<3;++i) { if(components[i]!=norm_input[i]) return 0; output[i]=norm_word(i); }
     ++native_norms; return 1;
 }
-static int view_fault(void *context,FA18NativeRecordView *s) {
-    (void)context;
+static int view_fault(void *context,FA18NativeRecordView *s,uint32_t *axis) {
+    (void)context; if(!axis) return 0;
     if(*s->error_word!=0x34 && *s->error_word!=0x35) return 0;
     ++native_faults; *s->pending=(uint8_t)(view_case&1); return 1;
 }
@@ -113,10 +113,10 @@ int main(int argc,char **argv) {
         for(j=0;j<scene_source_bytes[i].length;++j)
             if(rd_u8(scene_source_bytes[i].pc+j)!=scene_source_bytes[i].bytes[j]) return 1;
     for(view_case=0;view_case<cases;++view_case) {
-        unsigned slot=(view_case/256)%16,viewer=(slot+1+(view_case/32)%15)%16;
+        unsigned slot=(view_case/256)%16,viewer=(slot+1+(view_case/32)%15)%16; uint32_t axis,companion;
         if(view_case%29==0) viewer=slot;
         memcpy(m,base,sizeof *m); scene_fixture(view_case); view_fixture(view_case,slot,viewer);
-        REG_A[1]=CONTROL_RECORDS+slot*512; REG_A[3]=CONTROL_RECORDS+viewer*512;
+        REG_A[1]=CONTROL_RECORDS+slot*512; REG_A[2]=CONTROL_RECORDS+viewer*512; REG_A[3]=CONTROL_RECORDS+viewer*512;
         if(!load_scene(native) || !verify_record_owners(native)) return 1;
         for(i=0;i<sizeof parameters;++i) parameters[i]=rd_u8(VIEW_TABLE-32768+i);
         for(i=0;i<sizeof status;++i) status[i]=rd_u8(STATUS_TABLE-512+i);
@@ -134,12 +134,15 @@ int main(int argc,char **argv) {
         view=(FA18NativeRecordView){.records=&native->bank,.assets=&assets,.ops=&ops,
             .selected_record=&native->selected,.current_stride=&stride,.current_slot=&slot_word,.tick_word=&tick,.error_word=&error_word,
             .post_input_event=&event,.mode=&mode,.limit=&limit,.pending=&pending,.view_flag=&flag,.created=&created,.admitted=&admitted,.normalized=normalized};
-        work=(FA18NativeRecordViewWork){native->bank.records+viewer,REG_D[4]};
+        work=(FA18NativeRecordViewWork){native->bank.records+viewer,REG_D[4],native->bank.records+viewer};
         memcpy(before,m,sizeof *m);
         if(!original_view()) { fprintf(stderr,"source view stopped case %u\n",view_case); return 1; }
+        axis=REG_D[4]; companion=REG_A[2];
         memcpy(expected,m->chip,FA18_CHIP_SIZE); memcpy(expected+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE);
         memcpy(m,before,sizeof *m);
         if(!fa18_update_native_record_view(&view,slot,&work)) { fprintf(stderr,"native view failed case %u\n",view_case); return 1; }
+        if(companion!=CONTROL_RECORDS+512*(unsigned)(work.companion-native->bank.records)) return 1;
+        if(work.carried_axis!=axis) { fprintf(stderr,"view axis case %u expected %08X native %08X\n",view_case,axis,work.carried_axis); return 1; }
         store_scene(native); wr_u16(ERROR_CODE,error_word); wr_u8(FIRE_RECORD_PENDING,pending); wr_u8(RECORD_VIEW_FLAG,flag);
         wr_u8(SCENE_DISPATCH_CREATED,created); wr_u8(SCENE_DISPATCH_ADMITTED,admitted);
         for(i=0;i<3;++i) wr_u16(NORMALIZED+2*i,(uint16_t)normalized[i]);
@@ -150,6 +153,7 @@ int main(int argc,char **argv) {
                 fprintf(stderr,"view case %u byte %06X source %02X native %02X\n",view_case,a,expected[i],rd_u8(a)); return 1;
             }
         }
+        memcpy(m->chip,expected,FA18_CHIP_SIZE); memcpy(m->slow,expected+FA18_CHIP_SIZE,FA18_SLOW_SIZE);
         if(!verify_record_owners(native)) return 1;
     }
     if(source_norms!=native_norms || source_faults!=native_faults) return 1;

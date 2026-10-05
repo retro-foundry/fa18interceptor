@@ -7,8 +7,8 @@ typedef struct FA18NativeRecordView FA18NativeRecordView;
 typedef struct {
     /* Actual C2574A normalization and C06C02 source fault boundaries. */
     int (*normalize)(void *context,FA18NativeRecordView *state,int16_t scale,
-                     const int32_t components[3],int16_t output[3]);
-    int (*fault)(void *context,FA18NativeRecordView *state);
+                     const int32_t components[3],int16_t output[3],uint32_t *axis);
+    int (*fault)(void *context,FA18NativeRecordView *state,uint32_t *axis);
     void *context;
 } FA18NativeRecordViewOps;
 typedef struct {
@@ -17,7 +17,8 @@ typedef struct {
 } FA18NativeRecordViewAssets;
 typedef struct {
     FA18NativeSceneRecord *viewer;
-    uint32_t carried_axis; /* source D4 input retained for the signed word gate */
+    uint32_t carried_axis; /* source D4 input/output across actual lower owners */
+    FA18NativeSceneRecord *companion; /* live source A2 record identity */
 } FA18NativeRecordViewWork;
 struct FA18NativeRecordView {
     FA18NativeSceneRecords *records;
@@ -32,4 +33,7 @@ struct FA18NativeRecordView {
  * true lower owners. No CPU, address space or machine services are used. */
 int fa18_update_native_record_view(FA18NativeRecordView *state,unsigned slot,
                                     FA18NativeRecordViewWork *work);
+/* Actual C23FF8 shared selected-reference tail used by dispatch. */
+int fa18_link_native_record_view(FA18NativeRecordView *state,unsigned slot,
+                                  FA18NativeRecordViewWork *work);
 #endif

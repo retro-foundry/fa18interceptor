@@ -1,22 +1,17 @@
 #include "native_control_record_update.h"
 
-static int child(FA18NativeControlRecordUpdate *s,FA18NativeControlRecordChild kind,
-                 unsigned slot,int *decision) {
-    int ignored=0;
-    return s->ops->consume(s->ops->context,s,kind,slot,s->companion_slot,
-        decision?decision:&ignored);
-}
 static int active(const FA18NativeControlRecordUpdate *s,unsigned slot) {
     return (s->records->aircraft[slot].flags&0x40u)!=0;
 }
 static void prepare(FA18NativeControlRecordUpdate *s,unsigned slot,unsigned companion) {
     *s->current_slot=(uint16_t)slot; *s->current_stride=(uint16_t)(slot*512u);
-    s->companion_slot=companion;
+    s->companion_slot=companion; s->view_work->companion=s->records->records+companion;
 }
 static int dispatch_pose(FA18NativeControlRecordUpdate *s,unsigned slot) {
     int decision;
-    return child(s,FA18_RECORD_UPDATE_DISPATCH,slot,&decision) &&
-        (!decision || fa18_update_native_record_pose(s->pose,slot));
+    if(!fa18_dispatch_native_record(s->dispatch,slot,s->companion_slot,&decision)) return 0;
+    s->companion_slot=(unsigned)(s->view_work->companion-s->records->records);
+    return !decision || fa18_update_native_record_pose(s->pose,slot);
 }
 static int group_record(FA18NativeControlRecordUpdate *s,unsigned slot,unsigned companion,uint8_t gate,
                         int allow_release) {
@@ -104,7 +99,11 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
        s->regions->admitted!=s->view->admitted ||
        s->regions->pointer_groups!=s->placement->pointer_groups ||
        !s->regions->assets || s->regions->assets->parameters!=&s->view->assets->parameters ||
-       !s->ops || !s->ops->consume || !s->post_input_event ||
+       !s->dispatch || s->dispatch->view!=s->view || s->dispatch->view_work!=s->view_work ||
+       s->dispatch->range!=s->range || s->dispatch->cell_only!=s->pose->cell_only ||
+       s->dispatch->sequence_phase!=s->control->sequence_phase ||
+       s->dispatch->target_slot!=s->control->target_slot ||
+       s->dispatch->scene_redraw!=s->control->scene_redraw || !s->post_input_event ||
        !s->counter_first || !s->counter_second || !s->primary_gate || !s->secondary_gate ||
        !s->periodic_word || !s->current_slot || !s->current_stride) return 0;
     root=s->records->records;
@@ -123,8 +122,9 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     if(!*s->post_input_event && !set_record_word(root,0x4c,(uint16_t)(countdown-1u))) return 0;
     root->aircraft->flags&=0xfffd;
     if(!fa18_update_native_record_control(s->control,0,s->companion_slot) ||
-       !fa18_update_native_record_view(s->view,0,s->view_work) ||
-       !fa18_classify_native_selected_range(s->range,0) ||
+       !fa18_update_native_record_view(s->view,0,s->view_work)) return 0;
+    s->companion_slot=(unsigned)(s->view_work->companion-s->records->records);
+    if(!fa18_classify_native_selected_range(s->range,0) ||
        !fa18_update_native_record_pose(s->pose,0)) return 0;
     for(slot=1;slot<4;++slot)
         if(!group_record(s,slot,0,*s->primary_gate,1)) return 0;

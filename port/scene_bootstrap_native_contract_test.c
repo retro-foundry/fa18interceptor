@@ -5,6 +5,7 @@
 #include "native_record_action_placement_test_support.h"
 #include "native_postflight_test_support.h"
 #include "native_scene_regions_test_support.h"
+#include "native_record_dispatch_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -27,7 +28,7 @@ typedef struct {
     FA18NativeRecordViewAssets view_assets;
     uint8_t view_pending,view_flag,view_created,view_admitted;
     int16_t normalized[3];
-    FA18NativeControlRecordUpdate control_update; FA18NativeControlRecordOps control_ops;
+    FA18NativeControlRecordUpdate control_update; FA18NativeRecordDispatch dispatch; FA18RecordDispatchTestStorage dispatch_storage;
     FA18NativeContextRefresh refresh; FA18NativeContextRefreshOps refresh_ops;
     FA18NativeStartupRanges startup; FA18NativeViewedRecordWord viewed;
     FA18NativeGraphicsSetup graphics; FA18NativeGraphicsPlane planes[6];
@@ -56,12 +57,6 @@ typedef struct {
     unsigned calls; int complete;
 } Fixture;
 static Fixture fixture;
-static int update(void *context,FA18NativeControlRecordUpdate *state,
-                  FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
-    Fixture *f=context;
-    assert(state==&f->control_update && decision && child<2 && slot<16 && companion<16);
-    *decision=0; return 1;
-}
 static int pose(void *context,FA18NativeRecordPose *state,FA18NativeRecordPoseChild child,
                 const FA18NativeRecordPoseInput *in,FA18NativeRecordPoseResult *out) {
     Fixture *f=context; uint8_t high,low; unsigned i;
@@ -120,7 +115,6 @@ static void initialize(Fixture *f) {
         .grid_origin_x=&f->grid_x,.grid_origin_z=&f->grid_z,.error_word=&f->error_word,
         .target_point=f->target,.root_ready=&f->root_ready,.bar_e_flag=&f->bar_e,
         .bar_redraw_e=&f->bar_redraw,.fire_state=&f->fire,.input_source=&f->input_source};
-    f->control_ops=(FA18NativeControlRecordOps){update,f};
     f->record_selection=(FA18NativeRecordSelection){.records=&f->records,
         .selected_record=&f->selected,.selection_marker=&f->marker,.action_pending=&f->action_pending,
         .selection_active=&f->selection,.origin_enable=&f->context_select,
@@ -150,13 +144,14 @@ static void initialize(Fixture *f) {
     f->action_placement.viewed_record=f->fields+30;
     f->pose_ops=(FA18NativeRecordPoseOps){pose,f}; f->pose.ops=&f->pose_ops;
     f->control_update=(FA18NativeControlRecordUpdate){.records=&f->records,
-        .selection=&f->record_selection,.range=&f->range,.ops=&f->control_ops,
+        .selection=&f->record_selection,.range=&f->range,
         .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,.pose=&f->pose,.placement=&f->action_placement,
         .post_input_event=&f->post_event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary_gate,.secondary_gate=&f->secondary_gate,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};
     fa18_test_bind_postflight(&f->postflight,&f->post_storage,&f->control_update);
     fa18_test_bind_scene_regions(&f->regions,&f->region_storage,&f->control_update);
+    fa18_test_bind_record_dispatch(&f->dispatch,&f->dispatch_storage,&f->control_update,&f->context,&f->queue);
     f->postflight.target_record=&f->flight.spawn_gate;
     f->postflight.command_word=&f->flight.command_word;
     f->postflight.player_phase=&f->phase;

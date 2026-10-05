@@ -48,7 +48,10 @@ MSVC Release native game and affected contracts, strict GNU view/scheduler
 contracts, eleven affected CTests and the 497-file native build guard pass.
 The subsequent `native_record_control` batch supplies the carried axis directly
 and removes root/secondary control callbacks. The subsequent `native_record_pose`
-batch makes pose and motion history direct. Five scheduler children remain:
-periodic, primary/secondary placement, dispatch and finish. Native
+batch makes pose and motion history direct. The subsequent placement/finish/regions/dispatch batches remove the outer
+scheduler callbacks. View work now returns the actual companion identity and
+full carried axis; normalization/fault contracts expose their returned axis.
+The updated proof checks these outputs and independently compares typed
+records against original output. Native
 main still does not invoke this startup graph; full native runtime integration
 and the actual normalization/fault owners remain open.

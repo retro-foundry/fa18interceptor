@@ -22,4 +22,7 @@ struct FA18NativeRecordRange {
  * Uses the actual native C1D974 table primitive. Missing sound/table/record
  * owners fail explicitly, preserving preceding writes. */
 int fa18_classify_native_selected_range(FA18NativeRecordRange *state,unsigned slot);
+/* Complete C24568 over the current record's live view point, sharing the
+ * selected-range magnitude/classification tail. No sound prefix. */
+int fa18_classify_native_view_range(FA18NativeRecordRange *state,unsigned slot,uint32_t *axis);
 #endif

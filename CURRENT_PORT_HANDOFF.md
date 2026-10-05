@@ -13,7 +13,41 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: complete native periodic `$C28996`, region spawn `$C28B16`,
+Latest batch: complete native `$C23A7E` dispatch now replaces the scheduler's
+last outer callback. `$C23F4A` unclassified processing, `$C243F2` tracking and
+`$C24458` selected-control targeting share the actual `$C24568` view-point
+classification, native `$C23CA6` view and `$C1BEE8`/`$C1B7A6` publication.
+`FA18NativeControlRecordOps` is removed. Detail-four publication reuses the
+existing detail/queue owners; it has no missing scene-refresh child.
+
+The dispatcher preserves class gates, countdowns, autonomous damping, heading
+limits, sticky target flags and the source pose decision. Signed control choices
+can read adjacent live fields, including the current record; callers must bind
+those owners through the control field window. View work now carries both the
+numeric axis and the actual companion-record identity. Linked selection and
+heading can change that companion; the scheduler consumes the returned identity.
+Normalization/fault contracts expose the axis they actually return. Magnitude
+preserves DIVU's remainder in the high word of its returned axis.
+
+The complete proof checks 90,112 calls over eleven entries at all 1,035 reachable
+source boundaries, full game RAM excluding only CPU ABI stack, independent typed
+records, decisions, carried axis and returned companion identity. The zero-view
+mode-zero branch is sealed explicitly, as in the preceding publication proof.
+Actual view/range/magnitude/publication/redraw/queue bodies run throughout;
+normalization and fault remain true lower contracts. The existing view and
+selected-range proofs are rerun after the shared changes. MSVC Release native
+builds, strict GNU compilation, affected CTests and the unchanged 511-file
+native guard pass. See `analysis/routines/native_record_dispatch.md` and its
+checkpoint for exact reports.
+
+Next complete the native normalization/fault and startup-reachable pose/control
+owners, reconcile canonical startup/input/queue aliases and original assets,
+then install the native startup/frame graph in main. The full bootstrap still
+has the origin alias gap described below. The native main does not invoke this
+graph; the playable ROM-free runner still uses Musashi, guest RAM and chipset
+state. The full independence goal remains open.
+
+Preceding batch (`8231942d`): complete native periodic `$C28996`, region spawn `$C28B16`,
 dispatch `$C28B34` and actual `$C28F16` point publication now replace the
 scheduler's periodic callback. Actual native `$C2D954` orientation publishes
 both matrices and exposes its carried axis. `$C23A7E` dispatch is now the
@@ -216,9 +250,9 @@ The native bootstrap graph is direct through `$C08F26`, placement, template
 gates, `$C1C63E`, `$C22C80`, `$C29042`, and `$C1C860`. Explicit lower owners
 still remain:
 
-- `FA18NativeControlRecordOps`: periodic and dispatch. Placement and finish are
-  direct. Composed fresh-bootstrap contracts observe a true matrix
-  child inside root pose after direct root control/view/range.
+- The outer scheduler uses actual native periodic, dispatch, placement and
+  finish owners; `FA18NativeControlRecordOps` has been removed. Composed
+  bootstrap contracts observe the matrix child inside root pose.
 - `FA18NativeRecordPoseOps`: fourteen matrix, control/input, flight/collision,
   message/sound/fault and motion-slot boundaries. History is direct.
 - `FA18NativeRecordControlOps`: tone eight, message posting and scene
@@ -241,8 +275,7 @@ guest memory, and the machine/chipset runtime. Do not describe the port as
 emulation-free until native main owns startup, frame scheduling, rendering,
 audio, and input without those layers.
 
-Recommended next batch: finish the two scheduler children, bind actual view
-publication and complete startup-reachable
+Recommended next batch: bind canonical view/input/queue publication and complete startup-reachable
 pose/control children using their complete readable owners under `port/game/`.
 Preserve their true lower child boundaries and shared record mutations. Then
 connect original assets/state before installing the

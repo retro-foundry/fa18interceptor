@@ -20,4 +20,7 @@ int fa18_publish_native_view_key(FA18NativeContextPublication *state,uint32_t ev
                                    uint32_t *axis,uint32_t *published_event);
 int fa18_publish_native_zero_view(FA18NativeContextPublication *state,uint32_t event,
                                     uint32_t *axis,uint32_t *published_event);
+/* Complete C1B7A6: detail four and the actual shared queue tail. */
+int fa18_publish_native_context_detail(FA18NativeContextPublication *state,uint32_t event,
+                                        uint32_t *axis,uint32_t *published_event);
 #endif

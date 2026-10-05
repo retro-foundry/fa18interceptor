@@ -20,9 +20,9 @@ static int put32(FA18NativeSceneRecord *r,size_t at,uint32_t v) {
 static FA18NativeSceneRecord *record_offset(FA18NativeRecordView *s,uint16_t offset) {
     return offset%512u || offset/512u>=16?NULL:s->records->records+offset/512u;
 }
-static int fault(FA18NativeRecordView *s,uint16_t code) {
+static int fault(FA18NativeRecordView *s,FA18NativeRecordViewWork *w,uint16_t code) {
     *s->error_word=code;
-    return s->ops && s->ops->fault && s->ops->fault(s->ops->context,s);
+    return s->ops && s->ops->fault && s->ops->fault(s->ops->context,s,&w->carried_axis);
 }
 static int publish_view(FA18NativeSceneRecord *r,const uint16_t words[4],uint32_t height) {
     unsigned i;
@@ -55,7 +55,7 @@ static int refresh_table(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18Na
           if(at>INT32_MAX-10) return 0;
           cursor=at+10;
           if(!port_field_window_s16(&s->assets->parameters,cursor,&next)) return 0;
-          if(next<0) return fault(s,0x35);
+          if(next<0) return fault(s,w,0x35);
           at=cursor; }
     }
     if(!port_field_window_s16(&s->assets->parameters,(int32_t)at+10,&next)) return 0;
@@ -68,7 +68,7 @@ static int refresh_table(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18Na
     w->carried_axis=(uint32_t)(int32_t)next;
     return table_view(s,r,at+10) && put16(r,0x4a,0x7fff);
 }
-static int linked(FA18NativeRecordView *s,FA18NativeSceneRecord *r) {
+static int linked(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18NativeRecordViewWork *w) {
     uint16_t offset,words[4],angle; FA18NativeSceneRecord *other;
     r->aircraft->flags&=0xfffe;
     if(!(r->aircraft->flags&8u)) return 1;
@@ -81,10 +81,16 @@ static int linked(FA18NativeRecordView *s,FA18NativeSceneRecord *r) {
         r->word_6c=angle; r->word_6e=angle; return 1;
     }
     other=record_offset(s,offset); if(!other) return 0;
+    w->companion=other;
     words[0]=other->word_06; words[1]=other->word_08; words[2]=other->word_0c; words[3]=other->word_0e;
+    w->carried_axis=other->long_10;
     return publish_view(r,words,other->long_10) && put8(r,0x38,(uint8_t)((offset>>9)|0x80u));
 }
-static int zone_view(FA18NativeRecordView *s,FA18NativeSceneRecord *r) {
+int fa18_link_native_record_view(FA18NativeRecordView *s,unsigned slot,FA18NativeRecordViewWork *w) {
+    if(!s || !s->records || slot>=16 || !w || !s->selected_record || !s->current_stride) return 0;
+    return linked(s,s->records->records+slot,w);
+}
+static int zone_view(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18NativeRecordViewWork *w) {
     const PortFieldWindow *list=&s->assets->primary_list; int32_t at=0; int16_t head,offset;
     uint16_t selector; uint8_t zone; int from_zone=0;
     if(!(r->aircraft->flags&0x1000u)) return 1; /* source C242DA skips pending clear */
@@ -94,7 +100,7 @@ static int zone_view(FA18NativeRecordView *s,FA18NativeSceneRecord *r) {
             if(from_zone) return 0;
             if(!get8(r,0x5d,&zone)) return 0;
             if((int8_t)zone<=0) {
-                if(!fault(s,0x34)) return 0;
+                if(!fault(s,w,0x34)) return 0;
                 *s->pending=0; return 1;
             }
             if(!s->assets->zones || (size_t)(zone-1)>=s->assets->zone_count) return 0;
@@ -106,7 +112,11 @@ static int zone_view(FA18NativeRecordView *s,FA18NativeSceneRecord *r) {
         if(!port_field_window_u16(list,at+4,&selector)) return 0;
         if((selector&255u)==*s->current_slot) {
             if(!port_field_window_s16(list,at+6,&offset) ||
-               !port_field_window_s16(&s->assets->parameters,offset,&offset) || !table_view(s,r,offset)) return 0;
+               !port_field_window_s16(&s->assets->parameters,offset,&offset)) return 0;
+            { int16_t fine;
+              if(!port_field_window_s16(&s->assets->parameters,(int32_t)offset+4,&fine)) return 0;
+              w->carried_axis=(uint32_t)(int32_t)fine; }
+            if(!table_view(s,r,offset)) return 0;
             if(!put8(r,0x38,0xff)) return 0;
             r->aircraft->flags&=0xfffe; *s->pending=0;
             return 1;
@@ -115,14 +125,14 @@ static int zone_view(FA18NativeRecordView *s,FA18NativeSceneRecord *r) {
         at+=10;
     }
 }
-static int in_sight(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18NativeSceneRecord *viewer) {
+static int in_sight(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18NativeSceneRecord *viewer,FA18NativeRecordViewWork *w) {
     uint8_t cycle; uint16_t range; int32_t vector[3],product[3],first,sum; unsigned i;
     if(!get8(r,0x39,&cycle)) return 0;
     if((cycle&0xf0u)!=0x10) return 1;
     if(!viewer || !get16(viewer,0x4a,&range)) return 0;
     if((int16_t)range>0x3000) goto clear;
     for(i=0;i<3;++i) vector[i]=(int32_t)(viewer->geometry->position[i]-r->geometry->position[i])>>8;
-    if(!s->ops || !s->ops->normalize || !s->ops->normalize(s->ops->context,s,0xc0,vector,s->normalized)) return 0;
+    if(!s->ops || !s->ops->normalize || !s->ops->normalize(s->ops->context,s,0xc0,vector,s->normalized,&w->carried_axis)) return 0;
     for(i=0;i<3;++i) product[i]=(int32_t)viewer->geometry->inverse[i][2]*s->normalized[i];
     first=(int32_t)((uint32_t)product[2]+(uint32_t)product[0]);
     sum=(int32_t)((uint32_t)first+(uint32_t)product[1]);
@@ -130,15 +140,16 @@ static int in_sight(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18NativeS
     for(i=0;i<3;++i) product[i]=(int32_t)viewer->geometry->inverse[i][2]*r->geometry->inverse[i][2];
     first=(int32_t)((uint32_t)product[2]+(uint32_t)product[0]);
     sum=(int32_t)((uint32_t)first+(uint32_t)product[1]);
+    w->carried_axis=(uint32_t)sum;
     if((int64_t)first+product[1]<0 || sum<0xd000000) goto clear;
     r->byte_04|=0x20; return 1;
 clear:
     r->byte_04&=0xdf; return 1;
 }
-static int finish(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18NativeSceneRecord *viewer) {
+static int finish(FA18NativeRecordView *s,FA18NativeSceneRecord *r,FA18NativeSceneRecord *viewer,FA18NativeRecordViewWork *w) {
     uint16_t range,delay,kind; uint8_t mode; int32_t at=0; int16_t difference; int negative,row;
     if(r->byte_20&2u) goto done;
-    if(!in_sight(s,r,viewer) || !get8(r,5,&mode)) return 0;
+    if(!in_sight(s,r,viewer,w) || !get8(r,5,&mode)) return 0;
     if(mode==6 || (mode==8 && (*s->mode!=5 || !*s->pending)) || !(r->byte_04&0x20u)) goto done;
     if(!viewer || !get16(viewer,0x4a,&range)) return 0;
     if((int16_t)range>0x300) {
@@ -190,7 +201,9 @@ flag:
     }
     words[0]=(uint16_t)((int16_t)(world[0]>>16)>>6); words[1]=(uint16_t)((int16_t)(world[2]>>16)>>6);
     words[2]=(uint16_t)((world[0]>>8)&0x3fff); words[3]=(uint16_t)((world[2]>>8)&0x3fff);
-    return publish_view(r,words,(uint32_t)((int32_t)world[1]>>8)) && finish(s,r,viewer);
+    w->carried_axis=(uint32_t)((int32_t)world[2]>>8);
+    w->carried_axis=(w->carried_axis&0xffff0000u)|(w->carried_axis&0x3fffu);
+    return publish_view(r,words,(uint32_t)((int32_t)world[1]>>8)) && finish(s,r,viewer,w);
 }
 int fa18_update_native_record_view(FA18NativeRecordView *s,unsigned slot,FA18NativeRecordViewWork *w) {
     FA18NativeSceneRecord *r,*root; uint8_t mode,selector; unsigned i; int32_t limit;
@@ -200,15 +213,15 @@ int fa18_update_native_record_view(FA18NativeRecordView *s,unsigned slot,FA18Nat
     if(*s->post_input_event) return 1;
     r=s->records->records+slot; root=s->records->records;
     if(!refresh_table(s,r,w) || !get8(r,5,&mode)) return 0;
-    if(mode==8) return finish(s,r,w->viewer);
-    if(r->aircraft->flags&8u) return !(r->aircraft->flags&2u) || linked(s,r);
+    if(mode==8) return finish(s,r,w->viewer,w);
+    if(r->aircraft->flags&8u) return !(r->aircraft->flags&2u) || linked(s,r,w);
     if(!get8(r,0x38,&selector)) return 0;
     w->viewer=root;
     if(selector!=0xff) {
         w->viewer=record_offset(s,(uint16_t)((selector&0x7fu)<<9));
         if(!w->viewer || !get8(r,0x7a,&mode)) return 0;
         if(mode==5 && !put8(r,0x7a,3)) return 0;
-        if(!(w->viewer->aircraft->flags&0x40u)) return zone_view(s,r);
+        if(!(w->viewer->aircraft->flags&0x40u)) return zone_view(s,r,w);
         r->aircraft->flags|=1;
         if(w->viewer==root) return place(s,r,w);
     }

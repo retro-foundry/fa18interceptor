@@ -10,8 +10,8 @@ must bind the actual owner. See `native_context_publication.md`.
 
 `port/native_postflight.c/.h` implements complete `$C09E06`, all eight dispatched
 mode owners, `$C0A12E` view restoration and `$C0A3EA` readiness. The native
-record scheduler now invokes finish directly. Only periodic and dispatch remain
-in `FA18NativeControlRecordOps`.
+record scheduler now invokes finish directly. Periodic and dispatch now have actual native owners; the outer
+`FA18NativeControlRecordOps` layer is removed. See `native_record_dispatch.md`.
 
 The authority is the sealed original instruction graph, corroborated by
 `port/game/postflight_scheduler.c`. Mode 3, 4, 5, 6, 7, 9, 125 and other retain

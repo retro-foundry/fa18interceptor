@@ -24,10 +24,35 @@ static uint32_t cell_difference(uint16_t coarse,uint16_t fine,uint16_t own_coars
     uint32_t result=(uint32_t)cell+(uint32_t)(int32_t)detail;
     return (int64_t)cell+detail<0?0u-result:result;
 }
+static int publish_range(FA18NativeRecordRange *s,FA18NativeSceneRecord *r,
+    uint32_t dx,uint32_t dy,uint32_t dz,uint32_t *axis) {
+    uint8_t mode;
+    int16_t scalar;
+    if((int32_t)dx>0x7f00 || (int32_t)dy>0x7f00 || (int32_t)dz>0x7f00) goto far;
+    if(fa18_scene_component_magnitude_window_with_axis(s->table,(int16_t)dx,(int16_t)dy,
+        (int16_t)dz,&scalar,axis)!=0) return 0;
+    *s->magnitude=(uint16_t)scalar;
+    if(!write_word(r,0x4a,(uint16_t)scalar)) return 0;
+    r->byte_04|=1;
+    if(scalar>0x36c0) goto distant_class;
+    if(!fa18_read_native_scene_record(r,0x7a,&mode,1)) return 0;
+    if(scalar>0x1e00) { if(mode==4) mode=3; }
+    else if(mode==3) mode=4;
+    if(!fa18_write_native_scene_record(r,0x7a,&mode,1)) return 0;
+    if(!*s->current_stride) return 1;
+    if(scalar>0x1800) goto far;
+    r->aircraft->weapon_radar=(uint8_t)((r->aircraft->weapon_radar&15u)|
+        (scalar<=0x300?0x10u:scalar<=0xc00?0x20u:0x30u));
+    return 1;
+far:
+    if(!write_word(r,0x4a,0x7fff)) return 0;
+distant_class:
+    if(*s->current_stride) return byte_change(r,0x63,0xff,0xf0);
+    return 1;
+}
 int fa18_classify_native_selected_range(FA18NativeRecordRange *s,unsigned slot) {
     FA18NativeSceneRecord *r,*target;
-    uint16_t selected,distance; uint8_t counter,mode; uint32_t dx,dy,dz;
-    int16_t scalar;
+    uint16_t selected,distance; uint8_t counter; uint32_t dx,dy,dz;
     if(!s || !s->records || slot>=16 || !s->selected_record || !s->current_stride ||
        !s->magnitude || !s->bar_redraw_f) return 0;
     r=s->records->records+slot;
@@ -51,24 +76,25 @@ int fa18_classify_native_selected_range(FA18NativeRecordRange *s,unsigned slot) 
     dz=cell_difference(target->word_08,target->word_0e,r->word_08,r->word_0e);
     dy=target->long_10-r->long_10;
     if((int64_t)(int32_t)target->long_10-(int32_t)r->long_10<0) dy=0u-dy;
-    if((int32_t)dx>0x7f00 || (int32_t)dy>0x7f00 || (int32_t)dz>0x7f00) goto far;
-    if(fa18_scene_component_magnitude_window(s->table,(int16_t)dx,(int16_t)dy,(int16_t)dz,&scalar)!=0) return 0;
-    *s->magnitude=(uint16_t)scalar;
-    if(!write_word(r,0x4a,(uint16_t)scalar)) return 0;
-    r->byte_04|=1;
-    if(scalar>0x36c0) goto distant_class;
-    if(!fa18_read_native_scene_record(r,0x7a,&mode,1)) return 0;
-    if(scalar>0x1e00) { if(mode==4) mode=3; }
-    else if(mode==3) mode=4;
-    if(!fa18_write_native_scene_record(r,0x7a,&mode,1)) return 0;
-    if(!*s->current_stride) return 1;
-    if(scalar>0x1800) goto far;
-    r->aircraft->weapon_radar=(uint8_t)((r->aircraft->weapon_radar&15u)|
-        (scalar<=0x300?0x10u:scalar<=0xc00?0x20u:0x30u));
-    return 1;
-far:
-    if(!write_word(r,0x4a,0x7fff)) return 0;
-distant_class:
-    if(*s->current_stride) return byte_change(r,0x63,0xff,0xf0);
-    return 1;
+    return publish_range(s,r,dx,dy,dz,NULL);
+}
+int fa18_classify_native_view_range(FA18NativeRecordRange *s,unsigned slot,uint32_t *axis) {
+    FA18NativeSceneRecord *r; uint8_t counter; uint16_t distance,words[4];
+    uint32_t height,dx,dy,dz; uint8_t bytes[4]; unsigned i;
+    if(!s || !s->records || slot>=16 || !axis || !s->current_stride || !s->magnitude) return 0;
+    r=s->records->records+slot;
+    if(!fa18_read_native_scene_record(r,0x39,&counter,1)) return 0;
+    counter=(uint8_t)(counter+16);
+    if(!fa18_write_native_scene_record(r,0x39,&counter,1) || !read_word(r,0x4a,&distance)) return 0;
+    if((int16_t)distance>=0x480 && ((int16_t)distance>=0x900?80:32)>=(int8_t)(counter&240u)) return 1;
+    if(!byte_change(r,0x39,15,0) || !read_word(r,0x2c,words)) return 0;
+    if((int16_t)words[0]<0) return 1;
+    for(i=1;i<4;++i) if(!read_word(r,0x2c+2*i,words+i)) return 0;
+    if(!fa18_read_native_scene_record(r,0x34,bytes,4)) return 0;
+    height=(uint32_t)bytes[0]<<24|(uint32_t)bytes[1]<<16|(uint32_t)bytes[2]<<8|bytes[3];
+    dx=cell_difference(words[0],words[2],r->word_06,r->word_0c);
+    dz=cell_difference(words[1],words[3],r->word_08,r->word_0e); *axis=dz;
+    dy=height-r->long_10;
+    if((int64_t)(int32_t)height-(int32_t)r->long_10<0) dy=0u-dy;
+    return publish_range(s,r,dx,dy,dz,axis);
 }

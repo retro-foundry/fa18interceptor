@@ -21,11 +21,11 @@
     "native selected range: 8192 complete calls match all game RAM; actual magnitude; 3277 sound contracts"
   ],
   "source_sha256": {
-    "port/native_record_range.c": "8e50c649aa5218ac97cdd5fecc250ca9d0ae57c76bc4324bd1b94887bbc2aa57",
-    "port/native_record_range.h": "985275dbef3296e8fb44ccf95cd0232bf71d93721bd998f571479d5c4f23e99c",
-    "port/native_control_record_update.c": "87f5c7c22dc04a89896b9c7e09a1a7cda21a581844e67da380c277b8b88839ce",
-    "port/native_control_record_update.h": "9f58d80f455431eb1ab56c6bd5109d8bbf3bb29c1800d20e19866569a76aaf45",
-    "port/scene_component_magnitude.c": "c5a1acb1e57afb44d702fd341be334de20f078b6f6de3b1cb476716dff1337e0",
+    "port/native_record_range.c": "16425602cea416e4f0df4951bb7fa8dc22f6d47c0ae3d41e1f2c50d568c14d67",
+    "port/native_record_range.h": "0c41a47313378e113b4ce5b7731a3a391d1e25e17faa7b4dccafcebe2c9e3dd2",
+    "port/native_control_record_update.c": "d22350dbdbc94663de2191a7f7933b102e731826b72dde1a291ed1339ca801bc",
+    "port/native_control_record_update.h": "430a9ffb196104f50cef5c2daf20eaa05251d22157bf61163ea126f1a90b2279",
+    "port/scene_component_magnitude.c": "1456da0b73cc7a0f520068ac03469bf88e8e85028642da0a79a326abb0655bfa",
     "tools/recomp/native_record_range_oracle.c": "315c78fc4eb533313ded6137f0f58d1a329b659b94326e92f917446f7a95d2e0",
     "tools/recomp/check_native_record_range.py": "796c997ba0d21d0f797996118921c5b7d83e8fdb52fa7b8227088dbb96ef7670"
   }

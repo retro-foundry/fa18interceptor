@@ -10,13 +10,13 @@ typedef struct {
     uint8_t event,mode,limit,pending,flag,created,admitted;
     int16_t normalized[3]; unsigned norms,faults; int fail;
 } Fixture;
-static int normalize(void *context,FA18NativeRecordView *state,int16_t scale,const int32_t vector[3],int16_t out[3]) {
+static int normalize(void *context,FA18NativeRecordView *state,int16_t scale,const int32_t vector[3],int16_t out[3],uint32_t *axis) {
     Fixture *f=context; assert(state==&f->view && scale==192 && vector);
-    ++f->norms; out[0]=-192; out[1]=out[2]=0; return !f->fail;
+    assert(axis); ++f->norms; out[0]=-192; out[1]=out[2]=0; return !f->fail;
 }
-static int fault(void *context,FA18NativeRecordView *state) {
+static int fault(void *context,FA18NativeRecordView *state,uint32_t *axis) {
     Fixture *f=context; assert(state==&f->view && (f->error==0x34 || f->error==0x35));
-    ++f->faults; return !f->fail;
+    assert(axis); ++f->faults; return !f->fail;
 }
 static void initialize(Fixture *f) {
     memset(f,0,sizeof *f);

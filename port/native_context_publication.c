@@ -10,6 +10,13 @@ static int publication_valid(const FA18NativeContextPublication *s) {
         s->queue && s->queue->commands==f->commands && s->context->key_taken==&s->queue->taken &&
         s->selection_marker && s->target_record && s->spans;
 }
+int fa18_publish_native_context_detail(FA18NativeContextPublication *s,uint32_t event,
+                                        uint32_t *axis,uint32_t *published_event) {
+    if(!publication_valid(s) || !axis || !published_event) return 0;
+    *axis=4;
+    return fa18_set_native_view_detail(s->context->view,4) &&
+        fa18_publish_native_command_with_axis(s->queue,event,published_event,axis);
+}
 int fa18_publish_native_view_key(FA18NativeContextPublication *s,uint32_t event,
                                    uint32_t *axis,uint32_t *published_event) {
     FA18ViewCommandState *v; int mode;

@@ -27,8 +27,11 @@ comparisons at all 371 boundaries, including actual selection release,
 readiness and view restoration. Periodic now has a complete native region owner,
 including actual spawning, point publication and orientation. Its 40,960
 comparisons cover all 635 original boundaries with no child contracts; original
-region/descriptor data loaders resolve live hunk references. Dispatch remains
-the scheduler child;
+region/descriptor data loaders resolve live hunk references. Native dispatch now replaces the final outer scheduler callback, including
+actual view-point classification and record/detail publication. Its source
+proof covers 90,112 calls and all 1,035 reachable boundaries; only the true
+view normalization/fault contracts remain. Returned companion identity and
+carried-axis arithmetic are preserved alongside record writes and pose decisions;
 actual view publication now has a native owner, including zoom/redraw/queue.
 Its connected post-flight proof covers 481 boundaries in 90,112 calls with no
 child contracts. Complete startup field bindings remain required.

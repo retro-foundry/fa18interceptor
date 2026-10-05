@@ -1,0 +1,60 @@
+{
+  "status": "complete_native_record_dispatch_with_explicit_normalize_fault_children",
+  "complete_entries": [
+    "C23A7E",
+    "C23F4A",
+    "C24458",
+    "C24568",
+    "C1B7A6",
+    "C23CA6",
+    "C1BEE8",
+    "C23FF8",
+    "C1BA86",
+    "C1B906",
+    "C243F2"
+  ],
+  "actual_children": [
+    "C24568",
+    "C23CA6",
+    "C091E0",
+    "C2436A",
+    "C1D974",
+    "C1BEE8",
+    "C1B7A6",
+    "C1C23C"
+  ],
+  "child_contracts": [
+    "C2574A (normalize scale/input/output)",
+    "C06C02 (fault, request mutation)"
+  ],
+  "cases": 90112,
+  "source_boundaries": 1035,
+  "covered_boundaries": 1035,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; shared native record owners verified independently",
+  "native_cpu_dependency": false,
+  "limitations": "normalization/fault children remain explicit; caller binds source view/status/zone assets; full native startup/frame graph pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "eb3408c18a31e5d875dda0596c8d99721d031f5bf6c1d630e2cb66d7d3c9d685",
+  "reports": [
+    "native record dispatch: 90112 calls match game RAM, independent typed records, carried axis and decisions; 1536 normalize/774 fault contracts"
+  ],
+  "source_sha256": {
+    "port/native_record_dispatch.c": "f8f8f985df89a6f16dfa1e54c40cd440e923b032f44262032c026d7730416ba3",
+    "port/native_record_dispatch.h": "1fa241a0ffed553f09ed2b263b33f7f404f0729622fd97266d025b44548f6d29",
+    "port/native_record_view.c": "92e37a52d710eaeaf32cc2c0d278d26f9344d5aa7bd893e20e13b3cc04730917",
+    "port/native_record_view.h": "343d76068954980b5c063c8f67c5ccb1b3b67d7d1a7bdd08f949208ac28d490f",
+    "port/native_record_range.c": "16425602cea416e4f0df4951bb7fa8dc22f6d47c0ae3d41e1f2c50d568c14d67",
+    "port/native_record_range.h": "0c41a47313378e113b4ce5b7731a3a391d1e25e17faa7b4dccafcebe2c9e3dd2",
+    "port/scene_component_magnitude.c": "1456da0b73cc7a0f520068ac03469bf88e8e85028642da0a79a326abb0655bfa",
+    "port/scene_component_magnitude.h": "167a9c0620794391899bfb4fd605da3e16d051a6999b01c6a6b970c5e2b2f951",
+    "port/native_context_publication.c": "bcf311cd017664c592c1142eada5941a4430ce372d4cdd50d9484fdfad3fe181",
+    "port/native_context_publication.h": "a1485757f79b4cab0cdcbfb62cd71aeff5a218a156ca80a2d321ee6cca1fedd3",
+    "port/view_command_input.c": "36031fd4b8178456fa3b780dea7b77d71ca3001f1091d7dab74a17ecb3542ffe",
+    "port/view_command_input.h": "9cdb6e132ca89ac7bb6543bf832c64fe0076da3e683c7e4c41654987a221edb3",
+    "port/native_control_record_update.c": "d22350dbdbc94663de2191a7f7933b102e731826b72dde1a291ed1339ca801bc",
+    "port/native_control_record_update.h": "430a9ffb196104f50cef5c2daf20eaa05251d22157bf61163ea126f1a90b2279",
+    "port/native_scene_records.c": "a285bb6b28d721153af0887e61a178620f8e1dbfd759bd54ab20e79bebc67096",
+    "tools/recomp/native_record_dispatch_oracle.c": "75d75ce2d88d3cee89083ac7719b5b032f55782f0a2d3f4db9a12bbe33f4532d",
+    "tools/recomp/check_native_record_dispatch.py": "3b98bf2fd98f012fbff497be81bf85bb52ae629758681e9d76fb5c6d01189396"
+  }
+}
