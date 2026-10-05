@@ -24,13 +24,17 @@ static int load_display_palette(void *context,FA18ViewportPalettePhase phase,con
     FA18NativeInputDisplay *s=context;
     return s->load_palette(s->context,phase,words);
 }
-static int publish_display_pair(void *context,int index) {
-    FA18NativeInputDisplay *s=context;
-    int64_t offset=(int64_t)index-s->first_pair;
+int fa18_publish_native_display_pair(FA18NativeInputDisplay *s,int index) {
+    int64_t offset;
+    if(!s || !s->pairs) return 0;
+    offset=(int64_t)index-s->first_pair;
     if(offset<0 || (uint64_t)offset>=s->pair_count) return 0;
     s->saved_pair.view=s->pairs[offset].view;
     s->saved_pair.display_list=s->pairs[offset].display_list;
     return 1;
+}
+static int publish_display_pair(void *context,int index) {
+    return fa18_publish_native_display_pair(context,index);
 }
 int fa18_prepare_native_input_display(FA18NativeInputDisplay *s,FA18ViewportTransitionOps *ops) {
     if(!s || !ops || !s->pairs || !s->pair_count || !s->mode_palettes ||

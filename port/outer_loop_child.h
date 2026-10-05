@@ -57,7 +57,8 @@ int fa18_run_outer_loop_child(FA18OuterLoopChildState *outer,
 /* Idle branch of `$C1617E-$C16283`. It consumes the same mode-state byte
  * written by `$C1718E`, optionally waits and applies the caller-owned 32-word
  * RGB4 buffer, then performs the source's word-sized `1 - selected` toggle.
- * The nonzero activity-counter loop is a distinct unported branch. */
+ * The full wrapper above includes the activity branch. The shared native
+ * input/display owner is separately implemented in outer_display.c/.h. */
 int fa18_advance_outer_loop_idle_child(FA18OuterLoopChildState *outer,
                                        FA18ViewportModeState *viewport_mode,
                                        const FA18OuterLoopChildOps *ops,

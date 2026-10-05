@@ -38,6 +38,9 @@ typedef struct {
  * owners around the required native palette service. No pointer is fabricated. */
 int fa18_prepare_native_input_display(FA18NativeInputDisplay *display,
                                        FA18ViewportTransitionOps *ops);
+/* Shared publication owner for input transitions and outer display updates.
+ * index is the original signed word; invalid imported entries fail. */
+int fa18_publish_native_display_pair(FA18NativeInputDisplay *display,int index);
 
 /* Attach queue-reachable X/tick words to their owners, importing current
  * values without replacing the already-shared Y word or readiness byte.

@@ -49,11 +49,15 @@ composition, including actual display-list changes after publication.
 Viewport construction and merging now share the independent ordinary-buffer
 `amiga/viewport_list` core, with 32,768 frozen-service comparisons and a native
 list owner connected to callback RGB4 updates and renderer-buffer presentation.
+The complete native outer display owner now shares those input/page/mode
+objects, with 8,192 original comparisons covering all 80 source boundaries
+and real 32-word RGB4 updates. Original synchronization services remain explicit.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
 `analysis/routines/native_rgb4.md`,
 `analysis/routines/native_viewport_list.md`,
+`analysis/routines/native_outer_display.md`,
 `analysis/routines/native_audio_update.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,

@@ -23,8 +23,8 @@
     "native input callback C1718E with actual RGB4: 4096 original calls matched RAM outside CPU ABI stack, return and 2048 ordered palette boundaries"
   ],
   "source_sha256": {
-    "port/input_callback.c": "9f222971bd7a0a3058c04889ffacf3dd7e97418608162a36bac25fb953841aac",
-    "port/input_callback.h": "aa18008e420b88f8f47addd4e517b84fca0f8ae86d14f8f3a6d6b810f6b8e83c",
+    "port/input_callback.c": "391f1d4456d6b9e8eb476e029d071ac491804d85a8bdb63f5ede2c17c128d922",
+    "port/input_callback.h": "af9329abe8a8872703ce273d25842dcdc8b837af1ac64572204940bb6fa5f21c",
     "port/input_callback_contract_test.c": "62fb7f093971dfc4eb73b8709e3f9e655e44cfcfa2ba2527a5887646de38d00c",
     "port/viewport_transition.c": "d26b61c5b8c1444dac07c32a14de9b0c169a7ba7e646b37e4fa38bcbc22d6eb4",
     "port/viewport_transition.h": "e84807b7f607e171f80328bdc0228deda8305a8f16de24818693717cd5eac474",
@@ -32,8 +32,8 @@
     "port/audio_update.c": "a5bb0aa5f55777b892f4a9e163f8a476fa9fbc35a310d5f52c84f2dc6f1a1507",
     "port/command_queue.c": "33f5c8073da756dc67ea8371767778dbb561cc334b87eca6edb64af945b62d64",
     "port/command_queue.h": "4cb234bbfa375c4596128845f65d369e6408702995c7a2e294fc827b79e45b3e",
-    "port/input_palette.c": "5a306e83d40fb2c16666c64bf95e628e7f254f1ddbb5b0eb1c4e2daf70884315",
-    "port/input_palette.h": "621033b0ba30c3f8b0980211abcc80069da07ef6b5ead52077fc921aedf31540",
+    "port/input_palette.c": "e9de2a33f176ae7af83e437a59666e1b9b19b37d252d952f83c343ccfd5d85fd",
+    "port/input_palette.h": "4b07b15f0521fcdc5cecaacf865f7c15cec25fe22b9ff3372871fa40a738d0d0",
     "port/input_palette_contract_test.c": "96c56c4e753df31bd98c8574b7b87a912a6af62616f58f2654cf86d24d798be2",
     "port/amiga/rgb4.c": "c69c27c8096421a82ccbb5a063774c3b7bf11dee54ab85e2069c2e4524cd739a",
     "port/amiga/rgb4.h": "61a6b47e06847496e81cbd74e7065b81853ae1fe04516d5d4ff6eecc935b56c1",

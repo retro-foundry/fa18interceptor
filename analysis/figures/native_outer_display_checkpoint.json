@@ -1,0 +1,51 @@
+{
+  "status": "validated_native_outer_display_game_setup_and_scheduler_pending",
+  "entry": "C1612C",
+  "cases": 8192,
+  "source_boundaries": 80,
+  "covered_boundaries": [
+    80,
+    80
+  ],
+  "native_cpu_dependency": false,
+  "child_contracts": [
+    "WaitBOVP, WaitBlit and LoadView supplied synchronization/presentation contracts; mutate shared owners, never ABI locals"
+  ],
+  "rgb4_proof": "second run executes the real 32-word native palette backend versus the independently frozen-validated packed host service",
+  "comparison": "full Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; ordered service phases, actual object/palette identities, all 32 words and every mutable fixture owner/list buffer at each call; final original D0/D1 word toggle outputs",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "2f3c47fa6df27263f3f0ff73a741858bc73f0969a63a6ada3a540fd5433c5d33",
+  "reports": [
+    "native outer display C1612C: 4096 original calls matched RAM outside CPU ABI stack, source toggle outputs and 305158 ordered service boundaries",
+    "native outer display C1612C with actual RGB4: 4096 original calls matched RAM outside CPU ABI stack, source toggle outputs and 305158 ordered service boundaries"
+  ],
+  "source_sha256": {
+    "port/outer_display.c": "9a15e19732dcf39a6f4fb2ef28d2df80ced76d96d5e3c1bbe9ef2ff16f24e5dc",
+    "port/outer_display.h": "0f99c37a109a7e24476ea22468732b942564a9e9002d674d8458ceefe2d42a73",
+    "port/outer_display_contract_test.c": "b4b0dc3029b379fdad9ccfb5d150fd47215a1909c097334344c847c7cbceea48",
+    "port/input_callback.c": "391f1d4456d6b9e8eb476e029d071ac491804d85a8bdb63f5ede2c17c128d922",
+    "port/input_callback.h": "af9329abe8a8872703ce273d25842dcdc8b837af1ac64572204940bb6fa5f21c",
+    "port/input_palette.c": "e9de2a33f176ae7af83e437a59666e1b9b19b37d252d952f83c343ccfd5d85fd",
+    "port/input_palette.h": "4b07b15f0521fcdc5cecaacf865f7c15cec25fe22b9ff3372871fa40a738d0d0",
+    "port/viewport_transition.c": "d26b61c5b8c1444dac07c32a14de9b0c169a7ba7e646b37e4fa38bcbc22d6eb4",
+    "port/viewport_transition.h": "e84807b7f607e171f80328bdc0228deda8305a8f16de24818693717cd5eac474",
+    "port/viewport_mode_state.h": "90277e90785cbb7209fea0875a65572d7d3f3ec0e447f564f3491c2a37f33667",
+    "port/renderer_page_setup.c": "af86d023e5abba36e66821f17dc7c3cd95e5b2d621bd967b6df42398bbc59617",
+    "port/five_plane_chip_binding.c": "d10a6fc5fd63f1d855f79ca4e76e151b4567f5eecc2cfd543969e1689efdc27b",
+    "port/five_plane_page.c": "e078edf803a3201a04ced5e3a856cb2f223d0fcb1c063859e7682a3ec5b4a76e",
+    "port/copper_page.c": "3fe0937ab6ea44026ae938237d839ba7a43faea6a79515ce3f0acdeb1d0458da",
+    "port/voice_program.c": "7806d047ca2403d7a5ae4a6d1ad20fa6e5f316318c4f6c66a01fe97efd7e3541",
+    "port/audio_update.c": "a5bb0aa5f55777b892f4a9e163f8a476fa9fbc35a310d5f52c84f2dc6f1a1507",
+    "port/command_queue.c": "33f5c8073da756dc67ea8371767778dbb561cc334b87eca6edb64af945b62d64",
+    "port/amiga/rgb4.c": "c69c27c8096421a82ccbb5a063774c3b7bf11dee54ab85e2069c2e4524cd739a",
+    "port/amiga/rgb4.h": "61a6b47e06847496e81cbd74e7065b81853ae1fe04516d5d4ff6eecc935b56c1",
+    "port/amiga/viewport_list.c": "bc108a9aec864e14cac5f9b7302dd98e28fa0ca85b55fa6f56e41bdb0ee82ad4",
+    "port/amiga/viewport_list.h": "a3596c30a04f9b453ad8a78171f9ba65a60d6eb5a41f5fdfab9b75f1dee35cea",
+    "port/amiga/host_graphics.c": "f771e8497b9eecca38b02915f60dd0bc5df37af82a802b26b63db6d01ed0d0d8",
+    "port/amiga/host_compat.c": "f7245a38bda5184a8405ff71dde2218df1cf75042f7e7d398a92133c62c81c57",
+    "port/amiga/guest_memory.c": "34cc006389193abe6a05c841501205ab2b839a316a54c01bb959a7faf2a467ca",
+    "tools/recomp/command_publication_oracle.c": "f96f5168aa40cf1f8d68633bf0031fb61d7c22c048ad62886a5bf72febfd5015",
+    "tools/recomp/check_native_outer_display.py": "7bdf13f1385581fae8a67b7a47c595fc61b6acf9fbb185fdacc57571502860aa",
+    "tools/recomp/native_outer_display_oracle.c": "a770b6efe1445f14cfd54ab3e5b228b901f7e64063b3582e98a37f0f2f5af1cf"
+  }
+}

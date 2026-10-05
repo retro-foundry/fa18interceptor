@@ -18,4 +18,8 @@ int fa18_bind_native_input_palette(FA18NativeInputPalette *palette,
                                      AmigaRgb4Palette *color_map);
 int fa18_load_native_input_palette(void *context,FA18ViewportPalettePhase phase,
                                       const uint16_t *words);
+/* Shared native service for the callback's 16-word and outer display's
+ * 32-word loads. word_count must be at most 32. */
+int fa18_load_native_display_palette(FA18NativeInputPalette *palette,
+                                        const uint16_t *words,size_t word_count);
 #endif

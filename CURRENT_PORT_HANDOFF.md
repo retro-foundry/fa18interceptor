@@ -358,6 +358,51 @@ integration. The native main still does not call these new owners and the
 playable reference remains emulated. The full goal remains active; commit
 each validated batch.
 
+Outer display progress: `port/outer_display.c/.h` now implements the complete
+$C1612C owner with the same actual page/pair/dynamic-palette/mode owners used
+by the native $C1718E input callback. Activity/status fields bind to their
+enclosing game owners. Native waits, LoadView and RGB4 calls remain explicit
+service boundaries; shared fields and palette pointers are reread as in the
+source. Signed positive activity loops retain both 32-word palette loads and
+four waits per iteration, including byte-wrapped child-induced decrements.
+The idle branch retains the mode decrement before status testing and its
+optional wait/load. The final toggle rereads the page and wraps at 16 bits.
+
+The pair publication helper is now shared directly by both complete owners.
+`fa18_load_native_display_palette` supplies the actual common RGB4 backend
+for input's sixteen-word and outer display's thirty-two-word loads. Native
+construction/list/RGB4 cores remain independent reusable mechanisms; the
+outer display's palette selection, activity loop and toggle are game policy.
+No CPU, guest pointer, RAM capture, invented scheduler or substitute child is
+added to production. The integration contract builds the actual native lists,
+presents renderer-owned plane bytes and runs the real mouse/viewport/fade
+callback during a publication wait, using the same shared objects.
+
+Validation passes 4,096 controlled-service and 4,096 actual-RGB4 comparisons
+against sealed original instructions. Both cover all 80 source boundaries
+and 305,158 ordered service boundaries, matching full Chip/Slow RAM outside
+the original ABI stack, all palette words/object identities, mutable owners
+and list bytes at every service call, and source toggle outputs. Signed
+neighbor pages, complete 127-iteration loops, negative/changed activity,
+mode/status extremes, palette aliasing/pointer replacement and capacities
+16/32 are covered. WaitBOVP/WaitBlit/LoadView are controlled shared-owner
+contracts here, not proof of actual original timing; real native RGB4 is
+compared with the independently frozen-validated packed service.
+
+GNU strict-warning integration, CPU/bus/machine symbol inspection, native
+MSVC runner/contracts and all nineteen selected CTests pass. One legacy
+full-loop executable was initially absent; building it and rerunning that
+test resolves the Not Run result. The unchanged native guard passes 447
+files. Both input callback proofs still cover 198/198 boundaries across
+8,192 calls, and RGB4 still passes 16,384 frozen-service comparisons. See
+`analysis/routines/native_outer_display.md` and its checkpoint.
+
+Continue with original graphics setup and palette data import, actual native
+wait/presentation scheduling, sample playback and full game composition.
+The older bounded outer-loop wrapper retains separate metadata/callers;
+the native main still does not call this complete shared display graph.
+The playable reference remains emulated; the full goal remains unfinished.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with

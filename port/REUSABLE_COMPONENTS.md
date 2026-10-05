@@ -74,6 +74,13 @@ The callback also shares mouse/throttle words directly with command input;
 there is no additional emulated state to synchronize. See
 `../analysis/routines/native_input_callback.md` for validation and limits.
 
+`outer_display.c/.h` now uses that same native page/pair/mode owner for the
+complete outer display update. Its static/dynamic 32-word palette loop,
+activity decrements and page toggle are F/A-18 policy. The shared RGB4 service
+supports both this owner's 32-word loads and the input callback's 16-word
+loads. Synchronization/presentation stay with the embedding runtime; see
+`../analysis/routines/native_outer_display.md` for the source proof and limits.
+
 Planar rendering, projection and input modules remain candidates, with
 game-specific dimensions, tables or state still present. They should be
 extracted when another concrete caller establishes the common contract.
