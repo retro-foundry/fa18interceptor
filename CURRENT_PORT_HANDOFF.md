@@ -5,6 +5,11 @@ history (the preceding handoff is in commit 51fb22b2); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
+The user has now explicitly asked to keep the current approach and make it
+faster. Prioritize completing connected startup/game paths in larger batches;
+reuse existing owners and run validation for changed behavior/affected callers.
+The separate `amiga-recomp` project was inspected (13 existing tests pass),
+but the user did not request switching this port to its CPU/chipset runtime.
 
 Latest batch: complete `$C2D954/$C2D94E` record orientation now publishes
 angles and both matrices directly into actual shared native records. Forward
