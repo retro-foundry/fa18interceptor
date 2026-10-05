@@ -92,7 +92,7 @@ def main():
                  "tools/recomp/native_scene_player_oracle.c",
                  "tools/recomp/check_native_scene_bootstrap.py", "tools/recomp/native_scene_bootstrap_oracle.c"]
         checkpoint = {
-            "status": "historical_parent_proof_with_real_gate_and_three_child_contracts_placement_and_update_now_direct_in_product",
+            "status": "historical_parent_proof_with_real_gate_and_three_child_contracts_all_now_direct_in_product",
             "complete_parent": "C08F26", "supplementary_entries": ["C09620", "C090C2", "C1C40C"],
             "cases": args.cases*len(ENTRIES), "source_boundaries": len(rows), "covered_boundaries": len(visited),
             "native_cpu_dependency": False,
@@ -102,7 +102,7 @@ def main():
             "actual_children": ["C090C2", "C090F2", "C2FD22", "C09620 including C0840E", "C0910C", "C0915A", "C1C40C including real C06C02 RTS fault hook"],
             "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620/C1C40C; no exclusion for C090C2. Three ordered historical child-entry snapshots, independent child mutations and named record owners compared.",
             "coverage_cases": "all 16 valid viewed identities; both phase branches; ten renderer planes; real gate child, all 65536 bit indices, negative/odd/0/1/7FFF lengths, across-row/axis/adjacent-owner writes, source fault codes 43/44/45 and real RTS hook, all original Hunk-66 bytes with relocation-aware comparison and direct live stream binding, bound stream changed at placement boundary before real expansion",
-            "ownership_limit": "VIEW_RECORD accepts the supplied 16-record bank. Signed gate neighbours require actual bounded field owners; missing data is explicit. This historical oracle still contracts placement and record update and therefore proves only parent sequencing for those boundaries; the product now calls their separately tested native owners directly. Lower record/origin producers, refresh, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
+            "ownership_limit": "VIEW_RECORD accepts the supplied 16-record bank. Signed gate neighbours require actual bounded field owners; missing data is explicit. This historical oracle still contracts placement, record update and context refresh and therefore proves only parent sequencing for those boundaries; the product now calls their separately tested native owners directly. Lower record/origin children, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
             "original_state_sha256": seal,
             "original_pc_bytes_sha256": hashlib.sha256(b"".join(pc.to_bytes(4, "big")+bytes.fromhex(row["bytes"]) for pc,row in sorted(rows.items()))).hexdigest(),
             "reports": reports, "source_sha256": {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in paths},

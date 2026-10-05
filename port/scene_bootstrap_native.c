@@ -7,6 +7,7 @@ static int shared_bootstrap(const FA18NativeSceneBootstrap *s) {
        s->player->records->input!=f->commands || !s->player->effects ||
        s->player->effects->context!=s->context || !s->placement || s->placement->player!=s->player ||
        !s->update || s->update->records!=s->player->records || s->update->view!=s->context->view ||
+       !s->refresh || s->refresh->records!=s->player->records || s->refresh->view!=s->context->view ||
        !s->startup || !s->viewed_word || !s->renderer || !s->gates) return 0;
     return f->player==s->player->records->aircraft &&
         s->context->records==s->player->records->geometry && s->context->record_count==16;
@@ -56,8 +57,7 @@ int fa18_bind_native_scene_bootstrap(FA18NativeSceneBootstrap *s,FA18CommandQueu
        !fa18_bind_command_queue_byte(q,0xf6,s->menu_transition)) return 0;
     return 1;
 }
-int fa18_bootstrap_native_scene(FA18NativeSceneBootstrap *s,
-                                 const FA18NativeSceneBootstrapOps *ops) {
+int fa18_bootstrap_native_scene(FA18NativeSceneBootstrap *s) {
     FA18ViewCommandState *v; FA18FlightCommandState *f;
     uint32_t position[3]; unsigned i;
     FA18ContextCommandChildInput input={0}; FA18ContextCommandChildResult result;
@@ -123,10 +123,10 @@ int fa18_bootstrap_native_scene(FA18NativeSceneBootstrap *s,
     if(!fa18_place_native_scene_root(s->placement)) return 0;
     if(!fa18_run_template_bitmask_state(s->gates)) return 0;
     if(!fa18_update_native_scene_records(s->update)) return 0;
-    if(!ops || !ops->refresh_context || !ops->refresh_context(ops->context,s)) return 0;
+    if(!fa18_refresh_native_context(s->refresh)) return 0;
     return 1;
 }
 int fa18_native_scene_bootstrap_callback(void *context) {
     FA18NativeSceneBootstrapCall *call=context;
-    return call && fa18_bootstrap_native_scene(call->state,call->ops);
+    return call && fa18_bootstrap_native_scene(call->state);
 }

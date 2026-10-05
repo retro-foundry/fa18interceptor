@@ -9,9 +9,11 @@
 #include "native_template_gate_fixture.h"
 #define fa18_place_native_scene_root boot_place_direct
 #define fa18_update_native_scene_records boot_update_direct
+#define fa18_refresh_native_context boot_refresh_direct
 #include "../../port/scene_bootstrap_native.c"
 #undef fa18_place_native_scene_root
 #undef fa18_update_native_scene_records
+#undef fa18_refresh_native_context
 
 enum { BOOT_PLANE_BYTES=8048, BOOT_RAM_BYTES=FA18_CHIP_SIZE+FA18_SLOW_SIZE };
 typedef struct {
@@ -23,6 +25,7 @@ typedef struct {
     FA18NativeRendererClear renderer;
     FA18NativeScenePlacement placement;
     FA18NativeRecordUpdateStage update;
+    FA18NativeContextRefresh refresh;
     FA18NativeSceneBootstrap bootstrap;
     GateOracleState gates;
     uint8_t buffers[10][BOOT_PLANE_BYTES],fifth;
@@ -112,7 +115,8 @@ static int boot_load(BootstrapState *s) {
     for(i=0;i<24;++i) s->depth[i]=rd_u16(DEPTH_VALUES+2*i);
     s->placement.player=&p->setup;
     s->update.records=&p->bank; s->update.view=&p->view;
-    s->bootstrap=(FA18NativeSceneBootstrap){.context=&p->context,.player=&p->setup,.placement=&s->placement,.update=&s->update,.startup=&s->startup,
+    s->refresh.records=&p->bank; s->refresh.view=&p->view;
+    s->bootstrap=(FA18NativeSceneBootstrap){.context=&p->context,.player=&p->setup,.placement=&s->placement,.update=&s->update,.refresh=&s->refresh,.startup=&s->startup,
         .viewed_word=&s->viewed,.renderer=&s->renderer,.gates=&s->gates.state,.scene_limit=&s->scene_limit,.previous_scene_limit=&s->previous_limit,
         .context_state=&s->context_state,.menu_transition=&s->transition,.previous_state_byte=&s->previous_state,.byte_458be=&s->byte_be,
         .menu_return_word=&s->menu_return,.word_4fda0=&s->word_4fda0,.countdown=&s->countdown,
@@ -159,7 +163,10 @@ int boot_update_direct(FA18NativeRecordUpdateStage *update) {
     return boot_native_active && update==&boot_native_active->update &&
         boot_child_native(boot_native_active,&boot_native_active->bootstrap,1);
 }
-static int boot_refresh(void *context,FA18NativeSceneBootstrap *parent) { return boot_child_native(context,parent,2); }
+int boot_refresh_direct(FA18NativeContextRefresh *refresh) {
+    return boot_native_active && refresh==&boot_native_active->refresh &&
+        boot_child_native(boot_native_active,&boot_native_active->bootstrap,2);
+}
 static void boot_fixture(unsigned scenario) {
     static const uint8_t gates[]={0,1,0x80,0xff}; unsigned i,j;
     boot_source_calls=boot_native_calls=0;
@@ -234,7 +241,7 @@ int main(int argc,char **argv) {
     for(i=0;i<sizeof scene_source_bytes/sizeof scene_source_bytes[0];++i)
         for(j=0;j<scene_source_bytes[i].length;++j) if(rd_u8(scene_source_bytes[i].pc+j)!=scene_source_bytes[i].bytes[j]) return 1;
     for(scenario=0;scenario<cases;++scenario) {
-        int ok; FA18NativeSceneBootstrapOps ops={boot_refresh,native};
+        int ok;
         boot_scenario=scenario; memcpy(m,base,sizeof *m); boot_fixture(scenario);
         if(!boot_load(native) || (selected_entry!=0xc1c40c && !verify_record_owners(&native->scene))) return 1;
         memcpy(before,m,sizeof *m); boot_snapshot(expected); boot_store(native);
@@ -247,7 +254,7 @@ int main(int argc,char **argv) {
             }
         boot_snapshot(expected); memcpy(m,before,sizeof *m);
         if(selected_entry==0xc08f26) {
-            FA18NativeSceneBootstrapCall call={&native->bootstrap,&ops};
+            FA18NativeSceneBootstrapCall call={&native->bootstrap};
             boot_native_active=native;
             ok=fa18_native_scene_bootstrap_callback(&call);
             boot_native_active=NULL;

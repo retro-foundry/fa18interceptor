@@ -1,14 +1,13 @@
 # Native scene bootstrap parent and resolved viewed identity
 
 `port/scene_bootstrap_native.c/.h` implements the complete `$C08F26` parent
-around one required, explicitly pending child: `$C1C860` context refresh.
-`$C09266` recorder reset/root placement and `$C1C63E` record-update parent are
-now direct native children. It executes the actual native startup clear/enable, renderer clear,
+with direct native `$C09266` recorder reset/root placement, `$C1C40C` template
+gates, `$C1C63E` record update and `$C1C860` context refresh. It executes the
+actual native startup clear/enable, renderer clear,
 all-record/workspace clear, player preparation with its real mission-reset
 child, start-position tuple, observer child and complete `$C1C40C` gate
-construction. No pending child has a
-default implementation. Completion status is separate from incidental
-original register outputs.
+construction. Lower children have no default implementation. Completion
+status is separate from incidental original register outputs.
 
 The parent references the shared command/context/view/aircraft bank, player
 setup, renderer and queue owners. It binds known startup words directly to
@@ -47,9 +46,9 @@ logical value is outside the adapter's accepted domain.
 `FA18NativeSceneBootstrapCall` provides a callback adapter for the existing
 native startup text publisher. Placement requires no carried register input;
 the earlier D7 dependency belonged only to the contracted boundary and has
-been removed. Pending complete child graphs still need their own semantic inputs,
-including any actual caller-frame fields required by context refresh.
-The adapter alone does not install bootstrap into the running game.
+been removed. Lower child graphs retain their semantic inputs, including the
+caller-owned frame gate used by context refresh. The adapter alone does not
+install bootstrap into the running game.
 
 Run `python tools/recomp/check_native_scene_bootstrap.py`. Four sets of
 4,096 calls cover **291/291** reachable original instruction boundaries:
@@ -57,7 +56,7 @@ the complete bootstrap parent, standalone player preparation and standalone
 startup clear using the resolved viewed owner, and complete gate construction.
 Standalone preparation covers the phase-nonzero branch that the parent's
 preceding clear makes unreachable.
-This sealed comparison predates the direct placement owner: its three named
+This sealed comparison predates the three direct native owners: its three named
 children were contracted, while every other actual original
 child executes fully. All sixteen valid viewed identities and fifth-plane
 gate values 0/1/$80/$FF are exercised with varied records, workspace, globals,
@@ -67,7 +66,8 @@ Every Chip/Slow RAM byte matches, excluding only CPU ABI save/return stack
 `$C7FD00..$C7FF00` for bootstrap/preparation/gate construction. Startup clear
 has no exclusions. Three ordered full-RAM child-entry snapshots and the
 then-carried placement word match. This remains parent-order evidence and does
-not prove the current placement implementation; see `native_scene_placement.md`.
+not prove their current implementations; see `native_scene_placement.md`,
+`native_record_update_stage.md` and `native_context_refresh.md`.
 Independent mutations to viewed identity, message state, aircraft flags,
 observer origin, smoothed delta, scene limit, countdown and a depth tail
 propagate to later child entries. Contracted source children deliberately
@@ -118,8 +118,7 @@ fields are covered. A placement-boundary mutation of the actual bound stream
 is consumed by the real gate child, proving that it does not cache its input.
 The legacy return-code initializer and bootstrap share the same algorithm.
 
-Remaining work includes the `$C1C860` child and the lower `$C22C80/$C29042`
-producers, plus unported record
+Remaining work includes `$C29042`, the individual `$C22C80` children, plus unported record
 consumers, the actual tenth-plane producer, scene initializer, original asset
 loading/checksum production, sample output and installed-stage scheduling.
 The native main does not invoke this graph; the playable reference still

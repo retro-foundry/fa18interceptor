@@ -37,6 +37,6 @@ bootstrap differential checkpoint treated placement as a child contract and
 therefore does not prove this replacement. A full original-instruction
 differential run remains required.
 
-The native main still does not invoke this startup graph. `$C1C63E` and
-`$C1C860`, original asset/startup assembly and scheduling remain required for
+The native main still does not invoke this startup graph. Original asset/startup
+assembly, lower update children and scheduling remain required for
 the connected playable path.

@@ -11,7 +11,24 @@ reuse existing owners and run validation for changed behavior/affected callers.
 The separate `amiga-recomp` project was inspected (13 existing tests pass),
 but the user did not request switching this port to its CPU/chipset runtime.
 
-Latest batch: complete `$C22C80-$C230AE` sixteen-record scheduler now runs on
+Latest batch: complete `$C1C860-$C1CA2C` context refresh and `$C1CA82`
+record flagging now run on shared native owners. The parent preserves the
+signed position guard, original request nibble validation, selected/origin
+selector widths, child-mutated request rereads, frame gate ordering, condition
+choice and prepared render state. `$C08F26` now has no top-level callbacks:
+placement, template gates, record update and context refresh are all direct
+typed children.
+
+Validation: focused contracts cover both selector routes, accepted and invalid
+request kinds, later-bit consumption by a template child, early return, render
+state and failure ordering. Strict GNU/MSVC builds, the composed bootstrap
+contract, affected CTests, the historical parent harness and the native build
+guard pass. See `analysis/routines/native_context_refresh.md`.
+
+Next complete `$C29042` and the individual `$C22C80` record children, then
+bind original startup assets/state and install this graph in native main.
+
+Preceding batch: complete `$C22C80-$C230AE` sixteen-record scheduler now runs on
 the shared native record/workspace bank. It preserves all workspace word
 decrements, the slot-15 flag exception, signed byte countdowns, root countdown,
 slot 7's preparation-only route, forced flags for active slots 14/15, and the
@@ -25,9 +42,8 @@ both decision outcomes, periodic work, source ordering and child failure with
 preceding stores retained. Strict GNU and MSVC contracts and the composed
 bootstrap path pass. See `analysis/routines/native_control_record_update.md`.
 
-Next implement the startup-reachable record children in scheduler order,
-starting with selection release and the root control/view/marker/pose chain;
-then complete `$C29042` and `$C1C860`.
+Next was the startup-reachable record children plus `$C29042/$C1C860`;
+`$C1C860` is completed by the latest batch above.
 
 Preceding batch: complete `$C1C63E-$C1C7F4` record-update parent and its
 `$C1C7F6` rate classifier now run on the live native record/view owners. The

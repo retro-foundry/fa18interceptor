@@ -2,6 +2,7 @@
 #define FA18_NATIVE_SCENE_BOOTSTRAP_H
 #include "native_scene_placement.h"
 #include "native_record_update_stage.h"
+#include "native_context_refresh.h"
 #include "viewed_record_word.h"
 #include "renderer_clear.h"
 #include "template_bitmask_buffers.h"
@@ -11,6 +12,7 @@ typedef struct FA18NativeSceneBootstrap {
     FA18NativeScenePlayerSetup *player;
     FA18NativeScenePlacement *placement;
     FA18NativeRecordUpdateStage *update;
+    FA18NativeContextRefresh *refresh;
     FA18NativeStartupRanges *startup;
     FA18NativeViewedRecordWord *viewed_word;
     FA18NativeRendererClear *renderer;
@@ -24,14 +26,6 @@ typedef struct FA18NativeSceneBootstrap {
     size_t depth_count;
 } FA18NativeSceneBootstrap;
 
-typedef struct {
-    /* Required actual complete child C1C860.
-     * Its native graph remains pending. Completion status is separate from
-     * incidental original CPU returns. No missing child is substituted. */
-    int (*refresh_context)(void *context,FA18NativeSceneBootstrap *state);
-    void *context;
-} FA18NativeSceneBootstrapOps;
-
 /* Import/rebind the known startup-word and queue-byte owners, including the
  * viewed reference. All remaining original word data is supplied by caller.
  * References/metadata stay live; no scalar state is copied around execution.
@@ -39,14 +33,11 @@ typedef struct {
 int fa18_bind_native_scene_bootstrap(FA18NativeSceneBootstrap *state,
                                        FA18CommandQueue *queue,
                                        PortFieldByte *startup_words,size_t count);
-/* Complete C08F26 parent and real available children. C09266 placement is a
- * direct typed owner; only the still-pending context refresh remains a callback.
+/* Complete C08F26 parent and its four direct typed children.
  * Return 1 on completion, 0 on missing owner/child failure, preserving stores. */
-int fa18_bootstrap_native_scene(FA18NativeSceneBootstrap *state,
-                                 const FA18NativeSceneBootstrapOps *ops);
+int fa18_bootstrap_native_scene(FA18NativeSceneBootstrap *state);
 typedef struct {
     FA18NativeSceneBootstrap *state;
-    const FA18NativeSceneBootstrapOps *ops;
 } FA18NativeSceneBootstrapCall;
 /* Actual native body adapter for the existing startup text publisher. */
 int fa18_native_scene_bootstrap_callback(void *context);
