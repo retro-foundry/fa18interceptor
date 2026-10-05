@@ -34,8 +34,11 @@ library. All 28 aircraft actions now pass 28,672 further comparisons, with real
 native direction, throttle-reset and space-release children. All 16 view/origin/
 zoom actions and both actual children now pass 32,768 further comparisons.
 All five context actions and their actual geometry/observer children now pass
-20,480 further comparisons. Other children, queue publication, complete parent
-dispatch, data loading and full runtime integration remain open. See
+20,480 further comparisons. Native queue publication now passes 73,728
+comparisons, including every signed-index destination and shared-field alias.
+Other children, complete parent dispatch, data loading and full runtime
+integration remain open. See
+[native queue publication](analysis/routines/native_command_queue.md),
 [native context actions](analysis/routines/native_context_command_input.md),
 [native view actions](analysis/routines/native_view_command_input.md),
 [native aircraft actions](analysis/routines/native_flight_command_input.md),

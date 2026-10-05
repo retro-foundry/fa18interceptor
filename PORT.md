@@ -30,8 +30,10 @@ actions and real axis/throttle-reset/space-release children, with 28,672 source
 comparisons and complete component coverage. The native view/origin/zoom family
 adds 16 actions and both actual zoom/redraw children, with 32,768 complete
 comparisons. All five context actions and their actual geometry/observer
-children add 20,480 comparisons. Other children, publication, complete parent
-dispatch, original data loading and runtime integration remain open; see
+children add 20,480 comparisons. Native queue publication adds 73,728
+comparisons covering all signed-index destinations and shared-field aliases.
+Other children, complete parent dispatch, original data loading and runtime
+integration remain open; see `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,
 `analysis/routines/native_flight_command_input.md` and
 `analysis/routines/native_command_input.md`.

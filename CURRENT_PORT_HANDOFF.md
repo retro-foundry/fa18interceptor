@@ -133,6 +133,28 @@ fault behavior, actual remaining children, original data loading and the full
 game loop. All four action families now have native components, but neither
 their presence nor linking them into the bounded runtime completes the game.
 
+Queue progress: `port/command_queue.c/.h` implements complete $C1C23C
+publication with ordinary native state. Both signed indices retain the source
+alias effects: references bind neighboring command/flight/view/context fields
+to their actual owners, including big-endian byte writes into throttle words.
+Remaining neighboring data and the key translation table require original
+asset imports. The queue owns the context's taken byte. Publication preserves
+source write order, wrapping counters, gated events, translated event low-word
+clearing and unconditional clearing of all three modifiers.
+
+Validation passes 73,728 original-instruction comparisons with full RAM,
+events and independent canonical field mappings matched. All 28/28 boundaries,
+138 possible raw destinations and 256 translated destinations are covered;
+no child contracts are used. GNU strict-warning/MSVC contracts and all six
+input CTests pass, including selection -> actual view action -> publication.
+GNU symbol inspection finds no CPU/bus/machine references. Native MSVC game
+builds and its unchanged guard passes 423 files. See
+`analysis/routines/native_command_queue.md` and its checkpoint.
+Complete native parent dispatch/reset/fault behavior, actual remaining
+children, original data loading and the full game loop remain open. Publication
+is linked into the native library but not yet called by the bounded runtime.
+Continue the active emulation-free goal and commit each validated batch.
+
 ## Current function milestone: static recompilation (2026-10-05)
 
 The user now accepts static recompilation for the remaining functions, with
