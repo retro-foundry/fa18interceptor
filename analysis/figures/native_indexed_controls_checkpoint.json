@@ -1,0 +1,16 @@
+{
+  "status": "validated_native_component_runtime_integration_pending",
+  "cases": 65536,
+  "source_boundaries": 184,
+  "covered_boundaries": 184,
+  "comparison": "full Chip/Slow RAM, published event, ordered child inputs/effects",
+  "native_cpu_dependency": false,
+  "child_contract": "$C3318E status tone; controlled validation effects, child not ported here",
+  "source_sha256": {
+    "port/indexed_controls.c": "2af203c471c85e80baa2b16a08169f27af140e09ec10691cd84cae56962b3620",
+    "port/indexed_controls.h": "5058d10d7d5775ccf1972e7e0a74c2c63723cdc81c4330ceed87ddf7b0b5d4af",
+    "tools/recomp/native_indexed_controls_oracle.c": "513e76dd7e45a06fcea951e74269455684e5f472b2eda124fb0b417e78a44908",
+    "analysis\\data\\command_dispatch_source_scope.json": "b1d2c56f1d4a1ebedd6be089c3d1b55681604fb3cfa195032524368a8037fe74"
+  },
+  "result": "native indexed controls: 65536 cases matched original instructions, full Chip/Slow RAM, published events and child inputs; 9052 transitions, 9810 pose writes, 21195 throttle changes"
+}

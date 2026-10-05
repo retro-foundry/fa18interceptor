@@ -9,12 +9,33 @@ Kickstart 1.3, A500 PAL OCS, 512 KiB Chip + 512 KiB Slow RAM.
 
 ## Where things stand
 
-The game runs natively as C. A mechanical translation of the original 68000
-code runs on a small Amiga machine model, in an SDL2 window at 50 Hz.
+The current playable runners combine recreated C with a mechanical translation
+of the original 68000 code on an Amiga machine model, in an SDL2 window at 50 Hz.
 Hand-written C is replacing the translated routines in source-backed batches;
 539 translated game entries and seventy-five original source-only callable entries are
 registered. Three sealed native recordings cover the
 demo, a successful carrier landing, and qualification failure.
+
+The remaining **85** translated entries now use static C with direct native
+instruction-helper calls, as requested on 2026-10-05. Each carries a
+`STATIC_RECOMP` marker and a decompilation TODO in
+`port/recomp/generated/recomp_static_deferred.c`, with addresses and source
+contracts in `recomp_deferred.json`. The earlier count of 75 describes
+already-readable source-only entries. Shared CPU and chipset state remain
+required. See [static recompilation and return work](analysis/routines/static_recomp_deferred.md).
+
+The active goal is the complete game without CPU or chipset emulation. The
+ROM-free runner needs no Kickstart image but still uses Musashi and the machine
+model. The separate CPU-free `port/` runtime remains incomplete. Indexed input
+actions have an ordinary-state implementation with 65,536 passing source
+comparisons. Complete keyboard/pending selection now passes another 32,768
+source comparisons and composes with those indexed actions in a CPU-free
+library. All 28 aircraft actions now pass 28,672 further comparisons, with real
+native direction, throttle-reset and space-release children. Other children,
+view/context actions, queue publication and full runtime integration remain
+open. See [native aircraft actions](analysis/routines/native_flight_command_input.md),
+[native command input](analysis/routines/native_command_input.md)
+and [native indexed controls](analysis/routines/native_indexed_controls.md).
 
 The current display-selection handoff implements seven owners and passes
 229,376 whole-call comparisons, local DMA and dispatch smoke. Full integration

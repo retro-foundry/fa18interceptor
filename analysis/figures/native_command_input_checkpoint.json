@@ -1,0 +1,31 @@
+{
+  "status": "validated_native_selection_indexed_composition_runtime_integration_pending",
+  "reports": [
+    {
+      "entry": "C1AC28",
+      "cases": 16384,
+      "boundaries": 74,
+      "covered": 74,
+      "result": "native command input C1AC28: 16384 prefixes matched original actions, event/index/metadata and full Chip/Slow RAM"
+    },
+    {
+      "entry": "C1AD74",
+      "cases": 16384,
+      "boundaries": 243,
+      "covered": 243,
+      "result": "native command input C1AD74: 16384 prefixes matched original actions, event/index/metadata and full Chip/Slow RAM"
+    }
+  ],
+  "native_cpu_dependency": false,
+  "scope": "complete keyboard/pending selection prefixes; indexed composition; other actions/publication pending",
+  "source_sha256": {
+    "port/command_input.c": "4b6a7c89a501f9deaf894a739e67081b068b850893d8c620f50f1a801daecfc1",
+    "port/command_input.h": "221a9c9bbbb2072941ff1cf2fac578139c5e2f8ca2bba9be2918cfbd33b7f496",
+    "port/command_types.h": "ead9fc0ba9a37f0527e2275a65cf7dc1dfd96803fe64ae2020fef265cc3a14d3",
+    "port/indexed_controls.c": "2af203c471c85e80baa2b16a08169f27af140e09ec10691cd84cae56962b3620",
+    "port/indexed_controls.h": "5058d10d7d5775ccf1972e7e0a74c2c63723cdc81c4330ceed87ddf7b0b5d4af",
+    "tools/recomp/native_command_input_oracle.c": "95fe1f35f732a5aac8754953335b5e2049cdeeb8a31d470385ebb0841c7397b0",
+    "tools/recomp/command_selection_oracle.c": "074e38c221b767c750f5bc1e398461bac994e5500d18f4cc4bf635869e9c3fef",
+    "analysis\\data\\command_dispatch_source_scope.json": "b1d2c56f1d4a1ebedd6be089c3d1b55681604fb3cfa195032524368a8037fe74"
+  }
+}

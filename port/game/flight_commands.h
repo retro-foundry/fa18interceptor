@@ -1,20 +1,10 @@
 #ifndef FA18_FLIGHT_COMMANDS_H
 #define FA18_FLIGHT_COMMANDS_H
 #include "command_selection.h"
+#include "../flight_command_types.h"
 
 /* Shared flight actions reached by C1AC28 and C1AD74. These are internal
  * action bodies, not extra original functions or complete dispatch owners. */
-enum FlightCommandChild {
-    FLIGHT_EJECT_TOGGLE, FLIGHT_NEXT_TARGET, FLIGHT_RADAR_RANGE,
-    FLIGHT_SPACE_PRESS, FLIGHT_SPACE_RELEASE,
-    FLIGHT_Y_DOWN, FLIGHT_Y_UP, FLIGHT_Y_RELEASE,
-    FLIGHT_X_RIGHT, FLIGHT_X_LEFT, FLIGHT_X_RELEASE,
-    FLIGHT_THROTTLE_RELEASE, FLIGHT_THROTTLE_MODE_RELEASE,
-    FLIGHT_THROTTLE_MODE, FLIGHT_HOOK, FLIGHT_HOOK_SOUND,
-    FLIGHT_WEAPON_ENABLE, FLIGHT_WEAPON_SOUND, FLIGHT_WEAPON_MODE,
-    FLIGHT_GEAR, FLIGHT_TARGET, FLIGHT_FLARE_SOUND, FLIGHT_FLARE_SPAWN,
-    FLIGHT_CHAFF_SOUND, FLIGHT_ECM
-};
 enum FlightCommandPhase {
     FLIGHT_BYTE_TEST, FLIGHT_WORD_TEST, FLIGHT_BYTE_STORE, FLIGHT_WORD_STORE,
     FLIGHT_REQUEST_BIT, FLIGHT_TOGGLE_BIT, FLIGHT_TEST_BIT,
@@ -33,10 +23,6 @@ enum FlightCommandPhase {
     FLIGHT_ECM_BEGIN, FLIGHT_TOGGLE_ADDRESS,
     FLIGHT_SPAWN_SAVE, FLIGHT_SPAWN_ARGUMENT, FLIGHT_SPAWN_RESTORE
 };
-typedef struct {
-    uint32_t event;
-    int16_t carried_event_word;
-} FlightCommandResult;
 typedef struct {
     FlightCommandResult (*consume)(void *context, enum FlightCommandChild child);
     void (*observe)(void *context, enum FlightCommandPhase phase,

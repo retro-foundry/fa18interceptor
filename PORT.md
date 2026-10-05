@@ -10,6 +10,28 @@ Everything else is scaffolding with two jobs: keep the game running and
 rendering at every step, and serve as the reference each hand-written routine
 is proven against.
 
+For the 2026-10-05 milestone the user accepts static recompilation of the
+remaining entries, marked for later readable decompilation. All 85 deferred
+translations now have direct native instruction-helper bindings in
+`port/recomp/generated/recomp_static_deferred.c`; their per-entry debt is in
+`recomp_deferred.json`. Shared CPU/machine state remains an interim dependency.
+This does not change the final readable, CPU-free deliverable above.
+
+The active 2026-10-05 goal now prioritizes that full emulation-free deliverable.
+Reference `port/game` modules still use the machine bus; readable C alone does
+not remove this dependency. Ordinary-state modules in `port/` must be composed
+into the complete native game loop. The first current input component,
+`indexed_controls.c`, passes 65,536 source comparisons with full branch coverage
+and builds without CPU/machine dependencies. `command_input.c` now adds both
+complete selection prefixes, 32,768 passing source comparisons, shared ordinary
+state and indexed-action composition. The `fa18_command_input` library links
+without CPU or machine sources. `flight_command_input.c` adds all 28 aircraft
+actions and real axis/throttle-reset/space-release children, with 28,672 source
+comparisons and complete component coverage. Other children, view/context
+actions, publication, original mode/pose loading and runtime integration remain
+open; see `analysis/routines/native_flight_command_input.md` and
+`analysis/routines/native_command_input.md`.
+
 ## Architecture
 
 ```
@@ -62,7 +84,7 @@ is proven against.
 | A | Whole-program translation, interpreter fallback | done (624 routines) |
 | B | Machine layer | done; bus timing modelled to ~0.1-0.5% (STATUS.md, "Bus timing") |
 | C | Machine and frame parity with Engine9000 | historical emulator comparisons documented; current acceptance uses the sealed native recordings |
-| D | Readable C, proven in related batches | 539 registered translated entries plus seventy-five original source-only callable entries, 543 with source timing; see CURRENT_PORT_HANDOFF.md for full gates, structural proof and the remaining original callback scope |
+| D | Readable C, proven in related batches | 539 readable translated + 85 explicitly deferred static entries cover the seeded 624; 75 additional readable source-only entries, 543 readable entries with source timing. Original callback scope remains follow-up work; see CURRENT_PORT_HANDOFF.md |
 | F | Native backend: plain C memory, direct drawing and audio | not started |
 | E | OS replacement (Kickstart calls), cold boot from the ADF | Last: assess which services remain necessary after D and F; existing C shims are verified on three native sessions |
 

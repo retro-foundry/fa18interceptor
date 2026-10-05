@@ -1,9 +1,142 @@
 # C port handoff
 
-Updated 2026-10-04. This is the current work state. Older notes remain in git
+Updated 2026-10-05. This is the current work state. Older notes remain in git
 history (the preceding handoff is in commit 51fb22b2); ignored gate logs may
 also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
+
+## Active objective: complete the port without emulation (2026-10-05)
+
+The current user goal is the complete C game without CPU or chipset emulation.
+The static-function and ROM-free milestones below are reference milestones;
+neither completes this objective. Keep the playable reference runner for
+validation while moving state, input, updates, rendering and audio into the
+ordinary C runtime. Do not replace the full game with a bounded demo.
+
+Musashi dependencies currently remain at:
+
+- `port/machine/machine.c`: `m68k_execute()` drives the machine slices.
+- `port/recomp/recomp_runtime.h`: generated reference instructions use the
+  opcode handler table and shared registers, flags, stack and cycle counters.
+- `port/recomp/generated/recomp_static_deferred.c`: direct helpers eliminate
+  opcode lookup for the 85 deferred entries, but still model CPU instructions
+  using that same state, memory and machine timeline.
+- `port/recomp/recomp_runtime.c`: resume executes individual opcode handlers
+  between labels and returns special instructions to the interpreter.
+- `port/game/glue/` and `port/os/`: register ABI, child dispatch, interrupts,
+  STOP/RTE, returns and service timing still use Musashi.
+- `port/game/memory.h`: even ordinary domain C currently reads/writes the
+  original address space through `fa18_bus_*`.
+
+The older `port/` target builds without Musashi but its menu/demo integration
+is incomplete. Existing typed native rendering/math modules can be reused;
+their presence is not proof of a complete native flight loop.
+
+New progress: `port/indexed_controls.c/.h` implements the complete indexed
+action component ($C1BC50-$C1BEE4 plus the $C1C214 toggle) with named ordinary
+C fields and pose values. No CPU/machine headers or guest addresses are used.
+The original $C3318E status-tone child remains an explicit callback. Queue
+publication, loading the mode/pose data, audio and full game loop integration
+remain open. The new component is built with `fa18_port`, but is not yet called
+by that incomplete runtime or the playable reference runner.
+
+Validation: 65,536 original-instruction comparisons match all Chip/Slow RAM,
+published events and ordered child inputs/effects, covering all 184 component
+boundaries. Separate GNU/MSVC contract tests link only the component and test
+source; the GNU binary has no Musashi/bus/machine symbols. Native MSVC build
+and the unchanged 408-file native audit pass. See
+`analysis/routines/native_indexed_controls.md` and its checkpoint. The overall
+emulation-free objective remains active and unfinished.
+
+Further progress: `port/command_input.c/.h` implements both complete original
+keyboard and pending-command selection prefixes ($C1AD74/$C1AC28), preserving
+all raw/release-key routes, signed counters, modifier latches, recorder gates,
+pending-word validation and high-byte-first command priority. Its state owns
+the indexed controls directly: the function modifier and context/pose gate
+are shared fields, without duplicate state to synchronize. A native composition
+entry dispatches all three indexed action kinds from the selected request.
+The source enum/request layout moved unchanged into CPU-free `command_types.h`.
+
+`fa18_command_input` is a static library containing the native selection and
+indexed implementations. Native game and contract targets use that library;
+the reference game still uses its original machine-backed adapters. New
+source-prefix validation passes 16,384 calls per owner (32,768 total), matches
+all RAM and action/event/index/metadata results, and covers all 74 pending plus
+243 keyboard boundaries. GNU strict-warning and MSVC contract tests pass, the
+native MSVC runner builds, and the unchanged native audit passes 411 files.
+See `analysis/routines/native_command_input.md` and its checkpoint. These are
+input components, not complete parent action/publication owners or a running
+native flight loop. Continue with the flight/view/context action families and
+queue publication, then actual data loading and game-loop composition.
+
+Aircraft progress: `port/flight_command_input.c/.h` now implements all 28 flight
+actions using the same native command/indexed state and ordinary aircraft
+record pointers. Real native direction, throttle-reset and space-release
+children cover nine child identities at eight original entries. Audio/status,
+space-press, spawn and eject publication remain explicit child dependencies;
+the $C1C214 eject child includes publication, not just a toggle.
+Outgoing PENDING_COMMAND_WORD_A is a distinct field from input RECORD_WORD_A.
+The child enum/result layout moved unchanged into `flight_command_types.h`.
+
+Validation passes 28,672 source-instruction comparisons with every RAM byte,
+event and ordered child input/state matched, covering 222/222 parent and 37/37
+real control-child boundaries. Remaining children are controlled test contracts,
+not completed native backends. GNU strict-warning/MSVC contracts and all three
+input CTests pass; the GNU contract has no Musashi/bus/machine symbols. Native
+MSVC runner and reference MSVC ROM-free builds pass, native guard passes 414
+files and the unchanged 1,104-boundary command audit passes. See
+`analysis/routines/native_flight_command_input.md` and its checkpoint.
+The library links into the incomplete native game but is not called by its
+loop yet. Continue with actual children, view/context actions, publication,
+data loading and full native game-loop integration; the overall goal remains
+active and unfinished.
+
+## Current function milestone: static recompilation (2026-10-05)
+
+The user now accepts static recompilation for the remaining functions, with
+explicit markers so readable decompilation can resume later. This supersedes
+the requirement to finish every remaining owner as readable domain C before
+the current function milestone can advance. The runtime still uses the shared
+CPU state, Amiga machine and host compatibility services.
+
+Reconciliation finds **85**, rather than 75, unregistered entries in the
+624-entry translation. The older **75 source-only callable entries are already
+readable C**, in addition to 539 readable translated entries. All 85 deferred
+translations now live in `port/recomp/generated/recomp_static_deferred.c`.
+Each is marked `STATIC_RECOMP` and `TODO(decompile)`. Its 854 constant opcodes
+call 225 native instruction helpers copied from the original Musashi source,
+instead of looking up an opcode handler for each instruction. Shared control
+flow, labels, children, returns, bus accesses and event/cycle boundaries remain
+exactly as in the previous translation. All 624 function bodies, function IDs,
+entry ownership, spans, call graph and liveness are preserved.
+
+`port/recomp/generated/recomp_deferred.json` records every deferred address,
+source span, calls, indirect transfers and normalized source hash. Of these
+85 entries, 44 start inside original ADF CODE hunks; 41 are reference-runtime
+wrappers outside those hunks. This is an entry inventory, not a claim that
+internal labels are independent functions. Existing code restrictions keep
+reference wrappers out of ROM-free execution. C500D8's original callback
+installation evidence and complete original call-graph reconciliation remain
+follow-up work; static recompilation does not resolve those semantic claims.
+
+Regenerate with `python tools/recomp/static_recomp.py`; verify with `--check`.
+The full translator now performs this partition automatically. GNU and CMake
+builds reject stale generated helpers or markers. When an owner becomes
+readable, register its proved glue and rerun the partition: its translation
+returns to the normal reference bucket and leaves the deferred inventory.
+No static entry is added to the readable registry or its proof counts.
+
+Validation and the exact return work are recorded in
+`analysis/routines/static_recomp_deferred.md` and the committed checkpoint
+`analysis/figures/static_recomp_deferred_checkpoint.json`. GNU/MSVC builds,
+all 36,236 reference recording frames/RAM/CPU seals, the 614-row registered
+gate (571,427 shadow /458,087 sandbox, zero mismatches, poison exact), combined
+DMA (30,239 instructions /967,648 fixtures), GNU/MSVC ROM-free save/flight/
+mission/restart paths, eleven CTests and the 406-file native audit all pass.
+Retain the known combined
+readable-C timing difference and the ROM-free outcomes/progression/teardown
+acceptance gaps below. This provisional static milestone does not complete
+the final CPU-free native backend or whole-original-call-graph audit.
 
 ## Active objective: ROM independence (2026-10-04)
 
