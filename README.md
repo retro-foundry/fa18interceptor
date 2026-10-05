@@ -28,9 +28,10 @@ The active goal is the complete game without CPU or chipset emulation. The
 ROM-free runner needs no Kickstart image but still uses Musashi and the machine
 model. Work continues in `port/game/`, its glue and the active runtime.
 The abandoned top-level `fa18_port` implementation and its disconnected native
-replacement components have been removed. Only disk/Hunk loading, map-packet
-code and headers actually used by the current runners remain at the top level
-of `port/`; see [source ownership](port/README.md). Earlier standalone component
+replacement components have been removed. The retained disk/Hunk loading, map-packet
+code and shared command headers now live in `port/game/` with the other active
+sources; no top-level C source/header files remain in `port/`. See
+[source ownership](port/README.md). Earlier standalone component
 proofs do not establish progress in the playable runner.
 
 The current display-selection handoff implements seven owners and passes
@@ -487,7 +488,7 @@ recordings) are not in git.
 | `captures/` | Sealed recordings (read-only; not in git) |
 | `analysis/` | Memory map, routine reports, inventories |
 | `pcode/`, `source_amiga/` | Earlier analysis products: P-code exports, byte-exact assembly |
-| `port/*.c` (top level) | Shared disk/Hunk and map-packet code used by the active runners; abandoned sources removed |
+| `port/` (top level) | Source ownership notes and the preserved user-owned data allowlist; active C sources/headers moved to `port/game/` |
 
 ## Documents
 

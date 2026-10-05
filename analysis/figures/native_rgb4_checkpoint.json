@@ -1,5 +1,5 @@
 {
-  "status": "validated_native_rgb4_core_and_callback_backend_runtime_pending",
+  "status": "validated_shared_rgb4_core_and_host_backend",
   "cases": 16384,
   "baseline_commit": "9645f4de",
   "baseline_function_sha256": "2ece116fe7ecad40c2304313ee1dc727082024239f9d94c4fe3d9a34177e1eaf",
@@ -14,13 +14,10 @@
     "port/amiga/guest_memory.c": "34cc006389193abe6a05c841501205ab2b839a316a54c01bb959a7faf2a467ca",
     "port/amiga/rgb4.c": "c69c27c8096421a82ccbb5a063774c3b7bf11dee54ab85e2069c2e4524cd739a",
     "port/amiga/viewport_list.c": "bc108a9aec864e14cac5f9b7302dd98e28fa0ca85b55fa6f56e41bdb0ee82ad4",
-    "port/disk.c": "8c3e3ab8e7f584aaecd5fadde1d616d6c0e9bf4f2d1f79b9042532c0bdb5d60e",
-    "port/hunk.c": "351c73c0aa48eea4b912a169c7f33cda1066b169bdba0355503255861d4bbf9b",
+    "port/game/disk.c": "d62e26490f334fb8d6db6c15c20d42299e1ed2372e9fc905312beb6467507a91",
+    "port/game/hunk.c": "1bcd8e795190b76bcb1e8715e8c78df1ea3d356952115c5057c80fc4655f8c31",
     "port/amiga/rgb4.h": "61a6b47e06847496e81cbd74e7065b81853ae1fe04516d5d4ff6eecc935b56c1",
     "port/amiga/rgb4_contract_test.c": "b9d96b48c635aac55c01290840d5e74915d174fcd2d4a4e9d794aeabd6fc8286",
-    "port/input_palette.c": "e9de2a33f176ae7af83e437a59666e1b9b19b37d252d952f83c343ccfd5d85fd",
-    "port/input_palette.h": "4b07b15f0521fcdc5cecaacf865f7c15cec25fe22b9ff3372871fa40a738d0d0",
-    "port/input_palette_contract_test.c": "96c56c4e753df31bd98c8574b7b87a912a6af62616f58f2654cf86d24d798be2",
-    "tools/amiga/check_rgb4.py": "281b96b369f3cadd37216cbce63a0bf75b2ed3523892d7434ec203ec67f2b78b"
+    "tools/amiga/check_rgb4.py": "2941461dcc3f2f646f5ffe1efd89c8f528de6adab8c29b4cab15b469d81422d0"
   }
 }

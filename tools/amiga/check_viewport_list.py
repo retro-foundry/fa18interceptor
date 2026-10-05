@@ -21,7 +21,7 @@ def main():
     (directory / "viewport_list_previous.h").write_text(old)
     sources = ["tools/amiga/viewport_list_oracle.c", "port/amiga/host_graphics.c",
                "port/amiga/host_compat.c", "port/amiga/guest_memory.c", "port/amiga/rgb4.c",
-               "port/amiga/viewport_list.c", "port/disk.c", "port/hunk.c"]
+               "port/amiga/viewport_list.c", "port/game/disk.c", "port/game/hunk.c"]
     exe = directory / "viewport_list_oracle.exe"
     subprocess.run(["gcc", "-std=c11", "-O2", "-UNDEBUG", "-Wall", "-Wextra", "-Werror",
                     "-Iport/amiga", *sources, "-o", str(exe)], cwd=ROOT, check=True)
@@ -31,9 +31,9 @@ def main():
     print(result.stdout, end="")
     if args.cases >= 16384:
         paths = sources + ["port/amiga/viewport_list.h", "port/amiga/viewport_list_contract_test.c",
-                           "port/input_palette_contract_test.c", "tools/amiga/check_viewport_list.py"]
+                           "tools/amiga/check_viewport_list.py"]
         checkpoint = {
-            "status": "validated_native_viewport_construction_and_merge_game_setup_integration_pending",
+            "status": "validated_shared_viewport_construction_and_merge",
             "cases": args.cases*2, "baseline_commit": BASELINE,
             "baseline_source_sha256": hashlib.sha256(old.encode()).hexdigest(),
             "native_cpu_dependency": False,

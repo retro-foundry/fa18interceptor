@@ -12,10 +12,13 @@ parallel gameplay implementation in the top-level `port/` directory.
 A component proof counts as runtime progress only when the active runner uses it.
 
 The abandoned `fa18_port` source/build and disconnected native replacement
-components were removed. Forty-eight top-level C source/header files remain:
-disk/Hunk loaders, shared map-packet code, its projection type header and three
-command type headers. They are dependencies of the active runners. See
-`port/README.md` for ownership and build commands.
+components were removed. The 48 retained shared source/header files have now
+been moved into `port/game/`: disk/Hunk loaders, map-packet code, its projection
+type header and three command type headers. No top-level `port/*.c` or
+`port/*.h` files remain. Build paths and active includes use the new locations.
+The CMake runtime now compiles the map core with the other game sources; the
+Amiga loader library compiles disk/Hunk once. The GNU source glob includes all
+of these without duplicate explicit source lists. See `port/README.md`.
 
 Historical `analysis/routines/native_*.md` notes without the `native_c_` prefix
 and standalone `tools/recomp/check_native_*` component tools may reference the
@@ -27,8 +30,17 @@ Removal validation: both active runners build with MSVC Release and GNU;
 all eleven active CTests pass. The GNU and MSVC ADF-only launcher checks pass
 185 Hunk/8,441 relocation construction, both CPU modes, splash, credits and
 keyboard-to-demo, with zero ROM accesses or unsupported services. Hash checks
-confirm all 697 tracked active-tree files, all 48 retained top-level sources
-and the three user-owned guard/allowlist files are unchanged.
+before relocation confirmed all 697 tracked active-tree files, all 48 retained
+sources and the three user-owned guard/allowlist files were unchanged.
+
+Relocation validation also passes both MSVC/GNU runner builds, all eleven active
+CTests and both ADF-only launcher checks. All 48 moved implementations are
+unchanged apart from four loader include paths; the GNU manifest has 450 unique
+existing source files. Loader/OFS checks match all 185 hunks, 8,441 relocations
+and 22 resource hashes. The retained RGB4 and viewport comparison tools now use
+the moved loaders and exclude checkpoint dependencies on deleted components:
+16,384 RGB4 and 32,768 viewport construction/merge calls match their frozen host
+implementations. These shared host components are used by the active runner.
 
 ## Active runner state
 

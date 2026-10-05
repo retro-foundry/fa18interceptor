@@ -11,14 +11,16 @@ as evidence of progress in the playable runner. Previous sources remain in git
 history. Some historical analysis and oracle tools reference those removed
 sources and cannot be run against the current tree.
 
-Only dependencies of the active runners remain as top-level C sources/headers:
+All 48 retained shared C source/header files now live in `game/`; no C sources
+or headers remain at the top level of `port/`. Build and include paths use the
+new locations. These retained dependencies are:
 
 | Files | Active use |
 | --- | --- |
-| `disk.c/.h`, `hunk.c/.h` | Original ADF/OFS reading and Hunk parsing, used by `amiga/` loading |
-| `map_packet_*.c/.h`, `map_detail_*.c/.h` | Shared map-packet core called by `game/map_packet.c` and its glue |
-| `projection_packet.h` | Map-packet depth/result types |
-| `command_types.h`, `context_command_types.h`, `flight_command_types.h` | Types included by the active command implementation in `game/` |
+| `game/disk.c/.h`, `game/hunk.c/.h` | Original ADF/OFS reading and Hunk parsing, used by `amiga/` loading |
+| `game/map_packet_*.c/.h`, `game/map_detail_*.c/.h` | Shared map-packet core called by `game/map_packet.c` and its glue |
+| `game/projection_packet.h` | Map-packet depth/result types |
+| `game/command_types.h`, `game/context_command_types.h`, `game/flight_command_types.h` | Types included by the active command implementation in `game/` |
 
 Build from the repository root:
 

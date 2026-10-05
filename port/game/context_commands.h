@@ -1,7 +1,7 @@
 #ifndef FA18_CONTEXT_COMMANDS_H
 #define FA18_CONTEXT_COMMANDS_H
 #include "command_selection.h"
-#include "../context_command_types.h"
+#include "context_command_types.h"
 enum ContextCommandPhase {
     CONTEXT_BYTE_TEST, CONTEXT_WORD_STORE, CONTEXT_BYTE_STORE, CONTEXT_LONG_STORE,
     CONTEXT_REQUEST_BIT, CONTEXT_MODIFIER_TEST, CONTEXT_ORIGIN_TEST,

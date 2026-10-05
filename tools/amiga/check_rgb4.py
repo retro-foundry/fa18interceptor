@@ -23,7 +23,7 @@ def main():
         raise RuntimeError("frozen validation body differs from the baseline host service")
     sources = ["tools/amiga/rgb4_compat_oracle.c", "port/amiga/host_graphics.c",
                "port/amiga/host_compat.c", "port/amiga/guest_memory.c",
-               "port/amiga/rgb4.c", "port/amiga/viewport_list.c", "port/disk.c", "port/hunk.c"]
+               "port/amiga/rgb4.c", "port/amiga/viewport_list.c", "port/game/disk.c", "port/game/hunk.c"]
     directory = ROOT / "build/recomp"
     directory.mkdir(parents=True, exist_ok=True)
     exe = directory / "rgb4_compat_oracle.exe"
@@ -35,10 +35,9 @@ def main():
     print(result.stdout, end="")
     if args.cases >= 16384:
         paths = sources + ["port/amiga/rgb4.h", "port/amiga/rgb4_contract_test.c",
-                           "port/input_palette.c", "port/input_palette.h",
-                           "port/input_palette_contract_test.c", "tools/amiga/check_rgb4.py"]
+                           "tools/amiga/check_rgb4.py"]
         checkpoint = {
-            "status": "validated_native_rgb4_core_and_callback_backend_runtime_pending",
+            "status": "validated_shared_rgb4_core_and_host_backend",
             "cases": args.cases, "baseline_commit": BASELINE,
             "baseline_function_sha256": hashlib.sha256(body.encode()).hexdigest(),
             "native_cpu_dependency": False,

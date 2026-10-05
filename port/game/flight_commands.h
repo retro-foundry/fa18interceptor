@@ -1,7 +1,7 @@
 #ifndef FA18_FLIGHT_COMMANDS_H
 #define FA18_FLIGHT_COMMANDS_H
 #include "command_selection.h"
-#include "../flight_command_types.h"
+#include "flight_command_types.h"
 
 /* Shared flight actions reached by C1AC28 and C1AD74. These are internal
  * action bodies, not extra original functions or complete dispatch owners. */

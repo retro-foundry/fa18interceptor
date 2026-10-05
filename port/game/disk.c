@@ -1,5 +1,5 @@
-#include "amiga/ofs.h"
-#include "amiga/hunk.h"
+#include "../amiga/ofs.h"
+#include "../amiga/hunk.h"
 #include "disk.h"
 #include <stdio.h>
 #include <stdlib.h>

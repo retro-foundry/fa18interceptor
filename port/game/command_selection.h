@@ -1,7 +1,7 @@
 #ifndef FA18_COMMAND_SELECTION_H
 #define FA18_COMMAND_SELECTION_H
 #include "memory.h"
-#include "../command_types.h"
+#include "command_types.h"
 
 /* Dispatch policy component of the complete C1AC28/C1AD74 owners.
  * Selecting an action is separate from executing its shared command tail.

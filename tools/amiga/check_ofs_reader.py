@@ -11,7 +11,7 @@ def main():
     out=ROOT/"build/amiga";out.mkdir(parents=True,exist_ok=True)
     exe=out/"ofs_reader_test.exe"
     subprocess.run(["gcc","-std=c11","-Wall","-Wextra","-Werror","-UNDEBUG","-Iport/amiga",
-        "tools/amiga/ofs_reader_test.c","port/disk.c","port/amiga/guest_memory.c","-o",str(exe)],cwd=ROOT,check=True)
+        "tools/amiga/ofs_reader_test.c","port/game/disk.c","port/amiga/guest_memory.c","-o",str(exe)],cwd=ROOT,check=True)
     for row in manifest["resources"]:
         # Deliberately alter ASCII case to test the original OFS name hash.
         result=subprocess.run([str(exe),str(disk),row["adf_path"].swapcase(),str(out/"ofs_resource.bin")],

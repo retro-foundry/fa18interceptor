@@ -1,5 +1,5 @@
 {
-  "status": "validated_native_viewport_construction_and_merge_game_setup_integration_pending",
+  "status": "validated_shared_viewport_construction_and_merge",
   "cases": 32768,
   "baseline_commit": "5671d334",
   "baseline_source_sha256": "a6ccde46042829c9b96eb7e62cc9685d4eb09ebcaae181cd7d2541f3b65e28d6",
@@ -14,11 +14,10 @@
     "port/amiga/guest_memory.c": "34cc006389193abe6a05c841501205ab2b839a316a54c01bb959a7faf2a467ca",
     "port/amiga/rgb4.c": "c69c27c8096421a82ccbb5a063774c3b7bf11dee54ab85e2069c2e4524cd739a",
     "port/amiga/viewport_list.c": "bc108a9aec864e14cac5f9b7302dd98e28fa0ca85b55fa6f56e41bdb0ee82ad4",
-    "port/disk.c": "8c3e3ab8e7f584aaecd5fadde1d616d6c0e9bf4f2d1f79b9042532c0bdb5d60e",
-    "port/hunk.c": "351c73c0aa48eea4b912a169c7f33cda1066b169bdba0355503255861d4bbf9b",
+    "port/game/disk.c": "d62e26490f334fb8d6db6c15c20d42299e1ed2372e9fc905312beb6467507a91",
+    "port/game/hunk.c": "1bcd8e795190b76bcb1e8715e8c78df1ea3d356952115c5057c80fc4655f8c31",
     "port/amiga/viewport_list.h": "a3596c30a04f9b453ad8a78171f9ba65a60d6eb5a41f5fdfab9b75f1dee35cea",
     "port/amiga/viewport_list_contract_test.c": "13a7026c5e17c6ef6b41597583aa4d5d3f6f3a5485031bb842bf342b158d7644",
-    "port/input_palette_contract_test.c": "96c56c4e753df31bd98c8574b7b87a912a6af62616f58f2654cf86d24d798be2",
-    "tools/amiga/check_viewport_list.py": "a1c553c5fc3bd15f58a5f3e9ec02930b29d38036929a9052a48f4ee4646d5f17"
+    "tools/amiga/check_viewport_list.py": "8be60501173c64be284ef3b8e8c3fb6a618cde4f189625736f192307524dd8bd"
   }
 }

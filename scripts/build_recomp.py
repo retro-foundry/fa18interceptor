@@ -15,19 +15,6 @@ ROOT = Path(__file__).resolve().parents[1]
 MUSASHI = Path("tools/musashi")
 DEFAULT_MAIN = Path("port/recomp/recomp_main.c")
 DEFAULT_OUTPUT = Path("build/recomp/fa18_recomp.exe")
-MAP_PACKET_CORE = [
-    "port/map_packet_original_pass.c", "port/map_packet_static_data.c",
-    "port/map_packet_pass_runner.c", "port/map_packet_pass_selector.c",
-    "port/map_packet_directory.c", "port/map_packet_coordinate_setup.c",
-    "port/map_packet_control_stream.c", "port/map_packet_wide_control_stream.c",
-    "port/map_packet_low_filter.c", "port/map_packet_column_table.c",
-    "port/map_packet_control_walker.c", "port/map_packet_record_stage.c",
-    "port/map_packet_relative_offset.c", "port/map_detail_gate.c",
-    "port/map_detail_fields.c", "port/map_detail_component_route.c",
-    "port/map_packet_stage.c", "port/map_packet_selector.c",
-    "port/map_packet_transform.c",
-    "port/map_packet_depth_stage.c",
-]
 CFLAGS = [
     "-O2", "-w", f"-I{MUSASHI}", "-Iport/machine", "-Iport/recomp",
     "-Iport/recomp/generated", "-Iport/game", "-Iport/game/glue", "-Iport/os",
@@ -60,13 +47,12 @@ def source_files(main: Path) -> list[Path]:
         Path("port/romfree/media.c"),
         Path("port/amiga/guest_memory.c"),
         Path("port/amiga/hunk_loader.c"),
-        Path("port/hunk.c"), Path("port/disk.c"),
     ]
     globbed: list[Path] = []
     for pattern in ("port/recomp/generated/*.c", "port/game/*.c",
                     "port/game/glue/*.c", "port/os/*.c"):
         globbed.extend(sorted(Path().glob(pattern)))
-    return fixed + globbed + [Path(path) for path in MAP_PACKET_CORE]
+    return fixed + globbed
 
 
 def check_duplicate_globals() -> None:

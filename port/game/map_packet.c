@@ -7,7 +7,7 @@
 #include "globals.h"
 #include "machine.h"
 
-#include "../map_packet_original_pass.h"
+#include "map_packet_original_pass.h"
 #include <stdlib.h>
 
 FA18MapPacketDepthStageResult prepare_map_packet_depth(gaddr frame) {

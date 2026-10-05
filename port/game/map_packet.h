@@ -2,8 +2,8 @@
 #define FA18_GAME_MAP_PACKET_H
 
 #include "memory.h"
-#include "../map_packet_pass_selector.h"
-#include "../map_packet_depth_stage.h"
+#include "map_packet_pass_selector.h"
+#include "map_packet_depth_stage.h"
 
 /* Observations of the packet walk, in source order. The optional observer
  * belongs to the translated-caller bridge; the game never receives CPU state.

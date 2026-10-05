@@ -6,7 +6,7 @@
 #include "glue_clip.h"
 #include "globals.h"
 #include "polygon_clip.h"
-#include "../../map_packet_static_data.h"
+#include "../map_packet_static_data.h"
 
 #include <stdio.h>
 #include <stdlib.h>

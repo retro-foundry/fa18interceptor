@@ -23,9 +23,10 @@ CPU adapters belong in `port/game/glue/`. Changes must be connected to the
 active `fa18_recomp`/`fa18_romfree` runners before they count as runtime progress.
 
 The abandoned top-level `fa18_port` build, its source files and disconnected
-native replacement components were removed at the user's request. The remaining
-top-level sources are shared disk/Hunk loading, map-packet code and headers
-actually used by the active runners. See `port/README.md`. Historical standalone
+native replacement components were removed at the user's request. The retained
+shared disk/Hunk loading, map-packet code and command headers now live in
+`port/game/` with the other active sources. There are no top-level C source
+or header files left in `port/`. See `port/README.md`. Historical standalone
 proof notes/tools may reference removed files; those are not the active work
 plan. Git history preserves the former implementation.
 

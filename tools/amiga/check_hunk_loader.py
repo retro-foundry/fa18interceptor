@@ -25,7 +25,7 @@ def main():
     (out/"layout.bin").write_bytes(packed)
     exe=out/"hunk_loader_test.exe"
     subprocess.run(["gcc","-std=c11","-Wall","-Wextra","-Werror","-UNDEBUG","-Iport/amiga",
-        "tools/amiga/hunk_loader_test.c","port/hunk.c","port/disk.c","port/amiga/hunk_loader.c","port/amiga/guest_memory.c",
+        "tools/amiga/hunk_loader_test.c","port/game/hunk.c","port/game/disk.c","port/amiga/hunk_loader.c","port/amiga/guest_memory.c",
         "-o",str(exe)],cwd=ROOT,check=True)
     # The C loading path receives only the ADF and caller-owned placements.
     # Extracted disk bytes are an independent comparison oracle below.

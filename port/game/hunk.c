@@ -1,4 +1,4 @@
-#include "amiga/hunk.h"
+#include "../amiga/hunk.h"
 #include "hunk.h"
 
 #include <stdlib.h>

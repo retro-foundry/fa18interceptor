@@ -3,7 +3,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include "amiga/hunk.h"
+#include "../amiga/hunk.h"
 
 /* The game executable as loaded from the disk: its CODE/DATA/BSS segments and
  * their 32-bit relocations. The port reads tables and text from it; it never

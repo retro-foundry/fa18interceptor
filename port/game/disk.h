@@ -6,7 +6,7 @@
 
 /* An AmigaDOS OFS floppy image (ADF). The game reads its executable, pictures
  * and text files from it. */
-#include "amiga/ofs.h"
+#include "../amiga/ofs.h"
 typedef AmigaOfs FA18Disk;
 
 int fa18_disk_open(FA18Disk *disk, const char *path);
