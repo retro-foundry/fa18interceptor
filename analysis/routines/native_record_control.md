@@ -52,6 +52,7 @@ the new owner/contracts and changed callers, twelve affected CTests and the
 499-file native build guard pass. Composed tests exercise direct secondary
 playback and reject split record, event, mode or carried-work bindings. The
 bootstrap observation point now follows the direct control/view/range owners
-at the root pose boundary. Six scheduler children remain: periodic, pose,
-primary/secondary placement, dispatch and finish. Native main integration,
+at the root pose boundary. The subsequent `native_record_pose` batch makes
+pose/history direct, leaving five scheduler children: periodic, primary/secondary
+placement, dispatch and finish. Native main integration,
 original runtime asset bindings and actual lower children remain open.

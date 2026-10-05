@@ -1,6 +1,7 @@
 #include "scene_bootstrap_native.h"
 #include "run075_trig_asset.h"
 #include "native_record_control_test_support.h"
+#include "native_record_pose_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -12,6 +13,7 @@ typedef struct {
     FA18NativeSceneRecorder recorder; FA18NativeScenePlacement placement;
     FA18NativeRecordUpdateStage record_update; FA18NativeSelectorOrigin selector_origin;
     FA18NativeRecordSelection record_selection;
+    FA18NativeRecordPose pose; FA18RecordPoseTestStorage pose_storage; FA18NativeRecordPoseOps pose_ops;
     FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
@@ -50,10 +52,16 @@ typedef struct {
 static Fixture fixture;
 static int update(void *context,FA18NativeControlRecordUpdate *state,
                   FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
+    Fixture *f=context;
+    assert(state==&f->control_update && decision && child<5 && slot<16 && companion<16);
+    *decision=0; return 1;
+}
+static int pose(void *context,FA18NativeRecordPose *state,FA18NativeRecordPoseChild child,
+                const FA18NativeRecordPoseInput *in,FA18NativeRecordPoseResult *out) {
     Fixture *f=context; uint8_t high,low; unsigned i;
-    assert(state==&f->control_update && decision && child<6 && slot<16 && companion<16);
-    *decision=0;
-    if(child!=FA18_RECORD_UPDATE_POSE || slot!=0) return 1;
+    assert(state==&f->pose && in && out && in->slot<16);
+    if(child==FA18_POSE_MOTION_CANDIDATE) out->clear=1;
+    if(child!=FA18_POSE_RECORD_MATRIX || in->slot!=0) return 1;
     assert(f->calls++==0 && f->context.origin_first==0x10c00000);
     assert(f->flight.viewed==f->records.aircraft && f->flight.player->flags==0x11c8);
     assert(f->countdown==5 && f->history==0x800 && f->transition==1 && f->phase==0);
@@ -122,9 +130,12 @@ static void initialize(Fixture *f) {
     f->view_work.viewer=f->records.records;
     fa18_test_bind_record_control(&f->control_player,&f->control_storage,&f->records,
         &f->view_work,&f->current_slot,&f->post_event,&f->view_mode);
+    f->control_player.origin_enable=&f->context_select;
+    fa18_test_bind_record_pose(&f->pose,&f->pose_storage,&f->control_player,&f->current_stride);
+    f->pose_ops=(FA18NativeRecordPoseOps){pose,f}; f->pose.ops=&f->pose_ops;
     f->control_update=(FA18NativeControlRecordUpdate){.records=&f->records,
         .selection=&f->record_selection,.range=&f->range,.ops=&f->control_ops,
-        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,
+        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,.pose=&f->pose,
         .post_input_event=&f->post_event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary_gate,.secondary_gate=&f->secondary_gate,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};

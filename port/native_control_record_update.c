@@ -16,7 +16,7 @@ static void prepare(FA18NativeControlRecordUpdate *s,unsigned slot,unsigned comp
 static int dispatch_pose(FA18NativeControlRecordUpdate *s,unsigned slot) {
     int decision;
     return child(s,FA18_RECORD_UPDATE_DISPATCH,slot,&decision) &&
-        (!decision || child(s,FA18_RECORD_UPDATE_POSE,slot,0));
+        (!decision || fa18_update_native_record_pose(s->pose,slot));
 }
 static int group_record(FA18NativeControlRecordUpdate *s,unsigned slot,unsigned companion,uint8_t gate,
                         int allow_release,FA18NativeControlRecordChild place) {
@@ -75,6 +75,10 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
        !s->control || s->control->records!=s->records ||
        s->control->view_work!=s->view_work || s->control->current_slot!=s->current_slot ||
        s->control->post_input_event!=s->post_input_event || s->control->mode!=s->view->mode ||
+       !s->pose || s->pose->records!=s->records ||
+       s->pose->current_slot!=s->current_slot || s->pose->current_stride!=s->current_stride ||
+       s->pose->post_input_event!=s->post_input_event || s->pose->target_slot!=s->control->target_slot ||
+       s->pose->origin_enable!=s->control->origin_enable || s->pose->scene_redraw!=s->control->scene_redraw ||
        !s->ops || !s->ops->consume || !s->post_input_event ||
        !s->counter_first || !s->counter_second || !s->primary_gate || !s->secondary_gate ||
        !s->periodic_word || !s->current_slot || !s->current_stride) return 0;
@@ -96,7 +100,7 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     if(!fa18_update_native_record_control(s->control,0,s->companion_slot) ||
        !fa18_update_native_record_view(s->view,0,s->view_work) ||
        !fa18_classify_native_selected_range(s->range,0) ||
-       !child(s,FA18_RECORD_UPDATE_POSE,0,0)) return 0;
+       !fa18_update_native_record_pose(s->pose,0)) return 0;
     for(slot=1;slot<4;++slot)
         if(!group_record(s,slot,0,*s->primary_gate,1,
                          FA18_RECORD_UPDATE_PRIMARY_PLACE)) return 0;

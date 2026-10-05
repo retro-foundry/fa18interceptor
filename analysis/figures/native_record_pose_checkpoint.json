@@ -1,0 +1,98 @@
+{
+  "status": "complete_native_record_pose_with_actual_motion_history",
+  "complete_entries": [
+    "C25B66",
+    "C2651E"
+  ],
+  "actual_children": [
+    "C2651E"
+  ],
+  "child_contracts": [
+    "C2D970",
+    "C28E28",
+    "C2C392",
+    "C1B27E",
+    "C25704",
+    "C13D84",
+    "C2D408",
+    "C149BE",
+    "C26EBE",
+    "C17F8C",
+    "C06C02",
+    "C26322",
+    "C2B05A",
+    "C26352"
+  ],
+  "unreachable_arm_proof": {
+    "guard": [
+      [
+        12738620,
+        4,
+        "14290062"
+      ],
+      [
+        12738624,
+        4,
+        "020200f0"
+      ],
+      [
+        12738628,
+        4,
+        "0c020000"
+      ],
+      [
+        12738632,
+        2,
+        "6734"
+      ],
+      [
+        12738634,
+        4,
+        "14290062"
+      ],
+      [
+        12738638,
+        4,
+        "020200f0"
+      ],
+      [
+        12738642,
+        4,
+        "0c020000"
+      ],
+      [
+        12738646,
+        2,
+        "6612"
+      ]
+    ],
+    "excluded": "C26058-C26068",
+    "reason": "unchanged class byte is reloaded after its zero-class exit; second BNE must branch"
+  },
+  "cases": 16384,
+  "cases_per_entry": 8192,
+  "source_boundaries": 595,
+  "covered_boundaries": 595,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; shared native record owners verified independently",
+  "native_cpu_dependency": false,
+  "limitations": "motion/matrix/input/collision lower children remain explicit; runtime integration pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "8f90ca1d3267250705b136dccfe3dd41039cf5967246fad1346f4deb592c9e01",
+  "reports": [
+    "native record pose: 16384 complete calls match all game RAM; child counts 44 2773 1053 2858 271 286 3827 1927 5626 3 46 388 388 907"
+  ],
+  "source_sha256": {
+    "port/native_record_pose.c": "5efe4c78e4ff79e233a635ae91b394abaeda76cc09727d9b85b21fd634399113",
+    "port/native_record_pose.h": "a885f78f21da21148d5fe7654f9d26d99d37cada0f1ec7ab786f62f22638877b",
+    "port/native_record_pose_contract_test.c": "744da7547f830a437eaf219696c5c911ecd90a4a076837114e45b74f1ad0581d",
+    "port/native_record_pose_test_support.h": "5dbb8291b5a74d0115dd242ee80e512592b23d02a4cc993f648367087e7204ee",
+    "port/native_control_record_update.c": "e01db518cd9b62c731b23ab60a4618463141a4961a42f67d4b6b045acdfd50ca",
+    "port/native_control_record_update.h": "0af63ba19cb79618eeee1e16685b34e76d6b64589c738b437bf02730b81f6045",
+    "port/native_control_record_update_contract_test.c": "1ebe3d88e7508366087127a827ee773a8c0ec070e75190e70b962a4c9b13ea8a",
+    "port/CMakeLists.txt": "6c67042268354d2128bb8586fc6c60ef3ea6c26f7d7466dd117effbe5bb5a3ef",
+    "port/native_record_update_stage_contract_test.c": "1564d871b073a8a9fabdff2310e0771a9f1b5ed421afb808fd76a2ebbbef0b26",
+    "port/scene_bootstrap_native_contract_test.c": "4c71cf2e64d340e82ecba4458bb4a7c9a756ee4bc4a8a50d3198e49cf453c980",
+    "tools/recomp/native_record_pose_oracle.c": "aa1cbbd375b2dccd94c074a8aa479a861ad8b9304826f82ff267231ab58cfa8f",
+    "tools/recomp/check_native_record_pose.py": "85613dc5a48d92b1816262ffff46c53ecba44cb26597cdfd41d82164860c257b"
+  }
+}
