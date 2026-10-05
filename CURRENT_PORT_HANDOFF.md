@@ -6,7 +6,34 @@ also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
 
-Latest batch: `native_scene_records` now provides one live bank of sixteen
+Latest batch: complete native `$C08F26` parent now composes actual startup
+clear/enable, renderer clear, all-record/workspace clear, player preparation
+with its real reset child, start tuple and observer. Four required remaining
+children are explicit: `$C09266`, `$C1C40C`, `$C1C63E`, `$C1C860`. No child
+substitute is supplied. Viewed identity now resolves directly to the actual
+aircraft pointer in the shared sixteen-record bank; startup zero selects root.
+The independent `field_bytes` component supports whole logical-word writes,
+avoiding a half-cleared identity and any duplicate persistent offset scalar.
+
+Validation: 12,288 comparisons cover 190/190 original boundaries, including
+standalone preparation's phase branch and clear through the resolved owner.
+All RAM matches with only explicit bootstrap/preparation CPU-stack exclusions;
+four ordered child-entry snapshots and carried placement words also match.
+Strict GNU integration/symbol checks, native MSVC game/test builds, six focused
+CTests and the unchanged 478-file guard pass. Player/startup/queue/display
+regressions retain 122,880 comparisons and their complete source coverage.
+See `analysis/routines/native_scene_bootstrap.md` and
+`analysis/figures/native_scene_bootstrap_parent_checkpoint.json` for the four
+child contracts and valid identity domain. The earlier emulated bootstrap
+checkpoint is preserved separately.
+
+Next implement the actual placement/gate/update/context children using the
+shared bank and owners. Other startup words still require original imports.
+The tenth-plane producer, scene initializer, loading/checksum production,
+sample output and installed-stage scheduling remain pending. Native main
+does not call this graph; the playable reference remains emulated.
+
+Preceding batch: `native_scene_records` now provides one live bank of sixteen
 control and workspace records. Its mapped aircraft/geometry fields share the
 actual command objects; root level uses the existing indexed owner. Original
 record/work imports are required. Mapped packed positions hold no duplicated

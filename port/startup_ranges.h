@@ -20,7 +20,8 @@ int fa18_bind_native_startup_ranges(FA18NativeStartupRanges *state,
  * Complete $C090F2: enable the preceding 12 actual neighboring bytes.
  * Reuse live queue slots after later owner binding, not copied slot views.
  * Return 0 on a missing owner, retaining preceding writes. No host observer
- * is invoked between the two byte operations of each word store. */
+ * is invoked between plain integer byte stores. Logical word owners receive
+ * one whole-value write, without publishing an intermediate identity. */
 int fa18_clear_native_startup_ranges(FA18NativeStartupRanges *state);
 int fa18_enable_native_startup_ranges(FA18NativeStartupRanges *state);
 #endif

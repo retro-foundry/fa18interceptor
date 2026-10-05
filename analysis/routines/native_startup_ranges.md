@@ -15,12 +15,11 @@ initialized. Binding does not change the owners' values. The native proof
 uses the existing spawn gate, command word, cockpit bytes, message state and
 redraw word/long owners, with original imports for the other words.
 
-Complete native startup record/geometry identity is still pending. In
-particular, the cleared viewed-record offset needs its actual semantic native
-record binding when the bootstrap graph is composed. The standalone proof
-imports that word explicitly; it does not claim that a duplicated viewed
-pointer was updated. Neither these two leaves nor their presence in the
-native library complete `$C08F26` or the running game.
+This standalone proof imports the viewed-record word explicitly. The later
+`scene_bootstrap_native` composition binds it to the actual aircraft pointer
+in the shared native bank, with whole-value logical word stores; see
+`native_scene_bootstrap.md` for its separate proof and valid identity domain.
+These two leaves alone do not complete the bootstrap graph or running game.
 
 `port/field_bytes.h` extracts the mechanism already used by signed-index
 queue publication. Its `PortFieldByte` references a byte within an ordinary
@@ -29,9 +28,10 @@ preserves other bits and reconstructs signed values without out-of-range
 unsigned-to-signed conversions. Access does not depend on host byte order.
 Exactly one live typed owner is required, with a valid byte shift. Missing
 owners fail explicitly; ordered fills retain preceding writes on failure.
-There is no host observer between the two bytes used to implement a word
-clear. This provides the original final game-state result without creating
-a CPU instruction boundary or scheduler.
+There is no host observer between plain integer byte stores. Logical word
+owners receive a single whole-value write through `port_fill_field_words`;
+they need not represent a valid intermediate half-cleared value. This adds
+no CPU instruction boundary, thread synchronization or scheduler.
 
 The header has no F/A-18 types, original addresses, RAM allocation, address
 lookup, CPU registers or external library dependency. It has two concrete
@@ -66,8 +66,8 @@ focused CTests pass, and the unchanged native guard passes 470 files.
 seals, implementation hashes and ownership limits; the queue/display
 checkpoints include the shared header and have been refreshed.
 
-Next bind complete control-record/workspace owners and actual remaining
-startup children before composing `$C08F26`. The separate tenth renderer
+The later bootstrap parent uses the shared control-record/workspace owners
+around four explicit remaining child contracts. The separate tenth renderer
 buffer producer, scene initializer, original loading/checksum production,
 installed-stage scheduling and sample output remain open. Native main still
 does not call the new graph; the playable reference remains emulated.

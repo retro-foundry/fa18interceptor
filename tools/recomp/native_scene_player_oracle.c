@@ -10,7 +10,10 @@
 #include "../../port/native_scene_records.c"
 #include "../../port/scene_player_setup.c"
 #include "../../port/context_command_controls.c"
-#include "../../build/recomp/native_scene_player_source.h"
+#ifndef FA18_SCENE_SOURCE_HEADER
+#define FA18_SCENE_SOURCE_HEADER "../../build/recomp/native_scene_player_source.h"
+#endif
+#include FA18_SCENE_SOURCE_HEADER
 
 typedef struct {
     FA18CommandInput commands;
@@ -123,6 +126,7 @@ static void scene_fixture(unsigned scenario) {
     m68k_set_reg(M68K_REG_SR,0x2700|(scenario&31)); REG_PC=selected_entry;
     fa18_recomp_abort=0; fa18_next_event=INT64_MAX;
 }
+#ifndef FA18_SCENE_PLAYER_HELPERS_ONLY
 static int original_scene(void) {
     unsigned step,i;
     for(step=0;step<5000;++step) {
@@ -198,3 +202,4 @@ int main(int argc,char **argv) {
         if(scene_seen[i]) printf(" %06X",scene_source_bytes[i].pc);
     puts(""); free(native); free(expected); free(before); free(base); free(m); return 0;
 }
+#endif

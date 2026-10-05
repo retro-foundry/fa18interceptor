@@ -70,15 +70,22 @@ contracted and the tenth clear buffer requires its actual startup producer.
 Both complete startup clear/enable leaves add 8,192 comparisons at all 21
 boundaries, with all RAM compared and no child contracts. Their live queue
 references share the independent `field_bytes.h` mechanism with command
-publication; all 73,728 queue comparisons still pass. Complete startup record
-and geometry ownership, including viewed-record identity, remains open.
+publication; all 73,728 queue comparisons still pass. The later bootstrap
+composition binds viewed-record identity to the actual shared aircraft bank.
 Native scene records now bind the actual aircraft flags/position/heading/
 inverse fields and indexed root level through one live data view. Complete
 mission reset, preparation, transient reset and start-position leaves share
 that bank; the existing observer is reused. Another 24,576 comparisons cover
 all 98 reachable boundaries, including the actual all-record/workspace clear
 block with preserved tails. This proves the specified leaves/block, with
-full bootstrap and remaining native record consumers still pending.
+the remaining native record consumers still pending.
+The complete native bootstrap parent now composes these actual available
+children around four required placement/gate/update/context child contracts.
+Another 12,288 comparisons cover all 190 boundaries, ordered child-entry
+states and the carried placement word. Viewed identity resolves to the live
+aircraft pointer; whole logical-word writes extend the independently reusable
+field component. The actual four child graphs and native main integration
+remain pending.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
@@ -92,6 +99,7 @@ runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_post_input_display.md`,
 `analysis/routines/native_startup_ranges.md`,
 `analysis/routines/native_scene_player.md`,
+`analysis/routines/native_scene_bootstrap.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,

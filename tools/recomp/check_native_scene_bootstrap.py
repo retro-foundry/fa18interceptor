@@ -1,0 +1,102 @@
+"""Compare the complete native bootstrap parent around four explicit pending children."""
+import argparse
+import hashlib
+import json
+import subprocess
+from audit_command_dispatch import source_decoder
+from check_record_region_probe import ROOT, build_oracle, default_bash
+from recomp import classify, static_target
+
+ENTRIES = (0xc08f26, 0xc09620, 0xc090c2)
+CHILDREN = {0xc09266, 0xc1c40c, 0xc1c63e, 0xc1c860}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--cases", type=int, default=4096)
+    args = parser.parse_args()
+    if args.cases <= 0:
+        parser.error("cases must be positive")
+    state, decoder = source_decoder()
+    seal = json.loads((ROOT / "analysis/data/command_dispatch_source_scope.json").read_text())["state_sha256"]
+    if hashlib.sha256(state).hexdigest() != seal:
+        raise RuntimeError("original source seal differs")
+    rows, pending = {}, list(ENTRIES)
+    while pending:
+        pc = pending.pop()
+        if pc in rows or pc in CHILDREN:
+            continue
+        length, opcode, handler, assembly = decoder.decode(pc)
+        raw = b"".join(decoder.word(pc+i).to_bytes(2, "big") for i in range(0, length, 2))
+        rows[pc] = {"length": length, "bytes": raw.hex(), "assembly": assembly}
+        kind = classify(handler)
+        target = static_target(decoder, pc, opcode, handler, kind)
+        if kind == "rts":
+            continue
+        if kind == "interp":
+            raise RuntimeError(f"unexpected exception instruction at {pc:06X}")
+        if kind in ("jsr", "bsr", "bcc", "dbcc"):
+            if target is None:
+                raise RuntimeError(f"unresolved target at {pc:06X}")
+            pending.extend((pc+length, target))
+        elif kind in ("bra", "jmp"):
+            if target is None:
+                raise RuntimeError(f"unresolved transfer at {pc:06X}")
+            pending.append(target)
+        else:
+            pending.append(pc+length)
+    header = "/* Sealed original bootstrap/player/startup instructions; validation only. */\n"
+    header += "static const struct { uint32_t pc; unsigned length; uint8_t bytes[10]; } scene_source_bytes[]={\n"
+    for pc, row in sorted(rows.items()):
+        values = ",".join(f"0x{b:02x}" for b in bytes.fromhex(row["bytes"]))
+        header += f"{{0x{pc:06X},{row['length']},{{{values}}}}},\n"
+    header += "};\n"
+    directory = ROOT / "build/recomp"
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "native_scene_bootstrap_source.h").write_text(header)
+    exe = build_oracle("native_scene_bootstrap_oracle", "tools/recomp/native_scene_bootstrap_oracle.c", default_bash())
+    reports, visited = [], set()
+    for entry in ENTRIES:
+        result = subprocess.run([str(exe), str(args.cases), f"{entry:06X}"], cwd=ROOT,
+                                capture_output=True, text=True, timeout=180)
+        (directory / f"native_scene_bootstrap_{entry:06X}.log").write_text(result.stdout+result.stderr)
+        if result.returncode:
+            raise RuntimeError(result.stderr or result.stdout or "native bootstrap differs")
+        for line in result.stdout.splitlines():
+            if line.startswith("visited:"):
+                visited.update(line.partition(":")[2].split())
+        reports.append(result.stdout.splitlines()[0])
+        print(reports[-1], flush=True)
+    print(f"native bootstrap: {len(visited)}/{len(rows)} original boundaries", flush=True)
+    if args.cases >= 4096:
+        expected = {f"{pc:06X}" for pc in rows}
+        if visited != expected:
+            raise RuntimeError(f"uncovered boundaries: {sorted(expected-visited)}")
+        paths = ["port/scene_bootstrap_native.c", "port/scene_bootstrap_native.h",
+                 "port/viewed_record_word.c", "port/viewed_record_word.h",
+                 "port/scene_bootstrap_native_contract_test.c", "port/field_bytes.h",
+                 "port/field_bytes_contract_test.c", "port/startup_ranges.c", "port/startup_ranges.h",
+                 "port/command_queue.c", "port/command_queue.h", "port/renderer_clear.c",
+                 "port/renderer_clear.h", "port/native_scene_records.c", "port/native_scene_records.h",
+                 "port/scene_player_setup.c", "port/scene_player_setup.h", "port/context_command_controls.c",
+                 "tools/recomp/native_scene_player_oracle.c",
+                 "tools/recomp/check_native_scene_bootstrap.py", "tools/recomp/native_scene_bootstrap_oracle.c"]
+        checkpoint = {
+            "status": "validated_complete_bootstrap_parent_around_four_required_pending_children",
+            "complete_parent": "C08F26", "supplementary_entries": ["C09620", "C090C2"],
+            "cases": args.cases*len(ENTRIES), "source_boundaries": len(rows), "covered_boundaries": len(visited),
+            "native_cpu_dependency": False,
+            "child_contracts": [f"{pc:06X}" for pc in sorted(CHILDREN)],
+            "actual_children": ["C090C2", "C090F2", "C2FD22", "C09620 including C0840E", "C0910C", "C0915A"],
+            "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620, no exclusion for C090C2. Four ordered child-entry RAM snapshots, explicit placement word, independent child mutations and named record owners compared.",
+            "coverage_cases": "all 16 valid viewed identities, whole-value clear to actual root pointer, all byte-phase branches via standalone C09620, initial/global/record/work variation, all ten supplied renderer planes with gate 0/1/80/FF, overlapping original text writes and preserved record/plane/depth tails",
+            "ownership_limit": "VIEW_RECORD resolves only offsets 512*index in the supplied 16-record bank; malformed/out-of-bank values fail. Child contracts prove parent sequencing, not child behavior. Actual placement/gate/update/refresh graphs, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
+            "original_state_sha256": seal,
+            "original_pc_bytes_sha256": hashlib.sha256(b"".join(pc.to_bytes(4, "big")+bytes.fromhex(row["bytes"]) for pc,row in sorted(rows.items()))).hexdigest(),
+            "reports": reports, "source_sha256": {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in paths},
+        }
+        (ROOT / "analysis/figures/native_scene_bootstrap_parent_checkpoint.json").write_text(json.dumps(checkpoint, indent=2)+"\n")
+
+
+if __name__ == "__main__":
+    main()

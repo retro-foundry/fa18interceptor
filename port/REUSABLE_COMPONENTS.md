@@ -7,7 +7,7 @@ Game-specific adapters retain policy, asset interpretation and scheduling.
 
 | Component | Reusable interface | Current limits |
 | --- | --- | --- |
-| `field_bytes.h` | Header-only `PortFieldByte` views of caller-owned signed/unsigned 8/16/32-bit values, independent of host byte order. Shared by native command publication and startup clears. | Requires stable canonical integer owners and valid byte shifts. Supplies no original-address lookup, packed RAM, data import, pointer-identity conversion or game scheduling. |
+| `field_bytes.h` | Header-only byte views of caller-owned signed/unsigned 8/16/32-bit values and logical words. Whole-word fills call a logical owner's setter once. Shared by command publication and startup clears. | Requires stable canonical owners and valid shifts/pairs. Value accessors belong to each game's adapter; no original-address lookup, packed RAM, data import, record layout or scheduling is supplied. |
 | `voice_program.c/.h` | Portable `PortVoice` state, named sound operations, waits/loops, slide updates and a program-ended callback. Builds with only the C standard library. | Uses unsigned 32-bit values and eight-byte program cursor units. It provides tick execution, not sample mixing or a device driver. |
 | `voice_selection.c/.h` | Caller-owned sound tables and channel slots, ordered release/publication and acknowledgements. Shared by native command sounds and menu sounds. Builds with the C standard library and `voice_program.h`. | Accepts already resolved voices and fixed-point volumes. It has no asset loader, game sound IDs, scheduler or sample output. |
 | `amiga/rgb4.c/.h` | Ordinary-buffer colour-map loading and CopIns/merged-list palette writes. Builds with only the C standard library. Both native callback and packed compatibility service use it. | Implements the existing host's RGB4 semantics and list data formats. Allocation, viewport construction, input scheduling and presentation remain caller-owned. |
@@ -31,6 +31,17 @@ views, clear extents and semantic record bindings. The F/A-18 queue regression
 retains all 73,728 comparisons, and both complete startup leaves add 8,192
 comparisons at 21 original boundaries with no RAM exclusions/child contracts.
 See `../analysis/routines/native_startup_ranges.md` for ownership limits.
+
+Logical word owners now let a game's resolved record reference participate
+in the same bounded field view. Supply a `PortFieldWordValue` getter/setter
+and its high/low byte views; `port_fill_field_words` writes the whole value
+once without reading or exposing an intermediate identity. Primitive owners
+still use ordered high/low writes with no observer between them. This adds
+no concurrency guarantee. F/A-18's separate `viewed_record_word` adapter
+maps its sixteen actual aircraft objects to the original 512-byte offsets;
+that stride, record family and accepted domain stay game-specific. Its full
+bootstrap-parent proof covers 12,288 calls at all 190 boundaries, with four
+explicit pending child contracts. See `../analysis/routines/native_scene_bootstrap.md`.
 
 The independent `port_voice_selection` target supplies release/selection for
 those same `PortVoice` objects. Compile `voice_selection.c` with its header;

@@ -1,0 +1,132 @@
+#include "scene_bootstrap_native.h"
+#include <assert.h>
+#include <string.h>
+
+typedef struct {
+    FA18CommandInput input; FA18FlightCommandState flight; FA18ViewCommandState view;
+    FA18ContextCommandState context; FA18CommandEffects effects; FA18CommandQueue queue;
+    FA18NativeSceneRecords records; FA18NativeScenePlayerSetup player;
+    FA18NativeStartupRanges startup; FA18NativeViewedRecordWord viewed;
+    FA18NativeGraphicsSetup graphics; FA18NativeGraphicsPlane planes[6];
+    FA18NativeRendererClear renderer; FA18NativeSceneBootstrap bootstrap;
+    uint8_t buffers[6][8008],mission_b,mission_c,flags[6],phase,selection,fifth;
+    uint8_t limit_byte,previous_limit,context_state,transition,previous_byte,byte_be;
+    uint16_t limit,selected,shown,marker,menu_return,word_4fda0,countdown,word_a6,word_a8,history,minimum,scales[2],depth[24],words[52];
+    PortFieldByte fields[104];
+    uint32_t warnings,events,message_queue,message_timer,valid[2],reference;
+    unsigned calls; int complete;
+} Fixture;
+static Fixture fixture;
+static int place(void *context,FA18NativeSceneBootstrap *s,int16_t word) {
+    Fixture *f=context;
+    assert(f->calls++==0 && word==-123);
+    assert(f->flight.viewed==f->records.aircraft && f->flight.player->flags==0x11c8);
+    assert(f->countdown==5 && f->history==0x800 && f->transition==1 && f->phase==0);
+    assert(f->limit_byte==f->previous_limit && f->context_state==0xff && f->message_timer==0x1b8);
+    assert(f->view.line_last_row==0xa7 && f->view.span_origin==0x32 && f->view.span_origin_y==0x320);
+    assert(f->context.origin_first==0x10c00000 && f->view.origin_middle==0x05000000 && f->context.origin_third==0x11400000);
+    assert(f->context.pan==0x1c20 && !f->context.rotate && f->view.zoom_scale==0x80 && f->view.zoom_flags==0x80);
+    assert(f->valid[0]==0xffffffff && f->valid[1]==0xffffffff && f->minimum==0x7fff && f->reference==0x800000);
+    assert(f->depth[21]==21 && f->depth[22]==0x5a5a);
+    assert(s==&f->bootstrap);
+    f->input.indexed.mode=0x7d; f->flight.viewed=f->records.aircraft+7;
+    return 1;
+}
+static int gates(void *context,FA18NativeSceneBootstrap *s) {
+    Fixture *f=context; uint8_t high,low;
+    assert(f->calls++==1 && s==&f->bootstrap && f->input.indexed.mode==0x7d);
+    assert(port_read_field_byte(f->fields+30,&high) && port_read_field_byte(f->fields+31,&low));
+    assert(high==14 && !low);
+    f->context.origin_first++;
+    return 1;
+}
+static int update(void *context,FA18NativeSceneBootstrap *s) {
+    Fixture *f=context;
+    assert(f->calls++==2 && s==&f->bootstrap && f->context.origin_first==0x10c00001);
+    f->input.message_state=3;
+    return 1;
+}
+static int refresh(void *context,FA18NativeSceneBootstrap *s) {
+    Fixture *f=context;
+    assert(f->calls++==3 && s==&f->bootstrap && f->input.message_state==3);
+    return f->complete;
+}
+static void initialize(Fixture *f) {
+    uint8_t source[8192],work[512],neighbors[FA18_COMMAND_QUEUE_NEIGHBORS],keys[128]={0};
+    unsigned i;
+    memset(f,0,sizeof *f); memset(source,0x5a,sizeof source); memset(work,0x5a,sizeof work); memset(neighbors,0x5a,sizeof neighbors);
+    assert(fa18_import_native_scene_records(&f->records,&f->input,source,sizeof source,work,sizeof work));
+    f->flight.commands=&f->input; f->flight.player=f->records.aircraft;
+    f->view.flight=&f->flight; f->context.view=&f->view;
+    f->context.records=f->records.geometry; f->context.record_count=16; f->effects.context=&f->context;
+    assert(fa18_initialize_command_queue(&f->queue,&f->context,neighbors,sizeof neighbors,keys,sizeof keys));
+    f->player=(FA18NativeScenePlayerSetup){.records=&f->records,.flight=&f->flight,.effects=&f->effects,
+        .mission_flags_b=&f->mission_b,.mission_flags_c=&f->mission_c,.phase=&f->phase,
+        .selection_active=&f->selection,.limit=&f->limit,.selected_record=&f->selected,.message_shown=&f->shown,
+        .message_marker=&f->marker,.warning_causes=&f->warnings,.event_bits=&f->events};
+    for(i=0;i<6;++i) f->player.player_flags[i]=f->flags+i;
+    memset(f->buffers,0x5a,sizeof f->buffers);
+    for(i=0;i<6;++i) f->planes[i]=(FA18NativeGraphicsPlane){f->buffers[i],sizeof f->buffers[i],0};
+    for(i=0;i<5;++i) f->graphics.source[i]=f->planes+i;
+    for(i=0;i<4;++i) f->graphics.source[5+i]=f->planes+i;
+    f->renderer=(FA18NativeRendererClear){&f->graphics,f->planes+5,&f->fifth};
+    for(i=0;i<52;++i) {
+        f->words[i]=0x5a5a;
+        f->fields[2*i]=(PortFieldByte){.unsigned_word=f->words+i,.shift=8};
+        f->fields[2*i+1]=(PortFieldByte){.unsigned_word=f->words+i};
+    }
+    f->words[15]=5*512; f->previous_limit=11;
+    for(i=0;i<24;++i) f->depth[i]=0x5a5a;
+    f->bootstrap=(FA18NativeSceneBootstrap){.context=&f->context,.player=&f->player,.startup=&f->startup,
+        .viewed_word=&f->viewed,.renderer=&f->renderer,.scene_limit=&f->limit_byte,.previous_scene_limit=&f->previous_limit,
+        .context_state=&f->context_state,.menu_transition=&f->transition,.previous_state_byte=&f->previous_byte,.byte_458be=&f->byte_be,
+        .menu_return_word=&f->menu_return,.word_4fda0=&f->word_4fda0,.countdown=&f->countdown,
+        .word_459a6=&f->word_a6,.word_459a8=&f->word_a8,.history_record=&f->history,.readout_minimum=&f->minimum,
+        .row_scales={f->scales,f->scales+1},.message_queue_first=&f->message_queue,.message_timer=&f->message_timer,
+        .readout_valid={f->valid,f->valid+1},.reference_18=&f->reference,.depth_values=f->depth,.depth_count=24};
+    assert(fa18_bind_native_scene_bootstrap(&f->bootstrap,&f->queue,f->fields,104));
+    assert(f->flight.viewed==f->records.aircraft+5);
+    f->complete=1;
+}
+int main(void) {
+    Fixture *f=&fixture; unsigned i,j; uint8_t byte,record[512];
+    FA18NativeSceneBootstrapOps ops={place,gates,update,refresh,f};
+    FA18NativeSceneBootstrapCall call={&f->bootstrap,&ops,-123};
+    initialize(f);
+    assert(fa18_native_scene_bootstrap_callback(&call));
+    assert(f->calls==4 && f->flight.viewed==f->records.aircraft+7);
+    for(i=0;i<6;++i) for(j=0;j<8008;++j) assert(f->buffers[i][j]==(j<8000?0:0x5a));
+    for(i=0;i<16;++i) {
+        assert(fa18_read_native_scene_record(f->records.records+i,0,record,sizeof record));
+        for(j=164;j<512;++j) assert(record[j]==0x5a);
+        for(j=0;j<32;++j) assert(!f->records.work[i][j]);
+    }
+    for(i=0;i<48;++i) {
+        assert(port_read_field_byte(f->queue.slots+0x99+i,&byte));
+        assert(byte==((i>=16 && i<44)?0x20:0x30));
+    }
+    /* Rebinding reads the live identity, never the stale imported word. */
+    assert(fa18_bind_native_scene_bootstrap(&f->bootstrap,&f->queue,f->fields,104));
+    assert(f->flight.viewed==f->records.aircraft+7);
+    assert(fa18_clear_native_startup_ranges(&f->startup));
+    assert(f->flight.viewed==f->records.aircraft);
+    initialize(f); f->complete=0;
+    assert(!fa18_native_scene_bootstrap_callback(&call));
+    assert(f->calls==4 && f->input.message_state==3 && f->countdown==5);
+    initialize(f);
+    assert(!fa18_bootstrap_native_scene(&f->bootstrap,NULL,-123));
+    assert(!f->calls && f->countdown==5 && f->flight.viewed==f->records.aircraft);
+    initialize(f);
+    f->renderer.additional_buffer=NULL;
+    assert(!fa18_native_scene_bootstrap_callback(&call));
+    assert(!f->calls && f->message_timer==0x1b8 && f->countdown==5);
+    /* Invalid data is explicit, rather than silently choosing record zero. */
+    f->fields[30]=(PortFieldByte){.unsigned_word=f->words+15,.shift=8};
+    f->fields[31]=(PortFieldByte){.unsigned_word=f->words+15};
+    f->words[15]=1;
+    assert(!fa18_bind_native_viewed_record_word(&f->viewed,&f->records,&f->flight,f->fields,104));
+    f->words[15]=16*512;
+    assert(!fa18_bind_native_viewed_record_word(&f->viewed,&f->records,&f->flight,f->fields,104));
+    assert(!fa18_native_scene_bootstrap_callback(NULL));
+    return 0;
+}

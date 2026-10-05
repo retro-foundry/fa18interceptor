@@ -1,0 +1,91 @@
+# Native scene bootstrap parent and resolved viewed identity
+
+`port/scene_bootstrap_native.c/.h` implements the complete `$C08F26` parent
+around four required, explicitly pending children: `$C09266` placement,
+`$C1C40C` gate construction, `$C1C63E` record update and `$C1C860` context
+refresh. It executes the actual native startup clear/enable, renderer clear,
+all-record/workspace clear, player preparation with its real mission-reset
+child, start-position tuple and observer child. No pending child has a
+default implementation. Completion status is separate from incidental
+original register outputs.
+
+The parent references the shared command/context/view/aircraft bank, player
+setup, renderer and queue owners. It binds known startup words directly to
+spawn, command, cockpit, message and redraw fields. Phase, selection-active,
+fifth-plane gate, previous-state and menu-transition queue fields refer to
+the actual supplied owners. Other startup words require original imports;
+no spare packed startup image or detached geometry state is synthesized.
+Every required global and all 22 depth entries use caller-owned references.
+Original store order, overlapping text fills, record tails and plane/depth
+tails are preserved. Missing resources or child failure return zero after
+preceding stores. Binding failure can retain preceding imports but executes
+no startup stores.
+
+`port/viewed_record_word.c/.h` resolves the startup viewed word to the actual
+`flight.viewed` aircraft pointer in the supplied sixteen-record bank. There
+is no duplicate persistent offset scalar. Its import accepts exactly the
+sixteen offsets `512 * index`; malformed or out-of-bank data fail explicitly.
+Reading derives the word from the current pointer. Writing zero selects
+the actual root object. Rebinding reads the live pointer, preserving changes
+made by subsequent children rather than restoring the imported word.
+Owners, record banks and their metadata must remain at stable addresses.
+This bounded identity domain does not establish behavior for arbitrary
+16-bit offsets or unsupported record families.
+
+The independent, header-only `field_bytes.h` mechanism now accepts a logical
+word owner with value getter/setter operations. `port_fill_field_words`
+requires the high/low views of that same owner and calls its setter once
+with the whole word, without a getter or an intermediate identity. Ordinary
+byte/integer pairs retain ordered stores with no observer between them.
+This is an indivisible semantic operation, not thread synchronization.
+The generic component supplies no record stride, original address lookup,
+CPU/bus callbacks or game policy; F/A-18 supplies the identity adapter.
+Byte writes still preserve the other bits and can fail when a resulting
+logical value is outside the adapter's accepted domain.
+
+`FA18NativeSceneBootstrapCall` provides a callback adapter for the existing
+native startup text publisher. Its `placement_word` is the explicit carried
+16-bit value used by the pending placement owner. The original carried D7
+word is compared at that child entry; no register file is stored in native
+state. Pending complete child graphs still need their own semantic inputs,
+including any actual caller-frame fields required by context refresh.
+The adapter alone does not install bootstrap into the running game.
+
+Run `python tools/recomp/check_native_scene_bootstrap.py`. Three sets of
+4,096 calls cover **190/190** reachable original instruction boundaries:
+the complete bootstrap parent, standalone player preparation and standalone
+startup clear using the resolved viewed owner. Standalone preparation covers
+the phase-nonzero branch that the parent's preceding clear makes unreachable.
+Only the four named children are contracted; every other actual original
+child executes fully. All sixteen valid viewed identities and fifth-plane
+gate values 0/1/$80/$FF are exercised with varied records, workspace, globals,
+all ten supplied plane buffers and surrounding sentinels.
+
+Every Chip/Slow RAM byte matches, excluding only CPU ABI save/return stack
+`$C7FD00..$C7FF00` for bootstrap/preparation. Startup clear has no exclusions.
+Four ordered full-RAM child-entry snapshots and the placement word match.
+Independent mutations to viewed identity, message state, aircraft flags,
+observer origin, smoothed delta, scene limit, countdown and a depth tail
+propagate to later child entries. Contracted source children deliberately
+vary incidental CPU outputs, proving that completion status is separate.
+Named record owners are checked independently of their data-view exporter.
+Source CPU state, original address packing and Kickstart exist only in this
+validation executable. `analysis/figures/native_scene_bootstrap_parent_checkpoint.json`
+records the exact proof scope; the earlier emulated bootstrap checkpoint is
+preserved separately.
+
+The native contract checks shared-owner composition, all six supplied plane
+buffers including aliases, text overlaps, record/workspace/depth tails,
+rebind/clear identity behavior, invalid offsets, missing resources and child
+failure with preceding writes retained. GNU strict compilation and symbol
+inspection pass without CPU/bus/machine/guest/host dependencies. Native MSVC
+game/test builds, six focused CTests and the unchanged 478-file native guard
+pass. Player/startup/queue/display regressions retain 122,880 comparisons at
+their complete 98/21/28/62 source boundaries; their checkpoint hashes match.
+
+Remaining work includes the four complete native children, unported record
+consumers, the actual tenth-plane producer, scene initializer, original asset
+loading/checksum production, sample output and installed-stage scheduling.
+The native main does not invoke this graph; the playable reference still
+uses emulation. This proof establishes parent behavior around the explicit
+contracts and cannot establish the children's behavior or the complete game.

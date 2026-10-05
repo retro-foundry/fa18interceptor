@@ -1,0 +1,59 @@
+{
+  "status": "validated_complete_bootstrap_parent_around_four_required_pending_children",
+  "complete_parent": "C08F26",
+  "supplementary_entries": [
+    "C09620",
+    "C090C2"
+  ],
+  "cases": 12288,
+  "source_boundaries": 190,
+  "covered_boundaries": 190,
+  "native_cpu_dependency": false,
+  "child_contracts": [
+    "C09266",
+    "C1C40C",
+    "C1C63E",
+    "C1C860"
+  ],
+  "actual_children": [
+    "C090C2",
+    "C090F2",
+    "C2FD22",
+    "C09620 including C0840E",
+    "C0910C",
+    "C0915A"
+  ],
+  "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620, no exclusion for C090C2. Four ordered child-entry RAM snapshots, explicit placement word, independent child mutations and named record owners compared.",
+  "coverage_cases": "all 16 valid viewed identities, whole-value clear to actual root pointer, all byte-phase branches via standalone C09620, initial/global/record/work variation, all ten supplied renderer planes with gate 0/1/80/FF, overlapping original text writes and preserved record/plane/depth tails",
+  "ownership_limit": "VIEW_RECORD resolves only offsets 512*index in the supplied 16-record bank; malformed/out-of-bank values fail. Child contracts prove parent sequencing, not child behavior. Actual placement/gate/update/refresh graphs, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "2208ece166cff92805e367387e83b72a645e289bac9173db106cacda56e77921",
+  "reports": [
+    "native bootstrap C08F26: 4096 calls match full RAM, live owners and 4 ordered child contracts per call",
+    "native bootstrap C09620: 4096 calls match full RAM, live owners and 0 ordered child contracts per call",
+    "native bootstrap C090C2: 4096 calls match full RAM, live owners and 0 ordered child contracts per call"
+  ],
+  "source_sha256": {
+    "port/scene_bootstrap_native.c": "20260a501bc019d77d73806de21d161f1079281c89b969d1800ebba0bda0b223",
+    "port/scene_bootstrap_native.h": "060142a238a2c7c57962cba9be1615f226dcef9f1eba5fcd6a841ba5868d6f5d",
+    "port/viewed_record_word.c": "2a282a58698345c1bfb586474ddbc948bd2a6d8d1eb891d14bf2943bc8e1c9a4",
+    "port/viewed_record_word.h": "b0af0593b00ed947cb70cdf9c9333e81f67cf7ae7f4446843d42810975ce266f",
+    "port/scene_bootstrap_native_contract_test.c": "7ef842423960f7eb7c7d0ecaf7ec47d2ad290f53a4553cefb170414158e1e97b",
+    "port/field_bytes.h": "abff8eb93f1a466555dbc8365ea76327b1239f3cb56d1d614005642e9b4a2fe8",
+    "port/field_bytes_contract_test.c": "a76f6ffcbfde35e9b3a692e4cf5caefcf8d294b34b1f0bd21e642bfe0f316d65",
+    "port/startup_ranges.c": "f9d116e5bfcae7375d79e050b180302ff652733de0726d3eb9ace2e65a3cc882",
+    "port/startup_ranges.h": "daa9c18f05084c329f670fc5336cb07c1c5a642c97d9b4227ad9f9ef2fb407c4",
+    "port/command_queue.c": "dd1f1f6a046939903098708e095ed64e784ab02a6bb2d3c0e18ae378e6468e25",
+    "port/command_queue.h": "1795592dc406ee313e5a8756d175b3119b35e5f1c50ae19659021da44def3955",
+    "port/renderer_clear.c": "a7c2f7fc6c799a8cf0f697c651d124306b474cb24694ecf73a0f28207a620e51",
+    "port/renderer_clear.h": "9c62ebdc8846bb7c07b884142b94ddc871d7f09cbc2125c1ed934192f71ce76c",
+    "port/native_scene_records.c": "8b46b8bebf7d143fb43d1dd4e21f764fcca2b6e22e54944f61376ca4f16e96b9",
+    "port/native_scene_records.h": "79a6ec9b4e67e25c850219c39b2661df8bf0f2ab9f994c78d9a43e707bdb4bfe",
+    "port/scene_player_setup.c": "10e6ddcfa08d6dbd6b5fe368889a6f934c91651723bdb58d67c103dfe017421d",
+    "port/scene_player_setup.h": "16810fb57fa7dad4816b21e520577b2a46865e5dda07c636fc75adb60deb3cc4",
+    "port/context_command_controls.c": "94fd3576a278b1983883432eeb5f910aacedc8718025f78c429c1d98220ab5be",
+    "tools/recomp/native_scene_player_oracle.c": "a3e1df3194f3520818c2723d951e8ed800087158c46436cfe88746f9d968e0e1",
+    "tools/recomp/check_native_scene_bootstrap.py": "7bc435c205e156598cecdca82035b6299ee98b046dbcfd0b4b195ae0a36d0154",
+    "tools/recomp/native_scene_bootstrap_oracle.c": "04ae0156760ceefcdb5c40d01c01141c7bb3d45b3e865593a96db1009b3696de"
+  }
+}

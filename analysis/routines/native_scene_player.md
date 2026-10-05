@@ -78,11 +78,12 @@ Native MSVC game/test builds, five focused CTests and the unchanged native
 474-file guard pass. The checkpoint under `analysis/figures` records source
 seals, implementation hashes, comparison scope and ownership limits.
 
-Complete `$C08F26` composition remains pending. Use this bank's actual
-arrays and fields when binding the remaining placement/gate/update/context
-children; do not synchronize detached legacy record copies. Viewed/selected
-record identity must be bound through its native owner when the startup word
-clear is composed. Original record-data loading, unported record consumers,
+The later `$C08F26` parent composition now uses this bank's actual arrays and
+fields around four pending placement/gate/update/context child contracts.
+Viewed identity binds directly to the aircraft pointer through a logical
+startup word; see `native_scene_bootstrap.md` for that separate proof.
+Remaining native children must share these actual owners. Original
+record-data loading, unported record consumers,
 the tenth renderer buffer producer, scene initialization, checksum production,
 sample output and complete scheduling also remain required. Native main
 does not call the new graph; the playable reference remains emulated.
