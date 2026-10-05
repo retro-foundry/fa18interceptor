@@ -6,7 +6,32 @@ also remain under build/recomp/.
 PORT.md describes the architecture and source conventions.
 Commit completed, validated batches as work proceeds, as requested by the user.
 
-Latest batch: complete `$C090C2` startup clear and `$C090F2` enable leaves use
+Latest batch: `native_scene_records` now provides one live bank of sixteen
+control and workspace records. Its mapped aircraft/geometry fields share the
+actual command objects; root level uses the existing indexed owner. Original
+record/work imports are required. Mapped packed positions hold no duplicated
+values; bounded views read/write the live owners and retain unported data.
+Complete `$C0840E`, `$C09620` (including its real reset child), `$C095C0`
+and `$C0910C` now use this bank and required shared global references. The
+existing native `$C0915A` observer is reused. The `$C08F76..$C08FAA` clear
+block clears all sixteen prefixes/work records with original tail preservation.
+
+Validation: 24,576 comparisons cover 98/98 original boundaries, with no child
+contracts. All RAM matches, except the explicit CPU save-stack exclusion for
+the two reset/preparation entries. Tuple results and independent named record
+owners also match. Strict GNU integration/symbol checks, native MSVC game/test
+builds, five focused CTests and the unchanged 474-file guard pass. See
+`analysis/routines/native_scene_player.md` and its sealed checkpoint.
+
+Next compose the full `$C08F26` parent using this bank and actual remaining
+placement/gate/update/context children. Startup viewed/selected record identity
+and complete loading/record consumers remain pending; do not copy detached
+legacy record state around execution. The tenth renderer buffer, scene
+initializer, checksum production, sample output and native scheduling also
+remain open. Native main still does not call the graph; the playable reference
+remains emulated.
+
+Preceding batch: complete `$C090C2` startup clear and `$C090F2` enable leaves use
 live native queue bindings and a required caller-owned 52-word field view.
 `field_bytes.h` extracts a reusable, header-only byte-of-integer mechanism
 shared by command publication and startup clearing, with signed/unsigned

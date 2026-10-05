@@ -72,6 +72,13 @@ boundaries, with all RAM compared and no child contracts. Their live queue
 references share the independent `field_bytes.h` mechanism with command
 publication; all 73,728 queue comparisons still pass. Complete startup record
 and geometry ownership, including viewed-record identity, remains open.
+Native scene records now bind the actual aircraft flags/position/heading/
+inverse fields and indexed root level through one live data view. Complete
+mission reset, preparation, transient reset and start-position leaves share
+that bank; the existing observer is reused. Another 24,576 comparisons cover
+all 98 reachable boundaries, including the actual all-record/workspace clear
+block with preserved tails. This proves the specified leaves/block, with
+full bootstrap and remaining native record consumers still pending.
 Host services, sample playback, original data loading and
 runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_input_callback.md`,
@@ -84,6 +91,7 @@ runtime integration remain open; see `port/REUSABLE_COMPONENTS.md`,
 `analysis/routines/native_postflight_text.md`,
 `analysis/routines/native_post_input_display.md`,
 `analysis/routines/native_startup_ranges.md`,
+`analysis/routines/native_scene_player.md`,
 `analysis/routines/native_command_effects.md`,
 `analysis/routines/native_command_parent.md`, `analysis/routines/native_command_queue.md`,
 `analysis/routines/native_context_command_input.md`, `analysis/routines/native_view_command_input.md`,

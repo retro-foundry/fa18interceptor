@@ -1,0 +1,49 @@
+{
+  "status": "validated_native_player_leaves_and_shared_record_clear_full_bootstrap_pending",
+  "complete_entries": [
+    "C0840E",
+    "C09620",
+    "C095C0",
+    "C0910C",
+    "C0915A"
+  ],
+  "bounded_blocks": [
+    "C08F76..C08FAA all 16 control prefixes and workspace records; not complete C08F26"
+  ],
+  "cases": 24576,
+  "source_boundaries": 98,
+  "covered_boundaries": 98,
+  "native_cpu_dependency": false,
+  "child_contracts": [],
+  "actual_children": [
+    "C0840E complete real child of C09620",
+    "C0915A existing native observer reused"
+  ],
+  "comparison": "every Chip/Slow RAM byte, excluding only CPU ABI stack C7FD00..C7FF00 for C0840E/C09620; no exclusions for C095C0, C0910C/C0915A or C08F76 block; independently mapped named record owners and explicit tuple results",
+  "coverage_cases": "all byte-phase branches, full original record/workspace roundtrips, live shared aircraft flags/position/angle/inverse fields, preserve +A4..+1FF, all 16 records and all work records, initial/global-state variation",
+  "ownership_limit": "Record slots and mapped fields are shared ordinary objects; unported record positions require supplied original imports. Complete startup viewed/selected identity, placement/update/refresh children, asset loading and game-loop composition remain pending.",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "da509e3687ddc0fc5daa0777bb41f977eae4148e8f5f64a3ef5e0da43c7b5127",
+  "reports": [
+    "native scene C0840E: 4096 calls match full game RAM and shared record owners; no child contracts",
+    "native scene C09620: 4096 calls match full game RAM and shared record owners; no child contracts",
+    "native scene C095C0: 4096 calls match full game RAM and shared record owners; no child contracts",
+    "native scene C0910C: 4096 calls match full game RAM and shared record owners; no child contracts",
+    "native scene C0915A: 4096 calls match full game RAM and shared record owners; no child contracts",
+    "native scene C08F76: 4096 calls match full game RAM and shared record owners; no child contracts"
+  ],
+  "source_sha256": {
+    "port/native_scene_records.c": "8b46b8bebf7d143fb43d1dd4e21f764fcca2b6e22e54944f61376ca4f16e96b9",
+    "port/native_scene_records.h": "79a6ec9b4e67e25c850219c39b2661df8bf0f2ab9f994c78d9a43e707bdb4bfe",
+    "port/scene_player_setup.c": "10e6ddcfa08d6dbd6b5fe368889a6f934c91651723bdb58d67c103dfe017421d",
+    "port/scene_player_setup.h": "16810fb57fa7dad4816b21e520577b2a46865e5dda07c636fc75adb60deb3cc4",
+    "port/scene_player_contract_test.c": "b3165cf995c6cb22db00579c0ca1d9e5e2778c102086555a51530fa6e41b8cd4",
+    "port/context_command_controls.c": "94fd3576a278b1983883432eeb5f910aacedc8718025f78c429c1d98220ab5be",
+    "port/context_command_input.h": "667b6514bd64990cb8c572ce07b397c10fe5d8d88c3197790da5018f79268e0c",
+    "port/command_queue.c": "dd1f1f6a046939903098708e095ed64e784ab02a6bb2d3c0e18ae378e6468e25",
+    "port/command_queue.h": "1795592dc406ee313e5a8756d175b3119b35e5f1c50ae19659021da44def3955",
+    "port/field_bytes.h": "912b6012ded64bd77b0b910ffe3f1e88d544e5c5139a05cc0a186bc9e4593e3c",
+    "tools/recomp/check_native_scene_player.py": "026057f49ad2cedf7d9c39fc5491f996df68fceeaa4396dc583aae8a2163a159",
+    "tools/recomp/native_scene_player_oracle.c": "21bc0ccde6d7317d8771ff1c2cdeaf20178c6b3248608337b01861ec563efd63"
+  }
+}

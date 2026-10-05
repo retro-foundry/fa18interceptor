@@ -132,6 +132,13 @@ adopting these game rules. The complete original-instruction proof covers
 62 boundaries over 16,384 calls; see
 `../analysis/routines/native_post_input_display.md` for remaining dependencies.
 
+`native_scene_records` now adds a third concrete caller of `field_bytes`.
+Its views read/write the actual native command/geometry fields, with no
+duplicate packed owner to synchronize. Record counts, prefix clear extents
+and player setup remain F/A-18 policy; they belong in the adapter. Other
+ports can use the typed byte mechanism with their own layouts and owners.
+See `../analysis/routines/native_scene_player.md` for proof and limits.
+
 Planar rendering, projection and input modules remain candidates, with
 game-specific dimensions, tables or state still present. They should be
 extracted when another concrete caller establishes the common contract.
