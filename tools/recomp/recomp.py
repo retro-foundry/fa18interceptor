@@ -365,7 +365,8 @@ def main() -> None:
         for d in fn.insns.values():
             k = "undecodable" if d is None else d[4]
             kinds[k] = kinds.get(k, 0) + 1
-    report = {"functions": len(functions), "entries": len(best), "instructions": instructions,
+    report = {"functions": len(functions), "functions_per_file": args.functions_per_file,
+              "entries": len(best), "instructions": instructions,
               "seed_pcs": len(seeds), "seed_pcs_uncovered": sum(1 for s in seeds if s not in covered),
               "instruction_kinds": kinds}
     (args.out / "recomp_manifest.json").write_text(json.dumps(report, indent=2) + "\n")
@@ -406,6 +407,8 @@ def main() -> None:
         ["};", f"const int fa18_call_liveness_count = {len(rows)};", ""]))
     (args.out / "recomp_graph.json").write_text(json.dumps(graph, indent=1) + "\n")
     (args.out / "recomp_seeds.json").write_text(json.dumps(sorted(f"{s:06X}" for s in set(seeds))) + "\n")
+    from static_recomp import partition
+    partition(args.out)
     print(json.dumps(report))
 
 

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import re
 import subprocess
+import sys
 from collections import Counter
 from pathlib import Path
 
@@ -105,6 +106,8 @@ def main() -> int:
         replacements[Path(old)] = Path(new)
 
     check_duplicate_globals()
+    subprocess.run([sys.executable, "tools/recomp/static_recomp.py", "--check"],
+                   cwd=ROOT, check=True)
     original_sources = source_files(args.main)
     if args.romfree: original_sources.append(Path("port/romfree/profile.c"))
     sources = [replacements.get(source, source) for source in original_sources]

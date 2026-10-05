@@ -8,6 +8,7 @@ cmake_minimum_required(VERSION 3.16)
 project(fa18_recomp LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+find_package(Python3 REQUIRED COMPONENTS Interpreter)
 add_subdirectory(../amiga ${CMAKE_CURRENT_BINARY_DIR}/amiga-compat)
 
 include(FetchContent)
@@ -58,6 +59,11 @@ add_library(fa18_runtime STATIC
 target_include_directories(fa18_runtime PUBLIC . generated ../machine ../game ../game/glue ../os)
 target_compile_definitions(fa18_runtime PRIVATE _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_runtime PUBLIC fa18_musashi fa18_map_packet_core amiga_compat)
+add_custom_target(fa18_static_recomp_check
+    COMMAND ${Python3_EXECUTABLE} tools/recomp/static_recomp.py --check
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../..
+    VERBATIM)
+add_dependencies(fa18_runtime fa18_static_recomp_check)
 
 add_executable(fa18_recomp recomp_main.c)
 target_compile_definitions(fa18_recomp PRIVATE FA18_WITH_SDL SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)

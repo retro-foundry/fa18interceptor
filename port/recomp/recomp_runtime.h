@@ -95,7 +95,9 @@ extern int64_t fa18_cycle_origin, fa18_next_event;
 
 /* Before every instruction: hand back to the dispatcher when chipset work is
  * due (it resumes here after servicing) or the routine was invalidated. */
-#define FA18_EXEC(pc, op)                                                        \
+/* Both opcode-table reference execution and direct static helpers use the
+ * same fetch, event/abort boundary, register setup and cycle charge. */
+#define FA18_EXEC_USING(pc, op, operation)                                       \
     do {                                                                         \
         fa18_bus_finish(pc);                                                     \
         if (fa18_cycle_origin - GET_CYCLES() >= fa18_next_event || fa18_recomp_abort) { \
@@ -109,9 +111,12 @@ extern int64_t fa18_cycle_origin, fa18_next_event;
         REG_PPC = (pc);                                                          \
         REG_PC = (pc) + 2;                                                       \
         REG_IR = (op);                                                           \
-        m68ki_instruction_jump_table[(op)]();                                    \
+        operation;                                                              \
         USE_CYCLES(CYC_INSTRUCTION[(op)]);                                       \
     } while (0)
+
+#define FA18_EXEC(pc, op) \
+    FA18_EXEC_USING(pc, op, m68ki_instruction_jump_table[(op)]())
 
 #define FA18_CHECK(pc) ((void)0)
 

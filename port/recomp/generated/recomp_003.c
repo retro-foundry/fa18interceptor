@@ -2821,35 +2821,6 @@ L_C2F490:
     FA18_RETURN(0xC2F49A, 0x4E75); /* C2F49A: rts */
 }
 
-int fa18_fn_C2F49C(int entry) {
-    switch (entry) {
-    case 0: goto L_C2F49C;
-    case 1: goto L_C2F4B6;
-    case 2: goto L_C2F4D8;
-    case 3: goto L_C2F4DC;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C2F49C:
-    FA18_CHECK(0xC2F49C);
-    FA18_OP(0xC2F49C, 0x23FC, 0xC2F4A6); /* C2F49C: move.l  #$fffff, $c456e6.l */
-    FA18_OP(0xC2F4A6, 0x33FC, 0xC2F4AE); /* C2F4A6: move.w  #$d, $c45954.l */
-    FA18_OP(0xC2F4AE, 0x4A79, 0xC2F4B4); /* C2F4AE: tst.w   $c4566c.l */
-    FA18_BCC(0xC2F4B4, 0x6726, 0xC2F4B6, 0xC2F4DC, L_C2F4DC); /* C2F4B4: beq     $c2f4dc */
-L_C2F4B6:
-    FA18_CHECK(0xC2F4B6);
-    FA18_OP(0xC2F4B6, 0x303C, 0xC2F4BA); /* C2F4B6: move.w  #$0, D0 */
-    FA18_OP(0xC2F4BA, 0x323C, 0xC2F4BE); /* C2F4BA: move.w  #$0, D1 */
-    FA18_OP(0xC2F4BE, 0x343C, 0xC2F4C2); /* C2F4BE: move.w  #$8, D2 */
-    FA18_OP(0xC2F4C2, 0x363C, 0xC2F4C6); /* C2F4C2: move.w  #$9, D3 */
-    FA18_JUMP(0xC2F4C6, 0x6010, 0xC2F4D8, L_C2F4D8); /* C2F4C6: bra     $c2f4d8 */
-L_C2F4D8:
-    FA18_CHECK(0xC2F4D8);
-    FA18_CALL(0xC2F4D8, 0x6100, 0xC2F4DC, 504, 1); /* C2F4D8: bsr     $c2fa7e */
-L_C2F4DC:
-    FA18_CHECK(0xC2F4DC);
-    FA18_RETURN(0xC2F4DC, 0x4E75); /* C2F4DC: rts */
-}
-
 int fa18_fn_C2F558(int entry) {
     switch (entry) {
     case 0: goto L_C2F558;
@@ -19618,64 +19589,6 @@ L_C4FFB4:
     FA18_OP(0xC4FFBC, 0x2070, 0xC4FFC0); /* C4FFBC: movea.l (A0,D0.w), A0 */
     FA18_OP(0xC4FFC0, 0x33E8, 0xC4FFC8); /* C4FFC0: move.w  ($14,A0), $dff09c.l */
     FA18_RETURN(0xC4FFC8, 0x4E75); /* C4FFC8: rts */
-}
-
-int fa18_fn_C500D8(int entry) {
-    switch (entry) {
-    case 0: goto L_C500D8;
-    case 1: goto L_C500F8;
-    case 2: goto L_C50116;
-    case 3: goto L_C50120;
-    case 4: goto L_C50126;
-    case 5: goto L_C50134;
-    case 6: goto L_C5014C;
-    case 7: goto L_C50152;
-    default: return FA18_EXIT_DISPATCH;
-    }
-L_C500D8:
-    FA18_CHECK(0xC500D8);
-    FA18_OP(0xC500D8, 0x48E7, 0xC500DC); /* C500D8: movem.l D0-D3/A0-A4, -(A7) */
-    FA18_OP(0xC500DC, 0x33E9, 0xC500E4); /* C500DC: move.w  ($16,A1), $dff09c.l */
-    FA18_OP(0xC500E4, 0x2069, 0xC500E8); /* C500E4: movea.l ($0,A1), A0 */
-    FA18_OP(0xC500E8, 0x2469, 0xC500EC); /* C500E8: movea.l ($4,A1), A2 */
-    FA18_OP(0xC500EC, 0x266A, 0xC500F0); /* C500EC: movea.l ($0,A2), A3 */
-    FA18_OP(0xC500F0, 0xB7FC, 0xC500F6); /* C500F0: cmpa.l  #$0, A3 */
-    FA18_BCC(0xC500F6, 0x673C, 0xC500F8, 0xC50134, L_C50134); /* C500F6: beq     $c50134 */
-L_C500F8:
-    FA18_CHECK(0xC500F8);
-    FA18_OP(0xC500F8, 0x216B, 0xC500FE); /* C500F8: move.l  ($0,A3), ($0,A0) */
-    FA18_OP(0xC500FE, 0x202B, 0xC50102); /* C500FE: move.l  ($4,A3), D0 */
-    FA18_OP(0xC50102, 0xE280, 0xC50104); /* C50102: asr.l   #1, D0 */
-    FA18_OP(0xC50104, 0x3140, 0xC50108); /* C50104: move.w  D0, ($4,A0) */
-    FA18_OP(0xC50108, 0x33E9, 0xC50110); /* C50108: move.w  ($10,A1), $dff096.l */
-    FA18_CALL(0xC50110, 0x4EB9, 0xC50116, 599, 0); /* C50110: jsr     $c501e0.l */
-L_C50116:
-    FA18_CHECK(0xC50116);
-    FA18_OP(0xC50116, 0x0CAB, 0xC5011E); /* C50116: cmpi.l  #-$1, ($10,A3) */
-    FA18_BCC(0xC5011E, 0x6732, 0xC50120, 0xC50152, L_C50152); /* C5011E: beq     $c50152 */
-L_C50120:
-    FA18_CHECK(0xC50120);
-    FA18_OP(0xC50120, 0x53AB, 0xC50124); /* C50120: subq.l  #1, ($10,A3) */
-    FA18_BCC(0xC50124, 0x6A2C, 0xC50126, 0xC50152, L_C50152); /* C50124: bpl     $c50152 */
-L_C50126:
-    FA18_CHECK(0xC50126);
-    FA18_OP(0xC50126, 0x256B, 0xC5012C); /* C50126: move.l  ($20,A3), ($0,A2) */
-    FA18_OP(0xC5012C, 0x276B, 0xC50132); /* C5012C: move.l  ($14,A3), ($10,A3) */
-    FA18_JUMP(0xC50132, 0x601E, 0xC50152, L_C50152); /* C50132: bra     $c50152 */
-L_C50134:
-    FA18_CHECK(0xC50134);
-    FA18_OP(0xC50134, 0x317C, 0xC5013A); /* C50134: move.w  #$0, ($8,A0) */
-    FA18_OP(0xC5013A, 0x317C, 0xC50140); /* C5013A: move.w  #$7c, ($6,A0) */
-    FA18_OP(0xC50140, 0x33E9, 0xC50148); /* C50140: move.w  ($12,A1), $dff096.l */
-    FA18_OP(0xC50148, 0x303C, 0xC5014C); /* C50148: move.w  #$190, D0 */
-L_C5014C:
-    FA18_CHECK(0xC5014C);
-    FA18_OP(0xC5014C, 0x0440, 0xC50150); /* C5014C: subi.w  #$1, D0 */
-    FA18_BCC(0xC50150, 0x66FA, 0xC50152, 0xC5014C, L_C5014C); /* C50150: bne     $c5014c */
-L_C50152:
-    FA18_CHECK(0xC50152);
-    FA18_OP(0xC50152, 0x4CDF, 0xC50156); /* C50152: movem.l (A7)+, D0-D3/A0-A4 */
-    FA18_RETURN(0xC50156, 0x4E75); /* C50156: rts */
 }
 
 int fa18_fn_C50158(int entry) {

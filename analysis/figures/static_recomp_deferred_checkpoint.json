@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-05",
+  "status": "validated_static_recompilation_decompilation_deferred",
+  "translated_entries": 624,
+  "readable_translated_entries": 539,
+  "readable_source_only_entries": 75,
+  "deferred_static_entries": 85,
+  "original_adf_static_entries": 44,
+  "reference_wrapper_static_entries": 41,
+  "unique_static_source_boundaries": 2723,
+  "instructions_including_shared_ownership": 5563,
+  "direct_opcode_bindings": 854,
+  "instruction_helpers": 225,
+  "arithmetic_timing_helpers": 3,
+  "all_translation_bodies_preserved": true,
+  "tables_graph_and_liveness_preserved": true,
+  "readable_decompilation_complete": false,
+  "whole_original_call_graph_complete": false,
+  "cpu_and_chipset_required": true,
+  "source_sha256": {
+    "port/recomp/recomp_runtime.h": "afeb44285cde91513c0adfb093ba0c18d6c0f3c2736488f3eaa23bf219a07766",
+    "port/recomp/generated/recomp_static_deferred.c": "ed61d46ceabc27905e7e83ece68734924ea83596f7306486af433dd2d73b7adc",
+    "port/recomp/generated/recomp_deferred.json": "02ff7fef60f3e7a78eed4c45eb9d54e5a954cf876430e870b97f8b845d18548e",
+    "port/recomp/generated/recomp_table.c": "c3e253e219f8cc9cd03b7e803df1a31ba1dbc8603c24abb7e8d34820cd7233f5",
+    "port/recomp/generated/recomp_liveness.c": "833b7a0936f39ccdbf3e634d925b62f5cdbdd5ab746ba72c2a558b39840a6f94",
+    "port/recomp/generated/recomp_graph.json": "a1ed428dbd61548d2fca8cadbc7034ef3cf68f5a9ab5e5945c55eb934dd9d0c1",
+    "tools/recomp/static_recomp.py": "502d93abc54cb08ee2d82244ce47b796972b58c2d73a5b93e335b3e04f1bc4cd",
+    "tools/recomp/check_static_recomp.py": "99fcf9fa58cf7b98ba93bcb4413e3640301d330be53e05d0edddd49cf344c6ad"
+  },
+  "original_table_binding_comparison": {
+    "passed": true,
+    "opcodes": 854
+  },
+  "complete_recording_reference_comparison": {
+    "opcode_bindings": 854,
+    "static_entries": 85,
+    "recordings": [
+      {
+        "recording": "demo01",
+        "diagnostics": [
+          {
+            "frames": 20833,
+            "recomp": 1,
+            "cpu_cycles": 2960410986,
+            "generated_cycles": 2267609094,
+            "generated_share": 0.766,
+            "dispatches": 8366721,
+            "interpreted_game_instructions": 24546536,
+            "code_writes": 0,
+            "disabled_functions": 0,
+            "blits": 555658,
+            "line_blits": 373770,
+            "nonblack_pixels": 55917,
+            "pc": "FE5894",
+            "iterations": 4892
+          }
+        ],
+        "ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103",
+        "rgb444_sha256": "729f2ac3adae40e10aa4b87a31a40faa9c11836de16b9c3d1610e49215e37d07",
+        "rgb444_bytes": 3413278720
+      },
+      {
+        "recording": "qual_carrier_success",
+        "diagnostics": [
+          {
+            "frames": 12353,
+            "recomp": 1,
+            "cpu_cycles": 1755386026,
+            "generated_cycles": 1248992064,
+            "generated_share": 0.7115,
+            "dispatches": 5312832,
+            "interpreted_game_instructions": 13794504,
+            "code_writes": 0,
+            "disabled_functions": 0,
+            "blits": 261977,
+            "line_blits": 194805,
+            "nonblack_pixels": 55894,
+            "pc": "FE5894",
+            "iterations": 8038
+          }
+        ],
+        "ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30",
+        "rgb444_sha256": "8a8978bd6943d4cc8af26d8b4f7fda48dbf291cd3f1beca514c6f2317bfc0e0b",
+        "rgb444_bytes": 2023915520
+      },
+      {
+        "recording": "qual_fail_crashes",
+        "diagnostics": [
+          {
+            "frames": 3050,
+            "recomp": 1,
+            "cpu_cycles": 433411104,
+            "generated_cycles": 257841782,
+            "generated_share": 0.5949,
+            "dispatches": 1366409,
+            "interpreted_game_instructions": 3247503,
+            "code_writes": 0,
+            "disabled_functions": 0,
+            "blits": 41342,
+            "line_blits": 33561,
+            "nonblack_pixels": 5192,
+            "pc": "FE5878",
+            "iterations": 3082
+          }
+        ],
+        "ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69",
+        "rgb444_sha256": "9c64d09e6b5155733ab59ec9398174c2511aa747263637757be12f727a95884d",
+        "rgb444_bytes": 499712000
+      }
+    ]
+  },
+  "registered_port_gate": {
+    "entries": 614,
+    "shadow_matches": 571427,
+    "sandbox_matches": 458087,
+    "mismatches": 0,
+    "all_final_ram_and_cpu_seals_exact": true,
+    "poison_frames_identical": true,
+    "cold_hardware_and_incomplete_classifications_retained": true
+  },
+  "gnu_and_msvc_builds_passed": true,
+  "msvc_ctests_passed": 11,
+  "native_build_check_files": 406,
+  "romfree_gnu_and_msvc": {
+    "save_reload_78_bytes": true,
+    "active_free_flight": true,
+    "four_current_missions_active": true,
+    "mission_menu_second_mission_restart": true,
+    "rom_reads_fetches_and_faults": 0,
+    "adf_unchanged": true
+  },
+  "combined_source_dma_oracle": {
+    "passed": true,
+    "instruction_boundaries": 30239,
+    "fixtures": 967648,
+    "registers_sr_pc_cycles_and_all_ram_exact": true
+  },
+  "inherited_combined_readable_timing_debt": {
+    "first_frame": 424,
+    "pixels": 34144
+  },
+  "logs": [
+    "build/recomp/static_reference_gate.log",
+    "build/recomp/static_ports_gate.log",
+    "build/recomp/static_step_gate.log",
+    "build/recomp/static_romfree_gnu_gate.log",
+    "build/recomp/static_romfree_msvc_gate.log",
+    "build/recomp/static_ctest.log"
+  ]
+}

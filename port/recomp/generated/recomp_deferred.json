@@ -1,0 +1,2920 @@
+{
+  "schema": 1,
+  "translated_entries": 624,
+  "registered_readable_translated_entries": 539,
+  "registered_readable_source_only_entries": 75,
+  "static_recompiled_entries": 85,
+  "original_adf_static_entries": 44,
+  "reference_wrapper_static_entries": 41,
+  "readable_decompilation_complete": false,
+  "whole_original_call_graph_complete": false,
+  "cpu_and_chipset_required": true,
+  "instruction_helper_authority": "tools/musashi/m68kops.c",
+  "instruction_helpers_sha256": "17889a77bc3d9f47913ff4dc8b7010b3d81df4e0ec8777b3e31ede689264323d",
+  "opcodes": {
+    "0x0029": "m68k_op_ori_8_di",
+    "0x0069": "m68k_op_ori_16_di",
+    "0x006E": "m68k_op_ori_16_di",
+    "0x0200": "m68k_op_andi_8_d",
+    "0x0201": "m68k_op_andi_8_d",
+    "0x0202": "m68k_op_andi_8_d",
+    "0x0204": "m68k_op_andi_8_d",
+    "0x0206": "m68k_op_andi_8_d",
+    "0x0207": "m68k_op_andi_8_d",
+    "0x0229": "m68k_op_andi_8_di",
+    "0x0240": "m68k_op_andi_16_d",
+    "0x0241": "m68k_op_andi_16_d",
+    "0x0242": "m68k_op_andi_16_d",
+    "0x0244": "m68k_op_andi_16_d",
+    "0x0246": "m68k_op_andi_16_d",
+    "0x0247": "m68k_op_andi_16_d",
+    "0x0269": "m68k_op_andi_16_di",
+    "0x0283": "m68k_op_andi_32_d",
+    "0x0285": "m68k_op_andi_32_d",
+    "0x0440": "m68k_op_subi_16_d",
+    "0x0480": "m68k_op_subi_32_d",
+    "0x0640": "m68k_op_addi_16_d",
+    "0x0679": "m68k_op_addi_16_al",
+    "0x0684": "m68k_op_addi_32_d",
+    "0x0800": "m68k_op_btst_32_s_d",
+    "0x0801": "m68k_op_btst_32_s_d",
+    "0x0802": "m68k_op_btst_32_s_d",
+    "0x0806": "m68k_op_btst_32_s_d",
+    "0x0807": "m68k_op_btst_32_s_d",
+    "0x0828": "m68k_op_btst_8_s_di",
+    "0x0829": "m68k_op_btst_8_s_di",
+    "0x082E": "m68k_op_btst_8_s_di",
+    "0x0831": "m68k_op_btst_8_s_ix",
+    "0x0839": "m68k_op_btst_8_s_al",
+    "0x0869": "m68k_op_bchg_8_s_di",
+    "0x08C7": "m68k_op_bset_32_s_d",
+    "0x0C00": "m68k_op_cmpi_8_d",
+    "0x0C01": "m68k_op_cmpi_8_d",
+    "0x0C02": "m68k_op_cmpi_8_d",
+    "0x0C04": "m68k_op_cmpi_8_d",
+    "0x0C06": "m68k_op_cmpi_8_d",
+    "0x0C28": "m68k_op_cmpi_8_di",
+    "0x0C29": "m68k_op_cmpi_8_di",
+    "0x0C39": "m68k_op_cmpi_8_al",
+    "0x0C40": "m68k_op_cmpi_16_d",
+    "0x0C41": "m68k_op_cmpi_16_d",
+    "0x0C43": "m68k_op_cmpi_16_d",
+    "0x0C44": "m68k_op_cmpi_16_d",
+    "0x0C47": "m68k_op_cmpi_16_d",
+    "0x0C69": "m68k_op_cmpi_16_di",
+    "0x0C6E": "m68k_op_cmpi_16_di",
+    "0x0C79": "m68k_op_cmpi_16_al",
+    "0x0C80": "m68k_op_cmpi_32_d",
+    "0x0C81": "m68k_op_cmpi_32_d",
+    "0x0C82": "m68k_op_cmpi_32_d",
+    "0x0C83": "m68k_op_cmpi_32_d",
+    "0x0C87": "m68k_op_cmpi_32_d",
+    "0x0C91": "m68k_op_cmpi_32_ai",
+    "0x0CAB": "m68k_op_cmpi_32_di",
+    "0x0CB9": "m68k_op_cmpi_32_al",
+    "0x1007": "m68k_op_move_8_d_d",
+    "0x1019": "m68k_op_move_8_d_pi",
+    "0x1028": "m68k_op_move_8_d_di",
+    "0x1029": "m68k_op_move_8_d_di",
+    "0x1039": "m68k_op_move_8_d_al",
+    "0x116E": "m68k_op_move_8_di_di",
+    "0x1179": "m68k_op_move_8_di_al",
+    "0x1219": "m68k_op_move_8_d_pi",
+    "0x1229": "m68k_op_move_8_d_di",
+    "0x1239": "m68k_op_move_8_d_al",
+    "0x1341": "m68k_op_move_8_di_d",
+    "0x137C": "m68k_op_move_8_di_i",
+    "0x13C0": "m68k_op_move_8_al_d",
+    "0x13C2": "m68k_op_move_8_al_d",
+    "0x13C4": "m68k_op_move_8_al_d",
+    "0x13C7": "m68k_op_move_8_al_d",
+    "0x13E8": "m68k_op_move_8_al_di",
+    "0x13FC": "m68k_op_move_8_al_i",
+    "0x1429": "m68k_op_move_8_d_di",
+    "0x143C": "m68k_op_move_8_d_i",
+    "0x1619": "m68k_op_move_8_d_pi",
+    "0x1829": "m68k_op_move_8_d_di",
+    "0x182E": "m68k_op_move_8_d_di",
+    "0x1C19": "m68k_op_move_8_d_pi",
+    "0x1C2E": "m68k_op_move_8_d_di",
+    "0x1D40": "m68k_op_move_8_di_d",
+    "0x1D46": "m68k_op_move_8_di_d",
+    "0x1E06": "m68k_op_move_8_d_d",
+    "0x1E29": "m68k_op_move_8_d_di",
+    "0x1E39": "m68k_op_move_8_d_al",
+    "0x2001": "m68k_op_move_32_d_d",
+    "0x2002": "m68k_op_move_32_d_d",
+    "0x2003": "m68k_op_move_32_d_d",
+    "0x2005": "m68k_op_move_32_d_d",
+    "0x202B": "m68k_op_move_32_d_di",
+    "0x202E": "m68k_op_move_32_d_di",
+    "0x202F": "m68k_op_move_32_d_di",
+    "0x2039": "m68k_op_move_32_d_al",
+    "0x2040": "m68k_op_movea_32_d",
+    "0x2059": "m68k_op_movea_32_pi",
+    "0x205F": "m68k_op_movea_32_pi",
+    "0x2069": "m68k_op_movea_32_di",
+    "0x206F": "m68k_op_movea_32_di",
+    "0x2070": "m68k_op_movea_32_ix",
+    "0x2079": "m68k_op_movea_32_al",
+    "0x2087": "m68k_op_move_32_ai_d",
+    "0x20DC": "m68k_op_move_32_pi_pi",
+    "0x2144": "m68k_op_move_32_di_d",
+    "0x2147": "m68k_op_move_32_di_d",
+    "0x216B": "m68k_op_move_32_di_di",
+    "0x2202": "m68k_op_move_32_d_d",
+    "0x2203": "m68k_op_move_32_d_d",
+    "0x2204": "m68k_op_move_32_d_d",
+    "0x2206": "m68k_op_move_32_d_d",
+    "0x2228": "m68k_op_move_32_d_di",
+    "0x222F": "m68k_op_move_32_d_di",
+    "0x2239": "m68k_op_move_32_d_al",
+    "0x223C": "m68k_op_move_32_d_i",
+    "0x2258": "m68k_op_movea_32_pi",
+    "0x225A": "m68k_op_movea_32_pi",
+    "0x225D": "m68k_op_movea_32_pi",
+    "0x226F": "m68k_op_movea_32_di",
+    "0x2344": "m68k_op_move_32_di_d",
+    "0x23C0": "m68k_op_move_32_al_d",
+    "0x23C9": "m68k_op_move_32_al_a",
+    "0x23CA": "m68k_op_move_32_al_a",
+    "0x23D0": "m68k_op_move_32_al_ai",
+    "0x23D2": "m68k_op_move_32_al_ai",
+    "0x23D9": "m68k_op_move_32_al_pi",
+    "0x23FC": "m68k_op_move_32_al_i",
+    "0x2403": "m68k_op_move_32_d_d",
+    "0x2407": "m68k_op_move_32_d_d",
+    "0x242E": "m68k_op_move_32_d_di",
+    "0x243C": "m68k_op_move_32_d_i",
+    "0x2452": "m68k_op_movea_32_ai",
+    "0x2459": "m68k_op_movea_32_pi",
+    "0x245D": "m68k_op_movea_32_pi",
+    "0x2469": "m68k_op_movea_32_di",
+    "0x246E": "m68k_op_movea_32_di",
+    "0x2479": "m68k_op_movea_32_al",
+    "0x256B": "m68k_op_move_32_di_di",
+    "0x2600": "m68k_op_move_32_d_d",
+    "0x2601": "m68k_op_move_32_d_d",
+    "0x2602": "m68k_op_move_32_d_d",
+    "0x2639": "m68k_op_move_32_d_al",
+    "0x266A": "m68k_op_movea_32_di",
+    "0x266E": "m68k_op_movea_32_di",
+    "0x276B": "m68k_op_move_32_di_di",
+    "0x2802": "m68k_op_move_32_d_d",
+    "0x2829": "m68k_op_move_32_d_di",
+    "0x2839": "m68k_op_move_32_d_al",
+    "0x2A02": "m68k_op_move_32_d_d",
+    "0x2A03": "m68k_op_move_32_d_d",
+    "0x2A5F": "m68k_op_movea_32_pi",
+    "0x2A79": "m68k_op_movea_32_al",
+    "0x2C03": "m68k_op_move_32_d_d",
+    "0x2C04": "m68k_op_move_32_d_d",
+    "0x2C29": "m68k_op_move_32_d_di",
+    "0x2C5F": "m68k_op_movea_32_pi",
+    "0x2C79": "m68k_op_movea_32_al",
+    "0x2D48": "m68k_op_move_32_di_a",
+    "0x2D4B": "m68k_op_move_32_di_a",
+    "0x2D7C": "m68k_op_move_32_di_i",
+    "0x2E01": "m68k_op_move_32_d_d",
+    "0x2E04": "m68k_op_move_32_d_d",
+    "0x2E05": "m68k_op_move_32_d_d",
+    "0x2E06": "m68k_op_move_32_d_d",
+    "0x2F00": "m68k_op_move_32_pd_d",
+    "0x2F08": "m68k_op_move_32_pd_a",
+    "0x2F0E": "m68k_op_move_32_pd_a",
+    "0x2F39": "m68k_op_move_32_pd_al",
+    "0x2F4D": "m68k_op_move_32_di_a",
+    "0x3001": "m68k_op_move_16_d_d",
+    "0x3010": "m68k_op_move_16_d_ai",
+    "0x3012": "m68k_op_move_16_d_ai",
+    "0x3019": "m68k_op_move_16_d_pi",
+    "0x301A": "m68k_op_move_16_d_pi",
+    "0x301D": "m68k_op_move_16_d_pi",
+    "0x3028": "m68k_op_move_16_d_di",
+    "0x3029": "m68k_op_move_16_d_di",
+    "0x302E": "m68k_op_move_16_d_di",
+    "0x302F": "m68k_op_move_16_d_di",
+    "0x3039": "m68k_op_move_16_d_al",
+    "0x303C": "m68k_op_move_16_d_i",
+    "0x3083": "m68k_op_move_16_ai_d",
+    "0x3094": "m68k_op_move_16_ai_ai",
+    "0x3099": "m68k_op_move_16_ai_pi",
+    "0x30C3": "m68k_op_move_16_pi_d",
+    "0x30C4": "m68k_op_move_16_pi_d",
+    "0x30C7": "m68k_op_move_16_pi_d",
+    "0x30CC": "m68k_op_move_16_pi_a",
+    "0x30D4": "m68k_op_move_16_pi_ai",
+    "0x3140": "m68k_op_move_16_di_d",
+    "0x3141": "m68k_op_move_16_di_d",
+    "0x317C": "m68k_op_move_16_di_i",
+    "0x3180": "m68k_op_move_16_ix_d",
+    "0x3200": "m68k_op_move_16_d_d",
+    "0x3207": "m68k_op_move_16_d_d",
+    "0x3213": "m68k_op_move_16_d_ai",
+    "0x3228": "m68k_op_move_16_d_di",
+    "0x3229": "m68k_op_move_16_d_di",
+    "0x3239": "m68k_op_move_16_d_al",
+    "0x323C": "m68k_op_move_16_d_i",
+    "0x32FC": "m68k_op_move_16_pi_i",
+    "0x3340": "m68k_op_move_16_di_d",
+    "0x3343": "m68k_op_move_16_di_d",
+    "0x337C": "m68k_op_move_16_di_i",
+    "0x33C0": "m68k_op_move_16_al_d",
+    "0x33C1": "m68k_op_move_16_al_d",
+    "0x33C7": "m68k_op_move_16_al_d",
+    "0x33E8": "m68k_op_move_16_al_di",
+    "0x33E9": "m68k_op_move_16_al_di",
+    "0x33FC": "m68k_op_move_16_al_i",
+    "0x3400": "m68k_op_move_16_d_d",
+    "0x3401": "m68k_op_move_16_d_d",
+    "0x3404": "m68k_op_move_16_d_d",
+    "0x3407": "m68k_op_move_16_d_d",
+    "0x340C": "m68k_op_move_16_d_a",
+    "0x3419": "m68k_op_move_16_d_pi",
+    "0x3428": "m68k_op_move_16_d_di",
+    "0x3429": "m68k_op_move_16_d_di",
+    "0x342B": "m68k_op_move_16_d_di",
+    "0x342E": "m68k_op_move_16_d_di",
+    "0x3439": "m68k_op_move_16_d_al",
+    "0x343C": "m68k_op_move_16_d_i",
+    "0x3540": "m68k_op_move_16_di_d",
+    "0x3602": "m68k_op_move_16_d_d",
+    "0x3604": "m68k_op_move_16_d_d",
+    "0x3606": "m68k_op_move_16_d_d",
+    "0x3607": "m68k_op_move_16_d_d",
+    "0x360D": "m68k_op_move_16_d_a",
+    "0x361F": "m68k_op_move_16_d_pi",
+    "0x3629": "m68k_op_move_16_d_di",
+    "0x3630": "m68k_op_move_16_d_ix",
+    "0x3639": "m68k_op_move_16_d_al",
+    "0x363C": "m68k_op_move_16_d_i",
+    "0x3647": "m68k_op_movea_16_d",
+    "0x3681": "m68k_op_move_16_ai_d",
+    "0x36C4": "m68k_op_move_16_pi_d",
+    "0x36C7": "m68k_op_move_16_pi_d",
+    "0x3741": "m68k_op_move_16_di_d",
+    "0x3819": "m68k_op_move_16_d_pi",
+    "0x3828": "m68k_op_move_16_d_di",
+    "0x3829": "m68k_op_move_16_d_di",
+    "0x3839": "m68k_op_move_16_d_al",
+    "0x3847": "m68k_op_movea_16_d",
+    "0x3A01": "m68k_op_move_16_d_d",
+    "0x3A02": "m68k_op_move_16_d_d",
+    "0x3A19": "m68k_op_move_16_d_pi",
+    "0x3A39": "m68k_op_move_16_d_al",
+    "0x3A3C": "m68k_op_move_16_d_i",
+    "0x3A42": "m68k_op_movea_16_d",
+    "0x3A43": "m68k_op_movea_16_d",
+    "0x3C02": "m68k_op_move_16_d_d",
+    "0x3C03": "m68k_op_move_16_d_d",
+    "0x3C07": "m68k_op_move_16_d_d",
+    "0x3C1F": "m68k_op_move_16_d_pi",
+    "0x3C29": "m68k_op_move_16_d_di",
+    "0x3C39": "m68k_op_move_16_d_al",
+    "0x3D40": "m68k_op_move_16_di_d",
+    "0x3D41": "m68k_op_move_16_di_d",
+    "0x3D42": "m68k_op_move_16_di_d",
+    "0x3D43": "m68k_op_move_16_di_d",
+    "0x3D47": "m68k_op_move_16_di_d",
+    "0x3D59": "m68k_op_move_16_di_pi",
+    "0x3D7C": "m68k_op_move_16_di_i",
+    "0x3E00": "m68k_op_move_16_d_d",
+    "0x3E04": "m68k_op_move_16_d_d",
+    "0x3E06": "m68k_op_move_16_d_d",
+    "0x3E18": "m68k_op_move_16_d_pi",
+    "0x3E1A": "m68k_op_move_16_d_pi",
+    "0x3E1D": "m68k_op_move_16_d_pi",
+    "0x3E2E": "m68k_op_move_16_d_di",
+    "0x3E39": "m68k_op_move_16_d_al",
+    "0x3E3C": "m68k_op_move_16_d_i",
+    "0x3F03": "m68k_op_move_16_pd_d",
+    "0x3F06": "m68k_op_move_16_pd_d",
+    "0x3F40": "m68k_op_move_16_di_d",
+    "0x41EE": "m68k_op_lea_32_di",
+    "0x41F9": "m68k_op_lea_32_al",
+    "0x41FA": "m68k_op_lea_32_pcdi",
+    "0x4229": "m68k_op_clr_8_di",
+    "0x4239": "m68k_op_clr_8_al",
+    "0x4242": "m68k_op_clr_16_d",
+    "0x4243": "m68k_op_clr_16_d",
+    "0x4269": "m68k_op_clr_16_di",
+    "0x426E": "m68k_op_clr_16_di",
+    "0x4279": "m68k_op_clr_16_al",
+    "0x42A7": "m68k_op_clr_32_pd",
+    "0x42AE": "m68k_op_clr_32_di",
+    "0x42B9": "m68k_op_clr_32_al",
+    "0x43F3": "m68k_op_lea_32_ix",
+    "0x43F9": "m68k_op_lea_32_al",
+    "0x4440": "m68k_op_neg_16_d",
+    "0x4441": "m68k_op_neg_16_d",
+    "0x4442": "m68k_op_neg_16_d",
+    "0x4443": "m68k_op_neg_16_d",
+    "0x4444": "m68k_op_neg_16_d",
+    "0x4447": "m68k_op_neg_16_d",
+    "0x4480": "m68k_op_neg_32_d",
+    "0x4481": "m68k_op_neg_32_d",
+    "0x4482": "m68k_op_neg_32_d",
+    "0x4483": "m68k_op_neg_32_d",
+    "0x4484": "m68k_op_neg_32_d",
+    "0x4485": "m68k_op_neg_32_d",
+    "0x4486": "m68k_op_neg_32_d",
+    "0x4487": "m68k_op_neg_32_d",
+    "0x45D4": "m68k_op_lea_32_ai",
+    "0x45F3": "m68k_op_lea_32_ix",
+    "0x45F9": "m68k_op_lea_32_al",
+    "0x47E9": "m68k_op_lea_32_di",
+    "0x47F9": "m68k_op_lea_32_al",
+    "0x4843": "m68k_op_swap_32",
+    "0x4879": "m68k_op_pea_32_al",
+    "0x4880": "m68k_op_ext_16",
+    "0x4881": "m68k_op_ext_16",
+    "0x4883": "m68k_op_ext_16",
+    "0x4887": "m68k_op_ext_16",
+    "0x4892": "m68k_op_movem_16_re_ai",
+    "0x4893": "m68k_op_movem_16_re_ai",
+    "0x48A7": "m68k_op_movem_16_re_pd",
+    "0x48A9": "m68k_op_movem_16_re_di",
+    "0x48AE": "m68k_op_movem_16_re_di",
+    "0x48B9": "m68k_op_movem_16_re_al",
+    "0x48C0": "m68k_op_ext_32",
+    "0x48C1": "m68k_op_ext_32",
+    "0x48C2": "m68k_op_ext_32",
+    "0x48C3": "m68k_op_ext_32",
+    "0x48C4": "m68k_op_ext_32",
+    "0x48C5": "m68k_op_ext_32",
+    "0x48C6": "m68k_op_ext_32",
+    "0x48C7": "m68k_op_ext_32",
+    "0x48D0": "m68k_op_movem_32_re_ai",
+    "0x48E7": "m68k_op_movem_32_re_pd",
+    "0x48EE": "m68k_op_movem_32_re_di",
+    "0x48F9": "m68k_op_movem_32_re_al",
+    "0x49D2": "m68k_op_lea_32_ai",
+    "0x49F3": "m68k_op_lea_32_ix",
+    "0x49F9": "m68k_op_lea_32_al",
+    "0x4A00": "m68k_op_tst_8_d",
+    "0x4A29": "m68k_op_tst_8_di",
+    "0x4A39": "m68k_op_tst_8_al",
+    "0x4A40": "m68k_op_tst_16_d",
+    "0x4A41": "m68k_op_tst_16_d",
+    "0x4A42": "m68k_op_tst_16_d",
+    "0x4A43": "m68k_op_tst_16_d",
+    "0x4A50": "m68k_op_tst_16_ai",
+    "0x4A51": "m68k_op_tst_16_ai",
+    "0x4A54": "m68k_op_tst_16_ai",
+    "0x4A59": "m68k_op_tst_16_pi",
+    "0x4A5A": "m68k_op_tst_16_pi",
+    "0x4A69": "m68k_op_tst_16_di",
+    "0x4A6E": "m68k_op_tst_16_di",
+    "0x4A79": "m68k_op_tst_16_al",
+    "0x4A82": "m68k_op_tst_32_d",
+    "0x4AA9": "m68k_op_tst_32_di",
+    "0x4BD3": "m68k_op_lea_32_ai",
+    "0x4BFA": "m68k_op_lea_32_pcdi",
+    "0x4C94": "m68k_op_movem_16_er_ai",
+    "0x4C98": "m68k_op_movem_16_er_pi",
+    "0x4C99": "m68k_op_movem_16_er_pi",
+    "0x4C9D": "m68k_op_movem_16_er_pi",
+    "0x4C9F": "m68k_op_movem_16_er_pi",
+    "0x4CA9": "m68k_op_movem_16_er_di",
+    "0x4CAB": "m68k_op_movem_16_er_di",
+    "0x4CB9": "m68k_op_movem_16_er_al",
+    "0x4CD0": "m68k_op_movem_32_er_ai",
+    "0x4CDF": "m68k_op_movem_32_er_pi",
+    "0x4CE8": "m68k_op_movem_32_er_di",
+    "0x4CEE": "m68k_op_movem_32_er_di",
+    "0x4CEF": "m68k_op_movem_32_er_di",
+    "0x4CF1": "m68k_op_movem_32_er_ix",
+    "0x4CF9": "m68k_op_movem_32_er_al",
+    "0x4E56": "m68k_op_link_16",
+    "0x4E5E": "m68k_op_unlk_32",
+    "0x4E71": "m68k_op_nop",
+    "0x4E75": "m68k_op_rts_32",
+    "0x4E90": "m68k_op_jsr_32_ai",
+    "0x4E92": "m68k_op_jsr_32_ai",
+    "0x4EAE": "m68k_op_jsr_32_di",
+    "0x4EB9": "m68k_op_jsr_32_al",
+    "0x4ED0": "m68k_op_jmp_32_ai",
+    "0x4EF9": "m68k_op_jmp_32_al",
+    "0x4EFB": "m68k_op_jmp_32_pcix",
+    "0x4FEF": "m68k_op_lea_32_di",
+    "0x5045": "m68k_op_addq_16_d",
+    "0x5140": "m68k_op_subq_16_d",
+    "0x518F": "m68k_op_subq_32_a",
+    "0x51C8": "m68k_op_dbf_16",
+    "0x5239": "m68k_op_addq_8_al",
+    "0x5240": "m68k_op_addq_16_d",
+    "0x5242": "m68k_op_addq_16_d",
+    "0x5249": "m68k_op_addq_16_a",
+    "0x526E": "m68k_op_addq_16_di",
+    "0x52AE": "m68k_op_addq_32_di",
+    "0x5300": "m68k_op_subq_8_d",
+    "0x5328": "m68k_op_subq_8_di",
+    "0x5340": "m68k_op_subq_16_d",
+    "0x5341": "m68k_op_subq_16_d",
+    "0x5343": "m68k_op_subq_16_d",
+    "0x5350": "m68k_op_subq_16_ai",
+    "0x5369": "m68k_op_subq_16_di",
+    "0x536E": "m68k_op_subq_16_di",
+    "0x53AB": "m68k_op_subq_32_di",
+    "0x5441": "m68k_op_addq_16_d",
+    "0x544A": "m68k_op_addq_16_a",
+    "0x5500": "m68k_op_subq_8_d",
+    "0x5540": "m68k_op_subq_16_d",
+    "0x5849": "m68k_op_addq_16_a",
+    "0x584A": "m68k_op_addq_16_a",
+    "0x588F": "m68k_op_addq_32_a",
+    "0x58B9": "m68k_op_addq_32_al",
+    "0x5940": "m68k_op_subq_16_d",
+    "0x5C4B": "m68k_op_addq_16_a",
+    "0x5CB9": "m68k_op_addq_32_al",
+    "0x5D4B": "m68k_op_subq_16_a",
+    "0x5F40": "m68k_op_subq_16_d",
+    "0x6000": "m68k_op_bra_16",
+    "0x6002": "m68k_op_bra_8",
+    "0x6004": "m68k_op_bra_8",
+    "0x6006": "m68k_op_bra_8",
+    "0x6008": "m68k_op_bra_8",
+    "0x600A": "m68k_op_bra_8",
+    "0x600C": "m68k_op_bra_8",
+    "0x600E": "m68k_op_bra_8",
+    "0x6010": "m68k_op_bra_8",
+    "0x6016": "m68k_op_bra_8",
+    "0x6018": "m68k_op_bra_8",
+    "0x601A": "m68k_op_bra_8",
+    "0x601C": "m68k_op_bra_8",
+    "0x601E": "m68k_op_bra_8",
+    "0x6022": "m68k_op_bra_8",
+    "0x6024": "m68k_op_bra_8",
+    "0x602A": "m68k_op_bra_8",
+    "0x602E": "m68k_op_bra_8",
+    "0x6030": "m68k_op_bra_8",
+    "0x6034": "m68k_op_bra_8",
+    "0x6038": "m68k_op_bra_8",
+    "0x6040": "m68k_op_bra_8",
+    "0x6048": "m68k_op_bra_8",
+    "0x6052": "m68k_op_bra_8",
+    "0x6056": "m68k_op_bra_8",
+    "0x605A": "m68k_op_bra_8",
+    "0x605E": "m68k_op_bra_8",
+    "0x607E": "m68k_op_bra_8",
+    "0x6088": "m68k_op_bra_8",
+    "0x60BC": "m68k_op_bra_8",
+    "0x60C4": "m68k_op_bra_8",
+    "0x60CA": "m68k_op_bra_8",
+    "0x60DA": "m68k_op_bra_8",
+    "0x60E2": "m68k_op_bra_8",
+    "0x60E6": "m68k_op_bra_8",
+    "0x60EC": "m68k_op_bra_8",
+    "0x60EE": "m68k_op_bra_8",
+    "0x60F0": "m68k_op_bra_8",
+    "0x60F2": "m68k_op_bra_8",
+    "0x6100": "m68k_op_bsr_16",
+    "0x6600": "m68k_op_bne_16",
+    "0x6602": "m68k_op_bne_8",
+    "0x6604": "m68k_op_bne_8",
+    "0x6606": "m68k_op_bne_8",
+    "0x6608": "m68k_op_bne_8",
+    "0x660A": "m68k_op_bne_8",
+    "0x660C": "m68k_op_bne_8",
+    "0x660E": "m68k_op_bne_8",
+    "0x6612": "m68k_op_bne_8",
+    "0x6614": "m68k_op_bne_8",
+    "0x6616": "m68k_op_bne_8",
+    "0x6618": "m68k_op_bne_8",
+    "0x661E": "m68k_op_bne_8",
+    "0x6620": "m68k_op_bne_8",
+    "0x6622": "m68k_op_bne_8",
+    "0x6624": "m68k_op_bne_8",
+    "0x6628": "m68k_op_bne_8",
+    "0x662A": "m68k_op_bne_8",
+    "0x662C": "m68k_op_bne_8",
+    "0x6630": "m68k_op_bne_8",
+    "0x6634": "m68k_op_bne_8",
+    "0x6638": "m68k_op_bne_8",
+    "0x663E": "m68k_op_bne_8",
+    "0x6640": "m68k_op_bne_8",
+    "0x6642": "m68k_op_bne_8",
+    "0x6644": "m68k_op_bne_8",
+    "0x6646": "m68k_op_bne_8",
+    "0x6652": "m68k_op_bne_8",
+    "0x665A": "m68k_op_bne_8",
+    "0x666A": "m68k_op_bne_8",
+    "0x66CC": "m68k_op_bne_8",
+    "0x66DC": "m68k_op_bne_8",
+    "0x66E2": "m68k_op_bne_8",
+    "0x66EE": "m68k_op_bne_8",
+    "0x66FA": "m68k_op_bne_8",
+    "0x6700": "m68k_op_beq_16",
+    "0x6702": "m68k_op_beq_8",
+    "0x6704": "m68k_op_beq_8",
+    "0x6706": "m68k_op_beq_8",
+    "0x6708": "m68k_op_beq_8",
+    "0x670A": "m68k_op_beq_8",
+    "0x670C": "m68k_op_beq_8",
+    "0x6710": "m68k_op_beq_8",
+    "0x6712": "m68k_op_beq_8",
+    "0x6714": "m68k_op_beq_8",
+    "0x6716": "m68k_op_beq_8",
+    "0x671A": "m68k_op_beq_8",
+    "0x671C": "m68k_op_beq_8",
+    "0x6720": "m68k_op_beq_8",
+    "0x6724": "m68k_op_beq_8",
+    "0x6726": "m68k_op_beq_8",
+    "0x672C": "m68k_op_beq_8",
+    "0x6732": "m68k_op_beq_8",
+    "0x6734": "m68k_op_beq_8",
+    "0x6738": "m68k_op_beq_8",
+    "0x673C": "m68k_op_beq_8",
+    "0x6740": "m68k_op_beq_8",
+    "0x6742": "m68k_op_beq_8",
+    "0x6744": "m68k_op_beq_8",
+    "0x674A": "m68k_op_beq_8",
+    "0x674C": "m68k_op_beq_8",
+    "0x6754": "m68k_op_beq_8",
+    "0x675C": "m68k_op_beq_8",
+    "0x675E": "m68k_op_beq_8",
+    "0x6760": "m68k_op_beq_8",
+    "0x6766": "m68k_op_beq_8",
+    "0x676A": "m68k_op_beq_8",
+    "0x67A6": "m68k_op_beq_8",
+    "0x67C0": "m68k_op_beq_8",
+    "0x67CE": "m68k_op_beq_8",
+    "0x67D6": "m68k_op_beq_8",
+    "0x67E4": "m68k_op_beq_8",
+    "0x67E6": "m68k_op_beq_8",
+    "0x67F2": "m68k_op_beq_8",
+    "0x67F4": "m68k_op_beq_8",
+    "0x67F6": "m68k_op_beq_8",
+    "0x6A2C": "m68k_op_bpl_8",
+    "0x6B08": "m68k_op_bmi_8",
+    "0x6C00": "m68k_op_bge_16",
+    "0x6C02": "m68k_op_bge_8",
+    "0x6C04": "m68k_op_bge_8",
+    "0x6C06": "m68k_op_bge_8",
+    "0x6C08": "m68k_op_bge_8",
+    "0x6C0E": "m68k_op_bge_8",
+    "0x6C10": "m68k_op_bge_8",
+    "0x6C14": "m68k_op_bge_8",
+    "0x6C1A": "m68k_op_bge_8",
+    "0x6C1E": "m68k_op_bge_8",
+    "0x6C22": "m68k_op_bge_8",
+    "0x6C32": "m68k_op_bge_8",
+    "0x6C3A": "m68k_op_bge_8",
+    "0x6C4E": "m68k_op_bge_8",
+    "0x6C54": "m68k_op_bge_8",
+    "0x6C5E": "m68k_op_bge_8",
+    "0x6C6C": "m68k_op_bge_8",
+    "0x6C78": "m68k_op_bge_8",
+    "0x6C86": "m68k_op_bge_8",
+    "0x6CC8": "m68k_op_bge_8",
+    "0x6CE2": "m68k_op_bge_8",
+    "0x6CF0": "m68k_op_bge_8",
+    "0x6D00": "m68k_op_blt_16",
+    "0x6D02": "m68k_op_blt_8",
+    "0x6D04": "m68k_op_blt_8",
+    "0x6D06": "m68k_op_blt_8",
+    "0x6D08": "m68k_op_blt_8",
+    "0x6D0A": "m68k_op_blt_8",
+    "0x6D0C": "m68k_op_blt_8",
+    "0x6D0E": "m68k_op_blt_8",
+    "0x6D10": "m68k_op_blt_8",
+    "0x6D12": "m68k_op_blt_8",
+    "0x6D14": "m68k_op_blt_8",
+    "0x6D16": "m68k_op_blt_8",
+    "0x6D18": "m68k_op_blt_8",
+    "0x6D1C": "m68k_op_blt_8",
+    "0x6D1E": "m68k_op_blt_8",
+    "0x6D20": "m68k_op_blt_8",
+    "0x6D28": "m68k_op_blt_8",
+    "0x6D2C": "m68k_op_blt_8",
+    "0x6D2E": "m68k_op_blt_8",
+    "0x6D30": "m68k_op_blt_8",
+    "0x6D38": "m68k_op_blt_8",
+    "0x6D64": "m68k_op_blt_8",
+    "0x6D70": "m68k_op_blt_8",
+    "0x6D78": "m68k_op_blt_8",
+    "0x6D86": "m68k_op_blt_8",
+    "0x6D8E": "m68k_op_blt_8",
+    "0x6DA0": "m68k_op_blt_8",
+    "0x6DD0": "m68k_op_blt_8",
+    "0x6DD8": "m68k_op_blt_8",
+    "0x6DE0": "m68k_op_blt_8",
+    "0x6DE2": "m68k_op_blt_8",
+    "0x6DEA": "m68k_op_blt_8",
+    "0x6DEE": "m68k_op_blt_8",
+    "0x6DF0": "m68k_op_blt_8",
+    "0x6DF4": "m68k_op_blt_8",
+    "0x6DF8": "m68k_op_blt_8",
+    "0x6E00": "m68k_op_bgt_16",
+    "0x6E02": "m68k_op_bgt_8",
+    "0x6E06": "m68k_op_bgt_8",
+    "0x6E08": "m68k_op_bgt_8",
+    "0x6E0A": "m68k_op_bgt_8",
+    "0x6E0C": "m68k_op_bgt_8",
+    "0x6E0E": "m68k_op_bgt_8",
+    "0x6E10": "m68k_op_bgt_8",
+    "0x6E12": "m68k_op_bgt_8",
+    "0x6E16": "m68k_op_bgt_8",
+    "0x6E1A": "m68k_op_bgt_8",
+    "0x6E1C": "m68k_op_bgt_8",
+    "0x6E1E": "m68k_op_bgt_8",
+    "0x6E38": "m68k_op_bgt_8",
+    "0x6E3C": "m68k_op_bgt_8",
+    "0x6E40": "m68k_op_bgt_8",
+    "0x6E54": "m68k_op_bgt_8",
+    "0x6E9C": "m68k_op_bgt_8",
+    "0x6EB0": "m68k_op_bgt_8",
+    "0x6EB8": "m68k_op_bgt_8",
+    "0x6F00": "m68k_op_ble_16",
+    "0x6F02": "m68k_op_ble_8",
+    "0x6F04": "m68k_op_ble_8",
+    "0x6F06": "m68k_op_ble_8",
+    "0x6F08": "m68k_op_ble_8",
+    "0x6F0C": "m68k_op_ble_8",
+    "0x6F0E": "m68k_op_ble_8",
+    "0x6F10": "m68k_op_ble_8",
+    "0x6F12": "m68k_op_ble_8",
+    "0x6F1A": "m68k_op_ble_8",
+    "0x6F1C": "m68k_op_ble_8",
+    "0x6F26": "m68k_op_ble_8",
+    "0x6F46": "m68k_op_ble_8",
+    "0x6F48": "m68k_op_ble_8",
+    "0x6F50": "m68k_op_ble_8",
+    "0x7000": "m68k_op_moveq_32",
+    "0x7001": "m68k_op_moveq_32",
+    "0x7020": "m68k_op_moveq_32",
+    "0x70FF": "m68k_op_moveq_32",
+    "0x7200": "m68k_op_moveq_32",
+    "0x7201": "m68k_op_moveq_32",
+    "0x7209": "m68k_op_moveq_32",
+    "0x7400": "m68k_op_moveq_32",
+    "0x7600": "m68k_op_moveq_32",
+    "0x7604": "m68k_op_moveq_32",
+    "0x760A": "m68k_op_moveq_32",
+    "0x760F": "m68k_op_moveq_32",
+    "0x7801": "m68k_op_moveq_32",
+    "0x7802": "m68k_op_moveq_32",
+    "0x7803": "m68k_op_moveq_32",
+    "0x7804": "m68k_op_moveq_32",
+    "0x7A0E": "m68k_op_moveq_32",
+    "0x7E00": "m68k_op_moveq_32",
+    "0x7E01": "m68k_op_moveq_32",
+    "0x7E08": "m68k_op_moveq_32",
+    "0x8039": "m68k_op_or_8_er_al",
+    "0x816E": "m68k_op_or_16_re_di",
+    "0x8202": "m68k_op_or_8_er_d",
+    "0x84C0": "m68k_op_divu_16_d",
+    "0x86FC": "m68k_op_divu_16_i",
+    "0x8BC0": "m68k_op_divs_16_d",
+    "0x8DC0": "m68k_op_divs_16_d",
+    "0x8FC0": "m68k_op_divs_16_d",
+    "0x9041": "m68k_op_sub_16_er_d",
+    "0x9069": "m68k_op_sub_16_er_di",
+    "0x9079": "m68k_op_sub_16_er_al",
+    "0x916E": "m68k_op_sub_16_re_di",
+    "0x9240": "m68k_op_sub_16_er_d",
+    "0x9269": "m68k_op_sub_16_er_di",
+    "0x9279": "m68k_op_sub_16_er_al",
+    "0x9280": "m68k_op_sub_32_er_d",
+    "0x9446": "m68k_op_sub_16_er_d",
+    "0x94B1": "m68k_op_sub_32_er_ix",
+    "0x9641": "m68k_op_sub_16_er_d",
+    "0x9682": "m68k_op_sub_32_er_d",
+    "0x96B1": "m68k_op_sub_32_er_ix",
+    "0x96FC": "m68k_op_suba_16_i",
+    "0x9840": "m68k_op_sub_16_er_d",
+    "0x9842": "m68k_op_sub_16_er_d",
+    "0x9879": "m68k_op_sub_16_er_al",
+    "0x9886": "m68k_op_sub_32_er_d",
+    "0x98B1": "m68k_op_sub_32_er_ix",
+    "0x9A42": "m68k_op_sub_16_er_d",
+    "0x9A82": "m68k_op_sub_32_er_d",
+    "0x9A86": "m68k_op_sub_32_er_d",
+    "0x9C43": "m68k_op_sub_16_er_d",
+    "0x9C83": "m68k_op_sub_32_er_d",
+    "0x9E44": "m68k_op_sub_16_er_d",
+    "0x9E6E": "m68k_op_sub_16_er_di",
+    "0x9E84": "m68k_op_sub_32_er_d",
+    "0xB041": "m68k_op_cmp_16_d",
+    "0xB042": "m68k_op_cmp_16_d",
+    "0xB06E": "m68k_op_cmp_16_di",
+    "0xB079": "m68k_op_cmp_16_al",
+    "0xB0AE": "m68k_op_cmp_32_di",
+    "0xB0B9": "m68k_op_cmp_32_al",
+    "0xB279": "m68k_op_cmp_16_al",
+    "0xB280": "m68k_op_cmp_32_d",
+    "0xB444": "m68k_op_cmp_16_d",
+    "0xB479": "m68k_op_cmp_16_al",
+    "0xB480": "m68k_op_cmp_32_d",
+    "0xB481": "m68k_op_cmp_32_d",
+    "0xB4AE": "m68k_op_cmp_32_di",
+    "0xB669": "m68k_op_cmp_16_di",
+    "0xB6AE": "m68k_op_cmp_32_di",
+    "0xB7FC": "m68k_op_cmpa_32_i",
+    "0xB840": "m68k_op_cmp_16_d",
+    "0xB845": "m68k_op_cmp_16_d",
+    "0xB86E": "m68k_op_cmp_16_di",
+    "0xB880": "m68k_op_cmp_32_d",
+    "0xB8A9": "m68k_op_cmp_32_di",
+    "0xBA6E": "m68k_op_cmp_16_di",
+    "0xBC85": "m68k_op_cmp_32_d",
+    "0xBE44": "m68k_op_cmp_16_d",
+    "0xBE6E": "m68k_op_cmp_16_di",
+    "0xBE79": "m68k_op_cmp_16_al",
+    "0xBE85": "m68k_op_cmp_32_d",
+    "0xBE86": "m68k_op_cmp_32_d",
+    "0xC1C5": "m68k_op_muls_16_d",
+    "0xC2C3": "m68k_op_mulu_16_d",
+    "0xC342": "m68k_op_exg_32_dd",
+    "0xC3C6": "m68k_op_muls_16_d",
+    "0xC4C3": "m68k_op_mulu_16_d",
+    "0xC5C7": "m68k_op_muls_16_d",
+    "0xC5DA": "m68k_op_muls_16_pi",
+    "0xC5EC": "m68k_op_muls_16_di",
+    "0xC7C7": "m68k_op_muls_16_d",
+    "0xC7DA": "m68k_op_muls_16_pi",
+    "0xC7EC": "m68k_op_muls_16_di",
+    "0xC9C7": "m68k_op_muls_16_d",
+    "0xC9DA": "m68k_op_muls_16_pi",
+    "0xC9EA": "m68k_op_muls_16_di",
+    "0xCBDA": "m68k_op_muls_16_pi",
+    "0xCBE9": "m68k_op_muls_16_di",
+    "0xCDDA": "m68k_op_muls_16_pi",
+    "0xCDE9": "m68k_op_muls_16_di",
+    "0xCDEC": "m68k_op_muls_16_di",
+    "0xCF44": "m68k_op_exg_32_dd",
+    "0xCFDA": "m68k_op_muls_16_pi",
+    "0xCFE9": "m68k_op_muls_16_di",
+    "0xD040": "m68k_op_add_16_er_d",
+    "0xD06E": "m68k_op_add_16_er_di",
+    "0xD083": "m68k_op_add_32_er_d",
+    "0xD084": "m68k_op_add_32_er_d",
+    "0xD0B9": "m68k_op_add_32_er_al",
+    "0xD0C0": "m68k_op_adda_16_d",
+    "0xD0F9": "m68k_op_adda_16_al",
+    "0xD0FC": "m68k_op_adda_16_i",
+    "0xD1B9": "m68k_op_add_32_re_al",
+    "0xD1FC": "m68k_op_adda_32_i",
+    "0xD26E": "m68k_op_add_16_er_di",
+    "0xD287": "m68k_op_add_32_er_d",
+    "0xD2B9": "m68k_op_add_32_er_al",
+    "0xD2F9": "m68k_op_adda_16_al",
+    "0xD440": "m68k_op_add_16_er_d",
+    "0xD46E": "m68k_op_add_16_er_di",
+    "0xD480": "m68k_op_add_32_er_d",
+    "0xD481": "m68k_op_add_32_er_d",
+    "0xD484": "m68k_op_add_32_er_d",
+    "0xD485": "m68k_op_add_32_er_d",
+    "0xD4B9": "m68k_op_add_32_er_al",
+    "0xD4C0": "m68k_op_adda_16_d",
+    "0xD643": "m68k_op_add_16_er_d",
+    "0xD64D": "m68k_op_add_16_er_a",
+    "0xD66E": "m68k_op_add_16_er_di",
+    "0xD679": "m68k_op_add_16_er_al",
+    "0xD680": "m68k_op_add_32_er_d",
+    "0xD681": "m68k_op_add_32_er_d",
+    "0xD686": "m68k_op_add_32_er_d",
+    "0xD6D5": "m68k_op_adda_16_ai",
+    "0xD6ED": "m68k_op_adda_16_di",
+    "0xD6EE": "m68k_op_adda_16_di",
+    "0xD6FC": "m68k_op_adda_16_i",
+    "0xD841": "m68k_op_add_16_er_d",
+    "0xD842": "m68k_op_add_16_er_d",
+    "0xD84D": "m68k_op_add_16_er_a",
+    "0xD86E": "m68k_op_add_16_er_di",
+    "0xD880": "m68k_op_add_32_er_d",
+    "0xD881": "m68k_op_add_32_er_d",
+    "0xD882": "m68k_op_add_32_er_d",
+    "0xD883": "m68k_op_add_32_er_d",
+    "0xD887": "m68k_op_add_32_er_d",
+    "0xD8F4": "m68k_op_adda_16_ix",
+    "0xDA81": "m68k_op_add_32_er_d",
+    "0xDE43": "m68k_op_add_16_er_d",
+    "0xDE46": "m68k_op_add_16_er_d",
+    "0xDE47": "m68k_op_add_16_er_d",
+    "0xDE6E": "m68k_op_add_16_er_di",
+    "0xDE85": "m68k_op_add_32_er_d",
+    "0xDE86": "m68k_op_add_32_er_d",
+    "0xE049": "m68k_op_lsr_16_s",
+    "0xE080": "m68k_op_asr_32_s",
+    "0xE081": "m68k_op_asr_32_s",
+    "0xE082": "m68k_op_asr_32_s",
+    "0xE083": "m68k_op_asr_32_s",
+    "0xE084": "m68k_op_asr_32_s",
+    "0xE085": "m68k_op_asr_32_s",
+    "0xE086": "m68k_op_asr_32_s",
+    "0xE087": "m68k_op_asr_32_s",
+    "0xE182": "m68k_op_asl_32_s",
+    "0xE183": "m68k_op_asl_32_s",
+    "0xE184": "m68k_op_asl_32_s",
+    "0xE1A1": "m68k_op_asl_32_r",
+    "0xE240": "m68k_op_asr_16_s",
+    "0xE242": "m68k_op_asr_16_s",
+    "0xE243": "m68k_op_asr_16_s",
+    "0xE247": "m68k_op_asr_16_s",
+    "0xE260": "m68k_op_asr_16_r",
+    "0xE280": "m68k_op_asr_32_s",
+    "0xE380": "m68k_op_asl_32_s",
+    "0xE3A0": "m68k_op_asl_32_r",
+    "0xE440": "m68k_op_asr_16_s",
+    "0xE483": "m68k_op_asr_32_s",
+    "0xE485": "m68k_op_asr_32_s",
+    "0xE486": "m68k_op_asr_32_s",
+    "0xE487": "m68k_op_asr_32_s",
+    "0xE580": "m68k_op_asl_32_s",
+    "0xE5A0": "m68k_op_asl_32_r",
+    "0xE640": "m68k_op_asr_16_s",
+    "0xE660": "m68k_op_asr_16_r",
+    "0xE664": "m68k_op_asr_16_r",
+    "0xE665": "m68k_op_asr_16_r",
+    "0xE6A0": "m68k_op_asr_32_r",
+    "0xE6A1": "m68k_op_asr_32_r",
+    "0xE6A2": "m68k_op_asr_32_r",
+    "0xE806": "m68k_op_asr_8_s",
+    "0xE842": "m68k_op_asr_16_s",
+    "0xE881": "m68k_op_asr_32_s",
+    "0xE882": "m68k_op_asr_32_s",
+    "0xE883": "m68k_op_asr_32_s",
+    "0xE884": "m68k_op_asr_32_s",
+    "0xE885": "m68k_op_asr_32_s",
+    "0xE886": "m68k_op_asr_32_s",
+    "0xE887": "m68k_op_asr_32_s",
+    "0xEAA2": "m68k_op_asr_32_r",
+    "0xEAA3": "m68k_op_asr_32_r",
+    "0xEAA4": "m68k_op_asr_32_r",
+    "0xEBA0": "m68k_op_asl_32_r",
+    "0xEBA1": "m68k_op_asl_32_r",
+    "0xEBA4": "m68k_op_asl_32_r",
+    "0xEC40": "m68k_op_asr_16_s",
+    "0xEC41": "m68k_op_asr_16_s",
+    "0xEC42": "m68k_op_asr_16_s",
+    "0xEC43": "m68k_op_asr_16_s",
+    "0xEC44": "m68k_op_asr_16_s",
+    "0xEC45": "m68k_op_asr_16_s",
+    "0xEC46": "m68k_op_asr_16_s",
+    "0xEC47": "m68k_op_asr_16_s",
+    "0xEC67": "m68k_op_asr_16_r",
+    "0xED84": "m68k_op_asl_32_s",
+    "0xEE60": "m68k_op_asr_16_r",
+    "0xEE62": "m68k_op_asr_16_r",
+    "0xEE63": "m68k_op_asr_16_r",
+    "0xEE64": "m68k_op_asr_16_r",
+    "0xEEA0": "m68k_op_asr_32_r",
+    "0xEEA1": "m68k_op_asr_32_r",
+    "0xEEA2": "m68k_op_asr_32_r",
+    "0xEF84": "m68k_op_asl_32_s",
+    "0xEFA3": "m68k_op_asl_32_r",
+    "0xEFA4": "m68k_op_asl_32_r",
+    "0xEFA5": "m68k_op_asl_32_r"
+  },
+  "entries": [
+    {
+      "entry": "C0004E",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 9,
+      "spans": [
+        [
+          "C0004E",
+          "C00054"
+        ],
+        [
+          "C0655A",
+          "C06564"
+        ],
+        [
+          "C06598",
+          "C065AA"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "ec1772f99c848bccd6efd17d4ebc6ba7184093ba73f2ff4041065bda886289be",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C000A8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C000A8",
+          "C000AE"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "6f57a4339f0b25358181e9397413fa27aa32b356fe9c1f38242b77af70949c2e",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C000AE",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C000AE",
+          "C000B4"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "04b4a2bdf964ed78cd807a03816153c32ca12fb9a91a120bb74832b4cee5ecb0",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C000B4",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 9,
+      "spans": [
+        [
+          "C000B4",
+          "C000BA"
+        ],
+        [
+          "C06578",
+          "C06582"
+        ],
+        [
+          "C06598",
+          "C065AA"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "34edcea3f16582ad037430d73be960581dc8b675401d6a46c1e5d60a9bc3923e",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C000BA",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 9,
+      "spans": [
+        [
+          "C000BA",
+          "C000C0"
+        ],
+        [
+          "C06564",
+          "C0656E"
+        ],
+        [
+          "C06598",
+          "C065AA"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "51ce005a994d27c4b23c11a62ba0d3b6d9fc26bb004558297a3fe83d72c2271c",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C000FC",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C000FC",
+          "C00102"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "0461d92645155b321c214b19ea398cd8d7a0a7ba8a06878ad6b24c42db907ab6",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00102",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00102",
+          "C00108"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "5cf76ee6b51fd817ef9791bc88cd7ca50a0cd557e5cfa59088808f0f2698a4ea",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00108",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00108",
+          "C0010E"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "fdb87684e3a3f1687489db37f7094a351489d87647f7a4d9c1a07bb36cc9177e",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00132",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00132",
+          "C00138"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "9fdb14bf8774db435202190b474bc568b2654f5685ddac7aa5a33e4ef2e8e612",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00138",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00138",
+          "C0013E"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "57f49947711d62eefae6e421ecabbf4d416fd7f6cf834a49601deb8b70dd64b8",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00144",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00144",
+          "C0014A"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "b1e494528a7502a91db9bcddf27ff2d14c2e53c06301f8bec416cff666e77e6e",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00150",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00150",
+          "C00156"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "a0e8c04ecc2384c4623f8b15b6dd841cf80c09e95fcc46daabffef83f6bc57c6",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00174",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00174",
+          "C0017A"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "50945d0fd6e2ab685d14186b708c97591aab1fceff569f9cb8bb06f46adf0543",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C0018C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C0018C",
+          "C00192"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "42bcf76cb8d75660840938d891ac6f3950e27d9b83cd7fce033e76ca1680c310",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C001EC",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C001EC",
+          "C001F2"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "580600d64364c206afb27fb902b83d5ecc7f382068996fbde47bd9b17b64e2c8",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C001F2",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C001F2",
+          "C001F8"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "47024e0bd4d1bca95025036005e359a4e7432dd207e777f20ff3f8333342dd09",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C001F8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C001F8",
+          "C001FE"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "003b2652faecfd5c55f145c89cea4d7f4b51bcccd0e6db03cff05f7556c65413",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C001FE",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C001FE",
+          "C00204"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "0e307a877327b38cf1ece6f11d75882eae7574f247fc40f911c66a2d417c6702",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00240",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00240",
+          "C00246"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "4916999fc8cb653cf382f3b718cf04e3401ce9cfe1c51c35d0cebac000454da6",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00246",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00246",
+          "C0024C"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "74fffbfb0ed82421e3bf85dac40df875ad25bc5153694e14b048c66559cddce0",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00252",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00252",
+          "C00258"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "02b4f7adf014109212c83f30b5c2c97cb37b9ae957fc42da1646413093382a1e",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C00258",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C00258",
+          "C0025E"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "447116315833ab9ed6cc8f6b7cfaef1cb8f1fdc4a61c1242b5722881675f3aca",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C023B8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C023B8",
+          "C023BE"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "dfa868544f34893028964f69d40af085ef07b546b49b87b35d23f7e7152eb2ce",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C0257E",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C0257E",
+          "C02584"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "1a88c56671540221f234aa021db6585c35b34aa10175013ee96c9243b80a1385",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02584",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02584",
+          "C0258A"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "4fe887c19eab1d1234687f496989ef116ceaecde5d069ce1ad9263c76505a841",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02728",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02728",
+          "C0272E"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "d335df6426fd41750fcdd2656af626a8a3a100d5874a405c3ba59748c8908b14",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C0272E",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C0272E",
+          "C02734"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "7681fcbea9a6963d93c1556b8588311bdb984bc67023a310f00077377d84979e",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02758",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02758",
+          "C0275E"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "ceaa418ecd3fb19a3eaf56c32e1585f8985ac9cb8b9054bc55e374e27524e969",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02764",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02764",
+          "C0276A"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "828de371863cad3d0bd5319f20fec0217119461577bf90bad9c52a4be5a2f7d6",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02776",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02776",
+          "C0277C"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "7ffee2512fb060414e85c5bd9ebbde9a5ee1e7fbb96a541f8e05e3b5bd396096",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02812",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02812",
+          "C02818"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "a8d1cd4b494110f81cf5c1199d6940af98fb6cb4e4d01670dcfc23b8c2342e78",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02818",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02818",
+          "C0281E"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "2eb34c0eb6699f2aa52aadc164f137a02469ed2d30314486afa7a7d3a697ab5c",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02836",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02836",
+          "C0283C"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "4bb9b78d28ceddfd42e0f6f11a485f7717e74d2968d297548a465f999d293f2e",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02B06",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02B06",
+          "C02B0C"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "8ebbb24a43c366ab4ce19bcea89cbe6ff1327cfe4f9aa1989f20ae5f6ba9e367",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02DC8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02DC8",
+          "C02DCE"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "98def08cf9a28adbaf0b0f972d3c390e200ac7912b1726b41c457a6494014f19",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02DDA",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02DDA",
+          "C02DE0"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "ada877447e19c43985ecc404d467e9234465351c829a9ba121d0effe4139f061",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C02DE0",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C02DE0",
+          "C02DE6"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "99b3cc494ce9e591c1608e73f98a706212b2f14074d4a8f25d9977083aace84c",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C064EC",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C064EC",
+          "C064F2"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "705e37c3f847857fcab22adf8fc8018c3390e1d3ecdeaac97ba0448195d7926b",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C064F8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C064F8",
+          "C064FE"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "673b167da9e38d34042c7100bcfc6d4f8e454c776bfb7ecc3328478674e8b8d1",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C064FE",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 1,
+      "spans": [
+        [
+          "C064FE",
+          "C06504"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "2f5c9a79ec0ad7fada639ea42754b77e88b5bc1f78bfd5b7f3787ea31d7808ee",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C065AA",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [],
+      "origin": "reference_runtime_wrapper",
+      "instructions": 2,
+      "spans": [
+        [
+          "C065AA",
+          "C065AE"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "7418f75e238a6a648af65749ed0dcaefbaefb46bbd24fc5be1989b66878f3025",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C08ED0",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        4
+      ],
+      "origin": "original_adf_code",
+      "instructions": 5,
+      "spans": [
+        [
+          "C08ED0",
+          "C08EE4"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "166d63aabf1630e5ec700c15eb92c083061bace2f2cfc709f5dfc183a4a5b2c0",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C096B8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        12
+      ],
+      "origin": "original_adf_code",
+      "instructions": 2,
+      "spans": [
+        [
+          "C096B8",
+          "C096BC"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "88f7f965a13530a8f15a9e97a50e7fd1d193432104936ef4f1db6e0bfeda21c3",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C096BC",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        12
+      ],
+      "origin": "original_adf_code",
+      "instructions": 165,
+      "spans": [
+        [
+          "C096B8",
+          "C096CA"
+        ],
+        [
+          "C096D6",
+          "C098C6"
+        ]
+      ],
+      "calls": [
+        "C098C6"
+      ],
+      "dynamic_calls": 2,
+      "jumps_out": 0,
+      "translation_sha256": "3577eeb7ef4034e5d43d4cb5ce26f47bf4bff08450e3a463aaf25dfe913d5a16",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C096CA",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        12
+      ],
+      "origin": "original_adf_code",
+      "instructions": 164,
+      "spans": [
+        [
+          "C096B8",
+          "C096BC"
+        ],
+        [
+          "C096CA",
+          "C098C6"
+        ]
+      ],
+      "calls": [
+        "C098C6"
+      ],
+      "dynamic_calls": 2,
+      "jumps_out": 0,
+      "translation_sha256": "4f2c61795003e893ab6a28adacd9a36e9be139092b2c3f59d3daff548d284736",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C0DA38",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        33
+      ],
+      "origin": "original_adf_code",
+      "instructions": 25,
+      "spans": [
+        [
+          "C0DA38",
+          "C0DAA0"
+        ]
+      ],
+      "calls": [
+        "C0DAD0",
+        "C0DAD4",
+        "C0DADC",
+        "C0DAE6"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "1e288f5cc400da337657941fae465845536b11dfa9b177e4c947a1e1c9f47a83",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C0E78A",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 12,
+      "spans": [
+        [
+          "C0E78A",
+          "C0E7B0"
+        ]
+      ],
+      "calls": [
+        "C53F9C"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "c9d70b989efe47ba32c195a88aafe0d0f4baa594682abd123f5019c5a2641559",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C0F116",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 151,
+      "spans": [
+        [
+          "C0F116",
+          "C0F370"
+        ],
+        [
+          "C0F380",
+          "C0F3C4"
+        ]
+      ],
+      "calls": [
+        "C082B8",
+        "C11BFC",
+        "C12242",
+        "C12950",
+        "C1518C",
+        "C25312",
+        "C2548A",
+        "C2B3C2",
+        "C2B564",
+        "C2F49C",
+        "C2F582",
+        "C3003A",
+        "C30764",
+        "C30918",
+        "C309B6",
+        "C30A00",
+        "C30B5C",
+        "C30D34",
+        "C30F78",
+        "C3112A",
+        "C31226",
+        "C31A64",
+        "C31ACC",
+        "C31B76",
+        "C31EB6",
+        "C31F4A",
+        "C31F4C",
+        "C3201A",
+        "C3212A",
+        "C32178",
+        "C321D2",
+        "C32260",
+        "C322EE",
+        "C328A8",
+        "C32CEE",
+        "C332BC",
+        "C53F9C"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "de1693f322fa012a0ee9728cac89eb6322ab412ea9b36f6e87695f45a2a64bac",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C13256",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 32,
+      "spans": [
+        [
+          "C13256",
+          "C13258"
+        ],
+        [
+          "C1325E",
+          "C13272"
+        ],
+        [
+          "C1329C",
+          "C132BE"
+        ],
+        [
+          "C13330",
+          "C13358"
+        ],
+        [
+          "C1338C",
+          "C13396"
+        ]
+      ],
+      "calls": [
+        "C13396"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "4b08ff2084928866d47b0a8818b46c4ccba4cb00802a25bec9f3fd74be47b13e",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C13258",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 32,
+      "spans": [
+        [
+          "C13258",
+          "C1325A"
+        ],
+        [
+          "C13272",
+          "C13286"
+        ],
+        [
+          "C1329C",
+          "C132BE"
+        ],
+        [
+          "C13330",
+          "C13358"
+        ],
+        [
+          "C1338C",
+          "C13396"
+        ]
+      ],
+      "calls": [
+        "C13396"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "cb116938e24ac2b4af2c9077ce66c42474c05df2c3a0e214d8a73ff7912721af",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C1325A",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 29,
+      "spans": [
+        [
+          "C1325A",
+          "C1325C"
+        ],
+        [
+          "C13286",
+          "C13292"
+        ],
+        [
+          "C1329C",
+          "C132BE"
+        ],
+        [
+          "C13330",
+          "C13358"
+        ],
+        [
+          "C1338C",
+          "C13396"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "9a1917c57d84c1df962be8896156e43d498ac1f2d309ccb00a70d8d22e776204",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C1325C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 28,
+      "spans": [
+        [
+          "C1325C",
+          "C1325E"
+        ],
+        [
+          "C13292",
+          "C132BE"
+        ],
+        [
+          "C13330",
+          "C13358"
+        ],
+        [
+          "C1338C",
+          "C13396"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "99b200b045f5677c46d940d04e5eb80169af52bdaed54669b6e359593873b5c0",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C132BE",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 20,
+      "spans": [
+        [
+          "C132BE",
+          "C132C0"
+        ],
+        [
+          "C132C6",
+          "C132D2"
+        ],
+        [
+          "C13330",
+          "C13358"
+        ],
+        [
+          "C1338C",
+          "C13396"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "d0bdfc1fd8e612c8def324feef2adbab15d6261fa6525a5c0493b87d46e6eead",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C132C0",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 20,
+      "spans": [
+        [
+          "C132C0",
+          "C132C2"
+        ],
+        [
+          "C132D2",
+          "C132DE"
+        ],
+        [
+          "C13330",
+          "C13358"
+        ],
+        [
+          "C1338C",
+          "C13396"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "1e2835b5342a275e3badbd1e26d9fcb1dfd197dead1c75432515f2e525af7052",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C15DA8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C15D96",
+          "C15DB4"
+        ]
+      ],
+      "calls": [
+        "C0EFD4",
+        "C1612C",
+        "C2F558",
+        "C53FB0",
+        "C53FC0"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "b32e6eeb576662466270be8e6d6a1883debdbe8f9158eb34a30afb2586cbe150",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C1612C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        0
+      ],
+      "origin": "original_adf_code",
+      "instructions": 80,
+      "spans": [
+        [
+          "C1612C",
+          "C16284"
+        ]
+      ],
+      "calls": [
+        "C53EC0",
+        "C53F30",
+        "C53F44",
+        "C53F88"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "68b936bec911d9a6d33f2cfd7a206825d801ba218fbdbb5f1d94291318525877",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C1CFA8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        8
+      ],
+      "origin": "original_adf_code",
+      "instructions": 161,
+      "spans": [
+        [
+          "C1CE42",
+          "C1CFCA"
+        ],
+        [
+          "C1CFD6",
+          "C1D0A4"
+        ]
+      ],
+      "calls": [
+        "C1D0A4",
+        "C1D0B6",
+        "C1D91A",
+        "C25876"
+      ],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "fa19218dce9d4afa9781a9b350e19d35c81fa17e9601835c0d851806f150ed8b",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C1ED3C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        10
+      ],
+      "origin": "original_adf_code",
+      "instructions": 1116,
+      "spans": [
+        [
+          "C07840",
+          "C07960"
+        ],
+        [
+          "C1ED38",
+          "C1ED4C"
+        ],
+        [
+          "C1EE14",
+          "C1F2EE"
+        ],
+        [
+          "C1F344",
+          "C1F8E6"
+        ],
+        [
+          "C1F8EC",
+          "C1F99A"
+        ]
+      ],
+      "calls": [
+        "C06C02",
+        "C0D04C",
+        "C1F2EE",
+        "C1F99A",
+        "C1FB8C",
+        "C1FB9C",
+        "C1FC42",
+        "C2084A",
+        "C2D082",
+        "C2EC90"
+      ],
+      "dynamic_calls": 2,
+      "jumps_out": 0,
+      "translation_sha256": "b633219c5f84d606d64ea98896b2e9b455c70c03782ecd09b950a24b385ed1f7",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C1ED4C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        10
+      ],
+      "origin": "original_adf_code",
+      "instructions": 1162,
+      "spans": [
+        [
+          "C07840",
+          "C07960"
+        ],
+        [
+          "C1ED38",
+          "C1ED3C"
+        ],
+        [
+          "C1ED4C",
+          "C1F2EE"
+        ],
+        [
+          "C1F344",
+          "C1F8E6"
+        ],
+        [
+          "C1F8EC",
+          "C1F99A"
+        ]
+      ],
+      "calls": [
+        "C06C02",
+        "C0D04C",
+        "C1F2EE",
+        "C1F99A",
+        "C1FB8C",
+        "C1FB9C",
+        "C1FC42",
+        "C2084A",
+        "C2D082",
+        "C2EC90"
+      ],
+      "dynamic_calls": 2,
+      "jumps_out": 0,
+      "translation_sha256": "43aaf27f2751f5e5c941dbe6b54fc54cd349d51ee1025a259e7b424df4343bb4",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C1F2C8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        10
+      ],
+      "origin": "original_adf_code",
+      "instructions": 283,
+      "spans": [
+        [
+          "C1F21C",
+          "C1F2D4"
+        ],
+        [
+          "C1F2E4",
+          "C1F2EE"
+        ],
+        [
+          "C1F6F8",
+          "C1F8E6"
+        ],
+        [
+          "C1F8EC",
+          "C1F99A"
+        ]
+      ],
+      "calls": [
+        "C06C02",
+        "C0D04C",
+        "C1F2EE",
+        "C1F99A",
+        "C1FB8C",
+        "C1FB9C",
+        "C1FC42",
+        "C2D082"
+      ],
+      "dynamic_calls": 2,
+      "jumps_out": 0,
+      "translation_sha256": "bea6aa2d7e747de374df1962c829a364660ee44ee76d1eb95c0eb046198d835d",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C22AC0",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        16
+      ],
+      "origin": "original_adf_code",
+      "instructions": 1184,
+      "spans": [
+        [
+          "C07840",
+          "C07960"
+        ],
+        [
+          "C1ED38",
+          "C1ED3C"
+        ],
+        [
+          "C1ED4C",
+          "C1F2EE"
+        ],
+        [
+          "C1F344",
+          "C1F8E6"
+        ],
+        [
+          "C1F8EC",
+          "C1F99A"
+        ],
+        [
+          "C22AC0",
+          "C22B1A"
+        ]
+      ],
+      "calls": [
+        "C06C02",
+        "C09DD0",
+        "C0D04C",
+        "C1F2EE",
+        "C1F99A",
+        "C1FB8C",
+        "C1FB9C",
+        "C1FC42",
+        "C2084A",
+        "C22C70",
+        "C2D082",
+        "C2EC90"
+      ],
+      "dynamic_calls": 2,
+      "jumps_out": 0,
+      "translation_sha256": "5517f791a6f050dbf128d156fcd3556e3c86ba676c49ecddc0b870057cf28b22",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C2C216",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        30
+      ],
+      "origin": "original_adf_code",
+      "instructions": 36,
+      "spans": [
+        [
+          "C2C216",
+          "C2C270"
+        ],
+        [
+          "C2C37C",
+          "C2C38A"
+        ],
+        [
+          "C2CC20",
+          "C2CC2A"
+        ]
+      ],
+      "calls": [
+        "C2CA92",
+        "C2CAA0"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "2160d62cd6a5c37c8e78a694fe1f2db402a7c6801b7c1bf8950dbe399c6639d4",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C2C392",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        30
+      ],
+      "origin": "original_adf_code",
+      "instructions": 626,
+      "spans": [
+        [
+          "C2C270",
+          "C2C70C"
+        ],
+        [
+          "C2C716",
+          "C2C766"
+        ],
+        [
+          "C2C794",
+          "C2CA14"
+        ],
+        [
+          "C2CA1E",
+          "C2CA26"
+        ],
+        [
+          "C2CAB2",
+          "C2CB82"
+        ],
+        [
+          "C2CBBE",
+          "C2CC2A"
+        ]
+      ],
+      "calls": [
+        "C06C02",
+        "C2574A",
+        "C2CA26",
+        "C2CB86"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 1,
+      "translation_sha256": "1f05cefced1afccf5a714c905c6f1a958328fd38c7f0537eebef061b458e1707",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C2F49C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        36
+      ],
+      "origin": "original_adf_code",
+      "instructions": 11,
+      "spans": [
+        [
+          "C2F49C",
+          "C2F4C8"
+        ],
+        [
+          "C2F4D8",
+          "C2F4DE"
+        ]
+      ],
+      "calls": [
+        "C2FA7E"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "2d2d0422e2df27aa86f678b7c865f02aa1cd4a1597f9b4b7c2af6e76f404a0d7",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C500D8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        76
+      ],
+      "origin": "original_adf_code",
+      "instructions": 28,
+      "spans": [
+        [
+          "C500D8",
+          "C50158"
+        ]
+      ],
+      "calls": [
+        "C501E0"
+      ],
+      "dynamic_calls": 0,
+      "jumps_out": 0,
+      "translation_sha256": "73893f0f5e84c0c0453c66c6bbd0f40d2521fdebaafbc3d49e83c5d36f28890a",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C539A8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        171
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C539A8",
+          "C539C2"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "a1e0a7b71ba356e79cdfeefca0a31c0b1b1931c6ee1c4a7a437fcfb767171c8d",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C539C4",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        171
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C539C4",
+          "C539D8"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "4865dbea57f30aa1bc6e445cf38893d99bfd819c623eb9033fe5e5f36c8313b9",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C539F4",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        171
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C539F4",
+          "C53A0E"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "b47b5b2600d024988538fa2b7d042664eff888fe44bc7433cc8d5084a302576c",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53A7C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        171
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53A7C",
+          "C53A96"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "fe5c10146e9ee04e60ffcc6c20aee33870d394f59b27bb5ec50cb69e26254ff1",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53A98",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        171
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53A98",
+          "C53AAC"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "30930e4b1fceab33a37e63484a1d28c699558346c7527db732ed1190b8faf1df",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53AC8",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        171
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53AC8",
+          "C53AE2"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "155724103d9798ec4ef48d91ac6f77d2a5cf8accca6cc4ffb042c5119ac29c47",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53B00",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        172
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53B00",
+          "C53B16"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "ed6910c419a7a70f91a67760212f5a6e1c5125a30f04de5f767c5d5be1206357",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53B18",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        172
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53B18",
+          "C53B2E"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "bc72755a0b31f7c7cd42b9773de5d28e8d09d7cf3c10a11aebe0a178867fa4b6",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53B30",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        172
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53B30",
+          "C53B46"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "f9b5bbddaacdd9e26cdd3f27f6d764f104b3c472fdbc862f279abea85d72ef69",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53B48",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        172
+      ],
+      "origin": "original_adf_code",
+      "instructions": 7,
+      "spans": [
+        [
+          "C53B48",
+          "C53B60"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "9032278f402c26c72605f17205155a8e24f019544947e39f8d9313f5542f5e4f",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53C08",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        172
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53C08",
+          "C53C1C"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "6aa9d15145a17069ed613757b84405f407e57c9b46e9c1b43e572a7992181826",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53C78",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        172
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53C78",
+          "C53C8C"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "e6f7920f11b8661379b86334d262b3bc00dbde3cdda186d88abfbdedbfac2582",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53C8C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        172
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53C8C",
+          "C53CA0"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "20c1a5910d0beaae30ec6152df9731f405f0b755034a4377e586646b95242208",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53EC0",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        181
+      ],
+      "origin": "original_adf_code",
+      "instructions": 7,
+      "spans": [
+        [
+          "C53EC0",
+          "C53EDA"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "4246af54b73c2cfb5204cda9d8d3f7980a76aebf2b126cbf19b5d762655b29a3",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53F30",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        181
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53F30",
+          "C53F44"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "7d361cdff43a5a873b836bdacc19adf793790e49ab72b04d6737d53e82501728",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53F44",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        181
+      ],
+      "origin": "original_adf_code",
+      "instructions": 5,
+      "spans": [
+        [
+          "C53F44",
+          "C53F54"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "1fd935d07659bd8515b2bbbcecad5320b89988a4d33ae65b24704d4eaa5bd6f2",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53F88",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        181
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53F88",
+          "C53F9C"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "16687b09d75b87f829ec732219b5849d426d1e86bec197b216fcfb29033d2216",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53F9C",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        181
+      ],
+      "origin": "original_adf_code",
+      "instructions": 6,
+      "spans": [
+        [
+          "C53F9C",
+          "C53FB0"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "02cdd2f18d2cacfc54bda59c214ed9120d080160d5cd2a7ac65266d90e124bdd",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53FB0",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        181
+      ],
+      "origin": "original_adf_code",
+      "instructions": 5,
+      "spans": [
+        [
+          "C53FB0",
+          "C53FC0"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "62317dd6aa53f5abba844bce74e17213e8647d128006723e8dbdb59664e2df33",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    },
+    {
+      "entry": "C53FC0",
+      "status": "static_recompiled_deferred_decompilation",
+      "source": "port/recomp/generated/recomp_static_deferred.c",
+      "original_code_hunks": [
+        181
+      ],
+      "origin": "original_adf_code",
+      "instructions": 5,
+      "spans": [
+        [
+          "C53FC0",
+          "C53FD0"
+        ]
+      ],
+      "calls": [],
+      "dynamic_calls": 1,
+      "jumps_out": 0,
+      "translation_sha256": "33062ddafab3d21b23cfc6dcf527e57adf340f1012b9540f1b18ceae3c618de6",
+      "follow_up": "Prove complete callable owner and replace with readable domain C."
+    }
+  ]
+}
