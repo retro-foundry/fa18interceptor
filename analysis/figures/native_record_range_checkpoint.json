@@ -1,0 +1,32 @@
+{
+  "status": "complete_native_selected_range_with_explicit_sound_child",
+  "complete_entries": [
+    "C244E2"
+  ],
+  "actual_children": [
+    "C1D974"
+  ],
+  "child_contracts": [
+    "C3316E (sound argument 4; child mutates selected record)"
+  ],
+  "cases": 8192,
+  "source_boundaries": 137,
+  "covered_boundaries": 137,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; shared native record owners verified independently",
+  "native_cpu_dependency": false,
+  "limitations": "sound child remains explicit; caller supplies original magnitude table; full native startup/frame graph pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "5a843c9ef6bc5c1765c6417764fb5dc2bbaa1094f49bc1927c92aa6f5d28f63d",
+  "reports": [
+    "native selected range: 8192 complete calls match all game RAM; actual magnitude; 3277 sound contracts"
+  ],
+  "source_sha256": {
+    "port/native_record_range.c": "8e50c649aa5218ac97cdd5fecc250ca9d0ae57c76bc4324bd1b94887bbc2aa57",
+    "port/native_record_range.h": "985275dbef3296e8fb44ccf95cd0232bf71d93721bd998f571479d5c4f23e99c",
+    "port/native_control_record_update.c": "87f5c7c22dc04a89896b9c7e09a1a7cda21a581844e67da380c277b8b88839ce",
+    "port/native_control_record_update.h": "9f58d80f455431eb1ab56c6bd5109d8bbf3bb29c1800d20e19866569a76aaf45",
+    "port/scene_component_magnitude.c": "c5a1acb1e57afb44d702fd341be334de20f078b6f6de3b1cb476716dff1337e0",
+    "tools/recomp/native_record_range_oracle.c": "315c78fc4eb533313ded6137f0f58d1a329b659b94326e92f917446f7a95d2e0",
+    "tools/recomp/check_native_record_range.py": "796c997ba0d21d0f797996118921c5b7d83e8fdb52fa7b8227088dbb96ef7670"
+  }
+}

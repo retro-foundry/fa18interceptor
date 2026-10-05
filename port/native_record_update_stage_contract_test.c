@@ -11,6 +11,8 @@ typedef struct {
     FA18NativeControlRecordUpdate control;
     FA18NativeRecordSelection selection;
     FA18NativeControlRecordOps control_ops;
+    FA18NativeRecordRange range;
+    uint8_t range_redraw; uint16_t range_magnitude;
     uint8_t source[16*512],work[16*32],selector_table[8];
     uint8_t input,mirror,inhibit,context_select,detail,coarse_byte,fine_byte,rate;
     int32_t bias,long_mirror,depth,origin[3];
@@ -29,7 +31,7 @@ typedef struct {
 static int control(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->control && child<10 && slot<16 && companion<16 && decision);
+    assert(state==&f->control && child<9 && slot<16 && companion<16 && decision);
     ++f->control_calls; *decision=0; return 1;
 }
 static int origin(void *context,FA18NativeSelectorOrigin *state,
@@ -56,7 +58,9 @@ static void initialize(Fixture *f) {
         .selection_active=&f->selection_active,.origin_enable=&f->origin_enable,
         .action_first=&f->action_first,.action_second=&f->action_second,
         .action_third=&f->action_third,.pair_override=&f->pair_override};
-    f->control=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.ops=&f->control_ops,
+    f->range=(FA18NativeRecordRange){.records=&f->records,.selected_record=&f->selected,
+        .current_stride=&f->current_stride,.magnitude=&f->range_magnitude,.bar_redraw_f=&f->range_redraw};
+    f->control=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.range=&f->range,.ops=&f->control_ops,
         .post_input_event=&f->event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};

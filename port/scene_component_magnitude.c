@@ -36,8 +36,9 @@ static int divu_word(uint32_t dividend, uint16_t divisor, uint32_t *destination)
     return 0;
 }
 
-static int table_word(const FA18SceneMagnitudeTable *table, int16_t byte_offset,
+static int table_word(const FA18SceneMagnitudeTable *table,const PortFieldWindow *window, int16_t byte_offset,
                       uint16_t *word) {
+    if(window) return port_field_window_u16(window,byte_offset,word)?0:-1;
     if (!table || !table->words || !word || byte_offset < 0 ||
         ((uint16_t)byte_offset & 1u))
         return -1;
@@ -47,12 +48,12 @@ static int table_word(const FA18SceneMagnitudeTable *table, int16_t byte_offset,
     return 0;
 }
 
-int fa18_scene_component_magnitude(const FA18SceneMagnitudeTable *table,
+static int component_magnitude(const FA18SceneMagnitudeTable *table,const PortFieldWindow *window,
                                    int16_t component_0,
                                    int16_t component_1,
                                    int16_t component_2,
                                    int16_t *result) {
-    if (!table || !result) return -1;
+    if ((!table && !window) || !result) return -1;
     int16_t d2 = component_0;
     int32_t d3 = component_1;
     int16_t d4 = component_2;
@@ -77,7 +78,7 @@ int fa18_scene_component_magnitude(const FA18SceneMagnitudeTable *table,
         }
         d3 = (int16_t)((uint16_t)d3 << 1);
     }
-    if (table_word(table, (int16_t)d3, &lookup) != 0) return -1;
+    if (table_word(table,window, (int16_t)d3, &lookup) != 0) return -1;
     int32_t planar = (int32_t)(uint16_t)d2 * lookup;
 
     int32_t vertical = (int16_t)d4;
@@ -99,10 +100,19 @@ int fa18_scene_component_magnitude(const FA18SceneMagnitudeTable *table,
     } else {
         vertical = 0;
     }
-    if (table_word(table, (int16_t)vertical, &lookup) != 0) return -1;
+    if (table_word(table,window, (int16_t)vertical, &lookup) != 0) return -1;
     const uint32_t scalar_product = (uint32_t)(uint16_t)planar * lookup;
     const int32_t scalar = arithmetic_shift_right_long(
         (int32_t)scalar_product, 14);
     *result = scalar > INT16_MAX ? INT16_MAX : (int16_t)scalar;
     return 0;
+}
+
+int fa18_scene_component_magnitude(const FA18SceneMagnitudeTable *table,
+                                   int16_t x,int16_t y,int16_t z,int16_t *result) {
+    return component_magnitude(table,NULL,x,y,z,result);
+}
+int fa18_scene_component_magnitude_window(const PortFieldWindow *table,
+                                          int16_t x,int16_t y,int16_t z,int16_t *result) {
+    return component_magnitude(NULL,table,x,y,z,result);
 }

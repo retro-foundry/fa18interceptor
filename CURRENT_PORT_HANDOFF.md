@@ -13,7 +13,21 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Start from commits `80430049` (native record selection leaves) and `c9e6ae54`
+Latest batch: complete native `$C244E2` selected-range owner and its actual
+`$C1D974` magnitude child now replace the root-marker scheduler callback.
+The nine remaining scheduler children are periodic, root control, root view,
+pose, primary/secondary placement, secondary control, dispatch and finish.
+Source proof passes 8,192 complete calls at all 137/137 boundaries with all
+game RAM and independent typed owners matching. The sound child remains an
+explicit contract (3,277 argument/return/selection-mutation comparisons).
+The shared magnitude core now has a signed field-window API for original
+adjacent lookup data; the bounded word-table API remains available.
+MSVC Release game/affected contracts, strict GNU range contract, five affected
+CTests and the 495-file native build guard pass. See
+`analysis/routines/native_record_range.md` and its checkpoint. Next continue
+the root control/view/pose owners, then finish and native-main integration.
+
+Preceding commits were `80430049` (native record selection leaves) and `c9e6ae54`
 (native active-origin update). The expected working tree is clean except for
 the user's untracked `.vscode/` directory; do not stage or modify it. Continue
 committing completed, validated batches as work proceeds.
@@ -22,10 +36,10 @@ The native bootstrap graph is direct through `$C08F26`, placement, template
 gates, `$C1C63E`, `$C22C80`, `$C29042`, and `$C1C860`. Explicit lower owners
 still remain:
 
-- `FA18NativeControlRecordOps`: periodic, root control, root view, root marker,
+- `FA18NativeControlRecordOps`: periodic, root control, root view,
   pose, primary placement, secondary placement, secondary control, dispatch,
   and finish. The composed fresh-bootstrap contract reaches root control,
-  root view, root marker, root pose, and finish.
+  root view, root pose, and finish; range classification is now direct.
 - `FA18NativeRecordActionOps`: release, sound, and manoeuvre routines beneath
   the now-direct action selectors. They are route-dependent.
 - `FA18NativeSelectorOriginOps`: preparation, matrix A/B, regeneration, and

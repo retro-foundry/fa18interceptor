@@ -66,6 +66,8 @@ static int set_record_word(FA18NativeSceneRecord *record,size_t offset,uint16_t 
 int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     FA18NativeSceneRecord *root; uint16_t countdown; unsigned slot;
     if(!s || !s->records || !s->selection || s->selection->records!=s->records ||
+       !s->range || s->range->records!=s->records || s->range->selected_record!=s->selection->selected_record ||
+       s->range->current_stride!=s->current_stride ||
        !s->ops || !s->ops->consume || !s->post_input_event ||
        !s->counter_first || !s->counter_second || !s->primary_gate || !s->secondary_gate ||
        !s->periodic_word || !s->current_slot || !s->current_stride) return 0;
@@ -86,7 +88,7 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     root->aircraft->flags&=0xfffd;
     if(!child(s,FA18_RECORD_UPDATE_ROOT_CONTROL,0,0) ||
        !child(s,FA18_RECORD_UPDATE_ROOT_VIEW,0,0) ||
-       !child(s,FA18_RECORD_UPDATE_ROOT_MARKER,0,0) ||
+       !fa18_classify_native_selected_range(s->range,0) ||
        !child(s,FA18_RECORD_UPDATE_POSE,0,0)) return 0;
     for(slot=1;slot<4;++slot)
         if(!group_record(s,slot,0,*s->primary_gate,1,

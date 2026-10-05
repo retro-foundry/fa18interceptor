@@ -7,18 +7,20 @@ typedef struct {
     FA18CommandInput commands; FA18NativeSceneRecords records;
     FA18NativeControlRecordUpdate update; FA18NativeControlRecordOps ops;
     FA18NativeRecordSelection selection; FA18NativeRecordActionOps action_ops;
+    FA18NativeRecordRange range;
+    uint8_t range_redraw; uint16_t range_magnitude;
     uint8_t source[16*512],work[16*32],event,first,second,primary,secondary;
     uint8_t selection_active,origin_enable,action_first,action_second,action_third,pair_override;
     uint16_t selected,selection_marker,action_pending;
     uint16_t periodic,slot,stride;
-    unsigned calls[10],action_calls[3],dispatch_mask,pose_mask;
+    unsigned calls[9],action_calls[3],dispatch_mask,pose_mask;
     FA18NativeControlRecordChild fail;
 } Fixture;
 
 static int consume(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->update && decision && child<10 && slot<16);
+    assert(state==&f->update && decision && child<9 && slot<16);
     assert(companion<16);
     ++f->calls[child];
     if(child==f->fail) return 0;
@@ -46,7 +48,9 @@ static void initialize(Fixture *f) {
         .origin_enable=&f->origin_enable,.action_first=&f->action_first,
         .action_second=&f->action_second,.action_third=&f->action_third,
         .pair_override=&f->pair_override};
-    f->update=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.ops=&f->ops,
+    f->range=(FA18NativeRecordRange){.records=&f->records,.selected_record=&f->selected,
+        .current_stride=&f->stride,.magnitude=&f->range_magnitude,.bar_redraw_f=&f->range_redraw};
+    f->update=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.range=&f->range,.ops=&f->ops,
         .post_input_event=&f->event,.counter_first=&f->first,.counter_second=&f->second,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->slot,.current_stride=&f->stride};
@@ -65,7 +69,7 @@ int main(void) {
     assert(f.records.aircraft[15].secondary_flags==1 && f.first==1 && f.second==0x7e);
     assert(f.calls[FA18_RECORD_UPDATE_PERIODIC]==1);
     assert(f.calls[FA18_RECORD_UPDATE_ROOT_CONTROL]==1 && f.calls[FA18_RECORD_UPDATE_ROOT_VIEW]==1 &&
-           f.calls[FA18_RECORD_UPDATE_ROOT_MARKER]==1 && f.calls[FA18_RECORD_UPDATE_FINISH]==1);
+           f.calls[FA18_RECORD_UPDATE_FINISH]==1);
     assert(f.calls[FA18_RECORD_UPDATE_SECONDARY_PLACE]==2);
     assert(f.calls[FA18_RECORD_UPDATE_SECONDARY_CONTROL]==1 &&
            f.action_calls[FA18_RECORD_ACTION_MANOEUVRE]==2 && !f.pair_override);

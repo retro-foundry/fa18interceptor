@@ -11,6 +11,8 @@ typedef struct {
     FA18NativeSceneRecorder recorder; FA18NativeScenePlacement placement;
     FA18NativeRecordUpdateStage record_update; FA18NativeSelectorOrigin selector_origin;
     FA18NativeRecordSelection record_selection;
+    FA18NativeRecordRange range;
+    uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeControlRecordUpdate control_update; FA18NativeControlRecordOps control_ops;
     FA18NativeContextRefresh refresh; FA18NativeContextRefreshOps refresh_ops;
     FA18NativeStartupRanges startup; FA18NativeViewedRecordWord viewed;
@@ -43,7 +45,7 @@ static Fixture fixture;
 static int update(void *context,FA18NativeControlRecordUpdate *state,
                   FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context; uint8_t high,low; unsigned i;
-    assert(state==&f->control_update && decision && child<10 && slot<16 && companion<16);
+    assert(state==&f->control_update && decision && child<9 && slot<16 && companion<16);
     *decision=0;
     if(child!=FA18_RECORD_UPDATE_ROOT_CONTROL) return 1;
     assert(f->calls++==0 && f->context.origin_first==0x10c00000);
@@ -104,8 +106,10 @@ static void initialize(Fixture *f) {
         .selection_active=&f->selection,.origin_enable=&f->context_select,
         .action_first=&f->action_first,.action_second=&f->action_second,
         .action_third=&f->action_third,.pair_override=&f->pair_override};
+    f->range=(FA18NativeRecordRange){.records=&f->records,.selected_record=&f->selected,
+        .current_stride=&f->current_stride,.magnitude=&f->range_magnitude,.bar_redraw_f=&f->range_redraw};
     f->control_update=(FA18NativeControlRecordUpdate){.records=&f->records,
-        .selection=&f->record_selection,.ops=&f->control_ops,
+        .selection=&f->record_selection,.range=&f->range,.ops=&f->control_ops,
         .post_input_event=&f->post_event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary_gate,.secondary_gate=&f->secondary_gate,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};
