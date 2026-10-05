@@ -9,6 +9,11 @@ typedef struct {
     uint16_t segment;
     uint32_t offset;
     PortFieldWindow data;
+    /* Some original owners consume a reference field as a numeric operand.
+     * It is never used to locate data. Bind its source value explicitly when
+     * that operation is required; group copies keep it with the reference. */
+    uint32_t carried_value;
+    uint8_t carried_value_bound;
 } FA18NativeAssetReference;
 typedef struct {
     enum { FA18_SCENE_PROCEDURE_NONE, FA18_SCENE_PROCEDURE_COMPONENT_ACCUMULATION,
@@ -39,8 +44,8 @@ typedef struct {
 
 int fa18_load_native_scene_placement_assets(const FA18Hunks *hunks,
                                              FA18NativeScenePlacementAssets *assets);
-/* Original hunk 16 descriptor row, with the caller's source-identified
- * procedure. Data references resolve relocations into original assets. */
+/* Original hunk 16 descriptor row. Handler identity and data references
+ * resolve relocations into the original source procedure/assets. */
 int fa18_load_native_scene_pointer_group(const FA18Hunks *hunks,uint32_t offset,
                                           FA18NativeScenePointerGroup *group);
 /* Complete $C09266-$C095BE. Original assets and mutable scene-pointer groups

@@ -24,7 +24,11 @@ at all 172 boundaries and no child contracts. Its original-disk asset loader
 resolves the descriptors; indices reaching adjacent relocated words require
 explicit field owners. Native finish and all post-flight modes now add 90,112
 comparisons at all 371 boundaries, including actual selection release,
-readiness and view restoration. Periodic and dispatch remain scheduler children;
+readiness and view restoration. Periodic now has a complete native region owner,
+including actual spawning, point publication and orientation. Its 40,960
+comparisons cover all 635 original boundaries with no child contracts; original
+region/descriptor data loaders resolve live hunk references. Dispatch remains
+the scheduler child;
 actual view publication now has a native owner, including zoom/redraw/queue.
 Its connected post-flight proof covers 481 boundaries in 90,112 calls with no
 child contracts. Complete startup field bindings remain required.

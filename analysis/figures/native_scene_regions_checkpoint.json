@@ -1,0 +1,43 @@
+{
+  "status": "complete_native_scene_regions_no_child_contracts",
+  "complete_entries": [
+    "C28996",
+    "C28B16",
+    "C28B34",
+    "C28F16",
+    "C2D954"
+  ],
+  "child_contracts": [],
+  "cases": 40960,
+  "cases_per_entry": 8192,
+  "source_boundaries": 635,
+  "covered_boundaries": 635,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; independent typed record and descriptor owners, carried axis and mutable region index",
+  "native_cpu_dependency": false,
+  "limitations": "scheduler calls actual regions; original region/parameter loader is verified; numeric third-descriptor operand needs explicit source bindings; dispatch, original startup constructor and full native main remain pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "202f9849488805ffc33078f7bb6e8254b7b22a9b4eff7b8dfcb06beef6d65456",
+  "reports": [
+    "region assets: all 2328 Hunk-27 bytes/relocations, four live region windows and three original descriptor groups verified; numeric operands remain explicit",
+    "native regions: 40960 complete calls match full game RAM, typed descriptors/records, carried axis and mutable region order; no child contracts"
+  ],
+  "source_sha256": {
+    "port/native_scene_regions.c": "4692a588825a669fa85c58e8b996b507f8d38f9fa5b18e6959c847f1e77811fa",
+    "port/native_scene_regions.h": "dcd3cd8d5f5e0000a423b2f9dd93004e3f43967ba8f6127e20c5a741c1cc6d1b",
+    "port/native_record_orientation.c": "3ed857cf6f97b3a8c2be42beaccd62cc303de99bfc4390b0cdbc348cfc4a9f89",
+    "port/native_record_orientation.h": "7ec140a7b06df2b537d195d3343406d59da4cb97206e790d22f88792fd7162be",
+    "port/native_scene_regions_contract_test.c": "1d56432c7e5b68814f88a4c06748675633ba3683de42589fe6743b85be90df98",
+    "port/CMakeLists.txt": "bdbcc5dec6f2563070bf4272715ec49e822a9576f6e138230200128a108ceb30",
+    "port/native_scene_placement.c": "10cb1002606a44b34262c393e6d9d3dfad187c91ca27b71c36b1be8e2ca0c7fe",
+    "port/native_scene_placement.h": "d9a67febbaf81bfcf33a2ee6ad9d110bc10463e80d010788afe211f66bfe4f6f",
+    "port/native_record_action_placement_contract_test.c": "ddafbe5206aebc590ff5e273e33b29b7a2c21e0030a1fedcc79cc9f24b6699cf",
+    "port/native_control_record_update.c": "b54fc6c2cc6cab55f5cf5b3645096e41c419b56b03b20ecf1913ede32f09754f",
+    "port/native_control_record_update.h": "447a3712181d50267a2ebd42ff125244e8b7dfd86178765ba6cd00b70eed18e6",
+    "port/native_control_record_update_contract_test.c": "011684b93fb8347daddc9b6676353dbeb84e004e9e5b27b6f9d46d76bee03a15",
+    "port/native_scene_regions_test_support.h": "98de1ed8293eb0bce3dca0ca909dac13a685338c7ff600073e1f4639891bb6a6",
+    "port/native_record_update_stage_contract_test.c": "62da671e728460e1e98adb661f2e176ef92465b1fa7c9af92241d41ebe1e0cf8",
+    "port/scene_bootstrap_native_contract_test.c": "867eedcce6f5ebfd209cd2cc700e82361641280a393bc29422495def9255a3ee",
+    "tools/recomp/native_scene_regions_oracle.c": "e63a56784bd50273df55b052e85f7569dceff4230ee2688ae2f7e0ffc9b1b008",
+    "tools/recomp/check_native_scene_regions.py": "d420a0449c9e6cdd3744b8fc445bfddd53f7d1cfe8cc55778b166ec5b526e720"
+  }
+}

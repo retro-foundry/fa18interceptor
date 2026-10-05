@@ -52,23 +52,24 @@ static void initialize(Fixture *f,unsigned slot) {
 }
 static void check_loader(void) {
     FA18HunkSegment segments[19]={0}; FA18Hunks hunks={0};
-    FA18HunkReloc relocations[6]; FA18NativeRecordActionPlacementAssets assets;
+    FA18HunkReloc relocations[8]; FA18NativeRecordActionPlacementAssets assets;
     uint8_t source[0x1a80]={0},target[32]={0}; unsigned row,i;
     hunks.count=19; hunks.segments=segments;
     segments[16].data=source; segments[16].size=sizeof source;
-    segments[16].relocs=relocations; segments[16].reloc_count=6;
+    segments[16].relocs=relocations; segments[16].reloc_count=8;
     segments[17].data=source; segments[17].size=sizeof source;
     segments[18].data=target; segments[18].size=sizeof target;
-    for(row=0;row<2;++row) for(i=0;i<3;++i) {
-        unsigned at=row*20+4+4*i;
-        source[at+3]=(uint8_t)(i+1);
-        relocations[row*3+i].offset=at; relocations[row*3+i].target=18;
+    for(row=0;row<2;++row) for(i=0;i<4;++i) {
+        unsigned at=row*20+4*i;
+        source[at+3]=(uint8_t)(i?i:0x14);
+        relocations[row*4+i].offset=at; relocations[row*4+i].target=(uint16_t)(i?18:10);
     }
     assert(fa18_load_native_record_action_placement_assets(&hunks,&assets));
     assert(assets.primary.procedure==FA18_SCENE_PROCEDURE_RECORD_STREAM);
     assert(assets.alternate.data[2].segment==18 && assets.alternate.data[2].offset==3);
     assert(assets.alternate.data[2].data.bytes==target && assets.alternate.data[2].data.origin==3);
     assert(!assets.alternate.data[3].data.bytes);
+    assert(!assets.primary.data[1].carried_value_bound);
     assert(assets.offsets_10.bytes==source+0xdb2 && !assets.offsets_10.origin && assets.offsets_10.byte_count==0x4e);
     assert(assets.offsets_other.origin==0x24);
     { int16_t v; assert(port_field_window_s16(&assets.offsets_other,40,&v));
@@ -76,6 +77,7 @@ static void check_loader(void) {
     source[7]=33;
     assert(!fa18_load_native_record_action_placement_assets(&hunks,&assets));
     assert(!fa18_load_native_scene_pointer_group(&hunks,40,&assets.primary));
+    assert(!fa18_load_native_scene_pointer_group(NULL,0,&assets.primary));
 }
 int main(void) {
     static Fixture f; FA18NativeSceneRecord *r; unsigned i;

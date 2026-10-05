@@ -4,6 +4,7 @@
 #include "native_record_pose_test_support.h"
 #include "native_record_action_placement_test_support.h"
 #include "native_postflight_test_support.h"
+#include "native_scene_regions_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -19,6 +20,7 @@ typedef struct {
     FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
     FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
     FA18NativePostflight postflight; FA18PostflightTestStorage post_storage;
+    FA18NativeSceneRegions regions; FA18SceneRegionsTestStorage region_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -154,6 +156,7 @@ static void initialize(Fixture *f) {
         .primary_gate=&f->primary_gate,.secondary_gate=&f->secondary_gate,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};
     fa18_test_bind_postflight(&f->postflight,&f->post_storage,&f->control_update);
+    fa18_test_bind_scene_regions(&f->regions,&f->region_storage,&f->control_update);
     f->postflight.target_record=&f->flight.spawn_gate;
     f->postflight.command_word=&f->flight.command_word;
     f->postflight.player_phase=&f->phase;

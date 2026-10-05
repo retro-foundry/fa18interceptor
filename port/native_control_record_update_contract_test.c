@@ -4,6 +4,7 @@
 #include "native_record_pose_test_support.h"
 #include "native_record_action_placement_test_support.h"
 #include "native_postflight_test_support.h"
+#include "native_scene_regions_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -15,6 +16,7 @@ typedef struct {
     FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
     FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
     FA18NativePostflight postflight; FA18PostflightTestStorage post_storage;
+    FA18NativeSceneRegions regions; FA18SceneRegionsTestStorage region_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -25,14 +27,14 @@ typedef struct {
     uint8_t selection_active,origin_enable,action_first,action_second,action_third,pair_override;
     uint16_t selected,selection_marker,action_pending;
     uint16_t periodic,slot,stride;
-    unsigned calls[2],action_calls[3],dispatch_mask;
+    unsigned calls[1],action_calls[3],dispatch_mask;
     FA18NativeControlRecordChild fail;
 } Fixture;
 
 static int consume(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->update && decision && child<2 && slot<16);
+    assert(state==&f->update && decision && child==FA18_RECORD_UPDATE_DISPATCH && slot<16);
     assert(companion<16);
     ++f->calls[child];
     if(child==f->fail) return 0;
@@ -80,10 +82,17 @@ static void initialize(Fixture *f) {
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->slot,.current_stride=&f->stride};
     fa18_test_bind_postflight(&f->postflight,&f->post_storage,&f->update);
+    fa18_test_bind_scene_regions(&f->regions,&f->region_storage,&f->update);
 }
 int main(void) {
     static Fixture f; unsigned i; uint16_t expected_dispatch;
     initialize(&f); f.periodic=3; f.first=2; f.second=0x7f; f.secondary=1;
+    /* Execute an actual inside-region scan, including its mode-zero gate. */
+    f.region_storage.box[0]=f.region_storage.box[1]=0xff;
+    f.region_storage.box[3]=1;
+    f.region_storage.box[4]=f.region_storage.box[5]=0xff;
+    f.region_storage.box[7]=1;
+    f.region_storage.directory[0]=(PortFieldWindow){.bytes=f.region_storage.box,.byte_count=10};
     f.pair_override=1;
     put16(f.records.records,0x4c,5); f.records.aircraft[0].flags=0xffff;
     /* Root pose advances action two to three before the primary selectors. */
@@ -94,7 +103,7 @@ int main(void) {
     for(i=0;i<16;++i) assert(f.records.work[i][4]==0xff && f.records.work[i][5]==0xff);
     for(i=0;i<15;++i) assert(!(f.records.aircraft[i].secondary_flags&1));
     assert(f.records.aircraft[15].secondary_flags==1 && f.first==1 && f.second==0x7e);
-    assert(f.calls[FA18_RECORD_UPDATE_PERIODIC]==1);
+    assert(f.region_storage.occupied==1);
     assert(!f.placement_storage.space && !f.post_storage.report && !f.pair_override);
     assert(!(f.records.aircraft[5].flags&0x40) && !(f.records.aircraft[9].flags&0x40));
     assert(f.action_calls[FA18_RECORD_ACTION_MANOEUVRE]==2 && !f.pair_override);
@@ -108,9 +117,15 @@ int main(void) {
     { uint8_t bytes[2]; assert(fa18_read_native_scene_record(f.records.records,0x4c,bytes,2));
       assert(!bytes[0] && bytes[1]==4); }
 
-    initialize(&f); f.periodic=3; f.fail=FA18_RECORD_UPDATE_PERIODIC;
+    initialize(&f); f.periodic=3; f.region_storage.assets.directory_count=0;
     assert(!fa18_update_native_control_records(&f.update));
     assert(f.records.work[0][4]==0xff && f.records.aircraft[0].secondary_flags==0);
+    initialize(&f); f.update.regions=NULL;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.regions.mode=&f.primary;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.regions.pointer_groups=f.placement_storage.groups+1;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
 
     /* Slot four now uses the actual shared stream player, before dispatch. */
     initialize(&f); f.view_mode=125; f.records.records[0].word_6e=1;

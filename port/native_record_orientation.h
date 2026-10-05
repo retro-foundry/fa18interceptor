@@ -9,6 +9,10 @@
  * Missing data returns 0 with preceding angle/matrix stores retained. */
 int fa18_publish_native_record_orientation(FA18NativeSceneRecord *record,
     const uint16_t angles[3],const FA18FlightTrigData *data);
+/* Same publication, retaining the original inverse-third-angle sine as the
+ * numeric axis carried into the caller's next operation. */
+int fa18_publish_native_record_orientation_with_axis(FA18NativeSceneRecord *record,
+    const uint16_t angles[3],const FA18FlightTrigData *data,uint32_t *axis);
 /* $C2D94E adds the control-bit clear before the same publication. */
 int fa18_reset_native_record_orientation(FA18NativeSceneRecord *record,
     const uint16_t angles[3],const FA18FlightTrigData *data);

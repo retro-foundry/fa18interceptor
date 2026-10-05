@@ -99,6 +99,11 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
        s->postflight->admitted!=s->view->admitted || !s->records->input ||
        s->postflight->ready_mode!=&s->records->input->indexed.pose_entry ||
        s->postflight->status!=&s->records->input->indexed.cockpit_low_byte ||
+       !s->regions || s->regions->records!=s->records ||
+       s->regions->view_work!=s->view_work || s->regions->mode!=s->view->mode ||
+       s->regions->admitted!=s->view->admitted ||
+       s->regions->pointer_groups!=s->placement->pointer_groups ||
+       !s->regions->assets || s->regions->assets->parameters!=&s->view->assets->parameters ||
        !s->ops || !s->ops->consume || !s->post_input_event ||
        !s->counter_first || !s->counter_second || !s->primary_gate || !s->secondary_gate ||
        !s->periodic_word || !s->current_slot || !s->current_stride) return 0;
@@ -106,7 +111,7 @@ int fa18_update_native_control_records(FA18NativeControlRecordUpdate *s) {
     if(!*s->post_input_event)
         for(slot=0;slot<FA18_NATIVE_SCENE_RECORDS;++slot)
             set_work_word(s->records,slot,(uint16_t)(work_word(s->records,slot)-1u));
-    if((*s->periodic_word&15u)==3u && !child(s,FA18_RECORD_UPDATE_PERIODIC,0,0)) return 0;
+    if((*s->periodic_word&15u)==3u && !fa18_update_native_scene_regions(s->regions)) return 0;
     for(slot=0;slot<15;++slot) s->records->aircraft[slot].secondary_flags&=0xfffe;
     if(!*s->post_input_event) {
         if((int8_t)*s->counter_first>0) --*s->counter_first;

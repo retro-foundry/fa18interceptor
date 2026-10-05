@@ -13,7 +13,47 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: actual native `$C1BEE8` record-view publication, `$C1BA86`
+Latest batch: complete native periodic `$C28996`, region spawn `$C28B16`,
+dispatch `$C28B34` and actual `$C28F16` point publication now replace the
+scheduler's periodic callback. Actual native `$C2D954` orientation publishes
+both matrices and exposes its carried axis. `$C23A7E` dispatch is now the
+scheduler's one remaining outer child. The region index retains source spawn/
+rejection mutations, so scanning can exceed eight rows; the original disk has
+four directory entries and a terminator, not eight region assets.
+
+Full original-byte proof passes 40,960 calls (8,192 per five entries), all
+635/635 boundaries, full game RAM, independent typed records/descriptors,
+carried axis and source region index, with no child contracts. The Hunk-27
+loader checks all 2,328 original bytes/relocations, four live windows and three
+actual descriptor groups. Descriptor procedure identity now resolves from
+relocations; a relocated zero offset resolves to a target hunk's first byte
+instead of null. The original `$3C` group's third data reference requires this
+fix. MSVC Release game/affected builds, strict GNU compilation, eight affected
+CTests and the unchanged 509-file native guard pass. See
+`analysis/routines/native_scene_regions.md` and its checkpoint.
+
+Keep the descriptor bank shared with placement. `FA18NativeAssetReference`
+now has explicitly bound `carried_value`/`carried_value_bound` metadata for the
+third descriptor operand consumed numerically before admission rejection.
+Group copies carry that value with their semantic references; native code does
+not use it to reconstruct or dereference an address. The disk loader leaves it
+unbound: production startup still must identify/bind this numeric source input
+and canonical recorder/occupied/active/jitter aliases. Do not substitute raw
+unrelocated offsets, host pointers or a second frozen descriptor bank.
+Regions also share the actual record-view parameter window, mode/admission,
+records and carried work. The scheduler validates these aliases.
+
+Next complete `$C23A7E` and its actual lower owners, then reconcile original
+startup/input bindings and install the native startup/frame graph in main.
+Its complete readable reference is
+`port/game/main_loop_flight_controls.c:advance_main_loop_flight_record`;
+use the sealed original graph, including the early returns and `$C243F2` tail,
+as authority. Preserve its boolean completion decision and shared carried axis.
+Existing lower pose/control/flight/render/audio dependencies and the startup
+origin/sequence alias gap below remain requirements. The playable ROM-free
+reference runner still uses CPU/chipset state; this goal is not complete.
+
+Preceding batch (`0440c536`): actual native `$C1BEE8` record-view publication, `$C1BA86`
 redraw/publication and `$C1B906` zero-view/publication now share the existing
 native view and queue owners. Post-flight invokes this actual owner when its
 `publication` is bound; it validates canonical origin, sequence phase, view-side,
@@ -43,7 +83,7 @@ still needs reconciliation as described below. Next continue periodic/dispatch
 and their actual lower owners, reuse publication for dispatch/pose, bind original
 startup state/assets and install the native startup/frame graph in main.
 Periodic source owner is `port/game/flight_dynamics.c:update_scene_regions`:
-eight `$C29720` regions, enter/active both call `$C28B16` at distinct return
+`$C29720` region directory, enter/active both call `$C28B16` at distinct return
 sites, followed by actual `$C28B34` spawning/dispatch. Placement/replacement
 uses `$C28F16` at three source sites; orientation uses `$C2D954`. Keep the
 original row/descriptor references and mutable record fields resolved to typed

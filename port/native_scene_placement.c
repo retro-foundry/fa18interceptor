@@ -59,22 +59,28 @@ static int asset_reference(const FA18Hunks *hunks,uint32_t source_segment,
     if(!source->data || field>source->size || source->size-field<4) return 0;
     raw=fa18_be32(source->data+field);
     memset(reference,0,sizeof *reference);
-    if(!raw) return 1;
-    if(!fa18_hunk_pointer(hunks,source_segment,field,&segment,&offset) ||
-       segment>=hunks->count || !hunks->segments[segment].data ||
+    /* A relocated zero is the first byte of a target hunk, not a null
+     * reference. Only an unrelocated zero denotes absence. */
+    if(!fa18_hunk_pointer(hunks,source_segment,field,&segment,&offset)) return !raw;
+    if(segment>=hunks->count || !hunks->segments[segment].data ||
        offset>hunks->segments[segment].size) return 0;
     reference->segment=(uint16_t)segment; reference->offset=offset;
     return asset_window(hunks,segment,offset,&reference->data);
 }
 int fa18_load_native_scene_pointer_group(const FA18Hunks *hunks,uint32_t offset,
                                           FA18NativeScenePointerGroup *group) {
-    unsigned i;
+    unsigned i; uint32_t procedure_segment,procedure_offset;
     if(!group) return 0;
     memset(group,0,sizeof *group);
-    /* Complete placement owners use rows 0/$14 ($C1ED4C record stream)
-     * and $3C/$50 ($C22AC0 component accumulation), respectively. */
-    if(offset==0 || offset==0x14) group->procedure=FA18_SCENE_PROCEDURE_RECORD_STREAM;
-    else if(offset==POINTER_INPUT_10 || offset==POINTER_INPUT_OTHER)
+    if(!hunks || !hunks->segments || hunks->count<=POINTER_HUNK ||
+       !hunks->segments[POINTER_HUNK].data) return 0;
+    /* Resolve the actual source handler identity, independently of load
+     * addresses. Region rows also use $78/$C8 and other original groups. */
+    if(offset>=0x140 || offset%20 ||
+       !fa18_hunk_pointer(hunks,POINTER_HUNK,offset,&procedure_segment,&procedure_offset)) return 0;
+    if(procedure_segment==10 && procedure_offset==0x14)
+        group->procedure=FA18_SCENE_PROCEDURE_RECORD_STREAM;
+    else if(procedure_segment==16 && procedure_offset==0xa78)
         group->procedure=FA18_SCENE_PROCEDURE_COMPONENT_ACCUMULATION;
     else return 0;
     for(i=0;i<4;++i)
