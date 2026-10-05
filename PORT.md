@@ -18,6 +18,12 @@ translations now have direct native instruction-helper bindings in
 This does not change the final readable, CPU-free deliverable above.
 
 The active 2026-10-05 goal now prioritizes that full emulation-free deliverable.
+Native primary/secondary record placement now shares the startup descriptor
+bank, records and mutable fields directly, with 16,384 original comparisons
+at all 172 boundaries and no child contracts. Its original-disk asset loader
+resolves the descriptors; indices reaching adjacent relocated words require
+explicit field owners. Periodic, dispatch and finish remain scheduler children.
+See `analysis/routines/native_record_action_placement.md`.
 Reference `port/game` modules still use the machine bus; readable C alone does
 not remove this dependency. Ordinary-state modules in `port/` must be composed
 into the complete native game loop. The first current input component,

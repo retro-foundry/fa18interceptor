@@ -66,12 +66,17 @@ static int asset_reference(const FA18Hunks *hunks,uint32_t source_segment,
     reference->segment=(uint16_t)segment; reference->offset=offset;
     return asset_window(hunks,segment,offset,&reference->data);
 }
-static int pointer_group(const FA18Hunks *hunks,uint32_t offset,
-                         FA18NativeScenePointerGroup *group) {
+int fa18_load_native_scene_pointer_group(const FA18Hunks *hunks,uint32_t offset,
+                                          FA18NativeScenePointerGroup *group) {
     unsigned i;
     if(!group) return 0;
     memset(group,0,sizeof *group);
-    group->procedure=FA18_SCENE_PROCEDURE_COMPONENT_ACCUMULATION;
+    /* Complete placement owners use rows 0/$14 ($C1ED4C record stream)
+     * and $3C/$50 ($C22AC0 component accumulation), respectively. */
+    if(offset==0 || offset==0x14) group->procedure=FA18_SCENE_PROCEDURE_RECORD_STREAM;
+    else if(offset==POINTER_INPUT_10 || offset==POINTER_INPUT_OTHER)
+        group->procedure=FA18_SCENE_PROCEDURE_COMPONENT_ACCUMULATION;
+    else return 0;
     for(i=0;i<4;++i)
         if(!asset_reference(hunks,POINTER_HUNK,offset+4u+4u*i,group->data+i)) return 0;
     return 1;
@@ -84,8 +89,8 @@ int fa18_load_native_scene_placement_assets(const FA18Hunks *hunks,
         asset_window(hunks,GRID_HUNK,GRID_WORDS,&assets->grid_words) &&
         asset_window(hunks,GRID_HUNK,GRID_BYTES,&assets->grid_bytes) &&
         fa18_load_native_trig_data(hunks,&assets->trig)==0 &&
-        pointer_group(hunks,POINTER_INPUT_10,&assets->input_10) &&
-        pointer_group(hunks,POINTER_INPUT_OTHER,&assets->input_other);
+        fa18_load_native_scene_pointer_group(hunks,POINTER_INPUT_10,&assets->input_10) &&
+        fa18_load_native_scene_pointer_group(hunks,POINTER_INPUT_OTHER,&assets->input_other);
 }
 
 static int root_kind(FA18NativeSceneRecord *root,const FA18NativeScenePointerGroup *group) {

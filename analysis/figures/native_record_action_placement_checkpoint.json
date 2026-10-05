@@ -1,0 +1,60 @@
+{
+  "status": "complete_native_primary_secondary_placement_no_child_contracts",
+  "complete_entries": [
+    "C2374C",
+    "C2377E"
+  ],
+  "child_contracts": [],
+  "unreachable_arm_proof": {
+    "kind_writes": {
+      "12728348": "137c00010062",
+      "12728380": "137c00000062"
+    },
+    "guards": {
+      "12728474": "12290062",
+      "12728478": "020100f0",
+      "12728482": "0c010030",
+      "12728486": "6762",
+      "12728788": "10290062",
+      "12728792": "020000f0",
+      "12728796": "0c000030",
+      "12728800": "6642"
+    },
+    "excluded": [
+      "C2390A-C2391A",
+      "C239E2-C23A1E"
+    ],
+    "reason": "all complete-entry paths assign kind 0/1; no intervening kind write or child; source bytes sealed",
+    "scope": "only C2374C/C2377E; manoeuvre/release can reach the class-30 arms"
+  },
+  "cases": 16384,
+  "cases_per_entry": 8192,
+  "source_boundaries": 172,
+  "covered_boundaries": 172,
+  "comparison": "all Chip/Slow RAM except CPU ABI stack C7FD00..C7FF00; shared native record owners independently verified; carried axis and typed descriptors checked",
+  "native_cpu_dependency": false,
+  "limitations": "caller binds original assets, live mode counters and explicit adjacent numeric fields beyond the first relocated table operand; record-stream renderer and full native startup/frame graph pending",
+  "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+  "original_pc_bytes_sha256": "7685148933330ef980039c18b616c172bd115035505263ef61225e72a7947634",
+  "reports": [
+    "action assets: 78 original Hunk-17 table/adjacent bytes and six Hunk-51 references match; adjacent relocated operands require explicit owners",
+    "native primary/secondary placement: 16384 complete calls match all game RAM, typed records/descriptors and carried axis; 13378 launches (3341 aliased), 3006 inactive; no child contracts"
+  ],
+  "source_sha256": {
+    "port/native_record_action_placement.c": "c1707eea5e4ace4ac5a64e7572a287200ea85dd71844bebede4eb4a1d2adbf02",
+    "port/native_record_action_placement.h": "f8a0c3a8f85a14d9cf5aa7b03ee701687f5f56b6506e41860c1c3b879dc23266",
+    "port/native_record_action_placement_contract_test.c": "a8dd2474ea993f616fc409b0b293e1b248ff8bfbf8f1ebe4e10585777d94ccff",
+    "port/native_record_action_placement_test_support.h": "90e402f74d24d3fa9cc9a60febc89830266e5ffad3f25f6e2b9c78fa32e29e95",
+    "port/native_control_record_update.c": "c6b808b9e53963167817ee6fc6b213d74e07a9daa7558d3a0765a7652932f8c7",
+    "port/native_control_record_update.h": "61126438aa26641df4ea6ebdfed36cd1ddf74d2a9fefc5eceb1550d4ea887b71",
+    "port/native_control_record_update_contract_test.c": "160ce940c16326a6e0d066f32e49e04f72a9c50aad73adb236f29533986850ff",
+    "port/CMakeLists.txt": "c0bb661460a24c4cb0a02341d8ba9f0ca2cffabf11304a125b3b148f51b9144f",
+    "port/native_record_update_stage_contract_test.c": "ee2a2ee5b3f95e93dca6a0b5067b90858e8f73602f103c8223d9affba4535691",
+    "port/scene_bootstrap_native_contract_test.c": "b21531980a821b713dd942a28abf93126768b8cbd18b5d92754da2531ed08043",
+    "port/scene_bootstrap_native.c": "f27cb8492a187586d10cf7792db8687032b27bf6b33a25c9053fdb4d2626a467",
+    "port/native_scene_placement.c": "81ae1b3dbd4548bf3dd7c3c309bc34a409ef1f1622cf6fcbfc0e21ee0c6bad03",
+    "port/native_scene_placement.h": "986169295a3148d4ad0a1eaff4d51bfa3c28ccbfed84d9a28db40e68f03b4966",
+    "tools/recomp/native_record_action_placement_oracle.c": "3e79cd5e0ecff3c0a31fe05ece73fd87e157187352618f7092f39a156439c2cc",
+    "tools/recomp/check_native_record_action_placement.py": "d2f4bad0af0b226cf24fecfa5f5c044360629544fe001559abfc12eadfb40b35"
+  }
+}

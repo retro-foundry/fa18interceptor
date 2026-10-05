@@ -2,6 +2,7 @@
 
 #include "native_record_control_test_support.h"
 #include "native_record_pose_test_support.h"
+#include "native_record_action_placement_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -11,6 +12,7 @@ typedef struct {
     FA18NativeRecordSelection selection; FA18NativeRecordActionOps action_ops;
     FA18NativeRecordPose pose; FA18RecordPoseTestStorage pose_storage;
     FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
+    FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -21,14 +23,14 @@ typedef struct {
     uint8_t selection_active,origin_enable,action_first,action_second,action_third,pair_override;
     uint16_t selected,selection_marker,action_pending;
     uint16_t periodic,slot,stride;
-    unsigned calls[5],action_calls[3],dispatch_mask;
+    unsigned calls[3],action_calls[3],dispatch_mask;
     FA18NativeControlRecordChild fail;
 } Fixture;
 
 static int consume(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->update && decision && child<5 && slot<16);
+    assert(state==&f->update && decision && child<3 && slot<16);
     assert(companion<16);
     ++f->calls[child];
     if(child==f->fail) return 0;
@@ -68,8 +70,10 @@ static void initialize(Fixture *f) {
         &f->view_work,&f->slot,&f->event,&f->view_mode);
     f->control_player.origin_enable=&f->origin_enable;
     fa18_test_bind_record_pose(&f->pose,&f->pose_storage,&f->control_player,&f->stride);
+    fa18_test_bind_record_action_placement(&f->action_placement,&f->placement_storage,
+        &f->control_player,&f->pose,&f->view_limit);
     f->update=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.range=&f->range,.ops=&f->ops,
-        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,.pose=&f->pose,
+        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,.pose=&f->pose,.placement=&f->action_placement,
         .post_input_event=&f->event,.counter_first=&f->first,.counter_second=&f->second,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->slot,.current_stride=&f->stride};
@@ -89,7 +93,7 @@ int main(void) {
     assert(f.records.aircraft[15].secondary_flags==1 && f.first==1 && f.second==0x7e);
     assert(f.calls[FA18_RECORD_UPDATE_PERIODIC]==1);
     assert(f.calls[FA18_RECORD_UPDATE_FINISH]==1);
-    assert(f.calls[FA18_RECORD_UPDATE_SECONDARY_PLACE]==2);
+    assert(!(f.records.aircraft[5].flags&0x40) && !(f.records.aircraft[9].flags&0x40));
     assert(f.action_calls[FA18_RECORD_ACTION_MANOEUVRE]==2 && !f.pair_override);
     expected_dispatch=(uint16_t)((1u<<1)|(1u<<2)|(1u<<3)|(1u<<4)|(1u<<5)|(1u<<6)|(1u<<8)|
         (1u<<9)|(1u<<12)|(1u<<13)|(1u<<14)|(1u<<15));
@@ -123,5 +127,30 @@ int main(void) {
     assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
     initialize(&f); f.pose.origin_enable=&f.primary;
     assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.update.placement=NULL;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+    initialize(&f); f.action_placement.view_work=NULL;
+    assert(!fa18_update_native_control_records(&f.update) && !f.records.work[0][4]);
+
+    /* Actual primary stores are consumed in scheduler order, on the shared
+     * root and descriptor bank, before the dispatch child observes them. */
+    initialize(&f); f.event=1; f.primary=1; f.records.records[0].byte_5f=0x30;
+    f.records.aircraft[0].weapon_radar=0x20;
+    assert(fa18_update_native_control_records(&f.update));
+    assert(!f.records.records[0].byte_5f && f.placement_storage.primary==3);
+    for(i=1;i<4;++i) {
+        assert(f.records.records[i].byte_5f==(uint8_t)(0x40-i*0x10));
+        assert(f.placement_storage.groups[i].procedure==FA18_SCENE_PROCEDURE_RECORD_STREAM);
+        assert(f.records.aircraft[i].flags==0x11c2);
+    }
+    assert(f.placement_storage.pending==1 && f.control_storage.stream_view==0xfb);
+
+    initialize(&f); f.event=1; f.secondary=1; f.placement_storage.enable=1;
+    f.records.aircraft[4].flags=0x40; f.records.aircraft[4].weapon_radar=0x30;
+    f.records.records[4].byte_5f=2;
+    assert(fa18_update_native_control_records(&f.update));
+    assert(f.records.records[4].byte_5f==1 && f.records.records[5].byte_5f==2);
+    assert(f.records.aircraft[5].equipment_kind==1 && f.records.aircraft[5].flags==0x11c2);
+    assert(f.placement_storage.groups[5].procedure && !f.placement_storage.pending);
     return 0;
 }

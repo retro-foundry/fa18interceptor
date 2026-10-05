@@ -25,6 +25,10 @@ typedef struct {
     FA18NativeRendererClear renderer;
     FA18NativeScenePlacement placement;
     FA18NativeRecordUpdateStage update;
+    FA18NativeControlRecordUpdate control;
+    FA18NativeRecordActionPlacement action_placement;
+    FA18NativeScenePointerGroup pointer_groups[16];
+    uint8_t fire_state;
     FA18NativeContextRefresh refresh;
     FA18NativeSceneBootstrap bootstrap;
     GateOracleState gates;
@@ -114,7 +118,17 @@ static int boot_load(BootstrapState *s) {
     p->view.span_origin_y=rd_u16(SPAN_ORIGIN_Y); p->view.zoom_scale=rd_u16(ZOOM_SCALE);
     for(i=0;i<24;++i) s->depth[i]=rd_u16(DEPTH_VALUES+2*i);
     s->placement.player=&p->setup;
+    s->placement.pointer_groups=s->pointer_groups; s->placement.pointer_group_count=16;
+    s->fire_state=rd_u8(FIRE_STATE); s->placement.fire_state=&s->fire_state;
     s->update.records=&p->bank; s->update.view=&p->view;
+    /* The historical parent proof still contracts the entire update child.
+     * Its shared descriptor/global bindings satisfy the current parent API;
+     * this fixture does not claim execution of the lower startup graph. */
+    s->update.control_records=&s->control; s->control.placement=&s->action_placement;
+    s->action_placement=(FA18NativeRecordActionPlacement){.pointer_groups=s->pointer_groups,
+        .pointer_group_count=16,.warning_causes=&p->warnings,.events=&p->events,
+        .fire_state=&s->fire_state,.scene_redraw=&p->view.update_mask,
+        .stores_redraw_a=&p->flight.weapon_mode_redraws,.stores_redraw_b=&p->flight.weapon_redraws};
     s->refresh.records=&p->bank; s->refresh.view=&p->view;
     s->bootstrap=(FA18NativeSceneBootstrap){.context=&p->context,.player=&p->setup,.placement=&s->placement,.update=&s->update,.refresh=&s->refresh,.startup=&s->startup,
         .viewed_word=&s->viewed,.renderer=&s->renderer,.gates=&s->gates.state,.scene_limit=&s->scene_limit,.previous_scene_limit=&s->previous_limit,

@@ -1,7 +1,7 @@
 #include "scene_bootstrap_native.h"
 
 static int shared_bootstrap(const FA18NativeSceneBootstrap *s) {
-    FA18FlightCommandState *f;
+    FA18FlightCommandState *f; FA18NativeRecordActionPlacement *p;
     if(!s || !s->context || !s->context->view || !(f=s->context->view->flight) ||
        !f->commands || !s->player || s->player->flight!=f || !s->player->records ||
        s->player->records->input!=f->commands || !s->player->effects ||
@@ -9,6 +9,12 @@ static int shared_bootstrap(const FA18NativeSceneBootstrap *s) {
        !s->update || s->update->records!=s->player->records || s->update->view!=s->context->view ||
        !s->refresh || s->refresh->records!=s->player->records || s->refresh->view!=s->context->view ||
        !s->startup || !s->viewed_word || !s->renderer || !s->gates) return 0;
+    if(!s->update->control_records || !(p=s->update->control_records->placement) ||
+       p->pointer_groups!=s->placement->pointer_groups ||
+       p->pointer_group_count!=s->placement->pointer_group_count ||
+       p->warning_causes!=s->player->warning_causes || p->events!=s->player->event_bits ||
+       p->fire_state!=s->placement->fire_state || p->scene_redraw!=&s->context->view->update_mask ||
+       p->stores_redraw_a!=&f->weapon_mode_redraws || p->stores_redraw_b!=&f->weapon_redraws) return 0;
     return f->player==s->player->records->aircraft &&
         s->context->records==s->player->records->geometry && s->context->record_count==16;
 }
@@ -44,6 +50,7 @@ int fa18_bind_native_scene_bootstrap(FA18NativeSceneBootstrap *s,FA18CommandQueu
        !s->readout_valid[0] || !s->readout_valid[1] || !s->reference_18 || !s->depth_values || s->depth_count<22) return 0;
     v=s->context->view; f=v->flight;
     if(q->commands!=f->commands) return 0;
+    s->update->control_records->placement->viewed_record=words+0x1e;
     for(i=0;i<count;i+=2) if(!port_field_word_pair_valid(words+i)) return 0;
     if(!import_word(words+2,&f->spawn_gate) || !import_word(words+6,&f->command_word) ||
        !import_byte(words+12,&f->commands->indexed.cockpit_high_byte) ||

@@ -2,6 +2,7 @@
 
 #include "native_record_control_test_support.h"
 #include "native_record_pose_test_support.h"
+#include "native_record_action_placement_test_support.h"
 #include <assert.h>
 #include <string.h>
 
@@ -15,6 +16,7 @@ typedef struct {
     FA18NativeControlRecordOps control_ops;
     FA18NativeRecordPose pose; FA18RecordPoseTestStorage pose_storage;
     FA18NativeRecordControl control_player; FA18RecordControlTestStorage control_storage;
+    FA18NativeRecordActionPlacement action_placement; FA18RecordActionPlacementTestStorage placement_storage;
     FA18NativeRecordRange range;
     uint8_t range_redraw; uint16_t range_magnitude;
     FA18NativeRecordView record_view; FA18NativeRecordViewWork view_work;
@@ -39,7 +41,7 @@ typedef struct {
 static int control(void *context,FA18NativeControlRecordUpdate *state,
                    FA18NativeControlRecordChild child,unsigned slot,unsigned companion,int *decision) {
     Fixture *f=context;
-    assert(state==&f->control && child<5 && slot<16 && companion<16 && decision);
+    assert(state==&f->control && child<3 && slot<16 && companion<16 && decision);
     ++f->control_calls; *decision=0; return 1;
 }
 static int origin(void *context,FA18NativeSelectorOrigin *state,
@@ -78,8 +80,10 @@ static void initialize(Fixture *f) {
         &f->view_work,&f->current_slot,&f->event,&f->view_mode);
     f->control_player.origin_enable=&f->origin_enable;
     fa18_test_bind_record_pose(&f->pose,&f->pose_storage,&f->control_player,&f->current_stride);
+    fa18_test_bind_record_action_placement(&f->action_placement,&f->placement_storage,
+        &f->control_player,&f->pose,&f->view_limit);
     f->control=(FA18NativeControlRecordUpdate){.records=&f->records,.selection=&f->selection,.range=&f->range,.ops=&f->control_ops,
-        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,.pose=&f->pose,
+        .view=&f->record_view,.view_work=&f->view_work,.control=&f->control_player,.pose=&f->pose,.placement=&f->action_placement,
         .post_input_event=&f->event,.counter_first=&f->counter_a,.counter_second=&f->counter_b,
         .primary_gate=&f->primary,.secondary_gate=&f->secondary,.periodic_word=&f->periodic,
         .current_slot=&f->current_slot,.current_stride=&f->current_stride};

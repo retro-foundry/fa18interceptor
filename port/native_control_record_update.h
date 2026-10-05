@@ -7,10 +7,10 @@
 #include "native_record_view.h"
 #include "native_record_control.h"
 #include "native_record_pose.h"
+#include "native_record_action_placement.h"
 
 typedef enum {
     FA18_RECORD_UPDATE_PERIODIC,
-    FA18_RECORD_UPDATE_PRIMARY_PLACE, FA18_RECORD_UPDATE_SECONDARY_PLACE,
     FA18_RECORD_UPDATE_DISPATCH, FA18_RECORD_UPDATE_FINISH
 } FA18NativeControlRecordChild;
 
@@ -32,6 +32,7 @@ struct FA18NativeControlRecordUpdate {
     FA18NativeRecordViewWork *view_work;
     FA18NativeRecordControl *control;
     FA18NativeRecordPose *pose;
+    FA18NativeRecordActionPlacement *placement;
     const FA18NativeControlRecordOps *ops;
     uint8_t *post_input_event,*counter_first,*counter_second;
     uint8_t *primary_gate,*secondary_gate;
@@ -39,7 +40,7 @@ struct FA18NativeControlRecordUpdate {
     unsigned companion_slot; /* source A2 identity retained between groups */
 };
 
-/* Complete C22C80-C230AE scheduler with direct selection, control, pose, view and range owners.
+/* Complete C22C80-C230AE scheduler with direct selection, control, pose, placement, view and range owners.
  * Remaining game-specific children operate on the same live bank. */
 int fa18_update_native_control_records(FA18NativeControlRecordUpdate *state);
 

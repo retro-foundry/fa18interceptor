@@ -11,7 +11,8 @@ typedef struct {
     PortFieldWindow data;
 } FA18NativeAssetReference;
 typedef struct {
-    enum { FA18_SCENE_PROCEDURE_NONE, FA18_SCENE_PROCEDURE_COMPONENT_ACCUMULATION } procedure;
+    enum { FA18_SCENE_PROCEDURE_NONE, FA18_SCENE_PROCEDURE_COMPONENT_ACCUMULATION,
+           FA18_SCENE_PROCEDURE_RECORD_STREAM } procedure;
     FA18NativeAssetReference data[4]; /* original pointers 1..4 */
 } FA18NativeScenePointerGroup;
 typedef struct {
@@ -38,6 +39,10 @@ typedef struct {
 
 int fa18_load_native_scene_placement_assets(const FA18Hunks *hunks,
                                              FA18NativeScenePlacementAssets *assets);
+/* Original hunk 16 descriptor row, with the caller's source-identified
+ * procedure. Data references resolve relocations into original assets. */
+int fa18_load_native_scene_pointer_group(const FA18Hunks *hunks,uint32_t offset,
+                                          FA18NativeScenePointerGroup *group);
 /* Complete $C09266-$C095BE. Original assets and mutable scene-pointer groups
  * remain caller-owned. Returns 0 when required data/owners are unavailable,
  * retaining source-ordered stores already completed. */

@@ -54,6 +54,12 @@ with 16,384 further original-byte comparisons and complete coverage of their
 children are direct; sound, normalization and fault children remain explicit.
 See [selected range](analysis/routines/native_record_range.md) and
 [record view](analysis/routines/native_record_view.md).
+Primary and secondary record placement now run directly in that scheduler,
+with 16,384 complete source comparisons covering all 172 boundaries and no
+child contracts. They share the startup descriptor bank and live record/global
+owners; original-disk assets are checked separately. Periodic, dispatch and
+finish remain scheduler boundaries. See
+[native record placement](analysis/routines/native_record_action_placement.md).
 Host services, sample playback, asset loading and full runtime integration remain open. See
 [reusable components](port/REUSABLE_COMPONENTS.md),
 [native audio updates](analysis/routines/native_audio_update.md),

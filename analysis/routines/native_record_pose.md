@@ -59,6 +59,7 @@ MSVC Release game and affected contracts, strict GNU compilation, thirteen
 affected CTests and the 501-file native build guard pass. Composed scheduler
 tests exercise real action decay before readiness, direct secondary playback,
 dispatch/pose decisions and shared-state rejection. Bootstrap assertions now
-observe the actual matrix child within root pose. Five scheduler children
-remain: periodic, primary/secondary placement, dispatch and finish. The native
+observe the actual matrix child within root pose. The subsequent primary/secondary
+placement batch leaves three scheduler children: periodic, dispatch and finish.
+See `native_record_action_placement.md`. The native
 main, original runtime asset/state bindings and actual lower owners remain open.

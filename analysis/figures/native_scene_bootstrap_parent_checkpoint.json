@@ -1,5 +1,5 @@
 {
-  "status": "validated_complete_bootstrap_parent_with_real_gate_child_and_three_required_pending_children",
+  "status": "historical_parent_proof_with_real_gate_and_three_child_contracts_all_now_direct_in_product",
   "complete_parent": "C08F26",
   "supplementary_entries": [
     "C09620",
@@ -29,9 +29,9 @@
     "C0915A",
     "C1C40C including real C06C02 RTS fault hook"
   ],
-  "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620/C1C40C; no exclusion for C090C2. Three ordered child-entry snapshots, explicit placement word, independent child mutations and named record owners compared.",
+  "comparison": "all Chip/Slow RAM; only CPU ABI save/return stack C7FD00..C7FF00 excluded for C08F26/C09620/C1C40C; no exclusion for C090C2. Three ordered historical child-entry snapshots, independent child mutations and named record owners compared.",
   "coverage_cases": "all 16 valid viewed identities; both phase branches; ten renderer planes; real gate child, all 65536 bit indices, negative/odd/0/1/7FFF lengths, across-row/axis/adjacent-owner writes, source fault codes 43/44/45 and real RTS hook, all original Hunk-66 bytes with relocation-aware comparison and direct live stream binding, bound stream changed at placement boundary before real expansion",
-  "ownership_limit": "VIEW_RECORD accepts the supplied 16-record bank. Signed gate neighbours require actual bounded field owners; missing data is explicit. Child contracts prove parent sequencing, not child behavior. Actual placement/update/refresh graphs, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
+  "ownership_limit": "VIEW_RECORD accepts the supplied 16-record bank. Signed gate neighbours require actual bounded field owners; missing data is explicit. This historical oracle still contracts placement, record update and context refresh and therefore proves only parent sequencing for those boundaries; the product now calls their separately tested native owners directly. Lower record/origin children, tenth plane production, loading/checksums, sample output and scheduling remain pending. Native main does not invoke this graph.",
   "original_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
   "original_pc_bytes_sha256": "39faaccc54c0549322492492fcf9f1fee9fc2e1ae754af5cecd5ada44a81a895",
   "reports": [
@@ -41,8 +41,8 @@
     "native bootstrap C1C40C: 4096 calls match full RAM, live owners and 0 ordered child contracts per call"
   ],
   "source_sha256": {
-    "port/scene_bootstrap_native.c": "9cd64e1a66cd34c633ff169ad8692471ea1caf8f8ecebf363a2e890e82c6b8b2",
-    "port/scene_bootstrap_native.h": "5cc70c3bd22b851913da8240eb42d973c8c6b97d12cdca99dfaf0fd749574cde",
+    "port/scene_bootstrap_native.c": "f27cb8492a187586d10cf7792db8687032b27bf6b33a25c9053fdb4d2626a467",
+    "port/scene_bootstrap_native.h": "dab16dde8c04ef6cb53835305fe2ec3ec233dfc601e4781c4e196a16b946eeb3",
     "port/template_bitmask_buffers.c": "d9af1df8869bb5cbb9305da4675f6f8791e94a9da525cbe4b055e9769cf36d15",
     "port/template_bitmask_buffers.h": "706eefa68cbc95356a4537c7360a3fc6998a8eedc5b41a284c327be768be0c8a",
     "port/template_bitmask_buffers_contract_test.c": "d8e99d2eb051e2d881f8a915854ace850d0f886d9e75855d1c7702273b4617be",
@@ -52,7 +52,7 @@
     "port/hunk.c": "351c73c0aa48eea4b912a169c7f33cda1066b169bdba0355503255861d4bbf9b",
     "port/viewed_record_word.c": "2a282a58698345c1bfb586474ddbc948bd2a6d8d1eb891d14bf2943bc8e1c9a4",
     "port/viewed_record_word.h": "b0af0593b00ed947cb70cdf9c9333e81f67cf7ae7f4446843d42810975ce266f",
-    "port/scene_bootstrap_native_contract_test.c": "830b851ab286e2c0a1d11c2eff3cdf84df50f5dc42d9fcc6d1251c767f4dad87",
+    "port/scene_bootstrap_native_contract_test.c": "b21531980a821b713dd942a28abf93126768b8cbd18b5d92754da2531ed08043",
     "port/field_bytes.h": "abff8eb93f1a466555dbc8365ea76327b1239f3cb56d1d614005642e9b4a2fe8",
     "port/field_bytes_contract_test.c": "a76f6ffcbfde35e9b3a692e4cf5caefcf8d294b34b1f0bd21e642bfe0f316d65",
     "port/startup_ranges.c": "f9d116e5bfcae7375d79e050b180302ff652733de0726d3eb9ace2e65a3cc882",
@@ -61,13 +61,13 @@
     "port/command_queue.h": "1795592dc406ee313e5a8756d175b3119b35e5f1c50ae19659021da44def3955",
     "port/renderer_clear.c": "a7c2f7fc6c799a8cf0f697c651d124306b474cb24694ecf73a0f28207a620e51",
     "port/renderer_clear.h": "9c62ebdc8846bb7c07b884142b94ddc871d7f09cbc2125c1ed934192f71ce76c",
-    "port/native_scene_records.c": "0021faac8536a63d56876a825305e6bec13f64b9d5104eb9fb43636e351cd89a",
-    "port/native_scene_records.h": "9ae7e572f7fe14cb08e312578ee0e7a9ba83bbbebad475ee7040262799c89de6",
+    "port/native_scene_records.c": "a285bb6b28d721153af0887e61a178620f8e1dbfd759bd54ab20e79bebc67096",
+    "port/native_scene_records.h": "e9aea0c92fffd3d86eeb1a3fd4d8401687e2a67423bff1e8ee48c7ecbd5103f7",
     "port/scene_player_setup.c": "10e6ddcfa08d6dbd6b5fe368889a6f934c91651723bdb58d67c103dfe017421d",
     "port/scene_player_setup.h": "16810fb57fa7dad4816b21e520577b2a46865e5dda07c636fc75adb60deb3cc4",
     "port/context_command_controls.c": "94fd3576a278b1983883432eeb5f910aacedc8718025f78c429c1d98220ab5be",
     "tools/recomp/native_scene_player_oracle.c": "17c4e4887c26e35f6c5356c41228eccf16864a5893fcdc6704ca7fb8a07b8700",
-    "tools/recomp/check_native_scene_bootstrap.py": "0f33ecfb0ae7e111160af72b89124cdecb459394d9a26b8e232da4a099265291",
-    "tools/recomp/native_scene_bootstrap_oracle.c": "b128a21717ee165e50baf4f004d4be1396ed627d6a994b4f465b312cb87140eb"
+    "tools/recomp/check_native_scene_bootstrap.py": "719067721f21b8174f6564835c17b009cbad0ad35e311ca88e897df41e748bf7",
+    "tools/recomp/native_scene_bootstrap_oracle.c": "6dd1e7c0f8b3e15cd57ab06dc1919aa116239233b0b8d39413afc1d9c32523b5"
   }
 }

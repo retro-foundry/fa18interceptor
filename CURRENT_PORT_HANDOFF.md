@@ -13,7 +13,32 @@ but the user did not request switching this port to its CPU/chipset runtime.
 
 ## Resume state
 
-Latest batch: complete native `$C25B66` pose and actual `$C2651E` motion
+Latest batch: complete native `$C2374C` primary and `$C2377E` secondary placement
+replace both scheduler callbacks, including paired routes. The actual shared
+copy/stores/launch tail writes through ordinary records and the root-placement
+descriptor bank. Aliased records reread the changed kind before table selection;
+all three wrapped transformed deltas precede position publication. The carried
+axis, logical viewed identity, warning/events, fire and redraw owners remain
+shared. Both entries set kind 0/1, so the sealed class-$30 arms are unreachable
+only from these entries; manoeuvre/release still need those arms. Original-byte
+proof passes 16,384 calls (8,192 each), all 172/172 boundaries, all game RAM,
+typed records/descriptors and carried axis, with no child contracts. There are
+13,378 launches, including 3,341 with aliased records. Original-disk validation
+checks Hunk-16 descriptors, six Hunk-51 references and 78 Hunk-17 table/adjacent
+bytes. Larger indices beyond the first relocated operand require explicit
+adjacent numeric owners; raw unrelocated pointer offsets are not substituted.
+MSVC Release game/affected contracts, strict GNU compilation, fourteen affected
+CTests and the 503-file native guard pass. See
+`analysis/routines/native_record_action_placement.md` and its checkpoint.
+The updated historical bootstrap parent proof also passes 16,384 calls at all
+291/291 boundaries, retaining its three explicit whole-child contracts.
+
+Three scheduler children remain: periodic `$C28996`, dispatch `$C23A7E`, finish
+`$C09E06`. Complete these owners and startup-reachable pose/control children,
+then bind original startup assets/state and integrate native main. Dispatch
+shares the already-native record-view tail; preserve its carried-axis state.
+
+Preceding batch (`ba371dc9`): complete native `$C25B66` pose and actual `$C2651E` motion
 history now replace every scheduler pose callback. Source cell/event/expiry,
 control/alert/matrix, integration/packing/decay, collision and history routes
 operate on the shared native bank. Original negative-X/Z behavior and mixed
@@ -29,11 +54,8 @@ See `analysis/routines/native_record_pose.md` and its checkpoint. Composed
 bootstrap observations now occur at the matrix child inside root pose; scheduler
 contracts test actual action decay before readiness and direct secondary playback.
 
-Five scheduler children remain: periodic, primary/secondary placement, dispatch
-and finish. Continue these complete owners and the startup-reachable pose/control
-lower owners, using the existing readable code. Then bind original startup
-assets/state and integrate native main. Sound/messages, scene initialization,
-normalization/fault and actual flight/collision/matrix/input remain lower
+Sound/messages, scene initialization, normalization/fault and actual
+flight/collision/matrix/input remain lower
 requirements; they have not been replaced with substitutes.
 
 Preceding batch (commit `e846b88b`): complete native `$C23228` root control and `$C233AA` secondary
@@ -86,8 +108,8 @@ The native bootstrap graph is direct through `$C08F26`, placement, template
 gates, `$C1C63E`, `$C22C80`, `$C29042`, and `$C1C860`. Explicit lower owners
 still remain:
 
-- `FA18NativeControlRecordOps`: periodic, primary placement, secondary placement,
-  dispatch and finish. Composed fresh-bootstrap contracts observe a true matrix
+- `FA18NativeControlRecordOps`: periodic, dispatch and finish. Primary/secondary
+  placement is direct. Composed fresh-bootstrap contracts observe a true matrix
   child inside root pose after direct root control/view/range.
 - `FA18NativeRecordPoseOps`: fourteen matrix, control/input, flight/collision,
   message/sound/fault and motion-slot boundaries. History is direct.
@@ -108,19 +130,20 @@ guest memory, and the machine/chipset runtime. Do not describe the port as
 emulation-free until native main owns startup, frame scheduling, rendering,
 audio, and input without those layers.
 
-Recommended next batch: finish the five scheduler children and startup-reachable
+Recommended next batch: finish the three scheduler children and startup-reachable
 pose/control children using their complete readable owners under `port/game/`.
 Preserve their true lower child boundaries and shared record mutations. Then
-port finish scheduling and connect original assets/state before installing the
+connect original assets/state before installing the
 graph in native main. The static-recomp audit currently reports 85 deferred
 entries, 539 readable translated entries, 75 readable source-only entries,
 and 854 direct opcode bindings; those numbers describe the compatibility
 runner, not completion of the ordinary-state native graph.
 
-Latest validation passed: MSVC Release `fa18_port`, strict GNU contracts, nine
-affected CTests, `python scripts/check_native_build.py` over 493 files, and the
-two-case historical bootstrap oracle (282/291 parent boundaries). The
-historical oracle still contracts old child boundaries and is sequencing
+Latest validation passed: MSVC Release `fa18_port`, strict GNU contracts,
+fourteen affected CTests and the unchanged native build guard over 503 files.
+The full placement source proof covers 172/172 boundaries. The
+historical bootstrap proof passes 16,384 calls at all 291/291 boundaries,
+still contracts old child boundaries and is sequencing
 evidence rather than proof of the new direct lower owners.
 
 Latest batch: `$C230B0`, `$C230E8`, `$C23116` and `$C231A2` now run directly
