@@ -7,6 +7,14 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest correction: native startup now loads original pix/inst5 and pix/frnt5
+and publishes C16982's caches/mask. Earlier HUD checks used empty asset pointers;
+the user's missing-cockpit observation was correct. The cockpit bitmap now
+renders. The first page is moved off immutable image Hunk 62. Both assets' eight
+rendering planes, headers and mask match original startup; four cache cases and
+230 populated HUD cases pass, along with frontend/menu/display regressions and
+twelve reference CTests. See `analysis/native_cockpit_assets_milestone.md`.
+Cockpit artwork is 2/2 verified; native frame parity remains 0/3 accepted.
 Latest comparison update: original C1AD74 consumed-key exports now distinguish
 game input from sealed hardware-injection rows. Native accepts the separate
 FA18_GAME_INPUT_V1 format and matches turn/hook aircraft state through iteration

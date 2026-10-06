@@ -9,7 +9,17 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
-- Latest completed batch: native demonstration flight reads original disk
+- Latest completed batch: load original pix/inst5 and pix/frnt5, connect
+  C16982's plane caches/mask and preserve immutable image Hunk 62 outside the
+  display pages. Earlier HUD checks used empty image pointers; they did not
+  establish disk artwork rendering. Both assets now render; eight planes,
+  headers and mask match original startup. Four cache/mask cases and 230
+  populated HUD comparisons pass. See
+  `../analysis/native_cockpit_assets_milestone.md`. Cockpit artwork is
+  **2/2 verified (100% of that scope)**; full frame parity stays **0/3 accepted**.
+  Next: original audio availability and remaining frame/result cadence.
+
+- Complete: native demonstration flight reads original disk
   recorder assets through C16518's contract; C0FA04/C0FA4C/C0FA80, NPC
   range/view/guidance and C2374C selected-fire launches are connected. All
   4,892 demo updates complete, with 31 original startup/launch cases and four

@@ -1,5 +1,12 @@
 # Native cockpit/HUD milestone
 
+Correction (2026-10-06): the original tests below used native storage without
+loaded pix/inst5/frnt5 resources. They proved the connected owners against that
+incomplete state, not visible cockpit bitmap rendering. The missing startup
+loads and an overlapping display page are now corrected. Eight loaded rendering
+planes, both headers and the union mask match original startup; 230 populated
+drawing cases pass. See `native_cockpit_assets_milestone.md`.
+
 The connected caller is `fa18_native` -> frontend tick -> native flight tick ->
 scene drawing -> `native_hud_draw`. Nineteen instrument/panel owners now run
 directly from the game sources, under C0EFD4's view gates and saved-tick cadence.

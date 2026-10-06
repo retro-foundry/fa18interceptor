@@ -51,8 +51,11 @@ def main():
                     assert stats['display_yields'] == before['display_yields'] + 4
                     root = 0xC46184 - 0xC00000 + 0x80000
                     assert data[root:root+512] == old_data[root:root+512], 'physics repeated during flash'
-                    assert data[0x10000:0x1A000] == old_data[0x10000:0x1A000]
-                    assert data[0x40000:0x4A000] == old_data[0x40000:0x4A000]
+                    for page in range(2):
+                        for plane in range(4):
+                            pointer = 0xC4566E - 0xC00000 + 0x80000 + 16*page + 4*plane
+                            start = int.from_bytes(data[pointer:pointer+4], 'big')
+                            assert data[start:start+10240] == old_data[start:start+10240]
                 previous = stats, data, activity
             else:
                 assert stats['stage'] == 'C10DAE' and stats['postflight_resets'] == 1, stats

@@ -1,4 +1,7 @@
 /* Validate actual native setup children and existing reset owner. */
+#define MH_DIVIDE HEADING_DIVIDE
+#include "target_heading.h"
+#undef MH_DIVIDE
 #define main records_fixture_main
 #include "native_records_oracle.c"
 #undef main

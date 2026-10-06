@@ -4,6 +4,7 @@
 #include <stddef.h>
 typedef struct {
     unsigned width,height,planes;
+    uint8_t header[20]; /* Original BMHD fields for source bitmap consumers. */
     uint16_t palette[32];
     uint8_t *indices;
 } AmigaIlbm;

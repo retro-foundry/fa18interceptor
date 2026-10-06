@@ -29,8 +29,11 @@ The preview now draws the source horizon and normal/wide terrain packets into
 ordinary host planes, followed by the original scene placement/model streams,
 ground descriptors, aircraft hulls and fixed matrix mark. Grounded aircraft
 motion and stick recording now execute. Cockpit/HUD marks, tapes, readouts,
-panel images, compass and indicator/mode bars are connected; complete frame
-ordering remains pending.
+panel images, compass and indicator/mode bars are connected. Original cockpit
+artwork is loaded from `pix/inst5` and `pix/frnt5`, with the source plane caches
+and union mask. Both display pages preserve the immutable instrument images.
+Earlier HUD checks omitted those disk assets; populated artwork comparisons now
+pass. Complete frame ordering remains pending.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
 `hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;
@@ -64,6 +67,7 @@ python tools/native/check_records.py --runner build/native/fa18_native.exe
 python tools/native/check_raster.py --runner build/native/fa18_native.exe
 python tools/native/check_models.py --runner build/native/fa18_native.exe
 python tools/native/check_hud.py --runner build/native/fa18_native.exe
+python tools/native/check_cockpit_assets.py --runner build/native/fa18_native.exe
 python tools/native/check_qualification.py --runner build/native/fa18_native.exe
 python tools/native/check_demo.py --runner build/native/fa18_native.exe
 ```

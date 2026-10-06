@@ -14,6 +14,7 @@
 #include "clock.h"
 #include "display.h"
 #include "input.h"
+#include "cockpit_assets.h"
 #include "../audio.h"
 #include "../text.h"
 #include "../../romfree/placement.h"
@@ -29,7 +30,8 @@
 #include <sys/stat.h>
 #define make_directory(path) mkdir(path,0755)
 #endif
-enum { PLANE_TABLE=0x1000,PLAYER_LOG=0x2000,PLANE_FIRST=0x10000,PLANE_SECOND=0x40000,PLANE_BYTES=40*256 };
+/* Keep the original immutable image hunk at $012988 outside display pages. */
+enum { PLANE_TABLE=0x1000,PLAYER_LOG=0x2000,PLANE_FIRST=0x34000,PLANE_SECOND=0x40000,PLANE_BYTES=40*256 };
 static int fail(char *error,size_t cap,const char *why) { if(cap) snprintf(error,cap,"Native startup: %s",why); return 0; }
 void native_frontend_clear_text(void) {
     memset(native_storage_range(PLANE_FIRST,4*PLANE_BYTES),0,4*PLANE_BYTES);
@@ -136,6 +138,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
         memcpy(native_storage_range(rd_u32(buffer?RECORDER_WORDS:RECORDER_START),limit),
             bytes,size<limit?size:limit);
     }
+    if(!native_cockpit_load(&disk,error,cap)) goto done;
     native_flight_initialize(game);
     game->screen=NATIVE_SPLASH; memcpy(game->palette,game->splash.palette,sizeof game->palette);
     for(unsigned y=0;y<game->splash.height;++y) memcpy(game->indices+y*320,game->splash.indices+y*game->splash.width,game->splash.width);

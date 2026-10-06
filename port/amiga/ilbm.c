@@ -23,6 +23,7 @@ int amiga_ilbm_decode(AmigaIlbm *out,const uint8_t *b,size_t size,char *error,si
         pos=payload+length+(length&1);
     }
     if(!header || !body || !palette) return fail(error,cap,"missing BMHD, CMAP or BODY");
+    memcpy(out->header,header,sizeof out->header);
     out->width=amiga_be16(header); out->height=amiga_be16(header+2); out->planes=header[8]; masking=header[9]; compression=header[10];
     if(!out->width || !out->height || out->width>320 || out->height>256 || !out->planes || out->planes>5 || masking==1 || masking>2 || compression>1 || palette_size!=3u*(1u<<out->planes))
         return fail(error,cap,"unsupported resource geometry/format");
