@@ -69,6 +69,13 @@ def main():
             for suffix in ("ram", "rgb"):
                 assert (out / f"False.{suffix}").read_bytes() == (out / f"True.{suffix}").read_bytes(), (name, suffix)
             meter = json.loads((out / "profile.json").read_text())["_emulation"]
+            assert meter["schema"] == 2
+            if name == 'on':
+                # Actual source fetches count; retained C entry scheduling
+                # accounts for the remaining port-step calls.
+                assert 0 < meter['instructions']['adapter'] < meter['ports']['steps']
+            else:
+                assert meter['instructions']['adapter'] == 0
             index_data = (out / "indices.bin").read_bytes()
             assert len(index_data) == frames * PIXELS and 0 < max(index_data) < 32
             assert meter["frames"] == frames, meter["frames"]
@@ -83,6 +90,8 @@ def main():
                 assert meter["instructions"]["generated"] > 0, name
             if name == "on":
                 profile = json.loads((out / "profile.json").read_text())
+                assert (meter['ports']['steps'] - meter['instructions']['adapter']
+                        == profile['C1C63E']), "unaccounted instruction step or counted native entry"
                 for caller, callee in (('C1C63E', 'C22C80'), ('C22C80', 'C25B66')):
                     edge = next(edge for edge in profile['_native_edges']
                                 if edge['caller'] == caller and edge['callee'] == callee)

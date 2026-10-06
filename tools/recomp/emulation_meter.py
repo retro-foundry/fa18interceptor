@@ -14,8 +14,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts"))
 from compare_recomp_frames import compare_frames, fade_palette
-ENGINES = ("interpreted", "generated", "residual")
-BUS_ENGINES = ENGINES + ("port", "os", "chipset")
+ENGINES = ("interpreted", "generated", "residual", "adapter")
+BUS_ENGINES = ("interpreted", "generated", "residual", "port", "os", "chipset")
 
 
 def digest(path: Path) -> str:
@@ -57,7 +57,7 @@ def scenario(name: str, runner: Path, args: list[str], output: Path,
         stats = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
         profile = json.loads((work / f"{mode}.json").read_text())
         meter = profile["_emulation"]
-        if meter["schema"] != 1:
+        if meter["schema"] != 2:
             raise ValueError(f"{name}: unsupported meter schema")
         runs[mode] = dict(meter=meter, runner_stats=stats[0], native_edges=profile.get('_native_edges', []),
                           rgb_sha256=digest(work / f"{mode}.rgb"),
@@ -148,7 +148,8 @@ def main() -> int:
     sites = sum(len(re.findall(r"\b(?:rd|wr)_[us](?:8|16|32)\s*\(", path.read_text()))
                 for path in (ROOT / "port/game").rglob("*.[ch]"))
     full = not args.frames and len(rows) == 5
-    report = dict(schema=1, scope="full fixed suite" if full else "partial discovery probe",
+    report = dict(schema=2, scope="full fixed suite" if full else "partial discovery probe",
+                  instruction_policy="Interpreted + generated + residual + source-instruction adapters; retained C entry scheduling excluded.",
                   frame_comparison_policy="Ignore source-table Copper fade; require identical selected indices and non-fade RGB.",
                   cpu_removed_min_percent=min(row["cpu_removed_percent"] for row in rows),
                   accepted_cpu_removed_min_percent=(min(row["cpu_removed_percent"] for row in rows)
@@ -162,7 +163,8 @@ def main() -> int:
                   limits=["CPU share is executed work, not plan completion or whole-game coverage.",
                           "Failed parity makes CPU shares raw observations, not accepted removal progress.",
                           "Residual instructions include original-byte execution between labels and OS RTE opcode helpers.",
-                          "Hand-written instruction steps still depend on PC/registers/bus; port step counts expose that debt.",
+                          "Source-instruction adapters still depend on PC/registers/bus and are included in CPU work.",
+                          "Schema 1 omitted adapter instructions; its CPU percentages are superseded and not comparable.",
                           "Bus counts are top-level guest API accesses including instruction fetch/dispatch reads, not bus cycles.",
                           "RAM page counts are overlapping access hits; DMA reads/writes are separate chipset operations.",
                           "Direct DMA and host compatibility memory accesses are outside guest-API page counts; absence does not prove exclusive ownership.",

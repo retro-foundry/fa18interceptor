@@ -11,6 +11,9 @@ static inline uint16_t step_begin(uint32_t pc) {
     uint16_t opcode = fa18_bus_read16(pc);
     fa18_bus_finish(pc); fa18_bus_begin(pc); fa18_bus_fetch(pc);
     REG_PPC = pc; REG_IR = opcode; REG_PC = pc + 2;
+    /* These adapters still decode and execute an original CPU instruction.
+     * Scheduling a retained C frame does not call step_begin. */
+    if (fa18_meter_enabled) ++fa18_emulation_meter.adapter_instructions;
     return opcode;
 }
 static inline uint32_t step_displacement(uint32_t base) {

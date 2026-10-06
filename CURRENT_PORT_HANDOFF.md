@@ -11,7 +11,26 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
-Latest connected batch: native C1C63E retains game `RecordUpdateStageFrame`
+Latest measurement correction (schema 2): source-instruction adapters are now
+counted at `step_begin`, where they fetch/decode an original opcode. Retained C
+entry scheduling is excluded. The old schema omitted that work and overstated
+CPU removal: cached **38.4011%** and old bounded **69.8507%** are superseded.
+The corrected **800-frame, three-recording** raw CPU minimum is **0.4470%**;
+per scenario demo **2.5530%**, carrier **0.4470%**, crash **2.4463%**. This is a
+partial probe, not a full-suite result or completion percentage. The corrected
+full-suite minimum is unmeasured. Accepted share unavailable: source comparisons
+still fail. Memory/chipset/boot cutover **0%**, subsystem deletion **0/4**.
+No gameplay behavior changed in this meter batch; old demo RGB/index/RAM and
+all old profile fields match, MSVC/GNU profiles match, twelve CTests and profiling
+invariance pass. No full replay repeated. Evidence:
+`analysis/emulation_removal_adapter_meter_probe.json/.md`; the canonical
+`analysis/emulation_removal_meter.json/.md` now contain this schema-2 partial
+probe. Historical schema-1 full evidence remains in git/build history and must
+not be used as the current estimate. Continue native game/parent ownership and
+report future deltas using schema 2. The connected chain still removes 892
+instruction cases, with explicit parity/timing/stack/matrix debt below.
+
+Previous connected batch: native C1C63E retains game `RecordUpdateStageFrame`
 and calls the C22C80 record loop directly. All 112 update-stage CPU cases are
 deleted; the shared C22C80/C1C63E instruction body is now **100% removed**.
 This connected chain has removed 892 instruction cases, retaining thin entries,

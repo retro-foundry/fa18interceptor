@@ -16,6 +16,7 @@ typedef struct {
     uint64_t reads[FA18_ENGINE_COUNT], writes[FA18_ENGINE_COUNT];
     uint64_t blits, copper_instructions, bitplane_words, cia_events, interrupts;
     uint64_t service_steps, service_entries, port_steps, port_calls;
+    uint64_t adapter_instructions;
 } FA18EmulationMeter;
 extern FA18EmulationMeter fa18_emulation_meter;
 extern int fa18_meter_enabled, fa18_meter_engine;

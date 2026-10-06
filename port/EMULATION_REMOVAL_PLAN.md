@@ -88,12 +88,15 @@ original work still executed by an emulation engine:
 removed(scenario) = 1 - emulated_instructions_ON / emulated_instructions_OFF
 ```
 
-where `emulated_instructions` counts instructions executed by Musashi
-(interpreted) plus instructions executed inside generated code — which still
-runs a Musashi handler per data operation and therefore counts as emulated —
-and OFF is the same scenario with `--ports off`, the original path with no
-recreated C. The ON run is the real game. Nothing a disconnected module does
-can move this number, because only instructions that stop being executed count.
+`emulated_instructions` is the schema-2 sum of `interpreted`, `generated`,
+`residual` and `adapter`. The last category counts each original opcode fetched
+by the hand-written CPU instruction adapters through `step_begin`; source PC,
+register-file and bus semantics remain emulation even without an opcode-table
+call. Merely scheduling a retained C frame fetches no opcode and is excluded.
+OFF is the same scenario with `--ports off`. The old schema omitted adapters;
+its percentages are superseded rather than comparable progress measurements.
+The deletion gate still requires a build without CPU objects: a zero executed
+count alone cannot prove CPU/register independence or whole-game coverage.
 
 **Report the minimum across the suite, never the mean**, together with the
 per-scenario table. The suite is the three sealed native recordings plus the
@@ -109,7 +112,7 @@ denominator:
 
 | Axis | Metric | 100% means |
 | --- | --- | --- |
-| **A. CPU** | emulated-work share removed, as above | no scenario executes a Musashi instruction |
+| **A. CPU** | all four schema-2 instruction categories, as above | no original instruction executes; CPU omission build passes |
 | **B. Memory** | guest-bus accesses per frame issued from recreated C and its glue, against the `--ports off` baseline; plus converted `rd_*`/`wr_*` sites (0 of 8,988 today) | game state lives in C objects; `bus.c` unreferenced |
 | **C. Chipset/IO** | chipset operations per frame actually serviced (blitter ops, Copper instructions, bitplane fetches, CIA/interrupt events) against the baseline | native drawing, audio and timing; `machine/` unreferenced |
 | **D. OS/boot** | service dispatches per scenario reaching guest-resident OS wrappers or `m68k` state, against the baseline; plus the boot handoff | native entry, no guest PC, no hunk placement into guest RAM |
@@ -348,6 +351,25 @@ full raw **38.4011%** cached, accepted share unavailable, axes **0%**, gate **0/
 Raw meter excludes CPU-style adapters; repair that measurement before using it
 for further progress estimates. Inventory unchanged. Evidence:
 `../analysis/emulation_removal_update_stage_batch.json/.md`.
+
+Latest measurement correction (schema 2): source-instruction adapters are now
+counted at `step_begin`, where they fetch/decode an original opcode. Retained C
+entry scheduling is excluded. The old schema omitted that work and overstated
+CPU removal: cached **38.4011%** and old bounded **69.8507%** are superseded.
+The corrected **800-frame, three-recording** raw CPU minimum is **0.4470%**;
+per scenario demo **2.5530%**, carrier **0.4470%**, crash **2.4463%**. This is a
+partial probe, not a full-suite result or completion percentage. The corrected
+full-suite minimum is unmeasured. Accepted share unavailable: source comparisons
+still fail. Memory/chipset/boot cutover **0%**, subsystem deletion **0/4**.
+No gameplay behavior changed in this meter batch; old demo RGB/index/RAM and
+all old profile fields match, MSVC/GNU profiles match, twelve CTests and profiling
+invariance pass. No full replay repeated. Evidence:
+`../analysis/emulation_removal_adapter_meter_probe.json/.md`; the canonical
+`../analysis/emulation_removal_meter.json/.md` now contain this schema-2 partial
+probe. Historical schema-1 full evidence remains in git/build history and must
+not be used as the current estimate. Continue native game/parent ownership and
+report future deltas using schema 2. The connected chain still removes 892
+instruction cases, with explicit parity/timing/stack/matrix debt below.
 
 ### Phase 2 — Memory cutover (axis B, PORT.md stage F)
 

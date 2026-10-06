@@ -65,12 +65,13 @@ void fa18_meter_access(uint32_t address, unsigned size, int write) {
 
 void fa18_meter_write_json(FILE *out, uint64_t frames) {
     static const char *names[] = {"host", "interpreted", "generated", "residual", "port", "os", "chipset"};
-    fprintf(out, "\"_emulation\":{\"schema\":1,\"frames\":%llu,\"instructions\":{"
-            "\"interpreted\":%llu,\"generated\":%llu,\"residual\":%llu},\"bus\":{",
+    fprintf(out, "\"_emulation\":{\"schema\":2,\"frames\":%llu,\"instructions\":{"
+            "\"interpreted\":%llu,\"generated\":%llu,\"residual\":%llu,\"adapter\":%llu},\"bus\":{",
             (unsigned long long)frames,
             (unsigned long long)fa18_recomp_stats.interpreted_instructions,
             (unsigned long long)fa18_recomp_stats.generated_instructions,
-            (unsigned long long)fa18_recomp_stats.residual_instructions);
+            (unsigned long long)fa18_recomp_stats.residual_instructions,
+            (unsigned long long)fa18_emulation_meter.adapter_instructions);
     for (unsigned e = 0; e < FA18_ENGINE_COUNT; ++e)
         fprintf(out, "%s\"%s\":{\"reads\":%llu,\"writes\":%llu}", e ? "," : "", names[e],
                 (unsigned long long)fa18_emulation_meter.reads[e],

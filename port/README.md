@@ -49,3 +49,12 @@ to the original game's 16-stage Copper fade table at C08510. It checks drawing
 indices, all other colours and frame counts. The live gate, timing probe,
 comparison image report and emulation meter use that policy. Python comparison
 tools and their regression check require NumPy; image reports also use Pillow.
+
+The active emulation meter uses schema 2. Its instruction total includes
+`interpreted`, `generated`, `residual` and `adapter`: handwritten CPU steps
+fetching original opcodes still count as emulation. Retained C scheduling
+without an opcode fetch does not count. Schema-1 percentages omitted adapters
+and are superseded. The canonical meter report states whether its scenario
+coverage is partial or the full acceptance suite. Raw counts with failed parity
+do not establish accepted independence; subsystem omission builds remain the
+completion gate.
