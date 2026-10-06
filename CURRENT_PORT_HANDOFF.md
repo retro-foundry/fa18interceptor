@@ -7,6 +7,14 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest timing batch: native C17510/C1756A intro/menu sample loading and linked
+voice descriptors are connected. All eight files match original initial bytes;
+15 parent/service cases, 31 demo cases and two record parents pass. Native demo
+update 2,400's lead falls from 97 to 37 ticks by restoring the original 210-update
+banner delay. The complete native demo and frontend/menu regressions pass.
+See `analysis/native_menu_sound_milestone.md`. Next: C1787A engine/alert/noise
+resources (including source square-wave/noise generation and random seed), then
+voice updates/output and remaining frame/result cadence. Frame parity stays 0/3.
 Latest correction: native startup now loads original pix/inst5 and pix/frnt5
 and publishes C16982's caches/mask. Earlier HUD checks used empty asset pointers;
 the user's missing-cockpit observation was correct. The cockpit bitmap now

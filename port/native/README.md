@@ -49,8 +49,10 @@ Demonstration Flight (digit 1) now loads the original `text/textply` and
 `text/textctl` recorder assets at startup, then flies through the source demo
 stages, NPC guidance and recorded launches. All 4,892 demo updates complete;
 startup/record/launch/asset comparisons pass. Functional scenario wiring is
-3/3, while full native frame parity remains 0/3 accepted. Demo startup is early
-relative to the reference; original audio availability and viewport/message
+3/3, while full native frame parity remains 0/3 accepted. Intro/menu sample
+files and linked voice descriptors now load from the ADF. This restores the
+source 210-update demo banner and reduces the observed startup lead from 97 to
+37 game ticks. Engine/alert/noise sample initialization and viewport/message
 cadence still need reconciliation. Other selected modes stop at their banner.
 Audio remains suppressed.
 
@@ -68,6 +70,7 @@ python tools/native/check_raster.py --runner build/native/fa18_native.exe
 python tools/native/check_models.py --runner build/native/fa18_native.exe
 python tools/native/check_hud.py --runner build/native/fa18_native.exe
 python tools/native/check_cockpit_assets.py --runner build/native/fa18_native.exe
+python tools/native/check_sound_resources.py --runner build/native/fa18_native.exe
 python tools/native/check_qualification.py --runner build/native/fa18_native.exe
 python tools/native/check_demo.py --runner build/native/fa18_native.exe
 ```

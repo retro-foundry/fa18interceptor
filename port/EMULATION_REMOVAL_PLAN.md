@@ -9,7 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
-- Latest completed batch: load original pix/inst5 and pix/frnt5, connect
+- Latest completed batch: connect original C17510/C1756A intro/menu sample
+  initialization and C5046C/C50614 descriptor contracts. All eight sample files
+  match original bytes; 15 instruction cases and affected demo comparisons pass.
+  The startup tick lead drops from 97 to 37, restoring 60 original banner
+  updates (**about 62% of this measured gap**). See
+  `../analysis/native_menu_sound_milestone.md`. Native frame parity stays
+  **0/3 accepted**. Next: C1787A engine/alert/noise initialization, voice
+  updates/output and remaining frame/result cadence.
+
+- Complete: load original pix/inst5 and pix/frnt5, connect
   C16982's plane caches/mask and preserve immutable image Hunk 62 outside the
   display pages. Earlier HUD checks used empty image pointers; they did not
   establish disk artwork rendering. Both assets now render; eight planes,
