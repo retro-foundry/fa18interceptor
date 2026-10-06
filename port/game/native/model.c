@@ -2,7 +2,7 @@
  * C1ED48 is the source alias. C07846 extends flat geometry with paired edges.
  * The existing draw_stream.c owns command geometry and host raster submission.
  * C1ED4C selects aircraft/cockpit streams; C1F000 transforms record hulls.
- * TODO(port): expiry transition C22ADE.
+ * C22AC0/C22ADE starts destroyed-aircraft expiry before its descriptor draw.
  * Reached missing children fail explicitly, never substitute geometry. */
 #include "model.h"
 #include "frontend.h"
@@ -20,6 +20,8 @@
 #include "../cockpit_script.h"
 #include "../faces.h"
 #include "../render_line.h"
+#include "../context_publication.h"
+#include "../messages.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -545,6 +547,16 @@ static int ground_draw(gaddr frame,int32_t minimum_height) {
         drawn|=result;if(code&0x4000) return drawn;
     }
 }
+static ContextPublicationResult expiry_selection_child(void *context,enum ContextPublicationChild child) {
+    (void)context;
+    if(child!=CONTEXT_PUBLISH_SELECTION_TONE) {
+        fprintf(stderr,"native expiry selection child unavailable: %u\n",(unsigned)child); abort();
+    }
+    /* Despite the old hook name, C09DEA calls C25704: post TARGET DESTROYED,
+     * not an audio tone. C11BFC later owns the message's sound and timing. */
+    post_message(0x4016);
+    return (ContextPublicationResult){0};
+}
 int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
     NativeFrontend *game=context;
     if(game) ++game->model_calls;
@@ -554,7 +566,14 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
         gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
         uint16_t flags=rd_u16(record);
         if(flags&0x40) {
-            if(flags&0x200) missing("record expiry transition C22ADE",record);
+            if(flags&0x200) {
+                /* C22ADE-C22AFC. C22C70 is an empty render hook. Preserve
+                 * the parameters while C09DD0 clears only this selection. */
+                const ContextPublicationHooks hooks={.consume=expiry_selection_child};
+                wr_u16(record+0x4c,15);
+                wr_u16(record,(flags&0xfdffu)|0x400u);
+                clear_matching_record_selection(&hooks);
+            }
             return aircraft_descriptor(call->parameters,0x4200);
         }
         if(rd_u8(record+0x7a)!=5 && rd_s16(record+0x4c)<0) wr_u16(record,flags|0x40);

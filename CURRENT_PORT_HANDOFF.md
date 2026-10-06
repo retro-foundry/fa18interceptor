@@ -33,6 +33,18 @@ Next: correct connected gameplay timer/poll/display cadence from source,
 without guessed speed factors, capture-fed clocks or intro timing requirements.
 Both select original C2502E entry 15 (67 ms); source rendering exceeds that
 limit while native approaches it. No timer arithmetic/rate-index bug was found.
+Latest gameplay branch: C22ADE destruction-to-expiry is connected through the
+actual scene traversal, including C09DD0 target cleanup and C25704's TARGET
+DESTROYED message. The timer starts at 15, bit $0200 clears and $0400 sets;
+repeated rendering preserves expiry. Twenty controlled source descriptor cases
+across demo/setup checkpoints match returns, records, rendering and non-stack
+data. A native-only integration test starts from the disk/input and exercises
+the scene using its visible record, with controlled destruction inputs confined
+to the test. Production/test share the same native runtime objects. Frontend,
+CPU/chipset omission and active/crash frame-body comparisons pass. This branch
+is 1/1 complete; full frame acceptance remains 0/3 and the independent HUD timer
+difference remains open. No full original replay was repeated. See
+`analysis/native_record_expiry_milestone.md`.
 Latest PAL input batch: complete C1718E now runs through host counter samples,
 including signed delta wrap, bounded controls and input ticks before its
 existing viewport/fade tail. C17104/C1712C/C17456 initialize original -960..960

@@ -9,6 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: C22ADE's destruction-to-expiry branch now runs through the native
+  scene and C09DD0/C25704 selection/message owners. Source timer/flags, target
+  cleanup and repeated-render behavior match in 20 controlled descriptor cases.
+  A disk/input-backed integration test exercises the actual scene with the same
+  native runtime objects as the playable runner. Frontend/omission and two
+  affected original frame bodies pass. **1/1 (100% of this branch connection)**;
+  full gameplay sequence acceptance remains **0/3**, and the independent HUD
+  timer mismatch remains open. No full original replay was run. See
+  `../analysis/native_record_expiry_milestone.md`.
+
 - Latest acceptance scope: **gameplay frames**, ignoring Copper fade. Intro,
   loading and preflight may run faster. Old startup frame/update offsets are
   diagnostic observations, not acceptance blockers on their own. **5/5 selected

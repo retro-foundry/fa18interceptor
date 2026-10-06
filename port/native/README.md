@@ -44,6 +44,16 @@ checks verifier strictness against an accepted pair: equivalent buffer
 allocation passes, while wrong presentation, publication, HUD/input/motion
 or game tick fails.
 
+Destroyed flight records now enter source C22ADE's 15-tick expiry rather than
+aborting during scene rendering. C09DD0 clears a matching target and posts
+TARGET DESTROYED through C25704; repeated drawing does not restart expiry.
+Twenty controlled original descriptor comparisons and a disk-backed native
+scene integration check pass. The latter supplies destruction inputs only in
+its test entry; it shares the playable runner's `fa18_native_runtime` objects.
+This verifies the rendering transition, not complete destruction/collision or
+recorded-frame timing. See
+[`../../analysis/native_record_expiry_milestone.md`](../../analysis/native_record_expiry_milestone.md).
+
 The default is an SDL window with native stereo sound. `--wav PATH` captures
 the same PCM, including in headless runs. A key acknowledges the credits. A first-time
 pilot can enter a callsign, edit with Backspace, and confirm with Return.
@@ -266,7 +276,7 @@ and recorded gameplay acceptance.
 Scene ordering C0F048-C0F124 now comes from the shared update-sequence owner,
 with the native child consumer supplying the existing host rendering paths.
 Bias/flagged/range gates and stage markers therefore use the same source
-composition as C0EFD4. Alternate page presentation C0DA38 remains unconnected
+composition as C0EFD4. C0DA38's alternate selection/early frame exit remains unconnected
 and fails explicitly if reached. See
 [`../../analysis/native_scene_ordering_milestone.md`](../../analysis/native_scene_ordering_milestone.md).
 

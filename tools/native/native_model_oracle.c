@@ -284,7 +284,7 @@ static int circles(void) {
     free(expected);free(before);free(saved);
     puts("48 circle span/mask cases match original buffers in both plane layouts");return 1;
 }
-static int32_t consume(void *context,const ScenePlacementCall *call) {
+static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) {
     (void)context;
     FA18Machine *before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x80000),*vertices=malloc(0x2000),*records=malloc(0x2000),*slow=malloc(0x80000);
@@ -323,6 +323,45 @@ static int32_t consume(void *context,const ScenePlacementCall *call) {
     }
     ++calls;free(slow);free(records);free(vertices);free(expected);free(before);
     return original_result;
+}
+static unsigned expiry_cases;
+static int32_t consume(void *context,const ScenePlacementCall *call) {
+    if(call->routine!=0xc22ac0) return compare_descriptor(context,call);
+    FA18Machine *before=malloc(sizeof *before),*after=malloc(sizeof *after);
+    if(!before || !after) exit(1);
+    memcpy(before,fa18_machine,sizeof *before);
+    int32_t result=compare_descriptor(context,call);
+    memcpy(after,fa18_machine,sizeof *after);
+    /* Keep each reached disk-backed aircraft descriptor and its real render
+     * inputs. Vary only destruction/selection boundaries for this source
+     * routine; none of these fixtures enters the playable game's state. */
+    for(unsigned test=0;test<4;++test) {
+        memcpy(fa18_machine,before,sizeof *before);
+        uint16_t chosen=rd_u16(CHOSEN_RECORD);
+        gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)chosen;
+        wr_u16(record,(rd_u16(record)|0x240u)&0xfbffu);
+        wr_s16(record+0x4c,-1);
+        wr_u16(SELECTED_RECORD,test==0?0xffffu:test==1?(chosen^512u):chosen);
+        wr_u32(WARNING_CAUSES,0xffffffffu);
+        compare_descriptor(context,call);
+        ++expiry_cases;
+        if(rd_u16(record+0x4c)!=15 || (rd_u16(record)&0x600u)!=0x400u ||
+           (test>=2 && (rd_u16(SELECTED_RECORD)!=0xffffu ||
+                        rd_u32(WARNING_CAUSES)!=0xffffbdffu || rd_u16(MESSAGE_CODE)!=0x4016u))) {
+            fputs("Destroyed-aircraft transition/selection contract failed\n",stderr);exit(1);
+        }
+        /* A second render must not restart expiry or repost the message. */
+        if(test==3) {
+            wr_u16(record+0x4c,12);wr_u16(MESSAGE_CODE,0);
+            compare_descriptor(context,call);
+            if(rd_u16(record+0x4c)!=12 || rd_u16(MESSAGE_CODE)) {
+                fputs("Aircraft expiry restarted on a second render\n",stderr);exit(1);
+            }
+            ++expiry_cases;
+        }
+    }
+    memcpy(fa18_machine,after,sizeof *after);
+    free(after);free(before);return result;
 }
 static int32_t consume_followup(void *context,const FollowupPlacementEvent *call) {
     ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header};
@@ -414,6 +453,8 @@ int main(int argc,char **argv) {
     visit_scene_placements(0,&hooks);visit_scene_placements(1,&hooks);
     const FollowupPlacementHooks followups={consume_followup,NULL,NULL};
     visit_followup_placements(&followups);
+    if(!expiry_cases) {fputs("No aircraft expiry descriptor exercised\n",stderr);return 1;}
+    printf("%u destroyed-aircraft expiry/selection/repeated-render cases compared\n",expiry_cases);
     if(!scene_children()) return 1;
     printf("%u descriptors compared, %u failures\n",calls,failures);
     printf("%u positive model strip groups exercised in original rendering\n",strip_groups);

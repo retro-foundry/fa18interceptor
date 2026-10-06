@@ -91,8 +91,8 @@ static UpdateSequenceResult scene_child(void *context,enum UpdateSequenceChild c
         advance_main_loop_control_records(0x4500,&controls); break;
     case UPDATE_TRUE_FOLLOWUP: case UPDATE_FALSE_FOLLOWUP:
         visit_followup_placements(&followups); break;
-    /* C0DA38 changes display pages and exits the enclosing source frame.
-     * TODO(port): connect its native page-presentation contract before use. */
+    /* C0DA38 builds a full-viewport selection and exits the source frame.
+     * TODO(port): connect that selection and propagate its early owner exit. */
     case UPDATE_DISPLAY_END:
     default: fprintf(stderr,"native scene child unavailable: %u\n",(unsigned)child); abort();
     }

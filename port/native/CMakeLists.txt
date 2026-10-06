@@ -1,4 +1,4 @@
-add_executable(fa18_native main.c replay.c frame_capture.c
+add_library(fa18_native_runtime OBJECT replay.c frame_capture.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/display.c ../game/native/cockpit_assets.c
     ../game/native/audio_assets.c ../game/native/audio.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
@@ -10,7 +10,7 @@ add_executable(fa18_native main.c replay.c frame_capture.c
     ../game/native/input.c ../game/pending_input.c ../game/input_events.c
     ../game/command_dispatch.c ../game/view_commands.c ../game/player_input.c
     ../game/native/clock.c ../game/main_loop_timers.c
-    ../game/control_actions.c ../game/update_sequence.c
+    ../game/control_actions.c ../game/update_sequence.c ../game/context_publication.c
     ../game/scene_placements.c ../game/draw_stream.c ../game/active_planes.c
     ../game/projection.c ../game/circle.c
     ../game/followup_placements.c ../game/grid_projection_packet.c
@@ -56,17 +56,28 @@ add_executable(fa18_native main.c replay.c frame_capture.c
     ../game/menu_context_finish.c ../game/target_heading.c
     ../game/disk.c ../game/hunk.c ../romfree/media.c ../amiga/sha256.c
     ../amiga/ilbm.c ../amiga/pcm_output.c)
-target_include_directories(fa18_native PRIVATE ../game ../amiga ../romfree)
-target_compile_definitions(fa18_native PRIVATE FA18_NATIVE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
-target_link_libraries(fa18_native PRIVATE SDL2-static)
+add_executable(fa18_native main.c)
+target_include_directories(fa18_native_runtime PUBLIC ../game ../amiga ../romfree)
+target_compile_definitions(fa18_native_runtime PUBLIC FA18_NATIVE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
+target_link_libraries(fa18_native_runtime PUBLIC SDL2-static)
+target_link_libraries(fa18_native PRIVATE fa18_native_runtime)
 if(MSVC)
+    target_compile_options(fa18_native_runtime PRIVATE /W4 /Gy)
     target_compile_options(fa18_native PRIVATE /W4 /Gy)
     target_link_options(fa18_native PRIVATE /OPT:REF "/MAP:${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 else()
+    target_compile_options(fa18_native_runtime PRIVATE -Wall -Wextra -ffunction-sections -fdata-sections)
     target_compile_options(fa18_native PRIVATE -Wall -Wextra -ffunction-sections -fdata-sections)
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_executable(fa18_native_record_expiry_test ../../tools/native/native_record_expiry_test.c)
+    target_link_libraries(fa18_native_record_expiry_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_record_expiry
+        COMMAND fa18_native_record_expiry_test
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../captures/native/demo01/input.fa18in
+            ${CMAKE_CURRENT_BINARY_DIR}/record-expiry-save)
     add_test(NAME fa18_native_frame_body
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_frame_body.py
                 --runner $<TARGET_FILE:fa18_native>)
