@@ -134,6 +134,10 @@ static void dynamics(gaddr record) {
 static PostflightScheduleResult schedule_child(void *context,enum PostflightScheduleChild child,gaddr record) {
     (void)context; (void)record;
     if(child==SCHEDULE_SELECTION_GATE) { release_lost_selection(); return (PostflightScheduleResult){0,1}; }
+    if(child==SCHEDULE_NINE) {
+        schedule_postflight(POSTFLIGHT_MODE_NINE,0,record,NULL);
+        return (PostflightScheduleResult){0,1};
+    }
     fprintf(stderr,"native record schedule child unavailable: %u\n",(unsigned)child); abort();
 }
 typedef struct { gaddr companion; } RecordLoop;

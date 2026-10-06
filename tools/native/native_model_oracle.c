@@ -105,6 +105,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #define draw_square_faces host_draw_square_faces
 #define draw_record_shadow host_draw_record_shadow
 #define test_stream_face host_test_stream_face
+#define test_stream_face_accumulation host_test_stream_face_accumulation
 #define draw_tested_face host_draw_tested_face
 #define draw_tested_parallelogram host_draw_tested_parallelogram
 #define draw_indexed_face_list host_draw_indexed_face_list
@@ -191,6 +192,7 @@ static int original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     REG_A[0]=oracle_parameters;
     if(pc==0xc21b38u || pc==0xc21c86u) REG_A[2]=0x4600;
+    if(pc==0xc1ff0au || pc==0xc207feu) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
     m68k_set_reg(M68K_REG_SR,0x2700); REG_PC=pc;
     fa18_next_event=INT64_MAX; SET_CYCLES(100000000);
@@ -217,6 +219,37 @@ static int compare(const uint8_t *expected,unsigned test) {
 }
 
 static unsigned calls, failures;
+static int carrier_commands(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    memcpy(saved,fa18_machine,sizeof *saved);
+    for(unsigned test=0;test<48;++test) {
+        gaddr stream=0x4600;unsigned flag=test<16;
+        wr_u8(CONTEXT_SELECT,test&1);wr_u16(VIEW_RECORD,(test&2)?512:0);
+        gaddr viewed=CONTROL_RECORDS+rd_u16(VIEW_RECORD);
+        wr_u8(viewed+4,(test&4)?0x40:0);wr_u16(0x4200-0x7a,test&8);
+        if(!flag) {
+            static const uint16_t kinds[]={0x0100,0x1000,0x0400,0x0800,0x0c00,0x1400,0x1800,0x1c00};
+            wr_u16(stream,0);wr_u16(stream+2,6);wr_u16(stream+4,12);
+            wr_u16(stream+6,kinds[test&7]);wr_u16(stream+8,0);
+            wr_u32(0x4200-0x2c,0x4800);wr_u16(BOUND_SHIFT,test&3);
+            for(unsigned k=0;k<6;++k) wr_s16(0x4800+2*k,(int16_t)(k<3?100+test:256-k*50));
+        }
+        memcpy(before,fa18_machine,sizeof *before);
+        uint16_t result=flag?(uint16_t)command(0x84,&stream,0x4200):test_stream_face_accumulation(&stream,0x4200);
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(flag?0xc207fe:0xc1ff0a) || (uint16_t)REG_D[0]!=result || REG_A[2]!=stream) {
+            fprintf(stderr,"carrier command case %u result/stream mismatch\n",test);return 0;
+        }
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {fprintf(stderr,"carrier command case %u memory %06X differs\n",test,i);return 0;}
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("48 carrier flag/face-result cases match original result word, stream and non-stack RAM");return 1;
+}
 static int circles(void) {
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x80000);
@@ -282,7 +315,12 @@ static int32_t consume(void *context,const ScenePlacementCall *call) {
         ++slow_diffs;
     }
     int okay=compare(expected,calls) && result==original_result && !vertex_diffs && !record_diffs && !slow_diffs;
-    if(!okay) {fprintf(stderr,"descriptor %06X parameters %06X: return source=%d native=%d vertex differences=%u record differences=%u\n",call->routine,call->parameters,original_result,result,vertex_diffs,record_diffs); ++failures;}
+    if(!okay) {
+        fprintf(stderr,"descriptor %06X parameters %06X: return source=%d native=%d vertex differences=%u record differences=%u scratch source=%04X native=%04X\n",
+            call->routine,call->parameters,original_result,result,vertex_diffs,record_diffs,
+            rd_u16(0xc7fefc-0x7c),(unsigned)((expected[0x4200-0x7c]<<8)|expected[0x4200-0x7b]));
+        ++failures;
+    }
     ++calls;free(slow);free(records);free(vertices);free(expected);free(before);
     return original_result;
 }
@@ -369,6 +407,7 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+    if(!carrier_commands()) return 1;
     if(!hull_tails()) return 1;
     if(!circles()) return 1;
     const ScenePlacementHooks hooks={consume,NULL,NULL};

@@ -30,6 +30,11 @@ int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye
  * 10-11 set, component_beyond_bound on the word before `*faces` masked to
  * 14 bits; otherwise face_toward_eye. */
 int face_test_passes(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]);
+/* The model command owner also accumulates the first normal-component
+ * product (or the component offset) returned by C1FB82. Keep it separate
+ * from the predicate: a passing face can have a negative low word. */
+typedef struct { int passes; int32_t accumulation; } FaceTestResult;
+FaceTestResult face_test_result(uint16_t kind,gaddr points,gaddr *faces,const int16_t eye[3]);
 
 /* The stored-normal test on its own ($C1FB9C): `point` shifted by
  * BOUND_SHIFT and offset by BOUND_OFFSET_X/Z, less `eye`, dotted with

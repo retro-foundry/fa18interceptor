@@ -36,7 +36,12 @@ The record/context slice repeats during setup; headless statistics expose its
 `hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;
 the earlier crash-message description was incorrect. Source timer requests use
 seconds/microseconds from the native runner's deterministic PAL frame clock.
-Other selected modes stop at their transition banner. Audio remains suppressed.
+Qualification (digit 5) now continues through carrier construction and its
+briefing into active flight. Return acknowledges the code prompt, then Space
+leaves the qualification briefing. F10 applies the source throttle level;
+Down pulls back. A bounded carrier-start/takeoff probe passes source comparisons.
+Complete landing/outcomes and recorded-flight parity remain unverified.
+Demo and other selected modes stop at their transition banner. Audio remains suppressed.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
@@ -51,6 +56,7 @@ python tools/native/check_records.py --runner build/native/fa18_native.exe
 python tools/native/check_raster.py --runner build/native/fa18_native.exe
 python tools/native/check_models.py --runner build/native/fa18_native.exe
 python tools/native/check_hud.py --runner build/native/fa18_native.exe
+python tools/native/check_qualification.py --runner build/native/fa18_native.exe
 ```
 
 Build ownership is `port/recomp/CMakeLists.txt` -> `port/native/CMakeLists.txt`.
@@ -185,3 +191,11 @@ wait/press/release checkpoints. Headless counters expose `input_passes`,
 `input_events` and `input_queued`. Physical gameport acquisition, modifier
 timing and inherited countermeasure arguments remain open. See
 [`../../analysis/native_input_milestone.md`](../../analysis/native_input_milestone.md).
+
+Qualification mode 9 now shares the connected input, flight and display owners.
+C0FECE's carrier setup, C0FB70/C0FBB6 briefing and C0A2F0 landing schedule run
+directly. Carrier command C207FE and C1FF0A result-word accumulation preserve
+source followup drawing state. Four native checkpoints demonstrate carrier
+startup and short takeoff; original startup, view/record and reached rendering
+comparisons pass. See
+[`../../analysis/native_qualification_milestone.md`](../../analysis/native_qualification_milestone.md).

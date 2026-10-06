@@ -69,17 +69,20 @@ static int sum_not_negative(int32_t first, int32_t second, int32_t third) {
     return (int64_t)sum + third >= 0;
 }
 
-int point_toward_eye(const int16_t point[3], const int16_t normal[3], const int16_t eye[3]) {
+static FaceTestResult point_result(const int16_t point[3], const int16_t normal[3], const int16_t eye[3]) {
     int16_t bound = rd_s16(BOUND_SHIFT), q[3];
     int k;
     for (k = 0; k < 3; k++) q[k] = asr_word(point[k], bound);
     q[0] = (int16_t)(q[0] + rd_s16(BOUND_OFFSET_X));
     q[2] = (int16_t)(q[2] + rd_s16(BOUND_OFFSET_Z));
     for (k = 0; k < 3; k++) q[k] = (int16_t)(q[k] - eye[k]);
-    return sum_not_negative(q[2] * normal[2], q[0] * normal[0], q[1] * normal[1]);
+    return (FaceTestResult){sum_not_negative(q[2] * normal[2], q[0] * normal[0], q[1] * normal[1]),q[0]*normal[0]};
+}
+int point_toward_eye(const int16_t point[3], const int16_t normal[3], const int16_t eye[3]) {
+    return point_result(point,normal,eye).passes;
 }
 
-int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]) {
+static FaceTestResult face_result(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]) {
     int16_t q[3], n[3], u[3], v[3], p[3];
     int k, shift;
 
@@ -90,7 +93,7 @@ int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye
             q[k] = rd_s16(face + (gaddr)(2 * k));
             n[k] = rd_s16(face + 6 + (gaddr)(2 * k));
         }
-        return point_toward_eye(q, n, eye);
+        return point_result(q,n,eye);
     }
     shift = (kind >> 7) & 7;
     for (k = 0; k < 3; k++) {
@@ -101,7 +104,10 @@ int face_toward_eye(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye
     n[0] = (int16_t)((int32_t)((uint32_t)(u[1] * v[2]) - (uint32_t)(v[1] * u[2])) >> 8);
     n[1] = (int16_t)((int32_t)((uint32_t)(v[0] * u[2]) - (uint32_t)(u[0] * v[2])) >> 8);
     n[2] = (int16_t)((int32_t)((uint32_t)(u[0] * v[1]) - (uint32_t)(u[1] * v[0])) >> 8);
-    return sum_not_negative(n[2] * p[2], n[0] * p[0], n[1] * p[1]);
+    return (FaceTestResult){sum_not_negative(n[2] * p[2], n[0] * p[0], n[1] * p[1]),n[0]*p[0]};
+}
+int face_toward_eye(uint16_t kind,gaddr points,gaddr *faces,const int16_t eye[3]) {
+    return face_result(kind,points,faces,eye).passes;
 }
 
 /* The low word of a dot product's absolute value, shifted down by 4. */
@@ -142,4 +148,11 @@ int edge_alignment_test(gaddr *stream, int16_t eye_x, int16_t eye_z, int16_t ran
 int face_test_passes(uint16_t kind, gaddr points, gaddr *faces, const int16_t eye[3]) {
     if (kind & 0x0C00) return component_beyond_bound(kind, (int16_t)(rd_u16(*faces - 4) & 0x3FFF));
     return face_toward_eye(kind, points, faces, eye);
+}
+FaceTestResult face_test_result(uint16_t kind,gaddr points,gaddr *faces,const int16_t eye[3]) {
+    if(kind&0x0c00) {
+        int16_t offset=(int16_t)(rd_u16(*faces-4)&0x3fff);
+        return (FaceTestResult){component_beyond_bound(kind,offset),offset};
+    }
+    return face_result(kind,points,faces,eye);
 }

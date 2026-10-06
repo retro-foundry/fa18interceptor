@@ -120,13 +120,22 @@ Native continuation milestones (functional scope, not instruction counts):
   `../analysis/native_input_milestone.md`. Keyboard/source-owner milestone
   100%; physical gameport acquisition, modifier timing and countermeasure
   inherited arguments remain open. No whole-game percentage is inferred.
-- Next: complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
+- Connected: qualification (digit 5 / source mode 9) now passes the banner,
+  constructs the carrier scene, consumes the briefing and enters C10DAE.
+  F10 throttle/pullback demonstrates short takeoff. C207FE carrier surface
+  gating and C1FF0A face-result accumulation are connected; C0A2F0 landing
+  scheduling follows source gates. Four actual checkpoints, three sets of
+  original startup/record/render comparisons, affected regressions and twelve
+  reference tests pass. See `../analysis/native_qualification_milestone.md`.
+  Qualification startup/short-takeoff milestone 100%; complete landing,
+  outcomes and recorded-run acceptance remain open.
+- Next: recorded-input anchoring, complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.
-- Still open: other modes, active-flight exit/restart, outcomes/progression,
+- Still open: demo/remaining modes, active-flight exit/restart, outcomes/progression,
   audio, original timing and typed game state. The scene-setup endpoint
-  does not establish active flight or whole-game completion.
+  does not establish recorded-flight acceptance or whole-game completion.
 
 Use focused changed-path checks; full sealed replays are reserved for meaningful
 gameplay acceptance checkpoints. Copper fade remains excluded.

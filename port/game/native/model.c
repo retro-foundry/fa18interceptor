@@ -260,6 +260,11 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x078: return draw_parallelogram_face(stream);
     case 0x07c: return edge_alignment_test(stream,eye_x,eye_z,rd_s16(frame-0x28));
     case 0x080: return draw_face_lattice_plain(stream);
+    case 0x084:
+        /* C207FE: carrier hull latches the current model's flagged-view
+         * shadow state. It consumes no stream words and returns zero. */
+        if(!rd_u8(CONTEXT_SELECT) && viewed_record_flagged()) wr_u16(frame-0x7a,1);
+        return 0;
     case 0x088: extend_parallelograms_scaled(stream); return 0;
     case 0x08c: extend_parallelograms(stream); return 0;
     case 0x09c: return draw_square_faces(stream);
@@ -298,7 +303,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
         return rd_u32(PROJECTED_PAIR)==0xffffffffu?-1:1;
     }
     case 0x108: *stream=skip_for_type_3_to_6(*stream); return 0;
-    case 0x10c: return test_stream_face(stream,frame);
+    case 0x10c: return test_stream_face_accumulation(stream,frame);
     case 0x110: *stream=skip_stream_records(*stream); return 0;
     case 0x114: return draw_tested_parallelogram(stream,frame);
     case 0x124: *stream=skip_word_for_mode_57(*stream); return 0;
@@ -362,11 +367,15 @@ static int control(gaddr parameters,gaddr frame) {
             continue;
         }
         if(code==0xffff) return 0;
+        wr_u16(frame-0x7a,0); /* C1F7AA: per-surface flagged-view latch. */
         if(code&0x2000) {
             gaddr commands;
             if(code&0x1000) {commands=rd_u32(stream);stream+=4;}
             else commands=parameters+(code&0xfff);
             drawn|=sequence(commands,frame);
+            /* C1F7FA tests this before the single-stream completion gate.
+             * C207FE continues with the next carrier/cockpit surface. */
+            if(rd_u16(frame-0x7a)) continue;
             break;
         }
         gaddr list;
@@ -377,8 +386,10 @@ static int control(gaddr parameters,gaddr frame) {
             if(entry&0x1000) {commands=rd_u32(list);list+=4;}
             else commands=parameters+(entry&0xfff);
             drawn|=sequence(commands,frame);
+            if(rd_u16(frame-0x7a)) break;
             if(entry&0x8000) break;
         }
+        if(rd_u16(frame-0x7a)) continue;
         if(code&0x4000) break;
     }
     if(!(rd_u8(HEADER_BYTE)&0x40) && (rd_u8(HEADER_BYTE)&0x10)) {
@@ -387,7 +398,7 @@ static int control(gaddr parameters,gaddr frame) {
             record_finish(record,frame,rd_s16(record+0x4c));
         else {HistoryProjectionWork history={0};draw_history_projection(&history);}
     }
-    return drawn;
+    return (int16_t)drawn;
 }
 static int draw_model(gaddr parameters,gaddr frame,uint16_t camera_flags) {
     int16_t range=scaled_range(); gaddr stream=rd_u32(CONTROL_STREAM),bound;

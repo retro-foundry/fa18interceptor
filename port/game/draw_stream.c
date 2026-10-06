@@ -957,19 +957,23 @@ int draw_record_shadow(gaddr *stream, gaddr frame) {
 
 /* ---- face tests ---------------------------------------------------------- */
 
-int test_stream_face(gaddr *stream, gaddr frame) {
+static FaceTestResult stream_face_result(gaddr *stream, gaddr frame) {
     gaddr in = CLIP_INPUT + 4, faces;
     int16_t eye[3];
     uint16_t kind;
-    int k, passed;
+    int k;
 
     for (k = 0; k < 3; k++) put(in + (gaddr)(6 * k), get(vertex_at(next_word(stream))));
     kind = (uint16_t)next_word(stream);
     faces = *stream;
     for (k = 0; k < 3; k++) eye[k] = rd_s16(frame - 0x26 + (gaddr)(2 * k));
-    passed = face_test_passes(kind, rd_u32(frame - 0x2C), &faces, eye);
-    *stream = faces + (passed ? 0x12 : 0);
-    return passed;
+    FaceTestResult result=face_test_result(kind,rd_u32(frame-0x2c),&faces,eye);
+    *stream=faces+(result.passes?0x12:0);
+    return result;
+}
+int test_stream_face(gaddr *stream,gaddr frame) { return stream_face_result(stream,frame).passes; }
+uint16_t test_stream_face_accumulation(gaddr *stream,gaddr frame) {
+    return (uint16_t)stream_face_result(stream,frame).accumulation;
 }
 
 /* The vertex offsets at `*face`, the last flagged by bit 15, into the

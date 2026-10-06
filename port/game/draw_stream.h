@@ -175,6 +175,9 @@ int draw_record_shadow(gaddr *stream, gaddr frame);
  * bytes after the kind are skipped when the test passes. It works in its
  * caller's frame at `frame` (the point table at -$2C, the eye at -$26). */
 int test_stream_face(gaddr *stream, gaddr frame);
+/* C1FF0A's result word accumulated by the model owner, separate from its
+ * face predicate and the predicate-controlled stream skip. */
+uint16_t test_stream_face_accumulation(gaddr *stream,gaddr frame);
 
 /* A face of at least three vertex offsets, the last flagged by bit 15,
  * then its kind word ($C2005C). The face is drawn in the kind's colour;

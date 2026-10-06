@@ -151,7 +151,18 @@ reference tests pass. See `analysis/native_input_milestone.md`. This input
 batch is complete (100% of keyboard/source-owner integration); physical
 gameport acquisition, modifier timing and inherited countermeasure arguments
 remain open. No full sealed replay repeated or whole-game estimate inferred.
-Next: complete C0EFD4 ownership, remaining HUD/record children and C0DA38
+Qualification (digit 5 / mode 9) now proceeds through carrier construction,
+briefing acknowledgement and the existing context chain into C10DAE. A short
+F10/pullback probe clears the ground flag and increases speed/height. C207FE
+carrier surface gating and C1FF0A accumulated face-test values are connected;
+C0A2F0 qualification landing scheduling follows its original gates. Four native
+checkpoints, three sets of 20 original startup/briefing/scheduler cases, complete
+view/record and reached rendering comparisons pass, plus 48 flag/face-result
+cases, affected native regressions and twelve reference tests. See
+`analysis/native_qualification_milestone.md`. This startup/short-takeoff batch
+is complete (100% of that scope); full landing/outcomes and recorded-run parity
+remain open. No full replay repeated. Demo/remaining modes still stop at banners.
+Next: recorded-input anchoring, complete C0EFD4 ownership, remaining HUD/record children and C0DA38
 alternate presentation. Exact input-callback/beam timing remains unproven.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.

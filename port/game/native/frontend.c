@@ -141,8 +141,7 @@ const char *native_frontend_screen(const NativeFrontend *game) {
 void native_frontend_key(NativeFrontend *game,int key) {
     native_storage_bind(&game->storage);
     if(key>='a' && key<='z') key-=32;
-    if(rd_u8(MODE_SELECT)==1 &&
-       (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP)) {
+    if(native_flight_enabled(game)) {
         native_input_enqueue(game,key,1);return;
     }
     if(game->screen==NATIVE_CREDITS) {
@@ -169,8 +168,7 @@ void native_frontend_event(NativeFrontend *game,int key,int down) {
         if(down) game->shift_keys|=mask; else game->shift_keys&=~mask;
         wr_u8(KEY_STATE,(uint8_t)(game->shift_keys!=0)); return;
     }
-    if(rd_u8(MODE_SELECT)==1 &&
-       (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP)) {
+    if(native_flight_enabled(game)) {
         native_input_enqueue(game,key,down);return;
     }
     if(down) native_frontend_key(game,key);
@@ -193,8 +191,7 @@ void native_frontend_tick(NativeFrontend *game) {
         select_screen(game,NATIVE_CREDITS,15,0);
     }
     MainControlHooks hooks={0}; hooks.context=game; hooks.consume_values=child;
-    const int flight=rd_u8(MODE_SELECT)==1 &&
-        (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
+    const int flight=native_flight_enabled(game);
     if(!flight) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
     if(game->screen==NATIVE_ENLISTMENT && (int8_t)rd_u8(0xc457e0u)<0) {
         if(!rd_u16(PLAYER_LOG+4)) {
@@ -203,8 +200,7 @@ void native_frontend_tick(NativeFrontend *game) {
         wr_u16(PLAYER_LOG+4,(uint16_t)(rd_u16(PLAYER_LOG+4)+1));
     } else if(game->screen==NATIVE_CALLSIGN && game->name_finished) native_frontend_start_menu(game);
     native_menu_tick(game);
-    if(rd_u8(MODE_SELECT)==1 &&
-       (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP))
+    if(native_flight_enabled(game))
         native_display_begin_frame(game);
     const int complete=native_flight_tick(game);
     /* C32CEE is C0EFD4's final child, after the flight/HUD work. */

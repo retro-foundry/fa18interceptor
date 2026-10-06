@@ -80,7 +80,6 @@ static void refresh_child(void *context,enum ContextRefreshChild child) {
     }
 }
 static MenuTransitionResult transition_child(void *context,enum MenuTransitionCall child,uint32_t value) {
-    (void)context;
     const MenuColdHooks cold={0};
     switch(child) {
     case MENU_STOP_ZERO: free_voice(0); break;
@@ -94,6 +93,8 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     case MENU_DELAY_ROOT: case MENU_MODE_NINE_ROOT: initialize_scene_from_mode(NULL); break;
     case MENU_DELAY_VIEWPORT: clear_long_table(); break;
     case MENU_MODE_ONE_ROOT: set_menu_position_preset(&cold,0); break;
+    case MENU_MODE_NINE_POSITION: reset_scene_context(); break; /* C0924A */
+    case MENU_MODE_NINE_VIEW: finish_scene_setup(); break; /* C082B0 */
     case MENU_REFRESH: {
         const ContextRefreshHooks hooks={refresh_child,NULL,context};
         refresh_context_packet(&hooks); break;
@@ -120,6 +121,11 @@ void native_flight_reset_aircraft(NativeFrontend *game) {
     const MenuColdHooks hooks={cockpit_child,NULL,game};
     refresh_menu_cockpit(&hooks);
 }
+static void return_child(void *context,enum MenuReturnChild child) {
+    (void)context;
+    if(child==MR_CHOOSE_RESET || child==MR_LEAVE_RESET) reset_message_sequence();
+    else { fprintf(stderr,"native menu-return child unavailable: %u\n",(unsigned)child);abort(); }
+}
 static void stage(void *context,gaddr routine) {
     NativeFrontend *game=context;
     const MenuOutcomeHooks outcome={outcome_child,NULL,game};
@@ -136,6 +142,11 @@ static void stage(void *context,gaddr routine) {
     else if(routine==0xc1072e) queue_menu_message_four(NULL);
     else if(routine==0xc1075a) start_menu_outcome(&outcome);
     else if(routine==0xc1078a) finish_menu_outcome(&outcome);
+    else if(routine==0xc0fb70 || routine==0xc0fbb6) {
+        const MenuReturnHooks hooks={return_child,NULL,game};
+        if(routine==0xc0fb70) choose_menu_exit_after_countdown(&hooks);
+        else leave_menu_on_key_or_message(&hooks);
+    }
     else if(routine==0xc10970) follow_menu_return_context(NULL);
     else if(routine==0xc109ac) complete_menu_return_after_countdown(NULL);
     else if(routine==0xc11788) {
@@ -194,11 +205,13 @@ static int finish_frame_clock(NativeFrontend *game) {
     game->flight_timer_pending=0;
     return 1;
 }
+int native_flight_enabled(const NativeFrontend *game) {
+    const uint8_t mode=rd_u8(MODE_SELECT);
+    return (mode==1 || mode==9) &&
+        (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
+}
 int native_flight_tick(NativeFrontend *game) {
-    if(game->screen!=NATIVE_MODE_INTRO && game->screen!=NATIVE_SCENE_SETUP) return 1;
-    /* Connect Free Flight first. Other mode banners retain their existing
-     * endpoint until their distinct scene/record-update paths are owned. */
-    if(rd_u8(MODE_SELECT)!=1) return 1;
+    if(!native_flight_enabled(game)) return 1;
     if(game->flight_timer_pending) return finish_frame_clock(game);
     const uint16_t saved_tick=rd_u16(UPDATE_TICK);
     const InputDeviceHooks palette={palette_child,NULL,game};
