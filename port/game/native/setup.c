@@ -7,6 +7,8 @@
 #include "../audio.h"
 #include "../globals.h"
 #include "../stages.h"
+#include "../menu_setup.h"
+#include "../cockpit.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -41,6 +43,10 @@ static int32_t child(void *context,enum MenuContextChild which) {
          * replay clock advances at the runner's existing 50 Hz PAL cadence. */
         native_clock_request(); return 0;
     case MC_EXPIRY_TONE: play_tone_2(); return 0;
+    case MC_STAGE_SETUP: free_all_voices(); return 0;
+    case MC_STAGE_SOUND: start_sound_6(0x3f,0x78); return 0;
+    case MC_STAGE_COMMAND: return filter_cockpit_message(0x4021,NULL);
+    case MC_STAGE_FINISH: request_cockpit_redraw(); return 0;
     default: fprintf(stderr,"native setup child unavailable: %u\n",(unsigned)which); abort();
     }
 }

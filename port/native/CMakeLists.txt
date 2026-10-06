@@ -87,4 +87,7 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_map_limits
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_map_limits.py
                 --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_postflight_entry
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_postflight_entry.py
+                --runner $<TARGET_FILE:fa18_native>)
 endif()

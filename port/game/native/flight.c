@@ -31,6 +31,7 @@
 #include "../menu_return.h"
 #include "../menu_followup.h"
 #include "../menu_outcome.h"
+#include "../postflight_completion.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -136,6 +137,16 @@ static void stage(void *context,gaddr routine) {
     else if(routine==0xc1078a) finish_menu_outcome(&outcome);
     else if(routine==0xc10970) follow_menu_return_context(NULL);
     else if(routine==0xc109ac) complete_menu_return_after_countdown(NULL);
+    else if(routine==0xc11788) advance_postflight_completion(NULL);
+    else if(routine==0xc11830) restart_postflight_completion(NULL);
+    else if(routine==0xc11872) expire_postflight_completion(NULL);
+    else if(routine==0xc118a0) queue_postflight_failure(NULL);
+    else if(routine==0xc118e6) end_postflight_message(NULL);
+    else if(routine==0xc118fc) follow_postflight_message(NULL);
+    else if(routine==0xc11934) clear_postflight_phase(NULL);
+    else if(routine==0xc11958) follow_postflight_message_or_phase(NULL);
+    else if(routine==0xc119d4) restart_postflight_after_countdown(NULL);
+    else if(routine==0xc1104c) queue_postflight_end(NULL);
     else if(!native_setup_stage(game,routine)) { fprintf(stderr,"native flight stage unavailable: %08X\n",routine); abort(); }
 }
 enum { PALETTE_FRAME=0x3080 };

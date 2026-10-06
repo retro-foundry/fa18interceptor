@@ -131,6 +131,14 @@ view/record and reached rendering comparisons pass. Rough startup wiring now
 99%, excluding recorded-flight acceptance. The probe then reaches postflight
 MC_STAGE_SETUP/C0F4A6 free_all_voices, still missing from native setup. See
 `analysis/native_map_visibility_milestone.md`. No full sealed replay repeated.
+Postflight voice cleanup/event-pair/message/redraw children now connect to
+existing source owners; completion/message callbacks are bound. The native
+8200 probe reaches C11788 and its entry/wait/release cases match source RAM.
+Reset remains waiting on activity count C45899=0x28, consumed by C1612C's
+outer display/palette sequence. Integrate that source owner with resumable PAL
+presentation and two drawing pages next; do not invent a counter decrement.
+See `analysis/native_postflight_entry_milestone.md`. Startup remains roughly
+99%; full reset and recorded-flight acceptance remain open.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Source sound requests now consume the original mute/absent-voice gates; native

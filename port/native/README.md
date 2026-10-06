@@ -165,3 +165,10 @@ native takeoff: ground flag, height and source bookkeeping, plus original
 view/record comparisons. The later postflight setup/restart remains open;
 recorded-flight acceptance is not established. See
 [`../../analysis/native_map_visibility_milestone.md`](../../analysis/native_map_visibility_milestone.md).
+
+Postflight cleanup and reset-wait callbacks now execute. The short pullback
+run continues to C11788, with three source entry/reset cases passing. Reset is
+still waiting for C1612C outer display activity and page-presentation ownership.
+`check_postflight_entry.py` documents this frontier; it does not accept a full
+reset or recorded run. See
+[`../../analysis/native_postflight_entry_milestone.md`](../../analysis/native_postflight_entry_milestone.md).

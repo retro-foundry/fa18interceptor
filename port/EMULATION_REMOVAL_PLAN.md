@@ -99,8 +99,13 @@ Native continuation milestones (functional scope, not instruction counts):
   view/record and rendering comparisons. See
   `../analysis/native_map_visibility_milestone.md`. Rough startup wiring now
   99% (previously 98%); recorded-flight acceptance remains open.
-- Next reached dependency: MC_STAGE_SETUP/C0F4A6 in native postflight setup;
-  the takeoff probe later returns to ground and enters the result/reset path.
+- Connected: postflight voice cleanup, event pair and source message/redraw
+  children; existing completion/message callbacks are bound. The real 8200
+  probe reaches C11788, and three original entry/wait/release cases pass. See
+  `../analysis/native_postflight_entry_milestone.md`. Batch complete; startup
+  wiring remains roughly 99%, excluding full reset/recorded-flight acceptance.
+- Next reached dependency: C1612C outer display/palette activity wait and
+  two-page presentation. C11788 currently waits on its activity counter 0x28.
 - Next: complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.
