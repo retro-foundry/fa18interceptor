@@ -68,3 +68,16 @@ int fa18_resolve_map_packet_static_packet(void *context, uint32_t address,
                                 FA18_MAP_PACKET_PACKET_RUNTIME_BASE,
                                 address, packet, size);
 }
+
+int fa18_resolve_map_packet_visibility_limit(void *context,int16_t index,uint16_t *limit) {
+    FA18MapPacketStaticData *data=context;
+    const uint8_t *source;
+    size_t size;
+    const int16_t offset=(int16_t)((uint16_t)index*2u);
+    const uint32_t address=(uint32_t)(0x00c2adf8u+(uint32_t)(int32_t)offset);
+    if(!data || !limit || resolve(data->control_bytes,data->control_size,
+            FA18_MAP_PACKET_CONTROL_RUNTIME_BASE,address,&source,&size) || size<2u)
+        return -1;
+    *limit=fa18_be16(source);
+    return 0;
+}

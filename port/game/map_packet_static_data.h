@@ -31,6 +31,8 @@ int fa18_resolve_map_packet_control_stream(void *context, uint32_t address,
  * original Hunk-28 control payload. */
 int fa18_resolve_map_packet_low_filter_row(void *context, uint32_t address,
                                            int16_t selector, int8_t row[4]);
+/* C2AE88-C2AE8E: signed, doubled word index relative to C2ADF8. */
+int fa18_resolve_map_packet_visibility_limit(void *context,int16_t index,uint16_t *limit);
 int fa18_resolve_map_packet_static_packet(void *context, uint32_t address,
                                           const uint8_t **packet, size_t *size);
 

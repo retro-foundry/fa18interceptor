@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 
+typedef int (*FA18MapVisibilityLimitResolver)(void *context,int16_t index,uint16_t *limit);
 typedef struct {
     uint8_t alternate_layout;
     uint8_t force_visible;
@@ -14,9 +15,13 @@ typedef struct {
     int32_t coordinate_y;
     int32_t offset_x;
     int32_t offset_y;
+    /* Original C2AE88 also reads preceding image words for negative indices. */
+    FA18MapVisibilityLimitResolver resolve_visibility_limit;
+    void *visibility_context;
 } FA18MapDetailFieldsInput;
 
 typedef struct {
+    /* Source selector word: forced 1, compared X's low word, or 0. */
     uint16_t visible;
     int32_t coordinate_x;
     int32_t coordinate_y;
@@ -26,8 +31,8 @@ typedef struct {
 
 /* `$C2AE5A-$C2AEF7`: apply the map detail gate to prepared coordinate terms,
  * calculate the bounded visibility decision, and format the terms consumed by
- * `$C2AEFC`.  The original lookup addresses preceding image data for a
- * negative metric index; this bounded port rejects that unobserved case. */
+ * `$C2AEFC`. A loaded-image resolver is required for negative metric indices;
+ * ordinary nonnegative entries can use the reconstructed eighteen-word table. */
 int fa18_apply_map_detail_fields(const FA18MapDetailFieldsInput *input,
                                  FA18MapDetailFieldsResult *result);
 

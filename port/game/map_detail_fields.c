@@ -61,8 +61,14 @@ int fa18_apply_map_detail_fields(const FA18MapDetailFieldsInput *input,
     } else if (input->visibility_gate) {
         int16_t index = (int16_t)asr_long_8(input->detail_metric);
         if (index > 0x11) index = 0x11;
-        if (index < 0) return -1;
-        int32_t limit = map_detail_limit_lookup[index];
+        uint16_t lookup;
+        if(input->resolve_visibility_limit) {
+            if(input->resolve_visibility_limit(input->visibility_context,index,&lookup)) return -1;
+        } else {
+            if(index<0) return -1;
+            lookup=map_detail_limit_lookup[index];
+        }
+        int32_t limit = lookup;
         if (!input->zoom_endpoint) {
             const uint16_t divisor = input->zoom_scale < 2 ? 2u :
                 (uint16_t)input->zoom_scale;
@@ -73,9 +79,12 @@ int fa18_apply_map_detail_fields(const FA18MapDetailFieldsInput *input,
         limit = swap_words(limit);
         result->visibility_limit_written = 1;
         result->visibility_limit_register = (uint32_t)limit;
-        if (centered_magnitude(coordinate_x) > limit ||
-            centered_magnitude(coordinate_y) > limit)
-            result->visible = 1;
+        /* C2AECA branches with X still in D7; C2AF40 tests its low word.
+         * Y's far branch instead falls through C2AEDC's explicit value 1. */
+        int32_t centered_x=centered_magnitude(coordinate_x);
+        int32_t centered_y=centered_magnitude(coordinate_y);
+        if(centered_x>limit) result->visible=(uint16_t)centered_x;
+        else if(centered_y>limit) result->visible=1;
     }
 
     coordinate_x = swap_words(coordinate_x);

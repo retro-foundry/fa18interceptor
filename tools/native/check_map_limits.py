@@ -1,12 +1,11 @@
-"""Exercise reached paired model strips and compare their original geometry.
+"""Compare reached negative terrain visibility indices with the original.
 
-The short pullback scenario includes takeoff and ends before postflight.
-It does not establish full replay parity. Copper fade is excluded.
+Ends at the repaired tick; later postflight/setup ownership remains open.
+Copper fade is excluded by comparing plane buffers.
 """
 import argparse
 import json
 from pathlib import Path
-import re
 import subprocess
 import tempfile
 
@@ -18,12 +17,12 @@ def main():
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe')
     args = parser.parse_args()
     oracles = {}
-    for name in ('strips', 'model', 'records'):
+    for name in ('map_limits', 'raster'):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
         subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(oracle.relative_to(ROOT)),
                         '--main', f'tools/native/native_{name}_oracle.c'], cwd=ROOT, check=True)
         oracles[name] = oracle
-    with tempfile.TemporaryDirectory(prefix='native-strips-', dir=ROOT / 'build') as directory:
+    with tempfile.TemporaryDirectory(prefix='native-map-limits-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         replay = work / 'pull.e9k'
         replay.write_text('E9K_INPUT_V1\nF 1800 K 32 0 0 1\nF 1802 K 32 0 0 0\n'
@@ -33,27 +32,19 @@ def main():
                           'F 5400 K 49 0 0 1\nF 5402 K 49 0 0 0\n'
                           'F 6200 K 61 0 0 1\nF 7000 K 274 0 0 1\n'
                           'F 7150 K 274 0 0 0\n')
-        checkpoint = work / '7150.dat'
+        checkpoint = work / '7294.dat'
         result = subprocess.run([str(args.runner.resolve()), '--adf', str(ROOT / 'local/media/fa18.adf'),
-                                 '--save-dir', directory, '--headless', '--frames', '7150',
+                                 '--save-dir', directory, '--headless', '--frames', '7294',
                                  '--replay', str(replay), '--data-out', str(checkpoint)],
                                 cwd=ROOT, check=True, capture_output=True, text=True, timeout=25)
         stats = json.loads(result.stdout)
-        assert stats['stage'] == 'C10DAE' and stats['model_calls'] > 0, stats
+        assert stats['stage'] == 'C10DAE' and stats['terrain_polygons'] > 0, stats
         assert not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
         data = checkpoint.read_bytes()
-        player = 0xC46184 - 0xC00000 + 0x80000
-        assert not int.from_bytes(data[player+2:player+4], 'big') & 0x80, 'aircraft remains grounded'
-        assert int.from_bytes(data[player+24:player+28], 'big', signed=True) > 1800, 'aircraft did not climb'
-        assert data[player+0x21] & 1, 'source takeoff bookkeeping was not published'
-        subprocess.run([str(oracles['strips']), str(checkpoint)], cwd=ROOT, check=True, timeout=15)
-        result = subprocess.run([str(oracles['model']), str(checkpoint)], cwd=ROOT,
-                                check=True, capture_output=True, text=True, timeout=20)
-        print(result.stdout, end='')
-        match = re.search(r'(\d+) positive model strip groups', result.stdout)
-        assert match and int(match[1]) > 0, 'reached positive strips were not compared'
-        subprocess.run([str(oracles['records']), str(checkpoint), '7150'], cwd=ROOT, check=True, timeout=15)
-    print('Native takeoff renders paired strips and preserves source view/record updates')
+        assert int.from_bytes(data[0x3fd8:0x3fdc], 'big', signed=True) < 0, 'negative map metric not exercised'
+        for oracle in oracles.values():
+            subprocess.run([str(oracle), str(checkpoint)], cwd=ROOT, check=True, timeout=15)
+    print('Native negative-metric terrain pass completes and matches original plane buffers')
 
 
 if __name__ == '__main__':

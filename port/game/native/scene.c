@@ -72,8 +72,9 @@ static UpdateSequenceResult scene_child(void *context,enum UpdateSequenceChild c
             if(!wide && !depth.run_normal_pass) continue;
             wr_u16(CURRENT_COLOUR,6);
             if(run_map_packet_pass(frame,wide,&hooks)) {
-                fprintf(stderr,"native map packet pass failed: wide=%d tick=%u height=%d\n",
-                        wide,game->ticks,rd_s32(CONTROL_RECORDS+24)); abort();
+                fprintf(stderr,"native map packet pass failed: wide=%d tick=%u height=%d metric=%d octant=%d table=%d\n",
+                        wide,game->ticks,rd_s32(CONTROL_RECORDS+24),
+                        rd_s32(frame-0x28),rd_s8(VIEW_OCTANT),rd_s8(0xc45850)); abort();
             }
         }
         break;

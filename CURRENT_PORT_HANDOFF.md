@@ -123,6 +123,14 @@ View/record comparisons also pass at 7150 and 7280. See
 `analysis/native_model_strips_milestone.md`. The same pullback next fails the
 wide terrain pass at tick 7294, height 1800; takeoff remains unproven. Resolve
 that reached path next. Startup estimate remains roughly 98%.
+Negative/wrapped terrain visibility indices now read the original loaded image;
+the source X selector word is preserved. 384 source cases and repaired tick
+7294 terrain buffers pass. The 7150 checkpoint explicitly proves short takeoff:
+ground flag clear, height 264160 versus 1800, takeoff bookkeeping set; original
+view/record and reached rendering comparisons pass. Rough startup wiring now
+99%, excluding recorded-flight acceptance. The probe then reaches postflight
+MC_STAGE_SETUP/C0F4A6 free_all_voices, still missing from native setup. See
+`analysis/native_map_visibility_milestone.md`. No full sealed replay repeated.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Source sound requests now consume the original mute/absent-voice gates; native

@@ -92,8 +92,15 @@ Native continuation milestones (functional scope, not instruction counts):
   checkpoint pass, including positive strip rendering and view/record parity.
   See `../analysis/native_model_strips_milestone.md`. Batch complete; startup
   wiring remains roughly 98%, with takeoff unproven.
-- Next reached dependency: wide terrain pass fails at native tick 7294 in the
-  pullback probe (height 1800). Resolve its source contract before flight claims.
+- Connected: original-image terrain visibility lookup for negative/wrapped
+  indices and exact X selector-word behavior. 384 source cases and the actual
+  repaired tick-7294 map buffers pass. The 7150 checkpoint now explicitly checks
+  takeoff (ground flag clears, height increases, bookkeeping set), with source
+  view/record and rendering comparisons. See
+  `../analysis/native_map_visibility_milestone.md`. Rough startup wiring now
+  99% (previously 98%); recorded-flight acceptance remains open.
+- Next reached dependency: MC_STAGE_SETUP/C0F4A6 in native postflight setup;
+  the takeoff probe later returns to ground and enters the result/reset path.
 - Next: complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.

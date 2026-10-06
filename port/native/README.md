@@ -156,5 +156,12 @@ and fails explicitly if reached. See
 Positive paired model strips C1F584-C1F6F8 now render during the native pullback
 probe. `check_strips.py` checks 96 source cases and actual reached descriptor,
 plane and record comparisons. Dynamics warning publication uses C25704.
-The next reached failure is a wide terrain pass at tick 7294; takeoff is not
-accepted. See [`../../analysis/native_model_strips_milestone.md`](../../analysis/native_model_strips_milestone.md).
+The subsequent terrain fix and short takeoff check are documented below. See [`../../analysis/native_model_strips_milestone.md`](../../analysis/native_model_strips_milestone.md).
+
+Negative terrain visibility indices now resolve original image words and retain
+C2AF40's exact source selector. `check_map_limits.py` passes 384 source cases and
+the repaired tick-7294 terrain checkpoint. `check_strips.py` also checks a short
+native takeoff: ground flag, height and source bookkeeping, plus original
+view/record comparisons. The later postflight setup/restart remains open;
+recorded-flight acceptance is not established. See
+[`../../analysis/native_map_visibility_milestone.md`](../../analysis/native_map_visibility_milestone.md).

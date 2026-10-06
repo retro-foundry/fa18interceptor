@@ -147,6 +147,8 @@ static int runtime_record(void *context, uint8_t encoded,
                               gate.detail_byte, gate.visibility_flag);
 
     record->fields = (FA18MapDetailFieldsInput){0};
+    record->fields.resolve_visibility_limit=fa18_resolve_map_packet_visibility_limit;
+    record->fields.visibility_context=&runtime->data;
     record->fields.zoom_endpoint = rd_u8(0xC457DDu);
     record->fields.zoom_scale = rd_s16(0xC45A42u);
     record->fields.coordinate_x = (int32_t)(0u - (rd_u32(runtime->component) & mask));
