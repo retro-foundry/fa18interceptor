@@ -175,7 +175,6 @@ int glue_C25482_step(void);
 /* batch 7 */
 int glue_C50212(void);
 int glue_C4FFB0(void);
-int glue_C14876(void);
 int glue_C308E2(void);
 int glue_C30904(void);
 int glue_C28F16(void);
@@ -214,7 +213,6 @@ int glue_C0840E(void);
 int glue_C258C8(void);
 
 /* batch 10: decay, messages, lookups, cell steps, 2.8 matrix, cached display value */
-int glue_C148A2(void);
 int glue_C11312(void);
 int glue_C11312_step(void);
 int glue_C287DA(void);
@@ -245,7 +243,6 @@ int glue_C231A2_step(void);
 int glue_C2559A_step(void);
 int glue_C25864_step(void);
 
-int glue_C148E2(void);
 
 /* batch 13: decimal format, cockpit slide, position history */
 int glue_C3267A(void);
@@ -264,7 +261,6 @@ int glue_C2564E_step(void);
 int glue_C1D520(void);
 int glue_C1D520_step(void);
 int glue_C1D0B6(void);
-int glue_C26428(void);
 
 /* batch 16: small text */
 int glue_C32794(void);
@@ -541,17 +537,12 @@ int glue_C118E6(void);
 int glue_C11958(void);
 int glue_C119D4(void);
 int glue_C0A2F0(void);
-int glue_C1B4D0(void);
-int glue_C1B4D4(void);
-int glue_C1B4D8(void);
-int glue_C1B4DE(void);
 int glue_C1B50C(void);
 int glue_C1B510(void);
 int glue_C1B514(void);
 int glue_C1B558(void);
 int glue_C1B55C(void);
 int glue_C1B560(void);
-int glue_C25A6A(void);
 int glue_C33DA4(void);
 int glue_C21C4C(void);
 int glue_C1FED4(void);
@@ -727,7 +718,6 @@ int glue_C0CFFA(void);
 int glue_C0CF98(void);
 int glue_C13176(void);
 int glue_C12098(void);
-int glue_C1B27E(void);
 int glue_C3316E(void);
 int glue_C3316E_step(void);
 int glue_C244E2(void);
@@ -877,7 +867,6 @@ int glue_C2D99C(void);
 /* current record matrix update */
 
 /* indexed control-record update */
-int glue_C13D84(void);
 int glue_C26EBE(void);
 int glue_C23CA6(void);
 int glue_C23CA6_step(void);

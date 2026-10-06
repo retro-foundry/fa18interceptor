@@ -49,12 +49,3 @@ void record_76_78_registers(gaddr r, int16_t m6c, int16_t m6e,
     if ((int16_t)((int16_t)(m6c < 0 ? -m6c : m6c) >> 7) > 30 || i6e > 30) D(0) &= 0xFFFFu;
     SET_W(D(0), (int16_t)((int16_t)(old76 - target76) >> 6));
 }
-
-int glue_C26428(void) {
-    gaddr r = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
-    int16_t m6c = rd_s16(r + 0x6C), m6e = rd_s16(r + 0x6E), old76 = rd_s16(r + 0x76);
-    int enabled = rd_u8(RECORD_UPDATES_ON) != 0;
-    update_record_76_78();
-    record_76_78_registers(r, m6c, m6e, old76, enabled);
-    return glue_return();
-}

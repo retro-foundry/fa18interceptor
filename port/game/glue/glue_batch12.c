@@ -30,14 +30,3 @@ int glue_C231A2(void) {
     flags_logic_l(D(0));
     return glue_return();
 }
-
-/* $C148E2: compiled C; D0 = the term (extended), D1 = the scaled +$18
- * offset it added. D2 is saved and restored. */
-int glue_C148E2(void) {
-    gaddr r = rd_u32(CURRENT_RECORD);
-    int32_t offset = rd_s32(REFERENCE_18) - rd_s32(r + 0x18);
-    offset >>= (rd_u16(r + 0x02) & 0x08) ? 11 : 13;
-    D(0) = (uint32_t)(int32_t)attitude_term();
-    D(1) = (uint32_t)offset;
-    return glue_return();
-}

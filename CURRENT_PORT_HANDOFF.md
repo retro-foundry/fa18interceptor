@@ -11,7 +11,25 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
-Latest dependency removal: C25B66's live matrix call at C25D9E selects the
+Latest dependency removal: the same flight parent now selects game C input
+and indexed-record owners at C25C70/C25D7E. C1B27E/C13D84 and nine exclusive
+helper CPU entries/registrations are retired. Six bounded 800-frame before/
+after pairs preserve RGB, indices, final RAM and instruction/device counts;
+combined dispatches fall by 110/0/104. There are **23 C-owned entries** and
+**591 readable CPU rows**. Both GNU/MSVC runners build, twelve CTests, GNU
+profiling and the parent DMA/boundary oracle pass; an MSVC/GNU demo matches.
+All 309 sandbox parent calls match; shadow has 205 matches and 104 incomplete
+calls, unchanged from baseline. Live ON captures prove integration separately.
+The outer CPU/event boundary, guest state, scratch publication and existing
+2,400/18,000-cycle atomic timing remain. Bounded CPU-work delta **0.0000 pp**,
+cached full raw CPU **38.4011%**, native memory/chipset/boot **0%**, gate **0/4**.
+Combined source parity remains open at **565/446/263**, Copper fade excluded.
+Evidence: `analysis/emulation_removal_flight_calls_batch.json/.md`.
+Next target is **C2C392**: 626 original instructions still generated, called
+27 times in the bounded demo. Reconstruct its complete original record-action
+owner and connect it to the flight parent to remove remaining CPU work.
+
+Previous dependency removal: C25B66's live matrix call at C25D9E selects the
 game C owner directly, with copied arguments retained across IRQ service.
 C2D408's CPU entry adapter and registry row are removed. Six bounded
 before/after pairs (three recordings, parent and combined selections) match

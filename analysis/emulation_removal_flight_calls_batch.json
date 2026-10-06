@@ -1,0 +1,218 @@
+{
+  "before_commit": "2a2ffa1c",
+  "scope": "C25B66 live input and indexed-record C phases; child entry registrations removed, outer CPU/event and caller result publication retained",
+  "retired_cpu_entries": [
+    "C1B27E",
+    "C13D84",
+    "C1B4D0",
+    "C1B4D4",
+    "C1B4D8",
+    "C1B4DE",
+    "C25A6A",
+    "C14876",
+    "C148A2",
+    "C148E2",
+    "C26428"
+  ],
+  "direct_c_entries": 23,
+  "readable_cpu_registry_rows": 591,
+  "cpu_work_delta_bounded_pp": 0,
+  "cached_last_full_raw_cpu_removed_percent": 38.40106459907289,
+  "accepted_cpu_removed_percent": null,
+  "memory_chipset_boot_cutover_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": "0/4",
+  "full_replay_repeated": false,
+  "checks": {
+    "GNU_MSVC_both_runners": "built",
+    "CTest": "12/12",
+    "GNU_profiling": "OFF/ON/interpreter output/state unchanged; new live edges positive and child entry dispatch absent",
+    "parent_DMA_oracle": "554 instructions / 17728 cases; argument lifetime, IRQ guard, retirement and reset matched",
+    "MSVC_GNU_combined_demo": "800 frames RGB/index/RAM identical"
+  },
+  "source_parity_remaining_first_nonfade_frame": {
+    "demo01": 565,
+    "qual_carrier_success": 446,
+    "qual_fail_crashes": 263
+  },
+  "component_proof_limit": "Held parent source proofs use original child execution, not the new live callback; shadow incomplete counts 32/10/62 equal baseline and are not passes. All 309 sandbox calls match. Live ON before/after captures prove connected call ownership.",
+  "recordings": [
+    {
+      "recording": "demo01",
+      "frames": 800,
+      "comparisons": [
+        {
+          "mode": "parent",
+          "before": "build\\flight-calls\\before-demo01",
+          "after": "build\\flight-calls\\demo01-parent",
+          "hashes": {
+            "rgb": "6736f9e422226348cb046fa3d9fda8b0c28c742f60fcdfa2d366a2d8467a6843",
+            "idx": "b22370c79101c18424ccc86c253161cc3bb492f26bfc9d93acb94cd16058a678",
+            "ram": "3ba7b6f7ee0c726935777132354ab9d72ce128b03ee57beb1f488d45c7f26f76"
+          },
+          "drawing_and_ram_identical": true,
+          "removed_dispatches": 108,
+          "native_edges": {
+            "C1B27E": 54,
+            "C13D84": 54
+          },
+          "instructions_and_device_counts_identical": true
+        },
+        {
+          "mode": "all",
+          "before": "build\\matrix-dispatch-after\\demo01-all",
+          "after": "build\\flight-calls\\demo01-all",
+          "hashes": {
+            "rgb": "6736f9e422226348cb046fa3d9fda8b0c28c742f60fcdfa2d366a2d8467a6843",
+            "idx": "b22370c79101c18424ccc86c253161cc3bb492f26bfc9d93acb94cd16058a678",
+            "ram": "a2731246af0d9d87cd7b31dc54a6618537cda3f56823fb241ed1c8f8120b0861"
+          },
+          "drawing_and_ram_identical": true,
+          "removed_dispatches": 110,
+          "native_edges": {
+            "C1B27E": 55,
+            "C13D84": 55
+          },
+          "instructions_and_device_counts_identical": true
+        }
+      ],
+      "proofs": {
+        "shadow": {
+          "calls": 129,
+          "compared": 97,
+          "matched": 97,
+          "mismatched": 0,
+          "incomplete": 32
+        },
+        "sandbox": {
+          "calls": 129,
+          "compared": 129,
+          "matched": 129,
+          "mismatched": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    {
+      "recording": "qual_carrier_success",
+      "frames": 800,
+      "comparisons": [
+        {
+          "mode": "parent",
+          "before": "build\\flight-calls\\before-qual_carrier_success",
+          "after": "build\\flight-calls\\qual_carrier_success-parent",
+          "hashes": {
+            "rgb": "878507fd15dbdc49cd4f59056e8bb6c7eab74be86f727b6d60e0ab70264211c4",
+            "idx": "e5538508ab24218f372cd7c5bb61668a1e21d4795379705bf75b928e1463a3d8",
+            "ram": "d3df0c6643217f2fa3f82e91cbc367931b8bc09d05da329d48fc8e41abe3bc51"
+          },
+          "drawing_and_ram_identical": true,
+          "removed_dispatches": 0,
+          "native_edges": {
+            "C1B27E": 0,
+            "C13D84": 0
+          },
+          "instructions_and_device_counts_identical": true
+        },
+        {
+          "mode": "all",
+          "before": "build\\matrix-dispatch-after\\qual_carrier_success-all",
+          "after": "build\\flight-calls\\qual_carrier_success-all",
+          "hashes": {
+            "rgb": "b4003bf28eddf77bae0ee8358004f70d022d995eb344fbd64fa259c87c4adb73",
+            "idx": "37774b57a2d87cc7aacb70bf246fda4e749d73038935d172e04971bdd394e8f8",
+            "ram": "c96387e9cf5f91b4832d6c5fe47850ca3c136c43ee82f210345a4d2718b9c28b"
+          },
+          "drawing_and_ram_identical": true,
+          "removed_dispatches": 0,
+          "native_edges": {
+            "C1B27E": 0,
+            "C13D84": 0
+          },
+          "instructions_and_device_counts_identical": true
+        }
+      ],
+      "proofs": {
+        "shadow": {
+          "calls": 30,
+          "compared": 20,
+          "matched": 20,
+          "mismatched": 0,
+          "incomplete": 10
+        },
+        "sandbox": {
+          "calls": 30,
+          "compared": 30,
+          "matched": 30,
+          "mismatched": 0,
+          "incomplete": 0
+        }
+      }
+    },
+    {
+      "recording": "qual_fail_crashes",
+      "frames": 800,
+      "comparisons": [
+        {
+          "mode": "parent",
+          "before": "build\\flight-calls\\before-qual_fail_crashes",
+          "after": "build\\flight-calls\\qual_fail_crashes-parent",
+          "hashes": {
+            "rgb": "2d7dc3e66c6e30a71008a57957b4bd0fab0aa54a71c646442e501abd4f26a879",
+            "idx": "ee7c251ad1646ff445a05298794cc351edec455e2294b35b67e0fb0b96b8871a",
+            "ram": "76bdbd94761cfbd0bd9aeae5bcad13c0c09668d5494ea961cb5f8346c39a7e1f"
+          },
+          "drawing_and_ram_identical": true,
+          "removed_dispatches": 104,
+          "native_edges": {
+            "C1B27E": 52,
+            "C13D84": 52
+          },
+          "instructions_and_device_counts_identical": true
+        },
+        {
+          "mode": "all",
+          "before": "build\\matrix-dispatch-after\\qual_fail_crashes-all",
+          "after": "build\\flight-calls\\qual_fail_crashes-all",
+          "hashes": {
+            "rgb": "ba97adee9b4d1a0ad19a60b7c46e382a5e6c06d13e575bbf9ab21aa771cd70e7",
+            "idx": "88a40da7fbb7b1d81ab23e7912e6f5e219091b665ea6bc5546ca40e496f9432c",
+            "ram": "0806360989603162dfc27d0ab0b12d2689deaf4247e5f8fc0cac2dea1357a222"
+          },
+          "drawing_and_ram_identical": true,
+          "removed_dispatches": 104,
+          "native_edges": {
+            "C1B27E": 52,
+            "C13D84": 52
+          },
+          "instructions_and_device_counts_identical": true
+        }
+      ],
+      "proofs": {
+        "shadow": {
+          "calls": 150,
+          "compared": 88,
+          "matched": 88,
+          "mismatched": 0,
+          "incomplete": 62
+        },
+        "sandbox": {
+          "calls": 150,
+          "compared": 150,
+          "matched": 150,
+          "mismatched": 0,
+          "incomplete": 0
+        }
+      }
+    }
+  ],
+  "next_dependency": {
+    "entry": "C2C392",
+    "source_instructions": 626,
+    "bounded_demo_calls": 27,
+    "scope": "Generated flight record-action child; reconstruct its complete original owner, not another fixed-cycle repair."
+  }
+}

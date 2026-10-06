@@ -1,4 +1,4 @@
-/* Glue for decay_outside_limit, message reset, mode_offset, stream skip,
+/* Glue for message reset, mode_offset, stream skip,
  * cell steps, the 2.8 rotation matrix and the cached display value. */
 #include "glue.h"
 #include "glue_text.h"
@@ -8,33 +8,6 @@
 #include "globals.h"
 #include "memory.h"
 #include "stages.h"
-
-/* $C148A2: decay_outside_limit(short *value, int limit, int shift). The
- * original leaves EXT.L/NEG.L results in D0/D1: their high words carry the
- * signs of the value and of the (possibly negated) limit. */
-int glue_C148A2(void) {
-    gaddr value = rd_u32(A(7) + 4);
-    int16_t limit = rd_s16(A(7) + 10), shift = rd_s16(A(7) + 14);
-    int32_t v = rd_s16(value), lim = limit;
-
-    decay_outside_limit(value, limit, shift);
-
-    A(0) = value;
-    if (v > lim) {
-        D(0) = (uint32_t)v;
-        D(1) = (uint32_t)lim;
-    } else {
-        D(0) = (uint32_t)v;
-        D(1) = (uint32_t)-lim;
-    }
-    if (v > lim || v < -lim) {
-        int16_t w = (int16_t)v;
-        int16_t sh = (int16_t)(shift & 63);
-        SET_W(D(0), sh >= 16 ? (w < 0 ? -1 : 0) : (w >> sh));
-        SET_W(D(1), rd_u16(value));
-    }
-    return glue_return();
-}
 
 /* $C11312: leaves D0 = 0 and A0 past the two cleared queue words. */
 int glue_C11312(void) {

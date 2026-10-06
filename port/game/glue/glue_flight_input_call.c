@@ -1,8 +1,10 @@
-/* Register replay for recorder playback and the three input ramps. */
+/* Caller compatibility for the direct C input phase. */
 #include "glue.h"
 #include "ports_glue.h"
 
-#include "flight_recorder.h"
+#include "flight_dynamics.h"
+#include "glue_flight_record_calls.h"
+#include "recomp_ports.h"
 #include "globals.h"
 #include "memory.h"
 
@@ -138,10 +140,17 @@ static void flight_input_registers(gaddr player) {
     ramp_register(rd_u8(player + 0x2A), (uint8_t)D(2), 0x04, 3, 60);
 }
 
-int glue_C1B27E(void) {
-    uint32_t incoming_d0 = D(0);
-    gaddr player = A(1);
-    flight_input_registers(player);
-    update_flight_input(player, incoming_d0);
+typedef struct { gaddr record; uint32_t incoming; } FlightInputCall;
+
+static int call_record_input(const void *arguments) {
+    const FlightInputCall *input = arguments;
+    flight_input_registers(input->record);
+    update_dynamics_record_input(input->record, input->incoming);
+    fa18_ports_note_native_edge(0xC25B66, 0xC1B27E);
     return glue_return();
+}
+
+int glue_schedule_record_input(void) {
+    FlightInputCall input = {A(1), D(0)};
+    return fa18_ports_schedule_native_child(call_record_input, &input, sizeof input, 2400);
 }

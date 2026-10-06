@@ -282,7 +282,6 @@ const FA18Port fa18_ports[] = {
     {0xC0CF98, glue_C0CF98, "draw_scaled_stream_circle", 0, 0, glue_C0CF98_complete_step, 0xC0CFB6, 1, 0, glue_C0CF98_owns},
     {0xC13176, glue_C13176, "dispatch_event_sound", 0, 0, glue_C13176_complete_step, 0xC131BE, 0, 0xC13176, glue_C13176_owns},
     {0xC12098, glue_C12098, "update_view_controls", 0, 0, glue_C12098_step, 0xC12242},
-    {0xC1B27E, glue_C1B27E, "update_flight_input", 2400},
     {0xC3316E, glue_C3316E, "play_context_tone_4", 0, 0, glue_C3316E_step, 0xC331CE},
     {0xC244E2, glue_C244E2, "classify_selected_record_range", 0, 0, glue_C244E2_step, 0xC2467E},
     /* render_line.c, render_state.c */
@@ -297,7 +296,6 @@ const FA18Port fa18_ports[] = {
     {0xC1C7F6, glue_C1C7F6, "classify_record_rate", 0, 0, glue_C1C7F6_step, 0xC1C85E},
     {0xC50212, glue_C50212, "step_voice_program", 0, 0, glue_C50212_step, 0xC5027C},
     {0xC4FFB0, glue_C4FFB0, "clear_voice_interrupt", 0, 0, glue_C4FFB0_step, 0xC4FFCA},
-    {0xC14876, glue_C14876, "ease_record_26", 100},
     /* Complete stream stores, numeric fields and bounded marker siblings. */
     {0xC308E2, glue_C308E2, "store_stream_cd", 0, 0, glue_C308E2_complete_step, 0xC308F4, 0, 0, glue_C308E2_owns},
     {0xC30904, glue_C30904, "store_stream_ad", 0, 0, glue_C30904_complete_step, 0xC30916, 0, 0, glue_C30904_owns},
@@ -334,7 +332,6 @@ const FA18Port fa18_ports[] = {
     {0xC0840E, glue_C0840E, "reset_mission_objects", 0, 0, glue_C0840E_step, 0xC08488},
     {0xC258C8, glue_C258C8, "pan_view_from_keys", 0, 0, glue_C258C8_step, 0xC25980},
     /* batch 10: decay, messages, lookups, cell steps, 2.8 matrix, cached display value */
-    {0xC148A2, glue_C148A2, "decay_outside_limit", 130},
     {0xC11312, glue_C11312, "reset_message_sequence", 0, 0, glue_C11312_step, 0xC1134E},
     {0xC287DA, glue_C287DA, "mode_offset", 0, 0, glue_C287DA_step, 0xC28800},
     {0xC1FEF2, glue_C1FEF2, "skip_stream_records", 60},
@@ -355,7 +352,6 @@ const FA18Port fa18_ports[] = {
     /* batch 12: view octant, paired records, attitude term */
     {0xC254E8, glue_C254E8, "update_view_octant", 0, 0, glue_C254E8_step, 0xC2554E},
     {0xC231A2, glue_C231A2, "paired_record_ready", 0, 0, glue_C231A2_step, 0xC23228},
-    {0xC148E2, glue_C148E2, "attitude_term", 450},
     /* batch 13: decimal format, cockpit slide, position history */
     {0xC3267A, glue_C3267A, "format_decimal", 500},
     {0xC2559A, glue_C2559A, "step_cockpit_slide", 0, 0, glue_C2559A_step, 0xC2564E, 0, 0xC25592},
@@ -368,7 +364,6 @@ const FA18Port fa18_ports[] = {
     {0xC1D520, glue_C1D520, "collect_records_in_cell", 0, 0, glue_C1D520_step, 0xC1D722, 0, 0xC1D3F4},
     {0xC1D0B6, glue_C1D0B6, "accumulate_record_position", 0, 0,
      glue_C1D0B6_step, 0xC1D10C, 0, 0xC1D0A4},
-    {0xC26428, glue_C26428, "update_record_76_78", 500},
     /* batch 16: small text */
     {0xC32794, glue_C32794, "draw_small_text", 0, 0, glue_C32794_complete_step, 0xC32806, 1, 0, glue_C32794_owns},
     {0xC32662, glue_C32662, "draw_small_text", 0, 0, glue_C32662_complete_step, 0xC32806, 1, 0, glue_C32662_owns},
@@ -503,17 +498,12 @@ const FA18Port fa18_ports[] = {
     {0xC11958, glue_C11958, "follow_message_or_phase", 0, 0, glue_C11958_step, 0xC119D4, 0, 0, glue_C11958_owns},
     {0xC119D4, glue_C119D4, "restart_after_countdown", 0, 0, glue_C119D4_step, 0xC11A26, 0, 0, glue_C119D4_owns},
     {0xC0A2F0, glue_C0A2F0, "begin_phase_three", 0, 0, glue_C0A2F0_step, 0xC0A3C6, 0, 0xC0A2EE, glue_C0A2F0_owns},
-    {0xC1B4D0, glue_C1B4D0, "set_throttle_input", 60},
-    {0xC1B4D4, glue_C1B4D4, "set_throttle_input", 60},
-    {0xC1B4D8, glue_C1B4D8, "release_throttle_keys", 70},
-    {0xC1B4DE, glue_C1B4DE, "set_throttle_input", 60},
     {0xC1B50C, glue_C1B50C, "set_stick_y", 80},
     {0xC1B510, glue_C1B510, "set_stick_y", 80},
     {0xC1B514, glue_C1B514, "set_stick_y", 80},
     {0xC1B558, glue_C1B558, "set_stick_x", 80},
     {0xC1B55C, glue_C1B55C, "set_stick_x", 80},
     {0xC1B560, glue_C1B560, "set_stick_x", 80},
-    {0xC25A6A, glue_C25A6A, "record_flight_input", 250},
     {0xC33DA4, glue_C33DA4, "take_warning_events", 80},
     {0xC21C4C, glue_C21C4C, "split_edge", 0, 0, glue_C21C4C_complete_step, 0xC21C86, 1, 0, glue_C21C4C_owns},
     {0xC1FED4, glue_C1FED4, "skip_word_for_mode_57", 50},
@@ -725,7 +715,6 @@ const FA18Port fa18_ports[] = {
     {0xC2D99C, glue_C2D99C, "dispatch_matrix_route", 0, 0, glue_C2D99C_step, 0xC2D9B0},
     /* current record matrix update */
     /* indexed control-record update */
-    {0xC13D84, glue_C13D84, "update_indexed_record", 18000},
     {0xC26EBE, glue_C26EBE, "update_candidate_record", 0, 0, glue_C26EBE_complete_step, 0xC279C8, 0, 0xC26EB8, glue_C26EBE_owns},
     {0xC23CA6, glue_C23CA6, "update_record_view", 0, 0, glue_C23CA6_step, 0xC24368},
     {0xC0D04C, glue_C0D04C, "draw_history_projection", 0, 0, glue_C0D04C_complete_step, 0xC0D334, 1, 0xC0D048, glue_C0D04C_owns},

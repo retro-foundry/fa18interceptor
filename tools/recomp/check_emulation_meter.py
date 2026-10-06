@@ -86,6 +86,10 @@ def main():
                 parent_edge = next(edge for edge in profile['_native_edges']
                                    if edge['caller'] == 'C25B66' and edge['callee'] == 'C2D408')
                 assert parent_edge['calls'] > 0 and not profile.get('C2D408', 0)
+                for callee in ('C1B27E', 'C13D84'):
+                    edge = next(edge for edge in profile['_native_edges']
+                                if edge['caller'] == 'C25B66' and edge['callee'] == callee)
+                    assert edge['calls'] > 0 and not profile.get(callee, 0)
                 for callee in ('C1342C', 'C2DD4E'):
                     edge = next(edge for edge in profile['_native_edges']
                                 if edge['caller'] == 'C2D408' and edge['callee'] == callee)

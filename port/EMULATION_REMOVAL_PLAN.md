@@ -204,6 +204,19 @@ memory/chipset/boot cutover **0%**, deletion **0/4**. Combined source parity
 still fails at demo/carrier/crash 565/446/263; Phase 1 is incomplete. Evidence:
 `../analysis/emulation_removal_matrix_dispatch_batch.json/.md`.
 
+The live input and indexed-record phases now also call game C owners, retiring
+C1B27E/C13D84 plus nine exclusive helper CPU adapters. Six paired bounded
+800-frame captures preserve drawing/RAM and instruction/device counts;
+combined dispatches decrease 110/0/104. Both builds, twelve CTests, GNU profiling
+and the DMA/boundary oracle pass. All 309 sandbox source-parent calls match;
+shadow's 104 incomplete calls remain incomplete, equal to baseline. There are
+23 C-owned entries and 591 readable CPU registry rows. Bounded CPU-work delta
+is **0.0000 pp**; cached raw CPU **38.4011%**, other cutover axes **0%**, gate
+**0/4**, accepted percentage unavailable. Outer CPU/timing and guest-state
+dependencies remain. Next actual CPU-work owner: C2C392, 626 original generated
+instructions, called 27 times in the bounded demo. Evidence:
+`../analysis/emulation_removal_flight_calls_batch.json/.md`.
+
 Remaining C routines call each other by returning into the dispatcher. Give each
 recreated routine a direct C entry point and let a C caller call its C callee
 directly, keeping glue only for callers that are still generated code.

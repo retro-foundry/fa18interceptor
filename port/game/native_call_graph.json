@@ -221,6 +221,208 @@
         "existing 9500-cycle matrix timing debt",
         "temporary caller result publication"
       ]
+    },
+    {
+      "entry": "C1B27E",
+      "function": "update_flight_input",
+      "source": "port/game/flight_recorder.c",
+      "callers": [
+        {
+          "entry": "C25B66",
+          "function": "update_dynamics_record_input",
+          "source": "port/game/flight_dynamics.c"
+        }
+      ],
+      "source_call": "analysis/data/flight_dynamics_source_scope.json",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C13D84",
+      "function": "update_indexed_record",
+      "source": "port/game/indexed_record_update.c",
+      "callers": [
+        {
+          "entry": "C25B66",
+          "function": "update_dynamics_selected_record",
+          "source": "port/game/flight_dynamics.c"
+        }
+      ],
+      "source_call": "analysis/data/flight_dynamics_source_scope.json",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C1B4D0",
+      "function": "set_throttle_input",
+      "source": "port/game/player_input.c",
+      "callers": [
+        {
+          "entry": "C1B27E",
+          "function": "update_flight_input",
+          "source": "port/game/flight_recorder.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C1B4D4",
+      "function": "set_throttle_input",
+      "source": "port/game/player_input.c",
+      "callers": [
+        {
+          "entry": "C1B27E",
+          "function": "update_flight_input",
+          "source": "port/game/flight_recorder.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C1B4DE",
+      "function": "set_throttle_input",
+      "source": "port/game/player_input.c",
+      "callers": [
+        {
+          "entry": "C1B27E",
+          "function": "update_flight_input",
+          "source": "port/game/flight_recorder.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C1B4D8",
+      "function": "release_throttle_keys",
+      "source": "port/game/player_input.c",
+      "callers": [
+        {
+          "entry": "C1B27E",
+          "function": "update_flight_input",
+          "source": "port/game/flight_recorder.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C25A6A",
+      "function": "record_flight_input",
+      "source": "port/game/flight_recorder.c",
+      "callers": [
+        {
+          "entry": "C1B27E",
+          "function": "update_flight_input",
+          "source": "port/game/flight_recorder.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C14876",
+      "function": "ease_record_26",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C13D84",
+          "function": "update_indexed_record",
+          "source": "port/game/indexed_record_update.c",
+          "call_site": "prepare_indexed_signed_terms"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C148A2",
+      "function": "decay_outside_limit",
+      "source": "port/game/fixed_math.c",
+      "callers": [
+        {
+          "entry": "C13D84",
+          "function": "update_indexed_record",
+          "source": "port/game/indexed_record_update.c",
+          "call_site": "finish_indexed_record_update"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C148E2",
+      "function": "attitude_term",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C13D84",
+          "function": "update_indexed_record",
+          "source": "port/game/indexed_record_update.c",
+          "call_site": "prepare_indexed_signed_terms"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
+    },
+    {
+      "entry": "C26428",
+      "function": "update_record_76_78",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C13D84",
+          "function": "update_indexed_record",
+          "source": "port/game/indexed_record_update.c",
+          "call_site": "finish_indexed_record_update"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "temporary caller result publication"
+      ]
     }
   ]
 }

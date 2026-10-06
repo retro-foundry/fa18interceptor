@@ -2,6 +2,7 @@
 #define FA18_FLIGHT_DYNAMICS_H
 #include "memory.h"
 #include "record_matrix_update.h"
+#include "indexed_record_update.h"
 /* Working values retain original byte/word halves during mixed-width record,
  * scene and geometry operations. Consumers return all changed working values. */
 enum DynamicsValue { DY_PRIMARY,DY_DETAIL,DY_X,DY_Y,DY_Z,DY_RATE_X,DY_RATE_Y,DY_RATE_Z,
@@ -43,6 +44,9 @@ void advance_indexed_record_dynamics(DynamicsState w,const DynamicsHooks *h); /*
  * boundary remains in the temporary resumable CPU adapter. */
 void update_dynamics_record_matrix(const RecordMatrixInput *input, RecordMatrixResult *result,
                                    RecordMatrixSideHook side_hook, void *context);
+/* Input and selected-record phases owned by the same live flight parent. */
+void update_dynamics_record_input(gaddr record, uint32_t incoming);
+void update_dynamics_selected_record(IndexedRecordWork *work);
 void collide_scene_motion(DynamicsState w,const DynamicsHooks *h); /* C266AE */
 void update_scene_regions(DynamicsState w,const DynamicsHooks *h); /* C28996 */
 void spawn_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B16 */
