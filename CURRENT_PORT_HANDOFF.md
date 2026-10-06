@@ -7,6 +7,22 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest user scope: gameplay frames must match; intro/loading/preflight duration
+may differ and loading can be faster. Copper fade remains excluded. The old
+36-update startup lead is not by itself a blocker. See
+`analysis/native_gameplay_acceptance.md`: original start-2401 and native
+C0EFEA/update-2364, both game tick 222, match both 320x200 gameplay pages and
+player motion/pose/matrices byte for byte. `check_gameplay_checkpoint.py`
+reuses the original dump. One independent checkpoint is accepted; complete
+gameplay-sequence acceptance remains 0/3. Next: extend phase-aligned gameplay
+comparisons rather than matching preflight duration.
+Latest PAL input batch: complete C1718E now runs through host counter samples,
+including signed delta wrap, bounded controls and input ticks before its
+existing viewport/fade tail. C17104/C1712C/C17456 initialize original -960..960
+bounds and the native callback. SDL/E9K mouse and buttons reach source input
+owners. 128 startup + 6,400 full callback source cases, actual wrap/clamp/buttons/
+waits, eight frame bodies, affected gameplay and reference checks pass. This
+connection is 1/1 complete. See `analysis/native_input_pal_milestone.md`.
 Latest assembled-frame batch: C1C860's native adapter now sorts all lists only
 for nonzero context requests, otherwise one list as in C1C870/C1C98A/C1E328.
 Actual crash-flight comparison exposed the old always-all cursor difference.

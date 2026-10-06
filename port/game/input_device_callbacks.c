@@ -38,9 +38,8 @@ static void add_local(const InputDeviceHooks *h,gaddr a,uint32_t amount,unsigned
     observe(h,width==2?(subtract?IDC_SUB_MEMORY_WORD:IDC_ADD_MEMORY_WORD):IDC_ADD_MEMORY_LONG,v,amount);
     v=subtract?v-amount:v+amount; if(width==2) wr_u16(a,(uint16_t)v); else wr_u32(a,v);
 }
-static void read_counters(gaddr frame,const InputDeviceHooks *h,gaddr raw_local,int deltas) {
-    uint16_t raw,x,y,old;
-    observe(h,IDC_READ_COUNTERS,(uint32_t)deltas,0); raw=read_word(h,0xdff00a,0);
+static void read_counters(gaddr frame,const InputDeviceHooks *h,gaddr raw_local,int deltas,uint16_t raw) {
+    uint16_t x,y,old;
     word(h,raw_local,raw); observe(h,IDC_AND_D0_WORD,0xff,0); x=raw&255;
     y=read_word(h,raw_local,1); observe(h,IDC_ASR_D1_WORD,8,0); y=(uint16_t)((int16_t)y>>8);
     observe(h,IDC_AND_D1_WORD,0xff,0); y&=255;
@@ -84,9 +83,9 @@ static void restore_view_pair(gaddr frame,const InputDeviceHooks *h,int first) {
     observe(h,IDC_ASL_D0_LONG,2,0); offset=(uint32_t)(int32_t)(int16_t)index<<2;
     a=address(h,0,offset); a=address(h,0,a+0xc182c2); longword(h,SAVED_PALETTE,rd_u32(a));
 }
-void advance_input_device_callback(gaddr frame,const InputDeviceHooks *h) {
+static void advance_sampled_callback(gaddr frame,const InputDeviceHooks *h,uint16_t raw) {
     uint8_t ready; uint16_t v,delta;
-    read_counters(frame,h,frame-4,1);
+    read_counters(frame,h,frame-4,1,raw);
     ready=read_byte(h,PLAYER_READY,0); observe(h,IDC_TEST_BYTE,ready,0);
     if(!ready) {
         v=rd_u16(frame-12); observe(h,IDC_TEST_WORD,v,0);
@@ -98,6 +97,17 @@ void advance_input_device_callback(gaddr frame,const InputDeviceHooks *h) {
     word(h,COUNTER_X,rd_u16(frame-6)); word(h,COUNTER_Y,rd_u16(frame-8));
     v=read_word(h,INPUT_TICKS,0); observe(h,IDC_ADD_D0_WORD,1,0); word(h,INPUT_TICKS,(uint16_t)(v+1));
     advance_viewport_palette(frame,h);
+}
+void advance_input_device_callback(gaddr frame,const InputDeviceHooks *h) {
+    observe(h,IDC_READ_COUNTERS,1,0);
+    uint16_t raw=read_word(h,0xdff00a,0);
+    advance_sampled_callback(frame,h,raw);
+}
+void advance_input_device_callback_sample(gaddr frame,const InputDeviceHooks *h,uint16_t raw) {
+    /* The host supplies the two byte counters. All delta/wrap/clamp and PAL
+     * bookkeeping remains the same C1718E owner as the hardware caller. */
+    observe(h,IDC_READ_COUNTERS,1,0);observe(h,IDC_D0_WORD,raw,0);
+    advance_sampled_callback(frame,h,raw);
 }
 void advance_viewport_palette(gaddr frame,const InputDeviceHooks *h) {
     uint8_t mode,target,count; uint16_t v; int32_t signed_mode; gaddr src,dst; uint32_t offset;
@@ -160,5 +170,11 @@ void set_input_device_bounds(gaddr frame,const InputDeviceHooks *h) {
     word(h,MAX_X,rd_u16(frame+18)); word(h,MAX_Y,rd_u16(frame+22));
 }
 void initialise_input_device_counters(gaddr frame,const InputDeviceHooks *h) {
-    read_counters(frame,h,frame-2,0); consume(h,IDC_START_SERVER);
+    observe(h,IDC_READ_COUNTERS,0,0);
+    uint16_t raw=read_word(h,0xdff00a,0);
+    read_counters(frame,h,frame-2,0,raw); consume(h,IDC_START_SERVER);
+}
+void initialise_input_device_counters_sample(gaddr frame,const InputDeviceHooks *h,uint16_t raw) {
+    observe(h,IDC_READ_COUNTERS,0,0);observe(h,IDC_D0_WORD,raw,0);
+    read_counters(frame,h,frame-2,0,raw); consume(h,IDC_START_SERVER);
 }

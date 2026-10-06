@@ -9,6 +9,17 @@ python scripts/build_native.py
 build/native/fa18_native.exe --adf local/media/fa18.adf
 ```
 
+Gameplay frames are the acceptance scope; intro/loading duration may differ.
+Copper fade is ignored. See
+[`../../analysis/native_gameplay_acceptance.md`](../../analysis/native_gameplay_acceptance.md).
+One aligned independent demo checkpoint matches both 320x200 gameplay pages
+and player motion/pose/matrices byte for byte; complete gameplay sequences
+remain unaccepted. Reuse the existing original checkpoint:
+
+```powershell
+python tools/native/check_gameplay_checkpoint.py --source build/native-flight/reference-demo2401.dat --iteration 2364
+```
+
 The default is an SDL window with native stereo sound. `--wav PATH` captures
 the same PCM, including in headless runs. A key acknowledges the credits. A first-time
 pilot can enter a callsign, edit with Backspace, and confirm with Return.
@@ -100,10 +111,14 @@ Menu entry now executes complete C0FBE0 sound/volume/reset/palette setup.
 Its busy pause yields under the nominal PAL-clock conversion; input received
 during the pause is retained for the following game input poll. Source tone
 mute and volume-fade state are no longer overridden by the frontend.
-C1718E's viewport/fade tail now runs once per PAL frame, including pending
-game timers and display waits, as required by C17456's vertical-blank server.
-Stable palette publication is connected. The full mouse-counter callback and
-exact original frame/audio alignment remain open.
+C1718E's complete mouse-counter/control/viewport/fade callback now runs once
+per PAL frame, including pending game timers and display waits, as required by
+C17456's vertical-blank server. C17104 supplies original -960..960 control
+bounds. SDL relative mouse motion and left/right buttons are connected; E9K
+replays accept original device-0/4 `m`/`b` rows alongside keyboard input.
+Stable palette publication is connected. Original mouse acquisition cadence
+and exact gameplay frame/audio alignment remain open. See
+[`../../analysis/native_input_pal_milestone.md`](../../analysis/native_input_pal_milestone.md).
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.

@@ -6,15 +6,15 @@
 #undef main
 #include "hardware.h"
 
-/* Supply the native PAL interval through the original interrupt's viewport/
- * fade tail. RGB4 publication is a host boundary and excluded from drawing
+/* Supply the native PAL interval through the complete original input callback.
+ * RGB4 publication is a host boundary and excluded from drawing
  * acceptance; its game-side control stores still execute original bytes. */
 static int palette_tick(void) {
     uint32_t saved[16],pc=REG_PC;memcpy(saved,REG_DA,sizeof saved);
     uint16_t sr=(uint16_t)m68k_get_reg(NULL,M68K_REG_SR);
-    REG_A[6]=0xc7fd80;REG_A[7]=REG_A[6]-26;REG_PC=0xc172de;
+    REG_A[7]=0xc7fd80;wr_u32(REG_A[7],0xc70000);REG_PC=0xc1718e;
     for(unsigned step=0;step<10000;++step) {
-        if(REG_PC==0xc1744c) {
+        if(REG_PC==0xc70000 && REG_A[7]==0xc7fd84) {
             memcpy(REG_DA,saved,sizeof saved);REG_PC=pc;m68k_set_reg(M68K_REG_SR,sr);return 1;
         }
         if(REG_PC==0xc53ec0) {REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;}
@@ -35,6 +35,9 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) return 1;
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+    /* These keyboard-only paths supply no intervening mouse movement. */
+    m->joy0dat=(uint16_t)(rd_u16(0xc1ac08)<<8|rd_u16(0xc1ac06));
+    m->mouse_x=m->joy0dat&255;m->mouse_y=m->joy0dat>>8;
     unsigned first_tick=(unsigned)strtoul(argv[3],NULL,10),last_tick=(unsigned)strtoul(argv[4],NULL,10);
     native_clock_set(first_tick);unsigned in_timer=0,timer_samples=0;
     memset(REG_DA,0,sizeof REG_DA);REG_A[6]=0xc7ff80;REG_A[7]=0xc7ff00;

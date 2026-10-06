@@ -9,6 +9,22 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Latest acceptance scope: **gameplay frames**, ignoring Copper fade. Intro,
+  loading and preflight may run faster. Old startup frame/update offsets are
+  diagnostic observations, not acceptance blockers on their own. One independent
+  demo checkpoint at game tick 222 matches both 320x200 gameplay pages and
+  player motion/pose/matrices. See `../analysis/native_gameplay_acceptance.md`.
+  Broader phase-aligned comparisons remain; full gameplay acceptance is **0/3**.
+
+- Complete: C1718E's entire PAL input callback now uses host counter samples,
+  with original wrap/asymmetric deltas, clamping, saved counters, tick increment
+  and viewport/fade ordering. C17104/C1712C/C17456 startup and SDL/E9K mouse/
+  buttons are connected. 128 startup cases, 6,400 full callback source ticks,
+  actual controls/waits, eight frame bodies and affected gameplay checks pass.
+  **1/1 (100% of this callback connection)**, not whole-game parity. See
+  `../analysis/native_input_pal_milestone.md`. Next: extend independently aligned
+  gameplay comparisons; intro timing is outside the gate.
+
 - Complete: correct C1C860's sort-all caller flag, preserving C1E328's ordinary
   one-list-per-update path. Actual C0EFEA-C0F3C0 captures compare assembled
   gameplay/scene/cockpit/HUD/timers/messages with original bytes. **8/8 (100%

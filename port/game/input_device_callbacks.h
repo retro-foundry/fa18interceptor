@@ -22,6 +22,8 @@ typedef struct {
     void *context;
 } InputDeviceHooks;
 void advance_input_device_callback(gaddr frame,const InputDeviceHooks *h);
+/* Host acquisition of C17196's packed X/Y byte counters, without MMIO. */
+void advance_input_device_callback_sample(gaddr frame,const InputDeviceHooks *h,uint16_t raw);
 /* Palette/countdown tail shared by the source input callback and host video
  * tick. The caller supplies palette presentation and audio-fade children. */
 void advance_viewport_palette(gaddr frame,const InputDeviceHooks *h);
@@ -32,4 +34,5 @@ void open_input_device_timer(gaddr frame,const InputDeviceHooks *h);
 void open_input_device_request(const InputDeviceHooks *h);
 void set_input_device_bounds(gaddr frame,const InputDeviceHooks *h);
 void initialise_input_device_counters(gaddr frame,const InputDeviceHooks *h);
+void initialise_input_device_counters_sample(gaddr frame,const InputDeviceHooks *h,uint16_t raw);
 #endif

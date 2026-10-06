@@ -34,6 +34,8 @@ struct NativeFrontend {
     uint8_t input_keys[256];
     unsigned input_read,input_count,input_passes,input_events;
     uint16_t mouse_buttons,joystick_directions;
+    uint8_t mouse_x_counter,mouse_y_counter;
+    int input_server_installed;
     unsigned update_iterations;
     void (*begin_update)(NativeFrontend *game,void *context);
     void *update_context;
@@ -44,6 +46,8 @@ struct NativeFrontend {
     char config_path[4096];
 };
 int native_frontend_open(NativeFrontend *game,const char *adf,const char *save_dir,char *error,size_t capacity);
+void native_frontend_mouse(NativeFrontend *game,int dx,int dy);
+void native_frontend_button(NativeFrontend *game,unsigned button,int down);
 void native_frontend_close(NativeFrontend *game);
 void native_frontend_tick(NativeFrontend *game);
 void native_frontend_key(NativeFrontend *game,int key);

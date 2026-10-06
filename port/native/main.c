@@ -10,7 +10,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-typedef struct { unsigned frame; int key,down; } KeyEvent;
+typedef struct { unsigned frame; char kind; int a,b,c,d; } HostEvent;
+static void deliver_event(NativeFrontend *game,const HostEvent *event) {
+    if(event->kind=='K') native_frontend_event(game,event->a,event->d);
+    else if(event->kind=='m') native_frontend_mouse(game,event->b,event->c);
+    else native_frontend_button(game,(unsigned)event->b,event->c);
+}
 static int write_ppm(const char *path,NativeFrontend *game) {
     FILE *file=fopen(path,"wb"); if(!file) return 0;
     fprintf(file,"P6\n320 256\n255\n");
@@ -19,7 +24,7 @@ static int write_ppm(const char *path,NativeFrontend *game) {
 }
 int main(int argc,char **argv) {
     const char *adf="local/media/fa18.adf",*save_dir="saves-native",*ppm=NULL,*replay=NULL,*data_out=NULL; int headless=0,running=1,result=1;
-    unsigned frames=0,events=0,next=0,iterations=0; KeyEvent keys[1024]; char error[256];
+    unsigned frames=0,events=0,next=0,iterations=0; HostEvent host_events[1024]; char error[256];
     const char *input=NULL;NativeReplay loop={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
     NativeFrameCapture capture={0};capture.replay=&loop;
@@ -53,7 +58,19 @@ int main(int argc,char **argv) {
         FILE *file=fopen(replay,"r"); char line[128];
         if(!file) { fprintf(stderr,"Cannot open replay: %s\n",replay); goto done; }
         if(!fgets(line,sizeof line,file) || strncmp(line,"E9K_INPUT_V1",12)) { fclose(file); fputs("Invalid replay header\n",stderr); goto done; }
-        while(fgets(line,sizeof line,file)) { KeyEvent event; int a,b; if(events==1024 || sscanf(line,"F %u K %d %d %d %d",&event.frame,&event.key,&a,&b,&event.down)!=5 || (events && event.frame<keys[events-1].frame)) { fclose(file); fputs("Invalid replay row\n",stderr); goto done; } keys[events++]=event; }
+        while(fgets(line,sizeof line,file)) {
+            HostEvent event;char extra;
+            if(events==1024 || sscanf(line,"F %u %c %d %d %d %d %c",&event.frame,&event.kind,
+                &event.a,&event.b,&event.c,&event.d,&extra)!=6 ||
+                (events && event.frame<host_events[events-1].frame) ||
+                (event.kind!='K' && event.kind!='m' && event.kind!='b') ||
+                (event.kind=='K' && event.d!=0 && event.d!=1) ||
+                (event.kind!='K' && event.a!=0 && event.a!=4) ||
+                (event.kind=='b' && ((event.b!=0 && event.b!=1) || (event.c!=0 && event.c!=1)))) {
+                fclose(file);fputs("Invalid/unsupported replay row\n",stderr);goto done;
+            }
+            host_events[events++]=event;
+        }
         fclose(file);
     }
     if(!game || !native_frontend_open(game,adf,save_dir,error,sizeof error)) { fprintf(stderr,"%s\n",game?error:"Allocation failed"); goto done; }
@@ -71,8 +88,31 @@ int main(int argc,char **argv) {
         fputs(error,stderr);goto done;
     }
     while(running && (!frames || game->ticks<frames) && (!iterations || loop.iteration<iterations)) {
-        while(next<events && keys[next].frame<=game->ticks) { native_frontend_event(game,keys[next].key,keys[next].down); ++next; }
-        if(!headless) { SDL_Event event; while(SDL_PollEvent(&event)) { if(event.type==SDL_QUIT) running=0; if((event.type==SDL_KEYDOWN || event.type==SDL_KEYUP) && !event.key.repeat) { int key=event.key.keysym.sym; if(key>='a' && key<='z') key-=32; if(key==SDLK_RETURN) key='\r'; if(key==SDLK_BACKSPACE) key='\b'; if(key>=SDLK_F1 && key<=SDLK_F10) key=282+key-SDLK_F1; if(key==SDLK_UP) key=273; if(key==SDLK_DOWN) key=274; if(key==SDLK_RIGHT) key=275; if(key==SDLK_LEFT) key=276; if(key==SDLK_LSHIFT) key=304; if(key==SDLK_RSHIFT) key=303; native_frontend_event(game,key,event.type==SDL_KEYDOWN); } } }
+        while(next<events && host_events[next].frame<=game->ticks) { deliver_event(game,&host_events[next]); ++next; }
+        if(!headless) {
+            SDL_Event event;
+            while(SDL_PollEvent(&event)) {
+                if(event.type==SDL_QUIT) running=0;
+                if(event.type==SDL_MOUSEMOTION) native_frontend_mouse(game,event.motion.xrel,event.motion.yrel);
+                if((event.type==SDL_MOUSEBUTTONDOWN || event.type==SDL_MOUSEBUTTONUP) &&
+                    (event.button.button==SDL_BUTTON_LEFT || event.button.button==SDL_BUTTON_RIGHT))
+                    native_frontend_button(game,event.button.button==SDL_BUTTON_LEFT?0:1,event.type==SDL_MOUSEBUTTONDOWN);
+                if((event.type==SDL_KEYDOWN || event.type==SDL_KEYUP) && !event.key.repeat) {
+                    int key=event.key.keysym.sym;
+                    if(key>='a' && key<='z') key-=32;
+                    if(key==SDLK_RETURN) key='\r';
+                    if(key==SDLK_BACKSPACE) key='\b';
+                    if(key>=SDLK_F1 && key<=SDLK_F10) key=282+key-SDLK_F1;
+                    if(key==SDLK_UP) key=273;
+                    if(key==SDLK_DOWN) key=274;
+                    if(key==SDLK_RIGHT) key=275;
+                    if(key==SDLK_LEFT) key=276;
+                    if(key==SDLK_LSHIFT) key=304;
+                    if(key==SDLK_RSHIFT) key=303;
+                    native_frontend_event(game,key,event.type==SDL_KEYDOWN);
+                }
+            }
+        }
         native_frontend_tick(game);
         native_audio_render(&game->audio,samples,960,48000);
         if(!amiga_pcm_write(&audio_output,samples,960)) {

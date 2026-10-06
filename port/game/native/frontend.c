@@ -142,6 +142,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     }
     if(!native_cockpit_load(&disk,error,cap)) goto done;
     if(!native_audio_load_resources(&disk,error,cap)) goto done;
+    native_viewport_initialize(game);
     native_flight_initialize(game);
     game->screen=NATIVE_SPLASH; memcpy(game->palette,game->splash.palette,sizeof game->palette);
     for(unsigned y=0;y<game->splash.height;++y) memcpy(game->indices+y*320,game->splash.indices+y*game->splash.width,game->splash.width);
@@ -152,6 +153,16 @@ done:
     return ok;
 }
 void native_frontend_close(NativeFrontend *game) { amiga_ilbm_free(&game->splash); native_audio_bind(NULL); native_storage_bind(NULL); }
+void native_frontend_mouse(NativeFrontend *game,int dx,int dy) {
+    game->mouse_x_counter=(uint8_t)((unsigned)game->mouse_x_counter+(unsigned)dx);
+    game->mouse_y_counter=(uint8_t)((unsigned)game->mouse_y_counter+(unsigned)dy);
+}
+void native_frontend_button(NativeFrontend *game,unsigned button,int down) {
+    if(button>1) {fputs("Unsupported native mouse button\n",stderr);abort();}
+    const unsigned mask=button==0?MOUSE_LEFT:MOUSE_RIGHT;
+    if(down) game->mouse_buttons|=(uint16_t)mask;
+    else game->mouse_buttons&=(uint16_t)~mask;
+}
 const char *native_frontend_screen(const NativeFrontend *game) {
     static const char *names[]={"splash","credits","enlistment","callsign","menu","mode-intro","missions","pilot-log","scene-setup"}; return names[game->screen];
 }
