@@ -43,6 +43,8 @@ def native_entries(graph: list[dict], registered: set[str]) -> dict[str, dict]:
             if not source.is_relative_to((ROOT / 'port/game').resolve()) or 'glue' in source.parts:
                 raise ValueError(f'native behavior belongs in game/: {source}')
             body = function_body(source.read_text(), owner['function'])
+            if re.search(r'\b(?:m68k\w*|REG_\w+|fa18_recomp_\w+)\b', body):
+                raise ValueError(f'native body still uses CPU/dispatcher state: {owner["function"]}')
             if owner is not row and 'call_site' in owner:
                 if not re.search(r'\b' + re.escape(owner['call_site']) + r'\s*\(', body):
                     raise ValueError(f'native owner does not reach its C call site: {owner["function"]}')

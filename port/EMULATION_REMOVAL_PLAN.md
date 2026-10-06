@@ -165,6 +165,16 @@ memory/chipset/boot **0%**, deletion **0/4**. Combined parity remains failing,
 so Phase 1's exit gate is still open. Evidence:
 `../analysis/emulation_removal_meter_after_native_side.json/.md`.
 
+The seven CPU helper adapters below C1342C are also retired after known-call
+ownership validation, parent source checks and unchanged results in all five
+scenarios. There are now eight direct C entries and 606 readable CPU registry
+rows; reconstruction remains 614 entries. Raw percentage and all cutover axes
+are unchanged. Removing 36 unused adapter access sites is not memory cutover.
+Evidence: `../analysis/emulation_removal_meter_after_matrix_leaves.json/.md`.
+Following the user's instruction, use targeted comparisons and bounded runner
+checks for routine batches; reserve full replays for substantial changes,
+milestone acceptance and unresolved failures.
+
 Today C routines call each other by returning into the dispatcher. Give each
 recreated routine a direct C entry point and let a C caller call its C callee
 directly, keeping glue only for callers that are still generated code.

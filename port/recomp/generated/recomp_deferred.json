@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "translated_entries": 624,
-  "registered_readable_translated_entries": 538,
+  "registered_readable_translated_entries": 531,
   "registered_readable_source_only_entries": 75,
   "direct_native_entries": [
     {
@@ -21,9 +21,141 @@
         "guest game memory",
         "parent CPU/timing adapter"
       ]
+    },
+    {
+      "entry": "C13A2A",
+      "function": "decay_toward_zero",
+      "source": "port/game/fixed_math.c",
+      "callers": [
+        {
+          "entry": "C1342C",
+          "function": "update_matrix_side_record",
+          "source": "port/game/control_records.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C13A8E",
+      "function": "update_record_56_from_66",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C1342C",
+          "function": "update_matrix_side_record",
+          "source": "port/game/control_records.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/run_matrix_side_first_word_guard.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter",
+        "existing alert/audio hardware path"
+      ]
+    },
+    {
+      "entry": "C13B5A",
+      "function": "update_record_5a",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C1342C",
+          "function": "update_matrix_side_record",
+          "source": "port/game/control_records.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/run_matrix_side_signed_local_guard_pair.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C13BA0",
+      "function": "steer_record_56",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C1342C",
+          "function": "update_matrix_side_record",
+          "source": "port/game/control_records.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/route_matrix_side_component_source.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C13C0A",
+      "function": "ease_record_58",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C1342C",
+          "function": "update_matrix_side_record",
+          "source": "port/game/control_records.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C13C64",
+      "function": "steer_record_5a",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C1342C",
+          "function": "update_matrix_side_record",
+          "source": "port/game/control_records.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C13CDE",
+      "function": "nudge_outside_dead_zone",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C13BA0",
+          "function": "steer_record_56",
+          "source": "port/game/control_records.c",
+          "call_site": "ease_field"
+        },
+        {
+          "entry": "C13C0A",
+          "function": "ease_record_58",
+          "source": "port/game/control_records.c"
+        },
+        {
+          "entry": "C13C64",
+          "function": "steer_record_5a",
+          "source": "port/game/control_records.c",
+          "call_site": "ease_field"
+        }
+      ],
+      "source_call": "source_amiga/observed/update_control_record_word56.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
     }
   ],
-  "direct_native_entry_count": 1,
+  "direct_native_entry_count": 8,
   "static_recompiled_entries": 85,
   "original_adf_static_entries": 44,
   "reference_wrapper_static_entries": 41,

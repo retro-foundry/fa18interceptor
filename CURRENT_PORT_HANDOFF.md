@@ -68,6 +68,30 @@ the combined baseline still fails parity. Memory/chipset/boot **0%**, gate
 **0/4**. Next: retire proven C-only leaves inside this native child; keep
 original generated reference implementations for OFF/source comparisons.
 
+The next validated batch retires all seven CPU entry adapters under C1342C:
+C13A2A, C13A8E, C13B5A, C13BA0, C13C0A, C13C64 and C13CDE. Their known original
+callers are native C owners, and none independently dispatches in any full-suite
+ON profile. Domain behavior and generated reference code are retained. The
+800-frame parent source shadow/sandbox checks still give 65/70 matches, zero
+mismatches (five shadow comparisons incomplete). Both toolchains build; twelve
+CTests and GNU profiling invisibility pass. All five full-suite output hashes,
+counters, direct edge counts and comparisons are identical to the prior batch.
+See `analysis/emulation_removal_meter_after_matrix_leaves.json/.md`.
+Eight C entries now have no CPU adapter; 606 readable CPU registrations remain
+(531 translated plus 75 source-only), with reconstruction still 614 entries.
+Raw minimum **38.4011%**, delta **0.0000 pp**, cutover axes **0%**, gate **0/4**.
+The 36 deleted guest-access sites belonged to unused adapters: **zero** game
+state sites were converted. Current access-site count is 8,952.
+
+The user clarified that full replays should run infrequently because of their
+cost. Prefer affected source comparisons and bounded runner checks for routine
+batches; reuse these full-suite reports. Run full replays for substantial
+behavior changes, milestone acceptance or unresolved failures requiring them.
+Next connected closure: C2D408 -> C2DD4E -> C2DE96/C2DEA2. Its parent already
+passes depth results as C values. Parent fixed timing is a separate open issue:
+the isolated 800-frame C2D408 probe first differs from OFF at frame 584 (488
+non-fade pixels), despite matching source call results.
+
 ## What went wrong and must not recur
 
 About fourteen hours of elapsed work on 2026-10-05 expanded a separate gameplay
@@ -168,7 +192,7 @@ The last active function milestone (`05fa7453`) statically recompiles 85 deferre
 entries in `port/recomp/generated/recomp_static_deferred.c`. They retain explicit
 `STATIC_RECOMP`/`TODO(decompile)` markers and per-entry debt in
 `recomp_deferred.json`. The inventory includes 539 readable translated entries
-(538 CPU entry adapters and one direct C entry without a CPU adapter)
+(531 CPU entry adapters and eight direct C entries without CPU adapters)
 and 75 additional readable source-only callable entries. Static compilation
 still depends on shared CPU/machine state and is not readable decompilation.
 See `analysis/routines/static_recomp_deferred.md` and its checkpoint for the

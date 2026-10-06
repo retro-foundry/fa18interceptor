@@ -299,7 +299,6 @@ const FA18Port fa18_ports[] = {
     {0xC1C7F6, glue_C1C7F6, "classify_record_rate", 0, 0, glue_C1C7F6_step, 0xC1C85E},
     {0xC50212, glue_C50212, "step_voice_program", 0, 0, glue_C50212_step, 0xC5027C},
     {0xC4FFB0, glue_C4FFB0, "clear_voice_interrupt", 0, 0, glue_C4FFB0_step, 0xC4FFCA},
-    {0xC13B5A, glue_C13B5A, "update_record_5a", 120},
     {0xC14876, glue_C14876, "ease_record_26", 100},
     /* Complete stream stores, numeric fields and bounded marker siblings. */
     {0xC308E2, glue_C308E2, "store_stream_cd", 0, 0, glue_C308E2_complete_step, 0xC308F4, 0, 0, glue_C308E2_owns},
@@ -331,8 +330,6 @@ const FA18Port fa18_ports[] = {
     {0xC11B0E, glue_C11B0E, "clear_long_table", 0, 0, glue_C11B0E_step, 0xC11B42},
     /* batch 9: hex text, decay, nudge, random, voices, readout, mission, view pan */
     {0xC0F56A, glue_C0F56A, "format_hex", 0, 0, glue_C0F56A_step, 0xC0F5F8, 0, 0, glue_C0F56A_owns},
-    {0xC13A2A, glue_C13A2A, "decay_toward_zero", 120},
-    {0xC13CDE, glue_C13CDE, "nudge_outside_dead_zone", 120},
     {0xC13396, glue_C13396, "five_eighths", 0, 0, glue_C13396_complete_step, 0xC133B2, 0, 0xC13396, glue_C13396_owns},
     {0xC50AB4, glue_C50AB4, "random_bit", 0, 0, glue_C50AB4_step, 0xC50B02},
     {0xC17B08, glue_C17B08, "free_voice", 0, 0, glue_C17B08_step, 0xC17B2C},
@@ -350,8 +347,6 @@ const FA18Port fa18_ports[] = {
     {0xC31C20, glue_C31C20, "display_value_to_draw", 0, 0, glue_C31C20_complete_step, 0xC31C5E, 1, 0, glue_C31C20_owns},
     /* batch 11: player setup, steering, random bits, channel stop, cockpit script */
     {0xC09620, glue_C09620, "prepare_player_record", 0, 0, glue_C09620_step, 0xC096AA},
-    {0xC13BA0, glue_C13BA0, "steer_record_56", 220},
-    {0xC13C64, glue_C13C64, "steer_record_5a", 240},
     {0xC50B02, glue_C50B02, "random_bits", 0, 0, glue_C50B02_step, 0xC50B36},
     {0xC180FC, glue_C180FC, "stop_channel_2", 0, 0, glue_C180FC_step, 0xC18108},
     {0xC1EC96, glue_C1EC96, "cell_step", 0, 0, glue_C1EC96_step, 0xC1ECD4},
@@ -385,7 +380,6 @@ const FA18Port fa18_ports[] = {
     /* batch 17: BCD unpack, sorted search, record 56/66 with alert */
     {0xC259C2, glue_C259C2, "unpack_display_value", 900},
     {0xC1D4E4, glue_C1D4E4, "find_sorted_word", 0, 0, glue_C1D4E4_step, 0xC1D722, 0, 0xC1D3F4},
-    {0xC13A8E, glue_C13A8E, "update_record_56_from_66", 200},
     /* batch 18: joystick */
     {0xC16F1C, glue_C16F1C, "read_joystick", 0, 0, glue_C16F1C_step, 0xC16FF4},
     /* batch 19: rotation matrices and row scaling */
@@ -524,7 +518,6 @@ const FA18Port fa18_ports[] = {
     {0xC1B560, glue_C1B560, "set_stick_x", 80},
     {0xC25A6A, glue_C25A6A, "record_flight_input", 250},
     {0xC33DA4, glue_C33DA4, "take_warning_events", 80},
-    {0xC13C0A, glue_C13C0A, "ease_record_58", 400},
     {0xC21C4C, glue_C21C4C, "split_edge", 0, 0, glue_C21C4C_complete_step, 0xC21C86, 1, 0, glue_C21C4C_owns},
     {0xC1FED4, glue_C1FED4, "skip_word_for_mode_57", 50},
     {0xC345A0, glue_C345A0, "plot_ring", 0, 0, glue_C345A0_complete_step, 0xC347F2, 1, 0, glue_C345A0_owns},

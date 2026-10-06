@@ -14,33 +14,6 @@
 #include "text.h"
 #include "view.h"
 
-/* $C13A2A: decay_toward_zero(short *value, int shift); A0 = value, and
- * D1.w = the new value when |value| > 15. */
-int glue_C13A2A(void) {
-    gaddr value = rd_u32(A(7) + 4);
-    int16_t before = rd_s16(value);
-
-    decay_toward_zero(value, rd_s16(A(7) + 10));
-
-    A(0) = value;
-    if (before < -15 || before > 15) SET_W(D(1), rd_u16(value));
-    return glue_return();
-}
-
-/* $C13CDE: nudge_outside_dead_zone(short *value); A0 = value, D0.w = the
- * new value, D1.w = the old one. */
-int glue_C13CDE(void) {
-    gaddr value = rd_u32(A(7) + 4);
-    int16_t before = rd_s16(value);
-
-    nudge_outside_dead_zone(value);
-
-    A(0) = value;
-    SET_W(D(0), rd_u16(value));
-    SET_W(D(1), before);
-    return glue_return();
-}
-
 /* $C13396: five_eighths(short x): the result replaces x in its slot. */
 /* Complete C13396 is in glue_control_readouts.c. */
 

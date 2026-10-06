@@ -76,20 +76,6 @@ int glue_C33DA4(void) {
     return glue_return();
 }
 
-/* $C13C0A: ease_record_58(short) from the long at 4(A7), whose low word is
- * replaced by the target used; D0/D1/A0 as nudge_outside_dead_zone leaves
- * them. */
-int glue_C13C0A(void) {
-    gaddr value = rd_u32(CURRENT_RECORD) + 0x58;
-    int16_t old = rd_s16(value), target = ease_record_58(rd_s16(A(7) + 6));
-    int16_t eased = (int16_t)(old - (int16_t)((int16_t)(old - target) >> 2)); /* before the nudge */
-    wr_s16(A(7) + 6, target);
-    SET_W(D(0), rd_u16(value));
-    SET_W(D(1), eased);
-    A(0) = value;
-    return glue_return();
-}
-
 /* $C21C4C: A3 points; D0 = 0 (MOVEQ). */
 
 

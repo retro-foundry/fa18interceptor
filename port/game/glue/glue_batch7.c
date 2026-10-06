@@ -28,11 +28,6 @@ int glue_C4FFB0(void) {
     return glue_return();
 }
 
-int glue_C13B5A(void) {
-    update_record_5a();
-    return glue_return();
-}
-
 /* $C14876: compiled C, argument word at 6(A7). */
 int glue_C14876(void) {
     ease_record_26(rd_s16(A(7) + 6));

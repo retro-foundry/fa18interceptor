@@ -16,49 +16,6 @@ int glue_C09620(void) {
     return glue_return();
 }
 
-/* After a steering helper: the nudge leaves the field in A0, its new value
- * in D0.w and the eased value (before the nudge) in D1.w. */
-static void nudge_leftovers(gaddr field, int16_t eased) {
-    A(0) = field;
-    SET_W(D(0), rd_u16(field));
-    SET_W(D(1), eased);
-}
-
-/* Value a steering helper writes before the nudge. */
-static int16_t eased_value(int16_t before, int16_t target, int shift) {
-    return (int16_t)(before - (int16_t)((int16_t)(before - target) >> shift));
-}
-
-/* $C13BA0: steer_record_56(short target), compiled C; the target slot is
- * rewritten when halved. */
-int glue_C13BA0(void) {
-    gaddr slot = A(7) + 6, r = rd_u32(CURRENT_RECORD);
-    int16_t target = rd_s16(slot), before = rd_s16(r + 0x56);
-    int early = !(rd_u16(r + 0x02) & 0x80) && rd_u16(r + 0x26) != 0 && target <= 0;
-    int16_t used = steer_record_56(target);
-
-    if (early) {
-        SET_W(D(0), rd_u16(r + 0x26));
-        A(0) = r;
-        return glue_return();
-    }
-    wr_s16(slot, used);
-    nudge_leftovers(r + 0x56, eased_value(before, used, 2));
-    return glue_return();
-}
-
-/* $C13C64: steer_record_5a(short target), compiled C. */
-int glue_C13C64(void) {
-    gaddr slot = A(7) + 6, r = rd_u32(CURRENT_RECORD);
-    int16_t before = rd_s16(r + 0x5A);
-    int shift = rd_u8(r + 0x62) == 0x14 ? 2 : 1;
-    int16_t used = steer_record_5a(rd_s16(slot));
-
-    wr_s16(slot, used);
-    nudge_leftovers(r + 0x5A, eased_value(before, used, shift));
-    return glue_return();
-}
-
 /* $C50B02: random_bits(long count), compiled C; the count slot ends at -1
  * (or count - 1 when count <= 0). */
 int glue_C50B02(void) {

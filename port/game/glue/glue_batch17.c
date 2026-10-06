@@ -46,26 +46,3 @@ int glue_C1D4E4(void) {
     A(0) = entries;
     return glue_return();
 }
-
-/* $C13A8E: compiled C. D1 is live after it: the eased value on the easing
- * path; on the alert path whatever play_alert_tone's chain left. */
-int glue_C13A8E(void) {
-    gaddr r = rd_u32(CURRENT_RECORD);
-    int16_t angle = rd_s16(r + 0x66);
-    int alert = 0;
-
-    if (angle > 0 && angle < 400 && !(rd_u16(r + 0x02) & 0x40) && (rd_u16(r) & 0x1600) == 0x1000 &&
-        !(rd_u8(r + 0x04) & 0x02))
-        alert = 1;
-
-    update_record_56_from_66();
-
-    if (angle >= 400) {
-        SET_W(D(1), rd_u16(r + 0x56));
-    } else if (alert && (rd_u8(SOUND_FLAGS) & 0x04)) {
-        SET_W(D(1), rd_u16(VIEW_RECORD));
-        if (rd_u16(SCRIPT_RECORD) == rd_u16(VIEW_RECORD) && rd_u32(SOUND_VOICES + 4 * SOUND_ALERT))
-            D(1) = 2 * 4; /* play_sound: channel * 4 */
-    }
-    return glue_return();
-}

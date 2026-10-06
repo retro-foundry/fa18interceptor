@@ -175,7 +175,6 @@ int glue_C25482(void);
 /* batch 7 */
 int glue_C50212(void);
 int glue_C4FFB0(void);
-int glue_C13B5A(void);
 int glue_C14876(void);
 int glue_C308E2(void);
 int glue_C30904(void);
@@ -205,8 +204,6 @@ int glue_C11B0E_step(void);
 /* batch 9: hex text, decay, nudge, random, voices, readout, mission, view pan */
 int glue_C0F56A(void);
 int glue_C0F56A_step(void);
-int glue_C13A2A(void);
-int glue_C13CDE(void);
 int glue_C13396(void);
 int glue_C50AB4(void);
 int glue_C50AB4_step(void);
@@ -230,8 +227,6 @@ int glue_C31C20(void);
 
 /* batch 11: player setup, steering, random bits, channel stop, cockpit script */
 int glue_C09620(void);
-int glue_C13BA0(void);
-int glue_C13C64(void);
 int glue_C50B02(void);
 int glue_C50B02_step(void);
 int glue_C180FC(void);
@@ -281,7 +276,6 @@ int glue_C32736(void);
 int glue_C259C2(void);
 int glue_C1D4E4(void);
 int glue_C1D4E4_step(void);
-int glue_C13A8E(void);
 
 /* batch 18: joystick */
 int glue_C16F1C(void);
@@ -556,7 +550,6 @@ int glue_C1B55C(void);
 int glue_C1B560(void);
 int glue_C25A6A(void);
 int glue_C33DA4(void);
-int glue_C13C0A(void);
 int glue_C21C4C(void);
 int glue_C1FED4(void);
 
