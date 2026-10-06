@@ -14,6 +14,9 @@ enum { KEY_DESCRIPTOR=0x3140 };
 void native_input_enqueue(NativeFrontend *game,int key,int down) {
     unsigned raw=native_menu_raw_key(key,down);
     if(raw==0xff) return;
+    native_input_enqueue_raw(game,(uint8_t)raw);
+}
+void native_input_enqueue_raw(NativeFrontend *game,uint8_t raw) {
     if(game->input_count==sizeof game->input_keys) {
         fputs("native host keyboard queue exhausted before source input poll\n",stderr);abort();
     }

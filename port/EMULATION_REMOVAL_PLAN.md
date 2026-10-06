@@ -129,7 +129,12 @@ Native continuation milestones (functional scope, not instruction counts):
   reference tests pass. See `../analysis/native_qualification_milestone.md`.
   Qualification startup/short-takeoff milestone 100%; complete landing,
   outcomes and recorded-run acceptance remain open.
-- Next: recorded-input anchoring, complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
+- Connected: sealed raw keyboard recordings by update iteration, anchored at
+  the main menu after native cold startup. Same-update ordering, metadata
+  independence, bounded crash/carrier startup and suspension counters pass.
+  Replay delivery milestone 100%; original cadence/full recorded parity open.
+  See `../analysis/native_loop_replay_milestone.md`.
+- Next: collision outcome children, complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.

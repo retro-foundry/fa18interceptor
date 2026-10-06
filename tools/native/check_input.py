@@ -44,7 +44,7 @@ def main():
             elif frames == 6502:
                 before, old_data = previous
                 assert stats['timer_pending'] and stats['input_queued'] == 1, stats
-                for field in ('game_tick', 'record_updates', 'hud_frames', 'glyphs', 'input_passes', 'input_events'):
+                for field in ('game_tick', 'record_updates', 'hud_frames', 'glyphs', 'input_passes', 'input_events', 'update_iterations'):
                     assert stats[field] == before[field], f'{field} advanced during a pending frame'
                 root = 0xC46184 - 0xC00000 + 0x80000
                 assert data[root:root+512] == old_data[root:root+512], 'queued press executed before source poll'

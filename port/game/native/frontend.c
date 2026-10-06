@@ -176,6 +176,14 @@ void native_frontend_event(NativeFrontend *game,int key,int down) {
         || game->screen==NATIVE_SCENE_SETUP || game->screen==NATIVE_MODE_INTRO)
         native_menu_key(game,key,0);
 }
+void native_frontend_raw_event(NativeFrontend *game,uint8_t raw,int down) {
+    native_storage_bind(&game->storage);
+    raw=(uint8_t)((raw&0x7f)|(down?0:0x80));
+    if(native_flight_enabled(game)) native_input_enqueue_raw(game,raw);
+    else if(game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG)
+        native_menu_dispatch_raw(game,raw);
+    else { fprintf(stderr,"native raw replay event outside connected menu/flight screen: %u\n",game->screen);abort(); }
+}
 void native_frontend_tick(NativeFrontend *game) {
     native_storage_bind(&game->storage); ++game->ticks; ++game->screen_ticks;
     native_clock_set(game->ticks);
@@ -189,6 +197,12 @@ void native_frontend_tick(NativeFrontend *game) {
         const unsigned ticks=(unsigned)((0xa000ull*66*50+7093790-1)/7093790);
         if(game->screen_ticks<ticks) return;
         select_screen(game,NATIVE_CREDITS,15,0);
+    }
+    /* One C0EFD4 entry. Its clock poll and C1612C display continuation keep
+     * the same iteration; replay input must never advance while suspended. */
+    if(!game->flight_timer_pending) {
+        ++game->update_iterations;
+        if(game->begin_update) game->begin_update(game,game->update_context);
     }
     MainControlHooks hooks={0}; hooks.context=game; hooks.consume_values=child;
     const int flight=native_flight_enabled(game);

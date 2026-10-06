@@ -5,7 +5,8 @@
 #include "../../amiga/ilbm.h"
 enum NativeScreen { NATIVE_SPLASH,NATIVE_CREDITS,NATIVE_ENLISTMENT,NATIVE_CALLSIGN,NATIVE_MENU,
     NATIVE_MODE_INTRO,NATIVE_MISSIONS,NATIVE_PILOT_LOG,NATIVE_SCENE_SETUP };
-typedef struct {
+typedef struct NativeFrontend NativeFrontend;
+struct NativeFrontend {
     NativeStorage storage;
     AmigaIlbm splash;
     enum NativeScreen screen;
@@ -28,13 +29,18 @@ typedef struct {
     uint8_t input_keys[256];
     unsigned input_read,input_count,input_passes,input_events;
     uint16_t mouse_buttons,joystick_directions;
+    unsigned update_iterations;
+    void (*begin_update)(NativeFrontend *game,void *context);
+    void *update_context;
     char config_path[4096];
-} NativeFrontend;
+};
 int native_frontend_open(NativeFrontend *game,const char *adf,const char *save_dir,char *error,size_t capacity);
 void native_frontend_close(NativeFrontend *game);
 void native_frontend_tick(NativeFrontend *game);
 void native_frontend_key(NativeFrontend *game,int key);
 void native_frontend_event(NativeFrontend *game,int key,int down);
+/* Raw Amiga events from recordings retain their original key identities. */
+void native_frontend_raw_event(NativeFrontend *game,uint8_t raw,int down);
 /* Source C11312 reset and native work-buffer ownership. */
 void native_frontend_clear_text(void);
 void native_frontend_start_menu(NativeFrontend *game);

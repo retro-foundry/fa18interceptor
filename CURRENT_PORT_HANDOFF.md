@@ -162,7 +162,15 @@ cases, affected native regressions and twelve reference tests. See
 `analysis/native_qualification_milestone.md`. This startup/short-takeoff batch
 is complete (100% of that scope); full landing/outcomes and recorded-run parity
 remain open. No full replay repeated. Demo/remaining modes still stop at banners.
-Next: recorded-input anchoring, complete C0EFD4 ownership, remaining HUD/record children and C0DA38
+Native recorded-input delivery is now connected: `--input` consumes sealed
+FA18_LOOP_INPUT_V1 raw keys by main-loop iteration, anchored at the main menu
+after ordinary cold startup. Same-update ordering and suspension counters pass;
+bounded crash (1960) and carrier (4760) prefixes reach active qualification.
+Original view/record and reached carrier rendering comparisons pass. This
+delivery milestone is 100%; original cadence and full recorded parity remain
+open. The later crash prefix reaches an unconnected C17F8C collision-sound child.
+See `analysis/native_loop_replay_milestone.md`.
+Next: collision outcome children, complete C0EFD4 ownership, remaining HUD/record children and C0DA38
 alternate presentation. Exact input-callback/beam timing remains unproven.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.

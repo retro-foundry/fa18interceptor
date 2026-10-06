@@ -199,3 +199,12 @@ source followup drawing state. Four native checkpoints demonstrate carrier
 startup and short takeoff; original startup, view/record and reached rendering
 comparisons pass. See
 [`../../analysis/native_qualification_milestone.md`](../../analysis/native_qualification_milestone.md).
+
+Sealed `FA18_LOOP_INPUT_V1` keyboard recordings now run with `--input PATH` and
+an optional `--iterations N` bound. They start on the first native main-menu
+update after cold startup; `--replay E9K` can supply intro navigation. The first
+recording column controls delivery, while video-frame metadata is informational.
+Raw key identity and same-update edge order are preserved. Timer/display waits
+retain the update iteration. Crash and carrier prefixes reach active
+qualification; complete outcomes and frame parity remain open. See
+[`../../analysis/native_loop_replay_milestone.md`](../../analysis/native_loop_replay_milestone.md).

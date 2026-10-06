@@ -1,4 +1,4 @@
-add_executable(fa18_native main.c
+add_executable(fa18_native main.c replay.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/display.c
     ../game/input_display_setup.c ../game/render_page.c
@@ -95,6 +95,9 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                 --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_input
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_input.py
+                --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_replay
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_replay.py
                 --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_qualification
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_qualification.py
