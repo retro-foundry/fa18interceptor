@@ -71,6 +71,14 @@ static void fixture(uint32_t pc, unsigned scenario) {
     REG_A[3] = 0xC61300u;
     REG_A[4] = 0xC61100u;
     REG_A[7] = 0xC7FF00u;
+    if (pc >= 0xC309FEu && pc < 0xC30B5Cu) {
+        REG_A[0] = 0xC61000u;
+        for (i = 0; i < 64; ++i) {
+            wr_u32(REG_A[0] + i * 4, next_value());
+            wr_u32(REG_A[1] + i * 4, next_value());
+            wr_u32(REG_A[7] - 0x80 + i * 4, next_value());
+        }
+    }
     if((pc>=0xC1AC18u && pc<0xC1C2BEu) ||
        (pc>=0xC06BF0u && pc<0xC06C02u) ||
        (pc>=0xC0EFD4u && pc<0xC0F4A6u) ||

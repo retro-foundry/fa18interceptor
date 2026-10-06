@@ -5,6 +5,28 @@ explicit instruction to prevent another costly detour. Read this handoff and
 `AGENTS.md` before continuing. This file supersedes earlier resume instructions;
 previous handoffs and removed source are preserved in git history.
 
+The user's current comparison policy (confirmed 2026-10-06) ignores Copper
+fade when comparing frames. Fade-only palette/brightness differences are
+excluded; geometry, other rendering behavior and gameplay state still need to
+match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
+failure under this policy.
+
+The stores-icon prerequisite batch replaces the active `C30A00` / `C30AE2`
+fixed-cycle adapters with source-derived steps in
+`port/game/glue/glue_hud_stores_step.c`. Runner entry -> machine frame -> recomp
+hook -> active port registry reaches these steps during recorded flight. This
+removes their fixed-cycle timing error, not their PC/register/bus dependency.
+All 90 instructions / 2,880 opcode-oracle cases match; parent and independent
+child shadow/sandbox checks pass; all three full isolated recordings match RGB
+and sealed final RAM. Both toolchains build and all twelve CTests pass.
+
+Combined ON matches demo01 through frame 564 under strict RGB comparison;
+assess subsequent differences with the fade exclusion. The full meter rerun
+in `analysis/emulation_removal_meter_after_hud_stores.json/.md` gives raw minimum
+CPU-work removal **38.4011%** (+0.0090 percentage points); final-RAM/iteration
+acceptance remains open. Memory/chipset/boot cutover remain **0%**, deletion
+gate **0/4**. This is validated integration scaffolding, not Phase 1 completion.
+
 ## What went wrong and must not recur
 
 About fourteen hours of elapsed work on 2026-10-05 expanded a separate gameplay

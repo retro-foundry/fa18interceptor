@@ -5,6 +5,12 @@ Scope: the playable runners `fa18_recomp` and `fa18_romfree` built by
 against the tree at `9c062b80`. Read `../CURRENT_PORT_HANDOFF.md` and
 `../AGENTS.md` first; this plan is subordinate to the user's latest instructions.
 
+Frame-by-frame comparisons ignore Copper fade, as the user confirmed on
+2026-10-06. Fade-only palette/brightness differences do not fail acceptance.
+Geometry, drawing order, other rendering differences and gameplay state still
+need to match. Strict RGB hashes remain useful diagnostics but cannot by
+themselves reject a run under this comparison policy.
+
 "Emulation removed" means one thing only, and it is binary per subsystem: the
 shipped executable links none of
 
@@ -280,3 +286,27 @@ Phases 1-6. No emulation subsystem was removed or declared complete.
 RAM-page counters observe the guest API. Direct DMA and host compatibility
 memory accesses are separate and their absence from those counters must not
 be used to claim exclusive native ownership in Phase 2.
+
+### Stores-icon timing prerequisite
+
+The runner's `C30A00` / `C30AE2` stores-icon entries previously executed the
+existing C owners with fixed 900/500-cycle charges. That coupled drawing to
+the wrong beam timeline: their isolated ON replay first differed at frame
+424 (34,144 pixels). The active registry now calls source-derived instruction
+steps in `game/glue/glue_hud_stores_step.c`, including the shared early return.
+This is a temporary CPU adapter repair, not a native-call-graph cutover.
+
+Both GNU/MSVC runners build; all twelve active CTests pass. The active opcode
+oracle matches 90 instructions / 2,880 cases including bus contention. Parent
+and independent child shadow/sandbox probes match. The full isolated live gate
+matches all three recordings' RGB streams and sealed final RAM. Combined ON
+now matches demo01 through frame 564 under strict RGB comparison; frame 565
+must be assessed with the Copper-fade exclusion before it is treated as a
+rendering failure.
+
+`../analysis/emulation_removal_meter_after_hud_stores.json/.md` records the full
+five-scenario rerun: raw minimum CPU work removed **38.4011%**, a **+0.0090
+percentage-point** observation. Its strict RGB parity result is diagnostic
+under the user's fade exclusion; final-RAM/iteration gates remain open.
+Memory/native-chipset/native-boot cutover remain **0%**, deletion gate **0/4**.
+No phase or emulation subsystem is completed by this repair.
