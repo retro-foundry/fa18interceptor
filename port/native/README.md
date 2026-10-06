@@ -137,6 +137,11 @@ zone-check, page-clear and cockpit-redraw paths execute. Seven view/record
 checkpoints, 36 timer/readout cases and two periodic record passes match original
 non-stack RAM. See [`../../analysis/native_clock_milestone.md`](../../analysis/native_clock_milestone.md).
 Complete frame ownership and exact recorded cadence remain open.
+C12950 now consumes control/sound actions in active and inactive frame branches,
+through typed C locals/arguments and existing audio consumers. The native run
+executes 2454 owner calls; 720 source cases match memory and 1469 exact sound
+requests. Native sample loading/output remains unfinished. See
+[`../../analysis/native_control_actions_milestone.md`](../../analysis/native_control_actions_milestone.md).
 Full flight, positive shadow strips and the record-expiry
 transition remain unfinished. Setup correctness is separate from frame cadence
 and recorded gameplay acceptance.

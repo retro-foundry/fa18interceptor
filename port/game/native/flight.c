@@ -8,6 +8,7 @@
 #include "../main_loop_timers.h"
 #include "../render_buffers.h"
 #include "../cockpit.h"
+#include "../control_actions.h"
 #include "../globals.h"
 #include "../menu_transition.h"
 #include "../scene_dispatch.h"
@@ -202,6 +203,8 @@ int native_flight_tick(NativeFrontend *game) {
         refresh_context_packet(&refresh);
         native_scene_draw(game);
         update_message(); /* C11BFC at C0F12C, before instruments. */
+        update_control_actions(NULL,NULL); /* C12950 at C0F132. */
+        ++game->control_frames;
         native_hud_draw(saved_tick);
         ++game->hud_frames;
         /* C25312/C2548A precede C0EFD4's game counter increment. Polls
@@ -212,5 +215,7 @@ int native_flight_tick(NativeFrontend *game) {
         begin_main_loop_timers(&timers);
         return finish_frame_clock(game);
     }
+    update_control_actions(NULL,NULL); /* C12950 idle branch at C0F370. */
+    ++game->control_frames;
     return 1;
 }

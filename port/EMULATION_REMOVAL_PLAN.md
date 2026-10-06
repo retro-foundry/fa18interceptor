@@ -75,7 +75,13 @@ Native continuation milestones (functional scope, not instruction counts):
   record passes and focused yielding/pause checks pass. See
   `../analysis/native_clock_milestone.md`. Roughly 98% of startup wiring
   (previously 97%); whole-frame ownership and recorded-flight parity remain open.
-- Next: complete C0EFD4 frame ownership, remaining HUD/control/audio actions,
+- Connected: typed C12950 control/sound actions, with ordinary arguments and
+  locals, existing audio consumers, C131BE magnitude and C133B2 step behavior.
+  The native run executes 2454 active/inactive calls; 720 source cases match
+  non-stack RAM and 1469 exact sound requests. Seven view/record checks and
+  link omission pass. See `../analysis/native_control_actions_milestone.md`.
+  Startup estimate remains about 98%; native sample loading/output remains open.
+- Next: complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.

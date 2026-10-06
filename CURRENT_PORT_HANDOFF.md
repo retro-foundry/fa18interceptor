@@ -101,7 +101,14 @@ passes, focused yielding and setup/pause/resume checks pass; twelve reference
 CTests pass. See `analysis/native_clock_milestone.md`. Rough startup wiring
 estimate now about 98% (previously 97%), excluding full flight/frame acceptance.
 Game update cadence is distinct from the host PAL clock. Complete frame
-ownership, control/audio actions and remaining record children are still open.
+ownership and remaining record children are still open.
+C12950 control/sound actions now run before the HUD and in the inactive branch,
+using typed C locals/arguments and existing audio consumers. The 7000-frame run
+executes 2454 action-owner calls; source event/action/pending state is consumed.
+720 original-instruction cases match non-stack RAM and 1469 exact sound calls;
+the seven view/record checks and link omission pass. Startup wiring remains
+roughly 98%; native samples/output and complete frame ownership are still open.
+See `analysis/native_control_actions_milestone.md`.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Source sound requests now consume the original mute/absent-voice gates; native
