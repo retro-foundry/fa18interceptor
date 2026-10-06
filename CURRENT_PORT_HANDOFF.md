@@ -44,6 +44,30 @@ toolchains build, all twelve CTests pass, and capture/profiling remain invisible
 to RGB/RAM/stdout/stderr in all three CPU modes on both toolchains. Raw CPU,
 native-memory/chipset/boot axes and deletion gate are unchanged by diagnostics.
 
+Phase 1's first connected batch is `C2D408` -> `C1342C`: runner entry -> machine
+frame -> recomp hook -> active `glue_C2D408` ->
+`update_record_nonclass_matrix` -> `load_record_velocity` -> direct
+`update_matrix_side_record()`. The child no longer exchanges Musashi registers
+with its parent. Before/after compatibility observations carry ordinary C
+values, published only at the outer CPU adapter. `glue_matrix_side_record.c`
+and the C1342C registry/prototype entries are deleted. Known static callers
+and all five suite profiles establish this ownership within that coverage;
+`port/game/native_call_graph.json` preserves it for tooling. The game child has
+no custom-register/service/interrupt boundary within this existing atomic
+parent call. Guest memory and the parent's fixed timing charge remain; this
+batch is not an emulation-free frame body. The isolated 800-frame demo executes
+56 direct child calls in 70 parent calls; RGB, indices, RAM and existing counters
+are byte-identical to the prior ON runner. Parent shadow: 65 matches, five
+incomplete, zero mismatches; sandbox: 70 matches, zero incomplete/mismatches.
+The full suite executes 2,809 / 3,341 / 312 / 106 / 106 direct calls (three
+recordings, GNU/MSVC ADF). Every previous meter counter, output hash, runner
+statistic and fade-aware comparison is unchanged. See
+`analysis/emulation_removal_meter_after_native_side.json/.md`: raw CPU removal
+**38.4011%**, delta **0.0000 pp**; accepted CPU share remains unavailable because
+the combined baseline still fails parity. Memory/chipset/boot **0%**, gate
+**0/4**. Next: retire proven C-only leaves inside this native child; keep
+original generated reference implementations for OFF/source comparisons.
+
 ## What went wrong and must not recur
 
 About fourteen hours of elapsed work on 2026-10-05 expanded a separate gameplay
@@ -144,6 +168,7 @@ The last active function milestone (`05fa7453`) statically recompiles 85 deferre
 entries in `port/recomp/generated/recomp_static_deferred.c`. They retain explicit
 `STATIC_RECOMP`/`TODO(decompile)` markers and per-entry debt in
 `recomp_deferred.json`. The inventory includes 539 readable translated entries
+(538 CPU entry adapters and one direct C entry without a CPU adapter)
 and 75 additional readable source-only callable entries. Static compilation
 still depends on shared CPU/machine state and is not readable decompilation.
 See `analysis/routines/static_recomp_deferred.md` and its checkpoint for the

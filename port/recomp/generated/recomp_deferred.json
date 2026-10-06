@@ -1,8 +1,29 @@
 {
   "schema": 1,
   "translated_entries": 624,
-  "registered_readable_translated_entries": 539,
+  "registered_readable_translated_entries": 538,
   "registered_readable_source_only_entries": 75,
+  "direct_native_entries": [
+    {
+      "entry": "C1342C",
+      "function": "update_matrix_side_record",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C2D408",
+          "function": "update_record_nonclass_matrix",
+          "call_site": "load_record_velocity",
+          "source": "port/game/record_matrix_update.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/load_class10_record_triple.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "parent CPU/timing adapter"
+      ]
+    }
+  ],
+  "direct_native_entry_count": 1,
   "static_recompiled_entries": 85,
   "original_adf_static_entries": 44,
   "reference_wrapper_static_entries": 41,

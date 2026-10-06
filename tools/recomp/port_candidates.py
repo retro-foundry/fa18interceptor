@@ -20,6 +20,7 @@ GEN = ROOT / "port/recomp/generated"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import liveness  # noqa: E402
 from port_info import instructions  # noqa: E402
+from native_call_graph import native_entries
 
 
 def modified(entry: str) -> set[str]:
@@ -47,6 +48,7 @@ def main() -> None:
     edges = json.loads((GEN / "recomp_edges.json").read_text())
     graph = {f["entry"]: f for f in json.loads((GEN / "recomp_graph.json").read_text())}
     done = set(re.findall(r"\{0x([0-9A-F]{6})", (ROOT / "port/game/glue/ports.c").read_text()))
+    done |= native_entries(list(graph.values()), done).keys()
     live = {a: (int(r, 16), int(h, 16), int(f, 16)) for a, r, h, f in re.findall(
         r"\{0x([0-9A-F]+), 0x([0-9A-F]+), 0x([0-9A-F]+), 0x([0-9A-F]+)\}",
         (GEN / "recomp_liveness.c").read_text())}

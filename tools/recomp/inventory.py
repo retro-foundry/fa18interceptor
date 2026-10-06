@@ -17,6 +17,7 @@ import argparse
 import json
 import re
 from pathlib import Path
+from native_call_graph import native_entries
 
 ROOT = Path(__file__).resolve().parents[2]
 ADDR = re.compile(r"\$C([0-9A-Fa-f]{5})(?:-\$C([0-9A-Fa-f]{5}))?")
@@ -84,7 +85,12 @@ def main() -> None:
     by_entry = {f["entry"]: f for f in graph}
     lookup = routine_of(graph)
     calls = json.loads(args.profile.read_text()) if args.profile else {}
-    done = ported()
+    registered = ported()
+    native = native_entries(graph, registered)
+    done = registered | native.keys()
+    native_calls = {}
+    for edge in calls.get('_native_edges', []):
+        native_calls[edge['callee']] = native_calls.get(edge['callee'], 0) + edge['calls']
     reps = reports()
 
     modules_for: dict[str, list[str]] = {}
@@ -128,6 +134,7 @@ def main() -> None:
             "entry": e, "insns": f["instructions"], "calls": len(f["calls"]),
             "callers": len(callers.get(e, ())), "wave": wave.get(e),
             "profile": calls.get(e, 0), "modules": modules_for.get(e, []),
+            "native_calls": native_calls.get(e, 0), "direct_native": e in native,
             "report": reps.get(e), "ported": e in done, "clean": clean(f)})
     rows.sort(key=lambda r: (r["wave"] is None, r["wave"] if r["wave"] is not None else 99,
                              -r["profile"], r["entry"]))
@@ -140,11 +147,13 @@ def main() -> None:
              f"in waves: {len(wave)}; with an existing module: "
              f"{sum(1 for r in rows if r['modules'])}; with a report: {sum(1 for r in rows if r['report'])}",
              f"- modules not inside any translated routine: {len(unmatched)}", "",
-             "| routine | wave | insns | calls | callers | profile calls | ported | modules | report |",
-             "| --- | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |"]
+             f"- CPU entry adapters: {len(registered)}; direct C entries: {len(native)}", "",
+             "| routine | wave | insns | calls | callers | dispatch calls | direct C calls | ported | modules | report |",
+             "| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- | --- |"]
     for r in rows:
         lines.append(f"| `${r['entry']}` | {'' if r['wave'] is None else r['wave']} | {r['insns']} | "
-                     f"{r['calls']} | {r['callers']} | {r['profile']} | {'yes' if r['ported'] else ''} | "
+                     f"{r['calls']} | {r['callers']} | {r['profile']} | {r['native_calls']} | "
+                     f"{'direct C' if r['direct_native'] else 'yes' if r['ported'] else ''} | "
                      f"{', '.join(r['modules'])} | {r['report'] or ''} |")
     lines += ["", "## Modules not inside any translated routine", ""]
     lines += [f"- `{m}`" for m in unmatched]

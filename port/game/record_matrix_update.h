@@ -10,7 +10,8 @@ int update_record_class30_matrix(gaddr record);
 
 /* $C2D496-$C2D99A. `d` starts as the caller's data registers and retains
  * the pre-transform arithmetic for register glue. The optional side hook
- * runs the already ported $C1342C once and publishes its register output. */
+ * observes the direct C child before/after execution for temporary register
+ * compatibility; the observer never owns or substitutes the game call. */
 typedef struct RecordMatrixRun {
     uint32_t d[8];
     MatrixTransformAngleState transform;
@@ -21,7 +22,9 @@ typedef struct RecordMatrixRun {
     int used_matrix_side;
     int used_depth;
 } RecordMatrixRun;
-typedef void (*RecordMatrixSideHook)(void *context, uint32_t d[8]);
+enum RecordMatrixSidePhase { RECORD_MATRIX_SIDE_BEFORE, RECORD_MATRIX_SIDE_AFTER };
+typedef void (*RecordMatrixSideHook)(void *context, enum RecordMatrixSidePhase phase,
+                                    uint32_t d[8]);
 void update_record_nonclass_matrix(gaddr record, RecordMatrixRun *run,
                                    RecordMatrixSideHook side_hook, void *context);
 

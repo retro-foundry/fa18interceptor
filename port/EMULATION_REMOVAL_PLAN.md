@@ -49,7 +49,7 @@ emulated custom registers. That is the shape of the problem: the C exists, but
 the emulator is still the thing that calls it, holds its data, and renders for
 it.
 
-Current counted state of the active tree:
+Counted baseline at `9c062b80` (historical; not a current reconstruction total):
 
 | Quantity | Count | Source |
 | --- | ---: | --- |
@@ -154,6 +154,16 @@ requires, and the meter above. No behaviour changes.
 Exit: baseline numbers published; 0/4 gate stated.
 
 ### Phase 1 — Native call graph (axis A)
+
+First connected batch complete: `C2D408` calls `C1342C` directly through the
+game owner, with compatibility values published at the parent CPU boundary.
+The leaf's CPU adapter/registration are removed; the original generated OFF
+implementation remains. All five scenarios exercise the direct edge and retain
+identical pre-change outputs/counters. This removes a shared-register child
+dependency, but moves no measured axis: raw CPU **38.4011%**, delta **0.0000 pp**,
+memory/chipset/boot **0%**, deletion **0/4**. Combined parity remains failing,
+so Phase 1's exit gate is still open. Evidence:
+`../analysis/emulation_removal_meter_after_native_side.json/.md`.
 
 Today C routines call each other by returning into the dispatcher. Give each
 recreated routine a direct C entry point and let a C caller call its C callee

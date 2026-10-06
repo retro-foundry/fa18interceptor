@@ -5,8 +5,9 @@
 #include "globals.h"
 #include "memory.h"
 #include "record_matrix_update.h"
+#include "glue_matrix_side_values.h"
+#include "recomp_ports.h"
 
-void matrix_side_record_with_registers(void); /* glue_matrix_side_record.c */
 void transform_matrix_registers(const int16_t angles[3],
                                 const MatrixTransformAngleState *state,
                                 uint32_t last_term); /* glue_transform_matrix.c */
@@ -18,13 +19,14 @@ void track_direction_registers(int32_t elevation, int32_t azimuth, int32_t befor
 
 #define SEXT(v) ((uint32_t)(int32_t)(int16_t)(v))
 
-static void matrix_side_call(void *context, uint32_t d[8]) {
-    gaddr record = (gaddr)(uintptr_t)context;
-    int i;
-    for (i = 0; i < 8; i++) D(i) = d[i];
-    matrix_side_record_with_registers();
-    for (i = 0; i < 8; i++) d[i] = D(i);
-    A(1) = record; /* $C2D616 saves A1 around the child. */
+static void matrix_side_observe(void *context, enum RecordMatrixSidePhase phase,
+                                uint32_t d[8]) {
+    MatrixSideValues *values = context;
+    if (phase == RECORD_MATRIX_SIDE_BEFORE) matrix_side_capture(values);
+    else {
+        matrix_side_finish(values, &d[0], &d[1]);
+        fa18_ports_note_native_edge(0xC2D408, 0xC1342C);
+    }
 }
 
 static void class30_registers(gaddr record, int tracked, int32_t old_azimuth,
@@ -63,10 +65,11 @@ int glue_C2D408(void) {
         class30_registers(record, tracked, old_azimuth, x, y, z, snap);
     } else {
         RecordMatrixRun run;
+        MatrixSideValues side;
         for (i = 0; i < 8; i++) run.d[i] = D(i);
-        update_record_nonclass_matrix(record, &run, matrix_side_call,
-                                      (void *)(uintptr_t)record);
+        update_record_nonclass_matrix(record, &run, matrix_side_observe, &side);
         for (i = 0; i < 8; i++) D(i) = run.d[i];
+        if (run.used_matrix_side) A(0) = side.final_address;
         A(4) = record + 0x80;
         transform_matrix_registers(run.transformed_angles, &run.transform,
                                    run.last_term);

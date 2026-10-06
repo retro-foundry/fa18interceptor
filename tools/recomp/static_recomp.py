@@ -13,6 +13,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from native_call_graph import native_entries
 
 ROOT = Path(__file__).resolve().parents[2]
 GEN = ROOT / "port/recomp/generated"
@@ -56,8 +57,9 @@ def helper_body(source: str, name: str) -> str:
 def outputs(directory: Path = GEN) -> dict[Path, str]:
     graph = json.loads((directory / "recomp_graph.json").read_text())
     registered = set(re.findall(r"^\s*\{0x([0-9A-F]{6}),", (ROOT / "port/game/glue/ports.c").read_text(), re.M))
+    native = native_entries(graph, registered)
     expected = {row["entry"] for row in graph}
-    pending = expected - registered
+    pending = expected - registered - native.keys()
     bodies = {}
     normal_paths = sorted(directory.glob("recomp_[0-9]*.c"))
     source_paths = normal_paths + ([directory / STATIC_FILE] if (directory / STATIC_FILE).exists() else [])
@@ -133,6 +135,8 @@ def outputs(directory: Path = GEN) -> dict[Path, str]:
         "schema": 1, "translated_entries": len(graph),
         "registered_readable_translated_entries": len(expected & registered),
         "registered_readable_source_only_entries": len(registered - expected),
+        "direct_native_entries": list(native.values()),
+        "direct_native_entry_count": len(native),
         "static_recompiled_entries": len(pending),
         "original_adf_static_entries": sum(bool(row["original_code_hunks"]) for row in rows),
         "reference_wrapper_static_entries": sum(not row["original_code_hunks"] for row in rows),
@@ -159,6 +163,7 @@ def partition(directory: Path = GEN, check: bool = False) -> None:
     print(f"static recompilation: {inventory['static_recompiled_entries']} deferred entries, "
           f"{inventory['registered_readable_translated_entries']} readable translated, "
           f"{inventory['registered_readable_source_only_entries']} readable source-only; "
+          f"{inventory['direct_native_entry_count']} direct C entries without CPU entry adapters; "
           f"{len(inventory['opcodes'])} direct opcode bindings")
 
 

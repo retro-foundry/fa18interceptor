@@ -286,7 +286,6 @@ const FA18Port fa18_ports[] = {
     {0xC1B27E, glue_C1B27E, "update_flight_input", 2400},
     {0xC3316E, glue_C3316E, "play_context_tone_4", 0, 0, glue_C3316E_step, 0xC331CE},
     {0xC244E2, glue_C244E2, "classify_selected_record_range", 0, 0, glue_C244E2_step, 0xC2467E},
-    {0xC1342C, glue_C1342C, "update_matrix_side_record", 3500},
     {0xC2DD4E, glue_C2DD4E, "adjust_matrix_record_depth", 1300},
     /* render_line.c, render_state.c */
     {0xC2F490, glue_C2F490, "reset_line_style", 0, 0, glue_C2F490_step, 0xC2F49C},

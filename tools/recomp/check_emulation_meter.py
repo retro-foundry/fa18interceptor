@@ -48,15 +48,18 @@ def main():
     parser.add_argument("--runner", type=Path, default=ROOT / "build/recomp/fa18_recomp.exe")
     args = parser.parse_args()
     base = [str(args.runner.resolve()), "--state", str(ROOT / "captures/native/demo01/state.bin"),
-            "--rom", str(ROOT / "local/system/kick13.rom"), "--frames", "120"]
+            "--rom", str(ROOT / "local/system/kick13.rom")]
     with tempfile.TemporaryDirectory(prefix="meter-check-", dir=ROOT / "build") as temporary:
         out = Path(temporary)
         check_fade_policy(out)
         for name, options in (("off", ["--ports", "off"]), ("on", ["--ports", "on"]),
                               ("interpreter", ["--ports", "off", "--no-recomp"])):
+            frames = 800 if name == 'on' else 120
+            if name == 'on':
+                options += ["--input", str(ROOT / "captures/native/demo01/input.fa18in")]
             results = []
             for enabled in (False, True):
-                command = base + options + ["--ram-out", str(out / f"{enabled}.ram"),
+                command = base + options + ["--frames", str(frames), "--ram-out", str(out / f"{enabled}.ram"),
                                              "--rgb444", str(out / f"{enabled}.rgb")]
                 if enabled:
                     command += ["--profile", str(out / "profile.json"), "--index8", str(out / "indices.bin")]
@@ -67,8 +70,8 @@ def main():
                 assert (out / f"False.{suffix}").read_bytes() == (out / f"True.{suffix}").read_bytes(), (name, suffix)
             meter = json.loads((out / "profile.json").read_text())["_emulation"]
             index_data = (out / "indices.bin").read_bytes()
-            assert len(index_data) == 120 * PIXELS and 0 < max(index_data) < 32
-            assert meter["frames"] == 120, meter["frames"]
+            assert len(index_data) == frames * PIXELS and 0 < max(index_data) < 32
+            assert meter["frames"] == frames, meter["frames"]
             assert meter["instructions"]["interpreted"] > 0, name
             assert meter["bus"]["interpreted"]["reads"] > 0, name
             assert meter["chipset"]["bitplane_words"] > 0, name
@@ -79,9 +82,14 @@ def main():
             else:
                 assert meter["instructions"]["generated"] > 0, name
             if name == "on":
+                profile = json.loads((out / "profile.json").read_text())
+                edge = next(edge for edge in profile['_native_edges']
+                            if edge['caller'] == 'C2D408' and edge['callee'] == 'C1342C')
+                assert edge['calls'] > 0 and not profile.get('C1342C', 0)
                 assert meter["ports"]["calls"] + meter["ports"]["steps"] > 0
                 assert meter["bus"]["port"]["reads"] > 0
             if name == "off":
+                assert not json.loads((out / "profile.json").read_text())['_native_edges']
                 assert meter["ports"]["calls"] == meter["ports"]["steps"] == 0
             print(f"{name}: profiling preserves stdout, stderr, all RGB frames and final RAM; origins exercised")
 

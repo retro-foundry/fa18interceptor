@@ -35,6 +35,12 @@ Removing the abandoned source does not remove the active runner's remaining
 Musashi, guest-memory or chipset dependencies. Their removal must happen through
 the actual game/runtime call graph.
 
+`game/native_call_graph.json` records C-only ownership for retired CPU entry
+adapters. Tooling checks known original callers and actual C call sites before
+excluding these entries from deferred/unported lists. This inventory is scoped
+to discovered calls; runtime edge counts in profile `_native_edges` demonstrate
+exercise in the fixed suite. Neither proves whole-game CPU independence.
+
 Headless frame diagnostics use `--rgb444 OUT.bin --index8 OUT.index8`. The
 index stream contains one selected palette index per 320x256 pixel per frame,
 including during black fades; it does not change guest state or the RGB stream.

@@ -1,5 +1,4 @@
-/* Post-transform record angle and velocity update ($C2D704-$C2D99A).
- * This is a source block of the unregistered $C2D408 parent. */
+/* Current-record matrix, angle and velocity update ($C2D408-$C2D99A). */
 #include "record_matrix_update.h"
 
 #include "globals.h"
@@ -138,8 +137,9 @@ static void load_record_velocity(gaddr record, uint32_t d[8],
         d[0] = low_word(d[0], rd_u16(COCKPIT_FLAGS) & 0x40u);
         if ((uint16_t)d[0]) {
             run->used_matrix_side = 1;
-            if (side_hook) side_hook(context, d);
-            else update_matrix_side_record();
+            if (side_hook) side_hook(context, RECORD_MATRIX_SIDE_BEFORE, d);
+            update_matrix_side_record();
+            if (side_hook) side_hook(context, RECORD_MATRIX_SIDE_AFTER, d);
         }
         for (i = 0; i < 3; i++) d[2 * i] = low_word(d[2 * i], rd_u16(record + 0x56 + (gaddr)(2 * i)));
         return;

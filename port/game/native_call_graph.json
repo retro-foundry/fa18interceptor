@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "scope": "Known static callers and the fixed runtime suite; whole original call graph remains unverified.",
+  "entries": [
+    {
+      "entry": "C1342C",
+      "function": "update_matrix_side_record",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C2D408",
+          "function": "update_record_nonclass_matrix",
+          "call_site": "load_record_velocity",
+          "source": "port/game/record_matrix_update.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/load_class10_record_triple.asm",
+      "remaining_dependencies": ["guest game memory", "parent CPU/timing adapter"]
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from native_call_graph import native_entries
 
 ROOT = Path(__file__).resolve().parents[2]
 GEN = ROOT / "port/recomp/generated"
@@ -53,9 +54,14 @@ def main() -> None:
         (GEN / "recomp_liveness.c").read_text())}
     edges = json.loads((GEN / "recomp_edges.json").read_text())
     graph = {f["entry"]: f for f in json.loads((GEN / "recomp_graph.json").read_text())}
+    registered = set(re.findall(r"\{0x([0-9A-F]{6})", (ROOT / "port/game/glue/ports.c").read_text()))
+    native = native_entries(list(graph.values()), registered)
     for entry in sys.argv[1:]:
         entry = entry.upper().lstrip("$")
         print(f"== ${entry}")
+        if entry in native:
+            owner = native[entry]
+            print(f"  direct C owner: {owner['function']} in {owner['source']}; CPU entry adapter removed")
         for line in instructions(entry):
             print("   ", line)
         sites = sorted({r for r, c in edges if c == entry})

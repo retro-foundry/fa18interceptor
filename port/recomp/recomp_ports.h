@@ -79,6 +79,9 @@ long fa18_ports_report(const char *path);
 
 /* Per-routine call counts, for tools/recomp/inventory.py --profile. */
 int fa18_recomp_write_profile(const char *path);
+/* Observe an actual C-to-C game call, without consulting guest PC or stack.
+ * Profiling only; omitted when --profile is inactive. */
+void fa18_ports_note_native_edge(uint32_t caller, uint32_t callee);
 /* Observed call edges [[return address, routine], ...] for the liveness pass. */
 int fa18_recomp_write_edges(const char *path);
 

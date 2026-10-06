@@ -59,7 +59,7 @@ def scenario(name: str, runner: Path, args: list[str], output: Path,
         meter = profile["_emulation"]
         if meter["schema"] != 1:
             raise ValueError(f"{name}: unsupported meter schema")
-        runs[mode] = dict(meter=meter, runner_stats=stats[0],
+        runs[mode] = dict(meter=meter, runner_stats=stats[0], native_edges=profile.get('_native_edges', []),
                           rgb_sha256=digest(work / f"{mode}.rgb"),
                           index8_sha256=digest(work / f"{mode}.index8"),
                           ram_sha256=digest(work / f"{mode}.ram"))

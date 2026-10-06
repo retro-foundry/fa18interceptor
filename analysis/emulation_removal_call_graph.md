@@ -81,9 +81,21 @@ stream (`--index8`): indices must match, and different RGB values are excluded
 only within that index's source fade sequence at C08510. Strict RGB hashes remain
 diagnostics. Frame-count and final-RAM mismatches are still reported.
 
-The next structural removal is C child calls through the guest-PC dispatcher,
-starting with a source-proven hardware-free parent/leaf pair actually exercised
-by a recording. Existing global ON timing debt must stay visible: this meter's
+The first structural removal is the C2D408 -> C1342C shared-register child call.
+`update_record_nonclass_matrix()` reaches `load_record_velocity()`, which calls
+`update_matrix_side_record()` directly. An optional observer carries scratch
+results as C values; only the outer parent adapter publishes CPU registers.
+The leaf CPU adapter is deleted. Its sole known original caller and all five
+suite profiles support this ownership; `game/native_call_graph.json` and
+`tools/recomp/native_call_graph.py` validate the scoped C caller inventory.
+The compatibility helper has no Musashi/dispatcher symbols. Guest memory and
+the parent's fixed CPU timing remain.
+
+The native edge executes 2,809 / 3,341 / 312 / 106 / 106 times in the five ON
+scenarios. Prior RGB/index/RAM hashes, counters, runner statistics and fade-aware
+comparisons are unchanged. The raw minimum CPU share remains 38.4011% (zero
+delta); no subsystem becomes deletable. Existing global ON timing debt stays
+visible: this meter's
 baseline fails parity, so it cannot certify a new removal until the affected
 path and eventual whole suite pass. RAM-page absence is scenario evidence only,
 not proof of exclusive native ownership: direct DMA and host compatibility

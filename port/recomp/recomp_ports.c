@@ -125,6 +125,27 @@ static int source_only_reference;
 static uint32_t source_only_min,source_only_end;
 static PortStats *stats;
 static uint64_t *profile;
+typedef struct { uint32_t caller, callee; uint64_t calls; } NativeEdge;
+static NativeEdge *native_edges;
+static size_t native_edge_count, native_edge_capacity;
+
+void fa18_ports_note_native_edge(uint32_t caller, uint32_t callee) {
+    if (!fa18_meter_enabled) return;
+    size_t i;
+    for (i = 0; i < native_edge_count; ++i)
+        if (native_edges[i].caller == caller && native_edges[i].callee == callee) break;
+    if (i == native_edge_count) {
+        if (i == native_edge_capacity) {
+            size_t capacity = native_edge_capacity ? native_edge_capacity * 2 : 16;
+            NativeEdge *edges = realloc(native_edges, capacity * sizeof *edges);
+            if (!edges) { fputs("cannot allocate native call profile\n", stderr); abort(); }
+            native_edges = edges; native_edge_capacity = capacity;
+        }
+        native_edges[i].caller = caller; native_edges[i].callee = callee;
+        native_edges[i].calls = 0; ++native_edge_count;
+    }
+    ++native_edges[i].calls;
+}
 static unsigned char *context_before, *context_reference;
 typedef struct {
     int port;
@@ -199,6 +220,7 @@ static int stepped_owns(const FA18Port *port,uint32_t pc) {
 }
 
 void fa18_ports_init(FA18PortMode new_mode, const char *only) {
+    native_edge_count = 0;
     int i, f;
     mode = new_mode;
     source_only_reference=0;
@@ -1002,6 +1024,11 @@ int fa18_recomp_write_profile(const char *path) {
         first = 0;
     }
     if (!first) fputc(',', out);
+    fputs("\"_native_edges\":[", out);
+    for (size_t i = 0; i < native_edge_count; ++i)
+        fprintf(out, "%s{\"caller\":\"%06X\",\"callee\":\"%06X\",\"calls\":%llu}", i ? "," : "",
+                native_edges[i].caller, native_edges[i].callee, (unsigned long long)native_edges[i].calls);
+    fputs("],", out);
     fa18_meter_write_json(out, fa18_machine->frame);
     fputs("}\n", out);
     int failed = ferror(out);
