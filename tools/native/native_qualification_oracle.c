@@ -20,6 +20,9 @@
 /* These runtime boundaries are outside the parent cases below. A reached
  * boundary fails the test; none supplies substitute game behavior. */
 void native_frontend_clear_text(void) { abort(); }
+#ifndef FA18_QUALIFICATION_SAVE_BACKEND
+void native_frontend_save_log(NativeFrontend *game) { (void)game;abort(); }
+#endif
 void native_input_process(NativeFrontend *game) { (void)game;abort(); }
 void native_scene_project(void) { abort(); }
 int native_scene_draw(NativeFrontend *game) { (void)game;abort(); }

@@ -15,9 +15,15 @@ original RAM/registers/timing. Corrected carrier input reaches the unconnected
 C083E2 touchdown mission reset, now connected and verified at iteration 6288.
 Its old helper's wrong player-phase address is corrected. Aircraft landing,
 ground/contact, speed and reset fields agree apart from the two startup debts;
-qualification result callback C11078 is the next missing boundary. Evidence:
+qualification result callbacks C11078/C110A4 and viewport/restart
+C0F946/C0F974/C0F992 are now connected. The carrier recording completes with
+consumed keys, persists qualification success and restarts; fifteen source
+parent cases and save/reload pass. Two of three scenarios now have functional
+outcomes; full frame parity remains open, including post-result timing/state.
+Next: native demo playback and full frame/result cadence. Evidence:
 `analysis/native_game_input_milestone.md`.
 Touchdown evidence: `analysis/native_carrier_touchdown_milestone.md`.
+Result evidence: `analysis/native_qualification_result_milestone.md`.
 The first functional intro/menu milestone is implemented: original splash,
 credits and settled menu pixels match source OFF reference frames exactly;
 first-tour callsign editing and 78-byte save/reload pass; SDL dummy presentation

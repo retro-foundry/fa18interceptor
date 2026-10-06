@@ -156,7 +156,15 @@ Native continuation milestones (functional scope, not instruction counts):
   pass; the old helper's wrong player-phase address is corrected. Touchdown
   milestone 100%; success result callback C11078 remains open. See
   `../analysis/native_carrier_touchdown_milestone.md`.
-- Next: connect C11078/C110A4 qualification results, carrier-success/demo outcomes,
+- Connected: C11078/C110A4 qualification results, native 78-byte success save /
+  reload and C0F946/C0F974/C0F992 viewport/scene restart. The consumed-key
+  carrier recording completes all 8038 updates and 554 keys, landing and
+  persisting qualification. Fifteen original parent cases and affected
+  regressions pass. Result milestone 100%; 2/3 functional scenarios (about 67%
+  of that checklist), 0/3 full native frame-parity acceptances. Post-result
+  clock/state differences remain open. See
+  `../analysis/native_qualification_result_milestone.md`.
+- Next: demo playback/outcome, result/restart timing alignment,
   complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.

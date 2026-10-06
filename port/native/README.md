@@ -29,8 +29,8 @@ The preview now draws the source horizon and normal/wide terrain packets into
 ordinary host planes, followed by the original scene placement/model streams,
 ground descriptors, aircraft hulls and fixed matrix mark. Grounded aircraft
 motion and stick recording now execute. Cockpit/HUD marks, tapes, readouts,
-panel images, compass and indicator/mode bars are connected; takeoff and
-complete frame ordering remain pending.
+panel images, compass and indicator/mode bars are connected; complete frame
+ordering remains pending.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
 `hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;
@@ -40,7 +40,8 @@ Qualification (digit 5) now continues through carrier construction and its
 briefing into active flight. Return acknowledges the code prompt, then Space
 leaves the qualification briefing. F10 applies the source throttle level;
 Down pulls back. A bounded carrier-start/takeoff probe passes source comparisons.
-Complete landing/outcomes and recorded-flight parity remain unverified.
+Carrier landing, qualification-success save and restart are demonstrated with
+original consumed keys. Complete recorded frame parity remains unverified.
 Demo and other selected modes stop at their transition banner. Audio remains suppressed.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
@@ -235,8 +236,7 @@ integration remain open. See
 
 Carrier touchdown now runs C083E2's source mission reset. The aircraft stops on
 the deck with original motion, orientation, contact and reset state through
-iteration 6288. Eight original child comparisons pass. Qualification result
-messages/pilot-log completion remain open at C11078. The bounded check reuses
+iteration 6288. Eight original child comparisons pass. The bounded check reuses
 existing reference evidence:
 
 ```powershell
@@ -244,3 +244,16 @@ python tools/native/check_touchdown.py --game-input build/native-flight/carrier-
 ```
 
 See [`../../analysis/native_carrier_touchdown_milestone.md`](../../analysis/native_carrier_touchdown_milestone.md).
+
+Qualification success now queues the original result messages, updates and saves
+the 78-byte pilot record, then restarts through the original viewport/bootstrap
+callbacks. All 8038 consumed-input updates complete; the saved qualification
+word is 1 and reloads exactly. Two of three scenarios have functional outcomes.
+Full frame parity and post-result timing/state alignment remain open. To reuse
+the same original evidence for the native result/save/reload check:
+
+```powershell
+python tools/native/check_qualification_result.py --game-input build/native-flight/carrier-game-input.fa18in --source-end build/native-flight/reference-carrier-end.dat
+```
+
+See [`../../analysis/native_qualification_result_milestone.md`](../../analysis/native_qualification_result_milestone.md).

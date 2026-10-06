@@ -20,7 +20,7 @@ add_executable(fa18_native main.c replay.c
     ../game/display_records.c ../game/render_polygon.c ../game/render_line.c
     ../game/render_buffers.c ../game/plot.c ../game/clip.c
     ../game/polygon_clip.c ../game/attitude.c ../game/stages.c
-    ../game/matrix_route.c ../game/postflight_completion.c ../game/map_detail_component_route.c
+    ../game/matrix_route.c ../game/postflight_completion.c ../game/postflight_messages.c ../game/map_detail_component_route.c
     ../game/map_detail_fields.c ../game/map_detail_gate.c ../game/map_packet.c
     ../game/map_packet_column_table.c ../game/map_packet_control_stream.c ../game/map_packet_control_walker.c
     ../game/map_packet_coordinate_setup.c ../game/map_packet_depth_stage.c ../game/map_packet_directory.c

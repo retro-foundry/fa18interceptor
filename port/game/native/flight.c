@@ -33,6 +33,7 @@
 #include "../menu_followup.h"
 #include "../menu_outcome.h"
 #include "../postflight_completion.h"
+#include "../postflight_messages.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -57,6 +58,8 @@ static void storage_child(void *context,enum SceneBootstrapChild child) {
         const SceneBootstrapHooks hooks={storage_child,NULL,position};
         bootstrap_scene(&hooks);break;
     }
+    case BOOTSTRAP_FREE_VOICES: free_all_voices();break;
+    case BOOTSTRAP_LOAD_MENU_TABLE: load_long_table(0xc08490);break;
     default: fprintf(stderr,"native storage child unavailable: %u\n",(unsigned)child); abort();
     }
 }
@@ -130,6 +133,16 @@ static void return_child(void *context,enum MenuReturnChild child) {
     if(child==MR_CHOOSE_RESET || child==MR_LEAVE_RESET) reset_message_sequence();
     else { fprintf(stderr,"native menu-return child unavailable: %u\n",(unsigned)child);abort(); }
 }
+static int32_t result_message_child(void *context,enum PostflightMessageChild child) {
+    NativeFrontend *game=context;
+    switch(child) {
+    case PM_RESET_SEQUENCE: reset_message_sequence();return 0;
+    case PM_LOAD_MODE:
+        /* C1643A's 78-byte config write uses the existing native save overlay. */
+        native_frontend_save_log(game);return 0;
+    default: fprintf(stderr,"native result message child unavailable: %u\n",(unsigned)child);abort();
+    }
+}
 static void stage(void *context,gaddr routine) {
     NativeFrontend *game=context;
     const MenuOutcomeHooks outcome={outcome_child,NULL,game};
@@ -138,6 +151,12 @@ static void stage(void *context,gaddr routine) {
         const SceneBootstrapHooks hooks={storage_child,NULL,position};
         reset_sequence_after_bootstrap(&hooks);
         ++game->record_updates;
+    } else if(routine==0xc0f992) {
+        int32_t position[3]={0};
+        const SceneBootstrapHooks hooks={storage_child,NULL,position};
+        begin_sequence_after_bootstrap(&hooks);
+        ++game->record_updates;
+        if(rd_u32(STAGE_CALLBACK)==0xc0fcb4) game->screen=NATIVE_MENU;
     } else if(routine==0xc0fece) {
         const MenuTransitionHooks hooks={transition_child,NULL,game};
         advance_delayed_menu(&hooks);
@@ -172,6 +191,13 @@ static void stage(void *context,gaddr routine) {
     else if(routine==0xc11958) follow_postflight_message_or_phase(NULL);
     else if(routine==0xc119d4) restart_postflight_after_countdown(NULL);
     else if(routine==0xc1104c) queue_postflight_end(NULL);
+    else if(routine==0xc0f946) await_postflight_viewport(NULL);
+    else if(routine==0xc0f974) mark_postflight_viewport_ready(NULL);
+    else if(routine==0xc11078) raise_postflight_message_event(NULL);
+    else if(routine==0xc110a4) {
+        const PostflightMessageHooks messages={result_message_child,NULL,game};
+        prepare_postflight_messages(0x4900,&messages);
+    }
     else if(!native_setup_stage(game,routine)) { fprintf(stderr,"native flight stage unavailable: %08X\n",routine); abort(); }
 }
 enum { PALETTE_FRAME=0x3080 };
