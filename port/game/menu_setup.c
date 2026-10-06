@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 static void observe(const MenuSetupHooks *h,enum MenuSetupPhase phase,uint32_t value,gaddr address) {
-    if(h->observe) h->observe(h->context,phase,value,address);
+    if(h && h->observe) h->observe(h->context,phase,value,address);
 }
 static void consume(const MenuSetupHooks *h,enum MenuSetupCall call,uint32_t value) {
     if(!h->consume) abort();
@@ -18,11 +18,20 @@ static void word(const MenuSetupHooks *h,gaddr address,uint16_t value) {
 static void longword(const MenuSetupHooks *h,gaddr address,uint32_t value) {
     wr_u32(address,value); observe(h,MENU_SETUP_LONG_STORE,value,address);
 }
-void start_top_level_menu(const MenuSetupHooks *h) {
+void queue_top_level_menu_messages(const MenuSetupHooks *h) {
     static const uint16_t codes[]={6,100,101,102,103,104,105,106,107,108,109};
     gaddr cursor=MESSAGE_QUEUE;
-    uint8_t flags;
     unsigned i;
+    longword(h,MESSAGE_TIMER,0x1e0);
+    for(i=0;i<sizeof codes/sizeof codes[0];++i) {
+        wr_u16(cursor,codes[i]); observe(h,MENU_SETUP_QUEUE_WORD,codes[i],cursor);
+        cursor+=2; observe(h,MENU_SETUP_QUEUE_NEXT,cursor,0);
+    }
+    wr_u16(cursor,0); observe(h,MENU_SETUP_QUEUE_WORD,0,cursor);
+}
+void start_top_level_menu(const MenuSetupHooks *h) {
+    gaddr cursor=MESSAGE_QUEUE;
+    uint8_t flags;
     observe(h,MENU_SETUP_CURSOR,cursor,0);
     longword(h,MASTER_VOLUME_TARGET,0x1f0000);
     flags=rd_u8(SOUND_FLAGS); observe(h,MENU_SETUP_BIT_TEST,flags,7);
@@ -33,12 +42,7 @@ void start_top_level_menu(const MenuSetupHooks *h) {
     consume(h,MENU_SETUP_SOUND,15); byte(h,VOLUME_FADING,1);
     consume(h,MENU_SETUP_CLEAR,0); consume(h,MENU_SETUP_RESET,0);
     consume(h,MENU_SETUP_DELAY,0xc000); byte(h,CONTEXT_GATE,0);
-    consume(h,MENU_SETUP_SCRIPT,0xc08490); longword(h,MESSAGE_TIMER,0x1e0);
-    for(i=0;i<sizeof codes/sizeof codes[0];++i) {
-        wr_u16(cursor,codes[i]); observe(h,MENU_SETUP_QUEUE_WORD,codes[i],cursor);
-        cursor+=2; observe(h,MENU_SETUP_QUEUE_NEXT,cursor,0);
-    }
-    wr_u16(cursor,0); observe(h,MENU_SETUP_QUEUE_WORD,0,cursor);
+    consume(h,MENU_SETUP_SCRIPT,0xc08490); queue_top_level_menu_messages(h);
     wr_u32(STAGE_CALLBACK,0xc0fcb4); observe(h,MENU_SETUP_CALLBACK,0xc0fcb4,0);
 }
 void select_menu_sound_pair(uint32_t volume,const MenuSetupHooks *h) {

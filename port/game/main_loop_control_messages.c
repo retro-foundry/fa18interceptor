@@ -36,6 +36,10 @@ static MessageWorking consume(const MainControlHooks *h,enum MainControlChild ch
     if(h && h->consume) return h->consume(h->context,child);
     abort();
 }
+static MessageWorking consume_message(const MainControlHooks *h,enum MainControlChild child,MessageWorking work) {
+    if(h && h->consume_values) return h->consume_values(h->context,child,work);
+    return consume(h,child);
+}
 static void byte(const MainControlHooks *h,gaddr a,uint8_t v) { wr_u8(a,v); observe(h,MC_STORE_BYTE,v,0); }
 static void word(const MainControlHooks *h,gaddr a,uint16_t v) { wr_u16(a,v); observe(h,MC_STORE_WORD,v,0); }
 static void longword(const MainControlHooks *h,gaddr a,uint32_t v) { wr_u32(a,v); observe(h,MC_STORE_LONG,v,0); }
@@ -190,8 +194,8 @@ command_event:
     byte(h,MESSAGE_EVENT_CURSOR,cursor); goto restore_live;
 finish_sequence:
     mode=rd_u8(MESSAGE_MODE); observe(h,MC_COMPARE_BYTE,mode,3);
-    if(mode==3) { w=consume(h,MC_ACCEPT_TYPED_CODE); byte(h,MESSAGE_MODE,(uint8_t)(rd_u8(MESSAGE_MODE)|0x80)); return; }
-    byte(h,MESSAGE_MODE,(uint8_t)(mode&0xfd)); w=consume(h,MC_FINISH_SEQUENCE); byte(h,0xc457d5u,0xff); return;
+    if(mode==3) { w=consume_message(h,MC_ACCEPT_TYPED_CODE,w); byte(h,MESSAGE_MODE,(uint8_t)(rd_u8(MESSAGE_MODE)|0x80)); return; }
+    byte(h,MESSAGE_MODE,(uint8_t)(mode&0xfd)); w=consume_message(h,MC_FINISH_SEQUENCE,w); byte(h,0xc457d5u,0xff); return;
 advance_ready:
     flags=rd_u8(MESSAGE_READY); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<=0) return;
     subtract_byte(h,MESSAGE_READY,1); goto restore_live;
@@ -250,8 +254,8 @@ prepare_character:
         }
         if(test_byte(h,MESSAGE_READY)) {
             w.control=secondary_byte(h,0xc457d7u);
-            if(!w.control) { observe(h,MC_SECONDARY_LONG,2,0); w=consume(h,MC_SEQUENCE_TONE); }
-            else { observe(h,MC_SECONDARY_SUB_BYTE,1,0); if((uint8_t)(w.control-1)==0) { observe(h,MC_SECONDARY_LONG,2,0); w=consume(h,MC_SEQUENCE_TONE); } }
+            if(!w.control) { observe(h,MC_SECONDARY_LONG,2,0); w=consume_message(h,MC_SEQUENCE_TONE,w); }
+            else { observe(h,MC_SECONDARY_SUB_BYTE,1,0); if((uint8_t)(w.control-1)==0) { observe(h,MC_SECONDARY_LONG,2,0); w=consume_message(h,MC_SEQUENCE_TONE,w); } }
         }
     }
 draw_character:
@@ -260,7 +264,7 @@ draw_character:
     for(i=0;i<4;++i) {
         if(i==0) { bit(h,w.colour,3); observe(h,MC_PLANE_STYLE,(w.colour&8)?0xbfa:0xb0a,w.style); observe(h,MC_PLANE_ARGUMENT,rd_u32(w.planes),w.offset); }
         else { observe(h,MC_PLANE_ARGUMENT,rd_u32(w.planes+4*i),w.offset); bit(h,w.colour,3-i); observe(h,MC_PLANE_STYLE,(w.colour&(1u<<(3-i)))?0xbfa:0xb0a,w.style); }
-        w=consume(h,(enum MainControlChild)(MC_GLYPH_FIRST+i));
+        w=consume_message(h,(enum MainControlChild)(MC_GLYPH_FIRST+i),w);
     }
     if(!bit(h,rd_u8(MESSAGE_FLAGS),0)) { set_positions(h,&w,w.positions+4); set_text(h,&w,w.text+1); store_cursor(h,w,MESSAGE_LIVE_CURSOR); goto reset_repeat; }
     flags=rd_u8(MESSAGE_READY); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<=0) { set_positions(h,&w,w.positions+4); set_text(h,&w,w.text+1); }
@@ -277,7 +281,7 @@ next_segment:
         if((int8_t)previous>=1) {
             w=load_cursor(h,w,MESSAGE_RESTART_CURSOR); store_cursor(h,w,MESSAGE_LIVE_CURSOR); w.control=secondary_byte(h,0xc457d7u);
             if(w.control) { observe(h,MC_SECONDARY_SUB_BYTE,1,0); if((uint8_t)(w.control-1)!=0) return; }
-            observe(h,MC_SECONDARY_LONG,2,0); consume(h,MC_SEQUENCE_RESTART_TONE); return;
+    observe(h,MC_SECONDARY_LONG,2,0); consume_message(h,MC_SEQUENCE_RESTART_TONE,w); return;
         }
     }
     set_text(h,&w,w.text+1); value=primary_byte(h,w.text); set_text(h,&w,w.text+1); observe(h,MC_PRIMARY_EXT_WORD,(uint16_t)(int16_t)(int8_t)value,0);

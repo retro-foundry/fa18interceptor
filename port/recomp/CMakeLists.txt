@@ -8,6 +8,7 @@ project(fa18_recomp LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 find_package(Python3 REQUIRED COMPONENTS Interpreter)
+include(CTest)
 add_subdirectory(../amiga ${CMAKE_CURRENT_BINARY_DIR}/amiga-compat)
 
 include(FetchContent)
@@ -24,6 +25,14 @@ FetchContent_Declare(SDL2
     GIT_TAG release-2.30.11
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SDL2)
+
+# Native frontend explicitly requested 2026-10-06. Same game sources, independent
+# executable: its link has no Musashi, translation, glue or machine objects.
+option(FA18_NATIVE_ONLY "Build only the native intro/menu runner" OFF)
+add_subdirectory(../native ${CMAKE_CURRENT_BINARY_DIR}/native)
+if(FA18_NATIVE_ONLY)
+    return()
+endif()
 
 set(MUSASHI ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/musashi)
 add_library(fa18_musashi STATIC
@@ -59,7 +68,6 @@ add_executable(fa18_romfree recomp_main.c ../romfree/profile.c)
 target_compile_definitions(fa18_romfree PRIVATE FA18_ROMFREE_MAIN FA18_WITH_SDL SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_romfree PRIVATE fa18_runtime SDL2-static)
 
-include(CTest)
 if(BUILD_TESTING)
     add_executable(fa18_host_alert_test ../../tools/amiga/host_alert_test.c)
     target_link_libraries(fa18_host_alert_test PRIVATE fa18_runtime)

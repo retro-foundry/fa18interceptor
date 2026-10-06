@@ -33,6 +33,8 @@ typedef struct {
     MessageWorking (*consume)(void *context,enum MainControlChild child);
     void (*observe)(void *context,enum MainControlPhase phase,uint32_t value,uint32_t other);
     void *context;
+    /* Native callers pass game values directly, with no register observer. */
+    MessageWorking (*consume_values)(void *context,enum MainControlChild child,MessageWorking work);
 } MainControlHooks;
 void advance_main_loop_control_records(gaddr frame,const MainControlHooks *h);
 void advance_main_loop_message_sequence(MessageWorking work,const MainControlHooks *h);

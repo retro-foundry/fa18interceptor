@@ -1,5 +1,12 @@
 # Plan: removing emulation from the active port
 
+**Latest user direction (2026-10-06):** start `fa18_native` from the existing
+`port/game/` sources, initially intro -> menu. This supersedes the incremental
+adapter-removal strategy below. The native target omits CPU, translation, glue
+and chipset objects. Current milestone details are in `native/README.md`.
+Old runtime percentages below describe the reference runners and do not measure
+the native intro/menu milestone or whole-game completion.
+
 Scope: the playable runners `fa18_recomp` and `fa18_romfree` built by
 `recomp/CMakeLists.txt` and `../scripts/build_recomp.py`. Written 2026-10-06
 against the tree at `9c062b80`. Read `../CURRENT_PORT_HANDOFF.md` and

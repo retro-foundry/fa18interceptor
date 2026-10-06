@@ -21,6 +21,8 @@ typedef struct {
     void *context;
 } MenuSetupHooks;
 void start_top_level_menu(const MenuSetupHooks *hooks);
+/* Shared C0FBE0 message publication, also used by the native frontend. */
+void queue_top_level_menu_messages(const MenuSetupHooks *hooks);
 void select_menu_sound_pair(uint32_t volume,const MenuSetupHooks *hooks);
 void begin_menu_countdown(const MenuSetupHooks *hooks);
 uint16_t filter_cockpit_message(uint16_t code,const MenuSetupHooks *hooks);

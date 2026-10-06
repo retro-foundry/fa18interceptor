@@ -5,6 +5,13 @@ The user's latest instructions override historical plans and proof notes.
 
 ## Active port
 
+- Latest user direction (2026-10-06): `fa18_native` starts a native runtime
+  using the existing `port/game/` sources. First milestone is intro -> menu.
+  Native game composition belongs in `port/game/native/`; the entry/build in
+  `port/native/`; reusable asset loading stays in `port/amiga/`. This explicitly
+  supersedes the earlier prohibition against a new native runner below.
+  Emulator runners remain comparison references. See `port/native/README.md`.
+
 - Implement game behavior in `port/game/`; temporary CPU adapters belong in
   `port/game/glue/`. The actual runners are `fa18_recomp` and `fa18_romfree`,
   built by `port/recomp/CMakeLists.txt` and `scripts/build_recomp.py`.

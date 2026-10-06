@@ -7,4 +7,5 @@ captures/
 *.adf
 *.rom
 __pycache__/
+saves-native/
 E9K_INPUT_V1

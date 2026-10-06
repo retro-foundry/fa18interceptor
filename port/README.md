@@ -1,5 +1,13 @@
 # Active port source ownership
 
+Latest direction (2026-10-06): `fa18_native` reuses the game source with a native
+intro/menu entry, omitting CPU, translations, glue and chipset objects. Build
+with `python ../scripts/build_native.py` from this directory, or
+`python scripts/build_native.py` from the repository root. See
+[`native/README.md`](native/README.md). The historical restriction below is
+superseded for this explicitly requested runner; the deleted implementation
+remains retired.
+
 The active game implementation is `game/`, with temporary CPU adapters in
 `game/glue/`. The playable build is defined in `recomp/CMakeLists.txt` and
 `../scripts/build_recomp.py`; it produces `fa18_recomp` and `fa18_romfree`.

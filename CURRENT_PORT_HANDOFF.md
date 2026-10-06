@@ -1,5 +1,21 @@
 # Current playable port handoff
 
+Latest direction, 2026-10-06: build a native runner from `port/game/`, starting
+with intro -> credits -> pilot entry -> menu. This supersedes the incremental
+emulation-removal work below and the former restriction against a new runner.
+`fa18_native` is owned by `port/native/` and `port/game/native/`; shared loading
+stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
+`port/native/README.md` for scope, source authority, validation and launch.
+The emulator runners remain reference tools. Full native gameplay remains open.
+The first functional intro/menu milestone is implemented: original splash,
+credits and settled menu pixels match source OFF reference frames exactly;
+first-tour callsign editing and 78-byte save/reload pass; SDL dummy presentation
+runs. Native link-map omission check passes. Both reference builds and their
+twelve tests pass. Native settled-screen timing is not frame-parity evidence.
+Next native milestone: make numbered menu selection enter the actual game.
+Audio currently takes the original suppression path. Source data still uses
+checked address-indexed host buffers, pending typed-state migration.
+
 Updated 2026-10-06 after active-runner emulation metering, following the user's source-ownership correction, cleanup and
 explicit instruction to prevent another costly detour. Read this handoff and
 `AGENTS.md` before continuing. This file supersedes earlier resume instructions;
