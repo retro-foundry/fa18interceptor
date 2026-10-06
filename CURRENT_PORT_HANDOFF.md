@@ -108,6 +108,16 @@ gate **0/4**. Next: investigate the parent's source timing boundary before
 extending toward its generated callers; additional leaf retirement alone will
 not fix its live frame mismatch.
 
+The 600-frame timing trace identifies the actual outer caller as active
+`glue_C25B66_step` -> JSR at C25D9E -> C2D408 -> C25DA4. Across 28 calls, OFF
+boundary intervals vary from 10,240 to 20,622 cycles (mean 12,532.57), versus
+ON's 9,520-9,530. Three OFF calls cross frame end, versus two ON. These intervals
+include JSR/return bus settlement, not just child instruction time. Evidence:
+`analysis/emulation_removal_matrix_parent_timing.json/.md`. Recover dynamic
+source access/arithmetic/child timing and event boundaries; do not tune the
+fixed charge to an observed average or restore reference execution as gameplay.
+This bounded discovery changes no axis and does not repeat the full suite.
+
 ## What went wrong and must not recur
 
 About fourteen hours of elapsed work on 2026-10-05 expanded a separate gameplay

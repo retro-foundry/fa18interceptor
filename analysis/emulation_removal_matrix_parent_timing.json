@@ -1,0 +1,632 @@
+{
+  "schema": 1,
+  "scope": "600-frame isolated demo01 timing discovery; not a full replay or a behavior change",
+  "runner_sha256": "163500d00623155668b15bc1bfeccbfc221da307be84ea76b04bf86601eb35e9",
+  "inputs": {
+    "captures\\native\\demo01\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "captures\\native\\demo01\\input.fa18in": "91d0dd0defbace4253fb307e6c5bef458af4cf86defc850d13f19068b3159657",
+    "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "command": [
+    "build/recomp/fa18_recomp.exe",
+    "--state",
+    "captures/native/demo01/state.bin",
+    "--rom",
+    "local/system/kick13.rom",
+    "--input",
+    "captures/native/demo01/input.fa18in",
+    "--frames",
+    "600",
+    "--ports",
+    "MODE"
+  ],
+  "on_only": "C2D408",
+  "trace_environment": {
+    "FA18_BOUNDARY_TRACE": "build/matrix-caller-MODE.csv",
+    "FA18_BOUNDARY_RANGE": "C25D9E-C25DA8"
+  },
+  "measured_boundary": {
+    "call_pc": "C25D9E",
+    "callee": "C2D408",
+    "return_pc": "C25DA4",
+    "includes": "JSR, child call and return-target bus settlement"
+  },
+  "modes": {
+    "off": {
+      "calls": [
+        {
+          "record": "00C46184",
+          "entry_frame": 439,
+          "entry_line": 257,
+          "entry_cycle": 62498134,
+          "return_frame": 439,
+          "return_line": 279,
+          "return_cycle": 62508380,
+          "cycles": 10246
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 445,
+          "entry_line": 257,
+          "entry_cycle": 63350920,
+          "return_frame": 445,
+          "return_line": 280,
+          "return_cycle": 63361160,
+          "cycles": 10240
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 446,
+          "entry_line": 38,
+          "entry_cycle": 63393480,
+          "return_frame": 446,
+          "return_line": 64,
+          "return_cycle": 63405378,
+          "cycles": 11898
+        },
+        {
+          "record": "00C47D84",
+          "entry_frame": 446,
+          "entry_line": 75,
+          "entry_cycle": 63410212,
+          "return_frame": 446,
+          "return_line": 98,
+          "return_cycle": 63420722,
+          "cycles": 10510
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 451,
+          "entry_line": 257,
+          "entry_cycle": 64203410,
+          "return_frame": 451,
+          "return_line": 279,
+          "return_cycle": 64213658,
+          "cycles": 10248
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 452,
+          "entry_line": 33,
+          "entry_cycle": 64243920,
+          "return_frame": 452,
+          "return_line": 57,
+          "return_cycle": 64254972,
+          "cycles": 11052
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 457,
+          "entry_line": 257,
+          "entry_cycle": 65056128,
+          "return_frame": 457,
+          "return_line": 280,
+          "return_cycle": 65066368,
+          "cycles": 10240
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 458,
+          "entry_line": 33,
+          "entry_cycle": 65096736,
+          "return_frame": 458,
+          "return_line": 59,
+          "return_cycle": 65108464,
+          "cycles": 11728
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 463,
+          "entry_line": 257,
+          "entry_cycle": 65908678,
+          "return_frame": 463,
+          "return_line": 279,
+          "return_cycle": 65918934,
+          "cycles": 10256
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 464,
+          "entry_line": 33,
+          "entry_cycle": 65949300,
+          "return_frame": 464,
+          "return_line": 58,
+          "return_cycle": 65960310,
+          "cycles": 11010
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 469,
+          "entry_line": 257,
+          "entry_cycle": 66761282,
+          "return_frame": 469,
+          "return_line": 279,
+          "return_cycle": 66771526,
+          "cycles": 10244
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 470,
+          "entry_line": 33,
+          "entry_cycle": 66801912,
+          "return_frame": 470,
+          "return_line": 59,
+          "return_cycle": 66813556,
+          "cycles": 11644
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 475,
+          "entry_line": 264,
+          "entry_cycle": 67617000,
+          "return_frame": 475,
+          "return_line": 286,
+          "return_cycle": 67627246,
+          "cycles": 10246
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 476,
+          "entry_line": 41,
+          "entry_cycle": 67658022,
+          "return_frame": 476,
+          "return_line": 66,
+          "return_cycle": 67669152,
+          "cycles": 11130
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 557,
+          "entry_line": 285,
+          "entry_cycle": 79279122,
+          "return_frame": 557,
+          "return_line": 312,
+          "return_cycle": 79291226,
+          "cycles": 12104
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 558,
+          "entry_line": 94,
+          "entry_cycle": 79334414,
+          "return_frame": 558,
+          "return_line": 124,
+          "return_cycle": 79348042,
+          "cycles": 13628
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 563,
+          "entry_line": 310,
+          "entry_cycle": 80143056,
+          "return_frame": 564,
+          "return_line": 40,
+          "return_cycle": 80162516,
+          "cycles": 19460
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 564,
+          "entry_line": 109,
+          "entry_cycle": 80193672,
+          "return_frame": 564,
+          "return_line": 136,
+          "return_cycle": 80206034,
+          "cycles": 12362
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 570,
+          "entry_line": 269,
+          "entry_cycle": 81118900,
+          "return_frame": 570,
+          "return_line": 295,
+          "return_cycle": 81131006,
+          "cycles": 12106
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 571,
+          "entry_line": 70,
+          "entry_cycle": 81170900,
+          "return_frame": 571,
+          "return_line": 100,
+          "return_cycle": 81184536,
+          "cycles": 13636
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 576,
+          "entry_line": 269,
+          "entry_cycle": 81971512,
+          "return_frame": 576,
+          "return_line": 295,
+          "return_cycle": 81983618,
+          "cycles": 12106
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 577,
+          "entry_line": 66,
+          "entry_cycle": 82021620,
+          "return_frame": 577,
+          "return_line": 93,
+          "return_cycle": 82033990,
+          "cycles": 12370
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 582,
+          "entry_line": 312,
+          "entry_cycle": 82843842,
+          "return_frame": 583,
+          "return_line": 44,
+          "return_cycle": 82864464,
+          "cycles": 20622
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 583,
+          "entry_line": 123,
+          "entry_cycle": 82900210,
+          "return_frame": 583,
+          "return_line": 153,
+          "return_cycle": 82913890,
+          "cycles": 13680
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 589,
+          "entry_line": 299,
+          "entry_cycle": 83832666,
+          "return_frame": 590,
+          "return_line": 30,
+          "return_cycle": 83852666,
+          "cycles": 20000
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 590,
+          "entry_line": 99,
+          "entry_cycle": 83884048,
+          "return_frame": 590,
+          "return_line": 126,
+          "return_cycle": 83896442,
+          "cycles": 12394
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 596,
+          "entry_line": 269,
+          "entry_cycle": 84813800,
+          "return_frame": 596,
+          "return_line": 296,
+          "return_cycle": 84825908,
+          "cycles": 12108
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 597,
+          "entry_line": 76,
+          "entry_cycle": 84868204,
+          "return_frame": 597,
+          "return_line": 106,
+          "return_cycle": 84881848,
+          "cycles": 13644
+        }
+      ],
+      "total_calls": 28,
+      "min_cycles": 10240,
+      "mean_cycles": 12532.57142857143,
+      "max_cycles": 20622,
+      "cross_frame_calls": 3,
+      "trace_sha256": "fee6bf5a052038e3c300104049c579ab63f4a4378102bfdb7b6da12085f91c7b"
+    },
+    "on": {
+      "calls": [
+        {
+          "record": "00C46184",
+          "entry_frame": 439,
+          "entry_line": 257,
+          "entry_cycle": 62498134,
+          "return_frame": 439,
+          "return_line": 278,
+          "return_cycle": 62507654,
+          "cycles": 9520
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 445,
+          "entry_line": 257,
+          "entry_cycle": 63350812,
+          "return_frame": 445,
+          "return_line": 278,
+          "return_cycle": 63360332,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 446,
+          "entry_line": 36,
+          "entry_cycle": 63392632,
+          "return_frame": 446,
+          "return_line": 57,
+          "return_cycle": 63402152,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47D84",
+          "entry_frame": 446,
+          "entry_line": 68,
+          "entry_cycle": 63407006,
+          "return_frame": 446,
+          "return_line": 88,
+          "return_cycle": 63416526,
+          "cycles": 9520
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 451,
+          "entry_line": 256,
+          "entry_cycle": 64203270,
+          "return_frame": 451,
+          "return_line": 277,
+          "return_cycle": 64212790,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 452,
+          "entry_line": 31,
+          "entry_cycle": 64243030,
+          "return_frame": 452,
+          "return_line": 52,
+          "return_cycle": 64252550,
+          "cycles": 9520
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 457,
+          "entry_line": 257,
+          "entry_cycle": 65056082,
+          "return_frame": 457,
+          "return_line": 278,
+          "return_cycle": 65065602,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 458,
+          "entry_line": 32,
+          "entry_cycle": 65095984,
+          "return_frame": 458,
+          "return_line": 53,
+          "return_cycle": 65105504,
+          "cycles": 9520
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 463,
+          "entry_line": 257,
+          "entry_cycle": 65908558,
+          "return_frame": 463,
+          "return_line": 278,
+          "return_cycle": 65918080,
+          "cycles": 9522
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 464,
+          "entry_line": 31,
+          "entry_cycle": 65948444,
+          "return_frame": 464,
+          "return_line": 52,
+          "return_cycle": 65957966,
+          "cycles": 9522
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 469,
+          "entry_line": 257,
+          "entry_cycle": 66761324,
+          "return_frame": 469,
+          "return_line": 278,
+          "return_cycle": 66770844,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 470,
+          "entry_line": 32,
+          "entry_cycle": 66801228,
+          "return_frame": 470,
+          "return_line": 53,
+          "return_cycle": 66810748,
+          "cycles": 9520
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 475,
+          "entry_line": 257,
+          "entry_cycle": 67613810,
+          "return_frame": 475,
+          "return_line": 278,
+          "return_cycle": 67623330,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 476,
+          "entry_line": 32,
+          "entry_cycle": 67654082,
+          "return_frame": 476,
+          "return_line": 53,
+          "return_cycle": 67663608,
+          "cycles": 9526
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 557,
+          "entry_line": 285,
+          "entry_cycle": 79279122,
+          "return_frame": 557,
+          "return_line": 306,
+          "return_cycle": 79288642,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 558,
+          "entry_line": 88,
+          "entry_cycle": 79331504,
+          "return_frame": 558,
+          "return_line": 108,
+          "return_cycle": 79341026,
+          "cycles": 9522
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 563,
+          "entry_line": 299,
+          "entry_cycle": 80138090,
+          "return_frame": 564,
+          "return_line": 3,
+          "return_cycle": 80147610,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 564,
+          "entry_line": 91,
+          "entry_cycle": 80185880,
+          "return_frame": 564,
+          "return_line": 112,
+          "return_cycle": 80195406,
+          "cycles": 9526
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 570,
+          "entry_line": 268,
+          "entry_cycle": 81118866,
+          "return_frame": 570,
+          "return_line": 289,
+          "return_cycle": 81128386,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 571,
+          "entry_line": 63,
+          "entry_cycle": 81167746,
+          "return_frame": 571,
+          "return_line": 84,
+          "return_cycle": 81177276,
+          "cycles": 9530
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 576,
+          "entry_line": 268,
+          "entry_cycle": 81971464,
+          "return_frame": 576,
+          "return_line": 289,
+          "return_cycle": 81980984,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 577,
+          "entry_line": 60,
+          "entry_cycle": 82018968,
+          "return_frame": 577,
+          "return_line": 81,
+          "return_cycle": 82028494,
+          "cycles": 9526
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 582,
+          "entry_line": 312,
+          "entry_cycle": 82843786,
+          "return_frame": 583,
+          "return_line": 3,
+          "return_cycle": 82853306,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 583,
+          "entry_line": 107,
+          "entry_cycle": 82892838,
+          "return_frame": 583,
+          "return_line": 128,
+          "return_cycle": 82902360,
+          "cycles": 9522
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 589,
+          "entry_line": 269,
+          "entry_cycle": 83819176,
+          "return_frame": 589,
+          "return_line": 290,
+          "return_cycle": 83828696,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 590,
+          "entry_line": 63,
+          "entry_cycle": 83867616,
+          "return_frame": 590,
+          "return_line": 84,
+          "return_cycle": 83877138,
+          "cycles": 9522
+        },
+        {
+          "record": "00C46184",
+          "entry_frame": 596,
+          "entry_line": 269,
+          "entry_cycle": 84813902,
+          "return_frame": 596,
+          "return_line": 290,
+          "return_cycle": 84823422,
+          "cycles": 9520
+        },
+        {
+          "record": "00C47584",
+          "entry_frame": 597,
+          "entry_line": 69,
+          "entry_cycle": 84865266,
+          "return_frame": 597,
+          "return_line": 90,
+          "return_cycle": 84874792,
+          "cycles": 9526
+        }
+      ],
+      "total_calls": 28,
+      "min_cycles": 9520,
+      "mean_cycles": 9521.57142857143,
+      "max_cycles": 9530,
+      "cross_frame_calls": 2,
+      "trace_sha256": "992e71eedbd5f7408f3112acec4fa1e2daa1913570dfaa9552fc769a6fb768ea"
+    }
+  },
+  "original_fixed_child_charge": 9500,
+  "conclusion": "The original child boundary has variable cost and frame/event crossings. A replacement constant based on measured averages is not source-derived timing.",
+  "remaining_requirements": [
+    "Preserve original ordered accesses and dynamic arithmetic/callee timing.",
+    "Preserve event and frame boundaries, including interrupts.",
+    "Keep direct game C ownership and prior source call-result correctness."
+  ],
+  "progress": {
+    "last_full_suite_raw_cpu_percent": 38.40106459907289,
+    "full_suite_rerun": false,
+    "axis_delta_percent_points": 0,
+    "memory_percent": 0,
+    "chipset_percent": 0,
+    "boot_percent": 0,
+    "deletable_subsystems": 0
+  }
+}
