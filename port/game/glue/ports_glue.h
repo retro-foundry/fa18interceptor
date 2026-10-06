@@ -435,6 +435,7 @@ int glue_C30918_step(void);
 
 /* batch 39: cockpit messages */
 int glue_C11BFC(void);
+int glue_C11BFC_step(void);
 
 /* not registered: no recording calls it yet */
 int glue_C345A0(void);

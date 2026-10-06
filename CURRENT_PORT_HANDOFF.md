@@ -11,6 +11,16 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
+Latest timing prerequisite: C11BFC's fixed 3,000-cycle message adapter is
+now source-timed. All 256 instructions / 8,192 DMA oracle cases match; each
+800-frame isolated recording matches OFF drawing/RAM and every shadow/sandbox
+call (42/15/74, none incomplete). Both builds and twelve CTests pass. Combined
+ON still differs at demo frame 316; fresh short subdivisions isolate C30EAA's
+fixed image-blit adapter as another reproducer. Address that real rendering
+path next. No full replay rerun: raw CPU **38.4011%** is the cached measurement,
+new full-suite delta unmeasured; memory/chipset/boot **0%**, gate **0/4**.
+Evidence: `analysis/emulation_removal_message_timing_batch.json/.md`.
+
 The stores-icon prerequisite batch replaces the active `C30A00` / `C30AE2`
 fixed-cycle adapters with source-derived steps in
 `port/game/glue/glue_hud_stores_step.c`. Runner entry -> machine frame -> recomp

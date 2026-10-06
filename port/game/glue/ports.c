@@ -476,7 +476,7 @@ const FA18Port fa18_ports[] = {
     {0xC332FE, glue_C332FE, "draw_view_marker", 0, 0, glue_C332FE_complete_step, 0xC33370, 1, 0xC332FC, glue_C332FE_owns},
     {0xC30918, glue_C30918, "draw_gauge_bar", 0, 0, glue_C30918_step, 0xC309A2, 0, 0xC30916},
     /* batch 39: cockpit messages */
-    {0xC11BFC, glue_C11BFC, "update_message", 3000},
+    {0xC11BFC, glue_C11BFC, "update_message", 0, 0, glue_C11BFC_step, 0xC12098},
     /* batch 41: plane-side test */
     {0xC27456, glue_C27456, "faces_all_behind", 0, 0, glue_C27456_complete_step, 0xC27504, 0, 0xC27450, glue_C27456_owns},
     /* batch 42: direction tracking */

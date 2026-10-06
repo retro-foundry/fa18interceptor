@@ -375,3 +375,18 @@ RGB/RAM hashes, all profile counters and runner stats match the pre-diagnostic
 batch; their completed captures were reused after repairing length handling.
 This batch changes no removal axis: raw CPU **38.4011%**, memory/chipset/boot
 **0%**, deletion gate **0/4**, removal delta **0 percentage points**.
+
+### Cockpit message timing prerequisite
+
+The real C0EFD4 frame-update step calls C11BFC at C0F12C. Its fixed
+3,000-cycle charge independently reproduces the demo frame-316 index mismatch.
+The live registry now uses source-timed message boundaries. All 256 original
+instructions / 8,192 DMA oracle cases match. Isolated 800-frame demo/carrier/
+crash drawing and RAM match OFF; all 42/15/74 shadow and sandbox calls pass.
+Both toolchain builds and all twelve CTests pass.
+
+Combined ON still differs at frame 316; a second 320-frame subdivision isolates
+C30EAA. This repair removes a timing error, not a CPU/guest-bus dependency.
+No full suite rerun: last measured raw CPU **38.4011%** is cached, new full-suite
+delta unmeasured; accepted CPU share unset; memory/chipset/boot **0%**, gate
+**0/4**. Evidence: `../analysis/emulation_removal_message_timing_batch.json/.md`.
