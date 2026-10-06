@@ -32,5 +32,20 @@ void open_gameport_device(gaddr frame,const InputDisplayHooks *h);
 void set_gameport_controller_type(gaddr frame,const InputDisplayHooks *h);
 void configure_gameport_events(gaddr frame,const InputDisplayHooks *h);
 void load_setup_text_resources(gaddr frame,const InputDisplayHooks *h);
+/* C1612C continuation. A zero-initialized state starts a new publication.
+ * await_child returns zero while a service is pending; consume runs exactly
+ * once after it completes. NULL retains the blocking reference contract. */
+enum OuterDisplayPhase {
+    OUTER_WAIT_PUBLICATION, OUTER_PUBLISH, OUTER_TEST_ACTIVITY,
+    OUTER_WAIT_ACTIVITY, OUTER_WAIT_BLIT, OUTER_TEST_COUNT,
+    OUTER_STATIC_PALETTE, OUTER_STATIC_FIRST, OUTER_STATIC_SECOND,
+    OUTER_DYNAMIC_PALETTE, OUTER_DYNAMIC_FIRST, OUTER_DYNAMIC_SECOND,
+    OUTER_DECREMENT_ACTIVITY, OUTER_TEST_CLEAR, OUTER_CLEAR_WAIT,
+    OUTER_CLEAR_PALETTE, OUTER_SWAP_PAGE, OUTER_COMPLETE
+};
+typedef struct { enum OuterDisplayPhase phase; } OuterDisplayState;
+int advance_outer_display(gaddr frame,const InputDisplayHooks *h,
+    OuterDisplayState *state,
+    int (*await_child)(void *context,enum InputDisplayChild child));
 void synchronize_outer_display(gaddr frame,const InputDisplayHooks *h);
 #endif

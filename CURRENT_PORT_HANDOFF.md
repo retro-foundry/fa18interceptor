@@ -131,14 +131,18 @@ view/record and reached rendering comparisons pass. Rough startup wiring now
 99%, excluding recorded-flight acceptance. The probe then reaches postflight
 MC_STAGE_SETUP/C0F4A6 free_all_voices, still missing from native setup. See
 `analysis/native_map_visibility_milestone.md`. No full sealed replay repeated.
-Postflight voice cleanup/event-pair/message/redraw children now connect to
-existing source owners; completion/message callbacks are bound. The native
-8200 probe reaches C11788 and its entry/wait/release cases match source RAM.
-Reset remains waiting on activity count C45899=0x28, consumed by C1612C's
-outer display/palette sequence. Integrate that source owner with resumable PAL
-presentation and two drawing pages next; do not invent a counter decrement.
-See `analysis/native_postflight_entry_milestone.md`. Startup remains roughly
-99%; full reset and recorded-flight acceptance remain open.
+C1612C outer display now resumes across host PAL waits, publishing the completed
+page while C2F558 selects the next draw page. Its activity counter decrements
+only after the original four palette waits. The native 7400/7404 pair preserves
+all gameplay/plane state while activity goes 16 -> 15. By tick 8200, activity is
+zero, C11788 has completed one reset and C10DAE/record updates have resumed.
+128 resumable source cases, 1024 blocking CPU/RAM contracts, three postflight
+source cases and the affected native/reference checks pass. See
+`analysis/native_outer_display_milestone.md`. This bounded display/reset batch
+is complete (100% of that milestone); startup remains roughly 99%, and full
+frame ownership/recorded-flight acceptance remain open. No full replay repeated.
+Next: complete C0EFD4/input ownership, remaining HUD/record children and C0DA38
+alternate presentation. Exact input-callback/beam timing remains unproven.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Source sound requests now consume the original mute/absent-voice gates; native

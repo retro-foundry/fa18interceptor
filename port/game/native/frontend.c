@@ -12,6 +12,7 @@
 #include "menu.h"
 #include "flight.h"
 #include "clock.h"
+#include "display.h"
 #include "../audio.h"
 #include "../text.h"
 #include "../../romfree/placement.h"
@@ -31,6 +32,7 @@ enum { PLANE_TABLE=0x1000,PLAYER_LOG=0x2000,PLANE_FIRST=0x10000,PLANE_SECOND=0x4
 static int fail(char *error,size_t cap,const char *why) { if(cap) snprintf(error,cap,"Native startup: %s",why); return 0; }
 void native_frontend_clear_text(void) {
     memset(native_storage_range(PLANE_FIRST,4*PLANE_BYTES),0,4*PLANE_BYTES);
+    memset(native_storage_range(PLANE_SECOND,4*PLANE_BYTES),0,4*PLANE_BYTES);
 }
 static void select_screen(NativeFrontend *game,enum NativeScreen screen,uint16_t message,unsigned mode) {
     native_frontend_clear_text(); reset_message_sequence(); game->screen=screen; game->screen_ticks=0;
@@ -113,6 +115,11 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     for(unsigned i=0;i<4;++i) wr_u32(PLANE_TABLE+4*i,PLANE_FIRST+i*PLANE_BYTES);
     for(unsigned page=0;page<2;++page) for(unsigned i=0;i<4;++i)
         wr_u32(PAGE0_PLANE_TABLE+16*page+4*i,(page?PLANE_SECOND:PLANE_FIRST)+i*PLANE_BYTES);
+    /* C2FD08 clears source work buffers of 2000 longs. Bank B's fifth
+     * entry is POLY_MASK_PLANE, assigned below. The other work buffers
+     * are separate from the two pages and recording buffers. */
+    for(unsigned bank=0;bank<2;++bank) for(unsigned i=0;i<5;++i)
+        wr_u32((bank?RENDER_BUFFERS_B:RENDER_BUFFERS_A)+4*i,0x50000+(bank*5+i)*RENDER_BUFFER_LONGS*4);
     wr_u32(POLY_MASK_PLANE,0x30000); /* Separate 40-byte rows, host-owned mask. */
     wr_u32(CIRCLE_SPANS_PTR,0x33000); /* 127-radius symmetric span workspace. */
     wr_u8(0xc4588au,1); wr_u8(0xc457d7u,2); /* source audio suppression */
@@ -164,6 +171,10 @@ void native_frontend_event(NativeFrontend *game,int key,int down) {
 }
 void native_frontend_tick(NativeFrontend *game) {
     native_storage_bind(&game->storage); ++game->ticks; ++game->screen_ticks;
+    native_clock_set(game->ticks);
+    if(game->display_pending && !native_display_resume(game)) {
+        native_display_read_pixels(game); return;
+    }
     if(game->screen==NATIVE_SPLASH) {
         /* C0E53C's $A000 busy-loop iterations (C0E78A), nominal 68000
          * instruction timing converted once to PAL ticks. No CPU executes.
@@ -183,13 +194,12 @@ void native_frontend_tick(NativeFrontend *game) {
         wr_u16(PLAYER_LOG+4,(uint16_t)(rd_u16(PLAYER_LOG+4)+1));
     } else if(game->screen==NATIVE_CALLSIGN && game->name_finished) native_frontend_start_menu(game);
     native_menu_tick(game);
-    native_clock_set(game->ticks);
+    if(rd_u8(MODE_SELECT)==1 &&
+       (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP))
+        native_display_begin_frame(game);
     const int complete=native_flight_tick(game);
     /* C32CEE is C0EFD4's final child, after the flight/HUD work. */
     if(flight && complete) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
-    for(unsigned y=0;y<256;++y) for(unsigned x=0;x<320;++x) {
-        uint8_t index=0;
-        for(unsigned p=0;p<4;++p) if(rd_u8(PLANE_FIRST+p*PLANE_BYTES+y*40+x/8)&(0x80u>>(x&7))) index|=(uint8_t)(1u<<(3-p));
-        game->indices[y*320+x]=index;
-    }
+    if(game->display_drawing && complete) native_display_finish_frame(game);
+    native_display_read_pixels(game);
 }

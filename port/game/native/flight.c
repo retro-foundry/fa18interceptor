@@ -137,7 +137,11 @@ static void stage(void *context,gaddr routine) {
     else if(routine==0xc1078a) finish_menu_outcome(&outcome);
     else if(routine==0xc10970) follow_menu_return_context(NULL);
     else if(routine==0xc109ac) complete_menu_return_after_countdown(NULL);
-    else if(routine==0xc11788) advance_postflight_completion(NULL);
+    else if(routine==0xc11788) {
+        ++game->postflight_callbacks;
+        advance_postflight_completion(NULL);
+        if(rd_u32(STAGE_CALLBACK)!=routine) ++game->postflight_resets;
+    }
     else if(routine==0xc11830) restart_postflight_completion(NULL);
     else if(routine==0xc11872) expire_postflight_completion(NULL);
     else if(routine==0xc118a0) queue_postflight_failure(NULL);

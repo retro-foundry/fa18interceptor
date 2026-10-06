@@ -104,8 +104,14 @@ Native continuation milestones (functional scope, not instruction counts):
   probe reaches C11788, and three original entry/wait/release cases pass. See
   `../analysis/native_postflight_entry_milestone.md`. Batch complete; startup
   wiring remains roughly 99%, excluding full reset/recorded-flight acceptance.
-- Next reached dependency: C1612C outer display/palette activity wait and
-  two-page presentation. C11788 currently waits on its activity counter 0x28.
+- Connected: resumable C1612C display publication/palette activity and C2F558
+  page selection. Four PAL waits decrement activity once without repeating
+  gameplay; the native pullback now resets through C11788 and resumes C10DAE.
+  128 resumable source cases, 1024 blocking CPU/RAM contracts and three
+  postflight source cases pass, as do the affected native checks and twelve
+  reference tests. See `../analysis/native_outer_display_milestone.md`.
+  Display/reset milestone 100% for this demonstrated path; startup remains
+  roughly 99%, excluding complete frame timing and recorded-run acceptance.
 - Next: complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.

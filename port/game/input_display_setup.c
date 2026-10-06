@@ -133,21 +133,54 @@ static void publish_outer_pair(gaddr frame,const InputDisplayHooks *h) {
     index=word_d0(h,frame-2); observe(h,IDS_EXT_LONG,(uint32_t)(int32_t)(int16_t)index,0); observe(h,IDS_SHIFT_LONG,2,0);
     offset=(uint32_t)(int32_t)(int16_t)index<<2; a=address(h,0,offset); a=address(h,0,a+0xc182c2); longword(h,0xc18232,rd_u32(a));
 }
-void synchronize_outer_display(gaddr frame,const InputDisplayHooks *h) {
+int advance_outer_display(gaddr frame,const InputDisplayHooks *h,
+    OuterDisplayState *state,int (*await_child)(void *,enum InputDisplayChild)) {
     uint8_t count; uint16_t page,status;
-    consume(h,IDS_WAIT_PUBLICATION); publish_outer_pair(frame,h); consume(h,IDS_LOAD_VIEW);
-    if(test_byte(h,ACTIVITY_COUNT)) {
-        consume(h,IDS_WAIT_ACTIVITY); consume(h,IDS_WAIT_BLIT);
-        for(;;) {
-            count=byte_d0(h,ACTIVITY_COUNT); observe(h,IDS_TEST_BYTE,count,0); if((int8_t)count<=0) break;
-            consume(h,IDS_LOAD_STATIC_PALETTE); consume(h,IDS_WAIT_STATIC_FIRST); consume(h,IDS_WAIT_STATIC_SECOND);
-            consume(h,IDS_LOAD_DYNAMIC_PALETTE); consume(h,IDS_WAIT_DYNAMIC_FIRST); consume(h,IDS_WAIT_DYNAMIC_SECOND);
+    /* Each continuation boundary follows a complete source child. Nothing
+     * before a pending wait, including palette loads, is executed twice. */
+#define SERVICE(child,next) do { \
+    if(await_child && !await_child(h->context,child)) return 0; \
+    consume(h,child); state->phase=next; \
+} while(0)
+    for(;;) switch(state->phase) {
+    case OUTER_WAIT_PUBLICATION: SERVICE(IDS_WAIT_PUBLICATION,OUTER_PUBLISH); break;
+    case OUTER_PUBLISH:
+        publish_outer_pair(frame,h); consume(h,IDS_LOAD_VIEW);
+        state->phase=OUTER_TEST_ACTIVITY; break;
+    case OUTER_TEST_ACTIVITY:
+        state->phase=test_byte(h,ACTIVITY_COUNT)?OUTER_WAIT_ACTIVITY:OUTER_TEST_CLEAR; break;
+    case OUTER_WAIT_ACTIVITY: SERVICE(IDS_WAIT_ACTIVITY,OUTER_WAIT_BLIT); break;
+    case OUTER_WAIT_BLIT: SERVICE(IDS_WAIT_BLIT,OUTER_TEST_COUNT); break;
+    case OUTER_TEST_COUNT:
+        count=byte_d0(h,ACTIVITY_COUNT); observe(h,IDS_TEST_BYTE,count,0);
+        state->phase=(int8_t)count>0?OUTER_STATIC_PALETTE:OUTER_SWAP_PAGE; break;
+    case OUTER_STATIC_PALETTE: SERVICE(IDS_LOAD_STATIC_PALETTE,OUTER_STATIC_FIRST); break;
+    case OUTER_STATIC_FIRST: SERVICE(IDS_WAIT_STATIC_FIRST,OUTER_STATIC_SECOND); break;
+    case OUTER_STATIC_SECOND: SERVICE(IDS_WAIT_STATIC_SECOND,OUTER_DYNAMIC_PALETTE); break;
+    case OUTER_DYNAMIC_PALETTE: SERVICE(IDS_LOAD_DYNAMIC_PALETTE,OUTER_DYNAMIC_FIRST); break;
+    case OUTER_DYNAMIC_FIRST: SERVICE(IDS_WAIT_DYNAMIC_FIRST,OUTER_DYNAMIC_SECOND); break;
+    case OUTER_DYNAMIC_SECOND: SERVICE(IDS_WAIT_DYNAMIC_SECOND,OUTER_DECREMENT_ACTIVITY); break;
+    case OUTER_DECREMENT_ACTIVITY:
             count=byte_d0(h,ACTIVITY_COUNT); observe(h,IDS_SUB_D0_BYTE,1,0); byte(h,ACTIVITY_COUNT,(uint8_t)(count-1));
-        }
-    } else if(test_byte(h,TABLE_CLEAR_MODE)) {
+        state->phase=OUTER_TEST_COUNT; break;
+    case OUTER_TEST_CLEAR:
+        state->phase=OUTER_SWAP_PAGE;
+        if(!test_byte(h,TABLE_CLEAR_MODE)) break;
         count=byte_d0(h,TABLE_CLEAR_MODE); observe(h,IDS_SUB_D0_BYTE,1,0); byte(h,TABLE_CLEAR_MODE,(uint8_t)(count-1));
         status=word_d0(h,0xc458d2); observe(h,IDS_BIT_TEST,status,8);
-        if(!(status&0x100)) { consume(h,IDS_WAIT_CLEAR_PALETTE); consume(h,IDS_LOAD_CLEAR_PALETTE); }
+        if(!(status&0x100)) state->phase=OUTER_CLEAR_WAIT;
+        break;
+    case OUTER_CLEAR_WAIT: SERVICE(IDS_WAIT_CLEAR_PALETTE,OUTER_CLEAR_PALETTE); break;
+    case OUTER_CLEAR_PALETTE: SERVICE(IDS_LOAD_CLEAR_PALETTE,OUTER_SWAP_PAGE); break;
+    case OUTER_SWAP_PAGE:
+        page=word_d0(h,DRAW_PAGE); full(h,1,1); observe(h,IDS_SUB_D1_WORD,page,0); word(h,DRAW_PAGE,(uint16_t)(1-page));
+        state->phase=OUTER_COMPLETE; break;
+    case OUTER_COMPLETE: return 1;
+    default: abort();
     }
-    page=word_d0(h,DRAW_PAGE); full(h,1,1); observe(h,IDS_SUB_D1_WORD,page,0); word(h,DRAW_PAGE,(uint16_t)(1-page));
+#undef SERVICE
+}
+void synchronize_outer_display(gaddr frame,const InputDisplayHooks *h) {
+    OuterDisplayState state={0};
+    (void)advance_outer_display(frame,h,&state,NULL);
 }

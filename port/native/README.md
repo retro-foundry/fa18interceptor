@@ -162,13 +162,17 @@ Negative terrain visibility indices now resolve original image words and retain
 C2AF40's exact source selector. `check_map_limits.py` passes 384 source cases and
 the repaired tick-7294 terrain checkpoint. `check_strips.py` also checks a short
 native takeoff: ground flag, height and source bookkeeping, plus original
-view/record comparisons. The later postflight setup/restart remains open;
+view/record comparisons. The subsequent display/reset integration is documented below;
 recorded-flight acceptance is not established. See
 [`../../analysis/native_map_visibility_milestone.md`](../../analysis/native_map_visibility_milestone.md).
 
-Postflight cleanup and reset-wait callbacks now execute. The short pullback
-run continues to C11788, with three source entry/reset cases passing. Reset is
-still waiting for C1612C outer display activity and page-presentation ownership.
-`check_postflight_entry.py` documents this frontier; it does not accept a full
-reset or recorded run. See
-[`../../analysis/native_postflight_entry_milestone.md`](../../analysis/native_postflight_entry_milestone.md).
+Outer display C1612C and draw-page selection C2F558 now execute in Free Flight.
+Publication/palette waits resume on host PAL ticks without repeating physics,
+HUD or text. The source activity loop decrements once after four waits; the
+short pullback completes one postflight reset and resumes C10DAE. Both host
+pages render through the selected source plane table. `check_postflight_entry.py`
+checks native wait cadence/reset plus 128 resumable and three postflight source
+cases. The blocking owner passes 1024 complete CPU/RAM contracts; affected
+native checks and twelve reference CTests pass. Exact beam/input timing and
+full recorded-flight acceptance remain open. See
+[`../../analysis/native_outer_display_milestone.md`](../../analysis/native_outer_display_milestone.md).

@@ -1,6 +1,7 @@
 #ifndef FA18_NATIVE_FRONTEND_H
 #define FA18_NATIVE_FRONTEND_H
 #include "storage.h"
+#include "../input_display_setup.h"
 #include "../../amiga/ilbm.h"
 enum NativeScreen { NATIVE_SPLASH,NATIVE_CREDITS,NATIVE_ENLISTMENT,NATIVE_CALLSIGN,NATIVE_MENU,
     NATIVE_MODE_INTRO,NATIVE_MISSIONS,NATIVE_PILOT_LOG,NATIVE_SCENE_SETUP };
@@ -20,6 +21,10 @@ typedef struct {
     int flight_timer_pending;
     uint16_t flight_saved_tick;
     unsigned timer_yields;
+    OuterDisplayState display;
+    int display_pending,display_drawing,display_wait_pending;
+    unsigned display_wait_tick,displayed_page,display_publications,display_yields;
+    unsigned postflight_callbacks,postflight_resets;
     char config_path[4096];
 } NativeFrontend;
 int native_frontend_open(NativeFrontend *game,const char *adf,const char *save_dir,char *error,size_t capacity);
