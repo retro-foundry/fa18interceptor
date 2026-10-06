@@ -18,6 +18,7 @@
 #include "../view.h"
 #include "../menu_context_finish.h"
 #include "../audio.h"
+#include "../messages.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -81,6 +82,10 @@ static void dynamics(gaddr record) {
         }
         case DY_RECORD_CONTROLS:
             update_dynamics_record_input(record,w->primary); break;
+        case DY_DESCENT_ALERT: case DY_RECORD_ALERT: case DY_COLLISION_MESSAGE:
+            post_message((uint16_t)w->primary);
+            /* C25704 returns the posted message's classification byte. */
+            w->primary&=0xffffff00u; break;
         case DY_RECORD_SELECTOR: {
             IndexedRecordWork selected={0};update_dynamics_selected_record(&selected);
             w->primary=rd_u16(selected.record+0x6e);

@@ -2,7 +2,7 @@
  * C1ED48 is the source alias. C07846 extends flat geometry with paired edges.
  * The existing draw_stream.c owns command geometry and host raster submission.
  * C1ED4C selects aircraft/cockpit streams; C1F000 transforms record hulls.
- * TODO(port): positive shadow strips C1F584 and expiry transition C22ADE.
+ * TODO(port): expiry transition C22ADE.
  * Reached missing children fail explicitly, never substitute geometry. */
 #include "model.h"
 #include "frontend.h"
@@ -15,6 +15,7 @@
 #include "../polygon_clip.h"
 #include "../projection.h"
 #include "../vertex_tail.h"
+#include "../model_strips.h"
 #include "../history_projection.h"
 #include "../cockpit_script.h"
 #include "../faces.h"
@@ -450,7 +451,14 @@ static int draw_model(gaddr parameters,gaddr frame,uint16_t camera_flags) {
         if(output==WORKSPACES+6 && reject_first && !first_visible(WORKSPACES)) return 0;
     } while(--count>0);
     if(flat && (flags&4) && rd_s8(bound+8)>1) flat_extensions(&input,&output,frame);
-    if(!flat && (flags&8) && word(&input)>=0) missing("shadow strips C1F584",input-2);
+    if(!flat && (flags&8)) {
+        int16_t origin[3];
+        for(int k=0;k<3;++k) {
+            int32_t displacement=(int32_t)(rd_u32(frame-0x20+4*k)+rd_u32(SHADOW_OFFSET_X+4*k));
+            origin[k]=(int16_t)shift_long(displacement,8-difference);
+        }
+        transform_model_strips(input,output,origin,rd_s16(frame-8));
+    }
     return control(parameters,frame);
 }
 int native_model_draw(gaddr parameters,gaddr frame) {return draw_model(parameters,frame,0);}

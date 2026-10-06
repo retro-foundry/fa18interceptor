@@ -115,6 +115,14 @@ flagged-only controls and range-dependent child order follow original source.
 checks and twelve reference CTests pass. The C0DA38 alternate display route
 now fails explicitly pending its page-presentation contract. See
 `analysis/native_scene_ordering_milestone.md`. Startup remains roughly 98%.
+Native pullback now renders positive C1F584-C1F6F8 paired model strips, with
+source interpolation, reverse lanes and wrapping arithmetic. Reached C25704
+record warning messages are connected. 96 strip cases and a 7150-tick runner
+checkpoint pass; its 29 reached descriptors include a positive strip group.
+View/record comparisons also pass at 7150 and 7280. See
+`analysis/native_model_strips_milestone.md`. The same pullback next fails the
+wide terrain pass at tick 7294, height 1800; takeoff remains unproven. Resolve
+that reached path next. Startup estimate remains roughly 98%.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Source sound requests now consume the original mute/absent-voice gates; native

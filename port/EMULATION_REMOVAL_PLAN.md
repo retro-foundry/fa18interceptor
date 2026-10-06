@@ -87,6 +87,13 @@ Native continuation milestones (functional scope, not instruction counts):
   three renderer checkpoints, setup/pause/resume and twelve reference tests
   pass. See `../analysis/native_scene_ordering_milestone.md`. This batch is
   complete; startup estimate remains about 98%, excluding full-flight parity.
+- Connected: reached C1F584-C1F6F8 model strip interpolation and C25704
+  dynamics warning messages. 96 strip cases and an actual 7150-tick pullback
+  checkpoint pass, including positive strip rendering and view/record parity.
+  See `../analysis/native_model_strips_milestone.md`. Batch complete; startup
+  wiring remains roughly 98%, with takeoff unproven.
+- Next reached dependency: wide terrain pass fails at native tick 7294 in the
+  pullback probe (height 1800). Resolve its source contract before flight claims.
 - Next: complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.

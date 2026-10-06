@@ -142,7 +142,7 @@ through typed C locals/arguments and existing audio consumers. The native run
 executes 2454 owner calls; 720 source cases match memory and 1469 exact sound
 requests. Native sample loading/output remains unfinished. See
 [`../../analysis/native_control_actions_milestone.md`](../../analysis/native_control_actions_milestone.md).
-Full flight, positive shadow strips and the record-expiry
+Full flight and the record-expiry
 transition remain unfinished. Setup correctness is separate from frame cadence
 and recorded gameplay acceptance.
 
@@ -152,3 +152,9 @@ Bias/flagged/range gates and stage markers therefore use the same source
 composition as C0EFD4. Alternate page presentation C0DA38 remains unconnected
 and fails explicitly if reached. See
 [`../../analysis/native_scene_ordering_milestone.md`](../../analysis/native_scene_ordering_milestone.md).
+
+Positive paired model strips C1F584-C1F6F8 now render during the native pullback
+probe. `check_strips.py` checks 96 source cases and actual reached descriptor,
+plane and record comparisons. Dynamics warning publication uses C25704.
+The next reached failure is a wide terrain pass at tick 7294; takeoff is not
+accepted. See [`../../analysis/native_model_strips_milestone.md`](../../analysis/native_model_strips_milestone.md).

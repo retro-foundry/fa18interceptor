@@ -186,6 +186,7 @@ static uint8_t *file_bytes(const char *name,size_t *size) {
 }
 static gaddr oracle_parameters;
 static int16_t circle_x,circle_y,circle_radius;
+static unsigned strip_groups;
 static int original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     REG_A[0]=oracle_parameters;
@@ -196,6 +197,7 @@ static int original(uint32_t pc) {
     for(unsigned step=0;step<2000000;++step) {
         uint16_t opcode;
         if(REG_PC==0xc70000u && REG_A[7]==0xc7ff04u) { wait_blitter(); return 1; }
+        if(REG_PC==0xc1f598u) ++strip_groups; /* Positive strip's initial point. */
         int cycles_before=GET_CYCLES();
         opcode=rd_u16(REG_PC); REG_PPC=REG_PC; REG_IR=opcode; REG_PC+=2;
         m68ki_instruction_jump_table[opcode](); USE_CYCLES(CYC_INSTRUCTION[opcode]);
@@ -375,5 +377,6 @@ int main(int argc,char **argv) {
     visit_followup_placements(&followups);
     if(!scene_children()) return 1;
     printf("%u descriptors compared, %u failures\n",calls,failures);
+    printf("%u positive model strip groups exercised in original rendering\n",strip_groups);
     return failures?1:0;
 }
