@@ -14,7 +14,14 @@ Native continuation milestones (functional scope, not instruction counts):
   diagnostic observations, not acceptance blockers on their own. One independent
   demo checkpoint at game tick 222 matches both 320x200 gameplay pages and
   player motion/pose/matrices. See `../analysis/native_gameplay_acceptance.md`.
-  Broader phase-aligned comparisons remain; full gameplay acceptance is **0/3**.
+  A consecutive independent 128-update window now matches player motion,
+  controls and phases **128/128 (100% of that state scope)**; complete drawing
+  page pairs match **53/128 (41.4% of that window)**. First failure, tick 273,
+  is target-info ALT/HDG cycling from C25312's seconds-based timer. The retained
+  original prefix is unchanged in final RAM/registers. Capture ranges and the
+  window checker are complete; connected gameplay cadence remains to fix.
+  These percentages do not measure whole-game completion; full acceptance
+  remains **0/3**. Reuse original windows, allowing faster preflight/loading.
 
 - Complete: C1718E's entire PAL input callback now uses host counter samples,
   with original wrap/asymmetric deltas, clamping, saved counters, tick increment

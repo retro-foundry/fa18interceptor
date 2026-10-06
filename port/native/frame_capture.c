@@ -2,9 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void write_data(const NativeFrontend *game,const char *prefix,const char *suffix) {
+static void write_data(const NativeFrontend *game,const NativeFrameCapture *capture,const char *suffix) {
     char path[4096];
-    if(snprintf(path,sizeof path,"%s.%s.dat",prefix,suffix)>=(int)sizeof path) {
+    int length=capture->count==1
+        ? snprintf(path,sizeof path,"%s.%s.dat",capture->prefix,suffix)
+        : snprintf(path,sizeof path,"%s.%u.%s.dat",capture->prefix,
+                   capture->iteration+capture->captured,suffix);
+    if(length<0 || length>=(int)sizeof path) {
         fputs("Native frame capture path is too long\n",stderr);abort();
     }
     FILE *file=fopen(path,"wb");
@@ -18,13 +22,14 @@ static void write_data(const NativeFrontend *game,const char *prefix,const char 
 void native_frame_capture(NativeFrontend *game,enum NativeFrameBoundary boundary,
                           uint16_t saved_tick,void *context) {
     NativeFrameCapture *capture=context;
-    if(capture->complete || capture->replay->iteration!=capture->iteration) return;
+    if(capture->complete || capture->replay->iteration!=capture->iteration+capture->captured) return;
     if(boundary==NATIVE_FRAME_BODY_BEGIN) {
         if(capture->begun) {fputs("Native frame body began twice\n",stderr);abort();}
         capture->begun=1;capture->before_tick=game->ticks;capture->saved_tick=saved_tick;
-        write_data(game,capture->prefix,"before");
+        write_data(game,capture,"before");
     } else if(capture->begun) {
         capture->after_tick=game->ticks;
-        write_data(game,capture->prefix,"after");capture->complete=1;
+        write_data(game,capture,"after");capture->begun=0;
+        capture->complete=++capture->captured==capture->count;
     }
 }

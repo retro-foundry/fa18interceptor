@@ -27,11 +27,11 @@ int main(int argc,char **argv) {
     unsigned frames=0,events=0,next=0,iterations=0; HostEvent host_events[1024]; char error[256];
     const char *input=NULL;NativeReplay loop={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
-    NativeFrameCapture capture={0};capture.replay=&loop;
+    NativeFrameCapture capture={0};capture.replay=&loop;capture.count=1;
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-capture ITERATION PREFIX]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-capture FIRST[+COUNT] PREFIX]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -43,7 +43,12 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--wav")) wave=argv[++i];
         else if(i+2<argc && !strcmp(argv[i],"--frame-capture")) {
             char *end;unsigned long n=strtoul(argv[++i],&end,10);
-            if(*end || !n || n>10000000) {fputs("Invalid frame capture iteration\n",stderr);goto done;}
+            unsigned long count=1;
+            if(*end=='+') count=strtoul(end+1,&end,10);
+            if(*end || !n || !count || n>10000000 || count>10000000-n+1) {
+                fputs("Invalid frame capture iteration/range (FIRST[+COUNT])\n",stderr);goto done;
+            }
+            capture.count=(unsigned)count;
             capture.iteration=(unsigned)n;capture.prefix=argv[++i];
         }
         else { fprintf(stderr,"Unknown/incomplete option: %s\n",argv[i]); goto done; }
@@ -139,7 +144,8 @@ int main(int argc,char **argv) {
                 loop.iteration,iterations,loop.started?"":" before main-menu anchor");goto done;
     }
     if(capture.prefix && !capture.complete) {
-        fprintf(stderr,"Native frame capture %u did not complete%s\n",capture.iteration,
+        fprintf(stderr,"Native frame capture %u did not complete (%u/%u captured)%s\n",capture.iteration,
+                capture.captured,capture.count,
                 capture.begun?" before the run ended":" on a connected flight frame");goto done;
     }
     result=0; goto done;

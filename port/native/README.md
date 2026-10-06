@@ -20,6 +20,22 @@ remain unaccepted. Reuse the existing original checkpoint:
 python tools/native/check_gameplay_checkpoint.py --source build/native-flight/reference-demo2401.dat --iteration 2364
 ```
 
+The first independent consecutive gameplay window checks 128 updates: all
+128 player-motion/control/phase comparisons match, while 53 complete two-page
+drawing comparisons match. Remaining differences are the seconds-driven target
+information line (ALT/HDG/SPD cycling), first at tick 273. Gameplay timer/display
+cadence remains open. Reuse the retained original prefix:
+
+```powershell
+python tools/native/check_gameplay_window.py --source-prefix build/native-flight/gameplay-window-source --source-first 2401 --native-first 2364 --count 128 --out build/native-flight/gameplay-window-comparison
+```
+
+The checker retains all failures in `comparison.json` and currently exits 1.
+`--frame-capture FIRST+COUNT PREFIX` exports consecutive actual before/after
+boundaries as `PREFIX.ITERATION.before.dat` / `.after.dat`; its existing single
+iteration form keeps the old filenames. Reference-only `FA18_LOOP_DUMP` accepts
+`FIRST+COUNT:PREFIX` for original boundaries. No capture feeds native behavior.
+
 The default is an SDL window with native stereo sound. `--wav PATH` captures
 the same PCM, including in headless runs. A key acknowledges the credits. A first-time
 pilot can enter a callsign, edit with Backspace, and confirm with Return.

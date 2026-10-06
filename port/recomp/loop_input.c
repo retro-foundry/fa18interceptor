@@ -129,22 +129,42 @@ static void emit(FA18Machine *m, char kind, int a, int b, int c, int d) {
     else fprintf(record_out, "%ld %ld %c %d %d\n", iteration, frame, kind, a, b);
 }
 
-/* FA18_LOOP_DUMP=N:path writes Chip and Slow RAM as iteration N starts
- * (before its input), for comparing runs at the same point in the game. */
+/* FA18_LOOP_DUMP=N:path writes RAM as iteration N starts, before input.
+ * N+COUNT:prefix retains consecutive boundaries as prefix.ITERATION.dat.
+ * Diagnostic output never seeds game state or changes machine scheduling. */
 static void dump_if_asked(FA18Machine *m) {
     static long at = -1;
+    static long count = 1;
     static const char *path;
     if (at == -1) {
         const char *v = getenv("FA18_LOOP_DUMP");
         at = -2;
-        if (v && strchr(v, ':')) { at = atol(v); path = strchr(v, ':') + 1; }
+        if (v) {
+            char *end;
+            long first=strtol(v,&end,10);
+            if (*end=='+') count=strtol(end+1,&end,10);
+            if (*end!=':' || first<=0 || count<=0 || first>10000000 || count>10000000-first+1) {
+                fputs("Invalid FA18_LOOP_DUMP (FIRST[+COUNT]:PATH)\n",stderr);exit(2);
+            }
+            at=first;path=end+1;
+        }
     }
-    if (at == iteration && path) {
-        FILE *f = fopen(path, "wb");
-        if (f) {
-            fwrite(m->chip, 1, FA18_CHIP_SIZE, f);
-            fwrite(m->slow, 1, FA18_SLOW_SIZE, f);
-            fclose(f);
+    if (path && iteration>=at && iteration-at<count) {
+        char numbered[4096];
+        const char *target=path;
+        if (count!=1) {
+            int length=snprintf(numbered,sizeof numbered,"%s.%ld.dat",path,iteration);
+            if (length<0 || length>=(int)sizeof numbered) {
+                fputs("FA18_LOOP_DUMP path is too long\n",stderr);exit(2);
+            }
+            target=numbered;
+        }
+        FILE *f = fopen(target, "wb");
+        if (!f) {perror(target);exit(2);}
+        int written=fwrite(m->chip,1,FA18_CHIP_SIZE,f)==FA18_CHIP_SIZE &&
+                    fwrite(m->slow,1,FA18_SLOW_SIZE,f)==FA18_SLOW_SIZE;
+        if (fclose(f) || !written) {
+            fprintf(stderr,"Cannot write FA18_LOOP_DUMP: %s\n",target);exit(2);
         }
     }
 }

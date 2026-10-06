@@ -23,6 +23,44 @@ def integer(data, address, size):
     return int.from_bytes(span(data, address, size), 'big')
 
 
+def compare_gameplay(source, native):
+    """Compare fixed phase alignment, complete source pages and named flight fields."""
+    assert len(source) in (0x100000, 0x100048), 'expected original RAM export'
+    assert len(native) == 0x100000, 'expected native RAM export'
+    differences = []
+    for address, size in ((0xC1820C, 4), (0xC458DA, 2), (0xC4566C, 2), (0xC458DE, 2),
+                          (0xC45776, 4), (0xC4582E, 3)):
+        original, actual = span(source, address, size), span(native, address, size)
+        if original != actual:
+            differences.append(f'boundary/control {address:06X}: {original.hex()} != {actual.hex()}')
+    # Geometry comes from the original ViewPort, never a similarity crop.
+    width = integer(source, 0xC1822A + 0x18, 2)
+    height = integer(source, 0xC1822A + 0x1A, 2)
+    assert (width, height) == (320, 200), (width, height)
+    plane_bytes = ((width + 15) // 16) * 2 * height
+    for page in range(2):
+        for plane in range(4):
+            address = 0xC4566E + 16 * page + 4 * plane
+            original = span(source, integer(source, address, 4), plane_bytes)
+            actual = span(native, integer(native, address, 4), plane_bytes)
+            changed = [i for i, (a, b) in enumerate(zip(original, actual)) if a != b]
+            if changed:
+                first = changed[0]
+                differences.append(f'page {page} plane {plane}: {len(changed)} differing bytes; '
+                                   f'first byte {first} (x={first % 40 * 8}, y={first // 40}) '
+                                   f'{original[first]:02X} != {actual[first]:02X}')
+    # Explicit motion/pose/matrix scope; flags, counters and async voices are separate.
+    for name, begin, end in (('position and motion', 0x0C, 0x26), ('rates', 0x38, 0x4A),
+                             ('orientation', 0x66, 0x74), ('matrices', 0x80, 0xA4)):
+        address = 0xC46184 + begin
+        original, actual = span(source, address, end - begin), span(native, address, end - begin)
+        if original != actual:
+            changed = [f'+{begin + i:02X}:{a:02X}!={b:02X}'
+                       for i, (a, b) in enumerate(zip(original, actual)) if a != b]
+            differences.append(f'{name}: {", ".join(changed)}')
+    return differences
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe')
@@ -48,28 +86,10 @@ def main():
         stats = json.loads(result.stdout)
         assert stats['frame_capture_complete'] and not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
         native = Path(str(prefix) + '.before.dat').read_bytes()
-        for address, size in ((0xC1820C, 4), (0xC458DA, 2), (0xC4566C, 2), (0xC458DE, 2)):
-            assert span(source, address, size) == span(native, address, size), f'gameplay boundary {address:06X} differs'
-        # Geometry comes from the source ViewPort, not an image similarity crop.
-        width = integer(source, 0xC1822A + 0x18, 2)
-        height = integer(source, 0xC1822A + 0x1A, 2)
-        assert (width, height) == (320, 200), (width, height)
-        # Native host pages have spare rows and no graphics.library ViewPort.
-        # Compare every drawing byte in the source's active gameplay geometry.
-        plane_bytes = ((width + 15) // 16) * 2 * height
-        for page in range(2):
-            for plane in range(4):
-                address = 0xC4566E + 16 * page + 4 * plane
-                original = span(source, integer(source, address, 4), plane_bytes)
-                actual = span(native, integer(native, address, 4), plane_bytes)
-                differences = sum(a != b for a, b in zip(original, actual))
-                assert not differences, f'page {page} plane {plane}: {differences} differing bytes'
-        # Named motion/pose/matrix fields, not full ABI or asynchronous state.
-        for name, begin, end in (('position and motion', 0x0C, 0x26), ('rates', 0x38, 0x4A),
-                                 ('orientation', 0x66, 0x74), ('matrices', 0x80, 0xA4)):
-            assert span(source, 0xC46184 + begin, end - begin) == span(native, 0xC46184 + begin, end - begin), name
+        differences = compare_gameplay(source, native)
+        assert not differences, '\n'.join(differences)
         print(f'Aligned gameplay checkpoint: game tick {stats["frame_saved_tick"]}, native update {args.iteration}; '
-              f'both {width}x{height} four-plane pages and player motion/pose/matrices match original bytes')
+              'both 320x200 four-plane pages and player motion/pose/matrices match original bytes')
     print('One independent-run gameplay checkpoint accepted; complete sequence and time alignment remain unverified')
 
 

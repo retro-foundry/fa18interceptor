@@ -14,8 +14,16 @@ may differ and loading can be faster. Copper fade remains excluded. The old
 C0EFEA/update-2364, both game tick 222, match both 320x200 gameplay pages and
 player motion/pose/matrices byte for byte. `check_gameplay_checkpoint.py`
 reuses the original dump. One independent checkpoint is accepted; complete
-gameplay-sequence acceptance remains 0/3. Next: extend phase-aligned gameplay
-comparisons rather than matching preflight duration.
+gameplay-sequence acceptance remains 0/3. The first consecutive independent
+window now has 128/128 matching player motion/controls/phases, and 53/128
+matching complete drawing page pairs. At tick 273 the original target-info
+line has switched ALT -> HDG while native still shows ALT. Other drawing bytes
+match. C25312's seconds-driven INFO_REQUEST/C459C4 cycling exposes different
+gameplay pacing (18,000 vs 8,560 ms across this window). Optional native/source
+capture ranges and `check_gameplay_window.py` retain every difference for reuse.
+The one bounded original prefix agrees with existing final RAM/registers.
+Next: correct connected gameplay timer/poll/display cadence from source,
+without guessed speed factors, capture-fed clocks or intro timing requirements.
 Latest PAL input batch: complete C1718E now runs through host counter samples,
 including signed delta wrap, bounded controls and input ticks before its
 existing viewport/fade tail. C17104/C1712C/C17456 initialize original -960..960

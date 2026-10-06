@@ -4,7 +4,7 @@
 typedef struct {
     NativeReplay *replay;
     const char *prefix;
-    unsigned iteration,before_tick,after_tick;
+    unsigned iteration,count,captured,before_tick,after_tick;
     uint16_t saved_tick;
     int begun,complete;
 } NativeFrameCapture;
