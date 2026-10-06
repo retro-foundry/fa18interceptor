@@ -38,8 +38,12 @@ Lost-target selection cleanup now executes after the HUD and before timers.
 The source debug page mark and numeric overlays execute under their original
 gates after the counter and before the final message. All non-stack RAM agrees
 in 320 original caller-range cases. Stores icons, grid/record markers and
-scene-position labels are the three remaining identified frame owners; three
-of six are connected. This is a scope inventory, not whole-game progress.
+scene-position labels were the remaining identified frame owners. C2B3C2
+scene labels are now connected on both frame branches, using original scene
+rows and the source point/number layout. 256 complete source comparisons pass,
+including 41 visible number cases. Four of six identified frame owners are
+connected; stores and grid/record markers remain. This is a scope inventory,
+not whole-game progress.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
 `hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;

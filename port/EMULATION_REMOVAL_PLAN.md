@@ -9,6 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: connect C2B3C2 scene-position labels on both original frame-loop
+  branches, using original scene data and native C2ECA8/C32A44 children.
+  256 full source comparisons (41 visible number cases), 128 legacy cases,
+  the unchanged full native demo and 12 reference contracts pass. See
+  `../analysis/native_frame_labels_milestone.md`. **4/6 (about 67%)** of the
+  identified missing frame owners are connected. C30A00 stores and C2B564
+  grid/record markers remain. This is a connection inventory, not equal effort
+  or whole-game completion. Recorded frame parity stays **0/3 accepted**;
+  startup lead 37 ticks; Copper fade excluded.
+
 - Complete: connect C12242 lost-selection cleanup and C2F49C/C31B76 debug
   overlays at their original frame positions. 64 cleanup and 256 gated-overlay
   caller-range cases match all non-stack RAM; native demo, crash/re-entry,

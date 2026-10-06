@@ -7,6 +7,16 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest labels batch: C2B3C2 now runs after the counter on the drawing branch
+and at the idle join, before overlays/final message. It uses original scene
+data with connected native projection and C32A44 number layout. All non-stack
+RAM agrees in 256 complete source cases, including 41 visible number cases;
+128 legacy complete-call cases also pass. The 4,892-update native demo's final
+RAM is unchanged, and 12 reference contracts pass. See
+`analysis/native_frame_labels_milestone.md`. Four of six identified missing
+frame owners are connected (about 67% of that inventory). Stores icons and
+grid/record markers remain; full frame parity is 0/3 accepted and startup lead
+37 ticks. Copper fade remains excluded.
 Latest frame-tail batch: C12242 lost-selection cleanup now runs after the HUD,
 before timers. C2F49C page marks and C31B76 numeric overlays run after the
 counter under C0F386's original gates, before the final message. 64 cleanup

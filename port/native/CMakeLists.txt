@@ -4,6 +4,7 @@ add_executable(fa18_native main.c replay.c
     ../game/native/audio_assets.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
     ../game/input_display_setup.c ../game/render_page.c
     ../game/native/frame_tail.c ../game/hud_stream.c
+    ../game/native/frame_labels.c ../game/flight_markers.c
     ../game/native/input.c ../game/pending_input.c ../game/input_events.c
     ../game/command_dispatch.c ../game/view_commands.c ../game/player_input.c
     ../game/native/clock.c ../game/main_loop_timers.c

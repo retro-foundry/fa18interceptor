@@ -1,4 +1,4 @@
-"""Check connected native cleanup/overlay owners without replaying the original game."""
+"""Check native cleanup, overlays and scene labels without an original game replay."""
 import argparse
 import json
 from pathlib import Path
@@ -12,9 +12,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe')
     args = parser.parse_args()
-    oracle = ROOT / 'build/recomp/native_frame_tail_oracle.exe'
-    subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(oracle.relative_to(ROOT)),
-                    '--main', 'tools/native/native_frame_tail_oracle.c'], cwd=ROOT, check=True)
+    oracles = []
+    for name in ('frame_tail', 'frame_labels'):
+        oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
+        subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(oracle.relative_to(ROOT)),
+                        '--main', f'tools/native/native_{name}_oracle.c'], cwd=ROOT, check=True)
+        oracles.append(oracle)
     with tempfile.TemporaryDirectory(prefix='native-frame-tail-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         warmup = work / 'intro.e9k'
@@ -31,9 +34,10 @@ def main():
         # new cleanup and before the counter/overlay/final-message tail.
         marker = int.from_bytes(data.read_bytes()[0xC45AD4-0xC00000+0x80000:0xC45AD6-0xC00000+0x80000], 'big')
         assert stats['timer_pending'] and marker == 0x1D4, (stats, marker)
-        subprocess.run([str(oracle), str(data)], cwd=ROOT, check=True, timeout=20)
+        for oracle in oracles:
+            subprocess.run([str(oracle), str(data)], cwd=ROOT, check=True, timeout=20)
         print(f'{stats["hud_frames"]} native HUD passes reached source selection cleanup before yielding')
-    print('Native frame cleanup and gated overlays pass; grid/scene labels and frame parity remain open')
+    print('Native cleanup/overlays/scene labels pass; stores/grid markers and frame parity remain open')
 
 
 if __name__ == '__main__':

@@ -33,6 +33,7 @@ typedef struct {
     MarkerState (*restored)(void *context);
     gaddr (*stack)(void *context);
     void *context;
+    MarkerState (*consume_values)(void *context,enum MarkerChild child,MarkerState values);
 } MarkerHooks;
 void transform_marker_point(MarkerState w,const MarkerHooks *h); /* C2AFFA */
 void draw_scene_position_labels(MarkerState w,const MarkerHooks *h); /* C2B3C2 */

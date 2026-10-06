@@ -7,6 +7,7 @@
 #include "clock.h"
 #include "input.h"
 #include "frame_tail.h"
+#include "frame_labels.h"
 #include "../main_loop_timers.h"
 #include "../render_buffers.h"
 #include "../cockpit.h"
@@ -228,6 +229,7 @@ static int finish_frame_clock(NativeFrontend *game) {
         request_cockpit_redraw(); /* C082B8; C10B90 is the aircraft reset. */
     if(!rd_u8(ORIGIN_GATE_A)) wr_u16(UPDATE_TICK,(uint16_t)(rd_u16(UPDATE_TICK)+1));
     game->flight_timer_pending=0;
+    native_frame_scene_labels(); /* C0F380, after the counter. */
     native_frame_debug_overlay();
     return 1;
 }
@@ -272,6 +274,7 @@ int native_flight_tick(NativeFrontend *game) {
     }
     update_control_actions(NULL,NULL); /* C12950 idle branch at C0F370. */
     ++game->control_frames;
+    native_frame_scene_labels(); /* The idle branch joins at C0F380 too. */
     native_frame_debug_overlay();
     return 1;
 }
