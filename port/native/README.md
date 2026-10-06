@@ -176,3 +176,12 @@ cases. The blocking owner passes 1024 complete CPU/RAM contracts; affected
 native checks and twelve reference CTests pass. Exact beam/input timing and
 full recorded-flight acceptance remain open. See
 [`../../analysis/native_outer_display_milestone.md`](../../analysis/native_outer_display_milestone.md).
+
+Free Flight key presses/releases now queue into the original C0F3C4 input
+owner before stage/view/record work. C16EAE/C16BF2/C16C56 polling and complete
+C1AD74/C1AC28 dispatch preserve recorder drains and command publication/clearing.
+`check_input.py` compares 144 original input/command cases and four native
+wait/press/release checkpoints. Headless counters expose `input_passes`,
+`input_events` and `input_queued`. Physical gameport acquisition, modifier
+timing and inherited countermeasure arguments remain open. See
+[`../../analysis/native_input_milestone.md`](../../analysis/native_input_milestone.md).

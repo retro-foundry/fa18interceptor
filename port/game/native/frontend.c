@@ -13,6 +13,7 @@
 #include "flight.h"
 #include "clock.h"
 #include "display.h"
+#include "input.h"
 #include "../audio.h"
 #include "../text.h"
 #include "../../romfree/placement.h"
@@ -140,6 +141,10 @@ const char *native_frontend_screen(const NativeFrontend *game) {
 void native_frontend_key(NativeFrontend *game,int key) {
     native_storage_bind(&game->storage);
     if(key>='a' && key<='z') key-=32;
+    if(rd_u8(MODE_SELECT)==1 &&
+       (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP)) {
+        native_input_enqueue(game,key,1);return;
+    }
     if(game->screen==NATIVE_CREDITS) {
         /* C11624 copies an existing callsign into message 2. */
         native_frontend_enlist(game);
@@ -163,6 +168,10 @@ void native_frontend_event(NativeFrontend *game,int key,int down) {
         unsigned mask=1u<<(key-303);
         if(down) game->shift_keys|=mask; else game->shift_keys&=~mask;
         wr_u8(KEY_STATE,(uint8_t)(game->shift_keys!=0)); return;
+    }
+    if(rd_u8(MODE_SELECT)==1 &&
+       (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP)) {
+        native_input_enqueue(game,key,down);return;
     }
     if(down) native_frontend_key(game,key);
     else if(game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG

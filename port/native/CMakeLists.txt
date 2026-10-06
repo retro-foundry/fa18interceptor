@@ -2,6 +2,8 @@ add_executable(fa18_native main.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/display.c
     ../game/input_display_setup.c ../game/render_page.c
+    ../game/native/input.c ../game/pending_input.c ../game/input_events.c
+    ../game/command_dispatch.c ../game/view_commands.c ../game/player_input.c
     ../game/native/clock.c ../game/main_loop_timers.c
     ../game/control_actions.c ../game/update_sequence.c
     ../game/scene_placements.c ../game/draw_stream.c ../game/active_planes.c
@@ -90,5 +92,8 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                 --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_postflight_entry
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_postflight_entry.py
+                --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_input
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_input.py
                 --runner $<TARGET_FILE:fa18_native>)
 endif()

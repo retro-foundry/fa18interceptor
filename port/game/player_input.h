@@ -13,6 +13,8 @@ enum { STICK_UP = 0x10, STICK_DOWN = 0x20, STICK_LEFT = 0x08, STICK_RIGHT = 0x04
 
 /* Read the joystick in port 2 and latch its directions. */
 void read_joystick(void);
+/* C16F1C's game-owned latch logic after the platform samples JOY1DAT. */
+void latch_joystick_input(uint16_t directions);
 
 /* $C1BA86: request a cockpit redraw and set LINE_LAST_ROW for VIEW_MODE
  * (modes 5-7: $B3; 3-4 and 8-9, 12 up: $A7; others $90); then queue key

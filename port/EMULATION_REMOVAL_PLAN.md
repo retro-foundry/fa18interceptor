@@ -112,6 +112,14 @@ Native continuation milestones (functional scope, not instruction counts):
   reference tests. See `../analysis/native_outer_display_milestone.md`.
   Display/reset milestone 100% for this demonstrated path; startup remains
   roughly 99%, excluding complete frame timing and recorded-run acceptance.
+- Connected: source C0F3C4 pending-input owner and C1AD74/C1AC28 dispatchers.
+  Host key presses/releases queue through source polling, recorder draining,
+  command publication and clearing before record updates. 144 original-RAM
+  cases, four native wait/press/release checkpoints, affected gameplay checks,
+  frontend/menu and twelve reference tests pass. See
+  `../analysis/native_input_milestone.md`. Keyboard/source-owner milestone
+  100%; physical gameport acquisition, modifier timing and countermeasure
+  inherited arguments remain open. No whole-game percentage is inferred.
 - Next: complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.

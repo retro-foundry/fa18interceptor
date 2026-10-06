@@ -21,6 +21,10 @@ typedef struct {
     void (*consume)(void *context,enum CommandDispatchChild child);
     void (*observe)(void *context,enum CommandDispatchPhase phase,uint32_t value);
     void *context;
+    /* Native consumers need the selected action's arguments, including an
+     * event byte changed by the selection owner. CPU adapters already have
+     * these values in their caller state and can leave this unset. */
+    void (*prepare_action)(void *context,const CommandRequest *request);
 } CommandDispatchHooks;
 /* Complete original owners, including shared actions and every exit. */
 void dispatch_keyboard_command(uint32_t raw,const CommandDispatchHooks *hooks);

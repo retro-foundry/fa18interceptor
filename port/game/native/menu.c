@@ -14,6 +14,10 @@
 #include "../stages.h"
 #include "../flight_commands.h"
 #include "../player_input.h"
+#include "../command_dispatch.h"
+#include "../view.h"
+#include "../cockpit.h"
+#include "../messages.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -34,7 +38,7 @@ void native_menu_initialize(void) {
 static uint32_t mode_changed(void *context) {
     (void)context;
     play_status_tone(); /* C3318E, including its TONE_MUTE/source voice gates. */
-    return 0;
+    return 2; /* C3318E publishes tone kind 2 in D0 before its mute gates. */
 }
 unsigned native_menu_selected_mode(const NativeFrontend *game) {
     (void)game; return rd_u8(MODE_SELECT);
@@ -53,17 +57,37 @@ static FlightCommandResult flight_key_child(void *context,enum FlightCommandChil
     case FLIGHT_Y_UP: set_stick_y(STICK_UP);break;
     case FLIGHT_Y_DOWN: set_stick_y(STICK_DOWN);break;
     case FLIGHT_Y_RELEASE: set_stick_y(0);break;
-    case FLIGHT_X_RIGHT: set_stick_x(STICK_RIGHT);break;
-    case FLIGHT_X_LEFT: set_stick_x(STICK_LEFT);break;
+    /* Historical child names: C1B558 supplies $08; C1B55C supplies $04. */
+    case FLIGHT_X_RIGHT: set_stick_x(STICK_LEFT);break;
+    case FLIGHT_X_LEFT: set_stick_x(STICK_RIGHT);break;
     case FLIGHT_X_RELEASE: set_stick_x(0);break;
     case FLIGHT_THROTTLE_RELEASE: case FLIGHT_THROTTLE_MODE_RELEASE:
         reset_throttle_input_state();break;
+    case FLIGHT_SPACE_PRESS: dispatch_space_command_effect();break;
+    case FLIGHT_SPACE_RELEASE: set_event_bit_and_clear_command_word_bit();break;
+    case FLIGHT_THROTTLE_MODE: case FLIGHT_HOOK: case FLIGHT_WEAPON_ENABLE:
+    case FLIGHT_WEAPON_MODE: case FLIGHT_GEAR: case FLIGHT_NEXT_TARGET:
+    case FLIGHT_RADAR_RANGE: case FLIGHT_TARGET: case FLIGHT_ECM:
+        play_status_tone_outside_context();
+        return (FlightCommandResult){rd_u8(CONTEXT_SELECT)?request->raw_event:2,0};
+    case FLIGHT_HOOK_SOUND: case FLIGHT_WEAPON_SOUND:
+        post_message((uint16_t)request->raw_event);
+        return (FlightCommandResult){request->raw_event&0xffffff00u,0};
     default: fprintf(stderr,"native flight key child unavailable: %u\n",(unsigned)child);abort();
     }
     return (FlightCommandResult){request->raw_event,0};
 }
-void native_menu_key(NativeFrontend *game,int key,int down) {
+static void flight_arguments(void *context,enum FlightCommandPhase phase,
+                             uint32_t value,uint32_t limit,gaddr address) {
+    CommandRequest *arguments=context;
+    (void)limit;(void)address;
+    if(phase==FLIGHT_SOUND_SWAP) arguments->raw_event=value;
+    else if(phase==FLIGHT_SOUND_WORD)
+        arguments->raw_event=(arguments->raw_event&0xffff0000u)|(uint16_t)value;
+}
+unsigned native_menu_raw_key(int key,int down) {
     unsigned raw=0xff;
+    if(key>='a' && key<='z') key-=32;
     if(key>='1' && key<='9') raw=(unsigned)(key-'0');
     else if(key=='0') raw=10;
     else if(key>=282 && key<=291) raw=(unsigned)(key-282+0x50); /* E9K SDL1 F1-F10 */
@@ -83,8 +107,13 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
     else if(key>=32 && key<127) {
         for(unsigned i=0;i<0x40;++i) if(rd_u8(0xc331ceu+i)==(uint8_t)key) { raw=i; break; }
     }
-    if(raw==0xff) return;
+    if(raw==0xff) return raw;
     if(!down) raw|=0x80;
+    return raw;
+}
+void native_menu_key(NativeFrontend *game,int key,int down) {
+    unsigned raw=native_menu_raw_key(key,down);
+    if(raw==0xff) return;
     CommandRequest request=select_keyboard_command(raw,NULL);
     uint32_t event=request.raw_event;
     if(is_indexed_command(request.action)) {
@@ -94,7 +123,8 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
         /* C1C224, same store as execute_flight_command. */
         wr_u8(SEQUENCE_PHASE,request.modifier?0xff:1);
     } else if(is_flight_command(request.action)) {
-        const FlightCommandHooks hooks={flight_key_child,NULL,&request};
+        CommandRequest arguments=request;
+        const FlightCommandHooks hooks={flight_key_child,flight_arguments,&arguments};
         event=execute_flight_command(&request,0,&hooks);
     } else if(is_context_command(request.action)) {
         const ContextCommandHooks hooks={context_child,NULL,game};
@@ -109,6 +139,49 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
     if(game->screen==NATIVE_SCENE_SETUP || game->screen==NATIVE_MODE_INTRO)
         publish_command_event((uint8_t)event,NULL);
 }
+
+typedef struct { NativeFrontend *game; CommandRequest request; } NativeCommand;
+static void prepare_action(void *context,const CommandRequest *request) {
+    ((NativeCommand *)context)->request=*request;
+}
+static int16_t carried_selection(void *context) {
+    const CommandRequest *r=&((NativeCommand *)context)->request;
+    /* Normal indexed actions overwrite this input; ordinary flight actions
+     * do not inspect it. Countermeasure restoration and recorder $FD's
+     * inherited selection still require a source caller contract. */
+    if(r->action==COMMAND_CHAFF || (r->action==COMMAND_FLARE && !r->modifier) ||
+       (r->action==COMMAND_FUNCTION_LEVEL && rd_u8(RECORDER_MODE)==0xfd)) {
+        fputs("native input missing inherited countermeasure/recorder selection\n",stderr);abort();
+    }
+    return 0;
+}
+static uint32_t view_child(void *context,enum ViewCommandChild child) {
+    const NativeCommand *command=context;
+    if(child==VIEW_COMMAND_ZOOM_MAXIMUM) set_zoom_maximum();
+    else if(child==VIEW_COMMAND_REDRAW) request_cockpit_redraw();
+    else abort();
+    /* C08324/C082B8 preserve the event in D0. */
+    return command->request.raw_event;
+}
+static void dispatch_child(void *context,enum CommandDispatchChild child) {
+    (void)context;
+    fprintf(stderr,"native command dispatch child unavailable: %u\n",(unsigned)child);abort();
+}
+static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
+    NativeCommand command={game,{0}};
+    const CommandSelectionHooks selection={0};
+    const CommandPublicationHooks publication={0};
+    const FlightCommandHooks flight={flight_key_child,flight_arguments,&command.request};
+    const ViewCommandHooks view={view_child,NULL,&command};
+    const IndexedCommandHooks indexed={mode_changed,NULL,game};
+    const ContextCommandHooks actions={context_child,NULL,game};
+    const CommandDispatchHooks hooks={&selection,&publication,&flight,&view,&indexed,&actions,
+        carried_selection,dispatch_child,NULL,&command,prepare_action};
+    if(pending) dispatch_pending_command(&hooks);
+    else dispatch_keyboard_command(raw,&hooks);
+}
+void native_menu_dispatch_raw(NativeFrontend *game,uint8_t raw) { dispatch(game,raw,0); }
+void native_menu_dispatch_pending(NativeFrontend *game) { dispatch(game,0,1); }
 typedef struct { NativeFrontend *game; gaddr field; unsigned offset,width; } MenuContext;
 static void observe(void *context,enum MenuTransitionPhase phase,uint32_t value,uint32_t extra,gaddr address) {
     MenuContext *menu=context;

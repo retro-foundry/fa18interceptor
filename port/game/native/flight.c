@@ -5,6 +5,7 @@
 #include "scene.h"
 #include "hud.h"
 #include "clock.h"
+#include "input.h"
 #include "../main_loop_timers.h"
 #include "../render_buffers.h"
 #include "../cockpit.h"
@@ -202,6 +203,7 @@ int native_flight_tick(NativeFrontend *game) {
     const uint16_t saved_tick=rd_u16(UPDATE_TICK);
     const InputDeviceHooks palette={palette_child,NULL,game};
     advance_viewport_palette(PALETTE_FRAME,&palette);
+    native_input_process(game); /* C0F3C4, before the C0F5F8 stage tick. */
     const PostInputTickHooks hooks={stage,NULL,game};
     run_post_input_tick(&hooks);
     tick_notification_cadence(); /* C11B44 at C0EFEA. */

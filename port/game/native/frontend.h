@@ -25,6 +25,9 @@ typedef struct {
     int display_pending,display_drawing,display_wait_pending;
     unsigned display_wait_tick,displayed_page,display_publications,display_yields;
     unsigned postflight_callbacks,postflight_resets;
+    uint8_t input_keys[256];
+    unsigned input_read,input_count,input_passes,input_events;
+    uint16_t mouse_buttons,joystick_directions;
     char config_path[4096];
 } NativeFrontend;
 int native_frontend_open(NativeFrontend *game,const char *adf,const char *save_dir,char *error,size_t capacity);

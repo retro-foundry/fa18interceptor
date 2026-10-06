@@ -8,6 +8,7 @@ static void observe(const CommandDispatchHooks *h,enum CommandDispatchPhase phas
 }
 static void execute_request(const CommandRequest *request,const CommandDispatchHooks *h) {
     uint32_t event=request->raw_event;
+    if(h->prepare_action) h->prepare_action(h->context,request);
     switch(request->action) {
     case COMMAND_PENDING_EMPTY: case COMMAND_COUNTER_WAIT: case COMMAND_FINISH_EVENT: return;
     case COMMAND_INVALID_WORD:

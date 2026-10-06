@@ -141,7 +141,17 @@ source cases and the affected native/reference checks pass. See
 `analysis/native_outer_display_milestone.md`. This bounded display/reset batch
 is complete (100% of that milestone); startup remains roughly 99%, and full
 frame ownership/recorded-flight acceptance remain open. No full replay repeated.
-Next: complete C0EFD4/input ownership, remaining HUD/record children and C0DA38
+The source C0F3C4 input owner now runs before C0F5F8/view/record work. Native
+keys queue through C16EAE/C16BF2/C16C56 and C1AD74/C1AC28; source recorder
+drains, command publication and clearing execute. Four native checkpoints
+prove that a queued press waits for input polling without repeating gameplay,
+then applies the original right-direction bit and releases. 144 original
+non-stack-RAM cases, six affected native checks, frontend/menu and twelve
+reference tests pass. See `analysis/native_input_milestone.md`. This input
+batch is complete (100% of keyboard/source-owner integration); physical
+gameport acquisition, modifier timing and inherited countermeasure arguments
+remain open. No full sealed replay repeated or whole-game estimate inferred.
+Next: complete C0EFD4 ownership, remaining HUD/record children and C0DA38
 alternate presentation. Exact input-callback/beam timing remains unproven.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.

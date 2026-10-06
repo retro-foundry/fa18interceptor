@@ -8,12 +8,14 @@
 #include "hardware.h"
 #include "memory.h"
 
+#ifndef FA18_NATIVE
 int read_mouse_buttons(void) {
     int buttons = 0;
     if (!(rd_u8(CIAA_PORT_COPY) & 0x40)) buttons |= MOUSE_LEFT;   /* /FIR0 low */
     if (!(custom_read(POTINP) & 0x0400)) buttons |= MOUSE_RIGHT;  /* DATLY low */
     return buttons;
 }
+#endif
 
 /* Latch one axis; while paused (or a context is starting) it is also
  * mirrored into the player record under `mask`. */
@@ -23,8 +25,7 @@ static void latch_axis(gaddr axis, uint8_t direction, uint8_t mask) {
         wr_u8(PLAYER_STICK, (uint8_t)((rd_u8(PLAYER_STICK) & ~mask) | direction));
 }
 
-void read_joystick(void) {
-    uint16_t joy = custom_read(JOY1DAT);
+void latch_joystick_input(uint16_t joy) {
     int up = ((joy >> 9) ^ (joy >> 8)) & 1, down = ((joy >> 1) ^ joy) & 1;
 
     wr_u16(STICK_RAW, joy);
@@ -49,3 +50,6 @@ void read_joystick(void) {
         wr_u8(STICK_X_HELD, 0);
     }
 }
+#ifndef FA18_NATIVE
+void read_joystick(void) { latch_joystick_input(custom_read(JOY1DAT)); }
+#endif
