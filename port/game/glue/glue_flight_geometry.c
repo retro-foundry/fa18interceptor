@@ -65,9 +65,8 @@ int glue_complete_zone_exit(void) { check_record_zone_exit_complete(working(),&h
 int glue_complete_candidate_update(void) { update_candidate_record_complete(working(),&hooks); return glue_return(); }
 int glue_complete_candidate_faces(void) { test_candidate_faces_complete(working(),A(6),&hooks); return glue_return(); }
 
-typedef struct { ZoneExitFrame frame; int started; } ZoneExitCall;
-static int call_record_zone_exit(const void *arguments) {
-    ZoneExitCall *call=(ZoneExitCall *)arguments;
+int glue_continue_record_zone_exit(const void *arguments) {
+    NativeZoneExitCall *call=(NativeZoneExitCall *)arguments;
     if(call->started) call->frame.work=working();
     else { call->started=1; fa18_ports_note_native_edge(0xc25b66u,0xc28e28u); }
     if(update_dynamics_record_zone_exit(&call->frame,&hooks)) return glue_return();
@@ -79,8 +78,8 @@ static int call_record_zone_exit(const void *arguments) {
     return FA18_EXIT_DISPATCH;
 }
 int glue_schedule_record_zone_exit(void) {
-    ZoneExitCall call={0};
+    NativeZoneExitCall call={0};
     call.frame.work=working(); call.frame.phase=ZONE_BEGIN;
     /* Original child events remain live; parent timing is not yet modeled. */
-    return fa18_ports_schedule_native_child(call_record_zone_exit,&call,sizeof call,0);
+    return fa18_ports_schedule_native_child(glue_continue_record_zone_exit,&call,sizeof call,0);
 }

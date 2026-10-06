@@ -336,7 +336,11 @@ void fa18_machine_instruction_hook(unsigned int pc) {
             /* The clean runner ends this frame before fetching the next
              * instruction, including a resumable OS phase at a ROM identifier.
              * Retain the reference runner's established frame convention. */
-            if (fa18_machine->runtime_guard.enabled) { m68k_yield_from_instruction_hook(); return; }
+            /* An original instruction at a retained C return would consume
+             * its stack/PC before the owner can resume in the next frame. */
+            if (fa18_machine->runtime_guard.enabled || fa18_ports_native_boundary_ready()) {
+                m68k_yield_from_instruction_hook(); return;
+            }
             break;
         }
         fa18_bus_instruction();

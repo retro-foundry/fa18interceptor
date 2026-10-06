@@ -114,22 +114,48 @@ static DynamicsState record_cell(DynamicsState w,const DynamicsHooks *h) {
     SWAP(x,DY_X); ROL(x,DY_X,4); SWAP(z,DY_Z); ROL(z,DY_Z,4);
     SW(x,DY_X,3); NEGW(x,DY_X); SW(z,DY_Z,3); NEGW(z,DY_Z); AW(z,DY_Z,w.z); AW(z,DY_Z,w.z); AW(z,DY_Z,w.x); return w;
 }
-void advance_indexed_record_dynamics(DynamicsState w,const DynamicsHooks *h) {
-    DynamicsState saved; gaddr saved_record,saved_root; int64_t signed_value; uint8_t old_byte,code;
+int advance_record_dynamics(RecordDynamicsFrame *f,const DynamicsHooks *h) {
+#define DYNAMICS_WAIT(selected,next) do { f->work=w; f->saved=saved; f->saved_record=saved_record; f->saved_root=saved_root; f->child=selected; f->phase=next; return 0; } while(0)
+
+    DynamicsState w=f->work,saved=f->saved; gaddr saved_record=f->saved_record,saved_root=f->saved_root; int64_t signed_value; uint8_t old_byte,code;
+    switch(f->phase) {
+    case DYNAMICS_BEGIN: break;
+    case DYNAMICS_AFTER_CELL: goto resume_cell;
+    case DYNAMICS_AFTER_ZONE: goto resume_zone;
+    case DYNAMICS_AFTER_ACTION: goto resume_action;
+    case DYNAMICS_AFTER_CONTROLS: goto resume_controls;
+    case DYNAMICS_AFTER_DESCENT: goto resume_descent;
+    case DYNAMICS_AFTER_ALERT: goto resume_alert;
+    case DYNAMICS_AFTER_SELECTOR: goto resume_selector;
+    case DYNAMICS_AFTER_MATRIX: goto resume_matrix;
+    case DYNAMICS_AFTER_ROOT: goto resume_root;
+    case DYNAMICS_AFTER_CANDIDATE: goto resume_candidate;
+    case DYNAMICS_AFTER_SOUND: goto resume_sound;
+    case DYNAMICS_AFTER_MESSAGE: goto resume_message;
+    case DYNAMICS_AFTER_FAULT: goto resume_fault;
+    case DYNAMICS_AFTER_PROJECTION: goto resume_projection;
+    case DYNAMICS_AFTER_REGION: goto resume_region;
+    case DYNAMICS_AFTER_SLOT: goto resume_slot;
+    case DYNAMICS_AFTER_TIMER: goto resume_timer;
+    case DYNAMICS_COMPLETE: return 1;
+    default: abort();
+    }
     L(primary,DY_PRIMARY,0);
     if(test_word(h,0xc459b4u)) {
         OR_B(primary,DY_PRIMARY,rd_u8(0xc45788u));
         if((uint8_t)w.primary) {
-            if(!bit(h,w.record+1,6)) return;
+            if(!bit(h,w.record+1,6)) goto complete;
             load_words(&w,w.record+102,0xe0,-1,h); saved_record=w.record; saved_root=w.root; observe(h,DY_SAVE_CELL,DY_PRIMARY,0,0);
-            w=consume(h,DY_CELL_MATRIX); observe(h,DY_RESTORE_CELL,DY_PRIMARY,0,0); w.record=saved_record; w.root=saved_root; w=restored(h,w);
-            W(x,DY_X,rd_u16(w.record+12)); W(z,DY_Z,rd_u16(w.record+14)); EL(x,DY_X); EL(z,DY_Z); w=record_cell(w,h); byte(h,w.record+10,(uint8_t)w.z); return;
+            DYNAMICS_WAIT(DY_CELL_MATRIX,DYNAMICS_AFTER_CELL);
+resume_cell: observe(h,DY_RESTORE_CELL,DY_PRIMARY,0,0); w.record=saved_record; w.root=saved_root; w=restored(h,w);
+            W(x,DY_X,rd_u16(w.record+12)); W(z,DY_Z,rd_u16(w.record+14)); EL(x,DY_X); EL(z,DY_Z); w=record_cell(w,h); byte(h,w.record+10,(uint8_t)w.z); goto complete;
         }
     }
-    OR_B(primary,DY_PRIMARY,rd_u8(0xc457aeu)); if((uint8_t)w.primary) return;
+    OR_B(primary,DY_PRIMARY,rd_u8(0xc457aeu)); if((uint8_t)w.primary) goto complete;
     if(test_word(h,0xc459b4u)) {
         W(primary,DY_PRIMARY,rd_u16(0xc458dau)); AND_W(primary,DY_PRIMARY,31); CW(w.primary,rd_u16(0xc459b4u));
-        if((uint16_t)w.primary==rd_u16(0xc459b4u)) w=consume(h,DY_SELECTED_RECORD);
+        if((uint16_t)w.primary==rd_u16(0xc459b4u)) { DYNAMICS_WAIT(DY_SELECTED_RECORD,DYNAMICS_AFTER_ZONE); }
+resume_zone:;
     } else if(!test_byte(h,0xc45785u)) goto control_gates;
     W(primary,DY_PRIMARY,rd_u16(w.record)); W(detail,DY_DETAIL,w.primary); AND_W(primary,DY_PRIMARY,0x400);
     if((uint16_t)w.primary) {
@@ -149,9 +175,11 @@ clear_expiry:
 control_gates:
     if(bit(h,w.record+2,0) && !test_byte(h,w.record+5)) { change_bit(h,w.record+3,4,1); goto record_controls; }
     W(primary,DY_PRIMARY,rd_u16(0xc458ccu)); AND_W(primary,DY_PRIMARY,64); if(!(uint16_t)w.primary) goto matrix;
-    if(test_word(h,0xc459b4u)) w=consume(h,DY_RECORD_ACTION);
+    if(test_word(h,0xc459b4u)) { DYNAMICS_WAIT(DY_RECORD_ACTION,DYNAMICS_AFTER_ACTION); }
+resume_action:
 record_controls:
-    w=consume(h,DY_RECORD_CONTROLS); if(test_word(h,0xc459b4u)) goto record_warning;
+    DYNAMICS_WAIT(DY_RECORD_CONTROLS,DYNAMICS_AFTER_CONTROLS);
+resume_controls: if(test_word(h,0xc459b4u)) goto record_warning;
     L(primary,DY_PRIMARY,rd_u32(w.record+66));
     if((int32_t)w.primary<0) {
         NEGL(primary,DY_PRIMARY); if(bit(h,w.record+32,1)) goto action_warning;
@@ -174,24 +202,28 @@ action_warning:
     CW(rd_u16(0xc45ae0u),0xd02a); if(rd_u16(0xc45ae0u)==0xd02a) goto record_warning;
     or_long(h,0xc45b54u,64); W(primary,DY_PRIMARY,0xd02a);
 descent_alert:
-    w=consume(h,DY_DESCENT_ALERT); goto matrix;
+    DYNAMICS_WAIT(DY_DESCENT_ALERT,DYNAMICS_AFTER_DESCENT);
+resume_descent: goto matrix;
 record_warning:
     W(primary,DY_PRIMARY,rd_u16(0xc459b4u)); CW(w.primary,rd_u16(0xc458dcu));
     if((uint16_t)w.primary==rd_u16(0xc458dcu) && !test_byte(h,0xc45785u) && bit(h,w.record+3,0)) {
         CW(rd_u16(0xc45ae0u),0xd00a);
-        if(rd_u16(0xc45ae0u)!=0xd00a) { W(primary,DY_PRIMARY,0xd00a); w=consume(h,DY_RECORD_ALERT); or_long(h,0xc45b54u,128); }
+        if(rd_u16(0xc45ae0u)!=0xd00a) { W(primary,DY_PRIMARY,0xd00a); DYNAMICS_WAIT(DY_RECORD_ALERT,DYNAMICS_AFTER_ALERT);
+resume_alert: or_long(h,0xc45b54u,128); }
     }
     if(!bit(h,w.record+32,1)) {
         B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,16);
         if((uint8_t)w.primary==16 && bit(h,w.record,4)) {
-            saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); w=consume(h,DY_RECORD_SELECTOR);
+            saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); DYNAMICS_WAIT(DY_RECORD_SELECTOR,DYNAMICS_AFTER_SELECTOR);
+resume_selector:
             observe(h,DY_RESTORE_RECORD,DY_PRIMARY,0,0); w.record=saved_record; w=restored(h,w);
         }
     }
 matrix:
     B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,48);
     if((uint8_t)w.primary==48 || !bit(h,w.record,7)) {
-        saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); w=consume(h,DY_RECORD_MATRIX);
+        saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); DYNAMICS_WAIT(DY_RECORD_MATRIX,DYNAMICS_AFTER_MATRIX);
+resume_matrix:
         observe(h,DY_RESTORE_RECORD,DY_PRIMARY,0,0); w.record=saved_record; w=restored(h,w);
     }
     if(!test_word(h,0xc459b4u)) goto root_flight;
@@ -207,7 +239,8 @@ root_flight:
     W(primary,DY_PRIMARY,rd_u16(0xc458ccu)); AND_W(primary,DY_PRIMARY,64);
     if(!(uint16_t)w.primary) { L(rate_x,DY_RATE_X,0); L(rate_y,DY_RATE_Y,0); L(rate_z,DY_RATE_Z,0); }
     else {
-        saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); w=consume(h,DY_ROOT_FLIGHT);
+        saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); DYNAMICS_WAIT(DY_ROOT_FLIGHT,DYNAMICS_AFTER_ROOT);
+resume_root:
         observe(h,DY_RESTORE_RECORD,DY_PRIMARY,0,0); w.record=saved_record; w=restored(h,w); load_longs(&w,w.record+62,0xe0,h);
     }
 integrate:
@@ -263,7 +296,8 @@ view_decay:
 candidate:
     if(bit(h,w.record,2)) { w=restore_rates(w,saved,h); goto record_timer; }
     load_longs(&w,w.record+20,0x1c,h); observe(h,DY_LOAD_LONGS,DY_PRIMARY,0,0xe0); w.rate_x=saved.rate_x; w.rate_y=saved.rate_y; w.rate_z=saved.rate_z; w=restored(h,w);
-    SL(x,DY_X,w.rate_x); SL(y,DY_Y,w.rate_y); SL(z,DY_Z,w.rate_z); w=consume(h,DY_MOTION_CANDIDATE); w=restore_rates(w,saved,h);
+    SL(x,DY_X,w.rate_x); SL(y,DY_Y,w.rate_y); SL(z,DY_Z,w.rate_z); DYNAMICS_WAIT(DY_MOTION_CANDIDATE,DYNAMICS_AFTER_CANDIDATE);
+resume_candidate: w=restore_rates(w,saved,h);
     if(w.child_equal) goto no_collision;
     W(detail,DY_DETAIL,rd_u16(0xc459b4u)); observe(h,DY_BIT_TEST,DY_PRIMARY,w.primary,5);
     if(w.primary&32) { longword(h,w.record+86,0); word(h,w.record+90,0); }
@@ -281,7 +315,8 @@ collision_position:
     if(change_bit(h,w.record,7,1)) goto collision_speed; CW(w.x,960); if((int16_t)w.x>960) goto collision_speed;
     observe(h,DY_BIT_TEST,DY_PRIMARY,w.primary,5); if(!(w.primary&32)) goto collision_speed;
     saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); observe(h,DY_SOUND_ARGUMENTS,DY_PRIMARY,0,0);
-    w=consume(h,DY_COLLISION_SOUND); observe(h,DY_RESTORE_RECORD,DY_PRIMARY,0,0); w.record=saved_record; w=restored(h,w);
+    DYNAMICS_WAIT(DY_COLLISION_SOUND,DYNAMICS_AFTER_SOUND);
+resume_sound: observe(h,DY_RESTORE_RECORD,DY_PRIMARY,0,0); w.record=saved_record; w=restored(h,w);
 collision_speed:
     change_bit(h,w.record,7,1); CW(w.x,960); if((int16_t)w.x<=960 || test_byte(h,0xc4589au)) goto record_timer;
     observe(h,DY_BIT_TEST,DY_PRIMARY,w.primary,6); if(!(w.primary&64)) goto collision_damage;
@@ -289,7 +324,8 @@ collision_speed:
         B(detail,DY_DETAIL,rd_u8(0xc4584fu)); OR_B(detail,DY_DETAIL,rd_u8(0xc4584eu)); if((int8_t)w.detail>0) goto record_timer;
         change_bit(h,w.record+32,1,1); W(detail,DY_DETAIL,0x9014); or_word(h,0xc458ccu,256);
     } else { W(detail,DY_DETAIL,0xd00b); if(bit(h,0xc458dbu,1)) W(detail,DY_DETAIL,0xd00c); }
-    SWAP(primary,DY_PRIMARY); W(primary,DY_PRIMARY,w.detail); w=consume(h,DY_COLLISION_MESSAGE); SWAP(primary,DY_PRIMARY); byte(h,0xc457c0u,1); goto record_timer;
+    SWAP(primary,DY_PRIMARY); W(primary,DY_PRIMARY,w.detail); DYNAMICS_WAIT(DY_COLLISION_MESSAGE,DYNAMICS_AFTER_MESSAGE);
+resume_message: SWAP(primary,DY_PRIMARY); byte(h,0xc457c0u,1); goto record_timer;
 collision_damage:
     or_word(h,w.record,0x200); observe(h,DY_BIT_TEST,DY_PRIMARY,w.primary,6);
     if(!(w.primary&64)) { P(root,DY_ROOT,rd_u32(0xc1ab74u)); add_word(h,w.root+70,1); byte(h,0xc457c5u,1); byte(h,0xc45798u,4); }
@@ -297,7 +333,8 @@ collision_damage:
 collision_class:
     CW(w.primary,64); if((uint16_t)w.primary!=64) change_bit(h,w.record,7,1);
 collision_status:
-    if(bit(h,w.record,2)) { CW(rd_u16(w.record+76),15); if(rd_s16(w.record+76)<=15) goto record_timer; word(h,0xc4599eu,58); w=consume(h,DY_COLLISION_FAULT); goto record_timer; }
+    if(bit(h,w.record,2)) { CW(rd_u16(w.record+76),15); if(rd_s16(w.record+76)<=15) goto record_timer; word(h,0xc4599eu,58); DYNAMICS_WAIT(DY_COLLISION_FAULT,DYNAMICS_AFTER_FAULT);
+resume_fault: goto record_timer; }
     B(x,DY_X,rd_u8(w.record+98)); AND_B(x,DY_X,240); CB(w.x,48); if((uint8_t)w.x==48 && !bit(h,w.record,1)) goto record_timer;
     change_bit(h,w.record+32,1,1); CW(w.primary,64); if((uint16_t)w.primary!=64) and_word(h,w.record,0xefff);
     CB(w.x,0); if(!(uint8_t)w.x) goto ground_collision;
@@ -305,13 +342,16 @@ collision_status:
     CW(w.primary,64); if((int16_t)w.primary<64) goto mark_expiry;
     word(h,0xc4fdd2u,rd_u16(0xc459b6u)); change_bit(h,w.record+2,4,1); change_bit(h,w.record+32,1,1); byte(h,w.record+5,1);
 ground_collision:
-    CW(w.primary,64); if((uint16_t)w.primary==64) { change_bit(h,w.record+1,6,0); byte(h,0xc45858u,12); return; }
+    CW(w.primary,64); if((uint16_t)w.primary==64) { change_bit(h,w.record+1,6,0); byte(h,0xc45858u,12); goto complete; }
 choose_slot:
     L(detail,DY_DETAIL,17); CW(w.primary,32); if((int16_t)w.primary>=32) goto motion_slot;
-    w=consume(h,DY_GROUND_PROJECTION); saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); w=consume(h,DY_REGION_PROBE); observe(h,DY_RESTORE_RECORD,DY_PRIMARY,0,0); w.record=saved_record; w=restored(h,w);
+    DYNAMICS_WAIT(DY_GROUND_PROJECTION,DYNAMICS_AFTER_PROJECTION);
+resume_projection: saved_record=w.record; observe(h,DY_SAVE_RECORD,DY_PRIMARY,0,0); DYNAMICS_WAIT(DY_REGION_PROBE,DYNAMICS_AFTER_REGION);
+resume_region: observe(h,DY_RESTORE_RECORD,DY_PRIMARY,0,0); w.record=saved_record; w=restored(h,w);
     if(bit(h,w.record+4,1)) goto mark_expiry; L(detail,DY_DETAIL,0);
 motion_slot:
-    w=consume(h,DY_MOTION_SLOT);
+    DYNAMICS_WAIT(DY_MOTION_SLOT,DYNAMICS_AFTER_SLOT);
+resume_slot:
 mark_expiry:
     or_word(h,w.record,0x400); word(h,w.record+76,15); change_bit(h,w.record,1,1); if(test_word(h,0xc459b4u)) change_bit(h,w.record,1,0); goto record_timer;
 no_collision:
@@ -326,7 +366,16 @@ request_flag:
     B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,0);
     if(!(uint8_t)w.primary) { change_bit(h,w.record+32,5,1); byte(h,0xc458b4u,0); }
 record_timer:
-    consume(h,DY_RECORD_TIMER);
+    DYNAMICS_WAIT(DY_RECORD_TIMER,DYNAMICS_AFTER_TIMER);
+resume_timer:
+
+complete:
+    f->work=w; f->phase=DYNAMICS_COMPLETE; return 1;
+#undef DYNAMICS_WAIT
+}
+void advance_indexed_record_dynamics(DynamicsState w,const DynamicsHooks *h) {
+    RecordDynamicsFrame frame={0}; frame.work=w; frame.phase=DYNAMICS_BEGIN;
+    while(!advance_record_dynamics(&frame,h)) frame.work=consume(h,frame.child);
 }
 static DynamicsState scene_reference_distance(DynamicsState w,gaddr frame,const DynamicsHooks *h) {
     int64_t difference;

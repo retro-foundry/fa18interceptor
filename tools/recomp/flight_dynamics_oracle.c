@@ -16,6 +16,7 @@ extern int fa18_write_log_active;
 extern void fa18_structural_reset_write_log(void);
 extern void fa18_flight_dynamics_fixture_begin(const char *phase);
 extern int64_t fa18_next_event;
+extern size_t fa18_structural_native_pending(void);
 static uint32_t seed=0xc0f5f8u;
 static uint32_t random_value(void) {
     seed^=seed<<13; seed^=seed>>17; seed^=seed<<5; return seed;
@@ -70,6 +71,8 @@ int main(int argc,char **argv) {
     uint8_t *reference=malloc(FA18_CHIP_SIZE+FA18_SLOW_SIZE);
     void *cpu=malloc(m68k_context_size()); char error[256];
     unsigned cases=argc>1?(unsigned)strtoul(argv[1],NULL,10):8192,scenario;
+    int live=argc>3 && !strcmp(argv[3],"--live");
+    int caller_inputs=argc>4 && !strcmp(argv[4],"--caller-inputs");
     if(argc>2) selected_entry=(uint32_t)strtoul(argv[2],NULL,16);
     if(!state || !rom || !m || !base || !before || !reference || !cpu || !cases) return 1;
     if(!fa18_machine_load_state(m,state,state_size,rom,rom_size,error,sizeof error)) {
@@ -81,6 +84,18 @@ int main(int argc,char **argv) {
         uint32_t regs[16],sr; unsigned i;
         fa18_structural_reset_write_log();
         memcpy(m,base,sizeof *m); fixture(scenario);
+        if(caller_inputs) {
+            /* C22D88 and its indexed siblings pass the selected record. The
+             * original orientation writers initialize a 2.14 unit matrix;
+             * random full-width matrix coefficients are a separate edge probe. */
+            uint8_t record[512];
+            gaddr destination=CONTROL_RECORDS+512u*rd_u16(CHOSEN_RECORD);
+            memcpy(record,m->slow+(REG_A[1]-FA18_SLOW_BASE),sizeof record);
+            memcpy(m->slow+(destination-FA18_SLOW_BASE),record,sizeof record);
+            REG_A[1]=destination;
+            wr_u32(CURRENT_RECORD,destination);
+            for(i=0;i<9;++i) wr_u16(destination+128+2*i,i%4==0?0x4000:0);
+        }
         memcpy(before,m,sizeof *m); m68k_get_context(cpu); fa18_write_log_active=2;
         fa18_flight_dynamics_fixture_begin("original");
         if(source_call(0xc70000u,expected_sp)!=FA18_RET) {
@@ -91,6 +106,16 @@ int main(int argc,char **argv) {
         memcpy(reference+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE);
         memcpy(m,before,sizeof *m); m68k_set_context(cpu);
         fa18_flight_dynamics_fixture_begin("C");
+        if(live) {
+            if(selected_entry!=0xc25b66u) return 1;
+            fa18_write_log_active=0;
+            fa18_ports_init(FA18_PORTS_ON,"C25B66");
+            REG_PPC=0xc22d88u;
+            if(fa18_recomp_resume(0xc70000u,expected_sp)!=FA18_RET || fa18_structural_native_pending()) {
+                fputs("native flight continuation did not complete\n",stderr); return 1;
+            }
+            fa18_ports_init(FA18_PORTS_OFF,NULL);
+        } else {
         switch(selected_entry) {
         case 0xc25b66u: glue_C25B66(); break;
         case 0xc266aeu: glue_C266AE(); break;
@@ -98,6 +123,7 @@ int main(int argc,char **argv) {
         case 0xc28b16u: glue_C28B16(); break;
         case 0xc28b34u: glue_C28B34(); break;
         default: return 1;
+        }
         }
         fa18_write_log_active=0;
         for(i=0;i<16;++i) if(regs[i]!=REG_DA[i]) {

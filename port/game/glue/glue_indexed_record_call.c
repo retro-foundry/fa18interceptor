@@ -37,3 +37,7 @@ int glue_schedule_indexed_record(void) {
     IndexedRecordCall input = {D(2), A(2), A(3), A(4), A(5)};
     return fa18_ports_schedule_native_child(call_indexed_record, &input, sizeof input, 18000);
 }
+int glue_complete_native_indexed_record(void) {
+    IndexedRecordCall input={D(2),A(2),A(3),A(4),A(5)};
+    int result=call_indexed_record(&input); USE_CYCLES(18000); return result;
+}

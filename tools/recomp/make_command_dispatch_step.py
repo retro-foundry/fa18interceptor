@@ -15,7 +15,8 @@ family=parser.parse_args().family
 manifest=json.loads((ROOT/f"analysis/data/{family}_source_scope.json").read_text())
 groups=defaultdict(list)
 reused_steps=manifest.get("timing_reuse",{})
-generated_pcs={pc for entry,owner in manifest['owners'].items() if entry not in reused_steps for pc in owner['source_pcs']}
+native_owners={"C25B66"} if family=="flight_dynamics" else set()
+generated_pcs={pc for entry,owner in manifest['owners'].items() if entry not in reused_steps and entry not in native_owners for pc in owner['source_pcs']}
 for row in manifest["instructions"]:
  if row['pc'] in generated_pcs: groups[row["instruction"].split()[0]].append(row["pc"])
 body={
@@ -191,7 +192,7 @@ if family=="flight_record_actions":
 if family=="flight_motion_helpers":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_flight_motion_helpers_math.h"')
 if family=="flight_dynamics":
- out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_flight_dynamics_math.h"')
+ out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_flight_dynamics_math.h"\n#include "glue_flight_record_calls.h"\n#include "recomp_ports.h"\nextern int fa18_write_log_active;')
 if family=="flight_geometry":
  out=out.replace('#include "glue_renderer_step_math.h"','#include "glue_flight_geometry_math.h"')
 if family=="flight_markers":
@@ -271,11 +272,14 @@ static int owns_pc(const uint32_t *pcs,unsigned count,uint32_t pc) {
 }
 """
 for entry,owner in manifest["owners"].items():
- pcs=owner["source_pcs"]
+ pcs=sorted({entry,*(site["return_pc"] for site in owner["child_call_sites"])}) if entry in native_owners else owner["source_pcs"]
  out+=f"static const uint32_t owned_{entry}[]={{\n"
  for j in range(0,len(pcs),8): out+="    "+",".join("0x"+pc for pc in pcs[j:j+8])+",\n"
  out+="};\n"
  out+=f"int glue_{entry}_owns(uint32_t pc) {{ return owns_pc(owned_{entry},sizeof owned_{entry}/sizeof owned_{entry}[0],pc); }}\n"
+ if entry in native_owners:
+  out+=f'int glue_{entry}_step(void) {{ if(REG_PC!=0x{entry}u) return 0; if(fa18_write_log_active) {{ glue_{entry}(); return 1; }} REG_PPC=REG_PC; return glue_schedule_record_dynamics(); }}\n'
+  continue
  if entry in reused_steps: out+=f"extern int {reused_steps[entry]}(void);\n"
  out+=f"int glue_{entry}_step(void) {{ if(!glue_{entry}_owns(REG_PC)) return 0; return {reused_steps.get(entry,step_name)}(); }}\n"
 path=ROOT/f"port/game/glue/glue_{family}_step.c"

@@ -11,7 +11,24 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
-Latest connected batch: native C2C392 now calls `normalize_record_vector` ->
+Latest connected batch: C25B66 now schedules retained game C dynamics and
+composes its five native child owners directly. Its 554 CPU instruction cases
+are deleted (42.3547% of the shared family); 754 other cases are unchanged.
+A frame-end return fix prevents the interpreter consuming a pending C return.
+16,384 held-child cases match full state and all 554 boundaries; six focused
+runner frame pairs pass. GNU/MSVC both runners, twelve CTests, profiling and
+an MSVC/GNU bounded demo pass. Original-child live matrix fixtures still fail
+case 2. Three 800-frame probes complete but non-fade changes versus the previous
+commit begin at 591/446/263 (39,478/2,989/187,594 pixels); final RAM differs.
+These parity gates and unmodeled parent event timing remain open. No full replay
+repeated. Bounded demo raw CPU **69.8706%**, delta **-0.0073 pp**;
+full raw **38.4011%** cached, accepted share unavailable; other axes **0%**,
+deletion **0/4**, counts 25/590/84/691. Raw counters exclude CPU-style port
+steps, so they do not measure this body deletion or whole-plan completion.
+Evidence: `analysis/emulation_removal_flight_parent_batch.json/.md`.
+Continue outer C22 record-loop C ownership and direct parent integration.
+
+Previous connected batch: native C2C392 now calls `normalize_record_vector` ->
 existing `magnitude3` directly in game C. Its normal path no longer yields to
 C2574A/C1D974 CPU entries. 12,400 production continuation cases match complete
 register/PC/SR/RAM state with held events, including 396 calls to each child

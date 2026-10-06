@@ -440,6 +440,16 @@ void fa18_ports_native_child_wait(uint32_t return_pc, uint32_t return_sp) {
     native_wait_armed = 1;
 }
 
+int fa18_ports_native_boundary_ready(void) {
+    if (mode != FA18_PORTS_ON || fa18_write_log_active) return 0;
+    for (size_t i = stepped_count; i > 0; --i) {
+        const SteppedCall *call = &stepped_calls[i - 1];
+        if (call->native_child && REG_PC == call->native_pc && REG_A[7] == call->native_sp)
+            return 1;
+    }
+    return 0;
+}
+
 int fa18_ports_resume_step(void) {
     size_t i;
     if (mode != FA18_PORTS_ON || fa18_write_log_active) return 0;
@@ -454,6 +464,10 @@ int fa18_ports_resume_step(void) {
             finish_stepped_calls();
             return 1;
         }
+        /* A retained C owner resumes only at its child's matching return.
+         * A child or interrupt may enter the same original routine again;
+         * that entry needs its own call frame, not the older CPU step owner. */
+        if (call->native_child) continue;
         if (stepped_owns(port,REG_PC)) {
             if (!run_port_step(port)) {
                 fprintf(stderr, "port %s: cannot resume at %06X\n", port->name, REG_PC);

@@ -9,8 +9,9 @@ static void steering_enter(enum AutopilotPhase phase);
 static DynamicsState working(void) {
     DynamicsState w={D(0),D(1),D(2),D(3),D(4),D(5),D(6),D(7),A(0),A(1),A(2),A(3),A(4),A(5),COND_EQ()}; return w;
 }
-static DynamicsState consume(void *context,enum DynamicsChild child) {
-    static const struct { uint32_t entry,ret; } sites[]={
+typedef struct { uint32_t entry,ret; } DynamicsCallSite;
+static DynamicsCallSite dynamics_child_site(enum DynamicsChild child) {
+    static const DynamicsCallSite sites[]={
         {0xc2d970,0xc25b3a},{0xc28e28,0xc25bac},{0xc2c392,0xc25c70},{0xc1b27e,0xc25c76},
         {0xc25704,0xc25d20},{0xc25704,0xc25d54},{0xc13d84,0xc25d84},{0xc2d408,0xc25da4},
         {0xc149be,0xc25e2c},{0xc26ebe,0xc26014},{0xc17f8c,0xc260fe},{0xc25704,0xc2616a},
@@ -18,7 +19,11 @@ static DynamicsState consume(void *context,enum DynamicsChild child) {
         {0xc26cc0,0xc26af2},{0xc26d8a,0xc26af8},{0xc28b16,0xc289da},{0xc28b16,0xc289f6},
         {0xc28f16,0xc28a6a},{0xc28f16,0xc28a98},{0xc28f16,0xc28d58},{0xc2d954,0xc28e02}
     };
-    (void)context; glue_complete_child(sites[child].entry,sites[child].ret);
+    return sites[child];
+}
+static DynamicsState consume(void *context,enum DynamicsChild child) {
+    DynamicsCallSite site=dynamics_child_site(child);
+    (void)context; glue_complete_child(site.entry,site.ret);
     if(child==DY_COLLISION_SOUND) A(7)+=8;
     return working();
 }
@@ -108,20 +113,14 @@ static AutopilotChild autopilot_child(enum AutopilotPhase phase) {
     }
 }
 
-typedef struct {
-    AutopilotFrame frame;
-    uint32_t return_pc,return_sp;
-    int started,original_transfer;
-} AutopilotCall;
-
 static void steering_enter(enum AutopilotPhase phase) {
     AutopilotChild child=autopilot_child(phase);
     m68ki_push_32(child.ret);
     fa18_ports_note_native_edge(0xc2c392u,child.entry);
 }
 
-static int call_record_action(const void *arguments) {
-    AutopilotCall *call=(AutopilotCall *)arguments;
+int glue_continue_record_action(const void *arguments) {
+    NativeAutopilotCall *call=(NativeAutopilotCall *)arguments;
     if(call->original_transfer) return FA18_RET;
     if(call->started) call->frame.work=working();
     else { call->started=1; fa18_ports_note_native_edge(0xc25b66,0xc2c392); }
@@ -142,12 +141,12 @@ static int call_record_action(const void *arguments) {
     return FA18_EXIT_DISPATCH;
 }
 int glue_schedule_record_action(void) {
-    AutopilotCall call={0};
+    NativeAutopilotCall call={0};
     call.frame.work=working(); call.frame.phase=AP_BEGIN;
     call.return_pc=rd_u32(A(7))&0xffffffu; call.return_sp=A(7)+4;
     /* Computation is native. Source child timing remains; parent instruction
      * timing is an explicit integration debt, with no guessed average fee. */
-    return fa18_ports_schedule_native_child(call_record_action,&call,sizeof call,0);
+    return fa18_ports_schedule_native_child(glue_continue_record_action,&call,sizeof call,0);
 }
 int glue_record_action_reference(void) {
     AutopilotFrame frame={0};
@@ -163,4 +162,62 @@ int glue_record_action_reference(void) {
         frame.work=working();
     }
     return glue_return();
+}
+
+typedef struct {
+    RecordDynamicsFrame frame;
+    NativeAutopilotCall action;
+    NativeZoneExitCall zone;
+    enum { CHILD_IDLE,CHILD_ORIGINAL,CHILD_ACTION,CHILD_ZONE,CHILD_FINISHED } active;
+} RecordDynamicsCall;
+
+static int call_record_dynamics(const void *arguments) {
+    RecordDynamicsCall *call=(RecordDynamicsCall *)arguments;
+    for(;;) {
+        if(call->active==CHILD_ACTION) {
+            int result=glue_continue_record_action(&call->action);
+            if(result!=FA18_RET) return result;
+            call->active=CHILD_FINISHED;
+            fa18_ports_native_child_wait(REG_PC,A(7)); return FA18_EXIT_DISPATCH;
+        }
+        if(call->active==CHILD_ZONE) {
+            int result=glue_continue_record_zone_exit(&call->zone);
+            if(result!=FA18_RET) return result;
+            call->active=CHILD_FINISHED;
+            fa18_ports_native_child_wait(REG_PC,A(7)); return FA18_EXIT_DISPATCH;
+        }
+        if(call->active!=CHILD_IDLE) {
+            if(call->active==CHILD_ORIGINAL && call->frame.child==DY_COLLISION_SOUND) A(7)+=8;
+            call->frame.work=working(); call->active=CHILD_IDLE;
+        }
+        if(advance_record_dynamics(&call->frame,&hooks)) return glue_return();
+        DynamicsCallSite site=dynamics_child_site(call->frame.child);
+        uint32_t sp=A(7);
+        m68ki_push_32(site.ret); REG_PC=site.entry;
+        switch(call->frame.child) {
+        case DY_RECORD_ACTION:
+            call->action=(NativeAutopilotCall){0};
+            call->action.frame.work=working(); call->action.frame.phase=AP_BEGIN;
+            call->action.return_pc=site.ret; call->action.return_sp=sp;
+            call->active=CHILD_ACTION; continue;
+        case DY_SELECTED_RECORD:
+            call->zone=(NativeZoneExitCall){0};
+            call->zone.frame.work=(GeometryState){D(0),D(1),D(2),D(3),D(4),D(5),D(6),D(7),A(0),A(1),A(2),A(3),A(4),A(5),COND_EQ()};
+            call->zone.frame.phase=ZONE_BEGIN; call->active=CHILD_ZONE; continue;
+        case DY_RECORD_CONTROLS: glue_complete_native_record_input(); break;
+        case DY_RECORD_SELECTOR: glue_complete_native_indexed_record(); break;
+        case DY_RECORD_MATRIX: glue_complete_native_record_matrix(); break;
+        default:
+            call->active=CHILD_ORIGINAL;
+            fa18_ports_native_child_wait(site.ret,sp); return FA18_EXIT_DISPATCH;
+        }
+        call->active=CHILD_FINISHED;
+        fa18_ports_native_child_wait(REG_PC,A(7)); return FA18_EXIT_DISPATCH;
+    }
+}
+
+int glue_schedule_record_dynamics(void) {
+    RecordDynamicsCall call={0};
+    call.frame.work=working(); call.frame.phase=DYNAMICS_BEGIN;
+    return fa18_ports_schedule_native_child(call_record_dynamics,&call,sizeof call,0);
 }

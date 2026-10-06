@@ -1,0 +1,212 @@
+{
+  "before_commit": "29bc4d04",
+  "scope": "C22 record-loop calls C25B66 -> retained game RecordDynamicsFrame; five normal C children composed directly",
+  "retired_parent_instruction_cases": 554,
+  "remaining_family_instruction_cases": 754,
+  "family_stepping_body_removed_percent": 42.354740061162076,
+  "thin_cpu_entry_adapter_retained": true,
+  "original_children_held_event_cases": {
+    "controlled_child_contract": 16384,
+    "observed_source_boundaries": 554,
+    "raw_live_probe": "fails case 2 at C60866 (source 54/C 00)",
+    "selected_record_identity_matrix_probe": "fails case 2 at C461EE (source 33/C 36)"
+  },
+  "bounded_demo_raw_cpu_removed_percent": 69.87061129090806,
+  "bounded_demo_delta_pp": -0.007256121562832618,
+  "cached_full_raw_cpu_removed_percent": 38.40106459907289,
+  "accepted_cpu_removed_percent": null,
+  "memory_chipset_boot_cutover_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": "0/4",
+  "direct_c_entries": 25,
+  "readable_cpu_registry_rows": 590,
+  "deferred_entries": 84,
+  "direct_opcode_bindings": 691,
+  "frame_boundary_fix": "yield before fetching an original instruction at a retained C return when the frame ends",
+  "ctests": "12/12 pass",
+  "compiler_runner_builds": "GNU and MSVC recomp/romfree",
+  "gnu_profiling": "OFF/ON/interpreter stdout, stderr, RGB and RAM invariant; existing native-child CPU dispatch assertions pass",
+  "msvc_gnu_demo": "800 frame RGB/index/RAM and complete profiles identical",
+  "focused_frames": "six autopilot source frame pairs passed; interrupts masked, stop C25C70",
+  "recordings": [
+    {
+      "name": "demo01",
+      "instructions": {
+        "interpreted": 907476,
+        "generated": 665201,
+        "residual": 1034
+      },
+      "previous_instructions": {
+        "interpreted": 906714,
+        "generated": 665584,
+        "residual": 1034
+      },
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2D408",
+          "calls": 70
+        },
+        {
+          "caller": "C2D408",
+          "callee": "C2DD4E",
+          "calls": 69
+        },
+        {
+          "caller": "C25B66",
+          "callee": "C1B27E",
+          "calls": 56
+        },
+        {
+          "caller": "C25B66",
+          "callee": "C13D84",
+          "calls": 56
+        },
+        {
+          "caller": "C2D408",
+          "callee": "C1342C",
+          "calls": 56
+        },
+        {
+          "caller": "C25B66",
+          "callee": "C2C392",
+          "calls": 28
+        },
+        {
+          "caller": "C25B66",
+          "callee": "C28E28",
+          "calls": 2
+        }
+      ],
+      "cpu_matrix_entries": 0,
+      "previous_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 591,
+        "first_index_difference": 591,
+        "first_nonfade_difference": {
+          "frame": 591,
+          "pixels": 166
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 39478,
+        "index_difference_pixels": 39478,
+        "passed": false
+      },
+      "final_ram_equal_previous": false
+    },
+    {
+      "name": "qual_carrier_success",
+      "instructions": {
+        "interpreted": 991988,
+        "generated": 995532,
+        "residual": 1357
+      },
+      "previous_instructions": {
+        "interpreted": 992352,
+        "generated": 994990,
+        "residual": 1357
+      },
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2D408",
+          "calls": 15
+        },
+        {
+          "caller": "C2D408",
+          "callee": "C2DD4E",
+          "calls": 15
+        }
+      ],
+      "cpu_matrix_entries": 0,
+      "previous_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 446,
+        "first_index_difference": 446,
+        "first_nonfade_difference": {
+          "frame": 446,
+          "pixels": 52
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 2989,
+        "index_difference_pixels": 2989,
+        "passed": false
+      },
+      "final_ram_equal_previous": false
+    },
+    {
+      "name": "qual_fail_crashes",
+      "instructions": {
+        "interpreted": 944806,
+        "generated": 755688,
+        "residual": 1063
+      },
+      "previous_instructions": {
+        "interpreted": 950309,
+        "generated": 748039,
+        "residual": 1063
+      },
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2D408",
+          "calls": 76
+        },
+        {
+          "caller": "C2D408",
+          "callee": "C2DD4E",
+          "calls": 75
+        },
+        {
+          "caller": "C25B66",
+          "callee": "C1B27E",
+          "calls": 53
+        },
+        {
+          "caller": "C25B66",
+          "callee": "C13D84",
+          "calls": 53
+        },
+        {
+          "caller": "C2D408",
+          "callee": "C1342C",
+          "calls": 53
+        },
+        {
+          "caller": "C25B66",
+          "callee": "C28E28",
+          "calls": 2
+        }
+      ],
+      "cpu_matrix_entries": 0,
+      "previous_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 263,
+        "first_index_difference": 263,
+        "first_nonfade_difference": {
+          "frame": 263,
+          "pixels": 52
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 187594,
+        "index_difference_pixels": 187594,
+        "passed": false
+      },
+      "final_ram_equal_previous": false
+    }
+  ],
+  "full_replay_repeated": false,
+  "acceptance": "open: parent timing unmodeled, recorded non-fade changes and live original-child matrix edge mismatch"
+}

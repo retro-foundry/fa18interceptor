@@ -154,3 +154,7 @@ int glue_schedule_record_input(void) {
     FlightInputCall input = {A(1), D(0)};
     return fa18_ports_schedule_native_child(call_record_input, &input, sizeof input, 2400);
 }
+int glue_complete_native_record_input(void) {
+    FlightInputCall input={A(1),D(0)};
+    int result=call_record_input(&input); USE_CYCLES(2400); return result;
+}

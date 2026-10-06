@@ -31,7 +31,10 @@ def inventory():
         assert fixture_pcs==sealed_pcs,'complete-call fixture ownership differs from original source'
     expected={(int(c['target'],16),int(c['return_pc'],16)) for owner in result['owners'].values() for c in owner['child_call_sites']}
     for path in ('port/game/glue/glue_flight_dynamics.c','tools/recomp/flight_dynamics_contract_children.c'):
-        actual={(int(e,16),int(r,16)) for e,r in re.findall(r'\{0x([a-f0-9]{6}),0x([a-f0-9]{6})\}',(ROOT/path).read_text())}
+        contents=(ROOT/path).read_text()
+        if path.endswith('glue_flight_dynamics.c'):
+            contents=contents.split('static const DynamicsCallSite sites[]={',1)[1].split('};',1)[0]
+        actual={(int(e,16),int(r,16)) for e,r in re.findall(r'\{0x([a-f0-9]{6}),0x([a-f0-9]{6})\}',contents)}
         assert actual==expected,f'{path}: child sites differ from original source'
     return result
 def main():

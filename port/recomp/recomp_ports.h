@@ -68,6 +68,8 @@ void fa18_ports_note_source_write(uint32_t address,int size);
 /* Resume an active stepped call after chipset work, a child or an interrupt.
  * Called at an already-serviced instruction boundary; 1 means it advanced. */
 int fa18_ports_resume_step(void);
+/* A retained C owner, rather than an original instruction, owns this return. */
+int fa18_ports_native_boundary_ready(void);
 /* Read-only continuation count for bounded source timing audits. */
 size_t fa18_ports_active_steps(void);
 /* Schedule a C child selected by its parent's source call site. The copied

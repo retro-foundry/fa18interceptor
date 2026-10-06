@@ -294,6 +294,23 @@ Accepted share unavailable, other axes **0%**, deletion **0/4**, counts unchange
 No full suite repeated. Outer flight timing/ownership remains work. Evidence:
 `../analysis/emulation_removal_normalization_batch.json/.md`.
 
+Latest connected batch: C25B66 now schedules retained game C dynamics and
+composes its five native child owners directly. Its 554 CPU instruction cases
+are deleted (42.3547% of the shared family); 754 other cases are unchanged.
+A frame-end return fix prevents the interpreter consuming a pending C return.
+16,384 held-child cases match full state and all 554 boundaries; six focused
+runner frame pairs pass. GNU/MSVC both runners, twelve CTests, profiling and
+an MSVC/GNU bounded demo pass. Original-child live matrix fixtures still fail
+case 2. Three 800-frame probes complete but non-fade changes versus the previous
+commit begin at 591/446/263 (39,478/2,989/187,594 pixels); final RAM differs.
+These parity gates and unmodeled parent event timing remain open. No full replay
+repeated. Bounded demo raw CPU **69.8706%**, delta **-0.0073 pp**;
+full raw **38.4011%** cached, accepted share unavailable; other axes **0%**,
+deletion **0/4**, counts 25/590/84/691. Raw counters exclude CPU-style port
+steps, so they do not measure this body deletion or whole-plan completion.
+Evidence: `../analysis/emulation_removal_flight_parent_batch.json/.md`.
+Continue outer C22 record-loop C ownership and direct parent integration.
+
 ### Phase 2 — Memory cutover (axis B, PORT.md stage F)
 
 Replace `gaddr` plus `rd_*`/`wr_*` with real C structs and pointers, as

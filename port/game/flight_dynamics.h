@@ -43,8 +43,24 @@ typedef struct {
     void *context;
 } DynamicsHooks;
 void advance_indexed_record_dynamics(DynamicsState w,const DynamicsHooks *h); /* C25B66 */
-/* C25B66's matrix phase: ordinary C call ownership while its outer timing
- * boundary remains in the temporary resumable CPU adapter. */
+enum RecordDynamicsPhase {
+    DYNAMICS_BEGIN,DYNAMICS_AFTER_CELL,DYNAMICS_AFTER_ZONE,DYNAMICS_AFTER_ACTION,
+    DYNAMICS_AFTER_CONTROLS,DYNAMICS_AFTER_DESCENT,DYNAMICS_AFTER_ALERT,
+    DYNAMICS_AFTER_SELECTOR,DYNAMICS_AFTER_MATRIX,DYNAMICS_AFTER_ROOT,
+    DYNAMICS_AFTER_CANDIDATE,DYNAMICS_AFTER_SOUND,DYNAMICS_AFTER_MESSAGE,
+    DYNAMICS_AFTER_FAULT,DYNAMICS_AFTER_PROJECTION,DYNAMICS_AFTER_REGION,
+    DYNAMICS_AFTER_SLOT,DYNAMICS_AFTER_TIMER,DYNAMICS_COMPLETE
+};
+typedef struct {
+    DynamicsState work,saved;
+    gaddr saved_record,saved_root;
+    enum RecordDynamicsPhase phase;
+    enum DynamicsChild child;
+} RecordDynamicsFrame;
+/* One means complete; zero requests the named child with state retained. */
+int advance_record_dynamics(RecordDynamicsFrame *frame,const DynamicsHooks *hooks);
+/* C25B66's matrix phase: ordinary C call ownership within the resumable C parent.
+ * The temporary adapter still publishes CPU/stack state. */
 void update_dynamics_record_matrix(const RecordMatrixInput *input, RecordMatrixResult *result,
                                    RecordMatrixSideHook side_hook, void *context);
 /* Input and selected-record phases owned by the same live flight parent. */

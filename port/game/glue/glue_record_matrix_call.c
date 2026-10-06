@@ -10,6 +10,7 @@
 #include "glue_record_matrix_call.h"
 #include "glue_matrix_side_values.h"
 #include "recomp_ports.h"
+#include "glue_flight_record_calls.h"
 
 void transform_matrix_registers(const int16_t angles[3],
                                 const MatrixTransformAngleState *state,
@@ -96,4 +97,9 @@ int glue_schedule_record_matrix(void) {
     /* Preserve the existing atomic timing debt. Native ownership is separate
      * from repairing the ordered matrix/event schedule. */
     return fa18_ports_schedule_native_child(call_record_matrix, &input, sizeof input, 9500);
+}
+int glue_complete_native_record_matrix(void) {
+    RecordMatrixInput input; int i,result;
+    input.record=A(1); for(i=0;i<8;++i) input.working[i]=D(i);
+    result=call_record_matrix(&input); USE_CYCLES(9500); return result;
 }
