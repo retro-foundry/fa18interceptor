@@ -724,7 +724,6 @@ const FA18Port fa18_ports[] = {
     /* matrix route selector */
     {0xC2D99C, glue_C2D99C, "dispatch_matrix_route", 0, 0, glue_C2D99C_step, 0xC2D9B0},
     /* current record matrix update */
-    {0xC2D408, glue_C2D408, "update_record_matrix", 9500},
     /* indexed control-record update */
     {0xC13D84, glue_C13D84, "update_indexed_record", 18000},
     {0xC26EBE, glue_C26EBE, "update_candidate_record", 0, 0, glue_C26EBE_complete_step, 0xC279C8, 0, 0xC26EB8, glue_C26EBE_owns},

@@ -151,6 +151,10 @@ typedef struct {
     int port;
     uint32_t return_pc, return_sp;
     uint32_t frame_exit_pc, frame_exit_sp;
+    FA18NativeChild native_child;
+    void *native_arguments;
+    uint32_t native_pc, native_sp;
+    int native_cycles;
 } SteppedCall;
 static SteppedCall *stepped_calls;
 static size_t stepped_count, stepped_capacity;
@@ -222,6 +226,7 @@ static int stepped_owns(const FA18Port *port,uint32_t pc) {
 void fa18_ports_init(FA18PortMode new_mode, const char *only) {
     native_edge_count = 0;
     int i, f;
+    for (size_t j = 0; j < stepped_count; ++j) free(stepped_calls[j].native_arguments);
     mode = new_mode;
     source_only_reference=0;
     source_only_min=UINT32_MAX; source_only_end=0;
@@ -359,13 +364,22 @@ static int run_port_body(int port) {
     }
 }
 
+static void retire_stepped_calls(size_t count) {
+    for (size_t i = count; i < stepped_count; ++i) {
+        free(stepped_calls[i].native_arguments);
+        stepped_calls[i].native_arguments = NULL;
+        stepped_calls[i].native_child = NULL;
+    }
+    stepped_count = count;
+}
+
 static void finish_stepped_calls(void) {
     size_t i;
     for(i=stepped_count;i>0;--i) {
         const SteppedCall *call=&stepped_calls[i-1];
         if((REG_PC==call->return_pc && REG_A[7]==call->return_sp) ||
            (call->frame_exit_sp && REG_PC==call->frame_exit_pc && REG_A[7]==call->frame_exit_sp))
-            stepped_count=i-1;
+            retire_stepped_calls(i-1);
     }
 }
 
@@ -379,6 +393,37 @@ static int run_port_step(const FA18Port *port) {
 }
 size_t fa18_ports_active_steps(void) { return stepped_count; }
 
+int fa18_ports_schedule_native_child(FA18NativeChild child, const void *arguments,
+                                     size_t size, int cycles) {
+    SteppedCall *call;
+    if (mode != FA18_PORTS_ON || fa18_write_log_active || !stepped_count) return 0;
+    call = &stepped_calls[stepped_count - 1];
+    if (!stepped_owns(&fa18_ports[call->port], REG_PPC)) return 0;
+    if (!child || !arguments || !size || cycles < 0 || call->native_child) {
+        fputs("native child: invalid or overlapping call boundary\n", stderr); abort();
+    }
+    call->native_arguments = malloc(size);
+    if (!call->native_arguments) { fputs("native child: cannot retain arguments\n", stderr); abort(); }
+    memcpy(call->native_arguments, arguments, size);
+    call->native_child = child;
+    call->native_pc = REG_PC; call->native_sp = REG_A[7]; call->native_cycles = cycles;
+    return 1;
+}
+
+static void run_native_child(SteppedCall *call) {
+    FA18NativeChild child = call->native_child;
+    void *arguments = call->native_arguments;
+    int cycles = call->native_cycles, previous = fa18_meter_engine;
+    call->native_child = NULL; call->native_arguments = NULL;
+    fa18_meter_engine = FA18_ENGINE_PORT;
+    int result = child(arguments);
+    free(arguments);
+    if (result != FA18_RET) { fputs("native child: unsupported return boundary\n", stderr); abort(); }
+    if (fa18_meter_enabled) ++fa18_emulation_meter.port_calls;
+    fa18_meter_engine = previous;
+    USE_CYCLES(cycles);
+}
+
 int fa18_ports_resume_step(void) {
     size_t i;
     if (mode != FA18_PORTS_ON || fa18_write_log_active) return 0;
@@ -386,7 +431,13 @@ int fa18_ports_resume_step(void) {
     /* An interrupt may enter a nested native call while an older one waits;
      * choose the innermost bridge that owns the resumed instruction. */
     for (i = stepped_count; i > 0; --i) {
-        const FA18Port *port = &fa18_ports[stepped_calls[i - 1].port];
+        SteppedCall *call = &stepped_calls[i - 1];
+        const FA18Port *port = &fa18_ports[call->port];
+        if (call->native_child && REG_PC == call->native_pc && REG_A[7] == call->native_sp) {
+            run_native_child(call);
+            finish_stepped_calls();
+            return 1;
+        }
         if (stepped_owns(port,REG_PC)) {
             if (!run_port_step(port)) {
                 fprintf(stderr, "port %s: cannot resume at %06X\n", port->name, REG_PC);
@@ -413,6 +464,7 @@ static int run_glue(int port) {
             stepped_capacity = capacity;
         }
         call = &stepped_calls[stepped_count++];
+        memset(call, 0, sizeof *call);
         call->port = port;
         call->return_pc = fa18_bus_read32(REG_A[7]) & 0xffffffu;
         call->return_sp = REG_A[7] + 4;

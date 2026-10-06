@@ -559,6 +559,49 @@ static void fixture(uint32_t pc, unsigned scenario) {
     fa18_write_log_active = 1;
 }
 
+static unsigned native_probe_calls, native_probe_value;
+static int native_probe_child(const void *arguments) {
+    native_probe_value = *(const unsigned *)arguments;
+    ++native_probe_calls;
+    REG_PC = 0xC25DA4u; REG_A[7] += 4;
+    return FA18_RET;
+}
+
+/* Test the new scheduling contract independently of matrix arithmetic:
+ * copied arguments, IRQ PC/SP guards, completion, retirement and reset. */
+static int native_boundary_fixture(void) {
+    unsigned value = 0x12345678u;
+    uint32_t caller_sp, child_sp;
+    fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_ON, "C25B66");
+    fixture(0xC25B66u, 0); fa18_write_log_active = 0;
+    caller_sp = REG_A[7];
+    if (fa18_recomp_call_dynamic() != FA18_EXIT_DISPATCH || fa18_ports_active_steps() != 1) return 0;
+    REG_PPC = 0xC25D9Eu; REG_PC = 0xC2D408u;
+    child_sp = REG_A[7] -= 4; wr_u32(child_sp, 0xC25DA4u);
+    if (!fa18_ports_schedule_native_child(native_probe_child, &value, sizeof value, 16)) return 0;
+    value = 0; /* The caller's local lifetime must not supply later arguments. */
+    REG_PC = 0xC70000u; REG_A[7] = child_sp - 8;
+    if (fa18_ports_resume_step() || native_probe_calls) return 0;
+    REG_PC = 0xC2D408u;
+    if (fa18_ports_resume_step() || native_probe_calls) return 0;
+    REG_A[7] = child_sp;
+    if (!fa18_ports_resume_step() || native_probe_calls != 1 ||
+        native_probe_value != 0x12345678u || REG_PC != 0xC25DA4u || REG_A[7] != caller_sp) return 0;
+    REG_PC = 0xC70000u; REG_A[7] = caller_sp + 4;
+    if (fa18_ports_resume_step() || fa18_ports_active_steps()) return 0;
+    REG_PC = 0xC25B66u; REG_A[7] = caller_sp;
+    if (fa18_recomp_call_dynamic() != FA18_EXIT_DISPATCH) return 0;
+    REG_PPC = 0xC25D9Eu; REG_PC = 0xC2D408u;
+    fa18_write_log_active = 1;
+    if (fa18_ports_schedule_native_child(native_probe_child, &value, sizeof value, 16)) return 0;
+    fa18_write_log_active = 0;
+    if (!fa18_ports_schedule_native_child(native_probe_child, &value, sizeof value, 16)) return 0;
+    fa18_ports_init(FA18_PORTS_OFF, NULL);
+    if (fa18_ports_resume_step() || fa18_ports_active_steps() || native_probe_calls != 1) return 0;
+    puts("native child boundary: copied arguments, interrupt guards, retirement and reset matched");
+    return 1;
+}
+
 int main(int argc, char **argv) {
     size_t state_size = 0, rom_size = 0;
     uint8_t *state = read_file("captures/native/demo01/state.bin", &state_size);
@@ -628,5 +671,9 @@ int main(int argc, char **argv) {
     }
     printf("%s step oracle (%s): %u instructions, %u cases matched registers, SR, PC, cycles and RAM\n",
            group, fa18_bus_timing ? "DMA bus" : "CPU", instructions, matched);
+    if (!strcmp(group, "native_boundary")) {
+        memcpy(m, base, sizeof *m);
+        if (!native_boundary_fixture()) { fputs("native child boundary fixture failed\n", stderr); return 1; }
+    }
     free(cpu); free(reference); free(before); free(base); free(m); return 0;
 }

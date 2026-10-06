@@ -6,6 +6,25 @@
 #include "tracking.h"
 #include "control_records.h"
 
+void update_record_matrix(const RecordMatrixInput *input, RecordMatrixResult *result,
+                          RecordMatrixSideHook side_hook, void *context) {
+    gaddr record = input->record;
+    int i;
+    result->class30 = (rd_u8(record + 0x62) & 0xF0u) == 0x30;
+    if (result->class30) {
+        result->tracked = rd_s16(record + 0x4C) > 0 && !rd_u8(POST_INPUT_EVENT);
+        result->old_azimuth = rd_s16(record + 0x68);
+        result->x = rd_s32(record + 0x3E);
+        result->y = rd_s32(record + 0x42);
+        result->z = rd_s32(record + 0x46);
+        result->snap = !(rd_u8(CONTEXT_STATE) | rd_u8(TRACK_STARTED));
+        update_record_class30_matrix(record);
+    } else {
+        for (i = 0; i < 8; ++i) result->run.d[i] = input->working[i];
+        update_record_nonclass_matrix(record, &result->run, side_hook, context);
+    }
+}
+
 static int16_t sw(uint16_t value) { return (int16_t)value; }
 static uint32_t low_word(uint32_t old, uint16_t value) {
     return (old & 0xFFFF0000u) | value;

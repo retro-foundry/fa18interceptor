@@ -1,10 +1,13 @@
-/* Caller-visible registers for the current-record matrix update ($C2D408). */
+/* Publish results of the flight parent's direct C matrix call. No CPU
+ * entry registration or generated child dispatch owns this game call. */
 #include "glue.h"
 #include "ports_glue.h"
 
 #include "globals.h"
 #include "memory.h"
 #include "record_matrix_update.h"
+#include "flight_dynamics.h"
+#include "glue_record_matrix_call.h"
 #include "glue_matrix_side_values.h"
 #include "recomp_ports.h"
 
@@ -52,22 +55,19 @@ static void class30_registers(gaddr record, int tracked, int32_t old_azimuth,
     record_orientation_registers(record, D(4), D(5), D(6));
 }
 
-int glue_C2D408(void) {
-    gaddr record = A(1);
+static int call_record_matrix(const void *arguments) {
+    const RecordMatrixInput *input = arguments;
+    gaddr record = input->record;
+    RecordMatrixResult result;
+    MatrixSideValues side;
     int i;
-    if ((rd_u8(record + 0x62) & 0xF0u) == 0x30) {
-        int tracked = rd_s16(record + 0x4C) > 0 && !rd_u8(POST_INPUT_EVENT);
-        int32_t old_azimuth = rd_s16(record + 0x68);
-        int32_t x = rd_s32(record + 0x3E), y = rd_s32(record + 0x42),
-                z = rd_s32(record + 0x46);
-        int snap = !(rd_u8(CONTEXT_STATE) | rd_u8(TRACK_STARTED));
-        update_record_class30_matrix(record);
-        class30_registers(record, tracked, old_azimuth, x, y, z, snap);
+    update_dynamics_record_matrix(input, &result, matrix_side_observe, &side);
+    fa18_ports_note_native_edge(0xC25B66, 0xC2D408);
+    if (result.class30) {
+        class30_registers(record, result.tracked, result.old_azimuth,
+                          result.x, result.y, result.z, result.snap);
     } else {
-        RecordMatrixRun run;
-        MatrixSideValues side;
-        for (i = 0; i < 8; i++) run.d[i] = D(i);
-        update_record_nonclass_matrix(record, &run, matrix_side_observe, &side);
+        RecordMatrixRun run = result.run;
         if (run.used_depth) fa18_ports_note_native_edge(0xC2D408, 0xC2DD4E);
         for (i = 0; i < 8; i++) D(i) = run.d[i];
         if (run.used_matrix_side) A(0) = side.final_address;
@@ -86,4 +86,14 @@ int glue_C2D408(void) {
         }
     }
     return glue_return();
+}
+
+int glue_schedule_record_matrix(void) {
+    RecordMatrixInput input;
+    int i;
+    input.record = A(1);
+    for (i = 0; i < 8; ++i) input.working[i] = D(i);
+    /* Preserve the existing atomic timing debt. Native ownership is separate
+     * from repairing the ordered matrix/event schedule. */
+    return fa18_ports_schedule_native_child(call_record_matrix, &input, sizeof input, 9500);
 }

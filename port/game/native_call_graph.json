@@ -202,6 +202,25 @@
         "guest game memory",
         "ancestor CPU/timing adapter"
       ]
+    },
+    {
+      "entry": "C2D408",
+      "function": "update_record_matrix",
+      "source": "port/game/record_matrix_update.c",
+      "callers": [
+        {
+          "entry": "C25B66",
+          "function": "update_dynamics_record_matrix",
+          "source": "port/game/flight_dynamics.c"
+        }
+      ],
+      "source_call": "analysis/data/flight_dynamics_source_scope.json",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "existing 9500-cycle matrix timing debt",
+        "temporary caller result publication"
+      ]
     }
   ]
 }

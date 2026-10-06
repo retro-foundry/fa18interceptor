@@ -191,7 +191,20 @@ estimate remains **38.4011%** from the last full suite; cutover axes **0%**,
 deletion **0/4**. Removing six lookup sites is not conversion of state to C
 objects. Evidence: `../analysis/emulation_removal_record_arguments_batch.json/.md`.
 
-Today C routines call each other by returning into the dispatcher. Give each
+The live flight parent's C25D9E matrix call now selects the game C owner with
+ordinary copied arguments instead of dispatching a C2D408 CPU entry. Its CPU
+entry adapter/registry are removed; outer CPU timing/result publication and
+the existing 9,500-cycle atomic timing debt remain. Three bounded 800-frame
+parent and combined before/after pairs preserve RGB, indices and final RAM;
+combined dispatches decrease by 68/15/75. Both builds, twelve CTests, the DMA
+parent oracle and argument/IRQ/reset boundary fixture pass. There are twelve
+C-owned entries and 602 readable CPU registry rows. Bounded instruction delta
+is zero; cached full raw CPU **38.4011%**, accepted percentage unavailable,
+memory/chipset/boot cutover **0%**, deletion **0/4**. Combined source parity
+still fails at demo/carrier/crash 565/446/263; Phase 1 is incomplete. Evidence:
+`../analysis/emulation_removal_matrix_dispatch_batch.json/.md`.
+
+Remaining C routines call each other by returning into the dispatcher. Give each
 recreated routine a direct C entry point and let a C caller call its C callee
 directly, keeping glue only for callers that are still generated code.
 `PORT.md` already prescribes the end state: when every caller of a routine is

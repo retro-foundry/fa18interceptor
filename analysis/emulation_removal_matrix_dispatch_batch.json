@@ -1,0 +1,205 @@
+{
+  "scope": "C25B66 live call at C25D9E to C2D408; CPU entry/registry dispatch removed, outer CPU/timing and guest memory retained",
+  "before_commit": "ee812923",
+  "native_entries": 12,
+  "remaining_readable_cpu_entries": 602,
+  "cpu_work_delta_bounded_pp": 0.0,
+  "last_full_raw_cpu_removed_percent_cached": 38.40106459907289,
+  "accepted_cpu_percent": null,
+  "memory_chipset_boot_cutover_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": "0/4",
+  "full_replay_repeated": false,
+  "checks": {
+    "GNU_MSVC_both_runners": "built",
+    "CTest": "12/12",
+    "GNU_profiling": "OFF/ON/interpreter output and RAM unchanged",
+    "native_boundary_dma_oracle": "554 instructions / 17728 cases matched; copied arguments, interrupt guards, retirement, reset matched",
+    "MSVC_GNU_demo": "800 RGB/index frames and final RAM identical"
+  },
+  "recordings": [
+    {
+      "recording": "demo01",
+      "frames": 800,
+      "comparisons": [
+        {
+          "mode": "parent",
+          "baseline": "build\\matrix-dispatch\\before-demo01",
+          "after": "build\\matrix-dispatch-after\\demo01-on",
+          "rgb_indices_ram_identical": true,
+          "sha256": {
+            "rgb": "7e2690bdfe4c7c9dc2845fb73dbfb52665fa65fd1c83ba2968609ed6fe92ac24",
+            "idx": "b9f00ec1cf277fb680ca0d551b11248034f83578138575d00f44b4b6ba962776",
+            "ram": "8e53828c93c916e3089c0666bd180a4b3af299d577a9acd261b8e86764e04ce6"
+          },
+          "removed_dispatches": 70,
+          "direct_c_calls": 70,
+          "remaining_child_cpu_entries": 0,
+          "instructions_and_device_counts_identical": true
+        },
+        {
+          "mode": "combined",
+          "baseline": "build\\slot-timing\\demo01-all",
+          "after": "build\\matrix-dispatch-after\\demo01-all",
+          "rgb_indices_ram_identical": true,
+          "sha256": {
+            "rgb": "6736f9e422226348cb046fa3d9fda8b0c28c742f60fcdfa2d366a2d8467a6843",
+            "idx": "b22370c79101c18424ccc86c253161cc3bb492f26bfc9d93acb94cd16058a678",
+            "ram": "a2731246af0d9d87cd7b31dc54a6618537cda3f56823fb241ed1c8f8120b0861"
+          },
+          "removed_dispatches": 68,
+          "direct_c_calls": 68,
+          "remaining_child_cpu_entries": 0,
+          "instructions_and_device_counts_identical": true
+        }
+      ],
+      "source_comparison": {
+        "frame": 565,
+        "pixels": 683
+      },
+      "held_parent_proofs": {
+        "shadow": [
+          {
+            "calls": 129,
+            "compared": 97,
+            "matched": 97,
+            "mismatched": 0,
+            "incomplete": 32
+          }
+        ],
+        "sandbox": [
+          {
+            "calls": 129,
+            "compared": 129,
+            "matched": 129,
+            "mismatched": 0,
+            "incomplete": 0
+          }
+        ]
+      }
+    },
+    {
+      "recording": "qual_carrier_success",
+      "frames": 800,
+      "comparisons": [
+        {
+          "mode": "parent",
+          "baseline": "build\\matrix-dispatch\\before-qual_carrier_success",
+          "after": "build\\matrix-dispatch-after\\qual_carrier_success-on",
+          "rgb_indices_ram_identical": true,
+          "sha256": {
+            "rgb": "878507fd15dbdc49cd4f59056e8bb6c7eab74be86f727b6d60e0ab70264211c4",
+            "idx": "e5538508ab24218f372cd7c5bb61668a1e21d4795379705bf75b928e1463a3d8",
+            "ram": "d3df0c6643217f2fa3f82e91cbc367931b8bc09d05da329d48fc8e41abe3bc51"
+          },
+          "removed_dispatches": 15,
+          "direct_c_calls": 15,
+          "remaining_child_cpu_entries": 0,
+          "instructions_and_device_counts_identical": true
+        },
+        {
+          "mode": "combined",
+          "baseline": "build\\slot-timing\\qual_carrier_success-all",
+          "after": "build\\matrix-dispatch-after\\qual_carrier_success-all",
+          "rgb_indices_ram_identical": true,
+          "sha256": {
+            "rgb": "b4003bf28eddf77bae0ee8358004f70d022d995eb344fbd64fa259c87c4adb73",
+            "idx": "37774b57a2d87cc7aacb70bf246fda4e749d73038935d172e04971bdd394e8f8",
+            "ram": "c96387e9cf5f91b4832d6c5fe47850ca3c136c43ee82f210345a4d2718b9c28b"
+          },
+          "removed_dispatches": 15,
+          "direct_c_calls": 15,
+          "remaining_child_cpu_entries": 0,
+          "instructions_and_device_counts_identical": true
+        }
+      ],
+      "source_comparison": {
+        "frame": 446,
+        "pixels": 3
+      },
+      "held_parent_proofs": {
+        "shadow": [
+          {
+            "calls": 30,
+            "compared": 20,
+            "matched": 20,
+            "mismatched": 0,
+            "incomplete": 10
+          }
+        ],
+        "sandbox": [
+          {
+            "calls": 30,
+            "compared": 30,
+            "matched": 30,
+            "mismatched": 0,
+            "incomplete": 0
+          }
+        ]
+      }
+    },
+    {
+      "recording": "qual_fail_crashes",
+      "frames": 800,
+      "comparisons": [
+        {
+          "mode": "parent",
+          "baseline": "build\\matrix-dispatch\\before-qual_fail_crashes",
+          "after": "build\\matrix-dispatch-after\\qual_fail_crashes-on",
+          "rgb_indices_ram_identical": true,
+          "sha256": {
+            "rgb": "941737bb89d01d30671f695ed599b98dbcfadef7690c983a37be64348513d081",
+            "idx": "e2cc35eccbcf0ba26843780292f68a9467816fa23924a3d1a1b5445400dcc2cf",
+            "ram": "c6628b4c27a3187bf0a0faa5e181b031f98b3828d9425317540c1e64ea260dde"
+          },
+          "removed_dispatches": 76,
+          "direct_c_calls": 76,
+          "remaining_child_cpu_entries": 0,
+          "instructions_and_device_counts_identical": true
+        },
+        {
+          "mode": "combined",
+          "baseline": "build\\slot-timing\\qual_fail_crashes-all",
+          "after": "build\\matrix-dispatch-after\\qual_fail_crashes-all",
+          "rgb_indices_ram_identical": true,
+          "sha256": {
+            "rgb": "ba97adee9b4d1a0ad19a60b7c46e382a5e6c06d13e575bbf9ab21aa771cd70e7",
+            "idx": "88a40da7fbb7b1d81ab23e7912e6f5e219091b665ea6bc5546ca40e496f9432c",
+            "ram": "0806360989603162dfc27d0ab0b12d2689deaf4247e5f8fc0cac2dea1357a222"
+          },
+          "removed_dispatches": 75,
+          "direct_c_calls": 75,
+          "remaining_child_cpu_entries": 0,
+          "instructions_and_device_counts_identical": true
+        }
+      ],
+      "source_comparison": {
+        "frame": 263,
+        "pixels": 4
+      },
+      "held_parent_proofs": {
+        "shadow": [
+          {
+            "calls": 150,
+            "compared": 88,
+            "matched": 88,
+            "mismatched": 0,
+            "incomplete": 62
+          }
+        ],
+        "sandbox": [
+          {
+            "calls": 150,
+            "compared": 150,
+            "matched": 150,
+            "mismatched": 0,
+            "incomplete": 0
+          }
+        ]
+      }
+    }
+  ]
+}

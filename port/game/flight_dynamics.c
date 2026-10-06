@@ -2,6 +2,10 @@
  * The original instructions and children, not a physics model, are authority. */
 #include "flight_dynamics.h"
 #include <stdlib.h>
+void update_dynamics_record_matrix(const RecordMatrixInput *input, RecordMatrixResult *result,
+                                   RecordMatrixSideHook side_hook, void *context) {
+    update_record_matrix(input, result, side_hook, context);
+}
 static void observe(const DynamicsHooks *h,enum DynamicsPhase p,enum DynamicsValue f,uint32_t v,uint32_t o) {
     if(h && h->observe) h->observe(h->context,p,f,v,o);
 }

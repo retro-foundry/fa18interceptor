@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "translated_entries": 624,
-  "registered_readable_translated_entries": 528,
+  "registered_readable_translated_entries": 527,
   "registered_readable_source_only_entries": 75,
   "direct_native_entries": [
     {
@@ -204,9 +204,28 @@
         "guest game memory",
         "ancestor CPU/timing adapter"
       ]
+    },
+    {
+      "entry": "C2D408",
+      "function": "update_record_matrix",
+      "source": "port/game/record_matrix_update.c",
+      "callers": [
+        {
+          "entry": "C25B66",
+          "function": "update_dynamics_record_matrix",
+          "source": "port/game/flight_dynamics.c"
+        }
+      ],
+      "source_call": "analysis/data/flight_dynamics_source_scope.json",
+      "remaining_dependencies": [
+        "guest game memory",
+        "outer flight CPU/timing boundary",
+        "existing 9500-cycle matrix timing debt",
+        "temporary caller result publication"
+      ]
     }
   ],
-  "direct_native_entry_count": 11,
+  "direct_native_entry_count": 12,
   "static_recompiled_entries": 85,
   "original_adf_static_entries": 44,
   "reference_wrapper_static_entries": 41,

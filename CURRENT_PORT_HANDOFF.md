@@ -11,6 +11,24 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
+Latest dependency removal: C25B66's live matrix call at C25D9E selects the
+game C owner directly, with copied arguments retained across IRQ service.
+C2D408's CPU entry adapter and registry row are removed. Six bounded
+before/after pairs (three recordings, parent and combined selections) match
+all 800 RGB/index frames and final RAM. Combined dispatches decrease by
+68/15/75; instruction/device counts remain identical. The DMA parent oracle
+and boundary lifetime/IRQ/reset fixture pass, both GNU/MSVC runners build,
+twelve CTests pass, GNU profiling is invisible and an MSVC/GNU demo matches.
+There are twelve C-owned entries and 602 readable CPU rows. This is a live
+call-site dependency removal; the flight parent, guest memory, result publisher
+and existing 9,500-cycle atomic matrix timing remain CPU/chipset dependent.
+Bounded CPU-work delta **0.0000 pp**, cached full raw CPU **38.4011%**;
+memory/chipset/boot cutover **0%**, subsystem gate **0/4**. Source parity remains
+open at demo/carrier/crash frames **565/446/263** (Copper fade excluded).
+Evidence: `analysis/emulation_removal_matrix_dispatch_batch.json/.md`.
+Prioritize native flight ownership and ordered events next; do not restore
+the removed child CPU adapter. The plan remains incomplete.
+
 Latest validated prerequisite replaces C265E8's fixed scan charge with
 source timing. All 65 instructions / 2,080 DMA cases and isolated 800-frame
 comparisons pass; both builds, twelve CTests and GNU profiling checks pass.
@@ -31,7 +49,8 @@ is the cached full-suite figure, new delta unmeasured; memory/chipset/boot
 **0%**, gate **0/4**. Evidence:
 `analysis/emulation_removal_selection_timing_batch.json/.md`.
 
-Next concrete failure is the crash **C265E8,C2D408** timing interaction: a
+Historical failure before the slot scan timing repair was the crash
+**C265E8,C2D408** interaction: a
 220-frame minimized pair first changes indices at 213; neither member alone
 differs by 220. Reused isolated matrix captures first differ at demo 584,
 carrier 446, crash 263. Preserve native side/depth ownership, ordered events

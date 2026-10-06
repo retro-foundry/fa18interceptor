@@ -70,6 +70,14 @@ void fa18_ports_note_source_write(uint32_t address,int size);
 int fa18_ports_resume_step(void);
 /* Read-only continuation count for bounded source timing audits. */
 size_t fa18_ports_active_steps(void);
+/* Schedule a C child selected by its parent's source call site. The copied
+ * arguments survive chipset service/interrupts. PC/SP only guard resumption
+ * of this compatibility boundary; they do not select the C callee. Returns
+ * zero in held-event proofs/isolated step fixtures, which retain reference
+ * child dispatch. The existing atomic timing debt is explicit in cycles. */
+typedef int (*FA18NativeChild)(const void *arguments);
+int fa18_ports_schedule_native_child(FA18NativeChild child, const void *arguments,
+                                     size_t size, int cycles);
 /* SHADOW only: after each compared call, overwrite what the liveness table
  * declares dead. The run must still end like the plain generated run. */
 void fa18_ports_set_poison(int on);

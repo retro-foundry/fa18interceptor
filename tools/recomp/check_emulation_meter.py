@@ -83,6 +83,9 @@ def main():
                 assert meter["instructions"]["generated"] > 0, name
             if name == "on":
                 profile = json.loads((out / "profile.json").read_text())
+                parent_edge = next(edge for edge in profile['_native_edges']
+                                   if edge['caller'] == 'C25B66' and edge['callee'] == 'C2D408')
+                assert parent_edge['calls'] > 0 and not profile.get('C2D408', 0)
                 for callee in ('C1342C', 'C2DD4E'):
                     edge = next(edge for edge in profile['_native_edges']
                                 if edge['caller'] == 'C2D408' and edge['callee'] == callee)

@@ -28,6 +28,20 @@ typedef void (*RecordMatrixSideHook)(void *context, enum RecordMatrixSidePhase p
 void update_record_nonclass_matrix(gaddr record, RecordMatrixRun *run,
                                    RecordMatrixSideHook side_hook, void *context);
 
+/* Whole C2D408 call carried as C arguments/results. The working words are
+ * temporary caller compatibility, not a CPU/register-file reference. */
+typedef struct {
+    gaddr record;
+    uint32_t working[8];
+} RecordMatrixInput;
+typedef struct {
+    RecordMatrixRun run;
+    int class30, tracked, snap;
+    int32_t old_azimuth, x, y, z;
+} RecordMatrixResult;
+void update_record_matrix(const RecordMatrixInput *input, RecordMatrixResult *result,
+                          RecordMatrixSideHook side_hook, void *context);
+
 /* $C2D704-$C2D99A: the continuation after the record matrix transform.
  * Angles are D4-D6 on entry. Returns 1 when it reaches the orientation
  * writer, 0 when the source returns early after changing a velocity word. */
