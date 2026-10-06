@@ -207,6 +207,7 @@ void native_frontend_tick(NativeFrontend *game) {
     native_storage_bind(&game->storage); ++game->ticks; ++game->screen_ticks;
     native_clock_set(game->ticks);
     native_viewport_tick(game);
+    native_audio_tick(&game->audio);
     if(!native_menu_resume(&game->menu_setup,game->ticks)) return;
     if(game->display_pending && !native_display_resume(game)) {
         native_display_read_pixels(game); return;

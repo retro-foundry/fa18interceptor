@@ -9,6 +9,15 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: connect C50158's PAL voice program/output-level/slide updater
+  after C1718E, including suspended game updates. C5002A's original interrupt-5
+  registration and node priorities establish cadence/order. 7,250 complete
+  source comparisons, actual wait/faded-level/tone-completion and affected
+  gameplay/reference checks pass. See `../analysis/native_voice_cadence_milestone.md`.
+  **1/1 (100%)** of this callback connection is complete; C500D8 sample
+  progression/completion/chaining and audible playback remain open. Startup
+  lead stays **36 ticks**, full frame parity **0/3 accepted**, Copper fade excluded.
+
 - Complete: stop menu C0FCB4 from ticking its newly published C0FECE in the
   same update; execute menu messages at final C32CEE. Real recorded boundary
   checks match source countdown/key/banner state. Menu/demo/carrier/crash

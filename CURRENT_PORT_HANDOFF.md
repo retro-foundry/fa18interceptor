@@ -7,6 +7,15 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest voice batch: C50158 now runs each host PAL frame after C1718E's
+viewport/master fade, including menu pauses and suspended display/timer polls.
+Its complete delay/program/output/slide owner publishes ordinary native channel
+levels; ended tones now release their real slots. C5002A's interrupt-5 node
+priority -120 establishes this ordering. 7,250 source comparisons, actual
+wait/volume/tone completion and affected gameplay/reference checks pass. See
+`analysis/native_voice_cadence_milestone.md`. The PAL voice-update connection is
+1/1 complete; C500D8 sample completion/chaining and audible output remain open.
+Startup lead remains 36 ticks; full frame parity stays 0/3, Copper fade excluded.
 Latest dispatch correction: menu C0FCB4 now publishes C0FECE without ticking it
 again in the same update. Menu messages run afterward at the final C32CEE
 boundary. Actual recorded selection agrees with source countdown $D2, cleared

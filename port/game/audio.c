@@ -11,15 +11,25 @@
 #define MAX_VOLUME (63 * FIXED_UNIT)
 #define FADE_STEP (FIXED_UNIT / 4)
 
-void set_voice_output(gaddr channel, gaddr voice) {
+VoiceOutput voice_output_levels(gaddr voice) {
     int16_t period = (int16_t)(rd_u32(voice + VOICE_PERIOD) >> 16);
     int16_t volume = (int16_t)((rd_u32(voice + VOICE_VOLUME) >> 16) & 63);
     int16_t master = rd_s16(MASTER_VOLUME);
 
     if (period < PAULA_MIN_PERIOD) period = PAULA_MIN_PERIOD;
-    wr_s16(channel + AUD_PERIOD, period);
     if (volume > master) volume = master;
-    wr_s16(channel + AUD_VOLUME, volume);
+    VoiceOutput output = {period, volume};
+    return output;
+}
+
+static void publish_voice_registers(void *context, gaddr channel, VoiceOutput output) {
+    (void)context;
+    wr_s16(channel + AUD_PERIOD, output.period);
+    wr_s16(channel + AUD_VOLUME, output.volume);
+}
+
+void set_voice_output(gaddr channel, gaddr voice) {
+    publish_voice_registers(NULL, channel, voice_output_levels(voice));
 }
 
 void fade_master_volume(void) {
@@ -41,7 +51,7 @@ void fade_master_volume(void) {
 
 void clear_voice_interrupt(int channel) {
 #ifdef FA18_NATIVE
-    /* No Paula interrupt is pending in the host's silent frontend. Voice
+    /* No Paula interrupt is pending in the host's native frontend. Voice
      * ownership is still cleared by free_voice; no register is emulated. */
     (void)channel;
 #else
@@ -310,7 +320,7 @@ static void apply_slide(gaddr voice, int value, int slide) {
     wr_u32(voice + (gaddr)value, rd_u32(voice + (gaddr)value) + rd_u32(voice + (gaddr)slide));
 }
 
-void update_voices(void) {
+void advance_voice_channels(VoiceOutputSink publish, void *context) {
     int channel;
     for (channel = 0; channel < 4; channel++) {
         gaddr record = rd_u32(VOICE_TABLE + (gaddr)(4 * channel));
@@ -318,7 +328,7 @@ void update_voices(void) {
         gaddr voice = rd_u32(slot);
         if (!voice) continue;
         step_voice_program(voice, slot, channel);
-        set_voice_output(rd_u32(record), voice);
+        publish(context, rd_u32(record), voice_output_levels(voice));
         apply_slide(voice, VOICE_PERIOD, VOICE_PERIOD_SLIDE);
         apply_slide(voice, VOICE_VOLUME, VOICE_VOLUME_SLIDE);
         if (rd_u32(voice + VOICE_PERIOD_TICKS)) {
@@ -330,6 +340,10 @@ void update_voices(void) {
             if (!rd_u32(voice + VOICE_VOLUME_TICKS)) wr_u32(voice + VOICE_VOLUME_SLIDE, 0);
         }
     }
+}
+
+void update_voices(void) {
+    advance_voice_channels(publish_voice_registers, NULL);
 }
 
 void free_all_voices(void) {

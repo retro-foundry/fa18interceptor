@@ -1,7 +1,7 @@
 add_executable(fa18_native main.c replay.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/display.c ../game/native/cockpit_assets.c
-    ../game/native/audio_assets.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
+    ../game/native/audio_assets.c ../game/native/audio.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
     ../game/input_display_setup.c ../game/render_page.c
     ../game/native/frame_tail.c ../game/hud_stream.c
     ../game/native/frame_labels.c ../game/flight_markers.c
@@ -67,6 +67,9 @@ else()
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_test(NAME fa18_native_audio
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_audio.py
+                --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_frontend
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_frontend.py
                 --runner $<TARGET_FILE:fa18_native>

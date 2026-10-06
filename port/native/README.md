@@ -56,6 +56,13 @@ starts the banner at the final message boundary. The measured demo startup lead
 is 36 ticks. The remaining viewport wait spans a different number of game
 updates per PAL frame; source WaitBOVP/task pacing remains open. See
 `../../analysis/native_stage_dispatch_milestone.md`.
+The C50158 voice updater now runs every PAL frame after the viewport/master
+fade, including during menu pauses and display/timer waits. Original voice
+programs, period/volume slides and slot release execute; output levels publish
+to ordinary native channel state. 7,250 source comparisons and a real wait/
+tone-completion test pass. Sample progression/completion (C500D8), repetition/
+chaining and audible playback remain open. See
+`../../analysis/native_voice_cadence_milestone.md`.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
 `hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;
@@ -76,7 +83,8 @@ resources and linked voice descriptors now load from the ADF or execute the
 source square-wave/noise generators. All 15 sample buffers, availability flags
 and resulting random seed match original startup. This restores the source
 210-update demo banner and reduces the observed startup lead from 97 to 37 game
-ticks. Remaining message/frame cadence and per-tick audio programs/output remain open.
+ticks at that milestone, now 36. Remaining message/frame cadence and audible
+sample output remain open; per-tick voice programs are connected.
 Other selected modes stop at their banner. Audible output remains unconnected.
 Menu entry now executes complete C0FBE0 sound/volume/reset/palette setup.
 Its busy pause yields under the nominal PAL-clock conversion; input received
@@ -89,7 +97,8 @@ audible output remain open.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
-Voice programs and audible output still need their asynchronous host owner.
+Voice programs have their PAL owner; sample completion and audible output
+still need their asynchronous host owner.
 
 ```powershell
 build/native/fa18_native.exe --headless --frames 1800 --ppm build/credits.ppm
@@ -104,6 +113,7 @@ python tools/native/check_models.py --runner build/native/fa18_native.exe
 python tools/native/check_hud.py --runner build/native/fa18_native.exe
 python tools/native/check_cockpit_assets.py --runner build/native/fa18_native.exe
 python tools/native/check_sound_resources.py --runner build/native/fa18_native.exe
+python tools/native/check_audio.py --runner build/native/fa18_native.exe
 python tools/native/check_qualification.py --runner build/native/fa18_native.exe
 python tools/native/check_demo.py --runner build/native/fa18_native.exe
 ```

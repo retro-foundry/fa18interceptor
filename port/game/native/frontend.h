@@ -2,6 +2,7 @@
 #define FA18_NATIVE_FRONTEND_H
 #include "storage.h"
 #include "menu_start.h"
+#include "audio.h"
 #include "../input_display_setup.h"
 #include "../../amiga/ilbm.h"
 enum NativeScreen { NATIVE_SPLASH,NATIVE_CREDITS,NATIVE_ENLISTMENT,NATIVE_CALLSIGN,NATIVE_MENU,
@@ -13,6 +14,7 @@ struct NativeFrontend {
     enum NativeScreen screen;
     unsigned ticks,screen_ticks;
     NativeMenuSetup menu_setup;
+    NativeAudio audio;
     uint16_t palette[32];
     uint8_t indices[320*256];
     unsigned glyphs;

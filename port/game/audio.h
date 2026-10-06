@@ -25,6 +25,13 @@ enum { AUD_PERIOD = 0x06, AUD_VOLUME = 0x08 };
 
 #define PAULA_MIN_PERIOD 124
 
+/* C501E0's game-side output calculation. The destination is the channel
+ * descriptor's output identity; the platform owns publication. */
+typedef struct { int16_t period, volume; } VoiceOutput;
+typedef void (*VoiceOutputSink)(void *context, gaddr destination, VoiceOutput output);
+VoiceOutput voice_output_levels(gaddr voice);
+void advance_voice_channels(VoiceOutputSink publish, void *context);
+
 /* Write a voice's period and volume to its channel, limiting the period to
  * what Paula can play and the volume to the master volume. */
 void set_voice_output(gaddr channel, gaddr voice);
