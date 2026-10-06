@@ -1,6 +1,7 @@
 {
   "schema": 1,
   "scope": "full fixed suite",
+  "frame_comparison_policy": "Ignore source-table Copper fade; require identical selected indices and non-fade RGB.",
   "cpu_removed_min_percent": 38.40106459907289,
   "accepted_cpu_removed_min_percent": null,
   "parity_passed": false,
@@ -18,7 +19,7 @@
   "scenarios": [
     {
       "name": "demo01",
-      "runner_sha256": "f81ecbf3f711ecb6c39c613c5a33a50dd1226530d720450549365840dd560525",
+      "runner_sha256": "b687f7285cc56e9f814a436ae0aeb94c9a2bd7bba4b26155f84c590fca11b49d",
       "runs": {
         "off": {
           "meter": {
@@ -3545,6 +3546,7 @@
             "iterations": 4892
           },
           "rgb_sha256": "729f2ac3adae40e10aa4b87a31a40faa9c11836de16b9c3d1610e49215e37d07",
+          "index8_sha256": "fd503b8d9b683bfa909c8b30d49e08d85901ffe2be8960c7b80f95c101795972",
           "ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103"
         },
         "on": {
@@ -7072,6 +7074,7 @@
             "iterations": 4892
           },
           "rgb_sha256": "68341e4a54da7161b79144903d5cb6a13f54d4ab4e0205443231db6c32ba6e28",
+          "index8_sha256": "0d5ba5dd076d2e1673a874020d9c37a44ce001a64af9951391d789499a60cdfb",
           "ram_sha256": "d1436ac2d61cee7a5447563882ed32a606015d1e34a1dec4516c3d28fa78a71d"
         }
       },
@@ -7098,11 +7101,27 @@
       "rgb_equal": false,
       "sealed_ram_equal": false,
       "iterations_equal": true,
+      "frame_comparison": {
+        "frames": 20833,
+        "reference_frames": 20833,
+        "actual_frames": 21145,
+        "frame_counts_equal": false,
+        "first_rgb_difference": 565,
+        "first_index_difference": 316,
+        "first_nonfade_difference": {
+          "frame": 316,
+          "pixels": 64
+        },
+        "ignored_fade_pixels": 5171713,
+        "nonfade_pixels": 315009985,
+        "index_difference_pixels": 315009985,
+        "passed": false
+      },
       "parity_passed": false
     },
     {
       "name": "qual_carrier_success",
-      "runner_sha256": "f81ecbf3f711ecb6c39c613c5a33a50dd1226530d720450549365840dd560525",
+      "runner_sha256": "b687f7285cc56e9f814a436ae0aeb94c9a2bd7bba4b26155f84c590fca11b49d",
       "runs": {
         "off": {
           "meter": {
@@ -10449,6 +10468,7 @@
             "iterations": 8038
           },
           "rgb_sha256": "8a8978bd6943d4cc8af26d8b4f7fda48dbf291cd3f1beca514c6f2317bfc0e0b",
+          "index8_sha256": "b43f8252a633e0bec8fcf6858a0e9aa4b63d5c950d4cfdd6b4b81c3d8f6aa1f4",
           "ram_sha256": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30"
         },
         "on": {
@@ -13796,6 +13816,7 @@
             "iterations": 8038
           },
           "rgb_sha256": "bfa5f6edc390e029f1d7dfc891524c992523c6cf89ce755c0aa2b4b853334e63",
+          "index8_sha256": "d5db325db7f70e92212f300f3cc45dfa411d620b0b5658badb58caf957ef7de5",
           "ram_sha256": "390d7d8c2833d26b3cd2babd37011457e026f208c7fed20656dfa4666123c3cb"
         }
       },
@@ -13822,11 +13843,27 @@
       "rgb_equal": false,
       "sealed_ram_equal": false,
       "iterations_equal": true,
+      "frame_comparison": {
+        "frames": 12353,
+        "reference_frames": 12353,
+        "actual_frames": 20320,
+        "frame_counts_equal": false,
+        "first_rgb_difference": 423,
+        "first_index_difference": 374,
+        "first_nonfade_difference": {
+          "frame": 374,
+          "pixels": 55901
+        },
+        "ignored_fade_pixels": 2061205,
+        "nonfade_pixels": 278719447,
+        "index_difference_pixels": 278719447,
+        "passed": false
+      },
       "parity_passed": false
     },
     {
       "name": "qual_fail_crashes",
-      "runner_sha256": "f81ecbf3f711ecb6c39c613c5a33a50dd1226530d720450549365840dd560525",
+      "runner_sha256": "b687f7285cc56e9f814a436ae0aeb94c9a2bd7bba4b26155f84c590fca11b49d",
       "runs": {
         "off": {
           "meter": {
@@ -17083,6 +17120,7 @@
             "iterations": 3082
           },
           "rgb_sha256": "9c64d09e6b5155733ab59ec9398174c2511aa747263637757be12f727a95884d",
+          "index8_sha256": "518e4fae0365599cef6353645ac76e97e3a0706a860ddf438364c60f9e451a64",
           "ram_sha256": "73918588343cd74e80f316168866e4ea17a3edc245fa0cd5617f0e63bcb03f69"
         },
         "on": {
@@ -20340,6 +20378,7 @@
             "iterations": 3082
           },
           "rgb_sha256": "f32b8e0a03931b279491e244827f22d0ddf05a2907f624e58f82651f2e115d19",
+          "index8_sha256": "153cb967dc3046c6932cd3b834f68501220edcb1705833204c67c2ff3597ae5d",
           "ram_sha256": "8253cfe75bb55c325af6978eb70c946b776cedcbd16a67d9c7adc05feb904991"
         }
       },
@@ -20366,11 +20405,27 @@
       "rgb_equal": false,
       "sealed_ram_equal": false,
       "iterations_equal": true,
+      "frame_comparison": {
+        "frames": 3050,
+        "reference_frames": 3050,
+        "actual_frames": 3081,
+        "frame_counts_equal": false,
+        "first_rgb_difference": 263,
+        "first_index_difference": 213,
+        "first_nonfade_difference": {
+          "frame": 213,
+          "pixels": 1905
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 21941060,
+        "index_difference_pixels": 8213761,
+        "passed": false
+      },
       "parity_passed": false
     },
     {
       "name": "adf_gnu",
-      "runner_sha256": "64546b3b2a31861a0243b32528042809e9b6f38bd4c9f818f4fd79edab87dc38",
+      "runner_sha256": "9b9eb21d9cf83c762d5d00e137885d25c1a01c6066685fa44ee3adc67e581b7f",
       "runs": {
         "off": {
           "meter": {
@@ -25547,6 +25602,7 @@
             "iterations": 10274
           },
           "rgb_sha256": "263a7e598036a210cfa607fec73df3065e3df928432b32993b434be535837837",
+          "index8_sha256": "441a990ddcda0db0f0f08d70bac5e11d812bff95d11b552892d4de5b57419c6d",
           "ram_sha256": "50e9ff47f21967d4733dbbbe73fd981537ca8c5767ae2331c24c929326d6d344"
         },
         "on": {
@@ -30724,6 +30780,7 @@
             "iterations": 10316
           },
           "rgb_sha256": "18c210522bd303ce35dd994fa6f691cd64be3a3c0cedc6b14947b7f333f1eeec",
+          "index8_sha256": "be91efb010ec84151a9bff10735ab009e6953ca09b8c013549c80a0fbda541d5",
           "ram_sha256": "c7e20df1a7cb812c85a113e628a8f77bb164902bd92420bde2a6b1b63020dcf4"
         }
       },
@@ -30750,11 +30807,27 @@
       "rgb_equal": false,
       "sealed_ram_equal": null,
       "iterations_equal": false,
+      "frame_comparison": {
+        "frames": 2600,
+        "reference_frames": 2600,
+        "actual_frames": 2600,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 1460,
+        "first_index_difference": 1460,
+        "first_nonfade_difference": {
+          "frame": 1460,
+          "pixels": 26
+        },
+        "ignored_fade_pixels": 626291,
+        "nonfade_pixels": 636208,
+        "index_difference_pixels": 636208,
+        "passed": false
+      },
       "parity_passed": false
     },
     {
       "name": "adf_msvc",
-      "runner_sha256": "1f66c21c1268c6f2f69d65bdde140b3c7fc456a854dd7569e35258a48ac8f68d",
+      "runner_sha256": "b43aaebadfaea37ca1ebb1071f181ea153b35ff4e4074d6a813bf46fbfceaf8a",
       "runs": {
         "off": {
           "meter": {
@@ -35931,6 +36004,7 @@
             "iterations": 10274
           },
           "rgb_sha256": "263a7e598036a210cfa607fec73df3065e3df928432b32993b434be535837837",
+          "index8_sha256": "441a990ddcda0db0f0f08d70bac5e11d812bff95d11b552892d4de5b57419c6d",
           "ram_sha256": "50e9ff47f21967d4733dbbbe73fd981537ca8c5767ae2331c24c929326d6d344"
         },
         "on": {
@@ -41108,6 +41182,7 @@
             "iterations": 10316
           },
           "rgb_sha256": "18c210522bd303ce35dd994fa6f691cd64be3a3c0cedc6b14947b7f333f1eeec",
+          "index8_sha256": "be91efb010ec84151a9bff10735ab009e6953ca09b8c013549c80a0fbda541d5",
           "ram_sha256": "c7e20df1a7cb812c85a113e628a8f77bb164902bd92420bde2a6b1b63020dcf4"
         }
       },
@@ -41134,6 +41209,22 @@
       "rgb_equal": false,
       "sealed_ram_equal": null,
       "iterations_equal": false,
+      "frame_comparison": {
+        "frames": 2600,
+        "reference_frames": 2600,
+        "actual_frames": 2600,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 1460,
+        "first_index_difference": 1460,
+        "first_nonfade_difference": {
+          "frame": 1460,
+          "pixels": 26
+        },
+        "ignored_fade_pixels": 626291,
+        "nonfade_pixels": 636208,
+        "index_difference_pixels": 636208,
+        "passed": false
+      },
       "parity_passed": false
     }
   ],

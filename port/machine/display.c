@@ -84,6 +84,7 @@ void fa18_copper_run_until(FA18Machine *m, int vpos, int hpos) {
 
 void fa18_display_line(FA18Machine *m, int vpos) {
     uint16_t *row;
+    uint8_t *indices = NULL;
     uint16_t con0 = m->custom[0x100 >> 1], con1 = m->custom[0x102 >> 1];
     uint16_t con2 = m->custom[0x104 >> 1];
     uint16_t diwstrt = m->custom[0x08E >> 1], diwstop = m->custom[0x090 >> 1];
@@ -100,6 +101,10 @@ void fa18_display_line(FA18Machine *m, int vpos) {
     if (y >= 0 && y < FA18_SCREEN_H) {
         row = m->screen + y * FA18_SCREEN_W;
         for (x = 0; x < FA18_SCREEN_W; x++) row[x] = colors[0] & 0xFFF;
+        if (m->capture_indices) {
+            indices = m->screen_indices + y * FA18_SCREEN_W;
+            memset(indices, 0, FA18_SCREEN_W);
+        }
     } else {
         row = NULL;
     }
@@ -150,6 +155,7 @@ void fa18_display_line(FA18Machine *m, int vpos) {
                 index = p & 31;
             }
             row[sx] = colors[index] & 0xFFF;
+            if (indices) indices[sx] = (uint8_t)index;
         }
     }
 }

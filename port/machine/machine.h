@@ -72,6 +72,11 @@ typedef struct {
     int keyboard_head, keyboard_tail, keyboard_cooldown;
     uint16_t screen[FA18_SCREEN_W * FA18_SCREEN_H];      /* RGB444, frame in progress */
     uint16_t last_screen[FA18_SCREEN_W * FA18_SCREEN_H]; /* last completed frame */
+    /* Optional host diagnostics, outside guest/DMA memory. Keep the actual
+     * selected palette index even when Copper fade makes its RGB value black. */
+    int capture_indices;
+    uint8_t screen_indices[FA18_SCREEN_W * FA18_SCREEN_H];
+    uint8_t last_screen_indices[FA18_SCREEN_W * FA18_SCREEN_H];
     uint64_t unmapped_reads, unmapped_writes;
     uint64_t blits, line_blits;
     AmigaRuntimeGuard runtime_guard;

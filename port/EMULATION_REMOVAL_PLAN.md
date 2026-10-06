@@ -310,3 +310,32 @@ percentage-point** observation. Its strict RGB parity result is diagnostic
 under the user's fade exclusion; final-RAM/iteration gates remain open.
 Memory/native-chipset/native-boot cutover remain **0%**, deletion gate **0/4**.
 No phase or emulation subsystem is completed by this repair.
+
+### Copper-fade comparison implementation
+
+Both runners now expose optional `--index8` output from the existing display
+model. The shared comparison checks those selected indices even during black
+frames. An RGB difference is excluded only when its unchanged index is 0-15
+and both colours belong to that index's original fade sequence at C08510;
+upper-palette and unrelated colour changes remain failures. Unequal frame
+counts are reported as parity failures, with the common prefix compared.
+The meter, live gate, timing probe and comparison image report share this rule.
+The historical strict RGB baseline remains in git; the after-stores report now
+records the fade-aware results.
+
+The full suite excludes 5,171,713 fade pixels in demo01, 2,061,205 in the carrier
+run, and 626,291 in each ADF run. Combined ON still fails drawing/state parity:
+the first differing indices are demo01 frame 316 (64 pixels), carrier frame
+374 (55,901), crashes frame 213 (1,905), and both ADF runs frame 1460 (26).
+Demo01 frame 565 changes indices too; it is not a fade-only difference.
+Different native replay frame counts and final RAM seals remain visible.
+
+Both toolchains build, all twelve CTests pass, diagnostic capture preserves
+RGB/RAM/stdout/stderr in OFF/ON/interpreter checks on both toolchains, and the
+three full isolated stores replays pass the new gate. Policy regression cases
+cover allowed fade, unrelated/upper-palette colours, equal-RGB index changes,
+black-frame drawing changes and unequal lengths. The full native captures'
+RGB/RAM hashes, all profile counters and runner stats match the pre-diagnostic
+batch; their completed captures were reused after repairing length handling.
+This batch changes no removal axis: raw CPU **38.4011%**, memory/chipset/boot
+**0%**, deletion gate **0/4**, removal delta **0 percentage points**.

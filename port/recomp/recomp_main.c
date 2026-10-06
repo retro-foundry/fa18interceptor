@@ -57,6 +57,7 @@ static int write_ppm(const char *path, const uint16_t *pixels) {
 }
 
 static void usage(void) {
+    fputs("Diagnostics: --index8 OUT.bin (headless, selected palette indices per pixel/frame)\n", stderr);
     fprintf(stderr,
 #ifdef FA18_ROMFREE_MAIN
             "usage: fa18_romfree [--adf PATH] [--save-dir PATH] [--window [--scale N] [--vsync on|off]]\n"
@@ -273,7 +274,7 @@ int main(int argc, char **argv) {
 #else
     const char *state_path = NULL, *rom_path = NULL;
 #endif
-    const char *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL,
+    const char *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL, *indices_path = NULL,
                *fallback = NULL, *ram_out = NULL;
     const char *record_path = NULL, *input_path = NULL;
     int to_end = 0;
@@ -316,7 +317,8 @@ int main(int argc, char **argv) {
 #endif
     char error[256];
     FA18Machine *m;
-    FILE *rgb = NULL;
+    FILE *rgb = NULL, *indices = NULL;
+    uint64_t indices_bytes = 0;
     uint64_t rgb_bytes = 0, rgb_limit = 4ull << 30;
     const char *rgb_limit_text = getenv("FA18_RGB444_MAX_MIB");
     char *rgb_limit_end;
@@ -343,6 +345,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--ppm") && i + 1 < argc) ppm = argv[++i];
         else if (!strcmp(argv[i], "--ppm-every") && i + 1 < argc) ppm_dir = argv[++i];
         else if (!strcmp(argv[i], "--rgb444") && i + 1 < argc) rgb_path = argv[++i];
+        else if (!strcmp(argv[i], "--index8") && i + 1 < argc) indices_path = argv[++i];
         else if (!strcmp(argv[i], "--fallback-log") && i + 1 < argc) fallback = argv[++i];
         else if (!strcmp(argv[i], "--ram-out") && i + 1 < argc) ram_out = argv[++i];
         else if (!strcmp(argv[i], "--no-recomp")) use_recomp = 0;
@@ -512,6 +515,11 @@ int main(int argc, char **argv) {
         return 1;
     }
     fa18_meter_start(profile_path != NULL);
+    if (indices_path && window) {
+        fputs("--index8 requires a headless run\n", stderr);
+        return 2;
+    }
+    m->capture_indices = indices_path != NULL;
     if (window) {
 #ifdef FA18_WITH_SDL
         run_result = run_window(m, &replay, start_frame, frames, scale, vsync, &i,frame_times_path,fast_forward);
@@ -521,6 +529,11 @@ int main(int argc, char **argv) {
 #endif
     } else {
     if (rgb_path && !(rgb = fopen(rgb_path, "wb"))) { fprintf(stderr, "cannot write %s\n", rgb_path); return 1; }
+    if (indices_path && !(indices = fopen(indices_path, "wb"))) {
+        fprintf(stderr, "cannot write %s\n", indices_path);
+        if (rgb) fclose(rgb);
+        return 1;
+    }
     for (i = 0; (to_end ? fa18_loop_iterations() < fa18_loop_replay_end() : i < frames)
 #ifdef FA18_ROMFREE_MAIN
          && !fa18_os_host_exited()
@@ -543,6 +556,19 @@ int main(int argc, char **argv) {
                 fclose(rgb);
                 rgb = NULL;
                 remove(rgb_path);
+                if (indices) { fclose(indices); remove(indices_path); }
+                fa18_bus_trace_close();
+                return 1;
+            }
+        }
+        if (indices) {
+            size_t written = fwrite(m->last_screen_indices, 1, sizeof m->last_screen_indices, indices);
+            indices_bytes += written;
+            if (written != sizeof m->last_screen_indices || (rgb_limit && indices_bytes > rgb_limit)) {
+                fprintf(stderr, "cannot finish index8 output %s (write error or output limit)\n", indices_path);
+                fclose(indices);
+                remove(indices_path);
+                if (rgb) { fclose(rgb); remove(rgb_path); }
                 fa18_bus_trace_close();
                 return 1;
             }
@@ -554,6 +580,11 @@ int main(int argc, char **argv) {
         }
     }
     if (rgb) fclose(rgb);
+    if (indices && fclose(indices)) {
+        fprintf(stderr, "cannot finish index8 output %s\n", indices_path);
+        remove(indices_path);
+        return 1;
+    }
     }
     if (!fa18_bus_trace_close()) return 1;
     if (ppm && !write_ppm(ppm, m->last_screen)) { fprintf(stderr, "cannot write %s\n", ppm); return 1; }

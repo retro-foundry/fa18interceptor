@@ -24,3 +24,13 @@ Memory cutover: **0%** (0 converted, 8988 remaining access sites). Native chipse
 - Traffic reductions do not establish converted memory or native IO/boot.
 - Zero OFF dispatches give no service reduction denominator; guest boot is still required.
 - Full mission outcomes, progression and active-flight teardown are still unverified.
+
+Frame policy: Ignore source-table Copper fade; require identical selected indices and non-fade RGB.
+
+| Scenario | First strict RGB difference | First non-fade difference | Fade pixels excluded | Final RAM seal | Iterations equal |
+| --- | ---: | --- | ---: | --- | --- |
+| demo01 | 565 | {'frame': 316, 'pixels': 64} | 5171713 | False | True |
+| qual_carrier_success | 423 | {'frame': 374, 'pixels': 55901} | 2061205 | False | True |
+| qual_fail_crashes | 263 | {'frame': 213, 'pixels': 1905} | 0 | False | True |
+| adf_gnu | 1460 | {'frame': 1460, 'pixels': 26} | 626291 | None | False |
+| adf_msvc | 1460 | {'frame': 1460, 'pixels': 26} | 626291 | None | False |

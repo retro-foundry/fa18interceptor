@@ -9,8 +9,11 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "scripts"))
+from compare_recomp_frames import compare_frames, fade_palette
 ENGINES = ("interpreted", "generated", "residual")
 BUS_ENGINES = ENGINES + ("port", "os", "chipset")
 
@@ -45,7 +48,8 @@ def scenario(name: str, runner: Path, args: list[str], output: Path,
             save.mkdir(exist_ok=True)
             mode_args[mode_args.index("--save-dir") + 1] = str(save)
         command = [str(runner), *mode_args, "--ports", mode, "--profile", str(work / f"{mode}.json"),
-                   "--rgb444", str(work / f"{mode}.rgb"), "--ram-out", str(work / f"{mode}.ram")]
+                   "--rgb444", str(work / f"{mode}.rgb"), "--ram-out", str(work / f"{mode}.ram"),
+                   "--index8", str(work / f"{mode}.index8")]
         result = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True)
         (work / f"{mode}.log").write_text(result.stdout + result.stderr)
         if result.returncode:
@@ -57,12 +61,16 @@ def scenario(name: str, runner: Path, args: list[str], output: Path,
             raise ValueError(f"{name}: unsupported meter schema")
         runs[mode] = dict(meter=meter, runner_stats=stats[0],
                           rgb_sha256=digest(work / f"{mode}.rgb"),
+                          index8_sha256=digest(work / f"{mode}.index8"),
                           ram_sha256=digest(work / f"{mode}.ram"))
         if digest(runner) != runner_sha256:
             raise ValueError(f"{name}: runner changed during measurement")
-        # These are disposable meter outputs in build/, never recordings.
-        (work / f"{mode}.rgb").unlink()
-        (work / f"{mode}.ram").unlink()
+    comparison = compare_frames(work / "off.rgb", work / "on.rgb", work / "off.index8",
+                                work / "on.index8", fade_palette(work / "off.ram"))
+    # These are disposable meter outputs in build/, never recordings.
+    for mode in ("off", "on"):
+        for suffix in ("rgb", "ram", "index8"):
+            (work / f"{mode}.{suffix}").unlink()
     off, on = runs["off"], runs["on"]
     counts = {mode: sum(run["meter"]["instructions"][engine] for engine in ENGINES)
               for mode, run in runs.items()}
@@ -80,7 +88,8 @@ def scenario(name: str, runner: Path, args: list[str], output: Path,
                 chipset_operations=chipset, chipset_reduction_percent=reduction(chipset["on"], chipset["off"]),
                 service_steps=services, service_reduction_percent=reduction(services["on"], services["off"]),
                 rgb_equal=rgb_equal, sealed_ram_equal=sealed_ram, iterations_equal=comparable,
-                parity_passed=rgb_equal and comparable and sealed_ram is not False)
+                frame_comparison=comparison,
+                parity_passed=comparison["passed"] and comparable and sealed_ram is not False)
 
 
 def main() -> int:
@@ -140,6 +149,7 @@ def main() -> int:
                 for path in (ROOT / "port/game").rglob("*.[ch]"))
     full = not args.frames and len(rows) == 5
     report = dict(schema=1, scope="full fixed suite" if full else "partial discovery probe",
+                  frame_comparison_policy="Ignore source-table Copper fade; require identical selected indices and non-fade RGB.",
                   cpu_removed_min_percent=min(row["cpu_removed_percent"] for row in rows),
                   accepted_cpu_removed_min_percent=(min(row["cpu_removed_percent"] for row in rows)
                                                     if full and all(row["parity_passed"] for row in rows) else None),
@@ -176,6 +186,15 @@ def main() -> int:
                      f"{percent(row['chipset_reduction_percent'])} | {percent(row['service_reduction_percent'])} | "
                      f"{'PASS' if row['parity_passed'] else 'FAIL'} |")
     lines += ["", *[f"- {limit}" for limit in report["limits"]], ""]
+    lines += ["Frame policy: " + report["frame_comparison_policy"], "",
+              "| Scenario | First strict RGB difference | First non-fade difference | Fade pixels excluded | Final RAM seal | Iterations equal |",
+              "| --- | ---: | --- | ---: | --- | --- |"]
+    for row in rows:
+        comp = row["frame_comparison"]
+        lines.append(f"| {row['name']} | {comp['first_rgb_difference']} | "
+                     f"{comp['first_nonfade_difference']} | {comp['ignored_fade_pixels']} | "
+                     f"{row['sealed_ram_equal']} | {row['iterations_equal']} |")
+    lines.append("")
     args.out.with_suffix(".md").write_text("\n".join(lines))
     print("\n".join(lines[:8]), flush=True)
     return 0 if report["parity_passed"] else 1

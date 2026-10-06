@@ -16,6 +16,7 @@ import sys
 from PIL import Image, ImageDraw, ImageFont
 from probe_recomp_timing import (ROOT, WIDTH, HEIGHT, BYTES_PER_FRAME,
                                 replay, first_difference)
+from compare_recomp_frames import compare_frames, fade_palette
 
 
 def values(data):
@@ -72,16 +73,20 @@ def main():
     scratch = ROOT / "build/recomp"
     scratch.mkdir(parents=True, exist_ok=True)
     off, on = scratch / "comparison_off.rgb444", scratch / "comparison_on.rgb444"
+    off_indices, on_indices = off.with_suffix(".index8"), on.with_suffix(".index8")
+    off_ram = off.with_suffix(".ram")
     try:
         executable = ROOT / "build/recomp/fa18_recomp.exe"
         rom = ROOT / "local/system/kick13.rom"
         with ThreadPoolExecutor(max_workers=2) as pool:
             jobs = [pool.submit(replay, executable, args.recording, rom, replay_frames,
-                                mode, path, args.only if mode == "on" else None)
-                    for mode, path in (("off", off), ("on", on))]
+                                mode, path, args.only if mode == "on" else None,
+                                indices, off_ram if mode == "off" else None)
+                    for mode, path, indices in (("off", off, off_indices), ("on", on, on_indices))]
             for job in jobs:
                 job.result()
         first = first_difference(off, on, replay_frames)
+        comparison = compare_frames(off, on, off_indices, on_indices, fade_palette(off_ram))
         raw = []
         for path in (off, on):
             with path.open("rb") as stream:
@@ -108,6 +113,7 @@ def main():
                    "frame": args.frame, "source": "fresh --ports off",
                    "candidate": "fresh --ports on " + (args.only or "ALL"),
                    "first_difference": first, "changed_pixels": len(changed),
+                   "frame_comparison_ignoring_copper_fade": comparison,
                    "total_pixels": WIDTH * HEIGHT, "color_changes": dict(colors),
                    "nearby_frames": context,
                    "source_frame_sha256": hashlib.sha256(raw[0]).hexdigest(),
@@ -127,7 +133,7 @@ def main():
                   fill=(200, 210, 220))
         panels = [rgb_image(source), rgb_image(actual), mask]
         captions = ["SOURCE OFF: original instructions", "CURRENT ALL ON: C replacements",
-                    "DIFFERENCE MASK: pink = changed"]
+                    "STRICT RGB MASK: includes fade diagnostics"]
         if args.only:
             captions[1] = "CURRENT ON: " + args.only
         crop = (0, 96, 320, 208)
@@ -146,6 +152,9 @@ def main():
     finally:
         off.unlink(missing_ok=True)
         on.unlink(missing_ok=True)
+        off_indices.unlink(missing_ok=True)
+        on_indices.unlink(missing_ok=True)
+        off_ram.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

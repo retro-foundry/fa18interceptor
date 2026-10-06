@@ -27,6 +27,23 @@ CPU-work removal **38.4011%** (+0.0090 percentage points); final-RAM/iteration
 acceptance remains open. Memory/chipset/boot cutover remain **0%**, deletion
 gate **0/4**. This is validated integration scaffolding, not Phase 1 completion.
 
+Fade exclusion is implemented, not just documented: headless `--index8`
+records the selected palette index alongside RGB444. The shared comparator in
+`scripts/compare_recomp_frames.py` requires matching indices and excludes only
+same-index colours from the source's C08510 fade table. It preserves checks for
+upper-palette/other colours, drawing during black frames and unequal frame
+counts. The meter, live gate, timing probe and image report use it (NumPy is
+required for these Python comparisons).
+
+The full fade-aware report excludes millions of actual fade differences, but
+combined ON still fails drawing/state parity: first index differences occur at
+demo01 frame 316 (64 pixels), carrier 374 (55,901), crashes 213 (1,905), and
+ADF GNU/MSVC 1460 (26). Frame 565 changes indices, so it is not fade-only.
+All three full isolated stores recordings pass the new frame/RAM gate. Both
+toolchains build, all twelve CTests pass, and capture/profiling remain invisible
+to RGB/RAM/stdout/stderr in all three CPU modes on both toolchains. Raw CPU,
+native-memory/chipset/boot axes and deletion gate are unchanged by diagnostics.
+
 ## What went wrong and must not recur
 
 About fourteen hours of elapsed work on 2026-10-05 expanded a separate gameplay

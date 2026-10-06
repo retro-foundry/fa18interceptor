@@ -16,6 +16,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+from compare_recomp_frames import compare_frames, fade_palette
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,12 +57,17 @@ def normalize_probe(value: str) -> str:
 
 
 def replay(executable: Path, recording: Path, rom: Path, frames: int,
-           mode: str, output: Path, only: str | None = None) -> None:
+           mode: str, output: Path, only: str | None = None,
+           indices: Path | None = None, ram: Path | None = None) -> None:
     command = [str(executable), "--state", str(recording / "state.bin"),
                "--input", str(recording / "input.fa18in"), "--frames", str(frames),
                "--rom", str(rom), "--ports", mode, "--rgb444", str(output)]
     if only:
         command += ["--ports-only", only]
+    if indices:
+        command += ["--index8", str(indices)]
+    if ram:
+        command += ["--ram-out", str(ram)]
     environment = os.environ.copy()
     required_mib = (frames * BYTES_PER_FRAME + (1 << 20) - 1) >> 20
     environment["FA18_RGB444_MAX_MIB"] = str(required_mib + 1)
@@ -137,23 +143,35 @@ def main() -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     reference = output_dir / "timing_probe_off.bin"
     actual = output_dir / "timing_probe_on.bin"
+    reference_indices = reference.with_suffix(".index8")
+    actual_indices = actual.with_suffix(".index8")
+    reference_ram = reference.with_suffix(".ram")
     try:
-        replay(executable, recording, rom, args.frames, "off", reference)
+        replay(executable, recording, rom, args.frames, "off", reference,
+               indices=reference_indices, ram=reference_ram)
         print(f"source: {recording.name}, {args.frames} frames")
         for probe in args.probes:
             replay(executable, recording, rom, args.frames, "on", actual,
-                   None if probe == "ALL" else probe)
-            difference = first_difference(reference, actual, args.frames)
+                   None if probe == "ALL" else probe, indices=actual_indices)
+            comparison = compare_frames(reference, actual, reference_indices,
+                                        actual_indices, fade_palette(reference_ram))
+            found = comparison["first_nonfade_difference"]
+            difference = (found["frame"], found["pixels"]) if found else None
             if difference is None:
                 if not args.differences_only:
-                    print(f"{probe}: exact through frame {args.frames}")
+                    print(f"{probe}: matches through frame {args.frames} with Copper fade excluded "
+                          f"({comparison['ignored_fade_pixels']} pixels)")
             else:
                 frame, pixels = difference
-                print(f"{probe}: first difference frame {frame}, {pixels} pixels")
+                print(f"{probe}: first non-fade difference frame {frame}, {pixels} pixels; "
+                      f"{comparison['ignored_fade_pixels']} fade pixels excluded")
     finally:
         if not args.keep:
             reference.unlink(missing_ok=True)
             actual.unlink(missing_ok=True)
+            reference_indices.unlink(missing_ok=True)
+            actual_indices.unlink(missing_ok=True)
+            reference_ram.unlink(missing_ok=True)
     return 0
 
 

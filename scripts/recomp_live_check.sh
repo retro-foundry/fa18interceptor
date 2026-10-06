@@ -1,5 +1,6 @@
 #!/bin/sh
-# Compare live recreated-C RGB444 output with fresh source (`--ports off`)
+# Compare live recreated-C drawing/RGB444 with fresh source (`--ports off`),
+# ignoring only source-table Copper fade with unchanged palette indices.
 # streams and check the sealed final RAM during the same ON replay. Recordings
 # run independently in parallel; temporary outputs are always removed.
 # Set PORTS_ONLY to validate an isolated registered batch.
@@ -12,6 +13,7 @@ OUT=build/recomp
 cleanup() {
   rm -f "$OUT"/frames_off_check_*.bin "$OUT"/frames_on_check_*.bin
   rm -f "$OUT"/ram_on_check_*.bin
+  rm -f "$OUT"/ram_off_check_*.bin "$OUT"/indices_off_check_*.bin "$OUT"/indices_on_check_*.bin
 }
 trap cleanup EXIT HUP INT TERM
 
@@ -38,10 +40,14 @@ run_one() {
   reference="$OUT/frames_off_check_$run.bin"
   actual="$OUT/frames_on_check_$run.bin"
   ram="$OUT/ram_on_check_$run.bin"
+  reference_ram="$OUT/ram_off_check_$run.bin"
+  reference_indices="$OUT/indices_off_check_$run.bin"
+  actual_indices="$OUT/indices_on_check_$run.bin"
   only_args=""
   [ -n "${PORTS_ONLY:-}" ] && only_args="--ports-only $PORTS_ONLY"
-  $EXE $args --rom $ROM --ports off --rgb444 "$reference" >/dev/null
-  $EXE $args --rom $ROM --ports on $only_args --rgb444 "$actual" --ram-out "$ram" >/dev/null
+  $EXE $args --rom $ROM --ports off --rgb444 "$reference" --index8 "$reference_indices" --ram-out "$reference_ram" >/dev/null
+  $EXE $args --rom $ROM --ports on $only_args --rgb444 "$actual" --index8 "$actual_indices" --ram-out "$ram" >/dev/null
+  python scripts/compare_recomp_frames.py "$reference" "$actual" "$reference_indices" "$actual_indices" --reference-ram "$reference_ram" || return 1
   python - "$run" "$ram" <<'PY'
 import hashlib, json, sys
 from pathlib import Path
@@ -52,12 +58,8 @@ got = hashlib.sha256(Path(ram_path).read_bytes()).hexdigest()
 if got != want:
     sys.exit(f"{name}: live ON final RAM differs from the sealed recording ({got} != {want})")
 PY
-  if ! cmp -s "$reference" "$actual"; then
-    echo "$run: live ON RGB444 frames differ from source OFF" >&2
-    return 1
-  fi
-  rm -f "$reference" "$actual" "$ram"
-  echo "$run: live ON RGB444 frames match source OFF; final RAM matches seal"
+  rm -f "$reference" "$actual" "$ram" "$reference_ram" "$reference_indices" "$actual_indices"
+  echo "$run: live ON frames match source OFF with Copper fade excluded; final RAM matches seal"
 }
 
 run_all() {

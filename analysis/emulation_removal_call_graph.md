@@ -76,6 +76,10 @@ ported instruction steps remain separately visible.
 ADF keyboard-to-demo scenario on both active toolchains, comparing OFF/ON RGB
 and the native recordings' final RAM seals. Optional full launcher checks cover
 construction, both CPU modes, splash, credits and keyboard-to-demo.
+Frame comparisons exclude Copper fade via the display's optional selected-index
+stream (`--index8`): indices must match, and different RGB values are excluded
+only within that index's source fade sequence at C08510. Strict RGB hashes remain
+diagnostics. Frame-count and final-RAM mismatches are still reported.
 
 The next structural removal is C child calls through the guest-PC dispatcher,
 starting with a source-proven hardware-free parent/leaf pair actually exercised

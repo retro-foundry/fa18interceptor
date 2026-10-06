@@ -34,3 +34,12 @@ python scripts/build_recomp.py --romfree
 Removing the abandoned source does not remove the active runner's remaining
 Musashi, guest-memory or chipset dependencies. Their removal must happen through
 the actual game/runtime call graph.
+
+Headless frame diagnostics use `--rgb444 OUT.bin --index8 OUT.index8`. The
+index stream contains one selected palette index per 320x256 pixel per frame,
+including during black fades; it does not change guest state or the RGB stream.
+`../scripts/compare_recomp_frames.py` ignores only same-index colours belonging
+to the original game's 16-stage Copper fade table at C08510. It checks drawing
+indices, all other colours and frame counts. The live gate, timing probe,
+comparison image report and emulation meter use that policy. Python comparison
+tools and their regression check require NumPy; image reports also use Pillow.

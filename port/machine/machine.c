@@ -679,6 +679,8 @@ static void advance_line(FA18Machine *m) {
     if (m->vpos >= FA18_PAL_LINES) m->vpos = 0;
     if (m->vpos == FA18_FRAME_END_LINE) {
         memcpy(m->last_screen, m->screen, sizeof m->screen);
+        if (m->capture_indices)
+            memcpy(m->last_screen_indices, m->screen_indices, sizeof m->screen_indices);
         m->frame++;
         frame_done = 1;
         return;
