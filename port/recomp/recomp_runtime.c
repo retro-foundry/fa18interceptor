@@ -368,9 +368,12 @@ void fa18_machine_instruction_hook(unsigned int pc) {
         if (r == FA18_EXIT_INTERP && !fa18_machine_event_due()) break;
     }
     fa18_machine_require_supported_target(REG_PPC,REG_PC);
+    fa18_meter_engine = FA18_ENGINE_INTERPRETED;
     fa18_bus_begin(REG_PC); /* the interpreter's opcode fetch follows */
     note_rom_transition(REG_PPC, REG_PC);
     trace_pc(REG_PC);
+    if (fa18_meter_enabled && !CPU_STOPPED)
+        ++fa18_recomp_stats.interpreted_instructions;
     if (enabled_flag) {
         int f = fold(REG_PC);
         if (f >= 0) {
@@ -423,13 +426,17 @@ int fa18_recomp_resume(uint32_t ret, uint32_t sp) {
         fa18_machine_require_supported_target(REG_PPC,pc);
         op = fa18_bus_read16(pc);
         if (interpreter_only(op)) return FA18_EXIT_INTERP;
+        int previous = fa18_meter_engine;
+        fa18_meter_engine = FA18_ENGINE_RESIDUAL;
         fa18_bus_begin(pc);
         fa18_bus_fetch(pc);
         REG_PPC = pc;
         REG_PC = pc + 2;
         REG_IR = op;
+        if (fa18_meter_enabled) ++fa18_recomp_stats.residual_instructions;
         m68ki_instruction_jump_table[op]();
         USE_CYCLES(CYC_INSTRUCTION[op]);
+        fa18_meter_engine = previous;
     }
 }
 

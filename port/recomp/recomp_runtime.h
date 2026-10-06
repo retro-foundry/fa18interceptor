@@ -53,6 +53,9 @@ typedef struct {
     uint64_t generated_cycles;    /* CPU cycles spent in generated code */
     uint64_t interpreted_cycles;  /* CPU cycles spent in Musashi */
     uint64_t interpreted_game;    /* interpreted instructions in game RAM */
+    uint64_t interpreted_instructions; /* all Musashi instructions, including ROM */
+    uint64_t generated_instructions; /* actual translated opcode operations */
+    uint64_t residual_instructions; /* between-label and OS opcode helpers */
     uint64_t code_writes;         /* writes that hit translated bytes */
     int disabled_functions;
 } FA18RecompStats;
@@ -111,6 +114,7 @@ extern int64_t fa18_cycle_origin, fa18_next_event;
         REG_PPC = (pc);                                                          \
         REG_PC = (pc) + 2;                                                       \
         REG_IR = (op);                                                           \
+        if (fa18_meter_enabled) ++fa18_recomp_stats.generated_instructions;       \
         operation;                                                              \
         USE_CYCLES(CYC_INSTRUCTION[(op)]);                                       \
     } while (0)

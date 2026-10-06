@@ -27,6 +27,82 @@
 #include "m68kcpu.h"
 #include "m68kops.h"
 #include "../os/rom_audit_adapter.h"
+#include "recomp_runtime.h"
+
+FA18EmulationMeter fa18_emulation_meter;
+int fa18_meter_enabled, fa18_meter_engine;
+/* Physical 4 KiB RAM pages; mirrors share the underlying Chip RAM page.
+ * A page hit records each overlapping API access, not bytes or DMA slots.
+ * Shared-page evidence is conservative; absence is scenario-scoped only. */
+static uint64_t meter_pages[256][FA18_ENGINE_COUNT][2];
+
+void fa18_meter_os_opcode(void) {
+    if (fa18_meter_enabled) ++fa18_recomp_stats.residual_instructions;
+}
+
+void fa18_meter_start(int enabled) {
+    fa18_meter_enabled = enabled;
+    fa18_meter_engine = FA18_ENGINE_HOST;
+    memset(&fa18_emulation_meter, 0, sizeof fa18_emulation_meter);
+    memset(meter_pages, 0, sizeof meter_pages);
+}
+
+void fa18_meter_access(uint32_t address, unsigned size, int write) {
+    if (!fa18_meter_enabled) return;
+    if (write) ++fa18_emulation_meter.writes[fa18_meter_engine];
+    else ++fa18_emulation_meter.reads[fa18_meter_engine];
+    unsigned previous = 256;
+    for (unsigned i = 0; i < size; ++i) {
+        uint32_t a = (address + i) & 0xffffffu;
+        unsigned page = 256;
+        if (a < 0x200000u) page = (a & (FA18_CHIP_SIZE - 1)) >> 12;
+        else if (a >= FA18_SLOW_BASE && a < FA18_SLOW_BASE + FA18_SLOW_SIZE)
+            page = 128 + ((a - FA18_SLOW_BASE) >> 12);
+        if (page < 256 && page != previous) ++meter_pages[page][fa18_meter_engine][write != 0];
+        previous = page;
+    }
+}
+
+void fa18_meter_write_json(FILE *out, uint64_t frames) {
+    static const char *names[] = {"host", "interpreted", "generated", "residual", "port", "os", "chipset"};
+    fprintf(out, "\"_emulation\":{\"schema\":1,\"frames\":%llu,\"instructions\":{"
+            "\"interpreted\":%llu,\"generated\":%llu,\"residual\":%llu},\"bus\":{",
+            (unsigned long long)frames,
+            (unsigned long long)fa18_recomp_stats.interpreted_instructions,
+            (unsigned long long)fa18_recomp_stats.generated_instructions,
+            (unsigned long long)fa18_recomp_stats.residual_instructions);
+    for (unsigned e = 0; e < FA18_ENGINE_COUNT; ++e)
+        fprintf(out, "%s\"%s\":{\"reads\":%llu,\"writes\":%llu}", e ? "," : "", names[e],
+                (unsigned long long)fa18_emulation_meter.reads[e],
+                (unsigned long long)fa18_emulation_meter.writes[e]);
+    fprintf(out, "},\"chipset\":{\"blits\":%llu,\"copper_instructions\":%llu,"
+            "\"bitplane_words\":%llu,\"cia_events\":%llu,\"interrupt_requests\":%llu},"
+            "\"os\":{\"service_steps\":%llu,\"service_entries\":%llu,\"guest_boot_handoff\":true},"
+            "\"ports\":{\"calls\":%llu,\"steps\":%llu},\"ram_pages\":{",
+            (unsigned long long)fa18_emulation_meter.blits,
+            (unsigned long long)fa18_emulation_meter.copper_instructions,
+            (unsigned long long)fa18_emulation_meter.bitplane_words,
+            (unsigned long long)fa18_emulation_meter.cia_events,
+            (unsigned long long)fa18_emulation_meter.interrupts,
+            (unsigned long long)fa18_emulation_meter.service_steps,
+            (unsigned long long)fa18_emulation_meter.service_entries,
+            (unsigned long long)fa18_emulation_meter.port_calls,
+            (unsigned long long)fa18_emulation_meter.port_steps);
+    int first = 1;
+    for (unsigned p = 0; p < 256; ++p) {
+        uint64_t total = 0;
+        for (unsigned e = 0; e < FA18_ENGINE_COUNT; ++e)
+            total += meter_pages[p][e][0] + meter_pages[p][e][1];
+        if (!total) continue;
+        fprintf(out, "%s\"%06X\":{", first ? "" : ",", p < 128 ? p << 12 : FA18_SLOW_BASE + ((p - 128) << 12));
+        first = 0;
+        for (unsigned e = 0; e < FA18_ENGINE_COUNT; ++e)
+            fprintf(out, "%s\"%s\":[%llu,%llu]", e ? "," : "", names[e],
+                    (unsigned long long)meter_pages[p][e][0], (unsigned long long)meter_pages[p][e][1]);
+        fputc('}', out);
+    }
+    fputs("}}", out);
+}
 
 int fa18_bus_timing = 1;
 

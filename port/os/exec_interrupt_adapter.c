@@ -6,6 +6,7 @@
 #include "exec_service_state.h"
 #include "service_dispatch_adapter.h"
 #include "machine.h"
+#include "bus.h"
 #include "m68kops.h"
 #include <stdlib.h>
 static uint32_t signature(const uint8_t *r,unsigned lo,unsigned hi) {
@@ -72,7 +73,7 @@ static int exec_base(uint32_t pc) {
 }
 static int cpu_status(uint32_t pc,uint16_t op,uint16_t sr) {
     fa18_service_begin(pc,op);
-    if (op==0x4E73) m68ki_instruction_jump_table[op]();
+    if (op==0x4E73) { fa18_meter_os_opcode(); m68ki_instruction_jump_table[op](); }
     else if (!FLAG_S) m68ki_exception_privilege_violation();
     else { fa18_service_extension_words(1); m68ki_trace_t0(); m68ki_set_sr(sr); }
     USE_CYCLES(CYC_INSTRUCTION[op]); return 1;

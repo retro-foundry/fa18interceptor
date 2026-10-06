@@ -3,6 +3,7 @@
  * UAE's non-cycle-exact paths (blitter_dofast, blitter_dofast_desc and the
  * line-mode loop of actually_do_blit). */
 #include "machine.h"
+#include "bus.h"
 
 #include "recomp_runtime.h"
 
@@ -309,6 +310,7 @@ void fa18_blitter_start(FA18Machine *m) {
         zero = area_blit(m, width, height);
     }
     m->blits++;
+    if (fa18_meter_enabled) ++fa18_emulation_meter.blits;
     fa18_blitter_zero_flag(zero);
     /* Memory is updated now; BBUSY and the BLIT interrupt follow the
      * hardware duration so CPU wait loops keep their timing. */

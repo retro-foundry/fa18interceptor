@@ -82,6 +82,12 @@ if(BUILD_TESTING)
         target_compile_options(fa18_machine_startup_test PRIVATE -UNDEBUG)
     endif()
     add_test(NAME fa18_clean_machine_startup COMMAND fa18_machine_startup_test)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../captures/native/demo01/state.bin AND
+       EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/system/kick13.rom)
+        add_test(NAME fa18_emulation_meter_visibility
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/recomp/check_emulation_meter.py
+                    --runner $<TARGET_FILE:fa18_recomp>)
+    endif()
 endif()
 if(MSVC)
     target_compile_definitions(fa18_musashi PRIVATE _CRT_SECURE_NO_WARNINGS)

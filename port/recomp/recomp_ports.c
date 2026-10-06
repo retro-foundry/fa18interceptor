@@ -8,6 +8,7 @@
 
 #include "m68kcpu.h"
 #include "machine.h"
+#include "bus.h"
 #include "recomp_runtime.h"
 
 extern int64_t fa18_cycle_origin, fa18_next_event;
@@ -345,6 +346,15 @@ static void finish_stepped_calls(void) {
             stepped_count=i-1;
     }
 }
+
+static int run_port_step(const FA18Port *port) {
+    int previous = fa18_meter_engine;
+    fa18_meter_engine = FA18_ENGINE_PORT;
+    int result = port->step();
+    if (fa18_meter_enabled) ++fa18_emulation_meter.port_steps;
+    fa18_meter_engine = previous;
+    return result;
+}
 size_t fa18_ports_active_steps(void) { return stepped_count; }
 
 int fa18_ports_resume_step(void) {
@@ -356,7 +366,7 @@ int fa18_ports_resume_step(void) {
     for (i = stepped_count; i > 0; --i) {
         const FA18Port *port = &fa18_ports[stepped_calls[i - 1].port];
         if (stepped_owns(port,REG_PC)) {
-            if (!port->step()) {
+            if (!run_port_step(port)) {
                 fprintf(stderr, "port %s: cannot resume at %06X\n", port->name, REG_PC);
                 abort();
             }
@@ -393,7 +403,11 @@ static int run_glue(int port) {
          * Dispatch first so service precedes the first bridge instruction. */
         return FA18_EXIT_DISPATCH;
     }
+    int previous = fa18_meter_engine;
+    fa18_meter_engine = FA18_ENGINE_PORT;
     int r = fa18_ports[port].glue();
+    if (fa18_meter_enabled) ++fa18_emulation_meter.port_calls;
+    fa18_meter_engine = previous;
     USE_CYCLES(fa18_ports[port].cycles);
     return r;
 }
@@ -406,7 +420,13 @@ static uint32_t report_caller;
 static int run_reference(int function,int label) {
     int result;
     uint32_t ret,sp;
-    if(function>=0) return fa18_recomp_functions[function].fn(label);
+    if(function>=0) {
+        int previous = fa18_meter_engine;
+        fa18_meter_engine = FA18_ENGINE_GENERATED;
+        result = fa18_recomp_functions[function].fn(label);
+        fa18_meter_engine = previous;
+        return result;
+    }
     ret=fa18_bus_read32(REG_A[7])&0xffffffu; sp=REG_A[7]+4;
     ++source_only_reference;
     result=fa18_recomp_resume(ret,sp);
@@ -917,7 +937,7 @@ int fa18_ports_enter(int function, int label, int via_call) {
                 fa18_bus_read16(REG_PPC) == 0x4ED4; /* JMP (A4) */
     if (port < 0 || mode == FA18_PORTS_OFF || fa18_write_log_active || REG_PC != fa18_ports[port].entry ||
         (!call_entry && !tail_call))
-        return fa18_recomp_functions[function].fn(label);
+        return run_reference(function, label);
     stats[port].calls++;
     if (mode == FA18_PORTS_SHADOW) return run_shadow(function, label, port);
     if (mode == FA18_PORTS_SANDBOX) return run_sandbox(function, label, port);
@@ -981,7 +1001,9 @@ int fa18_recomp_write_profile(const char *path) {
                 (unsigned long long)profile[f]);
         first = 0;
     }
+    if (!first) fputc(',', out);
+    fa18_meter_write_json(out, fa18_machine->frame);
     fputs("}\n", out);
-    fclose(out);
-    return 1;
+    int failed = ferror(out);
+    return fclose(out) == 0 && !failed;
 }

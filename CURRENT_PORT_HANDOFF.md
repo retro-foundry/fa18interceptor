@@ -1,6 +1,6 @@
 # Current playable port handoff
 
-Updated 2026-10-05 following the user's source-ownership correction, cleanup and
+Updated 2026-10-06 after active-runner emulation metering, following the user's source-ownership correction, cleanup and
 explicit instruction to prevent another costly detour. Read this handoff and
 `AGENTS.md` before continuing. This file supersedes earlier resume instructions;
 previous handoffs and removed source are preserved in git history.
@@ -149,3 +149,71 @@ runs and sealed captures are validation evidence. Do not alter
 user-owned historical tooling; its removed target is not an active build.
 Preserve unrelated `.vscode/` content. Commit completed validated batches as
 previously requested. The emulation-independence goal remains unfinished.
+
+## Emulation removal: measured baseline (2026-10-06)
+
+The active objective is `port/EMULATION_REMOVAL_PLAN.md`, with commits after
+validated batches and scoped percentages at each step. Phase 0's call graph is
+`analysis/emulation_removal_call_graph.md`; the meter is
+`tools/recomp/emulation_meter.py` and its results are
+`analysis/emulation_removal_meter.json/.md`.
+
+`--profile` preserves routine-count keys and adds `_emulation`. It counts every
+interpreted instruction including ROM, every executed generated/static opcode
+helper, original-byte execution between labels and the three OS RTE helper
+paths. Guest API accesses are attributed to interpreter, generated, residual,
+port, OS, chipset or host, with conservative overlapping 4 KiB RAM-page hits.
+Direct DMA and host-compatibility memory accesses are outside that page count:
+absence does not establish exclusive native ownership. Chipset counts cover
+live blits, Copper instructions, bitplane word fetches, CIA events and interrupt
+requests. OS dispatches and port calls/steps expose remaining adapter work.
+
+Baseline suite: full sealed demo, carrier-success and crash recordings, plus
+the original ADF keyboard-to-demo sequence on GNU and MSVC. Raw CPU-work shares
+removed are respectively **85.5191%, 69.8738%, 69.7856%, 38.3921%, 38.3921%**;
+minimum **38.3921%**. **All five fail OFF/ON RGB parity**; all three native ON
+final RAM seals also fail. ADF OFF/ON update iteration counts differ. These are
+observations of the existing port, not accepted removal progress or whole-game
+completion. The report's accepted CPU share is null while parity fails.
+
+Memory cutover: **0%**, 0/8,988 guest access sites converted. Native chipset and
+native boot: **0%**. Deletable subsystems: **0/4**. This instrumentation batch
+removes no dependency and has **0 percentage-point removal delta**. Phase 0's
+measurement deliverables are published; its suite acceptance requirement and
+Phases 1-6 remain open.
+
+Validation: both active GNU and MSVC runners build; all **12** active CTests
+pass, including new profiling visibility checks when local reference inputs
+exist. `tools/recomp/check_emulation_meter.py` passes on both toolchains:
+120-frame OFF, ON and interpreter runs retain identical stdout/stderr, every
+RGB frame and final RAM with profiling enabled or disabled. Both full ADF-only
+launcher checks pass construction (185 hunks/8,441 relocations), both CPU modes,
+splash, credits and keyboard-to-demo, with zero ROM accesses/unsupported services.
+An independent unmodified `9c062b80` GNU build reproduces the full crash
+recording and 2,600-frame ADF sequence in OFF and ON byte for byte (all RGB,
+RAM and statistics). Their parity failures therefore predate the counters.
+`inventory.py` now finds active `game/*.h` citations: 332 translated routines
+have module matches instead of none from the obsolete top-level glob.
+
+Next: retain the failing baseline and investigate the first affected live
+transition, using existing source timing evidence. Then remove the guest-PC
+child dispatcher for a hardware-free, already-C parent/leaf pair actually
+exercised by the runner. Many ON paths still execute instruction-shaped steps;
+their readable domain C is often used only by comparison. Do not treat a step
+count, decreased bus traffic or an uncalled domain module as native integration.
+The hot C02776 reference entry is an OS VBeamPos wrapper, not an original ADF
+game helper to recreate; `recomp_deferred.json` records that origin.
+
+Reproduce:
+
+```text
+python tools/recomp/emulation_meter.py --launcher-checks
+python tools/recomp/emulation_meter.py --scenario demo01 --frames 120 --out build/meter-probe.json
+python tools/recomp/check_emulation_meter.py
+ctest --test-dir build/recomp-cmake -C Release --output-on-failure
+```
+
+The full meter deliberately exits 1 after writing its reports when parity
+fails. Probe results are explicitly partial, never a substitute for suite or
+whole-game acceptance. Disposable RGB/RAM outputs live in `build/` and are
+removed after hashing; sealed recordings and user-owned files are untouched.

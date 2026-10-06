@@ -5,6 +5,25 @@
  * bus.c). */
 
 #include "machine.h"
+#include <stdio.h>
+
+/* Profiling only: origin of actual guest-memory API accesses, including
+ * untimed game reads and writes. Diagnostic/loader accesses are host-owned. */
+enum { FA18_ENGINE_HOST, FA18_ENGINE_INTERPRETED, FA18_ENGINE_GENERATED,
+       FA18_ENGINE_RESIDUAL, FA18_ENGINE_PORT, FA18_ENGINE_OS,
+       FA18_ENGINE_CHIPSET, FA18_ENGINE_COUNT };
+typedef struct {
+    uint64_t reads[FA18_ENGINE_COUNT], writes[FA18_ENGINE_COUNT];
+    uint64_t blits, copper_instructions, bitplane_words, cia_events, interrupts;
+    uint64_t service_steps, service_entries, port_steps, port_calls;
+} FA18EmulationMeter;
+extern FA18EmulationMeter fa18_emulation_meter;
+extern int fa18_meter_enabled, fa18_meter_engine;
+void fa18_meter_start(int enabled);
+void fa18_meter_access(uint32_t address, unsigned size, int write);
+/* OS bridges which still execute a Musashi opcode count as residual work. */
+void fa18_meter_os_opcode(void);
+void fa18_meter_write_json(FILE *out, uint64_t frames);
 
 extern int fa18_bus_timing; /* 0 while memory is accessed outside the CPU */
 

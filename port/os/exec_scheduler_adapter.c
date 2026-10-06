@@ -6,6 +6,7 @@
 #include "exec_service_state.h"
 #include "service_dispatch_adapter.h"
 #include "machine.h"
+#include "bus.h"
 #include "m68kops.h"
 #include <string.h>
 #include <stdlib.h>
@@ -61,7 +62,7 @@ static int address(uint32_t pc,uint16_t op,unsigned reg,uint32_t value) {
 }
 static int cpu(uint32_t pc,uint16_t op,unsigned value) {
     fa18_service_begin(pc,op);
-    if (op==0x4E73) m68ki_instruction_jump_table[op]();
+    if (op==0x4E73) { fa18_meter_os_opcode(); m68ki_instruction_jump_table[op](); }
     else if (!FLAG_S) m68ki_exception_privilege_violation();
     else if (op==0x46FC || op==0x4E72) {
         fa18_service_extension_words(1); m68ki_trace_t0();

@@ -2,6 +2,7 @@
  * whose WAIT is satisfied anywhere on a line take effect before that line is
  * drawn; bitplane words are fetched from the live Chip RAM at draw time. */
 #include "machine.h"
+#include "bus.h"
 
 #include <string.h>
 
@@ -51,6 +52,7 @@ void fa18_copper_run_until(FA18Machine *m, int vpos, int hpos) {
             resumed = 1;
         }
         copper_slot(m, vpos, resumed);
+        if (fa18_meter_enabled) ++fa18_emulation_meter.copper_instructions;
         w1 = fa18_chip16(m, m->copper_pc);
         w2 = fa18_chip16(m, m->copper_pc + 2);
         m->copper_pc = (m->copper_pc + 4) & (FA18_CHIP_SIZE - 1);
@@ -114,6 +116,7 @@ void fa18_display_line(FA18Machine *m, int vpos) {
         int delay = (plane & 1) ? (con1 >> 4) & 15 : con1 & 15;
         int w;
         for (w = 0; w < words; w++) {
+            if (fa18_meter_enabled) ++fa18_emulation_meter.bitplane_words;
             uint16_t data = fa18_chip16(m, pt + (uint32_t)w * 2);
             int bit;
             for (bit = 0; bit < 16; bit++) {

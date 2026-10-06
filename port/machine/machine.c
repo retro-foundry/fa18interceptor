@@ -84,6 +84,7 @@ static void update_irq(FA18Machine *m) {
 }
 
 void fa18_raise_interrupt(FA18Machine *m, int bit) {
+    if (fa18_meter_enabled) ++fa18_emulation_meter.interrupts;
     m->intreq |= (uint16_t)(1u << bit);
     update_irq(m);
 }
@@ -91,6 +92,7 @@ void fa18_raise_interrupt(FA18Machine *m, int bit) {
 /* ---- CIAs ---------------------------------------------------------------- */
 
 static void cia_interrupt(FA18Machine *m, int which, uint8_t bit) {
+    if (fa18_meter_enabled) ++fa18_emulation_meter.cia_events;
     FA18Cia *c = &m->cia[which];
     c->icr |= bit;
     if (c->imask & bit) fa18_raise_interrupt(m, which == 0 ? 3 : 13);
@@ -405,7 +407,7 @@ void fa18_machine_require_supported_target(uint32_t caller,uint32_t target) {
     }
 }
 
-uint8_t fa18_bus_read8(uint32_t a) {
+static uint8_t bus_read8(uint32_t a) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
     guard_read(a,1);
@@ -431,7 +433,7 @@ uint8_t fa18_bus_read8(uint32_t a) {
     return 0;
 }
 
-uint16_t fa18_bus_read16(uint32_t a) {
+static uint16_t bus_read16(uint32_t a) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
     guard_read(a,2);
@@ -449,11 +451,21 @@ uint16_t fa18_bus_read16(uint32_t a) {
         return (uint16_t)(p[0] << 8 | p[1]);
     }
     if (is_custom(a)) return fa18_custom_read(m, a & 0x1FE);
-    return (uint16_t)(fa18_bus_read8(a) << 8 | fa18_bus_read8(a + 1));
+    return (uint16_t)(bus_read8(a) << 8 | bus_read8(a + 1));
 }
 
 uint32_t fa18_bus_read32(uint32_t a) {
-    return (uint32_t)fa18_bus_read16(a) << 16 | fa18_bus_read16(a + 2);
+    fa18_meter_access(a, 4, 0);
+    return (uint32_t)bus_read16(a) << 16 | bus_read16(a + 2);
+}
+
+uint8_t fa18_bus_read8(uint32_t a) {
+    fa18_meter_access(a, 1, 0);
+    return bus_read8(a);
+}
+uint16_t fa18_bus_read16(uint32_t a) {
+    fa18_meter_access(a, 2, 0);
+    return bus_read16(a);
 }
 
 /* The BLTSIZE the program last wrote, and its value when a polygon draw
@@ -485,7 +497,7 @@ static void watch_write(uint32_t a, uint32_t v, int size) {
     }
 }
 
-void fa18_bus_write8(uint32_t a, uint8_t v) {
+static void bus_write8(uint32_t a, uint8_t v) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
     watch_write(a, v, 1);
@@ -521,7 +533,7 @@ void fa18_bus_write8(uint32_t a, uint8_t v) {
     if (a < 0xF80000) m->unmapped_writes++;
 }
 
-void fa18_bus_write16(uint32_t a, uint16_t v) {
+static void bus_write16(uint32_t a, uint16_t v) {
     FA18Machine *m = fa18_machine;
     a &= 0xFFFFFF;
     watch_write(a, v, 2);
@@ -547,13 +559,22 @@ void fa18_bus_write16(uint32_t a, uint16_t v) {
         fa18_custom_write(m, a & 0x1FE, v);
         return;
     }
-    fa18_bus_write8(a, (uint8_t)(v >> 8));
-    fa18_bus_write8(a + 1, (uint8_t)v);
+    bus_write8(a, (uint8_t)(v >> 8));
+    bus_write8(a + 1, (uint8_t)v);
 }
 
 void fa18_bus_write32(uint32_t a, uint32_t v) {
-    fa18_bus_write16(a, (uint16_t)(v >> 16));
-    fa18_bus_write16(a + 2, (uint16_t)v);
+    fa18_meter_access(a, 4, 1);
+    bus_write16(a, (uint16_t)(v >> 16));
+    bus_write16(a + 2, (uint16_t)v);
+}
+void fa18_bus_write8(uint32_t a, uint8_t v) {
+    fa18_meter_access(a, 1, 1);
+    bus_write8(a, v);
+}
+void fa18_bus_write16(uint32_t a, uint16_t v) {
+    fa18_meter_access(a, 2, 1);
+    bus_write16(a, v);
 }
 
 /* Musashi memory interface: CPU accesses, timed by the bus (bus.c). A long
@@ -686,7 +707,7 @@ int fa18_machine_event_due(void) {
 
 /* Called at an instruction boundary inside m68k_execute. Returns 1 when the
  * frame is complete and the slice has been ended. */
-int fa18_machine_service(void) {
+static int machine_service(void) {
     FA18Machine *m = fa18_machine;
     int64_t now = fa18_cycle_origin - GET_CYCLES();
     uint32_t source_pc = REG_PC;
@@ -715,9 +736,19 @@ int fa18_machine_service(void) {
     return 0;
 }
 
+int fa18_machine_service(void) {
+    int previous = fa18_meter_engine;
+    fa18_meter_engine = FA18_ENGINE_CHIPSET;
+    int result = machine_service();
+    fa18_meter_engine = previous;
+    return result;
+}
+
 #define EXECUTE_BUDGET 0x3FFFFFFF
 
 void fa18_machine_run_frame(FA18Machine *m) {
+    int previous = fa18_meter_engine;
+    fa18_meter_engine = FA18_ENGINE_CHIPSET;
     frame_done = 0;
     if (!line_started) start_line(m);
     fa18_next_event = 0;
@@ -737,10 +768,12 @@ void fa18_machine_run_frame(FA18Machine *m) {
         fa18_cycle_origin = m->cycle + EXECUTE_BUDGET;
         in_execute = 1;
         m68k_execute(EXECUTE_BUDGET);
+        fa18_meter_engine = FA18_ENGINE_CHIPSET;
         in_execute = 0;
         m->cycle = fa18_cycle_origin - GET_CYCLES();
         if (CPU_STOPPED) m->cycle = last_boundary + 4; /* STOP discards the slice */
     }
+    fa18_meter_engine = previous;
 }
 
 /* Predict every line's DMA slots for the first frame after a restore by

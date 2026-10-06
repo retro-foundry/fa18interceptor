@@ -511,6 +511,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "cannot read FA18_LOOP_INPUT_V1 input %s\n", input_path);
         return 1;
     }
+    fa18_meter_start(profile_path != NULL);
     if (window) {
 #ifdef FA18_WITH_SDL
         run_result = run_window(m, &replay, start_frame, frames, scale, vsync, &i,frame_times_path,fast_forward);
@@ -561,7 +562,9 @@ int main(int argc, char **argv) {
         fprintf(stderr,"cannot finish ROM dependency inventory %s\n",rom_audit_path);
         return 1;
     }
-    if (profile_path) fa18_recomp_write_profile(profile_path);
+    if (profile_path && !fa18_recomp_write_profile(profile_path)) {
+        fprintf(stderr, "cannot write profile %s\n", profile_path); return 1;
+    }
     if (edges_path) fa18_recomp_write_edges(edges_path);
     if (rom_transitions_path && !fa18_recomp_write_rom_transitions(rom_transitions_path)) {
         fprintf(stderr, "cannot write ROM transition inventory %s\n", rom_transitions_path);

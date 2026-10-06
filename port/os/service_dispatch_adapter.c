@@ -1,6 +1,7 @@
 #include "service_dispatch_adapter.h"
 #include "../amiga/service_dispatch.h"
 #include "machine.h"
+#include "bus.h"
 #include "m68kcpu.h"
 #include "graphics_glue.h"
 #include "graphics_wait_bovp.h"
@@ -106,7 +107,16 @@ void fa18_service_enable(unsigned service,int enabled) {
 }
 int fa18_services_step(void) {
     if (REG_PC<service_low || REG_PC>=service_high) return 0;
+    int previous = fa18_meter_engine;
+    uint32_t pc = REG_PC;
+    fa18_meter_engine = FA18_ENGINE_OS;
     int result=amiga_services_step(services,FA18_SERVICE_COUNT+extra_count,REG_PC,REG_PPC,&fa18_machine->runtime_guard);
+    fa18_meter_engine = previous;
+    if (result == 1 && fa18_meter_enabled) {
+        ++fa18_emulation_meter.service_steps;
+        if (pc == fa18_machine->runtime_guard.service.entry)
+            ++fa18_emulation_meter.service_entries;
+    }
     if (result<0) {
         fprintf(stderr,"invalid service registry at PC=%06X cycle=%llu\n",REG_PC,
                 (unsigned long long)fa18_machine_now());

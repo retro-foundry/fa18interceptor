@@ -87,7 +87,7 @@ int fa18_os_exec_supervisor_step(void) {
     case 0xFC1FC4u:
         /* CPU exception-frame operation; the fixed instruction has no operands.
          * Preserves CPU callback/state rules without executing any ROM bytes. */
-        m68ki_instruction_jump_table[0x4E73](); break;
+        fa18_meter_os_opcode(); m68ki_instruction_jump_table[0x4E73](); break;
     case 0xFC1FC6u:
         fa18_service_extension_words(1); m68ki_trace_t0(); m68ki_jump(REG_A[6]-42); break;
     }
