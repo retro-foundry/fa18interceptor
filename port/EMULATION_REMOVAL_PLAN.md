@@ -81,6 +81,12 @@ Native continuation milestones (functional scope, not instruction counts):
   non-stack RAM and 1469 exact sound requests. Seven view/record checks and
   link omission pass. See `../analysis/native_control_actions_milestone.md`.
   Startup estimate remains about 98%; native sample loading/output remains open.
+- Connected: shared C0F048-C0F124 scene order in the playable native runner.
+  Position-bias gating, flagged-only control drawing and both range-dependent
+  orders now follow the source owner. 1024 complete parent-contract cases,
+  three renderer checkpoints, setup/pause/resume and twelve reference tests
+  pass. See `../analysis/native_scene_ordering_milestone.md`. This batch is
+  complete; startup estimate remains about 98%, excluding full-flight parity.
 - Next: complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.

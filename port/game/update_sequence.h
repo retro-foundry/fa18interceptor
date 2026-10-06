@@ -52,6 +52,9 @@ typedef struct {
 /* Complete C0EFD4-C0F3C3. Saved tick schedules the periodic work; every
  * child-sensitive global is reread at its original branch boundary. */
 void run_game_update_sequence(const UpdateSequenceHooks *hooks);
+/* C0F048-C0F124 scene ordering shared by the complete frame and native
+ * composition. Returns zero when the alternate display child exits the owner. */
+int run_game_scene_sequence(const UpdateSequenceHooks *hooks);
 /* Complete C0D730-C0D748 display-buffer decision and its two explicit children. */
 void submit_update_display_buffers(const UpdateSequenceHooks *hooks);
 #endif

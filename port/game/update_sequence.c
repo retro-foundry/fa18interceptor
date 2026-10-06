@@ -75,6 +75,36 @@ static void context_readouts(const UpdateSequenceHooks *h) {
     observe(h,UPDATE_SEQUENCE_CONTEXT_MODE,mode,0,0,0);
     if((uint8_t)(mode-2u)==0) h->consume(h->context,UPDATE_CONTEXT_MESSAGE);
 }
+int run_game_scene_sequence(const UpdateSequenceHooks *h) {
+    if(!h || !h->consume) abort();
+    marker(h,0x60); h->consume(h->context,UPDATE_COCKPIT_SLIDE);
+    h->consume(h->context,UPDATE_LIST_RESET);
+    /* C0DA38's alternate buffer path unlinks this owner's frame. */
+    if(h->consume(h->context,UPDATE_BUFFERS).owner_finished) return 0;
+    marker(h,0x68);
+    if(!byte(h,UPDATE_MAP_FLAGS,1) || byte(h,UPDATE_MAP_OVERRIDE,0)) h->consume(h->context,UPDATE_MAP);
+    marker(h,0x70); h->consume(h->context,UPDATE_MATRIX_MARK);
+    if(signed_value(h,-0x8000000)>-0x8000000) {
+        uint32_t decision;
+        marker(h,0x78); h->consume(h->context,UPDATE_PRIMARY_SCENE);
+        marker(h,0x80); h->consume(h->context,UPDATE_ALTERNATE_SCENE);
+        marker(h,0x90); h->consume(h->context,UPDATE_GRID);
+        marker(h,0xa0);
+        if(byte(h,ORIGIN_GATE_MODE,0)) h->consume(h->context,UPDATE_FLAGGED_SCENE);
+        else {
+            decision=h->consume(h->context,UPDATE_RANGE_DECISION).value;
+            observe(h,UPDATE_SEQUENCE_DECISION,decision,0,0,0);
+            if(decision) {
+                marker(h,0xa4); h->consume(h->context,UPDATE_TRUE_SCENE);
+                marker(h,0xa8); h->consume(h->context,UPDATE_TRUE_FOLLOWUP);
+            } else {
+                marker(h,0xac); h->consume(h->context,UPDATE_FALSE_FOLLOWUP);
+                marker(h,0xb0); h->consume(h->context,UPDATE_FALSE_SCENE);
+            }
+        }
+    }
+    return 1;
+}
 void run_game_update_sequence(const UpdateSequenceHooks *h) {
     uint16_t saved_tick;
     if(!h || !h->consume) abort();
@@ -91,32 +121,7 @@ void run_game_update_sequence(const UpdateSequenceHooks *h) {
         h->consume(h->context,UPDATE_MATRIX); h->consume(h->context,UPDATE_PROJECTION);
         h->consume(h->context,UPDATE_OCTANT); h->consume(h->context,UPDATE_ATTITUDE);
         h->consume(h->context,UPDATE_CONTEXT);
-        marker(h,0x60); h->consume(h->context,UPDATE_COCKPIT_SLIDE);
-        h->consume(h->context,UPDATE_LIST_RESET);
-        /* C0DA38's alternate buffer path unlinks this owner's frame. */
-        if(h->consume(h->context,UPDATE_BUFFERS).owner_finished) return;
-        marker(h,0x68);
-        if(!byte(h,UPDATE_MAP_FLAGS,1) || byte(h,UPDATE_MAP_OVERRIDE,0)) h->consume(h->context,UPDATE_MAP);
-        marker(h,0x70); h->consume(h->context,UPDATE_MATRIX_MARK);
-        if(signed_value(h,-0x8000000)>-0x8000000) {
-            uint32_t decision;
-            marker(h,0x78); h->consume(h->context,UPDATE_PRIMARY_SCENE);
-            marker(h,0x80); h->consume(h->context,UPDATE_ALTERNATE_SCENE);
-            marker(h,0x90); h->consume(h->context,UPDATE_GRID);
-            marker(h,0xa0);
-            if(byte(h,ORIGIN_GATE_MODE,0)) h->consume(h->context,UPDATE_FLAGGED_SCENE);
-            else {
-                decision=h->consume(h->context,UPDATE_RANGE_DECISION).value;
-                observe(h,UPDATE_SEQUENCE_DECISION,decision,0,0,0);
-                if(decision) {
-                    marker(h,0xa4); h->consume(h->context,UPDATE_TRUE_SCENE);
-                    marker(h,0xa8); h->consume(h->context,UPDATE_TRUE_FOLLOWUP);
-                } else {
-                    marker(h,0xac); h->consume(h->context,UPDATE_FALSE_FOLLOWUP);
-                    marker(h,0xb0); h->consume(h->context,UPDATE_FALSE_SCENE);
-                }
-            }
-        }
+        if(!run_game_scene_sequence(h)) return;
         marker(h,0xc0); h->consume(h->context,UPDATE_MESSAGE);
         h->consume(h->context,UPDATE_RECORD_STATUS); marker(h,0xd0);
         if(byte(h,ORIGIN_ENABLE,1) && !byte(h,UPDATE_HUD_MODE,0)) context_readouts(h);

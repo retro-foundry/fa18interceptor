@@ -2,5 +2,5 @@
 #define FA18_NATIVE_SCENE_H
 #include "frontend.h"
 void native_scene_project(void);
-void native_scene_draw(NativeFrontend *game);
+int native_scene_draw(NativeFrontend *game);
 #endif

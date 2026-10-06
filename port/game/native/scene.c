@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "model.h"
 #include "../scene_placements.h"
+#include "../update_sequence.h"
 #include "../globals.h"
 #include "../matrix_route.h"
 #include "../fixed_math.h"
@@ -48,14 +49,23 @@ static void grid_triangle(void *context) {(void)context;draw_polygon();}
 static void grid_pixel(void *context,int16_t x,int16_t y,int adjacent) {
     (void)context;if(adjacent) plot_pixel_pair(x,y);else plot_pixel(x,y);
 }
-void native_scene_draw(NativeFrontend *game) {
+static UpdateSequenceResult scene_child(void *context,enum UpdateSequenceChild child) {
+    NativeFrontend *game=context;
     const gaddr frame=0x4000; /* Host scratch, separate from text and recorder. */
-    step_cockpit_slide();
-    reset_list();
-    if(rd_u16(UPDATE_DISPLAY_FLAGS)&0x2000u) return;
-    submit_active_planes(NULL);
-    ++game->scene_frames;
-    if(!rd_u8(UPDATE_MAP_FLAGS) || rd_u8(UPDATE_MAP_OVERRIDE)) {
+    const ScenePlacementHooks placements={native_scene_placement,NULL,game};
+    const MainControlHooks controls={control_child,NULL,game,NULL};
+    const FollowupPlacementHooks followups={followup,NULL,game};
+    UpdateSequenceResult result={0,0};
+    switch(child) {
+    case UPDATE_COCKPIT_SLIDE: step_cockpit_slide(); break;
+    case UPDATE_LIST_RESET: reset_list(); break;
+    case UPDATE_BUFFERS: {
+        const UpdateSequenceHooks hooks={scene_child,NULL,game};
+        submit_update_display_buffers(&hooks); break;
+    }
+    case UPDATE_DISPLAY_PLANES:
+        submit_active_planes(NULL); ++game->scene_frames; break;
+    case UPDATE_MAP: {
         FA18MapPacketDepthStageResult depth=prepare_map_packet_depth(frame);
         const MapPacketHooks hooks={.context=game,.draw_polygon=polygon};
         for(int wide=0;wide<2;++wide) {
@@ -65,19 +75,28 @@ void native_scene_draw(NativeFrontend *game) {
                 fprintf(stderr,"native map packet pass failed: wide=%d\n",wide); abort();
             }
         }
+        break;
     }
-    draw_fixed_matrix_mark();
-    if(rd_s32(POSITION_BIAS)>-0x08000000) {
-        const ScenePlacementHooks placements={native_scene_placement,NULL,game};
-        visit_scene_placements(0,&placements);
-        visit_scene_placements(1,&placements);
+    case UPDATE_MATRIX_MARK: draw_fixed_matrix_mark(); break;
+    case UPDATE_PRIMARY_SCENE: visit_scene_placements(0,&placements); break;
+    case UPDATE_ALTERNATE_SCENE: visit_scene_placements(1,&placements); break;
+    case UPDATE_GRID: {
         const GridProjectionHooks grid={.triangle=grid_triangle,.pixel=grid_pixel};
-        draw_grid_projection_packet(0x4400,&grid);
+        draw_grid_projection_packet(0x4400,&grid); break;
     }
-    const MainControlHooks controls={control_child,NULL,game,NULL};
-    const FollowupPlacementHooks followups={followup,NULL,game};
-    int controls_first=rd_u8(ORIGIN_ENABLE) || flagged_slot_in_range();
-    if(controls_first) advance_main_loop_control_records(0x4500,&controls);
-    visit_followup_placements(&followups);
-    if(!controls_first) advance_main_loop_control_records(0x4500,&controls);
+    case UPDATE_RANGE_DECISION: result.value=flagged_slot_in_range(); break;
+    case UPDATE_FLAGGED_SCENE: case UPDATE_TRUE_SCENE: case UPDATE_FALSE_SCENE:
+        advance_main_loop_control_records(0x4500,&controls); break;
+    case UPDATE_TRUE_FOLLOWUP: case UPDATE_FALSE_FOLLOWUP:
+        visit_followup_placements(&followups); break;
+    /* C0DA38 changes display pages and exits the enclosing source frame.
+     * TODO(port): connect its native page-presentation contract before use. */
+    case UPDATE_DISPLAY_END:
+    default: fprintf(stderr,"native scene child unavailable: %u\n",(unsigned)child); abort();
+    }
+    return result;
+}
+int native_scene_draw(NativeFrontend *game) {
+    const UpdateSequenceHooks hooks={scene_child,NULL,game};
+    return run_game_scene_sequence(&hooks);
 }

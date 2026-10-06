@@ -145,3 +145,10 @@ requests. Native sample loading/output remains unfinished. See
 Full flight, positive shadow strips and the record-expiry
 transition remain unfinished. Setup correctness is separate from frame cadence
 and recorded gameplay acceptance.
+
+Scene ordering C0F048-C0F124 now comes from the shared update-sequence owner,
+with the native child consumer supplying the existing host rendering paths.
+Bias/flagged/range gates and stage markers therefore use the same source
+composition as C0EFD4. Alternate page presentation C0DA38 remains unconnected
+and fails explicitly if reached. See
+[`../../analysis/native_scene_ordering_milestone.md`](../../analysis/native_scene_ordering_milestone.md).

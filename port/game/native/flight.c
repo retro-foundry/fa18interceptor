@@ -201,7 +201,7 @@ int native_flight_tick(NativeFrontend *game) {
         native_scene_project();
         const ContextRefreshHooks refresh={refresh_child,NULL,game};
         refresh_context_packet(&refresh);
-        native_scene_draw(game);
+        if(!native_scene_draw(game)) return 1;
         update_message(); /* C11BFC at C0F12C, before instruments. */
         update_control_actions(NULL,NULL); /* C12950 at C0F132. */
         ++game->control_frames;

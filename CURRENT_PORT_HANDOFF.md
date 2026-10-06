@@ -109,6 +109,12 @@ executes 2454 action-owner calls; source event/action/pending state is consumed.
 the seven view/record checks and link omission pass. Startup wiring remains
 roughly 98%; native samples/output and complete frame ownership are still open.
 See `analysis/native_control_actions_milestone.md`.
+Native scene drawing now uses the shared C0F048-C0F124 owner: bias gating,
+flagged-only controls and range-dependent child order follow original source.
+1024 complete parent-contract cases, three renderer checkpoints, setup/pause
+checks and twelve reference CTests pass. The C0DA38 alternate display route
+now fails explicitly pending its page-presentation contract. See
+`analysis/native_scene_ordering_milestone.md`. Startup remains roughly 98%.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Source sound requests now consume the original mute/absent-voice gates; native

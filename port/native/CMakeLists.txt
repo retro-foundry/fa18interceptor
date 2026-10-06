@@ -2,7 +2,7 @@ add_executable(fa18_native main.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c
     ../game/native/clock.c ../game/main_loop_timers.c
-    ../game/control_actions.c
+    ../game/control_actions.c ../game/update_sequence.c
     ../game/scene_placements.c ../game/draw_stream.c ../game/active_planes.c
     ../game/projection.c ../game/circle.c
     ../game/followup_placements.c ../game/grid_projection_packet.c
