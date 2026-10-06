@@ -224,3 +224,11 @@ and affected native regressions pass. Native host ticks differ from the sealed
 video frames, so this is functional scenario completion; frame parity remains
 open. See
 [`../../analysis/native_sequence_return_milestone.md`](../../analysis/native_sequence_return_milestone.md).
+
+For original gameplay comparisons, `--input` also accepts `FA18_GAME_INPUT_V1`
+from `fa18_recomp --ports off --game-input-out PATH`. These rows mark keys the
+game consumed at C1AD74; sealed loop recordings mark hardware injection, whose
+delivery can differ. Native turn/hook state matches a focused original
+checkpoint with consumed keys; startup flags/countdown and carrier touchdown
+integration remain open. See
+[`../../analysis/native_game_input_milestone.md`](../../analysis/native_game_input_milestone.md).

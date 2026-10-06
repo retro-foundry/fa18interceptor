@@ -32,7 +32,12 @@ void fa18_loop_record(FILE *out);
 /* Load a recording to replay; 0 on a bad file. */
 int fa18_loop_replay(const char *path);
 /* Write the end line and close the recording, if any. */
-void fa18_loop_finish(void);
+int fa18_loop_finish(void);
+/* Reference evidence: record raw keys at C1AD74, after OS delivery. The
+ * FA18_GAME_INPUT_V1 rows use the same columns, with consumption iterations. */
+void fa18_loop_game_record(FILE *out);
+int fa18_loop_game_recording(void);
+void fa18_loop_game_key(unsigned raw);
 
 /* Live input while recording: held until the next iteration starts. */
 void fa18_loop_host_key(int rawkey, int down);

@@ -99,6 +99,12 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_replay
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_replay.py
                 --runner $<TARGET_FILE:fa18_native>)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../captures/native/qual_carrier_success/state.bin AND
+       EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/system/kick13.rom)
+        add_test(NAME fa18_native_game_input
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_game_input.py
+                    --runner $<TARGET_FILE:fa18_native>)
+    endif()
     add_test(NAME fa18_native_collision
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_collision.py
                 --runner $<TARGET_FILE:fa18_native>)

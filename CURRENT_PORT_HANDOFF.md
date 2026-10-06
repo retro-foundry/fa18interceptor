@@ -7,6 +7,13 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest comparison update: original C1AD74 consumed-key exports now distinguish
+game input from sealed hardware-injection rows. Native accepts the separate
+FA18_GAME_INPUT_V1 format and matches turn/hook aircraft state through iteration
+5508, except the existing region bit/countdown differences. Export preserves
+original RAM/registers/timing. Corrected carrier input reaches the unconnected
+C083E2 touchdown mission reset; landing acceptance remains open. Evidence:
+`analysis/native_game_input_milestone.md`.
 The first functional intro/menu milestone is implemented: original splash,
 credits and settled menu pixels match source OFF reference frames exactly;
 first-tour callsign editing and 78-byte save/reload pass; SDL dummy presentation

@@ -1039,6 +1039,13 @@ int fa18_ports_enter(int function, int label, int via_call) {
             if (fa18_recomp_stop_pc == REG_PC && fa18_recomp_stop_sp == REG_A[7]) fa18_recomp_stop_pc = 0;
             else fa18_loop_iteration();
         }
+        if (REG_PC == 0xc1ad74u && call_entry && fa18_loop_game_recording()) {
+            /* A deadline can suspend before LINK executes. Record the call,
+             * not its repeated first-instruction dispatch on resumption. */
+            if (fa18_recomp_stop_pc == REG_PC && fa18_recomp_stop_sp == REG_A[7])
+                fa18_recomp_stop_pc = 0;
+            else fa18_loop_game_key(fa18_bus_read32(REG_A[7] + 4));
+        }
         if (call_entry) note_edge(function);
     }
     port = port_of_function[function];

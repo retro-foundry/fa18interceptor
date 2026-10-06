@@ -65,6 +65,7 @@ static void usage(void) {
             "                     [--identify-adf PATH] (print disk/executable SHA-256 and compatibility)\n"
             "                     [--frames N] [--ppm OUT.ppm] [--ppm-every DIR] [--rgb444 OUT.bin]\n"
             "                     [--record OUT.fa18in] [--input IN.fa18in [--to-end]]\n"
+            "                     [--game-input-out OUT.fa18in] (keys consumed by the game)\n"
             "                     [--replay RUN.e9k --start-frame N] [--no-recomp] [--ram-out OUT.bin]\n"
             "                     [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
             "                     [--profile OUT.json] [--edges OUT.json] [--poison] [--frame-times OUT.csv]\n"
@@ -75,6 +76,7 @@ static void usage(void) {
             "usage: fa18_recomp --state STATE.bin --rom KICK13.rom [--frames N] [--ppm OUT.ppm]\n"
             "                   [--ppm-every DIR] [--rgb444 OUT.bin] [--no-recomp] [--fallback-log OUT.json]\n"
             "                   [--ram-out OUT.bin] [--replay RUN.e9k --start-frame N]\n"
+            "                   [--input IN.fa18in [--to-end]] [--game-input-out OUT.fa18in]\n"
             "                   [--window [--scale N] [--vsync on|off]]   (window: --frames 0 runs until closed)\n"
             "                   [--ports off|on|shadow|sandbox] [--ports-only LIST] [--ports-report OUT.json]\n"
             "                   [--profile OUT.json] [--edges OUT.json] [--poison] [--frame-times OUT.csv]\n"
@@ -276,7 +278,7 @@ int main(int argc, char **argv) {
 #endif
     const char *ppm = NULL, *ppm_dir = NULL, *rgb_path = NULL, *indices_path = NULL,
                *fallback = NULL, *ram_out = NULL;
-    const char *record_path = NULL, *input_path = NULL;
+    const char *record_path = NULL, *input_path = NULL, *game_input_out = NULL;
     int to_end = 0;
     const char *replay_path = NULL, *ports_only = NULL, *ports_report = NULL, *profile_path = NULL, *edges_path = NULL;
     const char *rom_transitions_path = NULL;
@@ -348,6 +350,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--index8") && i + 1 < argc) indices_path = argv[++i];
         else if (!strcmp(argv[i], "--fallback-log") && i + 1 < argc) fallback = argv[++i];
         else if (!strcmp(argv[i], "--ram-out") && i + 1 < argc) ram_out = argv[++i];
+        else if (!strcmp(argv[i], "--game-input-out") && i + 1 < argc) game_input_out = argv[++i];
         else if (!strcmp(argv[i], "--no-recomp")) use_recomp = 0;
         else if (!strcmp(argv[i], "--replay") && i + 1 < argc) replay_path = argv[++i];
         else if (!strcmp(argv[i], "--start-frame") && i + 1 < argc) start_frame = atoi(argv[++i]);
@@ -497,8 +500,8 @@ int main(int argc, char **argv) {
         fprintf(stderr, "cannot read E9K_INPUT_V1 replay %s\n", replay_path);
         return 1;
     }
-    if ((record_path || input_path) && !use_recomp) {
-        fprintf(stderr, "--record and --input count main-loop iterations in translated code; drop --no-recomp\n");
+    if ((record_path || input_path || game_input_out) && !use_recomp) {
+        fprintf(stderr, "--record, --input and --game-input-out need translated main-loop boundaries; drop --no-recomp\n");
         return 2;
     }
     if (record_path && (input_path || replay_path || !window)) {
@@ -518,6 +521,15 @@ int main(int argc, char **argv) {
     if (indices_path && window) {
         fputs("--index8 requires a headless run\n", stderr);
         return 2;
+    }
+    if (game_input_out && ports_mode != FA18_PORTS_OFF) {
+        fputs("--game-input-out requires --ports off for original game input evidence\n", stderr);
+        return 2;
+    }
+    if (game_input_out) {
+        FILE *out = fopen(game_input_out, "w");
+        if (!out) { fprintf(stderr, "cannot write %s\n", game_input_out); return 1; }
+        fa18_loop_game_record(out);
     }
     m->capture_indices = indices_path != NULL;
     if (window) {
@@ -648,7 +660,7 @@ int main(int argc, char **argv) {
         if (!run_result) run_result=1;
     }
 #endif
-    fa18_loop_finish();
+    if (!fa18_loop_finish()) { fputs("cannot finish input recording\n", stderr); return 1; }
     fa18_replay_free(&replay);
     free(m);
     return run_result;

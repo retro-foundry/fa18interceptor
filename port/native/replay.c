@@ -20,8 +20,10 @@ int native_replay_load(NativeReplay *replay,const char *path,char *error,size_t 
     const char *reason="cannot open input";
     memset(replay,0,sizeof *replay);
     if(!file) goto failed;
-    reason="invalid FA18_LOOP_INPUT_V1 header";
-    if(!fgets(line,sizeof line,file) || (strcmp(line,"FA18_LOOP_INPUT_V1\n") && strcmp(line,"FA18_LOOP_INPUT_V1"))) goto failed;
+    reason="invalid FA18_LOOP_INPUT_V1 or FA18_GAME_INPUT_V1 header";
+    if(!fgets(line,sizeof line,file)) goto failed;
+    line[strcspn(line,"\r\n")]=0;
+    if(strcmp(line,"FA18_LOOP_INPUT_V1") && strcmp(line,"FA18_GAME_INPUT_V1")) goto failed;
     while(fgets(line,sizeof line,file)) {
         unsigned iteration,frame,key,down;char tokens[5][32],extra;int fields;
         ++row;

@@ -145,7 +145,14 @@ Native continuation milestones (functional scope, not instruction counts):
   frontend regressions pass. Sequence-return milestone 100%; one of three
   recorded scenarios functionally complete, full frame parity still open.
   See `../analysis/native_sequence_return_milestone.md`.
-- Next: carrier-success/demo outcomes, complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
+- Connected: original consumed-key export at C1AD74 and native
+  `FA18_GAME_INPUT_V1` replay. Injection and consumption are now distinguished;
+  turn/hook state matches an original checkpoint through iteration 5508,
+  apart from two existing startup differences. Input-alignment milestone 100%;
+  carrier touchdown reaches the missing C083E2 mission reset. See
+  `../analysis/native_game_input_milestone.md`.
+- Next: connect C083E2 at carrier touchdown, carrier-success/demo outcomes,
+  complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.

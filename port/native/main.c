@@ -22,7 +22,7 @@ int main(int argc,char **argv) {
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }

@@ -13,6 +13,7 @@ typedef struct {
 } LoopEvent;
 
 static FILE *record_out;
+static FILE *game_out;
 static LoopEvent *events;
 static int event_count, next_event;
 static long iteration, frame, recorded_end;
@@ -56,11 +57,30 @@ int fa18_loop_replay(const char *path) {
     return 1;
 }
 
-void fa18_loop_finish(void) {
-    if (!record_out) return;
-    fprintf(record_out, "end %ld %ld\n", iteration, frame);
-    fclose(record_out);
-    record_out = NULL;
+void fa18_loop_game_record(FILE *out) {
+    game_out = out;
+    fputs("FA18_GAME_INPUT_V1\n", out);
+}
+int fa18_loop_game_recording(void) { return game_out != NULL; }
+
+void fa18_loop_game_key(unsigned raw) {
+    if (game_out)
+        fprintf(game_out, "%ld %ld K %u %u\n", iteration, frame,
+                raw & 0x7f, (raw & 0x80) ? 0u : 1u);
+}
+
+int fa18_loop_finish(void) {
+    int ok = 1;
+    FILE **outputs[] = {&record_out, &game_out};
+    for (unsigned i = 0; i < sizeof outputs / sizeof outputs[0]; ++i) {
+        FILE *out = *outputs[i];
+        if (!out) continue;
+        fprintf(out, "end %ld %ld\n", iteration, frame);
+        if (ferror(out)) ok = 0;
+        if (fclose(out)) ok = 0;
+        *outputs[i] = NULL;
+    }
+    return ok;
 }
 
 void fa18_loop_host_key(int rawkey, int down) {
