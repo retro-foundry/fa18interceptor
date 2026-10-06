@@ -16,6 +16,7 @@ typedef struct {
     HudStreamState (*consume)(void *context,enum StreamChild child);
     void (*observe)(void *context,enum StreamPhase phase,enum StreamField field,uint32_t value,uint32_t other);
     void *context;
+    HudStreamState (*consume_values)(void *context,enum StreamChild child,HudStreamState values);
 } HudStreamHooks;
 void store_stream_cd(HudStreamState w,const HudStreamHooks *h);
 void store_stream_ad(HudStreamState w,const HudStreamHooks *h);

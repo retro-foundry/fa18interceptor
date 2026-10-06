@@ -6,6 +6,7 @@
 #include "hud.h"
 #include "clock.h"
 #include "input.h"
+#include "frame_tail.h"
 #include "../main_loop_timers.h"
 #include "../render_buffers.h"
 #include "../cockpit.h"
@@ -227,6 +228,7 @@ static int finish_frame_clock(NativeFrontend *game) {
         request_cockpit_redraw(); /* C082B8; C10B90 is the aircraft reset. */
     if(!rd_u8(ORIGIN_GATE_A)) wr_u16(UPDATE_TICK,(uint16_t)(rd_u16(UPDATE_TICK)+1));
     game->flight_timer_pending=0;
+    native_frame_debug_overlay();
     return 1;
 }
 int native_flight_enabled(const NativeFrontend *game) {
@@ -259,6 +261,7 @@ int native_flight_tick(NativeFrontend *game) {
         ++game->control_frames;
         native_hud_draw(saved_tick);
         ++game->hud_frames;
+        native_frame_selection_cleanup();
         /* C25312/C2548A precede C0EFD4's game counter increment. Polls
          * resume on later PAL ticks without repeating physics or drawing. */
         game->flight_saved_tick=saved_tick;
@@ -269,5 +272,6 @@ int native_flight_tick(NativeFrontend *game) {
     }
     update_control_actions(NULL,NULL); /* C12950 idle branch at C0F370. */
     ++game->control_frames;
+    native_frame_debug_overlay();
     return 1;
 }

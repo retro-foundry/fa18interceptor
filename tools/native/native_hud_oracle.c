@@ -189,6 +189,7 @@ static int hud_owners(void) {
     memcpy(fa18_machine,saved,sizeof *saved);free(saved);free(before);free(expected);
     printf("%u HUD instrument/panel cases match original non-stack RAM\n",count);return 1;
 }
+#ifndef FA18_HUD_ORACLE_LIBRARY
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
@@ -201,3 +202,4 @@ int main(int argc,char **argv) {
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
     return hud_owners()?0:1;
 }
+#endif

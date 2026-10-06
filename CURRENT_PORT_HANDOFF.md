@@ -7,6 +7,16 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest frame-tail batch: C12242 lost-selection cleanup now runs after the HUD,
+before timers. C2F49C page marks and C31B76 numeric overlays run after the
+counter under C0F386's original gates, before the final message. 64 cleanup
+and 256 overlay source caller-range cases match all non-stack RAM. The native
+demo completes; its checkpoint image and all final RAM except the stage marker
+are unchanged. Crash/re-entry, frontend/menu and reference contracts pass.
+See `analysis/native_frame_tail_milestone.md`. Three of six identified missing
+frame owners are now connected (50% of that inventory, not whole-game effort).
+Stores, grid/record markers and scene labels remain open. Full frame parity
+remains 0/3 accepted, startup lead 37 ticks; Copper fade is still excluded.
 Latest cadence batch: C1718E's viewport/master-fade tail now runs on each host
 PAL frame, including menu delays, timer polls and display waits. It previously
 ran once per game update. C17456 registers interrupt 5 through Exec vector

@@ -30,6 +30,8 @@ void native_input_process(NativeFrontend *game) { (void)game;abort(); }
 void native_scene_project(void) { abort(); }
 int native_scene_draw(NativeFrontend *game) { (void)game;abort(); }
 void native_hud_draw(uint16_t tick) { (void)tick;abort(); }
+void native_frame_selection_cleanup(void) { abort(); }
+void native_frame_debug_overlay(void) { abort(); }
 
 static int original_parent(gaddr entry) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;

@@ -9,6 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: connect C12242 lost-selection cleanup and C2F49C/C31B76 debug
+  overlays at their original frame positions. 64 cleanup and 256 gated-overlay
+  caller-range cases match all non-stack RAM; native demo, crash/re-entry,
+  frontend/menu and reference contracts pass. See
+  `../analysis/native_frame_tail_milestone.md`. **3/6 (50%)** of the explicitly
+  identified missing frame owners are connected; the remaining three are
+  C30A00 stores icons, C2B564 grid/record markers and C2B3C2 scene labels.
+  This inventory is not a whole-game effort percentage. Recorded frame parity
+  remains **0/3 accepted**, startup lead 37 ticks, Copper fade excluded.
+
 - Latest completed batch: move C1718E's viewport/fade tail from game updates
   to its original vertical-blank cadence. It runs during host frame waits and
   publishes stable RGB4 colours through the native palette sink. 128 source

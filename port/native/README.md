@@ -34,6 +34,12 @@ artwork is loaded from `pix/inst5` and `pix/frnt5`, with the source plane caches
 and union mask. Both display pages preserve the immutable instrument images.
 Earlier HUD checks omitted those disk assets; populated artwork comparisons now
 pass. Complete frame ordering remains pending.
+Lost-target selection cleanup now executes after the HUD and before timers.
+The source debug page mark and numeric overlays execute under their original
+gates after the counter and before the final message. All non-stack RAM agrees
+in 320 original caller-range cases. Stores icons, grid/record markers and
+scene-position labels are the three remaining identified frame owners; three
+of six are connected. This is a scope inventory, not whole-game progress.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
 `hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;
