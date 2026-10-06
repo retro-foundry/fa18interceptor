@@ -19,6 +19,7 @@
 #include "../menu_context_finish.h"
 #include "../audio.h"
 #include "../messages.h"
+#include "../fault.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -86,6 +87,12 @@ static void dynamics(gaddr record) {
             post_message((uint16_t)w->primary);
             /* C25704 returns the posted message's classification byte. */
             w->primary&=0xffffff00u; break;
+        case DY_COLLISION_SOUND:
+            /* C260EC-C260F8: C17F8C receives period $1C and duration $30.
+             * The source voice gate owns both audio and FIRE_STATE effects. */
+            start_sound_6(0x1c,0x30);break;
+        case DY_COLLISION_FAULT:
+            fault_hook();break; /* C06C02 is empty in the release executable. */
         case DY_RECORD_SELECTOR: {
             IndexedRecordWork selected={0};update_dynamics_selected_record(&selected);
             w->primary=rd_u16(selected.record+0x6e);

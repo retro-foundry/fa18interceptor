@@ -134,7 +134,12 @@ Native continuation milestones (functional scope, not instruction counts):
   independence, bounded crash/carrier startup and suspension counters pass.
   Replay delivery milestone 100%; original cadence/full recorded parity open.
   See `../analysis/native_loop_replay_milestone.md`.
-- Next: collision outcome children, complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
+- Connected: C17F8C collision sound and C06C02 release fault. The sealed crash
+  prefix reaches two source postflight resets at iteration 2150; original
+  view/record and collision-child comparisons pass. Bounded collision/reset
+  milestone 100%; loaded samples/full recorded parity remain open. See
+  `../analysis/native_collision_milestone.md`.
+- Next: sequence/menu return, complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.

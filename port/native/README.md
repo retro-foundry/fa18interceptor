@@ -208,3 +208,10 @@ Raw key identity and same-update edge order are preserved. Timer/display waits
 retain the update iteration. Crash and carrier prefixes reach active
 qualification; complete outcomes and frame parity remain open. See
 [`../../analysis/native_loop_replay_milestone.md`](../../analysis/native_loop_replay_milestone.md).
+
+The sealed crash prefix now passes the C17F8C collision-sound gate and reaches
+two native postflight resets by iteration 2150. Its original view/record state
+comparisons and six collision-child cases pass. The subsequent C0F920 return to
+the menu remains unconnected; loaded samples and full outcome/frame parity are
+still open. See
+[`../../analysis/native_collision_milestone.md`](../../analysis/native_collision_milestone.md).

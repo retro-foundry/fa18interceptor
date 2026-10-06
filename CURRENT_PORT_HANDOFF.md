@@ -170,7 +170,13 @@ Original view/record and reached carrier rendering comparisons pass. This
 delivery milestone is 100%; original cadence and full recorded parity remain
 open. The later crash prefix reaches an unconnected C17F8C collision-sound child.
 See `analysis/native_loop_replay_milestone.md`.
-Next: collision outcome children, complete C0EFD4 ownership, remaining HUD/record children and C0DA38
+C17F8C collision sound and C06C02 release fault are now connected. The sealed
+crash prefix reaches two postflight resets by iteration 2150 (288 record
+updates); actual original view/record and six collision-child cases pass.
+This bounded collision/reset milestone is 100%. The next missing stage is
+C0F920, returning the sequence to the main menu; full recorded parity remains
+open. See `analysis/native_collision_milestone.md`.
+Next: sequence/menu return, complete C0EFD4 ownership, remaining HUD/record children and C0DA38
 alternate presentation. Exact input-callback/beam timing remains unproven.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
