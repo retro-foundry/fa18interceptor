@@ -23,9 +23,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static FlightActionState action_child(void *context,enum FlightActionChild child) {
+static FlightActionState action_child(void *context,enum FlightActionChild child,FlightActionState w) {
     (void)context;
-    fprintf(stderr,"native record action child unavailable: %u\n",(unsigned)child); abort();
+    switch(child) {
+    case FA_MAGNITUDE_ALERT: play_context_tone_4((int16_t)w.primary);break; /* C3316E */
+    case FA_ACTION_NORMALISE: {
+        NormalizedVectorState v={w.primary,w.selector,w.detail,w.x,w.y,w.z,w.product_a,w.product_b,0,0};
+        v=normalize_record_vector(v,NULL,NULL);
+        w.primary=v.scale;w.selector=v.length;w.detail=v.shift;w.x=v.planar_factor;
+        w.y=v.height_ratio;w.z=v.x;w.product_a=v.y;w.product_b=v.z;break;
+    }
+    default: fprintf(stderr,"native record action child unavailable: %u\n",(unsigned)child);abort();
+    }
+    return w;
 }
 static DynamicsState region_child(void *context,enum DynamicsChild child,DynamicsState work) {
     (void)context;
@@ -85,6 +95,14 @@ static void dynamics(gaddr record) {
         }
         case DY_RECORD_CONTROLS:
             update_dynamics_record_input(record,w->primary); break;
+        case DY_RECORD_ACTION: {
+            AutopilotFrame guidance={0};guidance.work=*w;
+            if(!update_dynamics_record_action(&guidance,NULL)) {
+                fprintf(stderr,"native guidance boundary unavailable: %u at %06X\n",
+                    (unsigned)guidance.phase,guidance.unresolved_target);abort();
+            }
+            *w=guidance.work;break;
+        }
         case DY_DESCENT_ALERT: case DY_RECORD_ALERT: case DY_COLLISION_MESSAGE:
             post_message((uint16_t)w->primary);
             /* C25704 returns the posted message's classification byte. */
@@ -147,6 +165,11 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
         schedule_postflight(POSTFLIGHT_MODE_NINE,0,record,NULL);
         return (PostflightScheduleResult){0,1};
     }
+    if(child==SCHEDULE_THREE) {
+        const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
+        schedule_postflight(POSTFLIGHT_MODE_THREE,3,record,&hooks);
+        return (PostflightScheduleResult){0,1};
+    }
     fprintf(stderr,"native record schedule child unavailable: %u\n",(unsigned)child); abort();
 }
 typedef struct { gaddr companion; } RecordLoop;
@@ -155,14 +178,25 @@ static void record_event(void *context,const RecordUpdateEvent *event) {
     if(event->phase==RECORD_UPDATE_ROOT ||
        (event->phase==RECORD_UPDATE_SLOT && !event->other)) loop->companion=event->companion;
 }
-static FlightWorking flight_child(void *context,enum FlightChild child) {
+static FlightWorking flight_child(void *context,enum FlightChild child,FlightWorking w) {
     (void)context;
-    fprintf(stderr,"native record dispatch child unavailable: %u\n",(unsigned)child); abort();
+    switch(child) {
+    case FC_CLASSIFY_RECORD: classify_record_range(w.record);break; /* C24568 */
+    case FC_PROJECT_VIEW: {
+        int32_t point[3];
+        local_to_world(w.viewer,w.viewer+RECORD_INVERSE,(int16_t)w.x,(int16_t)w.y,(int16_t)w.z,point);
+        w.value=(uint32_t)point[0];w.speed=(uint32_t)point[1];w.turn=(uint32_t)point[2];break;
+    }
+    case FC_SIGHT_RECORD: update_in_sight(w.record,w.viewer);break; /* C2436A */
+    case FC_ROUTE_FAULT: case FC_ZONE_FAULT: fault_hook();break;
+    default: fprintf(stderr,"native record dispatch child unavailable: %u\n",(unsigned)child);abort();
+    }
+    return w;
 }
 static int record_child(void *context,enum RecordUpdateChild child,unsigned slot) {
     const RecordLoop *loop=context;
     gaddr record=CONTROL_RECORDS+512u*slot;
-    const FlightActionHooks actions={action_child,NULL,NULL,NULL};
+    const FlightActionHooks actions={.consume_values=action_child};
     FlightActionState work={0}; work.record=record; work.source=loop->companion;
     switch(child) {
     case RECORD_UPDATE_PERIODIC: {
@@ -177,11 +211,13 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
     case RECORD_UPDATE_ROOT_MARKER: classify_selected_record_range(record); return 0;
     case RECORD_UPDATE_POSE: dynamics(record); return 0;
     case RECORD_UPDATE_PRIMARY_READY: return select_flight_record_action(work,1,&actions);
+    case RECORD_UPDATE_PRIMARY_PLACE: try_primary_flight_record_action(work,&actions);return 0;
     case RECORD_UPDATE_SECONDARY_READY: return select_flight_record_action(work,0,&actions);
+    case RECORD_UPDATE_SECONDARY_PLACE: try_flight_record_action(work,&actions);return 0;
     case RECORD_UPDATE_PAIRED_READY: return paired_record_ready(record);
     case RECORD_UPDATE_DISPATCH: {
         FlightWorking flight={0}; flight.record=record; flight.auxiliary=loop->companion;
-        const FlightHooks hooks={flight_child,NULL,NULL,NULL};
+        const FlightHooks hooks={.consume_values=flight_child};
         flight=advance_main_loop_flight_record(flight,&hooks);
         return flight.value!=0;
     }

@@ -36,7 +36,7 @@ add_executable(fa18_native main.c replay.c
     ../game/stage_tables.c ../game/fault.c ../game/menu_cold.c
     ../game/context_refresh.c ../game/template_placements.c
     ../game/placement_order.c ../game/renderer_workspace.c ../game/audio.c ../game/view_transform.c ../game/messages.c
-    ../game/post_input_tick.c ../game/scene_bootstrap.c ../game/template_gates.c
+    ../game/post_input_tick.c ../game/post_input.c ../game/scene_bootstrap.c ../game/template_gates.c
     ../game/input_device_callbacks.c ../game/menu_return.c ../game/menu_followup.c ../game/menu_outcome.c
     ../game/update_stage.c ../game/record_update_stage.c ../game/flight_record_actions.c
     ../game/flight_dynamics.c ../game/flight_recorder.c ../game/record_steering.c
@@ -114,4 +114,8 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_qualification
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_qualification.py
                 --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_demo
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_demo.py
+                --runner $<TARGET_FILE:fa18_native>
+                --map ${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map)
 endif()

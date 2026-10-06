@@ -24,6 +24,7 @@
 #include "../messages.h"
 #include "../notify.h"
 #include "../post_input_tick.h"
+#include "../post_input.h"
 #include "../scene_bootstrap.h"
 #include "../template_gates.h"
 #include "../control_records.h"
@@ -157,7 +158,10 @@ static void stage(void *context,gaddr routine) {
         begin_sequence_after_bootstrap(&hooks);
         ++game->record_updates;
         if(rd_u32(STAGE_CALLBACK)==0xc0fcb4) game->screen=NATIVE_MENU;
-    } else if(routine==0xc0fece) {
+    } else if(routine==0xc0fa04) finish_post_input_followup(NULL);
+    else if(routine==0xc0fa4c) await_viewport_match();
+    else if(routine==0xc0fa80) complete_post_input();
+    else if(routine==0xc0fece) {
         const MenuTransitionHooks hooks={transition_child,NULL,game};
         advance_delayed_menu(&hooks);
         if(rd_u32(STAGE_CALLBACK)!=routine) {
@@ -242,7 +246,7 @@ static int finish_frame_clock(NativeFrontend *game) {
 }
 int native_flight_enabled(const NativeFrontend *game) {
     const uint8_t mode=rd_u8(MODE_SELECT);
-    return (mode==1 || mode==9) &&
+    return (mode==1 || mode==9 || mode==127 || (mode==3 && rd_u8(RECORDER_MODE)==3)) &&
         (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
 }
 int native_flight_tick(NativeFrontend *game) {

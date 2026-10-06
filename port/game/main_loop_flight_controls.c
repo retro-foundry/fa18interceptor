@@ -335,7 +335,7 @@ FlightWorking advance_main_loop_flight_record(FlightWorking w,const FlightHooks 
     }
     if(byte_bit(h,w.record+2,0)) goto route_motion;
     value=rd_u16(w.record+44); observe(h,FC_TEST_WORD,value,0); if((int16_t)value<0) goto route_motion;
-    w=consume(h,FC_CLASSIFY_RECORD); W(turn,FC_TURN_WORD,rd_u16(w.record+108)); observe(h,FC_COMPARE_BYTE,rd_u8(w.record+56),255);
+    w=consume_input(h,FC_CLASSIFY_RECORD,w); W(turn,FC_TURN_WORD,rd_u16(w.record+108)); observe(h,FC_COMPARE_BYTE,rd_u8(w.record+56),255);
     if(rd_u8(w.record+56)==255) {
         observe(h,FC_COMPARE_BYTE,rd_u8(w.record+98),20); if(rd_u8(w.record+98)!=20) goto default_heading;
         W(speed,FC_SPEED_WORD,rd_u16(w.record+2)); w.speed=narrow_word(w.speed,w.speed&0x80); observe(h,FC_SPEED_AND_WORD,0x80,0);
@@ -401,7 +401,7 @@ route_motion:
         L(value,FC_VALUE_LONG,rd_u32(w.route)); observe(h,FC_COMPARE_LONG,w.value,rd_u32(w.record+44));
         if(w.value==rd_u32(w.record+44)) { L(value,FC_VALUE_LONG,rd_u32(w.route+4)); observe(h,FC_COMPARE_LONG,w.value,rd_u32(w.record+48)); if(w.value==rd_u32(w.record+48)) break; }
         w.route+=10; observe(h,FC_ROUTE,w.route,0); value=rd_u16(w.route); observe(h,FC_TEST_WORD,value,0);
-        if((int16_t)value<0) { word(h,0xc4599eu,0x35); w=consume(h,FC_ROUTE_FAULT); goto select_record_reference; }
+        if((int16_t)value<0) { word(h,0xc4599eu,0x35); w=consume_input(h,FC_ROUTE_FAULT,w); goto select_record_reference; }
     }
     value=rd_u16(w.route+10); observe(h,FC_TEST_WORD,value,0);
     if((int16_t)value<0) { if(!(memory_bit(h,w.record+1,7,FC_MEMORY_BIT_CLEAR)&0x80)) goto select_record_reference;
@@ -453,7 +453,7 @@ reset_motion:
     saved_value=w.value; saved_speed=w.speed; saved_turn=w.turn; observe(h,FC_SAVE_MOTION,0,0);
     if(test_byte(h,0xc457b5u)) {
         W(speed,FC_SPEED_WORD,rd_u16(0xc459b4u)); observe(h,FC_COMPARE_WORD,w.speed,rd_u16(0xc458dcu));
-        if((int16_t)w.speed!=(int16_t)rd_u16(0xc458dcu)) { w=consume(h,FC_REFRESH_VIEW); byte(h,0xc457d9u,0); w=consume(h,FC_REFRESH_SCENE); }
+        if((int16_t)w.speed!=(int16_t)rd_u16(0xc458dcu)) { w=consume_input(h,FC_REFRESH_VIEW,w); byte(h,0xc457d9u,0); w=consume_input(h,FC_REFRESH_SCENE,w); }
     }
     w.value=saved_value; w.speed=saved_speed; w.turn=saved_turn; observe(h,FC_RESTORE_MOTION,0,0);
 decelerate_motion:
@@ -546,7 +546,7 @@ prepare_view_projection:
 default_projection:
         test_byte(h,0xc4578au); L(x,FC_X_LONG,0); L(y,FC_Y_LONG,0); W(z,FC_Z_WORD,0xffdc);
     }
-    w=consume(h,FC_PROJECT_VIEW); L(x,FC_X_LONG,w.value); L(y,FC_Y_LONG,w.turn);
+    w=consume_input(h,FC_PROJECT_VIEW,w); L(x,FC_X_LONG,w.value); L(y,FC_Y_LONG,w.turn);
     w.x=shift_right(w.x,8); observe(h,FC_X_ASR_LONG,8,0); w.y=shift_right(w.y,8); observe(h,FC_Y_ASR_LONG,8,0);
     w.x=narrow_word(w.x,w.x&0x3fff); observe(h,FC_X_AND_WORD,0x3fff,0); w.y=narrow_word(w.y,w.y&0x3fff); observe(h,FC_Y_AND_WORD,0x3fff,0);
     w.value=swap_words(w.value); observe(h,FC_VALUE_SWAP,0,0); w.turn=swap_words(w.turn); observe(h,FC_TURN_SWAP,0,0);
@@ -555,7 +555,7 @@ default_projection:
     w.speed=shift_right(w.speed,8); observe(h,FC_SPEED_ASR_LONG,8,0); longword(h,w.record+52,w.speed);
 finish_view_status:
     if(byte_bit(h,w.record+32,1)) goto finish_pending;
-    w=consume(h,FC_SIGHT_RECORD); B(value,FC_VALUE_BYTE,rd_u8(w.record+5));
+    w=consume_input(h,FC_SIGHT_RECORD,w); B(value,FC_VALUE_BYTE,rd_u8(w.record+5));
     if(!(uint8_t)w.value) goto select_status_row;
     observe(h,FC_COMPARE_BYTE,w.value,1); if((uint8_t)w.value==1) goto select_status_row;
     observe(h,FC_COMPARE_BYTE,w.value,6); if((uint8_t)w.value==6) goto finish_pending;
@@ -593,7 +593,7 @@ resolve_zone:
             W(value,FC_VALUE_WORD,rd_u16(w.viewer+4)); w.value=narrow_word(w.value,w.value&255); observe(h,FC_VALUE_AND_WORD,255,0); observe(h,FC_COMPARE_WORD,w.value,rd_u16(0xc459b4u)); if((uint16_t)w.value==rd_u16(0xc459b4u)) goto publish_zone;
             w.viewer+=10; observe(h,FC_VIEWER,w.viewer,0);
         }
-        B(value,FC_VALUE_BYTE,rd_u8(w.record+93)); if((int8_t)w.value<=0) { word(h,0xc4599eu,0x34); w=consume(h,FC_ZONE_FAULT); goto finish_pending; }
+        B(value,FC_VALUE_BYTE,rd_u8(w.record+93)); if((int8_t)w.value<=0) { word(h,0xc4599eu,0x34); w=consume_input(h,FC_ZONE_FAULT,w); goto finish_pending; }
         w.viewer=0xc29720u; observe(h,FC_VIEWER,w.viewer,0); w.value=narrow_byte(w.value,(uint8_t)(w.value-1)); observe(h,FC_VALUE_SUB_BYTE,1,0);
         w.value=narrow_word(w.value,(uint16_t)(int16_t)(int8_t)w.value); observe(h,FC_VALUE_EXT_WORD,0,0); w.value=narrow_word(w.value,(uint16_t)(w.value<<2)); observe(h,FC_VALUE_ASL_WORD,2,0);
         w.viewer=rd_u32(w.viewer+(uint32_t)(int32_t)(int16_t)w.value); observe(h,FC_VIEWER,w.viewer,0); w.viewer+=10; observe(h,FC_VIEWER,w.viewer,0);

@@ -1,6 +1,7 @@
 /* Complete flight-record actions: C230E8..C23A24 and C257EC..C25862.
  * Shared exits are named state operations; all consumers remain original. */
 #include "flight_record_actions.h"
+#include "globals.h"
 #include <stdlib.h>
 static void observe(const FlightActionHooks *h,enum FlightActionPhase p,enum FlightActionValue field,uint32_t v,uint32_t operand) {
     if(h && h->observe) h->observe(h->context,p,field,v,operand);
@@ -8,6 +9,10 @@ static void observe(const FlightActionHooks *h,enum FlightActionPhase p,enum Fli
 static FlightActionState consume(const FlightActionHooks *h,enum FlightActionChild child) {
     if(h && h->consume) return h->consume(h->context,child);
     abort();
+}
+static FlightActionState consume_input(const FlightActionHooks *h,enum FlightActionChild child,FlightActionState w) {
+    if(h && h->consume_values) return h->consume_values(h->context,child,w);
+    return consume(h,child);
 }
 static uint32_t word_half(uint32_t old,uint16_t v) { return (old&0xffff0000u)|v; }
 static uint32_t byte_half(uint32_t old,uint8_t v) { return (old&0xffffff00u)|v; }
@@ -53,14 +58,14 @@ int select_flight_record_action(FlightActionState w,int allow_release,const Flig
     w.primary=byte_half(w.primary,w.primary&15); observe(h,FA_AND_BYTE,FA_PRIMARY,15,0); code=(uint8_t)w.primary;
     if(allow_release) {
         CBYTE(code,14);
-        if((int8_t)code>=14) { w.selector=byte_half(w.selector,w.selector&0xf0); observe(h,FA_AND_BYTE,FA_SELECTOR,0xf0,0); byte(h,w.source+124,(uint8_t)w.selector); consume(h,FA_RELEASE_ACTION); goto action_done; }
+        if((int8_t)code>=14) { w.selector=byte_half(w.selector,w.selector&0xf0); observe(h,FA_AND_BYTE,FA_SELECTOR,0xf0,0); byte(h,w.source+124,(uint8_t)w.selector); consume_input(h,FA_RELEASE_ACTION,w); goto action_done; }
     }
     CBYTE(code,9);
-    if(code==9 && !test_byte(h,0xc45785u)) { consume(h,FA_ACTION_SOUND); goto no_action; }
+    if(code==9 && !test_byte(h,0xc45785u)) { consume_input(h,FA_ACTION_SOUND,w); goto no_action; }
     CBYTE(code,1);
     if(code==1) { byte(h,0xc4586au,0x3f); byte(h,0xc45869u,0x78); byte(h,0xc457b8u,255); goto no_action; }
     CBYTE(code,3); if(code!=3) goto no_action;
-    consume(h,FA_MANOEUVRE_ACTION);
+    consume_input(h,FA_MANOEUVRE_ACTION,w);
 action_done:
     L(primary,FA_PRIMARY,1); return 1;
 no_action:
@@ -85,8 +90,8 @@ static void play_flight_record_stream(FlightActionState w,const FlightActionHook
     CBYTE(rd_u8(0xc458a6u),2); if(rd_u8(0xc458a6u)!=2) goto choose_stream;
     if(!test_byte(h,0xc45793u)) return;
     old=bit_change(h,0xc46186u,3,0); if(!(old&8)) goto choose_stream;
-    saved_record=w.record; observe(h,FA_SAVE_RECORD,FA_PRIMARY,0,0); word(h,w.record,0); w=consume(h,FA_RESET_STREAM_RECORD);
-    observe(h,FA_RESTORE_RECORD,FA_PRIMARY,0,0); w.record=saved_record; bit_change(h,w.record+2,0,1); byte(h,w.record+43,0x60); w=consume(h,FA_BEGIN_STREAM);
+    saved_record=w.record; observe(h,FA_SAVE_RECORD,FA_PRIMARY,0,0); word(h,w.record,0); w=consume_input(h,FA_RESET_STREAM_RECORD,w);
+    observe(h,FA_RESTORE_RECORD,FA_PRIMARY,0,0); w.record=saved_record; bit_change(h,w.record+2,0,1); byte(h,w.record+43,0x60); w=consume_input(h,FA_BEGIN_STREAM,w);
     P(stream,FA_STREAM,0xc2366au); B(primary,FA_PRIMARY,rd_u8(0xc45799u)); EW(primary,FA_PRIMARY); ALW(primary,FA_PRIMARY,3); goto read_stream;
 choose_stream:
     P(stream,FA_STREAM,0xc2366au); B(primary,FA_PRIMARY,rd_u8(0xc45799u)); EW(primary,FA_PRIMARY); ALW(primary,FA_PRIMARY,3);
@@ -101,7 +106,7 @@ read_command:
     P(stream,FA_STREAM,w.primary); P(stream,FA_STREAM,rd_u32(w.stream)); P(stream,FA_STREAM,w.stream+2); P(coefficients,FA_COEFFICIENTS,0xc4fda2u);
     P(stream,FA_STREAM,w.stream+(uint32_t)(int32_t)rd_s16(w.coefficients)); B(primary,FA_PRIMARY,rd_u8(w.stream)); if((int8_t)w.primary<0) goto stream_end;
     bit_change(h,w.record+2,3,0); byte(h,w.record+101,(uint8_t)w.primary); increment_word(h,w.coefficients); CWORD(rd_u16(w.coefficients),0x1fd);
-    if(rd_s16(w.coefficients)<0x1fd) return; W(primary,FA_PRIMARY,29); consume(h,FA_STREAM_LIMIT_MESSAGE); bit_change(h,w.record+2,0,0); return;
+    if(rd_s16(w.coefficients)<0x1fd) return; W(primary,FA_PRIMARY,29); consume_input(h,FA_STREAM_LIMIT_MESSAGE,w); bit_change(h,w.record+2,0,0); return;
 negative_stream:
     if(!test_word(h,0xc4fda2u)) { bit_change(h,w.record+2,3,0); byte(h,w.record+5,(uint8_t)w.primary); word(h,0xc4fda2u,1); return; }
     if(test_byte(h,w.record+5)) return; byte(h,w.record+101,rd_u8(w.record+101)&0xc3);
@@ -111,14 +116,14 @@ stream_end:
     { uint8_t pending=rd_u8(0xc4579au); observe(h,FA_TEST_BYTE,FA_PRIMARY,pending,0); if((int8_t)pending<0) return; }
     byte(h,0xc4579au,255); B(primary,FA_PRIMARY,rd_u8(0xc45799u)); AB(primary,FA_PRIMARY,1); CBYTE(w.primary,7);
     if((int8_t)w.primary>7) B(primary,FA_PRIMARY,1); EW(primary,FA_PRIMARY); ALW(primary,FA_PRIMARY,3);
-    P(copy,FA_COPY,0xc23622u); W(primary,FA_PRIMARY,rd_u16(w.copy+(uint32_t)(int32_t)(int16_t)w.primary)); consume(h,FA_STREAM_END_MESSAGE); return;
+    P(copy,FA_COPY,0xc23622u); W(primary,FA_PRIMARY,rd_u16(w.copy+(uint32_t)(int32_t)(int16_t)w.primary)); consume_input(h,FA_STREAM_END_MESSAGE,w); return;
 begin_next:
     byte(h,0xc4579au,0); CBYTE(rd_u8(0xc45799u),7);
     if(rd_s8(0xc45799u)>=7) {
-        saved_record=w.record; observe(h,FA_SAVE_RECORD,FA_PRIMARY,0,0); word(h,w.record,0); w=consume(h,FA_RESET_NEXT_RECORD);
+        saved_record=w.record; observe(h,FA_SAVE_RECORD,FA_PRIMARY,0,0); word(h,w.record,0); w=consume_input(h,FA_RESET_NEXT_RECORD,w);
         observe(h,FA_RESTORE_RECORD,FA_PRIMARY,0,0); w.record=saved_record; bit_change(h,w.record+2,0,1); byte(h,w.record+43,0x60);
     }
-    w=consume(h,FA_NEXT_STREAM); goto choose_stream;
+    w=consume_input(h,FA_NEXT_STREAM,w); goto choose_stream;
 }
 void advance_flight_record_stream(FlightActionState w,const FlightActionHooks *h) {
     CBYTE(rd_u8(0xc458a6u),125);
@@ -132,7 +137,7 @@ void advance_flight_record_control(FlightActionState w,const FlightActionHooks *
     W(primary,FA_PRIMARY,rd_u16(w.record+86)); W(selector,FA_SELECTOR,w.primary); ASW(selector,FA_SELECTOR,3); AW(primary,FA_PRIMARY,w.selector); AW(primary,FA_PRIMARY,rd_u16(0xc45946u)); ASW(primary,FA_PRIMARY,3);
     if((int16_t)w.primary<0) { w.primary=word_half(w.primary,(uint16_t)(0u-w.primary)); observe(h,FA_NEG_WORD,FA_PRIMARY,0,0); }
     CWORD(w.primary,78);
-    if((int16_t)w.primary>=78) { if(!test_byte(h,0xc45888u)) { byte(h,0xc45888u,1); L(primary,FA_PRIMARY,8); w=consume(h,FA_MAGNITUDE_ALERT); } }
+    if((int16_t)w.primary>=78) { if(!test_byte(h,0xc45888u)) { byte(h,0xc45888u,1); L(primary,FA_PRIMARY,8); w=consume_input(h,FA_MAGNITUDE_ALERT,w); } }
     else byte(h,0xc45888u,0);
     CBYTE(rd_u8(0xc458a6u),125);
     if(rd_u8(0xc458a6u)==125) {
@@ -141,10 +146,10 @@ void advance_flight_record_control(FlightActionState w,const FlightActionHooks *
             B(primary,FA_PRIMARY,rd_u8(0xc45799u)); CBYTE(rd_u8(0xc4579au),255);
             if(rd_u8(0xc4579au)!=255) { AB(primary,FA_PRIMARY,1); CBYTE(w.primary,7); if((int8_t)w.primary>7) B(primary,FA_PRIMARY,1); }
             byte(h,0xc45799u,(uint8_t)w.primary); AB(primary,FA_PRIMARY,1); CBYTE(w.primary,7); if((int8_t)w.primary>7) B(primary,FA_PRIMARY,1);
-            EW(primary,FA_PRIMARY); ALW(primary,FA_PRIMARY,3); P(copy,FA_COPY,0xc23622u); W(primary,FA_PRIMARY,rd_u16(w.copy+(uint32_t)(int32_t)(int16_t)w.primary)); w=consume(h,FA_CLONE_MESSAGE);
+            EW(primary,FA_PRIMARY); ALW(primary,FA_PRIMARY,3); P(copy,FA_COPY,0xc23622u); W(primary,FA_PRIMARY,rd_u16(w.copy+(uint32_t)(int32_t)(int16_t)w.primary)); w=consume_input(h,FA_CLONE_MESSAGE,w);
             byte(h,0xc4579au,0xfe); saved_class=rd_u8(w.record+99); B(selector,FA_SELECTOR,saved_class); copy_record(&w,h); byte(h,w.record+99,saved_class);
             byte(h,w.record+94,0); byte(h,w.record+98,17); bit_change(h,w.record+2,0,0); byte(h,w.record+5,0); byte(h,w.record+101,0);
-            L(x,FA_X,9); L(y,FA_Y,1); W(z,FA_Z,0xff9f); w=consume(h,FA_CLONE_PROJECTION);
+            L(x,FA_X,9); L(y,FA_Y,1); W(z,FA_Z,0xff9f); w=consume_input(h,FA_CLONE_PROJECTION,w);
             longword(h,w.record+20,w.primary); longword(h,w.record+24,w.selector); longword(h,w.record+28,w.detail);
             L(x,FA_X,w.primary); L(y,FA_Y,w.detail); ASL(x,FA_X,8); ASL(y,FA_Y,8);
             w.x=word_half(w.x,w.x&0x3fff); observe(h,FA_AND_WORD,FA_X,0x3fff,0); w.y=word_half(w.y,w.y&0x3fff); observe(h,FA_AND_WORD,FA_Y,0x3fff,0);
@@ -175,7 +180,7 @@ void select_next_flight_record_stream(FlightActionState w,const FlightActionHook
     if((uint8_t)w.selector==4) { CLONG(rd_u32(w.record+24),0x100000); if(rd_s32(w.record+24)<=0x100000) { W(primary,FA_PRIMARY,53); goto message; } }
     P(copy,FA_COPY,0xc23622u); ALW(selector,FA_SELECTOR,3); W(primary,FA_PRIMARY,rd_u16(w.copy+2+(uint32_t)(int32_t)(int16_t)w.selector));
 message:
-    consume(h,FA_NEXT_MESSAGE);
+    consume_input(h,FA_NEXT_MESSAGE,w);
 }
 void apply_flight_record_action_motion(FlightActionState w,const FlightActionHooks *h) {
     uint32_t last;
@@ -222,7 +227,7 @@ void apply_flight_record_action_motion(FlightActionState w,const FlightActionHoo
     W(z,FA_Z,rd_u16(w.source+148)); W(product_a,FA_PRODUCT_A,rd_u16(w.source+154)); W(product_b,FA_PRODUCT_B,rd_u16(w.source+160)); ASW(z,FA_Z,2); ASW(product_a,FA_PRODUCT_A,2); ASW(product_b,FA_PRODUCT_B,2);
     CBYTE(rd_u8(w.record+98),48);
     if(rd_u8(w.record+98)!=48) { w.z=word_half(w.z,(uint16_t)(0u-w.z)); observe(h,FA_NEG_WORD,FA_Z,0,0); w.product_a=word_half(w.product_a,(uint16_t)(0u-w.product_a)); observe(h,FA_NEG_WORD,FA_PRODUCT_A,0,0); w.product_b=word_half(w.product_b,(uint16_t)(0u-w.product_b)); observe(h,FA_NEG_WORD,FA_PRODUCT_B,0,0); }
-    W(primary,FA_PRIMARY,960); w=consume(h,FA_ACTION_NORMALISE);
+    W(primary,FA_PRIMARY,960); w=consume_input(h,FA_ACTION_NORMALISE,w);
     w.primary=rd_u32(w.record+62); w.selector=rd_u32(w.record+66); w.detail=rd_u32(w.record+70); observe(h,FA_LOAD_MOTION,FA_PRIMARY,w.record+62,0);
     AL(z,FA_Z,w.primary); AL(product_a,FA_PRODUCT_A,w.selector); AL(product_b,FA_PRODUCT_B,w.detail);
     wr_u32(w.record+62,w.z); wr_u32(w.record+66,w.product_a); wr_u32(w.record+70,w.product_b); word(h,w.record+76,0xffec);
@@ -232,25 +237,35 @@ void apply_flight_record_action_motion(FlightActionState w,const FlightActionHoo
 void initialise_flight_record_manoeuvre(FlightActionState w,const FlightActionHooks *h) {
     gaddr saved_record,saved_source;
     L(selector,FA_SELECTOR,w.record); w.selector-=0xc46184u; observe(h,FA_SUB_LONG,FA_SELECTOR,0xc46184u,0); word(h,0xc459c2u,(uint16_t)w.selector);
-    if(!test_byte(h,0xc45785u)) { W(selector,FA_SELECTOR,rd_u16(0xc459b4u)); w=consume(h,FA_REFRESH_ACTION_VIEW); }
+    if(!test_byte(h,0xc45785u)) { W(selector,FA_SELECTOR,rd_u16(0xc459b4u)); w=consume_input(h,FA_REFRESH_ACTION_VIEW,w); }
     copy_record(&w,h); bit_change(h,w.record,7,0); byte(h,w.record+98,48); W(primary,FA_PRIMARY,0xe10); W(detail,FA_DETAIL,0x3840); W(y,FA_Y,0x3840); P(coefficients,FA_COEFFICIENTS,w.record+128);
-    saved_record=w.record; saved_source=w.source; observe(h,FA_SAVE_RECORD_SOURCES,FA_PRIMARY,0,0); w=consume(h,FA_ACTION_ROTATION);
+    saved_record=w.record; saved_source=w.source; observe(h,FA_SAVE_RECORD_SOURCES,FA_PRIMARY,0,0); w=consume_input(h,FA_ACTION_ROTATION,w);
     wr_u16(w.record+102,(uint16_t)w.y); wr_u16(w.record+104,(uint16_t)w.z); wr_u16(w.record+106,(uint16_t)w.product_a);
-    w=consume(h,FA_ACTION_MATRIX); observe(h,FA_RESTORE_RECORD_SOURCES,FA_PRIMARY,0,0); w.record=saved_record; w.source=saved_source;
+    w=consume_input(h,FA_ACTION_MATRIX,w); observe(h,FA_RESTORE_RECORD_SOURCES,FA_PRIMARY,0,0); w.record=saved_record; w.source=saved_source;
     W(primary,FA_PRIMARY,40); apply_flight_record_action_motion(w,h);
 }
 void initialise_flight_record_release(FlightActionState w,const FlightActionHooks *h) {
     L(selector,FA_SELECTOR,w.record); w.selector-=0xc46184u; observe(h,FA_SUB_LONG,FA_SELECTOR,0xc46184u,0); word(h,0xc458c2u,(uint16_t)w.selector);
     copy_record(&w,h); bit_change(h,w.record,7,0); byte(h,w.record+98,49); W(primary,FA_PRIMARY,220); apply_flight_record_action_motion(w,h);
 }
-void try_flight_record_action(FlightActionState w,const FlightActionHooks *h) {
+static void try_record_action(FlightActionState w,const FlightActionHooks *h,int primary) {
     uint32_t mask; uint8_t kind;
+    if(primary) {
+        /* C2374C's selected-fire prefix jumps over the C2377E gates. */
+        byte(h,SPACE_COMMAND_LATCH,0);byte(h,FIRE_RECORD_PENDING,1);
+        if(rd_u32(WARNING_CAUSES)&0x4000u) {
+            longword(h,WARNING_CAUSES,rd_u32(WARNING_CAUSES)&0xffffbfffu);
+            longword(h,EVENT_BITS,rd_u32(EVENT_BITS)|8u);
+        }
+        goto source_stores;
+    }
     if(!test_byte(h,0xc45789u)) goto inactive;
     CBYTE(rd_u8(0xc458a7u),3);
     if(rd_s8(0xc458a7u)>=3) L(selector,FA_SELECTOR,3);
     else { CBYTE(rd_u8(0xc458a7u),2); L(selector,FA_SELECTOR,rd_s8(0xc458a7u)>=2?5:7); }
     if(test_byte(h,0xc458b5u)) { w.selector=word_half(w.selector,(uint16_t)w.selector>>1); observe(h,FA_LSR_WORD,FA_SELECTOR,1,0); }
     W(primary,FA_PRIMARY,rd_u16(0xc458dau)); w.primary=word_half(w.primary,w.primary&w.selector); observe(h,FA_AND_WORD,FA_PRIMARY,w.selector,0); if((uint16_t)w.primary) goto inactive;
+source_stores:
     B(selector,FA_SELECTOR,rd_u8(w.source+95)); B(primary,FA_PRIMARY,rd_u8(w.source+99)); w.primary=byte_half(w.primary,w.primary&0xf0); observe(h,FA_AND_BYTE,FA_PRIMARY,0xf0,0); CBYTE(w.primary,48);
     mask=(uint8_t)w.primary==48?15:0xf0; w.selector=byte_half(w.selector,w.selector&mask); observe(h,FA_AND_BYTE,FA_SELECTOR,mask,0); if(!(uint8_t)w.selector) goto inactive;
     L(primary,FA_PRIMARY,w.source); w.primary-=0xc46184u; observe(h,FA_SUB_LONG,FA_PRIMARY,0xc46184u,0); CWORD(w.primary,rd_u16(0xc458deu));
@@ -262,16 +277,18 @@ void try_flight_record_action(FlightActionState w,const FlightActionHooks *h) {
 inactive:
     bit_change(h,w.record+1,6,0);
 }
+void try_primary_flight_record_action(FlightActionState w,const FlightActionHooks *h) { try_record_action(w,h,1); }
+void try_flight_record_action(FlightActionState w,const FlightActionHooks *h) { try_record_action(w,h,0); }
 void normalise_flight_record_direction(gaddr frame,const FlightActionHooks *h) {
     FlightActionState w={0}; uint32_t factor,length,quotient; unsigned shift; uint16_t divisor;
     observe(h,FA_DIRECTION_ARGUMENTS,FA_PRIMARY,frame+8,0); w.primary=rd_u32(frame+8); w.z=rd_u32(frame+12); w.product_a=rd_u32(frame+16); w.product_b=rd_u32(frame+20);
     observe(h,FA_TEST_WORD,FA_PRIMARY,(uint16_t)w.primary,0);
-    if(!(uint16_t)w.primary) { for(;;) { word(h,0xc4599eu,21); consume(h,FA_DIRECTION_FAULT); } }
+    if(!(uint16_t)w.primary) { for(;;) { word(h,0xc4599eu,21); consume_input(h,FA_DIRECTION_FAULT,w); } }
     if((int16_t)w.primary<0) { w.primary=word_half(w.primary,(uint16_t)(0u-w.primary)); observe(h,FA_NEG_WORD,FA_PRIMARY,0,0); }
     W(detail,FA_DETAIL,w.z); if((int16_t)w.detail<0) { w.detail=word_half(w.detail,(uint16_t)(0u-w.detail)); observe(h,FA_NEG_WORD,FA_DETAIL,0,0); }
     W(x,FA_X,w.product_a); if((int16_t)w.x<0) { w.x=word_half(w.x,(uint16_t)(0u-w.x)); observe(h,FA_NEG_WORD,FA_X,0,0); }
     W(y,FA_Y,w.product_b); if((int16_t)w.y<0) { w.y=word_half(w.y,(uint16_t)(0u-w.y)); observe(h,FA_NEG_WORD,FA_Y,0,0); }
-    w=consume(h,FA_DIRECTION_LENGTH); L(detail,FA_DETAIL,3); EL(primary,FA_PRIMARY); factor=w.primary; length=w.selector; shift=3;
+    w=consume_input(h,FA_DIRECTION_LENGTH,w); L(detail,FA_DETAIL,3); EL(primary,FA_PRIMARY); factor=w.primary; length=w.selector; shift=3;
     for(;;) { CLONG(factor,length); if((int32_t)factor>(int32_t)length) break; factor<<=2; observe(h,FA_ASL_LONG,FA_PRIMARY,2,0); shift=(uint16_t)(shift+2); observe(h,FA_ADD_WORD,FA_DETAIL,2,0); }
     for(;;) {
         factor=asr(factor,2); observe(h,FA_ASR_LONG,FA_PRIMARY,2,0); shift=(uint16_t)(shift-2); observe(h,FA_SUB_WORD,FA_DETAIL,2,0); CWORD(shift,1); if((int16_t)shift<=1) break;

@@ -9,6 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Latest completed batch: native demonstration flight reads original disk
+  recorder assets through C16518's contract; C0FA04/C0FA4C/C0FA80, NPC
+  range/view/guidance and C2374C selected-fire launches are connected. All
+  4,892 demo updates complete, with 31 original startup/launch cases and four
+  record checkpoint comparisons passing. See
+  `../analysis/native_demo_milestone.md`. Functional scenario wiring is now
+  **3/3 (100% of that checklist)**; full native frame parity is **0/3 accepted**.
+  Next: original audio-availability initialization and frame/result cadence.
+  Copper fade remains excluded; no full original replay suite repeated.
+
 - Complete: source splash -> credits -> pilot entry -> main menu.
 - Complete: native menu navigation, mode banners, source-gated mission list,
   flight-log summary, Escape return, reset/save/reload. Source owners and seven

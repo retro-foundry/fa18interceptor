@@ -11,6 +11,9 @@
 #undef MC_WORD_STORE
 #undef MC_CALLBACK
 #undef MC_QUEUE_NEXT
+#define MH_DIVIDE HEADING_DIVIDE
+#include "target_heading.h"
+#undef MH_DIVIDE
 #define main records_fixture_main
 #include "native_records_oracle.c"
 #undef main

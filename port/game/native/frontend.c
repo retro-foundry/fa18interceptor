@@ -125,6 +125,17 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     wr_u32(CIRCLE_SPANS_PTR,0x33000); /* 127-radius symmetric span workspace. */
     wr_u8(0xc4588au,1); wr_u8(0xc457d7u,2); /* source audio suppression */
     native_menu_initialize();
+    /* C16518 reads the original flight-recorder byte and word buffers from
+     * textply/textctl. Demonstration mode 3 consumes these through C1B27E;
+     * they are disk assets, not RAM copied from a reference capture. Read's
+     * requested lengths are capacity and four times capacity respectively. */
+    for(unsigned buffer=0;buffer<2;++buffer) {
+        free(bytes);bytes=amiga_ofs_read(&disk,buffer?"text/textctl":"text/textply",&size);
+        if(!bytes) { fail(error,cap,"missing original flight-recorder data");goto done; }
+        size_t limit=(size_t)rd_u32(RECORDER_SIZE)*(buffer?4u:1u);
+        memcpy(native_storage_range(rd_u32(buffer?RECORDER_WORDS:RECORDER_START),limit),
+            bytes,size<limit?size:limit);
+    }
     native_flight_initialize(game);
     game->screen=NATIVE_SPLASH; memcpy(game->palette,game->splash.palette,sizeof game->palette);
     for(unsigned y=0;y<game->splash.height;++y) memcpy(game->indices+y*320,game->splash.indices+y*game->splash.width,game->splash.width);

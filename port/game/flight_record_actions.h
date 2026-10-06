@@ -30,6 +30,7 @@ typedef struct {
     void (*observe)(void *context,enum FlightActionPhase phase,enum FlightActionValue field,uint32_t value,uint32_t operand);
     FlightActionState (*divide_exception)(void *context);
     void *context;
+    FlightActionState (*consume_values)(void *context,enum FlightActionChild child,FlightActionState work);
 } FlightActionHooks;
 /* $C230E8/$C23116: select the original record action from its low flag nibble. */
 int select_flight_record_action(FlightActionState w,int allow_release,const FlightActionHooks *h);
@@ -46,6 +47,8 @@ void append_flight_record_stream(FlightActionState w,const FlightActionHooks *h)
 void initialise_flight_record_manoeuvre(FlightActionState w,const FlightActionHooks *h);
 void initialise_flight_record_release(FlightActionState w,const FlightActionHooks *h);
 void try_flight_record_action(FlightActionState w,const FlightActionHooks *h);
+/* C2374C selected-fire prefix, followed by C237B8's shared stores/motion. */
+void try_primary_flight_record_action(FlightActionState w,const FlightActionHooks *h);
 /* $C2385A: common internal action-motion tail, not a separate callable owner. */
 void apply_flight_record_action_motion(FlightActionState w,const FlightActionHooks *h);
 /* $C257EC: direction scaling, with the original nonreturning zero-scale fault. */

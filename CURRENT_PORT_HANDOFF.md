@@ -20,7 +20,14 @@ C0F946/C0F974/C0F992 are now connected. The carrier recording completes with
 consumed keys, persists qualification success and restarts; fifteen source
 parent cases and save/reload pass. Two of three scenarios now have functional
 outcomes; full frame parity remains open, including post-result timing/state.
-Next: native demo playback and full frame/result cadence. Evidence:
+Native demonstration flight now reads original textply/textctl recorder assets,
+connects C0FA04/C0FA4C/C0FA80, NPC dispatch/guidance and selected-fire launches,
+and completes all 4,892 recorded updates. Four native record checkpoints,
+31 startup/launch cases, source asset comparisons and regressions pass.
+Functional scenario wiring is 3/3; native full frame parity is still 0/3 accepted.
+The demo reaches active flight early; original audio-availability flags and
+message/viewport cadence remain open. See `analysis/native_demo_milestone.md`.
+Next: original startup/audio availability and full frame/result cadence. Evidence:
 `analysis/native_game_input_milestone.md`.
 Touchdown evidence: `analysis/native_carrier_touchdown_milestone.md`.
 Result evidence: `analysis/native_qualification_result_milestone.md`.

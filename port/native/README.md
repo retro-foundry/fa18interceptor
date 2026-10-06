@@ -42,7 +42,14 @@ leaves the qualification briefing. F10 applies the source throttle level;
 Down pulls back. A bounded carrier-start/takeoff probe passes source comparisons.
 Carrier landing, qualification-success save and restart are demonstrated with
 original consumed keys. Complete recorded frame parity remains unverified.
-Demo and other selected modes stop at their transition banner. Audio remains suppressed.
+Demonstration Flight (digit 1) now loads the original `text/textply` and
+`text/textctl` recorder assets at startup, then flies through the source demo
+stages, NPC guidance and recorded launches. All 4,892 demo updates complete;
+startup/record/launch/asset comparisons pass. Functional scenario wiring is
+3/3, while full native frame parity remains 0/3 accepted. Demo startup is early
+relative to the reference; original audio availability and viewport/message
+cadence still need reconciliation. Other selected modes stop at their banner.
+Audio remains suppressed.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
@@ -58,6 +65,7 @@ python tools/native/check_raster.py --runner build/native/fa18_native.exe
 python tools/native/check_models.py --runner build/native/fa18_native.exe
 python tools/native/check_hud.py --runner build/native/fa18_native.exe
 python tools/native/check_qualification.py --runner build/native/fa18_native.exe
+python tools/native/check_demo.py --runner build/native/fa18_native.exe
 ```
 
 Build ownership is `port/recomp/CMakeLists.txt` -> `port/native/CMakeLists.txt`.
