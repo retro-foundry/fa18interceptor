@@ -2,6 +2,9 @@
 #include "glue_flight_dynamics.h"
 #include "glue_child_call.h"
 #include "flight_dynamics.h"
+#include "glue_flight_record_calls.h"
+#include "recomp_ports.h"
+#include <stdlib.h>
 static DynamicsState working(void) {
     DynamicsState w={D(0),D(1),D(2),D(3),D(4),D(5),D(6),D(7),A(0),A(1),A(2),A(3),A(4),A(5),COND_EQ()}; return w;
 }
@@ -53,6 +56,8 @@ static void outputs(void *context,enum DynamicsPhase phase,enum DynamicsValue fi
     case DY_SOUND_ARGUMENTS: m68ki_push_32(0x30); flags_logic_l(0x30); m68ki_push_32(0x1c); flags_logic_l(0x1c); break;
     case DY_BEGIN_FRAME: m68ki_push_32(A(6)); A(6)=A(7); A(7)-=v; break;
     case DY_END_FRAME: A(7)=A(6); A(6)=m68ki_pull_32(); break;
+    case DY_AUTOPILOT_LIMIT: wr_u32(A(6)+(uint32_t)(int32_t)v,other); flags_logic_l(other); break;
+    case DY_AUTOPILOT_TOGGLE: FLAG_Z=v&1u; break;
     }
 }
 static gaddr frame(void *context) { (void)context; return A(6); }
@@ -63,3 +68,81 @@ int glue_C266AE(void) { collide_scene_motion(working(),&hooks); return glue_retu
 int glue_C28996(void) { update_scene_regions(working(),&hooks); return glue_return(); }
 int glue_C28B16(void) { spawn_region_records(working(),&hooks); return glue_return(); }
 int glue_complete_region_dispatch(void) { dispatch_region_records(working(),&hooks); return glue_return(); }
+
+typedef struct { uint32_t entry,ret; } AutopilotChild;
+static AutopilotChild autopilot_child(enum AutopilotPhase phase) {
+    switch(phase) {
+    case AP_AFTER_FAULT: return (AutopilotChild){0xc06c02,0xc2c34e};
+    case AP_AFTER_NORMALIZE: return (AutopilotChild){0xc2574a,0xc2c628};
+    case AP_AFTER_TURN: return (AutopilotChild){0xc2ca26,0xc2c9ee};
+    case AP_AFTER_PITCH: return (AutopilotChild){0xc2cb86,0xc2cb62};
+    case AP_AFTER_SIMPLE_ROLL: return (AutopilotChild){0xc2ca92,0xc2c1cc};
+    case AP_AFTER_WAIT_PITCH: return (AutopilotChild){0xc2cb86,0xc2c200};
+    case AP_AFTER_RATE_ROLL: return (AutopilotChild){0xc2ca92,0xc2c264};
+    case AP_AFTER_RATE_NEUTRAL: return (AutopilotChild){0xc2caa0,0xc2c26c};
+    case AP_AFTER_LOOP_PITCH: return (AutopilotChild){0xc2cbbc,0xc2bd36};
+    case AP_AFTER_LOOP_LEVEL: return (AutopilotChild){0xc2cbbc,0xc2bd40};
+    case AP_AFTER_BANK_ROLL: return (AutopilotChild){0xc2ca92,0xc2bdd4};
+    case AP_AFTER_PITCH_ARC: return (AutopilotChild){0xc2cbbc,0xc2be4c};
+    case AP_AFTER_LEVEL_ROLL: return (AutopilotChild){0xc2ca92,0xc2bed8};
+    case AP_AFTER_REVERSE_PITCH: return (AutopilotChild){0xc2cbbc,0xc2bf3e};
+    case AP_AFTER_COMBINED_ROLL: return (AutopilotChild){0xc2ca92,0xc2bfb4};
+    case AP_AFTER_COMBINED_PITCH: return (AutopilotChild){0xc2cb82,0xc2bfc6};
+    case AP_AFTER_REVERSE_ROLL: return (AutopilotChild){0xc2ca92,0xc2c03a};
+    case AP_AFTER_DIVE_PITCH: return (AutopilotChild){0xc2cbbc,0xc2c0c2};
+    case AP_AFTER_DIVE_LEVEL: return (AutopilotChild){0xc2cbbc,0xc2c0cc};
+    case AP_AFTER_CLIMB_PITCH: return (AutopilotChild){0xc2cbbc,0xc2c152};
+    case AP_AFTER_CLIMB_LEVEL: return (AutopilotChild){0xc2cbbc,0xc2c15c};
+    default: abort();
+    }
+}
+
+typedef struct {
+    AutopilotFrame frame;
+    uint32_t return_pc,return_sp;
+    int started,original_transfer;
+} AutopilotCall;
+
+static int call_record_action(const void *arguments) {
+    AutopilotCall *call=(AutopilotCall *)arguments;
+    if(call->original_transfer) return FA18_RET;
+    if(call->started) call->frame.work=working();
+    else { call->started=1; fa18_ports_note_native_edge(0xc25b66,0xc2c392); }
+    if(update_dynamics_record_action(&call->frame,&hooks)) return glue_return();
+    if(call->frame.phase==AP_ORIGINAL_TRANSFER) {
+        /* Preserve the source's arbitrary computed transfer, including faults.
+         * No invented clamp/default maneuver is supplied for unknown bytes. */
+        call->original_transfer=1;
+        REG_PC=call->frame.unresolved_target;
+        fa18_ports_native_child_wait(call->return_pc,call->return_sp);
+    } else {
+        AutopilotChild child=autopilot_child(call->frame.phase);
+        uint32_t sp=A(7);
+        m68ki_push_32(child.ret); REG_PC=child.entry;
+        fa18_ports_native_child_wait(child.ret,sp);
+    }
+    return FA18_EXIT_DISPATCH;
+}
+int glue_schedule_record_action(void) {
+    AutopilotCall call={0};
+    call.frame.work=working(); call.frame.phase=AP_BEGIN;
+    call.return_pc=rd_u32(A(7))&0xffffffu; call.return_sp=A(7)+4;
+    /* Computation is native. Source child timing remains; parent instruction
+     * timing is an explicit integration debt, with no guessed average fee. */
+    return fa18_ports_schedule_native_child(call_record_action,&call,sizeof call,0);
+}
+int glue_record_action_reference(void) {
+    AutopilotFrame frame={0};
+    uint32_t return_pc=rd_u32(A(7))&0xffffffu,return_sp=A(7)+4;
+    frame.work=working(); frame.phase=AP_BEGIN;
+    while(!advance_record_autopilot(&frame,&hooks)) {
+        if(frame.phase==AP_ORIGINAL_TRANSFER) {
+            REG_PC=frame.unresolved_target;
+            return fa18_recomp_resume(return_pc,return_sp);
+        }
+        AutopilotChild child=autopilot_child(frame.phase);
+        glue_complete_child(child.entry,child.ret);
+        frame.work=working();
+    }
+    return glue_return();
+}

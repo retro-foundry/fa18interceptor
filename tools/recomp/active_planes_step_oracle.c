@@ -569,6 +569,22 @@ static int native_probe_child(const void *arguments) {
 
 /* Test the new scheduling contract independently of matrix arithmetic:
  * copied arguments, IRQ PC/SP guards, completion, retirement and reset. */
+typedef struct { unsigned phase,value; } NativeWaitProbe;
+static unsigned native_wait_calls;
+static int native_probe_wait(const void *arguments) {
+    NativeWaitProbe *probe=(NativeWaitProbe *)arguments;
+    ++native_wait_calls;
+    if(!probe->phase) {
+        uint32_t sp=REG_A[7];
+        probe->phase=1; probe->value^=0x87654321u;
+        m68ki_push_32(0xc2c628u); REG_PC=0xc2574au;
+        fa18_ports_native_child_wait(0xc2c628u,sp);
+        return FA18_EXIT_DISPATCH;
+    }
+    if(probe->phase!=1 || probe->value!=(0x12345678u^0x87654321u)) abort();
+    REG_PC=0xc25da4u; REG_A[7]+=4;
+    return FA18_RET;
+}
 static int native_boundary_fixture(void) {
     unsigned value = 0x12345678u;
     uint32_t caller_sp, child_sp;
@@ -598,7 +614,25 @@ static int native_boundary_fixture(void) {
     if (!fa18_ports_schedule_native_child(native_probe_child, &value, sizeof value, 16)) return 0;
     fa18_ports_init(FA18_PORTS_OFF, NULL);
     if (fa18_ports_resume_step() || fa18_ports_active_steps() || native_probe_calls != 1) return 0;
-    puts("native child boundary: copied arguments, interrupt guards, retirement and reset matched");
+    fa18_ports_init(FA18_PORTS_ON,"C25B66");
+    fixture(0xc25b66u,0); fa18_write_log_active=0;
+    if(fa18_recomp_call_dynamic()!=FA18_EXIT_DISPATCH) return 0;
+    REG_PPC=0xc25d9eu; REG_PC=0xc2d408u;
+    child_sp=REG_A[7]-=4; wr_u32(child_sp,0xc25da4u);
+    NativeWaitProbe wait={0,0x12345678u};
+    if(!fa18_ports_schedule_native_child(native_probe_wait,&wait,sizeof wait,0)) return 0;
+    wait.value=0;
+    if(!fa18_ports_resume_step() || native_wait_calls!=1 || REG_PC!=0xc2574au || REG_A[7]!=child_sp-4) return 0;
+    if(fa18_ports_resume_step() || native_wait_calls!=1) return 0;
+    REG_PC=0xc2c628u;
+    if(fa18_ports_resume_step() || native_wait_calls!=1) return 0;
+    REG_PC=0xc70000u; REG_A[7]=child_sp;
+    if(fa18_ports_resume_step() || native_wait_calls!=1) return 0;
+    REG_PC=0xc2c628u;
+    if(!fa18_ports_resume_step() || native_wait_calls!=2 || REG_PC!=0xc25da4u || REG_A[7]!=child_sp+4) return 0;
+    fa18_ports_init(FA18_PORTS_OFF,NULL);
+    if(fa18_ports_resume_step() || fa18_ports_active_steps()) return 0;
+    puts("native child boundary: copied arguments, IRQ guards, child wait/resume, retirement and reset matched");
     return 1;
 }
 

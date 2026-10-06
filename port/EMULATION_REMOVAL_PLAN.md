@@ -217,6 +217,26 @@ dependencies remain. Next actual CPU-work owner: C2C392, 626 original generated
 instructions, called 27 times in the bounded demo. Evidence:
 `../analysis/emulation_removal_flight_calls_batch.json/.md`.
 
+The C25C6A call now selects a native forty-arm C2C392 autopilot. Its complete
+original owner totals **987 instructions**, including **361 cold instructions**
+missed by the previous generated body. A retained C frame owns response limits
+and continuation phases; existing runtime children remain original CPU work.
+49,600 component cases match all registers/PC/SR/RAM (864/987 instructions
+observed); 12,400 production-continuation cases match (841/987); both cover all
+361 cold instructions. Unknown/modified action targets retain the exact source
+transfer. All builds, twelve CTests, GNU profiling and DMA/boundary checks pass.
+The 800-frame demo has 27 native calls, zero C2C392 CPU entries and **2,076 fewer
+aggregate CPU instructions**: raw work avoided **69.8779% (+0.0397 pp)** for
+that bounded demo only. Carrier/crash counters and outputs are unchanged.
+First non-fade source differences are **619/446/263**; parity remains open.
+Parent instruction/event timing is unmodeled. Counts: 24 C-owned entries,
+591 readable CPU rows, 84 deferred entries, 691 direct opcode bindings.
+Cached full raw CPU **38.4011%** and bounded three-recording minimum
+**48.0797%** stay unchanged; accepted percentage unavailable. Other cutover
+axes **0%**, deletion **0/4**. No full replay suite repeated. Evidence:
+`../analysis/emulation_removal_autopilot_batch.json/.md`. Next: remaining
+normalization/steering CPU child calls, then C28E28 in the live flight parent.
+
 Remaining C routines call each other by returning into the dispatcher. Give each
 recreated routine a direct C entry point and let a C caller call its C callee
 directly, keeping glue only for callers that are still generated code.

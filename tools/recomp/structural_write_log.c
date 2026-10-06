@@ -26,6 +26,13 @@ int fa18_structural_port_unused(uint32_t entry) {
     return 0;
 }
 
+/* Live-continuation oracle: completion must release the retained C frame. */
+size_t fa18_structural_native_pending(void) {
+    size_t i,count=0;
+    for(i=0;i<stepped_count;++i) if(stepped_calls[i].native_child) ++count;
+    return count;
+}
+
 /* A hardware-bearing original child is retained by the reference dispatcher.
  * This assertion distinguishes its explicit hardware classification from a
  * completed C comparison, rather than treating it as a matched call. */

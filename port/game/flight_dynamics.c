@@ -586,3 +586,481 @@ skipped:
 next:;
     } while(decrement(&w.primary,DY_PRIMARY,h));
 }
+
+/* Original record autopilot. The action byte names maneuver phases; targets,
+ * response tables and the forty-arm dispatch are original game data. Limits
+ * live in this C frame across child calls rather than in a guest local frame. */
+static DynamicsState autopilot_table_term(DynamicsState w,gaddr table,int term,
+                                          const DynamicsHooks *h) {
+    P(root,DY_ROOT,table); L(y,DY_Y,term);
+    W(y,DY_Y,rd_u16(indexed(w.root,w.y))); return w;
+}
+static void autopilot_limits(AutopilotFrame *f,const DynamicsHooks *h) {
+    const int offsets[]={-4,-8,-12,-20,-16,-24,-28,-32};
+    const int32_t values[]={f->positive_roll,f->positive_pitch,f->hysteresis,
+        f->negative_roll,f->negative_pitch,f->negative_hysteresis,
+        f->direction_limit,f->steep_limit};
+    unsigned i;
+    for(i=0;i<8;++i) observe(h,DY_AUTOPILOT_LIMIT,DY_PRIMARY,(uint32_t)offsets[i],(uint32_t)values[i]);
+}
+int advance_record_autopilot(AutopilotFrame *f,const DynamicsHooks *h) {
+    DynamicsState w=f->work;
+    int64_t difference;
+    uint32_t old; unsigned shift;
+    static const gaddr action_targets[40]={
+        0xc2c48a,0xc2c18e,0xc2c204,0xc2c208,0xc2c20c,0xc2c310,0xc2c1e6,0xc2c48a,
+        0xc2c216,0xc2c28c,0xc2bd5a,0xc2bd72,0xc2bd88,0xc2bdd8,0xc2bdf0,0xc2be06,
+        0xc2be50,0xc2be74,0xc2be8a,0xc2bedc,0xc2beee,0xc2bf04,0xc2bf42,0xc2bf5a,
+        0xc2bf70,0xc2bfca,0xc2bfe2,0xc2bff8,0xc2c03e,0xc2c050,0xc2c066,0xc2c0d0,
+        0xc2c0e2,0xc2c0f8,0xc2bcc8,0xc2bcf8,0xc2bd0c,0xc2bd4a,0xc2c16c,0xc2c178
+    };
+#define AP_WAIT(next) do { f->work=w; f->phase=(next); return 0; } while(0)
+    switch(f->phase) {
+    case AP_BEGIN: break;
+    case AP_AFTER_FAULT: goto start_level;
+    case AP_AFTER_NORMALIZE: goto choose_limits;
+    case AP_AFTER_TURN: goto publish_turn;
+    case AP_AFTER_PITCH: goto publish_pitch;
+    case AP_AFTER_SIMPLE_ROLL: goto toggle_phase;
+    case AP_AFTER_WAIT_PITCH: goto toggle_phase;
+    case AP_AFTER_RATE_ROLL: goto toggle_phase;
+    case AP_AFTER_RATE_NEUTRAL: goto toggle_phase;
+    case AP_AFTER_LOOP_PITCH: goto toggle_phase;
+    case AP_AFTER_LOOP_LEVEL: goto clear_loop_stick;
+    case AP_AFTER_BANK_ROLL: goto toggle_phase;
+    case AP_AFTER_PITCH_ARC: goto toggle_phase;
+    case AP_AFTER_LEVEL_ROLL: goto toggle_phase;
+    case AP_AFTER_REVERSE_PITCH: goto toggle_phase;
+    case AP_AFTER_COMBINED_ROLL: goto combined_pitch;
+    case AP_AFTER_COMBINED_PITCH: goto toggle_phase;
+    case AP_AFTER_REVERSE_ROLL: goto toggle_phase;
+    case AP_AFTER_DIVE_PITCH: goto toggle_phase;
+    case AP_AFTER_DIVE_LEVEL: goto begin_climb;
+    case AP_AFTER_CLIMB_PITCH: goto toggle_phase;
+    case AP_AFTER_CLIMB_LEVEL: goto finish_climb;
+    case AP_ORIGINAL_TRANSFER: return 0;
+    case AP_COMPLETE: return 1;
+    }
+    observe(h,DY_BEGIN_FRAME,DY_PRIMARY,44,0);
+    B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,48);
+    if((uint8_t)w.primary==48) goto clear_control_flags;
+    word(h,w.record+126,0x1400); W(primary,DY_PRIMARY,rd_u16(w.record)); AND_W(primary,DY_PRIMARY,128);
+    if(!(uint16_t)w.primary) goto clear_control_flags;
+    B(primary,DY_PRIMARY,rd_u8(0xc457afu)); OR_B(primary,DY_PRIMARY,rd_u8(0xc457aeu));
+    if((uint8_t)w.primary) goto finished;
+redispatch:
+    B(primary,DY_PRIMARY,rd_u8(w.record+5)); if(!(uint8_t)w.primary) goto active_guidance;
+    CB(rd_u8(w.record+5),8); if(rd_u8(w.record+5)==8) goto dispatch;
+    CB(rd_u8(w.record+5),1); if(rd_u8(w.record+5)==1) goto dispatch;
+    if(bit(h,w.record+32,1) || bit(h,w.record+2,0)) goto dispatch;
+    W(z,DY_Z,rd_u16(w.record+108)); EL(z,DY_Z); ALL(z,DY_Z,6);
+    if(rd_s32(w.record+66)<0) {
+        observe(h,DY_TEST_LONG,DY_PRIMARY,rd_u32(w.record+66),0); CL(w.z,rd_u32(w.record+24));
+        if((int32_t)w.z<rd_s32(w.record+24)) goto dispatch;
+        goto start_level;
+    }
+    observe(h,DY_TEST_LONG,DY_PRIMARY,rd_u32(w.record+66),0);
+    NEGL(z,DY_Z); AL(z,DY_Z,0x800000); CL(w.z,rd_u32(w.record+24));
+    if((int32_t)w.z<rd_s32(w.record+24)) goto start_level;
+dispatch:
+    CB(w.primary,8); if((uint8_t)w.primary==8) goto action_index;
+    CB(rd_u8(0xc458a6u),5); if(rd_u8(0xc458a6u)!=5) goto action_index;
+    if(!bit(h,w.record+1,3)) goto action_index;
+    observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto action_index;
+    byte(h,w.record+5,8); L(primary,DY_PRIMARY,0); B(primary,DY_PRIMARY,rd_u8(w.record+58)); AW(primary,DY_PRIMARY,w.primary);
+    w=geometry_table(w,w.primary,h); observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.table),0);
+    if(rd_s16(w.table)<0) goto action_index;
+    load_words(&w,w.table,31,-1,h); store_values(w,w.record+44,15,0,h); EL(z,DY_Z); longword(h,w.record+52,w.z); goto redispatch;
+action_index: {
+        uint8_t action=(uint8_t)w.primary;
+        SW(primary,DY_PRIMARY,1); EW(primary,DY_PRIMARY); AW(primary,DY_PRIMARY,w.primary); AW(primary,DY_PRIMARY,w.primary);
+        P(root,DY_ROOT,0xc2baf8u); P(root,DY_ROOT,rd_u32(indexed(w.root,w.primary)));
+        /* The source has no bounds clamp. Unknown or modified targets retain
+         * its exact signed-byte index and original transfer at the boundary. */
+        if(!action || action>40 || w.root!=action_targets[action-1]) {
+            f->unresolved_target=w.root; AP_WAIT(AP_ORIGINAL_TRANSFER);
+        }
+        switch(action) {
+        case 1: case 3: case 4: case 8: goto active_guidance;
+        case 2: goto simple_roll;
+        case 5: W(primary,DY_PRIMARY,0x460); W(rate_x,DY_RATE_X,0x1e0); goto rate_roll;
+        case 6: goto countdown_guidance;
+        case 7: goto wait_pitch;
+        case 9: W(primary,DY_PRIMARY,0x280); W(rate_x,DY_RATE_X,0x140); goto rate_roll;
+        case 10: goto level_countdown;
+        case 11: goto begin_bank;
+        case 12: goto bank_countdown;
+        case 13: goto bank_arc;
+        case 14: goto begin_pitch_arc;
+        case 15: goto pitch_arc_countdown;
+        case 16: goto pitch_arc;
+        case 17: CL(rd_u32(w.record+24),0x100000); if(rd_s32(w.record+24)<=0x100000) goto reset_guidance; goto begin_level_roll;
+        case 18: goto level_roll_countdown;
+        case 19: goto level_roll;
+        case 20: goto begin_reverse_pitch;
+        case 21: goto reverse_pitch_countdown;
+        case 22: goto reverse_pitch;
+        case 23: goto begin_combined;
+        case 24: goto combined_countdown;
+        case 25: goto combined_roll;
+        case 26: goto begin_reverse_roll;
+        case 27: goto reverse_roll_countdown;
+        case 28: goto reverse_roll;
+        case 29: goto begin_dive;
+        case 30: goto dive_countdown;
+        case 31: goto dive;
+        case 32: goto begin_climb;
+        case 33: goto climb_countdown;
+        case 34: goto climb;
+        case 35: goto throttle_phase;
+        case 36: goto loop_countdown;
+        case 37: goto loop;
+        case 38: goto height_phase;
+        case 39: byte(h,w.record+5,40); word(h,w.record+76,15); goto final_countdown;
+        case 40: goto final_countdown;
+        }
+    }
+start_level:
+    byte(h,w.record+5,1); word(h,w.record+76,30); goto active_guidance;
+start_bank:
+    byte(h,w.record+5,8); word(h,w.record+76,30);
+active_guidance:
+    if(bit(h,w.record+32,1)) {
+        CW(rd_u16(w.record+102),0x3840); if(rd_s16(w.record+102)>0x3840) goto aim_target;
+        CW(rd_u16(w.record+102),0xaf0); if(rd_s16(w.record+102)<0xaf0) goto aim_target;
+        goto set_countdown_phase;
+    }
+    CB(rd_u8(w.record+5),8); if(rd_u8(w.record+5)!=8) {
+        if(bit(h,w.record+2,0)) goto aim_target;
+        observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0);
+        if(rd_s16(w.record+76)<0) goto reset_guidance; goto aim_target;
+    }
+    if(bit(h,w.record+2,0)) {
+        observe(h,DY_TEST_BYTE,DY_PRIMARY,rd_u8(0xc4579au),0); if(rd_s8(0xc4579au)>=0) goto finished;
+        observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0);
+        if(rd_s16(w.record+76)<0) { word(h,w.record+76,11); goto set_countdown_phase; }
+    }
+    W(z,DY_Z,rd_u16(w.record+102)); CW(w.z,0xe10);
+    if((int16_t)w.z>=0xe10) { CW(w.z,0x6270); if((int16_t)w.z<0x6270) goto aim_target; }
+    W(z,DY_Z,rd_u16(w.record+106)); CW(w.z,0x1c20); if((int16_t)w.z<0x1c20) goto aim_target;
+    CW(w.z,0x5460); if((int16_t)w.z<0x5460) { W(primary,DY_PRIMARY,37); word(h,w.record+76,(uint16_t)w.primary); goto set_countdown_phase; }
+aim_target:
+    W(primary,DY_PRIMARY,rd_u16(w.record+44)); if((int16_t)w.primary<0) goto clear_control_flags;
+    B(detail,DY_DETAIL,rd_u8(w.record+98)); AND_B(detail,DY_DETAIL,240); CB(w.detail,0);
+    if(!(uint8_t)w.detail) {
+        sub_word(h,w.record+38,1); CW(rd_u16(w.record+38),10); if(rd_s16(w.record+38)>=10) goto clear_control_flags;
+    }
+    SW(primary,DY_PRIMARY,rd_u16(w.record+6)); EL(primary,DY_PRIMARY); L(rate_x,DY_RATE_X,14); ALL(primary,DY_PRIMARY,14);
+    W(detail,DY_DETAIL,rd_u16(w.record+46)); SW(detail,DY_DETAIL,rd_u16(w.record+8)); EL(detail,DY_DETAIL); ALL(detail,DY_DETAIL,14);
+    W(x,DY_X,rd_u16(w.record+12)); W(rate_y,DY_RATE_Y,rd_u16(w.record+14)); EL(x,DY_X); EL(rate_y,DY_RATE_Y);
+    load_words(&w,w.record+48,40,-1,h);
+    if(bit(h,w.record+32,1)) goto target_height;
+    B(z,DY_Z,rd_u8(w.record+98)); AND_B(z,DY_Z,240); CB(w.z,0); if(!(uint8_t)w.z) goto target_height;
+    CB(rd_u8(w.record+98),20); if(rd_u8(w.record+98)==20) goto target_height;
+    CB(rd_u8(w.record+98),21); if(rd_u8(w.record+98)==21) goto target_height;
+    W(z,DY_Z,rd_u16(w.record+108)); EL(z,DY_Z); CB(rd_u8(w.record+5),8);
+    ALL(z,DY_Z,rd_u8(w.record+5)==8?6:7);
+    observe(h,DY_TEST_LONG,DY_PRIMARY,rd_u32(w.record+66),0);
+    if(rd_s32(w.record+66)<0) {
+        CL(w.z,rd_u32(w.record+24)); if((int32_t)w.z<rd_s32(w.record+24)) goto target_height;
+        CL(w.z,rd_u32(w.record+52)); if((int32_t)w.z<rd_s32(w.record+52)) goto target_height;
+    } else {
+        NEGL(z,DY_Z); AL(z,DY_Z,0x800000); CL(w.z,rd_u32(w.record+24)); if((int32_t)w.z>rd_s32(w.record+24)) goto target_height;
+        CL(w.z,rd_u32(w.record+52)); if((int32_t)w.z>=(int32_t)rd_s32(w.record+52)) goto target_height;
+    }
+    goto displacement;
+target_height: L(z,DY_Z,rd_u32(w.record+52));
+displacement:
+    EL(y,DY_Y); EL(rate_x,DY_RATE_X); observe(h,DY_TEST_BYTE,DY_PRIMARY,rd_u8(w.record+56),0);
+    if(rd_s8(w.record+56)>=0) {
+        B(rate_z,DY_RATE_Z,rd_u8(w.record+56)); EW(rate_z,DY_RATE_Z); shift=w.rate_z&63;
+        if(shift>=32) { L(y,DY_Y,0); L(z,DY_Z,0); L(rate_x,DY_RATE_X,0); }
+        else { ALL(y,DY_Y,shift); ALL(z,DY_Z,shift); ALL(rate_x,DY_RATE_X,shift); }
+        AND_L(y,DY_Y,0x3fff); AND_L(rate_x,DY_RATE_X,0x3fff);
+    }
+    SL(y,DY_Y,w.x); SL(rate_x,DY_RATE_X,w.rate_y); AL(y,DY_Y,w.primary); AL(rate_x,DY_RATE_X,w.detail);
+    L(rate_y,DY_RATE_Y,rd_u32(w.record+16)); SL(z,DY_Z,w.rate_y); L(rate_z,DY_RATE_Z,w.rate_x); L(rate_y,DY_RATE_Y,w.z); L(rate_x,DY_RATE_X,w.y);
+    L(primary,DY_PRIMARY,w.rate_x); if((int32_t)w.primary<0) NEGL(primary,DY_PRIMARY);
+    L(detail,DY_DETAIL,w.rate_y); if((int32_t)w.detail<0) NEGL(detail,DY_DETAIL);
+    L(x,DY_X,w.rate_z); if((int32_t)w.x<0) NEGL(x,DY_X);
+    CL(w.detail,w.primary);
+    if((int32_t)w.detail>(int32_t)w.primary) { CL(w.x,w.detail); L(y,DY_Y,(int32_t)w.x>(int32_t)w.detail?w.x:w.detail); }
+    else { CL(w.x,w.primary); L(y,DY_Y,(int32_t)w.x>(int32_t)w.primary?w.x:w.primary); }
+    for(;;) { CL(w.y,0x4800); if((int32_t)w.y<0x4800) break;
+        ASL(rate_x,DY_RATE_X,2); ASL(rate_y,DY_RATE_Y,2); ASL(rate_z,DY_RATE_Z,2); ASL(y,DY_Y,2); }
+    W(primary,DY_PRIMARY,0xc0); AP_WAIT(AP_AFTER_NORMALIZE);
+choose_limits:
+    CB(rd_u8(w.record+5),8);
+    if(rd_u8(w.record+5)==8) { f->positive_roll=0xc000; f->positive_pitch=0x10000; f->hysteresis=0x18000;
+        f->negative_roll=-0xc000; f->negative_pitch=-0x10000; f->negative_hysteresis=-0x18000; f->direction_limit=0x30000; f->steep_limit=0x80000; }
+    else {
+        B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,16);
+        if((uint8_t)w.primary==16) { f->positive_roll=0x30000; f->positive_pitch=0x40000; f->hysteresis=0x50000;
+            f->negative_roll=-0x30000; f->negative_pitch=-0x40000; f->negative_hysteresis=-0x50000; f->direction_limit=0x80000; f->steep_limit=0x80000; }
+        else { f->positive_roll=0x10000; f->positive_pitch=0x10000; f->hysteresis=0x20000;
+            f->negative_roll=-0x10000; f->negative_pitch=-0x10000; f->negative_hysteresis=-0x20000; f->direction_limit=0x20000; f->steep_limit=0x20000; }
+    }
+    autopilot_limits(f,h); and_byte(h,w.record+100,0x79);
+    W(primary,DY_PRIMARY,rd_u16(w.record+146)); W(detail,DY_DETAIL,rd_u16(w.record+152)); W(x,DY_X,rd_u16(w.record+158));
+    MUL(primary,DY_PRIMARY,w.rate_x); MUL(detail,DY_DETAIL,w.rate_y); MUL(x,DY_X,w.rate_z); AL(x,DY_X,w.primary); AL(x,DY_X,w.detail);
+    L(z,DY_Z,w.x); if((int32_t)w.z<0) NEGL(z,DY_Z);
+    W(primary,DY_PRIMARY,rd_u16(w.record+148)); W(detail,DY_DETAIL,rd_u16(w.record+154)); W(y,DY_Y,rd_u16(w.record+160));
+    MUL(primary,DY_PRIMARY,w.rate_x); MUL(detail,DY_DETAIL,w.rate_y); MUL(y,DY_Y,w.rate_z); AL(y,DY_Y,w.primary); AL(y,DY_Y,w.detail);
+    L(primary,DY_PRIMARY,w.y); if((int32_t)w.primary<0) NEGL(primary,DY_PRIMARY); CL(w.z,w.primary);
+    if((int32_t)w.z<=(int32_t)w.primary) { or_byte(h,w.record+100,8); L(x,DY_X,w.y); }
+    else { and_byte(h,w.record+100,0xf7); observe(h,DY_TEST_LONG,DY_PRIMARY,w.x,0); }
+    L(y,DY_Y,w.x);
+    if((int32_t)w.y<0) { and_byte(h,w.record+100,0xfe); int is_roll=bit(h,w.record+100,3);
+        CL(w.x,is_roll?f->negative_roll:f->negative_pitch);
+        if((int32_t)w.x>=(is_roll?f->negative_roll:f->negative_pitch)) goto aligned; }
+    else { or_byte(h,w.record+100,1); int is_roll=bit(h,w.record+100,3);
+        CL(w.x,is_roll?f->positive_roll:f->positive_pitch);
+        if((int32_t)w.x<=(is_roll?f->positive_roll:f->positive_pitch)) goto aligned; }
+    B(primary,DY_PRIMARY,rd_u8(w.record+100)); AND_B(primary,DY_PRIMARY,8); if((uint8_t)w.primary) goto pitch_control;
+    L(y,DY_Y,w.x); if((int32_t)w.y<0) NEGL(y,DY_Y);
+    B(primary,DY_PRIMARY,rd_u8(w.record+100)); AND_B(primary,DY_PRIMARY,2);
+    if((uint8_t)w.primary) { CL(w.y,f->hysteresis); if((int32_t)w.y<f->hysteresis) goto finished; }
+    CL(w.y,f->steep_limit); if((int32_t)w.y<f->steep_limit) or_byte(h,w.record+100,128);
+    CL(w.y,f->direction_limit); if((int32_t)w.y>=f->direction_limit) goto negative_turn_direction;
+    W(primary,DY_PRIMARY,rd_u16(w.record+150)); W(detail,DY_DETAIL,rd_u16(w.record+156)); W(z,DY_Z,rd_u16(w.record+162));
+    MUL(primary,DY_PRIMARY,w.rate_x); MUL(detail,DY_DETAIL,w.rate_y); MUL(z,DY_Z,w.rate_z); AL(z,DY_Z,w.primary);
+    difference=(int64_t)(int32_t)w.z+(int32_t)w.detail; AL(z,DY_Z,w.detail); if(difference<0) goto negative_turn_direction;
+    or_byte(h,w.record+100,32); goto turn_direction_ready;
+negative_turn_direction: and_byte(h,w.record+100,0xdf);
+turn_direction_ready:
+    and_byte(h,w.record+100,0xfd); SWAP(y,DY_Y); CW(w.y,10); if((int16_t)w.y>10) L(y,DY_Y,10);
+    B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,16);
+    if((uint8_t)w.primary==16) goto aircraft_turn;
+    P(root,DY_ROOT,0xc2cc2au); AW(y,DY_Y,w.y); W(y,DY_Y,rd_u16(indexed(w.root,w.y)));
+    observe(h,DY_TEST_LONG,DY_PRIMARY,w.x,0); if((int32_t)w.x>=0) NEGW(y,DY_Y); goto choose_roll_input;
+aircraft_turn:
+    CB(rd_u8(w.record+98),20);
+    if(rd_u8(w.record+98)==20) P(root,DY_ROOT,0xc2cc82u);
+    else { CB(rd_u8(w.record+5),8); P(root,DY_ROOT,rd_u8(w.record+5)==8?0xc2cc82u:0xc2cc56u); }
+    AW(y,DY_Y,w.y); W(y,DY_Y,rd_u16(indexed(w.root,w.y))); CW(rd_u16(w.record+108),0x1800); if(rd_s16(w.record+108)>=0x1800) ASW(y,DY_Y,1);
+    L(primary,DY_PRIMARY,w.x); if((int32_t)w.primary<0) { NEGW(y,DY_Y); NEGL(primary,DY_PRIMARY); }
+    W(z,DY_Z,rd_u16(w.record+106)); CW(w.z,0x1770);
+    if((int16_t)w.z>=0x1770) { CW(w.z,0x5910); if((int16_t)w.z<=0x5910) goto choose_roll_input; }
+    W(detail,DY_DETAIL,rd_u16(w.record+102)); CW(w.detail,0x6a40);
+    if((int16_t)w.detail<=0x6a40) { CW(w.detail,0x640); if((int16_t)w.detail>0x640) goto choose_roll_input; }
+    MUL(rate_x,DY_RATE_X,rd_u16(w.record+150)); MUL(rate_y,DY_RATE_Y,rd_u16(w.record+156)); MUL(rate_z,DY_RATE_Z,rd_u16(w.record+162));
+    AL(rate_z,DY_RATE_Z,w.rate_x); difference=(int64_t)(int32_t)w.rate_z+(int32_t)w.rate_y; AL(rate_z,DY_RATE_Z,w.rate_y);
+    if(difference<0) { L(detail,DY_DETAIL,0x300000); L(rate_z,DY_RATE_Z,w.detail); SL(detail,DY_DETAIL,w.primary); AL(detail,DY_DETAIL,w.rate_z); L(primary,DY_PRIMARY,w.detail); }
+    ASL(primary,DY_PRIMARY,8); CW(w.primary,0x3000);
+    if((int16_t)w.primary>0x3000) W(primary,DY_PRIMARY,0x3000);
+    else { CW(w.primary,32); if((int16_t)w.primary<=32) { CW(w.primary,0x1000); if((int16_t)w.primary<0x1000) W(primary,DY_PRIMARY,0x1000); }
+        else { CW(w.primary,0x1800); if((int16_t)w.primary<0x1800) W(primary,DY_PRIMARY,0x1800); } }
+    CB(rd_u8(w.record+122),3); if(rd_u8(w.record+122)!=3) { CB(rd_u8(w.record+122),4); if(rd_u8(w.record+122)!=4) goto apply_turn; }
+    observe(h,DY_TEST_WORD,DY_PRIMARY,w.y,0);
+    if((int16_t)w.y<0) {
+        B(x,DY_X,rd_u8(w.record+100)); AND_B(x,DY_X,96); CB(w.x,96);
+        if((uint8_t)w.x==96) { CW(w.z,0x3840); if((int16_t)w.z>=0x3840) { CW(w.z,0x6d60); if((int16_t)w.z<0x6d60) goto fixed_right_turn; } }
+        CW(w.z,0x3840); if((int16_t)w.z<=0x3840) goto apply_turn;
+        CW(w.z,0x68b0); if((int16_t)w.z>0x68b0) goto apply_turn;
+        CW(w.z,0x6720); if((int16_t)w.z>0x6720) { L(y,DY_Y,0); goto apply_turn; }
+fixed_right_turn: W(y,DY_Y,240); goto apply_turn;
+    } else {
+        B(x,DY_X,rd_u8(w.record+100)); AND_B(x,DY_X,96); CB(w.x,96);
+        if((uint8_t)w.x==96) { CW(w.z,0x3840); if((int16_t)w.z<=0x3840) { CW(w.z,0x320); if((int16_t)w.z>0x320) goto fixed_left_turn; } }
+        CW(w.z,0x3840); if((int16_t)w.z>=0x3840) goto apply_turn;
+        CW(w.z,0x7d0); if((int16_t)w.z<0x7d0) goto apply_turn;
+        CW(w.z,0x960); if((int16_t)w.z<0x960) { L(y,DY_Y,0); goto apply_turn; }
+fixed_left_turn: W(y,DY_Y,(uint16_t)-240);
+    }
+apply_turn:
+    B(x,DY_X,rd_u8(w.record+5)); if(!(uint8_t)w.x) goto turn_child;
+    CB(w.x,1); if((uint8_t)w.x==1) goto turn_child;
+    CB(w.x,8); if((uint8_t)w.x!=8) goto finished;
+    W(x,DY_X,rd_u16(w.record+2)); AND_W(x,DY_X,128); if((uint16_t)w.x) goto finished;
+turn_child: AP_WAIT(AP_AFTER_TURN);
+publish_turn:
+    B(detail,DY_DETAIL,rd_u8(w.record+98)); AND_B(detail,DY_DETAIL,240); CB(w.detail,16);
+    if((uint8_t)w.detail!=16) { word(h,w.record+84,(uint16_t)w.y); word(h,w.record+82,0); word(h,w.record+80,0); }
+    CB(rd_u8(w.record+5),8); if(rd_u8(w.record+5)==8) ASW(primary,DY_PRIMARY,1);
+    word(h,w.record+126,(uint16_t)w.primary); goto finished;
+choose_roll_input:
+    observe(h,DY_TEST_WORD,DY_PRIMARY,w.y,0);
+    if(!(uint16_t)w.y) L(x,DY_X,0);
+    else if((int16_t)w.y>0) { CW(w.y,rd_u16(w.record+88)); if((int16_t)w.y>rd_s16(w.record+88)) B(x,DY_X,128); else L(x,DY_X,0); }
+    else { CW(w.y,rd_u16(w.record+88)); if((int16_t)w.y<rd_s16(w.record+88)) B(x,DY_X,64); else L(x,DY_X,0); }
+    B(detail,DY_DETAIL,rd_u8(w.record+101)); AND_B(detail,DY_DETAIL,3); OR_B(detail,DY_DETAIL,w.x); byte(h,w.record+101,(uint8_t)w.detail);
+    B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,16); if((uint8_t)w.primary==16) goto finished;
+    word(h,w.record+82,(uint16_t)w.y); word(h,w.record+84,0); word(h,w.record+80,0); goto finished;
+pitch_control:
+    L(y,DY_Y,w.x); if((int32_t)w.y<0) NEGL(y,DY_Y);
+    B(primary,DY_PRIMARY,rd_u8(w.record+100)); AND_B(primary,DY_PRIMARY,4);
+    if((uint8_t)w.primary) { CL(w.y,f->hysteresis); if((int32_t)w.y<=f->hysteresis) goto finished; }
+    CL(w.y,f->direction_limit); if((int32_t)w.y>=f->direction_limit) goto negative_pitch_direction;
+    W(primary,DY_PRIMARY,rd_u16(w.record+150)); W(detail,DY_DETAIL,rd_u16(w.record+156)); W(z,DY_Z,rd_u16(w.record+162));
+    MUL(primary,DY_PRIMARY,w.rate_x); MUL(detail,DY_DETAIL,w.rate_y); MUL(z,DY_Z,w.rate_z); AL(z,DY_Z,w.primary);
+    difference=(int64_t)(int32_t)w.z+(int32_t)w.detail; AL(z,DY_Z,w.detail); if(difference<0) goto negative_pitch_direction;
+    or_byte(h,w.record+100,64); goto pitch_direction_ready;
+negative_pitch_direction: and_byte(h,w.record+100,0xbf);
+pitch_direction_ready:
+    and_byte(h,w.record+100,0xfb); SWAP(y,DY_Y); CW(w.y,10); if((int16_t)w.y>10) L(y,DY_Y,10);
+    B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,16);
+    if((uint8_t)w.primary!=16) P(root,DY_ROOT,0xc2cc2au);
+    else { CB(rd_u8(w.record+98),20); P(root,DY_ROOT,rd_u8(w.record+98)==20?0xc2cc6cu:0xc2cc40u); }
+    AW(y,DY_Y,w.y); W(y,DY_Y,rd_u16(indexed(w.root,w.y))); observe(h,DY_TEST_LONG,DY_PRIMARY,w.x,0); if((int32_t)w.x>=0) NEGW(y,DY_Y);
+    B(x,DY_X,rd_u8(w.record+5)); if(!(uint8_t)w.x) goto pitch_child;
+    CB(w.x,1); if((uint8_t)w.x==1) goto pitch_child;
+    CB(w.x,8); if((uint8_t)w.x!=8) goto finished;
+    W(x,DY_X,rd_u16(w.record+2)); AND_W(x,DY_X,128); if((uint16_t)w.x) goto finished;
+pitch_child: AP_WAIT(AP_AFTER_PITCH);
+publish_pitch:
+    B(detail,DY_DETAIL,rd_u8(w.record+98)); AND_B(detail,DY_DETAIL,240); CB(w.detail,16); if((uint8_t)w.detail==16) goto finished;
+    word(h,w.record+80,(uint16_t)w.y); word(h,w.record+82,0); word(h,w.record+84,0); goto finished;
+aligned:
+    B(primary,DY_PRIMARY,rd_u8(w.record+98)); AND_B(primary,DY_PRIMARY,240); CB(w.primary,16);
+    if((uint8_t)w.primary!=16) { word(h,w.record+80,0); word(h,w.record+82,0); word(h,w.record+84,0); }
+    B(primary,DY_PRIMARY,rd_u8(w.record+100)); AND_B(primary,DY_PRIMARY,8);
+    if(!(uint8_t)w.primary) { or_byte(h,w.record+100,2); or_byte(h,w.record+100,32); goto latch_phase; }
+    W(primary,DY_PRIMARY,rd_u16(w.record+150)); W(detail,DY_DETAIL,rd_u16(w.record+156)); W(x,DY_X,rd_u16(w.record+162));
+    MUL(primary,DY_PRIMARY,w.rate_x); MUL(detail,DY_DETAIL,w.rate_y); MUL(x,DY_X,w.rate_z); AL(x,DY_X,w.primary);
+    difference=(int64_t)(int32_t)w.x+(int32_t)w.detail; AL(x,DY_X,w.detail);
+    if(difference<0) { L(x,DY_X,w.y); goto pitch_direction_ready; }
+    or_byte(h,w.record+100,4); or_byte(h,w.record+100,64);
+latch_phase:
+    old=rd_u8(w.record+100); wr_u8(w.record+100,(uint8_t)(old^1)); observe(h,DY_AUTOPILOT_TOGGLE,DY_PRIMARY,old,0);
+toggle_phase:
+    or_byte(h,w.record+100,16); goto finished;
+/* Maneuver sequence arms. Shared countdown and attitude tests retain the
+ * source's signed word comparisons and overlapping record-byte flags. */
+throttle_phase:
+    CB(rd_u8(w.record+43),96); if(rd_s8(w.record+43)<96) or_byte(h,w.record+101,1); else and_byte(h,w.record+101,0xfc);
+    CW(rd_u16(w.record+110),0x840); if(rd_s16(w.record+110)>=0x840) { byte(h,w.record+5,36); word(h,w.record+76,60); } goto toggle_phase;
+loop_countdown:
+    observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>=0) goto toggle_phase;
+    change_bit(h,w.record+32,4,0); byte(h,w.record+5,37);
+loop:
+    P(root,DY_ROOT,0xc2cc40u); L(y,DY_Y,-40); W(z,DY_Z,rd_u16(w.record+102));
+    if(!bit(h,w.record+32,4)) { CW(w.z,0x3840); if((int16_t)w.z<0x3840) AP_WAIT(AP_AFTER_LOOP_PITCH); change_bit(h,w.record+32,4,1); }
+    CW(w.z,0x68b0); if((int16_t)w.z>=0x68b0) AP_WAIT(AP_AFTER_LOOP_PITCH);
+    L(y,DY_Y,0); AP_WAIT(AP_AFTER_LOOP_LEVEL);
+clear_loop_stick: byte(h,w.record+101,0); byte(h,w.record+5,38);
+height_phase: CL(rd_u32(w.record+24),0x240000); if(rd_s32(w.record+24)>0x240000) goto reset_guidance; goto toggle_phase;
+begin_bank: change_bit(h,w.record+32,3,0); change_bit(h,w.record+32,4,0); byte(h,w.record+5,12); word(h,w.record+76,15);
+bank_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver;
+    byte(h,w.record+5,13);
+bank_arc:
+    w=autopilot_table_term(w,0xc2cc56u,16,h); W(z,DY_Z,rd_u16(w.record+106));
+    if(bit(h,w.record+32,4)) goto bank_arc_exit;
+    if(!bit(h,w.record+32,3)) { CW(w.z,0x3840); if((int16_t)w.z>=0x3840) AP_WAIT(AP_AFTER_BANK_ROLL); change_bit(h,w.record+32,3,1); }
+    CW(w.z,0x3840); if((int16_t)w.z<0x3840) AP_WAIT(AP_AFTER_BANK_ROLL); change_bit(h,w.record+32,4,1);
+bank_arc_exit:
+    CW(w.z,0x320); if((int16_t)w.z<0x320) goto reset_guidance; CW(w.z,0x6e00); if((int16_t)w.z>=0x6e00) L(y,DY_Y,0); AP_WAIT(AP_AFTER_BANK_ROLL);
+begin_pitch_arc: change_bit(h,w.record+32,3,0); change_bit(h,w.record+32,4,0); byte(h,w.record+5,15); word(h,w.record+76,15);
+pitch_arc_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver; byte(h,w.record+5,16);
+pitch_arc:
+    w=autopilot_table_term(w,0xc2cc40u,12,h); NEGW(y,DY_Y); W(z,DY_Z,rd_u16(w.record+102));
+    if(bit(h,w.record+32,4)) goto pitch_arc_exit;
+    if(!bit(h,w.record+32,3)) { CW(w.z,0x3840); if((int16_t)w.z<=0x3840) AP_WAIT(AP_AFTER_PITCH_ARC); change_bit(h,w.record+32,3,1); }
+    CW(w.z,0x3840); if((int16_t)w.z>0x3840) AP_WAIT(AP_AFTER_PITCH_ARC); change_bit(h,w.record+32,4,1);
+pitch_arc_exit: CW(w.z,0x3840); if((int16_t)w.z>0x3840) goto reset_guidance; AP_WAIT(AP_AFTER_PITCH_ARC);
+begin_level_roll: change_bit(h,w.record+32,3,0); change_bit(h,w.record+32,4,0); byte(h,w.record+5,18); word(h,w.record+76,15);
+level_roll_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver; byte(h,w.record+5,19);
+level_roll:
+    w=autopilot_table_term(w,0xc2cc56u,16,h); W(z,DY_Z,rd_u16(w.record+106));
+    if(!bit(h,w.record+32,3)) { CW(w.z,0x3840); if((int16_t)w.z>=0x3840) AP_WAIT(AP_AFTER_LEVEL_ROLL); change_bit(h,w.record+32,3,1); }
+    CW(w.z,0x3840); if((int16_t)w.z==0x3840) { byte(h,w.record+5,15); word(h,w.record+76,2); goto pitch_arc_countdown; }
+    CW(w.z,0x35c0); if((int16_t)w.z>=0x35c0) { change_bit(h,w.record+3,4,1); L(y,DY_Y,0); } AP_WAIT(AP_AFTER_LEVEL_ROLL);
+begin_reverse_pitch: change_bit(h,w.record+32,3,0); byte(h,w.record+5,21); word(h,w.record+76,15);
+reverse_pitch_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver; byte(h,w.record+5,22);
+reverse_pitch:
+    w=autopilot_table_term(w,0xc2cc40u,12,h); NEGW(y,DY_Y); W(z,DY_Z,rd_u16(w.record+102));
+    if(!bit(h,w.record+32,3)) { CW(w.z,0x3840); if((int16_t)w.z<=0x3840) AP_WAIT(AP_AFTER_REVERSE_PITCH); change_bit(h,w.record+32,3,1); }
+    CW(w.z,0x3840); if((int16_t)w.z>0x3840) AP_WAIT(AP_AFTER_REVERSE_PITCH); byte(h,w.record+5,13); goto bank_arc;
+begin_combined: change_bit(h,w.record+32,3,0); change_bit(h,w.record+32,4,0); byte(h,w.record+5,24); word(h,w.record+76,15);
+combined_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver; byte(h,w.record+5,25);
+combined_roll:
+    w=autopilot_table_term(w,0xc2cc56u,14,h); W(z,DY_Z,rd_u16(w.record+106));
+    if(bit(h,w.record+32,4)) goto combined_exit;
+    if(!bit(h,w.record+32,3)) { CW(w.z,0x3840); if((int16_t)w.z>=0x3840) AP_WAIT(AP_AFTER_COMBINED_ROLL); change_bit(h,w.record+32,3,1); }
+    CW(w.z,0x3840); if((int16_t)w.z<0x3840) AP_WAIT(AP_AFTER_COMBINED_ROLL); change_bit(h,w.record+32,4,1);
+combined_exit: CW(w.z,0x3840); if((int16_t)w.z<0x3840) goto reset_guidance; AP_WAIT(AP_AFTER_COMBINED_ROLL);
+combined_pitch: w=autopilot_table_term(w,0xc2cc40u,14,h); NEGW(y,DY_Y); AP_WAIT(AP_AFTER_COMBINED_PITCH);
+begin_reverse_roll: change_bit(h,w.record+32,3,0); change_bit(h,w.record+32,4,0); byte(h,w.record+5,27); word(h,w.record+76,15);
+reverse_roll_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver; byte(h,w.record+5,28);
+reverse_roll:
+    w=autopilot_table_term(w,0xc2cc56u,16,h); W(z,DY_Z,rd_u16(w.record+106));
+    if(!bit(h,w.record+32,3)) { CW(w.z,0x3840); if((int16_t)w.z>=0x3840) AP_WAIT(AP_AFTER_REVERSE_ROLL); change_bit(h,w.record+32,3,1); }
+    CW(w.z,0x3840); if((int16_t)w.z==0x3840) goto begin_dive;
+    CW(w.z,0x35c0); if((int16_t)w.z>=0x35c0) { change_bit(h,w.record+3,4,1); L(y,DY_Y,0); } AP_WAIT(AP_AFTER_REVERSE_ROLL);
+begin_dive: change_bit(h,w.record+32,4,0); byte(h,w.record+5,30); word(h,w.record+76,10);
+dive_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver; byte(h,w.record+5,31);
+dive:
+    w=autopilot_table_term(w,0xc2cc40u,8,h); NEGW(y,DY_Y); W(z,DY_Z,rd_u16(w.record+102)); W(x,DY_X,rd_u16(w.record+106));
+    CW(w.x,0x5460); if((int16_t)w.x>0x5460) goto dive_upright; CW(w.x,0x1c20); if((int16_t)w.x<0x1c20) goto dive_upright;
+    if(!bit(h,w.record+32,4)) { CW(w.z,0x3840); if((int16_t)w.z>0x3840) AP_WAIT(AP_AFTER_DIVE_PITCH); change_bit(h,w.record+32,4,1); }
+    CW(w.z,0x960); if((int16_t)w.z<0x960) AP_WAIT(AP_AFTER_DIVE_PITCH); goto dive_level;
+dive_upright:
+    if(!bit(h,w.record+32,4)) { CW(w.z,0x3840); if((int16_t)w.z<0x3840) AP_WAIT(AP_AFTER_DIVE_PITCH); change_bit(h,w.record+32,4,1); }
+    CW(w.z,0x6720); if((int16_t)w.z>=0x6720) AP_WAIT(AP_AFTER_DIVE_PITCH);
+dive_level: L(y,DY_Y,0); AP_WAIT(AP_AFTER_DIVE_LEVEL);
+begin_climb: change_bit(h,w.record+32,4,0); byte(h,w.record+5,33); word(h,w.record+76,25);
+climb_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver; byte(h,w.record+5,34);
+climb:
+    w=autopilot_table_term(w,0xc2cc40u,8,h); W(z,DY_Z,rd_u16(w.record+102)); W(x,DY_X,rd_u16(w.record+106));
+    CW(w.x,0x5460); if((int16_t)w.x>0x5460) goto climb_upright; CW(w.x,0x1c20); if((int16_t)w.x<0x1c20) goto climb_upright;
+    if(!bit(h,w.record+32,4)) { CW(w.z,0x3840); if((int16_t)w.z<0x3840) AP_WAIT(AP_AFTER_CLIMB_PITCH); change_bit(h,w.record+32,4,1); }
+    CW(w.z,0x6720); if((int16_t)w.z>0x6720) AP_WAIT(AP_AFTER_CLIMB_PITCH); goto climb_level;
+climb_upright:
+    if(!bit(h,w.record+32,4)) { CW(w.z,0x3840); if((int16_t)w.z>0x3840) AP_WAIT(AP_AFTER_CLIMB_PITCH); change_bit(h,w.record+32,4,1); }
+    CW(w.z,0x960); if((int16_t)w.z<=0x960) AP_WAIT(AP_AFTER_CLIMB_PITCH);
+climb_level: L(y,DY_Y,0); AP_WAIT(AP_AFTER_CLIMB_LEVEL);
+finish_climb: change_bit(h,w.record+32,3,1); byte(h,w.record+5,22); goto reverse_pitch;
+final_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)>0) goto hold_maneuver; byte(h,w.record+5,2);
+simple_roll:
+    L(x,DY_X,0); w=autopilot_table_term(w,0xc2cc56u,16,h); W(primary,DY_PRIMARY,0x1c20); W(detail,DY_DETAIL,0x5460); W(z,DY_Z,rd_u16(w.record+106));
+    CW(w.z,0x3840); if((int16_t)w.z>=0x3840) W(primary,DY_PRIMARY,w.detail);
+    CW(w.z,w.primary); if((int16_t)w.z>=(int16_t)w.primary) AW(x,DY_X,1);
+    difference=(int16_t)w.z-(int16_t)w.primary; SW(z,DY_Z,w.primary); if(difference<0) NEGW(z,DY_Z);
+    CW(w.z,0x4b0); if((int16_t)w.z<0x4b0) { byte(h,w.record+5,7); word(h,w.record+76,32); and_byte(h,w.record+101,3); goto toggle_phase; }
+    observe(h,DY_TEST_WORD,DY_PRIMARY,w.x,0); if((uint16_t)w.x) NEGW(y,DY_Y); AP_WAIT(AP_AFTER_SIMPLE_ROLL);
+wait_pitch:
+    observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)<0) goto reset_guidance;
+    w=autopilot_table_term(w,0xc2cc40u,8,h); NEGW(y,DY_Y); AP_WAIT(AP_AFTER_WAIT_PITCH);
+rate_roll:
+    W(detail,DY_DETAIL,0x7080); SW(detail,DY_DETAIL,w.primary);
+    observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)<0) goto release_guidance;
+    L(x,DY_X,0); w=autopilot_table_term(w,0xc2cc56u,4,h); W(z,DY_Z,rd_u16(w.record+106));
+    CW(w.z,0x3840); if((int16_t)w.z>=0x3840) W(primary,DY_PRIMARY,w.detail);
+    CW(w.z,w.primary); if((int16_t)w.z>=(int16_t)w.primary) AW(x,DY_X,1);
+    difference=(int16_t)w.z-(int16_t)w.primary; SW(z,DY_Z,w.primary); if(difference<0) NEGW(z,DY_Z);
+    W(primary,DY_PRIMARY,0x1000); CW(w.z,w.rate_x); if((int16_t)w.z<(int16_t)w.rate_x) AP_WAIT(AP_AFTER_RATE_NEUTRAL);
+    observe(h,DY_TEST_WORD,DY_PRIMARY,w.x,0); if((uint16_t)w.x) NEGW(y,DY_Y); AP_WAIT(AP_AFTER_RATE_ROLL);
+hold_maneuver: change_bit(h,w.record+3,4,1); goto toggle_phase;
+reset_guidance:
+    if(bit(h,w.record+2,0)) { observe(h,DY_TEST_BYTE,DY_PRIMARY,rd_u8(0xc4579au),0); if(rd_s8(0xc4579au)>=0) goto begin_level_countdown; goto default_countdown; }
+    observe(h,DY_TEST_BYTE,DY_PRIMARY,rd_u8(w.record+56),0); if(rd_s8(w.record+56)>=0) goto default_countdown;
+    CB(rd_u8(w.record+56),255); if(rd_u8(w.record+56)==255) goto default_countdown;
+    CB(rd_u8(0xc458a7u),2); if(rd_s8(0xc458a7u)>2) { B(primary,DY_PRIMARY,rd_u8(w.record+100)); AND_B(primary,DY_PRIMARY,96); CB(w.primary,96); if((uint8_t)w.primary!=96) goto default_countdown; }
+    B(primary,DY_PRIMARY,rd_u8(0xc458a7u));
+    if((int8_t)w.primary<=0) W(primary,DY_PRIMARY,75);
+    else { SB(primary,DY_PRIMARY,1); if(!(uint8_t)w.primary) W(primary,DY_PRIMARY,37);
+        else { SB(primary,DY_PRIMARY,1); W(primary,DY_PRIMARY,!(uint8_t)w.primary?18:4); } }
+    word(h,w.record+76,(uint16_t)w.primary); goto set_countdown_phase;
+default_countdown: word(h,w.record+76,10);
+set_countdown_phase: byte(h,w.record+5,6);
+countdown_guidance:
+    if(bit(h,w.record+32,1)) goto finished;
+    if(bit(h,w.record+2,0)) {
+        observe(h,DY_TEST_BYTE,DY_PRIMARY,rd_u8(0xc4579au),0); if(rd_s8(0xc4579au)<0) goto finished;
+        observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)<0) goto start_bank; goto finished;
+    }
+    observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)<0) goto start_level;
+    W(z,DY_Z,rd_u16(w.record+108)); EL(z,DY_Z); ALL(z,DY_Z,6); observe(h,DY_TEST_LONG,DY_PRIMARY,rd_u32(w.record+66),0);
+    if(rd_s32(w.record+66)<0) { CL(w.z,rd_u32(w.record+24)); if((int32_t)w.z<rd_s32(w.record+24)) goto finished;
+        word(h,0xc4599eu,60); AP_WAIT(AP_AFTER_FAULT); }
+    NEGL(z,DY_Z); AL(z,DY_Z,0x800000); CL(w.z,rd_u32(w.record+24)); if((int32_t)w.z<rd_s32(w.record+24)) goto start_level; goto finished;
+begin_level_countdown: byte(h,w.record+5,10); observe(h,DY_TEST_BYTE,DY_PRIMARY,rd_u8(0xc45793u),0); word(h,w.record+76,rd_u8(0xc45793u)?36:60);
+level_countdown: observe(h,DY_TEST_WORD,DY_PRIMARY,rd_u16(w.record+76),0); if(rd_s16(w.record+76)<0) goto release_guidance; goto finished;
+release_guidance: byte(h,w.record+5,0); and_byte(h,w.record+101,3); goto finished;
+clear_control_flags: byte(h,w.record+100,0);
+finished:
+    observe(h,DY_END_FRAME,DY_PRIMARY,0,0); f->work=w; f->phase=AP_COMPLETE; return 1;
+#undef AP_WAIT
+}
+int update_dynamics_record_action(AutopilotFrame *frame,const DynamicsHooks *hooks) {
+    return advance_record_autopilot(frame,hooks);
+}

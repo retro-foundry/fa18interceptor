@@ -30,7 +30,7 @@ enum DynamicsPhase {
     DY_LOAD_WORDS,DY_LOAD_LONGS,DY_STORE_WORDS,DY_STORE_LONGS,
     DY_SAVE_RECORD,DY_RESTORE_RECORD,DY_SAVE_CELL,DY_RESTORE_CELL,DY_SAVE_RATES,DY_RESTORE_RATES,
     DY_SAVE_ORIENTATION,DY_RESTORE_ORIENTATION,DY_SAVE_SCAN,DY_RESTORE_SCAN,DY_SOUND_ARGUMENTS,
-    DY_BEGIN_FRAME,DY_END_FRAME
+    DY_BEGIN_FRAME,DY_END_FRAME,DY_AUTOPILOT_LIMIT,DY_AUTOPILOT_TOGGLE
 };
 typedef struct {
     DynamicsState (*consume)(void *context,enum DynamicsChild child);
@@ -51,4 +51,28 @@ void collide_scene_motion(DynamicsState w,const DynamicsHooks *h); /* C266AE */
 void update_scene_regions(DynamicsState w,const DynamicsHooks *h); /* C28996 */
 void spawn_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B16 */
 void dispatch_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B34 shared body */
+/* C2C392's forty original action arms. A phase is C continuation state,
+ * not a guest PC. Existing children remain at the temporary outer boundary. */
+enum AutopilotPhase {
+    AP_BEGIN, AP_AFTER_FAULT, AP_AFTER_NORMALIZE, AP_AFTER_TURN,
+    AP_AFTER_PITCH, AP_AFTER_SIMPLE_ROLL, AP_AFTER_WAIT_PITCH,
+    AP_AFTER_RATE_ROLL, AP_AFTER_RATE_NEUTRAL, AP_AFTER_LOOP_PITCH,
+    AP_AFTER_LOOP_LEVEL, AP_AFTER_BANK_ROLL, AP_AFTER_PITCH_ARC,
+    AP_AFTER_LEVEL_ROLL, AP_AFTER_REVERSE_PITCH, AP_AFTER_COMBINED_ROLL, AP_AFTER_COMBINED_PITCH,
+    AP_AFTER_REVERSE_ROLL, AP_AFTER_DIVE_PITCH, AP_AFTER_DIVE_LEVEL,
+    AP_AFTER_CLIMB_PITCH, AP_AFTER_CLIMB_LEVEL,
+    AP_ORIGINAL_TRANSFER, AP_COMPLETE
+};
+typedef struct {
+    DynamicsState work;
+    enum AutopilotPhase phase;
+    int32_t positive_roll, positive_pitch, hysteresis;
+    int32_t negative_roll, negative_pitch, negative_hysteresis;
+    int32_t direction_limit, steep_limit;
+    gaddr unresolved_target;
+} AutopilotFrame;
+/* Returns one at completion, zero when the frame needs its selected child.
+ * The original out-of-table transfer is retained as an unresolved boundary. */
+int advance_record_autopilot(AutopilotFrame *frame, const DynamicsHooks *hooks);
+int update_dynamics_record_action(AutopilotFrame *frame, const DynamicsHooks *hooks);
 #endif

@@ -423,6 +423,26 @@
         "outer flight CPU/timing boundary",
         "temporary caller result publication"
       ]
+    },
+    {
+      "entry": "C2C392",
+      "function": "advance_record_autopilot",
+      "source": "port/game/flight_dynamics.c",
+      "callers": [
+        {
+          "entry": "C25B66",
+          "function": "update_dynamics_record_action",
+          "source": "port/game/flight_dynamics.c"
+        }
+      ],
+      "source_call": "analysis/data/record_autopilot_source_scope.json",
+      "remaining_dependencies": [
+        "shared guest records and caller compatibility",
+        "source-timed normalization/steering child boundaries",
+        "outer flight CPU/event boundary",
+        "parent instruction/event timing not yet modeled",
+        "unknown or modified action-table targets retain original transfer"
+      ]
     }
   ]
 }

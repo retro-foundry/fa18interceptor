@@ -158,6 +158,8 @@ typedef struct {
 } SteppedCall;
 static SteppedCall *stepped_calls;
 static size_t stepped_count, stepped_capacity;
+static SteppedCall *executing_native_child;
+static int native_wait_armed;
 
 /* Held BLTSIZE writes and mouse-counter reads cannot supply repeatable live
  * inputs. Opted-in proofs record source inputs first, then replay the exact
@@ -414,14 +416,28 @@ static void run_native_child(SteppedCall *call) {
     FA18NativeChild child = call->native_child;
     void *arguments = call->native_arguments;
     int cycles = call->native_cycles, previous = fa18_meter_engine;
-    call->native_child = NULL; call->native_arguments = NULL;
     fa18_meter_engine = FA18_ENGINE_PORT;
+    if (executing_native_child) { fputs("native child: nested execution boundary\n", stderr); abort(); }
+    executing_native_child = call;
+    native_wait_armed = 0;
     int result = child(arguments);
-    free(arguments);
-    if (result != FA18_RET) { fputs("native child: unsupported return boundary\n", stderr); abort(); }
-    if (fa18_meter_enabled) ++fa18_emulation_meter.port_calls;
+    executing_native_child = NULL;
+    if (result == FA18_RET) {
+        call->native_child = NULL; call->native_arguments = NULL;
+        free(arguments);
+        if (fa18_meter_enabled) ++fa18_emulation_meter.port_calls;
+        USE_CYCLES(cycles);
+    } else if (result != FA18_EXIT_DISPATCH || !native_wait_armed) {
+        fputs("native child: unsupported return boundary\n", stderr); abort();
+    }
     fa18_meter_engine = previous;
-    USE_CYCLES(cycles);
+}
+
+void fa18_ports_native_child_wait(uint32_t return_pc, uint32_t return_sp) {
+    if (!executing_native_child) { fputs("native child: wait outside C continuation\n", stderr); abort(); }
+    executing_native_child->native_pc = return_pc & 0xffffffu;
+    executing_native_child->native_sp = return_sp;
+    native_wait_armed = 1;
 }
 
 int fa18_ports_resume_step(void) {

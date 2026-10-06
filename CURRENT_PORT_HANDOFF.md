@@ -11,23 +11,31 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
-Latest dependency removal: the same flight parent now selects game C input
-and indexed-record owners at C25C70/C25D7E. C1B27E/C13D84 and nine exclusive
-helper CPU entries/registrations are retired. Six bounded 800-frame before/
-after pairs preserve RGB, indices, final RAM and instruction/device counts;
-combined dispatches fall by 110/0/104. There are **23 C-owned entries** and
-**591 readable CPU rows**. Both GNU/MSVC runners build, twelve CTests, GNU
-profiling and the parent DMA/boundary oracle pass; an MSVC/GNU demo matches.
-All 309 sandbox parent calls match; shadow has 205 matches and 104 incomplete
-calls, unchanged from baseline. Live ON captures prove integration separately.
-The outer CPU/event boundary, guest state, scratch publication and existing
-2,400/18,000-cycle atomic timing remain. Bounded CPU-work delta **0.0000 pp**,
-cached full raw CPU **38.4011%**, native memory/chipset/boot **0%**, gate **0/4**.
-Combined source parity remains open at **565/446/263**, Copper fade excluded.
-Evidence: `analysis/emulation_removal_flight_calls_batch.json/.md`.
-Next target is **C2C392**: 626 original instructions still generated, called
-27 times in the bounded demo. Reconstruct its complete original record-action
-owner and connect it to the flight parent to remove remaining CPU work.
+Latest dependency removal: C25B66's C25C6A call now selects the native
+forty-arm C2C392 record autopilot. The original owner has **987 instructions**,
+including **361 cold instructions** missed by the old 626-instruction body.
+A retained C frame owns response limits and continuation phases; original
+normalization/steering children run through the existing dispatcher.
+49,600 component cases match all registers, PC, SR and RAM (864/987 boundaries);
+12,400 production-continuation cases match the same state (841/987). Both cover
+all 361 cold instructions. Unknown/modified action targets retain the exact
+original transfer; arbitrary fault-target behavior is not claimed proven.
+Both GNU/MSVC runners build; twelve CTests, GNU profiling, the parent DMA
+oracle and continuation IRQ/SP/lifetime/reset fixture pass. GNU/MSVC demo
+frames/indices/RAM match. In 800 demo frames, 27 calls are native, CPU-entry
+calls are zero, and aggregate CPU instructions decrease **2,076**. Demo raw
+CPU work avoided is **69.8779% (+0.0397 pp)**; carrier/crash are unchanged.
+Source parity remains open: first non-fade differences **619/446/263** (demo
+previously 565). Parent instruction/event timing remains unmodeled, alongside
+outer CPU/guest state and source child dependencies. There are **24 C-owned
+entries**, **591 readable CPU rows**, **84 deferred entries** and **691 direct
+opcode bindings**. Full raw CPU **38.4011%** is cached; bounded three-recording
+minimum **48.0797%** is unchanged; accepted CPU percentage remains unavailable.
+Native memory/chipset/boot **0%**, subsystem deletion **0/4**. No full replay
+suite was repeated. Evidence: `analysis/emulation_removal_autopilot_batch.json/.md`.
+Next: native normalization/steering child calls, then C28E28 in the same
+flight parent. This remains actual game ownership work, not a fixed-cycle
+adapter repair.
 
 Previous dependency removal: C25B66's live matrix call at C25D9E selects the
 game C owner directly, with copied arguments retained across IRQ service.

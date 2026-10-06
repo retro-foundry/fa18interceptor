@@ -21230,6 +21230,1349 @@ L_C2BAEE:
     FA18_RETURN(0xC2BAEE, 0x4E75); /* C2BAEE: rts */
 }
 
+int fa18_fn_C2C392(int entry) {
+    switch (entry) {
+    case 0: goto L_C2C270;
+    case 1: goto L_C2C27E;
+    case 2: goto L_C2C286;
+    case 3: goto L_C2C28C;
+    case 4: goto L_C2C294;
+    case 5: goto L_C2C298;
+    case 6: goto L_C2C2A0;
+    case 7: goto L_C2C2A8;
+    case 8: goto L_C2C2AA;
+    case 9: goto L_C2C2B0;
+    case 10: goto L_C2C2B8;
+    case 11: goto L_C2C2C2;
+    case 12: goto L_C2C2D0;
+    case 13: goto L_C2C2D8;
+    case 14: goto L_C2C2DC;
+    case 15: goto L_C2C2E0;
+    case 16: goto L_C2C2E6;
+    case 17: goto L_C2C2EC;
+    case 18: goto L_C2C2F2;
+    case 19: goto L_C2C2F6;
+    case 20: goto L_C2C2FC;
+    case 21: goto L_C2C304;
+    case 22: goto L_C2C30A;
+    case 23: goto L_C2C31A;
+    case 24: goto L_C2C322;
+    case 25: goto L_C2C32A;
+    case 26: goto L_C2C338;
+    case 27: goto L_C2C340;
+    case 28: goto L_C2C34E;
+    case 29: goto L_C2C352;
+    case 30: goto L_C2C362;
+    case 31: goto L_C2C366;
+    case 32: goto L_C2C370;
+    case 33: goto L_C2C378;
+    case 34: goto L_C2C37C;
+    case 35: goto L_C2C38A;
+    case 36: goto L_C2C38E;
+    case 37: goto L_C2C392;
+    case 38: goto L_C2C3A4;
+    case 39: goto L_C2C3B4;
+    case 40: goto L_C2C3C2;
+    case 41: goto L_C2C3CA;
+    case 42: goto L_C2C3D2;
+    case 43: goto L_C2C3DA;
+    case 44: goto L_C2C3E2;
+    case 45: goto L_C2C3EA;
+    case 46: goto L_C2C3F8;
+    case 47: goto L_C2C3FE;
+    case 48: goto L_C2C400;
+    case 49: goto L_C2C40E;
+    case 50: goto L_C2C414;
+    case 51: goto L_C2C41E;
+    case 52: goto L_C2C426;
+    case 53: goto L_C2C42E;
+    case 54: goto L_C2C44A;
+    case 55: goto L_C2C45E;
+    case 56: goto L_C2C470;
+    case 57: goto L_C2C47E;
+    case 58: goto L_C2C48A;
+    case 59: goto L_C2C492;
+    case 60: goto L_C2C49A;
+    case 61: goto L_C2C4A2;
+    case 62: goto L_C2C4AC;
+    case 63: goto L_C2C4B4;
+    case 64: goto L_C2C4BE;
+    case 65: goto L_C2C4C4;
+    case 66: goto L_C2C4CE;
+    case 67: goto L_C2C4D6;
+    case 68: goto L_C2C4D8;
+    case 69: goto L_C2C4E0;
+    case 70: goto L_C2C4E8;
+    case 71: goto L_C2C4EC;
+    case 72: goto L_C2C4F4;
+    case 73: goto L_C2C4FC;
+    case 74: goto L_C2C504;
+    case 75: goto L_C2C512;
+    case 76: goto L_C2C520;
+    case 77: goto L_C2C550;
+    case 78: goto L_C2C55E;
+    case 79: goto L_C2C566;
+    case 80: goto L_C2C56E;
+    case 81: goto L_C2C57C;
+    case 82: goto L_C2C580;
+    case 83: goto L_C2C582;
+    case 84: goto L_C2C588;
+    case 85: goto L_C2C58E;
+    case 86: goto L_C2C594;
+    case 87: goto L_C2C596;
+    case 88: goto L_C2C5A4;
+    case 89: goto L_C2C5AA;
+    case 90: goto L_C2C5AE;
+    case 91: goto L_C2C5B8;
+    case 92: goto L_C2C5D0;
+    case 93: goto L_C2C5E8;
+    case 94: goto L_C2C5EA;
+    case 95: goto L_C2C5EE;
+    case 96: goto L_C2C5F0;
+    case 97: goto L_C2C5F4;
+    case 98: goto L_C2C5F6;
+    case 99: goto L_C2C5FA;
+    case 100: goto L_C2C5FE;
+    case 101: goto L_C2C602;
+    case 102: goto L_C2C606;
+    case 103: goto L_C2C60A;
+    case 104: goto L_C2C60C;
+    case 105: goto L_C2C614;
+    case 106: goto L_C2C61E;
+    case 107: goto L_C2C628;
+    case 108: goto L_C2C630;
+    case 109: goto L_C2C674;
+    case 110: goto L_C2C682;
+    case 111: goto L_C2C6C4;
+    case 112: goto L_C2C704;
+    case 113: goto L_C2C716;
+    case 114: goto L_C2C730;
+    case 115: goto L_C2C732;
+    case 116: goto L_C2C74C;
+    case 117: goto L_C2C74E;
+    case 118: goto L_C2C752;
+    case 119: goto L_C2C75C;
+    case 120: goto L_C2C794;
+    case 121: goto L_C2C798;
+    case 122: goto L_C2C7A6;
+    case 123: goto L_C2C7AC;
+    case 124: goto L_C2C7B0;
+    case 125: goto L_C2C7B4;
+    case 126: goto L_C2C7B6;
+    case 127: goto L_C2C7C4;
+    case 128: goto L_C2C7CA;
+    case 129: goto L_C2C7CE;
+    case 130: goto L_C2C7D2;
+    case 131: goto L_C2C7DE;
+    case 132: goto L_C2C7E2;
+    case 133: goto L_C2C7E4;
+    case 134: goto L_C2C7EE;
+    case 135: goto L_C2C7F6;
+    case 136: goto L_C2C7FC;
+    case 137: goto L_C2C802;
+    case 138: goto L_C2C808;
+    case 139: goto L_C2C810;
+    case 140: goto L_C2C828;
+    case 141: goto L_C2C82E;
+    case 142: goto L_C2C83C;
+    case 143: goto L_C2C83E;
+    case 144: goto L_C2C84C;
+    case 145: goto L_C2C85C;
+    case 146: goto L_C2C85E;
+    case 147: goto L_C2C862;
+    case 148: goto L_C2C864;
+    case 149: goto L_C2C86A;
+    case 150: goto L_C2C870;
+    case 151: goto L_C2C876;
+    case 152: goto L_C2C87C;
+    case 153: goto L_C2C87E;
+    case 154: goto L_C2C89C;
+    case 155: goto L_C2C8AC;
+    case 156: goto L_C2C8B4;
+    case 157: goto L_C2C8BC;
+    case 158: goto L_C2C8C4;
+    case 159: goto L_C2C8CA;
+    case 160: goto L_C2C8D8;
+    case 161: goto L_C2C8DA;
+    case 162: goto L_C2C8DE;
+    case 163: goto L_C2C8E2;
+    case 164: goto L_C2C8EC;
+    case 165: goto L_C2C8F4;
+    case 166: goto L_C2C8FE;
+    case 167: goto L_C2C906;
+    case 168: goto L_C2C918;
+    case 169: goto L_C2C926;
+    case 170: goto L_C2C92E;
+    case 171: goto L_C2C934;
+    case 172: goto L_C2C93A;
+    case 173: goto L_C2C940;
+    case 174: goto L_C2C946;
+    case 175: goto L_C2C94C;
+    case 176: goto L_C2C950;
+    case 177: goto L_C2C958;
+    case 178: goto L_C2C960;
+    case 179: goto L_C2C964;
+    case 180: goto L_C2C972;
+    case 181: goto L_C2C978;
+    case 182: goto L_C2C97E;
+    case 183: goto L_C2C984;
+    case 184: goto L_C2C98A;
+    case 185: goto L_C2C990;
+    case 186: goto L_C2C996;
+    case 187: goto L_C2C9A4;
+    case 188: goto L_C2C9AA;
+    case 189: goto L_C2C9B0;
+    case 190: goto L_C2C9B6;
+    case 191: goto L_C2C9BC;
+    case 192: goto L_C2C9C2;
+    case 193: goto L_C2C9C8;
+    case 194: goto L_C2C9CA;
+    case 195: goto L_C2C9D0;
+    case 196: goto L_C2C9D6;
+    case 197: goto L_C2C9DE;
+    case 198: goto L_C2C9EA;
+    case 199: goto L_C2C9EE;
+    case 200: goto L_C2C9FC;
+    case 201: goto L_C2CA08;
+    case 202: goto L_C2CA10;
+    case 203: goto L_C2CA1E;
+    case 204: goto L_C2CAB2;
+    case 205: goto L_C2CAB6;
+    case 206: goto L_C2CAB8;
+    case 207: goto L_C2CAC2;
+    case 208: goto L_C2CACA;
+    case 209: goto L_C2CAD0;
+    case 210: goto L_C2CAD8;
+    case 211: goto L_C2CAF0;
+    case 212: goto L_C2CAF6;
+    case 213: goto L_C2CB04;
+    case 214: goto L_C2CB06;
+    case 215: goto L_C2CB14;
+    case 216: goto L_C2CB1C;
+    case 217: goto L_C2CB24;
+    case 218: goto L_C2CB2C;
+    case 219: goto L_C2CB32;
+    case 220: goto L_C2CB3C;
+    case 221: goto L_C2CB3E;
+    case 222: goto L_C2CB44;
+    case 223: goto L_C2CB4A;
+    case 224: goto L_C2CB52;
+    case 225: goto L_C2CB5E;
+    case 226: goto L_C2CB62;
+    case 227: goto L_C2CB72;
+    case 228: goto L_C2CBBE;
+    case 229: goto L_C2CBCC;
+    case 230: goto L_C2CBD8;
+    case 231: goto L_C2CBE2;
+    case 232: goto L_C2CBF0;
+    case 233: goto L_C2CC08;
+    case 234: goto L_C2CC0E;
+    case 235: goto L_C2CC1A;
+    case 236: goto L_C2CC26;
+    default: return FA18_EXIT_DISPATCH;
+    }
+L_C2C270:
+    FA18_CHECK(0xC2C270);
+    FA18_OP(0xC2C270, 0x137C, 0xC2C276); /* C2C270: move.b  #$a, ($5,A1) */
+    FA18_OP(0xC2C276, 0x4A39, 0xC2C27C); /* C2C276: tst.b   $c45793.l */
+    FA18_BCC(0xC2C27C, 0x6708, 0xC2C27E, 0xC2C286, L_C2C286); /* C2C27C: beq     $c2c286 */
+L_C2C27E:
+    FA18_CHECK(0xC2C27E);
+    FA18_OP(0xC2C27E, 0x337C, 0xC2C284); /* C2C27E: move.w  #$24, ($4c,A1) */
+    FA18_JUMP(0xC2C284, 0x6006, 0xC2C28C, L_C2C28C); /* C2C284: bra     $c2c28c */
+L_C2C286:
+    FA18_CHECK(0xC2C286);
+    FA18_OP(0xC2C286, 0x337C, 0xC2C28C); /* C2C286: move.w  #$3c, ($4c,A1) */
+L_C2C28C:
+    FA18_CHECK(0xC2C28C);
+    FA18_OP(0xC2C28C, 0x4A69, 0xC2C290); /* C2C28C: tst.w   ($4c,A1) */
+    FA18_BCC(0xC2C290, 0x6D00, 0xC2C294, 0xC2C37C, L_C2C37C); /* C2C290: blt     $c2c37c */
+L_C2C294:
+    FA18_CHECK(0xC2C294);
+    FA18_JUMP(0xC2C294, 0x6000, 0xC2CC26, L_C2CC26); /* C2C294: bra     $c2cc26 */
+L_C2C298:
+    FA18_CHECK(0xC2C298);
+    FA18_OP(0xC2C298, 0x0829, 0xC2C29E); /* C2C298: btst    #$0, ($2,A1) */
+    FA18_BCC(0xC2C29E, 0x670A, 0xC2C2A0, 0xC2C2AA, L_C2C2AA); /* C2C29E: beq     $c2c2aa */
+L_C2C2A0:
+    FA18_CHECK(0xC2C2A0);
+    FA18_OP(0xC2C2A0, 0x4A39, 0xC2C2A6); /* C2C2A0: tst.b   $c4579a.l */
+    FA18_BCC(0xC2C2A6, 0x6CC8, 0xC2C2A8, 0xC2C270, L_C2C270); /* C2C2A6: bge     $c2c270 */
+L_C2C2A8:
+    FA18_CHECK(0xC2C2A8);
+    FA18_JUMP(0xC2C2A8, 0x605A, 0xC2C304, L_C2C304); /* C2C2A8: bra     $c2c304 */
+L_C2C2AA:
+    FA18_CHECK(0xC2C2AA);
+    FA18_OP(0xC2C2AA, 0x4A29, 0xC2C2AE); /* C2C2AA: tst.b   ($38,A1) */
+    FA18_BCC(0xC2C2AE, 0x6C54, 0xC2C2B0, 0xC2C304, L_C2C304); /* C2C2AE: bge     $c2c304 */
+L_C2C2B0:
+    FA18_CHECK(0xC2C2B0);
+    FA18_OP(0xC2C2B0, 0x0C29, 0xC2C2B6); /* C2C2B0: cmpi.b  #-$1, ($38,A1) */
+    FA18_BCC(0xC2C2B6, 0x674C, 0xC2C2B8, 0xC2C304, L_C2C304); /* C2C2B6: beq     $c2c304 */
+L_C2C2B8:
+    FA18_CHECK(0xC2C2B8);
+    FA18_OP(0xC2C2B8, 0x0C39, 0xC2C2C0); /* C2C2B8: cmpi.b  #$2, $c458a7.l */
+    FA18_BCC(0xC2C2C0, 0x6F0E, 0xC2C2C2, 0xC2C2D0, L_C2C2D0); /* C2C2C0: ble     $c2c2d0 */
+L_C2C2C2:
+    FA18_CHECK(0xC2C2C2);
+    FA18_OP(0xC2C2C2, 0x1029, 0xC2C2C6); /* C2C2C2: move.b  ($64,A1), D0 */
+    FA18_OP(0xC2C2C6, 0x0200, 0xC2C2CA); /* C2C2C6: andi.b  #$60, D0 */
+    FA18_OP(0xC2C2CA, 0x0C00, 0xC2C2CE); /* C2C2CA: cmpi.b  #$60, D0 */
+    FA18_BCC(0xC2C2CE, 0x6634, 0xC2C2D0, 0xC2C304, L_C2C304); /* C2C2CE: bne     $c2c304 */
+L_C2C2D0:
+    FA18_CHECK(0xC2C2D0);
+    FA18_OP(0xC2C2D0, 0x1039, 0xC2C2D6); /* C2C2D0: move.b  $c458a7.l, D0 */
+    FA18_BCC(0xC2C2D6, 0x6F1A, 0xC2C2D8, 0xC2C2F2, L_C2C2F2); /* C2C2D6: ble     $c2c2f2 */
+L_C2C2D8:
+    FA18_CHECK(0xC2C2D8);
+    FA18_OP(0xC2C2D8, 0x5300, 0xC2C2DA); /* C2C2D8: subq.b  #1, D0 */
+    FA18_BCC(0xC2C2DA, 0x6710, 0xC2C2DC, 0xC2C2EC, L_C2C2EC); /* C2C2DA: beq     $c2c2ec */
+L_C2C2DC:
+    FA18_CHECK(0xC2C2DC);
+    FA18_OP(0xC2C2DC, 0x5300, 0xC2C2DE); /* C2C2DC: subq.b  #1, D0 */
+    FA18_BCC(0xC2C2DE, 0x6706, 0xC2C2E0, 0xC2C2E6, L_C2C2E6); /* C2C2DE: beq     $c2c2e6 */
+L_C2C2E0:
+    FA18_CHECK(0xC2C2E0);
+    FA18_OP(0xC2C2E0, 0x303C, 0xC2C2E4); /* C2C2E0: move.w  #$4, D0 */
+    FA18_JUMP(0xC2C2E4, 0x6010, 0xC2C2F6, L_C2C2F6); /* C2C2E4: bra     $c2c2f6 */
+L_C2C2E6:
+    FA18_CHECK(0xC2C2E6);
+    FA18_OP(0xC2C2E6, 0x303C, 0xC2C2EA); /* C2C2E6: move.w  #$12, D0 */
+    FA18_JUMP(0xC2C2EA, 0x600A, 0xC2C2F6, L_C2C2F6); /* C2C2EA: bra     $c2c2f6 */
+L_C2C2EC:
+    FA18_CHECK(0xC2C2EC);
+    FA18_OP(0xC2C2EC, 0x303C, 0xC2C2F0); /* C2C2EC: move.w  #$25, D0 */
+    FA18_JUMP(0xC2C2F0, 0x6004, 0xC2C2F6, L_C2C2F6); /* C2C2F0: bra     $c2c2f6 */
+L_C2C2F2:
+    FA18_CHECK(0xC2C2F2);
+    FA18_OP(0xC2C2F2, 0x303C, 0xC2C2F6); /* C2C2F2: move.w  #$4b, D0 */
+L_C2C2F6:
+    FA18_CHECK(0xC2C2F6);
+    FA18_OP(0xC2C2F6, 0x3340, 0xC2C2FA); /* C2C2F6: move.w  D0, ($4c,A1) */
+    FA18_JUMP(0xC2C2FA, 0x600E, 0xC2C30A, L_C2C30A); /* C2C2FA: bra     $c2c30a */
+L_C2C2FC:
+    FA18_CHECK(0xC2C2FC);
+    FA18_OP(0xC2C2FC, 0x337C, 0xC2C302); /* C2C2FC: move.w  #$b, ($4c,A1) */
+    FA18_JUMP(0xC2C302, 0x6006, 0xC2C30A, L_C2C30A); /* C2C302: bra     $c2c30a */
+L_C2C304:
+    FA18_CHECK(0xC2C304);
+    FA18_OP(0xC2C304, 0x337C, 0xC2C30A); /* C2C304: move.w  #$a, ($4c,A1) */
+L_C2C30A:
+    FA18_CHECK(0xC2C30A);
+    FA18_OP(0xC2C30A, 0x137C, 0xC2C310); /* C2C30A: move.b  #$6, ($5,A1) */
+    FA18_OP(0xC2C310, 0x0829, 0xC2C316); /* C2C310: btst    #$1, ($20,A1) */
+    FA18_BCC(0xC2C316, 0x6600, 0xC2C31A, 0xC2CC26, L_C2CC26); /* C2C316: bne     $c2cc26 */
+L_C2C31A:
+    FA18_CHECK(0xC2C31A);
+    FA18_OP(0xC2C31A, 0x0829, 0xC2C320); /* C2C31A: btst    #$0, ($2,A1) */
+    FA18_BCC(0xC2C320, 0x6644, 0xC2C322, 0xC2C366, L_C2C366); /* C2C320: bne     $c2c366 */
+L_C2C322:
+    FA18_CHECK(0xC2C322);
+    FA18_OP(0xC2C322, 0x4A69, 0xC2C326); /* C2C322: tst.w   ($4c,A1) */
+    FA18_BCC(0xC2C326, 0x6D00, 0xC2C32A, 0xC2C47E, L_C2C47E); /* C2C326: blt     $c2c47e */
+L_C2C32A:
+    FA18_CHECK(0xC2C32A);
+    FA18_OP(0xC2C32A, 0x3829, 0xC2C32E); /* C2C32A: move.w  ($6c,A1), D4 */
+    FA18_OP(0xC2C32E, 0x48C4, 0xC2C330); /* C2C32E: ext.l   D4 */
+    FA18_OP(0xC2C330, 0xED84, 0xC2C332); /* C2C330: asl.l   #6, D4 */
+    FA18_OP(0xC2C332, 0x4AA9, 0xC2C336); /* C2C332: tst.l   ($42,A1) */
+    FA18_BCC(0xC2C336, 0x6C1A, 0xC2C338, 0xC2C352, L_C2C352); /* C2C336: bge     $c2c352 */
+L_C2C338:
+    FA18_CHECK(0xC2C338);
+    FA18_OP(0xC2C338, 0xB8A9, 0xC2C33C); /* C2C338: cmp.l   ($18,A1), D4 */
+    FA18_BCC(0xC2C33C, 0x6D00, 0xC2C340, 0xC2CC26, L_C2CC26); /* C2C33C: blt     $c2cc26 */
+L_C2C340:
+    FA18_CHECK(0xC2C340);
+    FA18_OP(0xC2C340, 0x33FC, 0xC2C348); /* C2C340: move.w  #$3c, $c4599e.l */
+    FA18_CALL(0xC2C348, 0x4EB9, 0xC2C34E, 42, 0); /* C2C348: jsr     $c06c02.l */
+L_C2C34E:
+    FA18_CHECK(0xC2C34E);
+    FA18_JUMP(0xC2C34E, 0x6000, 0xC2C47E, L_C2C47E); /* C2C34E: bra     $c2c47e */
+L_C2C352:
+    FA18_CHECK(0xC2C352);
+    FA18_OP(0xC2C352, 0x4484, 0xC2C354); /* C2C352: neg.l   D4 */
+    FA18_OP(0xC2C354, 0x0684, 0xC2C35A); /* C2C354: addi.l  #$800000, D4 */
+    FA18_OP(0xC2C35A, 0xB8A9, 0xC2C35E); /* C2C35A: cmp.l   ($18,A1), D4 */
+    FA18_BCC(0xC2C35E, 0x6D00, 0xC2C362, 0xC2C47E, L_C2C47E); /* C2C35E: blt     $c2c47e */
+L_C2C362:
+    FA18_CHECK(0xC2C362);
+    FA18_JUMP(0xC2C362, 0x6000, 0xC2CC26, L_C2CC26); /* C2C362: bra     $c2cc26 */
+L_C2C366:
+    FA18_CHECK(0xC2C366);
+    FA18_OP(0xC2C366, 0x4A39, 0xC2C36C); /* C2C366: tst.b   $c4579a.l */
+    FA18_BCC(0xC2C36C, 0x6D00, 0xC2C370, 0xC2CC26, L_C2CC26); /* C2C36C: blt     $c2cc26 */
+L_C2C370:
+    FA18_CHECK(0xC2C370);
+    FA18_OP(0xC2C370, 0x4A69, 0xC2C374); /* C2C370: tst.w   ($4c,A1) */
+    FA18_BCC(0xC2C374, 0x6D00, 0xC2C378, 0xC2C470, L_C2C470); /* C2C374: blt     $c2c470 */
+L_C2C378:
+    FA18_CHECK(0xC2C378);
+    FA18_JUMP(0xC2C378, 0x6000, 0xC2CC26, L_C2CC26); /* C2C378: bra     $c2cc26 */
+L_C2C37C:
+    FA18_CHECK(0xC2C37C);
+    FA18_OP(0xC2C37C, 0x4229, 0xC2C380); /* C2C37C: clr.b   ($5,A1) */
+    FA18_OP(0xC2C380, 0x0229, 0xC2C386); /* C2C380: andi.b  #$3, ($65,A1) */
+    FA18_JUMP(0xC2C386, 0x6000, 0xC2CC26, L_C2CC26); /* C2C386: bra     $c2cc26 */
+L_C2C38A:
+    FA18_CHECK(0xC2C38A);
+    FA18_OP(0xC2C38A, 0x4229, 0xC2C38E); /* C2C38A: clr.b   ($64,A1) */
+L_C2C38E:
+    FA18_CHECK(0xC2C38E);
+    FA18_OP(0xC2C38E, 0x4E5E, 0xC2C390); /* C2C38E: unlk    A6 */
+    FA18_RETURN(0xC2C390, 0x4E75); /* C2C390: rts */
+L_C2C392:
+    FA18_CHECK(0xC2C392);
+    FA18_OP(0xC2C392, 0x4E56, 0xC2C396); /* C2C392: link    A6, #-$2c */
+    FA18_OP(0xC2C396, 0x1029, 0xC2C39A); /* C2C396: move.b  ($62,A1), D0 */
+    FA18_OP(0xC2C39A, 0x0200, 0xC2C39E); /* C2C39A: andi.b  #$f0, D0 */
+    FA18_OP(0xC2C39E, 0x0C00, 0xC2C3A2); /* C2C39E: cmpi.b  #$30, D0 */
+    FA18_BCC(0xC2C3A2, 0x67E6, 0xC2C3A4, 0xC2C38A, L_C2C38A); /* C2C3A2: beq     $c2c38a */
+L_C2C3A4:
+    FA18_CHECK(0xC2C3A4);
+    FA18_OP(0xC2C3A4, 0x337C, 0xC2C3AA); /* C2C3A4: move.w  #$1400, ($7e,A1) */
+    FA18_OP(0xC2C3AA, 0x3029, 0xC2C3AE); /* C2C3AA: move.w  ($0,A1), D0 */
+    FA18_OP(0xC2C3AE, 0x0240, 0xC2C3B2); /* C2C3AE: andi.w  #$80, D0 */
+    FA18_BCC(0xC2C3B2, 0x67D6, 0xC2C3B4, 0xC2C38A, L_C2C38A); /* C2C3B2: beq     $c2c38a */
+L_C2C3B4:
+    FA18_CHECK(0xC2C3B4);
+    FA18_OP(0xC2C3B4, 0x1039, 0xC2C3BA); /* C2C3B4: move.b  $c457af.l, D0 */
+    FA18_OP(0xC2C3BA, 0x8039, 0xC2C3C0); /* C2C3BA: or.b    $c457ae.l, D0 */
+    FA18_BCC(0xC2C3C0, 0x66CC, 0xC2C3C2, 0xC2C38E, L_C2C38E); /* C2C3C0: bne     $c2c38e */
+L_C2C3C2:
+    FA18_CHECK(0xC2C3C2);
+    FA18_OP(0xC2C3C2, 0x1029, 0xC2C3C6); /* C2C3C2: move.b  ($5,A1), D0 */
+    FA18_BCC(0xC2C3C6, 0x6700, 0xC2C3CA, 0xC2C48A, L_C2C48A); /* C2C3C6: beq     $c2c48a */
+L_C2C3CA:
+    FA18_CHECK(0xC2C3CA);
+    FA18_OP(0xC2C3CA, 0x0C29, 0xC2C3D0); /* C2C3CA: cmpi.b  #$8, ($5,A1) */
+    FA18_BCC(0xC2C3D0, 0x673C, 0xC2C3D2, 0xC2C40E, L_C2C40E); /* C2C3D0: beq     $c2c40e */
+L_C2C3D2:
+    FA18_CHECK(0xC2C3D2);
+    FA18_OP(0xC2C3D2, 0x0C29, 0xC2C3D8); /* C2C3D2: cmpi.b  #$1, ($5,A1) */
+    FA18_BCC(0xC2C3D8, 0x6734, 0xC2C3DA, 0xC2C40E, L_C2C40E); /* C2C3D8: beq     $c2c40e */
+L_C2C3DA:
+    FA18_CHECK(0xC2C3DA);
+    FA18_OP(0xC2C3DA, 0x0829, 0xC2C3E0); /* C2C3DA: btst    #$1, ($20,A1) */
+    FA18_BCC(0xC2C3E0, 0x662C, 0xC2C3E2, 0xC2C40E, L_C2C40E); /* C2C3E0: bne     $c2c40e */
+L_C2C3E2:
+    FA18_CHECK(0xC2C3E2);
+    FA18_OP(0xC2C3E2, 0x0829, 0xC2C3E8); /* C2C3E2: btst    #$0, ($2,A1) */
+    FA18_BCC(0xC2C3E8, 0x6624, 0xC2C3EA, 0xC2C40E, L_C2C40E); /* C2C3E8: bne     $c2c40e */
+L_C2C3EA:
+    FA18_CHECK(0xC2C3EA);
+    FA18_OP(0xC2C3EA, 0x3829, 0xC2C3EE); /* C2C3EA: move.w  ($6c,A1), D4 */
+    FA18_OP(0xC2C3EE, 0x48C4, 0xC2C3F0); /* C2C3EE: ext.l   D4 */
+    FA18_OP(0xC2C3F0, 0xED84, 0xC2C3F2); /* C2C3F0: asl.l   #6, D4 */
+    FA18_OP(0xC2C3F2, 0x4AA9, 0xC2C3F6); /* C2C3F2: tst.l   ($42,A1) */
+    FA18_BCC(0xC2C3F6, 0x6C08, 0xC2C3F8, 0xC2C400, L_C2C400); /* C2C3F6: bge     $c2c400 */
+L_C2C3F8:
+    FA18_CHECK(0xC2C3F8);
+    FA18_OP(0xC2C3F8, 0xB8A9, 0xC2C3FC); /* C2C3F8: cmp.l   ($18,A1), D4 */
+    FA18_BCC(0xC2C3FC, 0x6D10, 0xC2C3FE, 0xC2C40E, L_C2C40E); /* C2C3FC: blt     $c2c40e */
+L_C2C3FE:
+    FA18_CHECK(0xC2C3FE);
+    FA18_JUMP(0xC2C3FE, 0x607E, 0xC2C47E, L_C2C47E); /* C2C3FE: bra     $c2c47e */
+L_C2C400:
+    FA18_CHECK(0xC2C400);
+    FA18_OP(0xC2C400, 0x4484, 0xC2C402); /* C2C400: neg.l   D4 */
+    FA18_OP(0xC2C402, 0x0684, 0xC2C408); /* C2C402: addi.l  #$800000, D4 */
+    FA18_OP(0xC2C408, 0xB8A9, 0xC2C40C); /* C2C408: cmp.l   ($18,A1), D4 */
+    FA18_BCC(0xC2C40C, 0x6D70, 0xC2C40E, 0xC2C47E, L_C2C47E); /* C2C40C: blt     $c2c47e */
+L_C2C40E:
+    FA18_CHECK(0xC2C40E);
+    FA18_OP(0xC2C40E, 0x0C00, 0xC2C412); /* C2C40E: cmpi.b  #$8, D0 */
+    FA18_BCC(0xC2C412, 0x674A, 0xC2C414, 0xC2C45E, L_C2C45E); /* C2C412: beq     $c2c45e */
+L_C2C414:
+    FA18_CHECK(0xC2C414);
+    FA18_OP(0xC2C414, 0x0C39, 0xC2C41C); /* C2C414: cmpi.b  #$5, $c458a6.l */
+    FA18_BCC(0xC2C41C, 0x6640, 0xC2C41E, 0xC2C45E, L_C2C45E); /* C2C41C: bne     $c2c45e */
+L_C2C41E:
+    FA18_CHECK(0xC2C41E);
+    FA18_OP(0xC2C41E, 0x0829, 0xC2C424); /* C2C41E: btst    #$3, ($1,A1) */
+    FA18_BCC(0xC2C424, 0x6738, 0xC2C426, 0xC2C45E, L_C2C45E); /* C2C424: beq     $c2c45e */
+L_C2C426:
+    FA18_CHECK(0xC2C426);
+    FA18_OP(0xC2C426, 0x4A69, 0xC2C42A); /* C2C426: tst.w   ($4c,A1) */
+    FA18_BCC(0xC2C42A, 0x6E00, 0xC2C42E, 0xC2C45E, L_C2C45E); /* C2C42A: bgt     $c2c45e */
+L_C2C42E:
+    FA18_CHECK(0xC2C42E);
+    FA18_OP(0xC2C42E, 0x137C, 0xC2C434); /* C2C42E: move.b  #$8, ($5,A1) */
+    FA18_OP(0xC2C434, 0x7000, 0xC2C436); /* C2C434: moveq   #$0, D0 */
+    FA18_OP(0xC2C436, 0x1029, 0xC2C43A); /* C2C436: move.b  ($3a,A1), D0 */
+    FA18_OP(0xC2C43A, 0xD040, 0xC2C43C); /* C2C43A: add.w   D0, D0 */
+    FA18_OP(0xC2C43C, 0x49F9, 0xC2C442); /* C2C43C: lea     $c295e0.l, A4 */
+    FA18_OP(0xC2C442, 0xD8F4, 0xC2C446); /* C2C442: adda.w  (A4,D0.w), A4 */
+    FA18_OP(0xC2C446, 0x4A54, 0xC2C448); /* C2C446: tst.w   (A4) */
+    FA18_BCC(0xC2C448, 0x6D14, 0xC2C44A, 0xC2C45E, L_C2C45E); /* C2C448: blt     $c2c45e */
+L_C2C44A:
+    FA18_CHECK(0xC2C44A);
+    FA18_OP(0xC2C44A, 0x4C94, 0xC2C44E); /* C2C44A: movem.w (A4), D0-D4 */
+    FA18_OP(0xC2C44E, 0x48A9, 0xC2C454); /* C2C44E: movem.w D0-D3, ($2c,A1) */
+    FA18_OP(0xC2C454, 0x48C4, 0xC2C456); /* C2C454: ext.l   D4 */
+    FA18_OP(0xC2C456, 0x2344, 0xC2C45A); /* C2C456: move.l  D4, ($34,A1) */
+    FA18_JUMP(0xC2C45A, 0x6000, 0xC2C3C2, L_C2C3C2); /* C2C45A: bra     $c2c3c2 */
+L_C2C45E:
+    FA18_CHECK(0xC2C45E);
+    FA18_OP(0xC2C45E, 0x5340, 0xC2C460); /* C2C45E: subq.w  #1, D0 */
+    FA18_OP(0xC2C460, 0x4880, 0xC2C462); /* C2C460: ext.w   D0 */
+    FA18_OP(0xC2C462, 0xD040, 0xC2C464); /* C2C462: add.w   D0, D0 */
+    FA18_OP(0xC2C464, 0xD040, 0xC2C466); /* C2C464: add.w   D0, D0 */
+    FA18_OP(0xC2C466, 0x41FA, 0xC2C46A); /* C2C466: lea     (-$970,PC), A0; ($c2baf8) */
+    FA18_OP(0xC2C46A, 0x2070, 0xC2C46E); /* C2C46A: movea.l (A0,D0.w), A0 */
+    FA18_JUMP_OUT(0xC2C46E, 0x4ED0); /* C2C46E: jmp     (A0) */
+L_C2C470:
+    FA18_CHECK(0xC2C470);
+    FA18_OP(0xC2C470, 0x137C, 0xC2C476); /* C2C470: move.b  #$8, ($5,A1) */
+    FA18_OP(0xC2C476, 0x337C, 0xC2C47C); /* C2C476: move.w  #$1e, ($4c,A1) */
+    FA18_JUMP(0xC2C47C, 0x600C, 0xC2C48A, L_C2C48A); /* C2C47C: bra     $c2c48a */
+L_C2C47E:
+    FA18_CHECK(0xC2C47E);
+    FA18_OP(0xC2C47E, 0x137C, 0xC2C484); /* C2C47E: move.b  #$1, ($5,A1) */
+    FA18_OP(0xC2C484, 0x337C, 0xC2C48A); /* C2C484: move.w  #$1e, ($4c,A1) */
+L_C2C48A:
+    FA18_CHECK(0xC2C48A);
+    FA18_OP(0xC2C48A, 0x0829, 0xC2C490); /* C2C48A: btst    #$1, ($20,A1) */
+    FA18_BCC(0xC2C490, 0x6646, 0xC2C492, 0xC2C4D8, L_C2C4D8); /* C2C490: bne     $c2c4d8 */
+L_C2C492:
+    FA18_CHECK(0xC2C492);
+    FA18_OP(0xC2C492, 0x0C29, 0xC2C498); /* C2C492: cmpi.b  #$8, ($5,A1) */
+    FA18_BCC(0xC2C498, 0x6652, 0xC2C49A, 0xC2C4EC, L_C2C4EC); /* C2C498: bne     $c2c4ec */
+L_C2C49A:
+    FA18_CHECK(0xC2C49A);
+    FA18_OP(0xC2C49A, 0x0829, 0xC2C4A0); /* C2C49A: btst    #$0, ($2,A1) */
+    FA18_BCC(0xC2C4A0, 0x6712, 0xC2C4A2, 0xC2C4B4, L_C2C4B4); /* C2C4A0: beq     $c2c4b4 */
+L_C2C4A2:
+    FA18_CHECK(0xC2C4A2);
+    FA18_OP(0xC2C4A2, 0x4A39, 0xC2C4A8); /* C2C4A2: tst.b   $c4579a.l */
+    FA18_BCC(0xC2C4A8, 0x6C00, 0xC2C4AC, 0xC2CC26, L_C2CC26); /* C2C4A8: bge     $c2cc26 */
+L_C2C4AC:
+    FA18_CHECK(0xC2C4AC);
+    FA18_OP(0xC2C4AC, 0x4A69, 0xC2C4B0); /* C2C4AC: tst.w   ($4c,A1) */
+    FA18_BCC(0xC2C4B0, 0x6D00, 0xC2C4B4, 0xC2C2FC, L_C2C2FC); /* C2C4B0: blt     $c2c2fc */
+L_C2C4B4:
+    FA18_CHECK(0xC2C4B4);
+    FA18_OP(0xC2C4B4, 0x3829, 0xC2C4B8); /* C2C4B4: move.w  ($66,A1), D4 */
+    FA18_OP(0xC2C4B8, 0x0C44, 0xC2C4BC); /* C2C4B8: cmpi.w  #$e10, D4 */
+    FA18_BCC(0xC2C4BC, 0x6D06, 0xC2C4BE, 0xC2C4C4, L_C2C4C4); /* C2C4BC: blt     $c2c4c4 */
+L_C2C4BE:
+    FA18_CHECK(0xC2C4BE);
+    FA18_OP(0xC2C4BE, 0x0C44, 0xC2C4C2); /* C2C4BE: cmpi.w  #$6270, D4 */
+    FA18_BCC(0xC2C4C2, 0x6D38, 0xC2C4C4, 0xC2C4FC, L_C2C4FC); /* C2C4C2: blt     $c2c4fc */
+L_C2C4C4:
+    FA18_CHECK(0xC2C4C4);
+    FA18_OP(0xC2C4C4, 0x3829, 0xC2C4C8); /* C2C4C4: move.w  ($6a,A1), D4 */
+    FA18_OP(0xC2C4C8, 0x0C44, 0xC2C4CC); /* C2C4C8: cmpi.w  #$1c20, D4 */
+    FA18_BCC(0xC2C4CC, 0x6D2E, 0xC2C4CE, 0xC2C4FC, L_C2C4FC); /* C2C4CC: blt     $c2c4fc */
+L_C2C4CE:
+    FA18_CHECK(0xC2C4CE);
+    FA18_OP(0xC2C4CE, 0x0C44, 0xC2C4D2); /* C2C4CE: cmpi.w  #$5460, D4 */
+    FA18_BCC(0xC2C4D2, 0x6D00, 0xC2C4D6, 0xC2C2EC, L_C2C2EC); /* C2C4D2: blt     $c2c2ec */
+L_C2C4D6:
+    FA18_CHECK(0xC2C4D6);
+    FA18_JUMP(0xC2C4D6, 0x6024, 0xC2C4FC, L_C2C4FC); /* C2C4D6: bra     $c2c4fc */
+L_C2C4D8:
+    FA18_CHECK(0xC2C4D8);
+    FA18_OP(0xC2C4D8, 0x0C69, 0xC2C4DE); /* C2C4D8: cmpi.w  #$3840, ($66,A1) */
+    FA18_BCC(0xC2C4DE, 0x6E1C, 0xC2C4E0, 0xC2C4FC, L_C2C4FC); /* C2C4DE: bgt     $c2c4fc */
+L_C2C4E0:
+    FA18_CHECK(0xC2C4E0);
+    FA18_OP(0xC2C4E0, 0x0C69, 0xC2C4E6); /* C2C4E0: cmpi.w  #$af0, ($66,A1) */
+    FA18_BCC(0xC2C4E6, 0x6D14, 0xC2C4E8, 0xC2C4FC, L_C2C4FC); /* C2C4E6: blt     $c2c4fc */
+L_C2C4E8:
+    FA18_CHECK(0xC2C4E8);
+    FA18_JUMP(0xC2C4E8, 0x6000, 0xC2C30A, L_C2C30A); /* C2C4E8: bra     $c2c30a */
+L_C2C4EC:
+    FA18_CHECK(0xC2C4EC);
+    FA18_OP(0xC2C4EC, 0x0829, 0xC2C4F2); /* C2C4EC: btst    #$0, ($2,A1) */
+    FA18_BCC(0xC2C4F2, 0x6608, 0xC2C4F4, 0xC2C4FC, L_C2C4FC); /* C2C4F2: bne     $c2c4fc */
+L_C2C4F4:
+    FA18_CHECK(0xC2C4F4);
+    FA18_OP(0xC2C4F4, 0x4A69, 0xC2C4F8); /* C2C4F4: tst.w   ($4c,A1) */
+    FA18_BCC(0xC2C4F8, 0x6D00, 0xC2C4FC, 0xC2C298, L_C2C298); /* C2C4F8: blt     $c2c298 */
+L_C2C4FC:
+    FA18_CHECK(0xC2C4FC);
+    FA18_OP(0xC2C4FC, 0x3029, 0xC2C500); /* C2C4FC: move.w  ($2c,A1), D0 */
+    FA18_BCC(0xC2C500, 0x6D00, 0xC2C504, 0xC2C38A, L_C2C38A); /* C2C500: blt     $c2c38a */
+L_C2C504:
+    FA18_CHECK(0xC2C504);
+    FA18_OP(0xC2C504, 0x1229, 0xC2C508); /* C2C504: move.b  ($62,A1), D1 */
+    FA18_OP(0xC2C508, 0x0201, 0xC2C50C); /* C2C508: andi.b  #$f0, D1 */
+    FA18_OP(0xC2C50C, 0x0C01, 0xC2C510); /* C2C50C: cmpi.b  #$0, D1 */
+    FA18_BCC(0xC2C510, 0x660E, 0xC2C512, 0xC2C520, L_C2C520); /* C2C510: bne     $c2c520 */
+L_C2C512:
+    FA18_CHECK(0xC2C512);
+    FA18_OP(0xC2C512, 0x5369, 0xC2C516); /* C2C512: subq.w  #1, ($26,A1) */
+    FA18_OP(0xC2C516, 0x0C69, 0xC2C51C); /* C2C516: cmpi.w  #$a, ($26,A1) */
+    FA18_BCC(0xC2C51C, 0x6C00, 0xC2C520, 0xC2C38A, L_C2C38A); /* C2C51C: bge     $c2c38a */
+L_C2C520:
+    FA18_CHECK(0xC2C520);
+    FA18_OP(0xC2C520, 0x9069, 0xC2C524); /* C2C520: sub.w   ($6,A1), D0 */
+    FA18_OP(0xC2C524, 0x48C0, 0xC2C526); /* C2C524: ext.l   D0 */
+    FA18_OP(0xC2C526, 0x7A0E, 0xC2C528); /* C2C526: moveq   #$e, D5 */
+    FA18_OP(0xC2C528, 0xEBA0, 0xC2C52A); /* C2C528: asl.l   D5, D0 */
+    FA18_OP(0xC2C52A, 0x3229, 0xC2C52E); /* C2C52A: move.w  ($2e,A1), D1 */
+    FA18_OP(0xC2C52E, 0x9269, 0xC2C532); /* C2C52E: sub.w   ($8,A1), D1 */
+    FA18_OP(0xC2C532, 0x48C1, 0xC2C534); /* C2C532: ext.l   D1 */
+    FA18_OP(0xC2C534, 0xEBA1, 0xC2C536); /* C2C534: asl.l   D5, D1 */
+    FA18_OP(0xC2C536, 0x3429, 0xC2C53A); /* C2C536: move.w  ($c,A1), D2 */
+    FA18_OP(0xC2C53A, 0x3C29, 0xC2C53E); /* C2C53A: move.w  ($e,A1), D6 */
+    FA18_OP(0xC2C53E, 0x48C2, 0xC2C540); /* C2C53E: ext.l   D2 */
+    FA18_OP(0xC2C540, 0x48C6, 0xC2C542); /* C2C540: ext.l   D6 */
+    FA18_OP(0xC2C542, 0x4CA9, 0xC2C548); /* C2C542: movem.w ($30,A1), D3/D5 */
+    FA18_OP(0xC2C548, 0x0829, 0xC2C54E); /* C2C548: btst    #$1, ($20,A1) */
+    FA18_BCC(0xC2C54E, 0x665A, 0xC2C550, 0xC2C5AA, L_C2C5AA); /* C2C54E: bne     $c2c5aa */
+L_C2C550:
+    FA18_CHECK(0xC2C550);
+    FA18_OP(0xC2C550, 0x1829, 0xC2C554); /* C2C550: move.b  ($62,A1), D4 */
+    FA18_OP(0xC2C554, 0x0204, 0xC2C558); /* C2C554: andi.b  #$f0, D4 */
+    FA18_OP(0xC2C558, 0x0C04, 0xC2C55C); /* C2C558: cmpi.b  #$0, D4 */
+    FA18_BCC(0xC2C55C, 0x674C, 0xC2C55E, 0xC2C5AA, L_C2C5AA); /* C2C55C: beq     $c2c5aa */
+L_C2C55E:
+    FA18_CHECK(0xC2C55E);
+    FA18_OP(0xC2C55E, 0x0C29, 0xC2C564); /* C2C55E: cmpi.b  #$14, ($62,A1) */
+    FA18_BCC(0xC2C564, 0x6744, 0xC2C566, 0xC2C5AA, L_C2C5AA); /* C2C564: beq     $c2c5aa */
+L_C2C566:
+    FA18_CHECK(0xC2C566);
+    FA18_OP(0xC2C566, 0x0C29, 0xC2C56C); /* C2C566: cmpi.b  #$15, ($62,A1) */
+    FA18_BCC(0xC2C56C, 0x673C, 0xC2C56E, 0xC2C5AA, L_C2C5AA); /* C2C56C: beq     $c2c5aa */
+L_C2C56E:
+    FA18_CHECK(0xC2C56E);
+    FA18_OP(0xC2C56E, 0x3829, 0xC2C572); /* C2C56E: move.w  ($6c,A1), D4 */
+    FA18_OP(0xC2C572, 0x48C4, 0xC2C574); /* C2C572: ext.l   D4 */
+    FA18_OP(0xC2C574, 0x0C29, 0xC2C57A); /* C2C574: cmpi.b  #$8, ($5,A1) */
+    FA18_BCC(0xC2C57A, 0x6704, 0xC2C57C, 0xC2C580, L_C2C580); /* C2C57A: beq     $c2c580 */
+L_C2C57C:
+    FA18_CHECK(0xC2C57C);
+    FA18_OP(0xC2C57C, 0xEF84, 0xC2C57E); /* C2C57C: asl.l   #7, D4 */
+    FA18_JUMP(0xC2C57E, 0x6002, 0xC2C582, L_C2C582); /* C2C57E: bra     $c2c582 */
+L_C2C580:
+    FA18_CHECK(0xC2C580);
+    FA18_OP(0xC2C580, 0xED84, 0xC2C582); /* C2C580: asl.l   #6, D4 */
+L_C2C582:
+    FA18_CHECK(0xC2C582);
+    FA18_OP(0xC2C582, 0x4AA9, 0xC2C586); /* C2C582: tst.l   ($42,A1) */
+    FA18_BCC(0xC2C586, 0x6C0E, 0xC2C588, 0xC2C596, L_C2C596); /* C2C586: bge     $c2c596 */
+L_C2C588:
+    FA18_CHECK(0xC2C588);
+    FA18_OP(0xC2C588, 0xB8A9, 0xC2C58C); /* C2C588: cmp.l   ($18,A1), D4 */
+    FA18_BCC(0xC2C58C, 0x6D1C, 0xC2C58E, 0xC2C5AA, L_C2C5AA); /* C2C58C: blt     $c2c5aa */
+L_C2C58E:
+    FA18_CHECK(0xC2C58E);
+    FA18_OP(0xC2C58E, 0xB8A9, 0xC2C592); /* C2C58E: cmp.l   ($34,A1), D4 */
+    FA18_BCC(0xC2C592, 0x6D16, 0xC2C594, 0xC2C5AA, L_C2C5AA); /* C2C592: blt     $c2c5aa */
+L_C2C594:
+    FA18_CHECK(0xC2C594);
+    FA18_JUMP(0xC2C594, 0x6018, 0xC2C5AE, L_C2C5AE); /* C2C594: bra     $c2c5ae */
+L_C2C596:
+    FA18_CHECK(0xC2C596);
+    FA18_OP(0xC2C596, 0x4484, 0xC2C598); /* C2C596: neg.l   D4 */
+    FA18_OP(0xC2C598, 0x0684, 0xC2C59E); /* C2C598: addi.l  #$800000, D4 */
+    FA18_OP(0xC2C59E, 0xB8A9, 0xC2C5A2); /* C2C59E: cmp.l   ($18,A1), D4 */
+    FA18_BCC(0xC2C5A2, 0x6E06, 0xC2C5A4, 0xC2C5AA, L_C2C5AA); /* C2C5A2: bgt     $c2c5aa */
+L_C2C5A4:
+    FA18_CHECK(0xC2C5A4);
+    FA18_OP(0xC2C5A4, 0xB8A9, 0xC2C5A8); /* C2C5A4: cmp.l   ($34,A1), D4 */
+    FA18_BCC(0xC2C5A8, 0x6D04, 0xC2C5AA, 0xC2C5AE, L_C2C5AE); /* C2C5A8: blt     $c2c5ae */
+L_C2C5AA:
+    FA18_CHECK(0xC2C5AA);
+    FA18_OP(0xC2C5AA, 0x2829, 0xC2C5AE); /* C2C5AA: move.l  ($34,A1), D4 */
+L_C2C5AE:
+    FA18_CHECK(0xC2C5AE);
+    FA18_OP(0xC2C5AE, 0x48C3, 0xC2C5B0); /* C2C5AE: ext.l   D3 */
+    FA18_OP(0xC2C5B0, 0x48C5, 0xC2C5B2); /* C2C5B0: ext.l   D5 */
+    FA18_OP(0xC2C5B2, 0x4A29, 0xC2C5B6); /* C2C5B2: tst.b   ($38,A1) */
+    FA18_BCC(0xC2C5B6, 0x6D18, 0xC2C5B8, 0xC2C5D0, L_C2C5D0); /* C2C5B6: blt     $c2c5d0 */
+L_C2C5B8:
+    FA18_CHECK(0xC2C5B8);
+    FA18_OP(0xC2C5B8, 0x1E29, 0xC2C5BC); /* C2C5B8: move.b  ($38,A1), D7 */
+    FA18_OP(0xC2C5BC, 0x4887, 0xC2C5BE); /* C2C5BC: ext.w   D7 */
+    FA18_OP(0xC2C5BE, 0xEFA3, 0xC2C5C0); /* C2C5BE: asl.l   D7, D3 */
+    FA18_OP(0xC2C5C0, 0xEFA4, 0xC2C5C2); /* C2C5C0: asl.l   D7, D4 */
+    FA18_OP(0xC2C5C2, 0xEFA5, 0xC2C5C4); /* C2C5C2: asl.l   D7, D5 */
+    FA18_OP(0xC2C5C4, 0x0283, 0xC2C5CA); /* C2C5C4: andi.l  #$3fff, D3 */
+    FA18_OP(0xC2C5CA, 0x0285, 0xC2C5D0); /* C2C5CA: andi.l  #$3fff, D5 */
+L_C2C5D0:
+    FA18_CHECK(0xC2C5D0);
+    FA18_OP(0xC2C5D0, 0x9682, 0xC2C5D2); /* C2C5D0: sub.l   D2, D3 */
+    FA18_OP(0xC2C5D2, 0x9A86, 0xC2C5D4); /* C2C5D2: sub.l   D6, D5 */
+    FA18_OP(0xC2C5D4, 0xD680, 0xC2C5D6); /* C2C5D4: add.l   D0, D3 */
+    FA18_OP(0xC2C5D6, 0xDA81, 0xC2C5D8); /* C2C5D6: add.l   D1, D5 */
+    FA18_OP(0xC2C5D8, 0x2C29, 0xC2C5DC); /* C2C5D8: move.l  ($10,A1), D6 */
+    FA18_OP(0xC2C5DC, 0x9886, 0xC2C5DE); /* C2C5DC: sub.l   D6, D4 */
+    FA18_OP(0xC2C5DE, 0x2E05, 0xC2C5E0); /* C2C5DE: move.l  D5, D7 */
+    FA18_OP(0xC2C5E0, 0x2C04, 0xC2C5E2); /* C2C5E0: move.l  D4, D6 */
+    FA18_OP(0xC2C5E2, 0x2A03, 0xC2C5E4); /* C2C5E2: move.l  D3, D5 */
+    FA18_OP(0xC2C5E4, 0x2005, 0xC2C5E6); /* C2C5E4: move.l  D5, D0 */
+    FA18_BCC(0xC2C5E6, 0x6C02, 0xC2C5E8, 0xC2C5EA, L_C2C5EA); /* C2C5E6: bge     $c2c5ea */
+L_C2C5E8:
+    FA18_CHECK(0xC2C5E8);
+    FA18_OP(0xC2C5E8, 0x4480, 0xC2C5EA); /* C2C5E8: neg.l   D0 */
+L_C2C5EA:
+    FA18_CHECK(0xC2C5EA);
+    FA18_OP(0xC2C5EA, 0x2206, 0xC2C5EC); /* C2C5EA: move.l  D6, D1 */
+    FA18_BCC(0xC2C5EC, 0x6C02, 0xC2C5EE, 0xC2C5F0, L_C2C5F0); /* C2C5EC: bge     $c2c5f0 */
+L_C2C5EE:
+    FA18_CHECK(0xC2C5EE);
+    FA18_OP(0xC2C5EE, 0x4481, 0xC2C5F0); /* C2C5EE: neg.l   D1 */
+L_C2C5F0:
+    FA18_CHECK(0xC2C5F0);
+    FA18_OP(0xC2C5F0, 0x2407, 0xC2C5F2); /* C2C5F0: move.l  D7, D2 */
+    FA18_BCC(0xC2C5F2, 0x6C02, 0xC2C5F4, 0xC2C5F6, L_C2C5F6); /* C2C5F2: bge     $c2c5f6 */
+L_C2C5F4:
+    FA18_CHECK(0xC2C5F4);
+    FA18_OP(0xC2C5F4, 0x4482, 0xC2C5F6); /* C2C5F4: neg.l   D2 */
+L_C2C5F6:
+    FA18_CHECK(0xC2C5F6);
+    FA18_OP(0xC2C5F6, 0xB280, 0xC2C5F8); /* C2C5F6: cmp.l   D0, D1 */
+    FA18_BCC(0xC2C5F8, 0x6E08, 0xC2C5FA, 0xC2C602, L_C2C602); /* C2C5F8: bgt     $c2c602 */
+L_C2C5FA:
+    FA18_CHECK(0xC2C5FA);
+    FA18_OP(0xC2C5FA, 0xB480, 0xC2C5FC); /* C2C5FA: cmp.l   D0, D2 */
+    FA18_BCC(0xC2C5FC, 0x6E08, 0xC2C5FE, 0xC2C606, L_C2C606); /* C2C5FC: bgt     $c2c606 */
+L_C2C5FE:
+    FA18_CHECK(0xC2C5FE);
+    FA18_OP(0xC2C5FE, 0x2600, 0xC2C600); /* C2C5FE: move.l  D0, D3 */
+    FA18_JUMP(0xC2C600, 0x600A, 0xC2C60C, L_C2C60C); /* C2C600: bra     $c2c60c */
+L_C2C602:
+    FA18_CHECK(0xC2C602);
+    FA18_OP(0xC2C602, 0xB481, 0xC2C604); /* C2C602: cmp.l   D1, D2 */
+    FA18_BCC(0xC2C604, 0x6F04, 0xC2C606, 0xC2C60A, L_C2C60A); /* C2C604: ble     $c2c60a */
+L_C2C606:
+    FA18_CHECK(0xC2C606);
+    FA18_OP(0xC2C606, 0x2602, 0xC2C608); /* C2C606: move.l  D2, D3 */
+    FA18_JUMP(0xC2C608, 0x6002, 0xC2C60C, L_C2C60C); /* C2C608: bra     $c2c60c */
+L_C2C60A:
+    FA18_CHECK(0xC2C60A);
+    FA18_OP(0xC2C60A, 0x2601, 0xC2C60C); /* C2C60A: move.l  D1, D3 */
+L_C2C60C:
+    FA18_CHECK(0xC2C60C);
+    FA18_OP(0xC2C60C, 0x0C83, 0xC2C612); /* C2C60C: cmpi.l  #$4800, D3 */
+    FA18_BCC(0xC2C612, 0x6D0A, 0xC2C614, 0xC2C61E, L_C2C61E); /* C2C612: blt     $c2c61e */
+L_C2C614:
+    FA18_CHECK(0xC2C614);
+    FA18_OP(0xC2C614, 0xE485, 0xC2C616); /* C2C614: asr.l   #2, D5 */
+    FA18_OP(0xC2C616, 0xE486, 0xC2C618); /* C2C616: asr.l   #2, D6 */
+    FA18_OP(0xC2C618, 0xE487, 0xC2C61A); /* C2C618: asr.l   #2, D7 */
+    FA18_OP(0xC2C61A, 0xE483, 0xC2C61C); /* C2C61A: asr.l   #2, D3 */
+    FA18_JUMP(0xC2C61C, 0x60EE, 0xC2C60C, L_C2C60C); /* C2C61C: bra     $c2c60c */
+L_C2C61E:
+    FA18_CHECK(0xC2C61E);
+    FA18_OP(0xC2C61E, 0x303C, 0xC2C622); /* C2C61E: move.w  #$c0, D0 */
+    FA18_CALL(0xC2C622, 0x4EB9, 0xC2C628, 370, 0); /* C2C622: jsr     $c2574a.l */
+L_C2C628:
+    FA18_CHECK(0xC2C628);
+    FA18_OP(0xC2C628, 0x0C29, 0xC2C62E); /* C2C628: cmpi.b  #$8, ($5,A1) */
+    FA18_BCC(0xC2C62E, 0x6644, 0xC2C630, 0xC2C674, L_C2C674); /* C2C62E: bne     $c2c674 */
+L_C2C630:
+    FA18_CHECK(0xC2C630);
+    FA18_OP(0xC2C630, 0x2D7C, 0xC2C638); /* C2C630: move.l  #$c000, (-$4,A6) */
+    FA18_OP(0xC2C638, 0x2D7C, 0xC2C640); /* C2C638: move.l  #$10000, (-$8,A6) */
+    FA18_OP(0xC2C640, 0x2D7C, 0xC2C648); /* C2C640: move.l  #$18000, (-$c,A6) */
+    FA18_OP(0xC2C648, 0x2D7C, 0xC2C650); /* C2C648: move.l  #$ffff4000, (-$14,A6) */
+    FA18_OP(0xC2C650, 0x2D7C, 0xC2C658); /* C2C650: move.l  #$ffff0000, (-$10,A6) */
+    FA18_OP(0xC2C658, 0x2D7C, 0xC2C660); /* C2C658: move.l  #$fffe8000, (-$18,A6) */
+    FA18_OP(0xC2C660, 0x2D7C, 0xC2C668); /* C2C660: move.l  #$30000, (-$1c,A6) */
+    FA18_OP(0xC2C668, 0x2D7C, 0xC2C670); /* C2C668: move.l  #$80000, (-$20,A6) */
+    FA18_JUMP(0xC2C670, 0x6000, 0xC2C704, L_C2C704); /* C2C670: bra     $c2c704 */
+L_C2C674:
+    FA18_CHECK(0xC2C674);
+    FA18_OP(0xC2C674, 0x1029, 0xC2C678); /* C2C674: move.b  ($62,A1), D0 */
+    FA18_OP(0xC2C678, 0x0200, 0xC2C67C); /* C2C678: andi.b  #$f0, D0 */
+    FA18_OP(0xC2C67C, 0x0C00, 0xC2C680); /* C2C67C: cmpi.b  #$10, D0 */
+    FA18_BCC(0xC2C680, 0x6742, 0xC2C682, 0xC2C6C4, L_C2C6C4); /* C2C680: beq     $c2c6c4 */
+L_C2C682:
+    FA18_CHECK(0xC2C682);
+    FA18_OP(0xC2C682, 0x2D7C, 0xC2C68A); /* C2C682: move.l  #$10000, (-$4,A6) */
+    FA18_OP(0xC2C68A, 0x2D7C, 0xC2C692); /* C2C68A: move.l  #$10000, (-$8,A6) */
+    FA18_OP(0xC2C692, 0x2D7C, 0xC2C69A); /* C2C692: move.l  #$20000, (-$c,A6) */
+    FA18_OP(0xC2C69A, 0x2D7C, 0xC2C6A2); /* C2C69A: move.l  #$ffff0000, (-$14,A6) */
+    FA18_OP(0xC2C6A2, 0x2D7C, 0xC2C6AA); /* C2C6A2: move.l  #$ffff0000, (-$10,A6) */
+    FA18_OP(0xC2C6AA, 0x2D7C, 0xC2C6B2); /* C2C6AA: move.l  #$fffe0000, (-$18,A6) */
+    FA18_OP(0xC2C6B2, 0x2D7C, 0xC2C6BA); /* C2C6B2: move.l  #$20000, (-$1c,A6) */
+    FA18_OP(0xC2C6BA, 0x2D7C, 0xC2C6C2); /* C2C6BA: move.l  #$20000, (-$20,A6) */
+    FA18_JUMP(0xC2C6C2, 0x6040, 0xC2C704, L_C2C704); /* C2C6C2: bra     $c2c704 */
+L_C2C6C4:
+    FA18_CHECK(0xC2C6C4);
+    FA18_OP(0xC2C6C4, 0x2D7C, 0xC2C6CC); /* C2C6C4: move.l  #$30000, (-$4,A6) */
+    FA18_OP(0xC2C6CC, 0x2D7C, 0xC2C6D4); /* C2C6CC: move.l  #$40000, (-$8,A6) */
+    FA18_OP(0xC2C6D4, 0x2D7C, 0xC2C6DC); /* C2C6D4: move.l  #$50000, (-$c,A6) */
+    FA18_OP(0xC2C6DC, 0x2D7C, 0xC2C6E4); /* C2C6DC: move.l  #$fffd0000, (-$14,A6) */
+    FA18_OP(0xC2C6E4, 0x2D7C, 0xC2C6EC); /* C2C6E4: move.l  #$fffc0000, (-$10,A6) */
+    FA18_OP(0xC2C6EC, 0x2D7C, 0xC2C6F4); /* C2C6EC: move.l  #$fffb0000, (-$18,A6) */
+    FA18_OP(0xC2C6F4, 0x2D7C, 0xC2C6FC); /* C2C6F4: move.l  #$80000, (-$1c,A6) */
+    FA18_OP(0xC2C6FC, 0x2D7C, 0xC2C704); /* C2C6FC: move.l  #$80000, (-$20,A6) */
+L_C2C704:
+    FA18_CHECK(0xC2C704);
+    FA18_OP(0xC2C704, 0x0229, 0xC2C70A); /* C2C704: andi.b  #$79, ($64,A1) */
+    FA18_JUMP(0xC2C70A, 0x600A, 0xC2C716, L_C2C716); /* C2C70A: bra     $c2c716 */
+L_C2C716:
+    FA18_CHECK(0xC2C716);
+    FA18_OP(0xC2C716, 0x3029, 0xC2C71A); /* C2C716: move.w  ($92,A1), D0 */
+    FA18_OP(0xC2C71A, 0x3229, 0xC2C71E); /* C2C71A: move.w  ($98,A1), D1 */
+    FA18_OP(0xC2C71E, 0x3429, 0xC2C722); /* C2C71E: move.w  ($9e,A1), D2 */
+    FA18_OP(0xC2C722, 0xC1C5, 0xC2C724); /* C2C722: muls.w  D5, D0 */
+    FA18_OP(0xC2C724, 0xC3C6, 0xC2C726); /* C2C724: muls.w  D6, D1 */
+    FA18_OP(0xC2C726, 0xC5C7, 0xC2C728); /* C2C726: muls.w  D7, D2 */
+    FA18_OP(0xC2C728, 0xD480, 0xC2C72A); /* C2C728: add.l   D0, D2 */
+    FA18_OP(0xC2C72A, 0xD481, 0xC2C72C); /* C2C72A: add.l   D1, D2 */
+    FA18_OP(0xC2C72C, 0x2802, 0xC2C72E); /* C2C72C: move.l  D2, D4 */
+    FA18_BCC(0xC2C72E, 0x6C02, 0xC2C730, 0xC2C732, L_C2C732); /* C2C72E: bge     $c2c732 */
+L_C2C730:
+    FA18_CHECK(0xC2C730);
+    FA18_OP(0xC2C730, 0x4484, 0xC2C732); /* C2C730: neg.l   D4 */
+L_C2C732:
+    FA18_CHECK(0xC2C732);
+    FA18_OP(0xC2C732, 0x3029, 0xC2C736); /* C2C732: move.w  ($94,A1), D0 */
+    FA18_OP(0xC2C736, 0x3229, 0xC2C73A); /* C2C736: move.w  ($9a,A1), D1 */
+    FA18_OP(0xC2C73A, 0x3629, 0xC2C73E); /* C2C73A: move.w  ($a0,A1), D3 */
+    FA18_OP(0xC2C73E, 0xC1C5, 0xC2C740); /* C2C73E: muls.w  D5, D0 */
+    FA18_OP(0xC2C740, 0xC3C6, 0xC2C742); /* C2C740: muls.w  D6, D1 */
+    FA18_OP(0xC2C742, 0xC7C7, 0xC2C744); /* C2C742: muls.w  D7, D3 */
+    FA18_OP(0xC2C744, 0xD680, 0xC2C746); /* C2C744: add.l   D0, D3 */
+    FA18_OP(0xC2C746, 0xD681, 0xC2C748); /* C2C746: add.l   D1, D3 */
+    FA18_OP(0xC2C748, 0x2003, 0xC2C74A); /* C2C748: move.l  D3, D0 */
+    FA18_BCC(0xC2C74A, 0x6C02, 0xC2C74C, 0xC2C74E, L_C2C74E); /* C2C74A: bge     $c2c74e */
+L_C2C74C:
+    FA18_CHECK(0xC2C74C);
+    FA18_OP(0xC2C74C, 0x4480, 0xC2C74E); /* C2C74C: neg.l   D0 */
+L_C2C74E:
+    FA18_CHECK(0xC2C74E);
+    FA18_OP(0xC2C74E, 0xB880, 0xC2C750); /* C2C74E: cmp.l   D0, D4 */
+    FA18_BCC(0xC2C750, 0x6E0A, 0xC2C752, 0xC2C75C, L_C2C75C); /* C2C750: bgt     $c2c75c */
+L_C2C752:
+    FA18_CHECK(0xC2C752);
+    FA18_OP(0xC2C752, 0x0029, 0xC2C758); /* C2C752: ori.b   #$8, ($64,A1) */
+    FA18_OP(0xC2C758, 0x2403, 0xC2C75A); /* C2C758: move.l  D3, D2 */
+    FA18_JUMP(0xC2C75A, 0x6038, 0xC2C794, L_C2C794); /* C2C75A: bra     $c2c794 */
+L_C2C75C:
+    FA18_CHECK(0xC2C75C);
+    FA18_OP(0xC2C75C, 0x0229, 0xC2C762); /* C2C75C: andi.b  #$f7, ($64,A1) */
+    FA18_OP(0xC2C762, 0x4A82, 0xC2C764); /* C2C762: tst.l   D2 */
+    FA18_JUMP(0xC2C764, 0x602E, 0xC2C794, L_C2C794); /* C2C764: bra     $c2c794 */
+L_C2C794:
+    FA18_CHECK(0xC2C794);
+    FA18_OP(0xC2C794, 0x2602, 0xC2C796); /* C2C794: move.l  D2, D3 */
+    FA18_BCC(0xC2C796, 0x6C1E, 0xC2C798, 0xC2C7B6, L_C2C7B6); /* C2C796: bge     $c2c7b6 */
+L_C2C798:
+    FA18_CHECK(0xC2C798);
+    FA18_OP(0xC2C798, 0x0229, 0xC2C79E); /* C2C798: andi.b  #$fe, ($64,A1) */
+    FA18_OP(0xC2C79E, 0x0829, 0xC2C7A4); /* C2C79E: btst    #$3, ($64,A1) */
+    FA18_BCC(0xC2C7A4, 0x6706, 0xC2C7A6, 0xC2C7AC, L_C2C7AC); /* C2C7A4: beq     $c2c7ac */
+L_C2C7A6:
+    FA18_CHECK(0xC2C7A6);
+    FA18_OP(0xC2C7A6, 0xB4AE, 0xC2C7AA); /* C2C7A6: cmp.l   (-$14,A6), D2 */
+    FA18_JUMP(0xC2C7AA, 0x6004, 0xC2C7B0, L_C2C7B0); /* C2C7AA: bra     $c2c7b0 */
+L_C2C7AC:
+    FA18_CHECK(0xC2C7AC);
+    FA18_OP(0xC2C7AC, 0xB4AE, 0xC2C7B0); /* C2C7AC: cmp.l   (-$10,A6), D2 */
+L_C2C7B0:
+    FA18_CHECK(0xC2C7B0);
+    FA18_BCC(0xC2C7B0, 0x6C00, 0xC2C7B4, 0xC2CBBE, L_C2CBBE); /* C2C7B0: bge     $c2cbbe */
+L_C2C7B4:
+    FA18_CHECK(0xC2C7B4);
+    FA18_JUMP(0xC2C7B4, 0x601C, 0xC2C7D2, L_C2C7D2); /* C2C7B4: bra     $c2c7d2 */
+L_C2C7B6:
+    FA18_CHECK(0xC2C7B6);
+    FA18_OP(0xC2C7B6, 0x0029, 0xC2C7BC); /* C2C7B6: ori.b   #$1, ($64,A1) */
+    FA18_OP(0xC2C7BC, 0x0829, 0xC2C7C2); /* C2C7BC: btst    #$3, ($64,A1) */
+    FA18_BCC(0xC2C7C2, 0x6706, 0xC2C7C4, 0xC2C7CA, L_C2C7CA); /* C2C7C2: beq     $c2c7ca */
+L_C2C7C4:
+    FA18_CHECK(0xC2C7C4);
+    FA18_OP(0xC2C7C4, 0xB4AE, 0xC2C7C8); /* C2C7C4: cmp.l   (-$4,A6), D2 */
+    FA18_JUMP(0xC2C7C8, 0x6004, 0xC2C7CE, L_C2C7CE); /* C2C7C8: bra     $c2c7ce */
+L_C2C7CA:
+    FA18_CHECK(0xC2C7CA);
+    FA18_OP(0xC2C7CA, 0xB4AE, 0xC2C7CE); /* C2C7CA: cmp.l   (-$8,A6), D2 */
+L_C2C7CE:
+    FA18_CHECK(0xC2C7CE);
+    FA18_BCC(0xC2C7CE, 0x6F00, 0xC2C7D2, 0xC2CBBE, L_C2CBBE); /* C2C7CE: ble     $c2cbbe */
+L_C2C7D2:
+    FA18_CHECK(0xC2C7D2);
+    FA18_OP(0xC2C7D2, 0x1029, 0xC2C7D6); /* C2C7D2: move.b  ($64,A1), D0 */
+    FA18_OP(0xC2C7D6, 0x0200, 0xC2C7DA); /* C2C7D6: andi.b  #$8, D0 */
+    FA18_BCC(0xC2C7DA, 0x6600, 0xC2C7DE, 0xC2CAB2, L_C2CAB2); /* C2C7DA: bne     $c2cab2 */
+L_C2C7DE:
+    FA18_CHECK(0xC2C7DE);
+    FA18_OP(0xC2C7DE, 0x2602, 0xC2C7E0); /* C2C7DE: move.l  D2, D3 */
+    FA18_BCC(0xC2C7E0, 0x6C02, 0xC2C7E2, 0xC2C7E4, L_C2C7E4); /* C2C7E0: bge     $c2c7e4 */
+L_C2C7E2:
+    FA18_CHECK(0xC2C7E2);
+    FA18_OP(0xC2C7E2, 0x4483, 0xC2C7E4); /* C2C7E2: neg.l   D3 */
+L_C2C7E4:
+    FA18_CHECK(0xC2C7E4);
+    FA18_OP(0xC2C7E4, 0x1029, 0xC2C7E8); /* C2C7E4: move.b  ($64,A1), D0 */
+    FA18_OP(0xC2C7E8, 0x0200, 0xC2C7EC); /* C2C7E8: andi.b  #$2, D0 */
+    FA18_BCC(0xC2C7EC, 0x6708, 0xC2C7EE, 0xC2C7F6, L_C2C7F6); /* C2C7EC: beq     $c2c7f6 */
+L_C2C7EE:
+    FA18_CHECK(0xC2C7EE);
+    FA18_OP(0xC2C7EE, 0xB6AE, 0xC2C7F2); /* C2C7EE: cmp.l   (-$c,A6), D3 */
+    FA18_BCC(0xC2C7F2, 0x6D00, 0xC2C7F6, 0xC2CC26, L_C2CC26); /* C2C7F2: blt     $c2cc26 */
+L_C2C7F6:
+    FA18_CHECK(0xC2C7F6);
+    FA18_OP(0xC2C7F6, 0xB6AE, 0xC2C7FA); /* C2C7F6: cmp.l   (-$20,A6), D3 */
+    FA18_BCC(0xC2C7FA, 0x6C06, 0xC2C7FC, 0xC2C802, L_C2C802); /* C2C7FA: bge     $c2c802 */
+L_C2C7FC:
+    FA18_CHECK(0xC2C7FC);
+    FA18_OP(0xC2C7FC, 0x0029, 0xC2C802); /* C2C7FC: ori.b   #$80, ($64,A1) */
+L_C2C802:
+    FA18_CHECK(0xC2C802);
+    FA18_OP(0xC2C802, 0xB6AE, 0xC2C806); /* C2C802: cmp.l   (-$1c,A6), D3 */
+    FA18_BCC(0xC2C806, 0x6D08, 0xC2C808, 0xC2C810, L_C2C810); /* C2C806: blt     $c2c810 */
+L_C2C808:
+    FA18_CHECK(0xC2C808);
+    FA18_OP(0xC2C808, 0x0229, 0xC2C80E); /* C2C808: andi.b  #$df, ($64,A1) */
+    FA18_JUMP(0xC2C80E, 0x601E, 0xC2C82E, L_C2C82E); /* C2C80E: bra     $c2c82e */
+L_C2C810:
+    FA18_CHECK(0xC2C810);
+    FA18_OP(0xC2C810, 0x3029, 0xC2C814); /* C2C810: move.w  ($96,A1), D0 */
+    FA18_OP(0xC2C814, 0x3229, 0xC2C818); /* C2C814: move.w  ($9c,A1), D1 */
+    FA18_OP(0xC2C818, 0x3829, 0xC2C81C); /* C2C818: move.w  ($a2,A1), D4 */
+    FA18_OP(0xC2C81C, 0xC1C5, 0xC2C81E); /* C2C81C: muls.w  D5, D0 */
+    FA18_OP(0xC2C81E, 0xC3C6, 0xC2C820); /* C2C81E: muls.w  D6, D1 */
+    FA18_OP(0xC2C820, 0xC9C7, 0xC2C822); /* C2C820: muls.w  D7, D4 */
+    FA18_OP(0xC2C822, 0xD880, 0xC2C824); /* C2C822: add.l   D0, D4 */
+    FA18_OP(0xC2C824, 0xD881, 0xC2C826); /* C2C824: add.l   D1, D4 */
+    FA18_BCC(0xC2C826, 0x6DE0, 0xC2C828, 0xC2C808, L_C2C808); /* C2C826: blt     $c2c808 */
+L_C2C828:
+    FA18_CHECK(0xC2C828);
+    FA18_OP(0xC2C828, 0x0029, 0xC2C82E); /* C2C828: ori.b   #$20, ($64,A1) */
+L_C2C82E:
+    FA18_CHECK(0xC2C82E);
+    FA18_OP(0xC2C82E, 0x0229, 0xC2C834); /* C2C82E: andi.b  #$fd, ($64,A1) */
+    FA18_OP(0xC2C834, 0x4843, 0xC2C836); /* C2C834: swap    D3 */
+    FA18_OP(0xC2C836, 0x0C43, 0xC2C83A); /* C2C836: cmpi.w  #$a, D3 */
+    FA18_BCC(0xC2C83A, 0x6F02, 0xC2C83C, 0xC2C83E, L_C2C83E); /* C2C83A: ble     $c2c83e */
+L_C2C83C:
+    FA18_CHECK(0xC2C83C);
+    FA18_OP(0xC2C83C, 0x760A, 0xC2C83E); /* C2C83C: moveq   #$a, D3 */
+L_C2C83E:
+    FA18_CHECK(0xC2C83E);
+    FA18_OP(0xC2C83E, 0x1029, 0xC2C842); /* C2C83E: move.b  ($62,A1), D0 */
+    FA18_OP(0xC2C842, 0x0200, 0xC2C846); /* C2C842: andi.b  #$f0, D0 */
+    FA18_OP(0xC2C846, 0x0C00, 0xC2C84A); /* C2C846: cmpi.b  #$10, D0 */
+    FA18_BCC(0xC2C84A, 0x6760, 0xC2C84C, 0xC2C8AC, L_C2C8AC); /* C2C84A: beq     $c2c8ac */
+L_C2C84C:
+    FA18_CHECK(0xC2C84C);
+    FA18_OP(0xC2C84C, 0x41F9, 0xC2C852); /* C2C84C: lea     $c2cc2a.l, A0 */
+    FA18_OP(0xC2C852, 0xD643, 0xC2C854); /* C2C852: add.w   D3, D3 */
+    FA18_OP(0xC2C854, 0x3630, 0xC2C858); /* C2C854: move.w  (A0,D3.w), D3 */
+    FA18_OP(0xC2C858, 0x4A82, 0xC2C85A); /* C2C858: tst.l   D2 */
+    FA18_BCC(0xC2C85A, 0x6D02, 0xC2C85C, 0xC2C85E, L_C2C85E); /* C2C85A: blt     $c2c85e */
+L_C2C85C:
+    FA18_CHECK(0xC2C85C);
+    FA18_OP(0xC2C85C, 0x4443, 0xC2C85E); /* C2C85C: neg.w   D3 */
+L_C2C85E:
+    FA18_CHECK(0xC2C85E);
+    FA18_OP(0xC2C85E, 0x4A43, 0xC2C860); /* C2C85E: tst.w   D3 */
+    FA18_BCC(0xC2C860, 0x671A, 0xC2C862, 0xC2C87C, L_C2C87C); /* C2C860: beq     $c2c87c */
+L_C2C862:
+    FA18_CHECK(0xC2C862);
+    FA18_BCC(0xC2C862, 0x6D0C, 0xC2C864, 0xC2C870, L_C2C870); /* C2C862: blt     $c2c870 */
+L_C2C864:
+    FA18_CHECK(0xC2C864);
+    FA18_OP(0xC2C864, 0xB669, 0xC2C868); /* C2C864: cmp.w   ($58,A1), D3 */
+    FA18_BCC(0xC2C868, 0x6F12, 0xC2C86A, 0xC2C87C, L_C2C87C); /* C2C868: ble     $c2c87c */
+L_C2C86A:
+    FA18_CHECK(0xC2C86A);
+    FA18_OP(0xC2C86A, 0x143C, 0xC2C86E); /* C2C86A: move.b  #$80, D2 */
+    FA18_JUMP(0xC2C86E, 0x600E, 0xC2C87E, L_C2C87E); /* C2C86E: bra     $c2c87e */
+L_C2C870:
+    FA18_CHECK(0xC2C870);
+    FA18_OP(0xC2C870, 0xB669, 0xC2C874); /* C2C870: cmp.w   ($58,A1), D3 */
+    FA18_BCC(0xC2C874, 0x6C06, 0xC2C876, 0xC2C87C, L_C2C87C); /* C2C874: bge     $c2c87c */
+L_C2C876:
+    FA18_CHECK(0xC2C876);
+    FA18_OP(0xC2C876, 0x143C, 0xC2C87A); /* C2C876: move.b  #$40, D2 */
+    FA18_JUMP(0xC2C87A, 0x6002, 0xC2C87E, L_C2C87E); /* C2C87A: bra     $c2c87e */
+L_C2C87C:
+    FA18_CHECK(0xC2C87C);
+    FA18_OP(0xC2C87C, 0x7400, 0xC2C87E); /* C2C87C: moveq   #$0, D2 */
+L_C2C87E:
+    FA18_CHECK(0xC2C87E);
+    FA18_OP(0xC2C87E, 0x1229, 0xC2C882); /* C2C87E: move.b  ($65,A1), D1 */
+    FA18_OP(0xC2C882, 0x0201, 0xC2C886); /* C2C882: andi.b  #$3, D1 */
+    FA18_OP(0xC2C886, 0x8202, 0xC2C888); /* C2C886: or.b    D2, D1 */
+    FA18_OP(0xC2C888, 0x1341, 0xC2C88C); /* C2C888: move.b  D1, ($65,A1) */
+    FA18_OP(0xC2C88C, 0x1029, 0xC2C890); /* C2C88C: move.b  ($62,A1), D0 */
+    FA18_OP(0xC2C890, 0x0200, 0xC2C894); /* C2C890: andi.b  #$f0, D0 */
+    FA18_OP(0xC2C894, 0x0C00, 0xC2C898); /* C2C894: cmpi.b  #$10, D0 */
+    FA18_BCC(0xC2C898, 0x6700, 0xC2C89C, 0xC2CC26, L_C2CC26); /* C2C898: beq     $c2cc26 */
+L_C2C89C:
+    FA18_CHECK(0xC2C89C);
+    FA18_OP(0xC2C89C, 0x3343, 0xC2C8A0); /* C2C89C: move.w  D3, ($52,A1) */
+    FA18_OP(0xC2C8A0, 0x4269, 0xC2C8A4); /* C2C8A0: clr.w   ($54,A1) */
+    FA18_OP(0xC2C8A4, 0x4269, 0xC2C8A8); /* C2C8A4: clr.w   ($50,A1) */
+    FA18_JUMP(0xC2C8A8, 0x6000, 0xC2CC26, L_C2CC26); /* C2C8A8: bra     $c2cc26 */
+L_C2C8AC:
+    FA18_CHECK(0xC2C8AC);
+    FA18_OP(0xC2C8AC, 0x0C29, 0xC2C8B2); /* C2C8AC: cmpi.b  #$14, ($62,A1) */
+    FA18_BCC(0xC2C8B2, 0x6710, 0xC2C8B4, 0xC2C8C4, L_C2C8C4); /* C2C8B2: beq     $c2c8c4 */
+L_C2C8B4:
+    FA18_CHECK(0xC2C8B4);
+    FA18_OP(0xC2C8B4, 0x0C29, 0xC2C8BA); /* C2C8B4: cmpi.b  #$8, ($5,A1) */
+    FA18_BCC(0xC2C8BA, 0x6708, 0xC2C8BC, 0xC2C8C4, L_C2C8C4); /* C2C8BA: beq     $c2c8c4 */
+L_C2C8BC:
+    FA18_CHECK(0xC2C8BC);
+    FA18_OP(0xC2C8BC, 0x41F9, 0xC2C8C2); /* C2C8BC: lea     $c2cc56.l, A0 */
+    FA18_JUMP(0xC2C8C2, 0x6006, 0xC2C8CA, L_C2C8CA); /* C2C8C2: bra     $c2c8ca */
+L_C2C8C4:
+    FA18_CHECK(0xC2C8C4);
+    FA18_OP(0xC2C8C4, 0x41F9, 0xC2C8CA); /* C2C8C4: lea     $c2cc82.l, A0 */
+L_C2C8CA:
+    FA18_CHECK(0xC2C8CA);
+    FA18_OP(0xC2C8CA, 0xD643, 0xC2C8CC); /* C2C8CA: add.w   D3, D3 */
+    FA18_OP(0xC2C8CC, 0x3630, 0xC2C8D0); /* C2C8CC: move.w  (A0,D3.w), D3 */
+    FA18_OP(0xC2C8D0, 0x0C69, 0xC2C8D6); /* C2C8D0: cmpi.w  #$1800, ($6c,A1) */
+    FA18_BCC(0xC2C8D6, 0x6D02, 0xC2C8D8, 0xC2C8DA, L_C2C8DA); /* C2C8D6: blt     $c2c8da */
+L_C2C8D8:
+    FA18_CHECK(0xC2C8D8);
+    FA18_OP(0xC2C8D8, 0xE243, 0xC2C8DA); /* C2C8D8: asr.w   #1, D3 */
+L_C2C8DA:
+    FA18_CHECK(0xC2C8DA);
+    FA18_OP(0xC2C8DA, 0x2002, 0xC2C8DC); /* C2C8DA: move.l  D2, D0 */
+    FA18_BCC(0xC2C8DC, 0x6C04, 0xC2C8DE, 0xC2C8E2, L_C2C8E2); /* C2C8DC: bge     $c2c8e2 */
+L_C2C8DE:
+    FA18_CHECK(0xC2C8DE);
+    FA18_OP(0xC2C8DE, 0x4443, 0xC2C8E0); /* C2C8DE: neg.w   D3 */
+    FA18_OP(0xC2C8E0, 0x4480, 0xC2C8E2); /* C2C8E0: neg.l   D0 */
+L_C2C8E2:
+    FA18_CHECK(0xC2C8E2);
+    FA18_OP(0xC2C8E2, 0x3829, 0xC2C8E6); /* C2C8E2: move.w  ($6a,A1), D4 */
+    FA18_OP(0xC2C8E6, 0x0C44, 0xC2C8EA); /* C2C8E6: cmpi.w  #$1770, D4 */
+    FA18_BCC(0xC2C8EA, 0x6D08, 0xC2C8EC, 0xC2C8F4, L_C2C8F4); /* C2C8EA: blt     $c2c8f4 */
+L_C2C8EC:
+    FA18_CHECK(0xC2C8EC);
+    FA18_OP(0xC2C8EC, 0x0C44, 0xC2C8F0); /* C2C8EC: cmpi.w  #$5910, D4 */
+    FA18_BCC(0xC2C8F0, 0x6F00, 0xC2C8F4, 0xC2C85E, L_C2C85E); /* C2C8F0: ble     $c2c85e */
+L_C2C8F4:
+    FA18_CHECK(0xC2C8F4);
+    FA18_OP(0xC2C8F4, 0x3229, 0xC2C8F8); /* C2C8F4: move.w  ($66,A1), D1 */
+    FA18_OP(0xC2C8F8, 0x0C41, 0xC2C8FC); /* C2C8F8: cmpi.w  #$6a40, D1 */
+    FA18_BCC(0xC2C8FC, 0x6E08, 0xC2C8FE, 0xC2C906, L_C2C906); /* C2C8FC: bgt     $c2c906 */
+L_C2C8FE:
+    FA18_CHECK(0xC2C8FE);
+    FA18_OP(0xC2C8FE, 0x0C41, 0xC2C902); /* C2C8FE: cmpi.w  #$640, D1 */
+    FA18_BCC(0xC2C902, 0x6E00, 0xC2C906, 0xC2C85E, L_C2C85E); /* C2C902: bgt     $c2c85e */
+L_C2C906:
+    FA18_CHECK(0xC2C906);
+    FA18_OP(0xC2C906, 0xCBE9, 0xC2C90A); /* C2C906: muls.w  ($96,A1), D5 */
+    FA18_OP(0xC2C90A, 0xCDE9, 0xC2C90E); /* C2C90A: muls.w  ($9c,A1), D6 */
+    FA18_OP(0xC2C90E, 0xCFE9, 0xC2C912); /* C2C90E: muls.w  ($a2,A1), D7 */
+    FA18_OP(0xC2C912, 0xDE85, 0xC2C914); /* C2C912: add.l   D5, D7 */
+    FA18_OP(0xC2C914, 0xDE86, 0xC2C916); /* C2C914: add.l   D6, D7 */
+    FA18_BCC(0xC2C916, 0x6C0E, 0xC2C918, 0xC2C926, L_C2C926); /* C2C916: bge     $c2c926 */
+L_C2C918:
+    FA18_CHECK(0xC2C918);
+    FA18_OP(0xC2C918, 0x223C, 0xC2C91E); /* C2C918: move.l  #$300000, D1 */
+    FA18_OP(0xC2C91E, 0x2E01, 0xC2C920); /* C2C91E: move.l  D1, D7 */
+    FA18_OP(0xC2C920, 0x9280, 0xC2C922); /* C2C920: sub.l   D0, D1 */
+    FA18_OP(0xC2C922, 0xD287, 0xC2C924); /* C2C922: add.l   D7, D1 */
+    FA18_OP(0xC2C924, 0x2001, 0xC2C926); /* C2C924: move.l  D1, D0 */
+L_C2C926:
+    FA18_CHECK(0xC2C926);
+    FA18_OP(0xC2C926, 0xE080, 0xC2C928); /* C2C926: asr.l   #8, D0 */
+    FA18_OP(0xC2C928, 0x0C40, 0xC2C92C); /* C2C928: cmpi.w  #$3000, D0 */
+    FA18_BCC(0xC2C92C, 0x6F06, 0xC2C92E, 0xC2C934, L_C2C934); /* C2C92C: ble     $c2c934 */
+L_C2C92E:
+    FA18_CHECK(0xC2C92E);
+    FA18_OP(0xC2C92E, 0x303C, 0xC2C932); /* C2C92E: move.w  #$3000, D0 */
+    FA18_JUMP(0xC2C932, 0x601C, 0xC2C950, L_C2C950); /* C2C932: bra     $c2c950 */
+L_C2C934:
+    FA18_CHECK(0xC2C934);
+    FA18_OP(0xC2C934, 0x0C40, 0xC2C938); /* C2C934: cmpi.w  #$20, D0 */
+    FA18_BCC(0xC2C938, 0x6E0C, 0xC2C93A, 0xC2C946, L_C2C946); /* C2C938: bgt     $c2c946 */
+L_C2C93A:
+    FA18_CHECK(0xC2C93A);
+    FA18_OP(0xC2C93A, 0x0C40, 0xC2C93E); /* C2C93A: cmpi.w  #$1000, D0 */
+    FA18_BCC(0xC2C93E, 0x6C10, 0xC2C940, 0xC2C950, L_C2C950); /* C2C93E: bge     $c2c950 */
+L_C2C940:
+    FA18_CHECK(0xC2C940);
+    FA18_OP(0xC2C940, 0x303C, 0xC2C944); /* C2C940: move.w  #$1000, D0 */
+    FA18_JUMP(0xC2C944, 0x600A, 0xC2C950, L_C2C950); /* C2C944: bra     $c2c950 */
+L_C2C946:
+    FA18_CHECK(0xC2C946);
+    FA18_OP(0xC2C946, 0x0C40, 0xC2C94A); /* C2C946: cmpi.w  #$1800, D0 */
+    FA18_BCC(0xC2C94A, 0x6C04, 0xC2C94C, 0xC2C950, L_C2C950); /* C2C94A: bge     $c2c950 */
+L_C2C94C:
+    FA18_CHECK(0xC2C94C);
+    FA18_OP(0xC2C94C, 0x303C, 0xC2C950); /* C2C94C: move.w  #$1800, D0 */
+L_C2C950:
+    FA18_CHECK(0xC2C950);
+    FA18_OP(0xC2C950, 0x0C29, 0xC2C956); /* C2C950: cmpi.b  #$3, ($7a,A1) */
+    FA18_BCC(0xC2C956, 0x6708, 0xC2C958, 0xC2C960, L_C2C960); /* C2C956: beq     $c2c960 */
+L_C2C958:
+    FA18_CHECK(0xC2C958);
+    FA18_OP(0xC2C958, 0x0C29, 0xC2C95E); /* C2C958: cmpi.b  #$4, ($7a,A1) */
+    FA18_BCC(0xC2C95E, 0x666A, 0xC2C960, 0xC2C9CA, L_C2C9CA); /* C2C95E: bne     $c2c9ca */
+L_C2C960:
+    FA18_CHECK(0xC2C960);
+    FA18_OP(0xC2C960, 0x4A43, 0xC2C962); /* C2C960: tst.w   D3 */
+    FA18_BCC(0xC2C962, 0x6C32, 0xC2C964, 0xC2C996, L_C2C996); /* C2C962: bge     $c2c996 */
+L_C2C964:
+    FA18_CHECK(0xC2C964);
+    FA18_OP(0xC2C964, 0x1429, 0xC2C968); /* C2C964: move.b  ($64,A1), D2 */
+    FA18_OP(0xC2C968, 0x0202, 0xC2C96C); /* C2C968: andi.b  #$60, D2 */
+    FA18_OP(0xC2C96C, 0x0C02, 0xC2C970); /* C2C96C: cmpi.b  #$60, D2 */
+    FA18_BCC(0xC2C970, 0x660C, 0xC2C972, 0xC2C97E, L_C2C97E); /* C2C970: bne     $c2c97e */
+L_C2C972:
+    FA18_CHECK(0xC2C972);
+    FA18_OP(0xC2C972, 0x0C44, 0xC2C976); /* C2C972: cmpi.w  #$3840, D4 */
+    FA18_BCC(0xC2C976, 0x6D06, 0xC2C978, 0xC2C97E, L_C2C97E); /* C2C976: blt     $c2c97e */
+L_C2C978:
+    FA18_CHECK(0xC2C978);
+    FA18_OP(0xC2C978, 0x0C44, 0xC2C97C); /* C2C978: cmpi.w  #$6d60, D4 */
+    FA18_BCC(0xC2C97C, 0x6D12, 0xC2C97E, 0xC2C990, L_C2C990); /* C2C97C: blt     $c2c990 */
+L_C2C97E:
+    FA18_CHECK(0xC2C97E);
+    FA18_OP(0xC2C97E, 0x0C44, 0xC2C982); /* C2C97E: cmpi.w  #$3840, D4 */
+    FA18_BCC(0xC2C982, 0x6F46, 0xC2C984, 0xC2C9CA, L_C2C9CA); /* C2C982: ble     $c2c9ca */
+L_C2C984:
+    FA18_CHECK(0xC2C984);
+    FA18_OP(0xC2C984, 0x0C44, 0xC2C988); /* C2C984: cmpi.w  #$68b0, D4 */
+    FA18_BCC(0xC2C988, 0x6E40, 0xC2C98A, 0xC2C9CA, L_C2C9CA); /* C2C988: bgt     $c2c9ca */
+L_C2C98A:
+    FA18_CHECK(0xC2C98A);
+    FA18_OP(0xC2C98A, 0x0C44, 0xC2C98E); /* C2C98A: cmpi.w  #$6720, D4 */
+    FA18_BCC(0xC2C98E, 0x6E38, 0xC2C990, 0xC2C9C8, L_C2C9C8); /* C2C98E: bgt     $c2c9c8 */
+L_C2C990:
+    FA18_CHECK(0xC2C990);
+    FA18_OP(0xC2C990, 0x363C, 0xC2C994); /* C2C990: move.w  #$f0, D3 */
+    FA18_JUMP(0xC2C994, 0x6034, 0xC2C9CA, L_C2C9CA); /* C2C994: bra     $c2c9ca */
+L_C2C996:
+    FA18_CHECK(0xC2C996);
+    FA18_OP(0xC2C996, 0x1429, 0xC2C99A); /* C2C996: move.b  ($64,A1), D2 */
+    FA18_OP(0xC2C99A, 0x0202, 0xC2C99E); /* C2C99A: andi.b  #$60, D2 */
+    FA18_OP(0xC2C99E, 0x0C02, 0xC2C9A2); /* C2C99E: cmpi.b  #$60, D2 */
+    FA18_BCC(0xC2C9A2, 0x660C, 0xC2C9A4, 0xC2C9B0, L_C2C9B0); /* C2C9A2: bne     $c2c9b0 */
+L_C2C9A4:
+    FA18_CHECK(0xC2C9A4);
+    FA18_OP(0xC2C9A4, 0x0C44, 0xC2C9A8); /* C2C9A4: cmpi.w  #$3840, D4 */
+    FA18_BCC(0xC2C9A8, 0x6E06, 0xC2C9AA, 0xC2C9B0, L_C2C9B0); /* C2C9A8: bgt     $c2c9b0 */
+L_C2C9AA:
+    FA18_CHECK(0xC2C9AA);
+    FA18_OP(0xC2C9AA, 0x0C44, 0xC2C9AE); /* C2C9AA: cmpi.w  #$320, D4 */
+    FA18_BCC(0xC2C9AE, 0x6E12, 0xC2C9B0, 0xC2C9C2, L_C2C9C2); /* C2C9AE: bgt     $c2c9c2 */
+L_C2C9B0:
+    FA18_CHECK(0xC2C9B0);
+    FA18_OP(0xC2C9B0, 0x0C44, 0xC2C9B4); /* C2C9B0: cmpi.w  #$3840, D4 */
+    FA18_BCC(0xC2C9B4, 0x6C14, 0xC2C9B6, 0xC2C9CA, L_C2C9CA); /* C2C9B4: bge     $c2c9ca */
+L_C2C9B6:
+    FA18_CHECK(0xC2C9B6);
+    FA18_OP(0xC2C9B6, 0x0C44, 0xC2C9BA); /* C2C9B6: cmpi.w  #$7d0, D4 */
+    FA18_BCC(0xC2C9BA, 0x6D0E, 0xC2C9BC, 0xC2C9CA, L_C2C9CA); /* C2C9BA: blt     $c2c9ca */
+L_C2C9BC:
+    FA18_CHECK(0xC2C9BC);
+    FA18_OP(0xC2C9BC, 0x0C44, 0xC2C9C0); /* C2C9BC: cmpi.w  #$960, D4 */
+    FA18_BCC(0xC2C9C0, 0x6D06, 0xC2C9C2, 0xC2C9C8, L_C2C9C8); /* C2C9C0: blt     $c2c9c8 */
+L_C2C9C2:
+    FA18_CHECK(0xC2C9C2);
+    FA18_OP(0xC2C9C2, 0x363C, 0xC2C9C6); /* C2C9C2: move.w  #$ff10, D3 */
+    FA18_JUMP(0xC2C9C6, 0x6002, 0xC2C9CA, L_C2C9CA); /* C2C9C6: bra     $c2c9ca */
+L_C2C9C8:
+    FA18_CHECK(0xC2C9C8);
+    FA18_OP(0xC2C9C8, 0x7600, 0xC2C9CA); /* C2C9C8: moveq   #$0, D3 */
+L_C2C9CA:
+    FA18_CHECK(0xC2C9CA);
+    FA18_OP(0xC2C9CA, 0x1429, 0xC2C9CE); /* C2C9CA: move.b  ($5,A1), D2 */
+    FA18_BCC(0xC2C9CE, 0x671A, 0xC2C9D0, 0xC2C9EA, L_C2C9EA); /* C2C9CE: beq     $c2c9ea */
+L_C2C9D0:
+    FA18_CHECK(0xC2C9D0);
+    FA18_OP(0xC2C9D0, 0x0C02, 0xC2C9D4); /* C2C9D0: cmpi.b  #$1, D2 */
+    FA18_BCC(0xC2C9D4, 0x6714, 0xC2C9D6, 0xC2C9EA, L_C2C9EA); /* C2C9D4: beq     $c2c9ea */
+L_C2C9D6:
+    FA18_CHECK(0xC2C9D6);
+    FA18_OP(0xC2C9D6, 0x0C02, 0xC2C9DA); /* C2C9D6: cmpi.b  #$8, D2 */
+    FA18_BCC(0xC2C9DA, 0x6600, 0xC2C9DE, 0xC2CC26, L_C2CC26); /* C2C9DA: bne     $c2cc26 */
+L_C2C9DE:
+    FA18_CHECK(0xC2C9DE);
+    FA18_OP(0xC2C9DE, 0x3429, 0xC2C9E2); /* C2C9DE: move.w  ($2,A1), D2 */
+    FA18_OP(0xC2C9E2, 0x0242, 0xC2C9E6); /* C2C9E2: andi.w  #$80, D2 */
+    FA18_BCC(0xC2C9E6, 0x6600, 0xC2C9EA, 0xC2CC26, L_C2CC26); /* C2C9E6: bne     $c2cc26 */
+L_C2C9EA:
+    FA18_CHECK(0xC2C9EA);
+    FA18_CALL(0xC2C9EA, 0x6100, 0xC2C9EE, 417, 0); /* C2C9EA: bsr     $c2ca26 */
+L_C2C9EE:
+    FA18_CHECK(0xC2C9EE);
+    FA18_OP(0xC2C9EE, 0x1229, 0xC2C9F2); /* C2C9EE: move.b  ($62,A1), D1 */
+    FA18_OP(0xC2C9F2, 0x0201, 0xC2C9F6); /* C2C9F2: andi.b  #$f0, D1 */
+    FA18_OP(0xC2C9F6, 0x0C01, 0xC2C9FA); /* C2C9F6: cmpi.b  #$10, D1 */
+    FA18_BCC(0xC2C9FA, 0x670C, 0xC2C9FC, 0xC2CA08, L_C2CA08); /* C2C9FA: beq     $c2ca08 */
+L_C2C9FC:
+    FA18_CHECK(0xC2C9FC);
+    FA18_OP(0xC2C9FC, 0x3343, 0xC2CA00); /* C2C9FC: move.w  D3, ($54,A1) */
+    FA18_OP(0xC2CA00, 0x4269, 0xC2CA04); /* C2CA00: clr.w   ($52,A1) */
+    FA18_OP(0xC2CA04, 0x4269, 0xC2CA08); /* C2CA04: clr.w   ($50,A1) */
+L_C2CA08:
+    FA18_CHECK(0xC2CA08);
+    FA18_OP(0xC2CA08, 0x0C29, 0xC2CA0E); /* C2CA08: cmpi.b  #$8, ($5,A1) */
+    FA18_BCC(0xC2CA0E, 0x660E, 0xC2CA10, 0xC2CA1E, L_C2CA1E); /* C2CA0E: bne     $c2ca1e */
+L_C2CA10:
+    FA18_CHECK(0xC2CA10);
+    FA18_OP(0xC2CA10, 0xE240, 0xC2CA12); /* C2CA10: asr.w   #1, D0 */
+    FA18_JUMP(0xC2CA12, 0x600A, 0xC2CA1E, L_C2CA1E); /* C2CA12: bra     $c2ca1e */
+L_C2CA1E:
+    FA18_CHECK(0xC2CA1E);
+    FA18_OP(0xC2CA1E, 0x3340, 0xC2CA22); /* C2CA1E: move.w  D0, ($7e,A1) */
+    FA18_JUMP(0xC2CA22, 0x6000, 0xC2CC26, L_C2CC26); /* C2CA22: bra     $c2cc26 */
+L_C2CAB2:
+    FA18_CHECK(0xC2CAB2);
+    FA18_OP(0xC2CAB2, 0x2602, 0xC2CAB4); /* C2CAB2: move.l  D2, D3 */
+    FA18_BCC(0xC2CAB4, 0x6C02, 0xC2CAB6, 0xC2CAB8, L_C2CAB8); /* C2CAB4: bge     $c2cab8 */
+L_C2CAB6:
+    FA18_CHECK(0xC2CAB6);
+    FA18_OP(0xC2CAB6, 0x4483, 0xC2CAB8); /* C2CAB6: neg.l   D3 */
+L_C2CAB8:
+    FA18_CHECK(0xC2CAB8);
+    FA18_OP(0xC2CAB8, 0x1029, 0xC2CABC); /* C2CAB8: move.b  ($64,A1), D0 */
+    FA18_OP(0xC2CABC, 0x0200, 0xC2CAC0); /* C2CABC: andi.b  #$4, D0 */
+    FA18_BCC(0xC2CAC0, 0x6708, 0xC2CAC2, 0xC2CACA, L_C2CACA); /* C2CAC0: beq     $c2caca */
+L_C2CAC2:
+    FA18_CHECK(0xC2CAC2);
+    FA18_OP(0xC2CAC2, 0xB6AE, 0xC2CAC6); /* C2CAC2: cmp.l   (-$c,A6), D3 */
+    FA18_BCC(0xC2CAC6, 0x6F00, 0xC2CACA, 0xC2CC26, L_C2CC26); /* C2CAC6: ble     $c2cc26 */
+L_C2CACA:
+    FA18_CHECK(0xC2CACA);
+    FA18_OP(0xC2CACA, 0xB6AE, 0xC2CACE); /* C2CACA: cmp.l   (-$1c,A6), D3 */
+    FA18_BCC(0xC2CACE, 0x6D08, 0xC2CAD0, 0xC2CAD8, L_C2CAD8); /* C2CACE: blt     $c2cad8 */
+L_C2CAD0:
+    FA18_CHECK(0xC2CAD0);
+    FA18_OP(0xC2CAD0, 0x0229, 0xC2CAD6); /* C2CAD0: andi.b  #$bf, ($64,A1) */
+    FA18_JUMP(0xC2CAD6, 0x601E, 0xC2CAF6, L_C2CAF6); /* C2CAD6: bra     $c2caf6 */
+L_C2CAD8:
+    FA18_CHECK(0xC2CAD8);
+    FA18_OP(0xC2CAD8, 0x3029, 0xC2CADC); /* C2CAD8: move.w  ($96,A1), D0 */
+    FA18_OP(0xC2CADC, 0x3229, 0xC2CAE0); /* C2CADC: move.w  ($9c,A1), D1 */
+    FA18_OP(0xC2CAE0, 0x3829, 0xC2CAE4); /* C2CAE0: move.w  ($a2,A1), D4 */
+    FA18_OP(0xC2CAE4, 0xC1C5, 0xC2CAE6); /* C2CAE4: muls.w  D5, D0 */
+    FA18_OP(0xC2CAE6, 0xC3C6, 0xC2CAE8); /* C2CAE6: muls.w  D6, D1 */
+    FA18_OP(0xC2CAE8, 0xC9C7, 0xC2CAEA); /* C2CAE8: muls.w  D7, D4 */
+    FA18_OP(0xC2CAEA, 0xD880, 0xC2CAEC); /* C2CAEA: add.l   D0, D4 */
+    FA18_OP(0xC2CAEC, 0xD881, 0xC2CAEE); /* C2CAEC: add.l   D1, D4 */
+    FA18_BCC(0xC2CAEE, 0x6DE0, 0xC2CAF0, 0xC2CAD0, L_C2CAD0); /* C2CAEE: blt     $c2cad0 */
+L_C2CAF0:
+    FA18_CHECK(0xC2CAF0);
+    FA18_OP(0xC2CAF0, 0x0029, 0xC2CAF6); /* C2CAF0: ori.b   #$40, ($64,A1) */
+L_C2CAF6:
+    FA18_CHECK(0xC2CAF6);
+    FA18_OP(0xC2CAF6, 0x0229, 0xC2CAFC); /* C2CAF6: andi.b  #$fb, ($64,A1) */
+    FA18_OP(0xC2CAFC, 0x4843, 0xC2CAFE); /* C2CAFC: swap    D3 */
+    FA18_OP(0xC2CAFE, 0x0C43, 0xC2CB02); /* C2CAFE: cmpi.w  #$a, D3 */
+    FA18_BCC(0xC2CB02, 0x6F02, 0xC2CB04, 0xC2CB06, L_C2CB06); /* C2CB02: ble     $c2cb06 */
+L_C2CB04:
+    FA18_CHECK(0xC2CB04);
+    FA18_OP(0xC2CB04, 0x760A, 0xC2CB06); /* C2CB04: moveq   #$a, D3 */
+L_C2CB06:
+    FA18_CHECK(0xC2CB06);
+    FA18_OP(0xC2CB06, 0x1029, 0xC2CB0A); /* C2CB06: move.b  ($62,A1), D0 */
+    FA18_OP(0xC2CB0A, 0x0200, 0xC2CB0E); /* C2CB0A: andi.b  #$f0, D0 */
+    FA18_OP(0xC2CB0E, 0x0C00, 0xC2CB12); /* C2CB0E: cmpi.b  #$10, D0 */
+    FA18_BCC(0xC2CB12, 0x6708, 0xC2CB14, 0xC2CB1C, L_C2CB1C); /* C2CB12: beq     $c2cb1c */
+L_C2CB14:
+    FA18_CHECK(0xC2CB14);
+    FA18_OP(0xC2CB14, 0x41F9, 0xC2CB1A); /* C2CB14: lea     $c2cc2a.l, A0 */
+    FA18_JUMP(0xC2CB1A, 0x6016, 0xC2CB32, L_C2CB32); /* C2CB1A: bra     $c2cb32 */
+L_C2CB1C:
+    FA18_CHECK(0xC2CB1C);
+    FA18_OP(0xC2CB1C, 0x0C29, 0xC2CB22); /* C2CB1C: cmpi.b  #$14, ($62,A1) */
+    FA18_BCC(0xC2CB22, 0x6708, 0xC2CB24, 0xC2CB2C, L_C2CB2C); /* C2CB22: beq     $c2cb2c */
+L_C2CB24:
+    FA18_CHECK(0xC2CB24);
+    FA18_OP(0xC2CB24, 0x41F9, 0xC2CB2A); /* C2CB24: lea     $c2cc40.l, A0 */
+    FA18_JUMP(0xC2CB2A, 0x6006, 0xC2CB32, L_C2CB32); /* C2CB2A: bra     $c2cb32 */
+L_C2CB2C:
+    FA18_CHECK(0xC2CB2C);
+    FA18_OP(0xC2CB2C, 0x41F9, 0xC2CB32); /* C2CB2C: lea     $c2cc6c.l, A0 */
+L_C2CB32:
+    FA18_CHECK(0xC2CB32);
+    FA18_OP(0xC2CB32, 0xD643, 0xC2CB34); /* C2CB32: add.w   D3, D3 */
+    FA18_OP(0xC2CB34, 0x3630, 0xC2CB38); /* C2CB34: move.w  (A0,D3.w), D3 */
+    FA18_OP(0xC2CB38, 0x4A82, 0xC2CB3A); /* C2CB38: tst.l   D2 */
+    FA18_BCC(0xC2CB3A, 0x6D02, 0xC2CB3C, 0xC2CB3E, L_C2CB3E); /* C2CB3A: blt     $c2cb3e */
+L_C2CB3C:
+    FA18_CHECK(0xC2CB3C);
+    FA18_OP(0xC2CB3C, 0x4443, 0xC2CB3E); /* C2CB3C: neg.w   D3 */
+L_C2CB3E:
+    FA18_CHECK(0xC2CB3E);
+    FA18_OP(0xC2CB3E, 0x1429, 0xC2CB42); /* C2CB3E: move.b  ($5,A1), D2 */
+    FA18_BCC(0xC2CB42, 0x671A, 0xC2CB44, 0xC2CB5E, L_C2CB5E); /* C2CB42: beq     $c2cb5e */
+L_C2CB44:
+    FA18_CHECK(0xC2CB44);
+    FA18_OP(0xC2CB44, 0x0C02, 0xC2CB48); /* C2CB44: cmpi.b  #$1, D2 */
+    FA18_BCC(0xC2CB48, 0x6714, 0xC2CB4A, 0xC2CB5E, L_C2CB5E); /* C2CB48: beq     $c2cb5e */
+L_C2CB4A:
+    FA18_CHECK(0xC2CB4A);
+    FA18_OP(0xC2CB4A, 0x0C02, 0xC2CB4E); /* C2CB4A: cmpi.b  #$8, D2 */
+    FA18_BCC(0xC2CB4E, 0x6600, 0xC2CB52, 0xC2CC26, L_C2CC26); /* C2CB4E: bne     $c2cc26 */
+L_C2CB52:
+    FA18_CHECK(0xC2CB52);
+    FA18_OP(0xC2CB52, 0x3429, 0xC2CB56); /* C2CB52: move.w  ($2,A1), D2 */
+    FA18_OP(0xC2CB56, 0x0242, 0xC2CB5A); /* C2CB56: andi.w  #$80, D2 */
+    FA18_BCC(0xC2CB5A, 0x6600, 0xC2CB5E, 0xC2CC26, L_C2CC26); /* C2CB5A: bne     $c2cc26 */
+L_C2CB5E:
+    FA18_CHECK(0xC2CB5E);
+    FA18_CALL(0xC2CB5E, 0x6100, 0xC2CB62, 420, 0); /* C2CB5E: bsr     $c2cb86 */
+L_C2CB62:
+    FA18_CHECK(0xC2CB62);
+    FA18_OP(0xC2CB62, 0x1229, 0xC2CB66); /* C2CB62: move.b  ($62,A1), D1 */
+    FA18_OP(0xC2CB66, 0x0201, 0xC2CB6A); /* C2CB66: andi.b  #$f0, D1 */
+    FA18_OP(0xC2CB6A, 0x0C01, 0xC2CB6E); /* C2CB6A: cmpi.b  #$10, D1 */
+    FA18_BCC(0xC2CB6E, 0x6700, 0xC2CB72, 0xC2CC26, L_C2CC26); /* C2CB6E: beq     $c2cc26 */
+L_C2CB72:
+    FA18_CHECK(0xC2CB72);
+    FA18_OP(0xC2CB72, 0x3343, 0xC2CB76); /* C2CB72: move.w  D3, ($50,A1) */
+    FA18_OP(0xC2CB76, 0x4269, 0xC2CB7A); /* C2CB76: clr.w   ($52,A1) */
+    FA18_OP(0xC2CB7A, 0x4269, 0xC2CB7E); /* C2CB7A: clr.w   ($54,A1) */
+    FA18_JUMP(0xC2CB7E, 0x6000, 0xC2CC26, L_C2CC26); /* C2CB7E: bra     $c2cc26 */
+L_C2CBBE:
+    FA18_CHECK(0xC2CBBE);
+    FA18_OP(0xC2CBBE, 0x1029, 0xC2CBC2); /* C2CBBE: move.b  ($62,A1), D0 */
+    FA18_OP(0xC2CBC2, 0x0200, 0xC2CBC6); /* C2CBC2: andi.b  #$f0, D0 */
+    FA18_OP(0xC2CBC6, 0x0C00, 0xC2CBCA); /* C2CBC6: cmpi.b  #$10, D0 */
+    FA18_BCC(0xC2CBCA, 0x670C, 0xC2CBCC, 0xC2CBD8, L_C2CBD8); /* C2CBCA: beq     $c2cbd8 */
+L_C2CBCC:
+    FA18_CHECK(0xC2CBCC);
+    FA18_OP(0xC2CBCC, 0x4269, 0xC2CBD0); /* C2CBCC: clr.w   ($50,A1) */
+    FA18_OP(0xC2CBD0, 0x4269, 0xC2CBD4); /* C2CBD0: clr.w   ($52,A1) */
+    FA18_OP(0xC2CBD4, 0x4269, 0xC2CBD8); /* C2CBD4: clr.w   ($54,A1) */
+L_C2CBD8:
+    FA18_CHECK(0xC2CBD8);
+    FA18_OP(0xC2CBD8, 0x1029, 0xC2CBDC); /* C2CBD8: move.b  ($64,A1), D0 */
+    FA18_OP(0xC2CBDC, 0x0200, 0xC2CBE0); /* C2CBDC: andi.b  #$8, D0 */
+    FA18_BCC(0xC2CBE0, 0x660E, 0xC2CBE2, 0xC2CBF0, L_C2CBF0); /* C2CBE0: bne     $c2cbf0 */
+L_C2CBE2:
+    FA18_CHECK(0xC2CBE2);
+    FA18_OP(0xC2CBE2, 0x0029, 0xC2CBE8); /* C2CBE2: ori.b   #$2, ($64,A1) */
+    FA18_OP(0xC2CBE8, 0x0029, 0xC2CBEE); /* C2CBE8: ori.b   #$20, ($64,A1) */
+    FA18_JUMP(0xC2CBEE, 0x602A, 0xC2CC1A, L_C2CC1A); /* C2CBEE: bra     $c2cc1a */
+L_C2CBF0:
+    FA18_CHECK(0xC2CBF0);
+    FA18_OP(0xC2CBF0, 0x3029, 0xC2CBF4); /* C2CBF0: move.w  ($96,A1), D0 */
+    FA18_OP(0xC2CBF4, 0x3229, 0xC2CBF8); /* C2CBF4: move.w  ($9c,A1), D1 */
+    FA18_OP(0xC2CBF8, 0x3429, 0xC2CBFC); /* C2CBF8: move.w  ($a2,A1), D2 */
+    FA18_OP(0xC2CBFC, 0xC1C5, 0xC2CBFE); /* C2CBFC: muls.w  D5, D0 */
+    FA18_OP(0xC2CBFE, 0xC3C6, 0xC2CC00); /* C2CBFE: muls.w  D6, D1 */
+    FA18_OP(0xC2CC00, 0xC5C7, 0xC2CC02); /* C2CC00: muls.w  D7, D2 */
+    FA18_OP(0xC2CC02, 0xD480, 0xC2CC04); /* C2CC02: add.l   D0, D2 */
+    FA18_OP(0xC2CC04, 0xD481, 0xC2CC06); /* C2CC04: add.l   D1, D2 */
+    FA18_BCC(0xC2CC06, 0x6C06, 0xC2CC08, 0xC2CC0E, L_C2CC0E); /* C2CC06: bge     $c2cc0e */
+L_C2CC08:
+    FA18_CHECK(0xC2CC08);
+    FA18_OP(0xC2CC08, 0x2403, 0xC2CC0A); /* C2CC08: move.l  D3, D2 */
+    FA18_JUMP(0xC2CC0A, 0x6000, 0xC2CAF6, L_C2CAF6); /* C2CC0A: bra     $c2caf6 */
+L_C2CC0E:
+    FA18_CHECK(0xC2CC0E);
+    FA18_OP(0xC2CC0E, 0x0029, 0xC2CC14); /* C2CC0E: ori.b   #$4, ($64,A1) */
+    FA18_OP(0xC2CC14, 0x0029, 0xC2CC1A); /* C2CC14: ori.b   #$40, ($64,A1) */
+L_C2CC1A:
+    FA18_CHECK(0xC2CC1A);
+    FA18_OP(0xC2CC1A, 0x0869, 0xC2CC20); /* C2CC1A: bchg    #$8, ($64,A1) */
+    FA18_OP(0xC2CC20, 0x0029, 0xC2CC26); /* C2CC20: ori.b   #$10, ($64,A1) */
+L_C2CC26:
+    FA18_CHECK(0xC2CC26);
+    FA18_OP(0xC2CC26, 0x4E5E, 0xC2CC28); /* C2CC26: unlk    A6 */
+    FA18_RETURN(0xC2CC28, 0x4E75); /* C2CC28: rts */
+}
+
 int fa18_fn_C2CA26(int entry) {
     switch (entry) {
     case 0: goto L_C2CA26;

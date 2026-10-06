@@ -62,11 +62,15 @@ static int flight_dynamics_step(void) {
     case 0xC26C40: case 0xC26C46: case 0xC26C52: case 0xC28B88:
     case 0xC28B8C: case 0xC28DF8: case 0xC28E02:
         mask=m68ki_read_imm_16(); if(!(opcode&0x400u) && mode==4) renderer_store(A(reg),mask,4,(int)reg); else { address=cache_step_address(mode,reg,4); if(opcode&0x400u) renderer_load(address,mask,4,mode==3?(int)reg:-1); else renderer_store(address,mask,4,-1); } break;
-    case 0xC25B34: case 0xC25BA6: case 0xC25C6A:
+    case 0xC25B34: case 0xC25BA6:
     case 0xC25D1A: case 0xC25D4E:
     case 0xC25E26: case 0xC2600E: case 0xC260F8: case 0xC26164:
     case 0xC261D0: case 0xC26248: case 0xC28DFC:
         address=cache_step_address(mode,reg,4); m68ki_push_32(REG_PC); REG_PC=address; break;
+    case 0xC25C6A:
+        address=cache_step_address(mode,reg,4); m68ki_push_32(REG_PC); REG_PC=address;
+        if(address==0xC2C392) glue_schedule_record_action();
+        break;
     case 0xC25C70:
         address=cache_step_address(mode,reg,4); m68ki_push_32(REG_PC); REG_PC=address;
         if(address==0xC1B27E) glue_schedule_record_input();

@@ -78,6 +78,12 @@ size_t fa18_ports_active_steps(void);
 typedef int (*FA18NativeChild)(const void *arguments);
 int fa18_ports_schedule_native_child(FA18NativeChild child, const void *arguments,
                                      size_t size, int cycles);
+/* An executing C continuation can wait for an existing source child. Its
+ * copied payload may retain mutable C state until FA18_RET. Return
+ * FA18_EXIT_DISPATCH after arming this guard; the runtime executes the child
+ * before invoking the continuation again. Do not dispatch a child recursively
+ * inside the callback. C state selects the phase; PC/SP only guard resumption. */
+void fa18_ports_native_child_wait(uint32_t return_pc, uint32_t return_sp);
 /* SHADOW only: after each compared call, overwrite what the liveness table
  * declares dead. The run must still end like the plain generated run. */
 void fa18_ports_set_poison(int on);
