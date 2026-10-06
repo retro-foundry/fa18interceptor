@@ -9,6 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: correct C1C860's sort-all caller flag, preserving C1E328's ordinary
+  one-list-per-update path. Actual C0EFEA-C0F3C0 captures compare assembled
+  gameplay/scene/cockpit/HUD/timers/messages with original bytes. **8/8 (100%
+  of this sampled frame-body batch)** pass, including cockpit and map; all
+  display bytes compare, Copper fade excluded. Scratch, asynchronous voices
+  and busy counters are explicit exclusions. See
+  `../analysis/native_frame_body_milestone.md`. This demonstrates composition,
+  not original display/task cadence: startup lead **36 ticks**, full frame
+  parity **0/3 accepted**. Next: source-backed WaitBOVP/task pacing.
+
 - Complete: connect C4FFB4 channel requests and C500D8 sample repetition/
   chaining/stop owner to native PCM streams, SDL stereo publication and WAV
   capture. 256 full source comparisons, disk-backed pitch/routing/block

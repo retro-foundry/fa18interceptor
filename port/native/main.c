@@ -4,6 +4,7 @@
 #include "../game/memory.h"
 #include "../recomp/frame_pacer.h"
 #include "replay.h"
+#include "frame_capture.h"
 #include "../amiga/pcm_output.h"
 #include <SDL.h>
 #include <stdio.h>
@@ -21,10 +22,11 @@ int main(int argc,char **argv) {
     unsigned frames=0,events=0,next=0,iterations=0; KeyEvent keys[1024]; char error[256];
     const char *input=NULL;NativeReplay loop={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
+    NativeFrameCapture capture={0};capture.replay=&loop;
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-capture ITERATION PREFIX]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -34,10 +36,16 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--iterations")) { char *end;unsigned long n=strtoul(argv[++i],&end,10);if(*end || !n || n>10000000) { fputs("Invalid iteration limit\n",stderr);goto done; } iterations=(unsigned)n; }
         else if(i+1<argc && !strcmp(argv[i],"--data-out")) data_out=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--wav")) wave=argv[++i];
+        else if(i+2<argc && !strcmp(argv[i],"--frame-capture")) {
+            char *end;unsigned long n=strtoul(argv[++i],&end,10);
+            if(*end || !n || n>10000000) {fputs("Invalid frame capture iteration\n",stderr);goto done;}
+            capture.iteration=(unsigned)n;capture.prefix=argv[++i];
+        }
         else { fprintf(stderr,"Unknown/incomplete option: %s\n",argv[i]); goto done; }
     }
     if(headless && !frames) { fputs("Headless runs require --frames N\n",stderr); goto done; }
     if(iterations && !input) { fputs("Iteration limit requires --input\n",stderr);goto done; }
+    if(capture.prefix && !input) {fputs("Frame capture requires recorded --input\n",stderr);goto done;}
     if(input && !native_replay_load(&loop,input,error,sizeof error)) { fputs(error,stderr);goto done; }
     if(input && !iterations) iterations=loop.end;
     if(input && iterations>loop.end) { fputs("Iteration limit exceeds recorded end\n",stderr);goto done; }
@@ -50,6 +58,7 @@ int main(int argc,char **argv) {
     }
     if(!game || !native_frontend_open(game,adf,save_dir,error,sizeof error)) { fprintf(stderr,"%s\n",game?error:"Allocation failed"); goto done; }
     if(input) { game->begin_update=native_replay_update;game->update_context=&loop; }
+    if(capture.prefix) {game->observe_frame=native_frame_capture;game->frame_context=&capture;}
     if(!headless) {
         SDL_SetMainReady(); if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_EVENTS|SDL_INIT_TIMER)) goto sdl_error;
         window=SDL_CreateWindow("F/A-18 Interceptor - native intro/menu",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,960,768,SDL_WINDOW_RESIZABLE);
@@ -84,10 +93,14 @@ int main(int argc,char **argv) {
             && fwrite(game->storage.source,1,sizeof game->storage.source,file)==sizeof game->storage.source;
         if(fclose(file) || !written) { fprintf(stderr,"Cannot write native data: %s\n",data_out); goto done; }
     }
-    printf("{\"frames\":%u,\"screen\":\"%s\",\"mode\":%u,\"glyphs\":%u,\"record_updates\":%u,\"scene_frames\":%u,\"terrain_polygons\":%u,\"model_calls\":%u,\"hud_frames\":%u,\"control_frames\":%u,\"scene_selected\":%s,\"stage\":\"%06X\",\"game_tick\":%u,\"timer_pending\":%s,\"timer_yields\":%u,\"display_publications\":%u,\"display_yields\":%u,\"display_pending\":%s,\"displayed_page\":%u,\"postflight_callbacks\":%u,\"postflight_resets\":%u,\"input_passes\":%u,\"input_events\":%u,\"input_queued\":%u,\"update_iterations\":%u,\"replay_iterations\":%u,\"replay_events\":%zu,\"replay_started\":%s,\"voice_ticks\":%u,\"voice_publications\":%u,\"voice_levels\":[[%d,%d],[%d,%d],[%d,%d],[%d,%d]],\"sample_requests\":%u,\"sample_frames\":%u,\"nonzero_sample_frames\":%u,\"audio_device\":%s,\"cpu_emulation\":false,\"chipset_emulation\":false}\n",game->ticks,native_frontend_screen(game),native_menu_selected_mode(game),game->glyphs,game->record_updates,game->scene_frames,game->terrain_polygons,game->model_calls,game->hud_frames,game->control_frames,game->scene_selected?"true":"false",rd_u32(STAGE_CALLBACK),rd_u16(UPDATE_TICK),game->flight_timer_pending?"true":"false",game->timer_yields,game->display_publications,game->display_yields,game->display_pending?"true":"false",game->displayed_page,game->postflight_callbacks,game->postflight_resets,game->input_passes,game->input_events,game->input_count,game->update_iterations,loop.iteration,loop.next,loop.started?"true":"false",game->audio.ticks,game->audio.publications,game->audio.channels[0].period,game->audio.channels[0].volume,game->audio.channels[1].period,game->audio.channels[1].volume,game->audio.channels[2].period,game->audio.channels[2].volume,game->audio.channels[3].period,game->audio.channels[3].volume,game->audio.sample_requests,game->audio.sample_frames,game->audio.nonzero_frames,audio_output.device?"true":"false");
+    printf("{\"frames\":%u,\"screen\":\"%s\",\"mode\":%u,\"glyphs\":%u,\"record_updates\":%u,\"scene_frames\":%u,\"terrain_polygons\":%u,\"model_calls\":%u,\"hud_frames\":%u,\"control_frames\":%u,\"scene_selected\":%s,\"stage\":\"%06X\",\"game_tick\":%u,\"timer_pending\":%s,\"timer_yields\":%u,\"display_publications\":%u,\"display_yields\":%u,\"display_pending\":%s,\"displayed_page\":%u,\"postflight_callbacks\":%u,\"postflight_resets\":%u,\"input_passes\":%u,\"input_events\":%u,\"input_queued\":%u,\"update_iterations\":%u,\"replay_iterations\":%u,\"replay_events\":%zu,\"replay_started\":%s,\"voice_ticks\":%u,\"voice_publications\":%u,\"voice_levels\":[[%d,%d],[%d,%d],[%d,%d],[%d,%d]],\"sample_requests\":%u,\"sample_frames\":%u,\"nonzero_sample_frames\":%u,\"audio_device\":%s,\"frame_capture_complete\":%s,\"frame_before_tick\":%u,\"frame_after_tick\":%u,\"frame_saved_tick\":%u,\"cpu_emulation\":false,\"chipset_emulation\":false}\n",game->ticks,native_frontend_screen(game),native_menu_selected_mode(game),game->glyphs,game->record_updates,game->scene_frames,game->terrain_polygons,game->model_calls,game->hud_frames,game->control_frames,game->scene_selected?"true":"false",rd_u32(STAGE_CALLBACK),rd_u16(UPDATE_TICK),game->flight_timer_pending?"true":"false",game->timer_yields,game->display_publications,game->display_yields,game->display_pending?"true":"false",game->displayed_page,game->postflight_callbacks,game->postflight_resets,game->input_passes,game->input_events,game->input_count,game->update_iterations,loop.iteration,loop.next,loop.started?"true":"false",game->audio.ticks,game->audio.publications,game->audio.channels[0].period,game->audio.channels[0].volume,game->audio.channels[1].period,game->audio.channels[1].volume,game->audio.channels[2].period,game->audio.channels[2].volume,game->audio.channels[3].period,game->audio.channels[3].volume,game->audio.sample_requests,game->audio.sample_frames,game->audio.nonzero_frames,audio_output.device?"true":"false",capture.complete?"true":"false",capture.before_tick,capture.after_tick,capture.saved_tick);
     if(running && iterations && loop.iteration<iterations) {
         fprintf(stderr,"Native input stopped at iteration %u of %u: --frames limit reached%s\n",
                 loop.iteration,iterations,loop.started?"":" before main-menu anchor");goto done;
+    }
+    if(capture.prefix && !capture.complete) {
+        fprintf(stderr,"Native frame capture %u did not complete%s\n",capture.iteration,
+                capture.begun?" before the run ended":" on a connected flight frame");goto done;
     }
     result=0; goto done;
 sdl_error:

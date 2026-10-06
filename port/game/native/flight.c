@@ -42,6 +42,14 @@
 #include <stdlib.h>
 
 static void refresh_child(void *context,enum ContextRefreshChild child);
+static void refresh_native_context(void) {
+    /* C1C870 clears the inherited -$2C flag. A nonzero request batch sets
+     * it at C1C98A before sorting; an ordinary update sorts just one list.
+     * Capture the request before the template children consume its bits. */
+    const int sort_all=rd_u8(UPDATE_MASK)!=0;
+    const ContextRefreshHooks hooks={refresh_child,NULL,(void *)&sort_all};
+    refresh_context_packet(&hooks);
+}
 static void storage_child(void *context,enum SceneBootstrapChild child) {
     int32_t *position=context;
     switch(child) {
@@ -54,10 +62,7 @@ static void storage_child(void *context,enum SceneBootstrapChild child) {
     case BOOTSTRAP_PLACE_VIEW: reset_scene_recorder(); break;
     case BOOTSTRAP_BUILD_GATES: build_template_bit_gates(); break;
     case BOOTSTRAP_UPDATE_RECORDS: native_records_update(); break;
-    case BOOTSTRAP_REFRESH_CONTEXT: {
-        const ContextRefreshHooks hooks={refresh_child,NULL,context};
-        refresh_context_packet(&hooks); break;
-    }
+    case BOOTSTRAP_REFRESH_CONTEXT: refresh_native_context(); break;
     case BOOTSTRAP_RUN: {
         const SceneBootstrapHooks hooks={storage_child,NULL,position};
         bootstrap_scene(&hooks);break;
@@ -77,13 +82,9 @@ void native_flight_initialize(NativeFrontend *game) {
     game->record_updates=1;
 }
 static void refresh_child(void *context,enum ContextRefreshChild child) {
-    (void)context;
     switch(child) {
     case CONTEXT_REFRESH_TEMPLATES: refresh_template_placements(); break;
-    /* Original C1E328's saved-stack test is nonzero in the Free Flight
-     * C0FECE/C1C860 call (A4 byte $9E in the live boundary trace). This
-     * route sorts all pending lists; no CPU stack is retained by the host. */
-    case CONTEXT_REFRESH_SORT: sort_display_list(1); break;
+    case CONTEXT_REFRESH_SORT: sort_display_list(*(const int *)context); break;
     case CONTEXT_REFRESH_CACHE: order_placement_cache(); break;
     case CONTEXT_REFRESH_CONDITION_A: update_condition_a(); break;
     case CONTEXT_REFRESH_CONDITION_B: update_condition_b(); break;
@@ -106,10 +107,7 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     case MENU_MODE_ONE_ROOT: set_menu_position_preset(&cold,0); break;
     case MENU_MODE_NINE_POSITION: reset_scene_context(); break; /* C0924A */
     case MENU_MODE_NINE_VIEW: finish_scene_setup(); break; /* C082B0 */
-    case MENU_REFRESH: {
-        const ContextRefreshHooks hooks={refresh_child,NULL,context};
-        refresh_context_packet(&hooks); break;
-    }
+    case MENU_REFRESH: refresh_native_context(); break;
     default: fprintf(stderr,"native flight transition child unavailable: %u\n",(unsigned)child); abort();
     }
     return (MenuTransitionResult){0,0};
@@ -248,18 +246,18 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
         const PostInputTickHooks hooks={stage,NULL,game};
         run_post_input_tick(&hooks);
     } else wr_u8(KEY_TAKEN,0); /* C0F808's tail follows C0FCB4 too. */
+    if(game->observe_frame)
+        game->observe_frame(game,NATIVE_FRAME_BODY_BEGIN,saved_tick,game->frame_context);
     tick_notification_cadence(); /* C11B44 at C0EFEA. */
     /* C0EFD4 follows its stage tick with the record/context work while
      * POST_INPUT_AUX permits updates. View/control, projection, terrain and
-     * the HUD/panel slice follow the record/context work. Complete C0EFD4
-     * ownership and remaining end-of-frame drawing are pending. */
+     * the HUD/panel slice follow the record/context work. */
     if(rd_u8(POST_INPUT_AUX)) {
         update_view_controls(); /* C0F002, before the C1C63E record pass. */
         native_records_update();
         ++game->record_updates;
         native_scene_project();
-        const ContextRefreshHooks refresh={refresh_child,NULL,game};
-        refresh_context_packet(&refresh);
+        refresh_native_context();
         if(!native_scene_draw(game)) return 1;
         update_message(); /* C11BFC at C0F12C, before instruments. */
         update_control_actions(NULL,NULL); /* C12950 at C0F132. */

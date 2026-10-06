@@ -7,6 +7,15 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest assembled-frame batch: C1C860's native adapter now sorts all lists only
+for nonzero context requests, otherwise one list as in C1C870/C1C98A/C1E328.
+Actual crash-flight comparison exposed the old always-all cursor difference.
+`--frame-capture ITERATION PREFIX` exports actual C0EFEA/C0F3C0 boundaries;
+eight demo/wait/readout/crash/carrier/cockpit/map bodies match original bytes
+in compared state and every display byte. This is 8/8 sampled bodies, not full
+recording acceptance. Explicit scratch/async voice/busy exclusions are in
+`analysis/native_frame_body_milestone.md`. Copper fade excluded; startup lead
+36 ticks and full frame parity 0/3 remain. Next: original WaitBOVP/task pacing.
 Latest sample batch: C4FFB4's misleadingly named clear helper now requests
 native channel service. Complete C500D8 repetition/chaining/stop behavior feeds
 native signed PCM streams and SDL stereo output; `--wav PATH` captures the

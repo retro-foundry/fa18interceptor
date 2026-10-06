@@ -34,7 +34,11 @@ panel images, compass and indicator/mode bars are connected. Original cockpit
 artwork is loaded from `pix/inst5` and `pix/frnt5`, with the source plane caches
 and union mask. Both display pages preserve the immutable instrument images.
 Earlier HUD checks omitted those disk assets; populated artwork comparisons now
-pass. Complete frame ordering remains pending.
+pass. Eight actual assembled frame bodies now match original C0EFEA-C0F3C0
+in compared gameplay state and every display-plane byte, including cockpit
+and map. C1C860's caller now preserves the request-dependent all-list versus
+one-list sorting decision. Full recorded display/task cadence remains open.
+See [`../../analysis/native_frame_body_milestone.md`](../../analysis/native_frame_body_milestone.md).
 Lost-target selection cleanup now executes after the HUD and before timers.
 The source debug page mark and numeric overlays execute under their original
 gates after the counter and before the final message. All non-stack RAM agrees
@@ -121,6 +125,7 @@ python tools/native/check_cockpit_assets.py --runner build/native/fa18_native.ex
 python tools/native/check_sound_resources.py --runner build/native/fa18_native.exe
 python tools/native/check_audio.py --runner build/native/fa18_native.exe
 python tools/native/check_samples.py --runner build/native/fa18_native.exe
+python tools/native/check_frame_body.py --runner build/native/fa18_native.exe
 python tools/native/check_qualification.py --runner build/native/fa18_native.exe
 python tools/native/check_demo.py --runner build/native/fa18_native.exe
 ```

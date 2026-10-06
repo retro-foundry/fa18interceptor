@@ -256,6 +256,8 @@ void native_frontend_tick(NativeFrontend *game) {
     const int complete=native_flight_tick(game,!flight);
     /* C32CEE is C0EFD4's final child, after the flight/HUD work. */
     if((flight || menu) && complete) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
+    if(complete && game->observe_frame)
+        game->observe_frame(game,NATIVE_FRAME_BODY_END,0,game->frame_context);
     if(game->display_drawing && complete) native_display_finish_frame(game);
     native_display_read_pixels(game);
 }
