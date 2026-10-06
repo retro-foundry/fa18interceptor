@@ -348,6 +348,7 @@ int glue_C091A8(void);
 int glue_C0D334(void);
 int glue_C25754(void);
 int glue_C265E8(void);
+int glue_C265E8_step(void);
 
 /* batch 25: main engine, tone, edge vertices, buffers, stage blit, grid position, list point */
 int glue_C17C62(void);

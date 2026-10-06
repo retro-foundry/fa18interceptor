@@ -11,6 +11,16 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
+Latest validated prerequisite replaces C265E8's fixed scan charge with
+source timing. All 65 instructions / 2,080 DMA cases and isolated 800-frame
+comparisons pass; both builds, twelve CTests and GNU profiling checks pass.
+Combined carrier moves 374 -> **446**, crash 213 -> **263**, demo stays 565.
+No full rerun: cached raw CPU **38.4011%**, new delta unmeasured; native
+memory/chipset/boot **0%**, gate **0/4**. This removes a timing error, not a
+CPU dependency. Evidence: `analysis/emulation_removal_slot_timing_batch.json/.md`.
+The user's concern about slow removal progress is valid: prioritize connected
+native call ownership and deletion next, rather than further adapter expansion.
+
 Latest connected timing batch repairs the C310AA/C12242 compass/selection
 interaction. All 39 instructions / 1,248 DMA cases match; three paired
 800-frame drawing/RAM probes and every shadow/sandbox call pass. Both builds,

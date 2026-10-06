@@ -440,3 +440,15 @@ average fees. This is integration repair, not native frame completion.
 No full suite rerun: cached raw CPU **38.4011%**, new delta unmeasured; accepted
 CPU share unset; memory/chipset/boot **0%**, gate **0/4**. Evidence:
 `../analysis/emulation_removal_selection_timing_batch.json/.md`.
+
+### Flagged-slot timing prerequisite
+
+Latest validated prerequisite replaces C265E8's fixed scan charge with
+source timing. All 65 instructions / 2,080 DMA cases and isolated 800-frame
+comparisons pass; both builds, twelve CTests and GNU profiling checks pass.
+Combined carrier moves 374 -> **446**, crash 213 -> **263**, demo stays 565.
+No full rerun: cached raw CPU **38.4011%**, new delta unmeasured; native
+memory/chipset/boot **0%**, gate **0/4**. This removes a timing error, not a
+CPU dependency. Evidence: `../analysis/emulation_removal_slot_timing_batch.json/.md`.
+The user's concern about slow removal progress is valid: prioritize connected
+native call ownership and deletion next, rather than further adapter expansion.

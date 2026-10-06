@@ -419,7 +419,7 @@ const FA18Port fa18_ports[] = {
     {0xC091A8, glue_C091A8, "local_to_world", 0, 0, glue_C091A8_step, 0xC0924A},
     {0xC0D334, glue_C0D334, "derive_shown_vertices", 2800},
     {0xC25754, glue_C25754, "normalise_main_loop_control_vector", 0, 0, glue_C25754_step, 0xC257DC, 0, 0, glue_C25754_owns},
-    {0xC265E8, glue_C265E8, "flagged_slot_in_range", 3500},
+    {0xC265E8, glue_C265E8, "flagged_slot_in_range", 0, 0, glue_C265E8_step, 0xC266AC},
     /* batch 25: main engine, tone, edge vertices, buffers, stage blit, grid position, list point */
     {0xC17C62, glue_C17C62, "play_main_engine", 0, 0, glue_C17C62_step, 0xC17CF6},
     {0xC17D6E, glue_C17D6E, "slide_main_engine", 0, 0, glue_C17D6E_step, 0xC17DAA},
