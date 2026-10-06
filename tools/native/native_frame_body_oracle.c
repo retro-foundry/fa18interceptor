@@ -28,8 +28,9 @@ int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0,ne=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
-    uint8_t *data=(argc==6 || argc==7)?file_bytes(argv[1],&nd):NULL;
-    uint8_t *expected=(argc==6 || argc==7)?file_bytes(argv[2],&ne):NULL;
+    const int owner_exit=argc==8 && !strcmp(argv[7],"owner-exit");
+    uint8_t *data=(argc==6 || argc==7 || owner_exit)?file_bytes(argv[1],&nd):NULL;
+    uint8_t *expected=(argc==6 || argc==7 || owner_exit)?file_bytes(argv[2],&ne):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||!expected||nd!=0x100000||ne!=nd||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) return 1;
@@ -41,12 +42,14 @@ int main(int argc,char **argv) {
     unsigned first_tick=(unsigned)strtoul(argv[3],NULL,10),last_tick=(unsigned)strtoul(argv[4],NULL,10);
     native_clock_set(first_tick);unsigned in_timer=0,timer_samples=0;
     memset(REG_DA,0,sizeof REG_DA);REG_A[6]=0xc7ff80;REG_A[7]=0xc7ff00;
+    wr_u32(REG_A[6],0);wr_u32(REG_A[6]+4,0xc70000);
     wr_u16(REG_A[6]-2,(uint16_t)strtoul(argv[5],NULL,10));REG_A[4]=rd_u16(LINE_LAST_ROW);
     REG_PC=0xc0efea;m68k_set_reg(M68K_REG_SR,0x2700);
     fa18_next_event=INT64_MAX;SET_CYCLES(1000000000);
     unsigned step;
     for(step=0;step<10000000;++step) {
-        if(REG_PC==0xc0f3c0 && REG_A[7]==0xc7ff00) {wait_blitter();break;}
+        if((!owner_exit && REG_PC==0xc0f3c0 && REG_A[7]==0xc7ff00) ||
+           (owner_exit && REG_PC==0xc70000 && REG_A[7]==0xc7ff88)) {wait_blitter();break;}
         if(REG_PC==0xc25312) in_timer=1;
         if(REG_PC==0xc53c78) {
             if(in_timer && timer_samples++==1) {
@@ -95,7 +98,7 @@ int main(int argc,char **argv) {
     }
     printf("Frame body: %u gameplay differences, %u display bytes; %u instructions, %u timer samples; excluded scratch=%u voice=%u busy=%u\n",
         differences,plane_differences,step,timer_samples,scratch_differences,voice_differences,busy_differences);
-    if(argc==7) {
+    if(argc>=7) {
         FILE *out=fopen(argv[6],"wb");
         if(!out || fwrite(m->chip,1,0x80000,out)!=0x80000 || fwrite(m->slow,1,0x80000,out)!=0x80000 || fclose(out)) return 1;
     }

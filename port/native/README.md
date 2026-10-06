@@ -39,6 +39,9 @@ body boundaries as `PREFIX.ITERATION.entry.dat` / `.before.dat` / `.after.dat`.
 The entry export requires a flight update before its input/stage; its existing single
 iteration form keeps the old filenames. Reference-only `FA18_LOOP_DUMP` accepts
 `FIRST+COUNT:PREFIX` for original boundaries. No capture feeds native behavior.
+An alternate C0DA38 frame writes its `.after.dat` at the enclosing owner exit,
+with JSON `frame_owner_exit: true`; ordinary captures report false and end at
+C0F3C0. The normal frame-body checker rejects an alternate exit explicitly.
 `check_gameplay_comparison.py --source SOURCE.dat --native NATIVE.entry.dat`
 checks verifier strictness against an accepted pair: equivalent buffer
 allocation passes, while wrong presentation, publication, HUD/input/motion
@@ -276,8 +279,12 @@ and recorded gameplay acceptance.
 Scene ordering C0F048-C0F124 now comes from the shared update-sequence owner,
 with the native child consumer supplying the existing host rendering paths.
 Bias/flagged/range gates and stage markers therefore use the same source
-composition as C0EFD4. C0DA38's alternate selection/early frame exit remains unconnected
-and fails explicitly if reached. See
+composition as C0EFD4. C0DA38's full-viewport selection and early frame exit are
+now connected: either selection outcome skips the remaining frame children and
+returns to outer display presentation. Eighteen source cases and a disk-backed
+native frontend/original frame-prefix comparison pass. See
+[`../../analysis/native_scene_exit_milestone.md`](../../analysis/native_scene_exit_milestone.md)
+and
 [`../../analysis/native_scene_ordering_milestone.md`](../../analysis/native_scene_ordering_milestone.md).
 
 Positive paired model strips C1F584-C1F6F8 now render during the native pullback

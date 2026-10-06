@@ -71,6 +71,14 @@ else()
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_executable(fa18_native_scene_exit_test ../../tools/native/native_scene_exit_test.c)
+    target_link_libraries(fa18_native_scene_exit_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_scene_exit
+        COMMAND fa18_native_scene_exit_test
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../captures/native/demo01/input.fa18in
+            ${CMAKE_CURRENT_BINARY_DIR}/scene-exit-save
+            ${CMAKE_CURRENT_BINARY_DIR}/scene-exit)
     add_executable(fa18_native_record_expiry_test ../../tools/native/native_record_expiry_test.c)
     target_link_libraries(fa18_native_record_expiry_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_record_expiry

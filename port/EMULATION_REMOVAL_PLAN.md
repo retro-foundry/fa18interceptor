@@ -9,6 +9,17 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: C0DA38 full-viewport selection and its nonlocal frame exit are
+  connected through the actual scene/flight/frontend chain. Both outcomes skip
+  HUD/timers/counter/final message and continue display presentation. Eighteen
+  source boundary cases and the complete original frame prefix match. Three
+  ordinary gameplay/map bodies, expiry, frontend/omission and twelve reference
+  contracts pass. **1/1 (100% of this alternate-exit connection)**; full recorded
+  gameplay acceptance remains **0/3**, with independent HUD cadence still open.
+  `frame_owner_exit` identifies diagnostic captures that end at this exit.
+  No original recording was replayed. See
+  `../analysis/native_scene_exit_milestone.md`.
+
 - Complete: C22ADE's destruction-to-expiry branch now runs through the native
   scene and C09DD0/C25704 selection/message owners. Source timer/flags, target
   cleanup and repeated-render behavior match in 20 controlled descriptor cases.

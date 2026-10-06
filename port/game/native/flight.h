@@ -4,7 +4,8 @@
 void native_flight_initialize(NativeFrontend *game);
 /* Modes whose source startup/update composition is connected. */
 int native_flight_enabled(const NativeFrontend *game);
-/* Zero means C25312 is waiting for the next host clock sample. */
+enum NativeFlightResult { NATIVE_FLIGHT_WAIT, NATIVE_FLIGHT_COMPLETE, NATIVE_FLIGHT_OWNER_EXIT };
+/* WAIT suspends C25312. OWNER_EXIT skips C0EFD4's remaining children. */
 /* A menu selection already ran C0FCB4 in this update; its published flight
  * callback belongs to the following update. */
 int native_flight_tick(NativeFrontend *game,int stage_already_ran);

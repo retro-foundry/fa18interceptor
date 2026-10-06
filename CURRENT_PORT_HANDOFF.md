@@ -33,6 +33,19 @@ Next: correct connected gameplay timer/poll/display cadence from source,
 without guessed speed factors, capture-fed clocks or intro timing requirements.
 Both select original C2502E entry 15 (67 ms); source rendering exceeds that
 limit while native approaches it. No timer arithmetic/rate-index bug was found.
+Latest scene branch: C0DA38's full-viewport selection now propagates its early
+exit through C0D730 -> scene -> flight -> frontend. Both accept/reject paths
+skip the remaining HUD/timer/counter/final-message children and still resume
+outer display presentation. Eighteen signed-threshold/source-mode cases match
+original RAM/result/frame unwind; a disk/input-backed native frontend fixture
+matches the complete original C0EFEA-to-owner-exit prefix (5,253 instructions,
+zero gameplay/display differences). Capture JSON's `frame_owner_exit` explicitly
+distinguishes this boundary from C0F3C0. Active/crash/map bodies, expiry regression,
+frontend/omission and twelve reference host/loader tests pass. This branch is
+1/1 complete; original recordings were not rerun. See
+`analysis/native_scene_exit_milestone.md`. Full gameplay acceptance stays 0/3;
+independent HUD cadence remains open. Five retained demo boundaries also match
+the named motion/rates/orientation/matrices for all sixteen flight records.
 Latest gameplay branch: C22ADE destruction-to-expiry is connected through the
 actual scene traversal, including C09DD0 target cleanup and C25704's TARGET
 DESTROYED message. The timer starts at 15, bit $0200 clears and $0400 sets;

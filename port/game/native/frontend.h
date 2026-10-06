@@ -8,7 +8,8 @@
 enum NativeScreen { NATIVE_SPLASH,NATIVE_CREDITS,NATIVE_ENLISTMENT,NATIVE_CALLSIGN,NATIVE_MENU,
     NATIVE_MODE_INTRO,NATIVE_MISSIONS,NATIVE_PILOT_LOG,NATIVE_SCENE_SETUP };
 typedef struct NativeFrontend NativeFrontend;
-enum NativeFrameBoundary { NATIVE_FRAME_BODY_BEGIN, NATIVE_FRAME_BODY_END, NATIVE_FRAME_INPUT_BEGIN };
+enum NativeFrameBoundary { NATIVE_FRAME_BODY_BEGIN, NATIVE_FRAME_BODY_END, NATIVE_FRAME_INPUT_BEGIN,
+                           NATIVE_FRAME_OWNER_EXIT };
 struct NativeFrontend {
     NativeStorage storage;
     AmigaIlbm splash;
@@ -39,7 +40,7 @@ struct NativeFrontend {
     unsigned update_iterations;
     void (*begin_update)(NativeFrontend *game,void *context);
     void *update_context;
-    /* Optional diagnostics before input and at C0EFEA/C0F3C0. */
+    /* Optional diagnostics before input, at C0EFEA/C0F3C0 or C0DA38's exit. */
     void (*observe_frame)(NativeFrontend *game,enum NativeFrameBoundary boundary,
                           uint16_t saved_tick,void *context);
     void *frame_context;

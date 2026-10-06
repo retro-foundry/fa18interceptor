@@ -30,6 +30,7 @@ void native_frame_capture(NativeFrontend *game,enum NativeFrameBoundary boundary
         capture->begun=1;capture->before_tick=game->ticks;capture->saved_tick=saved_tick;
         write_data(game,capture,"before");
     } else if(capture->begun) {
+        capture->owner_exit=boundary==NATIVE_FRAME_OWNER_EXIT;
         capture->after_tick=game->ticks;
         write_data(game,capture,"after");capture->begun=0;
         capture->complete=++capture->captured==capture->count;

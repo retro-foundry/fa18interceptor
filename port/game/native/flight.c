@@ -262,7 +262,7 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
         ++game->record_updates;
         native_scene_project();
         refresh_native_context();
-        if(!native_scene_draw(game)) return 1;
+        if(!native_scene_draw(game)) return NATIVE_FLIGHT_OWNER_EXIT;
         update_message(); /* C11BFC at C0F12C, before instruments. */
         update_control_actions(NULL,NULL); /* C12950 at C0F132. */
         ++game->control_frames;

@@ -12,6 +12,7 @@
 #include "../cockpit.h"
 #include "../stages.h"
 #include "../active_planes.h"
+#include "../display_records.h"
 #include "../map_packet.h"
 #include "../polygon_clip.h"
 #include "../projection.h"
@@ -61,7 +62,7 @@ static UpdateSequenceResult scene_child(void *context,enum UpdateSequenceChild c
     case UPDATE_LIST_RESET: reset_list(); break;
     case UPDATE_BUFFERS: {
         const UpdateSequenceHooks hooks={scene_child,NULL,game};
-        submit_update_display_buffers(&hooks); break;
+        return submit_update_display_buffers(&hooks);
     }
     case UPDATE_DISPLAY_PLANES:
         submit_active_planes(NULL); ++game->scene_frames; break;
@@ -91,9 +92,9 @@ static UpdateSequenceResult scene_child(void *context,enum UpdateSequenceChild c
         advance_main_loop_control_records(0x4500,&controls); break;
     case UPDATE_TRUE_FOLLOWUP: case UPDATE_FALSE_FOLLOWUP:
         visit_followup_placements(&followups); break;
-    /* C0DA38 builds a full-viewport selection and exits the source frame.
-     * TODO(port): connect that selection and propagate its early owner exit. */
     case UPDATE_DISPLAY_END:
+        result.value=(uint32_t)prepare_full_display_selection();
+        result.owner_finished=1; break; /* C0DA90/C0DA9C: both unlink C0EFD4. */
     default: fprintf(stderr,"native scene child unavailable: %u\n",(unsigned)child); abort();
     }
     return result;

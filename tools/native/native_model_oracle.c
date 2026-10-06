@@ -13,6 +13,7 @@
 #include "globals.h"
 #include "followup_placements.h"
 #include "main_loop_control_messages.h"
+#include "display_records.h"
 extern int64_t fa18_next_event;
 #define FA18_NATIVE
 #define setup_line host_setup_line
@@ -191,6 +192,10 @@ static unsigned strip_groups;
 static int original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     REG_A[0]=oracle_parameters;
+    if(pc==0xc0da38u || pc==0xc0d730u) {
+        /* C0DA38 unlinks its caller's frame, not its child return address. */
+        REG_A[6]=0xc7fefcu;REG_A[7]=0xc7fef0u;wr_u32(REG_A[6],0);
+    }
     if(pc==0xc21b38u || pc==0xc21c86u) REG_A[2]=0x4600;
     if(pc==0xc1ff0au || pc==0xc207feu) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
@@ -219,6 +224,35 @@ static int compare(const uint8_t *expected,unsigned test) {
 }
 
 static unsigned calls, failures;
+static int full_selection_cases(void) {
+    static const int16_t thresholds[]={-32768,-32767,-1,0,5000,14399,14400,14401,32767};
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    for(unsigned test=0;test<18;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        const int mode=test/9;const int16_t threshold=thresholds[test%9];
+        wr_u8(CONTEXT_SELECT,(uint8_t)mode);wr_u16(UPDATE_DISPLAY_FLAGS,0x2000);
+        wr_s16(DISPLAY_MODE_ZERO_THRESHOLD,mode?32767:threshold);
+        wr_s16(VIEW_PAN,mode?threshold:-32768);
+        wr_u16(DISPLAY_SELECTION_WORD_A,0x1234);wr_u16(DISPLAY_SELECTION_WORD_B,0x5678);
+        wr_u32(DISPLAY_SELECTION_LONG,0x89abcdefu);wr_u8(DISPLAY_SELECTION_FLAG,0xa5);
+        memcpy(before,fa18_machine,sizeof *before);
+        int result=prepare_full_display_selection();
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(test&1?0xc0d730u:0xc0da38u) || REG_D[0]!=(uint32_t)result) return 0;
+        for(unsigned i=0;i<0xffc00;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                fprintf(stderr,"full selection case %u data %06X: source %02X native %02X\n",test,i,actual,expected[i]);return 0;
+            }
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("18 full-viewport selection cases match original result, enclosing-frame exit and non-stack RAM");return 1;
+}
 static int carrier_commands(void) {
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x100000);
@@ -446,6 +480,7 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+    if(!full_selection_cases()) return 1;
     if(!carrier_commands()) return 1;
     if(!hull_tails()) return 1;
     if(!circles()) return 1;

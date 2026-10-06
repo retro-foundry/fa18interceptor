@@ -10,5 +10,8 @@ typedef struct DisplayRecordHooks {
 } DisplayRecordHooks;
 
 int prepare_display_records(int wide, const DisplayRecordHooks *hooks);
+/* C0DA38: full viewport selection; zero accepts, one rejects. The original
+ * exits its enclosing frame in both cases; callers own that control flow. */
+int prepare_full_display_selection(void);
 
 #endif

@@ -56,5 +56,5 @@ void run_game_update_sequence(const UpdateSequenceHooks *hooks);
  * composition. Returns zero when the alternate display child exits the owner. */
 int run_game_scene_sequence(const UpdateSequenceHooks *hooks);
 /* Complete C0D730-C0D748 display-buffer decision and its two explicit children. */
-void submit_update_display_buffers(const UpdateSequenceHooks *hooks);
+UpdateSequenceResult submit_update_display_buffers(const UpdateSequenceHooks *hooks);
 #endif

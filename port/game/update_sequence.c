@@ -157,8 +157,8 @@ void run_game_update_sequence(const UpdateSequenceHooks *h) {
     marker(h,0x220); h->consume(h->context,UPDATE_FINAL);
     observe(h,UPDATE_SEQUENCE_END,0,0,0,0);
 }
-void submit_update_display_buffers(const UpdateSequenceHooks *h) {
+UpdateSequenceResult submit_update_display_buffers(const UpdateSequenceHooks *h) {
     uint16_t flags=rd_u16(UPDATE_DISPLAY_FLAGS);
     observe(h,UPDATE_SEQUENCE_DISPLAY_FLAGS,flags,0,0,0);
-    h->consume(h->context,(flags&0x2000u)?UPDATE_DISPLAY_END:UPDATE_DISPLAY_PLANES);
+    return h->consume(h->context,(flags&0x2000u)?UPDATE_DISPLAY_END:UPDATE_DISPLAY_PLANES);
 }

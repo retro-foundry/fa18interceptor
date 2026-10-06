@@ -39,6 +39,23 @@ static void relative_pairs(gaddr *at, int16_t first, int16_t second) {
     output_pair(at, (int16_t)(319 - rd_s16(b)), (int16_t)(179 - rd_s16(b + 2)));
 }
 
+static int finish_selection(int accepted) {
+    if(accepted) {
+        wr_u16(DISPLAY_SELECTION_WORD_A,1);
+        wr_u16(DISPLAY_SELECTION_WORD_B,1);
+        wr_u32(DISPLAY_SELECTION_LONG,0);
+    }
+    wr_u8(DISPLAY_SELECTION_FLAG,(uint8_t)accepted);
+    return !accepted;
+}
+int prepare_full_display_selection(void) {
+    gaddr at=CORNER_RECORDS+2;
+    wr_u16(CORNER_RECORDS,4);
+    output_pair(&at,0,0); output_pair(&at,319,0);
+    output_pair(&at,319,179); output_pair(&at,0,179);
+    return finish_selection(rd_s16(rd_u8(CONTEXT_SELECT)?VIEW_PAN:DISPLAY_MODE_ZERO_THRESHOLD)>0x3840);
+}
+
 static int select_pairs(void) {
     int16_t s[8], first = 0, second = 0;
     uint16_t flags = rd_u16(STATUS_CA);
@@ -60,9 +77,10 @@ static int select_pairs(void) {
         else goto reject;
     } else branch = 7;
 
+    if(branch==7) return prepare_full_display_selection();
     at = CORNER_RECORDS + 2;
-    wr_u16(CORNER_RECORDS, (uint16_t)((branch == 1 || branch == 5 || branch == 7) ? 4 : 5));
-    if (branch != 7) relative_pairs(&at, first, second);
+    wr_u16(CORNER_RECORDS, (uint16_t)((branch == 1 || branch == 5) ? 4 : 5));
+    relative_pairs(&at, first, second);
     switch (branch) {
     case 1:
         output_pair(&at, 319, 179);
@@ -122,23 +140,10 @@ static int select_pairs(void) {
             output_pair(&at, 319, 179);
         }
         break;
-    default:
-        output_pair(&at, 0, 0);
-        output_pair(&at, 319, 0);
-        output_pair(&at, 319, 179);
-        output_pair(&at, 0, 179);
-        if (rd_s16(rd_u8(CONTEXT_SELECT) ? VIEW_PAN : DISPLAY_MODE_ZERO_THRESHOLD) <= 0x3840)
-            goto reject;
-        break;
     }
-    wr_u16(DISPLAY_SELECTION_WORD_A, 1);
-    wr_u16(DISPLAY_SELECTION_WORD_B, 1);
-    wr_u32(DISPLAY_SELECTION_LONG, 0);
-    wr_u8(DISPLAY_SELECTION_FLAG, 1);
-    return 0;
+    return finish_selection(1);
 reject:
-    wr_u8(DISPLAY_SELECTION_FLAG, 0);
-    return 1;
+    return finish_selection(0);
 }
 
 int prepare_display_records(int wide, const DisplayRecordHooks *hooks) {

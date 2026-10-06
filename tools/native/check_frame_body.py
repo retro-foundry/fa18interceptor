@@ -59,6 +59,7 @@ def main():
                                     cwd=ROOT, check=True, capture_output=True, text=True, timeout=35)
             stats = json.loads(result.stdout)
             assert stats['frame_capture_complete'] and stats['replay_iterations'] == iteration + 1, stats
+            assert not stats['frame_owner_exit'], 'C0DA38 exits before the normal C0F3C0 boundary'
             assert not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
             assert stats['frame_before_tick'] <= stats['frame_after_tick'], stats
             if name in ('cockpit', 'map'):
