@@ -19,11 +19,15 @@ statistics. Escape returns from the mission list or log to the main menu.
 In the log, SHIFT-2 resets the 39 words, and 1 saves the exact 78 bytes. A reset
 pilot goes through enlistment/callsign entry again. Closing the window exits.
 Free Flight (digit 2) now runs the complete source bootstrap, delayed scene
-selection and viewport/message stages. It stops at `scene-setup` / C1072E;
-location/aircraft controls and cockpit/world rendering are still pending.
+selection and viewport/message stages. Return acknowledges the original disk's
+code-input message, then the original numbered location and aircraft keys run.
+The aircraft selection resets the recorder/root through C10B90 and updates the
+records. It reaches `scene-setup` / C10C08; P pauses/resumes into C10DAE.
+World/cockpit previews and active flight are still pending.
 The record/context slice repeats during setup; headless statistics expose its
-`record_updates` count. The setup banner currently displays a premature crash
-message; the remaining source command/context transition is incomplete.
+`record_updates` count. The banner CRACKED BY A-HA is original disk message $47;
+the earlier crash-message description was incorrect. Source timer requests use
+seconds/microseconds from the native runner's deterministic PAL frame clock.
 Other selected modes stop at their transition banner. Audio remains suppressed.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay

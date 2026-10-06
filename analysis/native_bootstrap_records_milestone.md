@@ -70,10 +70,11 @@ The focused flight-start test confirms ongoing updates execute in the runner.
 C23A7E controlled/original-child proofs pass 64 cases each with full CPU/SR/RAM.
 Both reference targets and native build; the 14 CTests excluding menu pass.
 
-The native setup banner currently displays a premature crash message. The
+Correction, 2026-10-06: the banner is **CRACKED BY A-HA**, original disk
+message $47, not a crash message. At this batch's checkpoint the
 native root still has its bootstrap kind while the later original checkpoint
 has aircraft kind $11. The remaining source command/context stages and buffer
 presentation need tracing; this batch does not substitute a new aircraft state
-or claim to fix the banner. No full replay was run. Estimated flight-start
+or replace the banner. No full replay was run. Estimated flight-start
 wiring is now about 60%, based on the added repeated record route and dispatch
 children, with input, world rendering and flight simulation still open.

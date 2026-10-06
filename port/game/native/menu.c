@@ -4,6 +4,9 @@
 #include "menu.h"
 #include "../globals.h"
 #include "../command_selection.h"
+#include "../command_publication.h"
+#include "../context_commands.h"
+#include "../audio.h"
 #include "../indexed_commands.h"
 #include "../menu_transition.h"
 #include "../menu_cold.h"
@@ -35,6 +38,14 @@ static uint32_t mode_changed(void *context) {
 unsigned native_menu_selected_mode(const NativeFrontend *game) {
     (void)game; return rd_u8(MODE_SELECT);
 }
+static ContextCommandResult context_child(void *context,enum ContextCommandChild which,const ContextCommandInput *input) {
+    (void)context; (void)input;
+    if(which==CONTEXT_COMMAND_REQUEST_VOICES) {
+        free_voice(0); free_voice(1); free_voice(2); free_voice(3);
+        return (ContextCommandResult){12,{0,0,0}};
+    }
+    fprintf(stderr,"native input context child unavailable: %u\n",(unsigned)which); abort();
+}
 void native_menu_key(NativeFrontend *game,int key,int down) {
     unsigned raw=0xff;
     if(key>='1' && key<='9') raw=(unsigned)(key-'0');
@@ -50,13 +61,25 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
     if(raw==0xff) return;
     if(!down) raw|=0x80;
     CommandRequest request=select_keyboard_command(raw,NULL);
+    uint32_t event=request.raw_event;
     if(is_indexed_command(request.action)) {
         const IndexedCommandHooks hooks={mode_changed,NULL,game};
-        execute_indexed_command(&request,0,&hooks);
+        event=execute_indexed_command(&request,0,&hooks);
     } else if(request.action==COMMAND_SIGN_INPUT) {
         /* C1C224, same store as execute_flight_command. */
         wr_u8(SEQUENCE_PHASE,request.modifier?0xff:1);
+    } else if(is_context_command(request.action)) {
+        const ContextCommandHooks hooks={context_child,NULL,game};
+        event=execute_context_command(&request,&hooks);
+    } else if(request.action!=COMMAND_QUEUE_ONLY && request.action!=COMMAND_COUNTER_WAIT && request.action!=COMMAND_FINISH_EVENT) {
+        fprintf(stderr,"native key action unavailable: %u\n",(unsigned)request.action); abort();
     }
+    /* C1AD72 and C1C2B6 return without queue publication. Other connected
+     * action bodies flow through C1C23C, the queue publication owner. */
+    if(request.action==COMMAND_COUNTER_WAIT) return;
+    if(request.action==COMMAND_FINISH_EVENT) return;
+    if(game->screen==NATIVE_SCENE_SETUP || game->screen==NATIVE_MODE_INTRO)
+        publish_command_event((uint8_t)event,NULL);
 }
 typedef struct { NativeFrontend *game; gaddr field; unsigned offset,width; } MenuContext;
 static void observe(void *context,enum MenuTransitionPhase phase,uint32_t value,uint32_t extra,gaddr address) {

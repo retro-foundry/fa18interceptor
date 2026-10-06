@@ -8,6 +8,7 @@
 #include "../menu_setup.h"
 #include "../stages.h"
 #include "../globals.h"
+#include "../player_input.h"
 #include "menu.h"
 #include "flight.h"
 #include "../text.h"
@@ -72,6 +73,7 @@ static MessageWorking child(void *context,enum MainControlChild which,MessageWor
         native_frontend_save_log(game);
         game->name_finished=1; return w;
     }
+    if(which==MC_ACCEPT_TYPED_CODE) { check_typed_code(); return w; }
     fprintf(stderr,"native frontend child unavailable: %u\n",(unsigned)which); abort();
 }
 int native_frontend_open(NativeFrontend *game,const char *path,const char *save_dir,char *error,size_t cap) {
@@ -137,7 +139,8 @@ void native_frontend_key(NativeFrontend *game,int key) {
             unsigned at=(rd_u8(0xc457f8u)+rd_u8(0xc457f9u))%10;
             wr_u8(0xc457e1u+at,(uint8_t)event); wr_u8(0xc457f9u,(uint8_t)(rd_u8(0xc457f9u)+1));
         }
-    } else if(game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG)
+    } else if(game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG
+        || game->screen==NATIVE_SCENE_SETUP || game->screen==NATIVE_MODE_INTRO)
         native_menu_key(game,key,1);
 }
 void native_frontend_event(NativeFrontend *game,int key,int down) {
@@ -149,7 +152,8 @@ void native_frontend_event(NativeFrontend *game,int key,int down) {
         wr_u8(KEY_STATE,(uint8_t)(game->shift_keys!=0)); return;
     }
     if(down) native_frontend_key(game,key);
-    else if(game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG)
+    else if(game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG
+        || game->screen==NATIVE_SCENE_SETUP || game->screen==NATIVE_MODE_INTRO)
         native_menu_key(game,key,0);
 }
 void native_frontend_tick(NativeFrontend *game) {

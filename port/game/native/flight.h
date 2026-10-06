@@ -3,4 +3,5 @@
 #include "frontend.h"
 void native_flight_initialize(NativeFrontend *game);
 void native_flight_tick(NativeFrontend *game);
+void native_flight_refresh_cockpit(NativeFrontend *game);
 #endif

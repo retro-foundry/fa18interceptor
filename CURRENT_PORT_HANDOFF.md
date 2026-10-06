@@ -27,14 +27,23 @@ The record/context slice now repeats during setup (12 updates in the focused
 run). Native record composition matches original C1C63E non-stack RAM at native
 boot/setup checkpoints and an original Free Flight checkpoint, including active
 slot dispatch and its inverse matrix. Complete input/view/timer ordering and
-other active children remain open; the setup banner prematurely reports a crash
-and the aircraft-kind transition is missing. See
-`analysis/native_bootstrap_records_milestone.md`. Endpoint: `scene-setup`,
-C1072E. Other modes still stop at their banner. No native flight runs yet.
+other active children remain open. The original disk's $47 message reads
+**CRACKED BY A-HA**; the earlier crash-message diagnosis was wrong. See
+`analysis/native_bootstrap_records_milestone.md`.
+Free Flight now consumes message completion at C1072E, accepts Return through
+the original typed-code check, and takes location/aircraft keys through the
+source command-selection/publication owners. C10B90 resets the recorder/root
+and updates records; the root now becomes aircraft kind $11. Camera-origin
+normalization and matrix children run directly. The tested path reaches
+C10C08 after aircraft selection, or C10DAE after P pause/resume. Five bounded
+C1C63E checkpoint comparisons match original non-stack RAM; intro/menu and
+twelve reference CTests pass. Evidence: `analysis/native_setup_selection_milestone.md`.
+Other modes still stop at their banner. No native flight runs yet.
 Evidence: `analysis/native_flight_start_milestone.md`. Rough flight-start
-estimate 50%; this does not measure whole-game completeness.
-Next: C1C63E/C22C80 bootstrap record updates, C1072E and interactive Free
-Flight location/aircraft choices, then direct drawing and the flight loop.
+estimate about 70%; this means Free Flight startup wiring only, with camera
+and keyboard choices connected but previews and actual flight still missing.
+Next: source input/view/timer update ordering, direct world/cockpit drawing
+for location/aircraft previews, and the active flight loop/record children.
 Audio currently takes the original suppression path. Source data still uses
 checked address-indexed host buffers, pending typed-state migration.
 

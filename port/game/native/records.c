@@ -14,6 +14,7 @@
 #include "../postflight_scheduler.h"
 #include "../main_loop_flight_controls.h"
 #include "../matrix.h"
+#include "../view.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -108,9 +109,32 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
     }
 }
 static SelectorOriginTriple origin_child(void *context,enum SelectorOriginChild child,const SelectorOriginTriple *input) {
-    (void)context; (void)input;
+    (void)context;
     if(child==ORIGIN_PREPARE) { update_view_matrix(); return (SelectorOriginTriple){{0,0,0}}; }
+    if(child==ORIGIN_NORMALIZE) {
+        NormalizedVectorState state={0}; state.scale=0x200;
+        state.x=input->component[0]; state.y=input->component[1]; state.z=input->component[2];
+        state=normalize_record_vector(state,NULL,NULL);
+        return (SelectorOriginTriple){{state.x,state.y,state.z}};
+    }
+    if(child==ORIGIN_MATRIX_A || child==ORIGIN_MATRIX_B) {
+        gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD);
+        if(child==ORIGIN_MATRIX_A) update_view_matrix();
+        int32_t out[3];
+        local_to_world(record,child==ORIGIN_MATRIX_A?VIEW_MATRIX:record+RECORD_INVERSE,
+            (int16_t)input->component[0],(int16_t)input->component[1],(int16_t)input->component[2],out);
+        return (SelectorOriginTriple){{(uint32_t)out[0],(uint32_t)out[1],(uint32_t)out[2]}};
+    }
+    if(child==ORIGIN_REGENERATE) {
+        int32_t out[3]; start_position(out);
+        return (SelectorOriginTriple){{(uint32_t)out[0],(uint32_t)out[1],(uint32_t)out[2]}};
+    }
     fprintf(stderr,"native record origin child unavailable: %u\n",(unsigned)child); abort();
+}
+void native_control_records_update(void) {
+    RecordLoop loop={0};
+    const RecordUpdateHooks records={record_child,record_event,&loop};
+    update_control_records(&records);
 }
 void native_records_update(void) {
     RecordUpdateStageFrame frame={0};

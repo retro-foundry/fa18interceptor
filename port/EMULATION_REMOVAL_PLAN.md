@@ -19,14 +19,18 @@ Native continuation milestones (functional scope, not instruction counts):
   messages. Initial pose/camera and gate banks match a source checkpoint.
   The record/context slice now repeats while setup permits it; active record
   dispatch and its cell matrix match focused original memory results.
-  Roughly 60% of flight-start wiring; later full record state still differs.
+  Roughly 70% of Free Flight startup wiring; later full record state still differs.
   See `../analysis/native_flight_start_milestone.md` and
   `../analysis/native_bootstrap_records_milestone.md` for bounded evidence.
+- Connected: C1072E message completion, source typed-code acknowledgement,
+  location and aircraft input, C10B90 recorder/root refresh, camera-origin
+  normalization, and source P pause/resume. The root becomes aircraft kind
+  $11 through its original constructor. See
+  `../analysis/native_setup_selection_milestone.md`.
 - Next: complete input/view/timer update ordering, remaining active-record
-  children (C1C63E/C22C80), C1072E and
-  Free Flight location/aircraft controls, direct cockpit/world drawing and
+  children (C1C63E/C22C80), direct cockpit/world drawing for the setup previews and
   connected flight simulation. Current native endpoint is `scene-setup`.
-  The premature crash banner and missing aircraft-kind transition remain open.
+  The earlier supposed crash banner was original disk text, CRACKED BY A-HA.
 - Still open: other modes, active-flight exit/restart, outcomes/progression,
   audio, original timing and typed game state. The scene-setup endpoint
   does not establish active flight or whole-game completion.

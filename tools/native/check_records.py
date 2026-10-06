@@ -34,6 +34,15 @@ def main():
                                 check=True, capture_output=True, text=True, timeout=15)
         assert json.loads(result.stdout)['record_updates'] > 1, 'ongoing record path not exercised'
         subprocess.run([str(oracle), str(checkpoint)], cwd=ROOT, check=True, timeout=15)
+        replay.write_text(replay.read_text() + 'F 4100 K 13 0 0 1\nF 4102 K 13 0 0 0\n'
+            'F 5000 K 50 0 0 1\nF 5002 K 50 0 0 0\n'
+            'F 5400 K 49 0 0 1\nF 5402 K 49 0 0 0\n')
+        for frames in ('5450', '6100'):
+            command[command.index('--frames') + 1] = frames
+            result = subprocess.run(command + ['--replay', str(replay)], cwd=ROOT,
+                check=True, capture_output=True, text=True, timeout=15)
+            assert json.loads(result.stdout)['stage'] == 'C10C08', result.stdout
+            subprocess.run([str(oracle), str(checkpoint)], cwd=ROOT, check=True, timeout=15)
     if args.reference:
         subprocess.run([str(oracle), str(args.reference.resolve())], cwd=ROOT, check=True, timeout=15)
 

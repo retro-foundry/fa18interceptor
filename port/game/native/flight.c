@@ -1,6 +1,7 @@
 /* Connected source stage C0FECE and its scene constructors. */
 #include "flight.h"
 #include "records.h"
+#include "setup.h"
 #include "../globals.h"
 #include "../menu_transition.h"
 #include "../scene_dispatch.h"
@@ -20,6 +21,7 @@
 #include "../input_device_callbacks.h"
 #include "../menu_return.h"
 #include "../menu_followup.h"
+#include "../menu_outcome.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -89,8 +91,27 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     }
     return (MenuTransitionResult){0,0};
 }
+static void outcome_child(void *context,enum MenuOutcomeChild child,uint32_t value) {
+    (void)context; (void)value;
+    switch(child) {
+    case MO_COUNTDOWN_RESET: case MO_OUTCOME_RESET: case MO_MESSAGE_RESET:
+    case MO_DELAYED_RESET: reset_message_sequence(); break;
+    default: fprintf(stderr,"native outcome child unavailable: %u\n",(unsigned)child); abort();
+    }
+}
+static void cockpit_child(void *context,enum MenuColdChild child) {
+    NativeFrontend *game=context;
+    if(child==MENU_COLD_POSITION) reset_scene_recorder();
+    else if(child==MENU_COLD_UPDATE) { native_control_records_update(); ++game->record_updates; }
+    else { fprintf(stderr,"native cockpit child unavailable: %u\n",(unsigned)child); abort(); }
+}
+void native_flight_refresh_cockpit(NativeFrontend *game) {
+    const MenuColdHooks hooks={cockpit_child,NULL,game};
+    refresh_menu_cockpit(&hooks);
+}
 static void stage(void *context,gaddr routine) {
     NativeFrontend *game=context;
+    const MenuOutcomeHooks outcome={outcome_child,NULL,game};
     if(routine==0xc0fece) {
         const MenuTransitionHooks hooks={transition_child,NULL,game};
         advance_delayed_menu(&hooks);
@@ -101,7 +122,12 @@ static void stage(void *context,gaddr routine) {
     } else if(routine==0xc101fc) reset_menu_viewport_after_countdown(NULL);
     else if(routine==0xc10228) enter_menu_mode_four(NULL);
     else if(routine==0xc10678) advance_menu_mode_messages(NULL);
-    else { fprintf(stderr,"native flight stage unavailable: %08X\n",routine); abort(); }
+    else if(routine==0xc1072e) queue_menu_message_four(NULL);
+    else if(routine==0xc1075a) start_menu_outcome(&outcome);
+    else if(routine==0xc1078a) finish_menu_outcome(&outcome);
+    else if(routine==0xc10970) follow_menu_return_context(NULL);
+    else if(routine==0xc109ac) complete_menu_return_after_countdown(NULL);
+    else if(!native_setup_stage(game,routine)) { fprintf(stderr,"native flight stage unavailable: %08X\n",routine); abort(); }
 }
 enum { PALETTE_FRAME=0x3080 };
 static int32_t palette_child(void *context,enum InputDeviceChild child) {
@@ -125,9 +151,6 @@ void native_flight_tick(NativeFrontend *game) {
     if(rd_u8(MODE_SELECT)!=1) return;
     const InputDeviceHooks palette={palette_child,NULL,game};
     advance_viewport_palette(PALETTE_FRAME,&palette);
-    /* Stop at the next unconnected owner, with its real callback/state
-     * visible in diagnostics. Location/aircraft input and drawing follow. */
-    if(rd_u32(STAGE_CALLBACK)==0xc1072e) return;
     const PostInputTickHooks hooks={stage,NULL,game};
     run_post_input_tick(&hooks);
     /* C0EFD4 follows its stage tick with the record/context work while
