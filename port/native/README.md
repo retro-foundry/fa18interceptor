@@ -51,6 +51,11 @@ readouts, including the source selection colours and redraw/clipping rules.
 weapon's one-digit zero is correctly blank. All six identified frame owners
 are connected. This is a scope inventory, not whole-game progress; full recorded
 frame parity remains open. See `../../analysis/native_stores_milestone.md`.
+Menu-to-flight selection now publishes its next callback once per update and
+starts the banner at the final message boundary. The measured demo startup lead
+is 36 ticks. The remaining viewport wait spans a different number of game
+updates per PAL frame; source WaitBOVP/task pacing remains open. See
+`../../analysis/native_stage_dispatch_milestone.md`.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
 `hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;

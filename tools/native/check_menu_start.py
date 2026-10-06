@@ -20,11 +20,13 @@ def main():
         warmup = work / 'intro.e9k'
         warmup.write_text('E9K_INPUT_V1\nF 1800 K 32 0 0 1\nF 1802 K 32 0 0 0\n')
 
-        def run(frames, name, replay=warmup):
+        def run(frames, name, replay=warmup, iterations=None):
             data = work / f'{name}.dat'
+            extra = [] if iterations is None else ['--input', str(ROOT / 'captures/native/demo01/input.fa18in'),
+                                                  '--iterations', str(iterations)]
             result = subprocess.run([str(runner), '--headless', '--frames', str(frames),
                                      '--replay', str(replay), '--save-dir', str(work / name),
-                                     '--data-out', str(data)], cwd=ROOT, check=True,
+                                     '--data-out', str(data)] + extra, cwd=ROOT, check=True,
                                     capture_output=True, text=True, timeout=15)
             return json.loads(result.stdout), data
 
@@ -58,7 +60,18 @@ def main():
         assert selected['mode'] == 1 and selected['stage'] == 'C0FECE', selected
         assert selected['input_queued'] == 0 and selected['input_events'] == 2, selected
         assert not selected['cpu_emulation'] and not selected['chipset_emulation'], selected
+        # Original start-of-1526 has C0FECE and its newly published $D2
+        # countdown. C0F5F8 executes one stage per update, so the selection
+        # must not tick that callback until the next update.
+        for iteration, countdown in ((1525, 210), (1526, 209)):
+            stats, path = run(6000, f'dispatch-{iteration}', iterations=iteration)
+            data = path.read_bytes()
+            assert stats['stage'] == 'C0FECE' and stats['hud_frames'] == 0, stats
+            assert int.from_bytes(field(0xC45AD6, 2), 'big') == countdown, (iteration, countdown)
+            assert field(0xC457A3, 1) == b'\0', 'post-stage key claim was not cleared'
+            assert field(0xC457C3, 1) == b'\1', 'new banner did not start after menu publication'
     print('Complete native menu setup, frozen pause, original volume/palette and queued selection pass')
+    print('Menu selection publishes its flight stage once; its countdown first ticks on the following update')
 
 
 if __name__ == '__main__':

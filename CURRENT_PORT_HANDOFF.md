@@ -7,6 +7,18 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest dispatch correction: menu C0FCB4 now publishes C0FECE without ticking it
+again in the same update. Menu messages run afterward at the final C32CEE
+boundary. Actual recorded selection agrees with source countdown $D2, cleared
+key claim and started banner; the next update first decrements it to $D1.
+The demo lead falls 37 -> 36 ticks. A bounded original prefix, identical to the
+existing checkpoint, isolates most of the remaining gap to C0FA4C's viewport
+wait: original 80 updates in 34 PAL frames, native 43 updates in 45 PAL frames
+before this correction. Native next-whole-PAL WaitBOVP pacing remains open;
+do not replace it with a guessed fixed pass count. Menu/demo/carrier/crash
+checks pass. See `analysis/native_stage_dispatch_milestone.md`. This correction
+is 1/1 verified; six identified missing frame owners remain connected. Full
+frame parity stays 0/3 accepted; Copper fade excluded.
 Latest cockpit stores batch: C30A00 now runs in the actual HUD between weapon
 status and grid readouts, using original stocks, symbols and clipping. Complete
 HUD checks also fixed the exhausted missile's one-digit zero: source leaves it

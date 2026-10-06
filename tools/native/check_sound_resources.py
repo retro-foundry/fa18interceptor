@@ -80,7 +80,7 @@ def main():
                     # Source start 2401 versus native end 2400. Pending timers
                     # remain visible; no source clock is injected into the game.
                     gap = stats['game_tick']-value(source, 0xC458DA, 2)
-                    assert gap == 37, f'new startup timing debt: {gap} ticks'
+                    assert gap == 36, f'new startup timing debt: {gap} ticks'
                     print(f'Demo startup lead is {gap} game ticks (previously 97)')
             else:
                 log = value(path.read_bytes(), 0xC1AB74, 4)

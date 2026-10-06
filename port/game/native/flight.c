@@ -239,13 +239,15 @@ int native_flight_enabled(const NativeFrontend *game) {
     return (mode==1 || mode==9 || mode==127 || (mode==3 && rd_u8(RECORDER_MODE)==3)) &&
         (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
 }
-int native_flight_tick(NativeFrontend *game) {
+int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
     if(!native_flight_enabled(game)) return 1;
     if(game->flight_timer_pending) return finish_frame_clock(game);
     const uint16_t saved_tick=rd_u16(UPDATE_TICK);
-    native_input_process(game); /* C0F3C4, before the C0F5F8 stage tick. */
-    const PostInputTickHooks hooks={stage,NULL,game};
-    run_post_input_tick(&hooks);
+    if(!stage_already_ran) {
+        native_input_process(game); /* C0F3C4, before the C0F5F8 stage tick. */
+        const PostInputTickHooks hooks={stage,NULL,game};
+        run_post_input_tick(&hooks);
+    } else wr_u8(KEY_TAKEN,0); /* C0F808's tail follows C0FCB4 too. */
     tick_notification_cadence(); /* C11B44 at C0EFEA. */
     /* C0EFD4 follows its stage tick with the record/context work while
      * POST_INPUT_AUX permits updates. View/control, projection, terrain and

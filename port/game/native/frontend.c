@@ -235,7 +235,8 @@ void native_frontend_tick(NativeFrontend *game) {
     if(game->input_count && !native_flight_enabled(game)) native_input_process(game);
     MainControlHooks hooks={0}; hooks.context=game; hooks.consume_values=child;
     const int flight=native_flight_enabled(game);
-    if(!flight) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
+    const int menu=game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG;
+    if(!flight && !menu) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
     if(game->screen==NATIVE_ENLISTMENT && (int8_t)rd_u8(0xc457e0u)<0) {
         if(!rd_u16(PLAYER_LOG+4)) {
             select_screen(game,NATIVE_CALLSIGN,3,2); wr_u8(0xc457f5u,20); wr_u8(0xc457e0u,2);
@@ -247,9 +248,11 @@ void native_frontend_tick(NativeFrontend *game) {
     if(game->menu_setup.pending) return;
     if(native_flight_enabled(game))
         native_display_begin_frame(game);
-    const int complete=native_flight_tick(game);
+    /* C0FCB4 can select flight here. C0F5F8 dispatches one stage per update:
+     * continue this frame without ticking its newly published C0FECE. */
+    const int complete=native_flight_tick(game,!flight);
     /* C32CEE is C0EFD4's final child, after the flight/HUD work. */
-    if(flight && complete) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
+    if((flight || menu) && complete) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
     if(game->display_drawing && complete) native_display_finish_frame(game);
     native_display_read_pixels(game);
 }

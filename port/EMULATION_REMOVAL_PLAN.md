@@ -9,6 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: stop menu C0FCB4 from ticking its newly published C0FECE in the
+  same update; execute menu messages at final C32CEE. Real recorded boundary
+  checks match source countdown/key/banner state. Menu/demo/carrier/crash
+  regressions pass. See `../analysis/native_stage_dispatch_milestone.md`.
+  This correction is **1/1 (100% of that scope)**; measured startup lead falls
+  **37 -> 36 ticks**. The bounded source trace isolates the larger remaining
+  viewport-wait pacing gap. Full frame parity remains **0/3 accepted**, six
+  missing frame owners connected, Copper fade excluded. Next: source-backed
+  WaitBOVP/task pacing and async voice/output.
+
 - Complete: connect C30A00 stores icons in the real native cockpit HUD.
   Correct C32AEE's blank one-digit zero for exhausted weapons. 1,484 stores
   and 280 complete HUD source comparisons, actual cockpit/map, complete
