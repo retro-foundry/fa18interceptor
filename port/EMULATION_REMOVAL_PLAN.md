@@ -151,7 +151,12 @@ Native continuation milestones (functional scope, not instruction counts):
   apart from two existing startup differences. Input-alignment milestone 100%;
   carrier touchdown reaches the missing C083E2 mission reset. See
   `../analysis/native_game_input_milestone.md`.
-- Next: connect C083E2 at carrier touchdown, carrier-success/demo outcomes,
+- Connected: C149BE -> C083E2 carrier touchdown mission reset. Eight original
+  reset cases and actual landing/contact/motion state through iteration 6288
+  pass; the old helper's wrong player-phase address is corrected. Touchdown
+  milestone 100%; success result callback C11078 remains open. See
+  `../analysis/native_carrier_touchdown_milestone.md`.
+- Next: connect C11078/C110A4 qualification results, carrier-success/demo outcomes,
   complete C0EFD4 frame ownership, remaining HUD/end-of-frame owners,
   remaining active-record children (C1C63E/C22C80), and flight acceptance.
   Current native endpoint is `scene-setup`.

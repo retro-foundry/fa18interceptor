@@ -167,7 +167,7 @@ void nudge_outside_dead_zone(gaddr record, gaddr value);
 void reset_mission_objects(void);
 /* $C133B2: step from the current record's +$6E word (or $10 for type $3x). */
 int32_t record_6e_step(void);
-/* $C083E2: post message $4005, settle attempt flag, then reset objects. */
+/* $C083E2: post message $4005, settle player phase, then reset objects. */
 void begin_mission_reset(void);
 
 /* Set up the player record for a new flight. */

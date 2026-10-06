@@ -55,6 +55,8 @@ static FlightWorking root_control_child(void *context,enum FlightChild child,Fli
     case FC_PROBE_CONTROL: probe_record_regions(NULL);break;
     case FC_TOUCHDOWN_FAST_TONE: case FC_TOUCHDOWN_SLOW_TONE:
         sound_chosen_record_alert(child==FC_TOUCHDOWN_FAST_TONE?40:30);break;
+    case FC_RESET_CONTROL:
+        begin_mission_reset();break; /* C083E2 after landing on the carrier. */
     case FC_SAMPLE_TOUCHDOWN: case FC_SAMPLE_TAKEOFF: {
         native_clock_sample();break;
     }

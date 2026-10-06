@@ -219,11 +219,11 @@ int32_t record_6e_step(void) {
 }
 
 void begin_mission_reset(void) {
-    uint8_t attempts;
+    uint8_t phase;
     post_message(0x4005);
     if (rd_u8(MODE_SELECT) == 6) {
-        attempts = rd_u8(ATTEMPTS_LEFT);
-        if (attempts != 1 && attempts != 0xFF) wr_u8(ATTEMPTS_LEFT, 0);
+        phase = rd_u8(PLAYER_PHASE); /* C083FA-C08408: C45798, not attempts C45898. */
+        if (phase != 1 && phase != 0xFF) wr_u8(PLAYER_PHASE, 0);
     }
     reset_mission_objects();
 }

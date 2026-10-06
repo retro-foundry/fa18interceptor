@@ -232,3 +232,15 @@ delivery can differ. Native turn/hook state matches a focused original
 checkpoint with consumed keys; startup flags/countdown and carrier touchdown
 integration remain open. See
 [`../../analysis/native_game_input_milestone.md`](../../analysis/native_game_input_milestone.md).
+
+Carrier touchdown now runs C083E2's source mission reset. The aircraft stops on
+the deck with original motion, orientation, contact and reset state through
+iteration 6288. Eight original child comparisons pass. Qualification result
+messages/pilot-log completion remain open at C11078. The bounded check reuses
+existing reference evidence:
+
+```powershell
+python tools/native/check_touchdown.py --game-input build/native-flight/carrier-game-input.fa18in --source-approach build/native-flight/reference-carrier-approach.dat
+```
+
+See [`../../analysis/native_carrier_touchdown_milestone.md`](../../analysis/native_carrier_touchdown_milestone.md).
