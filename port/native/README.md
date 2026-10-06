@@ -126,6 +126,10 @@ Nineteen cockpit/HUD instrument and panel owners now execute through direct
 host drawing. Three checkpoints each pass 95 original-instruction cases across
 centered, panned and clipped views. See
 [`../../analysis/native_hud_milestone.md`](../../analysis/native_hud_milestone.md).
-Remaining HUD parents, full flight, positive shadow strips and the record-expiry
+Postflight dispatch and the cockpit message line are now connected, with source
+warning selection before the HUD and the final text sequence after flight work.
+Notification cadence executes before record updates. Three checkpoints each
+pass 115 HUD/message cases. Timer polling and game update cadence remain open.
+Full flight, positive shadow strips and the record-expiry
 transition remain unfinished. Setup correctness is separate from frame cadence
 and recorded gameplay acceptance.

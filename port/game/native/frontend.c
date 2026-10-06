@@ -169,7 +169,9 @@ void native_frontend_tick(NativeFrontend *game) {
         select_screen(game,NATIVE_CREDITS,15,0);
     }
     MainControlHooks hooks={0}; hooks.context=game; hooks.consume_values=child;
-    advance_main_loop_message_sequence((MessageWorking){0},&hooks);
+    const int flight=rd_u8(MODE_SELECT)==1 &&
+        (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
+    if(!flight) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
     if(game->screen==NATIVE_ENLISTMENT && (int8_t)rd_u8(0xc457e0u)<0) {
         if(!rd_u16(PLAYER_LOG+4)) {
             select_screen(game,NATIVE_CALLSIGN,3,2); wr_u8(0xc457f5u,20); wr_u8(0xc457e0u,2);
@@ -178,6 +180,8 @@ void native_frontend_tick(NativeFrontend *game) {
     } else if(game->screen==NATIVE_CALLSIGN && game->name_finished) native_frontend_start_menu(game);
     native_menu_tick(game);
     native_flight_tick(game);
+    /* C32CEE is C0EFD4's final child, after the flight/HUD work. */
+    if(flight) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
     for(unsigned y=0;y<256;++y) for(unsigned x=0;x<320;++x) {
         uint8_t index=0;
         for(unsigned p=0;p<4;++p) if(rd_u8(PLANE_FIRST+p*PLANE_BYTES+y*40+x/8)&(0x80u>>(x&7))) index|=(uint8_t)(1u<<(3-p));

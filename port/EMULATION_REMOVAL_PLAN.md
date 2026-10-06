@@ -62,6 +62,11 @@ Native continuation milestones (functional scope, not instruction counts):
   match every non-stack RAM byte. See `../analysis/native_hud_milestone.md`.
   Roughly 97% of Free Flight startup wiring (previously 95%), excluding full
   frame/timing and active-flight acceptance.
+- Connected: source C11B44 notification cadence, C11BFC cockpit warnings,
+  C31226 postflight renderer and C322EE message line. The C32CEE final text
+  sequence now follows flight work. Three checkpoints each pass 115
+  HUD/message cases. Startup estimate remains about 97%; game update counter
+  and timer-driven cadence are the next active-flight dependency.
 - Next: remaining HUD drawing, complete input/view/timer update
   ordering, remaining active-record children (C1C63E/C22C80), and connected
   flight simulation. Current native endpoint is `scene-setup`.

@@ -27,8 +27,8 @@ oracle checkpoints, all three HUD oracle checkpoints, and the reference MSVC
 build with twelve passing CTests. The GNU validation build also passes.
 
 This is component correctness plus demonstrated runtime integration. Whole
-frame parity remains open: C12950 control/audio actions, C31226 postflight
-dispatch, stores, message-line drawing, end-of-frame owners and complete
+frame parity remains open: C12950 control/audio actions, stores,
+end-of-frame owners and complete
 message/timer/counter ordering are not yet connected. Source tick cadence gates
 are present, but the complete source frame clock still needs its owner.
 The existing `scene-setup` label covers this partial flight loop.
@@ -37,3 +37,13 @@ Estimated Free Flight startup wiring is now about 97% (previously 95%), with
 cockpit/HUD rendering connected. This excludes takeoff, other modes, full flight
 and recorded-run acceptance. Copper fade is excluded; no full sealed replay
 was repeated.
+
+The following connected batch adds C31226 postflight dispatch and C322EE
+message-line drawing, C11B44 notification cadence before the record pass, and
+C11BFC warning selection before instrument drawing. C32CEE text sequencing
+now follows flight work, matching its position as C0EFD4's final child.
+The expanded oracle passes 115 cases at each of frames 5300, 6100 and 6500;
+the native frontend and setup/pause/resume checks also pass. This leaves the
+scoped startup estimate at about 97%. The game update counter is still frozen:
+C25312 timer polling, C2548A sampling and C0EFD4's counter increment are next.
+The source update clock is distinct from host PAL display frames.

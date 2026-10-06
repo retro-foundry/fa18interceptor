@@ -10,6 +10,8 @@ add_executable(fa18_native main.c
     ../game/native/hud.c ../game/postflight_hud.c ../game/hud_readouts.c
     ../game/hud_marks.c ../game/view_marks.c
     ../game/hud_bars.c ../game/render_span.c
+    ../game/postflight_variants.c ../game/message_line.c
+    ../game/notify.c
     ../game/display_records.c ../game/render_polygon.c ../game/render_line.c
     ../game/render_buffers.c ../game/plot.c ../game/clip.c
     ../game/polygon_clip.c ../game/attitude.c ../game/stages.c

@@ -88,6 +88,13 @@ each checkpoint match all non-stack RAM, including planes. Evidence:
 now 97% (previously 95%). Complete frame ordering/cadence and full flight remain
 open; this is not recorded-run acceptance.
 Next: complete frame ownership, remaining HUD/input and flight-record children.
+The C32CEE text sequence now follows flight work, with C11B44 notification
+cadence before the record pass and C11BFC warning selection before HUD drawing.
+C31226 postflight dispatch and C322EE message-line drawing are connected.
+Three checkpoints each pass 115 HUD/message cases; frontend and setup checks
+pass. The scoped startup estimate remains about 97%. UPDATE_TICK is still
+frozen; next connect C25312 timer polling, C2548A sampling and the counter's
+source increment. Game update cadence is distinct from the host PAL clock.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Audio currently takes the original suppression path. Source data still uses

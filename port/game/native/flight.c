@@ -15,6 +15,8 @@
 #include "../fixed_math.h"
 #include "../stages.h"
 #include "../audio.h"
+#include "../messages.h"
+#include "../notify.h"
 #include "../post_input_tick.h"
 #include "../scene_bootstrap.h"
 #include "../template_gates.h"
@@ -157,6 +159,7 @@ void native_flight_tick(NativeFrontend *game) {
     advance_viewport_palette(PALETTE_FRAME,&palette);
     const PostInputTickHooks hooks={stage,NULL,game};
     run_post_input_tick(&hooks);
+    tick_notification_cadence(); /* C11B44 at C0EFEA. */
     /* C0EFD4 follows its stage tick with the record/context work while
      * POST_INPUT_AUX permits updates. View/control, projection, terrain and
      * the HUD/panel slice follow the record/context work. Complete message,
@@ -169,6 +172,7 @@ void native_flight_tick(NativeFrontend *game) {
         const ContextRefreshHooks refresh={refresh_child,NULL,game};
         refresh_context_packet(&refresh);
         native_scene_draw(game);
+        update_message(); /* C11BFC at C0F12C, before instruments. */
         native_hud_draw(saved_tick);
         ++game->hud_frames;
     }
