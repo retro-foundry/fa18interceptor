@@ -18,7 +18,8 @@ void update_dynamics_selected_record(IndexedRecordWork *work) {
 static void observe(const DynamicsHooks *h,enum DynamicsPhase p,enum DynamicsValue f,uint32_t v,uint32_t o) {
     if(h && h->observe) h->observe(h->context,p,f,v,o);
 }
-static DynamicsState consume(const DynamicsHooks *h,enum DynamicsChild child) {
+static DynamicsState consume(const DynamicsHooks *h,enum DynamicsChild child,DynamicsState work) {
+    if(h && h->consume_values) return h->consume_values(h->context,child,work);
     if(h && h->consume) return h->consume(h->context,child); abort();
 }
 static DynamicsState restored(const DynamicsHooks *h,DynamicsState w) {
@@ -375,7 +376,7 @@ complete:
 }
 void advance_indexed_record_dynamics(DynamicsState w,const DynamicsHooks *h) {
     RecordDynamicsFrame frame={0}; frame.work=w; frame.phase=DYNAMICS_BEGIN;
-    while(!advance_record_dynamics(&frame,h)) frame.work=consume(h,frame.child);
+    while(!advance_record_dynamics(&frame,h)) frame.work=consume(h,frame.child,frame.work);
 }
 static DynamicsState scene_reference_distance(DynamicsState w,gaddr frame,const DynamicsHooks *h) {
     int64_t difference;
@@ -473,7 +474,7 @@ component_retry:
     load_longs(&w,w.scene+24,7,h); add_long(h,w.scene,w.primary); add_long(h,w.scene+4,w.detail); add_long(h,w.scene+8,w.x);
     B(primary,DY_PRIMARY,rd_u8(frame-2)); EW(primary,DY_PRIMARY); word(h,0xc459b8u,(uint16_t)w.primary);
     saved_scan=w.rate_x; observe(h,DY_SAVE_SCAN,DY_PRIMARY,0,0); L(rate_z,DY_RATE_Z,0); B(primary,DY_PRIMARY,rd_u8(frame-4)); AND_B(primary,DY_PRIMARY,16); component=(uint8_t)w.primary!=0;
-    w=consume(h,component?DY_COMPONENT_COLLISION:DY_FACE_COLLISION); observe(h,DY_RESTORE_SCAN,DY_PRIMARY,0,0); w.rate_x=saved_scan; w=restored(h,w);
+    w=consume(h,component?DY_COMPONENT_COLLISION:DY_FACE_COLLISION,w); observe(h,DY_RESTORE_SCAN,DY_PRIMARY,0,0); w.rate_x=saved_scan; w=restored(h,w);
     observe(h,DY_TEST_WORD,DY_PRIMARY,w.rate_z,0); if((uint16_t)w.rate_z) goto component_hit;
     if(decrement(&w.rate_x,DY_RATE_X,h)) goto component_retry;
     load_longs(&w,w.scene+12,7,h); sub_long(h,w.scene,w.primary); sub_long(h,w.scene+4,w.detail); sub_long(h,w.scene+8,w.x); goto next_descriptor;
@@ -520,8 +521,8 @@ void update_scene_regions(DynamicsState w,const DynamicsHooks *h) {
         CW(w.rate_x,w.x); if((int16_t)w.rate_x>(int16_t)w.x) goto outside;
         CW(w.rate_y,w.y); if((int16_t)w.rate_y<(int16_t)w.y) goto outside;
         CW(w.rate_y,w.z); if((int16_t)w.rate_y>(int16_t)w.z) goto outside;
-        if(!occupied) { change_bit(h,0xc4579du,w.rate_z,1); w=consume(h,DY_REGION_ENTER); }
-        else w=consume(h,DY_REGION_ACTIVE);
+        if(!occupied) { change_bit(h,0xc4579du,w.rate_z,1); w=consume(h,DY_REGION_ENTER,w); }
+        else w=consume(h,DY_REGION_ACTIVE,w);
         goto next_region;
 outside:
         if(!occupied) goto next_region;
@@ -541,7 +542,7 @@ outside:
             if((int16_t)w.rate_y<0) {
                 AND_W(rate_y,DY_RATE_Y,0x7f00); if(!(uint16_t)w.rate_y) goto next_row;
                 ASW(rate_y,DY_RATE_Y,7); w=geometry_table(w,w.rate_y,h); load_words(&w,w.table,0x7c,4,h);
-                w=consume(h,DY_REGION_REPLACE); byte(h,w.root+56,255); and_word(h,w.root,0xfffe); byte(h,w.root+122,3); goto next_row;
+                w=consume(h,DY_REGION_REPLACE,w); byte(h,w.root+56,255); and_word(h,w.root,0xfffe); byte(h,w.root+122,3); goto next_row;
             }
             P(record,DY_RECORD,0xc46184u); AND_W(rate_y,DY_RATE_Y,0xff00); W(rate_x,DY_RATE_X,w.rate_y); AW(rate_y,DY_RATE_Y,w.rate_y); P(record,DY_RECORD,indexed(w.record,w.rate_y));
             W(detail,DY_DETAIL,rd_u16(w.record)); AND_W(detail,DY_DETAIL,64); if(!(uint16_t)w.detail) goto release;
@@ -552,21 +553,21 @@ release:
             byte(h,w.root+122,5);
 release_position:
             W(rate_y,DY_RATE_Y,rd_u16(w.table)); P(table,DY_TABLE,w.table+2); EL(rate_y,DY_RATE_Y);
-            w=consume(h,DY_REGION_RELEASE); byte(h,w.root+56,128); and_word(h,w.root,0xfffe);
+            w=consume(h,DY_REGION_RELEASE,w); byte(h,w.root+56,128); and_word(h,w.root,0xfffe);
 next_row:;
         } while(decrement(&w.primary,DY_PRIMARY,h));
 next_region:
         P(scene,DY_SCENE,w.scene+4); AW(rate_z,DY_RATE_Z,1); CW(w.rate_z,8); if((int16_t)w.rate_z>=8) return;
     }
 }
-void spawn_region_records(DynamicsState w,const DynamicsHooks *h) {
-    B(primary,DY_PRIMARY,rd_u8(0xc458a6u)); CB(w.primary,2); if((int8_t)w.primary<=2) return;
-    CB(w.primary,125); if((uint8_t)w.primary==125) return;
+DynamicsState spawn_region_records(DynamicsState w,const DynamicsHooks *h) {
+    B(primary,DY_PRIMARY,rd_u8(0xc458a6u)); CB(w.primary,2); if((int8_t)w.primary<=2) return w;
+    CB(w.primary,125); if((uint8_t)w.primary==125) return w;
     P(geometry,DY_GEOMETRY,rd_u32(w.scene)); P(geometry,DY_GEOMETRY,w.geometry+8); W(primary,DY_PRIMARY,rd_u16(w.geometry)); P(geometry,DY_GEOMETRY,w.geometry+2);
-    { int32_t count=(int16_t)w.primary-1; SW(primary,DY_PRIMARY,1); if(count<0) { L(rate_z,DY_RATE_Z,0xffffffffu); return; } }
-    dispatch_region_records(w,h);
+    { int32_t count=(int16_t)w.primary-1; SW(primary,DY_PRIMARY,1); if(count<0) { L(rate_z,DY_RATE_Z,0xffffffffu); return w; } }
+    return dispatch_region_records(w,h);
 }
-void dispatch_region_records(DynamicsState w,const DynamicsHooks *h) {
+DynamicsState dispatch_region_records(DynamicsState w,const DynamicsHooks *h) {
     gaddr saved_root,saved_geometry; uint32_t saved_count;
     do {
         P(record,DY_RECORD,0xc22048u); P(record,DY_RECORD,indexed(w.record,rd_u16(w.geometry))); P(geometry,DY_GEOMETRY,w.geometry+2);
@@ -619,7 +620,7 @@ void dispatch_region_records(DynamicsState w,const DynamicsHooks *h) {
                 W(detail,DY_DETAIL,rd_u16(w.table)); EL(detail,DY_DETAIL); longword(h,w.root+52,w.detail);
             }
             B(detail,DY_DETAIL,255);
-        } else { w=consume(h,DY_PLACE_RECORD); LSW(detail,DY_DETAIL,8); OR_B(detail,DY_DETAIL,128); }
+        } else { w=consume(h,DY_PLACE_RECORD,w); LSW(detail,DY_DETAIL,8); OR_B(detail,DY_DETAIL,128); }
         byte(h,w.root+56,(uint8_t)w.detail); word(h,w.root+6,(uint16_t)w.x); word(h,w.root+8,(uint16_t)w.y); word(h,w.root+12,(uint16_t)w.z); word(h,w.root+14,(uint16_t)w.rate_x); longword(h,w.root+16,w.rate_y);
         EL(z,DY_Z); EL(rate_x,DY_RATE_X); ALL(z,DY_Z,8); ALL(rate_y,DY_RATE_Y,8); ALL(rate_x,DY_RATE_X,8);
         observe(h,DY_TEST_LONG,DY_PRIMARY,w.rate_y,0);
@@ -630,12 +631,13 @@ void dispatch_region_records(DynamicsState w,const DynamicsHooks *h) {
         longword(h,w.root+20,w.x); longword(h,w.root+24,w.rate_y); longword(h,w.root+28,w.y);
         L(z,DY_Z,0); L(rate_x,DY_RATE_X,0); L(rate_y,DY_RATE_Y,0); P(record,DY_RECORD,w.root);
         saved_count=w.primary; saved_root=w.root; saved_geometry=w.geometry; observe(h,DY_SAVE_ORIENTATION,DY_PRIMARY,0,0);
-        w=consume(h,DY_ORIENT_RECORD); observe(h,DY_RESTORE_ORIENTATION,DY_PRIMARY,0,0); w.primary=saved_count; w.root=saved_root; w.geometry=saved_geometry; w=restored(h,w);
+        w=consume(h,DY_ORIENT_RECORD,w); observe(h,DY_RESTORE_ORIENTATION,DY_PRIMARY,0,0); w.primary=saved_count; w.root=saved_root; w.geometry=saved_geometry; w=restored(h,w);
         L(rate_z,DY_RATE_Z,0); goto next;
 skipped:
         P(geometry,DY_GEOMETRY,w.geometry+6); SWAP(primary,DY_PRIMARY); L(rate_z,DY_RATE_Z,0xffffffffu);
 next:;
     } while(decrement(&w.primary,DY_PRIMARY,h));
+    return w;
 }
 
 /* Original record autopilot. The action byte names maneuver phases; targets,

@@ -78,7 +78,7 @@ static void outputs(void *context,enum DynamicsPhase phase,enum DynamicsValue fi
 }
 static gaddr frame(void *context) { (void)context; return A(6); }
 static DynamicsState restored_state(void *context) { (void)context; return working(); }
-static const DynamicsHooks hooks={consume,outputs,frame,restored_state,NULL};
+static const DynamicsHooks hooks={consume,outputs,frame,restored_state,NULL,NULL};
 int glue_C25B66(void) { advance_indexed_record_dynamics(working(),&hooks); return glue_return(); }
 int glue_C266AE(void) { collide_scene_motion(working(),&hooks); return glue_return(); }
 int glue_C28996(void) { update_scene_regions(working(),&hooks); return glue_return(); }

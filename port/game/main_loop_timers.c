@@ -65,14 +65,14 @@ static uint32_t elapsed(const MainTimerHooks *h,uint32_t seconds,gaddr fraction)
     quotient=(int16_t)remainder; observe(h,MT_FRACTION_EXTEND,(uint32_t)quotient,0);
     delta+=(uint32_t)quotient; observe(h,MT_SAMPLE_ADD,(uint32_t)quotient,0); return delta;
 }
-void advance_main_loop_timers(const MainTimerHooks *h) {
-    uint32_t previous,delta,old,total,current; uint16_t flags,partial,divisor; uint8_t count,level,index;
+void begin_main_loop_timers(const MainTimerHooks *h) {
+    uint32_t previous,delta,old,total,current; uint16_t flags,partial; uint8_t count,level;
     consume(h,MT_SAMPLE_BEGIN); previous=rd_u32(PREVIOUS_SECONDS); observe(h,MT_ACCUMULATOR_LOAD,previous,0);
     if((int32_t)previous>=0) {
         flags=rd_u16(TIMER_FLAGS); observe(h,MT_DIVISOR_LOAD,flags,0); observe(h,MT_FLAGS_CLEAR,flags,0);
         if(flags&0x100) {
             wr_u16(TIMER_FLAGS,(uint16_t)(flags&0xfebf)); observe(h,MT_WORD_STORE,flags&0xfebf,0);
-            longword(h,ELAPSED_TOTAL,0); longword(h,NOTIFIED_TOTAL,0); goto poll;
+            longword(h,ELAPSED_TOTAL,0); longword(h,NOTIFIED_TOTAL,0); return;
         }
         delta=elapsed(h,previous,PREVIOUS_FRACTION);
         old=rd_u32(ELAPSED_TOTAL); wr_u32(ELAPSED_TOTAL,old+delta); observe(h,MT_TOTAL_ADD,old,delta);
@@ -112,21 +112,25 @@ void advance_main_loop_timers(const MainTimerHooks *h) {
     }
 save_fraction:
     longword(h,PREVIOUS_FRACTION,rd_u32(SAMPLE_FRACTION));
-poll:
-    for(;;) {
-        consume(h,MT_SAMPLE_POLL); previous=rd_u32(POLL_SECONDS); observe(h,MT_ACCUMULATOR_LOAD,previous,0);
-        if((int32_t)previous<0) return;
-        delta=elapsed(h,previous,POLL_FRACTION); longword(h,ELAPSED_SAMPLE,delta); observe(h,MT_POLL_COMPARE,delta,32767);
-        if((int32_t)delta>32767) return;
-        divisor=rd_u16(0xc458dau); observe(h,MT_DIVISOR_LOAD,divisor,2); observe(h,MT_DIVISOR_MASK,7,0);
-        divisor=(uint16_t)((divisor&7)+1); observe(h,MT_DIVISOR_INCREMENT,1,0); observe(h,MT_POLL_DIVIDE,divisor,0);
-        /* DIVU overflow leaves the dividend unchanged. */
-        if(delta/divisor<=65535) delta=delta/divisor;
-        observe(h,MT_THRESHOLD_BASE,0xc2502eu,0); index=rd_u8(0xc458beu); observe(h,MT_THRESHOLD_INDEX,index,0);
-        observe(h,MT_THRESHOLD_EXTEND,(uint16_t)(int16_t)(int8_t)index,0); observe(h,MT_THRESHOLD_SCALE,0,0);
-        partial=rd_u16(0xc2502eu+(uint32_t)(int32_t)(int16_t)((int16_t)(int8_t)index*2)); observe(h,MT_THRESHOLD_COMPARE,partial,0);
-        if((int16_t)delta>=(int16_t)partial) return;
-    }
+}
+int poll_main_loop_timers(const MainTimerHooks *h) {
+    uint32_t previous,delta; uint16_t divisor,partial; uint8_t index;
+    consume(h,MT_SAMPLE_POLL); previous=rd_u32(POLL_SECONDS); observe(h,MT_ACCUMULATOR_LOAD,previous,0);
+    if((int32_t)previous<0) return 1;
+    delta=elapsed(h,previous,POLL_FRACTION); longword(h,ELAPSED_SAMPLE,delta); observe(h,MT_POLL_COMPARE,delta,32767);
+    if((int32_t)delta>32767) return 1;
+    divisor=rd_u16(0xc458dau); observe(h,MT_DIVISOR_LOAD,divisor,2); observe(h,MT_DIVISOR_MASK,7,0);
+    divisor=(uint16_t)((divisor&7)+1); observe(h,MT_DIVISOR_INCREMENT,1,0); observe(h,MT_POLL_DIVIDE,divisor,0);
+    /* DIVU overflow leaves the dividend unchanged. */
+    if(delta/divisor<=65535) delta=delta/divisor;
+    observe(h,MT_THRESHOLD_BASE,0xc2502eu,0); index=rd_u8(0xc458beu); observe(h,MT_THRESHOLD_INDEX,index,0);
+    observe(h,MT_THRESHOLD_EXTEND,(uint16_t)(int16_t)(int8_t)index,0); observe(h,MT_THRESHOLD_SCALE,0,0);
+    partial=rd_u16(0xc2502eu+(uint32_t)(int32_t)(int16_t)((int16_t)(int8_t)index*2)); observe(h,MT_THRESHOLD_COMPARE,partial,0);
+    return (int16_t)delta>=(int16_t)partial;
+}
+void advance_main_loop_timers(const MainTimerHooks *h) {
+    begin_main_loop_timers(h);
+    while(!poll_main_loop_timers(h)) { }
 }
 void sample_main_loop_readout(const MainTimerHooks *h) {
     uint32_t divisor,result,quotient; int16_t value;

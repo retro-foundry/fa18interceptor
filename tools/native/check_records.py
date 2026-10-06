@@ -51,7 +51,9 @@ def main():
         initial_position = field(0xC46198, 12)
         replay.write_text(replay.read_text() + 'F 6200 K 61 0 0 1\nF 6600 K 61 0 0 0\n'
                           'F 6800 K 273 0 0 1\nF 6900 K 273 0 0 0\n')
-        for frames in ('6500', '6850', '7000'):
+        # C25312 limits game updates using the disk table. Allow enough game
+        # updates for C1B27E's unchanged one-step ramp to reach its limit 20.
+        for frames in ('6500', '6880', '7000'):
             command[command.index('--frames') + 1] = frames
             result = subprocess.run(command + ['--replay', str(replay)], cwd=ROOT,
                 check=True, capture_output=True, text=True, timeout=15)
@@ -60,7 +62,7 @@ def main():
                 assert field(0xC46198, 12) != initial_position, 'throttle did not move aircraft'
                 assert int.from_bytes(field(0xC461F2, 2), 'big') > 0, 'throttle produced no speed'
                 assert field(0xC461C2, 4) != bytes(4), 'horizontal motion was not published'
-            elif frames == '6850':
+            elif frames == '6880':
                 assert field(0xC461E9, 1)[0] & 0x30 == 0x10, 'stick press not recorded'
                 assert field(0xC461AC, 1) == bytes([20]), 'stick response did not ramp'
             else:

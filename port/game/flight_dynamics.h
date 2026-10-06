@@ -41,6 +41,7 @@ typedef struct {
     gaddr (*frame)(void *context);
     DynamicsState (*restored)(void *context);
     void *context;
+    DynamicsState (*consume_values)(void *context,enum DynamicsChild child,DynamicsState work);
 } DynamicsHooks;
 void advance_indexed_record_dynamics(DynamicsState w,const DynamicsHooks *h); /* C25B66 */
 enum RecordDynamicsPhase {
@@ -68,8 +69,8 @@ void update_dynamics_record_input(gaddr record, uint32_t incoming);
 void update_dynamics_selected_record(IndexedRecordWork *work);
 void collide_scene_motion(DynamicsState w,const DynamicsHooks *h); /* C266AE */
 void update_scene_regions(DynamicsState w,const DynamicsHooks *h); /* C28996 */
-void spawn_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B16 */
-void dispatch_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B34 shared body */
+DynamicsState spawn_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B16 */
+DynamicsState dispatch_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B34 shared body */
 /* C2C392's forty original action arms. A phase is C continuation state,
  * not a guest PC. Existing children remain at the temporary outer boundary. */
 enum AutopilotPhase {

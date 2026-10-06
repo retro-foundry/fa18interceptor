@@ -67,9 +67,17 @@ Native continuation milestones (functional scope, not instruction counts):
   sequence now follows flight work. Three checkpoints each pass 115
   HUD/message cases. Startup estimate remains about 97%; game update counter
   and timer-driven cadence are the next active-flight dependency.
-- Next: remaining HUD drawing, complete input/view/timer update
-  ordering, remaining active-record children (C1C63E/C22C80), and connected
-  flight simulation. Current native endpoint is `scene-setup`.
+- Connected: C25312 resumable timer polling, C2548A sampling, source game
+  counter/pause gates, periodic page clearing and C082B8 redraw requests.
+  The disk update-rate table controls timing; a pending poll does not repeat
+  physics, drawing or C32CEE text. C28996 regions and reached C28E28 zone checks
+  now run. Seven view/record checkpoints, 36 timer/readout cases, two periodic
+  record passes and focused yielding/pause checks pass. See
+  `../analysis/native_clock_milestone.md`. Roughly 98% of startup wiring
+  (previously 97%); whole-frame ownership and recorded-flight parity remain open.
+- Next: complete C0EFD4 frame ownership, remaining HUD/control/audio actions,
+  remaining active-record children (C1C63E/C22C80), and flight acceptance.
+  Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.
 - Still open: other modes, active-flight exit/restart, outcomes/progression,
   audio, original timing and typed game state. The scene-setup endpoint

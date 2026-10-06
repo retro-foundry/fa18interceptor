@@ -92,12 +92,20 @@ The C32CEE text sequence now follows flight work, with C11B44 notification
 cadence before the record pass and C11BFC warning selection before HUD drawing.
 C31226 postflight dispatch and C322EE message-line drawing are connected.
 Three checkpoints each pass 115 HUD/message cases; frontend and setup checks
-pass. The scoped startup estimate remains about 97%. UPDATE_TICK is still
-frozen; next connect C25312 timer polling, C2548A sampling and the counter's
-source increment. Game update cadence is distinct from the host PAL clock.
+pass. C25312 timer polling and C2548A sampling now execute, followed by the
+source game-counter increment. Polling yields across PAL ticks without
+repeating physics, HUD or final text; the disk table controls the threshold.
+C28996 periodic region work and reached C28E28 zone checks execute. Seven
+view/record checkpoints, 36 timer/readout oracle cases, two periodic record
+passes, focused yielding and setup/pause/resume checks pass; twelve reference
+CTests pass. See `analysis/native_clock_milestone.md`. Rough startup wiring
+estimate now about 98% (previously 97%), excluding full flight/frame acceptance.
+Game update cadence is distinct from the host PAL clock. Complete frame
+ownership, control/audio actions and remaining record children are still open.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
-Audio currently takes the original suppression path. Source data still uses
+Source sound requests now consume the original mute/absent-voice gates; native
+sample loading/output remains open. Source data still uses
 checked address-indexed host buffers, pending typed-state migration.
 
 Updated 2026-10-06 after active-runner emulation metering, following the user's source-ownership correction, cleanup and

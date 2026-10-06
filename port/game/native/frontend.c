@@ -11,6 +11,8 @@
 #include "../player_input.h"
 #include "menu.h"
 #include "flight.h"
+#include "clock.h"
+#include "../audio.h"
 #include "../text.h"
 #include "../../romfree/placement.h"
 #include "../../romfree/media.h"
@@ -25,7 +27,7 @@
 #include <sys/stat.h>
 #define make_directory(path) mkdir(path,0755)
 #endif
-enum { PLANE_TABLE=0x1000,PLAYER_LOG=0x2000,PLANE_FIRST=0x10000,PLANE_BYTES=40*256 };
+enum { PLANE_TABLE=0x1000,PLAYER_LOG=0x2000,PLANE_FIRST=0x10000,PLANE_SECOND=0x40000,PLANE_BYTES=40*256 };
 static int fail(char *error,size_t cap,const char *why) { if(cap) snprintf(error,cap,"Native startup: %s",why); return 0; }
 void native_frontend_clear_text(void) {
     memset(native_storage_range(PLANE_FIRST,4*PLANE_BYTES),0,4*PLANE_BYTES);
@@ -63,9 +65,8 @@ static MessageWorking child(void *context,enum MainControlChild which,MessageWor
         ++game->glyphs; return w;
     }
     if(which==MC_SEQUENCE_TONE || which==MC_SEQUENCE_RESTART_TONE) {
-        /* Original C3319A returns without sound when this gate is positive.
-         * This first screen milestone uses that actual silent source path. */
-        if(rd_s8(0xc4588au)>0) return w;
+        play_tone(1,2); /* C3316A supplies kind 1 and D1 = 2. */
+        return w;
     }
     if(which==MC_FINISH_SEQUENCE) {
         /* C1643A writes exactly the source's 78-byte flight log. Native saves
@@ -80,6 +81,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     AmigaOfs disk={0}; AmigaHunks hunks={0}; FA18MediaInfo media;
     uint8_t *exe=NULL,*bytes=NULL; size_t size=0; int ok=0;
     memset(game,0,sizeof *game); native_storage_bind(&game->storage);
+    native_clock_set(0);
     if(!save_dir || !*save_dir || snprintf(game->config_path,sizeof game->config_path,"%s/config",save_dir)>=(int)sizeof game->config_path)
         return fail(error,cap,"invalid save directory");
     if(make_directory(save_dir) && errno!=EEXIST) return fail(error,cap,"cannot create save directory");
@@ -109,6 +111,8 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     } else if(errno!=ENOENT) { fail(error,cap,"cannot read saved config"); goto done; }
     wr_u32(0xc1ab74u,PLAYER_LOG); wr_u32(0xc456b6u,PLANE_TABLE);
     for(unsigned i=0;i<4;++i) wr_u32(PLANE_TABLE+4*i,PLANE_FIRST+i*PLANE_BYTES);
+    for(unsigned page=0;page<2;++page) for(unsigned i=0;i<4;++i)
+        wr_u32(PAGE0_PLANE_TABLE+16*page+4*i,(page?PLANE_SECOND:PLANE_FIRST)+i*PLANE_BYTES);
     wr_u32(POLY_MASK_PLANE,0x30000); /* Separate 40-byte rows, host-owned mask. */
     wr_u32(CIRCLE_SPANS_PTR,0x33000); /* 127-radius symmetric span workspace. */
     wr_u8(0xc4588au,1); wr_u8(0xc457d7u,2); /* source audio suppression */
@@ -179,9 +183,10 @@ void native_frontend_tick(NativeFrontend *game) {
         wr_u16(PLAYER_LOG+4,(uint16_t)(rd_u16(PLAYER_LOG+4)+1));
     } else if(game->screen==NATIVE_CALLSIGN && game->name_finished) native_frontend_start_menu(game);
     native_menu_tick(game);
-    native_flight_tick(game);
+    native_clock_set(game->ticks);
+    const int complete=native_flight_tick(game);
     /* C32CEE is C0EFD4's final child, after the flight/HUD work. */
-    if(flight) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
+    if(flight && complete) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
     for(unsigned y=0;y<256;++y) for(unsigned x=0;x<320;++x) {
         uint8_t index=0;
         for(unsigned p=0;p<4;++p) if(rd_u8(PLANE_FIRST+p*PLANE_BYTES+y*40+x/8)&(0x80u>>(x&7))) index|=(uint8_t)(1u<<(3-p));

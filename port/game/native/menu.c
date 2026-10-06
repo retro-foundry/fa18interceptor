@@ -33,8 +33,7 @@ void native_menu_initialize(void) {
 }
 static uint32_t mode_changed(void *context) {
     (void)context;
-    /* C3318E -> C3319A: the selected positive TONE_MUTE path returns. */
-    if(rd_s8(TONE_MUTE)<=0) { fputs("native menu audio unavailable\n",stderr); abort(); }
+    play_status_tone(); /* C3318E, including its TONE_MUTE/source voice gates. */
     return 0;
 }
 unsigned native_menu_selected_mode(const NativeFrontend *game) {

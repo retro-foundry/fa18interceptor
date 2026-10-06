@@ -1,5 +1,5 @@
 /* Source C0F138-C0F29E gates and cadence for HUD and panel owners.
- * Stores and full frame/timer ownership remain unconnected. */
+ * Stores and complete frame ownership remain unconnected. */
 #include "hud.h"
 #include "../globals.h"
 #include "../postflight_hud.h"

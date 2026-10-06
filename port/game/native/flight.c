@@ -4,6 +4,10 @@
 #include "setup.h"
 #include "scene.h"
 #include "hud.h"
+#include "clock.h"
+#include "../main_loop_timers.h"
+#include "../render_buffers.h"
+#include "../cockpit.h"
 #include "../globals.h"
 #include "../menu_transition.h"
 #include "../scene_dispatch.h"
@@ -109,7 +113,7 @@ static void cockpit_child(void *context,enum MenuColdChild child) {
     else if(child==MENU_COLD_UPDATE) { native_control_records_update(); ++game->record_updates; }
     else { fprintf(stderr,"native cockpit child unavailable: %u\n",(unsigned)child); abort(); }
 }
-void native_flight_refresh_cockpit(NativeFrontend *game) {
+void native_flight_reset_aircraft(NativeFrontend *game) {
     const MenuColdHooks hooks={cockpit_child,NULL,game};
     refresh_menu_cockpit(&hooks);
 }
@@ -148,12 +152,37 @@ static int32_t palette_child(void *context,enum InputDeviceChild child) {
     }
     return 0;
 }
-void native_flight_tick(NativeFrontend *game) {
-    if(game->screen!=NATIVE_MODE_INTRO && game->screen!=NATIVE_SCENE_SETUP) return;
+static MainTimerBounds timer_child(void *context,enum MainTimerChild child) {
+    (void)context;
+    switch(child) {
+    case MT_SAMPLE_BEGIN: case MT_SAMPLE_POLL: native_clock_sample(); break;
+    case MT_COUNT_FIRST: tick_timer(0xc45886u); break;
+    case MT_COUNT_SECOND: tick_timer(0xc45891u); break;
+    case MT_COUNT_THIRD: tick_timer(TONE_MUTE); break;
+    default: fprintf(stderr,"native frame timer child unavailable: %u\n",(unsigned)child); abort();
+    }
+    return (MainTimerBounds){0};
+}
+static int finish_frame_clock(NativeFrontend *game) {
+    const MainTimerHooks hooks={.consume=timer_child};
+    if(!poll_main_loop_timers(&hooks)) { ++game->timer_yields; return 0; }
+    const uint16_t saved_tick=game->flight_saved_tick;
+    if((saved_tick&7)==7) sample_main_loop_readout(&hooks);
+    /* C53F9C releases graphics sprite zero. This runner never allocates
+     * hardware sprites; cockpit/scenery rendering uses host plane storage. */
+    if((saved_tick&31)==8) clear_page_plane_tops();
+    else if(!rd_u8(ORIGIN_DETAIL_MODE) && (saved_tick&31)==16)
+        request_cockpit_redraw(); /* C082B8; C10B90 is the aircraft reset. */
+    if(!rd_u8(ORIGIN_GATE_A)) wr_u16(UPDATE_TICK,(uint16_t)(rd_u16(UPDATE_TICK)+1));
+    game->flight_timer_pending=0;
+    return 1;
+}
+int native_flight_tick(NativeFrontend *game) {
+    if(game->screen!=NATIVE_MODE_INTRO && game->screen!=NATIVE_SCENE_SETUP) return 1;
     /* Connect Free Flight first. Other mode banners retain their existing
      * endpoint until their distinct scene/record-update paths are owned. */
-    if(rd_u8(MODE_SELECT)!=1) return;
-    native_records_set_clock(game->ticks);
+    if(rd_u8(MODE_SELECT)!=1) return 1;
+    if(game->flight_timer_pending) return finish_frame_clock(game);
     const uint16_t saved_tick=rd_u16(UPDATE_TICK);
     const InputDeviceHooks palette={palette_child,NULL,game};
     advance_viewport_palette(PALETTE_FRAME,&palette);
@@ -162,8 +191,8 @@ void native_flight_tick(NativeFrontend *game) {
     tick_notification_cadence(); /* C11B44 at C0EFEA. */
     /* C0EFD4 follows its stage tick with the record/context work while
      * POST_INPUT_AUX permits updates. View/control, projection, terrain and
-     * the HUD/panel slice follow the record/context work. Complete message,
-     * clock and end-of-frame ordering remains pending. */
+     * the HUD/panel slice follow the record/context work. Complete C0EFD4
+     * ownership and remaining end-of-frame drawing are pending. */
     if(rd_u8(POST_INPUT_AUX)) {
         update_view_controls(); /* C0F002, before the C1C63E record pass. */
         native_records_update();
@@ -175,5 +204,13 @@ void native_flight_tick(NativeFrontend *game) {
         update_message(); /* C11BFC at C0F12C, before instruments. */
         native_hud_draw(saved_tick);
         ++game->hud_frames;
+        /* C25312/C2548A precede C0EFD4's game counter increment. Polls
+         * resume on later PAL ticks without repeating physics or drawing. */
+        game->flight_saved_tick=saved_tick;
+        game->flight_timer_pending=1;
+        const MainTimerHooks timers={.consume=timer_child};
+        begin_main_loop_timers(&timers);
+        return finish_frame_clock(game);
     }
+    return 1;
 }

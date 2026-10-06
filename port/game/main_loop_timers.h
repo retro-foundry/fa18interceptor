@@ -22,6 +22,10 @@ typedef struct {
     void *context;
 } MainTimerHooks;
 void prepare_setup_bounds(const MainTimerHooks *h);
+/* Native runners yield between clock polls; the source accumulator and
+ * one-second counters must execute only once per game update. */
+void begin_main_loop_timers(const MainTimerHooks *h);
+int poll_main_loop_timers(const MainTimerHooks *h);
 void advance_main_loop_timers(const MainTimerHooks *h);
 void sample_main_loop_readout(const MainTimerHooks *h);
 #endif

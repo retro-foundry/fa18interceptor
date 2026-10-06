@@ -1,5 +1,6 @@
 /* Native composition of the source C1C63E -> C22C80 update path. */
 #include "records.h"
+#include "clock.h"
 #include "../globals.h"
 #include "../update_stage.h"
 #include "../record_update_stage.h"
@@ -24,13 +25,13 @@ static FlightActionState action_child(void *context,enum FlightActionChild child
     (void)context;
     fprintf(stderr,"native record action child unavailable: %u\n",(unsigned)child); abort();
 }
-static unsigned clock_ticks;
-void native_records_set_clock(unsigned ticks) {clock_ticks=ticks;}
-static int32_t clock_child(void *context,enum MenuContextChild child) {
+static DynamicsState region_child(void *context,enum DynamicsChild child,DynamicsState work) {
     (void)context;
-    if(child!=MC_TIMER_REQUEST) abort();
-    wr_u32(MENU_TIME_REQUEST+32,clock_ticks/50);
-    wr_u32(MENU_TIME_REQUEST+36,(clock_ticks%50)*20000u);return 0;
+    if(child==DY_REGION_ENTER || child==DY_REGION_ACTIVE) {
+        const DynamicsHooks hooks={.consume_values=region_child};
+        return spawn_region_records(work,&hooks);
+    }
+    fprintf(stderr,"native scene region child unavailable: %u\n",(unsigned)child); abort();
 }
 static FlightWorking root_control_child(void *context,enum FlightChild child,FlightWorking w) {
     (void)context;
@@ -53,8 +54,7 @@ static FlightWorking root_control_child(void *context,enum FlightChild child,Fli
     case FC_TOUCHDOWN_FAST_TONE: case FC_TOUCHDOWN_SLOW_TONE:
         sound_chosen_record_alert(child==FC_TOUCHDOWN_FAST_TONE?40:30);break;
     case FC_SAMPLE_TOUCHDOWN: case FC_SAMPLE_TAKEOFF: {
-        const MenuContextHooks timer={.consume=clock_child};
-        read_menu_time_sample(&timer);break;
+        native_clock_sample();break;
     }
     default: fprintf(stderr,"native root control child unavailable: %u\n",(unsigned)child);abort();
     }
@@ -67,6 +67,18 @@ static void dynamics(gaddr record) {
     while(!advance_record_dynamics(&frame,&hooks)) {
         DynamicsState *w=&frame.work;
         switch(frame.child) {
+        case DY_SELECTED_RECORD: {
+            ZoneExitFrame zone={0};
+            zone.work=(GeometryState){w->primary,w->detail,w->x,w->y,w->z,w->rate_x,w->rate_y,w->rate_z,
+                w->root,w->record,w->geometry,w->scene,w->table,w->face,w->child_equal};
+            if(!update_dynamics_record_zone_exit(&zone,NULL)) {
+                fprintf(stderr,"native record zone child unavailable: %u\n",(unsigned)zone.phase); abort();
+            }
+            const GeometryState v=zone.work;
+            *w=(DynamicsState){v.primary,v.detail,v.x,v.y,v.z,v.rate_x,v.rate_y,v.rate_z,
+                v.root,v.record,v.geometry,v.scene,v.table,v.face,v.child_equal};
+            break;
+        }
         case DY_RECORD_CONTROLS:
             update_dynamics_record_input(record,w->primary); break;
         case DY_RECORD_SELECTOR: {
@@ -135,6 +147,10 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
     const FlightActionHooks actions={action_child,NULL,NULL,NULL};
     FlightActionState work={0}; work.record=record; work.source=loop->companion;
     switch(child) {
+    case RECORD_UPDATE_PERIODIC: {
+        const DynamicsHooks regions={.consume_values=region_child};
+        update_scene_regions((DynamicsState){0},&regions); return 0;
+    }
     case RECORD_UPDATE_RELEASE_SELECTION: release_lost_selection(); return 0;
     case RECORD_UPDATE_ROOT_CONTROL: advance_flight_record_control(work,&actions); return 0;
     case RECORD_UPDATE_ROOT_VIEW: {

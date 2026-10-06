@@ -10,6 +10,7 @@
 #include "recomp_runtime.h"
 #include "recomp_ports.h"
 #include "memory.h"
+#include "../../port/game/native/clock.c"
 #include "../../port/game/native/records.c"
 #include "stages.h"
 extern int64_t fa18_next_event;
@@ -27,7 +28,7 @@ static int original(void) {
         /* C53C78 is the external timer request. Supply the same host clock
          * to both paths; execute the surrounding C16D04 game code normally. */
         if(REG_PC==0xc53c78u) {
-            clock_child(NULL,MC_TIMER_REQUEST);
+            native_clock_request();
             REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;
         }
         opcode=rd_u16(REG_PC); REG_PPC=REG_PC; REG_IR=opcode; REG_PC+=2;
@@ -49,8 +50,8 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) { fputs(error,stderr); return 1; }
     fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF,NULL); fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000); memcpy(m->slow,data+0x80000,0x80000);
-    native_records_set_clock(rd_u32(MENU_TIME_REQUEST+32)*50u+rd_u32(MENU_TIME_REQUEST+36)/20000u);
-    if(argc==3) native_records_set_clock((unsigned)strtoul(argv[2],NULL,10));
+    native_clock_set(rd_u32(MENU_TIME_REQUEST+32)*50u+rd_u32(MENU_TIME_REQUEST+36)/20000u);
+    if(argc==3) native_clock_set((unsigned)strtoul(argv[2],NULL,10));
     for(phase=0;phase<2;++phase) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     m68k_set_reg(M68K_REG_SR,0x2700); REG_PC=phase?0xc1c63eu:0xc12098u;

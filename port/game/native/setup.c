@@ -1,5 +1,6 @@
 /* Connected C10A24 location/aircraft selection sequence. */
 #include "setup.h"
+#include "clock.h"
 #include "flight.h"
 #include "../menu_context_finish.h"
 #include "../matrix.h"
@@ -19,7 +20,7 @@ static int32_t child(void *context,enum MenuContextChild which) {
     switch(which) {
     case MC_SMOOTH_RESET: case MC_RESTART_RESET: case MC_STAGE_RESET:
     case MC_VIEWPORT_RESET: reset_message_sequence(); return 0;
-    case MC_REFRESH_VIEW: native_flight_refresh_cockpit(setup->game); return 0;
+    case MC_REFRESH_VIEW: native_flight_reset_aircraft(setup->game); return 0;
     case MC_PRESET_POSITION: {
         const MenuContextHooks hooks={child,NULL,position_result,setup};
         load_menu_position_preset(&hooks); return 0;
@@ -38,8 +39,7 @@ static int32_t child(void *context,enum MenuContextChild which) {
     case MC_TIMER_REQUEST:
         /* timer.device GetSysTime's seconds/microseconds result. The native
          * replay clock advances at the runner's existing 50 Hz PAL cadence. */
-        wr_u32(MENU_TIME_REQUEST+32,setup->game->ticks/50);
-        wr_u32(MENU_TIME_REQUEST+36,(setup->game->ticks%50)*20000u); return 0;
+        native_clock_request(); return 0;
     case MC_EXPIRY_TONE: play_tone_2(); return 0;
     default: fprintf(stderr,"native setup child unavailable: %u\n",(unsigned)which); abort();
     }

@@ -129,7 +129,14 @@ centered, panned and clipped views. See
 Postflight dispatch and the cockpit message line are now connected, with source
 warning selection before the HUD and the final text sequence after flight work.
 Notification cadence executes before record updates. Three checkpoints each
-pass 115 HUD/message cases. Timer polling and game update cadence remain open.
+pass 115 HUD/message cases.
+The frame timer now yields across host PAL ticks, using the original disk's
+update-rate table. Pending polls repeat neither physics/drawing nor final text.
+The source game counter advances and freezes while paused; periodic region,
+zone-check, page-clear and cockpit-redraw paths execute. Seven view/record
+checkpoints, 36 timer/readout cases and two periodic record passes match original
+non-stack RAM. See [`../../analysis/native_clock_milestone.md`](../../analysis/native_clock_milestone.md).
+Complete frame ownership and exact recorded cadence remain open.
 Full flight, positive shadow strips and the record-expiry
 transition remain unfinished. Setup correctness is separate from frame cadence
 and recorded gameplay acceptance.

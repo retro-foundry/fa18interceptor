@@ -17,6 +17,9 @@ typedef struct {
     unsigned shift_keys;
     int name_finished;
     int scene_selected;
+    int flight_timer_pending;
+    uint16_t flight_saved_tick;
+    unsigned timer_yields;
     char config_path[4096];
 } NativeFrontend;
 int native_frontend_open(NativeFrontend *game,const char *adf,const char *save_dir,char *error,size_t capacity);

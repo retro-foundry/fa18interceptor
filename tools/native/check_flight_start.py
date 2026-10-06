@@ -81,10 +81,13 @@ def main():
         replay.write_text(replay.read_text() + "F 6100 K 80 0 0 1\nF 6102 K 80 0 0 0\n")
         paused, data = run(6350)
         assert paused["stage"] == "C11A50" and field(0xC457AE, 1) == b"\xff", paused
+        held, data = run(6370)
+        assert held["stage"] == "C11A50" and held["game_tick"] == paused["game_tick"], held
         replay.write_text(replay.read_text() + "F 6400 K 80 0 0 1\nF 6402 K 80 0 0 0\n")
         resumed, data = run(6500)
         assert resumed["stage"] == "C10DAE" and field(0xC457AE, 1) == b"\x00", resumed
-        assert int.from_bytes(field(0xC45AF2, 4), "big") == 128, "source timer seconds"
+        assert resumed["game_tick"] > held["game_tick"], "source game counter did not resume"
+        assert int.from_bytes(field(0xC45AF2, 4), "big") == 130, "source timer seconds at PAL frame 6500"
     assert hashlib.sha256(adf.read_bytes()).digest() == seal
     print("Native Free Flight: code acknowledgement -> location -> aircraft/root reset -> pause/resume executes")
     print("Source pose/camera checkpoint matches; active flight and full-state parity remain open")
