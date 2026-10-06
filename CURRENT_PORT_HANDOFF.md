@@ -69,7 +69,17 @@ twelve reference CTests pass. Evidence:
 `analysis/native_aircraft_rendering_milestone.md`. Rough startup estimate now
 90% (previously 85%), scoped to Free Flight startup wiring. Cockpit/HUD and
 active flight remain open; no full replay repeated.
-Next: cockpit/HUD and view controls with their newly reachable flight-record children.
+Native view controls C12098 now run before the record pass, exposing C1B27E
+input recording, C13D84 indexed controls and C149BE root motion. Their source
+normalization, attenuation, region probe, timer and touchdown tone children are
+connected. Aircraft selection reaches C10DAE without needing P; throttle moves
+the root with positive speed, and arrow press/ramp/release execute. Seven
+native checkpoints match original C12098/C1C63E non-stack RAM. Source clock
+requests use the same deterministic host clock in both validation paths.
+Evidence: `analysis/native_flight_controls_milestone.md`. Rough startup estimate
+now 95% (previously 90%), scoped to Free Flight startup wiring. This demonstrates
+grounded motion and stick recording, not takeoff or full flight parity.
+Next: cockpit/HUD and remaining flight-record/input children.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Audio currently takes the original suppression path. Source data still uses

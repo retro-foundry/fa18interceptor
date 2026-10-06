@@ -9,6 +9,10 @@ static FlightWorking consume(const FlightHooks *h,enum FlightChild child) {
     if(h && h->consume) return h->consume(h->context,child);
     abort();
 }
+static FlightWorking consume_input(const FlightHooks *h,enum FlightChild child,FlightWorking w) {
+    if(h && h->consume_values) return h->consume_values(h->context,child,w);
+    return consume(h,child);
+}
 static uint32_t narrow_word(uint32_t old,uint16_t v) { return (old&0xffff0000u)|v; }
 static uint32_t narrow_byte(uint32_t old,uint8_t v) { return (old&0xffffff00u)|v; }
 static uint32_t sign_word(uint32_t v) { return (uint32_t)(int32_t)(int16_t)v; }
@@ -34,13 +38,18 @@ static void subtract_long(const FlightHooks *h,gaddr a,uint32_t n) { uint32_t v=
 static void and_byte(const FlightHooks *h,gaddr a,uint8_t mask) { byte(h,a,rd_u8(a)&mask); }
 static void or_byte(const FlightHooks *h,gaddr a,uint8_t mask) { byte(h,a,rd_u8(a)|mask); }
 void advance_main_loop_flight_controls(gaddr frame,const FlightHooks *h) {
-    FlightWorking w; gaddr record,pointer; uint16_t index,v; uint8_t code,status; uint32_t n,m,threshold,base; unsigned i,scale;
+    FlightWorking w={0}; gaddr record,pointer; uint16_t index,v; uint8_t code,status; uint32_t n,m,threshold,base; unsigned i,scale;
     index=rd_u16(0xc459b4u); base=0xc46184u+((uint32_t)(int32_t)(int16_t)index<<9);
     observe(h,FC_CONTROL_SETUP,frame,0);
     wr_u16(frame-36,index); wr_u32(0xc18210u,base); wr_u32(frame-40,base);
     wr_u16(0xc45aa0u,rd_u16(base+150)); wr_u16(0xc45aa0u,rd_u16(base+150)); wr_u16(0xc45aa2u,rd_u16(base+156)); wr_u16(0xc45aa4u,rd_u16(base+162));
     wr_u16(frame-34,(uint16_t)(0u-rd_u16(base+110))); wr_u32(frame-44,base+2); wr_u32(frame-48,base+4); wr_u32(frame-52,base+32);
-    consume(h,FC_NORMALISE_CONTROL);
+    w.record=base;
+    w.value=(uint32_t)(int32_t)(int16_t)(0u-rd_u16(base+110));
+    w.z=(uint32_t)(int32_t)rd_s16(base+150);
+    w.rate=(uint32_t)(int32_t)rd_s16(base+156);
+    w.depth=(uint32_t)(int32_t)rd_s16(base+162);
+    consume_input(h,FC_NORMALISE_CONTROL,w);
     word(h,frame-2,rd_u16(0xc45a4cu)); word(h,frame-4,rd_u16(0xc45a4eu)); word(h,frame-6,rd_u16(0xc45a50u));
     pointer=lookup(h,rd_u32(frame-44)); v=value_word(h,pointer);
     if(!bit(h,v,7)) {
@@ -53,15 +62,19 @@ void advance_main_loop_flight_controls(gaddr frame,const FlightHooks *h) {
             word(h,frame-8,(uint16_t)n); word(h,frame-12,(uint16_t)m);
         }
         v=value_word(h,frame-2); observe(h,FC_VALUE_EXT_LONG,sign_word(v),0); m=rd_u16(frame-8); observe(h,FC_SPEED_WORD,m,0); observe(h,FC_SPEED_EXT_LONG,sign_word(m),0);
-        w=consume(h,FC_ATTENUATE_X);
+        w.value=sign_word(v);w.speed=sign_word(m);
+        w=consume_input(h,FC_ATTENUATE_X,w);
         m=rd_u16(frame-6); observe(h,FC_SPEED_WORD,m,0); observe(h,FC_SPEED_EXT_LONG,sign_word(m),0);
         n=rd_u16(frame-12); observe(h,FC_TURN_WORD,n,0); observe(h,FC_TURN_EXT_LONG,sign_word(n),0);
-        word(h,frame-2,(uint16_t)w.value); w=consume(h,FC_ATTENUATE_Z); word(h,frame-6,(uint16_t)w.value);
+        word(h,frame-2,(uint16_t)w.value);
+        w.value=sign_word((uint16_t)m);w.speed=sign_word((uint16_t)n);
+        w=consume_input(h,FC_ATTENUATE_Z,w); word(h,frame-6,(uint16_t)w.value);
     }
     record=lookup(h,rd_u32(0xc18210u)); n=value_long(h,record+66); observe(h,FC_VALUE_ASR_LONG,2,0); n=shift_right(n,2); word(h,frame-10,(uint16_t)n);
     if(test_byte(h,0xc457a0u) && !test_word(h,frame-36)) { observe(h,FC_VALUE_ASR_WORD,4,0); word(h,frame-10,(uint16_t)((int16_t)n>>4)); }
     v=value_word(h,frame-4); observe(h,FC_VALUE_EXT_LONG,sign_word(v),0); m=rd_u16(frame-10); observe(h,FC_SPEED_WORD,m,0); observe(h,FC_SPEED_EXT_LONG,sign_word(m),0);
-    w=consume(h,FC_ATTENUATE_Y); code=rd_u8(0xc4579fu); observe(h,FC_SPEED_BYTE,code,0); word(h,frame-4,(uint16_t)w.value);
+    w.value=sign_word(v);w.speed=sign_word(m);
+    w=consume_input(h,FC_ATTENUATE_Y,w); code=rd_u8(0xc4579fu); observe(h,FC_SPEED_BYTE,code,0); word(h,frame-4,(uint16_t)w.value);
     if(!bit(h,code,0)) { record=lookup(h,rd_u32(0xc18210u)); v=rd_u16(record+118); observe(h,FC_SPEED_WORD,v,0); add_word(h,frame-4,v); }
     scale=2;
 publish_motion:
@@ -104,7 +117,7 @@ publish_motion:
     if(!code) {
         pointer=lookup(h,rd_u32(frame-44)); v=value_word(h,pointer);
         if(bit(h,v,7)) { record=lookup(h,rd_u32(0xc18210u)); v=value_word(h,record+76); observe(h,FC_VALUE_AND_WORD,7,0); v&=7; observe(h,FC_TEST_WORD,v,0); if(v) goto grounded; }
-        consume(h,FC_PROBE_CONTROL); pointer=lookup(h,rd_u32(frame-48)); code=value_byte(h,pointer);
+        consume_input(h,FC_PROBE_CONTROL,w); pointer=lookup(h,rd_u32(frame-48)); code=value_byte(h,pointer);
         if(bit(h,code,1)) {
             record=lookup(h,rd_u32(0xc18210u)); code=value_byte(h,record+124); byte(h,frame-54,code); observe(h,FC_VALUE_AND_BYTE,0x70,0); observe(h,FC_TEST_BYTE,code&0x70,0);
             if(!(code&0x70)) {
@@ -118,7 +131,7 @@ grounded:
     pointer=lookup(h,rd_u32(frame-40)); v=value_word(h,pointer); if(bit(h,v,9)) goto advance_contact_timer;
     pointer=lookup(h,rd_u32(frame-44)); v=value_word(h,pointer); if(bit(h,v,7)) goto continuing_contact;
     observe(h,FC_VALUE_OR_WORD,0x80,0); word(h,pointer,v|0x80); record=lookup(h,rd_u32(0xc18210u)); word(h,record+38,0);
-    consume(h,FC_SAMPLE_TOUCHDOWN); longword(h,0xc4590cu,rd_u32(0xc45af2u)); observe(h,FC_VALUE_LONG,0,0); byte(h,0xc4579fu,0); observe(h,FC_VALUE_LONG,1,0); byte(h,0xc457c0u,1);
+    consume_input(h,FC_SAMPLE_TOUCHDOWN,w); longword(h,0xc4590cu,rd_u32(0xc45af2u)); observe(h,FC_VALUE_LONG,0,0); byte(h,0xc4579fu,0); observe(h,FC_VALUE_LONG,1,0); byte(h,0xc457c0u,1);
     v=rd_u16(frame-4); observe(h,FC_COMPARE_WORD,v,0x240);
     if((int16_t)v>=0x240) {
         code=value_byte(h,0xc4589au); observe(h,FC_TEST_BYTE,code,0); if(code) goto clear_inherited_height;
@@ -132,7 +145,7 @@ grounded:
     record=lookup(h,rd_u32(0xc18210u)); v=value_word(h,record+110); observe(h,FC_COMPARE_WORD,v,0x3c0);
     if((int16_t)v>=0x3c0) { pointer=lookup(h,rd_u32(frame-44)); v=value_word(h,pointer); observe(h,FC_VALUE_OR_WORD,0x1000,0); word(h,pointer,v|0x1000); word(h,0xc4fdd2u,rd_u16(0xc459b6u)); }
 touchdown_tone:
-    v=rd_u16(frame-4); observe(h,FC_COMPARE_WORD,v,0x180); consume(h,(int16_t)v>0x180?FC_TOUCHDOWN_FAST_TONE:FC_TOUCHDOWN_SLOW_TONE); goto clear_inherited_height;
+    v=rd_u16(frame-4); observe(h,FC_COMPARE_WORD,v,0x180); consume_input(h,(int16_t)v>0x180?FC_TOUCHDOWN_FAST_TONE:FC_TOUCHDOWN_SLOW_TONE,w); goto clear_inherited_height;
 continuing_contact:
     v=value_word(h,0xc461f2u); observe(h,FC_TEST_WORD,v,0);
     if(v) {
@@ -144,8 +157,8 @@ continuing_contact:
         observe(h,FC_VALUE_LONG,4,0); byte(h,0xc457c0u,4); v=value_word(h,0xc458cau);
         if(bit(h,v,8)) {
             observe(h,FC_VALUE_AND_WORD,0xfeff,0); word(h,0xc458cau,v&0xfeff); pointer=lookup(h,rd_u32(frame-48)); code=value_byte(h,pointer);
-            if(bit(h,code,2)) consume(h,FC_RESET_CONTROL);
-            else { pointer=lookup(h,rd_u32(frame-44)); v=value_word(h,pointer); observe(h,FC_VALUE_AND_WORD,0xc000,0); v&=0xc000; observe(h,FC_COMPARE_WORD,v,0xc000); if(v==0xc000) consume(h,FC_RESET_CONTROL); }
+            if(bit(h,code,2)) consume_input(h,FC_RESET_CONTROL,w);
+            else { pointer=lookup(h,rd_u32(frame-44)); v=value_word(h,pointer); observe(h,FC_VALUE_AND_WORD,0xc000,0); v&=0xc000; observe(h,FC_COMPARE_WORD,v,0xc000); if(v==0xc000) consume_input(h,FC_RESET_CONTROL,w); }
         }
         v=value_word(h,0xc458d2u); observe(h,FC_VALUE_OR_WORD,2,0); word(h,0xc458d2u,v|2);
     }
@@ -174,13 +187,13 @@ airborne:
     observe(h,FC_VALUE_AND_WORD,0xff7f,0); word(h,pointer,v&0xff7f); pointer=lookup(h,rd_u32(frame-48)); code=value_byte(h,pointer);
     if(bit(h,code,3)) { observe(h,FC_VALUE_AND_BYTE,0xf7,0); byte(h,pointer,code&0xf7); byte(h,0xc457c0u,4); }
     if(!test_word(h,frame-36)) {
-        consume(h,FC_SAMPLE_TAKEOFF); n=value_long(h,0xc4590cu); m=rd_u32(0xc45af2u); observe(h,FC_SPEED_LONG,m,0); observe(h,FC_SPEED_SUB_LONG,n,0); m-=n;
+        consume_input(h,FC_SAMPLE_TAKEOFF,w); n=value_long(h,0xc4590cu); m=rd_u32(0xc45af2u); observe(h,FC_SPEED_LONG,m,0); observe(h,FC_SPEED_SUB_LONG,n,0); m-=n;
         longword(h,0xc4590cu,m); add_long(h,0xc45910u,m); longword(h,0xc4590cu,0);
         record=lookup(h,rd_u32(0xc18210u)); code=value_byte(h,record+33); observe(h,FC_VALUE_OR_BYTE,1,0); record=lookup(h,rd_u32(0xc18210u)); byte(h,record+33,code|1);
         pointer=lookup(h,rd_u32(frame-44)); v=value_word(h,pointer); observe(h,FC_VALUE_AND_WORD,0xefff,0); word(h,pointer,v&0xefff);
         v=value_word(h,0xc458d2u); observe(h,FC_VALUE_AND_WORD,0xfffd,0); word(h,0xc458d2u,v&0xfffd);
         v=value_word(h,0xc458cau); observe(h,FC_VALUE_OR_WORD,0x100,0); word(h,0xc458cau,v|0x100);
-    } else consume(h,FC_REQUEST_CONTROL);
+    } else consume_input(h,FC_REQUEST_CONTROL,w);
     pointer=lookup(h,rd_u32(frame-48)); code=value_byte(h,pointer); observe(h,FC_VALUE_AND_BYTE,0xfd,0); byte(h,pointer,code&0xfd);
 }
 void begin_main_loop_mission_reset(const FlightHooks *h) {
@@ -207,7 +220,7 @@ void normalise_main_loop_control_vector(gaddr frame,const FlightHooks *h) {
     observe(h,FC_TURN_WORD,w.z,0); if((int16_t)w.z<0) observe(h,FC_TURN_NEG_WORD,0,0);
     observe(h,FC_X_WORD,w.rate,0); if((int16_t)w.rate<0) observe(h,FC_X_NEG_WORD,0,0);
     observe(h,FC_Y_WORD,w.depth,0); if((int16_t)w.depth<0) observe(h,FC_Y_NEG_WORD,0,0);
-    w=consume(h,FC_NORMALISE_LENGTH); if(w.zero) goto zero_vector;
+    w=consume_input(h,FC_NORMALISE_LENGTH,w); if(w.zero) goto zero_vector;
     observe(h,FC_TURN_LONG,8,0); shift=8; factor=sign_word(w.value); observe(h,FC_VALUE_EXT_LONG,factor,0); length=w.speed;
     for(;;) {
         observe(h,FC_COMPARE_LONG,factor,length); if((int32_t)factor>(int32_t)length) break;

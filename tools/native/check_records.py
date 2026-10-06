@@ -1,7 +1,8 @@
-"""Compare the native bootstrap record checkpoint with original C1C63E.
+"""Compare native view/control and record updates with original instructions.
 
 This bounded component check uses CPU/ROM only in the validation oracle.
-It does not certify active flight or native frame timing.
+It covers startup, grounded throttle motion and stick recording, not full
+flight/frame parity.
 """
 import argparse
 import json
@@ -37,12 +38,35 @@ def main():
         replay.write_text(replay.read_text() + 'F 4100 K 13 0 0 1\nF 4102 K 13 0 0 0\n'
             'F 5000 K 50 0 0 1\nF 5002 K 50 0 0 0\n'
             'F 5400 K 49 0 0 1\nF 5402 K 49 0 0 0\n')
-        for frames in ('5450', '6100'):
+        for frames, stage in (('5450', 'C10C08'), ('6100', 'C10DAE')):
             command[command.index('--frames') + 1] = frames
             result = subprocess.run(command + ['--replay', str(replay)], cwd=ROOT,
                 check=True, capture_output=True, text=True, timeout=15)
-            assert json.loads(result.stdout)['stage'] == 'C10C08', result.stdout
-            subprocess.run([str(oracle), str(checkpoint)], cwd=ROOT, check=True, timeout=15)
+            assert json.loads(result.stdout)['stage'] == stage, result.stdout
+            subprocess.run([str(oracle), str(checkpoint), frames], cwd=ROOT, check=True, timeout=15)
+        def field(address, length):
+            data = checkpoint.read_bytes()
+            start = address - 0xC00000 + 0x80000
+            return data[start:start + length]
+        initial_position = field(0xC46198, 12)
+        replay.write_text(replay.read_text() + 'F 6200 K 61 0 0 1\nF 6600 K 61 0 0 0\n'
+                          'F 6800 K 273 0 0 1\nF 6900 K 273 0 0 0\n')
+        for frames in ('6500', '6850', '7000'):
+            command[command.index('--frames') + 1] = frames
+            result = subprocess.run(command + ['--replay', str(replay)], cwd=ROOT,
+                check=True, capture_output=True, text=True, timeout=15)
+            assert json.loads(result.stdout)['stage'] == 'C10DAE', result.stdout
+            if frames == '6500':
+                assert field(0xC46198, 12) != initial_position, 'throttle did not move aircraft'
+                assert int.from_bytes(field(0xC461F2, 2), 'big') > 0, 'throttle produced no speed'
+                assert field(0xC461C2, 4) != bytes(4), 'horizontal motion was not published'
+            elif frames == '6850':
+                assert field(0xC461E9, 1)[0] & 0x30 == 0x10, 'stick press not recorded'
+                assert field(0xC461AC, 1) == bytes([20]), 'stick response did not ramp'
+            else:
+                assert field(0xC461E9, 1)[0] & 0x30 == 0, 'stick release not recorded'
+                assert field(0xC461AC, 1) == bytes(1), 'stick response did not release'
+            subprocess.run([str(oracle), str(checkpoint), frames], cwd=ROOT, check=True, timeout=15)
     if args.reference:
         subprocess.run([str(oracle), str(args.reference.resolve())], cwd=ROOT, check=True, timeout=15)
 

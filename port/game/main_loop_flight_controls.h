@@ -47,6 +47,8 @@ typedef struct {
     void (*observe)(void *context,enum FlightPhase phase,uint32_t value,uint32_t other);
     FlightWorking (*divide_exception)(void *context);
     void *context;
+    /* Native children receive the actual scalar/vector arguments directly. */
+    FlightWorking (*consume_values)(void *context,enum FlightChild child,FlightWorking work);
 } FlightHooks;
 void advance_main_loop_flight_controls(gaddr frame,const FlightHooks *h);
 FlightWorking advance_main_loop_flight_record(FlightWorking w,const FlightHooks *h);

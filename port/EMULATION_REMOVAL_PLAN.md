@@ -47,7 +47,16 @@ Native continuation milestones (functional scope, not instruction counts):
   record caches and complete parents match focused original non-stack RAM.
   See `../analysis/native_aircraft_rendering_milestone.md`. Roughly 90% of
   Free Flight startup wiring (previously 85%), excluding active-flight acceptance.
-- Next: cockpit/HUD drawing, input/view/timer update
+- Connected: C12098 view controls before the record pass, C1B27E flight input,
+  C13D84 indexed aircraft controls and C149BE root motion with normalization,
+  attenuation, region probe, source clock requests and touchdown tones. Seven
+  checkpoints match original C12098/C1C63E non-stack RAM, including positive
+  throttle speed/motion and arrow press/ramp/release. Aircraft selection now
+  completes into C10DAE without P. See
+  `../analysis/native_flight_controls_milestone.md`. Roughly 95% of Free Flight
+  startup wiring (previously 90%); grounded motion is demonstrated, takeoff
+  and recorded active-flight acceptance are not.
+- Next: cockpit/HUD drawing, complete input/view/timer update
   ordering, remaining active-record children (C1C63E/C22C80), and connected
   flight simulation. Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.

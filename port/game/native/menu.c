@@ -12,6 +12,8 @@
 #include "../menu_cold.h"
 #include "../numbers.h"
 #include "../stages.h"
+#include "../flight_commands.h"
+#include "../player_input.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -46,6 +48,21 @@ static ContextCommandResult context_child(void *context,enum ContextCommandChild
     }
     fprintf(stderr,"native input context child unavailable: %u\n",(unsigned)which); abort();
 }
+static FlightCommandResult flight_key_child(void *context,enum FlightCommandChild child) {
+    const CommandRequest *request=context;
+    switch(child) {
+    case FLIGHT_Y_UP: set_stick_y(STICK_UP);break;
+    case FLIGHT_Y_DOWN: set_stick_y(STICK_DOWN);break;
+    case FLIGHT_Y_RELEASE: set_stick_y(0);break;
+    case FLIGHT_X_RIGHT: set_stick_x(STICK_RIGHT);break;
+    case FLIGHT_X_LEFT: set_stick_x(STICK_LEFT);break;
+    case FLIGHT_X_RELEASE: set_stick_x(0);break;
+    case FLIGHT_THROTTLE_RELEASE: case FLIGHT_THROTTLE_MODE_RELEASE:
+        reset_throttle_input_state();break;
+    default: fprintf(stderr,"native flight key child unavailable: %u\n",(unsigned)child);abort();
+    }
+    return (FlightCommandResult){request->raw_event,0};
+}
 void native_menu_key(NativeFrontend *game,int key,int down) {
     unsigned raw=0xff;
     if(key>='1' && key<='9') raw=(unsigned)(key-'0');
@@ -55,6 +72,15 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
     else if(key=='\r') raw=0x44;
     else if(key=='\b') raw=0x41;
     else if(key==' ') raw=0x40;
+    /* Same physical keys as port/machine/input.c's reference host mapping.
+     * The source text translation table omits these throttle characters. */
+    else if(key=='-') raw=0x0b;
+    else if(key=='=') raw=0x0c;
+    else if(key=='\\') raw=0x0d;
+    else if(key==273) raw=0x4c;
+    else if(key==274) raw=0x4d;
+    else if(key==275) raw=0x4e;
+    else if(key==276) raw=0x4f;
     else if(key>=32 && key<127) {
         for(unsigned i=0;i<0x40;++i) if(rd_u8(0xc331ceu+i)==(uint8_t)key) { raw=i; break; }
     }
@@ -68,6 +94,9 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
     } else if(request.action==COMMAND_SIGN_INPUT) {
         /* C1C224, same store as execute_flight_command. */
         wr_u8(SEQUENCE_PHASE,request.modifier?0xff:1);
+    } else if(is_flight_command(request.action)) {
+        const FlightCommandHooks hooks={flight_key_child,NULL,&request};
+        event=execute_flight_command(&request,0,&hooks);
     } else if(is_context_command(request.action)) {
         const ContextCommandHooks hooks={context_child,NULL,game};
         event=execute_context_command(&request,&hooks);

@@ -22,11 +22,13 @@ Free Flight (digit 2) now runs the complete source bootstrap, delayed scene
 selection and viewport/message stages. Return acknowledges the original disk's
 code-input message, then the original numbered location and aircraft keys run.
 The aircraft selection resets the recorder/root through C10B90 and updates the
-records. It reaches `scene-setup` / C10C08; P pauses/resumes into C10DAE.
+records. The view/control update completes startup into C10DAE; P pauses/resumes.
+The `scene-setup` screen label also covers this initial flight loop. `=` and `-`
+use the source throttle controls, and arrow keys use the source stick controls.
 The preview now draws the source horizon and normal/wide terrain packets into
 ordinary host planes, followed by the original scene placement/model streams,
-ground descriptors and fixed matrix mark. Aircraft records, cockpit/HUD drawing, and active
-flight remain pending.
+ground descriptors, aircraft hulls and fixed matrix mark. Grounded aircraft
+motion and stick recording now execute; cockpit/HUD and takeoff remain pending.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons` and `model_calls` counts. The banner CRACKED BY A-HA is original disk message $47;
 the earlier crash-message description was incorrect. Source timer requests use
@@ -111,6 +113,11 @@ setup-control ordering. The model check compares all non-stack data as well as
 planes, and independently checks the complete followup, grid and control parents
 at three runner checkpoints. See
 [`../../analysis/native_aircraft_rendering_milestone.md`](../../analysis/native_aircraft_rendering_milestone.md).
-Cockpit/HUD, active flight, positive shadow strips and the record-expiry
+The view/control update, input recorder, indexed aircraft controls and root
+motion now execute source owners directly. Throttle motion and stick ramp/release
+are checked at seven native checkpoints against original C12098/C1C63E non-stack
+RAM. See [`../../analysis/native_flight_controls_milestone.md`](../../analysis/native_flight_controls_milestone.md).
+Unconnected flight command/dynamics children fail explicitly when reached.
+Cockpit/HUD, full flight, positive shadow strips and the record-expiry
 transition remain unfinished. Setup correctness is separate from frame cadence
 and recorded gameplay acceptance.

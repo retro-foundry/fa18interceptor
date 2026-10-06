@@ -150,6 +150,7 @@ void native_flight_tick(NativeFrontend *game) {
     /* Connect Free Flight first. Other mode banners retain their existing
      * endpoint until their distinct scene/record-update paths are owned. */
     if(rd_u8(MODE_SELECT)!=1) return;
+    native_records_set_clock(game->ticks);
     const InputDeviceHooks palette={palette_child,NULL,game};
     advance_viewport_palette(PALETTE_FRAME,&palette);
     const PostInputTickHooks hooks={stage,NULL,game};
@@ -159,6 +160,7 @@ void native_flight_tick(NativeFrontend *game) {
      * view projection and terrain now
      * follow the record/context slice in their original order. */
     if(rd_u8(POST_INPUT_AUX)) {
+        update_view_controls(); /* C0F002, before the C1C63E record pass. */
         native_records_update();
         ++game->record_updates;
         native_scene_project();

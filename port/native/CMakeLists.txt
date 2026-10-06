@@ -6,6 +6,7 @@ add_executable(fa18_native main.c
     ../game/followup_placements.c ../game/grid_projection_packet.c
     ../game/vertex_tail.c ../game/history_projection.c
     ../game/cockpit_script.c ../game/faces.c
+    ../game/flight_commands.c
     ../game/display_records.c ../game/render_polygon.c ../game/render_line.c
     ../game/render_buffers.c ../game/plot.c ../game/clip.c
     ../game/polygon_clip.c ../game/attitude.c ../game/stages.c

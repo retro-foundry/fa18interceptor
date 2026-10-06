@@ -15,12 +15,50 @@
 #include "../main_loop_flight_controls.h"
 #include "../matrix.h"
 #include "../view.h"
+#include "../menu_context_finish.h"
+#include "../audio.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 static FlightActionState action_child(void *context,enum FlightActionChild child) {
     (void)context;
     fprintf(stderr,"native record action child unavailable: %u\n",(unsigned)child); abort();
+}
+static unsigned clock_ticks;
+void native_records_set_clock(unsigned ticks) {clock_ticks=ticks;}
+static int32_t clock_child(void *context,enum MenuContextChild child) {
+    (void)context;
+    if(child!=MC_TIMER_REQUEST) abort();
+    wr_u32(MENU_TIME_REQUEST+32,clock_ticks/50);
+    wr_u32(MENU_TIME_REQUEST+36,(clock_ticks%50)*20000u);return 0;
+}
+static FlightWorking root_control_child(void *context,enum FlightChild child,FlightWorking w) {
+    (void)context;
+    switch(child) {
+    case FC_NORMALISE_CONTROL: {
+        const gaddr frame=0x4700;
+        wr_u32(frame+8,w.value);wr_u32(frame+12,w.z);
+        wr_u32(frame+16,w.rate);wr_u32(frame+20,w.depth);
+        const FlightHooks hooks={.consume_values=root_control_child};
+        normalise_main_loop_control_vector(frame,&hooks);break;
+    }
+    case FC_NORMALISE_LENGTH: {
+        int16_t x=(int16_t)w.z,y=(int16_t)w.rate,z=(int16_t)w.depth;
+        if(x<0) x=(int16_t)-x;if(y<0) y=(int16_t)-y;if(z<0) z=(int16_t)-z;
+        w.speed=(uint32_t)magnitude3(x,y,z);w.zero=w.speed==0;break;
+    }
+    case FC_ATTENUATE_X: case FC_ATTENUATE_Y: case FC_ATTENUATE_Z:
+        w.value=(uint32_t)(int32_t)attenuate_offset((int16_t)w.value,(int16_t)w.speed);break;
+    case FC_PROBE_CONTROL: probe_record_regions(NULL);break;
+    case FC_TOUCHDOWN_FAST_TONE: case FC_TOUCHDOWN_SLOW_TONE:
+        sound_chosen_record_alert(child==FC_TOUCHDOWN_FAST_TONE?40:30);break;
+    case FC_SAMPLE_TOUCHDOWN: case FC_SAMPLE_TAKEOFF: {
+        const MenuContextHooks timer={.consume=clock_child};
+        read_menu_time_sample(&timer);break;
+    }
+    default: fprintf(stderr,"native root control child unavailable: %u\n",(unsigned)child);abort();
+    }
+    return w;
 }
 static void dynamics(gaddr record) {
     RecordDynamicsFrame frame={0};
@@ -29,6 +67,18 @@ static void dynamics(gaddr record) {
     while(!advance_record_dynamics(&frame,&hooks)) {
         DynamicsState *w=&frame.work;
         switch(frame.child) {
+        case DY_RECORD_CONTROLS:
+            update_dynamics_record_input(record,w->primary); break;
+        case DY_RECORD_SELECTOR: {
+            IndexedRecordWork selected={0};update_dynamics_selected_record(&selected);
+            w->primary=rd_u16(selected.record+0x6e);
+            w->detail=(w->detail&0xffff0000u)|rd_u16(selected.record+0x6c);
+            w->root=selected.record;break;
+        }
+        case DY_ROOT_FLIGHT: {
+            const FlightHooks flight={.consume_values=root_control_child};
+            advance_main_loop_flight_controls(0x4800,&flight);break;
+        }
         case DY_CELL_MATRIX:
             inverse_orientation_matrix(record,(uint16_t)w->rate_x,(uint16_t)w->rate_y,(uint16_t)w->rate_z);
             break;

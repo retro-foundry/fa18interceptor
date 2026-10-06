@@ -74,7 +74,7 @@ def main():
         assert field(0xC45791, 1) == b"\x01", "aircraft selection gate not open"
         replay.write_text(replay.read_text() + "F 5400 K 49 0 0 1\nF 5402 K 49 0 0 0\n")
         selected, data = run(6100)
-        assert selected["stage"] == "C10C08", selected
+        assert selected["stage"] == "C10DAE", selected
         assert field(0xC45791, 1) == b"\x00", "aircraft selection gate not consumed"
         assert field(0xC45849, 1) == b"\x11" and field(0xC461E6, 1) == b"\x11", "aircraft/root reset"
         assert selected["record_updates"] > aircraft["record_updates"] > locations["record_updates"], "setup updates stopped"

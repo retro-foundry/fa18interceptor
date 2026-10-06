@@ -29,7 +29,7 @@ def main():
                           'F 4100 K 13 0 0 1\nF 4102 K 13 0 0 0\n'
                           'F 5000 K 50 0 0 1\nF 5002 K 50 0 0 0\n'
                           'F 5400 K 49 0 0 1\nF 5402 K 49 0 0 0\n')
-        for frames, stage in ((4000, 'C1075A'), (5300, 'C10AE6'), (6100, 'C10C08')):
+        for frames, stage in ((4000, 'C1075A'), (5300, 'C10AE6'), (6100, 'C10DAE')):
             checkpoint = work / f'{frames}.bin'
             result = subprocess.run([str(args.runner.resolve()), '--adf', str(ROOT / 'local/media/fa18.adf'),
                                      '--save-dir', directory, '--headless', '--frames', str(frames),
