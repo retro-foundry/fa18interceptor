@@ -45,8 +45,12 @@ including 41 visible number cases. Four of six identified frame owners are
 connected at that milestone. C2B564's grid/record-marker tree is now connected
 as well: **M opens the original map** during Free Flight, with both grid axes,
 coordinate labels and aircraft markers. 385 source cases and the real map
-checkpoint pass. Five of six identified frame owners are connected; stores
-icons remain. This is a scope inventory, not whole-game progress.
+checkpoint pass. C30A00 stores icons now run between weapon status and grid
+readouts, including the source selection colours and redraw/clipping rules.
+1,484 stores and 280 complete normal HUD source comparisons pass; the exhausted
+weapon's one-digit zero is correctly blank. All six identified frame owners
+are connected. This is a scope inventory, not whole-game progress; full recorded
+frame parity remains open. See `../../analysis/native_stores_milestone.md`.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
 `hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;

@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe')
     args = parser.parse_args()
     oracles = []
-    for name in ('frame_tail', 'frame_labels', 'frame_markers'):
+    for name in ('frame_tail', 'frame_labels', 'frame_markers', 'stores'):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
         subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(oracle.relative_to(ROOT)),
                         '--main', f'tools/native/native_{name}_oracle.c'], cwd=ROOT, check=True)
@@ -53,9 +53,9 @@ def main():
         # in the actual frontend, beyond merely setting its two entry gates.
         assert int.from_bytes(content[0x4B0C:0x4B0E], 'big') == 8624
         assert not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
-        subprocess.run([str(oracles[-1]), str(map_data)], cwd=ROOT, check=True, timeout=20)
+        subprocess.run([str(oracles[2]), str(map_data)], cwd=ROOT, check=True, timeout=20)
         print('M opens the map and runs both grid axes and aircraft markers in the native frontend')
-    print('Native cleanup/overlays/scene labels/grid markers pass; stores and frame parity remain open')
+    print('Native cleanup/overlays/scene labels/grid markers/stores pass; recorded frame parity remains open')
 
 
 if __name__ == '__main__':

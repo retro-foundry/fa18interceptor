@@ -7,6 +7,16 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest cockpit stores batch: C30A00 now runs in the actual HUD between weapon
+status and grid readouts, using original stocks, symbols and clipping. Complete
+HUD checks also fixed the exhausted missile's one-digit zero: source leaves it
+blank. 1,484 stores and 280 complete normal HUD source comparisons pass in all
+non-stack RAM. Native demo, live cockpit/map, carrier save/restart/reload and
+12 reference contracts pass. See `analysis/native_stores_milestone.md`.
+All six identified missing frame owners are connected (100% of that inventory,
+not whole-game progress). Full frame parity remains 0/3 accepted, startup lead
+37 ticks, Copper fade excluded. Async voices/output and full timing/state parity
+remain open; reuse reference recordings rather than repeating full replays.
 Latest grid batch: C2B564's complete X/Z grid and aircraft-marker child tree
 now runs after selection cleanup, before timers. Map entry's C0F4A6 voice
 release is connected; M opens the map in actual native Free Flight. 385 full

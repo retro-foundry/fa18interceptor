@@ -6,6 +6,7 @@ add_executable(fa18_native main.c replay.c
     ../game/native/frame_tail.c ../game/hud_stream.c
     ../game/native/frame_labels.c ../game/flight_markers.c
     ../game/native/frame_markers.c
+    ../game/native/stores.c ../game/hud_stores.c
     ../game/native/input.c ../game/pending_input.c ../game/input_events.c
     ../game/command_dispatch.c ../game/view_commands.c ../game/player_input.c
     ../game/native/clock.c ../game/main_loop_timers.c

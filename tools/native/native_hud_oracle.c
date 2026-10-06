@@ -9,6 +9,10 @@
 #define FA18_NATIVE
 #define draw_line host_draw_line
 #define draw_line_to_row host_draw_line_to_row
+#define draw_stores_icons host_draw_stores_icons
+#define draw_stores_icon_stream host_draw_stores_icon_stream
+#include "../../port/game/hud_stores.c"
+#include "../../port/game/native/stores.c"
 #define draw_mark_polygon host_draw_mark_polygon
 #define put hud_text_put
 #define fill_bar host_fill_bar

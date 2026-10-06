@@ -9,6 +9,15 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: connect C30A00 stores icons in the real native cockpit HUD.
+  Correct C32AEE's blank one-digit zero for exhausted weapons. 1,484 stores
+  and 280 complete HUD source comparisons, actual cockpit/map, complete
+  native demo, carrier save/restart/reload and 12 reference contracts pass.
+  See `../analysis/native_stores_milestone.md`. **6/6 (100%)** of the identified
+  missing frame owners are connected; this is an inventory count. Whole-game
+  frame parity remains **0/3 accepted**, startup lead 37 ticks, Copper fade
+  excluded. Async voices/output and complete timing/state parity remain open.
+
 - Complete: connect C2B564's grid/aircraft-marker tree and map-entry voice
   release. M opens the source map and runs both grid axes in actual native
   Free Flight. 385 source comparisons, 640 legacy cases, carrier

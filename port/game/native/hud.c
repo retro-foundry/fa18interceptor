@@ -1,6 +1,7 @@
 /* Source C0F138-C0F29E gates and cadence for HUD and panel owners.
- * Stores and complete frame ownership remain unconnected. */
+ * Aircraft stores use the source normal-view contract in stores.c. */
 #include "hud.h"
+#include "stores.h"
 #include "../globals.h"
 #include "../postflight_hud.h"
 #include "../hud_readouts.h"
@@ -35,6 +36,7 @@ void native_hud_draw(uint16_t saved_tick) {
     wr_u16(UPDATE_STAGE_MARKER,0x1a0);
     draw_panel_mark();
     draw_weapon_status();
+    native_hud_draw_stores(); /* C30A00 between weapon status and grid readouts. */
     draw_grid_z_readout();draw_grid_x_readout();draw_zoom_readout();
     draw_mode_bar();
     draw_scale_readout();

@@ -148,5 +148,9 @@ void draw_text_in_view(Text *text) {
 
 void print_bcd_in_view(gaddr end, int digits, int keep_zeros, Text *text) {
     format_digits(end, digits, 0, keep_zeros);
+    /* C32AEE-C32AFE tests the first digit even when the decremented width
+     * is negative. A one-digit zero stock is blank, as well as leading zeros
+     * in wider fields. The small-text formatter has a separate contract. */
+    if (!keep_zeros && digits == 1 && rd_u8(end - 1) == '0') wr_u8(end - 1, ' ');
     draw_text_in_view(text);
 }
