@@ -332,6 +332,23 @@ completion. Counts remain 25/590/84/691. Evidence:
 Next: C1C63E parent ownership and native root/control/render children; preserve
 explicit timing, non-fade, stack and matrix acceptance debt.
 
+Latest connected batch: native C1C63E retains game `RecordUpdateStageFrame`
+and calls the C22C80 record loop directly. All 112 update-stage CPU cases are
+deleted; the shared C22C80/C1C63E instruction body is now **100% removed**.
+This connected chain has removed 892 instruction cases, retaining thin entries,
+guest data and other original children. 4,096 original-child core cases match
+all state; 4,096 production cases match registers/PC/SR and RAM outside old
+CPU stack scratch. Strict all-RAM still fails (case 0 at C7FED1). Both compilers/
+runners, twelve CTests and profiling pass. The MSVC/GNU demo matches. Bounded
+recordings reach 43/15/75 native stage -> record-loop calls, with zero C22C80
+CPU entry dispatch. Previous-build non-fade/index differences start at
+381/446/263 (64/1,588/12,536 pixels); final RAM differs. Timing/parity stay open.
+No full replay repeated. Bounded raw demo **69.8507%**, delta **-0.0008 pp**;
+full raw **38.4011%** cached, accepted share unavailable, axes **0%**, gate **0/4**.
+Raw meter excludes CPU-style adapters; repair that measurement before using it
+for further progress estimates. Inventory unchanged. Evidence:
+`../analysis/emulation_removal_update_stage_batch.json/.md`.
+
 ### Phase 2 — Memory cutover (axis B, PORT.md stage F)
 
 Replace `gaddr` plus `rd_*`/`wr_*` with real C structs and pointers, as

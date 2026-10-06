@@ -1,0 +1,175 @@
+{
+  "before_commit": "214b1046",
+  "scope": "C090B4/C0F016 -> native C1C63E -> C22C80 -> C25B66",
+  "retired_update_stage_instruction_cases": 112,
+  "shared_record_update_step_body_removed_percent": 100,
+  "connected_chain_retired_instruction_cases": 892,
+  "core_original_child_cases": 4096,
+  "core_result": "all registers, PC, SR and RAM match",
+  "composed_held_event_cases": 4096,
+  "composed_result": "all registers, PC, SR and RAM outside CPU stack scratch C7FD00..C7FEFF match",
+  "strict_all_ram": "case 0 mismatch at C7FED1, source C2 / C 00",
+  "builds": "GNU/MSVC recomp/romfree",
+  "ctests": "12/12 pass, including direct parent-edge and zero CPU entry assertions",
+  "gnu_profiling": "OFF/ON/interpreter output invariance pass",
+  "msvc_gnu_demo": "800 frame RGB/index/RAM and full profile match",
+  "recordings": [
+    {
+      "name": "demo01",
+      "instructions": {
+        "interpreted": 907775,
+        "generated": 665941,
+        "residual": 1034
+      },
+      "previous_instructions": {
+        "interpreted": 908048,
+        "generated": 665627,
+        "residual": 1034
+      },
+      "ports": {
+        "calls": 491,
+        "steps": 3515122
+      },
+      "previous_ports": {
+        "calls": 491,
+        "steps": 3516931
+      },
+      "stage_to_records": [
+        {
+          "caller": "C1C63E",
+          "callee": "C22C80",
+          "calls": 43
+        }
+      ],
+      "cpu_record_loop_entry_dispatches": 0,
+      "previous_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": 381,
+        "first_nonfade_difference": {
+          "frame": 381,
+          "pixels": 64
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 64,
+        "index_difference_pixels": 64,
+        "passed": false
+      },
+      "final_ram_equal_previous": false
+    },
+    {
+      "name": "qual_carrier_success",
+      "instructions": {
+        "interpreted": 993014,
+        "generated": 994802,
+        "residual": 1357
+      },
+      "previous_instructions": {
+        "interpreted": 991706,
+        "generated": 996049,
+        "residual": 1357
+      },
+      "ports": {
+        "calls": 123,
+        "steps": 1824012
+      },
+      "previous_ports": {
+        "calls": 123,
+        "steps": 1824884
+      },
+      "stage_to_records": [
+        {
+          "caller": "C1C63E",
+          "callee": "C22C80",
+          "calls": 15
+        }
+      ],
+      "cpu_record_loop_entry_dispatches": 0,
+      "previous_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 446,
+        "first_index_difference": 446,
+        "first_nonfade_difference": {
+          "frame": 446,
+          "pixels": 627
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 1588,
+        "index_difference_pixels": 1588,
+        "passed": false
+      },
+      "final_ram_equal_previous": false
+    },
+    {
+      "name": "qual_fail_crashes",
+      "instructions": {
+        "interpreted": 950497,
+        "generated": 750666,
+        "residual": 1063
+      },
+      "previous_instructions": {
+        "interpreted": 947023,
+        "generated": 753933,
+        "residual": 1063
+      },
+      "ports": {
+        "calls": 651,
+        "steps": 3733077
+      },
+      "previous_ports": {
+        "calls": 651,
+        "steps": 3736195
+      },
+      "stage_to_records": [
+        {
+          "caller": "C1C63E",
+          "callee": "C22C80",
+          "calls": 75
+        }
+      ],
+      "cpu_record_loop_entry_dispatches": 0,
+      "previous_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 263,
+        "first_index_difference": 263,
+        "first_nonfade_difference": {
+          "frame": 263,
+          "pixels": 343
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 12536,
+        "index_difference_pixels": 12536,
+        "passed": false
+      },
+      "final_ram_equal_previous": false
+    }
+  ],
+  "bounded_demo_raw_cpu_removed_percent": 69.85071917928862,
+  "bounded_demo_delta_pp": -0.0007849630186740342,
+  "cached_full_raw_cpu_removed_percent": 38.40106459907289,
+  "accepted_cpu_removed_percent": null,
+  "memory_chipset_boot_cutover_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": "0/4",
+  "inventory": "25 exclusive C / 590 CPU rows / 84 deferred / 691 opcode bindings",
+  "full_replay_repeated": false,
+  "open_gates": [
+    "outer instruction/event timing",
+    "non-fade/index and final RAM recording differences",
+    "original CPU stack residue",
+    "prior isolated matrix fixture mismatch",
+    "raw meter excludes opcode-stepping adapters"
+  ]
+}

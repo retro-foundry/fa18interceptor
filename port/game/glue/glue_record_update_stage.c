@@ -79,13 +79,8 @@ int glue_C22C80(void) {
 
 /* This parent composes record dynamics directly. Remaining children retain
  * their original runtime boundary until their C owners are connected here. */
-typedef struct {
-    ControlRecordsFrame frame;
-    NativeRecordDynamicsCall dynamics;
-    enum { RECORD_CHILD_IDLE,RECORD_CHILD_ORIGINAL,RECORD_CHILD_DYNAMICS,RECORD_CHILD_FINISHED } active;
-} ControlRecordsCall;
-static int continue_control_records(const void *arguments) {
-    ControlRecordsCall *call=(ControlRecordsCall *)arguments;
+int glue_continue_control_records(const void *arguments) {
+    NativeControlRecordsCall *call=(NativeControlRecordsCall *)arguments;
     for(;;) {
         if(call->active==RECORD_CHILD_DYNAMICS) {
             int result=glue_continue_record_dynamics(&call->dynamics);
@@ -109,7 +104,10 @@ static int continue_control_records(const void *arguments) {
         fa18_ports_native_child_wait(site.ret,sp); return FA18_EXIT_DISPATCH;
     }
 }
+void glue_begin_control_records(NativeControlRecordsCall *call) {
+    *call=(NativeControlRecordsCall){0};
+}
 int glue_schedule_control_records(void) {
-    ControlRecordsCall call={0};
-    return fa18_ports_schedule_native_child(continue_control_records,&call,sizeof call,0);
+    NativeControlRecordsCall call; glue_begin_control_records(&call);
+    return fa18_ports_schedule_native_child(glue_continue_control_records,&call,sizeof call,0);
 }

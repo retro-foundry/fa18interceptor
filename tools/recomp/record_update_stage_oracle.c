@@ -120,9 +120,10 @@ int main(int argc,char **argv) {
         memcpy(reference+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE);
         memcpy(m,before,sizeof *m); m68k_set_context(cpu);
         if(live) {
-            if(selected_entry!=0xc22c80u) return 1;
-            fa18_write_log_active=0; fa18_ports_init(FA18_PORTS_ON,"C22C80");
-            REG_PPC=0xc1c6b6u; REG_IR=0x4eb9;
+            if(selected_entry!=0xc22c80u && selected_entry!=0xc1c63eu) return 1;
+            fa18_write_log_active=0;
+            fa18_ports_init(FA18_PORTS_ON,selected_entry==0xc22c80u?"C22C80":"C1C63E");
+            REG_PPC=selected_entry==0xc22c80u?0xc1c6b6u:0xc090b4u; REG_IR=0x4eb9;
             if(fa18_recomp_resume(0xc70000u,0xc7ff04u)!=FA18_RET) {
                 fprintf(stderr,"record update native case %u did not complete at %06X\n",scenario,REG_PC); return 1;
             }

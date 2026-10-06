@@ -19,6 +19,18 @@ typedef struct {
     void (*observe)(void *context,const UpdateStageEvent *event);
     void *context;
 } UpdateStageHooks;
+enum RecordUpdateStagePhase {
+    RECORD_STAGE_BEGIN, RECORD_STAGE_AFTER_RECORDS, RECORD_STAGE_AFTER_RATE,
+    RECORD_STAGE_AFTER_ORIGIN, RECORD_STAGE_AFTER_ORIGIN_RATE, RECORD_STAGE_COMPLETE
+};
+typedef struct {
+    enum RecordUpdateStagePhase phase;
+    enum UpdateStageChild child;
+    UpdateStageResult result;
+    uint8_t requests;
+} RecordUpdateStageFrame;
+/* Zero requests a child; one finishes the retained game stage. */
+int advance_record_update_stage(RecordUpdateStageFrame *frame,const UpdateStageHooks *hooks);
 /* Complete C1C63E-C1C7F4 owner. Record update, origin and rate producers
  * remain explicit children; signed widths and publication order are source-owned. */
 void run_record_update_stage(const UpdateStageHooks *hooks);

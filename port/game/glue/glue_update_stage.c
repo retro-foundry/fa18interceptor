@@ -2,6 +2,9 @@
 #include "glue_child_call.h"
 #include "update_stage.h"
 #include "globals.h"
+#include "glue_flight_record_calls.h"
+#include "recomp_ports.h"
+#include <stdlib.h>
 
 typedef struct { int origin; } UpdateStageCPU;
 static void stage_outputs(void *context,const UpdateStageEvent *event) {
@@ -57,4 +60,50 @@ int glue_C1C63E(void) {
     UpdateStageHooks hooks={consume,stage_outputs,&cpu};
     run_record_update_stage(&hooks);
     return glue_return();
+}
+
+typedef struct {
+    RecordUpdateStageFrame frame;
+    NativeControlRecordsCall records;
+    UpdateStageCPU cpu;
+    enum { UPDATE_CHILD_IDLE,UPDATE_CHILD_ORIGINAL,UPDATE_CHILD_RECORDS,UPDATE_CHILD_FINISHED } active;
+} RecordUpdateStageCall;
+static int continue_record_update_stage(const void *arguments) {
+    RecordUpdateStageCall *call=(RecordUpdateStageCall *)arguments;
+    for(;;) {
+        if(call->active==UPDATE_CHILD_RECORDS) {
+            int result=glue_continue_control_records(&call->records);
+            if(result!=FA18_RET) return result;
+            call->active=UPDATE_CHILD_FINISHED;
+            fa18_ports_native_child_wait(REG_PC,A(7)); return FA18_EXIT_DISPATCH;
+        }
+        if(call->active!=UPDATE_CHILD_IDLE) {
+            if(call->frame.child==UPDATE_STAGE_ORIGIN) {
+                SET_W(D(5),rd_u16(A(7))); A(7)+=2; flags_logic_w(D(5));
+            }
+            call->frame.result=(UpdateStageResult){A(3),(uint8_t)D(5)};
+            call->active=UPDATE_CHILD_IDLE;
+        }
+        UpdateStageHooks hooks={NULL,stage_outputs,&call->cpu};
+        if(advance_record_update_stage(&call->frame,&hooks)) return glue_return();
+        uint32_t entry,ret,sp=A(7);
+        switch(call->frame.child) {
+        case UPDATE_STAGE_RECORDS: entry=0xc22c80u; ret=0xc1c6bcu; break;
+        case UPDATE_STAGE_ORIGIN: entry=0xc29042u; ret=0xc1c71eu; break;
+        case UPDATE_STAGE_RATE: entry=0xc1c7f6u; ret=call->cpu.origin?0xc1c72au:0xc1c6d4u; break;
+        default: abort();
+        }
+        m68ki_push_32(ret); REG_PC=entry;
+        if(call->frame.child==UPDATE_STAGE_RECORDS) {
+            fa18_ports_note_native_edge(0xc1c63e,0xc22c80);
+            glue_begin_control_records(&call->records);
+            call->active=UPDATE_CHILD_RECORDS; continue;
+        }
+        call->active=UPDATE_CHILD_ORIGINAL;
+        fa18_ports_native_child_wait(ret,sp); return FA18_EXIT_DISPATCH;
+    }
+}
+int glue_schedule_record_update_stage(void) {
+    RecordUpdateStageCall call={0};
+    return fa18_ports_schedule_native_child(continue_record_update_stage,&call,sizeof call,0);
 }
