@@ -118,14 +118,17 @@ publish_history_count:
     byte(h,w.record+61,(uint8_t)w.primary);
 }
 
-void check_record_zone_exit_complete(GeometryState w,const GeometryHooks *h) {
+int advance_record_zone_exit(ZoneExitFrame *f,const GeometryHooks *h) {
+    GeometryState w=f->work;
+    if(f->phase==ZONE_AFTER_FAULT || f->phase==ZONE_COMPLETE) goto finished;
+    if(f->phase==ZONE_AFTER_PLACE) { byte(h,w.root+56,255); goto finished; }
     int outside;
     P(root,FG_ROOT,0xc46184u); W(primary,FG_PRIMARY,rd_u16(0xc459b4u)); ALW(primary,FG_PRIMARY,8); AW(primary,FG_PRIMARY,w.primary);
-    if(!(uint16_t)w.primary) return;
+    if(!(uint16_t)w.primary) goto finished;
     P(root,FG_ROOT,indexed(w.root,w.primary)); B(rate_x,FG_RATE_X,rd_u8(w.root+98)); AND_B(rate_x,FG_RATE_X,240); CB(w.rate_x,16);
-    if((uint8_t)w.rate_x!=16) return; CB(rd_u8(w.root+5),8); if(rd_u8(w.root+5)==8) return;
-    B(primary,FG_PRIMARY,rd_u8(w.root+93)); if((int8_t)w.primary<0) return;
-    { int32_t zone=(int8_t)w.primary-1; SB(primary,FG_PRIMARY,1); if(zone<0) { word(h,0xc4599eu,30); consume(h,FG_ZONE_FAULT); return; } }
+    if((uint8_t)w.rate_x!=16) goto finished; CB(rd_u8(w.root+5),8); if(rd_u8(w.root+5)==8) goto finished;
+    B(primary,FG_PRIMARY,rd_u8(w.root+93)); if((int8_t)w.primary<0) goto finished;
+    { int32_t zone=(int8_t)w.primary-1; SB(primary,FG_PRIMARY,1); if(zone<0) { word(h,0xc4599eu,30); f->work=w; f->phase=ZONE_AFTER_FAULT; return 0; } }
     EW(primary,FG_PRIMARY); AW(primary,FG_PRIMARY,w.primary); AW(primary,FG_PRIMARY,w.primary);
     W(rate_x,FG_RATE_X,rd_u16(w.root+6)); W(rate_y,FG_RATE_Y,rd_u16(w.root+8));
     P(scene,FG_SCENE,indexed(0xc29720u,w.primary)); P(scene,FG_SCENE,rd_u32(w.scene)); load_words(&w,w.scene,0x1e,-1,h); P(scene,FG_SCENE,w.scene+8);
@@ -133,21 +136,29 @@ void check_record_zone_exit_complete(GeometryState w,const GeometryHooks *h) {
     if(!outside) { CW(w.rate_x,w.x); outside=(int16_t)w.rate_x>(int16_t)w.x; }
     if(!outside) { CW(w.rate_y,w.y); outside=(int16_t)w.rate_y<(int16_t)w.y; }
     if(!outside) { CW(w.rate_y,w.z); outside=(int16_t)w.rate_y>(int16_t)w.z; }
-    if(!outside) { CB(rd_u8(w.root+122),5); if(rd_u8(w.root+122)!=5) return; }
+    if(!outside) { CB(rd_u8(w.root+122),5); if(rd_u8(w.root+122)!=5) goto finished; }
     W(primary,FG_PRIMARY,rd_u16(w.scene)); P(scene,FG_SCENE,w.scene+2);
-    { int32_t count=(int16_t)w.primary-1; SW(primary,FG_PRIMARY,1); if(count<0) return; }
+    { int32_t count=(int16_t)w.primary-1; SW(primary,FG_PRIMARY,1); if(count<0) goto finished; }
     do {
         P(scene,FG_SCENE,w.scene+4); W(detail,FG_DETAIL,rd_u16(w.scene)); P(scene,FG_SCENE,w.scene+2);
         W(x,FG_X,rd_u16(w.scene)); P(scene,FG_SCENE,w.scene+4);
         P(table,FG_TABLE,0xc295e0u); P(table,FG_TABLE,indexed(w.table,rd_u16(indexed(w.table,w.x))));
         load_words(&w,w.table,0x7c,4,h); AND_W(detail,FG_DETAIL,127); CW(w.detail,rd_u16(0xc459b4u));
         if((uint16_t)w.detail!=rd_u16(0xc459b4u)) continue;
-        if(!outside) return;
+        if(!outside) goto finished;
         CB(rd_u8(w.root+122),3);
         if(rd_u8(w.root+122)==3) byte(h,w.root+122,5);
         else { CB(rd_u8(w.root+122),4); if(rd_u8(w.root+122)==4) byte(h,w.root+122,5); }
-        and_word(h,w.root,0xfffe); w=consume(h,FG_ZONE_PLACE); byte(h,w.root+56,255); return;
+        and_word(h,w.root,0xfffe); f->work=w; f->phase=ZONE_AFTER_PLACE; return 0;
     } while(decrement(&w.primary,FG_PRIMARY,h));
+finished:
+    f->work=w; f->phase=ZONE_COMPLETE; return 1;
+}
+
+void check_record_zone_exit_complete(GeometryState w,const GeometryHooks *h) {
+    ZoneExitFrame frame={w,ZONE_BEGIN};
+    while(!advance_record_zone_exit(&frame,h))
+        frame.work=consume(h,frame.phase==ZONE_AFTER_FAULT?FG_ZONE_FAULT:FG_ZONE_PLACE);
 }
 
 void test_candidate_faces_complete(GeometryState w,gaddr frame,const GeometryHooks *h) {

@@ -99,7 +99,7 @@ int main(int argc,char **argv) {
         if(getenv("FA18_ORACLE_TRACE")) fprintf(stderr,"case %u C\n",scenario);
         switch(selected_entry) {
         case 0xc2651eu: glue_C2651E(); break;
-        case 0xc28e28u: glue_C28E28(); break;
+        case 0xc28e28u: glue_complete_zone_exit(); break;
         case 0xc26ebeu: glue_C26EBE(); break;
         case 0xc27456u: glue_C27456(); break;
         default: return 1;

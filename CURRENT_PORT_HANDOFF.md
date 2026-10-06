@@ -11,7 +11,28 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
-Latest dependency removal: C25B66's C25C6A call now selects the native
+Latest connected batch: C25B66's C25BA6 zone-exit call now selects native
+`update_dynamics_record_zone_exit` -> `advance_record_zone_exit`. Its C frame
+retains fault/placement phases across original runtime children. C28E28's CPU
+entry/registry/guard and sole wrapper file are retired. **16,384 production
+continuation cases** match all registers/PC/SR/RAM, covering **79/79** source
+instructions. Both runners/compilers build; twelve CTests, GNU profiling and
+an MSVC/GNU bounded demo pass. Native calls in 800 demo/carrier/crash frames
+are **2/0/2**, CPU-entry calls zero, aggregate CPU counts unchanged. Demo/carrier
+outputs and all three final RAMs match the preceding build. Crash rendering
+has a **185-pixel non-fade regression**, first at frame **556**; source first
+differences still **619/446/263**. Rendering acceptance is open; parent
+instruction/event timing is unmodeled. Component correctness does not close
+that integration gap. This removes an entry/stepping dependency, not new
+metered CPU work: delta **0.0000 pp**. Counts **25 C-owned / 590 readable CPU
+rows**, 84 deferred entries. Bounded demo raw CPU **69.8779%**; full minimum
+**38.4011%** is cached, accepted percentage unavailable; other cutover axes
+**0%**, subsystem deletion **0/4**. No full replay suite repeated. Evidence:
+`analysis/emulation_removal_zone_exit_batch.json/.md`. Follow up the rendering
+timing debt before claiming native-flight acceptance; remaining child calls
+and the outer C25B66 CPU/event parent are still removal work.
+
+Previous dependency removal: C25B66's C25C6A call now selects the native
 forty-arm C2C392 record autopilot. The original owner has **987 instructions**,
 including **361 cold instructions** missed by the old 626-instruction body.
 A retained C frame owns response limits and continuation phases; original

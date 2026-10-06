@@ -4,6 +4,7 @@
 int glue_schedule_record_input(void);
 int glue_schedule_indexed_record(void);
 int glue_schedule_record_action(void);
+int glue_schedule_record_zone_exit(void);
 /* Held original-child fixture entry, separate from the live continuation. */
 int glue_record_action_reference(void);
 #endif

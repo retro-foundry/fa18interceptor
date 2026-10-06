@@ -2,6 +2,9 @@
 #include "glue_flight_geometry.h"
 #include "glue_child_call.h"
 #include "flight_geometry.h"
+#include "flight_dynamics.h"
+#include "glue_flight_record_calls.h"
+#include "recomp_ports.h"
 static GeometryState working(void) {
     GeometryState w={D(0),D(1),D(2),D(3),D(4),D(5),D(6),D(7),A(0),A(1),A(2),A(3),A(4),A(5),COND_EQ()}; return w;
 }
@@ -61,3 +64,23 @@ int glue_complete_record_history(void) { record_position_history_complete(workin
 int glue_complete_zone_exit(void) { check_record_zone_exit_complete(working(),&hooks); return glue_return(); }
 int glue_complete_candidate_update(void) { update_candidate_record_complete(working(),&hooks); return glue_return(); }
 int glue_complete_candidate_faces(void) { test_candidate_faces_complete(working(),A(6),&hooks); return glue_return(); }
+
+typedef struct { ZoneExitFrame frame; int started; } ZoneExitCall;
+static int call_record_zone_exit(const void *arguments) {
+    ZoneExitCall *call=(ZoneExitCall *)arguments;
+    if(call->started) call->frame.work=working();
+    else { call->started=1; fa18_ports_note_native_edge(0xc25b66u,0xc28e28u); }
+    if(update_dynamics_record_zone_exit(&call->frame,&hooks)) return glue_return();
+    uint32_t sp=A(7);
+    int fault=call->frame.phase==ZONE_AFTER_FAULT;
+    uint32_t ret=fault?0xc28e24u:0xc28f08u;
+    m68ki_push_32(ret); REG_PC=fault?0xc06c02u:0xc28f16u;
+    fa18_ports_native_child_wait(ret,sp);
+    return FA18_EXIT_DISPATCH;
+}
+int glue_schedule_record_zone_exit(void) {
+    ZoneExitCall call={0};
+    call.frame.work=working(); call.frame.phase=ZONE_BEGIN;
+    /* Original child events remain live; parent timing is not yet modeled. */
+    return fa18_ports_schedule_native_child(call_record_zone_exit,&call,sizeof call,0);
+}

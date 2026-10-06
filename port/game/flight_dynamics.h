@@ -3,6 +3,7 @@
 #include "memory.h"
 #include "record_matrix_update.h"
 #include "indexed_record_update.h"
+#include "flight_geometry.h"
 /* Working values retain original byte/word halves during mixed-width record,
  * scene and geometry operations. Consumers return all changed working values. */
 enum DynamicsValue { DY_PRIMARY,DY_DETAIL,DY_X,DY_Y,DY_Z,DY_RATE_X,DY_RATE_Y,DY_RATE_Z,
@@ -75,4 +76,5 @@ typedef struct {
  * The original out-of-table transfer is retained as an unresolved boundary. */
 int advance_record_autopilot(AutopilotFrame *frame, const DynamicsHooks *hooks);
 int update_dynamics_record_action(AutopilotFrame *frame, const DynamicsHooks *hooks);
+int update_dynamics_record_zone_exit(ZoneExitFrame *frame,const GeometryHooks *hooks);
 #endif

@@ -443,6 +443,25 @@
         "parent instruction/event timing not yet modeled",
         "unknown or modified action-table targets retain original transfer"
       ]
+    },
+    {
+      "entry": "C28E28",
+      "function": "advance_record_zone_exit",
+      "source": "port/game/flight_geometry.c",
+      "callers": [
+        {
+          "entry": "C25B66",
+          "function": "update_dynamics_record_zone_exit",
+          "source": "port/game/flight_dynamics.c"
+        }
+      ],
+      "source_call": "analysis/data/flight_geometry_source_scope.json",
+      "remaining_dependencies": [
+        "shared guest scene and record data",
+        "original fault and placement child boundaries",
+        "outer flight CPU/event boundary",
+        "parent instruction/event timing not yet modeled"
+      ]
     }
   ]
 }

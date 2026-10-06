@@ -1064,3 +1064,6 @@ finished:
 int update_dynamics_record_action(AutopilotFrame *frame,const DynamicsHooks *hooks) {
     return advance_record_autopilot(frame,hooks);
 }
+int update_dynamics_record_zone_exit(ZoneExitFrame *frame,const GeometryHooks *hooks) {
+    return advance_record_zone_exit(frame,hooks);
+}

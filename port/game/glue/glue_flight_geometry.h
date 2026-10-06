@@ -3,8 +3,6 @@
 #include "glue.h"
 int glue_C2651E_complete_step(void);
 int glue_C2651E_owns(uint32_t pc);
-int glue_C28E28_complete_step(void);
-int glue_C28E28_owns(uint32_t pc);
 int glue_C26EBE_complete_step(void);
 int glue_C26EBE_owns(uint32_t pc);
 int glue_C27456_complete_step(void);

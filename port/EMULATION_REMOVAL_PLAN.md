@@ -237,6 +237,21 @@ axes **0%**, deletion **0/4**. No full replay suite repeated. Evidence:
 `../analysis/emulation_removal_autopilot_batch.json/.md`. Next: remaining
 normalization/steering CPU child calls, then C28E28 in the live flight parent.
 
+C25BA6 now selects the native C28E28 zone-exit owner through a retained C
+continuation; its CPU entry/registry/guard and sole wrapper file are retired.
+16,384 production-continuation cases match all registers/PC/SR/RAM, covering
+79/79 original instructions. Both compilers/runners, twelve CTests, GNU
+profiling and an MSVC/GNU demo pass. Bounded native calls are 2/0/2; aggregate
+CPU instructions unchanged. Demo/carrier frames and all final RAMs match the
+preceding build, but crash rendering has a **185-pixel non-fade regression**
+starting at frame **556**. Source first differences remain 619/446/263.
+Component correctness passes; rendering acceptance stays open, with parent
+instruction/event timing unmodeled. Counts 25 C-owned entries / 590 readable
+CPU rows / 84 deferred entries. Batch CPU-work delta **0.0000 pp**, bounded
+demo raw CPU **69.8779%**, full minimum **38.4011%** cached; accepted percentage
+unavailable, other cutover axes **0%**, deletion **0/4**. No full replay suite
+repeated. Evidence: `../analysis/emulation_removal_zone_exit_batch.json/.md`.
+
 Remaining C routines call each other by returning into the dispatcher. Give each
 recreated routine a direct C entry point and let a C caller call its C callee
 directly, keeping glue only for callers that are still generated code.

@@ -11,9 +11,11 @@
 #include "memory.h"
 #include "ports_glue.h"
 #include "globals.h"
+#include "glue_flight_record_calls.h"
 
 extern int fa18_write_log_active;
 extern void fa18_structural_reset_write_log(void);
+extern size_t fa18_structural_native_pending(void);
 extern void fa18_flight_geometry_fixture_begin(const char *phase);
 extern int64_t fa18_next_event;
 static uint32_t seed=0xc0f5f8u;
@@ -70,6 +72,7 @@ int main(int argc,char **argv) {
     uint8_t *reference=malloc(FA18_CHIP_SIZE+FA18_SLOW_SIZE);
     void *cpu=malloc(m68k_context_size()); char error[256];
     unsigned cases=argc>1?(unsigned)strtoul(argv[1],NULL,10):8192,scenario;
+    int live=argc>3 && !strcmp(argv[3],"--live");
     if(argc>2) selected_entry=(uint32_t)strtoul(argv[2],NULL,16);
     if(!state || !rom || !m || !base || !before || !reference || !cpu || !cases) return 1;
     if(!fa18_machine_load_state(m,state,state_size,rom,rom_size,error,sizeof error)) {
@@ -91,9 +94,20 @@ int main(int argc,char **argv) {
         memcpy(reference+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE);
         memcpy(m,before,sizeof *m); m68k_set_context(cpu);
         fa18_flight_geometry_fixture_begin("C");
-        switch(selected_entry) {
+        if(live) {
+            if(selected_entry!=0xc28e28u) return 1;
+            fa18_write_log_active=0;
+            fa18_ports_init(FA18_PORTS_ON,"C25B66"); REG_PC=0xc25b66u;
+            if(fa18_recomp_call_dynamic()!=FA18_EXIT_DISPATCH || fa18_ports_active_steps()!=1) return 1;
+            m68k_set_context(cpu); REG_PPC=0xc25ba6u;
+            if(!glue_schedule_record_zone_exit() || fa18_structural_native_pending()!=1 ||
+               fa18_recomp_resume(0xc70000u,expected_sp)!=FA18_RET || fa18_structural_native_pending()) {
+                fprintf(stderr,"flight-geometry oracle: case %u native zone continuation failed at %06X\n",scenario,REG_PC); return 1;
+            }
+            fa18_ports_init(FA18_PORTS_OFF,NULL);
+        } else switch(selected_entry) {
         case 0xc2651eu: glue_C2651E(); break;
-        case 0xc28e28u: glue_C28E28(); break;
+        case 0xc28e28u: glue_complete_zone_exit(); break;
         case 0xc26ebeu: glue_C26EBE(); break;
         case 0xc27456u: glue_C27456(); break;
         default: return 1;
@@ -118,7 +132,7 @@ int main(int argc,char **argv) {
     }
     { unsigned i,count=0;
       for(i=0;i<sizeof visited;++i) if(visited[i]) ++count;
-      printf("flight-geometry oracle %06X: %u complete calls matched all registers, PC, full SR and all RAM; %u parent boundaries observed\n",selected_entry,cases,count);
+      printf("flight-geometry oracle %06X%s: %u complete calls matched all registers, PC, full SR and all RAM; %u parent boundaries observed\n",selected_entry,live?" live continuation":"",cases,count);
       printf("visited:"); for(i=0;i<sizeof visited;++i) if(visited[i]) printf(" %06X",source_pc(i)); putchar('\n');
     }
     free(cpu); free(reference); free(before); free(base); free(m); return 0;

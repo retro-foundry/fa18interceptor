@@ -638,7 +638,6 @@ const FA18Port fa18_ports[] = {
     /* polygon to row C7 */
     {0xC301F0, glue_C301F0, "prepare_polygon_to_row", 0, 0, glue_C301F0_complete_step, 0xC3040C, 0, 0, glue_C301F0_owns},
     /* zone exit */
-    {0xC28E28, glue_C28E28, "check_zone_exit", 0, 0, glue_C28E28_complete_step, 0xC28F16, 0, 0xC28E16, glue_C28E28_owns},
     /* shape */
     {0xC2D16C, glue_C2D16C, "draw_shape", 0, 0, glue_C2D16C_complete_step, 0xC2D3A4, 1, 0, glue_C2D16C_owns},
     /* block face */

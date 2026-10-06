@@ -740,7 +740,6 @@ int glue_C301F0(void);
 int glue_C301F0_step(void);
 
 /* zone exit */
-int glue_C28E28(void);
 
 /* shape */
 int glue_C2D16C(void);

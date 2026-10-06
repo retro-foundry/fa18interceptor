@@ -1,0 +1,184 @@
+{
+  "before_commit": "3a416e15",
+  "scope": "C25B66 call at C25BA6 selects existing native zone-exit game owner; original source children remain cooperative runtime waits",
+  "original_instructions": 79,
+  "live_continuation_cases": 16384,
+  "observed_source_boundaries": 79,
+  "component_and_continuation_result": "all registers, PC, SR and Chip/Slow RAM match source with held events",
+  "source_parity_accepted": false,
+  "rendering_regression": "crash differs from preceding build by 185 non-fade pixels total, starting frame 556 (14 pixels there); aggregate RAM and CPU counts unchanged",
+  "direct_c_entries": 25,
+  "readable_cpu_registry_rows": 590,
+  "deferred_entries": 84,
+  "direct_opcode_bindings": 691,
+  "bounded_cpu_delta_pp": 0,
+  "cached_full_raw_cpu_removed_percent": 38.40106459907289,
+  "bounded_demo_raw_cpu_removed_percent": 69.87786741247089,
+  "accepted_cpu_removed_percent": null,
+  "memory_chipset_boot_cutover_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": "0/4",
+  "full_replay_repeated": false,
+  "checks": {
+    "GNU_MSVC_both_runners": "built",
+    "CTest": "12/12",
+    "GNU_profiling": "OFF/ON/interpreter state and output unchanged; C28E28 native edge positive and CPU entries zero",
+    "MSVC_GNU_demo": "800 RGB/index frames and final RAM identical",
+    "source_audit": "79 original boundaries unchanged"
+  },
+  "recordings": [
+    {
+      "recording": "demo01",
+      "frames": 800,
+      "native_calls": 2,
+      "cpu_entry_calls": 0,
+      "before_instructions": 1573332,
+      "after_instructions": 1573332,
+      "identical_before": {
+        "rgb": true,
+        "idx": true,
+        "ram": true
+      },
+      "hashes": {
+        "rgb": "7d186abcbe2dd31beb296f85808360f5c360f719216ca7c31fd1b6fc78bc29aa",
+        "idx": "21b209143efb6fd056953f5d7a5e92cb87e3458de29997d6356a1cf518d39297",
+        "ram": "32888b7491163665f6dcc6d0a2bdccc8addcd4eed9ee9cca43ad592910db63d7"
+      },
+      "source_frames": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 619,
+        "first_index_difference": 619,
+        "first_nonfade_difference": {
+          "frame": 619,
+          "pixels": 32
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 86874,
+        "index_difference_pixels": 86874,
+        "passed": false
+      },
+      "before_after_frames": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      }
+    },
+    {
+      "recording": "qual_carrier_success",
+      "frames": 800,
+      "native_calls": 0,
+      "cpu_entry_calls": 0,
+      "before_instructions": 1988699,
+      "after_instructions": 1988699,
+      "identical_before": {
+        "rgb": true,
+        "idx": true,
+        "ram": true
+      },
+      "hashes": {
+        "rgb": "b4003bf28eddf77bae0ee8358004f70d022d995eb344fbd64fa259c87c4adb73",
+        "idx": "37774b57a2d87cc7aacb70bf246fda4e749d73038935d172e04971bdd394e8f8",
+        "ram": "c96387e9cf5f91b4832d6c5fe47850ca3c136c43ee82f210345a4d2718b9c28b"
+      },
+      "source_frames": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 446,
+        "first_index_difference": 446,
+        "first_nonfade_difference": {
+          "frame": 446,
+          "pixels": 3
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 1212,
+        "index_difference_pixels": 1212,
+        "passed": false
+      },
+      "before_after_frames": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      }
+    },
+    {
+      "recording": "qual_fail_crashes",
+      "frames": 800,
+      "native_calls": 2,
+      "cpu_entry_calls": 0,
+      "before_instructions": 1699411,
+      "after_instructions": 1699411,
+      "identical_before": {
+        "rgb": false,
+        "idx": false,
+        "ram": true
+      },
+      "hashes": {
+        "rgb": "6c8487fd6b2312cdc225b7c2cecb817368cebede5ab8a65ade5a35d8643113e7",
+        "idx": "31c9449c5cd68395237b9fbd651ee75769ef4967c2778358adb79494f5228be0",
+        "ram": "0806360989603162dfc27d0ab0b12d2689deaf4247e5f8fc0cac2dea1357a222"
+      },
+      "source_frames": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 263,
+        "first_index_difference": 263,
+        "first_nonfade_difference": {
+          "frame": 263,
+          "pixels": 4
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 175855,
+        "index_difference_pixels": 175855,
+        "passed": false
+      },
+      "before_after_frames": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 556,
+        "first_index_difference": 556,
+        "first_nonfade_difference": {
+          "frame": 556,
+          "pixels": 14
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 185,
+        "index_difference_pixels": 185,
+        "passed": false
+      }
+    }
+  ],
+  "remaining_dependencies": [
+    "parent instruction/event timing unmodeled; crash rendering acceptance open",
+    "shared guest scene and record data",
+    "original fault and placement children",
+    "outer CPU/event flight parent"
+  ]
+}

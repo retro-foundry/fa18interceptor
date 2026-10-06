@@ -34,6 +34,9 @@ typedef struct {
 } GeometryHooks;
 void record_position_history_complete(GeometryState w,const GeometryHooks *h);
 void check_record_zone_exit_complete(GeometryState w,const GeometryHooks *h);
+enum ZoneExitPhase { ZONE_BEGIN, ZONE_AFTER_FAULT, ZONE_AFTER_PLACE, ZONE_COMPLETE };
+typedef struct { GeometryState work; enum ZoneExitPhase phase; } ZoneExitFrame;
+int advance_record_zone_exit(ZoneExitFrame *frame,const GeometryHooks *hooks);
 void update_candidate_record_complete(GeometryState w,const GeometryHooks *h);
 void test_candidate_faces_complete(GeometryState w,gaddr frame,const GeometryHooks *h);
 #endif

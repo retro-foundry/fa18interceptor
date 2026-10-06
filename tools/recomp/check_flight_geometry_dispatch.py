@@ -1,4 +1,7 @@
-"""Exercise actual ON/shadow/sandbox dispatch and guards for four geometry owners."""
+"""Exercise ON/shadow/sandbox dispatch for the three remaining CPU geometry owners.
+
+C28E28 is a native flight child; flight_geometry_oracle --live checks that path.
+"""
 import argparse,subprocess
 from audit_flight_geometry_source import ROOT,ENTRIES
 def main():
@@ -10,6 +13,7 @@ def main():
         '--replace-source','port/recomp/recomp_ports.c=tools/recomp/structural_write_log.c',
         '--replace-source','port/machine/bus.c=tools/recomp/flight_geometry_bus_budget.c'],cwd=ROOT,check=True)
     for e in ENTRIES:
+        if e == "C28E28": continue # Native flight child; checked by the continuation oracle.
         for mode,name in ((1,'on'),(2,'shadow'),(3,'sandbox')):
             r=subprocess.run([str(exe),str(a.cases),e,str(mode)],cwd=ROOT,capture_output=True,text=True,timeout=600)
             (ROOT/'build/recomp'/f'flight_geometry_dispatch_{e}_{name}.log').write_text(r.stdout+r.stderr)
