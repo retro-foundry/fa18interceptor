@@ -2,6 +2,7 @@
  * The original instructions and children, not a physics model, are authority. */
 #include "flight_dynamics.h"
 #include "flight_recorder.h"
+#include "record_steering.h"
 #include <stdlib.h>
 void update_dynamics_record_matrix(const RecordMatrixInput *input, RecordMatrixResult *result,
                                    RecordMatrixSideHook side_hook, void *context) {
@@ -1061,8 +1062,53 @@ finished:
     observe(h,DY_END_FRAME,DY_PRIMARY,0,0); f->work=w; f->phase=AP_COMPLETE; return 1;
 #undef AP_WAIT
 }
+static void steering_outputs(void *context,enum SteeringPhase phase,enum SteeringField field,
+                             uint32_t value,uint32_t operand) {
+    const DynamicsHooks *hooks=(const DynamicsHooks *)context;
+    static const enum DynamicsPhase phases[]={DY_BYTE,DY_WORD,DY_LONG,DY_AND_BYTE,DY_OR_BYTE,
+        DY_TEST_WORD,DY_COMPARE_BYTE,DY_COMPARE_WORD,DY_BIT_TEST,DY_STORE_BYTE};
+    static const enum DynamicsValue fields[]={DY_PRIMARY,DY_DETAIL,DY_X,DY_Y};
+    observe(hooks,phases[phase],fields[field],value,operand);
+}
+/* The maneuver phase selects a game function. Results return as C values;
+ * the optional observer only publishes temporary caller compatibility state. */
+static int update_autopilot_steering(AutopilotFrame *frame,const DynamicsHooks *hooks) {
+    RecordSteeringState state={frame->work.detail,frame->work.x,frame->work.y,frame->work.record};
+    RecordSteeringHooks output={steering_outputs,(void *)hooks};
+    switch(frame->phase) {
+    case AP_AFTER_FAULT: case AP_AFTER_NORMALIZE: case AP_ORIGINAL_TRANSFER:
+        return 0;
+    case AP_AFTER_TURN:
+        observe(hooks,DY_STEERING_ENTER,DY_PRIMARY,frame->phase,0);
+        state=select_record_turn(state,&output); break;
+    case AP_AFTER_PITCH: case AP_AFTER_WAIT_PITCH:
+        observe(hooks,DY_STEERING_ENTER,DY_PRIMARY,frame->phase,0);
+        state=select_record_pitch(state,&output); break;
+    case AP_AFTER_SIMPLE_ROLL: case AP_AFTER_RATE_ROLL: case AP_AFTER_BANK_ROLL:
+    case AP_AFTER_LEVEL_ROLL: case AP_AFTER_COMBINED_ROLL: case AP_AFTER_REVERSE_ROLL:
+        observe(hooks,DY_STEERING_ENTER,DY_PRIMARY,frame->phase,0);
+        state=select_record_roll(state,&output); break;
+    case AP_AFTER_RATE_NEUTRAL:
+        observe(hooks,DY_STEERING_ENTER,DY_PRIMARY,frame->phase,0);
+        state=select_record_neutral(state,&output); break;
+    case AP_AFTER_COMBINED_PITCH:
+        observe(hooks,DY_STEERING_ENTER,DY_PRIMARY,frame->phase,0);
+        state=select_record_pitch_preserving_controls(state,&output); break;
+    case AP_AFTER_LOOP_PITCH: case AP_AFTER_LOOP_LEVEL: case AP_AFTER_PITCH_ARC:
+    case AP_AFTER_REVERSE_PITCH: case AP_AFTER_DIVE_PITCH: case AP_AFTER_DIVE_LEVEL:
+    case AP_AFTER_CLIMB_PITCH: case AP_AFTER_CLIMB_LEVEL:
+        observe(hooks,DY_STEERING_ENTER,DY_PRIMARY,frame->phase,0);
+        state=select_record_pitch_branch(state,&output); break;
+    default: abort();
+    }
+    observe(hooks,DY_STEERING_LEAVE,DY_PRIMARY,frame->phase,0);
+    frame->work.detail=state.controls; frame->work.x=state.selection; frame->work.y=state.turn;
+    return 1;
+}
 int update_dynamics_record_action(AutopilotFrame *frame,const DynamicsHooks *hooks) {
-    return advance_record_autopilot(frame,hooks);
+    while(!advance_record_autopilot(frame,hooks))
+        if(!update_autopilot_steering(frame,hooks)) return 0;
+    return 1;
 }
 int update_dynamics_record_zone_exit(ZoneExitFrame *frame,const GeometryHooks *hooks) {
     return advance_record_zone_exit(frame,hooks);

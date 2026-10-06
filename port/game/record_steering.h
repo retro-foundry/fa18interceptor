@@ -12,10 +12,10 @@ typedef struct {
  void (*observe)(void *,enum SteeringPhase,enum SteeringField,uint32_t,uint32_t);
  void *context;
 } RecordSteeringHooks;
-void select_record_turn(RecordSteeringState,const RecordSteeringHooks *);
-void select_record_roll(RecordSteeringState,const RecordSteeringHooks *);
-void select_record_neutral(RecordSteeringState,const RecordSteeringHooks *);
-void select_record_pitch(RecordSteeringState,const RecordSteeringHooks *);
-void select_record_pitch_preserving_controls(RecordSteeringState,const RecordSteeringHooks *);
-void select_record_pitch_branch(RecordSteeringState,const RecordSteeringHooks *);
+RecordSteeringState select_record_turn(RecordSteeringState,const RecordSteeringHooks *);
+RecordSteeringState select_record_roll(RecordSteeringState,const RecordSteeringHooks *);
+RecordSteeringState select_record_neutral(RecordSteeringState,const RecordSteeringHooks *);
+RecordSteeringState select_record_pitch(RecordSteeringState,const RecordSteeringHooks *);
+RecordSteeringState select_record_pitch_preserving_controls(RecordSteeringState,const RecordSteeringHooks *);
+RecordSteeringState select_record_pitch_branch(RecordSteeringState,const RecordSteeringHooks *);
 #endif

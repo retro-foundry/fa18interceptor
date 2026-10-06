@@ -11,7 +11,24 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
-Latest connected batch: C25B66's C25BA6 zone-exit call now selects native
+Latest connected batch: native C2C392 now calls six game steering functions
+directly with C values/results, removing their CPU dispatch from this owner.
+49,600 production continuation cases match all registers/PC/SR/RAM with held
+events; 17,118 direct calls cover all six children. Six source-constructed
+real-runner frame pairs start at original C22D88 -> C25B66, stop at the original
+autopilot return and match RAM/RGB/indices. IRQs are masked in those frame
+fixtures; sealed gameplay and parent event timing are separate open gates.
+Three 800-frame recording RGB/index/RAM and full profiles are unchanged; an
+MSVC/GNU demo matches. Both runners/compilers build, twelve CTests and profiling
+checks pass. Steering CPU adapters remain for other original/unknown callers;
+counts stay 25 C-owned / 590 CPU rows / 84 deferred. Bounded demo **69.8779%**,
+batch delta **0.0000 pp**, cached full raw minimum **38.4011%**, accepted share
+unavailable. Other cutover axes **0%**, deletion **0/4**. No full suite repeated.
+Evidence: `analysis/emulation_removal_steering_calls_batch.json/.md`. Continue
+native normalization and flight parent ownership; retain the zone-exit timing
+regression below as unresolved acceptance debt.
+
+Previous connected batch: C25B66's C25BA6 zone-exit call now selects native
 `update_dynamics_record_zone_exit` -> `advance_record_zone_exit`. Its C frame
 retains fault/placement phases across original runtime children. C28E28's CPU
 entry/registry/guard and sole wrapper file are retired. **16,384 production

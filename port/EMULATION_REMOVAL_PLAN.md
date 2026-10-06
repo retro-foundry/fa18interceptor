@@ -270,6 +270,19 @@ C, its glue is deleted.
 Exit: the frame body is native, and the only emulated instructions left are the
 deferred entries and undiscovered code (Phase 5).
 
+Native C2C392 now calls six steering game functions directly, returning C
+state instead of dispatching their CPU entries. The production continuation
+matches 49,600 source cases; six constructed real-runner frame pairs exercise
+every child and match source RAM/RGB/indices at the original return boundary.
+The probes mask IRQs; parent timing and sealed source parity remain open.
+All three bounded 800-frame recording outputs/profiles are unchanged. Both
+builds, twelve CTests, profiling and MSVC/GNU demo comparisons pass. Remaining
+original callers require the steering CPU adapters; inventory stays 25 C-owned,
+590 CPU rows, 84 deferred. Batch delta **0.0000 pp**, bounded demo **69.8779%**,
+cached full raw minimum **38.4011%**; accepted share unavailable, other cutover
+axes **0%**, deletion **0/4**. No full suite repeated. Evidence:
+`../analysis/emulation_removal_steering_calls_batch.json/.md`.
+
 ### Phase 2 — Memory cutover (axis B, PORT.md stage F)
 
 Replace `gaddr` plus `rd_*`/`wr_*` with real C structs and pointers, as

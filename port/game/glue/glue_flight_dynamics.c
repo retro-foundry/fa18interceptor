@@ -5,6 +5,7 @@
 #include "glue_flight_record_calls.h"
 #include "recomp_ports.h"
 #include <stdlib.h>
+static void steering_enter(enum AutopilotPhase phase);
 static DynamicsState working(void) {
     DynamicsState w={D(0),D(1),D(2),D(3),D(4),D(5),D(6),D(7),A(0),A(1),A(2),A(3),A(4),A(5),COND_EQ()}; return w;
 }
@@ -58,6 +59,8 @@ static void outputs(void *context,enum DynamicsPhase phase,enum DynamicsValue fi
     case DY_END_FRAME: A(7)=A(6); A(6)=m68ki_pull_32(); break;
     case DY_AUTOPILOT_LIMIT: wr_u32(A(6)+(uint32_t)(int32_t)v,other); flags_logic_l(other); break;
     case DY_AUTOPILOT_TOGGLE: FLAG_Z=v&1u; break;
+    case DY_STEERING_ENTER: steering_enter((enum AutopilotPhase)v); break;
+    case DY_STEERING_LEAVE: (void)m68ki_pull_32(); break;
     }
 }
 static gaddr frame(void *context) { (void)context; return A(6); }
@@ -103,6 +106,12 @@ typedef struct {
     int started,original_transfer;
 } AutopilotCall;
 
+static void steering_enter(enum AutopilotPhase phase) {
+    AutopilotChild child=autopilot_child(phase);
+    m68ki_push_32(child.ret);
+    fa18_ports_note_native_edge(0xc2c392u,child.entry);
+}
+
 static int call_record_action(const void *arguments) {
     AutopilotCall *call=(AutopilotCall *)arguments;
     if(call->original_transfer) return FA18_RET;
@@ -116,6 +125,7 @@ static int call_record_action(const void *arguments) {
         REG_PC=call->frame.unresolved_target;
         fa18_ports_native_child_wait(call->return_pc,call->return_sp);
     } else {
+        if(call->frame.phase!=AP_AFTER_FAULT && call->frame.phase!=AP_AFTER_NORMALIZE) abort();
         AutopilotChild child=autopilot_child(call->frame.phase);
         uint32_t sp=A(7);
         m68ki_push_32(child.ret); REG_PC=child.entry;
@@ -135,7 +145,7 @@ int glue_record_action_reference(void) {
     AutopilotFrame frame={0};
     uint32_t return_pc=rd_u32(A(7))&0xffffffu,return_sp=A(7)+4;
     frame.work=working(); frame.phase=AP_BEGIN;
-    while(!advance_record_autopilot(&frame,&hooks)) {
+    while(!update_dynamics_record_action(&frame,&hooks)) {
         if(frame.phase==AP_ORIGINAL_TRANSFER) {
             REG_PC=frame.unresolved_target;
             return fa18_recomp_resume(return_pc,return_sp);

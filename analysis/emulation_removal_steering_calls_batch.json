@@ -1,0 +1,192 @@
+{
+  "before_commit": "4f136fa8",
+  "scope": "C25B66 -> native C2C392 -> six direct game steering functions; CPU children remain for normalization, faults and unresolved original targets",
+  "direct_c_entries": 25,
+  "readable_cpu_registry_rows": 590,
+  "deferred_entries": 84,
+  "direct_opcode_bindings": 691,
+  "live_continuation_cases": 49600,
+  "observed_parent_boundaries": 864,
+  "original_parent_boundaries": 987,
+  "cold_parent_boundaries_covered": 361,
+  "steering_calls": {
+    "C2CA26": 38,
+    "C2CA92": 8200,
+    "C2CAA0": 220,
+    "C2CB86": 1231,
+    "C2CB82": 1144,
+    "C2CBBC": 6285
+  },
+  "continuation_state_result": "all registers, PC, SR, Chip/Slow RAM match source with held events",
+  "frame_probe": [
+    {
+      "case": 1,
+      "entry": "C2CA92",
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2C392",
+          "calls": 1
+        },
+        {
+          "caller": "C2C392",
+          "callee": "C2CA92",
+          "calls": 1
+        }
+      ],
+      "ram_rgb_indices_identical": true,
+      "source_return": "C25C70"
+    },
+    {
+      "case": 14,
+      "entry": "C2CBBC",
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2C392",
+          "calls": 1
+        },
+        {
+          "caller": "C2C392",
+          "callee": "C2CBBC",
+          "calls": 1
+        }
+      ],
+      "ram_rgb_indices_identical": true,
+      "source_return": "C25C70"
+    },
+    {
+      "case": 23,
+      "entry": "C2CB82",
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2C392",
+          "calls": 1
+        },
+        {
+          "caller": "C2C392",
+          "callee": "C2CA92",
+          "calls": 1
+        },
+        {
+          "caller": "C2C392",
+          "callee": "C2CB82",
+          "calls": 1
+        }
+      ],
+      "ram_rgb_indices_identical": true,
+      "source_return": "C25C70"
+    },
+    {
+      "case": 46,
+      "entry": "C2CB86",
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2C392",
+          "calls": 1
+        },
+        {
+          "caller": "C2C392",
+          "callee": "C2CB86",
+          "calls": 1
+        }
+      ],
+      "ram_rgb_indices_identical": true,
+      "source_return": "C25C70"
+    },
+    {
+      "case": 648,
+      "entry": "C2CAA0",
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2C392",
+          "calls": 1
+        },
+        {
+          "caller": "C2C392",
+          "callee": "C2CAA0",
+          "calls": 1
+        }
+      ],
+      "ram_rgb_indices_identical": true,
+      "source_return": "C25C70"
+    },
+    {
+      "case": 1125,
+      "entry": "C2CA26",
+      "native_edges": [
+        {
+          "caller": "C25B66",
+          "callee": "C2C392",
+          "calls": 1
+        },
+        {
+          "caller": "C2C392",
+          "callee": "C2CA26",
+          "calls": 1
+        }
+      ],
+      "ram_rgb_indices_identical": true,
+      "source_return": "C25C70"
+    }
+  ],
+  "frame_probe_limits": "source-constructed inputs; real runner starts original C22D88 JSR, stops at C25C70; IRQs masked, ordinary chipset frame events enabled; not sealed gameplay or event timing proof",
+  "recordings": [
+    {
+      "recording": "demo01",
+      "frames": 800,
+      "identical_before": {
+        "rgb": true,
+        "idx": true,
+        "ram": true,
+        "json": true
+      }
+    },
+    {
+      "recording": "qual_carrier_success",
+      "frames": 800,
+      "identical_before": {
+        "rgb": true,
+        "idx": true,
+        "ram": true,
+        "json": true
+      }
+    },
+    {
+      "recording": "qual_fail_crashes",
+      "frames": 800,
+      "identical_before": {
+        "rgb": true,
+        "idx": true,
+        "ram": true,
+        "json": true
+      }
+    }
+  ],
+  "extended_probes": {
+    "demo_3000": "six steering arms unexercised",
+    "GNU_ADF_2600": "six steering arms unexercised"
+  },
+  "checks": {
+    "GNU_MSVC_runners": "both built",
+    "CTest": "12/12",
+    "GNU_profile_invisibility": "passed",
+    "GNU_MSVC_demo": "800 RGB/index frames and final RAM identical"
+  },
+  "source_parity_accepted": false,
+  "timing_debt": "parent instruction/event timing and prior zone-exit crash 185 non-fade pixel regression remain open",
+  "bounded_cpu_delta_pp": 0,
+  "cached_full_raw_cpu_removed_percent": 38.40106459907289,
+  "bounded_demo_raw_cpu_removed_percent": 69.87786741247089,
+  "accepted_cpu_removed_percent": null,
+  "memory_chipset_boot_cutover_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": "0/4",
+  "full_replay_repeated": false
+}

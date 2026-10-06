@@ -33,6 +33,20 @@ size_t fa18_structural_native_pending(void) {
     return count;
 }
 
+uint64_t fa18_structural_native_edge_calls(uint32_t caller,uint32_t callee) {
+    size_t i;
+    for(i=0;i<native_edge_count;++i)
+        if(native_edges[i].caller==caller && native_edges[i].callee==callee) return native_edges[i].calls;
+    return 0;
+}
+
+uint64_t fa18_structural_cpu_entry_calls(uint32_t entry) {
+    int i;
+    for(i=0;i<fa18_recomp_function_count;++i)
+        if(fa18_recomp_functions[i].entry==entry) return profile[i];
+    return 0;
+}
+
 /* A hardware-bearing original child is retained by the reference dispatcher.
  * This assertion distinguishes its explicit hardware classification from a
  * completed C comparison, rather than treating it as a matched call. */

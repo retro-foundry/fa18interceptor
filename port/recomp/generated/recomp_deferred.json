@@ -440,10 +440,54 @@
       "source_call": "analysis/data/record_autopilot_source_scope.json",
       "remaining_dependencies": [
         "shared guest records and caller compatibility",
-        "source-timed normalization/steering child boundaries",
+        "original normalization and fault child boundaries",
         "outer flight CPU/event boundary",
         "parent instruction/event timing not yet modeled",
-        "unknown or modified action-table targets retain original transfer"
+        "unknown or modified action-table targets retain original transfer, including CPU steering entries"
+      ],
+      "direct_game_calls": [
+        {
+          "entry": "C2CA26",
+          "function": "select_record_turn",
+          "source": "port/game/record_steering.c",
+          "caller_function": "update_autopilot_steering",
+          "caller_source": "port/game/flight_dynamics.c"
+        },
+        {
+          "entry": "C2CA92",
+          "function": "select_record_roll",
+          "source": "port/game/record_steering.c",
+          "caller_function": "update_autopilot_steering",
+          "caller_source": "port/game/flight_dynamics.c"
+        },
+        {
+          "entry": "C2CAA0",
+          "function": "select_record_neutral",
+          "source": "port/game/record_steering.c",
+          "caller_function": "update_autopilot_steering",
+          "caller_source": "port/game/flight_dynamics.c"
+        },
+        {
+          "entry": "C2CB86",
+          "function": "select_record_pitch",
+          "source": "port/game/record_steering.c",
+          "caller_function": "update_autopilot_steering",
+          "caller_source": "port/game/flight_dynamics.c"
+        },
+        {
+          "entry": "C2CB82",
+          "function": "select_record_pitch_preserving_controls",
+          "source": "port/game/record_steering.c",
+          "caller_function": "update_autopilot_steering",
+          "caller_source": "port/game/flight_dynamics.c"
+        },
+        {
+          "entry": "C2CBBC",
+          "function": "select_record_pitch_branch",
+          "source": "port/game/record_steering.c",
+          "caller_function": "update_autopilot_steering",
+          "caller_source": "port/game/flight_dynamics.c"
+        }
       ]
     },
     {

@@ -55,4 +55,22 @@ def native_entries(graph: list[dict], registered: set[str]) -> dict[str, dict]:
                 raise ValueError(f'native body still uses CPU/dispatcher state: {owner["function"]}')
         if not (ROOT / row['source_call']).is_file():
             raise ValueError(f'original call evidence is missing: {entry}')
+        if row.get('direct_game_calls'):
+            evidence = json.loads((ROOT / row['source_call']).read_text())
+            original_children = {site['target'] for site in evidence['owners'][entry]['child_call_sites']}
+            for child in row['direct_game_calls']:
+                if child['entry'] not in original_children or child['entry'] not in owners:
+                    raise ValueError(f'native child has no original owned call: {entry} -> {child["entry"]}')
+                bodies = []
+                for path, function in ((child['source'], child['function']),
+                                       (child['caller_source'], child['caller_function'])):
+                    source = (ROOT / path).resolve()
+                    if not source.is_relative_to((ROOT / 'port/game').resolve()) or 'glue' in source.parts:
+                        raise ValueError(f'native child behavior belongs in game/: {source}')
+                    body = function_body(source.read_text(), function)
+                    if re.search(r'\b(?:m68k\w*|REG_\w+|fa18_recomp_\w+)\b', body):
+                        raise ValueError(f'native child still uses CPU state: {function}')
+                    bodies.append(body)
+                if not re.search(r'\b' + re.escape(child['function']) + r'\s*\(', bodies[1]):
+                    raise ValueError(f'native caller does not call its child: {child["caller_function"]}')
     return entries
