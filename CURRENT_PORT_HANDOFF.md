@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Latest timing clarification: exact Amiga frame timing is not a completion gate
+for the native port. Preserve gameplay physics/rules and source-defined timers;
+allow native rendering/presentation cadence. Compare equivalent gameplay states
+and events, and keep strict recorded-frame results as diagnostics. The historical
+0/3 strict sequence result below is not a whole-game completion measure. Do not
+reproduce original rendering delays solely to align the timed HUD page at an
+equal update count. Copper fade remains excluded. See `NEW_PORT_HANDOFF.md`.
+
 Latest direction, 2026-10-06: build a native runner from `port/game/`, starting
 with intro -> credits -> pilot entry -> menu. This supersedes the incremental
 emulation-removal work below and the former restriction against a new runner.

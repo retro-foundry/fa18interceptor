@@ -6,8 +6,12 @@ The active goal is **get gameplay going and matching the recorded runs**.
 It is still active and unfulfilled. The user requested this file to transfer
 context; this is not a request to cancel or mark the gameplay goal complete.
 
-- Gameplay frames are the acceptance scope. Intro, loading and preflight may
-  run faster. A startup frame/update offset alone is not a blocker.
+- Latest user clarification: exact Amiga frame timing is not a completion
+  requirement; this is a native port. Preserve gameplay physics, rules, input
+  behavior and source-defined timers, while allowing different rendering and
+  presentation cadence. Compare equivalent gameplay states/events rather than
+  requiring identical wall-clock timestamps or frame numbers. Intro, loading
+  and preflight may also run faster.
 - Ignore **Copper fade** when comparing frames. Do not silently mask HUD pixels,
   loosen physics/input comparisons or invent another exclusion.
 - Commit completed, validated batches as work progresses. Give progress estimates
@@ -77,9 +81,11 @@ and drawn. The earlier missing-cockpit issue was real and has been fixed.
 SDL stereo output and `--wav PATH` use native PCM; bit-exact original audio
 fetch/filter/interrupt timing has not been established.
 
-The three recordings have functional outcomes: **3/3**. Complete independently
-recorded gameplay-frame sequence acceptance remains **0/3**. Do not confuse
-these two measures or report a branch's 100% completion as whole-game parity.
+The three recordings have functional outcomes: **3/3**. The historical strict
+recorded-frame sequence acceptance remains **0/3**, but exact Amiga frame timing
+is no longer a completion gate. No revised complete sequence assessment has
+been performed yet. Do not relabel old failures as new passes or report a
+branch's 100% completion as whole-game parity.
 
 Current independent comparison evidence:
 
@@ -117,18 +123,24 @@ arithmetic. No wrong index or arithmetic bug has been found. Native approaches
 that rate limit; original rendering takes longer. `native/clock.c` samples
 whole 20 ms PAL ticks; `native/display.c` currently yields WaitBOVP until the
 next whole host PAL boundary. Original viewport/task/sub-PAL pacing remains
-to understand. Do not add a guessed multiplier, fitted delay or captured clock.
+unverified, but reproducing that pacing is not required. A seconds-driven HUD
+can show a different page at the same update count when elapsed time differs;
+verify its timer and page transitions at equivalent elapsed game time before
+calling this a gameplay defect. Do not add a guessed multiplier, fitted delay
+or captured clock to reproduce the original machine's rendering cost.
 
 C16D04 also publishes fractional time at C45AF6. C28782/C28CAE can use its low
 word/byte to derive geometry offsets at C45B18/C45B1A. This is a possible later
 clock dependency, but it does not cause this retained window's HUD mismatch.
 
-**Next priority:** resolve gameplay cadence from source, and extend independent
-comparisons into later gameplay and the other recordings using retained evidence
-first. The two latest commits fixed genuine aborts but did not improve the
-53/128 independent drawing result. Focus subsequent work on that acceptance gap
-rather than accumulating small component proofs or optimizing historical
-instruction-coverage percentages.
+**Next priority:** finish unsupported gameplay commands/modes and assess later
+gameplay against equivalent source states/events using retained evidence first.
+Check physics, collisions, AI, mission outcomes and source-defined timer behavior;
+do not spend implementation effort reproducing Amiga rendering delays. Keep
+strict frame comparisons as diagnostics, and separately classify differences
+caused only by elapsed-time/presentation alignment. Do not blanket-mask HUD
+differences. The two latest commits fixed genuine aborts; the unchanged 53/128
+strict drawing result is diagnostic evidence, not a completion percentage.
 
 ## Latest completed commits
 
@@ -276,8 +288,9 @@ Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
 1, 9, 127 and demonstration mode 3 with recorder mode 3.
 
-Whole recorded sequences, complete record/flag/counter state, post-result
-cadence and exact audio fidelity are not accepted. The native link's omission
+Whole gameplay sequences under the revised timing scope, complete
+record/flag/counter state and post-result behavior remain unverified. Exact
+audio fidelity is also unverified. The native link's omission
 of emulation objects is real evidence for this runner's current connected scope,
 not proof that every original game path has been ported. The gameplay goal must
 remain active until its full requested end state is implemented and verified.

@@ -9,8 +9,11 @@ python scripts/build_native.py
 build/native/fa18_native.exe --adf local/media/fa18.adf
 ```
 
-Gameplay frames are the acceptance scope; intro/loading duration may differ.
-Copper fade is ignored. See
+Gameplay behavior and visuals at equivalent states/events are the acceptance
+scope; exact Amiga frame timing is not required. Preserve physics, rules and
+source-defined timers while allowing native rendering/presentation cadence.
+Intro/loading duration may differ. Copper fade is ignored. Strict frame checks
+below remain diagnostics, not a requirement to reproduce rendering delays. See
 [`../../analysis/native_gameplay_acceptance.md`](../../analysis/native_gameplay_acceptance.md).
 Five selected independent demo/carrier checkpoints match both 320x200 gameplay
 pages, phase/controls and named player motion/pose/matrices byte for byte;
@@ -26,8 +29,11 @@ python tools/native/check_gameplay_checkpoint.py --source build/native-flight/re
 The first independent consecutive gameplay window checks 128 updates: all
 128 player-motion/control/phase comparisons match, while 53 complete two-page
 drawing comparisons match. Remaining differences are the seconds-driven target
-information line (ALT/HDG/SPD cycling), first at tick 273. Gameplay timer/display
-cadence remains open. Reuse the retained original prefix:
+information line (ALT/HDG/SPD cycling), first at tick 273. This window has
+different elapsed times, so the HUD page difference at an equal update count
+does not by itself establish a timer defect. Verify equivalent elapsed game
+time and source transitions; exact original display cadence is not required.
+Reuse the retained original prefix:
 
 ```powershell
 python tools/native/check_gameplay_window.py --source-prefix build/native-flight/gameplay-window-source --source-first 2401 --native-first 2364 --count 128 --out build/native-flight/gameplay-window-comparison
