@@ -12,6 +12,10 @@ context; this is not a request to cancel or mark the gameplay goal complete.
   presentation cadence. Compare equivalent gameplay states/events rather than
   requiring identical wall-clock timestamps or frame numbers. Intro, loading
   and preflight may also run faster.
+- Accepted target: modern hardware completes each rendered frame within a
+  20 ms budget and presents every frame without skipping. Do not reproduce
+  Amiga missed frames or rendering delays. This is the intended pacing policy,
+  not a measured performance guarantee or permission to change physics/timers.
 - Ignore **Copper fade** when comparing frames. Do not silently mask HUD pixels,
   loosen physics/input comparisons or invent another exclusion.
 - Commit completed, validated batches as work progresses. Give progress estimates

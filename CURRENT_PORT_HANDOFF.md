@@ -7,6 +7,9 @@ and events, and keep strict recorded-frame results as diagnostics. The historica
 0/3 strict sequence result below is not a whole-game completion measure. Do not
 reproduce original rendering delays solely to align the timed HUD page at an
 equal update count. Copper fade remains excluded. See `NEW_PORT_HANDOFF.md`.
+The accepted native target is a 20 ms frame budget with every frame presented;
+Amiga missed frames need not be reproduced. Performance has not been measured
+as part of this clarification, and gameplay physics/timers remain authoritative.
 
 Latest direction, 2026-10-06: build a native runner from `port/game/`, starting
 with intro -> credits -> pilot entry -> menu. This supersedes the incremental

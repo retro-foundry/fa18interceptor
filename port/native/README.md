@@ -12,6 +12,9 @@ build/native/fa18_native.exe --adf local/media/fa18.adf
 Gameplay behavior and visuals at equivalent states/events are the acceptance
 scope; exact Amiga frame timing is not required. Preserve physics, rules and
 source-defined timers while allowing native rendering/presentation cadence.
+The accepted native target is a 20 ms frame budget with every frame presented,
+without recreating Amiga missed frames. This target is not a measured guarantee
+or a change to gameplay physics/timers.
 Intro/loading duration may differ. Copper fade is ignored. Strict frame checks
 below remain diagnostics, not a requirement to reproduce rendering delays. See
 [`../../analysis/native_gameplay_acceptance.md`](../../analysis/native_gameplay_acceptance.md).
