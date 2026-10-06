@@ -11,7 +11,28 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
-Latest connected batch: C25B66 now schedules retained game C dynamics and
+Latest connected batch: C22C80 now runs a retained game `ControlRecordsFrame`
+and calls the retained record-dynamics C owner directly. All 226 outer CPU
+instruction cases are deleted; the sibling C1C63E's 112 cases are unchanged.
+Together with the previous batch, **780/780 cases of these two targeted CPU
+bodies (100%) are removed**. Thin entry adapters, guest memory and other
+children's runtime boundaries remain, so this is not whole-plan completion.
+4,096 original-child core cases match all state. 4,096 production continuation
+cases match registers/PC/SR and RAM outside old CPU stack scratch C7FD00..C7FEFF;
+strict all-RAM fails case 0 at C7FED5. IRQ/event timing is held in those proofs.
+GNU/MSVC both runners, twelve CTests, profiling and the MSVC/GNU demo pass.
+Three 800-frame recording probes reach 129/30/150 direct C22C80 -> C25B66 calls
+and zero C25B66 CPU-entry dispatch. Non-fade comparisons versus the previous
+batch fail at 346/446/263; final RAM differs. Timing/parity remain open. No full
+replay repeated. Bounded demo raw **69.8515%**, delta **-0.0191 pp**;
+full **38.4011%** cached, accepted share unavailable, axes **0%**, gate **0/4**.
+Raw counters exclude CPU-style port steps and cannot represent whole-plan
+completion. Counts remain 25/590/84/691. Evidence:
+`analysis/emulation_removal_record_loop_batch.json/.md`.
+Next: C1C63E parent ownership and native root/control/render children; preserve
+explicit timing, non-fade, stack and matrix acceptance debt.
+
+Previous connected batch: C25B66 now schedules retained game C dynamics and
 composes its five native child owners directly. Its 554 CPU instruction cases
 are deleted (42.3547% of the shared family); 754 other cases are unchanged.
 A frame-end return fix prevents the interpreter consuming a pending C return.

@@ -308,8 +308,14 @@ static int entered_from_stepped_call(void) {
     if (!stepped_count) return 0;
     ret = fa18_bus_read32(REG_A[7]) & 0xFFFFFFu;
     for (i = stepped_count; i > 0; --i) {
-        const FA18Port *parent = &fa18_ports[stepped_calls[i - 1].port];
-        if (!stepped_owns(parent,ret)) continue;
+        const SteppedCall *call = &stepped_calls[i - 1];
+        const FA18Port *parent = &fa18_ports[call->port];
+        /* A composed C child can yield beyond the outer owner's old source
+         * range. Its exact saved return and SP identify that call boundary;
+         * the original JSR/BSR bytes still authenticate the call below. */
+        int native_return = call->native_child && call->native_pc == ret &&
+                            call->native_sp == REG_A[7] + 4;
+        if (!native_return && !stepped_owns(parent,ret)) continue;
         op = fa18_bus_read16(ret - 2);
         if ((op & 0xFF00u) == 0x6100u && (op & 0xFFu)) return 1;
         op = fa18_bus_read16(ret - 4);

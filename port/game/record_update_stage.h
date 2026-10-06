@@ -28,6 +28,27 @@ typedef struct {
     void (*observe)(void *context, const RecordUpdateEvent *event);
     void *context;
 } RecordUpdateHooks;
+enum ControlRecordsPhase {
+    CONTROL_RECORDS_BEGIN, CONTROL_RECORDS_AFTER_PERIODIC,
+    CONTROL_RECORDS_AFTER_RELEASE, CONTROL_RECORDS_AFTER_ROOT_CONTROL,
+    CONTROL_RECORDS_AFTER_ROOT_VIEW, CONTROL_RECORDS_AFTER_ROOT_MARKER,
+    CONTROL_RECORDS_AFTER_ROOT_POSE, CONTROL_RECORDS_SLOTS,
+    CONTROL_RECORDS_AFTER_FINISH, CONTROL_RECORDS_COMPLETE
+};
+enum ControlRecordSlotPhase {
+    CONTROL_SLOT_BEGIN, CONTROL_SLOT_AFTER_READY, CONTROL_SLOT_AFTER_PLACE,
+    CONTROL_SLOT_AFTER_CONTROL,
+    CONTROL_SLOT_AFTER_DISPATCH, CONTROL_SLOT_AFTER_POSE
+};
+typedef struct {
+    enum ControlRecordsPhase phase;
+    enum ControlRecordSlotPhase slot_phase;
+    enum RecordUpdateChild child;
+    unsigned slot;
+    int child_result;
+} ControlRecordsFrame;
+/* Zero requests the named child; one completes the retained C update. */
+int advance_control_records(ControlRecordsFrame *frame,const RecordUpdateHooks *hooks);
 /* Complete C22C80-C230AE parent, including inactive routes and slot 7's
  * preparation-only sequence. Child ownership remains explicit. */
 void update_control_records(const RecordUpdateHooks *hooks);

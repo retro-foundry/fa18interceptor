@@ -12,6 +12,14 @@ int glue_continue_record_zone_exit(const void *arguments);
 int glue_complete_native_record_input(void);
 int glue_complete_native_indexed_record(void);
 int glue_complete_native_record_matrix(void);
+typedef struct {
+    RecordDynamicsFrame frame;
+    NativeAutopilotCall action;
+    NativeZoneExitCall zone;
+    enum { CHILD_IDLE,CHILD_ORIGINAL,CHILD_ACTION,CHILD_ZONE,CHILD_FINISHED } active;
+} NativeRecordDynamicsCall;
+void glue_begin_record_dynamics(NativeRecordDynamicsCall *call);
+int glue_continue_record_dynamics(const void *arguments);
 int glue_schedule_record_dynamics(void);
 /* Parent-selected C calls; no child CPU entry registrations. */
 int glue_schedule_record_input(void);

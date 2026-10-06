@@ -99,6 +99,8 @@ int main(int argc,char **argv) {
     uint8_t *reference=malloc(FA18_CHIP_SIZE+FA18_SLOW_SIZE);
     void *cpu=malloc(m68k_context_size()); char error[256];
     unsigned cases=argc>1?(unsigned)strtoul(argv[1],NULL,10):8192,scenario;
+    int live=argc>3 && !strcmp(argv[3],"--live");
+    int game_ram=argc>4 && !strcmp(argv[4],"--game-ram");
     if(argc>2) selected_entry=(uint32_t)strtoul(argv[2],NULL,16);
     if(!state || !rom || !m || !base || !before || !reference || !cpu || !cases) return 1;
     if(!fa18_machine_load_state(m,state,state_size,rom,rom_size,error,sizeof error)) {
@@ -117,7 +119,15 @@ int main(int argc,char **argv) {
         memcpy(reference,m->chip,FA18_CHIP_SIZE);
         memcpy(reference+FA18_CHIP_SIZE,m->slow,FA18_SLOW_SIZE);
         memcpy(m,before,sizeof *m); m68k_set_context(cpu);
-        switch(selected_entry) {
+        if(live) {
+            if(selected_entry!=0xc22c80u) return 1;
+            fa18_write_log_active=0; fa18_ports_init(FA18_PORTS_ON,"C22C80");
+            REG_PPC=0xc1c6b6u; REG_IR=0x4eb9;
+            if(fa18_recomp_resume(0xc70000u,0xc7ff04u)!=FA18_RET) {
+                fprintf(stderr,"record update native case %u did not complete at %06X\n",scenario,REG_PC); return 1;
+            }
+            fa18_ports_init(FA18_PORTS_OFF,NULL);
+        } else switch(selected_entry) {
         case 0xc22c80u: glue_C22C80(); break;
         case 0xc1c63eu: glue_C1C63E(); break;
         default: return 1;
@@ -134,12 +144,17 @@ int main(int argc,char **argv) {
         for(i=0;i<FA18_CHIP_SIZE+FA18_SLOW_SIZE;++i) {
             gaddr address=i<FA18_CHIP_SIZE?i:i-FA18_CHIP_SIZE+FA18_SLOW_BASE;
             uint8_t got=i<FA18_CHIP_SIZE?m->chip[i]:m->slow[i-FA18_CHIP_SIZE];
+            /* Explicit weaker probe: CPU-call scratch below the restored SP
+             * is not native game state. The return word stays compared. */
+            if(game_ram && address>=0xc7fd00u && address<0xc7ff00u) continue;
             if(got!=reference[i]) {
                 fprintf(stderr,"record-update-stage oracle: case %u byte %06X source %02X C %02X\n",
                         scenario,address,reference[i],got); return 1;
             }
         }
     }
-    printf("record-update-stage oracle %06X: %u complete calls matched all registers, PC, full SR and all RAM\n",selected_entry,cases);
+    printf("record-update-stage oracle %06X: %u complete calls matched all registers, PC, full SR and %s\n",selected_entry,cases,game_ram?"RAM outside original CPU stack scratch":"all RAM");
+    if(live) puts("production retained C continuation exercised with held events");
+    if(game_ram) puts("scope: excludes original CPU stack scratch C7FD00..C7FEFF; strict all-RAM proof remains separate");
     free(cpu); free(reference); free(before); free(base); free(m); return 0;
 }

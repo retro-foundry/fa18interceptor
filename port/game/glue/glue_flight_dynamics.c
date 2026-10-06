@@ -164,15 +164,8 @@ int glue_record_action_reference(void) {
     return glue_return();
 }
 
-typedef struct {
-    RecordDynamicsFrame frame;
-    NativeAutopilotCall action;
-    NativeZoneExitCall zone;
-    enum { CHILD_IDLE,CHILD_ORIGINAL,CHILD_ACTION,CHILD_ZONE,CHILD_FINISHED } active;
-} RecordDynamicsCall;
-
-static int call_record_dynamics(const void *arguments) {
-    RecordDynamicsCall *call=(RecordDynamicsCall *)arguments;
+int glue_continue_record_dynamics(const void *arguments) {
+    NativeRecordDynamicsCall *call=(NativeRecordDynamicsCall *)arguments;
     for(;;) {
         if(call->active==CHILD_ACTION) {
             int result=glue_continue_record_action(&call->action);
@@ -216,8 +209,10 @@ static int call_record_dynamics(const void *arguments) {
     }
 }
 
+void glue_begin_record_dynamics(NativeRecordDynamicsCall *call) {
+    *call=(NativeRecordDynamicsCall){0}; call->frame.work=working(); call->frame.phase=DYNAMICS_BEGIN;
+}
 int glue_schedule_record_dynamics(void) {
-    RecordDynamicsCall call={0};
-    call.frame.work=working(); call.frame.phase=DYNAMICS_BEGIN;
-    return fa18_ports_schedule_native_child(call_record_dynamics,&call,sizeof call,0);
+    NativeRecordDynamicsCall call; glue_begin_record_dynamics(&call);
+    return fa18_ports_schedule_native_child(glue_continue_record_dynamics,&call,sizeof call,0);
 }

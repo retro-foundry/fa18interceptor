@@ -2,6 +2,8 @@
 #include "glue_child_call.h"
 #include "record_update_stage.h"
 #include "globals.h"
+#include "glue_flight_record_calls.h"
+#include "recomp_ports.h"
 
 static void record_outputs(void *context,const RecordUpdateEvent *event) {
     uint32_t value;
@@ -35,7 +37,8 @@ static void record_outputs(void *context,const RecordUpdateEvent *event) {
     case RECORD_UPDATE_RESTORE: D(5)=m68ki_pull_32(); flags_logic_l(D(5)); break;
     }
 }
-static int consume(void *context,enum RecordUpdateChild child,unsigned slot) {
+typedef struct { uint32_t entry,ret; } RecordUpdateCallSite;
+static RecordUpdateCallSite child_site(enum RecordUpdateChild child,unsigned slot) {
     static const uint32_t pose_return[16]={
         0xc22d8e,0xc22dd4,0xc22e18,0xc22e5c,0xc22e8a,0xc22ece,0xc22ef8,0,
         0xc22f44,0xc22f7e,0xc22fa8,0xc22fe2,0xc2300c,0xc23046,0xc23076,0xc230a6};
@@ -45,7 +48,6 @@ static int consume(void *context,enum RecordUpdateChild child,unsigned slot) {
     static const uint32_t paired_return[3]={0xc22f6c,0xc22fd0,0xc23034};
     static const uint32_t place_return[3]={0xc22f72,0xc22fd6,0xc2303a};
     uint32_t routine=0,ret=0;
-    (void)context;
     switch(child) {
     case RECORD_UPDATE_PERIODIC: routine=0xc28996; ret=0xc22ce4; break;
     case RECORD_UPDATE_RELEASE_SELECTION: routine=0xc230b0; ret=0xc22d52; break;
@@ -63,11 +65,51 @@ static int consume(void *context,enum RecordUpdateChild child,unsigned slot) {
     case RECORD_UPDATE_DISPATCH: routine=0xc23a7e; ret=dispatch_return[slot]; break;
     case RECORD_UPDATE_FINISH: routine=0xc09e06; ret=0xc230ac; break;
     }
-    glue_complete_child(routine,ret);
-    return !COND_EQ();
+    return (RecordUpdateCallSite){routine,ret};
+}
+static int consume(void *context,enum RecordUpdateChild child,unsigned slot) {
+    RecordUpdateCallSite site=child_site(child,slot); (void)context;
+    glue_complete_child(site.entry,site.ret); return !COND_EQ();
 }
 int glue_C22C80(void) {
     RecordUpdateHooks hooks={consume,record_outputs,0};
     update_control_records(&hooks);
     return glue_return();
+}
+
+/* This parent composes record dynamics directly. Remaining children retain
+ * their original runtime boundary until their C owners are connected here. */
+typedef struct {
+    ControlRecordsFrame frame;
+    NativeRecordDynamicsCall dynamics;
+    enum { RECORD_CHILD_IDLE,RECORD_CHILD_ORIGINAL,RECORD_CHILD_DYNAMICS,RECORD_CHILD_FINISHED } active;
+} ControlRecordsCall;
+static int continue_control_records(const void *arguments) {
+    ControlRecordsCall *call=(ControlRecordsCall *)arguments;
+    for(;;) {
+        if(call->active==RECORD_CHILD_DYNAMICS) {
+            int result=glue_continue_record_dynamics(&call->dynamics);
+            if(result!=FA18_RET) return result;
+            call->active=RECORD_CHILD_FINISHED;
+            fa18_ports_native_child_wait(REG_PC,A(7)); return FA18_EXIT_DISPATCH;
+        }
+        if(call->active!=RECORD_CHILD_IDLE) {
+            call->frame.child_result=!COND_EQ(); call->active=RECORD_CHILD_IDLE;
+        }
+        RecordUpdateHooks hooks={NULL,record_outputs,NULL};
+        if(advance_control_records(&call->frame,&hooks)) return glue_return();
+        RecordUpdateCallSite site=child_site(call->frame.child,call->frame.slot);
+        uint32_t sp=A(7); m68ki_push_32(site.ret); REG_PC=site.entry;
+        if(call->frame.child==RECORD_UPDATE_POSE) {
+            fa18_ports_note_native_edge(0xc22c80,0xc25b66);
+            glue_begin_record_dynamics(&call->dynamics);
+            call->active=RECORD_CHILD_DYNAMICS; continue;
+        }
+        call->active=RECORD_CHILD_ORIGINAL;
+        fa18_ports_native_child_wait(site.ret,sp); return FA18_EXIT_DISPATCH;
+    }
+}
+int glue_schedule_control_records(void) {
+    ControlRecordsCall call={0};
+    return fa18_ports_schedule_native_child(continue_control_records,&call,sizeof call,0);
 }
