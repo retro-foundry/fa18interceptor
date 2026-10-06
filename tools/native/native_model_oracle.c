@@ -11,6 +11,8 @@
 #include "recomp_ports.h"
 #include "memory.h"
 #include "globals.h"
+#include "followup_placements.h"
+#include "main_loop_control_messages.h"
 extern int64_t fa18_next_event;
 #define FA18_NATIVE
 #define setup_line host_setup_line
@@ -51,6 +53,22 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #include "../../port/game/map_packet.c"
 #define draw_filled_circle host_draw_filled_circle
 #include "../../port/game/circle.c"
+#define project_view_point host_project_view_point
+#define project_view_point_mode host_project_view_point_mode
+#define draw_display_stream_point host_draw_display_stream_point
+#define draw_fixed_matrix_mark host_draw_fixed_matrix_mark
+#define draw_scaled_view_circle host_draw_scaled_view_circle
+#define draw_scaled_stream_circle host_draw_scaled_stream_circle
+#define draw_shape host_draw_shape
+#define shift_word projection_shift_word
+#include "../../port/game/projection.c"
+#undef shift_word
+#define begin_history_projection host_begin_history_projection
+#define prepare_history_projection_point host_prepare_history_projection_point
+#define draw_history_projection host_draw_history_projection
+#include "../../port/game/history_projection.c"
+#define draw_grid_projection_packet host_draw_grid_projection_packet
+#include "../../port/game/grid_projection_packet.c"
 #undef draw_filled_circle
 #define draw_selected_segment host_draw_selected_segment
 #define draw_selected_segment_clipped host_draw_selected_segment_clipped
@@ -171,6 +189,7 @@ static int16_t circle_x,circle_y,circle_radius;
 static int original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     REG_A[0]=oracle_parameters;
+    if(pc==0xc21b38u || pc==0xc21c86u) REG_A[2]=0x4600;
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
     m68k_set_reg(M68K_REG_SR,0x2700); REG_PC=pc;
     fa18_next_event=INT64_MAX; SET_CYCLES(100000000);
@@ -233,21 +252,110 @@ static int circles(void) {
 static int32_t consume(void *context,const ScenePlacementCall *call) {
     (void)context;
     FA18Machine *before=malloc(sizeof *before);
-    uint8_t *expected=malloc(0x80000),*vertices=malloc(0x2000);
+    uint8_t *expected=malloc(0x80000),*vertices=malloc(0x2000),*records=malloc(0x2000),*slow=malloc(0x80000);
     memcpy(before,fa18_machine,sizeof *before);
     int result=native_scene_placement(NULL,call);
     memcpy(expected,fa18_machine->chip,0x80000);
     memcpy(vertices,fa18_machine->slow+0x48390,0x2000);
+    memcpy(records,fa18_machine->slow+0x46184,0x2000);
+    memcpy(slow,fa18_machine->slow,0x80000);
     memcpy(fa18_machine,before,sizeof *before);
     oracle_parameters=call->parameters;
+    /* C1F074 expiry returns the incoming, uncleared model accumulator.
+     * Match that caller scratch input in the independent source stack frame;
+     * normal C1F712 and command ORs must still update it themselves. */
+    for(unsigned i=0;i<0x98;++i) wr_u8(0xc7fefc-0x98+i,rd_u8(0x4200-0x98+i));
     if(!original(call->routine)) exit(1);
     int original_result=(int16_t)REG_D[0];
     unsigned vertex_diffs=0;
     for(unsigned i=0;i<0x2000;++i) if(vertices[i]!=fa18_machine->slow[0x48390+i]) ++vertex_diffs;
-    int okay=compare(expected,calls) && result==original_result && !vertex_diffs;
-    if(!okay) {fprintf(stderr,"descriptor %06X parameters %06X: return source=%d native=%d vertex differences=%u\n",call->routine,call->parameters,original_result,result,vertex_diffs); ++failures;}
-    ++calls;free(vertices);free(expected);free(before);
+    unsigned record_diffs=0;
+    for(unsigned i=0;i<0x2000;++i) if(records[i]!=fa18_machine->slow[0x46184+i]) {
+        if(record_diffs<8) fprintf(stderr,"record %06X: source %02X native %02X\n",0xc46184+i,fa18_machine->slow[0x46184+i],records[i]);
+        ++record_diffs;
+    }
+    unsigned slow_diffs=0;
+    for(unsigned i=0;i<0x7fc00;++i) if(slow[i]!=fa18_machine->slow[i]) {
+        if(slow_diffs<8) fprintf(stderr,"descriptor %06X data %06X: source %02X native %02X\n",call->routine,0xc00000+i,fa18_machine->slow[i],slow[i]);
+        ++slow_diffs;
+    }
+    int okay=compare(expected,calls) && result==original_result && !vertex_diffs && !record_diffs && !slow_diffs;
+    if(!okay) {fprintf(stderr,"descriptor %06X parameters %06X: return source=%d native=%d vertex differences=%u record differences=%u\n",call->routine,call->parameters,original_result,result,vertex_diffs,record_diffs); ++failures;}
+    ++calls;free(slow);free(records);free(vertices);free(expected);free(before);
     return original_result;
+}
+static int32_t consume_followup(void *context,const FollowupPlacementEvent *call) {
+    ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header};
+    return consume(context,&descriptor);
+}
+static int32_t native_followup(void *context,const FollowupPlacementEvent *call) {
+    (void)context;
+    ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header};
+    return native_scene_placement(NULL,&descriptor);
+}
+static void grid_triangle(void *context) {(void)context;host_draw_polygon();}
+static void grid_pixel(void *context,int16_t x,int16_t y,int adjacent) {
+    (void)context;if(adjacent) plot_pixel_pair(x,y);else plot_pixel(x,y);
+}
+static MessageWorking control_child(void *context,enum MainControlChild child) {
+    (void)context;
+    if(child!=MC_RESET_FACE_STATE) {fprintf(stderr,"unexpected setup control child %u\n",child);exit(1);}
+    host_reset_line_style();return (MessageWorking){0};
+}
+static int scene_children(void) {
+    const FollowupPlacementHooks followups={native_followup,NULL,NULL};
+    const GridProjectionHooks grid={.triangle=grid_triangle,.pixel=grid_pixel};
+    const MainControlHooks controls={control_child,NULL,NULL,NULL};
+    const uint32_t entries[]={0xc279d0,0xc1518c,0xc1ccbc};
+    FA18Machine *before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    for(unsigned test=0;test<3;++test) {
+        memcpy(before,fa18_machine,sizeof *before);
+        if(test==0) host_draw_grid_projection_packet(0x4400,&grid);
+        else if(test==1) advance_main_loop_control_records(0x4500,&controls);
+        else visit_followup_placements(&followups);
+        memcpy(expected,fa18_machine->chip,0x80000);
+        memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        oracle_parameters=0;
+        /* The parent's JSR adds one return address before the model LINK.
+         * Align its incoming local scratch, including the expiry accumulator. */
+        if(test==2) for(unsigned i=0;i<0x98;++i) wr_u8(0xc7fef8-0x98+i,rd_u8(0x4200-0x98+i));
+        if(!original(entries[test])) return 0;
+        unsigned differences=0;
+        for(unsigned i=0;i<0x100000;++i) {
+            if((i>=0x4168&&i<0x4200)||(i>=0x43dc&&i<0x4400)||(i>=0x44ea&&i<0x4500)||i>=0xffc00) continue;
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                if(differences<8) fprintf(stderr,"parent %06X address %06X: source %02X native %02X\n",entries[test],i<0x80000?i:0xc00000+i-0x80000,actual,expected[i]);
+                ++differences;
+            }
+        }
+        if(differences) {fprintf(stderr,"parent %06X: %u non-stack RAM differences\n",entries[test],differences);return 0;}
+        memcpy(fa18_machine,before,sizeof *before);
+    }
+    free(before);free(expected);puts("Grid, setup control and complete followup parents match non-stack RAM");return 1;
+}
+static int hull_tails(void) {
+    FA18Machine *before=malloc(sizeof *before),*saved=malloc(sizeof *saved);
+    uint8_t *expected=malloc(0x80000);
+    memcpy(saved,fa18_machine,sizeof *saved);
+    for(unsigned test=0;test<8;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        wr_u16(SCRIPT_RECORD,(test&2)?14*512:0);
+        wr_u16(0x4600,(test&4)?6:0);
+        memcpy(before,fa18_machine,sizeof *before);
+        gaddr next=(test&1)?derive_extended_shown_vertices(0x4600):derive_compact_shown_vertices(0x4600);
+        memcpy(expected,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        oracle_parameters=0;
+        if(!original((test&1)?0xc21c86u:0xc21b38u) || REG_A[2]!=next) return 0;
+        for(unsigned i=0;i<0x7fc00;++i) if(fa18_machine->slow[i]!=expected[i]) {
+            fprintf(stderr,"hull tail case %u data %06X: source %02X native %02X\n",test,0xc00000+i,fa18_machine->slow[i],expected[i]);return 0;
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);
+    free(expected);free(saved);free(before);puts("8 compact/extended hull tail cases match original data and stream position");return 1;
 }
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
@@ -259,9 +367,13 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+    if(!hull_tails()) return 1;
     if(!circles()) return 1;
     const ScenePlacementHooks hooks={consume,NULL,NULL};
     visit_scene_placements(0,&hooks);visit_scene_placements(1,&hooks);
+    const FollowupPlacementHooks followups={consume_followup,NULL,NULL};
+    visit_followup_placements(&followups);
+    if(!scene_children()) return 1;
     printf("%u descriptors compared, %u failures\n",calls,failures);
     return failures?1:0;
 }

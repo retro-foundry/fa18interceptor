@@ -1,7 +1,8 @@
 /* Source C1EE14: distance/LOD selection, bound vertices and model commands.
  * C1ED48 is the source alias. C07846 extends flat geometry with paired edges.
  * The existing draw_stream.c owns command geometry and host raster submission.
- * TODO(port): record hulls C1F000, shadow strips C1F584 and record marks C1F844.
+ * C1ED4C selects aircraft/cockpit streams; C1F000 transforms record hulls.
+ * TODO(port): positive shadow strips C1F584 and expiry transition C22ADE.
  * Reached missing children fail explicitly, never substitute geometry. */
 #include "model.h"
 #include "frontend.h"
@@ -13,6 +14,11 @@
 #include "../stages.h"
 #include "../polygon_clip.h"
 #include "../projection.h"
+#include "../vertex_tail.h"
+#include "../history_projection.h"
+#include "../cockpit_script.h"
+#include "../faces.h"
+#include "../render_line.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -68,6 +74,116 @@ static int first_visible(gaddr p) {
     int16_t z=rd_s16(p+4),x=rd_s16(p),y=rd_s16(p+2);
     int16_t extent=(int16_t)(z+(z>>1));
     return z>0 && x<=extent && (int16_t)-x<=extent && y<=extent && (int16_t)-y<=extent;
+}
+static void record_finish(gaddr record,gaddr frame,int16_t timer) {
+    /* C1F87A -> C2D082: expiry shape layers, then C0D04C history points. */
+    int scale=15-timer;
+    if(scale<=15) {
+        int32_t world[3]={rd_s16(record+0xc),rd_s32(record+0x10),rd_s16(record+0xe)};
+        world[0]=(int32_t)((uint32_t)world[0]+((uint32_t)(int32_t)(int16_t)(rd_s16(record+6)-rd_s16(0xc4594c))<<14));
+        world[2]=(int32_t)((uint32_t)world[2]+((uint32_t)(int32_t)(int16_t)(rd_s16(record+8)-rd_s16(0xc4594e))<<14));
+        int kind=rd_u8(record+0x62)==0x15?3:(rd_u8(record+4)&2)?2:1;
+        reset_line_style();wr_u32(POLY_COMPLEMENT,0);
+        int32_t vertical=(int32_t)((uint32_t)world[1]+rd_u32(PROJECTION_Y));
+        int32_t absolute=vertical<0?(int32_t)(0u-(uint32_t)vertical):vertical;
+        if(absolute<=0x8000) {
+            int16_t radius=0;
+            if(kind==3) {
+                int32_t distance[3];int32_t maximum=0;
+                for(int k=0;k<3;++k) {
+                    distance[k]=(int32_t)((uint32_t)world[k]+(uint32_t)(int32_t)rd_s16(PROJECTION_WORDS+2*k));
+                    if(distance[k]<0) distance[k]=(int32_t)(0u-(uint32_t)distance[k]);
+                    if(distance[k]>maximum) maximum=distance[k];
+                }
+                int down=maximum<=0x4000?0:maximum<=0x40000?4:8;
+                int16_t length=(int16_t)magnitude3((int16_t)(distance[0]>>down),(int16_t)(distance[1]>>down),(int16_t)(distance[2]>>down));
+                uint16_t numerator=(uint16_t)((0x2800u*(uint16_t)scale)/6u+0x2800u);
+                radius=length>0?(int16_t)((uint32_t)(int32_t)(int16_t)numerator/(uint16_t)length):127;
+                if(radius>127) radius=127;
+            }
+            int16_t point[3];int shift=rd_s16(BOUND_SHIFT);
+            world[0]=(int32_t)((uint32_t)world[0]+(uint32_t)(int32_t)rd_s16(PROJECTION_WORDS));
+            world[1]=vertical;
+            world[2]=(int32_t)((uint32_t)world[2]+(uint32_t)(int32_t)rd_s16(PROJECTION_WORDS+4));
+            for(int k=0;k<3;++k) point[k]=(int16_t)shift_long(world[k],shift);
+            draw_shape(point[0],point[1],point[2],(uint16_t)scale,(int8_t)kind,radius,(int16_t)shift);
+            if(kind>=3) {
+                ++kind;if(--scale<0) scale=0;
+                draw_shape(point[0],point[1],point[2],(uint16_t)scale,(int8_t)kind,radius,(int16_t)shift);
+                if(kind>=4) {
+                    ++kind;if(--scale<0) scale=0;
+                    draw_shape((int16_t)(point[0]+20),(int16_t)(point[1]+10),(int16_t)(point[2]+20),
+                        (uint16_t)scale,(int8_t)kind,radius,(int16_t)shift);
+                }
+            }
+        }
+    }
+    (void)frame;
+    HistoryProjectionWork history={0};draw_history_projection(&history);
+}
+static int record_vertices(gaddr bound,gaddr frame) {
+    /* C1F000-C1F2EA: rotate the hull into the record's cached local points,
+     * then shift and place the visible subset through the view matrix. The
+     * source consumes one extra cached point when the visible subset is full. */
+    gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+    if(!(rd_u16(record)&0x40)) return 0;
+    wr_u8(record+0x7b,rd_u8(frame-0x88));
+    if(rd_u16(record)&0x400) {
+        int16_t timer=rd_s16(record+0x4c);
+        if(timer==14) {
+            unsigned count=rd_u16(BOUND_SHIFT)&63;
+            uint32_t scaled=count>=32?0:(uint32_t)(int32_t)rd_s16(frame-0x28)<<count;
+            int32_t denominator=shift_long((int32_t)scaled,1);
+            int16_t radius=120;
+            if((int16_t)denominator>0) {
+                uint32_t d=(uint16_t)denominator;
+                uint32_t packed=((0x10000u%d)<<16)|(0x10000u/d);
+                if((int32_t)packed<=120) radius=(int16_t)packed;
+            }
+            wr_u8(0xc45869,(uint8_t)radius);wr_u8(0xc4586a,(uint8_t)(radius>>1));
+            wr_u8(0xc457b8,(uint8_t)(4-((radius>>1)>>4)));
+        }
+        if(timer<=12) {record_finish(record,frame,timer);return -1;}
+    }
+    int16_t origin[3];int down=8-rd_s16(frame-6),shift=rd_s16(frame-8);
+    for(int k=0;k<3;++k) {
+        int32_t offset=k==1?rd_s32(POSITION_LEVEL):
+            (int32_t)(rd_u32(frame-0x20+4*k)+rd_u32(SHADOW_OFFSET_X+4*k));
+        origin[k]=(int16_t)shift_long(offset,down);wr_s16(frame-0x14+2*k,origin[k]);
+    }
+    for(int i=0;i<9;++i) wr_s16(BOUND_MATRIX+2*i,(int16_t)(rd_s16(record+0x92+2*i)>>6));
+    int visible=rd_s8(bound+9)-1,extra=rd_s8(bound+8)-rd_s8(bound+9);
+    if(extra<0) missing("invalid hull counts C1F2D4",bound);
+    gaddr input=bound+10,cache=record+0xa4,output=WORKSPACES;
+    unsigned cached=0;int first=1;
+    for(;;) {
+        int16_t point[3],local[3];
+        for(int k=0;k<3;++k) point[k]=rd_s16(input+2*k);
+        input+=6;
+        for(int row=0;row<3;++row) local[row]=dot(BOUND_MATRIX+6*row,point);
+        if(cached<58) {
+            for(int k=0;k<3;++k) wr_s16(cache+6*cached+2*k,local[k]);
+            ++cached;
+        }
+        if(!first) --visible;
+        if(visible>=0) {
+            if(rd_u8(frame-0x7f)&1) {
+                for(int k=0;k<3;++k) wr_s16(frame-0x5e + 2*k,local[k]);
+                view_transform(frame-0x5e,(int16_t)shift,output);
+            } else {
+                for(int k=0;k<3;++k) point[k]=(int16_t)(shift_word(local[k],shift)+origin[k]);
+                for(int row=0;row<3;++row) wr_s16(output+2*row,dot(VIEW_ANGLE_MATRIX+6*row,point));
+            }
+            if(first && rd_s16(0xc459c0)>=0 && rd_u16(0xc459c0)==rd_u16(SCRIPT_RECORD)) {
+                project_view_point(rd_s16(output),rd_s16(output+2),rd_s16(output+4));
+                wr_s16(TARGET_MARK,(int16_t)(rd_s16(PROJECTED_PAIR)-rd_s16(0xc45988)));
+                wr_s16(TARGET_MARK+2,(int16_t)(rd_s16(PROJECTED_PAIR+2)-rd_s16(0xc458d8)));
+            }
+            if(first && rd_s16(frame-0x62)>1 && !first_visible(output)) return 0;
+            output+=6;
+        } else if(--extra<=0) return 1;
+        first=0;
+    }
 }
 static void flat_extensions(gaddr *input,gaddr *output,gaddr frame) {
     /* C07846 pairs each new point with the last initial edge's displacement.
@@ -148,15 +264,47 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x09c: return draw_square_faces(stream);
     case 0x0a0: return draw_split_square(stream);
     case 0x0a4: extend_block_scaled(stream); return 0;
+    case 0x0a8: *stream=derive_extended_shown_vertices(*stream); return 0;
+    case 0x0ac: *stream=derive_compact_shown_vertices(*stream); return 0;
+    case 0x0b0: split_record_and_stream_edges(stream); return 0;
     case 0x0c0: return draw_selected_segment(stream);
+    case 0x0c4: {
+        /* C1FF46: project the first face vertex when its side test rejects. */
+        for(int i=0;i<3;++i) {
+            gaddr point=WORKSPACES+(gaddr)(int32_t)word(stream);
+            wr_u32(CLIP_INPUT+4+6*i,rd_u32(point));
+            wr_u16(CLIP_INPUT+8+6*i,rd_u16(point+4));
+        }
+        uint16_t kind=(uint16_t)word(stream);int16_t eye[3];
+        for(int k=0;k<3;++k) eye[k]=rd_s16(frame-0x26+2*k);
+        if(face_test_passes(kind,rd_u32(frame-0x2c),stream,eye)) return 0;
+        wr_u16(CURRENT_COLOUR,kind);
+        return project_view_point_mode(rd_s16(CLIP_INPUT+4),rd_s16(CLIP_INPUT+6),
+            rd_s16(CLIP_INPUT+8),rd_s16(BOUND_SHIFT),rd_s16(frame-0x28),0);
+    }
+    case 0x0c8: *stream=skip_to_type_block(*stream); return 0;
+    case 0x0cc: *stream=skip_if_shown_record_flag(*stream); return 0;
+    case 0x0d0: *stream=derive_edge_vertices(*stream); return 0;
     case 0x0d4: offset_block_copies(stream); return 0;
+    case 0x0d8: *stream=skip_for_low_class(*stream); return 0;
     case 0x0dc: return draw_indexed_face_list(stream,frame);
     case 0x0e4: return draw_face_grid_plain(stream);
+    case 0x0ec: case 0x0f0: case 0x0f4: *stream=derive_shown_vertices(*stream); return 0;
+    case 0x0f8: {
+        draw_scaled_stream_circle(*stream,rd_s16(frame-8));*stream+=6;
+        /* C2EC82 clears its result but sets N with the -1 pair store.
+         * C1F944 consequently ends this command sequence on rejection. */
+        return rd_u32(PROJECTED_PAIR)==0xffffffffu?-1:1;
+    }
+    case 0x108: *stream=skip_for_type_3_to_6(*stream); return 0;
     case 0x10c: return test_stream_face(stream,frame);
     case 0x110: *stream=skip_stream_records(*stream); return 0;
     case 0x114: return draw_tested_parallelogram(stream,frame);
+    case 0x124: *stream=skip_word_for_mode_57(*stream); return 0;
     case 0x128: return draw_selected_segment_near(stream);
     case 0x12c: return draw_segment_pairs_near(stream);
+    case 0x130: *stream+=2; return 0;
+    case 0x134: *stream=skip_counted_entries(*stream); return 0;
     default: missing("draw command",index); return 0;
     }
 }
@@ -180,12 +328,14 @@ static int sequence(gaddr stream,gaddr frame) {
         int result=command((uint16_t)code,&stream,frame);
         if(result<0) return drawn;
         drawn|=result;
+        wr_u16(frame-0x7c,(uint16_t)(rd_u16(frame-0x7c)|result));
         if(code&0x4000) return drawn;
     }
 }
 static int control(gaddr parameters,gaddr frame) {
     gaddr stream=rd_u32(CONTROL_STREAM);
     int drawn=0;
+    wr_u16(frame-0x7c,0); /* C1F712; early expiry retains the preceding value. */
     wr_u32(LINE_STYLE,0x000fffffu); wr_u32(POLY_COMPLEMENT,0);
     for(;;) {
         uint16_t code=(uint16_t)word(&stream);
@@ -230,13 +380,18 @@ static int control(gaddr parameters,gaddr frame) {
         }
         if(code&0x4000) break;
     }
-    if(!(rd_u8(HEADER_BYTE)&0x40) && (rd_u8(HEADER_BYTE)&0x10)) missing("record finish/mark C1F844",parameters);
+    if(!(rd_u8(HEADER_BYTE)&0x40) && (rd_u8(HEADER_BYTE)&0x10)) {
+        gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+        if((rd_u16(record)&0x400) && rd_s16(record+0x4c)>=0 && rd_s16(record+0x4c)<16)
+            record_finish(record,frame,rd_s16(record+0x4c));
+        else {HistoryProjectionWork history={0};draw_history_projection(&history);}
+    }
     return drawn;
 }
-int native_model_draw(gaddr parameters,gaddr frame) {
+static int draw_model(gaddr parameters,gaddr frame,uint16_t camera_flags) {
     int16_t range=scaled_range(); gaddr stream=rd_u32(CONTROL_STREAM),bound;
     uint16_t code; int bound_shift=rd_s16(BOUND_SHIFT);
-    wr_u16(frame-0x80,0); wr_u16(frame-0x96,rd_u16(MAGNITUDE));
+    wr_u16(frame-0x80,camera_flags); wr_u16(frame-0x96,rd_u16(MAGNITUDE));
     wr_s16(frame-0x28,range); wr_u32(frame-0x2c,parameters);
     for(;;) {
         code=(uint16_t)word(&stream);
@@ -277,7 +432,11 @@ int native_model_draw(gaddr parameters,gaddr frame) {
        (rd_s16(DISTANCE_GATE)<=0 || !(rd_u8(VISIT_CLOCK)&3)) &&
        edge_alignment(bound+10,rd_s16(frame-0x26),rd_s16(frame-0x22),range)<0) return 0;
     wr_u16(0xc4bf90,0);
-    if(flags&1) missing("record hull C1F000",bound);
+    if(flags&1) {
+        int vertices=record_vertices(bound,frame);
+        if(vertices<=0) return vertices<0?rd_s16(frame-0x7c):0;
+        return control(parameters,frame);
+    }
     int flat=!!(flags&2),count=rd_s8(bound+8);
     gaddr input=bound+10,output=WORKSPACES;
     if(flat) {
@@ -293,6 +452,29 @@ int native_model_draw(gaddr parameters,gaddr frame) {
     if(flat && (flags&4) && rd_s8(bound+8)>1) flat_extensions(&input,&output,frame);
     if(!flat && (flags&8) && word(&input)>=0) missing("shadow strips C1F584",input-2);
     return control(parameters,frame);
+}
+int native_model_draw(gaddr parameters,gaddr frame) {return draw_model(parameters,frame,0);}
+static int aircraft_descriptor(gaddr parameters,gaddr frame) {
+    /* C1ED4C: selected-view and alternate stream gates, including cockpit view. */
+    if(rd_u8(HEADER_BYTE)&0x40) return 0;
+    if(!rd_u8(ORIGIN_ENABLE) && rd_u16(SCRIPT_RECORD)==rd_u16(0xc458de)) {
+        int camera=rd_s8(0xc457a7);
+        if(camera>=3 && camera<=9) return draw_model(parameters,frame,1);
+        if(rd_u32(0xc45a3a)!=rd_u32(CONTROL_STREAM)) {
+            wr_u32(CONTROL_STREAM,rd_u32(0xc45a3a));
+            if(!rd_u8(0xc45835)) {
+                unsigned mode=rd_u8(0xc4586b);
+                if(!mode || (mode<3 && shift_long(rd_s32(PROJECTION_Y),rd_s16(BOUND_SHIFT))<-0x20)) {
+                    gaddr stream=rd_u32(CONTROL_STREAM);int16_t selection=rd_s16(stream);
+                    if(selection<0) {if(selection==-1) return 0;stream+=4;}
+                    else if(selection&0x4000) stream+=6;
+                    else {int16_t offset=rd_s16(stream+2);if(offset<0) return 0;stream+=(gaddr)(int32_t)offset;}
+                    wr_u32(CONTROL_STREAM,stream);
+                }
+            }
+        }
+    }
+    return native_model_draw(parameters,frame);
 }
 
 static int ground_draw(gaddr frame,int32_t minimum_height) {
@@ -348,6 +530,17 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
     NativeFrontend *game=context;
     if(game) ++game->model_calls;
     if(call->routine==0xc1ee14 || call->routine==0xc1ed48) return native_model_draw(call->parameters,0x4200);
+    if(call->routine==0xc1ed4c) return aircraft_descriptor(call->parameters,0x4200);
+    if(call->routine==0xc22ac0) {
+        gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+        uint16_t flags=rd_u16(record);
+        if(flags&0x40) {
+            if(flags&0x200) missing("record expiry transition C22ADE",record);
+            return aircraft_descriptor(call->parameters,0x4200);
+        }
+        if(rd_u8(record+0x7a)!=5 && rd_s16(record+0x4c)<0) wr_u16(record,flags|0x40);
+        return 0;
+    }
     if(call->routine==0xc1ed3c) {
         if(rd_s32(TARGET_POINT+4)>=-0x280000) return 0;
         return native_model_draw(call->parameters,0x4200);

@@ -102,6 +102,15 @@ static/flat vertices and draw commands. Existing `draw_stream.c` supplies
 geometry; `circle.c` has a native span-mask backend. The model oracle compares
 reached descriptors at three actual runner checkpoints and 48 circle cases,
 without treating source CPU/ROM/chipset dependencies as native runtime code.
-Aircraft record hulls, positive shadow strips and record marks remain explicit
-missing children. See
+The initial static-scenery milestone is documented in
 [`../../analysis/native_scene_objects_milestone.md`](../../analysis/native_scene_objects_milestone.md).
+
+The followup list now includes aircraft descriptors and cached record hulls,
+with compact/extended derived vertices, history/expiry drawing and source grid/
+setup-control ordering. The model check compares all non-stack data as well as
+planes, and independently checks the complete followup, grid and control parents
+at three runner checkpoints. See
+[`../../analysis/native_aircraft_rendering_milestone.md`](../../analysis/native_aircraft_rendering_milestone.md).
+Cockpit/HUD, active flight, positive shadow strips and the record-expiry
+transition remain unfinished. Setup correctness is separate from frame cadence
+and recorded gameplay acceptance.

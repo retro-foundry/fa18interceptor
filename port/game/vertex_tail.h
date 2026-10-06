@@ -20,5 +20,10 @@ gaddr derive_shown_vertices(gaddr stream);
  * = W+$06 and W+$0C plus e/2. Then skips 14 bytes per step in bits 4-6 of
  * the shown record's +$7C. Returns the stream after it. */
 gaddr derive_edge_vertices(gaddr stream);
+/* C21B38: the compact hull's derived points, both in the shown record and
+ * the transformed workspace selected by the operand. */
+gaddr derive_compact_shown_vertices(gaddr stream);
+/* C21C86: extended hull tails in both banks, then workspace point +$258. */
+gaddr derive_extended_shown_vertices(gaddr stream);
 
 #endif

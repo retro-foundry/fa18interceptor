@@ -41,7 +41,13 @@ Native continuation milestones (functional scope, not instruction counts):
   comparisons. See `../analysis/native_scene_objects_milestone.md`.
   Roughly 85% of Free Flight startup wiring (previously 80%), with aircraft
   record drawing, cockpit/HUD and active controls still pending.
-- Next: aircraft record/descriptor and cockpit/HUD drawing, input/view/timer update
+- Connected: C1ED4C/C1F000 aircraft descriptors/hulls, compact/extended derived
+  vertices, C1CCBC followup placements, C279D0 grid and C1518C setup controls.
+  Three checkpoints execute 290/22,484/31,567 descriptors; descriptor drawing,
+  record caches and complete parents match focused original non-stack RAM.
+  See `../analysis/native_aircraft_rendering_milestone.md`. Roughly 90% of
+  Free Flight startup wiring (previously 85%), excluding active-flight acceptance.
+- Next: cockpit/HUD drawing, input/view/timer update
   ordering, remaining active-record children (C1C63E/C22C80), and connected
   flight simulation. Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.

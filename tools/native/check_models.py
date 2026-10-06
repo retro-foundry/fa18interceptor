@@ -1,8 +1,9 @@
-"""Exercise connected setup scenery and compare descriptors with original code.
+"""Exercise connected setup scenery/aircraft against original code.
 
 Copper fade is excluded: compare plane bytes, transformed vertices and returns.
 CPU/ROM/chipset dependencies belong solely to the independent oracle executable.
-This checks the setup slice, not flight cadence or aircraft/cockpit integration.
+Also compare all non-stack RAM for complete grid, control and followup parents.
+This checks setup integration, not flight cadence or cockpit/HUD integration.
 """
 import argparse
 import json
@@ -39,7 +40,7 @@ def main():
             assert not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
             subprocess.run([str(oracle), str(checkpoint)], cwd=ROOT, check=True, timeout=20)
             print(f'{frames}: {stats["model_calls"]} connected descriptor calls; stage {stage}')
-    print('Native setup scenery and circle masks match focused original comparisons')
+    print('Native setup scenery, aircraft and scene parents match focused original comparisons')
 
 
 if __name__ == '__main__':

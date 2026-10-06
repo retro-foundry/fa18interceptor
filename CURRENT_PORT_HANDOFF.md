@@ -60,8 +60,16 @@ also match. Frontend and Free Flight selection/pause/resume checks pass.
 Evidence: `analysis/native_scene_objects_milestone.md`. Rough scoped startup
 estimate now 85% (previously 80%): scenery is connected, aircraft records,
 cockpit/HUD and active flight remain open. No full replay repeated.
-Next: aircraft descriptor/record drawing C1ED4C/C1F000 and main-control/followup
-composition, then view controls and their newly reachable flight-record children.
+Aircraft descriptor/record drawing C1ED4C/C1F000 and C1CCBC followup composition
+now execute, along with C279D0 grid and C1518C setup control records. Three native
+checkpoints execute 290/22,484/31,567 descriptors; 10/34/14 reached descriptors
+and all three complete parents match original non-stack RAM. Compact/extended
+hull tails and circle masks also pass. Native frontend/menu/setup checks and
+twelve reference CTests pass. Evidence:
+`analysis/native_aircraft_rendering_milestone.md`. Rough startup estimate now
+90% (previously 85%), scoped to Free Flight startup wiring. Cockpit/HUD and
+active flight remain open; no full replay repeated.
+Next: cockpit/HUD and view controls with their newly reachable flight-record children.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Audio currently takes the original suppression path. Source data still uses

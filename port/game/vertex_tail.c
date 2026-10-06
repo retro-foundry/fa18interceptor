@@ -100,3 +100,42 @@ gaddr derive_edge_vertices(gaddr stream) {
     steps = (int8_t)(rd_u8(CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(SCRIPT_RECORD) + 0x7C) & 0x7F) >> 4;
     return stream + 6 + (gaddr)(14 * steps);
 }
+static Vertex quarter(Vertex a) {
+    Vertex v={(int16_t)(a.x>>2),(int16_t)(a.y>>2),(int16_t)(a.z>>2)};return v;
+}
+static void compact_tail(gaddr w) {
+    Vertex p=get(w,0x12),q=get(w,0x18),edge=sub(get(w,0x1e),p);
+    put(w,0x54,add(q,edge));
+    put(w,0x5a,add(q,sub(p,get(w,0x2a))));
+    put(w,0x3c,sub(q,sub(get(w,0x24),p)));
+    Vertex upper=add(midpoint(p,q),quarter(edge));
+    put(w,0x42,upper);put(w,0x48,midpoint(upper,get(w,0)));
+    Vertex split=quarter(sub(get(w,0x36),get(w,0x2a)));
+    put(w,0x4e,add(add(get(w,0x2a),split),half(split)));
+}
+gaddr derive_compact_shown_vertices(gaddr stream) {
+    compact_tail(CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD)+0xa4));
+    compact_tail(WORKSPACES+(gaddr)(int32_t)rd_s16(stream));return stream+2;
+}
+static void extended_tail(gaddr w) {
+    Vertex p=get(w,0x12),q=get(w,0x18),edge=sub(get(w,0x1e),p);
+    put(w,0x96,add(q,edge));
+    Vertex base=add(q,sub(p,get(w,0x30)));
+    put(w,0x66,base);put(w,0x8a,add(base,edge));
+    Vertex across=sub(get(w,0x24),get(w,6));
+    put(w,0xa2,add(get(w,0x24),across));
+    Vertex moved=add(get(w,0xc),across);
+    put(w,0x6c,moved);put(w,0xa8,add(moved,across));
+    put(w,0x9c,add(get(w,0x36),across));
+    Vertex half_edge=half(across);
+    put(w,0x72,add(get(w,0x2a),half_edge));put(w,0x78,add(get(w,0x60),half_edge));
+    Vertex wing=add(midpoint(p,q),add(add(across,across),half_edge));
+    put(w,0x7e,wing);put(w,0x84,midpoint(wing,get(w,0)));
+    put(w,0xae,add(get(w,0),half_edge));put(w,0x90,midpoint(get(w,0x30),get(w,0x42)));
+}
+gaddr derive_extended_shown_vertices(gaddr stream) {
+    extended_tail(CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD)+0xa4));
+    gaddr w=WORKSPACES+(gaddr)(int32_t)rd_s16(stream);extended_tail(w);
+    put(w,0x258,midpoint(midpoint(get(w,0x4e),get(w,0x54)),get(w,0x3c)));
+    return stream+2;
+}
