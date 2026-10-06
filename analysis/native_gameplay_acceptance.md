@@ -18,7 +18,7 @@ interval. They prove composition, not that independent runs reach the same
 state or produce the same complete gameplay sequence. Complete gameplay-frame
 acceptance remains **0/3**; no defensible whole-game parity percentage exists.
 
-One independently aligned gameplay checkpoint now passes. Original
+Five selected independently aligned gameplay checkpoints now pass. Original
 start-of-update 2401 and native C0EFEA in update 2364 have game tick 222,
 C10DAE and identical view/page selectors. **Both 320x200 four-plane gameplay
 pages are byte-identical**, as are player position/motion, rates, orientation
@@ -38,6 +38,37 @@ menu-relative checkpoint is startup evidence, not a gameplay failure by itself.
 This checkpoint therefore supports the user's gameplay-only scope; it does
 not prove that a fixed offset accepts every later phase or recording.
 
+The checker now captures native state **before input/stage**, matching the
+original C0EFD4 dump phase exactly. C0EFEA remains the separate assembled-body
+fixture boundary. This distinction matters at key edges: original update 6001
+still has its throttle/trim latch before a release, while native C0EFEA has
+already consumed that release. Comparing those two phases falsely rejected
+otherwise matching flight. `--frame-capture` now adds an `.entry.dat` export for
+flight updates whose input/stage have not already run; its existing `.before.dat`
+and `.after.dat` semantics are unchanged.
+
+Pages are compared by **draw/display roles**, using C2F558's selected DRAW_PAGE
+and active PAGE_PLANE_TABLE, rather than identical physical buffer numbers.
+C1612C publishes a completed buffer then flips DRAW_PAGE. Different preflight
+swap counts can change physical numbering without changing either gameplay
+frame. The active drawing-table publication must still agree with each runner's
+own selection. Both complete pages remain checked; page-role normalization
+does not search later frames, mask the HUD, or accept the wrong presented page.
+
+Four independently executed carrier checkpoints now match all drawing bytes,
+phase/controls and named player motion/pose/matrices: original/native updates
+5101 (tick 412), 5501 (812), 6001 (1312), and 6289 (1600). Original draw buffer
+1 corresponds to native buffer 0 in all four. Combined with the demo checkpoint,
+this is **5/5 selected checkpoints (100% of that sample)**, across two scenarios,
+not a whole-game percentage. All original exports were reused; no original
+replay was run for this batch. Reproduce one carrier checkpoint and verifier
+strictness:
+
+```powershell
+python tools/native/check_gameplay_checkpoint.py --source build/native-flight/reference-carrier-approach.dat --input build/native-flight/carrier-game-input.fa18in --iteration 6289
+python tools/native/check_gameplay_comparison.py --source build/native-flight/gameplay-window-source.2401.dat --native build/native-flight/gameplay-window-comparison/native.2364.entry.dat
+```
+
 Reproduce without rerunning the original recording:
 
 ```powershell
@@ -54,7 +85,7 @@ Original parent state, recorder cursors and clock samples should be compared
 when a subsequent equivalent gameplay boundary differs before choosing a fix.
 
 The first consecutive independent window is now retained: original updates
-2401..2528 and native C0EFEA/updates 2364..2491, game ticks 222..349. **128/128
+2401..2528 and native pre-input/updates 2364..2491, game ticks 222..349. **128/128
 phase/control and named player motion/pose/matrix comparisons match (100% of
 this window's state scope)**. There are 128 distinct original motion and drawing
 states. **53/128 complete two-page drawing comparisons match (41.4% of this
@@ -76,9 +107,17 @@ rendering/poll/display duration must be understood before correcting cadence.
 The possible C28782/C28CAE clock-dependent geometry offsets do not cause this
 window's drawing mismatch.
 
+Further timing inspection found the source rate-limit table C2502E entry 15
+is 67 ms. Both runners select that same entry and execute the same C25312
+arithmetic; the original frame-body oracle already verifies the result given
+the same samples. The native window approaches that limit, while original
+rendering takes longer between corresponding game updates. No incorrect rate
+index or timer arithmetic has been found. Simply multiplying native time or
+setting a fitted frame delay would replace the dependency rather than port it.
+
 Optional diagnostic ranges preserve actual runner boundaries:
-`--frame-capture FIRST+COUNT PREFIX` writes native `PREFIX.ITERATION.before.dat`
-and `.after.dat`; `FA18_LOOP_DUMP=FIRST+COUNT:PREFIX` writes original
+`--frame-capture FIRST+COUNT PREFIX` writes native `PREFIX.ITERATION.entry.dat`,
+`.before.dat` and `.after.dat`; `FA18_LOOP_DUMP=FIRST+COUNT:PREFIX` writes original
 `PREFIX.ITERATION.dat`. Single-capture filenames remain unchanged. The one
 bounded 6,000-PAL original prefix produced RAM/registers identical to the
 previous retained prefix, and its first boundary equals the old accepted

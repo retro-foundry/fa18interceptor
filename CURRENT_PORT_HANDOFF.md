@@ -13,8 +13,15 @@ may differ and loading can be faster. Copper fade remains excluded. The old
 `analysis/native_gameplay_acceptance.md`: original start-2401 and native
 C0EFEA/update-2364, both game tick 222, match both 320x200 gameplay pages and
 player motion/pose/matrices byte for byte. `check_gameplay_checkpoint.py`
-reuses the original dump. One independent checkpoint is accepted; complete
-gameplay-sequence acceptance remains 0/3. The first consecutive independent
+reuses the original dump. Five selected checkpoints across demo/carrier now
+match both pages, phase/controls and named player motion/pose/matrices: demo
+tick 222; carrier updates 5101/5501/6001/6289, ticks 412/812/1312/1600. This is
+5/5 selected checkpoints, not complete sequences. Independent comparisons use
+the new pre-input `.entry.dat` boundary and C2F558/C1612C draw/display roles;
+carrier physical page 1 equals native 0. Tests reject wrong roles, active-table
+publication, HUD bits, motion, key-release phase and ticks. Existing frame-body
+captures at C0EFEA/C0F3C0 remain unchanged. All original evidence was reused.
+Complete gameplay-sequence acceptance remains 0/3. The first consecutive independent
 window now has 128/128 matching player motion/controls/phases, and 53/128
 matching complete drawing page pairs. At tick 273 the original target-info
 line has switched ALT -> HDG while native still shows ALT. Other drawing bytes
@@ -24,6 +31,8 @@ capture ranges and `check_gameplay_window.py` retain every difference for reuse.
 The one bounded original prefix agrees with existing final RAM/registers.
 Next: correct connected gameplay timer/poll/display cadence from source,
 without guessed speed factors, capture-fed clocks or intro timing requirements.
+Both select original C2502E entry 15 (67 ms); source rendering exceeds that
+limit while native approaches it. No timer arithmetic/rate-index bug was found.
 Latest PAL input batch: complete C1718E now runs through host counter samples,
 including signed delta wrap, bounded controls and input ticks before its
 existing viewport/fade tail. C17104/C1712C/C17456 initialize original -960..960

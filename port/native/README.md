@@ -12,12 +12,15 @@ build/native/fa18_native.exe --adf local/media/fa18.adf
 Gameplay frames are the acceptance scope; intro/loading duration may differ.
 Copper fade is ignored. See
 [`../../analysis/native_gameplay_acceptance.md`](../../analysis/native_gameplay_acceptance.md).
-One aligned independent demo checkpoint matches both 320x200 gameplay pages
-and player motion/pose/matrices byte for byte; complete gameplay sequences
-remain unaccepted. Reuse the existing original checkpoint:
+Five selected independent demo/carrier checkpoints match both 320x200 gameplay
+pages, phase/controls and named player motion/pose/matrices byte for byte;
+complete gameplay sequences remain unaccepted. Comparisons use equal pre-input
+boundaries and source-defined draw/display roles; physical buffer numbering
+may differ after loading. Reuse existing original checkpoints:
 
 ```powershell
 python tools/native/check_gameplay_checkpoint.py --source build/native-flight/reference-demo2401.dat --iteration 2364
+python tools/native/check_gameplay_checkpoint.py --source build/native-flight/reference-carrier-approach.dat --input build/native-flight/carrier-game-input.fa18in --iteration 6289
 ```
 
 The first independent consecutive gameplay window checks 128 updates: all
@@ -31,10 +34,15 @@ python tools/native/check_gameplay_window.py --source-prefix build/native-flight
 ```
 
 The checker retains all failures in `comparison.json` and currently exits 1.
-`--frame-capture FIRST+COUNT PREFIX` exports consecutive actual before/after
-boundaries as `PREFIX.ITERATION.before.dat` / `.after.dat`; its existing single
+`--frame-capture FIRST+COUNT PREFIX` exports consecutive actual pre-input and
+body boundaries as `PREFIX.ITERATION.entry.dat` / `.before.dat` / `.after.dat`.
+The entry export requires a flight update before its input/stage; its existing single
 iteration form keeps the old filenames. Reference-only `FA18_LOOP_DUMP` accepts
 `FIRST+COUNT:PREFIX` for original boundaries. No capture feeds native behavior.
+`check_gameplay_comparison.py --source SOURCE.dat --native NATIVE.entry.dat`
+checks verifier strictness against an accepted pair: equivalent buffer
+allocation passes, while wrong presentation, publication, HUD/input/motion
+or game tick fails.
 
 The default is an SDL window with native stereo sound. `--wav PATH` captures
 the same PCM, including in headless runs. A key acknowledges the credits. A first-time

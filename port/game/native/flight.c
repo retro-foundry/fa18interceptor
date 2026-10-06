@@ -242,6 +242,10 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
     if(game->flight_timer_pending) return finish_frame_clock(game);
     const uint16_t saved_tick=rd_u16(UPDATE_TICK);
     if(!stage_already_ran) {
+        /* Independent reference dumps observe C0EFD4 before input/stage.
+         * Keep that boundary separate from C0EFEA frame-body fixtures. */
+        if(game->observe_frame)
+            game->observe_frame(game,NATIVE_FRAME_INPUT_BEGIN,saved_tick,game->frame_context);
         native_input_process(game); /* C0F3C4, before the C0F5F8 stage tick. */
         const PostInputTickHooks hooks={stage,NULL,game};
         run_post_input_tick(&hooks);

@@ -28,7 +28,7 @@ def compare_gameplay(source, native):
     assert len(source) in (0x100000, 0x100048), 'expected original RAM export'
     assert len(native) == 0x100000, 'expected native RAM export'
     differences = []
-    for address, size in ((0xC1820C, 4), (0xC458DA, 2), (0xC4566C, 2), (0xC458DE, 2),
+    for address, size in ((0xC1820C, 4), (0xC458DA, 2), (0xC458DE, 2),
                           (0xC45776, 4), (0xC4582E, 3)):
         original, actual = span(source, address, size), span(native, address, size)
         if original != actual:
@@ -38,15 +38,27 @@ def compare_gameplay(source, native):
     height = integer(source, 0xC1822A + 0x1A, 2)
     assert (width, height) == (320, 200), (width, height)
     plane_bytes = ((width + 15) // 16) * 2 * height
-    for page in range(2):
+    source_draw, native_draw = integer(source, 0xC4566C, 2), integer(native, 0xC4566C, 2)
+    for name, data, page in (('source', source, source_draw), ('native', native, native_draw)):
+        assert page in (0, 1), f'{name} has invalid draw page {page}'
+        # C2F558 selects the table from DRAW_PAGE before entering C0EFD4.
+        assert integer(data, 0xC456B6, 4) == 0xC4566E + 16 * page, f'{name} active drawing table differs'
+    # C1612C publishes the completed page then flips DRAW_PAGE. At these
+    # boundaries the opposite page is displayed. Loading may perform a
+    # different number of swaps; physical buffer numbers are not gameplay.
+    for role in range(2):
+        source_page, native_page = source_draw ^ role, native_draw ^ role
+        page_name = 'draw' if role == 0 else 'display'
         for plane in range(4):
-            address = 0xC4566E + 16 * page + 4 * plane
-            original = span(source, integer(source, address, 4), plane_bytes)
-            actual = span(native, integer(native, address, 4), plane_bytes)
+            original_address = 0xC4566E + 16 * source_page + 4 * plane
+            native_address = 0xC4566E + 16 * native_page + 4 * plane
+            original = span(source, integer(source, original_address, 4), plane_bytes)
+            actual = span(native, integer(native, native_address, 4), plane_bytes)
             changed = [i for i, (a, b) in enumerate(zip(original, actual)) if a != b]
             if changed:
                 first = changed[0]
-                differences.append(f'page {page} plane {plane}: {len(changed)} differing bytes; '
+                differences.append(f'page {page_name} plane {plane} '
+                                   f'(source {source_page}/native {native_page}): {len(changed)} differing bytes; '
                                    f'first byte {first} (x={first % 40 * 8}, y={first // 40}) '
                                    f'{original[first]:02X} != {actual[first]:02X}')
     # Explicit motion/pose/matrix scope; flags, counters and async voices are separate.
@@ -85,11 +97,13 @@ def main():
                                 cwd=ROOT, check=True, capture_output=True, text=True, timeout=35)
         stats = json.loads(result.stdout)
         assert stats['frame_capture_complete'] and not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
-        native = Path(str(prefix) + '.before.dat').read_bytes()
+        native = Path(str(prefix) + '.entry.dat').read_bytes()
         differences = compare_gameplay(source, native)
         assert not differences, '\n'.join(differences)
         print(f'Aligned gameplay checkpoint: game tick {stats["frame_saved_tick"]}, native update {args.iteration}; '
               'both 320x200 four-plane pages and player motion/pose/matrices match original bytes')
+        print(f'Physical draw buffers: source {integer(source, 0xC4566C, 2)}, native {integer(native, 0xC4566C, 2)}; '
+              'compared by source-defined draw/display roles')
     print('One independent-run gameplay checkpoint accepted; complete sequence and time alignment remain unverified')
 
 

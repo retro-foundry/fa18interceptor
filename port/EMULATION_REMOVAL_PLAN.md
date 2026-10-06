@@ -11,9 +11,14 @@ Native continuation milestones (functional scope, not instruction counts):
 
 - Latest acceptance scope: **gameplay frames**, ignoring Copper fade. Intro,
   loading and preflight may run faster. Old startup frame/update offsets are
-  diagnostic observations, not acceptance blockers on their own. One independent
-  demo checkpoint at game tick 222 matches both 320x200 gameplay pages and
-  player motion/pose/matrices. See `../analysis/native_gameplay_acceptance.md`.
+  diagnostic observations, not acceptance blockers on their own. **5/5 selected
+  independent demo/carrier checkpoints (100% of that sample)** match both
+  320x200 gameplay pages, phase/controls and named player motion/pose/matrices.
+  Native pre-input captures align exactly with original C0EFD4 dumps; C2F558 /
+  C1612C page roles permit different physical buffer numbering after loading.
+  Verifier checks still reject wrong presented frames, table publication and
+  changed HUD bits/input/motion. Existing C0EFEA frame-body captures are retained.
+  See `../analysis/native_gameplay_acceptance.md`. Original evidence was reused.
   A consecutive independent 128-update window now matches player motion,
   controls and phases **128/128 (100% of that state scope)**; complete drawing
   page pairs match **53/128 (41.4% of that window)**. First failure, tick 273,

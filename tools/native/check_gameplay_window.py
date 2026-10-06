@@ -1,7 +1,7 @@
 """Compare consecutive independent gameplay boundaries using retained original RAM.
 
 Source captures: FA18_LOOP_DUMP=FIRST+COUNT:PREFIX, at C0EFD4 before input.
-Native captures: --frame-capture FIRST+COUNT PREFIX, at C0EFEA after stage/input.
+Native captures: --frame-capture FIRST+COUNT PREFIX, before stage/input.
 Use an established equivalent active-flight boundary and equivalent controls;
 the checker never searches for similar frames, seeds state, or reruns the original.
 Both complete 320x200 drawing pages are checked, excluding fade colours only.
@@ -51,7 +51,7 @@ def main():
     frames, drawings, motion = [], set(), set()
     for i, path in enumerate(source_paths):
         native_iteration = args.native_first + i
-        native_path = Path(f'{prefix}.{native_iteration}.before.dat')
+        native_path = Path(f'{prefix}.{native_iteration}.entry.dat')
         source, native = path.read_bytes(), native_path.read_bytes()
         differences = compare_gameplay(source, native)
         planes = b''.join(span(source, integer(source, 0xC4566E + p * 4, 4), 8000) for p in range(8))
@@ -62,7 +62,7 @@ def main():
                            differences=differences))
     matching = sum(not row['differences'] for row in frames)
     flight_matching = sum(not any(not value.startswith('page ') for value in row['differences']) for row in frames)
-    report = dict(source_boundary='C0EFD4', native_boundary='C0EFEA',
+    report = dict(source_boundary='C0EFD4/pre-input', native_boundary='C0EFD4/pre-input',
                   compared=args.count, matching=matching, motion_and_controls_matching=flight_matching,
                   distinct_source_drawings=len(drawings),
                   distinct_source_motion=len(motion), frames=frames, native_run=stats)
