@@ -44,6 +44,13 @@ def main():
             if not any(row['caller'] == caller and row['callee'] == callee and row['calls']
                        for row in edges):
                 raise AssertionError(f'case {case}: native edge {caller} -> {callee} absent')
+        if case == 1125:
+            for caller, callee in [('C2C392', 'C2574A'), ('C2574A', 'C1D974')]:
+                if not any(row['caller'] == caller and row['callee'] == callee and row['calls']
+                           for row in edges):
+                    raise AssertionError(f'case {case}: native normalization edge absent')
+                if profiles['on'].get(callee, 0):
+                    raise AssertionError(f'case {case}: normalization CPU entry dispatched')
         if profiles['on'].get(entry, 0):
             raise AssertionError(f'case {case}: steering CPU entry dispatched')
         for extension in ['ram', 'rgb', 'idx']:

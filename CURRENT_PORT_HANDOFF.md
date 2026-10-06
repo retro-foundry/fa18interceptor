@@ -11,7 +11,25 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
-Latest connected batch: native C2C392 now calls six game steering functions
+Latest connected batch: native C2C392 now calls `normalize_record_vector` ->
+existing `magnitude3` directly in game C. Its normal path no longer yields to
+C2574A/C1D974 CPU entries. 12,400 production continuation cases match complete
+register/PC/SR/RAM state with held events, including 396 calls to each child
+and zero corresponding CPU-entry dispatch. A constructed real-runner frame
+case reaches both edges and matches source RAM/RGB/indices. Its interrupts
+are masked; outer instruction/event timing remains open. All six frame pairs,
+GNU/MSVC runners, twelve CTests, profiling and the MSVC/GNU demo pass. Three
+800-frame recordings match previous outputs/profiles and do not reach this
+normalization path. Batch delta **0.0000 pp**, bounded demo **69.8779%**,
+cached full raw minimum **38.4011%**, accepted share unavailable; other axes
+**0%**, deletion **0/4**. Counts remain 25/590/84/691. Other callers still use
+the normalization adapters. No full suite repeated. Evidence:
+`analysis/emulation_removal_normalization_batch.json/.md`. Normal gameplay
+children of this autopilot owner are now C calls; continue outer flight/loop
+ownership, keeping the fault and unknown-transfer boundaries explicit and
+the zone-exit timing regression below unresolved.
+
+Previous connected batch: native C2C392 now calls six game steering functions
 directly with C values/results, removing their CPU dispatch from this owner.
 49,600 production continuation cases match all registers/PC/SR/RAM with held
 events; 17,118 direct calls cover all six children. Six source-constructed

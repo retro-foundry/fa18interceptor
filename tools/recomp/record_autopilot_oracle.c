@@ -79,6 +79,7 @@ int main(int argc,char **argv) {
     int live=argc>3 && !strcmp(argv[3],"--live");
     const uint32_t steering_entries[]={0xc2ca26u,0xc2ca92u,0xc2caa0u,0xc2cb86u,0xc2cb82u,0xc2cbbcu};
     uint64_t steering_calls[6]={0};
+    uint64_t normalization_calls=0,magnitude_calls=0;
     if(argc>2) selected_entry=(uint32_t)strtoul(argv[2],NULL,16);
     if(!state || !rom || !m || !base || !before || !reference || !cpu || !cases) return 1;
     if(!fa18_machine_load_state(m,state,state_size,rom,rom_size,error,sizeof error)) {
@@ -124,6 +125,11 @@ int main(int argc,char **argv) {
                     fprintf(stderr,"record-autopilot oracle: case %u still dispatched CPU steering entry %06X\n",scenario,steering_entries[i]); return 1;
                 }
             }
+            normalization_calls+=fa18_structural_native_edge_calls(0xc2c392u,0xc2574au);
+            magnitude_calls+=fa18_structural_native_edge_calls(0xc2574au,0xc1d974u);
+            if(fa18_structural_cpu_entry_calls(0xc2574au) || fa18_structural_cpu_entry_calls(0xc1d974u)) {
+                fputs("normalization CPU child dispatched\n",stderr); return 1;
+            }
             fa18_ports_init(FA18_PORTS_OFF,NULL);
         } else glue_record_action_reference();
         fa18_write_log_active=0;
@@ -149,6 +155,9 @@ int main(int argc,char **argv) {
       printf("record-autopilot oracle %06X%s: %u complete calls matched all registers, PC, full SR and all RAM; %u parent boundaries observed\n",selected_entry,live?" live continuation":"",cases,count);
       printf("visited:"); for(i=0;i<sizeof visited;++i) if(visited[i]) printf(" %06X",source_pc(i)); putchar('\n');
       if(live) {
+          printf("native normalization: %llu calls; native magnitude: %llu calls\n",
+                 (unsigned long long)normalization_calls,(unsigned long long)magnitude_calls);
+          if(cases>=12400 && (!normalization_calls || !magnitude_calls)) return 1;
           for(i=0;i<6;++i) {
               printf("native steering %06X: %llu calls\n",steering_entries[i],(unsigned long long)steering_calls[i]);
               if(cases>=12400 && !steering_calls[i]) { fputs("steering C call was not exercised\n",stderr); return 1; }

@@ -440,7 +440,7 @@
       "source_call": "analysis/data/record_autopilot_source_scope.json",
       "remaining_dependencies": [
         "shared guest records and caller compatibility",
-        "original normalization and fault child boundaries",
+        "original fault child boundary",
         "outer flight CPU/event boundary",
         "parent instruction/event timing not yet modeled",
         "unknown or modified action-table targets retain original transfer, including CPU steering entries"
@@ -486,6 +486,13 @@
           "function": "select_record_pitch_branch",
           "source": "port/game/record_steering.c",
           "caller_function": "update_autopilot_steering",
+          "caller_source": "port/game/flight_dynamics.c"
+        },
+        {
+          "entry": "C2574A",
+          "function": "normalize_record_vector",
+          "source": "port/game/fixed_math.c",
+          "caller_function": "update_autopilot_direction",
           "caller_source": "port/game/flight_dynamics.c"
         }
       ]

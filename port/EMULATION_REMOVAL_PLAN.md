@@ -283,6 +283,17 @@ cached full raw minimum **38.4011%**; accepted share unavailable, other cutover
 axes **0%**, deletion **0/4**. No full suite repeated. Evidence:
 `../analysis/emulation_removal_steering_calls_batch.json/.md`.
 
+Native C2C392 also calls vector normalization/magnitude directly in game C.
+12,400 source cases match complete state with held events (396 calls each,
+zero CPU-entry dispatch); a constructed real-runner frame exercises both
+edges and matches source RAM/RGB/indices. Normalization adapters remain for
+other callers. Both builds, twelve CTests, profiling and bounded recording
+comparisons pass. Those prefixes do not exercise this normalization path:
+delta **0.0000 pp**, bounded demo **69.8779%**, cached full raw **38.4011%**.
+Accepted share unavailable, other axes **0%**, deletion **0/4**, counts unchanged.
+No full suite repeated. Outer flight timing/ownership remains work. Evidence:
+`../analysis/emulation_removal_normalization_batch.json/.md`.
+
 ### Phase 2 — Memory cutover (axis B, PORT.md stage F)
 
 Replace `gaddr` plus `rd_*`/`wr_*` with real C structs and pointers, as

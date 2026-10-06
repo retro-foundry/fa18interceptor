@@ -3,6 +3,7 @@
 #include "flight_dynamics.h"
 #include "flight_recorder.h"
 #include "record_steering.h"
+#include "fixed_math.h"
 #include <stdlib.h>
 void update_dynamics_record_matrix(const RecordMatrixInput *input, RecordMatrixResult *result,
                                    RecordMatrixSideHook side_hook, void *context) {
@@ -1105,9 +1106,31 @@ static int update_autopilot_steering(AutopilotFrame *frame,const DynamicsHooks *
     frame->work.detail=state.controls; frame->work.x=state.selection; frame->work.y=state.turn;
     return 1;
 }
+static void normalization_outputs(void *context,enum FixedNormalizationPhase phase,const NormalizedVectorState *s) {
+    const DynamicsHooks *hooks=(const DynamicsHooks *)context;
+    if(phase==FIXED_NORMALIZE_ENTER) observe(hooks,DY_NORMALIZE_ENTER,DY_PRIMARY,s->scale,0);
+    else if(phase==FIXED_MAGNITUDE_ENTER) observe(hooks,DY_MAGNITUDE_ENTER,DY_PRIMARY,s->x,0);
+    else {
+        observe(hooks,DY_LONG,DY_PRIMARY,s->scale,0); observe(hooks,DY_LONG,DY_DETAIL,s->length,0);
+        observe(hooks,DY_LONG,DY_X,s->shift,0); observe(hooks,DY_LONG,DY_Y,s->planar_factor,0);
+        observe(hooks,DY_LONG,DY_Z,s->height_ratio,0); observe(hooks,DY_LONG,DY_RATE_X,s->x,0);
+        observe(hooks,DY_LONG,DY_RATE_Y,s->y,0); observe(hooks,DY_LONG,DY_RATE_Z,s->z,0);
+        if(s->rounding_valid) observe(hooks,DY_NORMALIZE_EXTENSION,DY_PRIMARY,s->rounding_bit,0);
+        observe(hooks,DY_NORMALIZE_LEAVE,DY_PRIMARY,0,0);
+    }
+}
+static void update_autopilot_direction(AutopilotFrame *frame,const DynamicsHooks *hooks) {
+    DynamicsState *w=&frame->work;
+    NormalizedVectorState state={w->primary,w->detail,w->x,w->y,w->z,w->rate_x,w->rate_y,w->rate_z,0,0};
+    state=normalize_record_vector(state,normalization_outputs,(void *)hooks);
+    w->primary=state.scale; w->detail=state.length; w->x=state.shift;
+    w->y=state.planar_factor; w->z=state.height_ratio; w->rate_x=state.x; w->rate_y=state.y; w->rate_z=state.z;
+}
 int update_dynamics_record_action(AutopilotFrame *frame,const DynamicsHooks *hooks) {
-    while(!advance_record_autopilot(frame,hooks))
-        if(!update_autopilot_steering(frame,hooks)) return 0;
+    while(!advance_record_autopilot(frame,hooks)) {
+        if(frame->phase==AP_AFTER_NORMALIZE) update_autopilot_direction(frame,hooks);
+        else if(!update_autopilot_steering(frame,hooks)) return 0;
+    }
     return 1;
 }
 int update_dynamics_record_zone_exit(ZoneExitFrame *frame,const GeometryHooks *hooks) {

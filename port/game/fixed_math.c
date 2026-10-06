@@ -273,6 +273,81 @@ void normalize_vector(int32_t scale, int32_t x, int32_t y, int32_t z) {
     wr_s16(NORMALIZED + 4, rz);
 }
 
+static uint32_t normalized_word(uint32_t old,uint32_t word) {
+    return (old&0xffff0000u)|(uint16_t)word;
+}
+
+NormalizedVectorState normalize_record_vector(NormalizedVectorState s,FixedNormalizationHook hook,void *context) {
+    int16_t scale=(int16_t)s.scale;
+    uint32_t large,small,height,product;
+    if(hook) hook(context,FIXED_NORMALIZE_ENTER,&s);
+    s.rounding_valid=0;
+    if(scale) {
+        s.scale=normalized_word(s.scale,(uint16_t)abs16(scale));
+        large=normalized_word(s.shift,(uint16_t)abs16((int16_t)s.x));
+        small=normalized_word(s.planar_factor,(uint16_t)abs16((int16_t)s.y));
+        height=normalized_word(s.height_ratio,(uint16_t)abs16((int16_t)s.z));
+        if(hook) hook(context,FIXED_MAGNITUDE_ENTER,&s);
+        /* Preserve both table lookup leftovers, used by the original caller.
+         * This is the same two-stage magnitude calculation as magnitude3. */
+        s.length=(uint32_t)magnitude3((int16_t)large,(int16_t)small,(int16_t)height);
+        if((int16_t)small>(int16_t)large) { uint32_t swap=large; large=small; small=swap; }
+        small=(uint32_t)(int32_t)(int16_t)small;
+        if(small) {
+            small<<=8;
+            if(!(uint16_t)large) small=0;
+            else { small=divu_w(small,(uint16_t)large); small=normalized_word(small,small*2); }
+        }
+        s.planar_factor=normalized_word(small,rd_u16(MAGNITUDE_TABLE+(gaddr)(int32_t)(int16_t)small));
+        large=(uint16_t)s.planar_factor*(uint32_t)(uint16_t)large;
+        height=(uint32_t)(int32_t)(int16_t)height<<14;
+        if((int32_t)height>(int32_t)large) { uint32_t swap=large; large=height; height=swap; }
+        s.shift=(uint32_t)((int32_t)large>>14);
+        if(!(uint16_t)s.shift) height=0;
+        else {
+            height=divu_w(height,(uint16_t)s.shift);
+            height=normalized_word(height,(uint16_t)((int16_t)height>>6));
+            height=normalized_word(height,height*2);
+        }
+        s.height_ratio=height;
+        product=rd_u16(MAGNITUDE_TABLE+(gaddr)(int32_t)(int16_t)height)*(uint32_t)(uint16_t)s.shift;
+        s.rounding_bit=(product>>13)&1u; s.rounding_valid=1;
+        if((uint16_t)s.length) {
+            int32_t factor=(int16_t)s.scale;
+            s.shift=8;
+            while(factor<=(int32_t)s.length) {
+                factor=(int32_t)((uint32_t)factor<<2);
+                s.shift=normalized_word(s.shift,s.shift+2);
+            }
+            do {
+                factor>>=2; s.shift=normalized_word(s.shift,s.shift-2);
+            } while((int16_t)s.shift>1 && factor>(int32_t)s.length);
+            factor=(int32_t)((uint32_t)factor<<2); s.shift=normalized_word(s.shift,s.shift+2);
+            s.scale=divu_w((uint32_t)factor<<8,(uint16_t)s.length);
+            {
+                unsigned count=s.shift&63u;
+                uint32_t px=(uint32_t)((int16_t)s.x*(int32_t)(int16_t)s.scale);
+                uint32_t py=(uint32_t)((int16_t)s.y*(int32_t)(int16_t)s.scale);
+                uint32_t pz=(uint32_t)((int16_t)s.z*(int32_t)(int16_t)s.scale);
+                s.x=count>=32?(uint32_t)((int32_t)px<0?-1:0):(uint32_t)((int32_t)px>>count);
+                s.y=count>=32?(uint32_t)((int32_t)py<0?-1:0):(uint32_t)((int32_t)py>>count);
+                s.z=count>=32?(uint32_t)((int32_t)pz<0?-1:0):(uint32_t)((int32_t)pz>>count);
+                if(count) s.rounding_bit=count>=32?pz>>31:(pz>>(count-1))&1u;
+            }
+            if(scale<0) {
+                s.x=normalized_word(s.x,0u-(uint16_t)s.x);
+                s.y=normalized_word(s.y,0u-(uint16_t)s.y);
+                s.rounding_bit=(uint16_t)s.z!=0;
+                s.z=normalized_word(s.z,0u-(uint16_t)s.z);
+            }
+        } else s.x=s.y=s.z=0;
+    } else s.x=s.y=s.z=0;
+    wr_u16(NORMALIZED,(uint16_t)s.x); wr_u16(NORMALIZED+2,(uint16_t)s.y); wr_u16(NORMALIZED+4,(uint16_t)s.z);
+    s.x=(uint32_t)(int32_t)(int16_t)s.x; s.y=(uint32_t)(int32_t)(int16_t)s.y; s.z=(uint32_t)(int32_t)(int16_t)s.z;
+    if(hook) hook(context,FIXED_NORMALIZE_LEAVE,&s);
+    return s;
+}
+
 /* |a - b| >> 8, components of two long positions. */
 static int16_t distance_part(int32_t a, int32_t b) {
     int32_t d = a - b;

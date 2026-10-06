@@ -61,6 +61,14 @@ static void outputs(void *context,enum DynamicsPhase phase,enum DynamicsValue fi
     case DY_AUTOPILOT_TOGGLE: FLAG_Z=v&1u; break;
     case DY_STEERING_ENTER: steering_enter((enum AutopilotPhase)v); break;
     case DY_STEERING_LEAVE: (void)m68ki_pull_32(); break;
+    case DY_NORMALIZE_ENTER:
+        m68ki_push_32(0xc2c628); m68ki_push_32(A(6)); A(6)=A(7); A(7)-=4;
+        wr_u16(A(6)-2,(uint16_t)v); fa18_ports_note_native_edge(0xc2c392,0xc2574a); break;
+    case DY_MAGNITUDE_ENTER:
+        m68ki_push_32(0xc25784); m68ki_push_32(A(0)); m68ki_push_32(v); A(7)+=12;
+        fa18_ports_note_native_edge(0xc2574a,0xc1d974); break;
+    case DY_NORMALIZE_EXTENSION: FLAG_X=(v&1u)<<8; break;
+    case DY_NORMALIZE_LEAVE: A(7)=A(6); A(6)=m68ki_pull_32(); (void)m68ki_pull_32(); break;
     }
 }
 static gaddr frame(void *context) { (void)context; return A(6); }
@@ -125,7 +133,7 @@ static int call_record_action(const void *arguments) {
         REG_PC=call->frame.unresolved_target;
         fa18_ports_native_child_wait(call->return_pc,call->return_sp);
     } else {
-        if(call->frame.phase!=AP_AFTER_FAULT && call->frame.phase!=AP_AFTER_NORMALIZE) abort();
+        if(call->frame.phase!=AP_AFTER_FAULT) abort();
         AutopilotChild child=autopilot_child(call->frame.phase);
         uint32_t sp=A(7);
         m68ki_push_32(child.ret); REG_PC=child.entry;

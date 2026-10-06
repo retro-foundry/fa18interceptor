@@ -77,6 +77,16 @@ int32_t target_distance(int16_t x, int16_t y, int16_t z);
  * the length is zero. */
 void normalize_vector(int32_t scale, int32_t x, int32_t y, int32_t z);
 
+/* Register-entry caller values for the same normalization calculation. Mixed
+ * word/long halves remain observable until the original flight caller retires. */
+typedef struct {
+    uint32_t scale,length,shift,planar_factor,height_ratio,x,y,z;
+    unsigned rounding_bit,rounding_valid;
+} NormalizedVectorState;
+enum FixedNormalizationPhase { FIXED_NORMALIZE_ENTER,FIXED_MAGNITUDE_ENTER,FIXED_NORMALIZE_LEAVE };
+typedef void (*FixedNormalizationHook)(void *,enum FixedNormalizationPhase,const NormalizedVectorState *);
+NormalizedVectorState normalize_record_vector(NormalizedVectorState state,FixedNormalizationHook hook,void *context);
+
 /* $C265E8: the first flagged slot (bit 0 of +$27, scanning 19 down to 0)
  * that is armed (bit 5 of +$26, or any context running): 1 when its
  * record's distance from the observer is at most the slot's own offset
