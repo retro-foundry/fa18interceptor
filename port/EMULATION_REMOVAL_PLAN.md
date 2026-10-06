@@ -9,7 +9,18 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
-- Latest completed batch: connect original C1787A engine/alert/noise resources,
+- Latest completed batch: connect the complete C0FBE0 menu owner, replacing
+  its queue-only entry. Original sound selection, volume target, work-bank and
+  message resets, palette table and callback now execute. C0E78A's nominal
+  host pause suspends game/input updates and retains queued selections.
+  Eighteen source cases and the actual runner pause/input test pass, along
+  with frontend/menu/demo/carrier/crash and reference regressions. See
+  `../analysis/native_menu_start_milestone.md`. Menu setup is **1/1 source
+  parent complete (100% of that scope)**. Measured demo startup lead remains
+  37 ticks; full native frame parity stays **0/3 accepted**. Next: asynchronous
+  input/audio cadence and remaining frame-tail drawing.
+
+- Complete: connect original C1787A engine/alert/noise resources,
   C50A58 square-wave and C50B36 noise generation. All 15 startup sample buffers,
   availability flags $07/$F7 and random seed match original startup. 23 source
   cases and affected demo/carrier/crash comparisons pass, including actual

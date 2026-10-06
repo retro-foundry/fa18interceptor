@@ -55,16 +55,21 @@ source square-wave/noise generators. All 15 sample buffers, availability flags
 and resulting random seed match original startup. This restores the source
 210-update demo banner and reduces the observed startup lead from 97 to 37 game
 ticks. Viewport/message cadence and per-tick audio programs/output remain open.
-Other selected modes stop at their banner. Audio output remains suppressed.
+Other selected modes stop at their banner. Audible output remains unconnected.
+Menu entry now executes complete C0FBE0 sound/volume/reset/palette setup.
+Its busy pause yields under the nominal PAL-clock conversion; input received
+during the pause is retained for the following game input poll. Source tone
+mute and volume-fade state are no longer overridden by the frontend.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
-Source audio suppression is enabled for this initial visual milestone.
+Voice programs and audible output still need their asynchronous host owner.
 
 ```powershell
 build/native/fa18_native.exe --headless --frames 1800 --ppm build/credits.ppm
 python tools/native/check_frontend.py --runner build/native/fa18_native.exe
 python tools/native/check_menu.py --runner build/native/fa18_native.exe
+python tools/native/check_menu_start.py --runner build/native/fa18_native.exe
 python tools/native/check_flight_start.py --runner build/native/fa18_native.exe
 python tools/native/check_records.py --runner build/native/fa18_native.exe
 python tools/native/check_raster.py --runner build/native/fa18_native.exe
@@ -87,7 +92,8 @@ supplies game behavior or pixels.
 
 The original ADF provides splash pixels, palette, fonts and text tables.
 `advance_main_loop_message_sequence` calls native children with `MessageWorking`
-values; `queue_top_level_menu_messages` publishes the existing menu selectors.
+values; `begin_top_level_menu` / `finish_top_level_menu` execute the complete
+source menu owner around its host pause and publish the existing selectors.
 `plot_glyph8` writes ordinary bitplane buffers, which SDL presents directly.
 Source data addresses currently index checked host storage; fully typed game
 state is still future work. Source callback identifiers describe the recreated

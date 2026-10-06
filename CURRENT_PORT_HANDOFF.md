@@ -7,6 +7,17 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest startup batch: native menu entry now runs the complete C0FBE0 owner,
+including source sound selection, master-volume target, work-bank/message
+reset and palette-table loading. Its C0E78A busy pause yields under the existing
+nominal PAL-clock convention. Input/game updates stop during the pause and
+queued keyboard selections execute afterward. Eighteen source comparisons
+match all non-stack RAM before/after the pause. Source tone/fade overrides are
+removed; menu volume/state now match original startup. Frontend/menu, complete
+native demo, carrier/save/restart, crash/re-entry and twelve reference tests
+pass. See `analysis/native_menu_start_milestone.md`. C0FBE0 setup is 1/1 parent
+connected and verified; startup lead remains 37 ticks and frame parity is 0/3.
+Next: asynchronous input/audio cadence and remaining frame-tail drawing.
 Latest timing batch: native C17510/C1756A/C1787A startup sound resources and
 linked voice descriptors are connected. All 15 sample buffers, availability
 flags $07/$F7 and the generated-noise random seed match original startup.
@@ -15,8 +26,8 @@ flags $07/$F7 and the generated-noise random seed match original startup.
 banner delay. The complete native demo, carrier qualification/save/restart,
 crash/menu/qualification re-entry and frontend/menu regressions pass.
 See `analysis/native_flight_sound_milestone.md`. Startup sound initialization is
-3/3 source parents complete; audible output remains open. Next: voice updates/
-output and remaining message/viewport/frame/result cadence. Frame parity is 0/3.
+3/3 source parents complete; audible output remains open. Voice updates/output
+and remaining message/viewport/frame/result cadence remain open. Frame parity is 0/3.
 Latest correction: native startup now loads original pix/inst5 and pix/frnt5
 and publishes C16982's caches/mask. Earlier HUD checks used empty asset pointers;
 the user's missing-cockpit observation was correct. The cockpit bitmap now

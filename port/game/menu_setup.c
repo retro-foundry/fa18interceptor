@@ -29,7 +29,7 @@ void queue_top_level_menu_messages(const MenuSetupHooks *h) {
     }
     wr_u16(cursor,0); observe(h,MENU_SETUP_QUEUE_WORD,0,cursor);
 }
-void start_top_level_menu(const MenuSetupHooks *h) {
+void begin_top_level_menu(const MenuSetupHooks *h) {
     gaddr cursor=MESSAGE_QUEUE;
     uint8_t flags;
     observe(h,MENU_SETUP_CURSOR,cursor,0);
@@ -41,9 +41,16 @@ void start_top_level_menu(const MenuSetupHooks *h) {
     }
     consume(h,MENU_SETUP_SOUND,15); byte(h,VOLUME_FADING,1);
     consume(h,MENU_SETUP_CLEAR,0); consume(h,MENU_SETUP_RESET,0);
-    consume(h,MENU_SETUP_DELAY,0xc000); byte(h,CONTEXT_GATE,0);
+    consume(h,MENU_SETUP_DELAY,0xc000);
+}
+void finish_top_level_menu(const MenuSetupHooks *h) {
+    byte(h,CONTEXT_GATE,0);
     consume(h,MENU_SETUP_SCRIPT,0xc08490); queue_top_level_menu_messages(h);
     wr_u32(STAGE_CALLBACK,0xc0fcb4); observe(h,MENU_SETUP_CALLBACK,0xc0fcb4,0);
+}
+void start_top_level_menu(const MenuSetupHooks *h) {
+    begin_top_level_menu(h);
+    finish_top_level_menu(h);
 }
 void select_menu_sound_pair(uint32_t volume,const MenuSetupHooks *h) {
     uint8_t value=rd_u8(VOLUME_FADING);

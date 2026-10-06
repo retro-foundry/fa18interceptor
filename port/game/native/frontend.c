@@ -45,8 +45,8 @@ static void select_screen(NativeFrontend *game,enum NativeScreen screen,uint16_t
 }
 void native_frontend_start_menu(NativeFrontend *game) {
     select_screen(game,NATIVE_MENU,0,0);
-    queue_top_level_menu_messages(NULL);
-    wr_u32(STAGE_CALLBACK,0xc0fcb4); wr_u8(MODE_SELECT,0);
+    native_menu_begin(&game->menu_setup,game->ticks);
+    wr_u8(MODE_SELECT,0);
 }
 void native_frontend_enlist(NativeFrontend *game) {
     select_screen(game,NATIVE_ENLISTMENT,rd_u16(PLAYER_LOG+4)?2:1,0);
@@ -126,7 +126,6 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
         wr_u32((bank?RENDER_BUFFERS_B:RENDER_BUFFERS_A)+4*i,0x50000+(bank*5+i)*RENDER_BUFFER_LONGS*4);
     wr_u32(POLY_MASK_PLANE,0x30000); /* Separate 40-byte rows, host-owned mask. */
     wr_u32(CIRCLE_SPANS_PTR,0x33000); /* 127-radius symmetric span workspace. */
-    wr_u8(0xc4588au,1); wr_u8(0xc457d7u,2); /* source audio suppression */
     native_menu_initialize();
     /* C16518 reads the original flight-recorder byte and word buffers from
      * textply/textctl. Demonstration mode 3 consumes these through C1B27E;
@@ -157,6 +156,7 @@ const char *native_frontend_screen(const NativeFrontend *game) {
 void native_frontend_key(NativeFrontend *game,int key) {
     native_storage_bind(&game->storage);
     if(key>='a' && key<='z') key-=32;
+    if(game->menu_setup.pending) { native_input_enqueue(game,key,1);return; }
     if(native_flight_enabled(game)) {
         native_input_enqueue(game,key,1);return;
     }
@@ -184,6 +184,7 @@ void native_frontend_event(NativeFrontend *game,int key,int down) {
         if(down) game->shift_keys|=mask; else game->shift_keys&=~mask;
         wr_u8(KEY_STATE,(uint8_t)(game->shift_keys!=0)); return;
     }
+    if(game->menu_setup.pending) { native_input_enqueue(game,key,down);return; }
     if(native_flight_enabled(game)) {
         native_input_enqueue(game,key,down);return;
     }
@@ -195,6 +196,7 @@ void native_frontend_event(NativeFrontend *game,int key,int down) {
 void native_frontend_raw_event(NativeFrontend *game,uint8_t raw,int down) {
     native_storage_bind(&game->storage);
     raw=(uint8_t)((raw&0x7f)|(down?0:0x80));
+    if(game->menu_setup.pending) { native_input_enqueue_raw(game,raw);return; }
     if(native_flight_enabled(game)) native_input_enqueue_raw(game,raw);
     else if(game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG)
         native_menu_dispatch_raw(game,raw);
@@ -203,6 +205,7 @@ void native_frontend_raw_event(NativeFrontend *game,uint8_t raw,int down) {
 void native_frontend_tick(NativeFrontend *game) {
     native_storage_bind(&game->storage); ++game->ticks; ++game->screen_ticks;
     native_clock_set(game->ticks);
+    if(!native_menu_resume(&game->menu_setup,game->ticks)) return;
     if(game->display_pending && !native_display_resume(game)) {
         native_display_read_pixels(game); return;
     }
@@ -221,9 +224,13 @@ void native_frontend_tick(NativeFrontend *game) {
          * existing native menu owner after its last flight display returns. */
         if(game->screen==NATIVE_SCENE_SETUP && rd_u32(STAGE_CALLBACK)==0xc0fbe0)
             native_frontend_start_menu(game);
+        if(game->menu_setup.pending) return;
         ++game->update_iterations;
         if(game->begin_update) game->begin_update(game,game->update_context);
     }
+    /* Keyboard events received during C0E78A wait for the next source input
+     * poll. Menu publication must not overwrite a selection made mid-pause. */
+    if(game->input_count && !native_flight_enabled(game)) native_input_process(game);
     MainControlHooks hooks={0}; hooks.context=game; hooks.consume_values=child;
     const int flight=native_flight_enabled(game);
     if(!flight) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
@@ -233,7 +240,9 @@ void native_frontend_tick(NativeFrontend *game) {
         } else native_frontend_start_menu(game);
         wr_u16(PLAYER_LOG+4,(uint16_t)(rd_u16(PLAYER_LOG+4)+1));
     } else if(game->screen==NATIVE_CALLSIGN && game->name_finished) native_frontend_start_menu(game);
+    if(game->menu_setup.pending) return;
     native_menu_tick(game);
+    if(game->menu_setup.pending) return;
     if(native_flight_enabled(game))
         native_display_begin_frame(game);
     const int complete=native_flight_tick(game);

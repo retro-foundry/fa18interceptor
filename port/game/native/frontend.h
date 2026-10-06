@@ -1,6 +1,7 @@
 #ifndef FA18_NATIVE_FRONTEND_H
 #define FA18_NATIVE_FRONTEND_H
 #include "storage.h"
+#include "menu_start.h"
 #include "../input_display_setup.h"
 #include "../../amiga/ilbm.h"
 enum NativeScreen { NATIVE_SPLASH,NATIVE_CREDITS,NATIVE_ENLISTMENT,NATIVE_CALLSIGN,NATIVE_MENU,
@@ -11,6 +12,7 @@ struct NativeFrontend {
     AmigaIlbm splash;
     enum NativeScreen screen;
     unsigned ticks,screen_ticks;
+    NativeMenuSetup menu_setup;
     uint16_t palette[32];
     uint8_t indices[320*256];
     unsigned glyphs;

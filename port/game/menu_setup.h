@@ -21,6 +21,9 @@ typedef struct {
     void *context;
 } MenuSetupHooks;
 void start_top_level_menu(const MenuSetupHooks *hooks);
+/* C0FBE0 split at C0E78A's busy delay for a yielding host frontend. */
+void begin_top_level_menu(const MenuSetupHooks *hooks);
+void finish_top_level_menu(const MenuSetupHooks *hooks);
 /* Shared C0FBE0 message publication, also used by the native frontend. */
 void queue_top_level_menu_messages(const MenuSetupHooks *hooks);
 void select_menu_sound_pair(uint32_t volume,const MenuSetupHooks *hooks);
