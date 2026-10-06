@@ -42,6 +42,7 @@ def main():
         assert before["screen"] == "mode-intro" and before["stage"] == "C0FECE" and not before["scene_selected"], before
         after, data = run(4000)
         assert after["screen"] == "scene-setup" and after["stage"] == "C1072E" and after["scene_selected"], after
+        assert after["record_updates"] > before["record_updates"] >= 1, "record loop not exercised"
         def field(address, length):
             start = address - 0xC00000 + 0x80000
             return data[start:start + length]

@@ -12,6 +12,8 @@
 #include "../control_records.h"
 #include "../fixed_math.h"
 #include "../postflight_scheduler.h"
+#include "../main_loop_flight_controls.h"
+#include "../matrix.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -26,6 +28,9 @@ static void dynamics(gaddr record) {
     while(!advance_record_dynamics(&frame,&hooks)) {
         DynamicsState *w=&frame.work;
         switch(frame.child) {
+        case DY_CELL_MATRIX:
+            inverse_orientation_matrix(record,(uint16_t)w->rate_x,(uint16_t)w->rate_y,(uint16_t)w->rate_z);
+            break;
         case DY_RECORD_MATRIX: {
             const RecordMatrixInput input={record,{w->primary,w->detail,w->x,w->y,w->z,w->rate_x,w->rate_y,w->rate_z}};
             RecordMatrixResult result={0};
@@ -63,11 +68,21 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
     if(child==SCHEDULE_SELECTION_GATE) { release_lost_selection(); return (PostflightScheduleResult){0,1}; }
     fprintf(stderr,"native record schedule child unavailable: %u\n",(unsigned)child); abort();
 }
-static int record_child(void *context,enum RecordUpdateChild child,unsigned slot) {
+typedef struct { gaddr companion; } RecordLoop;
+static void record_event(void *context,const RecordUpdateEvent *event) {
+    RecordLoop *loop=context;
+    if(event->phase==RECORD_UPDATE_ROOT ||
+       (event->phase==RECORD_UPDATE_SLOT && !event->other)) loop->companion=event->companion;
+}
+static FlightWorking flight_child(void *context,enum FlightChild child) {
     (void)context;
+    fprintf(stderr,"native record dispatch child unavailable: %u\n",(unsigned)child); abort();
+}
+static int record_child(void *context,enum RecordUpdateChild child,unsigned slot) {
+    const RecordLoop *loop=context;
     gaddr record=CONTROL_RECORDS+512u*slot;
     const FlightActionHooks actions={action_child,NULL,NULL,NULL};
-    FlightActionState work={0}; work.record=record; work.source=CONTROL_RECORDS+0x800;
+    FlightActionState work={0}; work.record=record; work.source=loop->companion;
     switch(child) {
     case RECORD_UPDATE_RELEASE_SELECTION: release_lost_selection(); return 0;
     case RECORD_UPDATE_ROOT_CONTROL: advance_flight_record_control(work,&actions); return 0;
@@ -79,6 +94,12 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
     case RECORD_UPDATE_PRIMARY_READY: return select_flight_record_action(work,1,&actions);
     case RECORD_UPDATE_SECONDARY_READY: return select_flight_record_action(work,0,&actions);
     case RECORD_UPDATE_PAIRED_READY: return paired_record_ready(record);
+    case RECORD_UPDATE_DISPATCH: {
+        FlightWorking flight={0}; flight.record=record; flight.auxiliary=loop->companion;
+        const FlightHooks hooks={flight_child,NULL,NULL,NULL};
+        flight=advance_main_loop_flight_record(flight,&hooks);
+        return flight.value!=0;
+    }
     case RECORD_UPDATE_FINISH: {
         const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
         schedule_postflight(POSTFLIGHT_DISPATCH,0,record,&hooks); return 0;
@@ -93,8 +114,9 @@ static SelectorOriginTriple origin_child(void *context,enum SelectorOriginChild 
 }
 void native_records_update(void) {
     RecordUpdateStageFrame frame={0};
+    RecordLoop loop={0};
     const UpdateStageHooks stage={0};
-    const RecordUpdateHooks records={record_child,NULL,NULL};
+    const RecordUpdateHooks records={record_child,record_event,&loop};
     while(!advance_record_update_stage(&frame,&stage)) {
         if(frame.child==UPDATE_STAGE_RECORDS) {
             update_control_records(&records);

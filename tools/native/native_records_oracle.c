@@ -35,7 +35,10 @@ int main(int argc,char **argv) {
     uint8_t *data=argc==2?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m),*before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x100000);
-    if(!state || !rom || !data || nd!=0x100000 || !m || !before || !expected) return 1;
+    if(!state || !rom || !data || (nd!=0x100000 && nd!=0x100048) || !m || !before || !expected) {
+        fputs("Expected a native data export or reference RAM dump and local validation state/ROM\n",stderr);
+        return 1;
+    }
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) { fputs(error,stderr); return 1; }
     fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF,NULL); fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000); memcpy(m->slow,data+0x80000,0x80000);

@@ -21,6 +21,9 @@ pilot goes through enlistment/callsign entry again. Closing the window exits.
 Free Flight (digit 2) now runs the complete source bootstrap, delayed scene
 selection and viewport/message stages. It stops at `scene-setup` / C1072E;
 location/aircraft controls and cockpit/world rendering are still pending.
+The record/context slice repeats during setup; headless statistics expose its
+`record_updates` count. The setup banner currently displays a premature crash
+message; the remaining source command/context transition is incomplete.
 Other selected modes stop at their transition banner. Audio remains suppressed.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
@@ -58,7 +61,9 @@ active gameplay remain unverified; see
 [`../../analysis/native_flight_start_milestone.md`](../../analysis/native_flight_start_milestone.md).
 Bootstrap record updates and context refresh now run through native children.
 The focused record oracle matches original non-stack RAM at its tested boot
-checkpoint; ongoing updates and active-record dispatch remain open. See
+checkpoints, including an optional original Free Flight checkpoint. The setup
+record slice repeats, but full input/view/timer ordering and remaining active
+children are open. See
 [`../../analysis/native_bootstrap_records_milestone.md`](../../analysis/native_bootstrap_records_milestone.md).
 
 Authority: C0E2E8/C0E078 splash load, C0E53C/C0E78A busy delay, C11446/C11478

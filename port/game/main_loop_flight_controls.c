@@ -299,7 +299,7 @@ static int byte_bit(const FlightHooks *h,gaddr a,unsigned n) { return bit(h,rd_u
 /* C23A7E includes its earlier return arms and the complete C243F2 target tail.
  * Working values have named roles; arithmetic remains source-width and every
  * actual child reloads the values and record cursors it really returns. */
-void advance_main_loop_flight_record(FlightWorking w,const FlightHooks *h) {
+FlightWorking advance_main_loop_flight_record(FlightWorking w,const FlightHooks *h) {
     uint32_t saved_value,saved_speed,saved_turn,old,operand; uint16_t value; uint8_t code; int negative; gaddr p;
 #define B(field,phase,v) working_byte(&w.field,h,phase,(uint8_t)(v))
 #define W(field,phase,v) working_word(&w.field,h,phase,(uint16_t)(v))
@@ -469,7 +469,7 @@ publish_autonomous_motion:
     else { observe(h,FC_COMPARE_LONG,w.turn,w.value); if((int32_t)w.turn>(int32_t)w.value) L(value,FC_VALUE_LONG,w.turn); }
     w.value=shift_right(w.value,2); observe(h,FC_VALUE_ASR_LONG,2,0); word(h,w.record+110,(uint16_t)w.value); goto keep_record;
 unclassified_record:
-    if(!byte_bit(h,w.record+1,6)) return;
+    if(!byte_bit(h,w.record+1,6)) return w;
     B(speed,FC_SPEED_BYTE,rd_u8(0xc45788u)); w.speed=narrow_byte(w.speed,w.speed|rd_u8(0xc457aeu)); observe(h,FC_SPEED_OR_BYTE,rd_u8(0xc457aeu),0);
     if(!(uint8_t)w.speed) { value=rd_u16(w.record+76); wr_u16(w.record+76,(uint16_t)(value-1)); observe(h,FC_MEMORY_SUB_WORD,value,1); if((int32_t)(int16_t)value-1<=0) goto clear_record; }
     W(speed,FC_SPEED_WORD,rd_u16(w.record)); w.speed=narrow_word(w.speed,w.speed&0x400); observe(h,FC_SPEED_AND_WORD,0x400,0);
@@ -624,7 +624,7 @@ finish_pending:
 keep_record:
     L(value,FC_VALUE_LONG,1);
 done:
-    ;
+    return w;
 #undef B
 #undef W
 #undef L

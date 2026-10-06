@@ -17,12 +17,16 @@ Native continuation milestones (functional scope, not instruction counts):
   and context refresh, Free Flight
   C0FECE delayed scene selection, C101FC/C10228 viewport transition and C10678
   messages. Initial pose/camera and gate banks match a source checkpoint.
-  Roughly 55% of flight-start wiring; later full record state still differs.
+  The record/context slice now repeats while setup permits it; active record
+  dispatch and its cell matrix match focused original memory results.
+  Roughly 60% of flight-start wiring; later full record state still differs.
   See `../analysis/native_flight_start_milestone.md` and
   `../analysis/native_bootstrap_records_milestone.md` for bounded evidence.
-- Next: ongoing updates and active-record children (C1C63E/C22C80), C1072E and
+- Next: complete input/view/timer update ordering, remaining active-record
+  children (C1C63E/C22C80), C1072E and
   Free Flight location/aircraft controls, direct cockpit/world drawing and
   connected flight simulation. Current native endpoint is `scene-setup`.
+  The premature crash banner and missing aircraft-kind transition remain open.
 - Still open: other modes, active-flight exit/restart, outcomes/progression,
   audio, original timing and typed game state. The scene-setup endpoint
   does not establish active flight or whole-game completion.

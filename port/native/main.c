@@ -65,7 +65,7 @@ int main(int argc,char **argv) {
             && fwrite(game->storage.source,1,sizeof game->storage.source,file)==sizeof game->storage.source;
         if(fclose(file) || !written) { fprintf(stderr,"Cannot write native data: %s\n",data_out); goto done; }
     }
-    printf("{\"frames\":%u,\"screen\":\"%s\",\"mode\":%u,\"glyphs\":%u,\"scene_selected\":%s,\"stage\":\"%06X\",\"cpu_emulation\":false,\"chipset_emulation\":false}\n",game->ticks,native_frontend_screen(game),native_menu_selected_mode(game),game->glyphs,game->scene_selected?"true":"false",rd_u32(STAGE_CALLBACK));
+    printf("{\"frames\":%u,\"screen\":\"%s\",\"mode\":%u,\"glyphs\":%u,\"record_updates\":%u,\"scene_selected\":%s,\"stage\":\"%06X\",\"cpu_emulation\":false,\"chipset_emulation\":false}\n",game->ticks,native_frontend_screen(game),native_menu_selected_mode(game),game->glyphs,game->record_updates,game->scene_selected?"true":"false",rd_u32(STAGE_CALLBACK));
     result=0; goto done;
 sdl_error:
     fprintf(stderr,"SDL: %s\n",SDL_GetError());

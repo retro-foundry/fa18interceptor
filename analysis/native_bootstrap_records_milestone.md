@@ -44,3 +44,36 @@ completion of the bootstrap record/refresh call chain only. Ongoing selection,
 rendering and simulation are the larger remaining work. This estimate does not
 measure whole-game completion. Copper fade is excluded; no sealed full replay
 was rerun for this batch.
+
+## Follow-up: repeated setup updates and active dispatch
+
+The runner now repeats the record/context slice after its source post-input
+stage tick when POST_INPUT_AUX permits it. The 4000-frame focused Free Flight
+run performs 12 record updates, exposed by `record_updates` diagnostics. The
+source input/view children and drawing sequence between these stages remain
+unconnected; this is not a complete C0EFD4 implementation. UPDATE_TICK scheduling
+and periodic region work remain open. C1072E remains the endpoint.
+
+The C23A7E dispatch owner now returns its existing working values in C, allowing
+the native loop to use the original keep/clear decision. Companion-record state
+is retained from the source slot-loop events. The C2D970 inverse matrix child
+is connected for the source's cell-only route. Reference adapters keep the same
+observations and ignore the added C return value.
+
+`check_records.py` now checks both native boot and native Free Flight setup
+exports. With `--reference build/native-flight/source.ram`, it also checks an
+existing original frame-3035 export, exercising active slot 14 and its cell
+matrix. All three inputs match original C1C63E RAM outside the guest stack.
+This validates the record composition for those states; it does not establish
+that native startup has reached the same full game state as the original.
+The focused flight-start test confirms ongoing updates execute in the runner.
+C23A7E controlled/original-child proofs pass 64 cases each with full CPU/SR/RAM.
+Both reference targets and native build; the 14 CTests excluding menu pass.
+
+The native setup banner currently displays a premature crash message. The
+native root still has its bootstrap kind while the later original checkpoint
+has aircraft kind $11. The remaining source command/context stages and buffer
+presentation need tracing; this batch does not substitute a new aircraft state
+or claim to fix the banner. No full replay was run. Estimated flight-start
+wiring is now about 60%, based on the added repeated record route and dispatch
+children, with input, world rendering and flight simulation still open.

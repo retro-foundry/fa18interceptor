@@ -18,6 +18,7 @@ add_executable(fa18_native main.c
     ../game/flight_geometry.c ../game/control_input.c ../game/plane_tests.c
     ../game/flight_motion_helpers.c ../game/record_region_probe.c
     ../game/selector_origin.c
+    ../game/main_loop_flight_controls.c
     ../game/command_publication.c ../game/cockpit.c
     ../game/disk.c ../game/hunk.c ../romfree/media.c ../amiga/sha256.c
     ../amiga/ilbm.c)

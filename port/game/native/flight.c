@@ -43,13 +43,14 @@ static void storage_child(void *context,enum SceneBootstrapChild child) {
     default: fprintf(stderr,"native storage child unavailable: %u\n",(unsigned)child); abort();
     }
 }
-void native_flight_initialize(void) {
+void native_flight_initialize(NativeFrontend *game) {
     /* C11B0E clears sixteen longs through this pointer. Ordinary host
      * allocation; contents are produced by game owners, never a capture. */
     wr_u32(LONG_TABLE,0x3000);
     int32_t position[3]={0};
     const SceneBootstrapHooks hooks={storage_child,NULL,position};
     bootstrap_scene(&hooks);
+    game->record_updates=1;
 }
 static void refresh_child(void *context,enum ContextRefreshChild child) {
     (void)context;
@@ -129,4 +130,13 @@ void native_flight_tick(NativeFrontend *game) {
     if(rd_u32(STAGE_CALLBACK)==0xc1072e) return;
     const PostInputTickHooks hooks={stage,NULL,game};
     run_post_input_tick(&hooks);
+    /* C0EFD4 follows its stage tick with the record/context work while
+     * POST_INPUT_AUX permits updates. The intervening input/view and draw
+     * children remain pending; this is the connected record slice only. */
+    if(rd_u8(POST_INPUT_AUX)) {
+        native_records_update();
+        ++game->record_updates;
+        const ContextRefreshHooks refresh={refresh_child,NULL,game};
+        refresh_context_packet(&refresh);
+    }
 }

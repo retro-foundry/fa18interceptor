@@ -49,7 +49,7 @@ typedef struct {
     void *context;
 } FlightHooks;
 void advance_main_loop_flight_controls(gaddr frame,const FlightHooks *h);
-void advance_main_loop_flight_record(FlightWorking w,const FlightHooks *h);
+FlightWorking advance_main_loop_flight_record(FlightWorking w,const FlightHooks *h);
 void begin_main_loop_mission_reset(const FlightHooks *h);
 void normalise_main_loop_control_vector(gaddr frame,const FlightHooks *h);
 void classify_main_loop_record_range(FlightWorking w,const FlightHooks *h);

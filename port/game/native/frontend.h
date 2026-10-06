@@ -12,6 +12,7 @@ typedef struct {
     uint16_t palette[32];
     uint8_t indices[320*256];
     unsigned glyphs;
+    unsigned record_updates;
     unsigned shift_keys;
     int name_finished;
     int scene_selected;
