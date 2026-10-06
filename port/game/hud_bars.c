@@ -9,6 +9,10 @@
 #include "render_polygon.h"
 #include "render_span.h"
 #include "render_state.h"
+#ifdef FA18_NATIVE
+#include "native/raster.h"
+#include <stdlib.h>
+#endif
 
 #define ROW_BYTES 40
 
@@ -35,6 +39,10 @@ void fill_bar_words(uint16_t con0, int16_t plane, uint32_t cursor, int16_t shown
     /* A cut end is a whole word. */
     if (shown_right) last_mask = 0xFFFF;
     if (cut_left) first_mask = 0xFFFF;
+#ifdef FA18_NATIVE
+    if(con0!=BAR_CLEAR && con0!=BAR_SET) abort();
+    native_raster_bar(dest,(uint16_t)(size-cut),(int16_t)(cut*2+modulo),first_mask,last_mask,con0==BAR_SET);
+#else
     wait_blitter();
     custom_write(BLTCON0, con0);
     custom_write(BLTCON1, 0);
@@ -46,6 +54,7 @@ void fill_bar_words(uint16_t con0, int16_t plane, uint32_t cursor, int16_t shown
     custom_write_ptr(BLTCPT, dest);
     custom_write_ptr(BLTDPT, dest);
     custom_write(BLTSIZE, (uint16_t)(size - cut));
+#endif
 }
 
 int fill_bar(uint16_t con0, int16_t plane, uint32_t rows, int16_t position, int16_t words, uint16_t size,
@@ -118,6 +127,9 @@ void draw_mode_bar(void) {
         size = (uint16_t)(size - cut);
         modulo = (uint16_t)(cut * 2 + 1);
         dest = plane_address(0) + (gaddr)cursor;
+#ifdef FA18_NATIVE
+        native_raster_panel_inverted(MODE_IMAGE+skip,mask+skip,dest,size,(int16_t)modulo,(int16_t)(modulo-1+0x25));
+#else
         wait_blitter();
         custom_write(BLTCON0, 0x0F3A);
         custom_write(BLTCON1, 0);
@@ -132,6 +144,7 @@ void draw_mode_bar(void) {
         custom_write_ptr(BLTCPT, dest);
         custom_write_ptr(BLTDPT, dest);
         custom_write(BLTSIZE, size);
+#endif
     }
     if (rd_u8(record + 2) & 0x80) {
         int32_t x0 = (int32_t)0xE + rd_s16(SPAN_ORIGIN_Y), x1 = (int32_t)0xC + rd_s16(SPAN_ORIGIN_Y);
@@ -166,6 +179,10 @@ void blit_image(uint16_t con0, uint32_t mask, gaddr images, uint32_t rows, int16
     for (k = 0; k < 4; k++) {
         gaddr dest = plane_address((int16_t)(4 * k)) + (gaddr)cursor;
         uint32_t image = rd_u32(rd_u32(images + (gaddr)(4 * k))) + skip;
+#ifdef FA18_NATIVE
+        if(con0!=0x0fce) abort();
+        native_raster_panel_image(mask,image,dest,size,(int16_t)source_modulo,(int16_t)(source_modulo-1+modulo));
+#else
         wait_blitter();
         if (k == 0) {
             custom_write(BLTCON1, 0);
@@ -182,6 +199,7 @@ void blit_image(uint16_t con0, uint32_t mask, gaddr images, uint32_t rows, int16
         custom_write_ptr(BLTCPT, dest);
         custom_write_ptr(BLTDPT, dest);
         custom_write(BLTSIZE, size);
+#endif
     }
 }
 
@@ -223,6 +241,9 @@ void draw_compass_tape(void) {
         shift = (uint16_t)((16 - (half & 15)) << 12);
     }
     source = COMPASS_IMAGE + (uint32_t)((half & 0xF0) >> 3) + (uint32_t)(int32_t)(int16_t)(position * 2);
+#ifdef FA18_NATIVE
+    native_raster_compass(source,dest,(uint16_t)(0x1c3-cut),(int16_t)(cut*2+7),(int16_t)(cut*2+0x23),first_mask,last_mask,shift>>12);
+#else
     wait_blitter();
     custom_write(BLTCON0, 0x073A);
     custom_write(BLTCON1, shift);
@@ -236,6 +257,7 @@ void draw_compass_tape(void) {
     custom_write_ptr(BLTCPT, dest);
     custom_write_ptr(BLTDPT, dest);
     custom_write(BLTSIZE, (uint16_t)(0x1C3 - cut));
+#endif
     wr_u32(LINE_STYLE, 0xFFFFF);
     across = (int32_t)0xD0 + rd_s16(SPAN_ORIGIN_Y);
     if (across < 0 || (int16_t)across >= 0x140) return;
@@ -265,6 +287,9 @@ void draw_panel_frame(void) {
             for (k = 0; k < 4; k++) {
                 gaddr dest = plane_address((int16_t)(4 * k)) + (gaddr)cursor;
                 uint32_t image = rd_u32(rd_u32(FRAME_PLANE_IMAGES + (gaddr)(4 * k))) + skip;
+#ifdef FA18_NATIVE
+                native_raster_panel_copy(image,dest,size,(int16_t)modulo);
+#else
                 wait_blitter();
                 if (k == 0) {
                     custom_write(BLTCON1, 0);
@@ -274,6 +299,7 @@ void draw_panel_frame(void) {
                     custom_write(BLTDMOD, modulo);
                 }
                 restart_blit_ad(0x09F0, image, dest, size);
+#endif
             }
         }
     }
@@ -296,6 +322,9 @@ void draw_panel_frame(void) {
     cursor += (int16_t)(row * 40);
     for (k = 0; k < 4; k++) {
         gaddr dest = plane_address((int16_t)(4 * k)) + (gaddr)cursor;
+#ifdef FA18_NATIVE
+        native_raster_bar(dest,size,(int16_t)modulo,0xffff,0xffff,k>=2);
+#else
         wait_blitter();
         if (k == 0) {
             custom_write(BLTCON1, 0);
@@ -306,6 +335,7 @@ void draw_panel_frame(void) {
             custom_write(BLTDMOD, modulo);
         }
         restart_blit_cd(k < 2 ? BAR_CLEAR : BAR_SET, dest, size);
+#endif
     }
 }
 
@@ -341,6 +371,9 @@ void draw_panel_mark(void) {
     first_mask = position ? 0xFFFF : 0x0FFF;
     cut = (int16_t)(result + position);
     dest = rd_u32(rd_u32(PAGE_PLANE_TABLE) + 4) + (uint32_t)cursor;
+#ifdef FA18_NATIVE
+    native_raster_mark_clear(MARK_PANEL_IMAGE,dest,(uint16_t)(MARK_PANEL_SIZE-cut),(int16_t)(cut*2+MARK_PANEL_MODULO));
+#else
     wait_blitter();
     custom_write(BLTCON0, 0x0722);
     custom_write(BLTCON1, 0);
@@ -354,6 +387,7 @@ void draw_panel_mark(void) {
     custom_write_ptr(BLTCPT, dest);
     custom_write_ptr(BLTDPT, dest);
     custom_write(BLTSIZE, (uint16_t)(MARK_PANEL_SIZE - cut));
+#endif
 
     draw_mark_polygon();
 

@@ -3,6 +3,7 @@
 #include "records.h"
 #include "setup.h"
 #include "scene.h"
+#include "hud.h"
 #include "../globals.h"
 #include "../menu_transition.h"
 #include "../scene_dispatch.h"
@@ -151,14 +152,15 @@ void native_flight_tick(NativeFrontend *game) {
      * endpoint until their distinct scene/record-update paths are owned. */
     if(rd_u8(MODE_SELECT)!=1) return;
     native_records_set_clock(game->ticks);
+    const uint16_t saved_tick=rd_u16(UPDATE_TICK);
     const InputDeviceHooks palette={palette_child,NULL,game};
     advance_viewport_palette(PALETTE_FRAME,&palette);
     const PostInputTickHooks hooks={stage,NULL,game};
     run_post_input_tick(&hooks);
     /* C0EFD4 follows its stage tick with the record/context work while
-     * POST_INPUT_AUX permits updates. Input/control updates remain pending;
-     * view projection and terrain now
-     * follow the record/context slice in their original order. */
+     * POST_INPUT_AUX permits updates. View/control, projection, terrain and
+     * the HUD/panel slice follow the record/context work. Complete message,
+     * clock and end-of-frame ordering remains pending. */
     if(rd_u8(POST_INPUT_AUX)) {
         update_view_controls(); /* C0F002, before the C1C63E record pass. */
         native_records_update();
@@ -167,5 +169,7 @@ void native_flight_tick(NativeFrontend *game) {
         const ContextRefreshHooks refresh={refresh_child,NULL,game};
         refresh_context_packet(&refresh);
         native_scene_draw(game);
+        native_hud_draw(saved_tick);
+        ++game->hud_frames;
     }
 }

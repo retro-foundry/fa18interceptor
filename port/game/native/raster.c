@@ -30,6 +30,68 @@ void native_raster_line(gaddr plane,const LineSetup *line,PlaneOp op,int one_dot
 static unsigned width(uint16_t size) { return (size&63u)?size&63u:64u; }
 static unsigned height(uint16_t size) { return (size>>6)?size>>6:1024u; }
 
+void native_raster_panel_copy(gaddr image,gaddr dest,uint16_t size,int16_t modulo) {
+    unsigned words=width(size);
+    int stride=2*(int)words+(int16_t)((uint16_t)modulo&0xfffeu);
+    for(unsigned y=0;y<height(size);++y)
+        for(unsigned x=0;x<words;++x)
+            wr_u16(dest+y*stride+2*x,rd_u16(image+y*stride+2*x));
+}
+void native_raster_panel_image(gaddr mask,gaddr image,gaddr dest,uint16_t size,int16_t source_modulo,int16_t dest_modulo) {
+    unsigned words=width(size);
+    int source_stride=2*(int)words+(int16_t)((uint16_t)source_modulo&0xfffeu);
+    int dest_stride=2*(int)words+(int16_t)((uint16_t)dest_modulo&0xfffeu);
+    for(unsigned y=0;y<height(size);++y)
+        for(unsigned x=0;x<words;++x) {
+            unsigned from=y*source_stride+2*x,to=y*dest_stride+2*x;
+            uint16_t a=rd_u16(mask+from),b=rd_u16(image+from),c=rd_u16(dest+to);
+            wr_u16(dest+to,(uint16_t)(b|(~a&c)));
+        }
+}
+void native_raster_bar(gaddr dest,uint16_t size,int16_t modulo,uint16_t first,uint16_t last,int set) {
+    unsigned words=width(size);
+    int stride=2*(int)words+(int16_t)((uint16_t)modulo&0xfffeu);
+    for(unsigned y=0;y<height(size);++y)
+        for(unsigned x=0;x<words;++x) {
+            uint16_t mask=0xffff;
+            if(!x) mask&=first;if(x==words-1) mask&=last;
+            gaddr at=dest+y*stride+2*x;uint16_t old=rd_u16(at);
+            wr_u16(at,set?(uint16_t)(mask|old):(uint16_t)(~mask&old));
+        }
+}
+void native_raster_panel_inverted(gaddr mask,gaddr pattern,gaddr dest,uint16_t size,int16_t source_modulo,int16_t dest_modulo) {
+    unsigned words=width(size);
+    int source_stride=2*(int)words+(int16_t)((uint16_t)source_modulo&0xfffeu);
+    int dest_stride=2*(int)words+(int16_t)((uint16_t)dest_modulo&0xfffeu);
+    for(unsigned y=0;y<height(size);++y)
+        for(unsigned x=0;x<words;++x) {
+            unsigned from=y*source_stride+2*x,to=y*dest_stride+2*x;
+            uint16_t a=rd_u16(mask+from),b=rd_u16(pattern+from),c=rd_u16(dest+to);
+            wr_u16(dest+to,(uint16_t)((a&~b)|(~a&c)));
+        }
+}
+void native_raster_compass(gaddr image,gaddr dest,uint16_t size,int16_t source_modulo,int16_t dest_modulo,uint16_t first,uint16_t last,unsigned shift) {
+    unsigned words=width(size);uint16_t previous=0;
+    int source_stride=2*(int)words+(int16_t)((uint16_t)source_modulo&0xfffeu);
+    int dest_stride=2*(int)words+(int16_t)((uint16_t)dest_modulo&0xfffeu);
+    for(unsigned y=0;y<height(size);++y)
+        for(unsigned x=0;x<words;++x) {
+            uint16_t a=0xffff,b=rd_u16(image+y*source_stride+2*x);
+            uint16_t shifted=(uint16_t)(((uint32_t)previous<<16|b)>>shift);previous=b;
+            if(!x) a&=first;if(x==words-1) a&=last;
+            gaddr at=dest+y*dest_stride+2*x;uint16_t c=rd_u16(at);
+            wr_u16(at,(uint16_t)((a&~shifted)|(~a&c)));
+        }
+}
+void native_raster_mark_clear(gaddr image,gaddr dest,uint16_t size,int16_t dest_modulo) {
+    unsigned words=width(size);int dest_stride=2*(int)words+(int16_t)((uint16_t)dest_modulo&0xfffeu);
+    for(unsigned y=0;y<height(size);++y)
+        for(unsigned x=0;x<words;++x) {
+            gaddr at=dest+y*dest_stride+2*x;
+            wr_u16(at,(uint16_t)(~rd_u16(image+y*2*words+2*x)&rd_u16(at)));
+        }
+}
+
 void native_raster_fill(gaddr end,uint16_t size) {
     for(unsigned y=0;y<height(size);++y) {
         int inside=0;

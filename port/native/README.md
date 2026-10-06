@@ -28,9 +28,12 @@ use the source throttle controls, and arrow keys use the source stick controls.
 The preview now draws the source horizon and normal/wide terrain packets into
 ordinary host planes, followed by the original scene placement/model streams,
 ground descriptors, aircraft hulls and fixed matrix mark. Grounded aircraft
-motion and stick recording now execute; cockpit/HUD and takeoff remain pending.
+motion and stick recording now execute. Cockpit/HUD marks, tapes, readouts,
+panel images, compass and indicator/mode bars are connected; takeoff and
+complete frame ordering remain pending.
 The record/context slice repeats during setup; headless statistics expose its
-`record_updates`, `scene_frames`, `terrain_polygons` and `model_calls` counts. The banner CRACKED BY A-HA is original disk message $47;
+`record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
+`hud_frames` counts. The banner CRACKED BY A-HA is original disk message $47;
 the earlier crash-message description was incorrect. Source timer requests use
 seconds/microseconds from the native runner's deterministic PAL frame clock.
 Other selected modes stop at their transition banner. Audio remains suppressed.
@@ -47,6 +50,7 @@ python tools/native/check_flight_start.py --runner build/native/fa18_native.exe
 python tools/native/check_records.py --runner build/native/fa18_native.exe
 python tools/native/check_raster.py --runner build/native/fa18_native.exe
 python tools/native/check_models.py --runner build/native/fa18_native.exe
+python tools/native/check_hud.py --runner build/native/fa18_native.exe
 ```
 
 Build ownership is `port/recomp/CMakeLists.txt` -> `port/native/CMakeLists.txt`.
@@ -118,6 +122,10 @@ motion now execute source owners directly. Throttle motion and stick ramp/releas
 are checked at seven native checkpoints against original C12098/C1C63E non-stack
 RAM. See [`../../analysis/native_flight_controls_milestone.md`](../../analysis/native_flight_controls_milestone.md).
 Unconnected flight command/dynamics children fail explicitly when reached.
-Cockpit/HUD, full flight, positive shadow strips and the record-expiry
+Nineteen cockpit/HUD instrument and panel owners now execute through direct
+host drawing. Three checkpoints each pass 95 original-instruction cases across
+centered, panned and clipped views. See
+[`../../analysis/native_hud_milestone.md`](../../analysis/native_hud_milestone.md).
+Remaining HUD parents, full flight, positive shadow strips and the record-expiry
 transition remain unfinished. Setup correctness is separate from frame cadence
 and recorded gameplay acceptance.

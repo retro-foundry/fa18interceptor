@@ -1,5 +1,5 @@
 /* Connected C0EFD4 scene slice: view, terrain, scenery and aircraft records.
- * Cockpit/HUD submissions are still pending. */
+ * The HUD/panel slice follows in native/hud.c. */
 #include "scene.h"
 #include "model.h"
 #include "../scene_placements.h"

@@ -79,7 +79,15 @@ requests use the same deterministic host clock in both validation paths.
 Evidence: `analysis/native_flight_controls_milestone.md`. Rough startup estimate
 now 95% (previously 90%), scoped to Free Flight startup wiring. This demonstrates
 grounded motion and stick recording, not takeoff or full flight parity.
-Next: cockpit/HUD and remaining flight-record/input children.
+Native cockpit/HUD now connects nineteen instrument/panel owners: marks, tapes,
+numeric readouts, threat lights, frame/image, compass and indicator/mode bars.
+Their native branches perform direct host plane operations. Three native
+checkpoints exercise 780/1307/1707 HUD frames; 95 original-instruction cases at
+each checkpoint match all non-stack RAM, including planes. Evidence:
+`analysis/native_hud_milestone.md`. Rough Free Flight startup wiring estimate
+now 97% (previously 95%). Complete frame ordering/cadence and full flight remain
+open; this is not recorded-run acceptance.
+Next: complete frame ownership, remaining HUD/input and flight-record children.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
 Audio currently takes the original suppression path. Source data still uses
