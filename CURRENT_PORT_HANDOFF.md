@@ -22,7 +22,10 @@ Native Free Flight now runs the C08F26 storage/pose/template-gate prefix,
 C0FECE countdown/scene constructors, C101FC/C10228 viewport transition and
 C10678 mode messages. Initial player pose, camera and all three template-gate
 banks match a focused original checkpoint. Full record state still differs;
-the final bootstrap record update is not connected. Endpoint: `scene-setup`,
+the final bootstrap record update and context refresh are now connected.
+The native record composition matches original C1C63E non-stack RAM at the
+tested bootstrap checkpoint. Ongoing updates and active record dispatch remain
+open; see `analysis/native_bootstrap_records_milestone.md`. Endpoint: `scene-setup`,
 C1072E. Other modes still stop at their banner. No native flight runs yet.
 Evidence: `analysis/native_flight_start_milestone.md`. Rough flight-start
 estimate 50%; this does not measure whole-game completeness.

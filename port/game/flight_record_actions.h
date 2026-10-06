@@ -32,7 +32,7 @@ typedef struct {
     void *context;
 } FlightActionHooks;
 /* $C230E8/$C23116: select the original record action from its low flag nibble. */
-void select_flight_record_action(FlightActionState w,int allow_release,const FlightActionHooks *h);
+int select_flight_record_action(FlightActionState w,int allow_release,const FlightActionHooks *h);
 /* $C23186: the original nine-word sound argument table. */
 void queue_flight_record_action_sound(const FlightActionHooks *h);
 /* $C23228/$C233AA/$C23578: magnitude alert, record clone and control stream. */

@@ -1,5 +1,5 @@
 add_executable(fa18_native main.c
-    ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c
+    ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c
     ../game/main_loop_control_messages.c ../game/text.c ../game/menu_setup.c
     ../game/message_reset.c ../game/menu_available.c ../game/menu_table.c ../game/menu_transition.c
     ../game/command_selection.c ../game/indexed_commands.c ../game/numbers.c
@@ -10,6 +10,15 @@ add_executable(fa18_native main.c
     ../game/placement_order.c ../game/renderer_workspace.c ../game/audio.c ../game/view_transform.c ../game/messages.c
     ../game/post_input_tick.c ../game/scene_bootstrap.c ../game/template_gates.c
     ../game/input_device_callbacks.c ../game/menu_return.c ../game/menu_followup.c
+    ../game/update_stage.c ../game/record_update_stage.c ../game/flight_record_actions.c
+    ../game/flight_dynamics.c ../game/flight_recorder.c ../game/record_steering.c
+    ../game/record_matrix_update.c ../game/indexed_record_update.c ../game/postflight_scheduler.c
+    ../game/candidate_record_update.c ../game/candidate_record_scan.c
+    ../game/candidate_level_walk.c
+    ../game/flight_geometry.c ../game/control_input.c ../game/plane_tests.c
+    ../game/flight_motion_helpers.c ../game/record_region_probe.c
+    ../game/selector_origin.c
+    ../game/command_publication.c ../game/cockpit.c
     ../game/disk.c ../game/hunk.c ../romfree/media.c ../amiga/sha256.c
     ../amiga/ilbm.c)
 target_include_directories(fa18_native PRIVATE ../game ../amiga ../romfree)

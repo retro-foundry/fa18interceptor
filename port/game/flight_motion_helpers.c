@@ -69,12 +69,13 @@ static MotionState divide_projection(MotionState w,unsigned first_site,const Mot
     }
     MUL(value,MH_VALUE,w.y); MUL(x,MH_X,w.y); ASL(value,MH_VALUE,4); ASL(x,MH_X,4); return w;
 }
-void project_record_motion(MotionState w,const MotionHooks *h) {
+MotionState project_record_motion(MotionState w,const MotionHooks *h) {
     L(value,MH_VALUE,w.nx); L(selector,MH_SELECTOR,w.ny); L(x,MH_X,w.nz); ASL(selector,MH_SELECTOR,8);
-    if(!w.selector) return;
+    if(!w.selector) return w;
     L(y,MH_Y,rd_u32(w.record+24)); ASL(y,MH_Y,8); NEG(y,MH_Y); ALL(value,MH_VALUE,4); ALL(x,MH_X,4);
     w=divide_projection(w,0,h);
     add_position(h,w.record+20,w.value); store_long(h,w.record+24,0); add_position(h,w.record+28,w.x);
+    return w;
 }
 void project_scene_motion(MotionState w,gaddr frame,const MotionHooks *h) {
     L(value,MH_VALUE,rd_u32(frame+8)); ALW(value,MH_VALUE,6); P(scene,MH_SCENE,0xc45c72u); P(scene,MH_SCENE,indexed(w.scene,w.value));

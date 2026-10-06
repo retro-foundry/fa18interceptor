@@ -13,12 +13,14 @@ Native continuation milestones (functional scope, not instruction counts):
 - Complete: native menu navigation, mode banners, source-gated mission list,
   flight-log summary, Escape return, reset/save/reload. Source owners and seven
   settled-screen comparisons: `../analysis/native_menu_milestone.md`.
-- Connected, partial: C08F26 storage/pose/template-gate prefix, Free Flight
+- Connected, partial: full C08F26 bootstrap including native record updates
+  and context refresh, Free Flight
   C0FECE delayed scene selection, C101FC/C10228 viewport transition and C10678
   messages. Initial pose/camera and gate banks match a source checkpoint.
-  Roughly 50% of the flight-start milestone; full record state still differs.
-  See `../analysis/native_flight_start_milestone.md`.
-- Next: finish native bootstrap record updates (C1C63E/C22C80), C1072E and
+  Roughly 55% of flight-start wiring; later full record state still differs.
+  See `../analysis/native_flight_start_milestone.md` and
+  `../analysis/native_bootstrap_records_milestone.md` for bounded evidence.
+- Next: ongoing updates and active-record children (C1C63E/C22C80), C1072E and
   Free Flight location/aircraft controls, direct cockpit/world drawing and
   connected flight simulation. Current native endpoint is `scene-setup`.
 - Still open: other modes, active-flight exit/restart, outcomes/progression,

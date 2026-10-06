@@ -261,7 +261,7 @@
     {
       "entry": "C1B4D0",
       "function": "set_throttle_input",
-      "source": "port/game/player_input.c",
+      "source": "port/game/control_input.c",
       "callers": [
         {
           "entry": "C1B27E",
@@ -279,7 +279,7 @@
     {
       "entry": "C1B4D4",
       "function": "set_throttle_input",
-      "source": "port/game/player_input.c",
+      "source": "port/game/control_input.c",
       "callers": [
         {
           "entry": "C1B27E",
@@ -297,7 +297,7 @@
     {
       "entry": "C1B4DE",
       "function": "set_throttle_input",
-      "source": "port/game/player_input.c",
+      "source": "port/game/control_input.c",
       "callers": [
         {
           "entry": "C1B27E",
@@ -315,7 +315,7 @@
     {
       "entry": "C1B4D8",
       "function": "release_throttle_keys",
-      "source": "port/game/player_input.c",
+      "source": "port/game/control_input.c",
       "callers": [
         {
           "entry": "C1B27E",

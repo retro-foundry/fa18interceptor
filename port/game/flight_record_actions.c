@@ -45,7 +45,7 @@ static void copy_record(FlightActionState *w,const FlightActionHooks *h) {
 #define CWORD(a,b) observe(h,FA_COMPARE_WORD,FA_PRIMARY,(uint16_t)(a),(uint16_t)(b))
 #define CBYTE(a,b) observe(h,FA_COMPARE_BYTE,FA_PRIMARY,(uint8_t)(a),(uint8_t)(b))
 #define CLONG(a,b) observe(h,FA_COMPARE_LONG,FA_PRIMARY,(uint32_t)(a),(uint32_t)(b))
-void select_flight_record_action(FlightActionState w,int allow_release,const FlightActionHooks *h) {
+int select_flight_record_action(FlightActionState w,int allow_release,const FlightActionHooks *h) {
     uint8_t code;
     if(test_word(h,0xc459c2u)) goto no_action;
     P(source,FA_SOURCE,0xc46184u); B(primary,FA_PRIMARY,rd_u8(w.source+124));
@@ -62,9 +62,9 @@ void select_flight_record_action(FlightActionState w,int allow_release,const Fli
     CBYTE(code,3); if(code!=3) goto no_action;
     consume(h,FA_MANOEUVRE_ACTION);
 action_done:
-    L(primary,FA_PRIMARY,1); return;
+    L(primary,FA_PRIMARY,1); return 1;
 no_action:
-    L(primary,FA_PRIMARY,0);
+    L(primary,FA_PRIMARY,0); return 0;
 }
 void queue_flight_record_action_sound(const FlightActionHooks *h) {
     observe(h,FA_POINTER,FA_RECORD,0xc23174u,0); observe(h,FA_SOUND_ARGUMENTS,FA_PRIMARY,0xc23174u,0); consume(h,FA_SOUND_MESSAGE);

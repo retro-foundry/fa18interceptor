@@ -18,7 +18,7 @@ Digit 7 uses the original next-mission selector. Digit 8 opens flight-log
 statistics. Escape returns from the mission list or log to the main menu.
 In the log, SHIFT-2 resets the 39 words, and 1 saves the exact 78 bytes. A reset
 pilot goes through enlistment/callsign entry again. Closing the window exits.
-Free Flight (digit 2) now runs source scene-storage preparation, delayed scene
+Free Flight (digit 2) now runs the complete source bootstrap, delayed scene
 selection and viewport/message stages. It stops at `scene-setup` / C1072E;
 location/aircraft controls and cockpit/world rendering are still pending.
 Other selected modes stop at their transition banner. Audio remains suppressed.
@@ -32,6 +32,7 @@ build/native/fa18_native.exe --headless --frames 1800 --ppm build/credits.ppm
 python tools/native/check_frontend.py --runner build/native/fa18_native.exe
 python tools/native/check_menu.py --runner build/native/fa18_native.exe
 python tools/native/check_flight_start.py --runner build/native/fa18_native.exe
+python tools/native/check_records.py --runner build/native/fa18_native.exe
 ```
 
 Build ownership is `port/recomp/CMakeLists.txt` -> `port/native/CMakeLists.txt`.
@@ -55,6 +56,10 @@ it supplies no runtime state. Initial player pose, camera and template-gate
 banks match a focused original checkpoint. Full record state, update timing and
 active gameplay remain unverified; see
 [`../../analysis/native_flight_start_milestone.md`](../../analysis/native_flight_start_milestone.md).
+Bootstrap record updates and context refresh now run through native children.
+The focused record oracle matches original non-stack RAM at its tested boot
+checkpoint; ongoing updates and active-record dispatch remain open. See
+[`../../analysis/native_bootstrap_records_milestone.md`](../../analysis/native_bootstrap_records_milestone.md).
 
 Authority: C0E2E8/C0E078 splash load, C0E53C/C0E78A busy delay, C11446/C11478
 credits and acknowledgement, C115BA-C1175A tour/name flow, C0FBE0 menu,

@@ -1,5 +1,6 @@
 /* Connected source stage C0FECE and its scene constructors. */
 #include "flight.h"
+#include "records.h"
 #include "../globals.h"
 #include "../menu_transition.h"
 #include "../scene_dispatch.h"
@@ -22,6 +23,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static void refresh_child(void *context,enum ContextRefreshChild child);
 static void storage_child(void *context,enum SceneBootstrapChild child) {
     int32_t *position=context;
     switch(child) {
@@ -33,6 +35,11 @@ static void storage_child(void *context,enum SceneBootstrapChild child) {
     case BOOTSTRAP_SET_OBSERVER: set_observer_position(position[0],position[1],position[2]); break;
     case BOOTSTRAP_PLACE_VIEW: reset_scene_recorder(); break;
     case BOOTSTRAP_BUILD_GATES: build_template_bit_gates(); break;
+    case BOOTSTRAP_UPDATE_RECORDS: native_records_update(); break;
+    case BOOTSTRAP_REFRESH_CONTEXT: {
+        const ContextRefreshHooks hooks={refresh_child,NULL,context};
+        refresh_context_packet(&hooks); break;
+    }
     default: fprintf(stderr,"native storage child unavailable: %u\n",(unsigned)child); abort();
     }
 }
@@ -42,7 +49,7 @@ void native_flight_initialize(void) {
     wr_u32(LONG_TABLE,0x3000);
     int32_t position[3]={0};
     const SceneBootstrapHooks hooks={storage_child,NULL,position};
-    prepare_scene_storage(&hooks);
+    bootstrap_scene(&hooks);
 }
 static void refresh_child(void *context,enum ContextRefreshChild child) {
     (void)context;
