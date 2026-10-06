@@ -12,7 +12,15 @@ credits and settled menu pixels match source OFF reference frames exactly;
 first-tour callsign editing and 78-byte save/reload pass; SDL dummy presentation
 runs. Native link-map omission check passes. Both reference builds and their
 twelve tests pass. Native settled-screen timing is not frame-parity evidence.
-Next native milestone: make numbered menu selection enter the actual game.
+Native menu continuation is now connected: original digit/function-key mode
+selection, mission availability, pilot-log summary, Escape returns, SHIFT-2
+reset and 78-byte save/reload. All five mode banners, the mission list and
+pilot log match source settled pixels exactly. Both compiler reference builds,
+the existing frontend checks and focused menu checks validate this batch.
+Evidence: `analysis/native_menu_milestone.md`.
+Next native milestone: implement C0FECE delayed scene/root/view setup, then
+Free Flight location/aircraft prompts and the actual cockpit/flight loop.
+Selected modes currently stop at their transition screen; no flight runs yet.
 Audio currently takes the original suppression path. Source data still uses
 checked address-indexed host buffers, pending typed-state migration.
 

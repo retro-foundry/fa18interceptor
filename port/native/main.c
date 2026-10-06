@@ -1,4 +1,5 @@
 #include "../game/native/frontend.h"
+#include "../game/native/menu.h"
 #include "../recomp/frame_pacer.h"
 #include <SDL.h>
 #include <stdio.h>
@@ -43,8 +44,8 @@ int main(int argc,char **argv) {
     }
     FA18FramePacer pacer; fa18_frame_pacer_init(&pacer,SDL_GetPerformanceCounter(),SDL_GetPerformanceFrequency());
     while(running && (!frames || game->ticks<frames)) {
-        while(next<events && keys[next].frame<=game->ticks) { if(keys[next].down) native_frontend_key(game,keys[next].key); ++next; }
-        if(!headless) { SDL_Event event; while(SDL_PollEvent(&event)) { if(event.type==SDL_QUIT) running=0; if(event.type==SDL_KEYDOWN && !event.key.repeat) { int key=event.key.keysym.sym; if(key>='a' && key<='z') key-=32; if(key==SDLK_RETURN) key='\r'; if(key==SDLK_BACKSPACE) key='\b'; native_frontend_key(game,key); } } }
+        while(next<events && keys[next].frame<=game->ticks) { native_frontend_event(game,keys[next].key,keys[next].down); ++next; }
+        if(!headless) { SDL_Event event; while(SDL_PollEvent(&event)) { if(event.type==SDL_QUIT) running=0; if((event.type==SDL_KEYDOWN || event.type==SDL_KEYUP) && !event.key.repeat) { int key=event.key.keysym.sym; if(key>='a' && key<='z') key-=32; if(key==SDLK_RETURN) key='\r'; if(key==SDLK_BACKSPACE) key='\b'; if(key>=SDLK_F1 && key<=SDLK_F10) key=282+key-SDLK_F1; if(key==SDLK_LSHIFT) key=304; if(key==SDLK_RSHIFT) key=303; native_frontend_event(game,key,event.type==SDL_KEYDOWN); } } }
         native_frontend_tick(game);
         if(!headless) {
             for(unsigned i=0;i<320*256;++i) { uint16_t c=game->palette[game->indices[i]]; pixels[i]=0xff000000u|(((c>>8)&15)*17u<<16)|(((c>>4)&15)*17u<<8)|((c&15)*17u); }
@@ -54,7 +55,7 @@ int main(int argc,char **argv) {
         }
     }
     if(ppm && !write_ppm(ppm,game)) { fprintf(stderr,"Cannot write PPM: %s\n",ppm); goto done; }
-    printf("{\"frames\":%u,\"screen\":\"%s\",\"glyphs\":%u,\"cpu_emulation\":false,\"chipset_emulation\":false}\n",game->ticks,native_frontend_screen(game),game->glyphs);
+    printf("{\"frames\":%u,\"screen\":\"%s\",\"mode\":%u,\"glyphs\":%u,\"cpu_emulation\":false,\"chipset_emulation\":false}\n",game->ticks,native_frontend_screen(game),native_menu_selected_mode(game),game->glyphs);
     result=0; goto done;
 sdl_error:
     fprintf(stderr,"SDL: %s\n",SDL_GetError());

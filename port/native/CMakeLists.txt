@@ -1,6 +1,8 @@
 add_executable(fa18_native main.c
-    ../game/native/frontend.c ../game/native/storage.c
+    ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c
     ../game/main_loop_control_messages.c ../game/text.c ../game/menu_setup.c
+    ../game/message_reset.c ../game/menu_available.c ../game/menu_table.c ../game/menu_transition.c
+    ../game/command_selection.c ../game/indexed_commands.c ../game/numbers.c
     ../game/disk.c ../game/hunk.c ../romfree/media.c ../amiga/sha256.c
     ../amiga/ilbm.c)
 target_include_directories(fa18_native PRIVATE ../game ../amiga ../romfree)
@@ -18,4 +20,7 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_frontend.py
                 --runner $<TARGET_FILE:fa18_native>
                 --map ${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map)
+    add_test(NAME fa18_native_menu
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_menu.py
+                --runner $<TARGET_FILE:fa18_native>)
 endif()

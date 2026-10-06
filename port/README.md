@@ -1,7 +1,8 @@
 # Active port source ownership
 
 Latest direction (2026-10-06): `fa18_native` reuses the game source with a native
-intro/menu entry, omitting CPU, translations, glue and chipset objects. Build
+intro/menu entry and connected mission/log selection, omitting CPU,
+translations, glue and chipset objects. Build
 with `python ../scripts/build_native.py` from this directory, or
 `python scripts/build_native.py` from the repository root. See
 [`native/README.md`](native/README.md). The historical restriction below is

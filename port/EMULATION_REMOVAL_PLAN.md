@@ -7,6 +7,21 @@ and chipset objects. Current milestone details are in `native/README.md`.
 Old runtime percentages below describe the reference runners and do not measure
 the native intro/menu milestone or whole-game completion.
 
+Native continuation milestones (functional scope, not instruction counts):
+
+- Complete: source splash -> credits -> pilot entry -> main menu.
+- Complete: native menu navigation, mode banners, source-gated mission list,
+  flight-log summary, Escape return, reset/save/reload. Source owners and seven
+  settled-screen comparisons: `../analysis/native_menu_milestone.md`.
+- Next: C0FECE delayed scene/root/view setup; Free Flight location and aircraft
+  prompts; direct cockpit/world drawing and connected flight updates.
+- Still open: other modes, active-flight exit/restart, outcomes/progression,
+  audio, original timing and typed game state. The transition-screen endpoint
+  does not establish active flight or whole-game completion.
+
+Use focused changed-path checks; full sealed replays are reserved for meaningful
+gameplay acceptance checkpoints. Copper fade remains excluded.
+
 Scope: the playable runners `fa18_recomp` and `fa18_romfree` built by
 `recomp/CMakeLists.txt` and `../scripts/build_recomp.py`. Written 2026-10-06
 against the tree at `9c062b80`. Read `../CURRENT_PORT_HANDOFF.md` and

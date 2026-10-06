@@ -234,15 +234,6 @@ void sort_by_depth(int16_t count) {
     }
 }
 
-void reset_message_sequence(void) {
-    wr_u16(MESSAGE_QUEUE, 0);
-    wr_u16(MESSAGE_QUEUE + 2, 0);
-    wr_u32(MESSAGE_TIMER, 0x1B8);
-    wr_u8(MESSAGE_STATE_A, 0);
-    wr_u8(MESSAGE_STATE_B, 0);
-    wr_u8(MESSAGE_STATE_C, 0);
-    wr_u8(MESSAGE_STATE_D, 0);
-}
 
 int16_t mode_offset(void) {
     int8_t mode = (int8_t)rd_u8(MODE_SELECT);

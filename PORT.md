@@ -1,7 +1,8 @@
 # The C port
 
 Latest direction (2026-10-06): `fa18_native` now runs the original intro,
-credits, pilot entry and menu using existing `port/game/` functions. Its link
+credits, pilot entry, menu selection, mission list and pilot-log controls using
+existing `port/game/` functions. Its link
 omits CPU, translations, glue and chipset objects. This initial native slice
 supersedes the incremental removal work; it is not yet a native flight port.
 Build/run instructions and remaining timing/audio/state scope are in
