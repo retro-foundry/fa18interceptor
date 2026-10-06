@@ -41,6 +41,9 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
     else if(key=='0') raw=10;
     else if(key>=282 && key<=291) raw=(unsigned)(key-282+0x50); /* E9K SDL1 F1-F10 */
     else if(key==27) raw=0x45;
+    else if(key=='\r') raw=0x44;
+    else if(key=='\b') raw=0x41;
+    else if(key==' ') raw=0x40;
     else if(key>=32 && key<127) {
         for(unsigned i=0;i<0x40;++i) if(rd_u8(0xc331ceu+i)==(uint8_t)key) { raw=i; break; }
     }

@@ -11,6 +11,8 @@ C1017E builds the mission list from the actual pilot-log availability bytes.
 The original F1-F4 selection paths accept modes 3-6 for the supplied disk;
 a zero qualification word correctly rejects F1. Digit 7 uses the original
 next-mission field, not an invented mission progression rule.
+An independent source OFF checkpoint at frame 3010 and native selection both
+choose mode 6 for digit 7 with the supplied disk record.
 
 C24E8A and `print_number`/C24F76 format the pilot-log fields, including the
 source DIVU overflow behavior. C0FE36 consumes log actions; C16406 clears all
@@ -38,9 +40,15 @@ Copper fade remains excluded from acceptance.
 
 The focused connected check covers digits 1-5, mission/log navigation and return,
 F1-F4, the qualification gate, exact reset/save/reload, and ADF immutability.
+It also covers digit 7 and the first selection after a newly entered callsign.
+Return release must reach C1AD74 to restore its signed event counter after
+C32CEE finishes name entry; otherwise the first numbered selection is lost.
+That connected first-tour -> Free Flight case matches the source banner.
 The existing intro/frontend check also validates pixels, callsign editing,
 save/reload, SDL presentation and link omission. Both MSVC and GNU reference
 runners build after the shared-source split. No full sealed replay ran.
+All fourteen registered CTests pass; the new first-tour selection edge was
+also exercised directly after the final Return-release fix.
 
 ## Remaining dependency
 

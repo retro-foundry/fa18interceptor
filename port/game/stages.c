@@ -234,7 +234,6 @@ void sort_by_depth(int16_t count) {
     }
 }
 
-
 int16_t mode_offset(void) {
     int8_t mode = (int8_t)rd_u8(MODE_SELECT);
     if (mode == 0x7E || mode == 0x7F) return 0;

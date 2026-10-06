@@ -60,6 +60,14 @@ def main():
             assert stats["screen"] == "mode-intro" and stats["mode"] == mode, stats
             assert pixels == PIXELS[digit], (digit, pixels)
         print("Modes 1-5: source selections and all five transition banners match", flush=True)
+        stats, _, _ = run("next-mission", 4000, key(3000, 55))
+        assert stats["screen"] == "mode-intro" and stats["mode"] == 6, stats
+        print("Next mission: source pilot-log field selects mode 6", flush=True)
+        entry = key(2400, 112) + key(2440, 105) + key(2480, 108)
+        entry += key(2520, 111) + key(2560, 116) + key(2680, 13) + key(3000, 50)
+        stats, pixels, _ = run("first-tour-selection", 4000, entry, bytes(78))
+        assert stats["screen"] == "mode-intro" and stats["mode"] == 1 and pixels == PIXELS[2], stats
+        print("New pilot: Return release restores the source command gate; first selection works", flush=True)
         for digit, screen in ((6, "missions"), (8, "pilot-log")):
             stats, pixels, _ = run(f"menu-{digit}", 6000, key(3000, 48 + digit))
             assert stats["screen"] == screen and pixels == PIXELS[digit], (digit, stats, pixels)

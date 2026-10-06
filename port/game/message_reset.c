@@ -11,4 +11,3 @@ void reset_message_sequence(void) {
     wr_u8(MESSAGE_STATE_C, 0);
     wr_u8(MESSAGE_STATE_D, 0);
 }
-
