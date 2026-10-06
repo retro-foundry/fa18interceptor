@@ -1,4 +1,4 @@
-"""Check native cleanup, overlays and scene labels without an original game replay."""
+"""Check native frame drawing and live map entry without an original game replay."""
 import argparse
 import json
 from pathlib import Path
@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe')
     args = parser.parse_args()
     oracles = []
-    for name in ('frame_tail', 'frame_labels'):
+    for name in ('frame_tail', 'frame_labels', 'frame_markers'):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
         subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(oracle.relative_to(ROOT)),
                         '--main', f'tools/native/native_{name}_oracle.c'], cwd=ROOT, check=True)
@@ -37,7 +37,25 @@ def main():
         for oracle in oracles:
             subprocess.run([str(oracle), str(data)], cwd=ROOT, check=True, timeout=20)
         print(f'{stats["hud_frames"]} native HUD passes reached source selection cleanup before yielding')
-    print('Native cleanup/overlays/scene labels pass; stores/grid markers and frame parity remain open')
+        replay = work / 'map.e9k'
+        events = ((1800, 32), (3000, 50), (4100, 13), (5000, 50), (5400, 49), (6200, 77))
+        replay.write_text('E9K_INPUT_V1\n'+''.join(
+            f'F {frame} K {key} 0 0 1\nF {frame+2} K {key} 0 0 0\n' for frame, key in events))
+        map_data = work / 'map.dat'
+        result = subprocess.run([str(args.runner.resolve()), '--headless', '--frames', '6500',
+            '--replay', str(replay), '--save-dir', str(work / 'map-pilot'), '--data-out', str(map_data)],
+            cwd=ROOT, check=True, capture_output=True, text=True, timeout=25)
+        stats = json.loads(result.stdout)
+        assert stats['stage'] == 'C10DAE' and stats['mode'] == 1 and stats['hud_frames'] > 500, stats
+        content = map_data.read_bytes()
+        assert content[0xC45785-0xC00000+0x80000] and content[0xC457AD-0xC00000+0x80000] == 1
+        # The last original Z-grid coordinate proves the connected loop ran
+        # in the actual frontend, beyond merely setting its two entry gates.
+        assert int.from_bytes(content[0x4B0C:0x4B0E], 'big') == 8624
+        assert not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
+        subprocess.run([str(oracles[-1]), str(map_data)], cwd=ROOT, check=True, timeout=20)
+        print('M opens the map and runs both grid axes and aircraft markers in the native frontend')
+    print('Native cleanup/overlays/scene labels/grid markers pass; stores and frame parity remain open')
 
 
 if __name__ == '__main__':

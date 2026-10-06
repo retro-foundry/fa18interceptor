@@ -9,6 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: connect C2B564's grid/aircraft-marker tree and map-entry voice
+  release. M opens the source map and runs both grid axes in actual native
+  Free Flight. 385 source comparisons, 640 legacy cases, carrier
+  save/restart/reload, the unchanged native demo and 12 reference contracts
+  pass. See `../analysis/native_frame_markers_milestone.md`. **5/6 (about 83%)**
+  of the identified missing frame owners are connected; only C30A00 stores
+  icons remain. This is a connection inventory, not whole-game effort.
+  Recorded frame parity stays **0/3 accepted**, startup lead 37 ticks;
+  Copper fade excluded.
+
 - Complete: connect C2B3C2 scene-position labels on both original frame-loop
   branches, using original scene data and native C2ECA8/C32A44 children.
   256 full source comparisons (41 visible number cases), 128 legacy cases,

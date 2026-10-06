@@ -9,7 +9,7 @@
 
 /* C32A44: choose one of four glyph shifts for a screen X; align the glyph
  * window to an even byte and use the source's wrapped 40-byte row offset. */
-static void draw_position_number(int16_t x,int16_t y,int16_t number,uint16_t width) {
+void native_draw_position_number(int16_t x,int16_t y,int16_t number,uint16_t width) {
     wr_u32(DISPLAY_VALUE,(uint32_t)(int32_t)number);
     pack_display_value();
     gaddr layout=0xc3198cu+4*(2+((uint16_t)x&15)/4);
@@ -29,7 +29,7 @@ static MarkerState label_child(void *context,enum MarkerChild child,MarkerState 
                                 (int16_t)values.x,-1,0,0); /* C2ECA8 */
         break;
     case MM_SCENE_LABEL:
-        draw_position_number((int16_t)values.offset,(int16_t)values.screen_y,
+        native_draw_position_number((int16_t)values.offset,(int16_t)values.screen_y,
                              (int16_t)values.x,(uint16_t)values.y);
         break;
     default: abort();

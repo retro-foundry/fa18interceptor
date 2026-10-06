@@ -45,7 +45,9 @@ unsigned native_menu_selected_mode(const NativeFrontend *game) {
 }
 static ContextCommandResult context_child(void *context,enum ContextCommandChild which,const ContextCommandInput *input) {
     (void)context; (void)input;
-    if(which==CONTEXT_COMMAND_REQUEST_VOICES) {
+    /* Both source call sites invoke C0F4A6; map entry uses the same owner
+     * as the already-connected request command. */
+    if(which==CONTEXT_COMMAND_REQUEST_VOICES || which==CONTEXT_COMMAND_MAP_VOICES) {
         free_voice(0); free_voice(1); free_voice(2); free_voice(3);
         return (ContextCommandResult){12,{0,0,0}};
     }

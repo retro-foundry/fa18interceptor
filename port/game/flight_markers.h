@@ -35,9 +35,9 @@ typedef struct {
     void *context;
     MarkerState (*consume_values)(void *context,enum MarkerChild child,MarkerState values);
 } MarkerHooks;
-void transform_marker_point(MarkerState w,const MarkerHooks *h); /* C2AFFA */
+MarkerState transform_marker_point(MarkerState w,const MarkerHooks *h); /* C2AFFA */
 void draw_scene_position_labels(MarkerState w,const MarkerHooks *h); /* C2B3C2 */
 void draw_view_grid_and_markers(MarkerState w,const MarkerHooks *h); /* C2B564 */
-void draw_class_twenty_marker(MarkerState w,const MarkerHooks *h); /* C2B928 */
-void draw_record_position_marker(MarkerState w,gaddr frame,const MarkerHooks *h); /* C2B952 */
+MarkerState draw_class_twenty_marker(MarkerState w,const MarkerHooks *h); /* C2B928 */
+MarkerState draw_record_position_marker(MarkerState w,gaddr frame,const MarkerHooks *h); /* C2B952 */
 #endif

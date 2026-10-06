@@ -8,6 +8,7 @@
 #include "input.h"
 #include "frame_tail.h"
 #include "frame_labels.h"
+#include "frame_markers.h"
 #include "../main_loop_timers.h"
 #include "../render_buffers.h"
 #include "../cockpit.h"
@@ -264,6 +265,7 @@ int native_flight_tick(NativeFrontend *game) {
         native_hud_draw(saved_tick);
         ++game->hud_frames;
         native_frame_selection_cleanup();
+        native_frame_grid_and_markers(); /* C0F2F0, before the timer owner. */
         /* C25312/C2548A precede C0EFD4's game counter increment. Polls
          * resume on later PAL ticks without repeating physics or drawing. */
         game->flight_saved_tick=saved_tick;

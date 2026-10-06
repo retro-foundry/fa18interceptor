@@ -1,4 +1,4 @@
-/* Connected C0EFD4 frame-tail owners. Grid/scene labels remain separate work. */
+/* Connected C0EFD4 cleanup/overlays; grid and scene labels have their own owners. */
 #include "frame_tail.h"
 #include "../player_input.h"
 #include "../globals.h"

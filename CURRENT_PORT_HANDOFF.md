@@ -7,6 +7,16 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest grid batch: C2B564's complete X/Z grid and aircraft-marker child tree
+now runs after selection cleanup, before timers. Map entry's C0F4A6 voice
+release is connected; M opens the map in actual native Free Flight. 385 full
+source comparisons pass, including the live checkpoint and 224 visible
+fixture cases. All five legacy owners pass 128 cases each. Native demo final
+RAM is unchanged; carrier save/restart/reload and 12 reference contracts pass.
+See `analysis/native_frame_markers_milestone.md`. Five of six identified
+missing frame owners are connected (about 83% of that inventory); C30A00
+stores icons remain. Full frame parity is still 0/3 accepted, startup lead
+37 ticks, Copper fade excluded. Do not repeat original full replays needlessly.
 Latest labels batch: C2B3C2 now runs after the counter on the drawing branch
 and at the idle join, before overlays/final message. It uses original scene
 data with connected native projection and C32A44 number layout. All non-stack

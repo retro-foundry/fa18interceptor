@@ -97,7 +97,7 @@ static MarkerState pop(MarkerState w,enum MarkerPhase phase,enum MarkerValue fie
 }
 
 /* C2AFFA: unpack the signed X/Z offset and transform one view-space point. */
-void transform_marker_point(MarkerState w,const MarkerHooks *h) {
+MarkerState transform_marker_point(MarkerState w,const MarkerHooks *h) {
     unsigned row;
     L(row_x,MM_ROW_X,w.offset); SWAP(row_x,MM_ROW_X); W(row_y,MM_ROW_Y,w.offset);
     AW(x,MM_X,w.row_x); AW(z,MM_Z,w.row_y); P(matrix,MM_MATRIX,0xc45bd8u);
@@ -114,6 +114,7 @@ void transform_marker_point(MarkerState w,const MarkerHooks *h) {
     MUL(z,MM_Z,rd_u16(w.matrix)); P(matrix,MM_MATRIX,w.matrix+2);
     AL(z,MM_Z,w.y); AL(z,MM_Z,w.x); ASL(z,MM_Z,8);
     word(h,w.points,(uint16_t)w.z); P(points,MM_POINTS,w.points+2);
+    return w;
 }
 
 /* C2B3C2: project the 16-byte scene-position stream and number visible rows. */
@@ -181,34 +182,40 @@ skip_row:
 }
 
 /* Shared C2BAA8 tail: signed byte triples form horizontal marker segments. */
-static void draw_marker_stream(MarkerState w,const MarkerHooks *h) {
+static MarkerState draw_marker_stream(MarkerState w,const MarkerHooks *h) {
     int32_t sum;
     for(;;) {
-        B(row_x,MM_ROW_X,rd_u8(w.matrix)); P(matrix,MM_MATRIX,w.matrix+1); CB(w.row_x,0x80); if((uint8_t)w.row_x==0x80) return;
+        B(row_x,MM_ROW_X,rd_u8(w.matrix)); P(matrix,MM_MATRIX,w.matrix+1); CB(w.row_x,0x80); if((uint8_t)w.row_x==0x80) return w;
         B(row_y,MM_ROW_Y,rd_u8(w.matrix)); P(matrix,MM_MATRIX,w.matrix+1); B(row_z,MM_ROW_Z,rd_u8(w.matrix)); P(matrix,MM_MATRIX,w.matrix+1);
         SB(row_z,MM_ROW_Z,1); EW(row_x,MM_ROW_X); EW(row_y,MM_ROW_Y); EW(row_z,MM_ROW_Z);
+        MarkerState saved=w;
         observe(h,MM_PUSH_WORD,MM_OFFSET,w.offset,0); observe(h,MM_PUSH_WORD,MM_SCREEN_Y,w.screen_y,0);
         W(x,MM_X,w.offset); W(y,MM_Y,w.screen_y); sum=(int32_t)(int16_t)w.screen_y+(int16_t)w.row_x; AW(screen_y,MM_SCREEN_Y,w.row_x);
         if(sum<0) goto restore_point; CW(w.screen_y,179); if((int16_t)w.screen_y>179) goto restore_point;
         AW(y,MM_Y,w.row_x); sum=(int32_t)(int16_t)w.offset+(int16_t)w.row_y; AW(offset,MM_OFFSET,w.row_y);
         if(sum<0) goto restore_point; AW(x,MM_X,w.row_y); AW(x,MM_X,w.row_z); CW(w.x,319); if((int16_t)w.x>319) goto restore_point;
         observe(h,MM_PUSH_LONG,MM_MATRIX,w.matrix,0); w=consume(h,MM_MARKER_LINE,w); w=pop(w,MM_POP_LONG,MM_MATRIX,h);
+        if(h && h->consume_values) w.matrix=saved.matrix;
 restore_point:
         w=pop(w,MM_POP_WORD,MM_SCREEN_Y,h); w=pop(w,MM_POP_WORD,MM_OFFSET,h);
+        if(h && h->consume_values) {
+            w.offset=low_word(w.offset,(uint16_t)saved.offset);
+            w.screen_y=low_word(w.screen_y,(uint16_t)saved.screen_y);
+        }
     }
 }
 
-void draw_class_twenty_marker(MarkerState w,const MarkerHooks *h) {
-    observe(h,MM_TEST_BYTE,MM_OFFSET,rd_u8(0xc45857u),0); if(rd_s8(0xc45857u)<0) return;
-    load_words(&w,0xc4c592u,7,-1,h); w=consume(h,MM_CLASS20_PROJECT,w); if(w.child_negative) return;
-    word(h,0xc45954u,3); P(matrix,MM_MATRIX,0xc2b91eu); draw_marker_stream(w,h);
+MarkerState draw_class_twenty_marker(MarkerState w,const MarkerHooks *h) {
+    observe(h,MM_TEST_BYTE,MM_OFFSET,rd_u8(0xc45857u),0); if(rd_s8(0xc45857u)<0) return w;
+    load_words(&w,0xc4c592u,7,-1,h); w=consume(h,MM_CLASS20_PROJECT,w); if(w.child_negative) return w;
+    word(h,0xc45954u,3); P(matrix,MM_MATRIX,0xc2b91eu); return draw_marker_stream(w,h);
 }
 
-void draw_record_position_marker(MarkerState w,gaddr frame,const MarkerHooks *h) {
+MarkerState draw_record_position_marker(MarkerState w,gaddr frame,const MarkerHooks *h) {
     int32_t difference;
     load_words(&w,0xc4c592u,7,-1,h); L(x,MM_X,rd_u32(w.record+20)); L(z,MM_Z,rd_u32(w.record+28)); SWAP(x,MM_X);
     W(y,MM_Y,rd_u16(frame-2)); SWAP(z,MM_Z); w=consume(h,MM_MARKER_POINT,w); load_words(&w,0xc4c592u,7,-1,h); w=consume(h,MM_MARKER_PROJECT,w);
-    if(w.child_negative) { byte(h,0xc458afu,0); return; }
+    if(w.child_negative) { byte(h,0xc458afu,0); return w; }
     L(row_z,MM_ROW_Z,w.record); SL(row_z,MM_ROW_Z,0xc46184u); CW(w.row_z,rd_u16(0xc459bau));
     if((uint16_t)w.row_z==rd_u16(0xc459bau)) {
         observe(h,MM_TEST_BYTE,MM_OFFSET,rd_u8(0xc458afu),0);
@@ -222,7 +229,7 @@ select_visible:
     }
 marker_route:
     if(test_byte(h,0xc457b5u)) goto refresh_marker;
-    W(row_z,MM_ROW_Z,rd_u16(0xc458dau)); B(row_y,MM_ROW_Y,rd_u8(0xc45857u)); if((int8_t)w.row_y<0) return;
+    W(row_z,MM_ROW_Z,rd_u16(0xc458dau)); B(row_y,MM_ROW_Y,rd_u8(0xc45857u)); if((int8_t)w.row_y<0) return w;
     if((uint8_t)w.row_y) { EW(row_y,MM_ROW_Y); AND_W(row_z,MM_ROW_Z,w.row_y); if(!(uint16_t)w.row_z) goto refresh_marker; }
     observe(h,MM_TEST_BYTE,MM_OFFSET,rd_u8(w.record+113),0); if(rd_s8(w.record+113)<0) goto refresh_marker;
     L(row_z,MM_ROW_Z,0); B(row_z,MM_ROW_Z,rd_u8(w.record+112)); B(row_y,MM_ROW_Y,w.row_z); LSB(row_y,MM_ROW_Y,4); AND_B(row_z,MM_ROW_Z,15);
@@ -245,37 +252,42 @@ refresh_marker:
 publish_marker:
     byte(h,w.record+113,(uint8_t)w.z); W(row_y,MM_ROW_Y,w.offset); W(row_z,MM_ROW_Z,w.screen_y);
     AND_B(row_y,MM_ROW_Y,15); AND_B(row_z,MM_ROW_Z,15); ALB(row_y,MM_ROW_Y,4); OR_B(row_z,MM_ROW_Z,w.row_y); byte(h,w.record+112,(uint8_t)w.row_z);
-    if(!test_byte(h,0xc457b5u)) return; if(!bit(h,0xc458dbu,0)) return;
+    if(!test_byte(h,0xc457b5u)) return w; if(!bit(h,0xc458dbu,0)) return w;
 choose_marker:
-    EW(z,MM_Z); AW(z,MM_Z,w.z); P(matrix,MM_MATRIX,0xc2b7e4u); W(row_x,MM_ROW_X,rd_u16(indexed(w.matrix,w.z))); P(matrix,MM_MATRIX,indexed(w.matrix,w.row_x)); draw_marker_stream(w,h);
+    EW(z,MM_Z); AW(z,MM_Z,w.z); P(matrix,MM_MATRIX,0xc2b7e4u); W(row_x,MM_ROW_X,rd_u16(indexed(w.matrix,w.z))); P(matrix,MM_MATRIX,indexed(w.matrix,w.row_x)); return draw_marker_stream(w,h);
 }
 
 /* C2B564: two original grid runs followed by all sixteen control records. */
 void draw_view_grid_and_markers(MarkerState w,const MarkerHooks *h) {
-    gaddr frame; int64_t remaining; uint32_t old; unsigned axis;
+    gaddr frame; int64_t remaining; uint32_t old,origin_offset=0; unsigned axis;
+    const int native_values=h && h->consume_values;
     observe(h,MM_TEST_BYTE,MM_OFFSET,rd_u8(0xc457adu),0); if(rd_s8(0xc457adu)<=0) return;
     if(!test_byte(h,0xc45785u)) return;
-    observe(h,MM_BEGIN_FRAME,MM_OFFSET,10,0); if(!h || !h->frame || !h->stack) abort(); frame=h->frame(h->context);
+    observe(h,MM_BEGIN_FRAME,MM_OFFSET,10,0); if(!h || !h->frame || (!native_values && !h->stack)) abort(); frame=h->frame(h->context);
     longword(h,0xc456e6u,0xfffff); word(h,0xc45954u,8); load_longs(&w,0xc45c3eu,7,h);
     old=w.screen_y; w.screen_y=w.x; w.x=old; observe(h,MM_EXCHANGE,MM_SCREEN_Y,MM_X,0);
     SWAP(x,MM_X); NEGW(x,MM_X); word(h,frame-2,(uint16_t)w.x);
     SWAP(offset,MM_OFFSET); SWAP(screen_y,MM_SCREEN_Y); NEGW(offset,MM_OFFSET); NEGW(screen_y,MM_SCREEN_Y); SWAP(offset,MM_OFFSET); W(offset,MM_OFFSET,w.screen_y);
+    origin_offset=w.offset;
     observe(h,MM_PUSH_LONG,MM_OFFSET,w.offset,0); W(offset,MM_OFFSET,0xf660); word(h,frame-4,0xf680); word(h,frame-6,115); word(h,frame-8,24);
     for(axis=0;axis<2;++axis) {
         if(axis) {
             word(h,frame-4,0xfeb0); word(h,frame-6,34); word(h,frame-8,16);
-            L(offset,MM_OFFSET,rd_u32(h->stack(h->context))); SWAP(offset,MM_OFFSET); W(offset,MM_OFFSET,192); SWAP(offset,MM_OFFSET);
+            L(offset,MM_OFFSET,native_values?origin_offset:rd_u32(h->stack(h->context))); SWAP(offset,MM_OFFSET); W(offset,MM_OFFSET,192); SWAP(offset,MM_OFFSET);
         }
         do {
             P(points,MM_POINTS,0xc4c592u); W(x,MM_X,axis?5184:rd_u16(frame-4)); W(y,MM_Y,rd_u16(frame-2)); W(z,MM_Z,axis?rd_u16(frame-4):9184);
             w=consume(h,axis?MM_GRID_Z_FIRST:MM_GRID_X_FIRST,w);
             W(x,MM_X,axis?0xea40:rd_u16(frame-4)); W(y,MM_Y,rd_u16(frame-2)); W(z,MM_Z,axis?rd_u16(frame-4):0xef60);
             w=consume(h,axis?MM_GRID_Z_SECOND:MM_GRID_X_SECOND,w);
+            MarkerState saved_draw=w;
             observe(h,MM_SAVE_DRAW,MM_OFFSET,0,0); word(h,0xc45954u,8); w=consume(h,axis?MM_GRID_Z_LINE:MM_GRID_X_LINE,w);
             W(screen_y,MM_SCREEN_Y,w.offset); w=pop(w,MM_RESTORE_DRAW,MM_OFFSET,h);
+            if(native_values) { w.offset=saved_draw.offset;w.matrix=saved_draw.matrix; }
             if(bit(h,frame-7,0)) {
                 W(x,MM_X,rd_u16(frame-6)); observe(h,MM_TEST_WORD,MM_OFFSET,w.screen_y,0);
                 if((uint16_t)w.screen_y) {
+                    saved_draw=w;
                     observe(h,MM_SAVE_DRAW,MM_OFFSET,0,0); L(y,MM_Y,axis?1:2); L(offset,MM_OFFSET,rd_u32(axis?0xc4b390u:0xc4b394u)); L(screen_y,MM_SCREEN_Y,w.offset); SWAP(offset,MM_OFFSET);
                     if(!axis) {
                         SW(offset,MM_OFFSET,12); SW(screen_y,MM_SCREEN_Y,5); CW(w.screen_y,8); if((int16_t)w.screen_y<8) goto label_finished;
@@ -288,20 +300,24 @@ void draw_view_grid_and_markers(MarkerState w,const MarkerHooks *h) {
                     word(h,0xc45954u,2); w=consume(h,axis?MM_GRID_Z_LABEL:MM_GRID_X_LABEL,w);
 label_finished:
                     w=pop(w,MM_RESTORE_DRAW,MM_OFFSET,h);
+                    if(native_values) { w.offset=saved_draw.offset;w.matrix=saved_draw.matrix; }
                 }
             }
             add_word(h,frame-4,axis?560:448); if(bit(h,frame-7,0)) add_word(h,frame-6,1);
             remaining=sub_word(h,frame-8,1);
         } while(remaining>0 && rd_u16(frame-8));
     }
-    w=pop(w,MM_POP_LONG,MM_OFFSET,h); L(row_y,MM_ROW_Y,0);
+    w=pop(w,MM_POP_LONG,MM_OFFSET,h); if(native_values) w.offset=origin_offset;
+    L(row_y,MM_ROW_Y,0);
     do {
+        const uint16_t record_offset=(uint16_t)w.row_y;
         P(record,MM_RECORD,indexed(0xc46184u,w.row_y)); W(row_z,MM_ROW_Z,rd_u16(w.record)); W(x,MM_X,w.row_z); AND_W(row_z,MM_ROW_Z,64); if(!(uint16_t)w.row_z) goto next_record;
         AND_W(x,MM_X,8); if((uint16_t)w.x && bit(h,w.record+3,7)) goto next_record;
         load_longs(&w,w.record+20,0x1c,h); SWAP(x,MM_X); SWAP(z,MM_Z); P(points,MM_POINTS,0xc4c592u);
         observe(h,MM_PUSH_LONG,MM_OFFSET,w.offset,0); observe(h,MM_PUSH_WORD,MM_ROW_Y,w.row_y,0); W(y,MM_Y,rd_u16(frame-2)); w=consume(h,MM_RECORD_POINT,w);
-        observe(h,MM_TEST_WORD,MM_OFFSET,rd_u16(h->stack(h->context)),0);
-        if(!rd_u16(h->stack(h->context))) goto player_marker;
+        uint16_t saved_record=native_values?record_offset:rd_u16(h->stack(h->context));
+        observe(h,MM_TEST_WORD,MM_OFFSET,saved_record,0);
+        if(!saved_record) goto player_marker;
         word(h,0xc45954u,3); B(row_z,MM_ROW_Z,rd_u8(w.record+98)); AND_B(row_z,MM_ROW_Z,240); CB(w.row_z,32);
         if((uint8_t)w.row_z==32) { w=consume(h,MM_CLASS20_MARKER,w); goto record_finished; }
         CB(rd_u8(0xc458a6u),3); if(rd_u8(0xc458a6u)==3 && !bit(h,w.record+32,6)) goto record_marker;
@@ -311,9 +327,11 @@ player_marker:
         word(h,0xc45954u,13);
 record_marker:
         w=pop(w,MM_POP_WORD,MM_ROW_Y,h); w=pop(w,MM_POP_LONG,MM_OFFSET,h);
+        if(native_values) { w.row_y=low_word(w.row_y,record_offset);w.offset=origin_offset; }
         observe(h,MM_PUSH_LONG,MM_OFFSET,w.offset,0); observe(h,MM_PUSH_WORD,MM_ROW_Y,w.row_y,0); w=consume(h,MM_RECORD_MARKER,w);
 record_finished:
         w=pop(w,MM_POP_WORD,MM_ROW_Y,h); w=pop(w,MM_POP_LONG,MM_OFFSET,h);
+        if(native_values) { w.row_y=low_word(w.row_y,record_offset);w.offset=origin_offset; }
 next_record:
         AW(row_y,MM_ROW_Y,512); CW(w.row_y,0x1e00);
     } while((int16_t)w.row_y<=0x1e00);
