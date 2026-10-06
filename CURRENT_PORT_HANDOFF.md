@@ -39,11 +39,19 @@ C10C08 after aircraft selection, or C10DAE after P pause/resume. Five bounded
 C1C63E checkpoint comparisons match original non-stack RAM; intro/menu and
 twelve reference CTests pass. Evidence: `analysis/native_setup_selection_milestone.md`.
 Other modes still stop at their banner. No native flight runs yet.
-Evidence: `analysis/native_flight_start_milestone.md`. Rough flight-start
-estimate about 70%; this means Free Flight startup wiring only, with camera
-and keyboard choices connected but previews and actual flight still missing.
-Next: source input/view/timer update ordering, direct world/cockpit drawing
-for location/aircraft previews, and the active flight loop/record children.
+The native setup preview now draws the source horizon and terrain packets,
+with direct host plane line/fill/composite operations. Its real caller is
+native_flight_tick -> native_scene_project/native_scene_draw -> the shared
+source owners. 160 polygon cases and complete horizon/map submissions match
+original plane buffers at location and aircraft checkpoints. Existing setup,
+record and frontend checks plus twelve reference CTests pass. Copper fade is
+excluded; no full sealed replay was repeated. Evidence:
+`analysis/native_terrain_preview_milestone.md`. Rough startup estimate about
+80% (previously 70%), scoped to Free Flight startup wiring: terrain now renders,
+but aircraft/scene objects, cockpit/HUD, full update ordering and active flight
+remain open. Native data is still addressed storage rather than typed state.
+Next: connect source scene/object drawing, then view controls and their newly
+reachable flight-record children, and resolve input/view/timer ordering.
 Audio currently takes the original suppression path. Source data still uses
 checked address-indexed host buffers, pending typed-state migration.
 

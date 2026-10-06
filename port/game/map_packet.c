@@ -5,7 +5,9 @@
 #include "map_packet.h"
 
 #include "globals.h"
+#ifndef FA18_NATIVE
 #include "machine.h"
+#endif
 
 #include "map_packet_original_pass.h"
 #include <stdlib.h>
@@ -37,12 +39,19 @@ typedef struct {
 } MapPacketRuntime;
 
 static void source_data(FA18MapPacketStaticData *data) {
+#ifdef FA18_NATIVE
+    data->control_size=0xc80000u-FA18_MAP_PACKET_CONTROL_RUNTIME_BASE;
+    data->packet_size=0xc80000u-FA18_MAP_PACKET_PACKET_RUNTIME_BASE;
+    data->control_bytes=native_storage_range(FA18_MAP_PACKET_CONTROL_RUNTIME_BASE,data->control_size);
+    data->packet_bytes=native_storage_range(FA18_MAP_PACKET_PACKET_RUNTIME_BASE,data->packet_size);
+#else
     const uint32_t control = FA18_MAP_PACKET_CONTROL_RUNTIME_BASE - FA18_SLOW_BASE;
     const uint32_t packet = FA18_MAP_PACKET_PACKET_RUNTIME_BASE - FA18_SLOW_BASE;
     data->control_bytes = fa18_machine->slow + control;
     data->control_size = FA18_SLOW_SIZE - control;
     data->packet_bytes = fa18_machine->slow + packet;
     data->packet_size = FA18_SLOW_SIZE - packet;
+#endif
 }
 
 static int display_packet(void *context,

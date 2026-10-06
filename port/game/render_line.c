@@ -5,6 +5,9 @@
 #include "globals.h"
 #include "hardware.h"
 #include "memory.h"
+#ifdef FA18_NATIVE
+#include "native/raster.h"
+#endif
 
 #define ROW_BYTES 40
 
@@ -100,6 +103,14 @@ void draw_line_to_row(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t la
     wr_u16(POLY_PLANE_BITS, rd_u16(CURRENT_COLOUR));
     if (!setup_line(x0, y0, x1, y1, last_row, 1, 0, &line)) return;
 
+#ifdef FA18_NATIVE
+    planes = rd_u32(PAGE_PLANE_TABLE);
+    for(bit=0;bit<4;++bit) {
+        if(!((rd_u8(LINE_PLANES)>>bit)&1)) continue;
+        native_raster_line(rd_u32(planes+4u*(3-bit)),&line,
+                          colour_bit(bit)?PLANE_SET:PLANE_CLEAR,0);
+    }
+#else
     wait_blitter();
     custom_write(BLTAMOD, (uint16_t)line.step_both);
     custom_write(BLTDMOD, ROW_BYTES);
@@ -125,6 +136,7 @@ void draw_line_to_row(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t la
         custom_write(BLTBMOD, (uint16_t)line.step_minor);
         custom_write(BLTSIZE, line.size);
     }
+#endif
 }
 
 void reset_line_style(void) {

@@ -2,6 +2,7 @@
 #include "flight.h"
 #include "records.h"
 #include "setup.h"
+#include "scene.h"
 #include "../globals.h"
 #include "../menu_transition.h"
 #include "../scene_dispatch.h"
@@ -154,12 +155,15 @@ void native_flight_tick(NativeFrontend *game) {
     const PostInputTickHooks hooks={stage,NULL,game};
     run_post_input_tick(&hooks);
     /* C0EFD4 follows its stage tick with the record/context work while
-     * POST_INPUT_AUX permits updates. The intervening input/view and draw
-     * children remain pending; this is the connected record slice only. */
+     * POST_INPUT_AUX permits updates. Input/control updates remain pending;
+     * view projection and terrain now
+     * follow the record/context slice in their original order. */
     if(rd_u8(POST_INPUT_AUX)) {
         native_records_update();
         ++game->record_updates;
+        native_scene_project();
         const ContextRefreshHooks refresh={refresh_child,NULL,game};
         refresh_context_packet(&refresh);
+        native_scene_draw(game);
     }
 }

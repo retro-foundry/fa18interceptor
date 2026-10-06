@@ -7,15 +7,24 @@
 #include "memory.h"
 #include "render_polygon.h"
 
+#ifndef FA18_NATIVE
 static void normalize_busy_count(gaddr count) {
     int16_t first = rd_s16(count), second = rd_s16(count + 2);
     /* CLR.W/SWAP/MOVE.W clears the high word after the signed comparison. */
     wr_u32(count, (uint16_t)(first > second ? first : second));
 }
 
+#endif
+
 static void submit_plane(gaddr table, int index, uint16_t control, uint16_t size,
                          gaddr busy_count) {
     uint32_t plane = rd_u32(table + (gaddr)(index * 4)) + 0x28u;
+#ifdef FA18_NATIVE
+    unsigned rows=size>>6;
+    if(!rows) rows=1024;
+    for(unsigned i=0;i<rows*20u;++i) wr_u16(plane+2*i,control==0x03FA?0xffff:0);
+    (void)busy_count; /* Hardware poll counters have no host event clock. */
+#else
     if (busy_count) {
         wr_u16(busy_count, (uint16_t)(rd_u16(busy_count) + count_blitter_polls()));
         normalize_busy_count(busy_count);
@@ -24,6 +33,7 @@ static void submit_plane(gaddr table, int index, uint16_t control, uint16_t size
     custom_write_ptr(BLTCPT, plane);
     custom_write_ptr(BLTDPT, plane);
     custom_write(BLTSIZE, size);
+#endif
 }
 
 static int select_record(int wide, const ActivePlaneHooks *hooks) {
@@ -39,6 +49,9 @@ void submit_active_planes(const ActivePlaneHooks *hooks) {
     int selected, polygon;
     int i;
 
+#ifdef FA18_NATIVE
+    submit_plane(table,0,0x0100,size,0);
+#else
     wait_blitter();
     custom_write(BLTCON0, 0x0100);
     custom_write(BLTCON1, 0);
@@ -54,6 +67,7 @@ void submit_active_planes(const ActivePlaneHooks *hooks) {
         custom_write_ptr(BLTDPT, plane);
         custom_write(BLTSIZE, size);
     }
+#endif
     submit_plane(table, 1, 0x03FA, size, ACTIVE_PLANE_BUSY_1);
     submit_plane(table, 2, rd_u8(CONDITION_MET_A) ? 0x03FA : 0x0100,
                  size, ACTIVE_PLANE_BUSY_2);

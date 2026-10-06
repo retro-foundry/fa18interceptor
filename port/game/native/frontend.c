@@ -109,6 +109,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     } else if(errno!=ENOENT) { fail(error,cap,"cannot read saved config"); goto done; }
     wr_u32(0xc1ab74u,PLAYER_LOG); wr_u32(0xc456b6u,PLANE_TABLE);
     for(unsigned i=0;i<4;++i) wr_u32(PLANE_TABLE+4*i,PLANE_FIRST+i*PLANE_BYTES);
+    wr_u32(POLY_MASK_PLANE,0x30000); /* Separate 40-byte rows, host-owned mask. */
     wr_u8(0xc4588au,1); wr_u8(0xc457d7u,2); /* source audio suppression */
     native_menu_initialize();
     native_flight_initialize(game);

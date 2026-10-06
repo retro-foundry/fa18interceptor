@@ -1,5 +1,17 @@
 add_executable(fa18_native main.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
+    ../game/native/raster.c ../game/native/scene.c ../game/active_planes.c
+    ../game/display_records.c ../game/render_polygon.c ../game/render_line.c
+    ../game/render_buffers.c ../game/plot.c ../game/clip.c
+    ../game/polygon_clip.c ../game/attitude.c ../game/stages.c
+    ../game/matrix_route.c ../game/postflight_completion.c ../game/map_detail_component_route.c
+    ../game/map_detail_fields.c ../game/map_detail_gate.c ../game/map_packet.c
+    ../game/map_packet_column_table.c ../game/map_packet_control_stream.c ../game/map_packet_control_walker.c
+    ../game/map_packet_coordinate_setup.c ../game/map_packet_depth_stage.c ../game/map_packet_directory.c
+    ../game/map_packet_low_filter.c ../game/map_packet_original_pass.c ../game/map_packet_pass_runner.c
+    ../game/map_packet_pass_selector.c ../game/map_packet_record_stage.c ../game/map_packet_relative_offset.c
+    ../game/map_packet_selector.c ../game/map_packet_stage.c ../game/map_packet_static_data.c
+    ../game/map_packet_transform.c ../game/map_packet_wide_control_stream.c
     ../game/main_loop_control_messages.c ../game/text.c ../game/menu_setup.c
     ../game/message_reset.c ../game/menu_available.c ../game/menu_table.c ../game/menu_transition.c
     ../game/command_selection.c ../game/indexed_commands.c ../game/numbers.c

@@ -23,9 +23,11 @@ selection and viewport/message stages. Return acknowledges the original disk's
 code-input message, then the original numbered location and aircraft keys run.
 The aircraft selection resets the recorder/root through C10B90 and updates the
 records. It reaches `scene-setup` / C10C08; P pauses/resumes into C10DAE.
-World/cockpit previews and active flight are still pending.
+The preview now draws the source horizon and normal/wide terrain packets into
+ordinary host planes. Aircraft/scene objects, cockpit/HUD drawing, and active
+flight remain pending.
 The record/context slice repeats during setup; headless statistics expose its
-`record_updates` count. The banner CRACKED BY A-HA is original disk message $47;
+`record_updates`, `scene_frames`, and `terrain_polygons` counts. The banner CRACKED BY A-HA is original disk message $47;
 the earlier crash-message description was incorrect. Source timer requests use
 seconds/microseconds from the native runner's deterministic PAL frame clock.
 Other selected modes stop at their transition banner. Audio remains suppressed.
@@ -40,6 +42,7 @@ python tools/native/check_frontend.py --runner build/native/fa18_native.exe
 python tools/native/check_menu.py --runner build/native/fa18_native.exe
 python tools/native/check_flight_start.py --runner build/native/fa18_native.exe
 python tools/native/check_records.py --runner build/native/fa18_native.exe
+python tools/native/check_raster.py --runner build/native/fa18_native.exe
 ```
 
 Build ownership is `port/recomp/CMakeLists.txt` -> `port/native/CMakeLists.txt`.
@@ -81,3 +84,13 @@ The source busy pause is converted to nominal PAL ticks once; DMA/loading,
 CPU-paced message update frequency and fade timing are not reproduced.
 Static settled splash, credits and menu comparisons are separate from timing
 parity. Copper fade remains excluded from acceptance, per the user.
+
+Native preview ownership is `native_flight_tick` -> `native_scene_project` /
+`native_scene_draw` -> the shared matrix/projection, active-plane, map-packet,
+clip and polygon owners -> `port/game/native/raster.c`. The native branches
+replace blitter line/fill/composite submissions with direct host plane writes;
+the reference branches retain their hardware calls. `check_raster.py` compares
+160 polygons and the horizon/map buffers against original opcodes at each of
+two native selection checkpoints. Those opcodes, ROM and chipset run only in
+the validation executable. See
+[`../../analysis/native_terrain_preview_milestone.md`](../../analysis/native_terrain_preview_milestone.md).

@@ -2,6 +2,9 @@
 
 #include "globals.h"
 #include "hardware.h"
+#ifdef FA18_NATIVE
+#include "native/raster.h"
+#endif
 
 static void clear_longs(gaddr buffer, int count) {
     int i;
@@ -25,6 +28,9 @@ void blit_mask_between_planes(void) {
     uint32_t offset = rd_u32(POLY_PLANE_OFFSET);
     uint32_t plane0 = rd_u32(table) + offset, plane1 = rd_u32(table + 4) + offset;
 
+#ifdef FA18_NATIVE
+    native_raster_copy_masked(rd_u32(POLY_MASK_SOURCE),plane0,plane1,rd_u16(POLY_BLIT_SIZE));
+#else
     wait_blitter();
     custom_write(BLTCON0, 0x0FCA);
     custom_write(BLTCON1, 0x0002);
@@ -33,6 +39,7 @@ void blit_mask_between_planes(void) {
     custom_write_ptr(BLTCPT, plane1);
     custom_write_ptr(BLTDPT, plane1);
     custom_write(BLTSIZE, rd_u16(POLY_BLIT_SIZE));
+#endif
 }
 
 void clear_page_plane_tops(void) {
@@ -61,6 +68,9 @@ void blit_lane(int16_t plane_offset, int pattern) {
     int16_t modulo;
 
     lane_source(size, &c, &modulo);
+#ifdef FA18_NATIVE
+    native_raster_lane(rd_u32(POLY_MASK_SOURCE),c,plane,size,modulo,pattern&1);
+#else
     wait_blitter();
     custom_write(BLTCON0, (pattern & 1) ? 0x0FEC : 0x0F4C);
     custom_write(BLTCON1, 0x0002);
@@ -70,4 +80,5 @@ void blit_lane(int16_t plane_offset, int pattern) {
     custom_write_ptr(BLTBPT, plane);
     custom_write_ptr(BLTDPT, plane);
     custom_write(BLTSIZE, size);
+#endif
 }

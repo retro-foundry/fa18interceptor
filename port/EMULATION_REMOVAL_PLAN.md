@@ -19,7 +19,7 @@ Native continuation milestones (functional scope, not instruction counts):
   messages. Initial pose/camera and gate banks match a source checkpoint.
   The record/context slice now repeats while setup permits it; active record
   dispatch and its cell matrix match focused original memory results.
-  Roughly 70% of Free Flight startup wiring; later full record state still differs.
+  Later full record state still differs; see the latest scoped estimate below.
   See `../analysis/native_flight_start_milestone.md` and
   `../analysis/native_bootstrap_records_milestone.md` for bounded evidence.
 - Connected: C1072E message completion, source typed-code acknowledgement,
@@ -27,9 +27,16 @@ Native continuation milestones (functional scope, not instruction counts):
   normalization, and source P pause/resume. The root becomes aircraft kind
   $11 through its original constructor. See
   `../analysis/native_setup_selection_milestone.md`.
-- Next: complete input/view/timer update ordering, remaining active-record
-  children (C1C63E/C22C80), direct cockpit/world drawing for the setup previews and
-  connected flight simulation. Current native endpoint is `scene-setup`.
+- Connected: source view matrices/projection, horizon selection, normal/wide
+  terrain packets, polygon clipping and direct host line/fill/compositing.
+  The real native setup preview now shows terrain. 160 polygon cases plus
+  complete horizon/map submissions match original plane buffers at location
+  and aircraft-selection checkpoints. See
+  `../analysis/native_terrain_preview_milestone.md`. Roughly 80% of Free Flight
+  startup wiring (previously 70%); this excludes whole-game completion.
+- Next: scene/aircraft object and cockpit/HUD drawing, input/view/timer update
+  ordering, remaining active-record children (C1C63E/C22C80), and connected
+  flight simulation. Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.
 - Still open: other modes, active-flight exit/restart, outcomes/progression,
   audio, original timing and typed game state. The scene-setup endpoint

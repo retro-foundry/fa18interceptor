@@ -13,13 +13,18 @@
 #include "plot.h"
 #include "render_buffers.h"
 #include "render_line.h"
+#ifdef FA18_NATIVE
+#include "native/raster.h"
+#endif
 
 /* Mask (A) combined with the page plane (B) into the plane (D). */
+#ifndef FA18_NATIVE
 static const uint16_t composite_minterm[] = {
     [PLANE_CLEAR] = MINTERM_NOTA_AND_B,
     [PLANE_SET] = MINTERM_A_OR_B,
     [PLANE_COMPLEMENT] = MINTERM_A_XOR_B,
 };
+#endif
 
 void composite_polygon_plane(int plane_index, PlaneOp op) {
     gaddr planes = rd_u32(PAGE_PLANE_TABLE);
@@ -28,6 +33,9 @@ void composite_polygon_plane(int plane_index, PlaneOp op) {
 
     wr_u16(POLY_PLANE_BITS, (uint16_t)(rd_u16(POLY_PLANE_BITS) >> 1));
 
+#ifdef FA18_NATIVE
+    native_raster_composite(rd_u32(POLY_MASK_SOURCE),dest,rd_u16(POLY_BLIT_SIZE),op);
+#else
     wait_blitter();
     custom_write(BLTCON0, (uint16_t)(SRCA | SRCB | DEST | composite_minterm[op]));
     custom_write(BLTCON1, BLITREVERSE);
@@ -35,6 +43,7 @@ void composite_polygon_plane(int plane_index, PlaneOp op) {
     custom_write_ptr(BLTBPT, dest);
     custom_write_ptr(BLTDPT, dest);
     custom_write(BLTSIZE, rd_u16(POLY_BLIT_SIZE));
+#endif
 }
 
 /* One-dot blitter lines draw a single pixel per raster row, so the area fill
@@ -43,9 +52,14 @@ void composite_polygon_plane(int plane_index, PlaneOp op) {
  * upper end), and horizontal edges contribute nothing. */
 void draw_polygon_edge(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row) {
     LineSetup edge;
+#ifndef FA18_NATIVE
     gaddr start;
+#endif
 
     if (!setup_line(x0, y0, x1, y1, last_row, 0, 1, &edge)) return;
+#ifdef FA18_NATIVE
+    native_raster_line(rd_u32(POLY_MASK_PLANE),&edge,PLANE_COMPLEMENT,1);
+#else
     start = rd_u32(POLY_MASK_PLANE) + (gaddr)edge.offset;
 
     wait_blitter();
@@ -62,11 +76,15 @@ void draw_polygon_edge(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t l
     custom_write(BLTADAT, 0x8000);
     custom_write(BLTBMOD, (uint16_t)edge.step_minor);
     custom_write(BLTSIZE, edge.size);
+#endif
 }
 
 void clear_polygon_mask(void) {
     gaddr mask = rd_u32(POLY_MASK_END);
 
+#ifdef FA18_NATIVE
+    native_raster_clear(mask,rd_u16(POLY_BLIT_SIZE));
+#else
     /* A, B and D all address the mask; NOT A AND B is zero everywhere. */
     wait_blitter();
     custom_write(BLTCON0, (uint16_t)(SRCA | SRCB | DEST | MINTERM_NOTA_AND_B));
@@ -75,6 +93,7 @@ void clear_polygon_mask(void) {
     custom_write_ptr(BLTBPT, mask);
     custom_write_ptr(BLTDPT, mask);
     custom_write(BLTSIZE, rd_u16(POLY_BLIT_SIZE));
+#endif
 }
 
 static int16_t abs16(int16_t v) { return v < 0 ? (int16_t)-v : v; }
@@ -161,6 +180,10 @@ fill:
         size = (uint16_t)(((uint16_t)((int16_t)(maxy - miny + 1) - clipped) << 6) + (uint16_t)(words + 1));
         wr_u16(POLY_BLIT_SIZE, size);
 
+#ifdef FA18_NATIVE
+        (void)modulo; /* Direct plane rows use the same effective stride. */
+        native_raster_fill(rd_u32(POLY_MASK_END),size);
+#else
         wait_blitter();
         custom_write(BLTCON0, 0x09F0);
         custom_write(BLTCON1, 0x000A);
@@ -171,6 +194,7 @@ fill:
         custom_write(BLTBMOD, (uint16_t)modulo);
         custom_write(BLTDMOD, (uint16_t)modulo);
         custom_write(BLTSIZE, size);
+#endif
     }
     return 0;
 }
@@ -179,7 +203,9 @@ void draw_polygon(void) {
     int bit, given, complement_all = 0;
     uint8_t planes;
 
+#ifndef FA18_NATIVE
     custom_write(DMACON, 0x8400); /* blitter priority */
+#endif
     if (prepare_polygon()) return;
     given = rd_s16(LINE_COLOUR) >= 0;
     if (given && rd_u16(POLY_MASK_BLIT)) {
@@ -206,7 +232,9 @@ void draw_polygon(void) {
         }
     }
     clear_polygon_mask();
+#ifndef FA18_NATIVE
     custom_write(DMACON, 0x0400);
+#endif
 }
 
 #define MARK_POLYGON 0xC4B432u /* word count, then (x, y) word pairs at 1/256 scale */
