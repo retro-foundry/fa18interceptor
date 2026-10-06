@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "scope": "800-frame isolated demo01 C2D408 replay; no full suite rerun",
+  "command": [
+    "build/recomp/fa18_recomp.exe",
+    "--state",
+    "captures/native/demo01/state.bin",
+    "--rom",
+    "local/system/kick13.rom",
+    "--input",
+    "captures/native/demo01/input.fa18in",
+    "--frames",
+    "800",
+    "--ports",
+    "on",
+    "--ports-only",
+    "C2D408"
+  ],
+  "removed_cpu_adapters": [
+    "C2DD4E",
+    "C2DE96",
+    "C2DEA2"
+  ],
+  "runner_sha256": "163500d00623155668b15bc1bfeccbfc221da307be84ea76b04bf86601eb35e9",
+  "source_hashes": {
+    "port\\game\\matrix.c": "6e83dde08dcbdc5c998c0cbf12428bfc3d465aa2aa29d543a2f46cc306331718",
+    "port\\game\\record_matrix_update.c": "f9143abf93a5f3bf9156a933b0979eedd9cbd2f4be033a7fb477c1c7910bd642",
+    "port\\game\\glue\\glue_record_matrix_update.c": "beb534e71d7524a18d9eb4d83dbe0d599a45bbc5973ce4420a49bfe622403633",
+    "port\\game\\native_call_graph.json": "edfe6566bb7d22fba260956be62ac9ed930717f3738c3ad520331a025daf6b19"
+  },
+  "input_hashes": {
+    "captures\\native\\demo01\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "captures\\native\\demo01\\input.fa18in": "91d0dd0defbace4253fb307e6c5bef458af4cf86defc850d13f19068b3159657",
+    "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "native_edges": [
+    {
+      "caller": "C2D408",
+      "callee": "C2DD4E",
+      "calls": 69
+    },
+    {
+      "caller": "C2D408",
+      "callee": "C1342C",
+      "calls": 56
+    }
+  ],
+  "prior_profile_counters_equal": true,
+  "unchanged_profile_sha256": "e0404f99a97df69d3bd79ce81cda2f2649d6ef9fed947796bcd17b03b095d9df",
+  "streams": {
+    "rgb": {
+      "before_sha256": "7e2690bdfe4c7c9dc2845fb73dbfb52665fa65fd1c83ba2968609ed6fe92ac24",
+      "after_sha256": "7e2690bdfe4c7c9dc2845fb73dbfb52665fa65fd1c83ba2968609ed6fe92ac24",
+      "equal": true
+    },
+    "index8": {
+      "before_sha256": "b9f00ec1cf277fb680ca0d551b11248034f83578138575d00f44b4b6ba962776",
+      "after_sha256": "b9f00ec1cf277fb680ca0d551b11248034f83578138575d00f44b4b6ba962776",
+      "equal": true
+    },
+    "ram": {
+      "before_sha256": "8e53828c93c916e3089c0666bd180a4b3af299d577a9acd261b8e86764e04ce6",
+      "after_sha256": "8e53828c93c916e3089c0666bd180a4b3af299d577a9acd261b8e86764e04ce6",
+      "equal": true
+    }
+  },
+  "source_comparisons": {
+    "shadow": {
+      "entry": "C2D408",
+      "name": "update_record_matrix",
+      "calls": 70,
+      "compared": 65,
+      "matched": 65,
+      "mismatched": 0,
+      "hardware": 0,
+      "incomplete": 5,
+      "mean_cycles": 12254,
+      "busy_input_calls": 0,
+      "busy_input_reads": 0
+    },
+    "sandbox": {
+      "entry": "C2D408",
+      "name": "update_record_matrix",
+      "calls": 70,
+      "compared": 70,
+      "matched": 70,
+      "mismatched": 0,
+      "hardware": 0,
+      "incomplete": 0,
+      "mean_cycles": 12184,
+      "busy_input_calls": 0,
+      "busy_input_reads": 0
+    }
+  },
+  "full_suite_reference": {
+    "path": "analysis\\emulation_removal_meter_after_matrix_leaves.json",
+    "sha256": "6af1465e81f775ecb65a26ecb0e62352780fc0d5e4b7f356052ba7c156655aa4",
+    "raw_cpu_removed_min_percent": 38.40106459907289,
+    "rerun": false,
+    "accepted_cpu_share": null
+  },
+  "current_cutover": {
+    "cpu_registry_rows": 603,
+    "direct_c_entries": 11,
+    "readable_reconstructed_entries": 614,
+    "memory_sites_converted": 0,
+    "memory_sites_remaining": 8952,
+    "native_memory_percent": 0,
+    "native_chipset_percent": 0,
+    "native_boot_percent": 0,
+    "deletable_subsystems": 0
+  },
+  "limits": [
+    "Known static callers and prior five-scenario dispatch coverage, not the whole original call graph.",
+    "Full-suite percentage is reused from the preceding batch; this check does not certify full-suite parity.",
+    "Parent remains a fixed-charge CPU/timing adapter, and game state remains in guest RAM.",
+    "Deleted unused adapter access sites are not conversion to native memory."
+  ]
+}

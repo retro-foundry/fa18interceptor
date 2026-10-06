@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "translated_entries": 624,
-  "registered_readable_translated_entries": 531,
+  "registered_readable_translated_entries": 528,
   "registered_readable_source_only_entries": 75,
   "direct_native_entries": [
     {
@@ -153,9 +153,60 @@
         "guest game memory",
         "ancestor CPU/timing adapter"
       ]
+    },
+    {
+      "entry": "C2DD4E",
+      "function": "adjust_matrix_record_depth",
+      "source": "port/game/matrix.c",
+      "callers": [
+        {
+          "entry": "C2D408",
+          "function": "update_record_nonclass_matrix",
+          "source": "port/game/record_matrix_update.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/route_record_triple_to_adjustment.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C2DE96",
+      "function": "settle_record",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C2DD4E",
+          "function": "adjust_matrix_record_depth",
+          "source": "port/game/matrix.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/prepare_record_depth_adjustment.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C2DEA2",
+      "function": "mark_record_pending",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C2DD4E",
+          "function": "adjust_matrix_record_depth",
+          "source": "port/game/matrix.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_002.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
     }
   ],
-  "direct_native_entry_count": 8,
+  "direct_native_entry_count": 11,
   "static_recompiled_entries": 85,
   "original_adf_static_entries": 44,
   "reference_wrapper_static_entries": 41,

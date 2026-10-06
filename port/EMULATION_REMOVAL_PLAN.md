@@ -175,6 +175,14 @@ Following the user's instruction, use targeted comparisons and bounded runner
 checks for routine batches; reserve full replays for substantial changes,
 milestone acceptance and unresolved failures.
 
+C2DD4E and its C2DE96/C2DEA2 helpers are now also C-owned without CPU adapters.
+The bounded 800-frame parent probe executes 69 depth calls and preserves prior
+outputs/counters; source comparisons and both builds pass. There are 11 direct
+C entries plus 603 CPU registrations. No full replay was repeated: reuse the
+preceding **38.4011%** raw minimum, with zero observed bounded counter delta,
+cutover axes **0%**, deletion **0/4**. The parent's source timing mismatch still
+requires work. Evidence: `../analysis/emulation_removal_matrix_depth_batch.json/.md`.
+
 Today C routines call each other by returning into the dispatcher. Give each
 recreated routine a direct C entry point and let a C caller call its C callee
 directly, keeping glue only for callers that are still generated code.

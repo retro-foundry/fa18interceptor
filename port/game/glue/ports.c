@@ -237,7 +237,6 @@ const FA18Port fa18_ports[] = {
     /* control_records.c */
     {0xC1EBC0, glue_C1EBC0, "read_record_fields", 0, 0, glue_C1EBC0_step, 0xC1EBE0},
     {0xC230B0, glue_C230B0, "release_lost_selection", 0, 0, glue_C230B0_step, 0xC230E8},
-    {0xC2DE96, glue_C2DE96, "settle_record", 50},
     /* screen_frame.c */
     {0xC0DAA0, glue_C0DAA0, "append_mirrored_points", 0, 0, glue_C0DAA0_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0DAA0_owns},
     {0xC0DAD0, glue_C0DAD0, "append_point", 0, 0, glue_C0DAD0_complete_step, 0xC0DAEE, 0, 0xC0D74A, glue_C0DAD0_owns},
@@ -286,7 +285,6 @@ const FA18Port fa18_ports[] = {
     {0xC1B27E, glue_C1B27E, "update_flight_input", 2400},
     {0xC3316E, glue_C3316E, "play_context_tone_4", 0, 0, glue_C3316E_step, 0xC331CE},
     {0xC244E2, glue_C244E2, "classify_selected_record_range", 0, 0, glue_C244E2_step, 0xC2467E},
-    {0xC2DD4E, glue_C2DD4E, "adjust_matrix_record_depth", 1300},
     /* render_line.c, render_state.c */
     {0xC2F490, glue_C2F490, "reset_line_style", 0, 0, glue_C2F490_step, 0xC2F49C},
     {0xC2F596, glue_C2F596, "clear_renderer_blocks", 500},
@@ -309,7 +307,6 @@ const FA18Port fa18_ports[] = {
     {0xC31B76, glue_C31B76, "draw_stream_numeric_fields", 0, 0, glue_C31B76_step, 0xC31C20, 1, 0xC31B74, glue_C31B76_owns},
     {0xC33AD6, glue_C33AD6, "draw_bounded_stream_marker", 0, 0, glue_C33AD6_step, 0xC33B06, 1, 0, glue_C33AD6_owns},
     {0xC33B06, glue_C33B06, "draw_bounded_stream_marker", 0, 0, glue_C33B06_step, 0xC33B36, 1, 0, glue_C33B06_owns},
-    {0xC2DEA2, glue_C2DEA2, "mark_record_pending", 50},
     {0xC28F16, glue_C28F16, "set_record_view", 0, 0, glue_C28F16_step, 0xC28F2C},
     {0xC0FA4C, glue_C0FA4C, "await_viewport_match", 90},
     {0xC0FA80, glue_C0FA80, "complete_post_input", 80},

@@ -147,7 +147,6 @@ int glue_C2374C_step(void);
 int glue_C2574A_step(void);
 int glue_C25704_step(void);
 
-int glue_C2DE96(void);
 int glue_C0DAA0(void);
 int glue_C0DAA0_step(void);
 int glue_C0DAD0(void);
@@ -178,7 +177,6 @@ int glue_C4FFB0(void);
 int glue_C14876(void);
 int glue_C308E2(void);
 int glue_C30904(void);
-int glue_C2DEA2(void);
 int glue_C28F16(void);
 int glue_C28F16_step(void);
 int glue_C0FA4C(void);
@@ -727,7 +725,6 @@ int glue_C1B27E(void);
 int glue_C3316E(void);
 int glue_C3316E_step(void);
 int glue_C244E2(void);
-int glue_C2DD4E(void);
 
 /* batch 63: postflight HUD */
 int glue_C33CD2(void);

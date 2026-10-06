@@ -34,11 +34,6 @@ int glue_C14876(void) {
     return glue_return();
 }
 
-int glue_C2DEA2(void) {
-    mark_record_pending(A(1));
-    return glue_return();
-}
-
 int glue_C28F16(void) {
     set_record_view(A(0), (int16_t)D(2), (int16_t)D(3), (int16_t)D(4), (int16_t)D(5), D(6));
     return glue_return();

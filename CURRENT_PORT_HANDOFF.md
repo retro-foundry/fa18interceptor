@@ -92,6 +92,22 @@ passes depth results as C values. Parent fixed timing is a separate open issue:
 the isolated 800-frame C2D408 probe first differs from OFF at frame 584 (488
 non-fade pixels), despite matching source call results.
 
+The depth closure is now validated and committed as the next batch: C2DD4E,
+C2DE96 and C2DEA2 CPU adapters are retired, including `glue_matrix_depth.c`.
+The game owner already calls these functions directly with C values; the outer
+parent now profiles its actual depth call. The 800-frame isolated probe runs
+69 direct depth calls and 56 side calls. Previous counters and RGB/index/RAM
+bytes are identical; source shadow/sandbox counts remain 65/70 matches, zero
+mismatches (five shadow incomplete). Both toolchains build and twelve CTests
+pass. No full replay was repeated. Evidence:
+`analysis/emulation_removal_matrix_depth_batch.json/.md`.
+Current inventory is 603 CPU registrations plus 11 direct C entries, still 614
+readable entries. Reused full-suite raw minimum **38.4011%**, observed bounded
+counter delta **0**; accepted CPU share unavailable, memory/chipset/boot **0%**,
+gate **0/4**. Next: investigate the parent's source timing boundary before
+extending toward its generated callers; additional leaf retirement alone will
+not fix its live frame mismatch.
+
 ## What went wrong and must not recur
 
 About fourteen hours of elapsed work on 2026-10-05 expanded a separate gameplay
@@ -192,7 +208,7 @@ The last active function milestone (`05fa7453`) statically recompiles 85 deferre
 entries in `port/recomp/generated/recomp_static_deferred.c`. They retain explicit
 `STATIC_RECOMP`/`TODO(decompile)` markers and per-entry debt in
 `recomp_deferred.json`. The inventory includes 539 readable translated entries
-(531 CPU entry adapters and eight direct C entries without CPU adapters)
+(528 CPU entry adapters and eleven direct C entries without CPU adapters)
 and 75 additional readable source-only callable entries. Static compilation
 still depends on shared CPU/machine state and is not readable decompilation.
 See `analysis/routines/static_recomp_deferred.md` and its checkpoint for the

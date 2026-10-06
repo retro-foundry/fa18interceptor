@@ -68,6 +68,7 @@ int glue_C2D408(void) {
         MatrixSideValues side;
         for (i = 0; i < 8; i++) run.d[i] = D(i);
         update_record_nonclass_matrix(record, &run, matrix_side_observe, &side);
+        if (run.used_depth) fa18_ports_note_native_edge(0xC2D408, 0xC2DD4E);
         for (i = 0; i < 8; i++) D(i) = run.d[i];
         if (run.used_matrix_side) A(0) = side.final_address;
         A(4) = record + 0x80;

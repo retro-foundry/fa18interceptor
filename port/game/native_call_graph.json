@@ -151,6 +151,57 @@
         "guest game memory",
         "ancestor CPU/timing adapter"
       ]
+    },
+    {
+      "entry": "C2DD4E",
+      "function": "adjust_matrix_record_depth",
+      "source": "port/game/matrix.c",
+      "callers": [
+        {
+          "entry": "C2D408",
+          "function": "update_record_nonclass_matrix",
+          "source": "port/game/record_matrix_update.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/route_record_triple_to_adjustment.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C2DE96",
+      "function": "settle_record",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C2DD4E",
+          "function": "adjust_matrix_record_depth",
+          "source": "port/game/matrix.c"
+        }
+      ],
+      "source_call": "source_amiga/observed/prepare_record_depth_adjustment.asm",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
+    },
+    {
+      "entry": "C2DEA2",
+      "function": "mark_record_pending",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C2DD4E",
+          "function": "adjust_matrix_record_depth",
+          "source": "port/game/matrix.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_002.c",
+      "remaining_dependencies": [
+        "guest game memory",
+        "ancestor CPU/timing adapter"
+      ]
     }
   ]
 }

@@ -81,10 +81,4 @@ int glue_C230B0(void) {
     return glue_return();
 }
 
-/* $C2DE96: A1 record; no register outputs. */
-int glue_C2DE96(void) {
-    settle_record(A(1));
-    return glue_return();
-}
-
 /* Complete display pair writers are in glue_display_record_selection.c. */
