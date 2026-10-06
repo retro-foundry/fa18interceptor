@@ -204,21 +204,6 @@ static void stage(void *context,gaddr routine) {
     }
     else if(!native_setup_stage(game,routine)) { fprintf(stderr,"native flight stage unavailable: %08X\n",routine); abort(); }
 }
-enum { PALETTE_FRAME=0x3080 };
-static int32_t palette_child(void *context,enum InputDeviceChild child) {
-    NativeFrontend *game=context;
-    switch(child) {
-    case IDC_PALETTE_FIRST: case IDC_PALETTE_SECOND: {
-        gaddr source=rd_u32(PALETTE_FRAME-16);
-        for(unsigned i=0;i<16;++i) game->palette[i]=rd_u16(source+2*i);
-        break;
-    }
-    case IDC_PALETTE_STABLE: break; /* host palette is already published */
-    case IDC_FADE: fade_master_volume(); break;
-    default: fprintf(stderr,"native palette child unavailable: %u\n",(unsigned)child); abort();
-    }
-    return 0;
-}
 static MainTimerBounds timer_child(void *context,enum MainTimerChild child) {
     (void)context;
     switch(child) {
@@ -253,8 +238,6 @@ int native_flight_tick(NativeFrontend *game) {
     if(!native_flight_enabled(game)) return 1;
     if(game->flight_timer_pending) return finish_frame_clock(game);
     const uint16_t saved_tick=rd_u16(UPDATE_TICK);
-    const InputDeviceHooks palette={palette_child,NULL,game};
-    advance_viewport_palette(PALETTE_FRAME,&palette);
     native_input_process(game); /* C0F3C4, before the C0F5F8 stage tick. */
     const PostInputTickHooks hooks={stage,NULL,game};
     run_post_input_tick(&hooks);

@@ -7,6 +7,17 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest cadence batch: C1718E's viewport/master-fade tail now runs on each host
+PAL frame, including menu delays, timer polls and display waits. It previously
+ran once per game update. C17456 registers interrupt 5 through Exec vector
+-$A8 at C53B00; the reference machine raises that vertical-blank bit each PAL
+frame. Native RGB4 stable publication is connected as well. 128 source
+sequences (6,400 ticks) and a real display-wait/fade check pass. Frontend/menu,
+carrier/save/restart, crash/re-entry and populated cockpit regressions pass;
+the native demo completes and its final record parent agrees. See
+`analysis/native_viewport_cadence_milestone.md`. The viewport/fade tail is 1/1
+connected; full mouse-counter input and audible output are still open. Demo
+startup tick lead remains 37; native full frame parity remains 0/3 accepted.
 Latest startup batch: native menu entry now runs the complete C0FBE0 owner,
 including source sound selection, master-volume target, work-bank/message
 reset and palette-table loading. Its C0E78A busy pause yields under the existing
@@ -17,7 +28,7 @@ removed; menu volume/state now match original startup. Frontend/menu, complete
 native demo, carrier/save/restart, crash/re-entry and twelve reference tests
 pass. See `analysis/native_menu_start_milestone.md`. C0FBE0 setup is 1/1 parent
 connected and verified; startup lead remains 37 ticks and frame parity is 0/3.
-Next: asynchronous input/audio cadence and remaining frame-tail drawing.
+Next: asynchronous voice updates/output and remaining frame-tail drawing.
 Latest timing batch: native C17510/C1756A/C1787A startup sound resources and
 linked voice descriptors are connected. All 15 sample buffers, availability
 flags $07/$F7 and the generated-noise random seed match original startup.

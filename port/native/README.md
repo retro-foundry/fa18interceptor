@@ -54,12 +54,16 @@ resources and linked voice descriptors now load from the ADF or execute the
 source square-wave/noise generators. All 15 sample buffers, availability flags
 and resulting random seed match original startup. This restores the source
 210-update demo banner and reduces the observed startup lead from 97 to 37 game
-ticks. Viewport/message cadence and per-tick audio programs/output remain open.
+ticks. Remaining message/frame cadence and per-tick audio programs/output remain open.
 Other selected modes stop at their banner. Audible output remains unconnected.
 Menu entry now executes complete C0FBE0 sound/volume/reset/palette setup.
 Its busy pause yields under the nominal PAL-clock conversion; input received
 during the pause is retained for the following game input poll. Source tone
 mute and volume-fade state are no longer overridden by the frontend.
+C1718E's viewport/fade tail now runs once per PAL frame, including pending
+game timers and display waits, as required by C17456's vertical-blank server.
+Stable palette publication is connected. The full mouse-counter callback and
+audible output remain open.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
@@ -70,6 +74,7 @@ build/native/fa18_native.exe --headless --frames 1800 --ppm build/credits.ppm
 python tools/native/check_frontend.py --runner build/native/fa18_native.exe
 python tools/native/check_menu.py --runner build/native/fa18_native.exe
 python tools/native/check_menu_start.py --runner build/native/fa18_native.exe
+python tools/native/check_viewport.py --runner build/native/fa18_native.exe
 python tools/native/check_flight_start.py --runner build/native/fa18_native.exe
 python tools/native/check_records.py --runner build/native/fa18_native.exe
 python tools/native/check_raster.py --runner build/native/fa18_native.exe

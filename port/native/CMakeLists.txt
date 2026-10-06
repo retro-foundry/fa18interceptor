@@ -1,7 +1,7 @@
 add_executable(fa18_native main.c replay.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/display.c ../game/native/cockpit_assets.c
-    ../game/native/audio_assets.c ../game/sound_resources.c ../game/native/menu_start.c
+    ../game/native/audio_assets.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
     ../game/input_display_setup.c ../game/render_page.c
     ../game/native/input.c ../game/pending_input.c ../game/input_events.c
     ../game/command_dispatch.c ../game/view_commands.c ../game/player_input.c
@@ -84,6 +84,9 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                 --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_actions
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_actions.py
+                --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_viewport
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_viewport.py
                 --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_menu_start
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_menu_start.py

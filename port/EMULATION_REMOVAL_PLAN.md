@@ -9,7 +9,18 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
-- Latest completed batch: connect the complete C0FBE0 menu owner, replacing
+- Latest completed batch: move C1718E's viewport/fade tail from game updates
+  to its original vertical-blank cadence. It runs during host frame waits and
+  publishes stable RGB4 colours through the native palette sink. 128 source
+  sequences (6,400 ticks), a real display-wait test and affected native
+  frontend/menu/cockpit/demo/carrier/crash comparisons pass. See
+  `../analysis/native_viewport_cadence_milestone.md`. This tail is **1/1
+  connected (100% of that scope)**; the complete mouse callback and audible
+  output remain open. Demo startup lead remains 37 ticks; full frame parity
+  remains **0/3 accepted**. Next: asynchronous voice updates and missing
+  frame-tail rendering.
+
+- Complete: connect the complete C0FBE0 menu owner, replacing
   its queue-only entry. Original sound selection, volume target, work-bank and
   message resets, palette table and callback now execute. C0E78A's nominal
   host pause suspends game/input updates and retains queued selections.

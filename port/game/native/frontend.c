@@ -16,6 +16,7 @@
 #include "input.h"
 #include "cockpit_assets.h"
 #include "audio_assets.h"
+#include "viewport.h"
 #include "../audio.h"
 #include "../text.h"
 #include "../../romfree/placement.h"
@@ -205,6 +206,7 @@ void native_frontend_raw_event(NativeFrontend *game,uint8_t raw,int down) {
 void native_frontend_tick(NativeFrontend *game) {
     native_storage_bind(&game->storage); ++game->ticks; ++game->screen_ticks;
     native_clock_set(game->ticks);
+    native_viewport_tick(game);
     if(!native_menu_resume(&game->menu_setup,game->ticks)) return;
     if(game->display_pending && !native_display_resume(game)) {
         native_display_read_pixels(game); return;
