@@ -1,5 +1,7 @@
 #include "../game/native/frontend.h"
 #include "../game/native/menu.h"
+#include "../game/globals.h"
+#include "../game/memory.h"
 #include "../recomp/frame_pacer.h"
 #include <SDL.h>
 #include <stdio.h>
@@ -13,17 +15,18 @@ static int write_ppm(const char *path,NativeFrontend *game) {
     return fclose(file)==0;
 }
 int main(int argc,char **argv) {
-    const char *adf="local/media/fa18.adf",*save_dir="saves-native",*ppm=NULL,*replay=NULL; int headless=0,running=1,result=1;
+    const char *adf="local/media/fa18.adf",*save_dir="saves-native",*ppm=NULL,*replay=NULL,*data_out=NULL; int headless=0,running=1,result=1;
     unsigned frames=0,events=0,next=0; KeyEvent keys[1024]; char error[256];
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--ppm PATH]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--ppm PATH] [--data-out PATH]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
         else if(i+1<argc && !strcmp(argv[i],"--ppm")) ppm=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--replay")) replay=argv[++i];
+        else if(i+1<argc && !strcmp(argv[i],"--data-out")) data_out=argv[++i];
         else { fprintf(stderr,"Unknown/incomplete option: %s\n",argv[i]); goto done; }
     }
     if(headless && !frames) { fputs("Headless runs require --frames N\n",stderr); goto done; }
@@ -55,7 +58,14 @@ int main(int argc,char **argv) {
         }
     }
     if(ppm && !write_ppm(ppm,game)) { fprintf(stderr,"Cannot write PPM: %s\n",ppm); goto done; }
-    printf("{\"frames\":%u,\"screen\":\"%s\",\"mode\":%u,\"glyphs\":%u,\"cpu_emulation\":false,\"chipset_emulation\":false}\n",game->ticks,native_frontend_screen(game),native_menu_selected_mode(game),game->glyphs);
+    if(data_out) {
+        FILE *file=fopen(data_out,"wb");
+        if(!file) { perror(data_out); goto done; }
+        int written=fwrite(game->storage.buffers,1,sizeof game->storage.buffers,file)==sizeof game->storage.buffers
+            && fwrite(game->storage.source,1,sizeof game->storage.source,file)==sizeof game->storage.source;
+        if(fclose(file) || !written) { fprintf(stderr,"Cannot write native data: %s\n",data_out); goto done; }
+    }
+    printf("{\"frames\":%u,\"screen\":\"%s\",\"mode\":%u,\"glyphs\":%u,\"scene_selected\":%s,\"stage\":\"%06X\",\"cpu_emulation\":false,\"chipset_emulation\":false}\n",game->ticks,native_frontend_screen(game),native_menu_selected_mode(game),game->glyphs,game->scene_selected?"true":"false",rd_u32(STAGE_CALLBACK));
     result=0; goto done;
 sdl_error:
     fprintf(stderr,"SDL: %s\n",SDL_GetError());

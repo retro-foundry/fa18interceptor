@@ -56,7 +56,7 @@ def main():
             return [(frame, value, 1), (frame + 2, value, 0)]
         modes = (127, 1, 2, 125, 9)
         for digit, mode in enumerate(modes, 1):
-            stats, pixels, _ = run(f"mode-{digit}", 4000, key(3000, 48 + digit))
+            stats, pixels, _ = run(f"mode-{digit}", 3140, key(3000, 48 + digit))
             assert stats["screen"] == "mode-intro" and stats["mode"] == mode, stats
             assert pixels == PIXELS[digit], (digit, pixels)
         print("Modes 1-5: source selections and all five transition banners match", flush=True)
@@ -65,7 +65,7 @@ def main():
         print("Next mission: source pilot-log field selects mode 6", flush=True)
         entry = key(2400, 112) + key(2440, 105) + key(2480, 108)
         entry += key(2520, 111) + key(2560, 116) + key(2680, 13) + key(3000, 50)
-        stats, pixels, _ = run("first-tour-selection", 4000, entry, bytes(78))
+        stats, pixels, _ = run("first-tour-selection", 3140, entry, bytes(78))
         assert stats["screen"] == "mode-intro" and stats["mode"] == 1 and pixels == PIXELS[2], stats
         print("New pilot: Return release restores the source command gate; first selection works", flush=True)
         for digit, screen in ((6, "missions"), (8, "pilot-log")):

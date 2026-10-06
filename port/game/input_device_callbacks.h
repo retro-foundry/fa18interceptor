@@ -22,6 +22,9 @@ typedef struct {
     void *context;
 } InputDeviceHooks;
 void advance_input_device_callback(gaddr frame,const InputDeviceHooks *h);
+/* Palette/countdown tail shared by the source input callback and host video
+ * tick. The caller supplies palette presentation and audio-fade children. */
+void advance_viewport_palette(gaddr frame,const InputDeviceHooks *h);
 void install_input_device_callback(const InputDeviceHooks *h);
 void remove_input_device_callback(const InputDeviceHooks *h);
 void prepare_input_device_port(gaddr frame,const InputDeviceHooks *h);

@@ -9,6 +9,7 @@
 #include "../stages.h"
 #include "../globals.h"
 #include "menu.h"
+#include "flight.h"
 #include "../text.h"
 #include "../../romfree/placement.h"
 #include "../../romfree/media.h"
@@ -108,6 +109,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     for(unsigned i=0;i<4;++i) wr_u32(PLANE_TABLE+4*i,PLANE_FIRST+i*PLANE_BYTES);
     wr_u8(0xc4588au,1); wr_u8(0xc457d7u,2); /* source audio suppression */
     native_menu_initialize();
+    native_flight_initialize();
     game->screen=NATIVE_SPLASH; memcpy(game->palette,game->splash.palette,sizeof game->palette);
     for(unsigned y=0;y<game->splash.height;++y) memcpy(game->indices+y*320,game->splash.indices+y*game->splash.width,game->splash.width);
     ok=1;
@@ -118,7 +120,7 @@ done:
 }
 void native_frontend_close(NativeFrontend *game) { amiga_ilbm_free(&game->splash); native_storage_bind(NULL); }
 const char *native_frontend_screen(const NativeFrontend *game) {
-    static const char *names[]={"splash","credits","enlistment","callsign","menu","mode-intro","missions","pilot-log"}; return names[game->screen];
+    static const char *names[]={"splash","credits","enlistment","callsign","menu","mode-intro","missions","pilot-log","scene-setup"}; return names[game->screen];
 }
 void native_frontend_key(NativeFrontend *game,int key) {
     native_storage_bind(&game->storage);
@@ -169,6 +171,7 @@ void native_frontend_tick(NativeFrontend *game) {
         wr_u16(PLAYER_LOG+4,(uint16_t)(rd_u16(PLAYER_LOG+4)+1));
     } else if(game->screen==NATIVE_CALLSIGN && game->name_finished) native_frontend_start_menu(game);
     native_menu_tick(game);
+    native_flight_tick(game);
     for(unsigned y=0;y<256;++y) for(unsigned x=0;x<320;++x) {
         uint8_t index=0;
         for(unsigned p=0;p<4;++p) if(rd_u8(PLANE_FIRST+p*PLANE_BYTES+y*40+x/8)&(0x80u>>(x&7))) index|=(uint8_t)(1u<<(3-p));

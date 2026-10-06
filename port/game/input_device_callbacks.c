@@ -85,7 +85,7 @@ static void restore_view_pair(gaddr frame,const InputDeviceHooks *h,int first) {
     a=address(h,0,offset); a=address(h,0,a+0xc182c2); longword(h,SAVED_PALETTE,rd_u32(a));
 }
 void advance_input_device_callback(gaddr frame,const InputDeviceHooks *h) {
-    uint8_t ready,mode,target,count; uint16_t v,delta; int32_t signed_mode; gaddr src,dst; uint32_t offset;
+    uint8_t ready; uint16_t v,delta;
     read_counters(frame,h,frame-4,1);
     ready=read_byte(h,PLAYER_READY,0); observe(h,IDC_TEST_BYTE,ready,0);
     if(!ready) {
@@ -97,6 +97,10 @@ void advance_input_device_callback(gaddr frame,const InputDeviceHooks *h) {
     clamp_axis(h,INPUT_X,MIN_X,MAX_X); clamp_axis(h,INPUT_Y,MIN_Y,MAX_Y);
     word(h,COUNTER_X,rd_u16(frame-6)); word(h,COUNTER_Y,rd_u16(frame-8));
     v=read_word(h,INPUT_TICKS,0); observe(h,IDC_ADD_D0_WORD,1,0); word(h,INPUT_TICKS,(uint16_t)(v+1));
+    advance_viewport_palette(frame,h);
+}
+void advance_viewport_palette(gaddr frame,const InputDeviceHooks *h) {
+    uint8_t mode,target,count; uint16_t v; int32_t signed_mode; gaddr src,dst; uint32_t offset;
     mode=read_byte(h,VIEWPORT_MODE,0); target=read_byte(h,VIEWPORT_TARGET,1); compare_byte(h,mode,target);
     if(mode!=target) {
         count=read_byte(h,VIEWPORT_COUNTDOWN,2); observe(h,IDC_SUB_D2_BYTE,1,0); count=(uint8_t)(count-1);

@@ -10,7 +10,7 @@ static void observe(const SceneBootstrapHooks *hooks,enum SceneBootstrapPhase ph
 static void require_hooks(const SceneBootstrapHooks *hooks) {
     if(!hooks || !hooks->consume) abort();
 }
-void bootstrap_scene(const SceneBootstrapHooks *hooks) {
+void prepare_scene_storage(const SceneBootstrapHooks *hooks) {
     unsigned slot,i;
     require_hooks(hooks);
     hooks->consume(hooks->context,BOOTSTRAP_CLEAR_STARTUP);
@@ -49,6 +49,9 @@ void bootstrap_scene(const SceneBootstrapHooks *hooks) {
     observe(hooks,BOOTSTRAP_INITIALIZED,0);
     hooks->consume(hooks->context,BOOTSTRAP_PLACE_VIEW);
     hooks->consume(hooks->context,BOOTSTRAP_BUILD_GATES);
+}
+void bootstrap_scene(const SceneBootstrapHooks *hooks) {
+    prepare_scene_storage(hooks);
     hooks->consume(hooks->context,BOOTSTRAP_UPDATE_RECORDS);
     hooks->consume(hooks->context,BOOTSTRAP_REFRESH_CONTEXT);
 }

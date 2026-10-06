@@ -24,6 +24,9 @@ typedef struct {
     void *context;
 } SceneBootstrapHooks;
 /* Complete C08F26 and its C0F920/C0F992 sequence callback wrappers. */
+/* Source prefix through root placement and template-gate construction. The
+ * caller still owes record update and context refresh before full bootstrap. */
+void prepare_scene_storage(const SceneBootstrapHooks *hooks);
 void bootstrap_scene(const SceneBootstrapHooks *hooks);
 void reset_sequence_after_bootstrap(const SceneBootstrapHooks *hooks);
 void begin_sequence_after_bootstrap(const SceneBootstrapHooks *hooks);

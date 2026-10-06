@@ -3,7 +3,7 @@
 #include "storage.h"
 #include "../../amiga/ilbm.h"
 enum NativeScreen { NATIVE_SPLASH,NATIVE_CREDITS,NATIVE_ENLISTMENT,NATIVE_CALLSIGN,NATIVE_MENU,
-    NATIVE_MODE_INTRO,NATIVE_MISSIONS,NATIVE_PILOT_LOG };
+    NATIVE_MODE_INTRO,NATIVE_MISSIONS,NATIVE_PILOT_LOG,NATIVE_SCENE_SETUP };
 typedef struct {
     NativeStorage storage;
     AmigaIlbm splash;
@@ -14,6 +14,7 @@ typedef struct {
     unsigned glyphs;
     unsigned shift_keys;
     int name_finished;
+    int scene_selected;
     char config_path[4096];
 } NativeFrontend;
 int native_frontend_open(NativeFrontend *game,const char *adf,const char *save_dir,char *error,size_t capacity);

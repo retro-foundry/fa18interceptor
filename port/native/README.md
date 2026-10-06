@@ -18,8 +18,10 @@ Digit 7 uses the original next-mission selector. Digit 8 opens flight-log
 statistics. Escape returns from the mission list or log to the main menu.
 In the log, SHIFT-2 resets the 39 words, and 1 saves the exact 78 bytes. A reset
 pilot goes through enlistment/callsign entry again. Closing the window exits.
-The selected mode's delayed flight setup is still absent: mode-intro is a
-rendered transition screen, not active flight. Audio remains suppressed.
+Free Flight (digit 2) now runs source scene-storage preparation, delayed scene
+selection and viewport/message stages. It stops at `scene-setup` / C1072E;
+location/aircraft controls and cockpit/world rendering are still pending.
+Other selected modes stop at their transition banner. Audio remains suppressed.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
@@ -29,6 +31,7 @@ Source audio suppression is enabled for this initial visual milestone.
 build/native/fa18_native.exe --headless --frames 1800 --ppm build/credits.ppm
 python tools/native/check_frontend.py --runner build/native/fa18_native.exe
 python tools/native/check_menu.py --runner build/native/fa18_native.exe
+python tools/native/check_flight_start.py --runner build/native/fa18_native.exe
 ```
 
 Build ownership is `port/recomp/CMakeLists.txt` -> `port/native/CMakeLists.txt`.
@@ -47,6 +50,11 @@ values; `queue_top_level_menu_messages` publishes the existing menu selectors.
 Source data addresses currently index checked host storage; fully typed game
 state is still future work. Source callback identifiers describe the recreated
 menu transitions; they never execute source instructions or CPU adapters.
+`--data-out PATH` exports host buffers and source data for checkpoint inspection;
+it supplies no runtime state. Initial player pose, camera and template-gate
+banks match a focused original checkpoint. Full record state, update timing and
+active gameplay remain unverified; see
+[`../../analysis/native_flight_start_milestone.md`](../../analysis/native_flight_start_milestone.md).
 
 Authority: C0E2E8/C0E078 splash load, C0E53C/C0E78A busy delay, C11446/C11478
 credits and acknowledgement, C115BA-C1175A tour/name flow, C0FBE0 menu,

@@ -129,7 +129,6 @@ void native_menu_tick(NativeFrontend *game) {
     } else if(next==0xc0fe36) { game->screen=NATIVE_PILOT_LOG; game->screen_ticks=0; }
     else if(next==0xc0fece) {
         game->screen=NATIVE_MODE_INTRO; game->screen_ticks=0;
-        /* TODO(port): C0FECE's delayed flight scene/root/view owners. The
-         * source-selected transition message is rendered; flight is absent. */
+        game->scene_selected=0;
     }
 }

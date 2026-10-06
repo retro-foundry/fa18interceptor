@@ -18,9 +18,16 @@ reset and 78-byte save/reload. All five mode banners, the mission list and
 pilot log match source settled pixels exactly. Both compiler reference builds,
 the existing frontend checks and focused menu checks validate this batch.
 Evidence: `analysis/native_menu_milestone.md`.
-Next native milestone: implement C0FECE delayed scene/root/view setup, then
-Free Flight location/aircraft prompts and the actual cockpit/flight loop.
-Selected modes currently stop at their transition screen; no flight runs yet.
+Native Free Flight now runs the C08F26 storage/pose/template-gate prefix,
+C0FECE countdown/scene constructors, C101FC/C10228 viewport transition and
+C10678 mode messages. Initial player pose, camera and all three template-gate
+banks match a focused original checkpoint. Full record state still differs;
+the final bootstrap record update is not connected. Endpoint: `scene-setup`,
+C1072E. Other modes still stop at their banner. No native flight runs yet.
+Evidence: `analysis/native_flight_start_milestone.md`. Rough flight-start
+estimate 50%; this does not measure whole-game completeness.
+Next: C1C63E/C22C80 bootstrap record updates, C1072E and interactive Free
+Flight location/aircraft choices, then direct drawing and the flight loop.
 Audio currently takes the original suppression path. Source data still uses
 checked address-indexed host buffers, pending typed-state migration.
 

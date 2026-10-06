@@ -40,8 +40,14 @@ void fade_master_volume(void) {
 }
 
 void clear_voice_interrupt(int channel) {
+#ifdef FA18_NATIVE
+    /* No Paula interrupt is pending in the host's silent frontend. Voice
+     * ownership is still cleared by free_voice; no register is emulated. */
+    (void)channel;
+#else
     gaddr voice = rd_u32(VOICE_TABLE + (gaddr)(int32_t)(int16_t)(channel * 4));
     custom_write(INTREQ, rd_u16(voice + VOICE_INTERRUPT));
+#endif
 }
 
 void step_voice_program(gaddr voice, gaddr slot, int channel) {
