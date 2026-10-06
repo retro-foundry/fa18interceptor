@@ -1,0 +1,184 @@
+{
+  "schema": 1,
+  "scope": "800-frame isolated C2D408 probes on three sealed inputs; no full replay",
+  "authority": "Original parent selects/publishes CURRENT_RECORD at C1342C; unchanged math and original call-result comparisons.",
+  "real_caller": "runner -> machine frame -> recomp hook -> active C25B66 step -> C2D408 -> update_record_nonclass_matrix -> update_matrix_side_record -> C helpers",
+  "removed_dependency": "Six C helper bodies no longer load the guest CURRENT_RECORD pointer; selected record is a C argument.",
+  "original_pointer_still_published": true,
+  "baseline_commit": "75f524d25e770bd3a740e88b5a5d6e5ea38b7032",
+  "runner_sha256": "51cb0053483cbbc057b6a01750976f3279a3fc46a5127507c4f260fe471c82e6",
+  "source_hashes": {
+    "port\\game\\control_records.c": "0298a7cb4c06b4de4221be4af36e00c32756279b59d73f76808b141e52776c46",
+    "port\\game\\control_records.h": "8cca6ca2da75db1297e7563c3c7a47dcd6d9b2ef73044e22dff1798f9c59ab08"
+  },
+  "probes": [
+    {
+      "name": "demo01",
+      "frames": 800,
+      "parent_calls": 70,
+      "native_edges": [
+        {
+          "caller": "C2D408",
+          "callee": "C2DD4E",
+          "calls": 69
+        },
+        {
+          "caller": "C2D408",
+          "callee": "C1342C",
+          "calls": 56
+        }
+      ],
+      "removed_current_record_reads": 56,
+      "changed_memory_page": "C18000",
+      "profile_instructions_equal": true,
+      "all_other_page_accesses_equal": true,
+      "stdout_stderr_equal": true,
+      "output_hashes": {
+        "rgb": "7e2690bdfe4c7c9dc2845fb73dbfb52665fa65fd1c83ba2968609ed6fe92ac24",
+        "ram": "8e53828c93c916e3089c0666bd180a4b3af299d577a9acd261b8e86764e04ce6",
+        "index8": "b9f00ec1cf277fb680ca0d551b11248034f83578138575d00f44b4b6ba962776"
+      },
+      "outputs_match_prior_runner": true,
+      "profile_hashes": {
+        "before": "2fafc25da38bb5b1705b32f36e3504da4b840d09c286d8438536536adcb67abd",
+        "after": "f933ea5ad631bf650d2210ba503efbc08bc3ca4abf0a9cf1241b5434970eda1a"
+      }
+    },
+    {
+      "name": "qual_carrier_success",
+      "frames": 800,
+      "parent_calls": 15,
+      "native_edges": [
+        {
+          "caller": "C2D408",
+          "callee": "C2DD4E",
+          "calls": 15
+        }
+      ],
+      "removed_current_record_reads": 0,
+      "changed_memory_page": null,
+      "profile_instructions_equal": true,
+      "all_other_page_accesses_equal": true,
+      "stdout_stderr_equal": true,
+      "output_hashes": {
+        "rgb": "878507fd15dbdc49cd4f59056e8bb6c7eab74be86f727b6d60e0ab70264211c4",
+        "ram": "d3df0c6643217f2fa3f82e91cbc367931b8bc09d05da329d48fc8e41abe3bc51",
+        "index8": "e5538508ab24218f372cd7c5bb61668a1e21d4795379705bf75b928e1463a3d8"
+      },
+      "outputs_match_prior_runner": true,
+      "profile_hashes": {
+        "before": "11e657fc731d64272d233dafb1108c2f3430637798782843053e34ddc21028f1",
+        "after": "11e657fc731d64272d233dafb1108c2f3430637798782843053e34ddc21028f1"
+      }
+    },
+    {
+      "name": "qual_fail_crashes",
+      "frames": 800,
+      "parent_calls": 76,
+      "native_edges": [
+        {
+          "caller": "C2D408",
+          "callee": "C2DD4E",
+          "calls": 75
+        },
+        {
+          "caller": "C2D408",
+          "callee": "C1342C",
+          "calls": 53
+        }
+      ],
+      "removed_current_record_reads": 106,
+      "changed_memory_page": "C18000",
+      "profile_instructions_equal": true,
+      "all_other_page_accesses_equal": true,
+      "stdout_stderr_equal": true,
+      "output_hashes": {
+        "rgb": "941737bb89d01d30671f695ed599b98dbcfadef7690c983a37be64348513d081",
+        "ram": "c6628b4c27a3187bf0a0faa5e181b031f98b3828d9425317540c1e64ea260dde",
+        "index8": "e2cc35eccbcf0ba26843780292f68a9467816fa23924a3d1a1b5445400dcc2cf"
+      },
+      "outputs_match_prior_runner": true,
+      "profile_hashes": {
+        "before": "349bb795430ccb6b5852545d245cba996cd322fecca63bc318975608681352ae",
+        "after": "a60e90d0657a2ac3a24a57b2a425b01987f494a3a48128ffdf9419e7a8c5d0ef"
+      }
+    }
+  ],
+  "source_comparisons": {
+    "demo01": {
+      "shadow": {
+        "entry": "C2D408",
+        "name": "update_record_matrix",
+        "calls": 70,
+        "compared": 65,
+        "matched": 65,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 5,
+        "mean_cycles": 12254,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      },
+      "sandbox": {
+        "entry": "C2D408",
+        "name": "update_record_matrix",
+        "calls": 70,
+        "compared": 70,
+        "matched": 70,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0,
+        "mean_cycles": 12184,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      }
+    },
+    "qual_fail_crashes": {
+      "shadow": {
+        "entry": "C2D408",
+        "name": "update_record_matrix",
+        "calls": 76,
+        "compared": 66,
+        "matched": 66,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 10,
+        "mean_cycles": 11497,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      },
+      "sandbox": {
+        "entry": "C2D408",
+        "name": "update_record_matrix",
+        "calls": 76,
+        "compared": 76,
+        "matched": 76,
+        "mismatched": 0,
+        "hardware": 0,
+        "incomplete": 0,
+        "mean_cycles": 11488,
+        "busy_input_calls": 0,
+        "busy_input_reads": 0
+      }
+    }
+  },
+  "progress": {
+    "last_full_suite": "analysis/emulation_removal_meter_after_matrix_leaves.json",
+    "last_full_suite_raw_cpu_percent": 38.40106459907289,
+    "full_suite_rerun": false,
+    "observed_bounded_instruction_delta": 0,
+    "memory_sites_converted": 0,
+    "memory_sites_remaining": 8946,
+    "native_memory_percent": 0,
+    "native_chipset_percent": 0,
+    "native_boot_percent": 0,
+    "deletable_subsystems": 0,
+    "accepted_cpu_share": null
+  },
+  "limits": [
+    "Records and field accesses remain in guest memory; removed pointer accesses are not state conversion.",
+    "Parent fixed charge and missing event/frame boundaries remain unchanged.",
+    "Helpers run in the existing atomic parent. The original audio path does not modify CURRENT_RECORD.",
+    "Bounded parent probes exercise the side child 56/0/53 times; they do not establish whole-game parity."
+  ]
+}

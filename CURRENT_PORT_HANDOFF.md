@@ -118,6 +118,19 @@ source access/arithmetic/child timing and event boundaries; do not tune the
 fixed charge to an observed average or restore reference execution as gameplay.
 This bounded discovery changes no axis and does not repeat the full suite.
 
+The native matrix-side helper chain now takes its selected record as a C
+argument rather than rereading guest CURRENT_RECORD in six helper bodies.
+The owner still publishes the original pointer; math/field accesses are
+unchanged. Three isolated 800-frame probes preserve RGB/index/RAM, runner
+results and all instruction/device/call counts. Native pointer reads decrease
+by 56/0/106 (demo/carrier/crashes), only on page C18000. Parent source shadow
+matches 65/66 calls (five/ten incomplete), sandbox 70/76, zero mismatches.
+Both toolchains and twelve CTests pass; no full replay was rerun. Evidence:
+`analysis/emulation_removal_record_arguments_batch.json/.md`.
+Access sites now 8,946, zero state sites converted. Reused raw CPU minimum
+**38.4011%**, bounded instruction delta **0**, cutover axes **0%**, gate **0/4**.
+This makes native call inputs explicit ahead of the remaining timing work.
+
 ## What went wrong and must not recur
 
 About fourteen hours of elapsed work on 2026-10-05 expanded a separate gameplay

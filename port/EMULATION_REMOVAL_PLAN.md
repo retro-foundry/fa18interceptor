@@ -183,6 +183,14 @@ preceding **38.4011%** raw minimum, with zero observed bounded counter delta,
 cutover axes **0%**, deletion **0/4**. The parent's source timing mismatch still
 requires work. Evidence: `../analysis/emulation_removal_matrix_depth_batch.json/.md`.
 
+The matrix-side owner also passes its selected record explicitly to six C
+helpers, removing their guest CURRENT_RECORD lookups. Three bounded probes
+and parent source comparisons preserve behavior and instruction/device counts;
+native guest reads decrease by 56/0/106. No full replay was repeated. Raw CPU
+estimate remains **38.4011%** from the last full suite; cutover axes **0%**,
+deletion **0/4**. Removing six lookup sites is not conversion of state to C
+objects. Evidence: `../analysis/emulation_removal_record_arguments_batch.json/.md`.
+
 Today C routines call each other by returning into the dispatcher. Give each
 recreated routine a direct C entry point and let a C caller call its C callee
 directly, keeping glue only for callers that are still generated code.

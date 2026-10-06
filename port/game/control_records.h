@@ -45,16 +45,16 @@ void classify_record_rate(gaddr record);
 /* Clear the first (player) record's motion fields and the related globals. */
 void reset_player_record(void);
 
-/* Current record: +$5A = +$20 when +$6A exceeds 14400, -$20 when it is
+/* +$5A = +$20 when this record's +$6A exceeds 14400, -$20 when it is
  * lower but nonzero, 0 when +$6A is zero. */
-void update_record_5a(void);
+void update_record_5a(gaddr record);
 
 /* Current record: move +$26 an eighth of the way toward `target`. */
 void ease_record_26(int16_t target);
-/* The current record's +$58 a quarter of the way toward 5/8 of `target`
+/* This record's +$58 a quarter of the way toward 5/8 of `target`
  * (halved again when +$20 bit 2 is set), then kept out of the dead zone
  * ($C13C0A). Returns the target used. */
-int16_t ease_record_58(int16_t target);
+int16_t ease_record_58(gaddr record, int16_t target);
 
 /* $C1342C: select MATRIX_SIDE_RECORD, update its three table-driven working
  * values (+$56, +$58 and +$5A), and maintain the associated status bits. */
@@ -155,9 +155,9 @@ void update_view_matrix(void);
 /* Compass heading of the viewed record, in degrees and tape steps. */
 void update_compass(void);
 
-/* Nudge *value away from zero by the current record's +$6C / 128, except
+/* Nudge *value away from zero by this record's +$6C / 128, except
  * inside the +-$500 dead zone. */
-void nudge_outside_dead_zone(gaddr value);
+void nudge_outside_dead_zone(gaddr record, gaddr value);
 
 /* Reset the player record's mission fields and clear records 1-3. */
 void reset_mission_objects(void);
@@ -169,16 +169,16 @@ void begin_mission_reset(void);
 /* Set up the player record for a new flight. */
 void prepare_player_record(void);
 
-/* Ease the current record's +$56 a quarter of the way toward `target`
+/* Ease this record's +$56 a quarter of the way toward `target`
  * (halved when +$20 bit 2 is set), then apply the dead-zone nudge. Nothing
  * happens while +$26 is nonzero, +$2 bit 7 is clear and target <= 0.
  * Returns the target as possibly halved. */
-int16_t steer_record_56(int16_t target);
+int16_t steer_record_56(gaddr record, int16_t target);
 
-/* Ease the current record's +$5A toward 5/8 of `target` (halved when +$20
+/* Ease this record's +$5A toward 5/8 of `target` (halved when +$20
  * bit 2 is set) by a half or, when +$62 is $14, a quarter; then apply the
  * dead-zone nudge. Returns the scaled target. */
-int16_t steer_record_5a(int16_t target);
+int16_t steer_record_5a(gaddr record, int16_t target);
 
 /* Whether a record is ready to pair with its partner: it is active (+$1
  * bits 6 and 0), not excluded (+$0 & $8700, +$20 bit 1), its partner (+$38,
@@ -213,7 +213,7 @@ void update_record_76_78(void);
  * sound the alert if it is a plain player record (+$0 bits $1600 = $1000,
  * +$4 bit 1 clear), and zero +$56; otherwise ease +$56 toward -$40 or $40
  * (by the whole difference, or half when +$6C >= $6C0). */
-void update_record_56_from_66(void);
+void update_record_56_from_66(gaddr record);
 
 /* The loop state of file_records_by_level, as its caller sees it. */
 typedef struct {

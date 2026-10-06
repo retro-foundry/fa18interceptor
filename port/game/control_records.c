@@ -95,8 +95,7 @@ void reset_player_record(void) {
     wr_u16(0xC45AE4u, 0xFFFF);
 }
 
-void update_record_5a(void) {
-    gaddr r = rd_u32(CURRENT_RECORD);
+void update_record_5a(gaddr r) {
     int16_t level = rd_s16(r + 0x6A);
     if (level == 0) wr_u16(r + 0x5A, 0);
     else wr_s16(r + 0x5A, level > 14400 ? 0x20 : -0x20);
@@ -172,8 +171,8 @@ void update_compass(void) {
     wr_s16(COMPASS_TAPE, tape);
 }
 
-void nudge_outside_dead_zone(gaddr value) {
-    int16_t step = (int16_t)(rd_s16(rd_u32(CURRENT_RECORD) + 0x6C) >> 7);
+void nudge_outside_dead_zone(gaddr record, gaddr value) {
+    int16_t step = (int16_t)(rd_s16(record + 0x6C) >> 7);
     int16_t v = rd_s16(value);
     if (v >= 0) {
         if (v < 0x500) step = 0;
@@ -247,25 +246,23 @@ void prepare_player_record(void) {
     if (rd_u8(PLAYER_PHASE)) wr_u8(PLAYER_PHASE, 4);
 }
 
-static void ease_field(gaddr field, int16_t target, int shift) {
+static void ease_field(gaddr record, gaddr field, int16_t target, int shift) {
     int16_t v = rd_s16(field);
     wr_s16(field, (int16_t)(v - (int16_t)((int16_t)(v - target) >> shift)));
-    nudge_outside_dead_zone(field);
+    nudge_outside_dead_zone(record, field);
 }
 
-int16_t steer_record_56(int16_t target) {
-    gaddr r = rd_u32(CURRENT_RECORD);
+int16_t steer_record_56(gaddr r, int16_t target) {
     if (!(rd_u16(r + 0x02) & 0x80) && rd_u16(r + 0x26) != 0 && target <= 0) return target;
     if (rd_u8(r + 0x20) & 0x04) target = (int16_t)(target >> 1);
-    ease_field(r + 0x56, target, 2);
+    ease_field(r, r + 0x56, target, 2);
     return target;
 }
 
-int16_t steer_record_5a(int16_t target) {
-    gaddr r = rd_u32(CURRENT_RECORD);
+int16_t steer_record_5a(gaddr r, int16_t target) {
     target = five_eighths(target);
     if (rd_u8(r + 0x20) & 0x04) target = (int16_t)(target >> 1);
-    ease_field(r + 0x5A, target, rd_u8(r + 0x62) == 0x14 ? 2 : 1);
+    ease_field(r, r + 0x5A, target, rd_u8(r + 0x62) == 0x14 ? 2 : 1);
     return target;
 }
 
@@ -422,8 +419,7 @@ void update_record_76_78(void) {
     wr_s16(r + 0x76, table_by_magnitude(TABLE_76_TARGET, rd_s16(r + 0x6E)));
 }
 
-void update_record_56_from_66(void) {
-    gaddr r = rd_u32(CURRENT_RECORD);
+void update_record_56_from_66(gaddr r) {
     int16_t angle = rd_s16(r + 0x66), target, value;
     int shift;
 
@@ -487,15 +483,15 @@ void file_records_by_level(int16_t column, int16_t row, gaddr lists, FilingState
     file_bank(WORKSPACE_RECORDS, WORKSPACE_RECORD_BYTES, 0x40, column, row, lists, state, 0x36);
 }
 
-int16_t ease_record_58(int16_t target) {
-    gaddr r = rd_u32(CURRENT_RECORD), value = r + 0x58;
+int16_t ease_record_58(gaddr r, int16_t target) {
+    gaddr value = r + 0x58;
     int16_t old;
 
     target = five_eighths(target);
     if (rd_u8(r + 0x20) & 4) target = (int16_t)(target >> 1);
     old = rd_s16(value);
     wr_s16(value, (int16_t)(old - (int16_t)((int16_t)(old - target) >> 2)));
-    nudge_outside_dead_zone(value);
+    nudge_outside_dead_zone(r, value);
     return target;
 }
 
@@ -554,27 +550,27 @@ void update_matrix_side_record(void) {
         target = matrix_side_target(table, x);
         wr_s16(MATRIX_SIDE_TARGET_X, target);
         if (!(rd_u16(header) & 0x80)) {
-            steer_record_56(target);
+            steer_record_56(record, target);
         } else if (rd_u8(record + 0x20) & 0x01) {
-            update_record_56_from_66();
-            update_record_5a();
+            update_record_56_from_66(record);
+            update_record_5a(record);
         } else if (rd_s16(record + 0x6C) > 0x300 &&
                    (rd_s16(record + 0x66) == 0 || rd_s16(record + 0x66) > 0x6D60)) {
             if (x < 0) {
                 int16_t lane = (int16_t)(-x & ~1);
-                steer_record_56((int16_t)-rd_s16(table + (gaddr)lane));
+                steer_record_56(record, (int16_t)-rd_s16(table + (gaddr)lane));
             } else {
-                update_record_56_from_66();
-                update_record_5a();
+                update_record_56_from_66(record);
+                update_record_5a(record);
             }
         } else {
-            update_record_56_from_66();
-            update_record_5a();
+            update_record_56_from_66(record);
+            update_record_5a(record);
         }
     } else {
         wr_u16(MATRIX_SIDE_TARGET_X, 0);
         if (rd_u16(header) & 0x80) {
-            update_record_56_from_66();
+            update_record_56_from_66(record);
         } else if (rd_s16(record + 0x56) != 0 && rd_s16(record + 0x26) == 0) {
             decay_toward_zero(record + 0x56, index == 0 ? 2 : 1);
         }
@@ -584,7 +580,7 @@ void update_matrix_side_record(void) {
         target = matrix_side_target(table, y);
         wr_s16(MATRIX_SIDE_TARGET_Y, target);
         if (!(rd_u8(record + 4) & 0x02) && rd_s16(record + 0x6E) != 0)
-            ease_record_58(target);
+            ease_record_58(record, target);
         else
             decay_toward_zero(record + 0x58, 1);
     } else if (z == 0 || !(rd_u16(header) & 0x80)) {
@@ -600,22 +596,22 @@ void update_matrix_side_record(void) {
         target = matrix_side_target(table, z);
         wr_s16(MATRIX_SIDE_TARGET_Z, target);
         if (!(rd_u16(header) & 0x80)) {
-            steer_record_5a((int16_t)-target);
+            steer_record_5a(record, (int16_t)-target);
         } else if ((rd_u8(record + 4) & 0x02) || rd_s16(record + 0x6E) == 0) {
             decay_toward_zero(record + 0x58, 1);
             decay_toward_zero(record + 0x5A, 1);
         } else {
             int16_t angle = rd_s16(record + 0x6A);
-            ease_record_58(target);
+            ease_record_58(record, target);
             if (angle < 0x50 || angle > 0x7030 || rd_s16(record + 0x6E) <= 0x360 ||
                 (angle < 0x3840 ? z >= 0 : z <= 0))
-                steer_record_5a((int16_t)-target);
+                steer_record_5a(record, (int16_t)-target);
             else
                 wr_u16(record + 0x5A, 0);
         }
     } else {
         wr_u16(MATRIX_SIDE_TARGET_Z, 0);
-        if (rd_u16(header) & 0x80) update_record_5a();
+        if (rd_u16(header) & 0x80) update_record_5a(record);
         if (rd_s16(record + 0x5A) != 0) decay_toward_zero(record + 0x5A, 1);
     }
 
