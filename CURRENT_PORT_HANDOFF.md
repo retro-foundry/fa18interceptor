@@ -11,6 +11,17 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
+Latest image prerequisite: C30EAA's fixed 3,000-cycle blit adapter is now
+source-timed and reuses the existing C30F46 plane-stream tail. Its 62 source
+instructions / 1,984 DMA oracle cases match. Three isolated 800-frame drawing/
+RAM comparisons pass; sandbox passes, shadow has zero mismatches with hardware
+interruptions classified separately. The message-plus-image pair matches demo
+through 800, but ALL still differs at 316. A 603-entry short subdivision now
+isolates C25482's timer charge. Both builds, twelve CTests and GNU profiling
+checks pass. No full rerun: cached raw CPU **38.4011%**, new delta unmeasured;
+memory/chipset/boot **0%**, gate **0/4**. Evidence:
+`analysis/emulation_removal_image_timing_batch.json/.md`.
+
 Latest timing prerequisite: C11BFC's fixed 3,000-cycle message adapter is
 now source-timed. All 256 instructions / 8,192 DMA oracle cases match; each
 800-frame isolated recording matches OFF drawing/RAM and every shadow/sandbox

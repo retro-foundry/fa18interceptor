@@ -658,6 +658,7 @@ int glue_C30CC4(void);
 int glue_C30B5C(void);
 int glue_C30D34(void);
 int glue_C30EAA(void);
+int glue_C30EAA_step(void);
 int glue_C309B6(void);
 
 /* batch 60b: compass tape */

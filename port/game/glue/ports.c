@@ -619,7 +619,7 @@ const FA18Port fa18_ports[] = {
     {0xC30CC4, glue_C30CC4, "fill_bar_words", 900},
     {0xC30B5C, glue_C30B5C, "draw_status_stream_display", 0, 0, glue_C30B5C_complete_step, 0xC30D22, 1, 0, glue_C30B5C_owns},
     {0xC30D34, glue_C30D34, "draw_record_stream_display", 0, 0, glue_C30D34_complete_step, 0xC30EAA, 1, 0xC30D32, glue_C30D34_owns},
-    {0xC30EAA, glue_C30EAA, "blit_image", 3000},
+    {0xC30EAA, glue_C30EAA, "blit_image", 0, 0, glue_C30EAA_step, 0xC30F74, 1},
     {0xC309B6, glue_C309B6, "draw_table_stream_display", 0, 0, glue_C309B6_complete_step, 0xC309E2, 1, 0, glue_C309B6_owns},
     /* batch 60b: compass tape */
     {0xC30F78, glue_C30F78, "draw_cached_stream_display", 0, 0, glue_C30F78_complete_step, 0xC310AA, 1, 0xC30F76, glue_C30F78_owns},

@@ -390,3 +390,18 @@ C30EAA. This repair removes a timing error, not a CPU/guest-bus dependency.
 No full suite rerun: last measured raw CPU **38.4011%** is cached, new full-suite
 delta unmeasured; accepted CPU share unset; memory/chipset/boot **0%**, gate
 **0/4**. Evidence: `../analysis/emulation_removal_message_timing_batch.json/.md`.
+
+### Image blit timing prerequisite
+
+C30EAA's fixed image charge is replaced by source boundaries for clipping,
+blitter waits and four ordered submissions, reusing the C30F46 timing tail.
+All 62 instructions / 1,984 DMA cases match; three isolated 800-frame drawing/
+RAM comparisons pass. Shadow has zero mismatches (1/3/7 incomplete); sandbox
+passes all calls. Both builds, twelve CTests and GNU profiling checks pass.
+Message-plus-image timing matches demo through 800. ALL still differs at 316;
+a fresh short subdivision over all 603 entries isolates C25482.
+
+This repairs integration timing, not CPU independence. No full suite rerun:
+cached raw CPU **38.4011%**, new full-suite delta unmeasured, accepted CPU share
+unset; memory/chipset/boot **0%**, gate **0/4**. Evidence:
+`../analysis/emulation_removal_image_timing_batch.json/.md`.

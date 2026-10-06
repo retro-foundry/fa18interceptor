@@ -1,0 +1,191 @@
+{
+  "schema": 1,
+  "scope": "800-frame isolated image blit probes; no full replay rerun",
+  "real_caller": "runner -> machine frame -> recomp hook -> C309B6 HUD parent at C309DA -> C30EAA source-timed bridge",
+  "removed_dependency": "Fixed 3000-cycle image blit charge; source wait and plane-submit boundaries retained",
+  "baseline_commit": "9a3276e13eb335605688ca4219d46985c82c6aec",
+  "source_instructions": 62,
+  "dma_oracle_cases": 1984,
+  "isolated_before_first_index_difference": {
+    "frame": 316,
+    "pixels": 64
+  },
+  "combined_after_800_first_nonfade_difference": {
+    "frame": 316,
+    "pixels": 64
+  },
+  "message_and_image_pair_matches_800": true,
+  "remaining_isolated_reproducer": "C25482",
+  "both_toolchain_builds_passed": true,
+  "ctests_passed": 12,
+  "gnu_profiling_invisible_all_cpu_modes": true,
+  "full_suite_not_rerun": true,
+  "last_full_raw_cpu_removed_percent": 38.40106459907289,
+  "full_suite_cpu_delta": null,
+  "native_memory_chipset_boot_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": 0,
+  "runner_sha256": "fe5aac77535f7278f87de6a824819aec03679e4b77a59518d31e7ebbdfac274c",
+  "source_sha256": "da1a02c09de976003acd60d0a75f1637f668ecc00b9b94329d002ba387f0df8a",
+  "probes": [
+    {
+      "recording": "demo01",
+      "frames": 800,
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "ram_matches_off": true,
+      "on_calls": 33,
+      "proofs": {
+        "shadow": {
+          "entry": "C30EAA",
+          "name": "blit_image",
+          "calls": 33,
+          "compared": 32,
+          "matched": 32,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 1,
+          "mean_cycles": 6590,
+          "busy_input_calls": 32,
+          "busy_input_reads": 3502
+        },
+        "sandbox": {
+          "entry": "C30EAA",
+          "name": "blit_image",
+          "calls": 33,
+          "compared": 33,
+          "matched": 33,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 1979,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "on_hashes": {
+        "rgb": "afb3da10ecd7eb9925d70d6c74f4ba475ec4403398f7952773b6f8ead6698ec4",
+        "idx": "d4e169df6cf5bed6dc1ff79859ce16f7f1cdbe0a0981038ee2c3ec2af0e276cb",
+        "ram": "6090760f896fd1844c2fbe6b9ae67985af561e4da4824bc4c5977e9f3718587e"
+      }
+    },
+    {
+      "recording": "qual_carrier_success",
+      "frames": 800,
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "ram_matches_off": true,
+      "on_calls": 15,
+      "proofs": {
+        "shadow": {
+          "entry": "C30EAA",
+          "name": "blit_image",
+          "calls": 15,
+          "compared": 12,
+          "matched": 12,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 3,
+          "mean_cycles": 8557,
+          "busy_input_calls": 12,
+          "busy_input_reads": 1752
+        },
+        "sandbox": {
+          "entry": "C30EAA",
+          "name": "blit_image",
+          "calls": 15,
+          "compared": 15,
+          "matched": 15,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 2798,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "on_hashes": {
+        "rgb": "f19704bc755739ba5d7de134060f74ce78ded3a1cba7e1352d3f82c8378f5f6c",
+        "idx": "fd83297d6a270e5307d43fe9279adc95b87878b5d6442e15af7167da2499cc93",
+        "ram": "3be3fb567421f1cfa23224b195849f6a72e1f12a457ae7f216d03fe3546bf476"
+      }
+    },
+    {
+      "recording": "qual_fail_crashes",
+      "frames": 800,
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "ram_matches_off": true,
+      "on_calls": 74,
+      "proofs": {
+        "shadow": {
+          "entry": "C30EAA",
+          "name": "blit_image",
+          "calls": 74,
+          "compared": 67,
+          "matched": 67,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 7,
+          "mean_cycles": 8615,
+          "busy_input_calls": 67,
+          "busy_input_reads": 9795
+        },
+        "sandbox": {
+          "entry": "C30EAA",
+          "name": "blit_image",
+          "calls": 75,
+          "compared": 75,
+          "matched": 75,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 2561,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "on_hashes": {
+        "rgb": "eadf69487c4407203a37097a1e30bc675284104a179076b999fa975f1891eaa2",
+        "idx": "537eedd7ff42743ec3c711a6c96c86320079a9820d6c0c6d88417166860f775b",
+        "ram": "990180ae6e924549714f0c928153edf147615648544a5f29ed4c9a3090793e98"
+      }
+    }
+  ]
+}
