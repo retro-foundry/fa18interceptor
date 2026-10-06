@@ -420,3 +420,23 @@ This is a temporary CPU timing repair. No full suite rerun: cached raw CPU
 **38.4011%**, new delta unmeasured; accepted CPU share unset; memory/chipset/boot
 **0%**, gate **0/4**. Evidence:
 `../analysis/emulation_removal_timer_timing_batch.json/.md`.
+
+### Compass/selection timing interaction
+
+The C310AA/C12242 pair independently reproduced demo frame 316, while either
+entry alone passed that bounded interval. Source-timed multiply/divide/shift
+and selection cleanup boundaries now replace both fixed charges. All 39
+instructions / 1,248 DMA cases match; three paired 800-frame drawing/RAM probes
+and every shadow/sandbox call pass. Both builds, twelve CTests, GNU profiling
+checks and an 800-frame MSVC/GNU paired demo pass.
+
+Combined demo first non-fade difference moves from 316 to **565** (683 pixels),
+with Copper fade excluded. Carrier/crash still differ at 374/213. A minimized
+220-frame crash pair **C265E8,C2D408** reproduces 213; each alone passes that
+interval. Reused isolated matrix captures first differ at 584/446/263.
+Address original event timing without restoring retired CPU children or tuning
+average fees. This is integration repair, not native frame completion.
+
+No full suite rerun: cached raw CPU **38.4011%**, new delta unmeasured; accepted
+CPU share unset; memory/chipset/boot **0%**, gate **0/4**. Evidence:
+`../analysis/emulation_removal_selection_timing_batch.json/.md`.

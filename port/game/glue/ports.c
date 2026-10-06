@@ -320,7 +320,7 @@ const FA18Port fa18_ports[] = {
     {0xC1CA82, glue_C1CA82, "flag_all_records", 0, 0, glue_C1CA82_step, 0xC1CB14},
     {0xC1EC3A, glue_C1EC3A, "read_record_pair", 0, 0, glue_C1EC3A_step, 0xC1EC84},
     {0xC2DAF2, glue_C2DAF2, "update_view_matrix", 0, 0, glue_C2DAF2_step, 0xC2DB18},
-    {0xC310AA, glue_C310AA, "update_compass", 300},
+    {0xC310AA, glue_C310AA, "update_compass", 0, 0, glue_C310AA_step, 0xC310E2},
     {0xC082B8, glue_C082B8, "request_cockpit_redraw", 0, 0, glue_C082B8_step, 0xC08324},
     {0xC082B0, glue_C082B0, "finish_scene_setup", 0, 0, glue_C082B0_step, 0xC08324},
     {0xC10C08, glue_C10C08, "start_context_stage", 0, 0, glue_C10C08_step, 0xC10C68, 0, 0, glue_C10C08_owns},
@@ -452,7 +452,7 @@ const FA18Port fa18_ports[] = {
     /* batch 31: condition flags, lost selection */
     {0xC09A78, glue_C09A78, "update_condition_a", 0, 0, glue_C09A78_step, 0xC09B48},
     {0xC09A98, glue_C09A98, "update_condition_b", 0, 0, glue_C09A98_step, 0xC09B48},
-    {0xC12242, glue_C12242, "drop_lost_selection", 700},
+    {0xC12242, glue_C12242, "drop_lost_selection", 0, 0, glue_C12242_step, 0xC122A2},
     /* batch 32: fault hook, level lists */
     {0xC06C02, glue_C06C02, "fault_hook", 0, 0, glue_C06C02_step, 0xC06C04},
     {0xC1D5D8, glue_C1D5D8, "file_records_by_level", 0, 0, glue_C1D5D8_step, 0xC1D722, 0, 0xC1D3F4},

@@ -11,6 +11,24 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
+Latest connected timing batch repairs the C310AA/C12242 compass/selection
+interaction. All 39 instructions / 1,248 DMA cases match; three paired
+800-frame drawing/RAM probes and every shadow/sandbox call pass. Both builds,
+twelve CTests, GNU profiling checks and an 800-frame MSVC/GNU paired demo pass.
+Combined demo first non-fade difference moves from 316 to **565** (683 pixels);
+carrier/crash still differ at 374/213. No full replay rerun: raw CPU **38.4011%**
+is the cached full-suite figure, new delta unmeasured; memory/chipset/boot
+**0%**, gate **0/4**. Evidence:
+`analysis/emulation_removal_selection_timing_batch.json/.md`.
+
+Next concrete failure is the crash **C265E8,C2D408** timing interaction: a
+220-frame minimized pair first changes indices at 213; neither member alone
+differs by 220. Reused isolated matrix captures first differ at demo 584,
+carrier 446, crash 263. Preserve native side/depth ownership, ordered events
+and original arithmetic; do not tune fixed averages or restore removed CPU
+child adapters as game behavior. Continue toward the native frame entry and
+remaining removal phases; source timing bridges do not close any removal axis.
+
 Latest timer prerequisite: C25482's fixed 30-cycle charge is source-timed.
 All four instructions / 128 DMA cases match, three isolated 800-frame drawing/
 RAM comparisons match OFF, and all 27/15/36 shadow/sandbox calls pass. Both

@@ -1,0 +1,423 @@
+{
+  "schema": 1,
+  "scope": "800-frame compass/selection and combined recording probes; no full replay rerun",
+  "real_callers": [
+    "runner -> machine frame -> recomp hook -> C30F78 cached HUD parent -> C310AA",
+    "runner -> machine frame -> recomp hook -> C0EFD4 at C0F2E4 -> C12242"
+  ],
+  "removed_dependency": "Fixed 300/700-cycle timing charges for interacting compass/selection updates",
+  "baseline_commit": "06ef85441a2cf82567327a3f3051637e8252e4bf",
+  "source_instructions": 39,
+  "dma_oracle_cases": 1248,
+  "before_pair_320_first_index_difference": {
+    "frame": 316,
+    "pixels": 64
+  },
+  "before_each_pair_member_matches_320": true,
+  "both_toolchain_builds_passed": true,
+  "ctests_passed": 12,
+  "gnu_profiling_invisible_all_cpu_modes": true,
+  "msvc_gnu_pair_demo_800_rgb_indices_ram_identical": true,
+  "full_suite_not_rerun": true,
+  "last_full_raw_cpu_removed_percent": 38.40106459907289,
+  "full_suite_cpu_delta": null,
+  "native_memory_chipset_boot_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": 0,
+  "runner_sha256": "622063608e2ab6cf1d2142c8aca6f48d6d00fc1f687d3fa26886e3b3b52f6e1b",
+  "source_sha256": "d300500103002ad3187efb377515dfbc50cb71a55e744e5c3f4d7899dfcf8ed0",
+  "probes": [
+    {
+      "recording": "demo01",
+      "frames": 800,
+      "isolated_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "isolated_ram_matches_off": true,
+      "on_calls": {
+        "C310AA": 33,
+        "C12242": 42
+      },
+      "proofs": {
+        "shadow": [
+          {
+            "entry": "C310AA",
+            "name": "update_compass",
+            "calls": 33,
+            "compared": 33,
+            "matched": 33,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 392,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12242",
+            "name": "drop_lost_selection",
+            "calls": 42,
+            "compared": 42,
+            "matched": 42,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 45,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C310AA",
+            "name": "update_compass",
+            "calls": 33,
+            "compared": 33,
+            "matched": 33,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 392,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12242",
+            "name": "drop_lost_selection",
+            "calls": 42,
+            "compared": 42,
+            "matched": 42,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 46,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "combined_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 565,
+        "first_index_difference": 565,
+        "first_nonfade_difference": {
+          "frame": 565,
+          "pixels": 683
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 118849,
+        "index_difference_pixels": 118849,
+        "passed": false
+      },
+      "isolated_hashes": {
+        "rgb": "afb3da10ecd7eb9925d70d6c74f4ba475ec4403398f7952773b6f8ead6698ec4",
+        "idx": "d4e169df6cf5bed6dc1ff79859ce16f7f1cdbe0a0981038ee2c3ec2af0e276cb",
+        "ram": "6090760f896fd1844c2fbe6b9ae67985af561e4da4824bc4c5977e9f3718587e"
+      }
+    },
+    {
+      "recording": "qual_carrier_success",
+      "frames": 800,
+      "isolated_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "isolated_ram_matches_off": true,
+      "on_calls": {
+        "C310AA": 15,
+        "C12242": 15
+      },
+      "proofs": {
+        "shadow": [
+          {
+            "entry": "C310AA",
+            "name": "update_compass",
+            "calls": 15,
+            "compared": 15,
+            "matched": 15,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 372,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12242",
+            "name": "drop_lost_selection",
+            "calls": 15,
+            "compared": 15,
+            "matched": 15,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 44,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C310AA",
+            "name": "update_compass",
+            "calls": 15,
+            "compared": 15,
+            "matched": 15,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 372,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12242",
+            "name": "drop_lost_selection",
+            "calls": 15,
+            "compared": 15,
+            "matched": 15,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 44,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "combined_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 423,
+        "first_index_difference": 374,
+        "first_nonfade_difference": {
+          "frame": 374,
+          "pixels": 55901
+        },
+        "ignored_fade_pixels": 310739,
+        "nonfade_pixels": 163640,
+        "index_difference_pixels": 163640,
+        "passed": false
+      },
+      "isolated_hashes": {
+        "rgb": "f19704bc755739ba5d7de134060f74ce78ded3a1cba7e1352d3f82c8378f5f6c",
+        "idx": "fd83297d6a270e5307d43fe9279adc95b87878b5d6442e15af7167da2499cc93",
+        "ram": "3be3fb567421f1cfa23224b195849f6a72e1f12a457ae7f216d03fe3546bf476"
+      }
+    },
+    {
+      "recording": "qual_fail_crashes",
+      "frames": 800,
+      "isolated_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "isolated_ram_matches_off": true,
+      "on_calls": {
+        "C310AA": 74,
+        "C12242": 74
+      },
+      "proofs": {
+        "shadow": [
+          {
+            "entry": "C310AA",
+            "name": "update_compass",
+            "calls": 74,
+            "compared": 74,
+            "matched": 74,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 371,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12242",
+            "name": "drop_lost_selection",
+            "calls": 74,
+            "compared": 74,
+            "matched": 74,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 44,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ],
+        "sandbox": [
+          {
+            "entry": "C310AA",
+            "name": "update_compass",
+            "calls": 74,
+            "compared": 74,
+            "matched": 74,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 371,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          },
+          {
+            "entry": "C12242",
+            "name": "drop_lost_selection",
+            "calls": 74,
+            "compared": 74,
+            "matched": 74,
+            "mismatched": 0,
+            "hardware": 0,
+            "incomplete": 0,
+            "mean_cycles": 45,
+            "busy_input_calls": 0,
+            "busy_input_reads": 0
+          }
+        ]
+      },
+      "combined_comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 263,
+        "first_index_difference": 213,
+        "first_nonfade_difference": {
+          "frame": 213,
+          "pixels": 2145
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 196072,
+        "index_difference_pixels": 196072,
+        "passed": false
+      },
+      "isolated_hashes": {
+        "rgb": "eadf69487c4407203a37097a1e30bc675284104a179076b999fa975f1891eaa2",
+        "idx": "537eedd7ff42743ec3c711a6c96c86320079a9820d6c0c6d88417166860f775b",
+        "ram": "990180ae6e924549714f0c928153edf147615648544a5f29ed4c9a3090793e98"
+      }
+    }
+  ],
+  "reused_matrix_capture_comparisons": [
+    {
+      "recording": "demo01",
+      "isolated_matrix_first_nonfade_difference": {
+        "frame": 584,
+        "pixels": 488
+      },
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 584,
+        "first_index_difference": 584,
+        "first_nonfade_difference": {
+          "frame": 584,
+          "pixels": 488
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 8706,
+        "index_difference_pixels": 8706,
+        "passed": false
+      },
+      "reused_before_capture": "build\\record-args-after-demo01"
+    },
+    {
+      "recording": "qual_carrier_success",
+      "isolated_matrix_first_nonfade_difference": {
+        "frame": 446,
+        "pixels": 3
+      },
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 446,
+        "first_index_difference": 446,
+        "first_nonfade_difference": {
+          "frame": 446,
+          "pixels": 3
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 1250,
+        "index_difference_pixels": 1250,
+        "passed": false
+      },
+      "reused_before_capture": "build\\record-args-after-qual_carrier_success"
+    },
+    {
+      "recording": "qual_fail_crashes",
+      "isolated_matrix_first_nonfade_difference": {
+        "frame": 263,
+        "pixels": 4
+      },
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": 263,
+        "first_index_difference": 263,
+        "first_nonfade_difference": {
+          "frame": 263,
+          "pixels": 4
+        },
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 15984,
+        "index_difference_pixels": 15984,
+        "passed": false
+      },
+      "reused_before_capture": "build\\record-args-after-qual_fail_crashes"
+    }
+  ],
+  "next_crash_interaction": {
+    "frames": 220,
+    "selector": [
+      "C265E8",
+      "C2D408"
+    ],
+    "first_index_difference": {
+      "frame": 213,
+      "pixels": 2243
+    },
+    "each_member_matches_220": true
+  }
+}

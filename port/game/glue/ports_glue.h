@@ -194,6 +194,7 @@ int glue_C1CA82(void);
 int glue_C1EC3A(void);
 int glue_C2DAF2(void);
 int glue_C310AA(void);
+int glue_C310AA_step(void);
 int glue_C082B8(void);
 int glue_C082B0(void);
 int glue_C10C08(void);
@@ -395,6 +396,7 @@ int glue_C24E2C_step(void);
 int glue_C09A78(void);
 int glue_C09A98(void);
 int glue_C12242(void);
+int glue_C12242_step(void);
 
 /* batch 32: fault hook, level lists */
 int glue_C06C02(void);
