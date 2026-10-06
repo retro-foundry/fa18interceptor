@@ -87,7 +87,7 @@ def main():
                 assert value(path.read_bytes(), log+62, 2) > value(initial, log+62, 2), 'recorded launches absent'
             subprocess.run([str(oracles['records']), str(path)], cwd=ROOT, check=True, timeout=20)
     assert hashlib.sha256(adf.read_bytes()).digest() == seal
-    print('Complete startup sound resources, generated waveforms, original contracts and full native demo pass; audio output remains pending')
+    print('Complete startup sound resources, generated waveforms, original contracts and full native demo pass; sample publication is checked separately')
 
 
 if __name__ == '__main__':

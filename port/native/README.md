@@ -9,7 +9,8 @@ python scripts/build_native.py
 build/native/fa18_native.exe --adf local/media/fa18.adf
 ```
 
-The default is an SDL window. A key acknowledges the credits. A first-time
+The default is an SDL window with native stereo sound. `--wav PATH` captures
+the same PCM, including in headless runs. A key acknowledges the credits. A first-time
 pilot can enter a callsign, edit with Backspace, and confirm with Return.
 The original numbered main menu is then displayed. Digits 1-5 select the source
 mode and show its transition banner. Digit 6 opens the source-gated mission
@@ -60,8 +61,13 @@ The C50158 voice updater now runs every PAL frame after the viewport/master
 fade, including during menu pauses and display/timer waits. Original voice
 programs, period/volume slides and slot release execute; output levels publish
 to ordinary native channel state. 7,250 source comparisons and a real wait/
-tone-completion test pass. Sample progression/completion (C500D8), repetition/
-chaining and audible playback remain open. See
+tone-completion test pass. Sample requests (C500D8), repetition/chaining and
+audible playback are now connected as well. Signed disk PCM uses original PAL
+pitch and stereo routing, published through SDL or optional WAV capture. 256
+full source handler cases, four waveform/pitch/routing/block-partition cases
+and actual nonzero WAV/SDL publication pass. Bit-exact original audio timing,
+fetch/interrupt latency and filtering remain unverified. See
+`../../analysis/native_sample_output_milestone.md` and
 `../../analysis/native_voice_cadence_milestone.md`.
 The record/context slice repeats during setup; headless statistics expose its
 `record_updates`, `scene_frames`, `terrain_polygons`, `model_calls` and
@@ -84,8 +90,8 @@ source square-wave/noise generators. All 15 sample buffers, availability flags
 and resulting random seed match original startup. This restores the source
 210-update demo banner and reduces the observed startup lead from 97 to 37 game
 ticks at that milestone, now 36. Remaining message/frame cadence and audible
-sample output remain open; per-tick voice programs are connected.
-Other selected modes stop at their banner. Audible output remains unconnected.
+alignment remain open; per-tick programs and native sample output are connected.
+Other selected modes stop at their banner.
 Menu entry now executes complete C0FBE0 sound/volume/reset/palette setup.
 Its busy pause yields under the nominal PAL-clock conversion; input received
 during the pause is retained for the following game input poll. Source tone
@@ -93,12 +99,12 @@ mute and volume-fade state are no longer overridden by the frontend.
 C1718E's viewport/fade tail now runs once per PAL frame, including pending
 game timers and display waits, as required by C17456's vertical-blank server.
 Stable palette publication is connected. The full mouse-counter callback and
-audible output remain open.
+exact original frame/audio alignment remain open.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
-Voice programs have their PAL owner; sample completion and audible output
-still need their asynchronous host owner.
+Voice programs, sample requests and audible output have their native owners;
+complete original frame/audio timing remains open.
 
 ```powershell
 build/native/fa18_native.exe --headless --frames 1800 --ppm build/credits.ppm
@@ -114,6 +120,7 @@ python tools/native/check_hud.py --runner build/native/fa18_native.exe
 python tools/native/check_cockpit_assets.py --runner build/native/fa18_native.exe
 python tools/native/check_sound_resources.py --runner build/native/fa18_native.exe
 python tools/native/check_audio.py --runner build/native/fa18_native.exe
+python tools/native/check_samples.py --runner build/native/fa18_native.exe
 python tools/native/check_qualification.py --runner build/native/fa18_native.exe
 python tools/native/check_demo.py --runner build/native/fa18_native.exe
 ```

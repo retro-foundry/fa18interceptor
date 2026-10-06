@@ -55,7 +55,7 @@ add_executable(fa18_native main.c replay.c
     ../game/command_publication.c ../game/context_commands.c ../game/cockpit.c
     ../game/menu_context_finish.c ../game/target_heading.c
     ../game/disk.c ../game/hunk.c ../romfree/media.c ../amiga/sha256.c
-    ../amiga/ilbm.c)
+    ../amiga/ilbm.c ../amiga/pcm_output.c)
 target_include_directories(fa18_native PRIVATE ../game ../amiga ../romfree)
 target_compile_definitions(fa18_native PRIVATE FA18_NATIVE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_native PRIVATE SDL2-static)
@@ -67,6 +67,9 @@ else()
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_test(NAME fa18_native_samples
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_samples.py
+                --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_audio
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_audio.py
                 --runner $<TARGET_FILE:fa18_native>)

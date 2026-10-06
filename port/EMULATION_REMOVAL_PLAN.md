@@ -9,6 +9,16 @@ the native intro/menu milestone or whole-game completion.
 
 Native continuation milestones (functional scope, not instruction counts):
 
+- Complete: connect C4FFB4 channel requests and C500D8 sample repetition/
+  chaining/stop owner to native PCM streams, SDL stereo publication and WAV
+  capture. 256 full source comparisons, disk-backed pitch/routing/block
+  partitions, nonzero actual WAV/SDL and affected gameplay checks pass.
+  See `../analysis/native_sample_output_milestone.md`. Native audio integration
+  is **3/3 (100% of those boundaries)**, not bit-exact original audio fidelity.
+  Fetch/interrupt latency, filtering and exact audio alignment remain open.
+  Startup lead remains **36 ticks**, full frame parity **0/3 accepted**;
+  Copper fade excluded. Next: original display/task pacing and frame parity.
+
 - Complete: connect C50158's PAL voice program/output-level/slide updater
   after C1718E, including suspended game updates. C5002A's original interrupt-5
   registration and node priorities establish cadence/order. 7,250 complete

@@ -6,6 +6,9 @@
 
 #include "globals.h"
 #include "hardware.h"
+#ifdef FA18_NATIVE
+#include "native/audio.h"
+#endif
 
 #define FIXED_UNIT 0x10000
 #define MAX_VOLUME (63 * FIXED_UNIT)
@@ -32,6 +35,30 @@ void set_voice_output(gaddr channel, gaddr voice) {
     publish_voice_registers(NULL, channel, voice_output_levels(voice));
 }
 
+VoiceSample request_voice_sample(unsigned channel) {
+    gaddr record = rd_u32(VOICE_TABLE + 4 * channel);
+    gaddr slot = rd_u32(record + 4), voice = rd_u32(slot);
+    VoiceSample sample = {0, 0, {PAULA_MIN_PERIOD, 0}, 0};
+    if (!voice) return sample;
+    sample.samples = rd_u32(voice);
+    /* ASR.L followed by a word write drops the shared-allocation flag and
+     * any odd trailing byte. A zero length word denotes 65536 words. */
+    uint16_t words = (uint16_t)(rd_u32(voice + 4) >> 1);
+    sample.bytes = words ? 2u * words : 131072u;
+    sample.output = voice_output_levels(voice);
+    sample.active = 1;
+    uint32_t repetitions = rd_u32(voice + 16);
+    if (repetitions != 0xffffffffu) {
+        repetitions -= 1;
+        wr_u32(voice + 16, repetitions);
+        if (repetitions & 0x80000000u) {
+            wr_u32(slot, rd_u32(voice + 32));
+            wr_u32(voice + 16, rd_u32(voice + 20));
+        }
+    }
+    return sample;
+}
+
 void fade_master_volume(void) {
     int32_t target, level;
 
@@ -51,9 +78,7 @@ void fade_master_volume(void) {
 
 void clear_voice_interrupt(int channel) {
 #ifdef FA18_NATIVE
-    /* No Paula interrupt is pending in the host's native frontend. Voice
-     * ownership is still cleared by free_voice; no register is emulated. */
-    (void)channel;
+    native_audio_request_channel(channel);
 #else
     gaddr voice = rd_u32(VOICE_TABLE + (gaddr)(int32_t)(int16_t)(channel * 4));
     custom_write(INTREQ, rd_u16(voice + VOICE_INTERRUPT));

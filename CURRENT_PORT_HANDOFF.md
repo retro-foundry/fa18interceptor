@@ -7,6 +7,16 @@ emulation-removal work below and the former restriction against a new runner.
 stays in `port/amiga/`. Build with `python scripts/build_native.py`. See
 `port/native/README.md` for scope, source authority, validation and launch.
 The emulator runners remain reference tools. Full native gameplay remains open.
+Latest sample batch: C4FFB4's misleadingly named clear helper now requests
+native channel service. Complete C500D8 repetition/chaining/stop behavior feeds
+native signed PCM streams and SDL stereo output; `--wav PATH` captures the
+same PCM in headless runs. 256 full handler comparisons, four disk-backed
+pitch/routing/block-partition cases, nonzero WAV/SDL publication, PAL voices
+and affected gameplay/reference checks pass. Review Free Flight cockpit/audio
+at `build/native-flight/sample-freeflight6100.png` and `.wav`. See
+`analysis/native_sample_output_milestone.md`. Three native audio boundaries
+are connected; bit-exact audio fetch/filter/timing remains unverified. Startup
+lead stays 36 ticks; full frame parity stays 0/3, Copper fade excluded.
 Latest voice batch: C50158 now runs each host PAL frame after C1718E's
 viewport/master fade, including menu pauses and suspended display/timer polls.
 Its complete delay/program/output/slide owner publishes ordinary native channel

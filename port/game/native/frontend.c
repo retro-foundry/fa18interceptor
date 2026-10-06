@@ -88,6 +88,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     AmigaOfs disk={0}; AmigaHunks hunks={0}; FA18MediaInfo media;
     uint8_t *exe=NULL,*bytes=NULL; size_t size=0; int ok=0;
     memset(game,0,sizeof *game); native_storage_bind(&game->storage);
+    native_audio_bind(&game->audio);
     native_clock_set(0);
     if(!save_dir || !*save_dir || snprintf(game->config_path,sizeof game->config_path,"%s/config",save_dir)>=(int)sizeof game->config_path)
         return fail(error,cap,"invalid save directory");
@@ -150,7 +151,7 @@ done:
     if(!ok) native_frontend_close(game);
     return ok;
 }
-void native_frontend_close(NativeFrontend *game) { amiga_ilbm_free(&game->splash); native_storage_bind(NULL); }
+void native_frontend_close(NativeFrontend *game) { amiga_ilbm_free(&game->splash); native_audio_bind(NULL); native_storage_bind(NULL); }
 const char *native_frontend_screen(const NativeFrontend *game) {
     static const char *names[]={"splash","credits","enlistment","callsign","menu","mode-intro","missions","pilot-log","scene-setup"}; return names[game->screen];
 }
@@ -205,6 +206,7 @@ void native_frontend_raw_event(NativeFrontend *game,uint8_t raw,int down) {
 }
 void native_frontend_tick(NativeFrontend *game) {
     native_storage_bind(&game->storage); ++game->ticks; ++game->screen_ticks;
+    native_audio_bind(&game->audio);
     native_clock_set(game->ticks);
     native_viewport_tick(game);
     native_audio_tick(&game->audio);

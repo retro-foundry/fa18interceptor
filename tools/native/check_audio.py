@@ -1,7 +1,7 @@
 """Compare C50158 voices and exercise their PAL callback in the native runner.
 
-No original full replay is run. Audible samples and sample-completion callbacks
-remain outside this check's scope.
+No original full replay is run. Sample requests and PCM publication have their
+own check_samples.py boundary.
 """
 import argparse
 import json
@@ -55,7 +55,7 @@ def main():
         assert value(finished[1], voice + 0x34, 4) == 96
         assert value(finished[1], voice + 0x24, 4) == 0
         assert value(finished[1], voice + 0x28, 4) == 0
-    print('Native PAL voice programs advance during display waits, observe faded volume and release completed tones; audible samples remain open')
+    print('Native PAL voice programs advance during display waits, observe faded volume and release completed tones')
 
 
 if __name__ == '__main__':

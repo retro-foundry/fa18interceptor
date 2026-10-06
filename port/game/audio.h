@@ -32,6 +32,16 @@ typedef void (*VoiceOutputSink)(void *context, gaddr destination, VoiceOutput ou
 VoiceOutput voice_output_levels(gaddr voice);
 void advance_voice_channels(VoiceOutputSink publish, void *context);
 
+/* C500D8's buffer-request handler. The original slot/repetition/link
+ * changes remain game state; publication belongs to the host. */
+typedef struct {
+    gaddr samples;
+    uint32_t bytes;
+    VoiceOutput output;
+    int active;
+} VoiceSample;
+VoiceSample request_voice_sample(unsigned channel);
+
 /* Write a voice's period and volume to its channel, limiting the period to
  * what Paula can play and the volume to the master volume. */
 void set_voice_output(gaddr channel, gaddr voice);
@@ -42,7 +52,8 @@ void fade_master_volume(void);
 
 enum { VOICE_INTERRUPT = 0x14 }; /* word: this channel's INTREQ bits */
 
-/* Clear a channel's audio interrupt request (INTREQ bits from its voice). */
+/* C4FFB4 writes the descriptor's INTREQ payload. Original descriptors set
+ * the request bit here: this starts/stops sample service. Historical API name. */
 void clear_voice_interrupt(int channel);
 
 /* Voice program: a list of (offset, value) long pairs run when the voice
@@ -52,11 +63,11 @@ void clear_voice_interrupt(int channel);
  * is not zero (a zero counter always jumps). */
 enum { VOICE_LOOP_COUNTERS = 0x24, VOICE_DELAY = 0x2C, VOICE_PROGRAM = 0x30, VOICE_POSITION = 0x34 };
 
-/* Advance a voice program; when it ends, free `slot` and clear the
- * channel interrupt. */
+/* Advance a voice program; when it ends, free `slot` and request channel
+ * service to stop its samples. */
 void step_voice_program(gaddr voice, gaddr slot, int channel);
 
-/* Free the voice slot of a channel and clear its interrupt. */
+/* Free the voice slot and request channel service. */
 void free_voice(int channel);
 /* All four ($C0F4A6). */
 void free_all_voices(void);
@@ -133,7 +144,7 @@ void play_status_tone(void);
 /* play_status_tone unless a context runs ($C33186). */
 void play_status_tone_outside_context(void);
 
-/* The audio interrupt server's work ($C50158): for each channel with a
+/* The PAL interrupt server's work ($C50158): for each channel with a
  * voice, step its program, write it to Paula, and apply its period and
  * volume slides, each stopping when its tick count runs out. */
 void update_voices(void);
