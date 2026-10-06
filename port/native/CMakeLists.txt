@@ -1,6 +1,8 @@
 add_executable(fa18_native main.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
-    ../game/native/raster.c ../game/native/scene.c ../game/active_planes.c
+    ../game/native/raster.c ../game/native/scene.c ../game/native/model.c
+    ../game/scene_placements.c ../game/draw_stream.c ../game/active_planes.c
+    ../game/projection.c ../game/circle.c
     ../game/display_records.c ../game/render_polygon.c ../game/render_line.c
     ../game/render_buffers.c ../game/plot.c ../game/clip.c
     ../game/polygon_clip.c ../game/attitude.c ../game/stages.c
@@ -55,5 +57,8 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                 --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_flight_start
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_flight_start.py
+                --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_models
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_models.py
                 --runner $<TARGET_FILE:fa18_native>)
 endif()

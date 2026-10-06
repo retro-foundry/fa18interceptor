@@ -50,8 +50,20 @@ excluded; no full sealed replay was repeated. Evidence:
 80% (previously 70%), scoped to Free Flight startup wiring: terrain now renders,
 but aircraft/scene objects, cockpit/HUD, full update ordering and active flight
 remain open. Native data is still addressed storage rather than typed state.
-Next: connect source scene/object drawing, then view controls and their newly
-reachable flight-record children, and resolve input/view/timer ordering.
+The native setup now also draws scene placement/model commands, ground
+descriptors and the fixed matrix mark. The C1EE14 static model driver calls
+existing direct draw-stream geometry and host raster operations; no instruction
+adapters enter this runtime path. Three native setup checkpoints execute
+246/10,334/17,005 descriptor calls. Their reached descriptor returns, transformed
+vertices and plane buffers match focused original comparisons; 48 circle cases
+also match. Frontend and Free Flight selection/pause/resume checks pass.
+Evidence: `analysis/native_scene_objects_milestone.md`. Rough scoped startup
+estimate now 85% (previously 80%): scenery is connected, aircraft records,
+cockpit/HUD and active flight remain open. No full replay repeated.
+Next: aircraft descriptor/record drawing C1ED4C/C1F000 and main-control/followup
+composition, then view controls and their newly reachable flight-record children.
+Resolve input/view/timer ordering; missing reached model children still fail
+explicitly rather than supplying substitute geometry.
 Audio currently takes the original suppression path. Source data still uses
 checked address-indexed host buffers, pending typed-state migration.
 

@@ -24,10 +24,11 @@ code-input message, then the original numbered location and aircraft keys run.
 The aircraft selection resets the recorder/root through C10B90 and updates the
 records. It reaches `scene-setup` / C10C08; P pauses/resumes into C10DAE.
 The preview now draws the source horizon and normal/wide terrain packets into
-ordinary host planes. Aircraft/scene objects, cockpit/HUD drawing, and active
+ordinary host planes, followed by the original scene placement/model streams,
+ground descriptors and fixed matrix mark. Aircraft records, cockpit/HUD drawing, and active
 flight remain pending.
 The record/context slice repeats during setup; headless statistics expose its
-`record_updates`, `scene_frames`, and `terrain_polygons` counts. The banner CRACKED BY A-HA is original disk message $47;
+`record_updates`, `scene_frames`, `terrain_polygons` and `model_calls` counts. The banner CRACKED BY A-HA is original disk message $47;
 the earlier crash-message description was incorrect. Source timer requests use
 seconds/microseconds from the native runner's deterministic PAL frame clock.
 Other selected modes stop at their transition banner. Audio remains suppressed.
@@ -43,6 +44,7 @@ python tools/native/check_menu.py --runner build/native/fa18_native.exe
 python tools/native/check_flight_start.py --runner build/native/fa18_native.exe
 python tools/native/check_records.py --runner build/native/fa18_native.exe
 python tools/native/check_raster.py --runner build/native/fa18_native.exe
+python tools/native/check_models.py --runner build/native/fa18_native.exe
 ```
 
 Build ownership is `port/recomp/CMakeLists.txt` -> `port/native/CMakeLists.txt`.
@@ -94,3 +96,12 @@ the reference branches retain their hardware calls. `check_raster.py` compares
 two native selection checkpoints. Those opcodes, ROM and chipset run only in
 the validation executable. See
 [`../../analysis/native_terrain_preview_milestone.md`](../../analysis/native_terrain_preview_milestone.md).
+
+Scene placements now call `port/game/native/model.c` for source distance/LOD,
+static/flat vertices and draw commands. Existing `draw_stream.c` supplies
+geometry; `circle.c` has a native span-mask backend. The model oracle compares
+reached descriptors at three actual runner checkpoints and 48 circle cases,
+without treating source CPU/ROM/chipset dependencies as native runtime code.
+Aircraft record hulls, positive shadow strips and record marks remain explicit
+missing children. See
+[`../../analysis/native_scene_objects_milestone.md`](../../analysis/native_scene_objects_milestone.md).

@@ -13,7 +13,7 @@ typedef struct {
     uint8_t indices[320*256];
     unsigned glyphs;
     unsigned record_updates;
-    unsigned scene_frames,terrain_polygons;
+    unsigned scene_frames,terrain_polygons,model_calls;
     unsigned shift_keys;
     int name_finished;
     int scene_selected;

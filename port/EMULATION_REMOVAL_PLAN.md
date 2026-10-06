@@ -34,7 +34,14 @@ Native continuation milestones (functional scope, not instruction counts):
   and aircraft-selection checkpoints. See
   `../analysis/native_terrain_preview_milestone.md`. Roughly 80% of Free Flight
   startup wiring (previously 70%); this excludes whole-game completion.
-- Next: scene/aircraft object and cockpit/HUD drawing, input/view/timer update
+- Connected: scene placement traversal, C1EE14 static/flat model commands,
+  C096BC/C096CA ground descriptors, fixed matrix mark and direct host circles.
+  Three native setup checkpoints exercise 246/10,334/17,005 model calls;
+  reached descriptor returns, vertices and planes match focused original
+  comparisons. See `../analysis/native_scene_objects_milestone.md`.
+  Roughly 85% of Free Flight startup wiring (previously 80%), with aircraft
+  record drawing, cockpit/HUD and active controls still pending.
+- Next: aircraft record/descriptor and cockpit/HUD drawing, input/view/timer update
   ordering, remaining active-record children (C1C63E/C22C80), and connected
   flight simulation. Current native endpoint is `scene-setup`.
   The earlier supposed crash banner was original disk text, CRACKED BY A-HA.

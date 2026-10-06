@@ -110,6 +110,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     wr_u32(0xc1ab74u,PLAYER_LOG); wr_u32(0xc456b6u,PLANE_TABLE);
     for(unsigned i=0;i<4;++i) wr_u32(PLANE_TABLE+4*i,PLANE_FIRST+i*PLANE_BYTES);
     wr_u32(POLY_MASK_PLANE,0x30000); /* Separate 40-byte rows, host-owned mask. */
+    wr_u32(CIRCLE_SPANS_PTR,0x33000); /* 127-radius symmetric span workspace. */
     wr_u8(0xc4588au,1); wr_u8(0xc457d7u,2); /* source audio suppression */
     native_menu_initialize();
     native_flight_initialize(game);

@@ -1,6 +1,8 @@
-/* Connected C0EFD4 scene slice: matrix/projection, horizon and map packets.
- * Object descriptors and cockpit/HUD submissions are still pending. */
+/* Connected C0EFD4 scene slice: view, horizon, terrain and scene placements.
+ * Aircraft records and cockpit/HUD submissions are still pending. */
 #include "scene.h"
+#include "model.h"
+#include "../scene_placements.h"
 #include "../globals.h"
 #include "../matrix_route.h"
 #include "../fixed_math.h"
@@ -11,6 +13,7 @@
 #include "../active_planes.h"
 #include "../map_packet.h"
 #include "../polygon_clip.h"
+#include "../projection.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -43,5 +46,11 @@ void native_scene_draw(NativeFrontend *game) {
                 fprintf(stderr,"native map packet pass failed: wide=%d\n",wide); abort();
             }
         }
+    }
+    draw_fixed_matrix_mark();
+    if(rd_s32(POSITION_BIAS)>-0x08000000) {
+        const ScenePlacementHooks placements={native_scene_placement,NULL,game};
+        visit_scene_placements(0,&placements);
+        visit_scene_placements(1,&placements);
     }
 }

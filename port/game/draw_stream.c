@@ -72,6 +72,9 @@ static int selected_segment(gaddr *stream, int clipped) {
 int draw_selected_segment(gaddr *stream) {
     return selected_segment(stream, 0);
 }
+int draw_selected_segment_clipped(gaddr *stream) {
+    return selected_segment(stream, 1);
+}
 
 int draw_selected_segment_near(gaddr *stream) {
     if (rd_s32(PROJECTION_Y) >= -0xC0) {

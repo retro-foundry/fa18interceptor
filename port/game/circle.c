@@ -2,7 +2,9 @@
 #include "circle.h"
 
 #include "globals.h"
+#ifndef FA18_NATIVE
 #include "hardware.h"
+#endif
 #include "memory.h"
 #include "plot.h"
 
@@ -75,9 +77,11 @@ void draw_filled_circle(int16_t x, int16_t y, int16_t radius) {
 
     row_base = rd_u32(rd_u32(PAGE_PLANE_TABLE) + 12) + (gaddr)(int32_t)(int16_t)(top * 40);
     colour = rd_u16(CURRENT_COLOUR);
+#ifndef FA18_NATIVE
     wait_blitter();
     custom_write(BLTCON1, 0);
     custom_write(BLTADAT, 0xFFFF);
+#endif
     for (;;) {
         int16_t left = (int16_t)(rd_s16(span) + x);
         int16_t right = (int16_t)(rd_s16(span + 2) + x);
@@ -108,6 +112,7 @@ void draw_filled_circle(int16_t x, int16_t y, int16_t radius) {
         } else {
             last = 0xFFFF;
         }
+#ifndef FA18_NATIVE
         custom_write(BLTAFWM, first);
         custom_write(BLTALWM, last);
         for (plane = 0; plane < 4; plane++) {
@@ -117,6 +122,24 @@ void draw_filled_circle(int16_t x, int16_t y, int16_t radius) {
             custom_write_ptr(BLTDPT, dest + (gaddr)(plane * 0x1F40));
             custom_write(BLTSIZE, size);
         }
+#else
+        /* Same span word masks as C2F1C0, in the native page's plane table.
+         * Plane extents are host-owned; their spacing is not Chip RAM DMA. */
+        (void)dest;
+        for(plane=0;plane<4;++plane) {
+            gaddr base=rd_u32(rd_u32(PAGE_PLANE_TABLE)+4*(3-plane));
+            gaddr target=base+(gaddr)(top*40)+(gaddr)((left&0xfff0)>>3);
+            unsigned words=size&63;
+            for(unsigned i=0;i<words;++i) {
+                uint16_t mask=0xffff;
+                if(!i) mask&=first;
+                if(i+1==words) mask&=last;
+                uint16_t value=rd_u16(target+2*i);
+                wr_u16(target+2*i,(colour&(1u<<plane))?(uint16_t)(value|mask):(uint16_t)(value&~mask));
+            }
+        }
+        ++top;
+#endif
         row_base += 40;
         if (rising >= 0) {
             span += 4;
