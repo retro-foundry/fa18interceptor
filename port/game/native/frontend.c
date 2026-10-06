@@ -201,6 +201,10 @@ void native_frontend_tick(NativeFrontend *game) {
     /* One C0EFD4 entry. Its clock poll and C1612C display continuation keep
      * the same iteration; replay input must never advance while suspended. */
     if(!game->flight_timer_pending) {
+        /* C0F920 publishes C0FBE0 for the following update. Re-enter the
+         * existing native menu owner after its last flight display returns. */
+        if(game->screen==NATIVE_SCENE_SETUP && rd_u32(STAGE_CALLBACK)==0xc0fbe0)
+            native_frontend_start_menu(game);
         ++game->update_iterations;
         if(game->begin_update) game->begin_update(game,game->update_context);
     }

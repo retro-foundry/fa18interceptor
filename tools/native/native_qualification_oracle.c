@@ -28,6 +28,9 @@ void native_hud_draw(uint16_t tick) { (void)tick;abort(); }
 static int original_parent(gaddr entry) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;
     wr_u32(REG_A[7],0xc70000);REG_PC=entry;
+    /* These callbacks inherit C0EFD4's valid frame. C1C860 writes/reads its
+     * -$2C flag there; A6=0 would discard that write as unmapped test memory. */
+    REG_A[6]=0xc7ff70;
     m68k_set_reg(M68K_REG_SR,0x2700);
     fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
     for(unsigned steps=0;steps<2000000;++steps) {
@@ -40,6 +43,7 @@ static int original_parent(gaddr entry) {
     }
     fprintf(stderr,"qualification source did not return at %06X\n",REG_PC);return 0;
 }
+#ifndef FA18_QUALIFICATION_ORACLE_LIBRARY
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
@@ -82,3 +86,4 @@ int main(int argc,char **argv) {
     puts("20 native qualification startup, briefing, context and landing-schedule cases match original non-stack RAM");
     free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }
+#endif

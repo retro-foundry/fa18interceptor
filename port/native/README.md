@@ -215,3 +215,12 @@ comparisons and six collision-child cases pass. The subsequent C0F920 return to
 the menu remains unconnected; loaded samples and full outcome/frame parity are
 still open. See
 [`../../analysis/native_collision_milestone.md`](../../analysis/native_collision_milestone.md).
+
+C0F920/C08F26 now return a completed flight sequence to the native menu,
+clearing source renderer work banks and recorder/mode state. The entire sealed
+crash input runs to its stated three-crash/menu outcome, and selecting
+qualification again reaches the carrier briefing. Four original reset cases
+and affected native regressions pass. Native host ticks differ from the sealed
+video frames, so this is functional scenario completion; frame parity remains
+open. See
+[`../../analysis/native_sequence_return_milestone.md`](../../analysis/native_sequence_return_milestone.md).

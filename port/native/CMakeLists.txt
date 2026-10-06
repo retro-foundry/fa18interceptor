@@ -102,6 +102,9 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_collision
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_collision.py
                 --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_sequence_return
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_sequence_return.py
+                --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_qualification
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_qualification.py
                 --runner $<TARGET_FILE:fa18_native>)

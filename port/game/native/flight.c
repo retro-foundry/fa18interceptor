@@ -42,7 +42,7 @@ static void storage_child(void *context,enum SceneBootstrapChild child) {
     switch(child) {
     case BOOTSTRAP_CLEAR_STARTUP: clear_scene_startup_state(); break;
     case BOOTSTRAP_ENABLE_RECORDS: enable_scene_record_updates(); break;
-    case BOOTSTRAP_CLEAR_BUFFERS: native_frontend_clear_text(); break;
+    case BOOTSTRAP_CLEAR_BUFFERS: clear_render_buffers(); break; /* C2FD22 work banks */
     case BOOTSTRAP_PREPARE_PLAYER: prepare_player_record(); break;
     case BOOTSTRAP_START_POSITION: start_position(position); break;
     case BOOTSTRAP_SET_OBSERVER: set_observer_position(position[0],position[1],position[2]); break;
@@ -52,6 +52,10 @@ static void storage_child(void *context,enum SceneBootstrapChild child) {
     case BOOTSTRAP_REFRESH_CONTEXT: {
         const ContextRefreshHooks hooks={refresh_child,NULL,context};
         refresh_context_packet(&hooks); break;
+    }
+    case BOOTSTRAP_RUN: {
+        const SceneBootstrapHooks hooks={storage_child,NULL,position};
+        bootstrap_scene(&hooks);break;
     }
     default: fprintf(stderr,"native storage child unavailable: %u\n",(unsigned)child); abort();
     }
@@ -129,7 +133,12 @@ static void return_child(void *context,enum MenuReturnChild child) {
 static void stage(void *context,gaddr routine) {
     NativeFrontend *game=context;
     const MenuOutcomeHooks outcome={outcome_child,NULL,game};
-    if(routine==0xc0fece) {
+    if(routine==0xc0f920) {
+        int32_t position[3]={0};
+        const SceneBootstrapHooks hooks={storage_child,NULL,position};
+        reset_sequence_after_bootstrap(&hooks);
+        ++game->record_updates;
+    } else if(routine==0xc0fece) {
         const MenuTransitionHooks hooks={transition_child,NULL,game};
         advance_delayed_menu(&hooks);
         if(rd_u32(STAGE_CALLBACK)!=routine) {

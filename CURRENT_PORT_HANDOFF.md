@@ -176,7 +176,16 @@ updates); actual original view/record and six collision-child cases pass.
 This bounded collision/reset milestone is 100%. The next missing stage is
 C0F920, returning the sequence to the main menu; full recorded parity remains
 open. See `analysis/native_collision_milestone.md`.
-Next: sequence/menu return, complete C0EFD4 ownership, remaining HUD/record children and C0DA38
+C0F920/C08F26 sequence reset is now connected, with C2FD22 clearing the actual
+renderer work banks. The entire sealed crash input completes 3082 iterations /
+168 events, three postflight resets and return to the main menu; selecting
+qualification again reaches its carrier briefing. Four original reset cases
+match all non-stack RAM, including dirty work banks. Existing qualification and
+frontend/link checks pass. Sequence return is 100% of this functional scope.
+One of three sealed input scenarios runs to its stated outcome; no complete
+native recorded-frame parity has been accepted. See
+`analysis/native_sequence_return_milestone.md`.
+Next: carrier-success/demo outcomes, complete C0EFD4 ownership, remaining HUD/record children and C0DA38
 alternate presentation. Exact input-callback/beam timing remains unproven.
 Resolve input/view/timer ordering; missing reached model children still fail
 explicitly rather than supplying substitute geometry.
