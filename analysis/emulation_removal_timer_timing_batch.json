@@ -1,0 +1,193 @@
+{
+  "schema": 1,
+  "scope": "800-frame isolated timer probes; no full replay rerun",
+  "real_caller": "runner -> machine frame -> recomp hook -> C25312 main loop timer owner -> C25482 source-timed bridge",
+  "removed_dependency": "Fixed 30-cycle timer charge; signed-byte test, conditional decrement and event boundaries retained",
+  "baseline_commit": "efc20e563138e2e5af90fa278115883a9466ac9f",
+  "source_instructions": 4,
+  "dma_oracle_cases": 128,
+  "isolated_before_first_index_difference": {
+    "frame": 316,
+    "pixels": 64
+  },
+  "combined_after_800_first_nonfade_difference": {
+    "frame": 316,
+    "pixels": 64
+  },
+  "message_image_timer_group_matches_800": true,
+  "registry_first_half_matches_320": true,
+  "registry_second_half_matches_320": true,
+  "remaining_issue": "Combined registry interaction; neither complete half alone reproduces early failure",
+  "both_toolchain_builds_passed": true,
+  "ctests_passed": 12,
+  "gnu_profiling_invisible_all_cpu_modes": true,
+  "full_suite_not_rerun": true,
+  "last_full_raw_cpu_removed_percent": 38.40106459907289,
+  "full_suite_cpu_delta": null,
+  "native_memory_chipset_boot_percent": [
+    0,
+    0,
+    0
+  ],
+  "deletable_subsystems": 0,
+  "runner_sha256": "b89efd57e21dfbaa70b5ae65bde274e2b88177b274db84fd9c90548c3182d4af",
+  "source_sha256": "7e371a45711d1b54bd9f470c435313ab75bf7c1a9326ddb7f93bf33b5531c5a9",
+  "probes": [
+    {
+      "recording": "demo01",
+      "frames": 800,
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "ram_matches_off": true,
+      "on_calls": 27,
+      "proofs": {
+        "shadow": {
+          "entry": "C25482",
+          "name": "tick_timer",
+          "calls": 27,
+          "compared": 27,
+          "matched": 27,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 36,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C25482",
+          "name": "tick_timer",
+          "calls": 27,
+          "compared": 27,
+          "matched": 27,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 36,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "on_hashes": {
+        "rgb": "afb3da10ecd7eb9925d70d6c74f4ba475ec4403398f7952773b6f8ead6698ec4",
+        "idx": "d4e169df6cf5bed6dc1ff79859ce16f7f1cdbe0a0981038ee2c3ec2af0e276cb",
+        "ram": "6090760f896fd1844c2fbe6b9ae67985af561e4da4824bc4c5977e9f3718587e"
+      }
+    },
+    {
+      "recording": "qual_carrier_success",
+      "frames": 800,
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "ram_matches_off": true,
+      "on_calls": 15,
+      "proofs": {
+        "shadow": {
+          "entry": "C25482",
+          "name": "tick_timer",
+          "calls": 15,
+          "compared": 15,
+          "matched": 15,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 38,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C25482",
+          "name": "tick_timer",
+          "calls": 15,
+          "compared": 15,
+          "matched": 15,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 38,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "on_hashes": {
+        "rgb": "f19704bc755739ba5d7de134060f74ce78ded3a1cba7e1352d3f82c8378f5f6c",
+        "idx": "fd83297d6a270e5307d43fe9279adc95b87878b5d6442e15af7167da2499cc93",
+        "ram": "3be3fb567421f1cfa23224b195849f6a72e1f12a457ae7f216d03fe3546bf476"
+      }
+    },
+    {
+      "recording": "qual_fail_crashes",
+      "frames": 800,
+      "comparison": {
+        "frames": 800,
+        "reference_frames": 800,
+        "actual_frames": 800,
+        "frame_counts_equal": true,
+        "first_rgb_difference": null,
+        "first_index_difference": null,
+        "first_nonfade_difference": null,
+        "ignored_fade_pixels": 0,
+        "nonfade_pixels": 0,
+        "index_difference_pixels": 0,
+        "passed": true
+      },
+      "ram_matches_off": true,
+      "on_calls": 36,
+      "proofs": {
+        "shadow": {
+          "entry": "C25482",
+          "name": "tick_timer",
+          "calls": 36,
+          "compared": 36,
+          "matched": 36,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 37,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        },
+        "sandbox": {
+          "entry": "C25482",
+          "name": "tick_timer",
+          "calls": 36,
+          "compared": 36,
+          "matched": 36,
+          "mismatched": 0,
+          "hardware": 0,
+          "incomplete": 0,
+          "mean_cycles": 37,
+          "busy_input_calls": 0,
+          "busy_input_reads": 0
+        }
+      },
+      "on_hashes": {
+        "rgb": "eadf69487c4407203a37097a1e30bc675284104a179076b999fa975f1891eaa2",
+        "idx": "537eedd7ff42743ec3c711a6c96c86320079a9820d6c0c6d88417166860f775b",
+        "ram": "990180ae6e924549714f0c928153edf147615648544a5f29ed4c9a3090793e98"
+      }
+    }
+  ]
+}

@@ -405,3 +405,18 @@ This repairs integration timing, not CPU independence. No full suite rerun:
 cached raw CPU **38.4011%**, new full-suite delta unmeasured, accepted CPU share
 unset; memory/chipset/boot **0%**, gate **0/4**. Evidence:
 `../analysis/emulation_removal_image_timing_batch.json/.md`.
+
+### Signed-byte timer timing prerequisite
+
+C25482's fixed 30-cycle adapter independently reproduced demo frame 316. It
+now preserves original signed-byte test, decrement and return boundaries.
+All four instructions / 128 DMA cases match; three isolated 800-frame drawing/
+RAM comparisons match OFF and all 27/15/36 shadow/sandbox calls pass. Both
+builds, twelve CTests and GNU profiling checks pass. Message/image/timer group
+matches demo through 800. ALL still differs at 316; neither complete registry
+half reproduces it alone now. Minimize the remaining interaction next.
+
+This is a temporary CPU timing repair. No full suite rerun: cached raw CPU
+**38.4011%**, new delta unmeasured; accepted CPU share unset; memory/chipset/boot
+**0%**, gate **0/4**. Evidence:
+`../analysis/emulation_removal_timer_timing_batch.json/.md`.

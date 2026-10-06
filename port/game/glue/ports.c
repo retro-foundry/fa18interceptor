@@ -248,7 +248,7 @@ const FA18Port fa18_ports[] = {
     {0xC25B1E, glue_empty_stage, "empty_stage", 16},
     {0xC31F4A, glue_empty_stage, "empty_stage", 16},
     {0xC25864, glue_C25864, "reset_list", 0, 0, glue_C25864_step, 0xC25876},
-    {0xC25482, glue_C25482, "tick_timer", 30},
+    {0xC25482, glue_C25482, "tick_timer", 0, 0, glue_C25482_step, 0xC2548A},
     {0xC08394, glue_C08394, "set_event_bit_and_clear_command_word_bit", 48},
     {0xC090C2, glue_C090C2, "clear_scene_startup_state", 0, 0, glue_C090C2_step, 0xC090F2},
     {0xC090F2, glue_C090F2, "enable_scene_record_updates", 0, 0, glue_C090F2_step, 0xC0910C},

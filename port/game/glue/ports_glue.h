@@ -170,6 +170,7 @@ int glue_C1D722(void);
 int glue_C30F56(void);
 int glue_C1C7F6(void);
 int glue_C25482(void);
+int glue_C25482_step(void);
 
 /* batch 7 */
 int glue_C50212(void);

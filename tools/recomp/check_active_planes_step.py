@@ -28,7 +28,7 @@ def main():
     group_names += ("menu_transition", "menu_setup", "menu_cold", "menu_followup", "menu_outcome", "menu_return", "menu_context_finish", "postflight_completion", "postflight_messages", "postflight_file_callers", "input_device_callbacks", "input_display_setup", "main_loop_timers", "main_loop_control_messages", "record_control_actions", "main_loop_flight_controls", "flight_record_actions")
     group_names += ("flight_motion_helpers",)
     group_names += ("flight_dynamics", "flight_geometry", "flight_markers", "projection_readouts", "hud_stream", "hud_parents","hud_readout_parents","hud_text_helpers","hud_projection_parents","hud_history_stream","render_parents","face_stream_parents","face_list_parents","hud_render_parents","render_leaf_helpers","render_entry_helpers","segment_projection","corner_view","control_readouts","record_steering","display_record_selection")
-    group_names += ("hud_stores", "message_update", "image_blit")
+    group_names += ("hud_stores", "message_update", "image_blit", "timer_tick")
     parser.add_argument("--group", choices=group_names + ("all",), default="planes")
     args = parser.parse_args()
     if args.cases <= 0:
@@ -37,6 +37,7 @@ def main():
         "hud_stores": ["C30A00", "C30AE2"],
         "message_update": ["C11BFC"],
         "image_blit": ["C30EAA"],
+        "timer_tick": ["C25482"],
         "display_record_selection": ["C0D74A","C0D752","C0DAA0","C0DAD0","C0DAD4","C0DADC","C0DAE6"],
         "record_steering": ['C2CA26', 'C2CA92', 'C2CAA0', 'C2CB86', 'C2CB82', 'C2CBBC'],
         "control_readouts": ['C12950', 'C131BE', 'C13176', 'C133B2', 'C13396', 'C52EC8'],

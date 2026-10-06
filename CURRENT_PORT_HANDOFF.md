@@ -11,6 +11,16 @@ excluded; geometry, other rendering behavior and gameplay state still need to
 match. Treat strict RGB hashes as diagnostics, not sufficient evidence of a
 failure under this policy.
 
+Latest timer prerequisite: C25482's fixed 30-cycle charge is source-timed.
+All four instructions / 128 DMA cases match, three isolated 800-frame drawing/
+RAM comparisons match OFF, and all 27/15/36 shadow/sandbox calls pass. Both
+builds, twelve CTests and GNU profiling checks pass. Message/image/timer group
+matches demo through 800. ALL still differs at 316; neither half of the full
+603-entry registry now reproduces it alone. Minimize the interacting paths
+next. No full rerun: cached raw CPU **38.4011%**, new delta unmeasured;
+memory/chipset/boot **0%**, gate **0/4**. Evidence:
+`analysis/emulation_removal_timer_timing_batch.json/.md`.
+
 Latest image prerequisite: C30EAA's fixed 3,000-cycle blit adapter is now
 source-timed and reuses the existing C30F46 plane-stream tail. Its 62 source
 instructions / 1,984 DMA oracle cases match. Three isolated 800-frame drawing/
