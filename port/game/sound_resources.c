@@ -2,6 +2,7 @@
  * repetition counts, links and availability bits remain original game logic. */
 #include "sound_resources.h"
 #include "globals.h"
+#include "fixed_math.h"
 static gaddr voice(unsigned slot) { return rd_u32(SOUND_VOICES+4*slot); }
 void load_intro_sound_resources(const SoundResourceHooks *h) {
     if(!h->load(h->context,"text/text201",35) || !h->duplicate(h->context,35,36)) return;
@@ -39,4 +40,11 @@ void load_menu_sound_resources(const SoundResourceHooks *h) {
     wr_u32(voice(34)+16,3);wr_u32(voice(34)+20,3);
     wr_u32(voice(33)+32,voice(17));wr_u32(voice(34)+32,voice(18));
     wr_u8(SOUND_FLAGS,rd_u8(SOUND_FLAGS)|0x80u);
+}
+void initialize_square_wave_samples(gaddr samples,int32_t bytes) {
+    for(int32_t i=0;i<bytes/2;++i) wr_u8(samples++,0x7f);
+    for(int32_t i=0;i<bytes/2;++i) wr_u8(samples++,0x82);
+}
+void initialize_noise_samples(gaddr samples,int32_t bytes) {
+    for(int32_t i=0;i<bytes;++i) wr_u8(samples++,(uint8_t)random_bits(8));
 }

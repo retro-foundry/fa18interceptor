@@ -35,8 +35,8 @@ def main():
                        cwd=ROOT, check=True, capture_output=True, text=True, timeout=10)
         initial = initial_path.read_bytes()
         reference = args.source_initial.read_bytes() if args.source_initial else None
-        assert value(initial, 0xC45B5B, 1) & 0x80, 'menu sample availability missing'
-        assert value(initial, 0xC45B5A, 1) & 4, 'intro sample pair missing'
+        assert value(initial, 0xC45B5B, 1) == 0xF7, 'source sound availability differs'
+        assert value(initial, 0xC45B5A, 1) == 7, 'source event/intro sound availability differs'
         for slot, length in ((35, 568), (13, 2044), (15, 2012), (17, 32770),
                              (19, 32786), (25, 32914), (27, 32720), (33, 65590)):
             voice = value(initial, 0xC0A438+4*slot, 4)
@@ -49,6 +49,19 @@ def main():
                 source_voice = value(reference, 0xC0A438+4*slot, 4)
                 assert samples == field(reference, value(reference, source_voice, 4), length), f'original sound {slot} mismatch'
         subprocess.run([str(oracles['sound_resources']), str(initial_path)], cwd=ROOT, check=True, timeout=20)
+        for slot, length in ((2, 13818), (4, 32), (6, 2048), (5, 3462),
+                             (11, 4124), (0, 13202), (8, 20000)):
+            voice = value(initial, 0xC0A438+4*slot, 4)
+            assert voice and value(initial, voice+4, 4) == length
+            samples = field(initial, value(initial, voice, 4), length)
+            assert any(samples), f'flight sound {slot} is empty'
+            if reference:
+                source_voice = value(reference, 0xC0A438+4*slot, 4)
+                assert samples == field(reference, value(reference, source_voice, 4), length), f'original flight sound {slot} mismatch'
+        square = value(initial, 0xC0A438+4*4, 4)
+        assert field(initial, value(initial, square, 4), 32) == bytes([0x7F])*16+bytes([0x82])*16
+        if reference:
+            assert field(initial, 0xC07288, 4) == field(reference, 0xC07288, 4), 'startup random seed differs'
         for iterations in (2400, 4892):
             path = work / f'{iterations}.dat'
             result = subprocess.run([str(args.runner.resolve()), '--headless', '--frames', '30000',
@@ -74,7 +87,7 @@ def main():
                 assert value(path.read_bytes(), log+62, 2) > value(initial, log+62, 2), 'recorded launches absent'
             subprocess.run([str(oracles['records']), str(path)], cwd=ROOT, check=True, timeout=20)
     assert hashlib.sha256(adf.read_bytes()).digest() == seal
-    print('Menu sound resources, original descriptor contracts and full native demo pass; audio output remains pending')
+    print('Complete startup sound resources, generated waveforms, original contracts and full native demo pass; audio output remains pending')
 
 
 if __name__ == '__main__':

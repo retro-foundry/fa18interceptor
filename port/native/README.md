@@ -49,12 +49,13 @@ Demonstration Flight (digit 1) now loads the original `text/textply` and
 `text/textctl` recorder assets at startup, then flies through the source demo
 stages, NPC guidance and recorded launches. All 4,892 demo updates complete;
 startup/record/launch/asset comparisons pass. Functional scenario wiring is
-3/3, while full native frame parity remains 0/3 accepted. Intro/menu sample
-files and linked voice descriptors now load from the ADF. This restores the
-source 210-update demo banner and reduces the observed startup lead from 97 to
-37 game ticks. Engine/alert/noise sample initialization and viewport/message
-cadence still need reconciliation. Other selected modes stop at their banner.
-Audio remains suppressed.
+3/3, while full native frame parity remains 0/3 accepted. All startup sound
+resources and linked voice descriptors now load from the ADF or execute the
+source square-wave/noise generators. All 15 sample buffers, availability flags
+and resulting random seed match original startup. This restores the source
+210-update demo banner and reduces the observed startup lead from 97 to 37 game
+ticks. Viewport/message cadence and per-tick audio programs/output remain open.
+Other selected modes stop at their banner. Audio output remains suppressed.
 
 The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.

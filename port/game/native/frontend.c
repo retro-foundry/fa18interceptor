@@ -140,7 +140,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
             bytes,size<limit?size:limit);
     }
     if(!native_cockpit_load(&disk,error,cap)) goto done;
-    if(!native_audio_load_menu(&disk,error,cap)) goto done;
+    if(!native_audio_load_resources(&disk,error,cap)) goto done;
     native_flight_initialize(game);
     game->screen=NATIVE_SPLASH; memcpy(game->palette,game->splash.palette,sizeof game->palette);
     for(unsigned y=0;y<game->splash.height;++y) memcpy(game->indices+y*320,game->splash.indices+y*game->splash.width,game->splash.width);

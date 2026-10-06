@@ -10,4 +10,7 @@ typedef struct {
 /* Original C17510 and C1756A: disk-backed menu pairs and linked phrases. */
 void load_intro_sound_resources(const SoundResourceHooks *hooks);
 void load_menu_sound_resources(const SoundResourceHooks *hooks);
+/* C50A58 square wave and C50B36 generated noise for C1787A's voices. */
+void initialize_square_wave_samples(gaddr samples,int32_t bytes);
+void initialize_noise_samples(gaddr samples,int32_t bytes);
 #endif

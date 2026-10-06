@@ -45,10 +45,19 @@ def main():
         restart.write_text(prefix + '3084 0 K 5 1\n3085 0 K 5 0\nend 3500 0\n')
         restarted, data = run(restart, 3500, 'restart')
         assert restarted['mode'] == 9 and restarted['screen'] == 'scene-setup', restarted
-        assert restarted['stage'] == 'C0FBB6' and restarted['scene_selected'], restarted
+        assert restarted['stage'] == 'C1072E' and restarted['scene_selected'], restarted
         assert restarted['record_updates'] > stats['record_updates'], restarted
         assert restarted['replay_events'] == 170 and restarted['postflight_resets'] == 3, restarted
         subprocess.run([str(oracle), str(data)], cwd=ROOT, check=True, timeout=15)
+        # With the original sound flags initialized, re-entry reaches the
+        # source code prompt. Acknowledge it and then the carrier briefing.
+        restart.write_text(prefix + '3084 0 K 5 1\n3085 0 K 5 0\n'
+                           '3502 0 K 68 1\n3503 0 K 68 0\n'
+                           '3800 0 K 64 1\n3801 0 K 64 0\nend 4200 0\n')
+        playable, data = run(restart, 4200, 'playable')
+        assert playable['stage'] == 'C10DAE' and playable['mode'] == 9, playable
+        assert playable['record_updates'] > restarted['record_updates'], playable
+        assert playable['replay_events'] == 174 and playable['postflight_resets'] == 3, playable
     print('Native crash recording completes all input, returns to the menu and restarts qualification; reset oracle passes')
 
 

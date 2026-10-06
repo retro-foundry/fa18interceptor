@@ -4,6 +4,7 @@
 #include "audio_assets.h"
 #include "storage.h"
 #include "../sound_resources.h"
+#include "../input_display_setup.h"
 #include "../globals.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,8 +38,9 @@ static int load(void *context,const char *path,unsigned slot) {
     AudioAssets *assets=context;size_t bytes=0;uint8_t *data=amiga_ofs_read(assets->disk,path,&bytes);
     if(!data || !bytes) {
         free(data);
-        assets->failed=1;
-        if(assets->capacity) snprintf(assets->error,assets->capacity,"missing or empty original sound asset %s",path);
+        /* C5058E returns zero here. C1787A may try textegn2, and each
+         * original resource owner decides which availability bit to set. */
+        fprintf(stderr,"native sound resource unavailable: %s\n",path);
         return 0;
     }
     if(!create_voice(assets,bytes,slot)) {free(data);return 0;}
@@ -60,9 +62,34 @@ static void release(void *context,unsigned slot) {
      * belongs to this frontend lifetime; failed startup discards it together. */
     (void)context;wr_u32(SOUND_VOICES+4*slot,0);
 }
-int native_audio_load_menu(const AmigaOfs *disk,char *error,size_t capacity) {
+static int32_t setup_sound_child(void *context,enum InputDisplayChild child) {
+    AudioAssets *assets=context;gaddr record;
+    switch(child) {
+    case IDS_LOAD_TEXT_2: return load(assets,"text/textegn",2);
+    case IDS_LOAD_TEXT_2_ALTERNATE: return load(assets,"text/textegn2",2);
+    case IDS_DUPLICATE_TEXT_2: return duplicate(assets,2,3);
+    case IDS_ALLOCATE_TEXT_4: return create_voice(assets,32,4);
+    case IDS_CLEAR_TEXT_4:
+        record=sample_voice(4);initialize_square_wave_samples(rd_u32(record),rd_s32(record+4));return 0;
+    case IDS_ALLOCATE_TEXT_6: return create_voice(assets,0x800,6);
+    case IDS_CLEAR_TEXT_6:
+        record=sample_voice(6);initialize_noise_samples(rd_u32(record),rd_s32(record+4));return 0;
+    case IDS_LOAD_TEXT_5: return load(assets,"text/texttre",5);
+    case IDS_DUPLICATE_TEXT_6: return duplicate(assets,6,10);
+    case IDS_LOAD_TEXT_11: return load(assets,"text/textger",11);
+    case IDS_DUPLICATE_TEXT_2_TO_12: return duplicate(assets,2,12);
+    case IDS_LOAD_TEXT_0: return load(assets,"text/textcpt",0);
+    case IDS_DUPLICATE_TEXT_0: return duplicate(assets,0,1);
+    case IDS_LOAD_TEXT_8: return load(assets,"text/textwnd",8);
+    case IDS_DUPLICATE_TEXT_8: return duplicate(assets,8,9);
+    default: fprintf(stderr,"unexpected native sound setup child %u\n",(unsigned)child);abort();
+    }
+}
+int native_audio_load_resources(const AmigaOfs *disk,char *error,size_t capacity) {
     AudioAssets assets={disk,{0x8000,0xc55000,0x68000},error,capacity,0};
     const SoundResourceHooks hooks={load,duplicate,release,&assets};
     load_intro_sound_resources(&hooks);load_menu_sound_resources(&hooks);
+    const InputDisplayHooks setup={setup_sound_child,NULL,&assets};
+    load_setup_text_resources(0x4a20,&setup); /* C1787A's two-byte local. */
     return !assets.failed;
 }
