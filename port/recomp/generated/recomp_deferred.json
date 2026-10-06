@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "translated_entries": 624,
-  "registered_readable_translated_entries": 515,
+  "registered_readable_translated_entries": 514,
   "registered_readable_source_only_entries": 75,
   "direct_native_entries": [
     {
@@ -515,9 +515,29 @@
         "outer flight CPU/event boundary",
         "parent instruction/event timing not yet modeled"
       ]
+    },
+    {
+      "entry": "C1C7F6",
+      "function": "classify_record_rate",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C1C63E",
+          "function": "advance_record_update_stage",
+          "call_site": "classify_stage_rate",
+          "source": "port/game/update_stage.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest record memory",
+        "caller register/stack publication",
+        "parent instruction/event timing",
+        "outer original entry and other children"
+      ]
     }
   ],
-  "direct_native_entry_count": 25,
+  "direct_native_entry_count": 26,
   "static_recompiled_entries": 84,
   "original_adf_static_entries": 43,
   "reference_wrapper_static_entries": 41,

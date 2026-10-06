@@ -92,7 +92,8 @@ def main():
                 profile = json.loads((out / "profile.json").read_text())
                 assert (meter['ports']['steps'] - meter['instructions']['adapter']
                         == profile['C1C63E']), "unaccounted instruction step or counted native entry"
-                for caller, callee in (('C1C63E', 'C22C80'), ('C22C80', 'C25B66')):
+                for caller, callee in (('C1C63E', 'C22C80'), ('C22C80', 'C25B66'),
+                                       ('C1C63E', 'C1C7F6')):
                     edge = next(edge for edge in profile['_native_edges']
                                 if edge['caller'] == caller and edge['callee'] == callee)
                     assert edge['calls'] > 0 and not profile.get(callee, 0)

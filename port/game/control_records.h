@@ -40,7 +40,11 @@ void settle_record(gaddr record);
 
 /* Rate class 5, 3 or 1 from the largest of |+$56|, |+$58| and |+$5A|/4
  * (above $C0: 1; above $60: 3; else 5 unless |+$6C| > $1000). */
-void classify_record_rate(gaddr record);
+typedef struct {
+    int16_t maximum_rate,compared_rate,quarter_rate;
+    uint8_t class_code,discarded_bit;
+} RecordRateResult;
+RecordRateResult classify_record_rate(gaddr record);
 
 /* Clear the first (player) record's motion fields and the related globals. */
 void reset_player_record(void);

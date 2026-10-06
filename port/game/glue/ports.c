@@ -293,7 +293,6 @@ const FA18Port fa18_ports[] = {
     {0xC4FFB4, glue_C4FFB4, "clear_voice_interrupt", 0, 0, glue_C4FFB4_step, 0xC4FFCA},
     {0xC08324, glue_C08324, "set_zoom_maximum", 0, 0, glue_C08324_step, 0xC0833E},
     {0xC095C0, glue_C095C0, "reset_player_record", 0, 0, glue_C095C0_step, 0xC09620},
-    {0xC1C7F6, glue_C1C7F6, "classify_record_rate", 0, 0, glue_C1C7F6_step, 0xC1C85E},
     {0xC50212, glue_C50212, "step_voice_program", 0, 0, glue_C50212_step, 0xC5027C},
     {0xC4FFB0, glue_C4FFB0, "clear_voice_interrupt", 0, 0, glue_C4FFB0_step, 0xC4FFCA},
     /* Complete stream stores, numeric fields and bounded marker siblings. */

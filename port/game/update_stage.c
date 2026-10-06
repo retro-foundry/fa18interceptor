@@ -8,6 +8,12 @@ static void observe(const UpdateStageHooks *hooks,enum UpdateStagePhase phase,
     UpdateStageEvent event={phase,value,previous,coarse,flags,record,requests};
     if(hooks->observe) hooks->observe(hooks->context,&event);
 }
+static void classify_stage_rate(const UpdateStageHooks *hooks,gaddr record) {
+    UpdateStageEvent event={0};
+    event.phase=UPDATE_STAGE_CLASSIFIED_RATE; event.record=record;
+    event.rate=classify_record_rate(record);
+    if(hooks->observe) hooks->observe(hooks->context,&event);
+}
 static uint8_t reverse_cell(uint16_t x,uint16_t z) {
     return (uint8_t)((3u-(x&3u))+4u*(3u-(z&3u)));
 }
@@ -23,9 +29,7 @@ int advance_record_update_stage(RecordUpdateStageFrame *f,const UpdateStageHooks
     switch(f->phase) {
     case RECORD_STAGE_BEGIN: requests=0; break;
     case RECORD_STAGE_AFTER_RECORDS: goto after_records;
-    case RECORD_STAGE_AFTER_RATE: goto after_rate;
     case RECORD_STAGE_AFTER_ORIGIN: goto after_origin;
-    case RECORD_STAGE_AFTER_ORIGIN_RATE: goto after_origin_rate;
     case RECORD_STAGE_COMPLETE: return 1;
     default: abort();
     }
@@ -51,9 +55,7 @@ after_records:
         gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD);
         uint16_t x,z;
         observe(hooks,UPDATE_STAGE_RECORD_ROUTE,0,0,0,0,record,requests);
-        STAGE_WAIT(UPDATE_STAGE_RATE,RECORD_STAGE_AFTER_RATE);
-after_rate:
-        record=f->result.record;
+        classify_stage_rate(hooks,record);
         x=rd_u16(record+6); wr_u16(0xc4594cu,x);
         z=rd_u16(record+8); wr_u16(0xc4594eu,z);
         wr_u8(0xc45851u,rd_u8(record+0xau));
@@ -68,8 +70,7 @@ after_rate:
 after_origin:
         requests=f->result.requests;
         observe(hooks,UPDATE_STAGE_ORIGIN_RATE,0,0,0,0,CONTROL_RECORDS,requests);
-        STAGE_WAIT(UPDATE_STAGE_RATE,RECORD_STAGE_AFTER_ORIGIN_RATE);
-after_origin_rate:
+        classify_stage_rate(hooks,CONTROL_RECORDS);
         x=rd_u32(0xc45c3eu)&0x1fffffffu; z=rd_u32(0xc45c46u)&0x1fffffffu;
         coarse_x=(uint16_t)((x>>16)>>4); coarse_z=(uint16_t)((z>>16)>>4);
         first=reverse_cell(coarse_x,coarse_z);

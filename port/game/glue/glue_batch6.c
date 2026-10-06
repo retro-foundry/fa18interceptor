@@ -67,28 +67,6 @@ int glue_C30F56(void) {
     return glue_return();
 }
 
-/* $C1C7F6: A3 record. Leaves the magnitudes it compared in D0-D2. */
-int glue_C1C7F6(void) {
-    gaddr r = A(3);
-    int16_t a = rd_s16(r + 0x56), b = rd_s16(r + 0x58), c = rd_s16(r + 0x5A), largest;
-    a = (int16_t)(a < 0 ? -a : a);
-    b = (int16_t)(b < 0 ? -b : b);
-    c = (int16_t)((int16_t)(c < 0 ? -c : c) >> 2);
-
-    classify_record_rate(r);
-
-    if (b > a) largest = b > c ? b : c;
-    else largest = c > a ? c : a;
-    SET_W(D(0), largest);
-    SET_W(D(1), b);
-    SET_W(D(2), c);
-    if (largest <= 0x60) {
-        int16_t f = rd_s16(r + 0x6C);
-        SET_W(D(1), f < 0 ? -f : f);
-    }
-    return glue_return();
-}
-
 /* $C25482: A0 timer byte. */
 int glue_C25482(void) {
     tick_timer(A(0));

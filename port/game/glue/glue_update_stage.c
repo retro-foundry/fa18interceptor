@@ -22,6 +22,14 @@ static void stage_outputs(void *context,const UpdateStageEvent *event) {
         cpu->origin=1; A(7)-=2; m68k_write_memory_16(A(7),D(5)); flags_logic_w(D(5)); break;
     case UPDATE_STAGE_ORIGIN_RATE:
         A(3)=event->record; break;
+    case UPDATE_STAGE_CLASSIFIED_RATE:
+        /* Publish compatibility registers and dead BSR return storage after
+         * the named game call; neither PC nor an opcode selects its behavior. */
+        wr_u32(A(7)-4,cpu->origin?0xc1c72au:0xc1c6d4u);
+        SET_W(D(0),event->rate.maximum_rate); SET_W(D(1),event->rate.compared_rate);
+        SET_W(D(2),event->rate.quarter_rate);
+        FLAG_X=(uint32_t)event->rate.discarded_bit<<8; flags_logic_b(event->rate.class_code);
+        fa18_ports_note_native_edge(0xc1c63e,0xc1c7f6); break;
     case UPDATE_STAGE_RECORD_KEYS:
         SET_W(D(0),event->value&3u); step_subtract_word(&D(0),3); renderer_negate(&D(0),2);
         SET_W(D(1),event->previous&3u); step_subtract_word(&D(1),3); renderer_negate(&D(1),2);
@@ -46,13 +54,12 @@ static void stage_outputs(void *context,const UpdateStageEvent *event) {
     }
 }
 static UpdateStageResult consume(void *context,enum UpdateStageChild child) {
-    UpdateStageCPU *cpu=context;
     UpdateStageResult result;
     if(child==UPDATE_STAGE_RECORDS) glue_complete_child(0xc22c80u,0xc1c6bcu);
     else if(child==UPDATE_STAGE_ORIGIN) {
         glue_complete_child(0xc29042u,0xc1c71eu);
         SET_W(D(5),m68k_read_memory_16(A(7))); A(7)+=2; flags_logic_w(D(5));
-    } else glue_complete_child(0xc1c7f6u,cpu->origin?0xc1c72au:0xc1c6d4u);
+    } else abort();
     result.record=A(3); result.requests=(uint8_t)D(5); return result;
 }
 int glue_C1C63E(void) {
@@ -90,7 +97,6 @@ static int continue_record_update_stage(const void *arguments) {
         switch(call->frame.child) {
         case UPDATE_STAGE_RECORDS: entry=0xc22c80u; ret=0xc1c6bcu; break;
         case UPDATE_STAGE_ORIGIN: entry=0xc29042u; ret=0xc1c71eu; break;
-        case UPDATE_STAGE_RATE: entry=0xc1c7f6u; ret=call->cpu.origin?0xc1c72au:0xc1c6d4u; break;
         default: abort();
         }
         m68ki_push_32(ret); REG_PC=entry;

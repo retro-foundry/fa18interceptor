@@ -58,19 +58,24 @@ void settle_record(gaddr record) {
 
 static int16_t magnitude(int16_t v) { return (int16_t)(v < 0 ? -v : v); }
 
-void classify_record_rate(gaddr record) {
-    int16_t a = magnitude(rd_s16(record + 0x56));
-    int16_t b = magnitude(rd_s16(record + 0x58));
-    int16_t c = (int16_t)(magnitude(rd_s16(record + 0x5A)) >> 2);
-    int16_t largest;
-
-    if (b > a) largest = b > c ? b : c;
-    else largest = c > a ? c : a;
-
-    if (largest <= 0x60)
-        wr_u8(RECORD_RATE, magnitude(rd_s16(record + 0x6C)) > 0x1000 ? 3 : 5);
-    else
-        wr_u8(RECORD_RATE, largest <= 0xC0 ? 3 : 1);
+RecordRateResult classify_record_rate(gaddr record) {
+    RecordRateResult result;
+    int16_t a=magnitude(rd_s16(record+0x56));
+    int16_t b=magnitude(rd_s16(record+0x58));
+    int16_t c=magnitude(rd_s16(record+0x5a));
+    result.discarded_bit=(uint8_t)(((uint16_t)c>>1)&1u);
+    c=(int16_t)(c>>2);
+    result.quarter_rate=c;
+    result.maximum_rate=b>a?(b>c?b:c):(c>a?c:a);
+    result.compared_rate=b;
+    if(result.maximum_rate<=0x60) {
+        int16_t orientation=rd_s16(record+0x6c);
+        result.compared_rate=magnitude(orientation);
+        if(orientation<0) result.discarded_bit=1;
+        result.class_code=result.compared_rate>0x1000?3:5;
+    } else result.class_code=result.maximum_rate<=0xc0?3:1;
+    wr_u8(RECORD_RATE,result.class_code);
+    return result;
 }
 
 void reset_player_record(void) {

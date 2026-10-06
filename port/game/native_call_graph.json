@@ -513,6 +513,26 @@
         "outer flight CPU/event boundary",
         "parent instruction/event timing not yet modeled"
       ]
+    },
+    {
+      "entry": "C1C7F6",
+      "function": "classify_record_rate",
+      "source": "port/game/control_records.c",
+      "callers": [
+        {
+          "entry": "C1C63E",
+          "function": "advance_record_update_stage",
+          "call_site": "classify_stage_rate",
+          "source": "port/game/update_stage.c"
+        }
+      ],
+      "source_call": "port/recomp/generated/recomp_001.c",
+      "remaining_dependencies": [
+        "guest record memory",
+        "caller register/stack publication",
+        "parent instruction/event timing",
+        "outer original entry and other children"
+      ]
     }
   ]
 }
