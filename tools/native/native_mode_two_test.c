@@ -27,6 +27,8 @@ typedef struct {
     int weapon_baseline;
     unsigned flight,region_mask,occupied_mask,spawns,zone_exits,pending_exits,npc_missiles;
     uint32_t record_states[16];
+    uint16_t guidance_cases[16][512];
+    unsigned guidance_case_counts[16];
     uint32_t record_cases[16][32];
     unsigned record_case_counts[16];
     uint32_t initial_position[3];
@@ -65,7 +67,8 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     }
     if(boundary==NATIVE_FRAME_BODY_BEGIN && run->entry.begun)
         native_frame_capture(game,NATIVE_FRAME_BODY_END,saved_tick,&run->entry);
-    if(boundary==NATIVE_FRAME_BODY_BEGIN && rd_u8(MODE_SELECT)==run->mode) {
+    if(boundary==NATIVE_FRAME_BODY_BEGIN && (rd_u8(MODE_SELECT)==run->mode ||
+       (run->flight==2 && run->entered))) {
         run->entered=1;
         gaddr stage=rd_u32(STAGE_CALLBACK);
         gaddr key=stage|((run->mode==125 && game->ticks>=11000)?0x2000000u:0);
@@ -91,6 +94,25 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             run->region_mask=mask;run->occupied_mask=occupied;
             for(unsigned slot=0;slot<16;++slot) {
                 const gaddr record=CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES;
+                /* Sample actual manoeuvre/altitude-limit crossings, including
+                 * the countdown arm that calls C06C02. No state is seeded. */
+                if(run->flight==2 && (rd_u8(record+98)&0xf0)==0x10 &&
+                   (rd_u16(record)&0xc0)==0xc0) {
+                    const uint16_t guidance=rd_u8(record+5)|
+                        ((uint16_t)(rd_s16(record+76)<0?0:rd_s16(record+76)<2?rd_s16(record+76)+1:3)<<8)|
+                        ((uint16_t)(rd_s32(record+66)<0)<<10)|
+                        ((uint16_t)((int32_t)rd_s16(record+108)*64>=rd_s32(record+24))<<11)|
+                        ((uint16_t)(rd_s16(record+106)<0x320)<<12)|
+                        ((uint16_t)(rd_s16(record+106)<0x3840)<<13)|
+                        ((uint16_t)(rd_s16(record+102)<0x3840)<<14)|
+                        ((uint16_t)(rd_s16(record+102)>=0x68b0)<<15);
+                    unsigned found=0;
+                    while(found<run->guidance_case_counts[slot] && run->guidance_cases[slot][found]!=guidance) ++found;
+                    if(found==run->guidance_case_counts[slot]) {
+                        if(found==512) abort();
+                        run->guidance_cases[slot][run->guidance_case_counts[slot]++]=guidance;sample|=8;
+                    }
+                }
                 const unsigned zone=rd_u8(record+93);
                 const uint32_t state=(rd_u8(record+1)&0x41u)|((uint32_t)rd_u8(record+56)<<8)|
                     ((uint32_t)zone<<16)|((uint32_t)rd_u8(record+122)<<24);
@@ -190,6 +212,7 @@ int main(int argc,char **argv) {
     unsigned aircraft=argc>=6?(unsigned)atoi(argv[5]):1;
     if(argc==7) {
         if(!strcmp(argv[6],"callback") && run.mode==125) run.callback=1;
+        else if(!strcmp(argv[6],"combat") && (run.mode==6 || run.mode==8)) run.flight=2;
         else if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
         else if(!strcmp(argv[6],"eject") && run.mode==8) run.eject=1;
         else if(run.mode==8 && !strncmp(argv[6],"weapon",6) && strlen(argv[6])==7 && argv[6][6]>='1' && argv[6][6]<='3')
@@ -227,7 +250,7 @@ int main(int argc,char **argv) {
     const unsigned *input_times=mission?mission_times:times;
     const int *input_keys=mission?mission_keys:keys;
     unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:4u;
-    while(game->ticks<(run.flight?30000u:(mission || run.mode==125)?18000u:10000u)) {
+    while(game->ticks<(run.flight==2?60000u:run.flight?30000u:(mission || run.mode==125)?18000u:10000u)) {
         if(run.callback) {
             if(game->ticks==10000) {
                 run.callback_events=game->input_events;
@@ -278,14 +301,14 @@ int main(int argc,char **argv) {
        (!run.returned || game->scene_frames<30 || !game->postflight_callbacks)) ||
        (run.mode==125 && (!run.returned || game->scene_frames<2000 || (run.samples&7)!=7 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
-       (run.mode==6 && (game->scene_frames<384 || run.samples!=7 ||
+       (run.mode==6 && !run.flight && (game->scene_frames<384 || run.samples!=7 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
        (run.mode==3 && (game->scene_frames<768 || run.samples!=7 ||
         rd_u8(RECORDER_MODE)!=0 || rd_u8(0xc45849)!=0x12u-aircraft ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
        (run.eject && (!run.returned || run.ejection!=0x1ff || game->scene_frames<512 ||
         rd_u8(MODE_SELECT)!=0 || rd_u32(STAGE_CALLBACK)!=0xc0fcb4)) ||
-       ((!run.eject && (run.mode==4 || run.mode==5 || run.mode==7 || run.mode==8)) && (game->scene_frames<2000 || (run.samples&7)!=7 ||
+       ((!run.eject && run.flight!=2 && (run.mode==4 || run.mode==5 || run.mode==7 || run.mode==8)) && (game->scene_frames<2000 || (run.samples&7)!=7 ||
         rd_u8(RECORDER_MODE)!=0 || rd_u8(POSTFLIGHT_FAILURE_INPUT)!=0x11 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae))) {
         fprintf(stderr,"Mode %u failed: returned=%d captures=%u scene=%u postflight=%u\n",
@@ -308,8 +331,9 @@ int main(int argc,char **argv) {
         }
     }
     if(run.flight) {
-        if(!run.flight_baseline || !run.spawns || !run.zone_exits || !(run.npc_missiles&(1u<<13)) ||
-           game->scene_frames<5000 || !run.moved) {
+        if(!run.flight_baseline || !run.moved || game->scene_frames<5000 ||
+           (run.flight==2 && (rd_u8(RECORDER_MODE)!=0 || (run.samples&7)!=7)) ||
+           (run.flight==1 && (!run.spawns || !run.zone_exits || !(run.npc_missiles&(1u<<13))))) {
             fprintf(stderr,"Flight failed: spawns=%X exits=%X missiles=%X scene=%u position=%u,%u,%u initial=%u,%u,%u\n",
                 run.spawns,run.zone_exits,run.npc_missiles,game->scene_frames,
                 rd_u32(CONTROL_RECORDS+20),rd_u32(CONTROL_RECORDS+24),rd_u32(CONTROL_RECORDS+28),

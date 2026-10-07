@@ -13,6 +13,7 @@
 #include "../../port/game/native/clock.c"
 #include "../../port/game/native/records.c"
 #include "stages.h"
+#include "matrix_route.h"
 extern int64_t fa18_next_event;
 static uint8_t *file_bytes(const char *name,size_t *size) {
     FILE *f=fopen(name,"rb"); long n; uint8_t *p;
@@ -70,6 +71,100 @@ static int publication_cases(void) {
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
     puts("256 complete native record-publication parents match original non-stack RAM/display");return 1;
 }
+static int matrix_route_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    const uint16_t angles[]={0,1,0x7fff,0x8000,0xffe7,0xffff,0x7080,0x3840};
+    for(unsigned test=0;test<128;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        const unsigned offset=(test&64)?0x1000:0;
+        const gaddr record=CONTROL_RECORDS+offset;
+        wr_u16(VIEW_RECORD,(uint16_t)offset);wr_u8(CONTEXT_SELECT,0);wr_u8(VIEW_MODE,0);
+        wr_u8(MATRIX_ROUTE_SELECTOR,(uint8_t[]){0,1,0xff,0x80}[(test>>4)&3]);
+        wr_u8(record+0x62,(test&32)?0x20:0x10);
+        for(unsigned k=0;k<3;++k) wr_u16(record+0x66+2*k,angles[(test+k*3)&7]);
+        memcpy(before,fa18_machine,sizeof *before);
+        memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;wr_u32(REG_A[7],0xc70000);
+        m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=0xc2db18;fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
+        if(!original()) return 0;
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);update_control_record_matrix_route(NULL);
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {fprintf(stderr,"matrix route case %u RAM %06X differs\n",test,i<0x80000?i:0xc00000+i-0x80000);return 0;}
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("128 complete C2DB18 signed-angle matrix parents match original non-stack RAM");return 1;
+}
+static int matrix_transform_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    const uint16_t pitch[]={0,8,0x1b80,0x1bd0,0x1c00,0x1c10,0x1c20,0x1c28,
+                            0x1c70,0x1cc0,0x5380,0x53d0,0x5410,0x5440,0x5488,0x5530};
+    const uint16_t angles[]={0,0x38,0x3840,0x7080};
+    for(unsigned test=0;test<512;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        const gaddr matrix=CONTROL_RECORDS+0x80;
+        const uint16_t a=(test&256)?7:0,b=(test&256)?0xfffc:0,c=(test&256)?0x4b:0;
+        rotation_matrix(pitch[test&15],angles[(test>>4)&3],angles[(test>>6)&3],matrix);
+        memcpy(before,fa18_machine,sizeof *before);
+        memset(REG_DA,0,sizeof REG_DA);REG_D[0]=a;REG_D[2]=b;REG_D[4]=c;REG_A[4]=matrix;
+        REG_A[7]=0xc7ff00;wr_u32(REG_A[7],0xc70000);
+        m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=0xc2dee0;fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
+        if(!original()) return 0;
+        uint32_t returned[3]={REG_D[4],REG_D[5],REG_D[6]};const uint16_t divisor=(uint16_t)REG_D[3];
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        int16_t result[3];MatrixTransformAngleState transform;
+        build_transform_product(matrix,a,b,c);extract_transform_angles(result,&transform);
+        for(unsigned k=0;k<3;++k) if((uint32_t)(int32_t)result[k]!=returned[k]) {
+            fprintf(stderr,"matrix transform case %u angle %u source %08X native %04X\n",test,k,returned[k],(uint16_t)result[k]);return 0;
+        }
+        if((uint16_t)transform.divisor!=divisor) {
+            fprintf(stderr,"matrix transform case %u divisor source %04X native %04X\n",test,divisor,(uint16_t)transform.divisor);return 0;
+        }
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {fprintf(stderr,"matrix transform case %u RAM %06X differs\n",test,i);return 0;}
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("512 complete C2DEE0 matrix transforms match returned angles/divisor and non-stack RAM");return 1;
+}
+static int matrix_settle_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    const uint16_t old[]={0,1,2,0x38,0x1c20,0x1c21,0x37ff,0x3840,
+                          0x3841,0x3890,0x545f,0x5460,0x707f,0x7080,0x8000,0xffff};
+    const uint16_t proposed[]={0,0x38,0x1c20,0x3710,0x3840,0x3850,0x5460,0x7080};
+    for(unsigned test=0;test<256;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        const gaddr record=CONTROL_RECORDS;
+        wr_u8(record+3,(test&128)?0x40:0x50);wr_u8(record+5,0);wr_u16(record+0x66,0);
+        wr_u16(record+0x6a,old[test&15]);
+        memcpy(before,fa18_machine,sizeof *before);
+        memset(REG_DA,0,sizeof REG_DA);REG_D[4]=7;REG_D[5]=0x1234;REG_D[6]=proposed[(test>>4)&7];
+        REG_A[1]=record;REG_A[7]=0xc7ff00;wr_u32(REG_A[7],0xc70000);
+        m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=0xc2d704;fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
+        if(!original()) return 0;
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        uint16_t result[3]={7,0x1234,proposed[(test>>4)&7]};finish_record_matrix_angles(record,result);
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {fprintf(stderr,"matrix settling case %u RAM %06X differs\n",test,i<0x80000?i:0xc00000+i-0x80000);return 0;}
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("256 complete C2D704 angle-settling tails match original non-stack RAM");return 1;
+}
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0; char error[256]; unsigned i,differences=0,phase;
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
@@ -87,6 +182,9 @@ int main(int argc,char **argv) {
     native_clock_set(rd_u32(MENU_TIME_REQUEST+32)*50u+rd_u32(MENU_TIME_REQUEST+36)/20000u);
     if(argc==3) native_clock_set((unsigned)strtoul(argv[2],NULL,10));
     if(!publication_cases()) return 1;
+    if(!matrix_route_cases()) return 1;
+    if(!matrix_transform_cases()) return 1;
+    if(!matrix_settle_cases()) return 1;
     for(phase=0;phase<2;++phase) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     m68k_set_reg(M68K_REG_SR,0x2700); REG_PC=phase?0xc1c63eu:0xc12098u;

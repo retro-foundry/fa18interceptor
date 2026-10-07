@@ -23,6 +23,9 @@ typedef struct {
     void *context;
 } ReadoutHooks;
 void project_and_plot_point(ReadoutState w,int selected_mode,const ReadoutHooks *h);
+/* C2EC90 callers can use the returned coordinates even on rejection, when
+ * the published pair is -1 and X is zero. Preserve that distinct contract. */
+ReadoutState project_and_plot_point_result(ReadoutState w,int selected_mode,const ReadoutHooks *h);
 void finish_projected_x_limit(ReadoutState w,const ReadoutHooks *h); /* C2ECD2 */
 void finish_projected_y_limit(ReadoutState w,const ReadoutHooks *h); /* C2ECE4 */
 void draw_scene_numeric_label(ReadoutState w,const ReadoutHooks *h);

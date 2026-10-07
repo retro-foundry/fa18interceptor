@@ -46,13 +46,29 @@ int main(int argc,char **argv) {
     wr_u16(REG_A[6]-2,(uint16_t)strtoul(argv[5],NULL,10));REG_A[4]=rd_u16(LINE_LAST_ROW);
     REG_PC=0xc0efea;m68k_set_reg(M68K_REG_SR,0x2700);
     fa18_next_event=INT64_MAX;SET_CYCLES(1000000000);
-    unsigned step;
+    unsigned step,guidance_fault_returns=0;
     const char *trace_pixel=getenv("FA18_FRAME_TRACE_PIXEL");
     const gaddr pixel=trace_pixel?(gaddr)strtoul(trace_pixel,NULL,16):0;
+    const char *trace_matrix=getenv("FA18_FRAME_TRACE_MATRIX");
+    const gaddr matrix_record=trace_matrix?(gaddr)strtoul(trace_matrix,NULL,16):0;
+    int in_matrix=0;
     for(step=0;step<10000000;++step) {
+        if(trace_matrix && REG_PC==0xc2dee0 && REG_A[1]==matrix_record) in_matrix=1;
+        if(in_matrix && (REG_PC==0xc2e0dc || REG_PC==0xc2e118 || REG_PC==0xc2e202 ||
+                        REG_PC==0xc2e208 || REG_PC==0xc2e242 || REG_PC==0xc2e300 || REG_PC==0xc2e334))
+            fprintf(stderr,"extraction %06X d0=%08X d3=%08X d4/d5/d6=%08X/%08X/%08X main=%08X companion=%08X\n",
+                REG_PC,REG_D[0],REG_D[3],REG_D[4],REG_D[5],REG_D[6],
+                rd_u32(MATRIX_TRANSFORM_PRODUCT+4),rd_u32(MATRIX_TRANSFORM_PRODUCT+16));
+        if(REG_PC==0xc2d704) in_matrix=0;
+        if(trace_matrix && REG_A[1]==matrix_record &&
+           (REG_PC==0xc2dee0 || REG_PC==0xc2d704 || REG_PC==0xc2d76e || REG_PC==0xc2d94e))
+            fprintf(stderr,"matrix %06X record=%06X flags=%02X old=%04X/%04X/%04X d4/d5/d6=%08X/%08X/%08X\n",
+                REG_PC,matrix_record,rd_u8(matrix_record+3),rd_u16(matrix_record+0x66),
+                rd_u16(matrix_record+0x68),rd_u16(matrix_record+0x6a),REG_D[4],REG_D[5],REG_D[6]);
         if((!owner_exit && REG_PC==0xc0f3c0 && REG_A[7]==0xc7ff00) ||
            (owner_exit && REG_PC==0xc70000 && REG_A[7]==0xc7ff88)) {wait_blitter();break;}
         if(REG_PC==0xc25312) in_timer=1;
+        if(REG_PC==0xc2c34e) ++guidance_fault_returns; /* C06C02 has returned to the countdown owner. */
         if(REG_PC==0xc53c78) {
             if(in_timer && timer_samples++==1) {
                 for(unsigned tick=first_tick;tick<last_tick;++tick) if(!palette_tick()) return 1;
@@ -104,6 +120,7 @@ int main(int argc,char **argv) {
     }
     printf("Frame body: %u gameplay differences, %u display bytes; %u instructions, %u timer samples; excluded scratch=%u voice=%u busy=%u\n",
         differences,plane_differences,step,timer_samples,scratch_differences,voice_differences,busy_differences);
+    if(guidance_fault_returns) printf("Source guidance C06C02 returns: %u\n",guidance_fault_returns);
     if(argc>=7) {
         FILE *out=fopen(argv[6],"wb");
         if(!out || fwrite(m->chip,1,0x80000,out)!=0x80000 || fwrite(m->slow,1,0x80000,out)!=0x80000 || fclose(out)) return 1;

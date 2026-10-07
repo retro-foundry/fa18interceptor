@@ -556,6 +556,22 @@ python tools/native/check_postflight_schedule.py
 
 See [`../../analysis/native_postflight_schedule_milestone.md`](../../analysis/native_postflight_schedule_milestone.md).
 
+Sustained native mode-six/eight throttle/stick/target/fire input now resumes
+the readable guidance countdown after C06C02. The target marker consumes the
+projection child's returned coordinates, attitude longs are signed, matrix
+extraction retains its scaled divisor, and requested settling uses previous
+roll. 114 input/stage intervals and 465 sampled bodies match compared original
+RAM/display, including three original guidance-child returns in mode eight.
+No new exclusions were added. These are connected sampled comparisons; full
+missions and independent sequences remain open.
+
+```powershell
+python tools/native/check_mode_two.py --mode 6 --combat --out build/native-flight/combat-probe/validated-6
+python tools/native/check_mode_two.py --mode 8 --combat --out build/native-flight/combat-probe/validated-8
+```
+
+See [`../../analysis/native_guidance_limits_milestone.md`](../../analysis/native_guidance_limits_milestone.md).
+
 Configuration saves now compose complete source C1643A status/readiness
 decisions, and enlistment runs C162E4's source refresh/read/create flow through
 existing Amiga host file services. The ADF remains read-only and writes go to

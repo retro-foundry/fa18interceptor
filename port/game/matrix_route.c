@@ -18,7 +18,7 @@ static void record_angles(gaddr record, uint16_t tuple[3]) {
 static void publish_angles(const uint16_t tuple[3]) {
     int i;
     for (i = 0; i < 3; ++i)
-        wr_u32(ATTITUDE_A + (gaddr)(4 * i), tuple[i]);
+        wr_s32(ATTITUDE_A + (gaddr)(4 * i), (int16_t)tuple[i]); /* C2DB9E's MOVEM.W sign extends before C2DBA4's long stores. */
 }
 
 void dispatch_matrix_route(void (*view_route)(void), void (*record_route)(void)) {

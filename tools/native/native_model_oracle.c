@@ -191,6 +191,7 @@ static uint8_t *file_bytes(const char *name,size_t *size) {
 static gaddr oracle_parameters;
 static int16_t circle_x,circle_y,circle_radius;
 static int16_t point_x,point_y;
+static int16_t projection_x,projection_y,projection_depth;
 static unsigned strip_groups;
 static int original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
@@ -205,6 +206,7 @@ static int original(uint32_t pc) {
     if(pc==0xc1ff0au || pc==0xc207feu) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
     if(pc==0xc2f5f4u) {REG_D[0]=(uint32_t)(int32_t)point_x;REG_D[1]=(uint32_t)(int32_t)point_y;}
+    if(pc==0xc2ec90u) {REG_D[0]=(uint32_t)(int32_t)projection_x;REG_D[1]=(uint32_t)(int32_t)projection_y;REG_D[2]=(uint32_t)(int32_t)projection_depth;}
     m68k_set_reg(M68K_REG_SR,0x2700); REG_PC=pc;
     fa18_next_event=INT64_MAX; SET_CYCLES(100000000);
     for(unsigned step=0;step<2000000;++step) {
@@ -230,6 +232,36 @@ static int compare(const uint8_t *expected,unsigned test) {
 }
 
 static unsigned calls, failures;
+static int projection_results(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    const int16_t values[]={-32768,-32767,-160,-1,0,1,160,32767};
+    const int16_t depths[]={32767,6000,160,1,0,-1,-32768,300};
+    const int16_t rows[]={-1,0,89,90,178,179,180};
+    for(unsigned test=0;test<512;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        projection_x=values[test&7];projection_y=values[(test>>3)&7];projection_depth=depths[test>>6];
+        wr_s16(LINE_LAST_ROW,rows[test%7]);wr_u32(PROJECTED_PAIR,0x12345678);
+        memcpy(before,fa18_machine,sizeof *before);
+        ReadoutState point={.x=(uint32_t)(int32_t)projection_x,.y=(uint32_t)(int32_t)projection_y,
+            .value=(uint32_t)(int32_t)projection_depth};
+        const ReadoutHooks hooks={.consume=projection_child,.context=&point};
+        point=project_and_plot_point_result(point,-5,&hooks);
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(0xc2ec90) || point.x!=REG_D[0] || point.y!=REG_D[1]) {
+            fprintf(stderr,"projection return case %u differs\n",test);return 0;
+        }
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {fprintf(stderr,"projection return case %u RAM %06X differs\n",test,i<0x80000?i:0xc00000+i-0x80000);return 0;}
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("512 complete C2EC90 return-coordinate and non-stack RAM cases match original");return 1;
+}
 static int workspace_script_cases(void) {
     FA18Machine *saved=malloc(sizeof *saved);
     if(!saved) return 0;
@@ -628,9 +660,10 @@ int main(int argc,char **argv) {
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
     const int tails_only=argc==3 && !strcmp(argv[2],"--tails-only");
     const int points_only=argc==3 && !strcmp(argv[2],"--points-only");
+    const int projection_only=argc==3 && !strcmp(argv[2],"--projection-only");
     const int require_aircraft=argc==3 && !strcmp(argv[2],"--require-aircraft");
     const int aircraft_record=argc==4 && !strcmp(argv[2],"--aircraft-record");
-    uint8_t *data=(argc==2 || tails_only || points_only || require_aircraft || aircraft_record)?file_bytes(argv[1],&nd):NULL;
+    uint8_t *data=(argc==2 || tails_only || points_only || projection_only || require_aircraft || aircraft_record)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
@@ -638,6 +671,8 @@ int main(int argc,char **argv) {
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
     if(tails_only) return !derived_tails();
     if(points_only) return !point_destinations();
+    if(projection_only) return !projection_results();
+    if(!projection_results()) return 1;
     if(!point_destinations()) return 1;
     if(!workspace_script_cases() || !stream_circle_cases()) return 1;
     if(!full_selection_cases()) return 1;

@@ -38,8 +38,9 @@ TODOs; current code and the newest evidence take precedence.
 
 ## Current checkout and architecture
 
-Branch: `coverage-accounting`. The latest implementation batch connects keyboard
-countermeasures; use `git log -1` for its commit. Prior scene implementation:
+Branch: `coverage-accounting`. The latest implementation batch connects sustained
+flight guidance and corrects projection/matrix return semantics; use `git log -1`
+for its commit. Prior scene implementation:
 **`d5203c52`**. Preserve untracked `.vscode/`.
 No build/test process is pending and no user answer or approval is pending.
 
@@ -531,3 +532,21 @@ that cached eligible pilots concealed this fixture error in the previous
 match 264 intervals and 211 bodies. Full native build and six selected native
 gates pass. See analysis/native_callback_reset_milestone.md; full gameplay,
 audio and performance acceptance remain open. The complete-port goal stays active.
+
+Sustained native mode-six/eight flight now consumes C2C348 -> C06C02 and resumes
+the existing readable guidance owner. Original-body checks also correct target
+marker returned coordinates, signed attitude publication, retained scaled
+matrix divisor and settling from previous roll. Normal throttle/stick/target/
+fire probes match 114 input/stage intervals and 465 sampled bodies with unchanged
+RAM/display exclusions, including three original guidance-child returns in
+mode eight. Mode-four region flight still matches 56 intervals and now 49 bodies.
+Component checks pass 512 point-return cases, 128 signed-attitude parents, 512
+matrix transforms, 256 settling tails and 3,584 affected projection CPU contracts.
+All 36 selected native gates, seven record checkpoints, default models and
+native/reference builds pass. Final frontend/link checks pass and the public
+native executable is refreshed.
+The shared-runtime gates are fa18_native_combat_6 and fa18_native_combat_8; use
+check_mode_two.py --mode 6/8 --combat. See
+analysis/native_guidance_limits_milestone.md. Full mission successes,
+independent complete sequences, readable typed state, audio fidelity and
+performance acceptance remain unfinished. The complete-port goal stays active.

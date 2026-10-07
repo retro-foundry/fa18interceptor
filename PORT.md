@@ -11,6 +11,12 @@ runner supersedes the incremental removal work.
 Build/run instructions and remaining timing/audio/state scope are in
 [`port/native/README.md`](port/native/README.md).
 
+Sustained mode-six/eight native flight now connects the readable guidance
+continuation and corrects projection returns and matrix angle semantics.
+114 input/stage intervals and 465 sampled bodies match compared original
+RAM/display; complete mission sequences remain unaccepted. See
+[`analysis/native_guidance_limits_milestone.md`](analysis/native_guidance_limits_milestone.md).
+
 ## Deliverable
 
 Recreated, readable C source for the whole game: named functions and

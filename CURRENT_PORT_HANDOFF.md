@@ -1,5 +1,20 @@
 # Current playable port handoff
 
+Latest connected batch: sustained native mode-six/eight input now resumes
+the existing guidance owner after C2C348 -> C06C02. Extended comparisons also
+correct target-marker returned coordinates, signed attitude longs, the matrix
+extractor's retained small divisor, and settling from previous roll. Normal
+keyboard probes match 114 input/stage intervals and 465 sampled bodies against
+compared original RAM/display, including three original guidance-child returns
+in mode eight. No new exclusions were added. Component checks pass 512 point
+returns, 128 signed-attitude parents, 512 matrix transforms, 256 settling tails
+and 3,584 affected projection CPU contracts. All 36 selected native gates,
+seven record checkpoints, mode-four region flight (56 intervals/49 bodies),
+default models and native/reference builds pass. The public executable is
+refreshed; final frontend/link checks pass. See
+`analysis/native_guidance_limits_milestone.md`;
+complete gameplay/audio/performance acceptance remains unfinished.
+
 Latest connected batch: Delete now maps to source raw $46 and runs C06BF0's
 callback removal/reinstallation via existing C1748C/C17456 domain owners.
 Flight/menu callers preserve mouse state; 976 full input parents (64 new reset

@@ -13,7 +13,7 @@ add_library(fa18_native_runtime OBJECT replay.c frame_capture.c ../game/native/f
     ../game/native/clock.c ../game/main_loop_timers.c
     ../game/control_actions.c ../game/update_sequence.c ../game/context_publication.c
     ../game/scene_placements.c ../game/draw_stream.c ../game/active_planes.c
-    ../game/projection.c ../game/circle.c
+    ../game/projection.c ../game/projection_readouts.c ../game/circle.c
     ../game/followup_placements.c ../game/grid_projection_packet.c
     ../game/model_strips.c ../game/vertex_tail.c ../game/history_projection.c
     ../game/cockpit_script.c ../game/faces.c
@@ -113,6 +113,13 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
             ${CMAKE_CURRENT_BINARY_DIR}/region-flight-save
             ${CMAKE_CURRENT_BINARY_DIR}/region-flight 4 1 flight)
+    foreach(mode IN ITEMS 6 8)
+        add_test(NAME fa18_native_combat_${mode}
+            COMMAND fa18_native_mode_two_test
+                ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+                ${CMAKE_CURRENT_BINARY_DIR}/combat-${mode}-save
+                ${CMAKE_CURRENT_BINARY_DIR}/combat-${mode} ${mode} 1 combat)
+    endforeach()
     add_test(NAME fa18_native_mode_five
         COMMAND fa18_native_mode_two_test
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf

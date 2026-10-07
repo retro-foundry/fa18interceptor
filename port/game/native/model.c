@@ -14,6 +14,8 @@
 #include "../stages.h"
 #include "../polygon_clip.h"
 #include "../projection.h"
+#include "../projection_readouts.h"
+#include "../fault.h"
 #include "../vertex_tail.h"
 #include "../model_strips.h"
 #include "../history_projection.h"
@@ -31,6 +33,10 @@ static void missing(const char *part,gaddr at) {
     fprintf(stderr,"native model missing %s at %06X\n",part,at); abort();
 }
 static int16_t word(gaddr *p) { int16_t n=rd_s16(*p); *p+=2; return n; }
+static ReadoutState projection_child(void *context,enum ReadoutChild child) {
+    if(child!=PR_FAULT) abort();
+    fault_hook();return *(const ReadoutState *)context;
+}
 static int16_t shift_word(int16_t n,int count) {
     count&=63; return count>=16?(n<0?-1:0):(int16_t)(n>>count);
 }
@@ -177,10 +183,13 @@ static int record_vertices(gaddr bound,gaddr frame) {
                 for(int k=0;k<3;++k) point[k]=(int16_t)(shift_word(local[k],shift)+origin[k]);
                 for(int row=0;row<3;++row) wr_s16(output+2*row,dot(VIEW_ANGLE_MATRIX+6*row,point));
             }
-            if(first && rd_s16(0xc459c0)>=0 && rd_u16(0xc459c0)==rd_u16(SCRIPT_RECORD)) {
-                project_view_point(rd_s16(output),rd_s16(output+2),rd_s16(output+4));
-                wr_s16(TARGET_MARK,(int16_t)(rd_s16(PROJECTED_PAIR)-rd_s16(0xc45988)));
-                wr_s16(TARGET_MARK+2,(int16_t)(rd_s16(PROJECTED_PAIR+2)-rd_s16(0xc458d8)));
+            if(first && !(rd_u8(frame-0x7f)&1) && rd_s16(0xc459c0)>=0 && rd_u16(0xc459c0)==rd_u16(SCRIPT_RECORD)) {
+                ReadoutState point={.x=(uint32_t)(int32_t)rd_s16(output),.y=(uint32_t)(int32_t)rd_s16(output+2),
+                    .value=(uint32_t)(int32_t)rd_s16(output+4)};
+                const ReadoutHooks hooks={.consume=projection_child,.context=&point};
+                point=project_and_plot_point_result(point,-5,&hooks); /* C1F1D0 uses returned D0/D1, including rejection. */
+                wr_s16(TARGET_MARK,(int16_t)(point.x-rd_u16(0xc45988)));
+                wr_s16(TARGET_MARK+2,(int16_t)(point.y-rd_u16(0xc458d8)));
             }
             if(first && rd_s16(frame-0x62)>1 && !first_visible(output)) return 0;
             output+=6;

@@ -22,6 +22,7 @@ def main():
     parser.add_argument('--weapon', type=int, choices=(1,2,3), help='Cycle Return 1/2/3 times and fire twice with Space')
     parser.add_argument('--flight', action='store_true', help='Mode-4 takeoff, weapon inputs and region/zone transitions')
     parser.add_argument('--callback', action='store_true', help='Free Flight Delete callback remove/reinstall')
+    parser.add_argument('--combat', action='store_true', help='Mode-six/eight longer flight with manoeuvre-limit samples')
     args = parser.parse_args()
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
@@ -31,13 +32,15 @@ def main():
         parser.error('--flight requires --mode 4 without --eject/--weapon')
     if args.callback and (args.mode!=125 or args.flight or args.eject or args.weapon):
         parser.error('--callback requires --mode 125 without other probes')
+    if args.combat and (args.mode not in (6,8) or args.flight or args.eject or args.weapon or args.callback):
+        parser.error('--combat requires --mode 6 or 8 without other probes')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     prefix = work / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
-                            capture_output=True, text=True, timeout=45 if args.flight else 25)
+                             *(['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
+                            capture_output=True, text=True, timeout=90 if args.combat else 45 if args.flight else 25)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
     exports = [json.loads(line) for line in result.stdout.splitlines()]
@@ -74,6 +77,7 @@ def main():
     assert required <= {
         item['stage'] for item in bodies}, bodies
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
+    source_guidance_fault_returns=0
     for name, captures in (('mode_entry', entries), ('frame_body', bodies)):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
         # Shared GNU reference objects require sequential builds.
@@ -97,8 +101,13 @@ def main():
                 log.write(comparison.stdout + comparison.stderr)
                 log.flush()
                 print(comparison.stdout, end='', flush=True)
+                for line in comparison.stdout.splitlines():
+                    if line.startswith('Source guidance C06C02 returns: '):
+                        source_guidance_fault_returns+=int(line.split(': ')[1])
                 if comparison.returncode:
                     raise RuntimeError(comparison.stderr or comparison.stdout)
+    if args.combat and args.mode==8:
+        assert source_guidance_fault_returns>0, 'No complete original guidance fault/continuation body compared'
     outcome={2:'returns to menu',3:f'runs over 768 scene frames with aircraft {args.aircraft}',4:'runs over 2000 scene frames',5:'runs over 2000 scene frames',6:'runs over 384 scene frames',7:'runs over 2000 scene frames with an unlocked saved pilot',8:'runs over 2000 scene frames with an unlocked saved pilot',
              125:'runs over 2,000 scene frames, including Escape/restart'}[args.mode]
     if args.eject:
@@ -109,6 +118,8 @@ def main():
         outcome='takes off and runs region spawn/orientation, zone exit, NPC missiles and postflight restart'
     if args.callback:
         outcome='runs Delete callback removal/reinstallation and continues through Escape/restart'
+    if args.combat:
+        outcome='runs sustained throttle/stick/target/fire input and manoeuvre-limit crossings'
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')
 

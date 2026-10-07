@@ -31,7 +31,7 @@ uint32_t build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t 
 /* Second arithmetic block of $C2DEE0: convert the nine-long product
  * workspace to its three returned angle words (before the final shift). */
 typedef struct MatrixTransformAngleState {
-    int16_t divisor;
+    int16_t divisor; /* Final retained divisor, after any small-divisor scaling. */
     int16_t primary_index;
     uint32_t final_d0;
     int16_t secondary_raw;

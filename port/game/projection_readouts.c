@@ -52,7 +52,7 @@ static void divide(uint32_t *v,int16_t divisor,enum ReadoutValue field,const Rea
 }
 
 /* C2ECEA: reflection, last-row acceptance and original plot-mode dispatch. */
-static void finish_point_projection(ReadoutState w,const ReadoutHooks *h) {
+static ReadoutState finish_point_projection(ReadoutState w,const ReadoutHooks *h) {
     int32_t sum;
     SW(x,PR_X,319); NEGW(x,PR_X); SW(y,PR_Y,179); NEGW(y,PR_Y); AW(y,PR_Y,1);
     CW(w.y,rd_u16(0xc45984u)); if((int16_t)w.y>rd_s16(0xc45984u)) goto rejected;
@@ -73,32 +73,35 @@ static void finish_point_projection(ReadoutState w,const ReadoutHooks *h) {
     sum=(int16_t)w.mode+1; AW(mode,PR_MODE,1); if(sum>=0) { w=consume(h,PR_PAIR); goto drawn; }
     sum=(int16_t)w.mode+1; AW(mode,PR_MODE,1); if(sum>=0) { w=consume(h,PR_BLOCK); goto drawn; }
     sum=(int16_t)w.mode+1; AW(mode,PR_MODE,1); if(sum>=0) { w=consume(h,PR_CIRCLE); goto drawn; }
-    W(x,PR_X,w.x); return;
+    W(x,PR_X,w.x); return w;
 drawn:
-    L(x,PR_X,1); return;
+    L(x,PR_X,1); return w;
 rejected:
     L(x,PR_X,0); longword(h,0xc45958u,0xffffffffu);
+    return w;
 }
 
 
 /* C2ECE4: the upper Y clamp is shared with the complete projector. */
-void finish_projected_y_limit(ReadoutState w,const ReadoutHooks *h) {
+static ReadoutState finish_projected_y_result(ReadoutState w,const ReadoutHooks *h) {
     CW(w.y,180); if((int16_t)w.y>=180) W(y,PR_Y,179);
-    finish_point_projection(w,h);
+    return finish_point_projection(w,h);
 }
-static void scale_projected_y(ReadoutState w,const ReadoutHooks *h) {
+void finish_projected_y_limit(ReadoutState w,const ReadoutHooks *h) { (void)finish_projected_y_result(w,h); }
+static ReadoutState scale_projected_y(ReadoutState w,const ReadoutHooks *h) {
     int32_t sum;
     MUL(y,PR_Y,90); divide(&w.y,(int16_t)w.value,PR_Y,h); sum=(int16_t)w.y+90; AW(y,PR_Y,90);
-    if(sum<0) { W(y,PR_Y,0); finish_point_projection(w,h); }
-    else finish_projected_y_limit(w,h);
+    if(sum<0) { W(y,PR_Y,0); return finish_point_projection(w,h); }
+    return finish_projected_y_result(w,h);
 }
 /* C2ECD2: the upper X clamp precedes Y scaling. */
-void finish_projected_x_limit(ReadoutState w,const ReadoutHooks *h) {
+static ReadoutState finish_projected_x_result(ReadoutState w,const ReadoutHooks *h) {
     CW(w.x,320); if((int16_t)w.x>=320) W(x,PR_X,319);
-    scale_projected_y(w,h);
+    return scale_projected_y(w,h);
 }
+void finish_projected_x_limit(ReadoutState w,const ReadoutHooks *h) { (void)finish_projected_x_result(w,h); }
 /* C2EC90/94/9C/A4/A8 share C2ECAA. One actual child performs the drawing. */
-void project_and_plot_point(ReadoutState w,int selected_mode,const ReadoutHooks *h) {
+ReadoutState project_and_plot_point_result(ReadoutState w,int selected_mode,const ReadoutHooks *h) {
     int32_t sum;
     if(selected_mode==1) W(mode,PR_MODE,rd_u16(0xc45ab8u));
     else L(mode,PR_MODE,selected_mode);
@@ -107,14 +110,15 @@ void project_and_plot_point(ReadoutState w,int selected_mode,const ReadoutHooks 
     W(shift,PR_SHIFT,w.x); NEGW(shift,PR_SHIFT); CW(w.shift,w.value); if((int16_t)w.shift>=(int16_t)w.value) goto rejected;
     W(shift,PR_SHIFT,w.y); NEGW(shift,PR_SHIFT); CW(w.shift,w.value); if((int16_t)w.shift>=(int16_t)w.value) goto rejected;
     observe(h,PR_STORE_WORD,PR_X,w.value,0);
-    if((int16_t)w.value<=0) { word(h,0xc4599eu,27); w=consume(h,PR_FAULT); L(x,PR_X,0); return; }
+    if((int16_t)w.value<=0) { word(h,0xc4599eu,27); w=consume(h,PR_FAULT); L(x,PR_X,0); return w; }
     MUL(x,PR_X,160); divide(&w.x,(int16_t)w.value,PR_X,h); sum=(int16_t)w.x+160; AW(x,PR_X,160);
-    if(sum<0) { W(x,PR_X,0); scale_projected_y(w,h); }
-    else finish_projected_x_limit(w,h);
-    return;
+    if(sum<0) { W(x,PR_X,0); return scale_projected_y(w,h); }
+    return finish_projected_x_result(w,h);
 rejected:
     L(x,PR_X,0); longword(h,0xc45958u,0xffffffffu);
+    return w;
 }
+void project_and_plot_point(ReadoutState w,int selected_mode,const ReadoutHooks *h) { (void)project_and_plot_point_result(w,selected_mode,h); }
 
 /* C32AD0: packed digits, optional leading blanks and the four original planes. */
 static void draw_packed_digits(ReadoutState w,const ReadoutHooks *h) {

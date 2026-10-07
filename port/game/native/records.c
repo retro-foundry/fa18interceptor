@@ -154,9 +154,12 @@ static void dynamics(gaddr record) {
             update_dynamics_record_input(record,w->primary); break;
         case DY_RECORD_ACTION: {
             AutopilotFrame guidance={0};guidance.work=*w;
-            if(!update_dynamics_record_action(&guidance,NULL)) {
-                fprintf(stderr,"native guidance boundary unavailable: %u at %06X\n",
-                    (unsigned)guidance.phase,guidance.unresolved_target);abort();
+            while(!update_dynamics_record_action(&guidance,NULL)) {
+                if(guidance.phase==AP_AFTER_FAULT) fault_hook(); /* C2C348 -> C06C02, then start_level. */
+                else {
+                    fprintf(stderr,"native guidance boundary unavailable: %u at %06X\n",
+                        (unsigned)guidance.phase,guidance.unresolved_target);abort();
+                }
             }
             *w=guidance.work;break;
         }

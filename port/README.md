@@ -10,6 +10,11 @@ with `python ../scripts/build_native.py` from this directory, or
 superseded for this explicitly requested runner; the deleted implementation
 remains retired.
 
+The sustained mode-six/eight guidance continuation and projection/matrix fixes
+reuse `game/` owners through `game/native/`. Their shared-runtime comparisons
+and remaining whole-game limits are recorded in
+[`../analysis/native_guidance_limits_milestone.md`](../analysis/native_guidance_limits_milestone.md).
+
 The active game implementation is `game/`, with temporary CPU adapters in
 `game/glue/`. The playable build is defined in `recomp/CMakeLists.txt` and
 `../scripts/build_recomp.py`; it produces `fa18_recomp` and `fa18_romfree`.

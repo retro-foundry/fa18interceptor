@@ -274,7 +274,11 @@ static uint16_t half_capped_step(uint16_t distance) {
 static uint16_t settle_third_angle(gaddr record, uint16_t angle) {
     uint8_t flags = rd_u8(record + 3);
     wr_u8(record + 3, (uint8_t)(flags & ~0x10u));
-    if (!(flags & 0x10) || angle == 0x3840) return angle;
+    if (!(flags & 0x10)) return angle;
+    /* C2D70C replaces the extracted angle with the record's previous roll
+     * before settling it. The unrequested path retains the extracted angle. */
+    angle = rd_u16(record + 0x6A);
+    if (angle == 0x3840) return angle;
 
     if (sw(angle) > 0x3840) {
         if (sw(angle) < 0x5460)
