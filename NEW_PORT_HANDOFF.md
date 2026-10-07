@@ -2,6 +2,17 @@
 
 ## Objective and user constraints
 
+Latest normal-input outcome and stream reset (2026-10-07): mode six now has a
+required three-loss/reset-exhaustion/menu-return/Free-Flight-relaunch scenario.
+Its 86 input/stage intervals and 237 sampled bodies match original compared
+RAM/drawing. Mode two's missing C28722 child is connected to the existing scene
+initializer: seven streams, wrap and Escape return pass 30 intervals/206 bodies.
+The old mode-two spontaneous-failure deadline is superseded by this verified
+source loop. Debug/Release builds and seven affected CTests pass; both source
+comparisons run in CTest with temporary passing RAM. See
+`analysis/native_natural_outcomes.md`. Whole-game acceptance remains unfinished;
+the complete-port goal stays active.
+
 Latest connected postflight preservation (2026-10-07): nine childless callback
 owners retain actual preceding input results. The expanded comparison passes
 355 full bodies, 372 recorder parents, 84 keyboard parents and 168 separately

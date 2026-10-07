@@ -93,10 +93,9 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_executable(fa18_native_mode_two_test ../../tools/native/native_mode_two_test.c)
     target_link_libraries(fa18_native_mode_two_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_mode_two
-        COMMAND fa18_native_mode_two_test
-            ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
-            ${CMAKE_CURRENT_BINARY_DIR}/mode-two-save
-            ${CMAKE_CURRENT_BINARY_DIR}/mode-two)
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
+                --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 2
+                --out ${CMAKE_CURRENT_BINARY_DIR}/mode-two-check)
     add_test(NAME fa18_native_mode_125
         COMMAND fa18_native_mode_two_test
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
@@ -133,6 +132,10 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                 ${CMAKE_CURRENT_BINARY_DIR}/combat-${mode}-save
                 ${CMAKE_CURRENT_BINARY_DIR}/combat-${mode} ${mode} 1 combat)
     endforeach()
+    add_test(NAME fa18_native_natural_outcome
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
+                --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 6 --outcome
+                --out ${CMAKE_CURRENT_BINARY_DIR}/natural-outcome-check)
     add_test(NAME fa18_native_mode_five
         COMMAND fa18_native_mode_two_test
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf

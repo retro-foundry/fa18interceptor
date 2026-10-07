@@ -19,6 +19,7 @@ typedef struct {
     unsigned entry_count,entry_exports;
     unsigned stage_count,captures,streams;
     unsigned mode,samples;
+    unsigned previous_stream,stream_wraps;
     unsigned eject,ejection;
     unsigned callback,callback_bodies,callback_events;
     unsigned smoothing_cancel,cancel_phase,cancelled;
@@ -35,6 +36,9 @@ typedef struct {
     uint32_t initial_position[3];
     uint32_t aircraft_positions[16][3];
     unsigned aircraft_moved;
+    unsigned outcome,failure_seen,reset_states,outcome_transitions,outcome_controls;
+    unsigned last_outcome_state,outcome_baseline;
+    uint16_t initial_losses;
     int flight_baseline,moved;
     int entered,returned;
 } ModeRun;
@@ -62,7 +66,9 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         if(run->mode==125 && game->ticks>=11000) key|=0x2000000u;
         unsigned index=0;
         while(index<run->entry_count && run->entry_stages[index]!=key) ++index;
-        if(index==run->entry_count || game->input_count) {
+        const unsigned outcome_state=stage^((unsigned)rd_u8(POSTFLIGHT_RESET_REMAINING)<<24);
+        const int outcome_changed=run->outcome && run->outcome_baseline && outcome_state!=run->last_outcome_state;
+        if(index==run->entry_count || game->input_count || outcome_changed) {
             if(index==run->entry_count) {
                 if(index==64) abort();
                 run->entry_stages[run->entry_count++]=key;
@@ -103,6 +109,31 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned stream=rd_u8(0xc45799u);
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
+        if(run->mode==2) {
+            /* Compare the complete seventh-stream interval, including its
+             * actual C233AA -> C28722 reset and C23578 wrap to stream one. */
+            if(stream==7) sample|=8;
+            if(run->previous_stream==7 && stream==1) {++run->stream_wraps;sample|=8;}
+            run->previous_stream=stream;
+        }
+        if(run->outcome) {
+            const unsigned remaining=rd_u8(POSTFLIGHT_RESET_REMAINING);
+            const unsigned state=stage^(remaining<<24);
+            if(stage==0xc10dae && !run->outcome_baseline) {
+                run->outcome_baseline=1;
+                run->initial_losses=rd_u16(rd_u32(MODE_TABLE)+0x10);
+            }
+            if(run->outcome_baseline) {
+                if(remaining<=3) run->reset_states|=1u<<remaining;
+                if(state!=run->last_outcome_state) {
+                    run->last_outcome_state=state;sample|=8;
+                    ++run->outcome_transitions;
+                    printf("{\"outcome_transition\":true,\"tick\":%u,\"stage\":\"%06X\",\"resets_remaining\":%u,\"player_phase\":%u,\"sequence_phase\":%u}\n",
+                        game->ticks,stage,remaining,rd_u8(PLAYER_PHASE),rd_u8(SEQUENCE_PHASE));
+                }
+                if(stage==0xc118a0 || stage==0xc118e6) run->failure_seen=1;
+            }
+        }
         if(run->callback_bodies) {--run->callback_bodies;sample|=8;}
         /* Keep sampling active postflight bodies after the flight baseline;
          * these still run record dynamics beyond stage C10DAE. */
@@ -249,6 +280,7 @@ int main(int argc,char **argv) {
         if(!strcmp(argv[6],"callback") && run.mode==125) run.callback=1;
         else if(!strcmp(argv[6],"smoothing") && run.mode==4) run.smoothing_cancel=1;
         else if(!strcmp(argv[6],"combat") && (run.mode>=5 && run.mode<=8)) run.flight=2;
+        else if(!strcmp(argv[6],"outcome") && run.mode==6) { run.flight=2;run.outcome=1; }
         else if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
         else if(!strcmp(argv[6],"eject") && run.mode==8) run.eject=1;
         else if(run.mode==8 && !strncmp(argv[6],"weapon",6) && strlen(argv[6])==7 && argv[6][6]>='1' && argv[6][6]<='3')
@@ -285,8 +317,8 @@ int main(int argc,char **argv) {
     const int mission=(run.mode>=3 && run.mode<=5) || run.mode==7 || run.mode==8;
     const unsigned *input_times=mission?mission_times:times;
     const int *input_keys=mission?mission_keys:keys;
-    unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:4u;
-    while(game->ticks<(run.flight==2?60000u:run.flight?30000u:(mission || run.mode==125)?18000u:10000u)) {
+    unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:run.mode==2?5u:4u;
+    while(game->ticks<(run.outcome?120000u:run.flight==2?60000u:run.flight?30000u:(mission || run.mode==125 || run.mode==2)?18000u:10000u)) {
         if(run.callback) {
             if(game->ticks==10000) {
                 run.callback_events=game->input_events;
@@ -306,6 +338,18 @@ int main(int argc,char **argv) {
                 if(game->ticks==times[i]) native_frontend_event(game,keys[i],1);
                 if(game->ticks==times[i]+durations[i]) native_frontend_event(game,keys[i],0);
             }
+        }
+        if(run.outcome && game->ticks>=20000 && rd_u32(STAGE_CALLBACK)==0xc10dae &&
+           rd_u8(POSTFLIGHT_RESET_REMAINING)<=3 &&
+           !(run.outcome_controls&(1u<<rd_u8(POSTFLIGHT_RESET_REMAINING)))) {
+            /* Ordinary keyboard controls drive the player into the ground.
+             * Reset clears source input latches, so release and press again
+             * after each reset instead of writing motion or control state. */
+            run.outcome_controls|=1u<<rd_u8(POSTFLIGHT_RESET_REMAINING);
+            native_frontend_event(game,61,0);
+            native_frontend_event(game,273,0);
+            native_frontend_event(game,61,1);
+            native_frontend_event(game,273,1);
         }
         if(run.weapon) {
             for(unsigned i=0;i<run.weapon;++i) {
@@ -332,9 +376,10 @@ int main(int argc,char **argv) {
         native_frontend_tick(game);
         if(run.entered && game->screen==NATIVE_MENU && rd_u32(STAGE_CALLBACK)==0xc0fcb4)
             run.returned=1;
+        if(run.outcome && run.returned) break;
     }
     if(run.captures<8 || (run.mode==2 &&
-       (!run.returned || game->scene_frames<30 || !game->postflight_callbacks)) ||
+       (!run.returned || game->scene_frames<30 || !run.stream_wraps || run.streams!=255)) ||
        (run.mode==125 && (!run.returned || game->scene_frames<2000 || (run.samples&7)!=7 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
        (run.mode==6 && !run.flight && (game->scene_frames<384 || run.samples!=7 ||
@@ -350,6 +395,8 @@ int main(int argc,char **argv) {
         fprintf(stderr,"Mode %u failed: returned=%d captures=%u scene=%u postflight=%u\n",
             run.mode,run.returned,run.captures,game->scene_frames,game->postflight_callbacks);goto done;
     }
+    if(run.mode==2)
+        printf("{\"stream_wrap\":true,\"wraps\":%u,\"streams\":%u,\"returned\":true}\n",run.stream_wraps,run.streams);
     if(run.smoothing_cancel && (run.cancel_phase!=2 || run.cancelled!=3 ||
        !run.returned || game->scene_frames<30 || rd_u8(MODE_SELECT) || rd_u32(STAGE_CALLBACK)!=0xc0fcb4)) {
         fprintf(stderr,"Smoothing cancel failed: phase=%u continuation=%u returned=%d scene=%u\n",
@@ -387,6 +434,38 @@ int main(int argc,char **argv) {
         }
         printf("{\"regions\":true,\"spawned_records\":%u,\"zone_exits\":%u,\"npc_missiles\":%u,\"aircraft_moved\":%u,\"scene_frames\":%u}\n",
             run.spawns,run.zone_exits,run.npc_missiles,run.aircraft_moved,game->scene_frames);
+    }
+    if(run.outcome) {
+        const unsigned losses=(uint16_t)(rd_u16(rd_u32(MODE_TABLE)+0x10)-run.initial_losses);
+        if(!run.returned || !run.failure_seen || run.reset_states!=15 ||
+           game->postflight_callbacks<3 || rd_u8(MODE_SELECT) ||
+           rd_u32(STAGE_CALLBACK)!=0xc0fcb4 || losses!=3) {
+            fprintf(stderr,"Natural outcome failed: returned=%d failure=%u resets=%X callbacks=%u stage=%06X mode=%u losses=%u\n",
+                run.returned,run.failure_seen,run.reset_states,game->postflight_callbacks,
+                rd_u32(STAGE_CALLBACK),rd_u8(MODE_SELECT),losses);goto done;
+        }
+        printf("{\"natural_outcome\":true,\"mode\":6,\"returned\":true,\"failure_seen\":true,\"reset_states\":%u,\"transitions\":%u,\"scene_frames\":%u,\"tick\":%u,\"aircraft_losses\":%u}\n",
+            run.reset_states,run.outcome_transitions,game->scene_frames,game->ticks,losses);
+        /* Continue through the returned menu using only its normal keys.
+         * Keep the same runtime and log; reset only validation sampler state. */
+        const unsigned return_tick=game->ticks,scene_frames=game->scene_frames;
+        run.mode=125;run.outcome=0;run.flight=0;run.entered=0;
+        run.stage_count=0;run.entry_count=0;run.streams=0;run.samples=0;
+        const unsigned restart_times[]={1000,2500,4000};
+        const int restart_keys[]={52,13,13};
+        while(game->ticks<return_tick+5500) {
+            for(unsigned i=0;i<3;++i) {
+                if(game->ticks==return_tick+restart_times[i]) native_frontend_event(game,restart_keys[i],1);
+                if(game->ticks==return_tick+restart_times[i]+2) native_frontend_event(game,restart_keys[i],0);
+            }
+            native_frontend_tick(game);
+        }
+        if(!run.entered || rd_u8(MODE_SELECT)!=125 || rd_u32(STAGE_CALLBACK)!=0xc10dae ||
+           game->scene_frames<scene_frames+30) {
+            fprintf(stderr,"Free Flight after natural failure did not start: mode=%u stage=%06X scene=%u/%u\n",
+                rd_u8(MODE_SELECT),rd_u32(STAGE_CALLBACK),game->scene_frames,scene_frames);goto done;
+        }
+        printf("{\"outcome_restart\":true,\"mode\":125,\"scene_frames\":%u}\n",game->scene_frames-scene_frames);
     }
     result=0;
 done:

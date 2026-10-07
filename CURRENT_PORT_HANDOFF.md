@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest normal-input outcome and stream reset (2026-10-07): mode six loses three
+aircraft, exhausts resets, returns to the menu and launches Free Flight using
+ordinary keys. Its 86 input/stage intervals and 237 sampled bodies match
+original compared RAM/drawing. Mode two's missing C28722 connection is fixed;
+all seven streams, their wrap and Escape return pass 30 intervals/206 bodies.
+Debug/Release builds and seven affected CTests pass. Both source comparisons
+are registered in CTest and discard passing raw RAM. See
+`analysis/native_natural_outcomes.md`. Successful missions, independent complete
+sequences, remaining contracts, audio, typed state and performance stay open.
+
 Latest connected postflight preservation (2026-10-07): nine childless callbacks
 retain actual preceding input results. The expanded comparison passes 355 full
 bodies, 372 recorder parents, 84 keyboard parents and 168 separate input/stage

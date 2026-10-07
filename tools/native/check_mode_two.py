@@ -4,6 +4,7 @@ Starts the shared playable runtime from disk/input and compares original
 C0F3C4/C0F5F8 intervals plus C0EFEA/C0F3C0 bodies. No full Amiga replay.
 """
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -25,6 +26,7 @@ def main():
     parser.add_argument('--callback', action='store_true', help='Free Flight Delete callback remove/reinstall')
     parser.add_argument('--smoothing', action='store_true', help='Select the source cancel marker at naturally reached mode-four smoothing')
     parser.add_argument('--combat', action='store_true', help='Mode-five through eight longer flight with manoeuvre-limit samples')
+    parser.add_argument('--outcome', action='store_true', help='Mode-six normal-input failure, all three resets and menu return')
     parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
     if args.eject and args.mode!=8:
@@ -39,6 +41,8 @@ def main():
         parser.error('--smoothing requires --mode 4 without other probes')
     if args.combat and (args.mode not in (5,6,7,8) or args.flight or args.eject or args.weapon or args.callback):
         parser.error('--combat requires --mode 5, 6, 7 or 8 without other probes')
+    if args.outcome and (args.mode!=6 or args.combat or args.flight or args.eject or args.weapon or args.callback or args.smoothing):
+        parser.error('--outcome requires --mode 6 without other probes')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     with CaptureWorkspace(work, args.keep_captures) as capture_dir:
@@ -49,14 +53,24 @@ def check(args, work, capture_dir):
     prefix = capture_dir / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
-                            capture_output=True, text=True, timeout=90 if args.combat else 45 if args.flight else 25)
+                             *(['outcome'] if args.outcome else ['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
+                            capture_output=True, text=True, timeout=180 if args.outcome else 90 if args.combat else 45 if args.flight else 25)
     (work / 'native-run.log').write_text(result.stdout + result.stderr)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
     exports = [json.loads(line) for line in result.stdout.splitlines()]
     entries = [item for item in exports if 'entry' in item]
     bodies = [item for item in exports if 'capture' in item]
+    if args.mode==2:
+        wraps=[item for item in exports if item.get('stream_wrap')]
+        assert len(wraps)==1 and wraps[0]['wraps']>=1 and wraps[0]['streams']==255 and wraps[0]['returned'], exports
+    if args.outcome:
+        outcomes=[item for item in exports if item.get('natural_outcome')]
+        assert len(outcomes)==1 and outcomes[0]['returned'] and outcomes[0]['failure_seen'] and outcomes[0]['reset_states']==15 and outcomes[0]['aircraft_losses']==3, exports
+        transitions=[item for item in exports if item.get('outcome_transition')]
+        assert {item['resets_remaining'] for item in transitions} >= {0,1,2,3}, transitions
+        restarts=[item for item in exports if item.get('outcome_restart')]
+        assert len(restarts)==1 and restarts[0]['mode']==125 and restarts[0]['scene_frames']>=30, exports
     if args.callback:
         assert any(0x46 in item['keys'] for item in entries), entries
         assert any(0xc6 in item['keys'] for item in entries), entries
@@ -64,7 +78,7 @@ def check(args, work, capture_dir):
         assert any(item['stage']=='C10A24' and not item['keys'] for item in entries), entries
         cancellations=[item for item in exports if item.get('smoothing_cancel')]
         assert len(cancellations)==1 and cancellations[0]['continued'] and cancellations[0]['returned'] and cancellations[0]['scene_frames']>=30, exports
-    minimum_entries=44 if args.smoothing else {2:32,3:43,4:39,5:39,6:38,7:42,8:38,125:55}[args.mode]
+    minimum_entries=44 if args.smoothing else {2:30,3:43,4:39,5:39,6:38,7:42,8:38,125:55}[args.mode]
     minimum_bodies=29 if args.smoothing else {2:21,3:29,4:27,5:27,6:27,7:29,8:27,125:35}[args.mode]
     assert len(entries)>=minimum_entries and len(bodies)>=minimum_bodies, exports
     if args.eject:
@@ -78,7 +92,7 @@ def check(args, work, capture_dir):
     if args.flight:
         required|={'C11788','C11830','C11872'}
     if args.mode==2:
-        required|={'C10272','C1029E','C102D8','C10302','C10362','C0F920'}
+        required|={'C10272','C1029E','C102D8','C10302','C10362','C0F946','C0F974','C0F992'}
     elif args.mode==125:
         required|={'C10272','C1029E','C10C08','C0F992','C0FCB4'}
     else:
@@ -91,6 +105,8 @@ def check(args, work, capture_dir):
             required|={'C11078','C110A4'}
         if args.eject:
             required|={'C1104C','C118FC','C11934','C0F920'}
+    if args.outcome:
+        required|={'C11788','C11830','C11872','C118A0','C118E6','C0F920','C0FBE0'}
     if args.smoothing:
         required.discard('C10B1E')
         required|={'C10C68','C10CFE','C10D8A'}
@@ -131,6 +147,8 @@ def check(args, work, capture_dir):
         assert source_guidance_fault_returns>0, 'No complete original guidance fault/continuation body compared'
     outcome={2:'returns to menu',3:f'runs over 768 scene frames with aircraft {args.aircraft}',4:'runs over 2000 scene frames',5:'runs over 2000 scene frames',6:'runs over 384 scene frames',7:'runs over 2000 scene frames with an unlocked saved pilot',8:'runs over 2000 scene frames with an unlocked saved pilot',
              125:'runs over 2,000 scene frames, including Escape/restart'}[args.mode]
+    if args.mode==2:
+        outcome='runs all seven control streams, reinitializes the scene at wrap and returns to the menu with Escape'
     if args.eject:
         outcome='runs Shift-E through sound, record clone, lifetime rendering and menu return'
     if args.weapon:
@@ -143,6 +161,18 @@ def check(args, work, capture_dir):
         outcome='executes a controlled smoothing cancel/reset, resumes active flight and returns to the menu'
     if args.combat:
         outcome='runs sustained throttle/stick/target/fire input and manoeuvre-limit crossings'
+    if args.outcome:
+        outcome='reaches normal-input failure, exhausts all three aircraft resets, returns to the menu and starts Free Flight'
+        report={
+            'scenario': 'normal-input-mode-six-failure-and-freeflight-restart',
+            'native_state_seeded': False,
+            'input_stage_intervals': len(entries), 'sampled_bodies': len(bodies),
+            'outcome': outcomes[0], 'restart': restarts[0],
+            'test_sha256': hashlib.sha256(args.test.resolve().read_bytes()).hexdigest(),
+            'adf_sha256': hashlib.sha256((ROOT/'local/media/fa18.adf').read_bytes()).hexdigest(),
+            'reference_scope': 'Original instructions from sampled native before-states; not an independent complete mission replay',
+        }
+        (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')
 

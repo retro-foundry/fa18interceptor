@@ -1,5 +1,14 @@
 # Native port runner
 
+Normal-input mode-six failure now has a required three-loss/reset-exhaustion/
+menu-return/Free-Flight-relaunch scenario; 86 input/stage intervals and 237
+sampled bodies match original compared RAM/drawing. Mode two's missing C28722
+reset connection is fixed: all seven streams, wrap and Escape return match
+30 intervals/206 bodies. Both comparisons are registered in CTest and keep
+passing RAM temporary. Debug/Release builds and seven affected checks pass.
+See `../../analysis/native_natural_outcomes.md`. Successful missions and
+independent complete sequences remain open, alongside the other full-port work.
+
 Nine childless postflight callbacks now retain preceding input results. The
 expanded comparison passes 355 full bodies, 372 recorder parents, 84 keyboard
 parents and 168 separate input/stage parents against original compared

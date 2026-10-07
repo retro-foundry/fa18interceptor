@@ -11,6 +11,7 @@
 #include "../selector_origin.h"
 #include "../candidate_record_update.h"
 #include "../control_records.h"
+#include "../scene_dispatch.h"
 #include "../fixed_math.h"
 #include "../postflight_scheduler.h"
 #include "../context_publication.h"
@@ -67,6 +68,10 @@ static FlightActionState action_child(void *context,enum FlightActionChild child
         const FlightActionHooks hooks={.consume_values=action_child};
         select_next_flight_record_stream(w,&hooks); break; /* C23578 */
     }
+    case FA_RESET_STREAM_RECORD: case FA_RESET_NEXT_RECORD:
+        /* C2340E/C23500 call C28722. The control owner saves/restores its
+         * selected record and reloads the next stream after initialization. */
+        initialize_scene_from_mode(NULL);break;
     case FA_STREAM_END_MESSAGE: case FA_STREAM_LIMIT_MESSAGE: case FA_NEXT_MESSAGE:
         post_message((uint16_t)w.primary); w.primary&=0xffffff00u; break; /* C25704 */
     case FA_ACTION_NORMALISE: {
