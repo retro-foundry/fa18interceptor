@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected postflight preservation (2026-10-07): nine childless callbacks
+retain actual preceding input results. The expanded comparison passes 355 full
+bodies, 372 recorder parents, 84 keyboard parents and 168 separate input/stage
+parents against original compared RAM/drawing and defined returns. Three
+controlled postflight outcomes also pass nine intervals/25 bodies and saved-log
+persistence. Native Debug/Release and eight affected checks pass. See
+`analysis/native_postflight_input_return.md`.
+Other contracts and full mission/audio/state/performance acceptance remain open.
+
 Latest connected setup preservation (2026-10-07): smoothing publication/restart,
 context entry and viewport completion retain actual preceding input outputs.
 Stage outputs are checked separately from final message/body results. Sixty

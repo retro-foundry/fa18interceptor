@@ -263,16 +263,18 @@ static void stage(void *context,gaddr routine) {
         if(rd_u32(STAGE_CALLBACK)!=routine) ++game->postflight_resets;
     }
     else if(routine==0xc11830) restart_postflight_completion(NULL);
-    else if(routine==0xc11872) expire_postflight_completion(NULL);
+    /* The marked childless postflight callbacks use D0/D1/A0 and memory
+     * stores only. Their wait/transition routes retain the prior input result. */
+    else if(routine==0xc11872) { expire_postflight_completion(NULL);preserves_input=1; }
     else if(routine==0xc118a0) queue_postflight_failure(NULL);
-    else if(routine==0xc118e6) end_postflight_message(NULL);
-    else if(routine==0xc118fc) follow_postflight_message(NULL);
-    else if(routine==0xc11934) clear_postflight_phase(NULL);
-    else if(routine==0xc11958) follow_postflight_message_or_phase(NULL);
-    else if(routine==0xc119d4) restart_postflight_after_countdown(NULL);
-    else if(routine==0xc1104c) queue_postflight_end(NULL);
-    else if(routine==0xc0f946) await_postflight_viewport(NULL);
-    else if(routine==0xc0f974) mark_postflight_viewport_ready(NULL);
+    else if(routine==0xc118e6) { end_postflight_message(NULL);preserves_input=1; }
+    else if(routine==0xc118fc) { follow_postflight_message(NULL);preserves_input=1; }
+    else if(routine==0xc11934) { clear_postflight_phase(NULL);preserves_input=1; }
+    else if(routine==0xc11958) { follow_postflight_message_or_phase(NULL);preserves_input=1; }
+    else if(routine==0xc119d4) { restart_postflight_after_countdown(NULL);preserves_input=1; }
+    else if(routine==0xc1104c) { queue_postflight_end(NULL);preserves_input=1; }
+    else if(routine==0xc0f946) { await_postflight_viewport(NULL);preserves_input=1; }
+    else if(routine==0xc0f974) { mark_postflight_viewport_ready(NULL);preserves_input=1; }
     else if(routine==0xc11078) raise_postflight_message_event(NULL);
     else if(routine==0xc110a4) {
         const PostflightMessageHooks messages={result_message_child,NULL,game};

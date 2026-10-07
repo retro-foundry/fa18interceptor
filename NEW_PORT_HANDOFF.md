@@ -2,6 +2,16 @@
 
 ## Objective and user constraints
 
+Latest connected postflight preservation (2026-10-07): nine childless callback
+owners retain actual preceding input results. The expanded comparison passes
+355 full bodies, 372 recorder parents, 84 keyboard parents and 168 separately
+checked input/stage parents against original compared RAM/drawing and defined
+returns. Three controlled outcomes pass nine intervals/25 bodies and saved-log
+persistence. Native Debug/Release and eight affected checks pass. See
+`analysis/native_postflight_input_return.md`.
+Whole mission/audio/state/performance acceptance and remaining contracts stay
+unfinished; the complete-port goal remains active.
+
 Latest connected setup preservation (2026-10-07): smoothing publication/restart,
 context entry and viewport completion preserve actual preceding input results.
 Sixty separately checked input/stage parents, 247 full bodies, 264 recorder

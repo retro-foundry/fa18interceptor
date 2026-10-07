@@ -619,6 +619,38 @@ int main(int argc,char **argv) {
                 i,game->completed_input_return.owner,fixture.setup_stage);goto done;
         }
     }
+    /* Childless postflight callbacks retain the preceding input result.
+     * Negative player phase lets C11958's own sequence tests run without
+     * C0F5F8's earlier positive-player phase selector replacing the callback. */
+    static const gaddr postflight_stages[]={0xc11872,0xc118e6,0xc118fc,0xc11934,
+        0xc11958,0xc119d4,0xc1104c,0xc0f946,0xc0f974};
+    for(unsigned i=156;i<264;++i) {
+        const unsigned family=(i-156)/12,variant=(i-156)%12;
+        fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
+        wr_u8(RECORDER_MODE,0);wr_u8(POST_INPUT_AUX,0);wr_u8(KEY_TAKEN,0);
+        wr_u8(PLAYER_PHASE,0xf0);wr_u8(SEQUENCE_PHASE,0);
+        wr_u32(STAGE_CALLBACK,postflight_stages[family]);
+        wr_u16(POST_INPUT_COUNTDOWN,(variant&1)?1:0);
+        if(family==1 || family==2) wr_u8(MESSAGE_STATE_C,(variant&1)?0:0xff);
+        else if(family==4) {
+            wr_u8(MESSAGE_STATE_C,variant%4==0?0xff:0);
+            wr_u8(SEQUENCE_PHASE,(uint8_t[]){0,0xff,1,0}[variant%4]);
+            wr_u8(SEQUENCE_FLAG,1);
+        } else if(family==5) wr_u8(CONTEXT_REQUEST,(variant/2)&1);
+        else if(family==7) {
+            wr_u16(POST_INPUT_COUNTDOWN,variant%3==2?1:0);
+            wr_u8(VIEWPORT_MODE,0);wr_u8(VIEWPORT_TARGET,variant%3==0?0:15);
+        }
+        unsigned limit=game->ticks+100;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete || !fixture.idle_stage.complete || rd_u8(POST_INPUT_AUX) ||
+           fixture.setup_output.owner==NATIVE_INPUT_RETURN_UNKNOWN ||
+           game->completed_input_return.owner==NATIVE_INPUT_RETURN_UNKNOWN ||
+           !pending_input(game,&fixture,108+i)) {
+            fprintf(stderr,"Postflight stage input preservation failed at case %u: owner=%u stage=%06X\n",
+                i,fixture.setup_output.owner,fixture.setup_stage);goto done;
+        }
+    }
     fixture.cleanup_sampling=0;
     result=0;
 done:

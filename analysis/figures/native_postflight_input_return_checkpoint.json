@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-07",
+  "scope": "Controlled postflight callbacks/gates after ordinary disk/input Free Flight; stage parents precede separately selected idle bodies. Existing comparison exclusions unchanged. Sampled parents, not full mission acceptance.",
+  "runtime_failure_before_fix": "Postflight stage input preservation failed at case 156: owner=0 stage=C11872",
+  "full_bodies_compared": 355,
+  "recorder_parents_compared": 372,
+  "interposed_keyboard_parents_compared": 84,
+  "input_stage_parents_compared": 168,
+  "added_input_stage_parents": 108,
+  "stage_groups": {
+    "C11872": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C118E6": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C118FC": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C11934": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C11958": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C119D4": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C1104C": {
+      "parents": 12,
+      "stage_values": [
+        162,
+        190,
+        232
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        162,
+        232
+      ]
+    },
+    "C0F946": {
+      "parents": 12,
+      "stage_values": [
+        0,
+        7,
+        162,
+        204
+      ],
+      "stage_owners": [
+        1,
+        12
+      ],
+      "completed_body_values": [
+        0,
+        7,
+        113,
+        204
+      ]
+    },
+    "C0F974": {
+      "parents": 12,
+      "stage_values": [
+        0,
+        7,
+        211
+      ],
+      "stage_owners": [
+        1,
+        12
+      ],
+      "completed_body_values": [
+        0,
+        7,
+        64,
+        211
+      ]
+    }
+  },
+  "runner_sha256": "b9b634c7d0fcae2369632551726382442b6e328faf116dfc6d7ffe6b7d4b92d6",
+  "probe_sha256": "f0800904c8b30a8db70e8804bed8b18f5245852dd6159d18df7464d5c35d56a2",
+  "reports_sha256": {
+    "native-run.log": "5d27f3c8397b4bec31f318375663800c6f5cd7b7907a4840a5308735465cadef",
+    "captures.json": "c7acd950ed368416437631f218b8ca144c3fd6e99f247ed2efc6c04bd6710807",
+    "input-check.log": "a5537f88d240cfc3c5edc3c896d7b7e32dad78ef27041ed110770094ddc96d03",
+    "frame_body-check.log": "59215d2ba5e931e7f3a38b73b506ba1eb53ae8d76efb83dc7a90c87ee326ac6b",
+    "control_effects-check.log": "cc160742d8f801ea3fce7c36e0bdef22d9316b32e970ce9b4dcf1375b4d450ee"
+  },
+  "source_contract_sha256": "8469a96c35e7f1d5e9cfabf3a0c93420045f0fa0d5c13b59955fb00768228b31",
+  "controlled_postflight_outcomes": {
+    "entries": 9,
+    "bodies": 25,
+    "source_dos_writes": 1
+  },
+  "outcome_comparison_sha256": "b9904f520de68eea921eb078bc4820ca7412d53faf74a70abd611460facf480a",
+  "release_checks": [
+    "countermeasures",
+    "frame_body",
+    "frontend",
+    "postflight_entry",
+    "game_input",
+    "sequence_return",
+    "qualification",
+    "artifact_cleanup"
+  ]
+}
