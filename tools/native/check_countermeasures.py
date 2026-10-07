@@ -35,21 +35,25 @@ def check(args, work, capture_dir):
                          capture_output=True, text=True, timeout=25)
     (work / 'native-run.log').write_text(run.stdout + run.stderr)
     if run.returncode:
-        raise RuntimeError(run.stderr or run.stdout)
+        raise RuntimeError(run.stderr or run.stdout or f'Native integration exited with code {run.returncode}')
     exports = [json.loads(line) for line in run.stdout.splitlines()]
     bodies = [entry for entry in exports if 'capture' in entry]
     parents = [entry for entry in exports if 'control_parent' in entry]
     fd_inputs = [entry for entry in exports if 'fd_input' in entry]
     pending_inputs = [entry for entry in exports if 'pending_input' in entry]
     message_bodies = [entry for entry in exports if 'message_body' in entry]
+    clear_bodies = [entry for entry in exports if 'clear_body' in entry]
     assert [body['capture'] for body in bodies] == list(range(4)), bodies
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
     assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
-    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(36)), pending_inputs
+    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(48)), pending_inputs
     assert [entry['message_body'] for entry in message_bodies] == list(range(15)), message_bodies
     assert [entry['assigned'] for entry in message_bodies] == [True] * 13 + [False] * 2, message_bodies
     assert {entry['input_byte'] & 0x80 for entry in message_bodies[:12]} == {0, 0x80}
+    assert [entry['clear_body'] for entry in clear_bodies] == list(range(12)), clear_bodies
+    assert all(entry['return_owner'] == 2 and entry['input_byte'] == 0 and
+        entry['saved_tick'] & 31 == 8 for entry in clear_bodies), clear_bodies
     assert sum(entry['chain'] for entry in pending_inputs) == 12, pending_inputs
     assert {entry['recorder_mode'] for entry in pending_inputs} == {1, 2, 3}, pending_inputs
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
@@ -82,7 +86,7 @@ def check(args, work, capture_dir):
                     compare(parent, parent + '.before.dat', parent + '.after.dat', entry['raw'])
                 for entry in pending_inputs:
                     parent = str(prefix) + f".pending.{entry['pending_input']}"
-                    carry = [source_carries[entry['pending_input'] - 24]] if entry['pending_input'] >= 24 else []
+                    carry = [source_carries[entry['pending_input']]] if entry['pending_input'] >= 24 else []
                     compare(parent, parent + '.before.dat', parent + '.after.dat', 'pending', *carry)
             elif name == 'control_effects':
                 for entry in parents:
@@ -103,9 +107,16 @@ def check(args, work, capture_dir):
                     output = compare(capture, capture + '.before.dat', capture + '.after.dat',
                         body['before_tick'], body['after_tick'], body['saved_tick'],
                         capture + '.source.dat', environment=environment)
-                    source_carries[body['message_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
+                    source_carries[24 + body['message_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
+                for body in clear_bodies:
+                    capture = str(prefix) + f".clear.{body['clear_body']}"
+                    environment = dict(os.environ, FA18_FRAME_EXPECT_INPUT_CARRY=str(body['input_byte']))
+                    output = compare(capture, capture + '.before.dat', capture + '.after.dat',
+                        body['before_tick'], body['after_tick'], body['saved_tick'],
+                        capture + '.source.dat', environment=environment)
+                    source_carries[36 + body['clear_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
         print(f'{name}: original contracts and actual runtime captures pass', flush=True)
-    print('19 full bodies and 36 recorder input parents match original RAM/display, including 12 first-depleted message returns and two inactive exits')
+    print('31 full bodies and 48 recorder input parents match original RAM/display, including message and page-clear first-depleted returns')
 
 
 if __name__ == '__main__':

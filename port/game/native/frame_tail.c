@@ -33,10 +33,11 @@ void native_frame_selection_cleanup(void) {
     drop_lost_selection(); /* C12242; C31F4A immediately following is RTS. */
 }
 
-void native_frame_debug_overlay(void) {
+int native_frame_debug_overlay(void) {
     /* C0F386 runs on both the drawing and idle branches, after C2B3C2.
      * The source's idle UPDATE_ACTIVE gate suppresses these overlays. */
-    if(rd_u8(UPDATE_TAIL_CONDITION) && rd_u8(UPDATE_ACTIVE)) {
+    const int active=rd_u8(UPDATE_TAIL_CONDITION) && rd_u8(UPDATE_ACTIVE);
+    if(active) {
         wr_u16(UPDATE_STAGE_MARKER,0x210);
         draw_page_debug_mark();
         wr_u16(UPDATE_STAGE_MARKER,0x218);
@@ -44,4 +45,5 @@ void native_frame_debug_overlay(void) {
         draw_stream_numeric_fields((HudStreamState){0},&hooks);
     }
     wr_u16(UPDATE_STAGE_MARKER,0x220); /* C32CEE belongs to the frontend. */
+    return active;
 }

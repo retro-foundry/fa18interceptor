@@ -1,10 +1,17 @@
 # Native port runner
 
+The periodic page-top clear now returns its actual pattern to the next first
+depleted recorder flare/chaff command when the later label/debug passes skip.
+The current suite matches 31 flight bodies and 48 recorder input parents,
+including twelve new clear-derived cases reached through normal game counters.
+See `../../analysis/native_page_clear_input_return.md`; remaining drawing and
+intervening-command returns still need their own source contracts.
+
 The final message renderer now returns its defined character/glyph byte to
 the first depleted pending flare/chaff command. Nineteen flight bodies and
 36 recorder input parents match original compared RAM/drawing, including
 twelve independently verified first-depleted returns. Inactive message frames
-invalidate that return; drawing/intervening-command producers remain unfinished.
+do not assign a new return; drawing/intervening-command producers remain unfinished.
 See `../../analysis/native_message_input_carry_milestone.md`.
 
 The reported demo outside-view clipping after takeoff is fixed. Attached

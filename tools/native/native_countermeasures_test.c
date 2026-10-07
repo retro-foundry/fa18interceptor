@@ -18,6 +18,8 @@ typedef struct {
     unsigned captures,launches,expiry;
     int message_sampling;
     unsigned message_case;
+    int clear_sampling;
+    unsigned clear_case;
 } CountermeasureFixture;
 static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const unsigned settings=variant%12,mode=1+settings/4;
@@ -90,12 +92,26 @@ static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint16_t saved_tick,void *context) {
     CountermeasureFixture *fixture=context;
     fixture->clock.iteration=game->update_iterations;
+    if(fixture->clear_sampling) {
+        if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)==8) {
+            snprintf(fixture->path,sizeof fixture->path,"%s.clear.%u",fixture->prefix,fixture->clear_case);
+            fixture->capture=(NativeFrameCapture){.replay=&fixture->clock,.prefix=fixture->path,
+                .iteration=game->update_iterations,.count=1};
+        }
+        if(fixture->capture.prefix)
+            native_frame_capture(game,boundary,saved_tick,&fixture->capture);
+        if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
+            printf("{\"clear_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
+                fixture->clear_case,fixture->capture.before_tick,fixture->capture.after_tick,
+                fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value);
+        return;
+    }
     if(fixture->message_sampling) {
         native_frame_capture(game,boundary,saved_tick,&fixture->capture);
         if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
             printf("{\"message_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"assigned\":%s,\"input_byte\":%u}\n",
                 fixture->message_case,fixture->capture.before_tick,fixture->capture.after_tick,
-                fixture->capture.saved_tick,game->message_input_assigned?"true":"false",game->message_input_byte);
+                fixture->capture.saved_tick,(game->completed_input_return.owner!=NATIVE_INPUT_RETURN_UNKNOWN)?"true":"false",game->completed_input_return.value);
         return;
     }
     if(boundary==NATIVE_FRAME_BODY_BEGIN && (!fixture->capture.begun)) {
@@ -156,13 +172,27 @@ int main(int argc,char **argv) {
             .iteration=game->update_iterations+1,.count=1};
         unsigned limit=game->ticks+100;
         while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
-        if(!fixture.capture.complete || game->message_input_assigned!=(i<13) ||
+        if(!fixture.capture.complete || (game->completed_input_return.owner!=NATIVE_INPUT_RETURN_UNKNOWN)!=(i<13) ||
            (i<12 && !pending_input(game,&fixture,24+i))) {
             fprintf(stderr,"Message carry integration failed at case %u\n",i);goto done;
         }
     }
     wr_u8(0xc45871u,0);
     fixture.message_sampling=0;
+    fixture.clear_sampling=1;
+    for(unsigned i=0;i<12;++i) {
+        fixture.clear_case=i;fixture.capture=(NativeFrameCapture){0};
+        /* Let the original counter reach its periodic clear; do not seed
+         * UPDATE_TICK or import any original capture into native gameplay. */
+        wr_u8(RECORDER_MODE,0);
+        unsigned limit=game->ticks+200;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete || game->completed_input_return.owner!=NATIVE_INPUT_RETURN_PAGE_CLEAR ||
+           game->completed_input_return.value || !pending_input(game,&fixture,36+i)) {
+            fprintf(stderr,"Page clear carry integration failed at case %u\n",i);goto done;
+        }
+    }
+    fixture.clear_sampling=0;
     for(unsigned i=0;i<24;++i) if(!pending_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<2;++i) if(!fd_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<4;++i) if(!collision_parent(game,&fixture,i)) goto done;

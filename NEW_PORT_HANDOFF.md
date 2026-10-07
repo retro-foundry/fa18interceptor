@@ -2,13 +2,21 @@
 
 ## Objective and user constraints
 
+Latest connected drawing return (2026-10-07): periodic C2F582 page clears
+publish their actual pattern for the next first depleted recorder command.
+Twelve clears reached by the normal game counter and twelve following input
+parents match original independent returns. The complete suite matches 31
+flight bodies and 48 recorder input parents, including drawing bytes. Selected
+labels/debug overlays invalidate this return; other drawing/command producers
+remain explicit missing contracts. See `analysis/native_page_clear_input_return.md`.
+
 Latest connected recorder return (2026-10-07): C32CEE's defined message/glyph
 byte now reaches the next first depleted pending flare/chaff command. Nineteen
 actual flight bodies and 36 recorder input parents match original compared
 RAM/drawing; twelve first-depleted cases verify independently derived original
-frame returns and both release-bit states. Inactive message frames invalidate
-the value. The real message owner passes 8,192 CPU/SR/RAM component calls.
-Drawing-derived and intervening-command returns remain explicitly unfinished.
+frame returns and both release-bit states. Inactive message frames do not assign
+a new value. The real message owner passes 8,192 CPU/SR/RAM component calls.
+Other drawing-derived and intervening-command returns remain unfinished.
 See `analysis/native_message_input_carry_milestone.md`. The goal stays active.
 
 Latest user controls report (2026-10-07): rudder and numeric keypad external

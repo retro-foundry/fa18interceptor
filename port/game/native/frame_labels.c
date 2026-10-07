@@ -37,7 +37,7 @@ static MarkerState label_child(void *context,enum MarkerChild child,MarkerState 
     return values;
 }
 
-void native_frame_scene_labels(void) {
+int native_frame_scene_labels(void) {
     const MarkerHooks hooks={.consume_values=label_child};
-    draw_scene_position_labels((MarkerState){0},&hooks);
+    return draw_scene_position_labels((MarkerState){0},&hooks);
 }

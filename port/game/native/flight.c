@@ -290,13 +290,16 @@ static int finish_frame_clock(NativeFrontend *game) {
     if((saved_tick&7)==7) sample_main_loop_readout(&hooks);
     /* C53F9C releases graphics sprite zero. This runner never allocates
      * hardware sprites; cockpit/scenery rendering uses host plane storage. */
-    if((saved_tick&31)==8) clear_page_plane_tops();
+    if((saved_tick&31)==8)
+        game->completed_input_return=(NativeInputReturn){(uint8_t)clear_page_plane_tops(),NATIVE_INPUT_RETURN_PAGE_CLEAR};
     else if(!rd_u8(ORIGIN_DETAIL_MODE) && (saved_tick&31)==16)
         request_cockpit_redraw(); /* C082B8; C10B90 is the aircraft reset. */
     if(!rd_u8(ORIGIN_GATE_A)) wr_u16(UPDATE_TICK,(uint16_t)(rd_u16(UPDATE_TICK)+1));
     game->flight_timer_pending=0;
-    native_frame_scene_labels(); /* C0F380, after the counter. */
-    native_frame_debug_overlay();
+    if(native_frame_scene_labels()) /* C0F380, after the counter. */
+        game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
+    if(native_frame_debug_overlay())
+        game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
     return 1;
 }
 int native_flight_enabled(const NativeFrontend *game) {
@@ -317,6 +320,7 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
         const PostInputTickHooks hooks={stage,NULL,game};
         run_post_input_tick(&hooks);
     } else wr_u8(KEY_TAKEN,0); /* C0F808's tail follows C0FCB4 too. */
+    game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
     if(game->observe_frame)
         game->observe_frame(game,NATIVE_FRAME_BODY_BEGIN,saved_tick,game->frame_context);
     tick_notification_cadence(); /* C11B44 at C0EFEA. */

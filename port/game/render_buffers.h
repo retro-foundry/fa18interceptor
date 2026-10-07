@@ -13,8 +13,9 @@ void clear_render_buffers(void);
 void blit_mask_between_planes(void);
 
 /* Clear the first 40 bytes of each of the four planes of both pages
- * ($C2F582). */
-void clear_page_plane_tops(void);
+ * ($C2F582). Returns the cleared longword pattern, also left for the next
+ * pending-input parent by original C2F5A2. */
+uint32_t clear_page_plane_tops(void);
 
 /* The lane blit ($C304FA): plane `plane_offset` of the draw page at
  * POLY_PLANE_OFFSET through the polygon mask, C reading LANE_PATTERN from

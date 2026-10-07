@@ -1,12 +1,22 @@
 # Current playable port handoff
 
+Latest connected drawing return (2026-10-07): C2F582 now publishes its actual
+page-clear pattern for the next first depleted pending flare/chaff command.
+Twelve clears reached by the normal game counter and twelve following input
+parents match independently derived original returns. The complete suite
+matches 31 flight bodies and 48 recorder input parents, including all drawing
+bytes. Message no-assignment exits preserve a known clear result; selected
+labels/debug overlays invalidate it. Other drawing and intervening-command
+returns remain UNKNOWN and fail if consumed. See
+`analysis/native_page_clear_input_return.md`. Full port remains active.
+
 Latest connected recorder return (2026-10-07): the completed C32CEE message
 renderer now publishes its defined character/glyph byte for the first depleted
 pending flare/chaff command with an unclaimed input queue. Twelve actual input
 parents consume independently verified original frame returns; 19 complete
 bodies and 36 recorder input parents match compared RAM/drawing. Two inactive
-message exits clear validity. The real message owner also passes 8,192 complete
-CPU/SR/RAM component calls. Drawing-derived and intervening-command returns
+message exits leave no message assignment. The real message owner also passes 8,192 complete
+CPU/SR/RAM component calls. Other drawing-derived and intervening-command returns
 still require their source owners and fail explicitly if consumed. See
 `analysis/native_message_input_carry_milestone.md`. Full port remains active.
 
@@ -30,7 +40,7 @@ cases. After ordinary Free Flight startup, 24 controlled input parents using
 the playable runtime match original RAM, including twelve successful-flare ->
 depleted-chaff sequences. Four keyboard-driven flight bodies still match
 gameplay/display. Comparisons discard passing RAM. First depleted commands
-outside the defined final-message return still need their carry producer and fail loudly;
+outside the defined message/page-clear returns still need their carry producer and fail loudly;
 full gameplay acceptance remains unfinished. See
 `analysis/native_countermeasures_milestone.md`.
 The consumed-game-input gate now also requires the complete 164-byte player

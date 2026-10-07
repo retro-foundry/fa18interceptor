@@ -118,10 +118,10 @@ MarkerState transform_marker_point(MarkerState w,const MarkerHooks *h) {
 }
 
 /* C2B3C2: project the 16-byte scene-position stream and number visible rows. */
-void draw_scene_position_labels(MarkerState w,const MarkerHooks *h) {
-    CB(rd_u8(0xc458a6u),1); if(rd_u8(0xc458a6u)!=1) return;
-    CB(rd_u8(0xc458aeu),5); if(rd_s8(0xc458aeu)<5) return;
-    CL(rd_u32(0xc45a66u),0xfe800000u); if(rd_s32(0xc45a66u)>=(int32_t)0xfe800000u) return;
+int draw_scene_position_labels(MarkerState w,const MarkerHooks *h) {
+    CB(rd_u8(0xc458a6u),1); if(rd_u8(0xc458a6u)!=1) return 0;
+    CB(rd_u8(0xc458aeu),5); if(rd_s8(0xc458aeu)<5) return 0;
+    CL(rd_u32(0xc45a66u),0xfe800000u); if(rd_s32(0xc45a66u)>=(int32_t)0xfe800000u) return 0;
     add_byte(h,0xc45883u,1);
     if(test_byte(h,0xc45785u)) P(origin,MM_ORIGIN,0xc45c3eu);
     else { P(origin,MM_ORIGIN,0xc46184u); W(x,MM_X,rd_u16(0xc458deu)); P(origin,MM_ORIGIN,indexed(w.origin+20,w.x)); }
@@ -137,7 +137,7 @@ void draw_scene_position_labels(MarkerState w,const MarkerHooks *h) {
         load_words(&w,w.record,31,-1,h); P(record,MM_RECORD,w.record+10);
         observe(h,MM_TEST_WORD,MM_OFFSET,w.offset,0);
         if((int16_t)w.offset<0) {
-            CW(w.offset,0xffff); if((uint16_t)w.offset==0xffff) return;
+            CW(w.offset,0xffff); if((uint16_t)w.offset==0xffff) return 1;
             P(record,MM_RECORD,w.record+6); AND_W(offset,MM_OFFSET,0x7fff); ALW(offset,MM_OFFSET,8); AW(offset,MM_OFFSET,w.offset);
             P(matrix,MM_MATRIX,indexed(0xc46184u,w.offset)); if(!bit(h,w.matrix+1,6)) goto next_row;
             L(offset,MM_OFFSET,rd_u32(w.matrix+20)); L(screen_y,MM_SCREEN_Y,rd_u32(w.matrix+28));
@@ -177,7 +177,7 @@ next_row:
         add_word(h,0xc459aau,1); continue;
 skip_row:
         P(record,MM_RECORD,w.record+16); observe(h,MM_TEST_WORD,MM_OFFSET,rd_u16(w.record),0);
-        if(rd_s16(w.record)<0) return; goto next_row;
+        if(rd_s16(w.record)<0) return 1; goto next_row;
     }
 }
 

@@ -42,13 +42,15 @@ void blit_mask_between_planes(void) {
 #endif
 }
 
-void clear_page_plane_tops(void) {
+uint32_t clear_page_plane_tops(void) {
+    const uint32_t pattern=0; /* C2F59A-C2F5AA, shared by all ten stores. */
     int page, plane, i;
     for (page = 0; page < 2; page++)
         for (plane = 0; plane < 4; plane++) {
             gaddr p = rd_u32(PAGE0_PLANE_TABLE + (gaddr)(16 * page + 4 * plane));
-            for (i = 0; i < 10; i++) wr_u32(p + (gaddr)(4 * i), 0);
+            for (i = 0; i < 10; i++) wr_u32(p + (gaddr)(4 * i), pattern);
         }
+    return pattern;
 }
 
 /* The C pointer and modulo the lane blit uses. */

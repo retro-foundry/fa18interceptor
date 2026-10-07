@@ -253,6 +253,7 @@ void native_frontend_tick(NativeFrontend *game) {
     if(game->input_count && !native_flight_enabled(game)) native_input_process(game);
     MainControlHooks hooks={0}; hooks.context=game; hooks.consume_values=child;
     const int flight=native_flight_enabled(game);
+    if(!flight) game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
     const int menu=game->screen==NATIVE_MENU || game->screen==NATIVE_MISSIONS || game->screen==NATIVE_PILOT_LOG;
     if(!flight && !menu) advance_main_loop_message_sequence((MessageWorking){0},&hooks);
     if(game->screen==NATIVE_ENLISTMENT && (int8_t)rd_u8(0xc457e0u)<0) {
@@ -270,11 +271,12 @@ void native_frontend_tick(NativeFrontend *game) {
      * continue this frame without ticking its newly published C0FECE. */
     const int complete=native_flight_tick(game,!flight);
     /* C32CEE is C0EFD4's final child, after the flight/HUD work. */
-    if(complete) game->message_input_assigned=0;
+    if(complete==NATIVE_FLIGHT_OWNER_EXIT)
+        game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
     if((flight || menu) && complete==NATIVE_FLIGHT_COMPLETE) {
         const MessageSequenceResult message=advance_main_loop_message_sequence((MessageWorking){0},&hooks);
-        game->message_input_byte=message.input_byte;
-        game->message_input_assigned=message.assigned;
+        if(message.assigned)
+            game->completed_input_return=(NativeInputReturn){message.input_byte,NATIVE_INPUT_RETURN_MESSAGE};
     }
     if(complete && game->observe_frame)
         game->observe_frame(game,complete==NATIVE_FLIGHT_OWNER_EXIT?NATIVE_FRAME_OWNER_EXIT:NATIVE_FRAME_BODY_END,

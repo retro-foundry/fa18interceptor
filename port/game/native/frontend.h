@@ -9,6 +9,9 @@
 enum NativeScreen { NATIVE_SPLASH,NATIVE_CREDITS,NATIVE_ENLISTMENT,NATIVE_CALLSIGN,NATIVE_MENU,
     NATIVE_MODE_INTRO,NATIVE_MISSIONS,NATIVE_PILOT_LOG,NATIVE_SCENE_SETUP };
 typedef struct NativeFrontend NativeFrontend;
+enum NativeInputReturnOwner { NATIVE_INPUT_RETURN_UNKNOWN, NATIVE_INPUT_RETURN_MESSAGE,
+                              NATIVE_INPUT_RETURN_PAGE_CLEAR };
+typedef struct { uint8_t value; enum NativeInputReturnOwner owner; } NativeInputReturn;
 enum NativeFrameBoundary { NATIVE_FRAME_BODY_BEGIN, NATIVE_FRAME_BODY_END, NATIVE_FRAME_INPUT_BEGIN,
                            NATIVE_FRAME_OWNER_EXIT };
 struct NativeFrontend {
@@ -37,10 +40,9 @@ struct NativeFrontend {
     unsigned postflight_callbacks,postflight_resets;
     uint8_t input_keys[256];
     unsigned input_read,input_count,input_passes,input_events;
-    /* Return of the completed C32CEE message owner, for the next first
-     * pending command. Invalid when that frame did not define the byte. */
-    uint8_t message_input_byte;
-    int message_input_assigned;
+    /* Completed domain return for the next first pending command. Drawing
+     * paths without reconstructed return contracts leave UNKNOWN. */
+    NativeInputReturn completed_input_return;
     uint16_t mouse_buttons,joystick_directions;
     uint8_t mouse_x_counter,mouse_y_counter;
     int input_server_installed;

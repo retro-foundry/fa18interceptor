@@ -1,5 +1,10 @@
 # Native message return consumed by recorder input — 2026-10-07
 
+Follow-up: `native_page_clear_input_return.md` adds a periodic drawing return
+and expands the suite to 31 bodies/48 recorder parents. Message no-assignment
+exits now preserve a known preceding page-clear return. Counts below describe
+the original message-only batch.
+
 The final C32CEE message renderer now publishes its character/glyph low byte
 through `MessageSequenceResult`. `native_frontend_tick()` retains that result
 only when a completed frame actually defines it. `native/menu.c` consumes it

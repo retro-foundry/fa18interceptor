@@ -193,8 +193,8 @@ static int16_t carried_selection(void *context) {
         if(command->selection_known) return command->flight.carried_event;
         if(rd_s8(stock)>1) return 0;
         if(rd_u8(KEY_TAKEN)) return 0;
-        if(command->game->message_input_assigned) {
-            command->flight.carried_event=command->game->message_input_byte;
+        if(command->game->completed_input_return.owner!=NATIVE_INPUT_RETURN_UNKNOWN) {
+            command->flight.carried_event=command->game->completed_input_return.value;
             return command->flight.carried_event;
         }
         fputs("native input missing depleted recorder countermeasure carry\n",stderr);abort();
@@ -229,9 +229,9 @@ static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
         carried_selection,dispatch_child,NULL,&command,prepare_action};
     if(pending) dispatch_pending_command(&hooks);
     else dispatch_keyboard_command(raw,&hooks);
-    /* Other commands can replace this source return. Its complete producer
-     * contract is scoped to the first pending command after C32CEE. */
-    game->message_input_assigned=0;
+    /* Other commands can replace the completed domain return. Its producer
+     * contract is scoped to the first pending command of the next frame. */
+    game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
 }
 void native_menu_dispatch_raw(NativeFrontend *game,uint8_t raw) { dispatch(game,raw,0); }
 void native_menu_dispatch_pending(NativeFrontend *game) { dispatch(game,0,1); }

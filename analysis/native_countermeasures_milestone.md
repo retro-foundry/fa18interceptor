@@ -2,7 +2,8 @@
 
 Latest follow-up: claimed recorder depletion and first depletion after a defined
 final-message return are connected. See `native_message_input_carry_milestone.md`
-for the newest 19 body/36 input-parent evidence. Other unclaimed returns still
+for the message return evidence; `native_page_clear_input_return.md` records
+the newest 31 body/48 input-parent suite. Other unclaimed returns still
 need their real enclosing producer. Earlier
 counts and remaining-scope paragraphs below describe their original batches.
 
@@ -179,7 +180,7 @@ match at the consumed carrier-input checkpoint; the corrected gate passes.
 This strengthens the comparison by removing its three-byte exception.
 
 A first depleted recorder countermeasure with KEY_TAKEN zero outside the
-defined final-message return still aborts explicitly. Its event changes the
+defined final-message/page-clear return still aborts explicitly. Its event changes the
 claim/release test and raw/translated
 queue contents, so zero is not a valid general replacement. The source
 producer across preceding frame/message/drawing work must be reconstructed
