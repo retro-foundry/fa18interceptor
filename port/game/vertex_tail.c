@@ -42,6 +42,18 @@ static Vertex midpoint(Vertex a, Vertex b) {
     return half(add(a, b));
 }
 
+static void translated_tail(gaddr workspace) {
+    const Vertex displacement=sub(get(workspace,0x0c),get(workspace,0));
+    put(workspace,0x8a,add(get(workspace,6),displacement));
+    put(workspace,0x90,add(get(workspace,0x1e),displacement));
+}
+
+void derive_shown_translated_vertices(void) {
+    /* C0D6C4/C0D6E0: ADDI.W wraps the record offset before ADDA.W. */
+    translated_tail(CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD)+0xa4));
+    translated_tail(WORKSPACES);
+}
+
 void derive_vertex_tail(gaddr w) {
     Vertex p = get(w, 0x12), q = get(w, 0x18), t = get(w, 0x1E);
     Vertex r = get(w, 0x36), s = get(w, 0x30);

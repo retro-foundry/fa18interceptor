@@ -107,8 +107,11 @@ void update_flight_input(uint32_t player, uint32_t incoming_d0) {
         if (rd_u8(player + 0x7C) & 0x0F) return;
         if (!rd_u8(POST_INPUT_EVENT)) {
             int8_t function = rd_s8(FUNCTION_KEY_LEVEL);
-            if (function < 0) function = 0;
-            if (function && mode != 3 && mode != 2) {
+            /* C1B35A tests the stored byte before C1B35E clamps negative
+             * requests to zero. C1B36C skips mode 1, not mode 2. A stored
+             * $FF must still release a matching zero throttle phase. */
+            if (function && mode != 3 && mode != 1) {
+                if (function < 0) function = 0;
                 uint8_t trim = rd_u8(player + 0x39) & 0x0F;
                 int8_t difference = (int8_t)(function - rd_u8(player + 0x2B));
                 if (difference < 0) {

@@ -27,4 +27,15 @@ int is_indexed_command(enum CommandAction action);
  * before assigning a new one. It is an explicit owner input. */
 uint32_t execute_indexed_command(const CommandRequest *request,int16_t carried_index,
                                 const IndexedCommandHooks *hooks);
+enum IndexedActionOutputKind { INDEXED_ACTION_UNRESOLVED, INDEXED_ACTION_PRESERVE,
+    INDEXED_ACTION_SELECTION, INDEXED_ACTION_THROTTLE_LEVEL,
+    INDEXED_ACTION_THROTTLE_ACCUMULATOR, INDEXED_ACTION_RECORDER_LEVEL_CHANGE };
+typedef struct {
+    enum IndexedActionOutputKind kind;
+    int16_t selection,throttle_accumulator,recorder_level_change;
+    uint8_t throttle_level;
+} IndexedActionOutput;
+typedef struct { uint32_t event; IndexedActionOutput output; } IndexedCommandExecution;
+IndexedCommandExecution execute_indexed_command_result(const CommandRequest *request,
+    int16_t carried_index,const IndexedCommandHooks *hooks);
 #endif

@@ -37,6 +37,7 @@ typedef struct {
     CommandPublicationResult publication;
     FlightActionOutput flight_output;
     ViewActionOutput view_output;
+    IndexedActionOutput indexed_output;
 } CommandDispatchResult;
 CommandDispatchResult dispatch_keyboard_command_result(uint32_t raw,const CommandDispatchHooks *hooks);
 CommandDispatchResult dispatch_pending_command_result(const CommandDispatchHooks *hooks);

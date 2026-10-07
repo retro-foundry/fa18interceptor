@@ -35,6 +35,10 @@ def check(args, work, capture_dir):
                          capture_output=True, text=True, timeout=25)
     (work / 'native-run.log').write_text(run.stdout + run.stderr)
     if run.returncode:
+        captures = list(capture_dir.glob('*.before.dat'))
+        if captures:
+            latest = max(captures, key=lambda path: path.stat().st_mtime_ns)
+            retain_failure(latest.with_name(latest.name.removesuffix('.before.dat')), work)
         raise RuntimeError(run.stderr or run.stdout or f'Native integration exited with code {run.returncode}')
     exports = [json.loads(line) for line in run.stdout.splitlines()]
     bodies = [entry for entry in exports if 'capture' in entry]
@@ -54,7 +58,7 @@ def check(args, work, capture_dir):
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
     assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
-    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(180)), pending_inputs
+    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(192)), pending_inputs
     assert [entry['message_body'] for entry in message_bodies] == list(range(15)), message_bodies
     assert [entry['assigned'] for entry in message_bodies] == [True] * 13 + [False] * 2, message_bodies
     assert {entry['input_byte'] & 0x80 for entry in message_bodies[:12]} == {0, 0x80}
@@ -78,14 +82,17 @@ def check(args, work, capture_dir):
     assert all(entry['return_owner'] == 9 and entry['saved_tick'] & 31 not in (8, 16)
         for entry in grid_bodies), grid_bodies
     assert {entry['recorder_mode'] for entry in pending_inputs} == {1, 2, 3}, pending_inputs
-    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(72)), cleanup_bodies
+    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(84)), cleanup_bodies
     assert all(entry['return_owner'] == 10 and entry['saved_tick'] & 31 not in (8, 16)
         for entry in cleanup_bodies), cleanup_bodies
-    assert [entry['interposed_input'] for entry in interposed_inputs] == list(range(60)), interposed_inputs
-    assert {entry['return_owner'] for entry in interposed_inputs} == {10, 11, 12, 13, 14}, interposed_inputs
-    assert [(entry['return_owner'], entry['input_byte']) for entry in interposed_inputs[36:]] == list(zip(
+    assert [entry['interposed_input'] for entry in interposed_inputs] == list(range(72)), interposed_inputs
+    assert {entry['return_owner'] for entry in interposed_inputs} == {10, 11, 12, 13, 14, 15}, interposed_inputs
+    assert [(entry['return_owner'], entry['input_byte']) for entry in interposed_inputs[36:60]] == list(zip(
         [13,13,13,13,13,13,13,11,11,11,11,11,13,11,13,11,13,11,13,11,11,11,12,11],
         [13,9,11,0x30,0x30,0x20,1,0,0,0,0,0,0x30,0,0x10,0,0x23,0,0x33,0,0,0,255,0])), interposed_inputs
+    assert [(entry['return_owner'], entry['input_byte']) for entry in interposed_inputs[60:]] == list(zip(
+        [15,15,15,15,15,15,15,15,11,11,15,15],
+        [17,16,9,3,12,192,1,121,0,0,187,187])), interposed_inputs
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
     source_carries = {}
     for name in ('frame_body', 'input', 'control_effects'):
@@ -195,7 +202,7 @@ def check(args, work, capture_dir):
                         capture + '.source.dat', environment=environment)
                     source_carries[108 + body['cleanup_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
         print(f'{name}: original contracts and actual runtime captures pass', flush=True)
-    print('163 full bodies, 180 recorder input parents and 60 intervening keyboard parents match original RAM/display and defined returns')
+    print('175 full bodies, 192 recorder input parents and 72 intervening keyboard parents match original RAM/display and defined returns')
 
 
 if __name__ == '__main__':

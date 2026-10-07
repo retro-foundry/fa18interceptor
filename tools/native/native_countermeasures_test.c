@@ -83,7 +83,8 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
         0x4c,0x4d,0x4e,0x4f,0xcc,0xce,0x38,0xb8,0x0c,0x8c,0x25,0x24,
         0x3e,0x1e,0x2d,0x2f,0x3d,0x1d,0x3f,0x1f,0x3c,0x1b,0x1a,0x9a,
         0x13,0x13,0x13,0x44,0x44,0x44,0x44,0x14,0x0d,0x20,0x21,0x26,
-        0x40,0xc0,0x40,0x40,0x23,0x23,0x33,0x33,0x12,0x12,0x12,0x23};
+        0x40,0xc0,0x40,0x40,0x23,0x23,0x33,0x33,0x12,0x12,0x12,0x23,
+        0x01,0x02,0x09,0x03,0x50,0x59,0x50,0x59,0x50,0x59,0x50,0x59};
     const uint8_t raw=keys[variant];
     wr_u8(RECORDER_MODE,0);wr_u16(RECORD_WORD_A,0);wr_u16(RECORD_WORD_B,0);
     wr_u16(PENDING_COMMAND_WORD_A,0);wr_u16(PENDING_COMMAND_WORD_B,0);
@@ -110,7 +111,7 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
         wr_u8(CONTROL_RECORDS+0x62,0x11);
         wr_u8(CONTROL_RECORDS+0x63,(uint8_t[]){0x09,0x0b,0x0d,0x80,0,0x30,0x10,0x19,0x10,0x10,0x10,0x10}[variant-36]);
     }
-    if(variant>=48) {
+    if(variant>=48 && variant<60) {
         wr_u8(MODE_SELECT,variant==59?6:1);wr_u8(COMMAND_BLOCK_FLAGS,0);
         wr_u8(CONTROL_RECORDS+0x63,variant==50?0x10:0x30);
         wr_u8(COMMAND_WEAPON_PAUSE,0);
@@ -124,6 +125,16 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
             wr_u8(CONTROL_RECORDS+0x201,rd_u8(CONTROL_RECORDS+0x201)&~0x40);
         }
     }
+    if(variant>=60) {
+        wr_u8(MODE_SELECT,1);wr_u8(COMMAND_BLOCK_FLAGS,0);
+        wr_u8(COMMAND_ENABLE_GATE,variant==60 || variant==61);
+        wr_u8(COMMAND_MODE_GATE,variant==62?0:1);
+        wr_u8(COCKPIT_FLAGS,(rd_u8(COCKPIT_FLAGS)&~8)|(variant==63?8:0));
+        wr_u8(PLAYER_READY,variant==64 || variant==67?0:1);
+        wr_u8(FUNCTION_KEY_LEVEL,variant==66?12:0);wr_u8(CONTROL_RECORDS+0x2b,0);
+        wr_u8(ORIGIN_GATE_A,variant==68 || variant==69);
+        if(variant>=70) wr_u8(RECORDER_MODE,0xfd);
+    }
     snprintf(fixture->path,sizeof fixture->path,"%s.interposed.%u",fixture->prefix,variant);
     NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
         .iteration=fixture->clock.iteration,.count=1};
@@ -132,7 +143,7 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
     native_frame_capture(game,NATIVE_FRAME_BODY_END,0,&capture);
     printf("{\"interposed_input\":%u,\"raw\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
         variant,raw,game->completed_input_return.owner,game->completed_input_return.value);
-    if(variant>=36) {
+    if(variant>=36 && variant<60) {
         const unsigned owners[]={13,13,13,13,13,13,13,11,11,11,11,11,
             13,11,13,11,13,11,13,11,11,11,12,11};
         const uint8_t values[]={13,9,11,0x30,0x30,0x20,1,0,0,0,0,0,
@@ -142,6 +153,18 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
             fprintf(stderr,"Interposed action %u returned owner %u value %u\n",variant,
                 game->completed_input_return.owner,game->completed_input_return.value);return 0;
         }
+    }
+    if(variant>=60) {
+        const unsigned owners[]={15,15,15,15,15,15,15,15,11,11,15,15};
+        const uint8_t values[]={17,16,9,3,12,192,1,121,0,0,187,187};
+        if(game->completed_input_return.owner!=owners[variant-60] ||
+           game->completed_input_return.value!=values[variant-60]) {
+            fprintf(stderr,"Indexed action %u returned owner %u value %u\n",variant,
+                game->completed_input_return.owner,game->completed_input_return.value);return 0;
+        }
+        /* Next controlled recorder parent resumes ordinary Free Flight
+         * readiness; it retains the actual command output just captured. */
+        wr_u8(PLAYER_READY,1);
     }
     return capture.complete && game->completed_input_return.owner!=NATIVE_INPUT_RETURN_UNKNOWN;
 }
@@ -334,6 +357,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint1
 }
 int main(int argc,char **argv) {
     if(argc!=4) return 1;
+    setvbuf(stdout,NULL,_IONBF,0);
     NativeFrontend *game=calloc(1,sizeof *game);char error[256];int result=1;
     CountermeasureFixture fixture={.prefix=argv[3]};
     if(!game) return 1;
@@ -486,7 +510,7 @@ int main(int argc,char **argv) {
     }
     fixture.grid_sampling=0;
     fixture.cleanup_sampling=1;
-    for(unsigned i=0;i<72;++i) {
+    for(unsigned i=0;i<84;++i) {
         fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
         wr_u8(RECORDER_MODE,0);
         unsigned limit=game->ticks+100;

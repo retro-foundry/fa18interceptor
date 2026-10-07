@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Latest connected indexed outputs (2026-10-07): actual number/index selection,
+throttle level/accumulator and recorder-$FD relative change now compose later
+depleted input. The extended run also connects source release/model/vertex
+paths and corrects negative throttle-request ordering and its recorder gate.
+175 full bodies, 192 recorder parents and 72 intervening keyboard parents
+match original compared RAM/drawing and defined returns; all 10,688 selected
+command parents match RAM/returns. Nine affected checks and native/reference
+builds pass. See
+`analysis/native_indexed_input_return.md`. Context/reset/HUD contracts and
+whole-game mission/audio/state/performance acceptance remain open.
+
 Latest connected fire/countermeasure outputs (2026-10-07): actual fire
 selection, saved flare/chaff event and nested eject queue index now compose
 subsequent depleted input; modified/depleted gates preserve prior output.

@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected indexed outputs (2026-10-07): number/index selections,
+throttle outputs and recorder-$FD relative change now reach later depleted
+input. Extended frames also connect source release/model/vertex paths and fix
+negative throttle-request ordering and the recorder-mode gate. 175 full bodies,
+192 recorder parents and 72 keyboard parents match original compared RAM/drawing
+and returns; all 10,688 selected command parents match. Nine affected checks and
+native/reference builds pass. See `analysis/native_indexed_input_return.md`. Context/reset/HUD contracts
+and whole-game mission/audio/state/performance acceptance remain open.
+
 Latest connected fire/countermeasure outputs (2026-10-07): fire selection,
 saved stock event and actual nested eject queue index now reach subsequent
 depleted input; modified/depleted gates preserve prior output. 163 full bodies,

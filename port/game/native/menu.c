@@ -211,10 +211,9 @@ static int16_t carried_selection(void *context) {
         }
         fputs("native input missing depleted recorder countermeasure carry\n",stderr);abort();
     }
-    /* C1BCEE's recorder $FD arm changes only the inherited selection,
-     * then C1BEDA unconditionally publishes the original event. That
-     * selection is dead to this action's RAM and queue behavior. Other
-     * indexed arms construct their own selection before using it. */
+    /* C1BCEE's inherited selection is dead to this action's RAM/queue
+     * behavior. Its actual relative change is exposed separately and
+     * composed with prior output below; other arms assign their selection. */
     return 0;
 }
 static uint32_t view_child(void *context,enum ViewCommandChild child) {
@@ -257,6 +256,19 @@ static NativeInputReturn flight_return(FlightActionOutput output) {
     }
     return (NativeInputReturn){value,NATIVE_INPUT_RETURN_FLIGHT_ACTION};
 }
+static NativeInputReturn indexed_return(IndexedActionOutput output,NativeInputReturn prior) {
+    uint8_t value;
+    switch(output.kind) {
+    case INDEXED_ACTION_SELECTION: value=(uint8_t)output.selection;break;
+    case INDEXED_ACTION_THROTTLE_LEVEL: value=output.throttle_level;break;
+    case INDEXED_ACTION_THROTTLE_ACCUMULATOR: value=(uint8_t)output.throttle_accumulator;break;
+    case INDEXED_ACTION_RECORDER_LEVEL_CHANGE:
+        if(prior.owner==NATIVE_INPUT_RETURN_UNKNOWN) return prior;
+        value=(uint8_t)(prior.value+(uint16_t)output.recorder_level_change);break;
+    default: abort();
+    }
+    return (NativeInputReturn){value,NATIVE_INPUT_RETURN_INDEXED_ACTION};
+}
 static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
     NativeCommand command={.game=game};
     const CommandSelectionHooks selection={selection_value,&command};
@@ -276,7 +288,13 @@ static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
         game->completed_input_return=view_return(result.view_output);
     } else if(result.flight_output.kind!=FLIGHT_ACTION_UNRESOLVED && result.flight_output.kind!=FLIGHT_ACTION_PRESERVE) {
         game->completed_input_return=flight_return(result.flight_output);
+    } else if(result.indexed_output.kind!=INDEXED_ACTION_UNRESOLVED && result.indexed_output.kind!=INDEXED_ACTION_PRESERVE) {
+        const NativeInputReturn prior=command.selection_known
+            ?(NativeInputReturn){(uint8_t)command.flight.carried_event,NATIVE_INPUT_RETURN_COMMAND_SELECTION}
+            :game->completed_input_return;
+        game->completed_input_return=indexed_return(result.indexed_output,prior);
     } else if(result.flight_output.kind==FLIGHT_ACTION_PRESERVE || result.view_output.kind==VIEW_ACTION_PRESERVE ||
+              result.indexed_output.kind==INDEXED_ACTION_PRESERVE ||
               result.action==COMMAND_PENDING_EMPTY || result.action==COMMAND_COUNTER_WAIT ||
               result.action==COMMAND_FINISH_EVENT || result.action==COMMAND_QUEUE_ONLY) {
         /* C1AD72/C1AD70/C1C2B6 and queue-only skips assign no action output.

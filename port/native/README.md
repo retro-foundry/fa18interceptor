@@ -1,5 +1,14 @@
 # Native port runner
 
+Indexed selection, function-key throttle outputs and recorder-$FD relative
+changes now compose later depleted input. Expanded frames also connect source
+release/model/vertex paths and fix negative throttle-request ordering and its
+recorder gate. 175 full bodies, 192 recorder parents and 72 keyboard parents
+match original compared RAM/drawing and defined returns. All 10,688 selected
+command parents match RAM/returns; nine affected checks and native/reference builds pass. See
+`../../analysis/native_indexed_input_return.md`. Context/reset/HUD contracts and
+whole-game mission/audio/state/performance acceptance remain open.
+
 Fire selection, successful countermeasure events and nested eject publication
 now expose their actual outputs to subsequent depleted recorder input.
 Depleted/modified gates preserve prior output. 163 full bodies, 180 recorder

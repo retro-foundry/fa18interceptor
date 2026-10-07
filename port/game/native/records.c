@@ -37,6 +37,12 @@ static FlightActionState action_sound_child(void *context,enum FlightActionChild
 static FlightActionState action_child(void *context,enum FlightActionChild child,FlightActionState w) {
     (void)context;
     switch(child) {
+    case FA_RELEASE_ACTION: {
+        /* C230E8 -> C23716: release copies the selected record and applies
+         * the original action descriptor; the parent assigns its own result. */
+        const FlightActionHooks hooks={.consume_values=action_child};
+        initialise_flight_record_release(w,&hooks);break;
+    }
     case FA_MANOEUVRE_ACTION: {
         const FlightActionHooks hooks={.consume_values=action_child};
         initialise_flight_record_manoeuvre(w,&hooks);break;

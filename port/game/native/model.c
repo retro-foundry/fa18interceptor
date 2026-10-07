@@ -320,6 +320,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     }
     case 0x0fc: derive_shown_parallelogram_vertices(); return 0;
     case 0x100: derive_shown_midpoint_vertices(); return 0;
+    case 0x104: derive_shown_translated_vertices(); return 0;
     case 0x108: *stream=skip_for_type_3_to_6(*stream); return 0;
     case 0x10c: return test_stream_face_accumulation(stream,frame);
     case 0x110: *stream=skip_stream_records(*stream); return 0;
@@ -598,6 +599,19 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
             lifetime<=2?0xc3c70eu:lifetime<5?0xc3c700u:0xc3c6e0u;
         wr_u32(CONTROL_STREAM,stream);wr_u32(0xc45a3au,stream);
         return aircraft_descriptor(0xc3c6e0u,0x4200);
+    }
+    if(call->routine==0xc22bba) {
+        /* C22BBA-C22C6C: the released record's lifetime and action nibble
+         * choose the original disk-backed stream before C22AFE/C1ED4C. */
+        const gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+        const int16_t lifetime=rd_s16(record+0x4c);
+        gaddr stream;
+        if(lifetime>0) {
+            wr_u8(record+0x7c,rd_u8(record+0x7c)|1);
+            stream=lifetime>=5?0xc3c986u:lifetime<=2?0xc3c9b4u:0xc3c9a6u;
+        } else stream=lifetime==0 && (rd_u8(record+0x7c)&15)?0xc3c982u:0xc3c9c2u;
+        wr_u32(CONTROL_STREAM,stream);wr_u32(0xc45a3au,stream);
+        return aircraft_descriptor(0xc3c986u,0x4200);
     }
     if(call->routine==0xc22ac0) {
         gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
