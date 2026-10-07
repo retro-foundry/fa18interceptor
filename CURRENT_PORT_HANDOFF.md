@@ -1,5 +1,18 @@
 # Current playable port handoff
 
+Latest connected batch: normal mode-8 Shift-E runs through the source ejection
+flag/command publication, programmed sound, action record clone/orientation,
+lifetime-selected model and failure/menu return (739 scene/HUD frames).
+46 actual input/stage intervals and 43 sampled bodies match compared original
+RAM/display with zero differences and unchanged exclusions. C1C214, C23186,
+C236AA's reached view/matrix children, C22B1A and draw commands $E0/$100 are
+connected. 64 additional complete input parents and 128 additional derived
+geometry parents pass, including wrapping/overlapping banks. This is the
+demonstrated ejection/failure route. All 18 affected native integration tests,
+three default setup-model comparisons, reference build and 12 host/loading
+checks pass. Other mission outcomes, combat and whole
+game acceptance remain open. See `analysis/native_ejection_milestone.md`.
+
 Latest connected batch: mission-list F6 runs source mode 8 with an eligible
 saved pilot (2,458 scene/HUD frames). The disk's locked pilot still rejects
 F6. The fixture changes only availability byte $19 and reloads through the

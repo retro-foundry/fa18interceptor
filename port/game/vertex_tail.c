@@ -99,6 +99,33 @@ void derive_shown_parallelogram_vertices(void) {
     parallelogram_vertices(CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD)+0xa4));
     parallelogram_vertices(WORKSPACES);
 }
+static void reflected_vertices(gaddr workspace) {
+    for(unsigned group=0;group<2;++group) {
+        const Vertex origin=get(workspace,group?0x12:0x18);
+        for(unsigned i=0;i<4;++i)
+            put(workspace,0x5a+24*(int)group+6*(int)i,
+                sub(origin,sub(get(workspace,0x2a+24*(int)group+6*(int)i),origin)));
+    }
+}
+void derive_shown_reflected_vertices(void) {
+    reflected_vertices(CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD)+0xa4));
+    reflected_vertices(WORKSPACES);
+}
+static void midpoint_vertices(gaddr workspace) {
+    Vertex p=get(workspace,0),q=add(get(workspace,6),sub(get(workspace,12),p));
+    put(workspace,0x8a,q);
+    q=midpoint(q,p);put(workspace,0x90,q);
+    Vertex displacement=half(sub(q,p));
+    p=sub(p,displacement);put(workspace,0x96,p);
+    Vertex r=get(workspace,6),halfway=half(sub(q,r));
+    r=sub(r,halfway);put(workspace,0xa2,r);
+    put(workspace,0xa8,sub(r,displacement));
+    put(workspace,0x9c,sub(get(workspace,0x96),halfway));
+}
+void derive_shown_midpoint_vertices(void) {
+    midpoint_vertices(CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD)+0xa4));
+    midpoint_vertices(WORKSPACES);
+}
 gaddr derive_edge_vertices(gaddr stream) {
     int16_t a = rd_s16(stream), b = rd_s16(stream + 2), w = rd_s16(stream + 4);
     gaddr bank = WORKSPACES, target = WORKSPACES + (gaddr)(int32_t)w;

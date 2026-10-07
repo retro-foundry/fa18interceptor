@@ -83,8 +83,8 @@ int main(int argc,char **argv) {
         return differences!=0;
     }
     unsigned total_events=0,drain_cases=0;
-    unsigned countermeasure_cases=0,fd_cases=0;
-    for(unsigned variant=0;variant<848;++variant) {
+    unsigned countermeasure_cases=0,fd_cases=0,ejection_cases=0;
+    for(unsigned variant=0;variant<912;++variant) {
         static const uint8_t keys[]={0x0c,0x8c,0x4c,0xcc,0x4d,0xcd,0x4e,0xce,0x4f,0xcf,
             0x40,0xc0,0x24,0x20,0x13,0x44,0x37,0x38,0x39,0xb8,0xb9,0x50,0x55,0x59};
         static const uint16_t joy[]={0,1,2,0x100,0x200,0x301,0x102,0x303};
@@ -127,13 +127,21 @@ int main(int argc,char **argv) {
                 wr_u8(CONTROL_RECORDS+0x601,(variant&8)?0x40:0);
                 wr_u8(SOUND_FLAGS-1,(uint8_t)(variant&16?1:0));
             }
-        } else {
+        } else if(variant<848) {
             ++fd_cases;
             const unsigned settings=(variant-688)/10;
             game->input_keys[0]=(uint8_t)(0x50+(variant-688)%10);game->input_count=1;
             wr_u8(RECORDER_MODE,0xfd);wr_u8(MODE_SELECT,(settings&1)?1:0);
             wr_u8(KEY_STATE+1,(settings&2)?1:0);wr_u8(KEY_STATE,(settings&4)?1:0);
             wr_u8(KEY_TAKEN,(settings&8)?1:0);
+        } else {
+            ++ejection_cases;
+            const unsigned settings=variant-848;
+            game->input_keys[0]=0x12;game->input_count=1;
+            wr_u8(KEY_STATE,(uint8_t[]){0,1,2,0xff}[settings&3]);
+            wr_u8(ORIGIN_GATE_A,(settings&4)?1:0);
+            wr_u8(BAR_E_FLAG,(uint8_t[]){0,1,0x80,0xff}[(settings>>3)&3]);
+            wr_u8(KEY_TAKEN,(settings&32)?1:0);
         }
         memcpy(source,game,sizeof *source);memcpy(before,m,sizeof *m);
         if(!original_input(source)) return 1;
@@ -149,6 +157,6 @@ int main(int argc,char **argv) {
             }
         }
     }
-    printf("848 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases)\n",total_events,drain_cases,countermeasure_cases,fd_cases);
+    printf("912 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases, %u ejection cases)\n",total_events,drain_cases,countermeasure_cases,fd_cases,ejection_cases);
     free(source);free(game);free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

@@ -498,3 +498,15 @@ python tools/native/check_mode_two.py --mode 8 --out build/native-flight/mission
 ```
 
 See [`../../analysis/native_mode_eight_milestone.md`](../../analysis/native_mode_eight_milestone.md).
+
+Normal mode-8 Shift-E now follows the source ejection action into failure/menu
+return. The native route reaches 739 scene/HUD frames; 46 actual input/stage
+intervals and 43 sampled bodies match compared original RAM/display. Source
+flag/queue, programmed sound, clone/orientation and lifetime model/vertex
+construction are connected. Other outcomes and combat remain unfinished.
+
+```powershell
+python tools/native/check_mode_two.py --mode 8 --eject --out build/native-flight/ejection/original-check
+```
+
+See [`../../analysis/native_ejection_milestone.md`](../../analysis/native_ejection_milestone.md).

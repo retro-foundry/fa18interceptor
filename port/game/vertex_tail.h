@@ -23,6 +23,12 @@ gaddr derive_edge_vertices(gaddr stream);
 /* C21FA4: five parallelogram completions at +$60..+$78 in the shown
  * record's +$A4 bank and WORKSPACES. No stream operand is consumed. */
 void derive_shown_parallelogram_vertices(void);
+/* C0D524: reflect four points about +$18, then four about +$12,
+ * writing +$5A..+$84 in the shown record and transformed workspace. */
+void derive_shown_reflected_vertices(void);
+/* C0D61C: six points at +$8A..+$A8 from the first three vertices,
+ * using word-wrapped midpoint/displacement arithmetic in both banks. */
+void derive_shown_midpoint_vertices(void);
 /* C21B38: the compact hull's derived points, both in the shown record and
  * the transformed workspace selected by the operand. */
 gaddr derive_compact_shown_vertices(gaddr stream);

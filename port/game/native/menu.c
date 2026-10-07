@@ -5,6 +5,7 @@
 #include "../globals.h"
 #include "../command_selection.h"
 #include "../command_publication.h"
+#include "../context_publication.h"
 #include "../context_commands.h"
 #include "../audio.h"
 #include "../indexed_commands.h"
@@ -61,6 +62,11 @@ static FlightCommandResult flight_key_child(void *context,enum FlightCommandChil
     const NativeFlightCommand *command=context;
     const CommandRequest *request=&command->request;
     switch(child) {
+    case FLIGHT_EJECT_TOGGLE: {
+        const ContextPublicationHooks hooks={0};
+        const uint8_t event=publish_context_toggle_command((uint8_t)request->raw_event,BAR_E_FLAG,&hooks);
+        return (FlightCommandResult){(request->raw_event&0xffffff00u)|event,command->carried_event};
+    }
     case FLIGHT_Y_UP: set_stick_y(STICK_UP);break;
     case FLIGHT_Y_DOWN: set_stick_y(STICK_DOWN);break;
     case FLIGHT_Y_RELEASE: set_stick_y(0);break;

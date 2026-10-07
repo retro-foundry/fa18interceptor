@@ -23,8 +23,8 @@ static void word(const ContextPublicationHooks *h,gaddr address,uint16_t value) 
 void publish_context_detail_command(uint8_t event,const ContextPublicationHooks *h) {
     set_context_view_detail(4,h->view); publish_command_event(event,h->publication);
 }
-void publish_context_toggle_command(uint8_t event,gaddr flag,const ContextPublicationHooks *h) {
-    byte(h,flag,test(h,flag)?0:1); publish_command_event(event,h->publication);
+uint8_t publish_context_toggle_command(uint8_t event,gaddr flag,const ContextPublicationHooks *h) {
+    byte(h,flag,test(h,flag)?0:1); return publish_command_event(event,h->publication);
 }
 void publish_context_record_command(uint32_t event,int16_t index,const ContextPublicationHooks *h) {
     ContextPublicationResult child;

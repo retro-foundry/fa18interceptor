@@ -532,32 +532,35 @@ static int scene_children(void) {
     }
     free(before);free(expected);puts("Grid, setup control and complete followup parents match non-stack RAM");return 1;
 }
-static int parallelogram_tails(void) {
+static int derived_tails(void) {
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x100000);
     if(!saved || !before || !expected) return 0;
     memcpy(saved,fa18_machine,sizeof *saved);
     static const uint16_t indices[]={0,0x200,0x1c00,0x7fff,0x8000,0xff5c,0x2168,0x2162};
-    for(unsigned test=0;test<64;++test) {
+    static const gaddr routines[]={0xc21fa4u,0xc0d524u,0xc0d61cu};
+    for(unsigned test=0;test<192;++test) {
         memcpy(fa18_machine,saved,sizeof *saved);
         uint16_t index=indices[test%8];wr_u16(SCRIPT_RECORD,index);
         gaddr banks[]={CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(index+0xa4u),WORKSPACES};
         for(unsigned bank=0;bank<2;++bank) for(unsigned word=0;word<64;++word)
             wr_u16(banks[bank]+2*word,(uint16_t)(test*8191u+bank*32767u+word*10923u));
         memcpy(before,fa18_machine,sizeof *before);
-        derive_shown_parallelogram_vertices();
+        if(test<64) derive_shown_parallelogram_vertices();
+        else if(test<128) derive_shown_reflected_vertices();
+        else derive_shown_midpoint_vertices();
         memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
         memcpy(fa18_machine,before,sizeof *before);
-        if(!original(0xc21fa4u) || REG_D[0]!=0) return 0;
+        if(!original(routines[test/64]) || REG_D[0]!=0) return 0;
         for(unsigned i=0;i<0xff000;++i) {
             uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
             if(actual!=expected[i]) {
-                fprintf(stderr,"parallelogram tail case %u RAM %06X differs\n",test,i);return 0;
+                fprintf(stderr,"derived tail case %u RAM %06X differs\n",test,i);return 0;
             }
         }
     }
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
-    puts("64 complete C21FA4 parallelogram-tail cases match result and all non-stack RAM/display");return 1;
+    puts("192 complete C21FA4/C0D524/C0D61C derived-tail cases match result and all non-stack RAM/display");return 1;
 }
 static int hull_tails(void) {
     FA18Machine *before=malloc(sizeof *before),*saved=malloc(sizeof *saved);
@@ -584,16 +587,18 @@ int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
-    uint8_t *data=argc==2?file_bytes(argv[1],&nd):NULL;
+    const int tails_only=argc==3 && !strcmp(argv[2],"--tails-only");
+    uint8_t *data=(argc==2 || tails_only)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+    if(tails_only) return !derived_tails();
     if(!workspace_script_cases() || !stream_circle_cases()) return 1;
     if(!full_selection_cases()) return 1;
     if(!carrier_commands()) return 1;
-    if(!hull_tails() || !parallelogram_tails()) return 1;
+    if(!hull_tails() || !derived_tails()) return 1;
     if(!circles()) return 1;
     const ScenePlacementHooks hooks={consume,NULL,NULL};
     visit_scene_placements(0,&hooks);visit_scene_placements(1,&hooks);

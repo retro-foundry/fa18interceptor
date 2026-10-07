@@ -430,6 +430,17 @@ See `analysis/native_mode_eight_milestone.md`; run the shared checker with
 Every numbered mission entry now has a connected sampled route. Complete mission
 outcomes, reached combat/weapon children and other input/state variants remain
 unfinished; startup gates do not measure whole-game completeness.
+Normal mode-8 Shift-E now reaches source ejection/failure and returns to the
+menu after 739 scene/HUD frames. 46 actual input/stage intervals and 43 sampled
+bodies match compared original RAM/display. The reached flag publication,
+programmed sound, action-record clone/view/matrix, C22B1A lifetime stream and
+draw commands $E0/$100 are connected. 64 additional input parents and 128
+additional geometry parents pass. No new comparison exclusions were added.
+18 affected native integration tests, three default setup-model comparisons,
+reference build and 12 host/loading checks pass.
+See `analysis/native_ejection_milestone.md`; run the shared checker with
+`--mode 8 --eject --out build/native-flight/ejection/original-check`.
+Other input/state variants, successful outcomes and combat remain unfinished.
 
 Whole gameplay sequences under the revised timing scope, complete
 record/flag/counter state and post-result behavior remain unverified. Exact

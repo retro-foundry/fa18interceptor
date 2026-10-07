@@ -18,12 +18,16 @@ def main():
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mode-check')
     parser.add_argument('--mode', type=int, choices=(2,3,4,5,6,7,8,125), default=2)
     parser.add_argument('--aircraft', type=int, choices=(1,2), default=1)
+    parser.add_argument('--eject', action='store_true', help='Exercise Shift-E and mode-8 menu return')
     args = parser.parse_args()
+    if args.eject and args.mode!=8:
+        parser.error('--eject requires --mode 8')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     prefix = work / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
-                             str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft)], cwd=ROOT,
+                             str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
+                             *(['eject'] if args.eject else [])], cwd=ROOT,
                             capture_output=True, text=True, timeout=25)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
@@ -31,6 +35,8 @@ def main():
     entries = [item for item in exports if 'entry' in item]
     bodies = [item for item in exports if 'capture' in item]
     assert len(entries) >= {2:32,3:43,4:39,5:39,6:38,7:42,8:38,125:55}[args.mode] and len(bodies) >= {2:21,3:29,4:27,5:27,6:27,7:29,8:27,125:35}[args.mode], exports
+    if args.eject:
+        assert len(entries)>=46 and len(bodies)>=43, exports
     required={'C10DAE'}
     if args.mode==2:
         required|={'C10272','C1029E','C102D8','C10302','C10362','C0F920'}
@@ -44,6 +50,8 @@ def main():
             required|={'C10AB2','C10AE6'}
         if args.mode==7:
             required|={'C11078','C110A4'}
+        if args.eject:
+            required|={'C1104C','C118FC','C11934','C0F920'}
     assert required <= {
         item['stage'] for item in bodies}, bodies
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
@@ -74,6 +82,8 @@ def main():
                     raise RuntimeError(comparison.stderr or comparison.stdout)
     outcome={2:'returns to menu',3:f'runs over 768 scene frames with aircraft {args.aircraft}',4:'runs over 2000 scene frames',5:'runs over 2000 scene frames',6:'runs over 384 scene frames',7:'runs over 2000 scene frames with an unlocked saved pilot',8:'runs over 2000 scene frames with an unlocked saved pilot',
              125:'runs over 2,000 scene frames, including Escape/restart'}[args.mode]
+    if args.eject:
+        outcome='runs Shift-E through sound, record clone, lifetime rendering and menu return'
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')
 

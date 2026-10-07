@@ -5,6 +5,7 @@
 #include "globals.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
     NativeFrameCapture capture;
@@ -18,6 +19,7 @@ typedef struct {
     unsigned entry_count,entry_exports;
     unsigned stage_count,captures,streams;
     unsigned mode,samples;
+    unsigned eject,ejection;
     int entered,returned;
 } ModeRun;
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
@@ -56,6 +58,17 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned stream=rd_u8(0xc45799u);
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
+        if(run->eject && rd_u8(BAR_E_FLAG)) {
+            run->ejection|=1;
+            if(!rd_u16(CONTEXT_RECORD)) sample|=8; /* Sound and the first clone body. */
+            else {
+                run->ejection|=2;
+                const gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(CONTEXT_RECORD);
+                const int16_t lifetime=rd_s16(record+0x4c);
+                const unsigned bit=4u<<(lifetime<0?0:lifetime>=5?6:(unsigned)lifetime+1);
+                if(!(run->ejection&bit)) {run->ejection|=bit;sample|=8;}
+            }
+        }
         if(run->mode==125 || run->mode==6 || run->mode==3 || run->mode==4 || run->mode==5 || run->mode==7 || run->mode==8) {
             const unsigned frames[]={128,run->mode==6?256u:512u,
                 run->mode==6?384u:run->mode==3?768u:run->mode==125?1000u:2000u};
@@ -85,10 +98,14 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     }
 }
 int main(int argc,char **argv) {
-    if(argc<4 || argc>6) return 1;
+    if(argc<4 || argc>7) return 1;
     NativeFrontend *game=calloc(1,sizeof *game);char error[256];int result=1;
     ModeRun run={.prefix=argv[3],.mode=argc>=5?(unsigned)atoi(argv[4]):2};
-    unsigned aircraft=argc==6?(unsigned)atoi(argv[5]):1;
+    unsigned aircraft=argc>=6?(unsigned)atoi(argv[5]):1;
+    if(argc==7) {
+        if(strcmp(argv[6],"eject") || run.mode!=8) return 1;
+        run.eject=1;
+    }
     if((run.mode!=2 && run.mode!=3 && run.mode!=4 && run.mode!=5 && run.mode!=6 && run.mode!=7 && run.mode!=8 && run.mode!=125) ||
        aircraft<1 || aircraft>2) return 1;
     if(!game) return 1;
@@ -114,6 +131,12 @@ int main(int argc,char **argv) {
     const int *input_keys=mission?mission_keys:keys;
     unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:4u;
     while(game->ticks<((mission || run.mode==125)?18000u:10000u)) {
+        if(run.eject) {
+            if(game->ticks==12000) native_frontend_event(game,304,1);
+            if(game->ticks==12002) native_frontend_event(game,'E',1);
+            if(game->ticks==12004) native_frontend_event(game,'E',0);
+            if(game->ticks==12006) native_frontend_event(game,304,0);
+        }
         for(unsigned i=0;i<input_count;++i) {
             if(game->ticks==input_times[i]) native_frontend_event(game,input_keys[i],1);
             if(game->ticks==input_times[i]+2) native_frontend_event(game,input_keys[i],0);
@@ -131,7 +154,9 @@ int main(int argc,char **argv) {
        (run.mode==3 && (game->scene_frames<768 || run.samples!=7 ||
         rd_u8(RECORDER_MODE)!=0 || rd_u8(0xc45849)!=0x12u-aircraft ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
-       ((run.mode==4 || run.mode==5 || run.mode==7 || run.mode==8) && (game->scene_frames<2000 || run.samples!=7 ||
+       (run.eject && (!run.returned || run.ejection!=0x1ff || game->scene_frames<512 ||
+        rd_u8(MODE_SELECT)!=0 || rd_u32(STAGE_CALLBACK)!=0xc0fcb4)) ||
+       ((!run.eject && (run.mode==4 || run.mode==5 || run.mode==7 || run.mode==8)) && (game->scene_frames<2000 || run.samples!=7 ||
         rd_u8(RECORDER_MODE)!=0 || rd_u8(POSTFLIGHT_FAILURE_INPUT)!=0x11 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae))) {
         fprintf(stderr,"Mode %u failed: returned=%d captures=%u scene=%u postflight=%u\n",

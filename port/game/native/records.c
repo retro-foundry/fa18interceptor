@@ -25,9 +25,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static uint32_t action_view(uint32_t event,int16_t index);
+static FlightActionState action_sound_child(void *context,enum FlightActionChild child) {
+    (void)context;
+    if(child!=FA_SOUND_MESSAGE) abort();
+    int32_t arguments[9];
+    for(unsigned i=0;i<9;++i) arguments[i]=rd_s16(0xc23174u+2*i);
+    play_programmed_sound(arguments); /* C23186's MOVEM.W sign extends each argument. */
+    return (FlightActionState){0}; /* The enclosing selector returns its own zero. */
+}
 static FlightActionState action_child(void *context,enum FlightActionChild child,FlightActionState w) {
     (void)context;
     switch(child) {
+    case FA_MANOEUVRE_ACTION: {
+        const FlightActionHooks hooks={.consume_values=action_child};
+        initialise_flight_record_manoeuvre(w,&hooks);break;
+    }
+    case FA_ACTION_SOUND: {
+        const FlightActionHooks hooks={.consume=action_sound_child};
+        queue_flight_record_action_sound(&hooks);break;
+    }
+    case FA_REFRESH_ACTION_VIEW:
+        w.primary=action_view(w.primary,(int16_t)w.selector);break;
+    case FA_ACTION_ROTATION: {
+        int16_t angles[3];MatrixTransformAngleState state;
+        build_transform_product(w.coefficients,(uint16_t)w.primary,(uint16_t)w.detail,(uint16_t)w.y);
+        extract_transform_angles(angles,&state);
+        w.y=(uint32_t)(int32_t)angles[0];w.z=(uint32_t)(int32_t)angles[1];
+        w.product_a=(uint32_t)(int32_t)angles[2];break;
+    }
+    case FA_ACTION_MATRIX:
+        set_record_orientation(w.record,(uint16_t)w.y,(uint16_t)w.z,(uint16_t)w.product_a);break;
     case FA_MAGNITUDE_ALERT: play_context_tone_4((int16_t)w.primary);break; /* C3316E */
     case FA_BEGIN_STREAM: case FA_NEXT_STREAM: {
         const FlightActionHooks hooks={.consume_values=action_child};
@@ -183,6 +211,13 @@ static ContextPublicationResult record_publication_child(void *context,enum Cont
         view->event=(view->event&0xffffff00u)|publish_command_event((uint8_t)view->event,NULL);
     } else abort();
     return (ContextPublicationResult){view->event,rd_s16(VIEW_RECORD)};
+}
+static uint32_t action_view(uint32_t event,int16_t index) {
+    RecordView state={event};
+    const ViewCommandHooks view={record_view_child,NULL,&state};
+    const ContextPublicationHooks hooks={.view=&view,.consume=record_publication_child,.context=&state};
+    publish_context_record_command(state.event,index,&hooks);
+    return state.event;
 }
 static PostflightScheduleResult schedule_child(void *context,enum PostflightScheduleChild child,gaddr record) {
     (void)context; (void)record;

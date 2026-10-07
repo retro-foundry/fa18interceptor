@@ -296,6 +296,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x0d4: offset_block_copies(stream); return 0;
     case 0x0d8: *stream=skip_for_low_class(*stream); return 0;
     case 0x0dc: return draw_indexed_face_list(stream,frame);
+    case 0x0e0: derive_shown_reflected_vertices(); return 0;
     case 0x0e4: return draw_face_grid_plain(stream);
     case 0x0ec: case 0x0f0: case 0x0f4: *stream=derive_shown_vertices(*stream); return 0;
     case 0x0f8: {
@@ -305,6 +306,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
         return rd_u32(PROJECTED_PAIR)==0xffffffffu?-1:1;
     }
     case 0x0fc: derive_shown_parallelogram_vertices(); return 0;
+    case 0x100: derive_shown_midpoint_vertices(); return 0;
     case 0x108: *stream=skip_for_type_3_to_6(*stream); return 0;
     case 0x10c: return test_stream_face_accumulation(stream,frame);
     case 0x110: *stream=skip_stream_records(*stream); return 0;
@@ -569,6 +571,16 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
     if(game) ++game->model_calls;
     if(call->routine==0xc1ee14 || call->routine==0xc1ed48) return native_model_draw(call->parameters,0x4200);
     if(call->routine==0xc1ed4c) return aircraft_descriptor(call->parameters,0x4200);
+    if(call->routine==0xc22b1a) {
+        /* C22B1A selects the action record's model by its source lifetime;
+         * every arm joins C22AFE/C1ED4C with A0 fixed at C3C6E0. */
+        const gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+        const int16_t lifetime=rd_s16(record+0x4c);
+        const gaddr stream=lifetime<0?0xc3c71cu:lifetime==0?0xc3c720u:
+            lifetime<=2?0xc3c70eu:lifetime<5?0xc3c700u:0xc3c6e0u;
+        wr_u32(CONTROL_STREAM,stream);wr_u32(0xc45a3au,stream);
+        return aircraft_descriptor(0xc3c6e0u,0x4200);
+    }
     if(call->routine==0xc22ac0) {
         gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
         uint16_t flags=rd_u16(record);
