@@ -1,4 +1,52 @@
-# Native port handoff — 2026-10-06
+# Native port handoff — 2026-10-07
+
+## Current restart summary — 2026-10-07
+
+The active playable runner is `fa18_native`. The latest validated code is
+`f4606f9c` on `coverage-accounting`, pushed to `origin/coverage-accounting`.
+The playable executable is `build/native/fa18_native.exe`; its SHA256 is
+`7c6e8a527a834d9cf78fbca2725392c03a41aebdd94214bb134de1fda2ea2c01`.
+Untracked `.vscode/` is user-owned and must remain untouched.
+
+Recent completed batches:
+
+- `f4606f9c`: normal-input radar shoot-down through impact, enemy expiry
+  accounting and inactivation. All 634 consecutive bodies in that interval
+  match original compared RAM/drawing; the full probe passes 57 input/stage
+  intervals and 802 bodies. This batch extends validation of existing gameplay.
+- `1c7a2481`: preserve the incoming placement result on inactive C22AC0 paths;
+  verify the actual radar hit, weapon consumption before reset and replenishment
+  afterward. Thirty-two focused inactive-record contracts pass.
+- `367139cf`: connect mode-two stream resets to the existing scene initializer;
+  verify all seven streams and wrap. Mode six naturally loses three aircraft,
+  exhausts resets, returns to the menu and relaunches Free Flight.
+
+Native Debug and Release builds pass. The latest Release run passes eight
+affected CTests: combat eight, radar hit, radar kill, three weapon probes,
+frontend and artifact cleanup. Evidence and executable hashes are in
+`analysis/native_radar_kill_milestone.md` and
+`analysis/figures/native_radar_kill_checkpoint.json`.
+The comparisons execute original instructions from native before-states;
+they do not establish an independent complete original mission replay.
+
+Next work is normal-input infrared and gun shoot-down acceptance, then complete
+successful mission sequences and independent full-flight comparisons. Trace
+the actual native caller and original rule before changing behavior; a missing
+proof alone does not establish a gameplay bug. Remaining callback contracts,
+typed game state, audio fidelity and visible-window/combat performance remain
+open. Preserve physics and source timers while allowing the user's native
+presentation cadence. The complete-port goal remains active.
+
+Builds and CTest automatically prune disposable artifacts against a 4 GiB
+budget; passing comparison RAM is deleted immediately. The latest cleanup left
+about 1.48 GiB of protected build files and small artifacts. Keep passing
+captures temporary and bounded; use `--keep-captures` only for deliberate
+debugging. Preserve sealed recordings and local media. Do not modify
+`scripts/check_native_build.py`, `scripts/native_frame_count.py` or
+`port/native_data_allowlist.txt`.
+
+This summary supersedes older checkout, validation and unfinished-work claims
+below. Dated entries retain the evidence available at their original milestone.
 
 ## Objective and user constraints
 
@@ -291,10 +339,9 @@ TODOs; current code and the newest evidence take precedence.
 
 ## Current checkout and architecture
 
-Branch: `coverage-accounting`. The latest implementation batch fixes the reported
-demo outside-view clipping and the coarse matrix clamp; use `git log -1`
-for its commit. Prior scene implementation:
-**`d5203c52`**. Preserve untracked `.vscode/`.
+Branch: `coverage-accounting`. Latest validated code: **`f4606f9c`**, pushed to
+origin. The playable executable and current acceptance scope are identified in
+the restart summary above. Preserve untracked `.vscode/`.
 No build/test process is pending and no user answer or approval is pending.
 
 The playable native runner is **`fa18_native`**:
@@ -627,7 +674,20 @@ python tools/native/check_frame_body.py --case active --case crash-flight --case
 python tools/native/check_frontend.py --runner build/native/fa18_native.exe --map build/native-cmake/native/fa18_native.map
 ```
 
-Latest validated batch also rebuilt MSVC `fa18_recomp` and passed twelve
+Latest validated batch: native Debug/Release builds and eight affected Release
+CTests pass. The radar-kill check compares the continuous impact-to-inactivation
+interval; each original oracle build must run sequentially.
+
+```powershell
+ctest --test-dir build/native-cmake -C Release --output-on-failure -R '^fa18_native_(combat_8|radar_hit|radar_kill|weapon_[123]|frontend|artifact_cleanup)$'
+python tools/native/check_mode_two.py --mode 8 --kill --out build/native-flight/radar-kill
+```
+
+Latest log: `build/native-flight/radar-kill-ctest.log`. No independent complete
+original mission replay was performed. Do not rerun this batch without a new
+change, failure or unresolved concern.
+
+The earlier scene-exit batch rebuilt MSVC `fa18_recomp` and passed twelve
 reference host/loader tests:
 
 ```powershell
@@ -636,28 +696,26 @@ ctest --test-dir build/recomp-cmake -C Release --output-on-failure -R '^(fa18_ho
 
 Logs: `build/native-flight/scene-exit-check.log`, `scene-exit-frame-check.log`,
 `scene-exit-frontend-check.log`, `scene-exit-reference-build.log`.
-No full original replay was repeated in the last two implementation batches.
+These scene-exit logs describe historical validation.
 
 ## Other unfinished scope
 
-`native/menu.c:carried_selection()` still aborts for a first depleted pending
-recorder countermeasure when KEY_TAKEN is zero: its inherited selection needs
-the real source caller contract. Keyboard flare/chaff, successful pending
-commands, claimed-queue depleted commands and $FD function keys are connected.
-Do not invent a carry for the
-remaining paths. Control-effect component/face children are now connected;
-complete component-hit/weapon-kill sequences remain unverified.
-Other command/dynamics/model dispatches retain explicit missing-child failures.
-Some menu modes only reach their banner; native flight currently enables modes
-1, 2, 3, 4, 5, 6, 7, 9, 125 and 127. Digit 3's mode 2
-now reaches its source prompts, record-4 playback, flight failure and menu
-return. 32 actual input/stage intervals and 21 sampled bodies match original
-instructions' compared RAM/display. The transition preserves the source
-saved-pointer sort choice; filled circles retain the original fixed address
-offsets. Further mode-2 streams, resets and complete outcomes remain open.
+Radar destruction through expiry accounting and inactivation is now verified.
+Infrared/gun shoot-downs, complete successful missions, independent complete
+flights, remaining callback contracts, typed state, audio fidelity and broader
+visible-window/combat performance remain open. Later input-return milestones
+supersede the old first-depleted-recorder limitation; do not restore guessed
+inherited results or treat earlier missing-child claims as current bugs without
+checking the connected caller.
+
+Native flight includes mode eight. Mode two now passes all seven streams, wrap
+and Escape return (30 input/stage intervals and 206 bodies); its source playback
+loop supersedes the earlier spontaneous-failure deadline. Mode six passes the
+natural three-loss/reset-exhaustion/menu-return/Free-Flight-relaunch scenario
+(86 intervals and 237 bodies). See `analysis/native_natural_outcomes.md`.
 Native page allocation now retains the original descending 320x200 plane
 layout, independently confirmed in retained original demo/carrier RAM.
-See `analysis/native_mode_two_milestone.md`;
+Earlier mode-two startup evidence is in `analysis/native_mode_two_milestone.md`;
 `python tools/native/check_mode_two.py` reuses the actual runtime objects.
 
 Digit 4's mode 125 now connects its source restore setup and reaches sustained

@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Restart checkpoint (2026-10-07): `coverage-accounting` has validated code
+`f4606f9c`, pushed to origin. The playable runner is
+`build/native/fa18_native.exe`, SHA256
+`7c6e8a527a834d9cf78fbca2725392c03a41aebdd94214bb134de1fda2ea2c01`.
+Read the current restart summary in `NEW_PORT_HANDOFF.md` for recent commits,
+validation commands, artifact retention and the next work. Infrared/gun
+shoot-downs and complete successful missions are next; independent complete
+flights, remaining contracts, typed state, audio fidelity and broader
+visible-window/combat performance remain open. The complete-port goal stays
+active. This checkpoint supersedes older progress and next-work claims below;
+dated entries preserve historical evidence. Preserve user-owned `.vscode/`.
+
 Latest normal-input radar shoot-down (2026-10-07): enemy aircraft ten is hit,
 starts its 15-tick expiry, advances the enemy-aircraft expiry counter and then
 becomes inactive. All 634 consecutive bodies from impact through inactivation
