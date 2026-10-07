@@ -33,7 +33,7 @@
 #define make_directory(path) mkdir(path,0755)
 #endif
 /* Keep the original immutable image hunk at $012988 outside display pages. */
-enum { PLANE_TABLE=0x1000,PLAYER_LOG=0x2000,PLANE_FIRST=0x34000,PLANE_SECOND=0x40000,PLANE_BYTES=40*256 };
+enum { PLANE_TABLE=0x1000,PLAYER_LOG=0x2000,PLANE_FIRST=0x34000,PLANE_SECOND=0x40000,PLANE_BYTES=40*200 };
 static int fail(char *error,size_t cap,const char *why) { if(cap) snprintf(error,cap,"Native startup: %s",why); return 0; }
 void native_frontend_clear_text(void) {
     memset(native_storage_range(PLANE_FIRST,4*PLANE_BYTES),0,4*PLANE_BYTES);
@@ -118,9 +118,11 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
         if(!valid) { fail(error,cap,"invalid saved 78-byte config"); goto done; }
     } else if(errno!=ENOENT) { fail(error,cap,"cannot read saved config"); goto done; }
     wr_u32(0xc1ab74u,PLAYER_LOG); wr_u32(0xc456b6u,PLANE_TABLE);
-    for(unsigned i=0;i<4;++i) wr_u32(PLANE_TABLE+4*i,PLANE_FIRST+i*PLANE_BYTES);
+    /* The original 320x200 bitmap stores table entries in descending
+     * address order. C2F1C0 relies on their fixed $1F40 spacing. */
+    for(unsigned i=0;i<4;++i) wr_u32(PLANE_TABLE+4*i,PLANE_FIRST+(3-i)*PLANE_BYTES);
     for(unsigned page=0;page<2;++page) for(unsigned i=0;i<4;++i)
-        wr_u32(PAGE0_PLANE_TABLE+16*page+4*i,(page?PLANE_SECOND:PLANE_FIRST)+i*PLANE_BYTES);
+        wr_u32(PAGE0_PLANE_TABLE+16*page+4*i,(page?PLANE_SECOND:PLANE_FIRST)+(3-i)*PLANE_BYTES);
     /* C2FD08 clears source work buffers of 2000 longs. Bank B's fifth
      * entry is POLY_MASK_PLANE, assigned below. The other work buffers
      * are separate from the two pages and recording buffers. */

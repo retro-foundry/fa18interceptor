@@ -335,7 +335,16 @@ remaining paths. Control-effect component/face children are now connected;
 complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
-1, 9, 127 and demonstration mode 3 with recorder mode 3.
+1, 2, 9, 127 and demonstration mode 3 with recorder mode 3. Digit 3's mode 2
+now reaches its source prompts, record-4 playback, flight failure and menu
+return. 32 actual input/stage intervals and 21 sampled bodies match original
+instructions' compared RAM/display. The transition preserves the source
+saved-pointer sort choice; filled circles retain the original fixed address
+offsets. Further mode-2 streams, resets and complete outcomes remain open.
+Native page allocation now retains the original descending 320x200 plane
+layout, independently confirmed in retained original demo/carrier RAM.
+See `analysis/native_mode_two_milestone.md`;
+`python tools/native/check_mode_two.py` reuses the actual runtime objects.
 
 Whole gameplay sequences under the revised timing scope, complete
 record/flag/counter state and post-result behavior remain unverified. Exact

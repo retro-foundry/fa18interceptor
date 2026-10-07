@@ -76,6 +76,9 @@ void native_display_read_pixels(NativeFrontend *game) {
     for(unsigned p=0;p<4;++p) planes[p]=rd_u32(table+4*p);
     for(unsigned y=0;y<256;++y) for(unsigned x=0;x<320;++x) {
         uint8_t index=0;
+        /* The source bitmap has 200 rows; the host PAL surface has 256.
+         * Rows below the bitmap must not read into the next stored plane. */
+        if(y>=200) { game->indices[y*320+x]=0;continue; }
         for(unsigned p=0;p<4;++p)
             if(rd_u8(planes[p]+y*40+x/8)&(0x80u>>(x&7)))
                 index|=(uint8_t)(1u<<(3-p));

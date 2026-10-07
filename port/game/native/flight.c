@@ -30,6 +30,7 @@
 #include "../post_input.h"
 #include "../scene_bootstrap.h"
 #include "../template_gates.h"
+#include "../selector_origin.h"
 #include "../control_records.h"
 #include "../view.h"
 #include "../input_device_callbacks.h"
@@ -42,13 +43,14 @@
 #include <stdlib.h>
 
 static void refresh_child(void *context,enum ContextRefreshChild child);
-static void refresh_native_context(void) {
-    /* C1C870 clears the inherited -$2C flag. A nonzero request batch sets
-     * it at C1C98A before sorting; an ordinary update sorts just one list.
-     * Capture the request before the template children consume its bits. */
-    const int sort_all=rd_u8(UPDATE_MASK)!=0;
+static void refresh_native_context_sort(int sort_all) {
     const ContextRefreshHooks hooks={refresh_child,NULL,(void *)&sort_all};
     refresh_context_packet(&hooks);
+}
+static void refresh_native_context(void) {
+    /* In C0EFD4's frame, C1C870 clears -$2C and a request batch sets it
+     * at C1C98A. Capture that choice before the children consume requests. */
+    refresh_native_context_sort(rd_u8(UPDATE_MASK)!=0);
 }
 static void storage_child(void *context,enum SceneBootstrapChild child) {
     int32_t *position=context;
@@ -105,9 +107,17 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     case MENU_DELAY_ROOT: case MENU_MODE_NINE_ROOT: initialize_scene_from_mode(NULL); break;
     case MENU_DELAY_VIEWPORT: clear_long_table(); break;
     case MENU_MODE_ONE_ROOT: set_menu_position_preset(&cold,0); break;
+    case MENU_MODE_TWO_ROOT: load_origin_candidate_preset(&(SelectorOriginHooks){0},ORIGIN_ALTERNATE_PRESET); break;
     case MENU_MODE_NINE_POSITION: reset_scene_context(); break; /* C0924A */
     case MENU_MODE_NINE_VIEW: finish_scene_setup(); break; /* C082B0 */
-    case MENU_REFRESH: refresh_native_context(); break;
+    case MENU_REFRESH:
+        /* C0FECE's two-byte local frame places the sort's -$2C test in
+         * its saved A4, byte 2. Mode two's C29490 leaves A4 at the preset
+         * end ($C29872), so C1E48C sorts all lists even without requests.
+         * The ordinary C0EFD4 frame keeps its request-derived local. */
+        if(rd_u8(MODE_SELECT)==2) refresh_native_context_sort(1);
+        else refresh_native_context();
+        break;
     default: fprintf(stderr,"native flight transition child unavailable: %u\n",(unsigned)child); abort();
     }
     return (MenuTransitionResult){0,0};
@@ -131,8 +141,11 @@ void native_flight_reset_aircraft(NativeFrontend *game) {
     refresh_menu_cockpit(&hooks);
 }
 static void return_child(void *context,enum MenuReturnChild child) {
-    (void)context;
-    if(child==MR_CHOOSE_RESET || child==MR_LEAVE_RESET) reset_message_sequence();
+    if(child==MR_CHOOSE_RESET || child==MR_LEAVE_RESET || child==MR_SELECT_RESET) reset_message_sequence();
+    else if(child==MR_SELECT_KEY) {
+        const MenuReturnHooks hooks={return_child,NULL,context};
+        leave_menu_return_on_key(&hooks);
+    }
     else { fprintf(stderr,"native menu-return child unavailable: %u\n",(unsigned)child);abort(); }
 }
 static int32_t result_message_child(void *context,enum PostflightMessageChild child) {
@@ -171,6 +184,14 @@ static void stage(void *context,gaddr routine) {
         }
     } else if(routine==0xc101fc) reset_menu_viewport_after_countdown(NULL);
     else if(routine==0xc10228) enter_menu_mode_four(NULL);
+    else if(routine==0xc10272) leave_menu_after_countdown(&(MenuColdHooks){0},0);
+    else if(routine==0xc1029e) poll_menu_viewport(NULL,0);
+    else if(routine==0xc102d8) begin_menu_context_ready(NULL);
+    else if(routine==0xc10302 || routine==0xc10362) {
+        const MenuReturnHooks hooks={return_child,NULL,game};
+        if(routine==0xc10302) select_menu_return_message(&hooks);
+        else leave_menu_return_on_key(&hooks);
+    }
     else if(routine==0xc10678) advance_menu_mode_messages(NULL);
     else if(routine==0xc1072e) queue_menu_message_four(NULL);
     else if(routine==0xc1075a) start_menu_outcome(&outcome);
@@ -234,7 +255,7 @@ static int finish_frame_clock(NativeFrontend *game) {
 }
 int native_flight_enabled(const NativeFrontend *game) {
     const uint8_t mode=rd_u8(MODE_SELECT);
-    return (mode==1 || mode==9 || mode==127 || (mode==3 && rd_u8(RECORDER_MODE)==3)) &&
+    return (mode==1 || mode==2 || mode==9 || mode==127 || (mode==3 && rd_u8(RECORDER_MODE)==3)) &&
         (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
 }
 int native_flight_tick(NativeFrontend *game,int stage_already_ran) {

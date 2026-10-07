@@ -38,8 +38,10 @@ static int original_input(NativeFrontend *game) {
         if(REG_PC==0xc70000 && REG_A[7]==0xc7ff04) return 1;
         if(REG_PC==0xc53c08) {
             gaddr handle=rd_u32(REG_A[7]+4);
-            if(handle==0x6400) REG_D[0]=0;
-            else if(handle==0x6500) REG_D[0]=event_child(game,INPUT_KEYBOARD_READ);
+            gaddr caller=rd_u32(REG_A[7]);
+            if(caller==0xc16ebe && handle==rd_u32(EXTERNAL_INPUT_HANDLE)) REG_D[0]=0;
+            else if(caller==0xc16c02 && handle==rd_u32(KEYBOARD_INPUT_HANDLE))
+                REG_D[0]=event_child(game,INPUT_KEYBOARD_READ);
             else {fprintf(stderr,"unexpected input handle %06X\n",handle);return 0;}
             REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;
         }

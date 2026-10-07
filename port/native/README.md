@@ -74,6 +74,13 @@ mode and show its transition banner. Digit 6 opens the source-gated mission
 list; F1-F4 select the missions enabled by the supplied disk's pilot record.
 Digit 7 uses the original next-mission selector. Digit 8 opens flight-log
 statistics. Escape returns from the mission list or log to the main menu.
+Digit 3 (source mode 2) now continues beyond its banner. Return at each of its
+two source prompts reaches record-4 playback and flight. One failure/menu-return
+route is exercised; 32 actual input/stage intervals and 21 sampled frame bodies
+match original instructions' compared RAM/drawing. Other playback streams,
+resets and complete mode outcomes remain unverified. Run
+`python tools/native/check_mode_two.py`; see
+[`../../analysis/native_mode_two_milestone.md`](../../analysis/native_mode_two_milestone.md).
 In the log, SHIFT-2 resets the 39 words, and 1 saves the exact 78 bytes. A reset
 pilot goes through enlistment/callsign entry again. Closing the window exits.
 Free Flight (digit 2) now runs the complete source bootstrap, delayed scene

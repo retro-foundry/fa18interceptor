@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest connected batch: digit 3 now runs native source mode 2 through its two
+prompts, aircraft-record-4 control stream, flight failure and menu return.
+32 actual input/stage intervals and 21 sampled frame bodies match original
+instructions' compared RAM and drawing bytes. The checks exposed and fixed
+the transition's saved-pointer sort choice and filled-circle address offsets.
+Native page planes now retain the original descending 320x200 layout; the
+host surface's lower 56 rows remain outside the game bitmap.
+This is one exercised route, not whole-mode or whole-game acceptance. See
+`analysis/native_mode_two_milestone.md` and `tools/native/check_mode_two.py`.
+
 Latest batch, 2026-10-07: keyboard F/C reaches native source flare/chaff launch,
 motion, ground-contact expiry and drawing through C1518C. Complete original
 input/control-effect parent comparisons pass 688/192 cases; four actual

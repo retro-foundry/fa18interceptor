@@ -27,6 +27,12 @@ static FlightActionState action_child(void *context,enum FlightActionChild child
     (void)context;
     switch(child) {
     case FA_MAGNITUDE_ALERT: play_context_tone_4((int16_t)w.primary);break; /* C3316E */
+    case FA_BEGIN_STREAM: case FA_NEXT_STREAM: {
+        const FlightActionHooks hooks={.consume_values=action_child};
+        select_next_flight_record_stream(w,&hooks); break; /* C23578 */
+    }
+    case FA_STREAM_END_MESSAGE: case FA_STREAM_LIMIT_MESSAGE: case FA_NEXT_MESSAGE:
+        post_message((uint16_t)w.primary); w.primary&=0xffffff00u; break; /* C25704 */
     case FA_ACTION_NORMALISE: {
         NormalizedVectorState v={w.primary,w.selector,w.detail,w.x,w.y,w.z,w.product_a,w.product_b,0,0};
         v=normalize_record_vector(v,NULL,NULL);
@@ -205,6 +211,7 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
     }
     case RECORD_UPDATE_RELEASE_SELECTION: release_lost_selection(); return 0;
     case RECORD_UPDATE_ROOT_CONTROL: advance_flight_record_control(work,&actions); return 0;
+    case RECORD_UPDATE_SECONDARY_CONTROL: advance_flight_record_stream(work,&actions); return 0;
     case RECORD_UPDATE_ROOT_VIEW: {
         RecordViewUpdateWork view={0}; update_record_view(record,0,0,&view); return 1;
     }

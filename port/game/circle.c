@@ -123,12 +123,11 @@ void draw_filled_circle(int16_t x, int16_t y, int16_t radius) {
             custom_write(BLTSIZE, size);
         }
 #else
-        /* Same span word masks as C2F1C0, in the native page's plane table.
-         * Plane extents are host-owned; their spacing is not Chip RAM DMA. */
-        (void)dest;
+        /* C2F3CA-C2F462 adds a fixed $1F40 per plane to the last plane's
+         * pointer. Preserve those addresses even when the supplied page
+         * table has a different spacing; mode two reaches this source path. */
         for(plane=0;plane<4;++plane) {
-            gaddr base=rd_u32(rd_u32(PAGE_PLANE_TABLE)+4*(3-plane));
-            gaddr target=base+(gaddr)(top*40)+(gaddr)((left&0xfff0)>>3);
+            gaddr target=dest+(gaddr)(plane*0x1f40);
             unsigned words=size&63;
             for(unsigned i=0;i<words;++i) {
                 uint16_t mask=0xffff;
@@ -138,7 +137,6 @@ void draw_filled_circle(int16_t x, int16_t y, int16_t radius) {
                 wr_u16(target+2*i,(colour&(1u<<plane))?(uint16_t)(value|mask):(uint16_t)(value&~mask));
             }
         }
-        ++top;
 #endif
         row_base += 40;
         if (rising >= 0) {
