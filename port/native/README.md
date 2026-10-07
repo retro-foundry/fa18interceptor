@@ -1,5 +1,13 @@
 # Native port runner
 
+Smoothing publication/restart, context entry and viewport completion now
+preserve actual preceding input results. Sixty separate input/stage parents,
+247 full bodies, 264 recorder parents and 84 keyboard parents match original
+compared RAM/drawing and defined returns. Stage results are checked separately
+from later body/message outputs. Native Debug/Release and eleven affected checks pass. See
+`../../analysis/native_setup_input_return.md`; other callback contracts and
+whole-game mission/audio/state/performance acceptance remain open.
+
 The smoothing cancel child now calls the existing native cancel/reset
 composition. Its formerly unavailable MC_CANCEL handler is exercised with a
 validation-only source cancel marker at a naturally reached mode-four stage.

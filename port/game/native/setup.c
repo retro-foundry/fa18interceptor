@@ -60,10 +60,12 @@ int native_setup_stage(NativeFrontend *game,gaddr routine) {
     const MenuContextHooks hooks={child,NULL,position_result,&setup};
     switch(routine) {
     case 0xc10a24: follow_menu_smoothing(&hooks); return 1;
-    case 0xc10ab2: queue_menu_smoothing_message(&hooks); return 1;
-    case 0xc10ae6: restart_menu_smoothing(&hooks); return 1;
+    /* These callbacks use D0/A0; C10AE6's only child is C11312's message
+     * reset, which likewise preserves the inherited domain output. */
+    case 0xc10ab2: queue_menu_smoothing_message(&hooks); return NATIVE_SETUP_INPUT_PRESERVED;
+    case 0xc10ae6: restart_menu_smoothing(&hooks); return NATIVE_SETUP_INPUT_PRESERVED;
     case 0xc10b1e: reset_menu_smoothing_view(&hooks); return 1;
-    case 0xc10c08: begin_menu_context(&hooks); return 1;
+    case 0xc10c08: begin_menu_context(&hooks); return NATIVE_SETUP_INPUT_PRESERVED;
     case 0xc10c68: queue_menu_context_command(0,&hooks); return 1;
     case 0xc10cfe: finish_menu_context_message(&hooks); return 1;
     case 0xc10d8a: expire_menu_context(&hooks); return 1;
@@ -71,7 +73,9 @@ int native_setup_stage(NativeFrontend *game,gaddr routine) {
     /* C11A26-C11A4E uses D0/D1/A0 only and calls no children. Its viewport
      * gate and message publication preserve the preceding domain output. */
     case 0xc11a26: queue_menu_viewport_message(&hooks); return NATIVE_SETUP_INPUT_PRESERVED;
-    case 0xc11a50: finish_menu_viewport_message(&hooks); return 1;
+    /* C11A50 uses D0/D1, C11312 and the existing GetSysTime host boundary;
+     * neither the wait nor either completion route assigns an input result. */
+    case 0xc11a50: finish_menu_viewport_message(&hooks); return NATIVE_SETUP_INPUT_PRESERVED;
     default: return 0;
     }
 }

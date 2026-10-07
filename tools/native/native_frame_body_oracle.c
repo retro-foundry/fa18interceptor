@@ -101,7 +101,8 @@ int main(int argc,char **argv) {
         if(stage_only && (REG_PC==0xc53c08 || REG_PC==0xc53c8c || REG_PC==0xc1715c)) {
             /* Empty GetMsg/consumed descriptor release and zero physical
              * buttons are identical host contracts to the native fixture.
-             * C0F3C4, C0F5F8 and C11A26 execute original game instructions. */
+             * C0F3C4, C0F5F8 and the selected setup callback execute original
+             * game instructions, including their reset/time-accounting children. */
             if(REG_PC==0xc53c08) {
                 const gaddr handle=rd_u32(REG_A[7]+4);
                 if(handle!=rd_u32(EXTERNAL_INPUT_HANDLE) && handle!=rd_u32(KEYBOARD_INPUT_HANDLE)) return 1;

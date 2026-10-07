@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-07",
+  "scope": "Controlled callbacks/gates after ordinary disk/input Free Flight. Actual stage parents bracketed before a separate controlled idle body; complete original game code under existing identical OS boundaries. Sampled parents, not whole-game acceptance. No new RAM/drawing exclusions.",
+  "runtime_failure_before_fix": "Setup stage input preservation failed at case 120: owner=0 stage=C10AE6",
+  "full_bodies_compared": 247,
+  "recorder_parents_compared": 264,
+  "interposed_keyboard_parents_compared": 84,
+  "input_stage_parents_compared": 60,
+  "added_input_stage_parents": 48,
+  "stage_groups": {
+    "C10AB2": {
+      "parents": 12,
+      "stage_values": [
+        7,
+        190
+      ],
+      "stage_owners": [
+        1,
+        12
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C10AE6": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C10C08": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    },
+    "C11A50": {
+      "parents": 12,
+      "stage_values": [
+        190
+      ],
+      "stage_owners": [
+        1
+      ],
+      "completed_body_values": [
+        190
+      ]
+    }
+  },
+  "first_added_case": {
+    "cleanup_body": 108,
+    "stage": "C10AB2",
+    "stage_return_owner": 12,
+    "stage_input_byte": 7,
+    "return_owner": 1,
+    "input_byte": 190
+  },
+  "runner_sha256": "2bc98a013aa16255fa5d12e942dc813c40331fc656c55d4a905d522e28f5327e",
+  "probe_sha256": "208265dee1029b2e818fcdce1985c75b8556146bbd4fb27fc652d93f1267cc87",
+  "reports_sha256": {
+    "native-run.log": "24c10723ec3c25f2f3e9f5f38e3221893bc1d50858be978f9dba5ba6f8859c99",
+    "captures.json": "a979509efb98ff8ee1c81b56467d7dd603361f1ae864c093e4c1a98e2fcd3702",
+    "input-check.log": "fe8778f44e4d972a2872d082822b75167c7b95a0e2fdae8f5513743e96598dd8",
+    "frame_body-check.log": "59215d2ba5e931e7f3a38b73b506ba1eb53ae8d76efb83dc7a90c87ee326ac6b",
+    "control_effects-check.log": "cc160742d8f801ea3fce7c36e0bdef22d9316b32e970ce9b4dcf1375b4d450ee"
+  },
+  "source_contract_sha256": "40c00e9ed99510a06b3dc5b498c1842ef77ec1cdd090c2952f98f8e1aeaccedb",
+  "command": "python tools/native/check_countermeasures.py --out build/native-flight/setup-input-check",
+  "release_checks": [
+    "mode_four",
+    "smoothing_cancel",
+    "countermeasures",
+    "frame_body",
+    "frontend",
+    "frame_tail",
+    "postflight_entry",
+    "input",
+    "game_input",
+    "qualification",
+    "artifact_cleanup"
+  ]
+}

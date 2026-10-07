@@ -58,7 +58,7 @@ def check(args, work, capture_dir):
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
     assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
-    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(216)), pending_inputs
+    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(264)), pending_inputs
     assert [entry['message_body'] for entry in message_bodies] == list(range(15)), message_bodies
     assert [entry['assigned'] for entry in message_bodies] == [True] * 13 + [False] * 2, message_bodies
     assert {entry['input_byte'] & 0x80 for entry in message_bodies[:12]} == {0, 0x80}
@@ -82,7 +82,10 @@ def check(args, work, capture_dir):
     assert all(entry['return_owner'] == 9 and entry['saved_tick'] & 31 not in (8, 16)
         for entry in grid_bodies), grid_bodies
     assert {entry['recorder_mode'] for entry in pending_inputs} == {1, 2, 3}, pending_inputs
-    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(108)), cleanup_bodies
+    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(156)), cleanup_bodies
+    assert [entry['stage'] for entry in cleanup_bodies[108:]] == [stage for stage in
+        ('C10AB2','C10AE6','C10C08','C11A50') for _ in range(12)], cleanup_bodies
+    assert all(entry['stage_return_owner']!=0 for entry in cleanup_bodies[96:]), cleanup_bodies
     assert all(not entry['active'] for entry in cleanup_bodies[96:]), cleanup_bodies
     assert all(entry['return_owner'] == 10 for entry in cleanup_bodies[:84]), cleanup_bodies
     assert all(entry['return_owner'] != 0 and entry['saved_tick'] & 31 not in (8, 16)
@@ -146,7 +149,8 @@ def check(args, work, capture_dir):
                         environment['FA18_FRAME_INITIAL_INPUT_CARRY'] = str(preceding_input)
                     if index >= 96:
                         stage = str(prefix) + f'.stage.{index}'
-                        stage_environment = dict(environment, FA18_FRAME_STAGE_ONLY='1')
+                        stage_environment = dict(environment, FA18_FRAME_STAGE_ONLY='1',
+                            FA18_FRAME_EXPECT_INPUT_CARRY=str(body['stage_input_byte']))
                         stage_output = compare(stage, stage + '.before.dat', stage + '.after.dat',
                             body['before_tick'], body['before_tick'], body['saved_tick'],
                             stage + '.source.dat', environment=stage_environment, reference=oracles['frame_body'])
@@ -229,7 +233,7 @@ def check(args, work, capture_dir):
                         capture + '.source.dat', environment=environment)
                     source_carries[96 + body['grid_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
         print(f'{name}: original contracts and actual runtime captures pass', flush=True)
-    print('199 full bodies, 216 recorder input parents and 84 intervening keyboard parents match original RAM/display and defined returns')
+    print('247 full bodies, 264 recorder input parents and 84 intervening keyboard parents match original RAM/display and defined returns; 60 input/stage parents also pass')
 
 
 if __name__ == '__main__':

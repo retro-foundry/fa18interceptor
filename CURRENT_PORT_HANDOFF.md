@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected setup preservation (2026-10-07): smoothing publication/restart,
+context entry and viewport completion retain actual preceding input outputs.
+Stage outputs are checked separately from final message/body results. Sixty
+actual input/stage parents, 247 full bodies, 264 recorder parents and 84 keyboard
+parents match original compared RAM/drawing and defined returns. Native
+Debug/Release and eleven affected checks pass. See `analysis/native_setup_input_return.md`.
+Other callback contracts and whole-game mission/audio/state/performance
+acceptance remain open.
+
 Latest connected smoothing cancel (2026-10-07): C10A24's previously unavailable
 MC_CANCEL child now uses the existing native cancel/reset composition. A
 validation-only cancel marker at a naturally reached mode-four stage resumes

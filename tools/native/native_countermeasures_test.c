@@ -34,6 +34,8 @@ typedef struct {
     unsigned grid_case;
     int cleanup_sampling;
     unsigned cleanup_case;
+    gaddr setup_stage;
+    NativeInputReturn setup_output;
     NativeFrameCapture idle_stage;
 } CountermeasureFixture;
 static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
@@ -222,6 +224,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint1
     if(fixture->cleanup_sampling) {
         if(fixture->cleanup_case>=96) {
             if(boundary==NATIVE_FRAME_INPUT_BEGIN) {
+                fixture->setup_stage=rd_u32(STAGE_CALLBACK);
                 if(game->input_count || rd_u8(RECORDER_MODE) || rd_u16(RAW_KEY_LATCH) ||
                    rd_u16(RECORD_WORD_A) || rd_u16(RECORD_WORD_B)) {
                     fputs("Idle stage fixture has unexpected pending input\n",stderr);abort();
@@ -234,9 +237,14 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint1
                 /* Before the controlled body gates below: actual input/stage
                  * stores, bracketed separately from notification/drawing. */
                 native_frame_capture(game,NATIVE_FRAME_BODY_END,saved_tick,&fixture->idle_stage);
+                fixture->setup_output=game->completed_input_return;
             }
         }
         if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)!=8 && (saved_tick&31)!=16) {
+            /* New setup parents can enable record work. Bracket their real
+             * input/stage stores first, then select a separate source idle
+             * body so its result feeds recorder input without drawing. */
+            if(fixture->cleanup_case>=108) wr_u8(POST_INPUT_AUX,0);
             /* Select a lost target and queue gates; the actual source cleanup
              * resets the view and computes publication. No output is seeded. */
             wr_u16(TARGET_RECORD,15);wr_u16(CONTROL_RECORDS+15*512,0);
@@ -251,10 +259,11 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint1
         }
         if(fixture->capture.prefix) native_frame_capture(game,boundary,saved_tick,&fixture->capture);
         if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
-            printf("{\"cleanup_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u,\"active\":%s}\n",
+            printf("{\"cleanup_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u,\"active\":%s,\"stage\":\"%06X\",\"stage_return_owner\":%u,\"stage_input_byte\":%u}\n",
                 fixture->cleanup_case,fixture->capture.before_tick,fixture->capture.after_tick,
                 fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value,
-                rd_u8(POST_INPUT_AUX)?"true":"false");
+                rd_u8(POST_INPUT_AUX)?"true":"false",fixture->setup_stage,
+                fixture->setup_output.owner,fixture->setup_output.value);
         return;
     }
     if(fixture->grid_sampling) {
@@ -579,6 +588,35 @@ int main(int argc,char **argv) {
            !pending_input(game,&fixture,108+i)) {
             fprintf(stderr,"Idle input preservation failed at case %u: owner=%u active=%u\n",
                 i,game->completed_input_return.owner,rd_u8(POST_INPUT_AUX));goto done;
+        }
+    }
+    /* Each callback inherits a real preceding recorder output. These source
+     * conditions exercise wait, publication, reset and clock branches only
+     * in the validation entry; no output value/owner is supplied. */
+    for(unsigned i=108;i<156;++i) {
+        const unsigned family=(i-108)/12,variant=(i-108)%12;
+        fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
+        wr_u8(RECORDER_MODE,0);wr_u8(POST_INPUT_AUX,0);
+        wr_u8(KEY_TAKEN,0);wr_u8(SEQUENCE_PHASE,0);
+        wr_u32(STAGE_CALLBACK,(gaddr[]){0xc10ab2,0xc10ae6,0xc10c08,0xc11a50}[family]);
+        if(family==0) wr_u16(POST_INPUT_COUNTDOWN,(variant&1)?1:0);
+        else if(family==1) wr_u8(COMMAND_ENABLE_GATE,(variant&1)?1:0);
+        else if(family==2) {
+            wr_u8(CONTEXT_SELECT,variant%3!=0);
+            wr_u8(POST_INPUT_EVENT,variant%3==2?0xff:0);
+        } else {
+            wr_u8(POST_INPUT_EVENT,variant%3==0?0xff:0);
+            wr_u8(CONTEXT_STATE,variant%3==1?6:0);
+            wr_u32(MENU_TIME_PENDING,variant&1?0xffffffffu:0);
+            wr_u32(MENU_TIME_OPTIONAL,variant&1?1:0);
+        }
+        unsigned limit=game->ticks+100;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete || !fixture.idle_stage.complete || rd_u8(POST_INPUT_AUX) ||
+           game->completed_input_return.owner==NATIVE_INPUT_RETURN_UNKNOWN ||
+           !pending_input(game,&fixture,108+i)) {
+            fprintf(stderr,"Setup stage input preservation failed at case %u: owner=%u stage=%06X\n",
+                i,game->completed_input_return.owner,fixture.setup_stage);goto done;
         }
     }
     fixture.cleanup_sampling=0;

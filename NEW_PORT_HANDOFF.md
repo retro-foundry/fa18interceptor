@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected setup preservation (2026-10-07): smoothing publication/restart,
+context entry and viewport completion preserve actual preceding input results.
+Sixty separately checked input/stage parents, 247 full bodies, 264 recorder
+parents and 84 keyboard parents match original compared RAM/drawing and defined
+returns. Stage outputs are checked before later message rendering can replace
+them. Native Debug/Release and eleven affected checks pass. See `analysis/native_setup_input_return.md`.
+Other contracts and whole-game mission/audio/state/performance acceptance remain
+unfinished; the complete-port goal stays active.
+
 Latest connected smoothing cancel (2026-10-07): C10A24 -> MC_CANCEL now calls
 the existing native cancel/reset composition instead of aborting. A controlled
 source cancel marker at a naturally reached mode-four stage resumes flight
