@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected view-action return (2026-10-07): detail, origin level,
+record type, view mode and masked zoom flags now reach subsequent depleted
+recorder input when publication skips. 139 full bodies, 156 recorder parents
+and 36 intervening keyboard parents match original compared RAM/drawing and
+defined returns. All 2,176 selected command parents match RAM and returns;
+other command families remain outside this bounded suite. Nine affected checks
+and all native/reference builds pass. See
+`analysis/native_view_action_input_return.md`. Full port remains active.
+
 Latest connected control-action return (2026-10-07): stick/rudder/throttle,
 information-page and sign-input actions preserve actual prior/selection output;
 HUD toggle and gear-gate assignments publish their existing domain values.

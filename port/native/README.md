@@ -1,5 +1,12 @@
 # Native port runner
 
+View commands now compose their actual detail, origin level, record type, mode
+and masked zoom-flag outputs into subsequent depleted recorder input. 139 full
+bodies, 156 recorder parents and 36 intervening keyboard parents match original
+compared RAM/drawing and returns; all 2,176 selected command parents pass RAM
+and return checks. Other action families and whole-game acceptance stay open.
+See `../../analysis/native_view_action_input_return.md`.
+
 Control commands now compose their actual preservation/HUD-mode/gear-gate
 outputs through skipped publication into subsequent depleted recorder input.
 127 full bodies, 144 recorder parents and 24 intervening keyboard parents match

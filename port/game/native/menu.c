@@ -217,6 +217,18 @@ static void dispatch_child(void *context,enum CommandDispatchChild child) {
     NativeCommand *command=context;
     callback_reset_child(command->game,child);
 }
+static NativeInputReturn view_return(ViewActionOutput output) {
+    uint8_t value;
+    switch(output.kind) {
+    case VIEW_ACTION_DETAIL: value=output.detail;break;
+    case VIEW_ACTION_ORIGIN_LEVEL: value=output.origin_level;break;
+    case VIEW_ACTION_RECORD_TYPE: value=output.record_type;break;
+    case VIEW_ACTION_MODE: value=output.mode;break;
+    case VIEW_ACTION_ZOOM_FLAGS: value=output.zoom_flags;break;
+    default: abort();
+    }
+    return (NativeInputReturn){value,NATIVE_INPUT_RETURN_VIEW_ACTION};
+}
 static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
     NativeCommand command={.game=game};
     const CommandSelectionHooks selection={selection_value,&command};
@@ -232,11 +244,13 @@ static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
     if(result.publication_ran && result.publication.queued) {
         game->completed_input_return=(NativeInputReturn){(uint8_t)result.publication.translated_index,
             NATIVE_INPUT_RETURN_COMMAND_QUEUE};
+    } else if(result.view_output.kind!=VIEW_ACTION_UNRESOLVED && result.view_output.kind!=VIEW_ACTION_PRESERVE) {
+        game->completed_input_return=view_return(result.view_output);
     } else if(result.flight_output.kind==FLIGHT_ACTION_HUD_MODE) {
         game->completed_input_return=(NativeInputReturn){result.flight_output.hud_mode,NATIVE_INPUT_RETURN_FLIGHT_ACTION};
     } else if(result.flight_output.kind==FLIGHT_ACTION_GEAR_GATE) {
         game->completed_input_return=(NativeInputReturn){(uint8_t)result.flight_output.gear_gate,NATIVE_INPUT_RETURN_FLIGHT_ACTION};
-    } else if(result.flight_output.kind==FLIGHT_ACTION_PRESERVE ||
+    } else if(result.flight_output.kind==FLIGHT_ACTION_PRESERVE || result.view_output.kind==VIEW_ACTION_PRESERVE ||
               result.action==COMMAND_PENDING_EMPTY || result.action==COMMAND_COUNTER_WAIT ||
               result.action==COMMAND_FINISH_EVENT || result.action==COMMAND_QUEUE_ONLY) {
         /* C1AD72/C1AD70/C1C2B6 and queue-only skips assign no action output.

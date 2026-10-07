@@ -29,19 +29,24 @@ static int compare(const ViewCommandHooks *h,uint8_t value,uint8_t limit) {
     observe(h,VIEW_BYTE_COMPARE,value,limit,0); return (int8_t)value-(int8_t)limit;
 }
 void set_context_view_detail(unsigned value,const ViewCommandHooks *h) {
+    set_context_view_detail_result(value,h);
+}
+ViewActionOutput set_context_view_detail_result(unsigned value,const ViewCommandHooks *h) {
     observe(h,VIEW_DETAIL_SET,value,0,0);
     byte(h,ORIGIN_DETAIL_INDEX,(uint8_t)value); byte(h,UPDATE_MASK,0xff);
     if(!test(h,FIRE_STATE)) byte(h,FIRE_STATE,0xff);
+    return (ViewActionOutput){.kind=VIEW_ACTION_DETAIL,.detail=(uint8_t)value};
 }
 static void origin_level(const ViewCommandHooks *h,uint8_t value) {
     byte(h,ORIGIN_ENABLE,value); byte(h,UPDATE_MASK,0xff);
     if(!test(h,FIRE_STATE)) byte(h,FIRE_STATE,0xff);
 }
-static void origin_range(const ViewCommandHooks *h,int increase) {
+static ViewActionOutput origin_range(const ViewCommandHooks *h,int increase) {
     uint8_t old=rd_u8(ORIGIN_ENABLE),value;
     uint32_t middle;
     observe(h,VIEW_ORIGIN_READ,old,0,0);
-    if(!old || test(h,ORIGIN_DETAIL_MODE)) return;
+    if(!old || test(h,ORIGIN_DETAIL_MODE))
+        return (ViewActionOutput){.kind=VIEW_ACTION_ORIGIN_LEVEL,.origin_level=old};
     if(!increase) request(h,PENDING_COMMAND_WORD_B,3);
     if(test(h,ORIGIN_GATE_MODE)) {
         middle=rd_u32(SELECTOR_ORIGIN_MIDDLE); observe(h,VIEW_MIDDLE_READ,middle,0,0);
@@ -54,7 +59,8 @@ static void origin_range(const ViewCommandHooks *h,int increase) {
         }
         wr_u32(SELECTOR_ORIGIN_MIDDLE,middle);
         observe(h,VIEW_LONG_STORE,middle,0,SELECTOR_ORIGIN_MIDDLE);
-        byte(h,UPDATE_MASK,0xff); return;
+        byte(h,UPDATE_MASK,0xff);
+        return (ViewActionOutput){.kind=VIEW_ACTION_ORIGIN_LEVEL,.origin_level=old};
     }
     if(increase) {
         value=(uint8_t)(old+1); observe(h,VIEW_ORIGIN_INCREMENT,old,0,0);
@@ -68,8 +74,9 @@ static void origin_range(const ViewCommandHooks *h,int increase) {
         if((int8_t)old<=1) { value=0xff; observe(h,VIEW_ORIGIN_SET,(uint32_t)-1,0,0); }
     }
     origin_level(h,value);
+    return (ViewActionOutput){.kind=VIEW_ACTION_ORIGIN_LEVEL,.origin_level=value};
 }
-static uint32_t finish_mode(uint32_t event,const ViewCommandHooks *h) {
+static ViewCommandExecution finish_mode(uint32_t event,const ViewCommandHooks *h) {
     gaddr record;
     uint8_t value,type;
     int16_t span;
@@ -81,7 +88,8 @@ static uint32_t finish_mode(uint32_t event,const ViewCommandHooks *h) {
     observe(h,VIEW_RECORD_ADDRESS,0,0,record);
     type=rd_u8(record+0x62); observe(h,VIEW_RECORD_TYPE_READ,type,0,0);
     type&=0xf0; observe(h,VIEW_RECORD_TYPE_MASK,type,0,0);
-    if(!compare(h,type,0x30)) return event;
+    if(!compare(h,type,0x30))
+        return (ViewCommandExecution){event,{.kind=VIEW_ACTION_RECORD_TYPE,.record_type=type}};
     value=rd_u8(VIEW_MODE); observe(h,VIEW_MODE_READ,value,0,0);
     if(compare(h,value,3)>=0) {
         if(compare(h,value,9)<=0 || compare(h,value,12)>=0) {
@@ -91,7 +99,8 @@ static uint32_t finish_mode(uint32_t event,const ViewCommandHooks *h) {
             }
             observe(h,VIEW_ROW_COMPARE,row,rd_u16(LINE_LAST_ROW),0);
             if(row==rd_u16(LINE_LAST_ROW)) {
-                word(h,SPAN_ORIGIN,0x32); word(h,SPAN_ORIGIN_Y,0x320); return event;
+                word(h,SPAN_ORIGIN,0x32); word(h,SPAN_ORIGIN_Y,0x320);
+                return (ViewCommandExecution){event,{.kind=VIEW_ACTION_MODE,.mode=value}};
             }
         }
     }
@@ -102,9 +111,12 @@ static uint32_t finish_mode(uint32_t event,const ViewCommandHooks *h) {
     word(h,SPAN_ORIGIN,(uint16_t)span);
     observe(h,VIEW_SPAN_SCALE,(uint16_t)span,0,0);
     word(h,SPAN_ORIGIN_Y,(uint16_t)((uint16_t)span<<4));
-    return finish_view_redraw(event,h);
+    return finish_view_redraw_result(event,h);
 }
 uint32_t finish_view_redraw(uint32_t event,const ViewCommandHooks *h) {
+    return finish_view_redraw_result(event,h).event;
+}
+ViewCommandExecution finish_view_redraw_result(uint32_t event,const ViewCommandHooks *h) {
     uint8_t value;
     uint16_t row;
     event=h->consume(h->context,VIEW_COMMAND_REDRAW);
@@ -113,13 +125,18 @@ uint32_t finish_view_redraw(uint32_t event,const ViewCommandHooks *h) {
     else if(compare(h,value,9)<=0) goto extended_row;
     else if(compare(h,value,12)>=0) goto extended_row;
     else row=0x90;
-    word(h,LINE_LAST_ROW,row); return event;
+    word(h,LINE_LAST_ROW,row);
+    return (ViewCommandExecution){event,{.kind=VIEW_ACTION_MODE,.mode=value}};
 extended_row:
     if(compare(h,value,4)<=0 || compare(h,value,8)>=0) row=0xa7;
     else row=0xb3;
-    word(h,LINE_LAST_ROW,row); return event;
+    word(h,LINE_LAST_ROW,row);
+    return (ViewCommandExecution){event,{.kind=VIEW_ACTION_MODE,.mode=value}};
 }
 uint32_t select_zero_view_mode(uint32_t event,const ViewCommandHooks *h) {
+    return select_zero_view_mode_result(event,h).event;
+}
+ViewCommandExecution select_zero_view_mode_result(uint32_t event,const ViewCommandHooks *h) {
     observe(h,VIEW_MODE_ZERO,0,0,0); byte(h,VIEW_MODE_AUXILIARY,0);
     byte(h,VIEW_MODE,0); byte(h,REDRAW_FIRST,3); return finish_mode(event,h);
 }
@@ -136,7 +153,11 @@ int is_view_command(enum CommandAction action) {
     }
 }
 uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h) {
+    return execute_view_command_result(r,h).event;
+}
+ViewCommandExecution execute_view_command_result(const CommandRequest *r,const ViewCommandHooks *h) {
     uint32_t event=r->raw_event;
+    ViewActionOutput output={.kind=VIEW_ACTION_PRESERVE};
     uint8_t value,old;
     uint16_t scale;
     unsigned mode=0;
@@ -144,44 +165,46 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
     switch(r->action) {
     case COMMAND_CONTEXT_VIEW_DECREMENT:
         value=test(h,ORIGIN_ENABLE);
-        if(value) { origin_range(h,0); break; }
+        if(value) { output=origin_range(h,0); break; }
         /* The source then loads the same byte into its detail working value. */
         value=rd_u8(ORIGIN_ENABLE); observe(h,VIEW_ORIGIN_READ,value,0,0);
-        if(value) { request(h,PENDING_COMMAND_WORD_B+1,4); set_context_view_detail(8,h); }
+        output=(ViewActionOutput){.kind=VIEW_ACTION_ORIGIN_LEVEL,.origin_level=value};
+        if(value) { request(h,PENDING_COMMAND_WORD_B+1,4); output=set_context_view_detail_result(8,h); }
         else { request(h,PENDING_COMMAND_WORD_B,3); byte(h,VIEW_REFRESH_REQUEST,0xff); }
         break;
     case COMMAND_CONTEXT_VIEW_ALTERNATE:
         value=rd_u8(ORIGIN_ENABLE); observe(h,VIEW_ORIGIN_READ,value,0,0);
-        if(value) { request(h,PENDING_COMMAND_WORD_B+1,4); set_context_view_detail(8,h); }
+        output=(ViewActionOutput){.kind=VIEW_ACTION_ORIGIN_LEVEL,.origin_level=value};
+        if(value) { request(h,PENDING_COMMAND_WORD_B+1,4); output=set_context_view_detail_result(8,h); }
         else { request(h,PENDING_COMMAND_WORD_B,3); byte(h,VIEW_REFRESH_REQUEST,0xff); }
         break;
     case COMMAND_CONTEXT_VIEW_INCREMENT:
-        request(h,PENDING_COMMAND_WORD_B+1,7); origin_range(h,1); break;
+        request(h,PENDING_COMMAND_WORD_B+1,7); output=origin_range(h,1); break;
     case COMMAND_VIEW_THREE:
-        request(h,PENDING_COMMAND_WORD_B,7); set_context_view_detail(3,h); break;
+        request(h,PENDING_COMMAND_WORD_B,7); output=set_context_view_detail_result(3,h); break;
     case COMMAND_VIEW_NINE:
-        request(h,PENDING_COMMAND_WORD_B+1,5); set_context_view_detail(9,h); break;
+        request(h,PENDING_COMMAND_WORD_B+1,5); output=set_context_view_detail_result(9,h); break;
     case COMMAND_VIEW_EIGHT:
-        request(h,PENDING_COMMAND_WORD_B+1,4); set_context_view_detail(8,h); break;
+        request(h,PENDING_COMMAND_WORD_B+1,4); output=set_context_view_detail_result(8,h); break;
     case COMMAND_VIEW_TOGGLE:
         request(h,PENDING_COMMAND_WORD_B,5);
-        if(test(h,ORIGIN_ENABLE)) { set_context_view_detail(1,h); break; }
+        if(test(h,ORIGIN_ENABLE)) { output=set_context_view_detail_result(1,h); break; }
         goto mode_zero;
     case COMMAND_VIEW_ZERO:
         request(h,PENDING_COMMAND_WORD_B,4);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { set_context_view_detail(0,h); break; }
+        if(r->origin_mode) { output=set_context_view_detail_result(0,h); break; }
     mode_zero:
-        return select_zero_view_mode(event,h);
+        return select_zero_view_mode_result(event,h);
     case COMMAND_VIEW_ONE:
         request(h,PENDING_COMMAND_WORD_B+1,0);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { set_context_view_detail(4,h); break; }
+        if(r->origin_mode) { output=set_context_view_detail_result(4,h); break; }
         mode=6; observe(h,VIEW_MODE_SET,mode,0,0); goto set_mode;
     case COMMAND_VIEW_INCREMENT:
         request(h,PENDING_COMMAND_WORD_B,6);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { set_context_view_detail(2,h); break; }
+        if(r->origin_mode) { output=set_context_view_detail_result(2,h); break; }
         byte(h,VIEW_MODE_AUXILIARY,0);
         old=rd_u8(VIEW_MODE); value=(uint8_t)(old+1); wr_u8(VIEW_MODE,value);
         observe(h,VIEW_MODE_INCREMENT,old,0,0);
@@ -190,7 +213,7 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
     case COMMAND_VIEW_DECREMENT:
         request(h,PENDING_COMMAND_WORD_B+1,2);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { set_context_view_detail(6,h); break; }
+        if(r->origin_mode) { output=set_context_view_detail_result(6,h); break; }
         byte(h,VIEW_MODE_AUXILIARY,0);
         old=rd_u8(VIEW_MODE); value=(uint8_t)(old-1); wr_u8(VIEW_MODE,value);
         observe(h,VIEW_MODE_DECREMENT,old,0,0);
@@ -200,7 +223,7 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
     case COMMAND_VIEW_TWELVE: case COMMAND_VIEW_THIRTEEN:
         request(h,PENDING_COMMAND_WORD_B+1,r->action==COMMAND_VIEW_TWELVE?3:1);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode) { set_context_view_detail(r->action==COMMAND_VIEW_TWELVE?7:5,h); break; }
+        if(r->origin_mode) { output=set_context_view_detail_result(r->action==COMMAND_VIEW_TWELVE?7:5,h); break; }
         mode=r->action==COMMAND_VIEW_TWELVE?12:13;
         observe(h,VIEW_MODE_SET,mode,0,0); byte(h,VIEW_MODE_AUXILIARY,0);
         byte(h,UPDATE_MASK,0xff); goto store_mode;
@@ -214,7 +237,7 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
     case COMMAND_ZOOM_OUT:
         observe(h,VIEW_ZOOM_OUT_BEGIN,0x20,0,0);
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
-        if(r->origin_mode && test(h,ORIGIN_GATE_B)) { origin_range(h,0); break; }
+        if(r->origin_mode && test(h,ORIGIN_GATE_B)) { output=origin_range(h,0); break; }
         scale=rd_u16(ZOOM_SCALE); observe(h,VIEW_ZOOM_OUT_COMPARE,scale,0x20,0);
         if((int16_t)scale>0x20) {
             observe(h,VIEW_ZOOM_DECREASE,scale,0,0);
@@ -224,7 +247,7 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
     case COMMAND_ZOOM_IN:
         observe(h,VIEW_ORIGIN_TEST,r->origin_mode,0,0);
         if(r->origin_mode && test(h,ORIGIN_GATE_B)) {
-            request(h,PENDING_COMMAND_WORD_B+1,7); origin_range(h,1); break;
+            request(h,PENDING_COMMAND_WORD_B+1,7); output=origin_range(h,1); break;
         }
         scale=rd_u16(ZOOM_SCALE); observe(h,VIEW_ZOOM_IN_COMPARE,scale,0x80,0);
         if((int16_t)scale<0x80) {
@@ -234,6 +257,7 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
         byte(h,0xc4583du,3); byte(h,VIEW_REFRESH_REQUEST,0xff);
         value=rd_u8(ZOOM_FLAGS); observe(h,VIEW_ZOOM_FLAGS_READ,value,0,0);
         value&=0x7f; observe(h,VIEW_ZOOM_FLAGS_MASK,value,0,0);
+        output=(ViewActionOutput){.kind=VIEW_ACTION_ZOOM_FLAGS,.zoom_flags=value};
         if(!value) byte(h,UPDATE_MASK,0xff);
         scale=rd_u16(ZOOM_SCALE); observe(h,VIEW_ZOOM_IN_COMPARE,scale,0x80,0);
         old=rd_u8(ZOOM_FLAGS);
@@ -242,5 +266,5 @@ uint32_t execute_view_command(const CommandRequest *r,const ViewCommandHooks *h)
         break;
     default: abort();
     }
-    return event;
+    return (ViewCommandExecution){event,output};
 }

@@ -31,4 +31,18 @@ uint32_t select_zero_view_mode(uint32_t event,const ViewCommandHooks *hooks);
 /* C1BA86 redraw/row tail, before the shared command queue exit. */
 uint32_t finish_view_redraw(uint32_t event,const ViewCommandHooks *hooks);
 uint32_t execute_view_command(const CommandRequest *request,const ViewCommandHooks *hooks);
+/* View-domain outputs before shared queue publication; middle-coordinate and
+ * zoom-scale arithmetic do not replace these outputs in the original. */
+enum ViewActionOutputKind { VIEW_ACTION_UNRESOLVED, VIEW_ACTION_PRESERVE,
+    VIEW_ACTION_DETAIL, VIEW_ACTION_ORIGIN_LEVEL, VIEW_ACTION_RECORD_TYPE,
+    VIEW_ACTION_MODE, VIEW_ACTION_ZOOM_FLAGS };
+typedef struct {
+    enum ViewActionOutputKind kind;
+    uint8_t detail,origin_level,record_type,mode,zoom_flags;
+} ViewActionOutput;
+typedef struct { uint32_t event; ViewActionOutput output; } ViewCommandExecution;
+ViewActionOutput set_context_view_detail_result(unsigned value,const ViewCommandHooks *hooks);
+ViewCommandExecution select_zero_view_mode_result(uint32_t event,const ViewCommandHooks *hooks);
+ViewCommandExecution finish_view_redraw_result(uint32_t event,const ViewCommandHooks *hooks);
+ViewCommandExecution execute_view_command_result(const CommandRequest *request,const ViewCommandHooks *hooks);
 #endif

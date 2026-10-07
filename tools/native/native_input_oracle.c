@@ -204,12 +204,14 @@ int main(int argc,char **argv) {
         }
     }
     printf("2512 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases, %u ejection cases, %u callback cases, %u claimed pending countermeasures)\n",total_events,drain_cases,countermeasure_cases,fd_cases,ejection_cases,callback_cases,pending_countermeasures);
-    unsigned command_returns=0,preserved=0,selected=0,queued=0,action_returns=0,unresolved=0;
-    for(unsigned test=0;test<832;++test) {
+    unsigned command_returns=0,preserved=0,selected=0,queued=0,action_returns=0,view_returns=0,unresolved=0;
+    for(unsigned test=0;test<2176;++test) {
         static const uint8_t commands[]={0x60,0x61,0xe0,0xe1,0x66,0xe6,0x67,0xe7,
             0x70,0xf0,0x4c,0x4e,0x0c,0x8c,0x24,0x3e};
         const uint8_t controls[]={0x38,0x39,0xb8,0xb9,0x0b,0x8b,0x15,0x45};
-        const uint8_t raw=test<512?commands[test%16]:test<768?0x25:test<800?0x24:controls[(test-800)%8];
+        const int pending=test>=832 && test<1664;
+        const uint8_t raw=test<512?commands[test%16]:test<768?0x25:test<800?0x24:
+            test<832?controls[(test-800)%8]:pending?0:test&1?0x1a:0x1b;
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
         memset(game,0,sizeof *game);game->completed_input_return=(NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT};
         wr_u8(COMMAND_EVENT_COUNTER,(uint8_t[]){1,254,128,0}[(test>>5)&3]);
@@ -230,16 +232,33 @@ int main(int argc,char **argv) {
                 wr_u8(CONTROL_RECORDS+3,(rd_u8(CONTROL_RECORDS+3)&0x7f)|(gear&4?0x80:0));
                 wr_u32(COMMAND_GEAR_GATE,(uint32_t[]){0,0x40,0xffffffff,0x12345678}[gear&3]);
                 wr_u8(CONTEXT_SELECT,!!(gear&8));wr_u8(TONE_MUTE,!!(gear&16));
-            } else {
+            } else if(test<832) {
                 wr_u8(KEY_STATE,test&8?1:0);
                 if(raw&0x80) wr_u8(ORIGIN_DETAIL_MODE,3);
+            } else if(pending) {
+                const unsigned view=test-832,slot=3+view%13,settings=view/13;
+                wr_u8(RECORDER_MODE,3);wr_u16(RECORD_WORD_A,0);
+                wr_u16(RECORD_WORD_B,(uint16_t)(1u<<(slot<8?slot+8:slot-8)));
+                wr_u8(ORIGIN_ENABLE,(uint8_t[]){0,1,255,3}[settings&3]);
+                wr_u8(ORIGIN_DETAIL_MODE,settings&32?1:0);
+                wr_u8(ORIGIN_GATE_MODE,!!(settings&16));
+                wr_u32(SELECTOR_ORIGIN_MIDDLE,0x04000000);
+                wr_u16(VIEW_RECORD,0);
+                wr_u8(CONTROL_RECORDS+0x62,(uint8_t[]){0x11,0x20,0x30,0xff}[(settings>>2)&3]);
+                wr_u8(VIEW_MODE,(uint8_t[]){0,6,11,255}[(settings>>4)&3]);
+                wr_u16(LINE_LAST_ROW,settings&4?0xb3:0x90);
+                wr_u8(FIRE_STATE,settings&8?255:0);
+            } else {
+                wr_u8(ZOOM_FLAGS,(uint8_t)((test-1664)/2));
+                wr_u16(ZOOM_SCALE,(uint16_t[]){0x20,0x40,0x80,0xff00}[(test>>1)&3]);
             }
         }
         memcpy(source,game,sizeof *source);memcpy(before,m,sizeof *m);
-        if(!original_input_entry(source,0xc1ad74,raw)) return 1;
+        if(!original_input_entry(source,pending?0xc1ac28:0xc1ad74,raw)) return 1;
         const uint8_t carry=(uint8_t)REG_D[4];
         memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
-        memcpy(m,before,sizeof *m);native_menu_dispatch_raw(game,raw);
+        memcpy(m,before,sizeof *m);
+        if(pending) native_menu_dispatch_pending(game);else native_menu_dispatch_raw(game,raw);
         const NativeInputReturn output=game->completed_input_return;
         if(output.owner!=NATIVE_INPUT_RETURN_UNKNOWN) {
             if(output.value!=carry) {
@@ -251,6 +270,7 @@ int main(int argc,char **argv) {
             selected+=output.owner==NATIVE_INPUT_RETURN_COMMAND_SELECTION;
             queued+=output.owner==NATIVE_INPUT_RETURN_COMMAND_QUEUE;
             action_returns+=output.owner==NATIVE_INPUT_RETURN_FLIGHT_ACTION;
+            view_returns+=output.owner==NATIVE_INPUT_RETURN_VIEW_ACTION;
         } else ++unresolved;
         for(unsigned i=0;i<0xff000;++i) {
             uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
@@ -260,9 +280,9 @@ int main(int argc,char **argv) {
             }
         }
     }
-    if(!preserved || !selected || !queued || !unresolved) return 1;
-    printf("832 command parents match non-stack RAM; %u defined returns match (%u preserved, %u selection, %u queue, %u flight action; %u action-owned returns remain unresolved)\n",
-        command_returns,preserved,selected,queued,action_returns,unresolved);
+    if(!preserved || !selected || !queued || unresolved) return 1;
+    printf("2176 command parents match non-stack RAM; %u defined returns match (%u preserved, %u selection, %u queue, %u flight action, %u view action; %u action-owned returns remain unresolved)\n",
+        command_returns,preserved,selected,queued,action_returns,view_returns,unresolved);
     for(unsigned test=0;test<16;++test) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
         memset(game,0,sizeof *game);

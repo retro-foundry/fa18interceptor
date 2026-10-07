@@ -2,6 +2,14 @@
 
 ## Objective and user constraints
 
+Latest connected view-action return (2026-10-07): actual detail, origin level,
+record type, view mode and masked zoom flags compose subsequent depleted input.
+139 full bodies, 156 recorder parents and 36 intervening keyboard parents match
+original compared RAM/drawing and defined returns. All 2,176 selected command
+parents match RAM and returns. Other action families and whole-game acceptance
+remain open. Nine affected checks and all native/reference builds pass. See
+`analysis/native_view_action_input_return.md`. Full port stays active.
+
 Latest connected control-action return (2026-10-07): preserving control actions,
 actual HUD-mode changes and gear-gate outputs now reach subsequent depleted
 recorder input when publication skips. 127 full bodies, 144 recorder parents

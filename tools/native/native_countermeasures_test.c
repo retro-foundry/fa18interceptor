@@ -80,7 +80,8 @@ static int fd_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned
 }
 static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const uint8_t keys[]={0x60,0xe0,0x66,0xe6,0x67,0xe7,0x70,0xf0,0x4c,0x4e,0x4c,0x4e,
-        0x4c,0x4d,0x4e,0x4f,0xcc,0xce,0x38,0xb8,0x0c,0x8c,0x25,0x24};
+        0x4c,0x4d,0x4e,0x4f,0xcc,0xce,0x38,0xb8,0x0c,0x8c,0x25,0x24,
+        0x3e,0x1e,0x2d,0x2f,0x3d,0x1d,0x3f,0x1f,0x3c,0x1b,0x1a,0x9a};
     const uint8_t raw=keys[variant];
     wr_u8(RECORDER_MODE,0);wr_u16(RECORD_WORD_A,0);wr_u16(RECORD_WORD_B,0);
     wr_u16(PENDING_COMMAND_WORD_A,0);wr_u16(PENDING_COMMAND_WORD_B,0);
@@ -94,6 +95,13 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
     if(variant==23) {
         wr_u8(CONTROL_RECORDS+3,rd_u8(CONTROL_RECORDS+3)&0x7f);
         wr_u32(COMMAND_GEAR_GATE,0x40);
+    }
+    if(variant>=24) {
+        wr_u8(ORIGIN_DETAIL_MODE,0);wr_u8(ORIGIN_ENABLE,variant>=31 && variant<=34?3:0);
+        wr_u8(VIEW_MODE,variant==27?11:0);
+        wr_u8(ORIGIN_GATE_B,variant>=33 && variant<=34);
+        wr_u8(ORIGIN_GATE_MODE,variant>=33 && variant<=34);
+        wr_u32(SELECTOR_ORIGIN_MIDDLE,0x04000000);
     }
     snprintf(fixture->path,sizeof fixture->path,"%s.interposed.%u",fixture->prefix,variant);
     NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
@@ -446,7 +454,7 @@ int main(int argc,char **argv) {
     }
     fixture.grid_sampling=0;
     fixture.cleanup_sampling=1;
-    for(unsigned i=0;i<36;++i) {
+    for(unsigned i=0;i<48;++i) {
         fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
         wr_u8(RECORDER_MODE,0);
         unsigned limit=game->ticks+100;
