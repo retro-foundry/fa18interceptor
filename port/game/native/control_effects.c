@@ -18,8 +18,14 @@ enum { CONTROL_FRAME=0x4500,ACTION_FRAME=0x4600,AIM_FRAME=0x4900,
 static uint32_t action_child(void *context,enum RecordActionChild child);
 static gaddr collision_frame(void *context) {(void)context;return COLLISION_FRAME;}
 static DynamicsState collision_child(void *context,enum DynamicsChild child,DynamicsState w) {
-    (void)context;(void)w;
-    fprintf(stderr,"native control collision child unavailable: %u\n",(unsigned)child);abort();
+    (void)context;
+    MotionState motion={w.primary,w.detail,w.x,w.y,w.z,w.rate_x,w.rate_y,w.rate_z,
+                       w.root,w.record,w.geometry,w.scene,w.table,w.face,w.child_equal};
+    if(child==DY_COMPONENT_COLLISION) motion=test_component_motion(motion,COLLISION_FRAME,NULL);
+    else if(child==DY_FACE_COLLISION) motion=test_face_motion(motion,COLLISION_FRAME,NULL);
+    else {fprintf(stderr,"native control collision child unavailable: %u\n",(unsigned)child);abort();}
+    return (DynamicsState){motion.value,motion.selector,motion.x,motion.y,motion.z,motion.nx,motion.ny,motion.nz,
+                          motion.root,motion.record,motion.point_x,motion.scene,motion.table,motion.face,motion.child_equal};
 }
 static FlightActionState direction_child(void *context,enum FlightActionChild child,FlightActionState w) {
     (void)context;

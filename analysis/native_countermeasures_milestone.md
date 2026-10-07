@@ -78,3 +78,34 @@ a control effect. Other commands/modes, complete gameplay sequences, full
 record/flag/counter comparisons and post-result behavior remain unfinished.
 This evidence establishes the connected tested countermeasure paths, not
 whole-game equivalence or bit-exact audio.
+
+## Follow-up: control-effect scene collisions
+
+The native C266AE caller now consumes C26CC0/C26D8A's typed results. These
+owners return their complete working values and preserve the original A3/A5
+cursors; their CPU adapters still observe the same operations. C26CC0's
+native C27456 child reuses `faces_all_behind()` on the actual face-pointer
+stream, original record points, shift and eye coordinates. Only its stream
+cursor and predicate are live to the component parent.
+
+The complete C1518C comparison now covers **256 cases**, including 64 controlled
+descriptor/position cases. Original opcode coverage records 256 component
+child calls, 32 face child calls, 128 face-plane calls, 32 hit returns and
+220 misses. All compared non-stack RAM still agrees. Descriptor metadata and
+collision inputs are confined to tests; the model points/face tables come
+from the disk-loaded carrier record. These cases demonstrate face hits and
+component misses, not every possible component hit or complete weapon kill.
+
+After the ordinary Free Flight run, the same native integration entry also
+executes four controlled C1518C parents with the executable's runtime objects.
+Exports `frame.collision.N.before.dat` / `.after.dat` bracket **only C1518C**,
+not a complete C0EFEA frame. Original opcodes match all compared RAM, including
+display bytes: two face hits and two component misses, with one of the latter
+consuming eight face-plane calls. The previous four real keyboard-driven full
+bodies still pass unchanged. The native frontend/link check and 256 cases per
+owner in both legacy contract/real-child motion-helper comparisons also pass;
+both MSVC runners rebuild. No original full replay was repeated.
+
+The earlier missing component/face-child statement is superseded by this
+follow-up. Depleted pending recorder carry, $FD indexed selection, other
+commands/modes and complete gameplay equivalence remain open.

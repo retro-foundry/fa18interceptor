@@ -24,9 +24,13 @@ def main():
     run = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                           str(work / 'pilot'), str(prefix)], cwd=ROOT, check=True,
                          capture_output=True, text=True, timeout=25)
-    bodies = [json.loads(line) for line in run.stdout.splitlines()]
+    exports = [json.loads(line) for line in run.stdout.splitlines()]
+    bodies = [entry for entry in exports if 'capture' in entry]
+    parents = [entry for entry in exports if 'control_parent' in entry]
     assert [body['capture'] for body in bodies] == list(range(4)), bodies
-    (work / 'captures.json').write_text(json.dumps(bodies, indent=2) + '\n')
+    assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
+    assert any(entry['collision_hit'] for entry in parents), parents
+    (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
     for name in ('input', 'control_effects', 'frame_body'):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
         # These reference builds share an object directory: keep sequential.
@@ -36,6 +40,11 @@ def main():
         if name != 'frame_body':
             subprocess.run([str(oracle), str(prefix) + '.0.before.dat'],
                            cwd=ROOT, check=True, timeout=15)
+            if name == 'control_effects':
+                for entry in parents:
+                    parent = str(prefix) + f".collision.{entry['control_parent']}"
+                    subprocess.run([str(oracle), parent + '.before.dat', parent + '.after.dat'],
+                                   cwd=ROOT, check=True, timeout=15)
             continue
         for body in bodies:
             capture = Path(str(prefix) + f".{body['capture']}")

@@ -5,8 +5,10 @@ motion, ground-contact expiry and drawing through C1518C. Complete original
 input/control-effect parent comparisons pass 688/192 cases; four actual
 keyboard-driven Free Flight bodies match compared gameplay and all display
 bytes. Active/crash/map, queued input, native integration, frontend/omission and
-reference host/loading checks pass. Depleted pending recorder carry, $FD indexed
-selection and component/face collision children still need implementation.
+reference host/loading checks pass. A follow-up connects effect component/face
+collision children: 256 full source-parent cases and four controlled actual
+native parents match compared RAM/display (face hits and component misses).
+Depleted pending recorder carry and $FD indexed selection remain unfinished.
 See `analysis/native_countermeasures_milestone.md`. Whole gameplay remains open.
 
 Latest timing clarification: exact Amiga frame timing is not a completion gate

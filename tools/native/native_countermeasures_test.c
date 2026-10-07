@@ -1,6 +1,7 @@
 /* Real keyboard-driven Free Flight, sharing every runtime object with the
  * playable runner. Capture launch and expiry bodies for original comparison. */
 #include "native/frontend.h"
+#include "native/control_effects.h"
 #include "../../port/native/frame_capture.h"
 #include "globals.h"
 #include <stdio.h>
@@ -13,6 +14,31 @@ typedef struct {
     char path[4096];
     unsigned captures,launches,expiry;
 } CountermeasureFixture;
+static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
+    const gaddr record=0xc45c72u,target=CONTROL_RECORDS+14*512;
+    for(unsigned i=0;i<0x500;++i) wr_u8(record+i,0);
+    wr_u8(MISSION_FLAGS_A,0);wr_u8(0xc46201u,0);
+    wr_u8(0xc457bdu,0);wr_u8(0xc457aeu,0);
+    wr_u8(0xc4585eu,1);wr_u32(0xc459c6u,0x6500);
+    wr_u16(0x6500,0x0e10);wr_u32(0x6502,0x6600);wr_u32(0x6604,0x6700);
+    wr_u16(0x6700,0);wr_u8(0x6707,variant&1?16:0);
+    wr_u16(target,rd_u16(target)|0x40);wr_u8(target+123,0);
+    wr_u16(record+48,rd_u16(target+6));wr_u16(record+50,rd_u16(target+8));
+    wr_u32(record,(uint32_t)(int32_t)rd_s16(target+12)<<8);
+    wr_u32(record+4,(rd_u32(target+16)<<8)+(variant>=2?0x10000:0));
+    wr_u32(record+8,(uint32_t)(int32_t)rd_s16(target+14)<<8);
+    wr_u16(record+38,0x401);wr_u16(record+40,10);
+    snprintf(fixture->path,sizeof fixture->path,"%s.collision.%u",fixture->prefix,variant);
+    NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
+        .iteration=fixture->clock.iteration,.count=1};
+    /* These files bracket C1518C alone; they are not complete frame bodies. */
+    native_frame_capture(game,NATIVE_FRAME_BODY_BEGIN,0,&capture);
+    native_control_effects();
+    native_frame_capture(game,NATIVE_FRAME_BODY_END,0,&capture);
+    printf("{\"control_parent\":%u,\"collision_hit\":%s}\n",variant,
+           rd_u16(record+38)&0x10?"true":"false");
+    return capture.complete;
+}
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint16_t saved_tick,void *context) {
     CountermeasureFixture *fixture=context;
     fixture->clock.iteration=game->update_iterations;
@@ -60,6 +86,7 @@ int main(int argc,char **argv) {
         fprintf(stderr,"Countermeasure integration failed: captures=%u launch=%u expiry=%u stocks=%u/%u\n",
             fixture.captures,fixture.launches,fixture.expiry,rd_u8(MISSION_LEVEL_A),rd_u8(MISSION_LEVEL_B));goto done;
     }
+    for(unsigned i=0;i<4;++i) if(!collision_parent(game,&fixture,i)) goto done;
     result=0;
 done:
     if(game) {native_frontend_close(game);free(game);}return result;

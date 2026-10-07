@@ -86,8 +86,11 @@ use the source throttle controls, and arrow keys use the source stick controls.
 F and C execute source flare/chaff stock, messages and control-effect launch,
 motion, drawing and ground-contact expiry. Keyboard depleted-stock selection
 and SHIFT-F's mode-6 sound are connected. Depleted pending recorder carry,
-recorder $FD selection and effect component/face collision children remain
-unfinished. The runtime integration test uses real Free Flight keys and shares
+recorder $FD selection remain unfinished. Effect component/face collision
+children are connected; 256 source-parent cases and four controlled actual
+native parents match original compared RAM/display. These include face hits
+and component misses; complete weapon-kill sequences remain unverified.
+The runtime integration test uses real Free Flight keys and shares
 all playable runtime objects; four actual bodies match original gameplay and
 display. Build `fa18_native_countermeasures_test` and run
 `python tools/native/check_countermeasures.py` for retained focused evidence.

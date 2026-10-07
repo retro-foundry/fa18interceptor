@@ -1,6 +1,7 @@
 /* Original motion projection, slot publication and collision helpers.
  * Source: sealed C26322/C26352/C26C72/C26CC0/C26D8A owners. */
 #include "flight_motion_helpers.h"
+#include "plane_tests.h"
 #include <stdlib.h>
 static void observe(const MotionHooks *h,enum MotionPhase p,enum MotionValue f,uint32_t v,uint32_t o) {
     if(h && h->observe) h->observe(h->context,p,f,v,o);
@@ -116,8 +117,17 @@ static MotionState component_table(MotionState w,gaddr address,const MotionHooks
     P(table,MH_TABLE,address); P(face,MH_FACE,rd_u32(w.table)); P(table,MH_TABLE,w.table+4);
     W(nz,MH_NZ,rd_u16(w.face+2)); AW(nz,MH_NZ,164); return w;
 }
-void test_component_motion(MotionState w,gaddr frame,const MotionHooks *h) {
+static MotionState component_faces(MotionState w,gaddr frame,const MotionHooks *h,int upper) {
+    if(h && h->consume_face) return h->consume_face(h->context,upper);
+    /* C27456: consume the actual pointer stream and original plane-side
+     * predicate. Only its result and stream cursor are live on return here. */
+    w.nz=(uint32_t)faces_all_behind(&w.table,w.scene,rd_s16(frame-90),
+                                  (int16_t)w.point_x,(int32_t)w.record,rd_s16(frame-66));
+    w.child_equal=w.nz==0;return w;
+}
+MotionState test_component_motion(MotionState w,gaddr frame,const MotionHooks *h) {
     uint8_t code; int hit=0;
+    const gaddr saved_scene=w.scene,saved_face=w.face;
     observe(h,MH_SAVE_CURSORS,MH_VALUE,0,0); store_byte(h,frame-32,0); load_position(&w,w.scene,h);
     LSL(x,MH_X,8); LSL(y,MH_Y,8); LSL(z,MH_Z,8);
     P(point_x,MH_POINT_X,sign_word(w.x)); P(record,MH_RECORD,w.y); store_word(h,frame-66,(uint16_t)w.z);
@@ -129,7 +139,7 @@ void test_component_motion(MotionState w,gaddr frame,const MotionHooks *h) {
     if((int16_t)w.y<(int16_t)w.z) {
         for(;;) {
             uint16_t marker=rd_u16(w.table); observe(h,MH_TEST_WORD,MH_VALUE,marker,0); if((int16_t)marker<0) break;
-            if(!h || !h->consume_face) abort(); w=h->consume_face(h->context,0);
+            w=component_faces(w,frame,h,0);
             if(!w.child_equal) { hit=1; break; }
         }
     } else {
@@ -142,13 +152,15 @@ void test_component_motion(MotionState w,gaddr frame,const MotionHooks *h) {
             W(z,MH_Z,rd_u16(indexed(w.scene+2,w.nz))); EL(z,MH_Z); CL(w.z,w.record);
             if((int32_t)w.z<(int32_t)w.record) goto done;
         }
-        if(!h || !h->consume_face) abort(); w=h->consume_face(h->context,1); hit=!w.child_equal;
+        w=component_faces(w,frame,h,1); hit=!w.child_equal;
     }
 done:
     L(nz,MH_NZ,hit); observe(h,MH_RESTORE_CURSORS,MH_VALUE,0,0);
+    w.scene=saved_scene;w.face=saved_face;return w;
 }
-void test_face_motion(MotionState w,gaddr frame,const MotionHooks *h) {
+MotionState test_face_motion(MotionState w,gaddr frame,const MotionHooks *h) {
     uint32_t old; int hit=0; int64_t signed_sum;
+    const gaddr saved_scene=w.scene,saved_face=w.face;
     observe(h,MH_SAVE_CURSORS,MH_VALUE,0,0); store_byte(h,frame-32,0); load_position(&w,w.scene,h);
     LSL(x,MH_X,8); LSL(y,MH_Y,8); LSL(z,MH_Z,8);
     P(point_x,MH_POINT_X,sign_word(w.x)); P(record,MH_RECORD,w.y); P(table,MH_TABLE,sign_word(w.z));
@@ -192,4 +204,5 @@ void test_face_motion(MotionState w,gaddr frame,const MotionHooks *h) {
     }
 done:
     L(nz,MH_NZ,hit); observe(h,MH_RESTORE_CURSORS,MH_VALUE,0,0);
+    w.scene=saved_scene;w.face=saved_face;return w;
 }

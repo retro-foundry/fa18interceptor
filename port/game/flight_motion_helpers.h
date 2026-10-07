@@ -29,6 +29,6 @@ typedef struct {
 MotionState project_record_motion(MotionState w,const MotionHooks *h); /* C26322 */
 void publish_motion_slot(MotionState w,const MotionHooks *h); /* C26352 */
 void project_scene_motion(MotionState w,gaddr frame,const MotionHooks *h); /* C26C72 */
-void test_component_motion(MotionState w,gaddr frame,const MotionHooks *h); /* C26CC0 */
-void test_face_motion(MotionState w,gaddr frame,const MotionHooks *h); /* C26D8A */
+MotionState test_component_motion(MotionState w,gaddr frame,const MotionHooks *h); /* C26CC0 */
+MotionState test_face_motion(MotionState w,gaddr frame,const MotionHooks *h); /* C26D8A */
 #endif

@@ -170,8 +170,18 @@ and runtime evidence are distinguished in
 Build `fa18_native_countermeasures_test` with the native runner, then run
 `python tools/native/check_countermeasures.py`. Its exports persist under
 `build/native-flight/countermeasure-check/`. Depleted pending recorder carry,
-$FD function-level selection and control-effect component/face collision
-children remain explicit unsupported paths. Full gameplay goal remains active.
+$FD function-level selection remain explicit unsupported paths. Full gameplay
+goal remains active.
+
+Follow-up collision connection: C266AE now consumes source C26CC0/C26D8A
+typed returns; the component child reuses C27456's existing face-plane owner.
+Expanded C1518C source comparisons pass 256 cases, reaching 256 component,
+32 face and 128 plane child calls (32 hits / 220 misses). Four controlled
+C1518C parents using actual native runtime objects also match original RAM
+and display: two face hits, two component misses. Those exports bracket only
+the control parent; they are separate from the four keyboard-driven full frame
+bodies, which still pass. Motion-helper contract/real-child regressions and
+frontend/native omission checks pass. See the milestone's follow-up section.
 
 ### `d5203c52` — C0DA38 alternate selection and enclosing-frame exit
 
@@ -314,7 +324,8 @@ No full original replay was repeated in the last two implementation batches.
 countermeasures and function-level actions with recorder mode $FD: their
 inherited selection needs the real source caller contract. Keyboard flare/chaff
 and successful pending commands are connected. Do not invent a carry for the
-remaining paths. Control-effect component/face collision children remain open.
+remaining paths. Control-effect component/face children are now connected;
+complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
 1, 9, 127 and demonstration mode 3 with recorder mode 3.
