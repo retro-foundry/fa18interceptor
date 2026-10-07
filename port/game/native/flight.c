@@ -193,6 +193,11 @@ static int32_t result_message_child(void *context,enum PostflightMessageChild ch
 }
 static void stage(void *context,gaddr routine) {
     NativeFrontend *game=context;
+    const NativeInputReturn prior=game->completed_input_return;
+    int preserves_input=0;
+    /* C0F5F8's prefix/tail assigns no inherited input byte. Each selected
+     * stage must establish its own assignment or preservation contract. */
+    game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
     const MenuOutcomeHooks outcome={outcome_child,NULL,game};
     const MenuFollowupHooks followup={followup_child,NULL,game};
     const MenuReturnHooks returns={return_child,NULL,game};
@@ -270,7 +275,15 @@ static void stage(void *context,gaddr routine) {
         const PostflightMessageHooks messages={result_message_child,NULL,game};
         prepare_postflight_result(&messages);
     }
-    else if(!native_setup_stage(game,routine)) { fprintf(stderr,"native flight stage unavailable: %08X\n",routine); abort(); }
+    else {
+        const int result=native_setup_stage(game,routine);
+        if(result==NATIVE_SETUP_INPUT_PRESERVED) preserves_input=1;
+        else if(result==NATIVE_SETUP_UNHANDLED) {
+            fprintf(stderr,"native flight stage unavailable: %08X\n",routine);abort();
+        }
+    }
+    if(preserves_input) game->completed_input_return=prior;
+    else game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
 }
 static MainTimerBounds timer_child(void *context,enum MainTimerChild child) {
     (void)context;
@@ -318,7 +331,6 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
         const PostInputTickHooks hooks={stage,NULL,game};
         run_post_input_tick(&hooks);
     } else wr_u8(KEY_TAKEN,0); /* C0F808's tail follows C0FCB4 too. */
-    game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
     if(game->observe_frame)
         game->observe_frame(game,NATIVE_FRAME_BODY_BEGIN,saved_tick,game->frame_context);
     tick_notification_cadence(); /* C11B44 at C0EFEA. */
@@ -326,6 +338,7 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
      * POST_INPUT_AUX permits updates. View/control, projection, terrain and
      * the HUD/panel slice follow the record/context work. */
     if(rd_u8(POST_INPUT_AUX)) {
+        game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
         update_view_controls(); /* C0F002, before the C1C63E record pass. */
         native_records_update();
         ++game->record_updates;
@@ -347,6 +360,9 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
         begin_main_loop_timers(&timers);
         return finish_frame_clock(game);
     }
+    /* C11B44 uses D0 only; with POST_INPUT_AUX=0, C12950 exits at its
+     * enable gate before any child or inherited-byte assignment. The
+     * idle scene-label and debug gates then preserve this actual result. */
     update_control_actions(NULL,NULL); /* C12950 idle branch at C0F370. */
     ++game->control_frames;
     game->completed_input_return=native_frame_scene_labels(game->completed_input_return); /* The idle branch joins at C0F380 too. */

@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected idle preservation (2026-10-07): the actual viewport-message
+stage and idle frame preserve preceding input outputs. Fourteen idle bodies
+now match their original outputs; twelve feed recorder input directly. The
+expanded comparison passes 199 full bodies, 216 recorder parents, 84 keyboard
+parents and twelve separate input/stage parents. Ten affected checks and
+native/reference builds pass. See `analysis/native_idle_input_return.md`.
+Other stage/reset/HUD contracts and whole-game mission/audio/state/performance
+acceptance remain unfinished; the complete-port goal stays active.
+
 Latest connected context camera outputs (2026-10-07): existing matrix and
 observer owners now compose record-relative and preset camera calculations.
 Actual context/map outputs and preserving requests reach depleted recorder

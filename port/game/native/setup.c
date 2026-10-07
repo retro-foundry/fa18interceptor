@@ -67,7 +67,9 @@ int native_setup_stage(NativeFrontend *game,gaddr routine) {
     case 0xc10cfe: finish_menu_context_message(&hooks); return 1;
     case 0xc10d8a: expire_menu_context(&hooks); return 1;
     case 0xc10dae: update_menu_context(0,&hooks); return 1;
-    case 0xc11a26: queue_menu_viewport_message(&hooks); return 1;
+    /* C11A26-C11A4E uses D0/D1/A0 only and calls no children. Its viewport
+     * gate and message publication preserve the preceding domain output. */
+    case 0xc11a26: queue_menu_viewport_message(&hooks); return NATIVE_SETUP_INPUT_PRESERVED;
     case 0xc11a50: finish_menu_viewport_message(&hooks); return 1;
     default: return 0;
     }

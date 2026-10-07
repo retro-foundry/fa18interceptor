@@ -58,7 +58,7 @@ def check(args, work, capture_dir):
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
     assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
-    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(204)), pending_inputs
+    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(216)), pending_inputs
     assert [entry['message_body'] for entry in message_bodies] == list(range(15)), message_bodies
     assert [entry['assigned'] for entry in message_bodies] == [True] * 13 + [False] * 2, message_bodies
     assert {entry['input_byte'] & 0x80 for entry in message_bodies[:12]} == {0, 0x80}
@@ -82,9 +82,10 @@ def check(args, work, capture_dir):
     assert all(entry['return_owner'] == 9 and entry['saved_tick'] & 31 not in (8, 16)
         for entry in grid_bodies), grid_bodies
     assert {entry['recorder_mode'] for entry in pending_inputs} == {1, 2, 3}, pending_inputs
-    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(96)), cleanup_bodies
+    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(108)), cleanup_bodies
+    assert all(not entry['active'] for entry in cleanup_bodies[96:]), cleanup_bodies
     assert all(entry['return_owner'] == 10 for entry in cleanup_bodies[:84]), cleanup_bodies
-    assert all((entry['return_owner'] != 0 or not entry['active']) and entry['saved_tick'] & 31 not in (8, 16)
+    assert all(entry['return_owner'] != 0 and entry['saved_tick'] & 31 not in (8, 16)
         for entry in cleanup_bodies), cleanup_bodies
     assert [entry['interposed_input'] for entry in interposed_inputs] == list(range(84)), interposed_inputs
     assert {entry['return_owner'] for entry in interposed_inputs} == {10, 11, 12, 13, 14, 15, 16}, interposed_inputs
@@ -99,6 +100,7 @@ def check(args, work, capture_dir):
         [0,47,20,0,0,0,0,0,0,0,0,0])), interposed_inputs
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
     source_carries = {}
+    oracles = {}
     for name in ('frame_body', 'input', 'control_effects'):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
         # These reference builds share an object directory: keep sequential.
@@ -109,9 +111,11 @@ def check(args, work, capture_dir):
         (work / f'{name}-build.log').write_text(build.stdout + build.stderr)
         if build.returncode:
             raise RuntimeError(build.stderr or build.stdout)
+        oracles[name] = oracle
+    for name, oracle in oracles.items():
         with (work / f'{name}-check.log').open('w') as log:
-            def compare(capture, *values, environment=None):
-                comparison = subprocess.run([str(oracle), *map(str, values)],
+            def compare(capture, *values, environment=None, reference=None):
+                comparison = subprocess.run([str(reference or oracle), *map(str, values)],
                     cwd=ROOT, capture_output=True, text=True, timeout=15, env=environment)
                 log.write(comparison.stdout + comparison.stderr)
                 log.flush()
@@ -122,20 +126,46 @@ def check(args, work, capture_dir):
             if name != 'frame_body':
                 compare(str(prefix) + '.0', str(prefix) + '.0.before.dat')
             if name == 'input':
-                for entry in interposed_inputs:
-                    parent = str(prefix) + f".interposed.{entry['interposed_input']}"
-                    key = 120 + entry['interposed_input']
-                    environment = dict(os.environ, FA18_INPUT_EXPECT_CARRY=str(entry['input_byte']))
-                    output = compare(parent, parent + '.before.dat', parent + '.after.dat',
-                        entry['raw'], source_carries[key], environment=environment)
-                    source_carries[key] = int(re.search(r'Input return byte: (\d+)', output)[1])
                 for entry in fd_inputs:
                     parent = str(prefix) + f".fd.{entry['fd_input']}"
                     compare(parent, parent + '.before.dat', parent + '.after.dat', entry['raw'])
                 for entry in pending_inputs:
+                    if entry['pending_input'] >= 108:
+                        continue  # Cleanup bodies/commands are verified in their actual order below.
                     parent = str(prefix) + f".pending.{entry['pending_input']}"
                     carry = [source_carries[entry['pending_input']]] if entry['pending_input'] >= 24 else []
                     compare(parent, parent + '.before.dat', parent + '.after.dat', 'pending', *carry)
+                preceding_input = None
+                for body in cleanup_bodies:
+                    index = body['cleanup_body']
+                    capture = str(prefix) + f'.cleanup.{index}'
+                    environment = dict(os.environ, FA18_FRAME_EXPECT_INPUT_CARRY=str(body['input_byte']))
+                    environment.pop('FA18_FRAME_INITIAL_INPUT_CARRY', None)
+                    if not body['active']:
+                        assert preceding_input is not None, 'Idle body needs its preceding original input result'
+                        environment['FA18_FRAME_INITIAL_INPUT_CARRY'] = str(preceding_input)
+                    if index >= 96:
+                        stage = str(prefix) + f'.stage.{index}'
+                        stage_environment = dict(environment, FA18_FRAME_STAGE_ONLY='1')
+                        stage_output = compare(stage, stage + '.before.dat', stage + '.after.dat',
+                            body['before_tick'], body['before_tick'], body['saved_tick'],
+                            stage + '.source.dat', environment=stage_environment, reference=oracles['frame_body'])
+                        environment['FA18_FRAME_INITIAL_INPUT_CARRY'] = re.search(
+                            r'Frame input carry: (\d+)', stage_output)[1]
+                    output = compare(capture, capture + '.before.dat', capture + '.after.dat',
+                        body['before_tick'], body['after_tick'], body['saved_tick'],
+                        capture + '.source.dat', environment=environment, reference=oracles['frame_body'])
+                    carry = int(re.search(r'Frame input carry: (\d+)', output)[1])
+                    if 12 <= index < 96:
+                        entry = interposed_inputs[index - 12]
+                        parent = str(prefix) + f".interposed.{entry['interposed_input']}"
+                        environment = dict(os.environ, FA18_INPUT_EXPECT_CARRY=str(entry['input_byte']))
+                        output = compare(parent, parent + '.before.dat', parent + '.after.dat',
+                            entry['raw'], carry, environment=environment)
+                        carry = int(re.search(r'Input return byte: (\d+)', output)[1])
+                    parent = str(prefix) + f'.pending.{108 + index}'
+                    output = compare(parent, parent + '.before.dat', parent + '.after.dat', 'pending', carry)
+                    preceding_input = int(re.search(r'Input return byte: (\d+)', output)[1])
             elif name == 'control_effects':
                 for entry in parents:
                     parent = str(prefix) + f".collision.{entry['control_parent']}"
@@ -198,18 +228,8 @@ def check(args, work, capture_dir):
                         body['before_tick'], body['after_tick'], body['saved_tick'],
                         capture + '.source.dat', environment=environment)
                     source_carries[96 + body['grid_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
-                for body in cleanup_bodies:
-                    capture = str(prefix) + f".cleanup.{body['cleanup_body']}"
-                    environment = dict(os.environ)
-                    environment.pop('FA18_FRAME_EXPECT_INPUT_CARRY', None)
-                    if body['return_owner']:
-                        environment['FA18_FRAME_EXPECT_INPUT_CARRY'] = str(body['input_byte'])
-                    output = compare(capture, capture + '.before.dat', capture + '.after.dat',
-                        body['before_tick'], body['after_tick'], body['saved_tick'],
-                        capture + '.source.dat', environment=environment)
-                    source_carries[108 + body['cleanup_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
         print(f'{name}: original contracts and actual runtime captures pass', flush=True)
-    print('187 full bodies, 204 recorder input parents and 84 intervening keyboard parents match original RAM/display and defined returns')
+    print('199 full bodies, 216 recorder input parents and 84 intervening keyboard parents match original RAM/display and defined returns')
 
 
 if __name__ == '__main__':

@@ -1,5 +1,10 @@
 # Native context camera and zoom/message outputs - 2026-10-07
 
+Follow-up: `native_idle_input_return.md` resolves this batch's two idle outputs
+and checks twelve additional direct idle-to-recorder chains plus their actual
+input/stage parents. The historical evidence and limits below describe this
+context camera batch.
+
 Context calculation now reaches the existing matrix and observer owners in
 the playable native runner. Context commands expose their actual record
 selection, local height, preset displacement or map-origin result to later

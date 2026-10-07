@@ -34,6 +34,7 @@ typedef struct {
     unsigned grid_case;
     int cleanup_sampling;
     unsigned cleanup_case;
+    NativeFrameCapture idle_stage;
 } CountermeasureFixture;
 static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const unsigned settings=variant%12,mode=1+settings/4;
@@ -219,6 +220,22 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint1
     CountermeasureFixture *fixture=context;
     fixture->clock.iteration=game->update_iterations;
     if(fixture->cleanup_sampling) {
+        if(fixture->cleanup_case>=96) {
+            if(boundary==NATIVE_FRAME_INPUT_BEGIN) {
+                if(game->input_count || rd_u8(RECORDER_MODE) || rd_u16(RAW_KEY_LATCH) ||
+                   rd_u16(RECORD_WORD_A) || rd_u16(RECORD_WORD_B)) {
+                    fputs("Idle stage fixture has unexpected pending input\n",stderr);abort();
+                }
+                snprintf(fixture->path,sizeof fixture->path,"%s.stage.%u",fixture->prefix,fixture->cleanup_case);
+                fixture->idle_stage=(NativeFrameCapture){.replay=&fixture->clock,.prefix=fixture->path,
+                    .iteration=game->update_iterations,.count=1};
+                native_frame_capture(game,NATIVE_FRAME_BODY_BEGIN,saved_tick,&fixture->idle_stage);
+            } else if(boundary==NATIVE_FRAME_BODY_BEGIN) {
+                /* Before the controlled body gates below: actual input/stage
+                 * stores, bracketed separately from notification/drawing. */
+                native_frame_capture(game,NATIVE_FRAME_BODY_END,saved_tick,&fixture->idle_stage);
+            }
+        }
         if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)!=8 && (saved_tick&31)!=16) {
             /* Select a lost target and queue gates; the actual source cleanup
              * resets the view and computes publication. No output is seeded. */
@@ -538,15 +555,30 @@ int main(int argc,char **argv) {
         wr_u8(RECORDER_MODE,0);
         unsigned limit=game->ticks+100;
         while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
-        /* A context request can stop flight updates. Retain and compare that
-         * complete idle body too; the following context action must assign
-         * its own known output without inheriting the unresolved idle result. */
+        /* A context request can stop flight updates. The viewport stage and
+         * idle body preserve the real preceding input output. */
         if(!fixture.capture.complete || (i<84?game->completed_input_return.owner!=NATIVE_INPUT_RETURN_VIEW_KEY:
-                rd_u8(POST_INPUT_AUX) && game->completed_input_return.owner==NATIVE_INPUT_RETURN_UNKNOWN) ||
+                game->completed_input_return.owner==NATIVE_INPUT_RETURN_UNKNOWN) ||
            (rd_u8(POST_INPUT_AUX) && rd_u16(TARGET_RECORD)) || (i>=12 && !interposed_input(game,&fixture,i-12)) ||
            !pending_input(game,&fixture,108+i)) {
             fprintf(stderr,"Selection-cleanup carry integration failed at case %u: owner=%u target=%u\n",
                 i,game->completed_input_return.owner,rd_u16(TARGET_RECORD));goto done;
+        }
+    }
+    /* Consume idle output directly, without an intervening command assigning
+     * a new result. The preceding recorder parent supplies the actual output;
+     * only source viewport-stage gates are controlled in this fixture. */
+    for(unsigned i=96;i<108;++i) {
+        fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
+        wr_u8(RECORDER_MODE,0);wr_u32(STAGE_CALLBACK,ROUTINE_VIEWPORT_CHANGE);
+        wr_u8(VIEWPORT_MODE,0);wr_u8(VIEWPORT_TARGET,15);
+        unsigned limit=game->ticks+100;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete || rd_u8(POST_INPUT_AUX) ||
+           game->completed_input_return.owner==NATIVE_INPUT_RETURN_UNKNOWN ||
+           !pending_input(game,&fixture,108+i)) {
+            fprintf(stderr,"Idle input preservation failed at case %u: owner=%u active=%u\n",
+                i,game->completed_input_return.owner,rd_u8(POST_INPUT_AUX));goto done;
         }
     }
     fixture.cleanup_sampling=0;

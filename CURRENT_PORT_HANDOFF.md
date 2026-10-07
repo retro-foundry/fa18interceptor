@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest connected idle preservation (2026-10-07): the viewport-message stage
+and idle frame retain their actual preceding input result. Fourteen idle
+bodies, including twelve followed directly by recorder input, match original
+outputs. The expanded suite matches 199 full bodies, 216 recorder parents and
+84 keyboard parents against compared RAM/drawing and defined returns; twelve
+separate original input/stage parents also pass. Ten affected checks and
+native/reference builds pass. See `analysis/native_idle_input_return.md`.
+Other stage/reset/HUD contracts and whole-game mission/audio/state/performance
+acceptance remain open.
+
 Latest connected context camera outputs (2026-10-07): record-relative and
 preset calculations now call the existing matrix/observer owners; context,
 map and request actions compose actual outputs into depleted recorder input.

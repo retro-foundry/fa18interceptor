@@ -1,5 +1,14 @@
 # Native port runner
 
+The viewport-message stage and idle frame now preserve actual preceding input
+outputs. Fourteen idle bodies match original returns, with twelve followed
+directly by recorder input. The expanded suite matches 199 full bodies,
+216 recorder parents, 84 keyboard parents and twelve separate input/stage
+parents against compared RAM/drawing and defined returns. Ten affected checks
+and native/reference builds pass. See `../../analysis/native_idle_input_return.md`.
+Other stage/reset/HUD contracts and whole-game mission/audio/state/performance
+acceptance remain open.
+
 Context camera calculations now call the existing matrix/observer owners.
 Actual record/preset/map outputs and preserving requests compose subsequent
 depleted input. Zoom text and skipped-message decimal policies also reach

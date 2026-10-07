@@ -29,6 +29,7 @@ int main(int argc,char **argv) {
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
     const int owner_exit=argc==8 && !strcmp(argv[7],"owner-exit");
+    const int stage_only=getenv("FA18_FRAME_STAGE_ONLY")!=NULL;
     uint8_t *data=(argc==6 || argc==7 || owner_exit)?file_bytes(argv[1],&nd):NULL;
     uint8_t *expected=(argc==6 || argc==7 || owner_exit)?file_bytes(argv[2],&ne):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
@@ -42,9 +43,20 @@ int main(int argc,char **argv) {
     unsigned first_tick=(unsigned)strtoul(argv[3],NULL,10),last_tick=(unsigned)strtoul(argv[4],NULL,10);
     native_clock_set(first_tick);unsigned in_timer=0,timer_samples=0;
     memset(REG_DA,0,sizeof REG_DA);REG_A[6]=0xc7ff80;REG_A[7]=0xc7ff00;
+    /* Independent preceding original input result, never supplied to native
+     * gameplay. Idle bodies preserve it instead of assigning a new byte. */
+    const char *initial_carry=getenv("FA18_FRAME_INITIAL_INPUT_CARRY");
+    if(initial_carry) REG_D[4]=(uint32_t)strtoul(initial_carry,NULL,0);
     wr_u32(REG_A[6],0);wr_u32(REG_A[6]+4,0xc70000);
     wr_u16(REG_A[6]-2,(uint16_t)strtoul(argv[5],NULL,10));REG_A[4]=rd_u16(LINE_LAST_ROW);
-    REG_PC=0xc0efea;m68k_set_reg(M68K_REG_SR,0x2700);
+    REG_PC=0xc0efea;
+    if(stage_only) {
+        if(rd_u8(RECORDER_MODE) || rd_u16(RAW_KEY_LATCH) || rd_u16(RECORD_WORD_A) || rd_u16(RECORD_WORD_B)) {
+            fputs("Original idle stage requires empty keyboard/recorder input\n",stderr);return 1;
+        }
+        REG_A[7]=0xc7ff88;wr_u32(REG_A[7],0xc70000);REG_PC=0xc0efd4;m->joy1dat=0;
+    }
+    m68k_set_reg(M68K_REG_SR,0x2700);
     fa18_next_event=INT64_MAX;SET_CYCLES(1000000000);
     unsigned step,guidance_fault_returns=0;
     const char *trace_pixel=getenv("FA18_FRAME_TRACE_PIXEL");
@@ -55,6 +67,7 @@ int main(int argc,char **argv) {
     const int trace_input_carry=getenv("FA18_FRAME_TRACE_INPUT_CARRY")!=NULL;
     gaddr carry_writer=0;
     for(step=0;step<10000000;++step) {
+        if(stage_only && REG_PC==0xc0efea && REG_A[7]==0xc7ff82) break;
         if(trace_input_carry && ((REG_PC>=0xc0f250 && REG_PC<=0xc0f28c && (REG_PC-0xc0f250)%6==0) ||
             REG_PC==0xc0f2f6 || REG_PC==0xc0f2fc ||
             REG_PC==0xc0f380 || REG_PC==0xc0f386 || REG_PC==0xc0f3ac ||
@@ -85,6 +98,17 @@ int main(int argc,char **argv) {
             native_clock_request();REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;
         }
         if(REG_PC==0xc53f9c) {REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;}
+        if(stage_only && (REG_PC==0xc53c08 || REG_PC==0xc53c8c || REG_PC==0xc1715c)) {
+            /* Empty GetMsg/consumed descriptor release and zero physical
+             * buttons are identical host contracts to the native fixture.
+             * C0F3C4, C0F5F8 and C11A26 execute original game instructions. */
+            if(REG_PC==0xc53c08) {
+                const gaddr handle=rd_u32(REG_A[7]+4);
+                if(handle!=rd_u32(EXTERNAL_INPUT_HANDLE) && handle!=rd_u32(KEYBOARD_INPUT_HANDLE)) return 1;
+            }
+            if(REG_PC!=0xc53c8c) REG_D[0]=0;
+            REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;
+        }
         if(REG_PC==0xc53f4c) {
             REG_A[7]-=4;wr_u32(REG_A[7],0xc53f50);REG_PC=0xfc5a58;continue;
         }
