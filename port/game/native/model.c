@@ -308,6 +308,10 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x10c: return test_stream_face_accumulation(stream,frame);
     case 0x110: *stream=skip_stream_records(*stream); return 0;
     case 0x114: return draw_tested_parallelogram(stream,frame);
+    case 0x120:
+        /* C1FEE4: skip 18-byte entries using the source clock's low nibble.
+         * The initial DBRA tests before advancing, so zero skips nothing. */
+        *stream+=18u*(rd_u16(STREAM_SKIP)&15u); return 0;
     case 0x124: *stream=skip_word_for_mode_57(*stream); return 0;
     case 0x128: return draw_selected_segment_near(stream);
     case 0x12c: return draw_segment_pairs_near(stream);

@@ -171,6 +171,10 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
         schedule_postflight(POSTFLIGHT_MODE_NINE,0,record,NULL);
         return (PostflightScheduleResult){0,1};
     }
+    if(child==SCHEDULE_125) {
+        schedule_postflight(POSTFLIGHT_MODE_125,125,record,NULL); /* C0A334 */
+        return (PostflightScheduleResult){0,1};
+    }
     if(child==SCHEDULE_THREE) {
         const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
         schedule_postflight(POSTFLIGHT_MODE_THREE,3,record,&hooks);

@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected batch: digit 4 now enters native mode 125's prompts and
+sustained flight, with Escape/menu return and re-entry also exercised.
+55 actual input/stage intervals and 35 sampled bodies match original
+instructions' compared RAM/display. C0FECE's restore children, model command
+$120 (C1FEE4) and record scheduler C0A334 are connected. Seven affected native
+integration tests, mode-2 source regressions and current frontend checks pass.
+This is sampled route coverage; whole-mode outcomes and whole-game acceptance
+remain open. See `analysis/native_mode_125_milestone.md`.
+
 Latest connected batch: digit 3 now runs native source mode 2 through its two
 prompts, aircraft-record-4 control stream, flight failure and menu return.
 32 actual input/stage intervals and 21 sampled frame bodies match original

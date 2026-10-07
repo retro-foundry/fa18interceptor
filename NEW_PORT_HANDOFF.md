@@ -335,7 +335,7 @@ remaining paths. Control-effect component/face children are now connected;
 complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
-1, 2, 9, 127 and demonstration mode 3 with recorder mode 3. Digit 3's mode 2
+1, 2, 9, 125, 127 and demonstration mode 3 with recorder mode 3. Digit 3's mode 2
 now reaches its source prompts, record-4 playback, flight failure and menu
 return. 32 actual input/stage intervals and 21 sampled bodies match original
 instructions' compared RAM/display. The transition preserves the source
@@ -345,6 +345,17 @@ Native page allocation now retains the original descending 320x200 plane
 layout, independently confirmed in retained original demo/carrier RAM.
 See `analysis/native_mode_two_milestone.md`;
 `python tools/native/check_mode_two.py` reuses the actual runtime objects.
+
+Digit 4's mode 125 now connects its source restore setup and reaches sustained
+flight. Model command $120 retains C1FEE4's clock-controlled 18-byte skip;
+the native record loop dispatches mode 125 to source scheduler C0A334.
+The normal disk/input run reaches 2,211 scene/HUD frames, Escape/menu return
+and re-entry. 55 actual input/stage intervals and 35 bodies match compared
+original RAM/display. Mode-2 source regression and seven affected native
+integration tests pass. No new comparison exclusions were added.
+See `analysis/native_mode_125_milestone.md` and run
+`python tools/native/check_mode_two.py --mode 125 --out build/native-flight/restore-check/original-check`.
+Complete mode-125 outcomes and sequence acceptance remain open.
 
 Whole gameplay sequences under the revised timing scope, complete
 record/flag/counter state and post-result behavior remain unverified. Exact

@@ -414,3 +414,15 @@ python tools/native/check_qualification_result.py --game-input build/native-flig
 ```
 
 See [`../../analysis/native_qualification_result_milestone.md`](../../analysis/native_qualification_result_milestone.md).
+
+Digit 4 now reaches native mode 125's source prompts and sustained flight.
+A normal input run exercises Escape/menu return and re-entry, with 2,211
+scene/HUD frames. 55 actual input/stage intervals and 35 sampled bodies match
+original instructions' compared RAM/display. Complete outcomes and sequences
+remain unaccepted. The existing mode checker shares the playable runtime:
+
+```powershell
+python tools/native/check_mode_two.py --mode 125 --out build/native-flight/restore-check/original-check
+```
+
+See [`../../analysis/native_mode_125_milestone.md`](../../analysis/native_mode_125_milestone.md).

@@ -108,6 +108,10 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     case MENU_DELAY_VIEWPORT: clear_long_table(); break;
     case MENU_MODE_ONE_ROOT: set_menu_position_preset(&cold,0); break;
     case MENU_MODE_TWO_ROOT: load_origin_candidate_preset(&(SelectorOriginHooks){0},ORIGIN_ALTERNATE_PRESET); break;
+    case MENU_MODE_RESTORE: native_flight_reset_aircraft(context); break;
+    case MENU_MODE_RESTORE_STATE: load_origin_candidate_preset(&(SelectorOriginHooks){0},ORIGIN_ROOT_PRESET); break;
+    case MENU_MODE_RESTORE_POSITION: set_menu_position_preset(&cold,1); break;
+    case MENU_MODE_RESTORE_ROOT: initialize_scene_from_mode(NULL); break;
     case MENU_MODE_NINE_POSITION: reset_scene_context(); break; /* C0924A */
     case MENU_MODE_NINE_VIEW: finish_scene_setup(); break; /* C082B0 */
     case MENU_REFRESH:
@@ -255,7 +259,7 @@ static int finish_frame_clock(NativeFrontend *game) {
 }
 int native_flight_enabled(const NativeFrontend *game) {
     const uint8_t mode=rd_u8(MODE_SELECT);
-    return (mode==1 || mode==2 || mode==9 || mode==127 || (mode==3 && rd_u8(RECORDER_MODE)==3)) &&
+    return (mode==1 || mode==2 || mode==9 || mode==125 || mode==127 || (mode==3 && rd_u8(RECORDER_MODE)==3)) &&
         (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
 }
 int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
