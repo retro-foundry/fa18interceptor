@@ -1,4 +1,4 @@
-"""Check source modes 2, 3, 4, 6 or 125 through native menu and flight.
+"""Check source modes 2, 3, 4, 5, 6 or 125 through native menu and flight.
 
 Starts the shared playable runtime from disk/input and compares original
 C0F3C4/C0F5F8 intervals plus C0EFEA/C0F3C0 bodies. No full Amiga replay.
@@ -16,7 +16,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_mode_two_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mode-check')
-    parser.add_argument('--mode', type=int, choices=(2,3,4,6,125), default=2)
+    parser.add_argument('--mode', type=int, choices=(2,3,4,5,6,125), default=2)
     parser.add_argument('--aircraft', type=int, choices=(1,2), default=1)
     args = parser.parse_args()
     work = args.out.resolve()
@@ -30,7 +30,7 @@ def main():
     exports = [json.loads(line) for line in result.stdout.splitlines()]
     entries = [item for item in exports if 'entry' in item]
     bodies = [item for item in exports if 'capture' in item]
-    assert len(entries) >= {2:32,3:43,4:39,6:38,125:55}[args.mode] and len(bodies) >= {2:21,3:29,4:27,6:27,125:35}[args.mode], exports
+    assert len(entries) >= {2:32,3:43,4:39,5:39,6:38,125:55}[args.mode] and len(bodies) >= {2:21,3:29,4:27,5:27,6:27,125:35}[args.mode], exports
     required={'C10DAE'}
     if args.mode==2:
         required|={'C10272','C1029E','C102D8','C10302','C10362','C0F920'}
@@ -70,7 +70,7 @@ def main():
                 print(comparison.stdout, end='', flush=True)
                 if comparison.returncode:
                     raise RuntimeError(comparison.stderr or comparison.stdout)
-    outcome={2:'returns to menu',3:f'runs over 768 scene frames with aircraft {args.aircraft}',4:'runs over 2000 scene frames',6:'runs over 384 scene frames',
+    outcome={2:'returns to menu',3:f'runs over 768 scene frames with aircraft {args.aircraft}',4:'runs over 2000 scene frames',5:'runs over 2000 scene frames',6:'runs over 384 scene frames',
              125:'runs over 2,000 scene frames, including Escape/restart'}[args.mode]
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')

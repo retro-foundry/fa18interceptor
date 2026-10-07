@@ -460,3 +460,14 @@ python tools/native/check_mode_two.py --mode 4 --out build/native-flight/mission
 ```
 
 See [`../../analysis/native_mode_four_milestone.md`](../../analysis/native_mode_four_milestone.md).
+
+Mission-list F3 now runs normal mode 5 through briefing/context setup into
+flight (2,312 scene/HUD frames). 39 actual input/stage intervals and 27 sampled
+bodies match compared original RAM/display. Complete outcomes, record-restoration
+branches and combat remain open.
+
+```powershell
+python tools/native/check_mode_two.py --mode 5 --out build/native-flight/mission-five/original-check
+```
+
+See [`../../analysis/native_mode_five_milestone.md`](../../analysis/native_mode_five_milestone.md).

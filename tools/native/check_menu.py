@@ -80,9 +80,8 @@ def main():
             stats, _, _ = run(f"mission-f{number + 1}", 4900,
                 key(3000, 54) + key(4500, 282 + number))
             assert stats["mode"] == number + 3, stats
-            assert stats["screen"] == ("scene-setup" if number in (0,1,3) else "mode-intro"), stats
-            if number in (0,1,3):
-                assert stats["stage"] == "C105A6" and stats["scene_frames"] > 0, stats
+            assert stats["screen"] == "scene-setup", stats
+            assert stats["stage"] == "C105A6" and stats["scene_frames"] > 0, stats
         # Actual saved-log bytes drive the source eligibility gate. A pilot
         # with no qualification word cannot select F1; no invented availability.
         unqualified = bytearray(78)
