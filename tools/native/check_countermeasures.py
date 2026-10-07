@@ -44,11 +44,12 @@ def check(args, work, capture_dir):
     message_bodies = [entry for entry in exports if 'message_body' in entry]
     clear_bodies = [entry for entry in exports if 'clear_body' in entry]
     hud_bodies = [entry for entry in exports if 'hud_body' in entry]
+    debug_bodies = [entry for entry in exports if 'debug_body' in entry]
     assert [body['capture'] for body in bodies] == list(range(4)), bodies
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
     assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
-    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(60)), pending_inputs
+    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(72)), pending_inputs
     assert [entry['message_body'] for entry in message_bodies] == list(range(15)), message_bodies
     assert [entry['assigned'] for entry in message_bodies] == [True] * 13 + [False] * 2, message_bodies
     assert {entry['input_byte'] & 0x80 for entry in message_bodies[:12]} == {0, 0x80}
@@ -60,6 +61,8 @@ def check(args, work, capture_dir):
     assert all(entry['return_owner'] in (3, 4, 5) and entry['saved_tick'] & 31 != 8
         for entry in hud_bodies), hud_bodies
     assert {entry['return_owner'] for entry in hud_bodies} == {3, 4, 5}, hud_bodies
+    assert [entry['debug_body'] for entry in debug_bodies] == list(range(12)), debug_bodies
+    assert all(entry['return_owner'] == 6 for entry in debug_bodies), debug_bodies
     assert {entry['recorder_mode'] for entry in pending_inputs} == {1, 2, 3}, pending_inputs
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
     source_carries = {}
@@ -127,8 +130,15 @@ def check(args, work, capture_dir):
                         body['before_tick'], body['after_tick'], body['saved_tick'],
                         capture + '.source.dat', environment=environment)
                     source_carries[48 + body['hud_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
+                for body in debug_bodies:
+                    capture = str(prefix) + f".debug.{body['debug_body']}"
+                    environment = dict(os.environ, FA18_FRAME_EXPECT_INPUT_CARRY=str(body['input_byte']))
+                    output = compare(capture, capture + '.before.dat', capture + '.after.dat',
+                        body['before_tick'], body['after_tick'], body['saved_tick'],
+                        capture + '.source.dat', environment=environment)
+                    source_carries[60 + body['debug_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
         print(f'{name}: original contracts and actual runtime captures pass', flush=True)
-    print('43 full bodies and 60 recorder input parents match original RAM/display, including message, page-clear and HUD first-depleted returns')
+    print('55 full bodies and 72 recorder input parents match original RAM/display, including message, page-clear, HUD and debug text first-depleted returns')
 
 
 if __name__ == '__main__':

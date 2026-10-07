@@ -1,5 +1,13 @@
 # Native port runner
 
+The actual numeric debug overlay now returns its final four-plane text
+character/glyph selection to first depleted recorder flare/chaff commands.
+Inactive overlays preserve the preceding result. Fifty-five complete bodies
+and 72 recorder input parents match original compared RAM/drawing; 256 gated
+debug returns match, including clipped/odd-window cases. See
+`../../analysis/native_debug_text_input_return.md`. Remaining drawing/command
+contracts and whole-game acceptance stay open.
+
 HUD bar destinations and small-text character/glyph results now supply the
 first depleted recorder flare/chaff command. The periodic cockpit redraw also
 returns its source pass count. Forty-three actual bodies and 60 recorder input

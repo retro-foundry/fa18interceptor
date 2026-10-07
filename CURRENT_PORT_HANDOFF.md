@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest connected debug return (2026-10-07): the actual four-plane text owner
+now returns its final character or glyph selection through the numeric debug
+overlay to the next first depleted recorder command. Inactive overlays preserve
+the preceding domain result. The suite matches 55 complete flight bodies and
+72 recorder input parents, including twelve one-/three-field debug frames.
+256 gated overlay returns match the original, including clipped and odd-window
+characters. Ten affected checks pass; Release/Debug and both reference runners
+build. Qualification fixtures now match the current native boundary signatures.
+See `analysis/native_debug_text_input_return.md`. Full port remains active.
+
 Latest connected HUD return (2026-10-07): bar destinations, small-text
 character/glyph results and periodic cockpit redraw pass counts now reach the
 next first depleted recorder flare/chaff command. The real HUD owners compose

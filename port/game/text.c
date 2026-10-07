@@ -122,7 +122,8 @@ Text text_line(int count, gaddr chars, gaddr layout, gaddr rows, int16_t x_origi
     return text;
 }
 
-void draw_text(const Text *text) {
+TextDrawResult draw_text(const Text *text) {
+    TextDrawResult result={0};
     gaddr planes = rd_u32(PAGE_PLANE_TABLE);
     uint8_t colour = rd_u8(CURRENT_COLOUR + 1);
     int16_t column = (int16_t)(text->column * 2);
@@ -132,17 +133,20 @@ void draw_text(const Text *text) {
         int16_t at = rd_s16(text->layout + (gaddr)(4 * i));
         uint16_t mode = rd_u16(text->layout + (gaddr)(4 * i) + 2);
         uint8_t ch = rd_u8(text->chars + (gaddr)i);
+        result=(TextDrawResult){TEXT_DRAW_CHARACTER,ch,0}; /* C32B12, including spaces. */
         int16_t left = (int16_t)(text->x_origin + column + at);
         gaddr offset, glyph;
         if (ch == ' ' || left < 0 || left >= 40) continue;
         offset = (gaddr)(int32_t)(int16_t)(at + column) + text->rows;
-        if ((rd_u32(planes) + offset) & 1) continue;
         glyph = SMALL_GLYPHS + (uint32_t)(int32_t)rd_s16(SMALL_GLYPHS + (gaddr)(int32_t)(int16_t)((ch - 0x20) * 2));
+        result=(TextDrawResult){TEXT_DRAW_GLYPH,ch,glyph}; /* C32B4C precedes odd-window skip. */
+        if ((rd_u32(planes) + offset) & 1) continue;
         for (k = 0; k < 4; k++) {
             uint16_t bits = (uint16_t)(((colour >> (3 - k)) & 1 ? 0x0BFA : 0x0B0A) | mode);
             plot_glyph8(glyph, rd_u32(planes + (gaddr)(4 * k)) + offset, (bits >> 12) & 15, 5, (bits & 0xF0) != 0);
         }
     }
+    return result;
 }
 
 void draw_text_in_view(Text *text) {

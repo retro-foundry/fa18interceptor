@@ -22,6 +22,8 @@ typedef struct {
     unsigned clear_case;
     int hud_sampling;
     unsigned hud_case;
+    int debug_sampling;
+    unsigned debug_case;
 } CountermeasureFixture;
 static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const unsigned settings=variant%12,mode=1+settings/4;
@@ -94,6 +96,23 @@ static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint16_t saved_tick,void *context) {
     CountermeasureFixture *fixture=context;
     fixture->clock.iteration=game->update_iterations;
+    if(fixture->debug_sampling) {
+        if(boundary==NATIVE_FRAME_BODY_BEGIN) {
+            /* Controlled debug selection after ordinary startup; retain
+             * normal page, update counter and flight drawing order. */
+            wr_u8(UPDATE_TAIL_CONDITION,1);wr_u8(0xc457b3u,(uint8_t)(fixture->debug_case&1));
+            snprintf(fixture->path,sizeof fixture->path,"%s.debug.%u",fixture->prefix,fixture->debug_case);
+            fixture->capture=(NativeFrameCapture){.replay=&fixture->clock,.prefix=fixture->path,
+                .iteration=game->update_iterations,.count=1};
+        }
+        if(fixture->capture.prefix)
+            native_frame_capture(game,boundary,saved_tick,&fixture->capture);
+        if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
+            printf("{\"debug_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
+                fixture->debug_case,fixture->capture.before_tick,fixture->capture.after_tick,
+                fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value);
+        return;
+    }
     if(fixture->hud_sampling) {
         if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)!=8) {
             snprintf(fixture->path,sizeof fixture->path,"%s.hud.%u",fixture->prefix,fixture->hud_case);
@@ -224,6 +243,20 @@ int main(int argc,char **argv) {
         }
     }
     fixture.hud_sampling=0;
+    const uint8_t previous_debug=rd_u8(UPDATE_TAIL_CONDITION),previous_fields=rd_u8(0xc457b3u);
+    fixture.debug_sampling=1;
+    for(unsigned i=0;i<12;++i) {
+        fixture.debug_case=i;fixture.capture=(NativeFrameCapture){0};
+        wr_u8(RECORDER_MODE,0);
+        unsigned limit=game->ticks+100;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete || game->completed_input_return.owner!=NATIVE_INPUT_RETURN_DEBUG_TEXT ||
+           !pending_input(game,&fixture,60+i)) {
+            fprintf(stderr,"Debug text carry integration failed at case %u\n",i);goto done;
+        }
+    }
+    fixture.debug_sampling=0;
+    wr_u8(UPDATE_TAIL_CONDITION,previous_debug);wr_u8(0xc457b3u,previous_fields);
     for(unsigned i=0;i<24;++i) if(!pending_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<2;++i) if(!fd_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<4;++i) if(!collision_parent(game,&fixture,i)) goto done;

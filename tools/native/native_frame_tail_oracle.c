@@ -8,6 +8,7 @@
 
 static int source_range(gaddr start,gaddr end) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[4]=rd_u16(LINE_LAST_ROW);
+    REG_D[4]=0x51ab12e7;
     REG_A[6]=0xc7ff80;REG_A[7]=0xc7ff00;
     m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=start;
     fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
@@ -51,12 +52,22 @@ int main(int argc,char **argv) {
                 wr_u16(0xc45778,(uint16_t)-values[(test>>4)&7]);
                 wr_u16(LINE_LAST_ROW,test&16?9:199);
                 wr_u16(UPDATE_STAGE_MARKER,0x7777);
+                /* Controlled last-character layout tests the original
+                 * C32B12 clipping and C32B4C-before-odd-window selection. */
+                const int16_t last_columns[]={0,1,38,40,-2};
+                wr_u16(0xc31a4cu+12,(uint16_t)last_columns[(test>>4)%5]);
             }
             memcpy(before,m,sizeof *m);
-            if(group) native_frame_debug_overlay();else native_frame_selection_cleanup();
+            NativeInputReturn output={0};
+            if(group) output=native_frame_debug_overlay((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT});
+            else native_frame_selection_cleanup();
             memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
             memcpy(m,before,sizeof *m);
             if(!source_range(group?0xc0f386:0xc0f2dc,group?0xc0f3ba:0xc0f2f0)) return 1;
+            if(group && (output.owner==NATIVE_INPUT_RETURN_UNKNOWN || output.value!=(uint8_t)REG_D[4])) {
+                fprintf(stderr,"Debug return case %u: source %02X native %02X owner %u\n",
+                    test,(uint8_t)REG_D[4],output.value,output.owner);return 1;
+            }
             unsigned differences=0;
             for(unsigned i=0;i<0xffc00;++i) {
                 uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
@@ -69,6 +80,6 @@ int main(int argc,char **argv) {
             if(differences) return 1;
         }
     }
-    puts("64 selection-cleanup and 256 gated-overlay cases match all original non-stack RAM");
+    puts("64 selection-cleanup and 256 gated-overlay cases match all original non-stack RAM; 256 debug returns match");
     free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

@@ -29,11 +29,11 @@ void native_frontend_save_log(NativeFrontend *game) { (void)game;abort(); }
 void native_input_process(NativeFrontend *game) { (void)game;abort(); }
 void native_scene_project(void) { abort(); }
 int native_scene_draw(NativeFrontend *game) { (void)game;abort(); }
-void native_hud_draw(uint16_t tick) { (void)tick;abort(); }
-void native_frame_selection_cleanup(void) { abort(); }
-void native_frame_debug_overlay(void) { abort(); }
-void native_frame_scene_labels(void) { abort(); }
-void native_frame_grid_and_markers(void) { abort(); }
+NativeInputReturn native_hud_draw(uint16_t tick) { (void)tick;abort(); }
+int native_frame_selection_cleanup(void) { abort(); }
+NativeInputReturn native_frame_debug_overlay(NativeInputReturn prior) { (void)prior;abort(); }
+int native_frame_scene_labels(void) { abort(); }
+int native_frame_grid_and_markers(void) { abort(); }
 
 static int original_parent(gaddr entry) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;

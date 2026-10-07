@@ -2,6 +2,16 @@
 
 ## Objective and user constraints
 
+Latest connected debug return (2026-10-07): four-plane text character/glyph
+results now reach first depleted recorder flare/chaff commands through the
+real numeric overlay. Inactive overlays preserve the preceding result.
+Fifty-five complete bodies and 72 recorder input parents match original
+compared RAM/drawing, including twelve one-/three-field debug frames.
+256 gated debug returns match original source, with clipping and odd-window
+selection cases. Ten affected checks and all native/reference builds pass.
+See `analysis/native_debug_text_input_return.md`. Scene-label, marker, earlier
+HUD and intervening-command returns and whole-game acceptance remain open.
+
 Latest connected HUD return (2026-10-07): source bar destinations, small-text
 character/glyph results and periodic cockpit redraw pass counts now reach the
 first depleted recorder flare/chaff command. Forty-three actual flight bodies
