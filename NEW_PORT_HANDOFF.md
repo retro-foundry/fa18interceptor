@@ -79,6 +79,20 @@ builds in parallel. Independent MSVC build directories can run concurrently.
 
 ## What runs and what parity actually proves
 
+Latest independent later-demo assessment: source 2401..2763/native 2364..2726
+at ticks 222..584 matches all 363 named player/camera/phase/control boundaries.
+Named motion/rates/pose/matrices also match all 5,808 record instances. Complete
+record-core diagnostics match only 5,445 instances: the player retains +04
+bit two and a +4C countdown sixteen updates ahead. Zero boundaries have all
+sixteen cores matching. The comparison tools now report that scope explicitly.
+Strict two-page drawing passes 83/363 and still exits 1. At tick 508, the
+source view-hold timer expires and requests a cockpit redraw earlier in elapsed
+time; same-state/clock frame-body and original expiry-parent checks pass. No
+mask, fitted timer or game behavior change was introduced. See
+`analysis/native_later_demo_assessment.md`; source captures are retained under
+`build/native-flight/demo-later-review/`. Next trace the setup/bootstrap origin
+of the two player-core gaps before claiming whole record-state parity.
+
 Native intro, credits, callsign editing, menu/mission/log selection and config
 save/reload work. Demonstration, Free Flight and carrier qualification execute
 native input, record dynamics, terrain/models, cockpit/HUD, display, messages

@@ -12,7 +12,7 @@ import json
 from pathlib import Path
 import subprocess
 
-from check_gameplay_checkpoint import ROOT, compare_gameplay, integer, span
+from check_gameplay_checkpoint import ROOT, compare_gameplay, compare_record_state, integer, span
 
 
 def main():
@@ -59,11 +59,14 @@ def main():
         motion.add(hashlib.sha256(span(source, 0xC46190, 26)).hexdigest())
         frames.append(dict(source_iteration=args.source_first + i, native_iteration=native_iteration,
                            source_tick=integer(source, 0xC458DA, 2), native_tick=integer(native, 0xC458DA, 2),
-                           differences=differences))
+                           differences=differences, record_differences=compare_record_state(source, native)))
     matching = sum(not row['differences'] for row in frames)
     flight_matching = sum(not any(not value.startswith('page ') for value in row['differences']) for row in frames)
+    record_matching = sum(16 - len(row['record_differences']) for row in frames)
     report = dict(source_boundary='C0EFD4/pre-input', native_boundary='C0EFD4/pre-input',
                   compared=args.count, matching=matching, motion_and_controls_matching=flight_matching,
+                  record_cores_compared=16 * args.count, record_cores_matching=record_matching,
+                  complete_record_boundaries_matching=sum(not row['record_differences'] for row in frames),
                   distinct_source_drawings=len(drawings),
                   distinct_source_motion=len(motion), frames=frames, native_run=stats)
     report_path = args.out / 'comparison.json'
@@ -71,6 +74,8 @@ def main():
     print(f'Gameplay window: {matching}/{args.count} boundaries match ({matching / args.count:.1%}); '
           f'{len(drawings)} distinct drawing states, {len(motion)} distinct motion states')
     print(f'Player motion/pose/matrices, camera, phase and controls: {flight_matching}/{args.count} match')
+    print(f'Full flight-record cores (including flags/countdowns): {record_matching}/{16 * args.count} match; '
+          f"{report['complete_record_boundaries_matching']}/{args.count} complete record boundaries match")
     for row in [row for row in frames if row['differences']][:3]:
         print(f'Source {row["source_iteration"]}/native {row["native_iteration"]}, '
               f'ticks {row["source_tick"]}/{row["native_tick"]}:')

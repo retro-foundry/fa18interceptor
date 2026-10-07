@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest independent assessment extends demo ticks 222..584: all 363 player/
+camera boundaries and named motion/rates/pose/matrices across 5,808 record
+instances match. Strict drawing passes 83/363; later cockpit cache differences
+follow the source seconds-driven view-hold expiry/redraw path. Actual same-input
+frame body and original view-expiry parents pass. Full core diagnostics expose
+the player's region bit and sixteen-update countdown lead: 5,445/5,808 cores,
+zero complete record boundaries match. No gameplay change or new exclusion was
+made. See `analysis/native_later_demo_assessment.md`; next trace those startup
+record differences. Full goal remains unfinished.
+
 Latest connected batch: the reported demo outside-view clipping is corrected.
 C1F158/C1F2EE consumes the original model vertex; native composition had
 rotated it twice. All 223 independently aligned takeoff boundaries now match

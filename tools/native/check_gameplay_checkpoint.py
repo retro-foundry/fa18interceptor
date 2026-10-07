@@ -23,6 +23,24 @@ def integer(data, address, size):
     return int.from_bytes(span(data, address, size), 'big')
 
 
+def compare_record_state(source, native):
+    """Report every byte in the sixteen $A4-byte flight-record cores.
+
+    Include flags and countdowns. This separate scope must not be inferred
+    from matching drawing pages or the narrower player kinematic check.
+    Cached hull vertices following each core are renderer state, not included.
+    """
+    records = []
+    for slot in range(16):
+        address = 0xC46184 + slot * 512
+        original, actual = span(source, address, 0xA4), span(native, address, 0xA4)
+        changes = [f'+{offset:02X}:{a:02X}!={b:02X}'
+                   for offset, (a, b) in enumerate(zip(original, actual)) if a != b]
+        if changes:
+            records.append(dict(slot=slot, differences=changes))
+    return records
+
+
 def compare_gameplay(source, native):
     """Compare fixed phase alignment, complete source pages and named flight fields."""
     assert len(source) in (0x100000, 0x100048), 'expected original RAM export'
@@ -108,6 +126,10 @@ def main():
         native = Path(str(prefix) + '.entry.dat').read_bytes()
         differences = compare_gameplay(source, native)
         assert not differences, '\n'.join(differences)
+        records = compare_record_state(source, native)
+        print(f'Full flight-record cores (including flags/countdowns): {16 - len(records)}/16 match')
+        for record in records:
+            print(f"Record {record['slot']}: {', '.join(record['differences'])}")
         print(f'Aligned gameplay checkpoint: game tick {stats["frame_saved_tick"]}, native update {args.iteration}; '
               'both 320x200 four-plane pages, camera and player motion/pose/matrices match original bytes')
         print(f'Physical draw buffers: source {integer(source, 0xC4566C, 2)}, native {integer(native, 0xC4566C, 2)}; '

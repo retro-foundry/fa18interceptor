@@ -7,7 +7,7 @@ fail, including a changed bit in the timer-driven cockpit information line.
 import argparse
 from pathlib import Path
 
-from check_gameplay_checkpoint import compare_gameplay, integer
+from check_gameplay_checkpoint import compare_gameplay, compare_record_state, integer
 
 
 def offset(address):
@@ -59,8 +59,18 @@ def main():
         changed = bytearray(native)
         changed[offset(address)] ^= 1
         assert any(value.startswith(kind) for value in compare_gameplay(source, changed)), hex(address)
+    # Matching kinematics cannot conceal a different record flag/countdown.
+    # Check exact changed-byte evidence even when the baseline already carries
+    # separately reported cold-start record differences.
+    for slot, field in ((0, 4), (0, 0x4C), (15, 0x7E)):
+        changed = bytearray(native)
+        address = 0xC46184 + slot * 512 + field
+        changed[offset(address)] = source[offset(address)] ^ 1
+        record = next(item for item in compare_record_state(source, changed) if item['slot'] == slot)
+        assert any(value.startswith(f'+{field:02X}:') for value in record['differences']), (slot, field)
     print('Gameplay comparator: equivalent allocation passes; wrong frame/table, HUD bit, motion, '
           'mouse position, key-release phase, game tick, observer and camera/view matrices reject')
+    print('Full record diagnostics detect player flags/countdowns and the last record independently of page/kinematic matches')
 
 
 if __name__ == '__main__':

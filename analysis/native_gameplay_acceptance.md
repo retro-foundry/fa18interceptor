@@ -1,5 +1,14 @@
 # Native gameplay-frame acceptance
 
+The later independent segment now covers ticks 222..584: all 363 named player/
+camera boundaries match, but only 83 complete drawing boundaries match. The
+first cockpit cache difference at tick 508 follows the source seconds-driven
+view-hold expiry and redraw. Same-state/clock body and expiry-parent checks
+pass; equivalent elapsed-time assessment remains open. Complete core reporting
+also exposes the player's region flag and sixteen-update countdown lead:
+5,445/5,808 cores match, with zero completely matching record boundaries.
+See `native_later_demo_assessment.md`; these gaps are not masked or accepted.
+
 Latest takeoff assessment (2026-10-07): the user-reported demo outside-view
 clipping is fixed by supplying C1F2EE the original model vertex. All 223
 independent pre-input boundaries at source 2179..2401 / native 2142..2364
