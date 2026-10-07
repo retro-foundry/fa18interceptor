@@ -20,6 +20,7 @@ typedef struct {
     unsigned stage_count,captures,streams;
     unsigned mode,samples;
     unsigned eject,ejection;
+    unsigned callback,callback_bodies,callback_events;
     unsigned weapon,launch_bodies,launched,removed;
     unsigned projectile_states[3];
     uint16_t stock,ammo,counters[3];
@@ -73,6 +74,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned stream=rd_u8(0xc45799u);
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
+        if(run->callback_bodies) {--run->callback_bodies;sample|=8;}
         if(run->flight && stage==0xc10dae) {
             if(!run->flight_baseline) {
                 run->flight_baseline=1;
@@ -187,7 +189,8 @@ int main(int argc,char **argv) {
     ModeRun run={.prefix=argv[3],.mode=argc>=5?(unsigned)atoi(argv[4]):2};
     unsigned aircraft=argc>=6?(unsigned)atoi(argv[5]):1;
     if(argc==7) {
-        if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
+        if(!strcmp(argv[6],"callback") && run.mode==125) run.callback=1;
+        else if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
         else if(!strcmp(argv[6],"eject") && run.mode==8) run.eject=1;
         else if(run.mode==8 && !strncmp(argv[6],"weapon",6) && strlen(argv[6])==7 && argv[6][6]>='1' && argv[6][6]<='3')
             run.weapon=(unsigned)(argv[6][6]-'0');
@@ -201,12 +204,19 @@ int main(int argc,char **argv) {
         /* A saved-pilot fixture unlocks the original availability byte.
          * Reopen through the normal loader before any gameplay/input; only
          * validation creates this fixture, never the playable runtime. */
+        native_frontend_enlist(game); /* C162E4 must establish file readiness before C1643A. */
+        if(!rd_u16(MENU_FILE_READY) || rd_u16(MENU_TABLE_STATUS)) {
+            fputs("eligible-pilot fixture has no writable source config file\n",stderr);goto done;
+        }
         gaddr log=rd_u32(MODE_TABLE);
         if(!rd_u16(log)) goto done;
         wr_u8(log+0x12u+run.mode-1,1);
         native_frontend_save_log(game);
         native_frontend_close(game);
         if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
+        if(!rd_u8(rd_u32(MODE_TABLE)+0x12u+run.mode-1)) {
+            fputs("eligible-pilot fixture did not persist its availability byte\n",stderr);goto done;
+        }
     }
     game->observe_frame=observe;game->frame_context=&run;
     const unsigned times[]={1800,3000,5000,6500,11000,15000,16500};
@@ -218,6 +228,17 @@ int main(int argc,char **argv) {
     const int *input_keys=mission?mission_keys:keys;
     unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:4u;
     while(game->ticks<(run.flight?30000u:(mission || run.mode==125)?18000u:10000u)) {
+        if(run.callback) {
+            if(game->ticks==10000) {
+                run.callback_events=game->input_events;
+                native_frontend_event(game,127,1);run.callback_bodies=2;
+            }
+            if(game->ticks==10002) native_frontend_event(game,127,0);
+            if(game->ticks==10040 && (!game->input_server_installed ||
+               game->input_events!=run.callback_events+2)) {
+                fputs("Delete callback reset did not consume both events and reinstall the PAL server\n",stderr);goto done;
+            }
+        }
         if(run.flight) {
             const unsigned times[]={10000,11500,11200,11220,13000,14000,16000,17000};
             const unsigned durations[]={10000,500,2,2,2,100,2,100};
@@ -255,7 +276,7 @@ int main(int argc,char **argv) {
     }
     if(run.captures<8 || (run.mode==2 &&
        (!run.returned || game->scene_frames<30 || !game->postflight_callbacks)) ||
-       (run.mode==125 && (!run.returned || game->scene_frames<2000 || run.samples!=7 ||
+       (run.mode==125 && (!run.returned || game->scene_frames<2000 || (run.samples&7)!=7 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
        (run.mode==6 && (game->scene_frames<384 || run.samples!=7 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||

@@ -518,3 +518,16 @@ pass on a real demo aircraft record. Public native executable is updated.
 See analysis/native_config_owner_milestone.md; full mission successes,
 independent sequences, audio fidelity and 20 ms acceptance remain unfinished.
 The complete-port goal remains active.
+
+Delete callback follow-up: host Delete maps to raw $46; C06BF0 removes and
+reinstalls the input callback through existing C1748C/C17456 owners, preserving
+mouse state. 976 full input-parent comparisons include 64 new reset cases; 16
+additional menu command parents pass. Actual Free Flight Delete/Escape/restart
+matches 57 input/stage intervals and 37 sampled bodies. The eligible-pilot
+validation fixture now establishes source file readiness by entering
+enlistment before saving, then verifies reload. A fresh mode-eight probe exposed
+that cached eligible pilots concealed this fixture error in the previous
+28-test run. Six fresh pilot runs (seven/eight, ejection and three weapons)
+match 264 intervals and 211 bodies. Full native build and six selected native
+gates pass. See analysis/native_callback_reset_milestone.md; full gameplay,
+audio and performance acceptance remain open. The complete-port goal stays active.

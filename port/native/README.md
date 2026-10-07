@@ -1,5 +1,14 @@
 # Native port runner
 
+Latest input connection: Delete's source C06BF0 callback reset now executes
+existing C1748C/C17456 domain owners in flight and menus. Check it with
+`python tools/native/check_mode_two.py --mode 125 --callback`; 57 input/stage
+intervals and 37 sampled bodies match original compared RAM/display. Eligible
+pilot fixtures now establish source file readiness before saving; six fresh
+mission/ejection/weapon probes match 264 intervals and 211 bodies. See
+`../../analysis/native_callback_reset_milestone.md`. Whole-game acceptance
+remains unfinished.
+
 The 2026-10-06 user request starts `fa18_native`, reusing `port/game/` source
 with a separate native entry point. This supersedes the earlier restriction
 against starting a native runner. It does not restore the deleted `fa18_port`.

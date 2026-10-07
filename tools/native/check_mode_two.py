@@ -21,6 +21,7 @@ def main():
     parser.add_argument('--eject', action='store_true', help='Exercise Shift-E and mode-8 menu return')
     parser.add_argument('--weapon', type=int, choices=(1,2,3), help='Cycle Return 1/2/3 times and fire twice with Space')
     parser.add_argument('--flight', action='store_true', help='Mode-4 takeoff, weapon inputs and region/zone transitions')
+    parser.add_argument('--callback', action='store_true', help='Free Flight Delete callback remove/reinstall')
     args = parser.parse_args()
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
@@ -28,18 +29,23 @@ def main():
         parser.error('--weapon requires --mode 8 without --eject')
     if args.flight and (args.mode!=4 or args.eject or args.weapon):
         parser.error('--flight requires --mode 4 without --eject/--weapon')
+    if args.callback and (args.mode!=125 or args.flight or args.eject or args.weapon):
+        parser.error('--callback requires --mode 125 without other probes')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     prefix = work / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
+                             *(['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
                             capture_output=True, text=True, timeout=45 if args.flight else 25)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
     exports = [json.loads(line) for line in result.stdout.splitlines()]
     entries = [item for item in exports if 'entry' in item]
     bodies = [item for item in exports if 'capture' in item]
+    if args.callback:
+        assert any(0x46 in item['keys'] for item in entries), entries
+        assert any(0xc6 in item['keys'] for item in entries), entries
     assert len(entries) >= {2:32,3:43,4:39,5:39,6:38,7:42,8:38,125:55}[args.mode] and len(bodies) >= {2:21,3:29,4:27,5:27,6:27,7:29,8:27,125:35}[args.mode], exports
     if args.eject:
         assert len(entries)>=46 and len(bodies)>=43, exports
@@ -101,6 +107,8 @@ def main():
         outcome=f'fires source weapon selection {args.weapon}, preserving ammunition and log counters'
     if args.flight:
         outcome='takes off and runs region spawn/orientation, zone exit, NPC missiles and postflight restart'
+    if args.callback:
+        outcome='runs Delete callback removal/reinstallation and continues through Escape/restart'
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')
 

@@ -14,6 +14,7 @@ static int32_t palette_child(void *context,enum InputDeviceChild child) {
         install_input_device_callback(&hooks);return 0;
     }
     case IDC_ADD_SERVER: game->input_server_installed=1;return 0;
+    case IDC_REMOVE_SERVER: game->input_server_installed=0;return 0;
     case IDC_PALETTE_FIRST: case IDC_PALETTE_SECOND:
         source=rd_u32(PALETTE_FRAME-16);break;
     case IDC_PALETTE_STABLE: source=rd_u32(LONG_TABLE);break;
@@ -24,6 +25,14 @@ static int32_t palette_child(void *context,enum InputDeviceChild child) {
      * one selected page, while the source owner retains its view-pair stores. */
     for(unsigned i=0;i<16;++i) game->palette[i]=rd_u16(source+2*i);
     return 0;
+}
+void native_viewport_install_callback(NativeFrontend *game) {
+    const InputDeviceHooks hooks={palette_child,NULL,game};
+    install_input_device_callback(&hooks); /* C17456 */
+}
+void native_viewport_remove_callback(NativeFrontend *game) {
+    const InputDeviceHooks hooks={palette_child,NULL,game};
+    remove_input_device_callback(&hooks); /* C1748C */
 }
 void native_viewport_initialize(NativeFrontend *game) {
     const InputDeviceHooks hooks={palette_child,NULL,game};

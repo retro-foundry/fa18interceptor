@@ -5,4 +5,6 @@
  * Counters, bounded controls and viewport/fade run on PAL ticks, even waits. */
 void native_viewport_initialize(NativeFrontend *game);
 void native_viewport_tick(NativeFrontend *game);
+void native_viewport_install_callback(NativeFrontend *game);
+void native_viewport_remove_callback(NativeFrontend *game);
 #endif

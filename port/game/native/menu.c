@@ -2,6 +2,8 @@
  * C1017E publishes available missions; C24E8A formats the pilot log.
  * No source instruction, CPU adapter or device register is executed. */
 #include "menu.h"
+#include "viewport.h"
+#include "../fault.h"
 #include "../globals.h"
 #include "../command_selection.h"
 #include "../command_publication.h"
@@ -53,6 +55,16 @@ static ContextCommandResult context_child(void *context,enum ContextCommandChild
         return (ContextCommandResult){12,{0,0,0}};
     }
     fprintf(stderr,"native input context child unavailable: %u\n",(unsigned)which); abort();
+}
+static void callback_reset_child(NativeFrontend *game,enum CommandDispatchChild child) {
+    /* C1C2B8 -> C06BF0 removes the PAL callback, calls the release build's
+     * empty C06C02, then reinstalls it. Do not reset mouse counters/bounds. */
+    switch(child) {
+    case COMMAND_RESET_BEGIN: native_viewport_remove_callback(game);break;
+    case COMMAND_RESET_FAULT: case COMMAND_INVALID_INPUT_FAULT: fault_hook();break;
+    case COMMAND_RESET_FINISH: native_viewport_install_callback(game);break;
+    default: abort();
+    }
 }
 typedef struct {
     CommandRequest request;
@@ -117,6 +129,7 @@ unsigned native_menu_raw_key(int key,int down) {
     else if(key==27) raw=0x45;
     else if(key=='\r') raw=0x44;
     else if(key=='\b') raw=0x41;
+    else if(key==127) raw=0x46;
     else if(key==' ') raw=0x40;
     /* Same physical keys as port/machine/input.c's reference host mapping.
      * The source text translation table omits these throttle characters. */
@@ -152,6 +165,11 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
     } else if(is_context_command(request.action)) {
         const ContextCommandHooks hooks={context_child,NULL,game};
         event=execute_context_command(&request,&hooks);
+    } else if(request.action==COMMAND_RESET_CONTEXT) {
+        callback_reset_child(game,COMMAND_RESET_BEGIN);
+        callback_reset_child(game,COMMAND_RESET_FAULT);
+        callback_reset_child(game,COMMAND_RESET_FINISH);
+        return;
     } else if(request.action!=COMMAND_QUEUE_ONLY && request.action!=COMMAND_COUNTER_WAIT && request.action!=COMMAND_FINISH_EVENT) {
         fprintf(stderr,"native key action unavailable: %u\n",(unsigned)request.action); abort();
     }
@@ -208,8 +226,8 @@ static uint32_t view_child(void *context,enum ViewCommandChild child) {
     return command->flight.request.raw_event;
 }
 static void dispatch_child(void *context,enum CommandDispatchChild child) {
-    (void)context;
-    fprintf(stderr,"native command dispatch child unavailable: %u\n",(unsigned)child);abort();
+    NativeCommand *command=context;
+    callback_reset_child(command->game,child);
 }
 static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
     NativeCommand command={.game=game};

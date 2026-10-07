@@ -1,5 +1,18 @@
 # Current playable port handoff
 
+Latest connected batch: Delete now maps to source raw $46 and runs C06BF0's
+callback removal/reinstallation via existing C1748C/C17456 domain owners.
+Flight/menu callers preserve mouse state; 976 full input parents (64 new reset
+variants) plus 16 menu command parents match original non-stack RAM and callback
+state. Normal Free Flight Delete/Escape/restart matches 57 input/stage intervals
+and 37 sampled bodies with unchanged exclusions. The eligible-pilot fixture
+now enters enlistment before saving, checks readiness and verifies reload. A
+fresh mode-eight failure showed cached eligibility files concealed that fixture
+mistake in the previous batch. Fresh mode-seven/eight, ejection and all three
+weapon checks match 264 intervals and 211 bodies. Full native build and six
+selected native gates pass. See `analysis/native_callback_reset_milestone.md`;
+complete gameplay/audio/performance acceptance remains unfinished.
+
 Latest connected batch: native configuration writes now execute source C1643A
 status/readiness policy, and enlistment refresh executes C162E4/C0EF08/C16386/
 C1631C through existing Amiga host file services. The validated OFS mount stays

@@ -14,6 +14,7 @@
 #include "globals.h"
 #include "../../port/game/native/menu.c"
 #include "../../port/game/native/input.c"
+#include "../../port/game/native/viewport.c"
 extern int64_t fa18_next_event;
 
 /* Top-level menu composition is outside this input-only comparison. */
@@ -27,12 +28,13 @@ static uint8_t *read_bytes(const char *path,size_t *size) {
     p=malloc((size_t)n);if(!p || fread(p,1,(size_t)n,f)!=(size_t)n || fclose(f)) return NULL;
     *size=(size_t)n;return p;
 }
-static int original_input(NativeFrontend *game) {
+static int original_input_entry(NativeFrontend *game,gaddr entry,uint32_t raw) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;wr_u32(REG_A[7],0xc70000);
+    if(entry==0xc1ad74) wr_u32(REG_A[7]+4,raw);
     /* Keyboard countermeasure selection must replace the inherited low byte,
      * even when the caller's word/high halves are unrelated. */
     REG_D[4]=0x51ab12e7u;
-    m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=0xc0f3c4;
+    m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=entry;
     fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
     for(unsigned steps=0;steps<1000000;++steps) {
         if(REG_PC==0xc70000 && REG_A[7]==0xc7ff04) return 1;
@@ -49,11 +51,19 @@ static int original_input(NativeFrontend *game) {
             if(REG_PC==0xc1715c) REG_D[0]=game->mouse_buttons;
             REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;
         }
+        if(REG_PC==0xc53b00 || REG_PC==0xc53b18) {
+            /* Only Exec Add/RemIntServer is a host boundary. C06BF0 and both
+             * game-side callback owners execute all their original stores. */
+            if(rd_u32(REG_A[7]+4)!=5 || rd_u32(REG_A[7]+8)!=0xc1abf0) return 0;
+            game->input_server_installed=REG_PC==0xc53b00;
+            REG_D[0]=0;REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;
+        }
         uint16_t opcode=rd_u16(REG_PC);REG_PPC=REG_PC;REG_IR=opcode;REG_PC+=2;
         m68ki_instruction_jump_table[opcode]();USE_CYCLES(CYC_INSTRUCTION[opcode]);
     }
     fprintf(stderr,"source input failed at %06X\n",REG_PC);return 0;
 }
+static int original_input(NativeFrontend *game) {return original_input_entry(game,0xc0f3c4,0);}
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=read_bytes("captures/native/demo01/state.bin",&ns);
@@ -83,8 +93,8 @@ int main(int argc,char **argv) {
         return differences!=0;
     }
     unsigned total_events=0,drain_cases=0;
-    unsigned countermeasure_cases=0,fd_cases=0,ejection_cases=0;
-    for(unsigned variant=0;variant<912;++variant) {
+    unsigned countermeasure_cases=0,fd_cases=0,ejection_cases=0,callback_cases=0;
+    for(unsigned variant=0;variant<976;++variant) {
         static const uint8_t keys[]={0x0c,0x8c,0x4c,0xcc,0x4d,0xcd,0x4e,0xce,0x4f,0xcf,
             0x40,0xc0,0x24,0x20,0x13,0x44,0x37,0x38,0x39,0xb8,0xb9,0x50,0x55,0x59};
         static const uint16_t joy[]={0,1,2,0x100,0x200,0x301,0x102,0x303};
@@ -134,7 +144,7 @@ int main(int argc,char **argv) {
             wr_u8(RECORDER_MODE,0xfd);wr_u8(MODE_SELECT,(settings&1)?1:0);
             wr_u8(KEY_STATE+1,(settings&2)?1:0);wr_u8(KEY_STATE,(settings&4)?1:0);
             wr_u8(KEY_TAKEN,(settings&8)?1:0);
-        } else {
+        } else if(variant<912) {
             ++ejection_cases;
             const unsigned settings=variant-848;
             game->input_keys[0]=0x12;game->input_count=1;
@@ -142,12 +152,25 @@ int main(int argc,char **argv) {
             wr_u8(ORIGIN_GATE_A,(settings&4)?1:0);
             wr_u8(BAR_E_FLAG,(uint8_t[]){0,1,0x80,0xff}[(settings>>3)&3]);
             wr_u8(KEY_TAKEN,(settings&32)?1:0);
+        } else {
+            ++callback_cases;
+            const unsigned settings=variant-912;
+            game->input_server_installed=settings&1;
+            native_input_enqueue(game,127,!(settings&2));
+            wr_u8(RECORDER_MODE,(settings&4)?0xfd:0);
+            wr_u8(KEY_STATE,(settings&8)?1:0);
+            wr_u8(ORIGIN_DETAIL_MODE,(settings&16)?3:0);
+            wr_u8(CONTEXT_GATE,(settings&32)?2:0);
+            /* Installation must restore these descriptor fields only. */
+            wr_u32(0xc1abf8,0xaabbccdd);wr_u32(0xc1abfc,0x12345678);
+            wr_u32(0xc1ac02,0x87654321);
         }
         memcpy(source,game,sizeof *source);memcpy(before,m,sizeof *m);
         if(!original_input(source)) return 1;
         memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
         memcpy(m,before,sizeof *m);native_input_process(game);
-        if(game->input_count!=source->input_count || game->input_events!=source->input_events) return 1;
+        if(game->input_count!=source->input_count || game->input_events!=source->input_events ||
+           game->input_server_installed!=source->input_server_installed) return 1;
         total_events+=game->input_events;
         for(unsigned i=0;i<0xff000;++i) {
             uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
@@ -157,6 +180,28 @@ int main(int argc,char **argv) {
             }
         }
     }
-    printf("912 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases, %u ejection cases)\n",total_events,drain_cases,countermeasure_cases,fd_cases,ejection_cases);
+    printf("976 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases, %u ejection cases, %u callback cases)\n",total_events,drain_cases,countermeasure_cases,fd_cases,ejection_cases,callback_cases);
+    for(unsigned test=0;test<16;++test) {
+        memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+        memset(game,0,sizeof *game);
+        game->screen=(test&1)?NATIVE_MISSIONS:NATIVE_MENU;
+        game->input_server_installed=(test&2)!=0;
+        wr_u8(COMMAND_EVENT_COUNTER,1);wr_u8(MODE_SELECT,0);
+        wr_u8(ORIGIN_DETAIL_MODE,(test&4)?3:0);wr_u8(CONTEXT_GATE,(test&8)?2:0);
+        wr_u32(0xc1abf8,0xaabbccdd);wr_u32(0xc1ac02,0x87654321);
+        memcpy(source,game,sizeof *source);memcpy(before,m,sizeof *m);
+        if(!original_input_entry(source,0xc1ad74,0x46)) return 1;
+        memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
+        memcpy(m,before,sizeof *m);native_menu_key(game,127,1);
+        if(!game->input_server_installed || game->input_server_installed!=source->input_server_installed) return 1;
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                fprintf(stderr,"menu Delete case %u %06X: source %02X native %02X\n",test,
+                    i<0x80000?i:i-0x80000+0xc00000,expected[i],actual);return 1;
+            }
+        }
+    }
+    puts("16 menu/mission Delete command parents match original non-stack RAM and callback installation");
     free(source);free(game);free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }
