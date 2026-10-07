@@ -144,6 +144,19 @@ void derive_workspace_extensions(void) {
     p=get(w,0x1e);displacement=sub(get(w,0x2a),p);
     put(w,0x78,sub(sub(p,displacement),displacement));
 }
+void derive_workspace_midpoint_extensions(void) {
+    const gaddr w=WORKSPACES;
+    Vertex mid=half(add(get(w,6),get(w,12)));
+    Vertex reflection=sub(mid,sub(get(w,0x12),mid));
+    put(w,0x1e,mid);put(w,0x24,reflection);
+    put(w,0x2a,add(mid,half(half(sub(get(w,0),mid)))));
+    Vertex displacement=sub(get(w,0x18),reflection);
+    put(w,0x30,add(get(w,6),displacement));
+    put(w,0x36,add(get(w,12),displacement));
+    put(w,0x3c,add(get(w,0x12),displacement));
+    Vertex p=get(w,0x2a);displacement=sub(get(w,0),p);
+    put(w,0x42,sub(sub(p,displacement),displacement));
+}
 gaddr derive_edge_vertices(gaddr stream) {
     int16_t a = rd_s16(stream), b = rd_s16(stream + 2), w = rd_s16(stream + 4);
     gaddr bank = WORKSPACES, target = WORKSPACES + (gaddr)(int32_t)w;

@@ -540,8 +540,8 @@ static int derived_tails(void) {
     if(!saved || !before || !expected) return 0;
     memcpy(saved,fa18_machine,sizeof *saved);
     static const uint16_t indices[]={0,0x200,0x1c00,0x7fff,0x8000,0xff5c,0x2168,0x2162};
-    static const gaddr routines[]={0xc21fa4u,0xc0d524u,0xc0d61cu,0xc21e08u};
-    for(unsigned test=0;test<256;++test) {
+    static const gaddr routines[]={0xc21fa4u,0xc0d524u,0xc0d61cu,0xc21e08u,0xc21ef8u};
+    for(unsigned test=0;test<320;++test) {
         memcpy(fa18_machine,saved,sizeof *saved);
         uint16_t index=indices[test%8];wr_u16(SCRIPT_RECORD,index);
         gaddr banks[]={CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(index+0xa4u),WORKSPACES};
@@ -551,7 +551,8 @@ static int derived_tails(void) {
         if(test<64) derive_shown_parallelogram_vertices();
         else if(test<128) derive_shown_reflected_vertices();
         else if(test<192) derive_shown_midpoint_vertices();
-        else derive_workspace_extensions();
+        else if(test<256) derive_workspace_extensions();
+        else derive_workspace_midpoint_extensions();
         memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
         memcpy(fa18_machine,before,sizeof *before);
         if(!original(routines[test/64]) || REG_D[0]!=0) return 0;
@@ -563,7 +564,7 @@ static int derived_tails(void) {
         }
     }
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
-    puts("256 complete C21FA4/C0D524/C0D61C/C21E08 derived-tail cases match result and all non-stack RAM/display");return 1;
+    puts("320 complete C21FA4/C0D524/C0D61C/C21E08/C21EF8 derived-tail cases match result and all non-stack RAM/display");return 1;
 }
 static int hull_tails(void) {
     FA18Machine *before=malloc(sizeof *before),*saved=malloc(sizeof *saved);

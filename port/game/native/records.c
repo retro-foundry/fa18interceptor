@@ -79,6 +79,16 @@ static DynamicsState region_child(void *context,enum DynamicsChild child,Dynamic
         const DynamicsHooks hooks={.consume_values=region_child};
         return spawn_region_records(work,&hooks);
     }
+    if(child==DY_PLACE_RECORD || child==DY_REGION_RELEASE || child==DY_REGION_REPLACE) {
+        set_record_view(work.root,(int16_t)work.x,(int16_t)work.y,
+            (int16_t)work.z,(int16_t)work.rate_x,work.rate_y); /* C28F16 */
+        return work;
+    }
+    if(child==DY_ORIENT_RECORD) {
+        set_record_orientation(work.record,(uint16_t)work.z,
+            (uint16_t)work.rate_x,(uint16_t)work.rate_y); /* C2D954 */
+        return work;
+    }
     fprintf(stderr,"native scene region child unavailable: %u\n",(unsigned)child); abort();
 }
 static FlightWorking root_control_child(void *context,enum FlightChild child,FlightWorking w) {
@@ -121,8 +131,15 @@ static void dynamics(gaddr record) {
             ZoneExitFrame zone={0};
             zone.work=(GeometryState){w->primary,w->detail,w->x,w->y,w->z,w->rate_x,w->rate_y,w->rate_z,
                 w->root,w->record,w->geometry,w->scene,w->table,w->face,w->child_equal};
-            if(!update_dynamics_record_zone_exit(&zone,NULL)) {
-                fprintf(stderr,"native record zone child unavailable: %u\n",(unsigned)zone.phase); abort();
+            while(!update_dynamics_record_zone_exit(&zone,NULL)) {
+                if(zone.phase==ZONE_AFTER_PLACE) {
+                    GeometryState *v=&zone.work;
+                    set_record_view(v->root,(int16_t)v->x,(int16_t)v->y,
+                        (int16_t)v->z,(int16_t)v->rate_x,v->rate_y); /* C28F16 */
+                } else if(zone.phase==ZONE_AFTER_FAULT) fault_hook(); /* C06C02 */
+                else {
+                    fprintf(stderr,"native record zone child unavailable: %u\n",(unsigned)zone.phase); abort();
+                }
             }
             const GeometryState v=zone.work;
             *w=(DynamicsState){v.primary,v.detail,v.x,v.y,v.z,v.rate_x,v.rate_y,v.rate_z,
@@ -271,11 +288,12 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
     }
     fprintf(stderr,"native record schedule child unavailable: %u\n",(unsigned)child); abort();
 }
-typedef struct { gaddr companion; } RecordLoop;
+typedef struct { gaddr companion,viewer; } RecordLoop;
 static void record_event(void *context,const RecordUpdateEvent *event) {
     RecordLoop *loop=context;
     if(event->phase==RECORD_UPDATE_ROOT ||
        (event->phase==RECORD_UPDATE_SLOT && !event->other)) loop->companion=event->companion;
+    if(event->phase==RECORD_UPDATE_ROOT) loop->viewer=CONTROL_RECORDS;
 }
 static FlightWorking flight_child(void *context,enum FlightChild child,FlightWorking w) {
     (void)context;
@@ -293,7 +311,7 @@ static FlightWorking flight_child(void *context,enum FlightChild child,FlightWor
     return w;
 }
 static int record_child(void *context,enum RecordUpdateChild child,unsigned slot) {
-    const RecordLoop *loop=context;
+    RecordLoop *loop=context;
     gaddr record=CONTROL_RECORDS+512u*slot;
     const FlightActionHooks actions={.consume_values=action_child};
     FlightActionState work={0}; work.record=record; work.source=loop->companion;
@@ -306,7 +324,8 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
     case RECORD_UPDATE_ROOT_CONTROL: advance_flight_record_control(work,&actions); return 0;
     case RECORD_UPDATE_SECONDARY_CONTROL: advance_flight_record_stream(work,&actions); return 0;
     case RECORD_UPDATE_ROOT_VIEW: {
-        RecordViewUpdateWork view={0}; update_record_view(record,0,0,&view); return 1;
+        RecordViewUpdateWork view={0}; update_record_view(record,loop->viewer,0,&view);
+        loop->viewer=view.viewer;return 1;
     }
     case RECORD_UPDATE_ROOT_MARKER: classify_selected_record_range(record); return 0;
     case RECORD_UPDATE_POSE: dynamics(record); return 0;
@@ -314,11 +333,16 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
     case RECORD_UPDATE_PRIMARY_PLACE: try_primary_flight_record_action(work,&actions);return 0;
     case RECORD_UPDATE_SECONDARY_READY: return select_flight_record_action(work,0,&actions);
     case RECORD_UPDATE_SECONDARY_PLACE: try_flight_record_action(work,&actions);return 0;
-    case RECORD_UPDATE_PAIRED_READY: return paired_record_ready(record);
+    /* C231A2 reads A2, the aircraft owning this inactive paired missile. */
+    case RECORD_UPDATE_PAIRED_READY: return paired_record_ready(loop->companion);
     case RECORD_UPDATE_DISPATCH: {
         FlightWorking flight={0}; flight.record=record; flight.auxiliary=loop->companion;
+        /* C241A6's sight tail can retain the caller's viewer when the
+         * selected-reference heading arm bypasses view projection. */
+        flight.viewer=loop->viewer;
         const FlightHooks hooks={.consume_values=flight_child};
         flight=advance_main_loop_flight_record(flight,&hooks);
+        loop->viewer=flight.viewer;
         return flight.value!=0;
     }
     case RECORD_UPDATE_FINISH: {

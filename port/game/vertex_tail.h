@@ -32,6 +32,9 @@ void derive_shown_midpoint_vertices(void);
 /* C21E08: ten extensions at +$42..+$78 in WORKSPACES, combining
  * the original points with word-wrapped displacements. No stream operand. */
 void derive_workspace_extensions(void);
+/* C21EF8: seven workspace points at +$1E..+$42, using wrapped
+ * midpoint/reflection, quarter-displacement and translated vertices. */
+void derive_workspace_midpoint_extensions(void);
 /* C21B38: the compact hull's derived points, both in the shown record and
  * the transformed workspace selected by the operand. */
 gaddr derive_compact_shown_vertices(gaddr stream);

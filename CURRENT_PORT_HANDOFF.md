@@ -1,5 +1,18 @@
 # Current playable port handoff
 
+Latest connected batch: mode-4 throttle/stick flight runs region placement and
+orientation, zone exits, draw $B4/C21EF8, NPC missile launches and the player's
+hit/restart sequence (5,970 scene/HUD frames). The launch gate now tests the
+owning aircraft; the carrier renderer retains its completion flag, and the
+record sight tail retains its caller's viewer. 56 actual input/stage intervals
+and 47 sampled bodies match compared original RAM/display with zero differences
+and unchanged exclusions. Derived geometry passes 320 complete parents. The
+shared runtime adds `fa18_native_region_flight`; default setup models, reference
+runner builds, all 22 affected native tests and 12 host/loading checks pass.
+Full flight sequences, other
+combat/outcomes, audio and performance remain unaccepted. See
+`analysis/native_region_flight_milestone.md`; use `check_mode_two.py --mode 4 --flight`.
+
 Latest connected batch: normal mode-8 Return/Space firing exercises source
 weapon modes $30/$20/$10 (two missile stocks and gun ammunition). Draw command
 $98/C21E08 now has its readable workspace geometry. The gun comparison exposed

@@ -20,18 +20,21 @@ def main():
     parser.add_argument('--aircraft', type=int, choices=(1,2), default=1)
     parser.add_argument('--eject', action='store_true', help='Exercise Shift-E and mode-8 menu return')
     parser.add_argument('--weapon', type=int, choices=(1,2,3), help='Cycle Return 1/2/3 times and fire twice with Space')
+    parser.add_argument('--flight', action='store_true', help='Mode-4 takeoff, weapon inputs and region/zone transitions')
     args = parser.parse_args()
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
     if args.weapon and (args.mode!=8 or args.eject):
         parser.error('--weapon requires --mode 8 without --eject')
+    if args.flight and (args.mode!=4 or args.eject or args.weapon):
+        parser.error('--flight requires --mode 4 without --eject/--weapon')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     prefix = work / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else [])], cwd=ROOT,
-                            capture_output=True, text=True, timeout=25)
+                             *(['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
+                            capture_output=True, text=True, timeout=45 if args.flight else 25)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
     exports = [json.loads(line) for line in result.stdout.splitlines()]
@@ -42,7 +45,12 @@ def main():
         assert len(entries)>=46 and len(bodies)>=43, exports
     if args.weapon:
         assert len(entries)>=42+2*args.weapon and len(bodies)>=(36 if args.weapon==3 else 38), exports
+    if args.flight:
+        regions=[item for item in exports if item.get('regions')]
+        assert len(regions)==1 and regions[0]['spawned_records'] and regions[0]['zone_exits'] and regions[0]['npc_missiles']&(1<<13), exports
     required={'C10DAE'}
+    if args.flight:
+        required|={'C11788','C11830','C11872'}
     if args.mode==2:
         required|={'C10272','C1029E','C102D8','C10302','C10362','C0F920'}
     elif args.mode==125:
@@ -91,6 +99,8 @@ def main():
         outcome='runs Shift-E through sound, record clone, lifetime rendering and menu return'
     if args.weapon:
         outcome=f'fires source weapon selection {args.weapon}, preserving ammunition and log counters'
+    if args.flight:
+        outcome='takes off and runs region spawn/orientation, zone exit, NPC missiles and postflight restart'
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')
 

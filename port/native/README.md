@@ -66,6 +66,14 @@ This verifies the rendering transition, not complete destruction/collision or
 recorded-frame timing. See
 [`../../analysis/native_record_expiry_milestone.md`](../../analysis/native_record_expiry_milestone.md).
 
+Mode-4 throttle/stick flight also
+exercises region spawn/orientation, zone exits, NPC missile launches and the
+player's hit/restart sequence (5,970 scene/HUD frames). 56 actual input/stage
+intervals and 47 sampled bodies match original compared RAM/display with
+unchanged exclusions. Run `python tools/native/check_mode_two.py --mode 4 --flight`;
+see [`../../analysis/native_region_flight_milestone.md`](../../analysis/native_region_flight_milestone.md).
+Whole flights and other combat/outcome branches remain unverified.
+
 The default is an SDL window with native stereo sound. `--wav PATH` captures
 the same PCM, including in headless runs. A key acknowledges the credits. A first-time
 pilot can enter a callsign, edit with Backspace, and confirm with Return.

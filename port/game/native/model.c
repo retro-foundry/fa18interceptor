@@ -276,6 +276,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x0a8: *stream=derive_extended_shown_vertices(*stream); return 0;
     case 0x0ac: *stream=derive_compact_shown_vertices(*stream); return 0;
     case 0x0b0: split_record_and_stream_edges(stream); return 0;
+    case 0x0b4: derive_workspace_midpoint_extensions(); return 0;
     case 0x0c0: return draw_selected_segment(stream);
     case 0x0c4: {
         /* C1FF46: project the first face vertex when its side test rejects. */
@@ -323,7 +324,10 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x12c: return draw_segment_pairs_near(stream);
     case 0x130: *stream+=2; return 0;
     case 0x134: *stream=skip_counted_entries(*stream); return 0;
-    default: missing("draw command",index); return 0;
+    default:
+        fprintf(stderr,"native model stream %06X parameters %06X record %04X code %04X\n",
+            *stream-2,rd_u32(frame-0x2c),rd_u16(SCRIPT_RECORD),code);
+        missing("draw command",index); return 0;
     }
 }
 static int sequence(gaddr stream,gaddr frame) {
@@ -401,7 +405,9 @@ static int control(gaddr parameters,gaddr frame) {
             if(rd_u16(frame-0x7a)) break;
             if(entry&0x8000) break;
         }
-        if(rd_u16(frame-0x7a)) continue;
+        /* C1F838 returns to C1F716, whose whole-list completion latch
+         * remains set by C1F7DA even when C207FE ends the current surface. */
+        if(rd_u16(frame-0x7a) && !(code&0x4000)) continue;
         if(code&0x4000) break;
     }
     if(!(rd_u8(HEADER_BYTE)&0x40) && (rd_u8(HEADER_BYTE)&0x10)) {

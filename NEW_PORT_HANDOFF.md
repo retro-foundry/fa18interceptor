@@ -462,3 +462,18 @@ countermeasure parents/four bodies, reference build and 12 host/loading checks
 pass. These probes do not prove successful hits, full combat or mission outcomes.
 See `analysis/native_weapon_firing_milestone.md`; the shared checker accepts
 `--mode 8 --weapon 1`, `2` or `3`. The complete-port goal remains active.
+
+Normal mode-4 throttle/stick flight now runs region placement/orientation,
+zone exit, draw $B4/C21EF8, NPC missile launches and the player's hit/restart
+sequence, reaching 5,970 scene/HUD frames. Native composition fixes the owning
+aircraft input to the paired-missile readiness gate, the carrier's retained
+whole-list completion flag and the sight tail's inherited viewer. 56 actual
+input/stage intervals and 47 sampled bodies match compared original RAM/display
+with zero differences and no new exclusions. Derived geometry passes 320
+complete parents. The new shared-runtime test is `fa18_native_region_flight`;
+run `check_mode_two.py --mode 4 --flight`. Default setup-model checks, reference
+runner builds, all 22 affected native tests and 12 host/loading checks pass.
+These sampled bodies do not
+prove an independent whole flight, all collisions or mission outcomes. Audio
+fidelity and the 20 ms target remain unaccepted; the complete-port goal stays
+active. See `analysis/native_region_flight_milestone.md`.

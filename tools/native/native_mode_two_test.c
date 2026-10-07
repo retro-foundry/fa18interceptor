@@ -24,8 +24,19 @@ typedef struct {
     unsigned projectile_states[3];
     uint16_t stock,ammo,counters[3];
     int weapon_baseline;
+    unsigned flight,region_mask,occupied_mask,spawns,zone_exits,pending_exits,npc_missiles;
+    uint32_t record_states[16];
+    uint32_t record_cases[16][32];
+    unsigned record_case_counts[16];
+    uint32_t initial_position[3];
+    int flight_baseline,moved;
     int entered,returned;
 } ModeRun;
+static int inside_region(gaddr region,gaddr record) {
+    const int16_t x=rd_s16(record+6),z=rd_s16(record+8);
+    return x>=rd_s16(region) && x<=rd_s16(region+2) &&
+           z>=rd_s16(region+4) && z<=rd_s16(region+6);
+}
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                     uint16_t saved_tick,void *context) {
     ModeRun *run=context;
@@ -62,6 +73,50 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned stream=rd_u8(0xc45799u);
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
+        if(run->flight && stage==0xc10dae) {
+            if(!run->flight_baseline) {
+                run->flight_baseline=1;
+                for(unsigned i=0;i<3;++i) run->initial_position[i]=rd_u32(CONTROL_RECORDS+20+4*i);
+            }
+            for(unsigned i=0;i<3;++i)
+                if(rd_u32(CONTROL_RECORDS+20+4*i)!=run->initial_position[i]) run->moved=1;
+            unsigned mask=0,exits=0;
+            for(unsigned i=0;i<8 && rd_s16(0xc29720u+4*i)>=0;++i)
+                if(inside_region(rd_u32(0xc29720u+4*i),CONTROL_RECORDS)) mask|=1u<<i;
+            const unsigned occupied=rd_u8(0xc4579du);
+            if(mask!=run->region_mask || occupied!=run->occupied_mask ||
+               (mask!=occupied && (rd_u16(0xc458dau)&15)==3)) sample|=8;
+            run->region_mask=mask;run->occupied_mask=occupied;
+            for(unsigned slot=0;slot<16;++slot) {
+                const gaddr record=CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES;
+                const unsigned zone=rd_u8(record+93);
+                const uint32_t state=(rd_u8(record+1)&0x41u)|((uint32_t)rd_u8(record+56)<<8)|
+                    ((uint32_t)zone<<16)|((uint32_t)rd_u8(record+122)<<24);
+                const uint32_t previous=run->record_states[slot];
+                /* First occurrence of each activity/launch/zone/phase and
+                 * signed target class; repeated boundary oscillation retains
+                 * its actual gameplay updates without duplicating snapshots. */
+                const uint32_t key=state&0xffff80ffu;
+                unsigned found=0;
+                while(found<run->record_case_counts[slot] && run->record_cases[slot][found]!=key) ++found;
+                if(found==run->record_case_counts[slot]) {
+                    if(found==32) abort();
+                    run->record_cases[slot][run->record_case_counts[slot]++]=key;sample|=8;
+                }
+                if((slot==9 || slot==11 || slot==13) && (state&0x40) && rd_u8(record+98)<=1)
+                    run->npc_missiles|=1u<<slot;
+                if(game->ticks>=10000 && (state&0x40) && !(previous&0x40) && zone>=1 && zone<=8)
+                    run->spawns|=1u<<slot;
+                if((state>>24)==5 && ((previous>>24)==3 || (previous>>24)==4))
+                    run->zone_exits|=1u<<slot;
+                run->record_states[slot]=state;
+                if((state&0x40) && zone>=1 && zone<=8 && (rd_u8(record+98)&0xf0)==0x10 &&
+                   rd_u8(record+5)!=8 && !inside_region(rd_u32(0xc29720u+4*(zone-1)),record))
+                    exits|=1u<<slot;
+            }
+            if(exits&~run->pending_exits) sample|=8;
+            run->pending_exits|=exits;
+        }
         if(run->weapon && stage==0xc10dae && !run->weapon_baseline) {
             run->weapon_baseline=1;
             run->stock=rd_u8(CONTROL_RECORDS+95);
@@ -132,9 +187,9 @@ int main(int argc,char **argv) {
     ModeRun run={.prefix=argv[3],.mode=argc>=5?(unsigned)atoi(argv[4]):2};
     unsigned aircraft=argc>=6?(unsigned)atoi(argv[5]):1;
     if(argc==7) {
-        if(run.mode!=8) return 1;
-        if(!strcmp(argv[6],"eject")) run.eject=1;
-        else if(!strncmp(argv[6],"weapon",6) && strlen(argv[6])==7 && argv[6][6]>='1' && argv[6][6]<='3')
+        if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
+        else if(!strcmp(argv[6],"eject") && run.mode==8) run.eject=1;
+        else if(run.mode==8 && !strncmp(argv[6],"weapon",6) && strlen(argv[6])==7 && argv[6][6]>='1' && argv[6][6]<='3')
             run.weapon=(unsigned)(argv[6][6]-'0');
         else return 1;
     }
@@ -162,7 +217,16 @@ int main(int argc,char **argv) {
     const unsigned *input_times=mission?mission_times:times;
     const int *input_keys=mission?mission_keys:keys;
     unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:4u;
-    while(game->ticks<((mission || run.mode==125)?18000u:10000u)) {
+    while(game->ticks<(run.flight?30000u:(mission || run.mode==125)?18000u:10000u)) {
+        if(run.flight) {
+            const unsigned times[]={10000,11500,11200,11220,13000,14000,16000,17000};
+            const unsigned durations[]={10000,500,2,2,2,100,2,100};
+            const int keys[]={61,274,13,13,116,32,116,32};
+            for(unsigned i=0;i<8;++i) {
+                if(game->ticks==times[i]) native_frontend_event(game,keys[i],1);
+                if(game->ticks==times[i]+durations[i]) native_frontend_event(game,keys[i],0);
+            }
+        }
         if(run.weapon) {
             for(unsigned i=0;i<run.weapon;++i) {
                 if(game->ticks==11000+20*i) native_frontend_event(game,13,1);
@@ -221,6 +285,17 @@ int main(int argc,char **argv) {
             fprintf(stderr,"Weapon %u failed: stock=%u ammo=%u shots=%u/%u/%u launched=%u removed=%u\n",
                 run.weapon,stock,consumed,gun_shots,first,second,run.launched,run.removed);goto done;
         }
+    }
+    if(run.flight) {
+        if(!run.flight_baseline || !run.spawns || !run.zone_exits || !(run.npc_missiles&(1u<<13)) ||
+           game->scene_frames<5000 || !run.moved) {
+            fprintf(stderr,"Flight failed: spawns=%X exits=%X missiles=%X scene=%u position=%u,%u,%u initial=%u,%u,%u\n",
+                run.spawns,run.zone_exits,run.npc_missiles,game->scene_frames,
+                rd_u32(CONTROL_RECORDS+20),rd_u32(CONTROL_RECORDS+24),rd_u32(CONTROL_RECORDS+28),
+                run.initial_position[0],run.initial_position[1],run.initial_position[2]);goto done;
+        }
+        printf("{\"regions\":true,\"spawned_records\":%u,\"zone_exits\":%u,\"npc_missiles\":%u,\"scene_frames\":%u}\n",
+            run.spawns,run.zone_exits,run.npc_missiles,game->scene_frames);
     }
     result=0;
 done:
