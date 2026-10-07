@@ -1,5 +1,7 @@
 /* Complete corner and view-record construction; original owners in corner_view_source_scope.json. */
 #include "corner_view.h"
+#include "projection.h"
+#include "render_line.h"
 #include <stdlib.h>
 static void observe(const CornerViewHooks *h,enum CornerViewPhase p,enum CornerViewField f,uint32_t v,uint32_t o) {if(h&&h->observe)h->observe(h->context,p,f,v,o);}
 static CornerViewState restored(const CornerViewHooks *h) {if(h&&h->restored)return h->restored(h->context);abort();}
@@ -37,7 +39,12 @@ static void multiply(uint32_t *v,enum CornerViewField f,const CornerViewHooks *h
 #define EXT(f,id) do {w.f=(uint32_t)(int32_t)S(w.f);observe(h,CV_EXT_LONG,id,0,0);}while(0)
 #define NL(f,id) do {w.f=0u-w.f;observe(h,CV_NEG_LONG,id,0,0);}while(0)
 static void byte(const CornerViewHooks *h,gaddr at,uint8_t v) {wr_u8(at,v);observe(h,CV_STORE_BYTE,CV_FIRST_X,v,0);}
-static CornerViewState load_post(CornerViewState w,const CornerViewHooks *h,uint16_t mask) {(void)w;observe(h,CV_LOAD_WORDS_POST,CV_FIRST_X,mask,0);return restored(h);}
+static CornerViewState load_post(CornerViewState w,const CornerViewHooks *h,uint16_t mask) {
+ if(h && h->restored){observe(h,CV_LOAD_WORDS_POST,CV_FIRST_X,mask,0);return restored(h);}
+ uint32_t *values[]={&w.first_x,&w.first_y,&w.depth,&w.x,&w.y,&w.z,&w.scratch,&w.selector};
+ for(unsigned i=0;i<8;++i) if(mask&(1u<<i)){*values[i]=(uint32_t)(int32_t)rd_s16(w.cursor);w.cursor+=2;}
+ return w;
+}
 static CornerViewState stack_words(CornerViewState w,const CornerViewHooks *h,uint16_t mask,int restore_words) {(void)w;observe(h,restore_words?CV_RESTORE_WORDS:CV_SAVE_WORDS,CV_FIRST_X,mask,0);return restored(h);}
 static void bit_zero(const CornerViewHooks *h,uint32_t v) {observe(h,CV_BIT_ZERO,CV_FIRST_X,v,0);}
 static void memory_add(const CornerViewHooks *h,gaddr at) {uint16_t old=rd_u16(at);wr_u16(at,(uint16_t)(old+1));observe(h,CV_MEMORY_ADD_WORD,CV_FIRST_X,old,1);}
@@ -160,7 +167,7 @@ next:
 }
 
 /* C2CE82: retain all three exact row-product/sum orders and depth write. */
-void corner_rotate_view(CornerViewState w,const CornerViewHooks *h) {
+CornerViewState corner_rotate_view(CornerViewState w,const CornerViewHooks *h) {
  P(cursor,CV_CURSOR,0xc45bd8);w=load_post(w,h,7);
  MUL(first_x,CV_FIRST_X,w.x);MUL(first_y,CV_FIRST_Y,w.y);MUL(depth,CV_DEPTH,w.z);
  AL(first_x,CV_FIRST_X,w.first_y);AL(first_x,CV_FIRST_X,w.depth);ASR(first_x,CV_FIRST_X,8);W(scratch,CV_SCRATCH,w.first_x);
@@ -170,6 +177,7 @@ void corner_rotate_view(CornerViewState w,const CornerViewHooks *h) {
  MUL(y,CV_Y,rd_u16(w.cursor));P(cursor,CV_CURSOR,w.cursor+2);
  MUL(z,CV_Z,rd_u16(w.cursor));P(cursor,CV_CURSOR,w.cursor+2);
  AL(z,CV_Z,w.x);AL(z,CV_Z,w.y);ASR(z,CV_Z,8);word(h,0xc45ab6,(uint16_t)w.z);
+ return w;
 }
 
 /* Shared record-position construction at C2CCBA and C2CDA6. */
@@ -179,6 +187,47 @@ static CornerViewState record_position(CornerViewState w,const CornerViewHooks *
  L(y,CV_Y,rd_u32(w.workspaces));ASR(y,CV_Y,8);AW(x,CV_X,w.y);AW(x,CV_X,rd_u16(0xc45a72));
  L(y,CV_Y,rd_u32(w.workspaces+8));ASR(y,CV_Y,8);AW(z,CV_Z,w.y);AW(z,CV_Z,rd_u16(0xc45a76));
  L(y,CV_Y,rd_u32(w.workspaces+4));AL(y,CV_Y,rd_u32(0xc45a66));ASR(y,CV_Y,8);return w;
+}
+void draw_control_record(int16_t index,enum ControlRecordDrawing drawing) {
+ CornerViewState w={0};w.workspaces=0xc45c72u+(gaddr)(int32_t)(int16_t)((uint16_t)index<<6);
+ wr_u16(0xc45954u,drawing==CONTROL_RECORD_LAYERS?13:9);
+ if(drawing==CONTROL_RECORD_LAYERS && rd_s16(w.workspaces+40)<=58) {
+  /* C2CD4C -> C2D082: one kind-0 layer; the original caller sets no shift. */
+  int16_t cx=(int16_t)((uint16_t)(rd_u16(w.workspaces+48)-rd_u16(0xc4594cu))<<14);
+  int16_t cz=(int16_t)((uint16_t)(rd_u16(w.workspaces+50)-rd_u16(0xc4594eu))<<14);
+  uint32_t x=(uint32_t)(rd_s32(w.workspaces)>>8)+(uint32_t)(int32_t)cx;
+  uint32_t y=(uint32_t)(rd_s32(w.workspaces+4)>>8)+rd_u32(0xc45a78u);
+  uint32_t z=(uint32_t)(rd_s32(w.workspaces+8)>>8)+(uint32_t)(int32_t)cz;
+  wr_u16(0xc456e6u,15);wr_u16(0xc456e8u,0xffff);wr_u32(0xc456eau,0);
+  int32_t height=(int32_t)y;if(height<0) height=(int32_t)(0u-y);
+  if(height>0x8000) return;
+  int16_t scale=(int16_t)(58-rd_s16(w.workspaces+40));if(scale>12) scale=12;
+  draw_shape((int16_t)(x+(uint32_t)(int32_t)rd_s16(0xc45a72u)),(int16_t)y,
+             (int16_t)(z+(uint32_t)(int32_t)rd_s16(0xc45a76u)),(uint16_t)scale,0,0,0);
+  return;
+ }
+ w=record_position(w,NULL);
+ if(drawing==CONTROL_RECORD_PAIRS) {
+  /* C2CD94: three original template pairs, transformed with C2CE82. */
+  const int16_t origin[3]={(int16_t)w.x,(int16_t)w.y,(int16_t)w.z};
+  gaddr stream=0xc2ce5eu;
+  wr_u16(0xc456e6u,15);wr_u16(0xc456e8u,0xffff);wr_u32(0xc456eau,0);
+  for(unsigned pair=0;pair<3;++pair) {
+   for(unsigned point=0;point<2;++point) {
+    w.x=(uint16_t)(rd_u16(stream)+origin[0]);w.y=(uint16_t)(rd_u16(stream+2)+origin[1]);
+    w.z=(uint16_t)(rd_u16(stream+4)+origin[2]);stream+=6;
+    w=corner_rotate_view(w,NULL);
+    wr_u16(0xc4c592u+6*point,(uint16_t)w.scratch);
+    wr_u16(0xc4c594u+6*point,(uint16_t)w.depth);wr_u16(0xc4c596u+6*point,(uint16_t)w.z);
+   }
+   draw_projected_segment();
+  }
+  return;
+ }
+ w=corner_rotate_view(w,NULL);
+ const int visible=project_view_point_mode((int16_t)w.scratch,(int16_t)w.depth,(int16_t)w.z,-1,0,0);
+ if(!visible || (rd_u16(w.workspaces+38)&0x202u))
+  wr_u16(w.workspaces+38,rd_u16(w.workspaces+38)&0xfdffu);
 }
 static CornerViewState record_frame(CornerViewState w,const CornerViewHooks *h) {
  observe(h,CV_LINK,CV_FRAME,0x3e,0);w=restored(h);L(first_x,CV_FIRST_X,rd_u32(w.frame+8));ASL(first_x,CV_FIRST_X,6);

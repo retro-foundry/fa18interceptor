@@ -83,6 +83,15 @@ The aircraft selection resets the recorder/root through C10B90 and updates the
 records. The view/control update completes startup into C10DAE; P pauses/resumes.
 The `scene-setup` screen label also covers this initial flight loop. `=` and `-`
 use the source throttle controls, and arrow keys use the source stick controls.
+F and C execute source flare/chaff stock, messages and control-effect launch,
+motion, drawing and ground-contact expiry. Keyboard depleted-stock selection
+and SHIFT-F's mode-6 sound are connected. Depleted pending recorder carry,
+recorder $FD selection and effect component/face collision children remain
+unfinished. The runtime integration test uses real Free Flight keys and shares
+all playable runtime objects; four actual bodies match original gameplay and
+display. Build `fa18_native_countermeasures_test` and run
+`python tools/native/check_countermeasures.py` for retained focused evidence.
+See [`../../analysis/native_countermeasures_milestone.md`](../../analysis/native_countermeasures_milestone.md).
 The preview now draws the source horizon and normal/wide terrain packets into
 ordinary host planes, followed by the original scene placement/model streams,
 ground descriptors, aircraft hulls and fixed matrix mark. Grounded aircraft

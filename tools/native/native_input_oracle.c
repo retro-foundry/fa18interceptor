@@ -29,6 +29,9 @@ static uint8_t *read_bytes(const char *path,size_t *size) {
 }
 static int original_input(NativeFrontend *game) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;wr_u32(REG_A[7],0xc70000);
+    /* Keyboard countermeasure selection must replace the inherited low byte,
+     * even when the caller's word/high halves are unrelated. */
+    REG_D[4]=0x51ab12e7u;
     m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=0xc0f3c4;
     fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
     for(unsigned steps=0;steps<1000000;++steps) {
@@ -61,7 +64,8 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     unsigned total_events=0,drain_cases=0;
-    for(unsigned variant=0;variant<144;++variant) {
+    unsigned countermeasure_cases=0;
+    for(unsigned variant=0;variant<688;++variant) {
         static const uint8_t keys[]={0x0c,0x8c,0x4c,0xcc,0x4d,0xcd,0x4e,0xce,0x4f,0xcf,
             0x40,0xc0,0x24,0x20,0x13,0x44,0x37,0x38,0x39,0xb8,0xb9,0x50,0x55,0x59};
         static const uint16_t joy[]={0,1,2,0x100,0x200,0x301,0x102,0x303};
@@ -85,11 +89,25 @@ int main(int argc,char **argv) {
             if(variant%24==16) game->input_keys[0]=0x0b; /* map voices still unconnected */
             if(variant&8) {game->input_keys[1]=0x8c;game->input_count=2;}
             if(variant==95) {wr_u16(RAW_KEY_LATCH,1);wr_u16(RAW_KEY_WORD,0x4d);}
-        } else {
+        } else if(variant<144) {
             ++drain_cases;
             wr_u8(RECORDER_MODE,(uint8_t)(1+(variant%3)));
             wr_u16(RECORD_WORD_A,0x4400); /* Space and radar words */
             wr_u16(RECORD_WORD_B,0x10); /* zero view; mode 3 drains both */
+        } else {
+            ++countermeasure_cases;
+            const unsigned measure=(variant-144)/256;
+            game->input_keys[0]=measure==1?0x33:0x23;game->input_count=1;
+            wr_u8(MISSION_LEVEL_A,(uint8_t)(variant-144));
+            wr_u8(MISSION_LEVEL_B,(uint8_t)(variant-144));
+            if(variant>=656) {
+                wr_u8(KEY_STATE,1);wr_u8(MODE_SELECT,6);
+                wr_u16(COMMAND_SPAWN_GATE,(variant&1)?1:0);
+                wr_u8(CONTROL_RECORDS+0x201,(variant&2)?0x40:0);
+                wr_u8(CONTROL_RECORDS+0x401,(variant&4)?0x40:0);
+                wr_u8(CONTROL_RECORDS+0x601,(variant&8)?0x40:0);
+                wr_u8(SOUND_FLAGS-1,(uint8_t)(variant&16?1:0));
+            }
         }
         memcpy(source,game,sizeof *source);memcpy(before,m,sizeof *m);
         if(!original_input(source)) return 1;
@@ -105,6 +123,6 @@ int main(int argc,char **argv) {
             }
         }
     }
-    printf("144 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain cases)\n",total_events,drain_cases);
+    printf("688 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases)\n",total_events,drain_cases,countermeasure_cases);
     free(source);free(game);free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

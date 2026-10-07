@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest batch, 2026-10-07: keyboard F/C reaches native source flare/chaff launch,
+motion, ground-contact expiry and drawing through C1518C. Complete original
+input/control-effect parent comparisons pass 688/192 cases; four actual
+keyboard-driven Free Flight bodies match compared gameplay and all display
+bytes. Active/crash/map, queued input, native integration, frontend/omission and
+reference host/loading checks pass. Depleted pending recorder carry, $FD indexed
+selection and component/face collision children still need implementation.
+See `analysis/native_countermeasures_milestone.md`. Whole gameplay remains open.
+
 Latest timing clarification: exact Amiga frame timing is not a completion gate
 for the native port. Preserve gameplay physics/rules and source-defined timers;
 allow native rendering/presentation cadence. Compare equivalent gameplay states

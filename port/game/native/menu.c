@@ -53,8 +53,13 @@ static ContextCommandResult context_child(void *context,enum ContextCommandChild
     }
     fprintf(stderr,"native input context child unavailable: %u\n",(unsigned)which); abort();
 }
+typedef struct {
+    CommandRequest request;
+    int16_t carried_event;
+} NativeFlightCommand;
 static FlightCommandResult flight_key_child(void *context,enum FlightCommandChild child) {
-    const CommandRequest *request=context;
+    const NativeFlightCommand *command=context;
+    const CommandRequest *request=&command->request;
     switch(child) {
     case FLIGHT_Y_UP: set_stick_y(STICK_UP);break;
     case FLIGHT_Y_DOWN: set_stick_y(STICK_DOWN);break;
@@ -75,17 +80,27 @@ static FlightCommandResult flight_key_child(void *context,enum FlightCommandChil
     case FLIGHT_HOOK_SOUND: case FLIGHT_WEAPON_SOUND:
         post_message((uint16_t)request->raw_event);
         return (FlightCommandResult){request->raw_event&0xffffff00u,0};
+    case FLIGHT_FLARE_SOUND: case FLIGHT_CHAFF_SOUND:
+        /* C25704 masks the event's low byte and preserves the word saved
+         * at C1C0FC/C1C18A. These children post messages, not direct tones. */
+        post_message((uint16_t)request->raw_event);
+        return (FlightCommandResult){request->raw_event&0xffffff00u,command->carried_event};
+    case FLIGHT_FLARE_SPAWN:
+        /* C1C164 -> C17F8C: SHIFT-F in mode 6 starts sound 6. */
+        start_sound_6(0x1c,0x30);break;
     default: fprintf(stderr,"native flight key child unavailable: %u\n",(unsigned)child);abort();
     }
     return (FlightCommandResult){request->raw_event,0};
 }
 static void flight_arguments(void *context,enum FlightCommandPhase phase,
                              uint32_t value,uint32_t limit,gaddr address) {
-    CommandRequest *arguments=context;
+    NativeFlightCommand *command=context;
+    CommandRequest *arguments=&command->request;
     (void)limit;(void)address;
     if(phase==FLIGHT_SOUND_SWAP) arguments->raw_event=value;
     else if(phase==FLIGHT_SOUND_WORD)
         arguments->raw_event=(arguments->raw_event&0xffff0000u)|(uint16_t)value;
+    else if(phase==FLIGHT_SOUND_CARRY) command->carried_event=(int16_t)value;
 }
 unsigned native_menu_raw_key(int key,int down) {
     unsigned raw=0xff;
@@ -125,7 +140,7 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
         /* C1C224, same store as execute_flight_command. */
         wr_u8(SEQUENCE_PHASE,request.modifier?0xff:1);
     } else if(is_flight_command(request.action)) {
-        CommandRequest arguments=request;
+        NativeFlightCommand arguments={request,0};
         const FlightCommandHooks hooks={flight_key_child,flight_arguments,&arguments};
         event=execute_flight_command(&request,0,&hooks);
     } else if(is_context_command(request.action)) {
@@ -142,18 +157,38 @@ void native_menu_key(NativeFrontend *game,int key,int down) {
         publish_command_event((uint8_t)event,NULL);
 }
 
-typedef struct { NativeFrontend *game; CommandRequest request; } NativeCommand;
+typedef struct {
+    NativeFrontend *game;
+    NativeFlightCommand flight;
+    int selection_known;
+} NativeCommand;
 static void prepare_action(void *context,const CommandRequest *request) {
-    ((NativeCommand *)context)->request=*request;
+    ((NativeCommand *)context)->flight.request=*request;
+}
+static void selection_value(void *context,enum CommandSelectionPhase phase,uint32_t value,uint32_t limit) {
+    NativeCommand *command=context;
+    (void)limit;
+    if(phase==COMMAND_READ_BLOCK) {
+        /* C1AE02/C1AE08 load and mask the blocked-command byte before
+         * direct keys. A selected flare/chaff therefore carries low byte 0.
+         * Only that byte can reach C1C23C's queue; the high byte is dead. */
+        command->flight.carried_event=(int16_t)value;
+        command->selection_known=1;
+    }
 }
 static int16_t carried_selection(void *context) {
-    const CommandRequest *r=&((NativeCommand *)context)->request;
-    /* Normal indexed actions overwrite this input; ordinary flight actions
-     * do not inspect it. Countermeasure restoration and recorder $FD's
-     * inherited selection still require a source caller contract. */
-    if(r->action==COMMAND_CHAFF || (r->action==COMMAND_FLARE && !r->modifier) ||
-       (r->action==COMMAND_FUNCTION_LEVEL && rd_u8(RECORDER_MODE)==0xfd)) {
-        fputs("native input missing inherited countermeasure/recorder selection\n",stderr);abort();
+    const NativeCommand *command=context;
+    const CommandRequest *r=&command->flight.request;
+    if(r->action==COMMAND_CHAFF || (r->action==COMMAND_FLARE && !r->modifier)) {
+        const gaddr stock=r->action==COMMAND_CHAFF?MISSION_LEVEL_A:MISSION_LEVEL_B;
+        /* A successful pending action saves its own event (0) before the
+         * child. Depleted recorder actions do not define a carry here. */
+        if(command->selection_known) return command->flight.carried_event;
+        if(rd_s8(stock)>1) return 0;
+        fputs("native input missing depleted recorder countermeasure carry\n",stderr);abort();
+    }
+    if(r->action==COMMAND_FUNCTION_LEVEL && rd_u8(RECORDER_MODE)==0xfd) {
+        fputs("native input missing recorder $FD selection\n",stderr);abort();
     }
     return 0;
 }
@@ -163,17 +198,17 @@ static uint32_t view_child(void *context,enum ViewCommandChild child) {
     else if(child==VIEW_COMMAND_REDRAW) request_cockpit_redraw();
     else abort();
     /* C08324/C082B8 preserve the event in D0. */
-    return command->request.raw_event;
+    return command->flight.request.raw_event;
 }
 static void dispatch_child(void *context,enum CommandDispatchChild child) {
     (void)context;
     fprintf(stderr,"native command dispatch child unavailable: %u\n",(unsigned)child);abort();
 }
 static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
-    NativeCommand command={game,{0}};
-    const CommandSelectionHooks selection={0};
+    NativeCommand command={.game=game};
+    const CommandSelectionHooks selection={selection_value,&command};
     const CommandPublicationHooks publication={0};
-    const FlightCommandHooks flight={flight_key_child,flight_arguments,&command.request};
+    const FlightCommandHooks flight={flight_key_child,flight_arguments,&command.flight};
     const ViewCommandHooks view={view_child,NULL,&command};
     const IndexedCommandHooks indexed={mode_changed,NULL,game};
     const ContextCommandHooks actions={context_child,NULL,game};

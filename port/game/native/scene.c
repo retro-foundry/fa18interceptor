@@ -2,6 +2,7 @@
  * The HUD/panel slice follows in native/hud.c. */
 #include "scene.h"
 #include "model.h"
+#include "control_effects.h"
 #include "../scene_placements.h"
 #include "../update_sequence.h"
 #include "../globals.h"
@@ -41,11 +42,6 @@ static int32_t followup(void *context,const FollowupPlacementEvent *call) {
     ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header};
     return native_scene_placement(context,&descriptor);
 }
-static MessageWorking control_child(void *context,enum MainControlChild child) {
-    (void)context;
-    if(child==MC_RESET_FACE_STATE) {reset_line_style();return (MessageWorking){0};}
-    fprintf(stderr,"native scene control child unavailable: %u\n",(unsigned)child);abort();
-}
 static void grid_triangle(void *context) {(void)context;draw_polygon();}
 static void grid_pixel(void *context,int16_t x,int16_t y,int adjacent) {
     (void)context;if(adjacent) plot_pixel_pair(x,y);else plot_pixel(x,y);
@@ -54,7 +50,6 @@ static UpdateSequenceResult scene_child(void *context,enum UpdateSequenceChild c
     NativeFrontend *game=context;
     const gaddr frame=0x4000; /* Host scratch, separate from text and recorder. */
     const ScenePlacementHooks placements={native_scene_placement,NULL,game};
-    const MainControlHooks controls={control_child,NULL,game,NULL};
     const FollowupPlacementHooks followups={followup,NULL,game};
     UpdateSequenceResult result={0,0};
     switch(child) {
@@ -89,7 +84,7 @@ static UpdateSequenceResult scene_child(void *context,enum UpdateSequenceChild c
     }
     case UPDATE_RANGE_DECISION: result.value=flagged_slot_in_range(); break;
     case UPDATE_FLAGGED_SCENE: case UPDATE_TRUE_SCENE: case UPDATE_FALSE_SCENE:
-        advance_main_loop_control_records(0x4500,&controls); break;
+        native_control_effects(); break;
     case UPDATE_TRUE_FOLLOWUP: case UPDATE_FALSE_FOLLOWUP:
         visit_followup_placements(&followups); break;
     case UPDATE_DISPLAY_END:

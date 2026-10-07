@@ -67,7 +67,7 @@ void update_dynamics_record_matrix(const RecordMatrixInput *input, RecordMatrixR
 /* Input and selected-record phases owned by the same live flight parent. */
 void update_dynamics_record_input(gaddr record, uint32_t incoming);
 void update_dynamics_selected_record(IndexedRecordWork *work);
-void collide_scene_motion(DynamicsState w,const DynamicsHooks *h); /* C266AE */
+DynamicsState collide_scene_motion(DynamicsState w,const DynamicsHooks *h); /* C266AE */
 void update_scene_regions(DynamicsState w,const DynamicsHooks *h); /* C28996 */
 DynamicsState spawn_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B16 */
 DynamicsState dispatch_region_records(DynamicsState w,const DynamicsHooks *h); /* C28B34 shared body */

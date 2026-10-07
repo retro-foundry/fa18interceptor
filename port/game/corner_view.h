@@ -37,7 +37,11 @@ typedef struct {
  void *context;
 } CornerViewHooks;
 void corner_project_edges(CornerViewState,const CornerViewHooks *);
-void corner_rotate_view(CornerViewState,const CornerViewHooks *);
+CornerViewState corner_rotate_view(CornerViewState,const CornerViewHooks *);
+/* C2CCA0/C2CD28/C2CD94 record drawing with explicit record index and
+ * ordinary local values. The reference adapter above remains separate. */
+enum ControlRecordDrawing { CONTROL_RECORD_POINT,CONTROL_RECORD_LAYERS,CONTROL_RECORD_PAIRS };
+void draw_control_record(int16_t index,enum ControlRecordDrawing drawing);
 void corner_test_record(CornerViewState,const CornerViewHooks *,int layered);
 void corner_draw_record_pairs(CornerViewState,const CornerViewHooks *);
 void corner_draw_layers(CornerViewState,const CornerViewHooks *);

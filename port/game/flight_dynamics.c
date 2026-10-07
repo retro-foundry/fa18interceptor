@@ -397,9 +397,9 @@ static DynamicsState damp_scene_velocity(DynamicsState w,gaddr address,uint32_t 
     L(y,DY_Y,w.primary); if(duplicate_x) L(y,DY_Y,w.primary);
     ASL(y,DY_Y,w.z); SL(primary,DY_PRIMARY,w.y); L(y,DY_Y,w.x); ASL(y,DY_Y,w.z); SL(x,DY_X,w.y); return w;
 }
-void collide_scene_motion(DynamicsState w,const DynamicsHooks *h) {
+DynamicsState collide_scene_motion(DynamicsState w,const DynamicsHooks *h) {
     gaddr frame; int64_t difference,signed_sum; uint32_t saved_scan; int component;
-    L(primary,DY_PRIMARY,0); B(detail,DY_DETAIL,rd_u8(0xc457bdu)); OR_B(detail,DY_DETAIL,rd_u8(0xc457aeu)); if((uint8_t)w.detail) return;
+    L(primary,DY_PRIMARY,0); B(detail,DY_DETAIL,rd_u8(0xc457bdu)); OR_B(detail,DY_DETAIL,rd_u8(0xc457aeu)); if((uint8_t)w.detail) return w;
     observe(h,DY_BEGIN_FRAME,DY_PRIMARY,92,0); if(!h || !h->frame) abort(); frame=h->frame(h->context);
     L(primary,DY_PRIMARY,rd_u32(frame+8)); ALW(primary,DY_PRIMARY,6); P(scene,DY_SCENE,0xc45c72u); P(scene,DY_SCENE,indexed(w.scene,w.primary));
     load_longs(&w,w.scene+12,7,h); ASL(primary,DY_PRIMARY,8); ASL(detail,DY_DETAIL,8); ASL(x,DY_X,8); store_values(w,0xc46178u,7,0,h);
@@ -505,9 +505,9 @@ plane:
     P(root,DY_ROOT,w.geometry); load_longs(&w,w.scene,7,h); load_longs(&w,w.scene+12,0x70,h); SL(primary,DY_PRIMARY,w.z); SL(detail,DY_DETAIL,w.rate_x); SL(x,DY_X,w.rate_y);
     store_values(w,w.scene,7,1,h); ASL(primary,DY_PRIMARY,8); ASL(detail,DY_DETAIL,8); ASL(x,DY_X,8); goto follow_chain;
 hit:
-    L(primary,DY_PRIMARY,1); observe(h,DY_END_FRAME,DY_PRIMARY,0,0); return;
+    L(primary,DY_PRIMARY,1); observe(h,DY_END_FRAME,DY_PRIMARY,0,0); return w;
 miss:
-    L(primary,DY_PRIMARY,0); observe(h,DY_END_FRAME,DY_PRIMARY,0,0);
+    L(primary,DY_PRIMARY,0); observe(h,DY_END_FRAME,DY_PRIMARY,0,0); return w;
 }
 void update_scene_regions(DynamicsState w,const DynamicsHooks *h) {
     int occupied; uint8_t code;

@@ -38,8 +38,9 @@ TODOs; current code and the newest evidence take precedence.
 
 ## Current checkout and architecture
 
-Branch: `coverage-accounting`. Latest implementation commit: **`d5203c52`**.
-Before this handoff was added, the worktree was clean except untracked `.vscode/`.
+Branch: `coverage-accounting`. The latest implementation batch connects keyboard
+countermeasures; use `git log -1` for its commit. Prior scene implementation:
+**`d5203c52`**. Preserve untracked `.vscode/`.
 No build/test process is pending and no user answer or approval is pending.
 
 The playable native runner is **`fa18_native`**:
@@ -147,6 +148,30 @@ differences. The two latest commits fixed genuine aborts; the unchanged 53/128
 strict drawing result is diagnostic evidence, not a completion percentage.
 
 ## Latest completed commits
+
+### Keyboard flare/chaff and connected control effects — 2026-10-07
+
+Real Free Flight F/C now consume stock, post source messages and reach C1518C's
+launch/update/draw children through the actual scene. C159AE/C15AD4/C257EC
+derive launch direction; existing collision/ground owners and source
+C2CCA0/C2CD28/C2CD94 drawing are connected. Source C1AE02/C1AE08 defines the
+keyboard depleted-stock carry byte; successful pending commands save their
+own event. SHIFT-F mode 6 calls source sound 6.
+
+Validation: 688 complete input-parent cases; 192 complete control-effect-parent
+cases including visible lines/layers; four actual keyboard-driven native bodies
+covering flare/chaff launch and early ground-contact expiry. All four bodies
+match original compared gameplay state and every display byte. Active/crash/map,
+queued input, three native integration tests, frontend/link omission and twelve
+reference host/loading checks pass. No full original replay repeated. Component
+and runtime evidence are distinguished in
+`analysis/native_countermeasures_milestone.md`.
+
+Build `fa18_native_countermeasures_test` with the native runner, then run
+`python tools/native/check_countermeasures.py`. Its exports persist under
+`build/native-flight/countermeasure-check/`. Depleted pending recorder carry,
+$FD function-level selection and control-effect component/face collision
+children remain explicit unsupported paths. Full gameplay goal remains active.
 
 ### `d5203c52` — C0DA38 alternate selection and enclosing-frame exit
 
@@ -285,9 +310,11 @@ No full original replay was repeated in the last two implementation batches.
 
 ## Other unfinished scope
 
-`native/menu.c:carried_selection()` still aborts for chaff, unmodified flare
-and function-level actions with recorder mode $FD: their inherited selection
-needs the real source caller contract. Do not pass an invented zero to hide it.
+`native/menu.c:carried_selection()` still aborts for depleted pending recorder
+countermeasures and function-level actions with recorder mode $FD: their
+inherited selection needs the real source caller contract. Keyboard flare/chaff
+and successful pending commands are connected. Do not invent a carry for the
+remaining paths. Control-effect component/face collision children remain open.
 Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
 1, 9, 127 and demonstration mode 3 with recorder mode 3.

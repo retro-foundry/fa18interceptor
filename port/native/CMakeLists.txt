@@ -5,7 +5,8 @@ add_library(fa18_native_runtime OBJECT replay.c frame_capture.c
     ../game/input_display_setup.c ../game/render_page.c
     ../game/native/frame_tail.c ../game/hud_stream.c
     ../game/native/frame_labels.c ../game/flight_markers.c
-    ../game/native/frame_markers.c
+    ../game/native/frame_markers.c ../game/native/control_effects.c
+    ../game/record_control_actions.c ../game/corner_view.c
     ../game/native/stores.c ../game/hud_stores.c
     ../game/native/input.c ../game/pending_input.c ../game/input_events.c
     ../game/command_dispatch.c ../game/view_commands.c ../game/player_input.c
@@ -71,6 +72,13 @@ else()
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_executable(fa18_native_countermeasures_test ../../tools/native/native_countermeasures_test.c)
+    target_link_libraries(fa18_native_countermeasures_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_countermeasures
+        COMMAND fa18_native_countermeasures_test
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+            ${CMAKE_CURRENT_BINARY_DIR}/countermeasure-save
+            ${CMAKE_CURRENT_BINARY_DIR}/countermeasure)
     add_executable(fa18_native_scene_exit_test ../../tools/native/native_scene_exit_test.c)
     target_link_libraries(fa18_native_scene_exit_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_scene_exit
