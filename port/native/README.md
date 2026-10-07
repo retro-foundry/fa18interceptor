@@ -510,3 +510,17 @@ python tools/native/check_mode_two.py --mode 8 --eject --out build/native-flight
 ```
 
 See [`../../analysis/native_ejection_milestone.md`](../../analysis/native_ejection_milestone.md).
+
+Normal mode-8 Return/Space exercises both missile stocks and gun ammunition.
+The missing $98 geometry command is connected, and the control-point renderer
+now consumes the original child's returned plane destination for its test/clear.
+138 actual input/stage intervals and 112 sampled bodies match compared original
+RAM/display. Successful hits, complete combat and outcomes remain open.
+
+```powershell
+python tools/native/check_mode_two.py --mode 8 --weapon 1 --out build/native-flight/weapons/1-fixed
+python tools/native/check_mode_two.py --mode 8 --weapon 2 --out build/native-flight/weapons/2-fixed
+python tools/native/check_mode_two.py --mode 8 --weapon 3 --out build/native-flight/weapons/three-fixed
+```
+
+See [`../../analysis/native_weapon_firing_milestone.md`](../../analysis/native_weapon_firing_milestone.md).

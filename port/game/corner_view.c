@@ -1,6 +1,8 @@
 /* Complete corner and view-record construction; original owners in corner_view_source_scope.json. */
 #include "corner_view.h"
 #include "projection.h"
+#include "plot.h"
+#include "globals.h"
 #include "render_line.h"
 #include <stdlib.h>
 static void observe(const CornerViewHooks *h,enum CornerViewPhase p,enum CornerViewField f,uint32_t v,uint32_t o) {if(h&&h->observe)h->observe(h->context,p,f,v,o);}
@@ -225,9 +227,13 @@ void draw_control_record(int16_t index,enum ControlRecordDrawing drawing) {
   return;
  }
  w=corner_rotate_view(w,NULL);
- const int visible=project_view_point_mode((int16_t)w.scratch,(int16_t)w.depth,(int16_t)w.z,-1,0,0);
- if(!visible || (rd_u16(w.workspaces+38)&0x202u))
-  wr_u16(w.workspaces+38,rd_u16(w.workspaces+38)&0xfdffu);
+ const int visible=project_view_point((int16_t)w.scratch,(int16_t)w.depth,(int16_t)w.z);
+ gaddr destination=w.workspaces;
+ if(visible) destination=plot_pixel(rd_s16(PROJECTED_PAIR),rd_s16(PROJECTED_PAIR+2));
+ /* C2ECA8's point child returns its final plane word in the address used
+  * by C2CD14/C2CD1E. On rejection it retains the control record instead. */
+ if(!visible || (rd_u16(destination+38)&0x202u))
+  wr_u16(destination+38,rd_u16(destination+38)&0xfdffu);
 }
 static CornerViewState record_frame(CornerViewState w,const CornerViewHooks *h) {
  observe(h,CV_LINK,CV_FRAME,0x3e,0);w=restored(h);L(first_x,CV_FIRST_X,rd_u32(w.frame+8));ASL(first_x,CV_FIRST_X,6);

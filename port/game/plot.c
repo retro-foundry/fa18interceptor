@@ -12,13 +12,13 @@ static void plane_words(int16_t x, int16_t y, gaddr word[4]) {
     for (k = 0; k < 4; k++) word[k] = rd_u32(table + (gaddr)(4 * k)) + (gaddr)(int32_t)offset;
 }
 
-static void plot(int16_t x, int16_t y, gaddr masks, int rows) {
+static gaddr plot(int16_t x, int16_t y, gaddr masks, int rows) {
     uint16_t mask, colour = rd_u16(CURRENT_COLOUR) & 15;
     uint8_t planes = rd_u8(LINE_PLANES);
     gaddr word[4];
     int bit, row;
 
-    if (y <= 0) return;
+    if (y <= 0) return masks;
     mask = rd_u16(masks + (gaddr)(2 * (x & 15)));
     plane_words(x, y, word);
     if (rd_s16(LINE_COLOUR) >= 0) {
@@ -28,7 +28,7 @@ static void plot(int16_t x, int16_t y, gaddr masks, int rows) {
                 gaddr w = word[3 - bit];
                 if ((toggle & (1 << bit)) && (planes & (1 << bit))) wr_u16(w, (uint16_t)(rd_u16(w) ^ mask));
             }
-            return;
+            return word[3];
         }
     }
     for (bit = 0; bit < 4; bit++) {
@@ -39,10 +39,11 @@ static void plot(int16_t x, int16_t y, gaddr masks, int rows) {
             else wr_u16(w, (uint16_t)(rd_u16(w) & ~mask));
         }
     }
+    return word[3];
 }
 
-void plot_pixel(int16_t x, int16_t y) {
-    plot(x, y, PIXEL_MASKS, 1);
+gaddr plot_pixel(int16_t x, int16_t y) {
+    return plot(x, y, PIXEL_MASKS, 1);
 }
 
 void plot_pixel_in_view(int16_t x, int16_t y) {

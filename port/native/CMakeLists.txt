@@ -114,6 +114,13 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
             ${CMAKE_CURRENT_BINARY_DIR}/ejection-save
             ${CMAKE_CURRENT_BINARY_DIR}/ejection 8 1 eject)
+    foreach(weapon RANGE 1 3)
+        add_test(NAME fa18_native_weapon_${weapon}
+            COMMAND fa18_native_mode_two_test
+                ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+                ${CMAKE_CURRENT_BINARY_DIR}/weapon-${weapon}-save
+                ${CMAKE_CURRENT_BINARY_DIR}/weapon-${weapon} 8 1 weapon${weapon})
+    endforeach()
     foreach(aircraft RANGE 1 2)
         add_test(NAME fa18_native_mode_three_aircraft_${aircraft}
             COMMAND fa18_native_mode_two_test

@@ -47,6 +47,8 @@ int main(int argc,char **argv) {
     REG_PC=0xc0efea;m68k_set_reg(M68K_REG_SR,0x2700);
     fa18_next_event=INT64_MAX;SET_CYCLES(1000000000);
     unsigned step;
+    const char *trace_pixel=getenv("FA18_FRAME_TRACE_PIXEL");
+    const gaddr pixel=trace_pixel?(gaddr)strtoul(trace_pixel,NULL,16):0;
     for(step=0;step<10000000;++step) {
         if((!owner_exit && REG_PC==0xc0f3c0 && REG_A[7]==0xc7ff00) ||
            (owner_exit && REG_PC==0xc70000 && REG_A[7]==0xc7ff88)) {wait_blitter();break;}
@@ -63,9 +65,13 @@ int main(int argc,char **argv) {
             REG_A[7]-=4;wr_u32(REG_A[7],0xc53f50);REG_PC=0xfc5a58;continue;
         }
         int cycles=GET_CYCLES();uint16_t opcode=rd_u16(REG_PC);
+        const uint8_t previous_pixel=trace_pixel?rd_u8(pixel):0;
         REG_PPC=REG_PC;REG_IR=opcode;REG_PC+=2;
         m68ki_instruction_jump_table[opcode]();USE_CYCLES(CYC_INSTRUCTION[opcode]);
         m->cycle+=cycles-GET_CYCLES();
+        if(trace_pixel && rd_u8(pixel)!=previous_pixel)
+            fprintf(stderr,"pixel %06X %02X -> %02X at %06X d0=%08X d1=%08X destination=%06X colour=%u record=%06X\n",
+                pixel,previous_pixel,rd_u8(pixel),REG_PPC,REG_D[0],REG_D[1],REG_A[3],rd_u16(CURRENT_COLOUR),rd_u32(0xc18214));
     }
     if(step==10000000) {fprintf(stderr,"Frame body did not return at %06X\n",REG_PC);return 1;}
     unsigned differences=0,plane_differences=0,scratch_differences=0,voice_differences=0,busy_differences=0;

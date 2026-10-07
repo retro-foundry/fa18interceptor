@@ -1,5 +1,18 @@
 # Current playable port handoff
 
+Latest connected batch: normal mode-8 Return/Space firing exercises source
+weapon modes $30/$20/$10 (two missile stocks and gun ammunition). Draw command
+$98/C21E08 now has its readable workspace geometry. The gun comparison exposed
+and corrected C2CCA0's use of the point child's returned plane destination for
+its subsequent test/clear. 138 actual input/stage intervals and 112 sampled
+bodies match compared original RAM/display with zero differences and unchanged
+exclusions. Geometry/point components pass 256/64 complete parents. Actual
+runner probes reach 2,458 scene/HUD frames. All 21 affected native tests pass.
+Default setup models, countermeasure
+parents/four bodies, reference build and 12 host/loading checks pass. Successful
+hits, complete combat/outcomes and whole-game acceptance remain unfinished.
+See `analysis/native_weapon_firing_milestone.md`.
+
 Latest connected batch: normal mode-8 Shift-E runs through the source ejection
 flag/command publication, programmed sound, action record clone/orientation,
 lifetime-selected model and failure/menu return (739 scene/HUD frames).

@@ -20,6 +20,10 @@ typedef struct {
     unsigned stage_count,captures,streams;
     unsigned mode,samples;
     unsigned eject,ejection;
+    unsigned weapon,launch_bodies,launched,removed;
+    unsigned projectile_states[3];
+    uint16_t stock,ammo,counters[3];
+    int weapon_baseline;
     int entered,returned;
 } ModeRun;
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
@@ -58,6 +62,31 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned stream=rd_u8(0xc45799u);
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
+        if(run->weapon && stage==0xc10dae && !run->weapon_baseline) {
+            run->weapon_baseline=1;
+            run->stock=rd_u8(CONTROL_RECORDS+95);
+            run->ammo=rd_u16(CONTROL_RECORDS+96);
+            gaddr log=rd_u32(MODE_TABLE);
+            run->counters[0]=rd_u16(log+58);
+            run->counters[1]=rd_u16(log+62);
+            run->counters[2]=rd_u16(log+66);
+        }
+        if(run->weapon && game->ticks>=12000) {
+            if(run->launch_bodies) {--run->launch_bodies;sample|=8;}
+            for(unsigned slot=1;slot<=3;++slot) {
+                const gaddr record=CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES;
+                if(rd_u8(record+98)>1) continue;
+                const int16_t lifetime=rd_s16(record+76);
+                const unsigned state=(rd_u8(record+1)&0x40)?
+                    (lifetime<0?1u:lifetime==0?2u:lifetime==1?4u:lifetime<12?8u:
+                     lifetime<50?16u:lifetime<100?32u:64u):128u;
+                if(state!=128) run->launched|=1u<<slot;
+                else if(run->launched&(1u<<slot)) run->removed|=1u<<slot;
+                if(!(run->projectile_states[slot-1]&state)) {
+                    run->projectile_states[slot-1]|=state;sample|=8;
+                }
+            }
+        }
         if(run->eject && rd_u8(BAR_E_FLAG)) {
             run->ejection|=1;
             if(!rd_u16(CONTEXT_RECORD)) sample|=8; /* Sound and the first clone body. */
@@ -103,8 +132,11 @@ int main(int argc,char **argv) {
     ModeRun run={.prefix=argv[3],.mode=argc>=5?(unsigned)atoi(argv[4]):2};
     unsigned aircraft=argc>=6?(unsigned)atoi(argv[5]):1;
     if(argc==7) {
-        if(strcmp(argv[6],"eject") || run.mode!=8) return 1;
-        run.eject=1;
+        if(run.mode!=8) return 1;
+        if(!strcmp(argv[6],"eject")) run.eject=1;
+        else if(!strncmp(argv[6],"weapon",6) && strlen(argv[6])==7 && argv[6][6]>='1' && argv[6][6]<='3')
+            run.weapon=(unsigned)(argv[6][6]-'0');
+        else return 1;
     }
     if((run.mode!=2 && run.mode!=3 && run.mode!=4 && run.mode!=5 && run.mode!=6 && run.mode!=7 && run.mode!=8 && run.mode!=125) ||
        aircraft<1 || aircraft>2) return 1;
@@ -131,6 +163,18 @@ int main(int argc,char **argv) {
     const int *input_keys=mission?mission_keys:keys;
     unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:4u;
     while(game->ticks<((mission || run.mode==125)?18000u:10000u)) {
+        if(run.weapon) {
+            for(unsigned i=0;i<run.weapon;++i) {
+                if(game->ticks==11000+20*i) native_frontend_event(game,13,1);
+                if(game->ticks==11002+20*i) native_frontend_event(game,13,0);
+            }
+            for(unsigned i=0;i<2;++i) {
+                if(game->ticks==12000+1000*i) {
+                    native_frontend_event(game,32,1);run.launch_bodies=4;
+                }
+                if(game->ticks==12100+1000*i) native_frontend_event(game,32,0);
+            }
+        }
         if(run.eject) {
             if(game->ticks==12000) native_frontend_event(game,304,1);
             if(game->ticks==12002) native_frontend_event(game,'E',1);
@@ -156,11 +200,27 @@ int main(int argc,char **argv) {
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
        (run.eject && (!run.returned || run.ejection!=0x1ff || game->scene_frames<512 ||
         rd_u8(MODE_SELECT)!=0 || rd_u32(STAGE_CALLBACK)!=0xc0fcb4)) ||
-       ((!run.eject && (run.mode==4 || run.mode==5 || run.mode==7 || run.mode==8)) && (game->scene_frames<2000 || run.samples!=7 ||
+       ((!run.eject && (run.mode==4 || run.mode==5 || run.mode==7 || run.mode==8)) && (game->scene_frames<2000 || (run.samples&7)!=7 ||
         rd_u8(RECORDER_MODE)!=0 || rd_u8(POSTFLIGHT_FAILURE_INPUT)!=0x11 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae))) {
         fprintf(stderr,"Mode %u failed: returned=%d captures=%u scene=%u postflight=%u\n",
             run.mode,run.returned,run.captures,game->scene_frames,game->postflight_callbacks);goto done;
+    }
+    if(run.weapon) {
+        gaddr log=rd_u32(MODE_TABLE);
+        const unsigned consumed=(uint16_t)(run.ammo-rd_u16(CONTROL_RECORDS+96));
+        const unsigned gun_shots=(uint16_t)(rd_u16(log+58)-run.counters[0]);
+        const unsigned first=(uint16_t)(rd_u16(log+62)-run.counters[1]);
+        const unsigned second=(uint16_t)(rd_u16(log+66)-run.counters[2]);
+        const unsigned stock=rd_u8(CONTROL_RECORDS+95);
+        if(!run.weapon_baseline || (run.weapon==3?
+           (!consumed || consumed!=gun_shots || first || second || stock!=run.stock):
+           (!run.launched || !run.removed || consumed || gun_shots ||
+            first!=(run.weapon==1?2u:0u) || second!=(run.weapon==2?2u:0u) ||
+            stock!=(unsigned)(run.stock-(run.weapon==1?2u:32u))))) {
+            fprintf(stderr,"Weapon %u failed: stock=%u ammo=%u shots=%u/%u/%u launched=%u removed=%u\n",
+                run.weapon,stock,consumed,gun_shots,first,second,run.launched,run.removed);goto done;
+        }
     }
     result=0;
 done:

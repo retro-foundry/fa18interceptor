@@ -19,15 +19,18 @@ def main():
     parser.add_argument('--mode', type=int, choices=(2,3,4,5,6,7,8,125), default=2)
     parser.add_argument('--aircraft', type=int, choices=(1,2), default=1)
     parser.add_argument('--eject', action='store_true', help='Exercise Shift-E and mode-8 menu return')
+    parser.add_argument('--weapon', type=int, choices=(1,2,3), help='Cycle Return 1/2/3 times and fire twice with Space')
     args = parser.parse_args()
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
+    if args.weapon and (args.mode!=8 or args.eject):
+        parser.error('--weapon requires --mode 8 without --eject')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     prefix = work / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['eject'] if args.eject else [])], cwd=ROOT,
+                             *(['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else [])], cwd=ROOT,
                             capture_output=True, text=True, timeout=25)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
@@ -37,6 +40,8 @@ def main():
     assert len(entries) >= {2:32,3:43,4:39,5:39,6:38,7:42,8:38,125:55}[args.mode] and len(bodies) >= {2:21,3:29,4:27,5:27,6:27,7:29,8:27,125:35}[args.mode], exports
     if args.eject:
         assert len(entries)>=46 and len(bodies)>=43, exports
+    if args.weapon:
+        assert len(entries)>=42+2*args.weapon and len(bodies)>=(36 if args.weapon==3 else 38), exports
     required={'C10DAE'}
     if args.mode==2:
         required|={'C10272','C1029E','C102D8','C10302','C10362','C0F920'}
@@ -84,6 +89,8 @@ def main():
              125:'runs over 2,000 scene frames, including Escape/restart'}[args.mode]
     if args.eject:
         outcome='runs Shift-E through sound, record clone, lifetime rendering and menu return'
+    if args.weapon:
+        outcome=f'fires source weapon selection {args.weapon}, preserving ammunition and log counters'
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')
 

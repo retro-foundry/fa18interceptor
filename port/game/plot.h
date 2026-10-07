@@ -9,8 +9,10 @@
 
 #include "memory.h"
 
-/* One pixel ($C2F5F4). */
-void plot_pixel(int16_t x, int16_t y);
+/* One pixel ($C2F5F4). Returns the final plane-table entry's word address,
+ * consumed by the control-point caller after plotting. For a rejected row,
+ * the original mask-table address remains the destination. */
+gaddr plot_pixel(int16_t x, int16_t y);
 
 /* One pixel moved by the view's origin (SPAN_ORIGIN_Y across,
  * REDRAW_STATE_WORD down); columns outside 0..319 are skipped ($C2F5C0). */

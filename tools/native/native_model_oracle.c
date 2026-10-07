@@ -190,6 +190,7 @@ static uint8_t *file_bytes(const char *name,size_t *size) {
 }
 static gaddr oracle_parameters;
 static int16_t circle_x,circle_y,circle_radius;
+static int16_t point_x,point_y;
 static unsigned strip_groups;
 static int original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
@@ -203,6 +204,7 @@ static int original(uint32_t pc) {
     if(pc==0xc0cfb6u) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc1ff0au || pc==0xc207feu) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
+    if(pc==0xc2f5f4u) {REG_D[0]=(uint32_t)(int32_t)point_x;REG_D[1]=(uint32_t)(int32_t)point_y;}
     m68k_set_reg(M68K_REG_SR,0x2700); REG_PC=pc;
     fa18_next_event=INT64_MAX; SET_CYCLES(100000000);
     for(unsigned step=0;step<2000000;++step) {
@@ -538,8 +540,8 @@ static int derived_tails(void) {
     if(!saved || !before || !expected) return 0;
     memcpy(saved,fa18_machine,sizeof *saved);
     static const uint16_t indices[]={0,0x200,0x1c00,0x7fff,0x8000,0xff5c,0x2168,0x2162};
-    static const gaddr routines[]={0xc21fa4u,0xc0d524u,0xc0d61cu};
-    for(unsigned test=0;test<192;++test) {
+    static const gaddr routines[]={0xc21fa4u,0xc0d524u,0xc0d61cu,0xc21e08u};
+    for(unsigned test=0;test<256;++test) {
         memcpy(fa18_machine,saved,sizeof *saved);
         uint16_t index=indices[test%8];wr_u16(SCRIPT_RECORD,index);
         gaddr banks[]={CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(index+0xa4u),WORKSPACES};
@@ -548,7 +550,8 @@ static int derived_tails(void) {
         memcpy(before,fa18_machine,sizeof *before);
         if(test<64) derive_shown_parallelogram_vertices();
         else if(test<128) derive_shown_reflected_vertices();
-        else derive_shown_midpoint_vertices();
+        else if(test<192) derive_shown_midpoint_vertices();
+        else derive_workspace_extensions();
         memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
         memcpy(fa18_machine,before,sizeof *before);
         if(!original(routines[test/64]) || REG_D[0]!=0) return 0;
@@ -560,7 +563,7 @@ static int derived_tails(void) {
         }
     }
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
-    puts("192 complete C21FA4/C0D524/C0D61C derived-tail cases match result and all non-stack RAM/display");return 1;
+    puts("256 complete C21FA4/C0D524/C0D61C/C21E08 derived-tail cases match result and all non-stack RAM/display");return 1;
 }
 static int hull_tails(void) {
     FA18Machine *before=malloc(sizeof *before),*saved=malloc(sizeof *saved);
@@ -583,18 +586,50 @@ static int hull_tails(void) {
     memcpy(fa18_machine,saved,sizeof *saved);
     free(expected);free(saved);free(before);puts("8 compact/extended hull tail cases match original data and stream position");return 1;
 }
+static int point_destinations(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    static const int16_t columns[]={0,1,7,15,16,31,159,319};
+    static const int16_t rows[]={0,1,90,180};
+    for(unsigned test=0;test<64;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        point_x=columns[test%8];point_y=rows[(test/8)%4];
+        wr_u16(CURRENT_COLOUR,test<32?9:13);
+        wr_u8(LINE_PLANES,(test&16)?5:15);
+        wr_u16(LINE_COLOUR,(test&8)?0:0xffff);
+        wr_u8(POINT_XOR_PLANES,(test&8)?3:0);
+        memcpy(before,fa18_machine,sizeof *before);
+        const gaddr destination=plot_pixel(point_x,point_y);
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(0xc2f5f4u) || REG_A[3]!=destination) {
+            fprintf(stderr,"point case %u destination source %06X native %06X\n",test,REG_A[3],destination);return 0;
+        }
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {fprintf(stderr,"point case %u RAM %06X differs\n",test,i);return 0;}
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("64 complete C2F5F4 point cases match destination and all non-stack RAM/display");return 1;
+}
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
     const int tails_only=argc==3 && !strcmp(argv[2],"--tails-only");
-    uint8_t *data=(argc==2 || tails_only)?file_bytes(argv[1],&nd):NULL;
+    const int points_only=argc==3 && !strcmp(argv[2],"--points-only");
+    uint8_t *data=(argc==2 || tails_only || points_only)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
     if(tails_only) return !derived_tails();
+    if(points_only) return !point_destinations();
+    if(!point_destinations()) return 1;
     if(!workspace_script_cases() || !stream_circle_cases()) return 1;
     if(!full_selection_cases()) return 1;
     if(!carrier_commands()) return 1;

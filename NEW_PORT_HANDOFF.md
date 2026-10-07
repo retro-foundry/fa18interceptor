@@ -448,3 +448,17 @@ audio fidelity is also unverified. The native link's omission
 of emulation objects is real evidence for this runner's current connected scope,
 not proof that every original game path has been ported. The gameplay goal must
 remain active until its full requested end state is implemented and verified.
+
+Normal mode-8 Return/Space now runs three firing probes: source weapon high
+nibbles $30/$20 consume their respective missile stocks, and $10 consumes gun
+ammunition. Draw $98/C21E08 has connected readable geometry. The gun path also
+preserves C2CCA0's test/clear through the point child's returned plane-word
+destination, fixing a one-pixel original-body mismatch. 138 input/stage intervals
+and 112 sampled bodies match compared original RAM/display with zero differences
+and no new exclusions. Geometry/point components pass 256/64 complete parents.
+Actual runner probes reach 2,458 scene/HUD frames. All 21 affected native tests
+pass. Default setup models,
+countermeasure parents/four bodies, reference build and 12 host/loading checks
+pass. These probes do not prove successful hits, full combat or mission outcomes.
+See `analysis/native_weapon_firing_milestone.md`; the shared checker accepts
+`--mode 8 --weapon 1`, `2` or `3`. The complete-port goal remains active.

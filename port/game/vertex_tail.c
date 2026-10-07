@@ -126,6 +126,24 @@ void derive_shown_midpoint_vertices(void) {
     midpoint_vertices(CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD)+0xa4));
     midpoint_vertices(WORKSPACES);
 }
+void derive_workspace_extensions(void) {
+    const gaddr w=WORKSPACES;
+    Vertex p=get(w,0),q=get(w,6),r=get(w,12);
+    p=add(p,sub(q,r));put(w,0x42,p);
+    p=add(p,sub(r,get(w,0x18)));put(w,0x48,p);
+    p=get(w,0);q=get(w,6);
+    put(w,0x4e,sub(p,sub(get(w,0x12),q)));
+    Vertex displacement=sub(get(w,0x24),q);
+    put(w,0x54,add(p,displacement));
+    put(w,0x5a,add(get(w,0x0c),displacement));
+    put(w,0x60,add(get(w,0x42),displacement));
+    displacement=sub(get(w,0x36),get(w,0x18));
+    put(w,0x66,add(get(w,0x12),displacement));
+    put(w,0x6c,add(get(w,0x48),displacement));
+    put(w,0x72,add(get(w,0x4e),displacement));
+    p=get(w,0x1e);displacement=sub(get(w,0x2a),p);
+    put(w,0x78,sub(sub(p,displacement),displacement));
+}
 gaddr derive_edge_vertices(gaddr stream) {
     int16_t a = rd_s16(stream), b = rd_s16(stream + 2), w = rd_s16(stream + 4);
     gaddr bank = WORKSPACES, target = WORKSPACES + (gaddr)(int32_t)w;
