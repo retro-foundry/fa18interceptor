@@ -2,6 +2,17 @@
 
 ## Objective and user constraints
 
+Latest normal-input radar shoot-down (2026-10-07): mode eight destroys enemy
+aircraft ten through actual impact, 15-tick expiry, source enemy-aircraft expiry
+accounting and eventual inactivation. All 634 consecutive bodies in this
+interval match original compared RAM/drawing; the checker requires every body
+serial. The full probe passes 57 input/stage intervals and 802 bodies. Passing
+RAM is discarded immediately, and raw captures remain temporary and bounded.
+Native Debug/Release builds and eight affected CTests pass. See
+`analysis/native_radar_kill_milestone.md`. Gun/infrared shoot-downs, successful
+missions, independent full flights, remaining contracts, typed state, audio and
+wider performance stay unfinished; the complete-port goal remains active.
+
 Latest normal-input radar hit (2026-10-07): mode eight registers a player radar
 missile hit. All 57 input/stage intervals and 188 bodies, including the precise
 hit body, match original compared RAM/drawing. Inactive C22AC0 preserves the

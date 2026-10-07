@@ -1,5 +1,15 @@
 # Native port runner
 
+Mode eight now has a required normal-input radar shoot-down: impact, 15-tick
+expiry, enemy-aircraft expiry accounting and inactivation of the struck record.
+All 634 consecutive bodies in that interval match original compared RAM/drawing;
+the full probe passes 57 input/stage intervals and 802 bodies. The observer's
+body serials require every boundary, and passing RAM is deleted immediately
+after comparison. Captures stay temporary and bounded. Debug/Release builds
+and eight affected CTests pass. See `../../analysis/native_radar_kill_milestone.md`.
+Gun/infrared shoot-downs, successful missions, independent complete flights and
+the remaining state/audio/performance work stay open.
+
 Mode eight now has a required normal-input radar hit: 57 input/stage intervals
 and 188 sampled bodies, including the exact hit body, match original compared
 RAM/drawing. Inactive C22AC0 retains its caller's actual placement result;

@@ -28,8 +28,13 @@ def main():
     parser.add_argument('--combat', action='store_true', help='Mode-five through eight longer flight with manoeuvre-limit samples')
     parser.add_argument('--outcome', action='store_true', help='Mode-six normal-input failure, all three resets and menu return')
     parser.add_argument('--hit', action='store_true', help='Normal-input mode-eight radar missile hit')
+    parser.add_argument('--kill', action='store_true', help='Normal-input mode-eight radar destruction and expiry accounting')
     parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
+    if args.kill:
+        if args.hit:
+            parser.error('--kill includes --hit; select one probe')
+        args.hit=True
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
     if args.weapon and (args.mode!=8 or args.eject):
@@ -56,7 +61,7 @@ def check(args, work, capture_dir):
     prefix = capture_dir / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['hit'] if args.hit else ['outcome'] if args.outcome else ['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
+                             *(['kill'] if args.kill else ['hit'] if args.hit else ['outcome'] if args.outcome else ['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
                             capture_output=True, text=True, timeout=180 if args.outcome else 90 if args.combat or args.hit else 45 if args.flight else 25)
     (work / 'native-run.log').write_text(result.stdout + result.stderr)
     if result.returncode:
@@ -69,6 +74,16 @@ def check(args, work, capture_dir):
         assert len(hit_runs)==1 and hit_runs[0]['radar_hits']>0, exports
         hit_bodies=[item for item in bodies if item.get('hit_body')]
         assert len(hit_bodies)==1 and hit_bodies[0]['radar_hits_after']==hit_bodies[0]['radar_hits_before']+1, exports
+    if args.kill:
+        kills=[item for item in exports if item.get('radar_kill')]
+        assert len(kills)==1 and kills[0]['started'] and kills[0]['accounted'] and kills[0]['inactive'], exports
+        transitions=[item for item in exports if item.get('kill_transition')]
+        start=hit_bodies[0]['body_serial']
+        finish=transitions[-1]['body_serial']
+        assert not transitions[-1]['flags']&0x40 and finish-start+1==kills[0]['expiry_bodies'], kills
+        window={item['body_serial'] for item in bodies if start<=item['body_serial']<=finish}
+        assert window==set(range(start,finish+1)), 'Missing body in destruction-to-inactivation interval'
+        assert any(item['lifetime']==0 and item['enemy_expiries']==kills[0]['enemy_expiries_before']+1 for item in transitions), transitions
     if args.mode==2:
         wraps=[item for item in exports if item.get('stream_wrap')]
         assert len(wraps)==1 and wraps[0]['wraps']>=1 and wraps[0]['streams']==255 and wraps[0]['returned'], exports
@@ -163,6 +178,9 @@ def check(args, work, capture_dir):
                         if int.from_bytes(ram[log_offset:log_offset+2],'big')!=count:
                             retain_failure(capture, work)
                             raise AssertionError((suffix,item))
+                if not args.keep_captures:
+                    for suffix in ('before','after','source'):
+                        Path(capture+f'.{suffix}.dat').unlink(missing_ok=True)
     if args.combat and args.mode==8:
         assert source_guidance_fault_returns>0, 'No complete original guidance fault/continuation body compared'
     outcome={2:'returns to menu',3:f'runs over 768 scene frames with aircraft {args.aircraft}',4:'runs over 2000 scene frames',5:'runs over 2000 scene frames',6:'runs over 384 scene frames',7:'runs over 2000 scene frames with an unlocked saved pilot',8:'runs over 2000 scene frames with an unlocked saved pilot',
@@ -205,6 +223,13 @@ def check(args, work, capture_dir):
             'adf_sha256':hashlib.sha256((ROOT/'local/media/fa18.adf').read_bytes()).hexdigest(),
             'reference_scope':'Original instructions from native before-states, including exact hit body; not an independent complete mission or verified kill',
         }
+        (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
+    if args.kill:
+        outcome='destroys an enemy aircraft with a radar missile, counts its expiry and observes its inactivation'
+        report['scenario']='normal-input-mode-eight-radar-kill'
+        report['kill']=kills[0]
+        report['kill_transitions']=[item for item in exports if item.get('kill_transition')]
+        report['reference_scope']='Original instructions from native before-states, including hit and continuous destruction-to-inactivation bodies; not an independent complete mission'
         (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')

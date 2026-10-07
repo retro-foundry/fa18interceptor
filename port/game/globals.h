@@ -62,7 +62,7 @@
 #define SCENE_POINTERS     0xC22188u /* long[5]: the scene's pointers, copied from that table */
 #define SCENE_DISPATCH_ADMITTED 0xC458AAu /* signed byte: must exceed SCENE_DISPATCH_CREATED ($C28BC2) */
 #define SCENE_DISPATCH_CREATED  0xC458A9u /* signed byte: incremented for created class-$10 records ($C28C4A) */
-#define SCENE_DISPATCH_AUX      0xC458ABu /* byte: cleared at scene dispatch entry ($C2872E) */
+#define SCENE_DISPATCH_AUX      0xC458ABu /* byte: non-transient enemy aircraft expiries (C25B66); reset at C2872E, compared with mission quota by C0A364 */
 #define SCENE_DISPATCH_GATE     0xC45782u /* word: cleared at scene dispatch entry ($C28734) */
 #define SCENE_DISPATCH_LIMIT    0xC458A7u /* byte: maximum low-seven-bit stream selector ($C287A6) */
 #define SCENE_DISPATCH_LIMIT_PREVIOUS 0xC458A8u /* byte: saved before scene initialization ($C0FAA4) */

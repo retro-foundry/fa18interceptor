@@ -19,12 +19,18 @@ typedef struct {
     unsigned entry_count,entry_exports;
     unsigned stage_count,captures,streams;
     unsigned mode,samples;
+    unsigned body_serial,hit_serial;
     unsigned previous_stream,stream_wraps;
     unsigned eject,ejection;
     unsigned callback,callback_bodies,callback_events;
     unsigned smoothing_cancel,cancel_phase,cancelled;
     unsigned weapon,launch_bodies,launched,removed;
     unsigned hit_probe;
+    unsigned kill_probe,kill_started,kill_accounted,kill_inactive,kill_bodies;
+    gaddr kill_record;
+    uint8_t kill_baseline,kill_count;
+    uint16_t kill_last_flags;
+    int16_t kill_last_lifetime;
     uint8_t *hit_before;
     unsigned hit_tracking,hit_captured,hit_before_tick,hit_saved_tick;
     gaddr hit_log;
@@ -69,6 +75,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                     uint16_t saved_tick,void *context) {
     ModeRun *run=context;
     run->clock.iteration=game->update_iterations;
+    if(boundary==NATIVE_FRAME_BODY_BEGIN) ++run->body_serial;
     /* A single bounded in-memory before-state while a player radar missile
      * is active. Export only the actual collision body, never seed gameplay. */
     if(run->hit_probe && !run->hit_captured && boundary==NATIVE_FRAME_BODY_BEGIN) {
@@ -82,6 +89,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             memcpy(run->hit_before,game->storage.buffers,0x80000);
             memcpy(run->hit_before+0x80000,game->storage.source,0x80000);
             run->hit_before_tick=game->ticks;run->hit_saved_tick=saved_tick;
+            run->hit_serial=run->body_serial;
             run->hit_stage=rd_u32(STAGE_CALLBACK);
             run->hit_log=rd_u32(MODE_TABLE);
             run->hit_before_count=rd_u16(run->hit_log+68);
@@ -145,6 +153,12 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned stream=rd_u8(0xc45799u);
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
+        if(run->kill_probe && run->kill_started && !run->kill_inactive) {
+            if(run->kill_bodies>=768) {
+                fputs("Enemy destruction exceeded the bounded 768-body capture window\n",stderr);abort();
+            }
+            sample|=8;
+        }
         if(run->mode==2) {
             /* Compare the complete seventh-stream interval, including its
              * actual C233AA -> C28722 reset and C23578 wrap to stream one. */
@@ -313,7 +327,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             snprintf(run->path,sizeof run->path,"%s.%u",run->prefix,run->captures);
             run->capture=(NativeFrameCapture){.replay=&run->clock,.prefix=run->path,
                 .iteration=game->update_iterations,.count=1};
-            printf("{\"capture\":%u,\"stage\":\"%06X\",\"stream\":%u,",run->captures,stage,stream);
+            printf("{\"capture\":%u,\"stage\":\"%06X\",\"stream\":%u,\"body_serial\":%u,",run->captures,stage,stream,run->body_serial);
         }
     }
     if(run->capture.prefix && !run->capture.complete) {
@@ -329,15 +343,54 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->hit_tracking=0;
         const uint16_t hits=rd_u16(run->hit_log+68);
         if(hits!=run->hit_before_count) {
+            if(run->kill_probe) {
+                const unsigned index=rd_u16(0xc4fdd2u);
+                if(index>=0x2000u || (index&511u)) abort();
+                run->kill_record=CONTROL_RECORDS+index;
+                const uint8_t *before=run->hit_before+0x80000+run->kill_record-0xc00000;
+                const unsigned flags=before[0]*256u+before[1];
+                if((flags&0x1048u)!=0x1040u || (before[98]&0xf0u)!=0x10u ||
+                   (rd_u16(run->kill_record)&0x600u)!=0x400u || rd_s16(run->kill_record+76)!=15) {
+                    fputs("Radar hit did not start enemy aircraft destruction\n",stderr);abort();
+                }
+                run->kill_started=1;
+                run->kill_baseline=run->hit_before[0x80000+0x458ab];
+                run->kill_count=run->kill_baseline;
+            }
             write_hit_snapshot(run,"before",run->hit_before);
+            printf("{\"capture\":\"hit\",\"hit_body\":true,\"stage\":\"%06X\",\"body_serial\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s,\"pilot_log\":%u,\"radar_hits_before\":%u,\"radar_hits_after\":%u,\"impact_record\":%u,\"records\":[",
+                run->hit_stage,run->hit_serial,run->hit_before_tick,game->ticks,run->hit_saved_tick,
+                boundary==NATIVE_FRAME_OWNER_EXIT?"true":"false",run->hit_log,run->hit_before_count,hits,
+                rd_u16(0xc4fdd2u));
+            for(unsigned slot=0;slot<16;++slot) {
+                const gaddr record=CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES;
+                const uint8_t *before=run->hit_before+0x80000+record-0xc00000;
+                printf("%s{\"slot\":%u,\"flags_before\":%u,\"flags_after\":%u,\"kind_before\":%u,\"kind_after\":%u,\"damage_before\":%u,\"damage_after\":%u,\"lifetime_before\":%d,\"lifetime_after\":%d,\"phase_before\":%u,\"phase_after\":%u}",
+                    slot?",":"",slot,(unsigned)(before[0]*256u+before[1]),rd_u16(record),
+                    before[98],rd_u8(record+98),before[60],rd_u8(record+60),
+                    (int16_t)(before[76]*256u+before[77]),rd_s16(record+76),before[122],rd_u8(record+122));
+            }
+            puts("]}");
             memcpy(run->hit_before,game->storage.buffers,0x80000);
             memcpy(run->hit_before+0x80000,game->storage.source,0x80000);
             write_hit_snapshot(run,"after",run->hit_before);
             ++run->hit_captured;
-            printf("{\"capture\":\"hit\",\"hit_body\":true,\"stage\":\"%06X\",\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s,\"pilot_log\":%u,\"radar_hits_before\":%u,\"radar_hits_after\":%u}\n",
-                run->hit_stage,run->hit_before_tick,game->ticks,run->hit_saved_tick,
-                boundary==NATIVE_FRAME_OWNER_EXIT?"true":"false",run->hit_log,run->hit_before_count,hits);
         }
+    }
+    if(run->kill_probe && run->kill_started && !run->kill_inactive &&
+       (boundary==NATIVE_FRAME_BODY_END || boundary==NATIVE_FRAME_OWNER_EXIT)) {
+        const uint16_t flags=rd_u16(run->kill_record);
+        const int16_t lifetime=rd_s16(run->kill_record+76);
+        const uint8_t count=rd_u8(SCENE_DISPATCH_AUX);
+        if(flags!=run->kill_last_flags || lifetime!=run->kill_last_lifetime || count!=run->kill_count) {
+            printf("{\"kill_transition\":true,\"body_serial\":%u,\"tick\":%u,\"record\":%u,\"flags\":%u,\"lifetime\":%d,\"enemy_expiries\":%u}\n",
+                run->body_serial,game->ticks,run->kill_record,flags,lifetime,count);
+            run->kill_last_flags=flags;run->kill_last_lifetime=lifetime;
+        }
+        ++run->kill_bodies;
+        if(!(flags&0x400u) && (uint8_t)(count-run->kill_baseline)==1) run->kill_accounted=1;
+        if(run->kill_accounted && !(flags&0x40u)) run->kill_inactive=1;
+        run->kill_count=count;
     }
 }
 int main(int argc,char **argv) {
@@ -350,6 +403,7 @@ int main(int argc,char **argv) {
         else if(!strcmp(argv[6],"smoothing") && run.mode==4) run.smoothing_cancel=1;
         else if(!strcmp(argv[6],"combat") && (run.mode>=5 && run.mode<=8)) run.flight=2;
         else if(!strcmp(argv[6],"hit") && run.mode==8) {run.flight=2;run.weapon=2;run.hit_probe=1;}
+        else if(!strcmp(argv[6],"kill") && run.mode==8) {run.flight=2;run.weapon=2;run.hit_probe=1;run.kill_probe=1;}
         else if(!strcmp(argv[6],"outcome") && run.mode==6) { run.flight=2;run.outcome=1; }
         else if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
         else if(!strcmp(argv[6],"eject") && run.mode==8) run.eject=1;
@@ -519,6 +573,14 @@ int main(int argc,char **argv) {
     if(run.hit_probe && (!run.hit_counts[2] || run.hit_captured!=1)) {
         fprintf(stderr,"No normal-input radar missile hit: gun=%u infrared=%u radar=%u target=%u launched=%u removed=%u\n",
             run.hit_counts[0],run.hit_counts[1],run.hit_counts[2],rd_u16(TARGET_RECORD),run.launched,run.removed);goto done;
+    }
+    if(run.kill_probe) {
+        printf("{\"radar_kill\":true,\"started\":%s,\"accounted\":%s,\"inactive\":%s,\"record\":%u,\"expiry_bodies\":%u,\"enemy_expiries_before\":%u,\"enemy_expiries_after\":%u}\n",
+            run.kill_started?"true":"false",run.kill_accounted?"true":"false",run.kill_inactive?"true":"false",
+            run.kill_record,run.kill_bodies,run.kill_baseline,run.kill_count);
+        if(!run.kill_accounted || !run.kill_inactive) {
+            fputs("Radar destruction did not complete accounting/inactivation\n",stderr);goto done;
+        }
     }
     if(run.outcome) {
         const unsigned losses=(uint16_t)(rd_u16(rd_u32(MODE_TABLE)+0x10)-run.initial_losses);

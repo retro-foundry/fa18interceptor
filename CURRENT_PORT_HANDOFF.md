@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Latest normal-input radar shoot-down (2026-10-07): enemy aircraft ten is hit,
+starts its 15-tick expiry, advances the enemy-aircraft expiry counter and then
+becomes inactive. All 634 consecutive bodies from impact through inactivation
+match original compared RAM/drawing, with every body serial required. The full
+probe passes 57 input/stage intervals and 802 bodies. Passing RAM is discarded
+immediately after comparison; captures remain temporary and bounded. Native
+Debug/Release builds and eight affected CTests pass. See
+`analysis/native_radar_kill_milestone.md`. Gun/infrared shoot-downs, successful
+missions, independent full flights, other contracts, audio, typed state and
+wider performance stay open; the complete-port goal remains active.
+
 Latest normal-input radar hit (2026-10-07): mode eight registers a player radar
 missile hit; 57 input/stage intervals and 188 bodies, including the exact hit
 body, match original compared RAM/drawing. Inactive C22AC0 now preserves its
