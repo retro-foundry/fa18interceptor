@@ -102,6 +102,11 @@ static uint32_t finish_mode(uint32_t event,const ViewCommandHooks *h) {
     word(h,SPAN_ORIGIN,(uint16_t)span);
     observe(h,VIEW_SPAN_SCALE,(uint16_t)span,0,0);
     word(h,SPAN_ORIGIN_Y,(uint16_t)((uint16_t)span<<4));
+    return finish_view_redraw(event,h);
+}
+uint32_t finish_view_redraw(uint32_t event,const ViewCommandHooks *h) {
+    uint8_t value;
+    uint16_t row;
     event=h->consume(h->context,VIEW_COMMAND_REDRAW);
     value=rd_u8(VIEW_MODE); observe(h,VIEW_MODE_READ,value,0,0);
     if(compare(h,value,3)<0) row=0x90;

@@ -82,6 +82,14 @@ def main():
             assert stats["mode"] == number + 3, stats
             assert stats["screen"] == "scene-setup", stats
             assert stats["stage"] == "C105A6" and stats["scene_frames"] > 0, stats
+        stats, _, _ = run("locked-f5", 4900, key(3000,54)+key(4500,286))
+        assert stats["screen"] == "missions" and stats["mode"] == 0, stats
+        eligible = bytearray(78)
+        eligible[1] = eligible[5] = eligible[0x12+7-1] = 1
+        eligible[30:36] = b"PILOT\0"
+        stats, _, _ = run("unlocked-f5", 4900, key(3000,54)+key(4500,286), eligible)
+        assert stats["mode"] == 7 and stats["screen"] == "scene-setup", stats
+        assert stats["stage"] == "C105A6" and stats["scene_frames"] > 0, stats
         # Actual saved-log bytes drive the source eligibility gate. A pilot
         # with no qualification word cannot select F1; no invented availability.
         unqualified = bytearray(78)

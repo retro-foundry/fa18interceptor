@@ -471,3 +471,16 @@ python tools/native/check_mode_two.py --mode 5 --out build/native-flight/mission
 ```
 
 See [`../../analysis/native_mode_five_milestone.md`](../../analysis/native_mode_five_milestone.md).
+
+Mission-list F5 now runs source mode 7 with an eligible saved pilot (2,289
+scene/HUD frames). The original locked pilot still rejects F5; validation
+changes only the saved availability flag and reopens through the normal loader.
+42 input/stage intervals and 29 bodies, including C11078/C110A4, match compared
+original RAM/display. Complete outcomes/combat remain open; standalone mode-7
+placement-driver snapshots still fail at command $C3 and remain unaccepted.
+
+```powershell
+python tools/native/check_mode_two.py --mode 7 --out build/native-flight/mission-seven/original-check
+```
+
+See [`../../analysis/native_mode_seven_milestone.md`](../../analysis/native_mode_seven_milestone.md).

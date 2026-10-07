@@ -304,6 +304,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
          * C1F944 consequently ends this command sequence on rejection. */
         return rd_u32(PROJECTED_PAIR)==0xffffffffu?-1:1;
     }
+    case 0x0fc: derive_shown_parallelogram_vertices(); return 0;
     case 0x108: *stream=skip_for_type_3_to_6(*stream); return 0;
     case 0x10c: return test_stream_face_accumulation(stream,frame);
     case 0x110: *stream=skip_stream_records(*stream); return 0;

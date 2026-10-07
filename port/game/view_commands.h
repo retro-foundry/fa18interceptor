@@ -28,5 +28,7 @@ int is_view_command(enum CommandAction action);
 /* C1B7CC detail tail and C1B906 zero-mode tail, before queue publication. */
 void set_context_view_detail(unsigned value,const ViewCommandHooks *hooks);
 uint32_t select_zero_view_mode(uint32_t event,const ViewCommandHooks *hooks);
+/* C1BA86 redraw/row tail, before the shared command queue exit. */
+uint32_t finish_view_redraw(uint32_t event,const ViewCommandHooks *hooks);
 uint32_t execute_view_command(const CommandRequest *request,const ViewCommandHooks *hooks);
 #endif

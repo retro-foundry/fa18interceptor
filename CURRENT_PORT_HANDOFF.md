@@ -1,5 +1,19 @@
 # Current playable port handoff
 
+Latest connected batch: mission-list F5 runs source mode 7 with an eligible
+saved pilot (2,289 scene/HUD frames). The disk's locked pilot still cannot
+select F5. 42 actual input/stage intervals and 29 sampled bodies, including
+C11078/C110A4, match compared original RAM/display. C0A1E0's scheduler and
+C1BEE8 record-view publication are connected; command $FC/C21FA4 derives its
+five parallelogram completions. Complete publication/geometry checks pass
+256/64 cases. C110A4 now uses typed host locals, removing its scratch-RAM
+residue and the older result oracle's exclusion. 39 result/restart parents,
+fifteen affected regressions and reference build/host checks pass. Standalone
+mode-7 placement-driver snapshots fail at command $C3 in the controlled repeated
+expiry fixture; original execution also fails there. That comparison remains
+unaccepted. Complete outcomes/combat and whole-game acceptance remain open.
+See `analysis/native_mode_seven_milestone.md`.
+
 Latest connected batch: mission-list F3 now runs normal source mode 5 through
 briefing/context setup into sustained flight (2,312 scene/HUD frames).
 39 actual input/stage intervals and 27 sampled bodies match compared original

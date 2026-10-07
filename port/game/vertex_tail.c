@@ -87,6 +87,18 @@ gaddr derive_shown_vertices(gaddr stream) {
     return stream + 2;
 }
 
+static void parallelogram_vertices(gaddr workspace) {
+    static const int starts[]={0,0x12,0x2a,0x3c,0x4e};
+    for(unsigned i=0;i<5;++i) {
+        int at=starts[i];
+        put(workspace,0x60+6*(int)i,
+            add(get(workspace,at),sub(get(workspace,at+12),get(workspace,at+6))));
+    }
+}
+void derive_shown_parallelogram_vertices(void) {
+    parallelogram_vertices(CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(rd_s16(SCRIPT_RECORD)+0xa4));
+    parallelogram_vertices(WORKSPACES);
+}
 gaddr derive_edge_vertices(gaddr stream) {
     int16_t a = rd_s16(stream), b = rd_s16(stream + 2), w = rd_s16(stream + 4);
     gaddr bank = WORKSPACES, target = WORKSPACES + (gaddr)(int32_t)w;

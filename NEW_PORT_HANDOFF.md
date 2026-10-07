@@ -335,7 +335,7 @@ remaining paths. Control-effect component/face children are now connected;
 complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
-1, 2, 3, 4, 5, 6, 9, 125 and 127. Digit 3's mode 2
+1, 2, 3, 4, 5, 6, 7, 9, 125 and 127. Digit 3's mode 2
 now reaches its source prompts, record-4 playback, flight failure and menu
 return. 32 actual input/stage intervals and 21 sampled bodies match original
 instructions' compared RAM/display. The transition preserves the source
@@ -400,9 +400,25 @@ and current frontend checks pass. No comparison exclusions were added.
 See `analysis/native_mode_five_milestone.md`; run the shared checker with
 `--mode 5 --out build/native-flight/mission-five/original-check`.
 Complete mode-5 outcomes, record-restoration branches and combat remain open.
-The next unconnected entry is mission-list F5's mode 7. Modes 7 and 8
-remain gated; follow actual menu input and reached source children before
-claiming their gameplay is connected.
+Mission-list F5 now runs source mode 7 using an eligible saved-pilot fixture,
+with 2,289 scene/HUD frames. The original disk pilot's availability byte at
+offset $18 is zero and still rejects F5. Tests change only that saved-pilot
+flag, then reopen through the normal loader before input. 42 actual input/stage
+intervals and 29 sampled bodies, including C11078/C110A4, match compared original
+RAM/display. Native C0A1E0 calls C1BEE8's readable record-view publication with
+the source record-word event and STREAM_MODE; 256 complete publication parents
+pass. Model command $FC/C21FA4 passes 64 complete parallelogram-tail cases.
+C0FECE preserves saved A4=C296DA's nonzero sort byte. C110A4 uses typed host
+locals, leaving gameplay RAM untouched by its private frame; the older result
+oracle's six-byte scratch exclusion is removed and 39 result/restart parents
+pass. No new comparison exclusions were added. Direct standalone placement
+drivers on mode-7 snapshots fail at draw command $C3 in their controlled repeated
+expiry fixture; original execution also fails there. That fixture comparison
+remains unaccepted, alongside complete outcomes/combat and other variants.
+See `analysis/native_mode_seven_milestone.md`; run the shared checker with
+`--mode 7 --out build/native-flight/mission-seven/original-check`.
+The next gated entry is mission-list F6's mode 8. Follow actual eligible menu
+input and reached source children before claiming its gameplay is connected.
 
 Whole gameplay sequences under the revised timing scope, complete
 record/flag/counter state and post-result behavior remain unverified. Exact

@@ -30,6 +30,8 @@ void initialise_postflight_text(const PostflightMessageHooks *h);
 void copy_postflight_text(gaddr frame,const PostflightMessageHooks *h);
 void raise_postflight_message_event(const PostflightMessageHooks *h);
 void prepare_postflight_messages(gaddr frame,const PostflightMessageHooks *h);
+/* Same C110A4 owner with ordinary local storage instead of an adapter frame. */
+void prepare_postflight_result(const PostflightMessageHooks *h);
 void record_postflight_outcome(gaddr frame,const PostflightMessageHooks *h);
 void queue_postflight_text_error(const PostflightMessageHooks *h);
 void wait_postflight_text_error(const PostflightMessageHooks *h);

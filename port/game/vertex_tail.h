@@ -20,6 +20,9 @@ gaddr derive_shown_vertices(gaddr stream);
  * = W+$06 and W+$0C plus e/2. Then skips 14 bytes per step in bits 4-6 of
  * the shown record's +$7C. Returns the stream after it. */
 gaddr derive_edge_vertices(gaddr stream);
+/* C21FA4: five parallelogram completions at +$60..+$78 in the shown
+ * record's +$A4 bank and WORKSPACES. No stream operand is consumed. */
+void derive_shown_parallelogram_vertices(void);
 /* C21B38: the compact hull's derived points, both in the shown record and
  * the transformed workspace selected by the operand. */
 gaddr derive_compact_shown_vertices(gaddr stream);

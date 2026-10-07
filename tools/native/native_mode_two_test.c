@@ -56,7 +56,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned stream=rd_u8(0xc45799u);
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
-        if(run->mode==125 || run->mode==6 || run->mode==3 || run->mode==4 || run->mode==5) {
+        if(run->mode==125 || run->mode==6 || run->mode==3 || run->mode==4 || run->mode==5 || run->mode==7) {
             const unsigned frames[]={128,run->mode==6?256u:512u,
                 run->mode==6?384u:run->mode==3?768u:run->mode==125?1000u:2000u};
             for(unsigned i=0;i<3;++i)
@@ -89,16 +89,27 @@ int main(int argc,char **argv) {
     NativeFrontend *game=calloc(1,sizeof *game);char error[256];int result=1;
     ModeRun run={.prefix=argv[3],.mode=argc>=5?(unsigned)atoi(argv[4]):2};
     unsigned aircraft=argc==6?(unsigned)atoi(argv[5]):1;
-    if((run.mode!=2 && run.mode!=3 && run.mode!=4 && run.mode!=5 && run.mode!=6 && run.mode!=125) ||
+    if((run.mode!=2 && run.mode!=3 && run.mode!=4 && run.mode!=5 && run.mode!=6 && run.mode!=7 && run.mode!=125) ||
        aircraft<1 || aircraft>2) return 1;
     if(!game) return 1;
     if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
+    if(run.mode==7) {
+        /* A saved-pilot fixture unlocks the original availability byte.
+         * Reopen through the normal loader before any gameplay/input; only
+         * validation creates this fixture, never the playable runtime. */
+        gaddr log=rd_u32(MODE_TABLE);
+        if(!rd_u16(log)) goto done;
+        wr_u8(log+0x12u+run.mode-1,1);
+        native_frontend_save_log(game);
+        native_frontend_close(game);
+        if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
+    }
     game->observe_frame=observe;game->frame_context=&run;
     const unsigned times[]={1800,3000,5000,6500,11000,15000,16500};
     const int keys[]={32,run.mode==125?52:run.mode==6?55:51,13,13,27,13,13};
     const unsigned mission_times[]={1800,3000,4500,6500,8000,14500};
     const int mission_keys[]={32,54,282+(int)run.mode-3,13,13,48+(int)aircraft};
-    const int mission=run.mode>=3 && run.mode<=5;
+    const int mission=(run.mode>=3 && run.mode<=5) || run.mode==7;
     const unsigned *input_times=mission?mission_times:times;
     const int *input_keys=mission?mission_keys:keys;
     unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:4u;
@@ -120,7 +131,7 @@ int main(int argc,char **argv) {
        (run.mode==3 && (game->scene_frames<768 || run.samples!=7 ||
         rd_u8(RECORDER_MODE)!=0 || rd_u8(0xc45849)!=0x12u-aircraft ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
-       ((run.mode==4 || run.mode==5) && (game->scene_frames<2000 || run.samples!=7 ||
+       ((run.mode==4 || run.mode==5 || run.mode==7) && (game->scene_frames<2000 || run.samples!=7 ||
         rd_u8(RECORDER_MODE)!=0 || rd_u8(POSTFLIGHT_FAILURE_INPUT)!=0x11 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae))) {
         fprintf(stderr,"Mode %u failed: returned=%d captures=%u scene=%u postflight=%u\n",

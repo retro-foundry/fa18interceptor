@@ -13,6 +13,8 @@
 #include "../control_records.h"
 #include "../fixed_math.h"
 #include "../postflight_scheduler.h"
+#include "../context_publication.h"
+#include "../cockpit.h"
 #include "../main_loop_flight_controls.h"
 #include "../matrix.h"
 #include "../view.h"
@@ -164,6 +166,24 @@ static void dynamics(gaddr record) {
         }
     }
 }
+typedef struct { uint32_t event; } RecordView;
+static uint32_t record_view_child(void *context,enum ViewCommandChild child) {
+    const RecordView *view=context;
+    if(child==VIEW_COMMAND_ZOOM_MAXIMUM) set_zoom_maximum();
+    else if(child==VIEW_COMMAND_REDRAW) request_cockpit_redraw();
+    else abort();
+    return view->event; /* C08324/C082B8 preserve D0. */
+}
+static ContextPublicationResult record_publication_child(void *context,enum ContextPublicationChild child) {
+    RecordView *view=context;
+    if(child==CONTEXT_PUBLISH_ZOOM) set_zoom_maximum();
+    else if(child==CONTEXT_PUBLISH_VIEW) {
+        const ViewCommandHooks hooks={record_view_child,NULL,view};
+        view->event=finish_view_redraw(view->event,&hooks);
+        view->event=(view->event&0xffffff00u)|publish_command_event((uint8_t)view->event,NULL);
+    } else abort();
+    return (ContextPublicationResult){view->event,rd_s16(VIEW_RECORD)};
+}
 static PostflightScheduleResult schedule_child(void *context,enum PostflightScheduleChild child,gaddr record) {
     (void)context; (void)record;
     if(child==SCHEDULE_SELECTION_GATE) { release_lost_selection(); return (PostflightScheduleResult){0,1}; }
@@ -194,6 +214,20 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
         const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
         schedule_postflight(POSTFLIGHT_MODE_FIVE,5,record,&hooks); /* C0A002 */
         return (PostflightScheduleResult){0,1};
+    }
+    if(child==SCHEDULE_SEVEN) {
+        const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
+        schedule_postflight(POSTFLIGHT_MODE_SEVEN,7,record,&hooks); /* C0A1E0 */
+        return (PostflightScheduleResult){0,1};
+    }
+    if(child==SCHEDULE_PREPARE_SEVEN) {
+        /* C0A1E0 retains record 4's +6 OR +12 word in D0 before C1BEE8;
+         * only its low byte reaches the command queue. D1 is STREAM_MODE. */
+        RecordView state={rd_u16(CONTROL_RECORDS+0x806u)|rd_u16(CONTROL_RECORDS+0x80cu)};
+        const ViewCommandHooks view={record_view_child,NULL,&state};
+        const ContextPublicationHooks hooks={.view=&view,.consume=record_publication_child,.context=&state};
+        publish_context_record_command(state.event,rd_s16(STREAM_MODE),&hooks);
+        return (PostflightScheduleResult){state.event,0};
     }
     fprintf(stderr,"native record schedule child unavailable: %u\n",(unsigned)child); abort();
 }

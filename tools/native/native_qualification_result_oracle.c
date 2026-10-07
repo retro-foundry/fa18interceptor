@@ -34,12 +34,18 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;native_clock_set(12358);
     const gaddr entries[]={0xc11078,0xc110a4,0xc0f946,0xc0f974,0xc0f992};
-    for(unsigned test=0;test<15;++test) {
+    for(unsigned test=0;test<39;++test) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
         unsigned owner=test%5,variant=test/5;gaddr entry=entries[owner];
         wr_u8(MODE_SELECT,9);wr_u8(RECORDER_MODE,0);wr_u8(PLAYER_PHASE,variant==2?0xef:0xff);
         wr_u16(POST_INPUT_COUNTDOWN,variant==0?2:0xffff);
         wr_u8(VIEWPORT_MODE,0);wr_u8(VIEWPORT_TARGET,variant==2?15:0);wr_u8(MODE_TABLE_CHANGED,1);
+        if(test>=15) {
+            owner=1;entry=entries[owner];wr_u16(POST_INPUT_COUNTDOWN,0xffff);
+            wr_u8(MODE_SELECT,(uint8_t)(4+(test-15)%4));
+            wr_u8(PLAYER_PHASE,(uint8_t[]){0xfe,0xfd,2}[((test-15)/4)%3]);
+            wr_u16(0xc458da,(uint16_t)((test-15)/12));
+        }
         memcpy(before,m,sizeof *m);saves=0;
         if(!source_result(entry)) return 1;
         unsigned expected_saves=saves;uint8_t expected_log[78];memcpy(expected_log,saved_log,78);
@@ -50,7 +56,6 @@ int main(int argc,char **argv) {
             fprintf(stderr,"result case %u config-write contract differs\n",test);return 1;
         }
         for(unsigned i=0;i<0xff000;++i) {
-            if(i>=0x48fa && i<0x4900) continue; /* Native C110A4 private frame. */
             uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
             if(actual!=expected[i]) {
                 fprintf(stderr,"result case %u parent %06X address %06X: source %02X native %02X\n",
@@ -59,6 +64,6 @@ int main(int argc,char **argv) {
         }
         if(owner==4 && (game.screen!=NATIVE_MENU || game.record_updates!=1)) return 1;
     }
-    puts("15 qualification result/viewport/restart parents match original RAM with the shared config-write boundary");
+    puts("39 qualification/mission result/viewport/restart parents match original RAM with the shared config-write boundary");
     free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

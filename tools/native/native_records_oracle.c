@@ -36,6 +36,40 @@ static int original(void) {
     }
     fprintf(stderr,"original record update did not return at %06X\n",REG_PC); return 0;
 }
+static int publication_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    static const int16_t indices[]={0,1,4,15,-1,-63,63,64};
+    for(unsigned test=0;test<256;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        int16_t index=indices[test%8],offset=(int16_t)((uint16_t)index<<9);
+        uint32_t event=(uint32_t[]){0,1,0x7f,0x80,0xff,0x4016,0x44,0xdeadbeef}[(test/8)%8];
+        wr_u8(CONTROL_RECORDS+(gaddr)(int32_t)offset+0x62,(test&8)?0x30:0x20);
+        wr_u8(CONTEXT_SELECT,(test&16)?1:0);wr_u8(CONTEXT_PUBLISH_RETURN_MODE,2);
+        wr_u8(KEY_TAKEN,(test&32)?1:0);wr_u8(KEY_COUNT,(uint8_t[]){0,9,10,0xff}[(test/64)%4]);
+        wr_u8(KEY_WRITE,(uint8_t[]){0,9,10,0xff}[(test/64)%4]);wr_u8(KEY_TRANSLATED_WRITE,0);
+        memcpy(before,fa18_machine,sizeof *before);
+        memset(REG_DA,0,sizeof REG_DA);REG_D[0]=event;REG_D[1]=(uint16_t)index;
+        REG_A[7]=0xc7ff00;wr_u32(REG_A[7],0xc70000);REG_PC=0xc1bee8;
+        m68k_set_reg(M68K_REG_SR,0x2700);fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
+        if(!original()) return 0;
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        RecordView state={event};const ViewCommandHooks view={record_view_child,NULL,&state};
+        const ContextPublicationHooks hooks={.view=&view,.consume=record_publication_child,.context=&state};
+        publish_context_record_command(event,index,&hooks);
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                fprintf(stderr,"record publication case %u RAM %06X differs\n",test,i);return 0;
+            }
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("256 complete native record-publication parents match original non-stack RAM/display");return 1;
+}
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0; char error[256]; unsigned i,differences=0,phase;
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
@@ -52,6 +86,7 @@ int main(int argc,char **argv) {
     memcpy(m->chip,data,0x80000); memcpy(m->slow,data+0x80000,0x80000);
     native_clock_set(rd_u32(MENU_TIME_REQUEST+32)*50u+rd_u32(MENU_TIME_REQUEST+36)/20000u);
     if(argc==3) native_clock_set((unsigned)strtoul(argv[2],NULL,10));
+    if(!publication_cases()) return 1;
     for(phase=0;phase<2;++phase) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     m68k_set_reg(M68K_REG_SR,0x2700); REG_PC=phase?0xc1c63eu:0xc12098u;

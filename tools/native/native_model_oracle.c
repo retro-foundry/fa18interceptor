@@ -398,6 +398,14 @@ static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) 
     FA18Machine *before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x80000),*vertices=malloc(0x2000),*records=malloc(0x2000),*slow=malloc(0x80000);
     memcpy(before,fa18_machine,sizeof *before);
+    if(getenv("FA18_MODEL_DESCRIPTOR_TRACE")) {
+        fprintf(stderr,"Descriptor %06X parameters %06X placement %06X header %04X\n",
+                call->routine,call->parameters,call->placement,call->header);
+        oracle_parameters=call->parameters;
+        if(!original(call->routine)) exit(1);
+        fprintf(stderr,"Original descriptor returned %04X\n",(uint16_t)REG_D[0]);
+        memcpy(fa18_machine,before,sizeof *before);
+    }
     int result=native_scene_placement(NULL,call);
     memcpy(expected,fa18_machine->chip,0x80000);
     memcpy(vertices,fa18_machine->slow+0x48390,0x2000);
@@ -524,6 +532,33 @@ static int scene_children(void) {
     }
     free(before);free(expected);puts("Grid, setup control and complete followup parents match non-stack RAM");return 1;
 }
+static int parallelogram_tails(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    static const uint16_t indices[]={0,0x200,0x1c00,0x7fff,0x8000,0xff5c,0x2168,0x2162};
+    for(unsigned test=0;test<64;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        uint16_t index=indices[test%8];wr_u16(SCRIPT_RECORD,index);
+        gaddr banks[]={CONTROL_RECORDS+(gaddr)(int32_t)(int16_t)(index+0xa4u),WORKSPACES};
+        for(unsigned bank=0;bank<2;++bank) for(unsigned word=0;word<64;++word)
+            wr_u16(banks[bank]+2*word,(uint16_t)(test*8191u+bank*32767u+word*10923u));
+        memcpy(before,fa18_machine,sizeof *before);
+        derive_shown_parallelogram_vertices();
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(0xc21fa4u) || REG_D[0]!=0) return 0;
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                fprintf(stderr,"parallelogram tail case %u RAM %06X differs\n",test,i);return 0;
+            }
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("64 complete C21FA4 parallelogram-tail cases match result and all non-stack RAM/display");return 1;
+}
 static int hull_tails(void) {
     FA18Machine *before=malloc(sizeof *before),*saved=malloc(sizeof *saved);
     uint8_t *expected=malloc(0x80000);
@@ -558,7 +593,7 @@ int main(int argc,char **argv) {
     if(!workspace_script_cases() || !stream_circle_cases()) return 1;
     if(!full_selection_cases()) return 1;
     if(!carrier_commands()) return 1;
-    if(!hull_tails()) return 1;
+    if(!hull_tails() || !parallelogram_tails()) return 1;
     if(!circles()) return 1;
     const ScenePlacementHooks hooks={consume,NULL,NULL};
     visit_scene_placements(0,&hooks);visit_scene_placements(1,&hooks);

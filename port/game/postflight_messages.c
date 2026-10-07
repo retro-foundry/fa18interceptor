@@ -90,32 +90,58 @@ void raise_postflight_message_event(const PostflightMessageHooks *h) {
     observe(h,PM_D0_LONG,1,0); byte(h,POST_INPUT_EVENT,1); word(h,POST_INPUT_COUNTDOWN,2);
     callback(h,0xc110a4,1); byte(h,CONTEXT_GATE,1);
 }
-void prepare_postflight_messages(gaddr frame,const PostflightMessageHooks *h) {
+typedef struct {
+    gaddr frame,cursor;
+    uint16_t mode;
+} ResultMessageLocals;
+static gaddr result_cursor(const ResultMessageLocals *locals) {
+    return locals->frame?rd_u32(locals->frame-6):locals->cursor;
+}
+static uint16_t result_mode(const ResultMessageLocals *locals) {
+    return locals->frame?rd_u16(locals->frame-2):locals->mode;
+}
+static void result_store_cursor(ResultMessageLocals *locals,gaddr cursor,const PostflightMessageHooks *h) {
+    locals->cursor=cursor;
+    if(locals->frame) wr_u32(locals->frame-6,cursor);
+    observe(h,PM_STORE_LONG,cursor,0);
+}
+static void result_advance(ResultMessageLocals *locals,const PostflightMessageHooks *h) {
+    gaddr cursor=result_cursor(locals);
+    observe(h,PM_ADD_MEMORY_LONG,cursor,2);
+    locals->cursor=cursor+2;
+    if(locals->frame) wr_u32(locals->frame-6,locals->cursor);
+}
+static void result_append(ResultMessageLocals *locals,const PostflightMessageHooks *h,uint16_t code) {
+    gaddr cursor=address(h,0,result_cursor(locals)); word(h,cursor,code); result_advance(locals,h);
+}
+static void prepare_result_messages(ResultMessageLocals *locals,const PostflightMessageHooks *h) {
     uint16_t mode,phase_word; uint8_t phase; int32_t selected; gaddr cursor;
     if(!expired(h)) return;
-    mode=(uint16_t)signed_mode(h,0); longword(h,frame-6,MESSAGE_QUEUE); byte(h,POST_INPUT_AUX,0);
-    callback(h,0xc10dae,1); word(h,frame-2,mode); consume(h,PM_RESET_SEQUENCE);
+    mode=(uint16_t)signed_mode(h,0); result_store_cursor(locals,MESSAGE_QUEUE,h); byte(h,POST_INPUT_AUX,0);
+    callback(h,0xc10dae,1); locals->mode=mode;
+    if(locals->frame) wr_u16(locals->frame-2,mode);
+    observe(h,PM_STORE_WORD,mode,0); consume(h,PM_RESET_SEQUENCE);
     phase=read_byte(h,PLAYER_PHASE); compare(h,phase,0xff,1);
     if(phase==0xff) {
-        mode=read_word(h,frame-2); compare(h,mode,3,2);
+        mode=result_mode(locals); observe(h,PM_D0_WORD,mode,0); compare(h,mode,3,2);
         if(mode>=3) { compare(h,mode,8,2); }
         if(mode>=3 && mode<=8) {
             consume(h,PM_INDEXED_MESSAGE);
-            cursor=address(h,0,rd_u32(frame-6)); cursor=address(h,0,cursor+2); longword(h,frame-6,cursor);
-            mode=rd_u16(frame-2); compare(h,mode,3,2);
-            if(mode==3) { word(h,cursor,0x8055); add_local(h,frame-6,2,4); }
-            else append(h,frame-6,0x8056);
+            cursor=address(h,0,result_cursor(locals)); cursor=address(h,0,cursor+2); result_store_cursor(locals,cursor,h);
+            mode=result_mode(locals); compare(h,mode,3,2);
+            if(mode==3) { word(h,cursor,0x8055); result_advance(locals,h); }
+            else result_append(locals,h,0x8056);
         } else {
             selected=signed_mode(h,1); compare(h,(uint32_t)selected,9,4);
             if(selected==9) {
                 cursor=address(h,0,rd_u32(MODE_TABLE)); word(h,cursor,1); consume(h,PM_LOAD_MODE);
-                cursor=address(h,0,rd_u32(frame-6)); word(h,cursor,0x4a); cursor=address(h,0,cursor+2);
+                cursor=address(h,0,result_cursor(locals)); word(h,cursor,0x4a); cursor=address(h,0,cursor+2);
                 word(h,cursor,0x8053); cursor=address(h,0,cursor+2);
-                byte(h,SEQUENCE_FLAG,1); byte(h,PLAYER_PHASE,0xef); longword(h,frame-6,cursor);
+                byte(h,SEQUENCE_FLAG,1); byte(h,PLAYER_PHASE,0xef); result_store_cursor(locals,cursor,h);
             } else {
                 compare(h,(uint32_t)selected,125,4);
-                if(selected==125) { append(h,frame-6,0x48); byte(h,PLAYER_PHASE,0xf0); }
-                else append(h,frame-6,0x41);
+                if(selected==125) { result_append(locals,h,0x48); byte(h,PLAYER_PHASE,0xf0); }
+                else result_append(locals,h,0x41);
             }
         }
     } else {
@@ -128,38 +154,44 @@ void prepare_postflight_messages(gaddr frame,const PostflightMessageHooks *h) {
                 switch(selected) {
                 case 0:
                     phase_word=read_word(h,0xc458da); observe(h,PM_BIT_D0,phase_word,0);
-                    append(h,frame-6,(phase_word&1)?0x24:0x25); break;
-                case 1: append(h,frame-6,0x2c); byte(h,PLAYER_PHASE,0xf0); break;
-                case 2: append(h,frame-6,0x33); break;
+                    result_append(locals,h,(phase_word&1)?0x24:0x25); break;
+                case 1: result_append(locals,h,0x2c); byte(h,PLAYER_PHASE,0xf0); break;
+                case 2: result_append(locals,h,0x33); break;
                 case 3:
-                    cursor=address(h,0,rd_u32(frame-6)); word(h,cursor,0x39); cursor=address(h,0,cursor+2);
-                    phase_word=read_word(h,0xc458da); longword(h,frame-6,cursor); observe(h,PM_BIT_D0,phase_word,0);
-                    if(phase_word&1) { word(h,cursor,0x803a); add_local(h,frame-6,2,4); byte(h,PLAYER_PHASE,0xf0); }
-                    else append(h,frame-6,0x805c);
+                    cursor=address(h,0,result_cursor(locals)); word(h,cursor,0x39); cursor=address(h,0,cursor+2);
+                    phase_word=read_word(h,0xc458da); result_store_cursor(locals,cursor,h); observe(h,PM_BIT_D0,phase_word,0);
+                    if(phase_word&1) { word(h,cursor,0x803a); result_advance(locals,h); byte(h,PLAYER_PHASE,0xf0); }
+                    else result_append(locals,h,0x805c);
                     break;
                 }
-            } else append(h,frame-6,0x42);
+            } else result_append(locals,h,0x42);
             phase=read_byte(h,PLAYER_PHASE); compare(h,phase,0xf0,1);
             if(phase!=0xf0) {
-                cursor=address(h,0,rd_u32(frame-6)); cursor=address(h,0,cursor+2);
+                cursor=address(h,0,result_cursor(locals)); cursor=address(h,0,cursor+2);
                 word(h,cursor,0x8056); cursor=address(h,0,cursor+2);
-                word(h,cursor,0x8053); cursor=address(h,0,cursor+2); longword(h,frame-6,cursor);
+                word(h,cursor,0x8053); cursor=address(h,0,cursor+2); result_store_cursor(locals,cursor,h);
             }
         } else {
             phase=read_byte(h,PLAYER_PHASE); compare(h,phase,0xfd,1);
             if(phase==0xfd) {
                 selected=signed_mode(h,1); compare(h,(uint32_t)selected,4,4);
-                if(selected==4) { append(h,frame-6,0x4c); byte(h,PLAYER_PHASE,0xf0); }
+                if(selected==4) { result_append(locals,h,0x4c); byte(h,PLAYER_PHASE,0xf0); }
             }
         }
     }
     phase=read_byte(h,PLAYER_PHASE); compare(h,phase,0xfc,1);
     if(phase==0xfc) {
-        cursor=address(h,0,rd_u32(frame-6)); word(h,cursor,0x54); cursor=address(h,0,cursor+2);
-        word(h,cursor,0x8053); cursor=address(h,0,cursor+2); longword(h,frame-6,cursor);
+        cursor=address(h,0,result_cursor(locals)); word(h,cursor,0x54); cursor=address(h,0,cursor+2);
+        word(h,cursor,0x8053); cursor=address(h,0,cursor+2); result_store_cursor(locals,cursor,h);
         consume(h,PM_RECORD_OUTCOME); consume(h,PM_LOAD_OUTCOME);
     }
-    cursor=address(h,0,rd_u32(frame-6)); word(h,cursor,0);
+    cursor=address(h,0,result_cursor(locals)); word(h,cursor,0);
+}
+void prepare_postflight_messages(gaddr frame,const PostflightMessageHooks *h) {
+    ResultMessageLocals locals={.frame=frame}; prepare_result_messages(&locals,h);
+}
+void prepare_postflight_result(const PostflightMessageHooks *h) {
+    ResultMessageLocals locals={0}; prepare_result_messages(&locals,h);
 }
 void record_postflight_outcome(gaddr frame,const PostflightMessageHooks *h) {
     int32_t mode=signed_mode(h,1); gaddr a,b; uint16_t count; uint8_t attempts;
