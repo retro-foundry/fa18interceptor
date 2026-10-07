@@ -1,5 +1,20 @@
 # Current playable port handoff
 
+Latest connected input fix (2026-10-07): depleted recorder flare/chaff commands
+now complete when C1C23C's input queue is already claimed. Its gate makes the
+inherited event dead while stock/message and modifier clearing still execute.
+2,512 complete source input parents pass, including 1,536 new claimed-recorder
+cases. After ordinary Free Flight startup, 24 controlled input parents using
+the playable runtime match original RAM, including twelve successful-flare ->
+depleted-chaff sequences. Four keyboard-driven flight bodies still match
+gameplay/display. Comparisons discard passing RAM. First depleted commands
+with an unclaimed queue still require the real carry producer and fail loudly;
+full gameplay acceptance remains unfinished. See
+`analysis/native_countermeasures_milestone.md`.
+The consumed-game-input gate now also requires the complete 164-byte player
+core; stale assertions expecting the corrected flag/countdown gap are removed.
+Original export stability and native consumed-input checkpoint comparisons pass.
+
 Latest user direction (2026-10-07): stop workspace artifact growth. Cleanup
 reduces 60.501 GiB to 3.719 GiB, reclaiming 56.782 GiB; active build output is
 1.329 GiB. Source, media, recordings and Visual Studio setup are preserved.

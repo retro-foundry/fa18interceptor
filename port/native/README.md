@@ -138,15 +138,19 @@ F and C execute source flare/chaff stock, messages and control-effect launch,
 motion, drawing and ground-contact expiry. Keyboard depleted-stock selection
 and SHIFT-F's mode-6 sound are connected. Recorder $FD function keys also
 publish their source event; their inherited selection is dead to publication.
-848 source input cases and two controlled actual native input parents pass.
-Depleted pending recorder carry remains unfinished. Effect component/face collision
+2,512 source input cases pass, including 1,536 claimed recorder stock cases.
+Twenty-four controlled recorder input parents match after normal Free Flight
+startup, including successful flare followed by depleted chaff. C1C23C ignores
+the inherited event after input is claimed; a first depleted recorder command
+with an unclaimed queue still requires its real carry producer. Effect component/face collision
 children are connected; 256 source-parent cases and four controlled actual
 native parents match original compared RAM/display. These include face hits
 and component misses; complete weapon-kill sequences remain unverified.
 The runtime integration test uses real Free Flight keys and shares
 all playable runtime objects; four actual bodies match original gameplay and
 display. Build `fa18_native_countermeasures_test` and run
-`python tools/native/check_countermeasures.py` for retained focused evidence.
+`python tools/native/check_countermeasures.py` for reports and focused evidence.
+Passing captures are temporary; only failed cases retain raw RAM by default.
 See [`../../analysis/native_countermeasures_milestone.md`](../../analysis/native_countermeasures_milestone.md).
 The preview now draws the source horizon and normal/wide terrain packets into
 ordinary host planes, followed by the original scene placement/model streams,

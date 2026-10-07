@@ -15,6 +15,31 @@ typedef struct {
     char path[4096];
     unsigned captures,launches,expiry;
 } CountermeasureFixture;
+static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
+    const unsigned settings=variant%12,mode=1+settings/4;
+    const int chain=variant>=12;
+    wr_u8(RECORDER_MODE,(uint8_t)mode);wr_u8(MODE_SELECT,1);
+    wr_u16(RECORD_WORD_A,chain?6:(settings&2)?4:2);wr_u16(RECORD_WORD_B,0);
+    wr_u16(PENDING_COMMAND_WORD_A,0);wr_u16(PENDING_COMMAND_WORD_B,0);
+    wr_u8(MISSION_LEVEL_A,chain?(settings&1):(settings&1)?0x80:1);
+    wr_u8(MISSION_LEVEL_B,chain?2:(settings&1)?0x80:1);
+    wr_u8(KEY_TAKEN,chain?0:1);wr_u8(KEY_COUNT,0);
+    wr_u8(KEY_WRITE,(settings&2)?9:0);wr_u8(KEY_TRANSLATED_WRITE,(settings&2)?7:0);
+    wr_u8(KEY_STATE,0);wr_u8(KEY_STATE+1,0);wr_u8(KEY_STATE+2,0);
+    wr_u32(EXTERNAL_INPUT_HANDLE,0x6400);wr_u32(KEYBOARD_INPUT_HANDLE,0x6500);
+    game->joystick_directions=0;game->mouse_buttons=0;
+    snprintf(fixture->path,sizeof fixture->path,"%s.pending.%u",fixture->prefix,variant);
+    NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
+        .iteration=fixture->clock.iteration,.count=1};
+    /* Controlled C0F3C4 parents after ordinary disk/input startup. Chain
+     * cases establish KEY_TAKEN through a real successful flare publication. */
+    native_frame_capture(game,NATIVE_FRAME_BODY_BEGIN,0,&capture);
+    native_input_process(game);
+    native_frame_capture(game,NATIVE_FRAME_BODY_END,0,&capture);
+    printf("{\"pending_input\":%u,\"recorder_mode\":%u,\"chain\":%s}\n",variant,mode,chain?"true":"false");
+    return capture.complete && !rd_u16(RECORD_WORD_A) && !rd_u16(RECORD_WORD_B) &&
+        !game->input_count && (!chain || rd_u8(KEY_TAKEN)==1);
+}
 static int fd_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const uint8_t raw=(uint8_t)(0x50+variant*9);
     wr_u8(RECORDER_MODE,0xfd);wr_u8(MODE_SELECT,1);
@@ -104,6 +129,7 @@ int main(int argc,char **argv) {
         fprintf(stderr,"Countermeasure integration failed: captures=%u launch=%u expiry=%u stocks=%u/%u\n",
             fixture.captures,fixture.launches,fixture.expiry,rd_u8(MISSION_LEVEL_A),rd_u8(MISSION_LEVEL_B));goto done;
     }
+    for(unsigned i=0;i<24;++i) if(!pending_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<2;++i) if(!fd_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<4;++i) if(!collision_parent(game,&fixture,i)) goto done;
     result=0;

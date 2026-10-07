@@ -63,14 +63,9 @@ def main():
         assert not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
         native, source = native_data.read_bytes(), snapshots[1]
         root = 0xC46184 - 0xC00000 + 0x80000
-        # Existing cold-start differences: placed-region bit 2 and a countdown
-        # sixteen updates ahead. Keep them explicit, bounded and separately open.
-        assert source[root + 4] ^ native[root + 4] == 4
-        countdown = lambda data: int.from_bytes(data[root + 76:root + 78], 'big')
-        assert (countdown(native) - countdown(source)) & 0xffff == 16
+        # C08EE4/C08EB8 cold startup now constructs the source aircraft kind.
+        # Require the complete core, including its region flag and countdown.
         for offset in range(164):
-            if offset in (4, 76, 77):
-                continue
             assert source[root + offset] == native[root + offset], f'aircraft +{offset:02X} differs'
         for address in (0xC4582E, 0xC45830):
             offset = address - 0xC00000 + 0x80000

@@ -79,7 +79,10 @@ int main(int argc,char **argv) {
         size_t na=0;uint8_t *actual=read_bytes(argv[2],&na);unsigned differences=0;
         if(!actual || na!=0x100000) return 1;
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
-        game->input_keys[0]=(uint8_t)strtoul(argv[3],NULL,0);game->input_count=1;m->joy1dat=0;
+        if(strcmp(argv[3],"pending")) {
+            game->input_keys[0]=(uint8_t)strtoul(argv[3],NULL,0);game->input_count=1;
+        }
+        m->joy1dat=0;
         if(!original_input(game)) return 1;
         for(unsigned i=0;i<0xff000;++i) {
             uint8_t original=i<0x80000?m->chip[i]:m->slow[i-0x80000];
@@ -93,8 +96,8 @@ int main(int argc,char **argv) {
         return differences!=0;
     }
     unsigned total_events=0,drain_cases=0;
-    unsigned countermeasure_cases=0,fd_cases=0,ejection_cases=0,callback_cases=0;
-    for(unsigned variant=0;variant<976;++variant) {
+    unsigned countermeasure_cases=0,fd_cases=0,ejection_cases=0,callback_cases=0,pending_countermeasures=0;
+    for(unsigned variant=0;variant<2512;++variant) {
         static const uint8_t keys[]={0x0c,0x8c,0x4c,0xcc,0x4d,0xcd,0x4e,0xce,0x4f,0xcf,
             0x40,0xc0,0x24,0x20,0x13,0x44,0x37,0x38,0x39,0xb8,0xb9,0x50,0x55,0x59};
         static const uint16_t joy[]={0,1,2,0x100,0x200,0x301,0x102,0x303};
@@ -152,7 +155,7 @@ int main(int argc,char **argv) {
             wr_u8(ORIGIN_GATE_A,(settings&4)?1:0);
             wr_u8(BAR_E_FLAG,(uint8_t[]){0,1,0x80,0xff}[(settings>>3)&3]);
             wr_u8(KEY_TAKEN,(settings&32)?1:0);
-        } else {
+        } else if(variant<976) {
             ++callback_cases;
             const unsigned settings=variant-912;
             game->input_server_installed=settings&1;
@@ -164,6 +167,17 @@ int main(int argc,char **argv) {
             /* Installation must restore these descriptor fields only. */
             wr_u32(0xc1abf8,0xaabbccdd);wr_u32(0xc1abfc,0x12345678);
             wr_u32(0xc1ac02,0x87654321);
+        } else {
+            ++pending_countermeasures;
+            const unsigned settings=variant-976,kind=settings/256;
+            wr_u8(RECORDER_MODE,(uint8_t)(1+kind/2));
+            wr_u16(RECORD_WORD_A,(kind&1)?4:2);
+            wr_u16(RECORD_WORD_B,0);
+            wr_u8(MISSION_LEVEL_A,(uint8_t)settings);
+            wr_u8(MISSION_LEVEL_B,(uint8_t)settings);
+            /* An already claimed queue makes the incoming D4 byte dead.
+             * original_input deliberately supplies a nonzero release byte. */
+            wr_u8(KEY_TAKEN,1);
         }
         memcpy(source,game,sizeof *source);memcpy(before,m,sizeof *m);
         if(!original_input(source)) return 1;
@@ -180,7 +194,7 @@ int main(int argc,char **argv) {
             }
         }
     }
-    printf("976 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases, %u ejection cases, %u callback cases)\n",total_events,drain_cases,countermeasure_cases,fd_cases,ejection_cases,callback_cases);
+    printf("2512 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases, %u ejection cases, %u callback cases, %u claimed pending countermeasures)\n",total_events,drain_cases,countermeasure_cases,fd_cases,ejection_cases,callback_cases,pending_countermeasures);
     for(unsigned test=0;test<16;++test) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
         memset(game,0,sizeof *game);

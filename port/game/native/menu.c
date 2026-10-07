@@ -206,9 +206,12 @@ static int16_t carried_selection(void *context) {
     if(r->action==COMMAND_CHAFF || (r->action==COMMAND_FLARE && !r->modifier)) {
         const gaddr stock=r->action==COMMAND_CHAFF?MISSION_LEVEL_A:MISSION_LEVEL_B;
         /* A successful pending action saves its own event (0) before the
-         * child. Depleted recorder actions do not define a carry here. */
+         * child. Once C1C23C's KEY_TAKEN gate is set, the inherited event
+         * is dead: publication skips both its release test and queue writes.
+         * C25704 still owns the stock message and the exit clears modifiers. */
         if(command->selection_known) return command->flight.carried_event;
         if(rd_s8(stock)>1) return 0;
+        if(rd_u8(KEY_TAKEN)) return 0;
         fputs("native input missing depleted recorder countermeasure carry\n",stderr);abort();
     }
     /* C1BCEE's recorder $FD arm changes only the inherited selection,

@@ -98,17 +98,17 @@ builds in parallel. Independent MSVC build directories can run concurrently.
 
 Latest independent later-demo assessment: source 2401..2763/native 2364..2726
 at ticks 222..584 matches all 363 named player/camera/phase/control boundaries.
-Named motion/rates/pose/matrices also match all 5,808 record instances. Complete
-record-core diagnostics match only 5,445 instances: the player retains +04
-bit two and a +4C countdown sixteen updates ahead. Zero boundaries have all
-sixteen cores matching. The comparison tools now report that scope explicitly.
+Named motion/rates/pose/matrices and complete record cores match all 5,808
+record instances after the cold-start default/level correction. All 363
+boundaries have all sixteen cores matching. Together with takeoff, complete
+cores match 9,376/9,376 instances across 586 independently aligned boundaries.
 Strict two-page drawing passes 83/363 and still exits 1. At tick 508, the
 source view-hold timer expires and requests a cockpit redraw earlier in elapsed
 time; same-state/clock frame-body and original expiry-parent checks pass. No
 mask, fitted timer or game behavior change was introduced. See
-`analysis/native_later_demo_assessment.md`; source captures are retained under
-`build/native-flight/demo-later-review/`. Next trace the setup/bootstrap origin
-of the two player-core gaps before claiming whole record-state parity.
+`analysis/native_later_demo_assessment.md`; compressed source captures are
+retained under `build/native-flight/demo-later-review/`. Independent complete
+sequences and seconds-driven drawing assessment remain open.
 
 Native intro, credits, callsign editing, menu/mission/log selection and config
 save/reload work. Demonstration, Free Flight and carrier qualification execute
@@ -231,10 +231,10 @@ and runtime evidence are distinguished in
 `analysis/native_countermeasures_milestone.md`.
 
 Build `fa18_native_countermeasures_test` with the native runner, then run
-`python tools/native/check_countermeasures.py`. Its exports persist under
-`build/native-flight/countermeasure-check/`. Depleted pending recorder carry
-remains an explicit unsupported path. Full gameplay
-goal remains active.
+`python tools/native/check_countermeasures.py`. Reports/logs persist under
+`build/native-flight/countermeasure-check/`; passing raw RAM is temporary.
+First depleted recorder commands with an unclaimed queue remain unsupported.
+Full gameplay goal remains active.
 
 Follow-up collision connection: C266AE now consumes source C26CC0/C26D8A
 typed returns; the component child reuses C27456's existing face-plane owner.
@@ -252,6 +252,20 @@ Complete input comparisons pass 848 cases, including 160 new $FD combinations;
 two controlled actual native C0F3C4 parents match original compared RAM.
 The `frame.fd.N` files bracket only input, separate from complete frame bodies.
 Native menu/function-key/pilot-log regression checks pass.
+
+Claimed-recorder follow-up (2026-10-07): C1C23C tests KEY_TAKEN before inspecting
+the event release bit or touching the queue. Depleted flare/chaff commands can
+therefore finish once a prior command has claimed input without reconstructing
+their dead inherited event. Stock/messages and modifier clears retain their
+original owners. All 2,512 complete input parents match original compared RAM,
+including 1,536 new cases covering every stock byte for each effect and recorder
+modes 1/2/3 with nonzero original incoming D4. Twenty-four controlled C0F3C4
+parents using the playable runtime also match, including twelve sequences
+where a successful flare claims input before depleted chaff. These parents
+bracket input only; four ordinary keyboard-driven full bodies still match
+gameplay and every display byte. No comparison exclusions changed. A first
+depleted command with an unclaimed queue still requires its actual producer;
+no carry value is guessed for that case.
 
 ### `d5203c52` — C0DA38 alternate selection and enclosing-frame exit
 
@@ -390,10 +404,11 @@ No full original replay was repeated in the last two implementation batches.
 
 ## Other unfinished scope
 
-`native/menu.c:carried_selection()` still aborts for depleted pending recorder
-countermeasures: their inherited selection needs the real source caller
-contract. Keyboard flare/chaff, successful pending commands and $FD function
-keys are connected. Do not invent a carry for the
+`native/menu.c:carried_selection()` still aborts for a first depleted pending
+recorder countermeasure when KEY_TAKEN is zero: its inherited selection needs
+the real source caller contract. Keyboard flare/chaff, successful pending
+commands, claimed-queue depleted commands and $FD function keys are connected.
+Do not invent a carry for the
 remaining paths. Control-effect component/face children are now connected;
 complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.

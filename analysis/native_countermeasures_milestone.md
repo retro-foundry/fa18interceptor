@@ -1,5 +1,10 @@
 # Connected native countermeasures — 2026-10-07
 
+Latest follow-up: claimed recorder depletion is connected and validated; a first
+depleted recorder command with an unclaimed input queue still needs its real
+enclosing carry producer. See the final section for current evidence. Earlier
+counts and remaining-scope paragraphs below describe their original batches.
+
 Keyboard F and C now execute the original flare/chaff commands, post their
 messages, consume stock, and launch/update/draw control records in the playable
 `fa18_native` runner. The removed dependencies were missing command children
@@ -131,3 +136,50 @@ also pass their affected native check.
 The earlier $FD-selection limitation is superseded. Depleted pending recorder
 countermeasure carry still requires its enclosing caller contract; whole-game
 coverage and equivalent-state gameplay sequences remain unfinished.
+
+## Follow-up: depleted commands after an input claim
+
+The actual caller remains frontend -> native flight -> `native_input_process()`
+/ C0F3C4 -> C1AC28 -> C1C0E0/C1C172 -> C25704 -> C1C23C. Pending selection
+defines event zero but does not assign D4. Successful countermeasures save the
+event before the message child; depleted ones inherit D4. The byte-exact
+`source_amiga/observed/enqueue_command_input_event.asm` starts by testing
+KEY_TAKEN and branches directly to modifier clearing when it is nonzero,
+before the release-bit test and both queue stores. The inherited event is
+therefore dead to the reached RAM behavior in that case. `native/menu.c` now
+allows that path through its existing command, stock/message and publication
+owners. It does not introduce a carry producer or replace the unclaimed case.
+
+`python tools/native/check_countermeasures.py` passes these current checks:
+
+| Scope | Evidence |
+| --- | --- |
+| Complete C0F3C4 component contracts | 2,512 parents match original non-stack RAM; 1,536 new cases cover every stock byte, flare/chaff and recorder modes 1/2/3 with KEY_TAKEN set and incoming D4=$51AB12E7 |
+| Actual shared-runtime recorder input | 24 controlled C0F3C4 parents after normal Free Flight startup match compared RAM, including display; twelve start claimed and twelve execute successful flare before depleted chaff claims no second event |
+| Existing keyboard-driven complete flight bodies | Two launches and two early ground-contact expiry bodies match compared gameplay and every display byte |
+| Existing control-effect parents | 256 component cases and four actual controlled parents still pass |
+| Existing $FD and Delete contracts | Two actual $FD parents and sixteen menu/mission Delete parents still pass |
+
+The recorder fixtures cover stocks 1/$80 and zero/one after the successful
+flare; raw queue cursors zero/nine and translated cursors zero/seven vary.
+They seed only controlled input globals after the ordinary disk/key startup.
+Their before/after files bracket C0F3C4 alone; they are not natural depleted
+recordings or complete sequence evidence. The four ordinary full bodies remain
+separate. No RAM/display exclusions were added, and no full replay was repeated.
+
+The checker now uses `CaptureWorkspace`: passing runs retain logs and JSON,
+not raw RAM; a failed original comparison retains its one case. Explicit
+`--keep-captures` is available for deliberate diagnostics. All current passing
+captures were removed automatically. Release/Debug builds pass, public Release
+is refreshed, and five selected runtime CTests plus automatic cleanup pass.
+The game-input gate initially failed on stale assertions requiring the old
+cold-start flag/countdown gap. It now requires all 164 player-core bytes to
+match at the consumed carrier-input checkpoint; the corrected gate passes.
+This strengthens the comparison by removing its three-byte exception.
+
+A first depleted recorder countermeasure with KEY_TAKEN zero still aborts
+explicitly. Its event can change the claim/release test and raw/translated
+queue contents, so zero is not a valid general replacement. The source
+producer across preceding frame/message/drawing work must be reconstructed
+before connecting that remaining path. Complete mission sequences, typed-state
+migration, audio fidelity and measured 20 ms acceptance remain unfinished.
