@@ -1,5 +1,14 @@
 # Native port runner
 
+Radar/weapon commands now expose actual range, block and mode outputs to
+subsequent depleted recorder input; target/throttle/hook/ECM actions preserve
+their preceding output. Weapon $80-$10 follows the original signed branch to
+$30. 151 full bodies, 168 recorder parents and 48 intervening keyboard parents
+match original compared RAM/drawing and returns. All 4,416 selected command
+parents and nine affected checks pass. See
+`../../analysis/native_weapon_radar_input_return.md`. Whole-game acceptance,
+other action families, audio, typed state and measured performance stay open.
+
 View commands now compose their actual detail, origin level, record type, mode
 and masked zoom-flag outputs into subsequent depleted recorder input. 139 full
 bodies, 156 recorder parents and 36 intervening keyboard parents match original

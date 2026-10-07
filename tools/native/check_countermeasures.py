@@ -54,7 +54,7 @@ def check(args, work, capture_dir):
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
     assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
-    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(156)), pending_inputs
+    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(168)), pending_inputs
     assert [entry['message_body'] for entry in message_bodies] == list(range(15)), message_bodies
     assert [entry['assigned'] for entry in message_bodies] == [True] * 13 + [False] * 2, message_bodies
     assert {entry['input_byte'] & 0x80 for entry in message_bodies[:12]} == {0, 0x80}
@@ -78,10 +78,10 @@ def check(args, work, capture_dir):
     assert all(entry['return_owner'] == 9 and entry['saved_tick'] & 31 not in (8, 16)
         for entry in grid_bodies), grid_bodies
     assert {entry['recorder_mode'] for entry in pending_inputs} == {1, 2, 3}, pending_inputs
-    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(48)), cleanup_bodies
+    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(60)), cleanup_bodies
     assert all(entry['return_owner'] == 10 and entry['saved_tick'] & 31 not in (8, 16)
         for entry in cleanup_bodies), cleanup_bodies
-    assert [entry['interposed_input'] for entry in interposed_inputs] == list(range(36)), interposed_inputs
+    assert [entry['interposed_input'] for entry in interposed_inputs] == list(range(48)), interposed_inputs
     assert {entry['return_owner'] for entry in interposed_inputs} == {10, 11, 12, 13, 14}, interposed_inputs
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
     source_carries = {}
@@ -192,7 +192,7 @@ def check(args, work, capture_dir):
                         capture + '.source.dat', environment=environment)
                     source_carries[108 + body['cleanup_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
         print(f'{name}: original contracts and actual runtime captures pass', flush=True)
-    print('139 full bodies, 156 recorder input parents and 36 intervening keyboard parents match original RAM/display and defined returns')
+    print('151 full bodies, 168 recorder input parents and 48 intervening keyboard parents match original RAM/display and defined returns')
 
 
 if __name__ == '__main__':

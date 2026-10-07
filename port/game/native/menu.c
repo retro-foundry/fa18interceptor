@@ -229,6 +229,18 @@ static NativeInputReturn view_return(ViewActionOutput output) {
     }
     return (NativeInputReturn){value,NATIVE_INPUT_RETURN_VIEW_ACTION};
 }
+static NativeInputReturn flight_return(FlightActionOutput output) {
+    uint8_t value;
+    switch(output.kind) {
+    case FLIGHT_ACTION_HUD_MODE: value=output.hud_mode;break;
+    case FLIGHT_ACTION_GEAR_GATE: value=(uint8_t)output.gear_gate;break;
+    case FLIGHT_ACTION_RADAR_RANGE: value=output.radar_range;break;
+    case FLIGHT_ACTION_WEAPON_BLOCK: value=output.weapon_block;break;
+    case FLIGHT_ACTION_WEAPON_MODE: value=output.weapon_mode;break;
+    default: abort();
+    }
+    return (NativeInputReturn){value,NATIVE_INPUT_RETURN_FLIGHT_ACTION};
+}
 static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
     NativeCommand command={.game=game};
     const CommandSelectionHooks selection={selection_value,&command};
@@ -246,10 +258,8 @@ static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
             NATIVE_INPUT_RETURN_COMMAND_QUEUE};
     } else if(result.view_output.kind!=VIEW_ACTION_UNRESOLVED && result.view_output.kind!=VIEW_ACTION_PRESERVE) {
         game->completed_input_return=view_return(result.view_output);
-    } else if(result.flight_output.kind==FLIGHT_ACTION_HUD_MODE) {
-        game->completed_input_return=(NativeInputReturn){result.flight_output.hud_mode,NATIVE_INPUT_RETURN_FLIGHT_ACTION};
-    } else if(result.flight_output.kind==FLIGHT_ACTION_GEAR_GATE) {
-        game->completed_input_return=(NativeInputReturn){(uint8_t)result.flight_output.gear_gate,NATIVE_INPUT_RETURN_FLIGHT_ACTION};
+    } else if(result.flight_output.kind!=FLIGHT_ACTION_UNRESOLVED && result.flight_output.kind!=FLIGHT_ACTION_PRESERVE) {
+        game->completed_input_return=flight_return(result.flight_output);
     } else if(result.flight_output.kind==FLIGHT_ACTION_PRESERVE || result.view_output.kind==VIEW_ACTION_PRESERVE ||
               result.action==COMMAND_PENDING_EMPTY || result.action==COMMAND_COUNTER_WAIT ||
               result.action==COMMAND_FINISH_EVENT || result.action==COMMAND_QUEUE_ONLY) {

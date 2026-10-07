@@ -107,6 +107,7 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         store_byte(h,COMMAND_BLOCK_FLAGS,(uint8_t)(rd_u8(COMMAND_BLOCK_FLAGS)|0x0a));
         break;
     case COMMAND_NEXT_TARGET:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* C33186 preserves this output. */
         event=h->consume(h->context,FLIGHT_NEXT_TARGET).event;
         request_bit(h,PENDING_COMMAND_WORD_A,7);
         store_byte(h,COMMAND_NEXT_TARGET_FLAG,1); break;
@@ -124,6 +125,7 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
             value=value==11?9:11;
         }
         observe(h,FLIGHT_RADAR_SELECT,value,0,0);
+        output=(FlightActionOutput){.kind=FLIGHT_ACTION_RADAR_RANGE,.radar_range=value};
         store_byte(h,record+0x63,(uint8_t)(rd_u8(record+0x63)&0xf0));
         store_byte(h,record+0x63,(uint8_t)(rd_u8(record+0x63)|value));
         store_byte(h,SCALE_REDRAWS,3); break;
@@ -177,11 +179,13 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         }
         break;
     case COMMAND_THROTTLE_MODE:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* C1B602/C33186 and memory toggles. */
         event=h->consume(h->context,FLIGHT_THROTTLE_MODE_RELEASE).event;
         event=h->consume(h->context,FLIGHT_THROTTLE_MODE).event;
         request_bit(h,PENDING_COMMAND_WORD_A+1,0); store_byte(h,BAR_REDRAWS_B,3);
         store_word(h,CONTROL_RECORDS,rd_u16(CONTROL_RECORDS)^0x0800); break;
     case COMMAND_HOOK:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* C25704 changes D0, preserves D4. */
         request_bit(h,PENDING_COMMAND_WORD_A,1);
         if(compare_byte(h,CONTROL_RECORDS+0x62,0x11)) break;
         event=h->consume(h->context,FLIGHT_HOOK).event;
@@ -194,6 +198,7 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         event=h->consume(h->context,FLIGHT_HOOK_SOUND).event;
         event=swap_event(event,h); break;
     case COMMAND_WEAPON_MODE:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* Enable/message arms assign no output. */
         if(!compare_byte(h,MODE_SELECT,2)) goto enable_weapon;
         if(!compare_byte(h,MODE_SELECT,0x7d)) {
             if((int8_t)test_byte(h,COMMAND_WEAPON_PAUSE)<0) goto enable_weapon;
@@ -204,12 +209,18 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         event=h->consume(h->context,FLIGHT_WEAPON_MODE).event;
         value=rd_u8(COMMAND_BLOCK_FLAGS); observe(h,FLIGHT_WEAPON_READ,value,0,0);
         value&=0x0f; observe(h,FLIGHT_WEAPON_MASK,value,0,0);
+        output=(FlightActionOutput){.kind=FLIGHT_ACTION_WEAPON_BLOCK,.weapon_block=value};
         if(value) break;
         request_bit(h,PENDING_COMMAND_WORD_A,4);
         value=rd_u8(CONTROL_RECORDS+0x63); observe(h,FLIGHT_WEAPON_READ,value,0,0);
         value&=0xf0; observe(h,FLIGHT_WEAPON_MASK,value,0,0);
-        observe(h,FLIGHT_WEAPON_DECREMENT,value,0,0); value=(uint8_t)(value-0x10);
-        if((int8_t)value<0) { value=0x30; observe(h,FLIGHT_WEAPON_WRAP,value,0,0); }
+        observe(h,FLIGHT_WEAPON_DECREMENT,value,0,0);
+        /* C1BBE0/C1BBE4 uses SUBI's signed overflow flags. $80-$10 is
+         * negative before byte wrapping, so it also selects mode $30. */
+        const int decreased=(int8_t)value-0x10;
+        value=(uint8_t)decreased;
+        if(decreased<0) { value=0x30; observe(h,FLIGHT_WEAPON_WRAP,value,0,0); }
+        output=(FlightActionOutput){.kind=FLIGHT_ACTION_WEAPON_MODE,.weapon_mode=value};
         store_byte(h,CONTROL_RECORDS+0x63,rd_u8(CONTROL_RECORDS+0x63)&0x0f);
         store_byte(h,CONTROL_RECORDS+0x63,(uint8_t)(rd_u8(CONTROL_RECORDS+0x63)|value));
         store_byte(h,COMMAND_WEAPON_MODE_REDRAWS,3); store_byte(h,WEAPON_REDRAWS,3);
@@ -231,6 +242,7 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         }
         event=h->consume(h->context,FLIGHT_GEAR).event; break;
     case COMMAND_TARGET:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* Tone and target bit update only. */
         if(!compare_byte(h,MODE_SELECT,0x7d)) {
             event=h->consume(h->context,FLIGHT_TARGET).event;
             store_word(h,CONTROL_RECORDS+0x802,rd_u16(CONTROL_RECORDS+0x802)^0x1000);
@@ -253,6 +265,7 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         observe(h,FLIGHT_SPAWN_RESTORE,(uint16_t)event,0,0); break;
     case COMMAND_CHAFF: return (FlightCommandExecution){countermeasure(r,carried,h,0),output};
     case COMMAND_ECM:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* Tone and C1C214's memory toggle. */
         observe(h,FLIGHT_ECM_BEGIN,0,0,UPDATE_MAP_OVERRIDE);
         request_bit(h,PENDING_COMMAND_WORD_A+1,3); store_byte(h,BAR_REDRAWS_C,3);
         event=h->consume(h->context,FLIGHT_ECM).event;

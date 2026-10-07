@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest connected weapon/radar command outputs (2026-10-07): actual radar
+range, masked weapon block and selected weapon mode now compose depleted
+recorder input. Weapon $80-$10 follows the original signed-overflow branch,
+selecting $30. Target/throttle/hook/ECM actions preserve prior output.
+151 full bodies, 168 recorder parents and 48 intervening keyboard parents
+match original compared RAM/drawing and returns; all 4,416 selected command
+parents match non-stack RAM and defined returns. Nine affected checks and
+all native/reference builds pass. See
+`analysis/native_weapon_radar_input_return.md`. Other action families and
+whole-game acceptance remain open. Gameplay acceptance notes now reflect
+the user's permitted native cadence and corrected cold scene cores.
+
 Latest connected view-action return (2026-10-07): detail, origin level,
 record type, view mode and masked zoom flags now reach subsequent depleted
 recorder input when publication skips. 139 full bodies, 156 recorder parents

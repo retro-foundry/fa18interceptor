@@ -2,6 +2,16 @@
 
 ## Objective and user constraints
 
+Latest connected weapon/radar command outputs (2026-10-07): actual range,
+weapon block/mode and preserving target/throttle/hook/ECM actions now compose
+depleted recorder input. Weapon $80-$10 selects $30 under the original signed
+overflow condition. 151 full bodies, 168 recorder parents and 48 intervening
+keyboard parents match original compared RAM/drawing and returns. All 4,416
+selected command parents pass RAM/return checks; other action families and
+whole-game acceptance stay open. Nine affected checks and all native/reference
+builds pass. See `analysis/native_weapon_radar_input_return.md`. Gameplay
+acceptance notes now reflect permitted native cadence and corrected cold cores.
+
 Latest connected view-action return (2026-10-07): actual detail, origin level,
 record type, view mode and masked zoom flags compose subsequent depleted input.
 139 full bodies, 156 recorder parents and 36 intervening keyboard parents match

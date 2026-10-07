@@ -1,13 +1,23 @@
 # Native gameplay-frame acceptance
 
+Current policy (2026-10-07): the user's later clarification accepts different
+native rendering/presentation cadence. Preserve gameplay physics, rules, input
+and source-defined timers; compare equivalent gameplay states/events. Exact
+Amiga frame counts, elapsed timestamps and missed rendering frames are not
+completion gates. The older strict sequence/cadence assessments below remain
+diagnostics, not an instruction to reproduce Amiga rendering delays. Copper
+fade remains the only drawing exclusion. Complete scenario acceptance under
+this revised policy is still unestablished; functional outcomes are 3/3.
+
 The later independent segment now covers ticks 222..584: all 363 named player/
 camera boundaries match, but only 83 complete drawing boundaries match. The
 first cockpit cache difference at tick 508 follows the source seconds-driven
 view-hold expiry and redraw. Same-state/clock body and expiry-parent checks
-pass; equivalent elapsed-time assessment remains open. Complete core reporting
-also exposes the player's region flag and sixteen-update countdown lead:
-5,445/5,808 cores match, with zero completely matching record boundaries.
-See `native_later_demo_assessment.md`; these gaps are not masked or accepted.
+pass; equivalent state/event assessment remains open. Cold scene startup now
+executes C08EE4/C08EB8 before scene construction, correcting the region flag and
+sixteen-update countdown lead: all 5,808/5,808 later cores match. See
+`native_scene_startup_milestone.md` for that correction and
+`native_later_demo_assessment.md` for the earlier diagnostic findings.
 
 Latest takeoff assessment (2026-10-07): the user-reported demo outside-view
 clipping is fixed by supplying C1F2EE the original model vertex. All 223
