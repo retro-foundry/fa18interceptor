@@ -1,5 +1,13 @@
 # Native port runner
 
+Grid/aircraft-marker rendering now composes its actual point depth, heading,
+shape offset, clipped-segment height, line or number-text output into first
+depleted recorder input. Inactive grids preserve the preceding result. 91 full
+bodies and 108 input parents match original RAM/drawing; two snapshots each
+pass 401 grid/marker and 128 clipped-segment return/RAM cases. See
+`../../analysis/native_grid_marker_input_return.md`. Remaining return contracts
+and whole-game acceptance stay open.
+
 HUD marker lines now publish their actual size or defined clipped-start X
 delta to first depleted recorder input. Seventy-nine full bodies and 96 input
 parents match original compared RAM/drawing. Two runtime snapshots each pass

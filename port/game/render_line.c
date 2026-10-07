@@ -199,23 +199,30 @@ static int16_t divs_quotient(int32_t dividend, int16_t divisor) {
 }
 
 int draw_clipped_segment(void) {
+    return draw_clipped_segment_result().drawn;
+}
+
+SegmentDrawResult draw_clipped_segment_result(void) {
     gaddr out = POLY_VERTICES;
     int pass;
+    SegmentDrawResult result={0};
 
     for (pass = 0; pass < 2; pass++) {
         SegmentPoint p = segment_point(SEGMENT_POINTS), q = segment_point(SEGMENT_POINTS + 6), e;
         int16_t pv[3], qv[3], sx, sy;
         int plane;
+        result=(SegmentDrawResult){.kind=SEGMENT_DRAW_ENDPOINT_Y,.y=p.y}; /* C2EE60. */
         pv[0] = p.x; pv[1] = p.y; pv[2] = p.z;
         qv[0] = q.x; qv[1] = q.y; qv[2] = q.z;
         switch (clip_edge_end(pv, qv, enters, pv, &plane)) {
         case CLIP_END_POINT: e = p; break;
         case CLIP_END_CROSSING: e = segment_point(CLIP_POINT); break;
-        default: return 0;
+        default: return result;
         }
+        result.y=e.y; /* C2F03A loads the accepted crossing, when selected. */
         if (e.z <= 0) {
             wr_u16(ERROR_CODE, 0x16);
-            return 0;
+            return result;
         }
         sx = (int16_t)(divs_quotient((int32_t)e.x * 0xA0, e.z) + 0xA0);
         if (sx < 0) sx = 0; else if (sx >= 0x140) sx = 0x13F;
@@ -223,6 +230,7 @@ int draw_clipped_segment(void) {
         if (sy < 0) sy = 0; else if (sy >= 0xB4) sy = 0xB3;
         wr_s16(out, (int16_t)(0x13F - sx));
         wr_s16(out + 2, (int16_t)(0xB3 - sy));
+        result.kind=SEGMENT_DRAW_SCREEN_Y;result.y=(int16_t)(0xB3-sy);
         out += 4;
         if (!pass) {
             /* The other end next: the two points change places. */
@@ -231,6 +239,9 @@ int draw_clipped_segment(void) {
             wr_s16(SEGMENT_POINTS + 6, first.x); wr_s16(SEGMENT_POINTS + 8, first.y); wr_s16(SEGMENT_POINTS + 10, first.z);
         }
     }
-    draw_line(rd_s16(POLY_VERTICES), rd_s16(POLY_VERTICES + 2), rd_s16(POLY_VERTICES + 4), rd_s16(POLY_VERTICES + 6));
-    return 1;
+    result.line=draw_line_to_row_result(rd_s16(POLY_VERTICES), rd_s16(POLY_VERTICES + 2),
+        rd_s16(POLY_VERTICES + 4), rd_s16(POLY_VERTICES + 6),rd_s16(LINE_LAST_ROW));
+    if(result.line.kind!=LINE_DRAW_NONE) result.kind=SEGMENT_DRAW_LINE;
+    result.drawn=1;
+    return result;
 }

@@ -2,6 +2,7 @@
 #define FA18_FLIGHT_MARKERS_H
 #include "memory.h"
 #include "text.h"
+#include "render_line.h"
 /* Source working values: packed X/Z offset, projected Y, point components,
  * matrix products, record and stream cursors. Partial words remain visible. */
 enum MarkerValue { MM_OFFSET,MM_SCREEN_Y,MM_X,MM_Y,MM_Z,MM_ROW_X,MM_ROW_Y,MM_ROW_Z,
@@ -11,6 +12,18 @@ typedef struct {
     gaddr record,matrix,geometry,scene,origin,points;
     int child_negative,child_equal;
 } MarkerState;
+/* Defined outputs of the grid/aircraft-marker owners, separate from their
+ * geometric working values. Projection mode -5 preserves these outputs. */
+enum MarkerDrawKind { MARKER_DRAW_NONE, MARKER_DRAW_DEPTH, MARKER_DRAW_HEADING,
+    MARKER_DRAW_SHAPE_OFFSET, MARKER_DRAW_SEGMENT, MARKER_DRAW_NUMBER, MARKER_DRAW_LINE };
+typedef struct {
+    enum MarkerDrawKind kind;
+    int32_t depth;
+    int16_t heading,shape_offset;
+    SegmentDrawResult segment;
+    TextDrawResult number;
+    LineDrawResult line;
+} MarkerDrawOutput;
 enum MarkerChild {
     MM_SCENE_PROJECT,MM_SCENE_LABEL,MM_GRID_X_FIRST,MM_GRID_X_SECOND,MM_GRID_X_LINE,MM_GRID_X_LABEL,
     MM_GRID_Z_FIRST,MM_GRID_Z_SECOND,MM_GRID_Z_LINE,MM_GRID_Z_LABEL,MM_RECORD_POINT,
@@ -36,6 +49,7 @@ typedef struct {
     void *context;
     MarkerState (*consume_values)(void *context,enum MarkerChild child,MarkerState values);
     TextDrawResult (*scene_number_result)(void *context);
+    void (*publish_marker_output)(void *context,MarkerDrawOutput output);
 } MarkerHooks;
 MarkerState transform_marker_point(MarkerState w,const MarkerHooks *h); /* C2AFFA */
 /* C2B3C2's last row-Z load, Z matrix product or number renderer output.

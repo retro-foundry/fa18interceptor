@@ -23,6 +23,7 @@ extern int64_t fa18_next_event;
 #define reset_line_style host_reset_line_style
 #define draw_projected_segment host_draw_projected_segment
 #define draw_clipped_segment host_draw_clipped_segment
+#define draw_clipped_segment_result host_draw_clipped_segment_result
 #define composite_polygon_plane host_composite_polygon_plane
 #define draw_polygon_edge host_draw_polygon_edge
 #define clear_polygon_mask host_clear_polygon_mask
@@ -166,6 +167,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #undef reset_line_style
 #undef draw_projected_segment
 #undef draw_clipped_segment
+#undef draw_clipped_segment_result
 #undef composite_polygon_plane
 #undef draw_polygon_edge
 #undef clear_polygon_mask

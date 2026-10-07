@@ -339,8 +339,7 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
         ++game->hud_frames;
         if(native_frame_selection_cleanup())
             game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
-        if(native_frame_grid_and_markers()) /* C0F2F0, before the timer owner. */
-            game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
+        game->completed_input_return=native_frame_grid_and_markers(game->completed_input_return); /* C0F2F0, before the timer owner. */
         /* C25312/C2548A precede C0EFD4's game counter increment. Polls
          * resume on later PAL ticks without repeating physics or drawing. */
         game->flight_saved_tick=saved_tick;

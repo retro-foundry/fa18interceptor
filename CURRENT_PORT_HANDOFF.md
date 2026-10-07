@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest connected grid/aircraft-marker return (2026-10-07): point depths,
+heading/shape selections, clipped-segment heights, line results and number-text
+outputs now reach first depleted recorder flare/chaff input in source order.
+Inactive grids preserve the preceding result. 91 complete bodies and 108 input
+parents match original compared RAM/drawing, including twelve selected grid
+frames in ordinary Free Flight. Two snapshots each pass 401 complete grid/marker
+returns and 128 clipped-segment returns with non-stack RAM. Eleven affected
+checks and all native/reference builds pass. See
+`analysis/native_grid_marker_input_return.md`. Full port remains active.
+
 Latest connected HUD marker return (2026-10-07): the actual line renderer
 publishes its blit size, or the signed X delta computed before a lower-start
 last-row rejection. Other rejected starts preserve the preceding output.

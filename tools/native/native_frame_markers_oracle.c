@@ -3,6 +3,7 @@
 #include "native_hud_oracle.c"
 #include "../../port/game/native/frame_labels.c"
 #define draw_clipped_segment host_draw_clipped_segment
+#define draw_clipped_segment_result host_draw_clipped_segment_result
 #include "../../port/game/native/frame_markers.c"
 
 int main(int argc,char **argv) {
@@ -15,10 +16,11 @@ int main(int argc,char **argv) {
     if(!state||!rom||!data||nd!=0x100000||!m||!before||!expected) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
-    for(unsigned test=0;test<385;++test) {
+    for(unsigned test=0;test<401;++test) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
-        /* The final case consumes the runner's actual map/flight state. */
-        if(test<384) {
+        /* Case 384 consumes actual map/flight state; the final sixteen leave
+         * every record inactive to expose the last grid segment/number. */
+        if(test!=384) {
         wr_u8(ORIGIN_GATE_MODE,test<128 && (test&64)?0:1);
         wr_u8(ORIGIN_ENABLE,test<128 && (test&32)?0:1);
         wr_u8(MODE_SELECT,test&16?3:1);wr_u8(0xc457b5,test&8?1:0);
@@ -41,7 +43,7 @@ int main(int argc,char **argv) {
         }
         for(unsigned i=0;i<16;++i) {
             gaddr r=CONTROL_RECORDS+512*i;
-            wr_u16(r,i<(test>=128?16u:3u)?i==2?0x48:0x40:0);
+            wr_u16(r,test<384 && i<(test>=128?16u:3u)?i==2?0x48:0x40:0);
             wr_u8(r+3,test&4?128:0);wr_u8(r+32,test&2?64:0);
             wr_u8(r+98,i%3==1?0x20:i%3==2?0x30:0x10);
             wr_u16(r+104,(uint16_t)((test*1800+i*900)%30000));
@@ -51,10 +53,14 @@ int main(int argc,char **argv) {
         }
         }
         memcpy(before,m,sizeof *m);
-        native_frame_grid_and_markers();
+        const NativeInputReturn output=native_frame_grid_and_markers((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_LINE});
         memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
         memcpy(m,before,sizeof *m);
         if(!hud_original(0xc2b564)) return 1;
+        if(output.owner==NATIVE_INPUT_RETURN_UNKNOWN || output.value!=(uint8_t)REG_D[4]) {
+            fprintf(stderr,"Grid-marker return case %u: source %02X native %02X owner %u\n",
+                test,(uint8_t)REG_D[4],output.value,output.owner);return 1;
+        }
         unsigned differences=0;
         for(unsigned i=0;i<0xffc00;++i) {
             if(i>=GRID_FRAME-10 && i<GRID_FRAME) continue;
@@ -74,6 +80,6 @@ int main(int argc,char **argv) {
         }
     }
     if(!visible) {fputs("grid-marker fixtures drew no visible pixels\n",stderr);return 1;}
-    printf("385 full grid-marker cases match original non-stack RAM; %u draw visible pixels\n",visible);
+    printf("401 full grid-marker cases match original input returns and non-stack RAM; %u draw visible pixels\n",visible);
     free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

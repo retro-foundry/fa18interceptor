@@ -20,6 +20,7 @@ extern int64_t fa18_next_event;
 #define reset_line_style host_reset_line_style
 #define draw_projected_segment host_draw_projected_segment
 #define draw_clipped_segment host_draw_clipped_segment
+#define draw_clipped_segment_result host_draw_clipped_segment_result
 #define composite_polygon_plane host_composite_polygon_plane
 #define draw_polygon_edge host_draw_polygon_edge
 #define clear_polygon_mask host_clear_polygon_mask
@@ -58,6 +59,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #undef reset_line_style
 #undef draw_projected_segment
 #undef draw_clipped_segment
+#undef draw_clipped_segment_result
 #undef composite_polygon_plane
 #undef draw_polygon_edge
 #undef clear_polygon_mask
@@ -163,6 +165,46 @@ int main(int argc,char **argv) {
     if(!line_kinds[0] || !line_kinds[1] || !line_kinds[2]) {fputs("Line return fixtures missed an exit kind\n",stderr);return 1;}
     printf("128 original line returns and non-stack RAM match: %u preserve input, %u X deltas, %u blit sizes\n",
         line_kinds[0],line_kinds[1],line_kinds[2]);
+    static const int16_t segments[][6]={
+        {-100,0,512,100,0,512},{0,-100,512,0,100,512},
+        {-100,-100,512,100,100,512},{100,100,512,-100,-100,512},
+        {1000,80,512,0,0,512},{-1000,-80,512,0,0,512},
+        {80,1000,512,0,0,512},{-80,-1000,512,0,0,512},
+        {0,0,512,1000,80,512},{0,0,512,-1000,-80,512},
+        {0,0,512,80,1000,512},{0,0,512,-80,-1000,512},
+        {1000,80,512,1200,100,512},{-1000,-80,512,-1200,-100,512},
+        {80,1000,512,100,1200,512},{0,0,-512,100,80,-256}
+    };
+    unsigned segment_kinds[3]={0};
+    for(unsigned test=0;test<128;++test) {
+        memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+        for(unsigned i=0;i<6;++i) wr_s16(SEGMENT_POINTS+2*i,segments[test%16][i]);
+        wr_u16(LINE_LAST_ROW,test&64?0:179);
+        wr_u8(LINE_PLANES,(uint8_t[]){0,1,5,15}[(test>>4)&3]);
+        wr_s16(LINE_COLOUR,-1);wr_u16(CURRENT_COLOUR,6);
+        memcpy(before,m,sizeof *m);
+        const SegmentDrawResult result=host_draw_clipped_segment_result();
+        memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
+        memcpy(m,before,sizeof *m);
+        if(!original(0xc2ee4a)) return 1;
+        const uint16_t returned=result.kind==SEGMENT_DRAW_LINE?
+            result.line.kind==LINE_DRAW_SIZE?result.line.size:(uint16_t)result.line.x_delta:
+            (uint16_t)result.y;
+        if(returned!=(uint16_t)REG_D[4] || result.drawn!=(REG_D[0]==1)) {
+            fprintf(stderr,"Segment return case %u kind %u: source %04X/%u native %04X/%u\n",
+                test,result.kind,(uint16_t)REG_D[4],REG_D[0],returned,result.drawn);return 1;
+        }
+        if(!compare(expected,test)) return 1;
+        if(memcmp(m->slow,expected+0x80000,0x7fc00)) {
+            fprintf(stderr,"Segment case %u changed non-stack slow RAM\n",test);return 1;
+        }
+        ++segment_kinds[result.kind];
+    }
+    if(!segment_kinds[0] || !segment_kinds[1] || !segment_kinds[2]) {
+        fputs("Segment return fixtures missed an exit kind\n",stderr);return 1;
+    }
+    printf("128 original clipped-segment returns and non-stack RAM match: %u endpoint heights, %u screen heights, %u line results\n",
+        segment_kinds[0],segment_kinds[1],segment_kinds[2]);
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
     for(unsigned test=0;test<160;++test) {
         int16_t x=(int16_t)random_value(270),y=(int16_t)random_value(140);

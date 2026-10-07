@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected grid/aircraft-marker return (2026-10-07): the existing point,
+heading/shape, segment, line and number-text owners now compose first depleted
+recorder input; inactive grids preserve the preceding result. 91 complete bodies
+and 108 input parents match original RAM/drawing. Two snapshots each pass 401
+grid/marker and 128 clipped-segment return/RAM cases. Eleven affected checks and
+all native/reference builds pass. See
+`analysis/native_grid_marker_input_return.md`. Selection-cleanup, earlier HUD,
+intervening-command contracts and whole-game acceptance remain open.
+
 Latest connected HUD marker return (2026-10-07): line sizes and defined
 clipped-start X deltas now reach first depleted recorder flare/chaff commands.
 Other rejected starts preserve the preceding result. 79 full bodies and 96

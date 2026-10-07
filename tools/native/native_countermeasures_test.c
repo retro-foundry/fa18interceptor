@@ -30,6 +30,8 @@ typedef struct {
     unsigned label_case;
     int marker_sampling;
     unsigned marker_case;
+    int grid_sampling;
+    unsigned grid_case;
 } CountermeasureFixture;
 static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const unsigned settings=variant%12,mode=1+settings/4;
@@ -102,6 +104,24 @@ static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint16_t saved_tick,void *context) {
     CountermeasureFixture *fixture=context;
     fixture->clock.iteration=game->update_iterations;
+    if(fixture->grid_sampling) {
+        if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)!=8 && (saved_tick&31)!=16) {
+            /* Validation-only grid selection on ordinary Free Flight state;
+             * source owners still compute observer, matrices, depth and lines. */
+            wr_u8(ORIGIN_ENABLE,1);wr_u8(ORIGIN_GATE_MODE,1);
+            wr_u8(ORIGIN_DETAIL_MODE,0);wr_u8(ORIGIN_GATE_A,0);
+            snprintf(fixture->path,sizeof fixture->path,"%s.grid.%u",fixture->prefix,fixture->grid_case);
+            fixture->capture=(NativeFrameCapture){.replay=&fixture->clock,.prefix=fixture->path,
+                .iteration=game->update_iterations,.count=1};
+        }
+        if(fixture->capture.prefix)
+            native_frame_capture(game,boundary,saved_tick,&fixture->capture);
+        if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
+            printf("{\"grid_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
+                fixture->grid_case,fixture->capture.before_tick,fixture->capture.after_tick,
+                fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value);
+        return;
+    }
     if(fixture->marker_sampling) {
         if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)!=8 && (saved_tick&31)!=16) {
             /* Controlled indicator-line redraw after normal Free Flight startup;
@@ -362,6 +382,19 @@ int main(int argc,char **argv) {
         }
     }
     fixture.marker_sampling=0;
+    fixture.grid_sampling=1;
+    for(unsigned i=0;i<12;++i) {
+        fixture.grid_case=i;fixture.capture=(NativeFrameCapture){0};
+        wr_u8(RECORDER_MODE,0);
+        unsigned limit=game->ticks+100;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete || game->completed_input_return.owner!=NATIVE_INPUT_RETURN_GRID_MARKER ||
+           !pending_input(game,&fixture,96+i)) {
+            fprintf(stderr,"Grid-marker carry integration failed at case %u: owner=%u grid=%u map=%u detail=%u\n",i,
+                game->completed_input_return.owner,rd_u8(ORIGIN_GATE_MODE),rd_u8(ORIGIN_ENABLE),rd_u8(ORIGIN_DETAIL_MODE));goto done;
+        }
+    }
+    fixture.grid_sampling=0;
     result=0;
 done:
     if(game) {native_frontend_close(game);free(game);}return result;

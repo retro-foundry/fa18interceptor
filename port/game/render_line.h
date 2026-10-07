@@ -54,6 +54,12 @@ int draw_projected_segment(void);
  * exchanged ($C2EE4A). */
 int draw_clipped_segment(void);
 
+/* C2EE4A's final endpoint-Y load, reflected screen Y, or line output.
+ * The clipping probes save/restore the incoming endpoint values. */
+enum SegmentDrawKind { SEGMENT_DRAW_ENDPOINT_Y, SEGMENT_DRAW_SCREEN_Y, SEGMENT_DRAW_LINE };
+typedef struct { int drawn; enum SegmentDrawKind kind; int16_t y; LineDrawResult line; } SegmentDrawResult;
+SegmentDrawResult draw_clipped_segment_result(void);
+
 /* Draw lines into all four planes in the current object colour. */
 void reset_line_style(void);
 

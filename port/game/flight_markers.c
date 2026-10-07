@@ -188,6 +188,9 @@ skip_row:
         if(rd_s16(w.record)<0) return result; goto next_row;
     }
 }
+static void marker_output(const MarkerHooks *h,MarkerDrawOutput output) {
+    if(h && h->publish_marker_output) h->publish_marker_output(h->context,output);
+}
 
 /* Shared C2BAA8 tail: signed byte triples form horizontal marker segments. */
 static MarkerState draw_marker_stream(MarkerState w,const MarkerHooks *h) {
@@ -248,7 +251,8 @@ marker_route:
     B(y,MM_Y,w.screen_y); AND_B(y,MM_Y,15); difference=(int8_t)w.y-(int8_t)w.row_z; SB(y,MM_Y,w.row_z);
     if(difference<0) { CB(w.y,0xf8); if((int8_t)w.y<=-8) AB(y,MM_Y,16); }
     else { CB(w.y,8); if((int8_t)w.y>=8) SB(y,MM_Y,16); }
-    NEGB(y,MM_Y); EW(y,MM_Y); AW(screen_y,MM_SCREEN_Y,w.y); B(z,MM_Z,rd_u8(w.record+113)); goto choose_marker;
+    NEGB(y,MM_Y); EW(y,MM_Y); AW(screen_y,MM_SCREEN_Y,w.y); B(z,MM_Z,rd_u8(w.record+113));
+    marker_output(h,(MarkerDrawOutput){.kind=MARKER_DRAW_HEADING,.heading=(int8_t)w.z}); goto choose_marker;
 refresh_marker:
     W(row_z,MM_ROW_Z,rd_u16(w.record+104)); W(row_y,MM_ROW_Y,900); L(z,MM_Z,0);
     difference=(int16_t)w.row_z-(int16_t)w.row_y; SW(row_z,MM_ROW_Z,w.row_y); if(difference<0) goto publish_marker;
@@ -258,11 +262,14 @@ refresh_marker:
         difference=(int16_t)w.row_z-(int16_t)w.row_y; SW(row_z,MM_ROW_Z,w.row_y); if(difference<0) break;
     }
 publish_marker:
+    marker_output(h,(MarkerDrawOutput){.kind=MARKER_DRAW_HEADING,.heading=(int8_t)w.z});
     byte(h,w.record+113,(uint8_t)w.z); W(row_y,MM_ROW_Y,w.offset); W(row_z,MM_ROW_Z,w.screen_y);
     AND_B(row_y,MM_ROW_Y,15); AND_B(row_z,MM_ROW_Z,15); ALB(row_y,MM_ROW_Y,4); OR_B(row_z,MM_ROW_Z,w.row_y); byte(h,w.record+112,(uint8_t)w.row_z);
     if(!test_byte(h,0xc457b5u)) return w; if(!bit(h,0xc458dbu,0)) return w;
 choose_marker:
-    EW(z,MM_Z); AW(z,MM_Z,w.z); P(matrix,MM_MATRIX,0xc2b7e4u); W(row_x,MM_ROW_X,rd_u16(indexed(w.matrix,w.z))); P(matrix,MM_MATRIX,indexed(w.matrix,w.row_x)); return draw_marker_stream(w,h);
+    EW(z,MM_Z); AW(z,MM_Z,w.z);
+    marker_output(h,(MarkerDrawOutput){.kind=MARKER_DRAW_SHAPE_OFFSET,.shape_offset=(int16_t)w.z});
+    P(matrix,MM_MATRIX,0xc2b7e4u); W(row_x,MM_ROW_X,rd_u16(indexed(w.matrix,w.z))); P(matrix,MM_MATRIX,indexed(w.matrix,w.row_x)); return draw_marker_stream(w,h);
 }
 
 /* C2B564: two original grid runs followed by all sixteen control records. */
