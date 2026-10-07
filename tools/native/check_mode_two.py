@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--weapon', type=int, choices=(1,2,3), help='Cycle Return 1/2/3 times and fire twice with Space')
     parser.add_argument('--flight', action='store_true', help='Mode-4 takeoff, weapon inputs and region/zone transitions')
     parser.add_argument('--callback', action='store_true', help='Free Flight Delete callback remove/reinstall')
+    parser.add_argument('--smoothing', action='store_true', help='Select the source cancel marker at naturally reached mode-four smoothing')
     parser.add_argument('--combat', action='store_true', help='Mode-five through eight longer flight with manoeuvre-limit samples')
     parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
@@ -34,6 +35,8 @@ def main():
         parser.error('--flight requires --mode 4 without --eject/--weapon')
     if args.callback and (args.mode!=125 or args.flight or args.eject or args.weapon):
         parser.error('--callback requires --mode 125 without other probes')
+    if args.smoothing and (args.mode!=4 or args.flight or args.eject or args.weapon or args.callback or args.combat):
+        parser.error('--smoothing requires --mode 4 without other probes')
     if args.combat and (args.mode not in (5,6,7,8) or args.flight or args.eject or args.weapon or args.callback):
         parser.error('--combat requires --mode 5, 6, 7 or 8 without other probes')
     work = args.out.resolve()
@@ -46,7 +49,7 @@ def check(args, work, capture_dir):
     prefix = capture_dir / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
+                             *(['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
                             capture_output=True, text=True, timeout=90 if args.combat else 45 if args.flight else 25)
     (work / 'native-run.log').write_text(result.stdout + result.stderr)
     if result.returncode:
@@ -57,7 +60,13 @@ def check(args, work, capture_dir):
     if args.callback:
         assert any(0x46 in item['keys'] for item in entries), entries
         assert any(0xc6 in item['keys'] for item in entries), entries
-    assert len(entries) >= {2:32,3:43,4:39,5:39,6:38,7:42,8:38,125:55}[args.mode] and len(bodies) >= {2:21,3:29,4:27,5:27,6:27,7:29,8:27,125:35}[args.mode], exports
+    if args.smoothing:
+        assert any(item['stage']=='C10A24' and not item['keys'] for item in entries), entries
+        cancellations=[item for item in exports if item.get('smoothing_cancel')]
+        assert len(cancellations)==1 and cancellations[0]['continued'] and cancellations[0]['returned'] and cancellations[0]['scene_frames']>=30, exports
+    minimum_entries=44 if args.smoothing else {2:32,3:43,4:39,5:39,6:38,7:42,8:38,125:55}[args.mode]
+    minimum_bodies=29 if args.smoothing else {2:21,3:29,4:27,5:27,6:27,7:29,8:27,125:35}[args.mode]
+    assert len(entries)>=minimum_entries and len(bodies)>=minimum_bodies, exports
     if args.eject:
         assert len(entries)>=46 and len(bodies)>=43, exports
     if args.weapon:
@@ -82,6 +91,9 @@ def check(args, work, capture_dir):
             required|={'C11078','C110A4'}
         if args.eject:
             required|={'C1104C','C118FC','C11934','C0F920'}
+    if args.smoothing:
+        required.discard('C10B1E')
+        required|={'C10C68','C10CFE','C10D8A'}
     assert required <= {
         item['stage'] for item in bodies}, bodies
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
@@ -127,6 +139,8 @@ def check(args, work, capture_dir):
         outcome='takes off and runs region spawn/orientation, zone exit, NPC missiles and postflight restart'
     if args.callback:
         outcome='runs Delete callback removal/reinstallation and continues through Escape/restart'
+    if args.smoothing:
+        outcome='executes a controlled smoothing cancel/reset, resumes active flight and returns to the menu'
     if args.combat:
         outcome='runs sustained throttle/stick/target/fire input and manoeuvre-limit crossings'
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '

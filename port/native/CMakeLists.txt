@@ -117,6 +117,10 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
             ${CMAKE_CURRENT_BINARY_DIR}/mode-four-save
             ${CMAKE_CURRENT_BINARY_DIR}/mode-four 4)
+    add_test(NAME fa18_native_smoothing_cancel
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
+                --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 4 --smoothing
+                --out ${CMAKE_CURRENT_BINARY_DIR}/smoothing-cancel-check)
     add_test(NAME fa18_native_region_flight
         COMMAND fa18_native_mode_two_test
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf

@@ -21,6 +21,7 @@ static void position_result(void *context,uint32_t result[3]) {
 static int32_t child(void *context,enum MenuContextChild which) {
     Setup *setup=context;
     switch(which) {
+    case MC_CANCEL: native_flight_cancel_context(setup->game); return 0;
     case MC_SMOOTH_RESET: case MC_RESTART_RESET: case MC_STAGE_RESET:
     case MC_VIEWPORT_RESET: reset_message_sequence(); return 0;
     case MC_REFRESH_VIEW: native_flight_reset_aircraft(setup->game); return 0;

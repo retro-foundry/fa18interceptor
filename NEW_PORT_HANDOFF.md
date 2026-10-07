@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected smoothing cancel (2026-10-07): C10A24 -> MC_CANCEL now calls
+the existing native cancel/reset composition instead of aborting. A controlled
+source cancel marker at a naturally reached mode-four stage resumes flight
+and returns to the menu. All 44 actual input/stage intervals and 29 sampled
+bodies match original compared RAM/drawing. Native Debug/Release and eight
+affected checks pass. See
+`analysis/native_smoothing_cancel.md`. Other stage contracts and whole-game
+mission/audio/state/performance acceptance remain unfinished; the goal stays active.
+
 Latest measured native demo (2026-10-07): all 10,910 frames call SDL presentation
 in a normally paced hidden Direct3D window; work peaks at 6.9374 ms, below 20 ms.
 Headless work peaks at 1.6407 ms. Host pacing intervals sometimes exceed 20 ms;

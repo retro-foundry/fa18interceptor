@@ -21,6 +21,7 @@ typedef struct {
     unsigned mode,samples;
     unsigned eject,ejection;
     unsigned callback,callback_bodies,callback_events;
+    unsigned smoothing_cancel,cancel_phase,cancelled;
     unsigned weapon,launch_bodies,launched,removed;
     unsigned projectile_states[3];
     uint16_t stock,ammo,counters[3];
@@ -48,6 +49,15 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     run->clock.iteration=game->update_iterations;
     if(boundary==NATIVE_FRAME_INPUT_BEGIN && rd_u8(MODE_SELECT)==run->mode) {
         gaddr stage=rd_u32(STAGE_CALLBACK);
+        if(run->smoothing_cancel && !run->cancel_phase && stage==0xc10a24) {
+            /* Controlled cancel marker at a naturally reached source stage.
+             * Preflight normally gates keypad input here. Only this validation
+             * entry selects its rare cancel condition; no return is seeded. */
+            wr_u8(KEY_TAKEN,2);
+            run->cancel_phase=1;run->callback_bodies=2;
+        } else if(run->smoothing_cancel && run->cancel_phase==1) {
+            run->cancel_phase=2;
+        }
         gaddr key=stage|((rd_s16(POST_INPUT_COUNTDOWN)<=0)?0x1000000u:0);
         if(run->mode==125 && game->ticks>=11000) key|=0x2000000u;
         unsigned index=0;
@@ -73,6 +83,20 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
        (run->flight==2 && run->entered))) {
         run->entered=1;
         gaddr stage=rd_u32(STAGE_CALLBACK);
+        if(run->smoothing_cancel && run->cancel_phase==1) {
+            if(stage!=0xc10c68 || rd_u16(POST_INPUT_COUNTDOWN)!=5 ||
+               !rd_u8(POST_INPUT_AUX) || rd_u8(CONTEXT_SMOOTH) ||
+               !rd_u8(CONTEXT_STARTED) || !rd_u8(MENU_TRANSITION_FLAG) ||
+               rd_u8(CONTEXT_GATE) || rd_u8(CONTEXT_AUX) || rd_u8(POST_INPUT_EVENT)) {
+                fprintf(stderr,"Smoothing cancel did not execute the source return/reset path: stage=%06X key=%u countdown=%u aux=%u smooth=%u started=%u transition=%u gate=%u context=%u event=%u\n",
+                    stage,rd_u8(KEY_TAKEN),rd_u16(POST_INPUT_COUNTDOWN),rd_u8(POST_INPUT_AUX),
+                    rd_u8(CONTEXT_SMOOTH),rd_u8(CONTEXT_STARTED),rd_u8(MENU_TRANSITION_FLAG),
+                    rd_u8(CONTEXT_GATE),rd_u8(CONTEXT_AUX),rd_u8(POST_INPUT_EVENT));abort();
+            }
+            run->cancelled=1;
+        }
+        if(run->smoothing_cancel && run->cancel_phase==2 && stage==0xc10dae)
+            run->cancelled|=2;
         gaddr key=stage|((run->mode==125 && game->ticks>=11000)?0x2000000u:0);
         unsigned index=0;
         while(index<run->stage_count && run->stages[index]!=key) ++index;
@@ -223,6 +247,7 @@ int main(int argc,char **argv) {
     unsigned aircraft=argc>=6?(unsigned)atoi(argv[5]):1;
     if(argc==7) {
         if(!strcmp(argv[6],"callback") && run.mode==125) run.callback=1;
+        else if(!strcmp(argv[6],"smoothing") && run.mode==4) run.smoothing_cancel=1;
         else if(!strcmp(argv[6],"combat") && (run.mode>=5 && run.mode<=8)) run.flight=2;
         else if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
         else if(!strcmp(argv[6],"eject") && run.mode==8) run.eject=1;
@@ -319,12 +344,19 @@ int main(int argc,char **argv) {
         rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
        (run.eject && (!run.returned || run.ejection!=0x1ff || game->scene_frames<512 ||
         rd_u8(MODE_SELECT)!=0 || rd_u32(STAGE_CALLBACK)!=0xc0fcb4)) ||
-       ((!run.eject && run.flight!=2 && (run.mode==4 || run.mode==5 || run.mode==7 || run.mode==8)) && (game->scene_frames<2000 || (run.samples&7)!=7 ||
+       ((!run.eject && !run.smoothing_cancel && run.flight!=2 && (run.mode==4 || run.mode==5 || run.mode==7 || run.mode==8)) && (game->scene_frames<2000 || (run.samples&7)!=7 ||
         rd_u8(RECORDER_MODE)!=0 || rd_u8(POSTFLIGHT_FAILURE_INPUT)!=0x11 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae))) {
         fprintf(stderr,"Mode %u failed: returned=%d captures=%u scene=%u postflight=%u\n",
             run.mode,run.returned,run.captures,game->scene_frames,game->postflight_callbacks);goto done;
     }
+    if(run.smoothing_cancel && (run.cancel_phase!=2 || run.cancelled!=3 ||
+       !run.returned || game->scene_frames<30 || rd_u8(MODE_SELECT) || rd_u32(STAGE_CALLBACK)!=0xc0fcb4)) {
+        fprintf(stderr,"Smoothing cancel failed: phase=%u continuation=%u returned=%d scene=%u\n",
+                run.cancel_phase,run.cancelled,run.returned,game->scene_frames);goto done;
+    }
+    if(run.smoothing_cancel)
+        printf("{\"smoothing_cancel\":true,\"scene_frames\":%u,\"continued\":true,\"returned\":true}\n",game->scene_frames);
     if(run.weapon) {
         gaddr log=rd_u32(MODE_TABLE);
         const unsigned consumed=(uint16_t)(run.ammo-rd_u16(CONTROL_RECORDS+96));

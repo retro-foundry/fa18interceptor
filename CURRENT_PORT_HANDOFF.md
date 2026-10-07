@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected smoothing cancel (2026-10-07): C10A24's previously unavailable
+MC_CANCEL child now uses the existing native cancel/reset composition. A
+validation-only cancel marker at a naturally reached mode-four stage resumes
+flight and returns to the menu. All 44 actual input/stage intervals and 29
+sampled bodies match original compared RAM/drawing. Native Debug/Release and
+eight affected checks pass.
+See `analysis/native_smoothing_cancel.md`. Full outcomes, other stage contracts,
+audio, typed state and broader performance acceptance remain open.
+
 Latest measured native demo (2026-10-07): all 10,910 frames call SDL presentation
 in a normally paced hidden Direct3D window. Measured frame work peaks at
 6.9374 ms, below 20 ms; headless work peaks at 1.6407 ms. Host pacing intervals

@@ -11,4 +11,6 @@ enum NativeFlightResult { NATIVE_FLIGHT_WAIT, NATIVE_FLIGHT_COMPLETE, NATIVE_FLI
 int native_flight_tick(NativeFrontend *game,int stage_already_ran);
 /* C10B90 recorder/root refresh after aircraft selection. */
 void native_flight_reset_aircraft(NativeFrontend *game);
+/* C10BAE shared cancel/reset, including C10A24's smoothing cancel child. */
+void native_flight_cancel_context(NativeFrontend *game);
 #endif

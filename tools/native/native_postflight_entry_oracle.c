@@ -13,6 +13,9 @@
 void native_flight_reset_aircraft(NativeFrontend *game) {
     (void)game;fputs("unexpected aircraft-refresh boundary in postflight test\n",stderr);abort();
 }
+void native_flight_cancel_context(NativeFrontend *game) {
+    (void)game;fputs("unexpected context-cancel boundary in postflight test\n",stderr);abort();
+}
 
 static int original_entry(gaddr entry) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00u;wr_u32(REG_A[7],0xc70000u);

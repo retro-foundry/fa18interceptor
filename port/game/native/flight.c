@@ -165,14 +165,17 @@ static void return_child(void *context,enum MenuReturnChild child) {
     else if(child==MR_CANCEL_REFRESH) native_flight_reset_aircraft(context);
     else if(child==MR_MESSAGE_CANCEL || child==MR_CONTEXT_CANCEL ||
             child==MR_SMOOTH_CANCEL || child==MR_END_CANCEL) {
-        const MenuReturnHooks hooks={return_child,NULL,context};
-        cancel_menu_return(&hooks);
+        native_flight_cancel_context(context);
     }
     else if(child==MR_SELECT_KEY) {
         const MenuReturnHooks hooks={return_child,NULL,context};
         leave_menu_return_on_key(&hooks);
     }
     else { fprintf(stderr,"native menu-return child unavailable: %u\n",(unsigned)child);abort(); }
+}
+void native_flight_cancel_context(NativeFrontend *game) {
+    const MenuReturnHooks hooks={return_child,NULL,game};
+    cancel_menu_return(&hooks);
 }
 static int32_t result_message_child(void *context,enum PostflightMessageChild child) {
     NativeFrontend *game=context;

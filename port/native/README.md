@@ -1,5 +1,13 @@
 # Native port runner
 
+The smoothing cancel child now calls the existing native cancel/reset
+composition. Its formerly unavailable MC_CANCEL handler is exercised with a
+validation-only source cancel marker at a naturally reached mode-four stage.
+The run resumes flight and returns to the menu; all 44 actual input/stage
+intervals and 29 sampled bodies match original compared RAM/drawing. Native
+Debug/Release and eight affected checks pass. See `../../analysis/native_smoothing_cancel.md`; other
+stage contracts and whole-game mission/audio/state/performance remain open.
+
 The complete demo now has a bounded performance checkpoint: all 10,910 frames
 call SDL presentation in a normally paced hidden Direct3D window, with measured
 work peaking at 6.9374 ms. Headless work peaks at 1.6407 ms. Host pacing intervals
