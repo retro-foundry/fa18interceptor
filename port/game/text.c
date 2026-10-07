@@ -81,8 +81,7 @@ TextDrawResult draw_small_text(const SmallText *text) {
         glyph = SMALL_GLYPHS + (gaddr)(int32_t)rd_s16(SMALL_GLYPHS + (gaddr)(int32_t)(int16_t)((ch - 0x20) * 2));
         result=(TextDrawResult){TEXT_DRAW_GLYPH,ch,glyph}; /* C327D6 */
         if (dest & 1) {
-            result.kind=TEXT_DRAW_FAULT;
-            wr_u16(ERROR_CODE, 0x46);
+            wr_u16(ERROR_CODE, 0x46); /* C327FE's release C06C02 is RTS: glyph survives. */
             continue;
         }
         {

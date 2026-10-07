@@ -2,6 +2,13 @@
 
 ## Objective and user constraints
 
+Latest small-text fault return (2026-10-07): the original release fault hook
+is RTS, so an odd destination preserves the selected glyph after setting $46.
+The native renderer now retains that result through its existing drawing skip.
+480 HUD non-stack RAM cases and 237 defined returns match, including 27 odd
+fault returns across cockpit/context views. Six affected checks and all builds
+pass. See `analysis/native_small_text_fault_return.md`. Full port remains open.
+
 Latest connected scene-label return (2026-10-07): scene row-Z loads, matrix
 products and position-number text results now reach first depleted recorder
 flare/chaff commands. Terminator and alternate skipped-row exits match source;

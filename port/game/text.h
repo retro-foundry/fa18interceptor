@@ -46,8 +46,8 @@ SmallText small_text_line(int count, gaddr chars, gaddr layout, gaddr rows, int1
                           uint16_t mode, int in_view);
 
 /* The last source character load or glyph selection; clipping still loads
- * the character. An odd destination enters a separate fault-return contract. */
-enum TextDrawKind { TEXT_DRAW_NONE, TEXT_DRAW_CHARACTER, TEXT_DRAW_GLYPH, TEXT_DRAW_FAULT, TEXT_DRAW_UNRESOLVED };
+ * the character. The release fault hook preserves an odd destination's glyph. */
+enum TextDrawKind { TEXT_DRAW_NONE, TEXT_DRAW_CHARACTER, TEXT_DRAW_GLYPH, TEXT_DRAW_UNRESOLVED };
 typedef struct { enum TextDrawKind kind; uint8_t character; gaddr glyph; } TextDrawResult;
 /* Draw a SmallText line (characters outside the 40-byte row are skipped). */
 TextDrawResult draw_small_text(const SmallText *text);

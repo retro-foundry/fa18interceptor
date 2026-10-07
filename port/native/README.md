@@ -1,5 +1,10 @@
 # Native port runner
 
+Small-text odd destinations now preserve their selected glyph through the
+original release fault return. Focused HUD checks match 480 RAM cases and 237
+defined returns, including 27 odd-destination cases in cockpit/context views.
+See `../../analysis/native_small_text_fault_return.md`.
+
 Scene-position labels now publish their actual row-Z load, matrix product or
 number-text result to first depleted recorder flare/chaff commands. Skipped
 labels preserve the preceding context HUD readout. Sixty-seven complete bodies

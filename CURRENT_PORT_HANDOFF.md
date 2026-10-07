@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Latest small-text fault return (2026-10-07): odd destinations retain the
+selected glyph after setting error $46, as the original release C06C02 RTS
+does. The existing drawing skip is unchanged. Focused HUD comparisons match
+480 non-stack RAM cases and 237 defined returns, including 27 actual odd
+fault returns across cockpit/context views. Six affected checks and all
+native/reference builds pass. See `analysis/native_small_text_fault_return.md`.
+Full port remains active.
+
 Latest connected scene-label return (2026-10-07): row-Z loads, matrix products
 and position-number text results now reach first depleted recorder flare/chaff
 commands. Terminator loads and alternate skipped-row exits follow the original

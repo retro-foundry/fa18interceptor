@@ -177,14 +177,15 @@ static int hud_owners(void) {
         {0xc11bfc,update_message},{0xc11b44,tick_notification_cadence}
     };
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
-    uint8_t *expected=malloc(0x100000);unsigned count=0,return_count=0;
+    uint8_t *expected=malloc(0x100000);unsigned count=0,return_count=0,odd_return_count=0;
     memcpy(saved,fa18_machine,sizeof *saved);
-    for(unsigned variant=0;variant<10;++variant) {
+    for(unsigned variant=0;variant<12;++variant) {
         for(unsigned test=0;test<sizeof cases/sizeof cases[0];++test) {
-            const int has_return=cases[test].host==check_scale_return || cases[test].host==check_message_return ||
-                cases[test].host==check_speed_return || cases[test].host==check_altitude_return || cases[test].host==check_heading_return ||
-                cases[test].host==check_indicator_return || cases[test].host==check_mode_return;
+            const int text_return=cases[test].host==check_scale_return || cases[test].host==check_message_return ||
+                cases[test].host==check_speed_return || cases[test].host==check_altitude_return || cases[test].host==check_heading_return;
+            const int has_return=text_return || cases[test].host==check_indicator_return || cases[test].host==check_mode_return;
             if(variant>=5 && !has_return) continue;
+            if(variant>=10 && !text_return) continue;
             memcpy(fa18_machine,saved,sizeof *saved);
             const int16_t origins[]={0,-3,3,-20,20};
             wr_u16(SPAN_ORIGIN,(uint16_t)origins[variant%5]);
@@ -193,10 +194,20 @@ static int hud_owners(void) {
             wr_u8(REDRAW_FIRST,3);wr_u8(GAUGE_REFRESH,3);
             wr_u8(DISPLAY_UPDATE,3);wr_u8(WEAPON_REDRAWS,3);
             wr_u8(GRID_X_REDRAWS,3);wr_u8(GRID_Z_REDRAWS,3);
-            const uint8_t redraws=variant<5?3:0;
+            const uint8_t redraws=variant<5 || variant>=10?3:0;
             wr_u8(BAR_REDRAWS_A,redraws);wr_u8(BAR_REDRAWS_B,redraws);wr_u8(BAR_REDRAWS_C,redraws);
             wr_u8(BAR_REDRAWS_D,redraws);wr_u8(BAR_REDRAWS_E,redraws);wr_u8(BAR_REDRAWS_F,redraws);
             wr_u8(SCALE_REDRAWS,redraws);
+            if(variant>=10) {
+                /* Validation-only odd destinations reach the actual small-text
+                 * fault hook. Bars/blitter owners keep their separate fixtures. */
+                const gaddr planes=rd_u32(PAGE_PLANE_TABLE);
+                for(unsigned plane=0;plane<4;++plane) wr_u32(planes+4*plane,rd_u32(planes+4*plane)+1);
+                wr_u16(ERROR_CODE,0);wr_u8(INFO_REDRAWS,3);
+                wr_u8(CONTEXT_SELECT,(uint8_t)(variant-10));
+                wr_u8(CONTEXT_READOUTS,1);wr_u16(COCKPIT_FLAGS,rd_u16(COCKPIT_FLAGS)|0x40);
+                wr_u8(TEXT_ALWAYS,1);
+            }
             if(cases[test].entry==0xc31226u) {
                 wr_u8(GAUGE_REFRESH,(uint8_t)(variant%3));
                 wr_u16(STREAM_SKIP,(uint16_t)(variant*4));
@@ -215,6 +226,7 @@ static int hud_owners(void) {
                         cases[test].entry,variant,(uint8_t)REG_D[4],checked_return.value);return 0;
                 }
                 ++return_count;
+                if(variant>=10 && rd_u16(ERROR_CODE)==0x46) ++odd_return_count;
             }
             unsigned differences=0;
             for(unsigned i=0;i<0xffc00;++i) {
@@ -228,8 +240,9 @@ static int hud_owners(void) {
             ++count;
         }
     }
+    if(odd_return_count<6) {fputs("HUD fixtures did not exercise normal and context odd-destination fault returns\n",stderr);return 0;}
     memcpy(fa18_machine,saved,sizeof *saved);free(saved);free(before);free(expected);
-    printf("%u HUD instrument/panel cases match original non-stack RAM; %u defined returns match\n",count,return_count);return 1;
+    printf("%u HUD instrument/panel cases match original non-stack RAM; %u defined returns match, including %u odd-destination fault returns\n",count,return_count,odd_return_count);return 1;
 }
 #ifndef FA18_HUD_ORACLE_LIBRARY
 int main(int argc,char **argv) {
