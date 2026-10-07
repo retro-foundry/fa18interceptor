@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest connected fire/countermeasure outputs (2026-10-07): actual fire
+selection, saved flare/chaff event and nested eject queue index now compose
+subsequent depleted input; modified/depleted gates preserve prior output.
+163 full bodies, 180 recorder parents and 60 intervening keyboard parents
+match original compared RAM/drawing and defined returns. The radar/weapon
+runtime probe now uses the actual flight mode and requires its intended
+owner/value, correcting the prior narrower integration claim. All 8,256
+selected command parents match RAM/returns; nine affected checks and all
+native/reference builds pass. See
+`analysis/native_fire_countermeasure_input_return.md`. Indexed/context
+contracts and full mission/audio/state/performance acceptance remain open.
+
 Latest connected weapon/radar command outputs (2026-10-07): actual radar
 range, masked weapon block and selected weapon mode now compose depleted
 recorder input. Weapon $80-$10 follows the original signed-overflow branch,

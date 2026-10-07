@@ -2,6 +2,16 @@
 
 ## Objective and user constraints
 
+Latest connected fire/countermeasure outputs (2026-10-07): fire selection,
+saved stock event and actual nested eject queue index now reach subsequent
+depleted input; modified/depleted gates preserve prior output. 163 full bodies,
+180 recorder parents and 60 intervening keyboard parents match original compared
+RAM/drawing and returns. Corrected radar/weapon probes require actual action
+owners/values; the earlier mode-zero integration claim is superseded. All 8,256
+selected command parents, nine affected checks and all native/reference builds
+pass. See `analysis/native_fire_countermeasure_input_return.md`. Remaining
+indexed/context/HUD contracts and whole-game acceptance stay open.
+
 Latest connected weapon/radar command outputs (2026-10-07): actual range,
 weapon block/mode and preserving target/throttle/hook/ECM actions now compose
 depleted recorder input. Weapon $80-$10 selects $30 under the original signed

@@ -17,7 +17,7 @@ static const struct { uint32_t entry, ret; } children[]={
     {0xc25704,0xc1c1aa}, {0xc33186,0xc1c20e}
 };
 static FlightCommandResult consume(void *context,enum FlightCommandChild child) {
-    FlightCommandResult result;
+    FlightCommandResult result={0};
     (void)context;
     glue_complete_child(children[child].entry,children[child].ret);
     result.event=D(0); result.carried_event_word=(int16_t)D(4); return result;

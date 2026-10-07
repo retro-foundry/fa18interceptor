@@ -33,16 +33,6 @@ int is_flight_command(enum CommandAction action);
 uint32_t execute_flight_command(const CommandRequest *request,
                                int16_t carried_event_word,
                                const FlightCommandHooks *hooks);
-/* Action-owned input outputs, independent of the event queued afterwards. */
-enum FlightActionOutputKind { FLIGHT_ACTION_UNRESOLVED, FLIGHT_ACTION_PRESERVE,
-                             FLIGHT_ACTION_HUD_MODE, FLIGHT_ACTION_GEAR_GATE,
-                             FLIGHT_ACTION_RADAR_RANGE, FLIGHT_ACTION_WEAPON_BLOCK,
-                             FLIGHT_ACTION_WEAPON_MODE };
-typedef struct {
-    enum FlightActionOutputKind kind;
-    uint8_t hud_mode,radar_range,weapon_block,weapon_mode;
-    uint32_t gear_gate;
-} FlightActionOutput;
 typedef struct { uint32_t event; FlightActionOutput output; } FlightCommandExecution;
 FlightCommandExecution execute_flight_command_result(const CommandRequest *request,
     int16_t carried_event_word,const FlightCommandHooks *hooks);

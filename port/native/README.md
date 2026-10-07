@@ -1,5 +1,15 @@
 # Native port runner
 
+Fire selection, successful countermeasure events and nested eject publication
+now expose their actual outputs to subsequent depleted recorder input.
+Depleted/modified gates preserve prior output. 163 full bodies, 180 recorder
+parents and 60 intervening keyboard parents match original compared RAM/drawing
+and returns. The radar/weapon runtime probes now require actual action owners
+and values in the correct mode. All 8,256 selected command parents and nine
+affected checks pass; native/reference builds succeed. See
+`../../analysis/native_fire_countermeasure_input_return.md`. Indexed/context
+contracts and whole-game mission/audio/state/performance acceptance stay open.
+
 Radar/weapon commands now expose actual range, block and mode outputs to
 subsequent depleted recorder input; target/throttle/hook/ECM actions preserve
 their preceding output. Weapon $80-$10 follows the original signed branch to

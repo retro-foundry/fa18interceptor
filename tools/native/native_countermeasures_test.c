@@ -82,7 +82,8 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
     const uint8_t keys[]={0x60,0xe0,0x66,0xe6,0x67,0xe7,0x70,0xf0,0x4c,0x4e,0x4c,0x4e,
         0x4c,0x4d,0x4e,0x4f,0xcc,0xce,0x38,0xb8,0x0c,0x8c,0x25,0x24,
         0x3e,0x1e,0x2d,0x2f,0x3d,0x1d,0x3f,0x1f,0x3c,0x1b,0x1a,0x9a,
-        0x13,0x13,0x13,0x44,0x44,0x44,0x44,0x14,0x0d,0x20,0x21,0x26};
+        0x13,0x13,0x13,0x44,0x44,0x44,0x44,0x14,0x0d,0x20,0x21,0x26,
+        0x40,0xc0,0x40,0x40,0x23,0x23,0x33,0x33,0x12,0x12,0x12,0x23};
     const uint8_t raw=keys[variant];
     wr_u8(RECORDER_MODE,0);wr_u16(RECORD_WORD_A,0);wr_u16(RECORD_WORD_B,0);
     wr_u16(PENDING_COMMAND_WORD_A,0);wr_u16(PENDING_COMMAND_WORD_B,0);
@@ -104,10 +105,24 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
         wr_u8(ORIGIN_GATE_MODE,variant>=33 && variant<=34);
         wr_u32(SELECTOR_ORIGIN_MIDDLE,0x04000000);
     }
-    if(variant>=36) {
-        wr_u8(MODE_SELECT,0);wr_u16(VIEW_RECORD,0);wr_u8(COMMAND_BLOCK_FLAGS,variant==42?1:0);
+    if(variant>=36 && variant<48) {
+        wr_u8(MODE_SELECT,1);wr_u16(VIEW_RECORD,0);wr_u8(COMMAND_BLOCK_FLAGS,variant==42?1:0);
         wr_u8(CONTROL_RECORDS+0x62,0x11);
         wr_u8(CONTROL_RECORDS+0x63,(uint8_t[]){0x09,0x0b,0x0d,0x80,0,0x30,0x10,0x19,0x10,0x10,0x10,0x10}[variant-36]);
+    }
+    if(variant>=48) {
+        wr_u8(MODE_SELECT,variant==59?6:1);wr_u8(COMMAND_BLOCK_FLAGS,0);
+        wr_u8(CONTROL_RECORDS+0x63,variant==50?0x10:0x30);
+        wr_u8(COMMAND_WEAPON_PAUSE,0);
+        if(variant==51) wr_u8(KEY_STATE,1); /* Modified space preserves output. */
+        wr_u8(MISSION_LEVEL_B,variant==52?2:1);wr_u8(MISSION_LEVEL_A,variant==54?2:0x80);
+        wr_u8(ORIGIN_GATE_A,variant==57?1:0);
+        if(variant>=57) wr_u8(KEY_STATE,1);
+        if(variant==58) {wr_u8(KEY_COUNT,0);wr_u8(KEY_TRANSLATED_WRITE,255);}
+        if(variant==59) {
+            wr_u16(COMMAND_SPAWN_GATE,0);
+            wr_u8(CONTROL_RECORDS+0x201,rd_u8(CONTROL_RECORDS+0x201)&~0x40);
+        }
     }
     snprintf(fixture->path,sizeof fixture->path,"%s.interposed.%u",fixture->prefix,variant);
     NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
@@ -117,6 +132,17 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
     native_frame_capture(game,NATIVE_FRAME_BODY_END,0,&capture);
     printf("{\"interposed_input\":%u,\"raw\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
         variant,raw,game->completed_input_return.owner,game->completed_input_return.value);
+    if(variant>=36) {
+        const unsigned owners[]={13,13,13,13,13,13,13,11,11,11,11,11,
+            13,11,13,11,13,11,13,11,11,11,12,11};
+        const uint8_t values[]={13,9,11,0x30,0x30,0x20,1,0,0,0,0,0,
+            0x30,0,0x10,0,0x23,0,0x33,0,0,0,255,0};
+        if(game->completed_input_return.owner!=owners[variant-36] ||
+           game->completed_input_return.value!=values[variant-36]) {
+            fprintf(stderr,"Interposed action %u returned owner %u value %u\n",variant,
+                game->completed_input_return.owner,game->completed_input_return.value);return 0;
+        }
+    }
     return capture.complete && game->completed_input_return.owner!=NATIVE_INPUT_RETURN_UNKNOWN;
 }
 static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
@@ -460,7 +486,7 @@ int main(int argc,char **argv) {
     }
     fixture.grid_sampling=0;
     fixture.cleanup_sampling=1;
-    for(unsigned i=0;i<60;++i) {
+    for(unsigned i=0;i<72;++i) {
         fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
         wr_u8(RECORDER_MODE,0);
         unsigned limit=game->ticks+100;

@@ -55,7 +55,7 @@ int is_flight_command(enum CommandAction action) {
     }
 }
 
-static uint32_t countermeasure(const CommandRequest *request,int16_t carried,
+static FlightCommandExecution countermeasure(const CommandRequest *request,int16_t carried,
                               const FlightCommandHooks *h,int flare) {
     gaddr count=flare?MISSION_LEVEL_B:MISSION_LEVEL_A;
     uint8_t old,value;
@@ -63,10 +63,11 @@ static uint32_t countermeasure(const CommandRequest *request,int16_t carried,
     FlightCommandResult result;
     request_bit(h,PENDING_COMMAND_WORD_A+1,flare?1:2);
     old=rd_u8(count); value=(uint8_t)(old-1); wr_u8(count,value);
+    const int deployed=(int8_t)old>1;
     observe(h,FLIGHT_COUNTER_DECREMENT,old,0,count);
     /* BLE follows the subtraction flags, including overflow for $80-1;
      * comparing the wrapped result as a signed byte would choose wrongly. */
-    if((int8_t)old>1) {
+    if(deployed) {
         store_byte(h,flare?COMMAND_FLARE_TIMER:COMMAND_CHAFF_TIMER,0x1e);
         carried=(int16_t)event;
         observe(h,FLIGHT_SOUND_CARRY,(uint16_t)carried,0,0);
@@ -81,7 +82,11 @@ static uint32_t countermeasure(const CommandRequest *request,int16_t carried,
      * owns its returned value; it need not preserve the incoming word. */
     event=(result.event&0xffff0000u)|(uint16_t)result.carried_event_word;
     observe(h,FLIGHT_SOUND_RESTORE,(uint16_t)event,0,0);
-    return event;
+    const FlightActionOutput output=deployed
+        ?(FlightActionOutput){.kind=FLIGHT_ACTION_COUNTERMEASURE_EVENT,
+            .countermeasure_event=(uint16_t)result.carried_event_word}
+        :result.output;
+    return (FlightCommandExecution){event,output};
 }
 
 uint32_t execute_flight_command(const CommandRequest *r,int16_t carried,
@@ -98,11 +103,15 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
     if(!h || !h->consume || !is_flight_command(r->action)) abort();
     switch(r->action) {
     case COMMAND_EJECT:
+        output.kind=FLIGHT_ACTION_PRESERVE;
         observe(h,FLIGHT_MODIFIER_TEST,r->modifier,0,0);
         if(!r->modifier || test_byte(h,ORIGIN_GATE_A)) break;
         store_byte(h,BAR_REDRAWS_E,8);
         observe(h,FLIGHT_TOGGLE_ADDRESS,0,0,BAR_E_FLAG);
-        event=h->consume(h->context,FLIGHT_EJECT_TOGGLE).event;
+        {
+            const FlightCommandResult child=h->consume(h->context,FLIGHT_EJECT_TOGGLE);
+            event=child.event;output=child.output;
+        }
         request_bit(h,PENDING_COMMAND_WORD_A,5);
         store_byte(h,COMMAND_BLOCK_FLAGS,(uint8_t)(rd_u8(COMMAND_BLOCK_FLAGS)|0x0a));
         break;
@@ -130,10 +139,15 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         store_byte(h,record+0x63,(uint8_t)(rd_u8(record+0x63)|value));
         store_byte(h,SCALE_REDRAWS,3); break;
     case COMMAND_SPACE:
+        output.kind=FLIGHT_ACTION_PRESERVE;
         observe(h,FLIGHT_MODIFIER_TEST,r->modifier,0,0);
-        if(!r->modifier) event=h->consume(h->context,FLIGHT_SPACE_PRESS).event;
+        if(!r->modifier) {
+            const FlightCommandResult child=h->consume(h->context,FLIGHT_SPACE_PRESS);
+            event=child.event;output=child.output;
+        }
         break;
     case COMMAND_SPACE_RELEASE:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* C08394 changes only memory. */
         event=h->consume(h->context,FLIGHT_SPACE_RELEASE).event; break;
     case COMMAND_INFO_PAGE:
         output.kind=FLIGHT_ACTION_PRESERVE; /* C1B236-C1B260 use the event only. */
@@ -249,8 +263,9 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         }
         break;
     case COMMAND_FLARE:
+        output.kind=FLIGHT_ACTION_PRESERVE;
         observe(h,FLIGHT_MODIFIER_TEST,r->modifier,0,0);
-        if(!r->modifier) return (FlightCommandExecution){countermeasure(r,carried,h,1),output};
+        if(!r->modifier) return countermeasure(r,carried,h,1);
         if(compare_byte(h,MODE_SELECT,6)) break;
         word=rd_u16(COMMAND_SPAWN_GATE); observe(h,FLIGHT_WORD_TEST,word,0,0);
         if(word) break;
@@ -260,10 +275,13 @@ FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int
         observe(h,FLIGHT_SPAWN_SAVE,(uint16_t)event,0,0);
         observe(h,FLIGHT_SPAWN_ARGUMENT,0x30,0,0);
         observe(h,FLIGHT_SPAWN_ARGUMENT,0x1c,0,0);
-        event=h->consume(h->context,FLIGHT_FLARE_SPAWN).event;
+        {
+            const FlightCommandResult child=h->consume(h->context,FLIGHT_FLARE_SPAWN);
+            event=child.event;output=child.output;
+        }
         event=(event&0xffff0000u)|(r->raw_event&0xffffu);
         observe(h,FLIGHT_SPAWN_RESTORE,(uint16_t)event,0,0); break;
-    case COMMAND_CHAFF: return (FlightCommandExecution){countermeasure(r,carried,h,0),output};
+    case COMMAND_CHAFF: return countermeasure(r,carried,h,0);
     case COMMAND_ECM:
         output.kind=FLIGHT_ACTION_PRESERVE; /* Tone and C1C214's memory toggle. */
         observe(h,FLIGHT_ECM_BEGIN,0,0,UPDATE_MAP_OVERRIDE);

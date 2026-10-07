@@ -77,8 +77,13 @@ static FlightCommandResult flight_key_child(void *context,enum FlightCommandChil
     switch(child) {
     case FLIGHT_EJECT_TOGGLE: {
         const ContextPublicationHooks hooks={0};
-        const uint8_t event=publish_context_toggle_command((uint8_t)request->raw_event,BAR_E_FLAG,&hooks);
-        return (FlightCommandResult){(request->raw_event&0xffffff00u)|event,command->carried_event};
+        const CommandPublicationResult publication=publish_context_toggle_command_result(
+            (uint8_t)request->raw_event,BAR_E_FLAG,&hooks);
+        const FlightActionOutput output=publication.queued
+            ?(FlightActionOutput){.kind=FLIGHT_ACTION_QUEUE_INDEX,.queue_index=publication.translated_index}
+            :(FlightActionOutput){.kind=FLIGHT_ACTION_PRESERVE};
+        return (FlightCommandResult){(request->raw_event&0xffffff00u)|publication.event,
+            command->carried_event,output};
     }
     case FLIGHT_Y_UP: set_stick_y(STICK_UP);break;
     case FLIGHT_Y_DOWN: set_stick_y(STICK_DOWN);break;
@@ -89,7 +94,11 @@ static FlightCommandResult flight_key_child(void *context,enum FlightCommandChil
     case FLIGHT_X_RELEASE: set_stick_x(0);break;
     case FLIGHT_THROTTLE_RELEASE: case FLIGHT_THROTTLE_MODE_RELEASE:
         reset_throttle_input_state();break;
-    case FLIGHT_SPACE_PRESS: dispatch_space_command_effect();break;
+    case FLIGHT_SPACE_PRESS: {
+        const uint8_t selection=dispatch_space_command_effect();
+        return (FlightCommandResult){.event=request->raw_event,
+            .output={.kind=FLIGHT_ACTION_FIRE_SELECTION,.fire_selection=selection}};
+    }
     case FLIGHT_SPACE_RELEASE: set_event_bit_and_clear_command_word_bit();break;
     case FLIGHT_THROTTLE_MODE: case FLIGHT_HOOK: case FLIGHT_WEAPON_ENABLE:
     case FLIGHT_WEAPON_MODE: case FLIGHT_GEAR: case FLIGHT_NEXT_TARGET:
@@ -103,10 +112,13 @@ static FlightCommandResult flight_key_child(void *context,enum FlightCommandChil
         /* C25704 masks the event's low byte and preserves the word saved
          * at C1C0FC/C1C18A. These children post messages, not direct tones. */
         post_message((uint16_t)request->raw_event);
-        return (FlightCommandResult){request->raw_event&0xffffff00u,command->carried_event};
+        return (FlightCommandResult){request->raw_event&0xffffff00u,command->carried_event,
+            {.kind=FLIGHT_ACTION_PRESERVE}};
     case FLIGHT_FLARE_SPAWN:
         /* C1C164 -> C17F8C: SHIFT-F in mode 6 starts sound 6. */
-        start_sound_6(0x1c,0x30);break;
+        start_sound_6(0x1c,0x30);
+        return (FlightCommandResult){.event=request->raw_event,
+            .output={.kind=FLIGHT_ACTION_PRESERVE}};
     default: fprintf(stderr,"native flight key child unavailable: %u\n",(unsigned)child);abort();
     }
     return (FlightCommandResult){request->raw_event,0};
@@ -237,6 +249,10 @@ static NativeInputReturn flight_return(FlightActionOutput output) {
     case FLIGHT_ACTION_RADAR_RANGE: value=output.radar_range;break;
     case FLIGHT_ACTION_WEAPON_BLOCK: value=output.weapon_block;break;
     case FLIGHT_ACTION_WEAPON_MODE: value=output.weapon_mode;break;
+    case FLIGHT_ACTION_FIRE_SELECTION: value=output.fire_selection;break;
+    case FLIGHT_ACTION_COUNTERMEASURE_EVENT: value=(uint8_t)output.countermeasure_event;break;
+    case FLIGHT_ACTION_QUEUE_INDEX:
+        return (NativeInputReturn){(uint8_t)output.queue_index,NATIVE_INPUT_RETURN_COMMAND_QUEUE};
     default: abort();
     }
     return (NativeInputReturn){value,NATIVE_INPUT_RETURN_FLIGHT_ACTION};

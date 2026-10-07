@@ -37,13 +37,22 @@ register shadow, captured output or fitted gameplay constant was added.
 
 ## Connected comparison
 
-Twelve additional Free Flight cleanup bodies supply actual outputs to radar,
-weapon and preserving toggle/target commands before first depleted recorder
-input. The real full-queue gate exposes the action output. Radar cases exercise
-all three nibble selections; weapon cases include the $80 overflow, zero,
-ordinary decrement and blocked paths. The comparison retains all earlier cases
-and independently composes original body -> original keyboard -> original
-recorder parents. Native gameplay consumes only its own actual owner outputs.
+Runtime evidence correction: this batch's new keyboard probes set MODE_SELECT
+to zero, routing those keys past the intended flight actions. The original
+RAM/return comparisons below passed, but did not prove those action paths in
+the playable runner. The later fire/countermeasure batch corrects the mode,
+requires actual owner/value assertions and passes 163 full bodies plus 240
+input parents. See `native_fire_countermeasure_input_return.md`. The 4,416
+focused command-parent results below remain valid component evidence.
+
+The earlier comparison retains its Free Flight cleanup bodies and independently
+composes original body -> original keyboard -> original recorder parents.
+Native gameplay consumes only its own actual outputs. The corrected later
+probe now exposes the intended actions through the full-queue gate: all three
+radar selections, weapon $80 overflow, zero, ordinary decrement and blocked
+paths, plus preserving target/toggle commands. See the correction above for
+the distinction between the original bounded comparison and actual action
+integration.
 
 151 complete bodies, 168 recorder parents and 48 intervening keyboard parents
 match original compared RAM/drawing and defined returns. No HUD/drawing mask
