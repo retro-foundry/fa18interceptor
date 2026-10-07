@@ -24,10 +24,19 @@ typedef struct {
     unsigned callback,callback_bodies,callback_events;
     unsigned smoothing_cancel,cancel_phase,cancelled;
     unsigned weapon,launch_bodies,launched,removed;
+    unsigned hit_probe;
+    uint8_t *hit_before;
+    unsigned hit_tracking,hit_captured,hit_before_tick,hit_saved_tick;
+    gaddr hit_log;
+    gaddr hit_stage;
+    uint16_t hit_before_count;
     unsigned projectile_states[3];
     uint16_t stock,ammo,counters[3];
     int weapon_baseline;
+    unsigned weapon_checked;
+    uint16_t weapon_stock,weapon_ammo,weapon_counters[3];
     unsigned flight,region_mask,occupied_mask,spawns,zone_exits,pending_exits,npc_missiles;
+    uint16_t hit_baseline[3],hit_counts[3];
     uint32_t record_states[16];
     uint16_t guidance_cases[16][512];
     unsigned guidance_case_counts[16];
@@ -47,10 +56,37 @@ static int inside_region(gaddr region,gaddr record) {
     return x>=rd_s16(region) && x<=rd_s16(region+2) &&
            z>=rd_s16(region+4) && z<=rd_s16(region+6);
 }
+static void write_hit_snapshot(const ModeRun *run,const char *suffix,const uint8_t *data) {
+    char path[4096];
+    const int length=snprintf(path,sizeof path,"%s.hit.%s.dat",run->prefix,suffix);
+    if(length<0 || length>=(int)sizeof path) abort();
+    FILE *file=fopen(path,"wb");
+    if(!file) {perror(path);abort();}
+    const int written=fwrite(data,1,0x100000,file)==0x100000;
+    if(fclose(file) || !written) {fprintf(stderr,"Cannot write hit capture: %s\n",path);abort();}
+}
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                     uint16_t saved_tick,void *context) {
     ModeRun *run=context;
     run->clock.iteration=game->update_iterations;
+    /* A single bounded in-memory before-state while a player radar missile
+     * is active. Export only the actual collision body, never seed gameplay. */
+    if(run->hit_probe && !run->hit_captured && boundary==NATIVE_FRAME_BODY_BEGIN) {
+        run->hit_tracking=0;
+        for(unsigned slot=1;slot<=3;++slot) {
+            const gaddr projectile=CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES;
+            if((rd_u8(projectile+1)&0x48u)==0x48u && !rd_u8(projectile+94) &&
+               !rd_u8(projectile+98)) run->hit_tracking=1;
+        }
+        if(run->hit_tracking) {
+            memcpy(run->hit_before,game->storage.buffers,0x80000);
+            memcpy(run->hit_before+0x80000,game->storage.source,0x80000);
+            run->hit_before_tick=game->ticks;run->hit_saved_tick=saved_tick;
+            run->hit_stage=rd_u32(STAGE_CALLBACK);
+            run->hit_log=rd_u32(MODE_TABLE);
+            run->hit_before_count=rd_u16(run->hit_log+68);
+        }
+    }
     if(boundary==NATIVE_FRAME_INPUT_BEGIN && rd_u8(MODE_SELECT)==run->mode) {
         gaddr stage=rd_u32(STAGE_CALLBACK);
         if(run->smoothing_cancel && !run->cancel_phase && stage==0xc10a24) {
@@ -141,10 +177,16 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
            rd_u8(MODE_SELECT)==run->mode && rd_u8(POST_INPUT_AUX)))) {
             if(!run->flight_baseline) {
                 run->flight_baseline=1;
+                for(unsigned i=0;i<3;++i)
+                    run->hit_baseline[i]=rd_u16(rd_u32(MODE_TABLE)+60+4*i);
                 for(unsigned i=0;i<3;++i) run->initial_position[i]=rd_u32(CONTROL_RECORDS+20+4*i);
                 for(unsigned slot=0;slot<16;++slot)
                     for(unsigned i=0;i<3;++i)
                         run->aircraft_positions[slot][i]=rd_u32(CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES+20+4*i);
+            }
+            for(unsigned i=0;i<3;++i) {
+                const uint16_t hits=(uint16_t)(rd_u16(rd_u32(MODE_TABLE)+60+4*i)-run->hit_baseline[i]);
+                if(hits!=run->hit_counts[i]) {run->hit_counts[i]=hits;sample|=8;}
             }
             for(unsigned i=0;i<3;++i)
                 if(rd_u32(CONTROL_RECORDS+20+4*i)!=run->initial_position[i]) run->moved=1;
@@ -216,6 +258,18 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             run->counters[1]=rd_u16(log+62);
             run->counters[2]=rd_u16(log+66);
         }
+        if(run->weapon && !run->hit_probe && run->weapon_baseline &&
+           !run->weapon_checked && stage==0xc11788) {
+            /* Observe consumption before the natural postflight reset
+             * restores the player's stores. Keep the later reset exercised. */
+            run->weapon_checked=1;
+            run->weapon_stock=rd_u8(CONTROL_RECORDS+95);
+            run->weapon_ammo=rd_u16(CONTROL_RECORDS+96);
+            for(unsigned i=0;i<3;++i)
+                run->weapon_counters[i]=rd_u16(rd_u32(MODE_TABLE)+58+4*i);
+            printf("{\"weapon_checkpoint\":true,\"tick\":%u,\"stock\":%u,\"gun_ammo\":%u,\"initial_stock\":%u,\"initial_gun_ammo\":%u}\n",
+                game->ticks,run->weapon_stock,run->weapon_ammo,run->stock,run->ammo);
+        }
         if(run->weapon && game->ticks>=12000) {
             if(run->launch_bodies) {--run->launch_bodies;sample|=8;}
             for(unsigned slot=1;slot<=3;++slot) {
@@ -262,13 +316,28 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             printf("{\"capture\":%u,\"stage\":\"%06X\",\"stream\":%u,",run->captures,stage,stream);
         }
     }
-    if(!run->capture.prefix || run->capture.complete) return;
-    native_frame_capture(game,boundary,saved_tick,&run->capture);
-    if(run->capture.complete) {
-        printf("\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s}\n",
-            run->capture.before_tick,run->capture.after_tick,run->capture.saved_tick,
-            run->capture.owner_exit?"true":"false");
-        ++run->captures;
+    if(run->capture.prefix && !run->capture.complete) {
+        native_frame_capture(game,boundary,saved_tick,&run->capture);
+        if(run->capture.complete) {
+            printf("\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s}\n",
+                run->capture.before_tick,run->capture.after_tick,run->capture.saved_tick,
+                run->capture.owner_exit?"true":"false");
+            ++run->captures;
+        }
+    }
+    if(run->hit_tracking && (boundary==NATIVE_FRAME_BODY_END || boundary==NATIVE_FRAME_OWNER_EXIT)) {
+        run->hit_tracking=0;
+        const uint16_t hits=rd_u16(run->hit_log+68);
+        if(hits!=run->hit_before_count) {
+            write_hit_snapshot(run,"before",run->hit_before);
+            memcpy(run->hit_before,game->storage.buffers,0x80000);
+            memcpy(run->hit_before+0x80000,game->storage.source,0x80000);
+            write_hit_snapshot(run,"after",run->hit_before);
+            ++run->hit_captured;
+            printf("{\"capture\":\"hit\",\"hit_body\":true,\"stage\":\"%06X\",\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s,\"pilot_log\":%u,\"radar_hits_before\":%u,\"radar_hits_after\":%u}\n",
+                run->hit_stage,run->hit_before_tick,game->ticks,run->hit_saved_tick,
+                boundary==NATIVE_FRAME_OWNER_EXIT?"true":"false",run->hit_log,run->hit_before_count,hits);
+        }
     }
 }
 int main(int argc,char **argv) {
@@ -280,6 +349,7 @@ int main(int argc,char **argv) {
         if(!strcmp(argv[6],"callback") && run.mode==125) run.callback=1;
         else if(!strcmp(argv[6],"smoothing") && run.mode==4) run.smoothing_cancel=1;
         else if(!strcmp(argv[6],"combat") && (run.mode>=5 && run.mode<=8)) run.flight=2;
+        else if(!strcmp(argv[6],"hit") && run.mode==8) {run.flight=2;run.weapon=2;run.hit_probe=1;}
         else if(!strcmp(argv[6],"outcome") && run.mode==6) { run.flight=2;run.outcome=1; }
         else if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
         else if(!strcmp(argv[6],"eject") && run.mode==8) run.eject=1;
@@ -290,6 +360,10 @@ int main(int argc,char **argv) {
     if((run.mode!=2 && run.mode!=3 && run.mode!=4 && run.mode!=5 && run.mode!=6 && run.mode!=7 && run.mode!=8 && run.mode!=125) ||
        aircraft<1 || aircraft>2) return 1;
     if(!game) return 1;
+    if(run.hit_probe) {
+        run.hit_before=malloc(0x100000);
+        if(!run.hit_before) goto done;
+    }
     if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
     if(run.mode==7 || run.mode==8) {
         /* A saved-pilot fixture unlocks the original availability byte.
@@ -334,9 +408,14 @@ int main(int argc,char **argv) {
             const unsigned times[]={10000,11500,11200,11220,13000,14000,16000,17000};
             const unsigned durations[]={10000,500,2,2,2,100,2,100};
             const int keys[]={61,274,13,13,116,32,116,32};
+            /* Mode-eight's sustained combat probe needs a bounded pull-up;
+             * holding it for 500 ticks now naturally ends this flight early.
+             * Keep its long-flight guards and guide it with ordinary keys. */
+            const unsigned pitch_duration=run.flight==2 && run.mode==8?100u:durations[1];
             for(unsigned i=0;i<8;++i) {
+                if(run.hit_probe && (i==2 || i==3)) continue;
                 if(game->ticks==times[i]) native_frontend_event(game,keys[i],1);
-                if(game->ticks==times[i]+durations[i]) native_frontend_event(game,keys[i],0);
+                if(game->ticks==times[i]+(i==1?pitch_duration:durations[i])) native_frontend_event(game,keys[i],0);
             }
         }
         if(run.outcome && game->ticks>=20000 && rd_u32(STAGE_CALLBACK)==0xc10dae &&
@@ -356,7 +435,7 @@ int main(int argc,char **argv) {
                 if(game->ticks==11000+20*i) native_frontend_event(game,13,1);
                 if(game->ticks==11002+20*i) native_frontend_event(game,13,0);
             }
-            for(unsigned i=0;i<2;++i) {
+            for(unsigned i=0;i<2 && !run.hit_probe;++i) {
                 if(game->ticks==12000+1000*i) {
                     native_frontend_event(game,32,1);run.launch_bodies=4;
                 }
@@ -404,14 +483,15 @@ int main(int argc,char **argv) {
     }
     if(run.smoothing_cancel)
         printf("{\"smoothing_cancel\":true,\"scene_frames\":%u,\"continued\":true,\"returned\":true}\n",game->scene_frames);
-    if(run.weapon) {
-        gaddr log=rd_u32(MODE_TABLE);
-        const unsigned consumed=(uint16_t)(run.ammo-rd_u16(CONTROL_RECORDS+96));
-        const unsigned gun_shots=(uint16_t)(rd_u16(log+58)-run.counters[0]);
-        const unsigned first=(uint16_t)(rd_u16(log+62)-run.counters[1]);
-        const unsigned second=(uint16_t)(rd_u16(log+66)-run.counters[2]);
-        const unsigned stock=rd_u8(CONTROL_RECORDS+95);
-        if(!run.weapon_baseline || (run.weapon==3?
+    if(run.weapon && !run.hit_probe) {
+        const unsigned consumed=(uint16_t)(run.ammo-run.weapon_ammo);
+        const unsigned gun_shots=(uint16_t)(run.weapon_counters[0]-run.counters[0]);
+        const unsigned first=(uint16_t)(run.weapon_counters[1]-run.counters[1]);
+        const unsigned second=(uint16_t)(run.weapon_counters[2]-run.counters[2]);
+        const unsigned stock=run.weapon_stock;
+        if(!run.weapon_baseline || !run.weapon_checked || !game->postflight_callbacks ||
+           rd_u8(CONTROL_RECORDS+95)!=run.stock || rd_u16(CONTROL_RECORDS+96)!=run.ammo ||
+           (run.weapon==3?
            (!consumed || consumed!=gun_shots || first || second || stock!=run.stock):
            (!run.launched || !run.removed || consumed || gun_shots ||
             first!=(run.weapon==1?2u:0u) || second!=(run.weapon==2?2u:0u) ||
@@ -432,8 +512,13 @@ int main(int argc,char **argv) {
                 rd_u32(CONTROL_RECORDS+20),rd_u32(CONTROL_RECORDS+24),rd_u32(CONTROL_RECORDS+28),
                 run.initial_position[0],run.initial_position[1],run.initial_position[2]);goto done;
         }
-        printf("{\"regions\":true,\"spawned_records\":%u,\"zone_exits\":%u,\"npc_missiles\":%u,\"aircraft_moved\":%u,\"scene_frames\":%u}\n",
-            run.spawns,run.zone_exits,run.npc_missiles,run.aircraft_moved,game->scene_frames);
+        printf("{\"regions\":true,\"spawned_records\":%u,\"zone_exits\":%u,\"npc_missiles\":%u,\"aircraft_moved\":%u,\"scene_frames\":%u,\"gun_hits\":%u,\"infrared_hits\":%u,\"radar_hits\":%u}\n",
+            run.spawns,run.zone_exits,run.npc_missiles,run.aircraft_moved,game->scene_frames,
+            run.hit_counts[0],run.hit_counts[1],run.hit_counts[2]);
+    }
+    if(run.hit_probe && (!run.hit_counts[2] || run.hit_captured!=1)) {
+        fprintf(stderr,"No normal-input radar missile hit: gun=%u infrared=%u radar=%u target=%u launched=%u removed=%u\n",
+            run.hit_counts[0],run.hit_counts[1],run.hit_counts[2],rd_u16(TARGET_RECORD),run.launched,run.removed);goto done;
     }
     if(run.outcome) {
         const unsigned losses=(uint16_t)(rd_u16(rd_u32(MODE_TABLE)+0x10)-run.initial_losses);
@@ -469,5 +554,6 @@ int main(int argc,char **argv) {
     }
     result=0;
 done:
+    free(run.hit_before);
     if(game) {native_frontend_close(game);free(game);}return result;
 }

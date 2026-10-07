@@ -27,6 +27,7 @@ def main():
     parser.add_argument('--smoothing', action='store_true', help='Select the source cancel marker at naturally reached mode-four smoothing')
     parser.add_argument('--combat', action='store_true', help='Mode-five through eight longer flight with manoeuvre-limit samples')
     parser.add_argument('--outcome', action='store_true', help='Mode-six normal-input failure, all three resets and menu return')
+    parser.add_argument('--hit', action='store_true', help='Normal-input mode-eight radar missile hit')
     parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
     if args.eject and args.mode!=8:
@@ -43,6 +44,8 @@ def main():
         parser.error('--combat requires --mode 5, 6, 7 or 8 without other probes')
     if args.outcome and (args.mode!=6 or args.combat or args.flight or args.eject or args.weapon or args.callback or args.smoothing):
         parser.error('--outcome requires --mode 6 without other probes')
+    if args.hit and (args.mode!=8 or args.combat or args.flight or args.eject or args.weapon or args.callback or args.smoothing or args.outcome):
+        parser.error('--hit requires --mode 8 without other probes')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     with CaptureWorkspace(work, args.keep_captures) as capture_dir:
@@ -53,14 +56,19 @@ def check(args, work, capture_dir):
     prefix = capture_dir / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['outcome'] if args.outcome else ['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
-                            capture_output=True, text=True, timeout=180 if args.outcome else 90 if args.combat else 45 if args.flight else 25)
+                             *(['hit'] if args.hit else ['outcome'] if args.outcome else ['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
+                            capture_output=True, text=True, timeout=180 if args.outcome else 90 if args.combat or args.hit else 45 if args.flight else 25)
     (work / 'native-run.log').write_text(result.stdout + result.stderr)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
     exports = [json.loads(line) for line in result.stdout.splitlines()]
     entries = [item for item in exports if 'entry' in item]
     bodies = [item for item in exports if 'capture' in item]
+    if args.hit:
+        hit_runs=[item for item in exports if item.get('regions')]
+        assert len(hit_runs)==1 and hit_runs[0]['radar_hits']>0, exports
+        hit_bodies=[item for item in bodies if item.get('hit_body')]
+        assert len(hit_bodies)==1 and hit_bodies[0]['radar_hits_after']==hit_bodies[0]['radar_hits_before']+1, exports
     if args.mode==2:
         wraps=[item for item in exports if item.get('stream_wrap')]
         assert len(wraps)==1 and wraps[0]['wraps']>=1 and wraps[0]['streams']==255 and wraps[0]['returned'], exports
@@ -85,6 +93,8 @@ def check(args, work, capture_dir):
         assert len(entries)>=46 and len(bodies)>=43, exports
     if args.weapon:
         assert len(entries)>=42+2*args.weapon and len(bodies)>=(36 if args.weapon==3 else 38), exports
+        checkpoints=[item for item in exports if item.get('weapon_checkpoint')]
+        assert len(checkpoints)==1, exports
     if args.flight:
         regions=[item for item in exports if item.get('regions')]
         assert len(regions)==1 and regions[0]['spawned_records'] and regions[0]['zone_exits'] and regions[0]['npc_missiles']&(1<<13), exports
@@ -143,6 +153,16 @@ def check(args, work, capture_dir):
                 if comparison.returncode:
                     retain_failure(capture, work)
                     raise RuntimeError(comparison.stderr or comparison.stdout)
+                if item.get('hit_body'):
+                    pilot_log=item['pilot_log']
+                    log_offset=(pilot_log if pilot_log<0x80000 else 0x80000+pilot_log-0xc00000)+68
+                    for suffix, count in (('before',item['radar_hits_before']),
+                                          ('after',item['radar_hits_after']),
+                                          ('source',item['radar_hits_after'])):
+                        ram=Path(capture+f'.{suffix}.dat').read_bytes()
+                        if int.from_bytes(ram[log_offset:log_offset+2],'big')!=count:
+                            retain_failure(capture, work)
+                            raise AssertionError((suffix,item))
     if args.combat and args.mode==8:
         assert source_guidance_fault_returns>0, 'No complete original guidance fault/continuation body compared'
     outcome={2:'returns to menu',3:f'runs over 768 scene frames with aircraft {args.aircraft}',4:'runs over 2000 scene frames',5:'runs over 2000 scene frames',6:'runs over 384 scene frames',7:'runs over 2000 scene frames with an unlocked saved pilot',8:'runs over 2000 scene frames with an unlocked saved pilot',
@@ -171,6 +191,19 @@ def check(args, work, capture_dir):
             'test_sha256': hashlib.sha256(args.test.resolve().read_bytes()).hexdigest(),
             'adf_sha256': hashlib.sha256((ROOT/'local/media/fa18.adf').read_bytes()).hexdigest(),
             'reference_scope': 'Original instructions from sampled native before-states; not an independent complete mission replay',
+        }
+        (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
+    if args.hit:
+        outcome='registers a normal-input radar missile hit'
+        report={
+            'scenario':'normal-input-mode-eight-radar-hit',
+            'native_flight_state_seeded':False,
+            'eligibility_fixture':'Saved pilot mission-availability byte only; reopened through normal loader',
+            'input_stage_intervals':len(entries), 'sampled_bodies':len(bodies),
+            'hit_body':hit_bodies[0], 'flight':hit_runs[0],
+            'test_sha256':hashlib.sha256(args.test.resolve().read_bytes()).hexdigest(),
+            'adf_sha256':hashlib.sha256((ROOT/'local/media/fa18.adf').read_bytes()).hexdigest(),
+            'reference_scope':'Original instructions from native before-states, including exact hit body; not an independent complete mission or verified kill',
         }
         (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '

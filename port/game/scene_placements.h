@@ -10,6 +10,8 @@ typedef struct {
     gaddr placement, descriptor, routine, parameters;
     uint16_t header;
     int16_t distance, kind;
+    /* Caller calculation retained by childless descriptor exits. */
+    int32_t prior_result;
 } ScenePlacementCall;
 enum ScenePlacementPhase {
     SCENE_PLACEMENT_SELECT, SCENE_PLACEMENT_SCAN, SCENE_PLACEMENT_DESCRIPTOR,

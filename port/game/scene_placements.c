@@ -32,6 +32,7 @@ static void visit_placement(gaddr record, uint16_t header,
     int16_t point[3];
     unsigned i;
     int32_t cached;
+    uint16_t prior_result=header&15u;
     ScenePlacementCall call;
     wr_u8(HEADER_BYTE, (uint8_t)header);
     wr_u16(BOUND_SHIFT, header & 15u);
@@ -58,6 +59,7 @@ static void visit_placement(gaddr record, uint16_t header,
         refresh = cached < 0x100;
         if (cached >= 0x100 && cached < 0x400) {
             uint16_t clock = rd_u16(REFRESH_CLOCK) & 3u;
+            prior_result=clock;
             observe(hooks, (ScenePlacementEvent){.phase=SCENE_PLACEMENT_REFRESH_GATE,
                 .header=header, .value=clock});
             refresh = (header & 0x100u) ? clock == 2 : clock == 0;
@@ -87,7 +89,7 @@ static void visit_placement(gaddr record, uint16_t header,
     wr_u8(record + 19, (uint8_t)(rd_u8(record + 19) - 1));
     wr_u8(VISIT_CLOCK, rd_u8(record + 19));
     call = (ScenePlacementCall){record, descriptor, routine, rd_u32(descriptor + 4),
-        header, rd_s16(record + 16), (int16_t)(int8_t)(header >> 8)};
+        header, rd_s16(record + 16), (int16_t)(int8_t)(header >> 8), prior_result};
     wr_s16(MAGNITUDE, call.distance);
     wr_u32(CONTROL_STREAM, rd_u32(descriptor + 8));
     wr_u32(AUX_STREAM, rd_u32(descriptor + 12));

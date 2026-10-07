@@ -19,6 +19,7 @@ typedef struct {
     int32_t point[3], terms[3], value;
     uint16_t header, index, shift;
     int selected, transformed;
+    int32_t prior_result;
 } FollowupPlacementEvent;
 typedef struct {
     int32_t (*consume)(void *context, const FollowupPlacementEvent *call);

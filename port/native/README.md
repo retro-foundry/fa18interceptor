@@ -1,5 +1,16 @@
 # Native port runner
 
+Mode eight now has a required normal-input radar hit: 57 input/stage intervals
+and 188 sampled bodies, including the exact hit body, match original compared
+RAM/drawing. Inactive C22AC0 retains its caller's actual placement result;
+32 focused inactive-record contracts pass. Weapon probes check consumption
+before natural reset and restored stores afterward. Mode-eight combat retains
+its long-flight guards with a bounded pull-up. Hit, combat-eight and all three
+weapon source comparisons run in CTest with temporary passing RAM.
+Debug/Release builds and thirteen affected checks pass across targeted runs.
+See `../../analysis/native_radar_hit_milestone.md`. Complete kills/missions,
+independent flights, other contracts, audio, typed state and performance stay open.
+
 Normal-input mode-six failure now has a required three-loss/reset-exhaustion/
 menu-return/Free-Flight-relaunch scenario; 86 input/stage intervals and 237
 sampled bodies match original compared RAM/drawing. Mode two's missing C28722

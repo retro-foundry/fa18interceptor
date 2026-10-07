@@ -80,6 +80,7 @@ static void selected_records(const FollowupPlacementHooks *h) {
         wr_u16(BOUND_SHIFT,e.shift);
         e.value=shifted(add32(rd_s32(e.record+0x18),rd_s32(POSITION_BIAS)),e.shift);
         wr_s32(POSITION_LEVEL,e.value); wr_u8(POSITION_VALID,1);
+        e.prior_result=e.value; /* C1CDD0; distance leaves this value intact. */
         e.point[0]=shifted(raw_x,e.shift); e.point[1]=shifted(rd_s32(e.record+0x18),e.shift);
         e.point[2]=shifted(raw_z,e.shift);
         for (i=0;i<3;++i) wr_s32(POINT+4*i,e.point[i]);
@@ -108,6 +109,7 @@ static void alternate_records(const FollowupPlacementHooks *h) {
         wr_u32(EXTRA,rd_u32(record+12)); wr_u16(KIND,header>>8); wr_u8(POSITION_VALID,0);
         e.phase=FOLLOWUP_ALTERNATE_POINT; emit(h,e);
         e.transformed=(header&0x50u)!=0;
+        e.prior_result=header&15u; /* C1CE62; position/distance preserve it. */
         if (e.transformed) {
             gaddr owner=accumulate_selected_position((header&0x40u)!=0,header,e.point);
             e.value=(int32_t)owner;
@@ -125,6 +127,7 @@ static void alternate_records(const FollowupPlacementHooks *h) {
         if (e.value<0x100) distance(h,record+16);
         else if (e.value<0x400) {
             e.value=rd_u16(CLOCK)&3u; e.phase=FOLLOWUP_REFRESH_PHASE; emit(h,e);
+            e.prior_result=e.value; /* C1CF12/C1CF1A. */
             if ((header&0x100u) ? e.value==2 : e.value==0) distance(h,record+16);
         }
         if (!e.transformed) {

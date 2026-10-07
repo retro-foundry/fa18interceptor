@@ -126,16 +126,27 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
             ${CMAKE_CURRENT_BINARY_DIR}/region-flight-save
             ${CMAKE_CURRENT_BINARY_DIR}/region-flight 4 1 flight)
     foreach(mode IN ITEMS 5 6 7 8)
-        add_test(NAME fa18_native_combat_${mode}
-            COMMAND fa18_native_mode_two_test
-                ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
-                ${CMAKE_CURRENT_BINARY_DIR}/combat-${mode}-save
-                ${CMAKE_CURRENT_BINARY_DIR}/combat-${mode} ${mode} 1 combat)
+        if(mode EQUAL 8)
+            add_test(NAME fa18_native_combat_${mode}
+                COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
+                    --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 8 --combat
+                    --out ${CMAKE_CURRENT_BINARY_DIR}/combat-eight-check)
+        else()
+            add_test(NAME fa18_native_combat_${mode}
+                COMMAND fa18_native_mode_two_test
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+                    ${CMAKE_CURRENT_BINARY_DIR}/combat-${mode}-save
+                    ${CMAKE_CURRENT_BINARY_DIR}/combat-${mode} ${mode} 1 combat)
+        endif()
     endforeach()
     add_test(NAME fa18_native_natural_outcome
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
                 --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 6 --outcome
                 --out ${CMAKE_CURRENT_BINARY_DIR}/natural-outcome-check)
+    add_test(NAME fa18_native_radar_hit
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
+                --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 8 --hit
+                --out ${CMAKE_CURRENT_BINARY_DIR}/radar-hit-check)
     add_test(NAME fa18_native_mode_five
         COMMAND fa18_native_mode_two_test
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
@@ -158,10 +169,9 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
             ${CMAKE_CURRENT_BINARY_DIR}/ejection 8 1 eject)
     foreach(weapon RANGE 1 3)
         add_test(NAME fa18_native_weapon_${weapon}
-            COMMAND fa18_native_mode_two_test
-                ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
-                ${CMAKE_CURRENT_BINARY_DIR}/weapon-${weapon}-save
-                ${CMAKE_CURRENT_BINARY_DIR}/weapon-${weapon} 8 1 weapon${weapon})
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
+                --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 8 --weapon ${weapon}
+                --out ${CMAKE_CURRENT_BINARY_DIR}/weapon-${weapon}-check)
     endforeach()
     foreach(aircraft RANGE 1 2)
         add_test(NAME fa18_native_mode_three_aircraft_${aircraft}

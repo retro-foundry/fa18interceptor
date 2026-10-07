@@ -2,6 +2,18 @@
 
 ## Objective and user constraints
 
+Latest normal-input radar hit (2026-10-07): mode eight registers a player radar
+missile hit. All 57 input/stage intervals and 188 bodies, including the precise
+hit body, match original compared RAM/drawing. Inactive C22AC0 preserves the
+actual placement caller calculation; 32 focused inactive-record contracts pass.
+Weapon checks now verify consumption before the natural reset and replenishment
+afterward. Mode-eight combat keeps its long-flight guards with a bounded pull-up.
+All five new/expanded source comparisons run in CTest with temporary passing RAM.
+Debug/Release builds and thirteen affected checks pass across targeted runs.
+See `analysis/native_radar_hit_milestone.md`. Kills, successful missions,
+independent full flights, remaining contracts, audio, typed state and wider
+performance stay unfinished; the complete-port goal remains active.
+
 Latest normal-input outcome and stream reset (2026-10-07): mode six now has a
 required three-loss/reset-exhaustion/menu-return/Free-Flight-relaunch scenario.
 Its 86 input/stage intervals and 237 sampled bodies match original compared

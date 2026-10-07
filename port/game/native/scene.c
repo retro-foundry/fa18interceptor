@@ -39,7 +39,8 @@ static int polygon(void *context,gaddr end,int16_t origin) {
     return 0; /* Packet walker expects submission success, including rejection. */
 }
 static int32_t followup(void *context,const FollowupPlacementEvent *call) {
-    ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header};
+    ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header,
+        .prior_result=call->prior_result};
     return native_scene_placement(context,&descriptor);
 }
 static void grid_triangle(void *context) {(void)context;draw_polygon();}

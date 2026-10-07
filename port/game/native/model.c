@@ -628,7 +628,9 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
             return aircraft_descriptor(call->parameters,0x4200);
         }
         if(rd_u8(record+0x7a)!=5 && rd_s16(record+0x4c)<0) wr_u16(record,flags|0x40);
-        return 0;
+        /* C22B04-C22B18 touches only flags: retain the caller's actual
+         * shift/refresh phase (or selected-position calculation). */
+        return call->prior_result;
     }
     if(call->routine==0xc1ed3c) {
         if(rd_s32(TARGET_POINT+4)>=-0x280000) return 0;

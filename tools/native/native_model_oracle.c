@@ -193,6 +193,7 @@ static uint8_t *file_bytes(const char *name,size_t *size) {
     *size=(size_t)n; return p;
 }
 static gaddr oracle_parameters;
+static int32_t oracle_descriptor_input;
 static int16_t circle_x,circle_y,circle_radius;
 static int16_t point_x,point_y;
 static int16_t projection_x,projection_y,projection_depth;
@@ -200,6 +201,7 @@ static unsigned strip_groups;
 static int original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     REG_A[0]=oracle_parameters;
+    if(pc==0xc22ac0u) REG_D[0]=(uint32_t)oracle_descriptor_input;
     if(pc==0xc0da38u || pc==0xc0d730u) {
         /* C0DA38 unlinks its caller's frame, not its child return address. */
         REG_A[6]=0xc7fefcu;REG_A[7]=0xc7fef0u;wr_u32(REG_A[6],0);
@@ -433,6 +435,7 @@ static int circles(void) {
 }
 static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) {
     (void)context;
+    oracle_descriptor_input=call->prior_result;
     FA18Machine *before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x80000),*vertices=malloc(0x2000),*records=malloc(0x2000),*slow=malloc(0x80000);
     memcpy(before,fa18_machine,sizeof *before);
@@ -480,12 +483,35 @@ static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) 
     return original_result;
 }
 static unsigned expiry_cases;
+static unsigned inactive_cases;
+static void inactive_descriptor_cases(const ScenePlacementCall *call) {
+    FA18Machine *saved=malloc(sizeof *saved);
+    if(!saved) exit(1);
+    memcpy(saved,fa18_machine,sizeof *saved);
+    /* C22B04-C22B18 retains actual caller output on phase-five, waiting,
+     * and reactivation exits. Vary these boundaries only in the oracle. */
+    static const int32_t prior_results[]={0,1,2,3,15,-1,32767,-32768};
+    for(unsigned test=0;test<32;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        const gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
+        const uint16_t flags=rd_u16(record)&0xffbfu;
+        wr_u16(record,flags);
+        wr_u8(record+0x7a,(test&8)?5:4);
+        wr_s16(record+0x4c,(test&16)?-1:0);
+        ScenePlacementCall inactive=*call;
+        inactive.prior_result=prior_results[test&7];
+        compare_descriptor(NULL,&inactive);
+        const uint16_t expected=(!(test&8) && (test&16))?flags|0x40u:flags;
+        if(rd_u16(record)!=expected) {
+            fputs("Inactive-aircraft phase/lifetime reactivation differs\n",stderr);exit(1);
+        }
+        ++inactive_cases;
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(saved);
+}
 static int32_t consume(void *context,const ScenePlacementCall *call) {
     const gaddr chosen=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(CHOSEN_RECORD);
-    /* C22AC0 also draws ships (the $20 type class is distinct in C26EBE).
-     * Setup aircraft descriptors precede flight-record type initialization.
-     * Applying the repeated aircraft lifetime fixture to the carrier enters an invalid
-     * source stream too. Keep the unmodified carrier descriptor compared. */
+    /* C22AC0 also draws ships. Keep their unmodified descriptor compared. */
     if(call->routine!=0xc22ac0 || (rd_u8(chosen+0x62)&0xf0u)==0x20u)
         return compare_descriptor(context,call);
     FA18Machine *before=malloc(sizeof *before),*after=malloc(sizeof *after);
@@ -493,6 +519,7 @@ static int32_t consume(void *context,const ScenePlacementCall *call) {
     memcpy(before,fa18_machine,sizeof *before);
     int32_t result=compare_descriptor(context,call);
     memcpy(after,fa18_machine,sizeof *after);
+    inactive_descriptor_cases(call);
     /* Keep each reached disk-backed aircraft descriptor and its real render
      * inputs. Vary only destruction/selection boundaries for this source
      * routine; none of these fixtures enters the playable game's state. */
@@ -525,12 +552,14 @@ static int32_t consume(void *context,const ScenePlacementCall *call) {
     free(after);free(before);return result;
 }
 static int32_t consume_followup(void *context,const FollowupPlacementEvent *call) {
-    ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header};
+    ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header,
+        .prior_result=call->prior_result};
     return consume(context,&descriptor);
 }
 static int32_t native_followup(void *context,const FollowupPlacementEvent *call) {
     (void)context;
-    ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header};
+    ScenePlacementCall descriptor={.routine=call->routine,.parameters=call->parameters,.header=call->header,
+        .prior_result=call->prior_result};
     return native_scene_placement(NULL,&descriptor);
 }
 static void grid_triangle(void *context) {(void)context;host_draw_polygon();}
@@ -662,17 +691,33 @@ int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
+    const int inactive_only=argc==3 && !strcmp(argv[2],"--inactive-only");
     const int tails_only=argc==3 && !strcmp(argv[2],"--tails-only");
     const int points_only=argc==3 && !strcmp(argv[2],"--points-only");
     const int projection_only=argc==3 && !strcmp(argv[2],"--projection-only");
     const int require_aircraft=argc==3 && !strcmp(argv[2],"--require-aircraft");
     const int aircraft_record=argc==4 && !strcmp(argv[2],"--aircraft-record");
-    uint8_t *data=(argc==2 || tails_only || points_only || projection_only || require_aircraft || aircraft_record)?file_bytes(argv[1],&nd):NULL;
+    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || require_aircraft || aircraft_record)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+    if(inactive_only) {
+        for(unsigned slot=0;slot<16;++slot) {
+            const gaddr descriptor=0xc22188u+20*slot;
+            const unsigned kind=rd_u8(CONTROL_RECORDS+512*slot+98)&0xf0u;
+            /* C22B04's inactive gate is shared by aircraft and ships; its
+             * exit never enters the class-specific model drawing stream. */
+            if(rd_u32(descriptor)!=0xc22ac0u || (kind!=0x10u && kind!=0x20u)) continue;
+            wr_u16(SCRIPT_RECORD,(uint16_t)(512*slot));
+            const ScenePlacementCall call={.routine=rd_u32(descriptor),.parameters=rd_u32(descriptor+4)};
+            inactive_descriptor_cases(&call);
+            printf("%u inactive-record retained-output/reactivation cases compared (class %02X), %u failures\n",inactive_cases,kind,failures);
+            return failures?1:0;
+        }
+        fputs("No disk-backed aircraft/ship descriptor for inactive cases\n",stderr);return 1;
+    }
     if(tails_only) return !derived_tails();
     if(points_only) return !point_destinations();
     if(projection_only) return !projection_results();
@@ -698,6 +743,7 @@ int main(int argc,char **argv) {
     visit_followup_placements(&followups);
     if((require_aircraft || aircraft_record) && !expiry_cases) {fputs("No aircraft expiry descriptor exercised\n",stderr);return 1;}
     printf("%u destroyed-aircraft expiry/selection/repeated-render cases compared\n",expiry_cases);
+    printf("%u inactive-aircraft retained-output/reactivation cases compared\n",inactive_cases);
     if(!scene_children()) return 1;
     printf("%u descriptors compared, %u failures\n",calls,failures);
     printf("%u positive model strip groups exercised in original rendering\n",strip_groups);
