@@ -28,12 +28,14 @@ int main(int argc,char **argv) {
     unsigned frames=0,events=0,next=0,iterations=0; HostEvent host_events[1024]; char error[256];
     const char *input=NULL;NativeReplay loop={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
+    const char *frame_times=NULL;FILE *timing=NULL;int hidden=0;
+    SDL_RendererInfo renderer_info={0};uint64_t previous_frame_start=0;
     NativeFrameCapture capture={0};capture.replay=&loop;capture.count=1;
     unsigned capture_budget_mib=512;
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--hidden (window diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -43,6 +45,8 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--iterations")) { char *end;unsigned long n=strtoul(argv[++i],&end,10);if(*end || !n || n>10000000) { fputs("Invalid iteration limit\n",stderr);goto done; } iterations=(unsigned)n; }
         else if(i+1<argc && !strcmp(argv[i],"--data-out")) data_out=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--wav")) wave=argv[++i];
+        else if(i+1<argc && !strcmp(argv[i],"--frame-times")) frame_times=argv[++i];
+        else if(!strcmp(argv[i],"--hidden")) hidden=1;
         else if(!strcmp(argv[i],"--frame-capture-entry-only")) capture.entry_only=1;
         else if(i+1<argc && !strcmp(argv[i],"--capture-budget-mib")) {
             char *end;unsigned long n=strtoul(argv[++i],&end,10);
@@ -62,6 +66,7 @@ int main(int argc,char **argv) {
         else { fprintf(stderr,"Unknown/incomplete option: %s\n",argv[i]); goto done; }
     }
     if(headless && !frames) { fputs("Headless runs require --frames N\n",stderr); goto done; }
+    if(hidden && headless) {fputs("Hidden window diagnostics require window presentation\n",stderr);goto done;}
     if(iterations && !input) { fputs("Iteration limit requires --input\n",stderr);goto done; }
     if(capture.prefix && !input) {fputs("Frame capture requires recorded --input\n",stderr);goto done;}
     if(capture.entry_only && !capture.prefix) {fputs("Entry-only capture requires --frame-capture\n",stderr);goto done;}
@@ -95,16 +100,28 @@ int main(int argc,char **argv) {
     if(capture.prefix) {game->observe_frame=native_frame_capture;game->frame_context=&capture;}
     if(!headless) {
         SDL_SetMainReady(); if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_EVENTS|SDL_INIT_TIMER)) goto sdl_error;
-        window=SDL_CreateWindow("F/A-18 Interceptor - native intro/menu",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,960,768,SDL_WINDOW_RESIZABLE);
+        window=SDL_CreateWindow("F/A-18 Interceptor - native intro/menu",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,960,768,
+            SDL_WINDOW_RESIZABLE|(hidden?SDL_WINDOW_HIDDEN:0));
         if(!window) goto sdl_error;
         renderer=SDL_CreateRenderer(window,-1,0); if(!renderer) goto sdl_error;
+        if(SDL_GetRendererInfo(renderer,&renderer_info)) goto sdl_error;
         SDL_RenderSetLogicalSize(renderer,320,256); texture=SDL_CreateTexture(renderer,SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_STREAMING,320,256); if(!texture) goto sdl_error;
     }
-    FA18FramePacer pacer; fa18_frame_pacer_init(&pacer,SDL_GetPerformanceCounter(),SDL_GetPerformanceFrequency());
+    const uint64_t frequency=SDL_GetPerformanceFrequency();
+    const double microseconds_per_tick=1000000.0/(double)frequency;
+    FA18FramePacer pacer; fa18_frame_pacer_init(&pacer,SDL_GetPerformanceCounter(),frequency);
     if(!amiga_pcm_open(&audio_output,48000,!headless,wave,error,sizeof error)) {
         fputs(error,stderr);goto done;
     }
+    if(frame_times) {
+        timing=fopen(frame_times,"w");
+        if(!timing) {fprintf(stderr,"Cannot create native frame timing report: %s\n",frame_times);goto done;}
+        if(fputs("frame,iteration,mode,stage,view,scene_updated,presented,input_us,game_us,audio_us,convert_us,present_us,wait_us,work_us,total_us,start_interval_us,renderer\n",timing)==EOF) goto timing_error;
+    }
     while(running && (!frames || game->ticks<frames) && (!iterations || loop.iteration<iterations)) {
+        uint64_t times[7]={0};int presented=0;
+        const unsigned previous_scene=game->scene_frames;
+        if(timing) times[0]=SDL_GetPerformanceCounter();
         while(next<events && host_events[next].frame<=game->ticks) { deliver_event(game,&host_events[next]); ++next; }
         if(!headless) {
             SDL_Event event;
@@ -118,16 +135,35 @@ int main(int argc,char **argv) {
                     native_host_keyboard_event(game,&event.key);
             }
         }
+        if(timing) times[1]=SDL_GetPerformanceCounter();
         native_frontend_tick(game);
+        if(timing) times[2]=SDL_GetPerformanceCounter();
         native_audio_render(&game->audio,samples,960,48000);
         if(!amiga_pcm_write(&audio_output,samples,960)) {
             fprintf(stderr,"Cannot publish native PCM audio: %s\n",SDL_GetError());goto done;
         }
+        if(timing) times[3]=times[4]=times[5]=SDL_GetPerformanceCounter();
         if(!headless) {
             for(unsigned i=0;i<320*256;++i) { uint16_t c=game->palette[game->indices[i]]; pixels[i]=0xff000000u|(((c>>8)&15)*17u<<16)|(((c>>4)&15)*17u<<8)|((c&15)*17u); }
+            if(timing) times[4]=SDL_GetPerformanceCounter();
             if(SDL_UpdateTexture(texture,NULL,pixels,320*sizeof *pixels) || SDL_RenderClear(renderer) || SDL_RenderCopy(renderer,texture,NULL,NULL)) goto sdl_error;
-            SDL_RenderPresent(renderer); uint64_t now=SDL_GetPerformanceCounter(),deadline=fa18_frame_pacer_next(&pacer,now);
-            if(deadline>now) SDL_Delay((uint32_t)((deadline-now)*1000/SDL_GetPerformanceFrequency()));
+            SDL_RenderPresent(renderer);presented=1;
+            if(timing) times[5]=SDL_GetPerformanceCounter();
+            uint64_t now=SDL_GetPerformanceCounter(),deadline=fa18_frame_pacer_next(&pacer,now);
+            if(deadline>now) SDL_Delay((uint32_t)((deadline-now)*1000/frequency));
+        }
+        if(timing) {
+            times[6]=SDL_GetPerformanceCounter();
+            if(fprintf(timing,"%u,%u,%u,%06X,%u,%u,%d,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%.3f,%s\n",
+                game->ticks,game->update_iterations,native_menu_selected_mode(game),rd_u32(STAGE_CALLBACK),rd_u8(VIEW_MODE),
+                game->scene_frames!=previous_scene,presented,
+                (times[1]-times[0])*microseconds_per_tick,(times[2]-times[1])*microseconds_per_tick,
+                (times[3]-times[2])*microseconds_per_tick,(times[4]-times[3])*microseconds_per_tick,
+                (times[5]-times[4])*microseconds_per_tick,(times[6]-times[5])*microseconds_per_tick,
+                (times[5]-times[0])*microseconds_per_tick,(times[6]-times[0])*microseconds_per_tick,
+                previous_frame_start?(times[0]-previous_frame_start)*microseconds_per_tick:0.0,
+                renderer_info.name?renderer_info.name:"headless")<0) goto timing_error;
+            previous_frame_start=times[0];
         }
     }
     if(ppm && !write_ppm(ppm,game)) { fprintf(stderr,"Cannot write PPM: %s\n",ppm); goto done; }
@@ -149,9 +185,13 @@ int main(int argc,char **argv) {
                 capture.begun?" before the run ended":" on a connected flight frame");goto done;
     }
     result=0; goto done;
+timing_error:
+    fprintf(stderr,"Cannot write native frame timing report: %s\n",frame_times);
+    goto done;
 sdl_error:
     fprintf(stderr,"SDL: %s\n",SDL_GetError());
 done:
+    if(timing && fclose(timing)) {fprintf(stderr,"Cannot finish native frame timing report: %s\n",frame_times);result=1;}
     if(!amiga_pcm_close(&audio_output)) {fputs("Cannot finish native WAV capture\n",stderr);result=1;}
     native_replay_close(&loop);
     SDL_DestroyTexture(texture); SDL_DestroyRenderer(renderer); SDL_DestroyWindow(window); SDL_Quit();

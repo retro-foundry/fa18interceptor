@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest measured native demo (2026-10-07): all 10,910 frames call SDL presentation
+in a normally paced hidden Direct3D window; work peaks at 6.9374 ms, below 20 ms.
+Headless work peaks at 1.6407 ms. Host pacing intervals sometimes exceed 20 ms;
+visible display and full mission/combat performance remain unaccepted. Logging
+preserves complete RAM, pixels and counters in Free Flight. Native Debug/Release
+and five affected checks pass. See `analysis/native_frame_performance.md`.
+Whole-game outcomes, rare contracts, audio and typed state remain unfinished;
+the complete-port goal stays active.
+
 Latest connected idle preservation (2026-10-07): the actual viewport-message
 stage and idle frame preserve preceding input outputs. Fourteen idle bodies
 now match their original outputs; twelve feed recorder input directly. The

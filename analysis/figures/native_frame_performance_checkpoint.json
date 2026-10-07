@@ -1,0 +1,474 @@
+{
+  "date": "2026-10-07",
+  "host": {
+    "cpu": "Intel Core i9-12900KS",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "driver": "32.0.16.1714",
+    "platform": "Windows",
+    "build": "MSVC Release",
+    "sdl": "2.30.11"
+  },
+  "scope": "Full retained demo input; hidden-window SDL calls do not establish visible compositor behavior. Startup and CSV I/O excluded from work. Pacing intervals reported separately.",
+  "executable_sha256": "d6c5cb391df46ff8883a63c126e7f75315b85e24d72fc89b23a313ee9ef269e0",
+  "input": "captures/native/demo01/input.fa18in",
+  "input_sha256": "91d0dd0defbace4253fb307e6c5bef458af4cf86defc850d13f19068b3159657",
+  "acknowledgement": {
+    "key": "Space",
+    "down_frame": 30,
+    "up_frame": 32
+  },
+  "counter_differences": {
+    "audio_device": [
+      false,
+      true
+    ]
+  },
+  "runs": {
+    "demo-headless": {
+      "source": "demo-headless.csv",
+      "budget_ms": 20.0,
+      "renderers": [
+        "headless"
+      ],
+      "all": {
+        "frames": 10910,
+        "presented": 0,
+        "over_work_budget": 0,
+        "phases": {
+          "input_us": {
+            "mean_ms": 0.0001,
+            "p95_ms": 0.0001,
+            "p99_ms": 0.0001,
+            "max_ms": 0.4861
+          },
+          "game_us": {
+            "mean_ms": 0.5799,
+            "p95_ms": 0.8885,
+            "p99_ms": 1.0007,
+            "max_ms": 1.6318
+          },
+          "audio_us": {
+            "mean_ms": 0.009,
+            "p95_ms": 0.0125,
+            "p99_ms": 0.0165,
+            "max_ms": 0.1669
+          },
+          "convert_us": {
+            "mean_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "present_us": {
+            "mean_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "wait_us": {
+            "mean_ms": 0.0,
+            "p95_ms": 0.0001,
+            "p99_ms": 0.0001,
+            "max_ms": 0.0182
+          },
+          "work_us": {
+            "mean_ms": 0.5889,
+            "p95_ms": 0.8989,
+            "p99_ms": 1.0118,
+            "max_ms": 1.6407
+          },
+          "total_us": {
+            "mean_ms": 0.589,
+            "p95_ms": 0.8989,
+            "p99_ms": 1.0119,
+            "max_ms": 1.6408
+          },
+          "start_interval_us": {
+            "mean_ms": 0.5918,
+            "p95_ms": 0.9019,
+            "p99_ms": 1.0158,
+            "max_ms": 1.6471
+          }
+        }
+      },
+      "scene_updates": {
+        "frames": 2337,
+        "presented": 0,
+        "over_work_budget": 0,
+        "phases": {
+          "input_us": {
+            "mean_ms": 0.0,
+            "p95_ms": 0.0001,
+            "p99_ms": 0.0001,
+            "max_ms": 0.0003
+          },
+          "game_us": {
+            "mean_ms": 0.8231,
+            "p95_ms": 0.9967,
+            "p99_ms": 1.1042,
+            "max_ms": 1.6318
+          },
+          "audio_us": {
+            "mean_ms": 0.0093,
+            "p95_ms": 0.0127,
+            "p99_ms": 0.0206,
+            "max_ms": 0.083
+          },
+          "convert_us": {
+            "mean_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "present_us": {
+            "mean_ms": 0.0,
+            "p95_ms": 0.0,
+            "p99_ms": 0.0,
+            "max_ms": 0.0
+          },
+          "wait_us": {
+            "mean_ms": 0.0,
+            "p95_ms": 0.0001,
+            "p99_ms": 0.0001,
+            "max_ms": 0.0109
+          },
+          "work_us": {
+            "mean_ms": 0.8324,
+            "p95_ms": 1.0063,
+            "p99_ms": 1.1146,
+            "max_ms": 1.6407
+          },
+          "total_us": {
+            "mean_ms": 0.8325,
+            "p95_ms": 1.0064,
+            "p99_ms": 1.1147,
+            "max_ms": 1.6408
+          },
+          "start_interval_us": {
+            "mean_ms": 0.5404,
+            "p95_ms": 0.6253,
+            "p99_ms": 0.7474,
+            "max_ms": 1.3986
+          }
+        }
+      },
+      "scene_views": {
+        "0": {
+          "frames": 1800,
+          "work": {
+            "mean_ms": 0.825,
+            "p95_ms": 0.9822,
+            "p99_ms": 1.079,
+            "max_ms": 1.3746
+          }
+        },
+        "1": {
+          "frames": 113,
+          "work": {
+            "mean_ms": 0.8836,
+            "p95_ms": 1.1016,
+            "p99_ms": 1.6011,
+            "max_ms": 1.6407
+          }
+        },
+        "2": {
+          "frames": 36,
+          "work": {
+            "mean_ms": 0.8426,
+            "p95_ms": 1.0444,
+            "p99_ms": 1.0903,
+            "max_ms": 1.0903
+          }
+        },
+        "3": {
+          "frames": 6,
+          "work": {
+            "mean_ms": 0.7723,
+            "p95_ms": 0.8926,
+            "p99_ms": 0.8926,
+            "max_ms": 0.8926
+          }
+        },
+        "4": {
+          "frames": 7,
+          "work": {
+            "mean_ms": 0.8208,
+            "p95_ms": 0.9373,
+            "p99_ms": 0.9373,
+            "max_ms": 0.9373
+          }
+        },
+        "5": {
+          "frames": 24,
+          "work": {
+            "mean_ms": 0.9811,
+            "p95_ms": 1.0398,
+            "p99_ms": 1.0853,
+            "max_ms": 1.0853
+          }
+        },
+        "6": {
+          "frames": 153,
+          "work": {
+            "mean_ms": 0.9566,
+            "p95_ms": 1.0931,
+            "p99_ms": 1.168,
+            "max_ms": 1.2144
+          }
+        },
+        "10": {
+          "frames": 50,
+          "work": {
+            "mean_ms": 0.7553,
+            "p95_ms": 0.8689,
+            "p99_ms": 0.9321,
+            "max_ms": 0.9321
+          }
+        },
+        "11": {
+          "frames": 103,
+          "work": {
+            "mean_ms": 0.7467,
+            "p95_ms": 0.8741,
+            "p99_ms": 1.1146,
+            "max_ms": 1.3253
+          }
+        },
+        "13": {
+          "frames": 45,
+          "work": {
+            "mean_ms": 0.7857,
+            "p95_ms": 0.8617,
+            "p99_ms": 0.9773,
+            "max_ms": 0.9773
+          }
+        }
+      },
+      "noninitial_intervals_over_20ms": 0,
+      "csv_sha256": "f6dd1bdbdb5d2233702031028fda32e123c4b47616594d000c4a0d273e09aa00"
+    },
+    "demo-window": {
+      "source": "demo-window.csv",
+      "budget_ms": 20.0,
+      "renderers": [
+        "direct3d"
+      ],
+      "all": {
+        "frames": 10910,
+        "presented": 10910,
+        "over_work_budget": 0,
+        "phases": {
+          "input_us": {
+            "mean_ms": 0.0076,
+            "p95_ms": 0.0146,
+            "p99_ms": 0.0556,
+            "max_ms": 0.4023
+          },
+          "game_us": {
+            "mean_ms": 1.4578,
+            "p95_ms": 2.6876,
+            "p99_ms": 3.363,
+            "max_ms": 6.3806
+          },
+          "audio_us": {
+            "mean_ms": 0.0229,
+            "p95_ms": 0.0382,
+            "p99_ms": 0.0728,
+            "max_ms": 0.9969
+          },
+          "convert_us": {
+            "mean_ms": 0.1284,
+            "p95_ms": 0.2023,
+            "p99_ms": 0.3369,
+            "max_ms": 0.9454
+          },
+          "present_us": {
+            "mean_ms": 0.2124,
+            "p95_ms": 0.3392,
+            "p99_ms": 0.5501,
+            "max_ms": 2.6588
+          },
+          "wait_us": {
+            "mean_ms": 18.1523,
+            "p95_ms": 19.7169,
+            "p99_ms": 20.024,
+            "max_ms": 21.1497
+          },
+          "work_us": {
+            "mean_ms": 1.8291,
+            "p95_ms": 3.1549,
+            "p99_ms": 3.8464,
+            "max_ms": 6.9374
+          },
+          "total_us": {
+            "mean_ms": 19.9814,
+            "p95_ms": 21.0223,
+            "p99_ms": 21.3809,
+            "max_ms": 22.2438
+          },
+          "start_interval_us": {
+            "mean_ms": 19.9969,
+            "p95_ms": 21.0377,
+            "p99_ms": 21.3941,
+            "max_ms": 22.3133
+          }
+        }
+      },
+      "scene_updates": {
+        "frames": 2337,
+        "presented": 2337,
+        "over_work_budget": 0,
+        "phases": {
+          "input_us": {
+            "mean_ms": 0.0081,
+            "p95_ms": 0.0157,
+            "p99_ms": 0.0606,
+            "max_ms": 0.3889
+          },
+          "game_us": {
+            "mean_ms": 2.084,
+            "p95_ms": 3.2689,
+            "p99_ms": 3.9075,
+            "max_ms": 6.2989
+          },
+          "audio_us": {
+            "mean_ms": 0.0228,
+            "p95_ms": 0.0386,
+            "p99_ms": 0.0898,
+            "max_ms": 0.2529
+          },
+          "convert_us": {
+            "mean_ms": 0.1207,
+            "p95_ms": 0.1863,
+            "p99_ms": 0.3301,
+            "max_ms": 0.5524
+          },
+          "present_us": {
+            "mean_ms": 0.2033,
+            "p95_ms": 0.3164,
+            "p99_ms": 0.4826,
+            "max_ms": 1.1889
+          },
+          "wait_us": {
+            "mean_ms": 17.5639,
+            "p95_ms": 19.3927,
+            "p99_ms": 19.9754,
+            "max_ms": 20.5071
+          },
+          "work_us": {
+            "mean_ms": 2.4388,
+            "p95_ms": 3.7132,
+            "p99_ms": 4.4,
+            "max_ms": 6.9374
+          },
+          "total_us": {
+            "mean_ms": 20.0027,
+            "p95_ms": 21.0506,
+            "p99_ms": 21.4584,
+            "max_ms": 22.0607
+          },
+          "start_interval_us": {
+            "mean_ms": 19.9798,
+            "p95_ms": 21.0343,
+            "p99_ms": 21.3682,
+            "max_ms": 22.1546
+          }
+        }
+      },
+      "scene_views": {
+        "0": {
+          "frames": 1800,
+          "work": {
+            "mean_ms": 2.4227,
+            "p95_ms": 3.6766,
+            "p99_ms": 4.3893,
+            "max_ms": 6.9374
+          }
+        },
+        "1": {
+          "frames": 113,
+          "work": {
+            "mean_ms": 2.4914,
+            "p95_ms": 3.6524,
+            "p99_ms": 4.4056,
+            "max_ms": 4.7984
+          }
+        },
+        "2": {
+          "frames": 36,
+          "work": {
+            "mean_ms": 2.7102,
+            "p95_ms": 4.2519,
+            "p99_ms": 4.2856,
+            "max_ms": 4.2856
+          }
+        },
+        "3": {
+          "frames": 6,
+          "work": {
+            "mean_ms": 2.1575,
+            "p95_ms": 3.8829,
+            "p99_ms": 3.8829,
+            "max_ms": 3.8829
+          }
+        },
+        "4": {
+          "frames": 7,
+          "work": {
+            "mean_ms": 2.6615,
+            "p95_ms": 3.693,
+            "p99_ms": 3.693,
+            "max_ms": 3.693
+          }
+        },
+        "5": {
+          "frames": 24,
+          "work": {
+            "mean_ms": 3.1274,
+            "p95_ms": 3.8801,
+            "p99_ms": 4.0992,
+            "max_ms": 4.0992
+          }
+        },
+        "6": {
+          "frames": 153,
+          "work": {
+            "mean_ms": 2.5368,
+            "p95_ms": 4.0707,
+            "p99_ms": 4.7698,
+            "max_ms": 5.5762
+          }
+        },
+        "10": {
+          "frames": 50,
+          "work": {
+            "mean_ms": 2.2584,
+            "p95_ms": 3.2662,
+            "p99_ms": 4.4,
+            "max_ms": 4.4
+          }
+        },
+        "11": {
+          "frames": 103,
+          "work": {
+            "mean_ms": 2.3983,
+            "p95_ms": 3.315,
+            "p99_ms": 3.8701,
+            "max_ms": 4.1835
+          }
+        },
+        "13": {
+          "frames": 45,
+          "work": {
+            "mean_ms": 2.3303,
+            "p95_ms": 3.6045,
+            "p99_ms": 4.1133,
+            "max_ms": 4.1133
+          }
+        }
+      },
+      "noninitial_intervals_over_20ms": 6250,
+      "csv_sha256": "dff7271d88e92f40758d4344f82450b644c50064eed8f660d8278e3838486fd9"
+    }
+  }
+}

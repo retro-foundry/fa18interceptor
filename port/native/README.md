@@ -1,5 +1,13 @@
 # Native port runner
 
+The complete demo now has a bounded performance checkpoint: all 10,910 frames
+call SDL presentation in a normally paced hidden Direct3D window, with measured
+work peaking at 6.9374 ms. Headless work peaks at 1.6407 ms. Host pacing intervals
+sometimes exceed 20 ms; visible display and full mission/combat performance
+remain open. Timing instrumentation preserves complete RAM, pixels and counters
+in ordinary Free Flight. Native Debug/Release and five affected checks pass.
+See `../../analysis/native_frame_performance.md` for measurement scope.
+
 The viewport-message stage and idle frame now preserve actual preceding input
 outputs. Fourteen idle bodies match original returns, with twelve followed
 directly by recorder input. The expanded suite matches 199 full bodies,
@@ -183,8 +191,8 @@ Gameplay behavior and visuals at equivalent states/events are the acceptance
 scope; exact Amiga frame timing is not required. Preserve physics, rules and
 source-defined timers while allowing native rendering/presentation cadence.
 The accepted native target is a 20 ms frame budget with every frame presented,
-without recreating Amiga missed frames. This target is not a measured guarantee
-or a change to gameplay physics/timers.
+without recreating Amiga missed frames. The measured demo checkpoint above
+covers frame work on one host; broader performance acceptance remains open.
 Intro/loading duration may differ. Copper fade is ignored. Strict frame checks
 below remain diagnostics, not a requirement to reproduce rendering delays. See
 [`../../analysis/native_gameplay_acceptance.md`](../../analysis/native_gameplay_acceptance.md).
@@ -379,6 +387,18 @@ The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
 Voice programs, sample requests and audible output have their native owners;
 complete original frame/audio timing remains open.
+
+Add `--frame-times PATH` to an ordinary windowed run to write per-frame timing
+CSV. The parent directory must already exist. Input, game, audio, conversion,
+presentation and host wait are separate columns. `--hidden` is an optional
+window diagnostic; headless reports omit conversion/presentation. CSV writing
+is outside measured work but included in the next frame's start interval.
+Asset loading/device creation precede the loop. Every loop frame is reported.
+
+```powershell
+build/native/fa18_native.exe --frame-times build/flight-times.csv
+python tools/native/report_frame_times.py build/flight-times.csv --output build/flight-times.json --require-budget --require-presentation
+```
 
 ```powershell
 build/native/fa18_native.exe --headless --frames 1800 --ppm build/credits.ppm

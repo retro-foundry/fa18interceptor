@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Latest measured native demo (2026-10-07): all 10,910 frames call SDL presentation
+in a normally paced hidden Direct3D window. Measured frame work peaks at
+6.9374 ms, below 20 ms; headless work peaks at 1.6407 ms. Host pacing intervals
+still exceed 20 ms on some frames. Timing instrumentation preserves complete
+RAM, pixels and counters in ordinary Free Flight. Native Debug/Release and five
+affected checks pass. See `analysis/native_frame_performance.md`. Visible display
+and full mission/combat performance, outcomes, audio and typed state remain open.
+
 Latest connected idle preservation (2026-10-07): the viewport-message stage
 and idle frame retain their actual preceding input result. Fourteen idle
 bodies, including twelve followed directly by recorder input, match original
