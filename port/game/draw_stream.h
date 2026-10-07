@@ -192,6 +192,10 @@ int draw_tested_face(gaddr *stream, gaddr frame);
  * fourth corner p2 - (p1 - p0), then the kind word as for
  * draw_tested_face. Nothing when all four corners are behind. */
 int draw_tested_parallelogram(gaddr *stream, gaddr frame);
+/* C0CFB6: workspace offset, colour and radius triples until the radius
+ * word has bit 15. Scale/project each circle as C0CFFA does, accumulating
+ * acceptance at frame-$7E and the final-entry flag at frame-$6E. */
+int draw_stream_circles(gaddr *stream, gaddr frame);
 
 /* A base pointer, then offsets from it to such faces until a negative one
  * ($C20100), each drawn the same way except that the test reads and

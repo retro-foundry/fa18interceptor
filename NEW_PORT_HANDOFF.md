@@ -335,7 +335,7 @@ remaining paths. Control-effect component/face children are now connected;
 complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
-1, 2, 6, 9, 125, 127 and demonstration mode 3 with recorder mode 3. Digit 3's mode 2
+1, 2, 3, 6, 9, 125 and 127. Digit 3's mode 2
 now reaches its source prompts, record-4 playback, flight failure and menu
 return. 32 actual input/stage intervals and 21 sampled bodies match original
 instructions' compared RAM/display. The transition preserves the source
@@ -369,11 +369,22 @@ mode-2/mode-125 source regressions and current frontend checks pass.
 See `analysis/native_mode_six_milestone.md`; run
 `python tools/native/check_mode_two.py --mode 6 --out build/native-flight/mission-six/original-check`.
 Mode-6 completion/outcome children, cancellations and variants remain open.
-The next unconnected mission entry is mission-list F1's normal mode 3:
-`native_flight_enabled()` currently admits mode 3 only with recorder mode 3
-(the demonstration path). Follow actual menu/F1 input and the shared source
-briefing path before enabling other mission gates or adding children. Modes
-4, 5, 7 and 8 remain gated; do not claim their gameplay is connected.
+Mission-list F1 now runs normal mode 3 (recorder mode 0) through briefing,
+source aircraft selection and flight. Both aircraft choices reach 969
+scene/HUD frames and each passes 43 actual input/stage intervals / 29 sampled
+bodies against compared original RAM/display. Source draw commands $118
+(C1FE68 workspace selector) and $11C (C0CFB6 circle stream) are connected.
+65,588 selector cases and 24 complete circle-stream parents match original
+instructions; the transition preserves saved A4=C296EE's nonzero sort byte.
+The model oracle now verifies the actual descending 320x200 plane layout,
+replacing its obsolete ascending 256-row assumption. Ten affected native
+integration tests and current frontend/frame-body/reference checks pass.
+See `analysis/native_mode_three_milestone.md`; run the shared checker with
+`--mode 3`, and with `--mode 3 --aircraft 2` for the second choice, using
+separate `--out` directories. Mission completion/combat and variants remain open.
+The next unconnected entry is mission-list F2's mode 4. Modes 4, 5, 7 and 8
+remain gated; follow actual menu input and reached source children before
+claiming their gameplay is connected.
 
 Whole gameplay sequences under the revised timing scope, complete
 record/flag/counter state and post-result behavior remain unverified. Exact

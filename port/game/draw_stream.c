@@ -5,6 +5,7 @@
 #include "plane_tests.h"
 #include "polygon_clip.h"
 #include "render_line.h"
+#include "projection.h"
 
 typedef struct { int16_t x, y, z; } Vertex;
 
@@ -15,6 +16,19 @@ static int16_t next_word(gaddr *stream) {
 }
 
 static gaddr vertex_at(int16_t offset) { return WORKSPACES + (gaddr)(int32_t)offset; }
+
+int draw_stream_circles(gaddr *stream,gaddr frame) {
+    wr_u16(frame-0x7e,0); wr_u16(frame-0x6e,0);
+    while(!rd_u16(frame-0x6e)) {
+        gaddr point=vertex_at(next_word(stream));
+        wr_u16(CURRENT_COLOUR,(uint16_t)next_word(stream));
+        uint16_t radius=(uint16_t)next_word(stream);
+        if(radius&0x8000u) { wr_u16(frame-0x6e,1); radius&=0x7fffu; }
+        draw_scaled_view_circle(point,rd_s16(frame-8),(int16_t)radius);
+        wr_u16(frame-0x7e,(uint16_t)(rd_u16(frame-0x7e)|(rd_u32(PROJECTED_PAIR)!=0xffffffffu)));
+    }
+    return rd_u16(frame-0x7e);
+}
 
 static Vertex get(gaddr a) {
     Vertex v;

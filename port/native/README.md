@@ -437,3 +437,15 @@ python tools/native/check_mode_two.py --mode 6 --out build/native-flight/mission
 ```
 
 See [`../../analysis/native_mode_six_milestone.md`](../../analysis/native_mode_six_milestone.md).
+
+Mission-list F1 now enters normal mode 3 without recorder playback. Both source
+aircraft choices reach flight (969 scene/HUD frames), each passing 43 actual
+input/stage intervals and 29 sampled bodies against compared original
+RAM/display. Full mission completion/combat and variants remain open.
+
+```powershell
+python tools/native/check_mode_two.py --mode 3 --out build/native-flight/mission-three/original-check
+python tools/native/check_mode_two.py --mode 3 --aircraft 2 --out build/native-flight/mission-three/original-two
+```
+
+See [`../../analysis/native_mode_three_milestone.md`](../../analysis/native_mode_three_milestone.md).

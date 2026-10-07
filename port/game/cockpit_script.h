@@ -14,6 +14,10 @@ gaddr skip_for_type_3_to_6(gaddr script);
 
 /* Skip one 18-byte entry per SCRIPT_COUNT. */
 gaddr skip_counted_entries(gaddr script);
+/* C1FE68: select a script block from workspace record STREAM_MODE's +4
+ * word. Negative values leave the cursor; low bits choose $86-byte blocks,
+ * with eight-byte entries for the values outside 12..116. */
+gaddr select_workspace_script_block(gaddr script);
 
 /* Skip 2 bytes when the record class (+$7C bits 4-6) is below 6. */
 gaddr skip_for_low_class(gaddr script);

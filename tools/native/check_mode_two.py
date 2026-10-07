@@ -1,4 +1,4 @@
-"""Check source modes 2, 6 or 125 through native menu and flight.
+"""Check source modes 2, 3, 6 or 125 through native menu and flight.
 
 Starts the shared playable runtime from disk/input and compares original
 C0F3C4/C0F5F8 intervals plus C0EFEA/C0F3C0 bodies. No full Amiga replay.
@@ -16,20 +16,21 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_mode_two_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mode-check')
-    parser.add_argument('--mode', type=int, choices=(2,6,125), default=2)
+    parser.add_argument('--mode', type=int, choices=(2,3,6,125), default=2)
+    parser.add_argument('--aircraft', type=int, choices=(1,2), default=1)
     args = parser.parse_args()
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     prefix = work / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
-                             str(work / 'pilot-test'), str(prefix), str(args.mode)], cwd=ROOT,
+                             str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft)], cwd=ROOT,
                             capture_output=True, text=True, timeout=25)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
     exports = [json.loads(line) for line in result.stdout.splitlines()]
     entries = [item for item in exports if 'entry' in item]
     bodies = [item for item in exports if 'capture' in item]
-    assert len(entries) >= {2:32,6:38,125:55}[args.mode] and len(bodies) >= {2:21,6:27,125:35}[args.mode], exports
+    assert len(entries) >= {2:32,3:43,6:38,125:55}[args.mode] and len(bodies) >= {2:21,3:29,6:27,125:35}[args.mode], exports
     required={'C10DAE'}
     if args.mode==2:
         required|={'C10272','C1029E','C102D8','C10302','C10362','C0F920'}
@@ -39,6 +40,8 @@ def main():
         required|={'C103E4','C10418','C10458','C104C2','C105A6','C105F4',
                    'C10626','C1064C','C10900','C10942','C10970','C109AC',
                    'C10A24','C10B1E'}
+        if args.mode==3:
+            required|={'C10AB2','C10AE6'}
     assert required <= {
         item['stage'] for item in bodies}, bodies
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
@@ -67,7 +70,7 @@ def main():
                 print(comparison.stdout, end='', flush=True)
                 if comparison.returncode:
                     raise RuntimeError(comparison.stderr or comparison.stdout)
-    outcome={2:'returns to menu',6:'runs over 384 scene frames',
+    outcome={2:'returns to menu',3:f'runs over 768 scene frames with aircraft {args.aircraft}',6:'runs over 384 scene frames',
              125:'runs over 2,000 scene frames, including Escape/restart'}[args.mode]
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')

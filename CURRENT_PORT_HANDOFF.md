@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest connected batch: mission-list F1 now runs normal source mode 3 through
+aircraft choice and flight for both choices (969 scene/HUD frames). Each
+choice passes 43 actual input/stage intervals and 29 sampled original frame
+bodies. Draw commands $118/C1FE68 and $11C/C0CFB6 are connected and pass
+65,588 selector cases / 24 complete circle-stream parents. Normal mode 3's
+transition preserves its saved-pointer sort choice. Ten affected native
+integration tests, current frontend and active/crash/map checks, reference
+build and twelve host/loading checks pass. Full mission outcomes, combat and
+whole-game acceptance remain open. See `analysis/native_mode_three_milestone.md`.
+
 Latest connected batch: next-mission digit 7 now runs source mode 6 through
 briefing/context/aircraft setup and sustained flight (401 scene/HUD frames).
 38 actual input/stage intervals and 27 sampled bodies match compared original

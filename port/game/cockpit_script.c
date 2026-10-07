@@ -15,6 +15,16 @@ gaddr skip_counted_entries(gaddr script) {
     return script + (gaddr)(int32_t)(int16_t)(count * 18);
 }
 
+gaddr select_workspace_script_block(gaddr script) {
+    int16_t index=(int16_t)(rd_u16(STREAM_MODE)*32u);
+    int16_t value=rd_s16(WORKSPACE_RECORDS+(gaddr)(int32_t)index+4);
+    if(value<0) return script;
+    script+=2u+0x86u*(((unsigned)value&7u)/2u);
+    if(value<12) script+=0x26u+(gaddr)(int32_t)(int16_t)(((11-value)>>1)*8);
+    else if(value>116) script+=0x56u+(gaddr)(int32_t)(int16_t)(((value-116)>>1)*8);
+    return script;
+}
+
 gaddr skip_for_low_class(gaddr script) {
     int8_t cls = (int8_t)((int8_t)(rd_u8(script_record() + 0x7C) & 0x7F) >> 4);
     return script + (cls < 6 ? 2 : 0);

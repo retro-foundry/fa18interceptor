@@ -308,6 +308,8 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x10c: return test_stream_face_accumulation(stream,frame);
     case 0x110: *stream=skip_stream_records(*stream); return 0;
     case 0x114: return draw_tested_parallelogram(stream,frame);
+    case 0x118: *stream=select_workspace_script_block(*stream); return 0;
+    case 0x11c: return draw_stream_circles(stream,frame);
     case 0x120:
         /* C1FEE4: skip 18-byte entries using the source clock's low nibble.
          * The initial DBRA tests before advancing, so zero skips nothing. */

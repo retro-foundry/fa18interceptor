@@ -110,6 +110,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #define draw_tested_face host_draw_tested_face
 #define draw_tested_parallelogram host_draw_tested_parallelogram
 #define draw_indexed_face_list host_draw_indexed_face_list
+#define draw_stream_circles host_draw_stream_circles
 #define get draw_vertex_get
 #define put draw_vertex_put
 #include "../../port/game/draw_stream.c"
@@ -154,6 +155,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #undef draw_tested_face
 #undef draw_tested_parallelogram
 #undef draw_indexed_face_list
+#undef draw_stream_circles
 
 #undef FA18_NATIVE
 #undef setup_line
@@ -197,6 +199,8 @@ static int original(uint32_t pc) {
         REG_A[6]=0xc7fefcu;REG_A[7]=0xc7fef0u;wr_u32(REG_A[6],0);
     }
     if(pc==0xc21b38u || pc==0xc21c86u) REG_A[2]=0x4600;
+    if(pc==0xc1fe68u) REG_A[2]=0x4600;
+    if(pc==0xc0cfb6u) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc1ff0au || pc==0xc207feu) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
     m68k_set_reg(M68K_REG_SR,0x2700); REG_PC=pc;
@@ -224,6 +228,70 @@ static int compare(const uint8_t *expected,unsigned test) {
 }
 
 static unsigned calls, failures;
+static int workspace_script_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved);
+    if(!saved) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    unsigned cases=0;
+    for(unsigned value=0;value<65536;++value) {
+        wr_u16(STREAM_MODE,0); wr_u16(WORKSPACE_RECORDS+4,(uint16_t)value);
+        gaddr cursor=select_workspace_script_block(0x4600);
+        if(!original(0xc1fe68u) || REG_A[2]!=cursor || (uint16_t)REG_D[0]!=0) {
+            fprintf(stderr,"workspace selector value %04X differs\n",value);return 0;
+        }
+        ++cases;
+    }
+    const uint16_t indices[]={15,0xffff,0x400,0x7ff};
+    const uint16_t values[]={0,1,2,7,11,12,116,117,127,128,0x7fff,0x8000,0xffff};
+    for(unsigned i=0;i<4;++i) for(unsigned j=0;j<13;++j) {
+        wr_u16(STREAM_MODE,indices[i]);
+        gaddr record=WORKSPACE_RECORDS+(gaddr)(int32_t)(int16_t)(indices[i]*32u);
+        wr_u16(record+4,values[j]);
+        gaddr cursor=select_workspace_script_block(0x4600);
+        if(!original(0xc1fe68u) || REG_A[2]!=cursor || (uint16_t)REG_D[0]!=0) {
+            fprintf(stderr,"workspace selector index %04X value %04X differs\n",indices[i],values[j]);return 0;
+        }
+        ++cases;
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(saved);
+    printf("%u workspace-script cases match original cursor/result, including all word values\n",cases);
+    return 1;
+}
+static int stream_circle_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    for(unsigned test=0;test<24;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        gaddr cursor=0x4600;unsigned count=1+test%3;
+        const int16_t depths[]={-1,0,1,100,256,1000};
+        wr_u16(0x4200-8,test/12);
+        wr_u16(LINE_LAST_ROW,179);wr_u32(PROJECTED_PAIR,0xffffffffu);
+        for(unsigned i=0;i<count;++i) {
+            gaddr point=WORKSPACES+6*i,entry=cursor+6*i;
+            wr_s16(point,(test&1)?400:0);wr_s16(point+2,(int16_t)(20*i));
+            wr_s16(point+4,depths[(test+i)%6]);
+            wr_u16(entry,6*i);wr_u16(entry+2,(test+i)&15);
+            uint16_t radius=(uint16_t)((test&2)?0:300+100*i);
+            wr_u16(entry+4,(uint16_t)(radius|(i+1==count?0x8000u:0)));
+        }
+        memcpy(before,fa18_machine,sizeof *before);
+        uint16_t result=(uint16_t)host_draw_stream_circles(&cursor,0x4200);
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(0xc0cfb6u) || (uint16_t)REG_D[0]!=result || REG_A[2]!=cursor) {
+            fprintf(stderr,"circle stream case %u return/cursor differs\n",test);return 0;
+        }
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {fprintf(stderr,"circle stream case %u RAM %06X differs\n",test,i);return 0;}
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("24 complete circle-stream cases match original cursor/result and all non-stack RAM/display");
+    return 1;
+}
 static int full_selection_cases(void) {
     static const int16_t thresholds[]={-32768,-32767,-1,0,5000,14399,14400,14401,32767};
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
@@ -288,6 +356,13 @@ static int circles(void) {
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x80000);
     memcpy(saved,fa18_machine,sizeof *saved);
+    gaddr table=rd_u32(PAGE_PLANE_TABLE),offsets[4];
+    for(int k=0;k<4;++k) {
+        offsets[k]=rd_u32(table+4*k)-rd_u32(table+12);
+        if(offsets[k]!=(gaddr)((3-k)*0x1f40)) {
+            fputs("Native circle plane layout does not retain source spacing/order\n",stderr);return 0;
+        }
+    }
     for(unsigned test=0;test<48;++test) {
         circle_x=(int16_t)(test%3==0?2:test%3==1?317:160);
         circle_y=(int16_t)(test%4==0?1:test%4==1?179:90);
@@ -305,18 +380,18 @@ static int circles(void) {
          * plane contents with the original's fixed contiguous arrangement. */
         memcpy(fa18_machine,before,sizeof *before);
         for(int k=0;k<4;++k) {
-            memcpy(fa18_machine->chip+0x10000+k*10240,before->chip+0x10000+(3-k)*0x1f40,8000);
-            wr_u32(rd_u32(PAGE_PLANE_TABLE)+4*k,0x10000+k*10240);
+            memcpy(fa18_machine->chip+0x20000+offsets[k],before->chip+0x10000+(3-k)*0x1f40,8000);
+            wr_u32(rd_u32(PAGE_PLANE_TABLE)+4*k,0x20000+offsets[k]);
         }
         host_draw_filled_circle(circle_x,circle_y,circle_radius);
-        for(int k=0;k<4;++k) if(memcmp(fa18_machine->chip+0x10000+k*10240,
+        for(int k=0;k<4;++k) if(memcmp(fa18_machine->chip+0x20000+offsets[k],
                 expected+0x10000+(3-k)*0x1f40,8000)) {
             fprintf(stderr,"native circle plane layout differs: case %u plane %d\n",test,k);return 0;
         }
     }
     memcpy(fa18_machine,saved,sizeof *saved);
     free(expected);free(before);free(saved);
-    puts("48 circle span/mask cases match original buffers in both plane layouts");return 1;
+    puts("48 circle span/mask cases match source buffers and relocated actual native plane layout");return 1;
 }
 static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) {
     (void)context;
@@ -480,6 +555,7 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+    if(!workspace_script_cases() || !stream_circle_cases()) return 1;
     if(!full_selection_cases()) return 1;
     if(!carrier_commands()) return 1;
     if(!hull_tails()) return 1;
