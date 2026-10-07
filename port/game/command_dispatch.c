@@ -33,7 +33,10 @@ static CommandDispatchResult execute_request(const CommandRequest *request,const
             const IndexedCommandExecution indexed=execute_indexed_command_result(request,h->carried_selection(h->context),h->indexed);
             event=indexed.event;result.indexed_output=indexed.output;
         }
-        else if(is_context_command(request->action)) event=execute_context_command(request,h->context_actions);
+        else if(is_context_command(request->action)) {
+            const ContextCommandExecution context=execute_context_command_result(request,h->context_actions);
+            event=context.event;result.context_output=context.output;
+        }
         else abort();
         break;
     }

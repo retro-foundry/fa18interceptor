@@ -71,16 +71,18 @@ static void write_type(gaddr record) {
     if (name) copy_string(MESSAGE_LINE + 4, name);
 }
 
-static void write_page(gaddr record, uint16_t page) {
+static TextDrawResult write_page(gaddr record, uint16_t page) {
     gaddr label = MESSAGE_LINE + 13;
 
     if (page == 1) {
         copy_string(label, TEXT_ALT);
         format_decimal(MESSAGE_LINE + 0x17, (uint32_t)(rd_s32(record + 0x18) >> 10) * 5, 5, 0);
+        return (TextDrawResult){.kind=TEXT_DRAW_FORMAT_POLICY,.keep_zeros=0}; /* C32494 */
     } else if (page == 2) {
         copy_string(label, TEXT_HDG);
         format_decimal(MESSAGE_LINE + 0x16, (uint32_t)(int32_t)divu_word((int32_t)rd_s16(record + 0x68) >> 3, 10), 3,
                        1);
+        return (TextDrawResult){.kind=TEXT_DRAW_FORMAT_POLICY,.keep_zeros=1}; /* C324C6 */
     } else if (page == 3) {
         int16_t speed = 0;
         copy_string(label, TEXT_SPD);
@@ -89,11 +91,13 @@ static void write_page(gaddr record, uint16_t page) {
             if (speed < 0) speed = (int16_t)-speed;
         }
         format_decimal(MESSAGE_LINE + 0x16, (uint32_t)(int32_t)divu_word(speed, 12), 4, 0);
+        return (TextDrawResult){.kind=TEXT_DRAW_FORMAT_POLICY,.keep_zeros=0}; /* C32506 */
     }
+    return (TextDrawResult){0};
 }
 
 /* The info pages for the selected record: 1 when the line is to be drawn. */
-static int info_line(int16_t selected) {
+static int info_line(int16_t selected,TextDrawResult *format) {
     uint16_t page;
 
     if ((int8_t)rd_u8(INFO_REDRAWS) <= 0) {
@@ -118,7 +122,7 @@ static int info_line(int16_t selected) {
     {
         gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)selected;
         write_type(record);
-        write_page(record, page);
+        *format=write_page(record, page);
     }
     return 1;
 }
@@ -175,16 +179,17 @@ static TextDrawResult draw_line(void) {
 
 TextDrawResult draw_message_line(void) {
     int16_t selected = rd_s16(SELECTED_RECORD);
+    TextDrawResult format={0};
 
     if (selected >= 0 && !(rd_u16(COCKPIT_FLAGS) & 0x81) && count_down(INFO_DELAY) < 0) {
         wr_u8(INFO_DELAY, 0xFF);
-        if (!info_line(selected)) return (TextDrawResult){0};
+        if (!info_line(selected,&format)) return (TextDrawResult){0};
     } else if (!message_text()) {
         return (TextDrawResult){0};
     }
     TextDrawResult result=draw_line();
-    /* C32494/C324C6/C32506 may format info before a context skips text.
-     * That separate formatting return has not yet been reconstructed. */
-    if(result.kind==TEXT_DRAW_NONE) result.kind=TEXT_DRAW_UNRESOLVED;
-    return result;
+    /* C3267A and its packed-BCD child preserve the chosen zero policy.
+     * C32662/C32622 may then skip text entirely; otherwise the actual
+     * renderer's last character/glyph supersedes that formatting output. */
+    return result.kind==TEXT_DRAW_NONE?format:result;
 }

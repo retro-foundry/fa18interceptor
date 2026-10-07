@@ -84,7 +84,8 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
         0x3e,0x1e,0x2d,0x2f,0x3d,0x1d,0x3f,0x1f,0x3c,0x1b,0x1a,0x9a,
         0x13,0x13,0x13,0x44,0x44,0x44,0x44,0x14,0x0d,0x20,0x21,0x26,
         0x40,0xc0,0x40,0x40,0x23,0x23,0x33,0x33,0x12,0x12,0x12,0x23,
-        0x01,0x02,0x09,0x03,0x50,0x59,0x50,0x59,0x50,0x59,0x50,0x59};
+        0x01,0x02,0x09,0x03,0x50,0x59,0x50,0x59,0x50,0x59,0x50,0x59,
+        0x43,0x43,0x43,0x43,0x43,0x37,0x37,0x37,0x19,0x19,0x43,0x43};
     const uint8_t raw=keys[variant];
     wr_u8(RECORDER_MODE,0);wr_u16(RECORD_WORD_A,0);wr_u16(RECORD_WORD_B,0);
     wr_u16(PENDING_COMMAND_WORD_A,0);wr_u16(PENDING_COMMAND_WORD_B,0);
@@ -125,7 +126,7 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
             wr_u8(CONTROL_RECORDS+0x201,rd_u8(CONTROL_RECORDS+0x201)&~0x40);
         }
     }
-    if(variant>=60) {
+    if(variant>=60 && variant<72) {
         wr_u8(MODE_SELECT,1);wr_u8(COMMAND_BLOCK_FLAGS,0);
         wr_u8(COMMAND_ENABLE_GATE,variant==60 || variant==61);
         wr_u8(COMMAND_MODE_GATE,variant==62?0:1);
@@ -134,6 +135,18 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
         wr_u8(FUNCTION_KEY_LEVEL,variant==66?12:0);wr_u8(CONTROL_RECORDS+0x2b,0);
         wr_u8(ORIGIN_GATE_A,variant==68 || variant==69);
         if(variant>=70) wr_u8(RECORDER_MODE,0xfd);
+    }
+    if(variant>=72) {
+        wr_u8(MODE_SELECT,1);wr_u8(COMMAND_BLOCK_FLAGS,0);
+        wr_u8(COMMAND_ENABLE_GATE,0);wr_u8(COMMAND_MODE_GATE,1);
+        wr_u8(COCKPIT_FLAGS,rd_u8(COCKPIT_FLAGS)&~8);
+        wr_u8(ORIGIN_ENABLE,variant==73 || variant==74 || variant==76 || variant==78 || variant==80 || variant>=82?3:0);
+        wr_u8(ORIGIN_GATE_MODE,variant==79);wr_u8(ORIGIN_GATE_A,variant==81);
+        wr_u16(VIEW_RECORD,512);
+        wr_u8(KEY_STATE,variant==73 || variant==74 || variant==75 || variant==76 || variant==83);
+        /* These are existing disk pose/preset rows. Record 14 is the real
+         * aircraft from the collision fixture; record 15 is inactive. */
+        wr_u8(SCENE_POSE_ENTRY,variant==73 || variant==75?3:variant==74?4:variant==83?1:0);
     }
     snprintf(fixture->path,sizeof fixture->path,"%s.interposed.%u",fixture->prefix,variant);
     NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
@@ -154,7 +167,7 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
                 game->completed_input_return.owner,game->completed_input_return.value);return 0;
         }
     }
-    if(variant>=60) {
+    if(variant>=60 && variant<72) {
         const unsigned owners[]={15,15,15,15,15,15,15,15,11,11,15,15};
         const uint8_t values[]={17,16,9,3,12,192,1,121,0,0,187,187};
         if(game->completed_input_return.owner!=owners[variant-60] ||
@@ -165,6 +178,15 @@ static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,
         /* Next controlled recorder parent resumes ordinary Free Flight
          * readiness; it retains the actual command output just captured. */
         wr_u8(PLAYER_READY,1);
+    }
+    if(variant>=72) {
+        const unsigned owners[]={16,16,16,16,16,16,16,16,11,11,16,16};
+        const uint8_t values[]={0,47,20,0,0,0,0,0,0,0,0,0};
+        if(game->completed_input_return.owner!=owners[variant-72] ||
+           game->completed_input_return.value!=values[variant-72]) {
+            fprintf(stderr,"Context action %u returned owner %u value %u\n",variant,
+                game->completed_input_return.owner,game->completed_input_return.value);return 0;
+        }
     }
     return capture.complete && game->completed_input_return.owner!=NATIVE_INPUT_RETURN_UNKNOWN;
 }
@@ -212,9 +234,10 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint1
         }
         if(fixture->capture.prefix) native_frame_capture(game,boundary,saved_tick,&fixture->capture);
         if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
-            printf("{\"cleanup_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
+            printf("{\"cleanup_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u,\"active\":%s}\n",
                 fixture->cleanup_case,fixture->capture.before_tick,fixture->capture.after_tick,
-                fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value);
+                fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value,
+                rd_u8(POST_INPUT_AUX)?"true":"false");
         return;
     }
     if(fixture->grid_sampling) {
@@ -510,13 +533,17 @@ int main(int argc,char **argv) {
     }
     fixture.grid_sampling=0;
     fixture.cleanup_sampling=1;
-    for(unsigned i=0;i<84;++i) {
+    for(unsigned i=0;i<96;++i) {
         fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
         wr_u8(RECORDER_MODE,0);
         unsigned limit=game->ticks+100;
         while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
-        if(!fixture.capture.complete || game->completed_input_return.owner!=NATIVE_INPUT_RETURN_VIEW_KEY ||
-           rd_u16(TARGET_RECORD) || (i>=12 && !interposed_input(game,&fixture,i-12)) ||
+        /* A context request can stop flight updates. Retain and compare that
+         * complete idle body too; the following context action must assign
+         * its own known output without inheriting the unresolved idle result. */
+        if(!fixture.capture.complete || (i<84?game->completed_input_return.owner!=NATIVE_INPUT_RETURN_VIEW_KEY:
+                rd_u8(POST_INPUT_AUX) && game->completed_input_return.owner==NATIVE_INPUT_RETURN_UNKNOWN) ||
+           (rd_u8(POST_INPUT_AUX) && rd_u16(TARGET_RECORD)) || (i>=12 && !interposed_input(game,&fixture,i-12)) ||
            !pending_input(game,&fixture,108+i)) {
             fprintf(stderr,"Selection-cleanup carry integration failed at case %u: owner=%u target=%u\n",
                 i,game->completed_input_return.owner,rd_u16(TARGET_RECORD));goto done;

@@ -2,6 +2,17 @@
 
 ## Objective and user constraints
 
+Latest connected context camera outputs (2026-10-07): existing matrix and
+observer owners now compose record-relative and preset camera calculations.
+Actual context/map outputs and preserving requests reach depleted recorder
+input. The connected run also fixes zoom-text and skipped-message formatting
+outputs. 187 full bodies match compared RAM/drawing; 204 recorder parents and
+84 keyboard parents match RAM and defined returns. Two new idle bodies retain
+explicitly unresolved inherited outputs. All 12,576 selected command parents
+match RAM/returns. Ten affected checks and native/reference builds pass.
+See `analysis/native_context_input_return.md`. Idle/stage/reset
+contracts and whole-game mission/audio/state/performance acceptance stay open.
+
 Latest connected indexed outputs (2026-10-07): number/index selections,
 throttle outputs and recorder-$FD relative change now reach later depleted
 input. Extended frames also connect source release/model/vertex paths and fix

@@ -132,6 +132,9 @@ static void check_heading_return(void) {
 static void check_scale_return(void) {
     checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_scale_readout());
 }
+static void check_zoom_return(void) {
+    checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_zoom_readout());
+}
 static void check_message_return(void) {
     checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_message_line());
 }
@@ -171,23 +174,25 @@ static int hud_owners(void) {
         {0xc3201a,check_altitude_return},{0xc3212a,host_draw_record_72_readout},
         {0xc30918,host_draw_gauge_bar},{0xc3003a,host_draw_panel_mark},
         {0xc328a8,host_draw_weapon_status},{0xc321d2,host_draw_grid_z_readout},
-        {0xc32260,host_draw_grid_x_readout},{0xc31acc,host_draw_zoom_readout},
+        {0xc32260,host_draw_grid_x_readout},{0xc31acc,check_zoom_return},
         {0xc31a64,check_scale_return},{0xc30b5c,check_indicator_return},
         {0xc30d34,check_mode_return},
         {0xc31226,host_draw_postflight_renderer_dispatch},{0xc322ee,check_message_return},
         {0xc11bfc,update_message},{0xc11b44,tick_notification_cadence}
     };
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
-    uint8_t *expected=malloc(0x100000);unsigned count=0,return_count=0,odd_return_count=0,marker_return_count=0;
+    uint8_t *expected=malloc(0x100000);unsigned count=0,return_count=0,odd_return_count=0,marker_return_count=0,format_return_count=0;
     memcpy(saved,fa18_machine,sizeof *saved);
-    for(unsigned variant=0;variant<14;++variant) {
+    for(unsigned variant=0;variant<30;++variant) {
         for(unsigned test=0;test<sizeof cases/sizeof cases[0];++test) {
             const int text_return=cases[test].host==check_scale_return || cases[test].host==check_message_return ||
-                cases[test].host==check_speed_return || cases[test].host==check_altitude_return || cases[test].host==check_heading_return;
+                cases[test].host==check_speed_return || cases[test].host==check_altitude_return || cases[test].host==check_heading_return ||
+                cases[test].host==check_zoom_return;
             const int has_return=text_return || cases[test].host==check_indicator_return || cases[test].host==check_mode_return;
             if(variant>=5 && !has_return) continue;
             if(variant>=10 && variant<12 && !text_return) continue;
-            if(variant>=12 && cases[test].host!=check_indicator_return && cases[test].host!=check_mode_return) continue;
+            if(variant>=12 && variant<14 && cases[test].host!=check_indicator_return && cases[test].host!=check_mode_return) continue;
+            if(variant>=14 && cases[test].host!=check_message_return && cases[test].host!=check_zoom_return) continue;
             memcpy(fa18_machine,saved,sizeof *saved);
             const int16_t origins[]={0,-3,3,-20,20};
             wr_u16(SPAN_ORIGIN,(uint16_t)origins[variant%5]);
@@ -210,7 +215,7 @@ static int hud_owners(void) {
                 wr_u8(CONTEXT_READOUTS,1);wr_u16(COCKPIT_FLAGS,rd_u16(COCKPIT_FLAGS)|0x40);
                 wr_u8(TEXT_ALWAYS,1);
             }
-            if(variant>=12) {
+            if(variant>=12 && variant<14) {
                 /* Actual indicator/mode marker children, plus their last-row
                  * rejection preserving the preceding HUD result. */
                 wr_u16(SPAN_ORIGIN,0);wr_u16(SPAN_ORIGIN_Y,0);
@@ -219,6 +224,16 @@ static int hud_owners(void) {
                 wr_u8(BAR_REDRAWS_C,0);wr_u8(BAR_REDRAWS_E,0);
                 wr_u8(CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD)+2,
                     rd_u8(CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD)+2)|0x80);
+            }
+            if(variant>=14) {
+                const unsigned setting=variant-14;
+                wr_u8(CONTEXT_SELECT,1);wr_u8(TEXT_ALWAYS,!!(setting&8));
+                wr_u16(SELECTED_RECORD,0);wr_u16(COCKPIT_FLAGS,rd_u16(COCKPIT_FLAGS)&~0x81);
+                wr_u8(INFO_DELAY,255);wr_u8(INFO_REDRAWS,3);
+                wr_u16(INFO_PAGE,(uint16_t)(0x8000|(setting&3)));
+                wr_u16(ZOOM_SCALE,(uint16_t[]){0x80,0x40,0x20,0xff80}[setting&3]);
+                wr_u8(ZOOM_READOUT_FLAGS,!!(setting&4));
+                wr_u8(DISPLAY_UPDATE,setting&8?0:3);
             }
             if(cases[test].entry==0xc31226u) {
                 wr_u8(GAUGE_REFRESH,(uint8_t)(variant%3));
@@ -239,7 +254,8 @@ static int hud_owners(void) {
                 }
                 ++return_count;
                 if(variant>=10 && variant<12 && rd_u16(ERROR_CODE)==0x46) ++odd_return_count;
-                if(variant>=12 && checked_return.owner==NATIVE_INPUT_RETURN_HUD_LINE) ++marker_return_count;
+                if(variant>=12 && variant<14 && checked_return.owner==NATIVE_INPUT_RETURN_HUD_LINE) ++marker_return_count;
+                if(variant>=14 && checked_return.owner==NATIVE_INPUT_RETURN_HUD_FORMAT) ++format_return_count;
             }
             unsigned differences=0;
             for(unsigned i=0;i<0xffc00;++i) {
@@ -255,8 +271,9 @@ static int hud_owners(void) {
     }
     if(odd_return_count<6) {fputs("HUD fixtures did not exercise normal and context odd-destination fault returns\n",stderr);return 0;}
     if(marker_return_count!=2) {fputs("HUD fixtures missed indicator/mode marker returns or last-row rejection\n",stderr);return 0;}
+    if(format_return_count!=6) {fprintf(stderr,"HUD fixtures missed skipped-text decimal policies: %u\n",format_return_count);return 0;}
     memcpy(fa18_machine,saved,sizeof *saved);free(saved);free(before);free(expected);
-    printf("%u HUD instrument/panel cases match original non-stack RAM; %u defined returns match, including %u odd-destination fault and %u marker-line returns\n",count,return_count,odd_return_count,marker_return_count);return 1;
+    printf("%u HUD instrument/panel cases match original non-stack RAM; %u defined returns match, including %u odd-destination fault, %u marker-line and %u skipped-text decimal-policy returns\n",count,return_count,odd_return_count,marker_return_count,format_return_count);return 1;
 }
 #ifndef FA18_HUD_ORACLE_LIBRARY
 int main(int argc,char **argv) {

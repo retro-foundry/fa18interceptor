@@ -86,12 +86,12 @@ TextDrawResult draw_scale_readout(void) {
     return small_readout(3, TEXT_LINE, TEXT_LINE + 3, 3, 0, LAYOUT_THREE, 0x1CD2, 0x12, 4, SMALL_DRAW, 1);
 }
 
-void draw_zoom_readout(void) {
+TextDrawResult draw_zoom_readout(void) {
     int16_t zoom;
     int32_t shown;
     uint16_t mode = SMALL_DRAW, colour = 4;
 
-    if ((int8_t)rd_u8(DISPLAY_UPDATE) <= 0) return;
+    if ((int8_t)rd_u8(DISPLAY_UPDATE) <= 0) return (TextDrawResult){0};
     wr_u8(DISPLAY_UPDATE, (uint8_t)(rd_u8(DISPLAY_UPDATE) - 1));
     zoom = rd_s16(ZOOM_SCALE);
     if (zoom == 0x80) {
@@ -108,7 +108,7 @@ void draw_zoom_readout(void) {
     wr_u32(LINE_STYLE, 0xFFFFF);
     plot_pixel_in_view(0xF6, 0xBC);
     show(shown);
-    small_readout(2, TEXT_LINE, TEXT_LINE + 2, 2, 0, LAYOUT_ZOOM, 0x1CDE, 0x1E, 4, mode, 1);
+    return small_readout(2, TEXT_LINE, TEXT_LINE + 2, 2, 0, LAYOUT_ZOOM, 0x1CDE, 0x1E, 4, mode, 1);
 }
 
 TextDrawResult draw_speed_readout(void) {

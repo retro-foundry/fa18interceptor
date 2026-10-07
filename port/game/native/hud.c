@@ -16,6 +16,8 @@ static NativeInputReturn text_return(NativeInputReturn prior,TextDrawResult text
         return (NativeInputReturn){text.character,NATIVE_INPUT_RETURN_HUD_TEXT};
     if(text.kind==TEXT_DRAW_GLYPH)
         return (NativeInputReturn){(uint8_t)text.glyph,NATIVE_INPUT_RETURN_HUD_TEXT};
+    if(text.kind==TEXT_DRAW_FORMAT_POLICY)
+        return (NativeInputReturn){text.keep_zeros,NATIVE_INPUT_RETURN_HUD_FORMAT};
     return (NativeInputReturn){0};
 }
 static NativeInputReturn bar_return(NativeInputReturn prior,BarDrawResult bar) {
@@ -58,7 +60,7 @@ NativeInputReturn native_hud_draw(uint16_t saved_tick) {
     draw_panel_mark();
     draw_weapon_status();
     native_hud_draw_stores(); /* C30A00 between weapon status and grid readouts. */
-    draw_grid_z_readout();draw_grid_x_readout();draw_zoom_readout();
+    draw_grid_z_readout();draw_grid_x_readout();result=text_return(result,draw_zoom_readout());
     result=bar_return(result,draw_mode_bar());
     result=text_return(result,draw_scale_readout());
     result=text_return(result,draw_message_line());

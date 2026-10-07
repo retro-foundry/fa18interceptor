@@ -1,5 +1,16 @@
 # Native port runner
 
+Context camera calculations now call the existing matrix/observer owners.
+Actual record/preset/map outputs and preserving requests compose subsequent
+depleted input. Zoom text and skipped-message decimal policies also reach
+their actual native HUD outputs. 187 full bodies match compared RAM/drawing;
+204 recorder parents and 84 keyboard parents match RAM and defined returns.
+Two added idle bodies keep their inherited output explicitly unresolved.
+All 12,576 selected command parents match RAM/returns; ten affected checks and
+native/reference builds pass. See
+`../../analysis/native_context_input_return.md`. Idle/stage/reset contracts and
+whole-game mission/audio/state/performance acceptance remain open.
+
 Indexed selection, function-key throttle outputs and recorder-$FD relative
 changes now compose later depleted input. Expanded frames also connect source
 release/model/vertex paths and fix negative throttle-request ordering and its

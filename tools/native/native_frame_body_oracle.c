@@ -55,7 +55,8 @@ int main(int argc,char **argv) {
     const int trace_input_carry=getenv("FA18_FRAME_TRACE_INPUT_CARRY")!=NULL;
     gaddr carry_writer=0;
     for(step=0;step<10000000;++step) {
-        if(trace_input_carry && (REG_PC==0xc0f2f6 || REG_PC==0xc0f2fc ||
+        if(trace_input_carry && ((REG_PC>=0xc0f250 && REG_PC<=0xc0f28c && (REG_PC-0xc0f250)%6==0) ||
+            REG_PC==0xc0f2f6 || REG_PC==0xc0f2fc ||
             REG_PC==0xc0f380 || REG_PC==0xc0f386 || REG_PC==0xc0f3ac ||
             REG_PC==0xc0f3b2 || REG_PC==0xc0f3ba || REG_PC==0xc0f3c0))
             fprintf(stderr,"input-carry boundary=%06X value=%08X last-change=%06X opcode=%04X\n",

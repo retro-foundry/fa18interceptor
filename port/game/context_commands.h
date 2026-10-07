@@ -24,4 +24,15 @@ typedef struct {
 } ContextCommandHooks;
 int is_context_command(enum CommandAction action);
 uint32_t execute_context_command(const CommandRequest *request,const ContextCommandHooks *hooks);
+enum ContextActionOutputKind { CONTEXT_ACTION_UNRESOLVED, CONTEXT_ACTION_PRESERVE,
+    CONTEXT_ACTION_VIEW_RECORD, CONTEXT_ACTION_LOCAL_HEIGHT,
+    CONTEXT_ACTION_PRESET_X_DISPLACEMENT, CONTEXT_ACTION_MAP_ORIGIN_X };
+typedef struct {
+    enum ContextActionOutputKind kind;
+    int16_t view_record,local_height;
+    int32_t preset_x_displacement,map_origin_x;
+} ContextActionOutput;
+typedef struct { uint32_t event; ContextActionOutput output; } ContextCommandExecution;
+ContextCommandExecution execute_context_command_result(const CommandRequest *request,
+    const ContextCommandHooks *hooks);
 #endif

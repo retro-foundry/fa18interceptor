@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest connected context camera outputs (2026-10-07): record-relative and
+preset calculations now call the existing matrix/observer owners; context,
+map and request actions compose actual outputs into depleted recorder input.
+The extended run also restores zoom text and skipped-message decimal-policy
+outputs. 187 full bodies match compared RAM/drawing; 204 recorder parents and
+84 keyboard parents match RAM and defined returns. Two added idle bodies keep
+their inherited output explicitly unresolved. All 12,576 selected command
+parents match RAM/returns. Ten affected checks and native/reference builds pass.
+See `analysis/native_context_input_return.md`.
+Idle/stage/reset contracts and whole-game mission/audio/state/performance
+acceptance remain open.
+
 Latest connected indexed outputs (2026-10-07): actual number/index selection,
 throttle level/accumulator and recorder-$FD relative change now compose later
 depleted input. The extended run also connects source release/model/vertex

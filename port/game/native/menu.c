@@ -19,6 +19,7 @@
 #include "../player_input.h"
 #include "../command_dispatch.h"
 #include "../view.h"
+#include "../matrix.h"
 #include "../cockpit.h"
 #include "../messages.h"
 #include "../../amiga/host_keys.h"
@@ -48,7 +49,19 @@ unsigned native_menu_selected_mode(const NativeFrontend *game) {
     (void)game; return rd_u8(MODE_SELECT);
 }
 static ContextCommandResult context_child(void *context,enum ContextCommandChild which,const ContextCommandInput *input) {
-    (void)context; (void)input;
+    (void)context;
+    if(which==CONTEXT_COMMAND_LOCAL_TO_WORLD) {
+        ContextCommandResult result={0};
+        local_to_world(input->record,input->record+RECORD_INVERSE,
+            input->local[0],input->local[1],input->local[2],result.position);
+        result.event=(uint32_t)result.position[0];return result;
+    }
+    if(which==CONTEXT_COMMAND_SET_OBSERVER) {
+        set_observer_position(input->position[0],input->position[1],input->position[2]);
+        /* C0915A returns the masked/negated observer X used by publication. */
+        return (ContextCommandResult){rd_u32(OBSERVER),
+            {rd_s32(OBSERVER),rd_s32(OBSERVER+4),rd_s32(OBSERVER+8)}};
+    }
     /* Both source call sites invoke C0F4A6; map entry uses the same owner
      * as the already-connected request command. */
     if(which==CONTEXT_COMMAND_REQUEST_VOICES || which==CONTEXT_COMMAND_MAP_VOICES) {
@@ -269,6 +282,17 @@ static NativeInputReturn indexed_return(IndexedActionOutput output,NativeInputRe
     }
     return (NativeInputReturn){value,NATIVE_INPUT_RETURN_INDEXED_ACTION};
 }
+static NativeInputReturn context_return(ContextActionOutput output) {
+    uint8_t value;
+    switch(output.kind) {
+    case CONTEXT_ACTION_VIEW_RECORD: value=(uint8_t)output.view_record;break;
+    case CONTEXT_ACTION_LOCAL_HEIGHT: value=(uint8_t)output.local_height;break;
+    case CONTEXT_ACTION_PRESET_X_DISPLACEMENT: value=(uint8_t)output.preset_x_displacement;break;
+    case CONTEXT_ACTION_MAP_ORIGIN_X: value=(uint8_t)output.map_origin_x;break;
+    default: abort();
+    }
+    return (NativeInputReturn){value,NATIVE_INPUT_RETURN_CONTEXT_ACTION};
+}
 static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
     NativeCommand command={.game=game};
     const CommandSelectionHooks selection={selection_value,&command};
@@ -293,8 +317,11 @@ static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
             ?(NativeInputReturn){(uint8_t)command.flight.carried_event,NATIVE_INPUT_RETURN_COMMAND_SELECTION}
             :game->completed_input_return;
         game->completed_input_return=indexed_return(result.indexed_output,prior);
+    } else if(result.context_output.kind!=CONTEXT_ACTION_UNRESOLVED && result.context_output.kind!=CONTEXT_ACTION_PRESERVE) {
+        game->completed_input_return=context_return(result.context_output);
     } else if(result.flight_output.kind==FLIGHT_ACTION_PRESERVE || result.view_output.kind==VIEW_ACTION_PRESERVE ||
               result.indexed_output.kind==INDEXED_ACTION_PRESERVE ||
+              result.context_output.kind==CONTEXT_ACTION_PRESERVE ||
               result.action==COMMAND_PENDING_EMPTY || result.action==COMMAND_COUNTER_WAIT ||
               result.action==COMMAND_FINISH_EVENT || result.action==COMMAND_QUEUE_ONLY) {
         /* C1AD72/C1AD70/C1C2B6 and queue-only skips assign no action output.
