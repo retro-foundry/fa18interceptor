@@ -87,6 +87,12 @@ int main(int argc,char **argv) {
         }
         m->joy1dat=0;
         if(!original_input(game)) return 1;
+        const char *expected_carry=getenv("FA18_INPUT_EXPECT_CARRY");
+        if(expected_carry && (uint8_t)REG_D[4]!=(uint8_t)strtoul(expected_carry,NULL,0)) {
+            fprintf(stderr,"Input return: source %02X native %02X\n",(uint8_t)REG_D[4],
+                (uint8_t)strtoul(expected_carry,NULL,0));return 1;
+        }
+        printf("Input return byte: %u\n",(uint8_t)REG_D[4]);
         for(unsigned i=0;i<0xff000;++i) {
             uint8_t original=i<0x80000?m->chip[i]:m->slow[i-0x80000];
             if(actual[i]!=original) {
@@ -198,6 +204,49 @@ int main(int argc,char **argv) {
         }
     }
     printf("2512 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases, %u ejection cases, %u callback cases, %u claimed pending countermeasures)\n",total_events,drain_cases,countermeasure_cases,fd_cases,ejection_cases,callback_cases,pending_countermeasures);
+    unsigned command_returns=0,preserved=0,selected=0,queued=0,unresolved=0;
+    for(unsigned test=0;test<512;++test) {
+        static const uint8_t commands[]={0x60,0x61,0xe0,0xe1,0x66,0xe6,0x67,0xe7,
+            0x70,0xf0,0x4c,0x4e,0x0c,0x8c,0x24,0x3e};
+        const uint8_t raw=commands[test%16];
+        memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+        memset(game,0,sizeof *game);game->completed_input_return=(NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT};
+        wr_u8(COMMAND_EVENT_COUNTER,(uint8_t[]){1,254,128,0}[(test>>5)&3]);
+        wr_u8(COMMAND_MODE_GATE,1);wr_u8(COMMAND_ENABLE_GATE,0);
+        wr_u8(COMMAND_RETURN_STATE,0);wr_u8(CONTEXT_GATE,0);wr_u8(ORIGIN_ENABLE,0);
+        wr_u8(ORIGIN_DETAIL_MODE,test&16?3:0);wr_u8(COMMAND_BLOCK_FLAGS,0);
+        wr_u8(MODE_SELECT,1);wr_u8(RECORDER_MODE,0);
+        wr_u8(KEY_STATE,0);wr_u8(KEY_STATE+1,0);wr_u8(KEY_STATE+2,0);
+        wr_u8(KEY_TAKEN,!!(test&128));wr_u8(KEY_COUNT,test&256?10:0);
+        wr_u8(KEY_WRITE,test&4?255:10);
+        wr_u8(KEY_TRANSLATED_WRITE,(uint8_t[]){0,7,255,128}[(test>>2)&3]);
+        memcpy(source,game,sizeof *source);memcpy(before,m,sizeof *m);
+        if(!original_input_entry(source,0xc1ad74,raw)) return 1;
+        const uint8_t carry=(uint8_t)REG_D[4];
+        memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
+        memcpy(m,before,sizeof *m);native_menu_dispatch_raw(game,raw);
+        const NativeInputReturn output=game->completed_input_return;
+        if(output.owner!=NATIVE_INPUT_RETURN_UNKNOWN) {
+            if(output.value!=carry) {
+                fprintf(stderr,"Command return case %u raw %02X owner %u: source %02X native %02X\n",
+                    test,raw,output.owner,carry,output.value);return 1;
+            }
+            ++command_returns;
+            preserved+=output.owner==NATIVE_INPUT_RETURN_HUD_TEXT;
+            selected+=output.owner==NATIVE_INPUT_RETURN_COMMAND_SELECTION;
+            queued+=output.owner==NATIVE_INPUT_RETURN_COMMAND_QUEUE;
+        } else ++unresolved;
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                fprintf(stderr,"Command case %u %06X: source %02X native %02X\n",test,
+                    i<0x80000?i:i-0x80000+0xc00000,expected[i],actual);return 1;
+            }
+        }
+    }
+    if(!preserved || !selected || !queued || !unresolved) return 1;
+    printf("512 command parents match non-stack RAM; %u defined returns match (%u preserved, %u selection, %u queue; %u action-owned returns remain unresolved)\n",
+        command_returns,preserved,selected,queued,unresolved);
     for(unsigned test=0;test<16;++test) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
         memset(game,0,sizeof *game);

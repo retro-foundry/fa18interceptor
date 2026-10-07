@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected intervening-command return (2026-10-07): wait/modifier/empty
+and queue-only exits compose actual preservation/selection outputs, and accepted
+publication supplies its signed queue index to subsequent depleted input.
+115 full bodies, 132 recorder parents and twelve intervening keyboard parents
+match original RAM/drawing. 512 focused command RAM cases and 471 defined returns
+pass; 41 action-owned outputs stay unresolved. Nine affected checks and all
+native/reference builds pass. See
+`analysis/native_intervening_command_input_return.md`. Full acceptance remains open.
+
 Latest connected lost-target cleanup return (2026-10-07): the actual view mode
 or signed translated-queue index now reaches first depleted recorder input.
 Skipped cleanup preserves its preceding result. 103 complete bodies and 120

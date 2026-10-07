@@ -227,11 +227,19 @@ static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
     const ContextCommandHooks actions={context_child,NULL,game};
     const CommandDispatchHooks hooks={&selection,&publication,&flight,&view,&indexed,&actions,
         carried_selection,dispatch_child,NULL,&command,prepare_action};
-    if(pending) dispatch_pending_command(&hooks);
-    else dispatch_keyboard_command(raw,&hooks);
-    /* Other commands can replace the completed domain return. Its producer
-     * contract is scoped to the first pending command of the next frame. */
-    game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
+    const CommandDispatchResult result=pending?dispatch_pending_command_result(&hooks):
+        dispatch_keyboard_command_result(raw,&hooks);
+    if(result.publication_ran && result.publication.queued) {
+        game->completed_input_return=(NativeInputReturn){(uint8_t)result.publication.translated_index,
+            NATIVE_INPUT_RETURN_COMMAND_QUEUE};
+    } else if(result.action==COMMAND_PENDING_EMPTY || result.action==COMMAND_COUNTER_WAIT ||
+              result.action==COMMAND_FINISH_EVENT || result.action==COMMAND_QUEUE_ONLY) {
+        /* C1AD72/C1AD70/C1C2B6 and queue-only skips assign no action output.
+         * C1AE02/C1AE08's actual masked block load can still supersede prior. */
+        if(command.selection_known)
+            game->completed_input_return=(NativeInputReturn){(uint8_t)command.flight.carried_event,
+                NATIVE_INPUT_RETURN_COMMAND_SELECTION};
+    } else game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
 }
 void native_menu_dispatch_raw(NativeFrontend *game,uint8_t raw) { dispatch(game,raw,0); }
 void native_menu_dispatch_pending(NativeFrontend *game) { dispatch(game,0,1); }

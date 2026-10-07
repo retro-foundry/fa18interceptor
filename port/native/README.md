@@ -1,5 +1,12 @@
 # Native port runner
 
+Intervening wait/modifier/empty/queue-only commands now preserve their actual
+prior or selector output; accepted queue publication supplies its signed index.
+115 full bodies, 132 recorder parents and twelve intervening keyboard parents
+match original RAM/drawing. 512 focused command parents pass RAM; 471 defined
+returns match. Remaining action-owned outputs stay explicit. See
+`../../analysis/native_intervening_command_input_return.md`.
+
 Lost-target cleanup now preserves skipped outputs and publishes its actual view
 mode or signed translated-queue index through the existing publication owner.
 103 complete bodies and 120 input parents match original RAM/drawing, including

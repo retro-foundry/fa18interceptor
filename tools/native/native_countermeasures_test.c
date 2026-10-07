@@ -78,6 +78,26 @@ static int fd_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned
     printf("{\"fd_input\":%u,\"raw\":%u}\n",variant,raw);
     return capture.complete && game->input_count==0;
 }
+static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
+    const uint8_t keys[]={0x60,0xe0,0x66,0xe6,0x67,0xe7,0x70,0xf0,0x4c,0x4e,0x4c,0x4e};
+    const uint8_t raw=keys[variant];
+    wr_u8(RECORDER_MODE,0);wr_u16(RECORD_WORD_A,0);wr_u16(RECORD_WORD_B,0);
+    wr_u16(PENDING_COMMAND_WORD_A,0);wr_u16(PENDING_COMMAND_WORD_B,0);
+    wr_u8(ORIGIN_DETAIL_MODE,variant&1?3:0);
+    wr_u8(KEY_TAKEN,0);wr_u8(KEY_COUNT,0);wr_u8(KEY_WRITE,0);
+    wr_u8(KEY_TRANSLATED_WRITE,variant==11?255:7);
+    wr_u8(KEY_STATE,0);wr_u8(KEY_STATE+1,0);wr_u8(KEY_STATE+2,0);
+    wr_u8(COMMAND_EVENT_COUNTER,variant==8?254:variant==9?128:1);
+    snprintf(fixture->path,sizeof fixture->path,"%s.interposed.%u",fixture->prefix,variant);
+    NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
+        .iteration=fixture->clock.iteration,.count=1};
+    native_frame_capture(game,NATIVE_FRAME_BODY_BEGIN,0,&capture);
+    native_input_enqueue_raw(game,raw);native_input_process(game);
+    native_frame_capture(game,NATIVE_FRAME_BODY_END,0,&capture);
+    printf("{\"interposed_input\":%u,\"raw\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
+        variant,raw,game->completed_input_return.owner,game->completed_input_return.value);
+    return capture.complete && game->completed_input_return.owner!=NATIVE_INPUT_RETURN_UNKNOWN;
+}
 static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const gaddr record=0xc45c72u,target=CONTROL_RECORDS+14*512;
     for(unsigned i=0;i<0x500;++i) wr_u8(record+i,0);
@@ -115,7 +135,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint1
             wr_u8(ORIGIN_DETAIL_MODE,0);wr_u8(UPDATE_TAIL_CONDITION,0);
             wr_u8(KEY_TAKEN,fixture->cleanup_case%3==1);
             wr_u8(KEY_COUNT,fixture->cleanup_case%3==2?10:0);wr_u8(KEY_WRITE,0);
-            wr_u8(KEY_TRANSLATED_WRITE,(uint8_t[]){0,7,9,255}[fixture->cleanup_case/3]);
+            wr_u8(KEY_TRANSLATED_WRITE,(uint8_t[]){0,7,9,255}[(fixture->cleanup_case/3)%4]);
             snprintf(fixture->path,sizeof fixture->path,"%s.cleanup.%u",fixture->prefix,fixture->cleanup_case);
             fixture->capture=(NativeFrameCapture){.replay=&fixture->clock,.prefix=fixture->path,
                 .iteration=game->update_iterations,.count=1};
@@ -419,13 +439,14 @@ int main(int argc,char **argv) {
     }
     fixture.grid_sampling=0;
     fixture.cleanup_sampling=1;
-    for(unsigned i=0;i<12;++i) {
+    for(unsigned i=0;i<24;++i) {
         fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
         wr_u8(RECORDER_MODE,0);
         unsigned limit=game->ticks+100;
         while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
         if(!fixture.capture.complete || game->completed_input_return.owner!=NATIVE_INPUT_RETURN_VIEW_KEY ||
-           rd_u16(TARGET_RECORD) || !pending_input(game,&fixture,108+i)) {
+           rd_u16(TARGET_RECORD) || (i>=12 && !interposed_input(game,&fixture,i-12)) ||
+           !pending_input(game,&fixture,108+i)) {
             fprintf(stderr,"Selection-cleanup carry integration failed at case %u: owner=%u target=%u\n",
                 i,game->completed_input_return.owner,rd_u16(TARGET_RECORD));goto done;
         }

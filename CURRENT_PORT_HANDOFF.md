@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected intervening-command return (2026-10-07): wait/modifier/empty
+and queue-only exits preserve prior output or the actual selector block byte;
+accepted publication supplies its signed translated index. 115 complete bodies,
+132 recorder input parents and twelve intervening keyboard parents match the
+original compared RAM/drawing and defined returns. 512 focused command parents
+match RAM; 471 defined returns pass, with 41 action-owned returns still unresolved.
+Nine affected checks and all native/reference builds pass.
+See `analysis/native_intervening_command_input_return.md`. Full port stays active.
+
 Latest connected lost-target cleanup return (2026-10-07): selection cleanup now
 preserves its incoming output on skip/context exits and publishes the actual
 view mode or signed translated-queue index on the view-key path. 103 complete

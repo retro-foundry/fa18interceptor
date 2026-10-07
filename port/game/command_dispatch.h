@@ -29,4 +29,13 @@ typedef struct {
 /* Complete original owners, including shared actions and every exit. */
 void dispatch_keyboard_command(uint32_t raw,const CommandDispatchHooks *hooks);
 void dispatch_pending_command(const CommandDispatchHooks *hooks);
+/* Selection/action and the actual shared publication result. The action's
+ * other outputs belong to its own domain owner, not a CPU register shadow. */
+typedef struct {
+    enum CommandAction action;
+    int publication_ran;
+    CommandPublicationResult publication;
+} CommandDispatchResult;
+CommandDispatchResult dispatch_keyboard_command_result(uint32_t raw,const CommandDispatchHooks *hooks);
+CommandDispatchResult dispatch_pending_command_result(const CommandDispatchHooks *hooks);
 #endif
