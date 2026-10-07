@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from capture_workspace import CaptureWorkspace, retain_failure
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -23,6 +24,7 @@ def main():
     parser.add_argument('--flight', action='store_true', help='Mode-4 takeoff, weapon inputs and region/zone transitions')
     parser.add_argument('--callback', action='store_true', help='Free Flight Delete callback remove/reinstall')
     parser.add_argument('--combat', action='store_true', help='Mode-five through eight longer flight with manoeuvre-limit samples')
+    parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
@@ -36,7 +38,12 @@ def main():
         parser.error('--combat requires --mode 5, 6, 7 or 8 without other probes')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
-    prefix = work / 'frame'
+    with CaptureWorkspace(work, args.keep_captures) as capture_dir:
+        check(args, work, capture_dir)
+
+
+def check(args, work, capture_dir):
+    prefix = capture_dir / 'frame'
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
                              *(['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
@@ -106,6 +113,7 @@ def main():
                     if line.startswith('Source guidance C06C02 returns: '):
                         source_guidance_fault_returns+=int(line.split(': ')[1])
                 if comparison.returncode:
+                    retain_failure(capture, work)
                     raise RuntimeError(comparison.stderr or comparison.stdout)
     if args.combat and args.mode==8:
         assert source_guidance_fault_returns>0, 'No complete original guidance fault/continuation body compared'

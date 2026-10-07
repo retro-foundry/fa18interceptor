@@ -8,6 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     build = ROOT / "build/native-cmake"
+    subprocess.run([sys.executable, "scripts/prune_build_artifacts.py", "--quiet"],
+                   cwd=ROOT, check=True)
     subprocess.run(["cmake", "-S", "port/recomp", "-B", str(build),
                     "-DFA18_NATIVE_ONLY=ON", "-DBUILD_TESTING=OFF"], cwd=ROOT, check=True)
     subprocess.run(["cmake", "--build", str(build), "--config", "Release",

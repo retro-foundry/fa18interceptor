@@ -141,6 +141,8 @@ def main() -> int:
     (ROOT / ninja_file).write_text("\n".join(lines) + "\n", newline="\n")
     subprocess.run(["ninja", "-f", str(ninja_file), "-j", str(args.jobs)],
                    cwd=ROOT, check=True)
+    subprocess.run([sys.executable, "scripts/prune_build_artifacts.py", "--quiet",
+                    "--keep", str(args.output)], cwd=ROOT, check=True)
     return 0
 
 

@@ -25,6 +25,9 @@ void native_frame_capture(NativeFrontend *game,enum NativeFrameBoundary boundary
     if(capture->complete || capture->replay->iteration!=capture->iteration+capture->captured) return;
     if(boundary==NATIVE_FRAME_INPUT_BEGIN) {
         write_data(game,capture,"entry");
+        if(capture->entry_only) capture->complete=++capture->captured==capture->count;
+    } else if(capture->entry_only) {
+        return;
     } else if(boundary==NATIVE_FRAME_BODY_BEGIN) {
         if(capture->begun) {fputs("Native frame body began twice\n",stderr);abort();}
         capture->begun=1;capture->before_tick=game->ticks;capture->saved_tick=saved_tick;

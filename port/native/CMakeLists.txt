@@ -62,6 +62,9 @@ target_include_directories(fa18_native_runtime PUBLIC ../game ../amiga ../romfre
 target_compile_definitions(fa18_native_runtime PUBLIC FA18_NATIVE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_native_runtime PUBLIC SDL2-static)
 target_link_libraries(fa18_native PRIVATE fa18_native_runtime)
+add_custom_command(TARGET fa18_native POST_BUILD
+    COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/prune_build_artifacts.py --quiet
+    COMMENT "Bound disposable replay and validation artifacts")
 if(MSVC)
     target_compile_options(fa18_native_runtime PRIVATE /W4 /Gy)
     target_compile_options(fa18_native PRIVATE /W4 /Gy)
@@ -72,6 +75,11 @@ else()
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_test(NAME fa18_native_artifact_policy
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/test_prune_build_artifacts.py)
+    add_test(NAME fa18_native_artifact_cleanup
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/prune_build_artifacts.py --quiet)
+    set_tests_properties(fa18_native_artifact_cleanup PROPERTIES FIXTURES_CLEANUP native_artifacts)
     add_executable(fa18_native_postflight_schedule_test ../../tools/native/native_postflight_schedule_test.c)
     target_link_libraries(fa18_native_postflight_schedule_test PRIVATE fa18_native_runtime)
     foreach(result_kind four five ready)
@@ -256,4 +264,7 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_sound_resources
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_sound_resources.py
                 --runner $<TARGET_FILE:fa18_native>)
+    get_property(native_tests DIRECTORY PROPERTY TESTS)
+    list(REMOVE_ITEM native_tests fa18_native_artifact_cleanup)
+    set_tests_properties(${native_tests} PROPERTIES FIXTURES_REQUIRED native_artifacts)
 endif()

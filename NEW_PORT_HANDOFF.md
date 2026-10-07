@@ -2,6 +2,14 @@
 
 ## Objective and user constraints
 
+Latest user direction (2026-10-07): clear generated output and prevent renewed
+disk growth. Workspace 60.501 -> 3.719 GiB; 56.782 GiB reclaimed. Build/CTest
+cleanup now uses a 4 GiB budget, native comparisons discard passing RAM, and
+manual native captures default to 512 MiB. Active Visual Studio builds, source,
+media and recordings are preserved. Original recent windows are verified
+`.dat.gz` files, directly readable by the window checker. See
+`analysis/workspace_artifact_retention.md` and AGENTS.md retention rules.
+
 The active goal is **get gameplay going and matching the recorded runs**.
 It is still active and unfulfilled. The user requested this file to transfer
 context; this is not a request to cancel or mark the gameplay goal complete.

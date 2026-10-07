@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Keep disposable build artifacts within a bounded on-disk cache.
 
-Compiler outputs and fetched dependencies are protected. Large replay streams,
-traces, captures, and diagnostics are removed oldest-first when the build tree
-exceeds the configured budget. Canonical shadow streams are removed last.
+Active compiler outputs, fetched dependencies and compressed reference RAM are
+protected. Raw captures and obsolete GNU oracle executables are removed
+oldest-first. This tool only operates inside the repository's build roots.
 """
 
 from __future__ import annotations
@@ -19,6 +19,9 @@ PROTECTED_SUFFIXES = {
     ".a", ".dll", ".exe", ".exp", ".ilk", ".lib", ".ninja_deps",
     ".ninja_log", ".o", ".obj", ".pdb",
 }
+DISPOSABLE_SUFFIXES = {".dat", ".rgb", ".idx", ".index8", ".rgb444",
+                       ".ram", ".bin", ".jsonl", ".wav", ".ppm", ".png"}
+BUILD_ROOTS = (ROOT / "build", ROOT / "port/build")
 
 
 def is_disposable(path: Path, relative: Path, minimum: int) -> bool:
@@ -26,41 +29,78 @@ def is_disposable(path: Path, relative: Path, minimum: int) -> bool:
         return False
     if any(part in PROTECTED_DIRS for part in relative.parts[:-1]):
         return False
+    if any(part.startswith("ram-") for part in relative.parts[:-1]):
+        return False  # A comparison may be consuming this live temporary run.
+    # Hundreds of separately linked historical GNU probes can consume GiB.
+    # CMake executables and the playable reference runners remain protected.
+    if relative.parent == Path("recomp") and path.suffix.lower() == ".exe":
+        return path.stem not in {"fa18_recomp", "fa18_romfree"}
     if path.suffix.lower() in PROTECTED_SUFFIXES:
         return False
-    return True
+    return path.suffix.lower() in DISPOSABLE_SUFFIXES
+
+
+def files_without_links(build: Path):
+    """Do not follow Windows junctions or symlinks outside the build tree."""
+    for directory, dirs, names in os.walk(build, followlinks=False):
+        dirs[:] = [name for name in dirs if not is_link(Path(directory) / name)]
+        for name in names:
+            path = Path(directory) / name
+            if not is_link(path):
+                yield path
+
+
+def is_link(path: Path) -> bool:
+    import stat
+    try:
+        info = path.lstat()
+    except OSError:
+        return True  # A concurrent temporary run may already have removed it.
+    return path.is_symlink() or bool(getattr(info, "st_file_attributes", 0) &
+                                   getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-dir", type=Path, default=ROOT / "build")
     parser.add_argument("--max-gib", type=float,
-                        default=float(os.environ.get("FA18_BUILD_MAX_GIB", "12")))
-    parser.add_argument("--min-file-mib", type=float, default=8)
+                        default=float(os.environ.get("FA18_BUILD_MAX_GIB", "4")))
+    parser.add_argument("--min-file-mib", type=float, default=0.5)
+    parser.add_argument("--keep", type=Path, action="append", default=[],
+                        help="protect a currently used file or directory")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--quiet", action="store_true")
     args = parser.parse_args()
 
     build = args.build_dir.resolve()
+    if build not in [path.absolute() for path in BUILD_ROOTS]:
+        parser.error("--build-dir must be this repository's build or port/build directory")
     if not build.is_dir():
         return 0
+    if is_link(build):
+        parser.error("build directory must not be a junction or symlink")
+    if not 0 < args.max_gib < float("inf") or not 0 <= args.min_file_mib < float("inf"):
+        parser.error("budgets must be positive")
     limit = int(args.max_gib * (1 << 30))
     minimum = int(args.min_file_mib * (1 << 20))
-    if limit <= 0 or minimum < 0:
-        parser.error("budgets must be positive")
+    keeps = [path.resolve() for path in args.keep]
 
     total = 0
     candidates: list[tuple[int, int, str, Path, int]] = []
-    for path in build.rglob("*"):
-        if not path.is_file():
-            continue
+    for path in files_without_links(build):
         try:
             stat = path.stat()
         except OSError:
             continue
         total += stat.st_size
         relative = path.relative_to(build)
-        if is_disposable(path, relative, minimum):
+        if any(path == keep or keep in path.parents for keep in keeps):
+            continue
+        try:
+            disposable = is_disposable(path, relative, minimum)
+        except OSError:
+            continue
+        if disposable:
             canonical = (relative.parent == Path("recomp") and
                          relative.name.startswith("frames_shadow_") and
                          relative.suffix == ".bin")
@@ -81,6 +121,9 @@ def main() -> int:
                 path.unlink()
             except FileNotFoundError:
                 continue
+            except OSError as error:
+                print(f"cannot remove {relative}: {error}")
+                continue
         total -= size
         removed += 1
         removed_bytes += size
@@ -92,7 +135,7 @@ def main() -> int:
               f"{removed_bytes / (1 << 30):.2f} GiB in {removed} files")
     if total > limit:
         print(f"build cache remains above {args.max_gib:g} GiB because only "
-              "compiler outputs or small files remain")
+              "protected, busy or small files remain")
     return 0
 
 

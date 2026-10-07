@@ -47,3 +47,17 @@ The user's latest instructions override historical plans and proof notes.
   or `port/native_data_allowlist.txt`.
 - Preserve unrelated user changes, including `.vscode/`, and sealed recordings.
 - Commit completed validated batches as the user previously requested.
+
+## Build artifact retention
+
+- User direction (2026-10-07): keep workspace disk use bounded. Builds and
+  native CTest runs invoke `scripts/prune_build_artifacts.py` with a 4 GiB
+  build-cache budget. Do not disable those hooks or accumulate raw passing RAM.
+- Native mode/postflight/window comparisons use temporary capture storage by
+  default and retain reports plus the failing case. Use `--keep-captures` only
+  for a concrete unresolved investigation; remove passing copies afterwards.
+- Manual diagnostic captures default to 512 MiB. Use bounded ranges; increasing
+  `--capture-budget-mib` is an explicit diagnostic choice, not a new default.
+- Retain reusable original RAM compressed as `.dat.gz`, with hashes/reports.
+  Run the pruner after direct emulator capture commands as well. Preserve
+  canonical `captures/`, media, active build dependencies and user settings.

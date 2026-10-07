@@ -28,10 +28,11 @@ int main(int argc,char **argv) {
     const char *input=NULL;NativeReplay loop={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
     NativeFrameCapture capture={0};capture.replay=&loop;capture.count=1;
+    unsigned capture_budget_mib=512;
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-capture FIRST[+COUNT] PREFIX]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -41,6 +42,12 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--iterations")) { char *end;unsigned long n=strtoul(argv[++i],&end,10);if(*end || !n || n>10000000) { fputs("Invalid iteration limit\n",stderr);goto done; } iterations=(unsigned)n; }
         else if(i+1<argc && !strcmp(argv[i],"--data-out")) data_out=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--wav")) wave=argv[++i];
+        else if(!strcmp(argv[i],"--frame-capture-entry-only")) capture.entry_only=1;
+        else if(i+1<argc && !strcmp(argv[i],"--capture-budget-mib")) {
+            char *end;unsigned long n=strtoul(argv[++i],&end,10);
+            if(*end || !n || n>10000000) {fputs("Invalid capture budget\n",stderr);goto done;}
+            capture_budget_mib=(unsigned)n;
+        }
         else if(i+2<argc && !strcmp(argv[i],"--frame-capture")) {
             char *end;unsigned long n=strtoul(argv[++i],&end,10);
             unsigned long count=1;
@@ -56,6 +63,10 @@ int main(int argc,char **argv) {
     if(headless && !frames) { fputs("Headless runs require --frames N\n",stderr); goto done; }
     if(iterations && !input) { fputs("Iteration limit requires --input\n",stderr);goto done; }
     if(capture.prefix && !input) {fputs("Frame capture requires recorded --input\n",stderr);goto done;}
+    if(capture.entry_only && !capture.prefix) {fputs("Entry-only capture requires --frame-capture\n",stderr);goto done;}
+    if(capture.prefix && capture.count>capture_budget_mib/(capture.entry_only?1u:3u)) {
+        fputs("Frame capture exceeds --capture-budget-mib (default 512); use a smaller range or an explicit budget\n",stderr);goto done;
+    }
     if(input && !native_replay_load(&loop,input,error,sizeof error)) { fputs(error,stderr);goto done; }
     if(input && !iterations) iterations=loop.end;
     if(input && iterations>loop.end) { fputs("Iteration limit exceeds recorded end\n",stderr);goto done; }

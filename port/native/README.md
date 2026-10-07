@@ -27,6 +27,24 @@ python scripts/build_native.py
 build/native/fa18_native.exe --adf local/media/fa18.adf
 ```
 
+Builds and native CTest runs automatically prune disposable replay/test output
+against a 4 GiB build-cache budget. Active compiler files, fetched dependencies,
+logs/reports, compressed original RAM and canonical recordings are protected.
+The limit cannot delete protected files to make space. To run cleanup manually:
+
+```powershell
+python scripts/prune_build_artifacts.py
+```
+
+Mode, postflight and independent-window comparisons now use temporary RAM by
+default, retaining reports and the failed case. `--keep-captures` explicitly
+retains raw debug output, still subject to the build-cache policy. The window
+checker accepts retained original `PREFIX.ITERATION.dat.gz` without expanding
+the cache. Use `--frame-capture-entry-only` for independent pre-input windows;
+it writes one snapshot per boundary rather than three. Native capture ranges
+default to 512 MiB; larger deliberate captures require `--capture-budget-mib N`.
+See [`../../analysis/workspace_artifact_retention.md`](../../analysis/workspace_artifact_retention.md).
+
 Gameplay behavior and visuals at equivalent states/events are the acceptance
 scope; exact Amiga frame timing is not required. Preserve physics, rules and
 source-defined timers while allowing native rendering/presentation cadence.

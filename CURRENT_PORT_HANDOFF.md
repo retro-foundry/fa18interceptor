@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Latest user direction (2026-10-07): stop workspace artifact growth. Cleanup
+reduces 60.501 GiB to 3.719 GiB, reclaiming 56.782 GiB; active build output is
+1.329 GiB. Source, media, recordings and Visual Studio setup are preserved.
+Builds/CTest now prune disposable output against a 4 GiB budget; comparison
+RAM is temporary by default, with only failed cases retained. Manual native
+captures default to 512 MiB. Original comparison windows are hash-verified
+`.dat.gz`; reports/logs survive. See `analysis/workspace_artifact_retention.md`.
+
 Latest connected startup fix: native cold entry now calls original C08EE4/
 C08EB8 defaults and saved-level owners before C08F26 bootstrap. This removes
 the type-zero root construction that left a region flag and sixteen-update

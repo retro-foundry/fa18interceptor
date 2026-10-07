@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from capture_workspace import CaptureWorkspace, retain_failure
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -17,9 +18,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_postflight_schedule_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/postflight-schedule/original-check')
+    parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
+    with CaptureWorkspace(work, args.keep_captures) as capture_dir:
+        check(args, work, capture_dir)
+
+
+def check(args, work, capture_dir):
     oracles = {}
     # These builds share GNU reference objects and must stay sequential.
     for name in ('mode_entry', 'frame_body'):
@@ -33,7 +40,9 @@ def main():
     for kind in ('four', 'five', 'ready'):
         case = work / kind
         case.mkdir(parents=True, exist_ok=True)
-        prefix = case / 'frame'
+        capture_case = capture_dir / kind
+        capture_case.mkdir(parents=True, exist_ok=True)
+        prefix = capture_case / 'frame'
         run = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                               str(case / 'pilot'), str(prefix), kind], cwd=ROOT,
                              capture_output=True, text=True, timeout=45)
@@ -65,6 +74,7 @@ def main():
                     log.write(comparison.stdout + comparison.stderr)
                     log.flush()
                     if comparison.returncode:
+                        retain_failure(capture, case)
                         raise RuntimeError(comparison.stderr or comparison.stdout)
                     for line in comparison.stdout.splitlines():
                         if line.startswith('Complete original file owners reached DOS Write'):

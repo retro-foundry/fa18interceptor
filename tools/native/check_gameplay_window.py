@@ -8,9 +8,11 @@ Both complete 320x200 drawing pages are checked, excluding fade colours only.
 """
 import argparse
 import hashlib
+import gzip
 import json
 from pathlib import Path
 import subprocess
+from capture_workspace import CaptureWorkspace, retain_failure
 
 from check_gameplay_checkpoint import ROOT, compare_gameplay, compare_record_state, integer, span
 
@@ -24,7 +26,8 @@ def main():
     parser.add_argument('--source-first', type=int, required=True)
     parser.add_argument('--native-first', type=int, required=True)
     parser.add_argument('--count', type=int, required=True)
-    parser.add_argument('--out', type=Path, required=True, help='retain native captures and comparison report here')
+    parser.add_argument('--out', type=Path, required=True, help='retain comparison report and first failing capture here')
+    parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
     if min(args.source_first, args.native_first, args.count) <= 0:
         parser.error('first iterations and count must be positive')
@@ -32,19 +35,25 @@ def main():
         parser.error('a window requires at least two boundaries; use check_gameplay_checkpoint.py for one')
     source_paths = [Path(f'{args.source_prefix}.{args.source_first + i}.dat') for i in range(args.count)]
     for path in source_paths:
-        if not path.is_file():
+        if not path.is_file() and not Path(str(path) + '.gz').is_file():
             parser.error(f'missing original boundary: {path}; capture it once before comparing')
     args.out.mkdir(parents=True, exist_ok=True)
+    with CaptureWorkspace(args.out, args.keep_captures) as capture_dir:
+        check(args, source_paths, capture_dir)
+
+
+def check(args, source_paths, capture_dir):
     replay = args.replay
     if replay is None:
         replay = args.out / 'intro.e9k'
         replay.write_text('E9K_INPUT_V1\nF 1800 K 32 0 0 1\nF 1802 K 32 0 0 0\n')
-    prefix = args.out / 'native'
+    prefix = capture_dir / 'native'
     result = subprocess.run([str(args.runner.resolve()), '--headless', '--frames', '100000',
                              '--input', str(args.input.resolve()),
                              '--iterations', str(args.native_first + args.count),
                              '--replay', str(replay.resolve()), '--save-dir', str(args.out / 'pilot'),
-                             '--frame-capture', f'{args.native_first}+{args.count}', str(prefix.resolve())],
+                             '--frame-capture', f'{args.native_first}+{args.count}', str(prefix.resolve()),
+                             '--frame-capture-entry-only'],
                             cwd=ROOT, check=True, capture_output=True, text=True, timeout=60)
     stats = json.loads(result.stdout)
     assert stats['frame_capture_complete'] and not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
@@ -52,8 +61,11 @@ def main():
     for i, path in enumerate(source_paths):
         native_iteration = args.native_first + i
         native_path = Path(f'{prefix}.{native_iteration}.entry.dat')
-        source, native = path.read_bytes(), native_path.read_bytes()
+        source = path.read_bytes() if path.is_file() else gzip.decompress(Path(str(path) + '.gz').read_bytes())
+        native = native_path.read_bytes()
         differences = compare_gameplay(source, native)
+        if differences and not any(row['differences'] for row in frames):
+            retain_failure(Path(str(prefix) + f'.{native_iteration}'), args.out)
         planes = b''.join(span(source, integer(source, 0xC4566E + p * 4, 4), 8000) for p in range(8))
         drawings.add(hashlib.sha256(planes).hexdigest())
         motion.add(hashlib.sha256(span(source, 0xC46190, 26)).hexdigest())
