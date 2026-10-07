@@ -9,6 +9,7 @@
 #define FA18_NATIVE
 #define draw_line host_draw_line
 #define draw_line_to_row host_draw_line_to_row
+#define draw_line_to_row_result host_draw_line_to_row_result
 #define draw_stores_icons host_draw_stores_icons
 #define draw_stores_icon_stream host_draw_stores_icon_stream
 #include "../../port/game/hud_stores.c"
@@ -177,15 +178,16 @@ static int hud_owners(void) {
         {0xc11bfc,update_message},{0xc11b44,tick_notification_cadence}
     };
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
-    uint8_t *expected=malloc(0x100000);unsigned count=0,return_count=0,odd_return_count=0;
+    uint8_t *expected=malloc(0x100000);unsigned count=0,return_count=0,odd_return_count=0,marker_return_count=0;
     memcpy(saved,fa18_machine,sizeof *saved);
-    for(unsigned variant=0;variant<12;++variant) {
+    for(unsigned variant=0;variant<14;++variant) {
         for(unsigned test=0;test<sizeof cases/sizeof cases[0];++test) {
             const int text_return=cases[test].host==check_scale_return || cases[test].host==check_message_return ||
                 cases[test].host==check_speed_return || cases[test].host==check_altitude_return || cases[test].host==check_heading_return;
             const int has_return=text_return || cases[test].host==check_indicator_return || cases[test].host==check_mode_return;
             if(variant>=5 && !has_return) continue;
-            if(variant>=10 && !text_return) continue;
+            if(variant>=10 && variant<12 && !text_return) continue;
+            if(variant>=12 && cases[test].host!=check_indicator_return && cases[test].host!=check_mode_return) continue;
             memcpy(fa18_machine,saved,sizeof *saved);
             const int16_t origins[]={0,-3,3,-20,20};
             wr_u16(SPAN_ORIGIN,(uint16_t)origins[variant%5]);
@@ -198,7 +200,7 @@ static int hud_owners(void) {
             wr_u8(BAR_REDRAWS_A,redraws);wr_u8(BAR_REDRAWS_B,redraws);wr_u8(BAR_REDRAWS_C,redraws);
             wr_u8(BAR_REDRAWS_D,redraws);wr_u8(BAR_REDRAWS_E,redraws);wr_u8(BAR_REDRAWS_F,redraws);
             wr_u8(SCALE_REDRAWS,redraws);
-            if(variant>=10) {
+            if(variant>=10 && variant<12) {
                 /* Validation-only odd destinations reach the actual small-text
                  * fault hook. Bars/blitter owners keep their separate fixtures. */
                 const gaddr planes=rd_u32(PAGE_PLANE_TABLE);
@@ -207,6 +209,16 @@ static int hud_owners(void) {
                 wr_u8(CONTEXT_SELECT,(uint8_t)(variant-10));
                 wr_u8(CONTEXT_READOUTS,1);wr_u16(COCKPIT_FLAGS,rd_u16(COCKPIT_FLAGS)|0x40);
                 wr_u8(TEXT_ALWAYS,1);
+            }
+            if(variant>=12) {
+                /* Actual indicator/mode marker children, plus their last-row
+                 * rejection preserving the preceding HUD result. */
+                wr_u16(SPAN_ORIGIN,0);wr_u16(SPAN_ORIGIN_Y,0);
+                wr_u16(REDRAW_STATE_WORD,variant==13?20:0);
+                wr_u8(BAR_REDRAWS_A,3);wr_u8(BAR_REDRAWS_B,0);
+                wr_u8(BAR_REDRAWS_C,0);wr_u8(BAR_REDRAWS_E,0);
+                wr_u8(CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD)+2,
+                    rd_u8(CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD)+2)|0x80);
             }
             if(cases[test].entry==0xc31226u) {
                 wr_u8(GAUGE_REFRESH,(uint8_t)(variant%3));
@@ -226,7 +238,8 @@ static int hud_owners(void) {
                         cases[test].entry,variant,(uint8_t)REG_D[4],checked_return.value);return 0;
                 }
                 ++return_count;
-                if(variant>=10 && rd_u16(ERROR_CODE)==0x46) ++odd_return_count;
+                if(variant>=10 && variant<12 && rd_u16(ERROR_CODE)==0x46) ++odd_return_count;
+                if(variant>=12 && checked_return.owner==NATIVE_INPUT_RETURN_HUD_LINE) ++marker_return_count;
             }
             unsigned differences=0;
             for(unsigned i=0;i<0xffc00;++i) {
@@ -241,8 +254,9 @@ static int hud_owners(void) {
         }
     }
     if(odd_return_count<6) {fputs("HUD fixtures did not exercise normal and context odd-destination fault returns\n",stderr);return 0;}
+    if(marker_return_count!=2) {fputs("HUD fixtures missed indicator/mode marker returns or last-row rejection\n",stderr);return 0;}
     memcpy(fa18_machine,saved,sizeof *saved);free(saved);free(before);free(expected);
-    printf("%u HUD instrument/panel cases match original non-stack RAM; %u defined returns match, including %u odd-destination fault returns\n",count,return_count,odd_return_count);return 1;
+    printf("%u HUD instrument/panel cases match original non-stack RAM; %u defined returns match, including %u odd-destination fault and %u marker-line returns\n",count,return_count,odd_return_count,marker_return_count);return 1;
 }
 #ifndef FA18_HUD_ORACLE_LIBRARY
 int main(int argc,char **argv) {

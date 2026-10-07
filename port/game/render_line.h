@@ -35,6 +35,13 @@ void draw_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
  * to row $C7). */
 void draw_line_to_row(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row);
 
+/* C2FA7E publishes its actual blit size even when no plane is enabled.
+ * A rejected lower-end-first line has already computed its signed X delta;
+ * the other rejected starts preserve the caller's preceding output. */
+enum LineDrawKind { LINE_DRAW_NONE, LINE_DRAW_X_DELTA, LINE_DRAW_SIZE };
+typedef struct { enum LineDrawKind kind; int16_t x_delta; uint16_t size; } LineDrawResult;
+LineDrawResult draw_line_to_row_result(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row);
+
 /* The two view-space points at SEGMENT_POINTS projected and joined by a
  * line; 0, drawing nothing, when either is behind or outside the view
  * pyramid ($C2ED70). */

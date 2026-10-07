@@ -217,6 +217,9 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_hud
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_hud.py
                 --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_raster
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_raster.py
+                --runner $<TARGET_FILE:fa18_native>)
     add_test(NAME fa18_native_clock
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_clock.py
                 --runner $<TARGET_FILE:fa18_native>)

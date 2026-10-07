@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #include "memory.h"
+#include "render_line.h"
 
 /* Cockpit panel pieces drawn with the blitter, each clipped to the view
  * with bound_span: indicator bars filled or cleared in one plane, and
@@ -18,7 +19,7 @@
 #define BAR_CLEAR 0x030A
 #define BAR_SET   0x03FA
 enum BarDrawKind { BAR_DRAW_NONE, BAR_DRAW_DESTINATION, BAR_DRAW_MARKER_LINE };
-typedef struct { enum BarDrawKind kind; gaddr destination; } BarDrawResult;
+typedef struct { enum BarDrawKind kind; gaddr destination; LineDrawResult line; } BarDrawResult;
 /* Actual C30CCA/C30CE0 destination, or no assignment when clipped. */
 BarDrawResult fill_bar_result(uint16_t con0, int16_t plane, uint32_t rows, int16_t position, int16_t words,
                              uint16_t size, int16_t modulo, uint16_t first_mask, uint16_t last_mask);

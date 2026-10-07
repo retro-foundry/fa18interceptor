@@ -22,6 +22,10 @@ static NativeInputReturn bar_return(NativeInputReturn prior,BarDrawResult bar) {
     if(bar.kind==BAR_DRAW_NONE) return prior;
     if(bar.kind==BAR_DRAW_DESTINATION)
         return (NativeInputReturn){(uint8_t)bar.destination,NATIVE_INPUT_RETURN_HUD_BAR};
+    if(bar.kind==BAR_DRAW_MARKER_LINE && bar.line.kind==LINE_DRAW_SIZE)
+        return (NativeInputReturn){(uint8_t)bar.line.size,NATIVE_INPUT_RETURN_HUD_LINE};
+    if(bar.kind==BAR_DRAW_MARKER_LINE && bar.line.kind==LINE_DRAW_X_DELTA)
+        return (NativeInputReturn){(uint8_t)bar.line.x_delta,NATIVE_INPUT_RETURN_HUD_LINE};
     return (NativeInputReturn){0};
 }
 NativeInputReturn native_hud_draw(uint16_t saved_tick) {

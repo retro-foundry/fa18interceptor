@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected HUD marker return (2026-10-07): line sizes and defined
+clipped-start X deltas now reach first depleted recorder flare/chaff commands.
+Other rejected starts preserve the preceding result. 79 full bodies and 96
+input parents match original RAM/drawing, including twelve fresh Free Flight
+marker frames. Two snapshots each pass 128 line-return/RAM cases; focused HUD
+checks pass 492 RAM cases and 252 returns. Ten affected checks and all builds
+pass. See `analysis/native_hud_marker_input_return.md`. Active grid/aircraft
+marker composition, remaining HUD/command contracts and full acceptance stay open.
+
 Latest small-text fault return (2026-10-07): the original release fault hook
 is RTS, so an odd destination preserves the selected glyph after setting $46.
 The native renderer now retains that result through its existing drawing skip.

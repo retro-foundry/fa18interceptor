@@ -1,5 +1,13 @@
 # Native port runner
 
+HUD marker lines now publish their actual size or defined clipped-start X
+delta to first depleted recorder input. Seventy-nine full bodies and 96 input
+parents match original compared RAM/drawing. Two runtime snapshots each pass
+128 line-return/RAM cases; focused HUD checks pass 492 RAM cases and 252 returns.
+The raster check is now included in native CTest. See
+`../../analysis/native_hud_marker_input_return.md`. Active grid/aircraft-marker
+return composition and whole-game acceptance remain open.
+
 Small-text odd destinations now preserve their selected glyph through the
 original release fault return. Focused HUD checks match 480 RAM cases and 237
 defined returns, including 27 odd-destination cases in cockpit/context views.

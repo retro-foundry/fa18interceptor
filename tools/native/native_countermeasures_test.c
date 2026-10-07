@@ -10,6 +10,7 @@
 #include "view.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
     NativeFrameCapture capture;
@@ -27,6 +28,8 @@ typedef struct {
     unsigned debug_case;
     int label_sampling;
     unsigned label_case;
+    int marker_sampling;
+    unsigned marker_case;
 } CountermeasureFixture;
 static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const unsigned settings=variant%12,mode=1+settings/4;
@@ -99,6 +102,24 @@ static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint16_t saved_tick,void *context) {
     CountermeasureFixture *fixture=context;
     fixture->clock.iteration=game->update_iterations;
+    if(fixture->marker_sampling) {
+        if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)!=8 && (saved_tick&31)!=16) {
+            /* Controlled indicator-line redraw after normal Free Flight startup;
+             * later bar gates skip, leaving the actual horizontal line result. */
+            wr_u8(BAR_REDRAWS_A,3);wr_u8(BAR_REDRAWS_B,0);
+            wr_u8(BAR_REDRAWS_C,0);wr_u8(BAR_REDRAWS_E,0);
+            snprintf(fixture->path,sizeof fixture->path,"%s.marker.%u",fixture->prefix,fixture->marker_case);
+            fixture->capture=(NativeFrameCapture){.replay=&fixture->clock,.prefix=fixture->path,
+                .iteration=game->update_iterations,.count=1};
+        }
+        if(fixture->capture.prefix)
+            native_frame_capture(game,boundary,saved_tick,&fixture->capture);
+        if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
+            printf("{\"marker_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
+                fixture->marker_case,fixture->capture.before_tick,fixture->capture.after_tick,
+                fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value);
+        return;
+    }
     if(fixture->label_sampling) {
         if(boundary==NATIVE_FRAME_BODY_BEGIN) {
             /* Validation-only map/view selection after ordinary startup.
@@ -315,6 +336,32 @@ int main(int argc,char **argv) {
     for(unsigned i=0;i<24;++i) if(!pending_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<2;++i) if(!fd_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<4;++i) if(!collision_parent(game,&fixture,i)) goto done;
+    /* Marker frames get their own ordinary disk/key startup, independent of
+     * the preceding controlled map views and collision parent state. */
+    native_frontend_close(game);memset(game,0,sizeof *game);
+    if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
+    while(game->ticks<7800) {
+        for(unsigned i=0;i<5;++i) {
+            if(game->ticks==times[i]) native_frontend_event(game,keys[i],1);
+            if(game->ticks==times[i]+2) native_frontend_event(game,keys[i],0);
+        }
+        native_frontend_tick(game);
+    }
+    fixture.capture=(NativeFrameCapture){0};fixture.marker_sampling=1;
+    game->observe_frame=observe;game->frame_context=&fixture;
+    for(unsigned i=0;i<12;++i) {
+        fixture.marker_case=i;fixture.capture=(NativeFrameCapture){0};
+        wr_u8(RECORDER_MODE,0);
+        unsigned limit=game->ticks+100;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete || game->completed_input_return.owner!=NATIVE_INPUT_RETURN_HUD_LINE ||
+           !pending_input(game,&fixture,84+i)) {
+            fprintf(stderr,"Marker-line carry integration failed at case %u: span=%d row=%d bars=%u/%u/%u/%u map=%u hud=%u\n",i,
+                rd_s16(SPAN_ORIGIN_Y),rd_s16(REDRAW_STATE_WORD),rd_u8(BAR_REDRAWS_A),rd_u8(BAR_REDRAWS_B),
+                rd_u8(BAR_REDRAWS_C),rd_u8(BAR_REDRAWS_E),rd_u8(ORIGIN_ENABLE),rd_u8(UPDATE_HUD_MODE));goto done;
+        }
+    }
+    fixture.marker_sampling=0;
     result=0;
 done:
     if(game) {native_frontend_close(game);free(game);}return result;

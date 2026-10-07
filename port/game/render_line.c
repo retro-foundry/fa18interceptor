@@ -31,6 +31,7 @@ int setup_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row,
     } else {
         line->rows = (int16_t)(y0 - y1 - 1);
         dx = (int16_t)(x0 - x1);
+        line->dx = dx; /* C2FAC2 computes the delta before the last-row rejection. */
         line->row = (int16_t)(y1 + 1);
         if (line->row > last_row) return 0;
         line->x = x1;
@@ -96,12 +97,20 @@ void draw_line(int16_t x0, int16_t y0, int16_t x1, int16_t y1) {
 }
 
 void draw_line_to_row(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row) {
+    draw_line_to_row_result(x0,y0,x1,y1,last_row);
+}
+
+LineDrawResult draw_line_to_row_result(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row) {
     LineSetup line;
     gaddr planes;
     int bit;
 
     wr_u16(POLY_PLANE_BITS, rd_u16(CURRENT_COLOUR));
-    if (!setup_line(x0, y0, x1, y1, last_row, 1, 0, &line)) return;
+    if (!setup_line(x0, y0, x1, y1, last_row, 1, 0, &line)) {
+        if((uint16_t)y1<(uint16_t)y0)
+            return (LineDrawResult){.kind=LINE_DRAW_X_DELTA,.x_delta=line.dx};
+        return (LineDrawResult){0};
+    }
 
 #ifdef FA18_NATIVE
     planes = rd_u32(PAGE_PLANE_TABLE);
@@ -137,6 +146,7 @@ void draw_line_to_row(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t la
         custom_write(BLTSIZE, line.size);
     }
 #endif
+    return (LineDrawResult){.kind=LINE_DRAW_SIZE,.size=line.size}; /* C2FB42-C2FB46. */
 }
 
 void reset_line_style(void) {

@@ -74,6 +74,9 @@ int fill_bar(uint16_t con0, int16_t plane, uint32_t rows, int16_t position, int1
 static BarDrawResult last_bar(BarDrawResult prior,BarDrawResult next) {
     return next.kind==BAR_DRAW_NONE?prior:next;
 }
+static BarDrawResult last_line(BarDrawResult prior,LineDrawResult line) {
+    return line.kind==LINE_DRAW_NONE?prior:(BarDrawResult){.kind=BAR_DRAW_MARKER_LINE,.line=line};
+}
 
 static int is_on_screen(int32_t x, int16_t last) {
     return x >= 0 && (int16_t)x <= last;
@@ -89,8 +92,7 @@ BarDrawResult draw_indicator_bars(void) {
             int16_t y = (int16_t)(0xB4 + rd_s16(REDRAW_STATE_WORD));
             wr_u32(LINE_STYLE, 0xFFFFF);
             wr_u16(CURRENT_COLOUR, (rd_u8(record + 3) & 8) ? 9 : 0);
-            draw_line_to_row((int16_t)x, y, (int16_t)(x + 9), y, 0xC7);
-            result.kind=BAR_DRAW_MARKER_LINE;
+            result=last_line(result,draw_line_to_row_result((int16_t)x, y, (int16_t)(x + 9), y, 0xC7));
         }
     }
     if (counts_down(BAR_REDRAWS_B)) {
@@ -166,9 +168,8 @@ BarDrawResult draw_mode_bar(void) {
         if (!is_on_screen(x0, 0x13F) || !is_on_screen(x1, 0x13F)) return result;
         wr_u32(LINE_STYLE, 0xFFFFF);
         wr_u16(CURRENT_COLOUR, 0);
-        draw_line_to_row((int16_t)x0, (int16_t)(0xC0 + rd_s16(REDRAW_STATE_WORD)), (int16_t)x1,
-                         (int16_t)(0xC3 + rd_s16(REDRAW_STATE_WORD)), 0xC7);
-        result.kind=BAR_DRAW_MARKER_LINE;
+        result=last_line(result,draw_line_to_row_result((int16_t)x0, (int16_t)(0xC0 + rd_s16(REDRAW_STATE_WORD)), (int16_t)x1,
+                         (int16_t)(0xC3 + rd_s16(REDRAW_STATE_WORD)), 0xC7));
     }
     return result;
 }

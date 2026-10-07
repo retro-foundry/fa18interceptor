@@ -19,6 +19,7 @@ extern int64_t fa18_next_event;
 #define setup_line host_setup_line
 #define draw_line host_draw_line
 #define draw_line_to_row host_draw_line_to_row
+#define draw_line_to_row_result host_draw_line_to_row_result
 #define reset_line_style host_reset_line_style
 #define draw_projected_segment host_draw_projected_segment
 #define draw_clipped_segment host_draw_clipped_segment
@@ -161,6 +162,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #undef setup_line
 #undef draw_line
 #undef draw_line_to_row
+#undef draw_line_to_row_result
 #undef reset_line_style
 #undef draw_projected_segment
 #undef draw_clipped_segment

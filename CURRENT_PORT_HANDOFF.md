@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest connected HUD marker return (2026-10-07): the actual line renderer
+publishes its blit size, or the signed X delta computed before a lower-start
+last-row rejection. Other rejected starts preserve the preceding output.
+Both HUD marker callers compose this result through existing bar/text ordering.
+79 complete bodies and 96 recorder input parents match original compared RAM
+and drawing, including twelve new marker frames from a fresh Free Flight.
+Two snapshots each pass 128 line-return/non-stack RAM cases; focused HUD
+checks pass 492 RAM cases and 252 defined returns. Ten affected checks and all
+native/reference builds pass. The raster checker is now registered in CTest
+with its current source-backed Free Flight stage expectation. See
+`analysis/native_hud_marker_input_return.md`. Full port remains active.
+
 Latest small-text fault return (2026-10-07): odd destinations retain the
 selected glyph after setting error $46, as the original release C06C02 RTS
 does. The existing drawing skip is unchanged. Focused HUD comparisons match
