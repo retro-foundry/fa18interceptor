@@ -4,6 +4,10 @@ This is host C11 code. The Amiga SDK is reference material only: this library
 does not include SDK headers, link SDK libraries, or invoke an Amiga compiler.
 It builds independently of Interceptor, Musashi, SDL, ROMs and savestates.
 
+`host_keys.c` owns physical Amiga raw-key identities for character/SDL2 host
+symbols and SDL1/libretro replay symbols. Both native and reference runners
+consume this shared mapper; game text translation remains a separate owner.
+
 ```sh
 cmake -S port/amiga -B build/amiga-compat
 cmake --build build/amiga-compat --config Release

@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest user-reported controls fix (2026-10-07): comma/period rudder and SDL
+numeric keypad views now reach the native input queue. The former native mapper
+used a typed-text table that omits control keys and did not accept SDL keypad
+identities. Native and reference runners now share the unchanged physical Amiga
+host mapper in `port/amiga/host_keys.c`. The SDL event boundary is shared by
+the playable entry and a normal Free Flight integration test. Twenty-six real
+SDL-queue input/stage intervals and 52 sampled bodies match original compared
+RAM/display. Both rudder directions move the source control axis and releases
+clear the input; external/cockpit view changes work with either Num Lock flag.
+Passing captures are temporary. See `analysis/native_host_keys_milestone.md`.
+The complete-port goal remains active.
+
 Latest connected input fix (2026-10-07): depleted recorder flare/chaff commands
 now complete when C1C23C's input queue is already claimed. Its gate makes the
 inherited event dead while stock/message and modifier clearing still execute.

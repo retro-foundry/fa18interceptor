@@ -2,6 +2,16 @@
 
 ## Objective and user constraints
 
+Latest user controls report (2026-10-07): rudder and numeric keypad external
+views did not work. Native host input now shares the reference physical Amiga
+mapper; typed-text translation is no longer used to identify physical keys.
+Comma/period and SDL/legacy keypad press/release events are connected. A normal
+Free Flight test drives the SDL event queue through the playable host handler;
+26 input/stage intervals and 52 bodies match original compared RAM/display,
+including opposite rudder control-axis motion, releases and external/cockpit
+view changes with either Num Lock flag. See
+`analysis/native_host_keys_milestone.md`. Full goal remains unfinished.
+
 Latest user direction (2026-10-07): clear generated output and prevent renewed
 disk growth. Workspace 60.501 -> 3.719 GiB; 56.782 GiB reclaimed. Build/CTest
 cleanup now uses a 4 GiB budget, native comparisons discard passing RAM, and

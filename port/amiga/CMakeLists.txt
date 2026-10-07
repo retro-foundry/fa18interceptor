@@ -7,6 +7,7 @@ add_library(amiga_compat STATIC ../game/disk.c ../game/hunk.c guest_memory.c hun
 target_sources(amiga_compat PRIVATE sha256.c)
 target_sources(amiga_compat PRIVATE rgb4.c)
 target_sources(amiga_compat PRIVATE viewport_list.c)
+target_sources(amiga_compat PRIVATE host_keys.c)
 target_include_directories(amiga_compat PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 include(CTest)
 if(BUILD_TESTING)

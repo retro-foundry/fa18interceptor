@@ -30,6 +30,7 @@ def source_files(main: Path) -> list[Path]:
         Path("port/machine/bus.c"), Path("port/machine/blitter.c"),
         Path("port/machine/display.c"), Path("port/machine/input.c"),
         Path("port/amiga/rom_audit.c"),
+        Path("port/amiga/host_keys.c"),
         Path("port/amiga/runtime_guard.c"),
         Path("port/amiga/service_dispatch.c"),
         Path("port/amiga/exec_lists.c"),

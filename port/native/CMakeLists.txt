@@ -57,6 +57,7 @@ add_library(fa18_native_runtime OBJECT replay.c frame_capture.c ../game/native/f
     ../game/menu_context_finish.c ../game/target_heading.c
     ../game/disk.c ../game/hunk.c ../romfree/media.c ../amiga/sha256.c
     ../amiga/ilbm.c ../amiga/pcm_output.c ../amiga/host_compat.c ../amiga/guest_memory.c)
+target_sources(fa18_native_runtime PRIVATE host_input.c ../amiga/host_keys.c)
 add_executable(fa18_native main.c)
 target_include_directories(fa18_native_runtime PUBLIC ../game ../amiga ../romfree)
 target_compile_definitions(fa18_native_runtime PUBLIC FA18_NATIVE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
@@ -169,6 +170,13 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
             ${CMAKE_CURRENT_BINARY_DIR}/countermeasure-save
             ${CMAKE_CURRENT_BINARY_DIR}/countermeasure)
+    add_executable(fa18_native_host_keys_test ../../tools/native/native_host_keys_test.c)
+    target_link_libraries(fa18_native_host_keys_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_host_keys
+        COMMAND fa18_native_host_keys_test
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+            ${CMAKE_CURRENT_BINARY_DIR}/host-keys-save
+            ${CMAKE_CURRENT_BINARY_DIR}/host-keys)
     add_executable(fa18_native_scene_exit_test ../../tools/native/native_scene_exit_test.c)
     target_link_libraries(fa18_native_scene_exit_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_scene_exit

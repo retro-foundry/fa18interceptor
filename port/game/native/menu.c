@@ -21,6 +21,7 @@
 #include "../view.h"
 #include "../cockpit.h"
 #include "../messages.h"
+#include "../../amiga/host_keys.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -121,31 +122,11 @@ static void flight_arguments(void *context,enum FlightCommandPhase phase,
     else if(phase==FLIGHT_SOUND_CARRY) command->carried_event=(int16_t)value;
 }
 unsigned native_menu_raw_key(int key,int down) {
-    unsigned raw=0xff;
-    if(key>='a' && key<='z') key-=32;
-    if(key>='1' && key<='9') raw=(unsigned)(key-'0');
-    else if(key=='0') raw=10;
-    else if(key>=282 && key<=291) raw=(unsigned)(key-282+0x50); /* E9K SDL1 F1-F10 */
-    else if(key==27) raw=0x45;
-    else if(key=='\r') raw=0x44;
-    else if(key=='\b') raw=0x41;
-    else if(key==127) raw=0x46;
-    else if(key==' ') raw=0x40;
-    /* Same physical keys as port/machine/input.c's reference host mapping.
-     * The source text translation table omits these throttle characters. */
-    else if(key=='-') raw=0x0b;
-    else if(key=='=') raw=0x0c;
-    else if(key=='\\') raw=0x0d;
-    else if(key==273) raw=0x4c;
-    else if(key==274) raw=0x4d;
-    else if(key==275) raw=0x4e;
-    else if(key==276) raw=0x4f;
-    else if(key>=32 && key<127) {
-        for(unsigned i=0;i<0x40;++i) if(rd_u8(0xc331ceu+i)==(uint8_t)key) { raw=i; break; }
-    }
-    if(raw==0xff) return raw;
-    if(!down) raw|=0x80;
-    return raw;
+    /* Host/replay keys identify physical keys. C331CE translates raw events
+     * for typed text and deliberately omits rudder and other control keys. */
+    const int raw=key>=256 && key<0x40000000
+        ?amiga_host_legacy_raw_key(key):amiga_host_raw_key(key);
+    return raw<0?0xffu:(unsigned)raw|(down?0u:0x80u);
 }
 void native_menu_key(NativeFrontend *game,int key,int down) {
     unsigned raw=native_menu_raw_key(key,down);

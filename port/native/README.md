@@ -134,6 +134,12 @@ The aircraft selection resets the recorder/root through C10B90 and updates the
 records. The view/control update completes startup into C10DAE; P pauses/resumes.
 The `scene-setup` screen label also covers this initial flight loop. `=` and `-`
 use the source throttle controls, and arrow keys use the source stick controls.
+Comma and period use the original rudder controls; releasing either clears
+the rudder input. Numeric keypad view controls now accept live SDL keys and
+legacy replay identities. Keypad 2 selects the outside view, 4/6 cycle view
+angles, and 8 returns to the cockpit under the normal flight context. The
+physical keypad remains distinct from the numbered menu keys, with either
+Num Lock state. See [`../../analysis/native_host_keys_milestone.md`](../../analysis/native_host_keys_milestone.md).
 F and C execute source flare/chaff stock, messages and control-effect launch,
 motion, drawing and ground-contact expiry. Keyboard depleted-stock selection
 and SHIFT-F's mode-6 sound are connected. Recorder $FD function keys also
