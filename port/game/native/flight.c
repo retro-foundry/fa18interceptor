@@ -81,6 +81,8 @@ void native_flight_initialize(NativeFrontend *game) {
     wr_u32(LONG_TABLE,0x3000);
     int32_t position[3]={0};
     const SceneBootstrapHooks hooks={storage_child,NULL,position};
+    initialize_scene_startup_defaults(); /* C0F550 -> C08EE4 */
+    load_saved_scene_level(); /* C0F556 -> C08EB8 */
     bootstrap_scene(&hooks);
     game->record_updates=1;
 }

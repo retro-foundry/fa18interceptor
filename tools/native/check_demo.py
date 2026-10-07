@@ -50,10 +50,16 @@ def main():
                         '--save-dir', str(work / 'initial-pilot'), '--data-out', str(initial)],
                        cwd=ROOT, check=True, capture_output=True, text=True, timeout=10)
         baseline = initial.read_bytes()
+        assert value(baseline, 0xC46184 + 0x62, 1) == 0x11, 'cold startup selected the wrong aircraft kind'
+        assert value(baseline, 0xC46184 + 0x4C, 2) == 0xFFFF, 'cold root countdown differs'
+        assert not value(baseline, 0xC46184 + 4, 1) & 4, 'cold root region flag differs'
         assert any(field(baseline, value(baseline, 0xC4FDA4, 4), 3676)), 'disk recorder bytes missing'
         assert any(field(baseline, value(baseline, 0xC4FDB0, 4), 14704)), 'disk recorder words missing'
         if args.source_initial:
             reference = args.source_initial.read_bytes()
+            for slot in range(16):
+                address = 0xC46184 + 512 * slot
+                assert field(baseline, address, 0xA4) == field(reference, address, 0xA4), f'cold record {slot} differs'
             for pointer, length in ((0xC4FDA4, 3676), (0xC4FDB0, 14704)):
                 assert field(baseline, value(baseline, pointer, 4), length) == field(
                     reference, value(reference, pointer, 4), length), 'original disk recorder asset mismatch'

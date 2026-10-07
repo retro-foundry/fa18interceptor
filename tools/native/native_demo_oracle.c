@@ -9,6 +9,29 @@ int main(int argc,char **argv) {
     if(!state||!rom||!data||nd!=0x100000||!m||!before||!expected) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;native_clock_set(5000);
+    for(unsigned test=0;test<32;++test) {
+        memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+        /* Cold defaults must overwrite prior selectors. The saved level is
+         * a word whose low byte is copied, including signed byte values. */
+        wr_u16(rd_u32(MODE_TABLE)+2,(uint16_t)(0x1200u+test*17u));
+        wr_u8(POSTFLIGHT_FAILURE_INPUT,(uint8_t)test);
+        wr_u8(SCENE_DISPATCH_LIMIT,0x7f);wr_u8(SCENE_DISPATCH_LIMIT_PREVIOUS,0x80);
+        wr_u8(VIEWPORT_MODE,2);wr_u8(VIEWPORT_TARGET,3);
+        wr_u8(TABLE_CLEAR_MODE,2);wr_u8(COMMAND_EVENT_COUNTER,0x80);
+        wr_u8(CONTEXT_GATE,0);wr_u8(0xc457d4u,0);wr_u16(0xc50412u,123);
+        memcpy(before,m,sizeof *m);
+        if(!original_parent(test&1?0xc08eb8:0xc08ee4)) return 1;
+        memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
+        memcpy(m,before,sizeof *m);
+        if(test&1) load_saved_scene_level(); else initialize_scene_startup_defaults();
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                fprintf(stderr,"cold scene case %u at %06X: source %02X native %02X\n",
+                    test,i<0x80000?i:0xc00000+i-0x80000,expected[i],actual);return 1;
+            }
+        }
+    }
     const gaddr entries[]={0xc0fece,0xc0fa04,0xc0fa4c,0xc0fa80,0xc10c68};
     for(unsigned test=0;test<15;++test) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
@@ -58,6 +81,6 @@ int main(int argc,char **argv) {
             }
         }
     }
-    puts("15 native demo startup parents and 16 primary/secondary launch cases match original non-stack RAM");
+    puts("32 cold defaults/level parents, 15 native demo startup parents and 16 primary/secondary launch cases match original non-stack RAM");
     free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

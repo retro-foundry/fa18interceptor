@@ -6,6 +6,15 @@ The active goal is **get gameplay going and matching the recorded runs**.
 It is still active and unfulfilled. The user requested this file to transfer
 context; this is not a request to cancel or mark the gameplay goal complete.
 
+Latest startup correction (2026-10-07): cold native entry now invokes C08EE4/
+C08EB8 before C08F26. All 16 initial cores and 9,376 complete record cores
+across 586 independent demo boundaries match, correcting the player region
+flag/countdown gap. Takeoff drawing passes 223/223; later drawing stays 83/363
+while player/camera/complete cores pass 363/363. Thirty-two cold source parents,
+disk-backed demo contracts, eight runtime gates and Free Flight/postflight
+comparisons pass. See `analysis/native_scene_startup_milestone.md`. Full goal
+remains active.
+
 - Latest user clarification: exact Amiga frame timing is not a completion
   requirement; this is a native port. Preserve gameplay physics, rules, input
   behavior and source-defined timers, while allowing different rendering and

@@ -10,6 +10,24 @@ static void observe(const SceneBootstrapHooks *hooks,enum SceneBootstrapPhase ph
 static void require_hooks(const SceneBootstrapHooks *hooks) {
     if(!hooks || !hooks->consume) abort();
 }
+void initialize_scene_startup_defaults(void) {
+    /* C0F4D8 calls C08EE4 before C0F812 builds the first scene. In
+     * particular, root placement consumes the selected aircraft at C45849;
+     * leaving it at the loaded hunk's zero chooses a different record kind. */
+    wr_u16(0xc503e8u+0x2au,0xfffc);
+    wr_u8(TABLE_CLEAR_MODE,0);
+    wr_u8(COMMAND_EVENT_COUNTER,0);
+    wr_u8(VIEWPORT_MODE,15); wr_u8(VIEWPORT_TARGET,15);
+    wr_u8(CONTEXT_GATE,1); wr_u8(0xc457d4u,1);
+    wr_u8(POSTFLIGHT_FAILURE_INPUT,0x11);
+}
+void load_saved_scene_level(void) {
+    /* C08EB8 follows C08EE4: retain the saved word's low byte in both
+     * selectors. Subsequent bootstrap restores the previous selector. */
+    uint8_t level=(uint8_t)rd_u16(rd_u32(MODE_TABLE)+2);
+    wr_u8(SCENE_DISPATCH_LIMIT,level);
+    wr_u8(SCENE_DISPATCH_LIMIT_PREVIOUS,level);
+}
 void prepare_scene_storage(const SceneBootstrapHooks *hooks) {
     unsigned slot,i;
     require_hooks(hooks);

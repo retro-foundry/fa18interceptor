@@ -23,6 +23,9 @@ typedef struct {
     void (*observe)(void *context, const SceneBootstrapEvent *event);
     void *context;
 } SceneBootstrapHooks;
+/* C08EE4/C08EB8: cold defaults and pilot-log level, before first bootstrap. */
+void initialize_scene_startup_defaults(void);
+void load_saved_scene_level(void);
 /* Complete C08F26 and its C0F920/C0F992 sequence callback wrappers. */
 /* Source prefix through root placement and template-gate construction. The
  * caller still owes record update and context refresh before full bootstrap. */

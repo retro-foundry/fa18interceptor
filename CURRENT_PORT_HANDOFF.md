@@ -1,14 +1,15 @@
 # Current playable port handoff
 
-Latest independent assessment extends demo ticks 222..584: all 363 player/
-camera boundaries and named motion/rates/pose/matrices across 5,808 record
-instances match. Strict drawing passes 83/363; later cockpit cache differences
-follow the source seconds-driven view-hold expiry/redraw path. Actual same-input
-frame body and original view-expiry parents pass. Full core diagnostics expose
-the player's region bit and sixteen-update countdown lead: 5,445/5,808 cores,
-zero complete record boundaries match. No gameplay change or new exclusion was
-made. See `analysis/native_later_demo_assessment.md`; next trace those startup
-record differences. Full goal remains unfinished.
+Latest connected startup fix: native cold entry now calls original C08EE4/
+C08EB8 defaults and saved-level owners before C08F26 bootstrap. This removes
+the type-zero root construction that left a region flag and sixteen-update
+countdown lead. All 16 initial cores and 9,376 complete cores across 586
+independent demo boundaries match. Takeoff drawing still passes 223/223;
+later player/camera/core state passes 363/363, drawing 83/363. The remaining
+seconds-driven drawing assessment is open. 32 original cold parents, disk-backed
+demo checks, eight affected runtime gates, Free Flight input/body and controlled
+postflight comparisons pass. See `analysis/native_scene_startup_milestone.md`
+and `analysis/native_later_demo_assessment.md`. Full goal remains unfinished.
 
 Latest connected batch: the reported demo outside-view clipping is corrected.
 C1F158/C1F2EE consumes the original model vertex; native composition had

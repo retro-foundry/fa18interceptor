@@ -4,6 +4,12 @@
 comparison tools; it makes no playable behavior change. The complete-port
 goal remains active.
 
+Update: `native_scene_startup_milestone.md` corrects the cold bootstrap caller.
+All 5,808 later complete record cores and all 363 complete record boundaries
+now match. The table below records the preceding investigation; its drawing
+and player/camera results remain unchanged. Original boundaries are now
+compressed `.dat.gz`; the window checker reads these without a fresh replay.
+
 ## Independent segment
 
 A focused original prefix of 6,000 PAL frames now retains source pre-input
@@ -72,15 +78,15 @@ prefix rather than replaying it again:
 python tools/native/check_gameplay_window.py --runner build/native-cmake/native/Release/fa18_native.exe --source-prefix build/native-flight/demo-later-review/source --source-first 2401 --native-first 2364 --count 363 --out build/native-flight/demo-later-review/checked
 ```
 
-Expected strict result: exit 1, 83 drawing matches, 363 player/camera matches,
-5,445 matching record cores and zero complete record boundaries. The normal
-checkpoint checker also exposes the player-core gaps at tick 222. Existing
+Current strict result: exit 1, 83 drawing matches, 363 player/camera matches,
+5,808 matching record cores and 363 complete record boundaries. Before the
+cold-start fix it reported 5,445 and zero respectively. Existing
 allocation/page/kinematic/camera rejection tests and the new core mutations
 pass. No runtime build is needed for this Python-only batch; executables remain
 those validated in `native_outside_camera_milestone.md`.
 
-Next, trace the player's +4C initialization/decrements and +04 bit-two producer
-through the actual setup/bootstrap/record callers. Do not seed the reference
-counter, clear the flag unconditionally or fit a preflight delay. Later/full
+The player's +4C/+04 gap was traced to omitted C08EE4/C08EB8 startup calls;
+their restored source order fixes it without seeding counters or clearing
+flags after construction. Next assess equivalent elapsed gameplay events. Later/full
 independent sequences, depleted pending recorder carry, normal mission success,
 typed-state migration, audio fidelity and the 20 ms target remain unfinished.
