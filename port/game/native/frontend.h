@@ -12,7 +12,7 @@ typedef struct NativeFrontend NativeFrontend;
 enum NativeInputReturnOwner { NATIVE_INPUT_RETURN_UNKNOWN, NATIVE_INPUT_RETURN_MESSAGE,
                               NATIVE_INPUT_RETURN_PAGE_CLEAR, NATIVE_INPUT_RETURN_HUD_BAR,
                               NATIVE_INPUT_RETURN_HUD_TEXT, NATIVE_INPUT_RETURN_REDRAW,
-                              NATIVE_INPUT_RETURN_DEBUG_TEXT };
+                              NATIVE_INPUT_RETURN_DEBUG_TEXT, NATIVE_INPUT_RETURN_SCENE_LABEL };
 typedef struct { uint8_t value; enum NativeInputReturnOwner owner; } NativeInputReturn;
 enum NativeFrameBoundary { NATIVE_FRAME_BODY_BEGIN, NATIVE_FRAME_BODY_END, NATIVE_FRAME_INPUT_BEGIN,
                            NATIVE_FRAME_OWNER_EXIT };

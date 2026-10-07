@@ -39,10 +39,14 @@ int main(int argc,char **argv) {
         for(unsigned i=0;i<9;++i) wr_u16(VIEW_ANGLE_MATRIX+2*i,i%4==0?256:0);
         wr_u16(LINE_LAST_ROW,199);wr_u32(PROJECTED_PAIR,0xffffffff);
         memcpy(before,m,sizeof *m);
-        native_frame_scene_labels();
+        const NativeInputReturn output=native_frame_scene_labels((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT});
         memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
         memcpy(m,before,sizeof *m);
         if(!hud_original(0xc2b3c2)) return 1;
+        if(output.owner==NATIVE_INPUT_RETURN_UNKNOWN || output.value!=(uint8_t)REG_D[4]) {
+            fprintf(stderr,"Scene-label return case %u: source %02X native %02X owner %u\n",
+                test,(uint8_t)REG_D[4],output.value,output.owner);return 1;
+        }
         unsigned differences=0;
         for(unsigned i=0;i<0xffc00;++i) {
             uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
@@ -62,6 +66,6 @@ int main(int argc,char **argv) {
         }
     }
     if(!visible || !numbers) {fputs("scene label fixtures did not draw points and numbers\n",stderr);return 1;}
-    printf("256 scene-label cases match original non-stack RAM; %u draw visible pixels, %u publish numbers\n",visible,numbers);
+    printf("256 scene-label cases match original non-stack RAM and returned input; %u draw visible pixels, %u publish numbers\n",visible,numbers);
     free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

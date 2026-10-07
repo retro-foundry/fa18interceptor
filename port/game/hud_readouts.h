@@ -13,8 +13,8 @@
 
 TextDrawResult draw_scale_readout(void); /* $C31A64: 2, 10 or 40 by +$63 */
 void draw_zoom_readout(void);     /* $C31ACC: 10, 20 or 40 by ZOOM_SCALE */
-void draw_speed_readout(void);    /* $C31F4C: +$6E / 12, "KTS" in a context */
-void draw_altitude_readout(void); /* $C3201A: +$18 >> 10 * 5, "FT" in a context */
+TextDrawResult draw_speed_readout(void);    /* $C31F4C: +$6E / 12, "KTS" in a context */
+TextDrawResult draw_altitude_readout(void); /* $C3201A: +$18 >> 10 * 5, "FT" in a context */
 void draw_record_72_readout(void);/* $C3212A: +$72 >> 8 */
 void draw_record_2b_readout(void);/* $C32178: |+$2B << 8| / 307 */
 void draw_grid_z_readout(void);   /* $C321D2: the grid row from +$1C */
@@ -25,7 +25,7 @@ void draw_weapon_readout(void);           /* $C31C60: " SW n", " AM n" or "GUN n
 void draw_signed_readout(int16_t value);  /* $C31D16: sign and four digits */
 void draw_load_readout(void);             /* $C31D64: +$56 with a decimal point */
 void draw_shoot_cue(void);                /* $C31E6C: "IN RNG" or " SHOOT" */
-void draw_heading_readout(void);          /* $C31EB6: "HDG" and three digits */
+TextDrawResult draw_heading_readout(void); /* $C31EB6: "HDG" and three digits */
 
 /* Small text: the weapon kind over "ARM" or " NO" by what is left ($C328A8). */
 void draw_weapon_status(void);

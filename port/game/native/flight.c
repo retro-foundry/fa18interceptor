@@ -296,8 +296,7 @@ static int finish_frame_clock(NativeFrontend *game) {
         game->completed_input_return=(NativeInputReturn){(uint8_t)request_cockpit_redraw(),NATIVE_INPUT_RETURN_REDRAW};
     if(!rd_u8(ORIGIN_GATE_A)) wr_u16(UPDATE_TICK,(uint16_t)(rd_u16(UPDATE_TICK)+1));
     game->flight_timer_pending=0;
-    if(native_frame_scene_labels()) /* C0F380, after the counter. */
-        game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
+    game->completed_input_return=native_frame_scene_labels(game->completed_input_return); /* C0F380, after the counter. */
     game->completed_input_return=native_frame_debug_overlay(game->completed_input_return);
     return 1;
 }
@@ -352,7 +351,7 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
     }
     update_control_actions(NULL,NULL); /* C12950 idle branch at C0F370. */
     ++game->control_frames;
-    native_frame_scene_labels(); /* The idle branch joins at C0F380 too. */
+    game->completed_input_return=native_frame_scene_labels(game->completed_input_return); /* The idle branch joins at C0F380 too. */
     game->completed_input_return=native_frame_debug_overlay(game->completed_input_return);
     return 1;
 }

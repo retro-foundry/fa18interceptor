@@ -29,7 +29,9 @@ NativeInputReturn native_hud_draw(uint16_t saved_tick) {
     wr_u16(UPDATE_STAGE_MARKER,0xd0);
     if(rd_u8(ORIGIN_ENABLE) && !rd_u8(UPDATE_HUD_MODE)) {
         wr_u8(CONTEXT_READOUTS,1);
-        draw_speed_readout();draw_altitude_readout();draw_heading_readout();
+        result=text_return(result,draw_speed_readout());
+        result=text_return(result,draw_altitude_readout());
+        result=text_return(result,draw_heading_readout());
         if(rd_u8(MODE_SELECT)==2) result=text_return(result,draw_message_line());
         return result;
     }

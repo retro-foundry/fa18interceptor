@@ -70,10 +70,10 @@ static TextDrawResult small_readout(int count, gaddr chars, gaddr end, int digit
 }
 
 /* In a context: the line in plane 0 and, inverted, in plane $C. */
-static void small_readout_twice(int count, gaddr chars, gaddr end, int digits, int keep_zeros, gaddr layout,
+static TextDrawResult small_readout_twice(int count, gaddr chars, gaddr end, int digits, int keep_zeros, gaddr layout,
                                 gaddr rows, int16_t x_origin) {
     small_readout(count, chars, end, digits, keep_zeros, layout, rows, x_origin, 0, SMALL_DRAW, 0);
-    small_readout(count, chars, end, digits, keep_zeros, layout, rows, x_origin, 0xC, SMALL_INVERSE, 0);
+    return small_readout(count, chars, end, digits, keep_zeros, layout, rows, x_origin, 0xC, SMALL_INVERSE, 0);
 }
 
 TextDrawResult draw_scale_readout(void) {
@@ -111,7 +111,7 @@ void draw_zoom_readout(void) {
     small_readout(2, TEXT_LINE, TEXT_LINE + 2, 2, 0, LAYOUT_ZOOM, 0x1CDE, 0x1E, 4, mode, 1);
 }
 
-void draw_speed_readout(void) {
+TextDrawResult draw_speed_readout(void) {
     gaddr record = viewed_record(), chars = TEXT_LINE + 5;
     int16_t speed = 0;
 
@@ -120,19 +120,18 @@ void draw_speed_readout(void) {
         if (speed < 0) speed = (int16_t)-speed;
     }
     if (rd_u8(CONTEXT_SELECT)) {
-        if (!context_allows()) return;
+        if (!context_allows()) return (TextDrawResult){0};
         show(divu_word(speed, 12));
         put(chars + 4, "KTS");
-        small_readout_twice(7, chars, chars + 4, 7, 0, LAYOUT_SPEED_C, 0x1CD2, 0x12);
-        return;
+        return small_readout_twice(7, chars, chars + 4, 7, 0, LAYOUT_SPEED_C, 0x1CD2, 0x12);
     }
     speed = display_value_to_draw(SPEED_SHOWN, speed);
-    if (speed < 0) return;
+    if (speed < 0) return (TextDrawResult){0};
     show(divu_word(speed, 12));
-    small_readout(4, chars, chars + 4, 4, 0, LAYOUT_SPEED, 0x1A0E, 0x1E, 4, SMALL_DRAW, 1);
+    return small_readout(4, chars, chars + 4, 4, 0, LAYOUT_SPEED, 0x1A0E, 0x1E, 4, SMALL_DRAW, 1);
 }
 
-void draw_altitude_readout(void) {
+TextDrawResult draw_altitude_readout(void) {
     gaddr chars = TEXT_LINE + 4;
     int context = rd_u8(CONTEXT_SELECT) != 0, cached = !context && (int8_t)rd_u8(GAUGE_REFRESH) <= 0;
     int32_t altitude;
@@ -143,22 +142,21 @@ void draw_altitude_readout(void) {
     } else {
         altitude = (int32_t)((uint32_t)(rd_s32(viewed_record() + 0x18) >> 10) * 5);
     }
-    if (context && !context_allows()) return;
+    if (context && !context_allows()) return (TextDrawResult){0};
     if (cached && rd_s32(ALTITUDE_SHOWN) < 0) {
         /* A value still to be drawn: that one, now marked drawn. */
         altitude = rd_s32(ALTITUDE_SHOWN) & 0x7FFFFFFF;
         wr_u32(ALTITUDE_SHOWN, (uint32_t)altitude);
     } else {
-        if (cached && (altitude == rd_s32(ALTITUDE_SHOWN) || (rd_u8(DISPLAY_FORCE) & 1))) return;
+        if (cached && (altitude == rd_s32(ALTITUDE_SHOWN) || (rd_u8(DISPLAY_FORCE) & 1))) return (TextDrawResult){0};
         wr_u32(ALTITUDE_SHOWN, (uint32_t)altitude | 0x80000000u);
     }
     show(altitude);
     if (!context) {
-        small_readout(6, chars, chars + 6, 6, 0, LAYOUT_ALTITUDE, 0x18CE, 0x1E, 4, SMALL_DRAW, 1);
-        return;
+        return small_readout(6, chars, chars + 6, 6, 0, LAYOUT_ALTITUDE, 0x18CE, 0x1E, 4, SMALL_DRAW, 1);
     }
     put(chars + 6, "FT");
-    small_readout_twice(8, chars, chars + 6, 8, 0, LAYOUT_ALTITUDE, 0x1CDA, 0x1A);
+    return small_readout_twice(8, chars, chars + 6, 8, 0, LAYOUT_ALTITUDE, 0x1CDA, 0x1A);
 }
 
 void draw_record_72_readout(void) {
@@ -275,15 +273,15 @@ void draw_shoot_cue(void) {
     draw_text_in_view(&line);
 }
 
-void draw_heading_readout(void) {
+TextDrawResult draw_heading_readout(void) {
     int16_t degrees;
 
-    if (!rd_u8(CONTEXT_SELECT) || !context_allows()) return;
+    if (!rd_u8(CONTEXT_SELECT) || !context_allows()) return (TextDrawResult){0};
     degrees = divu_word((int32_t)rd_s16(viewed_record() + 0x68) >> 3, 10);
     wr_u16(COMPASS_DEGREES, (uint16_t)degrees);
     show(degrees);
     put(TEXT_LINE, "HDG");
-    small_readout_twice(6, TEXT_LINE, TEXT_LINE + 6, 3, 1, LAYOUT_HEADING, 0x1CCA, 0xA);
+    return small_readout_twice(6, TEXT_LINE, TEXT_LINE + 6, 3, 1, LAYOUT_HEADING, 0x1CCA, 0xA);
 }
 
 void draw_three_digits(gaddr layout, gaddr rows) {

@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest connected scene-label return (2026-10-07): row-Z loads, matrix products
+and position-number text results now reach first depleted recorder flare/chaff
+commands. Terminator loads and alternate skipped-row exits follow the original
+source. Skipped labels preserve the preceding result, including the newly
+connected context speed/altitude/heading HUD readouts. The suite matches 67
+complete bodies and 84 recorder input parents, with twelve new label frames.
+256 label returns/non-stack RAM cases and 450 HUD RAM cases with 207 defined
+returns pass. Ten affected checks and native/reference builds pass. See
+`analysis/native_scene_label_input_return.md`. Full port remains active.
+
 Latest connected debug return (2026-10-07): the actual four-plane text owner
 now returns its final character or glyph selection through the numeric debug
 overlay to the next first depleted recorder command. Inactive overlays preserve

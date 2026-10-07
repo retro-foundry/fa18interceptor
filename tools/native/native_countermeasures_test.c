@@ -7,6 +7,7 @@
 #include "globals.h"
 #include "menu_setup.h"
 #include "stages.h"
+#include "view.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,6 +25,8 @@ typedef struct {
     unsigned hud_case;
     int debug_sampling;
     unsigned debug_case;
+    int label_sampling;
+    unsigned label_case;
 } CountermeasureFixture;
 static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const unsigned settings=variant%12,mode=1+settings/4;
@@ -96,6 +99,32 @@ static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint16_t saved_tick,void *context) {
     CountermeasureFixture *fixture=context;
     fixture->clock.iteration=game->update_iterations;
+    if(fixture->label_sampling) {
+        if(boundary==NATIVE_FRAME_BODY_BEGIN) {
+            /* Validation-only map/view selection after ordinary startup.
+             * Observer height comes from the actual source start-position owner. */
+            int32_t position[3];start_position(position);
+            set_observer_position(position[0],position[1],position[2]);
+            wr_s32(CONTROL_RECORDS+0x18,position[1]);
+            wr_s32(CONTROL_RECORDS+0x10,position[1]>>8);
+            wr_u8(ORIGIN_ENABLE,1);wr_u8(ORIGIN_GATE_MODE,0);
+            wr_u8(ORIGIN_DETAIL_MODE,(uint8_t)(5+fixture->label_case%3));
+            wr_u8(ORIGIN_DETAIL_COUNTER,5); /* Source detail hold while adjustment runs. */
+            wr_u8(ORIGIN_GATE_A,(uint8_t)((fixture->label_case>>2)&1));
+            wr_u8(0xc45848u,(uint8_t)(fixture->label_case%5));wr_u8(0xc45857u,0);
+            snprintf(fixture->path,sizeof fixture->path,"%s.label.%u",fixture->prefix,fixture->label_case);
+            fixture->capture=(NativeFrameCapture){.replay=&fixture->clock,.prefix=fixture->path,
+                .iteration=game->update_iterations,.count=1};
+        }
+        if(fixture->capture.prefix)
+            native_frame_capture(game,boundary,saved_tick,&fixture->capture);
+        if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
+            printf("{\"label_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u,\"detail_mode\":%u,\"position_bias\":%d,\"label_row\":%u}\n",
+                fixture->label_case,fixture->capture.before_tick,fixture->capture.after_tick,
+                fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value,
+                rd_u8(ORIGIN_DETAIL_MODE),rd_s32(POSITION_BIAS),rd_u16(0xc459aau));
+        return;
+    }
     if(fixture->debug_sampling) {
         if(boundary==NATIVE_FRAME_BODY_BEGIN) {
             /* Controlled debug selection after ordinary startup; retain
@@ -257,6 +286,32 @@ int main(int argc,char **argv) {
     }
     fixture.debug_sampling=0;
     wr_u8(UPDATE_TAIL_CONDITION,previous_debug);wr_u8(0xc457b3u,previous_fields);
+    const uint8_t previous_map=rd_u8(ORIGIN_ENABLE),previous_grid=rd_u8(ORIGIN_GATE_MODE),
+        previous_detail=rd_u8(ORIGIN_DETAIL_MODE),previous_detail_count=rd_u8(ORIGIN_DETAIL_COUNTER),previous_gate=rd_u8(ORIGIN_GATE_A),
+        previous_row=rd_u8(0xc45848u),previous_blink=rd_u8(0xc45857u);
+    uint32_t previous_observer[6];
+    const uint32_t previous_player_y=rd_u32(CONTROL_RECORDS+0x18),previous_player_height=rd_u32(CONTROL_RECORDS+0x10);
+    for(unsigned i=0;i<6;++i) previous_observer[i]=rd_u32(OBSERVER+4*i);
+    fixture.label_sampling=1;
+    for(unsigned i=0;i<12;++i) {
+        fixture.label_case=i;fixture.capture=(NativeFrameCapture){0};
+        wr_u8(RECORDER_MODE,0);
+        unsigned limit=game->ticks+100;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete ||
+           (game->completed_input_return.owner!=NATIVE_INPUT_RETURN_SCENE_LABEL &&
+            game->completed_input_return.owner!=NATIVE_INPUT_RETURN_HUD_TEXT) ||
+           !pending_input(game,&fixture,72+i)) {
+            fprintf(stderr,"Scene-label carry integration failed at case %u\n",i);goto done;
+        }
+    }
+    fixture.label_sampling=0;
+    wr_u8(ORIGIN_ENABLE,previous_map);wr_u8(ORIGIN_GATE_MODE,previous_grid);
+    wr_u8(ORIGIN_DETAIL_MODE,previous_detail);wr_u8(ORIGIN_GATE_A,previous_gate);
+    wr_u8(ORIGIN_DETAIL_COUNTER,previous_detail_count);
+    wr_u8(0xc45848u,previous_row);wr_u8(0xc45857u,previous_blink);
+    for(unsigned i=0;i<6;++i) wr_u32(OBSERVER+4*i,previous_observer[i]);
+    wr_u32(CONTROL_RECORDS+0x18,previous_player_y);wr_u32(CONTROL_RECORDS+0x10,previous_player_height);
     for(unsigned i=0;i<24;++i) if(!pending_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<2;++i) if(!fd_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<4;++i) if(!collision_parent(game,&fixture,i)) goto done;

@@ -1,5 +1,13 @@
 # Native port runner
 
+Scene-position labels now publish their actual row-Z load, matrix product or
+number-text result to first depleted recorder flare/chaff commands. Skipped
+labels preserve the preceding context HUD readout. Sixty-seven complete bodies
+and 84 recorder input parents match original compared RAM/drawing; 256 label
+returns and 450 HUD RAM cases with 207 defined returns pass. See
+`../../analysis/native_scene_label_input_return.md`. Remaining drawing/command
+contracts and whole-game acceptance stay open.
+
 The actual numeric debug overlay now returns its final four-plane text
 character/glyph selection to first depleted recorder flare/chaff commands.
 Inactive overlays preserve the preceding result. Fifty-five complete bodies

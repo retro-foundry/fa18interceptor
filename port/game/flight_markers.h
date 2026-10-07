@@ -1,6 +1,7 @@
 #ifndef FA18_FLIGHT_MARKERS_H
 #define FA18_FLIGHT_MARKERS_H
 #include "memory.h"
+#include "text.h"
 /* Source working values: packed X/Z offset, projected Y, point components,
  * matrix products, record and stream cursors. Partial words remain visible. */
 enum MarkerValue { MM_OFFSET,MM_SCREEN_Y,MM_X,MM_Y,MM_Z,MM_ROW_X,MM_ROW_Y,MM_ROW_Z,
@@ -34,11 +35,15 @@ typedef struct {
     gaddr (*stack)(void *context);
     void *context;
     MarkerState (*consume_values)(void *context,enum MarkerChild child,MarkerState values);
+    TextDrawResult (*scene_number_result)(void *context);
 } MarkerHooks;
 MarkerState transform_marker_point(MarkerState w,const MarkerHooks *h); /* C2AFFA */
-/* C2B3C2: nonzero when the label pass was selected; skipped gates preserve
- * the preceding drawing return. */
-int draw_scene_position_labels(MarkerState w,const MarkerHooks *h);
+/* C2B3C2's last row-Z load, Z matrix product or number renderer output.
+ * NO_OUTPUT gates/skip exits preserve the caller's preceding drawing output. */
+enum SceneLabelOutput { SCENE_LABEL_NO_OUTPUT, SCENE_LABEL_ROW_Z,
+                        SCENE_LABEL_MATRIX_Z, SCENE_LABEL_NUMBER };
+typedef struct { enum SceneLabelOutput kind; int32_t component_z; TextDrawResult number; } SceneLabelResult;
+SceneLabelResult draw_scene_position_labels(MarkerState w,const MarkerHooks *h);
 int draw_view_grid_and_markers(MarkerState w,const MarkerHooks *h); /* C2B564; true when selected. */
 MarkerState draw_class_twenty_marker(MarkerState w,const MarkerHooks *h); /* C2B928 */
 MarkerState draw_record_position_marker(MarkerState w,gaddr frame,const MarkerHooks *h); /* C2B952 */

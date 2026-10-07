@@ -2,6 +2,16 @@
 
 ## Objective and user constraints
 
+Latest connected scene-label return (2026-10-07): scene row-Z loads, matrix
+products and position-number text results now reach first depleted recorder
+flare/chaff commands. Terminator and alternate skipped-row exits match source;
+skipped labels preserve the context speed/altitude/heading HUD result. The suite
+matches 67 complete bodies and 84 recorder input parents, including twelve
+label frames. 256 label returns/non-stack RAM cases and 450 HUD RAM cases with
+207 defined returns pass. Ten affected checks and all native/reference builds
+pass. See `analysis/native_scene_label_input_return.md`. Active grid/marker,
+remaining HUD/command contracts and whole-game acceptance remain open.
+
 Latest connected debug return (2026-10-07): four-plane text character/glyph
 results now reach first depleted recorder flare/chaff commands through the
 real numeric overlay. Inactive overlays preserve the preceding result.

@@ -119,6 +119,15 @@
 #define draw_line host_draw_line
 #include "../../port/game/native/hud.c"
 static NativeInputReturn checked_return;
+static void check_speed_return(void) {
+    checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_speed_readout());
+}
+static void check_altitude_return(void) {
+    checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_altitude_readout());
+}
+static void check_heading_return(void) {
+    checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_heading_readout());
+}
 static void check_scale_return(void) {
     checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_scale_readout());
 }
@@ -156,9 +165,9 @@ static int hud_owners(void) {
     static const struct {uint32_t entry;void (*host)(void);} cases[]={
         {0xc30764,host_draw_panel_frame},{0xc309b6,host_draw_panel_image},
         {0xc332bc,host_draw_postflight_hud},{0xc3112a,host_draw_threat_lights},
-        {0xc30f78,host_draw_compass_tape},{0xc31eb6,host_draw_heading_readout},
-        {0xc31f4c,host_draw_speed_readout},{0xc32178,host_draw_record_2b_readout},
-        {0xc3201a,host_draw_altitude_readout},{0xc3212a,host_draw_record_72_readout},
+        {0xc30f78,host_draw_compass_tape},{0xc31eb6,check_heading_return},
+        {0xc31f4c,check_speed_return},{0xc32178,host_draw_record_2b_readout},
+        {0xc3201a,check_altitude_return},{0xc3212a,host_draw_record_72_readout},
         {0xc30918,host_draw_gauge_bar},{0xc3003a,host_draw_panel_mark},
         {0xc328a8,host_draw_weapon_status},{0xc321d2,host_draw_grid_z_readout},
         {0xc32260,host_draw_grid_x_readout},{0xc31acc,host_draw_zoom_readout},
@@ -173,6 +182,7 @@ static int hud_owners(void) {
     for(unsigned variant=0;variant<10;++variant) {
         for(unsigned test=0;test<sizeof cases/sizeof cases[0];++test) {
             const int has_return=cases[test].host==check_scale_return || cases[test].host==check_message_return ||
+                cases[test].host==check_speed_return || cases[test].host==check_altitude_return || cases[test].host==check_heading_return ||
                 cases[test].host==check_indicator_return || cases[test].host==check_mode_return;
             if(variant>=5 && !has_return) continue;
             memcpy(fa18_machine,saved,sizeof *saved);
