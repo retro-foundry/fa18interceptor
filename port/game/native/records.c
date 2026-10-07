@@ -180,6 +180,11 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
         schedule_postflight(POSTFLIGHT_MODE_THREE,3,record,&hooks);
         return (PostflightScheduleResult){0,1};
     }
+    if(child==SCHEDULE_SIX) {
+        const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
+        schedule_postflight(POSTFLIGHT_MODE_SIX,6,record,&hooks); /* C0A15C */
+        return (PostflightScheduleResult){0,1};
+    }
     fprintf(stderr,"native record schedule child unavailable: %u\n",(unsigned)child); abort();
 }
 typedef struct { gaddr companion; } RecordLoop;
@@ -241,6 +246,7 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
 }
 static SelectorOriginTriple origin_child(void *context,enum SelectorOriginChild child,const SelectorOriginTriple *input) {
     (void)context;
+    if(child==ORIGIN_FALLBACK) { fault_hook(); return (SelectorOriginTriple){{0,0,0}}; }
     if(child==ORIGIN_PREPARE) { update_view_matrix(); return (SelectorOriginTriple){{0,0,0}}; }
     if(child==ORIGIN_NORMALIZE) {
         NormalizedVectorState state={0}; state.scale=0x200;
@@ -266,6 +272,10 @@ void native_control_records_update(void) {
     RecordLoop loop={0};
     const RecordUpdateHooks records={record_child,record_event,&loop};
     update_control_records(&records);
+}
+void native_records_select_origin(void) {
+    const SelectorOriginHooks hooks={origin_child,NULL,NULL};
+    select_origin_control_record(&hooks);
 }
 void native_records_update(void) {
     RecordUpdateStageFrame frame={0};

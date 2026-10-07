@@ -1,4 +1,4 @@
-/* The actual digit-3/digit-4 menu paths, sharing the playable runtime's objects.
+/* Actual menu/mission paths, sharing the playable runtime's objects.
  * Capture the first body at each source stage and each playback stream. */
 #include "native/frontend.h"
 #include "../../port/native/frame_capture.h"
@@ -19,10 +19,10 @@ typedef struct {
     unsigned stage_count,captures,streams;
     unsigned mode,samples;
     int entered,returned;
-} ModeTwoRun;
+} ModeRun;
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                     uint16_t saved_tick,void *context) {
-    ModeTwoRun *run=context;
+    ModeRun *run=context;
     run->clock.iteration=game->update_iterations;
     if(boundary==NATIVE_FRAME_INPUT_BEGIN && rd_u8(MODE_SELECT)==run->mode) {
         gaddr stage=rd_u32(STAGE_CALLBACK);
@@ -56,8 +56,8 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned stream=rd_u8(0xc45799u);
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
-        if(run->mode==125) {
-            const unsigned frames[]={128,512,1000};
+        if(run->mode==125 || run->mode==6) {
+            const unsigned frames[]={128,run->mode==6?256u:512u,run->mode==6?384u:1000u};
             for(unsigned i=0;i<3;++i)
                 if(game->scene_frames>=frames[i] && !(run->samples&(1u<<i))) sample|=1u<<i;
         }
@@ -86,13 +86,13 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 int main(int argc,char **argv) {
     if(argc!=4 && argc!=5) return 1;
     NativeFrontend *game=calloc(1,sizeof *game);char error[256];int result=1;
-    ModeTwoRun run={.prefix=argv[3],.mode=argc==5?(unsigned)atoi(argv[4]):2};
-    if(run.mode!=2 && run.mode!=125) return 1;
+    ModeRun run={.prefix=argv[3],.mode=argc==5?(unsigned)atoi(argv[4]):2};
+    if(run.mode!=2 && run.mode!=6 && run.mode!=125) return 1;
     if(!game) return 1;
     if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
     game->observe_frame=observe;game->frame_context=&run;
     const unsigned times[]={1800,3000,5000,6500,11000,15000,16500};
-    const int keys[]={32,run.mode==125?52:51,13,13,27,13,13};
+    const int keys[]={32,run.mode==125?52:run.mode==6?55:51,13,13,27,13,13};
     while(game->ticks<(run.mode==125?18000u:10000u)) {
         for(unsigned i=0;i<(run.mode==125?7u:4u);++i) {
             if(game->ticks==times[i]) native_frontend_event(game,keys[i],1);
@@ -105,6 +105,8 @@ int main(int argc,char **argv) {
     if(run.captures<8 || (run.mode==2 &&
        (!run.returned || game->scene_frames<30 || !game->postflight_callbacks)) ||
        (run.mode==125 && (!run.returned || game->scene_frames<2000 || run.samples!=7 ||
+        rd_u32(STAGE_CALLBACK)!=0xc10dae)) ||
+       (run.mode==6 && (game->scene_frames<384 || run.samples!=7 ||
         rd_u32(STAGE_CALLBACK)!=0xc10dae))) {
         fprintf(stderr,"Mode %u failed: returned=%d captures=%u scene=%u postflight=%u\n",
             run.mode,run.returned,run.captures,game->scene_frames,game->postflight_callbacks);goto done;

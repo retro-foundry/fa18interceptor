@@ -84,6 +84,11 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
             ${CMAKE_CURRENT_BINARY_DIR}/mode-125-save
             ${CMAKE_CURRENT_BINARY_DIR}/mode-125 125)
+    add_test(NAME fa18_native_mode_six
+        COMMAND fa18_native_mode_two_test
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+            ${CMAKE_CURRENT_BINARY_DIR}/mode-six-save
+            ${CMAKE_CURRENT_BINARY_DIR}/mode-six 6)
     add_executable(fa18_native_countermeasures_test ../../tools/native/native_countermeasures_test.c)
     target_link_libraries(fa18_native_countermeasures_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_countermeasures

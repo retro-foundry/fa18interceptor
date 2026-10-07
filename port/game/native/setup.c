@@ -49,6 +49,8 @@ static int32_t child(void *context,enum MenuContextChild which) {
     case MC_STAGE_SOUND: start_sound_6(0x3f,0x78); return 0;
     case MC_STAGE_COMMAND: return filter_cockpit_message(0x4021,NULL);
     case MC_STAGE_FINISH: request_cockpit_redraw(); return 0;
+    case MC_NOISE: play_noise(8); return 0; /* C17E4A */
+    case MC_ENGINE: play_engine(0x300,8); return 0; /* C17CF6 */
     default: fprintf(stderr,"native setup child unavailable: %u\n",(unsigned)which); abort();
     }
 }

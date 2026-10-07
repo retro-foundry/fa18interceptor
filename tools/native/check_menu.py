@@ -61,8 +61,9 @@ def main():
             assert pixels == PIXELS[digit], (digit, pixels)
         print("Modes 1-5: source selections and all five transition banners match", flush=True)
         stats, _, _ = run("next-mission", 4000, key(3000, 55))
-        assert stats["screen"] == "mode-intro" and stats["mode"] == 6, stats
-        print("Next mission: source pilot-log field selects mode 6", flush=True)
+        assert stats["screen"] == "scene-setup" and stats["mode"] == 6, stats
+        assert stats["stage"] == "C105A6" and stats["scene_frames"] > 0, stats
+        print("Next mission: source pilot-log field selects mode 6 and reaches its briefing", flush=True)
         entry = key(2400, 112) + key(2440, 105) + key(2480, 108)
         entry += key(2520, 111) + key(2560, 116) + key(2680, 13) + key(3000, 50)
         stats, pixels, _ = run("first-tour-selection", 3140, entry, bytes(78))
@@ -78,7 +79,10 @@ def main():
         for number in range(4):
             stats, _, _ = run(f"mission-f{number + 1}", 4900,
                 key(3000, 54) + key(4500, 282 + number))
-            assert stats["screen"] == "mode-intro" and stats["mode"] == number + 3, stats
+            assert stats["mode"] == number + 3, stats
+            assert stats["screen"] == ("scene-setup" if number==3 else "mode-intro"), stats
+            if number==3:
+                assert stats["stage"] == "C105A6" and stats["scene_frames"] > 0, stats
         # Actual saved-log bytes drive the source eligibility gate. A pilot
         # with no qualification word cannot select F1; no invented availability.
         unqualified = bytearray(78)

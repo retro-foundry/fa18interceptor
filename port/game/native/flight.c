@@ -37,6 +37,7 @@
 #include "../menu_return.h"
 #include "../menu_followup.h"
 #include "../menu_outcome.h"
+#include "../menu_setup.h"
 #include "../postflight_completion.h"
 #include "../postflight_messages.h"
 #include <stdio.h>
@@ -116,10 +117,11 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     case MENU_MODE_NINE_VIEW: finish_scene_setup(); break; /* C082B0 */
     case MENU_REFRESH:
         /* C0FECE's two-byte local frame places the sort's -$2C test in
-         * its saved A4, byte 2. Mode two's C29490 leaves A4 at the preset
-         * end ($C29872), so C1E48C sorts all lists even without requests.
+         * its saved A4, byte 2. The reached mode-two and mode-six paths
+         * leave A4 at $C29872 / $C29662, so C1E48C sorts all lists even
+         * without requests.
          * The ordinary C0EFD4 frame keeps its request-derived local. */
-        if(rd_u8(MODE_SELECT)==2) refresh_native_context_sort(1);
+        if(rd_u8(MODE_SELECT)==2 || rd_u8(MODE_SELECT)==6) refresh_native_context_sort(1);
         else refresh_native_context();
         break;
     default: fprintf(stderr,"native flight transition child unavailable: %u\n",(unsigned)child); abort();
@@ -127,10 +129,14 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     return (MenuTransitionResult){0,0};
 }
 static void outcome_child(void *context,enum MenuOutcomeChild child,uint32_t value) {
-    (void)context; (void)value;
+    (void)context;
     switch(child) {
     case MO_COUNTDOWN_RESET: case MO_OUTCOME_RESET: case MO_MESSAGE_RESET:
     case MO_DELAYED_RESET: reset_message_sequence(); break;
+    case MO_DELAYED_MESSAGE_DISABLED: queue_indexed_menu_message(value,1,0,NULL); break;
+    case MO_DELAYED_MESSAGE_ENABLED: queue_indexed_menu_message(value,1,1,NULL); break;
+    case MO_OUTCOME_MESSAGE: queue_indexed_menu_message(value,1,3,NULL); break;
+    case MO_PAUSE_SCENE: native_records_select_origin(); break; /* C29368 */
     default: fprintf(stderr,"native outcome child unavailable: %u\n",(unsigned)child); abort();
     }
 }
@@ -144,8 +150,20 @@ void native_flight_reset_aircraft(NativeFrontend *game) {
     const MenuColdHooks hooks={cockpit_child,NULL,game};
     refresh_menu_cockpit(&hooks);
 }
+static uint32_t followup_child(void *context,enum MenuFollowupChild child,uint32_t value,gaddr address) {
+    (void)context; (void)value; (void)address;
+    if(child==MF_RESET) { reset_message_sequence(); return 0; }
+    fprintf(stderr,"native menu-followup child unavailable: %u\n",(unsigned)child); abort();
+}
 static void return_child(void *context,enum MenuReturnChild child) {
-    if(child==MR_CHOOSE_RESET || child==MR_LEAVE_RESET || child==MR_SELECT_RESET) reset_message_sequence();
+    if(child==MR_CHOOSE_RESET || child==MR_LEAVE_RESET || child==MR_SELECT_RESET ||
+       child==MR_MESSAGE_RESET || child==MR_CANCEL_RESET) reset_message_sequence();
+    else if(child==MR_CANCEL_REFRESH) native_flight_reset_aircraft(context);
+    else if(child==MR_MESSAGE_CANCEL || child==MR_CONTEXT_CANCEL ||
+            child==MR_SMOOTH_CANCEL || child==MR_END_CANCEL) {
+        const MenuReturnHooks hooks={return_child,NULL,context};
+        cancel_menu_return(&hooks);
+    }
     else if(child==MR_SELECT_KEY) {
         const MenuReturnHooks hooks={return_child,NULL,context};
         leave_menu_return_on_key(&hooks);
@@ -165,6 +183,8 @@ static int32_t result_message_child(void *context,enum PostflightMessageChild ch
 static void stage(void *context,gaddr routine) {
     NativeFrontend *game=context;
     const MenuOutcomeHooks outcome={outcome_child,NULL,game};
+    const MenuFollowupHooks followup={followup_child,NULL,game};
+    const MenuReturnHooks returns={return_child,NULL,game};
     if(routine==0xc0f920) {
         int32_t position[3]={0};
         const SceneBootstrapHooks hooks={storage_child,NULL,position};
@@ -190,6 +210,14 @@ static void stage(void *context,gaddr routine) {
     else if(routine==0xc10228) enter_menu_mode_four(NULL);
     else if(routine==0xc10272) leave_menu_after_countdown(&(MenuColdHooks){0},0);
     else if(routine==0xc1029e) poll_menu_viewport(NULL,0);
+    else if(routine==0xc103e4) leave_menu_after_countdown(&(MenuColdHooks){0},1);
+    else if(routine==0xc10418) poll_menu_viewport(NULL,1);
+    else if(routine==0xc10458) follow_menu_key_or_countdown(&followup);
+    else if(routine==0xc104c2) select_delayed_menu_message(&outcome);
+    else if(routine==0xc105a6) leave_delayed_menu_message(&outcome);
+    else if(routine==0xc105f4) pause_menu_after_countdown(&outcome);
+    else if(routine==0xc10626) start_menu_context_after_countdown(&outcome);
+    else if(routine==0xc1064c) finish_menu_context_three(&returns);
     else if(routine==0xc102d8) begin_menu_context_ready(NULL);
     else if(routine==0xc10302 || routine==0xc10362) {
         const MenuReturnHooks hooks={return_child,NULL,game};
@@ -205,8 +233,11 @@ static void stage(void *context,gaddr routine) {
         if(routine==0xc0fb70) choose_menu_exit_after_countdown(&hooks);
         else leave_menu_on_key_or_message(&hooks);
     }
-    else if(routine==0xc10970) follow_menu_return_context(NULL);
-    else if(routine==0xc109ac) complete_menu_return_after_countdown(NULL);
+    else if(routine==0xc10900) follow_menu_return_message(&returns);
+    else if(routine==0xc10942) start_menu_smoothing(&returns);
+    else if(routine==0xc10970) follow_menu_return_context(&returns);
+    else if(routine==0xc109ac) complete_menu_return_after_countdown(&returns);
+    else if(routine==0xc108da) queue_menu_attempts_exhausted(&outcome);
     else if(routine==0xc11788) {
         ++game->postflight_callbacks;
         advance_postflight_completion(NULL);
@@ -259,7 +290,7 @@ static int finish_frame_clock(NativeFrontend *game) {
 }
 int native_flight_enabled(const NativeFrontend *game) {
     const uint8_t mode=rd_u8(MODE_SELECT);
-    return (mode==1 || mode==2 || mode==9 || mode==125 || mode==127 || (mode==3 && rd_u8(RECORDER_MODE)==3)) &&
+    return (mode==1 || mode==2 || mode==6 || mode==9 || mode==125 || mode==127 || (mode==3 && rd_u8(RECORDER_MODE)==3)) &&
         (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
 }
 int native_flight_tick(NativeFrontend *game,int stage_already_ran) {

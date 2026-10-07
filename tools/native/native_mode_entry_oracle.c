@@ -11,6 +11,9 @@ static int original_stage(void) {
     SET_CYCLES(1000000000);
     for(unsigned step=0;step<2000000;++step) {
         if(REG_PC==0xc70000 && REG_A[7]==0xc7ff04) return 1;
+        if(getenv("FA18_MODE_STAGE_TRACE") && (REG_PC==0xc1e328 || REG_PC==0xc1e48c))
+            fprintf(stderr,"Stage sort %06X: A6=%06X A7=%06X A4=%06X choice=%02X\n",
+                REG_PC,REG_A[6],REG_A[7],REG_A[4],rd_u8(REG_A[6]-0x2c));
         if(REG_PC==0xc53c78) {
             wr_u32(MENU_TIME_REQUEST+32,host_tick/50);
             wr_u32(MENU_TIME_REQUEST+36,(host_tick%50)*20000u);

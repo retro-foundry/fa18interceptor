@@ -426,3 +426,14 @@ python tools/native/check_mode_two.py --mode 125 --out build/native-flight/resto
 ```
 
 See [`../../analysis/native_mode_125_milestone.md`](../../analysis/native_mode_125_milestone.md).
+
+Next-mission digit 7 now selects the original pilot log's mode 6 and runs
+briefing/context/aircraft setup into flight, with 401 scene/HUD frames in a
+normal input run. 38 actual input/stage intervals and 27 sampled bodies match
+compared original RAM/display. Full mission outcomes and variants remain open.
+
+```powershell
+python tools/native/check_mode_two.py --mode 6 --out build/native-flight/mission-six/original-check
+```
+
+See [`../../analysis/native_mode_six_milestone.md`](../../analysis/native_mode_six_milestone.md).

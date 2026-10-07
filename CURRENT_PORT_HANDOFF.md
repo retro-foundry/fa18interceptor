@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected batch: next-mission digit 7 now runs source mode 6 through
+briefing/context/aircraft setup and sustained flight (401 scene/HUD frames).
+38 actual input/stage intervals and 27 sampled bodies match compared original
+RAM/display. Source message lookup, origin selection, setup engine/noise and
+C0A15C's scheduler are composed into the native runner. The transition retains
+its saved-pointer sort choice. Modes 2/125 source regressions, eight affected
+native integration tests and frontend checks pass. Full mode-6 outcomes and
+whole-game acceptance remain open. See `analysis/native_mode_six_milestone.md`.
+
 Latest connected batch: digit 4 now enters native mode 125's prompts and
 sustained flight, with Escape/menu return and re-entry also exercised.
 55 actual input/stage intervals and 35 sampled bodies match original

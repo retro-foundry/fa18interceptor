@@ -1,4 +1,4 @@
-"""Check digit 3/mode 2 or digit 4/mode 125 through native menu and flight.
+"""Check source modes 2, 6 or 125 through native menu and flight.
 
 Starts the shared playable runtime from disk/input and compares original
 C0F3C4/C0F5F8 intervals plus C0EFEA/C0F3C0 bodies. No full Amiga replay.
@@ -16,7 +16,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_mode_two_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mode-check')
-    parser.add_argument('--mode', type=int, choices=(2,125), default=2)
+    parser.add_argument('--mode', type=int, choices=(2,6,125), default=2)
     args = parser.parse_args()
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
@@ -29,12 +29,16 @@ def main():
     exports = [json.loads(line) for line in result.stdout.splitlines()]
     entries = [item for item in exports if 'entry' in item]
     bodies = [item for item in exports if 'capture' in item]
-    assert len(entries) >= (32 if args.mode==2 else 55) and len(bodies) >= (21 if args.mode==2 else 35), exports
-    required={'C10272','C1029E','C10DAE'}
+    assert len(entries) >= {2:32,6:38,125:55}[args.mode] and len(bodies) >= {2:21,6:27,125:35}[args.mode], exports
+    required={'C10DAE'}
     if args.mode==2:
-        required|={'C102D8','C10302','C10362','C0F920'}
+        required|={'C10272','C1029E','C102D8','C10302','C10362','C0F920'}
+    elif args.mode==125:
+        required|={'C10272','C1029E','C10C08','C0F992','C0FCB4'}
     else:
-        required|={'C10C08','C0F992','C0FCB4'}
+        required|={'C103E4','C10418','C10458','C104C2','C105A6','C105F4',
+                   'C10626','C1064C','C10900','C10942','C10970','C109AC',
+                   'C10A24','C10B1E'}
     assert required <= {
         item['stage'] for item in bodies}, bodies
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
@@ -63,7 +67,8 @@ def main():
                 print(comparison.stdout, end='', flush=True)
                 if comparison.returncode:
                     raise RuntimeError(comparison.stderr or comparison.stdout)
-    outcome='returns to menu' if args.mode==2 else 'runs over 2,000 scene frames, including Escape/restart'
+    outcome={2:'returns to menu',6:'runs over 384 scene frames',
+             125:'runs over 2,000 scene frames, including Escape/restart'}[args.mode]
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')
 

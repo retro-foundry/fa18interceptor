@@ -335,7 +335,7 @@ remaining paths. Control-effect component/face children are now connected;
 complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
-1, 2, 9, 125, 127 and demonstration mode 3 with recorder mode 3. Digit 3's mode 2
+1, 2, 6, 9, 125, 127 and demonstration mode 3 with recorder mode 3. Digit 3's mode 2
 now reaches its source prompts, record-4 playback, flight failure and menu
 return. 32 actual input/stage intervals and 21 sampled bodies match original
 instructions' compared RAM/display. The transition preserves the source
@@ -356,6 +356,24 @@ integration tests pass. No new comparison exclusions were added.
 See `analysis/native_mode_125_milestone.md` and run
 `python tools/native/check_mode_two.py --mode 125 --out build/native-flight/restore-check/original-check`.
 Complete mode-125 outcomes and sequence acceptance remain open.
+
+Next-mission digit 7 now uses the original pilot-log field to select mode 6
+and runs briefing/context/aircraft setup into sustained flight. The normal
+disk/input run reaches 401 scene/HUD frames. 38 actual input/stage intervals
+and 27 sampled bodies match compared original RAM/display. The source
+C0FECE transition sorts all lists from its saved A4=C29662 byte, independent
+of the request mask; mode-2's already preserved choice remains intact.
+C24FA4 message lookup, C29368 origin selection, setup engine/noise and
+C0A15C's scheduler are connected. Eight affected native integration tests,
+mode-2/mode-125 source regressions and current frontend checks pass.
+See `analysis/native_mode_six_milestone.md`; run
+`python tools/native/check_mode_two.py --mode 6 --out build/native-flight/mission-six/original-check`.
+Mode-6 completion/outcome children, cancellations and variants remain open.
+The next unconnected mission entry is mission-list F1's normal mode 3:
+`native_flight_enabled()` currently admits mode 3 only with recorder mode 3
+(the demonstration path). Follow actual menu/F1 input and the shared source
+briefing path before enabling other mission gates or adding children. Modes
+4, 5, 7 and 8 remain gated; do not claim their gameplay is connected.
 
 Whole gameplay sequences under the revised timing scope, complete
 record/flag/counter state and post-result behavior remain unverified. Exact
