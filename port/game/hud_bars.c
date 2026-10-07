@@ -31,7 +31,7 @@ static int counts_down(gaddr redraws) {
     return 1;
 }
 
-void fill_bar_words(uint16_t con0, int16_t plane, uint32_t cursor, int16_t shown_right, int16_t cut_left,
+gaddr fill_bar_words(uint16_t con0, int16_t plane, uint32_t cursor, int16_t shown_right, int16_t cut_left,
                     uint16_t size, int16_t modulo, uint16_t first_mask, uint16_t last_mask) {
     gaddr dest = plane_address(plane) + cursor;
     int16_t cut = (int16_t)(shown_right + cut_left);
@@ -55,23 +55,32 @@ void fill_bar_words(uint16_t con0, int16_t plane, uint32_t cursor, int16_t shown
     custom_write_ptr(BLTDPT, dest);
     custom_write(BLTSIZE, (uint16_t)(size - cut));
 #endif
+    return dest;
 }
 
-int fill_bar(uint16_t con0, int16_t plane, uint32_t rows, int16_t position, int16_t words, uint16_t size,
+BarDrawResult fill_bar_result(uint16_t con0, int16_t plane, uint32_t rows, int16_t position, int16_t words, uint16_t size,
              int16_t modulo, uint16_t first_mask, uint16_t last_mask) {
     int32_t cursor = (int32_t)(rows + rd_u32(REDRAW_STATE_LONG));
     int16_t shown_right = bound_span(&position, words, &cursor);
 
-    if (shown_right < 0) return 0;
-    fill_bar_words(con0, plane, (uint32_t)cursor, shown_right, position, size, modulo, first_mask, last_mask);
-    return 1;
+    if (shown_right < 0) return (BarDrawResult){0};
+    return (BarDrawResult){BAR_DRAW_DESTINATION,
+        fill_bar_words(con0, plane, (uint32_t)cursor, shown_right, position, size, modulo, first_mask, last_mask)};
+}
+int fill_bar(uint16_t con0, int16_t plane, uint32_t rows, int16_t position, int16_t words, uint16_t size,
+             int16_t modulo, uint16_t first_mask, uint16_t last_mask) {
+    return fill_bar_result(con0,plane,rows,position,words,size,modulo,first_mask,last_mask).kind==BAR_DRAW_DESTINATION;
+}
+static BarDrawResult last_bar(BarDrawResult prior,BarDrawResult next) {
+    return next.kind==BAR_DRAW_NONE?prior:next;
 }
 
 static int is_on_screen(int32_t x, int16_t last) {
     return x >= 0 && (int16_t)x <= last;
 }
 
-void draw_indicator_bars(void) {
+BarDrawResult draw_indicator_bars(void) {
+    BarDrawResult result={0},bar;
     gaddr record = viewed_record();
 
     if (counts_down(BAR_REDRAWS_A)) {
@@ -81,21 +90,26 @@ void draw_indicator_bars(void) {
             wr_u32(LINE_STYLE, 0xFFFFF);
             wr_u16(CURRENT_COLOUR, (rd_u8(record + 3) & 8) ? 9 : 0);
             draw_line_to_row((int16_t)x, y, (int16_t)(x + 9), y, 0xC7);
+            result.kind=BAR_DRAW_MARKER_LINE;
         }
     }
     if (counts_down(BAR_REDRAWS_B)) {
-        if (!fill_bar(rd_u16(record) & 0x800 ? BAR_SET : BAR_CLEAR, 0xC, 0x1A68, 0, 3, 0x1C3, 0x23, 0x7F, 0x8000))
+        bar=fill_bar_result(rd_u16(record) & 0x800 ? BAR_SET : BAR_CLEAR, 0xC, 0x1A68, 0, 3, 0x1C3, 0x23, 0x7F, 0x8000);
+        result=last_bar(result,bar);
+        if (bar.kind==BAR_DRAW_NONE)
             goto last;
     }
     if (counts_down(BAR_REDRAWS_C)) {
-        if (fill_bar(rd_u8(PLAYER_FLAGS_G) ? BAR_SET : BAR_CLEAR, 0xC, 0x1A14, 0x12, 2, 0x1C2, 0x25, 0xFFF, 0xFC00))
-            return;
+        bar=fill_bar_result(rd_u8(PLAYER_FLAGS_G) ? BAR_SET : BAR_CLEAR, 0xC, 0x1A14, 0x12, 2, 0x1C2, 0x25, 0xFFF, 0xFC00);
+        result=last_bar(result,bar);
+        if (bar.kind==BAR_DRAW_DESTINATION) return result;
     }
 last:
     if (counts_down(BAR_REDRAWS_E)) {
         int set = rd_u8(BAR_E_FLAG) && (rd_u8(BAR_REDRAWS_E) & 1); /* flashing */
-        fill_bar(set ? BAR_SET : BAR_CLEAR, 0xC, 0x1888, 0, 2, 0x202, 0x25, 0x7F, 0xFFFF);
+        result=last_bar(result,fill_bar_result(set ? BAR_SET : BAR_CLEAR, 0xC, 0x1888, 0, 2, 0x202, 0x25, 0x7F, 0xFFFF));
     }
+    return result;
 }
 
 /* The panel image: a pointer to its address, and pointers to each plane's. */
@@ -106,12 +120,12 @@ last:
 #define MODE_IMAGE      0x129FCu
 #define MODE_MASKS      0xC30D22u /* long[4] */
 
-void draw_mode_bar(void) {
+BarDrawResult draw_mode_bar(void) {
     gaddr record = viewed_record();
 
-    fill_bar((int8_t)rd_u8(BAR_REDRAWS_F) > 0 && (rd_u8(DISPLAY_FORCE) & 2) ? BAR_SET : BAR_CLEAR, 0xC, 0x1C70, 0,
+    BarDrawResult result=fill_bar_result((int8_t)rd_u8(BAR_REDRAWS_F) > 0 && (rd_u8(DISPLAY_FORCE) & 2) ? BAR_SET : BAR_CLEAR, 0xC, 0x1C70, 0,
              2, 0x202, 0x25, 0x3F, 0xFFFE);
-    if (!counts_down(BAR_REDRAWS_D)) return;
+    if (!counts_down(BAR_REDRAWS_D)) return result;
     {
         int index = (int8_t)(rd_u8(record + 0x7C) & 0x7F) >> 5;
         uint32_t mask = rd_u32(MODE_MASKS + (gaddr)(4 * index));
@@ -121,12 +135,13 @@ void draw_mode_bar(void) {
         gaddr dest;
         uint32_t skip;
 
-        if (shown_right < 0) return;
+        if (shown_right < 0) return result;
         cut = (int16_t)(shown_right + position);
         skip = (uint32_t)(int32_t)(int16_t)(position * 2);
         size = (uint16_t)(size - cut);
         modulo = (uint16_t)(cut * 2 + 1);
         dest = plane_address(0) + (gaddr)cursor;
+        result=(BarDrawResult){BAR_DRAW_DESTINATION,dest}; /* C30DEC/C30DEE */
 #ifdef FA18_NATIVE
         native_raster_panel_inverted(MODE_IMAGE+skip,mask+skip,dest,size,(int16_t)modulo,(int16_t)(modulo-1+0x25));
 #else
@@ -148,12 +163,14 @@ void draw_mode_bar(void) {
     }
     if (rd_u8(record + 2) & 0x80) {
         int32_t x0 = (int32_t)0xE + rd_s16(SPAN_ORIGIN_Y), x1 = (int32_t)0xC + rd_s16(SPAN_ORIGIN_Y);
-        if (!is_on_screen(x0, 0x13F) || !is_on_screen(x1, 0x13F)) return;
+        if (!is_on_screen(x0, 0x13F) || !is_on_screen(x1, 0x13F)) return result;
         wr_u32(LINE_STYLE, 0xFFFFF);
         wr_u16(CURRENT_COLOUR, 0);
         draw_line_to_row((int16_t)x0, (int16_t)(0xC0 + rd_s16(REDRAW_STATE_WORD)), (int16_t)x1,
                          (int16_t)(0xC3 + rd_s16(REDRAW_STATE_WORD)), 0xC7);
+        result.kind=BAR_DRAW_MARKER_LINE;
     }
+    return result;
 }
 
 void blit_image(uint16_t con0, uint32_t mask, gaddr images, uint32_t rows, int16_t position, int16_t words, uint16_t size,

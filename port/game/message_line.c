@@ -151,37 +151,40 @@ static int message_text(void) {
     return 1;
 }
 
-static void line_in_plane(int16_t plane, uint16_t mode) {
+static TextDrawResult line_in_plane(int16_t plane, uint16_t mode) {
     SmallText line = small_text_line(LINE_LENGTH, MESSAGE_LINE, LINE_LAYOUT, 0x1E0C, 0xC, plane, mode, 1);
-    if (rd_u8(CONTEXT_SELECT) && !rd_u8(TEXT_ALWAYS)) return;
-    draw_small_text(&line);
+    if (rd_u8(CONTEXT_SELECT) && !rd_u8(TEXT_ALWAYS)) return (TextDrawResult){0};
+    return draw_small_text(&line);
 }
 
-static void draw_line(void) {
+static TextDrawResult draw_line(void) {
     uint8_t kind = (uint8_t)(rd_u8(MESSAGE_FLAGS) >> 6);
     int16_t first = kind == 0 ? 0 : kind == 1 ? 4 : 0xC, second = kind < 2 ? 0xC : 4, third = kind == 0 ? 4 : 0;
 
-    line_in_plane(first, SMALL_DRAW);
+    TextDrawResult result=line_in_plane(first, SMALL_DRAW);
     if (rd_u8(CONTEXT_SELECT)) {
         SmallText below = small_text_line(LINE_LENGTH, MESSAGE_LINE, LINE_LAYOUT, 0x1B14, 0xC, 0xC, SMALL_INVERSE, 0);
-        if (!rd_u8(TEXT_ALWAYS)) return;
-        draw_small_text(&below);
-        return;
+        if (!rd_u8(TEXT_ALWAYS)) return result;
+        return draw_small_text(&below);
     }
-    if ((int8_t)rd_u8(MESSAGE_REDRAWS) < 0) return;
+    if ((int8_t)rd_u8(MESSAGE_REDRAWS) < 0) return result;
     wr_u8(MESSAGE_REDRAWS, (uint8_t)(rd_u8(MESSAGE_REDRAWS) - 1));
     line_in_plane(second, SMALL_CLEAR);
-    line_in_plane(third, SMALL_CLEAR);
+    return line_in_plane(third, SMALL_CLEAR);
 }
 
-void draw_message_line(void) {
+TextDrawResult draw_message_line(void) {
     int16_t selected = rd_s16(SELECTED_RECORD);
 
     if (selected >= 0 && !(rd_u16(COCKPIT_FLAGS) & 0x81) && count_down(INFO_DELAY) < 0) {
         wr_u8(INFO_DELAY, 0xFF);
-        if (!info_line(selected)) return;
+        if (!info_line(selected)) return (TextDrawResult){0};
     } else if (!message_text()) {
-        return;
+        return (TextDrawResult){0};
     }
-    draw_line();
+    TextDrawResult result=draw_line();
+    /* C32494/C324C6/C32506 may format info before a context skips text.
+     * That separate formatting return has not yet been reconstructed. */
+    if(result.kind==TEXT_DRAW_NONE) result.kind=TEXT_DRAW_UNRESOLVED;
+    return result;
 }

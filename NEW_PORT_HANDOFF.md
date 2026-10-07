@@ -2,6 +2,16 @@
 
 ## Objective and user constraints
 
+Latest connected HUD return (2026-10-07): source bar destinations, small-text
+character/glyph results and periodic cockpit redraw pass counts now reach the
+first depleted recorder flare/chaff command. Forty-three actual flight bodies
+and 60 recorder input parents match original compared RAM/drawing, including
+twelve new HUD/redraw cases. Focused checks match 405 HUD RAM cases and 117
+defined returns with clipped and skipped paths. Nine affected checks pass;
+Release/Debug and both reference runners build. Selected unfinished drawing
+and intervening-command returns remain explicit missing contracts. See
+`analysis/native_hud_input_returns.md`. The complete-port goal remains active.
+
 Latest connected drawing return (2026-10-07): periodic C2F582 page clears
 publish their actual pattern for the next first depleted recorder command.
 Twelve clears reached by the normal game counter and twelve following input

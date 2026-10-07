@@ -28,9 +28,9 @@ static HudStreamState numeric_child(void *context,enum StreamChild child,HudStre
     return values;
 }
 
-void native_frame_selection_cleanup(void) {
+int native_frame_selection_cleanup(void) {
     wr_u16(UPDATE_STAGE_MARKER,0x1d4);
-    drop_lost_selection(); /* C12242; C31F4A immediately following is RTS. */
+    return drop_lost_selection(); /* C12242; C31F4A immediately following is RTS. */
 }
 
 int native_frame_debug_overlay(void) {

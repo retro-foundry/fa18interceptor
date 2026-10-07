@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Latest connected HUD return (2026-10-07): bar destinations, small-text
+character/glyph results and periodic cockpit redraw pass counts now reach the
+next first depleted recorder flare/chaff command. The real HUD owners compose
+these results in source order; selected cleanup/grid/label/debug work with
+unfinished contracts invalidates them. The complete suite matches 43 flight
+bodies and 60 recorder input parents, including twelve new HUD/redraw cases.
+Focused HUD checks match 405 non-stack RAM cases and 117 defined returns,
+including clipping and skipped redraws. Nine affected native checks pass;
+Release/Debug and both reference MSVC runners build. See
+`analysis/native_hud_input_returns.md`. Full port remains active.
+
 Latest connected drawing return (2026-10-07): C2F582 now publishes its actual
 page-clear pattern for the next first depleted pending flare/chaff command.
 Twelve clears reached by the normal game counter and twelve following input

@@ -45,8 +45,12 @@ typedef struct {
 SmallText small_text_line(int count, gaddr chars, gaddr layout, gaddr rows, int16_t x_origin, int16_t plane,
                           uint16_t mode, int in_view);
 
+/* The last source character load or glyph selection; clipping still loads
+ * the character. An odd destination enters a separate fault-return contract. */
+enum TextDrawKind { TEXT_DRAW_NONE, TEXT_DRAW_CHARACTER, TEXT_DRAW_GLYPH, TEXT_DRAW_FAULT, TEXT_DRAW_UNRESOLVED };
+typedef struct { enum TextDrawKind kind; uint8_t character; gaddr glyph; } TextDrawResult;
 /* Draw a SmallText line (characters outside the 40-byte row are skipped). */
-void draw_small_text(const SmallText *text);
+TextDrawResult draw_small_text(const SmallText *text);
 
 /* Write `count` hex digits of DISPLAY_VALUE_BCD backwards ending before
  * `end`, leading zeros (not the last digit) as spaces. */

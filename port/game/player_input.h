@@ -26,7 +26,7 @@ void queue_view_key(uint8_t raw);
  * selection and the view record, request a full update and, outside a
  * context, reset the view mode and span origins and queue_view_key(0)
  * (TARGET_RECORD holds the selection). */
-void drop_lost_selection(void);
+int drop_lost_selection(void); /* True when a view command was published. */
 
 /* The throttle keys' field of PLAYER_STICK ($C1B4D0 up, $C1B4D4 down,
  * $C1B4DE hold). */

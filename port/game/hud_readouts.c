@@ -62,11 +62,11 @@ static void put(gaddr at, const char *s) {
 
 /* `count` characters from `chars`, `digits` hex digits of DISPLAY_VALUE_BCD
  * ending at `end` written into them first. */
-static void small_readout(int count, gaddr chars, gaddr end, int digits, int keep_zeros, gaddr layout, gaddr rows,
+static TextDrawResult small_readout(int count, gaddr chars, gaddr end, int digits, int keep_zeros, gaddr layout, gaddr rows,
                           int16_t x_origin, int16_t plane, uint16_t mode, int in_view) {
     SmallText line = small_text_line(count, chars, layout, rows, x_origin, plane, mode, in_view);
     format_digits(end, digits, 1, keep_zeros);
-    draw_small_text(&line);
+    return draw_small_text(&line);
 }
 
 /* In a context: the line in plane 0 and, inverted, in plane $C. */
@@ -76,14 +76,14 @@ static void small_readout_twice(int count, gaddr chars, gaddr end, int digits, i
     small_readout(count, chars, end, digits, keep_zeros, layout, rows, x_origin, 0xC, SMALL_INVERSE, 0);
 }
 
-void draw_scale_readout(void) {
+TextDrawResult draw_scale_readout(void) {
     uint8_t mode;
 
-    if ((int8_t)rd_u8(SCALE_REDRAWS) <= 0) return;
+    if ((int8_t)rd_u8(SCALE_REDRAWS) <= 0) return (TextDrawResult){0};
     wr_u8(SCALE_REDRAWS, (uint8_t)(rd_u8(SCALE_REDRAWS) - 1));
     mode = rd_u8(viewed_record() + 0x63) & 15;
     show(mode == 9 ? 2 : mode == 0xB ? 10 : 40);
-    small_readout(3, TEXT_LINE, TEXT_LINE + 3, 3, 0, LAYOUT_THREE, 0x1CD2, 0x12, 4, SMALL_DRAW, 1);
+    return small_readout(3, TEXT_LINE, TEXT_LINE + 3, 3, 0, LAYOUT_THREE, 0x1CD2, 0x12, 4, SMALL_DRAW, 1);
 }
 
 void draw_zoom_readout(void) {

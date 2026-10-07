@@ -17,12 +17,17 @@
  * lies beyond the view ($C30CC4 after $C310E2). */
 #define BAR_CLEAR 0x030A
 #define BAR_SET   0x03FA
+enum BarDrawKind { BAR_DRAW_NONE, BAR_DRAW_DESTINATION, BAR_DRAW_MARKER_LINE };
+typedef struct { enum BarDrawKind kind; gaddr destination; } BarDrawResult;
+/* Actual C30CCA/C30CE0 destination, or no assignment when clipped. */
+BarDrawResult fill_bar_result(uint16_t con0, int16_t plane, uint32_t rows, int16_t position, int16_t words,
+                             uint16_t size, int16_t modulo, uint16_t first_mask, uint16_t last_mask);
 int fill_bar(uint16_t con0, int16_t plane, uint32_t rows, int16_t position, int16_t words, uint16_t size,
              int16_t modulo, uint16_t first_mask, uint16_t last_mask);
 
 /* The same once bounded ($C30CC4): `cursor` the rows' offset, words cut
  * off on the right (shown_right, bound_span's result) and on the left. */
-void fill_bar_words(uint16_t con0, int16_t plane, uint32_t cursor, int16_t shown_right, int16_t cut_left,
+gaddr fill_bar_words(uint16_t con0, int16_t plane, uint32_t cursor, int16_t shown_right, int16_t cut_left,
                     uint16_t size, int16_t modulo, uint16_t first_mask, uint16_t last_mask);
 
 /* An image in all four planes ($C30EAA): A the shared `mask`, B each
@@ -33,12 +38,12 @@ void blit_image(uint16_t con0, uint32_t mask, gaddr images, uint32_t rows, int16
 
 /* Three indicator bars and a marker line, each redrawn while its countdown
  * runs ($C30B5C). */
-void draw_indicator_bars(void);
+BarDrawResult draw_indicator_bars(void);
 
 /* A bar, set while BAR_REDRAWS_F is positive; then, while BAR_REDRAWS_D
  * runs, the record's +$7C image and, while its +$02 bit 7 is set, a marker
  * line ($C30D34). */
-void draw_mode_bar(void);
+BarDrawResult draw_mode_bar(void);
 
 /* The compass: update it, then (when the tape position changes) blit the
  * tape image shifted to it into plane 3, and a marker line ($C30F78). */

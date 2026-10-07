@@ -1,5 +1,13 @@
 # Native port runner
 
+HUD bar destinations and small-text character/glyph results now supply the
+first depleted recorder flare/chaff command. The periodic cockpit redraw also
+returns its source pass count. Forty-three actual bodies and 60 recorder input
+parents match original compared RAM/drawing; focused HUD checks match 405 RAM
+cases and 117 defined returns. Unfinished drawing and intervening-command
+returns remain explicit missing contracts. See
+`../../analysis/native_hud_input_returns.md`. Whole-game acceptance stays open.
+
 The periodic page-top clear now returns its actual pattern to the next first
 depleted recorder flare/chaff command when the later label/debug passes skip.
 The current suite matches 31 flight bodies and 48 recorder input parents,

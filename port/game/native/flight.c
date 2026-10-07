@@ -293,7 +293,7 @@ static int finish_frame_clock(NativeFrontend *game) {
     if((saved_tick&31)==8)
         game->completed_input_return=(NativeInputReturn){(uint8_t)clear_page_plane_tops(),NATIVE_INPUT_RETURN_PAGE_CLEAR};
     else if(!rd_u8(ORIGIN_DETAIL_MODE) && (saved_tick&31)==16)
-        request_cockpit_redraw(); /* C082B8; C10B90 is the aircraft reset. */
+        game->completed_input_return=(NativeInputReturn){(uint8_t)request_cockpit_redraw(),NATIVE_INPUT_RETURN_REDRAW};
     if(!rd_u8(ORIGIN_GATE_A)) wr_u16(UPDATE_TICK,(uint16_t)(rd_u16(UPDATE_TICK)+1));
     game->flight_timer_pending=0;
     if(native_frame_scene_labels()) /* C0F380, after the counter. */
@@ -337,10 +337,12 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
         update_message(); /* C11BFC at C0F12C, before instruments. */
         update_control_actions(NULL,NULL); /* C12950 at C0F132. */
         ++game->control_frames;
-        native_hud_draw(saved_tick);
+        game->completed_input_return=native_hud_draw(saved_tick);
         ++game->hud_frames;
-        native_frame_selection_cleanup();
-        native_frame_grid_and_markers(); /* C0F2F0, before the timer owner. */
+        if(native_frame_selection_cleanup())
+            game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
+        if(native_frame_grid_and_markers()) /* C0F2F0, before the timer owner. */
+            game->completed_input_return.owner=NATIVE_INPUT_RETURN_UNKNOWN;
         /* C25312/C2548A precede C0EFD4's game counter increment. Polls
          * resume on later PAL ticks without repeating physics or drawing. */
         game->flight_saved_tick=saved_tick;

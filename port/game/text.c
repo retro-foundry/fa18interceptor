@@ -61,7 +61,8 @@ SmallText small_text_line(int count, gaddr chars, gaddr layout, gaddr rows, int1
     return text;
 }
 
-void draw_small_text(const SmallText *text) {
+TextDrawResult draw_small_text(const SmallText *text) {
+    TextDrawResult result={0};
     gaddr plane = rd_u32(rd_u32(PAGE_PLANE_TABLE) + (gaddr)(int32_t)text->plane_offset);
     int16_t column = (int16_t)(text->column * 2);
     gaddr layout = text->layout, chars = text->chars;
@@ -71,13 +72,16 @@ void draw_small_text(const SmallText *text) {
         int16_t at = rd_s16(layout);
         uint16_t mode = rd_u16(layout + 2);
         uint8_t ch = rd_u8(chars++);
+        result=(TextDrawResult){TEXT_DRAW_CHARACTER,ch,0}; /* C327AA */
         int16_t left = (int16_t)(text->x_origin + column);
         gaddr dest, glyph;
         /* BLT tests the true sign of the sum; the 40 limit the wrapped word. */
         if ((int32_t)left + at < 0 || (int16_t)(left + at) >= 40) continue;
         dest = (gaddr)(int32_t)(int16_t)(column + at) + text->rows + plane;
         glyph = SMALL_GLYPHS + (gaddr)(int32_t)rd_s16(SMALL_GLYPHS + (gaddr)(int32_t)(int16_t)((ch - 0x20) * 2));
+        result=(TextDrawResult){TEXT_DRAW_GLYPH,ch,glyph}; /* C327D6 */
         if (dest & 1) {
+            result.kind=TEXT_DRAW_FAULT;
             wr_u16(ERROR_CODE, 0x46);
             continue;
         }
@@ -88,6 +92,7 @@ void draw_small_text(const SmallText *text) {
             plot_glyph3(glyph, dest, (bits >> 12) & 15, 5, how);
         }
     }
+    return result;
 }
 
 void format_digits(gaddr end, int count, int hex, int keep_zeros) {

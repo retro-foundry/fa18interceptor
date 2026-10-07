@@ -4,13 +4,14 @@
 #include <stdint.h>
 
 #include "memory.h"
+#include "text.h"
 
 /* The cockpit's numeric readouts for the viewed control record. Each builds
  * its characters in TEXT_LINE and draws them with the small (3x5) or the
  * 8-pixel text plotter. Most redraw only when the value changes (a cache
  * word, see display_value_to_draw) or for a few passes after it does. */
 
-void draw_scale_readout(void);    /* $C31A64: 2, 10 or 40 by the record's +$63 */
+TextDrawResult draw_scale_readout(void); /* $C31A64: 2, 10 or 40 by +$63 */
 void draw_zoom_readout(void);     /* $C31ACC: 10, 20 or 40 by ZOOM_SCALE */
 void draw_speed_readout(void);    /* $C31F4C: +$6E / 12, "KTS" in a context */
 void draw_altitude_readout(void); /* $C3201A: +$18 >> 10 * 5, "FT" in a context */

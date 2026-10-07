@@ -45,7 +45,7 @@ static MarkerState marker_child(void *context,enum MarkerChild child,MarkerState
     return values;
 }
 
-void native_frame_grid_and_markers(void) {
+int native_frame_grid_and_markers(void) {
     const MarkerHooks hooks={.frame=grid_frame,.consume_values=marker_child};
-    draw_view_grid_and_markers((MarkerState){0},&hooks);
+    return draw_view_grid_and_markers((MarkerState){0},&hooks);
 }

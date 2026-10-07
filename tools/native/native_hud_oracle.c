@@ -16,6 +16,7 @@
 #define draw_mark_polygon host_draw_mark_polygon
 #define put hud_text_put
 #define fill_bar host_fill_bar
+#define fill_bar_result host_fill_bar_result
 #define fill_bar_words host_fill_bar_words
 #define blit_image host_blit_image
 #define draw_indicator_bars host_draw_indicator_bars
@@ -117,8 +118,22 @@
 #undef draw_line
 #define draw_line host_draw_line
 #include "../../port/game/native/hud.c"
+static NativeInputReturn checked_return;
+static void check_scale_return(void) {
+    checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_scale_readout());
+}
+static void check_message_return(void) {
+    checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_message_line());
+}
+static void check_indicator_return(void) {
+    checked_return=bar_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_BAR},host_draw_indicator_bars());
+}
+static void check_mode_return(void) {
+    checked_return=bar_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_BAR},host_draw_mode_bar());
+}
 static int hud_original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[4]=rd_u16(LINE_LAST_ROW);
+    REG_D[4]=0x51ab12e7; /* Independent inherited input for preservation exits. */
     REG_A[7]=0xc7ff00u;wr_u32(REG_A[7],0xc70000u);
     m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=pc;
     fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
@@ -147,36 +162,49 @@ static int hud_owners(void) {
         {0xc30918,host_draw_gauge_bar},{0xc3003a,host_draw_panel_mark},
         {0xc328a8,host_draw_weapon_status},{0xc321d2,host_draw_grid_z_readout},
         {0xc32260,host_draw_grid_x_readout},{0xc31acc,host_draw_zoom_readout},
-        {0xc31a64,host_draw_scale_readout},{0xc30b5c,host_draw_indicator_bars},
-        {0xc30d34,host_draw_mode_bar},
-        {0xc31226,host_draw_postflight_renderer_dispatch},{0xc322ee,host_draw_message_line},
+        {0xc31a64,check_scale_return},{0xc30b5c,check_indicator_return},
+        {0xc30d34,check_mode_return},
+        {0xc31226,host_draw_postflight_renderer_dispatch},{0xc322ee,check_message_return},
         {0xc11bfc,update_message},{0xc11b44,tick_notification_cadence}
     };
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
-    uint8_t *expected=malloc(0x100000);unsigned count=0;
+    uint8_t *expected=malloc(0x100000);unsigned count=0,return_count=0;
     memcpy(saved,fa18_machine,sizeof *saved);
-    for(unsigned variant=0;variant<5;++variant) {
+    for(unsigned variant=0;variant<10;++variant) {
         for(unsigned test=0;test<sizeof cases/sizeof cases[0];++test) {
+            const int has_return=cases[test].host==check_scale_return || cases[test].host==check_message_return ||
+                cases[test].host==check_indicator_return || cases[test].host==check_mode_return;
+            if(variant>=5 && !has_return) continue;
             memcpy(fa18_machine,saved,sizeof *saved);
             const int16_t origins[]={0,-3,3,-20,20};
-            wr_u16(SPAN_ORIGIN,(uint16_t)origins[variant]);
-            wr_u16(SPAN_ORIGIN_Y,(uint16_t)(origins[variant]*16));
+            wr_u16(SPAN_ORIGIN,(uint16_t)origins[variant%5]);
+            wr_u16(SPAN_ORIGIN_Y,(uint16_t)(origins[variant%5]*16));
             wr_u16(REDRAW_STATE_WORD,0);wr_u32(REDRAW_STATE_LONG,0);
             wr_u8(REDRAW_FIRST,3);wr_u8(GAUGE_REFRESH,3);
             wr_u8(DISPLAY_UPDATE,3);wr_u8(WEAPON_REDRAWS,3);
             wr_u8(GRID_X_REDRAWS,3);wr_u8(GRID_Z_REDRAWS,3);
-            wr_u8(BAR_REDRAWS_A,3);wr_u8(BAR_REDRAWS_B,3);wr_u8(BAR_REDRAWS_C,3);
-            wr_u8(BAR_REDRAWS_D,3);wr_u8(BAR_REDRAWS_E,3);wr_u8(BAR_REDRAWS_F,3);
+            const uint8_t redraws=variant<5?3:0;
+            wr_u8(BAR_REDRAWS_A,redraws);wr_u8(BAR_REDRAWS_B,redraws);wr_u8(BAR_REDRAWS_C,redraws);
+            wr_u8(BAR_REDRAWS_D,redraws);wr_u8(BAR_REDRAWS_E,redraws);wr_u8(BAR_REDRAWS_F,redraws);
+            wr_u8(SCALE_REDRAWS,redraws);
             if(cases[test].entry==0xc31226u) {
                 wr_u8(GAUGE_REFRESH,(uint8_t)(variant%3));
                 wr_u16(STREAM_SKIP,(uint16_t)(variant*4));
             }
             memcpy(before,fa18_machine,sizeof *before);
+            checked_return=(NativeInputReturn){0};
             cases[test].host();
             memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
             memcpy(fa18_machine,before,sizeof *before);
             if(!hud_original(cases[test].entry)) {
                 fprintf(stderr,"HUD case %06X variant %u stopped, preceding PC %06X opcode %04X\n",cases[test].entry,variant,REG_PPC,REG_IR);return 0;
+            }
+            if(checked_return.owner!=NATIVE_INPUT_RETURN_UNKNOWN) {
+                if(checked_return.value!=(uint8_t)REG_D[4]) {
+                    fprintf(stderr,"HUD return %06X variant %u: source %02X host %02X\n",
+                        cases[test].entry,variant,(uint8_t)REG_D[4],checked_return.value);return 0;
+                }
+                ++return_count;
             }
             unsigned differences=0;
             for(unsigned i=0;i<0xffc00;++i) {
@@ -191,7 +219,7 @@ static int hud_owners(void) {
         }
     }
     memcpy(fa18_machine,saved,sizeof *saved);free(saved);free(before);free(expected);
-    printf("%u HUD instrument/panel cases match original non-stack RAM\n",count);return 1;
+    printf("%u HUD instrument/panel cases match original non-stack RAM; %u defined returns match\n",count,return_count);return 1;
 }
 #ifndef FA18_HUD_ORACLE_LIBRARY
 int main(int argc,char **argv) {

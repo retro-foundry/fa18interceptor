@@ -258,11 +258,11 @@ choose_marker:
 }
 
 /* C2B564: two original grid runs followed by all sixteen control records. */
-void draw_view_grid_and_markers(MarkerState w,const MarkerHooks *h) {
+int draw_view_grid_and_markers(MarkerState w,const MarkerHooks *h) {
     gaddr frame; int64_t remaining; uint32_t old,origin_offset=0; unsigned axis;
     const int native_values=h && h->consume_values;
-    observe(h,MM_TEST_BYTE,MM_OFFSET,rd_u8(0xc457adu),0); if(rd_s8(0xc457adu)<=0) return;
-    if(!test_byte(h,0xc45785u)) return;
+    observe(h,MM_TEST_BYTE,MM_OFFSET,rd_u8(0xc457adu),0); if(rd_s8(0xc457adu)<=0) return 0;
+    if(!test_byte(h,0xc45785u)) return 0;
     observe(h,MM_BEGIN_FRAME,MM_OFFSET,10,0); if(!h || !h->frame || (!native_values && !h->stack)) abort(); frame=h->frame(h->context);
     longword(h,0xc456e6u,0xfffff); word(h,0xc45954u,8); load_longs(&w,0xc45c3eu,7,h);
     old=w.screen_y; w.screen_y=w.x; w.x=old; observe(h,MM_EXCHANGE,MM_SCREEN_Y,MM_X,0);
@@ -336,4 +336,5 @@ next_record:
         AW(row_y,MM_ROW_Y,512); CW(w.row_y,0x1e00);
     } while((int16_t)w.row_y<=0x1e00);
     observe(h,MM_END_FRAME,MM_OFFSET,0,0);
+    return 1;
 }
