@@ -99,6 +99,12 @@ int main(int argc,char **argv) {
                 pixel,previous_pixel,rd_u8(pixel),REG_PPC,REG_D[0],REG_D[1],REG_A[3],rd_u16(CURRENT_COLOUR),rd_u32(0xc18214));
     }
     if(step==10000000) {fprintf(stderr,"Frame body did not return at %06X\n",REG_PC);return 1;}
+    printf("Frame input carry: %u\n",REG_D[4]);
+    const char *expected_carry=getenv("FA18_FRAME_EXPECT_INPUT_CARRY");
+    if(expected_carry && (uint8_t)REG_D[4]!=(uint8_t)strtoul(expected_carry,NULL,0)) {
+        fprintf(stderr,"Frame input carry differs: source %02X native %02X\n",
+            (uint8_t)REG_D[4],(uint8_t)strtoul(expected_carry,NULL,0));return 1;
+    }
     unsigned differences=0,plane_differences=0,scratch_differences=0,voice_differences=0,busy_differences=0;
     uint8_t *voice_mask=calloc(0x100000,1);
     if(!voice_mask) return 1;

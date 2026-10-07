@@ -138,9 +138,13 @@ static void set_glyph(const MainControlHooks *h,MessageWorking *w,gaddr a) { w->
 static void refresh_colour(const MainControlHooks *h,MessageWorking *w) {
     w->colour=(w->control&0xf0u)>>4; observe(h,MC_COLOUR_FROM_CONTROL,0,0); word(h,MESSAGE_COLOUR,(uint16_t)w->colour);
 }
-void advance_main_loop_message_sequence(MessageWorking w,const MainControlHooks *h) {
+static MessageSequenceResult message_result(MessageWorking w,int assigned) {
+    return (MessageSequenceResult){(uint8_t)w.character,assigned};
+}
+MessageSequenceResult advance_main_loop_message_sequence(MessageWorking w,const MainControlHooks *h) {
+    int assigned=0;
     uint16_t selector,value,relative; uint8_t mode,event,cursor,flags,previous; unsigned i;
-    if(test_byte(h,0xc45871u)) return;
+    if(test_byte(h,0xc45871u)) return message_result(w,assigned);
     set_lookup(h,&w,MESSAGE_SELECTORS); w.control=secondary_byte(h,MESSAGE_CURSOR);
     observe(h,MC_SECONDARY_EXT_WORD,(uint16_t)(int16_t)(int8_t)w.control,0);
     selector=primary_word(h,w.lookup+(uint32_t)(int32_t)(int8_t)w.control); if(!selector) goto count_delay;
@@ -169,7 +173,7 @@ void advance_main_loop_message_sequence(MessageWorking w,const MainControlHooks 
         byte(h,MESSAGE_EVENT_COUNT,0); byte(h,MESSAGE_EVENT_CURSOR,0); byte(h,0xc457f7u,0);
         observe(h,MC_MESSAGE_CLEAR_BEGIN,0,0);
         for(i=0;i<10;++i) { wr_u8(MESSAGE_EVENTS+i,0); wr_u8(MESSAGE_BUFFER+i,0); observe(h,MC_MESSAGE_CLEAR_BYTE,0,0); }
-        observe(h,MC_MESSAGE_CLEAR_DONE,0,0); w.character=0; byte(h,MESSAGE_READY,0);
+        observe(h,MC_MESSAGE_CLEAR_DONE,0,0); w.character=0; assigned=1; byte(h,MESSAGE_READY,0);
     }
     byte(h,MESSAGE_ACTIVE,1); byte(h,MESSAGE_FLAGS,rd_u8(w.text)); set_text(h,&w,w.text+1);
     w.control=secondary_byte(h,w.text); set_text(h,&w,w.text+1); refresh_colour(h,&w);
@@ -178,14 +182,14 @@ void advance_main_loop_message_sequence(MessageWorking w,const MainControlHooks 
 active_sequence:
     value=rd_u16(MESSAGE_DELAY); observe(h,MC_TEST_WORD,value,0); if((int16_t)value>0) goto count_delay;
     mode=rd_u8(MESSAGE_MODE); observe(h,MC_COMPARE_BYTE,mode,2); if((int8_t)mode>=2) goto command_event;
-    value=subtract_word(h,MESSAGE_WAIT,1); if((int16_t)value>1) return;
+    value=subtract_word(h,MESSAGE_WAIT,1); if((int16_t)value>1) return message_result(w,assigned);
     if(!bit(h,rd_u8(MESSAGE_FLAGS),0)) { w=load_cursor(h,w,MESSAGE_RESTART_CURSOR); goto reset_repeat; }
     value=subtract_word(h,MESSAGE_REPEAT,1); if((int16_t)value<=1) goto reset_repeat;
     goto advance_ready;
 command_event:
     flags=rd_u8(MESSAGE_BUFFER_SPACE); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<0) goto finish_sequence;
     set_lookup(h,&w,MESSAGE_EVENTS); cursor=rd_u8(MESSAGE_EVENT_CURSOR); observe(h,MC_INDEX_BYTE,cursor,0); observe(h,MC_INDEX_EXT_WORD,(uint16_t)(int16_t)(int8_t)cursor,0);
-    event=rd_u8(w.lookup+(uint32_t)(int32_t)(int8_t)cursor); w.character=event; observe(h,MC_CHARACTER_BYTE,event,0); if(!event) return;
+    event=rd_u8(w.lookup+(uint32_t)(int32_t)(int8_t)cursor); w.character=event; assigned=1; observe(h,MC_CHARACTER_BYTE,event,0); if(!event) return message_result(w,assigned);
     observe(h,MC_COMPARE_BYTE,event,0x44); if(event==0x44) goto finish_sequence;
     flags=rd_u8(MESSAGE_READY); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<=0) goto reset_repeat;
     subtract_byte(h,MESSAGE_READY,1); subtract_byte(h,MESSAGE_EVENT_COUNT,1);
@@ -194,10 +198,10 @@ command_event:
     byte(h,MESSAGE_EVENT_CURSOR,cursor); goto restore_live;
 finish_sequence:
     mode=rd_u8(MESSAGE_MODE); observe(h,MC_COMPARE_BYTE,mode,3);
-    if(mode==3) { w=consume_message(h,MC_ACCEPT_TYPED_CODE,w); byte(h,MESSAGE_MODE,(uint8_t)(rd_u8(MESSAGE_MODE)|0x80)); return; }
-    byte(h,MESSAGE_MODE,(uint8_t)(mode&0xfd)); w=consume_message(h,MC_FINISH_SEQUENCE,w); byte(h,0xc457d5u,0xff); return;
+    if(mode==3) { w=consume_message(h,MC_ACCEPT_TYPED_CODE,w); byte(h,MESSAGE_MODE,(uint8_t)(rd_u8(MESSAGE_MODE)|0x80)); return message_result(w,assigned); }
+    byte(h,MESSAGE_MODE,(uint8_t)(mode&0xfd)); w=consume_message(h,MC_FINISH_SEQUENCE,w); byte(h,0xc457d5u,0xff); return message_result(w,assigned);
 advance_ready:
-    flags=rd_u8(MESSAGE_READY); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<=0) return;
+    flags=rd_u8(MESSAGE_READY); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<=0) return message_result(w,assigned);
     subtract_byte(h,MESSAGE_READY,1); goto restore_live;
 reset_repeat:
     w.control=secondary_byte(h,MESSAGE_PACE); observe(h,MC_SECONDARY_EXT_WORD,(uint16_t)(int16_t)(int8_t)w.control,0); word(h,MESSAGE_REPEAT,(uint16_t)(int16_t)(int8_t)w.control);
@@ -217,7 +221,7 @@ emit_character:
     if((int8_t)mode>=2) {
         observe(h,MC_TEST_BYTE,(uint8_t)w.character,0); if(!(uint8_t)w.character) goto publish_live;
         observe(h,MC_CHARACTER_AND_WORD,255,0); w.character&=255; set_lookup(h,&w,0xc331ceu);
-        w.character=rd_u8(w.lookup+w.character); observe(h,MC_CHARACTER_BYTE,w.character,0); if(!w.character) goto publish_live;
+        w.character=rd_u8(w.lookup+w.character); assigned=1; observe(h,MC_CHARACTER_BYTE,w.character,0); if(!w.character) goto publish_live;
         observe(h,MC_COMPARE_BYTE,w.character,32); if((int8_t)w.character<32) goto prepare_character;
         flags=rd_u8(MESSAGE_READY); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<=0) goto prepare_character;
         observe(h,MC_COMPARE_BYTE,rd_u8(MESSAGE_MODE),3);
@@ -226,9 +230,9 @@ emit_character:
             observe(h,MC_INDEX_BYTE,cursor,0); observe(h,MC_INDEX_EXT_WORD,(uint16_t)(int16_t)(int8_t)cursor,0); byte(h,w.lookup+(uint32_t)(int32_t)(int8_t)cursor,(uint8_t)w.character);
         }
         add_byte(h,MESSAGE_BUFFER_SIZE,1); previous=subtract_byte(h,MESSAGE_BUFFER_SPACE,1);
-        if((int8_t)previous<1) { w.character=32; observe(h,MC_CHARACTER_LONG,32,0); }
+        if((int8_t)previous<1) { w.character=32; assigned=1; observe(h,MC_CHARACTER_LONG,32,0); }
     } else {
-        w.character=rd_u8(w.text); observe(h,MC_CHARACTER_BYTE,w.character,0);
+        w.character=rd_u8(w.text); assigned=1; observe(h,MC_CHARACTER_BYTE,w.character,0);
         if((int8_t)w.character<0) goto next_selector;
         if(!w.character) goto next_segment;
     }
@@ -239,7 +243,7 @@ prepare_character:
     w.character&=255; observe(h,MC_CHARACTER_AND_WORD,255,0); observe(h,MC_COMPARE_BYTE,(uint8_t)w.character,8);
     if((uint8_t)w.character==8) {
         flags=rd_u8(MESSAGE_READY); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<=0) set_positions(h,&w,w.positions-4);
-        w.character=92; observe(h,MC_CHARACTER_LONG,92,0); w.colour=0; observe(h,MC_COLOUR_WORD,0,0);
+        w.character=92; assigned=1; observe(h,MC_CHARACTER_LONG,92,0); w.colour=0; observe(h,MC_COLOUR_WORD,0,0);
     }
     observe(h,MC_CHARACTER_SUB_WORD,32,0); w.character=(uint16_t)(w.character-32);
     if(bit(h,rd_u8(MESSAGE_FLAGS),0)) {
@@ -269,19 +273,19 @@ draw_character:
     if(!bit(h,rd_u8(MESSAGE_FLAGS),0)) { set_positions(h,&w,w.positions+4); set_text(h,&w,w.text+1); store_cursor(h,w,MESSAGE_LIVE_CURSOR); goto reset_repeat; }
     flags=rd_u8(MESSAGE_READY); observe(h,MC_TEST_BYTE,flags,0); if((int8_t)flags<=0) { set_positions(h,&w,w.positions+4); set_text(h,&w,w.text+1); }
 publish_live:
-    store_cursor(h,w,MESSAGE_LIVE_CURSOR); return;
+    store_cursor(h,w,MESSAGE_LIVE_CURSOR); return message_result(w,assigned);
 next_selector:
     set_lookup(h,&w,MESSAGE_SELECTORS); cursor=primary_byte(h,MESSAGE_CURSOR); observe(h,MC_PRIMARY_EXT_WORD,(uint16_t)(int16_t)(int8_t)cursor,0);
     value=rd_u16(w.lookup+2+(uint32_t)(int32_t)(int8_t)cursor); observe(h,MC_TEST_WORD,value,0);
     if(value) { add_byte(h,MESSAGE_CURSOR,2); goto reset_active; }
-    byte(h,MESSAGE_MODE,1); word(h,MESSAGE_DELAY,50); byte(h,MESSAGE_CURSOR,0); longword(h,MESSAGE_SELECTORS,0); return;
+    byte(h,MESSAGE_MODE,1); word(h,MESSAGE_DELAY,50); byte(h,MESSAGE_CURSOR,0); longword(h,MESSAGE_SELECTORS,0); return message_result(w,assigned);
 next_segment:
     if(!bit(h,rd_u8(MESSAGE_FLAGS),0)) {
         previous=subtract_byte(h,MESSAGE_SEGMENT_DELAY,1);
         if((int8_t)previous>=1) {
             w=load_cursor(h,w,MESSAGE_RESTART_CURSOR); store_cursor(h,w,MESSAGE_LIVE_CURSOR); w.control=secondary_byte(h,0xc457d7u);
-            if(w.control) { observe(h,MC_SECONDARY_SUB_BYTE,1,0); if((uint8_t)(w.control-1)!=0) return; }
-    observe(h,MC_SECONDARY_LONG,2,0); consume_message(h,MC_SEQUENCE_RESTART_TONE,w); return;
+            if(w.control) { observe(h,MC_SECONDARY_SUB_BYTE,1,0); if((uint8_t)(w.control-1)!=0) return message_result(w,assigned); }
+    observe(h,MC_SECONDARY_LONG,2,0); consume_message(h,MC_SEQUENCE_RESTART_TONE,w); return message_result(w,assigned);
         }
     }
     set_text(h,&w,w.text+1); value=primary_byte(h,w.text); set_text(h,&w,w.text+1); observe(h,MC_PRIMARY_EXT_WORD,(uint16_t)(int16_t)(int8_t)value,0);
@@ -297,4 +301,5 @@ count_delay:
     if((int16_t)value>0) { value=subtract_word(h,MESSAGE_DELAY,1); if((int16_t)value<=1) byte(h,MESSAGE_MODE,(uint8_t)(rd_u8(MESSAGE_MODE)|0x80)); }
 reset_active:
     byte(h,MESSAGE_ACTIVE,0);
+    return message_result(w,assigned);
 }

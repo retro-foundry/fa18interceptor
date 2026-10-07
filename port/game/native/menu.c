@@ -182,7 +182,7 @@ static void selection_value(void *context,enum CommandSelectionPhase phase,uint3
     }
 }
 static int16_t carried_selection(void *context) {
-    const NativeCommand *command=context;
+    NativeCommand *command=context;
     const CommandRequest *r=&command->flight.request;
     if(r->action==COMMAND_CHAFF || (r->action==COMMAND_FLARE && !r->modifier)) {
         const gaddr stock=r->action==COMMAND_CHAFF?MISSION_LEVEL_A:MISSION_LEVEL_B;
@@ -193,6 +193,10 @@ static int16_t carried_selection(void *context) {
         if(command->selection_known) return command->flight.carried_event;
         if(rd_s8(stock)>1) return 0;
         if(rd_u8(KEY_TAKEN)) return 0;
+        if(command->game->message_input_assigned) {
+            command->flight.carried_event=command->game->message_input_byte;
+            return command->flight.carried_event;
+        }
         fputs("native input missing depleted recorder countermeasure carry\n",stderr);abort();
     }
     /* C1BCEE's recorder $FD arm changes only the inherited selection,
@@ -225,6 +229,9 @@ static void dispatch(NativeFrontend *game,uint8_t raw,int pending) {
         carried_selection,dispatch_child,NULL,&command,prepare_action};
     if(pending) dispatch_pending_command(&hooks);
     else dispatch_keyboard_command(raw,&hooks);
+    /* Other commands can replace this source return. Its complete producer
+     * contract is scoped to the first pending command after C32CEE. */
+    game->message_input_assigned=0;
 }
 void native_menu_dispatch_raw(NativeFrontend *game,uint8_t raw) { dispatch(game,raw,0); }
 void native_menu_dispatch_pending(NativeFrontend *game) { dispatch(game,0,1); }

@@ -37,5 +37,9 @@ typedef struct {
     MessageWorking (*consume_values)(void *context,enum MainControlChild child,MessageWorking work);
 } MainControlHooks;
 void advance_main_loop_control_records(gaddr frame,const MainControlHooks *h);
-void advance_main_loop_message_sequence(MessageWorking work,const MainControlHooks *h);
+/* C32CEE can assign a character or glyph address consumed by the following
+ * pending-input parent. Only the low byte is part of that publication contract.
+ * Delay/no-message exits preserve the caller's value rather than define zero. */
+typedef struct { uint8_t input_byte; int assigned; } MessageSequenceResult;
+MessageSequenceResult advance_main_loop_message_sequence(MessageWorking work,const MainControlHooks *h);
 #endif

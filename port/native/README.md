@@ -1,5 +1,12 @@
 # Native port runner
 
+The final message renderer now returns its defined character/glyph byte to
+the first depleted pending flare/chaff command. Nineteen flight bodies and
+36 recorder input parents match original compared RAM/drawing, including
+twelve independently verified first-depleted returns. Inactive message frames
+invalidate that return; drawing/intervening-command producers remain unfinished.
+See `../../analysis/native_message_input_carry_milestone.md`.
+
 The reported demo outside-view clipping after takeoff is fixed. Attached
 projection now consumes the original model vertex, as C1F2EE does. All 223
 independent takeoff boundaries match both drawing pages, camera state and

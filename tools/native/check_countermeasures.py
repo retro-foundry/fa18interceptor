@@ -6,6 +6,8 @@ No original full replay is run; complete body comparisons retain HUD pixels.
 """
 import argparse
 import json
+import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -39,15 +41,20 @@ def check(args, work, capture_dir):
     parents = [entry for entry in exports if 'control_parent' in entry]
     fd_inputs = [entry for entry in exports if 'fd_input' in entry]
     pending_inputs = [entry for entry in exports if 'pending_input' in entry]
+    message_bodies = [entry for entry in exports if 'message_body' in entry]
     assert [body['capture'] for body in bodies] == list(range(4)), bodies
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
     assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
-    assert [entry['pending_input'] for entry in pending_inputs] == list(range(24)), pending_inputs
+    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(36)), pending_inputs
+    assert [entry['message_body'] for entry in message_bodies] == list(range(15)), message_bodies
+    assert [entry['assigned'] for entry in message_bodies] == [True] * 13 + [False] * 2, message_bodies
+    assert {entry['input_byte'] & 0x80 for entry in message_bodies[:12]} == {0, 0x80}
     assert sum(entry['chain'] for entry in pending_inputs) == 12, pending_inputs
     assert {entry['recorder_mode'] for entry in pending_inputs} == {1, 2, 3}, pending_inputs
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
-    for name in ('input', 'control_effects', 'frame_body'):
+    source_carries = {}
+    for name in ('frame_body', 'input', 'control_effects'):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
         # These reference builds share an object directory: keep sequential.
         build = subprocess.run([sys.executable, 'scripts/build_recomp.py', '--output',
@@ -58,14 +65,15 @@ def check(args, work, capture_dir):
         if build.returncode:
             raise RuntimeError(build.stderr or build.stdout)
         with (work / f'{name}-check.log').open('w') as log:
-            def compare(capture, *values):
+            def compare(capture, *values, environment=None):
                 comparison = subprocess.run([str(oracle), *map(str, values)],
-                    cwd=ROOT, capture_output=True, text=True, timeout=15)
+                    cwd=ROOT, capture_output=True, text=True, timeout=15, env=environment)
                 log.write(comparison.stdout + comparison.stderr)
                 log.flush()
                 if comparison.returncode:
                     retain_failure(capture, work)
                     raise RuntimeError(comparison.stderr or comparison.stdout)
+                return comparison.stdout
             if name != 'frame_body':
                 compare(str(prefix) + '.0', str(prefix) + '.0.before.dat')
             if name == 'input':
@@ -74,7 +82,8 @@ def check(args, work, capture_dir):
                     compare(parent, parent + '.before.dat', parent + '.after.dat', entry['raw'])
                 for entry in pending_inputs:
                     parent = str(prefix) + f".pending.{entry['pending_input']}"
-                    compare(parent, parent + '.before.dat', parent + '.after.dat', 'pending')
+                    carry = [source_carries[entry['pending_input'] - 24]] if entry['pending_input'] >= 24 else []
+                    compare(parent, parent + '.before.dat', parent + '.after.dat', 'pending', *carry)
             elif name == 'control_effects':
                 for entry in parents:
                     parent = str(prefix) + f".collision.{entry['control_parent']}"
@@ -85,8 +94,18 @@ def check(args, work, capture_dir):
                     compare(capture, capture + '.before.dat', capture + '.after.dat',
                             body['before_tick'], body['after_tick'], body['saved_tick'],
                             capture + '.source.dat')
+                for body in message_bodies:
+                    capture = str(prefix) + f".message.{body['message_body']}"
+                    environment = dict(os.environ)
+                    environment.pop('FA18_FRAME_EXPECT_INPUT_CARRY', None)
+                    if body['assigned']:
+                        environment['FA18_FRAME_EXPECT_INPUT_CARRY'] = str(body['input_byte'])
+                    output = compare(capture, capture + '.before.dat', capture + '.after.dat',
+                        body['before_tick'], body['after_tick'], body['saved_tick'],
+                        capture + '.source.dat', environment=environment)
+                    source_carries[body['message_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
         print(f'{name}: original contracts and actual runtime captures pass', flush=True)
-    print('Four keyboard-driven full bodies and 24 controlled recorder input parents match original compared RAM/display')
+    print('19 full bodies and 36 recorder input parents match original RAM/display, including 12 first-depleted message returns and two inactive exits')
 
 
 if __name__ == '__main__':

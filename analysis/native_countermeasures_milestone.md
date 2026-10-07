@@ -1,8 +1,9 @@
 # Connected native countermeasures — 2026-10-07
 
-Latest follow-up: claimed recorder depletion is connected and validated; a first
-depleted recorder command with an unclaimed input queue still needs its real
-enclosing carry producer. See the final section for current evidence. Earlier
+Latest follow-up: claimed recorder depletion and first depletion after a defined
+final-message return are connected. See `native_message_input_carry_milestone.md`
+for the newest 19 body/36 input-parent evidence. Other unclaimed returns still
+need their real enclosing producer. Earlier
 counts and remaining-scope paragraphs below describe their original batches.
 
 Keyboard F and C now execute the original flare/chaff commands, post their
@@ -177,9 +178,10 @@ cold-start flag/countdown gap. It now requires all 164 player-core bytes to
 match at the consumed carrier-input checkpoint; the corrected gate passes.
 This strengthens the comparison by removing its three-byte exception.
 
-A first depleted recorder countermeasure with KEY_TAKEN zero still aborts
-explicitly. Its event can change the claim/release test and raw/translated
+A first depleted recorder countermeasure with KEY_TAKEN zero outside the
+defined final-message return still aborts explicitly. Its event changes the
+claim/release test and raw/translated
 queue contents, so zero is not a valid general replacement. The source
 producer across preceding frame/message/drawing work must be reconstructed
-before connecting that remaining path. Complete mission sequences, typed-state
+before connecting the remaining drawing/intervening-command paths. Complete mission sequences, typed-state
 migration, audio fidelity and measured 20 ms acceptance remain unfinished.

@@ -28,12 +28,13 @@ static uint8_t *read_bytes(const char *path,size_t *size) {
     p=malloc((size_t)n);if(!p || fread(p,1,(size_t)n,f)!=(size_t)n || fclose(f)) return NULL;
     *size=(size_t)n;return p;
 }
+static uint32_t initial_input_carry=0x51ab12e7u;
 static int original_input_entry(NativeFrontend *game,gaddr entry,uint32_t raw) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;wr_u32(REG_A[7],0xc70000);
     if(entry==0xc1ad74) wr_u32(REG_A[7]+4,raw);
     /* Keyboard countermeasure selection must replace the inherited low byte,
      * even when the caller's word/high halves are unrelated. */
-    REG_D[4]=0x51ab12e7u;
+    REG_D[4]=initial_input_carry;
     m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=entry;
     fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
     for(unsigned steps=0;steps<1000000;++steps) {
@@ -75,7 +76,9 @@ int main(int argc,char **argv) {
     if(!state || !rom || !data || nd!=0x100000 || !m || !before || !expected || !game || !source) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
-    if(argc==4) {
+    if(argc==4 || argc==5) {
+        /* Optional independent preceding-body output. Native never reads it. */
+        if(argc==5) initial_input_carry=(uint32_t)strtoul(argv[4],NULL,0);
         size_t na=0;uint8_t *actual=read_bytes(argv[2],&na);unsigned differences=0;
         if(!actual || na!=0x100000) return 1;
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);

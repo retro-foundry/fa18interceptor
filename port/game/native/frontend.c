@@ -58,6 +58,9 @@ void native_frontend_enlist(NativeFrontend *game) {
     game->name_finished=0;
 }
 static MessageWorking child(void *context,enum MainControlChild which,MessageWorking w) {
+    /* C330FE uses the glyph address without replacing it; C3316A saves D0-D7.
+     * C25246 uses D0/D1 only. C1643A/C0EF08 use D0/D1 and OS calls which
+     * preserve D4. These native children retain the message character value. */
     NativeFrontend *game=context;
     if(which>=MC_GLYPH_FIRST && which<=MC_GLYPH_FOURTH) {
         unsigned plane=(unsigned)(which-MC_GLYPH_FIRST);
@@ -267,8 +270,12 @@ void native_frontend_tick(NativeFrontend *game) {
      * continue this frame without ticking its newly published C0FECE. */
     const int complete=native_flight_tick(game,!flight);
     /* C32CEE is C0EFD4's final child, after the flight/HUD work. */
-    if((flight || menu) && complete==NATIVE_FLIGHT_COMPLETE)
-        advance_main_loop_message_sequence((MessageWorking){0},&hooks);
+    if(complete) game->message_input_assigned=0;
+    if((flight || menu) && complete==NATIVE_FLIGHT_COMPLETE) {
+        const MessageSequenceResult message=advance_main_loop_message_sequence((MessageWorking){0},&hooks);
+        game->message_input_byte=message.input_byte;
+        game->message_input_assigned=message.assigned;
+    }
     if(complete && game->observe_frame)
         game->observe_frame(game,complete==NATIVE_FLIGHT_OWNER_EXIT?NATIVE_FRAME_OWNER_EXIT:NATIVE_FRAME_BODY_END,
                             0,game->frame_context);

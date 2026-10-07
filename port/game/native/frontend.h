@@ -37,6 +37,10 @@ struct NativeFrontend {
     unsigned postflight_callbacks,postflight_resets;
     uint8_t input_keys[256];
     unsigned input_read,input_count,input_passes,input_events;
+    /* Return of the completed C32CEE message owner, for the next first
+     * pending command. Invalid when that frame did not define the byte. */
+    uint8_t message_input_byte;
+    int message_input_assigned;
     uint16_t mouse_buttons,joystick_directions;
     uint8_t mouse_x_counter,mouse_y_counter;
     int input_server_installed;

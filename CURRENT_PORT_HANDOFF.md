@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest connected recorder return (2026-10-07): the completed C32CEE message
+renderer now publishes its defined character/glyph byte for the first depleted
+pending flare/chaff command with an unclaimed input queue. Twelve actual input
+parents consume independently verified original frame returns; 19 complete
+bodies and 36 recorder input parents match compared RAM/drawing. Two inactive
+message exits clear validity. The real message owner also passes 8,192 complete
+CPU/SR/RAM component calls. Drawing-derived and intervening-command returns
+still require their source owners and fail explicitly if consumed. See
+`analysis/native_message_input_carry_milestone.md`. Full port remains active.
+
 Latest user-reported controls fix (2026-10-07): comma/period rudder and SDL
 numeric keypad views now reach the native input queue. The former native mapper
 used a typed-text table that omits control keys and did not accept SDL keypad
@@ -20,7 +30,7 @@ cases. After ordinary Free Flight startup, 24 controlled input parents using
 the playable runtime match original RAM, including twelve successful-flare ->
 depleted-chaff sequences. Four keyboard-driven flight bodies still match
 gameplay/display. Comparisons discard passing RAM. First depleted commands
-with an unclaimed queue still require the real carry producer and fail loudly;
+outside the defined final-message return still need their carry producer and fail loudly;
 full gameplay acceptance remains unfinished. See
 `analysis/native_countermeasures_milestone.md`.
 The consumed-game-input gate now also requires the complete 164-byte player

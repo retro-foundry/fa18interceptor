@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected recorder return (2026-10-07): C32CEE's defined message/glyph
+byte now reaches the next first depleted pending flare/chaff command. Nineteen
+actual flight bodies and 36 recorder input parents match original compared
+RAM/drawing; twelve first-depleted cases verify independently derived original
+frame returns and both release-bit states. Inactive message frames invalidate
+the value. The real message owner passes 8,192 CPU/SR/RAM component calls.
+Drawing-derived and intervening-command returns remain explicitly unfinished.
+See `analysis/native_message_input_carry_milestone.md`. The goal stays active.
+
 Latest user controls report (2026-10-07): rudder and numeric keypad external
 views did not work. Native host input now shares the reference physical Amiga
 mapper; typed-text translation is no longer used to identify physical keys.
