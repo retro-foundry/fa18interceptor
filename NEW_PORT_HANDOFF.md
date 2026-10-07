@@ -417,8 +417,19 @@ expiry fixture; original execution also fails there. That fixture comparison
 remains unaccepted, alongside complete outcomes/combat and other variants.
 See `analysis/native_mode_seven_milestone.md`; run the shared checker with
 `--mode 7 --out build/native-flight/mission-seven/original-check`.
-The next gated entry is mission-list F6's mode 8. Follow actual eligible menu
-input and reached source children before claiming its gameplay is connected.
+Mission-list F6 now runs source mode 8 with an eligible saved pilot, reaching
+2,458 scene/HUD frames. The disk's availability byte at offset $19 remains zero
+and still rejects F6. Only the saved-pilot fixture changes that byte, then reloads
+through the normal loader before input. Native C0A364's existing readable
+scheduler is connected; C0FECE preserves saved A4=C29702's nonzero sort choice.
+38 actual input/stage intervals and 27 sampled bodies match compared original
+RAM/display with zero differences and no new comparison exclusions. Eleven
+affected native integration tests, including current frontend and menu, pass.
+See `analysis/native_mode_eight_milestone.md`; run the shared checker with
+`--mode 8 --out build/native-flight/mission-eight/original-check`.
+Every numbered mission entry now has a connected sampled route. Complete mission
+outcomes, reached combat/weapon children and other input/state variants remain
+unfinished; startup gates do not measure whole-game completeness.
 
 Whole gameplay sequences under the revised timing scope, complete
 record/flag/counter state and post-result behavior remain unverified. Exact

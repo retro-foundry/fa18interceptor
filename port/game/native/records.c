@@ -220,6 +220,11 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
         schedule_postflight(POSTFLIGHT_MODE_SEVEN,7,record,&hooks); /* C0A1E0 */
         return (PostflightScheduleResult){0,1};
     }
+    if(child==SCHEDULE_OTHER) {
+        const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
+        schedule_postflight(POSTFLIGHT_MODE_OTHER,rd_u8(MODE_SELECT),record,&hooks); /* C0A364 */
+        return (PostflightScheduleResult){0,1};
+    }
     if(child==SCHEDULE_PREPARE_SEVEN) {
         /* C0A1E0 retains record 4's +6 OR +12 word in D0 before C1BEE8;
          * only its low byte reaches the command queue. D1 is STREAM_MODE. */

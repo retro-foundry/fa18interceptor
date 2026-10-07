@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest connected batch: mission-list F6 runs source mode 8 with an eligible
+saved pilot (2,458 scene/HUD frames). The disk's locked pilot still rejects
+F6. The fixture changes only availability byte $19 and reloads through the
+normal loader. Native record composition calls readable C0A364; C0FECE
+preserves saved A4=C29702's nonzero sort choice. 38 actual input/stage intervals
+and 27 sampled bodies match compared original RAM/display with zero differences
+and no new exclusions. Eleven affected native integration tests pass, including
+current frontend/save/reload and locked/eligible F6 menu checks.
+Complete mission outcomes, combat, typed-state migration,
+whole gameplay sequence acceptance, audio fidelity and performance remain open.
+See `analysis/native_mode_eight_milestone.md`.
+
 Latest connected batch: mission-list F5 runs source mode 7 with an eligible
 saved pilot (2,289 scene/HUD frames). The disk's locked pilot still cannot
 select F5. 42 actual input/stage intervals and 29 sampled bodies, including

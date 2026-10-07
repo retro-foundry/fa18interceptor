@@ -484,3 +484,17 @@ python tools/native/check_mode_two.py --mode 7 --out build/native-flight/mission
 ```
 
 See [`../../analysis/native_mode_seven_milestone.md`](../../analysis/native_mode_seven_milestone.md).
+
+Mission-list F6 now runs source mode 8 with an eligible saved pilot (2,458
+scene/HUD frames). The original pilot's availability byte $19 remains locked;
+validation changes only that saved byte and reopens through the normal loader.
+38 actual input/stage intervals and 27 sampled bodies match compared original
+RAM/display. The reached C0A364 scheduler and saved A4=C29702's transition sort
+choice are connected. Complete mission outcomes, combat and other variants
+remain open.
+
+```powershell
+python tools/native/check_mode_two.py --mode 8 --out build/native-flight/mission-eight/original-check
+```
+
+See [`../../analysis/native_mode_eight_milestone.md`](../../analysis/native_mode_eight_milestone.md).
