@@ -3,7 +3,6 @@
 #include "postflight_file_callers.h"
 #include "globals.h"
 #include <stdlib.h>
-#define FILE_CHECK_BUFFER 0xc4fdc4u
 #define MODE_FILE_READ_RESULT 0xc1ab78u
 static void observe(const PostflightFileHooks *h,enum PostflightFilePhase p,uint32_t v,uint32_t other) {
     if(h && h->observe) h->observe(h->context,p,v,other);
@@ -49,26 +48,33 @@ void format_postflight_hex_frame(gaddr frame,const PostflightFileHooks *h) {
         byte(h,cursor,0x20); add_local(h,frame+8,1,4,0); add_local(h,frame-1,1,1,0);
     }
 }
-uint32_t check_postflight_mode_file(gaddr frame,const PostflightFileHooks *h) {
-    uint32_t buffer,tag,result;
-    buffer=consume(h,PFF_ALLOCATE_CHECK); longword(h,FILE_CHECK_BUFFER,buffer);
+static void local_long(gaddr frame,int offset,uint32_t value,const PostflightFileHooks *h) {
+    if(frame) longword(h,frame+offset,value); else observe(h,PFF_STORE_LONG,value,0);
+}
+static uint32_t check_volume(gaddr frame,const PostflightFileHooks *h) {
+    uint32_t buffer,tag,result,status;
+    buffer=consume(h,PFF_ALLOCATE_CHECK); longword(h,MODE_FILE_INFO_POINTER,buffer);
     observe(h,PFF_ADD_LONG,3,0); buffer+=3; observe(h,PFF_AND_LONG,0xfffffffcu,0); buffer&=0xfffffffcu;
-    longword(h,FILE_CHECK_BUFFER,buffer); consume(h,PFF_LOCK_CHECK); consume(h,PFF_EXAMINE_CHECK); consume(h,PFF_UNLOCK_CHECK);
-    buffer=address(h,rd_u32(FILE_CHECK_BUFFER)); tag=read_long(h,buffer+24);
-    longword(h,frame-4,tag); observe(h,PFF_TEST_LONG,tag,0);
-    if((int32_t)tag<0) { observe(h,PFF_D0_LONG,1,0); longword(h,frame-8,1); }
+    longword(h,MODE_FILE_INFO_POINTER,buffer); consume(h,PFF_LOCK_CHECK); consume(h,PFF_INFO_CHECK); consume(h,PFF_UNLOCK_CHECK);
+    buffer=address(h,rd_u32(MODE_FILE_INFO_POINTER)); tag=read_long(h,buffer+24);
+    local_long(frame,-4,tag,h); observe(h,PFF_TEST_LONG,tag,0);
+    if((int32_t)tag<0) { observe(h,PFF_D0_LONG,1,0); status=1;local_long(frame,-8,1,h); }
     else {
-        tag=rd_u32(frame-4); compare_long(h,tag,0x42414400u);
-        if(tag==0x42414400u) { observe(h,PFF_D0_LONG,2,0); longword(h,frame-8,2); }
+        if(frame) tag=rd_u32(frame-4);
+        compare_long(h,tag,0x42414400u);
+        if(tag==0x42414400u) { observe(h,PFF_D0_LONG,2,0); status=2;local_long(frame,-8,2,h); }
         else {
-            buffer=address(h,rd_u32(FILE_CHECK_BUFFER)); result=rd_u32(buffer+8); compare_long(h,result,0x50);
-            if(result==0x50) { observe(h,PFF_D0_LONG,3,0); longword(h,frame-8,3); }
-            else longword(h,frame-8,0);
+            buffer=address(h,rd_u32(MODE_FILE_INFO_POINTER)); result=rd_u32(buffer+8); compare_long(h,result,0x50);
+            if(result==0x50) { observe(h,PFF_D0_LONG,3,0); status=3;local_long(frame,-8,3,h); }
+            else {status=0;local_long(frame,-8,0,h);}
         }
     }
-    buffer=rd_u32(FILE_CHECK_BUFFER); observe(h,PFF_TEST_LONG,buffer,0); if(buffer) consume(h,PFF_FREE_CHECK);
-    return read_long(h,frame-8);
+    buffer=rd_u32(MODE_FILE_INFO_POINTER); observe(h,PFF_TEST_LONG,buffer,0); if(buffer) consume(h,PFF_FREE_CHECK);
+    if(frame) return read_long(h,frame-8);
+    observe(h,PFF_D0_LONG,status,0);return status;
 }
+uint32_t check_postflight_mode_file(gaddr frame,const PostflightFileHooks *h) {return check_volume(frame,h);}
+uint32_t check_postflight_volume(const PostflightFileHooks *h) {return check_volume(0,h);}
 void refresh_postflight_mode_file(const PostflightFileHooks *h) {
     uint32_t status,result;
     consume(h,PFF_RELEASE_TABLE); status=consume(h,PFF_CHECK_TABLE);
@@ -82,19 +88,22 @@ void refresh_postflight_mode_file(const PostflightFileHooks *h) {
 }
 uint32_t save_postflight_mode_file(gaddr frame,const PostflightFileHooks *h) {
     uint32_t handle,result;
-    handle=consume(h,PFF_OPEN_SAVE); longword(h,frame-12,handle); observe(h,PFF_TEST_LONG,handle,0);
+    handle=consume(h,PFF_OPEN_SAVE); local_long(frame,-12,handle,h); observe(h,PFF_TEST_LONG,handle,0);
     if((int32_t)handle<=0) { observe(h,PFF_D0_LONG,0,0); return 0; }
-    result=consume(h,PFF_WRITE_SAVE); longword(h,frame-8,result); observe(h,PFF_ADD_LONG,1,0);
+    result=consume(h,PFF_WRITE_SAVE); local_long(frame,-8,result,h); observe(h,PFF_ADD_LONG,1,0);
     if(result==0xffffffffu) { observe(h,PFF_D0_LONG,0,0); return 0; }
     word(h,MENU_FILE_READY,1); return consume(h,PFF_CLOSE_SAVE);
 }
 uint32_t read_postflight_mode_file(gaddr frame,const PostflightFileHooks *h) {
     uint32_t handle,result;
-    handle=consume(h,PFF_OPEN_LOAD); longword(h,frame-12,handle); observe(h,PFF_TEST_LONG,handle,0);
+    handle=consume(h,PFF_OPEN_LOAD); local_long(frame,-12,handle,h); observe(h,PFF_TEST_LONG,handle,0);
     if((int32_t)handle<=0) { word(h,MENU_FILE_READY,0); observe(h,PFF_D0_LONG,0,0); return 0; }
     word(h,MENU_FILE_READY,1); result=consume(h,PFF_READ_LOAD);
-    observe(h,PFF_PUSH_LOAD_HANDLE,0,0); longword(h,frame-8,result); consume(h,PFF_CLOSE_LOAD);
-    result=rd_u32(frame-8); compare_long(h,result,0xffffffffu);
+    observe(h,PFF_PUSH_LOAD_HANDLE,0,0); local_long(frame,-8,result,h); consume(h,PFF_CLOSE_LOAD);
+    if(frame) result=rd_u32(frame-8);
+    compare_long(h,result,0xffffffffu);
     if(result==0xffffffffu) { observe(h,PFF_D0_LONG,0,0); return 0; }
     word(h,MENU_FILE_READY,1); observe(h,PFF_D0_LONG,1,0); return 1;
 }
+uint32_t create_postflight_mode_file(const PostflightFileHooks *h) {return save_postflight_mode_file(0,h);}
+uint32_t load_postflight_mode_file(const PostflightFileHooks *h) {return read_postflight_mode_file(0,h);}

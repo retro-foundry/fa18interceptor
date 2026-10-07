@@ -58,7 +58,7 @@ def main():
                        cwd=ROOT, check=True, capture_output=True, text=True, timeout=10)
         loaded = reloaded.read_bytes()
         assert loaded[offset(native_log):offset(native_log) + 78] == saved, 'qualification save did not reload'
-    print('Native carrier qualification completes, persists success, restarts and reloads its log; 63 result-parent cases pass with the shared C1643A boundary')
+    print('Native carrier qualification completes, persists success, restarts and reloads its log; 77 complete result/config-parent cases pass')
 
 
 if __name__ == '__main__':

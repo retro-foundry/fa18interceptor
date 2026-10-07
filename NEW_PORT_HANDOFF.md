@@ -497,3 +497,24 @@ Run python tools/native/check_postflight_schedule.py; see
 analysis/native_postflight_schedule_milestone.md. Normal-input successful
 missions, whole independent flights, audio and 20 ms performance acceptance
 remain unfinished; the complete-port goal stays active.
+
+
+Native configuration calls now compose complete source C1643A status/readiness
+policy. Enlistment runs C162E4/C0EF08/C16386/C1631C refresh/read/create through
+existing Amiga host file services. The read-only OFS mount is retained for the
+frontend lifetime; writes use the overlay, including MODE_OLDFILE=1005 behavior.
+Source readiness/load-result fields are now initialized. Nine postflight
+input/stage intervals and 25 bodies match original RAM/display with complete
+game file owners executing and unchanged masks; the C1643A comparison bypass
+is removed. 77 result/config parents match RAM and persisted bytes; 2,560
+CPU/child-entry contract cases pass. Normal mode-four flight still matches 56
+intervals and 47 bodies. Retained recorded carrier input completes native
+qualification, persists success, restarts and reloads. All 28 selected native
+tests, 12 host/loading checks, default models and reference builds pass. An
+existing model probe incorrectly forced aircraft lifetime fixtures onto the
+carrier; both previous native and original rendering fail that artificial
+case. Normal carrier comparisons remain, and five expiry cases/11 descriptors
+pass on a real demo aircraft record. Public native executable is updated.
+See analysis/native_config_owner_milestone.md; full mission successes,
+independent sequences, audio fidelity and 20 ms acceptance remain unfinished.
+The complete-port goal remains active.

@@ -109,7 +109,7 @@ const FA18Port fa18_ports[] = {
     {0xC1029E, glue_C1029E, "poll_menu_viewport", 0, 0, glue_C1029E_step, 0xC102D8, 0, 0, glue_C1029E_owns},
     {0xC10418, glue_C10418, "poll_menu_viewport", 0, 0, glue_C10418_step, 0xC10458, 0, 0, glue_C10418_owns},
     {0xC10458, glue_C10458, "follow_menu_key_or_countdown", 0, 0, glue_C10458_step, 0xC104C2, 0, 0, glue_C10458_owns},
-    {0xC1643A, glue_C1643A, "load_menu_mode_file", 0, 0, glue_C1643A_step, 0xC16512, 0, 0, glue_C1643A_owns},
+    {0xC1643A, glue_C1643A, "write_menu_mode_file", 0, 0, glue_C1643A_step, 0xC16512, 0, 0, glue_C1643A_owns},
     /* Original cold callback/helper entries absent from the seeded translation.
      * Track these ten separately from the 624 translated-entry denominator. */
     {0xC0FE36, glue_C0FE36, "consume_menu_table_action", 0, 0, glue_C0FE36_step, 0xC0FECE, 0, 0, glue_C0FE36_owns},

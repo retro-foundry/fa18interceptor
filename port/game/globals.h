@@ -179,7 +179,8 @@
 #define FIRE_ALERT_COUNTDOWN 0xC45797u /* byte: set to 8 for the viewed selected-fire record ($C237E8) */
 #define MODE_TABLE_CHANGED  0xC457C5u /* byte: mode-table counter changed ($C23832/$C23852) */
 #define MENU_TABLE_ACTION   0xC45792u /* byte consumed by C0FE36: 1 load, 2 clear */
-#define MENU_TABLE_STATUS   0xC45928u /* word returned by the source table-load check */
+#define MENU_TABLE_STATUS   0xC45928u /* word returned by the source volume-info check */
+#define MODE_FILE_INFO_POINTER 0xC4FDC4u /* source C0EF08's allocated volume-info buffer */
 #define MENU_AVAILABLE_CODES 0xC3ED00u /* word queue codes, advanced only for enabled modes */
 #define MENU_FILE_READY     0xC08010u /* word gate checked before the source file open */
 #define MENU_FILE_NAME      0xC08028u /* original filename passed to DOS Open */

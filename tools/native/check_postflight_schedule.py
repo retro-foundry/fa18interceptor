@@ -1,8 +1,8 @@
 """Compare controlled postflight conditions through the shared native runtime.
 
 Source terminal flags are seeded only by the validation executable, after normal
-mission startup. C1643A remains the explicit existing shared config-write
-boundary; its disk/status decisions are outside this result-caller comparison.
+mission startup. Complete C1643A/C0EF08 source owners execute in the reference;
+only their actual OS services use the shared writable-overlay host contract.
 """
 import argparse
 import json
@@ -29,7 +29,7 @@ def main():
                         f'tools/native/native_{name}_oracle.c'], cwd=ROOT, check=True,
                        stdout=subprocess.DEVNULL)
         oracles[name] = oracle
-    totals = {'entries': 0, 'bodies': 0, 'shared_config_writes': 0}
+    totals = {'entries': 0, 'bodies': 0, 'source_dos_writes': 0}
     for kind in ('four', 'five', 'ready'):
         case = work / kind
         case.mkdir(parents=True, exist_ok=True)
@@ -53,8 +53,6 @@ def main():
                     if name == 'mode_entry':
                         capture = str(prefix) + f".entry.{item['entry']}"
                         values = [str(item['tick']), *map(str, item['keys'])]
-                        if kind == 'ready':
-                            values.append('--shared-config-write')
                     else:
                         capture = str(prefix) + f".{item['capture']}"
                         values = [str(item['before_tick']), str(item['after_tick']),
@@ -69,14 +67,14 @@ def main():
                     if comparison.returncode:
                         raise RuntimeError(comparison.stderr or comparison.stdout)
                     for line in comparison.stdout.splitlines():
-                        if line.startswith('Shared native config-write boundary calls:'):
-                            totals['shared_config_writes'] += int(line.split(':', 1)[1].split()[0])
+                        if line.startswith('Complete original file owners reached DOS Write'):
+                            totals['source_dos_writes'] += int(line.split()[-2])
         totals['entries'] += len(entries)
         totals['bodies'] += len(bodies)
         print(f'{kind}: {len(entries)} input/stage intervals and {len(bodies)} bodies match compared original RAM/display', flush=True)
-    assert totals['shared_config_writes'] == 1, totals
+    assert totals['source_dos_writes'] == 1, totals
     (work / 'comparison.json').write_text(json.dumps(totals, indent=2) + '\n')
-    print('Controlled postflight paths pass; result caller uses the shared save boundary (C1643A disk/status decisions excluded)')
+    print('Controlled postflight paths pass, including complete C1643A/C0EF08 source decisions and real overlay persistence')
 
 
 if __name__ == '__main__':

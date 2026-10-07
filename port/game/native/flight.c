@@ -185,7 +185,6 @@ static int32_t result_message_child(void *context,enum PostflightMessageChild ch
     }
     case PM_LOAD_MODE: case PM_LOAD_OUTCOME:
         /* C1643A's 78-byte config write uses the existing native save overlay. */
-        /* TODO(port): C1643A disk/status/readiness gates still need composition. */
         native_frontend_save_log(game);return 0;
     default: fprintf(stderr,"native result message child unavailable: %u\n",(unsigned)child);abort();
     }

@@ -1,4 +1,4 @@
-add_library(fa18_native_runtime OBJECT replay.c frame_capture.c
+add_library(fa18_native_runtime OBJECT replay.c frame_capture.c ../game/native/files.c ../game/postflight_file_callers.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/display.c ../game/native/cockpit_assets.c
     ../game/native/audio_assets.c ../game/native/audio.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
@@ -56,7 +56,7 @@ add_library(fa18_native_runtime OBJECT replay.c frame_capture.c
     ../game/command_publication.c ../game/context_commands.c ../game/cockpit.c
     ../game/menu_context_finish.c ../game/target_heading.c
     ../game/disk.c ../game/hunk.c ../romfree/media.c ../amiga/sha256.c
-    ../amiga/ilbm.c ../amiga/pcm_output.c)
+    ../amiga/ilbm.c ../amiga/pcm_output.c ../amiga/host_compat.c ../amiga/guest_memory.c)
 add_executable(fa18_native main.c)
 target_include_directories(fa18_native_runtime PUBLIC ../game ../amiga ../romfree)
 target_compile_definitions(fa18_native_runtime PUBLIC FA18_NATIVE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)

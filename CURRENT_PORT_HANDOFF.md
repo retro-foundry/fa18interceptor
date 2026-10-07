@@ -1,5 +1,21 @@
 # Current playable port handoff
 
+Latest connected batch: native configuration writes now execute source C1643A
+status/readiness policy, and enlistment refresh executes C162E4/C0EF08/C16386/
+C1631C through existing Amiga host file services. The validated OFS mount stays
+read-only; the overlay retains MODE_OLDFILE write behavior. Native startup now
+sets source file readiness/load status. Nine input/stage intervals and 25 bodies
+match original RAM/display with complete game file owners executing and
+unchanged masks; the old C1643A comparison bypass is removed. 77 result/config
+parents match RAM and persisted bytes; 2,560 CPU/child-entry contract cases pass.
+Normal mode-four flight still matches 56 intervals/47 bodies; recorded carrier
+qualification completes, saves, restarts and reloads. All 28 selected native
+tests, 12 host/loading checks, default models and reference builds pass. The
+qualification model probe now keeps carrier comparisons while limiting its
+aircraft expiry fixtures to appropriate records; five aircraft cases pass on a
+real demo record. See `analysis/native_config_owner_milestone.md`. Full mission,
+independent sequence, audio and performance acceptance remain open.
+
 Latest connected batch: C0A3EA readiness, mode-four C1BEE8 result view,
 mode-five C0A12E record restores, reached C083A6 control request and
 C110A4/C24FA4/C11350/C08ED0 result messages/log update. Controlled fixtures

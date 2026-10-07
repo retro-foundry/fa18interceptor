@@ -546,3 +546,15 @@ python tools/native/check_postflight_schedule.py
 ```
 
 See [`../../analysis/native_postflight_schedule_milestone.md`](../../analysis/native_postflight_schedule_milestone.md).
+
+Configuration saves now compose complete source C1643A status/readiness
+decisions, and enlistment runs C162E4's source refresh/read/create flow through
+existing Amiga host file services. The ADF remains read-only and writes go to
+the overlay. The postflight checker executes complete original game file
+owners at its OS boundaries, with no game-routine bypass. Nine intervals and
+25 bodies match; 77 result/config parents and 2,560 CPU contract cases pass.
+Recorded carrier qualification still saves success, restarts and reloads.
+All 28 selected native tests and 12 host/loading checks pass. Whole gameplay,
+audio and performance acceptance remain open.
+
+See [`../../analysis/native_config_owner_milestone.md`](../../analysis/native_config_owner_milestone.md).

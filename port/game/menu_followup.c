@@ -79,9 +79,9 @@ void advance_menu_mode_messages(const MenuFollowupHooks *h) {
     word(h,cursor,0); observe(h,MF_QUEUE_CODE,0,cursor);
     callback(h,ROUTINE_QUEUE_MESSAGE_FOUR);
 }
-void load_menu_mode_file(const MenuFollowupHooks *h) {
+void write_menu_mode_file(const MenuFollowupHooks *h) {
     uint16_t status=rd_u16(MENU_TABLE_STATUS),ready;
-    uint32_t handle,received;
+    uint32_t handle,written;
     observe(h,MF_WORD_D0,status,0);
     if(status) return;
     consume(h,MF_FILE_RELEASE,0,0); byte(h,MODE_TABLE_CHANGED,0);
@@ -98,12 +98,12 @@ void load_menu_mode_file(const MenuFollowupHooks *h) {
     if((int32_t)handle<=0) {
         word(h,MENU_FILE_READY,0); observe(h,MF_FILE_ZERO,0,0); return;
     }
-    received=consume(h,MF_FILE_READ,handle,rd_u32(MODE_TABLE));
-    observe(h,MF_FILE_READ_RESULT,received,0);
-    consume(h,MF_FILE_YIELD_AFTER_READ,0,0);
+    written=consume(h,MF_FILE_WRITE,handle,rd_u32(MODE_TABLE));
+    observe(h,MF_FILE_WRITE_RESULT,written,0);
+    consume(h,MF_FILE_YIELD_AFTER_WRITE,0,0);
     consume(h,MF_FILE_CLOSE,handle,0); consume(h,MF_FILE_YIELD_AFTER_CLOSE,0,0);
-    observe(h,MF_FILE_COMPARE,received,0);
-    /* The original rejects only -1. Zero and short reads still take OwnBlitter. */
-    if(received==0xffffffffu) { observe(h,MF_FILE_ZERO,0,0); return; }
+    observe(h,MF_FILE_COMPARE,written,0);
+    /* The original rejects only -1. Zero and short writes still take OwnBlitter. */
+    if(written==0xffffffffu) { observe(h,MF_FILE_ZERO,0,0); return; }
     consume(h,MF_FILE_OWN,0,0);
 }

@@ -2,7 +2,7 @@
 #define FA18_POSTFLIGHT_FILE_CALLERS_H
 #include "memory.h"
 enum PostflightFileChild {
-    PFF_ALLOCATE_CHECK, PFF_LOCK_CHECK, PFF_EXAMINE_CHECK, PFF_UNLOCK_CHECK, PFF_FREE_CHECK,
+    PFF_ALLOCATE_CHECK, PFF_LOCK_CHECK, PFF_INFO_CHECK, PFF_UNLOCK_CHECK, PFF_FREE_CHECK,
     PFF_RELEASE_TABLE, PFF_CHECK_TABLE, PFF_LOAD_TABLE, PFF_SAVE_TABLE, PFF_OWN_TABLE,
     PFF_OPEN_SAVE, PFF_WRITE_SAVE, PFF_CLOSE_SAVE, PFF_OPEN_LOAD, PFF_READ_LOAD, PFF_CLOSE_LOAD
 };
@@ -20,7 +20,11 @@ typedef struct {
 } PostflightFileHooks;
 void format_postflight_hex_frame(gaddr frame,const PostflightFileHooks *h);
 uint32_t check_postflight_mode_file(gaddr frame,const PostflightFileHooks *h);
+/* Same C0EF08 decisions using ordinary local results for native composition. */
+uint32_t check_postflight_volume(const PostflightFileHooks *h);
 void refresh_postflight_mode_file(const PostflightFileHooks *h);
 uint32_t save_postflight_mode_file(gaddr frame,const PostflightFileHooks *h);
 uint32_t read_postflight_mode_file(gaddr frame,const PostflightFileHooks *h);
+uint32_t create_postflight_mode_file(const PostflightFileHooks *h);
+uint32_t load_postflight_mode_file(const PostflightFileHooks *h);
 #endif

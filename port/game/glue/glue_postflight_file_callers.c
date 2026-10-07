@@ -20,10 +20,10 @@ static int32_t consume(void *context,enum PostflightFileChild child) {
     case PFF_LOCK_CHECK:
         full(1,0xfffffffeu); push(D(1)); m68ki_push_32(0xc07fe4);
         wr_u32(A(6)-16,D(0)); flags_logic_l(D(0)); arguments=8; break;
-    case PFF_EXAMINE_CHECK:
-        push(rd_u32(0xc4fdc4)); push(D(0)); wr_u32(A(6)-12,D(0)); flags_logic_l(D(0)); arguments=8; break;
+    case PFF_INFO_CHECK:
+        push(rd_u32(MODE_FILE_INFO_POINTER)); push(D(0)); wr_u32(A(6)-12,D(0)); flags_logic_l(D(0)); arguments=8; break;
     case PFF_UNLOCK_CHECK: push(rd_u32(A(6)-12)); arguments=4; break;
-    case PFF_FREE_CHECK: full(0,40); push(D(0)); push(rd_u32(0xc4fdc4)); arguments=8; break;
+    case PFF_FREE_CHECK: full(0,40); push(D(0)); push(rd_u32(MODE_FILE_INFO_POINTER)); arguments=8; break;
     case PFF_OPEN_SAVE: push(0x3ee); m68ki_push_32(0xc08012); arguments=8; break;
     case PFF_OPEN_LOAD: push(0x3ed); m68ki_push_32(0xc0801d); arguments=8; break;
     case PFF_WRITE_SAVE: case PFF_READ_LOAD:

@@ -11,6 +11,7 @@
 #include "../player_input.h"
 #include "menu.h"
 #include "flight.h"
+#include "files.h"
 #include "clock.h"
 #include "display.h"
 #include "input.h"
@@ -50,18 +51,11 @@ void native_frontend_start_menu(NativeFrontend *game) {
     wr_u8(MODE_SELECT,0);
 }
 void native_frontend_enlist(NativeFrontend *game) {
+    native_frontend_refresh_log(game); /* C11478/C114D2 -> C162E4 */
     select_screen(game,NATIVE_ENLISTMENT,rd_u16(PLAYER_LOG+4)?2:1,0);
     if(rd_u16(PLAYER_LOG+4)) for(unsigned i=0;i<24 && rd_u8(PLAYER_LOG+30+i);++i)
         wr_u8(0xc3f1edu+i,rd_u8(PLAYER_LOG+30+i));
     game->name_finished=0;
-}
-void native_frontend_save_log(NativeFrontend *game) {
-    FILE *file=fopen(game->config_path,"wb");
-    if(!file) { perror(game->config_path); abort(); }
-    int written=fwrite(native_storage_range(PLAYER_LOG,78),1,78,file)==78;
-    int closed=fclose(file)==0;
-    if(!written || !closed) { fprintf(stderr,"cannot save native flight log\n"); abort(); }
-    wr_u8(MODE_TABLE_CHANGED,0);
 }
 static MessageWorking child(void *context,enum MainControlChild which,MessageWorking w) {
     NativeFrontend *game=context;
@@ -148,13 +142,18 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     native_flight_initialize(game);
     game->screen=NATIVE_SPLASH; memcpy(game->palette,game->splash.palette,sizeof game->palette);
     for(unsigned y=0;y<game->splash.height;++y) memcpy(game->indices+y*320,game->splash.indices+y*game->splash.width,game->splash.width);
+    game->disk=disk;disk=(AmigaOfs){0};
+    if(!native_files_open(game,save_dir)) {fail(error,cap,"cannot initialize config file services");goto done;}
     ok=1;
 done:
     free(exe); free(bytes); amiga_hunks_free(&hunks); amiga_ofs_close(&disk);
     if(!ok) native_frontend_close(game);
     return ok;
 }
-void native_frontend_close(NativeFrontend *game) { amiga_ilbm_free(&game->splash); native_audio_bind(NULL); native_storage_bind(NULL); }
+void native_frontend_close(NativeFrontend *game) {
+    if(!amiga_host_close(&game->files)) {fputs("cannot close native file services\n",stderr);abort();}
+    amiga_ofs_close(&game->disk);amiga_ilbm_free(&game->splash);native_audio_bind(NULL);native_storage_bind(NULL);
+}
 void native_frontend_mouse(NativeFrontend *game,int dx,int dy) {
     game->mouse_x_counter=(uint8_t)((unsigned)game->mouse_x_counter+(unsigned)dx);
     game->mouse_y_counter=(uint8_t)((unsigned)game->mouse_y_counter+(unsigned)dy);

@@ -445,7 +445,13 @@ static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) 
 }
 static unsigned expiry_cases;
 static int32_t consume(void *context,const ScenePlacementCall *call) {
-    if(call->routine!=0xc22ac0) return compare_descriptor(context,call);
+    const gaddr chosen=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(CHOSEN_RECORD);
+    /* C22AC0 also draws ships (the $20 type class is distinct in C26EBE).
+     * Setup aircraft descriptors precede flight-record type initialization.
+     * Applying the repeated aircraft lifetime fixture to the carrier enters an invalid
+     * source stream too. Keep the unmodified carrier descriptor compared. */
+    if(call->routine!=0xc22ac0 || (rd_u8(chosen+0x62)&0xf0u)==0x20u)
+        return compare_descriptor(context,call);
     FA18Machine *before=malloc(sizeof *before),*after=malloc(sizeof *after);
     if(!before || !after) exit(1);
     memcpy(before,fa18_machine,sizeof *before);
@@ -622,7 +628,9 @@ int main(int argc,char **argv) {
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
     const int tails_only=argc==3 && !strcmp(argv[2],"--tails-only");
     const int points_only=argc==3 && !strcmp(argv[2],"--points-only");
-    uint8_t *data=(argc==2 || tails_only || points_only)?file_bytes(argv[1],&nd):NULL;
+    const int require_aircraft=argc==3 && !strcmp(argv[2],"--require-aircraft");
+    const int aircraft_record=argc==4 && !strcmp(argv[2],"--aircraft-record");
+    uint8_t *data=(argc==2 || tails_only || points_only || require_aircraft || aircraft_record)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
@@ -636,11 +644,20 @@ int main(int argc,char **argv) {
     if(!carrier_commands()) return 1;
     if(!hull_tails() || !derived_tails()) return 1;
     if(!circles()) return 1;
+    if(aircraft_record) {
+        /* Validation-only selection of an actual disk-started aircraft. Keep
+         * its descriptor, positions and renderer inputs; compare each complete
+         * original descriptor and its expiry side effects normally. */
+        unsigned index=(unsigned)strtoul(argv[3],NULL,10);
+        if(!index || index>=16 || (rd_u8(CONTROL_RECORDS+512*index+0x62)&0xf0u)!=0x10u ||
+           !(rd_u16(CONTROL_RECORDS+512*index)&0x40u)) return 1;
+        wr_u16(0xc4e98a,(uint16_t)index);wr_u16(0xc4e98c,0xffff);
+    }
     const ScenePlacementHooks hooks={consume,NULL,NULL};
     visit_scene_placements(0,&hooks);visit_scene_placements(1,&hooks);
     const FollowupPlacementHooks followups={consume_followup,NULL,NULL};
     visit_followup_placements(&followups);
-    if(!expiry_cases) {fputs("No aircraft expiry descriptor exercised\n",stderr);return 1;}
+    if((require_aircraft || aircraft_record) && !expiry_cases) {fputs("No aircraft expiry descriptor exercised\n",stderr);return 1;}
     printf("%u destroyed-aircraft expiry/selection/repeated-render cases compared\n",expiry_cases);
     if(!scene_children()) return 1;
     printf("%u descriptors compared, %u failures\n",calls,failures);

@@ -15,9 +15,9 @@ static uint32_t consume(void *context,enum MenuFollowupChild child,uint32_t valu
     (void)context;
     switch(child) {
     case MF_FILE_YIELD_BEFORE_OPEN: case MF_FILE_YIELD_AFTER_CLOSE: push(0); arguments=4; break;
-    case MF_FILE_YIELD_AFTER_OPEN: case MF_FILE_YIELD_AFTER_READ: arguments=4; break;
+    case MF_FILE_YIELD_AFTER_OPEN: case MF_FILE_YIELD_AFTER_WRITE: arguments=4; break;
     case MF_FILE_OPEN: push(value); m68ki_push_32(address); arguments=8; break;
-    case MF_FILE_READ:
+    case MF_FILE_WRITE:
         A(0)=address; D(0)=78; flags_logic_l(D(0)); push(D(0)); push(A(0)); push(rd_u32(A(6)-12));
         wr_u32(A(6)-4,A(0)); flags_logic_l(A(0)); arguments=12; break;
     case MF_FILE_CLOSE: push(rd_u32(A(6)-12)); arguments=4; break;
@@ -52,7 +52,7 @@ static void outputs(void *context,enum MenuFollowupPhase phase,uint32_t value,ga
     case MF_FILE_HANDLE:
         push(0); wr_u32(A(6)-12,value); flags_logic_l(value); break;
     case MF_FILE_HANDLE_TEST: flags_logic_l(value); break;
-    case MF_FILE_READ_RESULT: push(0); wr_u32(A(6)-8,value); flags_logic_l(value); break;
+    case MF_FILE_WRITE_RESULT: push(0); wr_u32(A(6)-8,value); flags_logic_l(value); break;
     case MF_FILE_COMPARE: step_compare_long(0xffffffffu,value); break;
     case MF_FILE_ZERO: D(0)=0; flags_logic_l(0); break;
     }
@@ -64,4 +64,4 @@ int glue_C1029E(void) { poll_menu_viewport(&hooks,0); return glue_return(); }
 int glue_C10418(void) { poll_menu_viewport(&hooks,1); return glue_return(); }
 int glue_C10458(void) { follow_menu_key_or_countdown(&hooks); return glue_return(); }
 int glue_C10678(void) { link_frame(6); advance_menu_mode_messages(&hooks); return leave_frame(); }
-int glue_C1643A(void) { link_frame(12); load_menu_mode_file(&hooks); return leave_frame(); }
+int glue_C1643A(void) { link_frame(12); write_menu_mode_file(&hooks); return leave_frame(); }
