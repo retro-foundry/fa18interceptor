@@ -2,6 +2,14 @@
 
 ## Objective and user constraints
 
+Latest connected control-action return (2026-10-07): preserving control actions,
+actual HUD-mode changes and gear-gate outputs now reach subsequent depleted
+recorder input when publication skips. 127 full bodies, 144 recorder parents
+and 24 intervening keyboard parents match original RAM/drawing and returns.
+832 focused command parents match RAM and 826 returns pass; six stay unresolved.
+Nine affected checks and all native/reference builds pass.
+See `analysis/native_control_action_input_return.md`. Full acceptance stays open.
+
 Latest connected intervening-command return (2026-10-07): wait/modifier/empty
 and queue-only exits compose actual preservation/selection outputs, and accepted
 publication supplies its signed queue index to subsequent depleted input.

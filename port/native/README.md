@@ -1,5 +1,11 @@
 # Native port runner
 
+Control commands now compose their actual preservation/HUD-mode/gear-gate
+outputs through skipped publication into subsequent depleted recorder input.
+127 full bodies, 144 recorder parents and 24 intervening keyboard parents match
+original RAM/drawing. See `../../analysis/native_control_action_input_return.md`.
+Remaining return contracts and whole-game acceptance stay open.
+
 Intervening wait/modifier/empty/queue-only commands now preserve their actual
 prior or selector output; accepted queue publication supplies its signed index.
 115 full bodies, 132 recorder parents and twelve intervening keyboard parents

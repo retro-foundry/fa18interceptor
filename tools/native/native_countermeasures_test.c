@@ -79,15 +79,22 @@ static int fd_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned
     return capture.complete && game->input_count==0;
 }
 static int interposed_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
-    const uint8_t keys[]={0x60,0xe0,0x66,0xe6,0x67,0xe7,0x70,0xf0,0x4c,0x4e,0x4c,0x4e};
+    const uint8_t keys[]={0x60,0xe0,0x66,0xe6,0x67,0xe7,0x70,0xf0,0x4c,0x4e,0x4c,0x4e,
+        0x4c,0x4d,0x4e,0x4f,0xcc,0xce,0x38,0xb8,0x0c,0x8c,0x25,0x24};
     const uint8_t raw=keys[variant];
     wr_u8(RECORDER_MODE,0);wr_u16(RECORD_WORD_A,0);wr_u16(RECORD_WORD_B,0);
     wr_u16(PENDING_COMMAND_WORD_A,0);wr_u16(PENDING_COMMAND_WORD_B,0);
-    wr_u8(ORIGIN_DETAIL_MODE,variant&1?3:0);
-    wr_u8(KEY_TAKEN,0);wr_u8(KEY_COUNT,0);wr_u8(KEY_WRITE,0);
+    const int controls=variant>=12;
+    wr_u8(ORIGIN_DETAIL_MODE,controls?(variant==16 || variant==17 || variant==19 || variant==21?3:0):(variant&1?3:0));
+    wr_u8(KEY_TAKEN,0);wr_u8(KEY_COUNT,controls?10:0);wr_u8(KEY_WRITE,0);
     wr_u8(KEY_TRANSLATED_WRITE,variant==11?255:7);
     wr_u8(KEY_STATE,0);wr_u8(KEY_STATE+1,0);wr_u8(KEY_STATE+2,0);
     wr_u8(COMMAND_EVENT_COUNTER,variant==8?254:variant==9?128:1);
+    if(variant==22) wr_u8(POST_INPUT_EXPIRED,127); /* Actual signed wrap result. */
+    if(variant==23) {
+        wr_u8(CONTROL_RECORDS+3,rd_u8(CONTROL_RECORDS+3)&0x7f);
+        wr_u32(COMMAND_GEAR_GATE,0x40);
+    }
     snprintf(fixture->path,sizeof fixture->path,"%s.interposed.%u",fixture->prefix,variant);
     NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
         .iteration=fixture->clock.iteration,.count=1};
@@ -439,7 +446,7 @@ int main(int argc,char **argv) {
     }
     fixture.grid_sampling=0;
     fixture.cleanup_sampling=1;
-    for(unsigned i=0;i<24;++i) {
+    for(unsigned i=0;i<36;++i) {
         fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
         wr_u8(RECORDER_MODE,0);
         unsigned limit=game->ticks+100;

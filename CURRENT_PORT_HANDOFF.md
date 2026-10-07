@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected control-action return (2026-10-07): stick/rudder/throttle,
+information-page and sign-input actions preserve actual prior/selection output;
+HUD toggle and gear-gate assignments publish their existing domain values.
+127 full bodies, 144 recorder parents and 24 intervening keyboard parents
+match original compared RAM/drawing and defined returns. 832 focused command
+parents match RAM; 826 defined returns pass and six stay unresolved. Nine
+affected checks and all native/reference builds pass. See
+`analysis/native_control_action_input_return.md`. Full port remains active.
+
 Latest connected intervening-command return (2026-10-07): wait/modifier/empty
 and queue-only exits preserve prior output or the actual selector block byte;
 accepted publication supplies its signed translated index. 115 complete bodies,

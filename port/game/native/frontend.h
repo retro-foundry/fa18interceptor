@@ -15,7 +15,7 @@ enum NativeInputReturnOwner { NATIVE_INPUT_RETURN_UNKNOWN, NATIVE_INPUT_RETURN_M
                               NATIVE_INPUT_RETURN_DEBUG_TEXT, NATIVE_INPUT_RETURN_SCENE_LABEL,
                               NATIVE_INPUT_RETURN_HUD_LINE, NATIVE_INPUT_RETURN_GRID_MARKER,
                               NATIVE_INPUT_RETURN_VIEW_KEY, NATIVE_INPUT_RETURN_COMMAND_SELECTION,
-                              NATIVE_INPUT_RETURN_COMMAND_QUEUE };
+                              NATIVE_INPUT_RETURN_COMMAND_QUEUE, NATIVE_INPUT_RETURN_FLIGHT_ACTION };
 typedef struct { uint8_t value; enum NativeInputReturnOwner owner; } NativeInputReturn;
 enum NativeFrameBoundary { NATIVE_FRAME_BODY_BEGIN, NATIVE_FRAME_BODY_END, NATIVE_FRAME_INPUT_BEGIN,
                            NATIVE_FRAME_OWNER_EXIT };

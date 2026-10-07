@@ -21,8 +21,10 @@ static CommandDispatchResult execute_request(const CommandRequest *request,const
         h->consume(h->context,COMMAND_RESET_FINISH); return result;
     case COMMAND_QUEUE_ONLY: break;
     default:
-        if(is_flight_command(request->action))
-            event=execute_flight_command(request,h->carried_selection(h->context),h->flight);
+        if(is_flight_command(request->action)) {
+            const FlightCommandExecution flight=execute_flight_command_result(request,h->carried_selection(h->context),h->flight);
+            event=flight.event;result.flight_output=flight.output;
+        }
         else if(is_view_command(request->action)) event=execute_view_command(request,h->view);
         else if(is_indexed_command(request->action))
             event=execute_indexed_command(request,h->carried_selection(h->context),h->indexed);

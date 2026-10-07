@@ -86,7 +86,12 @@ static uint32_t countermeasure(const CommandRequest *request,int16_t carried,
 
 uint32_t execute_flight_command(const CommandRequest *r,int16_t carried,
                                const FlightCommandHooks *h) {
+    return execute_flight_command_result(r,carried,h).event;
+}
+FlightCommandExecution execute_flight_command_result(const CommandRequest *r,int16_t carried,
+                               const FlightCommandHooks *h) {
     uint32_t event=r->raw_event;
+    FlightActionOutput output={0};
     uint8_t value,old,input;
     uint16_t word;
     gaddr record;
@@ -129,6 +134,7 @@ uint32_t execute_flight_command(const CommandRequest *r,int16_t carried,
     case COMMAND_SPACE_RELEASE:
         event=h->consume(h->context,FLIGHT_SPACE_RELEASE).event; break;
     case COMMAND_INFO_PAGE:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* C1B236-C1B260 use the event only. */
         word=rd_u16(INFO_PAGE); observe(h,FLIGHT_INFO_READ,word,0,0);
         observe(h,FLIGHT_INFO_INCREMENT,word,0,0); ++word;
         observe(h,FLIGHT_INFO_COMPARE,word,3,0);
@@ -142,15 +148,17 @@ uint32_t execute_flight_command(const CommandRequest *r,int16_t carried,
         observe(h,FLIGHT_HUD_INCREMENT,value,0,0); ++value;
         observe(h,FLIGHT_HUD_COMPARE,value,1,0);
         if((int8_t)value>1) { value=0; observe(h,FLIGHT_HUD_WRAP,0,0,0); }
-        store_byte(h,POST_INPUT_EXPIRED,value); break;
-    case COMMAND_Y_DOWN: event=h->consume(h->context,FLIGHT_Y_DOWN).event; break;
-    case COMMAND_Y_UP: event=h->consume(h->context,FLIGHT_Y_UP).event; break;
-    case COMMAND_Y_RELEASE: event=h->consume(h->context,FLIGHT_Y_RELEASE).event; break;
-    case COMMAND_X_RIGHT: event=h->consume(h->context,FLIGHT_X_RIGHT).event; break;
-    case COMMAND_X_LEFT: event=h->consume(h->context,FLIGHT_X_LEFT).event; break;
-    case COMMAND_X_RELEASE: event=h->consume(h->context,FLIGHT_X_RELEASE).event; break;
+        store_byte(h,POST_INPUT_EXPIRED,value);
+        output=(FlightActionOutput){.kind=FLIGHT_ACTION_HUD_MODE,.hud_mode=value}; break;
+    case COMMAND_Y_DOWN: output.kind=FLIGHT_ACTION_PRESERVE;event=h->consume(h->context,FLIGHT_Y_DOWN).event; break;
+    case COMMAND_Y_UP: output.kind=FLIGHT_ACTION_PRESERVE;event=h->consume(h->context,FLIGHT_Y_UP).event; break;
+    case COMMAND_Y_RELEASE: output.kind=FLIGHT_ACTION_PRESERVE;event=h->consume(h->context,FLIGHT_Y_RELEASE).event; break;
+    case COMMAND_X_RIGHT: output.kind=FLIGHT_ACTION_PRESERVE;event=h->consume(h->context,FLIGHT_X_RIGHT).event; break;
+    case COMMAND_X_LEFT: output.kind=FLIGHT_ACTION_PRESERVE;event=h->consume(h->context,FLIGHT_X_LEFT).event; break;
+    case COMMAND_X_RELEASE: output.kind=FLIGHT_ACTION_PRESERVE;event=h->consume(h->context,FLIGHT_X_RELEASE).event; break;
     case COMMAND_TRIM_A: case COMMAND_TRIM_B: case COMMAND_TRIM_RELEASE:
     case COMMAND_THROTTLE_UP: case COMMAND_THROTTLE_DOWN: case COMMAND_THROTTLE_RELEASE:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* C1B58E-C1B5D8 and C1B602. */
         if(r->action==COMMAND_TRIM_A || r->action==COMMAND_TRIM_B || r->action==COMMAND_TRIM_RELEASE) {
             input=r->action==COMMAND_TRIM_A?0x80:r->action==COMMAND_TRIM_B?0x40:0;
             observe(h,input?FLIGHT_INPUT_VALUE:FLIGHT_INPUT_RELEASE,input,0,0);
@@ -210,12 +218,14 @@ uint32_t execute_flight_command(const CommandRequest *r,int16_t carried,
         event=h->consume(h->context,FLIGHT_WEAPON_ENABLE).event;
         request_bit(h,CONTROL_RECORDS+2,3); break;
     case COMMAND_GEAR:
+        output.kind=FLIGHT_ACTION_PRESERVE;
         request_bit(h,PENDING_COMMAND_WORD_A,0);
         if(!test_bit(h,CONTROL_RECORDS+3,7)) {
             old=rd_u8(COMMAND_BLOCK_FLAGS); wr_u8(COMMAND_BLOCK_FLAGS,old^0x80);
             observe(h,FLIGHT_TOGGLE_BIT,old,7,COMMAND_BLOCK_FLAGS);
             event=rd_u32(COMMAND_GEAR_GATE); observe(h,FLIGHT_GEAR_READ,event,0,0);
             event&=0x40; observe(h,FLIGHT_GEAR_MASK,event,0,0);
+            output=(FlightActionOutput){.kind=FLIGHT_ACTION_GEAR_GATE,.gear_gate=event};
             if(event) { store_byte(h,COMMAND_GEAR_MESSAGE,0x83); event=r->raw_event; break; }
             event=r->raw_event;
         }
@@ -228,7 +238,7 @@ uint32_t execute_flight_command(const CommandRequest *r,int16_t carried,
         break;
     case COMMAND_FLARE:
         observe(h,FLIGHT_MODIFIER_TEST,r->modifier,0,0);
-        if(!r->modifier) return countermeasure(r,carried,h,1);
+        if(!r->modifier) return (FlightCommandExecution){countermeasure(r,carried,h,1),output};
         if(compare_byte(h,MODE_SELECT,6)) break;
         word=rd_u16(COMMAND_SPAWN_GATE); observe(h,FLIGHT_WORD_TEST,word,0,0);
         if(word) break;
@@ -241,7 +251,7 @@ uint32_t execute_flight_command(const CommandRequest *r,int16_t carried,
         event=h->consume(h->context,FLIGHT_FLARE_SPAWN).event;
         event=(event&0xffff0000u)|(r->raw_event&0xffffu);
         observe(h,FLIGHT_SPAWN_RESTORE,(uint16_t)event,0,0); break;
-    case COMMAND_CHAFF: return countermeasure(r,carried,h,0);
+    case COMMAND_CHAFF: return (FlightCommandExecution){countermeasure(r,carried,h,0),output};
     case COMMAND_ECM:
         observe(h,FLIGHT_ECM_BEGIN,0,0,UPDATE_MAP_OVERRIDE);
         request_bit(h,PENDING_COMMAND_WORD_A+1,3); store_byte(h,BAR_REDRAWS_C,3);
@@ -249,9 +259,10 @@ uint32_t execute_flight_command(const CommandRequest *r,int16_t carried,
         observe(h,FLIGHT_TOGGLE_ADDRESS,0,0,PLAYER_FLAGS_G);
         value=test_byte(h,PLAYER_FLAGS_G)?0:1; store_byte(h,PLAYER_FLAGS_G,value); break;
     case COMMAND_SIGN_INPUT:
+        output.kind=FLIGHT_ACTION_PRESERVE; /* C1C224 writes only SEQUENCE_PHASE. */
         observe(h,FLIGHT_MODIFIER_TEST,r->modifier,0,0);
         store_byte(h,SEQUENCE_PHASE,r->modifier?0xff:1); break;
     default: abort();
     }
-    return event;
+    return (FlightCommandExecution){event,output};
 }
