@@ -113,7 +113,7 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
             ${CMAKE_CURRENT_BINARY_DIR}/region-flight-save
             ${CMAKE_CURRENT_BINARY_DIR}/region-flight 4 1 flight)
-    foreach(mode IN ITEMS 6 8)
+    foreach(mode IN ITEMS 5 6 7 8)
         add_test(NAME fa18_native_combat_${mode}
             COMMAND fa18_native_mode_two_test
                 ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf

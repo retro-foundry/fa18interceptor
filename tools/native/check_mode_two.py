@@ -22,7 +22,7 @@ def main():
     parser.add_argument('--weapon', type=int, choices=(1,2,3), help='Cycle Return 1/2/3 times and fire twice with Space')
     parser.add_argument('--flight', action='store_true', help='Mode-4 takeoff, weapon inputs and region/zone transitions')
     parser.add_argument('--callback', action='store_true', help='Free Flight Delete callback remove/reinstall')
-    parser.add_argument('--combat', action='store_true', help='Mode-six/eight longer flight with manoeuvre-limit samples')
+    parser.add_argument('--combat', action='store_true', help='Mode-five through eight longer flight with manoeuvre-limit samples')
     args = parser.parse_args()
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
@@ -32,8 +32,8 @@ def main():
         parser.error('--flight requires --mode 4 without --eject/--weapon')
     if args.callback and (args.mode!=125 or args.flight or args.eject or args.weapon):
         parser.error('--callback requires --mode 125 without other probes')
-    if args.combat and (args.mode not in (6,8) or args.flight or args.eject or args.weapon or args.callback):
-        parser.error('--combat requires --mode 6 or 8 without other probes')
+    if args.combat and (args.mode not in (5,6,7,8) or args.flight or args.eject or args.weapon or args.callback):
+        parser.error('--combat requires --mode 5, 6, 7 or 8 without other probes')
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     prefix = work / 'frame'
@@ -41,6 +41,7 @@ def main():
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
                              *(['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
                             capture_output=True, text=True, timeout=90 if args.combat else 45 if args.flight else 25)
+    (work / 'native-run.log').write_text(result.stdout + result.stderr)
     if result.returncode:
         raise RuntimeError(result.stderr or result.stdout)
     exports = [json.loads(line) for line in result.stdout.splitlines()]

@@ -223,8 +223,10 @@ void extract_transform_angles(int16_t out[3], MatrixTransformAngleState *state) 
         if (magnitude >= 0x0FF60000u) {
             table = MATRIX_ANGLE_TABLE_COARSE;
             shifted = (magnitude >> 12) + ((magnitude & 0x800u) != 0);
-            index = (int16_t)(shifted - 0xFF08u);
-            if (index > 0xF8) index = 0xF8;
+            /* C2E042/C2E048 subtract and clamp as signed longs. Narrowing
+             * first turns large products into negative table offsets. */
+            int32_t coarse_index = (int32_t)(shifted - 0xFF08u);
+            index = coarse_index > 0xF8 ? 0xF8 : (int16_t)coarse_index;
         } else {
             table = MATRIX_ANGLE_TABLE_MID;
             shifted = (magnitude >> 16) + ((magnitude & 0x8000u) != 0);

@@ -17,6 +17,14 @@ continuation and corrects projection returns and matrix angle semantics.
 RAM/display; complete mission sequences remain unaccepted. See
 [`analysis/native_guidance_limits_milestone.md`](analysis/native_guidance_limits_milestone.md).
 
+The demo attached-camera projection now uses the original model vertex,
+correcting apparent aircraft clipping after takeoff. All 223 independently
+aligned takeoff boundaries match drawing, player motion and camera state.
+The adjacent coarse angle clamp also matches source long arithmetic; extended
+modes five through eight match 232 input/stage intervals and 726 bodies.
+See [`analysis/native_outside_camera_milestone.md`](analysis/native_outside_camera_milestone.md).
+Complete game acceptance remains unfinished.
+
 ## Deliverable
 
 Recreated, readable C source for the whole game: named functions and

@@ -1,5 +1,14 @@
 # Native port runner
 
+The reported demo outside-view clipping after takeoff is fixed. Attached
+projection now consumes the original model vertex, as C1F2EE does. All 223
+independent takeoff boundaries match both drawing pages, camera state and
+player motion/pose. Three outside-camera cases join the ten-case frame-body
+suite. Extended missions also fix a coarse matrix clamp, matching 232 input/
+stage intervals and 726 bodies across modes five through eight. See
+`../../analysis/native_outside_camera_milestone.md`. Full gameplay acceptance
+remains unfinished.
+
 Latest input connection: Delete's source C06BF0 callback reset now executes
 existing C1748C/C17456 domain owners in flight and menus. Check it with
 `python tools/native/check_mode_two.py --mode 125 --callback`; 57 input/stage

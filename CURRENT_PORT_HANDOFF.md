@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest connected batch: the reported demo outside-view clipping is corrected.
+C1F158/C1F2EE consumes the original model vertex; native composition had
+rotated it twice. All 223 independently aligned takeoff boundaries now match
+both drawing pages, player pose/motion and camera state. Ten assembled-body
+cases pass, including three new attached-camera regressions. Extended mission
+sampling also corrects C2E048's coarse angle clamp before word narrowing:
+modes five through eight match 232 input/stage intervals and 726 sampled
+bodies, including active postflight dynamics. All 576 complete matrix cases,
+the failing record checkpoint and eleven selected runtime gates pass. See
+`analysis/native_outside_camera_milestone.md`. Complete gameplay/audio/state/
+performance acceptance remains unfinished.
+
 Latest connected batch: sustained native mode-six/eight input now resumes
 the existing guidance owner after C2C348 -> C06C02. Extended comparisons also
 correct target-marker returned coordinates, signed attitude longs, the matrix

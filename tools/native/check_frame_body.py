@@ -19,7 +19,8 @@ def main():
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe')
     parser.add_argument('--carrier-input', type=Path)
     parser.add_argument('--case', action='append', choices=('selection', 'viewport', 'active', 'readout',
-                                                          'crash-flight', 'carrier-approach', 'cockpit', 'map'))
+                                                          'crash-flight', 'carrier-approach', 'cockpit', 'map',
+                                                          'outside-takeoff', 'outside-roll', 'outside-bank'))
     args = parser.parse_args()
     oracle = ROOT / 'build/recomp/native_frame_body_oracle.exe'
     subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(oracle.relative_to(ROOT)),
@@ -28,6 +29,9 @@ def main():
                  ('viewport', ROOT / 'captures/native/demo01/input.fa18in', 1750),
                  ('active', ROOT / 'captures/native/demo01/input.fa18in', 2401),
                  ('readout', ROOT / 'captures/native/demo01/input.fa18in', 2405),
+                 ('outside-takeoff', ROOT / 'captures/native/demo01/input.fa18in', 2274),
+                 ('outside-roll', ROOT / 'captures/native/demo01/input.fa18in', 2322),
+                 ('outside-bank', ROOT / 'captures/native/demo01/input.fa18in', 2330),
                  ('crash-flight', ROOT / 'captures/native/qual_fail_crashes/input.fa18in', 2000)]
     if args.carrier_input:
         scenarios.append(('carrier-approach', args.carrier_input.resolve(), 6289))
@@ -62,6 +66,10 @@ def main():
             assert not stats['frame_owner_exit'], 'C0DA38 exits before the normal C0F3C0 boundary'
             assert not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
             assert stats['frame_before_tick'] <= stats['frame_after_tick'], stats
+            if name.startswith('outside-'):
+                before = Path(str(prefix) + '.before.dat').read_bytes()
+                assert 3 <= before[0xC457A7 - 0xC00000 + 0x80000] <= 9, 'attached camera not exercised'
+                assert before[0xC45785 - 0xC00000 + 0x80000] == 0, 'unexpected independent camera'
             if name in ('cockpit', 'map'):
                 assert stats['mode'] == 1 and stats['stage'] == 'C10DAE' and stats['hud_frames'] > 0, stats
                 before = Path(str(prefix) + '.before.dat').read_bytes()

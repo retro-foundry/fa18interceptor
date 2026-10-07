@@ -61,6 +61,14 @@ def compare_gameplay(source, native):
                                    f'(source {source_page}/native {native_page}): {len(changed)} differing bytes; '
                                    f'first byte {first} (x={first % 40 * 8}, y={first // 40}) '
                                    f'{original[first]:02X} != {actual[first]:02X}')
+    # The attached outside camera is part of the gameplay view, including
+    # its world position and the matrices consumed by model projection.
+    for name, address, size in (('observer', 0xC45C32, 24), ('camera matrix', 0xC45C20, 18),
+                               ('view matrix', 0xC45BD8, 18), ('view pan/rotate', 0xC45A94, 4),
+                               ('view attitude', 0xC45A88, 12), ('view side', 0xC458B2, 1)):
+        original, actual = span(source, address, size), span(native, address, size)
+        if original != actual:
+            differences.append(f'{name}: {original.hex()} != {actual.hex()}')
     # Explicit motion/pose/matrix scope; flags, counters and async voices are separate.
     for name, begin, end in (('position and motion', 0x0C, 0x26), ('rates', 0x38, 0x4A),
                              ('orientation', 0x66, 0x74), ('matrices', 0x80, 0xA4)):
@@ -101,7 +109,7 @@ def main():
         differences = compare_gameplay(source, native)
         assert not differences, '\n'.join(differences)
         print(f'Aligned gameplay checkpoint: game tick {stats["frame_saved_tick"]}, native update {args.iteration}; '
-              'both 320x200 four-plane pages and player motion/pose/matrices match original bytes')
+              'both 320x200 four-plane pages, camera and player motion/pose/matrices match original bytes')
         print(f'Physical draw buffers: source {integer(source, 0xC4566C, 2)}, native {integer(native, 0xC4566C, 2)}; '
               'compared by source-defined draw/display roles')
     print('One independent-run gameplay checkpoint accepted; complete sequence and time alignment remain unverified')

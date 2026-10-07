@@ -54,10 +54,10 @@ int main(int argc,char **argv) {
     int in_matrix=0;
     for(step=0;step<10000000;++step) {
         if(trace_matrix && REG_PC==0xc2dee0 && REG_A[1]==matrix_record) in_matrix=1;
-        if(in_matrix && (REG_PC==0xc2e0dc || REG_PC==0xc2e118 || REG_PC==0xc2e202 ||
+        if(in_matrix && (REG_PC==0xc2e024 || REG_PC==0xc2e048 || REG_PC==0xc2e0dc || REG_PC==0xc2e118 || REG_PC==0xc2e202 ||
                         REG_PC==0xc2e208 || REG_PC==0xc2e242 || REG_PC==0xc2e300 || REG_PC==0xc2e334))
-            fprintf(stderr,"extraction %06X d0=%08X d3=%08X d4/d5/d6=%08X/%08X/%08X main=%08X companion=%08X\n",
-                REG_PC,REG_D[0],REG_D[3],REG_D[4],REG_D[5],REG_D[6],
+            fprintf(stderr,"extraction %06X d0=%08X d1=%08X d3=%08X d4/d5/d6=%08X/%08X/%08X main=%08X companion=%08X\n",
+                REG_PC,REG_D[0],REG_D[1],REG_D[3],REG_D[4],REG_D[5],REG_D[6],
                 rd_u32(MATRIX_TRANSFORM_PRODUCT+4),rd_u32(MATRIX_TRANSFORM_PRODUCT+16));
         if(REG_PC==0xc2d704) in_matrix=0;
         if(trace_matrix && REG_A[1]==matrix_record &&

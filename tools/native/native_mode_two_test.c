@@ -32,6 +32,8 @@ typedef struct {
     uint32_t record_cases[16][32];
     unsigned record_case_counts[16];
     uint32_t initial_position[3];
+    uint32_t aircraft_positions[16][3];
+    unsigned aircraft_moved;
     int flight_baseline,moved;
     int entered,returned;
 } ModeRun;
@@ -78,10 +80,16 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         const unsigned bit=stream<8?1u<<stream:0;
         unsigned sample=0;
         if(run->callback_bodies) {--run->callback_bodies;sample|=8;}
-        if(run->flight && stage==0xc10dae) {
+        /* Keep sampling active postflight bodies after the flight baseline;
+         * these still run record dynamics beyond stage C10DAE. */
+        if(run->flight && (stage==0xc10dae || (run->flight==2 && run->flight_baseline &&
+           rd_u8(MODE_SELECT)==run->mode && rd_u8(POST_INPUT_AUX)))) {
             if(!run->flight_baseline) {
                 run->flight_baseline=1;
                 for(unsigned i=0;i<3;++i) run->initial_position[i]=rd_u32(CONTROL_RECORDS+20+4*i);
+                for(unsigned slot=0;slot<16;++slot)
+                    for(unsigned i=0;i<3;++i)
+                        run->aircraft_positions[slot][i]=rd_u32(CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES+20+4*i);
             }
             for(unsigned i=0;i<3;++i)
                 if(rd_u32(CONTROL_RECORDS+20+4*i)!=run->initial_position[i]) run->moved=1;
@@ -94,6 +102,9 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             run->region_mask=mask;run->occupied_mask=occupied;
             for(unsigned slot=0;slot<16;++slot) {
                 const gaddr record=CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES;
+                if((rd_u8(record+98)&0xf0)==0x10 && (rd_u16(record)&0xc0)==0xc0)
+                    for(unsigned i=0;i<3;++i)
+                        if(rd_u32(record+20+4*i)!=run->aircraft_positions[slot][i]) run->aircraft_moved|=1u<<slot;
                 /* Sample actual manoeuvre/altitude-limit crossings, including
                  * the countdown arm that calls C06C02. No state is seeded. */
                 if(run->flight==2 && (rd_u8(record+98)&0xf0)==0x10 &&
@@ -212,7 +223,7 @@ int main(int argc,char **argv) {
     unsigned aircraft=argc>=6?(unsigned)atoi(argv[5]):1;
     if(argc==7) {
         if(!strcmp(argv[6],"callback") && run.mode==125) run.callback=1;
-        else if(!strcmp(argv[6],"combat") && (run.mode==6 || run.mode==8)) run.flight=2;
+        else if(!strcmp(argv[6],"combat") && (run.mode>=5 && run.mode<=8)) run.flight=2;
         else if(!strcmp(argv[6],"flight") && run.mode==4) run.flight=1;
         else if(!strcmp(argv[6],"eject") && run.mode==8) run.eject=1;
         else if(run.mode==8 && !strncmp(argv[6],"weapon",6) && strlen(argv[6])==7 && argv[6][6]>='1' && argv[6][6]<='3')
@@ -331,16 +342,19 @@ int main(int argc,char **argv) {
         }
     }
     if(run.flight) {
-        if(!run.flight_baseline || !run.moved || game->scene_frames<5000 ||
+        /* In mode five this input leaves the player stationary while the
+         * other aircraft fly. Require observed aircraft motion in that case. */
+        if(!run.flight_baseline || (run.mode==5?!(run.aircraft_moved&~1u):!run.moved) || game->scene_frames<5000 ||
            (run.flight==2 && (rd_u8(RECORDER_MODE)!=0 || (run.samples&7)!=7)) ||
            (run.flight==1 && (!run.spawns || !run.zone_exits || !(run.npc_missiles&(1u<<13))))) {
-            fprintf(stderr,"Flight failed: spawns=%X exits=%X missiles=%X scene=%u position=%u,%u,%u initial=%u,%u,%u\n",
+            fprintf(stderr,"Flight failed: baseline=%d moved=%d samples=%X returned=%d recorder=%u spawns=%X exits=%X missiles=%X scene=%u position=%u,%u,%u initial=%u,%u,%u\n",
+                run.flight_baseline,run.moved,run.samples,run.returned,rd_u8(RECORDER_MODE),
                 run.spawns,run.zone_exits,run.npc_missiles,game->scene_frames,
                 rd_u32(CONTROL_RECORDS+20),rd_u32(CONTROL_RECORDS+24),rd_u32(CONTROL_RECORDS+28),
                 run.initial_position[0],run.initial_position[1],run.initial_position[2]);goto done;
         }
-        printf("{\"regions\":true,\"spawned_records\":%u,\"zone_exits\":%u,\"npc_missiles\":%u,\"scene_frames\":%u}\n",
-            run.spawns,run.zone_exits,run.npc_missiles,game->scene_frames);
+        printf("{\"regions\":true,\"spawned_records\":%u,\"zone_exits\":%u,\"npc_missiles\":%u,\"aircraft_moved\":%u,\"scene_frames\":%u}\n",
+            run.spawns,run.zone_exits,run.npc_missiles,run.aircraft_moved,game->scene_frames);
     }
     result=0;
 done:

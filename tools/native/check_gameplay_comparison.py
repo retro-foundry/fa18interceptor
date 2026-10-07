@@ -52,12 +52,15 @@ def main():
                           (0xC46190, 'position and motion'),
                           (0xC45776, 'boundary/control C45776'),
                           (0xC4582F, 'boundary/control C4582E'),
-                          (0xC458DA, 'boundary/control C458DA')):
+                          (0xC458DA, 'boundary/control C458DA'),
+                          (0xC45C3E, 'observer'),
+                          (0xC45C20, 'camera matrix'),
+                          (0xC45BD8, 'view matrix')):
         changed = bytearray(native)
         changed[offset(address)] ^= 1
         assert any(value.startswith(kind) for value in compare_gameplay(source, changed)), hex(address)
     print('Gameplay comparator: equivalent allocation passes; wrong frame/table, HUD bit, motion, '
-          'mouse position, key-release phase and game tick reject')
+          'mouse position, key-release phase, game tick, observer and camera/view matrices reject')
 
 
 if __name__ == '__main__':

@@ -38,8 +38,8 @@ TODOs; current code and the newest evidence take precedence.
 
 ## Current checkout and architecture
 
-Branch: `coverage-accounting`. The latest implementation batch connects sustained
-flight guidance and corrects projection/matrix return semantics; use `git log -1`
+Branch: `coverage-accounting`. The latest implementation batch fixes the reported
+demo outside-view clipping and the coarse matrix clamp; use `git log -1`
 for its commit. Prior scene implementation:
 **`d5203c52`**. Preserve untracked `.vscode/`.
 No build/test process is pending and no user answer or approval is pending.
@@ -149,6 +149,37 @@ differences. The two latest commits fixed genuine aborts; the unchanged 53/128
 strict drawing result is diagnostic evidence, not a completion percentage.
 
 ## Latest completed commits
+
+### Demo attached camera and extended matrix limits — 2026-10-07
+
+The reported clipping just after demo takeoff came from passing an already
+rotated vertex into C1F2EE's attached-camera projection. The original reloads
+the unrotated model vertex at A1-6; native composition now does the same.
+The barrel roll also occurs in the original playback and is preserved.
+Source/native camera position and plane pose already matched. All 223
+consecutive takeoff boundaries now match both complete drawing pages, camera
+state and named player motion/pose/matrices (previously 153 drawing matches).
+The independent comparator now includes named camera state; mutation tests
+reject incorrect observer/camera matrices. Ten actual frame-body cases pass,
+including three new outside-takeoff/roll/bank regressions.
+
+Extended modes five through eight also exposed C2E048's signed-long coarse
+clamp: native narrowed before comparing. The clamp now precedes narrowing.
+576 complete matrix cases and all seven actual record checkpoints pass,
+including the formerly failing mode-seven body. Normal probes match 232
+input/stage intervals and 726 sampled bodies, including active postflight
+dynamics. Mode five's player stays stationary under these inputs while other
+aircraft fly; its probe requires observed non-player aircraft movement.
+All eleven selected runtime gates, the final renderer regressions, full
+native/reference builds and final frontend/link check pass. The public native
+executable is refreshed. See `analysis/native_outside_camera_milestone.md`.
+Artifacts are in `build/native-flight/demo-takeoff-review/` and
+`build/native-flight/combat-probe/clamp-5` through `clamp-8`.
+
+This accepts the compared takeoff segment and connected mission samples,
+not complete independent flights or mission success. Remaining whole-game,
+typed-state, audio and performance requirements stay active; the later
+seconds-driven HUD comparison remains separately unaccepted.
 
 ### Keyboard flare/chaff and connected control effects — 2026-10-07
 

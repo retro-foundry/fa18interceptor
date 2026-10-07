@@ -177,8 +177,10 @@ static int record_vertices(gaddr bound,gaddr frame) {
         if(!first) --visible;
         if(visible>=0) {
             if(rd_u8(frame-0x7f)&1) {
-                for(int k=0;k<3;++k) wr_s16(frame-0x5e + 2*k,local[k]);
-                view_transform(frame-0x5e,(int16_t)shift,output);
+                /* C1F158 -> C1F2EE reloads the original vertex at A1-6.
+                 * An attached camera uses model coordinates; the rotated
+                 * cache is for the world-space branch below. */
+                view_transform(input-6,(int16_t)shift,output);
             } else {
                 for(int k=0;k<3;++k) point[k]=(int16_t)(shift_word(local[k],shift)+origin[k]);
                 for(int row=0;row<3;++row) wr_s16(output+2*row,dot(VIEW_ANGLE_MATRIX+6*row,point));

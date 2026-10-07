@@ -1,5 +1,15 @@
 # Native gameplay-frame acceptance
 
+Latest takeoff assessment (2026-10-07): the user-reported demo outside-view
+clipping is fixed by supplying C1F2EE the original model vertex. All 223
+independent pre-input boundaries at source 2179..2401 / native 2142..2364
+now match both complete drawing pages, camera state and named player motion/
+pose/matrices. Before the fix only 153 drawing boundaries matched, while
+camera state and pose already agreed. The original demo also rolls; its motion
+is preserved. This accepts that takeoff segment, not the full demo. See
+`native_outside_camera_milestone.md`; the later tick-273 HUD assessment below
+remains separate and unaccepted. No drawing exclusion changed.
+
 Latest user clarification: gameplay frames are what must match. Intro, loading
 and preflight duration may differ, including loading substantially faster.
 Copper fade remains excluded. This overrides earlier whole-launch timing gates.

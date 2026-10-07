@@ -107,11 +107,22 @@ static int matrix_transform_cases(void) {
     const uint16_t pitch[]={0,8,0x1b80,0x1bd0,0x1c00,0x1c10,0x1c20,0x1c28,
                             0x1c70,0x1cc0,0x5380,0x53d0,0x5410,0x5440,0x5488,0x5530};
     const uint16_t angles[]={0,0x38,0x3840,0x7080};
-    for(unsigned test=0;test<512;++test) {
+    const uint16_t coefficients[]={0x3fd7,0x3fd8,0x3fff,0x4000,0x4001,0x5fc1,0x5fc2,0x5fc3,
+                                   0x6000,0x7f4c,0x7fff,0x8000,0x8001,0xa03e,0xbfff,0xc000};
+    for(unsigned test=0;test<576;++test) {
         memcpy(fa18_machine,saved,sizeof *saved);
         const gaddr matrix=CONTROL_RECORDS+0x80;
-        const uint16_t a=(test&256)?7:0,b=(test&256)?0xfffc:0,c=(test&256)?0x4b:0;
-        rotation_matrix(pitch[test&15],angles[(test>>4)&3],angles[(test>>6)&3],matrix);
+        const uint16_t a=test<512 && (test&256)?7:0,b=test<512 && (test&256)?0xfffc:0,c=test<512 && (test&256)?0x4b:0;
+        if(test<512) rotation_matrix(pitch[test&15],angles[(test>>4)&3],angles[(test>>6)&3],matrix);
+        else {
+            /* Full original owner with signed matrix coefficients near the
+             * coarse clamp and word-sign boundary, as reached after flight.
+             * Exercise both signs and companion-axis configurations. */
+            for(unsigned k=0;k<9;++k) wr_u16(matrix+2*k,0);
+            wr_u16(matrix,0x4000);wr_u16(matrix+8,(test&16)?0xc000:0x4000);
+            wr_u16(matrix+16,(test&32)?0xc000:0x4000);
+            wr_u16(matrix+14,coefficients[test&15]);
+        }
         memcpy(before,fa18_machine,sizeof *before);
         memset(REG_DA,0,sizeof REG_DA);REG_D[0]=a;REG_D[2]=b;REG_D[4]=c;REG_A[4]=matrix;
         REG_A[7]=0xc7ff00;wr_u32(REG_A[7],0xc70000);
@@ -134,7 +145,7 @@ static int matrix_transform_cases(void) {
         }
     }
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
-    puts("512 complete C2DEE0 matrix transforms match returned angles/divisor and non-stack RAM");return 1;
+    puts("576 complete C2DEE0 matrix transforms match returned angles/divisor and non-stack RAM");return 1;
 }
 static int matrix_settle_cases(void) {
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);

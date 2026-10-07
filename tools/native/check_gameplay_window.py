@@ -70,7 +70,7 @@ def main():
     report_path.write_text(json.dumps(report, indent=2) + '\n')
     print(f'Gameplay window: {matching}/{args.count} boundaries match ({matching / args.count:.1%}); '
           f'{len(drawings)} distinct drawing states, {len(motion)} distinct motion states')
-    print(f'Player motion/pose/matrices, phase and controls: {flight_matching}/{args.count} match')
+    print(f'Player motion/pose/matrices, camera, phase and controls: {flight_matching}/{args.count} match')
     for row in [row for row in frames if row['differences']][:3]:
         print(f'Source {row["source_iteration"]}/native {row["native_iteration"]}, '
               f'ticks {row["source_tick"]}/{row["native_tick"]}:')

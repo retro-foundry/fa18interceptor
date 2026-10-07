@@ -1,5 +1,12 @@
 # Active port source ownership
 
+Latest connected fixes: demo attached-camera projection avoids rotating the
+model vertex twice; 223 independent takeoff boundaries match both drawing
+pages, player motion and camera state. The shared coarse angle clamp now uses
+source long arithmetic; extended mission samples match 232 intervals/726
+bodies. See [`../analysis/native_outside_camera_milestone.md`](../analysis/native_outside_camera_milestone.md).
+Full game acceptance remains unfinished.
+
 Latest direction (2026-10-06): `fa18_native` reuses the game source with a native
 intro/menu entry, mission/log selection and connected demonstration/Free
 Flight/carrier qualification gameplay, omitting CPU,
