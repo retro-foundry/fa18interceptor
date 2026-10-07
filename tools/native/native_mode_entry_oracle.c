@@ -4,6 +4,7 @@
 #include "native_input_oracle.c"
 #undef main
 static unsigned host_tick;
+static unsigned shared_config_boundary,config_writes;
 static int original_stage(void) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;
     wr_u32(REG_A[7],0xc70000);REG_PC=0xc0f5f8;
@@ -11,6 +12,12 @@ static int original_stage(void) {
     SET_CYCLES(1000000000);
     for(unsigned step=0;step<2000000;++step) {
         if(REG_PC==0xc70000 && REG_A[7]==0xc7ff04) return 1;
+        if(shared_config_boundary && REG_PC==0xc1643a) {
+            /* Explicit existing native persistence boundary. This comparison
+             * covers the result caller, not C1643A's disk/status decisions. */
+            ++config_writes;wr_u8(MODE_TABLE_CHANGED,0);
+            REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;
+        }
         if(getenv("FA18_MODE_STAGE_TRACE") && (REG_PC==0xc1e328 || REG_PC==0xc1e48c))
             fprintf(stderr,"Stage sort %06X: A6=%06X A7=%06X A4=%06X choice=%02X\n",
                 REG_PC,REG_A[6],REG_A[7],REG_A[4],rd_u8(REG_A[6]-0x2c));
@@ -49,7 +56,10 @@ int main(int argc,char **argv) {
         }
     }
     m->joy1dat=0;
-    for(int i=4;i<argc;++i) native_input_enqueue_raw(game,(uint8_t)strtoul(argv[i],NULL,10));
+    for(int i=4;i<argc;++i) {
+        if(!strcmp(argv[i],"--shared-config-write")) shared_config_boundary=1;
+        else native_input_enqueue_raw(game,(uint8_t)strtoul(argv[i],NULL,10));
+    }
     host_tick=(unsigned)strtoul(argv[3],NULL,10);
     const gaddr stage=rd_u32(STAGE_CALLBACK);
     if(!original_input(game) || !original_stage()) return 1;
@@ -65,6 +75,7 @@ int main(int argc,char **argv) {
         ++differences;
     }
     printf("Actual input/stage %06X: %u compared RAM differences\n",stage,differences);
+    if(shared_config_boundary) printf("Shared native config-write boundary calls: %u (C1643A excluded)\n",config_writes);
     free(game);free(m);free(after);free(before);free(rom);free(state);
     return differences!=0;
 }

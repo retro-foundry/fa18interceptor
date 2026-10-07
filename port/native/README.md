@@ -532,3 +532,17 @@ python tools/native/check_mode_two.py --mode 8 --weapon 3 --out build/native-fli
 ```
 
 See [`../../analysis/native_weapon_firing_milestone.md`](../../analysis/native_weapon_firing_milestone.md).
+
+The shared runtime now connects player readiness, mode-four result view,
+mode-five record restoration and the reached result messages/log updates.
+Controlled terminal fixtures match nine actual input/stage intervals and 25
+sampled bodies against original RAM/display. These fixtures seed terminal
+conditions only in validation; they do not establish normal-input mission
+success. Result comparisons explicitly retain the shared C1643A save boundary;
+its disk/status gates remain open. All 26 affected native tests pass.
+
+```powershell
+python tools/native/check_postflight_schedule.py
+```
+
+See [`../../analysis/native_postflight_schedule_milestone.md`](../../analysis/native_postflight_schedule_milestone.md).

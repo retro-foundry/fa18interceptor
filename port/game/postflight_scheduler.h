@@ -40,6 +40,9 @@ typedef struct PostflightScheduleHooks {
     void *context;
 } PostflightScheduleHooks;
 
+/* C0A3EA's result is live in C0A3DA: event zero means the player is ready. */
+PostflightScheduleResult postflight_player_readiness(const PostflightScheduleHooks *hooks);
+
 /* Complete C09E06/C09E98/C09EC4/C0A002/C0A12E/C0A15C/C0A1E0/
  * C0A2F0/C0A334/C0A364/C0A3EA, including C0A3A6/C0A3C6 shared tails.
  * Leaf modes permit NULL hooks; a reached source child requires consume. */

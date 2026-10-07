@@ -72,6 +72,15 @@ else()
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_executable(fa18_native_postflight_schedule_test ../../tools/native/native_postflight_schedule_test.c)
+    target_link_libraries(fa18_native_postflight_schedule_test PRIVATE fa18_native_runtime)
+    foreach(result_kind four five ready)
+        add_test(NAME fa18_native_postflight_${result_kind}
+            COMMAND fa18_native_postflight_schedule_test
+                ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+                ${CMAKE_CURRENT_BINARY_DIR}/postflight-${result_kind}-save
+                ${CMAKE_CURRENT_BINARY_DIR}/postflight-${result_kind} ${result_kind})
+    endforeach()
     add_executable(fa18_native_mode_two_test ../../tools/native/native_mode_two_test.c)
     target_link_libraries(fa18_native_mode_two_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_mode_two

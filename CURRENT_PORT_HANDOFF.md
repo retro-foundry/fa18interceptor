@@ -1,5 +1,19 @@
 # Current playable port handoff
 
+Latest connected batch: C0A3EA readiness, mode-four C1BEE8 result view,
+mode-five C0A12E record restores, reached C083A6 control request and
+C110A4/C24FA4/C11350/C08ED0 result messages/log update. Controlled fixtures
+through the actual shared runtime pass nine input/stage intervals and 25
+sampled bodies with zero compared original RAM/display differences and unchanged
+RAM/display masks. 63 result-parent cases pass with the existing C1643A shared save
+boundary; its disk/status/readiness decisions remain unverified. Despite older
+helper names, C539F4 is DOS Write, not Read. Normal mode-four flight still
+passes 56 intervals/47 bodies. All 26 affected native tests, seven native-only
+host/loading checks and both reference builds pass. The validated public native
+executable is updated. See `analysis/native_postflight_schedule_milestone.md`;
+run `python tools/native/check_postflight_schedule.py`. Normal-input mission
+success, full gameplay/audio/performance acceptance remain open.
+
 Latest connected batch: mode-4 throttle/stick flight runs region placement and
 orientation, zone exits, draw $B4/C21EF8, NPC missile launches and the player's
 hit/restart sequence (5,970 scene/HUD frames). The launch gate now tests the

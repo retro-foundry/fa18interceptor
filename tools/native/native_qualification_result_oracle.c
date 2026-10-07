@@ -34,7 +34,7 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;native_clock_set(12358);
     const gaddr entries[]={0xc11078,0xc110a4,0xc0f946,0xc0f974,0xc0f992};
-    for(unsigned test=0;test<39;++test) {
+    for(unsigned test=0;test<63;++test) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
         unsigned owner=test%5,variant=test/5;gaddr entry=entries[owner];
         wr_u8(MODE_SELECT,9);wr_u8(RECORDER_MODE,0);wr_u8(PLAYER_PHASE,variant==2?0xef:0xff);
@@ -45,6 +45,17 @@ int main(int argc,char **argv) {
             wr_u8(MODE_SELECT,(uint8_t)(4+(test-15)%4));
             wr_u8(PLAYER_PHASE,(uint8_t[]){0xfe,0xfd,2}[((test-15)/4)%3]);
             wr_u16(0xc458da,(uint16_t)((test-15)/12));
+        }
+        if(test>=39) {
+            owner=1;entry=entries[owner];
+            const unsigned variant=(test-39)/4;
+            const uint8_t levels[]={0,1,2,3,0x7f,0xff};
+            const uint8_t attempts[]={0,2,3,0xfe,0xff,0x80};
+            wr_u8(MODE_SELECT,(uint8_t)(4+(test-39)%4));wr_u8(PLAYER_PHASE,0xfc);
+            wr_u16(POST_INPUT_COUNTDOWN,0xffff);
+            wr_u8(SCENE_DISPATCH_LIMIT,levels[variant]);
+            wr_u8(rd_u32(MODE_TABLE)+18+rd_u8(MODE_SELECT),attempts[variant]);
+            wr_u16(rd_u32(MODE_TABLE)+0x38,variant&1?0xffff:0);
         }
         memcpy(before,m,sizeof *m);saves=0;
         if(!source_result(entry)) return 1;
@@ -64,6 +75,6 @@ int main(int argc,char **argv) {
         }
         if(owner==4 && (game.screen!=NATIVE_MENU || game.record_updates!=1)) return 1;
     }
-    puts("39 qualification/mission result/viewport/restart parents match original RAM with the shared config-write boundary");
+    puts("63 qualification/mission result/viewport/restart parents match original RAM with the shared config-write boundary (C1643A excluded)");
     free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

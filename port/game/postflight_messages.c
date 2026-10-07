@@ -193,19 +193,26 @@ void prepare_postflight_messages(gaddr frame,const PostflightMessageHooks *h) {
 void prepare_postflight_result(const PostflightMessageHooks *h) {
     ResultMessageLocals locals={0}; prepare_result_messages(&locals,h);
 }
-void record_postflight_outcome(gaddr frame,const PostflightMessageHooks *h) {
-    int32_t mode=signed_mode(h,1); gaddr a,b; uint16_t count; uint8_t attempts;
+static void record_result(gaddr frame,const PostflightMessageHooks *h) {
+    int32_t mode=signed_mode(h,1); gaddr a,b,entry; uint16_t count; uint8_t attempts;
     a=address(h,0,rd_u32(MODE_TABLE)); a=address(h,0,a+18); a=address(h,0,a+(uint32_t)mode);
-    longword(h,frame-4,a); consume(h,PM_REFRESH_OUTCOME);
+    entry=a;
+    if(frame) longword(h,frame-4,a); else observe(h,PM_STORE_LONG,a,0);
+    consume(h,PM_REFRESH_OUTCOME);
     a=address(h,0,rd_u32(MODE_TABLE)); byte(h,a+6,rd_u8(MODE_SELECT));
-    a=address(h,0,rd_u32(frame-4)); b=address(h,1,rd_u32(MODE_TABLE)); byte(h,b+7,rd_u8(a));
+    a=address(h,0,frame?rd_u32(frame-4):entry); b=address(h,1,rd_u32(MODE_TABLE)); byte(h,b+7,rd_u8(a));
     a=address(h,0,rd_u32(MODE_TABLE)); count=read_word(h,a+0x38); observe(h,PM_ADD_WORD,1,0); count++;
     a=address(h,0,rd_u32(MODE_TABLE)); word(h,a+0x38,count);
     attempts=read_byte(h,SCENE_DISPATCH_LIMIT); observe(h,PM_ADD_BYTE,1,0); attempts++;
     byte(h,SCENE_DISPATCH_LIMIT,attempts); compare(h,attempts,3,1); if((int8_t)attempts>3) byte(h,SCENE_DISPATCH_LIMIT,3);
-    a=address(h,0,rd_u32(frame-4)); attempts=read_byte(h,a); observe(h,PM_ADD_BYTE,1,0); attempts++;
+    a=address(h,0,frame?rd_u32(frame-4):entry); attempts=read_byte(h,a); observe(h,PM_ADD_BYTE,1,0); attempts++;
     byte(h,a,attempts); compare(h,attempts,3,1); if(attempts>3) byte(h,a,3);
     byte(h,SCENE_DISPATCH_LIMIT_PREVIOUS,rd_u8(SCENE_DISPATCH_LIMIT));
+}
+void record_postflight_outcome(gaddr frame,const PostflightMessageHooks *h) { record_result(frame,h); }
+void record_postflight_result(const PostflightMessageHooks *h) { record_result(0,h); }
+void refresh_postflight_grade(void) {
+    wr_s16(rd_u32(MODE_TABLE)+2,(int16_t)(int8_t)rd_u8(SCENE_DISPATCH_LIMIT));
 }
 void queue_postflight_text_error(const PostflightMessageHooks *h) {
     if(!expired(h)) { consume(h,PM_CLEAR_ERROR); return; }

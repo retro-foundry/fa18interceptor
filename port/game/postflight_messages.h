@@ -33,6 +33,10 @@ void prepare_postflight_messages(gaddr frame,const PostflightMessageHooks *h);
 /* Same C110A4 owner with ordinary local storage instead of an adapter frame. */
 void prepare_postflight_result(const PostflightMessageHooks *h);
 void record_postflight_outcome(gaddr frame,const PostflightMessageHooks *h);
+/* C11350 with an ordinary local pointer to the mode's pilot-log entry. */
+void record_postflight_result(const PostflightMessageHooks *h);
+/* C08ED0 stores the sign-extended current mission level in the pilot log. */
+void refresh_postflight_grade(void);
 void queue_postflight_text_error(const PostflightMessageHooks *h);
 void wait_postflight_text_error(const PostflightMessageHooks *h);
 void queue_postflight_intro(const PostflightMessageHooks *h);

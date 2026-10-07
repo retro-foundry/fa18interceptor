@@ -113,6 +113,10 @@ static FlightWorking root_control_child(void *context,enum FlightChild child,Fli
         sound_chosen_record_alert(child==FC_TOUCHDOWN_FAST_TONE?40:30);break;
     case FC_RESET_CONTROL:
         begin_mission_reset();break; /* C083E2 after landing on the carrier. */
+    case FC_REQUEST_CONTROL: {
+        const ContextPublicationHooks request={0};
+        set_selected_record_request(1,&request);break; /* C083A6 */
+    }
     case FC_SAMPLE_TOUCHDOWN: case FC_SAMPLE_TAKEOFF: {
         native_clock_sample();break;
     }
@@ -237,8 +241,13 @@ static uint32_t action_view(uint32_t event,int16_t index) {
     return state.event;
 }
 static PostflightScheduleResult schedule_child(void *context,enum PostflightScheduleChild child,gaddr record) {
-    (void)context; (void)record;
+    (void)context;
     if(child==SCHEDULE_SELECTION_GATE) { release_lost_selection(); return (PostflightScheduleResult){0,1}; }
+    if(child==SCHEDULE_READY_GATE) return postflight_player_readiness(NULL); /* C0A3EA */
+    if(child==SCHEDULE_RESTORE_FIRST || child==SCHEDULE_RESTORE_SECOND) {
+        schedule_postflight(POSTFLIGHT_RESTORE_RECORD,0,record,NULL); /* C0A12E */
+        return (PostflightScheduleResult){0,1}; /* Result is dead to C0A002. */
+    }
     if(child==SCHEDULE_NINE) {
         schedule_postflight(POSTFLIGHT_MODE_NINE,0,record,NULL);
         return (PostflightScheduleResult){0,1};
@@ -277,8 +286,8 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
         schedule_postflight(POSTFLIGHT_MODE_OTHER,rd_u8(MODE_SELECT),record,&hooks); /* C0A364 */
         return (PostflightScheduleResult){0,1};
     }
-    if(child==SCHEDULE_PREPARE_SEVEN) {
-        /* C0A1E0 retains record 4's +6 OR +12 word in D0 before C1BEE8;
+    if(child==SCHEDULE_PREPARE_FOUR || child==SCHEDULE_PREPARE_SEVEN) {
+        /* C09EC4/C0A1E0 retain record 4's +6 OR +12 word before C1BEE8;
          * only its low byte reaches the command queue. D1 is STREAM_MODE. */
         RecordView state={rd_u16(CONTROL_RECORDS+0x806u)|rd_u16(CONTROL_RECORDS+0x80cu)};
         const ViewCommandHooks view={record_view_child,NULL,&state};

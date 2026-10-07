@@ -176,8 +176,16 @@ static int32_t result_message_child(void *context,enum PostflightMessageChild ch
     NativeFrontend *game=context;
     switch(child) {
     case PM_RESET_SEQUENCE: reset_message_sequence();return 0;
-    case PM_LOAD_MODE:
+    case PM_INDEXED_MESSAGE:
+        queue_indexed_menu_message((uint32_t)(int32_t)(int8_t)rd_u8(MODE_SELECT),0,4,NULL);return 0;
+    case PM_REFRESH_OUTCOME: refresh_postflight_grade();return 0;
+    case PM_RECORD_OUTCOME: {
+        const PostflightMessageHooks hooks={result_message_child,NULL,game};
+        record_postflight_result(&hooks);return 0;
+    }
+    case PM_LOAD_MODE: case PM_LOAD_OUTCOME:
         /* C1643A's 78-byte config write uses the existing native save overlay. */
+        /* TODO(port): C1643A disk/status/readiness gates still need composition. */
         native_frontend_save_log(game);return 0;
     default: fprintf(stderr,"native result message child unavailable: %u\n",(unsigned)child);abort();
     }

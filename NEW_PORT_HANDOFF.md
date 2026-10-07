@@ -477,3 +477,23 @@ These sampled bodies do not
 prove an independent whole flight, all collisions or mission outcomes. Audio
 fidelity and the 20 ms target remain unaccepted; the complete-port goal stays
 active. See `analysis/native_region_flight_milestone.md`.
+
+
+Controlled postflight conditions now connect C0A3EA readiness, mode-four
+C1BEE8 result view, mode-five C0A12E record restoration, reached C083A6 control
+request and C110A4/C24FA4/C11350/C08ED0 result messages and pilot-log updates.
+Normal menu startup precedes validation-only terminal flag/position seeding;
+all subsequent frames use the actual shared runtime. Nine input/stage intervals
+and 25 sampled bodies match compared original RAM/display, with unchanged
+RAM/display masks. 63 derived result-parent cases pass, including signed level and
+unsigned attempt limits and completion-count wrap. The ready fixture verifies
+its 78-byte saved log equals the result table. C1643A remains the explicit shared
+native save boundary in these result comparisons; its disk/status/readiness
+gates remain to be integrated and verified. C539F4 is DOS Write despite older
+load/read helper names. Normal mode-four flight still passes 56 intervals and
+47 bodies. All 26 affected native tests, seven native-only host/loading checks
+and both reference builds pass. Public build/native/fa18_native.exe is updated.
+Run python tools/native/check_postflight_schedule.py; see
+analysis/native_postflight_schedule_milestone.md. Normal-input successful
+missions, whole independent flights, audio and 20 ms performance acceptance
+remain unfinished; the complete-port goal stays active.

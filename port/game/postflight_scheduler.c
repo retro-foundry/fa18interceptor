@@ -207,6 +207,23 @@ static void mode_six(const PostflightScheduleHooks *h,uint16_t event) {
 outside:
     if(compare_byte(h,rd_u8(SEQUENCE_PHASE),3)) outcome(h,0xfe,0);
 }
+PostflightScheduleResult postflight_player_readiness(const PostflightScheduleHooks *h) {
+    const gaddr record=CONTROL_RECORDS;
+    uint8_t value;
+    observe(h,SCHEDULE_PLAYER_RECORD,0,0,record);
+    if(!bit(h,record+0x21,0) || !bit(h,record+3,7)) goto not_ready;
+    if(compare_byte(h,rd_u8(0xc45848u),3)) {
+        if(!bit(h,record+4,2)) goto not_ready;
+    } else {
+        value=rd_u8(record+4); observe(h,SCHEDULE_EVENT_BYTE,value,0,0);
+        value&=0xc0; observe(h,SCHEDULE_EVENT_MASK_BYTE,value,0,0);
+        if(!value) goto not_ready;
+    }
+    if(test_word(h,record+0x6e)) goto not_ready;
+    observe(h,SCHEDULE_EVENT_ZERO,0,0,0); return (PostflightScheduleResult){0,1};
+not_ready:
+    observe(h,SCHEDULE_EVENT_ONE,1,0,0); return (PostflightScheduleResult){1,0};
+}
 void schedule_postflight(enum PostflightSchedule mode,uint16_t event,gaddr record,
                         const PostflightScheduleHooks *h) {
     uint8_t value;
@@ -264,18 +281,7 @@ void schedule_postflight(enum PostflightSchedule mode,uint16_t event,gaddr recor
           observe(h,SCHEDULE_LONG_STORE,(uint32_t)(int32_t)words[4],0,record+0x34); }
         return;
     case POSTFLIGHT_PLAYER_READY:
-        record=CONTROL_RECORDS; observe(h,SCHEDULE_PLAYER_RECORD,0,0,record);
-        if(!bit(h,record+0x21,0) || !bit(h,record+3,7)) goto not_ready;
-        if(compare_byte(h,rd_u8(0xc45848u),3)) {
-            if(!bit(h,record+4,2)) goto not_ready;
-        } else {
-            value=rd_u8(record+4); observe(h,SCHEDULE_EVENT_BYTE,value,0,0);
-            value&=0xc0; observe(h,SCHEDULE_EVENT_MASK_BYTE,value,0,0);
-            if(!value) goto not_ready;
-        }
-        if(test_word(h,record+0x6e)) goto not_ready;
-        observe(h,SCHEDULE_EVENT_ZERO,0,0,0); return;
-    not_ready: observe(h,SCHEDULE_EVENT_ONE,1,0,0); return;
+        (void)postflight_player_readiness(h); return;
     }
     abort();
 }
