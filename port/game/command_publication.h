@@ -19,4 +19,8 @@ typedef struct {
 /* Returns the translated byte when queued; otherwise the incoming byte.
  * The CPU adapter preserves upper bytes and all source flags independently. */
 uint8_t publish_command_event(uint8_t raw,const CommandPublicationHooks *hooks);
+/* The actual translated-store index is an output of C1C298/C1C29E, including
+ * signed indices and raw-store aliases. No store leaves queued false. */
+typedef struct { uint8_t event; int queued; int8_t translated_index; } CommandPublicationResult;
+CommandPublicationResult publish_command_event_result(uint8_t raw,const CommandPublicationHooks *hooks);
 #endif

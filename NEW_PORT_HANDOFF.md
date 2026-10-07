@@ -2,6 +2,15 @@
 
 ## Objective and user constraints
 
+Latest connected lost-target cleanup return (2026-10-07): the actual view mode
+or signed translated-queue index now reaches first depleted recorder input.
+Skipped cleanup preserves its preceding result. 103 complete bodies and 120
+input parents match original RAM/drawing, including twelve selected lost-target
+frames. 512 focused cleanup return/RAM cases and all native/reference builds pass.
+Nine affected native checks pass.
+See `analysis/native_selection_cleanup_input_return.md`. Earlier HUD,
+intervening-command outputs and whole-game acceptance remain open.
+
 Latest connected grid/aircraft-marker return (2026-10-07): the existing point,
 heading/shape, segment, line and number-text owners now compose first depleted
 recorder input; inactive grids preserve the preceding result. 91 complete bodies

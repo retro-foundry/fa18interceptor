@@ -48,11 +48,12 @@ def check(args, work, capture_dir):
     label_bodies = [entry for entry in exports if 'label_body' in entry]
     marker_bodies = [entry for entry in exports if 'marker_body' in entry]
     grid_bodies = [entry for entry in exports if 'grid_body' in entry]
+    cleanup_bodies = [entry for entry in exports if 'cleanup_body' in entry]
     assert [body['capture'] for body in bodies] == list(range(4)), bodies
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
     assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
-    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(108)), pending_inputs
+    assert sorted(entry['pending_input'] for entry in pending_inputs) == list(range(120)), pending_inputs
     assert [entry['message_body'] for entry in message_bodies] == list(range(15)), message_bodies
     assert [entry['assigned'] for entry in message_bodies] == [True] * 13 + [False] * 2, message_bodies
     assert {entry['input_byte'] & 0x80 for entry in message_bodies[:12]} == {0, 0x80}
@@ -76,6 +77,9 @@ def check(args, work, capture_dir):
     assert all(entry['return_owner'] == 9 and entry['saved_tick'] & 31 not in (8, 16)
         for entry in grid_bodies), grid_bodies
     assert {entry['recorder_mode'] for entry in pending_inputs} == {1, 2, 3}, pending_inputs
+    assert [entry['cleanup_body'] for entry in cleanup_bodies] == list(range(12)), cleanup_bodies
+    assert all(entry['return_owner'] == 10 and entry['saved_tick'] & 31 not in (8, 16)
+        for entry in cleanup_bodies), cleanup_bodies
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
     source_carries = {}
     for name in ('frame_body', 'input', 'control_effects'):
@@ -170,8 +174,15 @@ def check(args, work, capture_dir):
                         body['before_tick'], body['after_tick'], body['saved_tick'],
                         capture + '.source.dat', environment=environment)
                     source_carries[96 + body['grid_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
+                for body in cleanup_bodies:
+                    capture = str(prefix) + f".cleanup.{body['cleanup_body']}"
+                    environment = dict(os.environ, FA18_FRAME_EXPECT_INPUT_CARRY=str(body['input_byte']))
+                    output = compare(capture, capture + '.before.dat', capture + '.after.dat',
+                        body['before_tick'], body['after_tick'], body['saved_tick'],
+                        capture + '.source.dat', environment=environment)
+                    source_carries[108 + body['cleanup_body']] = int(re.search(r'Frame input carry: (\d+)', output)[1])
         print(f'{name}: original contracts and actual runtime captures pass', flush=True)
-    print('91 full bodies and 108 recorder input parents match original RAM/display, including message, page-clear, HUD, debug text, scene-label, marker-line and grid-marker first-depleted returns')
+    print('103 full bodies and 120 recorder input parents match original RAM/display, including drawing and selection-cleanup first-depleted returns')
 
 
 if __name__ == '__main__':

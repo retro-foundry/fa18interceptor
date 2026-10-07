@@ -27,9 +27,12 @@ static HudStreamState numeric_child(void *context,enum StreamChild child,HudStre
     return values;
 }
 
-int native_frame_selection_cleanup(void) {
+NativeInputReturn native_frame_selection_cleanup(NativeInputReturn prior) {
     wr_u16(UPDATE_STAGE_MARKER,0x1d4);
-    return drop_lost_selection(); /* C12242; C31F4A immediately following is RTS. */
+    const SelectionCleanupResult cleanup=drop_lost_selection_result(); /* C12242; C31F4A is RTS. */
+    if(!cleanup.published) return prior;
+    return (NativeInputReturn){cleanup.view.queued?(uint8_t)cleanup.view.translated_index:cleanup.view.view_mode,
+        NATIVE_INPUT_RETURN_VIEW_KEY};
 }
 
 NativeInputReturn native_frame_debug_overlay(NativeInputReturn prior) {

@@ -30,7 +30,7 @@ void native_input_process(NativeFrontend *game) { (void)game;abort(); }
 void native_scene_project(void) { abort(); }
 int native_scene_draw(NativeFrontend *game) { (void)game;abort(); }
 NativeInputReturn native_hud_draw(uint16_t tick) { (void)tick;abort(); }
-int native_frame_selection_cleanup(void) { abort(); }
+NativeInputReturn native_frame_selection_cleanup(NativeInputReturn prior) { (void)prior;abort(); }
 NativeInputReturn native_frame_debug_overlay(NativeInputReturn prior) { (void)prior;abort(); }
 NativeInputReturn native_frame_scene_labels(NativeInputReturn prior) { (void)prior;abort(); }
 NativeInputReturn native_frame_grid_and_markers(NativeInputReturn prior) { (void)prior;abort(); }

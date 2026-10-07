@@ -21,12 +21,16 @@ void latch_joystick_input(uint16_t directions);
  * `raw` (when none was taken this update and it is a press) in KEY_RAW and,
  * translated through KEY_TABLE, in KEY_TRANSLATED, up to ten keys. */
 void queue_view_key(uint8_t raw);
+typedef struct { uint8_t view_mode; int queued; int8_t translated_index; } ViewKeyResult;
+ViewKeyResult queue_view_key_result(uint8_t raw);
 
 /* $C12242: when the selected record has lost its bit 6 (+$00), drop the
  * selection and the view record, request a full update and, outside a
  * context, reset the view mode and span origins and queue_view_key(0)
  * (TARGET_RECORD holds the selection). */
 int drop_lost_selection(void); /* True when a view command was published. */
+typedef struct { int published; ViewKeyResult view; } SelectionCleanupResult;
+SelectionCleanupResult drop_lost_selection_result(void);
 
 /* The throttle keys' field of PLAYER_STICK ($C1B4D0 up, $C1B4D4 down,
  * $C1B4DE hold). */

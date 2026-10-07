@@ -33,7 +33,7 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     for(unsigned group=0;group<2;++group) {
-        unsigned cases=group?256:64;
+        unsigned cases=group?256:512;
         for(unsigned test=0;test<cases;++test) {
             memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
             if(!group) {
@@ -42,7 +42,11 @@ int main(int argc,char **argv) {
                 wr_u16(CONTROL_RECORDS+(target<<9),test&1?0x40:0);
                 wr_u8(CONTEXT_SELECT,test&2?1:0);wr_u8(UPDATE_MASK,0x24);
                 wr_u8(VIEW_MODE,7);wr_u16(SPAN_ORIGIN,12);wr_u16(SPAN_ORIGIN_Y,192);
-                wr_u8(KEY_TAKEN,0);wr_u8(KEY_COUNT,0);wr_u8(KEY_WRITE,0);wr_u8(KEY_TRANSLATED_WRITE,0);
+                const unsigned queue=test>>6;
+                wr_u8(KEY_TAKEN,queue==1);
+                wr_u8(KEY_COUNT,(uint8_t[]){0,0,10,127,255,128,9,0}[queue]);
+                wr_u8(KEY_WRITE,(uint8_t[]){0,9,10,255,194,10,246,0}[queue]);
+                wr_u8(KEY_TRANSLATED_WRITE,(uint8_t[]){0,7,9,255,128,127,251,3}[queue]);
             } else {
                 const int16_t values[]={0,1,9,10,999,9999,32767,(int16_t)0x8000};
                 wr_u8(UPDATE_TAIL_CONDITION,test&1?1:0);wr_u8(UPDATE_ACTIVE,test&2?1:0);
@@ -60,13 +64,13 @@ int main(int argc,char **argv) {
             memcpy(before,m,sizeof *m);
             NativeInputReturn output={0};
             if(group) output=native_frame_debug_overlay((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT});
-            else native_frame_selection_cleanup();
+            else output=native_frame_selection_cleanup((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT});
             memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
             memcpy(m,before,sizeof *m);
             if(!source_range(group?0xc0f386:0xc0f2dc,group?0xc0f3ba:0xc0f2f0)) return 1;
-            if(group && (output.owner==NATIVE_INPUT_RETURN_UNKNOWN || output.value!=(uint8_t)REG_D[4])) {
-                fprintf(stderr,"Debug return case %u: source %02X native %02X owner %u\n",
-                    test,(uint8_t)REG_D[4],output.value,output.owner);return 1;
+            if(output.owner==NATIVE_INPUT_RETURN_UNKNOWN || output.value!=(uint8_t)REG_D[4]) {
+                fprintf(stderr,"Frame-tail return group %u case %u: source %02X native %02X owner %u\n",
+                    group,test,(uint8_t)REG_D[4],output.value,output.owner);return 1;
             }
             unsigned differences=0;
             for(unsigned i=0;i<0xffc00;++i) {
@@ -80,6 +84,6 @@ int main(int argc,char **argv) {
             if(differences) return 1;
         }
     }
-    puts("64 selection-cleanup and 256 gated-overlay cases match all original non-stack RAM; 256 debug returns match");
+    puts("512 selection-cleanup and 256 gated-overlay cases match original input returns and all non-stack RAM");
     free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }

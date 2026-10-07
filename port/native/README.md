@@ -1,5 +1,12 @@
 # Native port runner
 
+Lost-target cleanup now preserves skipped outputs and publishes its actual view
+mode or signed translated-queue index through the existing publication owner.
+103 complete bodies and 120 input parents match original RAM/drawing, including
+twelve selected cleanup frames in ordinary Free Flight. See
+`../../analysis/native_selection_cleanup_input_return.md`. Earlier HUD/command
+outputs and whole-game acceptance remain open.
+
 Grid/aircraft-marker rendering now composes its actual point depth, heading,
 shape offset, clipped-segment height, line or number-text output into first
 depleted recorder input. Inactive grids preserve the preceding result. 91 full

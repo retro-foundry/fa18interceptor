@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected lost-target cleanup return (2026-10-07): selection cleanup now
+preserves its incoming output on skip/context exits and publishes the actual
+view mode or signed translated-queue index on the view-key path. 103 complete
+bodies and 120 recorder input parents match original compared RAM/drawing,
+including twelve actual cleanup frames after ordinary Free Flight startup.
+512 focused cleanup return/non-stack RAM cases and all native/reference builds pass.
+Nine affected native checks pass.
+See `analysis/native_selection_cleanup_input_return.md`. Full port remains active.
+
 Latest connected grid/aircraft-marker return (2026-10-07): point depths,
 heading/shape selections, clipped-segment heights, line results and number-text
 outputs now reach first depleted recorder flare/chaff input in source order.

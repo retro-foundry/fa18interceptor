@@ -32,6 +32,8 @@ typedef struct {
     unsigned marker_case;
     int grid_sampling;
     unsigned grid_case;
+    int cleanup_sampling;
+    unsigned cleanup_case;
 } CountermeasureFixture;
 static int pending_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const unsigned settings=variant%12,mode=1+settings/4;
@@ -104,6 +106,27 @@ static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint16_t saved_tick,void *context) {
     CountermeasureFixture *fixture=context;
     fixture->clock.iteration=game->update_iterations;
+    if(fixture->cleanup_sampling) {
+        if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)!=8 && (saved_tick&31)!=16) {
+            /* Select a lost target and queue gates; the actual source cleanup
+             * resets the view and computes publication. No output is seeded. */
+            wr_u16(TARGET_RECORD,15);wr_u16(CONTROL_RECORDS+15*512,0);
+            wr_u8(CONTEXT_SELECT,0);wr_u8(ORIGIN_ENABLE,0);wr_u8(ORIGIN_GATE_MODE,0);
+            wr_u8(ORIGIN_DETAIL_MODE,0);wr_u8(UPDATE_TAIL_CONDITION,0);
+            wr_u8(KEY_TAKEN,fixture->cleanup_case%3==1);
+            wr_u8(KEY_COUNT,fixture->cleanup_case%3==2?10:0);wr_u8(KEY_WRITE,0);
+            wr_u8(KEY_TRANSLATED_WRITE,(uint8_t[]){0,7,9,255}[fixture->cleanup_case/3]);
+            snprintf(fixture->path,sizeof fixture->path,"%s.cleanup.%u",fixture->prefix,fixture->cleanup_case);
+            fixture->capture=(NativeFrameCapture){.replay=&fixture->clock,.prefix=fixture->path,
+                .iteration=game->update_iterations,.count=1};
+        }
+        if(fixture->capture.prefix) native_frame_capture(game,boundary,saved_tick,&fixture->capture);
+        if(boundary==NATIVE_FRAME_BODY_END && fixture->capture.complete)
+            printf("{\"cleanup_body\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"return_owner\":%u,\"input_byte\":%u}\n",
+                fixture->cleanup_case,fixture->capture.before_tick,fixture->capture.after_tick,
+                fixture->capture.saved_tick,game->completed_input_return.owner,game->completed_input_return.value);
+        return;
+    }
     if(fixture->grid_sampling) {
         if(boundary==NATIVE_FRAME_BODY_BEGIN && (saved_tick&31)!=8 && (saved_tick&31)!=16) {
             /* Validation-only grid selection on ordinary Free Flight state;
@@ -395,6 +418,19 @@ int main(int argc,char **argv) {
         }
     }
     fixture.grid_sampling=0;
+    fixture.cleanup_sampling=1;
+    for(unsigned i=0;i<12;++i) {
+        fixture.cleanup_case=i;fixture.capture=(NativeFrameCapture){0};
+        wr_u8(RECORDER_MODE,0);
+        unsigned limit=game->ticks+100;
+        while(!fixture.capture.complete && game->ticks<limit) native_frontend_tick(game);
+        if(!fixture.capture.complete || game->completed_input_return.owner!=NATIVE_INPUT_RETURN_VIEW_KEY ||
+           rd_u16(TARGET_RECORD) || !pending_input(game,&fixture,108+i)) {
+            fprintf(stderr,"Selection-cleanup carry integration failed at case %u: owner=%u target=%u\n",
+                i,game->completed_input_return.owner,rd_u16(TARGET_RECORD));goto done;
+        }
+    }
+    fixture.cleanup_sampling=0;
     result=0;
 done:
     if(game) {native_frontend_close(game);free(game);}return result;

@@ -6,7 +6,11 @@ static void observe(const CommandPublicationHooks *h,enum CommandPublicationPhas
     if(h && h->observe) h->observe(h->context,phase,value,address);
 }
 uint8_t publish_command_event(uint8_t raw,const CommandPublicationHooks *h) {
-    uint8_t taken=rd_u8(KEY_TAKEN),result=raw,count;
+    return publish_command_event_result(raw,h).event;
+}
+CommandPublicationResult publish_command_event_result(uint8_t raw,const CommandPublicationHooks *h) {
+    CommandPublicationResult result={.event=raw};
+    uint8_t taken=rd_u8(KEY_TAKEN),count;
     observe(h,COMMAND_PUBLICATION_TAKEN,taken,0);
     if(!taken) {
         observe(h,COMMAND_PUBLICATION_RELEASE,raw&0x80u,0);
@@ -22,8 +26,8 @@ uint8_t publish_command_event(uint8_t raw,const CommandPublicationHooks *h) {
                 }
                 wr_u8(KEY_RAW+(gaddr)(int32_t)index,raw);
                 observe(h,COMMAND_PUBLICATION_RAW,raw,KEY_RAW+(gaddr)(int32_t)index);
-                result=rd_u8(KEY_TABLE+raw);
-                observe(h,COMMAND_PUBLICATION_TRANSLATED,result,0);
+                result.event=rd_u8(KEY_TABLE+raw);
+                observe(h,COMMAND_PUBLICATION_TRANSLATED,result.event,0);
                 observe(h,COMMAND_PUBLICATION_ADVANCE_INDEX,(uint8_t)index,0);
                 wr_u8(KEY_WRITE,(uint8_t)(index+1));
                 /* The raw store can alias queue globals for a negative index. */
@@ -32,8 +36,9 @@ uint8_t publish_command_event(uint8_t raw,const CommandPublicationHooks *h) {
                 observe(h,COMMAND_PUBLICATION_ADVANCE_COUNT,count,0);
                 index=rd_s8(KEY_TRANSLATED_WRITE);
                 observe(h,COMMAND_PUBLICATION_TRANSLATED_INDEX,(uint8_t)index,0);
-                wr_u8(KEY_TRANSLATED+(gaddr)(int32_t)index,result);
-                observe(h,COMMAND_PUBLICATION_TRANSLATED_WRITE,result,0);
+                result.queued=1;result.translated_index=index;
+                wr_u8(KEY_TRANSLATED+(gaddr)(int32_t)index,result.event);
+                observe(h,COMMAND_PUBLICATION_TRANSLATED_WRITE,result.event,0);
             }
         }
     }
