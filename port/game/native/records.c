@@ -185,6 +185,11 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
         schedule_postflight(POSTFLIGHT_MODE_SIX,6,record,&hooks); /* C0A15C */
         return (PostflightScheduleResult){0,1};
     }
+    if(child==SCHEDULE_FOUR) {
+        const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
+        schedule_postflight(POSTFLIGHT_MODE_FOUR,4,record,&hooks); /* C09EC4 */
+        return (PostflightScheduleResult){0,1};
+    }
     fprintf(stderr,"native record schedule child unavailable: %u\n",(unsigned)child); abort();
 }
 typedef struct { gaddr companion; } RecordLoop;

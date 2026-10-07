@@ -118,10 +118,10 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     case MENU_REFRESH:
         /* C0FECE's two-byte local frame places the sort's -$2C test in
          * its saved A4, byte 2. The reached mode-two and normal mission paths
-         * leave A4 at $C29872 / $C296EE / $C29662, so C1E48C sorts all lists even
+         * leave A4 at $C29872 / $C296EE / $C296E4 / $C29662, so C1E48C sorts all lists even
          * without requests.
          * The ordinary C0EFD4 frame keeps its request-derived local. */
-        if(rd_u8(MODE_SELECT)==2 || rd_u8(MODE_SELECT)==6 ||
+        if(rd_u8(MODE_SELECT)==2 || rd_u8(MODE_SELECT)==4 || rd_u8(MODE_SELECT)==6 ||
            (rd_u8(MODE_SELECT)==3 && !rd_u8(RECORDER_MODE))) refresh_native_context_sort(1);
         else refresh_native_context();
         break;
@@ -291,7 +291,7 @@ static int finish_frame_clock(NativeFrontend *game) {
 }
 int native_flight_enabled(const NativeFrontend *game) {
     const uint8_t mode=rd_u8(MODE_SELECT);
-    return (mode==1 || mode==2 || mode==3 || mode==6 || mode==9 || mode==125 || mode==127) &&
+    return (mode==1 || mode==2 || mode==3 || mode==4 || mode==6 || mode==9 || mode==125 || mode==127) &&
         (game->screen==NATIVE_MODE_INTRO || game->screen==NATIVE_SCENE_SETUP);
 }
 int native_flight_tick(NativeFrontend *game,int stage_already_ran) {

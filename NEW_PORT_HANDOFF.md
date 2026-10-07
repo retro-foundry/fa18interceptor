@@ -335,7 +335,7 @@ remaining paths. Control-effect component/face children are now connected;
 complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.
 Some menu modes only reach their banner; native flight currently enables modes
-1, 2, 3, 6, 9, 125 and 127. Digit 3's mode 2
+1, 2, 3, 4, 6, 9, 125 and 127. Digit 3's mode 2
 now reaches its source prompts, record-4 playback, flight failure and menu
 return. 32 actual input/stage intervals and 21 sampled bodies match original
 instructions' compared RAM/display. The transition preserves the source
@@ -382,7 +382,16 @@ integration tests and current frontend/frame-body/reference checks pass.
 See `analysis/native_mode_three_milestone.md`; run the shared checker with
 `--mode 3`, and with `--mode 3 --aircraft 2` for the second choice, using
 separate `--out` directories. Mission completion/combat and variants remain open.
-The next unconnected entry is mission-list F2's mode 4. Modes 4, 5, 7 and 8
+Mission-list F2 now runs normal mode 4 through briefing/context setup into
+flight, reaching 2,507 scene/HUD frames. 39 actual input/stage intervals and
+27 sampled bodies match compared original RAM/display. The native record
+loop calls readable C09EC4 through its source mode-4 scheduler; C0FECE retains
+saved A4=C296E4's nonzero sort byte. Thirteen affected native integration tests
+and current frontend checks pass. No comparison exclusions were added.
+See `analysis/native_mode_four_milestone.md`; run the shared checker with
+`--mode 4 --out build/native-flight/mission-four/original-check`.
+Complete mode-4 outcomes, combat and other variants remain open.
+The next unconnected entry is mission-list F3's mode 5. Modes 5, 7 and 8
 remain gated; follow actual menu input and reached source children before
 claiming their gameplay is connected.
 

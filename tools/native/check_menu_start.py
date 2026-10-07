@@ -51,7 +51,16 @@ def main():
         assert field(0xC458AD, 1) == b'\0'
         assert field(int.from_bytes(field(0xC45660, 4), 'big'), 64) == field(0xC08490, 64)
         for channel, slot in ((0, 13), (1, 14)):
-            assert field(0xC4FE38+4*channel, 4) == field(0xC0A438+4*slot, 4)
+            # Sample requests advance VOICE_SLOTS through voice +$20.
+            # The complete parent oracle above verifies the initial choice;
+            # settled playback must still belong to that source asset chain.
+            playing = int.from_bytes(field(0xC4FE38+4*channel, 4), 'big')
+            voice = int.from_bytes(field(0xC0A438+4*slot, 4), 'big')
+            seen = set()
+            while voice and voice != playing and voice not in seen:
+                seen.add(voice)
+                voice = int.from_bytes(field(voice+32, 4), 'big')
+            assert playing and voice == playing, (channel, playing, seen)
         held = work / 'held.e9k'
         held.write_text(warmup.read_text() + 'F 2272 K 50 0 0 1\nF 2273 K 50 0 0 0\n')
         waiting, _ = run(2280, 'held-pause', held)

@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest connected batch: mission-list F2 now runs normal source mode 4 through
+briefing/context setup into sustained flight (2,507 scene/HUD frames).
+39 actual input/stage intervals and 27 sampled bodies match compared original
+RAM/display. Native record composition calls C09EC4's readable scheduler;
+the transition preserves saved A4=C296E4's sort choice. Thirteen affected native
+integration tests and current frontend checks pass. Complete mode-4 outcomes,
+combat and whole-game acceptance remain open. See
+`analysis/native_mode_four_milestone.md`.
+
 Latest connected batch: mission-list F1 now runs normal source mode 3 through
 aircraft choice and flight for both choices (969 scene/HUD frames). Each
 choice passes 43 actual input/stage intervals and 29 sampled original frame
