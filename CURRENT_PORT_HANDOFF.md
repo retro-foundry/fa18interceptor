@@ -8,7 +8,9 @@ bytes. Active/crash/map, queued input, native integration, frontend/omission and
 reference host/loading checks pass. A follow-up connects effect component/face
 collision children: 256 full source-parent cases and four controlled actual
 native parents match compared RAM/display (face hits and component misses).
-Depleted pending recorder carry and $FD indexed selection remain unfinished.
+$FD function-key selection now proceeds: the inherited value is dead to its
+publication path. Complete input comparisons pass 848 cases and two controlled
+actual native input parents. Depleted pending recorder carry remains unfinished.
 See `analysis/native_countermeasures_milestone.md`. Whole gameplay remains open.
 
 Latest timing clarification: exact Amiga frame timing is not a completion gate

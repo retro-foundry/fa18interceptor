@@ -169,8 +169,8 @@ and runtime evidence are distinguished in
 
 Build `fa18_native_countermeasures_test` with the native runner, then run
 `python tools/native/check_countermeasures.py`. Its exports persist under
-`build/native-flight/countermeasure-check/`. Depleted pending recorder carry,
-$FD function-level selection remain explicit unsupported paths. Full gameplay
+`build/native-flight/countermeasure-check/`. Depleted pending recorder carry
+remains an explicit unsupported path. Full gameplay
 goal remains active.
 
 Follow-up collision connection: C266AE now consumes source C26CC0/C26D8A
@@ -182,6 +182,13 @@ and display: two face hits, two component misses. Those exports bracket only
 the control parent; they are separate from the four keyboard-driven full frame
 bodies, which still pass. Motion-helper contract/real-child regressions and
 frontend/native omission checks pass. See the milestone's follow-up section.
+
+Recorder $FD follow-up: its inherited selection is dead to publication
+(C1BCEE -> C1BEDA -> C1C23C), so function keys now proceed without aborting.
+Complete input comparisons pass 848 cases, including 160 new $FD combinations;
+two controlled actual native C0F3C4 parents match original compared RAM.
+The `frame.fd.N` files bracket only input, separate from complete frame bodies.
+Native menu/function-key/pilot-log regression checks pass.
 
 ### `d5203c52` — C0DA38 alternate selection and enclosing-frame exit
 
@@ -321,9 +328,9 @@ No full original replay was repeated in the last two implementation batches.
 ## Other unfinished scope
 
 `native/menu.c:carried_selection()` still aborts for depleted pending recorder
-countermeasures and function-level actions with recorder mode $FD: their
-inherited selection needs the real source caller contract. Keyboard flare/chaff
-and successful pending commands are connected. Do not invent a carry for the
+countermeasures: their inherited selection needs the real source caller
+contract. Keyboard flare/chaff, successful pending commands and $FD function
+keys are connected. Do not invent a carry for the
 remaining paths. Control-effect component/face children are now connected;
 complete component-hit/weapon-kill sequences remain unverified.
 Other command/dynamics/model dispatches retain explicit missing-child failures.

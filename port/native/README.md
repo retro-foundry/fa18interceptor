@@ -85,8 +85,10 @@ The `scene-setup` screen label also covers this initial flight loop. `=` and `-`
 use the source throttle controls, and arrow keys use the source stick controls.
 F and C execute source flare/chaff stock, messages and control-effect launch,
 motion, drawing and ground-contact expiry. Keyboard depleted-stock selection
-and SHIFT-F's mode-6 sound are connected. Depleted pending recorder carry,
-recorder $FD selection remain unfinished. Effect component/face collision
+and SHIFT-F's mode-6 sound are connected. Recorder $FD function keys also
+publish their source event; their inherited selection is dead to publication.
+848 source input cases and two controlled actual native input parents pass.
+Depleted pending recorder carry remains unfinished. Effect component/face collision
 children are connected; 256 source-parent cases and four controlled actual
 native parents match original compared RAM/display. These include face hits
 and component misses; complete weapon-kill sequences remain unverified.

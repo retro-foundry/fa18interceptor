@@ -187,9 +187,10 @@ static int16_t carried_selection(void *context) {
         if(rd_s8(stock)>1) return 0;
         fputs("native input missing depleted recorder countermeasure carry\n",stderr);abort();
     }
-    if(r->action==COMMAND_FUNCTION_LEVEL && rd_u8(RECORDER_MODE)==0xfd) {
-        fputs("native input missing recorder $FD selection\n",stderr);abort();
-    }
+    /* C1BCEE's recorder $FD arm changes only the inherited selection,
+     * then C1BEDA unconditionally publishes the original event. That
+     * selection is dead to this action's RAM and queue behavior. Other
+     * indexed arms construct their own selection before using it. */
     return 0;
 }
 static uint32_t view_child(void *context,enum ViewCommandChild child) {

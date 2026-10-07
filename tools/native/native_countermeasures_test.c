@@ -2,6 +2,7 @@
  * playable runner. Capture launch and expiry bodies for original comparison. */
 #include "native/frontend.h"
 #include "native/control_effects.h"
+#include "native/input.h"
 #include "../../port/native/frame_capture.h"
 #include "globals.h"
 #include <stdio.h>
@@ -14,6 +15,23 @@ typedef struct {
     char path[4096];
     unsigned captures,launches,expiry;
 } CountermeasureFixture;
+static int fd_input(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
+    const uint8_t raw=(uint8_t)(0x50+variant*9);
+    wr_u8(RECORDER_MODE,0xfd);wr_u8(MODE_SELECT,1);
+    wr_u8(ORIGIN_DETAIL_MODE,0);wr_u8(COMMAND_EVENT_COUNTER,1);
+    wr_u8(KEY_STATE,0);wr_u8(KEY_STATE+1,0);wr_u8(KEY_TAKEN,0);
+    wr_u32(EXTERNAL_INPUT_HANDLE,0x6400);wr_u32(KEYBOARD_INPUT_HANDLE,0x6500);
+    game->joystick_directions=0;game->mouse_buttons=0;
+    snprintf(fixture->path,sizeof fixture->path,"%s.fd.%u",fixture->prefix,variant);
+    NativeFrameCapture capture={.replay=&fixture->clock,.prefix=fixture->path,
+        .iteration=fixture->clock.iteration,.count=1};
+    /* These files bracket C0F3C4 alone, with a controlled recorder mode. */
+    native_frame_capture(game,NATIVE_FRAME_BODY_BEGIN,0,&capture);
+    native_input_enqueue_raw(game,raw);native_input_process(game);
+    native_frame_capture(game,NATIVE_FRAME_BODY_END,0,&capture);
+    printf("{\"fd_input\":%u,\"raw\":%u}\n",variant,raw);
+    return capture.complete && game->input_count==0;
+}
 static int collision_parent(NativeFrontend *game,CountermeasureFixture *fixture,unsigned variant) {
     const gaddr record=0xc45c72u,target=CONTROL_RECORDS+14*512;
     for(unsigned i=0;i<0x500;++i) wr_u8(record+i,0);
@@ -86,6 +104,7 @@ int main(int argc,char **argv) {
         fprintf(stderr,"Countermeasure integration failed: captures=%u launch=%u expiry=%u stocks=%u/%u\n",
             fixture.captures,fixture.launches,fixture.expiry,rd_u8(MISSION_LEVEL_A),rd_u8(MISSION_LEVEL_B));goto done;
     }
+    for(unsigned i=0;i<2;++i) if(!fd_input(game,&fixture,i)) goto done;
     for(unsigned i=0;i<4;++i) if(!collision_parent(game,&fixture,i)) goto done;
     result=0;
 done:

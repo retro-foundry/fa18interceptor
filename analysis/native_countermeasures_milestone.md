@@ -109,3 +109,25 @@ both MSVC runners rebuild. No original full replay was repeated.
 The earlier missing component/face-child statement is superseded by this
 follow-up. Depleted pending recorder carry, $FD indexed selection, other
 commands/modes and complete gameplay equivalence remain open.
+
+## Follow-up: recorder $FD function keys
+
+C1BCEE subtracts $50 and adds $0B to the inherited selection, then C1BCF6
+jumps to C1BEDA, whose unconditional branch publishes the original event at
+C1C23C. That selection is dead to RAM and event publication. Other indexed
+paths define their own selection before using it. The native caller therefore
+no longer aborts on $FD function keys or requires a guessed carry.
+
+Complete C0F3C4 input comparisons now pass **848 cases**, including 160 $FD
+F1-F10 cases across mode, modifier, latch and publication gates with deliberately
+nonzero incoming D4. Two controlled $FD input parents run through the actual
+native host queue/process with the executable's runtime objects after ordinary
+disk/input startup. `frame.fd.N.before.dat` / `.after.dat` bracket C0F3C4 alone,
+not complete gameplay bodies. Both match original compared non-stack RAM.
+The collision parents and four keyboard-driven full bodies still pass. Menu
+mode banners, mission function keys, availability gates and pilot-log controls
+also pass their affected native check.
+
+The earlier $FD-selection limitation is superseded. Depleted pending recorder
+countermeasure carry still requires its enclosing caller contract; whole-game
+coverage and equivalent-state gameplay sequences remain unfinished.

@@ -27,9 +27,11 @@ def main():
     exports = [json.loads(line) for line in run.stdout.splitlines()]
     bodies = [entry for entry in exports if 'capture' in entry]
     parents = [entry for entry in exports if 'control_parent' in entry]
+    fd_inputs = [entry for entry in exports if 'fd_input' in entry]
     assert [body['capture'] for body in bodies] == list(range(4)), bodies
     assert [entry['control_parent'] for entry in parents] == list(range(4)), parents
     assert any(entry['collision_hit'] for entry in parents), parents
+    assert [entry['fd_input'] for entry in fd_inputs] == [0, 1], fd_inputs
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
     for name in ('input', 'control_effects', 'frame_body'):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
@@ -40,6 +42,11 @@ def main():
         if name != 'frame_body':
             subprocess.run([str(oracle), str(prefix) + '.0.before.dat'],
                            cwd=ROOT, check=True, timeout=15)
+            if name == 'input':
+                for entry in fd_inputs:
+                    parent = str(prefix) + f".fd.{entry['fd_input']}"
+                    subprocess.run([str(oracle), parent + '.before.dat', parent + '.after.dat', str(entry['raw'])],
+                                   cwd=ROOT, check=True, timeout=15)
             if name == 'control_effects':
                 for entry in parents:
                     parent = str(prefix) + f".collision.{entry['control_parent']}"

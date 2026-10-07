@@ -56,16 +56,33 @@ int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=read_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=read_bytes("local/system/kick13.rom",&nr);
-    uint8_t *data=argc==2?read_bytes(argv[1],&nd):NULL;
+    uint8_t *data=argc>=2?read_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m),*before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x100000);
     NativeFrontend *game=calloc(1,sizeof *game),*source=malloc(sizeof *source);
     if(!state || !rom || !data || nd!=0x100000 || !m || !before || !expected || !game || !source) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
+    if(argc==4) {
+        size_t na=0;uint8_t *actual=read_bytes(argv[2],&na);unsigned differences=0;
+        if(!actual || na!=0x100000) return 1;
+        memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+        game->input_keys[0]=(uint8_t)strtoul(argv[3],NULL,0);game->input_count=1;m->joy1dat=0;
+        if(!original_input(game)) return 1;
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t original=i<0x80000?m->chip[i]:m->slow[i-0x80000];
+            if(actual[i]!=original) {
+                if(differences<10) fprintf(stderr,"actual input %06X source %02X native %02X\n",
+                    i<0x80000?i:0xc00000+i-0x80000,original,actual[i]);
+                ++differences;
+            }
+        }
+        printf("Actual native input parent: %u compared RAM differences\n",differences);
+        return differences!=0;
+    }
     unsigned total_events=0,drain_cases=0;
-    unsigned countermeasure_cases=0;
-    for(unsigned variant=0;variant<688;++variant) {
+    unsigned countermeasure_cases=0,fd_cases=0;
+    for(unsigned variant=0;variant<848;++variant) {
         static const uint8_t keys[]={0x0c,0x8c,0x4c,0xcc,0x4d,0xcd,0x4e,0xce,0x4f,0xcf,
             0x40,0xc0,0x24,0x20,0x13,0x44,0x37,0x38,0x39,0xb8,0xb9,0x50,0x55,0x59};
         static const uint16_t joy[]={0,1,2,0x100,0x200,0x301,0x102,0x303};
@@ -94,7 +111,7 @@ int main(int argc,char **argv) {
             wr_u8(RECORDER_MODE,(uint8_t)(1+(variant%3)));
             wr_u16(RECORD_WORD_A,0x4400); /* Space and radar words */
             wr_u16(RECORD_WORD_B,0x10); /* zero view; mode 3 drains both */
-        } else {
+        } else if(variant<688) {
             ++countermeasure_cases;
             const unsigned measure=(variant-144)/256;
             game->input_keys[0]=measure==1?0x33:0x23;game->input_count=1;
@@ -108,6 +125,13 @@ int main(int argc,char **argv) {
                 wr_u8(CONTROL_RECORDS+0x601,(variant&8)?0x40:0);
                 wr_u8(SOUND_FLAGS-1,(uint8_t)(variant&16?1:0));
             }
+        } else {
+            ++fd_cases;
+            const unsigned settings=(variant-688)/10;
+            game->input_keys[0]=(uint8_t)(0x50+(variant-688)%10);game->input_count=1;
+            wr_u8(RECORDER_MODE,0xfd);wr_u8(MODE_SELECT,(settings&1)?1:0);
+            wr_u8(KEY_STATE+1,(settings&2)?1:0);wr_u8(KEY_STATE,(settings&4)?1:0);
+            wr_u8(KEY_TAKEN,(settings&8)?1:0);
         }
         memcpy(source,game,sizeof *source);memcpy(before,m,sizeof *m);
         if(!original_input(source)) return 1;
@@ -123,6 +147,6 @@ int main(int argc,char **argv) {
             }
         }
     }
-    printf("688 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases)\n",total_events,drain_cases,countermeasure_cases);
+    printf("848 native pending-input cases match original game non-stack RAM (%u keyboard events, %u recorder drain, %u countermeasure cases, %u recorder FD cases)\n",total_events,drain_cases,countermeasure_cases,fd_cases);
     free(source);free(game);free(expected);free(before);free(m);free(data);free(state);free(rom);return 0;
 }
