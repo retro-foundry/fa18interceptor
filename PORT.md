@@ -1,5 +1,14 @@
 # The C port
 
+Search and Rescue (F4/internal mode six) now completes the pod objective,
+carrier deck/wire landing, saved result, messages, Escape/menu and cold reload
+through ordinary keys. All 44 input/stage intervals and 193 bodies match the
+sampled original RAM/drawing; the playable replay agrees on saved bytes/menu.
+See [`analysis/native_rescue_mission_sequence_milestone.md`](analysis/native_rescue_mission_sequence_milestone.md).
+The initial pilot comes from the original ADF. Earned tour availability,
+successful internal mode seven and independent complete-flight parity remain
+open. Gameplay and comparison masks are unchanged.
+
 Latest direction (2026-10-06): `fa18_native` now runs the original intro,
 credits, pilot entry, menu selection, mission list and pilot-log controls using
 existing `port/game/` functions. Its link
@@ -23,8 +32,8 @@ parity and full-port acceptance remain open.
 Sustained mode-six/eight native flight now connects the readable guidance
 continuation and corrects projection returns and matrix angle semantics.
 114 input/stage intervals and 465 sampled bodies match compared original
-RAM/display. Mode-eight success is now accepted above; mode-six success and
-independent full flights remain open. See
+RAM/display. Mode-six/eight success is now accepted above; independent full
+flights remain open. See
 [`analysis/native_guidance_limits_milestone.md`](analysis/native_guidance_limits_milestone.md).
 
 The demo attached-camera projection now uses the original model vertex,

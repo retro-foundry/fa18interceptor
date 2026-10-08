@@ -1,5 +1,24 @@
 # Current playable port handoff
 
+Latest rescue sequence (2026-10-08): Search and Rescue (F4/internal mode six)
+now completes pod deployment, original near-site objective, carrier deck/wire
+landing, stop, save, messages, Escape/menu and cold reload through ordinary
+keys. All 44 input/stage intervals and 193 sampled bodies match original
+compared RAM/drawing, including 40 rescue bodies, 80 consecutive landing/result
+bodies and one config write. Completions advance 3 -> 4 and grade 0 -> 1.
+The playable runner delivers 870 host events and agrees on all saved bytes and
+the menu. Debug/Release rescue gates pass with matching inputs, outcomes and
+saved bytes. Gameplay and comparison masks are unchanged; no new decompilation
+is claimed. The fresh pilot comes from the original ADF, rather than a
+port-earned complete tour. Captures remain inside the 240-pair / 480 MiB cap
+and passing RAM is removed. See the serial `fa18_native_mission_6_sequence`,
+`analysis/native_rescue_mission_sequence_milestone.md` and its checkpoint.
+Successful internal mode seven, earned tour availability and independent
+complete original flights remain open; the complete-port goal stays active.
+Eight selected Release checks and three Debug checks pass, including all five
+accepted mission sequences in Release and the frontend/link gate. The playable
+Release executable is unchanged; cache use remains 2.00 GiB after pruning.
+
 Latest final-mission sequence (2026-10-08): ordinary keys destroy four patrol
 aircraft, admit the original FF objective, land on the carrier wire, stop, save,
 finish result messages and return to the menu. Completions advance 3 -> 4 and
@@ -17,7 +36,8 @@ The serial gate is `fa18_native_mission_8_sequence`; the earlier three-aircraft
 diagnostic remains accepted. See `analysis/native_final_mission_sequence_milestone.md`
 and its checkpoint. The saved-pilot availability fixture remains explicitly
 unearned, with no flight-state seeding. Earned availability, successful internal
-modes six/seven and independent complete-flight parity remain open.
+mode seven and independent complete-flight parity remain open; mode six is
+accepted above.
 Two identical flights partition capture storage inside the existing 480 MiB
 cap and remove passing RAM before collecting the next partition. The 4 GiB
 build-cache pruning hooks remain active.

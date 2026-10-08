@@ -24,6 +24,50 @@ static double angle_delta(double a,double b) {
 static double clamp(double value,double low,double high) {
     return value<low?low:value>high?high:value;
 }
+static void command_throttle(MissionPilot *pilot,NativeFrontend *game,int throttle);
+/* Rescue validation input: fly to the normally spawned site and deploy with
+ * Shift+F. Position, velocity and pod state are observed, never written. */
+static int rescue_flight(MissionPilot *pilot,NativeFrontend *game) {
+    if(!pilot->rescue_flight || pilot->objective || rd_u8(PLAYER_PHASE)==0xff || rd_u8(PLAYER_PHASE)==1) return 0;
+    const gaddr site=CONTROL_RECORDS+0x1600u;
+    pilot->target=11;
+    double delta[3],velocity[3],local[3]={0};
+    for(unsigned i=0;i<3;++i) {
+        delta[i]=((double)rd_s32(site+20+4*i)-rd_s32(CONTROL_RECORDS+20+4*i))/256.0;
+        velocity[i]=rd_s32(CONTROL_RECORDS+62+4*i)/256.0;
+    }
+    const double range=hypot(delta[0],delta[2]);
+    const double yaw=rd_u16(CONTROL_RECORDS+104)*6.283185307179586/28800;
+    const double wanted=pilot->rescue_drop_tick?pilot->rescue_drop_yaw:atan2(-delta[0],delta[2]);
+    const double error=angle_delta(wanted,yaw);
+    const double speed=rd_s16(CONTROL_RECORDS+110)/64.0;
+    const double direction[3]={-sin(yaw),fabs(error)>0.3?0:
+        clamp((delta[1]+400)/3000-velocity[1]/fmax(speed,30),-0.12,0.12),cos(yaw)};
+    for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
+        local[i]+=direction[j]*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
+    const double pitch=atan2(local[1],hypot(local[0],local[2]));
+    if(!pilot->combat_started) {pilot->combat_started=1;pilot->previous_x=yaw;pilot->previous_y=pitch;}
+    const double rudder=error-10*angle_delta(yaw,pilot->previous_x),elevator=pitch+4*angle_delta(pitch,pilot->previous_y);
+    pilot->previous_x=yaw;pilot->previous_y=pitch;
+    const double bank=angle_delta(rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800,0);
+    command_throttle(pilot,game,pilot->rescue_drop_tick?291:range>5000?288:286);
+    held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
+    held(pilot,game,&pilot->rudder,rudder>0.006?46:rudder< -0.006?44:0);
+    held(pilot,game,&pilot->pitch,elevator>0.006?274:elevator< -0.006?273:0);
+    held(pilot,game,&pilot->fire,0);
+    /* Input aiming estimate for a slowing pod; original C241A6/C25B66 decide
+     * its actual motion/contact, and C0A15C alone decides near/far outcome. */
+    if(!pilot->rescue_drop_tick && fabs(delta[0]-22*velocity[0])<150 &&
+       fabs(delta[2]-22*velocity[2])<150 && fabs(error)<0.3 && delta[1]>-700) {
+        pilot->rescue_drop_tick=game->ticks;
+        pilot->rescue_drop_yaw=yaw;
+        printf("{\"rescue_drop_input\":true,\"tick\":%u,\"range\":%.3f,\"height_above_site\":%.3f}\n",
+            game->ticks,range,-delta[1]);
+        /* Let the last steering release finish before this one-shot modifier.
+         * The original C1C23C publication clears Shift after any command. */
+    }
+    return 1;
+}
 static void command_throttle(MissionPilot *pilot,NativeFrontend *game,int throttle) {
     /* C1B35A and C13D84 can settle F10 at phase 120 before afterburner.
      * Reapply the normal plus key after the source releases throttle input. */
@@ -267,7 +311,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
 static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
     if(!pilot->complete_flight || (!pilot->objective &&
        rd_u8(PLAYER_PHASE)!=0xff && rd_u8(PLAYER_PHASE)!=1)) return 0;
-    if((pilot->escort_flight || pilot->final_flight) && pilot->return_input_phase!=rd_u8(PLAYER_PHASE)) {
+    if((pilot->escort_flight || pilot->final_flight || pilot->rescue_flight) && pilot->return_input_phase!=rd_u8(PLAYER_PHASE)) {
         /* The escort's result camera clears input while changing FF to one.
          * Release/repress ordinary controls when the player regains the view. */
         held(pilot,game,&pilot->rudder,0);held(pilot,game,&pilot->pitch,0);
@@ -281,9 +325,9 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
     double point[3],position[3],local[3]={0};
     for(unsigned i=0;i<3;++i) {
         position[i]=rd_s32(CONTROL_RECORDS+20+4*i)/256.0;
-        point[i]=pilot->home[i]-pilot->forward[i]*12000;
+        point[i]=pilot->home[i]-pilot->forward[i]*(pilot->rescue_flight?24000:12000);
     }
-    point[1]=pilot->home[1]+700;
+    point[1]=pilot->home[1]+(pilot->rescue_flight?2200:700);
     const double approach_distance=hypot(point[0]-position[0],point[2]-position[2]);
     if(pilot->phase==1 && approach_distance<1800 &&
        (!pilot->final_sequence || position[1]<pilot->home[1]+1400)) pilot->phase=2;
@@ -294,7 +338,7 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
             (pilot->home[2]-position[2])*pilot->forward[2];
         for(unsigned i=0;i<3;++i)
             point[i]=pilot->home[i]+pilot->forward[i]*(2000-before_home);
-        point[1]=pilot->home[1]-200+fmax(before_home,0)*0.04;
+        point[1]=pilot->home[1]-(pilot->rescue_flight?250:200)+fmax(before_home,0)*0.04;
     }
     const double wanted_yaw=atan2(-(point[0]-position[0]),point[2]-position[2]);
     const double yaw=rd_u16(CONTROL_RECORDS+104)*6.283185307179586/28800;
@@ -345,7 +389,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
                rd_u8(FUNCTION_KEY_LEVEL),rd_u8(PLAYER_STICK),rd_s8(CONTROL_RECORDS+43),rd_u32(CONTROL_RECORDS+114),
                rd_u8(SCENE_DISPATCH_ADMITTED),rd_u8(SCENE_DISPATCH_AUX),
                rd_u16(rd_u32(MODE_TABLE)+60),rd_u16(rd_u32(MODE_TABLE)+68),rd_u8(CONTROL_RECORDS+99)&0xf0);
-        for(unsigned slot=0;slot<=12;slot+=trace_interval==100?1u:2u) {
+        for(unsigned slot=0;slot<=(pilot->rescue_flight?14u:12u);slot+=trace_interval==100 || pilot->rescue_flight?1u:2u) {
             gaddr record=CONTROL_RECORDS+512*slot;
             printf("%s{\"slot\":%u,\"flags\":%u,\"kind\":%u,\"contact\":%u,\"region\":%u,\"damage\":%u,"
                    "\"speed\":[%d,%d],\"position\":[%d,%d,%d],\"angles\":[%d,%d,%d],\"linked\":%u,\"lifetime\":%d}",
@@ -366,6 +410,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         }
     }
     if(!pilot->started) return;
+    if(pilot->rescue_drop_tick && game->ticks<pilot->rescue_drop_tick+20) return;
     if(pilot->final_flight && !pilot->objective && game->ticks>pilot->started+750) {
         const uint8_t weapon=rd_u8(CONTROL_RECORDS+99)&0xf0u;
         const uint8_t stock=rd_u8(CONTROL_RECORDS+95);
@@ -399,6 +444,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         held(pilot,game,&pilot->rudder,0);
         return;
     }
+    if(rescue_flight(pilot,game)) return;
     if(follow_stolen_aircraft(pilot,game)) return;
     if(combat_flight(pilot,game)) return;
     if(return_flight(pilot,game)) return;

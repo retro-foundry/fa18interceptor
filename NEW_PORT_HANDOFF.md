@@ -2,6 +2,27 @@
 
 ## Current restart summary — 2026-10-08
 
+Search and Rescue (F4/internal mode six) now completes through ordinary keys:
+Shift+F deploys a pod, the original near-site test admits success, and the
+player returns to the carrier, catches the wire, stops, saves, finishes messages
+and presses Escape to return to the menu. All 44 input/stage intervals and 193
+sampled bodies match original compared RAM/drawing, including both 20-body
+rescue windows, 80 consecutive landing/result bodies and one config write.
+Completions advance 3 -> 4 and grade 0 -> 1. The playable runner consumes the
+same 870 host events and agrees on the saved bytes/menu; cold reload preserves
+all 78 bytes. Debug/Release rescue gates pass with matching input, save and
+sequence evidence. Gameplay and comparison masks are unchanged; no new
+decompilation is claimed. The initial pilot is the unmodified original ADF log,
+not a port-earned complete tour. Captures use 237 pairs inside the unchanged
+240-pair / 480 MiB cap; passing RAM is temporary. See
+`analysis/native_rescue_mission_sequence_milestone.md` and its checkpoint;
+the serial gate is `fa18_native_mission_6_sequence`. Successful internal mode
+seven, earned tour availability and independent whole flights remain open.
+Eight selected Release checks and three Debug checks pass, including all five
+accepted mission sequences in Release, the frontend/link gate and artifact
+policy/cleanup. The playable Release executable is unchanged; build-cache use
+remains 2.00 GiB after pruning.
+
 Final Carrier Sub mission (F6/internal mode 8) now completes through ordinary
 keys: four aircraft expiries satisfy this fixture's quota four, the FF objective
 is admitted, and the player returns to the carrier wire, stops, saves and
@@ -18,8 +39,9 @@ predicates, countdowns and comparison masks are unchanged. No newly decompiled
 routine is claimed. The serial gate is `fa18_native_mission_8_sequence`; see
 `analysis/native_final_mission_sequence_milestone.md` and its checkpoint.
 The initial availability-only saved pilot remains explicitly unearned; flight
-state is never seeded. Earned availability, successful internal modes six/seven
-and independent complete original flights remain open. Two identical flights
+state is never seeded. Earned availability, successful internal mode seven
+and independent complete original flights remain open; mode six is accepted
+above. Two identical flights
 partition captures inside the existing 480 MiB cap, removing passing RAM before
 the next partition; the 4 GiB build-cache pruning hooks stay active. The earlier
 `fa18_native_final_patrol_diagnostic` remains an accepted three-aircraft route.

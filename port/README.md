@@ -1,5 +1,14 @@
 # Active port source ownership
 
+Search and Rescue (F4/internal mode six) now completes its pod objective,
+carrier deck/wire landing, save, messages, Escape/menu and cold reload with
+ordinary keys. The serial `fa18_native_mission_6_sequence` compares 44 intervals
+and 193 bodies with original RAM/drawing; the playable replay agrees on saved
+bytes/menu. See [`../analysis/native_rescue_mission_sequence_milestone.md`](../analysis/native_rescue_mission_sequence_milestone.md).
+Existing readable game owners are unchanged. The initial pilot is the original
+ADF log; port-earned tour availability, successful internal mode seven and
+independent whole flights remain open.
+
 Latest final-mission correction: the native record scheduler preserves C230B0's
 returned selection word through C0A364/C0A3A6. Ordinary controls now complete
 the final aircraft objective, carrier landing, save, menu return and cold Next
