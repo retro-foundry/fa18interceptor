@@ -1,5 +1,20 @@
 # Current playable port handoff
 
+Latest mode-five mission success acceptance (2026-10-08): normal keys complete
+formation, both radar shoot-downs, the original objective, carrier arrestor
+landing, stopped-aircraft admission, result save and cold reload. All 34
+input/stage intervals and 155 sampled bodies match original compared
+RAM/drawing, including all 59 consecutive touchdown-to-result bodies. Completion
+count advances 3 -> 4 and mode-five grade 1 -> 2 without a crash reset. The serial
+gate is `fa18_native_mission_five_success`. Debug fixture build and four selected
+checks pass; Release fixture build and six selected checks pass. Gameplay and
+the playable executable are unchanged. See
+`analysis/native_mission_five_success_milestone.md`. This supersedes the earlier
+open mode-five return/landing/save claims below. Result message completion and
+restart, successful modes four/six/seven/eight, independent complete flights,
+remaining contracts, typed state, audio and wider performance remain open;
+the complete-port goal stays active.
+
 Latest mode-five combat objective acceptance (2026-10-08): normal keys complete
 formation, both radar shoot-downs and expiry increments, then reach original
 objective phase FF at tick 19,304. All 29 input/stage intervals and 118 sampled

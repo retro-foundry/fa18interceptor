@@ -12,8 +12,8 @@ typedef struct {
     uint8_t *before, *entry_before;
     unsigned body, captures, entries, first_tick, entry_tick, iteration, window, combat_window, formation_window;
     unsigned entry_keys[256], key_count;
-    unsigned mode;
-    int force_return, complete_flight;
+    unsigned mode, formation_length;
+    int force_return;
     uint16_t saved_tick, contact, completions, speed;
     uint16_t radar_hits, gun_hits;
     int16_t proximity_gate;
@@ -110,7 +110,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     }
     if(run->force_return && ((run->proximity_gate==200 && proximity_gate<200 && proximity_gate>=0) ||
                             (run->proximity_gate>=0 && proximity_gate<0)))
-        run->formation_window=run->complete_flight?16:32;
+        run->formation_window=run->formation_length;
     if(run->mode==5 && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits))
         run->combat_window=20; /* Include the original 15-tick expiry and its boundary. */
     if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
@@ -169,25 +169,28 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 }
 
 int main(int argc,char **argv) {
-    /* Mode three is the acceptance gate; mode five variants are diagnostics. */
+    /* Modes three and five include success gates and bounded diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5|5-formation|5-mission]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5|5-formation|5-mission|5-success]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
     if(argc==6) {
-        pilot.complete_flight=!strcmp(argv[5],"5-mission");
+        pilot.complete_flight=!strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success");
         pilot.force_return=!strcmp(argv[5],"5-formation") || pilot.complete_flight;
         pilot.mode=pilot.force_return?5u:(unsigned)atoi(argv[5]);
     }
     if(pilot.mode!=3 && pilot.mode!=5) {
-        fprintf(stderr,"Unsupported mission mode: %s (expected 3, 5, 5-formation or 5-mission)\n",argv[5]);
+        fprintf(stderr,"Unsupported mission mode: %s (expected 3, 5, 5-formation, 5-mission or 5-success)\n",argv[5]);
         goto done;
     }
     run.mode=pilot.mode;
     run.force_return=pilot.force_return;
-    run.complete_flight=pilot.complete_flight;
+    /* Success coverage reserves the 96-body landing window inside the same
+     * 480 MiB cap. Longer formation windows have separate accepted gates. */
+    run.formation_length=pilot.complete_flight?16u:32u;
+    if(argc==6 && !strcmp(argv[5],"5-success")) run.formation_length=4;
     run.prefix=argv[4];run.before=malloc(0x100000);run.entry_before=malloc(0x100000);
     if(!game || !run.before || !run.entry_before) goto done;
     pilot.keys=fopen(argv[3],"w");

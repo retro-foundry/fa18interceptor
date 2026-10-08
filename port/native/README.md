@@ -1,11 +1,20 @@
 # Native port runner
 
+Mode five now has normal-key formation, radar shoot-downs, objective, carrier
+arrestor landing, stopped-aircraft success, result save and cold reload
+acceptance. All 34 input/stage intervals and 155 sampled bodies match original
+compared RAM/drawing, including 59 consecutive touchdown-to-result bodies.
+Completion count advances 3 -> 4 and grade 1 -> 2 without a reset. The serial
+gate is `fa18_native_mission_five_success`. Gameplay is unchanged. See
+`../../analysis/native_mission_five_success_milestone.md`. Other mission
+successes, restart and independent complete flights remain open.
+
 The optional validation pilot now completes formation and both radar kills,
 then reaches original mode-five objective phase FF at tick 19,304. All 29
 input/stage intervals and 118 sampled bodies match original compared
 RAM/drawing, including 32 formation-window and 40 combat-window bodies. The
-serial gate is `fa18_native_mission_five_objective`. This changes validation
-only; safe return, landing and saved success remain open. See
+serial gate is `fa18_native_mission_five_objective`. This bounded gate excludes
+return, landing and saved success; those have the full mission gate above. See
 `../../analysis/native_mission_five_objective_milestone.md`.
 
 The native validation pilot now reaches C0A002's proximity countdown and
@@ -14,9 +23,9 @@ intervals and 107 sampled bodies match original compared RAM/drawing, including
 64 consecutive window bodies. All 201 native proximity scans are observed;
 original execution reports 12 restoration calls for each aircraft, with the
 native restored values checked against the original table. The serial CTest
-is `fa18_native_mission_five_forced_return`. This changes validation only;
-complete mode-five mission success and independent complete flights remain
-open. See `../../analysis/native_mission_five_forced_return_milestone.md`.
+is `fa18_native_mission_five_forced_return`. This gate excludes complete mission
+success; independent complete flights remain open. See
+`../../analysis/native_mission_five_forced_return_milestone.md`.
 
 Independent-camera depth sorting now receives the actual final scaled view
 coefficient through the native projection caller. All 640 complete component
@@ -34,7 +43,7 @@ Control normalisation and depth sorting publish their actual retained output
 to ordinary host renderer state for early model expiry. The gate also checks
 64 candidate-reference, 128 complete depth-sort and 256 distance/factor cases.
 Masks, distance arithmetic and gameplay rules are unchanged. The flight still
-crashes and mode-five mission success remains unaccepted. See
+crashes; this remains a reset regression alongside the successful mission gate. See
 `../../analysis/native_mission_five_combat_reset_milestone.md` for source
 ownership, remaining caller contracts and comparison scope. The keyboard pilot
 remains validation-only; passing RAM is temporary and bounded.

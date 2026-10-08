@@ -9,9 +9,9 @@ typedef struct {
     unsigned scene, phase, target, started, objective, target_press, completions, grade;
     unsigned mode, trace;
     int force_return, formation_started, formation_done;
-    int complete_flight, combat_started;
+    int complete_flight, combat_started, return_started;
     unsigned missile_target, missile_tick;
-    int rudder, pitch, roll, throttle, fire;
+    int rudder, pitch, roll, throttle, fire, hook;
     FILE *keys;
 } MissionPilot;
 void mission_pilot_event(MissionPilot *pilot,NativeFrontend *game,int code,int down);

@@ -3,13 +3,29 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`5bc76a7f` on `coverage-accounting`.
+`39702e5d` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `73f9bc00fd5db4f1f3a3e90097b902e0a4eb2b4d8ad07a24789626a3549189cd`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
-Latest mode-five combat objective acceptance: normal keyboard input completes
+Latest mode-five mission success acceptance: normal keys complete formation,
+both radar shoot-downs, the original objective, carrier arrestor landing,
+stopped-aircraft admission, result save and cold reload. All 34 input/stage
+intervals and 155 sampled bodies match original compared RAM/drawing, including
+all 59 consecutive touchdown-to-result bodies. Completion count advances
+3 -> 4 and mode-five grade 1 -> 2 with no crash reset. The new serial gate is
+`fa18_native_mission_five_success`. Debug fixture build and four selected checks
+pass; Release fixture build and six selected checks pass. Gameplay and the
+playable executable are unchanged. Passing RAM remains temporary and bounded.
+See `analysis/native_mission_five_success_milestone.md` and
+`analysis/figures/native_mission_five_success_checkpoint.json`. This supersedes
+the earlier open mode-five return/landing/save claims below. Result message
+completion/restart, successful modes four/six/seven/eight, independent complete
+flights, remaining contracts, typed state, audio and wider performance remain
+open; the complete-port goal stays active.
+
+Earlier mode-five combat objective acceptance: normal keyboard input completes
 formation, destroys both enemy aircraft with radar missiles and reaches the
 original objective phase `$FF` at tick 19,304. All 29 input/stage intervals
 and 118 sampled bodies match original compared RAM/drawing, including 32

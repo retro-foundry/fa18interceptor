@@ -1,5 +1,9 @@
 # Mode-five combat objective - 2026-10-08
 
+Later full mission acceptance supersedes the open return/landing/save work
+recorded here; see `native_mission_five_success_milestone.md`. This bounded
+objective gate and its original evidence remain valid.
+
 Normal keyboard input now completes formation and both radar shoot-downs,
 then reaches the original mode-five objective at tick 19,304. All 29
 input/stage intervals and 118 sampled bodies match original compared

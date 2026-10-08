@@ -140,6 +140,65 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
         game->ticks-pilot->missile_tick<4?32:0);
     return 1;
 }
+/* Return flight input for the mode-five validation pilot. Keep heading
+ * feedback in world coordinates across the combat/return handoff. */
+static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
+    if(!pilot->complete_flight || (!pilot->objective &&
+       rd_u8(PLAYER_PHASE)!=0xff && rd_u8(PLAYER_PHASE)!=1)) return 0;
+    if(!pilot->objective) {
+        printf("{\"objective\":true,\"tick\":%u,\"phase\":%u}\n",game->ticks,rd_u8(PLAYER_PHASE));
+        pilot->objective=1;pilot->phase=1;
+    }
+    double point[3],position[3],local[3]={0};
+    for(unsigned i=0;i<3;++i) {
+        position[i]=rd_s32(CONTROL_RECORDS+20+4*i)/256.0;
+        point[i]=pilot->home[i]-pilot->forward[i]*12000;
+    }
+    point[1]=pilot->home[1]+700;
+    const double approach_distance=hypot(point[0]-position[0],point[2]-position[2]);
+    if(pilot->phase==1 && approach_distance<1800) pilot->phase=2;
+    if(pilot->phase>=2) {
+        /* Pilot input: intercept the centerline and descend onto the wire
+         * region before the starting pose, rather than flying past it. */
+        const double before_home=(pilot->home[0]-position[0])*pilot->forward[0]+
+            (pilot->home[2]-position[2])*pilot->forward[2];
+        for(unsigned i=0;i<3;++i)
+            point[i]=pilot->home[i]+pilot->forward[i]*(2000-before_home);
+        point[1]=pilot->home[1]-200+fmax(before_home,0)*0.04;
+    }
+    const double wanted_yaw=atan2(-(point[0]-position[0]),point[2]-position[2]);
+    const double yaw=rd_u16(CONTROL_RECORDS+104)*6.283185307179586/28800;
+    const double yaw_error=angle_delta(wanted_yaw,yaw);
+    const double speed=rd_s16(CONTROL_RECORDS+110)/64.0;
+    const double vertical_speed=rd_s32(CONTROL_RECORDS+66)/256.0;
+    /* Pitch follows current heading so a return turn cannot reverse its
+     * feedback; observed vertical speed damps the selected height approach. */
+    const double direction[3]={-sin(yaw),fabs(yaw_error)>0.3?0:
+        clamp((point[1]-position[1])/3000-
+              vertical_speed/fmax(speed,30),-0.12,0.12),cos(yaw)};
+    for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
+        local[i]+=direction[j]*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
+    const double pitch=atan2(local[1],hypot(local[0],local[2]));
+    const double bank=angle_delta(rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800,0);
+    if(!pilot->return_started) {
+        pilot->return_started=1;pilot->previous_x=yaw;pilot->previous_y=pitch;
+        printf("{\"return_start\":true,\"tick\":%u,\"pose\":%u,\"home\":[%.3f,%.3f,%.3f],"
+               "\"forward\":[%.3f,%.3f,%.3f]}\n",game->ticks,rd_u8(SCENE_POSE_ENTRY),
+               pilot->home[0],pilot->home[1],pilot->home[2],
+               pilot->forward[0],pilot->forward[1],pilot->forward[2]);
+    }
+    const double yaw_control=yaw_error-10*angle_delta(yaw,pilot->previous_x);
+    const double pitch_control=pitch+4*angle_delta(pitch,pilot->previous_y);
+    pilot->previous_x=yaw;pilot->previous_y=pitch;
+    command_throttle(pilot,game,pilot->phase>=2 || approach_distance<20000?286:288);
+    /* Original A/raw $20 invokes COMMAND_HOOK for the F/A-18 arrestor. */
+    held(pilot,game,&pilot->hook,pilot->phase>=2 && !(rd_u16(CONTROL_RECORDS+2)&0x8000)?97:0);
+    held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
+    held(pilot,game,&pilot->rudder,yaw_control>0.006?46:yaw_control< -0.006?44:0);
+    held(pilot,game,&pilot->pitch,pilot->phase==3?0:pitch_control>0.006?274:pitch_control< -0.006?273:0);
+    held(pilot,game,&pilot->fire,0);
+    return 1;
+}
 void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
     if(game->flight_timer_pending || game->scene_frames==pilot->scene) return;
     pilot->scene=game->scene_frames;
@@ -195,6 +254,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
     }
     if(follow_stolen_aircraft(pilot,game)) return;
     if(combat_flight(pilot,game)) return;
+    if(return_flight(pilot,game)) return;
     double point[3],position[3],local[3]={0};
     for(unsigned i=0;i<3;++i) position[i]=(double)rd_s32(CONTROL_RECORDS+20+4*i)/256;
     int gun_target=0,gun_aim=0;
