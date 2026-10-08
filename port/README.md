@@ -1,5 +1,13 @@
 # Active port source ownership
 
+Latest final-mission correction: the native record scheduler preserves C230B0's
+returned selection word through C0A364/C0A3A6. Ordinary controls now complete
+the final aircraft objective, carrier landing, save, menu return and cold Next
+Mission wrap, with sampled original comparisons and matching playable output.
+See [`../analysis/native_final_mission_sequence_milestone.md`](../analysis/native_final_mission_sequence_milestone.md).
+The eligible pilot fixture is explicitly unearned; independent original whole
+flights and full-port acceptance remain open.
+
 Latest connected fixes: demo attached-camera projection avoids rotating the
 model vertex twice; 223 independent takeoff boundaries match both drawing
 pages, player motion and camera state. The shared coarse angle clamp now uses

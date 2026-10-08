@@ -231,7 +231,10 @@ void schedule_postflight(enum PostflightSchedule mode,uint16_t event,gaddr recor
     switch(mode) {
     case POSTFLIGHT_DISPATCH:
         store_byte(h,SPACE_COMMAND_LATCH,0); store_byte(h,SPACE_COMMAND_LATCH+1,0);
-        store_byte(h,PAIR_OVERRIDE,0); consume(h,SCHEDULE_SELECTION_GATE,0);
+        store_byte(h,PAIR_OVERRIDE,0);
+        /* C230B0 returns the selection word in D0.w. C09E30 replaces
+         * only its low byte; the counted C0A364 outcome preserves the high. */
+        event=(uint16_t)consume(h,SCHEDULE_SELECTION_GATE,0).event;
         if(!bit(h,SCHEDULE_STATUS,6) || test_byte(h,SCHEDULE_BLOCKED)) return;
         value=rd_u8(MODE_SELECT); event=event_byte(h,event,value);
         if(compare_byte(h,value,2)<=0) return;

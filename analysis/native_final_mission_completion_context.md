@@ -1,5 +1,13 @@
 # Final mission completion context - 2026-10-08
 
+Latest acceptance: ordinary keys now complete four counted aircraft
+destructions, carrier landing, saved result, menu return and cold Next Mission
+wrap. Class-20 surface record 14 remains active at objective admission. The native scheduler
+return contract is corrected and all sampled original comparisons pass; see
+`native_final_mission_sequence_milestone.md`. Earned availability and independent
+complete-flight parity remain open. The three-aircraft diagnostic below is
+retained as earlier evidence.
+
 The user's mission-six concern refers to the final Carrier Sub mission.
 The earlier handoff incorrectly associated it with the internal `mode_six`
 scheduler. That scheduler belongs to Search and Rescue.
@@ -69,7 +77,8 @@ The active runtime reaches these readable owners through
 `native_frontend_tick` -> native flight/record updates. The mode-eight scheduler
 callback in `native/records.c` calls `POSTFLIGHT_MODE_OTHER` / C0A364. Its signed
 quota comparison must pass before the original two-step countdown publishes FF.
-No original gameplay routines were changed or newly decompiled in this batch.
+No original gameplay routines were changed or newly decompiled in the earlier
+three-aircraft diagnostic batch.
 
 ## Accepted three-aircraft diagnostic
 
@@ -123,11 +132,9 @@ the 4 GiB budget; the canonical Release playable is unchanged.
 
 ## Remaining acceptance
 
-Complete the fourth counted aircraft destruction through ordinary controls,
-then compare original FF objective, landing, stopped-aircraft admission, config
-save and menu return. Verify next-mission wrap through the original pilot-log
-selection path. A longer input-pilot attempt reaches three expiries but crashes
-before completing the fourth; this is a pilot diagnostic, not evidence that the
-mission is impossible. Earned availability and independent original complete-
-flight parity also remain open. Do not invent a submarine explosion, weaken the
-counters or declare final-mission completion from the partial diagnostic.
+Fourth aircraft destruction, FF objective, carrier landing, stopped result,
+config save, menu return and cold Next Mission wrap are accepted by the later
+sequence milestone. The earlier longer three-expiry attempt that crashed was a
+pilot diagnostic, not evidence that the mission was impossible. Earned
+availability and independent original complete-flight parity remain open.
+Preserve the original counter rules and absence of a required visible explosion.

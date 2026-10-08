@@ -1,22 +1,31 @@
 # Current playable port handoff
 
-Latest final-mission diagnostic (2026-10-08): the original aircraft-expiry
-predicates are traced through C25B66/C25BEE and the mode-eight C0A364 scheduler.
-Ordinary keys destroy three patrol aircraft: expiry count 0 -> 3 against this
-fixture's quota four. All 24 input/stage intervals and 120 sampled bodies match
-original compared RAM/drawing, including three complete 20-body hit/expiry
-windows. The playable runner replays all 2,004 events; its captured RAM agrees
-on counters, phase, hits and completions. No objective, completion or config
-write is accepted. The saved-pilot availability fixture is explicitly unearned;
-flight state is never seeded. The serial gate is
-`fa18_native_final_patrol_diagnostic`. Gameplay and comparison masks are
-unchanged. Fourth destruction, final objective/landing/save/menu wrap, earned
-availability and independent complete-flight parity remain open. See
-`analysis/native_final_mission_completion_context.md` and its checkpoint.
-Debug/Release fixture builds pass. Six selected Release checks and three Debug
-checks pass, including the existing three mission sequences. Input and outcome
-hashes agree across configurations; passing RAM is removed. The playable
-executable is unchanged and the build cache remains 2.00 GiB within its budget.
+Latest final-mission sequence (2026-10-08): ordinary keys destroy four patrol
+aircraft, admit the original FF objective, land on the carrier wire, stop, save,
+finish result messages and return to the menu. Completions advance 3 -> 4 and
+mode-eight grade 0 -> 1. A cold Next Mission selection wraps to mode three.
+Class-20 surface record 14 remains active at objective admission; no explosion is
+required by this original counter path. All 42 flight intervals/239 sampled
+bodies plus one cold-wrap interval/body match original compared RAM/drawing,
+including 101 combat bodies, 64 consecutive landing bodies and one config write.
+The playable runner delivers all 2,626 flight events and four cold-wrap events,
+agrees on saved bytes/menu/wrap and has no queued input or crash reset.
+C230B0's returned selection word is now preserved into C0A364/C0A3A6: original
+FF04 replaces the adapter's incorrect 0004 completion word. Original predicates,
+countdowns and comparison masks are preserved; no new decompilation is claimed.
+The serial gate is `fa18_native_mission_8_sequence`; the earlier three-aircraft
+diagnostic remains accepted. See `analysis/native_final_mission_sequence_milestone.md`
+and its checkpoint. The saved-pilot availability fixture remains explicitly
+unearned, with no flight-state seeding. Earned availability, successful internal
+modes six/seven and independent complete-flight parity remain open.
+Two identical flights partition capture storage inside the existing 480 MiB
+cap and remove passing RAM before collecting the next partition. The 4 GiB
+build-cache pruning hooks remain active.
+Debug/Release playable and fixture builds pass. Eight selected Release checks
+and three Debug checks pass, including final success, the earlier patrol
+diagnostic, modes three/four/five sequences and the frontend/link gate. Both
+configurations agree on inputs, counters, saved result and cold wrap. The
+canonical Release executable is refreshed; build-cache use is 2.00 GiB.
 
 Latest mission-four sequence acceptance (2026-10-08): ordinary keys from the
 earned region pilot log shoot down record 8, complete the escort objective,

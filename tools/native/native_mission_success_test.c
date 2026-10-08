@@ -13,7 +13,8 @@ typedef struct {
     unsigned body, captures, entries, first_tick, entry_tick, iteration, window, combat_window, formation_window;
     unsigned entry_keys[256], key_count;
     unsigned mode, formation_length;
-    int force_return, sequence, following_result, restarted;
+    unsigned capture_from, capture_until;
+    int force_return, sequence, following_result, restarted, wrap_probe;
     uint16_t saved_tick, contact, completions, speed;
     uint16_t radar_hits, gun_hits, infrared_hits;
     int16_t proximity_gate;
@@ -43,16 +44,19 @@ static void capture_budget(const Observation *run) {
         fputs("Mission capture budget exhausted\n",stderr);abort();
     }
 }
+static int capture_tick(const Observation *run,unsigned tick) {
+    return tick>=run->capture_from && (!run->capture_until || tick<=run->capture_until);
+}
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                     uint16_t saved_tick,void *context) {
     Observation *run=context;
     if(boundary==NATIVE_FRAME_INPUT_BEGIN) {
         run->entry_stage=rd_u32(STAGE_CALLBACK);run->entry_phase=rd_u8(PLAYER_PHASE);
         run->entry_tick=game->ticks;run->key_count=game->input_count;
-        run->keep_entry=run->entry_stage!=run->previous_entry_stage ||
+        run->keep_entry=capture_tick(run,game->ticks) && (run->entry_stage!=run->previous_entry_stage ||
             run->entry_phase!=run->previous_entry_phase || run->entry_stage==0xc110a4 ||
             (run->following_result && (run->key_count ||
-             (run->entry_phase==0xfc && rd_u8(MESSAGE_STATE_B) && rd_u8(MESSAGE_STATE_C))));
+             (run->entry_phase==0xfc && rd_u8(MESSAGE_STATE_B) && rd_u8(MESSAGE_STATE_C)))));
         if(run->keep_entry) {
             copy_ram(run->entry_before,game);
             for(unsigned i=0;i<run->key_count;++i)
@@ -86,8 +90,8 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             printf("{\"entry\":%u,\"iteration\":%u,\"stage\":\"%06X\",\"tick\":%u,\"keys\":[",
                 run->entries++,run->iteration,run->entry_stage,run->entry_tick);
             for(unsigned i=0;i<run->key_count;++i) printf("%s%u",i?",":"",run->entry_keys[i]);
-            printf("],\"phase_before\":%u,\"phase_after\":%u,\"completions\":%u}\n",
-                run->entry_phase,run->phase,run->completions);
+            printf("],\"phase_before\":%u,\"phase_after\":%u,\"completions\":%u,\"wrap_probe\":%s}\n",
+                run->entry_phase,run->phase,run->completions,run->wrap_probe?"true":"false");
             run->keep_entry=0;
         }
         if(run->following_result && run->entry_stage==0xc0f992 && run->stage==0xc0fcb4) run->restarted=1;
@@ -129,21 +133,21 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     const unsigned region_mask=rd_u8(SCENE_POSE_ENTRY)==3?0xc0u:4u;
     const int ready=run->landed && (region&region_mask) && !speed;
     const int ready_before=run->landed && (run->region&region_mask) && !run->speed;
-    const int keep=run->stage!=run->previous_stage || run->body%(run->mode==3?512:1024)==0 ||
+    const int keep=capture_tick(run,run->first_tick) && (run->stage!=run->previous_stage || run->body%(run->mode==3?512:1024)==0 ||
         run->window || run->combat_window || run->formation_window || phase!=run->phase || completions!=run->completions ||
         ((contact^run->contact)&(run->force_return?0x84:0x80)) || confirmation!=run->confirmation ||
         (run->landed && ((region^run->region)&region_mask)) || (ready && !ready_before) ||
         radar_hits!=run->radar_hits || gun_hits!=run->gun_hits || final_hit ||
         (run->following_result && (message_b!=run->message_b || message_c!=run->message_c)) ||
         ((run->mode==4 || run->mode==5 || run->mode==8) && enemy_expiries!=run->enemy_expiries) ||
-        (run->mode==8 && rd_u8(SCENE_DISPATCH_ADMITTED)!=run->admitted);
+        (run->mode==8 && rd_u8(SCENE_DISPATCH_ADMITTED)!=run->admitted));
     if(run->mode==8 && (run->stage!=run->previous_stage || phase!=run->phase ||
        enemy_expiries!=run->enemy_expiries || rd_u8(SCENE_DISPATCH_ADMITTED)!=run->admitted)) {
         printf("{\"final_mission_counter\":true,\"body\":%u,\"tick\":%u,\"stage\":\"%06X\","
                "\"phase_before\":%u,\"phase_after\":%u,\"sequence_phase\":%u,"
-               "\"admitted_before\":%u,\"admitted_after\":%u,\"expiries_before\":%u,\"expiries_after\":%u,\"records\":[",
+               "\"admitted_before\":%u,\"admitted_after\":%u,\"expiries_before\":%u,\"expiries_after\":%u,\"wrap_probe\":%s,\"records\":[",
             run->body,game->ticks,run->stage,run->phase,phase,rd_u8(SEQUENCE_PHASE),run->admitted,
-            rd_u8(SCENE_DISPATCH_ADMITTED),run->enemy_expiries,enemy_expiries);
+            rd_u8(SCENE_DISPATCH_ADMITTED),run->enemy_expiries,enemy_expiries,run->wrap_probe?"true":"false");
         for(unsigned slot=4;slot<=14;slot+=2) {
             const gaddr record=CONTROL_RECORDS+512*slot;
             const uint8_t *before=run->before+0x80000+record-0xc00000;
@@ -188,7 +192,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                "\"touchdown\":%s,\"landing_window\":%s,\"ready\":%s,"
                "\"combat_window\":%s,\"enemy_expiries_before\":%u,\"enemy_expiries_after\":%u,"
                "\"proximity_gate_before\":%d,\"proximity_gate_after\":%d,\"formation_window\":%s,"
-               "\"message_b_before\":%u,\"message_b_after\":%u,\"message_c_before\":%u,\"message_c_after\":%u}\n",
+               "\"message_b_before\":%u,\"message_b_after\":%u,\"message_c_before\":%u,\"message_c_after\":%u,\"wrap_probe\":%s}\n",
                run->captures++,run->body,run->iteration,run->stage,run->first_tick,game->ticks,
                run->saved_tick,boundary==NATIVE_FRAME_OWNER_EXIT?"true":"false",
                run->phase,phase,run->contact,contact,run->confirmation,confirmation,
@@ -196,7 +200,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                run->completions,completions,touchdown?"true":"false",
                run->window?"true":"false",ready?"true":"false",run->combat_window?"true":"false",
                run->enemy_expiries,enemy_expiries,run->proximity_gate,proximity_gate,
-               run->formation_window?"true":"false",run->message_b,message_b,run->message_c,message_c);
+               run->formation_window?"true":"false",run->message_b,message_b,run->message_c,message_c,run->wrap_probe?"true":"false");
     }
     if(run->window) --run->window;
     if(run->combat_window) --run->combat_window;
@@ -215,6 +219,7 @@ int main(int argc,char **argv) {
     if(argc==6) {
         pilot.escort_flight=!strcmp(argv[5],"4-success") || !strcmp(argv[5],"4-sequence");
         pilot.final_flight=!strcmp(argv[5],"8-success") || !strcmp(argv[5],"8-sequence");
+        pilot.final_sequence=!strcmp(argv[5],"8-sequence");
         run.sequence=!strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence") || !strcmp(argv[5],"8-sequence");
         pilot.complete_flight=pilot.escort_flight || pilot.final_flight || !strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.force_return=!strcmp(argv[5],"5-formation") || !strcmp(argv[5],"5-mission") ||
@@ -227,6 +232,9 @@ int main(int argc,char **argv) {
     }
     run.mode=pilot.mode;
     run.force_return=pilot.force_return;
+    const char *capture_from=getenv("FA18_MISSION_CAPTURE_FROM_TICK"),*capture_until=getenv("FA18_MISSION_CAPTURE_UNTIL_TICK");
+    run.capture_from=capture_from?(unsigned)strtoul(capture_from,NULL,10):0;
+    run.capture_until=capture_until?(unsigned)strtoul(capture_until,NULL,10):0;
     /* Sequence coverage reserves 64 landing bodies and the later callbacks
      * inside the same 480 MiB cap; success gates retain their longer windows. */
     run.formation_length=pilot.complete_flight?16u:32u;
@@ -335,6 +343,45 @@ int main(int argc,char **argv) {
     }
     const gaddr loaded=rd_u32(MODE_TABLE);
     for(unsigned i=0;i<sizeof saved;++i) if(saved[i]!=rd_u8(loaded+i)) goto done;
+    if(pilot.final_sequence) {
+        /* A separate cold session selects Next Mission through normal keys.
+         * C1BC50 reads the saved final mode eight and wraps its successor to
+         * mode three. Keep its replay clock separate from the completed flight. */
+        if(fclose(pilot.keys)) {pilot.keys=NULL;goto done;}
+        pilot.keys=NULL;
+        char wrap_keys[4096];
+        if(snprintf(wrap_keys,sizeof wrap_keys,"%s.wrap.e9k",argv[3])>=(int)sizeof wrap_keys) goto done;
+        pilot.keys=fopen(wrap_keys,"w");if(!pilot.keys) goto done;
+        fputs("E9K_INPUT_V1\n",pilot.keys);
+        run.wrap_probe=1;run.following_result=0;run.previous_stage=0;
+        /* Early capture partitions omit this cold session. The final partition
+         * compares it once, inside the same 480 MiB capture budget. */
+        run.capture_from=run.capture_until?0xffffffffu:0;run.capture_until=0;
+        game->observe_frame=observe;game->frame_context=&run;
+        while(game->ticks<3004) {
+            if(game->ticks==1800) mission_pilot_event(&pilot,game,32,1);
+            if(game->ticks==1802) mission_pilot_event(&pilot,game,32,0);
+            if(game->ticks==3000) mission_pilot_event(&pilot,game,55,1);
+            if(game->ticks==3002) mission_pilot_event(&pilot,game,55,0);
+            native_frontend_tick(game);
+        }
+        if(rd_u8(MODE_SELECT)!=3 || game->input_count || game->postflight_resets) {
+            fprintf(stderr,"Final next-mission wrap failed: mode %u, queued %u\n",rd_u8(MODE_SELECT),game->input_count);goto done;
+        }
+        const uint16_t visits=(uint16_t)(saved[4]*256u+saved[5]);
+        if(rd_u16(rd_u32(MODE_TABLE)+4)!=(uint16_t)(visits+1u)) goto done;
+        /* Entering the menu acknowledges enlistment and increments word +4.
+         * All saved result fields were checked on cold load before these keys. */
+        for(unsigned i=0;i<sizeof saved;++i) if(i!=4 && i!=5 && saved[i]!=rd_u8(rd_u32(MODE_TABLE)+i)) {
+            fprintf(stderr,"Next-mission selection changed loaded log byte %u: %u -> %u\n",
+                i,saved[i],rd_u8(rd_u32(MODE_TABLE)+i));goto done;
+        }
+        printf("{\"next_mission_wrap\":true,\"ticks\":%u,\"mode\":%u,\"saved_mode\":%u,"
+               "\"stage\":\"%06X\",\"screen\":\"%s\",\"queued\":%u,\"result_fields_unchanged\":true,"
+               "\"enlistment_before\":%u,\"enlistment_after\":%u}\n",
+            game->ticks,rd_u8(MODE_SELECT),rd_u8(rd_u32(MODE_TABLE)+6),rd_u32(STAGE_CALLBACK),
+            native_frontend_screen(game),game->input_count,visits,rd_u16(rd_u32(MODE_TABLE)+4));
+    }
     printf("{\"finished\":true,\"airborne\":true,\"landed\":true,\"objective\":true,"
            "\"mode\":%u,\"stage\":\"%06X\",\"phase\":%u,\"ticks\":%u,\"target\":%u,"
            "\"completions_before\":%u,\"completions_after\":%u,\"grade_before\":%u,\"grade_after\":%u,"

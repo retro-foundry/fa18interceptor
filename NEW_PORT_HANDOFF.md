@@ -2,23 +2,32 @@
 
 ## Current restart summary — 2026-10-08
 
-Final Carrier Sub mission (F6/internal mode 8): original aircraft-expiry counter
-ownership is now traced and tested. Ordinary keys destroy three patrol aircraft,
-giving three expiries against this fixture's quota four. All 24 input/stage
-intervals and 120 sampled bodies match original compared RAM/drawing, including
-three complete 20-body destruction/expiry windows. The playable runner
-delivers all 2,004 recorded events and its captured RAM agrees on quota, expiries,
-phase, hits and completions. No objective or config write is accepted; phase
-remains zero and the saved log is unchanged. This uses the established unearned
-availability-only pilot fixture, with no flight-state seeding. The serial gate
-is `fa18_native_final_patrol_diagnostic`; see
-`analysis/native_final_mission_completion_context.md`. Fourth destruction,
-objective/landing/save/menu wrap, earned availability and independent complete
-original flights remain open. Gameplay and comparison masks are unchanged.
-Debug/Release fixture builds pass, with six selected Release checks and three
-Debug checks passing. Inputs and outcomes agree; passing RAM is removed. The
-playable executable is unchanged. Build-cache use remains 2.00 GiB within its
-4 GiB budget. Evidence is in `analysis/figures/native_final_patrol_checkpoint.json`.
+Final Carrier Sub mission (F6/internal mode 8) now completes through ordinary
+keys: four aircraft expiries satisfy this fixture's quota four, the FF objective
+is admitted, and the player returns to the carrier wire, stops, saves and
+finishes result messages. Completions advance 3 -> 4 and grade 0 -> 1. Escape
+returns to the menu; a cold Next Mission selection wraps from saved mode eight
+to mode three. Class-20 surface record 14 remains active at objective admission. All 42
+flight input/stage intervals and 239 bodies plus one cold-wrap interval/body
+match original compared RAM/drawing, including 101 combat bodies, 64 landing
+bodies and one config write. The playable runner delivers all 2,626 flight
+events and four wrap events and agrees on the saved log/menu/wrap.
+The connected scheduler now preserves C230B0's returned selection word through
+C0A364/C0A3A6, publishing original FF04 instead of 0004 at completion. Original
+predicates, countdowns and comparison masks are unchanged. No newly decompiled
+routine is claimed. The serial gate is `fa18_native_mission_8_sequence`; see
+`analysis/native_final_mission_sequence_milestone.md` and its checkpoint.
+The initial availability-only saved pilot remains explicitly unearned; flight
+state is never seeded. Earned availability, successful internal modes six/seven
+and independent complete original flights remain open. Two identical flights
+partition captures inside the existing 480 MiB cap, removing passing RAM before
+the next partition; the 4 GiB build-cache pruning hooks stay active. The earlier
+`fa18_native_final_patrol_diagnostic` remains an accepted three-aircraft route.
+Debug/Release playable and fixture builds pass. Eight selected Release checks
+and three Debug checks pass. Inputs, counters, saved bytes and cold wrap agree
+across configurations. The canonical Release executable is refreshed, passing
+RAM is removed and build-cache use remains 2.00 GiB within its 4 GiB budget.
+Evidence is in `analysis/figures/native_final_mission_sequence_checkpoint.json`.
 
 Mission four now completes a normal-key escort flight and saved result sequence
 from the source-earned region pilot log. Record 8 is shot down, the escort lands,
@@ -52,8 +61,9 @@ The supplied [Wikipedia passage](https://en.wikipedia.org/wiki/F/A-18_Intercepto
 reports that the submarine need not visibly explode and that destroying the
 patrolling aircraft may suffice. The original mode-eight dispatch uses
 `POSTFLIGHT_MODE_OTHER` -> `generic_mode`, comparing admitted/completed counters.
-It has no direct submarine-explosion test. Counter provenance is now traced;
-a successful ordinary-input final flight/save/menu return still requires verification.
+It has no direct submarine-explosion test. The successful ordinary-input final
+flight/save/menu/wrap route is accepted above; earned availability and independent
+original full-flight parity remain open.
 Preserve original rules; see `analysis/native_final_mission_completion_context.md`.
 
 Earlier mission-four input diagnostic added `4-success` and `4-sequence`.

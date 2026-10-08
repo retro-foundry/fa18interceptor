@@ -266,8 +266,13 @@ static uint32_t action_view(uint32_t event,int16_t index) {
     return state.event;
 }
 static PostflightScheduleResult schedule_child(void *context,enum PostflightScheduleChild child,gaddr record) {
-    (void)context;
-    if(child==SCHEDULE_SELECTION_GATE) { release_lost_selection(); return (PostflightScheduleResult){0,1}; }
+    if(child==SCHEDULE_SELECTION_GATE) {
+        uint16_t selected=rd_u16(SELECTED_RECORD);
+        release_lost_selection();
+        /* C230B0 retains the incoming selection even when it releases it. */
+        *(uint16_t *)context=selected;
+        return (PostflightScheduleResult){selected,rd_s16(SELECTED_RECORD)<0};
+    }
     if(child==SCHEDULE_READY_GATE) return postflight_player_readiness(NULL); /* C0A3EA */
     if(child==SCHEDULE_RESTORE_FIRST || child==SCHEDULE_RESTORE_SECOND) {
         schedule_postflight(POSTFLIGHT_RESTORE_RECORD,0,record,NULL); /* C0A12E */
@@ -308,7 +313,9 @@ static PostflightScheduleResult schedule_child(void *context,enum PostflightSche
     }
     if(child==SCHEDULE_OTHER) {
         const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
-        schedule_postflight(POSTFLIGHT_MODE_OTHER,rd_u8(MODE_SELECT),record,&hooks); /* C0A364 */
+        /* C09E30/C0A370 are byte moves; C0A3A6 publishes the retained word. */
+        uint16_t event=(*(uint16_t *)context&0xff00u)|rd_u8(MODE_SELECT);
+        schedule_postflight(POSTFLIGHT_MODE_OTHER,event,record,&hooks); /* C0A364 */
         return (PostflightScheduleResult){0,1};
     }
     if(child==SCHEDULE_PREPARE_FOUR || child==SCHEDULE_PREPARE_SEVEN) {
@@ -381,7 +388,8 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
         return flight.value!=0;
     }
     case RECORD_UPDATE_FINISH: {
-        const PostflightScheduleHooks hooks={schedule_child,NULL,NULL};
+        uint16_t event=0;
+        const PostflightScheduleHooks hooks={schedule_child,NULL,&event};
         schedule_postflight(POSTFLIGHT_DISPATCH,0,record,&hooks); return 0;
     }
     default: fprintf(stderr,"native control record child unavailable: %u (slot %u)\n",(unsigned)child,slot); abort();

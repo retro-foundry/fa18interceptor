@@ -1,14 +1,20 @@
 # Native port runner
 
-The final Carrier Sub mission (F6/internal mode 8) now has a serial
-`fa18_native_final_patrol_diagnostic` gate. Ordinary keys destroy three aircraft;
-24 intervals/120 sampled bodies match original compared RAM/drawing, including
-all three hit/expiry windows. The playable runner's captured RAM agrees on
-three expiries against this fixture's quota four, unchanged completions and no
-objective/save. Its 2,004 host events are fully delivered. The availability-only
-pilot fixture is explicitly unearned. See
-`../../analysis/native_final_mission_completion_context.md`. Full final-mission
-success, earned availability and independent complete-flight parity remain open.
+The final Carrier Sub mission (F6/internal mode 8) now completes its aircraft
+objective, carrier wire landing, stopped result, save, messages and Escape/menu
+return. Cold Next Mission wraps from saved mode eight to mode three. The serial
+`fa18_native_mission_8_sequence` gate compares 42 flight intervals/239 bodies
+plus one cold-wrap interval/body with original RAM/drawing, including all hit
+windows, 64 landing bodies and one config write. The playable runner delivers
+2,626 flight events plus four wrap events and agrees on saved bytes/menu/wrap.
+C230B0's returned selection word is preserved into the generic scheduler;
+original FF04 replaces the adapter's incorrect 0004 completion word. Predicates,
+countdowns and comparison masks are unchanged. Class-20 surface record 14 remains active
+at objective admission. The availability-only pilot fixture is explicitly
+unearned. See `../../analysis/native_final_mission_sequence_milestone.md`.
+Earned availability and independent complete-flight parity remain open. The
+earlier `fa18_native_final_patrol_diagnostic` remains accepted; capture partitions
+retain the 480 MiB cap and builds/CTest keep the 4 GiB pruning hooks.
 
 Mode four now completes normal-key escort, carrier arrestor landing, stopped
 result, config save, result messages, Escape/menu return and cold reload from

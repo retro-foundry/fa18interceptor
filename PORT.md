@@ -11,10 +11,20 @@ runner supersedes the incremental removal work.
 Build/run instructions and remaining timing/audio/state scope are in
 [`port/native/README.md`](port/native/README.md).
 
+The final Carrier Sub mission (F6/internal mode eight) now completes its
+aircraft objective, carrier landing, saved result, menu return and cold Next
+Mission wrap through ordinary keys. Its scheduler now preserves the original
+selection-word return at C230B0/C0A364/C0A3A6. The sampled original comparisons
+and playable result agree; see
+[`analysis/native_final_mission_sequence_milestone.md`](analysis/native_final_mission_sequence_milestone.md).
+The eligibility fixture remains unearned; independent original complete-flight
+parity and full-port acceptance remain open.
+
 Sustained mode-six/eight native flight now connects the readable guidance
 continuation and corrects projection returns and matrix angle semantics.
 114 input/stage intervals and 465 sampled bodies match compared original
-RAM/display; complete mission sequences remain unaccepted. See
+RAM/display. Mode-eight success is now accepted above; mode-six success and
+independent full flights remain open. See
 [`analysis/native_guidance_limits_milestone.md`](analysis/native_guidance_limits_milestone.md).
 
 The demo attached-camera projection now uses the original model vertex,

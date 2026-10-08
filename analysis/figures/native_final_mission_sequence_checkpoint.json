@@ -1,0 +1,331 @@
+{
+  "date": "2026-10-08",
+  "scenario": "normal-key-final-patrol-carrier-landing-result-messages-escape-menu-reload",
+  "mission_success_accepted": true,
+  "mission_sequence_accepted": true,
+  "mission_availability_earned": false,
+  "native_flight_state_seeded": false,
+  "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+  "flight_input_stage_intervals": 42,
+  "flight_sampled_bodies": 239,
+  "cold_wrap_input_stage_intervals": 1,
+  "cold_wrap_sampled_bodies": 1,
+  "consecutive_landing_bodies": 64,
+  "compared_combat_bodies": 101,
+  "original_config_writes": 1,
+  "capture_partitions": [
+    {
+      "from_tick": 0,
+      "until_tick": 23000,
+      "intervals": 30,
+      "bodies": 164,
+      "original_config_writes": 0,
+      "wrap_intervals": 0,
+      "wrap_bodies": 0
+    },
+    {
+      "from_tick": 23001,
+      "until_tick": 0,
+      "intervals": 13,
+      "bodies": 76,
+      "original_config_writes": 1,
+      "wrap_intervals": 1,
+      "wrap_bodies": 1
+    }
+  ],
+  "capture_pair_cap": 240,
+  "capture_budget_mib": 480,
+  "build_cache_budget_gib": 4,
+  "build_cache_after_pruning_gib_rounded": 2.0,
+  "corrected_return": {
+    "caller": "native record update finish -> C09E06 -> C230B0 -> C0A364 -> C0A3A6",
+    "objective_body": 8938,
+    "selected_word": "FFFF",
+    "quota": 4,
+    "original_phase_word": "FF04",
+    "previous_native_phase_word": "0004",
+    "original_compared_difference": "one byte at C458C0",
+    "comparison_masks_changed": false,
+    "newly_decompiled_entries": 0
+  },
+  "summary": {
+    "finished": true,
+    "airborne": true,
+    "landed": true,
+    "objective": true,
+    "mode": 8,
+    "stage": "C10DAE",
+    "phase": 252,
+    "ticks": 32456,
+    "target": 12,
+    "completions_before": 3,
+    "completions_after": 4,
+    "grade_before": 0,
+    "grade_after": 1,
+    "region": 192,
+    "speed": 0,
+    "crash_resets": 0,
+    "reloaded": true
+  },
+  "objective": {
+    "final_mission_counter": true,
+    "body": 8938,
+    "tick": 22174,
+    "stage": "C10DAE",
+    "phase_before": 0,
+    "phase_after": 255,
+    "sequence_phase": 3,
+    "admitted_before": 4,
+    "admitted_after": 4,
+    "expiries_before": 4,
+    "expiries_after": 4,
+    "wrap_probe": false,
+    "active_surface_record": {
+      "slot": 14,
+      "kind": 32,
+      "flags_before": 16476,
+      "flags_after": 16476,
+      "contact": 0,
+      "lifetime_before": 0,
+      "lifetime_after": 0
+    }
+  },
+  "patrol_expiries": [
+    {
+      "final_mission_counter": true,
+      "body": 6368,
+      "tick": 13477,
+      "stage": "C10DAE",
+      "phase_before": 0,
+      "phase_after": 0,
+      "sequence_phase": 0,
+      "admitted_before": 4,
+      "admitted_after": 4,
+      "expiries_before": 0,
+      "expiries_after": 1,
+      "wrap_probe": false,
+      "expired_record": {
+        "slot": 10,
+        "kind": 18,
+        "flags_before": 29889,
+        "flags_after": 28865,
+        "contact": 4096,
+        "lifetime_before": 1,
+        "lifetime_after": 0
+      }
+    },
+    {
+      "final_mission_counter": true,
+      "body": 6773,
+      "tick": 14844,
+      "stage": "C10DAE",
+      "phase_before": 0,
+      "phase_after": 0,
+      "sequence_phase": 0,
+      "admitted_before": 4,
+      "admitted_after": 4,
+      "expiries_before": 1,
+      "expiries_after": 2,
+      "wrap_probe": false,
+      "expired_record": {
+        "slot": 12,
+        "kind": 18,
+        "flags_before": 29889,
+        "flags_after": 28865,
+        "contact": 4096,
+        "lifetime_before": 1,
+        "lifetime_after": 0
+      }
+    },
+    {
+      "final_mission_counter": true,
+      "body": 8028,
+      "tick": 19080,
+      "stage": "C10DAE",
+      "phase_before": 0,
+      "phase_after": 0,
+      "sequence_phase": 0,
+      "admitted_before": 4,
+      "admitted_after": 4,
+      "expiries_before": 2,
+      "expiries_after": 3,
+      "wrap_probe": false,
+      "expired_record": {
+        "slot": 8,
+        "kind": 18,
+        "flags_before": 21697,
+        "flags_after": 20673,
+        "contact": 4096,
+        "lifetime_before": 1,
+        "lifetime_after": 0
+      }
+    },
+    {
+      "final_mission_counter": true,
+      "body": 8937,
+      "tick": 22147,
+      "stage": "C10DAE",
+      "phase_before": 0,
+      "phase_after": 0,
+      "sequence_phase": 0,
+      "admitted_before": 4,
+      "admitted_after": 4,
+      "expiries_before": 3,
+      "expiries_after": 4,
+      "wrap_probe": false,
+      "expired_record": {
+        "slot": 12,
+        "kind": 18,
+        "flags_before": 29889,
+        "flags_after": 28865,
+        "contact": 4096,
+        "lifetime_before": 1,
+        "lifetime_after": 0
+      }
+    }
+  ],
+  "weapon_hits": [
+    {
+      "weapon_hit": true,
+      "body": 6353,
+      "gun_before": 0,
+      "gun_after": 0,
+      "radar_before": 1,
+      "radar_after": 2,
+      "infrared_before": 4,
+      "infrared_after": 4,
+      "destroyed_slots": [
+        10
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 6758,
+      "gun_before": 0,
+      "gun_after": 0,
+      "radar_before": 2,
+      "radar_after": 3,
+      "infrared_before": 4,
+      "infrared_after": 4,
+      "destroyed_slots": [
+        12
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8013,
+      "gun_before": 0,
+      "gun_after": 0,
+      "radar_before": 3,
+      "radar_after": 3,
+      "infrared_before": 4,
+      "infrared_after": 5,
+      "destroyed_slots": [
+        8
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8892,
+      "gun_before": 0,
+      "gun_after": 1,
+      "radar_before": 3,
+      "radar_after": 3,
+      "infrared_before": 5,
+      "infrared_after": 5,
+      "destroyed_slots": []
+    },
+    {
+      "weapon_hit": true,
+      "body": 8893,
+      "gun_before": 1,
+      "gun_after": 2,
+      "radar_before": 3,
+      "radar_after": 3,
+      "infrared_before": 5,
+      "infrared_after": 5,
+      "destroyed_slots": []
+    },
+    {
+      "weapon_hit": true,
+      "body": 8922,
+      "gun_before": 2,
+      "gun_after": 2,
+      "radar_before": 3,
+      "radar_after": 3,
+      "infrared_before": 5,
+      "infrared_after": 6,
+      "destroyed_slots": [
+        12
+      ]
+    }
+  ],
+  "sequence": {
+    "sequence": true,
+    "restarted": true,
+    "ticks": 33466,
+    "stage": "C0FCB4",
+    "mode": 8,
+    "phase": 0,
+    "queued": 0,
+    "crash_resets": 0,
+    "completions": 4,
+    "grade": 1,
+    "menu": true,
+    "log_unchanged": true
+  },
+  "next_mission_wrap": {
+    "next_mission_wrap": true,
+    "ticks": 3004,
+    "mode": 3,
+    "saved_mode": 8,
+    "stage": "C0FECE",
+    "screen": "mode-intro",
+    "queued": 0,
+    "result_fields_unchanged": true,
+    "enlistment_before": 2,
+    "enlistment_after": 3
+  },
+  "canonical_host_events": 2626,
+  "canonical_wrap_host_events": 4,
+  "input_sha256": "dca7bf6e988e59d6bcc65822106cef49306a5c853188e1d57b1bdb8eb670ba35",
+  "wrap_input_sha256_lf": "08488a14de94bd7452b3e19a7973c7615944b5430212f15f60cb1c5c7d1fed63",
+  "initial_config_sha256": "29feeb30cecce09afb651b9ea87be6f09a742f4c9e15cb1f6744347f1f836a8e",
+  "saved_config_sha256": "bb816711809e12ebe64cb0288770acde1ba389506dc337099880d17b03ac5744",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "canonical_playable_sha256": "567d0956f32f0587a057c4c37268bfce4956b57098192dc050b1fe40bed64571",
+  "release": {
+    "test_sha256": "62c0fe48d8996addc4c383d6579b73c9aff456e92c9a1b954a379586b024711d",
+    "runner_sha256": "567d0956f32f0587a057c4c37268bfce4956b57098192dc050b1fe40bed64571",
+    "comparison_sha256": "f0cb3d53b0c4a6c98c786c8aeaf81885e2bb6b4180d8b3b80b59cfc5524e03a1",
+    "checks": [
+      "fa18_native_artifact_policy",
+      "fa18_native_mission_3_sequence",
+      "fa18_native_mission_4_sequence",
+      "fa18_native_mission_5_sequence",
+      "fa18_native_mission_8_sequence",
+      "fa18_native_final_patrol_diagnostic",
+      "fa18_native_frontend",
+      "fa18_native_artifact_cleanup"
+    ]
+  },
+  "debug": {
+    "test_sha256": "5de12b7c91aec8aac79be30b93996e784bd19a914205bc63665ed2a521cf6cb6",
+    "runner_sha256": "752102db54e15bfd14bf0aac508f93f79a86f3c5a86b57a08a5e12ce27151fc6",
+    "comparison_sha256": "1b0acbe71486afd5820d2de90b5cbf1630ec7d7a31a6b278c504d040efbfbf55",
+    "checks": [
+      "fa18_native_artifact_policy",
+      "fa18_native_mission_8_sequence",
+      "fa18_native_artifact_cleanup"
+    ]
+  },
+  "passing_raw_ram_retained": false,
+  "debug_release_inputs_saved_bytes_and_outcomes_equal": true,
+  "remaining": [
+    "Earned final-mission availability",
+    "Successful internal modes six/seven",
+    "Independent original complete-flight parity",
+    "Remaining caller contracts and encountered deferred decompilations",
+    "Typed state, audio and wider performance audits"
+  ]
+}
