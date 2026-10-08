@@ -72,6 +72,8 @@ Reports are in `build/native-cmake/native/mission-{3,5}-sequence-check/`.
 Retained checkpoints and consumed keys are
 `analysis/figures/native_mission_{three,five}_sequence_checkpoint.json` and
 `tools/native/fixtures/mission-{three,five}-sequence.e9k`.
+Checkpoints distinguish the captured Windows CRLF input hash from the retained
+Git LF fixture hash; their replay events are identical.
 
 Debug and Release fixture builds pass. All five selected CTests pass in each
 configuration: both existing mission success gates, both new sequence gates

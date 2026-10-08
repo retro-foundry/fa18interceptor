@@ -373,5 +373,7 @@
     "build/native-flight/mission-sequence-debug-ctest.log",
     "build/native-flight/mission-sequence-final-release-ctest.log"
   ],
-  "peak_raw_capture_mib": 412
+  "peak_raw_capture_mib": 412,
+  "retained_input_sha256": "09dbdbd52e4d1db38adad3c3c6a8f7dd759beeff841d72298d90332ae3762f2b",
+  "input_hash_scope": "input_sha256 hashes captured Windows CRLF bytes; retained_input_sha256 hashes the Git LF fixture with identical events"
 }
