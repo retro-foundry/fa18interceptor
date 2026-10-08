@@ -1,14 +1,19 @@
 # Current playable port handoff
 
-Latest diagnostics checkpoint (2026-10-08): the fixed normal-input mode-eight
-gun approach matches 59 input/stage intervals and 277 sampled bodies against
-original compared RAM/drawing, including 32 active gun-effect bodies. This
-flight records zero gun hits; gun hit and shoot-down acceptance remain open.
-The failed experimental feedback pilot was removed. Read-only telemetry and
-strict gun-hit observation stay in the validation fixture. Debug/Release fixture
-builds and four affected CTests pass; playable behavior is unchanged. See `analysis/native_gun_approach_checkpoint.md` and the restart
-summary in `NEW_PORT_HANDOFF.md`. Radar/infrared acceptance below remains valid;
-full missions and the complete-port goal remain unfinished.
+Latest gun damage acceptance (2026-10-08): mode eight's first gun hit matches
+317 input/stage intervals and 181 sampled bodies against original compared
+RAM/drawing. The exact hit advances the gun log counter 0 -> 1 and enemy ten's
+damage 0 -> 1. A validation-only pilot emits ordinary keys; no gameplay source
+or playable executable changes. Debug/Release fixture builds and five affected
+CTests pass. See `analysis/native_gun_hit_milestone.md` and `NEW_PORT_HANDOFF.md`.
+The extended gun-kill diagnostic observes three native hits and inactivation
+but fails its continuous original comparison at body 6540: placement cache
+C4F6DE is original $00C2 versus native $FFFF, with identical drawing. It remains
+a manual diagnostic, not shoot-down acceptance. Trace the actual early-expiry
+model accumulator producer next. The failed case is retained locally; passing
+RAM remains temporary. Radar/infrared acceptance below remains valid. Full
+missions and the complete-port goal remain unfinished. This supersedes the
+older gun-approach checkpoint's open-first-hit claim.
 
 Latest acceptance (2026-10-08): normal-input infrared shoot-down now passes
 impact, enemy expiry accounting and inactivation. All 634 consecutive bodies

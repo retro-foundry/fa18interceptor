@@ -2,8 +2,8 @@
 
 ## Current restart summary — 2026-10-08
 
-The active playable runner is `fa18_native`. The latest validated code is
-`373feace` before the gun diagnostics checkpoint on `coverage-accounting`.
+The active playable runner is `fa18_native`. This checkpoint follows
+`5aea11c6` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `7c6e8a527a834d9cf78fbca2725392c03a41aebdd94214bb134de1fda2ea2c01`.
@@ -11,13 +11,20 @@ Untracked `.vscode/` is user-owned and must remain untouched.
 
 Recent completed batches:
 
-- Gun diagnostics (2026-10-08): 59 input/stage intervals and 277 sampled bodies
+- Gun damage hit (2026-10-08): 317 input/stage intervals and 181 sampled bodies
+  match original compared RAM/drawing, including the exact first gun hit.
+  Pilot-log +60 and enemy ten's damage advance 0 -> 1. A validation-only pilot
+  reads positions and emits ordinary pitch/rudder/fire keys; no gameplay
+  source or playable executable changes. The gun-hit test is registered in
+  CTest. See `analysis/native_gun_hit_milestone.md` for evidence and the open
+  gun-kill mismatch below.
+- `5aea11c6`: gun diagnostics (2026-10-08): 59 input/stage intervals and 277 sampled bodies
   match original compared RAM/drawing, including 32 active gun-effect bodies.
   The fixed ordinary-input flight records zero gun hits. The failed feedback
   pilot was removed; read-only telemetry and strict gun-hit observation remain
   in the validation fixture. No playable behavior changes. See
-  `analysis/native_gun_approach_checkpoint.md`. Gun hit/shoot-down acceptance
-  remains open.
+  `analysis/native_gun_approach_checkpoint.md`. Its open-first-hit claim is
+  superseded by the newer gun damage checkpoint.
 - `373feace`: infrared acceptance (2026-10-08): normal-input missile impact, expiry
   accounting and inactivation pass 55 input/stage intervals and 802 bodies,
   including every body in the 634-body destruction interval. The selected
@@ -35,11 +42,12 @@ Recent completed batches:
   verify all seven streams and wrap. Mode six naturally loses three aircraft,
   exhausts resets, returns to the menu and relaunches Free Flight.
 
-Native Debug and Release fixture builds pass. All four gun diagnostics
-regression checks pass: radar kill, infrared kill, frontend and artifact cleanup.
-Results are recorded in
-`analysis/figures/native_gun_approach_checkpoint.json`; the local log is
-`build/native-flight/gun-checkpoint-ctest.log`. The preceding infrared Release
+Native Debug and Release fixture builds pass. All five affected checks pass:
+gun hit, radar kill, infrared kill, frontend and artifact cleanup.
+Results are recorded in `analysis/figures/native_gun_hit_checkpoint.json`;
+the local log is `build/native-flight/gun-hit-checkpoint-ctest.log`.
+The preceding gun approach checkpoint is
+`analysis/figures/native_gun_approach_checkpoint.json`. The preceding infrared Release
 run passed all four; its checkpoint is
 `analysis/figures/native_infrared_kill_checkpoint.json`.
 The prior radar Release run passed eight
@@ -50,17 +58,27 @@ frontend and artifact cleanup. Evidence and executable hashes are in
 The comparisons execute original instructions from native before-states;
 they do not establish an independent complete original mission replay.
 
-Next work is normal-input gun shoot-down acceptance, then complete
-successful mission sequences and independent full-flight comparisons. Trace
-the actual native caller and original rule before changing behavior; a missing
-proof alone does not establish a gameplay bug. Remaining callback contracts,
+Next work is the observed gun shoot-down mismatch. The manual command
+`python tools/native/check_mode_two.py --mode 8 --kill --gun --out build/native-flight/gun-kill`
+observes three native hits and expiry/inactivation across 101 consecutive bodies
+but fails original comparison at body 6540 (ticks 14055–14058, saved tick 1138).
+The failed `frame.79.*.dat` case is retained in that output's `failure/` directory.
+Original placement cache C4F6DE is $00C2, native $FFFF; drawing matches.
+Trace `visit_followup_placements` -> scene `followup` ->
+`native_scene_placement` -> `aircraft_descriptor` -> `record_vertices` /
+`record_finish`, against C1F074/C1F8DE and the actual producer of -$7C(A6).
+The isolated model oracle seeds caller scratch and does not prove that producer
+in a complete frame. Do not seed native from reference RAM or exclude the cache
+word. Gun shoot-down acceptance is still open, and its failing probe is not a
+CTest acceptance gate. Then continue successful complete mission sequences and
+independent full-flight comparisons. Remaining callback contracts,
 typed game state, audio fidelity and visible-window/combat performance remain
 open. Preserve physics and source timers while allowing the user's native
 presentation cadence. The complete-port goal remains active.
 
 Builds and CTest automatically prune disposable artifacts against a 4 GiB
 budget; passing comparison RAM is deleted immediately. The latest cleanup left
-about 1.47 GiB of protected build files and small artifacts. Keep passing
+about 1.50 GiB of build files and small artifacts. Keep passing
 captures temporary and bounded; use `--keep-captures` only for deliberate
 debugging. Preserve sealed recordings and local media. Do not modify
 `scripts/check_native_build.py`, `scripts/native_frame_count.py` or

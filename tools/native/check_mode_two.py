@@ -28,9 +28,9 @@ def main():
     parser.add_argument('--combat', action='store_true', help='Mode-five through eight longer flight with manoeuvre-limit samples')
     parser.add_argument('--outcome', action='store_true', help='Mode-six normal-input failure, all three resets and menu return')
     parser.add_argument('--hit', action='store_true', help='Require a normal-input mode-eight weapon hit')
-    parser.add_argument('--kill', action='store_true', help='Normal-input mode-eight missile destruction and expiry accounting')
+    parser.add_argument('--kill', action='store_true', help='Normal-input mode-eight weapon destruction and expiry accounting')
     parser.add_argument('--missile', choices=('radar','infrared'), help='Missile for --hit/--kill (default: radar)')
-    parser.add_argument('--gun', action='store_true', help='Gun for --hit')
+    parser.add_argument('--gun', action='store_true', help='Gun for --hit/--kill')
     parser.add_argument('--gun-approach', action='store_true', help='Compare gun approach even when shots miss (diagnostic)')
     parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
@@ -43,8 +43,8 @@ def main():
         args.hit=True
     if args.missile and not args.hit:
         parser.error('--missile requires --hit or --kill')
-    if args.gun and (not args.hit or args.kill or args.missile):
-        parser.error('--gun requires --hit without --kill/--missile')
+    if args.gun and (not args.hit or args.missile):
+        parser.error('--gun requires --hit or --kill without --missile')
     args.missile='gun' if args.gun else args.missile or 'radar'
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
@@ -89,19 +89,43 @@ def check(args, work, capture_dir):
         assert len(hit_runs)==1 and (args.gun_approach or hit_runs[0][args.missile+'_hits']>0), exports
         hit_bodies=[item for item in bodies if item.get('hit_body')]
         if not args.gun_approach or hit_bodies:
-            assert len(hit_bodies)==1 and hit_bodies[0]['weapon']==hit_weapon, exports
+            assert len(hit_bodies)==(3 if args.gun and args.kill else 1), exports
+            assert all(item['weapon']==hit_weapon for item in hit_bodies), exports
             delta=(hit_bodies[0]['hits_after']-hit_bodies[0]['hits_before'])&0xffff
             assert delta>0 if args.gun else delta==1, exports
+        if args.gun and not args.gun_approach:
+            # First damage hit, not a destruction/kill claim. C266AE need not
+            # publish HISTORY_RECORD before its third-hit branch.
+            gun_targets=[record for record in hit_bodies[0]['records']
+                         if record['damage_before']!=record['damage_after']]
+            assert delta==1 and len(gun_targets)==1, hit_bodies[0]
+            target=gun_targets[0]
+            assert target['slot']!=0 and target['kind_before']&0xf0==0x10, target
+            assert target['flags_before']&0x1648==0x1040, target
+            assert target['flags_after']==target['flags_before'], target
+            assert target['damage_before']&15==0 and target['damage_after']&15==1, target
+            if args.kill:
+                for index, item in enumerate(hit_bodies):
+                    assert item['hits_before']==hit_bodies[0]['hits_before']+index, item
+                    assert item['hits_after']==item['hits_before']+1, item
+                    damaged=item['records'][target['slot']]
+                    assert damaged['damage_before']&15==index, damaged
+                    assert damaged['damage_after']&15==min(index+1,2), damaged
+                    assert damaged['kind_before']==damaged['kind_after']==target['kind_before'], damaged
+                    if index<2:
+                        assert damaged['flags_before']==damaged['flags_after'], damaged
+                    else:
+                        assert not damaged['flags_before']&0x600 and damaged['flags_after']&0x600, damaged
         if args.gun_approach:
             gun_samples=[item for item in exports if 'gun_samples' in item]
             assert len(gun_samples)==1 and gun_samples[0]['gun_samples']==32, exports
     if args.kill:
-        kills=[item for item in exports if item.get('missile_kill')]
+        kills=[item for item in exports if item.get('gun_kill' if args.gun else 'missile_kill')]
         assert len(kills)==1 and kills[0]['weapon']==hit_weapon and kills[0]['started'] and kills[0]['accounted'] and kills[0]['inactive'], exports
         transitions=[item for item in exports if item.get('kill_transition')]
         start=hit_bodies[0]['body_serial']
         finish=transitions[-1]['body_serial']
-        assert not transitions[-1]['flags']&0x40 and finish-start+1==kills[0]['expiry_bodies'], kills
+        assert not transitions[-1]['flags']&0x40 and finish-start+1==kills[0]['damage_to_inactivation_bodies' if args.gun else 'expiry_bodies'], kills
         window={item['body_serial'] for item in bodies if start<=item['body_serial']<=finish}
         assert window==set(range(start,finish+1)), 'Missing body in destruction-to-inactivation interval'
         assert any(item['lifetime']==0 and item['enemy_expiries']==kills[0]['enemy_expiries_before']+1 for item in transitions), transitions
@@ -244,6 +268,11 @@ def check(args, work, capture_dir):
             'adf_sha256':hashlib.sha256((ROOT/'local/media/fa18.adf').read_bytes()).hexdigest(),
             'reference_scope':'Original instructions from native before-states, including exact hit body; not an independent complete mission or verified kill',
         }
+        if args.gun and not args.gun_approach:
+            report['target']=gun_targets[0]
+            report['gun_damage_hit_verified']=True
+            report['gun_shoot_down_verified']=args.kill
+            report['gun_damage_bodies']=hit_bodies
         if args.gun_approach:
             outcome='compares the gun approach and its observed hit/miss result'
             report['scenario']='normal-input-mode-eight-gun-approach'
@@ -251,11 +280,11 @@ def check(args, work, capture_dir):
             report['reference_scope']='Original instructions from sampled native before-states, including 32 active-projectile bodies; no gun shoot-down or independent complete mission established'
         (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
     if args.kill:
-        outcome=f'destroys an enemy aircraft with a {args.missile} missile, counts its expiry and observes its inactivation'
+        outcome=f'destroys an enemy aircraft with '+('three gun hits' if args.gun else f'a {args.missile} missile')+', counts its expiry and observes its inactivation'
         report['scenario']=f'normal-input-mode-eight-{args.missile}-kill'
         report['kill']=kills[0]
         report['kill_transitions']=[item for item in exports if item.get('kill_transition')]
-        report['reference_scope']='Original instructions from native before-states, including hit and continuous destruction-to-inactivation bodies; not an independent complete mission'
+        report['reference_scope']='Original instructions from native before-states, including '+('three damage hits and continuous first-damage-to-inactivation bodies' if args.gun else 'hit and continuous destruction-to-inactivation bodies')+'; not an independent complete mission'
         (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f'Mode {args.mode} {outcome}; {len(entries)} actual input/stage intervals and '
           f'{len(bodies)} frame bodies match compared original RAM/display')

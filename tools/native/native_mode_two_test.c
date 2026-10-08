@@ -29,7 +29,7 @@ typedef struct {
     unsigned hit_probe;
     unsigned gun_approach,gun_bodies;
     GunDiscovery gun;
-    unsigned kill_probe,kill_started,kill_accounted,kill_inactive,kill_bodies;
+    unsigned kill_probe,kill_started,kill_destroyed,kill_accounted,kill_inactive,kill_bodies;
     gaddr kill_record;
     uint8_t kill_baseline,kill_count;
     uint16_t kill_last_flags;
@@ -68,9 +68,9 @@ static int inside_region(gaddr region,gaddr record) {
 static unsigned hit_counter_offset(unsigned weapon) {
     return weapon==3?60u:60u+4u*weapon; /* C266AE gun; C26EBE missile counters. */
 }
-static void write_hit_snapshot(const ModeRun *run,const char *suffix,const uint8_t *data) {
+static void write_hit_snapshot(const ModeRun *run,const char *tag,const char *suffix,const uint8_t *data) {
     char path[4096];
-    const int length=snprintf(path,sizeof path,"%s.hit.%s.dat",run->prefix,suffix);
+    const int length=snprintf(path,sizeof path,"%s.%s.%s.dat",run->prefix,tag,suffix);
     if(length<0 || length>=(int)sizeof path) abort();
     FILE *file=fopen(path,"wb");
     if(!file) {perror(path);abort();}
@@ -85,7 +85,8 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     if(boundary==NATIVE_FRAME_BODY_BEGIN && run->weapon==3) gun_discovery_trace(&run->gun,game->ticks);
     /* A single bounded in-memory before-state while selected player ordnance
      * is active. Export only the actual collision body, never seed gameplay. */
-    if(run->hit_probe && !run->hit_captured && boundary==NATIVE_FRAME_BODY_BEGIN) {
+    if(run->hit_probe && (!run->hit_captured ||
+       (run->weapon==3 && run->kill_probe && !run->kill_destroyed)) && boundary==NATIVE_FRAME_BODY_BEGIN) {
         run->hit_tracking=0;
         if(run->weapon!=3) for(unsigned slot=1;slot<=3;++slot) {
             const gaddr projectile=CONTROL_RECORDS+slot*CONTROL_RECORD_BYTES;
@@ -357,26 +358,45 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->hit_tracking=0;
         const uint16_t hits=rd_u16(run->hit_log+hit_counter_offset(run->weapon));
         if(hits!=run->hit_before_count) {
-            if(run->kill_probe) {
-                const unsigned index=rd_u16(0xc4fdd2u);
+            if(run->kill_probe && !run->kill_started) {
+                unsigned index=rd_u16(0xc4fdd2u);
+                if(run->weapon==3) {
+                    unsigned changed=0;
+                    for(unsigned slot=1;slot<16;++slot) {
+                        const gaddr record=CONTROL_RECORDS+slot*512u;
+                        const uint8_t *before=run->hit_before+0x80000+record-0xc00000;
+                        if(before[60]!=rd_u8(record+60)) {index=slot*512u;++changed;}
+                    }
+                    if(changed!=1) {
+                        fputs("First gun hit did not identify one damaged record\n",stderr);abort();
+                    }
+                }
                 if(index>=0x2000u || (index&511u)) abort();
                 run->kill_record=CONTROL_RECORDS+index;
                 const uint8_t *before=run->hit_before+0x80000+run->kill_record-0xc00000;
                 const unsigned flags=before[0]*256u+before[1];
-                if((flags&0x1048u)!=0x1040u || (before[98]&0xf0u)!=0x10u ||
-                   (rd_u16(run->kill_record)&0x600u)!=0x400u || rd_s16(run->kill_record+76)!=15) {
-                    fputs("Missile hit did not start enemy aircraft destruction\n",stderr);abort();
+                if((flags&0x1648u)!=0x1040u || (before[98]&0xf0u)!=0x10u ||
+                   (run->weapon==3?
+                    (before[60]&15u)!=0 || (rd_u8(run->kill_record+60)&15u)!=1:
+                    (rd_u16(run->kill_record)&0x600u)!=0x400u || rd_s16(run->kill_record+76)!=15)) {
+                    fputs("Weapon hit did not reach its expected enemy damage/destruction path\n",stderr);abort();
                 }
                 run->kill_started=1;
+                run->kill_destroyed=run->weapon!=3;
                 run->kill_baseline=run->hit_before[0x80000+0x458ab];
                 run->kill_count=run->kill_baseline;
             }
+            if(run->kill_probe && run->weapon==3 && (rd_u16(run->kill_record)&0x600u))
+                run->kill_destroyed=1;
+            char tag[32];
+            if(run->hit_captured) snprintf(tag,sizeof tag,"gun-hit-%u",run->hit_captured+1);
+            else strcpy(tag,"hit");
             /* C4FDD2 need not change on a first gun hit. */
             char impact_record[16];
             snprintf(impact_record,sizeof impact_record,"%u",rd_u16(0xc4fdd2u));
-            write_hit_snapshot(run,"before",run->hit_before);
-            printf("{\"capture\":\"hit\",\"hit_body\":true,\"stage\":\"%06X\",\"body_serial\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s,\"pilot_log\":%u,\"weapon\":%u,\"hits_before\":%u,\"hits_after\":%u,\"impact_record\":%s,\"records\":[",
-                run->hit_stage,run->hit_serial,run->hit_before_tick,game->ticks,run->hit_saved_tick,
+            write_hit_snapshot(run,tag,"before",run->hit_before);
+            printf("{\"capture\":\"%s\",\"hit_body\":true,\"stage\":\"%06X\",\"body_serial\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s,\"pilot_log\":%u,\"weapon\":%u,\"hits_before\":%u,\"hits_after\":%u,\"impact_record\":%s,\"records\":[",
+                tag,run->hit_stage,run->hit_serial,run->hit_before_tick,game->ticks,run->hit_saved_tick,
                 boundary==NATIVE_FRAME_OWNER_EXIT?"true":"false",run->hit_log,run->weapon,run->hit_before_count,hits,
                 run->weapon==3?"null":impact_record);
             for(unsigned slot=0;slot<16;++slot) {
@@ -390,7 +410,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             puts("]}");
             memcpy(run->hit_before,game->storage.buffers,0x80000);
             memcpy(run->hit_before+0x80000,game->storage.source,0x80000);
-            write_hit_snapshot(run,"after",run->hit_before);
+            write_hit_snapshot(run,tag,"after",run->hit_before);
             ++run->hit_captured;
         }
     }
@@ -405,7 +425,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             run->kill_last_flags=flags;run->kill_last_lifetime=lifetime;
         }
         ++run->kill_bodies;
-        if(!(flags&0x400u) && (uint8_t)(count-run->kill_baseline)==1) run->kill_accounted=1;
+        if(run->kill_destroyed && !(flags&0x400u) && (uint8_t)(count-run->kill_baseline)==1) run->kill_accounted=1;
         if(run->kill_accounted && !(flags&0x40u)) run->kill_inactive=1;
         run->kill_count=count;
     }
@@ -423,6 +443,7 @@ int main(int argc,char **argv) {
         else if(!strcmp(argv[6],"kill") && run.mode==8) {run.flight=2;run.weapon=2;run.hit_probe=1;run.kill_probe=1;}
         else if(!strcmp(argv[6],"infrared-hit") && run.mode==8) {run.flight=2;run.weapon=1;run.hit_probe=1;}
         else if(!strcmp(argv[6],"infrared-kill") && run.mode==8) {run.flight=2;run.weapon=1;run.hit_probe=1;run.kill_probe=1;}
+        else if(!strcmp(argv[6],"gun-kill") && run.mode==8) {run.flight=2;run.weapon=3;run.hit_probe=1;run.kill_probe=1;}
         else if(!strcmp(argv[6],"gun-hit") && run.mode==8) {run.flight=2;run.weapon=3;run.hit_probe=1;}
         else if(!strcmp(argv[6],"gun-approach") && run.mode==8) {run.flight=2;run.weapon=3;run.hit_probe=1;run.gun_approach=1;}
         else if(!strcmp(argv[6],"outcome") && run.mode==6) { run.flight=2;run.outcome=1; }
@@ -486,12 +507,16 @@ int main(int argc,char **argv) {
             /* Mode-eight's sustained combat probe needs a bounded pull-up;
              * holding it for 500 ticks now naturally ends this flight early.
              * Keep its long-flight guards and guide it with ordinary keys. */
-            const unsigned pitch_duration=run.flight==2 && run.mode==8?100u:durations[1];
+            const unsigned pitch_duration=run.hit_probe && run.weapon==3 && !run.gun_approach?20u:
+                run.flight==2 && run.mode==8?100u:durations[1];
             for(unsigned i=0;i<8;++i) {
                 if(run.hit_probe && (i==2 || i==3)) continue;
+                if(run.hit_probe && run.weapon==3 && !run.gun_approach && (i==5 || i==7)) continue;
                 if(game->ticks==times[i]) native_frontend_event(game,keys[i],1);
                 if(game->ticks==times[i]+(i==1?pitch_duration:durations[i])) native_frontend_event(game,keys[i],0);
             }
+            if(run.hit_probe && run.weapon==3 && !run.gun_approach)
+                gun_discovery_tick(&run.gun,game,run.hit_captured!=0);
         }
         if(run.outcome && game->ticks>=20000 && rd_u32(STAGE_CALLBACK)==0xc10dae &&
            rd_u8(POSTFLIGHT_RESET_REMAINING)<=3 &&
@@ -578,7 +603,11 @@ int main(int argc,char **argv) {
     if(run.flight) {
         /* In mode five this input leaves the player stationary while the
          * other aircraft fly. Require observed aircraft motion in that case. */
-        if(!run.flight_baseline || (run.mode==5?!(run.aircraft_moved&~1u):!run.moved) || game->scene_frames<5000 ||
+        /* Gun impact is a separate acceptance scenario. Its 2,000-frame
+         * checkpoints include the firing pass and natural postflight; existing
+         * sustained combat and missile probes retain their 5,000-frame guard. */
+        const unsigned minimum_frames=run.hit_probe && run.weapon==3 && !run.gun_approach?2000u:5000u;
+        if(!run.flight_baseline || (run.mode==5?!(run.aircraft_moved&~1u):!run.moved) || game->scene_frames<minimum_frames ||
            (run.flight==2 && (rd_u8(RECORDER_MODE)!=0 || (run.samples&7)!=7)) ||
            (run.flight==1 && (!run.spawns || !run.zone_exits || !(run.npc_missiles&(1u<<13))))) {
             fprintf(stderr,"Flight failed: baseline=%d moved=%d samples=%X returned=%d recorder=%u spawns=%X exits=%X missiles=%X scene=%u position=%u,%u,%u initial=%u,%u,%u\n",
@@ -597,17 +626,17 @@ int main(int argc,char **argv) {
             fputs("Gun approach did not capture 32 active-projectile bodies\n",stderr);goto done;
         }
     }
-    if(run.hit_probe && !run.gun_approach && (!run.hit_counts[run.weapon==3?0:run.weapon] || run.hit_captured!=1)) {
+    if(run.hit_probe && !run.gun_approach && (!run.hit_counts[run.weapon==3?0:run.weapon] || run.hit_captured!=(run.weapon==3 && run.kill_probe?3u:1u))) {
         fprintf(stderr,"No normal-input selected weapon hit: gun=%u infrared=%u radar=%u target=%u launched=%u removed=%u\n",
             run.hit_counts[0],run.hit_counts[1],run.hit_counts[2],rd_u16(TARGET_RECORD),run.launched,run.removed);goto done;
     }
     if(run.kill_probe) {
-        printf("{\"missile_kill\":true,\"weapon\":%u,\"started\":%s,\"accounted\":%s,\"inactive\":%s,\"record\":%u,\"expiry_bodies\":%u,\"enemy_expiries_before\":%u,\"enemy_expiries_after\":%u}\n",
-            run.weapon,
-            run.kill_started?"true":"false",run.kill_accounted?"true":"false",run.kill_inactive?"true":"false",
-            run.kill_record,run.kill_bodies,run.kill_baseline,run.kill_count);
-        if(!run.kill_accounted || !run.kill_inactive) {
-            fputs("Missile destruction did not complete accounting/inactivation\n",stderr);goto done;
+        printf("{\"%s\":true,\"weapon\":%u,\"started\":%s,\"accounted\":%s,\"inactive\":%s,\"record\":%u,\"%s\":%u,\"enemy_expiries_before\":%u,\"enemy_expiries_after\":%u}\n",
+            run.weapon==3?"gun_kill":"missile_kill",run.weapon,
+            run.kill_destroyed?"true":"false",run.kill_accounted?"true":"false",run.kill_inactive?"true":"false",
+            run.kill_record,run.weapon==3?"damage_to_inactivation_bodies":"expiry_bodies",run.kill_bodies,run.kill_baseline,run.kill_count);
+        if(!run.kill_destroyed || !run.kill_accounted || !run.kill_inactive) {
+            fputs("Weapon destruction did not complete accounting/inactivation\n",stderr);goto done;
         }
     }
     if(run.outcome) {

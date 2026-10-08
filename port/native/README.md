@@ -1,11 +1,15 @@
 # Native port runner
 
-The validation-only gun approach now matches 59 input/stage intervals and 277
-sampled bodies against original compared RAM/drawing, including 32 active gun
-effect bodies. The ordinary-input flight records zero gun hits. Read-only
-telemetry and strict gun-hit observation are available in the fixture; the
-playable game is unchanged. See `../../analysis/native_gun_approach_checkpoint.md`.
-Gun hits/shoot-downs and full successful missions remain open.
+The mode-eight first gun damage hit now matches 317 input/stage intervals and
+181 sampled bodies against original compared RAM/drawing. The exact hit advances
+the gun log counter and enemy ten's damage from zero to one. A validation-only
+pilot emits ordinary keyboard events; the playable game is unchanged.
+Debug/Release fixture builds and five affected CTests pass. See
+`../../analysis/native_gun_hit_milestone.md`. Gun shoot-down acceptance remains
+open: the continuous manual `--kill --gun` probe finds an early-expiry placement
+return mismatch at C4F6DE, original $00C2 versus native $FFFF, with identical
+drawing. The failing case is retained locally; this probe is not registered
+in CTest. Full successful missions and the complete-port goal remain open.
 
 Mode eight now also has a required normal-input infrared shoot-down: 55
 input/stage intervals and 802 bodies match original compared RAM/drawing,
