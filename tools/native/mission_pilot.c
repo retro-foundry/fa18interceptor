@@ -91,16 +91,19 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
        rd_u8(PLAYER_PHASE)==0xff || rd_u8(PLAYER_PHASE)==1) return 0;
     unsigned selected=0;
     double target_distance_squared=0;
-    for(unsigned slot=8;slot<=(pilot->escort_flight?12u:10u);slot+=2) {
+    for(unsigned slot=pilot->final_flight?4u:8u;slot<=(pilot->final_flight?14u:pilot->escort_flight?12u:10u);slot+=2) {
         const gaddr record=CONTROL_RECORDS+512*slot;
         if((rd_u16(record)&0x1648u)!=0x1040u) continue;
+        if(pilot->final_flight && (rd_u8(record+98)&0xf0u)!=0x10u) continue;
         double square=0;
         for(unsigned i=0;i<3;++i) {
             const double d=(rd_s32(record+20+4*i)-rd_s32(CONTROL_RECORDS+20+4*i))/256.0;
             square+=d*d;
         }
-        if(slot==pilot->target) {target_distance_squared=square;selected=slot;break;}
-        if(!selected || (pilot->mode==4 && square<target_distance_squared)) {
+        if(slot==pilot->target && (!pilot->final_flight || square<20000.0*20000.0)) {
+            target_distance_squared=square;selected=slot;break;
+        }
+        if(!selected || ((pilot->mode==4 || pilot->final_flight) && square<target_distance_squared)) {
             target_distance_squared=square;selected=slot;
         }
     }
@@ -109,7 +112,8 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     const double range=sqrt(target_distance_squared),speed=rd_s16(CONTROL_RECORDS+110)/64.0;
     /* Input aim for the regional closing pass uses a shorter intercept lead;
      * the actual projectile continues to use original motion/tracking rules. */
-    const double time=clamp(range/(pilot->escort_flight && selected==12?198+speed:fmax(speed,70)),0,400);
+    const int final_heat=pilot->final_flight && (rd_u8(CONTROL_RECORDS+99)&0xf0u)==0x30u;
+    const double time=clamp(range/(final_heat || (pilot->escort_flight && selected==12)?198+speed:fmax(speed,70)),0,400);
     double delta[3],local[3]={0};
     for(unsigned i=0;i<3;++i)
         delta[i]=(rd_s32(target+20+4*i)-rd_s32(CONTROL_RECORDS+20+4*i))/256.0+
@@ -122,8 +126,8 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     /* Mode-four input keeps pitch relative to the current heading while
      * turning toward higher enemy aircraft; the accepted mode-five keys
      * retain their existing heading choice. */
-    const double pitch_heading=pilot->mode==4?yaw:wanted_yaw;
-    const double pitch_slope=pilot->mode==4?
+    const double pitch_heading=pilot->mode==4 || pilot->final_flight?yaw:wanted_yaw;
+    const double pitch_slope=pilot->mode==4 || pilot->final_flight?
         clamp(delta[1]/6000-rd_s32(CONTROL_RECORDS+66)/256.0/fmax(speed,30),-0.12,0.12):
         clamp(delta[1]/fmax(horizontal,100),-0.05,0.05);
     const double direction[3]={-sin(pitch_heading),fabs(yaw_error)>0.3?0:
@@ -144,7 +148,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
     held(pilot,game,&pilot->rudder,yaw_control>0.006?46:yaw_control< -0.006?44:0);
     held(pilot,game,&pilot->pitch,pitch_control>0.006?274:pitch_control< -0.006?273:0);
-    if(pilot->mode==4 && pilot->missile_target==selected && game->ticks>pilot->missile_tick+200) {
+    if((pilot->mode==4 || pilot->final_flight) && pilot->missile_target==selected && game->ticks>pilot->missile_tick+200) {
         int active=0;
         for(unsigned slot=1;slot<=3;++slot) {
             const gaddr projectile=CONTROL_RECORDS+512*slot;
@@ -156,7 +160,11 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
      * input choices; original launch/tracking/damage rules decide the result. */
     const int close_aim=pilot->mode==4 && !pilot->escort_flight;
     const double launch_range=close_aim?10000:20000;
-    const int launch=rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<launch_range &&
+    const uint8_t weapon=rd_u8(CONTROL_RECORDS+99)&0xf0u,stock=rd_u8(CONTROL_RECORDS+95);
+    const int final_ready=!pilot->final_flight || (weapon==0x20 && (stock&0xf0u)) ||
+        (weapon==0x30 && (stock&15u));
+    const int launch=final_ready && rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<launch_range &&
+        (!(pilot->final_flight && weapon==0x30) || (rd_u8(SHOOT_CUE) && range<10000 && fabs(yaw_error)<0.1)) &&
         (!(pilot->escort_flight && selected==12) || rd_u8(SHOOT_CUE)) &&
         fabs(x)<(close_aim?0.2:0.6) && fabs(y)<(close_aim?0.15:0.3) && pilot->missile_target!=selected;
     if(launch) {
@@ -166,7 +174,8 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
                 game->ticks,selected,range,yaw_error,rd_u8(CONTROL_RECORDS+95),rd_u8(CONTROL_RECORDS+56));
     }
     held(pilot,game,&pilot->fire,pilot->missile_target==selected &&
-        game->ticks-pilot->missile_tick<(pilot->escort_flight?12u:4u)?32:0);
+        game->ticks-pilot->missile_tick<(pilot->final_flight && weapon==0x30?1u:
+            pilot->escort_flight || pilot->final_flight?12u:4u)?32:0);
     return 1;
 }
 /* Return flight input for the mode-five validation pilot. Keep heading
@@ -174,7 +183,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
 static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
     if(!pilot->complete_flight || (!pilot->objective &&
        rd_u8(PLAYER_PHASE)!=0xff && rd_u8(PLAYER_PHASE)!=1)) return 0;
-    if(pilot->escort_flight && pilot->return_input_phase!=rd_u8(PLAYER_PHASE)) {
+    if((pilot->escort_flight || pilot->final_flight) && pilot->return_input_phase!=rd_u8(PLAYER_PHASE)) {
         /* The escort's result camera clears input while changing FF to one.
          * Release/repress ordinary controls when the player regains the view. */
         held(pilot,game,&pilot->rudder,0);held(pilot,game,&pilot->pitch,0);
@@ -271,6 +280,16 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         }
     }
     if(!pilot->started) return;
+    if(pilot->final_flight && !pilot->objective && game->ticks>pilot->started+750) {
+        const uint8_t weapon=rd_u8(CONTROL_RECORDS+99)&0xf0u;
+        const uint8_t stock=rd_u8(CONTROL_RECORDS+95);
+        const uint8_t wanted=(stock&0xf0u)?0x20u:(stock&15u)?0x30u:0x10u;
+        if(weapon!=wanted && game->ticks>pilot->weapon_press+20) {
+            held(pilot,game,&pilot->fire,0);
+            mission_pilot_event(pilot,game,13,1);pilot->weapon_press=game->ticks;
+            pilot->missile_target=0;
+        }
+    }
     if(pilot->phase==2 && (rd_u8(CONTROL_RECORDS+3)&0x80)) pilot->phase=3;
     if(pilot->phase==3) {
         held(pilot,game,&pilot->pitch,0);held(pilot,game,&pilot->roll,0);
@@ -281,7 +300,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         }
     }
     if(!pilot->objective && (rd_s16(SELECTED_RECORD)<0 ||
-       ((pilot->mode==4 || pilot->mode==5) && rd_s16(SELECTED_RECORD)!=(int)(pilot->target*512))) &&
+       ((pilot->mode==4 || pilot->mode==5 || pilot->final_flight) && rd_s16(SELECTED_RECORD)!=(int)(pilot->target*512))) &&
        game->ticks>pilot->target_press+200) {
         mission_pilot_event(pilot,game,116,1);pilot->target_press=game->ticks;
     }

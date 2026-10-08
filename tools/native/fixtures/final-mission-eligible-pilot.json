@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "scenario": "Existing mode-eight eligibility-only fixture: original disk pilot plus availability byte 25 set to one, saved and reopened through the original loader",
+  "source": "tools/native/native_mode_two_test.c mode-eight preflight fixture",
+  "config_hex": "00010002000105000000048b00000000000000000001010100010000000052004f00494500000000000000000000000000000000000000030003000f000000070004000100010000000000000000",
+  "config_sha256": "29feeb30cecce09afb651b9ea87be6f09a742f4c9e15cb1f6744347f1f836a8e",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "mission_availability_earned": false,
+  "native_flight_state_seeded": false
+}

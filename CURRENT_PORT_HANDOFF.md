@@ -1,5 +1,23 @@
 # Current playable port handoff
 
+Latest final-mission diagnostic (2026-10-08): the original aircraft-expiry
+predicates are traced through C25B66/C25BEE and the mode-eight C0A364 scheduler.
+Ordinary keys destroy three patrol aircraft: expiry count 0 -> 3 against this
+fixture's quota four. All 24 input/stage intervals and 120 sampled bodies match
+original compared RAM/drawing, including three complete 20-body hit/expiry
+windows. The playable runner replays all 2,004 events; its captured RAM agrees
+on counters, phase, hits and completions. No objective, completion or config
+write is accepted. The saved-pilot availability fixture is explicitly unearned;
+flight state is never seeded. The serial gate is
+`fa18_native_final_patrol_diagnostic`. Gameplay and comparison masks are
+unchanged. Fourth destruction, final objective/landing/save/menu wrap, earned
+availability and independent complete-flight parity remain open. See
+`analysis/native_final_mission_completion_context.md` and its checkpoint.
+Debug/Release fixture builds pass. Six selected Release checks and three Debug
+checks pass, including the existing three mission sequences. Input and outcome
+hashes agree across configurations; passing RAM is removed. The playable
+executable is unchanged and the build cache remains 2.00 GiB within its budget.
+
 Latest mission-four sequence acceptance (2026-10-08): ordinary keys from the
 earned region pilot log shoot down record 8, complete the escort objective,
 return to the carrier, capture the wire, stop, save, finish result messages,

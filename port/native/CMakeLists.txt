@@ -121,6 +121,13 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                     --out ${CMAKE_CURRENT_BINARY_DIR}/mission-${mission_mode}-sequence-check)
         set_tests_properties(fa18_native_mission_${mission_mode}_sequence PROPERTIES RUN_SERIAL TRUE)
     endforeach()
+    add_test(NAME fa18_native_final_patrol_diagnostic
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_final_patrol.py
+                --test $<TARGET_FILE:fa18_native_mission_success_test>
+                --runner $<TARGET_FILE:fa18_native>
+                --timeout $<IF:$<CONFIG:Debug>,90,60>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/final-patrol-diagnostic-check)
+    set_tests_properties(fa18_native_final_patrol_diagnostic PROPERTIES RUN_SERIAL TRUE)
     set_tests_properties(fa18_native_mission_three_success fa18_native_mission_four_combat_reset fa18_native_mission_five_combat_reset
         fa18_native_mission_five_forced_return fa18_native_mission_five_objective
         fa18_native_mission_five_success

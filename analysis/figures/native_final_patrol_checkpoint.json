@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-08",
+  "scenario": "final-mission-three-patrol-destructions-below-quota",
+  "mission_success_accepted": false,
+  "mission_availability_earned": false,
+  "native_flight_state_seeded": false,
+  "reference_scope": "Original instructions from native before-states; independent complete-flight parity remains open",
+  "input_stage_intervals": 24,
+  "sampled_bodies": 120,
+  "counter_windows": [
+    {
+      "slot": 10,
+      "hit_body": 6353,
+      "expiry_body": 6368,
+      "compared_bodies": 20
+    },
+    {
+      "slot": 12,
+      "hit_body": 6758,
+      "expiry_body": 6773,
+      "compared_bodies": 20
+    },
+    {
+      "slot": 8,
+      "hit_body": 8013,
+      "expiry_body": 8028,
+      "compared_bodies": 20
+    }
+  ],
+  "final": {
+    "diagnostic_end": true,
+    "mode": 8,
+    "phase": 0,
+    "tick": 21000,
+    "crash_resets": 0,
+    "completions_before": 3,
+    "completions_after": 3,
+    "stage": "C10DAE"
+  },
+  "status": {
+    "final_mission_status": true,
+    "admitted": 4,
+    "expiries": 3,
+    "objective": false,
+    "record_14_kind": 32,
+    "record_14_flags": 16476
+  },
+  "canonical_counters": {
+    "admitted": 4,
+    "expiries": 3,
+    "phase": 0,
+    "completions": 3,
+    "radar_hits": 3,
+    "infrared_hits": 5,
+    "record_14_kind": 32,
+    "record_14_flags": 16476
+  },
+  "canonical_host_events": 2004,
+  "source_config_writes": 0,
+  "input_sha256_lf": "e41574e9e2d3822dc2ca5ae3ecf73a82dba581f7e10cfd3b2b393dcb6f0b25a8",
+  "initial_config_sha256": "29feeb30cecce09afb651b9ea87be6f09a742f4c9e15cb1f6744347f1f836a8e",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "canonical_playable_sha256": "24c84246d78e72afdc1f8aa876aac0a1fe1dae191863adead9ac069b877536de",
+  "release": {
+    "test_sha256": "15f5764e87344e7e0b75c199324071e49e2d7597157b462c486ed2c4f0cf6bc0",
+    "runner_sha256": "24c84246d78e72afdc1f8aa876aac0a1fe1dae191863adead9ac069b877536de",
+    "comparison_sha256": "a0df5940398a56ae09ad9aa9d19e721ce520f2221f53d3e32b009411cbd1ceff",
+    "checks": [
+      "fa18_native_final_patrol_diagnostic",
+      "fa18_native_mission_3_sequence",
+      "fa18_native_mission_4_sequence",
+      "fa18_native_mission_5_sequence",
+      "fa18_native_artifact_policy",
+      "fa18_native_artifact_cleanup"
+    ]
+  },
+  "debug": {
+    "test_sha256": "f16c45ecafcd4b05d78741e7e9d0a5996e320ae153e7557b03cca1ddeaf1db80",
+    "runner_sha256": "abbe017657c6caa1ba32224c97dd8b4c1225a036696db6659cc700b45d2242c1",
+    "comparison_sha256": "4b39c8a437ab07592d8302dd9eaabb6441914491c01ebd150f0e6b8d319b63c9",
+    "checks": [
+      "fa18_native_final_patrol_diagnostic",
+      "fa18_native_artifact_policy",
+      "fa18_native_artifact_cleanup"
+    ]
+  },
+  "passing_raw_ram_retained": false,
+  "remaining": [
+    "Fourth aircraft destruction and original FF objective",
+    "Landing/stopped result/config save/menu return/mission wrap",
+    "Earned final-mission availability",
+    "Independent original complete-flight parity and whole-port acceptance"
+  ]
+}

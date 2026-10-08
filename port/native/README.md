@@ -1,5 +1,15 @@
 # Native port runner
 
+The final Carrier Sub mission (F6/internal mode 8) now has a serial
+`fa18_native_final_patrol_diagnostic` gate. Ordinary keys destroy three aircraft;
+24 intervals/120 sampled bodies match original compared RAM/drawing, including
+all three hit/expiry windows. The playable runner's captured RAM agrees on
+three expiries against this fixture's quota four, unchanged completions and no
+objective/save. Its 2,004 host events are fully delivered. The availability-only
+pilot fixture is explicitly unearned. See
+`../../analysis/native_final_mission_completion_context.md`. Full final-mission
+success, earned availability and independent complete-flight parity remain open.
+
 Mode four now completes normal-key escort, carrier arrestor landing, stopped
 result, config save, result messages, Escape/menu return and cold reload from
 the earned region pilot. All 43 input/stage intervals and 159 sampled bodies

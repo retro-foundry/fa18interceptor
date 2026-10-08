@@ -15,9 +15,9 @@ typedef struct {
     unsigned mode, formation_length;
     int force_return, sequence, following_result, restarted;
     uint16_t saved_tick, contact, completions, speed;
-    uint16_t radar_hits, gun_hits;
+    uint16_t radar_hits, gun_hits, infrared_hits;
     int16_t proximity_gate;
-    uint8_t enemy_expiries;
+    uint8_t enemy_expiries, admitted;
     uint8_t phase, region, confirmation, message_b, message_c, entry_phase, previous_entry_phase;
     gaddr stage, previous_stage, entry_stage, previous_entry_stage;
     int begun, keep_entry, airborne, landed;
@@ -74,7 +74,9 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->completions=rd_u16(rd_u32(MODE_TABLE)+56);
         run->radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
         run->gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
+        run->infrared_hits=rd_u16(rd_u32(MODE_TABLE)+64);
         run->enemy_expiries=rd_u8(SCENE_DISPATCH_AUX);
+        run->admitted=rd_u8(SCENE_DISPATCH_ADMITTED);
         run->proximity_gate=rd_s16(SCENE_DISPATCH_GATE);
         copy_ram(run->before,game);
         if(run->keep_entry) {
@@ -116,7 +118,9 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     if(run->force_return && ((run->proximity_gate==200 && proximity_gate<200 && proximity_gate>=0) ||
                             (run->proximity_gate>=0 && proximity_gate<0)))
         run->formation_window=run->formation_length;
-    if((run->mode==4 || run->mode==5) && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits))
+    const uint16_t infrared_hits=rd_u16(rd_u32(MODE_TABLE)+64);
+    const int final_hit=run->mode==8 && infrared_hits!=run->infrared_hits;
+    if((run->mode==4 || run->mode==5 || run->mode==8) && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits || final_hit))
         run->combat_window=20; /* Include the original 15-tick expiry and its boundary. */
     if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
     const int touchdown=run->airborne && !run->landed && (contact&0x80);
@@ -129,9 +133,27 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->window || run->combat_window || run->formation_window || phase!=run->phase || completions!=run->completions ||
         ((contact^run->contact)&(run->force_return?0x84:0x80)) || confirmation!=run->confirmation ||
         (run->landed && ((region^run->region)&region_mask)) || (ready && !ready_before) ||
-        radar_hits!=run->radar_hits || gun_hits!=run->gun_hits ||
+        radar_hits!=run->radar_hits || gun_hits!=run->gun_hits || final_hit ||
         (run->following_result && (message_b!=run->message_b || message_c!=run->message_c)) ||
-        ((run->mode==4 || run->mode==5) && enemy_expiries!=run->enemy_expiries);
+        ((run->mode==4 || run->mode==5 || run->mode==8) && enemy_expiries!=run->enemy_expiries) ||
+        (run->mode==8 && rd_u8(SCENE_DISPATCH_ADMITTED)!=run->admitted);
+    if(run->mode==8 && (run->stage!=run->previous_stage || phase!=run->phase ||
+       enemy_expiries!=run->enemy_expiries || rd_u8(SCENE_DISPATCH_ADMITTED)!=run->admitted)) {
+        printf("{\"final_mission_counter\":true,\"body\":%u,\"tick\":%u,\"stage\":\"%06X\","
+               "\"phase_before\":%u,\"phase_after\":%u,\"sequence_phase\":%u,"
+               "\"admitted_before\":%u,\"admitted_after\":%u,\"expiries_before\":%u,\"expiries_after\":%u,\"records\":[",
+            run->body,game->ticks,run->stage,run->phase,phase,rd_u8(SEQUENCE_PHASE),run->admitted,
+            rd_u8(SCENE_DISPATCH_ADMITTED),run->enemy_expiries,enemy_expiries);
+        for(unsigned slot=4;slot<=14;slot+=2) {
+            const gaddr record=CONTROL_RECORDS+512*slot;
+            const uint8_t *before=run->before+0x80000+record-0xc00000;
+            printf("%s{\"slot\":%u,\"kind\":%u,\"flags_before\":%u,\"flags_after\":%u,"
+                   "\"contact\":%u,\"lifetime_before\":%d,\"lifetime_after\":%d}",
+                slot==4?"":",",slot,rd_u8(record+98),before[0]*256u+before[1],rd_u16(record),
+                rd_u16(record+2),(int16_t)(before[76]*256u+before[77]),rd_s16(record+76));
+        }
+        puts("]}");
+    }
     if(run->mode==4 && !run->phase && phase==0xff) {
         const gaddr escort=CONTROL_RECORDS+512*4;
         printf("{\"escort_objective\":true,\"body\":%u,\"tick\":%u,\"flags\":%u,\"contact\":%u,"
@@ -139,11 +161,11 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             run->body,game->ticks,rd_u16(escort),rd_u16(escort+2),rd_u16(escort+6),rd_u16(escort+12),
             rd_u16(escort+108),rd_u16(CONTROL_RECORDS+512*8),rd_u16(CONTROL_RECORDS+512*10));
     }
-    if(radar_hits!=run->radar_hits || gun_hits!=run->gun_hits) {
+    if(radar_hits!=run->radar_hits || gun_hits!=run->gun_hits || final_hit) {
         printf("{\"weapon_hit\":true,\"body\":%u,\"gun_before\":%u,\"gun_after\":%u,"
-               "\"radar_before\":%u,\"radar_after\":%u,\"records\":[",
-            run->body,run->gun_hits,gun_hits,run->radar_hits,radar_hits);
-        for(unsigned slot=4;slot<=10;slot+=2) {
+               "\"radar_before\":%u,\"radar_after\":%u,\"infrared_before\":%u,\"infrared_after\":%u,\"records\":[",
+            run->body,run->gun_hits,gun_hits,run->radar_hits,radar_hits,run->infrared_hits,infrared_hits);
+        for(unsigned slot=4;slot<=(run->mode==8?14u:10u);slot+=2) {
             const gaddr record=CONTROL_RECORDS+512*slot;
             const uint8_t *before=run->before+0x80000+record-0xc00000;
             printf("%s{\"slot\":%u,\"flags_before\":%u,\"flags_after\":%u,\"lifetime\":%d}",
@@ -185,20 +207,21 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 int main(int argc,char **argv) {
     /* Mission success gates and bounded normal-input diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|4-success|4-sequence|5|5-formation|5-mission|5-success|3-sequence|5-sequence]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|4-success|4-sequence|5|5-formation|5-mission|5-success|3-sequence|5-sequence|8-success|8-sequence]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
     if(argc==6) {
         pilot.escort_flight=!strcmp(argv[5],"4-success") || !strcmp(argv[5],"4-sequence");
-        run.sequence=!strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence");
-        pilot.complete_flight=pilot.escort_flight || !strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
+        pilot.final_flight=!strcmp(argv[5],"8-success") || !strcmp(argv[5],"8-sequence");
+        run.sequence=!strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence") || !strcmp(argv[5],"8-sequence");
+        pilot.complete_flight=pilot.escort_flight || pilot.final_flight || !strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.force_return=!strcmp(argv[5],"5-formation") || !strcmp(argv[5],"5-mission") ||
             !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.mode=pilot.force_return?5u:(unsigned)atoi(argv[5]);
     }
-    if(pilot.mode!=3 && pilot.mode!=4 && pilot.mode!=5) {
+    if(pilot.mode!=3 && pilot.mode!=4 && pilot.mode!=5 && !(pilot.mode==8 && pilot.final_flight)) {
         fprintf(stderr,"Unsupported mission mode: %s\n",argv[5]);
         goto done;
     }
@@ -214,6 +237,9 @@ int main(int argc,char **argv) {
     if(!pilot.keys) goto done;
     fputs("E9K_INPUT_V1\n",pilot.keys);
     if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
+    if(pilot.final_flight && !rd_u8(rd_u32(MODE_TABLE)+18+pilot.mode-1)) {
+        fputs("Final mission requires a saved pilot with original availability already loaded\n",stderr);goto done;
+    }
     game->observe_frame=observe;game->frame_context=&run;
     const unsigned times[]={1800,3000,4500,6500,8000,14500};
     const int keys[]={32,54,282+(int)pilot.mode-3,13,13,50};
@@ -225,7 +251,8 @@ int main(int argc,char **argv) {
             if(game->ticks==times[i]+2) mission_pilot_event(&pilot,game,keys[i],0);
         }
         if(pilot.target_press && game->ticks==pilot.target_press+2) mission_pilot_event(&pilot,game,116,0);
-        if((pilot.mode==4 || pilot.mode==5) && pilot.started) for(unsigned i=0;i<(pilot.complete_flight?2u:3u);++i) {
+        if(pilot.weapon_press && game->ticks==pilot.weapon_press+2) mission_pilot_event(&pilot,game,13,0);
+        if((pilot.mode==4 || pilot.mode==5 || pilot.final_flight) && pilot.started) for(unsigned i=0;i<(pilot.complete_flight?2u:3u);++i) {
             if(game->ticks==pilot.started+700+20*i) mission_pilot_event(&pilot,game,13,1);
             if(game->ticks==pilot.started+702+20*i) mission_pilot_event(&pilot,game,13,0);
         }
@@ -238,10 +265,15 @@ int main(int argc,char **argv) {
     const unsigned speed=rd_u16(CONTROL_RECORDS+110),contact=rd_u16(CONTROL_RECORDS+2);
     const gaddr log=rd_u32(MODE_TABLE),stage=rd_u32(STAGE_CALLBACK);
     const unsigned completions=rd_u16(log+56),grade=rd_u8(log+18+pilot.mode);
-    if(pilot.mode==4 || pilot.mode==5)
+    if(pilot.mode==4 || pilot.mode==5 || pilot.final_flight)
         printf("{\"diagnostic_end\":true,\"mode\":%u,\"phase\":%u,\"tick\":%u,\"crash_resets\":%u,"
                "\"completions_before\":%u,\"completions_after\":%u,\"stage\":\"%06X\"}\n",
             mode,phase,ticks,resets,pilot.completions,completions,stage);
+    if(pilot.final_flight)
+        printf("{\"final_mission_status\":true,\"admitted\":%u,\"expiries\":%u,\"objective\":%s,"
+               "\"record_14_kind\":%u,\"record_14_flags\":%u}\n",
+            rd_u8(SCENE_DISPATCH_ADMITTED),rd_u8(SCENE_DISPATCH_AUX),pilot.objective?"true":"false",
+            rd_u8(CONTROL_RECORDS+512*14+98),rd_u16(CONTROL_RECORDS+512*14));
     const unsigned region_mask=rd_u8(SCENE_POSE_ENTRY)==3?0xc0u:4u;
     if(!run.airborne || !run.landed || !pilot.objective || !pilot.started || resets ||
        mode!=pilot.mode || phase!=0xfc || !(contact&0x80) || !(region&region_mask) || speed ||

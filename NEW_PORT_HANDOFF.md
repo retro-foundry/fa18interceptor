@@ -2,6 +2,24 @@
 
 ## Current restart summary — 2026-10-08
 
+Final Carrier Sub mission (F6/internal mode 8): original aircraft-expiry counter
+ownership is now traced and tested. Ordinary keys destroy three patrol aircraft,
+giving three expiries against this fixture's quota four. All 24 input/stage
+intervals and 120 sampled bodies match original compared RAM/drawing, including
+three complete 20-body destruction/expiry windows. The playable runner
+delivers all 2,004 recorded events and its captured RAM agrees on quota, expiries,
+phase, hits and completions. No objective or config write is accepted; phase
+remains zero and the saved log is unchanged. This uses the established unearned
+availability-only pilot fixture, with no flight-state seeding. The serial gate
+is `fa18_native_final_patrol_diagnostic`; see
+`analysis/native_final_mission_completion_context.md`. Fourth destruction,
+objective/landing/save/menu wrap, earned availability and independent complete
+original flights remain open. Gameplay and comparison masks are unchanged.
+Debug/Release fixture builds pass, with six selected Release checks and three
+Debug checks passing. Inputs and outcomes agree; passing RAM is removed. The
+playable executable is unchanged. Build-cache use remains 2.00 GiB within its
+4 GiB budget. Evidence is in `analysis/figures/native_final_patrol_checkpoint.json`.
+
 Mission four now completes a normal-key escort flight and saved result sequence
 from the source-earned region pilot log. Record 8 is shot down, the escort lands,
 the original objective is admitted at tick 17,346, and the player returns to the
@@ -34,8 +52,8 @@ The supplied [Wikipedia passage](https://en.wikipedia.org/wiki/F/A-18_Intercepto
 reports that the submarine need not visibly explode and that destroying the
 patrolling aircraft may suffice. The original mode-eight dispatch uses
 `POSTFLIGHT_MODE_OTHER` -> `generic_mode`, comparing admitted/completed counters.
-It has no direct submarine-explosion test. Counter provenance and a successful
-ordinary-input final flight/save/menu return still require verification.
+It has no direct submarine-explosion test. Counter provenance is now traced;
+a successful ordinary-input final flight/save/menu return still requires verification.
 Preserve original rules; see `analysis/native_final_mission_completion_context.md`.
 
 Earlier mission-four input diagnostic added `4-success` and `4-sequence`.
