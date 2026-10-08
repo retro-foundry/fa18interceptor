@@ -1,0 +1,575 @@
+{
+  "scenario": "normal-key-mode-five-proximity-paired-restoration",
+  "input_stage_intervals": 24,
+  "sampled_bodies": 107,
+  "consecutive_proximity_restoration_window_bodies": 64,
+  "native_consecutive_proximity_decrements": 201,
+  "original_first_restoration_calls": 12,
+  "original_second_restoration_calls": 12,
+  "restorations": [
+    {
+      "body": 8055,
+      "before_tick": 17997,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8056,
+      "before_tick": 18001,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8057,
+      "before_tick": 18004,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8058,
+      "before_tick": 18008,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8059,
+      "before_tick": 18011,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8060,
+      "before_tick": 18014,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8061,
+      "before_tick": 18018,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8062,
+      "before_tick": 18021,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8063,
+      "before_tick": 18024,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8064,
+      "before_tick": 18028,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8065,
+      "before_tick": 18031,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    },
+    {
+      "body": 8066,
+      "before_tick": 18035,
+      "first_calls": 1,
+      "second_calls": 1,
+      "views": [
+        {
+          "slot": 4,
+          "kind": 18,
+          "expected": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8192,
+            2304
+          ]
+        },
+        {
+          "slot": 6,
+          "kind": 19,
+          "expected": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ],
+          "actual": [
+            66,
+            74,
+            8192,
+            8352,
+            2304
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "diagnostic_end": true,
+    "mode": 5,
+    "phase": 0,
+    "tick": 18130,
+    "crash_resets": 0,
+    "completions_before": 3,
+    "completions_after": 3,
+    "stage": "C10DAE"
+  },
+  "mission_success_accepted": false,
+  "native_flight_state_seeded": false,
+  "comparison_masks_changed": false,
+  "reference_scope": "Original instructions from native before-states; independent complete-flight parity remains open",
+  "input_sha256": "c9291a4009cdf96b5e9d16bcccd550baec718e124116a467d3facc174e99ce99",
+  "test_sha256": "365ba1b3829ff3b9316bba9895873d88004658f9e34fdc9059d15d1fe6d819b8",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "date": "2026-10-08",
+  "checkpoint_parent": "c609f812",
+  "runtime_changed": false,
+  "playable_sha256": "73f9bc00fd5db4f1f3a3e90097b902e0a4eb2b4d8ad07a24789626a3549189cd",
+  "validation": {
+    "debug_fixture_build": "pass",
+    "release_fixture_build": "pass",
+    "debug_ctest": {
+      "fa18_native_mission_three_success": "pass",
+      "fa18_native_mission_five_forced_return": "pass",
+      "fa18_native_artifact_cleanup": "pass"
+    },
+    "release_ctest": {
+      "fa18_native_mission_three_success": "pass",
+      "fa18_native_mission_five_combat_reset": "pass",
+      "fa18_native_mission_five_forced_return": "pass",
+      "fa18_native_artifact_cleanup": "pass"
+    }
+  }
+}

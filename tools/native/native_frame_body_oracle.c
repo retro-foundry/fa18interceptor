@@ -73,8 +73,11 @@ int main(int argc,char **argv) {
     gaddr carry_writer=0;
     gaddr depth_writer=0;
     unsigned context_sorts=0,cached_entries=0,far_entries=0;
+    unsigned restore_first=0,restore_second=0;
     uint16_t context_factor=0;
     for(step=0;step<10000000;++step) {
+        if(REG_PC==0xc0a12e && REG_A[1]==CONTROL_RECORDS+0x800) ++restore_first;
+        if(REG_PC==0xc0a12e && REG_A[1]==CONTROL_RECORDS+0xc00) ++restore_second;
         if(REG_PC==0xc1e328 && rd_u8(CONTEXT_SELECT)) context_factor=(uint16_t)(REG_D[3]>>16);
         if(REG_PC==0xc1e440 && rd_u8(CONTEXT_SELECT)) ++context_sorts;
         if(REG_PC==0xc1e3a0 && rd_u8(CONTEXT_SELECT)) ++cached_entries;
@@ -163,6 +166,9 @@ int main(int argc,char **argv) {
     }
     if(step==10000000) {fprintf(stderr,"Frame body did not return at %06X\n",REG_PC);return 1;}
     printf("Frame input carry: %u\n",REG_D[4]);
+    if(restore_first || restore_second)
+        printf("Mode-five restoration: %u first-record calls, %u second-record calls\n",
+            restore_first,restore_second);
     if(rd_u8(CONTEXT_SELECT))
         printf("Context depth: %u sorted lists, %u cached entries, %u fixed-far entries, incoming word=%04X\n",
             context_sorts,cached_entries,far_entries,context_factor);

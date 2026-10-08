@@ -1,5 +1,15 @@
 # Native port runner
 
+The native validation pilot now reaches C0A002's proximity countdown and
+C0A12E's paired aircraft restoration using normal keys. All 24 input/stage
+intervals and 107 sampled bodies match original compared RAM/drawing, including
+64 consecutive window bodies. All 201 native proximity scans are observed;
+original execution reports 12 restoration calls for each aircraft, with the
+native restored values checked against the original table. The serial CTest
+is `fa18_native_mission_five_forced_return`. This changes validation only;
+complete mode-five mission success and independent complete flights remain
+open. See `../../analysis/native_mission_five_forced_return_milestone.md`.
+
 Independent-camera depth sorting now receives the actual final scaled view
 coefficient through the native projection caller. All 640 complete component
 cases and 48 actual map/moving-camera bodies match original output and compared

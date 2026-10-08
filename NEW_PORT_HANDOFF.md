@@ -3,13 +3,30 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`f5d60f2a` on `coverage-accounting`.
+`c609f812` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `73f9bc00fd5db4f1f3a3e90097b902e0a4eb2b4d8ad07a24789626a3549189cd`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
-Latest mode-five investigation: the optional validation argument `5-formation`
+Latest mode-five forced-return acceptance: normal keyboard input holds the
+original stolen-aircraft proximity requirement through all 201 native scans,
+then reaches C0A12E for both aircraft. All 24 input/stage intervals and 107
+sampled bodies match original compared RAM/drawing, including 64 consecutive
+proximity/restoration window bodies. Original execution reports 12 calls for
+each aircraft; both native restored view sets match the original C295E0 table.
+The new serial CTest is `fa18_native_mission_five_forced_return`. This advances
+mission coverage without changing playable behavior or the executable.
+Debug fixture build and all three selected checks pass; the Release fixture
+build and all four selected checks pass, including mode three, mode-five
+combat/reset, forced return and artifact cleanup.
+See `analysis/native_mission_five_forced_return_milestone.md`. The bounded
+fixture still reports an incomplete mission, with completion count 3 and no
+saved result; combat, safe return, landing and cold reload remain open for
+mode five. Independent complete flights and the other whole-port work remain
+open. This supersedes the earlier pilot/countdown investigation below.
+
+Earlier mode-five investigation: the optional validation argument `5-formation`
 attempts the original stolen-aircraft proximity objective using ordinary keys.
 The bounded run through tick 11,600 matches all 24 input/stage intervals and
 36 sampled bodies against original compared RAM/drawing, including contact

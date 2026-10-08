@@ -10,12 +10,13 @@
 typedef struct {
     const char *prefix;
     uint8_t *before, *entry_before;
-    unsigned body, captures, entries, first_tick, entry_tick, iteration, window, combat_window;
+    unsigned body, captures, entries, first_tick, entry_tick, iteration, window, combat_window, formation_window;
     unsigned entry_keys[256], key_count;
     unsigned mode;
     int force_return;
     uint16_t saved_tick, contact, completions, speed;
     uint16_t radar_hits, gun_hits;
+    int16_t proximity_gate;
     uint8_t enemy_expiries;
     uint8_t phase, region, confirmation, entry_phase, previous_entry_phase;
     gaddr stage, previous_stage, entry_stage, previous_entry_stage;
@@ -71,6 +72,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
         run->gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
         run->enemy_expiries=rd_u8(SCENE_DISPATCH_AUX);
+        run->proximity_gate=rd_s16(SCENE_DISPATCH_GATE);
         copy_ram(run->before,game);
         if(run->keep_entry) {
             capture_budget(run);
@@ -95,6 +97,20 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     const uint16_t radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
     const uint16_t gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
     const uint8_t enemy_expiries=rd_u8(SCENE_DISPATCH_AUX);
+    const int16_t proximity_gate=rd_s16(SCENE_DISPATCH_GATE);
+    if(run->force_return && run->proximity_gate>=0 && proximity_gate<run->proximity_gate) {
+        const int limit=rd_s8(SCENE_DISPATCH_LIMIT);
+        printf("{\"proximity\":true,\"body\":%u,\"before_tick\":%u,\"after_tick\":%u,"
+               "\"gate_before\":%d,\"gate_after\":%d,\"distance_limit\":%u,"
+               "\"player_fixed\":[%d,%d,%d],\"stolen_fixed\":[%d,%d,%d]}\n",
+               run->body,run->first_tick,game->ticks,run->proximity_gate,proximity_gate,
+               limit>=3?0x18000u:limit>=2?0x24000u:0x30000u,
+               rd_s32(CONTROL_RECORDS+20),rd_s32(CONTROL_RECORDS+24),rd_s32(CONTROL_RECORDS+28),
+               rd_s32(CONTROL_RECORDS+0x814),rd_s32(CONTROL_RECORDS+0x818),rd_s32(CONTROL_RECORDS+0x81c));
+    }
+    if(run->force_return && ((run->proximity_gate==200 && proximity_gate<200 && proximity_gate>=0) ||
+                            (run->proximity_gate>=0 && proximity_gate<0)))
+        run->formation_window=32;
     if(run->mode==5 && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits))
         run->combat_window=20; /* Include the original 15-tick expiry and its boundary. */
     if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
@@ -105,7 +121,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     const int ready=run->landed && (region&region_mask) && !speed;
     const int ready_before=run->landed && (run->region&region_mask) && !run->speed;
     const int keep=run->stage!=run->previous_stage || run->body%(run->mode==3?512:1024)==0 ||
-        run->window || run->combat_window || phase!=run->phase || completions!=run->completions ||
+        run->window || run->combat_window || run->formation_window || phase!=run->phase || completions!=run->completions ||
         ((contact^run->contact)&(run->force_return?0x84:0x80)) || confirmation!=run->confirmation ||
         (run->landed && ((region^run->region)&region_mask)) || (ready && !ready_before) ||
         radar_hits!=run->radar_hits || gun_hits!=run->gun_hits ||
@@ -135,17 +151,20 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                "\"view_record\":%u,\"region_before\":%u,\"region_after\":%u,\"speed\":%u,"
                "\"completions_before\":%u,\"completions_after\":%u,"
                "\"touchdown\":%s,\"landing_window\":%s,\"ready\":%s,"
-               "\"combat_window\":%s,\"enemy_expiries_before\":%u,\"enemy_expiries_after\":%u}\n",
+               "\"combat_window\":%s,\"enemy_expiries_before\":%u,\"enemy_expiries_after\":%u,"
+               "\"proximity_gate_before\":%d,\"proximity_gate_after\":%d,\"formation_window\":%s}\n",
                run->captures++,run->body,run->iteration,run->stage,run->first_tick,game->ticks,
                run->saved_tick,boundary==NATIVE_FRAME_OWNER_EXIT?"true":"false",
                run->phase,phase,run->contact,contact,run->confirmation,confirmation,
                rd_s16(SELECTED_RECORD),rd_u16(VIEW_RECORD),run->region,region,speed,
                run->completions,completions,touchdown?"true":"false",
                run->window?"true":"false",ready?"true":"false",run->combat_window?"true":"false",
-               run->enemy_expiries,enemy_expiries);
+               run->enemy_expiries,enemy_expiries,run->proximity_gate,proximity_gate,
+               run->formation_window?"true":"false");
     }
     if(run->window) --run->window;
     if(run->combat_window) --run->combat_window;
+    if(run->formation_window) --run->formation_window;
     run->previous_stage=run->stage;
 }
 

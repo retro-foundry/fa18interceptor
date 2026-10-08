@@ -24,9 +24,9 @@ static double angle_delta(double a,double b) {
 static double clamp(double value,double low,double high) {
     return value<low?low:value>high?high:value;
 }
-/* Diagnostic flight only: attempt to follow the stolen aircraft for C0A002's
- * proximity countdown. This pilot has not completed the objective; its early
- * frozen attitude matches original sampled bodies. All controls remain keys. */
+/* Validation flight only: follow the stolen aircraft for C0A002's proximity
+ * countdown. Formation input is separate from the subsequent combat/landing
+ * pilot; every control remains an ordinary key. */
 static int follow_stolen_aircraft(MissionPilot *pilot,NativeFrontend *game) {
     if(!pilot->force_return || pilot->formation_done || pilot->objective) return 0;
     pilot->target=4;
@@ -47,22 +47,36 @@ static int follow_stolen_aircraft(MissionPilot *pilot,NativeFrontend *game) {
     const double speed=rd_s16(CONTROL_RECORDS+110)/64.0;
     const double target_speed=rd_s16(target+110)/64.0;
     const double horizontal=hypot(velocity[0],velocity[2]);
-    const double time=clamp(range/fmax(speed,70),20,1000);
+    const double time=clamp(range/fmax(speed,70),200,1000);
     const double along=horizontal? (delta[0]*velocity[0]+delta[2]*velocity[2])/horizontal:range;
     const double wanted_speed=target_speed+clamp((along-250)/80,-30,45);
     const double yaw=rd_u16(CONTROL_RECORDS+104)*6.283185307179586/28800;
-    const double pitch=angle_delta(rd_u16(CONTROL_RECORDS+102)*6.283185307179586/28800,0);
     const double bank=angle_delta(rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800,0);
     const double wanted_yaw=atan2(-(delta[0]+velocity[0]*time),delta[2]+velocity[2]*time);
-    const double wanted_pitch=clamp(-(delta[1]+80)/6000,-0.08,0.08);
+    const double height=rd_s8(SCENE_DISPATCH_LIMIT)>=3?200:400;
+    const double direction[3]={-sin(wanted_yaw),clamp((delta[1]+height)/6000,-0.08,0.08),cos(wanted_yaw)};
+    double local[3]={0};
+    for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
+        local[i]+=direction[j]*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
+    const double pitch=atan2(local[1],hypot(local[0],local[2]));
+    if(!pilot->formation_started) {
+        pilot->formation_started=1;
+        pilot->previous_x=yaw;pilot->previous_y=pitch;
+    }
     const double yaw_control=angle_delta(wanted_yaw,yaw)-10*angle_delta(yaw,pilot->previous_x);
-    const double pitch_control=wanted_pitch-pitch-10*angle_delta(pitch,pilot->previous_y);
+    const double pitch_control=pitch+4*angle_delta(pitch,pilot->previous_y);
     pilot->previous_x=yaw;pilot->previous_y=pitch;
+    int throttle=range>30000 || speed<wanted_speed-1?291:speed>wanted_speed+1?285:288;
+    /* C1B35A and C13D84 can settle F10 at phase 120 before afterburner.
+     * Reapply the normal plus key after the source releases throttle input. */
+    if(throttle==291 && rd_s8(CONTROL_RECORDS+43)>=120 && !(rd_u16(CONTROL_RECORDS+2)&8))
+        throttle=61;
+    if(throttle==61 && pilot->throttle==61 && !(rd_u8(PLAYER_STICK)&3))
+        mission_pilot_event(pilot,game,61,1);
+    else held(pilot,game,&pilot->throttle,throttle);
     held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
     held(pilot,game,&pilot->rudder,yaw_control>0.006?46:yaw_control< -0.006?44:0);
-    held(pilot,game,&pilot->pitch,pitch_control>0.006?273:pitch_control< -0.006?274:0);
-    held(pilot,game,&pilot->throttle,range>4000?291:
-        speed<wanted_speed-1?291:speed>wanted_speed+1?285:288);
+    held(pilot,game,&pilot->pitch,pitch_control>0.006?274:pitch_control< -0.006?273:0);
     held(pilot,game,&pilot->fire,0);
     return 1;
 }
@@ -72,8 +86,10 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
     if(getenv("FA18_MISSION_TRACE") && game->ticks/500!=pilot->trace) {
         pilot->trace=game->ticks/500;
         printf("{\"trace\":true,\"tick\":%u,\"phase\":%u,\"pilot_phase\":%u,\"gate\":%d,"
+               "\"function_level\":%u,\"controls\":%u,\"thrust\":%d,\"fuel\":%u,"
                "\"admitted\":%u,\"aux\":%u,\"gun_hits\":%u,\"radar_hits\":%u,\"weapon\":%u,\"records\":[",
                game->ticks,rd_u8(PLAYER_PHASE),pilot->phase,rd_s16(SCENE_DISPATCH_GATE),
+               rd_u8(FUNCTION_KEY_LEVEL),rd_u8(PLAYER_STICK),rd_s8(CONTROL_RECORDS+43),rd_u32(CONTROL_RECORDS+114),
                rd_u8(SCENE_DISPATCH_ADMITTED),rd_u8(SCENE_DISPATCH_AUX),
                rd_u16(rd_u32(MODE_TABLE)+60),rd_u16(rd_u32(MODE_TABLE)+68),rd_u8(CONTROL_RECORDS+99)&0xf0);
         for(unsigned slot=0;slot<=12;slot+=2) {
@@ -111,7 +127,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
        game->ticks>pilot->target_press+200) {
         mission_pilot_event(pilot,game,116,1);pilot->target_press=game->ticks;
     }
-    if(game->ticks<pilot->started+650) {
+    if(game->ticks<pilot->started+(pilot->force_return?575u:650u)) {
         held(pilot,game,&pilot->throttle,61);
         held(pilot,game,&pilot->pitch,game->ticks>=pilot->started+550?274:0);
         held(pilot,game,&pilot->rudder,0);

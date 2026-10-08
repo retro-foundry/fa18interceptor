@@ -1,5 +1,11 @@
 # Mode-five formation diagnostic checkpoint - 2026-10-08
 
+This early-turn investigation is superseded by
+`native_mission_five_forced_return_milestone.md`. The revised `5-formation`
+pilot completes the proximity countdown and reaches paired restoration.
+The retained input and fixture hash below describe the former frozen-attitude
+trajectory; the current pilot no longer generates that earlier sequence.
+
 The validation-only `5-formation` argument attempts to follow the stolen
 aircraft before engaging the enemies. All input uses ordinary frontend keys;
 the pilot only reads runtime state. No playable game source, physics, mission

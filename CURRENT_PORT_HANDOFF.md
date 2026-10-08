@@ -1,6 +1,18 @@
 # Current playable port handoff
 
-Latest mode-five investigation (2026-10-08): the validation-only `5-formation`
+Latest mode-five forced-return acceptance (2026-10-08): normal keys hold all
+201 native proximity scans and reach paired C0A12E restoration. All 24
+input/stage intervals and 107 sampled bodies match original compared
+RAM/drawing, including 64 consecutive proximity/restoration window bodies.
+Original execution reports 12 calls for each aircraft; the native restored
+views match the actual C295E0 table. This is a serial CTest gate. Gameplay and
+the playable executable are unchanged. Debug builds and all three selected
+checks pass; Release builds and all four selected checks pass. Mode-five mission
+completion, result save/cold reload, independent full flights and other whole-port work remain
+open. See `analysis/native_mission_five_forced_return_milestone.md`. This
+supersedes the earlier formation-pilot investigation below.
+
+Earlier mode-five investigation (2026-10-08): the validation-only `5-formation`
 pilot and bounded tick limit reproduce an early frozen attitude. All 24
 input/stage intervals and 36 sampled bodies match original compared RAM/drawing,
 including contact bit-two transitions. This does not demonstrate a port bug
