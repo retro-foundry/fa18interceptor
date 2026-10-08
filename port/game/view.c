@@ -111,14 +111,20 @@ static void follow_record(void) {
     wr_u16(VIEW_ROTATE, rd_u16(TRACKED_HEADING));
 }
 
-void aim_view(void) {
+int32_t aim_view_depth_factor(void) {
     int k;
+    int32_t factor;
     if (rd_u8(CONTEXT_STARTED)) follow_record();
     else pan_view_from_keys();
     two_angle_matrix(rd_u16(VIEW_PAN), rd_u16(VIEW_ROTATE), VIEW_ANGLE_MATRIX);
-    scale_matrix_rows(VIEW_ANGLE_MATRIX, MATRIX_ROW_SCALES);
+    factor = scale_matrix_rows(VIEW_ANGLE_MATRIX, MATRIX_ROW_SCALES);
     y_rotation_matrix8(rd_s16(VIEW_ROTATE), LIST_MATRIX);
     for (k = 0; k < 3; k++) wr_s32(ATTITUDE_A + (gaddr)(4 * k), rd_s16(CONTROL_RECORDS + 0x66 + (gaddr)(2 * k)));
+    return factor;
+}
+
+void aim_view(void) {
+    (void)aim_view_depth_factor();
 }
 
 void set_observer_position(int32_t x, int32_t y, int32_t z) {

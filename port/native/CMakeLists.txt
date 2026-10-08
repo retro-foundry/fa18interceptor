@@ -265,6 +265,11 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_frame_times
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_frame_times.py
                 --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_view_depth
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_view_depth.py
+                --runner $<TARGET_FILE:fa18_native>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/view-depth-check)
+    set_tests_properties(fa18_native_view_depth PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_menu
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_menu.py
                 --runner $<TARGET_FILE:fa18_native>)

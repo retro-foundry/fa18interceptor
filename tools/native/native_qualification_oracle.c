@@ -27,7 +27,7 @@ void native_frontend_clear_text(void) { abort(); }
 void native_frontend_save_log(NativeFrontend *game) { (void)game;abort(); }
 #endif
 void native_input_process(NativeFrontend *game) { (void)game;abort(); }
-void native_scene_project(void) { abort(); }
+uint32_t native_scene_project(void) { abort(); }
 int native_scene_draw(NativeFrontend *game) { (void)game;abort(); }
 NativeInputReturn native_hud_draw(uint16_t tick) { (void)tick;abort(); }
 NativeInputReturn native_frame_selection_cleanup(NativeInputReturn prior) { (void)prior;abort(); }

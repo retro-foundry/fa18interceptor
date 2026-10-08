@@ -26,11 +26,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void native_scene_project(void) {
-    dispatch_matrix_route(NULL,NULL);
+uint32_t native_scene_project(void) {
+    const int context = rd_u8(CONTEXT_SELECT) != 0;
+    uint32_t factor = 0;
+    /* C2D99C dispatches to the aiming route for an independent camera. Its
+     * final scaled coefficient supersedes C29042's earlier origin output. */
+    if (context) factor = (uint32_t)aim_view_depth_factor();
+    else dispatch_matrix_route(NULL,NULL);
     seed_projection();
+    if (!context) {
+        const gaddr record = CONTROL_RECORDS + (gaddr)(int32_t)rd_s16(VIEW_RECORD);
+        factor = rd_u32(record + 0x1c) & 0x3fffffu; /* C1C5F0/C1C5F4. */
+    }
     update_view_octant();
     update_attitude_flags();
+    return factor;
 }
 static int polygon(void *context,gaddr end,int16_t origin) {
     NativeFrontend *game=context;

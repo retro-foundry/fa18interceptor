@@ -55,8 +55,10 @@ void alternate_rotation_matrix(uint16_t a, uint16_t b, uint16_t c, gaddr out);
 void two_angle_matrix(uint16_t a, uint16_t b, gaddr out);
 
 /* Multiply each row of `matrix` by the matching word of `scales`, keeping
- * 8 fraction bits ($C2E5AC). */
-void scale_matrix_rows(gaddr matrix, gaddr scales);
+ * 8 fraction bits ($C2E5AC). Return the full first coefficient of the final
+ * scaled row ($C2E5EA), before its word store. Context depth sorting retains
+ * the upper half of this arithmetic output. */
+int32_t scale_matrix_rows(gaddr matrix, gaddr scales);
 
 /* $C2DD4E: adjust a record's matrix inputs and its +$22/+24/+54 working
  * words.  `d3`, `d5`, `d6`, and `d7` are the original's live register values

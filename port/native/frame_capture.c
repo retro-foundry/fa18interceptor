@@ -19,6 +19,27 @@ static void write_data(const NativeFrontend *game,const NativeFrameCapture *capt
         fprintf(stderr,"Cannot write native frame capture: %s\n",path);abort();
     }
 }
+/* Consecutive captures need each body's own PAL interval; the runner's final
+ * summary describes only the last one. Small sidecars let source comparisons
+ * replay a bounded window without repeating the entire flight per body. */
+static void write_timing(const NativeFrameCapture *capture) {
+    if(capture->count==1) return;
+    char path[4096];
+    const unsigned iteration=capture->iteration+capture->captured;
+    const int length=snprintf(path,sizeof path,"%s.%u.timing.json",capture->prefix,iteration);
+    if(length<0 || length>=(int)sizeof path) {
+        fputs("Native frame timing path is too long\n",stderr);abort();
+    }
+    FILE *file=fopen(path,"w");
+    if(!file) {perror(path);abort();}
+    const int written=fprintf(file,
+        "{\"iteration\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s}\n",
+        iteration,capture->before_tick,capture->after_tick,capture->saved_tick,
+        capture->owner_exit?"true":"false")>0;
+    if(fclose(file) || !written) {
+        fprintf(stderr,"Cannot write native frame timing: %s\n",path);abort();
+    }
+}
 void native_frame_capture(NativeFrontend *game,enum NativeFrameBoundary boundary,
                           uint16_t saved_tick,void *context) {
     NativeFrameCapture *capture=context;
@@ -35,7 +56,7 @@ void native_frame_capture(NativeFrontend *game,enum NativeFrameBoundary boundary
     } else if(capture->begun) {
         capture->owner_exit=boundary==NATIVE_FRAME_OWNER_EXIT;
         capture->after_tick=game->ticks;
-        write_data(game,capture,"after");capture->begun=0;
+        write_data(game,capture,"after");write_timing(capture);capture->begun=0;
         capture->complete=++capture->captured==capture->count;
     }
 }

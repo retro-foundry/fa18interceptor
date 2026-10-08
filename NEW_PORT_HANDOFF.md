@@ -3,11 +3,30 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`48e3e130` on `coverage-accounting`.
+`d8eba83d` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
-`9390cca490d782ff9978e8936c87d9fa11444239e8ecb4aa1a368b5953b47aa5`.
+`73f9bc00fd5db4f1f3a3e90097b902e0a4eb2b4d8ad07a24789626a3549189cd`.
 Untracked `.vscode/` is user-owned and must remain untouched.
+
+Latest independent-camera depth acceptance: the final scaled view coefficient
+now reaches context sorting through an explicit native return value. C2DACC's
+matrix call replaces the earlier C29042 origin output; context projection
+preserves its upper word. All 128 complete matrix and 512 view/projection/sort
+component cases pass. Map and two moving camera routes each match 16 consecutive
+full original bodies, covering both signs of the incoming factor and actual
+preserved-factor sorting: 16 source batches and 16 cached-depth entries.
+Debug builds and all three affected checks pass; the final Release build and
+all 17 affected checks pass. The new serial CTest uses one bounded capture run per
+window, with per-body timing sidecars. See
+`analysis/native_context_depth_milestone.md`. Camera motion, matrix arithmetic,
+gameplay rules and comparison masks are unchanged. Full mission acceptance
+remains open.
+
+Current camera checkpoint: `analysis/figures/native_context_depth_checkpoint.json`.
+Regression logs: `build/native-flight/view-depth-{debug,release}-ctest.log`.
+The camera gate covers map and moving views; regressions include both carrier
+sequences, mission three, mode-five combat/reset and all three weapon kills.
 
 Latest combat/reset acceptance: the mode-five normal-key diagnostic matches
 all 26 input/stage intervals and all 115 sampled bodies, including every one
@@ -27,9 +46,10 @@ mode-five mission success remains unaccepted. See
 The reset-reference fix was committed as `48e3e130`. The former expanded
 renderer investigation is resolved for this scenario; its failed body 96/97
 RAM is compressed locally with hashes. Passing RAM remains temporary and
-removed. C29042's context-view incoming planar output remains a named contract
-when no template/distance calculation replaces it; no value is invented for
-that caller. Preserve user-owned `.vscode/` and the protected validation files.
+removed. The former C29042 context-flight claim is superseded by the final
+scaled view output above. Startup/menu context refreshes without a projection
+pass retain their named incoming-factor TODO when no template/distance call
+replaces it. Preserve user-owned `.vscode/` and the protected validation files.
 
 Recent completed batches:
 
@@ -89,8 +109,8 @@ Recent completed batches:
   verify all seven streams and wrap. Mode six naturally loses three aircraft,
   exhausts resets, returns to the menu and relaunches Free Flight.
 
-Native Debug and Release playable and affected fixture builds pass for the
-combat/expiry/reset fix. Debug mission-three success, mode-five combat/reset
+The preceding combat/expiry/reset checkpoint passed native Debug and Release
+playable and affected fixture builds. Debug mission-three success, mode-five combat/reset
 and cleanup pass. All 14 final Release checks pass: both mission gates, both
 qualification sequences, gun/radar/infrared kills, mode five, record expiry,
 models, raster, frontend, artifact policy and cleanup. Evidence is in
@@ -125,11 +145,12 @@ frontend and artifact cleanup. Evidence and executable hashes are in
 The comparisons execute original instructions from native before-states;
 they do not establish an independent complete original mission replay.
 
-Next work starts with finishing the mode-five objective and carrier return
+Next work starts with finishing the mode-five objective and successful return
 using normal keys, then comparing its successful landing, save and reload.
 The combat/expiry/reset comparison now passes; it does not prove a successful
-mission or complete independent flight. Resolve C29042's remaining incoming
-planar-output contract when context-view cached-only sorting requires it.
+mission or complete independent flight. The context-flight factor is resolved;
+trace startup/menu context callers without projection if cached sorting reaches
+their still-unknown incoming factor.
 Successful mission-list modes four through eight and independent full-flight
 comparison remain open.
 Mode three now has source comparisons through its

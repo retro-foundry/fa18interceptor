@@ -100,15 +100,19 @@ void two_angle_matrix(uint16_t a, uint16_t b, gaddr out) {
     wr_s16(out + 16, mul8(cb, ca));
 }
 
-void scale_matrix_rows(gaddr matrix, gaddr scales) {
+int32_t scale_matrix_rows(gaddr matrix, gaddr scales) {
     int row, col;
+    int32_t final_first = 0;
     for (row = 0; row < 3; row++) {
         int16_t scale = rd_s16(scales + (gaddr)(2 * row));
         for (col = 0; col < 3; col++) {
             gaddr cell = matrix + (gaddr)(6 * row + 2 * col);
-            wr_s16(cell, (int16_t)(((int32_t)rd_s16(cell) * scale) >> 8));
+            int32_t scaled = ((int32_t)rd_s16(cell) * scale) >> 8;
+            wr_s16(cell, (int16_t)scaled);
+            if (row == 2 && col == 0) final_first = scaled;
         }
     }
+    return final_first;
 }
 
 uint32_t build_transform_product(gaddr source, uint16_t a, uint16_t b, uint16_t c) {

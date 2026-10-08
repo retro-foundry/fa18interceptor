@@ -21,6 +21,10 @@ void update_view_octant(void);
  * LIST_MATRIX from the rotation, and ATTITUDE_A-C from the player's
  * orientation words. */
 void aim_view(void);
+/* The same complete view update, returning the final scaled matrix's first
+ * bottom-row coefficient. C2DACC produces this depth-sort factor; subsequent
+ * yaw/angle publication changes only its low word ($C2DAD0-C2DAF0). */
+int32_t aim_view_depth_factor(void);
 
 /* The observer at (x, y, z): its position, and the negated position with x
  * and z kept to 22 bits ($C0915A). */

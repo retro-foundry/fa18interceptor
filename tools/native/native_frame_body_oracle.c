@@ -72,7 +72,13 @@ int main(int argc,char **argv) {
     const gaddr watched_word=trace_word?(gaddr)strtoul(trace_word,NULL,16):0;
     gaddr carry_writer=0;
     gaddr depth_writer=0;
+    unsigned context_sorts=0,cached_entries=0,far_entries=0;
+    uint16_t context_factor=0;
     for(step=0;step<10000000;++step) {
+        if(REG_PC==0xc1e328 && rd_u8(CONTEXT_SELECT)) context_factor=(uint16_t)(REG_D[3]>>16);
+        if(REG_PC==0xc1e440 && rd_u8(CONTEXT_SELECT)) ++context_sorts;
+        if(REG_PC==0xc1e3a0 && rd_u8(CONTEXT_SELECT)) ++cached_entries;
+        if(REG_PC==0xc1e38e && rd_u8(CONTEXT_SELECT)) ++far_entries;
         if(trace_depth && (REG_PC==0xc1e328 || REG_PC==0xc1e37a || REG_PC==0xc1e42e ||
                           REG_PC==0xc1e440 || REG_PC==0xc1e484))
             fprintf(stderr,"depth pc=%06X value=%08X count=%04X list=%06X flags=%04X next=%02X upper-writer=%06X\n",
@@ -157,6 +163,9 @@ int main(int argc,char **argv) {
     }
     if(step==10000000) {fprintf(stderr,"Frame body did not return at %06X\n",REG_PC);return 1;}
     printf("Frame input carry: %u\n",REG_D[4]);
+    if(rd_u8(CONTEXT_SELECT))
+        printf("Context depth: %u sorted lists, %u cached entries, %u fixed-far entries, incoming word=%04X\n",
+            context_sorts,cached_entries,far_entries,context_factor);
     const char *expected_carry=getenv("FA18_FRAME_EXPECT_INPUT_CARRY");
     if(expected_carry && (uint8_t)REG_D[4]!=(uint8_t)strtoul(expected_carry,NULL,0)) {
         fprintf(stderr,"Frame input carry differs: source %02X native %02X\n",

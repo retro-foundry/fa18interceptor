@@ -46,25 +46,29 @@
 
 static void refresh_child(void *context,enum ContextRefreshChild child);
 typedef struct { int all; DisplaySortResult sort; } ContextSort;
-static void refresh_native_context_sort(int sort_all) {
+static void refresh_native_context_sort(int sort_all,const uint32_t *projection_factor) {
     ContextSort context={.all=sort_all};
     /* C1C5F0/C1C5F4 leave the viewed record's masked Z in the ordinary
      * projection caller. Template rebuilding can replace it below. */
-    if(!rd_u8(CONTEXT_SELECT)) {
+    if(projection_factor) {
+        context.sort.planar_factor=*projection_factor;
+        context.sort.has_factor=1;
+    } else if(!rd_u8(CONTEXT_SELECT)) {
         const gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD);
         context.sort.planar_factor=rd_u32(record+0x1c)&0x3fffffu;
         context.sort.has_factor=1;
     }
-    /* TODO(port): C29042's context-view incoming planar output when no
-     * template or distance call replaces it. has_factor distinguishes that
-     * missing caller contract from an actually produced zero. */
+    /* C2DACC's matrix output survives the context projection's save/restore
+     * at C1C2C8/C1C406. Templates and uncached distance calls may replace it.
+     * TODO(port): context startup/menu callers without a projection pass;
+     * keep their missing incoming factor distinct from a produced zero. */
     const ContextRefreshHooks hooks={refresh_child,NULL,&context};
     refresh_context_packet(&hooks);
 }
-static void refresh_native_context(void) {
+static void refresh_native_context(const uint32_t *projection_factor) {
     /* In C0EFD4's frame, C1C870 clears -$2C and a request batch sets it
      * at C1C98A. Capture that choice before the children consume requests. */
-    refresh_native_context_sort(rd_u8(UPDATE_MASK)!=0);
+    refresh_native_context_sort(rd_u8(UPDATE_MASK)!=0,projection_factor);
 }
 static void storage_child(void *context,enum SceneBootstrapChild child) {
     int32_t *position=context;
@@ -78,7 +82,7 @@ static void storage_child(void *context,enum SceneBootstrapChild child) {
     case BOOTSTRAP_PLACE_VIEW: reset_scene_recorder(); break;
     case BOOTSTRAP_BUILD_GATES: build_template_bit_gates(); break;
     case BOOTSTRAP_UPDATE_RECORDS: native_records_update(); break;
-    case BOOTSTRAP_REFRESH_CONTEXT: refresh_native_context(); break;
+    case BOOTSTRAP_REFRESH_CONTEXT: refresh_native_context(NULL); break;
     case BOOTSTRAP_RUN: {
         const SceneBootstrapHooks hooks={storage_child,NULL,position};
         bootstrap_scene(&hooks);break;
@@ -152,8 +156,8 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
          * The ordinary C0EFD4 frame keeps its request-derived local. */
         if(rd_u8(MODE_SELECT)==2 || rd_u8(MODE_SELECT)==4 || rd_u8(MODE_SELECT)==5 ||
            rd_u8(MODE_SELECT)==6 || rd_u8(MODE_SELECT)==7 || rd_u8(MODE_SELECT)==8 ||
-           (rd_u8(MODE_SELECT)==3 && !rd_u8(RECORDER_MODE))) refresh_native_context_sort(1);
-        else refresh_native_context();
+           (rd_u8(MODE_SELECT)==3 && !rd_u8(RECORDER_MODE))) refresh_native_context_sort(1,NULL);
+        else refresh_native_context(NULL);
         break;
     default: fprintf(stderr,"native flight transition child unavailable: %u\n",(unsigned)child); abort();
     }
@@ -374,8 +378,8 @@ int native_flight_tick(NativeFrontend *game,int stage_already_ran) {
         update_view_controls(); /* C0F002, before the C1C63E record pass. */
         native_records_update();
         ++game->record_updates;
-        native_scene_project();
-        refresh_native_context();
+        const uint32_t projection_factor=native_scene_project();
+        refresh_native_context(&projection_factor);
         if(!native_scene_draw(game)) return NATIVE_FLIGHT_OWNER_EXIT;
         update_message(); /* C11BFC at C0F12C, before instruments. */
         update_control_actions(NULL,NULL); /* C12950 at C0F132. */

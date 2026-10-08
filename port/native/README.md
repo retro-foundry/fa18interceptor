@@ -1,5 +1,14 @@
 # Native port runner
 
+Independent-camera depth sorting now receives the actual final scaled view
+coefficient through the native projection caller. All 640 complete component
+cases and 48 actual map/moving-camera bodies match original output and compared
+RAM/drawing, including both factor signs and preserved-factor sorting. The
+serial `fa18_native_view_depth` CTest uses bounded capture windows and per-body
+timing sidecars. Source ownership and remaining startup/menu contracts are in
+`../../analysis/native_context_depth_milestone.md`; full game acceptance stays
+open.
+
 Normal-key mode-five combat, enemy-expiry accounting and the natural reset
 now pass 26 input/stage intervals and 115 sampled bodies against original
 compared RAM/drawing, including all 63 consecutive combat-window bodies.
@@ -337,6 +346,9 @@ python tools/native/check_gameplay_window.py --source-prefix build/native-flight
 The checker retains all failures in `comparison.json` and currently exits 1.
 `--frame-capture FIRST+COUNT PREFIX` exports consecutive actual pre-input and
 body boundaries as `PREFIX.ITERATION.entry.dat` / `.before.dat` / `.after.dat`.
+Completed bodies in a range also write `PREFIX.ITERATION.timing.json`, with
+their actual PAL interval, saved tick and owner-exit status. The runner's final
+JSON summary describes the last body; use each sidecar for window comparisons.
 The entry export requires a flight update before its input/stage; its existing single
 iteration form keeps the old filenames. Reference-only `FA18_LOOP_DUMP` accepts
 `FIRST+COUNT:PREFIX` for original boundaries. No capture feeds native behavior.

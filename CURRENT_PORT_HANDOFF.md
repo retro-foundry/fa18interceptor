@@ -1,5 +1,18 @@
 # Current playable port handoff
 
+Latest independent-camera depth acceptance (2026-10-08): native projection
+returns the final scaled view coefficient to context depth sorting. C2DACC
+replaces C29042's earlier origin output; the flight caller's incoming-factor
+contract is resolved. All 640 complete component cases and 48 actual camera
+bodies match original output and compared RAM/drawing, including both signs
+of the factor and preserved-factor sorting. The new serial CTest uses bounded
+consecutive captures with per-body timing sidecars. All three selected Debug
+and 17 final Release checks pass. No matrix arithmetic,
+camera motion, gameplay rule or comparison mask changes. Startup/menu context
+callers without projection, remaining mission successes and full-flight
+acceptance stay open. See `analysis/native_context_depth_milestone.md` and
+`NEW_PORT_HANDOFF.md` for the current executable and validation.
+
 Latest combat/reset acceptance (2026-10-08): the native control-normalisation
 and depth-sort owners now publish their actual retained output into host
 renderer state for early model expiry. The normal-key mode-five diagnostic

@@ -98,10 +98,12 @@ a successful mode-five mission or complete enemy inactivation intervals in
 this mode. Complete its objective, carrier approach, successful landing, save
 and reload using ordinary keys next.
 
-The incoming context-view planar output from C29042 remains a named caller
-contract when neither template rebuilding nor distance calculation replaces
-it. `has_factor` distinguishes that missing input from a produced zero; the
-ordinary viewed-aircraft caller and the tested producers are connected.
+The following `native_context_depth_milestone.md` supersedes the earlier open
+context-flight factor claim: C2DACC's final scaled matrix output replaces the
+origin output and is now connected to cached sorting. Startup/menu context
+callers without projection still need their own incoming factor traced when
+no template or distance producer replaces it. `has_factor` distinguishes that
+missing input from a produced zero.
 Other mission successes, independent complete flights, remaining contracts,
 typed state, audio fidelity and broader performance remain open. The full
 complete-port goal stays active.
