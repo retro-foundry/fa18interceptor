@@ -1,5 +1,15 @@
 # Native port runner
 
+Mode eight now also has a required normal-input infrared shoot-down: 55
+input/stage intervals and 802 bodies match original compared RAM/drawing,
+including every body in the 634-body impact-to-inactivation interval. The
+shared observer checks the selected projectile kind and pilot-log hit word.
+No gameplay rules or playable executable changed. Debug/Release builds and
+four affected CTests pass, including radar kill. Captures remain temporary
+and bounded. See `../../analysis/native_infrared_kill_milestone.md`.
+Gun shoot-downs and full successful missions remain open; this supersedes
+older infrared acceptance limitations below.
+
 Mode eight now has a required normal-input radar shoot-down: impact, 15-tick
 expiry, enemy-aircraft expiry accounting and inactivation of the struck record.
 All 634 consecutive bodies in that interval match original compared RAM/drawing;

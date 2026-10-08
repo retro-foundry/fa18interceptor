@@ -27,14 +27,18 @@ def main():
     parser.add_argument('--smoothing', action='store_true', help='Select the source cancel marker at naturally reached mode-four smoothing')
     parser.add_argument('--combat', action='store_true', help='Mode-five through eight longer flight with manoeuvre-limit samples')
     parser.add_argument('--outcome', action='store_true', help='Mode-six normal-input failure, all three resets and menu return')
-    parser.add_argument('--hit', action='store_true', help='Normal-input mode-eight radar missile hit')
-    parser.add_argument('--kill', action='store_true', help='Normal-input mode-eight radar destruction and expiry accounting')
+    parser.add_argument('--hit', action='store_true', help='Normal-input mode-eight missile hit')
+    parser.add_argument('--kill', action='store_true', help='Normal-input mode-eight missile destruction and expiry accounting')
+    parser.add_argument('--missile', choices=('radar','infrared'), help='Missile for --hit/--kill (default: radar)')
     parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()
     if args.kill:
         if args.hit:
             parser.error('--kill includes --hit; select one probe')
         args.hit=True
+    if args.missile and not args.hit:
+        parser.error('--missile requires --hit or --kill')
+    args.missile=args.missile or 'radar'
     if args.eject and args.mode!=8:
         parser.error('--eject requires --mode 8')
     if args.weapon and (args.mode!=8 or args.eject):
@@ -59,9 +63,11 @@ def main():
 
 def check(args, work, capture_dir):
     prefix = capture_dir / 'frame'
+    hit_probe=('infrared-' if args.missile=='infrared' else '')+('kill' if args.kill else 'hit')
+    hit_weapon=1 if args.missile=='infrared' else 2
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                              str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
-                             *(['kill'] if args.kill else ['hit'] if args.hit else ['outcome'] if args.outcome else ['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
+                             *([hit_probe] if args.hit else ['outcome'] if args.outcome else ['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
                             capture_output=True, text=True, timeout=180 if args.outcome else 90 if args.combat or args.hit else 45 if args.flight else 25)
     (work / 'native-run.log').write_text(result.stdout + result.stderr)
     if result.returncode:
@@ -71,12 +77,12 @@ def check(args, work, capture_dir):
     bodies = [item for item in exports if 'capture' in item]
     if args.hit:
         hit_runs=[item for item in exports if item.get('regions')]
-        assert len(hit_runs)==1 and hit_runs[0]['radar_hits']>0, exports
+        assert len(hit_runs)==1 and hit_runs[0][args.missile+'_hits']>0, exports
         hit_bodies=[item for item in bodies if item.get('hit_body')]
-        assert len(hit_bodies)==1 and hit_bodies[0]['radar_hits_after']==hit_bodies[0]['radar_hits_before']+1, exports
+        assert len(hit_bodies)==1 and hit_bodies[0]['weapon']==hit_weapon and hit_bodies[0]['hits_after']==hit_bodies[0]['hits_before']+1, exports
     if args.kill:
-        kills=[item for item in exports if item.get('radar_kill')]
-        assert len(kills)==1 and kills[0]['started'] and kills[0]['accounted'] and kills[0]['inactive'], exports
+        kills=[item for item in exports if item.get('missile_kill')]
+        assert len(kills)==1 and kills[0]['weapon']==hit_weapon and kills[0]['started'] and kills[0]['accounted'] and kills[0]['inactive'], exports
         transitions=[item for item in exports if item.get('kill_transition')]
         start=hit_bodies[0]['body_serial']
         finish=transitions[-1]['body_serial']
@@ -170,10 +176,10 @@ def check(args, work, capture_dir):
                     raise RuntimeError(comparison.stderr or comparison.stdout)
                 if item.get('hit_body'):
                     pilot_log=item['pilot_log']
-                    log_offset=(pilot_log if pilot_log<0x80000 else 0x80000+pilot_log-0xc00000)+68
-                    for suffix, count in (('before',item['radar_hits_before']),
-                                          ('after',item['radar_hits_after']),
-                                          ('source',item['radar_hits_after'])):
+                    log_offset=(pilot_log if pilot_log<0x80000 else 0x80000+pilot_log-0xc00000)+60+4*item['weapon']
+                    for suffix, count in (('before',item['hits_before']),
+                                          ('after',item['hits_after']),
+                                          ('source',item['hits_after'])):
                         ram=Path(capture+f'.{suffix}.dat').read_bytes()
                         if int.from_bytes(ram[log_offset:log_offset+2],'big')!=count:
                             retain_failure(capture, work)
@@ -212,9 +218,9 @@ def check(args, work, capture_dir):
         }
         (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
     if args.hit:
-        outcome='registers a normal-input radar missile hit'
+        outcome=f'registers a normal-input {args.missile} missile hit'
         report={
-            'scenario':'normal-input-mode-eight-radar-hit',
+            'scenario':f'normal-input-mode-eight-{args.missile}-hit',
             'native_flight_state_seeded':False,
             'eligibility_fixture':'Saved pilot mission-availability byte only; reopened through normal loader',
             'input_stage_intervals':len(entries), 'sampled_bodies':len(bodies),
@@ -225,8 +231,8 @@ def check(args, work, capture_dir):
         }
         (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
     if args.kill:
-        outcome='destroys an enemy aircraft with a radar missile, counts its expiry and observes its inactivation'
-        report['scenario']='normal-input-mode-eight-radar-kill'
+        outcome=f'destroys an enemy aircraft with a {args.missile} missile, counts its expiry and observes its inactivation'
+        report['scenario']=f'normal-input-mode-eight-{args.missile}-kill'
         report['kill']=kills[0]
         report['kill_transitions']=[item for item in exports if item.get('kill_transition')]
         report['reference_scope']='Original instructions from native before-states, including hit and continuous destruction-to-inactivation bodies; not an independent complete mission'

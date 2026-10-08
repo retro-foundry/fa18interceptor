@@ -1,6 +1,6 @@
-# Native port handoff — 2026-10-07
+# Native port handoff — 2026-10-08
 
-## Current restart summary — 2026-10-07
+## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. The latest validated code is
 `f4606f9c` on `coverage-accounting`, pushed to `origin/coverage-accounting`.
@@ -10,6 +10,12 @@ Untracked `.vscode/` is user-owned and must remain untouched.
 
 Recent completed batches:
 
+- Infrared acceptance (2026-10-08): normal-input missile impact, expiry
+  accounting and inactivation pass 55 input/stage intervals and 802 bodies,
+  including every body in the 634-body destruction interval. The selected
+  missile kind and pilot-log +64 counter are checked. No gameplay rule changes;
+  the playable executable is unchanged. See
+  `analysis/native_infrared_kill_milestone.md`.
 - `f4606f9c`: normal-input radar shoot-down through impact, enemy expiry
   accounting and inactivation. All 634 consecutive bodies in that interval
   match original compared RAM/drawing; the full probe passes 57 input/stage
@@ -21,7 +27,11 @@ Recent completed batches:
   verify all seven streams and wrap. Mode six naturally loses three aircraft,
   exhausts resets, returns to the menu and relaunches Free Flight.
 
-Native Debug and Release builds pass. The latest Release run passes eight
+Native Debug and Release builds pass. The latest Release run passes four
+affected CTests: radar kill, infrared kill, frontend and artifact cleanup.
+The compact checkpoint is `analysis/figures/native_infrared_kill_checkpoint.json`;
+the log is `build/native-flight/infrared-ctest.log`.
+The prior radar Release run passed eight
 affected CTests: combat eight, radar hit, radar kill, three weapon probes,
 frontend and artifact cleanup. Evidence and executable hashes are in
 `analysis/native_radar_kill_milestone.md` and
@@ -29,7 +39,7 @@ frontend and artifact cleanup. Evidence and executable hashes are in
 The comparisons execute original instructions from native before-states;
 they do not establish an independent complete original mission replay.
 
-Next work is normal-input infrared and gun shoot-down acceptance, then complete
+Next work is normal-input gun shoot-down acceptance, then complete
 successful mission sequences and independent full-flight comparisons. Trace
 the actual native caller and original rule before changing behavior; a missing
 proof alone does not establish a gameplay bug. Remaining callback contracts,
@@ -39,7 +49,7 @@ presentation cadence. The complete-port goal remains active.
 
 Builds and CTest automatically prune disposable artifacts against a 4 GiB
 budget; passing comparison RAM is deleted immediately. The latest cleanup left
-about 1.48 GiB of protected build files and small artifacts. Keep passing
+about 1.47 GiB of protected build files and small artifacts. Keep passing
 captures temporary and bounded; use `--keep-captures` only for deliberate
 debugging. Preserve sealed recordings and local media. Do not modify
 `scripts/check_native_build.py`, `scripts/native_frame_count.py` or
@@ -674,16 +684,16 @@ python tools/native/check_frame_body.py --case active --case crash-flight --case
 python tools/native/check_frontend.py --runner build/native/fa18_native.exe --map build/native-cmake/native/fa18_native.map
 ```
 
-Latest validated batch: native Debug/Release builds and eight affected Release
-CTests pass. The radar-kill check compares the continuous impact-to-inactivation
+Latest validated batch: native Debug/Release builds and four affected Release
+CTests pass. The missile-kill checks compare the continuous impact-to-inactivation
 interval; each original oracle build must run sequentially.
 
 ```powershell
-ctest --test-dir build/native-cmake -C Release --output-on-failure -R '^fa18_native_(combat_8|radar_hit|radar_kill|weapon_[123]|frontend|artifact_cleanup)$'
-python tools/native/check_mode_two.py --mode 8 --kill --out build/native-flight/radar-kill
+ctest --test-dir build/native-cmake -C Release --output-on-failure -R '^fa18_native_(radar_kill|infrared_kill|frontend|artifact_cleanup)$'
+python tools/native/check_mode_two.py --mode 8 --kill --missile infrared --out build/native-flight/infrared-kill
 ```
 
-Latest log: `build/native-flight/radar-kill-ctest.log`. No independent complete
+Latest log: `build/native-flight/infrared-ctest.log`. No independent complete
 original mission replay was performed. Do not rerun this batch without a new
 change, failure or unresolved concern.
 
@@ -700,8 +710,8 @@ These scene-exit logs describe historical validation.
 
 ## Other unfinished scope
 
-Radar destruction through expiry accounting and inactivation is now verified.
-Infrared/gun shoot-downs, complete successful missions, independent complete
+Radar and infrared destruction through expiry accounting and inactivation are
+now verified. Gun shoot-downs, complete successful missions, independent complete
 flights, remaining callback contracts, typed state, audio fidelity and broader
 visible-window/combat performance remain open. Later input-return milestones
 supersede the old first-depleted-recorder limitation; do not restore guessed

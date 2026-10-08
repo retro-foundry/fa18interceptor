@@ -151,6 +151,10 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
                 --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 8 --kill
                 --out ${CMAKE_CURRENT_BINARY_DIR}/radar-kill-check)
+    add_test(NAME fa18_native_infrared_kill
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
+                --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 8 --kill --missile infrared
+                --out ${CMAKE_CURRENT_BINARY_DIR}/infrared-kill-check)
     add_test(NAME fa18_native_mode_five
         COMMAND fa18_native_mode_two_test
             ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
