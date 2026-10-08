@@ -1,5 +1,14 @@
 # Native port runner
 
+Final mission availability is now earned by the ordinary rescue/cruise save
+chain from the original ADF pilot. The active final success gate loads that
+saved log and completes aircraft objective, carrier landing, save, menu and
+cold wrap. Completions advance 5 -> 6; sampled original comparisons and the
+playable replay agree. See
+`../../analysis/native_final_mission_earned_availability_milestone.md`.
+Gameplay is unchanged; a newly enlisted complete tour and independent whole
+flights remain open. The older patrol diagnostic retains its unearned log.
+
 Intercept Incoming Cruise Missile (F5/internal mode seven) now completes
 interception, carrier deck/wire landing, stop/save, messages, Escape/menu and
 cold reload through ordinary keys. `fa18_native_mission_7_sequence` compares
@@ -9,7 +18,7 @@ replay delivers all 1,533 host events and agrees on saved bytes/menu. Starting
 availability is earned by the normal-key rescue save; its existing gate now
 reproduces exact retained rescue inputs and log bytes. See
 `../../analysis/native_cruise_mission_sequence_milestone.md`. All six menu
-missions have successful routes. Complete-tour/final availability and
+missions have successful routes. Complete-tour acceptance and
 independent whole flights remain open. Gameplay and comparison masks are
 unchanged; passing RAM remains temporary inside the existing 480 MiB cap.
 Debug/Release gates agree on cruise inputs, saved bytes and result sequence.
@@ -39,9 +48,10 @@ windows, 64 landing bodies and one config write. The playable runner delivers
 C230B0's returned selection word is preserved into the generic scheduler;
 original FF04 replaces the adapter's incorrect 0004 completion word. Predicates,
 countdowns and comparison masks are unchanged. Class-20 surface record 14 remains active
-at objective admission. The availability-only pilot fixture is explicitly
+at objective admission. The original availability-only pilot fixture was
 unearned. See `../../analysis/native_final_mission_sequence_milestone.md`.
-Earned availability and independent complete-flight parity remain open. The
+The active gate now uses earned availability above; independent complete-flight
+parity remains open. The
 earlier `fa18_native_final_patrol_diagnostic` remains accepted; capture partitions
 retain the 480 MiB cap and builds/CTest keep the 4 GiB pruning hooks.
 

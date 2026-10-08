@@ -1,21 +1,16 @@
 """Compare the same final flight in two partitions inside the 480 MiB cap."""
-import hashlib
 import json
 from pathlib import Path
 import subprocess
 
 from mission_source_comparison import compare_mission_boundaries
+from final_pilot_fixture import load_final_pilot
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
 def collect_final_sequence(args, work, ram, env):
-    fixture = json.loads((ROOT / 'tools/native/fixtures/final-mission-eligible-pilot.json').read_text())
-    initial = bytes.fromhex(fixture['config_hex'])
-    assert len(initial) == 78 and initial[25] == 1
-    assert hashlib.sha256(initial).hexdigest() == fixture['config_sha256']
-    assert hashlib.sha256((ROOT / 'local/media/fa18.adf').read_bytes()).hexdigest() == fixture['adf_sha256']
-    assert not fixture['mission_availability_earned'] and not fixture['native_flight_state_seeded']
+    initial = load_final_pilot()
     cases, partitions, writes = [], [], 0
     first_exports = first_saved = first_keys = first_wrap = None
     for index, (begin, end) in enumerate(((0, 23000), (23001, 0))):

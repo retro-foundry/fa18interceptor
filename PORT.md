@@ -1,5 +1,14 @@
 # The C port
 
+Final mission availability is now earned by the ordinary rescue/cruise save
+chain from the original ADF pilot. The final gate uses the actual saved log and
+completes aircraft objective, carrier landing, save, menu and cold wrap with
+matching sampled original comparisons and playable results. Gameplay is
+unchanged. See
+[`analysis/native_final_mission_earned_availability_milestone.md`](analysis/native_final_mission_earned_availability_milestone.md).
+A complete newly enlisted tour and independent original whole flights remain
+open; the earlier patrol diagnostic retains its explicitly unearned log.
+
 Intercept Incoming Cruise Missile (F5/internal mode seven) now completes its
 interception, carrier deck/wire landing, saved result, messages, Escape/menu and
 cold reload through ordinary keys. All 42 input/stage intervals and 171 bodies
@@ -36,8 +45,9 @@ Mission wrap through ordinary keys. Its scheduler now preserves the original
 selection-word return at C230B0/C0A364/C0A3A6. The sampled original comparisons
 and playable result agree; see
 [`analysis/native_final_mission_sequence_milestone.md`](analysis/native_final_mission_sequence_milestone.md).
-The eligibility fixture remains unearned; independent original complete-flight
-parity and full-port acceptance remain open.
+The original success evidence used an unearned eligibility fixture; the active
+gate now uses the earned log above. Independent original complete-flight parity
+and full-port acceptance remain open.
 
 Sustained mode-six/eight native flight now connects the readable guidance
 continuation and corrects projection returns and matrix angle semantics.

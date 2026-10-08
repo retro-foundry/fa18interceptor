@@ -1,5 +1,25 @@
 # Current playable port handoff
 
+Latest earned final availability (2026-10-08): the active final success gate
+uses the actual pilot log saved after normal-key rescue and cruise flights.
+The original byte-25 grade guard admits F6/internal mode eight. Ordinary keys
+then complete four aircraft expiries, carrier landing, save, messages/menu and
+cold Next Mission wrap. Completions advance 5 -> 6 and grade 0 -> 1.
+All 42 flight intervals/239 bodies plus one cold-wrap interval/body match
+original compared RAM/drawing; the playable replay agrees on saved bytes/menu.
+No visible submarine explosion is required on this original counter path.
+The cruise gate reproduces exact retained input and all 78 prerequisite bytes.
+This removes synthetic eligibility from the active final success gate; gameplay
+and masks are unchanged. The older patrol diagnostic remains explicitly
+unearned. See `analysis/native_final_mission_earned_availability_milestone.md`.
+The ADF pilot contains earlier progress: a newly enlisted complete tour,
+independent original whole flights and full-port acceptance remain open.
+The complete-port goal stays active; capture/pruning limits remain unchanged.
+Six selected Release checks and four Debug checks pass, including both earned
+progression gates, final success and the Release frontend/link check. Debug and
+Release final inputs, saved bytes, objective/landing/menu and wrap agree.
+The playable Release executable is unchanged; pruned build use is 2.00 GiB.
+
 Latest cruise-missile sequence (2026-10-08): Intercept Incoming Cruise Missile
 (F5/internal mode seven) completes interception, carrier deck/wire landing,
 stop/save, messages, Escape/menu and cold reload through ordinary keys.
@@ -12,8 +32,8 @@ gate now reproduces exact retained inputs and log bytes. It is not a complete
 tour from a newly enlisted pilot. Gameplay and comparison masks are unchanged;
 no new decompilation is claimed. See `fa18_native_mission_7_sequence`,
 `analysis/native_cruise_mission_sequence_milestone.md` and its checkpoint.
-All six menu missions now have successful native routes. Complete-tour/final
-availability, independent complete original flights, remaining caller contracts,
+All six menu missions now have successful native routes. Complete-tour
+acceptance, independent complete original flights, remaining caller contracts,
 typed state, audio and wider performance remain open; the full goal stays active.
 Passing RAM is temporary inside the unchanged 240-pair / 480 MiB capture cap.
 Nine selected Release checks and three Debug checks pass, with matching cruise
@@ -55,9 +75,9 @@ FF04 replaces the adapter's incorrect 0004 completion word. Original predicates,
 countdowns and comparison masks are preserved; no new decompilation is claimed.
 The serial gate is `fa18_native_mission_8_sequence`; the earlier three-aircraft
 diagnostic remains accepted. See `analysis/native_final_mission_sequence_milestone.md`
-and its checkpoint. The saved-pilot availability fixture remains explicitly
-unearned, with no flight-state seeding. Earned final availability and independent
-complete-flight parity remain open; modes six/seven are accepted above.
+and its checkpoint. This historical availability fixture was explicitly
+unearned, with no flight-state seeding. The active gate now uses earned final
+availability as recorded above; independent complete-flight parity remains open.
 Two identical flights partition capture storage inside the existing 480 MiB
 cap and remove passing RAM before collecting the next partition. The 4 GiB
 build-cache pruning hooks remain active.

@@ -4,9 +4,11 @@ Latest acceptance: ordinary keys now complete four counted aircraft
 destructions, carrier landing, saved result, menu return and cold Next Mission
 wrap. Class-20 surface record 14 remains active at objective admission. The native scheduler
 return contract is corrected and all sampled original comparisons pass; see
-`native_final_mission_sequence_milestone.md`. Earned availability and independent
-complete-flight parity remain open. The three-aircraft diagnostic below is
-retained as earlier evidence.
+`native_final_mission_sequence_milestone.md`. The active final gate now uses
+availability earned by rescue/cruise saves; see
+`native_final_mission_earned_availability_milestone.md`. A newly enlisted complete
+tour and independent complete-flight parity remain open. The three-aircraft
+diagnostic below is retained as earlier evidence.
 
 The user's mission-six concern refers to the final Carrier Sub mission.
 The earlier handoff incorrectly associated it with the internal `mode_six`
@@ -136,5 +138,7 @@ Fourth aircraft destruction, FF objective, carrier landing, stopped result,
 config save, menu return and cold Next Mission wrap are accepted by the later
 sequence milestone. The earlier longer three-expiry attempt that crashed was a
 pilot diagnostic, not evidence that the mission was impossible. Earned
-availability and independent original complete-flight parity remain open.
+availability is now accepted through the later rescue/cruise saved-log chain;
+see `native_final_mission_earned_availability_milestone.md`. A newly enlisted
+complete tour and independent original complete-flight parity remain open.
 Preserve the original counter rules and absence of a required visible explosion.

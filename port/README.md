@@ -1,5 +1,12 @@
 # Active port source ownership
 
+The active final success gate now uses availability earned by normal-key rescue
+and cruise saves from the original ADF pilot. It completes the aircraft
+objective, carrier landing, save, menu and cold wrap with matching sampled
+original comparisons and playable results. Gameplay is unchanged. See
+[`../analysis/native_final_mission_earned_availability_milestone.md`](../analysis/native_final_mission_earned_availability_milestone.md).
+A newly enlisted complete tour and independent whole flights remain open.
+
 Intercept Incoming Cruise Missile (F5/internal mode seven) now completes
 interception, carrier deck/wire landing, save, messages, Escape/menu and cold
 reload through ordinary keys. The serial `fa18_native_mission_7_sequence`
@@ -25,8 +32,9 @@ returned selection word through C0A364/C0A3A6. Ordinary controls now complete
 the final aircraft objective, carrier landing, save, menu return and cold Next
 Mission wrap, with sampled original comparisons and matching playable output.
 See [`../analysis/native_final_mission_sequence_milestone.md`](../analysis/native_final_mission_sequence_milestone.md).
-The eligible pilot fixture is explicitly unearned; independent original whole
-flights and full-port acceptance remain open.
+The original success fixture was explicitly unearned; the active gate now uses
+the earned log above. The earlier patrol diagnostic retains its unearned log.
+Independent original whole flights and full-port acceptance remain open.
 
 Latest connected fixes: demo attached-camera projection avoids rotating the
 model vertex twice; 223 independent takeoff boundaries match both drawing

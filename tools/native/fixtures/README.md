@@ -38,3 +38,20 @@ no flight state. The initial ADF pilot already contains earlier progress;
 this fixture proves the rescue-earned availability step, not a complete tour
 earned from a newly enlisted pilot. See
 `analysis/native_rescue_mission_sequence_milestone.md`.
+
+## Earned final-mission availability
+
+`cruise-sequence.e9k` retains the 1,533 ordinary host events from the accepted
+cruise interception, carrier landing, save and menu return at tick 22,970.
+Starting from `cruise-mission-pilot.json`, it earns mode-seven grade one,
+admitting the final Carrier Sub mission (F6/internal mode eight).
+
+`final-mission-earned-pilot.json` retains the actual 78-byte saved log, initial
+log hash and normalized input/ADF hashes. `final_pilot_fixture.load_final_pilot()`
+checks the rescue/cruise provenance chain; `fa18_native_mission_7_sequence`
+reproduces exact retained input and saved bytes. The active final success gate
+uses this earned log. The original ADF pilot contains earlier progress, so this
+does not establish a newly enlisted complete tour. The older
+`final-mission-eligible-pilot.json` remains explicitly unearned and serves the
+earlier three-aircraft diagnostic. See
+`analysis/native_final_mission_earned_availability_milestone.md`.

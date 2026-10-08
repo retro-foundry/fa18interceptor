@@ -2,6 +2,26 @@
 
 ## Current restart summary — 2026-10-08
 
+Final mission availability is now earned by ordinary rescue and cruise flights
+starting from the original ADF pilot. The active final success gate loads their
+actual saved log; the original byte-25 grade guard admits F6/internal mode eight.
+Four aircraft expiries then admit success, followed by carrier landing, save,
+messages/menu and cold Next Mission wrap. Completions advance 5 -> 6 and grade
+0 -> 1. All 42 flight intervals/239 bodies plus one wrap interval/body match
+original compared RAM/drawing, with matching playable saved bytes/menu/wrap.
+The cruise gate reproduces exact retained input and all 78 prerequisite bytes.
+Gameplay and masks are unchanged; the older patrol diagnostic still uses its
+explicitly unearned reference log. See
+`analysis/native_final_mission_earned_availability_milestone.md` and checkpoint.
+No visible submarine explosion is required on this original counter path.
+Earlier ADF pilot progress remains: a newly enlisted complete tour, independent
+original whole flights and full-port acceptance are still open. Capture and
+pruning limits remain unchanged; the complete-port goal stays active.
+Six selected Release checks and four Debug checks pass. Final input/save hashes,
+objective/landing/menu and cold wrap agree across configurations. The Release
+playable remains unchanged and pruned build use is 2.00 GiB. Evidence is in
+`analysis/figures/native_final_mission_earned_availability_checkpoint.json`.
+
 Intercept Incoming Cruise Missile (F5/internal mode seven) now completes through
 ordinary keys: a radar missile intercepts record four, the original FF objective
 is admitted, and the player returns to the carrier, catches the wire, stops,
@@ -16,8 +36,8 @@ retained rescue inputs and log bytes. This does not prove a complete tour from
 a newly enlisted pilot. Gameplay and comparison masks are unchanged; no new
 decompilation is claimed. The serial gate is `fa18_native_mission_7_sequence`;
 see `analysis/native_cruise_mission_sequence_milestone.md` and its checkpoint.
-All six menu missions now have successful native routes. Complete-tour/final
-availability, independent whole flights, remaining caller contracts, typed state,
+All six menu missions now have successful native routes. Complete-tour
+acceptance, independent whole flights, remaining caller contracts, typed state,
 audio and wider performance remain open. Captures use 213 pairs within the
 unchanged 240-pair / 480 MiB cap and passing RAM remains temporary.
 Debug/Release fixture builds pass. Nine selected Release checks and three
@@ -62,9 +82,9 @@ C0A364/C0A3A6, publishing original FF04 instead of 0004 at completion. Original
 predicates, countdowns and comparison masks are unchanged. No newly decompiled
 routine is claimed. The serial gate is `fa18_native_mission_8_sequence`; see
 `analysis/native_final_mission_sequence_milestone.md` and its checkpoint.
-The initial availability-only saved pilot remains explicitly unearned; flight
-state is never seeded. Earned final availability and independent complete
-original flights remain open; modes six/seven are accepted above. Two identical
+This historical availability-only saved pilot was explicitly unearned; flight
+state was never seeded. The active gate now uses earned final availability as
+recorded above; independent complete original flights remain open. Two identical
 flights
 partition captures inside the existing 480 MiB cap, removing passing RAM before
 the next partition; the 4 GiB build-cache pruning hooks stay active. The earlier
@@ -108,8 +128,9 @@ reports that the submarine need not visibly explode and that destroying the
 patrolling aircraft may suffice. The original mode-eight dispatch uses
 `POSTFLIGHT_MODE_OTHER` -> `generic_mode`, comparing admitted/completed counters.
 It has no direct submarine-explosion test. The successful ordinary-input final
-flight/save/menu/wrap route is accepted above; earned availability and independent
-original full-flight parity remain open.
+flight/save/menu/wrap route and rescue/cruise-earned availability are accepted
+above; a newly enlisted complete tour and independent original full-flight
+parity remain open.
 Preserve original rules; see `analysis/native_final_mission_completion_context.md`.
 
 Earlier mission-four input diagnostic added `4-success` and `4-sequence`.

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "config_hex": "00010002000307000000054300000000000000000001010101010000000052004f00494500000000000000000000000000000000000000050005000f000000070004000200020000000200000000",
+  "config_sha256": "c5c7d4259d9349596389e5a5df3dcce6ba6e32a1db82d1403dd64ce11eb6cae4",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "mission_mode": 8,
+  "availability_earned_by_mode": 7,
+  "mission_availability_earned": true,
+  "full_tour_earned": false,
+  "native_flight_state_seeded": false,
+  "provenance": "Original ADF pilot, normal-key rescue success/save/menu, then normal-key cruise interception/save/menu earns the grade admitting the final mission",
+  "initial_fixture": "tools/native/fixtures/cruise-mission-pilot.json",
+  "initial_config_sha256": "3ba231b8be362090992a49cb2246b2a0f8326358c5cac23bdef409849eecd829",
+  "cruise_menu_tick": 22970,
+  "input_sha256_lf": {
+    "tools/native/fixtures/cruise-sequence.e9k": "139f58e3d9a5fc59a0a3bf39584b38622e206a8ebc23175053de8d7d7a421a05"
+  },
+  "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open"
+}

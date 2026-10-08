@@ -15,6 +15,7 @@ from check_mission_five_objective import objective_evidence
 from mission_source_comparison import compare_mission_boundaries
 from region_pilot_fixture import load_region_pilot
 from cruise_pilot_fixture import load_cruise_pilot
+from final_pilot_fixture import load_final_pilot
 from final_sequence_capture import collect_final_sequence
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -207,6 +208,10 @@ def main():
             assert saved == load_cruise_pilot(), 'Rescue save must reproduce earned cruise availability'
             retained = ROOT / 'tools/native/fixtures/rescue-sequence.e9k'
             assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'Earned rescue input differs'
+        if args.mode == 7:
+            assert saved == load_final_pilot(), 'Cruise save must reproduce earned final availability'
+            retained = ROOT / 'tools/native/fixtures/cruise-sequence.e9k'
+            assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'Earned cruise input differs'
         if writes is None:
             writes = compare_mission_boundaries(prefix, entries, bodies, work)
         assert writes == 1, f'Expected the actual mission config write; observed {writes}'
@@ -298,8 +303,10 @@ def main():
             assert wrap_state['mode'] == 3 and wrap_state['stage'] == wrap['stage'] and wrap_state['screen'] == wrap['screen'], wrap_state
             assert wrap_state['host_replay_events'] == 4 and not wrap_state['host_replay_pending'] and not wrap_state['input_queued'], wrap_state
             assert not wrap_state['postflight_resets'] and (canonical_pilot / 'config').read_bytes() == saved, wrap_state
-            report.update({'mission_success_accepted': True, 'mission_availability_earned': False,
-                'eligibility_fixture': 'tools/native/fixtures/final-mission-eligible-pilot.json',
+            report.update({'mission_success_accepted': True, 'mission_availability_earned': True,
+                'full_tour_earned': False,
+                'initial_pilot_source': 'Normal-key rescue and cruise success/save/menu chain from original ADF pilot',
+                'eligibility_fixture': 'tools/native/fixtures/final-mission-earned-pilot.json',
                 'capture_partitions': partitions, 'patrol_expiries': expiries, 'counter_objective': objective,
                 'weapon_hits': hits, 'compared_combat_bodies': len(compared_combat),
                 'return': returns[0], 'next_mission_wrap': wrap, 'canonical_wrap': wrap_state,
