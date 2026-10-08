@@ -67,20 +67,13 @@ The fixture's failure exit remains expected because the flight does not meet
 the mission-success conditions. Original instructions execute from native
 before-states; this does not prove independent complete original-flight parity.
 
-## Pending enemy-expiry investigation
+## Historical enemy-expiry investigation
 
-The expanded local diagnostic adds 63 consecutive combat-window bodies and
-115 sampled bodies overall. It exposes an early model-expiry retained-output
-mismatch at body 8,561: C4F6DE is source $7586, native $FFFF. A local change
-publishes the live control-normalisation status pointer from C1D974 and reaches
-the next body, 8,562, which differs source $0002 versus native $7586. The original
-C1E4A6 depth-sort save supplies the latter retained output. Its actual producer
-must be connected before accepting the expanded comparison.
-
-Those renderer changes and the expanded gate remain uncommitted. Both native
-enemy-expiry increments are observed; complete source comparison of both
-windows remains open. Finish that comparison, then complete the normal-key
-mode-five objective and carrier return. Modes four through eight, independent
-complete flights, remaining contracts, typed state, audio fidelity and broader
-performance remain open. The complete-port goal stays active. Build retention
-remains 4 GiB; preserve the protected validation files and user-owned settings.
+The investigation recorded here is now resolved for the normal-key mode-five
+combat/reset scenario. The expanded comparison passes all 115 sampled bodies,
+including all 63 consecutive combat-window bodies and both enemy-expiry
+accounting increments. The normalisation pointer and actual depth-sort output
+now reach early model expiry through host renderer state. See
+`native_mission_five_combat_reset_milestone.md` for the connected owners,
+component checks, regressions and remaining full-port scope. Mode-five mission
+success and independent complete original-flight parity remain open.

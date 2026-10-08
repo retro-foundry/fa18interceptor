@@ -11,6 +11,7 @@
 #include "recomp_ports.h"
 #include "memory.h"
 #include "../../port/game/native/clock.c"
+#include "../../port/game/native/model_state.c"
 #include "../../port/game/native/records.c"
 #include "stages.h"
 #include "matrix_route.h"

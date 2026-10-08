@@ -179,17 +179,23 @@ static uint16_t magnitude_factor(int16_t index) {
     return rd_u16(MAGNITUDE_TABLE + (gaddr)(int32_t)(int16_t)(index * 2));
 }
 
-int32_t magnitude3(int16_t x, int16_t y, int16_t z) {
+DistanceResult magnitude3_result(int16_t x, int16_t y, int16_t z) {
     int16_t large = x, small = y, index = 0;
     int32_t planar, height, big, other, result;
+    uint32_t planar_factor;
 
     if (small > large) {
         large = y;
         small = x;
     }
-    if (small != 0 && large != 0)
-        index = (int16_t)divu_w((uint32_t)((int32_t)small << 8), (uint16_t)large);
-    planar = (int32_t)((uint32_t)(uint16_t)large * magnitude_factor(index));
+    planar_factor = (uint32_t)(int32_t)small;
+    if (small != 0) {
+        planar_factor <<= 8;
+        planar_factor = large != 0 ? divu_w(planar_factor, (uint16_t)large) : 0;
+        index = (int16_t)planar_factor;
+    }
+    planar_factor = (planar_factor & 0xFFFF0000u) | magnitude_factor(index);
+    planar = (int32_t)((uint32_t)(uint16_t)large * (uint16_t)planar_factor);
 
     height = (int32_t)z << 14;
     big = planar;
@@ -205,7 +211,11 @@ int32_t magnitude3(int16_t x, int16_t y, int16_t z) {
     result = (int32_t)((uint32_t)magnitude_factor(index) * (uint16_t)big) >> 14;
     if (result > 0x7FFF) result = (int32_t)(((uint32_t)result & 0xFFFF0000u) | 0x7FFF);
     wr_u16(MAGNITUDE, (uint16_t)result);
-    return result;
+    return (DistanceResult){result, planar_factor};
+}
+
+int32_t magnitude3(int16_t x, int16_t y, int16_t z) {
+    return magnitude3_result(x, y, z).length;
 }
 
 /* NEG.W when negative: -32768 stays. */
@@ -214,7 +224,7 @@ static int16_t asr16(int16_t v, int count) {
     return count >= 16 ? (int16_t)(v < 0 ? -1 : 0) : (int16_t)(v >> count);
 }
 
-int32_t target_distance(int16_t x, int16_t y, int16_t z) {
+DistanceResult target_distance_result(int16_t x, int16_t y, int16_t z) {
     int shift = rd_s16(BOUND_SHIFT) & 63;
     int16_t dx = (int16_t)(x + asr16(rd_s16(PROJECTION_WORDS), shift));
     int16_t dz = (int16_t)(z + asr16(rd_s16(PROJECTION_WORDS + 4), shift));
@@ -227,10 +237,14 @@ int32_t target_distance(int16_t x, int16_t y, int16_t z) {
     if (dy < 0) dy = (int32_t)(0u - (uint32_t)dy);
     if (dy >= 0x7FFF0) {
         wr_u16(MAGNITUDE, 0x7FFF);
-        return 0x7FFF;
+        return (DistanceResult){0x7FFF, (uint32_t)dy};
     }
     if (dz < 0) dz = (int16_t)-dz;
-    return magnitude3((int16_t)(dx >> 4), (int16_t)(dy >> 4), (int16_t)(dz >> 4));
+    return magnitude3_result((int16_t)(dx >> 4), (int16_t)(dy >> 4), (int16_t)(dz >> 4));
+}
+
+int32_t target_distance(int16_t x, int16_t y, int16_t z) {
+    return target_distance_result(x, y, z).length;
 }
 
 static int16_t abs16(int16_t v) {

@@ -1,6 +1,7 @@
 /* Native composition of the source C1C63E -> C22C80 update path. */
 #include "records.h"
 #include "clock.h"
+#include "model.h"
 #include "../globals.h"
 #include "../update_stage.h"
 #include "../record_update_stage.h"
@@ -106,6 +107,10 @@ static FlightWorking root_control_child(void *context,enum FlightChild child,Fli
     (void)context;
     switch(child) {
     case FC_NORMALISE_CONTROL: {
+        /* C149BE -> C25754 -> C1D974 saves its live status pointer.
+         * Its low word overlaps the later C1EE14 model's retained -$7C.
+         * Zero scale bypasses that child and preserves the preceding output. */
+        if((uint16_t)w.value) native_model_retain_result((uint16_t)(w.record+2));
         const gaddr frame=0x4700;
         wr_u32(frame+8,w.value);wr_u32(frame+12,w.z);
         wr_u32(frame+16,w.rate);wr_u32(frame+20,w.depth);

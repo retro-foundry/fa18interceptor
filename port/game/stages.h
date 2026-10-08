@@ -70,6 +70,14 @@ void sort_by_depth(int16_t count);
  * `all` goes on through the rest this pass. A list with no entries is a
  * fatal error ($37). */
 void sort_display_list(int all);
+typedef struct {
+    /* Incoming projection/template planar value; cached depth words retain
+     * its upper half. The copy/reorder stage supplies it to the next list. */
+    uint32_t planar_factor;
+    uint16_t retained_word;
+    unsigned has_factor, has_output;
+} DisplaySortResult;
+void sort_display_list_retained(int all, DisplaySortResult *result);
 
 /* Empty the message queue and reset the message sequence. */
 void reset_message_sequence(void);

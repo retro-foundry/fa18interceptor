@@ -10,11 +10,12 @@
 typedef struct {
     const char *prefix;
     uint8_t *before, *entry_before;
-    unsigned body, captures, entries, first_tick, entry_tick, iteration, window;
+    unsigned body, captures, entries, first_tick, entry_tick, iteration, window, combat_window;
     unsigned entry_keys[256], key_count;
     unsigned mode;
     uint16_t saved_tick, contact, completions, speed;
     uint16_t radar_hits, gun_hits;
+    uint8_t enemy_expiries;
     uint8_t phase, region, confirmation, entry_phase, previous_entry_phase;
     gaddr stage, previous_stage, entry_stage, previous_entry_stage;
     int begun, keep_entry, airborne, landed;
@@ -68,6 +69,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->completions=rd_u16(rd_u32(MODE_TABLE)+56);
         run->radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
         run->gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
+        run->enemy_expiries=rd_u8(SCENE_DISPATCH_AUX);
         copy_ram(run->before,game);
         if(run->keep_entry) {
             capture_budget(run);
@@ -91,6 +93,9 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     const uint16_t completions=rd_u16(rd_u32(MODE_TABLE)+56);
     const uint16_t radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
     const uint16_t gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
+    const uint8_t enemy_expiries=rd_u8(SCENE_DISPATCH_AUX);
+    if(run->mode==5 && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits))
+        run->combat_window=20; /* Include the original 15-tick expiry and its boundary. */
     if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
     const int touchdown=run->airborne && !run->landed && (contact&0x80);
     if(touchdown) {run->landed=1;run->window=96;}
@@ -99,10 +104,11 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     const int ready=run->landed && (region&region_mask) && !speed;
     const int ready_before=run->landed && (run->region&region_mask) && !run->speed;
     const int keep=run->stage!=run->previous_stage || run->body%(run->mode==3?512:1024)==0 ||
-        run->window || phase!=run->phase || completions!=run->completions ||
+        run->window || run->combat_window || phase!=run->phase || completions!=run->completions ||
         ((contact^run->contact)&0x80) || confirmation!=run->confirmation ||
         (run->landed && ((region^run->region)&region_mask)) || (ready && !ready_before) ||
-        radar_hits!=run->radar_hits || gun_hits!=run->gun_hits;
+        radar_hits!=run->radar_hits || gun_hits!=run->gun_hits ||
+        (run->mode==5 && enemy_expiries!=run->enemy_expiries);
     if(radar_hits!=run->radar_hits || gun_hits!=run->gun_hits) {
         printf("{\"weapon_hit\":true,\"body\":%u,\"gun_before\":%u,\"gun_after\":%u,"
                "\"radar_before\":%u,\"radar_after\":%u,\"records\":[",
@@ -127,15 +133,18 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                "\"confirmation_before\":%u,\"confirmation_after\":%u,\"selected\":%d,"
                "\"view_record\":%u,\"region_before\":%u,\"region_after\":%u,\"speed\":%u,"
                "\"completions_before\":%u,\"completions_after\":%u,"
-               "\"touchdown\":%s,\"landing_window\":%s,\"ready\":%s}\n",
+               "\"touchdown\":%s,\"landing_window\":%s,\"ready\":%s,"
+               "\"combat_window\":%s,\"enemy_expiries_before\":%u,\"enemy_expiries_after\":%u}\n",
                run->captures++,run->body,run->iteration,run->stage,run->first_tick,game->ticks,
                run->saved_tick,boundary==NATIVE_FRAME_OWNER_EXIT?"true":"false",
                run->phase,phase,run->contact,contact,run->confirmation,confirmation,
                rd_s16(SELECTED_RECORD),rd_u16(VIEW_RECORD),run->region,region,speed,
                run->completions,completions,touchdown?"true":"false",
-               run->window?"true":"false",ready?"true":"false");
+               run->window?"true":"false",ready?"true":"false",run->combat_window?"true":"false",
+               run->enemy_expiries,enemy_expiries);
     }
     if(run->window) --run->window;
+    if(run->combat_window) --run->combat_window;
     run->previous_stage=run->stage;
 }
 
@@ -181,6 +190,10 @@ int main(int argc,char **argv) {
     const unsigned speed=rd_u16(CONTROL_RECORDS+110),contact=rd_u16(CONTROL_RECORDS+2);
     const gaddr log=rd_u32(MODE_TABLE),stage=rd_u32(STAGE_CALLBACK);
     const unsigned completions=rd_u16(log+56),grade=rd_u8(log+18+pilot.mode);
+    if(pilot.mode==5)
+        printf("{\"diagnostic_end\":true,\"mode\":%u,\"phase\":%u,\"tick\":%u,\"crash_resets\":%u,"
+               "\"completions_before\":%u,\"completions_after\":%u,\"stage\":\"%06X\"}\n",
+            mode,phase,ticks,resets,pilot.completions,completions,stage);
     const unsigned region_mask=rd_u8(SCENE_POSE_ENTRY)==3?0xc0u:4u;
     if(!run.airborne || !run.landed || !pilot.objective || !pilot.started || resets ||
        mode!=pilot.mode || phase!=0xfc || !(contact&0x80) || !(region&region_mask) || speed ||

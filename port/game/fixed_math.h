@@ -64,6 +64,13 @@ int32_t long_divide(int32_t dividend, int32_t divisor, int32_t *remainder);
  * larger of x and y scaled by sqrt(1 + ratio^2) from MAGNITUDE_TABLE, then
  * the same with z. Capped at $7FFF (low word) and stored in MAGNITUDE. */
 int32_t magnitude3(int16_t x, int16_t y, int16_t z);
+typedef struct {
+    int32_t length;
+    /* C1D994's division remainder and C1D998's planar table factor.
+     * C1E4A6 retains the high word for a later expired model. */
+    uint32_t planar_factor;
+} DistanceResult;
+DistanceResult magnitude3_result(int16_t x, int16_t y, int16_t z);
 
 /* The magnitude3 distance from (x, y, z) plus the target point
  * (PROJECTION_WORDS x and z, PROJECTION_Y, each shifted down by
@@ -71,6 +78,9 @@ int32_t magnitude3(int16_t x, int16_t y, int16_t z);
  * instead while POSITION_VALID is set; a height of $7FFF0 or more gives
  * $7FFF at once. */
 int32_t target_distance(int16_t x, int16_t y, int16_t z);
+/* On the saturated-height path the retained value is the absolute height
+ * itself (C1D95C); otherwise it is magnitude3's planar lookup output. */
+DistanceResult target_distance_result(int16_t x, int16_t y, int16_t z);
 
 /* NORMALIZED = (x, y, z) scaled to about `scale` / length, signed by the
  * sign of `scale` ($C25754, using magnitude3). All zero when the scale or

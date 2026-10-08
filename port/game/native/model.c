@@ -585,11 +585,11 @@ static ContextPublicationResult expiry_selection_child(void *context,enum Contex
     post_message(0x4016);
     return (ContextPublicationResult){0};
 }
-int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
+static int32_t scene_placement(void *context,const ScenePlacementCall *call) {
     NativeFrontend *game=context;
     if(game) ++game->model_calls;
-    if(call->routine==0xc1ee14 || call->routine==0xc1ed48) return native_model_draw(call->parameters,0x4200);
-    if(call->routine==0xc1ed4c) return aircraft_descriptor(call->parameters,0x4200);
+    if(call->routine==0xc1ee14 || call->routine==0xc1ed48) return native_model_draw(call->parameters,NATIVE_SCENE_MODEL_FRAME);
+    if(call->routine==0xc1ed4c) return aircraft_descriptor(call->parameters,NATIVE_SCENE_MODEL_FRAME);
     if(call->routine==0xc22b1a) {
         /* C22B1A selects the action record's model by its source lifetime;
          * every arm joins C22AFE/C1ED4C with A0 fixed at C3C6E0. */
@@ -598,7 +598,7 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
         const gaddr stream=lifetime<0?0xc3c71cu:lifetime==0?0xc3c720u:
             lifetime<=2?0xc3c70eu:lifetime<5?0xc3c700u:0xc3c6e0u;
         wr_u32(CONTROL_STREAM,stream);wr_u32(0xc45a3au,stream);
-        return aircraft_descriptor(0xc3c6e0u,0x4200);
+        return aircraft_descriptor(0xc3c6e0u,NATIVE_SCENE_MODEL_FRAME);
     }
     if(call->routine==0xc22bba) {
         /* C22BBA-C22C6C: the released record's lifetime and action nibble
@@ -611,7 +611,7 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
             stream=lifetime>=5?0xc3c986u:lifetime<=2?0xc3c9b4u:0xc3c9a6u;
         } else stream=lifetime==0 && (rd_u8(record+0x7c)&15)?0xc3c982u:0xc3c9c2u;
         wr_u32(CONTROL_STREAM,stream);wr_u32(0xc45a3au,stream);
-        return aircraft_descriptor(0xc3c986u,0x4200);
+        return aircraft_descriptor(0xc3c986u,NATIVE_SCENE_MODEL_FRAME);
     }
     if(call->routine==0xc22ac0) {
         gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(SCRIPT_RECORD);
@@ -625,7 +625,7 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
                 wr_u16(record,(flags&0xfdffu)|0x400u);
                 clear_matching_record_selection(&hooks);
             }
-            return aircraft_descriptor(call->parameters,0x4200);
+            return aircraft_descriptor(call->parameters,NATIVE_SCENE_MODEL_FRAME);
         }
         if(rd_u8(record+0x7a)!=5 && rd_s16(record+0x4c)<0) wr_u16(record,flags|0x40);
         /* C22B04-C22B18 touches only flags: retain the caller's actual
@@ -634,9 +634,18 @@ int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
     }
     if(call->routine==0xc1ed3c) {
         if(rd_s32(TARGET_POINT+4)>=-0x280000) return 0;
-        return native_model_draw(call->parameters,0x4200);
+        return native_model_draw(call->parameters,NATIVE_SCENE_MODEL_FRAME);
     }
-    if(call->routine==0xc096ca) return ground_draw(0x4200,-0x800000);
-    if(call->routine==0xc096bc) return ground_draw(0x4200,-0x380000);
+    if(call->routine==0xc096ca) return ground_draw(NATIVE_SCENE_MODEL_FRAME,-0x800000);
+    if(call->routine==0xc096bc) return ground_draw(NATIVE_SCENE_MODEL_FRAME,-0x380000);
     missing("placement descriptor",call->routine);return 0;
+}
+
+int32_t native_scene_placement(void *context,const ScenePlacementCall *call) {
+    /* Only an actual model caller materialises the retained value in its
+     * ordinary native scratch frame. Startup updates publish host state. */
+    wr_u16(NATIVE_SCENE_MODEL_FRAME-0x7c,native_model_retained_result());
+    const int32_t result=scene_placement(context,call);
+    native_model_retain_result(rd_u16(NATIVE_SCENE_MODEL_FRAME-0x7c));
+    return result;
 }

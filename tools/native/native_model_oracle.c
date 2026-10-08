@@ -119,6 +119,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #include "../../port/game/draw_stream.c"
 #undef get
 #undef put
+#include "../../port/game/native/model_state.c"
 #include "../../port/game/native/model.c"
 #undef draw_selected_segment
 #undef draw_selected_segment_clipped
@@ -448,6 +449,9 @@ static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) 
         fprintf(stderr,"Original descriptor returned %04X\n",(uint16_t)REG_D[0]);
         memcpy(fa18_machine,before,sizeof *before);
     }
+    /* This isolated component receives the same explicit caller scratch
+     * input as the original below. Full-body tests prove its real producers. */
+    native_model_retain_result(rd_u16(NATIVE_SCENE_MODEL_FRAME-0x7c));
     int result=native_scene_placement(NULL,call);
     memcpy(expected,fa18_machine->chip,0x80000);
     memcpy(vertices,fa18_machine->slow+0x48390,0x2000);
@@ -581,6 +585,7 @@ static int scene_children(void) {
     uint8_t *expected=malloc(0x100000);
     for(unsigned test=0;test<3;++test) {
         memcpy(before,fa18_machine,sizeof *before);
+        native_model_retain_result(rd_u16(NATIVE_SCENE_MODEL_FRAME-0x7c));
         if(test==0) host_draw_grid_projection_packet(0x4400,&grid);
         else if(test==1) advance_main_loop_control_records(0x4500,&controls);
         else visit_followup_placements(&followups);

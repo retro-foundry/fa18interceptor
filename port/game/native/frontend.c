@@ -11,6 +11,7 @@
 #include "../player_input.h"
 #include "menu.h"
 #include "flight.h"
+#include "model.h"
 #include "files.h"
 #include "clock.h"
 #include "display.h"
@@ -85,6 +86,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     AmigaOfs disk={0}; AmigaHunks hunks={0}; FA18MediaInfo media;
     uint8_t *exe=NULL,*bytes=NULL; size_t size=0; int ok=0;
     memset(game,0,sizeof *game); native_storage_bind(&game->storage);
+    native_model_retain_result(0);
     native_audio_bind(&game->audio);
     native_clock_set(0);
     if(!save_dir || !*save_dir || snprintf(game->config_path,sizeof game->config_path,"%s/config",save_dir)>=(int)sizeof game->config_path)

@@ -3,6 +3,7 @@
 #include "records.h"
 #include "setup.h"
 #include "scene.h"
+#include "model.h"
 #include "hud.h"
 #include "clock.h"
 #include "input.h"
@@ -44,8 +45,20 @@
 #include <stdlib.h>
 
 static void refresh_child(void *context,enum ContextRefreshChild child);
+typedef struct { int all; DisplaySortResult sort; } ContextSort;
 static void refresh_native_context_sort(int sort_all) {
-    const ContextRefreshHooks hooks={refresh_child,NULL,(void *)&sort_all};
+    ContextSort context={.all=sort_all};
+    /* C1C5F0/C1C5F4 leave the viewed record's masked Z in the ordinary
+     * projection caller. Template rebuilding can replace it below. */
+    if(!rd_u8(CONTEXT_SELECT)) {
+        const gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD);
+        context.sort.planar_factor=rd_u32(record+0x1c)&0x3fffffu;
+        context.sort.has_factor=1;
+    }
+    /* TODO(port): C29042's context-view incoming planar output when no
+     * template or distance call replaces it. has_factor distinguishes that
+     * missing caller contract from an actually produced zero. */
+    const ContextRefreshHooks hooks={refresh_child,NULL,&context};
     refresh_context_packet(&hooks);
 }
 static void refresh_native_context(void) {
@@ -86,10 +99,24 @@ void native_flight_initialize(NativeFrontend *game) {
     bootstrap_scene(&hooks);
     game->record_updates=1;
 }
+static void template_sort_factor(void *context,const TemplatePlacementEvent *event) {
+    ContextSort *sort=context;
+    if(event->phase==TEMPLATE_ORIGIN || event->phase==TEMPLATE_REVERSE_RECORD) {
+        sort->sort.planar_factor=(uint32_t)event->y;
+        sort->sort.has_factor=1;
+    }
+}
 static void refresh_child(void *context,enum ContextRefreshChild child) {
+    ContextSort *sort=context;
     switch(child) {
-    case CONTEXT_REFRESH_TEMPLATES: refresh_template_placements(); break;
-    case CONTEXT_REFRESH_SORT: sort_display_list(*(const int *)context); break;
+    case CONTEXT_REFRESH_TEMPLATES: {
+        const TemplatePlacementObserver observer={template_sort_factor,sort};
+        refresh_template_placements_observed(&observer);break;
+    }
+    case CONTEXT_REFRESH_SORT:
+        sort_display_list_retained(sort->all,&sort->sort);
+        if(sort->sort.has_output) native_model_retain_result(sort->sort.retained_word);
+        break;
     case CONTEXT_REFRESH_CACHE: order_placement_cache(); break;
     case CONTEXT_REFRESH_CONDITION_A: update_condition_a(); break;
     case CONTEXT_REFRESH_CONDITION_B: update_condition_b(); break;

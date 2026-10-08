@@ -1,15 +1,16 @@
 # Native port runner
 
-The native record loop now preserves the original candidate scan's retained
-reference record through dynamics into the following sight calculation. All
-26 normal-key mode-five input/stage intervals and 58 sampled bodies match
-original compared RAM/drawing, including the formerly failing reset. This
-changes the playable runtime; rounding and comparison masks are unchanged.
-The aircraft still crashes, and mode-five mission success remains unaccepted.
-The expanded enemy-expiry renderer investigation is uncommitted and is not an
-accepted CTest gate. See
-`../../analysis/native_candidate_reference_reset_milestone.md` for ownership,
-validation scope and next work. The keyboard pilot remains validation-only.
+Normal-key mode-five combat, enemy-expiry accounting and the natural reset
+now pass 26 input/stage intervals and 115 sampled bodies against original
+compared RAM/drawing, including all 63 consecutive combat-window bodies.
+Control normalisation and depth sorting publish their actual retained output
+to ordinary host renderer state for early model expiry. The gate also checks
+64 candidate-reference, 128 complete depth-sort and 256 distance/factor cases.
+Masks, distance arithmetic and gameplay rules are unchanged. The flight still
+crashes and mode-five mission success remains unaccepted. See
+`../../analysis/native_mission_five_combat_reset_milestone.md` for source
+ownership, remaining caller contracts and comparison scope. The keyboard pilot
+remains validation-only; passing RAM is temporary and bounded.
 
 Mode three now has a normal-key objective/landing/taxi/result/save/reload gate.
 All 36 input/stage intervals and 184 sampled bodies match original compared

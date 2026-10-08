@@ -1,0 +1,357 @@
+{
+  "scenario": "normal-key-mode-five-gun-combat-expiry-reset",
+  "input_stage_intervals": 26,
+  "sampled_bodies": 115,
+  "consecutive_combat_window_bodies": 63,
+  "gun_hit_increments": 7,
+  "gun_hit_bodies": [
+    {
+      "weapon_hit": true,
+      "body": 8330,
+      "gun_before": 0,
+      "gun_after": 1,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2588
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2588
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 6
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 29
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8331,
+      "gun_before": 1,
+      "gun_after": 2,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2589
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2589
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 5
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 28
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8468,
+      "gun_before": 2,
+      "gun_after": 4,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2726
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2726
+        },
+        {
+          "slot": 8,
+          "flags_before": 20673,
+          "flags_after": 21185,
+          "lifetime": 32
+        },
+        {
+          "slot": 10,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 10
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8469,
+      "gun_before": 4,
+      "gun_after": 5,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2727
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2727
+        },
+        {
+          "slot": 8,
+          "flags_before": 21185,
+          "flags_after": 22209,
+          "lifetime": 15
+        },
+        {
+          "slot": 10,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 9
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8556,
+      "gun_before": 5,
+      "gun_after": 6,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2814
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2814
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 29377,
+          "lifetime": -71
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 3
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8557,
+      "gun_before": 6,
+      "gun_after": 7,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2815
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2815
+        },
+        {
+          "slot": 8,
+          "flags_before": 29377,
+          "flags_after": 30401,
+          "lifetime": 15
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 2
+        }
+      ]
+    }
+  ],
+  "enemy_expiries": [
+    {
+      "capture": 87,
+      "body": 8485,
+      "iteration": 12944,
+      "stage": "C10DAE",
+      "before_tick": 19449,
+      "after_tick": 19451,
+      "saved_tick": 2590,
+      "owner_exit": false,
+      "phase_before": 0,
+      "phase_after": 0,
+      "contact_before": 8192,
+      "contact_after": 8192,
+      "confirmation_before": 255,
+      "confirmation_after": 255,
+      "selected": 2048,
+      "view_record": 0,
+      "region_before": 0,
+      "region_after": 0,
+      "speed": 5360,
+      "completions_before": 3,
+      "completions_after": 3,
+      "touchdown": false,
+      "landing_window": false,
+      "ready": false,
+      "combat_window": true,
+      "enemy_expiries_before": 0,
+      "enemy_expiries_after": 1
+    },
+    {
+      "capture": 108,
+      "body": 8573,
+      "iteration": 13032,
+      "stage": "C10DAE",
+      "before_tick": 19746,
+      "after_tick": 19748,
+      "saved_tick": 2678,
+      "owner_exit": false,
+      "phase_before": 0,
+      "phase_after": 0,
+      "contact_before": 8192,
+      "contact_after": 8192,
+      "confirmation_before": 255,
+      "confirmation_after": 255,
+      "selected": 3072,
+      "view_record": 0,
+      "region_before": 0,
+      "region_after": 0,
+      "speed": 6176,
+      "completions_before": 3,
+      "completions_after": 3,
+      "touchdown": false,
+      "landing_window": false,
+      "ready": false,
+      "combat_window": true,
+      "enemy_expiries_before": 1,
+      "enemy_expiries_after": 2
+    }
+  ],
+  "candidate_reference_cases": 64,
+  "depth_sort_cases": 128,
+  "distance_factor_cases": 256,
+  "reset": {
+    "capture": 114,
+    "body": 8705,
+    "iteration": 13164,
+    "stage": "C11830",
+    "before_tick": 20352,
+    "after_tick": 20352,
+    "saved_tick": 2810,
+    "owner_exit": false,
+    "phase_before": 4,
+    "phase_after": 4,
+    "contact_before": 128,
+    "contact_after": 128,
+    "confirmation_before": 0,
+    "confirmation_after": 0,
+    "selected": -1,
+    "view_record": 0,
+    "region_before": 200,
+    "region_after": 8,
+    "speed": 0,
+    "completions_before": 3,
+    "completions_after": 3,
+    "touchdown": false,
+    "landing_window": true,
+    "ready": false,
+    "combat_window": false,
+    "enemy_expiries_before": 2,
+    "enemy_expiries_after": 2
+  },
+  "summary": {
+    "diagnostic_end": true,
+    "mode": 5,
+    "phase": 4,
+    "tick": 20352,
+    "crash_resets": 1,
+    "completions_before": 3,
+    "completions_after": 3,
+    "stage": "C11830"
+  },
+  "mission_success_accepted": false,
+  "native_flight_state_seeded": false,
+  "comparison_masks_changed": false,
+  "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+  "input_sha256": "ff31ee5694629634f4de456216c68f085b55c54275ab6ea8f462753582de0eb8",
+  "test_sha256": "b60af39faa2a7abe84913418c430cbdece81f834ab27726062258801f0a80b79",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "playable_sha256": "9390cca490d782ff9978e8936c87d9fa11444239e8ecb4aa1a368b5953b47aa5",
+  "debug_ctests_passed": [
+    "fa18_native_mission_three_success",
+    "fa18_native_mission_five_combat_reset",
+    "fa18_native_artifact_cleanup"
+  ],
+  "release_ctests_passed": [
+    "fa18_native_artifact_policy",
+    "fa18_native_mission_three_success",
+    "fa18_native_mission_five_combat_reset",
+    "fa18_native_qualification_sequence",
+    "fa18_native_qualification_new_pilot",
+    "fa18_native_radar_kill",
+    "fa18_native_infrared_kill",
+    "fa18_native_gun_kill",
+    "fa18_native_mode_five",
+    "fa18_native_record_expiry",
+    "fa18_native_frontend",
+    "fa18_native_models",
+    "fa18_native_raster",
+    "fa18_native_artifact_cleanup"
+  ],
+  "builds_passed": [
+    "Debug playable and mission fixture",
+    "Release playable, mission, mode-two, qualification-sequence and record-expiry fixtures"
+  ],
+  "source_owners": [
+    "C149BE/C25754/C1D974 status pointer publication",
+    "C1C5F0/C1C5F4 ordinary projection caller",
+    "C1D91A/C1D974 distance and planar factor",
+    "C1E328/C1E4A6 depth-sort retained output",
+    "C1F074/C1F712 early model expiry and initialisation"
+  ],
+  "native_retained_result_owner": "port/game/native/model_state.c; ordinary C state materialised at scene placement",
+  "remaining_context_sort_input_contract": "C29042 context-view incoming planar value when no template/distance calculation replaces it"
+}

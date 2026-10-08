@@ -1,15 +1,17 @@
 # Current playable port handoff
 
-Latest connected fix (2026-10-08): the original candidate scan's retained
-reference record now survives native dynamics and reaches the next record's
-sight calculation. All 26 normal-key mode-five input/stage intervals and
-58 sampled bodies match original compared RAM/drawing, including the formerly
-failing C11830 reset at tick 20,352. Rounding and masks are unchanged. The
-flight still crashes and completion count stays 3; mode-five mission success
-remains unaccepted. Debug/Release builds pass. The expanded expiry-window
-renderer investigation remains local and uncommitted; its 115-body check is
-not an accepted gate. See `analysis/native_candidate_reference_reset_milestone.md`
-and `NEW_PORT_HANDOFF.md` for evidence, executable hash and next work.
+Latest combat/reset acceptance (2026-10-08): the native control-normalisation
+and depth-sort owners now publish their actual retained output into host
+renderer state for early model expiry. The normal-key mode-five diagnostic
+matches all 26 input/stage intervals and all 115 sampled bodies, including
+63 consecutive combat-window bodies, seven gun-hit increments, both enemy
+expiry-accounting increments and the natural reset. All 64 candidate-reference,
+128 depth-sort and 256 distance/factor component cases pass. The comparison is
+now a serial CTest gate; masks and gameplay rules are unchanged. The flight
+still crashes and completion count remains 3, so mode-five mission success
+remains unaccepted. Debug checks and all 14 affected final Release checks pass.
+See `analysis/native_mission_five_combat_reset_milestone.md`
+and `NEW_PORT_HANDOFF.md` for executable hash, regressions and next work.
 
 Latest mission-list success acceptance (2026-10-08): mode three takes off,
 selects an aircraft with normal T input, reaches the original confirmation

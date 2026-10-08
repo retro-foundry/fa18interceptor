@@ -1,6 +1,6 @@
 add_library(fa18_native_runtime OBJECT replay.c frame_capture.c ../game/native/files.c ../game/postflight_file_callers.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
-    ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/display.c ../game/native/cockpit_assets.c
+    ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/model_state.c ../game/native/display.c ../game/native/cockpit_assets.c
     ../game/native/audio_assets.c ../game/native/audio.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
     ../game/input_display_setup.c ../game/render_page.c
     ../game/native/frame_tail.c ../game/hud_stream.c
@@ -92,6 +92,12 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_success.py
                 --test $<TARGET_FILE:fa18_native_mission_success_test>
                 --out ${CMAKE_CURRENT_BINARY_DIR}/mission-three-success-check)
+    add_test(NAME fa18_native_mission_five_combat_reset
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_combat_reset.py
+                --test $<TARGET_FILE:fa18_native_mission_success_test>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/mission-five-combat-reset-check)
+    set_tests_properties(fa18_native_mission_three_success fa18_native_mission_five_combat_reset
+        PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_qualification_sequence
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_qualification_sequence.py
                 --test $<TARGET_FILE:fa18_native_qualification_sequence_test>

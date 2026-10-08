@@ -67,10 +67,16 @@ int main(int argc,char **argv) {
     const int trace_input_carry=getenv("FA18_FRAME_TRACE_INPUT_CARRY")!=NULL;
     const int trace_model=getenv("FA18_FRAME_TRACE_MODEL")!=NULL;
     const int trace_normalise=getenv("FA18_FRAME_TRACE_NORMALISE")!=NULL;
+    const int trace_depth=getenv("FA18_FRAME_TRACE_DEPTH")!=NULL;
     const char *trace_word=getenv("FA18_FRAME_TRACE_WORD");
     const gaddr watched_word=trace_word?(gaddr)strtoul(trace_word,NULL,16):0;
     gaddr carry_writer=0;
+    gaddr depth_writer=0;
     for(step=0;step<10000000;++step) {
+        if(trace_depth && (REG_PC==0xc1e328 || REG_PC==0xc1e37a || REG_PC==0xc1e42e ||
+                          REG_PC==0xc1e440 || REG_PC==0xc1e484))
+            fprintf(stderr,"depth pc=%06X value=%08X count=%04X list=%06X flags=%04X next=%02X upper-writer=%06X\n",
+                REG_PC,REG_D[3],(uint16_t)REG_D[7],REG_A[1],rd_u16(REG_A[1]),rd_u8(SORT_LIST_NEXT),depth_writer);
         if(trace_normalise && (REG_PC==0xc2574a || REG_PC==0xc25754 || REG_PC==0xc25764 ||
             REG_PC==0xc25784 || REG_PC==0xc257ae || REG_PC==0xc257c2))
             fprintf(stderr,"normalise pc=%06X return=%06X frame=%06X record=%06X viewer=%06X d0=%08X d1=%08X d2=%08X d3=%08X d4=%08X vector=%08X/%08X/%08X\n",
@@ -131,10 +137,12 @@ int main(int argc,char **argv) {
         const uint8_t previous_pixel=trace_pixel?rd_u8(pixel):0;
         const uint16_t previous_word=trace_word?rd_u16(watched_word):0;
         const uint32_t previous_carry=REG_D[4];
+        const uint32_t previous_depth=REG_D[3];
         const gaddr previous_viewer=REG_A[3];
         REG_PPC=REG_PC;REG_IR=opcode;REG_PC+=2;
         m68ki_instruction_jump_table[opcode]();USE_CYCLES(CYC_INSTRUCTION[opcode]);
         m->cycle+=cycles-GET_CYCLES();
+        if(trace_depth && (REG_D[3]>>16)!=(previous_depth>>16)) depth_writer=REG_PPC;
         if(trace_normalise && REG_A[3]!=previous_viewer)
             fprintf(stderr,"viewer %06X -> %06X at %06X record=%06X\n",
                 previous_viewer,REG_A[3],REG_PPC,REG_A[1]);
