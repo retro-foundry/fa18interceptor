@@ -171,10 +171,17 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                 --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 4 --smoothing
                 --out ${CMAKE_CURRENT_BINARY_DIR}/smoothing-cancel-check)
     add_test(NAME fa18_native_region_flight
-        COMMAND fa18_native_mode_two_test
-            ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
-            ${CMAKE_CURRENT_BINARY_DIR}/region-flight-save
-            ${CMAKE_CURRENT_BINARY_DIR}/region-flight 4 1 flight)
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
+                --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 4 --flight
+                --out ${CMAKE_CURRENT_BINARY_DIR}/region-flight-check)
+    set_tests_properties(fa18_native_region_flight PROPERTIES RUN_SERIAL TRUE)
+    add_test(NAME fa18_native_region_pilot_progression
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/region_pilot_fixture.py
+                --runner $<TARGET_FILE:fa18_native>
+                --qualification-test $<TARGET_FILE:fa18_native_qualification_sequence_test>
+                --mission-test $<TARGET_FILE:fa18_native_mission_success_test>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/region-pilot-progression)
+    set_tests_properties(fa18_native_region_pilot_progression PROPERTIES RUN_SERIAL TRUE)
     foreach(mode IN ITEMS 5 6 7 8)
         if(mode EQUAL 8)
             add_test(NAME fa18_native_combat_${mode}

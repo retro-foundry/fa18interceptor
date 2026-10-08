@@ -9,6 +9,7 @@
 #include "../amiga/pcm_output.h"
 #include <SDL.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 typedef struct { unsigned frame; char kind; int a,b,c,d; } HostEvent;
@@ -25,7 +26,8 @@ static int write_ppm(const char *path,NativeFrontend *game) {
 }
 int main(int argc,char **argv) {
     const char *adf="local/media/fa18.adf",*save_dir="saves-native",*ppm=NULL,*replay=NULL,*data_out=NULL; int headless=0,running=1,result=1;
-    unsigned frames=0,events=0,next=0,iterations=0; HostEvent host_events[1024]; char error[256];
+    unsigned frames=0,iterations=0;
+    size_t events=0,next=0,event_capacity=0; HostEvent *host_events=NULL; char error[256];
     const char *input=NULL;NativeReplay loop={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
     const char *frame_times=NULL;FILE *timing=NULL;int hidden=0;
@@ -82,7 +84,7 @@ int main(int argc,char **argv) {
         if(!fgets(line,sizeof line,file) || strncmp(line,"E9K_INPUT_V1",12)) { fclose(file); fputs("Invalid replay header\n",stderr); goto done; }
         while(fgets(line,sizeof line,file)) {
             HostEvent event;char extra;
-            if(events==1024 || sscanf(line,"F %u %c %d %d %d %d %c",&event.frame,&event.kind,
+            if(sscanf(line,"F %u %c %d %d %d %d %c",&event.frame,&event.kind,
                 &event.a,&event.b,&event.c,&event.d,&extra)!=6 ||
                 (events && event.frame<host_events[events-1].frame) ||
                 (event.kind!='K' && event.kind!='m' && event.kind!='b') ||
@@ -91,9 +93,21 @@ int main(int argc,char **argv) {
                 (event.kind=='b' && ((event.b!=0 && event.b!=1) || (event.c!=0 && event.c!=1)))) {
                 fclose(file);fputs("Invalid/unsupported replay row\n",stderr);goto done;
             }
+            if(events==event_capacity) {
+                if(event_capacity>SIZE_MAX/2/sizeof *host_events) {
+                    fclose(file);fputs("Replay event storage exceeds host size limit\n",stderr);goto done;
+                }
+                const size_t capacity=event_capacity?event_capacity*2:1024;
+                HostEvent *grown=realloc(host_events,capacity*sizeof *host_events);
+                if(!grown) {
+                    fclose(file);fputs("Cannot allocate replay event storage\n",stderr);goto done;
+                }
+                host_events=grown;event_capacity=capacity;
+            }
             host_events[events++]=event;
         }
-        fclose(file);
+        const int read_error=ferror(file),close_error=fclose(file);
+        if(read_error || close_error) {fputs("Cannot finish reading replay\n",stderr);goto done;}
     }
     if(!game || !native_frontend_open(game,adf,save_dir,error,sizeof error)) { fprintf(stderr,"%s\n",game?error:"Allocation failed"); goto done; }
     if(input) { game->begin_update=native_replay_update;game->update_context=&loop; }
@@ -191,6 +205,7 @@ timing_error:
 sdl_error:
     fprintf(stderr,"SDL: %s\n",SDL_GetError());
 done:
+    free(host_events);
     if(timing && fclose(timing)) {fprintf(stderr,"Cannot finish native frame timing report: %s\n",frame_times);result=1;}
     if(!amiga_pcm_close(&audio_output)) {fputs("Cannot finish native WAV capture\n",stderr);result=1;}
     native_replay_close(&loop);

@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-08",
+  "parent_commit": "efc71ba0731bf10e4b7850240974a4867c1799a3",
+  "scenario": "earned-pilot-progression-and-mode-four-region-coverage",
+  "progression": {
+    "native_flight_state_seeded": false,
+    "phases": {
+      "enlist": {
+        "screen": "menu",
+        "config_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9"
+      },
+      "qualification": {
+        "input_stage_intervals": 50,
+        "sampled_bodies": 174,
+        "original_config_writes": 1
+      },
+      "mission-three": {
+        "input_stage_intervals": 44,
+        "sampled_bodies": 164,
+        "original_config_writes": 1
+      }
+    },
+    "config_sha256": "7bc9e00e8691143313b0c9f3a1739a05799f9b7e49c5c5683bafbf7f0d5e77b4",
+    "reference_scope": "Original instructions from native before-states; canonical runner agrees on earned saves/menu return, not independent original whole-flight parity"
+  },
+  "region": {
+    "scenario": "earned-pilot-mode-four-region-flight",
+    "native_flight_state_seeded": false,
+    "pilot_fixture": "tools/native/fixtures/region-flight-pilot.json",
+    "pilot_config_sha256": "7bc9e00e8691143313b0c9f3a1739a05799f9b7e49c5c5683bafbf7f0d5e77b4",
+    "input_stage_intervals": 57,
+    "sampled_bodies": 49,
+    "original_config_writes": 0,
+    "flight": {
+      "regions": true,
+      "spawned_records": 12288,
+      "zone_exits": 4096,
+      "npc_missiles": 8704,
+      "aircraft_moved": 4369,
+      "scene_frames": 5737,
+      "gun_hits": 0,
+      "infrared_hits": 0,
+      "radar_hits": 0
+    },
+    "reference_scope": "Original instructions from sampled native before-states; not an independent complete original flight"
+  },
+  "validation": {
+    "release_selected": "7/7 passed",
+    "debug_selected": "3/3 passed",
+    "release_final_region": "2/2 passed",
+    "unordered_replay_after_1652_events": "Rejected before startup in Debug/Release",
+    "logs": {
+      "release": "build/native-flight/region-restoration-release-ctest.log",
+      "debug": "build/native-flight/region-restoration-debug-ctest.log",
+      "release_final_region": "build/native-flight/region-restoration-release-final-ctest.log"
+    }
+  },
+  "playable_sha256": "d6c594410c91ac4d534353b644127f03df67f929a85bd94add1fdc9bb192c8d6",
+  "release_playable_sha256": "d6c594410c91ac4d534353b644127f03df67f929a85bd94add1fdc9bb192c8d6",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "retained_inputs": {
+    "tools/native/fixtures/region-pilot-enlist.e9k": "3c2a48da86432f2782ed6cb0036a9eb42fa08df4b6a64df75496e602530bff3a",
+    "tools/native/fixtures/carrier_qualification_game_input.fa18in": "234f2d2599fd7f69c3a18c298e42be455c3c8683fc9e1cf3c4b0af7c005a1218",
+    "tools/native/fixtures/region-pilot-mission-three.e9k": "58f4a5271365bf7bf0cef9c7462af4cbb5140d48862e9e0edfad617b1a8f6bc0"
+  },
+  "game_rules_or_comparison_masks_changed": false,
+  "build_cache_gib": 2.0,
+  "whole_port_complete": false,
+  "next_work": "Mode-four successful ordinary-input mission, followed by remaining mission/full-flight/contracts/state/audio/performance acceptance"
+}

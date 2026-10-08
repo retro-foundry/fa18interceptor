@@ -10,6 +10,7 @@ from pathlib import Path
 import subprocess
 import sys
 from capture_workspace import CaptureWorkspace, retain_failure
+from region_pilot_fixture import load_region_pilot
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -70,12 +71,18 @@ def main():
 
 def check(args, work, capture_dir):
     prefix = capture_dir / 'frame'
+    pilot = capture_dir / 'pilot-test'
+    pilot.mkdir(exist_ok=True)
+    if args.flight:
+        # Source-earned level-zero log: normal menu reset, qualification and
+        # mission-three completion. C08EB8 loads it before any flight input.
+        (pilot / 'config').write_bytes(load_region_pilot())
     hit_probe=(args.missile+'-' if args.missile!='radar' else '')+('kill' if args.kill else 'hit')
     if args.gun_approach:
         hit_probe='gun-approach'
     hit_weapon={'infrared':1,'radar':2,'gun':3}[args.missile]
     result = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
-                             str(work / 'pilot-test'), str(prefix), str(args.mode), str(args.aircraft),
+                             str(pilot), str(prefix), str(args.mode), str(args.aircraft),
                              *([hit_probe] if args.hit else ['outcome'] if args.outcome else ['smoothing'] if args.smoothing else ['combat'] if args.combat else ['callback'] if args.callback else ['eject'] if args.eject else [f'weapon{args.weapon}'] if args.weapon else ['flight'] if args.flight else [])], cwd=ROOT,
                             capture_output=True, text=True, timeout=180 if args.outcome else 90 if args.combat or args.hit else 45 if args.flight else 25)
     (work / 'native-run.log').write_text(result.stdout + result.stderr)
@@ -184,6 +191,7 @@ def check(args, work, capture_dir):
         item['stage'] for item in bodies}, bodies
     (work / 'captures.json').write_text(json.dumps(exports, indent=2) + '\n')
     source_guidance_fault_returns=0
+    source_config_writes=0
     for name, captures in (('mode_entry', entries), ('frame_body', bodies)):
         oracle = ROOT / f'build/recomp/native_{name}_oracle.exe'
         # Shared GNU reference objects require sequential builds.
@@ -210,6 +218,8 @@ def check(args, work, capture_dir):
                 for line in comparison.stdout.splitlines():
                     if line.startswith('Source guidance C06C02 returns: '):
                         source_guidance_fault_returns+=int(line.split(': ')[1])
+                    if line.startswith('Complete original file owners reached DOS Write '):
+                        source_config_writes+=int(line.split('Write ')[1].split()[0])
                 if comparison.returncode:
                     retain_failure(capture, work)
                     raise RuntimeError(comparison.stderr or comparison.stdout)
@@ -238,6 +248,17 @@ def check(args, work, capture_dir):
         outcome=f'fires source weapon selection {args.weapon}, preserving ammunition and log counters'
     if args.flight:
         outcome='takes off and runs region spawn/orientation, zone exit, NPC missiles and postflight restart'
+        assert source_config_writes==0 and (pilot/'config').read_bytes()==load_region_pilot()
+        report={
+            'scenario':'earned-pilot-mode-four-region-flight',
+            'native_flight_state_seeded':False,
+            'pilot_fixture':'tools/native/fixtures/region-flight-pilot.json',
+            'pilot_config_sha256':hashlib.sha256(load_region_pilot()).hexdigest(),
+            'input_stage_intervals':len(entries), 'sampled_bodies':len(bodies),
+            'original_config_writes':source_config_writes, 'flight':regions[0],
+            'reference_scope':'Original instructions from sampled native before-states; not an independent complete original flight',
+        }
+        (work/'comparison.json').write_text(json.dumps(report,indent=2)+'\n')
     if args.callback:
         outcome='runs Delete callback removal/reinstallation and continues through Escape/restart'
     if args.smoothing:

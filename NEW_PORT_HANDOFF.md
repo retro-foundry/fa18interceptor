@@ -2,7 +2,32 @@
 
 ## Current restart summary — 2026-10-08
 
-Latest validation diagnostics: the mode fixture now services PCM after each
+Region-flight coverage is restored with a source-earned level-zero pilot log.
+Normal menu reset/callsign entry, carrier qualification and mission-three
+success/save/menu return reproduce its exact 78 bytes. Qualification matches
+50 input/stage intervals and 174 sampled bodies; mission three matches 44/164,
+including each real config write. The playable runner agrees on both saves
+and the mission-three menu return. Region flight retains its existing keys
+and strict guards: records 12/13 spawn, record 12 exits its zone, NPC missile
+slots 9/13 activate, and all 57 intervals/49 bodies match original compared
+RAM/drawing. See `analysis/native_region_pilot_progression_milestone.md`.
+The region CTest now uses the source checker with temporary RAM. The new serial
+`fa18_native_region_pilot_progression` gate reproduces the earned log.
+Debug/Release playable and affected fixture builds pass. Seven selected Release
+checks, three Debug checks and the final Release region/report repeat pass;
+both builds reject a late unordered replay event. Results/hashes are in
+`analysis/figures/native_region_pilot_progression_checkpoint.json`. Passing
+captures are removed; build-cache use is 2.00 GiB under the existing 4 GiB policy.
+
+The playable host replay loader now grows its event storage instead of rejecting
+the mission's 1,652-key recording at event 1,025. Allocation, size and read
+errors remain explicit. Game rules, arithmetic and comparison masks are unchanged.
+The original level-two ADF pilot fills both admitted aircraft slots; it cannot
+spawn the region aircraft in this scenario. Cold level loading is correct.
+The retained earned log selects a reachable coverage case; it supplies no
+flight state or outcomes. Mode-four mission success remains the next task.
+
+Earlier validation diagnostics: the mode fixture services PCM after each
 tick, matching the playable backend, and supports `FA18_MODE_END_TICK` plus
 `FA18_MODE_FINAL_DATA` for aligned, bounded final-RAM snapshots. Default input
 sequences and acceptance guards are preserved. With the established region
@@ -11,16 +36,17 @@ inputs, all 1 MiB of runner/fixture RAM agrees at ticks 16,003, 18,500 and
 early pull-up/rudder experiment matches 61 original input/stage intervals and
 62 sampled bodies but fails acceptance; its inputs are not retained in the
 fixture. See `analysis/native_region_flight_diagnostics.md`. Gameplay and the
-playable executable are unchanged; region coverage remains the next task.
+playable executable were unchanged at that earlier checkpoint; its open region
+coverage is superseded by the earned-pilot acceptance above.
 Debug/Release fixture builds, five selected CTests, fourteen invalid tick
 checks and the three final aligned RAM comparisons pass. Passing captures
 are removed within the existing retention policy.
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`a4574211` on `coverage-accounting`.
+`efc71ba0` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
-`d66c5ea2578453ebe9e444a314b5c4345dfd46bed19440b25fafa0a6c1a64a50`.
+`d6c594410c91ac4d534353b644127f03df67f929a85bd94add1fdc9bb192c8d6`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
 Latest connected fix: C2DEE0/C2DFF6's matrix product cursor now reaches the
@@ -35,11 +61,11 @@ comparison mask changes. See `analysis/native_matrix_sight_reference_milestone.m
 and `analysis/figures/native_matrix_sight_reference_checkpoint.json`.
 Passing RAM stays temporary; the resolved failure is compressed with hashes.
 
-Remaining regression: `fa18_native_region_flight` still fails its spawn/zone/
+Earlier regression: the original level-two region input failed its spawn/zone/
 NPC-missile coverage guards. All 58 input/stage intervals and 47 sampled bodies
 of the failing run match original compared RAM/drawing, with no config write.
 A shorter validation pull-up also misses these events; original keys and
-strict guards are preserved. Restore this ordinary-input coverage next.
+strict guards are preserved in the accepted earned-pilot case above.
 The other nine additional Release checks and six selected Debug checks pass
 across their initial runs and Debug sequence retry. Debug sequence captures
 now allow 90 seconds; Release retains 60. Details are in the milestone above.

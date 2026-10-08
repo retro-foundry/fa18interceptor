@@ -1,13 +1,29 @@
 # Current playable port handoff
 
-Latest validation diagnostics (2026-10-08): the mode fixture services PCM
+Latest region coverage acceptance (2026-10-08): normal menu reset, qualification
+and mission-three completion/save/menu return earn the level-zero region pilot.
+Qualification matches 50 original intervals/174 bodies and mission three 44/164,
+including both config writes. The playable runner agrees on the saved logs/menu.
+Region flight preserves its established keys and strict coverage guards and
+matches 57 intervals/49 bodies, with records 12/13 spawned, record 12's zone exit
+and NPC missiles 9/13. The serial region gate now compares original boundaries;
+`fa18_native_region_pilot_progression` reproduces the exact earned log. The host
+replay loader accepts the complete 1,652-event flight with dynamic storage.
+See `analysis/native_region_pilot_progression_milestone.md`. Game rules and
+comparison masks remain unchanged. Mode-four mission success is next; full-port
+acceptance remains open.
+Debug/Release playable/fixture builds pass, with seven selected Release checks,
+three Debug checks and the final Release region/report repeat passing. Evidence
+is in `analysis/figures/native_region_pilot_progression_checkpoint.json`.
+
+Earlier validation diagnostics (2026-10-08): the mode fixture services PCM
 after each tick and supports bounded final-RAM snapshots through
 `FA18_MODE_END_TICK` and `FA18_MODE_FINAL_DATA`. Established inputs and strict
 guards remain intact. Runner/fixture RAM matches byte-for-byte at ticks
 16,003, 18,500 and 22,000 with the existing region inputs. PCM does not resolve
 the missing spawn/zone/NPC-missile coverage. The unsuccessful early pull-up/
 rudder experiment is documented rather than adopted. Gameplay and the
-playable executable are unchanged. See `analysis/native_region_flight_diagnostics.md`.
+playable executable were unchanged at that checkpoint. See `analysis/native_region_flight_diagnostics.md`.
 
 Latest connected matrix/sight fix (2026-10-08): the native dynamics caller
 passes C2DEE0/C2DFF6's product cursor to the following record's C2436A sight
@@ -20,10 +36,11 @@ gameplay rules and comparison masks are unchanged. See
 `analysis/native_matrix_sight_reference_milestone.md` and `NEW_PORT_HANDOFF.md`.
 This remains an unsuccessful flight: no hit/objective/save, crash tick 22,148
 and completions unchanged at 3. Mode-four success is the next ordinary-input
-mission task. First restore the existing region-flight regression's required
-spawn/zone/NPC-missile coverage: its CTest still fails those guards despite all
+mission task. The earlier level-two region run failed its spawn/zone/NPC-missile
+guards despite all
 58 input/stage intervals and 47 sampled bodies matching original compared
-RAM/drawing. Original keys and strict guards are preserved; see the milestone.
+RAM/drawing. The earned-pilot acceptance above supersedes this regression task.
+Original keys and strict guards are preserved; see the milestones.
 Other successful missions, independent complete flights, further play
 after the accepted result menu, remaining contracts, typed state, audio and
 wider performance remain open; the complete-port goal stays active.

@@ -1,5 +1,16 @@
 # Native port runner
 
+Region flight now passes with an earned level-zero pilot log. Normal menu
+reset, qualification and mission-three success/save/menu return reproduce all
+78 bytes; the playable runner agrees on both saved results. Qualification
+matches 50 original input/stage intervals/174 bodies, mission three 44/164 and
+region flight 57/49, including the existing spawn/zone/NPC-missile/reset guards.
+The serial gates are `fa18_native_region_flight` and
+`fa18_native_region_pilot_progression`. The host replay loader now accepts the
+complete 1,652-event mission flight. See
+`../../analysis/native_region_pilot_progression_milestone.md`. Successful mode
+four and whole-port acceptance remain open.
+
 The native record loop now passes C2DEE0/C2DFF6's final matrix product cursor
 to the following C2436A sight update. All 576 component cases match the
 original output/cursor/RAM. The normal-key mode-four diagnostic matches all
@@ -8,10 +19,9 @@ continuation and reset. The serial `fa18_native_mission_four_combat_reset`
 gate passes in Debug and Release. See
 `../../analysis/native_matrix_sight_reference_milestone.md`. Mode-four success
 remains open: this flight has no hit/objective/save and still crashes.
-The existing region-flight CTest also still fails its required spawn/zone/
-NPC-missile coverage guards, although all 58 intervals and 47 sampled bodies
-match original compared RAM/drawing. Restoring that ordinary-input coverage
-remains open; the original keys and strict guards are preserved.
+The earlier level-two region scenario misses spawn/zone/NPC-missile coverage
+while matching all 58 intervals/47 bodies. The earned-pilot gate above now
+restores that coverage, preserving the original keys and strict guards.
 
 Modes three and five now complete result messages and Escape/menu restart
 after their normal-key successful flights. All 44/42 input-stage intervals
@@ -372,6 +382,18 @@ snapshot. Clear both variables before acceptance runs. The fixture services
 960 stereo PCM frames at 48 kHz after each tick, as the playable backend does.
 Use temporary capture storage and prune after manual runs. See
 [`../../analysis/native_region_flight_diagnostics.md`](../../analysis/native_region_flight_diagnostics.md).
+
+Region coverage uses an earned level-zero pilot log, reproduced through normal
+menu reset/callsign entry, qualification and mission-three completion. The
+original level-two disk log fills both aircraft admission slots before takeoff.
+`python tools/native/check_mode_two.py --mode 4 --flight` loads the retained
+78-byte log before flight and compares all sampled original boundaries without
+changing its keys or coverage guards. The serial CTests are
+`fa18_native_region_flight` and `fa18_native_region_pilot_progression`; the latter
+reproduces the log and checks qualification/mission-three source boundaries and
+playable saved results. Host `--replay` storage grows to accept complete consumed
+input such as the 1,652-event mission-three flight. See
+[`../../analysis/native_region_pilot_progression_milestone.md`](../../analysis/native_region_pilot_progression_milestone.md).
 
 Gameplay behavior and visuals at equivalent states/events are the acceptance
 scope; exact Amiga frame timing is not required. Preserve physics, rules and
