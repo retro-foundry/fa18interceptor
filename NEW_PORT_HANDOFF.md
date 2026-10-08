@@ -3,13 +3,43 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`70f89254` on `coverage-accounting`.
+`190abd80` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
-`73f9bc00fd5db4f1f3a3e90097b902e0a4eb2b4d8ad07a24789626a3549189cd`.
+`d66c5ea2578453ebe9e444a314b5c4345dfd46bed19440b25fafa0a6c1a64a50`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
-Latest mission result sequence acceptance: modes three and five complete
+Latest connected fix: C2DEE0/C2DFF6's matrix product cursor now reaches the
+following record's C2436A sight update through the native dynamics/record loop.
+All 576 complete matrix component cases match original angles, divisor,
+cursor and non-stack RAM. The normal-key mode-four diagnostic matches all
+26 input/stage intervals and 59 sampled bodies, including C11788's crash
+continuation and C11830's reset. Its new serial gate is
+`fa18_native_mission_four_combat_reset`; Debug and Release pass. The native
+playable executable above is refreshed. No arithmetic, gameplay rule or
+comparison mask changes. See `analysis/native_matrix_sight_reference_milestone.md`
+and `analysis/figures/native_matrix_sight_reference_checkpoint.json`.
+Passing RAM stays temporary; the resolved failure is compressed with hashes.
+
+Remaining regression: `fa18_native_region_flight` still fails its spawn/zone/
+NPC-missile coverage guards. All 58 input/stage intervals and 47 sampled bodies
+of the failing run match original compared RAM/drawing, with no config write.
+A shorter validation pull-up also misses these events; original keys and
+strict guards are preserved. Restore this ordinary-input coverage next.
+The other nine additional Release checks and six selected Debug checks pass
+across their initial runs and Debug sequence retry. Debug sequence captures
+now allow 90 seconds; Release retains 60. Details are in the milestone above.
+
+Mode four still has no hit/objective/save in this diagnostic and crashes at
+tick 22,148, with completions unchanged at 3. Then continue its ordinary-key
+mission success route. Source `postflight_scheduler.c:record_mode` requires
+record four grounded, active and slow, with enemy records eight/ten inactive,
+before its countdown admits the objective. Successful modes four/six/seven/eight,
+independent complete flights, further play after the accepted result menu,
+remaining caller contracts, typed state, audio and wider performance remain
+open; the complete-port goal stays active.
+
+Earlier mission result sequence acceptance: modes three and five complete
 normal-key success, saved result, result messages, Escape, scene bootstrap,
 menu return and cold log reload. All 44/42 input-stage intervals and 162/169
 sampled bodies match original compared RAM/drawing, with 64 consecutive

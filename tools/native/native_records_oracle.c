@@ -130,6 +130,7 @@ static int matrix_transform_cases(void) {
         m68k_set_reg(M68K_REG_SR,0x2700);REG_PC=0xc2dee0;fa18_next_event=INT64_MAX;SET_CYCLES(100000000);
         if(!original()) return 0;
         uint32_t returned[3]={REG_D[4],REG_D[5],REG_D[6]};const uint16_t divisor=(uint16_t)REG_D[3];
+        const gaddr product_cursor=REG_A[3];
         memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
         memcpy(fa18_machine,before,sizeof *before);
         int16_t result[3];MatrixTransformAngleState transform;
@@ -140,13 +141,17 @@ static int matrix_transform_cases(void) {
         if((uint16_t)transform.divisor!=divisor) {
             fprintf(stderr,"matrix transform case %u divisor source %04X native %04X\n",test,divisor,(uint16_t)transform.divisor);return 0;
         }
+        if(transform.next_product!=product_cursor) {
+            fprintf(stderr,"matrix transform case %u cursor source %06X native %06X\n",
+                test,product_cursor,transform.next_product);return 0;
+        }
         for(unsigned i=0;i<0xff000;++i) {
             uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
             if(actual!=expected[i]) {fprintf(stderr,"matrix transform case %u RAM %06X differs\n",test,i);return 0;}
         }
     }
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
-    puts("576 complete C2DEE0 matrix transforms match returned angles/divisor and non-stack RAM");return 1;
+    puts("576 complete C2DEE0 matrix transforms match returned angles/divisor/cursor and non-stack RAM");return 1;
 }
 static int matrix_settle_cases(void) {
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);

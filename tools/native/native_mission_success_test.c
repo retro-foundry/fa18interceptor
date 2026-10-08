@@ -116,7 +116,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     if(run->force_return && ((run->proximity_gate==200 && proximity_gate<200 && proximity_gate>=0) ||
                             (run->proximity_gate>=0 && proximity_gate<0)))
         run->formation_window=run->formation_length;
-    if(run->mode==5 && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits))
+    if((run->mode==4 || run->mode==5) && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits))
         run->combat_window=20; /* Include the original 15-tick expiry and its boundary. */
     if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
     const int touchdown=run->airborne && !run->landed && (contact&0x80);
@@ -131,7 +131,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         (run->landed && ((region^run->region)&region_mask)) || (ready && !ready_before) ||
         radar_hits!=run->radar_hits || gun_hits!=run->gun_hits ||
         (run->following_result && (message_b!=run->message_b || message_c!=run->message_c)) ||
-        (run->mode==5 && enemy_expiries!=run->enemy_expiries);
+        ((run->mode==4 || run->mode==5) && enemy_expiries!=run->enemy_expiries);
     if(radar_hits!=run->radar_hits || gun_hits!=run->gun_hits) {
         printf("{\"weapon_hit\":true,\"body\":%u,\"gun_before\":%u,\"gun_after\":%u,"
                "\"radar_before\":%u,\"radar_after\":%u,\"records\":[",
@@ -176,20 +176,21 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 }
 
 int main(int argc,char **argv) {
-    /* Modes three and five include success gates and bounded diagnostics. */
+    /* Mission success gates and bounded normal-input diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5|5-formation|5-mission|5-success|3-sequence|5-sequence]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|5|5-formation|5-mission|5-success|3-sequence|5-sequence]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
     if(argc==6) {
         run.sequence=!strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence");
-        pilot.complete_flight=!strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
-        pilot.force_return=!strcmp(argv[5],"5-formation") || pilot.complete_flight;
+        pilot.complete_flight=!strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
+        pilot.force_return=!strcmp(argv[5],"5-formation") || !strcmp(argv[5],"5-mission") ||
+            !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.mode=pilot.force_return?5u:(unsigned)atoi(argv[5]);
     }
-    if(pilot.mode!=3 && pilot.mode!=5) {
+    if(pilot.mode!=3 && pilot.mode!=4 && pilot.mode!=5) {
         fprintf(stderr,"Unsupported mission mode: %s\n",argv[5]);
         goto done;
     }
@@ -216,7 +217,7 @@ int main(int argc,char **argv) {
             if(game->ticks==times[i]+2) mission_pilot_event(&pilot,game,keys[i],0);
         }
         if(pilot.target_press && game->ticks==pilot.target_press+2) mission_pilot_event(&pilot,game,116,0);
-        if(pilot.mode==5 && pilot.started) for(unsigned i=0;i<(pilot.complete_flight?2u:3u);++i) {
+        if((pilot.mode==4 || pilot.mode==5) && pilot.started) for(unsigned i=0;i<(pilot.complete_flight?2u:3u);++i) {
             if(game->ticks==pilot.started+700+20*i) mission_pilot_event(&pilot,game,13,1);
             if(game->ticks==pilot.started+702+20*i) mission_pilot_event(&pilot,game,13,0);
         }
@@ -229,7 +230,7 @@ int main(int argc,char **argv) {
     const unsigned speed=rd_u16(CONTROL_RECORDS+110),contact=rd_u16(CONTROL_RECORDS+2);
     const gaddr log=rd_u32(MODE_TABLE),stage=rd_u32(STAGE_CALLBACK);
     const unsigned completions=rd_u16(log+56),grade=rd_u8(log+18+pilot.mode);
-    if(pilot.mode==5)
+    if(pilot.mode==4 || pilot.mode==5)
         printf("{\"diagnostic_end\":true,\"mode\":%u,\"phase\":%u,\"tick\":%u,\"crash_resets\":%u,"
                "\"completions_before\":%u,\"completions_after\":%u,\"stage\":\"%06X\"}\n",
             mode,phase,ticks,resets,pilot.completions,completions,stage);

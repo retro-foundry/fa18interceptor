@@ -1,5 +1,18 @@
 # Native port runner
 
+The native record loop now passes C2DEE0/C2DFF6's final matrix product cursor
+to the following C2436A sight update. All 576 component cases match the
+original output/cursor/RAM. The normal-key mode-four diagnostic matches all
+26 input/stage intervals and 59 sampled bodies, including its crash
+continuation and reset. The serial `fa18_native_mission_four_combat_reset`
+gate passes in Debug and Release. See
+`../../analysis/native_matrix_sight_reference_milestone.md`. Mode-four success
+remains open: this flight has no hit/objective/save and still crashes.
+The existing region-flight CTest also still fails its required spawn/zone/
+NPC-missile coverage guards, although all 58 intervals and 47 sampled bodies
+match original compared RAM/drawing. Restoring that ordinary-input coverage
+remains open; the original keys and strict guards are preserved.
+
 Modes three and five now complete result messages and Escape/menu restart
 after their normal-key successful flights. All 44/42 input-stage intervals
 and 162/169 sampled bodies match original compared RAM/drawing, with 64

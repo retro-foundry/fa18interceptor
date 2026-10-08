@@ -96,6 +96,10 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_combat_reset.py
                 --test $<TARGET_FILE:fa18_native_mission_success_test>
                 --out ${CMAKE_CURRENT_BINARY_DIR}/mission-five-combat-reset-check)
+    add_test(NAME fa18_native_mission_four_combat_reset
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_combat_reset.py
+                --test $<TARGET_FILE:fa18_native_mission_success_test> --mode 4
+                --out ${CMAKE_CURRENT_BINARY_DIR}/mission-four-combat-reset-check)
     add_test(NAME fa18_native_mission_five_forced_return
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_forced_return.py
                 --test $<TARGET_FILE:fa18_native_mission_success_test>
@@ -112,10 +116,11 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         add_test(NAME fa18_native_mission_${mission_mode}_sequence
             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_success.py
                     --test $<TARGET_FILE:fa18_native_mission_success_test> --mode ${mission_mode} --sequence
+                    --timeout $<IF:$<CONFIG:Debug>,90,60>
                     --out ${CMAKE_CURRENT_BINARY_DIR}/mission-${mission_mode}-sequence-check)
         set_tests_properties(fa18_native_mission_${mission_mode}_sequence PROPERTIES RUN_SERIAL TRUE)
     endforeach()
-    set_tests_properties(fa18_native_mission_three_success fa18_native_mission_five_combat_reset
+    set_tests_properties(fa18_native_mission_three_success fa18_native_mission_four_combat_reset fa18_native_mission_five_combat_reset
         fa18_native_mission_five_forced_return fa18_native_mission_five_objective
         fa18_native_mission_five_success
         PROPERTIES RUN_SERIAL TRUE)

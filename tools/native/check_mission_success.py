@@ -23,7 +23,11 @@ def main():
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mission-success-check')
     parser.add_argument('--mode', type=int, choices=(3, 5), default=3)
     parser.add_argument('--sequence', action='store_true', help='Finish result messages and press Escape to restart into the menu')
+    parser.add_argument('--timeout', type=float, default=60,
+                        help='Native fixture deadline in seconds (Debug capture runs can require longer)')
     args = parser.parse_args()
+    if args.timeout <= 0:
+        parser.error('--timeout must be positive')
     work = args.out.resolve()
     env = os.environ.copy()
     env['FA18_MISSION_END_TICK'] = '32000' if args.mode == 3 else '30000'
@@ -33,7 +37,7 @@ def main():
         scenario = f'{args.mode}-sequence' if args.sequence else '3' if args.mode == 3 else '5-success'
         replay = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                                  str(pilot), str(keys), str(prefix), scenario],
-                                cwd=ROOT, capture_output=True, text=True, env=env, timeout=60)
+                                cwd=ROOT, capture_output=True, text=True, env=env, timeout=args.timeout)
         (work / 'native.log').write_text(replay.stdout + replay.stderr)
         assert replay.returncode == 0, replay.stderr or replay.stdout
         exports = [json.loads(line) for line in replay.stdout.splitlines() if line.startswith('{')]

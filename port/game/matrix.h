@@ -36,6 +36,7 @@ typedef struct MatrixTransformAngleState {
     uint32_t final_d0;
     int16_t secondary_raw;
     int primary_clears_d2_high;
+    gaddr next_product; /* C2DFF6 leaves the last product cursor for its caller. */
 } MatrixTransformAngleState;
 void extract_transform_angles(int16_t out[3], MatrixTransformAngleState *state);
 

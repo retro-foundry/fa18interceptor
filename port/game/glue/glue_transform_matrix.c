@@ -13,7 +13,7 @@ void transform_matrix_registers(const int16_t angles[3],
     SET_W(D(3), state->divisor);
     D(7) = (uint16_t)state->primary_index;
     A(2) = MATRIX_TRANSFORM_ROTATION;
-    A(3) = MATRIX_TRANSFORM_PRODUCT + 32;
+    A(3) = state->next_product;
     D(4) = (uint32_t)(int32_t)angles[0];
     D(5) = (uint32_t)(int32_t)angles[1];
     D(6) = (uint32_t)(int32_t)angles[2];

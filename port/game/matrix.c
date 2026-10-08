@@ -267,7 +267,10 @@ void extract_transform_angles(int16_t out[3], MatrixTransformAngleState *state) 
         out[2] = (int16_t)((uint16_t)transform_axis_angle(
         rd_s32(MATRIX_TRANSFORM_PRODUCT + 4),
         rd_s32(MATRIX_TRANSFORM_PRODUCT + 16), &divisor, &final_d0, 0) << 3);
-        if (state) { state->final_d0 = final_d0; state->divisor = divisor; }
+        if (state) {
+            state->final_d0 = final_d0; state->divisor = divisor;
+            state->next_product = MATRIX_TRANSFORM_PRODUCT + 32;
+        }
     }
 }
 

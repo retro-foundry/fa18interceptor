@@ -87,7 +87,7 @@ static int follow_stolen_aircraft(MissionPilot *pilot,NativeFrontend *game) {
  * radar missiles with normal controls. No hit, collision or outcome state
  * is written. */
 static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
-    if(!pilot->complete_flight || !pilot->formation_done || pilot->objective ||
+    if(!pilot->complete_flight || (pilot->mode==5 && !pilot->formation_done) || pilot->objective ||
        rd_u8(PLAYER_PHASE)==0xff || rd_u8(PLAYER_PHASE)==1) return 0;
     unsigned selected=0;
     double target_distance_squared=0;
@@ -100,7 +100,9 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
             square+=d*d;
         }
         if(slot==pilot->target) {target_distance_squared=square;selected=slot;break;}
-        if(!selected) {target_distance_squared=square;selected=slot;}
+        if(!selected || (pilot->mode==4 && square<target_distance_squared)) {
+            target_distance_squared=square;selected=slot;
+        }
     }
     if(!selected) {held(pilot,game,&pilot->fire,0);return 1;}
     const gaddr target=CONTROL_RECORDS+512*selected;
@@ -115,8 +117,15 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     const double yaw=rd_u16(CONTROL_RECORDS+104)*6.283185307179586/28800;
     const double yaw_error=angle_delta(wanted_yaw,yaw);
     const double horizontal=hypot(delta[0],delta[2]);
-    const double direction[3]={-sin(wanted_yaw),fabs(yaw_error)>0.3?0:
-        clamp(delta[1]/fmax(horizontal,100),-0.05,0.05),cos(wanted_yaw)};
+    /* Mode-four input keeps pitch relative to the current heading while
+     * turning toward higher enemy aircraft; the accepted mode-five keys
+     * retain their existing heading choice. */
+    const double pitch_heading=pilot->mode==4?yaw:wanted_yaw;
+    const double pitch_slope=pilot->mode==4?
+        clamp(delta[1]/6000-rd_s32(CONTROL_RECORDS+66)/256.0/fmax(speed,30),-0.12,0.12):
+        clamp(delta[1]/fmax(horizontal,100),-0.05,0.05);
+    const double direction[3]={-sin(pitch_heading),fabs(yaw_error)>0.3?0:
+        pitch_slope,cos(pitch_heading)};
     for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
         local[i]+=direction[j]*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
     const double bank=angle_delta(rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800,0);
@@ -133,8 +142,16 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
     held(pilot,game,&pilot->rudder,yaw_control>0.006?46:yaw_control< -0.006?44:0);
     held(pilot,game,&pilot->pitch,pitch_control>0.006?274:pitch_control< -0.006?273:0);
-    const int launch=rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<20000 &&
-        fabs(x)<0.6 && fabs(y)<0.3 && pilot->missile_target!=selected;
+    if(pilot->mode==4 && pilot->missile_target==selected && game->ticks>pilot->missile_tick+200) {
+        int active=0;
+        for(unsigned slot=1;slot<=3;++slot) {
+            const gaddr projectile=CONTROL_RECORDS+512*slot;
+            active|=(rd_u8(projectile+1)&0x48u)==0x48u && !rd_u8(projectile+94);
+        }
+        if(!active) pilot->missile_target=0;
+    }
+    const int launch=rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<(pilot->mode==4?10000:20000) &&
+        fabs(x)<(pilot->mode==4?0.2:0.6) && fabs(y)<(pilot->mode==4?0.15:0.3) && pilot->missile_target!=selected;
     if(launch) {pilot->missile_target=selected;pilot->missile_tick=game->ticks;}
     held(pilot,game,&pilot->fire,pilot->missile_target==selected &&
         game->ticks-pilot->missile_tick<4?32:0);
@@ -242,11 +259,11 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         }
     }
     if(!pilot->objective && (rd_s16(SELECTED_RECORD)<0 ||
-       (pilot->mode==5 && rd_s16(SELECTED_RECORD)!=(int)(pilot->target*512))) &&
+       ((pilot->mode==4 || pilot->mode==5) && rd_s16(SELECTED_RECORD)!=(int)(pilot->target*512))) &&
        game->ticks>pilot->target_press+200) {
         mission_pilot_event(pilot,game,116,1);pilot->target_press=game->ticks;
     }
-    if(game->ticks<pilot->started+(pilot->force_return?575u:650u)) {
+    if(game->ticks<pilot->started+(pilot->force_return || pilot->complete_flight?575u:650u)) {
         held(pilot,game,&pilot->throttle,61);
         held(pilot,game,&pilot->pitch,game->ticks>=pilot->started+550?274:0);
         held(pilot,game,&pilot->rudder,0);

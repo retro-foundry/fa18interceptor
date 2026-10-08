@@ -1,5 +1,24 @@
 # Current playable port handoff
 
+Latest connected matrix/sight fix (2026-10-08): the native dynamics caller
+passes C2DEE0/C2DFF6's product cursor to the following record's C2436A sight
+update. All 576 complete matrix cases match original output/cursor/non-stack
+RAM. The normal-key mode-four diagnostic now matches all 26 input/stage
+intervals and 59 sampled bodies, including the crash continuation and natural
+reset. The new serial gate is `fa18_native_mission_four_combat_reset`;
+Debug and Release pass, and the playable executable is refreshed. Arithmetic,
+gameplay rules and comparison masks are unchanged. See
+`analysis/native_matrix_sight_reference_milestone.md` and `NEW_PORT_HANDOFF.md`.
+This remains an unsuccessful flight: no hit/objective/save, crash tick 22,148
+and completions unchanged at 3. Mode-four success is the next ordinary-input
+mission task. First restore the existing region-flight regression's required
+spawn/zone/NPC-missile coverage: its CTest still fails those guards despite all
+58 input/stage intervals and 47 sampled bodies matching original compared
+RAM/drawing. Original keys and strict guards are preserved; see the milestone.
+Other successful missions, independent complete flights, further play
+after the accepted result menu, remaining contracts, typed state, audio and
+wider performance remain open; the complete-port goal stays active.
+
 Latest mission result sequence acceptance (2026-10-08): modes three and five
 complete normal-key success, save, result messages, Escape, scene bootstrap,
 menu return and cold log reload. All 44/42 input-stage intervals and 162/169

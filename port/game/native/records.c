@@ -207,6 +207,9 @@ static gaddr dynamics(gaddr record,gaddr reference) {
             const RecordMatrixInput input={record,{w->primary,w->detail,w->x,w->y,w->z,w->rate_x,w->rate_y,w->rate_z}};
             RecordMatrixResult result={0};
             update_dynamics_record_matrix(&input,&result,NULL,NULL);
+            /* C2DEE0's extraction cursor remains the next record's incoming
+             * sight reference, including a grounded root's crash continuation. */
+            if(!result.class30) w->scene=result.run.transform.next_product;
             break;
         }
         case DY_MOTION_CANDIDATE: {
