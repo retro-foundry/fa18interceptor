@@ -2,24 +2,35 @@
 
 ## Current restart summary — 2026-10-08
 
-A new pilot now completes Intercept Stolen Aircraft (F3/internal mode five)
-from the actual mission-four save earned after normal enlistment, qualification
-and mission three. Formation, two radar kills, carrier wire landing, stop/save,
-messages/menu and cold reload pass using ordinary keys. Completions advance
-2 -> 3 and grade 0 -> 1. All 42 intervals/174 bodies match original compared
-RAM/drawing; the playable replay delivers 2,777 events and saves identical bytes.
-The original level-zero encounter uses enemies 8/12; the old ADF-pilot route
-retains its original 8/10 controls and checks. Gameplay and masks are unchanged.
-The serial gate is `fa18_native_mission_5_new_pilot_sequence`; see
-`analysis/native_new_pilot_stolen_sequence_milestone.md` and checkpoint.
-Mission four reproduces exact retained input and all 78 prerequisite bytes.
-The earned new-pilot tour now covers three menu missions; rescue/cruise/final
-progression from this save, independent original whole flights and full-port
-acceptance remain open. Passing RAM stays inside the unchanged 480 MiB cap.
-Seven selected Release checks and five Debug checks pass, with matching new
-input/save hashes and objective/landing/menu evidence. Historical mode-five
-inputs and saved bytes remain unchanged. The playable Release executable is
-unchanged; build-cache use remains 2.00 GiB after pruning.
+A newly enlisted pilot now earns qualification and all six menu missions,
+including the final Carrier Sub (F6/internal eight). Ordinary inputs complete
+rescue, cruise interception and four final aircraft expiries, carrier wire
+landing, save, messages/menu and cold Next Mission wrap. All six grades are one
+and completions advance five to six. The submarine remains active at objective
+admission; its visible explosion is not required by this original counter path.
+Only validation input/evidence changes; gameplay and comparison masks remain
+unchanged. See `analysis/native_new_pilot_tour_milestone.md` and its checkpoint.
+
+New rescue/cruise/final gates compare 44/42/64 flight intervals and 191/171/220
+bodies, with one original config write each and matching playable saved bytes.
+The final gate also compares eleven flare/chaff presses and one cold-wrap
+interval/body. `fa18_native_new_pilot_tour` replays the same earned chain from
+an empty save directory across cold starts; only the game writes the log.
+Independent original whole flights, uninterrupted single-process tour checks,
+remaining caller contracts, typed state, audio and wider performance remain
+open. The complete-port goal stays active. Passing RAM is temporary inside the
+unchanged 240-pair / 480 MiB cap, with 4 GiB build pruning still enabled.
+
+Nine selected Release checks and seven Debug checks pass, including the earned
+tour, new mission gates, regression checks and artifact policy/cleanup. Both
+configurations agree on inputs, saved bytes and objective/landing/menu/wrap
+results. Debug final captures use a 120-second deadline after the original
+90-second deadline timed out. The playable executables are unchanged; pruned
+build-cache use is 2.01 GiB. Sealed evidence is in
+`analysis/figures/native_new_pilot_tour_checkpoint.json`.
+
+Earlier acceptance notes below are historical; this summary supersedes their
+pending newly enlisted tour work.
 
 Final mission availability is now earned by ordinary rescue and cruise flights
 starting from the original ADF pilot. The active final success gate loads their

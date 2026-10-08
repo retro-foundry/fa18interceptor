@@ -17,6 +17,7 @@ from region_pilot_fixture import load_region_pilot
 from cruise_pilot_fixture import load_cruise_pilot
 from final_pilot_fixture import load_final_pilot
 from stolen_pilot_fixture import load_stolen_pilot
+from tour_pilot_fixture import load_tour_pilot, tour_input, load_tour_result
 from final_sequence_capture import collect_final_sequence
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -73,14 +74,14 @@ def main():
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe',
                         help='Playable runner for escort, rescue, cruise and final-mission replays')
     parser.add_argument('--sequence', action='store_true', help='Finish result messages and press Escape to restart into the menu')
-    parser.add_argument('--new-pilot', action='store_true', help='Run mode-five sequence from the newly enlisted, mission-four-earned log')
+    parser.add_argument('--new-pilot', action='store_true', help='Run a later mission sequence from its actual newly enlisted pilot save chain')
     parser.add_argument('--timeout', type=float, default=60,
                         help='Native fixture deadline in seconds (Debug capture runs can require longer)')
     args = parser.parse_args()
     if args.timeout <= 0:
         parser.error('--timeout must be positive')
-    if args.new_pilot and (args.mode != 5 or not args.sequence):
-        parser.error('--new-pilot requires --mode 5 --sequence')
+    if args.new_pilot and (args.mode not in (5, 6, 7, 8) or not args.sequence):
+        parser.error('--new-pilot requires --mode 5, 6, 7 or 8 and --sequence')
     if args.mode in (6, 7, 8) and not args.sequence:
         parser.error('Rescue, cruise and final missions use --sequence for complete-flight comparison')
     work = args.out.resolve()
@@ -92,16 +93,18 @@ def main():
         prefix, pilot = ram / 'frame', ram / 'pilot'
         keys = work / 'pilot.e9k'
         scenario = f'{args.mode}-sequence' if args.sequence else '3' if args.mode == 3 else f'{args.mode}-success'
-        if args.new_pilot:
+        if args.new_pilot and args.mode == 5:
             scenario = '5-tour'
+        elif args.new_pilot and args.mode == 8:
+            scenario = '8-tour'
         initial = None
         if args.mode in (4, 7) or args.new_pilot:
-            initial = load_stolen_pilot() if args.new_pilot else load_region_pilot() if args.mode == 4 else load_cruise_pilot()
+            initial = load_tour_pilot(args.mode) if args.new_pilot else load_region_pilot() if args.mode == 4 else load_cruise_pilot()
             pilot.mkdir()
             (pilot / 'config').write_bytes(initial)
         writes = partitions = None
         if args.mode == 8:
-            exports, keys, initial, saved, writes, partitions = collect_final_sequence(args, work, ram, env)
+            exports, keys, initial, saved, writes, partitions = collect_final_sequence(args, work, ram, env, initial, scenario)
         else:
             replay = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                                      str(pilot), str(keys), str(prefix), scenario],
@@ -153,7 +156,10 @@ def main():
             assert len(returns) == 1 and returns[0]['pose'] == 3, returns
             assert landings[0]['region_after'] & 0xc0, 'Touchdown must be on the carrier'
             assert landings[0]['contact_before'] & 0x8000, 'Arrestor not deployed'
-            if args.mode in (6, 7):
+            if args.mode in (6, 7) or (args.mode == 8 and args.new_pilot):
+                # The new final route catches the wire one original body
+                # after deck contact. Require its compared transition within
+                # the consecutive landing window, as on rescue/cruise.
                 wire, = [item for item in window if not item['contact_before'] & 0x4000 and item['contact_after'] & 0x4000]
                 assert wire['contact_after'] & 0xc080 == 0xc080 and wire['region_after'] & 0xc0, wire
                 assert landings[0]['body'] <= wire['body'] <= window[-1]['body'], wire
@@ -210,18 +216,19 @@ def main():
             saved = (pilot / 'config').read_bytes()
         assert len(saved) == 78 and int.from_bytes(saved[56:58], 'big') == summary['completions_after']
         assert saved[6] == args.mode and saved[7] == summary['grade_before'] and saved[18 + args.mode] == summary['grade_after']
-        if args.new_pilot:
-            retained = ROOT / 'tools/native/fixtures/mission-five-new-pilot-sequence.e9k'
-            assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'New-pilot stolen-aircraft input differs'
+        if args.new_pilot and args.mode < 8:
+            assert saved == load_tour_pilot(args.mode + 1), 'New-pilot save must reproduce the next earned availability'
+            retained = tour_input(args.mode)
+            assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'New-pilot retained input differs'
         if args.mode == 4 and args.sequence:
             assert saved == load_stolen_pilot(), 'Escort save must reproduce new-pilot stolen-aircraft availability'
             retained = ROOT / 'tools/native/fixtures/mission-four-sequence.e9k'
             assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'Earned escort input differs'
-        if args.mode == 6:
+        if args.mode == 6 and not args.new_pilot:
             assert saved == load_cruise_pilot(), 'Rescue save must reproduce earned cruise availability'
             retained = ROOT / 'tools/native/fixtures/rescue-sequence.e9k'
             assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'Earned rescue input differs'
-        if args.mode == 7:
+        if args.mode == 7 and not args.new_pilot:
             assert saved == load_final_pilot(), 'Cruise save must reproduce earned final availability'
             retained = ROOT / 'tools/native/fixtures/cruise-sequence.e9k'
             assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'Earned cruise input differs'
@@ -265,8 +272,9 @@ def main():
             report['mission_sequence_accepted'] = True
         if args.new_pilot:
             report.update({'mission_availability_earned': True, 'pilot_newly_enlisted': True,
-                'full_tour_earned': False, 'eligibility_fixture': 'tools/native/fixtures/stolen-mission-pilot.json',
-                'initial_pilot_source': 'Normal menu reset, qualification, mission-three and mission-four success/save/menu'})
+                'full_tour_earned': False,
+                'eligibility_fixture': 'tools/native/fixtures/stolen-mission-pilot.json' if args.mode == 5 else 'tools/native/fixtures/new-pilot-tour-availability.json',
+                'initial_pilot_source': 'Normal menu reset, qualification and earned mission save/menu chain'})
         if args.mode in (4, 6, 7, 8) or args.new_pilot:
             canonical_pilot = ram / 'canonical-pilot'
             canonical_pilot.mkdir()
@@ -300,8 +308,9 @@ def main():
             assert objective['expiries_after'] == 4 and objective['sequence_phase'] == 3, objective
             assert objective['records'][-1]['slot'] == 14 and objective['records'][-1]['kind'] == 0x20 and objective['records'][-1]['flags_after'] & 0x40, objective
             hits = [item for item in exports if item.get('weapon_hit')]
-            assert len(hits) == 6 and hits[-1]['infrared_after'] == hits[0]['infrared_before'] + 2, hits
-            assert hits[-1]['radar_after'] == hits[0]['radar_before'] + 2 and hits[-1]['gun_after'] == 2, hits
+            assert len(hits) == (4 if args.new_pilot else 6) and hits[-1]['infrared_after'] == hits[0]['infrared_before'] + 2, hits
+            assert hits[-1]['radar_after'] == hits[0]['radar_before'] + 2, hits
+            assert hits[-1]['gun_after'] == (hits[0]['gun_before'] if args.new_pilot else 2), hits
             compared_combat = {item['body'] for item in bodies if item['combat_window']}
             for hit in hits:
                 assert set(range(hit['body'], hit['body'] + 20)) <= compared_combat, hit
@@ -328,6 +337,23 @@ def main():
                 'weapon_hits': hits, 'compared_combat_bodies': len(compared_combat),
                 'return': returns[0], 'next_mission_wrap': wrap, 'canonical_wrap': wrap_state,
                 'wrap_input_sha256_lf': hashlib.sha256(Path(str(keys) + '.wrap.e9k').read_text().encode()).hexdigest()})
+            if args.new_pilot:
+                assert saved[:4] == b'\0\1\0\0' and saved[21:27] == b'\1' * 6
+                assert int.from_bytes(saved[56:58], 'big') == 6
+                retained_saved, retained_result = load_tour_result()
+                assert saved == retained_saved, 'New-pilot final save differs'
+                for generated, retained in ((keys, ROOT / retained_result['input']),
+                    (Path(str(keys) + '.wrap.e9k'), ROOT / retained_result['wrap_input'])):
+                    assert generated.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'New-pilot final retained input differs'
+                countermeasures = [item for item in entries if 0x23 in item['keys'] or 0x33 in item['keys']]
+                assert sum(0x23 in item['keys'] for item in countermeasures) == 5, countermeasures
+                assert sum(0x33 in item['keys'] for item in countermeasures) == 6, countermeasures
+                report.update({'full_tour_earned': True, 'pilot_newly_enlisted': True,
+                    'wire_capture': wire,
+                    'countermeasure_inputs': [{'tick': item['tick'], 'stage': item['stage'], 'keys': item['keys']}
+                                              for item in countermeasures],
+                    'eligibility_fixture': 'tools/native/fixtures/new-pilot-tour-availability.json',
+                    'initial_pilot_source': 'Normal menu reset, qualification and all six earned mission saves'})
         (work / 'comparison.json').write_text(json.dumps(report, indent=2) + '\n')
     suffix = ', result messages, Escape/menu restart and cold reload' if args.sequence else ''
     print(f"Mode {args.mode} mission: {len(entries)} input/stage intervals and {len(bodies)} bodies match original RAM/drawing, including all {len(window)} landing bodies and the actual config write{suffix}")

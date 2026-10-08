@@ -1,11 +1,16 @@
 # The C port
 
-The new-pilot tour now covers qualification and the first three menu missions.
-Intercept Stolen Aircraft (F3/internal mode five) uses the actual mission-four
-save and completes objective, carrier landing, save and menu return with
-matching sampled original comparisons and playable saved bytes. Gameplay is
-unchanged; later new-pilot progression and independent whole flights remain open.
-See [`analysis/native_new_pilot_stolen_sequence_milestone.md`](analysis/native_new_pilot_stolen_sequence_milestone.md).
+A newly enlisted pilot now earns qualification and all six menu missions,
+including final aircraft objective, carrier wire landing, saved sixth result,
+menu return and cold Next Mission wrap. The submarine remains active at
+objective admission; a visible explosion is not required. Gameplay is unchanged.
+The new per-mission gates compare sampled original instructions and playable
+saved bytes. `fa18_native_new_pilot_tour` starts with an empty save directory
+and carries only actual game saves across cold starts. Independent original
+whole flights and uninterrupted single-process tour checks remain open; see
+[native_new_pilot_tour_milestone.md](analysis/native_new_pilot_tour_milestone.md).
+
+Earlier acceptance notes below describe the preceding milestones.
 
 Final mission availability is now earned by the ordinary rescue/cruise save
 chain from the original ADF pilot. The final gate uses the actual saved log and
@@ -13,8 +18,7 @@ completes aircraft objective, carrier landing, save, menu and cold wrap with
 matching sampled original comparisons and playable results. Gameplay is
 unchanged. See
 [`analysis/native_final_mission_earned_availability_milestone.md`](analysis/native_final_mission_earned_availability_milestone.md).
-A complete newly enlisted tour and independent original whole flights remain
-open; the earlier patrol diagnostic retains its explicitly unearned log.
+Independent original whole flights remain open; the earlier patrol diagnostic retains its explicitly unearned log.
 
 Intercept Incoming Cruise Missile (F5/internal mode seven) now completes its
 interception, carrier deck/wire landing, saved result, messages, Escape/menu and
@@ -23,8 +27,8 @@ match sampled original RAM/drawing, with matching playable saved bytes/menu.
 Its availability is earned by the normal-key rescue save from the original ADF
 pilot; the rescue gate reproduces that retained input/log. See
 [`analysis/native_cruise_mission_sequence_milestone.md`](analysis/native_cruise_mission_sequence_milestone.md).
-All six menu missions have successful native routes. A complete earned tour,
-independent original whole flights and full-port acceptance remain open.
+All six menu missions have successful native routes. Independent original
+whole flights and full-port acceptance remain open.
 
 Search and Rescue (F4/internal mode six) now completes the pod objective,
 carrier deck/wire landing, saved result, messages, Escape/menu and cold reload

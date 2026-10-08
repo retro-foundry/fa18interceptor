@@ -9,8 +9,9 @@ from final_pilot_fixture import load_final_pilot
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def collect_final_sequence(args, work, ram, env):
-    initial = load_final_pilot()
+def collect_final_sequence(args, work, ram, env, initial=None, scenario='8-sequence'):
+    if initial is None:
+        initial = load_final_pilot()
     cases, partitions, writes = [], [], 0
     first_exports = first_saved = first_keys = first_wrap = None
     for index, (begin, end) in enumerate(((0, 23000), (23001, 0))):
@@ -24,7 +25,7 @@ def collect_final_sequence(args, work, ram, env):
         run_env = dict(env, FA18_MISSION_END_TICK='40000',
                        FA18_MISSION_CAPTURE_FROM_TICK=str(begin), FA18_MISSION_CAPTURE_UNTIL_TICK=str(end))
         native = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
-            str(pilot), str(keys), str(prefix), '8-sequence'], cwd=ROOT,
+            str(pilot), str(keys), str(prefix), scenario], cwd=ROOT,
             env=run_env, capture_output=True, text=True, timeout=args.timeout)
         (partition_work / 'native.log').write_text(native.stdout + native.stderr)
         assert native.returncode == 0, f"Native exit {native.returncode}; see {partition_work / 'native.log'}: {native.stderr.strip() or native.stdout[-600:]}"

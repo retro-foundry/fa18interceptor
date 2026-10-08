@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "pilot_newly_enlisted": true,
+  "full_tour_earned": true,
+  "native_flight_state_seeded": false,
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "initial_config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+  "config_hex": "00010000000808000000039c0000000000000000000101010101010000004e4557000000000000000000000000000000000000000000000600060021000000040002000700060000000500000000",
+  "config_sha256": "3721534ce27505c9ace37b3c6f7f4b0170aab1d84cb2aad886d999fe4cadc632",
+  "input": "tools/native/fixtures/final-new-pilot-sequence.e9k",
+  "input_sha256_lf": "f867382ded07413afa6ac64c42fc9ba32cbb1611450a736870e9f485c24a8c0d",
+  "menu_tick": 40049,
+  "wrap_input": "tools/native/fixtures/final-new-pilot-wrap.e9k",
+  "wrap_input_sha256_lf": "08488a14de94bd7452b3e19a7973c7615944b5430212f15f60cb1c5c7d1fed63",
+  "wrap_tick": 3004,
+  "wrap_stage": "C0FECE",
+  "provenance": "Normal menu reset/callsign NEW, qualification, all six earned mission objective/landing/save/menu sequences and cold Next Mission wrap",
+  "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open"
+}

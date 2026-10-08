@@ -54,13 +54,14 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     if(boundary==NATIVE_FRAME_INPUT_BEGIN) {
         run->entry_stage=rd_u32(STAGE_CALLBACK);run->entry_phase=rd_u8(PLAYER_PHASE);
         run->entry_tick=game->ticks;run->key_count=game->input_count;
-        int rescue_key=0;
-        if(run->mode==6) for(unsigned i=0;i<run->key_count;++i) {
+        int objective_key=0;
+        if(run->mode==6 || run->mode==8) for(unsigned i=0;i<run->key_count;++i) {
             const uint8_t key=game->input_keys[(game->input_read+i)&255u]&0x7fu;
-            if(key==0x60 || key==0x23) rescue_key=1;
+            if(run->mode==6 && (key==0x60 || key==0x23)) objective_key=1;
+            if(run->mode==8 && (key==0x23 || key==0x33)) objective_key=1;
         }
         run->keep_entry=capture_tick(run,game->ticks) && (run->entry_stage!=run->previous_entry_stage ||
-            run->entry_phase!=run->previous_entry_phase || run->entry_stage==0xc110a4 || rescue_key ||
+            run->entry_phase!=run->previous_entry_phase || run->entry_stage==0xc110a4 || objective_key ||
             (run->following_result && (run->key_count ||
              (run->entry_phase==0xfc && rd_u8(MESSAGE_STATE_B) && rd_u8(MESSAGE_STATE_C)))));
         if(run->keep_entry) {
@@ -260,19 +261,20 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 int main(int argc,char **argv) {
     /* Mission success gates and bounded normal-input diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|4-success|4-sequence|5|5-formation|5-mission|5-success|3-sequence|5-sequence|5-tour|6-rescue|6-sequence|7-success|7-sequence|8-success|8-sequence]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|4-success|4-sequence|5|5-formation|5-mission|5-success|3-sequence|5-sequence|5-tour|6-rescue|6-sequence|7-success|7-sequence|8-success|8-sequence|8-tour]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
     if(argc==6) {
         pilot.tour_flight=!strcmp(argv[5],"5-tour");
+        pilot.new_final_flight=!strcmp(argv[5],"8-tour");
         pilot.escort_flight=!strcmp(argv[5],"4-success") || !strcmp(argv[5],"4-sequence");
-        pilot.final_flight=!strcmp(argv[5],"8-success") || !strcmp(argv[5],"8-sequence");
-        pilot.final_sequence=!strcmp(argv[5],"8-sequence");
+        pilot.final_flight=pilot.new_final_flight || !strcmp(argv[5],"8-success") || !strcmp(argv[5],"8-sequence");
+        pilot.final_sequence=pilot.new_final_flight || !strcmp(argv[5],"8-sequence");
         pilot.rescue_flight=!strcmp(argv[5],"6-rescue") || !strcmp(argv[5],"6-sequence");
         pilot.cruise_flight=!strcmp(argv[5],"7-success") || !strcmp(argv[5],"7-sequence");
-        run.sequence=pilot.tour_flight || !strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence") || !strcmp(argv[5],"6-sequence") || !strcmp(argv[5],"7-sequence") || !strcmp(argv[5],"8-sequence");
+        run.sequence=pilot.tour_flight || pilot.new_final_flight || !strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence") || !strcmp(argv[5],"6-sequence") || !strcmp(argv[5],"7-sequence") || !strcmp(argv[5],"8-sequence");
         pilot.complete_flight=pilot.tour_flight || pilot.escort_flight || pilot.final_flight || pilot.rescue_flight || pilot.cruise_flight || !strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.force_return=!strcmp(argv[5],"5-formation") || !strcmp(argv[5],"5-mission") ||
             !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence") || pilot.tour_flight;
@@ -313,6 +315,7 @@ int main(int argc,char **argv) {
         }
         if(pilot.target_press && game->ticks==pilot.target_press+2) mission_pilot_event(&pilot,game,116,0);
         if(pilot.weapon_press && game->ticks==pilot.weapon_press+2) mission_pilot_event(&pilot,game,13,0);
+        if(pilot.defense_tick && game->ticks==pilot.defense_tick+2) mission_pilot_event(&pilot,game,pilot.defense_key,0);
         if(pilot.rescue_drop_tick && game->ticks==pilot.rescue_drop_tick+6) mission_pilot_event(&pilot,game,304,1);
         if(pilot.rescue_drop_tick && game->ticks==pilot.rescue_drop_tick+6) mission_pilot_event(&pilot,game,102,1);
         if(pilot.rescue_drop_tick && game->ticks==pilot.rescue_drop_tick+12) mission_pilot_event(&pilot,game,102,0);

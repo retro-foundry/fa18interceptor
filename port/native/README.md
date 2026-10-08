@@ -1,13 +1,16 @@
 # Native port runner
 
-The new-pilot tour now covers qualification and the first three menu missions.
-The serial `fa18_native_mission_5_new_pilot_sequence` uses the actual mission-four
-save, then completes stolen-aircraft objective, carrier wire landing, save,
-messages/menu and cold reload. All 42 intervals/174 bodies match sampled
-original RAM/drawing and the playable replay agrees on saved bytes/menu.
-Only validation input/evidence changes. Later new-pilot progression and
-independent whole flights remain open. See
-`../../analysis/native_new_pilot_stolen_sequence_milestone.md`.
+A newly enlisted pilot now earns qualification and all six menu missions,
+including final aircraft objective, carrier wire landing, saved sixth result,
+menu return and cold Next Mission wrap. The submarine remains active at
+objective admission; a visible explosion is not required. Gameplay is unchanged.
+The new per-mission gates compare sampled original instructions and playable
+saved bytes. `fa18_native_new_pilot_tour` starts with an empty save directory
+and carries only actual game saves across cold starts. Independent original
+whole flights and uninterrupted single-process tour checks remain open; see
+[native_new_pilot_tour_milestone.md](../../analysis/native_new_pilot_tour_milestone.md).
+
+Earlier acceptance notes below describe the preceding milestones.
 
 Final mission availability is now earned by the ordinary rescue/cruise save
 chain from the original ADF pilot. The active final success gate loads that
@@ -15,8 +18,8 @@ saved log and completes aircraft objective, carrier landing, save, menu and
 cold wrap. Completions advance 5 -> 6; sampled original comparisons and the
 playable replay agree. See
 `../../analysis/native_final_mission_earned_availability_milestone.md`.
-Gameplay is unchanged; a newly enlisted complete tour and independent whole
-flights remain open. The older patrol diagnostic retains its unearned log.
+Gameplay is unchanged; independent original whole flights remain open. The
+older patrol diagnostic retains its unearned log.
 
 Intercept Incoming Cruise Missile (F5/internal mode seven) now completes
 interception, carrier deck/wire landing, stop/save, messages, Escape/menu and
@@ -27,8 +30,7 @@ replay delivers all 1,533 host events and agrees on saved bytes/menu. Starting
 availability is earned by the normal-key rescue save; its existing gate now
 reproduces exact retained rescue inputs and log bytes. See
 `../../analysis/native_cruise_mission_sequence_milestone.md`. All six menu
-missions have successful routes. Complete-tour acceptance and
-independent whole flights remain open. Gameplay and comparison masks are
+missions have successful routes. Independent original whole flights remain open. Gameplay and comparison masks are
 unchanged; passing RAM remains temporary inside the existing 480 MiB cap.
 Debug/Release gates agree on cruise inputs, saved bytes and result sequence.
 Nine selected Release checks and three Debug checks pass; the playable Release

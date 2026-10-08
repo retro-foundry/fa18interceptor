@@ -121,13 +121,21 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                     --out ${CMAKE_CURRENT_BINARY_DIR}/mission-${mission_mode}-sequence-check)
         set_tests_properties(fa18_native_mission_${mission_mode}_sequence PROPERTIES RUN_SERIAL TRUE)
     endforeach()
-    add_test(NAME fa18_native_mission_5_new_pilot_sequence
-        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_success.py
-                --test $<TARGET_FILE:fa18_native_mission_success_test> --mode 5 --sequence --new-pilot
+    foreach(mission_mode 5 6 7 8)
+        add_test(NAME fa18_native_mission_${mission_mode}_new_pilot_sequence
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_success.py
+                    --test $<TARGET_FILE:fa18_native_mission_success_test> --mode ${mission_mode} --sequence --new-pilot
+                    --runner $<TARGET_FILE:fa18_native>
+                    --timeout $<IF:$<CONFIG:Debug>,$<IF:$<STREQUAL:${mission_mode},8>,120,90>,60>
+                    --out ${CMAKE_CURRENT_BINARY_DIR}/mission-${mission_mode}-new-pilot-sequence-check)
+        set_tests_properties(fa18_native_mission_${mission_mode}_new_pilot_sequence PROPERTIES RUN_SERIAL TRUE)
+    endforeach()
+    add_test(NAME fa18_native_new_pilot_tour
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_new_pilot_tour.py
                 --runner $<TARGET_FILE:fa18_native>
-                --timeout $<IF:$<CONFIG:Debug>,90,60>
-                --out ${CMAKE_CURRENT_BINARY_DIR}/mission-5-new-pilot-sequence-check)
-    set_tests_properties(fa18_native_mission_5_new_pilot_sequence PROPERTIES RUN_SERIAL TRUE)
+                --timeout $<IF:$<CONFIG:Debug>,120,60>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/new-pilot-tour-check)
+    set_tests_properties(fa18_native_new_pilot_tour PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_final_patrol_diagnostic
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_final_patrol.py
                 --test $<TARGET_FILE:fa18_native_mission_success_test>

@@ -10,7 +10,7 @@ typedef struct {
     unsigned mode, trace;
     int force_return, formation_started, formation_done;
     int complete_flight, combat_started, return_started;
-    int tour_flight;
+    int tour_flight, new_final_flight;
     int escort_flight, final_flight, final_sequence, rescue_flight, cruise_flight;
     unsigned rescue_drop_tick;
     double rescue_drop_yaw;
@@ -18,6 +18,8 @@ typedef struct {
     double final_breakaway_yaw;
     unsigned return_input_phase;
     unsigned missile_target, missile_tick, weapon_press;
+    unsigned defense_tick;
+    int defense_key;
     int rudder, pitch, roll, throttle, fire, hook;
     FILE *keys;
 } MissionPilot;
