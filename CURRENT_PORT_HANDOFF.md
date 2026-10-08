@@ -1,5 +1,18 @@
 # Current playable port handoff
 
+Latest mission-four input diagnostic (2026-10-08): the validation-only pilot
+supports `4-success` and `4-sequence`, fires earlier on the closing pass and
+can pursue regional enemy record 12 after the initial enemies. Starting with
+the earned region pilot log, ordinary keys shoot down record 8: radar hits
+advance 0 -> 1 at body 6,434. All 26 input/stage intervals and 81 sampled bodies
+match original compared RAM/drawing. The flight still crashes and resets at
+tick 15,999 (C11830); completions stay 1, with no objective or config write.
+The fixture correctly returns failure. These scenario names request success
+validation; they do not establish mission-four acceptance. Gameplay and the
+playable executable are unchanged. Successful escort/landing/save remains next.
+Debug/Release fixture builds pass. Five selected Release checks pass: existing
+mission-four combat reset, mode-three/five sequences and artifact policy/cleanup.
+
 Latest region coverage acceptance (2026-10-08): normal menu reset, qualification
 and mission-three completion/save/menu return earn the level-zero region pilot.
 Qualification matches 50 original intervals/174 bodies and mission three 44/164,

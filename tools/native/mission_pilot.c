@@ -91,7 +91,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
        rd_u8(PLAYER_PHASE)==0xff || rd_u8(PLAYER_PHASE)==1) return 0;
     unsigned selected=0;
     double target_distance_squared=0;
-    for(unsigned slot=8;slot<=10;slot+=2) {
+    for(unsigned slot=8;slot<=(pilot->escort_flight?12u:10u);slot+=2) {
         const gaddr record=CONTROL_RECORDS+512*slot;
         if((rd_u16(record)&0x1648u)!=0x1040u) continue;
         double square=0;
@@ -150,11 +150,14 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
         }
         if(!active) pilot->missile_target=0;
     }
-    const int launch=rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<(pilot->mode==4?10000:20000) &&
-        fabs(x)<(pilot->mode==4?0.2:0.6) && fabs(y)<(pilot->mode==4?0.15:0.3) && pilot->missile_target!=selected;
+    /* Escort validation fires earlier on the closing pass. These are pilot
+     * input choices; original launch/tracking/damage rules decide the result. */
+    const int close_aim=pilot->mode==4 && !pilot->escort_flight;
+    const int launch=rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<(close_aim?10000:20000) &&
+        fabs(x)<(close_aim?0.2:0.6) && fabs(y)<(close_aim?0.15:0.3) && pilot->missile_target!=selected;
     if(launch) {pilot->missile_target=selected;pilot->missile_tick=game->ticks;}
     held(pilot,game,&pilot->fire,pilot->missile_target==selected &&
-        game->ticks-pilot->missile_tick<4?32:0);
+        game->ticks-pilot->missile_tick<(pilot->escort_flight?12u:4u)?32:0);
     return 1;
 }
 /* Return flight input for the mode-five validation pilot. Keep heading

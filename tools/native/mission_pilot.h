@@ -10,6 +10,7 @@ typedef struct {
     unsigned mode, trace;
     int force_return, formation_started, formation_done;
     int complete_flight, combat_started, return_started;
+    int escort_flight;
     unsigned missile_target, missile_tick;
     int rudder, pitch, roll, throttle, fire, hook;
     FILE *keys;

@@ -2,6 +2,24 @@
 
 ## Current restart summary — 2026-10-08
 
+The latest mission-four validation pilot adds `4-success` and `4-sequence`.
+These modes read flight state and send ordinary keys, firing earlier on the
+closing pass and pursuing regional enemy record 12 when eligible. Starting
+with `region_pilot_fixture.load_region_pilot()` in a fresh saved-pilot directory,
+the 1,747-event flight shoots down record 8: radar hits advance 0 -> 1 at body
+6,434. All 26 input/stage intervals and 81 sampled bodies match original
+compared RAM/drawing. Original instructions receive native before-states;
+this is sampled boundary evidence, not an independent original full flight.
+The flight still crashes and resets at tick 15,999 (C11830), with completions
+unchanged at 1, no objective and no config write. The success fixture returns
+failure as required. Successful escort/landing/save remains open. Existing
+`4-mission` and mode-three/five pilot choices are preserved. Gameplay and the
+playable executable are unchanged; passing RAM is removed after comparison.
+Diagnostic reports and consumed keys are under
+`build/native-flight/mission-four-earned-success-probe/` (ignored local output).
+Debug/Release mission fixture builds pass. All five selected Release checks pass:
+mission-four combat reset, mode-three/five sequences and artifact policy/cleanup.
+
 Region-flight coverage is restored with a source-earned level-zero pilot log.
 Normal menu reset/callsign entry, carrier qualification and mission-three
 success/save/menu return reproduce its exact 78 bytes. Qualification matches
