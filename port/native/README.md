@@ -1,5 +1,19 @@
 # Native port runner
 
+Mode four now completes normal-key escort, carrier arrestor landing, stopped
+result, config save, result messages, Escape/menu return and cold reload from
+the earned region pilot. All 43 input/stage intervals and 159 sampled bodies
+match original compared RAM/drawing, including 64 consecutive landing bodies
+and one config write. Completions advance 1 -> 2 and grade 0 -> 1. The playable
+runner delivers the same 3,883 host replay events and agrees on the saved log
+and menu. JSON distinguishes `host_replay_events`/`host_replay_pending` from
+game-input replay counters. The serial gate is `fa18_native_mission_4_sequence`.
+See `../../analysis/native_mission_four_sequence_milestone.md`. Gameplay and
+comparison masks are unchanged; independent complete flights remain open.
+The user notes mission six may be impossible; verify original feasibility
+before requiring a success or changing outcome rules. Decompile any remaining
+instruction translations encountered on the active path.
+
 Region flight now passes with an earned level-zero pilot log. Normal menu
 reset, qualification and mission-three success/save/menu return reproduce all
 78 bytes; the playable runner agrees on both saved results. Qualification
@@ -9,7 +23,7 @@ The serial gates are `fa18_native_region_flight` and
 `fa18_native_region_pilot_progression`. The host replay loader now accepts the
 complete 1,652-event mission flight. See
 `../../analysis/native_region_pilot_progression_milestone.md`. Successful mode
-four and whole-port acceptance remain open.
+four is accepted above; whole-port acceptance remains open.
 
 The native record loop now passes C2DEE0/C2DFF6's final matrix product cursor
 to the following C2436A sight update. All 576 component cases match the
@@ -17,8 +31,8 @@ original output/cursor/RAM. The normal-key mode-four diagnostic matches all
 26 input/stage intervals and 59 sampled bodies, including its crash
 continuation and reset. The serial `fa18_native_mission_four_combat_reset`
 gate passes in Debug and Release. See
-`../../analysis/native_matrix_sight_reference_milestone.md`. Mode-four success
-remains open: this flight has no hit/objective/save and still crashes.
+`../../analysis/native_matrix_sight_reference_milestone.md`. This reset flight
+has no hit/objective/save and still crashes; the successful route is accepted above.
 The earlier level-two region scenario misses spawn/zone/NPC-missile coverage
 while matching all 58 intervals/47 bodies. The earned-pilot gate above now
 restores that coverage, preserving the original keys and strict guards.

@@ -132,6 +132,13 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         radar_hits!=run->radar_hits || gun_hits!=run->gun_hits ||
         (run->following_result && (message_b!=run->message_b || message_c!=run->message_c)) ||
         ((run->mode==4 || run->mode==5) && enemy_expiries!=run->enemy_expiries);
+    if(run->mode==4 && !run->phase && phase==0xff) {
+        const gaddr escort=CONTROL_RECORDS+512*4;
+        printf("{\"escort_objective\":true,\"body\":%u,\"tick\":%u,\"flags\":%u,\"contact\":%u,"
+               "\"cell\":[%u,%u],\"speed\":%u,\"enemy_flags\":[%u,%u]}\n",
+            run->body,game->ticks,rd_u16(escort),rd_u16(escort+2),rd_u16(escort+6),rd_u16(escort+12),
+            rd_u16(escort+108),rd_u16(CONTROL_RECORDS+512*8),rd_u16(CONTROL_RECORDS+512*10));
+    }
     if(radar_hits!=run->radar_hits || gun_hits!=run->gun_hits) {
         printf("{\"weapon_hit\":true,\"body\":%u,\"gun_before\":%u,\"gun_after\":%u,"
                "\"radar_before\":%u,\"radar_after\":%u,\"records\":[",

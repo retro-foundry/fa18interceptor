@@ -13,6 +13,7 @@ import subprocess
 from capture_workspace import CaptureWorkspace
 from check_mission_five_objective import objective_evidence
 from mission_source_comparison import compare_mission_boundaries
+from region_pilot_fixture import load_region_pilot
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -21,7 +22,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_mission_success_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mission-success-check')
-    parser.add_argument('--mode', type=int, choices=(3, 5), default=3)
+    parser.add_argument('--mode', type=int, choices=(3, 4, 5), default=3)
+    parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe',
+                        help='Playable runner for the earned-pilot mode-four replay')
     parser.add_argument('--sequence', action='store_true', help='Finish result messages and press Escape to restart into the menu')
     parser.add_argument('--timeout', type=float, default=60,
                         help='Native fixture deadline in seconds (Debug capture runs can require longer)')
@@ -34,7 +37,12 @@ def main():
     with CaptureWorkspace(work) as ram:
         prefix, pilot = ram / 'frame', ram / 'pilot'
         keys = work / 'pilot.e9k'
-        scenario = f'{args.mode}-sequence' if args.sequence else '3' if args.mode == 3 else '5-success'
+        scenario = f'{args.mode}-sequence' if args.sequence else '3' if args.mode == 3 else f'{args.mode}-success'
+        initial = None
+        if args.mode == 4:
+            initial = load_region_pilot()
+            pilot.mkdir()
+            (pilot / 'config').write_bytes(initial)
         replay = subprocess.run([str(args.test.resolve()), str(ROOT / 'local/media/fa18.adf'),
                                  str(pilot), str(keys), str(prefix), scenario],
                                 cwd=ROOT, capture_output=True, text=True, env=env, timeout=args.timeout)
@@ -62,8 +70,24 @@ def main():
             assert len(window) == 64, 'Missing sequence landing window'
         elif args.mode == 3:
             assert len(window) == 96, 'Missing landing window'
-        if args.mode == 5:
-            evidence = objective_evidence(exports, 4)
+        if args.mode in (4, 5):
+            if args.mode == 5:
+                evidence = objective_evidence(exports, 4)
+            else:
+                escorts = [item for item in exports if item.get('escort_objective')]
+                assert len(escorts) == 1, escorts
+                escort = escorts[0]
+                assert escort['flags'] & 0x40 and escort['contact'] & 0x80, escort
+                assert any(escort['cell']) and escort['speed'] <= 0x320, escort
+                assert not any(flags & 0x40 for flags in escort['enemy_flags']), escort
+                hits = [item for item in exports if item.get('weapon_hit')]
+                assert len(hits) == 1 and hits[0]['radar_after'] == hits[0]['radar_before'] + 1, hits
+                assert any(item['slot'] == 8 and item['flags_before'] & 0x2000 and
+                           item['flags_after'] & 0x400 and item['lifetime'] == 15 for item in hits[0]['records']), hits
+                combat = [item for item in bodies if item['combat_window']]
+                assert len(combat) == 20 and [item['body'] for item in combat] == list(range(hits[0]['body'], hits[0]['body'] + 20)), combat
+                assert any(item['enemy_expiries_after'] == item['enemy_expiries_before'] + 1 for item in combat), combat
+                evidence = {'escort': escort, 'radar_hit': hits[0], 'combat_window_bodies': len(combat)}
             returns = [item for item in exports if item.get('return_start')]
             assert len(returns) == 1 and returns[0]['pose'] == 3, returns
             assert landings[0]['region_after'] & 0xc0, 'Touchdown must be on the carrier'
@@ -77,6 +101,8 @@ def main():
                                      item['view_record'] == 0 for item in confirmations), confirmations
         objectives = [item for item in bodies if item['phase_before'] == 0 and item['phase_after'] == 255]
         assert len(objectives) == 1, objectives
+        if args.mode == 4:
+            assert evidence['escort']['body'] == objectives[0]['body'], evidence
         finishes = [item for item in bodies if item['phase_after'] == 252 and item['phase_before'] != 252]
         assert len(finishes) == 1 and finishes[0]['ready'], finishes
         results = [item for item in entries if item['stage'] == 'C110A4' and
@@ -117,8 +143,9 @@ def main():
         assert saved[6] == args.mode and saved[7] == summary['grade_before'] and saved[18 + args.mode] == summary['grade_after']
         writes = compare_mission_boundaries(prefix, entries, bodies, work)
         assert writes == 1, f'Expected the actual mission config write; observed {writes}'
-        report = {'scenario': 'normal-key-mode-three-objective-landing-taxi-result-reload' if args.mode == 3 else
-                             'normal-key-mode-five-formation-radar-kills-carrier-landing-result-reload',
+        report = {'scenario': {3: 'normal-key-mode-three-objective-landing-taxi-result-reload',
+                              4: 'normal-key-mode-four-escort-carrier-landing-result-reload',
+                              5: 'normal-key-mode-five-formation-radar-kills-carrier-landing-result-reload'}[args.mode],
                   'input_stage_intervals': len(entries), 'sampled_bodies': len(bodies),
                   'consecutive_landing_bodies': len(window), 'original_config_writes': writes,
                   'summary': summary, 'objective': objectives[0], 'touchdown': landings[0],
@@ -137,6 +164,28 @@ def main():
             report['scenario'] = report['scenario'].replace('result-reload', 'result-messages-escape-menu-reload')
             report['result_sequence'] = sequence_evidence
             report['mission_sequence_accepted'] = True
+        if args.mode == 4:
+            canonical_pilot = ram / 'canonical-pilot'
+            canonical_pilot.mkdir()
+            (canonical_pilot / 'config').write_bytes(initial)
+            frames = sequence_evidence['summary']['ticks'] if args.sequence else summary['ticks']
+            canonical = subprocess.run([str(args.runner.resolve()), '--adf', str(ROOT / 'local/media/fa18.adf'),
+                '--save-dir', str(canonical_pilot), '--headless', '--frames', str(frames), '--replay', str(keys)],
+                cwd=ROOT, capture_output=True, text=True, timeout=args.timeout)
+            (work / 'canonical.log').write_text(canonical.stdout + canonical.stderr)
+            assert canonical.returncode == 0, canonical.stderr or canonical.stdout
+            rows = [json.loads(line) for line in canonical.stdout.splitlines() if line.startswith('{')]
+            assert len(rows) == 1, rows
+            state = rows[0]
+            assert not state['postflight_resets'] and not state['cpu_emulation'] and not state['chipset_emulation'], state
+            assert state['host_replay_events'] == len(keys.read_text().splitlines()) - 1, state
+            assert not state['host_replay_pending'] and not state['input_queued'], state
+            assert (canonical_pilot / 'config').read_bytes() == saved, 'Playable saved result differs'
+            if args.sequence:
+                assert state['screen'] == 'menu' and state['stage'] == 'C0FCB4', state
+            report['canonical'] = state
+            report['initial_config_sha256'] = hashlib.sha256(initial).hexdigest()
+            report['runner_sha256'] = hashlib.sha256(args.runner.read_bytes()).hexdigest()
         (work / 'comparison.json').write_text(json.dumps(report, indent=2) + '\n')
     suffix = ', result messages, Escape/menu restart and cold reload' if args.sequence else ''
     print(f"Mode {args.mode} mission: {len(entries)} input/stage intervals and {len(bodies)} bodies match original RAM/drawing, including all {len(window)} landing bodies and the actual config write{suffix}")

@@ -107,7 +107,9 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     if(!selected) {held(pilot,game,&pilot->fire,0);return 1;}
     const gaddr target=CONTROL_RECORDS+512*selected;
     const double range=sqrt(target_distance_squared),speed=rd_s16(CONTROL_RECORDS+110)/64.0;
-    const double time=clamp(range/fmax(speed,70),0,400);
+    /* Input aim for the regional closing pass uses a shorter intercept lead;
+     * the actual projectile continues to use original motion/tracking rules. */
+    const double time=clamp(range/(pilot->escort_flight && selected==12?198+speed:fmax(speed,70)),0,400);
     double delta[3],local[3]={0};
     for(unsigned i=0;i<3;++i)
         delta[i]=(rd_s32(target+20+4*i)-rd_s32(CONTROL_RECORDS+20+4*i))/256.0+
@@ -153,9 +155,16 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     /* Escort validation fires earlier on the closing pass. These are pilot
      * input choices; original launch/tracking/damage rules decide the result. */
     const int close_aim=pilot->mode==4 && !pilot->escort_flight;
-    const int launch=rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<(close_aim?10000:20000) &&
+    const double launch_range=close_aim?10000:20000;
+    const int launch=rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<launch_range &&
+        (!(pilot->escort_flight && selected==12) || rd_u8(SHOOT_CUE)) &&
         fabs(x)<(close_aim?0.2:0.6) && fabs(y)<(close_aim?0.15:0.3) && pilot->missile_target!=selected;
-    if(launch) {pilot->missile_target=selected;pilot->missile_tick=game->ticks;}
+    if(launch) {
+        pilot->missile_target=selected;pilot->missile_tick=game->ticks;
+        if(getenv("FA18_MISSION_TRACE"))
+            printf("{\"pilot_fire\":true,\"tick\":%u,\"target\":%u,\"range\":%.3f,\"yaw_error\":%.6f,\"stock\":%u,\"linked\":%u}\n",
+                game->ticks,selected,range,yaw_error,rd_u8(CONTROL_RECORDS+95),rd_u8(CONTROL_RECORDS+56));
+    }
     held(pilot,game,&pilot->fire,pilot->missile_target==selected &&
         game->ticks-pilot->missile_tick<(pilot->escort_flight?12u:4u)?32:0);
     return 1;
@@ -165,6 +174,13 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
 static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
     if(!pilot->complete_flight || (!pilot->objective &&
        rd_u8(PLAYER_PHASE)!=0xff && rd_u8(PLAYER_PHASE)!=1)) return 0;
+    if(pilot->escort_flight && pilot->return_input_phase!=rd_u8(PLAYER_PHASE)) {
+        /* The escort's result camera clears input while changing FF to one.
+         * Release/repress ordinary controls when the player regains the view. */
+        held(pilot,game,&pilot->rudder,0);held(pilot,game,&pilot->pitch,0);
+        held(pilot,game,&pilot->roll,0);held(pilot,game,&pilot->throttle,0);
+        pilot->return_input_phase=rd_u8(PLAYER_PHASE);
+    }
     if(!pilot->objective) {
         printf("{\"objective\":true,\"tick\":%u,\"phase\":%u}\n",game->ticks,rd_u8(PLAYER_PHASE));
         pilot->objective=1;pilot->phase=1;
@@ -210,7 +226,9 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
     const double yaw_control=yaw_error-10*angle_delta(yaw,pilot->previous_x);
     const double pitch_control=pitch+4*angle_delta(pitch,pilot->previous_y);
     pilot->previous_x=yaw;pilot->previous_y=pitch;
-    command_throttle(pilot,game,pilot->phase>=2 || approach_distance<20000?286:288);
+    /* F9 on the escort's long return keeps separation from the regional
+     * fighter; the established F5 approach remains the landing input. */
+    command_throttle(pilot,game,pilot->phase>=2 || approach_distance<20000?286:pilot->escort_flight?290:288);
     /* Original A/raw $20 invokes COMMAND_HOOK for the F/A-18 arrestor. */
     held(pilot,game,&pilot->hook,pilot->phase>=2 && !(rd_u16(CONTROL_RECORDS+2)&0x8000)?97:0);
     held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
@@ -222,8 +240,9 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
 void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
     if(game->flight_timer_pending || game->scene_frames==pilot->scene) return;
     pilot->scene=game->scene_frames;
-    if(getenv("FA18_MISSION_TRACE") && game->ticks/500!=pilot->trace) {
-        pilot->trace=game->ticks/500;
+    const unsigned trace_interval=pilot->escort_flight && getenv("FA18_MISSION_WEAPON_TRACE")?100u:500u;
+    if(getenv("FA18_MISSION_TRACE") && game->ticks/trace_interval!=pilot->trace) {
+        pilot->trace=game->ticks/trace_interval;
         printf("{\"trace\":true,\"tick\":%u,\"phase\":%u,\"pilot_phase\":%u,\"gate\":%d,"
                "\"function_level\":%u,\"controls\":%u,\"thrust\":%d,\"fuel\":%u,"
                "\"admitted\":%u,\"aux\":%u,\"gun_hits\":%u,\"radar_hits\":%u,\"weapon\":%u,\"records\":[",
@@ -231,14 +250,14 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
                rd_u8(FUNCTION_KEY_LEVEL),rd_u8(PLAYER_STICK),rd_s8(CONTROL_RECORDS+43),rd_u32(CONTROL_RECORDS+114),
                rd_u8(SCENE_DISPATCH_ADMITTED),rd_u8(SCENE_DISPATCH_AUX),
                rd_u16(rd_u32(MODE_TABLE)+60),rd_u16(rd_u32(MODE_TABLE)+68),rd_u8(CONTROL_RECORDS+99)&0xf0);
-        for(unsigned slot=0;slot<=12;slot+=2) {
+        for(unsigned slot=0;slot<=12;slot+=trace_interval==100?1u:2u) {
             gaddr record=CONTROL_RECORDS+512*slot;
             printf("%s{\"slot\":%u,\"flags\":%u,\"kind\":%u,\"contact\":%u,\"region\":%u,\"damage\":%u,"
-                   "\"speed\":[%d,%d],\"position\":[%d,%d,%d],\"angles\":[%d,%d,%d]}",
+                   "\"speed\":[%d,%d],\"position\":[%d,%d,%d],\"angles\":[%d,%d,%d],\"linked\":%u,\"lifetime\":%d}",
                    slot?",":"",slot,rd_u16(record),rd_u8(record+98),rd_u16(record+2),rd_u8(record+4),rd_u8(record+60),
                    rd_s16(record+108),rd_s16(record+110),rd_s32(record+20)/256,
                    rd_s32(record+24)/256,rd_s32(record+28)/256,
-                   rd_s16(record+102),rd_s16(record+104),rd_s16(record+106));
+                   rd_s16(record+102),rd_s16(record+104),rd_s16(record+106),rd_u8(record+56),rd_s16(record+76));
         }
         puts("]}");fflush(stdout);
     }

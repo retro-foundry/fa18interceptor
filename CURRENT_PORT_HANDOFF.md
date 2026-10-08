@@ -1,6 +1,34 @@
 # Current playable port handoff
 
-Latest mission-four input diagnostic (2026-10-08): the validation-only pilot
+Latest mission-four sequence acceptance (2026-10-08): ordinary keys from the
+earned region pilot log shoot down record 8, complete the escort objective,
+return to the carrier, capture the wire, stop, save, finish result messages,
+press Escape and return to the menu with cold log reload. All 43 input/stage
+intervals and 159 sampled bodies match original compared RAM/drawing, including
+64 consecutive landing bodies and one actual config write. Completions advance
+1 -> 2 and grade 0 -> 1. The playable runner delivers all 3,883 recorded host
+events, returns to the same menu and saves identical bytes. Its JSON now reports
+host replay delivery/pending counts separately from game-input replay counts.
+The serial gate is `fa18_native_mission_4_sequence`; see
+`analysis/native_mission_four_sequence_milestone.md`. This supersedes the
+unsuccessful mission-four diagnostic below. Gameplay and comparison masks are
+unchanged; independent complete original flights and full-port acceptance
+remain open.
+Debug/Release playable and mission fixture builds pass. Seven selected Release
+checks and three Debug checks pass, with matching mission input/save hashes.
+Passing RAM is removed and build-cache use remains 2.00 GiB. Evidence is in
+`analysis/figures/native_mission_four_sequence_checkpoint.json`.
+
+Latest user direction (2026-10-08): decompile any remaining instruction
+translation encountered on the active path rather than bypassing it. The user also
+notes mission six may be impossible to complete. Verify its feasibility against
+original conditions and execution before requiring successful coverage or
+calling a failed flight a port defect; preserve original outcome rules.
+The current comparison-build inventory distinguishes 75 already-readable
+source-only entries from 84 deferred instruction translations. This inventory
+does not measure whole-game completeness or native runtime integration.
+
+Earlier mission-four input diagnostic (2026-10-08): the validation-only pilot
 supports `4-success` and `4-sequence`, fires earlier on the closing pass and
 can pursue regional enemy record 12 after the initial enemies. Starting with
 the earned region pilot log, ordinary keys shoot down record 8: radar hits
@@ -23,8 +51,8 @@ and NPC missiles 9/13. The serial region gate now compares original boundaries;
 `fa18_native_region_pilot_progression` reproduces the exact earned log. The host
 replay loader accepts the complete 1,652-event flight with dynamic storage.
 See `analysis/native_region_pilot_progression_milestone.md`. Game rules and
-comparison masks remain unchanged. Mode-four mission success is next; full-port
-acceptance remains open.
+comparison masks remain unchanged. The mission-four acceptance above extends
+this earned-pilot checkpoint; full-port acceptance remains open.
 Debug/Release playable/fixture builds pass, with seven selected Release checks,
 three Debug checks and the final Release region/report repeat passing. Evidence
 is in `analysis/figures/native_region_pilot_progression_checkpoint.json`.

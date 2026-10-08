@@ -2,7 +2,37 @@
 
 ## Current restart summary — 2026-10-08
 
-The latest mission-four validation pilot adds `4-success` and `4-sequence`.
+Mission four now completes a normal-key escort flight and saved result sequence
+from the source-earned region pilot log. Record 8 is shot down, the escort lands,
+the original objective is admitted at tick 17,346, and the player returns to the
+carrier. Wire touchdown occurs at 26,834, the stopped-aircraft result at 27,000,
+save at 27,023 and Escape/menu return at 28,037. Completions advance 1 -> 2 and
+grade 0 -> 1; the saved log survives cold reload unchanged. All 43 input/stage
+intervals and 159 sampled bodies match original compared RAM/drawing, including
+20 hit/expiry bodies, 64 consecutive landing bodies and one actual config write.
+The playable runner delivers all 3,883 host replay events and produces the same
+saved bytes/menu. Host replay delivery and pending counts now appear separately
+from game-input replay counters in JSON. The new serial CTest is
+`fa18_native_mission_4_sequence`. See
+`analysis/native_mission_four_sequence_milestone.md` and its checkpoint JSON.
+Gameplay and comparison masks are unchanged. Original instructions receive
+native before-states; independent full-flight parity remains open.
+Debug/Release playable and fixture builds pass. Seven selected Release checks
+and three Debug checks pass, with matching mission input/save hashes. Passing
+RAM is removed; build-cache use remains 2.00 GiB within its 4 GiB budget.
+
+Latest user direction: decompile any remaining instruction translation encountered
+on the active path, including its required shared tails and child contracts.
+The comparison-build inventory currently lists 75 already-readable source-only
+entries and 84 deferred translations; use the actual deferred list rather than
+treating 75 as a count of undecompiled functions. These counts do not establish
+native integration or whole-game completion.
+The user notes mission six may be impossible to complete. Investigate original
+`postflight_scheduler.c:mode_six` and actual original outcomes before requiring
+a successful flight or identifying a port defect. Preserve its target,
+lifetime, position and result admission rules; feasibility remains unverified.
+
+Earlier mission-four input diagnostic added `4-success` and `4-sequence`.
 These modes read flight state and send ordinary keys, firing earlier on the
 closing pass and pursuing regional enemy record 12 when eligible. Starting
 with `region_pilot_fixture.load_region_pilot()` in a fresh saved-pilot directory,
@@ -43,7 +73,7 @@ errors remain explicit. Game rules, arithmetic and comparison masks are unchange
 The original level-two ADF pilot fills both admitted aircraft slots; it cannot
 spawn the region aircraft in this scenario. Cold level loading is correct.
 The retained earned log selects a reachable coverage case; it supplies no
-flight state or outcomes. Mode-four mission success remains the next task.
+flight state or outcomes. It also supplies the accepted mission-four route above.
 
 Earlier validation diagnostics: the mode fixture services PCM after each
 tick, matching the playable backend, and supports `FA18_MODE_END_TICK` plus
@@ -61,10 +91,10 @@ checks and the three final aligned RAM comparisons pass. Passing captures
 are removed within the existing retention policy.
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`efc71ba0` on `coverage-accounting`.
+`6d5f5c3f` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
-`d6c594410c91ac4d534353b644127f03df67f929a85bd94add1fdc9bb192c8d6`.
+`24c84246d78e72afdc1f8aa876aac0a1fe1dae191863adead9ac069b877536de`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
 Latest connected fix: C2DEE0/C2DFF6's matrix product cursor now reaches the
@@ -88,11 +118,12 @@ The other nine additional Release checks and six selected Debug checks pass
 across their initial runs and Debug sequence retry. Debug sequence captures
 now allow 90 seconds; Release retains 60. Details are in the milestone above.
 
-Mode four still has no hit/objective/save in this diagnostic and crashes at
-tick 22,148, with completions unchanged at 3. Then continue its ordinary-key
-mission success route. Source `postflight_scheduler.c:record_mode` requires
+The established combat-reset diagnostic still has no hit/objective/save and
+crashes at tick 22,148, with completions unchanged at 3. The separate successful
+route is accepted above. Source `postflight_scheduler.c:record_mode` requires
 record four grounded, active and slow, with enemy records eight/ten inactive,
-before its countdown admits the objective. Successful modes four/six/seven/eight,
+before its countdown admits the objective. Successful modes seven/eight,
+original mission-six feasibility/outcomes,
 independent complete flights, further play after the accepted result menu,
 remaining caller contracts, typed state, audio and wider performance remain
 open; the complete-port goal stays active.
