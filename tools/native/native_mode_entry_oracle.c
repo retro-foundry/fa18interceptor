@@ -5,7 +5,12 @@
 #undef main
 #include "native_file_service_oracle.h"
 static unsigned host_tick;
+static uint16_t retained_sort;
+static unsigned retained_sorts,cached_sort_entries,far_sort_entries;
 static int original_stage(void) {
+    const int trace=getenv("FA18_MODE_STAGE_TRACE")!=NULL;
+    const char *forced_factor=getenv("FA18_MODE_CONTEXT_FACTOR");
+    uint32_t upper_writer=0;
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;
     wr_u32(REG_A[7],0xc70000);REG_PC=0xc0f5f8;
     m68k_set_reg(M68K_REG_SR,0x2700);
@@ -13,17 +18,26 @@ static int original_stage(void) {
     for(unsigned step=0;step<2000000;++step) {
         if(REG_PC==0xc70000 && REG_A[7]==0xc7ff04) return 1;
         if(file_oracle_service()) continue;
-        if(getenv("FA18_MODE_STAGE_TRACE") && (REG_PC==0xc1e328 || REG_PC==0xc1e48c))
-            fprintf(stderr,"Stage sort %06X: A6=%06X A7=%06X A4=%06X choice=%02X\n",
-                REG_PC,REG_A[6],REG_A[7],REG_A[4],rd_u8(REG_A[6]-0x2c));
+        /* A comparison-only dependency probe. Never supplied to native code. */
+        if(forced_factor && REG_PC==0xc1c860)
+            REG_D[3]=(uint32_t)strtoul(forced_factor,NULL,0);
+        if(REG_PC==0xc1e4a6) {retained_sort=(uint16_t)(REG_D[3]>>16);++retained_sorts;}
+        if(REG_PC==0xc1e3a0) ++cached_sort_entries;
+        if(REG_PC==0xc1e38e) ++far_sort_entries;
+        if(trace && (REG_PC==0xc1c860 || REG_PC==0xc1e328 || REG_PC==0xc1e48c || REG_PC==0xc1e4a6))
+            fprintf(stderr,"Stage sort %06X: A6=%06X A7=%06X A4=%06X choice=%02X D3=%08X upper_writer=%06X request=%02X context=%02X\n",
+                REG_PC,REG_A[6],REG_A[7],REG_A[4],rd_u8(REG_A[6]-0x2c),
+                REG_D[3],upper_writer,rd_u8(UPDATE_MASK),rd_u8(CONTEXT_SELECT));
         if(REG_PC==0xc53c78) {
             wr_u32(MENU_TIME_REQUEST+32,host_tick/50);
             wr_u32(MENU_TIME_REQUEST+36,(host_tick%50)*20000u);
             REG_PC=rd_u32(REG_A[7]);REG_A[7]+=4;continue;
         }
         const int cycles=GET_CYCLES();
+        const uint32_t pc=REG_PC,upper=REG_D[3]&0xffff0000u;
         uint16_t opcode=rd_u16(REG_PC);REG_PPC=REG_PC;REG_IR=opcode;REG_PC+=2;
         m68ki_instruction_jump_table[opcode]();USE_CYCLES(CYC_INSTRUCTION[opcode]);
+        if(trace && (REG_D[3]&0xffff0000u)!=upper) upper_writer=pc;
         fa18_machine->cycle+=cycles-GET_CYCLES();
     }
     fprintf(stderr,"Mode stage did not return at %06X\n",REG_PC);return 0;
@@ -53,6 +67,10 @@ int main(int argc,char **argv) {
     m->joy1dat=0;
     for(int i=4;i<argc;++i) native_input_enqueue_raw(game,(uint8_t)strtoul(argv[i],NULL,10));
     host_tick=(unsigned)strtoul(argv[3],NULL,10);
+    const char *retained_before=getenv("FA18_MODE_RETAINED_BEFORE");
+    const char *retained_after=getenv("FA18_MODE_RETAINED_AFTER");
+    if((retained_before!=NULL)!=(retained_after!=NULL)) return 1;
+    if(retained_before) retained_sort=(uint16_t)strtoul(retained_before,NULL,10);
     const gaddr stage=rd_u32(STAGE_CALLBACK);
     if(!file_oracle_reset(game)) return 1;
     if(!original_input(game) || !original_stage()) return 1;
@@ -68,6 +86,12 @@ int main(int argc,char **argv) {
         ++differences;
     }
     printf("Actual input/stage %06X: %u compared RAM differences\n",stage,differences);
+    if(retained_after) {
+        const uint16_t expected=(uint16_t)strtoul(retained_after,NULL,10);
+        printf("Stage retained sort: %u lists, %u cached entries, %u fixed-far entries, source=%04X native=%04X\n",
+            retained_sorts,cached_sort_entries,far_sort_entries,retained_sort,expected);
+        if(retained_sort!=expected) ++differences;
+    }
     if(file_oracle_writes) printf("Complete original file owners reached DOS Write %u time(s)\n",file_oracle_writes);
     file_oracle_close(game);
     free(game);free(m);free(after);free(before);free(rom);free(state);

@@ -1,5 +1,12 @@
 # Native port runner
 
+Menu/restart retained sorting now has direct original-caller comparisons:
+eleven intervals, 27 sorted lists and eighteen incoming-factor probes agree.
+Release and Debug pass; gameplay and playable binaries are unchanged. Reached
+paths replace the factor through templates or uncached distances. Initial
+startup and rare callers remain open. See
+[menu/context evidence](../../analysis/native_menu_context_sort_milestone.md).
+
 PCM playback now retains frontend-owned host buffer spans rather than resolving
 an addressed game byte for every sample. Three ordinary-key audio/state/pixel
 replays and the full earned tour preserve their previous results. Original

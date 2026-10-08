@@ -1,0 +1,262 @@
+{
+  "scope": "actual native scene/menu before-state original caller comparisons",
+  "runtime_gameplay_changed": false,
+  "negative_control_rejected": true,
+  "test_sha256": "bf901ed4ada9bf9b20b6c27d4c5c34926d49af2248778261ead691f887d1edfd",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "cases": [
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 3214,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 2,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "cee5c1ac68c1d34c0c9427ff8a108f51fcb168501dbaebc510140f0f9ca73342",
+      "after_sha256": "8a9997bc3bab16c10373d2ff9c5b3dbeaf79d7f529850cfa95665f6ab1baa7b8"
+    },
+    {
+      "entry": 1,
+      "stage": "C0F992",
+      "tick": 11040,
+      "retained_before": 1,
+      "retained_after": 300,
+      "keys": [],
+      "mode": 2,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "14308299ae569d8b75c01d45d92272a07edfe53461c7265e042713ab9975d933",
+      "after_sha256": "b36a0364a0ec6998327c198856cf2ac3408c650dc81006e4bd96393ee85d72cc"
+    },
+    {
+      "entry": 2,
+      "stage": "C0FECE",
+      "tick": 11194,
+      "retained_before": 300,
+      "retained_after": 300,
+      "keys": [],
+      "mode": 2,
+      "source_lists": 0,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "9223dff300fa82e84144f4e923ccb895c814bc527f0696458d5f4b2e34b165b0",
+      "after_sha256": "28d8117435b4ee84180fc9dbc2c0c862f9977e09a6b6bb8059872560b779ba1d"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 3,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "dd119ca90463b3837dd3acd7abe10b934925764675a1d1ea388399114a38ad66",
+      "after_sha256": "8ebe32355ac367ee3397889ec8ea2d65cb996f48b1d6067c1db4a4d0f5352a8b"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 4,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "48166179605fe09aa96084e7157a0cb0e82e65c05af6851d59afd40d6d7b754e",
+      "after_sha256": "f30307e801d03f6964f725ef0ae5f4d01a73198fbe9811bb4b81db05bc0f7964"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 5,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "05b7b591bf543fd3bc41e7c293ff20c39ab0d79a55a01d0c67f913a23f173701",
+      "before_sha256": "2eaae7e6698096b69f0197ba3aecbef2a94869037ab3fc6273c0f27cebc8908b",
+      "after_sha256": "b56f5178a820c655115c1d59471b150a549ba2dd7fa4d726da8bbd02b543b4cc"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 6,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "714fb67ab9fff5ade21ccad123fe3acfd415c32486d0ddf941d65369de20c6d6",
+      "before_sha256": "68fad6498a958c56e081109456d0542e72006cecd14cbfb165f729994bcd2ddf",
+      "after_sha256": "fa18efdfac09149584f5ec73a97cc26de02fc6ddd1c96802b46ebf62984074ce"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 7,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "b49b1d82890c39ad6bfc8422a516405150514408a00ddf6e789a88603cf70315",
+      "before_sha256": "8f24e1e356fa36b501047d2d8ad99369c202e4731482575dfff08d187e8acfdd",
+      "after_sha256": "e0fe0e40c1ae9a24c81b78293dd315e095d102e0bf4110b9c0bbc4936ed2b0ca"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 8,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "before_sha256": "5af722be37305cd0817efd560036e9befce892ec8392ce3fcea9294650d97297",
+      "after_sha256": "8e292be9736dd146562ebdaa544c54fe5f46e5ac2d8f12d12d7a60a01d1f9d55"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 3214,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 125,
+      "source_lists": 0,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "45438d3ea7f56f8675bcdeddb59aae0bd0e44e1684b272f23f96c28ba4c37373",
+      "after_sha256": "8f2ca9ae1b46add4984eefa08b8405fe859edecd78ea2860c4a79b6d3d1960ef"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "tick": 3214,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 127,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "c335b0e26012674fae79708b172e65013485de31b2884d980895229ef8868bf0",
+      "after_sha256": "42d1abeae73993d846d7e3845102ec5de02d7b1f72566ce60a182ad36e00b188"
+    }
+  ],
+  "date": "2026-10-08",
+  "parent_commit": "e39b2c1d",
+  "release_test_sha256": "bf901ed4ada9bf9b20b6c27d4c5c34926d49af2248778261ead691f887d1edfd",
+  "debug_test_sha256": "38e8b839f6f5e985f03fe2062de414e962f5775692a50ea9802d49a260ebb6b8",
+  "release_runtime_sha256": "e73541ba7564ab7573d9f35d61a55148c2c7635ed74156f20cc67a55ec1015fc",
+  "debug_runtime_sha256": "932c5e0095fac1ce47789d67a8625bf1afa457f535853e2423d53bf0454023a3",
+  "intervals": 11,
+  "source_sorted_lists": 27,
+  "original_only_factor_probes": 18,
+  "maximum_passing_capture_bytes": 6291456,
+  "release_gate_seconds": 53.01,
+  "debug_gate_seconds": 114.83,
+  "release_checks": [
+    "context_sort",
+    "artifact_policy",
+    "artifact_cleanup"
+  ],
+  "debug_checks": [
+    "context_sort",
+    "artifact_policy",
+    "artifact_cleanup"
+  ],
+  "complete_port": false,
+  "initial_frontend_startup_compared": false,
+  "rare_callers_closed": false,
+  "independent_original_whole_flight": false,
+  "source_sha256": {
+    "tools/native/native_context_sort_test.c": "e0a17aa874892c44a57373ade1c26d5f13fd4d4b6f50bbfbc05f311408e96188",
+    "tools/native/check_context_sort.py": "b280ec311caf68619773e490f1775126919b4646fe17698efac8f61fb9b5d78d",
+    "tools/native/native_mode_entry_oracle.c": "98df6ab83dd1b21b7c510689dec7d08e6189f0af21a4889e6cca88203710e750",
+    "port/native/CMakeLists.txt": "49f427417ad8be43c4de7264eafb01910df52bbf1cd2348e229e450efe2c8410",
+    "port/game/native/flight.c": "2eae2e3ab68d9acde514a54bf894c4dbcfe472fc6a5a402a23ef062b8828b962",
+    "port/game/stage_tables.c": "22ce39a7ce3f53c08d23b685d9f4b1f377759c32f0e2ecacb6630c498cb80cd7",
+    "port/game/context_refresh.c": "9138a04e9a05b948399ad8fb7f08e976c0a81ac9630c0391637ec5a6265210ee",
+    "tools/native/tour_pilot_fixture.py": "8ab808d9b8d84ea7f53de19c41fa7b898c2d7160064996c3bb25857544534332"
+  },
+  "reference_log_sha256": {
+    "source-2.log": "ca45ba9d54471d95a6279fc34753208be116bf5960561519ad5e8b871f28ba6f",
+    "source-3.log": "59a9d1e206cb0ac465c2aec204c0b5af4d36ea58e7bab54e6ece63e857c2ceeb",
+    "source-4.log": "9cb7ada6e2775fe0713fc23bbe1c5a8eebbab911d513a48beab39348a09e8b0b",
+    "source-5.log": "f2b3c32a604b9c3820a0dfc93c89d6fd138e46798cd3bdb8d7e59cce6f183274",
+    "source-6.log": "b8e719891ce7fbbbf7bd9faa919190083b7d18f6831e7b891d365428e8900908",
+    "source-7.log": "36f2231a35f6afa816846058f44043e01bc200f4b9d8c8f394f90646e31b4512",
+    "source-8.log": "0e38a9cb80be3c2afee715020d865976c58723dd39b1e6957eb7f391bf0df84f",
+    "source-125.log": "f29ecd30de1f9421cb06f1369a0a0baa4cc66bcbe3de338c1fb2e07b46c3de01",
+    "source-127.log": "6ca77f1cdca12fda6f2b2fbbd9698057ffd9bf550cc0d1ce206f6df564de0a83",
+    "negative-control.log": "cc17fea112473576db907d55998d08b676e34baf90186a7cc38a286644e3261a"
+  },
+  "build_cache_gib": 2.1,
+  "passing_raw_captures_retained": false
+}

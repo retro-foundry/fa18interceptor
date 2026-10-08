@@ -171,6 +171,13 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_executable(fa18_native_mode_two_test
         ../../tools/native/native_mode_two_test.c ../../tools/native/gun_discovery.c)
     target_link_libraries(fa18_native_mode_two_test PRIVATE fa18_native_runtime)
+    add_executable(fa18_native_context_sort_test ../../tools/native/native_context_sort_test.c)
+    target_link_libraries(fa18_native_context_sort_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_context_sort
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_context_sort.py
+                --test $<TARGET_FILE:fa18_native_context_sort_test>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/context-sort-check)
+    set_tests_properties(fa18_native_context_sort PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_mode_two
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mode_two.py
                 --test $<TARGET_FILE:fa18_native_mode_two_test> --mode 2

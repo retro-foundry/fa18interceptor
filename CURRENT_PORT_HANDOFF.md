@@ -1,5 +1,19 @@
 # Current playable port handoff
 
+Latest menu/context sorting evidence (2026-10-08):
+
+Nine ordinary-menu scenarios now compare the renderer's retained sort owner
+directly with complete original callers: eleven intervals and 27 sorted lists.
+All eighteen original-only incoming-factor probes preserve compared RAM and
+retained output; a wrong retained word is rejected. Reached menu/restart paths
+replace incoming factors through templates or uncached distance calculations.
+Release and Debug each pass three selected checks and agree on interval/RAM
+hashes. Gameplay and playable binaries are unchanged. Initial startup before
+observers attach, mode nine and other rare callers remain outside this gate;
+the unknown-factor TODO and complete-port goal remain active. Passing captures
+are temporary, with a 6 MiB peak; build cache is 2.10 GiB. See
+`analysis/native_menu_context_sort_milestone.md` and its checkpoint.
+
 Latest native PCM ownership (2026-10-08):
 
 Native PCM playback now retains typed current/next host spans owned by its
