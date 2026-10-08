@@ -1,5 +1,12 @@
 # Native port runner
 
+The validation-only gun approach now matches 59 input/stage intervals and 277
+sampled bodies against original compared RAM/drawing, including 32 active gun
+effect bodies. The ordinary-input flight records zero gun hits. Read-only
+telemetry and strict gun-hit observation are available in the fixture; the
+playable game is unchanged. See `../../analysis/native_gun_approach_checkpoint.md`.
+Gun hits/shoot-downs and full successful missions remain open.
+
 Mode eight now also has a required normal-input infrared shoot-down: 55
 input/stage intervals and 802 bodies match original compared RAM/drawing,
 including every body in the 634-body impact-to-inactivation interval. The

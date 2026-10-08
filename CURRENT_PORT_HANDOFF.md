@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Latest diagnostics checkpoint (2026-10-08): the fixed normal-input mode-eight
+gun approach matches 59 input/stage intervals and 277 sampled bodies against
+original compared RAM/drawing, including 32 active gun-effect bodies. This
+flight records zero gun hits; gun hit and shoot-down acceptance remain open.
+The failed experimental feedback pilot was removed. Read-only telemetry and
+strict gun-hit observation stay in the validation fixture. Debug/Release fixture
+builds and four affected CTests pass; playable behavior is unchanged. See `analysis/native_gun_approach_checkpoint.md` and the restart
+summary in `NEW_PORT_HANDOFF.md`. Radar/infrared acceptance below remains valid;
+full missions and the complete-port goal remain unfinished.
+
 Latest acceptance (2026-10-08): normal-input infrared shoot-down now passes
 impact, enemy expiry accounting and inactivation. All 634 consecutive bodies
 in that interval match original compared RAM/drawing; the full check passes

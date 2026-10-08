@@ -3,14 +3,22 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. The latest validated code is
-`f4606f9c` on `coverage-accounting`, pushed to `origin/coverage-accounting`.
+`373feace` before the gun diagnostics checkpoint on `coverage-accounting`.
+Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `7c6e8a527a834d9cf78fbca2725392c03a41aebdd94214bb134de1fda2ea2c01`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
 Recent completed batches:
 
-- Infrared acceptance (2026-10-08): normal-input missile impact, expiry
+- Gun diagnostics (2026-10-08): 59 input/stage intervals and 277 sampled bodies
+  match original compared RAM/drawing, including 32 active gun-effect bodies.
+  The fixed ordinary-input flight records zero gun hits. The failed feedback
+  pilot was removed; read-only telemetry and strict gun-hit observation remain
+  in the validation fixture. No playable behavior changes. See
+  `analysis/native_gun_approach_checkpoint.md`. Gun hit/shoot-down acceptance
+  remains open.
+- `373feace`: infrared acceptance (2026-10-08): normal-input missile impact, expiry
   accounting and inactivation pass 55 input/stage intervals and 802 bodies,
   including every body in the 634-body destruction interval. The selected
   missile kind and pilot-log +64 counter are checked. No gameplay rule changes;
@@ -27,10 +35,13 @@ Recent completed batches:
   verify all seven streams and wrap. Mode six naturally loses three aircraft,
   exhausts resets, returns to the menu and relaunches Free Flight.
 
-Native Debug and Release builds pass. The latest Release run passes four
-affected CTests: radar kill, infrared kill, frontend and artifact cleanup.
-The compact checkpoint is `analysis/figures/native_infrared_kill_checkpoint.json`;
-the log is `build/native-flight/infrared-ctest.log`.
+Native Debug and Release fixture builds pass. All four gun diagnostics
+regression checks pass: radar kill, infrared kill, frontend and artifact cleanup.
+Results are recorded in
+`analysis/figures/native_gun_approach_checkpoint.json`; the local log is
+`build/native-flight/gun-checkpoint-ctest.log`. The preceding infrared Release
+run passed all four; its checkpoint is
+`analysis/figures/native_infrared_kill_checkpoint.json`.
 The prior radar Release run passed eight
 affected CTests: combat eight, radar hit, radar kill, three weapon probes,
 frontend and artifact cleanup. Evidence and executable hashes are in
