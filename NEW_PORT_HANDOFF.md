@@ -3,7 +3,7 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`a78749d3` on `coverage-accounting`.
+`ceb736dc` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `35228ba51693afc342ae88e94728608c89cd4beb011c98c63e5df21c7c71c0bd`.
@@ -11,6 +11,15 @@ Untracked `.vscode/` is user-owned and must remain untouched.
 
 Recent completed batches:
 
+- Mode-three mission success (2026-10-08): normal keys complete takeoff,
+  selected-aircraft confirmation, safe terrain landing, taxi into the original
+  runway polygon, stopped-aircraft admission, result save and fresh log reload.
+  Completion count advances 3 -> 4 and mode grade 1 -> 2 without a crash reset.
+  All 36 input/stage intervals and 184 sampled bodies match original compared
+  RAM/drawing, including 96 consecutive landing bodies and the actual DOS Write.
+  This is a CTest gate. The validation pilot only reads RAM and emits keys;
+  gameplay and the playable executable are unchanged. See
+  `analysis/native_mission_three_success_milestone.md` for scope and limits.
 - Carrier qualification sequence (2026-10-08): both the original ADF log and
   a reopened unqualified saved pilot complete takeoff, landing, successful
   result, config save, restarted flight and fresh log reload with normal keys.
@@ -58,8 +67,13 @@ Recent completed batches:
   verify all seven streams and wrap. Mode six naturally loses three aircraft,
   exhausts resets, returns to the menu and relaunches Free Flight.
 
-Native Debug and Release playable and fixture builds pass. The latest six
-Release checks pass: both qualification sequences, ordinary qualification,
+Native Debug and Release playable and fixture builds pass. The latest four
+Release checks pass: mission-three success, frontend, artifact policy and
+artifact cleanup. Debug mission-three success and cleanup also pass.
+Evidence is in `analysis/figures/native_mission_three_success_checkpoint.json`;
+logs are `build/native-flight/mission-success-{debug,release}-ctest.log`.
+
+The preceding six Release checks pass: both qualification sequences, ordinary qualification,
 ready-player postflight, frontend and artifact cleanup. Debug sequence checks
 also pass. Evidence is in `analysis/figures/native_qualification_sequence_checkpoint.json`;
 logs are in `build/native-flight/carrier-sequence/`.
@@ -83,8 +97,10 @@ frontend and artifact cleanup. Evidence and executable hashes are in
 The comparisons execute original instructions from native before-states;
 they do not establish an independent complete original mission replay.
 
-Next work is successful mission-list modes three through eight and independent
-full-flight comparison. Carrier qualification now has repeatable source
+Next work is successful mission-list modes four through eight and independent
+full-flight comparison. Mode three now has source comparisons through its
+objective, landing, taxi, stopped-aircraft result, save and reload. Its mission
+restart and independent full original replay remain open. Carrier qualification has repeatable source
 comparisons through landing/result/save/restart/reload, including a newly earned
 qualification, but independent complete original flight parity remains open.
 The gun probe now passes:
@@ -103,7 +119,7 @@ presentation cadence. The complete-port goal remains active.
 
 Builds and CTest automatically prune disposable artifacts against a 4 GiB
 budget; passing comparison RAM is deleted immediately. The latest cleanup left
-about 1.53 GiB of build files and small artifacts. Keep passing
+about 1.61 GiB of build files and small artifacts before this mission batch. Keep passing
 captures temporary and bounded; use `--keep-captures` only for deliberate
 debugging. Preserve sealed recordings and local media. Do not modify
 `scripts/check_native_build.py`, `scripts/native_frame_count.py` or

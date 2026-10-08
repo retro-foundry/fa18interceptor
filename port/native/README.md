@@ -1,5 +1,17 @@
 # Native port runner
 
+Mode three now has a normal-key objective/landing/taxi/result/save/reload gate.
+All 36 input/stage intervals and 184 sampled bodies match original compared
+RAM/drawing, including 96 consecutive landing bodies and the actual config
+write. Completion count advances 3 -> 4 and mode grade 1 -> 2, with no crash
+reset. The validation pilot reads flight state and sends ordinary keys; gameplay
+and the playable executable are unchanged. Debug/Release builds and checks
+pass. Captures stay temporary and bounded. See
+`../../analysis/native_mission_three_success_milestone.md` for the source
+conditions, terrain landing followed by taxi, and comparison limits.
+Modes four through eight, mission restart and independent complete flights
+remain open, alongside the remaining state/audio/performance work.
+
 Carrier qualification now has two repeatable source sequence gates: the
 original ADF log and a reopened unqualified saved pilot. Each completes takeoff,
 landing, success, config write, restarted flight and fresh log reload, matching

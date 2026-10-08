@@ -1,5 +1,19 @@
 # Current playable port handoff
 
+Latest mission-list success acceptance (2026-10-08): mode three takes off,
+selects an aircraft with normal T input, reaches the original confirmation
+objective, lands safely on terrain, taxis into the original runway polygon and
+stops. Completion count advances 3 -> 4 and mode grade 1 -> 2; the actual
+78-byte config write and cold reload agree. All 36 input/stage intervals and
+184 sampled bodies match original compared RAM/drawing, including 96 consecutive
+landing bodies. Debug and Release checks pass. The validation pilot only reads
+flight RAM and sends keys; gameplay and the playable executable are unchanged.
+Passing RAM is temporary and bounded. See
+`analysis/native_mission_three_success_milestone.md`. Modes four through eight,
+independent complete flights, mission restart, remaining contracts, typed state,
+audio and wider performance remain open; the complete-port goal stays active.
+This supersedes older claims that all mission-list successes remain unaccepted.
+
 Latest carrier sequence acceptance (2026-10-08): both the original ADF log and
 a reopened unqualified saved pilot complete normal-key takeoff, landing, success,
 config write, restart and log reload. Each passes 50 input/stage intervals and
