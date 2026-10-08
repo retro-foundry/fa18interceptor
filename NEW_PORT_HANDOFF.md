@@ -3,11 +3,26 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`d8eba83d` on `coverage-accounting`.
+`f5d60f2a` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `73f9bc00fd5db4f1f3a3e90097b902e0a4eb2b4d8ad07a24789626a3549189cd`.
 Untracked `.vscode/` is user-owned and must remain untouched.
+
+Latest mode-five investigation: the optional validation argument `5-formation`
+attempts the original stolen-aircraft proximity objective using ordinary keys.
+The bounded run through tick 11,600 matches all 24 input/stage intervals and
+36 sampled bodies against original compared RAM/drawing, including contact
+bit-two transitions during the early turn. Its frozen attitude also occurs
+in the original; no gameplay fix is justified by this evidence. The countdown
+remains 200, completion count remains 3 and the fixture correctly reports an
+incomplete mission. Default mode-three and numeric mode-five checks retain
+their existing pilots. `FA18_MISSION_END_TICK` bounds diagnostic duration;
+passing RAM remains temporary. See
+`analysis/native_mission_five_formation_checkpoint.md` for the retained input,
+comparison scope and next investigation. Mode-five success remains open.
+The Release fixture build, identical bounded replay and both existing mission
+CTest checks plus artifact cleanup pass.
 
 Latest independent-camera depth acceptance: the final scaled view coefficient
 now reaches context sorting through an explicit native return value. C2DACC's

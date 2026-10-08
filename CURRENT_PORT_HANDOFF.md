@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Latest mode-five investigation (2026-10-08): the validation-only `5-formation`
+pilot and bounded tick limit reproduce an early frozen attitude. All 24
+input/stage intervals and 36 sampled bodies match original compared RAM/drawing,
+including contact bit-two transitions. This does not demonstrate a port bug
+or a successful mission: the objective countdown stays 200 and completions
+stay 3. Gameplay and the playable executable are unchanged. Default mode-three
+and numeric mode-five pilots remain the existing acceptance/diagnostic paths.
+See `analysis/native_mission_five_formation_checkpoint.md`. Mode-five success
+and independent full-flight comparisons remain open. The Release fixture build,
+identical bounded replay, both existing mission CTests and cleanup pass.
+
 Latest independent-camera depth acceptance (2026-10-08): native projection
 returns the final scaled view coefficient to context depth sorting. C2DACC
 replaces C29042's earlier origin output; the flight caller's incoming-factor

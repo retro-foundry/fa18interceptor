@@ -21,6 +21,51 @@ static double angle_delta(double a,double b) {
     while(result< -3.141592653589793) result+=6.283185307179586;
     return result;
 }
+static double clamp(double value,double low,double high) {
+    return value<low?low:value>high?high:value;
+}
+/* Diagnostic flight only: attempt to follow the stolen aircraft for C0A002's
+ * proximity countdown. This pilot has not completed the objective; its early
+ * frozen attitude matches original sampled bodies. All controls remain keys. */
+static int follow_stolen_aircraft(MissionPilot *pilot,NativeFrontend *game) {
+    if(!pilot->force_return || pilot->formation_done || pilot->objective) return 0;
+    pilot->target=4;
+    if(rd_s16(SCENE_DISPATCH_GATE)<0) {
+        pilot->formation_done=1;
+        held(pilot,game,&pilot->throttle,61);
+        pilot->previous_x=pilot->previous_y=0;
+        printf("{\"formation_complete\":true,\"tick\":%u}\n",game->ticks);
+        return 0;
+    }
+    const gaddr target=CONTROL_RECORDS+512*pilot->target;
+    double delta[3],velocity[3];
+    for(unsigned i=0;i<3;++i) {
+        delta[i]=(rd_s32(target+20+4*i)-rd_s32(CONTROL_RECORDS+20+4*i))/256.0;
+        velocity[i]=rd_s32(target+62+4*i)/256.0;
+    }
+    const double range=hypot(delta[0],delta[2]);
+    const double speed=rd_s16(CONTROL_RECORDS+110)/64.0;
+    const double target_speed=rd_s16(target+110)/64.0;
+    const double horizontal=hypot(velocity[0],velocity[2]);
+    const double time=clamp(range/fmax(speed,70),20,1000);
+    const double along=horizontal? (delta[0]*velocity[0]+delta[2]*velocity[2])/horizontal:range;
+    const double wanted_speed=target_speed+clamp((along-250)/80,-30,45);
+    const double yaw=rd_u16(CONTROL_RECORDS+104)*6.283185307179586/28800;
+    const double pitch=angle_delta(rd_u16(CONTROL_RECORDS+102)*6.283185307179586/28800,0);
+    const double bank=angle_delta(rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800,0);
+    const double wanted_yaw=atan2(-(delta[0]+velocity[0]*time),delta[2]+velocity[2]*time);
+    const double wanted_pitch=clamp(-(delta[1]+80)/6000,-0.08,0.08);
+    const double yaw_control=angle_delta(wanted_yaw,yaw)-10*angle_delta(yaw,pilot->previous_x);
+    const double pitch_control=wanted_pitch-pitch-10*angle_delta(pitch,pilot->previous_y);
+    pilot->previous_x=yaw;pilot->previous_y=pitch;
+    held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
+    held(pilot,game,&pilot->rudder,yaw_control>0.006?46:yaw_control< -0.006?44:0);
+    held(pilot,game,&pilot->pitch,pitch_control>0.006?273:pitch_control< -0.006?274:0);
+    held(pilot,game,&pilot->throttle,range>4000?291:
+        speed<wanted_speed-1?291:speed>wanted_speed+1?285:288);
+    held(pilot,game,&pilot->fire,0);
+    return 1;
+}
 void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
     if(game->flight_timer_pending || game->scene_frames==pilot->scene) return;
     pilot->scene=game->scene_frames;
@@ -72,6 +117,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         held(pilot,game,&pilot->rudder,0);
         return;
     }
+    if(follow_stolen_aircraft(pilot,game)) return;
     double point[3],position[3],local[3]={0};
     for(unsigned i=0;i<3;++i) position[i]=(double)rd_s32(CONTROL_RECORDS+20+4*i)/256;
     int gun_target=0,gun_aim=0;

@@ -13,6 +13,7 @@ typedef struct {
     unsigned body, captures, entries, first_tick, entry_tick, iteration, window, combat_window;
     unsigned entry_keys[256], key_count;
     unsigned mode;
+    int force_return;
     uint16_t saved_tick, contact, completions, speed;
     uint16_t radar_hits, gun_hits;
     uint8_t enemy_expiries;
@@ -105,7 +106,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     const int ready_before=run->landed && (run->region&region_mask) && !run->speed;
     const int keep=run->stage!=run->previous_stage || run->body%(run->mode==3?512:1024)==0 ||
         run->window || run->combat_window || phase!=run->phase || completions!=run->completions ||
-        ((contact^run->contact)&0x80) || confirmation!=run->confirmation ||
+        ((contact^run->contact)&(run->force_return?0x84:0x80)) || confirmation!=run->confirmation ||
         (run->landed && ((region^run->region)&region_mask)) || (ready && !ready_before) ||
         radar_hits!=run->radar_hits || gun_hits!=run->gun_hits ||
         (run->mode==5 && enemy_expiries!=run->enemy_expiries);
@@ -149,19 +150,23 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 }
 
 int main(int argc,char **argv) {
-    /* Mode three is the acceptance gate; mode five is a combat diagnostic. */
+    /* Mode three is the acceptance gate; mode five variants are diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5|5-formation]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
-    if(argc==6) pilot.mode=(unsigned)atoi(argv[5]);
+    if(argc==6) {
+        pilot.force_return=!strcmp(argv[5],"5-formation");
+        pilot.mode=pilot.force_return?5u:(unsigned)atoi(argv[5]);
+    }
     if(pilot.mode!=3 && pilot.mode!=5) {
-        fprintf(stderr,"Unsupported mission mode: %s (expected 3 or 5)\n",argv[5]);
+        fprintf(stderr,"Unsupported mission mode: %s (expected 3, 5 or 5-formation)\n",argv[5]);
         goto done;
     }
     run.mode=pilot.mode;
+    run.force_return=pilot.force_return;
     run.prefix=argv[4];run.before=malloc(0x100000);run.entry_before=malloc(0x100000);
     if(!game || !run.before || !run.entry_before) goto done;
     pilot.keys=fopen(argv[3],"w");
@@ -171,7 +176,9 @@ int main(int argc,char **argv) {
     game->observe_frame=observe;game->frame_context=&run;
     const unsigned times[]={1800,3000,4500,6500,8000,14500};
     const int keys[]={32,54,282+(int)pilot.mode-3,13,13,50};
-    while(game->ticks<(pilot.mode==3?32000u:60000u)) {
+    const char *end=getenv("FA18_MISSION_END_TICK");
+    const unsigned end_tick=end?(unsigned)strtoul(end,NULL,10):pilot.mode==3?32000u:60000u;
+    while(game->ticks<end_tick) {
         for(unsigned i=0;i<(pilot.mode==3?6u:5u);++i) {
             if(game->ticks==times[i]) mission_pilot_event(&pilot,game,keys[i],1);
             if(game->ticks==times[i]+2) mission_pilot_event(&pilot,game,keys[i],0);

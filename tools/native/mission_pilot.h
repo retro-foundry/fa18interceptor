@@ -8,6 +8,7 @@ typedef struct {
     double home[3], forward[3], previous_x, previous_y;
     unsigned scene, phase, target, started, objective, target_press, completions, grade;
     unsigned mode, trace;
+    int force_return, formation_done;
     int rudder, pitch, roll, throttle, fire;
     FILE *keys;
 } MissionPilot;
