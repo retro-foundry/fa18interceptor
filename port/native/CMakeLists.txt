@@ -83,6 +83,16 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     set_tests_properties(fa18_native_artifact_cleanup PROPERTIES FIXTURES_CLEANUP native_artifacts)
     add_executable(fa18_native_postflight_schedule_test ../../tools/native/native_postflight_schedule_test.c)
     target_link_libraries(fa18_native_postflight_schedule_test PRIVATE fa18_native_runtime)
+    add_executable(fa18_native_qualification_sequence_test ../../tools/native/native_qualification_sequence_test.c)
+    target_link_libraries(fa18_native_qualification_sequence_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_qualification_sequence
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_qualification_sequence.py
+                --test $<TARGET_FILE:fa18_native_qualification_sequence_test>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/qualification-sequence-check)
+    add_test(NAME fa18_native_qualification_new_pilot
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_qualification_sequence.py
+                --test $<TARGET_FILE:fa18_native_qualification_sequence_test> --new-pilot
+                --out ${CMAKE_CURRENT_BINARY_DIR}/qualification-new-pilot-check)
     foreach(result_kind four five ready)
         add_test(NAME fa18_native_postflight_${result_kind}
             COMMAND fa18_native_postflight_schedule_test

@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-08",
+  "cases": {
+    "original_log": {
+      "scenario": "recorded-input-carrier-landing-success-restart",
+      "input_stage_intervals": 50,
+      "sampled_bodies": 174,
+      "consecutive_landing_bodies": 96,
+      "original_config_writes": 1,
+      "summary": {
+        "sequence": true,
+        "iterations": 8038,
+        "events": 554,
+        "captures": 174,
+        "bodies": 6142,
+        "airborne": true,
+        "landed": true,
+        "success": true,
+        "restarted": true,
+        "mode": 9,
+        "stage": "C10DAE",
+        "queued": 0,
+        "crash_resets": 0,
+        "initial_qualification": 1,
+        "reloaded": true
+      },
+      "touchdown": {
+        "capture": 49,
+        "body": 4347,
+        "iteration": 6243,
+        "stage": "C10DAE",
+        "before_tick": 12231,
+        "after_tick": 12234,
+        "saved_tick": 1554,
+        "owner_exit": false,
+        "phase_before": 0,
+        "phase_after": 0,
+        "contact_before": 32898,
+        "contact_after": 49346,
+        "qualification_before": 1,
+        "qualification_after": 1,
+        "touchdown": true,
+        "landing_window": true
+      },
+      "result": {
+        "entry": 32,
+        "iteration": 6296,
+        "stage": "C110A4",
+        "tick": 12405,
+        "keys": [],
+        "phase_before": 255,
+        "phase_after": 239,
+        "qualification": 1
+      },
+      "saved_pilot_fixture": "None; original ADF log",
+      "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+      "input_sha256": "8d4dff657c006d5161ad4c719604f7bbc2a884977c475e9400942564cabd4340",
+      "test_sha256": "816bc63faa5ff9e8a5af0c891302eb338400840854810bfab85fc67bcebb2e03",
+      "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+      "configuration": "Release",
+      "native_flight_state_seeded": false
+    },
+    "new_pilot": {
+      "scenario": "recorded-input-carrier-landing-success-restart",
+      "input_stage_intervals": 50,
+      "sampled_bodies": 174,
+      "consecutive_landing_bodies": 96,
+      "original_config_writes": 1,
+      "summary": {
+        "sequence": true,
+        "iterations": 8038,
+        "events": 554,
+        "captures": 174,
+        "bodies": 6142,
+        "airborne": true,
+        "landed": true,
+        "success": true,
+        "restarted": true,
+        "mode": 9,
+        "stage": "C10DAE",
+        "queued": 0,
+        "crash_resets": 0,
+        "initial_qualification": 0,
+        "reloaded": true
+      },
+      "touchdown": {
+        "capture": 49,
+        "body": 4347,
+        "iteration": 6243,
+        "stage": "C10DAE",
+        "before_tick": 12231,
+        "after_tick": 12234,
+        "saved_tick": 1554,
+        "owner_exit": false,
+        "phase_before": 0,
+        "phase_after": 0,
+        "contact_before": 32898,
+        "contact_after": 49346,
+        "qualification_before": 0,
+        "qualification_after": 0,
+        "touchdown": true,
+        "landing_window": true
+      },
+      "result": {
+        "entry": 32,
+        "iteration": 6296,
+        "stage": "C110A4",
+        "tick": 12405,
+        "keys": [],
+        "phase_before": 255,
+        "phase_after": 239,
+        "qualification": 1
+      },
+      "saved_pilot_fixture": "Qualification word zero, saved and reopened before replay",
+      "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+      "input_sha256": "8d4dff657c006d5161ad4c719604f7bbc2a884977c475e9400942564cabd4340",
+      "test_sha256": "51cbf7ecb4f12ad215e3d9804fd802b50eaea957d9296e7d34447568274b1e7f",
+      "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+      "configuration": "Debug",
+      "native_flight_state_seeded": false
+    }
+  },
+  "release_ctests": {
+    "passed": 6,
+    "log": "build/native-flight/carrier-sequence/release-ctest.log"
+  },
+  "debug_checks": {
+    "original_log_passed": true,
+    "new_pilot_passed": true,
+    "cleanup_passed": true,
+    "logs": [
+      "build/native-flight/carrier-sequence/debug-ctest.log",
+      "build/native-flight/carrier-sequence/debug-new-pilot-ctest.log"
+    ]
+  },
+  "native_runner_sha256": "35228ba51693afc342ae88e94728608c89cd4beb011c98c63e5df21c7c71c0bd",
+  "release_fixture_sha256": "816bc63faa5ff9e8a5af0c891302eb338400840854810bfab85fc67bcebb2e03"
+}

@@ -1,0 +1,2 @@
+# Preserve the original consumed-input export bytes and its evidence hash.
+carrier_qualification_game_input.fa18in -text whitespace=cr-at-eol

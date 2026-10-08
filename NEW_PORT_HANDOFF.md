@@ -3,7 +3,7 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`e2919a29` on `coverage-accounting`.
+`a78749d3` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `35228ba51693afc342ae88e94728608c89cd4beb011c98c63e5df21c7c71c0bd`.
@@ -11,6 +11,15 @@ Untracked `.vscode/` is user-owned and must remain untouched.
 
 Recent completed batches:
 
+- Carrier qualification sequence (2026-10-08): both the original ADF log and
+  a reopened unqualified saved pilot complete takeoff, landing, successful
+  result, config save, restarted flight and fresh log reload with normal keys.
+  Each passes 50 input/stage intervals and 174 bodies against original compared
+  RAM/drawing, including all 96 consecutive landing bodies and the actual DOS
+  Write. The new pilot earns qualification 0 -> 1. A retained consumed-key
+  fixture makes both checks repeatable in CTest without local build-cache
+  input. Gameplay and the playable executable are unchanged. See
+  `analysis/native_qualification_sequence_milestone.md` for scope and limits.
 - Gun shoot-down (2026-10-08): 317 input/stage intervals and 275 bodies match
   original compared RAM/drawing, including every body in the 101-body
   first-damage-to-inactivation interval. The actual map clipping owner now
@@ -49,8 +58,14 @@ Recent completed batches:
   verify all seven streams and wrap. Mode six naturally loses three aircraft,
   exhausts resets, returns to the menu and relaunches Free Flight.
 
-Native Debug and Release playable and fixture builds pass. All eight affected
-checks pass: gun hit, gun kill, radar kill, infrared kill, raster, models,
+Native Debug and Release playable and fixture builds pass. The latest six
+Release checks pass: both qualification sequences, ordinary qualification,
+ready-player postflight, frontend and artifact cleanup. Debug sequence checks
+also pass. Evidence is in `analysis/figures/native_qualification_sequence_checkpoint.json`;
+logs are in `build/native-flight/carrier-sequence/`.
+
+The preceding gun checkpoint passed all eight affected
+checks: gun hit, gun kill, radar kill, infrared kill, raster, models,
 frontend and artifact cleanup.
 Results are recorded in `analysis/figures/native_gun_kill_checkpoint.json`;
 the local log is `build/native-flight/gun-kill-checkpoint-ctest.log`.
@@ -68,8 +83,11 @@ frontend and artifact cleanup. Evidence and executable hashes are in
 The comparisons execute original instructions from native before-states;
 they do not establish an independent complete original mission replay.
 
-Next work is successful complete mission sequences and independent full-flight
-comparison. The gun probe now passes:
+Next work is successful mission-list modes three through eight and independent
+full-flight comparison. Carrier qualification now has repeatable source
+comparisons through landing/result/save/restart/reload, including a newly earned
+qualification, but independent complete original flight parity remains open.
+The gun probe now passes:
 `python tools/native/check_mode_two.py --mode 8 --kill --gun --out build/native-flight/gun-kill-fixed`.
 The former failure's original C7FE78 word came from map clip stage C24956/C24970
 return addresses, with C249D6 providing a second closing-boundary Y writer.

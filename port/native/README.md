@@ -1,5 +1,17 @@
 # Native port runner
 
+Carrier qualification now has two repeatable source sequence gates: the
+original ADF log and a reopened unqualified saved pilot. Each completes takeoff,
+landing, success, config write, restarted flight and fresh log reload, matching
+50 input/stage intervals and 174 bodies against original compared RAM/drawing.
+All 96 consecutive landing bodies and the actual result DOS Write are checked;
+the new pilot earns qualification 0 -> 1. Gameplay and the playable executable
+are unchanged. Debug/Release builds and six affected Release CTests pass.
+Passing RAM remains temporary and bounded. See
+`../../analysis/native_qualification_sequence_milestone.md`. Mission-list
+successes, independent full flights and remaining state/audio/performance work
+remain open; the complete-port goal stays active.
+
 The mode-eight gun shoot-down now passes 317 input/stage intervals and 275
 bodies against original compared RAM/drawing, including all 101 consecutive
 bodies from first damage through enemy expiry accounting and eventual

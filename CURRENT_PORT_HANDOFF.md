@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest carrier sequence acceptance (2026-10-08): both the original ADF log and
+a reopened unqualified saved pilot complete normal-key takeoff, landing, success,
+config write, restart and log reload. Each passes 50 input/stage intervals and
+174 bodies against original compared RAM/drawing, including all 96 consecutive
+landing bodies and the actual C1643A DOS Write. The new pilot earns qualification
+0 -> 1. This adds validation and a retained consumed-key fixture; gameplay and
+the playable executable are unchanged. Debug/Release builds and six affected
+Release CTests pass. Passing RAM remains temporary and bounded. See
+`analysis/native_qualification_sequence_milestone.md`. Mission-list successes,
+independent complete flights, remaining contracts, typed state, audio and wider
+performance remain open; the complete-port goal stays active.
+
 Latest gun shoot-down acceptance (2026-10-08): mode eight passes 317 input/stage
 intervals and 275 bodies against original compared RAM/drawing, including all
 101 consecutive bodies from first damage through expiry accounting and eventual
