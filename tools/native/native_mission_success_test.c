@@ -13,7 +13,7 @@ typedef struct {
     unsigned body, captures, entries, first_tick, entry_tick, iteration, window, combat_window, formation_window;
     unsigned entry_keys[256], key_count;
     unsigned mode;
-    int force_return;
+    int force_return, complete_flight;
     uint16_t saved_tick, contact, completions, speed;
     uint16_t radar_hits, gun_hits;
     int16_t proximity_gate;
@@ -110,7 +110,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     }
     if(run->force_return && ((run->proximity_gate==200 && proximity_gate<200 && proximity_gate>=0) ||
                             (run->proximity_gate>=0 && proximity_gate<0)))
-        run->formation_window=32;
+        run->formation_window=run->complete_flight?16:32;
     if(run->mode==5 && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits))
         run->combat_window=20; /* Include the original 15-tick expiry and its boundary. */
     if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
@@ -171,21 +171,23 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 int main(int argc,char **argv) {
     /* Mode three is the acceptance gate; mode five variants are diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5|5-formation]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5|5-formation|5-mission]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
     if(argc==6) {
-        pilot.force_return=!strcmp(argv[5],"5-formation");
+        pilot.complete_flight=!strcmp(argv[5],"5-mission");
+        pilot.force_return=!strcmp(argv[5],"5-formation") || pilot.complete_flight;
         pilot.mode=pilot.force_return?5u:(unsigned)atoi(argv[5]);
     }
     if(pilot.mode!=3 && pilot.mode!=5) {
-        fprintf(stderr,"Unsupported mission mode: %s (expected 3, 5 or 5-formation)\n",argv[5]);
+        fprintf(stderr,"Unsupported mission mode: %s (expected 3, 5, 5-formation or 5-mission)\n",argv[5]);
         goto done;
     }
     run.mode=pilot.mode;
     run.force_return=pilot.force_return;
+    run.complete_flight=pilot.complete_flight;
     run.prefix=argv[4];run.before=malloc(0x100000);run.entry_before=malloc(0x100000);
     if(!game || !run.before || !run.entry_before) goto done;
     pilot.keys=fopen(argv[3],"w");
@@ -203,7 +205,7 @@ int main(int argc,char **argv) {
             if(game->ticks==times[i]+2) mission_pilot_event(&pilot,game,keys[i],0);
         }
         if(pilot.target_press && game->ticks==pilot.target_press+2) mission_pilot_event(&pilot,game,116,0);
-        if(pilot.mode==5 && pilot.started) for(unsigned i=0;i<3;++i) {
+        if(pilot.mode==5 && pilot.started) for(unsigned i=0;i<(pilot.complete_flight?2u:3u);++i) {
             if(game->ticks==pilot.started+700+20*i) mission_pilot_event(&pilot,game,13,1);
             if(game->ticks==pilot.started+702+20*i) mission_pilot_event(&pilot,game,13,0);
         }

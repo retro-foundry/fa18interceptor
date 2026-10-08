@@ -1,5 +1,13 @@
 # Native port runner
 
+The optional validation pilot now completes formation and both radar kills,
+then reaches original mode-five objective phase FF at tick 19,304. All 29
+input/stage intervals and 118 sampled bodies match original compared
+RAM/drawing, including 32 formation-window and 40 combat-window bodies. The
+serial gate is `fa18_native_mission_five_objective`. This changes validation
+only; safe return, landing and saved success remain open. See
+`../../analysis/native_mission_five_objective_milestone.md`.
+
 The native validation pilot now reaches C0A002's proximity countdown and
 C0A12E's paired aircraft restoration using normal keys. All 24 input/stage
 intervals and 107 sampled bodies match original compared RAM/drawing, including

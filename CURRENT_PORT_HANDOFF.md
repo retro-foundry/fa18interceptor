@@ -1,5 +1,18 @@
 # Current playable port handoff
 
+Latest mode-five combat objective acceptance (2026-10-08): normal keys complete
+formation, both radar shoot-downs and expiry increments, then reach original
+objective phase FF at tick 19,304. All 29 input/stage intervals and 118 sampled
+bodies match original compared RAM/drawing, including 32 formation-window and
+40 combat-window bodies. The new serial CTest is
+`fa18_native_mission_five_objective`. Debug fixture build and four selected
+checks pass; Release fixture build and five selected checks pass. Gameplay and
+the playable executable are unchanged. Completion count stays 3, no reset or
+result write occurs in the bounded run, and safe return/landing/saved success
+remain open. See `analysis/native_mission_five_objective_milestone.md`.
+Independent complete flights and other whole-port work remain open; the
+complete-port goal stays active. This advances the forced-return milestone below.
+
 Latest mode-five forced-return acceptance (2026-10-08): normal keys hold all
 201 native proximity scans and reach paired C0A12E restoration. All 24
 input/stage intervals and 107 sampled bodies match original compared

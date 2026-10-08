@@ -9,6 +9,8 @@ typedef struct {
     unsigned scene, phase, target, started, objective, target_press, completions, grade;
     unsigned mode, trace;
     int force_return, formation_started, formation_done;
+    int complete_flight, combat_started;
+    unsigned missile_target, missile_tick;
     int rudder, pitch, roll, throttle, fire;
     FILE *keys;
 } MissionPilot;

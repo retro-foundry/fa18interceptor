@@ -3,13 +3,29 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`c609f812` on `coverage-accounting`.
+`5bc76a7f` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `73f9bc00fd5db4f1f3a3e90097b902e0a4eb2b4d8ad07a24789626a3549189cd`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
-Latest mode-five forced-return acceptance: normal keyboard input holds the
+Latest mode-five combat objective acceptance: normal keyboard input completes
+formation, destroys both enemy aircraft with radar missiles and reaches the
+original objective phase `$FF` at tick 19,304. All 29 input/stage intervals
+and 118 sampled bodies match original compared RAM/drawing, including 32
+consecutive formation-window and 40 consecutive combat-window bodies. The
+new serial CTest is `fa18_native_mission_five_objective`. Debug fixture build
+and all four selected checks pass; Release fixture build and all five selected
+checks pass. Gameplay and the playable executable are unchanged. The bounded
+run has no reset, keeps completion count 3 and writes no result config. Safe
+return, landing and saved success remain open for mode five; an exploratory
+longer continuation still crashes. See
+`analysis/native_mission_five_objective_milestone.md` and
+`analysis/figures/native_mission_five_objective_checkpoint.json`. This advances
+the earlier forced-return milestone below; independent complete flights and
+other whole-port work remain open. The complete-port goal stays active.
+
+Earlier mode-five forced-return acceptance: normal keyboard input holds the
 original stolen-aircraft proximity requirement through all 201 native scans,
 then reaches C0A12E for both aircraft. All 24 input/stage intervals and 107
 sampled bodies match original compared RAM/drawing, including 64 consecutive

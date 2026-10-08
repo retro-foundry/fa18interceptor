@@ -100,8 +100,12 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_forced_return.py
                 --test $<TARGET_FILE:fa18_native_mission_success_test>
                 --out ${CMAKE_CURRENT_BINARY_DIR}/mission-five-forced-return-check)
+    add_test(NAME fa18_native_mission_five_objective
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_five_objective.py
+                --test $<TARGET_FILE:fa18_native_mission_success_test>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/mission-five-objective-check)
     set_tests_properties(fa18_native_mission_three_success fa18_native_mission_five_combat_reset
-        fa18_native_mission_five_forced_return
+        fa18_native_mission_five_forced_return fa18_native_mission_five_objective
         PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_qualification_sequence
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_qualification_sequence.py

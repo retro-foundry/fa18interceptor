@@ -24,6 +24,15 @@ static double angle_delta(double a,double b) {
 static double clamp(double value,double low,double high) {
     return value<low?low:value>high?high:value;
 }
+static void command_throttle(MissionPilot *pilot,NativeFrontend *game,int throttle) {
+    /* C1B35A and C13D84 can settle F10 at phase 120 before afterburner.
+     * Reapply the normal plus key after the source releases throttle input. */
+    if(throttle==291 && rd_s8(CONTROL_RECORDS+43)>=120 && !(rd_u16(CONTROL_RECORDS+2)&8))
+        throttle=61;
+    if(throttle==61 && pilot->throttle==61 && !(rd_u8(PLAYER_STICK)&3))
+        mission_pilot_event(pilot,game,61,1);
+    else held(pilot,game,&pilot->throttle,throttle);
+}
 /* Validation flight only: follow the stolen aircraft for C0A002's proximity
  * countdown. Formation input is separate from the subsequent combat/landing
  * pilot; every control remains an ordinary key. */
@@ -67,17 +76,68 @@ static int follow_stolen_aircraft(MissionPilot *pilot,NativeFrontend *game) {
     const double pitch_control=pitch+4*angle_delta(pitch,pilot->previous_y);
     pilot->previous_x=yaw;pilot->previous_y=pitch;
     int throttle=range>30000 || speed<wanted_speed-1?291:speed>wanted_speed+1?285:288;
-    /* C1B35A and C13D84 can settle F10 at phase 120 before afterburner.
-     * Reapply the normal plus key after the source releases throttle input. */
-    if(throttle==291 && rd_s8(CONTROL_RECORDS+43)>=120 && !(rd_u16(CONTROL_RECORDS+2)&8))
-        throttle=61;
-    if(throttle==61 && pilot->throttle==61 && !(rd_u8(PLAYER_STICK)&3))
-        mission_pilot_event(pilot,game,61,1);
-    else held(pilot,game,&pilot->throttle,throttle);
+    command_throttle(pilot,game,throttle);
     held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
     held(pilot,game,&pilot->rudder,yaw_control>0.006?46:yaw_control< -0.006?44:0);
     held(pilot,game,&pilot->pitch,pitch_control>0.006?274:pitch_control< -0.006?273:0);
     held(pilot,game,&pilot->fire,0);
+    return 1;
+}
+/* Mission validation only: pursue the remaining active enemies and launch
+ * radar missiles with normal controls. No hit, collision or outcome state
+ * is written. */
+static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
+    if(!pilot->complete_flight || !pilot->formation_done || pilot->objective ||
+       rd_u8(PLAYER_PHASE)==0xff || rd_u8(PLAYER_PHASE)==1) return 0;
+    unsigned selected=0;
+    double target_distance_squared=0;
+    for(unsigned slot=8;slot<=10;slot+=2) {
+        const gaddr record=CONTROL_RECORDS+512*slot;
+        if((rd_u16(record)&0x1648u)!=0x1040u) continue;
+        double square=0;
+        for(unsigned i=0;i<3;++i) {
+            const double d=(rd_s32(record+20+4*i)-rd_s32(CONTROL_RECORDS+20+4*i))/256.0;
+            square+=d*d;
+        }
+        if(slot==pilot->target) {target_distance_squared=square;selected=slot;break;}
+        if(!selected) {target_distance_squared=square;selected=slot;}
+    }
+    if(!selected) {held(pilot,game,&pilot->fire,0);return 1;}
+    const gaddr target=CONTROL_RECORDS+512*selected;
+    const double range=sqrt(target_distance_squared),speed=rd_s16(CONTROL_RECORDS+110)/64.0;
+    const double time=clamp(range/fmax(speed,70),0,400);
+    double delta[3],local[3]={0};
+    for(unsigned i=0;i<3;++i)
+        delta[i]=(rd_s32(target+20+4*i)-rd_s32(CONTROL_RECORDS+20+4*i))/256.0+
+            rd_s32(target+62+4*i)/256.0*time;
+    delta[1]+=400;
+    const double wanted_yaw=atan2(-delta[0],delta[2]);
+    const double yaw=rd_u16(CONTROL_RECORDS+104)*6.283185307179586/28800;
+    const double yaw_error=angle_delta(wanted_yaw,yaw);
+    const double horizontal=hypot(delta[0],delta[2]);
+    const double direction[3]={-sin(wanted_yaw),fabs(yaw_error)>0.3?0:
+        clamp(delta[1]/fmax(horizontal,100),-0.05,0.05),cos(wanted_yaw)};
+    for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
+        local[i]+=direction[j]*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
+    const double bank=angle_delta(rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800,0);
+    const double x=atan2(local[0],local[2]),y=atan2(local[1],hypot(local[0],local[2]));
+    if(!pilot->combat_started || pilot->target!=selected) {
+        pilot->combat_started=1;pilot->previous_x=yaw;pilot->previous_y=y;
+    }
+    pilot->target=selected;
+    const double yaw_control=angle_delta(wanted_yaw,yaw)-10*angle_delta(yaw,pilot->previous_x);
+    const double pitch_control=y+4*angle_delta(y,pilot->previous_y);
+    pilot->previous_x=yaw;pilot->previous_y=y;
+    const double wanted_speed=rd_s16(target+110)/64.0+clamp((range-1800)/100,-25,25);
+    command_throttle(pilot,game,speed<wanted_speed-1?291:speed>wanted_speed+1?285:288);
+    held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
+    held(pilot,game,&pilot->rudder,yaw_control>0.006?46:yaw_control< -0.006?44:0);
+    held(pilot,game,&pilot->pitch,pitch_control>0.006?274:pitch_control< -0.006?273:0);
+    const int launch=rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<20000 &&
+        fabs(x)<0.6 && fabs(y)<0.3 && pilot->missile_target!=selected;
+    if(launch) {pilot->missile_target=selected;pilot->missile_tick=game->ticks;}
+    held(pilot,game,&pilot->fire,pilot->missile_target==selected &&
+        game->ticks-pilot->missile_tick<4?32:0);
     return 1;
 }
 void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
@@ -134,6 +194,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         return;
     }
     if(follow_stolen_aircraft(pilot,game)) return;
+    if(combat_flight(pilot,game)) return;
     double point[3],position[3],local[3]={0};
     for(unsigned i=0;i<3;++i) position[i]=(double)rd_s32(CONTROL_RECORDS+20+4*i)/256;
     int gun_target=0,gun_aim=0;
