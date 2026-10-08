@@ -3,11 +3,25 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`ceb736dc` on `coverage-accounting`.
+`08628194` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `35228ba51693afc342ae88e94728608c89cd4beb011c98c63e5df21c7c71c0bd`.
 Untracked `.vscode/` is user-owned and must remain untouched.
+
+Latest diagnostic checkpoint: the validation pilot is now shared in
+`tools/native/mission_pilot.c`; the existing mode-three acceptance remains the
+default. Optional mode five selects the gun through ordinary Return input and
+records seven gun-hit increments across six bodies. All 26 input/stage
+intervals and the first 57 sampled bodies match original compared RAM/drawing.
+The next body, reset C11830 at host tick 20,352, differs at C45A4F and C45A51:
+source $F7/$94, native $F8/$95. This mismatch remains unresolved. The flight
+crashes, completion count stays 3 and the diagnostic exits with failure;
+mode-five mission success is not accepted. Debug/Release builds and the
+mode-three regressions pass; the playable executable is unchanged. The single
+failed case is retained locally as compressed RAM with hashes, and passing
+captures are removed. See `analysis/native_mission_five_combat_checkpoint.md`
+and `analysis/figures/native_mission_five_combat_checkpoint.json`.
 
 Recent completed batches:
 
@@ -97,8 +111,13 @@ frontend and artifact cleanup. Evidence and executable hashes are in
 The comparisons execute original instructions from native before-states;
 they do not establish an independent complete original mission replay.
 
-Next work is successful mission-list modes four through eight and independent
-full-flight comparison. Mode three now has source comparisons through its
+Next work starts with the mode-five reset-vector mismatch: trace C25754's
+normalisation inputs and its C1D974 length child through the connected native
+record owner. Do not adjust rounding or comparison masks without source
+evidence. Then compare the combat expiry boundaries and finish the mode-five
+objective and carrier return using normal keys. Successful mission-list modes
+four through eight and independent full-flight comparison remain open.
+Mode three now has source comparisons through its
 objective, landing, taxi, stopped-aircraft result, save and reload. Its mission
 restart and independent full original replay remain open. Carrier qualification has repeatable source
 comparisons through landing/result/save/restart/reload, including a newly earned

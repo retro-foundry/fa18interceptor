@@ -85,7 +85,8 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     target_link_libraries(fa18_native_postflight_schedule_test PRIVATE fa18_native_runtime)
     add_executable(fa18_native_qualification_sequence_test ../../tools/native/native_qualification_sequence_test.c)
     target_link_libraries(fa18_native_qualification_sequence_test PRIVATE fa18_native_runtime)
-    add_executable(fa18_native_mission_success_test ../../tools/native/native_mission_success_test.c)
+    add_executable(fa18_native_mission_success_test ../../tools/native/native_mission_success_test.c
+        ../../tools/native/mission_pilot.c)
     target_link_libraries(fa18_native_mission_success_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_mission_three_success
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_success.py

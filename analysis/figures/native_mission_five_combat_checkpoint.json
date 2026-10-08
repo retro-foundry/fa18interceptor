@@ -1,0 +1,312 @@
+{
+  "date": "2026-10-08",
+  "checkpoint_parent": "08628194",
+  "scenario": "normal-key-mode-five-gun-combat-reset-diagnostic",
+  "mission_success_accepted": false,
+  "runtime_changed": false,
+  "native_flight_state_seeded": false,
+  "compared_input_stage_intervals": 26,
+  "matched_sampled_bodies": 57,
+  "failed_sampled_bodies": 1,
+  "observed_gun_hit_increments": 7,
+  "gun_hit_bodies": [
+    {
+      "weapon_hit": true,
+      "body": 8330,
+      "gun_before": 0,
+      "gun_after": 1,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2588
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2588
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 6
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 29
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8331,
+      "gun_before": 1,
+      "gun_after": 2,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2589
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2589
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 5
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 28
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8468,
+      "gun_before": 2,
+      "gun_after": 4,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2726
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2726
+        },
+        {
+          "slot": 8,
+          "flags_before": 20673,
+          "flags_after": 21185,
+          "lifetime": 32
+        },
+        {
+          "slot": 10,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 10
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8469,
+      "gun_before": 4,
+      "gun_after": 5,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2727
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2727
+        },
+        {
+          "slot": 8,
+          "flags_before": 21185,
+          "flags_after": 22209,
+          "lifetime": 15
+        },
+        {
+          "slot": 10,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 9
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8556,
+      "gun_before": 5,
+      "gun_after": 6,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2814
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2814
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 29377,
+          "lifetime": -71
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 3
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8557,
+      "gun_before": 6,
+      "gun_after": 7,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2815
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2815
+        },
+        {
+          "slot": 8,
+          "flags_before": 29377,
+          "flags_after": 30401,
+          "lifetime": 15
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 2
+        }
+      ]
+    }
+  ],
+  "radar_hits_before": 1,
+  "radar_hits_after": 1,
+  "failure": {
+    "capture": 57,
+    "body": 8705,
+    "iteration": 13164,
+    "stage": "C11830",
+    "before_tick": 20352,
+    "after_tick": 20352,
+    "saved_tick": 2810,
+    "owner_exit": false,
+    "phase_before": 4,
+    "phase_after": 4,
+    "contact_before": 128,
+    "contact_after": 128,
+    "confirmation_before": 0,
+    "confirmation_after": 0,
+    "selected": -1,
+    "view_record": 0,
+    "region_before": 200,
+    "region_after": 8,
+    "speed": 0,
+    "completions_before": 3,
+    "completions_after": 3,
+    "touchdown": false,
+    "landing_window": true,
+    "ready": false
+  },
+  "differences": [
+    {
+      "address": "C45A4F",
+      "source": "F7",
+      "native": "F8"
+    },
+    {
+      "address": "C45A51",
+      "source": "94",
+      "native": "95"
+    }
+  ],
+  "display_byte_differences": 0,
+  "failure_reproduced": true,
+  "fresh_fixture_same_keys_and_failed_before_after_ram": true,
+  "comparison_masks_changed": false,
+  "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+  "validation": {
+    "debug_fixture_build": true,
+    "release_fixture_build": true,
+    "release_playable_build": true,
+    "debug_ctest_passed": [
+      "fa18_native_mission_three_success",
+      "fa18_native_artifact_cleanup"
+    ],
+    "release_ctest_passed": [
+      "fa18_native_mission_three_success",
+      "fa18_native_frontend",
+      "fa18_native_artifact_policy",
+      "fa18_native_artifact_cleanup"
+    ],
+    "mode_three_input_stage_intervals": 36,
+    "mode_three_sampled_bodies": 184,
+    "mode_three_consecutive_landing_bodies": 96
+  },
+  "input_sha256": "ff31ee5694629634f4de456216c68f085b55c54275ab6ea8f462753582de0eb8",
+  "test_sha256": "ce3ebfd7c7363f08c5d1745872c685b55a72816767755a88f0e31bfc79fed032",
+  "playable_sha256": "35228ba51693afc342ae88e94728608c89cd4beb011c98c63e5df21c7c71c0bd",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "failed_local_captures": [
+    {
+      "path": "build/native-flight/mission-five-gun-source-check/failure/frame.body.57.before.dat.gz",
+      "raw_bytes": 1048576,
+      "raw_sha256": "4abaade45e8fd584063003ac0e4d9a32a213ada62aa2acbe047c3e42b28a1e18",
+      "compressed_bytes": 328526,
+      "compressed_sha256": "376fd2b7bf9ad47a291157cba9c3782fe7f1224fa416b4e24462314ca8521afd"
+    },
+    {
+      "path": "build/native-flight/mission-five-gun-source-check/failure/frame.body.57.after.dat.gz",
+      "raw_bytes": 1048576,
+      "raw_sha256": "5d68548d8f7879541a57c7b12018b207103c94b30d93562d83f767a1dbd1accc",
+      "compressed_bytes": 327340,
+      "compressed_sha256": "dfab0ecc0d64a1aca284d77287a644b8ec91c66d5a95b25385234c027d4bb5f2"
+    },
+    {
+      "path": "build/native-flight/mission-five-gun-source-check/failure/frame.body.57.source.dat.gz",
+      "raw_bytes": 1048576,
+      "raw_sha256": "cc66f2150098974eb5533ab0d4e32aaf16ace8790536a4dc26bc6dc626534997",
+      "compressed_bytes": 327530,
+      "compressed_sha256": "bf58a23127b8a87c6f4a818c6272530b061b054e21bf94e31b24ed0da3da790e"
+    }
+  ],
+  "next_work": [
+    "Trace C25754 normalisation arguments and C1D974 length through the connected native record owner; fix the source-backed reset mismatch.",
+    "Compare consecutive enemy expiry bodies and finish the normal-key mode-five objective and carrier return."
+  ]
+}

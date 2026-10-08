@@ -2,24 +2,19 @@
  * Only keyboard events are delivered; all flight and outcome RAM is read-only. */
 #include "native/frontend.h"
 #include "globals.h"
-#include <math.h>
+#include "mission_pilot.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-typedef struct {
-    double home[3], forward[3], previous_x, previous_y;
-    unsigned scene, phase, target, started, objective, target_press, completions, grade;
-    int rudder, pitch, roll, throttle;
-    FILE *keys;
-} Pilot;
 
 typedef struct {
     const char *prefix;
     uint8_t *before, *entry_before;
     unsigned body, captures, entries, first_tick, entry_tick, iteration, window;
     unsigned entry_keys[256], key_count;
+    unsigned mode;
     uint16_t saved_tick, contact, completions, speed;
+    uint16_t radar_hits, gun_hits;
     uint8_t phase, region, confirmation, entry_phase, previous_entry_phase;
     gaddr stage, previous_stage, entry_stage, previous_entry_stage;
     int begun, keep_entry, airborne, landed;
@@ -71,6 +66,8 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->region=rd_u8(CONTROL_RECORDS+4);run->speed=rd_u16(CONTROL_RECORDS+110);
         run->confirmation=rd_u8(PLAYER_FLAGS_F);
         run->completions=rd_u16(rd_u32(MODE_TABLE)+56);
+        run->radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
+        run->gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
         copy_ram(run->before,game);
         if(run->keep_entry) {
             capture_budget(run);
@@ -92,15 +89,32 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     const uint8_t phase=rd_u8(PLAYER_PHASE),region=rd_u8(CONTROL_RECORDS+4);
     const uint8_t confirmation=rd_u8(PLAYER_FLAGS_F);
     const uint16_t completions=rd_u16(rd_u32(MODE_TABLE)+56);
-    if(rd_u8(MODE_SELECT)==3 && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
+    const uint16_t radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
+    const uint16_t gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
+    if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
     const int touchdown=run->airborne && !run->landed && (contact&0x80);
     if(touchdown) {run->landed=1;run->window=96;}
-    const int ready=run->landed && (region&4) && !speed;
-    const int ready_before=run->landed && (run->region&4) && !run->speed;
-    const int keep=run->stage!=run->previous_stage || run->body%512==0 ||
+    /* C0A3EA admits carrier contact for pose three, runway contact otherwise. */
+    const unsigned region_mask=rd_u8(SCENE_POSE_ENTRY)==3?0xc0u:4u;
+    const int ready=run->landed && (region&region_mask) && !speed;
+    const int ready_before=run->landed && (run->region&region_mask) && !run->speed;
+    const int keep=run->stage!=run->previous_stage || run->body%(run->mode==3?512:1024)==0 ||
         run->window || phase!=run->phase || completions!=run->completions ||
         ((contact^run->contact)&0x80) || confirmation!=run->confirmation ||
-        (run->landed && ((region^run->region)&4)) || (ready && !ready_before);
+        (run->landed && ((region^run->region)&region_mask)) || (ready && !ready_before) ||
+        radar_hits!=run->radar_hits || gun_hits!=run->gun_hits;
+    if(radar_hits!=run->radar_hits || gun_hits!=run->gun_hits) {
+        printf("{\"weapon_hit\":true,\"body\":%u,\"gun_before\":%u,\"gun_after\":%u,"
+               "\"radar_before\":%u,\"radar_after\":%u,\"records\":[",
+            run->body,run->gun_hits,gun_hits,run->radar_hits,radar_hits);
+        for(unsigned slot=4;slot<=10;slot+=2) {
+            const gaddr record=CONTROL_RECORDS+512*slot;
+            const uint8_t *before=run->before+0x80000+record-0xc00000;
+            printf("%s{\"slot\":%u,\"flags_before\":%u,\"flags_after\":%u,\"lifetime\":%d}",
+                slot==4?"":",",slot,before[0]*256u+before[1],rd_u16(record),rd_s16(record+76));
+        }
+        puts("]}");
+    }
     if(keep) {
         capture_budget(run);
         snapshot(run,"body",run->captures,"before",run->before);
@@ -125,105 +139,20 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     run->previous_stage=run->stage;
 }
 
-static void key(Pilot *pilot,NativeFrontend *game,int code,int down) {
-    native_frontend_event(game,code,down);
-    fprintf(pilot->keys,"F %u K %d 0 0 %d\n",game->ticks,code,down);
-}
-static void held(Pilot *pilot,NativeFrontend *game,int *current,int code) {
-    if(*current==code) return;
-    if(*current) key(pilot,game,*current,0);
-    if(code) key(pilot,game,code,1);
-    *current=code;
-}
-static double angle_delta(double a,double b) {
-    double result=a-b;
-    while(result>3.141592653589793) result-=6.283185307179586;
-    while(result< -3.141592653589793) result+=6.283185307179586;
-    return result;
-}
-static void fly(Pilot *pilot,NativeFrontend *game) {
-    if(game->flight_timer_pending || game->scene_frames==pilot->scene) return;
-    pilot->scene=game->scene_frames;
-    if(!pilot->started && rd_u32(STAGE_CALLBACK)==0xc10dae) {
-        pilot->started=game->ticks;
-        pilot->completions=rd_u16(rd_u32(MODE_TABLE)+56);
-        pilot->grade=rd_u8(rd_u32(MODE_TABLE)+21);
-        for(unsigned i=0;i<3;++i) {
-            pilot->home[i]=(double)rd_s32(CONTROL_RECORDS+20+4*i)/256;
-            pilot->forward[i]=(double)rd_s16(CONTROL_RECORDS+150+6*i)/16384;
-        }
-    }
-    if(!pilot->started) return;
-    if(pilot->phase==2 && (rd_u8(CONTROL_RECORDS+3)&0x80)) pilot->phase=3;
-    if(pilot->phase==3) {
-        held(pilot,game,&pilot->pitch,0);held(pilot,game,&pilot->roll,0);
-        if(rd_u8(CONTROL_RECORDS+4)&4) {
-            held(pilot,game,&pilot->rudder,0);
-            held(pilot,game,&pilot->throttle,rd_u16(CONTROL_RECORDS+110)?45:0);
-            return;
-        }
-    }
-    if(!pilot->objective && rd_s16(SELECTED_RECORD)<0 && game->ticks>pilot->target_press+200) {
-        key(pilot,game,116,1);pilot->target_press=game->ticks;
-    }
-    if(game->ticks<pilot->started+650) {
-        held(pilot,game,&pilot->throttle,61);
-        held(pilot,game,&pilot->pitch,game->ticks>=pilot->started+550?274:0);
-        held(pilot,game,&pilot->rudder,0);
-        return;
-    }
-    double point[3],position[3],local[3]={0};
-    for(unsigned i=0;i<3;++i) position[i]=(double)rd_s32(CONTROL_RECORDS+20+4*i)/256;
-    if(!pilot->target) {
-        double nearest=1e30;
-        for(unsigned slot=1;slot<16;++slot) {
-            const gaddr record=CONTROL_RECORDS+512*slot;
-            if(!(rd_u8(record+1)&0x40) || (rd_u8(record+98)&0xf0)!=0x10) continue;
-            double distance=0;
-            for(unsigned i=0;i<3;++i) {
-                double delta=(double)rd_s32(record+20+4*i)/256-position[i];distance+=delta*delta;
-            }
-            if(distance<nearest) {nearest=distance;pilot->target=slot;}
-        }
-    }
-    if(rd_u8(PLAYER_PHASE)==0xff || rd_u8(PLAYER_PHASE)==1) {
-        if(!pilot->objective) printf("{\"objective\":true,\"tick\":%u,\"phase\":%u}\n",game->ticks,rd_u8(PLAYER_PHASE));
-        pilot->objective=1;if(!pilot->phase) pilot->phase=1;
-    }
-    if(!pilot->objective && pilot->target) {
-        const gaddr target=CONTROL_RECORDS+512*pilot->target;
-        for(unsigned i=0;i<3;++i) point[i]=(double)rd_s32(target+20+4*i)/256;
-        /* Takeoff safety is pilot input, not a modification to game physics. */
-        if(position[1]<pilot->home[1]+200) point[1]=position[1]+1000;
-    } else {
-        for(unsigned i=0;i<3;++i) point[i]=pilot->home[i]-pilot->forward[i]*12000;
-        point[1]=pilot->home[1]+700;
-        if(pilot->phase==1 && hypot(point[0]-position[0],point[2]-position[2])<1800) pilot->phase=2;
-        if(pilot->phase>=2) {
-            for(unsigned i=0;i<3;++i) point[i]=pilot->home[i]+pilot->forward[i]*2500;
-            point[1]=pilot->home[1];
-            held(pilot,game,&pilot->throttle,285); /* Source F4 level for approach. */
-        }
-    }
-    for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
-        local[i]+=(point[j]-position[j])*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
-    const double x=atan2(local[0],local[2]);
-    const double y=atan2(local[1],hypot(local[0],local[2]));
-    const double px=x+4*angle_delta(x,pilot->previous_x),py=y+4*angle_delta(y,pilot->previous_y);
-    pilot->previous_x=x;pilot->previous_y=y;
-    double bank=rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800;
-    if(bank>3.141592653589793) bank-=6.283185307179586;
-    held(pilot,game,&pilot->roll,pilot->phase==2 && fabs(x)<0.25?
-        (bank>0.025?275:bank< -0.025?276:0):0);
-    held(pilot,game,&pilot->rudder,px>0.006?44:px< -0.006?46:0);
-    held(pilot,game,&pilot->pitch,pilot->phase==3?0:py>0.006?274:py< -0.006?273:0);
-}
-
 int main(int argc,char **argv) {
-    /* ADF, fresh save, output keys, capture prefix. Mode three/aircraft two. */
-    if(argc!=5) return 1;
-    NativeFrontend *game=calloc(1,sizeof *game);Pilot pilot={0};Observation run={0};
+    /* Mode three is the acceptance gate; mode five is a combat diagnostic. */
+    if(argc!=5 && argc!=6) {
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5]\n",stderr);
+        return 1;
+    }
+    NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
+    if(argc==6) pilot.mode=(unsigned)atoi(argv[5]);
+    if(pilot.mode!=3 && pilot.mode!=5) {
+        fprintf(stderr,"Unsupported mission mode: %s (expected 3 or 5)\n",argv[5]);
+        goto done;
+    }
+    run.mode=pilot.mode;
     run.prefix=argv[4];run.before=malloc(0x100000);run.entry_before=malloc(0x100000);
     if(!game || !run.before || !run.entry_before) goto done;
     pilot.keys=fopen(argv[3],"w");
@@ -232,14 +161,18 @@ int main(int argc,char **argv) {
     if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
     game->observe_frame=observe;game->frame_context=&run;
     const unsigned times[]={1800,3000,4500,6500,8000,14500};
-    const int keys[]={32,54,282,13,13,50};
-    while(game->ticks<32000) {
-        for(unsigned i=0;i<6;++i) {
-            if(game->ticks==times[i]) key(&pilot,game,keys[i],1);
-            if(game->ticks==times[i]+2) key(&pilot,game,keys[i],0);
+    const int keys[]={32,54,282+(int)pilot.mode-3,13,13,50};
+    while(game->ticks<(pilot.mode==3?32000u:60000u)) {
+        for(unsigned i=0;i<(pilot.mode==3?6u:5u);++i) {
+            if(game->ticks==times[i]) mission_pilot_event(&pilot,game,keys[i],1);
+            if(game->ticks==times[i]+2) mission_pilot_event(&pilot,game,keys[i],0);
         }
-        if(pilot.target_press && game->ticks==pilot.target_press+2) key(&pilot,game,116,0);
-        fly(&pilot,game);native_frontend_tick(game);
+        if(pilot.target_press && game->ticks==pilot.target_press+2) mission_pilot_event(&pilot,game,116,0);
+        if(pilot.mode==5 && pilot.started) for(unsigned i=0;i<3;++i) {
+            if(game->ticks==pilot.started+700+20*i) mission_pilot_event(&pilot,game,13,1);
+            if(game->ticks==pilot.started+702+20*i) mission_pilot_event(&pilot,game,13,0);
+        }
+        mission_pilot_tick(&pilot,game);native_frontend_tick(game);
         if(game->postflight_resets) break;
         if(pilot.started && rd_u16(rd_u32(MODE_TABLE)+56)!=pilot.completions) break;
     }
@@ -247,10 +180,11 @@ int main(int argc,char **argv) {
     const unsigned resets=game->postflight_resets,region=rd_u8(CONTROL_RECORDS+4);
     const unsigned speed=rd_u16(CONTROL_RECORDS+110),contact=rd_u16(CONTROL_RECORDS+2);
     const gaddr log=rd_u32(MODE_TABLE),stage=rd_u32(STAGE_CALLBACK);
-    const unsigned completions=rd_u16(log+56),grade=rd_u8(log+21);
+    const unsigned completions=rd_u16(log+56),grade=rd_u8(log+18+pilot.mode);
+    const unsigned region_mask=rd_u8(SCENE_POSE_ENTRY)==3?0xc0u:4u;
     if(!run.airborne || !run.landed || !pilot.objective || !pilot.started || resets ||
-       mode!=3 || phase!=0xfc || !(contact&0x80) || !(region&4) || speed ||
-       completions!=pilot.completions+1 || rd_u8(log+6)!=3 || rd_u8(log+7)!=pilot.grade ||
+       mode!=pilot.mode || phase!=0xfc || !(contact&0x80) || !(region&region_mask) || speed ||
+       completions!=pilot.completions+1 || rd_u8(log+6)!=mode || rd_u8(log+7)!=pilot.grade ||
        grade!=(pilot.grade<3?pilot.grade+1:3)) {
         fprintf(stderr,"Mission incomplete: tick %u, mode %u, phase %u, completions %u -> %u, resets %u\n",
             ticks,mode,phase,pilot.completions,completions,resets);goto done;

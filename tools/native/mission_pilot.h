@@ -1,0 +1,16 @@
+/* Validation-only keyboard pilot; never linked into the playable runner. */
+#ifndef FA18_MISSION_PILOT_H
+#define FA18_MISSION_PILOT_H
+#include "native/frontend.h"
+#include <stdio.h>
+
+typedef struct {
+    double home[3], forward[3], previous_x, previous_y;
+    unsigned scene, phase, target, started, objective, target_press, completions, grade;
+    unsigned mode, trace;
+    int rudder, pitch, roll, throttle, fire;
+    FILE *keys;
+} MissionPilot;
+void mission_pilot_event(MissionPilot *pilot,NativeFrontend *game,int code,int down);
+void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game);
+#endif
