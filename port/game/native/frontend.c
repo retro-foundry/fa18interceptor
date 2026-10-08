@@ -37,6 +37,9 @@
 /* Keep the original immutable image hunk at $012988 outside display pages. */
 enum { PLANE_TABLE=0x1000,PLAYER_LOG=0x2000,PLANE_FIRST=0x34000,PLANE_SECOND=0x40000,PLANE_BYTES=40*200 };
 static int fail(char *error,size_t cap,const char *why) { if(cap) snprintf(error,cap,"Native startup: %s",why); return 0; }
+static const int8_t *sample_buffer(void *context,gaddr address,uint32_t bytes) {
+    return (const int8_t *)native_storage_span(context,address,bytes);
+}
 void native_frontend_clear_text(void) {
     memset(native_storage_range(PLANE_FIRST,4*PLANE_BYTES),0,4*PLANE_BYTES);
     memset(native_storage_range(PLANE_SECOND,4*PLANE_BYTES),0,4*PLANE_BYTES);
@@ -86,6 +89,7 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     AmigaOfs disk={0}; AmigaHunks hunks={0}; FA18MediaInfo media;
     uint8_t *exe=NULL,*bytes=NULL; size_t size=0; int ok=0;
     memset(game,0,sizeof *game); native_storage_bind(&game->storage);
+    game->audio.resolve=sample_buffer;game->audio.sample_context=&game->storage;
     native_model_retain_result(0);
     native_audio_bind(&game->audio);
     native_clock_set(0);

@@ -6,6 +6,8 @@
  * instruction fetch, chipset state or event clock exists in this backend. */
 typedef struct { uint8_t source[0x80000], buffers[0x80000]; } NativeStorage;
 void native_storage_bind(NativeStorage *storage);
+/* Explicit owner for retained host views; unaffected by later global binds. */
+uint8_t *native_storage_span(NativeStorage *storage,uint32_t address,size_t bytes);
 uint8_t *native_storage_range(uint32_t address,size_t bytes);
 uint8_t native_data_read8(uint32_t address);
 uint16_t native_data_read16(uint32_t address);

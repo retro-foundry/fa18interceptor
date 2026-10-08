@@ -21,8 +21,13 @@ static void service(NativeAudio *audio,unsigned channel) {
         audio->streams[channel].playing=0;
         return;
     }
+    if(!audio->resolve) {
+        fputs("native PCM request without a sample-buffer owner\n",stderr);abort();
+    }
+    NativePcmBuffer buffer={audio->resolve(audio->sample_context,sample.samples&~1u,sample.bytes),sample.bytes};
+    if(!buffer.data) { fputs("native PCM sample-buffer owner returned no bytes\n",stderr);abort(); }
     if(!audio->streams[channel].playing) {
-        audio->streams[channel].current=sample;
+        audio->streams[channel].current=buffer;
         audio->streams[channel].cursor=0;
         audio->streams[channel].phase=0;
         audio->streams[channel].playing=1;
@@ -31,7 +36,7 @@ static void service(NativeAudio *audio,unsigned channel) {
          * request rather than counting it as a played loop. */
         service(audio,channel);
         audio->streams[channel].period=(uint16_t)audio->channels[channel].period;
-    } else audio->streams[channel].next=sample;
+    } else audio->streams[channel].next=buffer;
 }
 
 static void publish(void *context, gaddr destination, VoiceOutput output) {
@@ -66,7 +71,7 @@ void native_audio_render(NativeAudio *audio,int16_t *stereo,unsigned frames,unsi
         int left=0,right=0;
         for(unsigned c=0;c<4;++c) {
             if(!audio->streams[c].playing) continue;
-            int value=(int8_t)rd_u8((audio->streams[c].current.samples&~1u)+audio->streams[c].cursor);
+            int value=audio->streams[c].current.data[audio->streams[c].cursor];
             unsigned volume=(uint16_t)audio->channels[c].volume;
             volume=volume&64u?64u:volume&63u;
             int output=value*(int)volume*2; /* Two full-scale channels fit s16. */

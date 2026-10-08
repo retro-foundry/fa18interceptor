@@ -2,16 +2,23 @@
 #define FA18_NATIVE_AUDIO_H
 #include "../audio.h"
 
+/* C500D8 supplies an address/length at a buffer request. Resolve that identity
+ * once into an owned host span; PCM byte playback does not use game addresses. */
+typedef const int8_t *(*NativePcmResolve)(void *context,gaddr address,uint32_t bytes);
+typedef struct { const int8_t *data; uint32_t bytes; } NativePcmBuffer;
+
 typedef struct {
     VoiceOutput channels[4];
     unsigned ticks, publications;
     struct {
-        VoiceSample current, next;
+        NativePcmBuffer current, next;
         uint32_t cursor;
         uint64_t phase;
         uint16_t period;
         int playing;
     } streams[4];
+    NativePcmResolve resolve;
+    void *sample_context;
     unsigned pending, sample_requests, sample_frames, nonzero_frames;
 } NativeAudio;
 

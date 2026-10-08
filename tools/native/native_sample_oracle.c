@@ -5,6 +5,16 @@
 #include "audio.h"
 #include "../../port/game/native/audio.c"
 
+typedef struct { FA18Machine *machine; unsigned resolutions; } SampleOwner;
+static const int8_t *sample_bytes(void *context,gaddr address,uint32_t bytes) {
+    SampleOwner *owner=context;
+    ++owner->resolutions;
+    if(address<0x80000u && bytes<=0x80000u-address)
+        return (const int8_t *)owner->machine->chip+address;
+    if(address>=0xc00000u && address<0xc80000u && bytes<=0xc80000u-address)
+        return (const int8_t *)owner->machine->slow+(address-0xc00000u);
+    return NULL;
+}
 static int source_request(unsigned channel) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;
     wr_u32(REG_A[7],0xc70000);REG_A[1]=rd_u32(VOICE_TABLE+4*channel);
@@ -67,7 +77,10 @@ int main(int argc,char **argv) {
         gaddr voice=rd_u32(SOUND_VOICES+4*SOUND_PROGRAMMED),samples=rd_u32(voice);
         wr_u32(voice+8,300u<<16);wr_u32(voice+12,21u<<16);wr_u32(voice+16,0xffffffff);
         wr_u32(VOICE_SLOTS+4*channel,voice);wr_u32(MASTER_VOLUME,0x3f0000);
-        NativeAudio whole={0},split={0};int16_t first[1940],second[1940];
+        SampleOwner whole_owner={m,0},split_owner={m,0};
+        NativeAudio whole={.resolve=sample_bytes,.sample_context=&whole_owner},
+            split={.resolve=sample_bytes,.sample_context=&split_owner};
+        int16_t first[1940],second[1940];
         memcpy(before,m,sizeof *m);native_audio_bind(&whole);native_audio_request_channel((int)channel);
         native_audio_render(&whole,first,970,48000);
         for(unsigned frame=0;frame<970;++frame) {
@@ -85,6 +98,7 @@ int main(int argc,char **argv) {
             native_audio_render(&split,second+2*frame,count,48000);frame+=count;
         }
         if(memcmp(first,second,sizeof first) || whole.sample_requests!=split.sample_requests ||
+           whole_owner.resolutions!=whole.sample_requests || split_owner.resolutions!=split.sample_requests ||
            whole.streams[channel].cursor!=split.streams[channel].cursor ||
            whole.streams[channel].phase!=split.streams[channel].phase ||
            memcmp(m->chip,expected,0x80000) || memcmp(m->slow,expected+0x80000,0x80000)) {

@@ -1,5 +1,12 @@
 # Native port runner
 
+PCM playback now retains frontend-owned host buffer spans rather than resolving
+an addressed game byte for every sample. Three ordinary-key audio/state/pixel
+replays and the full earned tour preserve their previous results. Original
+sample/voice comparisons and ownership checks pass. Voice/request state still
+uses the source arena; full typed-state migration and original recorded-audio
+fidelity remain open. See [PCM ownership evidence](../../analysis/native_pcm_buffer_ownership_milestone.md).
+
 A newly enlisted pilot now earns qualification and all six menu missions,
 including final aircraft objective, carrier wire landing, saved sixth result,
 menu return and cold Next Mission wrap. The submarine remains active at

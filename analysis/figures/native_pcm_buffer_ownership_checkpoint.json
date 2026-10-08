@@ -1,0 +1,470 @@
+{
+  "date": "2026-10-08",
+  "scope": "Owned host spans for current/next PCM byte playback; original sample/voice game state remains addressed",
+  "runtime_changed": true,
+  "comparison_masks_changed": false,
+  "new_decompilations": 0,
+  "baseline_commit": "adc019b1",
+  "baseline_runner_sha256": "567d0956f32f0587a057c4c37268bfce4956b57098192dc050b1fe40bed64571",
+  "pcm_test_runner_sha256": "e73541ba7564ab7573d9f35d61a55148c2c7635ed74156f20cc67a55ec1015fc",
+  "release_runner_sha256": "e73541ba7564ab7573d9f35d61a55148c2c7635ed74156f20cc67a55ec1015fc",
+  "debug_runner_sha256": "932c5e0095fac1ce47789d67a8625bf1afa457f535853e2423d53bf0454023a3",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "pcm_ram_pixels_stats_preserved": true,
+  "cases": {
+    "intro": {
+      "frames": 3100,
+      "input_sha256_lf": "609052ddb3a9e3bfd55ac1367eb91c252b01cb54814cef3fb189af9003a66952",
+      "initial_config_sha256": null,
+      "wav_sha256": "8074034871432712ef416653cdcc53030d621e3aa1b466382edd03812fd77d10",
+      "data_sha256": "0203c59dca843356e1596a4f68df7d50b1ee54aaf502978bb2d10dd039039ba3",
+      "ppm_sha256": "4db323fe48982af510b6589e020fe40f3c0099ed02b6827ed5a9f7da7e648fe8",
+      "saved_config_sha256": null,
+      "stats": {
+        "frame_owner_exit": false,
+        "frames": 3100,
+        "screen": "mode-intro",
+        "mode": 127,
+        "glyphs": 4652,
+        "record_updates": 1,
+        "scene_frames": 0,
+        "terrain_polygons": 0,
+        "model_calls": 0,
+        "hud_frames": 0,
+        "control_frames": 98,
+        "scene_selected": false,
+        "stage": "C0FECE",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 0,
+        "display_publications": 97,
+        "display_yields": 100,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 97,
+        "input_events": 1,
+        "input_queued": 0,
+        "update_iterations": 3057,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 4,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 3100,
+        "voice_publications": 2562,
+        "voice_levels": [
+          [
+            358,
+            6
+          ],
+          [
+            358,
+            6
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 6940,
+        "sample_frames": 2976000,
+        "nonzero_sample_frames": 1255816,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "audio_us": {
+        "mean": 16.029193548387095,
+        "p95": 46.0,
+        "maximum": 218.0
+      }
+    },
+    "freeflight": {
+      "frames": 6500,
+      "input_sha256_lf": "68b2e2cccec28635d691154cf0213ef94f1b11352fec9e17be888820a1177eb2",
+      "initial_config_sha256": null,
+      "wav_sha256": "6030f7a216891fbb4170e68a7e302edf392a1d46a26a0faba006e45674fcf666",
+      "data_sha256": "0dea827b3dc0f9f176c74749daddd6a1960bda507cb7996b9ca4a2a0e40133f8",
+      "ppm_sha256": "ba7825bba0b480098f39c1cfed0c9526ef90af09bb0bbddafe28974bdec71bf0",
+      "saved_config_sha256": null,
+      "stats": {
+        "frame_owner_exit": false,
+        "frames": 6500,
+        "screen": "scene-setup",
+        "mode": 1,
+        "glyphs": 5720,
+        "record_updates": 529,
+        "scene_frames": 527,
+        "terrain_polygons": 9060,
+        "model_calls": 8597,
+        "hud_frames": 527,
+        "control_frames": 2299,
+        "scene_selected": true,
+        "stage": "C10DAE",
+        "game_tick": 181,
+        "timer_pending": false,
+        "timer_yields": 1194,
+        "display_publications": 2298,
+        "display_yields": 2306,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 2298,
+        "input_events": 7,
+        "input_queued": 0,
+        "update_iterations": 5258,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 10,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 6500,
+        "voice_publications": 9746,
+        "voice_levels": [
+          [
+            764,
+            40
+          ],
+          [
+            766,
+            40
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 10023,
+        "sample_frames": 6240000,
+        "nonzero_sample_frames": 4429534,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "audio_us": {
+        "mean": 21.837215384615384,
+        "p95": 61.6,
+        "maximum": 721.9
+      }
+    },
+    "final-combat": {
+      "frames": 24200,
+      "input_sha256_lf": "f867382ded07413afa6ac64c42fc9ba32cbb1611450a736870e9f485c24a8c0d",
+      "initial_config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "wav_sha256": "89b41625c2d15a5c64be80ce7a4c849a01d4f105d44788ace60508f9fb6a1346",
+      "data_sha256": "76b46db74a304a024a9a43213083ee36819169714d70176dc651d9da9fcd6c94",
+      "ppm_sha256": "ee7be643cf9aa3ac470d14345d374c0230fc62ba31e1f88036726d236d4c592c",
+      "saved_config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "stats": {
+        "frame_owner_exit": false,
+        "frames": 24200,
+        "screen": "scene-setup",
+        "mode": 8,
+        "glyphs": 9836,
+        "record_updates": 4224,
+        "scene_frames": 4222,
+        "terrain_polygons": 24956,
+        "model_calls": 18234,
+        "hud_frames": 4222,
+        "control_frames": 9727,
+        "scene_selected": true,
+        "stage": "C10DAE",
+        "game_tick": 4067,
+        "timer_pending": false,
+        "timer_yields": 9966,
+        "display_publications": 9726,
+        "display_yields": 9734,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 9726,
+        "input_events": 6004,
+        "input_queued": 0,
+        "update_iterations": 14186,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 6009,
+        "host_replay_pending": 576,
+        "replay_started": false,
+        "voice_ticks": 24200,
+        "voice_publications": 50430,
+        "voice_levels": [
+          [
+            594,
+            54
+          ],
+          [
+            596,
+            54
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 54501,
+        "sample_frames": 23232000,
+        "nonzero_sample_frames": 21376129,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "audio_us": {
+        "mean": 41.83487190082645,
+        "p95": 120.8,
+        "maximum": 1164.6
+      }
+    }
+  },
+  "headless_audio_work": {
+    "before": {
+      "stats": {
+        "frame_owner_exit": false,
+        "frames": 24200,
+        "screen": "scene-setup",
+        "mode": 8,
+        "glyphs": 9836,
+        "record_updates": 4224,
+        "scene_frames": 4222,
+        "terrain_polygons": 24956,
+        "model_calls": 18234,
+        "hud_frames": 4222,
+        "control_frames": 9727,
+        "scene_selected": true,
+        "stage": "C10DAE",
+        "game_tick": 4067,
+        "timer_pending": false,
+        "timer_yields": 9966,
+        "display_publications": 9726,
+        "display_yields": 9734,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 9726,
+        "input_events": 6004,
+        "input_queued": 0,
+        "update_iterations": 14186,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 6009,
+        "host_replay_pending": 576,
+        "replay_started": false,
+        "voice_ticks": 24200,
+        "voice_publications": 50430,
+        "voice_levels": [
+          [
+            594,
+            54
+          ],
+          [
+            596,
+            54
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 54501,
+        "sample_frames": 23232000,
+        "nonzero_sample_frames": 21376129,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "audio_us": {
+        "mean": 15.1705,
+        "p95": 26.0,
+        "max": 1335.4
+      },
+      "scope": "One same-host headless final-combat run, no WAV or device; no whole-frame/visible performance acceptance"
+    },
+    "after": {
+      "stats": {
+        "frame_owner_exit": false,
+        "frames": 24200,
+        "screen": "scene-setup",
+        "mode": 8,
+        "glyphs": 9836,
+        "record_updates": 4224,
+        "scene_frames": 4222,
+        "terrain_polygons": 24956,
+        "model_calls": 18234,
+        "hud_frames": 4222,
+        "control_frames": 9727,
+        "scene_selected": true,
+        "stage": "C10DAE",
+        "game_tick": 4067,
+        "timer_pending": false,
+        "timer_yields": 9966,
+        "display_publications": 9726,
+        "display_yields": 9734,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 9726,
+        "input_events": 6004,
+        "input_queued": 0,
+        "update_iterations": 14186,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 6009,
+        "host_replay_pending": 576,
+        "replay_started": false,
+        "voice_ticks": 24200,
+        "voice_publications": 50430,
+        "voice_levels": [
+          [
+            594,
+            54
+          ],
+          [
+            596,
+            54
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 54501,
+        "sample_frames": 23232000,
+        "nonzero_sample_frames": 21376129,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "audio_us": {
+        "mean": 10.54798347107438,
+        "p95": 16.9,
+        "max": 357.5
+      },
+      "scope": "One same-host headless final-combat run, no WAV or device; no whole-frame/visible performance acceptance"
+    }
+  },
+  "release_debug_tour_agreement": true,
+  "tour_results": [
+    {
+      "stage": "enlist",
+      "config_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+      "host_events": 18
+    },
+    {
+      "stage": "qualification",
+      "config_sha256": "61f678ada0882b729f58d1f2cd5a05d9b9ca814755abb9ff1c3da3fb9329072e",
+      "host_events": 2
+    },
+    {
+      "stage": "mission-3",
+      "config_sha256": "7bc9e00e8691143313b0c9f3a1739a05799f9b7e49c5c5683bafbf7f0d5e77b4",
+      "host_events": 1652
+    },
+    {
+      "stage": "mission-4",
+      "config_sha256": "05b7b591bf543fd3bc41e7c293ff20c39ab0d79a55a01d0c67f913a23f173701",
+      "host_events": 3883
+    },
+    {
+      "stage": "mission-5",
+      "config_sha256": "714fb67ab9fff5ade21ccad123fe3acfd415c32486d0ddf941d65369de20c6d6",
+      "host_events": 2777
+    },
+    {
+      "stage": "mission-6",
+      "config_sha256": "b49b1d82890c39ad6bfc8422a516405150514408a00ddf6e789a88603cf70315",
+      "host_events": 870
+    },
+    {
+      "stage": "mission-7",
+      "config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "host_events": 1533
+    },
+    {
+      "stage": "mission-8",
+      "config_sha256": "3721534ce27505c9ace37b3c6f7f4b0170aab1d84cb2aad886d999fe4cadc632",
+      "host_events": 6585
+    },
+    {
+      "stage": "next-mission-wrap",
+      "config_sha256": "3721534ce27505c9ace37b3c6f7f4b0170aab1d84cb2aad886d999fe4cadc632",
+      "host_events": 4
+    }
+  ],
+  "component_scope": {
+    "original_sample_requests": 256,
+    "original_voice_sequences": 145,
+    "original_voice_callbacks": 7250,
+    "disk_pcm_partition_checks": 4,
+    "explicit_owned_storage_banks": 2
+  },
+  "validation": {
+    "Release": [
+      "fa18_native_pcm_buffers",
+      "fa18_native_samples",
+      "fa18_native_audio",
+      "fa18_native_frontend",
+      "fa18_native_frame_times",
+      "fa18_native_new_pilot_tour",
+      "fa18_native_artifact_policy",
+      "fa18_native_artifact_cleanup"
+    ],
+    "Debug": [
+      "fa18_native_pcm_buffers",
+      "fa18_native_samples",
+      "fa18_native_audio",
+      "fa18_native_new_pilot_tour",
+      "fa18_native_artifact_policy",
+      "fa18_native_artifact_cleanup"
+    ]
+  },
+  "independent_original_audio_fidelity_accepted": false,
+  "capture_pair_cap": 240,
+  "diagnostic_capture_budget_mib": 512,
+  "build_cache_budget_gib": 4
+}

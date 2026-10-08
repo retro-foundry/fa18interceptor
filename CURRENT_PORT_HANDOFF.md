@@ -1,5 +1,21 @@
 # Current playable port handoff
 
+Latest native PCM ownership (2026-10-08):
+
+Native PCM playback now retains typed current/next host spans owned by its
+frontend. Each original C500D8 request resolves its sample address/length once;
+byte playback no longer looks up global game-data addresses. Priming, chaining,
+clock, pitch, signed samples and stereo remain unchanged. Intro/selection,
+Free Flight and final combat preserve complete WAV, RAM, pixels and counters.
+The whole earned tour agrees with its preceding results in Release and Debug.
+Eight selected Release and six Debug checks pass; the canonical executable is
+refreshed. One headless combat measurement observes mean audio work 15.17 ->
+10.55 microseconds. This is mixer evidence on one host, not broader visible
+performance or original recorded-audio fidelity. Voice programs/request state
+and the rest of the typed-state migration remain open; the full goal stays
+active. Build cache is 2.07 GiB, with capture/pruning limits unchanged.
+See `analysis/native_pcm_buffer_ownership_milestone.md` and its checkpoint.
+
 Latest earned new-pilot tour (2026-10-08):
 
 A newly enlisted pilot now earns qualification and all six menu missions,

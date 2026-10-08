@@ -88,6 +88,12 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_executable(fa18_native_mission_success_test ../../tools/native/native_mission_success_test.c
         ../../tools/native/mission_pilot.c)
     target_link_libraries(fa18_native_mission_success_test PRIVATE fa18_native_runtime)
+    add_executable(fa18_native_pcm_buffer_test ../../tools/native/native_pcm_buffer_test.c)
+    target_link_libraries(fa18_native_pcm_buffer_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_pcm_buffers
+        COMMAND $<TARGET_FILE:fa18_native_pcm_buffer_test>
+                ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+                ${CMAKE_CURRENT_BINARY_DIR}/pcm-buffer-pilot)
     add_test(NAME fa18_native_mission_three_success
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_success.py
                 --test $<TARGET_FILE:fa18_native_mission_success_test>

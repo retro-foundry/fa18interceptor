@@ -3,17 +3,20 @@
 #include <stdlib.h>
 static NativeStorage *active;
 void native_storage_bind(NativeStorage *storage) { active=storage; }
-uint8_t *native_storage_range(uint32_t address,size_t bytes) {
+uint8_t *native_storage_span(NativeStorage *storage,uint32_t address,size_t bytes) {
     uint32_t offset=address;
     uint8_t *base=NULL;
-    if(active) {
-        if(address<sizeof active->buffers) base=active->buffers;
-        else if(address>=0xc00000u && address<0xc80000u) { base=active->source; offset-=0xc00000u; }
+    if(storage) {
+        if(address<sizeof storage->buffers) base=storage->buffers;
+        else if(address>=0xc00000u && address<0xc80000u) { base=storage->source; offset-=0xc00000u; }
     }
     if(!base || bytes>0x80000u-offset) {
         fprintf(stderr,"native data range invalid: %08X + %zu\n",address,bytes); abort();
     }
     return base+offset;
+}
+uint8_t *native_storage_range(uint32_t address,size_t bytes) {
+    return native_storage_span(active,address,bytes);
 }
 uint8_t native_data_read8(uint32_t a) { return *native_storage_range(a,1); }
 uint16_t native_data_read16(uint32_t a) { const uint8_t *p=native_storage_range(a,2); return (uint16_t)(p[0]<<8|p[1]); }
