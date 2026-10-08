@@ -69,10 +69,12 @@ hashes. Build-cache use is 2.00 GiB after pruning.
 
 Independent complete-flight parity, successful modes seven/eight, further play
 after the result menu, remaining caller contracts, typed state, audio and wider
-performance remain open. The user notes mission six may be impossible: verify
-its original target/lifetime/proximity rules and actual original outcomes before
-requiring a successful flight or identifying a port defect. Preserve source
-rules. Feasibility is unverified, and the complete-port goal remains active.
+performance remain open. The user's mission six concern refers to the final
+Carrier Sub mission (internal mode 8), not mode-six Search and Rescue. The
+later supplied historical account is recorded in
+`native_final_mission_completion_context.md`. Verify original counter/outcome/save
+execution and preserve source rules.
+Final-mission completion remains unverified; the complete-port goal stays active.
 
 Decompile any remaining instruction translation encountered on the active path,
 including required shared tails and child contracts. The comparison inventory's

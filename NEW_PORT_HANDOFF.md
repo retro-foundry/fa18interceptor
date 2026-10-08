@@ -27,10 +27,16 @@ The comparison-build inventory currently lists 75 already-readable source-only
 entries and 84 deferred translations; use the actual deferred list rather than
 treating 75 as a count of undecompiled functions. These counts do not establish
 native integration or whole-game completion.
-The user notes mission six may be impossible to complete. Investigate original
-`postflight_scheduler.c:mode_six` and actual original outcomes before requiring
-a successful flight or identifying a port defect. Preserve its target,
-lifetime, position and result admission rules; feasibility remains unverified.
+The user's mission six is the final Carrier Sub mission: F6 selects internal
+mode 8. Internal mode 6 is Search and Rescue; the earlier reference to
+`postflight_scheduler.c:mode_six` for this concern was a numbering error.
+The supplied [Wikipedia passage](https://en.wikipedia.org/wiki/F/A-18_Interceptor#Gameplay)
+reports that the submarine need not visibly explode and that destroying the
+patrolling aircraft may suffice. The original mode-eight dispatch uses
+`POSTFLIGHT_MODE_OTHER` -> `generic_mode`, comparing admitted/completed counters.
+It has no direct submarine-explosion test. Counter provenance and a successful
+ordinary-input final flight/save/menu return still require verification.
+Preserve original rules; see `analysis/native_final_mission_completion_context.md`.
 
 Earlier mission-four input diagnostic added `4-success` and `4-sequence`.
 These modes read flight state and send ordinary keys, firing earlier on the
@@ -123,7 +129,7 @@ crashes at tick 22,148, with completions unchanged at 3. The separate successful
 route is accepted above. Source `postflight_scheduler.c:record_mode` requires
 record four grounded, active and slow, with enemy records eight/ten inactive,
 before its countdown admits the objective. Successful modes seven/eight,
-original mission-six feasibility/outcomes,
+final Carrier Sub (internal mode-eight) completion verification,
 independent complete flights, further play after the accepted result menu,
 remaining caller contracts, typed state, audio and wider performance remain
 open; the complete-port goal stays active.

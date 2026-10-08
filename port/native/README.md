@@ -10,9 +10,11 @@ and menu. JSON distinguishes `host_replay_events`/`host_replay_pending` from
 game-input replay counters. The serial gate is `fa18_native_mission_4_sequence`.
 See `../../analysis/native_mission_four_sequence_milestone.md`. Gameplay and
 comparison masks are unchanged; independent complete flights remain open.
-The user notes mission six may be impossible; verify original feasibility
-before requiring a success or changing outcome rules. Decompile any remaining
-instruction translations encountered on the active path.
+The user's mission six is the Carrier Sub mission (F6/internal mode 8), while
+internal mode 6 is Search and Rescue. Verify original counter/outcome/save
+behavior against the user's historical context; see
+`../../analysis/native_final_mission_completion_context.md`. Decompile any
+remaining instruction translations encountered on the active path.
 
 Region flight now passes with an earned level-zero pilot log. Normal menu
 reset, qualification and mission-three success/save/menu return reproduce all

@@ -21,9 +21,12 @@ Passing RAM is removed and build-cache use remains 2.00 GiB. Evidence is in
 
 Latest user direction (2026-10-08): decompile any remaining instruction
 translation encountered on the active path rather than bypassing it. The user also
-notes mission six may be impossible to complete. Verify its feasibility against
-original conditions and execution before requiring successful coverage or
-calling a failed flight a port defect; preserve original outcome rules.
+clarifies that mission six means the final Carrier Sub mission (F6, internal
+mode 8), not internal mode 6/Search and Rescue. The supplied Wikipedia passage
+is historical context to verify against original outcome/save execution;
+preserve original rules.
+Mode 8 reaches the generic admitted/completed-counter scheduler, not `mode_six`.
+See `analysis/native_final_mission_completion_context.md` for sources and scope.
 The current comparison-build inventory distinguishes 75 already-readable
 source-only entries from 84 deferred instruction translations. This inventory
 does not measure whole-game completeness or native runtime integration.
