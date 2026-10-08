@@ -1,13 +1,24 @@
 # Active port source ownership
 
+Intercept Incoming Cruise Missile (F5/internal mode seven) now completes
+interception, carrier deck/wire landing, save, messages, Escape/menu and cold
+reload through ordinary keys. The serial `fa18_native_mission_7_sequence`
+compares 42 intervals and 171 bodies with original RAM/drawing; the playable
+replay agrees on saved bytes/menu. Availability comes from the normal-key
+rescue save, now reproduced by its existing gate. See
+[`../analysis/native_cruise_mission_sequence_milestone.md`](../analysis/native_cruise_mission_sequence_milestone.md).
+Gameplay and comparison masks are unchanged. All six menu missions have
+successful routes; a complete earned tour and independent whole flights remain
+open.
+
 Search and Rescue (F4/internal mode six) now completes its pod objective,
 carrier deck/wire landing, save, messages, Escape/menu and cold reload with
 ordinary keys. The serial `fa18_native_mission_6_sequence` compares 44 intervals
 and 193 bodies with original RAM/drawing; the playable replay agrees on saved
 bytes/menu. See [`../analysis/native_rescue_mission_sequence_milestone.md`](../analysis/native_rescue_mission_sequence_milestone.md).
 Existing readable game owners are unchanged. The initial pilot is the original
-ADF log; port-earned tour availability, successful internal mode seven and
-independent whole flights remain open.
+ADF log; port-earned tour availability and independent whole flights remain
+open; internal mode seven is accepted above.
 
 Latest final-mission correction: the native record scheduler preserves C230B0's
 returned selection word through C0A364/C0A3A6. Ordinary controls now complete

@@ -1,5 +1,26 @@
 # Current playable port handoff
 
+Latest cruise-missile sequence (2026-10-08): Intercept Incoming Cruise Missile
+(F5/internal mode seven) completes interception, carrier deck/wire landing,
+stop/save, messages, Escape/menu and cold reload through ordinary keys.
+All 42 input/stage intervals and 171 sampled bodies match original compared
+RAM/drawing, including 20 interception/expiry bodies, 80 consecutive landing/
+result bodies and one config write. Completions advance 4 -> 5 and grade 0 -> 1.
+The playable replay agrees on saved bytes/menu. The starting availability is
+earned by the normal-key rescue save from the original ADF pilot; the rescue
+gate now reproduces exact retained inputs and log bytes. It is not a complete
+tour from a newly enlisted pilot. Gameplay and comparison masks are unchanged;
+no new decompilation is claimed. See `fa18_native_mission_7_sequence`,
+`analysis/native_cruise_mission_sequence_milestone.md` and its checkpoint.
+All six menu missions now have successful native routes. Complete-tour/final
+availability, independent complete original flights, remaining caller contracts,
+typed state, audio and wider performance remain open; the full goal stays active.
+Passing RAM is temporary inside the unchanged 240-pair / 480 MiB capture cap.
+Nine selected Release checks and three Debug checks pass, with matching cruise
+inputs, saved bytes and sequence evidence. The playable runner delivers all
+1,533 cruise host events; its Release executable/link map remain valid and
+unchanged. Build-cache use remains 2.00 GiB after pruning.
+
 Latest rescue sequence (2026-10-08): Search and Rescue (F4/internal mode six)
 now completes pod deployment, original near-site objective, carrier deck/wire
 landing, stop, save, messages, Escape/menu and cold reload through ordinary
@@ -13,7 +34,7 @@ is claimed. The fresh pilot comes from the original ADF, rather than a
 port-earned complete tour. Captures remain inside the 240-pair / 480 MiB cap
 and passing RAM is removed. See the serial `fa18_native_mission_6_sequence`,
 `analysis/native_rescue_mission_sequence_milestone.md` and its checkpoint.
-Successful internal mode seven, earned tour availability and independent
+Internal mode seven is accepted above; earned tour availability and independent
 complete original flights remain open; the complete-port goal stays active.
 Eight selected Release checks and three Debug checks pass, including all five
 accepted mission sequences in Release and the frontend/link gate. The playable
@@ -35,9 +56,8 @@ countdowns and comparison masks are preserved; no new decompilation is claimed.
 The serial gate is `fa18_native_mission_8_sequence`; the earlier three-aircraft
 diagnostic remains accepted. See `analysis/native_final_mission_sequence_milestone.md`
 and its checkpoint. The saved-pilot availability fixture remains explicitly
-unearned, with no flight-state seeding. Earned availability, successful internal
-mode seven and independent complete-flight parity remain open; mode six is
-accepted above.
+unearned, with no flight-state seeding. Earned final availability and independent
+complete-flight parity remain open; modes six/seven are accepted above.
 Two identical flights partition capture storage inside the existing 480 MiB
 cap and remove passing RAM before collecting the next partition. The 4 GiB
 build-cache pruning hooks remain active.

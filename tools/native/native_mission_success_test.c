@@ -136,6 +136,20 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->formation_window=run->formation_length;
     const uint16_t infrared_hits=rd_u16(rd_u32(MODE_TABLE)+64);
     const int final_hit=run->mode==8 && infrared_hits!=run->infrared_hits;
+    const gaddr cruise=CONTROL_RECORDS+0x800u;
+    const uint8_t *cruise_before=run->before+0x80000+cruise-0xc00000;
+    const int cruise_hit=run->mode==7 && !(cruise_before[32]&2u) && (rd_u8(cruise+32)&2u);
+    if(run->mode==7 && (rd_u8(cruise+98)==0x15 || cruise_before[98]==0x15) &&
+       (cruise_hit || cruise_before[1]!=rd_u8(cruise+1) || phase!=run->phase)) {
+        printf("{\"cruise_event\":true,\"body\":%u,\"tick\":%u,\"phase_before\":%u,\"phase_after\":%u,"
+               "\"sequence_phase\":%u,\"kind\":%u,\"flags_before\":%u,\"flags_after\":%u,"
+               "\"cause_before\":%u,\"cause_after\":%u,\"intercept\":%s,\"cell\":[%u,%u],"
+               "\"timer\":%d,\"position_fixed\":[%d,%d,%d]}\n",
+            run->body,game->ticks,run->phase,phase,rd_u8(SEQUENCE_PHASE),rd_u8(cruise+98),
+            cruise_before[0]*256u+cruise_before[1],rd_u16(cruise),cruise_before[32],rd_u8(cruise+32),
+            cruise_hit?"true":"false",rd_u16(cruise+6),rd_u16(cruise+12),rd_s16(cruise+76),
+            rd_s32(cruise+20),rd_s32(cruise+24),rd_s32(cruise+28));
+    }
     const uint16_t pod_offset=run->mode==6?rd_u16(SCHEDULE_TARGET):0;
     const gaddr pod=CONTROL_RECORDS+pod_offset,site=CONTROL_RECORDS+0x1600u;
     const uint16_t pod_flags=pod_offset?rd_u16(pod):0;
@@ -155,13 +169,14 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
             rd_s32(pod+20),rd_s32(pod+24),rd_s32(pod+28),
             rd_s32(site+20),rd_s32(site+24),rd_s32(site+28));
     }
-    if((run->mode==4 || run->mode==5 || run->mode==8) && (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits || final_hit))
+    if((run->mode==4 || run->mode==5 || run->mode==7 || run->mode==8) &&
+       (radar_hits!=run->radar_hits || gun_hits!=run->gun_hits || final_hit || cruise_hit))
         run->combat_window=20; /* Include the original 15-tick expiry and its boundary. */
     if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
     const int touchdown=run->airborne && !run->landed && (contact&0x80);
-    /* Rescue touches the deck before crossing the wire; cover its later save
+    /* These approaches touch the deck before crossing the wire; cover the save
      * as well as the contact transition, inside the unchanged capture cap. */
-    if(touchdown) {run->landed=1;run->window=run->sequence?(run->mode==6?80u:64u):96u;}
+    if(touchdown) {run->landed=1;run->window=run->sequence?(run->mode==6 || run->mode==7?80u:64u):96u;}
     /* C0A3EA admits carrier contact for pose three, runway contact otherwise. */
     const unsigned region_mask=rd_u8(SCENE_POSE_ENTRY)==3?0xc0u:4u;
     const int ready=run->landed && (region&region_mask) && !speed;
@@ -245,7 +260,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 int main(int argc,char **argv) {
     /* Mission success gates and bounded normal-input diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|4-success|4-sequence|5|5-formation|5-mission|5-success|3-sequence|5-sequence|6-rescue|6-sequence|8-success|8-sequence]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|4-success|4-sequence|5|5-formation|5-mission|5-success|3-sequence|5-sequence|6-rescue|6-sequence|7-success|7-sequence|8-success|8-sequence]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
@@ -255,13 +270,14 @@ int main(int argc,char **argv) {
         pilot.final_flight=!strcmp(argv[5],"8-success") || !strcmp(argv[5],"8-sequence");
         pilot.final_sequence=!strcmp(argv[5],"8-sequence");
         pilot.rescue_flight=!strcmp(argv[5],"6-rescue") || !strcmp(argv[5],"6-sequence");
-        run.sequence=!strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence") || !strcmp(argv[5],"6-sequence") || !strcmp(argv[5],"8-sequence");
-        pilot.complete_flight=pilot.escort_flight || pilot.final_flight || pilot.rescue_flight || !strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
+        pilot.cruise_flight=!strcmp(argv[5],"7-success") || !strcmp(argv[5],"7-sequence");
+        run.sequence=!strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence") || !strcmp(argv[5],"6-sequence") || !strcmp(argv[5],"7-sequence") || !strcmp(argv[5],"8-sequence");
+        pilot.complete_flight=pilot.escort_flight || pilot.final_flight || pilot.rescue_flight || pilot.cruise_flight || !strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.force_return=!strcmp(argv[5],"5-formation") || !strcmp(argv[5],"5-mission") ||
             !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.mode=pilot.force_return?5u:(unsigned)atoi(argv[5]);
     }
-    if(pilot.mode!=3 && pilot.mode!=4 && pilot.mode!=5 && !(pilot.mode==6 && pilot.rescue_flight) && !(pilot.mode==8 && pilot.final_flight)) {
+    if(pilot.mode!=3 && pilot.mode!=4 && pilot.mode!=5 && !(pilot.mode==6 && pilot.rescue_flight) && !(pilot.mode==7 && pilot.cruise_flight) && !(pilot.mode==8 && pilot.final_flight)) {
         fprintf(stderr,"Unsupported mission mode: %s\n",argv[5]);
         goto done;
     }
@@ -280,8 +296,8 @@ int main(int argc,char **argv) {
     if(!pilot.keys) goto done;
     fputs("E9K_INPUT_V1\n",pilot.keys);
     if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
-    if(pilot.final_flight && !rd_u8(rd_u32(MODE_TABLE)+18+pilot.mode-1)) {
-        fputs("Final mission requires a saved pilot with original availability already loaded\n",stderr);goto done;
+    if((pilot.final_flight || pilot.cruise_flight) && !rd_u8(rd_u32(MODE_TABLE)+18+pilot.mode-1)) {
+        fputs("Mission requires a saved pilot with original availability already loaded\n",stderr);goto done;
     }
     game->observe_frame=observe;game->frame_context=&run;
     const unsigned times[]={1800,3000,4500,6500,8000,14500};
@@ -299,7 +315,7 @@ int main(int argc,char **argv) {
         if(pilot.rescue_drop_tick && game->ticks==pilot.rescue_drop_tick+6) mission_pilot_event(&pilot,game,102,1);
         if(pilot.rescue_drop_tick && game->ticks==pilot.rescue_drop_tick+12) mission_pilot_event(&pilot,game,102,0);
         if(pilot.rescue_drop_tick && game->ticks==pilot.rescue_drop_tick+14) mission_pilot_event(&pilot,game,304,0);
-        if((pilot.mode==4 || pilot.mode==5 || pilot.final_flight) && pilot.started) for(unsigned i=0;i<(pilot.complete_flight?2u:3u);++i) {
+        if((pilot.mode==4 || pilot.mode==5 || pilot.final_flight || pilot.cruise_flight) && pilot.started) for(unsigned i=0;i<(pilot.complete_flight?2u:3u);++i) {
             if(game->ticks==pilot.started+700+20*i) mission_pilot_event(&pilot,game,13,1);
             if(game->ticks==pilot.started+702+20*i) mission_pilot_event(&pilot,game,13,0);
         }
@@ -312,7 +328,7 @@ int main(int argc,char **argv) {
     const unsigned speed=rd_u16(CONTROL_RECORDS+110),contact=rd_u16(CONTROL_RECORDS+2);
     const gaddr log=rd_u32(MODE_TABLE),stage=rd_u32(STAGE_CALLBACK);
     const unsigned completions=rd_u16(log+56),grade=rd_u8(log+18+pilot.mode);
-    if(pilot.mode==4 || pilot.mode==5 || pilot.final_flight || pilot.rescue_flight)
+    if(pilot.mode==4 || pilot.mode==5 || pilot.final_flight || pilot.rescue_flight || pilot.cruise_flight)
         printf("{\"diagnostic_end\":true,\"mode\":%u,\"phase\":%u,\"tick\":%u,\"crash_resets\":%u,"
                "\"completions_before\":%u,\"completions_after\":%u,\"stage\":\"%06X\"}\n",
             mode,phase,ticks,resets,pilot.completions,completions,stage);

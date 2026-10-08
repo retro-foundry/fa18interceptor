@@ -1,13 +1,23 @@
 # The C port
 
+Intercept Incoming Cruise Missile (F5/internal mode seven) now completes its
+interception, carrier deck/wire landing, saved result, messages, Escape/menu and
+cold reload through ordinary keys. All 42 input/stage intervals and 171 bodies
+match sampled original RAM/drawing, with matching playable saved bytes/menu.
+Its availability is earned by the normal-key rescue save from the original ADF
+pilot; the rescue gate reproduces that retained input/log. See
+[`analysis/native_cruise_mission_sequence_milestone.md`](analysis/native_cruise_mission_sequence_milestone.md).
+All six menu missions have successful native routes. A complete earned tour,
+independent original whole flights and full-port acceptance remain open.
+
 Search and Rescue (F4/internal mode six) now completes the pod objective,
 carrier deck/wire landing, saved result, messages, Escape/menu and cold reload
 through ordinary keys. All 44 input/stage intervals and 193 bodies match the
 sampled original RAM/drawing; the playable replay agrees on saved bytes/menu.
 See [`analysis/native_rescue_mission_sequence_milestone.md`](analysis/native_rescue_mission_sequence_milestone.md).
 The initial pilot comes from the original ADF. Earned tour availability,
-successful internal mode seven and independent complete-flight parity remain
-open. Gameplay and comparison masks are unchanged.
+independent complete-flight parity remain open. Gameplay and comparison masks
+are unchanged; internal mode seven is accepted above.
 
 Latest direction (2026-10-06): `fa18_native` now runs the original intro,
 credits, pilot entry, menu selection, mission list and pilot-log controls using

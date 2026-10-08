@@ -1,5 +1,21 @@
 # Native port runner
 
+Intercept Incoming Cruise Missile (F5/internal mode seven) now completes
+interception, carrier deck/wire landing, stop/save, messages, Escape/menu and
+cold reload through ordinary keys. `fa18_native_mission_7_sequence` compares
+42 intervals and 171 bodies with original RAM/drawing, including 20 combat
+bodies, 80 consecutive landing/result bodies and one config write. The playable
+replay delivers all 1,533 host events and agrees on saved bytes/menu. Starting
+availability is earned by the normal-key rescue save; its existing gate now
+reproduces exact retained rescue inputs and log bytes. See
+`../../analysis/native_cruise_mission_sequence_milestone.md`. All six menu
+missions have successful routes. Complete-tour/final availability and
+independent whole flights remain open. Gameplay and comparison masks are
+unchanged; passing RAM remains temporary inside the existing 480 MiB cap.
+Debug/Release gates agree on cruise inputs, saved bytes and result sequence.
+Nine selected Release checks and three Debug checks pass; the playable Release
+executable is unchanged and build-cache use remains 2.00 GiB after pruning.
+
 Search and Rescue (F4/internal mode six) now completes pod deployment, near-site
 objective, carrier deck/wire landing, stop/save, messages, Escape/menu and cold
 reload through ordinary keys. `fa18_native_mission_6_sequence` compares 44
@@ -9,8 +25,8 @@ The playable replay delivers 870 host events and saves identical bytes. Both
 Debug and Release pass with matching inputs and saved results. The fresh pilot
 is the original ADF log; full port-earned tour availability remains open.
 See `../../analysis/native_rescue_mission_sequence_milestone.md`. Gameplay and
-comparison masks are unchanged; independent full flights and successful
-internal mode seven remain open. Passing RAM stays temporary inside the
+comparison masks are unchanged; independent full flights remain open and
+internal mode seven is accepted above. Passing RAM stays temporary inside the
 existing 240-pair / 480 MiB cap and pruning hooks remain active.
 
 The final Carrier Sub mission (F6/internal mode 8) now completes its aircraft
