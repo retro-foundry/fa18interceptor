@@ -1,13 +1,26 @@
 # Native port runner
 
+Modes three and five now complete result messages and Escape/menu restart
+after their normal-key successful flights. All 44/42 input-stage intervals
+and 162/169 sampled bodies match original compared RAM/drawing, with 64
+consecutive landing bodies per mode and one original config write. Completion
+count and grade stay at 4 and 2 through bootstrap, with all 78 log bytes
+unchanged and cold reload verified. The serial gates are
+`fa18_native_mission_3_sequence` and `fa18_native_mission_5_sequence`. Gameplay
+is unchanged. Debug/Release fixture builds and all five selected checks pass
+in each configuration. See `../../analysis/native_mission_result_sequence_milestone.md`.
+Other mission successes, independent complete flights, further play after
+this result menu and remaining state/audio/performance work remain open.
+
 Mode five now has normal-key formation, radar shoot-downs, objective, carrier
 arrestor landing, stopped-aircraft success, result save and cold reload
 acceptance. All 34 input/stage intervals and 155 sampled bodies match original
 compared RAM/drawing, including 59 consecutive touchdown-to-result bodies.
 Completion count advances 3 -> 4 and grade 1 -> 2 without a reset. The serial
 gate is `fa18_native_mission_five_success`. Gameplay is unchanged. See
-`../../analysis/native_mission_five_success_milestone.md`. Other mission
-successes, restart and independent complete flights remain open.
+`../../analysis/native_mission_five_success_milestone.md`. Result messages and
+restart have the sequence gate above; other successes and independent complete
+flights remain open.
 
 The optional validation pilot now completes formation and both radar kills,
 then reaches original mode-five objective phase FF at tick 19,304. All 29
@@ -57,7 +70,7 @@ and the playable executable are unchanged. Debug/Release builds and checks
 pass. Captures stay temporary and bounded. See
 `../../analysis/native_mission_three_success_milestone.md` for the source
 conditions, terrain landing followed by taxi, and comparison limits.
-Modes four through eight, mission restart and independent complete flights
+Successful modes four, six, seven and eight and independent complete flights
 remain open, alongside the remaining state/audio/performance work.
 
 Carrier qualification now has two repeatable source sequence gates: the
@@ -68,7 +81,7 @@ All 96 consecutive landing bodies and the actual result DOS Write are checked;
 the new pilot earns qualification 0 -> 1. Gameplay and the playable executable
 are unchanged. Debug/Release builds and six affected Release CTests pass.
 Passing RAM remains temporary and bounded. See
-`../../analysis/native_qualification_sequence_milestone.md`. Mission-list
+`../../analysis/native_qualification_sequence_milestone.md`. Other mission-list
 successes, independent full flights and remaining state/audio/performance work
 remain open; the complete-port goal stays active.
 

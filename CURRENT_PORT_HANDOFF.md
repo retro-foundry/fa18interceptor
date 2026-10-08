@@ -1,5 +1,21 @@
 # Current playable port handoff
 
+Latest mission result sequence acceptance (2026-10-08): modes three and five
+complete normal-key success, save, result messages, Escape, scene bootstrap,
+menu return and cold log reload. All 44/42 input-stage intervals and 162/169
+sampled bodies match original compared RAM/drawing, including 64 consecutive
+landing bodies per mode and one actual config write. Completion count stays
+4 and grade stays 2; all 78 saved bytes survive restart unchanged. The serial
+gates are `fa18_native_mission_3_sequence` and `fa18_native_mission_5_sequence`.
+Debug/Release fixture builds and all five selected checks pass in each
+configuration; consumed input and saved-result hashes agree.
+Gameplay and the playable executable are unchanged; passing RAM is temporary
+within the existing cap. See `analysis/native_mission_result_sequence_milestone.md`.
+This supersedes open result-message/restart claims for modes three and five
+below. Successful modes four/six/seven/eight, independent complete flights,
+further play after this result menu, remaining contracts, typed state, audio
+and wider performance remain open; the complete-port goal stays active.
+
 Latest mode-five mission success acceptance (2026-10-08): normal keys complete
 formation, both radar shoot-downs, the original objective, carrier arrestor
 landing, stopped-aircraft admission, result save and cold reload. All 34

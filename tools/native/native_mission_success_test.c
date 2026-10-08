@@ -13,12 +13,12 @@ typedef struct {
     unsigned body, captures, entries, first_tick, entry_tick, iteration, window, combat_window, formation_window;
     unsigned entry_keys[256], key_count;
     unsigned mode, formation_length;
-    int force_return;
+    int force_return, sequence, following_result, restarted;
     uint16_t saved_tick, contact, completions, speed;
     uint16_t radar_hits, gun_hits;
     int16_t proximity_gate;
     uint8_t enemy_expiries;
-    uint8_t phase, region, confirmation, entry_phase, previous_entry_phase;
+    uint8_t phase, region, confirmation, message_b, message_c, entry_phase, previous_entry_phase;
     gaddr stage, previous_stage, entry_stage, previous_entry_stage;
     int begun, keep_entry, airborne, landed;
 } Observation;
@@ -50,7 +50,9 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->entry_stage=rd_u32(STAGE_CALLBACK);run->entry_phase=rd_u8(PLAYER_PHASE);
         run->entry_tick=game->ticks;run->key_count=game->input_count;
         run->keep_entry=run->entry_stage!=run->previous_entry_stage ||
-            run->entry_phase!=run->previous_entry_phase || run->entry_stage==0xc110a4;
+            run->entry_phase!=run->previous_entry_phase || run->entry_stage==0xc110a4 ||
+            (run->following_result && (run->key_count ||
+             (run->entry_phase==0xfc && rd_u8(MESSAGE_STATE_B) && rd_u8(MESSAGE_STATE_C))));
         if(run->keep_entry) {
             copy_ram(run->entry_before,game);
             for(unsigned i=0;i<run->key_count;++i)
@@ -68,6 +70,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->phase=rd_u8(PLAYER_PHASE);run->contact=rd_u16(CONTROL_RECORDS+2);
         run->region=rd_u8(CONTROL_RECORDS+4);run->speed=rd_u16(CONTROL_RECORDS+110);
         run->confirmation=rd_u8(PLAYER_FLAGS_F);
+        run->message_b=rd_u8(MESSAGE_STATE_B);run->message_c=rd_u8(MESSAGE_STATE_C);
         run->completions=rd_u16(rd_u32(MODE_TABLE)+56);
         run->radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
         run->gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
@@ -85,6 +88,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                 run->entry_phase,run->phase,run->completions);
             run->keep_entry=0;
         }
+        if(run->following_result && run->entry_stage==0xc0f992 && run->stage==0xc0fcb4) run->restarted=1;
         return;
     }
     /* Menu ticks can publish BODY_END without entering a flight body. */
@@ -93,6 +97,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
     const uint16_t contact=rd_u16(CONTROL_RECORDS+2),speed=rd_u16(CONTROL_RECORDS+110);
     const uint8_t phase=rd_u8(PLAYER_PHASE),region=rd_u8(CONTROL_RECORDS+4);
     const uint8_t confirmation=rd_u8(PLAYER_FLAGS_F);
+    const uint8_t message_b=rd_u8(MESSAGE_STATE_B),message_c=rd_u8(MESSAGE_STATE_C);
     const uint16_t completions=rd_u16(rd_u32(MODE_TABLE)+56);
     const uint16_t radar_hits=rd_u16(rd_u32(MODE_TABLE)+68);
     const uint16_t gun_hits=rd_u16(rd_u32(MODE_TABLE)+60);
@@ -115,7 +120,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->combat_window=20; /* Include the original 15-tick expiry and its boundary. */
     if(rd_u8(MODE_SELECT)==run->mode && run->stage==0xc10dae && !(contact&0x80)) run->airborne=1;
     const int touchdown=run->airborne && !run->landed && (contact&0x80);
-    if(touchdown) {run->landed=1;run->window=96;}
+    if(touchdown) {run->landed=1;run->window=run->sequence?64u:96u;}
     /* C0A3EA admits carrier contact for pose three, runway contact otherwise. */
     const unsigned region_mask=rd_u8(SCENE_POSE_ENTRY)==3?0xc0u:4u;
     const int ready=run->landed && (region&region_mask) && !speed;
@@ -125,6 +130,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         ((contact^run->contact)&(run->force_return?0x84:0x80)) || confirmation!=run->confirmation ||
         (run->landed && ((region^run->region)&region_mask)) || (ready && !ready_before) ||
         radar_hits!=run->radar_hits || gun_hits!=run->gun_hits ||
+        (run->following_result && (message_b!=run->message_b || message_c!=run->message_c)) ||
         (run->mode==5 && enemy_expiries!=run->enemy_expiries);
     if(radar_hits!=run->radar_hits || gun_hits!=run->gun_hits) {
         printf("{\"weapon_hit\":true,\"body\":%u,\"gun_before\":%u,\"gun_after\":%u,"
@@ -152,7 +158,8 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                "\"completions_before\":%u,\"completions_after\":%u,"
                "\"touchdown\":%s,\"landing_window\":%s,\"ready\":%s,"
                "\"combat_window\":%s,\"enemy_expiries_before\":%u,\"enemy_expiries_after\":%u,"
-               "\"proximity_gate_before\":%d,\"proximity_gate_after\":%d,\"formation_window\":%s}\n",
+               "\"proximity_gate_before\":%d,\"proximity_gate_after\":%d,\"formation_window\":%s,"
+               "\"message_b_before\":%u,\"message_b_after\":%u,\"message_c_before\":%u,\"message_c_after\":%u}\n",
                run->captures++,run->body,run->iteration,run->stage,run->first_tick,game->ticks,
                run->saved_tick,boundary==NATIVE_FRAME_OWNER_EXIT?"true":"false",
                run->phase,phase,run->contact,contact,run->confirmation,confirmation,
@@ -160,7 +167,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
                run->completions,completions,touchdown?"true":"false",
                run->window?"true":"false",ready?"true":"false",run->combat_window?"true":"false",
                run->enemy_expiries,enemy_expiries,run->proximity_gate,proximity_gate,
-               run->formation_window?"true":"false");
+               run->formation_window?"true":"false",run->message_b,message_b,run->message_c,message_c);
     }
     if(run->window) --run->window;
     if(run->combat_window) --run->combat_window;
@@ -171,26 +178,27 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 int main(int argc,char **argv) {
     /* Modes three and five include success gates and bounded diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5|5-formation|5-mission|5-success]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|5|5-formation|5-mission|5-success|3-sequence|5-sequence]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
     if(argc==6) {
-        pilot.complete_flight=!strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success");
+        run.sequence=!strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence");
+        pilot.complete_flight=!strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.force_return=!strcmp(argv[5],"5-formation") || pilot.complete_flight;
         pilot.mode=pilot.force_return?5u:(unsigned)atoi(argv[5]);
     }
     if(pilot.mode!=3 && pilot.mode!=5) {
-        fprintf(stderr,"Unsupported mission mode: %s (expected 3, 5, 5-formation, 5-mission or 5-success)\n",argv[5]);
+        fprintf(stderr,"Unsupported mission mode: %s\n",argv[5]);
         goto done;
     }
     run.mode=pilot.mode;
     run.force_return=pilot.force_return;
-    /* Success coverage reserves the 96-body landing window inside the same
-     * 480 MiB cap. Longer formation windows have separate accepted gates. */
+    /* Sequence coverage reserves 64 landing bodies and the later callbacks
+     * inside the same 480 MiB cap; success gates retain their longer windows. */
     run.formation_length=pilot.complete_flight?16u:32u;
-    if(argc==6 && !strcmp(argv[5],"5-success")) run.formation_length=4;
+    if(argc==6 && (!strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence"))) run.formation_length=4;
     run.prefix=argv[4];run.before=malloc(0x100000);run.entry_before=malloc(0x100000);
     if(!game || !run.before || !run.entry_before) goto done;
     pilot.keys=fopen(argv[3],"w");
@@ -240,6 +248,46 @@ int main(int argc,char **argv) {
     int read=fread(saved,1,sizeof saved,file)==sizeof saved && fgetc(file)==EOF;
     if(fclose(file) || !read) goto done;
     for(unsigned i=0;i<sizeof saved;++i) if(saved[i]!=rd_u8(log+i)) goto done;
+    if(run.sequence) {
+        /* Flight is complete. Release the pilot's held keys through the same
+         * host input path before the result messages and C0F992 restart. */
+        const int held[]={pilot.rudder,pilot.pitch,pilot.roll,pilot.throttle,pilot.fire,pilot.hook};
+        unsigned restart_key_tick=0;int restart_key_released=0;
+        run.following_result=1;
+        for(unsigned i=0;i<sizeof held/sizeof held[0];++i)
+            if(held[i]) mission_pilot_event(&pilot,game,held[i],0);
+        while(game->ticks<ticks+5000u && !game->postflight_resets) {
+            /* Successful mission messages return FC to phase four, leaving
+             * the aircraft parked. Normal Escape (C1C224, phase one) requests
+             * the viewport/bootstrap restart through C0F5F8. */
+            if(!restart_key_tick && rd_u8(PLAYER_PHASE)==4 && rd_s8(MESSAGE_STATE_C)<0) {
+                restart_key_tick=game->ticks;
+                printf("{\"result_messages_finished\":true,\"tick\":%u,\"phase\":4,"
+                       "\"message_state\":%d,\"restart_key\":27}\n",game->ticks,rd_s8(MESSAGE_STATE_C));
+                mission_pilot_event(&pilot,game,27,1);
+            }
+            if(restart_key_tick && !restart_key_released && game->ticks>=restart_key_tick+2) {
+                mission_pilot_event(&pilot,game,27,0);restart_key_released=1;
+            }
+            native_frontend_tick(game);
+            if(run.restarted && rd_u32(STAGE_CALLBACK)==0xc0fcb4) break;
+        }
+        if(!run.restarted || !restart_key_released || game->postflight_resets || game->input_count ||
+           game->screen!=NATIVE_MENU || rd_u32(STAGE_CALLBACK)!=0xc0fcb4 ||
+           rd_u8(PLAYER_PHASE) || rd_u8(RECORDER_MODE)) {
+            fprintf(stderr,"Mission result restart incomplete: tick %u, stage %06X, phase %u\n",
+                game->ticks,rd_u32(STAGE_CALLBACK),rd_u8(PLAYER_PHASE));goto done;
+        }
+        for(unsigned i=0;i<sizeof saved;++i) if(saved[i]!=rd_u8(rd_u32(MODE_TABLE)+i)) {
+            fprintf(stderr,"Mission log changed during restart at byte %u\n",i);goto done;
+        }
+        printf("{\"sequence\":true,\"restarted\":%s,\"ticks\":%u,\"stage\":\"%06X\","
+               "\"mode\":%u,\"phase\":%u,\"queued\":%u,\"crash_resets\":%u,"
+               "\"completions\":%u,\"grade\":%u,\"menu\":true,\"log_unchanged\":true}\n",
+               run.restarted?"true":"false",game->ticks,rd_u32(STAGE_CALLBACK),rd_u8(MODE_SELECT),
+               rd_u8(PLAYER_PHASE),game->input_count,game->postflight_resets,
+               rd_u16(rd_u32(MODE_TABLE)+56),rd_u8(rd_u32(MODE_TABLE)+18+pilot.mode));
+    }
     native_frontend_close(game);
     if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {
         fprintf(stderr,"Reload failed: %s\n",error);goto done;

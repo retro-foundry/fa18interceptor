@@ -3,13 +3,30 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`39702e5d` on `coverage-accounting`.
+`70f89254` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `73f9bc00fd5db4f1f3a3e90097b902e0a4eb2b4d8ad07a24789626a3549189cd`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
-Latest mode-five mission success acceptance: normal keys complete formation,
+Latest mission result sequence acceptance: modes three and five complete
+normal-key success, saved result, result messages, Escape, scene bootstrap,
+menu return and cold log reload. All 44/42 input-stage intervals and 162/169
+sampled bodies match original compared RAM/drawing, with 64 consecutive
+landing bodies per mode and one actual config write. Completion count stays
+4 and grade stays 2 through restart; all 78 saved log bytes remain unchanged.
+The serial gates are `fa18_native_mission_3_sequence` and
+`fa18_native_mission_5_sequence`. Passing RAM remains temporary and bounded;
+Debug/Release fixture builds and all five selected checks pass in each
+configuration, with identical consumed input and saved-result hashes.
+Gameplay and the playable executable are unchanged. See
+`analysis/native_mission_result_sequence_milestone.md`. This resolves result
+message completion and Escape/menu restart for these two mission-list modes.
+Successful modes four/six/seven/eight, independent complete flights, further
+play after this result menu, remaining contracts, typed state, audio and wider
+performance remain open; the complete-port goal stays active.
+
+Earlier mode-five mission success acceptance: normal keys complete formation,
 both radar shoot-downs, the original objective, carrier arrestor landing,
 stopped-aircraft admission, result save and cold reload. All 34 input/stage
 intervals and 155 sampled bodies match original compared RAM/drawing, including
