@@ -1,13 +1,15 @@
 # Native port runner
 
-The mission validation pilot now lives in `tools/native/mission_pilot.c` and
-remains outside the playable runner. Its optional mode-five combat diagnostic
-records seven normal-key gun-hit increments, but the aircraft crashes and a
-two-byte original/native reset-vector mismatch remains unresolved. Mode five
-is not a mission-success CTest gate. Mode-three acceptance still passes in
-Debug and Release; gameplay and the playable executable are unchanged. See
-`../../analysis/native_mission_five_combat_checkpoint.md` for the failure,
-compressed local evidence and next work.
+The native record loop now preserves the original candidate scan's retained
+reference record through dynamics into the following sight calculation. All
+26 normal-key mode-five input/stage intervals and 58 sampled bodies match
+original compared RAM/drawing, including the formerly failing reset. This
+changes the playable runtime; rounding and comparison masks are unchanged.
+The aircraft still crashes, and mode-five mission success remains unaccepted.
+The expanded enemy-expiry renderer investigation is uncommitted and is not an
+accepted CTest gate. See
+`../../analysis/native_candidate_reference_reset_milestone.md` for ownership,
+validation scope and next work. The keyboard pilot remains validation-only.
 
 Mode three now has a normal-key objective/landing/taxi/result/save/reload gate.
 All 36 input/stage intervals and 184 sampled bodies match original compared

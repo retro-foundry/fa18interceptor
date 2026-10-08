@@ -1,5 +1,11 @@
 # Mode-five combat diagnostic checkpoint - 2026-10-08
 
+The reset diagnosis below is historical. The connected candidate-reference
+fix now passes all 58 sampled bodies, including this reset; see
+`native_candidate_reference_reset_milestone.md`. The saved failed case retains
+the old native after-state, so replaying that artifact still demonstrates the
+old mismatch. Mode-five mission success and expanded expiry parity remain open.
+
 Ordinary input reaches seven gun-hit increments across six observed frame
 bodies in mode five. All 26 input/stage intervals and the first 57 sampled
 bodies match original compared RAM/drawing, including those six hit bodies.

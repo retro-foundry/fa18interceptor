@@ -21,6 +21,10 @@ typedef struct CandidateUpdateWork {
     int pass;
     int had_probe;
     gaddr final_geometry_a4;
+    /* C27142/C27504 leave the last candidate/selected reference in A3.
+     * The following record's sight tail consumes it. Early paths retain
+     * the caller's incoming reference. */
+    gaddr reference_record;
 } CandidateUpdateWork;
 
 /* Complete memory-side path of $C26EBE; caller-visible register glue is

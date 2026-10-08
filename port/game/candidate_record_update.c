@@ -21,6 +21,7 @@ int update_candidate_record(CandidateUpdateWork *work,
         scan_offset = work->scan.candidate_offset;
         if (work->scan.route == CANDIDATE_SCAN_DONE) {
             select_candidate_level(&work->level);
+            work->reference_record = work->level.selected; /* C27504/C2750A */
             work->path = CANDIDATE_UPDATE_TERMINAL;
             if (work->level.route == CANDIDATE_LEVEL_STOP_ZERO) return 0;
             if (work->level.route == CANDIDATE_LEVEL_TERMINAL)
@@ -38,6 +39,7 @@ int update_candidate_record(CandidateUpdateWork *work,
             work->had_probe = 1;
             prepare_candidate_probe(&work->probe, work->scan.candidate_record,
                                     work->pass, relative_x, relative_y, relative_z);
+            work->reference_record = work->probe.candidate_record; /* C27142 */
             if (work->probe.below_first_height) {
                 int face_result = scan_candidate_lower_faces(&work->probe);
                 work->final_geometry_a4 = work->probe.face_list;

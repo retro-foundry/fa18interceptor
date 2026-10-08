@@ -66,10 +66,16 @@ int main(int argc,char **argv) {
     int in_matrix=0;
     const int trace_input_carry=getenv("FA18_FRAME_TRACE_INPUT_CARRY")!=NULL;
     const int trace_model=getenv("FA18_FRAME_TRACE_MODEL")!=NULL;
+    const int trace_normalise=getenv("FA18_FRAME_TRACE_NORMALISE")!=NULL;
     const char *trace_word=getenv("FA18_FRAME_TRACE_WORD");
     const gaddr watched_word=trace_word?(gaddr)strtoul(trace_word,NULL,16):0;
     gaddr carry_writer=0;
     for(step=0;step<10000000;++step) {
+        if(trace_normalise && (REG_PC==0xc2574a || REG_PC==0xc25754 || REG_PC==0xc25764 ||
+            REG_PC==0xc25784 || REG_PC==0xc257ae || REG_PC==0xc257c2))
+            fprintf(stderr,"normalise pc=%06X return=%06X frame=%06X record=%06X viewer=%06X d0=%08X d1=%08X d2=%08X d3=%08X d4=%08X vector=%08X/%08X/%08X\n",
+                REG_PC,rd_u32(REG_A[7]),REG_A[6],REG_A[1],REG_A[3],REG_D[0],REG_D[1],REG_D[2],REG_D[3],REG_D[4],
+                REG_D[5],REG_D[6],REG_D[7]);
         if(stage_only && REG_PC==0xc0efea && REG_A[7]==0xc7ff82) break;
         if(trace_model && (REG_PC==0xc1ee14 || REG_PC==0xc1f074 || REG_PC==0xc1f8de)) {
             const gaddr accumulator=(REG_PC==0xc1ee14?REG_A[7]-4:REG_A[6])-0x7c;
@@ -125,9 +131,13 @@ int main(int argc,char **argv) {
         const uint8_t previous_pixel=trace_pixel?rd_u8(pixel):0;
         const uint16_t previous_word=trace_word?rd_u16(watched_word):0;
         const uint32_t previous_carry=REG_D[4];
+        const gaddr previous_viewer=REG_A[3];
         REG_PPC=REG_PC;REG_IR=opcode;REG_PC+=2;
         m68ki_instruction_jump_table[opcode]();USE_CYCLES(CYC_INSTRUCTION[opcode]);
         m->cycle+=cycles-GET_CYCLES();
+        if(trace_normalise && REG_A[3]!=previous_viewer)
+            fprintf(stderr,"viewer %06X -> %06X at %06X record=%06X\n",
+                previous_viewer,REG_A[3],REG_PPC,REG_A[1]);
         if(trace_input_carry && REG_D[4]!=previous_carry) carry_writer=REG_PPC;
         if(trace_word && rd_u16(watched_word)!=previous_word)
             fprintf(stderr,"word %06X %04X -> %04X at %06X frame=%06X sp=%06X d0=%08X d1=%08X d2=%08X d3=%08X\n",

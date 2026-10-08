@@ -1,15 +1,15 @@
 # Current playable port handoff
 
-Latest diagnostic checkpoint (2026-10-08): the shared validation-only pilot
-reproduces seven normal-key mode-five gun-hit increments. All 26 input/stage
-intervals and the first 57 sampled bodies match original compared RAM/drawing;
-the 58th sampled body (reset body 8,705) differs by one in the low bytes of
-C45A4E/C45A50. The mismatch
-remains unresolved, the flight crashes and mode-five mission success remains
-unaccepted. The failed case is compressed locally with hashes; passing RAM is
-removed. Debug/Release builds and mode-three regressions pass. No gameplay or
-playable executable changes. See `analysis/native_mission_five_combat_checkpoint.md`
-and the restart summary in `NEW_PORT_HANDOFF.md` for the next investigation.
+Latest connected fix (2026-10-08): the original candidate scan's retained
+reference record now survives native dynamics and reaches the next record's
+sight calculation. All 26 normal-key mode-five input/stage intervals and
+58 sampled bodies match original compared RAM/drawing, including the formerly
+failing C11830 reset at tick 20,352. Rounding and masks are unchanged. The
+flight still crashes and completion count stays 3; mode-five mission success
+remains unaccepted. Debug/Release builds pass. The expanded expiry-window
+renderer investigation remains local and uncommitted; its 115-body check is
+not an accepted gate. See `analysis/native_candidate_reference_reset_milestone.md`
+and `NEW_PORT_HANDOFF.md` for evidence, executable hash and next work.
 
 Latest mission-list success acceptance (2026-10-08): mode three takes off,
 selects an aircraft with normal T input, reaches the original confirmation

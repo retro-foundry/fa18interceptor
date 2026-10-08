@@ -135,9 +135,10 @@ static FlightWorking root_control_child(void *context,enum FlightChild child,Fli
     }
     return w;
 }
-static void dynamics(gaddr record) {
+static gaddr dynamics(gaddr record,gaddr reference) {
     RecordDynamicsFrame frame={0};
     frame.work.record=record;
+    frame.work.scene=reference;
     const DynamicsHooks hooks={0};
     while(!advance_record_dynamics(&frame,&hooks)) {
         DynamicsState *w=&frame.work;
@@ -204,8 +205,9 @@ static void dynamics(gaddr record) {
             break;
         }
         case DY_MOTION_CANDIDATE: {
-            CandidateUpdateWork candidate={0};
+            CandidateUpdateWork candidate={.reference_record=w->scene};
             w->primary=(uint32_t)update_candidate_record(&candidate,(int32_t)w->x,(int32_t)w->y,(int32_t)w->z);
+            w->scene=candidate.reference_record;
             w->child_equal=w->primary==0; break;
         }
         case DY_RECORD_TIMER: {
@@ -228,6 +230,7 @@ static void dynamics(gaddr record) {
         default: fprintf(stderr,"native record dynamics child unavailable: %u\n",(unsigned)frame.child); abort();
         }
     }
+    return frame.work.scene;
 }
 typedef struct { uint32_t event; } RecordView;
 static uint32_t record_view_child(void *context,enum ViewCommandChild child) {
@@ -351,7 +354,8 @@ static int record_child(void *context,enum RecordUpdateChild child,unsigned slot
         loop->viewer=view.viewer;return 1;
     }
     case RECORD_UPDATE_ROOT_MARKER: classify_selected_record_range(record); return 0;
-    case RECORD_UPDATE_POSE: dynamics(record); return 0;
+    case RECORD_UPDATE_POSE:
+        loop->viewer=dynamics(record,loop->viewer); return 0;
     case RECORD_UPDATE_PRIMARY_READY: return select_flight_record_action(work,1,&actions);
     case RECORD_UPDATE_PRIMARY_PLACE: try_primary_flight_record_action(work,&actions);return 0;
     case RECORD_UPDATE_SECONDARY_READY: return select_flight_record_action(work,0,&actions);

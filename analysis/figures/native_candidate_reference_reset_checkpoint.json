@@ -1,0 +1,267 @@
+{
+  "scenario": "normal-key-mode-five-gun-hit-and-natural-reset",
+  "input_stage_intervals": 26,
+  "sampled_bodies": 58,
+  "gun_hit_bodies": [
+    {
+      "weapon_hit": true,
+      "body": 8330,
+      "gun_before": 0,
+      "gun_after": 1,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2588
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2588
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 6
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 29
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8331,
+      "gun_before": 1,
+      "gun_after": 2,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2589
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2589
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 5
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 28
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8468,
+      "gun_before": 2,
+      "gun_after": 4,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2726
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2726
+        },
+        {
+          "slot": 8,
+          "flags_before": 20673,
+          "flags_after": 21185,
+          "lifetime": 32
+        },
+        {
+          "slot": 10,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 10
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8469,
+      "gun_before": 4,
+      "gun_after": 5,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2727
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2727
+        },
+        {
+          "slot": 8,
+          "flags_before": 21185,
+          "flags_after": 22209,
+          "lifetime": 15
+        },
+        {
+          "slot": 10,
+          "flags_before": 28865,
+          "flags_after": 28865,
+          "lifetime": 9
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8556,
+      "gun_before": 5,
+      "gun_after": 6,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2814
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2814
+        },
+        {
+          "slot": 8,
+          "flags_before": 28865,
+          "flags_after": 29377,
+          "lifetime": -71
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 3
+        }
+      ]
+    },
+    {
+      "weapon_hit": true,
+      "body": 8557,
+      "gun_before": 6,
+      "gun_after": 7,
+      "radar_before": 1,
+      "radar_after": 1,
+      "records": [
+        {
+          "slot": 4,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2815
+        },
+        {
+          "slot": 6,
+          "flags_before": 20697,
+          "flags_after": 20697,
+          "lifetime": -2815
+        },
+        {
+          "slot": 8,
+          "flags_before": 29377,
+          "flags_after": 30401,
+          "lifetime": 15
+        },
+        {
+          "slot": 10,
+          "flags_before": 20673,
+          "flags_after": 20673,
+          "lifetime": 2
+        }
+      ]
+    }
+  ],
+  "reset": {
+    "capture": 57,
+    "body": 8705,
+    "iteration": 13164,
+    "stage": "C11830",
+    "before_tick": 20352,
+    "after_tick": 20352,
+    "saved_tick": 2810,
+    "owner_exit": false,
+    "phase_before": 4,
+    "phase_after": 4,
+    "contact_before": 128,
+    "contact_after": 128,
+    "confirmation_before": 0,
+    "confirmation_after": 0,
+    "selected": -1,
+    "view_record": 0,
+    "region_before": 200,
+    "region_after": 8,
+    "speed": 0,
+    "completions_before": 3,
+    "completions_after": 3,
+    "touchdown": false,
+    "landing_window": true,
+    "ready": false
+  },
+  "mission_success_accepted": false,
+  "native_flight_state_seeded": false,
+  "comparison_masks_changed": false,
+  "input_sha256": "ff31ee5694629634f4de456216c68f085b55c54275ab6ea8f462753582de0eb8",
+  "test_sha256": "0e808194905141e57660f32f5b3adcdc2d4445f144edbc044182ed914dd9fe55",
+  "reference_scope": "Complete original bodies from native before-states; independent full-flight parity remains open",
+  "playable_sha256": "17b4c75c091c928f0a1dba32ce7198d7931073823dc94183589ccf9d0d84c241",
+  "source_owners": [
+    "C26EBE/C27142/C27504 candidate reference output",
+    "native record dynamics and RECORD_UPDATE_POSE parent",
+    "C241A6/C2436A following record sight calculation"
+  ],
+  "pending_expiry_renderer_investigation_committed": false,
+  "builds_passed": [
+    "Debug playable and mission fixture",
+    "Release playable, mission fixture, mode-two fixture and record-expiry fixture"
+  ],
+  "debug_ctests_passed": [
+    "fa18_native_mission_three_success",
+    "fa18_native_artifact_cleanup"
+  ],
+  "release_ctests_passed": [
+    "fa18_native_mission_three_success",
+    "fa18_native_gun_kill",
+    "fa18_native_mode_five",
+    "fa18_native_record_expiry",
+    "fa18_native_frontend",
+    "fa18_native_artifact_policy",
+    "fa18_native_artifact_cleanup"
+  ]
+}

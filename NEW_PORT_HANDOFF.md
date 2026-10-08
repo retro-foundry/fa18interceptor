@@ -3,25 +3,30 @@
 ## Current restart summary — 2026-10-08
 
 The active playable runner is `fa18_native`. This checkpoint follows
-`08628194` on `coverage-accounting`.
+`d265112f` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
-`35228ba51693afc342ae88e94728608c89cd4beb011c98c63e5df21c7c71c0bd`.
+`17b4c75c091c928f0a1dba32ce7198d7931073823dc94183589ccf9d0d84c241`.
 Untracked `.vscode/` is user-owned and must remain untouched.
 
-Latest diagnostic checkpoint: the validation pilot is now shared in
-`tools/native/mission_pilot.c`; the existing mode-three acceptance remains the
-default. Optional mode five selects the gun through ordinary Return input and
-records seven gun-hit increments across six bodies. All 26 input/stage
-intervals and the first 57 sampled bodies match original compared RAM/drawing.
-The next body, reset C11830 at host tick 20,352, differs at C45A4F and C45A51:
-source $F7/$94, native $F8/$95. This mismatch remains unresolved. The flight
-crashes, completion count stays 3 and the diagnostic exits with failure;
-mode-five mission success is not accepted. Debug/Release builds and the
-mode-three regressions pass; the playable executable is unchanged. The single
-failed case is retained locally as compressed RAM with hashes, and passing
-captures are removed. See `analysis/native_mission_five_combat_checkpoint.md`
-and `analysis/figures/native_mission_five_combat_checkpoint.json`.
+Latest connected fix: candidate scanning now returns the source's retained
+reference record through the native dynamics parent and record loop. This
+fixes the mode-five C11830 reset's normalised vector without changing rounding.
+A fresh normal-key diagnostic matches all 26 input/stage intervals and all
+58 sampled bodies, including seven gun-hit increments and reset body 8,705.
+The flight still crashes at tick 20,352 and completion count stays 3; mode-five
+mission success remains unaccepted. Debug/Release playable and fixture builds
+pass. The playable executable above includes this fix. See
+`analysis/native_candidate_reference_reset_milestone.md` and
+`analysis/figures/native_candidate_reference_reset_checkpoint.json`.
+
+The expanded expiry-window investigation remains uncommitted. Its first
+renderer mismatch is body 8,561 (C4F6DE source $7586, native $FFFF). A local
+normalisation-output change reaches the following body, 8,562, where source
+$0002 differs from native $7586; the original depth sort's C1E4A6 saved output
+is the next producer to connect. The added 115-body combat/expiry check is not
+an accepted CTest gate. Preserve these pending changes and the compressed
+original reset evidence. Passing RAM is temporary and removed.
 
 Recent completed batches:
 
@@ -81,11 +86,14 @@ Recent completed batches:
   verify all seven streams and wrap. Mode six naturally loses three aircraft,
   exhausts resets, returns to the menu and relaunches Free Flight.
 
-Native Debug and Release playable and fixture builds pass. The latest four
-Release checks pass: mission-three success, frontend, artifact policy and
-artifact cleanup. Debug mission-three success and cleanup also pass.
-Evidence is in `analysis/figures/native_mission_three_success_checkpoint.json`;
-logs are `build/native-flight/mission-success-{debug,release}-ctest.log`.
+Native Debug and Release playable and mission-fixture builds pass for the
+candidate-reference fix. Debug mission-three success and cleanup pass. Seven
+Release checks pass: mission-three success, gun kill, mode five, record expiry,
+frontend, artifact policy and artifact cleanup. Evidence is in
+`analysis/figures/native_candidate_reference_reset_checkpoint.json`; the
+Release log is `build/native-flight/push-reset-validation/release-ctest.log`.
+The preceding mission-three checkpoint is
+`analysis/figures/native_mission_three_success_checkpoint.json`.
 
 The preceding six Release checks pass: both qualification sequences, ordinary qualification,
 ready-player postflight, frontend and artifact cleanup. Debug sequence checks
@@ -111,12 +119,13 @@ frontend and artifact cleanup. Evidence and executable hashes are in
 The comparisons execute original instructions from native before-states;
 they do not establish an independent complete original mission replay.
 
-Next work starts with the mode-five reset-vector mismatch: trace C25754's
-normalisation inputs and its C1D974 length child through the connected native
-record owner. Do not adjust rounding or comparison masks without source
-evidence. Then compare the combat expiry boundaries and finish the mode-five
-objective and carrier return using normal keys. Successful mission-list modes
-four through eight and independent full-flight comparison remain open.
+Next work starts with the mode-five enemy-expiry renderer output: connect the
+actual C1E328/C1E4A6 depth-sort result into early C1F074 model expiry, then
+compare all consecutive combat windows and both enemy-expiry increments.
+Do not invent a retained value or change comparison masks. Finish the mode-five
+objective and carrier return using normal keys after that comparison passes.
+Successful mission-list modes four through eight and independent full-flight
+comparison remain open.
 Mode three now has source comparisons through its
 objective, landing, taxi, stopped-aircraft result, save and reload. Its mission
 restart and independent full original replay remain open. Carrier qualification has repeatable source
