@@ -35,7 +35,12 @@ void native_scene_project(void) {
 static int polygon(void *context,gaddr end,int16_t origin) {
     NativeFrontend *game=context;
     (void)end; (void)origin;
-    if(clip_and_draw_polygon()) ++game->terrain_polygons;
+    /* C2AA9C -> C246A0 map clipping leaves an observable word in the later
+     * model frame. C1F074 expiry skips initialization and C1F8DE returns it.
+     * Publish the actual clipping owner's retained output, not reference RAM. */
+    uint16_t carry=rd_u16(0x4200-0x7c);
+    if(clip_and_draw_polygon_retained(&carry)) ++game->terrain_polygons;
+    wr_u16(0x4200-0x7c,carry);
     return 0; /* Packet walker expects submission success, including rejection. */
 }
 static int32_t followup(void *context,const FollowupPlacementEvent *call) {

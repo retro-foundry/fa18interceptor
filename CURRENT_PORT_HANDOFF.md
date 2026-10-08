@@ -1,19 +1,19 @@
 # Current playable port handoff
 
-Latest gun damage acceptance (2026-10-08): mode eight's first gun hit matches
-317 input/stage intervals and 181 sampled bodies against original compared
-RAM/drawing. The exact hit advances the gun log counter 0 -> 1 and enemy ten's
-damage 0 -> 1. A validation-only pilot emits ordinary keys; no gameplay source
-or playable executable changes. Debug/Release fixture builds and five affected
-CTests pass. See `analysis/native_gun_hit_milestone.md` and `NEW_PORT_HANDOFF.md`.
-The extended gun-kill diagnostic observes three native hits and inactivation
-but fails its continuous original comparison at body 6540: placement cache
-C4F6DE is original $00C2 versus native $FFFF, with identical drawing. It remains
-a manual diagnostic, not shoot-down acceptance. Trace the actual early-expiry
-model accumulator producer next. The failed case is retained locally; passing
-RAM remains temporary. Radar/infrared acceptance below remains valid. Full
-missions and the complete-port goal remain unfinished. This supersedes the
-older gun-approach checkpoint's open-first-hit claim.
+Latest gun shoot-down acceptance (2026-10-08): mode eight passes 317 input/stage
+intervals and 275 bodies against original compared RAM/drawing, including all
+101 consecutive bodies from first damage through expiry accounting and eventual
+inactivation. The connected map clip owner now preserves its actual output for
+early model expiry; C4F6DE's former $00C2/$FFFF mismatch is fixed. All 256 focused
+clipping residue/drawing cases match. No collision, damage, motion or timer rule
+changes. Debug/Release playable and fixture builds and eight affected CTests
+pass, including gun/radar/infrared shoot-downs. Gun kill is now a CTest gate.
+See `analysis/native_gun_kill_milestone.md` and `NEW_PORT_HANDOFF.md` for source
+ownership, hashes and limits. The resolved failure is compressed locally;
+passing RAM remains temporary and bounded. Successful complete missions and
+independent full-flight comparisons are next. Remaining callback contracts,
+typed state, audio and broader performance stay open; the complete-port goal
+remains active. This supersedes older open-gun and failed-probe claims below.
 
 Latest acceptance (2026-10-08): normal-input infrared shoot-down now passes
 impact, enemy expiry accounting and inactivation. All 634 consecutive bodies

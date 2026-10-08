@@ -1,5 +1,9 @@
 # Native gun damage hit checkpoint — 2026-10-08
 
+The subsequent `native_gun_kill_milestone.md` resolves the expiry mismatch
+recorded below and verifies all 101 consecutive bodies through inactivation.
+This document preserves the evidence available at the first-hit checkpoint.
+
 The normal-input mode-eight gun-hit check matches 317 input/stage intervals
 and 181 sampled bodies against original compared RAM/drawing, including the
 exact first damage body. The pilot-log gun counter advances from zero to one

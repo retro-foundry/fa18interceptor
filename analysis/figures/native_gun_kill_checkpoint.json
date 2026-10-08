@@ -1,0 +1,198 @@
+{
+  "scenario": "normal-input-mode-eight-gun-kill",
+  "native_flight_state_seeded": false,
+  "eligibility_fixture": "Saved pilot mission-availability byte only; reopened through normal loader",
+  "input_stage_intervals": 317,
+  "sampled_bodies": 275,
+  "test_sha256": "48a5b1569b350889d0ede20c8a0f47143404cb6326bd2a8701a418fcaefd9217",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "reference_scope": "Original instructions from native before-states, including three damage hits and continuous first-damage-to-inactivation bodies; not an independent complete mission",
+  "gun_damage_hit_verified": true,
+  "gun_shoot_down_verified": true,
+  "kill": {
+    "gun_kill": true,
+    "weapon": 3,
+    "started": true,
+    "accounted": true,
+    "inactive": true,
+    "record": 12875140,
+    "damage_to_inactivation_bodies": 101,
+    "enemy_expiries_before": 0,
+    "enemy_expiries_after": 1
+  },
+  "flight": {
+    "regions": true,
+    "spawned_records": 12288,
+    "zone_exits": 4096,
+    "npc_missiles": 10752,
+    "aircraft_moved": 5377,
+    "scene_frames": 3621,
+    "gun_hits": 3,
+    "infrared_hits": 0,
+    "radar_hits": 0
+  },
+  "date": "2026-10-08",
+  "native_runner_sha256": "35228ba51693afc342ae88e94728608c89cd4beb011c98c63e5df21c7c71c0bd",
+  "gun_damage_bodies": [
+    {
+      "capture": "hit",
+      "body_serial": 6534,
+      "before_tick": 14035,
+      "after_tick": 14037,
+      "weapon": 3,
+      "pilot_log": 8192,
+      "hits_before": 0,
+      "hits_after": 1,
+      "target": {
+        "slot": 10,
+        "flags_before": 28865,
+        "flags_after": 28865,
+        "kind_before": 18,
+        "kind_after": 18,
+        "damage_before": 0,
+        "damage_after": 1,
+        "lifetime_before": 5,
+        "lifetime_after": 4,
+        "phase_before": 4,
+        "phase_after": 4
+      }
+    },
+    {
+      "capture": "gun-hit-2",
+      "body_serial": 6535,
+      "before_tick": 14038,
+      "after_tick": 14041,
+      "weapon": 3,
+      "pilot_log": 8192,
+      "hits_before": 1,
+      "hits_after": 2,
+      "target": {
+        "slot": 10,
+        "flags_before": 28865,
+        "flags_after": 28865,
+        "kind_before": 18,
+        "kind_after": 18,
+        "damage_before": 1,
+        "damage_after": 2,
+        "lifetime_before": 4,
+        "lifetime_after": 3,
+        "phase_before": 4,
+        "phase_after": 4
+      }
+    },
+    {
+      "capture": "gun-hit-3",
+      "body_serial": 6536,
+      "before_tick": 14042,
+      "after_tick": 14044,
+      "weapon": 3,
+      "pilot_log": 8192,
+      "hits_before": 2,
+      "hits_after": 3,
+      "target": {
+        "slot": 10,
+        "flags_before": 28865,
+        "flags_after": 29377,
+        "kind_before": 18,
+        "kind_after": 18,
+        "damage_before": 2,
+        "damage_after": 2,
+        "lifetime_before": 3,
+        "lifetime_after": 2,
+        "phase_before": 4,
+        "phase_after": 4
+      }
+    }
+  ],
+  "selected_lifecycle_transitions": [
+    {
+      "kill_transition": true,
+      "body_serial": 6537,
+      "tick": 14047,
+      "record": 12875140,
+      "flags": 21697,
+      "lifetime": 15,
+      "enemy_expiries": 0
+    },
+    {
+      "kill_transition": true,
+      "body_serial": 6540,
+      "tick": 14058,
+      "record": 12875140,
+      "flags": 21697,
+      "lifetime": 12,
+      "enemy_expiries": 0
+    },
+    {
+      "kill_transition": true,
+      "body_serial": 6552,
+      "tick": 14098,
+      "record": 12875140,
+      "flags": 28865,
+      "lifetime": 0,
+      "enemy_expiries": 1
+    },
+    {
+      "kill_transition": true,
+      "body_serial": 6619,
+      "tick": 14324,
+      "record": 12875140,
+      "flags": 9409,
+      "lifetime": 15,
+      "enemy_expiries": 1
+    },
+    {
+      "kill_transition": true,
+      "body_serial": 6634,
+      "tick": 14375,
+      "record": 12875140,
+      "flags": 129,
+      "lifetime": 20,
+      "enemy_expiries": 1
+    }
+  ],
+  "continuous_original_body_interval": {
+    "first": 6534,
+    "last": 6634,
+    "count": 101,
+    "every_serial_required": true,
+    "gameplay_byte_differences": 0,
+    "display_byte_differences": 0
+  },
+  "resolved_cache_mismatch": {
+    "address": "C4F6DE",
+    "body_serial": 6540,
+    "original_word": "00C2",
+    "old_native_word": "FFFF",
+    "fixed_native_word": "00C2",
+    "producer": "Map polygon clipping C24956/C24970; alternate closing-boundary writer C249D6"
+  },
+  "focused_clipping_check": {
+    "cases": 256,
+    "return_address_words": 231,
+    "saved_coordinate_words": 20,
+    "unchanged_words": 5,
+    "drawing_matches": true,
+    "log": "build/native-flight/gun-expiry-raster-check.log"
+  },
+  "debug_playable_and_fixture_build": "pass",
+  "release_playable_and_fixture_build": "pass",
+  "release_ctest": {
+    "passed": 8,
+    "failed": 0,
+    "tests": [
+      "gun_hit",
+      "gun_kill",
+      "radar_kill",
+      "infrared_kill",
+      "raster",
+      "models",
+      "frontend",
+      "artifact_cleanup"
+    ]
+  },
+  "playable_runtime_changed": true,
+  "gameplay_rules_changed": false,
+  "comparison_exclusions_changed": false,
+  "full_port_complete": false
+}

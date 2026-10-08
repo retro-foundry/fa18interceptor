@@ -40,6 +40,7 @@ extern int64_t fa18_next_event;
 #define clip_crossing host_clip_crossing
 #define clip_stage host_clip_stage
 #define clip_and_draw_polygon host_clip_and_draw_polygon
+#define clip_and_draw_polygon_retained host_clip_and_draw_polygon_retained
 #define prepare_map_packet_depth host_prepare_map_packet_depth
 #define run_map_packet_pass host_run_map_packet_pass
 #define native_storage_range oracle_storage_range

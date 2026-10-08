@@ -18,6 +18,10 @@ typedef struct {
 typedef struct {
     gaddr next;
     uint16_t count;
+    /* Optional map-parent output: source clipping reuses the later model's
+     * uncleared accumulator. Other polygon callers do not share that slot. */
+    uint16_t *model_carry;
+    int first_stage;
 } ClipOutput;
 
 enum { CLIP_Y_POS, CLIP_Y_NEG, CLIP_X_POS, CLIP_X_NEG }; /* stage numbers */
@@ -39,5 +43,8 @@ ClipPoint clip_crossing(int stage, ClipPoint prev, ClipPoint cur);
  * away (or to two vertices), reaches z <= 0, or a closing edge is
  * degenerate (CLIP_ERRORS). */
 int clip_and_draw_polygon(void);
+/* C2AA9C's map child only: retain the C24956/C24970 return-address word,
+ * or the saved Y of C249D6 on the second closing boundary, for C1F8DE. */
+int clip_and_draw_polygon_retained(uint16_t *model_carry);
 
 #endif

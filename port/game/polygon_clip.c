@@ -84,6 +84,10 @@ ClipPoint clip_crossing(int stage, ClipPoint prev, ClipPoint cur) {
 static void pass(int stage, ClipPoint p, ClipOutput *out, int through_scratch) {
     if (through_scratch) put(CLIP_SCRATCH, p);
     if (stage < CLIP_X_NEG) {
+        if (out->model_carry && out->first_stage == CLIP_Y_NEG && stage == CLIP_X_POS)
+            /* C24956/C24970: this map nesting places the high return word
+             * in the later C1EE14 frame's -$7C. Both returns are in C2. */
+            *out->model_carry = (uint16_t)(0xc24974u >> 16);
         clip_stage(stage + 1, p, out);
     } else {
         put(out->next, p);
@@ -100,6 +104,10 @@ void clip_stage(int stage, ClipPoint cur, ClipOutput *out) {
     } else {
         ClipPoint prev = get(previous_of(stage));
         if (inside(stage, prev) != inside(stage, cur)) {
+            if (out->model_carry && out->first_stage == CLIP_X_POS && stage == CLIP_X_NEG)
+                /* C24BC4 closes Y_NEG directly into X_POS. Its X_NEG child
+                 * saves current Y at C249D6 in that same retained word. */
+                *out->model_carry = (uint16_t)cur.y;
             ClipPoint crossing = clip_crossing(stage, prev, cur);
             put(CLIP_SCRATCH, crossing);
             put(previous_of(stage), cur);
@@ -136,6 +144,7 @@ static int close_stages(ClipOutput *out) {
         crossing = clip_crossing(stage, first, last);
         if (stage < CLIP_X_NEG) {
             put(CLIP_SCRATCH, crossing);
+            out->first_stage = stage + 1;
             clip_stage(stage + 1, crossing, out);
         } else {
             put(out->next, crossing);
@@ -169,10 +178,10 @@ static int project(const ClipOutput *out) {
     return 1;
 }
 
-int clip_and_draw_polygon(void) {
+int clip_and_draw_polygon_retained(uint16_t *model_carry) {
     int16_t shift = rd_s16(CLIP_INPUT), count = rd_s16(CLIP_INPUT + 2), i;
     gaddr src = CLIP_INPUT + 4;
-    ClipOutput out;
+    ClipOutput out = {.model_carry=model_carry, .first_stage=CLIP_Y_NEG};
 
     if (count < 3) {
         wr_u16(ERROR_CODE, 0x1F);
@@ -216,3 +225,5 @@ int clip_and_draw_polygon(void) {
     wr_u16(LIST_COUNT, (uint16_t)(rd_u16(LIST_COUNT) + 1));
     return 1;
 }
+
+int clip_and_draw_polygon(void) { return clip_and_draw_polygon_retained(NULL); }

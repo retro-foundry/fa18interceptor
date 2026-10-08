@@ -37,6 +37,7 @@ extern int64_t fa18_next_event;
 #define clip_crossing host_clip_crossing
 #define clip_stage host_clip_stage
 #define clip_and_draw_polygon host_clip_and_draw_polygon
+#define clip_and_draw_polygon_retained host_clip_and_draw_polygon_retained
 #define prepare_map_packet_depth host_prepare_map_packet_depth
 #define run_map_packet_pass host_run_map_packet_pass
 #define native_storage_range oracle_storage_range
@@ -76,6 +77,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #undef clip_crossing
 #undef clip_stage
 #undef clip_and_draw_polygon
+#undef clip_and_draw_polygon_retained
 #undef prepare_map_packet_depth
 #undef run_map_packet_pass
 static uint8_t *file_bytes(const char *name,size_t *size) {
@@ -132,6 +134,43 @@ int main(int argc,char **argv) {
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) { fputs(error,stderr); return 1; }
     fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF,NULL); fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000); memcpy(m->slow,data+0x80000,0x80000);
+    unsigned retained_returns=0,retained_coordinates=0,retained_unchanged=0;
+    for(unsigned test=0;test<256;++test) {
+        memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+        wr_u16(CLIP_INPUT,0);wr_u16(CLIP_INPUT+2,3+test%4);
+        wr_u16(LINE_LAST_ROW,179);wr_u8(LINE_PLANES,15);wr_u16(CURRENT_COLOUR,6);
+        for(unsigned vertex=0;vertex<3+test%4;++vertex) {
+            wr_s16(CLIP_INPUT+4+6*vertex,(int16_t)(random_value(601)-300));
+            wr_s16(CLIP_INPUT+6+6*vertex,(int16_t)(random_value(601)-300));
+            wr_s16(CLIP_INPUT+8+6*vertex,(int16_t)(50+random_value(201)));
+        }
+        /* At this independent C246A0 call's frame C7FEFC, -$1E has the
+         * same overlap as the map parent's later model accumulator. */
+        const uint16_t incoming=(uint16_t)(0x5100+test);
+        wr_u16(0xc7fede,incoming);memcpy(before,m,sizeof *m);
+        uint16_t carry=incoming;host_clip_and_draw_polygon_retained(&carry);
+        memcpy(expected,m->chip,0x80000);memcpy(m,before,sizeof *m);
+        /* Run the reference last, as in the line/segment cases below. Its
+         * completed hardware clock must not be rewound by a machine copy. */
+        if(!original(0xc246a0)) {
+            fprintf(stderr,"Retained clipping case %u cycle=%llu DMA=%04X blits=%llu\n",test,
+                (unsigned long long)m->cycle,m->dmacon,(unsigned long long)m->blits);
+            return 1;
+        }
+        const uint16_t retained=rd_u16(0xc7fede);
+        if(carry!=retained || !compare(expected,test)) {
+            fprintf(stderr,"Map clipping retained case %u: source %04X native %04X\n",test,retained,carry);
+            return 1;
+        }
+        if(retained==incoming) ++retained_unchanged;
+        else if(retained==(0xc24974u>>16)) ++retained_returns;
+        else ++retained_coordinates;
+    }
+    if(!retained_returns || !retained_coordinates || !retained_unchanged) {
+        fputs("Map clipping carry fixtures missed a writer kind\n",stderr);return 1;
+    }
+    printf("256 map clipping retained words and drawing match: %u returns, %u coordinates, %u unchanged\n",
+        retained_returns,retained_coordinates,retained_unchanged);
     static const int16_t line_points[][4]={
         {10,20,29,20},{29,20,10,20},{20,30,250,55},{250,30,20,55},
         {100,10,100,170},{130,170,100,10},{20,220,40,230},{40,230,20,220},

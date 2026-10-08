@@ -117,7 +117,7 @@ void clip_stage_registers(int k, ClipCopy *c) {
 
 static int stage_glue(int k) {
     ClipCopy copy;
-    ClipOutput out;
+    ClipOutput out = {0};
     ClipPoint p;
 
     load_clip_copy(&copy);

@@ -65,9 +65,17 @@ int main(int argc,char **argv) {
     const gaddr matrix_record=trace_matrix?(gaddr)strtoul(trace_matrix,NULL,16):0;
     int in_matrix=0;
     const int trace_input_carry=getenv("FA18_FRAME_TRACE_INPUT_CARRY")!=NULL;
+    const int trace_model=getenv("FA18_FRAME_TRACE_MODEL")!=NULL;
+    const char *trace_word=getenv("FA18_FRAME_TRACE_WORD");
+    const gaddr watched_word=trace_word?(gaddr)strtoul(trace_word,NULL,16):0;
     gaddr carry_writer=0;
     for(step=0;step<10000000;++step) {
         if(stage_only && REG_PC==0xc0efea && REG_A[7]==0xc7ff82) break;
+        if(trace_model && (REG_PC==0xc1ee14 || REG_PC==0xc1f074 || REG_PC==0xc1f8de)) {
+            const gaddr accumulator=(REG_PC==0xc1ee14?REG_A[7]-4:REG_A[6])-0x7c;
+            fprintf(stderr,"model pc=%06X record=%04X sp=%06X frame=%06X accumulator=%06X value=%04X\n",
+                REG_PC,rd_u16(SCRIPT_RECORD),REG_A[7],REG_A[6],accumulator,rd_u16(accumulator));
+        }
         if(trace_input_carry && ((REG_PC>=0xc0f250 && REG_PC<=0xc0f28c && (REG_PC-0xc0f250)%6==0) ||
             REG_PC==0xc0f2f6 || REG_PC==0xc0f2fc ||
             REG_PC==0xc0f380 || REG_PC==0xc0f386 || REG_PC==0xc0f3ac ||
@@ -115,11 +123,16 @@ int main(int argc,char **argv) {
         }
         int cycles=GET_CYCLES();uint16_t opcode=rd_u16(REG_PC);
         const uint8_t previous_pixel=trace_pixel?rd_u8(pixel):0;
+        const uint16_t previous_word=trace_word?rd_u16(watched_word):0;
         const uint32_t previous_carry=REG_D[4];
         REG_PPC=REG_PC;REG_IR=opcode;REG_PC+=2;
         m68ki_instruction_jump_table[opcode]();USE_CYCLES(CYC_INSTRUCTION[opcode]);
         m->cycle+=cycles-GET_CYCLES();
         if(trace_input_carry && REG_D[4]!=previous_carry) carry_writer=REG_PPC;
+        if(trace_word && rd_u16(watched_word)!=previous_word)
+            fprintf(stderr,"word %06X %04X -> %04X at %06X frame=%06X sp=%06X d0=%08X d1=%08X d2=%08X d3=%08X\n",
+                watched_word,previous_word,rd_u16(watched_word),REG_PPC,REG_A[6],REG_A[7],
+                REG_D[0],REG_D[1],REG_D[2],REG_D[3]);
         if(trace_pixel && rd_u8(pixel)!=previous_pixel)
             fprintf(stderr,"pixel %06X %02X -> %02X at %06X d0=%08X d1=%08X destination=%06X colour=%u record=%06X\n",
                 pixel,previous_pixel,rd_u8(pixel),REG_PPC,REG_D[0],REG_D[1],REG_A[3],rd_u16(CURRENT_COLOUR),rd_u32(0xc18214));
