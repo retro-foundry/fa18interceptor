@@ -1,0 +1,189 @@
+{
+  "scenario": "normal-key-mode-five-formation-radar-kills-carrier-landing-result-messages-escape-menu-reload",
+  "mission_success_accepted": true,
+  "mission_sequence_accepted": true,
+  "mission_availability_earned": true,
+  "pilot_newly_enlisted": true,
+  "full_tour_earned": false,
+  "native_flight_state_seeded": false,
+  "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+  "eligibility_fixture": "tools/native/fixtures/stolen-mission-pilot.json",
+  "initial_pilot_source": "Normal menu reset, qualification, mission-three and mission-four success/save/menu",
+  "input_stage_intervals": 42,
+  "sampled_bodies": 174,
+  "consecutive_landing_bodies": 64,
+  "original_config_writes": 1,
+  "summary": {
+    "finished": true,
+    "airborne": true,
+    "landed": true,
+    "objective": true,
+    "mode": 5,
+    "stage": "C10DAE",
+    "phase": 252,
+    "ticks": 31643,
+    "target": 8,
+    "completions_before": 2,
+    "completions_after": 3,
+    "grade_before": 0,
+    "grade_after": 1,
+    "region": 192,
+    "speed": 0,
+    "crash_resets": 0,
+    "reloaded": true
+  },
+  "date": "2026-10-08",
+  "menu_key": "F3",
+  "internal_mode": 5,
+  "runtime_changed": false,
+  "new_decompilations": 0,
+  "comparison_masks_changed": false,
+  "capture_pairs": 216,
+  "capture_pair_cap": 240,
+  "capture_budget_mib": 480,
+  "build_cache_budget_gib": 4,
+  "build_cache_after_pruning_gib_rounded": 2.0,
+  "combat": {
+    "consecutive_formation_window_bodies": 8,
+    "consecutive_combat_window_bodies": 40,
+    "native_consecutive_proximity_decrements": 201,
+    "radar_hit_increments": 2,
+    "objective": {
+      "objective": true,
+      "tick": 18284,
+      "phase": 255
+    },
+    "hit_targets": [
+      8,
+      12
+    ],
+    "hit_bodies": [
+      8064,
+      8124
+    ],
+    "expiry_bodies": [
+      8079,
+      8139
+    ]
+  },
+  "touchdown": {
+    "body": 12266,
+    "before_tick": 31452,
+    "after_tick": 31454,
+    "stage": "C10DAE",
+    "phase_before": 1,
+    "phase_after": 1,
+    "contact_before": 32770,
+    "contact_after": 49282,
+    "region_before": 192,
+    "region_after": 192,
+    "speed": 2535
+  },
+  "finish": {
+    "body": 12315,
+    "before_tick": 31617,
+    "after_tick": 31620,
+    "stage": "C10DAE",
+    "phase_before": 1,
+    "phase_after": 252,
+    "contact_before": 50306,
+    "contact_after": 50306,
+    "region_before": 192,
+    "region_after": 192,
+    "speed": 0
+  },
+  "result": {
+    "entry": 33,
+    "iteration": 16783,
+    "stage": "C110A4",
+    "tick": 31643,
+    "keys": [],
+    "phase_before": 252,
+    "phase_after": 252,
+    "completions": 3,
+    "wrap_probe": false,
+    "modifier_before": 0,
+    "modifier_after": 0,
+    "control_before": 0,
+    "control_after": 0
+  },
+  "messages_finished": {
+    "result_messages_finished": true,
+    "tick": 32611,
+    "phase": 4,
+    "message_state": -128,
+    "restart_key": 27
+  },
+  "menu_return": {
+    "sequence": true,
+    "restarted": true,
+    "ticks": 32650,
+    "stage": "C0FCB4",
+    "mode": 5,
+    "phase": 0,
+    "queued": 0,
+    "crash_resets": 0,
+    "completions": 3,
+    "grade": 1,
+    "menu": true,
+    "log_unchanged": true
+  },
+  "canonical": {
+    "frames": 32650,
+    "screen": "menu",
+    "mode": 5,
+    "stage": "C0FCB4",
+    "host_replay_events": 2777,
+    "host_replay_pending": 0,
+    "input_queued": 0,
+    "postflight_resets": 0,
+    "cpu_emulation": false,
+    "chipset_emulation": false
+  },
+  "hashes": {
+    "input_sha256": "4f313036077ef33e93f6b8b2f81befbe81bddade99dd7d43ad769614acc0791f",
+    "saved_config_sha256": "714fb67ab9fff5ade21ccad123fe3acfd415c32486d0ddf941d65369de20c6d6",
+    "initial_config_sha256": "05b7b591bf543fd3bc41e7c293ff20c39ab0d79a55a01d0c67f913a23f173701",
+    "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2"
+  },
+  "retained_input_sha256_lf": "e0707b5a96236b89e62318958fe0baaef57a564c0dc09d0514cbaa7bf4fe7844",
+  "saved_config_hex": "0001000000050500000001d60000000000000000000101010000000000004e4557000000000000000000000000000000000000000000000300030000000000000000000400030000000300000000",
+  "configurations": {
+    "Release": {
+      "test_sha256": "90210d01c457ef03938a4f768358f82f384e7af094d8606e41de3b0c577579d4",
+      "runner_sha256": "567d0956f32f0587a057c4c37268bfce4956b57098192dc050b1fe40bed64571"
+    },
+    "Debug": {
+      "test_sha256": "9d74383f3dc88c926121c50ba27ef110d9badd0fa9dfe5f5ef8997389c7494e8",
+      "runner_sha256": "752102db54e15bfd14bf0aac508f93f79a86f3c5a86b57a08a5e12ce27151fc6"
+    }
+  },
+  "configurations_agree_on": [
+    "input_sha256",
+    "saved_config_sha256",
+    "initial_config_sha256",
+    "summary",
+    "combat_objective",
+    "touchdown",
+    "finish",
+    "result_sequence"
+  ],
+  "checks": {
+    "Release": [
+      "fa18_native_mission_5_new_pilot_sequence",
+      "fa18_native_mission_4_sequence",
+      "fa18_native_mission_5_sequence",
+      "fa18_native_region_pilot_progression",
+      "fa18_native_artifact_policy",
+      "fa18_native_frontend",
+      "fa18_native_artifact_cleanup"
+    ],
+    "Debug": [
+      "fa18_native_artifact_policy",
+      "fa18_native_mission_4_sequence",
+      "fa18_native_mission_5_sequence",
+      "fa18_native_mission_5_new_pilot_sequence",
+      "fa18_native_artifact_cleanup"
+    ]
+  }
+}

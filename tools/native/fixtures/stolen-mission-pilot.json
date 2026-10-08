@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "date": "2026-10-08",
+  "mission_mode": 5,
+  "availability_earned_by_mode": 4,
+  "mission_availability_earned": true,
+  "pilot_newly_enlisted": true,
+  "full_tour_earned": false,
+  "native_flight_state_seeded": false,
+  "provenance": "Normal menu reset/callsign NEW, carrier qualification, mission-three and mission-four success/save/menu",
+  "config_hex": "0001000000040400000001420000000000000000000101000000000000004e4557000000000000000000000000000000000000000000000200020000000000000000000200010000000100000000",
+  "config_sha256": "05b7b591bf543fd3bc41e7c293ff20c39ab0d79a55a01d0c67f913a23f173701",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "initial_fixture": "tools/native/fixtures/region-flight-pilot.json",
+  "initial_config_sha256": "7bc9e00e8691143313b0c9f3a1739a05799f9b7e49c5c5683bafbf7f0d5e77b4",
+  "mission_four_menu_tick": 28037,
+  "input_sha256_lf": {
+    "tools/native/fixtures/mission-four-sequence.e9k": "783d9391a8126375c4330f2e6952ee6c46e2b7d8eb4fc68e618f18603b9a8893"
+  },
+  "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open"
+}

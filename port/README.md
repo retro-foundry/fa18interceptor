@@ -1,5 +1,13 @@
 # Active port source ownership
 
+A newly enlisted pilot now completes qualification and the first three menu
+missions. The new serial `fa18_native_mission_5_new_pilot_sequence` starts from
+the actual mission-four save and verifies stolen-aircraft objective, carrier
+landing, save and menu against sampled original boundaries and playable output.
+Gameplay is unchanged. Later new-pilot progression and independent whole
+flights remain open; see
+[`../analysis/native_new_pilot_stolen_sequence_milestone.md`](../analysis/native_new_pilot_stolen_sequence_milestone.md).
+
 The active final success gate now uses availability earned by normal-key rescue
 and cruise saves from the original ADF pilot. It completes the aircraft
 objective, carrier landing, save, menu and cold wrap with matching sampled

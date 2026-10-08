@@ -1,5 +1,25 @@
 # Current playable port handoff
 
+Latest new-pilot tour extension (2026-10-08): Intercept Stolen Aircraft
+(F3/internal mode five) now completes from the actual mission-four save earned
+after enlistment, qualification and mission three. Ordinary keys complete
+formation, two radar kills, carrier wire landing, stop/save, messages/menu and
+cold reload. Completions advance 2 -> 3 and grade 0 -> 1. All 42 intervals and
+174 bodies match original compared RAM/drawing; the playable replay delivers
+2,777 host events and agrees on saved bytes/menu. The original level-zero
+encounter uses records 8/12; the older ADF-pilot gate retains records 8/10.
+Only validation input and retained evidence change. The serial gate is
+`fa18_native_mission_5_new_pilot_sequence`; see
+`analysis/native_new_pilot_stolen_sequence_milestone.md`. Mission four now
+reproduces exact retained inputs and the prerequisite log. This proves a new
+pilot through three menu missions; rescue/cruise/final new-pilot progression,
+independent original whole flights and full-port acceptance remain open.
+Passing RAM stays inside 216 pairs within the unchanged 480 MiB cap.
+Seven selected Release checks and five Debug checks pass. The new route's
+input/save hashes and objective/landing/menu evidence agree across builds.
+The historical mode-five input/save hashes remain unchanged. The playable
+Release executable is unchanged; pruned build-cache use remains 2.00 GiB.
+
 Latest earned final availability (2026-10-08): the active final success gate
 uses the actual pilot log saved after normal-key rescue and cruise flights.
 The original byte-25 grade guard admits F6/internal mode eight. Ordinary keys

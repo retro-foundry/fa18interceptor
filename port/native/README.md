@@ -1,5 +1,14 @@
 # Native port runner
 
+The new-pilot tour now covers qualification and the first three menu missions.
+The serial `fa18_native_mission_5_new_pilot_sequence` uses the actual mission-four
+save, then completes stolen-aircraft objective, carrier wire landing, save,
+messages/menu and cold reload. All 42 intervals/174 bodies match sampled
+original RAM/drawing and the playable replay agrees on saved bytes/menu.
+Only validation input/evidence changes. Later new-pilot progression and
+independent whole flights remain open. See
+`../../analysis/native_new_pilot_stolen_sequence_milestone.md`.
+
 Final mission availability is now earned by the ordinary rescue/cruise save
 chain from the original ADF pilot. The active final success gate loads that
 saved log and completes aircraft objective, carrier landing, save, menu and

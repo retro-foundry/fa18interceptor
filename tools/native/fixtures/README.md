@@ -55,3 +55,20 @@ does not establish a newly enlisted complete tour. The older
 `final-mission-eligible-pilot.json` remains explicitly unearned and serves the
 earlier three-aircraft diagnostic. See
 `analysis/native_final_mission_earned_availability_milestone.md`.
+
+## Newly enlisted stolen-aircraft route
+
+`mission-four-sequence.e9k` retains the 3,883 ordinary host events earning the
+mission-four save from `region-flight-pilot.json`, after normal enlistment,
+qualification and mission three. `stolen-mission-pilot.json` retains its actual
+78-byte log, admitting Intercept Stolen Aircraft through original grade byte 22.
+`stolen_pilot_fixture.load_stolen_pilot()` checks the prerequisite hash chain;
+the existing mission-four sequence gate reproduces exact input and saved bytes.
+
+`mission-five-new-pilot-sequence.e9k` retains 2,777 ordinary events completing
+the stolen-aircraft mission from that log. The serial
+`fa18_native_mission_5_new_pilot_sequence` compares original boundaries and the
+playable replay, requiring the same retained input and saved result/menu.
+The historical ADF-pilot route remains separately accepted. This proves a new
+pilot through the first three menu missions, not a complete six-mission tour.
+See `analysis/native_new_pilot_stolen_sequence_milestone.md`.

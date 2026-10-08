@@ -14,7 +14,7 @@ typedef struct {
     unsigned entry_keys[256], key_count;
     unsigned mode, formation_length;
     unsigned capture_from, capture_until;
-    int force_return, sequence, following_result, restarted, wrap_probe;
+    int force_return, sequence, following_result, restarted, wrap_probe, tour_flight;
     uint16_t saved_tick, contact, completions, speed;
     uint16_t radar_hits, gun_hits, infrared_hits, pod_offset, pod_flags;
     int16_t pod_lifetime;
@@ -217,7 +217,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         printf("{\"weapon_hit\":true,\"body\":%u,\"gun_before\":%u,\"gun_after\":%u,"
                "\"radar_before\":%u,\"radar_after\":%u,\"infrared_before\":%u,\"infrared_after\":%u,\"records\":[",
             run->body,run->gun_hits,gun_hits,run->radar_hits,radar_hits,run->infrared_hits,infrared_hits);
-        for(unsigned slot=4;slot<=(run->mode==8?14u:10u);slot+=2) {
+        for(unsigned slot=4;slot<=(run->mode==8?14u:run->tour_flight?12u:10u);slot+=2) {
             const gaddr record=CONTROL_RECORDS+512*slot;
             const uint8_t *before=run->before+0x80000+record-0xc00000;
             printf("%s{\"slot\":%u,\"flags_before\":%u,\"flags_after\":%u,\"lifetime\":%d}",
@@ -260,21 +260,22 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 int main(int argc,char **argv) {
     /* Mission success gates and bounded normal-input diagnostics. */
     if(argc!=5 && argc!=6) {
-        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|4-success|4-sequence|5|5-formation|5-mission|5-success|3-sequence|5-sequence|6-rescue|6-sequence|7-success|7-sequence|8-success|8-sequence]\n",stderr);
+        fputs("Usage: mission_success_test ADF fresh-save keys capture-prefix [3|4-mission|4-success|4-sequence|5|5-formation|5-mission|5-success|3-sequence|5-sequence|5-tour|6-rescue|6-sequence|7-success|7-sequence|8-success|8-sequence]\n",stderr);
         return 1;
     }
     NativeFrontend *game=calloc(1,sizeof *game);MissionPilot pilot={.mode=3};Observation run={0};
     char error[256];int result=1;
     if(argc==6) {
+        pilot.tour_flight=!strcmp(argv[5],"5-tour");
         pilot.escort_flight=!strcmp(argv[5],"4-success") || !strcmp(argv[5],"4-sequence");
         pilot.final_flight=!strcmp(argv[5],"8-success") || !strcmp(argv[5],"8-sequence");
         pilot.final_sequence=!strcmp(argv[5],"8-sequence");
         pilot.rescue_flight=!strcmp(argv[5],"6-rescue") || !strcmp(argv[5],"6-sequence");
         pilot.cruise_flight=!strcmp(argv[5],"7-success") || !strcmp(argv[5],"7-sequence");
-        run.sequence=!strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence") || !strcmp(argv[5],"6-sequence") || !strcmp(argv[5],"7-sequence") || !strcmp(argv[5],"8-sequence");
-        pilot.complete_flight=pilot.escort_flight || pilot.final_flight || pilot.rescue_flight || pilot.cruise_flight || !strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
+        run.sequence=pilot.tour_flight || !strcmp(argv[5],"3-sequence") || !strcmp(argv[5],"5-sequence") || !strcmp(argv[5],"4-sequence") || !strcmp(argv[5],"6-sequence") || !strcmp(argv[5],"7-sequence") || !strcmp(argv[5],"8-sequence");
+        pilot.complete_flight=pilot.tour_flight || pilot.escort_flight || pilot.final_flight || pilot.rescue_flight || pilot.cruise_flight || !strcmp(argv[5],"4-mission") || !strcmp(argv[5],"5-mission") || !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
         pilot.force_return=!strcmp(argv[5],"5-formation") || !strcmp(argv[5],"5-mission") ||
-            !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence");
+            !strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence") || pilot.tour_flight;
         pilot.mode=pilot.force_return?5u:(unsigned)atoi(argv[5]);
     }
     if(pilot.mode!=3 && pilot.mode!=4 && pilot.mode!=5 && !(pilot.mode==6 && pilot.rescue_flight) && !(pilot.mode==7 && pilot.cruise_flight) && !(pilot.mode==8 && pilot.final_flight)) {
@@ -282,6 +283,7 @@ int main(int argc,char **argv) {
         goto done;
     }
     run.mode=pilot.mode;
+    run.tour_flight=pilot.tour_flight;
     run.force_return=pilot.force_return;
     const char *capture_from=getenv("FA18_MISSION_CAPTURE_FROM_TICK"),*capture_until=getenv("FA18_MISSION_CAPTURE_UNTIL_TICK");
     run.capture_from=capture_from?(unsigned)strtoul(capture_from,NULL,10):0;
@@ -289,7 +291,7 @@ int main(int argc,char **argv) {
     /* Sequence coverage reserves 64 landing bodies and the later callbacks
      * inside the same 480 MiB cap; success gates retain their longer windows. */
     run.formation_length=pilot.complete_flight?16u:32u;
-    if(argc==6 && (!strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence"))) run.formation_length=4;
+    if(argc==6 && (!strcmp(argv[5],"5-success") || !strcmp(argv[5],"5-sequence") || pilot.tour_flight)) run.formation_length=4;
     run.prefix=argv[4];run.before=malloc(0x100000);run.entry_before=malloc(0x100000);
     if(!game || !run.before || !run.entry_before) goto done;
     pilot.keys=fopen(argv[3],"w");

@@ -1,5 +1,12 @@
 # The C port
 
+The new-pilot tour now covers qualification and the first three menu missions.
+Intercept Stolen Aircraft (F3/internal mode five) uses the actual mission-four
+save and completes objective, carrier landing, save and menu return with
+matching sampled original comparisons and playable saved bytes. Gameplay is
+unchanged; later new-pilot progression and independent whole flights remain open.
+See [`analysis/native_new_pilot_stolen_sequence_milestone.md`](analysis/native_new_pilot_stolen_sequence_milestone.md).
+
 Final mission availability is now earned by the ordinary rescue/cruise save
 chain from the original ADF pilot. The final gate uses the actual saved log and
 completes aircraft objective, carrier landing, save, menu and cold wrap with

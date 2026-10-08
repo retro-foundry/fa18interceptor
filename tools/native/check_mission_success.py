@@ -16,6 +16,7 @@ from mission_source_comparison import compare_mission_boundaries
 from region_pilot_fixture import load_region_pilot
 from cruise_pilot_fixture import load_cruise_pilot
 from final_pilot_fixture import load_final_pilot
+from stolen_pilot_fixture import load_stolen_pilot
 from final_sequence_capture import collect_final_sequence
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -72,25 +73,30 @@ def main():
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe',
                         help='Playable runner for escort, rescue, cruise and final-mission replays')
     parser.add_argument('--sequence', action='store_true', help='Finish result messages and press Escape to restart into the menu')
+    parser.add_argument('--new-pilot', action='store_true', help='Run mode-five sequence from the newly enlisted, mission-four-earned log')
     parser.add_argument('--timeout', type=float, default=60,
                         help='Native fixture deadline in seconds (Debug capture runs can require longer)')
     args = parser.parse_args()
     if args.timeout <= 0:
         parser.error('--timeout must be positive')
+    if args.new_pilot and (args.mode != 5 or not args.sequence):
+        parser.error('--new-pilot requires --mode 5 --sequence')
     if args.mode in (6, 7, 8) and not args.sequence:
         parser.error('Rescue, cruise and final missions use --sequence for complete-flight comparison')
     work = args.out.resolve()
     env = os.environ.copy()
     env['FA18_MISSION_END_TICK'] = '32000' if args.mode == 3 else '30000'
-    if args.mode in (6, 7):
+    if args.mode in (6, 7) or args.new_pilot:
         env['FA18_MISSION_END_TICK'] = '40000'
     with CaptureWorkspace(work) as ram:
         prefix, pilot = ram / 'frame', ram / 'pilot'
         keys = work / 'pilot.e9k'
         scenario = f'{args.mode}-sequence' if args.sequence else '3' if args.mode == 3 else f'{args.mode}-success'
+        if args.new_pilot:
+            scenario = '5-tour'
         initial = None
-        if args.mode in (4, 7):
-            initial = load_region_pilot() if args.mode == 4 else load_cruise_pilot()
+        if args.mode in (4, 7) or args.new_pilot:
+            initial = load_stolen_pilot() if args.new_pilot else load_region_pilot() if args.mode == 4 else load_cruise_pilot()
             pilot.mkdir()
             (pilot / 'config').write_bytes(initial)
         writes = partitions = None
@@ -126,7 +132,7 @@ def main():
             assert len(window) == 96, 'Missing landing window'
         if args.mode in (4, 5):
             if args.mode == 5:
-                evidence = objective_evidence(exports, 4)
+                evidence = objective_evidence(exports, 4, (8, 12) if args.new_pilot else (8, 10))
             else:
                 escorts = [item for item in exports if item.get('escort_objective')]
                 assert len(escorts) == 1, escorts
@@ -204,6 +210,13 @@ def main():
             saved = (pilot / 'config').read_bytes()
         assert len(saved) == 78 and int.from_bytes(saved[56:58], 'big') == summary['completions_after']
         assert saved[6] == args.mode and saved[7] == summary['grade_before'] and saved[18 + args.mode] == summary['grade_after']
+        if args.new_pilot:
+            retained = ROOT / 'tools/native/fixtures/mission-five-new-pilot-sequence.e9k'
+            assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'New-pilot stolen-aircraft input differs'
+        if args.mode == 4 and args.sequence:
+            assert saved == load_stolen_pilot(), 'Escort save must reproduce new-pilot stolen-aircraft availability'
+            retained = ROOT / 'tools/native/fixtures/mission-four-sequence.e9k'
+            assert keys.read_bytes().replace(b'\r\n', b'\n') == retained.read_bytes().replace(b'\r\n', b'\n'), 'Earned escort input differs'
         if args.mode == 6:
             assert saved == load_cruise_pilot(), 'Rescue save must reproduce earned cruise availability'
             retained = ROOT / 'tools/native/fixtures/rescue-sequence.e9k'
@@ -250,7 +263,11 @@ def main():
             report['scenario'] = report['scenario'].replace('result-reload', 'result-messages-escape-menu-reload')
             report['result_sequence'] = sequence_evidence
             report['mission_sequence_accepted'] = True
-        if args.mode in (4, 6, 7, 8):
+        if args.new_pilot:
+            report.update({'mission_availability_earned': True, 'pilot_newly_enlisted': True,
+                'full_tour_earned': False, 'eligibility_fixture': 'tools/native/fixtures/stolen-mission-pilot.json',
+                'initial_pilot_source': 'Normal menu reset, qualification, mission-three and mission-four success/save/menu'})
+        if args.mode in (4, 6, 7, 8) or args.new_pilot:
             canonical_pilot = ram / 'canonical-pilot'
             canonical_pilot.mkdir()
             if initial is not None:

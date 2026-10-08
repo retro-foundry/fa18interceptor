@@ -107,7 +107,14 @@ static int follow_stolen_aircraft(MissionPilot *pilot,NativeFrontend *game) {
     const double bank=angle_delta(rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800,0);
     const double wanted_yaw=atan2(-(delta[0]+velocity[0]*time),delta[2]+velocity[2]*time);
     const double height=rd_s8(SCENE_DISPATCH_LIMIT)>=3?200:400;
-    const double direction[3]={-sin(wanted_yaw),clamp((delta[1]+height)/6000,-0.08,0.08),cos(wanted_yaw)};
+    /* New-pilot validation input: retain flying speed during the closing
+     * turn, and damp height feedback with observed vertical velocity. */
+    const double pitch_heading=pilot->tour_flight?yaw:wanted_yaw;
+    const double slope=pilot->tour_flight?
+        clamp((delta[1]+height)/3000-velocity[1]/fmax(speed,30),-0.12,0.12):
+        clamp((delta[1]+height)/6000,-0.08,0.08);
+    const double direction[3]={-sin(pitch_heading),
+        pilot->tour_flight && fabs(angle_delta(wanted_yaw,yaw))>0.3?0:slope,cos(pitch_heading)};
     double local[3]={0};
     for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
         local[i]+=direction[j]*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
@@ -120,6 +127,10 @@ static int follow_stolen_aircraft(MissionPilot *pilot,NativeFrontend *game) {
     const double pitch_control=pitch+4*angle_delta(pitch,pilot->previous_y);
     pilot->previous_x=yaw;pilot->previous_y=pitch;
     int throttle=range>30000 || speed<wanted_speed-1?291:speed>wanted_speed+1?285:288;
+    if(pilot->tour_flight) {
+        const double flying_speed=fmax(wanted_speed,80);
+        throttle=range>30000 || speed<flying_speed-1?291:speed>flying_speed+1?286:288;
+    }
     command_throttle(pilot,game,throttle);
     held(pilot,game,&pilot->roll,bank>0.02?275:bank< -0.02?276:0);
     held(pilot,game,&pilot->rudder,yaw_control>0.006?46:yaw_control< -0.006?44:0);
@@ -220,7 +231,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     unsigned selected=0;
     double target_distance_squared=0;
     for(unsigned slot=pilot->final_flight || pilot->cruise_flight?4u:8u;
-        slot<=(pilot->cruise_flight?4u:pilot->final_flight?14u:pilot->escort_flight?12u:10u);slot+=2) {
+        slot<=(pilot->cruise_flight?4u:pilot->final_flight?14u:pilot->escort_flight || pilot->tour_flight?12u:10u);slot+=2) {
         const gaddr record=CONTROL_RECORDS+512*slot;
         if((rd_u16(record)&0x1648u)!=0x1040u) continue;
         if(pilot->final_flight && (rd_u8(record+98)&0xf0u)!=0x10u) continue;
@@ -242,7 +253,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     /* Input aim for the regional closing pass uses a shorter intercept lead;
      * the actual projectile continues to use original motion/tracking rules. */
     const int final_heat=pilot->final_flight && (rd_u8(CONTROL_RECORDS+99)&0xf0u)==0x30u;
-    const double time=clamp(range/(final_heat || (pilot->escort_flight && selected==12)?198+speed:fmax(speed,70)),0,400);
+    const double time=clamp(range/(final_heat || ((pilot->escort_flight || pilot->tour_flight) && selected==12)?198+speed:fmax(speed,70)),0,400);
     double delta[3],local[3]={0};
     for(unsigned i=0;i<3;++i)
         delta[i]=(rd_s32(target+20+4*i)-rd_s32(CONTROL_RECORDS+20+4*i))/256.0+
@@ -255,8 +266,8 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     /* Mode-four input keeps pitch relative to the current heading while
      * turning toward higher enemy aircraft; the accepted mode-five keys
      * retain their existing heading choice. */
-    const double pitch_heading=pilot->mode==4 || pilot->final_flight || pilot->cruise_flight?yaw:wanted_yaw;
-    const double pitch_slope=pilot->mode==4 || pilot->final_flight || pilot->cruise_flight?
+    const double pitch_heading=pilot->mode==4 || pilot->final_flight || pilot->cruise_flight || pilot->tour_flight?yaw:wanted_yaw;
+    const double pitch_slope=pilot->mode==4 || pilot->final_flight || pilot->cruise_flight || pilot->tour_flight?
         clamp(delta[1]/6000-rd_s32(CONTROL_RECORDS+66)/256.0/fmax(speed,30),-0.12,0.12):
         clamp(delta[1]/fmax(horizontal,100),-0.05,0.05);
     const double direction[3]={-sin(pitch_heading),fabs(yaw_error)>0.3?0:
@@ -312,7 +323,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
 static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
     if(!pilot->complete_flight || (!pilot->objective &&
        rd_u8(PLAYER_PHASE)!=0xff && rd_u8(PLAYER_PHASE)!=1)) return 0;
-    if((pilot->escort_flight || pilot->final_flight || pilot->rescue_flight || pilot->cruise_flight) && pilot->return_input_phase!=rd_u8(PLAYER_PHASE)) {
+    if((pilot->escort_flight || pilot->final_flight || pilot->rescue_flight || pilot->cruise_flight || pilot->tour_flight) && pilot->return_input_phase!=rd_u8(PLAYER_PHASE)) {
         /* The escort's result camera clears input while changing FF to one.
          * Release/repress ordinary controls when the player regains the view. */
         held(pilot,game,&pilot->rudder,0);held(pilot,game,&pilot->pitch,0);

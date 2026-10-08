@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 END_TICK = 19500
 
 
-def objective_evidence(exports, formation_length):
+def objective_evidence(exports, formation_length, expected_hit_slots=(8, 10)):
     """Require the normally reached formation, radar expiry and objective path."""
     proximity = [item for item in exports if item.get('proximity')]
     assert [item['gate_before'] for item in proximity] == list(range(200, -1, -1))
@@ -35,7 +35,7 @@ def objective_evidence(exports, formation_length):
         targets = [record for record in hit['records'] if record['flags_before'] != record['flags_after']]
         assert len(targets) == 1 and targets[0]['lifetime'] == 15, hit
         hit_slots.append(targets[0]['slot'])
-    assert hit_slots == [8, 10], hit_slots
+    assert hit_slots == list(expected_hit_slots), hit_slots
     combat = [item for item in bodies if item['combat_window']]
     expected = {body for hit in hits for body in range(hit['body'], hit['body'] + 20)}
     assert {item['body'] for item in combat} == expected, 'Missing radar/expiry window'
