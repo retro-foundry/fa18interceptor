@@ -3,6 +3,8 @@
 #include "native/frontend.h"
 #include "../../port/native/frame_capture.h"
 #include "globals.h"
+#include <errno.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -432,7 +434,21 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 }
 int main(int argc,char **argv) {
     if(argc<4 || argc>7) return 1;
+    const char *diagnostic_end=getenv("FA18_MODE_END_TICK");
+    unsigned diagnostic_end_tick=0;
+    if(diagnostic_end) {
+        char *end;
+        errno=0;
+        const unsigned long parsed=strtoul(diagnostic_end,&end,10);
+        if(!*diagnostic_end || strspn(diagnostic_end,"0123456789")!=strlen(diagnostic_end) ||
+           *end || errno==ERANGE || !parsed || parsed>UINT_MAX) {
+            fprintf(stderr,"FA18_MODE_END_TICK must be a positive unsigned tick count\n");
+            return 1;
+        }
+        diagnostic_end_tick=(unsigned)parsed;
+    }
     NativeFrontend *game=calloc(1,sizeof *game);char error[256];int result=1;
+    int16_t samples[1920];
     ModeRun run={.prefix=argv[3],.mode=argc>=5?(unsigned)atoi(argv[4]):2};
     unsigned aircraft=argc>=6?(unsigned)atoi(argv[5]):1;
     if(argc==7) {
@@ -488,7 +504,9 @@ int main(int argc,char **argv) {
     const unsigned *input_times=mission?mission_times:times;
     const int *input_keys=mission?mission_keys:keys;
     unsigned input_count=run.mode==3?6u:mission?5u:run.mode==125?7u:run.mode==2?5u:4u;
-    while(game->ticks<(run.outcome?120000u:run.flight==2?60000u:run.flight?30000u:(mission || run.mode==125 || run.mode==2)?18000u:10000u)) {
+    const unsigned end_tick=diagnostic_end?diagnostic_end_tick:
+        run.outcome?120000u:run.flight==2?60000u:run.flight?30000u:(mission || run.mode==125 || run.mode==2)?18000u:10000u;
+    while(game->ticks<end_tick) {
         if(run.callback) {
             if(game->ticks==10000) {
                 run.callback_events=game->input_events;
@@ -553,9 +571,17 @@ int main(int argc,char **argv) {
             if(game->ticks==input_times[i]+2) native_frontend_event(game,input_keys[i],0);
         }
         native_frontend_tick(game);
+        native_audio_render(&game->audio,samples,960,48000);
         if(run.entered && game->screen==NATIVE_MENU && rd_u32(STAGE_CALLBACK)==0xc0fcb4)
             run.returned=1;
         if(run.outcome && run.returned) break;
+    }
+    const char *final_data=getenv("FA18_MODE_FINAL_DATA");
+    if(final_data) {
+        run.clock.iteration=game->update_iterations;
+        NativeFrameCapture final={.replay=&run.clock,.prefix=final_data,
+            .iteration=game->update_iterations,.count=1};
+        native_frame_capture(game,NATIVE_FRAME_BODY_BEGIN,rd_u16(UPDATE_TICK),&final);
     }
     if(run.captures<8 || (run.mode==2 &&
        (!run.returned || game->scene_frames<30 || !run.stream_wraps || run.streams!=255)) ||
@@ -663,6 +689,7 @@ int main(int argc,char **argv) {
                 if(game->ticks==return_tick+restart_times[i]+2) native_frontend_event(game,restart_keys[i],0);
             }
             native_frontend_tick(game);
+            native_audio_render(&game->audio,samples,960,48000);
         }
         if(!run.entered || rd_u8(MODE_SELECT)!=125 || rd_u32(STAGE_CALLBACK)!=0xc10dae ||
            game->scene_frames<scene_frames+30) {

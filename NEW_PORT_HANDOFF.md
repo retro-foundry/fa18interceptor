@@ -2,8 +2,22 @@
 
 ## Current restart summary — 2026-10-08
 
+Latest validation diagnostics: the mode fixture now services PCM after each
+tick, matching the playable backend, and supports `FA18_MODE_END_TICK` plus
+`FA18_MODE_FINAL_DATA` for aligned, bounded final-RAM snapshots. Default input
+sequences and acceptance guards are preserved. With the established region
+inputs, all 1 MiB of runner/fixture RAM agrees at ticks 16,003, 18,500 and
+22,000. PCM servicing does not restore the missing region coverage. A separate
+early pull-up/rudder experiment matches 61 original input/stage intervals and
+62 sampled bodies but fails acceptance; its inputs are not retained in the
+fixture. See `analysis/native_region_flight_diagnostics.md`. Gameplay and the
+playable executable are unchanged; region coverage remains the next task.
+Debug/Release fixture builds, five selected CTests, fourteen invalid tick
+checks and the three final aligned RAM comparisons pass. Passing captures
+are removed within the existing retention policy.
+
 The active playable runner is `fa18_native`. This checkpoint follows
-`190abd80` on `coverage-accounting`.
+`a4574211` on `coverage-accounting`.
 Use `git log -1` for the latest pushed checkpoint.
 The playable executable is `build/native/fa18_native.exe`; its SHA256 is
 `d66c5ea2578453ebe9e444a314b5c4345dfd46bed19440b25fafa0a6c1a64a50`.

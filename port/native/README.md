@@ -363,6 +363,16 @@ it writes one snapshot per boundary rather than three. Native capture ranges
 default to 512 MiB; larger deliberate captures require `--capture-budget-mib N`.
 See [`../../analysis/workspace_artifact_retention.md`](../../analysis/workspace_artifact_retention.md).
 
+For aligned mode-fixture diagnostics, `FA18_MODE_END_TICK` selects a positive
+unsigned terminal tick; `FA18_MODE_FINAL_DATA` writes the final RAM as
+`PREFIX.before.dat`. These environment variables apply only to
+`fa18_native_mode_two_test`. Default endpoints and acceptance guards remain
+intact, so a shortened diagnostic may exit unsuccessfully after writing its
+snapshot. Clear both variables before acceptance runs. The fixture services
+960 stereo PCM frames at 48 kHz after each tick, as the playable backend does.
+Use temporary capture storage and prune after manual runs. See
+[`../../analysis/native_region_flight_diagnostics.md`](../../analysis/native_region_flight_diagnostics.md).
+
 Gameplay behavior and visuals at equivalent states/events are the acceptance
 scope; exact Amiga frame timing is not required. Preserve physics, rules and
 source-defined timers while allowing native rendering/presentation cadence.

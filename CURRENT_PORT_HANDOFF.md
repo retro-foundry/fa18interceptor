@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Latest validation diagnostics (2026-10-08): the mode fixture services PCM
+after each tick and supports bounded final-RAM snapshots through
+`FA18_MODE_END_TICK` and `FA18_MODE_FINAL_DATA`. Established inputs and strict
+guards remain intact. Runner/fixture RAM matches byte-for-byte at ticks
+16,003, 18,500 and 22,000 with the existing region inputs. PCM does not resolve
+the missing spawn/zone/NPC-missile coverage. The unsuccessful early pull-up/
+rudder experiment is documented rather than adopted. Gameplay and the
+playable executable are unchanged. See `analysis/native_region_flight_diagnostics.md`.
+
 Latest connected matrix/sight fix (2026-10-08): the native dynamics caller
 passes C2DEE0/C2DFF6's product cursor to the following record's C2436A sight
 update. All 576 complete matrix cases match original output/cursor/non-stack
