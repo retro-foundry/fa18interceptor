@@ -3,8 +3,9 @@
 Current whole-flight allocation/cockpit check (2026-10-09): Release/Debug
 preserve all qualification/mission-three traces, final RAM, counters and
 earned saves, with zero gameplay heap violations. Five bounded complete
-page deltas match selected-radar marker history. A separate live original
-owner-return page gate matches 0/5 and remains unaccepted; later plane-2
+page deltas match selected-radar marker history. Corrected original owner
+returns match all pages in both bounded windows (5/5 and 11/11); the previous
+end address included the next HUD child and is now rejected. Later pixel
 interaction and broader drawing stay open. Runtime is unchanged. See
 [current evidence](analysis/native_cockpit_radar_milestone.md).
 

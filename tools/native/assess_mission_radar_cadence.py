@@ -148,6 +148,14 @@ def main():
     captures = {row['iteration']: row['snapshots'] for row in original['captures']}
     assert sorted(captures) == list(range(window['first'], window['last'] + 1))
     assert original['last_observation'] >= window['last'] + 1
+    for i, snapshots in captures.items():
+        data = gzip.decompress((args.original_bodies / f'source-body.{i}.owner.dat.gz').read_bytes())
+        assert digest(data) == snapshots['owner']['ram_sha256']
+        registers = snapshots['owner']['registers']
+        assert registers['pc'] == 0xC31226
+        stack_return = integer(data, registers['registers'][15], 4)
+        assert stack_return == snapshots['owner-after']['registers']['pc'], (
+            f'Radar {i} returned to {stack_return:06X}; capture includes another caller instruction')
     body_oracle = ROOT / 'build/recomp/native_frame_body_oracle.exe'
     radar_oracle = ROOT / 'build/recomp/native_radar_cadence_oracle.exe'
     for executable, source in ((body_oracle, 'native_frame_body_oracle.c'),

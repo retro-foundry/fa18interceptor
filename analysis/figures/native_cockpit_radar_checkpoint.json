@@ -185,9 +185,10 @@
       "marker_coordinate": true,
       "other_marker": true
     },
-    "live_original_pages_matching": 0,
+    "scope": "Selected-target markers obey original alternating-call blink in this window. Different incoming phases are assessed under the accepted rendering-cadence policy. Every strict page difference remains reported. Message text and other drawing differences are not accepted by this check. Native body checks retain their existing explicit exclusions; actual original owner returns are checked for all complete pages, cores and radar list/cache. Every full-page XOR byte in this bounded window equals the retained radar point-cache delta; no pixels are excluded.",
+    "live_original_pages_matching": 5,
     "live_native_pages_matching": 5,
-    "strict_live_owner_pages_matching": false,
+    "strict_live_owner_pages_matching": true,
     "complete_page_delta": [
       {
         "source_iteration": 23334,
@@ -300,10 +301,10 @@
     {
       "iteration": 23334,
       "source": [
-        245,
-        286,
-        206,
-        216,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -323,10 +324,10 @@
     {
       "iteration": 23335,
       "source": [
-        246,
-        286,
-        208,
-        217,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -346,10 +347,10 @@
     {
       "iteration": 23336,
       "source": [
-        246,
-        286,
-        208,
-        217,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -369,10 +370,10 @@
     {
       "iteration": 23337,
       "source": [
-        246,
-        286,
-        208,
-        217,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -392,10 +393,10 @@
     {
       "iteration": 23338,
       "source": [
-        246,
-        286,
-        208,
-        217,
+        0,
+        0,
+        0,
+        0,
         0,
         0,
         0,
@@ -960,5 +961,33 @@
     "complete_owner_comparisons": 96,
     "native_body_comparisons": 24
   },
-  "acceptance": "Current whole-flight gameplay and allocation guards pass. Five bounded complete-page deltas equal observed selected-marker cache history. Live original radar-owner pages match 0/5; retained as failure, not masked. Broader drawing remains open."
+  "acceptance": "Current whole-flight gameplay and allocation guards pass. Five bounded complete-page deltas equal observed selected-marker cache history. Corrected live original radar-owner returns match 5/5 and 11/11 complete pages, alongside native returns. Later pixel interaction and broader drawing remain open.",
+  "plane_two_owner_window": {
+    "first": 23944,
+    "last": 23954,
+    "boundaries": 11,
+    "runner_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+    "original_probe_sha256": "6a215a5b16fced492308cd8cf7701892731c4a6efdac51dd00e236752e49ab7d",
+    "original_unchanged_observations": 23955,
+    "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+    "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+    "radar_original_non_stack_comparisons": 44,
+    "native_complete_body_comparisons": 11,
+    "live_original_radar_returns_compared": 11,
+    "initial_phase_offset": 123,
+    "equivalent_blink_phase_points_matching": true,
+    "mutation_rejections": {
+      "counter_increment": true,
+      "premature_marker": true,
+      "marker_coordinate": true,
+      "other_marker": true
+    },
+    "scope": "Selected-target markers obey original alternating-call blink in this window. Different incoming phases are assessed under the accepted rendering-cadence policy. Every strict page difference remains reported. Message text and other drawing differences are not accepted by this check. Native body checks retain their existing explicit exclusions; actual original owner returns are checked for all complete pages, cores and radar list/cache.",
+    "live_original_pages_matching": 11,
+    "live_native_pages_matching": 11,
+    "strict_live_owner_pages_matching": true
+  },
+  "corrected_original_owner_return": "C0F18E",
+  "rejected_original_owner_return": "C0F194 (includes C332BC HUD child)",
+  "late_owner_return_fixture_rejected": true
 }

@@ -11,7 +11,7 @@ from pathlib import Path
 import subprocess
 import tempfile
 
-from check_gameplay_checkpoint import ROOT
+from check_gameplay_checkpoint import ROOT, integer
 from check_qualification_message_cadence import digest
 from compare_flight_traces import read_trace
 
@@ -81,6 +81,14 @@ def main():
                 assert registers['iteration'] == i and registers['pc'] == pc
                 data = (work / f'{name}.{suffix}.dat').read_bytes()
                 assert len(data) == 0x100000
+                if suffix == 'owner':
+                    # A later caller label may include another drawing child.
+                    # Require the requested end to be this call's actual return.
+                    stack_return = integer(data, registers['registers'][15], 4)
+                    assert stack_return == args.owner_return, (
+                        f'Owner {args.owner:06X} returns to {stack_return:06X}, '
+                        f'not requested {args.owner_return:06X}')
+                    registers['stack_return'] = stack_return
                 path = args.out / f'source-body.{i}.{suffix}.dat.gz'
                 path.write_bytes(gzip.compress(data, mtime=0))
                 (args.out / f'source-body.{i}.{suffix}.json').write_text(
