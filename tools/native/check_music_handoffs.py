@@ -1,8 +1,9 @@
-"""Compare every initial music request in a validated separate original launch.
+"""Compare startup music or complete-recording retained sample payloads.
 
 Matching uses original sample bytes and ordered requests, not relocated pointer
-values, a searched subsequence or a shifted WAV. Timing differences remain
-reported; this does not accept complete native/original recorded sound.
+values, a searched subsequence or a shifted WAV. The optional full catalog
+checks every request's retained payload on its actual channel, without claiming
+fetch-time contents or ordered handoffs. Neither mode accepts complete sound.
 """
 import argparse
 import array
@@ -59,6 +60,55 @@ def compare(original,native):
             assert all(event[field]==actual[field] for field in ('bytes','sha256','period','volume')),(channel,index)
 
 
+def compare_payload_catalog(original,native,request_count):
+    """Compare every retained payload on its actual channel, without alignment.
+
+    Original pointer/length comes from recorded writes; its payload is read
+    from final retained RAM. This does not prove fetch-time immutability or
+    equal request order, repetition count, period, volume or waveform timing.
+    """
+    assert sum(map(len,original))==request_count, 'Original handler request coverage changed'
+    assets=[{(event['bytes'],event['sha256']) for event in channel} for channel in native]
+    for channel,events in enumerate(original):
+        assert events and assets[channel], ('Missing complete channel evidence',channel)
+        for index,event in enumerate(events):
+            assert (event['bytes'],event['sha256']) in assets[channel], ('Unknown channel payload',channel,index)
+
+
+def complete_payload_catalog(original,native,validation,report,native_data):
+    request_count=validation['source_writes'][f"{validation['resolved_voice_layout']['hunk_76']+44:06X}"]
+    compare_payload_catalog(original,native,request_count)
+    rejected=[]
+    for change in ('length','payload','channel','missing-request'):
+        damaged=[[dict(event) for event in channel] for channel in original]
+        if change=='length': damaged[0][0]['bytes']+=2
+        elif change=='payload': damaged[0][0]['sha256']='0'*64
+        elif change=='channel': damaged[3].append(damaged[0].pop(0))
+        else: damaged[0].pop()
+        try: compare_payload_catalog(damaged,native,request_count)
+        except AssertionError: rejected.append(change)
+        else: raise AssertionError(f'Accepted damaged full payload catalog: {change}')
+    catalogs=[]
+    for channel in range(4):
+        identities=sorted({(event['bytes'],event['sha256']) for event in original[channel]})
+        catalogs.append([dict(bytes=size,sha256=checksum,
+            original_requests=sum((e['bytes'],e['sha256'])==(size,checksum) for e in original[channel]),
+            native_requests=sum((e['bytes'],e['sha256'])==(size,checksum) for e in native[channel]),
+            original_sample_addresses=sorted({e['samples'] for e in original[channel] if (e['bytes'],e['sha256'])==(size,checksum)}),
+            native_sample_addresses=sorted({e['samples'] for e in native[channel] if (e['bytes'],e['sha256'])==(size,checksum)}))
+            for size,checksum in identities])
+    return dict(scope='Every complete original recorded handler request resolves in retained final RAM to a native-owned payload on the same channel. No fetched-sample lifetime, ordered handoff, repetition, level, pitch, onset or waveform parity is inferred.',
+        original_validation=validation,native_runner_sha256=report['runner_sha256'],
+        native_trace_sha256=report['complete_audio_trace_sha256'],native_final_ram_sha256=digest(native_data),
+        original_requests_by_channel=[len(c) for c in original],native_active_requests_by_channel=[len(c) for c in native],
+        original_total_requests=request_count,
+        original_unique_payloads=len({(e['bytes'],e['sha256']) for c in original for e in c}),
+        native_unique_payloads=len({(e['bytes'],e['sha256']) for c in native for e in c}),
+        all_retained_original_requested_payloads_match_native_on_same_channel=True,
+        payload_catalog_by_channel=catalogs,negative_controls_rejected=rejected,
+        alignment_search_shift_trim_gain_or_clock_change=False,whole_flight_sound_acceptance=False)
+
+
 def onset(path):
     with wave.open(str(path)) as wav:
         rate=wav.getframerate()
@@ -76,21 +126,38 @@ def main():
     parser.add_argument('--baseline',type=Path,required=True)
     parser.add_argument('--native-trace',type=Path,required=True)
     parser.add_argument('--native-report',type=Path,required=True)
+    parser.add_argument('--complete-payload-catalog',action='store_true',
+                        help='Check every complete recording request against same-channel retained native payloads; no handoff/timing acceptance')
+    parser.add_argument('--native-data',type=Path,
+                        help='Verified native final RAM required for the complete payload catalog')
     parser.add_argument('--pcm-reference',type=Path,
                         help='Explicit reusable original WAV; still checked against every original PCM block/hash')
     parser.add_argument('--out',type=Path,required=True)
     args=parser.parse_args()
+    if args.complete_payload_catalog != (args.native_data is not None):
+        parser.error('--complete-payload-catalog requires --native-data; native data is only used with that mode')
     validation=validate_events(args.original,args.baseline,args.pcm_reference)
     report=json.loads(args.native_report.read_text())
     trace=gzip.decompress(args.native_trace.read_bytes()) if args.native_trace.suffix=='.gz' else args.native_trace.read_bytes()
     assert digest(trace)==report['complete_audio_trace_sha256']
-    read_audio_trace(args.native_trace,report['stats'])
+    native_data=None
+    if args.native_data:
+        native_data=gzip.decompress(args.native_data.read_bytes()) if args.native_data.suffix=='.gz' else args.native_data.read_bytes()
+        assert len(native_data)==0x100000
+        assert digest(native_data)==report['final_data_retention']['decoded_sha256']
+    read_audio_trace(args.native_trace,report['stats'],native_data)
     native=[[] for _ in range(4)]
     for line in trace.splitlines():
         row=json.loads(line)
         if row.get('kind')=='request' and row['active']:
             native[row['channel']].append(row)
     original=requests(args.original,validation['resolved_voice_layout'])
+    if args.complete_payload_catalog:
+        result=complete_payload_catalog(original,native,validation,report,native_data)
+        args.out.parent.mkdir(parents=True,exist_ok=True)
+        args.out.write_text(json.dumps(result,indent=2)+'\n')
+        print(f"All {result['original_total_requests']} original requests resolve to retained native payloads on the same channel; four mutations rejected; handoff/timing acceptance remains open")
+        return
     assert sum(map(len,original))==validation['source_writes'][f"{validation['resolved_voice_layout']['hunk_76']+44:06X}"]
     assert all(original[channel] for channel in (0,1)) and not original[2] and not original[3]
     compare(original,native)

@@ -1,5 +1,12 @@
 # Current playable port handoff
 
+Complete retained audio payloads (2026-10-09): all 8,281 original Demo handler
+requests resolve in final RAM to native payloads on the same channels (12
+original payloads). Full PCM/event coverage and native owned-span hashes pass;
+four corrupt catalogs are rejected and the 48-request startup gate still passes.
+Fetch-time contents, handoff ordering and waveform timing remain unproved.
+Runtime is unchanged. See [payload evidence](analysis/native_complete_audio_payload_milestone.md).
+
 Bounded message pages (2026-10-09): ten actual C322EE inputs/returns match
 original instructions; immutable glyphs and source colour/clear rules predict
 all 640,000 owner page bytes. Five native bodies and live original text returns

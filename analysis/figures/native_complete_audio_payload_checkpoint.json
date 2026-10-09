@@ -1,0 +1,291 @@
+{
+  "date": "2026-10-09",
+  "native_runtime_changed": false,
+  "scope": "Every complete original recorded handler request resolves in retained final RAM to a native-owned payload on the same channel. No fetched-sample lifetime, ordered handoff, repetition, level, pitch, onset or waveform parity is inferred.",
+  "source_tool_sha256": "08fc5e7bcdb45965c5c1565d4f1585b63ed309eb33762259ab40c6b61311136e",
+  "full_report_sha256": "503e44266e820b4ae59aa9332bf8f4bcb9b56f58a788166666abed16c38dd40c",
+  "original_total_requests": 8281,
+  "original_requests_by_channel": [
+    254,
+    368,
+    19,
+    7640
+  ],
+  "native_active_requests_by_channel": [
+    173,
+    217,
+    24,
+    7670
+  ],
+  "original_unique_payloads": 12,
+  "native_unique_payloads": 17,
+  "payload_catalog_by_channel": [
+    [
+      {
+        "bytes": 13202,
+        "sha256": "ca7a3d917c8c4a7b9145f8c98bcbee3741127a04470c481eb586f1d94e668ad7",
+        "original_requests": 92,
+        "native_requests": 49,
+        "original_sample_addresses": [
+          358568
+        ],
+        "native_sample_addresses": [
+          447392
+        ]
+      },
+      {
+        "bytes": 13818,
+        "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0",
+        "original_requests": 151,
+        "native_requests": 79,
+        "original_sample_addresses": [
+          46056
+        ],
+        "native_sample_addresses": [
+          425984
+        ]
+      },
+      {
+        "bytes": 20000,
+        "sha256": "518bf5f40c1228eb6ea1b9b98ac00836682682ffad0d4d49e1c0ca5ab213111f",
+        "original_requests": 9,
+        "native_requests": 8,
+        "original_sample_addresses": [
+          371776
+        ],
+        "native_sample_addresses": [
+          460596
+        ]
+      },
+      {
+        "bytes": 32770,
+        "sha256": "4cb22150b61d37935cb3a0c7ad0688b3a82fbc2cd59ffe143fa4e24290223a1e",
+        "original_requests": 1,
+        "native_requests": 7,
+        "original_sample_addresses": [
+          121456
+        ],
+        "native_sample_addresses": [
+          37840
+        ]
+      },
+      {
+        "bytes": 32786,
+        "sha256": "9b90b44e6b185554f19b33cc3a6d60f34f4d984578f978d92b7a10c10a89f6a2",
+        "original_requests": 1,
+        "native_requests": 2,
+        "original_sample_addresses": [
+          154232
+        ],
+        "native_sample_addresses": [
+          12931072
+        ]
+      }
+    ],
+    [
+      {
+        "bytes": 5580,
+        "sha256": "0b727aa172caac29e3ab4c92b401c780cc8b2b052604b38d172f19c6ad175c50",
+        "original_requests": 197,
+        "native_requests": 91,
+        "original_sample_addresses": [
+          358568
+        ],
+        "native_sample_addresses": [
+          447392
+        ]
+      },
+      {
+        "bytes": 11000,
+        "sha256": "7eff289fbf0bb7eb971e994117c33005bdf27a1c02042ee3b1e766b570aaab5d",
+        "original_requests": 10,
+        "native_requests": 8,
+        "original_sample_addresses": [
+          373714
+        ],
+        "native_sample_addresses": [
+          462534
+        ]
+      },
+      {
+        "bytes": 12938,
+        "sha256": "6879acace7594c437dcb900845aa9de3e54cb2cbad149ea7c363ef0d45aafb3e",
+        "original_requests": 159,
+        "native_requests": 81,
+        "original_sample_addresses": [
+          46936
+        ],
+        "native_sample_addresses": [
+          426864
+        ]
+      },
+      {
+        "bytes": 32770,
+        "sha256": "4cb22150b61d37935cb3a0c7ad0688b3a82fbc2cd59ffe143fa4e24290223a1e",
+        "original_requests": 1,
+        "native_requests": 7,
+        "original_sample_addresses": [
+          121456
+        ],
+        "native_sample_addresses": [
+          37840
+        ]
+      },
+      {
+        "bytes": 32786,
+        "sha256": "9b90b44e6b185554f19b33cc3a6d60f34f4d984578f978d92b7a10c10a89f6a2",
+        "original_requests": 1,
+        "native_requests": 2,
+        "original_sample_addresses": [
+          154232
+        ],
+        "native_sample_addresses": [
+          12931072
+        ]
+      }
+    ],
+    [
+      {
+        "bytes": 2048,
+        "sha256": "1ccad9c6250d0e5fbef84dccaf135f2018f3c793a97e0102f92af5e6aef6d4fa",
+        "original_requests": 4,
+        "native_requests": 4,
+        "original_sample_addresses": [
+          59880
+        ],
+        "native_sample_addresses": [
+          13095088
+        ]
+      },
+      {
+        "bytes": 3462,
+        "sha256": "86e1ce8814647948d4a6b245a46eb0eab35bf73cf68bf2c6ad9041219e0c7c0a",
+        "original_requests": 4,
+        "native_requests": 4,
+        "original_sample_addresses": [
+          61928
+        ],
+        "native_sample_addresses": [
+          439804
+        ]
+      },
+      {
+        "bytes": 4124,
+        "sha256": "ab4352391a8f282bc93e9a6b1ae267e27d253b545c4e5daab99992484d7166b8",
+        "original_requests": 7,
+        "native_requests": 12,
+        "original_sample_addresses": [
+          108736
+        ],
+        "native_sample_addresses": [
+          443268
+        ]
+      },
+      {
+        "bytes": 13818,
+        "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0",
+        "original_requests": 4,
+        "native_requests": 4,
+        "original_sample_addresses": [
+          46056
+        ],
+        "native_sample_addresses": [
+          425984
+        ]
+      }
+    ],
+    [
+      {
+        "bytes": 32,
+        "sha256": "d2202673dc258127ea0a6aa9e81cd276c935fef7daababa333a729e5851c188d",
+        "original_requests": 7640,
+        "native_requests": 7670,
+        "original_sample_addresses": [
+          41952
+        ],
+        "native_sample_addresses": [
+          71892
+        ]
+      }
+    ]
+  ],
+  "negative_controls_rejected": [
+    "length",
+    "payload",
+    "channel",
+    "missing-request"
+  ],
+  "alignment_search_shift_trim_gain_or_clock_change": false,
+  "whole_flight_sound_acceptance": false,
+  "original_recording": {
+    "authority": {
+      "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+      "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+      "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+      "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+    },
+    "recorded_audio": {
+      "file": "original.wav",
+      "channels": 2,
+      "sample_bits": 16,
+      "first_replay_call": 1,
+      "replay_calls": 21069,
+      "sample_rate": 44100,
+      "reported_fps": 50.0,
+      "sample_frames": 18582858,
+      "pcm_sha256": "76ffa4bef9b203c84e67565b41685b1e62d66c0710fa0c318d264fa2d8c2b3c0",
+      "wav_sha256": "db14f6340ca2464d6f2fd441b8f007bc2eb21d4eac7d39990befcb0d37816745",
+      "capture_scope": "All batch PCM from requested ordinary retro_run calls; startup/restore initialization excluded",
+      "capture_budget_mib": 512
+    },
+    "event_rows": 406754,
+    "boundary_rows": 21069,
+    "resolved_voice_layout": {
+      "hunk_74": 12910120,
+      "hunk_75": 12910392,
+      "hunk_76": 12910808,
+      "voice_slots": 12910136,
+      "master_volume": 12910374,
+      "verified_hunk_76_bytes": 420,
+      "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+    },
+    "known_voice_boundaries": 21069,
+    "unknown_voice_boundaries": 0,
+    "registers_unchanged": true,
+    "complete_ram_state_unchanged": true,
+    "video_unchanged": true
+  },
+  "native_recording": {
+    "native_runner_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+    "native_trace_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415",
+    "native_final_ram_sha256": "4f0f6d334e716a6f915ced4a58b57b7287550bdf49b5dca233845194d791ce31"
+  },
+  "startup_regression": {
+    "report_sha256": "e410e0ca153813f6bc046e3c385944b4395e347fb5373bba794379dd8eb4fda5",
+    "requests_by_channel": [
+      24,
+      24,
+      0,
+      0
+    ],
+    "all_original_requests_match_ordered_native_payload_period_volume": true,
+    "wrong_payload_length_period_volume_rejected": true,
+    "original_onset": {
+      "rate_hz": 44100,
+      "first_nonzero_stereo_frame_by_channel": [
+        3370056,
+        3370123
+      ],
+      "right_minus_left_frames": 67
+    },
+    "native_onset": {
+      "rate_hz": 48000,
+      "first_nonzero_stereo_frame_by_channel": [
+        19,
+        19
+      ],
+      "right_minus_left_frames": 0
+    }
+  }
+}
