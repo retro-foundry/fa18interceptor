@@ -1,5 +1,19 @@
 # Current playable port handoff
 
+Independent complete qualification flight (2026-10-09): Release/Debug agree
+through landing, results and the original restart callback. All 2,728 first-flight
+boundaries match 43,648 complete record cores and camera/control/target state;
+2,722 complete drawing boundaries match. All 1,611 distinct gameplay states
+across nine result/restart callback runs agree. Six strict message differences
+are localized and assessed as one-step expiry/blink phase: 83 observed boundaries
+and 267 original message-owner comparisons pass, plus four rejection probes.
+Both take the FF -> EF qualification result branch. Initial pilot words differ
+(original0/native1); this is not new-pilot proof. The source recording ends
+during second-flight setup; a native menu trace gap and later fixed-offset
+failures remain explicit. Gameplay and retained plain-Escape restart are
+unchanged. All-mission independent flights and the other completion work
+remain open. See `analysis/native_independent_qualification_trace_milestone.md`.
+
 Independent whole demo recording now has bounded read-only traces. Its first
 flight's 2,046 boundaries match all 32,736 cores and camera/control state;
 1,235 complete drawing boundaries match. Twelve actual callback runs through

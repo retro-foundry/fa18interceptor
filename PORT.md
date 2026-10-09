@@ -1,5 +1,16 @@
 # The C port
 
+Independent complete qualification now matches all 43,648 record cores and
+camera/control/target fields across 2,728 first-flight boundaries; 2,722
+complete drawings match. Nine result/restart callback runs preserve all
+1,611 distinct gameplay states. Six message differences follow the original
+expiry/blink cadence at a one-step phase offset, with 83 observed states,
+267 original-owner checks and four rejection probes. Release/Debug agree.
+Initial pilot contexts differ, and second-flight/menu observation limits
+remain explicit. Gameplay and original Escape restart are unchanged;
+all-mission independent flights and other completion items remain open.
+See [qualification flight evidence](analysis/native_independent_qualification_trace_milestone.md).
+
 The reported ALT/HDG timing difference is assessed under the accepted cadence
 policy. All 374 transitions of the independently recorded target-info episode
 obey original elapsed/countdown, context/redraw and complete-text rules.

@@ -1,0 +1,326 @@
+{
+  "date": "2026-10-09",
+  "scope": "Independent complete first carrier qualification flight and C0F992 restart callback; not all missions or strict picture identity",
+  "runtime_changed": false,
+  "plain_escape_original_restart_preserved": true,
+  "input_hashes": {
+    "captures\\native\\qual_carrier_success\\input.fa18in": "fe4ff3a4cac080a4534041eb42d84a9332916d7566336910d852f86cde070440",
+    "captures\\native\\qual_carrier_success\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "local\\media\\fa18.adf": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "consumed_input_sha256": "8d4dff657c006d5161ad4c719604f7bbc2a884977c475e9400942564cabd4340",
+  "trace_sha256": {
+    "source": "7522c72cd7cb9e503ddfcde419d4d5b3dff3c9cc5d1d9cb79a7030b33e86af6a",
+    "native": "0d4085086b47a34b2e72d96f3a2f7981e5f6739700b3128efc7f74c57c707252"
+  },
+  "final_ram_sha256": {
+    "source": "b68cb41fce666cc678ffd5e548b83f770d8b6d6eadcebfcace2c5c5a23d66a30",
+    "native": "358fb5cd38fcac567b0499b7e3a711508759c8e171f15ce342d10403f871b14f"
+  },
+  "native_save_sha256": "100fa63ee3391383f42fd933dfd7c521a236a84d95c3db6edc268a8d9e0cfb41",
+  "first_flight": {
+    "compared": 2728,
+    "record_cores_compared": 43648,
+    "record_cores_matching": 43648,
+    "complete_record_boundaries_matching": 2728,
+    "camera_and_controls_matching": 2728,
+    "complete_pages_matching": 2722,
+    "timer_and_hud_matching": 0,
+    "first_record_difference": null,
+    "first_game_difference": null,
+    "first_page_difference": {
+      "source_iteration": 5530,
+      "native_iteration": 5530,
+      "source_tick": 841,
+      "changes": [
+        5
+      ]
+    },
+    "game_fields_compared": [
+      "stage",
+      "game_tick",
+      "phase",
+      "mouse_coordinates",
+      "selected_record",
+      "mode",
+      "target_record",
+      "controls",
+      "observer",
+      "camera_matrix",
+      "view_matrix",
+      "view_pan_rotate",
+      "view_attitude",
+      "view_side"
+    ]
+  },
+  "flight_and_restart": {
+    "source_rows": 2913,
+    "native_rows": 2763,
+    "runs": [
+      {
+        "stage": "00c10d8a",
+        "source_first": 4690,
+        "source_last": 4693,
+        "native_first": 4690,
+        "native_last": 4693,
+        "source_rows": 4,
+        "native_rows": 4,
+        "source_distinct_states": 4,
+        "native_distinct_states": 4,
+        "matching": true,
+        "source_state_sequence_sha256": "52e709218547b8848f14ce25e29fe9144f7fd25458de4ad14b85cfde64d17386",
+        "native_state_sequence_sha256": "52e709218547b8848f14ce25e29fe9144f7fd25458de4ad14b85cfde64d17386",
+        "source_pal_interval": [
+          1039,
+          1054
+        ],
+        "native_pal_interval": [
+          7006,
+          7009
+        ]
+      },
+      {
+        "stage": "00c10dae",
+        "source_first": 4694,
+        "source_last": 6293,
+        "native_first": 4694,
+        "native_last": 6293,
+        "source_rows": 1600,
+        "native_rows": 1600,
+        "source_distinct_states": 1600,
+        "native_distinct_states": 1600,
+        "matching": true,
+        "source_state_sequence_sha256": "d59ef7d9e54019a35c253932e0090b29c3742facf82d972b82180dd174550b4c",
+        "native_state_sequence_sha256": "d59ef7d9e54019a35c253932e0090b29c3742facf82d972b82180dd174550b4c",
+        "source_pal_interval": [
+          1060,
+          11895
+        ],
+        "native_pal_interval": [
+          7010,
+          12400
+        ]
+      },
+      {
+        "stage": "00c110a4",
+        "source_first": 6294,
+        "source_last": 6296,
+        "native_first": 6294,
+        "native_last": 6296,
+        "source_rows": 3,
+        "native_rows": 3,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "16439d439479a24a49c24a172e77e7aa2f48d2c5d51aaea12bda76e1e2df3afb",
+        "native_state_sequence_sha256": "16439d439479a24a49c24a172e77e7aa2f48d2c5d51aaea12bda76e1e2df3afb",
+        "source_pal_interval": [
+          11902,
+          11911
+        ],
+        "native_pal_interval": [
+          12403,
+          12405
+        ]
+      },
+      {
+        "stage": "00c10dae",
+        "source_first": 6297,
+        "source_last": 6297,
+        "native_first": 6297,
+        "native_last": 6297,
+        "source_rows": 1,
+        "native_rows": 1,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "173fa053e58932b31e1d0244521feaf971122718d0291c9821112a583371c60e",
+        "native_state_sequence_sha256": "173fa053e58932b31e1d0244521feaf971122718d0291c9821112a583371c60e",
+        "source_pal_interval": [
+          11912,
+          11912
+        ],
+        "native_pal_interval": [
+          12406,
+          12406
+        ]
+      },
+      {
+        "stage": "00c11958",
+        "source_first": 6298,
+        "source_last": 7316,
+        "native_first": 6298,
+        "native_last": 7316,
+        "source_rows": 1019,
+        "native_rows": 1019,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "e20d2d7ea38ad7fe1125210d4f2f4059f411768c3d97294e3ed3ee5083042da2",
+        "native_state_sequence_sha256": "e20d2d7ea38ad7fe1125210d4f2f4059f411768c3d97294e3ed3ee5083042da2",
+        "source_pal_interval": [
+          11912,
+          12100
+        ],
+        "native_pal_interval": [
+          12407,
+          13425
+        ]
+      },
+      {
+        "stage": "00c119d4",
+        "source_first": 7317,
+        "source_last": 7417,
+        "native_first": 7317,
+        "native_last": 7417,
+        "source_rows": 101,
+        "native_rows": 101,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "3387592bed8cf474566649ed01974ff48446a6ec2c9c6d5465e512c8ea8bbcf8",
+        "native_state_sequence_sha256": "3387592bed8cf474566649ed01974ff48446a6ec2c9c6d5465e512c8ea8bbcf8",
+        "source_pal_interval": [
+          12100,
+          12116
+        ],
+        "native_pal_interval": [
+          13426,
+          13526
+        ]
+      },
+      {
+        "stage": "00c0f946",
+        "source_first": 7418,
+        "source_last": 7598,
+        "native_first": 7418,
+        "native_last": 7448,
+        "source_rows": 181,
+        "native_rows": 31,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "99f03bece921b21d1583db68339323312ad78d8a7d7d90edc19ccc7ac66e9733",
+        "native_state_sequence_sha256": "99f03bece921b21d1583db68339323312ad78d8a7d7d90edc19ccc7ac66e9733",
+        "source_pal_interval": [
+          12117,
+          12148
+        ],
+        "native_pal_interval": [
+          13527,
+          13558
+        ]
+      },
+      {
+        "stage": "00c0f974",
+        "source_first": 7599,
+        "source_last": 7601,
+        "native_first": 7449,
+        "native_last": 7451,
+        "source_rows": 3,
+        "native_rows": 3,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "7d5701fa8e4a4ce15a9d5be7594b92fb6df5fe6d60f9665897c5aff4f7d9e695",
+        "native_state_sequence_sha256": "7d5701fa8e4a4ce15a9d5be7594b92fb6df5fe6d60f9665897c5aff4f7d9e695",
+        "source_pal_interval": [
+          12149,
+          12150
+        ],
+        "native_pal_interval": [
+          13560,
+          13563
+        ]
+      },
+      {
+        "stage": "00c0f992",
+        "source_first": 7602,
+        "source_last": 7602,
+        "native_first": 7452,
+        "native_last": 7452,
+        "source_rows": 1,
+        "native_rows": 1,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "798ad64b9df9daa7097c1a81ace82182240079f9f47688e0f8b7b3592e679017",
+        "native_state_sequence_sha256": "798ad64b9df9daa7097c1a81ace82182240079f9f47688e0f8b7b3592e679017",
+        "source_pal_interval": [
+          12155,
+          12155
+        ],
+        "native_pal_interval": [
+          13564,
+          13564
+        ]
+      }
+    ],
+    "matching_runs": 9,
+    "source_state_changes": 1611,
+    "native_state_changes": 1611
+  },
+  "recording_end": {
+    "source": {
+      "iteration": 8038,
+      "stage": "00c10c68",
+      "game_tick": 17
+    },
+    "native": {
+      "iteration": 8038,
+      "stage": "00c10dae",
+      "game_tick": 203
+    }
+  },
+  "native_observation_gaps": [
+    7453
+  ],
+  "message_cadence_assessment": {
+    "boundaries": 83,
+    "source_owners": 249,
+    "native_failure_owners": 18,
+    "initial_cadence_offset_steps": 1,
+    "message_expiry": {
+      "source": 5531,
+      "native": 5530
+    },
+    "stall_on": {
+      "source": 6231,
+      "native": 6230
+    },
+    "stall_off": {
+      "source": 6235,
+      "native": 6234
+    },
+    "result_player_phase": [
+      255,
+      255,
+      255,
+      239,
+      239
+    ],
+    "drawing_difference_boundaries": 6,
+    "changed_drawing_bytes": 160,
+    "acceptance": "Observed message expiry and blink phase preserve original eight-step cadence. Strict full-page differences remain six; whole-flight cadence outside these windows is not inferred.",
+    "wrong_state_mutations_rejected": [
+      "notification_countdown",
+      "message_countdown",
+      "message_shown",
+      "player_phase"
+    ]
+  },
+  "message_report_sha256": "ac726d0ab0ad4380b188699a6df253b07fd203ac2bb86f039e8b05f9cd318b3d",
+  "initial_pilot_qualification_words": {
+    "source": 0,
+    "native": 1
+  },
+  "release_debug_identical": true,
+  "remaining": [
+    "Independent whole flights for all six missions",
+    "Other complete drawing assessment",
+    "Original recorded audio/filter fidelity",
+    "Visible performance and per-frame presentation",
+    "Named C state migration"
+  ]
+}
