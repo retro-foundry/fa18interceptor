@@ -1,0 +1,743 @@
+{
+  "scope": "Complete original batch PCM coverage and unchanged emulator execution; native onset/handoffs/filter parity remains open",
+  "capture": "build\\native-audio\\dma-complete-demo",
+  "baseline": "build\\native-audio\\original-complete-demo-baseline",
+  "pcm_file_checked": "build\\native-audio\\original-complete-demo\\original.wav",
+  "replay_calls": 21069,
+  "chunks": 21069,
+  "recorded_audio": {
+    "file": "original.wav",
+    "channels": 2,
+    "sample_bits": 16,
+    "first_replay_call": 1,
+    "replay_calls": 21069,
+    "sample_rate": 44100,
+    "reported_fps": 50.0,
+    "sample_frames": 18582858,
+    "pcm_sha256": "76ffa4bef9b203c84e67565b41685b1e62d66c0710fa0c318d264fa2d8c2b3c0",
+    "wav_sha256": "db14f6340ca2464d6f2fd441b8f007bc2eb21d4eac7d39990befcb0d37816745",
+    "capture_scope": "All batch PCM from requested ordinary retro_run calls; startup/restore initialization excluded",
+    "capture_budget_mib": 512
+  },
+  "authority": {
+    "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+    "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+    "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+    "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+  },
+  "core_options": {
+    "puae_model": "auto",
+    "puae_model_options_display": "disabled",
+    "puae_model_fd": "A500",
+    "puae_model_hd": "A1200",
+    "puae_model_cd": "CD32",
+    "puae_kickstart": "kick13.rom",
+    "puae_chipmem_size": "auto",
+    "puae_bogomem_size": "auto",
+    "puae_fastmem_size": "auto",
+    "puae_z3mem_size": "auto",
+    "puae_cpu_model": "auto",
+    "puae_fpu_model": "auto",
+    "puae_cpu_throttle": "0.0",
+    "puae_cpu_multiplier": "0",
+    "puae_cpu_compatibility": "exact",
+    "puae_autoloadfastforward": "disabled",
+    "puae_floppy_speed": "100",
+    "puae_floppy_multidrive": "enabled",
+    "puae_floppy_write_protection": "enabled",
+    "puae_floppy_write_redirect": "disabled",
+    "puae_cd_speed": "100",
+    "puae_cd_startup_delayed_insert": "disabled",
+    "puae_shared_nvram": "disabled",
+    "puae_use_whdload": "files",
+    "puae_use_whdload_theme": "default",
+    "puae_use_whdload_prefs": "disabled",
+    "puae_use_whdload_buttonwait": "enabled",
+    "puae_use_whdload_nowritecache": "disabled",
+    "puae_use_boot_hd": "disabled",
+    "puae_cart_file": "none",
+    "puae_video_options_display": "disabled",
+    "puae_video_allow_hz_change": "locked",
+    "puae_video_standard": "PAL auto",
+    "puae_video_aspect": "auto",
+    "puae_video_resolution": "auto",
+    "puae_video_vresolution": "auto",
+    "puae_crop": "disabled",
+    "puae_crop_delay": "enabled",
+    "puae_crop_mode": "both",
+    "puae_vertical_pos": "auto",
+    "puae_horizontal_pos": "auto",
+    "puae_video_winuae_window_positioning": "disabled",
+    "puae_immediate_blits": "waiting",
+    "puae_collision_level": "playfields",
+    "puae_gfx_flickerfixer": "disabled",
+    "puae_gfx_framerate": "disabled",
+    "puae_gfx_gamma": "0",
+    "puae_gfx_colors": "24bit",
+    "puae_vkbd_theme": "auto",
+    "puae_vkbd_transparency": "25%",
+    "puae_vkbd_dimming": "25%",
+    "puae_statusbar": "bottom",
+    "puae_statusbar_startup": "disabled",
+    "puae_statusbar_messages": "disabled",
+    "puae_joyport_pointer_color": "blue",
+    "puae_audio_options_display": "disabled",
+    "puae_sound_stereo_separation": "100%",
+    "puae_sound_interpol": "anti",
+    "puae_sound_filter": "emulated",
+    "puae_sound_filter_type": "auto",
+    "puae_floppy_sound": "80",
+    "puae_floppy_sound_empty_mute": "enabled",
+    "puae_floppy_sound_type": "internal",
+    "puae_sound_volume_cd": "100%",
+    "puae_analogmouse": "both",
+    "puae_analogmouse_deadzone": "20",
+    "puae_analogmouse_speed": "1.0",
+    "puae_analogmouse_speed_right": "1.0",
+    "puae_dpadmouse_speed": "6",
+    "puae_mouse_speed": "100",
+    "puae_physicalmouse": "enabled",
+    "puae_physical_keyboard_pass_through": "disabled",
+    "puae_keyrah_keypad_mappings": "disabled",
+    "puae_mapping_options_display": "enabled",
+    "puae_mapper_vkbd": "---",
+    "puae_mapper_statusbar": "RETROK_F12",
+    "puae_mapper_mouse_toggle": "RETROK_RCTRL",
+    "puae_mapper_turbo_fire_toggle": "---",
+    "puae_mapper_save_disk_toggle": "---",
+    "puae_mapper_aspect_ratio_toggle": "---",
+    "puae_mapper_crop_toggle": "---",
+    "puae_mapper_reset": "---",
+    "puae_mapper_up": "---",
+    "puae_mapper_down": "---",
+    "puae_mapper_left": "---",
+    "puae_mapper_right": "---",
+    "puae_mapper_b": "---",
+    "puae_mapper_a": "---",
+    "puae_mapper_y": "---",
+    "puae_mapper_x": "RETROK_SPACE",
+    "puae_mapper_select": "TOGGLE_VKBD",
+    "puae_mapper_start": "---",
+    "puae_mapper_l": "---",
+    "puae_mapper_r": "---",
+    "puae_mapper_l2": "MOUSE_LEFT_BUTTON",
+    "puae_mapper_r2": "MOUSE_RIGHT_BUTTON",
+    "puae_mapper_l3": "---",
+    "puae_mapper_r3": "---",
+    "puae_mapper_lu": "---",
+    "puae_mapper_ld": "---",
+    "puae_mapper_ll": "---",
+    "puae_mapper_lr": "---",
+    "puae_mapper_ru": "---",
+    "puae_mapper_rd": "---",
+    "puae_mapper_rl": "---",
+    "puae_mapper_rr": "---",
+    "puae_turbo_fire": "disabled",
+    "puae_turbo_fire_button": "B",
+    "puae_turbo_pulse": "6",
+    "puae_joyport": "joystick",
+    "puae_joyport_order": "1234",
+    "puae_retropad_options": "disabled",
+    "puae_cd32pad_options": "disabled"
+  },
+  "final_original_audio_hash": "92ea13cab2907710eb9e9b984e2ed8681f0a35269de48cd2b35b7243262618a9",
+  "registers_unchanged": true,
+  "complete_ram_state_unchanged": true,
+  "video_unchanged": true,
+  "no_samples_removed_or_rewritten": true,
+  "audio_events": {
+    "file": "audio_events.jsonl",
+    "rows": 406754,
+    "sha256": "ceb40f89a5b175047fc7e9621d8c1ae2763580d64ae8146d4bcac90ad8a44bea",
+    "final_hardware": {
+      "cia_pra": 192,
+      "cia_ddra": 3,
+      "led_pin_on": true,
+      "channels": [
+        {
+          "state": 3,
+          "volume": 27,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 6909,
+          "remaining_words": 3374,
+          "period": 634,
+          "data_word": 59626,
+          "buffer": 46056,
+          "cursor": 53126,
+          "next_cycles": 7680,
+          "drhpos": 109
+        },
+        {
+          "state": 3,
+          "volume": 27,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 6469,
+          "remaining_words": 2952,
+          "period": 636,
+          "data_word": 10235,
+          "buffer": 46936,
+          "cursor": 53970,
+          "next_cycles": 323584,
+          "drhpos": 41
+        },
+        {
+          "state": 0,
+          "volume": 0,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 1731,
+          "remaining_words": 1730,
+          "period": 124,
+          "data_word": 62970,
+          "buffer": 61928,
+          "cursor": 61930,
+          "next_cycles": 4294967295,
+          "drhpos": 47
+        },
+        {
+          "state": 0,
+          "volume": 0,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 16,
+          "remaining_words": 9,
+          "period": 124,
+          "data_word": 32639,
+          "buffer": 41952,
+          "cursor": 41968,
+          "next_cycles": 4294967295,
+          "drhpos": 35
+        }
+      ]
+    },
+    "led_interface": true,
+    "final_led_states": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "voice_hunk_layout": true,
+    "resolved_voice_layout": {
+      "hunk_74": 12910120,
+      "hunk_75": 12910392,
+      "hunk_76": 12910808,
+      "voice_slots": 12910136,
+      "master_volume": 12910374,
+      "verified_hunk_76_bytes": 420,
+      "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+    },
+    "voice_source_executable_sha256": "d7301e20958548f9b5f1ba744f8ff91fef476306c220eb886e7c90bac2802ffa",
+    "scope": "All logged audio/control custom writes, safe voice RAM and published LED/filter state at every full-frame boundary; CIA pin/duty only known at retained endpoints"
+  },
+  "event_rows": 406754,
+  "boundary_rows": 21069,
+  "register_writes": {
+    "DFF096": 78383,
+    "DFF09A": 145572,
+    "DFF09C": 32969,
+    "DFF0A0": 254,
+    "DFF0A2": 254,
+    "DFF0A4": 254,
+    "DFF0A6": 21315,
+    "DFF0A8": 21315,
+    "DFF0B0": 368,
+    "DFF0B2": 368,
+    "DFF0B4": 368,
+    "DFF0B6": 21431,
+    "DFF0B8": 21431,
+    "DFF0C0": 19,
+    "DFF0C2": 19,
+    "DFF0C4": 19,
+    "DFF0C6": 524,
+    "DFF0C8": 524,
+    "DFF0D0": 7640,
+    "DFF0D2": 7640,
+    "DFF0D4": 7640,
+    "DFF0D6": 8688,
+    "DFF0D8": 8688
+  },
+  "source_writes": {
+    "C2FF4A": 38443,
+    "C3002E": 31195,
+    "C4FFC0": 455,
+    "C500DC": 8745,
+    "C500F8": 16562,
+    "C50104": 8281,
+    "C50108": 8281,
+    "C50134": 464,
+    "C5013A": 464,
+    "C50140": 464,
+    "C501F0": 51494,
+    "C5020C": 51494,
+    "FC0F36": 2698,
+    "FC0FC4": 1349,
+    "FC1354": 21071,
+    "FC13BC": 1349,
+    "FC1428": 21092,
+    "FC143C": 21092,
+    "FC1B7C": 1354,
+    "FC1BE0": 1349,
+    "FC1BEE": 12368,
+    "FC1C0E": 12368,
+    "FC1E68": 422,
+    "FC1E88": 1352,
+    "FC1F00": 422,
+    "FC1F14": 1349,
+    "FC1F68": 1349,
+    "FC1F8C": 1349,
+    "FC4A02": 843,
+    "FC4A6C": 843,
+    "FC4A7A": 843,
+    "FC4AAE": 843,
+    "FCD5AC": 4749,
+    "FCD5FA": 4749,
+    "FE9118": 4651,
+    "FE9150": 4651,
+    "FE91DC": 1349,
+    "FE92C8": 1349,
+    "FE9368": 21069,
+    "FE93DC": 21069
+  },
+  "buffer_pointer_low_writes": [
+    254,
+    368,
+    19,
+    7640
+  ],
+  "voice_slot_changes": [
+    37,
+    34,
+    10,
+    160
+  ],
+  "first_slot_changes": [
+    {
+      "call": 94,
+      "channel": 0,
+      "before": "C07678",
+      "after": "C076F8"
+    },
+    {
+      "call": 94,
+      "channel": 1,
+      "before": "C076B8",
+      "after": "C07738"
+    },
+    {
+      "call": 230,
+      "channel": 3,
+      "before": "000000",
+      "after": "C01408"
+    },
+    {
+      "call": 238,
+      "channel": 3,
+      "before": "C01408",
+      "after": "000000"
+    },
+    {
+      "call": 259,
+      "channel": 0,
+      "before": "C076F8",
+      "after": "C07C40"
+    },
+    {
+      "call": 260,
+      "channel": 1,
+      "before": "C07738",
+      "after": "C07C80"
+    },
+    {
+      "call": 270,
+      "channel": 0,
+      "before": "C07C40",
+      "after": "000000"
+    },
+    {
+      "call": 271,
+      "channel": 0,
+      "before": "000000",
+      "after": "C06A18"
+    },
+    {
+      "call": 271,
+      "channel": 1,
+      "before": "C07C80",
+      "after": "C06A58"
+    },
+    {
+      "call": 420,
+      "channel": 0,
+      "before": "C06A18",
+      "after": "C06998"
+    },
+    {
+      "call": 420,
+      "channel": 1,
+      "before": "C06A58",
+      "after": "C069D8"
+    },
+    {
+      "call": 458,
+      "channel": 3,
+      "before": "000000",
+      "after": "C01408"
+    },
+    {
+      "call": 459,
+      "channel": 3,
+      "before": "C01408",
+      "after": "000000"
+    },
+    {
+      "call": 460,
+      "channel": 3,
+      "before": "000000",
+      "after": "C01408"
+    },
+    {
+      "call": 461,
+      "channel": 3,
+      "before": "C01408",
+      "after": "000000"
+    },
+    {
+      "call": 462,
+      "channel": 3,
+      "before": "000000",
+      "after": "C01408"
+    }
+  ],
+  "initial_hardware": {
+    "cia_pra": 192,
+    "cia_ddra": 3,
+    "led_pin_on": true,
+    "channels": [
+      {
+        "state": 3,
+        "volume": 31,
+        "interrupt_pending": false,
+        "flags": 128,
+        "length_words": 16385,
+        "remaining_words": 9407,
+        "period": 358,
+        "data_word": 65279,
+        "buffer": 121456,
+        "cursor": 135412,
+        "next_cycles": 11776,
+        "drhpos": 215
+      },
+      {
+        "state": 2,
+        "volume": 31,
+        "interrupt_pending": false,
+        "flags": 128,
+        "length_words": 16385,
+        "remaining_words": 9416,
+        "period": 358,
+        "data_word": 254,
+        "buffer": 121456,
+        "cursor": 135396,
+        "next_cycles": 52736,
+        "drhpos": 199
+      },
+      {
+        "state": 0,
+        "volume": 0,
+        "interrupt_pending": false,
+        "flags": 128,
+        "length_words": 0,
+        "remaining_words": 0,
+        "period": 124,
+        "data_word": 0,
+        "buffer": 0,
+        "cursor": 0,
+        "next_cycles": 4294967295,
+        "drhpos": 0
+      },
+      {
+        "state": 0,
+        "volume": 2,
+        "interrupt_pending": false,
+        "flags": 128,
+        "length_words": 16,
+        "remaining_words": 5,
+        "period": 300,
+        "data_word": 33410,
+        "buffer": 41952,
+        "cursor": 41976,
+        "next_cycles": 4294967295,
+        "drhpos": 51
+      }
+    ]
+  },
+  "filter_scope": "Published gui_data.powerled/filter boolean at every replay boundary via original LED interface; no live CIA reads or repeated serialization; within-block transition sample unproven",
+  "native_sound_acceptance": false,
+  "led_updates": [
+    {
+      "kind": "led",
+      "call": 1,
+      "sample_frames": 0,
+      "led": 0,
+      "state": 1
+    }
+  ],
+  "power_filter_boundary_counts": {
+    "1": 21069
+  },
+  "initial_published_led_states": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "final_published_led_states": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "resolved_voice_layout": {
+    "hunk_74": 12910120,
+    "hunk_75": 12910392,
+    "hunk_76": 12910808,
+    "voice_slots": 12910136,
+    "master_volume": 12910374,
+    "verified_hunk_76_bytes": 420,
+    "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+  },
+  "known_voice_boundaries": 21069,
+  "unknown_voice_boundaries": 0,
+  "voice_layout_scope": "Immutable original Hunk 76 and all relocation equations identify loaded Hunk 74 ownership; unresolved game voices are unknown, not empty",
+  "audio_dma": {
+    "file": "audio_dma.bin",
+    "sha256": "4f9913ae1b6199455f7c4db01f168eb495a7f14392d5f791d4ead022eba1f77e",
+    "calls": 21069,
+    "fetched_words": 2939342,
+    "words_by_channel": [
+      1396972,
+      1391226,
+      30655,
+      120489
+    ],
+    "first_source_frame": 1,
+    "last_source_frame": 21069,
+    "raw_record_bytes": 88,
+    "packed_fetch_bytes": 18,
+    "collection_mode": 6,
+    "scope": "Every audio DMA record in consecutive completed core frame views; actual fetched word/address/beam, not retained-RAM substitution. Native sound acceptance remains open."
+  },
+  "dma_stream_bytes": 53856301,
+  "dma_retained_bytes": 22536785,
+  "fetched_words_by_channel": [
+    1396972,
+    1391226,
+    30655,
+    120489
+  ],
+  "unique_fetch_addresses_by_channel": [
+    39895,
+    31145,
+    11166,
+    16
+  ],
+  "first_nonzero_fetched_word_by_channel": [
+    {
+      "call": 1,
+      "source_frame": 1,
+      "address": "0211BC",
+      "fetched": 65532,
+      "beam": [
+        17,
+        3
+      ]
+    },
+    {
+      "call": 1,
+      "source_frame": 1,
+      "address": "0211AC",
+      "fetched": 65278,
+      "beam": [
+        19,
+        5
+      ]
+    },
+    {
+      "call": 2178,
+      "source_frame": 2178,
+      "address": "01A8C0",
+      "fetched": 8701,
+      "beam": [
+        21,
+        65
+      ]
+    },
+    {
+      "call": 230,
+      "source_frame": 230,
+      "address": "00A3F8",
+      "fetched": 33410,
+      "beam": [
+        23,
+        82
+      ]
+    }
+  ],
+  "final_ram_different_fetched_words_by_channel": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "first_fetched_word_different_from_final_ram": null,
+  "all_fetched_words_equal_final_ram": true,
+  "consecutive_completed_core_frames": true,
+  "dma_scope": "Actual fetched words in every completed original frame view. Boundary PCM, RAM, registers, state and video remain exact; within-block output timing and native waveform acceptance remain open.",
+  "catalog_report_sha256": "503e44266e820b4ae59aa9332bf8f4bcb9b56f58a788166666abed16c38dd40c",
+  "historical_native_request_runner_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+  "current_native_asset_runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+  "native_report_sha256": "45ff95379157e74c54b4a1dcca07f71f09632ef2981c30a4242a8cf4332f4baa",
+  "native_delta_sha256": "8a82e347cf74881ebff102dda634104e0a7fe2a6cb898f4af9fe368cf21fea8e",
+  "native_asset_snapshot": {
+    "iteration": 22142,
+    "frame": 29132,
+    "boundary": 2,
+    "saved_tick": 1,
+    "ram_sha256": "1abfa0d3cab2ad1190b993f8cbd96a16a2a66776fd611e9816010c228b1dd23c"
+  },
+  "matched_current_native_asset_words_by_channel": [
+    1396972,
+    1391225,
+    30654,
+    120489
+  ],
+  "uncatalogued_fetched_words_by_channel": [
+    0,
+    1,
+    1,
+    0
+  ],
+  "first_uncatalogued_fetch_by_channel": [
+    null,
+    {
+      "call": 94,
+      "source_frame": 94,
+      "channel": 1,
+      "address": "025A72",
+      "fetched": 0,
+      "beam": [
+        19,
+        277
+      ]
+    },
+    {
+      "call": 2178,
+      "source_frame": 2178,
+      "channel": 2,
+      "address": "000000",
+      "fetched": 0,
+      "beam": [
+        21,
+        64
+      ]
+    },
+    null
+  ],
+  "first_uncatalogued_fetches": [
+    {
+      "call": 94,
+      "source_frame": 94,
+      "channel": 1,
+      "address": "025A72",
+      "fetched": 0,
+      "beam": [
+        19,
+        277
+      ]
+    },
+    {
+      "call": 2178,
+      "source_frame": 2178,
+      "channel": 2,
+      "address": "000000",
+      "fetched": 0,
+      "beam": [
+        21,
+        64
+      ]
+    }
+  ],
+  "all_catalogued_fetched_words_equal_current_native_assets": true,
+  "complete_fetched_word_catalog_coverage": false,
+  "payload_witness_scope": "Historical same-channel request catalog plus current native asset bytes; actual original words compared without replacement. Uncatalogued fetches remain explicit. No current-native request order, onset, repetition, handoff or whole-waveform acceptance.",
+  "date": "2026-10-10",
+  "native_runtime_changed": false,
+  "reference_observer_changed": true,
+  "retained_report": "build\\native-audio\\dma-complete-demo\\payload-witnesses-retained.json",
+  "report_sha256": "d1ede5772c66318bbb9b4a49dac97f82938ef41b304805db999e46077f877f7b",
+  "source_core_commit": "ace4c3a9553e7005ed32c6fee8817126a53a8887",
+  "retention": {
+    "state.bin": {
+      "decoded_bytes": 3145728,
+      "decoded_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3",
+      "retained_bytes": 356771,
+      "retained_sha256": "9e3af3e26ff9c081ecf2253d4264a9ee1a12d9baef46fc5fd50f4b18ddaf4016"
+    },
+    "chip.bin": {
+      "decoded_bytes": 524288,
+      "decoded_sha256": "06fd4652e4da5018da8deb0966e6481b1ee75204a58beb1d2f529ef56945ae9f",
+      "retained_bytes": 198294,
+      "retained_sha256": "50ba392bd6763ac2c8cf00316e03fa0c6d5a228a667c09c0f0e5039ba2140f03"
+    },
+    "slow.bin": {
+      "decoded_bytes": 524288,
+      "decoded_sha256": "7a41c6e48b416e4eeedaaa1454c43875ea3a5d72c34ebdffbc401e3c884f66da",
+      "retained_bytes": 144766,
+      "retained_sha256": "8725d2189803a37d87b1fdf50e28e284f86fb41d16cc0265b1b95dec9630acab"
+    },
+    "audio_dma.bin": {
+      "decoded_bytes": 53856301,
+      "decoded_sha256": "4f9913ae1b6199455f7c4db01f168eb495a7f14392d5f791d4ead022eba1f77e",
+      "retained_bytes": 22536785,
+      "retained_sha256": "66a35ab780bc923bf5e5de900c51864d3a45e44ae910da35a293a43998d5103b"
+    },
+    "duplicate_wav_removed_after_full_equality": true,
+    "canonical_pcm_reference": "build\\native-audio\\original-complete-demo\\original.wav"
+  },
+  "tests": {
+    "guard_tests": 13,
+    "original_audio_capture_ctest": true,
+    "artifact_cleanup_ctest": true
+  },
+  "files_sha256": {
+    "scripts/engine9000_bridge.py": "0725745bcb3e856829e3829f2606123389074d329e5a233a893088cda84ebffe",
+    "scripts/original_audio_dma.py": "2e853a4f04b971f396562ac0415e4d6938dc74f7acb654d3cdf8b3b78232f282",
+    "scripts/capture_dma_frame.py": "2be7de46e1f3245a58ebf93b01f6c9c8e36aa07787cf5c3d6df3c36eb17105d0",
+    "tools/native/check_original_audio_capture.py": "bfc2df1bff66db4a83f98e371788ee370cd2a0ba6d82c0fee3bfe379f68b1117",
+    "tools/native/check_original_audio_dma.py": "4ca601a96ae98bfb772b50189e58d971742b732f180f6ebb6e29b07a0646a2b7",
+    "tools/native/check_audio_dma_payloads.py": "59ad91cd3174a173221a5b6d5cb2799e5268820b9ff091247753a9109dab0e1b",
+    "tools/native/test_original_audio_dma.py": "dba2c7a5eab33cbd8a4b00455f381614f7863b3a8f02ae508db3a511e59fc97c",
+    "tools/native/test_original_audio_capture.py": "748276092134515b42b25f66448e5857b5f96bb1c6c1fd71d66ef5e918552d05"
+  },
+  "snapshot_sha256": "9baa0c609e44e422ef88e40114244bcb4c1fc04f0ef711220575389800f91a00",
+  "capture_artifact_bytes_before_retention": 212932446
+}

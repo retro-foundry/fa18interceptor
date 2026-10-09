@@ -9,6 +9,8 @@ import tempfile
 
 from check_original_audio_capture import validate
 from check_original_audio_events import validate_events
+from check_original_audio_dma import validate_dma
+from original_audio_dma import MAGIC, FRAME, FETCH
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -19,7 +21,8 @@ def main():
         base = [sys.executable,str(ROOT/'scripts/engine9000_bridge.py'),
                 '--frames','32','--restore',str(ROOT/'captures/native/demo01/state.bin')]
         for name, extra in (('baseline',[]),('capture',['--wav']),
-                            ('events',['--wav','--audio-events'])):
+                            ('events',['--wav','--audio-events']),
+                            ('dma',['--wav','--audio-events','--audio-dma'])):
             result = subprocess.run([*base,'--output',str(work/name),*extra],cwd=ROOT,
                                     capture_output=True,text=True,timeout=20)
             assert result.returncode == 0, result.stderr
@@ -27,6 +30,42 @@ def main():
         assert result['replay_calls'] == result['chunks'] == 32
         assert result['recorded_audio']['sample_frames'] == 32*882
         events = validate_events(work/'events', work/'baseline')
+        dma = validate_dma(work/'dma',work/'baseline')
+        assert dma['audio_dma']['calls'] == 32 and dma['audio_dma']['fetched_words'] > 0
+        assert (work/'dma/audio_events.jsonl').read_bytes() == (work/'events/audio_events.jsonl').read_bytes()
+        assert (work/'dma/original.wav').read_bytes() == (work/'capture/original.wav').read_bytes()
+        dma_bytes = (work/'dma/audio_dma.bin').read_bytes()
+        for change in ('dma-truncated','dma-missing-call','dma-wrong-source-frame',
+                       'dma-wrong-pcm-boundary','dma-invalid-register'):
+            damaged = work/change
+            shutil.copytree(work/'dma',damaged)
+            data = bytearray(dma_bytes)
+            start = len(MAGIC)+1
+            header = list(FRAME.unpack(data[start:start+FRAME.size]))
+            if change == 'dma-truncated':
+                del data[-1]
+            elif change == 'dma-invalid-register':
+                at = start+FRAME.size
+                while header[8] == 0:
+                    at += 1+FRAME.size
+                    header = list(FRAME.unpack(data[at-FRAME.size:at]))
+                item = list(FETCH.unpack(data[at:at+FETCH.size]))
+                item[3] = 0
+                data[at:at+FETCH.size] = FETCH.pack(*item)
+            else:
+                field = {'dma-missing-call':0,'dma-wrong-source-frame':2,'dma-wrong-pcm-boundary':9}[change]
+                header[field] += 1
+                data[start:start+FRAME.size] = FRAME.pack(*header)
+            (damaged/'audio_dma.bin').write_bytes(data)
+            snapshot = json.loads((damaged/'snapshot.json').read_text())
+            snapshot['audio_dma']['sha256'] = hashlib.sha256(data).hexdigest()
+            (damaged/'snapshot.json').write_text(json.dumps(snapshot))
+            try:
+                validate_dma(damaged,work/'baseline')
+            except (AssertionError,ValueError):
+                pass
+            else:
+                raise AssertionError(f'Accepted damaged original DMA: {change}')
         assert events['recorded_audio']['pcm_sha256'] == result['recorded_audio']['pcm_sha256']
         rows = [json.loads(line) for line in (work/'events/audio_events.jsonl').read_text().splitlines()]
         assert len([row for row in rows if row['kind'] == 'initial']) == 1
@@ -113,7 +152,7 @@ def main():
                                     capture_output=True,text=True,timeout=20)
             assert result.returncode and message in result.stderr, result.stderr
             assert not (work/name/'original.wav').exists()
-    print('Real 32-frame original PCM/event/LED/loaded-voice tracing preserves complete state; corrupt PCM/events/LED/voice ownership/reference, stepping and budget failures rejected')
+    print('Real 32-frame original PCM/event/LED/voice/DMA tracing preserves complete state and PCM; corrupt telemetry, stepping and budget failures rejected')
 
 
 if __name__ == '__main__':

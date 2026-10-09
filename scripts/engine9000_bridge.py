@@ -383,6 +383,8 @@ def main():
     parser.add_argument('--wav', action='store_true', help='Capture complete reference PCM during the requested replay window')
     parser.add_argument('--audio-events', action='store_true',
                         help='With --wav/--restore, record audio/control writes, safe voice RAM and published LED/filter state at every replay boundary')
+    parser.add_argument('--audio-dma', action='store_true',
+                        help='With --audio-events, export actual fetched audio words from the existing DMA collector')
     parser.add_argument('--capture-budget-mib', type=int, default=512)
     args = parser.parse_args()
     if args.trace_frames and args.normal_custom_log:
@@ -391,6 +393,8 @@ def main():
         parser.error('--wav requires ordinary full-frame replay, without instruction stepping')
     if args.audio_events and (not args.wav or not args.restore or args.normal_custom_log):
         parser.error('--audio-events requires --wav/--restore and its own filtered custom log')
+    if args.audio_dma and not args.audio_events:
+        parser.error('--audio-dma requires --audio-events')
     if args.frames < 0 or (args.wav and (args.frames < 1 or args.capture_budget_mib < 8)):
         parser.error('PCM capture requires positive frames and at least 8 MiB capture budget')
     args.output.mkdir(parents=True, exist_ok=False)
@@ -455,6 +459,11 @@ def main():
         engine.bind('e9k_debug_set_debug_option', None, U, U, P)(38, 1, None)
         normal_custom = (args.output / 'normal_custom_writes.jsonl').open('w', encoding='utf8')
         engine.custom_log = normal_custom
+    dma = None
+    dma_report = None
+    if args.audio_dma:
+        from original_audio_dma import AudioDmaWriter
+        dma = AudioDmaWriter(engine, (args.output / 'audio_dma.bin').open('wb'))
     try:
         for frame in range(args.start_frame + 1, args.start_frame + args.frames + 1):
             engine.audio_capture_call = frame
@@ -469,9 +478,13 @@ def main():
                 engine.write_audio_event({'kind': 'boundary', 'call': frame,
                     'sample_frames': engine.audio_capture_frames, **engine.audio_voice_reader.voices(),
                     'led_states': engine.led_states.copy()})
+            if dma is not None:
+                dma.boundary(frame)
             if frame % 100 == 0:
                 samples.append({'frame': frame, 'pc': engine.regs()['pc']})
     finally:
+        if dma is not None:
+            dma_report = dma.finish()
         if normal_custom is not None:
             engine.custom_log = None
             normal_custom.close()
@@ -526,6 +539,8 @@ def main():
             'resolved_voice_layout': engine.audio_voice_reader.layout,
             'voice_source_executable_sha256': engine.audio_voice_reader.disk_sha256,
             'scope': 'All logged audio/control custom writes, safe voice RAM and published LED/filter state at every full-frame boundary; CIA pin/duty only known at retained endpoints'}
+    if dma_report is not None:
+        report['audio_dma'] = dma_report
     (args.output / 'snapshot.json').write_text(json.dumps(report, indent=2) + '\n')
     if args.trace_frames:
         import capstone

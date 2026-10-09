@@ -1,5 +1,15 @@
 # Native port handoff — 2026-10-09
 
+Complete sound fetch contents (2026-10-10): all 21,069 original replay calls
+retain 2,939,342 actual DMA words, with complete PCM/RAM/state/register/video
+and the earlier event log unchanged. Every word matches retained original RAM;
+2,939,340 catalogued words also match current native asset bytes. Two original
+zero fetches outside the request spans remain explicit for handoff assessment.
+Thirteen guards and the real 32-frame CTest pass; raw passing data and the
+duplicate WAV are removed after verified compressed retention. Native runtime
+is unchanged. Sound ordering/timing/waveform acceptance remains open. See
+[fetch-content evidence](analysis/native_original_audio_dma_milestone.md).
+
 Visible complete flight (2026-10-10): qualification and mission three now
 pass all 42,706 visible presentations with sound, complete final RAM/counters
 and the earned pilot unchanged. Maximum measured work is 16.3617 ms, with no

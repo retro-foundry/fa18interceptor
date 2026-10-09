@@ -26,8 +26,8 @@ def validate(capture, baseline, pcm_reference=None):
     report = json.loads((capture / 'snapshot.json').read_text())
     prior = json.loads((baseline / 'snapshot.json').read_text())
     # Wall-clock duration and the new audio descriptor are host observations.
-    assert {k:v for k,v in report.items() if k not in ('recorded_audio','audio_events','wall_seconds')} == {
-        k:v for k,v in prior.items() if k not in ('recorded_audio','audio_events','wall_seconds')}, 'Recording changed original execution'
+    assert {k:v for k,v in report.items() if k not in ('recorded_audio','audio_events','audio_dma','wall_seconds')} == {
+        k:v for k,v in prior.items() if k not in ('recorded_audio','audio_events','audio_dma','wall_seconds')}, 'Recording changed original execution'
     for name in ('state.bin', 'chip.bin', 'slow.bin'):
         assert recorded_bytes(capture, name) == recorded_bytes(baseline, name), name
     assert (capture / 'screen.png').read_bytes() == (baseline / 'screen.png').read_bytes()
