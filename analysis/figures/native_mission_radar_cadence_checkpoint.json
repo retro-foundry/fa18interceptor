@@ -1,0 +1,1641 @@
+{
+  "first": 22302,
+  "last": 22325,
+  "boundaries": 24,
+  "runner_sha256": "64cc3278ee928c352230574dba455e56ecfb62c6c787a90e877b45054c5686ee",
+  "original_probe_sha256": "74ff2000e59b7a994fd61a4f97d3b7a085d5d4a32a0bd5f741249c8a48882572",
+  "original_unchanged_observations": 22326,
+  "source_trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+  "native_trace_sha256": "62cb2077f31ba059dbd210ca0340cc57e40d7726d894a80af59e54bc95fa6a37",
+  "radar_original_non_stack_comparisons": 96,
+  "native_complete_body_comparisons": 24,
+  "live_original_radar_returns_compared": 24,
+  "initial_phase_offset": 123,
+  "equivalent_blink_phase_points_matching": true,
+  "mutation_rejections": {
+    "counter_increment": true,
+    "premature_marker": true,
+    "marker_coordinate": true,
+    "other_marker": true
+  },
+  "scope": "Selected-target markers obey original alternating-call blink in this window. Different incoming phases are assessed under the accepted rendering-cadence policy. Every strict page difference remains reported. Message text and other drawing differences are not accepted by this check. Native body checks retain their existing explicit exclusions; actual original owner returns are checked for all complete pages, cores and radar list/cache.",
+  "assessment_report_sha256": "0736e99d9e73a396c47581d611bcaf8648feb125e1304ad005b98a8c7e87dd72",
+  "original_body_report_sha256": "37ab276dd1807eaf14457d406d2c54f2d489db676d7302bae2d6d4a12b759550",
+  "window_report_sha256": "7dc996d7ccf9e689507a4016234f6d4c738a4e22f59f78f596900cf441fa387a",
+  "source_probe_sha256": "74ff2000e59b7a994fd61a4f97d3b7a085d5d4a32a0bd5f741249c8a48882572",
+  "source_probe_source_sha256": "173bbf077dfb58f0673df2189928424f8c8a06b20d7269a9c7dea62f1076394b",
+  "prefix_call_counts_per_runner": {
+    "one": 11,
+    "two": 2,
+    "suppressed": 11
+  },
+  "phase_before_after": {
+    "source": [
+      126,
+      141
+    ],
+    "native": [
+      249,
+      8
+    ]
+  },
+  "rows": [
+    {
+      "iteration": 22302,
+      "native_iteration": 22302,
+      "native_body_input_sha256": "120fbe038cb91f79f47008943cf95cd5105819f6b38552f5ed41d0b982c37a80",
+      "native_body_output_sha256": "43d05eea912cb0ffb1692e09cb54dc8a291d6fa6008474c921f495d368d034fe",
+      "source_owner_input_sha256": "4c985811da5d3c43159dbf7760e6d31fc584c4223d55d81b60393736d5a18372",
+      "source_owner_output_sha256": "f14e69aadc1f00d51ce3eab6c6d6a918ce330dc763ab27c5ff602d3de40d8156",
+      "source": {
+        "phase_before": 126,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 4096,
+            "x": 131,
+            "y": 157,
+            "pair": 1,
+            "colour": 8,
+            "phase": 127
+          },
+          {
+            "record_offset": 7168,
+            "x": 149,
+            "y": 173,
+            "pair": 0,
+            "colour": 5,
+            "phase": 127
+          }
+        ],
+        "phase_after": 127,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 127,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 149,
+            "y": 173,
+            "pair": 0,
+            "colour": 5,
+            "phase": 128
+          }
+        ],
+        "phase_after": 128,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "d3322ac70b20c89723c76c3b9b7004d4732feddeb02ed69105dcd6287ab330bf",
+      "native_owner_output_sha256": "1b9f7105bfb7146ecc0b0ba6f8ba518c35c92fdf580b702b00bb6d35f26ecb7f",
+      "native": {
+        "phase_before": 249,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 149,
+            "y": 173,
+            "pair": 0,
+            "colour": 5,
+            "phase": 250
+          }
+        ],
+        "phase_after": 250,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 248,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 4096,
+            "x": 131,
+            "y": 157,
+            "pair": 1,
+            "colour": 8,
+            "phase": 249
+          },
+          {
+            "record_offset": 7168,
+            "x": 149,
+            "y": 173,
+            "pair": 0,
+            "colour": 5,
+            "phase": 249
+          }
+        ],
+        "phase_after": 249,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22303,
+      "native_iteration": 22303,
+      "native_body_input_sha256": "66676b4620f0a4f25b38bdf5a019a68521a39ee402e393a7775eade7e7d9fb7c",
+      "native_body_output_sha256": "9313cf6d356b5c5ee3dd24ed19aa655db99205acf86ed6b640cfd7945f7350cd",
+      "source_owner_input_sha256": "9b89ee820bc878d2e2764e9fad03b3df4902706d132f4bd79f3229272341fe04",
+      "source_owner_output_sha256": "215159bd7d2f6e7145969e4159b1db9acc44d7877b5463b00d6d285d88b2f3ec",
+      "source": {
+        "phase_before": 127,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 127,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 126,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 126,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "817147aec25971c5df4866e186340a6221e3a8d7f48e34aad996e09098c3ec64",
+      "native_owner_output_sha256": "793a908d031fa17dd402bcf7c0e3104084d17a32d070932f0ab494684ab60682",
+      "native": {
+        "phase_before": 250,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 250,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 251,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 251,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22304,
+      "native_iteration": 22304,
+      "native_body_input_sha256": "05c2df1442a52e2cbf0fc7121824e9d1ad36b78f317cd3cb958a502e85ac50b7",
+      "native_body_output_sha256": "062911f471a4cfbf66049a63aafd90a8e8480e2c1552fb3a99ff255e9ac5e6d6",
+      "source_owner_input_sha256": "caa3191d721b85066fd24e0e7f6e428dbbd6df3176d196b26086cba99e340237",
+      "source_owner_output_sha256": "32ff3731eb4e6531a43c9acc9d9b897a76be1d9c7145419ecf2ad67d4611f4ba",
+      "source": {
+        "phase_before": 127,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 127,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 126,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 126,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "f9302d9d7f27e0a2e0bb98fa8dc7756cea07ccac87430856e28962a9ccec33a9",
+      "native_owner_output_sha256": "08ea6ea8ef13db21e331b42f7e7d8a05f46ed58f032d400826cae26f5f97bf3b",
+      "native": {
+        "phase_before": 250,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 250,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 251,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 251,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22305,
+      "native_iteration": 22305,
+      "native_body_input_sha256": "eb3159bbaa135319a839ecc6b16edbf1319d37ab5c37ef2aa38d28a1cfe06f86",
+      "native_body_output_sha256": "2195027599644cdc863a8c8fa24026b456d0ffac63e8d3d7eb66005f16e17a00",
+      "source_owner_input_sha256": "6a7c616b210eb1b28a08cbe44c24026ef492868ed622b3f7b54bf86a09546c7c",
+      "source_owner_output_sha256": "c714cbd1714f11609b3b6b89567dd8ae3421769f5115a88431ca3f2404321f10",
+      "source": {
+        "phase_before": 127,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 172,
+            "pair": 0,
+            "colour": 5,
+            "phase": 128
+          }
+        ],
+        "phase_after": 128,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 126,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 4096,
+            "x": 132,
+            "y": 154,
+            "pair": 1,
+            "colour": 8,
+            "phase": 127
+          },
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 172,
+            "pair": 0,
+            "colour": 5,
+            "phase": 127
+          }
+        ],
+        "phase_after": 127,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "96a587b1cb81171edd91a0f9f978311c3bec7df7e199271f5de2a00b53b7c913",
+      "native_owner_output_sha256": "81c4d0042b5e259350126c58f7235d3713bc8fc3687cb4017158cba732e87ae3",
+      "native": {
+        "phase_before": 250,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 4096,
+            "x": 132,
+            "y": 154,
+            "pair": 1,
+            "colour": 8,
+            "phase": 251
+          },
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 172,
+            "pair": 0,
+            "colour": 5,
+            "phase": 251
+          }
+        ],
+        "phase_after": 251,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 251,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 172,
+            "pair": 0,
+            "colour": 5,
+            "phase": 252
+          }
+        ],
+        "phase_after": 252,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22306,
+      "native_iteration": 22306,
+      "native_body_input_sha256": "c6dab6f8cb99a5838008719794672894384fd98794e66412db520d6548c7bbf0",
+      "native_body_output_sha256": "be4c545a587131cd10dd75003bd146ef6a3c7ff527b98bbd2b648c0955b84dc2",
+      "source_owner_input_sha256": "08a5c9bb2bcadc58ccf8f6960c16d13a8dd4aaf31fb0e6ddd426d26eb9365dae",
+      "source_owner_output_sha256": "0527d0c82a5fd72fae5b1012769287e8bb97959055eb6c0e145bcddc530c5017",
+      "source": {
+        "phase_before": 128,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 4096,
+            "x": 132,
+            "y": 154,
+            "pair": 1,
+            "colour": 8,
+            "phase": 129
+          },
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 172,
+            "pair": 0,
+            "colour": 5,
+            "phase": 129
+          }
+        ],
+        "phase_after": 129,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 129,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 172,
+            "pair": 0,
+            "colour": 5,
+            "phase": 130
+          }
+        ],
+        "phase_after": 130,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "16b67d921d29f803a696e3f6a9c268b71e0b608a149ac3a5c7ecf19d9b34b3cb",
+      "native_owner_output_sha256": "398301da80e2be2ff1b3c1118d201dc9a372e4f5e18d6faa3c2b3f79307a4a6a",
+      "native": {
+        "phase_before": 251,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 172,
+            "pair": 0,
+            "colour": 5,
+            "phase": 252
+          }
+        ],
+        "phase_after": 252,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 250,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 4096,
+            "x": 132,
+            "y": 154,
+            "pair": 1,
+            "colour": 8,
+            "phase": 251
+          },
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 172,
+            "pair": 0,
+            "colour": 5,
+            "phase": 251
+          }
+        ],
+        "phase_after": 251,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22307,
+      "native_iteration": 22307,
+      "native_body_input_sha256": "a62fa78fea2ce39551afdd8589439e8a1a24696406d83b642d01528b66e35132",
+      "native_body_output_sha256": "7d9de57455c67aaf4c5e1a10e01aa35018600402581e2eecb21f18ce7d642d06",
+      "source_owner_input_sha256": "73f588f9bfc20021c8c85f09e0f3747f7ca80b0b646f382e17e4e9cc6762f2c6",
+      "source_owner_output_sha256": "132cfa0cf53ab43b0c48ea6b3b2ca1365adfd8fa74589313a4836bea028478e1",
+      "source": {
+        "phase_before": 129,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 129,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 128,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 128,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "4ba68839bbb0f121b011a8cd3cef046d76a3f5e3057c419491afd8ff2cab7659",
+      "native_owner_output_sha256": "ad4ea37ab7b084eb02b268170451146f3a3aaf10c63c36096854bae3eced8be2",
+      "native": {
+        "phase_before": 252,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 252,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 253,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 253,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22308,
+      "native_iteration": 22308,
+      "native_body_input_sha256": "a58baeafd35b3d2e442ce5dbaf0426130c78040844b899052eede2cb32be194e",
+      "native_body_output_sha256": "8df634993b692de0b7f9518c9e7501fb68ea0831cae74f2473fefd3e2579cb97",
+      "source_owner_input_sha256": "e893efcfa41e5a4de21e47caea0d0976466797ceb2e64397a7faa718763c8b8e",
+      "source_owner_output_sha256": "cd09297f48e992b4a5a892d8a41c41336d92a55e98bba6da9f8d3b145069e232",
+      "source": {
+        "phase_before": 129,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 129,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 128,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 128,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "19efcb0c0867feae1f805007e5522c3c2acc125ec88b966561ba7a88c36ea42d",
+      "native_owner_output_sha256": "f9a2a5d62727334990e1d7b02ebed9c01a4e3f39dd006b416946b80a0a9cf73a",
+      "native": {
+        "phase_before": 252,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 252,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 253,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 253,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22309,
+      "native_iteration": 22309,
+      "native_body_input_sha256": "97b9f3876980e05de1aea2f9cc4ba9db75207a192fa1cf856dc194f837fa0109",
+      "native_body_output_sha256": "1d950f295d016c67383602958015c3bd73dcafb3ab4612a94b22fd3d5fece7fe",
+      "source_owner_input_sha256": "cc1b2d49d870d69e1f6b0b82c0606caee90ffa5072270f09e894edcfaa563ce9",
+      "source_owner_output_sha256": "211d0d8cdffd7da72c0b81f1b5c1200c209f8a9c9efcf06deb447d7f5625c093",
+      "source": {
+        "phase_before": 129,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 170,
+            "pair": 0,
+            "colour": 5,
+            "phase": 130
+          }
+        ],
+        "phase_after": 130,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 128,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 170,
+            "pair": 0,
+            "colour": 5,
+            "phase": 129
+          }
+        ],
+        "phase_after": 129,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "6c229561956a87c19a0eabc05dbe7f3e5dafc4fe4e82329febdf33be524ca688",
+      "native_owner_output_sha256": "9f758f8a49eba40c70f88f85951f5125bb88956ddf1496da93273d959b9f07e3",
+      "native": {
+        "phase_before": 252,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 170,
+            "pair": 0,
+            "colour": 5,
+            "phase": 253
+          }
+        ],
+        "phase_after": 253,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 253,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 170,
+            "pair": 0,
+            "colour": 5,
+            "phase": 254
+          }
+        ],
+        "phase_after": 254,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22310,
+      "native_iteration": 22310,
+      "native_body_input_sha256": "1b7fec37d3afc08c8aae1724ea9d6e19c4efcd45b0316bf528c2dd0775323dd8",
+      "native_body_output_sha256": "3ba45cfab02a81afcd422bfa21e959368eea4248db5116bed36f638fe3abe0e8",
+      "source_owner_input_sha256": "1177b6a20a82f55b97f6f4750aa21e9dc536ba030be73dfbc53699fce56305a2",
+      "source_owner_output_sha256": "de20d786a89cf922d9c37d46275fbe9f588fb462daf139ca4a2471cfb0184d95",
+      "source": {
+        "phase_before": 130,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 170,
+            "pair": 0,
+            "colour": 5,
+            "phase": 131
+          }
+        ],
+        "phase_after": 131,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 131,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 170,
+            "pair": 0,
+            "colour": 5,
+            "phase": 132
+          }
+        ],
+        "phase_after": 132,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "5de28d6dfdc4dafac8631e10e6e22fa105fff561966a68ffe9c2ba1d7914d8e7",
+      "native_owner_output_sha256": "1e5779c8981e1d9934d393355724f8a5b779874fa1aaf53ea3095b73318cca0b",
+      "native": {
+        "phase_before": 253,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 170,
+            "pair": 0,
+            "colour": 5,
+            "phase": 254
+          }
+        ],
+        "phase_after": 254,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 252,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 170,
+            "pair": 0,
+            "colour": 5,
+            "phase": 253
+          }
+        ],
+        "phase_after": 253,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22311,
+      "native_iteration": 22311,
+      "native_body_input_sha256": "9f9ad8b55103a2b11e522f868c44beb5624ffd3a7175cdc171132e3802a0cd58",
+      "native_body_output_sha256": "25f86fcc0daeb453b68a4c44da98ef598eda0faae46fe042a8570b1d8d1f7e52",
+      "source_owner_input_sha256": "d261b5e7df75b38a5117af70a14f40b527b368ca60f472fa1ab67e779ea5aa99",
+      "source_owner_output_sha256": "6f4a0bbef19b2320bd1784fad9d4943a9bc1f55e48de425150ffbae393eddfec",
+      "source": {
+        "phase_before": 131,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 131,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 130,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 130,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "3bdfe91998aa2862950fc57803a7412269fea453295bb278be86718ed5bf49db",
+      "native_owner_output_sha256": "73a6dbc8a04ae4569a8f0af122edbd84c1b8e07f4a6715bf27b218decf3a932d",
+      "native": {
+        "phase_before": 254,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 254,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 255,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 255,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22312,
+      "native_iteration": 22312,
+      "native_body_input_sha256": "6b8ff8ee26e5dae2173871c576c713429d53d91e5370fbec2bbea77d8a5a5cf7",
+      "native_body_output_sha256": "9a823f830eb7d45245b244613b1cc9e980d0ee5bf8dd4b30a75968e952f4b005",
+      "source_owner_input_sha256": "d1446fa1916f37f6d65ac7766746a02b19ea21b31f6e46fe23edf417369dea40",
+      "source_owner_output_sha256": "5ed9e20e7d4ff05dec0a21609ed4bb4d4c7f945c469fbe5bbba4b2bbbffc6e95",
+      "source": {
+        "phase_before": 131,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 131,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 130,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 130,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "7265bfe2ff377d9749efa797beb457284e04a2a085292cd009510a08203b3c64",
+      "native_owner_output_sha256": "77b54f3d092fd6f8d32ee0fadc88fbce57d1bec04e1cb9e888cea2f370c0ef7b",
+      "native": {
+        "phase_before": 254,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 254,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 255,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 255,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22313,
+      "native_iteration": 22313,
+      "native_body_input_sha256": "42033d518dce9831381cb43a8137dd8e9bce1be916552e9cdb95081adb4cb65a",
+      "native_body_output_sha256": "347b0c8ac3a4a2409dc62039ad958ca0a3a3d49cd31be5794ffd25f14969536f",
+      "source_owner_input_sha256": "9ee371d438de7e91eb89d30a1edc44d997d544f3d0a0b34cfcd9773dc3aa0a0f",
+      "source_owner_output_sha256": "f63cd8a6dc35bfd71d8121e30a8dad8e90e202a756e7d65349f2742bcfd579cc",
+      "source": {
+        "phase_before": 131,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 132
+          }
+        ],
+        "phase_after": 132,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 130,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 131
+          }
+        ],
+        "phase_after": 131,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "4479bb327d372711c1ab34bd99aec369f82d5ce67e2b7b5b95c099bc2d0b13af",
+      "native_owner_output_sha256": "1c7e8aeb763c603c9c5e468b67b5cff8bcf4b75aa64887a40c9e9a0fc55546a0",
+      "native": {
+        "phase_before": 254,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 255
+          }
+        ],
+        "phase_after": 255,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 255,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 0
+          }
+        ],
+        "phase_after": 0,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22314,
+      "native_iteration": 22314,
+      "native_body_input_sha256": "180ea229bfe59a044144374c302b54ebef8f124e02d087b85991a4b3f136fd74",
+      "native_body_output_sha256": "373e8780a142d4990499650a15b7cca5ca92266ef6224a73e6961a0ae651250e",
+      "source_owner_input_sha256": "bf5898c0da3f87d9bae9f7098dc143f6c565b3c1d91f20569fffbe116efff320",
+      "source_owner_output_sha256": "355e07cb547f1aae0ccbc7bc2f0cce732e6172860d3bee6d5494b2a198859229",
+      "source": {
+        "phase_before": 132,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 133
+          }
+        ],
+        "phase_after": 133,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 133,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 134
+          }
+        ],
+        "phase_after": 134,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "4778eda026c4c85f6f392f2e2e0d232e09c94168b5f0bc28ec45020d340b15ba",
+      "native_owner_output_sha256": "0b472358ffa0c759b08724a0cd892b2bbf5da3c9fc31b458b757906c5eef82a3",
+      "native": {
+        "phase_before": 255,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 0
+          }
+        ],
+        "phase_after": 0,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 254,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 255
+          }
+        ],
+        "phase_after": 255,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22315,
+      "native_iteration": 22315,
+      "native_body_input_sha256": "9f639e4041f9eb907f25aa8a174b567e8546bb9f91ad731b1971be6157fdf619",
+      "native_body_output_sha256": "69d83571ee7715ea01b61cff49bc3a21fecd928b0c6f75e0cf0829de43fa9160",
+      "source_owner_input_sha256": "8e403a76e97f9cbcd3f972e87760ae13ba0a0b0e26b514d6228ba0071ed83b67",
+      "source_owner_output_sha256": "c4acac0f9acc9a86727f6a1bd679697d89a4e8621694fa6a38a5537e47656dd7",
+      "source": {
+        "phase_before": 133,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 133,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 132,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 132,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "591e3780305ea6611260873677d0e18ee18dee264729116f21fa2721d580bf9a",
+      "native_owner_output_sha256": "5da668aa8f105dbd2f1835f08a61261c6558952d94e50d95b62b574eba39b443",
+      "native": {
+        "phase_before": 0,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 0,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 1,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 1,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22316,
+      "native_iteration": 22316,
+      "native_body_input_sha256": "a2e1bdd0e3b513686ac02b67c8e1a02025b961081d12699dcf6ebecbe5843354",
+      "native_body_output_sha256": "231de734e02c135da34287939ca9be5afb1f43f9744532d0458f60d9b29a269c",
+      "source_owner_input_sha256": "4988a7d43f569125642bdb73d2ec30a949af8c7c2b92dc9e17e3bfb5a80f44ea",
+      "source_owner_output_sha256": "1d0b954ed61e733d1404cbf9d7a35ef1cd1fd4b9de7c434647ade29345401862",
+      "source": {
+        "phase_before": 133,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 133,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 132,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 132,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "9d17dde16a39fc08f365655d2ff91c4873d84f47675172823fdebbed26b0b23f",
+      "native_owner_output_sha256": "62f0150fa64aaf762d8bcc35cfd9015e0b99fd39d5cfb7fc9376de6379d4f135",
+      "native": {
+        "phase_before": 0,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 0,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 1,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 1,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22317,
+      "native_iteration": 22317,
+      "native_body_input_sha256": "e7fa2f25ec33d51bae3f33fc2e181ebdb017d6151c9ea1a92f6fe5e6b191edfd",
+      "native_body_output_sha256": "974d310c7cd0aad253d86c97c6997dfbd3e932960ff39f500cba194443e1e360",
+      "source_owner_input_sha256": "9c4846bc257e6866b7731c00d6934063de8388a872ce08c076da4c01e65fb55d",
+      "source_owner_output_sha256": "8e9a20f630d84829322dbeeada12efb3ed664e316b4764b5af22881785002b57",
+      "source": {
+        "phase_before": 133,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 134
+          }
+        ],
+        "phase_after": 134,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 132,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 133
+          }
+        ],
+        "phase_after": 133,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "e1756d3ec2bfd03c687b8727e9a44d566d7ab95c9ab555a533f001506da033c0",
+      "native_owner_output_sha256": "38c50b28259c22a6599392976bce69f7ebb633d2959af94718e1ea6724a2cdd5",
+      "native": {
+        "phase_before": 0,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 1
+          }
+        ],
+        "phase_after": 1,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 1,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 2
+          }
+        ],
+        "phase_after": 2,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22318,
+      "native_iteration": 22318,
+      "native_body_input_sha256": "0193d9ca320131af6dbc418d0c1b4373929ec42e922bc73c8d8d69cde8c094b7",
+      "native_body_output_sha256": "829a99643fe15fc865718fdad339ce261fef79cf8059ca76cc7707a06f6a69fc",
+      "source_owner_input_sha256": "e15a3e1108099b8c2ab18f00ea0bce4d342065e8be274120fc81bb732bb68d78",
+      "source_owner_output_sha256": "3010593434c650b015ec6dc6446e05dcdbbf46eeadd214c2a2de548725ada1c2",
+      "source": {
+        "phase_before": 134,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 135
+          },
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 136
+          }
+        ],
+        "phase_after": 136,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 135,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 136
+          },
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 137
+          }
+        ],
+        "phase_after": 137,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "7ab516db0d59d3af325c3dc716dca40f636f836f1d01753ccb76283fc35ae383",
+      "native_owner_output_sha256": "1902d358e182fd4e909141394bd50c41c20d2e47c7906d6a4bed00079e9705a9",
+      "native": {
+        "phase_before": 1,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 2
+          },
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 3
+          }
+        ],
+        "phase_after": 3,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 0,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 1
+          },
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 2
+          }
+        ],
+        "phase_after": 2,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22319,
+      "native_iteration": 22319,
+      "native_body_input_sha256": "0f9c5b927e7e770ca2902eb3c2ba975d67063fe083b0813d2fba95dcfdc9083a",
+      "native_body_output_sha256": "47b75d4040c47328eed3bd18168ee914cde05e6266c73afd216c86249105842f",
+      "source_owner_input_sha256": "18b3860ebaec5524132f06b638c772f6cbc4cb9171cc2ea36b9d2b1e6bd15d3b",
+      "source_owner_output_sha256": "10183616eabbdfa7737dc57cb42e645b497522da0f6c479c48e2a7bc5630473b",
+      "source": {
+        "phase_before": 136,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 137
+          },
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 138
+          }
+        ],
+        "phase_after": 138,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 137,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 138
+          },
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 139
+          }
+        ],
+        "phase_after": 139,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "d4b1f9996a3e198ef967fd3f6669a2ae706b5d81aa2e51f31cbd1dd470f86f8b",
+      "native_owner_output_sha256": "0d235b3120f6892a090d368ab5b230ffdfd6f17074b09f05d9ec95e6a04e9b09",
+      "native": {
+        "phase_before": 3,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 4
+          },
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 5
+          }
+        ],
+        "phase_after": 5,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 2,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 3
+          },
+          {
+            "record_offset": 7168,
+            "x": 147,
+            "y": 165,
+            "pair": 0,
+            "colour": 5,
+            "phase": 4
+          }
+        ],
+        "phase_after": 4,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22320,
+      "native_iteration": 22320,
+      "native_body_input_sha256": "73b44791503e258974db9f9b2916cb9c8589849d40d797271e5f7c95dc6f07c5",
+      "native_body_output_sha256": "8ffc4d138496a4981200956ea52f3a403156c681be767a9dcc5995dd23ba43d3",
+      "source_owner_input_sha256": "e74745294fa4ee364a980b52bb138dad7cec598106319f86085e771b3475702f",
+      "source_owner_output_sha256": "069ffd1c028445a42988ac02cfc4c28273442ed689cf363c6ae843d439068a51",
+      "source": {
+        "phase_before": 138,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 138,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 139,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 139,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "1d3360cfa078c880da3192a0c7f5eae04a651f37284edfc7873aa72b8f5de206",
+      "native_owner_output_sha256": "d1c85197a95f419b7faab96ba143cb0128bbf353008c9f16011cdf6e1ba71497",
+      "native": {
+        "phase_before": 5,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 5,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 4,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 4,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22321,
+      "native_iteration": 22321,
+      "native_body_input_sha256": "967b86cd342e4acd0de6c39f4ac802401654c44d22ec5bec70a642b3973da1d1",
+      "native_body_output_sha256": "d87d0adc23dbe85e11b83d3879f7d418cc0b17dc8898cae87a9b5d4e2c163c1d",
+      "source_owner_input_sha256": "da31f013006af2f3126669b333c9d51ed8b07927f58e9f7906c6431a630ddbe7",
+      "source_owner_output_sha256": "edd413d3aef1f83e06cc5c326830624b35d6044efbadaf734c89b8bc7f9fa1cb",
+      "source": {
+        "phase_before": 138,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 164,
+            "pair": 0,
+            "colour": 5,
+            "phase": 139
+          }
+        ],
+        "phase_after": 139,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 139,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 164,
+            "pair": 0,
+            "colour": 5,
+            "phase": 140
+          }
+        ],
+        "phase_after": 140,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "3db1628404237510393da27fc34760b53a7113431b98bd9ae779badf70eafc21",
+      "native_owner_output_sha256": "a2f248a62a3a3caf1b9c1e4ec4abaf7c846395fadfe99971b43cfbd357c8e404",
+      "native": {
+        "phase_before": 5,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 164,
+            "pair": 0,
+            "colour": 5,
+            "phase": 6
+          }
+        ],
+        "phase_after": 6,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 4,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 164,
+            "pair": 0,
+            "colour": 5,
+            "phase": 5
+          }
+        ],
+        "phase_after": 5,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22322,
+      "native_iteration": 22322,
+      "native_body_input_sha256": "288d384cbfec93046f28c840a67ea01552e910f42eede0dc067d9358bcf834d8",
+      "native_body_output_sha256": "8a2a93ea90a4742e5e85f9d4e1c3e601a60b74f23f6913d08837c96cbc018bd2",
+      "source_owner_input_sha256": "ef9a1752730fb833f6118d6a8eeacccd527260fe3d0f548dbabcf31f7c1ad196",
+      "source_owner_output_sha256": "8ca8aea994747f1f56aace01c366e0d47a48ddfae5064c494ef51c91bc0e34f3",
+      "source": {
+        "phase_before": 139,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 164,
+            "pair": 0,
+            "colour": 5,
+            "phase": 140
+          }
+        ],
+        "phase_after": 140,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 138,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 164,
+            "pair": 0,
+            "colour": 5,
+            "phase": 139
+          }
+        ],
+        "phase_after": 139,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "da8b6630495996c2ab222c5d4ad5ee300363a980a1c78b8f75d322011cd06e5f",
+      "native_owner_output_sha256": "77ab52e1e44dcc5f5795fb830d4697b6d3e612ba5e4daabc3cbba58e45f9e428",
+      "native": {
+        "phase_before": 6,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 164,
+            "pair": 0,
+            "colour": 5,
+            "phase": 7
+          }
+        ],
+        "phase_after": 7,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 7,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 164,
+            "pair": 0,
+            "colour": 5,
+            "phase": 8
+          }
+        ],
+        "phase_after": 8,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22323,
+      "native_iteration": 22323,
+      "native_body_input_sha256": "d8ff037827eb3cf2e3935ccbc472bc5b10c59d1adb01720a65ede988340ab3e4",
+      "native_body_output_sha256": "87dc73130035e78cae3a39a2e15d820aaa85d73f8c9dea3487002e2c0b3146de",
+      "source_owner_input_sha256": "1ecb7ed3a64af2ae2a19a3cbbdc90a9c039856cc1afe79b3b143d8fe1b5f1b3d",
+      "source_owner_output_sha256": "65b3ce4ea0e4b7c738e550e2af6901554b13610b597ce1e45eb317adde78e282",
+      "source": {
+        "phase_before": 140,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 140,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 141,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 141,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "582c6b1d06427f167f9ad64216a6d823938050a61a12346ad12f2187e11c1d1f",
+      "native_owner_output_sha256": "4ddf196b3c41cf4ac1517dad6ac498c0fe7058ceb43aef3610e3ada3681f40a0",
+      "native": {
+        "phase_before": 7,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 7,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 6,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 6,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22324,
+      "native_iteration": 22324,
+      "native_body_input_sha256": "34b78a539f2a9cfb1ae46a9aa4896cbe2d0b2b9603e7841df3431d9c4846a64d",
+      "native_body_output_sha256": "0ab00f60e9dd0f4591f17641dc6208f16170b5c434aef2071f7075c744466ed4",
+      "source_owner_input_sha256": "969a7102b48bd37c26b701d6831abcb5209ca978d67bcfc47e8ae32158e51090",
+      "source_owner_output_sha256": "c18a516ce3e22f004ad18e0293a46734c7abc737378eab80aae5be786f5c9d4c",
+      "source": {
+        "phase_before": 140,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 140,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 141,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 141,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "75bba2a05be8074063b6c78870042fe8fcef6bde58466137caab7886a9198b76",
+      "native_owner_output_sha256": "6e73da15653d7905125ed8199000428cf0702c3c93ec669a630247651f0a4c1d",
+      "native": {
+        "phase_before": 7,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 7,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 6,
+        "selected_record": 4096,
+        "points": [],
+        "phase_after": 6,
+        "prefix_calls": 0,
+        "complete_non_stack_ram_matching": true
+      }
+    },
+    {
+      "iteration": 22325,
+      "native_iteration": 22325,
+      "native_body_input_sha256": "cc825ba7199fa225154ad9a1e7b970a13f25b61c4183a88ed57f356b93109a8a",
+      "native_body_output_sha256": "87c54aead28ff9f5fe12037c6e945671f01983e6b6e8dfc62e15340c34e37fd8",
+      "source_owner_input_sha256": "3997579c79558ab569808c3763c6ac4fccc482a328760141381850543b0b84cc",
+      "source_owner_output_sha256": "02b47228ac3adeb5a64c4bb613a04e1e8655cf0bc735a1410ed7f63c8b406a09",
+      "source": {
+        "phase_before": 140,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 163,
+            "pair": 0,
+            "colour": 5,
+            "phase": 141
+          }
+        ],
+        "phase_after": 141,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "source_flipped_phase": {
+        "phase_before": 141,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 163,
+            "pair": 0,
+            "colour": 5,
+            "phase": 142
+          }
+        ],
+        "phase_after": 142,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_owner_input_sha256": "f05898ecbf6f5700d23bd9f0d89eb503dd96cce032f6a6999023d582729fc080",
+      "native_owner_output_sha256": "7fe108714c4cbc09b0d658daf30bf1b0c7d57e0e7c51e235720fa00cb2ffd22f",
+      "native": {
+        "phase_before": 7,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 163,
+            "pair": 0,
+            "colour": 5,
+            "phase": 8
+          }
+        ],
+        "phase_after": 8,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      },
+      "native_flipped_phase": {
+        "phase_before": 6,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 7168,
+            "x": 148,
+            "y": 163,
+            "pair": 0,
+            "colour": 5,
+            "phase": 7
+          }
+        ],
+        "phase_after": 7,
+        "prefix_calls": 1,
+        "complete_non_stack_ram_matching": true
+      }
+    }
+  ],
+  "strict_complete_pages_matching": 287,
+  "complete_flight_observations": 4967,
+  "next_unassessed_difference": {
+    "iteration": 22309,
+    "owner": "C322EE target-information line",
+    "source": "HDG 150",
+    "native": "ALT 5115",
+    "accepted": false
+  }
+}

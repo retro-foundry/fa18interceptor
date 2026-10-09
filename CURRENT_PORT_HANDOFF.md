@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Mission-three radar cadence (2026-10-09): the first remaining strict pixels
+at 22,303 are the selected-target marker on opposite incoming blink phases.
+Twenty-four actual original owner returns and native bodies, 96 complete
+owner comparisons and four rejection probes preserve original increments,
+gates, coordinates and colours. All 22,326 reference observations reproduce.
+This bounded radar phase is assessed under the accepted rendering cadence;
+strict pages remain 287/4,967. Target-info text at 22,309 is the next unassessed
+difference. Runtime and counters are unchanged; state cleanup stays deferred.
+See [radar evidence](analysis/native_mission_radar_cadence_milestone.md).
+
 Ground-strip startup fix (2026-10-09): native now calls original C2527C,
 generating all 40 disk-backed strip corner records before gameplay. Missing
 corners caused empty ground draws and later placement skips, consistent with

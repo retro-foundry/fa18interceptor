@@ -67,6 +67,9 @@ int main(int argc,char **argv) {
     const int trace_input_carry=getenv("FA18_FRAME_TRACE_INPUT_CARRY")!=NULL;
     const int trace_model=getenv("FA18_FRAME_TRACE_MODEL")!=NULL;
     const int trace_line=getenv("FA18_FRAME_TRACE_LINE")!=NULL;
+    const int trace_plot=getenv("FA18_FRAME_TRACE_PLOT")!=NULL;
+    const char *radar_dump=getenv("FA18_FRAME_RADAR_DUMP");
+    unsigned radar_exports=0;
     const char *descriptor_dump=getenv("FA18_FRAME_DESCRIPTOR_DUMP");
     const char *descriptor_stream=getenv("FA18_FRAME_DESCRIPTOR_STREAM");
     unsigned descriptor_exports=0;
@@ -80,6 +83,16 @@ int main(int argc,char **argv) {
     unsigned restore_first=0,restore_second=0;
     uint16_t context_factor=0;
     for(step=0;step<10000000;++step) {
+        if(radar_dump && ((REG_PC==0xc31226u && !(radar_exports&1u)) ||
+                          (REG_PC==0xc0f18eu && !(radar_exports&2u)))) {
+            const int after=REG_PC==0xc0f18eu;
+            char path[4096];
+            if(snprintf(path,sizeof path,"%s.%s.dat",radar_dump,after?"after":"before")>=(int)sizeof path) return 1;
+            FILE *out=fopen(path,"wb");
+            if(!out || fwrite(m->chip,1,0x80000,out)!=0x80000 ||
+               fwrite(m->slow,1,0x80000,out)!=0x80000 || fclose(out)) return 1;
+            radar_exports|=after?2u:1u;
+        }
         if(descriptor_dump && descriptor_stream && REG_PC==0xc096cau &&
            rd_u32(0xc45a36u)==(gaddr)strtoul(descriptor_stream,NULL,16)) {
             char path[4096];
@@ -93,6 +106,10 @@ int main(int argc,char **argv) {
             fprintf(stderr,"line %d,%d -> %d,%d colour=%u return=%06X\n",
                 (int16_t)REG_D[0],(int16_t)REG_D[1],(int16_t)REG_D[2],(int16_t)REG_D[3],
                 rd_u16(CURRENT_COLOUR),rd_u32(REG_A[7]));
+        if(trace_plot && (REG_PC==0xc2f5f4u || REG_PC==0xc2f60au || REG_PC==0xc2f66eu))
+            fprintf(stderr,"plot pc=%06X x=%d y=%d colour=%u return=%06X record=%06X\n",
+                REG_PC,(int16_t)REG_D[0],(int16_t)REG_D[1],rd_u16(CURRENT_COLOUR),
+                rd_u32(REG_A[7]),rd_u32(0xc18214u));
         if(REG_PC==0xc0a12e && REG_A[1]==CONTROL_RECORDS+0x800) ++restore_first;
         if(REG_PC==0xc0a12e && REG_A[1]==CONTROL_RECORDS+0xc00) ++restore_second;
         if(REG_PC==0xc1e328 && rd_u8(CONTEXT_SELECT)) context_factor=(uint16_t)(REG_D[3]>>16);

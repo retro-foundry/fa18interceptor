@@ -25,17 +25,36 @@ static void export_frame_body(const char *prefix,const char *suffix) {
 void fa18_bus_begin(uint32_t pc) {
     static int initialized;
     static long target;
+    static long count=1,last_iteration;
+    static uint32_t owner,owner_return;
     static const char *prefix;
     static unsigned exported;
     if(!initialized) {
         const char *at=getenv("FA18_ORIGINAL_BODY_ITERATION");
         prefix=getenv("FA18_ORIGINAL_BODY_PREFIX");
         if(!at || !prefix || !(target=strtol(at,NULL,10))) abort();
+        const char *range=getenv("FA18_ORIGINAL_BODY_COUNT");
+        if(range) count=strtol(range,NULL,10);
+        if(count<1 || count>128) abort();
+        const char *entry=getenv("FA18_ORIGINAL_BODY_OWNER");
+        const char *after=getenv("FA18_ORIGINAL_BODY_OWNER_RETURN");
+        if(!!entry!=!!after) abort();
+        if(entry) {owner=(uint32_t)strtoul(entry,NULL,16);owner_return=(uint32_t)strtoul(after,NULL,16);}
         initialized=1;
     }
-    if(fa18_loop_iterations()==target) {
-        if(pc==0xc0efeau && !(exported&1)) {export_frame_body(prefix,"before");exported|=1;}
-        if(pc==0xc0f3c0u && !(exported&2)) {export_frame_body(prefix,"after");exported|=2;}
+    const long iteration=fa18_loop_iterations();
+    if(iteration>=target && iteration-target<count) {
+        char range_prefix[4096];
+        const char *destination=prefix;
+        if(iteration!=last_iteration) {exported=0;last_iteration=iteration;}
+        if(count>1) {
+            if(snprintf(range_prefix,sizeof range_prefix,"%s.%ld",prefix,iteration)>=(int)sizeof range_prefix) abort();
+            destination=range_prefix;
+        }
+        if(pc==0xc0efeau && !(exported&1)) {export_frame_body(destination,"before");exported|=1;}
+        if(pc==0xc0f3c0u && !(exported&2)) {export_frame_body(destination,"after");exported|=2;}
+        if(owner && pc==owner && !(exported&4)) {export_frame_body(destination,"owner");exported|=4;}
+        if(owner_return && pc==owner_return && !(exported&8)) {export_frame_body(destination,"owner-after");exported|=8;}
     }
     original_bus_begin(pc);
 }
