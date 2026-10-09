@@ -55,7 +55,8 @@ def predicted_pages(before, after, drawn, mutation=None, base=None):
                 pixels = ((bits << 24) >> shift) & cell if drawing else 0
                 if mutation == 'wrong_glyph' and drawing:
                     pixels ^= cell
-                result[plane][dest:dest + 4] = ((old & (0xFFFFFFFF ^ cell)) | pixels).to_bytes(4, 'big')
+                retained = old if mutation == 'lost_cell_clear' else old & (0xFFFFFFFF ^ cell)
+                result[plane][dest:dest + 4] = (retained | pixels).to_bytes(4, 'big')
     return result
 
 
@@ -95,12 +96,14 @@ def main():
         parser.add_argument('--' + name, type=Path, required=True)
     parser.add_argument('--plane-history', action='store_true',
                         help='Predict every plane-1 XOR byte on both pages through the bounded window')
+    parser.add_argument('--retain-native-owners', action='store_true',
+                        help='Keep compressed native owner inputs/returns for a concrete combined-write investigation')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     window = json.loads((args.window / 'report.json').read_text())
     original = json.loads((args.original_bodies / 'report.json').read_text())
     reference = json.loads((args.trace_evidence / 'report.json').read_text())
-    assert 1 <= len(window['rows']) <= 32
+    assert 1 <= len(window['rows']) <= 128
     assert reference['baseline_source_trace_sha256'] == original['source_trace_sha256']
     assert reference['runner_sha256'] == window['runner_sha256']
     baseline = args.source_evidence / 'driver.jsonl.gz'
@@ -127,6 +130,7 @@ def main():
                 cwd=ROOT, stdout=log, stderr=subprocess.STDOUT, check=True)
     env = {k: v for k, v in os.environ.items() if not k.startswith('FA18_FRAME_')}
     rows, rejections = [], dict(wrong_plane=False, lost_clear=False, wrong_glyph=False)
+    cell_clear_rejected = False
     history, expected, previous_draw = [], {}, {}
     with tempfile.TemporaryDirectory(prefix='message-pages-', dir=ROOT / 'build') as directory:
         work = Path(directory)
@@ -134,10 +138,19 @@ def main():
             i, j = observed['source_iteration'], observed['native_iteration']
             entry = {}
             for name, index in (('source', i), ('native', j)):
-                data = gzip.decompress((args.window / f'{name}.{index}.dat.gz').read_bytes())
-                assert digest(data) == observed['ram_sha256'][name]
-                verify_trace(data, headers[name], traces[name][index])
-                entry[name] = data
+                path = args.window / f'{name}.{index}.dat.gz'
+                if path.exists():
+                    data = gzip.decompress(path.read_bytes())
+                    assert digest(data) == observed['ram_sha256'][name]
+                    verify_trace(data, headers[name], traces[name][index])
+                    entry[name] = data
+                else:
+                    # Only a passing native entry is pruned. Its real body
+                    # begin proves the page bytes, not the pre-input fields.
+                    assert name == 'native' and not observed['page_differences'] and not args.plane_history
+                    data = gzip.decompress((args.window / f'native.{index}.before.dat.gz').read_bytes())
+                    assert pages(data) == pages(entry['source'])
+                    assert [digest(page) for page in pages(data)] == traces[name][index]['pages']
             if args.plane_history:
                 history.append(dict(iteration=i, **check_plane_history(entry, expected, previous_draw, not history)))
             timing = observed['body_timing']
@@ -162,6 +175,9 @@ def main():
                     verify_return(owner_input, captures[i])
                 else:
                     owner_input, observed_output = [(work / f'message.{suffix}.dat').read_bytes() for suffix in ('before', 'after')]
+                    if args.retain_native_owners:
+                        for suffix, data in zip(('before', 'after'), (owner_input, observed_output)):
+                            (args.out / f'native-owner.{i}.{suffix}.dat.gz').write_bytes(gzip.compress(data, mtime=0))
                 fixture, output = work / 'owner.dat', work / 'output.dat'
                 fixture.write_bytes(owner_input)
                 result = subprocess.run([str(executables['native_message_cadence_oracle']), str(fixture), str(output)],
@@ -198,6 +214,8 @@ def main():
                 for mutation in rejections:
                     if predicted_pages(owner_input, actual, state['text_drawn'], mutation) != pages(observed_output):
                         rejections[mutation] = True
+                if predicted_pages(owner_input, actual, state['text_drawn'], 'lost_cell_clear') != pages(observed_output):
+                    cell_clear_rejected = True
                 row[name] = dict(owner_input_sha256=digest(owner_input), owner_output_sha256=digest(observed_output),
                     predicted_pages_sha256=[digest(page) for page in pages(actual)], compared_bytes=64000,
                     layout_sha256=digest(span(owner_input, 0xC31998, 104)),
@@ -209,6 +227,17 @@ def main():
                 assert refreshes['source'] == refreshes['native'], 'Instrument redraw events/images differ'
                 history[-1]['panel_refresh_sha256'] = refreshes['source']
             rows.append(row)
+    unobservable = []
+    if not rejections['lost_clear']:
+        # Clearing already blank alternate colour cells has no visible effect
+        # in an entirely neutral-message window. Require an observable cell
+        # clear control; do not claim that the alternate-plane probe failed.
+        assert all(row[name]['flags_after'] >> 6 == 0 for row in rows for name in ('source', 'native')), \
+            'Unobservable alternate-plane clearing needs its own assessment outside neutral messages'
+        assert cell_clear_rejected, 'No observable clear control in this message window'
+        unobservable.append('lost_clear')
+        del rejections['lost_clear']
+        rejections['lost_cell_clear'] = True
     assert all(rejections.values()), rejections
     report = dict(first=window['first'], last=window['last'], observations=len(rows), rows=rows,
         runner_sha256=window['runner_sha256'], source_trace_sha256=window['source_trace_sha256'],
@@ -223,6 +252,10 @@ def main():
         report['complete_plane_history'] = history
         report['scope'] = report['scope'].replace('Cross-runtime message page history remains open;',
             'Every plane-1 XOR byte on both complete pages is predicted through this bounded window from common initial planes, actual message writes and instrument bitmap redraws; other cross-runtime planes remain open;')
+    if args.retain_native_owners:
+        report['native_owner_captures_retained'] = True
+    if unobservable:
+        report['unobservable_drawing_mutations'] = unobservable
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f"{len(rows)} native bodies, {2 * len(rows)} actual message owners and complete 64,000-byte page predictions pass; three drawing mutations rejected")
     subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)

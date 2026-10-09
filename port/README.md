@@ -1,5 +1,12 @@
 # Active port source ownership
 
+Combined cockpit history (2026-10-09): all eight complete planes across the
+first 40-observation drawing episode follow actual radar, bitmap and message
+writes (2,560,000 XOR bytes). The first 38 differing plane-0 observations are
+explained; 1,873 remain open. All three omitted-owner histories are rejected;
+earlier message and whole-plane-1/2 reports are unchanged. See
+[combined drawing evidence](../analysis/native_combined_cockpit_history_milestone.md).
+
 Remaining drawing audit (2026-10-09): original radar writes explain the first
 17 differing plane-3 observations. Full-flight audits retain 1,911 unresolved
 observations for plane 0 and 2,785 for plane 3 and exit failure; whole-plane

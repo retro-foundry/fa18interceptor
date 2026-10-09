@@ -94,6 +94,12 @@ def main():
             rows = report['complete_plane_history']
             assert all(report['mutation_rejections'].values()) and report['wrong_owner_return_capture_rejected']
             assert report['live_original_pages_matching'] == report['live_native_pages_matching'] == report['observations']
+            if 'history_mutation_rejections' in report:
+                assert set(report['history_mutation_rejections']) == {
+                    'lost_panel_refresh', 'lost_radar_writes', 'lost_message_writes'}
+                assert all(row['rejected'] is True for row in report['history_mutation_rejections'].values())
+                assert all(report['radar_phase_mutation_rejections'].values())
+                assert all(report['radar_paint_mutation_rejections'].values())
         else:
             rows = report['cross_paint_history']['rows']
             assert all(report['paint_mutation_rejections'].values()) and report['strict_live_owner_pages_matching']

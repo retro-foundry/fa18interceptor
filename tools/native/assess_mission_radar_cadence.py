@@ -277,11 +277,23 @@ def main():
         native_header, native_rows = read_trace(native_path)
         assert header == native_header
         for observed in window['rows']:
+            source_entry_pages = None
             for name, index, trace_rows in (('source', observed['source_iteration'], source_rows),
                                             ('native', observed['native_iteration'], native_rows)):
-                data = gzip.decompress((args.window / f'{name}.{index}.dat.gz').read_bytes())
-                assert digest(data) == observed['ram_sha256'][name]
-                verify_trace(data, header, trace_rows[index])
+                path = args.window / f'{name}.{index}.dat.gz'
+                if path.exists():
+                    data = gzip.decompress(path.read_bytes())
+                    assert digest(data) == observed['ram_sha256'][name]
+                    verify_trace(data, header, trace_rows[index])
+                    if name == 'source':
+                        source_entry_pages = pages(data)
+                else:
+                    # Pruned passing native entries can be proved only for
+                    # complete page bytes by the retained actual body begin.
+                    assert name == 'native' and not observed['page_differences']
+                    data = gzip.decompress((args.window / f'native.{index}.before.dat.gz').read_bytes())
+                    assert pages(data) == source_entry_pages
+                    assert [digest(page) for page in pages(data)] == trace_rows[index]['pages']
     else:
         assert window['source_trace_sha256'] == original['source_trace_sha256']
     captures = {row['iteration']: row['snapshots'] for row in original['captures']}

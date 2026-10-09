@@ -1,5 +1,9 @@
 # Remaining complete-flight drawing audit - 2026-10-09
 
+This earlier inventory is superseded for the first plane-0 episode by the
+[combined cockpit history](native_combined_cockpit_history_milestone.md).
+That episode is now explained; the current plane-0 unresolved count is 1,873.
+
 The first mission-three plane-3 episode is now explained by the original radar
 head, erasure and marker writes, including instrument bitmap redraws. All
 complete plane-3 bytes on both pages match the predicted XOR history through
