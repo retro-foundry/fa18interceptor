@@ -1,5 +1,15 @@
 # The C port
 
+Complete mission-three message timing (2026-10-09): all 4,964 real transitions
+obey original elapsed/countdown, delay/redraw, full text and colour-cache rules,
+including 1,362 paused HUD periods. Nine priority-message producer fields match
+at all 4,967 observations. Both first HDG events follow two sampled-second
+changes (original tick168/native185); this is assessed under the accepted
+cadence policy. Release/Debug agree; nine wrong results are rejected. Optional
+read-only fields preserve all earlier traces, pages, final RAM, counters and
+saves. Strict pages remain 287/4,967; other drawing and completion work remain
+open. State cleanup stays deferred. See [message evidence](analysis/native_mission_message_timing_milestone.md).
+
 Ground-strip startup fix (2026-10-09): native now calls original C2527C,
 generating all 40 disk-backed strip corner records before gameplay. Missing
 corners caused empty ground draws and later placement skips, consistent with

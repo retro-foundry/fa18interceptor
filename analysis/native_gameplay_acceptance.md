@@ -1,5 +1,15 @@
 # Native gameplay-frame acceptance
 
+Complete mission-three message timing (2026-10-09): all 4,964 real transitions
+obey original elapsed/countdown, delay/redraw, full text and colour-cache rules,
+including 1,362 paused HUD periods. Nine priority-message producer fields match
+at all 4,967 observations. Both first HDG events follow two sampled-second
+changes (original tick168/native185); this is assessed under the accepted
+cadence policy. Release/Debug agree; nine wrong results are rejected. Optional
+read-only fields preserve all earlier traces, pages, final RAM, counters and
+saves. Strict pages remain 287/4,967; other drawing and completion work remain
+open. State cleanup stays deferred. See [mission message evidence](native_mission_message_timing_milestone.md).
+
 2026-10-09 target-info update: the reported tick273 ALT/HDG mismatch is assessed
 under the cadence policy. Both independently started mode-three recordings
 obey the original elapsed/countdown, context/redraw and complete-text rules

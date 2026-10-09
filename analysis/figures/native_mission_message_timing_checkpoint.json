@@ -1,0 +1,195 @@
+{
+  "assets_sha256": "dc670ce5e6983915463ca18f239253660a184c9212c9d8389383f8216d62f516",
+  "trace_sha256": {
+    "source": "1b8102c53dba21d5292c69da6e2d54bed8e5c36deab22dedd71f27b220e8198b",
+    "native": "c628d3f83365e2b95fa5348acb4ec56c208dea1dd2102ca53db38d8d32de39b8"
+  },
+  "preserved_observations": {
+    "source": 27110,
+    "native": 16062
+  },
+  "complete_producer_boundaries": 4967,
+  "producer_fields": [
+    "notification_countdown",
+    "message_code",
+    "message_loaded",
+    "message_shown",
+    "message_countdown",
+    "message_time",
+    "cockpit_flags",
+    "threat_events",
+    "player_phase"
+  ],
+  "equivalent_initial_page_events": [
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      2
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      2,
+      8
+    ]
+  ],
+  "first_heading": {
+    "source": {
+      "iteration": 22309,
+      "tick": 168,
+      "page": 2,
+      "seconds_changed": 32,
+      "message": "    NO SIG   HDG:  150    "
+    },
+    "native": {
+      "iteration": 22326,
+      "tick": 185,
+      "page": 2,
+      "seconds_changed": 14,
+      "message": "    NO SIG   HDG:  150    "
+    }
+  },
+  "negative_controls_rejected": [
+    "premature_page",
+    "lost_second_event",
+    "wrong_refreshed_text",
+    "wrong_held_text",
+    "lost_vicinity_delay",
+    "wrong_notification_step",
+    "wrong_message_colour",
+    "wrong_warning_text",
+    "wrong_priority_message"
+  ],
+  "first": 22142,
+  "last": 27108,
+  "strict_pages_matching": 287,
+  "strict_page_boundaries": 4967,
+  "acceptance": "The complete recorded mission obeys original elapsed-second page cycling, delay/redraw gates, full text caching/formatting and message-kind rules. Priority-message producer fields match at all real update identities. The initial ALT/HDG difference is assessed under the accepted cadence policy. Strict complete pages remain reported; other drawing, other flights and audio are not accepted by this check.",
+  "build_runner_sha256": {
+    "Release": "c77e172ba3c5c768ff48aeefee444b5eb276dcff5b7dbd1317c7dd4f55fbdabb",
+    "Debug": "0e1847288e301c76f1959a545382e85d3d10424b04b213f3f81e8de562d04491"
+  },
+  "source_runner_sha256": "00315bd371ba806577fce21b8ed548563f3e572da6f4048f402d1af6b89b4bb8",
+  "source_final_ram_sha256": "dc670ce5e6983915463ca18f239253660a184c9212c9d8389383f8216d62f516",
+  "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+  "input_hashes": {
+    "captures\\native\\qual_carrier_success\\input.fa18in": "fe4ff3a4cac080a4534041eb42d84a9332916d7566336910d852f86cde070440",
+    "captures\\native\\qual_carrier_success\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+    "tools\\native\\fixtures\\region-pilot-enlist.e9k": "3c2a48da86432f2782ed6cb0036a9eb42fa08df4b6a64df75496e602530bff3a",
+    "local\\media\\fa18.adf": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2"
+  },
+  "baseline_trace_sha256": {
+    "source": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+    "native": "62cb2077f31ba059dbd210ca0340cc57e40d7726d894a80af59e54bc95fa6a37"
+  },
+  "assessment_report_sha256": {
+    "Release": "debc98de73f15422e35c0f104810df0457dc6a687af6e755735687e020a9045b",
+    "Debug": "a6d6db0fda5c7955f8ebd720bccfc7ab72e22612c716e57b1182dda9f93f47cf"
+  },
+  "capture_report_sha256": {
+    "Release": "5890141794bc7553d3b8773b51f5ffb13bb15f1356c3853a456ac7097e207ae0",
+    "Debug": "9cb23b19e47225f4ad69390f24336e92377df4f4e605ab60f05e74133642f6c7"
+  },
+  "source": {
+    "transitions": 4964,
+    "duplicate_observations": 2,
+    "idle": 1362,
+    "fresh_information": 590,
+    "cached_information": 2773,
+    "blanking": 6,
+    "fresh_message": 14,
+    "cached_message": 219,
+    "context_suppressed": 0,
+    "seconds_changed": 584,
+    "notification_steps": 4964,
+    "message_kinds": 3602,
+    "delay_resets": [
+      23311,
+      25710
+    ],
+    "redraw_events": [
+      22149,
+      22150,
+      22151,
+      22152,
+      22153,
+      22442,
+      22443,
+      22444,
+      22445,
+      22446,
+      22545,
+      22546,
+      22547,
+      22548,
+      22549,
+      26060,
+      26061,
+      26062,
+      26063,
+      26064,
+      26230,
+      26231,
+      26232,
+      26233,
+      26234
+    ],
+    "page_event_count": 276
+  },
+  "native": {
+    "transitions": 4964,
+    "duplicate_observations": 2,
+    "idle": 1362,
+    "fresh_information": 541,
+    "cached_information": 2822,
+    "blanking": 6,
+    "fresh_message": 14,
+    "cached_message": 219,
+    "context_suppressed": 0,
+    "seconds_changed": 246,
+    "notification_steps": 4964,
+    "message_kinds": 3602,
+    "delay_resets": [
+      23311,
+      25710
+    ],
+    "redraw_events": [
+      22149,
+      22150,
+      22151,
+      22152,
+      22153,
+      22442,
+      22443,
+      22444,
+      22445,
+      22446,
+      22545,
+      22546,
+      22547,
+      22548,
+      22549,
+      26060,
+      26061,
+      26062,
+      26063,
+      26064,
+      26230,
+      26231,
+      26232,
+      26233,
+      26234
+    ],
+    "page_event_count": 123
+  }
+}

@@ -11,7 +11,7 @@ typedef struct {
     FILE *file;
     size_t bytes,budget;
     unsigned rows;
-    int failed;
+    int failed,message_fields;
 } FA18FlightTrace;
 int fa18_flight_trace_open(FA18FlightTrace *trace,const char *path,size_t budget);
 int fa18_flight_trace_write(FA18FlightTrace *trace,unsigned iteration,unsigned frame,

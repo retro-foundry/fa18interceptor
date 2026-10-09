@@ -5,6 +5,7 @@
 #include "flight_trace.h"
 #include "../amiga/sha256.h"
 #include <stdarg.h>
+#include <stdlib.h>
 #include <string.h>
 
 typedef struct { const char *name; uint32_t address; size_t size; } TraceField;
@@ -33,6 +34,25 @@ static const TraceField fields[]={
     {"primary_count",0xc45884,1}, {"secondary_count",0xc45885,1},
     {"view_mode",0xc457a7,1}
 };
+/* Optional owner inputs needed to assess complete cockpit message sequences.
+ * Default V2 output is unchanged; these are direct, read-only host spans. */
+static const TraceField message_fields[]={
+    {"message_shown",0xc45ade,2}, {"message_code",0xc45ae0,2},
+    {"message_loaded",0xc45ae2,2}, {"message_flags",0xc45862,1},
+    {"message_countdown",0xc45892,1}, {"message_time",0xc45893,1},
+    {"message_kind",0xc45860,1}, {"message_redraws",0xc45861,1},
+    {"notification_countdown",0xc45890,1},
+    {"threat_events",0xc4586e,1}, {"threat_bits",0xc4586d,1},
+    {"radar_phase",0xc45883,1}, {"text_always",0xc45793,1},
+    {"player_phase",0xc45798,1}
+};
+static size_t field_count(const FA18FlightTrace *trace) {
+    return sizeof fields/sizeof fields[0]+(trace->message_fields?sizeof message_fields/sizeof message_fields[0]:0);
+}
+static const TraceField *field_at(size_t index) {
+    const size_t count=sizeof fields/sizeof fields[0];
+    return index<count?&fields[index]:&message_fields[index-count];
+}
 typedef struct { char text[12288]; size_t size; int failed; } TraceRow;
 static void append(TraceRow *row,const char *format,...) {
     va_list args;
@@ -70,15 +90,18 @@ static int publish(FA18FlightTrace *trace,const TraceRow *row) {
 }
 int fa18_flight_trace_open(FA18FlightTrace *trace,const char *path,size_t budget) {
     memset(trace,0,sizeof *trace);trace->budget=budget;
+    trace->message_fields=getenv("FA18_TRACE_MESSAGE_FIELDS")!=NULL;
     trace->file=fopen(path,"wb");
     if(!trace->file) {perror(path);trace->failed=1;return 0;}
     TraceRow row={0};
     append(&row,"{\"format\":\"FA18_FLIGHT_TRACE_V2\",\"boundary\":\"C0EFD4/pre-input\","
                 "\"record_address\":%u,\"record_stride\":512,\"record_size\":164,"
                 "\"record_count\":16,\"plane_bytes\":8000,\"fields\":[",0xc46184u);
-    for(size_t i=0;i<sizeof fields/sizeof fields[0];++i)
+    for(size_t i=0;i<field_count(trace);++i) {
+        const TraceField *field=field_at(i);
         append(&row,"%s{\"name\":\"%s\",\"address\":%u,\"size\":%zu}",
-            i?",":"",fields[i].name,fields[i].address,fields[i].size);
+            i?",":"",field->name,field->address,field->size);
+    }
     append(&row,"]}\n");
     return publish(trace,&row);
 }
@@ -93,8 +116,9 @@ int fa18_flight_trace_write(FA18FlightTrace *trace,unsigned iteration,unsigned f
         append(&row,"\"");
     }
     append(&row,"],\"fields\":[");
-    for(size_t i=0;i<sizeof fields/sizeof fields[0];++i) {
-        append(&row,"%s\"",i?",":"");hex(&row,reader(context,fields[i].address,fields[i].size),fields[i].size);
+    for(size_t i=0;i<field_count(trace);++i) {
+        const TraceField *field=field_at(i);
+        append(&row,"%s\"",i?",":"");hex(&row,reader(context,field->address,field->size),field->size);
         append(&row,"\"");
     }
     const uint32_t draw=integer(reader,context,0xc4566c,2);
