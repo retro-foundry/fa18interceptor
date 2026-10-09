@@ -20,7 +20,10 @@ enum NativeInputReturnOwner { NATIVE_INPUT_RETURN_UNKNOWN, NATIVE_INPUT_RETURN_M
                               NATIVE_INPUT_RETURN_CONTEXT_ACTION,NATIVE_INPUT_RETURN_HUD_FORMAT };
 typedef struct { uint8_t value; enum NativeInputReturnOwner owner; } NativeInputReturn;
 enum NativeFrameBoundary { NATIVE_FRAME_BODY_BEGIN, NATIVE_FRAME_BODY_END, NATIVE_FRAME_INPUT_BEGIN,
-                           NATIVE_FRAME_OWNER_EXIT };
+                           NATIVE_FRAME_OWNER_EXIT, NATIVE_STARTUP_SCENE_BEGIN,
+                           NATIVE_STARTUP_SCENE_END };
+typedef void (*NativeFrameObserver)(NativeFrontend *game,enum NativeFrameBoundary boundary,
+                                    uint16_t saved_tick,void *context);
 struct NativeFrontend {
     NativeStorage storage;
     AmigaOfs disk;
@@ -56,13 +59,17 @@ struct NativeFrontend {
     unsigned update_iterations;
     void (*begin_update)(NativeFrontend *game,void *context);
     void *update_context;
-    /* Optional diagnostics before input, at C0EFEA/C0F3C0 or C0DA38's exit. */
-    void (*observe_frame)(NativeFrontend *game,enum NativeFrameBoundary boundary,
-                          uint16_t saved_tick,void *context);
+    /* Optional read-only diagnostics around initial C08F26, before input,
+     * at C0EFEA/C0F3C0 or C0DA38's exit. */
+    NativeFrameObserver observe_frame;
     void *frame_context;
     char config_path[4096];
 };
 int native_frontend_open(NativeFrontend *game,const char *adf,const char *save_dir,char *error,size_t capacity);
+/* Attach read-only diagnostics before the initial C0F812/C08F26 scene,
+ * rather than losing that interval while ordinary open initializes it. */
+int native_frontend_open_observed(NativeFrontend *game,const char *adf,const char *save_dir,
+                                 char *error,size_t capacity,NativeFrameObserver observer,void *context);
 void native_frontend_mouse(NativeFrontend *game,int dx,int dy);
 void native_frontend_button(NativeFrontend *game,unsigned button,int down);
 void native_frontend_close(NativeFrontend *game);

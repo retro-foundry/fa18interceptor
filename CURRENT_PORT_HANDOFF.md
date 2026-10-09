@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Initial startup sorting (2026-10-09) is now verified, completing that requested
+check together with qualification entry. The actual C0F812 stack frame and
+complete C08F26 bootstrap match native startup; all three lists and retained
+output agree. Ten startup intervals add thirty lists and twenty incoming-factor
+probes. Release/Debug agree on all 22 combined intervals, 60 lists, 40 probes and
+RAM hashes. No startup sort fault or gameplay change was found. Optional
+read-only observation attaches before initialization; normal frontend and demo
+regressions pass in both builds. Canonical Release is refreshed. See
+`analysis/native_initial_startup_sort_milestone.md` and its checkpoint. Older
+initial-startup TODO notes below are superseded for the requested callers.
+
 Latest acceptance direction (2026-10-09): the user explicitly waived an
 uninterrupted qualification-plus-six-mission run because the final mission's
 spawn variation makes that route difficult. Qualify missions individually with
@@ -9,7 +20,7 @@ The existing continuous-campaign tools and five-mission prefix remain diagnostic
 evidence; the unsuccessful sixth mission in that session is no longer a
 completion blocker. This supersedes every older uninterrupted-campaign
 requirement below. Failed bank/height test-pilot experiments were reverted.
-Independent original whole flights, startup sorting, recorded audio/filter
+Independent original whole flights, recorded audio/filter
 fidelity, visible performance and named-state cleanup remain separate work.
 
 Repeated individual qualification is now accepted: current Release and Debug

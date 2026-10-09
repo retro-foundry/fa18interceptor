@@ -7,15 +7,19 @@
 static unsigned host_tick;
 static uint16_t retained_sort;
 static unsigned retained_sorts,cached_sort_entries,far_sort_entries;
+static int startup_scene;
 static int original_stage(void) {
     const int trace=getenv("FA18_MODE_STAGE_TRACE")!=NULL;
     const char *forced_factor=getenv("FA18_MODE_CONTEXT_FACTOR");
     uint32_t upper_writer=0;
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;
-    wr_u32(REG_A[7],0xc70000);REG_PC=0xc0f5f8;
+    wr_u32(REG_A[7],0xc70000);REG_PC=startup_scene?0xc0f812:0xc0f5f8;
     m68k_set_reg(M68K_REG_SR,0x2700);
     SET_CYCLES(1000000000);
     for(unsigned step=0;step<2000000;++step) {
+        /* Execute C0F812's actual LINK -14 and its complete C08F26 call.
+         * The native interval ends before C0F81C's unrelated text setup. */
+        if(startup_scene && REG_PC==0xc0f81c && REG_A[7]==REG_A[6]-14) return 1;
         if(REG_PC==0xc70000 && REG_A[7]==0xc7ff04) return 1;
         if(file_oracle_service()) continue;
         /* A comparison-only dependency probe. Never supplied to native code. */
@@ -44,6 +48,7 @@ static int original_stage(void) {
 }
 int main(int argc,char **argv) {
     if(argc<4) return 1;
+    startup_scene=argc==5 && !strcmp(argv[4],"startup");
     size_t ns=0,nr=0,nb=0,na=0;char error[256];
     uint8_t *state=read_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=read_bytes("local/system/kick13.rom",&nr);
@@ -65,7 +70,7 @@ int main(int argc,char **argv) {
         }
     }
     m->joy1dat=0;
-    for(int i=4;i<argc;++i) native_input_enqueue_raw(game,(uint8_t)strtoul(argv[i],NULL,10));
+    if(!startup_scene) for(int i=4;i<argc;++i) native_input_enqueue_raw(game,(uint8_t)strtoul(argv[i],NULL,10));
     host_tick=(unsigned)strtoul(argv[3],NULL,10);
     const char *retained_before=getenv("FA18_MODE_RETAINED_BEFORE");
     const char *retained_after=getenv("FA18_MODE_RETAINED_AFTER");
@@ -73,7 +78,7 @@ int main(int argc,char **argv) {
     if(retained_before) retained_sort=(uint16_t)strtoul(retained_before,NULL,10);
     const gaddr stage=rd_u32(STAGE_CALLBACK);
     if(!file_oracle_reset(game)) return 1;
-    if(!original_input(game) || !original_stage()) return 1;
+    if((!startup_scene && !original_input(game)) || !original_stage()) return 1;
     unsigned differences=0;
     for(unsigned i=0;i<0xff000;++i) {
         const uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];

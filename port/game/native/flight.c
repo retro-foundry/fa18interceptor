@@ -60,8 +60,10 @@ static void refresh_native_context_sort(int sort_all,const uint32_t *projection_
     }
     /* C2DACC's matrix output survives the context projection's save/restore
      * at C1C2C8/C1C406. Templates and uncached distance calls may replace it.
-     * TODO(port): context startup/menu callers without a projection pass;
-     * keep their missing incoming factor distinct from a produced zero. */
+     * Actual C0F812 startup and the reached menu callers replace their
+     * incoming factor through templates or uncached distance calls. Keep
+     * an absent incoming factor distinct from a produced zero; observed
+     * original-only factor probes cover those callers. */
     const ContextRefreshHooks hooks={refresh_child,NULL,&context};
     refresh_context_packet(&hooks);
 }
@@ -100,7 +102,9 @@ void native_flight_initialize(NativeFrontend *game) {
     const SceneBootstrapHooks hooks={storage_child,NULL,position};
     initialize_scene_startup_defaults(); /* C0F550 -> C08EE4 */
     load_saved_scene_level(); /* C0F556 -> C08EB8 */
+    if(game->observe_frame) game->observe_frame(game,NATIVE_STARTUP_SCENE_BEGIN,0,game->frame_context);
     bootstrap_scene(&hooks);
+    if(game->observe_frame) game->observe_frame(game,NATIVE_STARTUP_SCENE_END,0,game->frame_context);
     game->record_updates=1;
 }
 static void template_sort_factor(void *context,const TemplatePlacementEvent *event) {

@@ -10,8 +10,20 @@ driver and accepted five-mission prefix remain diagnostic evidence. Its final
 flight failure is no longer a completion blocker. This overrides every older
 uninterrupted-run requirement below. The latest failed bank/height input
 experiments were reverted. Independent original whole-flight comparisons,
-startup sorting, original recorded sound/filter fidelity, visible performance
+original recorded sound/filter fidelity, visible performance
 and named-state cleanup remain outstanding.
+
+Initial startup and qualification-entry sorting are now verified. A read-only
+startup observer captures the actual C08F26 call; the oracle executes C0F812's
+real LINK -14 frame, then the complete bootstrap. All three lists and retained
+output agree. Release/Debug match every record and RAM hash across 22 combined
+intervals, 60 sorted lists and 40 incoming-factor probes. Initial startup alone
+adds 10 intervals/30 lists/20 probes from five distinct real before-states.
+No startup sort discrepancy or game-behavior change was found; normal frontend,
+demo and artifact regressions pass in both builds. Canonical Release is refreshed.
+See `analysis/native_initial_startup_sort_milestone.md` and
+`analysis/figures/native_initial_startup_sort_checkpoint.json`. Older initial
+startup TODO notes are superseded for these requested callers.
 
 Repeated individual mission acceptance now passes on the current executables:
 Release and Debug each earn qualification plus all six cold missions, save the
@@ -158,8 +170,8 @@ refreshed. Initial startup remains unverified. See
 
 Full independently started original flights remain the main playable-parity
 check. Repeated individual mission tests replace the uninterrupted campaign
-requirement by the latest explicit user direction. Initial startup sorting,
-audio recording fidelity, visible performance and named-state migration remain
+requirement by the latest explicit user direction. Initial startup sorting is
+verified. Audio recording fidelity, visible performance and named-state migration remain
 open. Historical summaries below are superseded
 where they label qualification as Demonstration or describe all binaries as
 unchanged. The complete-port goal remains active.

@@ -19,6 +19,18 @@ from tour_pilot_fixture import load_tour_pilot
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def verify_sort_coverage(cases):
+    """Initial sorting must not satisfy the separate menu/mission coverage."""
+    startup = [case for case in cases if case.get('startup')]
+    later = [case for case in cases if not case.get('startup')]
+    assert len(startup)==10 and all(case['source_lists']>=3 for case in startup), startup
+    assert {'C0FECE', 'C0F992'} <= {case['stage'] for case in later}, later
+    assert sum(case['source_lists'] for case in later) >= 30, 'Expected menu/mission sorting was not reached'
+    for mode in (2, 3, 4, 5, 6, 7, 8, 9, 127):
+        assert any(case['mode']==mode and case['source_lists']>=3 for case in later), mode
+    return startup
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_context_sort_test.exe')
@@ -58,6 +70,9 @@ def main():
                     base = f'{prefix}.{item["entry"]}'
                     command = [str(oracle), base + '.before.dat', base + '.after.dat',
                                str(item['tick']), *map(str, item['keys'])]
+                    if item.get('startup'):
+                        assert item['tick']==0 and not item['keys'] and item['original_caller']=='C0F812', item
+                        command.append('startup')
                     env = dict(os.environ, FA18_MODE_STAGE_TRACE='1',
                                FA18_MODE_RETAINED_BEFORE=str(item['retained_before']),
                                FA18_MODE_RETAINED_AFTER=str(item['retained_after']))
@@ -104,11 +119,13 @@ def main():
                         Path(base + f'.{suffix}.dat').unlink()
             print(f'Mode {mode}: {len(entries)} scene/menu intervals match original RAM and retained sorting', flush=True)
         assert negative_checked and {'C0FECE', 'C0F992'} <= stages, stages
-        assert sum(case['source_lists'] for case in cases) >= 30, 'Expected scene/menu sorting was not reached'
-        for mode in (2, 3, 4, 5, 6, 7, 8, 9, 127):
-            assert any(case['mode'] == mode and case['source_lists'] >= 3 for case in cases), mode
+        startup = verify_sort_coverage(cases)
         report = {'scope': 'actual native scene/menu before-state original caller comparisons',
-                  'runtime_changed': True, 'physics_rules_changed': False, 'negative_control_rejected': negative_checked,
+                  'runtime_changed': True, 'runtime_change_scope': 'optional read-only initial-scene observation; sort behavior unchanged',
+                  'initial_startup_verified': True, 'startup_intervals': len(startup),
+                  'startup_sorted_lists': sum(case['source_lists'] for case in startup),
+                  'startup_factor_probes': sum(len(case['original_only_factor_probes']) for case in startup),
+                  'physics_rules_changed': False, 'negative_control_rejected': negative_checked,
                   'test_sha256': hashlib.sha256(args.test.resolve().read_bytes()).hexdigest(),
                   'adf_sha256': hashlib.sha256((ROOT / 'local/media/fa18.adf').read_bytes()).hexdigest(),
                   'cases': cases}

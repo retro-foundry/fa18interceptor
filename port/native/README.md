@@ -1,5 +1,12 @@
 # Native port runner
 
+Initial startup and qualification-entry sorting are verified through the actual
+connected frontend. The original C0F812 LINK -14 frame and complete C08F26 call
+match lists, retained output and compared RAM. Release/Debug agree on 22 combined
+intervals, 60 lists and 40 factor probes; normal frontend/demo regressions pass.
+Optional read-only startup observation leaves sorting/gameplay unchanged. See
+[startup evidence](../../analysis/native_initial_startup_sort_milestone.md).
+
 Current acceptance (2026-10-09): the user waived an uninterrupted campaign.
 Repeated individual qualification and mission tests, using actual earned saves
 and checking objectives, landing, results and menu return, replace that gate.
@@ -17,7 +24,7 @@ Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry
 also passes. Release/Debug agree on 12 intervals, 30 lists and 20 factor probes;
-frontend/demo regressions pass. Initial startup and the remaining completion
+frontend/demo regressions pass. Initial startup is now verified above; other completion
 items stay open. See [mode audit](../../analysis/native_menu_sort_mode_audit_milestone.md).
 The earlier sorting summary below is historical.
 

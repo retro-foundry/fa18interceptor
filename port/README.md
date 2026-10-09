@@ -1,5 +1,11 @@
 # Active port source ownership
 
+Initial startup and qualification-entry sorting are verified. The real C0F812
+caller frame and complete C08F26 bootstrap match native lists, retained output
+and compared RAM. Release/Debug agree on 22 combined intervals, 60 lists and
+40 factor probes; frontend/demo regressions pass. Optional startup observation
+does not change gameplay. See [startup evidence](../analysis/native_initial_startup_sort_milestone.md).
+
 Current acceptance (2026-10-09): repeated individual mission tests now replace
 the uninterrupted campaign gate by explicit user direction. Cold save/load
 boundaries are allowed; retain actual earned results and objective, landing,
@@ -17,7 +23,7 @@ Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry
 also passes. Release/Debug agree on 12 intervals, 30 lists and 20 factor probes;
-frontend/demo regressions pass. Initial startup and the remaining completion
+frontend/demo regressions pass. Initial startup is now verified above; other completion
 items stay open. See [mode audit](../analysis/native_menu_sort_mode_audit_milestone.md).
 The earlier sorting summary below is historical.
 

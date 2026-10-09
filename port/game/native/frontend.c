@@ -86,9 +86,14 @@ static MessageWorking child(void *context,enum MainControlChild which,MessageWor
     fprintf(stderr,"native frontend child unavailable: %u\n",(unsigned)which); abort();
 }
 int native_frontend_open(NativeFrontend *game,const char *path,const char *save_dir,char *error,size_t cap) {
+    return native_frontend_open_observed(game,path,save_dir,error,cap,NULL,NULL);
+}
+int native_frontend_open_observed(NativeFrontend *game,const char *path,const char *save_dir,
+                                 char *error,size_t cap,NativeFrameObserver observer,void *context) {
     AmigaOfs disk={0}; AmigaHunks hunks={0}; FA18MediaInfo media;
     uint8_t *exe=NULL,*bytes=NULL; size_t size=0; int ok=0;
     memset(game,0,sizeof *game); native_storage_bind(&game->storage);
+    game->observe_frame=observer;game->frame_context=context;
     game->audio.resolve=sample_buffer;game->audio.sample_context=&game->storage;
     native_model_retain_result(0);
     native_audio_bind(&game->audio);

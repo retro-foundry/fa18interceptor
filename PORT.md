@@ -1,5 +1,12 @@
 # The C port
 
+Initial startup and qualification-entry sorting now match the original callers.
+Release and Debug agree on 22 startup/menu/restart intervals, 60 sorted lists,
+40 incoming-factor probes and every compared RAM hash. No initial sorting fault
+was found; optional startup diagnostics leave game behavior unchanged. Frontend,
+demo and artifact regressions pass in both builds. The requested startup check
+is complete; see [startup evidence](analysis/native_initial_startup_sort_milestone.md).
+
 Current acceptance (2026-10-09): the user waived the uninterrupted campaign
 requirement. Repeated individual qualification/mission tests, with actual earned
 saves and checked objectives, landing, results and menu returns, are sufficient
@@ -17,7 +24,7 @@ Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry
 also passes. Release/Debug agree on 12 intervals, 30 lists and 20 factor probes;
-frontend/demo regressions pass. Initial startup and the remaining completion
+frontend/demo regressions pass. Initial startup is now verified above; other completion
 items stay open. See [mode audit](analysis/native_menu_sort_mode_audit_milestone.md).
 The earlier sorting summary below is historical.
 
