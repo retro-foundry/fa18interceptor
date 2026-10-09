@@ -2,6 +2,7 @@
 #include "../globals.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 static NativeAudio *active_audio;
 void native_audio_bind(NativeAudio *audio) { active_audio=audio; }
@@ -9,6 +10,13 @@ void native_audio_request_channel(int channel) {
     if(channel<0 || channel>=4 || !active_audio) {
         fprintf(stderr,"native sample request without a channel owner: %d\n",channel);
         abort();
+    }
+    /* C50134-C50150 silences and stops an empty slot before the caller
+     * starts another voice. Preserve that stop even when requests share a
+     * host block, so the new pitch cannot be applied to the old music buffer. */
+    if(!rd_u32(VOICE_SLOTS+4u*(unsigned)channel)) {
+        memset(&active_audio->streams[channel],0,sizeof active_audio->streams[channel]);
+        active_audio->channels[channel]=(VoiceOutput){PAULA_MIN_PERIOD,0};
     }
     active_audio->pending |= 1u << channel;
 }

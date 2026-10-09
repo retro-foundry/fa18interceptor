@@ -153,6 +153,10 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
     if(!native_audio_load_resources(&disk,error,cap)) goto done;
     native_viewport_initialize(game);
     native_flight_initialize(game);
+    /* C0E3E6-C0E40C starts the disk music at full master volume before
+     * the title/credits path. C17B96 owns its sample pair and sequencing. */
+    wr_u32(MASTER_VOLUME,0x3f0000u); wr_u32(MASTER_VOLUME_TARGET,0x3f0000u);
+    start_menu_sound_pair(50);
     game->screen=NATIVE_SPLASH; memcpy(game->palette,game->splash.palette,sizeof game->palette);
     for(unsigned y=0;y<game->splash.height;++y) memcpy(game->indices+y*320,game->splash.indices+y*game->splash.width,game->splash.width);
     game->disk=disk;disk=(AmigaOfs){0};
@@ -187,7 +191,9 @@ void native_frontend_key(NativeFrontend *game,int key) {
     if(native_flight_enabled(game)) {
         native_input_enqueue(game,key,1);return;
     }
-    if(game->screen==NATIVE_CREDITS) {
+    if(game->screen==NATIVE_SPLASH || game->screen==NATIVE_CREDITS) {
+        /* C11478 ducks the existing music on the first key, before enlistment. */
+        wr_u32(MASTER_VOLUME_TARGET,0x1f0000u); wr_u8(VOLUME_FADING,1);
         /* C11624 copies an existing callsign into message 2. */
         native_frontend_enlist(game);
     } else if(game->screen==NATIVE_CALLSIGN) {
@@ -209,7 +215,9 @@ void native_frontend_event(NativeFrontend *game,int key,int down) {
     if(key==303 || key==304) {
         unsigned mask=1u<<(key-303);
         if(down) game->shift_keys|=mask; else game->shift_keys&=~mask;
-        wr_u8(KEY_STATE,(uint8_t)(game->shift_keys!=0)); return;
+        wr_u8(KEY_STATE,(uint8_t)(game->shift_keys!=0));
+        if(down && game->screen==NATIVE_SPLASH) native_frontend_key(game,key);
+        return;
     }
     if(game->menu_setup.pending) { native_input_enqueue(game,key,down);return; }
     if(native_flight_enabled(game)) {
@@ -239,14 +247,9 @@ void native_frontend_tick(NativeFrontend *game) {
     if(game->display_pending && !native_display_resume(game)) {
         native_display_read_pixels(game); return;
     }
-    if(game->screen==NATIVE_SPLASH) {
-        /* C0E53C's $A000 busy-loop iterations (C0E78A), nominal 68000
-         * instruction timing converted once to PAL ticks. No CPU executes.
-         * DMA contention/loading and fade timing remain reference-only. */
-        const unsigned ticks=(unsigned)((0xa000ull*66*50+7093790-1)/7093790);
-        if(game->screen_ticks<ticks) return;
-        select_screen(game,NATIVE_CREDITS,15,0);
-    }
+    /* Requested title hold: audio continues, and only a key enters the
+     * existing pilot/menu flow. Elapsed host ticks never dismiss the title. */
+    if(game->screen==NATIVE_SPLASH) return;
     /* One C0EFD4 entry. Its clock poll and C1612C display continuation keep
      * the same iteration; replay input must never advance while suspended. */
     if(!game->flight_timer_pending) {

@@ -1,7 +1,8 @@
 """Exercise native intro/menu, editing/saving, presentation and omission build.
 
 Settled pixel digests come from original-source OFF ADF runs, 2026-10-06:
-splash frame 1000; credits 1800; menu 3000 after Space at 1800.
+splash frame 1000; menu 3000 after Space at 1800.
+The native title now waits for a key as requested, including a long idle hold.
 These are static-screen checks, not a claim about frame timing/fade parity.
 """
 import argparse
@@ -16,7 +17,6 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[2]
 SCREENS = {
     "splash": "b7fdc5a1957229042f733eb1030332145cb7ef7cfa5d7eed91af4a2e506d1e2e",
-    "credits": "b6395078ddc314dc782613d7845bf3bd366b7aea27c292814b0073097d9e7f11",
     "menu": "6d32c81d93af3cbdaf91a36dac49b31bbaacc5e0d86ecc19784891b30c9497c7",
 }
 
@@ -67,10 +67,13 @@ def main():
             header = b"P6\n320 256\n255\n"
             assert data.startswith(header) and len(data) == len(header) + 320*256*3
             return stats, digest(data[len(header):])
-        for screen, frames, events in (("splash", 1, None), ("credits", 1800, None), ("menu", 4000, acknowledge)):
+        for screen, frames, events in (("splash", 1, None), ("splash", 9000, None), ("menu", 4000, acknowledge)):
             stats, pixels = run(screen, frames, events=events)
             assert stats["screen"] == screen and pixels == SCREENS[screen], (screen, stats, pixels)
             print(f"{screen}: original-source settled pixels match")
+        shift = replay("shift-acknowledge", [(1800, 304)])
+        stats, pixels = run("shift-menu", 4000, events=shift)
+        assert stats["screen"] == "menu" and pixels == SCREENS["menu"]
         first = work / "first-tour"
         first.mkdir()
         (first / "config").write_bytes(bytes(78))

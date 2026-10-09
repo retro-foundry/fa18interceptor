@@ -97,6 +97,14 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         COMMAND $<TARGET_FILE:fa18_native_pcm_buffer_test>
                 ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
                 ${CMAKE_CURRENT_BINARY_DIR}/pcm-buffer-pilot)
+    add_executable(fa18_native_music_transition_test ../../tools/native/native_music_transition_test.c)
+    target_link_libraries(fa18_native_music_transition_test PRIVATE fa18_native_runtime)
+    foreach(digit 1 2 5 7)
+        add_test(NAME fa18_native_music_transition_${digit}
+            COMMAND $<TARGET_FILE:fa18_native_music_transition_test>
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+                    ${CMAKE_CURRENT_BINARY_DIR}/music-transition-${digit}-pilot ${digit})
+    endforeach()
     add_test(NAME fa18_native_mission_three_success
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_mission_success.py
                 --test $<TARGET_FILE:fa18_native_mission_success_test>

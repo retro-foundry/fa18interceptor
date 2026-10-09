@@ -24,9 +24,8 @@ int main(int argc,char **argv) {
     assert(voice);
     for(unsigned bank=0;bank<2;++bank) {
         free_all_voices();
-        /* Consume the empty-slot request before starting the next buffer;
-         * a coalesced stop/start intentionally keeps its current buffer. */
-        int16_t stereo[2];native_audio_render(&game->audio,stereo,1,48000);
+        /* A stop/start within one host block must discard the old buffer. */
+        int16_t stereo[2];
         int8_t *owned=(int8_t *)native_storage_span(&game->storage,bases[bank],32);
         int8_t *decoy=(int8_t *)native_storage_span(other,bases[bank],32);
         owned[1]=7;decoy[1]=127;

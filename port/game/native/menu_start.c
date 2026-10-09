@@ -13,7 +13,7 @@ static void menu_setup_child(void *context,enum MenuSetupCall call,uint32_t valu
     case MENU_SETUP_CLEAR: clear_render_buffers(); break;
     case MENU_SETUP_RESET: reset_message_sequence(); break;
     case MENU_SETUP_DELAY:
-        /* Same nominal C0E78A conversion used for the splash. No input/game
+        /* Nominal C0E78A conversion for the menu's short pause. No input/game
          * update runs during this host-clock pause; source CPU timing is not
          * reproduced by this conversion. */
         setup->ready_tick+=(unsigned)((value*66ull*50+7093790-1)/7093790);

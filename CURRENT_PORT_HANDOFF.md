@@ -1,5 +1,22 @@
 # Current playable port handoff
 
+Current title/music fix (2026-10-09): the title now waits for any key instead
+of advancing on a timer. Disk music starts at master 63, ducks to 31 on the
+acknowledging key, and stops before gameplay. Empty voice requests now clear
+current/next PCM buffers immediately, preventing old music from playing at an
+engine's pitch after a stop/start in one host block. Menu return restarts music.
+Original owners: C0E3E6/C17B96, C11478, C0FECE and C50134-C50150. The title
+hold is explicit user steering and supersedes the previous timed credits path.
+`fa18_native_music_transition_[1257]` covers actual title/menu/flight buffers
+for Demonstration, Free Flight, qualification and a mission, plus menu return.
+The frontend check also holds original title pixels for 9,000 idle ticks.
+All ten selected Release and Debug checks pass (four music routes, PCM
+ownership, original sample/voice oracles, frontend, menu start and cleanup).
+The mission route also checks music absence through its active-flight endpoint.
+This corrects the coalesced-stop assumption in the older PCM ownership note.
+Canonical Release is refreshed; running games need a restart to load it.
+Full original recording/filter fidelity remains open.
+
 User-requested native text customization (2026-10-09): message 71 now reads
 `SECURITY CLEARANCE GRANTED`. Its 34-character field and original descriptor
 remain intact. Release/Debug builds and the frontend check pass; qualification

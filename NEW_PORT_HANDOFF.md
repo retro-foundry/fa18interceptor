@@ -2,6 +2,19 @@
 
 ## Current restart summary — 2026-10-09
 
+Latest title/music direction: wait on the title until any key, then duck music
+in the pilot/menu flow; no music in gameplay. Startup now starts the original
+disk music at master 63; the key targets 31. Native empty-voice service discards
+current/next PCM buffers before a replacement voice starts, removing slow music
+carried into flight. Music restarts on menu return. The timed title-to-credits
+transition is removed per the user's explicit request. Four connected music
+checks cover Demonstration, Free Flight, qualification and a mission; the
+frontend check holds the title for 9,000 ticks without input. All ten selected
+checks pass in Release and Debug, including original sample/voice oracles,
+frontend, menu start and PCM ownership; active mission flight is also checked.
+Canonical Release is refreshed. Complete original
+recorded-audio/filter acceptance remains open.
+
 Native message 71 now displays `SECURITY CLEARANCE GRANTED`, as requested.
 Release/Debug builds and the frontend check pass; the complete phrase is visible
 at qualification-entry tick 3420. The fixed-width field and descriptor are
