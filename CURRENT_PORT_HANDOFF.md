@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Complete mission-three drawing localization (2026-10-09): all 4,967 observations
+match rows 0..127 of both complete pages. Five adjoining diagnostic bands cover
+every page byte; strict pages remain 287/4,967 without exclusions. Release/Debug
+preserve prior traces, final RAM, counters and earned saves. Four bounded
+snapshots locate the first row-191 difference to sliding target-info text, with
+the same original/native slide offset. Later cockpit drawing remains open.
+See [drawing localization](analysis/native_mission_drawing_bands_milestone.md).
+
 Complete mission-three message timing (2026-10-09): all 4,964 real transitions
 obey original elapsed/countdown, delay/redraw, full text and colour-cache rules,
 including 1,362 paused HUD periods. Nine priority-message producer fields match

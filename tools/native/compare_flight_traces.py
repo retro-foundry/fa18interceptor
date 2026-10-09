@@ -38,6 +38,9 @@ def read_trace(path):
             assert contract['mouse_coordinates'] == (0xC45776, 4)
             assert contract['selected_record'] == (0xC459C0, 2)
         assert len({f['name'] for f in fields}) == len(fields)
+        if 'drawing_bands' in header:
+            assert header['drawing_bands'] == [dict(y=0, rows=96), dict(y=96, rows=32),
+                dict(y=128, rows=32), dict(y=160, rows=32), dict(y=192, rows=8)], 'incomplete/overlapping drawing bands'
         rows, ended, previous = {}, False, 0
         for line in stream:
             row = json.loads(line)
@@ -54,6 +57,11 @@ def read_trace(path):
             assert all(len(bytes.fromhex(v)) == f['size'] for f, v in zip(fields, row['fields']))
             assert len(row['pages']) == (8 if row['pages_valid'] else 0)
             assert all(len(bytes.fromhex(v)) == 32 for v in row['pages'])
+            assert ('drawing_bands' in row) == ('drawing_bands' in header), 'unadvertised/missing drawing bands'
+            if 'drawing_bands' in header:
+                assert len(row['drawing_bands']) == (len(header['drawing_bands']) if row['pages_valid'] else 0)
+                assert all(len(band) == 8 and all(len(bytes.fromhex(v)) == 32 for v in band)
+                           for band in row['drawing_bands']), 'invalid drawing-band hashes'
             if row['pages_valid']:
                 assert (row['width'], row['height']) == (320, 200)
                 assert row['draw_page'] in (0, 1) and row['page_table'] == 0xC4566E + 16 * row['draw_page']

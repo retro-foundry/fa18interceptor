@@ -1,5 +1,12 @@
 # Native port runner
 
+Complete mission-three drawing localization (2026-10-09): all 4,967 observations
+match rows 0..127 of both complete pages. Optional adjoining bands preserve
+every earlier trace, page, final RAM byte, counter and save in Release/Debug.
+The first row-191 difference is sliding target-info text at the same offset.
+Strict pages remain 287/4,967; later cockpit drawing and broader completion
+remain open. See [localization evidence](../../analysis/native_mission_drawing_bands_milestone.md).
+
 Complete mission-three message timing (2026-10-09): all 4,964 real transitions
 obey original elapsed/countdown, delay/redraw, full text and colour-cache rules,
 including 1,362 paused HUD periods. Nine priority-message producer fields match
@@ -810,6 +817,11 @@ The supplied ADF is read-only. `--save-dir PATH` selects the native save overlay
 (default `saves-native`). Its `config` retains the original 78-byte format.
 Voice programs, sample requests and audible output have their native owners;
 complete original frame/audio timing remains open.
+
+Set `FA18_TRACE_DRAWING_BANDS=1` with `--flight-trace PATH` to add five adjoining
+full-width hash bands covering both complete pages. Full-page hashes remain
+unchanged and authoritative. `FA18_TRACE_MESSAGE_FIELDS=1` independently adds
+message-owner inputs. Both options are read-only diagnostics.
 
 Add `--frame-times PATH` to an ordinary windowed run to write per-frame timing
 CSV. The parent directory must already exist. Input, game, audio, conversion,

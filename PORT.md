@@ -1,5 +1,12 @@
 # The C port
 
+Complete mission-three drawing localization (2026-10-09): all 4,967 observations
+match rows 0..127 of both complete pages. Optional adjoining bands preserve
+every earlier trace, page, final RAM byte, counter and save in Release/Debug.
+The first row-191 difference is sliding target-info text at the same offset.
+Strict pages remain 287/4,967; later cockpit drawing and broader completion
+remain open. See [localization evidence](analysis/native_mission_drawing_bands_milestone.md).
+
 Complete mission-three message timing (2026-10-09): all 4,964 real transitions
 obey original elapsed/countdown, delay/redraw, full text and colour-cache rules,
 including 1,362 paused HUD periods. Nine priority-message producer fields match

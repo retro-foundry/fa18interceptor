@@ -41,6 +41,9 @@ def verify_trace(data, header, row):
         assert span(data, 0xC46184 + 512 * slot, 164).hex() == row['records'][slot]
     assert row['pages_valid'] and (row['width'], row['height']) == (320, 200)
     assert [digest(page) for page in pages(data)] == row['pages']
+    if 'drawing_bands' in header:
+        assert [[digest(page[band['y'] * 40:(band['y'] + band['rows']) * 40])
+                 for page in pages(data)] for band in header['drawing_bands']] == row['drawing_bands']
 
 
 def pages(data):

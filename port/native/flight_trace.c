@@ -46,6 +46,11 @@ static const TraceField message_fields[]={
     {"radar_phase",0xc45883,1}, {"text_always",0xc45793,1},
     {"player_phase",0xc45798,1}
 };
+/* Adjoining diagnostic bands cover every byte of every complete page.
+ * Full-page hashes remain authoritative; bands only locate differences. */
+static const struct { unsigned y,rows; } drawing_bands[]={
+    {0,96},{96,32},{128,32},{160,32},{192,8}
+};
 static size_t field_count(const FA18FlightTrace *trace) {
     return sizeof fields/sizeof fields[0]+(trace->message_fields?sizeof message_fields/sizeof message_fields[0]:0);
 }
@@ -91,6 +96,7 @@ static int publish(FA18FlightTrace *trace,const TraceRow *row) {
 int fa18_flight_trace_open(FA18FlightTrace *trace,const char *path,size_t budget) {
     memset(trace,0,sizeof *trace);trace->budget=budget;
     trace->message_fields=getenv("FA18_TRACE_MESSAGE_FIELDS")!=NULL;
+    trace->drawing_bands=getenv("FA18_TRACE_DRAWING_BANDS")!=NULL;
     trace->file=fopen(path,"wb");
     if(!trace->file) {perror(path);trace->failed=1;return 0;}
     TraceRow row={0};
@@ -102,7 +108,14 @@ int fa18_flight_trace_open(FA18FlightTrace *trace,const char *path,size_t budget
         append(&row,"%s{\"name\":\"%s\",\"address\":%u,\"size\":%zu}",
             i?",":"",field->name,field->address,field->size);
     }
-    append(&row,"]}\n");
+    append(&row,"]");
+    if(trace->drawing_bands) {
+        append(&row,",\"drawing_bands\":[");
+        for(size_t i=0;i<sizeof drawing_bands/sizeof drawing_bands[0];++i)
+            append(&row,"%s{\"y\":%u,\"rows\":%u}",i?",":"",drawing_bands[i].y,drawing_bands[i].rows);
+        append(&row,"]");
+    }
+    append(&row,"}\n");
     return publish(trace,&row);
 }
 int fa18_flight_trace_write(FA18FlightTrace *trace,unsigned iteration,unsigned frame,
@@ -136,7 +149,21 @@ int fa18_flight_trace_write(FA18FlightTrace *trace,unsigned iteration,unsigned f
         char digest[65];amiga_sha256_hex(planes[i],8000,digest);
         append(&row,"%s\"%s\"",i?",":"",digest);
     }
-    append(&row,"]}\n");
+    append(&row,"]");
+    if(trace->drawing_bands) {
+        append(&row,",\"drawing_bands\":[");
+        if(valid) for(size_t band=0;band<sizeof drawing_bands/sizeof drawing_bands[0];++band) {
+            append(&row,"%s[",band?",":"");
+            for(unsigned plane=0;plane<8;++plane) {
+                char digest[65];
+                amiga_sha256_hex(planes[plane]+drawing_bands[band].y*40,drawing_bands[band].rows*40,digest);
+                append(&row,"%s\"%s\"",plane?",":"",digest);
+            }
+            append(&row,"]");
+        }
+        append(&row,"]");
+    }
+    append(&row,"}\n");
     if(!publish(trace,&row)) return 0;
     ++trace->rows;return 1;
 }

@@ -22,6 +22,11 @@ def verify_ram(header, row, data):
     assert row['pages'] == [hashlib.sha256(span(data,
         integer(data, 0xC4566E + 16 * (draw ^ role) + 4 * plane, 4), 8000)).hexdigest()
         for role in range(2) for plane in range(4)]
+    if 'drawing_bands' in header:
+        assert row['drawing_bands'] == [[hashlib.sha256(span(data,
+            integer(data, 0xC4566E + 16 * (draw ^ role) + 4 * plane, 4) + band['y'] * 40,
+            band['rows'] * 40)).hexdigest() for role in range(2) for plane in range(4)]
+            for band in header['drawing_bands']]
 
 
 def main():

@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--source-evidence', type=Path, required=True)
     parser.add_argument('--source-updates', type=Path, required=True)
     parser.add_argument('--native-evidence', type=Path, required=True)
+    parser.add_argument('--trace-evidence', type=Path, help='Optional preserved enriched full-flight traces from the current runner')
     parser.add_argument('--first', type=int, required=True)
     parser.add_argument('--count', type=int, default=4)
     parser.add_argument('--out', type=Path, required=True)
@@ -36,10 +37,22 @@ def main():
     mapping, updates = verified_update_mapping(args.source_updates,
         args.source_evidence / 'driver.jsonl.gz', original)
     assert native['source_update_evidence'] == updates
-    assert digest(args.runner.read_bytes()) == native['runner_sha256']
+    execution = native
     source_path, native_path = (args.source_evidence / 'driver.jsonl.gz', args.native_evidence / 'native.jsonl.gz')
-    assert digest(gzip.decompress(source_path.read_bytes())) == original['driver_trace_sha256']
-    assert digest(gzip.decompress(native_path.read_bytes())) == native['native_trace_sha256']
+    source_digest = original['driver_trace_sha256']
+    if args.trace_evidence:
+        from check_mission_message_trace import preserved
+        execution = json.loads((args.trace_evidence / 'report.json').read_text())
+        assert execution['baseline_source_trace_sha256'] == source_digest
+        assert execution['baseline_native_trace_sha256'] == native['native_trace_sha256']
+        assert execution['source_update_evidence'] == updates
+        source_path, native_path = (args.trace_evidence / f'{name}.jsonl.gz' for name in ('source', 'native'))
+        assert preserved(source_path, args.source_evidence / 'driver.jsonl.gz') == execution['source_rows_preserved']
+        assert preserved(native_path, args.native_evidence / 'native.jsonl.gz') == execution['native_rows_preserved']
+        source_digest = execution['source_trace_sha256']
+    assert digest(args.runner.read_bytes()) == execution['runner_sha256']
+    assert digest(gzip.decompress(source_path.read_bytes())) == source_digest
+    assert digest(gzip.decompress(native_path.read_bytes())) == execution['native_trace_sha256']
     sh, source = read_trace(source_path)
     nh, host = read_trace(native_path)
     assert sh == nh
@@ -49,7 +62,7 @@ def main():
     for path, expected in {**original['input_hashes'], **native['native_input_hashes']}.items():
         assert digest((ROOT / path).read_bytes()) == expected
     env = {k: v for k, v in os.environ.items() if not k.startswith(
-        ('FA18_LOOP_', 'FA18_BOUNDARY_', 'FA18_UPDATE_ENTRY_', 'FA18_ORIGINAL_PILOT_'))}
+        ('FA18_LOOP_', 'FA18_BOUNDARY_', 'FA18_UPDATE_ENTRY_', 'FA18_ORIGINAL_PILOT_', 'FA18_TRACE_'))}
     rows = []
     with tempfile.TemporaryDirectory(prefix='mission-drawing-window-', dir=ROOT / 'build') as directory:
         work = Path(directory)
@@ -118,9 +131,9 @@ def main():
                 row['body_timing'] = (json.loads((work / f'native.{j}.timing.json').read_text()) if nl != nf else
                     {name: stats['frame_' + name] for name in ('before_tick', 'after_tick', 'saved_tick')})
             rows.append(row)
-    report = dict(source_trace_sha256=original['driver_trace_sha256'],
-        native_trace_sha256=native['native_trace_sha256'], source_update_mapping_sha256=updates['mapping_sha256'],
-        runner_sha256=native['runner_sha256'], first=first, last=last, rows=rows,
+    report = dict(source_trace_sha256=source_digest,
+        native_trace_sha256=execution['native_trace_sha256'], source_update_mapping_sha256=updates['mapping_sha256'],
+        runner_sha256=execution['runner_sha256'], first=first, last=last, rows=rows,
         scope='Every captured field, core and complete page reproduces its live trace. '
               'All changed bytes are retained; this localizes differences without accepting them.')
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')

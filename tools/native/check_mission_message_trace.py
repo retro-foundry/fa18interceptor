@@ -21,8 +21,10 @@ from compare_flight_traces import read_trace
 def preserved(path, baseline):
     header, rows = read_trace(path)
     old_header, old = read_trace(baseline)
-    assert {k: v for k, v in header.items() if k != 'fields'} == {
-        k: v for k, v in old_header.items() if k != 'fields'}
+    assert {k: v for k, v in header.items() if k not in ('fields', 'drawing_bands')} == {
+        k: v for k, v in old_header.items() if k not in ('fields', 'drawing_bands')}
+    if 'drawing_bands' in old_header:
+        assert header['drawing_bands'] == old_header['drawing_bands']
     assert header['fields'][:len(old_header['fields'])] == old_header['fields']
     assert rows.keys() == old.keys()
     for i, row in rows.items():
@@ -30,6 +32,8 @@ def preserved(path, baseline):
         for key in ('frame', 'records', 'pages', 'pages_valid', 'draw_page', 'page_table', 'width', 'height'):
             assert row[key] == prior[key], (i, key)
         assert all(row['fields'][name] == value for name, value in prior['fields'].items()), i
+        if 'drawing_bands' in prior:
+            assert row['drawing_bands'] == prior['drawing_bands'], i
     return len(rows)
 
 
@@ -40,6 +44,7 @@ def main():
     parser.add_argument('--native-evidence', type=Path, required=True)
     parser.add_argument('--source-updates', type=Path, required=True)
     parser.add_argument('--source-reuse', type=Path)
+    parser.add_argument('--drawing-bands', action='store_true', help='also locate page differences with adjoining full-width bands')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
@@ -54,8 +59,10 @@ def main():
     mapping, updates = verified_update_mapping(args.source_updates,
         args.source_evidence / 'driver.jsonl.gz', source)
     env = {k: v for k, v in os.environ.items() if not k.startswith(
-        ('FA18_LOOP_', 'FA18_ORIGINAL_', 'FA18_BOUNDARY_', 'FA18_UPDATE_ENTRY_'))}
+        ('FA18_LOOP_', 'FA18_ORIGINAL_', 'FA18_BOUNDARY_', 'FA18_UPDATE_ENTRY_', 'FA18_TRACE_'))}
     env['FA18_TRACE_MESSAGE_FIELDS'] = '1'
+    if args.drawing_bands:
+        env['FA18_TRACE_DRAWING_BANDS'] = '1'
     with tempfile.TemporaryDirectory(prefix='mission-message-trace-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         source_trace = args.out / 'source.jsonl.gz'
