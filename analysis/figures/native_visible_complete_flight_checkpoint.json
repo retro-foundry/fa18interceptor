@@ -1,0 +1,910 @@
+{
+  "scope": "Attempted paced visible independent qualification/mission-three replay with sound. Every SDL presentation is counted; compositor scanout is not instrumented. Other missions and combat/view coverage remain separate.",
+  "visible_window_requested": true,
+  "hidden_window": false,
+  "pacing_modified": false,
+  "recorded_input_only": true,
+  "campaign_required": false,
+  "native_flight_state_seeded": false,
+  "runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "mission_report_sha256": "3f309e61ae320956f55d9319140ddf3908d847dcf00d6c78b43a5488d176917e",
+  "input_sha256": "1276c7a60f847ff36801de7f272bc1000afb76e2f67981c3dc0e92ac5dab6d28",
+  "initial_config_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+  "final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+  "final_saved_pilot": "0001000000020300000000ad0000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+  "canonical": {
+    "frame_owner_exit": false,
+    "frames": 42706,
+    "screen": "menu",
+    "mode": 0,
+    "glyphs": 15520,
+    "record_updates": 5632,
+    "scene_frames": 5627,
+    "terrain_polygons": 24869,
+    "model_calls": 66514,
+    "hud_frames": 5627,
+    "control_frames": 16065,
+    "scene_selected": true,
+    "stage": "C0FCB4",
+    "game_tick": 0,
+    "timer_pending": false,
+    "timer_yields": 13230,
+    "display_publications": 16065,
+    "display_yields": 16089,
+    "display_pending": false,
+    "displayed_page": 0,
+    "postflight_callbacks": 0,
+    "postflight_resets": 0,
+    "input_passes": 16062,
+    "input_events": 1418,
+    "input_queued": 0,
+    "update_iterations": 27584,
+    "replay_iterations": 27108,
+    "replay_events": 1426,
+    "host_replay_events": 2,
+    "host_replay_pending": 0,
+    "replay_started": true,
+    "voice_ticks": 42706,
+    "voice_publications": 90270,
+    "voice_levels": [
+      [
+        358,
+        31
+      ],
+      [
+        358,
+        31
+      ],
+      [
+        124,
+        0
+      ],
+      [
+        300,
+        2
+      ]
+    ],
+    "sample_requests": 45719,
+    "sample_frames": 40997760,
+    "nonzero_sample_frames": 40521617,
+    "audio_device": true,
+    "frame_capture_complete": false,
+    "frame_before_tick": 0,
+    "frame_after_tick": 0,
+    "frame_saved_tick": 0,
+    "cpu_emulation": false,
+    "chipset_emulation": false
+  },
+  "timing": {
+    "source": "independent-mission.csv",
+    "budget_ms": 20.0,
+    "renderers": [
+      "direct3d"
+    ],
+    "all": {
+      "frames": 42706,
+      "presented": 42706,
+      "over_work_budget": 0,
+      "phases": {
+        "input_us": {
+          "mean_ms": 0.0094,
+          "p95_ms": 0.0213,
+          "p99_ms": 0.0539,
+          "max_ms": 1.7605
+        },
+        "game_us": {
+          "mean_ms": 1.0967,
+          "p95_ms": 3.2536,
+          "p99_ms": 5.656,
+          "max_ms": 11.0154
+        },
+        "audio_us": {
+          "mean_ms": 0.0286,
+          "p95_ms": 0.0773,
+          "p99_ms": 0.1647,
+          "max_ms": 0.6234
+        },
+        "convert_us": {
+          "mean_ms": 0.1032,
+          "p95_ms": 0.2832,
+          "p99_ms": 0.6033,
+          "max_ms": 1.4471
+        },
+        "present_us": {
+          "mean_ms": 0.5037,
+          "p95_ms": 1.2358,
+          "p99_ms": 2.3705,
+          "max_ms": 4.8993
+        },
+        "wait_us": {
+          "mean_ms": 18.2403,
+          "p95_ms": 19.8798,
+          "p99_ms": 20.2299,
+          "max_ms": 21.3415
+        },
+        "work_us": {
+          "mean_ms": 1.7416,
+          "p95_ms": 4.7501,
+          "p99_ms": 7.7786,
+          "max_ms": 16.3617
+        },
+        "total_us": {
+          "mean_ms": 19.9818,
+          "p95_ms": 21.037,
+          "p99_ms": 21.4092,
+          "max_ms": 22.0715
+        },
+        "start_interval_us": {
+          "mean_ms": 19.9992,
+          "p95_ms": 21.0546,
+          "p99_ms": 21.4318,
+          "max_ms": 22.1425
+        }
+      },
+      "worst_work": [
+        {
+          "frame": "31826",
+          "iteration": "23415",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "22.200",
+          "game_us": "10926.300",
+          "audio_us": "117.100",
+          "convert_us": "466.900",
+          "present_us": "4829.200",
+          "wait_us": "3099.800",
+          "work_us": "16361.700",
+          "total_us": "19461.500",
+          "start_interval_us": "20711.600",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "32416",
+          "iteration": "23590",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "22.300",
+          "game_us": "9618.200",
+          "audio_us": "171.400",
+          "convert_us": "823.100",
+          "present_us": "2372.000",
+          "wait_us": "6916.000",
+          "work_us": "13007.000",
+          "total_us": "19923.000",
+          "start_interval_us": "21028.500",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "9667",
+          "iteration": "5955",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "0",
+          "presented": "1",
+          "input_us": "44.500",
+          "game_us": "8233.800",
+          "audio_us": "166.300",
+          "convert_us": "703.300",
+          "present_us": "3162.100",
+          "wait_us": "7800.800",
+          "work_us": "12310.000",
+          "total_us": "20110.800",
+          "start_interval_us": "20277.700",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "32858",
+          "iteration": "23721",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "20.600",
+          "game_us": "9829.200",
+          "audio_us": "99.200",
+          "convert_us": "557.200",
+          "present_us": "1798.500",
+          "wait_us": "7908.500",
+          "work_us": "12304.700",
+          "total_us": "20213.200",
+          "start_interval_us": "19928.400",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "10124",
+          "iteration": "6091",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "24.800",
+          "game_us": "11015.400",
+          "audio_us": "138.500",
+          "convert_us": "574.400",
+          "present_us": "525.900",
+          "wait_us": "6625.200",
+          "work_us": "12279.000",
+          "total_us": "18904.200",
+          "start_interval_us": "21899.900",
+          "renderer": "direct3d"
+        }
+      ]
+    },
+    "scene_updates": {
+      "frames": 5627,
+      "presented": 5627,
+      "over_work_budget": 0,
+      "phases": {
+        "input_us": {
+          "mean_ms": 0.0095,
+          "p95_ms": 0.0208,
+          "p99_ms": 0.0617,
+          "max_ms": 0.5963
+        },
+        "game_us": {
+          "mean_ms": 1.5285,
+          "p95_ms": 4.2679,
+          "p99_ms": 7.064,
+          "max_ms": 11.0154
+        },
+        "audio_us": {
+          "mean_ms": 0.0262,
+          "p95_ms": 0.0682,
+          "p99_ms": 0.1477,
+          "max_ms": 0.528
+        },
+        "convert_us": {
+          "mean_ms": 0.099,
+          "p95_ms": 0.2561,
+          "p99_ms": 0.5663,
+          "max_ms": 1.1099
+        },
+        "present_us": {
+          "mean_ms": 0.4975,
+          "p95_ms": 1.2284,
+          "p99_ms": 2.3472,
+          "max_ms": 4.8292
+        },
+        "wait_us": {
+          "mean_ms": 17.8228,
+          "p95_ms": 19.6143,
+          "p99_ms": 20.0023,
+          "max_ms": 20.4931
+        },
+        "work_us": {
+          "mean_ms": 2.1606,
+          "p95_ms": 5.6854,
+          "p99_ms": 8.9075,
+          "max_ms": 16.3617
+        },
+        "total_us": {
+          "mean_ms": 19.9834,
+          "p95_ms": 21.0527,
+          "p99_ms": 21.4731,
+          "max_ms": 21.9911
+        },
+        "start_interval_us": {
+          "mean_ms": 19.9964,
+          "p95_ms": 21.0859,
+          "p99_ms": 21.4833,
+          "max_ms": 22.1232
+        }
+      },
+      "worst_work": [
+        {
+          "frame": "31826",
+          "iteration": "23415",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "22.200",
+          "game_us": "10926.300",
+          "audio_us": "117.100",
+          "convert_us": "466.900",
+          "present_us": "4829.200",
+          "wait_us": "3099.800",
+          "work_us": "16361.700",
+          "total_us": "19461.500",
+          "start_interval_us": "20711.600",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "32416",
+          "iteration": "23590",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "22.300",
+          "game_us": "9618.200",
+          "audio_us": "171.400",
+          "convert_us": "823.100",
+          "present_us": "2372.000",
+          "wait_us": "6916.000",
+          "work_us": "13007.000",
+          "total_us": "19923.000",
+          "start_interval_us": "21028.500",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "32858",
+          "iteration": "23721",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "20.600",
+          "game_us": "9829.200",
+          "audio_us": "99.200",
+          "convert_us": "557.200",
+          "present_us": "1798.500",
+          "wait_us": "7908.500",
+          "work_us": "12304.700",
+          "total_us": "20213.200",
+          "start_interval_us": "19928.400",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "10124",
+          "iteration": "6091",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "24.800",
+          "game_us": "11015.400",
+          "audio_us": "138.500",
+          "convert_us": "574.400",
+          "present_us": "525.900",
+          "wait_us": "6625.200",
+          "work_us": "12279.000",
+          "total_us": "18904.200",
+          "start_interval_us": "21899.900",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "41637",
+          "iteration": "26691",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "156.600",
+          "game_us": "8666.400",
+          "audio_us": "163.700",
+          "convert_us": "991.400",
+          "present_us": "2170.100",
+          "wait_us": "7358.000",
+          "work_us": "12148.200",
+          "total_us": "19506.200",
+          "start_interval_us": "21085.900",
+          "renderer": "direct3d"
+        }
+      ]
+    },
+    "scene_views": {
+      "0": {
+        "frames": 5627,
+        "presented": 5627,
+        "over_work_budget": 0,
+        "phases": {
+          "input_us": {
+            "mean_ms": 0.0095,
+            "p95_ms": 0.0208,
+            "p99_ms": 0.0617,
+            "max_ms": 0.5963
+          },
+          "game_us": {
+            "mean_ms": 1.5285,
+            "p95_ms": 4.2679,
+            "p99_ms": 7.064,
+            "max_ms": 11.0154
+          },
+          "audio_us": {
+            "mean_ms": 0.0262,
+            "p95_ms": 0.0682,
+            "p99_ms": 0.1477,
+            "max_ms": 0.528
+          },
+          "convert_us": {
+            "mean_ms": 0.099,
+            "p95_ms": 0.2561,
+            "p99_ms": 0.5663,
+            "max_ms": 1.1099
+          },
+          "present_us": {
+            "mean_ms": 0.4975,
+            "p95_ms": 1.2284,
+            "p99_ms": 2.3472,
+            "max_ms": 4.8292
+          },
+          "wait_us": {
+            "mean_ms": 17.8228,
+            "p95_ms": 19.6143,
+            "p99_ms": 20.0023,
+            "max_ms": 20.4931
+          },
+          "work_us": {
+            "mean_ms": 2.1606,
+            "p95_ms": 5.6854,
+            "p99_ms": 8.9075,
+            "max_ms": 16.3617
+          },
+          "total_us": {
+            "mean_ms": 19.9834,
+            "p95_ms": 21.0527,
+            "p99_ms": 21.4731,
+            "max_ms": 21.9911
+          },
+          "start_interval_us": {
+            "mean_ms": 19.9964,
+            "p95_ms": 21.0859,
+            "p99_ms": 21.4833,
+            "max_ms": 22.1232
+          }
+        },
+        "worst_work": [
+          {
+            "frame": "31826",
+            "iteration": "23415",
+            "mode": "3",
+            "stage": "C10DAE",
+            "view": "0",
+            "scene_updated": "1",
+            "presented": "1",
+            "input_us": "22.200",
+            "game_us": "10926.300",
+            "audio_us": "117.100",
+            "convert_us": "466.900",
+            "present_us": "4829.200",
+            "wait_us": "3099.800",
+            "work_us": "16361.700",
+            "total_us": "19461.500",
+            "start_interval_us": "20711.600",
+            "renderer": "direct3d"
+          },
+          {
+            "frame": "32416",
+            "iteration": "23590",
+            "mode": "3",
+            "stage": "C10DAE",
+            "view": "0",
+            "scene_updated": "1",
+            "presented": "1",
+            "input_us": "22.300",
+            "game_us": "9618.200",
+            "audio_us": "171.400",
+            "convert_us": "823.100",
+            "present_us": "2372.000",
+            "wait_us": "6916.000",
+            "work_us": "13007.000",
+            "total_us": "19923.000",
+            "start_interval_us": "21028.500",
+            "renderer": "direct3d"
+          },
+          {
+            "frame": "32858",
+            "iteration": "23721",
+            "mode": "3",
+            "stage": "C10DAE",
+            "view": "0",
+            "scene_updated": "1",
+            "presented": "1",
+            "input_us": "20.600",
+            "game_us": "9829.200",
+            "audio_us": "99.200",
+            "convert_us": "557.200",
+            "present_us": "1798.500",
+            "wait_us": "7908.500",
+            "work_us": "12304.700",
+            "total_us": "20213.200",
+            "start_interval_us": "19928.400",
+            "renderer": "direct3d"
+          },
+          {
+            "frame": "10124",
+            "iteration": "6091",
+            "mode": "9",
+            "stage": "C10DAE",
+            "view": "0",
+            "scene_updated": "1",
+            "presented": "1",
+            "input_us": "24.800",
+            "game_us": "11015.400",
+            "audio_us": "138.500",
+            "convert_us": "574.400",
+            "present_us": "525.900",
+            "wait_us": "6625.200",
+            "work_us": "12279.000",
+            "total_us": "18904.200",
+            "start_interval_us": "21899.900",
+            "renderer": "direct3d"
+          },
+          {
+            "frame": "41637",
+            "iteration": "26691",
+            "mode": "3",
+            "stage": "C10DAE",
+            "view": "0",
+            "scene_updated": "1",
+            "presented": "1",
+            "input_us": "156.600",
+            "game_us": "8666.400",
+            "audio_us": "163.700",
+            "convert_us": "991.400",
+            "present_us": "2170.100",
+            "wait_us": "7358.000",
+            "work_us": "12148.200",
+            "total_us": "19506.200",
+            "start_interval_us": "21085.900",
+            "renderer": "direct3d"
+          }
+        ]
+      }
+    }
+  },
+  "mission_scene_work": {
+    "3": {
+      "frames": 3770,
+      "presented": 3770,
+      "over_work_budget": 0,
+      "phases": {
+        "input_us": {
+          "mean_ms": 0.0094,
+          "p95_ms": 0.0212,
+          "p99_ms": 0.0574,
+          "max_ms": 0.4935
+        },
+        "game_us": {
+          "mean_ms": 1.5675,
+          "p95_ms": 4.3586,
+          "p99_ms": 7.1463,
+          "max_ms": 10.9263
+        },
+        "audio_us": {
+          "mean_ms": 0.0262,
+          "p95_ms": 0.0678,
+          "p99_ms": 0.1402,
+          "max_ms": 0.528
+        },
+        "convert_us": {
+          "mean_ms": 0.1,
+          "p95_ms": 0.2591,
+          "p99_ms": 0.5663,
+          "max_ms": 1.0247
+        },
+        "present_us": {
+          "mean_ms": 0.5005,
+          "p95_ms": 1.2304,
+          "p99_ms": 2.3668,
+          "max_ms": 4.8292
+        },
+        "wait_us": {
+          "mean_ms": 17.7703,
+          "p95_ms": 19.5669,
+          "p99_ms": 19.9865,
+          "max_ms": 20.4931
+        },
+        "work_us": {
+          "mean_ms": 2.2036,
+          "p95_ms": 5.8315,
+          "p99_ms": 8.9887,
+          "max_ms": 16.3617
+        },
+        "total_us": {
+          "mean_ms": 19.9739,
+          "p95_ms": 21.0365,
+          "p99_ms": 21.4199,
+          "max_ms": 21.9911
+        },
+        "start_interval_us": {
+          "mean_ms": 19.9984,
+          "p95_ms": 21.0876,
+          "p99_ms": 21.4411,
+          "max_ms": 22.0803
+        }
+      },
+      "worst_work": [
+        {
+          "frame": "31826",
+          "iteration": "23415",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "22.200",
+          "game_us": "10926.300",
+          "audio_us": "117.100",
+          "convert_us": "466.900",
+          "present_us": "4829.200",
+          "wait_us": "3099.800",
+          "work_us": "16361.700",
+          "total_us": "19461.500",
+          "start_interval_us": "20711.600",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "32416",
+          "iteration": "23590",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "22.300",
+          "game_us": "9618.200",
+          "audio_us": "171.400",
+          "convert_us": "823.100",
+          "present_us": "2372.000",
+          "wait_us": "6916.000",
+          "work_us": "13007.000",
+          "total_us": "19923.000",
+          "start_interval_us": "21028.500",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "32858",
+          "iteration": "23721",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "20.600",
+          "game_us": "9829.200",
+          "audio_us": "99.200",
+          "convert_us": "557.200",
+          "present_us": "1798.500",
+          "wait_us": "7908.500",
+          "work_us": "12304.700",
+          "total_us": "20213.200",
+          "start_interval_us": "19928.400",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "41637",
+          "iteration": "26691",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "156.600",
+          "game_us": "8666.400",
+          "audio_us": "163.700",
+          "convert_us": "991.400",
+          "present_us": "2170.100",
+          "wait_us": "7358.000",
+          "work_us": "12148.200",
+          "total_us": "19506.200",
+          "start_interval_us": "21085.900",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "33865",
+          "iteration": "24388",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "9.000",
+          "game_us": "8543.200",
+          "audio_us": "59.900",
+          "convert_us": "295.700",
+          "present_us": "3165.100",
+          "wait_us": "7542.300",
+          "work_us": "12072.900",
+          "total_us": "19615.200",
+          "start_interval_us": "20707.000",
+          "renderer": "direct3d"
+        }
+      ]
+    },
+    "9": {
+      "frames": 1857,
+      "presented": 1857,
+      "over_work_budget": 0,
+      "phases": {
+        "input_us": {
+          "mean_ms": 0.0095,
+          "p95_ms": 0.0202,
+          "p99_ms": 0.0663,
+          "max_ms": 0.5963
+        },
+        "game_us": {
+          "mean_ms": 1.4492,
+          "p95_ms": 3.8667,
+          "p99_ms": 6.9184,
+          "max_ms": 11.0154
+        },
+        "audio_us": {
+          "mean_ms": 0.0264,
+          "p95_ms": 0.0696,
+          "p99_ms": 0.1629,
+          "max_ms": 0.5084
+        },
+        "convert_us": {
+          "mean_ms": 0.0969,
+          "p95_ms": 0.2548,
+          "p99_ms": 0.5744,
+          "max_ms": 1.1099
+        },
+        "present_us": {
+          "mean_ms": 0.4912,
+          "p95_ms": 1.2226,
+          "p99_ms": 2.3191,
+          "max_ms": 4.2553
+        },
+        "wait_us": {
+          "mean_ms": 17.9295,
+          "p95_ms": 19.7025,
+          "p99_ms": 20.1025,
+          "max_ms": 20.4674
+        },
+        "work_us": {
+          "mean_ms": 2.0732,
+          "p95_ms": 5.3411,
+          "p99_ms": 8.5556,
+          "max_ms": 12.279
+        },
+        "total_us": {
+          "mean_ms": 20.0027,
+          "p95_ms": 21.0841,
+          "p99_ms": 21.5468,
+          "max_ms": 21.9615
+        },
+        "start_interval_us": {
+          "mean_ms": 19.9923,
+          "p95_ms": 21.0844,
+          "p99_ms": 21.5289,
+          "max_ms": 22.1232
+        }
+      },
+      "worst_work": [
+        {
+          "frame": "10124",
+          "iteration": "6091",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "24.800",
+          "game_us": "11015.400",
+          "audio_us": "138.500",
+          "convert_us": "574.400",
+          "present_us": "525.900",
+          "wait_us": "6625.200",
+          "work_us": "12279.000",
+          "total_us": "18904.200",
+          "start_interval_us": "21899.900",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "7032",
+          "iteration": "5175",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "22.500",
+          "game_us": "8957.100",
+          "audio_us": "168.400",
+          "convert_us": "952.700",
+          "present_us": "1915.300",
+          "wait_us": "7658.000",
+          "work_us": "12016.000",
+          "total_us": "19674.000",
+          "start_interval_us": "20821.500",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "9685",
+          "iteration": "5961",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "21.900",
+          "game_us": "9631.200",
+          "audio_us": "93.400",
+          "convert_us": "666.300",
+          "present_us": "1529.700",
+          "wait_us": "7759.000",
+          "work_us": "11942.500",
+          "total_us": "19701.500",
+          "start_interval_us": "19897.000",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "12169",
+          "iteration": "6697",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "21.100",
+          "game_us": "8585.300",
+          "audio_us": "139.600",
+          "convert_us": "707.100",
+          "present_us": "2319.100",
+          "wait_us": "8168.500",
+          "work_us": "11772.200",
+          "total_us": "19940.700",
+          "start_interval_us": "19770.300",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "9570",
+          "iteration": "5927",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "18.900",
+          "game_us": "9697.100",
+          "audio_us": "86.800",
+          "convert_us": "480.700",
+          "present_us": "1352.500",
+          "wait_us": "8304.000",
+          "work_us": "11636.000",
+          "total_us": "19940.000",
+          "start_interval_us": "19409.400",
+          "renderer": "direct3d"
+        }
+      ]
+    }
+  },
+  "mission_scene_views": {
+    "3": [
+      0
+    ],
+    "9": [
+      0
+    ]
+  },
+  "returncode": 0,
+  "runtime_counter_differences": {},
+  "expected_frames": 42706,
+  "observed_frames_presented": true,
+  "saved_config_matches": true,
+  "final_ram_matches": true,
+  "all_frames_presented": true,
+  "within_work_budget": true,
+  "accepted_complete_visible_flight": true,
+  "date": "2026-10-10",
+  "comparison_sha256": "9667a5e3305859efe61f5dccea962115e089c3194484704ac753f1efd234d028",
+  "timing_csv_sha256": "7b8b2c71cd01b9ceb5829d3447d199ed70d18c3ec5695e081721cec6f58ada0a",
+  "retained_report": "build/native-flight/visible-complete-cockpit-current/comparison.json",
+  "command": "python tools/native/measure_visible_performance.py --mission-report build/native-flight/frame-delta-trace-preservation/Release/report.json --mission-input build/native-flight/patrol-entry-review/update-consumed.fa18in --runner build/native-cmake/native/Release/fa18_native.exe --out build/native-flight/visible-complete-cockpit-current",
+  "concurrent_reference_oracles_or_captures": false,
+  "scope_limits": [
+    "Qualification and mission three, cockpit view 0 only",
+    "Other missions, combat and camera views remain open",
+    "SDL presentation returns; compositor scanout unobserved",
+    "20 ms work threshold; host scheduling and pacing are separate",
+    "Earlier failed runs retained, without an inferred cause"
+  ]
+}

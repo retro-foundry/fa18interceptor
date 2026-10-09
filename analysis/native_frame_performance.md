@@ -1,5 +1,13 @@
 # Native frame work measurement - 2026-10-07
 
+Visible complete flight (2026-10-10): qualification and mission three now
+pass all 42,706 visible presentations with sound, complete final RAM/counters
+and the earned pilot unchanged. Maximum measured work is 16.3617 ms, with no
+frame above 20 ms. This covers cockpit view 0 on this host; other missions,
+combat and camera views remain open. Earlier input-poll failures are retained
+without an inferred cause. Runtime is unchanged; recorded sound timing remains
+open. See [visible-flight evidence](native_visible_complete_flight_milestone.md).
+
 The complete retained demonstration input now has a measured native frame-work
 checkpoint. All 10,910 host-loop frames call SDL presentation in a normally
 paced, hidden Direct3D window. Measured work peaks at 6.9374 ms, below the

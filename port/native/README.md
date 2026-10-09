@@ -1,5 +1,13 @@
 # Native port runner
 
+Visible complete flight (2026-10-10): qualification and mission three now
+pass all 42,706 visible presentations with sound, complete final RAM/counters
+and the earned pilot unchanged. Maximum measured work is 16.3617 ms, with no
+frame above 20 ms. This covers cockpit view 0 on this host; other missions,
+combat and camera views remain open. Earlier input-poll failures are retained
+without an inferred cause. Runtime is unchanged; recorded sound timing remains
+open. See [visible-flight evidence](../../analysis/native_visible_complete_flight_milestone.md).
+
 Complete mission-three drawing (2026-10-09): all 4,967 independent flight
 observations and all eight planes now pass the original-rule history gate
 (317,888,000 XOR bytes), with every complete core/scene row matching and no
