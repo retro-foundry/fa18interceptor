@@ -20,7 +20,7 @@ static char registers_buffer[4096];
 static size_t metadata_bytes,shared_budget=256u*1024u*1024u;
 static long first,count,last_iteration;
 static unsigned exported;
-static uint32_t message_return,message_stack;
+static uint32_t message_return,message_stack,panel_stack;
 
 static const uint8_t *delta_reader(void *context,uint32_t address,size_t size) {
     const FA18Machine *machine=context;
@@ -60,7 +60,7 @@ static void capture(long iteration,uint32_t pc,unsigned bit) {
     initialize_delta();
     if(iteration<first || iteration-first>=count) return;
     if(iteration!=last_iteration) {
-        exported=0;message_return=message_stack=0;last_iteration=iteration;
+        exported=0;message_return=message_stack=panel_stack=0;last_iteration=iteration;
     }
     if(exported&bit) return;
     char row[2048];
@@ -95,6 +95,13 @@ void fa18_bus_begin(uint32_t pc) {
     if(iteration>=first && iteration-first<count) {
         if(pc==0xc0efea) capture(iteration,pc,2);
         if(pc==0xc0f3c0) capture(iteration,pc,4);
+        if(pc==0xc30764 && !(exported&128)) {
+            panel_stack=REG_A[7]+4;
+            if(storage_word(REG_A[7])!=0xc0f182) abort();
+            capture(iteration,pc,128);
+        }
+        if(pc==0xc0f182 && (exported&128) && REG_A[7]==panel_stack)
+            capture(iteration,pc,256);
         if(pc==0xc31226 && !(exported&8)) {
             if(storage_word(REG_A[7])!=0xc0f18e) abort();
             capture(iteration,pc,8);

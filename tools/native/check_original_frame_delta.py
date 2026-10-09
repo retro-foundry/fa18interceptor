@@ -5,6 +5,7 @@ Every preceding trace row, full final RAM and runtime counter must stay exact.
 """
 import argparse
 import gzip
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -16,7 +17,8 @@ from check_qualification_message_cadence import digest, verify_trace
 from compare_flight_traces import read_trace
 from frame_delta import snapshots
 
-BOUNDARIES = (0xC0EFD4, 0xC0EFEA, 0xC0F3C0, 0xC31226, 0xC0F18E, 0xC322EE, 0xC0F286, 0xC0F2DC)
+BOUNDARIES = (0xC0EFD4, 0xC0EFEA, 0xC0F3C0, 0xC30764, 0xC0F182,
+              0xC31226, 0xC0F18E, 0xC322EE, 0xC0F286, 0xC0F2DC)
 
 
 def verify_owner_return(snapshot, registers, pending):
@@ -24,15 +26,15 @@ def verify_owner_return(snapshot, registers, pending):
     pc, iteration = snapshot['boundary'], snapshot['iteration']
     if pc in (0xC0EFD4, 0xC0EFEA, 0xC0F3C0):
         assert not pending, 'Original body boundary interrupted an owner capture'
-    if pc in (0xC31226, 0xC322EE):
-        owner = 'radar' if pc == 0xC31226 else 'message'
+    if pc in (0xC30764, 0xC31226, 0xC322EE):
+        owner = {0xC30764: 'panel', 0xC31226: 'radar', 0xC322EE: 'message'}[pc]
         stack = registers['registers'][15]
         returned = integer(snapshot['data'], stack, 4)
-        assert returned in ((0xC0F18E,) if owner == 'radar' else (0xC0F286, 0xC0F2DC))
+        assert returned in {'panel': (0xC0F182,), 'radar': (0xC0F18E,), 'message': (0xC0F286, 0xC0F2DC)}[owner]
         assert owner not in pending, 'Repeated original owner entry without return'
         pending[owner] = iteration, returned, stack + 4
-    elif pc in (0xC0F18E, 0xC0F286, 0xC0F2DC):
-        owner = 'radar' if pc == 0xC0F18E else 'message'
+    elif pc in (0xC0F182, 0xC0F18E, 0xC0F286, 0xC0F2DC):
+        owner = 'panel' if pc == 0xC0F182 else 'radar' if pc == 0xC0F18E else 'message'
         assert owner in pending, 'Original owner return has no entry'
         assert pending.pop(owner) == (iteration, pc, registers['registers'][15]), 'Original owner returned to another caller'
         return 1
@@ -51,7 +53,7 @@ def verify_owner_stream(directory):
         i, pc = snapshot['iteration'], snapshot['boundary']
         assert (registers['iteration'], registers['frame'], registers['pc']) == (i, snapshot['frame'], pc)
         assert snapshot['ram_sha256'] == identities[i, pc]['ram_sha256']
-        if pc in (0xC0F18E, 0xC0F286, 0xC0F2DC) and not wrong_caller:
+        if pc in (0xC0F182, 0xC0F18E, 0xC0F286, 0xC0F2DC) and not wrong_caller:
             bad = dict(registers, registers=list(registers['registers']))
             bad['registers'][15] += 4
             try:
@@ -65,7 +67,7 @@ def verify_owner_stream(directory):
         count += 1
     assert not pending and next(lines, None) is None and count == report['snapshots']
     assert wrong_caller
-    assert returns == sum(report['boundary_counts'][f'{pc:06X}'] for pc in (0xC0F18E, 0xC0F286, 0xC0F2DC))
+    assert returns == sum(report['boundary_counts'].get(f'{pc:06X}', 0) for pc in (0xC0F182, 0xC0F18E, 0xC0F286, 0xC0F2DC))
     return dict(snapshots=count, actual_owner_returns_matching=returns, wrong_caller_stack_rejected=True,
                 source_report_sha256=digest((directory / 'report.json').read_bytes()),
                 metadata_sha256=report['metadata_sha256'])
@@ -80,6 +82,7 @@ def main():
     parser.add_argument('--window-radar', type=Path)
     parser.add_argument('--window-message', type=Path)
     parser.add_argument('--verify-existing', type=Path, help='Verify all actual caller returns in a preserved stream without rerunning')
+    parser.add_argument('--previous-stream', type=Path, help='Require every old RAM/register boundary to remain byte-identical')
     args = parser.parse_args()
     assert (args.first is None) == (args.count is None)
     reference = json.loads((args.reference / 'report.json').read_text())
@@ -126,6 +129,21 @@ def main():
             assert report['source_trace_sha256'] == source['driver_trace_sha256']
             windows[name] = directory, {r['iteration']: r['snapshots'] for r in report['captures']}
     checked_old = 0
+    previous_snapshots = previous_lines = None
+    checked_previous = 0
+    if args.previous_stream:
+        previous_report = json.loads((args.previous_stream / 'report.json').read_text())
+        assert previous_report['source_trace_sha256'] == reference['source_trace_sha256']
+        previous_metadata = gzip.decompress((args.previous_stream / 'registers.jsonl.gz').read_bytes())
+        assert digest(previous_metadata) == previous_report['metadata_sha256']
+        previous_hash = hashlib.sha256()
+        with gzip.open(args.previous_stream / 'frames.delta.gz', 'rb') as old_stream:
+            while chunk := old_stream.read(1024 * 1024):
+                previous_hash.update(chunk)
+        assert previous_hash.hexdigest() == previous_report['stream_sha256']
+        previous_lines = iter(previous_metadata.splitlines())
+        previous_snapshots = iter(snapshots(args.previous_stream / 'frames.delta.gz', BOUNDARIES))
+        previous_markers = {int(pc, 16) for pc, hits in previous_report['boundary_counts'].items() if hits}
     with tempfile.TemporaryDirectory(prefix='original-frame-delta-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         stream, metadata, trace, final = [work / name for name in ('frames.delta', 'registers.jsonl', 'trace.jsonl', 'final.dat')]
@@ -160,9 +178,15 @@ def main():
                 if pc == 0xC0EFD4:
                     assert snapshot['frame'] == rows[i]['frame']
                     verify_trace(data, header, rows[i]); entries.append(i)
-                if pc in (0xC31226, 0xC322EE):
+                if previous_snapshots is not None and pc in previous_markers:
+                    old, old_registers = next(previous_snapshots), json.loads(next(previous_lines))
+                    assert (snapshot['iteration'], snapshot['frame'], snapshot['boundary'], snapshot['ram_sha256']) == (
+                        old['iteration'], old['frame'], old['boundary'], old['ram_sha256'])
+                    assert data == old['data'] and registers == old_registers, 'Previous actual RAM/registers changed'
+                    checked_previous += 1
+                if pc in (0xC30764, 0xC31226, 0xC322EE):
                     returned = integer(data, registers['registers'][15], 4)
-                    assert returned in ((0xC0F18E,) if pc == 0xC31226 else (0xC0F286, 0xC0F2DC))
+                    assert returned in {0xC30764: (0xC0F182,), 0xC31226: (0xC0F18E,), 0xC322EE: (0xC0F286, 0xC0F2DC)}[pc]
                     registers['stack_return'] = returned
                 for owner, (path, captures) in windows.items():
                     suffix = {0xC0EFEA: 'before', 0xC0F3C0: 'after',
@@ -178,6 +202,9 @@ def main():
                 identities.append(dict(iteration=i, pc=pc, frame=snapshot['frame'], ram_sha256=snapshot['ram_sha256']))
             assert not registers_file.read(), 'Metadata follows stream terminal count'
         assert not pending, 'Original stream ended inside an owner'
+        if previous_snapshots is not None:
+            assert next(previous_snapshots, None) is None and next(previous_lines, None) is None
+            assert checked_previous == previous_report['snapshots']
         assert entries == list(range(first, last + 1)), 'Incomplete original input observations'
         if windows:
             assert checked_old == sum(4 * len(captures) for _, captures in windows.values())
@@ -198,6 +225,7 @@ def main():
         source_trace_sha256=reference['source_trace_sha256'], source_input_sha256=source['generated_input_sha256'],
         unchanged_observations=len(rows), complete_trace_preserved=True, final_ram_preserved=True,
         runtime_counters_preserved=True, old_window_snapshots_identical=checked_old,
+        previous_stream_snapshots_identical=checked_previous,
         actual_owner_returns_matching=owner_returns,
         stream_sha256=stream_hash, metadata_sha256=metadata_hash,
         stream_bytes=stream_bytes, metadata_bytes=metadata_bytes, trace_bytes=trace_bytes,

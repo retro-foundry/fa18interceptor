@@ -1,0 +1,69 @@
+{
+  "observations": 4967,
+  "snapshots": 36509,
+  "boundary_counts": {
+    "C0EFD4": 4967,
+    "C0EFEA": 4965,
+    "C0F3C0": 4965,
+    "C30764": 3602,
+    "C0F182": 3602,
+    "C31226": 3602,
+    "C0F18E": 3602,
+    "C322EE": 3602,
+    "C0F286": 3602,
+    "C0F2DC": 0
+  },
+  "probe_sha256": "f61c941cf48a6a492cde9b4e6c7b3e97154c4fe03d773948b8f76c79a793fb40",
+  "stream_sha256": "4c90edf31a8075e771a45690edf3f376214147ee9ec73071f49fbc5b77791d61",
+  "metadata_sha256": "7ecb52f57c6fa82f2823f0ebb84067dd9933e283d8114d0ef5f0b3454cc788ba",
+  "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+  "source_input_sha256": "fa3ac6722fc0338d5b773b6c288e8ca095274ba64000cf0773aa4fbb8bd73b12",
+  "actual_owner_returns_matching": 10806,
+  "previous_stream_snapshots_identical": 29305,
+  "old_window_snapshots_identical": 408,
+  "stream_bytes": 151879520,
+  "metadata_bytes": 6935442,
+  "trace_bytes": 250829740,
+  "retained_bytes": 25785248,
+  "evidence_sha256": {
+    "build/native-flight/original-frame-delta-panel-complete-flight/report.json": "cd8cb6793f6a700cfc7656bf7160285a708853f0ea6e00fb7ae66089cf706eb8",
+    "build/native-flight/original-frame-delta-panel-complete-flight/counter-example.json": "c21db91158a912b0f18c8821b413acb3539a909e870cf91dbe415f73bcb2fbf5",
+    "build/native-flight/original-frame-delta-complete-flight/report.json": "07efde470c9536760aee5fe009700863813a6ea458474c79cd0bbfc35489e070",
+    "build/native-flight/frame-delta-trace-preservation/Release/report.json": "3f309e61ae320956f55d9319140ddf3908d847dcf00d6c78b43a5488d176917e",
+    "tools/native/check_original_frame_delta.py": "f6470a1ab277268197538a471f374709852c99fd7f3c80c44e29907f52d483d8",
+    "tools/native/original_frame_delta_probe.c": "4cd8bef6858a5971cb05491a34ce5ae7af2b01626f307589becfffd13aaf4c12",
+    "tools/native/original_frame_delta_loop.c": "2cd5f36ccb335efc85d1ac84d0714039a3477627fa3cf1adc8d56a8797781600",
+    "build/native-flight/original-frame-delta-panel-caller-returns/report.json": "02ab6ad02fd83f2ad1bacbc41e562173216019e648a436b3aaeadd04c613aa29"
+  },
+  "counter_example": {
+    "C0EFEA": {
+      "frame": 19573,
+      "ram_sha256": "721db1ec3237a664be58e257b02a97c8c106cfa210167fd58ecdcc4b573b188b",
+      "counter": 0,
+      "row": 0,
+      "row_bytes": 0
+    },
+    "C30764": {
+      "frame": 19579,
+      "ram_sha256": "7efc79faceb8663df0b96d3a59d6f6000f53f60f0fbad9aac692ddfeba34cb97",
+      "counter": 3,
+      "row": 65535,
+      "row_bytes": 4294967256
+    },
+    "C0F182": {
+      "frame": 19579,
+      "ram_sha256": "4c3de8ba282d2a7e52d6f8fa8bcc153292e16906fbc272f4169d2e8094a0adf3",
+      "counter": 2,
+      "row": 65535,
+      "row_bytes": 4294967256
+    }
+  },
+  "scope": "Complete independent original panel boundaries, unchanged prior RAM/registers and replay. Source evidence only; full-flight drawing, audio timing and visible performance remain open.",
+  "caller_return_verification": {
+    "snapshots": 36509,
+    "actual_owner_returns_matching": 10806,
+    "wrong_caller_stack_rejected": true,
+    "source_report_sha256": "cd8cb6793f6a700cfc7656bf7160285a708853f0ea6e00fb7ae66089cf706eb8",
+    "metadata_sha256": "7ecb52f57c6fa82f2823f0ebb84067dd9933e283d8114d0ef5f0b3454cc788ba"
+  }
+}

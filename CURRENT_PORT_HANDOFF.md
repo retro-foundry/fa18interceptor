@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Actual panel boundaries (2026-10-09): the complete original flight now
+retains 3,602 C30764 calls/returns and preserves all 29,305 previous RAM/register
+snapshots, the whole replay, final RAM and counters. All 10,806 drawing-owner
+returns restore their callers. The actual redraw counter can change from zero
+to three between frame entry and drawing; the full history check now consumes
+that call boundary. Runtime is unchanged; full drawing acceptance remains open.
+See [panel evidence](analysis/native_actual_panel_boundaries_milestone.md).
+
 NO SIG drawing history (2026-10-09): all eight planes across the next
 51-observation episode follow actual writes (3,264,000 XOR bytes), closing
 48 more plane-0 differences. The full-flight gate still fails with 1,825
