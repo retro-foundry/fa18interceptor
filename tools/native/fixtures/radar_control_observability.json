@@ -1,0 +1,440 @@
+{
+  "selected": {
+    "provenance": {
+      "report": "build/native-flight/cockpit-first-combined-radar-history/report.json",
+      "sha256": "b2b5927cc72913278b427fbf2f48f774cbddab360bdd8d5a22b5670b29da3dc6",
+      "iteration": 22302
+    },
+    "rows": [
+      {
+        "source": {
+          "complete_non_stack_ram_matching": true,
+          "prefix_calls": 1,
+          "phase_before": 126,
+          "phase_after": 127,
+          "selected_record": 4096,
+          "points": [
+            {
+              "record_offset": 4096,
+              "x": 131,
+              "y": 157,
+              "pair": 1,
+              "colour": 8,
+              "phase": 127
+            },
+            {
+              "record_offset": 7168,
+              "x": 149,
+              "y": 173,
+              "pair": 0,
+              "colour": 5,
+              "phase": 127
+            }
+          ],
+          "paints": [
+            {
+              "kind": "line",
+              "x": 154,
+              "y": 163,
+              "x1": 139,
+              "y1": 147,
+              "colour": 3
+            },
+            {
+              "kind": "line",
+              "x": 162,
+              "y": 163,
+              "x1": 177,
+              "y1": 147,
+              "colour": 3
+            },
+            {
+              "kind": "point",
+              "x": 150,
+              "y": 174,
+              "x1": 0,
+              "y1": 0,
+              "colour": 0
+            },
+            {
+              "kind": "pair",
+              "x": 131,
+              "y": 157,
+              "x1": 0,
+              "y1": 0,
+              "colour": 8
+            },
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 173,
+              "x1": 0,
+              "y1": 0,
+              "colour": 5
+            }
+          ]
+        },
+        "native": {
+          "complete_non_stack_ram_matching": true,
+          "prefix_calls": 1,
+          "phase_before": 249,
+          "phase_after": 250,
+          "selected_record": 4096,
+          "points": [
+            {
+              "record_offset": 7168,
+              "x": 149,
+              "y": 173,
+              "pair": 0,
+              "colour": 5,
+              "phase": 250
+            }
+          ],
+          "paints": [
+            {
+              "kind": "line",
+              "x": 154,
+              "y": 163,
+              "x1": 139,
+              "y1": 147,
+              "colour": 3
+            },
+            {
+              "kind": "line",
+              "x": 162,
+              "y": 163,
+              "x1": 177,
+              "y1": 147,
+              "colour": 3
+            },
+            {
+              "kind": "point",
+              "x": 150,
+              "y": 174,
+              "x1": 0,
+              "y1": 0,
+              "colour": 0
+            },
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 173,
+              "x1": 0,
+              "y1": 0,
+              "colour": 5
+            }
+          ]
+        },
+        "source_flipped_phase": {
+          "complete_non_stack_ram_matching": true,
+          "prefix_calls": 1,
+          "phase_before": 127,
+          "phase_after": 128,
+          "selected_record": 4096,
+          "points": [
+            {
+              "record_offset": 7168,
+              "x": 149,
+              "y": 173,
+              "pair": 0,
+              "colour": 5,
+              "phase": 128
+            }
+          ],
+          "paints": [
+            {
+              "kind": "line",
+              "x": 154,
+              "y": 163,
+              "x1": 139,
+              "y1": 147,
+              "colour": 3
+            },
+            {
+              "kind": "line",
+              "x": 162,
+              "y": 163,
+              "x1": 177,
+              "y1": 147,
+              "colour": 3
+            },
+            {
+              "kind": "point",
+              "x": 150,
+              "y": 174,
+              "x1": 0,
+              "y1": 0,
+              "colour": 0
+            },
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 173,
+              "x1": 0,
+              "y1": 0,
+              "colour": 5
+            }
+          ]
+        },
+        "native_flipped_phase": {
+          "complete_non_stack_ram_matching": true,
+          "prefix_calls": 1,
+          "phase_before": 248,
+          "phase_after": 249,
+          "selected_record": 4096,
+          "points": [
+            {
+              "record_offset": 4096,
+              "x": 131,
+              "y": 157,
+              "pair": 1,
+              "colour": 8,
+              "phase": 249
+            },
+            {
+              "record_offset": 7168,
+              "x": 149,
+              "y": 173,
+              "pair": 0,
+              "colour": 5,
+              "phase": 249
+            }
+          ],
+          "paints": [
+            {
+              "kind": "line",
+              "x": 154,
+              "y": 163,
+              "x1": 139,
+              "y1": 147,
+              "colour": 3
+            },
+            {
+              "kind": "line",
+              "x": 162,
+              "y": 163,
+              "x1": 177,
+              "y1": 147,
+              "colour": 3
+            },
+            {
+              "kind": "point",
+              "x": 150,
+              "y": 174,
+              "x1": 0,
+              "y1": 0,
+              "colour": 0
+            },
+            {
+              "kind": "pair",
+              "x": 131,
+              "y": 157,
+              "x1": 0,
+              "y1": 0,
+              "colour": 8
+            },
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 173,
+              "x1": 0,
+              "y1": 0,
+              "colour": 5
+            }
+          ]
+        }
+      }
+    ],
+    "combined_history": {
+      "first": 22302,
+      "last": 22341,
+      "history_mutation_rejections": {
+        "lost_panel_refresh": {
+          "rejected": true,
+          "first_difference": 22319
+        },
+        "lost_radar_writes": {
+          "rejected": true,
+          "first_difference": 22303
+        },
+        "lost_message_writes": {
+          "rejected": true,
+          "first_difference": 22309
+        }
+      }
+    }
+  },
+  "no_selected_marker": {
+    "provenance": {
+      "report": "build/native-flight/compact-second-combined-radar-history/report.json",
+      "sha256": "068b457882d75a1000f8fe809c8d491220bf6b330fb46c724158590cc7df4e57",
+      "iteration": 22353
+    },
+    "rows": [
+      {
+        "source": {
+          "complete_non_stack_ram_matching": true,
+          "prefix_calls": 1,
+          "phase_before": 157,
+          "phase_after": 158,
+          "selected_record": 4096,
+          "points": [
+            {
+              "record_offset": 7168,
+              "x": 149,
+              "y": 161,
+              "pair": 0,
+              "colour": 5,
+              "phase": 158
+            }
+          ],
+          "paints": [
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 161,
+              "x1": 0,
+              "y1": 0,
+              "colour": 0
+            },
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 161,
+              "x1": 0,
+              "y1": 0,
+              "colour": 5
+            }
+          ]
+        },
+        "native": {
+          "complete_non_stack_ram_matching": true,
+          "prefix_calls": 1,
+          "phase_before": 24,
+          "phase_after": 25,
+          "selected_record": 4096,
+          "points": [
+            {
+              "record_offset": 7168,
+              "x": 149,
+              "y": 161,
+              "pair": 0,
+              "colour": 5,
+              "phase": 25
+            }
+          ],
+          "paints": [
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 161,
+              "x1": 0,
+              "y1": 0,
+              "colour": 0
+            },
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 161,
+              "x1": 0,
+              "y1": 0,
+              "colour": 5
+            }
+          ]
+        },
+        "source_flipped_phase": {
+          "complete_non_stack_ram_matching": true,
+          "prefix_calls": 1,
+          "phase_before": 156,
+          "phase_after": 157,
+          "selected_record": 4096,
+          "points": [
+            {
+              "record_offset": 7168,
+              "x": 149,
+              "y": 161,
+              "pair": 0,
+              "colour": 5,
+              "phase": 157
+            }
+          ],
+          "paints": [
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 161,
+              "x1": 0,
+              "y1": 0,
+              "colour": 0
+            },
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 161,
+              "x1": 0,
+              "y1": 0,
+              "colour": 5
+            }
+          ]
+        },
+        "native_flipped_phase": {
+          "complete_non_stack_ram_matching": true,
+          "prefix_calls": 1,
+          "phase_before": 25,
+          "phase_after": 26,
+          "selected_record": 4096,
+          "points": [
+            {
+              "record_offset": 7168,
+              "x": 149,
+              "y": 161,
+              "pair": 0,
+              "colour": 5,
+              "phase": 26
+            }
+          ],
+          "paints": [
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 161,
+              "x1": 0,
+              "y1": 0,
+              "colour": 0
+            },
+            {
+              "kind": "point",
+              "x": 149,
+              "y": 161,
+              "x1": 0,
+              "y1": 0,
+              "colour": 5
+            }
+          ]
+        }
+      }
+    ],
+    "combined_history": {
+      "first": 22353,
+      "last": 22403,
+      "history_mutation_rejections": {
+        "lost_panel_refresh": {
+          "rejected": true,
+          "first_difference": 22383,
+          "actual_mutation": "lost_source_panel_refresh",
+          "balanced_mutation_unobservable": true
+        },
+        "lost_radar_writes": {
+          "rejected": true,
+          "first_difference": 22355,
+          "actual_mutation": "lost_source_radar_writes",
+          "balanced_mutation_unobservable": true
+        },
+        "lost_message_writes": {
+          "rejected": true,
+          "first_difference": 22354
+        }
+      }
+    }
+  }
+}

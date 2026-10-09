@@ -16,6 +16,8 @@ from check_qualification_message_cadence import digest, pages
 from check_recorded_original_mission_trace import verified_update_mapping
 from check_mission_message_trace import preserved
 from compare_flight_traces import read_trace
+from assess_mission_radar_cadence import validate_control_summary
+from assess_mission_cockpit_history import validate_history_controls
 
 
 def coverage(source, native, mapping, first, last, histories, plane, audit=False):
@@ -95,11 +97,12 @@ def main():
             assert all(report['mutation_rejections'].values()) and report['wrong_owner_return_capture_rejected']
             assert report['live_original_pages_matching'] == report['live_native_pages_matching'] == report['observations']
             if 'history_mutation_rejections' in report:
-                assert set(report['history_mutation_rejections']) == {
-                    'lost_panel_refresh', 'lost_radar_writes', 'lost_message_writes'}
-                assert all(row['rejected'] is True for row in report['history_mutation_rejections'].values())
+                validate_history_controls(report)
                 assert all(report['radar_phase_mutation_rejections'].values())
                 assert all(report['radar_paint_mutation_rejections'].values())
+                validate_control_summary(report['radar_phase_mutation_rejections'],
+                    report.get('radar_unobservable_phase_mutations', []), report['radar_paint_mutation_rejections'],
+                    report.get('radar_unobservable_paint_mutations', []))
         else:
             rows = report['cross_paint_history']['rows']
             assert all(report['paint_mutation_rejections'].values()) and report['strict_live_owner_pages_matching']

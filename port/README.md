@@ -1,5 +1,14 @@
 # Active port source ownership
 
+NO SIG drawing history (2026-10-09): all eight planes across the next
+51-observation episode follow actual writes (3,264,000 XOR bytes), closing
+48 more plane-0 differences. The full-flight gate still fails with 1,825
+plane-0 and 2,785 plane-3 observations open. Missing selected markers now
+get explicit inactive-control assessment; counters, ordinary contacts and
+all paint controls remain strict. Source-only omitted writes are rejected.
+The selected-target regression stays byte-identical; runtime is unchanged.
+See [drawing/control evidence](../analysis/native_no_sig_cockpit_history_milestone.md).
+
 Complete original flight capture (2026-10-09): 4,967 independent input
 observations, 4,965 bodies and 3,602 actual radar/message calls each now
 retain complete RAM/registers in 23.71 MB gzip. All 27,110 source trace

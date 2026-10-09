@@ -9,7 +9,7 @@ import gzip
 import json
 from pathlib import Path
 
-from assess_mission_radar_cadence import apply_paints, painted_pages
+from assess_mission_radar_cadence import apply_paints, painted_pages, validate_controls
 from check_gameplay_checkpoint import ROOT, integer
 from check_mission_message_pages import predicted_pages, verify_return
 from check_mission_message_trace import preserved
@@ -19,6 +19,20 @@ from compare_flight_traces import read_trace
 
 def ram(path):
     return gzip.decompress(path.read_bytes())
+
+
+def validate_history_controls(report):
+    controls = report['history_mutation_rejections']
+    assert set(controls) == {'lost_panel_refresh', 'lost_radar_writes', 'lost_message_writes'}
+    source_variants = {'lost_panel_refresh': 'lost_source_panel_refresh', 'lost_radar_writes': 'lost_source_radar_writes'}
+    for kind, control in controls.items():
+        assert control['rejected'] is True
+        assert report['first'] <= control['first_difference'] <= report['last']
+        if 'actual_mutation' in control:
+            assert kind in source_variants and control['actual_mutation'] == source_variants[kind]
+            assert control['balanced_mutation_unobservable'] is True
+        else:
+            assert 'balanced_mutation_unobservable' not in control
 
 
 def predict_history(window_path, window, radar, message, radar_bodies, message_bodies,
@@ -89,8 +103,9 @@ def predict_history(window_path, window, radar, message, radar_bodies, message_b
             assert digest(before) == state['owner_input_sha256']
             assert digest(after) == state['owner_output_sha256']
             assert predicted_pages(before, after, state['text_drawn']) == pages(after)
-            refreshes[name] = instrument_panel_refresh(body, expected[name], apply=mutation != 'lost_panel_refresh')
-            if mutation != 'lost_radar_writes':
+            refreshes[name] = instrument_panel_refresh(body, expected[name], apply=mutation != 'lost_panel_refresh' and
+                not (mutation == 'lost_source_panel_refresh' and name == 'source'))
+            if mutation != 'lost_radar_writes' and not (mutation == 'lost_source_radar_writes' and name == 'source'):
                 apply_paints(expected[name], radar_rows[i][name]['paints'])
             if mutation != 'lost_message_writes':
                 expected[name] = predicted_pages(before, after, state['text_drawn'], base=expected[name])
@@ -126,7 +141,8 @@ def main():
             assert report[key] == window[key], key
         assert report['live_original_pages_matching'] == report['live_native_pages_matching'] == report[count_key] == len(window['rows'])
         assert all(report['mutation_rejections'].values())
-    assert radar['strict_live_owner_pages_matching'] and all(radar['paint_mutation_rejections'].values())
+    assert radar['strict_live_owner_pages_matching']
+    validate_controls(radar)
     assert message['wrong_owner_return_capture_rejected'] and message['native_owner_captures_retained']
     inputs = (args.window, window, radar, message, args.radar_bodies, args.message_bodies,
               args.message_pages, headers, traces)
@@ -139,7 +155,18 @@ def main():
             assert error.args[0][-1] == 'Combined writes do not explain every complete page byte', error
             rejections[mutation] = dict(rejected=True, first_difference=error.args[0][0])
         else:
-            raise AssertionError(f'{mutation} was unobservable in this window')
+            assert mutation in ('lost_panel_refresh', 'lost_radar_writes'), f'{mutation} was unobservable in this window'
+            # Removing identical writes from both histories can preserve XOR.
+            # Removing actual source writes alone must still be observable.
+            try:
+                actual_mutation = 'lost_source_panel_refresh' if mutation == 'lost_panel_refresh' else 'lost_source_radar_writes'
+                predict_history(*inputs, mutation=actual_mutation)
+            except AssertionError as error:
+                assert error.args[0][-1] == 'Combined writes do not explain every complete page byte', error
+                rejections[mutation] = dict(rejected=True, first_difference=error.args[0][0],
+                    actual_mutation=actual_mutation, balanced_mutation_unobservable=True)
+            else:
+                raise AssertionError(f'No observable source omission for {mutation} in this window')
     report = dict(first=window['first'], last=window['last'], observations=len(history),
                   runner_sha256=window['runner_sha256'], source_trace_sha256=window['source_trace_sha256'],
                   native_trace_sha256=window['native_trace_sha256'], complete_plane_history=history,
@@ -153,6 +180,11 @@ def main():
                   radar_paint_mutation_rejections=radar['paint_mutation_rejections'],
                   unobservable_message_mutations=message.get('unobservable_drawing_mutations', []),
                   scope='All eight complete page XORs in this bounded independent flight window follow actual original radar, bitmap and message writes from common initial pages. No pixel masks or clock adjustments; other windows and full-flight drawing remain open.')
+    if radar.get('unobservable_phase_mutations'):
+        report['radar_unobservable_phase_mutations'] = radar['unobservable_phase_mutations']
+    if radar.get('unobservable_paint_mutations'):
+        report['radar_unobservable_paint_mutations'] = radar['unobservable_paint_mutations']
+    validate_history_controls(report)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(report, indent=2) + '\n')
     print(f'{len(history)} complete eight-plane observations / {report["compared_bytes"]} bytes predicted; three omitted-owner histories rejected')

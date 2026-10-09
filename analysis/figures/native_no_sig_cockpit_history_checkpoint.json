@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-09",
+  "native_runtime_changed": false,
+  "runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+  "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+  "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+  "tools_sha256": {
+    "tools/native/assess_mission_radar_cadence.py": "a33f0f9fc2064516ba2d138a01c62474fbc24eaa0f430624a0f8475211fffb6b",
+    "tools/native/assess_mission_cockpit_history.py": "edae5ddc389e70c0fb38f0bd6e9df851257593961ec168d67ce61622f33250be",
+    "tools/native/assess_mission_plane_history.py": "6059fc42ae9373fa80340bf10d565aabc8cc67a661230f141eadd463d8c17d77",
+    "tools/native/test_radar_control_observability.py": "8409434ae30423544d58bffbe3f847ca4c0d311a085f1e0c0f4d8b88da84c321",
+    "tools/native/fixtures/radar_control_observability.json": "f794d5ea330e20c4effb25c355265abda10a7971a62d0e13a2b3bd79e77f5e31"
+  },
+  "evidence": {
+    "window": {
+      "path": "build/native-flight/compact-second-combined-window/window/report.json",
+      "sha256": "6bed699d55f135df57c6af71e18e45adf35ad9fc9cbef943c38ea53690e82860"
+    },
+    "source_radar": {
+      "path": "build/native-flight/compact-second-combined-window/radar/report.json",
+      "sha256": "9cfdf34f98284b3f56600b52e636740fcd8c295d786ae21760a8dc3086638ed4"
+    },
+    "source_message": {
+      "path": "build/native-flight/compact-second-combined-window/message/report.json",
+      "sha256": "c1e2987277cfa2fb33b91335546f3c4582c30cfe3b42ced67beca9fc6946ba61"
+    },
+    "radar": {
+      "path": "build/native-flight/compact-second-combined-radar-history-final/report.json",
+      "sha256": "068b457882d75a1000f8fe809c8d491220bf6b330fb46c724158590cc7df4e57"
+    },
+    "message": {
+      "path": "build/native-flight/compact-second-combined-message-pages/report.json",
+      "sha256": "ee28e39da51ac599873cc5164cd9eafa42b1fbfeed03d7a97bdaaa227b79e25a"
+    },
+    "history": {
+      "path": "build/native-flight/compact-second-combined-history-final.json",
+      "sha256": "a513b802acddeeeaf8f2af115b5838b5d10c0c4cd99188a30161d2426dac6192"
+    },
+    "audit": {
+      "path": "build/native-flight/mission-three-plane-zero-second-combined-audit-final.json",
+      "sha256": "0ffb8fb3c771a4ddc5f1842d856513b107184eef40059e6a3817342f30ab6f46"
+    },
+    "selected_regression": {
+      "path": "build/native-flight/selected-radar-control-regression/report.json",
+      "sha256": "b2b5927cc72913278b427fbf2f48f774cbddab360bdd8d5a22b5670b29da3dc6"
+    },
+    "selected_baseline": {
+      "path": "build/native-flight/cockpit-first-combined-radar-history/report.json",
+      "sha256": "b2b5927cc72913278b427fbf2f48f774cbddab360bdd8d5a22b5670b29da3dc6"
+    },
+    "complete_source": {
+      "path": "build/native-flight/original-frame-delta-complete-flight/report.json",
+      "sha256": "07efde470c9536760aee5fe009700863813a6ea458474c79cd0bbfc35489e070"
+    },
+    "complete_native": {
+      "path": "build/native-flight/frame-delta-complete-flight/Release/report.json",
+      "sha256": "45ff95379157e74c54b4a1dcca07f71f09632ef2981c30a4242a8cf4332f4baa"
+    },
+    "flight": {
+      "path": "build/native-flight/frame-delta-trace-preservation/Release/report.json",
+      "sha256": "3f309e61ae320956f55d9319140ddf3908d847dcf00d6c78b43a5488d176917e"
+    }
+  },
+  "first": 22353,
+  "last": 22403,
+  "observations": 51,
+  "complete_xor_bytes": 3264000,
+  "new_plane_zero_differences_explained": 48,
+  "remaining_plane_zero_observations": 1825,
+  "remaining_plane_three_observations": 2785,
+  "full_flight_gate_fails": true,
+  "missing_late_history_rejected": true,
+  "radar_non_stack_component_executions": 204,
+  "message_non_stack_component_executions": 102,
+  "complete_owner_page_predictions": 204,
+  "complete_owner_page_prediction_bytes": 13056000,
+  "native_complete_body_comparisons": 51,
+  "unobservable_selected_marker_controls": [
+    "premature_marker",
+    "marker_coordinate"
+  ],
+  "observable_radar_phase_controls": {
+    "counter_increment": true,
+    "other_marker": true
+  },
+  "observable_radar_paint_controls": {
+    "lost_erase": true,
+    "wrong_marker_colour": true,
+    "wrong_head_slope": true
+  },
+  "history_omission_controls": {
+    "lost_panel_refresh": {
+      "rejected": true,
+      "first_difference": 22383,
+      "actual_mutation": "lost_source_panel_refresh",
+      "balanced_mutation_unobservable": true
+    },
+    "lost_radar_writes": {
+      "rejected": true,
+      "first_difference": 22355,
+      "actual_mutation": "lost_source_radar_writes",
+      "balanced_mutation_unobservable": true
+    },
+    "lost_message_writes": {
+      "rejected": true,
+      "first_difference": 22354
+    }
+  },
+  "selected_target_regression_byte_identical": true,
+  "final_combined_report_byte_identical": true,
+  "control_tests_passed": 11,
+  "plane_acceptance_tests_passed": 5,
+  "complete_window_and_owner_identities_sha256": {
+    "window": "95e4291eb8c690ed29f90a024220c8dae92d4fdccda62e279191f5ae3f100864",
+    "source_radar": "238ed3f82c50089b6bcbe8054b55763cdb2f0fbaf2cdc1552795ad1304ff525e",
+    "source_message": "ba829d92aeb3887f26602d045269bc3e4b334c387b60e514c9dc921e0bdd14c0"
+  },
+  "scope": "All eight complete independent page XORs across the second Mission 3 cockpit episode follow actual source/native bitmap, radar and message writes. Inactive selected-marker controls are assessed explicitly; source-only omissions are observable and rejected. Remaining complete-flight drawing, other flights, audio timing and visible performance remain open."
+}

@@ -237,6 +237,88 @@ def verify(rows):
     return phase_offset
 
 
+def phase_controls(rows):
+    """Test counters/regular contacts even when the selected contact is absent."""
+    verify(rows)
+    selected = next((i for i, row in enumerate(rows) if any(
+        p['record_offset'] == row['source']['selected_record'] for p in row['source']['points'])), None)
+    unobservable, rejections = [], {}
+    for kind in ('counter_increment', 'premature_marker', 'marker_coordinate', 'other_marker'):
+        changed = copy.deepcopy(rows)
+        if kind in ('premature_marker', 'marker_coordinate') and selected is None:
+            assert all(not any(p['record_offset'] == row[name]['selected_record'] for p in row[name]['points'])
+                for row in rows for name in ('source', 'native', 'source_flipped_phase', 'native_flipped_phase'))
+            unobservable.append(kind)
+            continue
+        index = selected if selected is not None else 0
+        if kind == 'other_marker' and selected is None:
+            index = next(i for i, row in enumerate(rows) if any(
+                p['record_offset'] != row['source']['selected_record'] for p in row['source']['points']))
+        state = changed[index]['source']
+        if kind == 'counter_increment':
+            state['phase_after'] += 1
+        elif kind == 'other_marker':
+            state['points'] = [p for p in state['points'] if p['record_offset'] == state['selected_record']]
+        else:
+            marker = next(p for p in state['points'] if p['record_offset'] == state['selected_record'])
+            if kind == 'premature_marker':
+                changed[index]['source_flipped_phase']['points'].append(copy.deepcopy(marker))
+            else:
+                marker['x'] += 1
+        try:
+            verify(changed)
+        except AssertionError:
+            rejections[kind] = True
+        else:
+            raise AssertionError(f'{kind} mutation accepted')
+    return rejections, unobservable
+
+
+def changed_paints(paints, kind):
+    """Mutate actual operations; None means that feature is absent."""
+    changed = copy.deepcopy(paints)
+    if kind == 'lost_erase':
+        return [p for p in changed if p['colour']] if any(not p['colour'] for p in changed) else None
+    if kind == 'wrong_head_slope':
+        target = next((p for p in changed if p['kind'] == 'line'), None)
+        if target is not None:
+            target['x1'] += 1
+    else:
+        assert kind == 'wrong_marker_colour'
+        target = next((p for p in changed if p['kind'] != 'line' and p['colour'] in (1, 8)), None)
+        if target is None:
+            target = next((p for p in changed if p['kind'] != 'line' and p['colour']), None)
+        if target is not None:
+            target['colour'] = 1 if target['colour'] == 8 else 8
+    return changed if target is not None else None
+
+
+def validate_control_summary(phase, inactive_phase, paints=None, inactive_paints=()):
+    """Every defined control needs a rejection or its permitted assessment."""
+    inactive = set(inactive_phase)
+    required = {'counter_increment', 'premature_marker', 'marker_coordinate', 'other_marker'}
+    assert set(phase).isdisjoint(inactive) and set(phase) | inactive == required
+    assert all(value is True for value in phase.values())
+    assert inactive <= {'premature_marker', 'marker_coordinate'}
+    if inactive:
+        assert inactive == {'premature_marker', 'marker_coordinate'}
+    if paints is not None:
+        active = paints
+        required = {'lost_erase', 'wrong_marker_colour', 'wrong_head_slope'}
+        assert required <= set(active)
+        assert all(value is True for value in active.values())
+        assert set(inactive_paints) <= {'lost_panel_refresh'}
+
+
+def validate_controls(report):
+    """Missing observable controls cannot be relabelled as unobservable."""
+    validate_control_summary(report['mutation_rejections'], report.get('unobservable_phase_mutations', []),
+        report.get('paint_mutation_rejections'), report.get('unobservable_paint_mutations', []))
+    if report.get('unobservable_phase_mutations'):
+        assert all(not any(p['record_offset'] == row[name]['selected_record'] for p in row[name]['points'])
+            for row in report['rows'] for name in ('source', 'native', 'source_flipped_phase', 'native_flipped_phase'))
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--window', type=Path, required=True)
@@ -395,19 +477,9 @@ def main():
                                 pixel_163_162_after=pixel_colour(observed_output, 163, 162),
                                 paints=state['paints']))
                             for kind in paint_rejections:
-                                changed = copy.deepcopy(state['paints'])
-                                if kind == 'lost_erase':
-                                    changed = [p for p in changed if p['colour']]
-                                else:
-                                    target = next((p for p in changed if
-                                        (p['kind'] == 'line' if kind == 'wrong_head_slope' else
-                                         p['kind'] != 'line' and p['colour'] in (1, 8))), None)
-                                    if target is None:
-                                        continue
-                                    if kind == 'wrong_head_slope':
-                                        target['x1'] += 1
-                                    else:
-                                        target['colour'] = 1 if target['colour'] == 8 else 8
+                                changed = changed_paints(state['paints'], kind)
+                                if changed is None:
+                                    continue
                                 if painted_pages(owner_input, changed) != observed_pages:
                                     paint_rejections[kind] = True
                 if name == 'source':
@@ -432,27 +504,7 @@ def main():
             b = gzip.decompress((args.window / f'native.{j}.dat.gz').read_bytes())
             page_deltas.append(dict(source_iteration=i, native_iteration=j,
                                    **complete_page_delta(a, b, colour)))
-    rejections = {}
-    for kind in ('counter_increment', 'premature_marker', 'marker_coordinate', 'other_marker'):
-        changed = copy.deepcopy(rows)
-        index = next(i for i, row in enumerate(changed)
-                     if any(p['record_offset'] == row['source']['selected_record'] for p in row['source']['points']))
-        state = changed[index]['source']
-        marker = next(p for p in state['points'] if p['record_offset'] == state['selected_record'])
-        if kind == 'counter_increment':
-            state['phase_after'] += 1
-        elif kind == 'premature_marker':
-            changed[index]['source_flipped_phase']['points'].append(copy.deepcopy(marker))
-        elif kind == 'marker_coordinate':
-            marker['x'] += 1
-        else:
-            state['points'] = [p for p in state['points'] if p['record_offset'] == state['selected_record']]
-        try:
-            verify(changed)
-        except AssertionError:
-            rejections[kind] = True
-        else:
-            raise AssertionError(f'{kind} mutation accepted')
+    rejections, unobservable_phase = phase_controls(rows)
     report = dict(first=window['first'], last=window['last'], boundaries=len(rows),
         runner_sha256=window['runner_sha256'], original_probe_sha256=original['probe_sha256'],
         original_unchanged_observations=original['unchanged_observations'],
@@ -465,6 +517,8 @@ def main():
               'Every strict page difference remains reported. Message text and other drawing differences '
               'are not accepted by this check. Native body checks retain their existing explicit exclusions; '
               'actual original owner returns are checked for all complete pages, cores and radar list/cache.')
+    if unobservable_phase:
+        report['unobservable_phase_mutations'] = unobservable_phase
     report['live_original_pages_matching'] = sum(row['source_live_pages_matching'] for row in rows)
     report['live_native_pages_matching'] = sum(row['native_live_pages_matching'] for row in rows)
     report['strict_live_owner_pages_matching'] = all(
@@ -484,15 +538,16 @@ def main():
                 assert error.args and error.args[0][-1] == 'Radar paint history does not explain complete plane difference', error
                 report['paint_mutation_rejections']['lost_panel_refresh'] = True
             else:
-                report['unobservable_paint_mutations'] = ['lost_panel_refresh']
+                report.setdefault('unobservable_paint_mutations', []).append('lost_panel_refresh')
         report['scope'] += ' Ordered radar crosshair, erase and marker writes predict every complete live owner page byte, including background-bit erasure.'
         report['scope'] += ' Cross-runtime XOR is predicted for all bytes of the requested planes from a common initial state, including actual instrument bitmap redraws.'
     if page_deltas is not None:
         report['complete_page_delta'] = page_deltas
         report['scope'] += ' Every full-page XOR byte in this bounded window equals the retained radar point-cache delta; no pixels are excluded.'
+    validate_controls(report)
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'{len(rows)} original/native radar transitions, {4*len(rows)} complete owner comparisons, '
-          f'{len(rows)} native body comparisons; phase offset={phase_offset}; four mutations rejected')
+          f'{len(rows)} native body comparisons; phase offset={phase_offset}; {len(rejections)} phase mutations rejected')
     print(f"Live original owner pages: {report['live_original_pages_matching']}/{len(rows)} match; "
           f"native: {report['live_native_pages_matching']}/{len(rows)} match")
     if args.paint_history:
