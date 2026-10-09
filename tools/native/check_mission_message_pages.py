@@ -26,7 +26,10 @@ def predicted_pages(before, after, drawn, mutation=None, base=None):
     # skip. Keep those branches outside the claim rather than guessing them.
     assert integer(before, 0xC45785, 1) == 0  # CONTEXT_SELECT
     assert integer(before, 0xC45986, 2) == 0  # SPAN_ORIGIN
-    assert integer(before, 0xC45918, 4) == 0  # REDRAW_STATE_LONG
+    # C325A6's normal view entry adds the complete REDRAW_STATE_LONG to
+    # the glyph destination (C32794/C327D0). Moving up a row uses $FFFFFFD8;
+    # the ADD.L wraps rather than treating that value as a positive offset.
+    rows = (0x1E0C + integer(before, 0xC45918, 4)) & 0xFFFFFFFF
     kind = integer(after, 0xC45862, 1) >> 6
     first = 0 if kind == 0 else 1 if kind == 1 else 3
     planes = [(first, True)]
@@ -49,7 +52,7 @@ def predicted_pages(before, after, drawn, mutation=None, base=None):
         cell = 0xE0000000 >> shift
         for plane, drawing in planes:
             for row, bits in enumerate(glyph):
-                dest = 0x1E0C + column + 40 * row
+                dest = rows + column + 40 * row
                 assert 0 <= dest <= 7996
                 old = int.from_bytes(result[plane][dest:dest + 4], 'big')
                 pixels = ((bits << 24) >> shift) & cell if drawing else 0

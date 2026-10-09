@@ -73,6 +73,9 @@ int main(int argc,char **argv) {
     const char *message_dump=getenv("FA18_FRAME_MESSAGE_DUMP");
     unsigned message_exports=0;
     gaddr message_return=0,message_stack=0;
+    const char *panel_dump=getenv("FA18_FRAME_PANEL_DUMP");
+    unsigned panel_exports=0;
+    gaddr panel_stack=0;
     const char *descriptor_dump=getenv("FA18_FRAME_DESCRIPTOR_DUMP");
     const char *descriptor_stream=getenv("FA18_FRAME_DESCRIPTOR_STREAM");
     unsigned descriptor_exports=0;
@@ -86,6 +89,20 @@ int main(int argc,char **argv) {
     unsigned restore_first=0,restore_second=0;
     uint16_t context_factor=0;
     for(step=0;step<10000000;++step) {
+        if(panel_dump && REG_PC==0xc30764u && !panel_exports) {
+            if(rd_u32(REG_A[7])!=0xc0f182u) return 1;
+            panel_stack=REG_A[7]+4;
+        }
+        if(panel_dump && ((REG_PC==0xc30764u && !panel_exports) ||
+            (panel_exports==1 && REG_PC==0xc0f182u && REG_A[7]==panel_stack))) {
+            char path[4096];
+            if(snprintf(path,sizeof path,"%s.%s.dat",panel_dump,
+                panel_exports?"after":"before")>=(int)sizeof path) return 1;
+            FILE *out=fopen(path,"wb");
+            if(!out || fwrite(m->chip,1,0x80000,out)!=0x80000 ||
+                fwrite(m->slow,1,0x80000,out)!=0x80000 || fclose(out)) return 1;
+            ++panel_exports;
+        }
         if(message_dump && REG_PC==0xc322eeu && !message_exports) {
             message_return=rd_u32(REG_A[7]);message_stack=REG_A[7]+4;
             if(message_return!=0xc0f286u && message_return!=0xc0f2dcu) return 1;
@@ -218,6 +235,9 @@ int main(int argc,char **argv) {
     if(step==10000000) {fprintf(stderr,"Frame body did not return at %06X\n",REG_PC);return 1;}
     if(message_dump && message_exports!=2) {
         fputs("Frame message owner did not produce both actual boundaries\n",stderr);return 1;
+    }
+    if(panel_dump && panel_exports!=2) {
+        fputs("Frame panel owner did not produce both actual boundaries\n",stderr);return 1;
     }
     printf("Frame input carry: %u\n",REG_D[4]);
     if(restore_first || restore_second)

@@ -1,5 +1,15 @@
 # Native port runner
 
+Complete mission-three drawing (2026-10-09): all 4,967 independent flight
+observations and all eight planes now pass the original-rule history gate
+(317,888,000 XOR bytes), with every complete core/scene row matching and no
+unexplained observation. Actual panel, radar and message inputs predict
+21,612 complete owner page sets; phase, paint, glyph and omitted-owner controls
+all reject their mutations. Runtime is unchanged. Audio timing, visible
+performance and broader flight coverage remain open; campaign continuity is
+waived and named-state cleanup remains outside the goal. See [full-flight
+evidence](../../analysis/native_complete_cockpit_flight_milestone.md).
+
 Actual panel boundaries (2026-10-09): the complete original flight now
 retains 3,602 C30764 calls/returns and preserves all 29,305 previous RAM/register
 snapshots, the whole replay, final RAM and counters. All 10,806 drawing-owner

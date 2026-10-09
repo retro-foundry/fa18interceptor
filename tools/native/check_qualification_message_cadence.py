@@ -55,22 +55,30 @@ def pages(data):
 
 
 def instrument_panel_refresh(body, expected, apply=True):
-    """C30764's complete 55-row bitmap copy on an unclipped cockpit path.
+    """C30764's bitmap copy on a horizontally unclipped cockpit path.
 
     Only independent expected buffers are written. Captured pages stay intact;
     apply=False supports the lost-redraw negative control.
     """
     if not 0 < integer(body, 0xC45836, 1) < 128:
         return None
-    assert integer(body, 0xC45986, 2) == integer(body, 0xC458D8, 2) == 0
-    assert integer(body, 0xC45918, 4) == 0
+    assert integer(body, 0xC45986, 2) == 0
+    lift = integer(body, 0xC458D8, 2)
+    if lift & 0x8000:
+        lift -= 0x10000
+    # C3076C-C307B0 keeps 55 source rows for a nonpositive lift and shortens
+    # the copy for a positive lift. Its ADD.L translates the destination;
+    # the source bitmap still starts at its first row.
+    height = 55 - max(lift, 0)
+    start = (0x16A8 + integer(body, 0xC45918, 4)) & 0xFFFFFFFF
+    assert 0 < height <= 55 and 0 <= start <= 8000 - height * 40
     images = []
     for plane in range(4):
         pointer = integer(body, 0xC30752 + 4 * plane, 4)
-        image = span(body, integer(body, pointer, 4), 2200)
+        image = span(body, integer(body, pointer, 4), height * 40)
         images.append(digest(image))
         if apply:
-            expected[plane][5800:8000] = image
+            expected[plane][start:start + height * 40] = image
     return images
 
 

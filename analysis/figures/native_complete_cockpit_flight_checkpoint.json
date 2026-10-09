@@ -1,0 +1,101 @@
+{
+  "first": 22142,
+  "last": 27108,
+  "observations": 4967,
+  "complete_trace_and_core_observations": 4967,
+  "strict_scene_bytes": 203448320,
+  "history_observations": 4967,
+  "history_bytes": 317888000,
+  "complete_plane_history_matching": true,
+  "first_unexplained": null,
+  "no_body_dispatches": [
+    22501,
+    24007
+  ],
+  "replayed_original_bodies_matching": 4965,
+  "sealed_native_body_identities_matching": 4965,
+  "sealed_source_snapshots_matching": 36509,
+  "live_owner_predictions": {
+    "source": 3602,
+    "native": 3602
+  },
+  "phase_mutation_rejections": {
+    "counter_increment": true,
+    "premature_marker": true,
+    "marker_coordinate": true,
+    "other_marker": true
+  },
+  "paint_mutation_rejections": {
+    "wrong_marker_colour": true,
+    "wrong_head_slope": true,
+    "lost_erase": true
+  },
+  "glyph_mutation_rejections": {
+    "wrong_glyph": true,
+    "wrong_plane": true,
+    "lost_cell_clear": true
+  },
+  "source_omission_first_rejections": {
+    "panel": 22149,
+    "radar": 22149,
+    "message": 22302
+  },
+  "runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+  "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+  "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+  "verifier_source_sha256": {
+    "check_complete_cockpit_history.py": "452bf11cf42ceb299100e4448c68cc1322efa27fc129ffc45997e814bd6c308c",
+    "frame_delta.py": "1dad263b46357e1245ce9bc7556a9efb1fce9b76e181441bee32278132d4069f",
+    "check_original_frame_delta.py": "f6470a1ab277268197538a471f374709852c99fd7f3c80c44e29907f52d483d8",
+    "check_qualification_message_cadence.py": "d6423b3582ee233cac4aa5184abfcc6bd70f92ca93a88e88168e1da6695673eb",
+    "check_mission_message_pages.py": "56ab4bb44093e9010afe0b906afcd4584044782a2fccf14b6af09ec3f11d55b8",
+    "assess_mission_radar_cadence.py": "a33f0f9fc2064516ba2d138a01c62474fbc24eaa0f430624a0f8475211fffb6b",
+    "check_recorded_original_mission_trace.py": "09569e418bc645553ef657bdd77f03fddfe342f7c932dad7588bb62523863f9b",
+    "compare_flight_traces.py": "b0eb6929ad8aa1c385b37082bc057a8f9ca32dda18be3ac06e3f66da5cd9e1f2",
+    "native_frame_body_oracle.c": "1bdea2ea1ae3223b6e41c856479082e272c211e7710be19505978c233fde9442",
+    "native_radar_cadence_oracle.c": "79aea7905f016ad4cd7b9e0610c83400fe57074209047101eb98bb880b9fea32",
+    "native_message_cadence_oracle.c": "937e7c7d915fac929bf74cd3d5cbd2b8400ccdd290773e00f95946b0b7b8972b",
+    "native_panel_frame_oracle.c": "fec0919641533603ec33b028ca48a6953c504b342157ade36c8d43be448c02c8",
+    "native_hud_oracle.c": "020a608e2389eb650b0a135982beaee9bff58885baf4c35f3053c0f80441374a",
+    "native_records_oracle.c": "3b095e966ccd2d73e876d2f5aa09faea103b65686c57464ddf7296eedac0fdf6"
+  },
+  "oracle_sha256": {
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp\\native_frame_body_oracle.exe": "0db9597221af550586041969259f6aba2efb2f287f4bb5a6e5ee21ac40ea532b",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp\\native_radar_cadence_oracle.exe": "f0fbaadb36d6f9e4a6ce0bb8e9fc8bc4cb1ff5409a14cb5caf117616c254e891",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp\\native_message_cadence_oracle.exe": "bcee80ec90d1577639b0d4074e8f8acd175226565cbef78b9fc3b411a992b9ee",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp\\native_panel_frame_oracle.exe": "54aa3fd2298b602521c01529e9d960d8bdd5c6c3873d8c0ff6eb05609e855d2b"
+  },
+  "evidence_sha256": {
+    "build\\native-flight\\complete-cockpit-owner-history\\report.json": "755ae2e3bfc922730e7cf473f2793738815e8a1a35c601038369a930fae1d253",
+    "build/native-flight/original-frame-delta-panel-complete-flight/report.json": "cd8cb6793f6a700cfc7656bf7160285a708853f0ea6e00fb7ae66089cf706eb8",
+    "build/native-flight/frame-delta-complete-flight/Release/report.json": "45ff95379157e74c54b4a1dcca07f71f09632ef2981c30a4242a8cf4332f4baa",
+    "build/native-flight/frame-delta-trace-preservation/Release/report.json": "3f309e61ae320956f55d9319140ddf3908d847dcf00d6c78b43a5488d176917e",
+    "build/native-flight/original-frame-delta-panel-caller-returns/report.json": "02ab6ad02fd83f2ad1bacbc41e562173216019e648a436b3aaeadd04c613aa29",
+    "build/native-flight/complete-cockpit-second-regression.json": "a513b802acddeeeaf8f2af115b5838b5d10c0c4cd99188a30161d2426dac6192",
+    "build/native-flight/original-frame-delta-panel-complete-flight/counter-example.json": "c21db91158a912b0f18c8821b413acb3539a909e870cf91dbe415f73bcb2fbf5"
+  },
+  "complete_live_owner_predictions": 21612,
+  "complete_live_owner_page_bytes": 1383168000,
+  "component_executions": 28816,
+  "guard_tests_passed": 33,
+  "strict_complete_page_equality_observations": 287,
+  "nonzero_observations_by_plane": [
+    1478,
+    14,
+    23,
+    2785,
+    1479,
+    14,
+    23,
+    2785
+  ],
+  "annotation_correction": {
+    "verified_source_sha256": "fec0919641533603ec33b028ca48a6953c504b342157ade36c8d43be448c02c8",
+    "current_source_sha256": "a81173e680e4acd1dbb74347eafa80d88396a692150f4ee11e81e2a55bd54729",
+    "old_header": "/* Reference only: C30764 on a reconstructed actual flight-owner boundary.\n * Complete native body/source-prefix comparisons separately bind the input\n * to playable native RAM and the independent original's live radar entry. */",
+    "new_header": "/* Reference only: C30764 on captured original / reconstructed native inputs.\n * Native inputs come from a complete body compared with the playable runner;\n * original inputs come directly from the actual C30764 call boundary. */",
+    "remaining_source_bytes_identical": true,
+    "line_count_unchanged": true
+  },
+  "scope": "Every eight-plane XOR byte of the complete independent recorded Release M3 flight follows original rules on actual owner inputs, under the agreed timing policy. Runtime unchanged; other flights, audio onset/handoffs and visible performance remain separate."
+}
