@@ -1,6 +1,6 @@
 # Current playable port handoff
 
-Active completion investigation (2026-10-09, uncommitted): one frontend earns
+Active completion investigation (2026-10-09): one frontend earns
 qualification and the first four missions with gear control; the cruise-missile
 interception route is now under investigation.
 The continuous driver and playable-replay checker are under `tools/native/`;
@@ -30,9 +30,12 @@ one `fa18_native` process: qualification plus four missions, all 78 saved bytes
 agree with the driver, final menu C0FCB4/mode zero at tick 125454, no crash resets
 or pending input. The compact proof is
 `analysis/figures/native_geared_campaign_prefix_checkpoint.json`. Debug and the
-six-mission pass remain open. Latest cruise diagnostics show the gun fires and
-consumes ammunition but does not hit before the original failure; the next
-work is interception, not fuel deduction or a blocked fire key.
+six-mission pass remain open. The latest cruise gun approach earns the original
+objective at tick 138725, then crashes during the low-altitude return handoff:
+`build/native-flight/campaign-session-gear-cruise-close-gun/`. It is not a saved
+completion. The diagnostic targets build in Release/Debug, and the existing
+mission-five success comparison passes in both. No failing full-campaign test
+is registered in default CTest.
 
 Latest mode-verified drawing-order audit (2026-10-09):
 

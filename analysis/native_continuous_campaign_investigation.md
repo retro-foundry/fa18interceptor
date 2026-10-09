@@ -154,7 +154,11 @@ using observed velocity also fails before FE at tick 139018. Further read-only
 gates show COMMAND_WORD=8 and gun budget falling 296 -> 185 while fire remains
 held: the gun is firing, and the remaining problem is achieving a hit, not an
 empty magazine or blocked Space command. Current output is
-`campaign-session-gear-cruise-gun-gates/`; no test is running now.
+`campaign-session-gear-cruise-gun-gates/`. A subsequent ordinary-throttle
+closing approach (`campaign-session-gear-cruise-close-gun/`) earns the original
+cruise objective at tick 138725 but crashes during the low-altitude return
+handoff. This is an objective observation, not a saved mission completion.
+No test is running now.
 
 ## Verified playable prefix
 
@@ -175,8 +179,12 @@ RAM is retained. Source/runner/ADF and key hashes preserve the evidence scope.
 On success the checker must replay the entire generated `session.e9k` in one
 fresh `fa18_native` process with the same actual enlisted save. It requires all
 saved bytes, scene counts, host events and final menu/reset counters to agree.
-No such full pass has been reached yet. Debug must then be built and checked;
-existing affected mission gates must still pass before committing this batch.
+No such full pass has been reached yet. Diagnostic executables build in both
+Release and Debug; the existing mission-five success comparison and artifact
+cleanup pass in each (Release 24.85 s, Debug 49.89 s). Python syntax and both
+CLI help paths pass. This validates a diagnostic-tool checkpoint, not the full
+campaign or visible-performance workflow. Full Release/Debug campaign checks
+remain necessary before registering an accepted continuous-campaign gate.
 
 ```powershell
 cmake --build build/native-cmake --config Release --target fa18_native_campaign_session_test --parallel 8

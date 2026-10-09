@@ -11,6 +11,12 @@ typedef struct {
     int force_return, formation_started, formation_done;
     int complete_flight, combat_started, return_started;
     int tour_flight, new_final_flight;
+    int campaign_flight;
+    int manage_gear;
+    unsigned gear_key_tick;
+    unsigned ground_attack_target;
+    double ground_attack_yaw;
+    int ground_breakaway;
     int escort_flight, final_flight, final_sequence, rescue_flight, cruise_flight;
     unsigned rescue_drop_tick;
     double rescue_drop_yaw;

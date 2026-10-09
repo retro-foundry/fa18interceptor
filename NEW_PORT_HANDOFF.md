@@ -2,7 +2,7 @@
 
 ## Current restart summary — 2026-10-09
 
-Active completion work (uncommitted): the one-frontend campaign driver in
+Active completion work: the one-frontend campaign driver in
 `tools/native/native_campaign_session_test.c` and checker
 `tools/native/check_campaign_session.py` earn qualification, mission three
 and mission four with real saved results and menu mode zero between missions.
@@ -44,8 +44,11 @@ process. Qualification and four geared missions produce exactly the driver's
 78 saved bytes, menu C0FCB4/mode zero at tick 125454, with no crash reset or
 pending input. See `analysis/figures/native_geared_campaign_prefix_checkpoint.json`.
 This is partial playable integration, not six-mission or independent-original
-acceptance. Latest cruise gun diagnostics show ammunition being used without
-a hit; the original FE failure remains. No test is currently running.
+acceptance. The latest cruise gun approach earns the original objective at
+tick 138725, then crashes during the low-altitude return handoff; no saved
+cruise completion is claimed. Diagnostic targets build in Release/Debug and
+the existing mission-five success comparison passes in both. No test is
+currently running. See `campaign-session-gear-cruise-close-gun/` for that failure.
 No visible measurement process is running after the interrupted old route.
 
 Visible measurement was run via `tools/native/measure_visible_performance.py`
