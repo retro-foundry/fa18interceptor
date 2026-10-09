@@ -9,6 +9,7 @@ import hashlib
 import json
 import os
 import time
+import wave
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +66,19 @@ class MemoryMap(C.Structure):
     _fields_ = [('descriptors', C.POINTER(Descriptor)), ('count', U)]
 
 
+class Geometry(C.Structure):
+    _fields_ = [('width', U), ('height', U), ('max_width', U), ('max_height', U),
+                ('aspect', C.c_float)]
+
+
+class Timing(C.Structure):
+    _fields_ = [('fps', C.c_double), ('sample_rate', C.c_double)]
+
+
+class AvInfo(C.Structure):
+    _fields_ = [('geometry', Geometry), ('timing', Timing)]
+
+
 def sha(data):
     return hashlib.sha256(data).hexdigest()
 
@@ -92,6 +106,14 @@ class Engine:
         self.custom_log = None
         self.maps = []
         self.audio_hash = hashlib.sha256()
+        self.audio_capture = None
+        self.audio_capture_hash = hashlib.sha256()
+        self.audio_capture_frames = 0
+        self.audio_capture_bytes = 44
+        self.audio_capture_budget = 0
+        self.audio_capture_error = None
+        self.audio_capture_log = None
+        self.audio_capture_call = 0
         self.env_commands = set()
         # A Python host does not initialise the MinGW DLL's stderr. The callback
         # accepts the fixed prefix of libretro's printf ABI; unused varargs are
@@ -197,7 +219,27 @@ class Engine:
             self.video_count += 1
 
     def on_audio(self, ptr, frames):
-        self.audio_hash.update(C.string_at(ptr, frames * 4))
+        data = C.string_at(ptr, frames * 4)
+        self.audio_hash.update(data)
+        if self.audio_capture is not None and not self.audio_capture_error:
+            # Exceptions raised inside ctypes callbacks are otherwise printed
+            # and swallowed. Retain failure for the normal replay caller.
+            try:
+                row = json.dumps({'call': self.audio_capture_call,
+                    'vblank': self.frame, 'hardware_frame': self.hardware_frame,
+                    'first_sample': self.audio_capture_frames, 'frames': frames,
+                    'pcm_sha256': sha(data)}) + '\n'
+                used = len(data) + len(row.encode('utf8'))
+                if self.audio_capture_bytes + used > self.audio_capture_budget:
+                    raise RuntimeError('Original PCM exceeds the bounded capture budget')
+                self.audio_capture.writeframesraw(data)
+                self.audio_capture_hash.update(data)
+                if self.audio_capture_log is not None:
+                    self.audio_capture_log.write(row)
+                self.audio_capture_frames += frames
+                self.audio_capture_bytes += used
+            except (OSError, RuntimeError) as error:
+                self.audio_capture_error = str(error)
         return frames
 
     def poll(self):
@@ -281,9 +323,15 @@ def main():
                         help='Single-step this many video frames after the normal replay window')
     parser.add_argument('--normal-custom-log', action='store_true',
                         help='Record Custom-register writes during ordinary full-frame replay')
+    parser.add_argument('--wav', action='store_true', help='Capture complete reference PCM during the requested replay window')
+    parser.add_argument('--capture-budget-mib', type=int, default=512)
     args = parser.parse_args()
     if args.trace_frames and args.normal_custom_log:
         parser.error('--normal-custom-log cannot be combined with --trace-frames')
+    if args.wav and args.trace_frames:
+        parser.error('--wav requires ordinary full-frame replay, without instruction stepping')
+    if args.frames < 0 or (args.wav and (args.frames < 1 or args.capture_budget_mib < 8)):
+        parser.error('PCM capture requires positive frames and at least 8 MiB capture budget')
     args.output.mkdir(parents=True, exist_ok=False)
     saves = args.output / 'saves'
     saves.mkdir()
@@ -316,6 +364,18 @@ def main():
             raise RuntimeError('Core rejected save state')
     engine.frame = args.start_frame
     engine.hardware_frame = args.start_frame
+    av = AvInfo()
+    engine.bind('retro_get_system_av_info', None, C.POINTER(AvInfo))(C.byref(av))
+    if args.wav:
+        rate = av.timing.sample_rate
+        if not rate.is_integer() or rate < 1:
+            raise RuntimeError(f'Unsupported original PCM sample rate: {rate}')
+        engine.audio_capture_budget = (args.capture_budget_mib - 8) * 1024 * 1024
+        if args.frames * rate * 4 / av.timing.fps > engine.audio_capture_budget:
+            raise RuntimeError('Requested original PCM window exceeds capture budget')
+        engine.audio_capture = wave.open(str(args.output / 'original.wav'), 'wb')
+        engine.audio_capture.setparams((2, 2, int(rate), 0, 'NONE', 'not compressed'))
+        engine.audio_capture_log = (args.output / 'audio_chunks.jsonl').open('w', encoding='utf8')
     samples = []
     normal_custom = None
     if args.normal_custom_log:
@@ -323,17 +383,28 @@ def main():
         engine.bind('e9k_debug_set_debug_option', None, U, U, P)(38, 1, None)
         normal_custom = (args.output / 'normal_custom_writes.jsonl').open('w', encoding='utf8')
         engine.custom_log = normal_custom
-    for frame in range(args.start_frame + 1, args.start_frame + args.frames + 1):
-        for kind, values in events.get(frame, []):
-            engine.event(kind, values)
-        engine.core.retro_run()
-        if engine.frame != frame:
-            raise RuntimeError(f'Expected video frame {frame}, actual {engine.frame}')
-        if frame % 100 == 0:
-            samples.append({'frame': frame, 'pc': engine.regs()['pc']})
-    if normal_custom is not None:
-        engine.custom_log = None
-        normal_custom.close()
+    try:
+        for frame in range(args.start_frame + 1, args.start_frame + args.frames + 1):
+            engine.audio_capture_call = frame
+            for kind, values in events.get(frame, []):
+                engine.event(kind, values)
+            engine.core.retro_run()
+            if engine.audio_capture_error:
+                raise RuntimeError(engine.audio_capture_error)
+            if engine.frame != frame:
+                raise RuntimeError(f'Expected video frame {frame}, actual {engine.frame}')
+            if frame % 100 == 0:
+                samples.append({'frame': frame, 'pc': engine.regs()['pc']})
+    finally:
+        if normal_custom is not None:
+            engine.custom_log = None
+            normal_custom.close()
+        if args.wav:
+            engine.audio_capture.close()
+            engine.audio_capture = None
+            engine.audio_capture_log.close()
+    if args.wav and not engine.audio_capture_frames:
+        raise RuntimeError('Reference emulator emitted no PCM samples')
     (args.output / 'state.bin').write_bytes(engine.state())
     maps = []
     for name, address, size in [('chip', 0, 0x80000), ('slow', 0xc00000, 0x80000)]:
@@ -353,6 +424,17 @@ def main():
               'video_sha256': sha(engine.video[0]), 'audio_sha256': engine.audio_hash.hexdigest(),
               'core_options': {k.decode(): engine.overrides.get(k, v).decode() for k, v in engine.options.items()},
               'wall_seconds': round(time.monotonic() - start, 3)}
+    if args.wav:
+        with (args.output / 'original.wav').open('rb') as captured:
+            wav_hash = hashlib.file_digest(captured, 'sha256').hexdigest()
+        report['recorded_audio'] = {'file': 'original.wav', 'channels': 2, 'sample_bits': 16,
+            'first_replay_call': args.start_frame + 1, 'replay_calls': args.frames,
+            'sample_rate': int(av.timing.sample_rate), 'reported_fps': av.timing.fps,
+            'sample_frames': engine.audio_capture_frames,
+            'pcm_sha256': engine.audio_capture_hash.hexdigest(),
+            'wav_sha256': wav_hash,
+            'capture_scope': 'All batch PCM from requested ordinary retro_run calls; startup/restore initialization excluded',
+            'capture_budget_mib': args.capture_budget_mib}
     (args.output / 'snapshot.json').write_text(json.dumps(report, indent=2) + '\n')
     if args.trace_frames:
         import capstone

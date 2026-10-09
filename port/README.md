@@ -1,5 +1,10 @@
 # Active port source ownership
 
+The complete original demo now has a validated PCM recording: all 21,069
+reference calls preserve original execution and complete sample coverage.
+Native onset/handoffs and interpolation/filter fidelity remain open; the native
+executable is unchanged. See [audio evidence](../analysis/native_original_audio_recording_milestone.md).
+
 Gameplay storage is reserved before the playable frame loop. Project heap and
 buffered-file open/close calls are guarded; SDL uses a fixed startup arena,
 PCM a fixed ring, and pilot/capture I/O direct OS handles. Release/Debug preserve

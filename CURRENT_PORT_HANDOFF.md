@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Original complete demo audio (2026-10-09): all 21,069 ordinary reference calls
+and 18,582,858 stereo sample frames are recorded intact at 44.1 kHz. Full
+nonrecording replay preserves complete RAM/state/registers/video/audio hash;
+corrupt/incomplete recording checks and the active CTest pass. Native executable
+is unchanged. Native onset/handoff alignment and interpolation/filter parity
+remain open; different replay contexts are not accepted as matching WAVs.
+See [original audio evidence](analysis/native_original_audio_recording_milestone.md).
+
 Gameplay preallocation (2026-10-09): project heap and buffered-file creation/
 closure are rejected inside the playable frame loop. SDL uses a fixed 32 MiB
 startup arena; PCM uses a fixed 512 KiB ring, with no growing audio queue.
