@@ -1,0 +1,1121 @@
+{
+  "date": "2026-10-09",
+  "criterion": "Repeated individually tested missions; cold earned-save starts permitted by explicit user direction",
+  "uninterrupted_campaign_required": false,
+  "individual_mission_criterion_met": true,
+  "whole_port_complete": false,
+  "runtime_changed_in_this_batch": false,
+  "failed_test_pilot_experiments_reverted": true,
+  "spawn_coverage": "Fixed-input reproducibility and two actual saved-pilot final-mission contexts; not exhaustive spawn coverage",
+  "source_comparison_scope": "Original instructions from native before-states; independent original whole flights remain open",
+  "gear_scope": "Sealed cold reference routes preserved. Previously accepted geared five-mission prefix remains separate evidence.",
+  "passing_ctest_checks": 10,
+  "builds": {
+    "Release": {
+      "configuration": "Release",
+      "passing_gates": 7,
+      "runner_sha256": "20c3f9cd8875feabe1d4ee0abc45da3dd57bec170ce159f1c8f821dc007a4f27",
+      "mission_test_sha256": "99e6ebe47dc240b676ea0c6fb0f95bbfac6f9a824e47a4eacdd778764b344275",
+      "qualification_test_sha256": "a124091d22ff16fcf011f0878ddbdaac06db11e320e94c11ded6dc5979c39b90",
+      "ctest_log_sha256": "db872e5710faa83618fc7202d02835bf45f5171c14623a43a6cc8a155889addd",
+      "reports": {
+        "mission-8-sequence-check": {
+          "report_sha256": "3c1c9684b3fdf0236718ce0739a4cd28d55612c84f246f5ee1aeb4bafd50cbfc",
+          "path": "build/native-flight/individual-mission-acceptance/Release/mission-8-sequence-check.json"
+        },
+        "mission-8-new-pilot-sequence-check": {
+          "report_sha256": "01a2115a7d402859287c6ae88908213cb12865a3a1b285604bbdeee356ae8d80",
+          "path": "build/native-flight/individual-mission-acceptance/Release/mission-8-new-pilot-sequence-check.json"
+        },
+        "new-pilot-tour-check": {
+          "report_sha256": "a65c81e01463f4121cdf2042b16086334e6f57822b0df42ad844e597d6787df5",
+          "path": "build/native-flight/individual-mission-acceptance/Release/new-pilot-tour-check.json"
+        },
+        "qualification-sequence-check": {
+          "report_sha256": "1eaf47f32cfb70006ef93b0b8abbe84fce39da238e1a4c2f27587d1d72e5078b",
+          "path": "build/native-flight/individual-mission-acceptance/Release/qualification-sequence-check.json"
+        },
+        "qualification-new-pilot-check": {
+          "report_sha256": "a4792db9b026b0351b596f3760ff4f98436cecb9b3ddb7c17dc301718e5393b0",
+          "path": "build/native-flight/individual-mission-acceptance/Release/qualification-new-pilot-check.json"
+        }
+      }
+    },
+    "Debug": {
+      "configuration": "Debug",
+      "passing_gates": 3,
+      "runner_sha256": "3b829c768bac773d214510fe80bbde081462f5ea1dee1718fea0bbdeeaff08fb",
+      "mission_test_sha256": "2c61fa8453d79d4017710b076eb2895147283293128a8ec6802d87f25e7fab9e",
+      "qualification_test_sha256": "b18c89c77008de8a25f8a762cef340a15d51ce1e364ac37c1a95faae590191fe",
+      "ctest_log_sha256": "fc97e8b07adeafcb8a42c6dda333738c064033d2dbfe0729917a86c81e2b0df8",
+      "reports": {
+        "new-pilot-tour-check": {
+          "report_sha256": "8c888ae693803295402c6d5aaa44120bf81440ee37f4c208fee683e890e024f4",
+          "path": "build/native-flight/individual-mission-acceptance/Debug/new-pilot-tour-check.json"
+        }
+      }
+    }
+  },
+  "tour_stages_match_exactly": true,
+  "tour_stages": [
+    {
+      "name": "enlist",
+      "initial_config_sha256": null,
+      "saved_config_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+      "saved_config_hex": "0000000000010000000000000000000000000000000000000000000000004e4557000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "input_sha256_lf": "3c2a48da86432f2782ed6cb0036a9eb42fa08df4b6a64df75496e602530bff3a",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 9000,
+        "screen": "menu",
+        "mode": 0,
+        "glyphs": 13256,
+        "record_updates": 1,
+        "scene_frames": 0,
+        "terrain_polygons": 0,
+        "model_calls": 0,
+        "hud_frames": 0,
+        "control_frames": 0,
+        "scene_selected": false,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 0,
+        "display_publications": 0,
+        "display_yields": 0,
+        "display_pending": false,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 1,
+        "input_events": 1,
+        "input_queued": 0,
+        "update_iterations": 7156,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 18,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 9000,
+        "voice_publications": 18769,
+        "voice_levels": [
+          [
+            358,
+            31
+          ],
+          [
+            358,
+            31
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 6257,
+        "sample_frames": 8640000,
+        "nonzero_sample_frames": 8299845,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    {
+      "name": "qualification",
+      "initial_config_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+      "saved_config_sha256": "61f678ada0882b729f58d1f2cd5a05d9b9ca814755abb9ff1c3da3fb9329072e",
+      "saved_config_hex": "0001000000020000000000640000000000000000000000000000000000004e4557000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "input_sha256_lf": "9eb82e11886e7a2c9b7a113482ab7c14d9a97a0a3376eb8cfacad7d101296d96",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 14663,
+        "screen": "scene-setup",
+        "mode": 9,
+        "glyphs": 6808,
+        "record_updates": 1858,
+        "scene_frames": 1856,
+        "terrain_polygons": 6617,
+        "model_calls": 10785,
+        "hud_frames": 1856,
+        "control_frames": 6142,
+        "scene_selected": true,
+        "stage": "C10DAE",
+        "game_tick": 203,
+        "timer_pending": true,
+        "timer_yields": 4311,
+        "display_publications": 6141,
+        "display_yields": 6158,
+        "display_pending": false,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 6140,
+        "input_events": 553,
+        "input_queued": 0,
+        "update_iterations": 8514,
+        "replay_iterations": 8038,
+        "replay_events": 554,
+        "host_replay_events": 2,
+        "host_replay_pending": 0,
+        "replay_started": true,
+        "voice_ticks": 14663,
+        "voice_publications": 31020,
+        "voice_levels": [
+          [
+            764,
+            40
+          ],
+          [
+            766,
+            40
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 14980,
+        "sample_frames": 14076480,
+        "nonzero_sample_frames": 13612942,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "game_input_sha256_lf": "234f2d2599fd7f69c3a18c298e42be455c3c8683fc9e1cf3c4b0af7c005a1218"
+    },
+    {
+      "name": "mission-3",
+      "initial_config_sha256": "61f678ada0882b729f58d1f2cd5a05d9b9ca814755abb9ff1c3da3fb9329072e",
+      "saved_config_sha256": "7bc9e00e8691143313b0c9f3a1739a05799f9b7e49c5c5683bafbf7f0d5e77b4",
+      "saved_config_hex": "0001000000030300000000b40000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+      "input_sha256_lf": "58f4a5271365bf7bf0cef9c7462af4cbb5140d48862e9e0edfad617b1a8f6bc0",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 27979,
+        "screen": "menu",
+        "mode": 3,
+        "glyphs": 8452,
+        "record_updates": 3521,
+        "scene_frames": 3518,
+        "terrain_polygons": 15656,
+        "model_calls": 51921,
+        "hud_frames": 3518,
+        "control_frames": 15204,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 8265,
+        "display_publications": 15203,
+        "display_yields": 15214,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 15203,
+        "input_events": 1647,
+        "input_queued": 0,
+        "update_iterations": 17882,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 1652,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 27979,
+        "voice_publications": 59040,
+        "voice_levels": [
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 38809,
+        "sample_frames": 26859840,
+        "nonzero_sample_frames": 26530412,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    {
+      "name": "mission-4",
+      "initial_config_sha256": "7bc9e00e8691143313b0c9f3a1739a05799f9b7e49c5c5683bafbf7f0d5e77b4",
+      "saved_config_sha256": "05b7b591bf543fd3bc41e7c293ff20c39ab0d79a55a01d0c67f913a23f173701",
+      "saved_config_hex": "0001000000040400000001420000000000000000000101000000000000004e4557000000000000000000000000000000000000000000000200020000000000000000000200010000000100000000",
+      "input_sha256_lf": "783d9391a8126375c4330f2e6952ee6c46e2b7d8eb4fc68e618f18603b9a8893",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 28037,
+        "screen": "menu",
+        "mode": 4,
+        "glyphs": 8608,
+        "record_updates": 4970,
+        "scene_frames": 4967,
+        "terrain_polygons": 23864,
+        "model_calls": 21885,
+        "hud_frames": 4967,
+        "control_frames": 11834,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 11693,
+        "display_publications": 11833,
+        "display_yields": 11844,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 11833,
+        "input_events": 3878,
+        "input_queued": 0,
+        "update_iterations": 14512,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 3883,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 28037,
+        "voice_publications": 60840,
+        "voice_levels": [
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 45810,
+        "sample_frames": 26915520,
+        "nonzero_sample_frames": 26586370,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    {
+      "name": "mission-5",
+      "initial_config_sha256": "05b7b591bf543fd3bc41e7c293ff20c39ab0d79a55a01d0c67f913a23f173701",
+      "saved_config_sha256": "714fb67ab9fff5ade21ccad123fe3acfd415c32486d0ddf941d65369de20c6d6",
+      "saved_config_hex": "0001000000050500000001d60000000000000000000101010000000000004e4557000000000000000000000000000000000000000000000300030000000000000000000400030000000300000000",
+      "input_sha256_lf": "e0707b5a96236b89e62318958fe0baaef57a564c0dc09d0514cbaa7bf4fe7844",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 32650,
+        "screen": "menu",
+        "mode": 5,
+        "glyphs": 9236,
+        "record_updates": 6324,
+        "scene_frames": 6321,
+        "terrain_polygons": 19338,
+        "model_calls": 23219,
+        "hud_frames": 6321,
+        "control_frames": 13228,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 14912,
+        "display_publications": 13227,
+        "display_yields": 13238,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 13227,
+        "input_events": 2772,
+        "input_queued": 0,
+        "update_iterations": 15906,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 2777,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 32650,
+        "voice_publications": 69437,
+        "voice_levels": [
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 37688,
+        "sample_frames": 31344000,
+        "nonzero_sample_frames": 31012277,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    {
+      "name": "mission-6",
+      "initial_config_sha256": "714fb67ab9fff5ade21ccad123fe3acfd415c32486d0ddf941d65369de20c6d6",
+      "saved_config_sha256": "b49b1d82890c39ad6bfc8422a516405150514408a00ddf6e789a88603cf70315",
+      "saved_config_hex": "0001000000060600000002340000000000000000000101010100000000004e4557000000000000000000000000000000000000000000000400040000000000000000000400030000000400000000",
+      "input_sha256_lf": "5599460810b534c078abfdad0dcaf7efc729a577a2fb2462d0800ca7c514b9b2",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 25872,
+        "screen": "menu",
+        "mode": 6,
+        "glyphs": 9512,
+        "record_updates": 4178,
+        "scene_frames": 4175,
+        "terrain_polygons": 12172,
+        "model_calls": 18479,
+        "hud_frames": 4175,
+        "control_frames": 11412,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 9950,
+        "display_publications": 11411,
+        "display_yields": 11422,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 11411,
+        "input_events": 863,
+        "input_queued": 0,
+        "update_iterations": 14090,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 870,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 25872,
+        "voice_publications": 55264,
+        "voice_levels": [
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 35865,
+        "sample_frames": 24837120,
+        "nonzero_sample_frames": 24507309,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    {
+      "name": "mission-7",
+      "initial_config_sha256": "b49b1d82890c39ad6bfc8422a516405150514408a00ddf6e789a88603cf70315",
+      "saved_config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "saved_config_hex": "00010000000707000000028e0000000000000000000101010101000000004e4557000000000000000000000000000000000000000000000500050000000000000000000500040000000400000000",
+      "input_sha256_lf": "1c4ad6559c1c81bef343a55c6551f0b6aa124c76ec9f9732df4285a820e452e1",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 22970,
+        "screen": "menu",
+        "mode": 7,
+        "glyphs": 9056,
+        "record_updates": 3630,
+        "scene_frames": 3627,
+        "terrain_polygons": 12319,
+        "model_calls": 46693,
+        "hud_frames": 3627,
+        "control_frames": 9946,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 8514,
+        "display_publications": 9945,
+        "display_yields": 9956,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 9945,
+        "input_events": 1528,
+        "input_queued": 0,
+        "update_iterations": 12624,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 1533,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 22970,
+        "voice_publications": 48829,
+        "voice_levels": [
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 28650,
+        "sample_frames": 22051200,
+        "nonzero_sample_frames": 21724540,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    {
+      "name": "mission-8",
+      "initial_config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "saved_config_sha256": "3721534ce27505c9ace37b3c6f7f4b0170aab1d84cb2aad886d999fe4cadc632",
+      "saved_config_hex": "00010000000808000000039c0000000000000000000101010101010000004e4557000000000000000000000000000000000000000000000600060021000000040002000700060000000500000000",
+      "input_sha256_lf": "f867382ded07413afa6ac64c42fc9ba32cbb1611450a736870e9f485c24a8c0d",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 40049,
+        "screen": "menu",
+        "mode": 8,
+        "glyphs": 9208,
+        "record_updates": 8661,
+        "scene_frames": 8658,
+        "terrain_polygons": 36405,
+        "model_calls": 38492,
+        "hud_frames": 8658,
+        "control_frames": 15072,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 20467,
+        "display_publications": 15071,
+        "display_yields": 15082,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 15071,
+        "input_events": 6580,
+        "input_queued": 0,
+        "update_iterations": 17750,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 6585,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 40049,
+        "voice_publications": 86405,
+        "voice_levels": [
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 54820,
+        "sample_frames": 38447040,
+        "nonzero_sample_frames": 38109616,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    {
+      "name": "next-mission-wrap",
+      "initial_config_sha256": "3721534ce27505c9ace37b3c6f7f4b0170aab1d84cb2aad886d999fe4cadc632",
+      "saved_config_sha256": "3721534ce27505c9ace37b3c6f7f4b0170aab1d84cb2aad886d999fe4cadc632",
+      "saved_config_hex": "00010000000808000000039c0000000000000000000101010101010000004e4557000000000000000000000000000000000000000000000600060021000000040002000700060000000500000000",
+      "input_sha256_lf": "08488a14de94bd7452b3e19a7973c7615944b5430212f15f60cb1c5c7d1fed63",
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 3004,
+        "screen": "mode-intro",
+        "mode": 3,
+        "glyphs": 3468,
+        "record_updates": 1,
+        "scene_frames": 0,
+        "terrain_polygons": 0,
+        "model_calls": 0,
+        "hud_frames": 0,
+        "control_frames": 2,
+        "scene_selected": false,
+        "stage": "C0FECE",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 0,
+        "display_publications": 2,
+        "display_yields": 4,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 1,
+        "input_events": 1,
+        "input_queued": 0,
+        "update_iterations": 1180,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 4,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 3004,
+        "voice_publications": 6245,
+        "voice_levels": [
+          [
+            358,
+            30
+          ],
+          [
+            358,
+            30
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            300,
+            2
+          ]
+        ],
+        "sample_requests": 1965,
+        "sample_frames": 2883840,
+        "nonzero_sample_frames": 2684344,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    }
+  ],
+  "fresh_release_source_checks": {
+    "mission-8-sequence-check": {
+      "scenario": "normal-key-final-patrol-carrier-landing-result-messages-escape-menu-reload",
+      "input_stage_intervals": 42,
+      "sampled_bodies": 239,
+      "consecutive_landing_bodies": 64,
+      "original_config_writes": 1,
+      "summary": {
+        "finished": true,
+        "airborne": true,
+        "landed": true,
+        "objective": true,
+        "mode": 8,
+        "stage": "C10DAE",
+        "phase": 252,
+        "ticks": 32456,
+        "target": 12,
+        "completions_before": 5,
+        "completions_after": 6,
+        "grade_before": 0,
+        "grade_after": 1,
+        "region": 192,
+        "speed": 0,
+        "crash_resets": 0,
+        "reloaded": true
+      },
+      "native_flight_state_seeded": false,
+      "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+      "input_sha256": "dca7bf6e988e59d6bcc65822106cef49306a5c853188e1d57b1bdb8eb670ba35",
+      "test_sha256": "99e6ebe47dc240b676ea0c6fb0f95bbfac6f9a824e47a4eacdd778764b344275",
+      "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+      "initial_config_sha256": "c5c7d4259d9349596389e5a5df3dcce6ba6e32a1db82d1403dd64ce11eb6cae4",
+      "saved_config_sha256": "84229463a7fdce3036f672441becae0de23056b8120a5c58e816723a3cc8061a",
+      "capture_partitions": [
+        {
+          "from_tick": 0,
+          "until_tick": 23000,
+          "intervals": 30,
+          "bodies": 164,
+          "original_config_writes": 0,
+          "wrap_intervals": 0,
+          "wrap_bodies": 0
+        },
+        {
+          "from_tick": 23001,
+          "until_tick": 0,
+          "intervals": 13,
+          "bodies": 76,
+          "original_config_writes": 1,
+          "wrap_intervals": 1,
+          "wrap_bodies": 1
+        }
+      ],
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 33466,
+        "screen": "menu",
+        "mode": 8,
+        "glyphs": 9192,
+        "record_updates": 6701,
+        "scene_frames": 6698,
+        "terrain_polygons": 27099,
+        "model_calls": 36439,
+        "hud_frames": 6698,
+        "control_frames": 13112,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 15844,
+        "display_publications": 13111,
+        "display_yields": 13122,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 13111,
+        "input_events": 2621,
+        "input_queued": 0,
+        "update_iterations": 15790,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 2626,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 33466,
+        "voice_publications": 72389,
+        "voice_levels": [
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 45471,
+        "sample_frames": 32127360,
+        "nonzero_sample_frames": 31797076,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "canonical_wrap": {
+        "frame_owner_exit": false,
+        "frames": 3004,
+        "screen": "mode-intro",
+        "mode": 3,
+        "glyphs": 3452,
+        "record_updates": 1,
+        "scene_frames": 0,
+        "terrain_polygons": 0,
+        "model_calls": 0,
+        "hud_frames": 0,
+        "control_frames": 2,
+        "scene_selected": false,
+        "stage": "C0FECE",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 0,
+        "display_publications": 2,
+        "display_yields": 4,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 1,
+        "input_events": 1,
+        "input_queued": 0,
+        "update_iterations": 1180,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 4,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 3004,
+        "voice_publications": 6237,
+        "voice_levels": [
+          [
+            358,
+            30
+          ],
+          [
+            358,
+            30
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            300,
+            2
+          ]
+        ],
+        "sample_requests": 1901,
+        "sample_frames": 2883840,
+        "nonzero_sample_frames": 2684106,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    "mission-8-new-pilot-sequence-check": {
+      "scenario": "normal-key-final-patrol-carrier-landing-result-messages-escape-menu-reload",
+      "input_stage_intervals": 64,
+      "sampled_bodies": 220,
+      "consecutive_landing_bodies": 64,
+      "original_config_writes": 1,
+      "summary": {
+        "finished": true,
+        "airborne": true,
+        "landed": true,
+        "objective": true,
+        "mode": 8,
+        "stage": "C10DAE",
+        "phase": 252,
+        "ticks": 39039,
+        "target": 12,
+        "completions_before": 5,
+        "completions_after": 6,
+        "grade_before": 0,
+        "grade_after": 1,
+        "region": 192,
+        "speed": 0,
+        "crash_resets": 0,
+        "reloaded": true
+      },
+      "native_flight_state_seeded": false,
+      "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+      "input_sha256": "743f988ea4747a8290bd4a95b6ad2b929f1004fb6438975c8c8eb2342bbdba11",
+      "test_sha256": "99e6ebe47dc240b676ea0c6fb0f95bbfac6f9a824e47a4eacdd778764b344275",
+      "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+      "initial_config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "saved_config_sha256": "3721534ce27505c9ace37b3c6f7f4b0170aab1d84cb2aad886d999fe4cadc632",
+      "capture_partitions": [
+        {
+          "from_tick": 0,
+          "until_tick": 23000,
+          "intervals": 36,
+          "bodies": 120,
+          "original_config_writes": 0,
+          "wrap_intervals": 0,
+          "wrap_bodies": 0
+        },
+        {
+          "from_tick": 23001,
+          "until_tick": 0,
+          "intervals": 29,
+          "bodies": 101,
+          "original_config_writes": 1,
+          "wrap_intervals": 1,
+          "wrap_bodies": 1
+        }
+      ],
+      "canonical": {
+        "frame_owner_exit": false,
+        "frames": 40049,
+        "screen": "menu",
+        "mode": 8,
+        "glyphs": 9208,
+        "record_updates": 8661,
+        "scene_frames": 8658,
+        "terrain_polygons": 36405,
+        "model_calls": 38492,
+        "hud_frames": 8658,
+        "control_frames": 15072,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 20467,
+        "display_publications": 15071,
+        "display_yields": 15082,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 15071,
+        "input_events": 6580,
+        "input_queued": 0,
+        "update_iterations": 17750,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 6585,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 40049,
+        "voice_publications": 86405,
+        "voice_levels": [
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 54820,
+        "sample_frames": 38447040,
+        "nonzero_sample_frames": 38109616,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "canonical_wrap": {
+        "frame_owner_exit": false,
+        "frames": 3004,
+        "screen": "mode-intro",
+        "mode": 3,
+        "glyphs": 3468,
+        "record_updates": 1,
+        "scene_frames": 0,
+        "terrain_polygons": 0,
+        "model_calls": 0,
+        "hud_frames": 0,
+        "control_frames": 2,
+        "scene_selected": false,
+        "stage": "C0FECE",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 0,
+        "display_publications": 2,
+        "display_yields": 4,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 1,
+        "input_events": 1,
+        "input_queued": 0,
+        "update_iterations": 1180,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 4,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 3004,
+        "voice_publications": 6245,
+        "voice_levels": [
+          [
+            358,
+            30
+          ],
+          [
+            358,
+            30
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            300,
+            2
+          ]
+        ],
+        "sample_requests": 1965,
+        "sample_frames": 2883840,
+        "nonzero_sample_frames": 2684344,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      }
+    },
+    "qualification-sequence-check": {
+      "scenario": "recorded-input-carrier-landing-success-restart",
+      "input_stage_intervals": 50,
+      "sampled_bodies": 174,
+      "consecutive_landing_bodies": 96,
+      "original_config_writes": 1,
+      "summary": {
+        "sequence": true,
+        "iterations": 8038,
+        "events": 554,
+        "captures": 174,
+        "bodies": 6142,
+        "airborne": true,
+        "landed": true,
+        "success": true,
+        "restarted": true,
+        "mode": 9,
+        "stage": "C10DAE",
+        "queued": 0,
+        "crash_resets": 0,
+        "initial_qualification": 1,
+        "reloaded": true
+      },
+      "native_flight_state_seeded": false,
+      "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+      "input_sha256": "8d4dff657c006d5161ad4c719604f7bbc2a884977c475e9400942564cabd4340",
+      "test_sha256": "a124091d22ff16fcf011f0878ddbdaac06db11e320e94c11ded6dc5979c39b90",
+      "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2"
+    },
+    "qualification-new-pilot-check": {
+      "scenario": "recorded-input-carrier-landing-success-restart",
+      "input_stage_intervals": 50,
+      "sampled_bodies": 174,
+      "consecutive_landing_bodies": 96,
+      "original_config_writes": 1,
+      "summary": {
+        "sequence": true,
+        "iterations": 8038,
+        "events": 554,
+        "captures": 174,
+        "bodies": 6142,
+        "airborne": true,
+        "landed": true,
+        "success": true,
+        "restarted": true,
+        "mode": 9,
+        "stage": "C10DAE",
+        "queued": 0,
+        "crash_resets": 0,
+        "initial_qualification": 0,
+        "reloaded": true
+      },
+      "native_flight_state_seeded": false,
+      "reference_scope": "Original instructions from native before-states; independent full-flight parity remains open",
+      "input_sha256": "8d4dff657c006d5161ad4c719604f7bbc2a884977c475e9400942564cabd4340",
+      "test_sha256": "a124091d22ff16fcf011f0878ddbdaac06db11e320e94c11ded6dc5979c39b90",
+      "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2"
+    }
+  },
+  "capture_pair_cap": 240,
+  "capture_budget_mib": 480,
+  "build_cache_budget_gib": 4,
+  "remaining_work": [
+    "Independent original whole-flight comparisons and HUD timing assessment",
+    "Initial startup retained sorting",
+    "Original recorded sound and Amiga filter fidelity",
+    "Visible gameplay performance and presentation across missions/views/audio",
+    "Remaining named C state ownership"
+  ]
+}

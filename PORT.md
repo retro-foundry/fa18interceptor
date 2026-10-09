@@ -7,6 +7,12 @@ for campaign qualification. Cold starts are allowed. Older references to an
 uninterrupted tour as required work are superseded. Independent original whole
 flights and the other completion items remain open.
 
+Current Release and Debug both pass the earned cold tour, with all nine stages,
+runtime counters and 78-byte saves identical. Fresh Release qualification and
+final source comparisons pass in both supported pilot contexts. Ten selected
+checks pass; this qualifies repeated individual missions under the revised
+criterion. See [individual mission evidence](analysis/native_individual_mission_acceptance.md).
+
 Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry

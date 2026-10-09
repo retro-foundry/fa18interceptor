@@ -7,6 +7,12 @@ Cold starts are allowed. The continuous-campaign driver remains optional
 diagnostic tooling; older references to its sixth flight as required work are
 superseded. Independent original whole flights and other completion work remain.
 
+Fresh Release and Debug earned cold tours pass with all nine stages identical,
+including every counter and 78-byte save. Release qualification and final source
+gates also pass in original/new-pilot contexts; ten selected checks pass overall.
+Repeated individual mission acceptance is met. See
+[individual mission evidence](../../analysis/native_individual_mission_acceptance.md).
+
 Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry

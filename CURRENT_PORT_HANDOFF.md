@@ -12,6 +12,16 @@ requirement below. Failed bank/height test-pilot experiments were reverted.
 Independent original whole flights, startup sorting, recorded audio/filter
 fidelity, visible performance and named-state cleanup remain separate work.
 
+Repeated individual qualification is now accepted: current Release and Debug
+each complete qualification and all six cold earned missions, result/menu and
+Next Mission wrap. All nine tour stages match exactly, including counters and
+78-byte saves. Fresh Release original/new-pilot qualification and final-flight
+source gates also pass; ten selected CTests pass in total. Final source gates
+compare 42/64 intervals and 239/220 bodies and each replay the actual playable
+runner. See `analysis/native_individual_mission_acceptance.md` and its checkpoint.
+The complete port remains unfinished. Visible-performance tooling must accept
+validated individual geared routes instead of requiring the waived campaign.
+
 Free Flight renderer fix (2026-10-09): the user's location-three crash at
 model C3AAC4 / stream C3ABEA / command 4018 was a missing native command.
 Original table C1FCE8+$18 points to C206E4, now connected through the existing

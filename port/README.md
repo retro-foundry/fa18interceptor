@@ -7,6 +7,12 @@ save and menu-return checks. Older uninterrupted-tour requirements below are
 superseded. Independent original whole-flight parity and other completion work
 remain open.
 
+Repeated individual mission acceptance now passes: current Release and Debug
+earned cold tours agree on all nine stages, counters and 78-byte saves. Fresh
+Release qualification/final source comparisons also pass for both supported
+pilot contexts; ten selected checks pass overall. See
+[individual mission evidence](../analysis/native_individual_mission_acceptance.md).
+
 Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry

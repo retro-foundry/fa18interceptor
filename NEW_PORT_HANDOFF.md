@@ -13,6 +13,16 @@ experiments were reverted. Independent original whole-flight comparisons,
 startup sorting, original recorded sound/filter fidelity, visible performance
 and named-state cleanup remain outstanding.
 
+Repeated individual mission acceptance now passes on the current executables:
+Release and Debug each earn qualification plus all six cold missions, save the
+sixth result, return to menu and wrap. All nine stages match every counter/input
+hash and all 78 saved bytes. Fresh Release qualification/final source gates pass
+for original and newly enlisted pilot contexts; ten selected CTests pass overall.
+See `analysis/native_individual_mission_acceptance.md` and
+`analysis/figures/native_individual_mission_acceptance_checkpoint.json`.
+The uninterrupted driver is optional diagnostic tooling. Visible-performance
+qualification must be adapted to validated individual geared mission routes.
+
 Free Flight location-three renderer crash fixed: model C3AAC4's command 4018
 now dispatches the original C206E4 interpolated-segment routine. The model oracle
 compares 72 complete command cases and 16 actual-model poses (eight source calls),
@@ -146,10 +156,11 @@ Frontend/demo regressions and artifact checks pass; the Release executable is
 refreshed. Initial startup remains unverified. See
 `analysis/native_menu_sort_mode_audit_milestone.md` and its checkpoint.
 
-The six requested completion items remain the active acceptance work. Full
-independently started original flights and one-process qualification/all-six-
-missions/menu are the priorities. Audio recording fidelity, visible performance
-and named-state migration remain open. Historical summaries below are superseded
+Full independently started original flights remain the main playable-parity
+check. Repeated individual mission tests replace the uninterrupted campaign
+requirement by the latest explicit user direction. Initial startup sorting,
+audio recording fidelity, visible performance and named-state migration remain
+open. Historical summaries below are superseded
 where they label qualification as Demonstration or describe all binaries as
 unchanged. The complete-port goal remains active.
 

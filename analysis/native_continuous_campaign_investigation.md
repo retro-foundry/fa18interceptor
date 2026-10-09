@@ -24,6 +24,14 @@ sequence gates and earned cold tour, including original and newly enlisted
 pilot contexts where supported. Fixed-input repeats show reproducibility;
 they do not establish exhaustive coverage of random spawns.
 
+Completed follow-up: current Release and Debug earned cold tours pass with all
+nine stages exactly equal, including runtime counters and complete saves. Fresh
+Release qualification/final source comparisons pass in both pilot contexts;
+ten selected checks pass overall. Repeated individual mission qualification is
+accepted. See `native_individual_mission_acceptance.md` and its checkpoint.
+The visible-performance tool's continuous-report prerequisite must be replaced
+with validated individual geared routes; the waived campaign is not required.
+
 This is work in progress, not an acceptance milestone. Completed sort fix and
 its Release/Debug evidence are committed as `1dd08521`; all files described here
 remain uncommitted pending validation. The complete-port goal remains active.
