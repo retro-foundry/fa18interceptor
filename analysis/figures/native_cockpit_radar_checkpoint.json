@@ -1,0 +1,964 @@
+{
+  "date": "2026-10-09",
+  "runner_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+  "debug_runner_sha256": "df61632eb4059b020c10673362afa8eed11466f3e4cf8734dff35eef75384ee2",
+  "native_runtime_changed": false,
+  "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+  "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+  "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+  "source_update_mapping_sha256": "45176e5a7d3c5b3f064d48adce0c8eb0c8115186550c4fb3bc64c6817edb9b4e",
+  "source_rows_preserved": 27110,
+  "native_rows_preserved": 16062,
+  "enlisted_frames": 9000,
+  "qualification_and_mission_three_frames": 42706,
+  "release_debug_complete_traces_RAM_counters_saves_memory_equal": true,
+  "memory": {
+    "enlist": {
+      "sdl_arena_bytes": 33554432,
+      "sdl_startup_bytes": 0,
+      "sdl_peak_bytes": 96,
+      "sdl_gameplay_pool_requests": 0,
+      "sdl_failures": 0,
+      "project_gameplay_heap_violations": 0,
+      "pcm_ring_frames": 131072,
+      "os_driver_allocations_observed": false
+    },
+    "flight": {
+      "sdl_arena_bytes": 33554432,
+      "sdl_startup_bytes": 0,
+      "sdl_peak_bytes": 96,
+      "sdl_gameplay_pool_requests": 0,
+      "sdl_failures": 0,
+      "project_gameplay_heap_violations": 0,
+      "pcm_ring_frames": 131072,
+      "os_driver_allocations_observed": false
+    }
+  },
+  "pcm_change": {
+    "enlist": {
+      "before": 8299845,
+      "after": 8511816
+    },
+    "flight": {
+      "before": 40187341,
+      "after": 40521617
+    },
+    "scope": "Explicit PCM processing change; only nonzero_sample_frames may differ. All game/voice counters, complete traces, final RAM and saves remain strict."
+  },
+  "complete_pages_matching": 287,
+  "observations": 4967,
+  "bands": [
+    {
+      "y": 0,
+      "rows": 96,
+      "matching": 4967,
+      "compared": 4967,
+      "matching_planes": [
+        4967,
+        4967,
+        4967,
+        4967,
+        4967,
+        4967,
+        4967,
+        4967
+      ],
+      "first_difference": null
+    },
+    {
+      "y": 96,
+      "rows": 32,
+      "matching": 4967,
+      "compared": 4967,
+      "matching_planes": [
+        4967,
+        4967,
+        4967,
+        4967,
+        4967,
+        4967,
+        4967,
+        4967
+      ],
+      "first_difference": null
+    },
+    {
+      "y": 128,
+      "rows": 32,
+      "matching": 4501,
+      "compared": 4967,
+      "matching_planes": [
+        4546,
+        4959,
+        4952,
+        4929,
+        4546,
+        4959,
+        4952,
+        4929
+      ],
+      "first_difference": {
+        "source_iteration": 22303,
+        "native_iteration": 22303,
+        "game_tick": 162,
+        "planes": [
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "y": 160,
+      "rows": 32,
+      "matching": 1222,
+      "compared": 4967,
+      "matching_planes": [
+        4358,
+        4967,
+        4959,
+        2325,
+        4357,
+        4967,
+        4959,
+        2325
+      ],
+      "first_difference": {
+        "source_iteration": 22442,
+        "native_iteration": 22442,
+        "game_tick": 301,
+        "planes": [
+          4
+        ]
+      }
+    },
+    {
+      "y": 192,
+      "rows": 8,
+      "matching": 1551,
+      "compared": 4967,
+      "matching_planes": [
+        4023,
+        4961,
+        4967,
+        2552,
+        4022,
+        4961,
+        4967,
+        2552
+      ],
+      "first_difference": {
+        "source_iteration": 22309,
+        "native_iteration": 22309,
+        "game_tick": 168,
+        "planes": [
+          4
+        ]
+      }
+    }
+  ],
+  "negative_counter_controls": [
+    "implicit_pcm_change",
+    "changed_postflight_resets",
+    "changed_sample_requests",
+    "missing_counter",
+    "invalid_pcm_count"
+  ],
+  "radar_window": {
+    "first": 23334,
+    "last": 23338,
+    "boundaries": 5,
+    "runner_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+    "original_probe_sha256": "6a215a5b16fced492308cd8cf7701892731c4a6efdac51dd00e236752e49ab7d",
+    "original_unchanged_observations": 23339,
+    "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+    "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+    "radar_original_non_stack_comparisons": 20,
+    "native_complete_body_comparisons": 5,
+    "live_original_radar_returns_compared": 5,
+    "initial_phase_offset": 123,
+    "equivalent_blink_phase_points_matching": true,
+    "mutation_rejections": {
+      "counter_increment": true,
+      "premature_marker": true,
+      "marker_coordinate": true,
+      "other_marker": true
+    },
+    "live_original_pages_matching": 0,
+    "live_native_pages_matching": 5,
+    "strict_live_owner_pages_matching": false,
+    "complete_page_delta": [
+      {
+        "source_iteration": 23334,
+        "native_iteration": 23333,
+        "compared_bytes": 64000,
+        "changed_pixels_by_page": [
+          [
+            [
+              155,
+              159
+            ]
+          ],
+          [
+            [
+              155,
+              159
+            ]
+          ]
+        ],
+        "delta_sha256": "365a0a3963d12f4b63cea28ef0eda94f57a22aab609e459b569b3a3e20f8fa7d",
+        "colour": 1
+      },
+      {
+        "source_iteration": 23335,
+        "native_iteration": 23334,
+        "compared_bytes": 64000,
+        "changed_pixels_by_page": [
+          [
+            [
+              155,
+              159
+            ]
+          ],
+          [
+            [
+              155,
+              160
+            ]
+          ]
+        ],
+        "delta_sha256": "5d99e07a2b531787e2257d1d4b10f6de53daeda4a62de55353a7622ef038ec0a",
+        "colour": 1
+      },
+      {
+        "source_iteration": 23336,
+        "native_iteration": 23335,
+        "compared_bytes": 64000,
+        "changed_pixels_by_page": [
+          [
+            [
+              155,
+              160
+            ]
+          ],
+          [
+            [
+              155,
+              160
+            ]
+          ]
+        ],
+        "delta_sha256": "16e0e43967aa4b77f4bacb55a2e1ec9cbe1b307fa7b9f07cbb823f3447c9029d",
+        "colour": 1
+      },
+      {
+        "source_iteration": 23337,
+        "native_iteration": 23336,
+        "compared_bytes": 64000,
+        "changed_pixels_by_page": [
+          [
+            [
+              155,
+              160
+            ]
+          ],
+          [
+            [
+              155,
+              160
+            ]
+          ]
+        ],
+        "delta_sha256": "16e0e43967aa4b77f4bacb55a2e1ec9cbe1b307fa7b9f07cbb823f3447c9029d",
+        "colour": 1
+      },
+      {
+        "source_iteration": 23338,
+        "native_iteration": 23337,
+        "compared_bytes": 64000,
+        "changed_pixels_by_page": [
+          [
+            [
+              155,
+              160
+            ]
+          ],
+          [
+            [
+              155,
+              160
+            ]
+          ]
+        ],
+        "delta_sha256": "16e0e43967aa4b77f4bacb55a2e1ec9cbe1b307fa7b9f07cbb823f3447c9029d",
+        "colour": 1
+      }
+    ]
+  },
+  "radar_owner_page_difference_bytes": [
+    {
+      "iteration": 23334,
+      "source": [
+        245,
+        286,
+        206,
+        216,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "iteration": 23335,
+      "source": [
+        246,
+        286,
+        208,
+        217,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "iteration": 23336,
+      "source": [
+        246,
+        286,
+        208,
+        217,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "iteration": 23337,
+      "source": [
+        246,
+        286,
+        208,
+        217,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "iteration": 23338,
+      "source": [
+        246,
+        286,
+        208,
+        217,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "rejected_page_delta_controls": [
+    "unrelated_page_pixel",
+    "wrong_marker_colour"
+  ],
+  "additional_plane_two_window": {
+    "first": 23944,
+    "last": 23954,
+    "runner_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+    "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+    "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+    "rows": [
+      {
+        "source_iteration": 23944,
+        "native_iteration": 23943,
+        "ram_sha256": {
+          "source": "5ff0f44e896af936b90df873ca3bdf697b348e690e6ab88da3f43f555a06c9cf",
+          "native": "d79931d85f62a38dec50f86b6833776bd68bd25794cade791c4538188d7d0734"
+        },
+        "differences": [
+          {
+            "plane": 3,
+            "bytes": 9,
+            "bit_pixels": 15,
+            "byte_bbox": [
+              160,
+              161,
+              199,
+              196
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 9,
+            "bit_pixels": 15,
+            "byte_bbox": [
+              160,
+              161,
+              199,
+              196
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23945,
+        "native_iteration": 23944,
+        "ram_sha256": {
+          "source": "1eeda677c31a3499b572f4e72663a5e39b1a40c2e35a81a4767431d938088da5",
+          "native": "f53bf9258e01b7841df2ea4a5fa192849961361db92c6f10e370d526a0ad557a"
+        },
+        "differences": [
+          {
+            "plane": 3,
+            "bytes": 9,
+            "bit_pixels": 15,
+            "byte_bbox": [
+              160,
+              161,
+              199,
+              196
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              192,
+              192,
+              199,
+              192
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23946,
+        "native_iteration": 23945,
+        "ram_sha256": {
+          "source": "22855a4454fd822519f6bea98241ab2e563ef4f13579fbcafa83c01e6c6aafa5",
+          "native": "d18f2f2baefb3eea4e7f9ba63d3c6b5a091b5487a6d0869df712b4ccc8211445"
+        },
+        "differences": [
+          {
+            "plane": 2,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              192,
+              192,
+              199,
+              192
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              192,
+              192,
+              199,
+              192
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23947,
+        "native_iteration": 23946,
+        "ram_sha256": {
+          "source": "a2823437bb621fba54e43c11b7144c4f32baff482d58e2f06e4105bd90eedd37",
+          "native": "b9aac128b1971363dfd7acccac730bc6b293343b3685e2babf911d367e17d5f2"
+        },
+        "differences": [
+          {
+            "plane": 2,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              192,
+              192,
+              199,
+              192
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              192,
+              192,
+              199,
+              192
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23948,
+        "native_iteration": 23947,
+        "ram_sha256": {
+          "source": "ce628b8d5ecce4630b6adcb1e2bb644db1825fe3949f3e2f5e0653f8e412ffb1",
+          "native": "ae912ea00fac0681bc8fa503bcbc983254c7a65315452db005083396e4a18253"
+        },
+        "differences": [
+          {
+            "plane": 2,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              192,
+              192,
+              199,
+              192
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              192,
+              192,
+              199,
+              192
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23949,
+        "native_iteration": 23948,
+        "ram_sha256": {
+          "source": "1f6945a701d1299e2fac37ef37632736002ee13b4f36163aa40349841e8e2fac",
+          "native": "af21df219af0dddfdaa507adcce3f5e6d40ce7f07e2e08076d071eb13b6defbd"
+        },
+        "differences": [
+          {
+            "plane": 2,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              192,
+              192,
+              199,
+              192
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 3,
+            "bit_pixels": 3,
+            "byte_bbox": [
+              160,
+              162,
+              199,
+              192
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23950,
+        "native_iteration": 23949,
+        "ram_sha256": {
+          "source": "440bb4fdc0ab7e41aacf34904fb47c7f268f798c0bd8a8fbb4c9bc6a20077108",
+          "native": "de3e1e9959ad871c69659bb68d7d4aa3e116e58cdf18fda188bf24d640edc62a"
+        },
+        "differences": [
+          {
+            "plane": 2,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 3,
+            "bit_pixels": 3,
+            "byte_bbox": [
+              160,
+              162,
+              199,
+              192
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 3,
+            "bit_pixels": 3,
+            "byte_bbox": [
+              160,
+              162,
+              199,
+              192
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23951,
+        "native_iteration": 23950,
+        "ram_sha256": {
+          "source": "8ec28a9f621ef67225dfc7341c5814e723211c78502d7a6ab3d39bf0b113c872",
+          "native": "4ccc0ee577d0a8315a5e1d200e19c76e7f1de214876aed19099de7e60ae674e1"
+        },
+        "differences": [
+          {
+            "plane": 2,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 3,
+            "bit_pixels": 3,
+            "byte_bbox": [
+              160,
+              162,
+              199,
+              192
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 3,
+            "bit_pixels": 3,
+            "byte_bbox": [
+              160,
+              162,
+              199,
+              192
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23952,
+        "native_iteration": 23951,
+        "ram_sha256": {
+          "source": "e4cbe6e4869c33323967d391d0f283cae081dd035c1612fdf85e2a9fd13f0ef3",
+          "native": "bd542526f1f2bbbf50130cad6d16ae39c5f0b584369bb54ee7219d875e8a65e2"
+        },
+        "differences": [
+          {
+            "plane": 2,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 3,
+            "bit_pixels": 3,
+            "byte_bbox": [
+              160,
+              162,
+              199,
+              192
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 22,
+            "bit_pixels": 50,
+            "byte_bbox": [
+              160,
+              162,
+              199,
+              196
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23953,
+        "native_iteration": 23952,
+        "ram_sha256": {
+          "source": "ee8dd57de8abc9818f0304c023c4213c18e5cbd5cacb21c3dec8bcd3d3bd4a57",
+          "native": "b7533f9ec0fefcfa358b17b59a1964d8cd023669bcf393a5415c84b51b77de9b"
+        },
+        "differences": [
+          {
+            "plane": 2,
+            "bytes": 1,
+            "bit_pixels": 1,
+            "byte_bbox": [
+              160,
+              162,
+              167,
+              162
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 22,
+            "bit_pixels": 50,
+            "byte_bbox": [
+              160,
+              162,
+              199,
+              196
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 21,
+            "bit_pixels": 49,
+            "byte_bbox": [
+              160,
+              165,
+              199,
+              196
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 23954,
+        "native_iteration": 23953,
+        "ram_sha256": {
+          "source": "bc5993e3123fa46fa6932c359112403df696b4248ab7cf6578d92ecc9c92e772",
+          "native": "07e97ba0bca3d439d4d15e20881d1b01d2711ee8b0d82ee77eab5975d985505a"
+        },
+        "differences": [
+          {
+            "plane": 3,
+            "bytes": 21,
+            "bit_pixels": 49,
+            "byte_bbox": [
+              160,
+              165,
+              199,
+              196
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 21,
+            "bit_pixels": 49,
+            "byte_bbox": [
+              160,
+              166,
+              199,
+              196
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "prior_radar_gate_regression": {
+    "original_live_pages_matching": 24,
+    "native_live_pages_matching": 24,
+    "complete_owner_comparisons": 96,
+    "native_body_comparisons": 24
+  },
+  "acceptance": "Current whole-flight gameplay and allocation guards pass. Five bounded complete-page deltas equal observed selected-marker cache history. Live original radar-owner pages match 0/5; retained as failure, not masked. Broader drawing remains open."
+}

@@ -2,6 +2,8 @@
 
 Both games start independently. Every old field, core, page and final RAM byte
 must reproduce its accepted recording before the extra fields can be assessed.
+An explicit PCM-processing change may alter only the nonzero-sample counter;
+all game/voice counters remain strict, and both loops must pass the heap guard.
 """
 import argparse
 import gzip
@@ -37,6 +39,18 @@ def preserved(path, baseline):
     return len(rows)
 
 
+def preserved_counters(before, after, pcm_change=False):
+    """PCM processing can change zero crossings, never game/voice counters."""
+    if not pcm_change:
+        assert before == after
+        return None
+    assert before.keys() == after.keys()
+    assert {k: v for k, v in before.items() if k != 'nonzero_sample_frames'} == {
+        k: v for k, v in after.items() if k != 'nonzero_sample_frames'}
+    assert 0 <= after['nonzero_sample_frames'] <= after['sample_frames']
+    return dict(before=before['nonzero_sample_frames'], after=after['nonzero_sample_frames'])
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--runner', type=Path, required=True)
@@ -45,6 +59,8 @@ def main():
     parser.add_argument('--source-updates', type=Path, required=True)
     parser.add_argument('--source-reuse', type=Path)
     parser.add_argument('--drawing-bands', action='store_true', help='also locate page differences with adjoining full-width bands')
+    parser.add_argument('--pcm-change', action='store_true',
+        help='Explicit original-derived PCM change: preserve every game/voice counter, recording the changed nonzero-sample count')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
@@ -106,16 +122,21 @@ def main():
             assert result.returncode == 0, name
             return json.loads(result.stdout)
         enlist = run(['--frames', '9000', '--replay', str(ROOT / 'tools/native/fixtures/region-pilot-enlist.e9k'),
-                      '--save-dir', str(pilot)], 'enlist.log')
-        assert enlist == native['enlist_run'] and (pilot / 'config').read_bytes().hex() == native['enlisted_pilot']
+                      '--save-dir', str(pilot), '--memory-report', str(work / 'enlist-memory.json')], 'enlist.log')
+        enlist_pcm = preserved_counters(native['enlist_run'], enlist, args.pcm_change)
+        assert (pilot / 'config').read_bytes().hex() == native['enlisted_pilot']
         intro = work / 'intro.e9k'
         intro.write_text('E9K_INPUT_V1\nF 1800 K 32 0 0 1\nF 1802 K 32 0 0 0\n')
         trace, ram = work / 'native.jsonl', work / 'native.dat'
         native_run = run(['--frames', '100000', '--replay', str(intro), '--input',
             str((args.source_updates / 'update-consumed.fa18in').resolve()), '--iterations',
             str(updates['real_update_calls']), '--save-dir', str(pilot),
-            '--flight-trace', str(trace), '--data-out', str(ram)], 'native.log')
-        assert native_run == native['native_run']
+            '--flight-trace', str(trace), '--data-out', str(ram),
+            '--memory-report', str(work / 'flight-memory.json')], 'native.log')
+        flight_pcm = preserved_counters(native['native_run'], native_run, args.pcm_change)
+        memory = {name: json.loads((work / f'{name}-memory.json').read_text()) for name in ('enlist', 'flight')}
+        for value in memory.values():
+            assert value['project_gameplay_heap_violations'] == value['sdl_failures'] == 0, value
         native_ram_sha = digest(ram.read_bytes())
         assert native_ram_sha == native['native_final_ram_sha256']
         assert (pilot / 'config').read_bytes().hex() == native['final_saved_pilot']
@@ -129,13 +150,19 @@ def main():
             source_trace_sha256=digest(gzip.decompress(source_trace.read_bytes())),
             native_trace_sha256=digest(gzip.decompress(native_trace.read_bytes())),
             source_final_ram_sha256=source_ram_sha, native_final_ram_sha256=native_ram_sha,
-            source_run=source_run, native_run=native_run, source_update_evidence=updates,
+            source_run=source_run, native_run=native_run, enlist_run=enlist, memory=memory,
+            source_update_evidence=updates,
             source_rows_preserved=source_rows, native_rows_preserved=native_rows,
             final_saved_pilot=native['final_saved_pilot'], input_hashes={**source['input_hashes'], **native['native_input_hashes']},
             whole_successful_flight=comparison,
             scope='Optional message fields leave every preceding trace field, complete core, page, final RAM byte, '
                   'counter, outcome and save unchanged. Independently started full mission-three flight; '
                   'strict drawing remains open. Message timing is assessed separately.')
+        if args.pcm_change:
+            report['pcm_change'] = dict(enlist=enlist_pcm, flight=flight_pcm,
+                scope='Explicit PCM processing change; only nonzero_sample_frames may differ. '
+                      'All game/voice counters, complete traces, final RAM and saves remain strict.')
+            report['scope'] = report['scope'].replace('counter, outcome', 'game/voice counter, outcome')
         (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
         print(f'{source_rows} original and {native_rows} native observations preserved; '
               'complete final RAM and saves unchanged; optional owner inputs now recorded')

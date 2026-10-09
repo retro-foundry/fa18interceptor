@@ -1,5 +1,13 @@
 # Active port source ownership
 
+Current whole-flight allocation/cockpit check (2026-10-09): Release/Debug
+preserve all qualification/mission-three traces, final RAM, counters and
+earned saves, with zero gameplay heap violations. Five bounded complete
+page deltas match selected-radar marker history. A separate live original
+owner-return page gate matches 0/5 and remains unaccepted; later plane-2
+interaction and broader drawing stay open. Runtime is unchanged. See
+[current evidence](../analysis/native_cockpit_radar_milestone.md).
+
 Original voice ownership (2026-10-09): reference tracing now resolves the
 loaded sound hunks, correcting false empty voices in a separate launch with
 a 480-byte relocation. Complete original Demo and separate-launch execution,

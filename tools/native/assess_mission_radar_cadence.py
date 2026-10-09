@@ -10,15 +10,55 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 
 from check_gameplay_checkpoint import ROOT, integer, span
-from check_qualification_message_cadence import digest, pages
+from check_qualification_message_cadence import digest, pages, verify_trace
+from compare_flight_traces import read_trace
 
 
 def points(row):
     return sorted([{k:v for k,v in point.items() if k!='phase'} for point in row['points']],
                   key=lambda point: point['record_offset'])
+
+
+def cached_pixels(data, page):
+    result = set()
+    for cursor in range(0, 40, 4):
+        address = 0xC4E71C + page * 40 + cursor
+        x, y = integer(data, address, 2), integer(data, address + 2, 2)
+        if x == 0xFFFF:
+            break
+        pair, x = bool(x & 0x8000), x & 0x7FFF
+        assert 0 < x < 320 and 0 < y < 200
+        result.add((x, y))
+        if pair:
+            result.add((x - 1, y))  # Original PAIR_MASKS / plot_pixel_pair.
+    return result
+
+
+def complete_page_delta(source, native, colour):
+    """Check every actual XOR byte against the observed cached point delta.
+
+    This predicts differences; neither page is modified or masked, and the
+    strict same-phase page comparison remains failed when bytes differ.
+    """
+    draw = integer(source, 0xC4566C, 2)
+    assert draw == integer(native, 0xC4566C, 2) and draw in (0, 1)
+    expected = [bytearray(8000) for _ in range(8)]
+    changed = []
+    for role, page in enumerate((draw, 1 - draw)):
+        delta = cached_pixels(source, page) ^ cached_pixels(native, page)
+        changed.append(sorted(delta))
+        for plane in range(4):
+            if colour & (1 << (3 - plane)):
+                for x, y in delta:
+                    expected[4 * role + plane][y * 40 + x // 8] |= 0x80 >> (x & 7)
+    actual = [bytes(x ^ y for x, y in zip(a, b)) for a, b in zip(pages(source), pages(native))]
+    assert actual == expected, 'Complete page difference is not the observed radar cache delta'
+    return dict(compared_bytes=64000, changed_pixels_by_page=changed,
+                delta_sha256=digest(b''.join(actual)), colour=colour)
 
 
 def verify(rows):
@@ -66,12 +106,45 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--window', type=Path, required=True)
     parser.add_argument('--original-bodies', type=Path, required=True)
+    parser.add_argument('--trace-evidence', type=Path,
+        help='Verified preserved full-flight traces when the drawing window uses optional owner fields')
+    parser.add_argument('--source-evidence', type=Path,
+        help='Ordinary original recording required to bind optional trace fields')
+    parser.add_argument('--complete-page-delta', action='store_true',
+        help='Require every complete-page XOR byte to equal the observed cached selected-marker difference')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     window = json.loads((args.window / 'report.json').read_text())
     original = json.loads((args.original_bodies / 'report.json').read_text())
-    assert window['source_trace_sha256'] == original['source_trace_sha256']
+    if args.trace_evidence:
+        from check_mission_message_trace import preserved
+        assert args.source_evidence is not None
+        reference = json.loads((args.trace_evidence / 'report.json').read_text())
+        assert reference['baseline_source_trace_sha256'] == original['source_trace_sha256']
+        assert reference['source_trace_sha256'] == window['source_trace_sha256']
+        assert reference['native_trace_sha256'] == window['native_trace_sha256']
+        assert reference['runner_sha256'] == window['runner_sha256']
+        source_path = args.trace_evidence / 'source.jsonl.gz'
+        baseline = args.source_evidence / 'driver.jsonl.gz'
+        assert digest(gzip.decompress(baseline.read_bytes())) == original['source_trace_sha256']
+        assert digest(gzip.decompress(source_path.read_bytes())) == reference['source_trace_sha256']
+        header, source_rows = read_trace(source_path)
+        # The owner probe already verifies the ordinary recording row for row.
+        # Bind optional fields to that same recording, never another replay.
+        assert preserved(source_path, baseline) == reference['source_rows_preserved']
+        native_path = args.trace_evidence / 'native.jsonl.gz'
+        assert digest(gzip.decompress(native_path.read_bytes())) == reference['native_trace_sha256']
+        native_header, native_rows = read_trace(native_path)
+        assert header == native_header
+        for observed in window['rows']:
+            for name, index, trace_rows in (('source', observed['source_iteration'], source_rows),
+                                            ('native', observed['native_iteration'], native_rows)):
+                data = gzip.decompress((args.window / f'{name}.{index}.dat.gz').read_bytes())
+                assert digest(data) == observed['ram_sha256'][name]
+                verify_trace(data, header, trace_rows[index])
+    else:
+        assert window['source_trace_sha256'] == original['source_trace_sha256']
     captures = {row['iteration']: row['snapshots'] for row in original['captures']}
     assert sorted(captures) == list(range(window['first'], window['last'] + 1))
     assert original['last_observation'] >= window['last'] + 1
@@ -102,7 +175,7 @@ def main():
                     stdout=log, stderr=subprocess.STDOUT, timeout=20)
             assert result.returncode == 0, log_path
             assert '0 gameplay differences, 0 display bytes' in log_path.read_text()
-            row = dict(iteration=i, native_iteration=j, source_owner_live_output_matching=True,
+            row = dict(iteration=i, native_iteration=j,
                        native_body_input_sha256=digest(before.read_bytes()),
                        native_body_output_sha256=digest(after.read_bytes()),
                        native_body_original_matching_with_existing_exclusions=True,
@@ -139,7 +212,12 @@ def main():
                         # Actual original returns can include asynchronous OS
                         # and real ABI stack changes. Check all complete pages,
                         # sixteen cores and the entire radar-owned list/cache.
-                        assert pages(actual) == pages(observed_output)
+                        actual_pages, observed_pages = pages(actual), pages(observed_output)
+                        row[name + '_live_pages_matching'] = actual_pages == observed_pages
+                        row[name + '_live_page_difference_bytes'] = [
+                            sum(a != b for a, b in zip(x, y)) for x, y in zip(actual_pages, observed_pages)]
+                        if actual_pages != observed_pages:
+                            (args.out / f'failed-{name}-owner.{i}.dat.gz').write_bytes(gzip.compress(actual, mtime=0))
                         for slot in range(16):
                             address = 0xC46184 + 512 * slot
                             assert span(actual, address, 164) == span(observed_output, address, 164)
@@ -153,15 +231,32 @@ def main():
                     assert row['source_body_phase_before'] == row['source']['phase_before']
             rows.append(row)
     phase_offset = verify(rows)
+    page_deltas = None
+    if args.complete_page_delta:
+        assert args.trace_evidence, 'Live trace verification is required for the complete page delta'
+        colours = {p['colour'] for row in rows for name in
+                   ('source', 'native', 'source_flipped_phase', 'native_flipped_phase')
+                   for p in row[name]['points'] if p['record_offset'] == row[name]['selected_record']}
+        assert len(colours) == 1, 'This bounded cache-delta check requires a stable selected-marker colour'
+        colour, = colours
+        page_deltas = []
+        for observed in window['rows']:
+            i, j = observed['source_iteration'], observed['native_iteration']
+            a = gzip.decompress((args.window / f'source.{i}.dat.gz').read_bytes())
+            b = gzip.decompress((args.window / f'native.{j}.dat.gz').read_bytes())
+            page_deltas.append(dict(source_iteration=i, native_iteration=j,
+                                   **complete_page_delta(a, b, colour)))
     rejections = {}
     for kind in ('counter_increment', 'premature_marker', 'marker_coordinate', 'other_marker'):
         changed = copy.deepcopy(rows)
-        state = changed[0]['source']
+        index = next(i for i, row in enumerate(changed)
+                     if any(p['record_offset'] == row['source']['selected_record'] for p in row['source']['points']))
+        state = changed[index]['source']
         marker = next(p for p in state['points'] if p['record_offset'] == state['selected_record'])
         if kind == 'counter_increment':
             state['phase_after'] += 1
         elif kind == 'premature_marker':
-            changed[0]['source_flipped_phase']['points'].append(copy.deepcopy(marker))
+            changed[index]['source_flipped_phase']['points'].append(copy.deepcopy(marker))
         elif kind == 'marker_coordinate':
             marker['x'] += 1
         else:
@@ -184,11 +279,21 @@ def main():
               'Every strict page difference remains reported. Message text and other drawing differences '
               'are not accepted by this check. Native body checks retain their existing explicit exclusions; '
               'actual original owner returns are checked for all complete pages, cores and radar list/cache.')
+    report['live_original_pages_matching'] = sum(row['source_live_pages_matching'] for row in rows)
+    report['live_native_pages_matching'] = sum(row['native_live_pages_matching'] for row in rows)
+    report['strict_live_owner_pages_matching'] = all(
+        row[name + '_live_pages_matching'] for row in rows for name in ('source', 'native'))
+    if page_deltas is not None:
+        report['complete_page_delta'] = page_deltas
+        report['scope'] += ' Every full-page XOR byte in this bounded window equals the retained radar point-cache delta; no pixels are excluded.'
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'{len(rows)} original/native radar transitions, {4*len(rows)} complete owner comparisons, '
           f'{len(rows)} native body comparisons; phase offset={phase_offset}; four mutations rejected')
+    print(f"Live original owner pages: {report['live_original_pages_matching']}/{len(rows)} match; "
+          f"native: {report['live_native_pages_matching']}/{len(rows)} match")
     subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+    return 0 if report['strict_live_owner_pages_matching'] else 1
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
