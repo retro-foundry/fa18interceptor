@@ -1,0 +1,258 @@
+{
+  "date": "2026-10-09",
+  "scope": "Resolve actual original voice owner and compare all separate-launch first-music requests; original/native onset and whole-flight sound remain unaccepted",
+  "native_runtime_unchanged_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+  "original_executable_sha256": "d7301e20958548f9b5f1ba744f8ff91fef476306c220eb886e7c90bac2802ffa",
+  "source_manifest": "analysis/hunk_inventory.json",
+  "source_hash_manifest": "analysis/data/romfree_hunk_layout.json",
+  "caller": "scripts/engine9000_bridge.py -> existing Custom-write callback -> VoiceReader.observe_write -> ordinary per-frame VoiceReader.voices",
+  "complete_original": {
+    "authority": {
+      "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+      "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+      "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+      "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+    },
+    "replay_calls": 21069,
+    "event_rows": 406754,
+    "boundary_rows": 21069,
+    "recorded_audio": {
+      "file": "original.wav",
+      "channels": 2,
+      "sample_bits": 16,
+      "first_replay_call": 1,
+      "replay_calls": 21069,
+      "sample_rate": 44100,
+      "reported_fps": 50.0,
+      "sample_frames": 18582858,
+      "pcm_sha256": "76ffa4bef9b203c84e67565b41685b1e62d66c0710fa0c318d264fa2d8c2b3c0",
+      "wav_sha256": "db14f6340ca2464d6f2fd441b8f007bc2eb21d4eac7d39990befcb0d37816745",
+      "capture_scope": "All batch PCM from requested ordinary retro_run calls; startup/restore initialization excluded",
+      "capture_budget_mib": 512
+    },
+    "resolved_voice_layout": {
+      "hunk_74": 12910120,
+      "hunk_75": 12910392,
+      "hunk_76": 12910808,
+      "voice_slots": 12910136,
+      "master_volume": 12910374,
+      "verified_hunk_76_bytes": 420,
+      "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+    },
+    "known_voice_boundaries": 21069,
+    "unknown_voice_boundaries": 0,
+    "registers_unchanged": true,
+    "complete_ram_state_unchanged": true,
+    "video_unchanged": true
+  },
+  "complete_original_row_preservation": {
+    "every_original_pcm_byte_unchanged": true,
+    "original_wav_reference": "build/native-audio/original-complete-demo/original.wav",
+    "wav_sha256": "db14f6340ca2464d6f2fd441b8f007bc2eb21d4eac7d39990befcb0d37816745",
+    "all_trace_rows": 406754,
+    "prior_trace_rows_preserved_after_removing_new_layout_field": 406754,
+    "prior_voice_rows_accepted": true
+  },
+  "separate_launch": {
+    "authority": {
+      "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+      "config_sha256": "cde0af34ecb42f7d677d407231ac8560ce186411ef1fd2acf5b36e39ba0c1a2e",
+      "initial_state_sha256": "221b8ddc9b010c59a4cf45f4714a3456a383221f4b31fb5eabf64e091f25b0e2",
+      "recording_sha256": "8d689ce8862a17e0973d619d470fd8f3cff6048fbe5ab49717d9ce1de1f71931",
+      "snapshot_sha256": "310024a8d413175bed231d9e68d37273aa1006afb5dea59f054c04953bc7e59f"
+    },
+    "replay_calls": 5000,
+    "event_rows": 222435,
+    "boundary_rows": 5000,
+    "recorded_audio": {
+      "file": "original.wav",
+      "channels": 2,
+      "sample_bits": 16,
+      "first_replay_call": 1,
+      "replay_calls": 5000,
+      "sample_rate": 44100,
+      "reported_fps": 50.0,
+      "sample_frames": 4410000,
+      "pcm_sha256": "d372bb3238e20f6b2ba8b4adb92ab0e1b1f02a59b73e26ed6d66702c6c614d01",
+      "wav_sha256": "679663513713d3cea4a4a308de348fcb2c2b6e6ba069aa64092b6f3f428e8824",
+      "capture_scope": "All batch PCM from requested ordinary retro_run calls; startup/restore initialization excluded",
+      "capture_budget_mib": 512
+    },
+    "resolved_voice_layout": {
+      "hunk_74": 12910600,
+      "hunk_75": 12910872,
+      "hunk_76": 12911288,
+      "voice_slots": 12910616,
+      "master_volume": 12910854,
+      "verified_hunk_76_bytes": 420,
+      "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+    },
+    "known_voice_boundaries": 1180,
+    "unknown_voice_boundaries": 3820,
+    "registers_unchanged": true,
+    "complete_ram_state_unchanged": true,
+    "video_unchanged": true
+  },
+  "separate_launch_row_preservation": {
+    "every_original_pcm_byte_unchanged": true,
+    "original_wav_reference": "build/native-audio/filter-response-cold/ready-filtered/original.wav",
+    "wav_sha256": "679663513713d3cea4a4a308de348fcb2c2b6e6ba069aa64092b6f3f428e8824",
+    "all_trace_rows": 222435,
+    "prior_trace_rows_preserved_after_removing_new_layout_field": 217434,
+    "prior_voice_rows_accepted": false
+  },
+  "separate_launch_legacy_voice_rows_rejected": true,
+  "independently_regenerated_workbench_state_sha256": "221b8ddc9b010c59a4cf45f4714a3456a383221f4b31fb5eabf64e091f25b0e2",
+  "music_handoffs": {
+    "native_runner_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+    "native_trace_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415",
+    "requests_by_channel": [
+      24,
+      24,
+      0,
+      0
+    ],
+    "all_original_requests_match_ordered_native_payload_period_volume": true,
+    "comparison_search_shift_trim_or_gain_conversion": false,
+    "wrong_payload_length_period_volume_rejected": true,
+    "timing": {
+      "0": {
+        "beam_line_candidates": {
+          "312": {
+            "intervals": 21,
+            "min_cycles": -37600,
+            "max_cycles": -2228
+          },
+          "313": {
+            "intervals": 21,
+            "min_cycles": -145,
+            "max_cycles": 196
+          },
+          "314": {
+            "intervals": 21,
+            "min_cycles": 2230,
+            "max_cycles": 37878
+          }
+        },
+        "native_refill_rounding_cycles": {
+          "min": 3.1848958330228925,
+          "max": 70.28364583291113
+        },
+        "original_initial_and_prime": [
+          {
+            "call": 3821,
+            "hardware_frame": 3821,
+            "vpos": 284,
+            "hpos": 158,
+            "samples": 117392,
+            "bytes": 2044,
+            "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565",
+            "period": 358,
+            "volume": 63
+          },
+          {
+            "call": 3821,
+            "hardware_frame": 3821,
+            "vpos": 286,
+            "hpos": 90,
+            "samples": 117392,
+            "bytes": 2044,
+            "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565",
+            "period": 358,
+            "volume": 63
+          }
+        ],
+        "native_initial_and_prime_output_frames": [
+          0,
+          0
+        ]
+      },
+      "1": {
+        "beam_line_candidates": {
+          "312": {
+            "intervals": 21,
+            "min_cycles": -37675,
+            "max_cycles": -2212
+          },
+          "313": {
+            "intervals": 21,
+            "min_cycles": -38,
+            "max_cycles": 58
+          },
+          "314": {
+            "intervals": 21,
+            "min_cycles": 2232,
+            "max_cycles": 37689
+          }
+        },
+        "native_refill_rounding_cycles": {
+          "min": 3.1848958330228925,
+          "max": 70.28364583291113
+        },
+        "original_initial_and_prime": [
+          {
+            "call": 3821,
+            "hardware_frame": 3821,
+            "vpos": 308,
+            "hpos": 148,
+            "samples": 117392,
+            "bytes": 2044,
+            "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565",
+            "period": 358,
+            "volume": 63
+          },
+          {
+            "call": 3821,
+            "hardware_frame": 3821,
+            "vpos": 310,
+            "hpos": 60,
+            "samples": 117392,
+            "bytes": 2044,
+            "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565",
+            "period": 358,
+            "volume": 63
+          }
+        ],
+        "native_initial_and_prime_output_frames": [
+          0,
+          0
+        ]
+      }
+    },
+    "original_onset": {
+      "rate_hz": 44100,
+      "first_nonzero_stereo_frame_by_channel": [
+        3370056,
+        3370123
+      ],
+      "right_minus_left_frames": 67
+    },
+    "native_onset": {
+      "rate_hz": 48000,
+      "first_nonzero_stereo_frame_by_channel": [
+        19,
+        19
+      ],
+      "right_minus_left_frames": 0
+    },
+    "whole_flight_sound_acceptance": false
+  },
+  "validation": {
+    "active_release_original_audio_ctest": true,
+    "full_original_complete_pcm_state_video_preserved": true,
+    "separate_launch_complete_pcm_state_video_preserved": true,
+    "wrong_missing_falsely_unknown_voice_layout_rejected": true,
+    "legacy_false_empty_voices_rejected": true,
+    "reusable_ram_compressed": true,
+    "passing_duplicate_wavs_removed_after_identity": true
+  },
+  "commands": {
+    "ready_initial": "python scripts/engine9000_bridge.py --frames 8000 --config build/native-audio/filter-response-cold/filtered.uae --playback build/native-audio/filter-response-cold/launch-game.e9k --output build/native-audio/voice-layout/ready-initial",
+    "ready_capture": "python scripts/engine9000_bridge.py --frames 5000 --config build/native-audio/filter-response-cold/filtered.uae --restore build/native-audio/voice-layout/ready-initial/state.bin --playback build/native-audio/filter-response-cold/launch-ready.e9k --output build/native-audio/voice-layout/ready-capture --wav --audio-events",
+    "complete_original": "python scripts/engine9000_bridge.py --frames 21069 --restore captures/uae/run075/restored-state.bin --playback captures/uae/run075/playback.e9k --config captures/uae/run075/config.uae --output build/native-audio/voice-layout/complete-demo --wav --audio-events",
+    "retained_original_check": "python tools/native/check_original_audio_events.py --capture build/native-audio/voice-layout/complete-demo --baseline build/native-audio/original-complete-demo-led --pcm-reference build/native-audio/original-complete-demo/original.wav --out build/native-audio/voice-layout/complete-demo/validation-retained.json",
+    "music_handoffs": "python tools/native/check_music_handoffs.py --original build/native-audio/voice-layout/ready-capture --baseline build/native-audio/filter-response-cold/ready-filtered --pcm-reference build/native-audio/filter-response-cold/ready-filtered/original.wav --native-trace build/native-audio/native-complete-demo-events/audio.jsonl.gz --native-report build/native-audio/native-filter-demo/report.json --out build/native-audio/voice-layout/music-handoffs.json"
+  },
+  "capture_reproduction_note": "Capture commands created fresh folders. RAM was subsequently compressed; regenerate the byte-identical Workbench state or decode its retained state.dat.gz before a new restore capture. Retained check commands use compressed RAM and explicit canonical WAVs."
+}

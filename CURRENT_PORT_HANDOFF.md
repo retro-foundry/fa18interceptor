@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Original voice ownership (2026-10-09): reference tracing now resolves the
+loaded sound hunks, correcting false empty voices in a separate launch with
+a 480-byte relocation. Complete original Demo and separate-launch execution,
+PCM and register writes remain exact. All 48 initial music requests match
+native sample bytes/order/period/volume. Original right-channel onset follows
+left by 67 samples; native starts together, so onset/whole-flight sound remain
+open. Native executable and gameplay storage are unchanged. See
+[voice and handoff evidence](analysis/native_original_voice_layout_milestone.md).
+
 Native PCM filter (2026-10-09): playable output now uses the original A500
 fixed and enabled LED cascades, with 56 bytes of fixed state and no gameplay
 allocation. Release/Debug match every sample in the complete 13,230,014-frame

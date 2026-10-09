@@ -486,7 +486,8 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_sound_resources.py
                 --runner $<TARGET_FILE:fa18_native>)
     if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/engine9000/e9k-debugger/system/ami9000.dll AND
-       EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../captures/native/demo01/state.bin)
+       EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../captures/native/demo01/state.bin AND
+       EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/extracted/f18_interceptor)
         add_test(NAME fa18_native_original_audio_capture
             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/test_original_audio_capture.py)
         set_tests_properties(fa18_native_original_audio_capture PROPERTIES RUN_SERIAL TRUE)

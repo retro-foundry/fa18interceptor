@@ -14,7 +14,7 @@ from check_original_audio_capture import recorded_bytes, validate
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from original_audio_events import audio_state
+from original_audio_events import audio_state, VoiceReader
 
 
 def validate_events(capture, baseline, pcm_reference=None):
@@ -39,6 +39,22 @@ def validate_events(capture, baseline, pcm_reference=None):
     led_states, led_updates = None, []
     power_boundaries = Counter()
     led_capture = descriptor.get('led_interface', False)
+    layout_capture = descriptor.get('voice_hunk_layout', False)
+    known_voice_boundaries = unknown_voice_boundaries = 0
+    layout = descriptor.get('resolved_voice_layout')
+    banks = [recorded_bytes(capture,name) for name in ('chip.bin','slow.bin')]
+    def retained_memory(address,size):
+        assert VoiceReader.in_ram(address,size)
+        bank,offset = (banks[0],address) if address < 0x80000 else (banks[1],address-0xc00000)
+        return bank[offset:offset+size]
+    reader = VoiceReader(retained_memory)
+    actual_layout = reader.discover()
+    if layout_capture:
+        assert reader.disk_sha256 == descriptor['voice_source_executable_sha256']
+        assert actual_layout == layout, 'Reported voice owner differs from loaded original code/relocations'
+    else:
+        assert actual_layout is not None and actual_layout['voice_slots'] == 0xc4fe38 and actual_layout['master_volume'] == 0xc4ff26, 'Legacy fixed voice addresses do not match the loaded original sound owner'
+    owner_observed = False
     with path.open() as log:
         for line in log:
             row = json.loads(line)
@@ -65,6 +81,8 @@ def validate_events(capture, baseline, pcm_reference=None):
                 assert 0 <= row['value'] <= 65535
                 register_counts[f'{address:06X}'] += 1
                 source_counts[f"{row['source']:06X}"] += 1
+                if layout_capture and layout is not None and row['source']-layout['hunk_76'] in VoiceReader.WRITERS:
+                    owner_observed = True
                 if 0xdff0a0 <= address <= 0xdff0da and (address - 0xdff0a0) % 16 == 2:
                     buffer_loads[(address - 0xdff0a0) // 16] += 1
                 continue
@@ -83,6 +101,15 @@ def validate_events(capture, baseline, pcm_reference=None):
                 if led_capture:
                     assert row['led_states'] == led_states, 'LED boundary differs from original notifications'
                     power_boundaries[str(led_states[0])] += 1
+            if layout_capture:
+                if row['voice_layout'] is None:
+                    assert not owner_observed, 'Unknown voice owner after actual handler write'
+                    assert row['voices'] is None and row['master_volume'] is None
+                    if kind == 'boundary': unknown_voice_boundaries += 1
+                    continue
+                assert row['voice_layout'] == layout
+                owner_observed = True
+                if kind == 'boundary': known_voice_boundaries += 1
             assert len(row['voices']) == 4 and len(bytes.fromhex(row['master_volume'])) == 4
             addresses = []
             for channel, voice in enumerate(row['voices']):
@@ -117,6 +144,11 @@ def validate_events(capture, baseline, pcm_reference=None):
             power_filter_boundary_counts=dict(sorted(power_boundaries.items())),
             initial_published_led_states=initial['led_states'], final_published_led_states=led_states,
             filter_scope='Published gui_data.powerled/filter boolean at every replay boundary via original LED interface; no live CIA reads or repeated serialization; within-block transition sample unproven')
+    if layout_capture:
+        assert known_voice_boundaries + unknown_voice_boundaries == boundaries
+        result.update(resolved_voice_layout=layout,known_voice_boundaries=known_voice_boundaries,
+            unknown_voice_boundaries=unknown_voice_boundaries,
+            voice_layout_scope='Immutable original Hunk 76 and all relocation equations identify loaded Hunk 74 ownership; unresolved game voices are unknown, not empty')
     return result
 
 

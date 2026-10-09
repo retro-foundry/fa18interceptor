@@ -33,10 +33,13 @@ def main():
         assert [row['call'] for row in rows if row['kind'] == 'boundary'] == list(range(1,33))
         assert any(row['kind'] == 'write' and 0xdff0a0 <= row['address'] <= 0xdff0da for row in rows)
         assert events['audio_events']['led_interface']
+        assert events['known_voice_boundaries'] == 32 and events['unknown_voice_boundaries'] == 0
+        assert events['resolved_voice_layout']['voice_slots'] == 0xc4fe38
         assert sum(events['power_filter_boundary_counts'].values()) == 32
         assert any(row['kind'] == 'led' and row['led'] == 0 for row in rows)
         for change in ('missing-boundary', 'wrong-sample-boundary', 'wrong-led-boundary',
-                       'missing-led-state', 'missing-led-notification', 'wrong-led-sample-offset'):
+                       'missing-led-state', 'missing-led-notification', 'wrong-led-sample-offset',
+                       'wrong-voice-layout', 'missing-voice-layout', 'wrong-voice-owner'):
             damaged = work/change
             shutil.copytree(work/'events', damaged)
             modified = [dict(row) for row in rows]
@@ -50,6 +53,13 @@ def main():
                 modified[index]['led_states'][0] ^= 1
             elif change == 'missing-led-state':
                 del modified[index]['led_states']
+            elif change == 'wrong-voice-layout':
+                modified[index]['voice_layout'] = dict(modified[index]['voice_layout'],voice_slots=0xc50018)
+            elif change == 'missing-voice-layout':
+                del modified[index]['voice_layout']
+            elif change == 'wrong-voice-owner':
+                modified[index]['voice_layout'] = None
+                modified[index]['voices'] = modified[index]['master_volume'] = None
             else:
                 index = next(i for i,row in enumerate(modified) if row['kind'] == 'led')
                 if change == 'missing-led-notification':
@@ -103,7 +113,7 @@ def main():
                                     capture_output=True,text=True,timeout=20)
             assert result.returncode and message in result.stderr, result.stderr
             assert not (work/name/'original.wav').exists()
-    print('Real 32-frame original PCM/event/LED tracing preserves complete state; corrupt PCM/events/LED boundaries/notifications/reference, stepping and budget failures rejected')
+    print('Real 32-frame original PCM/event/LED/loaded-voice tracing preserves complete state; corrupt PCM/events/LED/voice ownership/reference, stepping and budget failures rejected')
 
 
 if __name__ == '__main__':

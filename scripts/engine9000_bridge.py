@@ -120,6 +120,7 @@ class Engine:
         self.audio_capture_log = None
         self.audio_capture_call = 0
         self.audio_events = None
+        self.audio_voice_reader = None
         self.audio_event_rows = 0
         # The core's retro_led_state[] starts at zero and only publishes
         # changes. Capture the interface from initialization, before restore.
@@ -181,6 +182,7 @@ class Engine:
                 for i in range(count):
                     r = rows[i]
                     if 0xa0 <= r.reg <= 0xda or r.reg in (0x96, 0x9a, 0x9c, 0x9e):
+                        self.audio_voice_reader.observe_write(r.source)
                         self.write_audio_event({'kind': 'write',
                             'call': self.audio_capture_call,
                             'hardware_frame': self.hardware_frame,
@@ -436,13 +438,15 @@ def main():
         engine.audio_capture.setparams((2, 2, int(rate), 0, 'NONE', 'not compressed'))
         engine.audio_capture_log = (args.output / 'audio_chunks.jsonl').open('w', encoding='utf8')
     if args.audio_events:
-        from original_audio_events import audio_state, voice_state
+        from original_audio_events import audio_state, VoiceReader
         if not engine.led_interface_available:
             raise RuntimeError('Original core did not request the LED interface')
         engine.audio_events = (args.output / 'audio_events.jsonl').open('w', encoding='utf8')
+        engine.audio_voice_reader = VoiceReader(engine.memory)
+        engine.audio_voice_reader.discover()
         engine.write_audio_event({'kind': 'initial', 'call': args.start_frame,
                                  'sample_frames': 0, **audio_state(payload),
-                                 **voice_state(engine.memory), 'led_states': engine.led_states.copy()})
+                                 **engine.audio_voice_reader.voices(), 'led_states': engine.led_states.copy()})
         engine.bind('e9k_debug_set_debug_option', None, U, U, P)(38, 1, None)
     samples = []
     normal_custom = None
@@ -463,7 +467,7 @@ def main():
                 raise RuntimeError(f'Expected video frame {frame}, actual {engine.frame}')
             if args.audio_events:
                 engine.write_audio_event({'kind': 'boundary', 'call': frame,
-                    'sample_frames': engine.audio_capture_frames, **voice_state(engine.memory),
+                    'sample_frames': engine.audio_capture_frames, **engine.audio_voice_reader.voices(),
                     'led_states': engine.led_states.copy()})
             if frame % 100 == 0:
                 samples.append({'frame': frame, 'pc': engine.regs()['pc']})
@@ -518,6 +522,9 @@ def main():
             'final_hardware': audio_state((args.output / 'state.bin').read_bytes()),
             'led_interface': True,
             'final_led_states': engine.led_states.copy(),
+            'voice_hunk_layout': True,
+            'resolved_voice_layout': engine.audio_voice_reader.layout,
+            'voice_source_executable_sha256': engine.audio_voice_reader.disk_sha256,
             'scope': 'All logged audio/control custom writes, safe voice RAM and published LED/filter state at every full-frame boundary; CIA pin/duty only known at retained endpoints'}
     (args.output / 'snapshot.json').write_text(json.dumps(report, indent=2) + '\n')
     if args.trace_frames:

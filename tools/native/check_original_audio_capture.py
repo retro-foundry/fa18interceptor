@@ -27,7 +27,7 @@ def validate(capture, baseline, pcm_reference=None):
     prior = json.loads((baseline / 'snapshot.json').read_text())
     # Wall-clock duration and the new audio descriptor are host observations.
     assert {k:v for k,v in report.items() if k not in ('recorded_audio','audio_events','wall_seconds')} == {
-        k:v for k,v in prior.items() if k != 'wall_seconds'}, 'Recording changed original execution'
+        k:v for k,v in prior.items() if k not in ('recorded_audio','audio_events','wall_seconds')}, 'Recording changed original execution'
     for name in ('state.bin', 'chip.bin', 'slow.bin'):
         assert recorded_bytes(capture, name) == recorded_bytes(baseline, name), name
     assert (capture / 'screen.png').read_bytes() == (baseline / 'screen.png').read_bytes()
@@ -52,6 +52,9 @@ def validate(capture, baseline, pcm_reference=None):
     assert pcm_hash.hexdigest() == audio['pcm_sha256']
     with wav_path.open('rb') as file:
         assert hashlib.file_digest(file,'sha256').hexdigest() == audio['wav_sha256']
+    if 'recorded_audio' in prior:
+        assert audio == prior['recorded_audio'], 'Complete original PCM differs from recorded baseline'
+        assert (capture/'audio_chunks.jsonl').read_bytes() == (baseline/'audio_chunks.jsonl').read_bytes()
     return {'scope':'Complete original batch PCM coverage and unchanged emulator execution; native onset/handoffs/filter parity remains open',
         'capture':str(capture), 'baseline':str(baseline), 'pcm_file_checked':str(wav_path),
         'replay_calls':len(calls), 'chunks':chunks,
