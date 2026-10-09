@@ -1,5 +1,19 @@
 # Current playable port handoff
 
+Latest mode-verified drawing-order audit (2026-10-09):
+
+Actual Demonstration entry now sorts all three lists, matching original saved
+A4 `$C47584`. The previous fixture selected qualification for its labelled
+Demonstration case; selected-mode assertions now prevent that error. The actual
+demo exposed 22 RAM differences despite equal retained words, fixed in the
+connected native C0FECE path. Qualification entry also passes. Release and Debug
+agree on 12 intervals, 30 lists, 20 factor probes and all RAM hashes across ten
+scenarios. Frontend/demo and artifact checks pass; canonical Release is refreshed.
+Initial startup remains unverified, and whole flights, uninterrupted campaign,
+recorded audio, visible performance and named-state ownership remain open. See
+`analysis/native_menu_sort_mode_audit_milestone.md` and its checkpoint. The full
+goal remains active; older sorting summaries below are historical.
+
 Latest menu/context sorting evidence (2026-10-08):
 
 Nine ordinary-menu scenarios now compare the renderer's retained sort owner

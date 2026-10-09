@@ -1,0 +1,280 @@
+{
+  "scope": "actual native scene/menu before-state original caller comparisons",
+  "negative_control_rejected": true,
+  "test_sha256": "20a55028761c31074ba3eab8fb4b2fbfa9739db65ca9e01dabc93b1183d19bce",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "cases": [
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 2,
+      "tick": 3214,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 2,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "cee5c1ac68c1d34c0c9427ff8a108f51fcb168501dbaebc510140f0f9ca73342",
+      "after_sha256": "8a9997bc3bab16c10373d2ff9c5b3dbeaf79d7f529850cfa95665f6ab1baa7b8"
+    },
+    {
+      "entry": 1,
+      "stage": "C0F992",
+      "selected_mode": 2,
+      "tick": 11040,
+      "retained_before": 1,
+      "retained_after": 300,
+      "keys": [],
+      "mode": 2,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "14308299ae569d8b75c01d45d92272a07edfe53461c7265e042713ab9975d933",
+      "after_sha256": "b36a0364a0ec6998327c198856cf2ac3408c650dc81006e4bd96393ee85d72cc"
+    },
+    {
+      "entry": 2,
+      "stage": "C0FECE",
+      "selected_mode": 125,
+      "tick": 11194,
+      "retained_before": 300,
+      "retained_after": 300,
+      "keys": [],
+      "mode": 2,
+      "source_lists": 0,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "9223dff300fa82e84144f4e923ccb895c814bc527f0696458d5f4b2e34b165b0",
+      "after_sha256": "28d8117435b4ee84180fc9dbc2c0c862f9977e09a6b6bb8059872560b779ba1d"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 3,
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 3,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "dd119ca90463b3837dd3acd7abe10b934925764675a1d1ea388399114a38ad66",
+      "after_sha256": "8ebe32355ac367ee3397889ec8ea2d65cb996f48b1d6067c1db4a4d0f5352a8b"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 4,
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 4,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "48166179605fe09aa96084e7157a0cb0e82e65c05af6851d59afd40d6d7b754e",
+      "after_sha256": "f30307e801d03f6964f725ef0ae5f4d01a73198fbe9811bb4b81db05bc0f7964"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 5,
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 5,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "05b7b591bf543fd3bc41e7c293ff20c39ab0d79a55a01d0c67f913a23f173701",
+      "before_sha256": "2eaae7e6698096b69f0197ba3aecbef2a94869037ab3fc6273c0f27cebc8908b",
+      "after_sha256": "b56f5178a820c655115c1d59471b150a549ba2dd7fa4d726da8bbd02b543b4cc"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 6,
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 6,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "714fb67ab9fff5ade21ccad123fe3acfd415c32486d0ddf941d65369de20c6d6",
+      "before_sha256": "68fad6498a958c56e081109456d0542e72006cecd14cbfb165f729994bcd2ddf",
+      "after_sha256": "fa18efdfac09149584f5ec73a97cc26de02fc6ddd1c96802b46ebf62984074ce"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 7,
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 7,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "b49b1d82890c39ad6bfc8422a516405150514408a00ddf6e789a88603cf70315",
+      "before_sha256": "8f24e1e356fa36b501047d2d8ad99369c202e4731482575dfff08d187e8acfdd",
+      "after_sha256": "e0fe0e40c1ae9a24c81b78293dd315e095d102e0bf4110b9c0bbc4936ed2b0ca"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 8,
+      "tick": 4714,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 8,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "before_sha256": "5af722be37305cd0817efd560036e9befce892ec8392ce3fcea9294650d97297",
+      "after_sha256": "8e292be9736dd146562ebdaa544c54fe5f46e5ac2d8f12d12d7a60a01d1f9d55"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 9,
+      "tick": 3214,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 9,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "c335b0e26012674fae79708b172e65013485de31b2884d980895229ef8868bf0",
+      "after_sha256": "42d1abeae73993d846d7e3845102ec5de02d7b1f72566ce60a182ad36e00b188"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 125,
+      "tick": 3214,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 125,
+      "source_lists": 0,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "45438d3ea7f56f8675bcdeddb59aae0bd0e44e1684b272f23f96c28ba4c37373",
+      "after_sha256": "8f2ca9ae1b46add4984eefa08b8405fe859edecd78ea2860c4a79b6d3d1960ef"
+    },
+    {
+      "entry": 0,
+      "stage": "C0FECE",
+      "selected_mode": 127,
+      "tick": 3214,
+      "retained_before": 0,
+      "retained_after": 0,
+      "keys": [],
+      "mode": 127,
+      "source_lists": 3,
+      "cached_entries": 0,
+      "fixed_far_entries": 0,
+      "original_only_factor_probes": [
+        "0xa9f01357",
+        "0xffff2468"
+      ],
+      "initial_config_sha256": "ADF pilot",
+      "before_sha256": "4a9f6610be8cee94594d5ae08e89d7b92e33c9d8ffe73b200ec02292a8f00a57",
+      "after_sha256": "b1c49e99975017eb895a5ad5101ed738151f649307d10da586531b86ff5bcac4"
+    }
+  ],
+  "runtime_changed": true,
+  "physics_rules_changed": false,
+  "date": "2026-10-09",
+  "configurations": [
+    "Release",
+    "Debug"
+  ],
+  "release_debug_interval_records_identical": true,
+  "debug_test_sha256": "a72df491a8bf96bc1f29d5a7845a2b4f3e24fb9d925bbd7a643246c3ce395df4",
+  "runner_sha256": "2c742d378b0ada91fddcc566f4e43e6bddc0df9186be796f331e9c87b08c3fb1",
+  "script_sha256_lf": "928fc5afe2520a7d5c1210758fc121eec5e0abf083bd7dabcdc1901b0523f840",
+  "prior_demo_label_selected_qualification": true,
+  "actual_demo_before_fix_ram_differences": 22,
+  "original_demo_saved_a4": "C47584",
+  "original_sort_all_byte": "75",
+  "initial_startup_verified": false,
+  "independent_original_whole_flights_verified": false,
+  "ctests": {
+    "Release": {
+      "passed": [
+        "frontend",
+        "demo",
+        "artifact_policy",
+        "artifact_cleanup"
+      ],
+      "seconds": 50.11
+    },
+    "Debug": {
+      "passed": [
+        "frontend",
+        "demo",
+        "artifact_cleanup"
+      ],
+      "seconds": 92.94
+    }
+  },
+  "capture_policy": "Passing raw RAM temporary; retain failing case; unchanged 4 GiB cache budget",
+  "post_processing": "Only report metadata and final selected-mode assertions normalized after completed oracle runs; interval evidence unchanged"
+}

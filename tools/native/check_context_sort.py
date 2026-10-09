@@ -35,7 +35,7 @@ def main():
         (work / 'source-build.log').write_text(build.stdout + build.stderr)
         if build.returncode:
             raise RuntimeError(build.stderr or build.stdout)
-        for mode in (2, 3, 4, 5, 6, 7, 8, 125, 127):
+        for mode in (2, 3, 4, 5, 6, 7, 8, 9, 125, 127):
             prefix, pilot = ram / f'mode{mode}', ram / f'pilot{mode}'
             pilot.mkdir()
             config = load_tour_pilot(mode) if mode >= 5 and mode <= 8 else None
@@ -49,6 +49,10 @@ def main():
                 raise RuntimeError(run.stderr or run.stdout)
             entries = [json.loads(line) for line in run.stdout.splitlines()]
             assert entries, mode
+            selections = [item for item in entries if item['stage'] == 'C0FECE']
+            assert selections and selections[0]['selected_mode'] == mode, (mode, entries)
+            assert all(item['selected_mode'] == (125 if mode == 2 else mode)
+                       for item in selections[1:]), (mode, entries)
             with (work / f'source-{mode}.log').open('w') as log:
                 for item in entries:
                     base = f'{prefix}.{item["entry"]}'
@@ -100,11 +104,11 @@ def main():
                         Path(base + f'.{suffix}.dat').unlink()
             print(f'Mode {mode}: {len(entries)} scene/menu intervals match original RAM and retained sorting', flush=True)
         assert negative_checked and {'C0FECE', 'C0F992'} <= stages, stages
-        assert sum(case['source_lists'] for case in cases) >= 27, 'Expected scene/menu sorting was not reached'
-        for mode in (2, 3, 4, 5, 6, 7, 8, 127):
+        assert sum(case['source_lists'] for case in cases) >= 30, 'Expected scene/menu sorting was not reached'
+        for mode in (2, 3, 4, 5, 6, 7, 8, 9, 127):
             assert any(case['mode'] == mode and case['source_lists'] >= 3 for case in cases), mode
         report = {'scope': 'actual native scene/menu before-state original caller comparisons',
-                  'runtime_gameplay_changed': False, 'negative_control_rejected': negative_checked,
+                  'runtime_changed': True, 'physics_rules_changed': False, 'negative_control_rejected': negative_checked,
                   'test_sha256': hashlib.sha256(args.test.resolve().read_bytes()).hexdigest(),
                   'adf_sha256': hashlib.sha256((ROOT / 'local/media/fa18.adf').read_bytes()).hexdigest(),
                   'cases': cases}

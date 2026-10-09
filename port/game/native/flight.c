@@ -151,11 +151,13 @@ static MenuTransitionResult transition_child(void *context,enum MenuTransitionCa
     case MENU_REFRESH:
         /* C0FECE's two-byte local frame places the sort's -$2C test in
          * its saved A4, byte 2. The reached mode-two and normal mission paths
-         * leave A4 at $C29872 / $C296EE / $C296E4 / $C2968A / $C29662 / $C296DA / $C29702,
+         * leave A4 at $C29872 / $C296EE / $C296E4 / $C2968A / $C29662 / $C296DA / $C29702;
+         * Demonstration's C0FECE path leaves it at $C47584. These saved
+         * caller bytes are nonzero at C1E48C, including the demo's $75,
          * so C1E48C sorts all lists even without requests.
          * The ordinary C0EFD4 frame keeps its request-derived local. */
         if(rd_u8(MODE_SELECT)==2 || rd_u8(MODE_SELECT)==4 || rd_u8(MODE_SELECT)==5 ||
-           rd_u8(MODE_SELECT)==6 || rd_u8(MODE_SELECT)==7 || rd_u8(MODE_SELECT)==8 ||
+           rd_u8(MODE_SELECT)==6 || rd_u8(MODE_SELECT)==7 || rd_u8(MODE_SELECT)==8 || rd_u8(MODE_SELECT)==127 ||
            (rd_u8(MODE_SELECT)==3 && !rd_u8(RECORDER_MODE))) refresh_native_context_sort(1,NULL);
         else refresh_native_context(NULL);
         break;

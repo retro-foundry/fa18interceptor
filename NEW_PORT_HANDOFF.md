@@ -1,4 +1,25 @@
-# Native port handoff — 2026-10-08
+# Native port handoff — 2026-10-09
+
+## Current restart summary — 2026-10-09
+
+Actual Demonstration entry now sorts all three display lists, matching the
+original caller. The preceding test's labelled Demonstration case selected
+qualification instead; mode assertions now prevent that mistake. The actual
+demo revealed 22 RAM differences despite equal retained sort words. Original
+saved A4 `$C47584` explains the caller's all-list decision; the native C0FECE
+path now preserves it. Qualification entry also passes. Ten scenarios compare
+12 intervals, 30 sorted lists and 20 factor probes in Release and Debug, with
+identical interval/RAM hashes and a rejected wrong-output negative control.
+Frontend/demo regressions and artifact checks pass; the Release executable is
+refreshed. Initial startup remains unverified. See
+`analysis/native_menu_sort_mode_audit_milestone.md` and its checkpoint.
+
+The six requested completion items remain the active acceptance work. Full
+independently started original flights and one-process qualification/all-six-
+missions/menu are the priorities. Audio recording fidelity, visible performance
+and named-state migration remain open. Historical summaries below are superseded
+where they label qualification as Demonstration or describe all binaries as
+unchanged. The complete-port goal remains active.
 
 ## Current restart summary — 2026-10-08
 

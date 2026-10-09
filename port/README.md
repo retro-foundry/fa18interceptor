@@ -1,5 +1,13 @@
 # Active port source ownership
 
+Actual Demonstration drawing order now matches its original caller; its native
+menu transition sorts all three lists. Mode assertions corrected a fixture that
+had selected qualification under the Demonstration label. Qualification entry
+also passes. Release/Debug agree on 12 intervals, 30 lists and 20 factor probes;
+frontend/demo regressions pass. Initial startup and the remaining completion
+items stay open. See [mode audit](../analysis/native_menu_sort_mode_audit_milestone.md).
+The earlier sorting summary below is historical.
+
 Menu/restart retained sorting now has direct original-caller comparisons:
 eleven intervals, 27 sorted lists and eighteen incoming-factor probes agree.
 Release and Debug pass; gameplay and playable binaries are unchanged. Reached

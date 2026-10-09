@@ -11,7 +11,7 @@ typedef struct {
     NativeReplay clock;
     const char *prefix;
     char path[4096];
-    unsigned count,tick,key_count;
+    unsigned count,tick,key_count,selected_mode;
     uint8_t keys[256];
     uint16_t retained;
     gaddr stage;
@@ -31,6 +31,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         run->entry=(NativeFrameCapture){.replay=&run->clock,.prefix=run->path,
             .iteration=game->update_iterations,.count=1};
         run->stage=stage;run->tick=game->ticks;
+        run->selected_mode=rd_u8(MODE_SELECT);
         run->retained=native_model_retained_result();
         run->key_count=game->input_count;
         for(unsigned i=0;i<run->key_count;++i)
@@ -38,8 +39,8 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
         native_frame_capture(game,NATIVE_FRAME_BODY_BEGIN,saved_tick,&run->entry);
     } else if(boundary==NATIVE_FRAME_BODY_BEGIN && run->entry.begun) {
         native_frame_capture(game,NATIVE_FRAME_BODY_END,saved_tick,&run->entry);
-        printf("{\"entry\":%u,\"stage\":\"%06X\",\"tick\":%u,\"retained_before\":%u,\"retained_after\":%u,\"keys\":[",
-            run->count++,run->stage,run->tick,run->retained,native_model_retained_result());
+        printf("{\"entry\":%u,\"stage\":\"%06X\",\"selected_mode\":%u,\"tick\":%u,\"retained_before\":%u,\"retained_after\":%u,\"keys\":[",
+            run->count++,run->stage,run->selected_mode,run->tick,run->retained,native_model_retained_result());
         for(unsigned i=0;i<run->key_count;++i) printf("%s%u",i?",":"",run->keys[i]);
         puts("]}");
     }
@@ -48,7 +49,7 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,
 int main(int argc,char **argv) {
     if(argc!=5) return 1;
     const unsigned mode=(unsigned)atoi(argv[4]);
-    if((mode<2 || mode>8) && mode!=125 && mode!=127) return 1;
+    if((mode<2 || mode>9) && mode!=125 && mode!=127) return 1;
     NativeFrontend *game=calloc(1,sizeof *game);
     char error[256];int result=1;
     if(!game) return 1;
@@ -60,7 +61,7 @@ int main(int argc,char **argv) {
     const unsigned mission_times[]={1800,3000,4500,6500,8000};
     const int mission_keys[]={32,54,282+(int)mode-3,13,13};
     const unsigned menu_times[]={1800,3000,5000,6500,11000};
-    const int menu_keys[]={32,mode==127?53:mode==125?52:51,13,13,27};
+    const int menu_keys[]={32,mode==127?49:mode==125?52:mode==9?53:51,13,13,27};
     const int mission=mode>=3 && mode<=8;
     const unsigned *times=mission?mission_times:menu_times;
     const int *keys=mission?mission_keys:menu_keys;
