@@ -114,6 +114,8 @@ class Engine:
         self.audio_capture_error = None
         self.audio_capture_log = None
         self.audio_capture_call = 0
+        self.audio_events = None
+        self.audio_event_rows = 0
         self.env_commands = set()
         # A Python host does not initialise the MinGW DLL's stderr. The callback
         # accepts the fixed prefix of libretro's printf ABI; unused varargs are
@@ -158,6 +160,22 @@ class Engine:
 
     def on_custom_frame(self, entries, count, dropped, core_frame, user):
         self.hardware_frame += 1
+        if self.audio_events is not None and not self.audio_capture_error:
+            try:
+                if dropped:
+                    raise RuntimeError(f'Original audio trace lost {dropped} custom writes')
+                rows = C.cast(entries, C.POINTER(CustomWrite))
+                for i in range(count):
+                    r = rows[i]
+                    if 0xa0 <= r.reg <= 0xda or r.reg in (0x96, 0x9a, 0x9c, 0x9e):
+                        self.write_audio_event({'kind': 'write',
+                            'call': self.audio_capture_call,
+                            'hardware_frame': self.hardware_frame,
+                            'vpos': r.vpos, 'hpos': r.hpos,
+                            'address': 0xdff000 + r.reg, 'value': r.value,
+                            'source': r.source, 'copper': bool(r.copper)})
+            except (OSError, RuntimeError) as error:
+                self.audio_capture_error = str(error)
         if self.custom_log is not None:
             rows = C.cast(entries, C.POINTER(CustomWrite))
             for i in range(count):
@@ -172,6 +190,15 @@ class Engine:
         fn = getattr(self.core, name)
         fn.restype, fn.argtypes = result, list(args)
         return fn
+
+    def write_audio_event(self, row):
+        line = json.dumps(row) + '\n'
+        size = len(line.encode('utf8'))
+        if self.audio_capture_bytes + size > self.audio_capture_budget:
+            raise RuntimeError('Original audio events exceed the bounded capture budget')
+        self.audio_events.write(line)
+        self.audio_event_rows += 1
+        self.audio_capture_bytes += size
 
     def environment(self, cmd, data):
         self.env_commands.add(cmd)
@@ -324,12 +351,16 @@ def main():
     parser.add_argument('--normal-custom-log', action='store_true',
                         help='Record Custom-register writes during ordinary full-frame replay')
     parser.add_argument('--wav', action='store_true', help='Capture complete reference PCM during the requested replay window')
+    parser.add_argument('--audio-events', action='store_true',
+                        help='With --wav/--restore, record audio/control writes and safe voice RAM at every replay boundary')
     parser.add_argument('--capture-budget-mib', type=int, default=512)
     args = parser.parse_args()
     if args.trace_frames and args.normal_custom_log:
         parser.error('--normal-custom-log cannot be combined with --trace-frames')
     if args.wav and args.trace_frames:
         parser.error('--wav requires ordinary full-frame replay, without instruction stepping')
+    if args.audio_events and (not args.wav or not args.restore or args.normal_custom_log):
+        parser.error('--audio-events requires --wav/--restore and its own filtered custom log')
     if args.frames < 0 or (args.wav and (args.frames < 1 or args.capture_budget_mib < 8)):
         parser.error('PCM capture requires positive frames and at least 8 MiB capture budget')
     args.output.mkdir(parents=True, exist_ok=False)
@@ -376,6 +407,13 @@ def main():
         engine.audio_capture = wave.open(str(args.output / 'original.wav'), 'wb')
         engine.audio_capture.setparams((2, 2, int(rate), 0, 'NONE', 'not compressed'))
         engine.audio_capture_log = (args.output / 'audio_chunks.jsonl').open('w', encoding='utf8')
+    if args.audio_events:
+        from original_audio_events import audio_state, voice_state
+        engine.audio_events = (args.output / 'audio_events.jsonl').open('w', encoding='utf8')
+        engine.write_audio_event({'kind': 'initial', 'call': args.start_frame,
+                                 'sample_frames': 0, **audio_state(payload),
+                                 **voice_state(engine.memory)})
+        engine.bind('e9k_debug_set_debug_option', None, U, U, P)(38, 1, None)
     samples = []
     normal_custom = None
     if args.normal_custom_log:
@@ -393,6 +431,9 @@ def main():
                 raise RuntimeError(engine.audio_capture_error)
             if engine.frame != frame:
                 raise RuntimeError(f'Expected video frame {frame}, actual {engine.frame}')
+            if args.audio_events:
+                engine.write_audio_event({'kind': 'boundary', 'call': frame,
+                    'sample_frames': engine.audio_capture_frames, **voice_state(engine.memory)})
             if frame % 100 == 0:
                 samples.append({'frame': frame, 'pc': engine.regs()['pc']})
     finally:
@@ -403,6 +444,9 @@ def main():
             engine.audio_capture.close()
             engine.audio_capture = None
             engine.audio_capture_log.close()
+        if engine.audio_events is not None:
+            engine.audio_events.close()
+            engine.audio_events = None
     if args.wav and not engine.audio_capture_frames:
         raise RuntimeError('Reference emulator emitted no PCM samples')
     (args.output / 'state.bin').write_bytes(engine.state())
@@ -435,6 +479,13 @@ def main():
             'wav_sha256': wav_hash,
             'capture_scope': 'All batch PCM from requested ordinary retro_run calls; startup/restore initialization excluded',
             'capture_budget_mib': args.capture_budget_mib}
+    if args.audio_events:
+        with (args.output / 'audio_events.jsonl').open('rb') as log:
+            event_hash = hashlib.file_digest(log, 'sha256').hexdigest()
+        report['audio_events'] = {'file': 'audio_events.jsonl',
+            'rows': engine.audio_event_rows, 'sha256': event_hash,
+            'final_hardware': audio_state((args.output / 'state.bin').read_bytes()),
+            'scope': 'All logged audio/control custom writes and safe voice RAM at every full-frame boundary; CIA/audio hardware sampled only from sealed initial and ordinary final state, not within-frame LED duty'}
     (args.output / 'snapshot.json').write_text(json.dumps(report, indent=2) + '\n')
     if args.trace_frames:
         import capstone

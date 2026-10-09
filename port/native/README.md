@@ -2,6 +2,8 @@
 
 The complete original demo now has a validated PCM recording: all 21,069
 reference calls preserve original execution and complete sample coverage.
+Their 406,753-row audio-write/voice trace also preserves full state and PCM.
+LED/filter pin is known at the retained endpoints only.
 Native onset/handoffs and interpolation/filter fidelity remain open; the native
 executable is unchanged. See [audio evidence](../../analysis/native_original_audio_recording_milestone.md).
 

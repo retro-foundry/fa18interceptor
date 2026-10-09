@@ -1,11 +1,14 @@
 # Native port handoff — 2026-10-09
 
 Original complete demo audio (2026-10-09): all 21,069 ordinary reference calls
-and 18,582,858 stereo sample frames are recorded intact at 44.1 kHz. Full
-nonrecording replay preserves complete RAM/state/registers/video/audio hash;
-corrupt/incomplete recording checks and the active CTest pass. Native executable
-is unchanged. Native onset/handoff alignment and interpolation/filter parity
-remain open; different replay contexts are not accepted as matching WAVs.
+and 18,582,858 stereo sample frames are recorded intact at 44.1 kHz. Their
+406,753-row audio-write/voice trace also preserves full execution and PCM.
+LED pin is on at both retained endpoints; intermediate filter state remains
+unproven. Intrusive serialization was rejected. Full nonrecording replay
+preserves complete RAM/state/registers/video/audio hash; corrupt/incomplete
+checks and the active CTest pass. Native executable is unchanged. Native
+onset/handoff alignment and interpolation/filter parity remain open; different
+replay contexts are not accepted as matching WAVs.
 See [original audio evidence](analysis/native_original_audio_recording_milestone.md).
 
 Gameplay preallocation (2026-10-09): project heap and buffered-file creation/

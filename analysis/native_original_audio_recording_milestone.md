@@ -64,3 +64,50 @@ artifact cleanup pass; the active Release native executable retains SHA256
 The complete-C-port goal remains active with audio fidelity, broader drawing
 and visible performance acceptance still open. State cleanup remains deferred
 and the uninterrupted campaign requirement remains waived.
+
+## Complete original audio-event trace
+
+`--wav --audio-events --restore STATE` now also records the pinned core's
+existing Custom-register logger for audio/control writes, including actual
+writer PC and beam position. It reads the four complete active voice records
+and master volume from ordinary game RAM at each replay boundary. Both logs
+share the bounded recording budget; dropped Custom writes or callback failures
+reject the recording. This extends the actual original host, not the native
+game or an invented audio-device model.
+
+The complete sealed demo has 406,753 event rows, including all 21,069 voice/PCM
+boundaries. Buffer-pointer low-word writes per channel are 254/368/19/7,640
+(8,281 total), and active slot changes are 37/34/10/160. The actual C500D8
+handler's writes, C501E0 period/volume publications, source PCs and every voice
+record remain retained in the trace. The checker validates contiguous call
+coverage and sample offsets against every original PCM block, complete record
+sizes and the whole event-log hash. Its full nonrecording comparison again
+preserves every RAM/state/register/video/audio field and the entire earlier
+WAV hash. Native onset and handoff matching are still open.
+
+Filter endpoints are decoded from the sealed initial state and the normal
+final serialization using pinned `cia.c:save_cia` and `audio.c:save_audio`
+layouts. Both have CIA PRA 192 / DDRA 3: the LED pin is on. This proves these
+two endpoints only. Intermediate CIA writes and within-frame LED duty remain
+unproven; the trace does not force a guessed native filter policy.
+
+A rejected 32-frame experiment serialized state at every boundary. Its five
+changed bytes belonged to CPU/CHIP/CHPD chunks, even though PCM and RAM still
+matched. The strict complete-state check caught it, and repeated serialization
+was removed. The production trace uses safe RAM reads and existing write logs,
+with no additional mid-run serialization or live CIA reads. Failed probe RAM
+is retained compressed with exact differences and hashes in the event report.
+
+The real 32-frame CTest now includes event tracing and rejects a missing voice
+boundary or incorrect PCM offset even when the event descriptor's checksum is
+updated. Explicitly reusing a retained reference WAV still verifies every
+block and complete hash; corrupt reusable PCM is rejected. CTest, Python syntax
+checks and artifact cleanup pass. Native source/output/executable are unchanged.
+
+`figures/native_original_audio_events_checkpoint.json` retains the compact
+coverage, complete source/register counts, first slot transitions, endpoint
+states and exact commands. Reusable original RAM is compressed. The generated
+duplicate full WAV was removed after complete identical-hash verification;
+`--pcm-reference build/native-audio/original-complete-demo/original.wav` checks
+the retained canonical WAV against the event capture's full block log. The
+event log remains in bounded build storage for native alignment/filter work.
