@@ -1,4 +1,4 @@
-"""Compare the recorded original mission-three crash from independent starts.
+"""Compare recorded original mission-three flights from independent starts.
 
 Enlist a native pilot using ordinary keys, then cold-load its actual saved
 config. Original RAM never initializes the native game. Complete drawings and
@@ -32,7 +32,7 @@ def context(ram):
                 player_phase=integer(ram, 0xC45798, 1))
 
 
-def assess(source_path, native_path):
+def assess(source_path, native_path, success=False):
     sh, source = read_trace(source_path)
     nh, native = read_trace(native_path)
     assert sh == nh
@@ -44,8 +44,13 @@ def assess(source_path, native_path):
     def stop(rows, start):
         return next(i for i in range(start + 1, max(rows) + 1)
                     if number(rows[i], 'stage') == 0xC11788)
-    ss, ns = stop(source, sf), stop(native, nf)
-    assert ss == ns == max(source) == max(native), 'different crash callback or recording end'
+    if success:
+        ss = next(i for i, r in source.items() if i > sf and number(r, 'mode') == 0) - 1
+        ns = max(native)
+        assert ss == ns, 'different final observed flight boundary'
+    else:
+        ss, ns = stop(source, sf), stop(native, nf)
+        assert ss == ns == max(source) == max(native), 'different crash callback or recording end'
     count = ss - sf + 1
     report = compare(source, native, sf, nf, count)
     report.update(first=sf, last=ss,
@@ -56,6 +61,11 @@ def assess(source_path, native_path):
             changed_fields={k: [v, native[i]['fields'][k]] for k, v in source[i]['fields'].items()
                             if v != native[i]['fields'][k]})
             for i in range(sf, ss + 1) if source[i]['pages'] != native[i]['pages']])
+    first_difference = min((r['source_iteration'] for r in
+        (report['first_record_difference'], report['first_game_difference']) if r), default=ss + 1)
+    report['complete_gameplay_matching_prefix'] = first_difference - sf
+    report['strict_gameplay_matching'] = first_difference == ss + 1
+    report['native_menu_observation_gaps'] = [i for i in range(ss + 1, max(source) + 1) if i not in native]
     # Ensure the diagnostic observes an NPC byte, controls and a full page.
     report['mutation_rejections'] = {}
     for kind in ('npc_core', 'controls', 'page'):
@@ -91,7 +101,8 @@ def main():
     evidence = args.source_evidence
     original = json.loads((evidence / 'report.json').read_text())
     assert original['unmodified_replay_exact'], 'original recording has not reproduced independently'
-    assert original['original_outcome'] == 'crash/reset' and not original['mission_success']
+    success = original['mission_success']
+    assert original['original_outcome'] == ('success' if success else 'crash/reset')
     for name, expected in original['input_hashes'].items():
         assert digest((ROOT / name).read_bytes()) == expected, f'original media changed: {name}'
     for name, key, compressed in (
@@ -116,6 +127,7 @@ def main():
         for name, key in (('native.jsonl.gz', 'native_trace_sha256'),
                           ('native.dat.gz', 'native_final_ram_sha256')):
             assert digest(gzip.decompress((args.out / name).read_bytes())) == report[key]
+        assert context(gzip.decompress((args.out / 'native.dat.gz').read_bytes())) == report['native_context']
     else:
         env = {k: v for k, v in os.environ.items()
                if not k.startswith(('FA18_LOOP_', 'FA18_ORIGINAL_PILOT_'))}
@@ -140,8 +152,11 @@ def main():
                 '--iterations', str(original['iterations']), '--save-dir', str(pilot),
                 '--flight-trace', str(work / 'native.jsonl'), '--data-out', str(work / 'native.dat')], 'native.log')
             assert stats['replay_iterations'] == original['iterations']
-            assert stats['replay_events'] == 640 and stats['input_queued'] == 0
-            assert stats['postflight_resets'] == 1
+            events = sum(' K ' in line for line in (evidence / 'consumed.fa18in').read_text().splitlines())
+            assert stats['replay_events'] == events and stats['input_queued'] == 0
+            assert stats['postflight_resets'] == (0 if success else 1)
+            if success:
+                assert stats['screen'] == 'menu' and stats['mode'] == 0 and stats['stage'] == 'C0FCB4'
             assert not stats['cpu_emulation'] and not stats['chipset_emulation']
             ram = (work / 'native.dat').read_bytes()
             assert len(ram) == 0x100000
@@ -164,19 +179,21 @@ def main():
         assert a[field] == b[field], f'unmatched earned-pilot context: {field}'
     report['pilot_record_difference_offsets'] = [i for i, (x, y) in enumerate(
         zip(bytes.fromhex(a['pilot']), bytes.fromhex(b['pilot']))) if x != y]
-    report['whole_failed_flight'] = assess(evidence / 'driver.jsonl.gz', args.out / 'native.jsonl.gz')
+    key = 'whole_successful_flight' if success else 'whole_failed_flight'
+    report[key] = assess(evidence / 'driver.jsonl.gz', args.out / 'native.jsonl.gz', success)
+    report['mission_success'] = success
     report['scope'] = ('Independently started, equally qualified zero-grade pilots; complete mission-three '
-        'failed flight through the first C11788 crash/reset boundary. No reference RAM supplied to native. '
-        'Full pilot records differ in naming/date/history bytes. Strict drawing and clock differences '
-        'remain unaccepted diagnostics. Successful mission-three whole flight remains open.')
+        + ('successful flight, grade and menu return. Raw fixed-offset state parity remains unaccepted '
+           'if a source update repeats. ' if success else 'failed flight through the first C11788 crash/reset boundary. ')
+        + 'No reference RAM supplied to native. Full pilot records differ in naming/date/history bytes. '
+        'Strict drawing and clock differences remain unaccepted diagnostics.')
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
-    comparison = report['whole_failed_flight']
-    assert comparison['complete_record_boundaries_matching'] == comparison['compared']
-    assert comparison['camera_and_controls_matching'] == comparison['compared']
+    comparison = report[key]
     print(json.dumps({k: v for k, v in comparison.items() if k.endswith('matching') or k == 'compared'}))
     for name, expected in hashes.items():
         assert digest((ROOT / name).read_bytes()) == expected, f'native input changed: {name}'
     subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+    assert comparison['strict_gameplay_matching'], 'whole-flight state parity remains unaccepted; see retained report'
 
 
 if __name__ == '__main__':

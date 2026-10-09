@@ -25,6 +25,9 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--reuse-driver', action='store_true', help='verify an already retained complete driver recording')
+    parser.add_argument('--pilot-ticks-per-update', type=int, choices=range(1, 17), default=4,
+                        help='validation controller input timing; never changes a game clock')
+    parser.add_argument('--patrol-input', action='store_true', help='ordinary approach/landing input without firing')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     recording = ROOT / 'captures/native/qual_carrier_success/input.fa18in'
@@ -52,7 +55,9 @@ def main():
             code = run(ROOT / 'build/recomp/fa18_original_mission_pilot.exe', recording, args.out / 'driver.log',
                 work / 'driver.jsonl', work / 'driver.dat', args.out / 'consumed.fa18in',
                 dict(FA18_ORIGINAL_PILOT_INPUT=str((args.out / 'input.fa18in').resolve()),
-                     FA18_ORIGINAL_PILOT_KEYS=str((args.out / 'controller-choices.e9k').resolve())))
+                     FA18_ORIGINAL_PILOT_KEYS=str((args.out / 'controller-choices.e9k').resolve()),
+                     FA18_ORIGINAL_PILOT_TICKS_PER_UPDATE=str(args.pilot_ticks_per_update),
+                     **({'FA18_ORIGINAL_PILOT_PATROL': '1'} if args.patrol_input else {})))
             assert code in (0, 1), f'original pilot process failed: {code}'
             for name in ('driver.jsonl', 'driver.dat'):
                 (args.out / f'{name}.gz').write_bytes(gzip.compress((work / name).read_bytes(), mtime=0))
@@ -62,6 +67,8 @@ def main():
             ram = (work / 'driver.dat').read_bytes()
             log = (args.out / 'driver.log').read_text()
             preliminary = dict(input_hashes=hashes, driver_returncode=code,
+                controller_ticks_per_update=args.pilot_ticks_per_update,
+                patrol_input=args.patrol_input,
                 driver_trace_sha256=digest((work / 'driver.jsonl').read_bytes()),
                 driver_final_ram_sha256=digest(ram), generated_input_sha256=digest((args.out / 'input.fa18in').read_bytes()),
                 consumed_input_sha256=digest((args.out / 'consumed.fa18in').read_bytes()),

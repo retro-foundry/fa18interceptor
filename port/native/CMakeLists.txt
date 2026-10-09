@@ -91,6 +91,8 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_executable(fa18_native_campaign_session_test ../../tools/native/native_campaign_session_test.c
         ../../tools/native/mission_pilot.c)
     target_link_libraries(fa18_native_campaign_session_test PRIVATE fa18_native_runtime)
+    add_executable(fa18_native_recorded_patrol_input_test ../../tools/native/native_recorded_patrol_input_test.c)
+    target_link_libraries(fa18_native_recorded_patrol_input_test PRIVATE fa18_native_runtime)
     add_executable(fa18_native_pcm_buffer_test ../../tools/native/native_pcm_buffer_test.c)
     target_link_libraries(fa18_native_pcm_buffer_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_pcm_buffers

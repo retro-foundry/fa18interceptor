@@ -12,6 +12,7 @@ typedef struct {
     int complete_flight, combat_started, return_started;
     int tour_flight, new_final_flight;
     int campaign_flight;
+    int patrol_flight; /* Validation approach only: observe aircraft, do not fire. */
     int manage_gear;
     unsigned gear_key_tick;
     unsigned ground_attack_target;

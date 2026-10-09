@@ -419,7 +419,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     const int weapon_aligned=(!pilot->new_final_flight && (!pilot->campaign_flight || pilot->mode==5 || pilot->cruise_flight)) || (weapon_aim[2]>0 &&
         fabs(atan2(weapon_aim[0],weapon_aim[2]))<(pilot->campaign_flight && pilot->cruise_flight?0.005:pilot->campaign_flight && pilot->mode==5?0.2:0.035) &&
         fabs(atan2(weapon_aim[1],hypot(weapon_aim[0],weapon_aim[2])))<(pilot->campaign_flight && pilot->mode==5?0.25:0.08));
-    const int launch=final_ready && !projectile_active && !pilot->ground_breakaway && rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<launch_range &&
+    const int launch=!pilot->patrol_flight && final_ready && !projectile_active && !pilot->ground_breakaway && rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<launch_range &&
         weapon_aligned &&
         (!(pilot->final_flight && weapon==0x30) ||
             ((pilot->new_final_flight || rd_u8(SHOOT_CUE)) && range<(pilot->new_final_flight?15000:10000) && fabs(yaw_error)<0.1)) &&
@@ -470,6 +470,12 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
         for(unsigned i=0;i<3;++i)
             point[i]=pilot->home[i]+pilot->forward[i]*(2000-before_home);
         point[1]=pilot->home[1]-(high_return?250:200)+fmax(before_home,0)*0.04;
+        if(pilot->patrol_flight) {
+            /* Validation runway approach: aim beyond the starting position
+             * and descend to its observed height, not the carrier wire. */
+            for(unsigned i=0;i<3;++i) point[i]=pilot->home[i]+pilot->forward[i]*2500;
+            point[1]=pilot->home[1];
+        }
     }
     const double wanted_yaw=atan2(-(point[0]-position[0]),point[2]-position[2]);
     const double yaw=rd_u16(CONTROL_RECORDS+104)*6.283185307179586/28800;
@@ -479,12 +485,18 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
     /* Pitch follows current heading so a return turn cannot reverse its
      * feedback; observed vertical speed damps the selected height approach. */
     const double descent=pilot->final_sequence && pilot->phase==1?0.25:0.12;
-    const double direction[3]={-sin(yaw),fabs(yaw_error)>0.3?0:
+    double direction[3]={-sin(yaw),fabs(yaw_error)>0.3?0:
         clamp((point[1]-position[1])/3000-
               vertical_speed/fmax(speed,30),-descent,descent),cos(yaw)};
+    if(pilot->patrol_flight) {
+        /* The test pilot holds its approach height through the return turn.
+         * Keys remain the only output; the original controls all motion. */
+        direction[1]=clamp((point[1]-position[1])/6000-
+                          vertical_speed/fmax(speed,30),-0.12,0.12);
+    }
     for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
         local[i]+=direction[j]*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
-    const double pitch=pilot->new_final_flight?
+    const double pitch=pilot->new_final_flight || pilot->patrol_flight?
         angle_delta(rd_u16(CONTROL_RECORDS+102)*6.283185307179586/28800,0):
         atan2(local[1],hypot(local[0],local[2]));
     const double bank=angle_delta(rd_u16(CONTROL_RECORDS+106)*6.283185307179586/28800,0);
@@ -496,7 +508,7 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
                pilot->forward[0],pilot->forward[1],pilot->forward[2]);
     }
     const double yaw_control=yaw_error-10*angle_delta(yaw,pilot->previous_x);
-    const double pitch_control=pilot->new_final_flight?
+    const double pitch_control=pilot->new_final_flight || pilot->patrol_flight?
         pitch+atan(direction[1])+10*angle_delta(pitch,pilot->previous_y):
         pitch+4*angle_delta(pitch,pilot->previous_y);
     pilot->previous_x=yaw;pilot->previous_y=pitch;
@@ -577,7 +589,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         }
     }
     if(pilot->rescue_drop_tick && game->ticks<pilot->rescue_drop_tick+20) return;
-    if((pilot->final_flight || (pilot->campaign_flight && pilot->mode!=6)) && !pilot->objective && game->ticks>pilot->started+750) {
+    if(!pilot->patrol_flight && (pilot->final_flight || (pilot->campaign_flight && pilot->mode!=6)) && !pilot->objective && game->ticks>pilot->started+750) {
         const uint8_t weapon=rd_u8(CONTROL_RECORDS+99)&0xf0u;
         const uint8_t stock=rd_u8(CONTROL_RECORDS+95);
         const gaddr target=CONTROL_RECORDS+512*pilot->target;

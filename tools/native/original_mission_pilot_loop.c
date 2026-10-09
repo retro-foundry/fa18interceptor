@@ -19,6 +19,7 @@ static unsigned releases[4];
 static unsigned location_tick;
 static unsigned airborne,gear_raised,gear_lowered;
 static uint32_t previous_stage;
+static unsigned controller_ticks_per_update=4;
 
 void native_frontend_event(NativeFrontend *game,int code,int down) {
     (void)game;
@@ -55,6 +56,16 @@ void fa18_loop_iteration(void) {
         if(!path || !log || !events || recorded_end!=8038) {
             fputs("Original pilot requires sealed qualification input and two output paths\n",stderr);exit(2);
         }
+        const char *scale=getenv("FA18_ORIGINAL_PILOT_TICKS_PER_UPDATE");
+        if(scale) {
+            char *end;
+            unsigned long value=strtoul(scale,&end,10);
+            if(*end || value<1 || value>16) {
+                fputs("Original pilot input timing requires 1..16 ticks per update\n",stderr);exit(2);
+            }
+            controller_ticks_per_update=(unsigned)value;
+        }
+        fprintf(stderr,"Original validation controller ticks per update: %u\n",controller_ticks_per_update);
         pilot_record=fopen(path,"w");pilot.keys=fopen(log,"w");
         if(!pilot_record || !pilot.keys) {perror("original pilot output");exit(2);}
         fputs("FA18_LOOP_INPUT_V1\n",pilot_record);fputs("E9K_INPUT_V1\n",pilot.keys);
@@ -63,6 +74,11 @@ void fa18_loop_iteration(void) {
             fprintf(pilot_record,"%ld 0 K %d %d\n",events[i].iteration,events[i].a,events[i].b);
         }
         pilot.mode=3;pilot.manage_gear=1;
+        if(getenv("FA18_ORIGINAL_PILOT_PATROL")) {
+            /* Test input: use the existing level-turn/return controller to
+             * approach the normally spawned aircraft without firing. */
+            pilot.patrol_flight=pilot.complete_flight=pilot.campaign_flight=1;
+        }
         /* Diagnostic end bound only; the source game state is untouched. */
         recorded_end=40000;
     }
@@ -105,10 +121,10 @@ void fa18_loop_iteration(void) {
             mission_pilot_event(&pilot,&observation,50,0);releases[2]=1;
         }
         if(stage==0xc10dae || pilot.started) {
-            /* The validation controller's takeoff choices use four nominal
+            /* The validation controller's takeoff choices use nominal
              * host ticks per physics update. Actual PAL time differs in the
              * original renderer; no clock is written to the source game. */
-            observation.ticks=40000u+4u*rd_u16(UPDATE_TICK);
+            observation.ticks=40000u+controller_ticks_per_update*rd_u16(UPDATE_TICK);
             release_once(pilot.target_press,&releases[0],116);
             release_once(pilot.gear_key_tick,&releases[1],103);
             mission_pilot_tick(&pilot,&observation);

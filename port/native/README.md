@@ -1,5 +1,13 @@
 # Native port runner
 
+The original and independent native now complete mission three with gear
+raised after takeoff, lowered before runway landing, grade and menu return.
+The complete original recording reproduces without its controller; native
+Release/Debug agree. Whole-flight state parity remains unaccepted after a
+repeated original entry at tick 360. Strict comparisons and verified snapshots
+retain the failure. Gameplay and Escape are unchanged. See
+[success recording](../../analysis/native_independent_mission_success_milestone.md).
+
 Independent mission-three failed flight now matches all 5,216 aircraft cores
 and camera/control/target state through its first crash/reset callback. The
 original recording reproduces all 22,467 boundaries without its input pilot.

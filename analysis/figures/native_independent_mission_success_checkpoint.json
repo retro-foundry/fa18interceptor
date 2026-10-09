@@ -1,0 +1,297 @@
+{
+  "date": "2026-10-09",
+  "scope": "Successful original/native mission-three outcomes and geared input qualification; raw whole-flight state parity remains unaccepted",
+  "runtime_changed": false,
+  "plain_escape_original_restart_preserved": true,
+  "controller_ticks_per_update": 4,
+  "original_recording": {
+    "input_hashes": {
+      "captures\\native\\qual_carrier_success\\input.fa18in": "fe4ff3a4cac080a4534041eb42d84a9332916d7566336910d852f86cde070440",
+      "captures\\native\\qual_carrier_success\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    "driver_trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+    "driver_final_ram_sha256": "dc670ce5e6983915463ca18f239253660a184c9212c9d8389383f8216d62f516",
+    "generated_input_sha256": "fa3ac6722fc0338d5b773b6c288e8ca095274ba64000cf0773aa4fbb8bd73b12",
+    "consumed_input_sha256": "7dd9daf5a9a9a38c5e85444c444de079591829cc567663a2054a77181f435192",
+    "iterations": 27110,
+    "mission_success": true,
+    "original_outcome": "success",
+    "unmodified_replay_exact": true
+  },
+  "source_flight_events": {
+    "airborne": 22289,
+    "gear_raised_airborne": 22291,
+    "gear_lowered_airborne": 23929,
+    "touchdown": 26060
+  },
+  "native_trace_sha256": "400f2c5474bd91bb048f1c46ed07d2467694b722c5b36182e5e6651275a22bb5",
+  "native_final_ram_sha256": "aca50c37b3035fe80aac27f18abf56611748a09be11aec28e309265a9e2583c6",
+  "source_context": {
+    "pilot": "000100000000030000000168000000000000000000010000000000000000000000000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+    "qualified": 1,
+    "saved_level": 0,
+    "grades": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "completions": 1,
+    "scene_level": 1,
+    "player_phase": 0
+  },
+  "native_context": {
+    "pilot": "0001000000020300000000ac0000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+    "qualified": 1,
+    "saved_level": 0,
+    "grades": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "completions": 1,
+    "scene_level": 1,
+    "player_phase": 0
+  },
+  "pilot_difference_offsets": [
+    5,
+    10,
+    11,
+    30,
+    31,
+    32
+  ],
+  "strict_comparison": {
+    "compared": 4967,
+    "record_cores_compared": 79472,
+    "record_cores_matching": 64996,
+    "complete_record_boundaries_matching": 360,
+    "camera_and_controls_matching": 361,
+    "complete_pages_matching": 192,
+    "timer_and_hud_matching": 0,
+    "first_record_difference": {
+      "source_iteration": 22502,
+      "native_iteration": 22502,
+      "source_tick": 360,
+      "changes": [
+        0,
+        8,
+        12
+      ]
+    },
+    "first_game_difference": {
+      "source_iteration": 22502,
+      "native_iteration": 22502,
+      "source_tick": 360,
+      "changes": [
+        "game_tick",
+        "mouse_coordinates"
+      ]
+    },
+    "first_page_difference": {
+      "source_iteration": 22286,
+      "native_iteration": 22286,
+      "source_tick": 145,
+      "changes": [
+        4,
+        6,
+        7
+      ]
+    },
+    "game_fields_compared": [
+      "stage",
+      "game_tick",
+      "phase",
+      "mouse_coordinates",
+      "selected_record",
+      "mode",
+      "target_record",
+      "controls",
+      "observer",
+      "camera_matrix",
+      "view_matrix",
+      "view_pan_rotate",
+      "view_attitude",
+      "view_side"
+    ],
+    "first": 22142,
+    "last": 27108,
+    "records_matching_per_slot": [
+      360,
+      4137,
+      4137,
+      4137,
+      4967,
+      4967,
+      4967,
+      4967,
+      364,
+      4967,
+      4967,
+      4967,
+      2218,
+      4967,
+      4940,
+      4967
+    ],
+    "complete_gameplay_matching_prefix": 360,
+    "strict_gameplay_matching": false,
+    "native_menu_observation_gaps": [
+      27109,
+      27110
+    ],
+    "mutation_rejections": {
+      "npc_core": true,
+      "controls": true,
+      "page": true
+    }
+  },
+  "native_input_qualification": {
+    "scope": "Native patrol input qualification only; independent original flight remains separate",
+    "source_prefix_last": 22145,
+    "source_trace_sha256": "1f99295bbae7c794c600f7fe2f4514966e24ffae2a8dbe9e697db96db08b95c0",
+    "source_consumed_input_sha256": "90f9c50956a89365e5febf5deb89b2206a3e26fb4d819f8c670624da4049b69b",
+    "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "runner_sha256": "55b2fd45a853fddf76d3aa35ad3632b45d796c06f3036c42f49ab829c59edc23",
+    "test_sha256": "ca172c66e95f13b9315ea11bae34e3f713b14c056c156d94562b13f53fe53cd4",
+    "controller_ticks_per_update": 4,
+    "driver": {
+      "patrol_input_result": true,
+      "tick": 41339,
+      "iteration": 26148,
+      "game_tick": 3458,
+      "phase": 252,
+      "completions": 1,
+      "grade": 1,
+      "objective": 1,
+      "airborne": 1,
+      "gear_up": 1,
+      "gear_down": 1,
+      "landed": 1,
+      "region": 4,
+      "speed": 0,
+      "resets": 0,
+      "xyz": [
+        1067587,
+        7,
+        1095391
+      ]
+    },
+    "canonical": {
+      "frame_owner_exit": false,
+      "frames": 41339,
+      "screen": "scene-setup",
+      "mode": 3,
+      "glyphs": 14852,
+      "record_updates": 5492,
+      "scene_frames": 5488,
+      "terrain_polygons": 23641,
+      "model_calls": 66361,
+      "hud_frames": 5488,
+      "control_frames": 15107,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 3458,
+      "timer_pending": false,
+      "timer_yields": 12846,
+      "display_publications": 15106,
+      "display_yields": 15131,
+      "display_pending": true,
+      "displayed_page": 1,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 15104,
+      "input_events": 2146,
+      "input_queued": 0,
+      "update_iterations": 26624,
+      "replay_iterations": 26148,
+      "replay_events": 566,
+      "host_replay_events": 1588,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 41339,
+      "voice_publications": 87127,
+      "voice_levels": [
+        [
+          410,
+          1
+        ],
+        [
+          412,
+          1
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          0
+        ]
+      ],
+      "sample_requests": 42360,
+      "sample_frames": 39685440,
+      "nonzero_sample_frames": 38885129,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "enlisted_save_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+    "earned_save_sha256": "f570ab47b45354d110109867d7e8109f7bc400d75954d0c4075e906666529777",
+    "earned_save_hex": "0001000000020300000000a30000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+    "physical_input_sha256": "1c68cf99aec1b0d5d8ad9679d4bc1b3d994ee311dccd403a9089f0b78d044849",
+    "prefix_sha256": "32944648796bb2ff69c51260f12821ed6f7ad192e5e12758e5818a83031e41a1",
+    "canonical_prefix_sha256": "775650e1fd26ece901cf5b33835044fa090aee5b2c5d166e5f31ddb03d84551f",
+    "canonical_earned_save_exact": true,
+    "flight_state_seeded": false
+  },
+  "release_debug_exact": [
+    "native input-driver controls",
+    "driver/canonical earned saves",
+    "original-input full native traces",
+    "original-input final native RAM",
+    "counters",
+    "strict reports"
+  ],
+  "default_profile_original_comparison": {
+    "input_stage_intervals": 36,
+    "frame_bodies": 184,
+    "landing_bodies": 96,
+    "actual_config_write": true
+  },
+  "first_repeat": {
+    "source_iteration": 22502,
+    "previous_iteration": 22501,
+    "game_tick": 360,
+    "same_observed_fields_records_pages": true,
+    "source_pal": [
+      20052,
+      20053
+    ],
+    "native_tick": 361,
+    "snapshot_range": [
+      22500,
+      22504
+    ],
+    "snapshots_verified_against_complete_traces": true,
+    "interpretation": "Investigate source C0EFD4 entry resumption versus actual retired updates; no frame exclusions or clock/physics changes accepted"
+  }
+}

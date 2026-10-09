@@ -1,5 +1,18 @@
 # Native port handoff — 2026-10-09
 
+Independent mission-three successful recording (2026-10-09): the original
+now earns its objective, geared runway landing, grade one and menu return. All
+27,110 trace boundaries, consumed controls and final RAM reproduce without
+the validation controller. Independent native Release/Debug also succeed and
+agree on traces, RAM, counters and saves. Whole-flight state parity remains
+unaccepted: the first 360 boundaries match, then the source repeats the same
+observed tick/state at loop 22,502 while native advances. Ten verified RAM
+snapshots retain that discrepancy; reference entry-resumption accounting is
+the next investigation. The strict gate correctly fails. Native geared-input
+qualification and canonical replay pass in both builds; the default profile
+still passes its original source gate. Gameplay/Escape are unchanged. See
+`analysis/native_independent_mission_success_milestone.md`.
+
 Independent mission-three recording (2026-10-09): a complete failed flight
 now matches all 5,216 record cores and camera/control/target state across 326
 boundaries through C11788 crash/reset. The generated ordinary-key recording
