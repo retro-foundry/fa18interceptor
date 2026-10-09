@@ -5,9 +5,19 @@ Independent whole demo recording: first flight matches 2,046 boundaries, all
 restart preserve all2,062 distinct gameplay states. Strict drawing remains
 1,235/2,046 and full fixed-offset failures remain reported. See
 `analysis/native_independent_demo_trace_milestone.md`. All-mission independent
-flights and equivalent elapsed-time HUD assessment remain open. Plain Escape
-from Free Flight now reproduces the user's automatic mode-one reentry; this
-has priority over further trace work. Existing return check used Shift+Escape.
+flights and equivalent elapsed-time HUD assessment remain open.
+
+Latest control direction (2026-10-09): keep original plain-Escape restart
+behaviour. The user confirmed that automatic Free Flight reentry is expected
+and requested dropping the proposed change. The uncommitted SDL Escape-to-menu
+override and its tests were removed. C0F992 preserves the selected mode;
+modified Escape uses the existing abandonment/reset path. The earlier
+menu-return check used Shift+Escape. This is no longer an outstanding fix.
+Release/Debug and canonical Release are rebuilt with the original controls;
+host-key/frontend checks and cleanup pass in both configurations. Original
+input parity passes all 2,512 pending cases, 12,576 command parents/returns and
+16 menu Delete cases with a diagnostic 120-second allowance. The unchanged
+CTest's 15-second oracle limit timed out twice; its test source was preserved.
 
 ## Current restart summary — 2026-10-09
 

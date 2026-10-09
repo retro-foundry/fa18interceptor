@@ -7,9 +7,19 @@ automatic restart preserve all 2,062 distinct gameplay states. The viewport wait
 spans33 PAL ticks in both runs despite different loop counts. Strict drawing and
 fixed-offset failures remain reported. See
 `analysis/native_independent_demo_trace_milestone.md`. All-mission independent
-flights and equivalent elapsed-time HUD assessment remain open. Latest priority:
-plain Escape from Free Flight briefly returns to menu then reselects option two.
-This is reproduced; the earlier return check used Shift+Escape. No fix claimed yet.
+flights and equivalent elapsed-time HUD assessment remain open.
+
+Escape behaviour (2026-10-09): the user confirmed that plain Escape restarting
+the selected Free Flight mode is original behaviour and requested keeping it.
+The proposed SDL Escape-to-menu override and its tests were dropped before
+commit. C0F992 preserves the mode for restart; modified Escape follows the
+existing abandonment/reset path. The earlier menu-return check used Shift+Escape.
+Release/Debug were rebuilt and canonical Release refreshed with the original
+input code. Both builds pass host-key/frontend checks and artifact cleanup.
+The original-input CTest hit its unchanged 15-second oracle timeout twice;
+the same comparison passes with a diagnostic 120-second allowance: 2,512
+pending-input cases, 12,576 command parents/returns and 16 menu Delete cases.
+No test timeout or gameplay source was changed.
 
 Initial startup sorting (2026-10-09) is now verified, completing that requested
 check together with qualification entry. The actual C0F812 stack frame and
