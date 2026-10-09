@@ -150,6 +150,9 @@ int main(int argc,char **argv) {
         if(read_error || close_error) {fputs("Cannot finish reading replay\n",stderr);goto done;}
     }
     if(!game || !native_frontend_open(game,adf,save_dir,error,sizeof error)) { fprintf(stderr,"%s\n",game?error:"Allocation failed"); goto done; }
+    if(!native_pcm_filter_begin(&game->audio.output_filter,48000)) {
+        fputs("Cannot configure native A500 PCM output filter\n",stderr);goto done;
+    }
     if(input) { game->begin_update=native_replay_update;game->update_context=&loop; }
     if(audio_trace_path) {
         if(!native_audio_trace_open(&audio_trace,audio_trace_path,(size_t)capture_budget_mib*1024*1024)) goto done;

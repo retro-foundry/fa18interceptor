@@ -1,5 +1,17 @@
 # Native port runner
 
+Native PCM filter (2026-10-09): playable output now uses the original A500
+fixed and enabled LED cascades, with 56 bytes of fixed state and no gameplay
+allocation. Release/Debug match every sample in the complete 13,230,014-frame
+original cold-start response. The complete native Demo also matches original
+filter processing, preserving every audio event and game-data byte. All
+33,800 intro/Free Flight/final-combat frames preserve game state and agree
+across builds, with zero heap violations; music transitions pass. Visible
+Free Flight presents all 6,500 frames, with 0.518 ms maximum audio work; one
+406 ms SDL input stall still fails the 20 ms frame gate. Original game
+onset/handoff alignment, broader drawing/performance and deferred state
+cleanup remain separate. See [filter integration evidence](../../analysis/native_pcm_filter_milestone.md).
+
 Original filter evidence (2026-10-09): the existing LED interface reports
 filter enabled at all 21,069 Demo boundaries, preserving complete original
 PCM/execution and every earlier event row. Two independent cold starts also

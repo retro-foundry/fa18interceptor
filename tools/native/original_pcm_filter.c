@@ -26,7 +26,8 @@ static double softfloat_tan(double value) {
 }
 #include "original_pcm_filter.h"
 int main(int argc,char **argv) {
-    if(argc!=6) return 1;
+    const int plain=argc==7 && !strcmp(argv[6],"--plain-pcm");
+    if(argc!=6 && !plain) return 1;
     FILE *input=fopen(argv[1],"rb"),*output=fopen(argv[2],"wb");
     if(!input || !output) return 2;
     unsigned rate=(unsigned)strtoul(argv[3],NULL,10);
@@ -41,6 +42,10 @@ int main(int argc,char **argv) {
     size_t count;
     while((count=fread(source,sizeof *source,2,input))==2) {
         for(unsigned channel=0;channel<2;++channel) {
+            if(plain) {
+                result[channel]=(int16_t)filter(source[channel],&states[channel]);
+                continue;
+            }
             /* driveclick.c:driveclick_mix scales even unfiltered Paula
              * input by 2/3 when its wave resources are initialized. With
              * muted clicks and original x2 FINISH_DATA, invert uniquely;

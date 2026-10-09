@@ -61,6 +61,13 @@ target_sources(fa18_native_runtime PRIVATE host_input.c ../amiga/host_keys.c)
 target_sources(fa18_native_runtime PRIVATE ../amiga/sdl_memory.c)
 target_sources(fa18_native_runtime PRIVATE ../amiga/runtime_memory.c)
 add_executable(fa18_native main.c)
+# audio.c:filter uses ordered float operations, including its double denormal
+# offset. Avoid fused contraction or fast-math rewriting in the native mixer.
+if(MSVC)
+    set_source_files_properties(../game/native/audio.c PROPERTIES COMPILE_OPTIONS "/fp:strict")
+else()
+    set_source_files_properties(../game/native/audio.c PROPERTIES COMPILE_OPTIONS "-ffp-contract=off;-fno-fast-math")
+endif()
 foreach(native_target fa18_native_runtime fa18_native)
     if(MSVC)
         target_compile_options(${native_target} PRIVATE /FI${CMAKE_CURRENT_SOURCE_DIR}/../amiga/runtime_memory.h)
@@ -92,14 +99,20 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_preallocation_output
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_preallocation.py
                 --runner $<TARGET_FILE:fa18_native>
-                --reference ${CMAKE_CURRENT_SOURCE_DIR}/../../analysis/figures/native_pcm_averaging_checkpoint.json
+                --reference ${CMAKE_CURRENT_SOURCE_DIR}/../../analysis/figures/native_pcm_filter_checkpoint.json
                 --out ${CMAKE_CURRENT_BINARY_DIR}/preallocation-output-$<CONFIG>)
     set_tests_properties(fa18_native_preallocation_output PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_audio_trace
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_native_audio_trace.py
                 --runner $<TARGET_FILE:fa18_native>)
     set_tests_properties(fa18_native_audio_trace PROPERTIES RUN_SERIAL TRUE)
+    add_executable(fa18_native_pcm_filter_test ../../tools/native/native_pcm_filter_test.c)
+    target_link_libraries(fa18_native_pcm_filter_test PRIVATE fa18_native_runtime)
     if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/engine9000-src/ami9000/sources/src/audio.c)
+        add_test(NAME fa18_native_pcm_filter
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_native_pcm_filter.py
+                --filter $<TARGET_FILE:fa18_native_pcm_filter_test>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/pcm-filter-$<CONFIG>)
         set(original_averaging ${CMAKE_CURRENT_BINARY_DIR}/original_pcm_averaging.h)
         add_custom_command(OUTPUT ${original_averaging}
             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/extract_original_pcm_averaging.py

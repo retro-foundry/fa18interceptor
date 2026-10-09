@@ -17,6 +17,17 @@ typedef struct {
 } NativeAudioEvent;
 typedef void (*NativeAudioObserver)(void *context,const NativeAudioEvent *event);
 
+/* Original A500 audio.c:filter, with the observed enabled LED cascade.
+ * Coefficients and the two stereo histories are ordinary fixed host state. */
+typedef struct {
+    float rc1,rc2,rc3,rc4,rc5;
+} NativePcmFilterChannel;
+typedef struct {
+    NativePcmFilterChannel channels[2];
+    float fixed_first,fixed_second,led;
+    unsigned rate;
+} NativePcmFilter;
+
 typedef struct {
     VoiceOutput channels[4];
     unsigned ticks, publications;
@@ -32,7 +43,14 @@ typedef struct {
     NativeAudioObserver observe;
     void *observe_context;
     unsigned pending, sample_requests, sample_frames, nonzero_frames;
+    NativePcmFilter output_filter;
 } NativeAudio;
+
+/* Configure once before output starts; only source-validated host rates.
+ * Unconfigured low-level audio components expose pre-filter PCM for oracles.
+ * The playable entry always enables the A500/LED profile before its loop. */
+int native_pcm_filter_begin(NativePcmFilter *filter,unsigned rate);
+void native_pcm_filter_process(NativePcmFilter *filter,int16_t *stereo,unsigned frames,unsigned rate);
 
 /* Select the current frontend, as with the existing native data binding. */
 void native_audio_bind(NativeAudio *audio);

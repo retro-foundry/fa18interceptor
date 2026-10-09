@@ -38,6 +38,7 @@ int main(int argc,char **argv) {
     if(!game || !native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {
         fprintf(stderr,"Music transition startup: %s\n",game?error:"allocation failed");return 1;
     }
+    assert(native_pcm_filter_begin(&game->audio.output_filter,48000)); /* Playable main's output profile. */
     const unsigned mode=digit==1?3:digit==2?1:digit==5?9:6;
     int16_t stereo[1920];unsigned flight_checks=0;
     const unsigned end=digit==2?12000:digit==7?11000:9000;

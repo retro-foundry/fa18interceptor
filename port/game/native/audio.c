@@ -5,6 +5,38 @@
 #include <string.h>
 
 static NativeAudio *active_audio;
+int native_pcm_filter_begin(NativePcmFilter *filter,unsigned rate) {
+    /* Original rc_calculate_a0, double M_PI and SoftFloat tangent/rounding:
+     * 6200/20000 Hz fixed poles, followed by the three 7000 Hz LED poles.
+     * Nine significant decimal digits preserve the exact source float bits.
+     * Initialization never computes transcendental functions in gameplay. */
+    NativePcmFilter fresh={0};fresh.rate=rate;
+    if(rate==44100) {
+        fresh.fixed_first=0.48603487f;fresh.fixed_second=0.931495488f;fresh.led=0.521334589f;
+    } else if(rate==48000) {
+        fresh.fixed_first=0.462153852f;fresh.fixed_second=0.881853998f;fresh.led=0.49654904f;
+    } else return 0;
+    *filter=fresh;return 1;
+}
+void native_pcm_filter_process(NativePcmFilter *filter,int16_t *stereo,unsigned frames,unsigned rate) {
+    if(!filter->rate || filter->rate!=rate) {
+        fputs("native PCM filter requires its configured output rate\n",stderr);abort();
+    }
+    for(unsigned frame=0;frame<frames;++frame) for(unsigned channel=0;channel<2;++channel) {
+        NativePcmFilterChannel *history=&filter->channels[channel];
+        const int input=stereo[2*frame+channel];
+        /* audio.c:filter FILTER_MODEL_A500, led_filter_on=1. Retain float
+         * evaluation order and the original double denormal offset. */
+        history->rc1=(float)(filter->fixed_first*input+(1.0f-filter->fixed_first)*history->rc1+1E-10);
+        history->rc2=filter->fixed_second*history->rc1+(1.0f-filter->fixed_second)*history->rc2;
+        history->rc3=filter->led*history->rc2+(1-filter->led)*history->rc3;
+        history->rc4=filter->led*history->rc3+(1-filter->led)*history->rc4;
+        history->rc5=filter->led*history->rc4+(1-filter->led)*history->rc5;
+        int output=(int)history->rc5;
+        if(output>32767) output=32767;else if(output<-32768) output=-32768;
+        stereo[2*frame+channel]=(int16_t)output;
+    }
+}
 void native_audio_bind(NativeAudio *audio) { active_audio=audio; }
 void native_audio_request_channel(int channel) {
     if(channel<0 || channel>=4 || !active_audio) {
@@ -124,8 +156,10 @@ void native_audio_render(NativeAudio *audio,int16_t *stereo,unsigned frames,unsi
             int output=(int)(area/3546895)*2;
             if(c==0 || c==3) left+=output; else right+=output;
         }
-        if(left || right) ++audio->nonzero_frames;
         stereo[2*frame]=(int16_t)left;stereo[2*frame+1]=(int16_t)right;
     }
+    if(audio->output_filter.rate) native_pcm_filter_process(&audio->output_filter,stereo,frames,rate);
+    for(unsigned frame=0;frame<frames;++frame)
+        if(stereo[2*frame] || stereo[2*frame+1]) ++audio->nonzero_frames;
     audio->sample_frames+=frames;
 }
