@@ -1,5 +1,13 @@
 # Native port runner
 
+Original startup audio fetch (2026-10-10): the channel-2 zero word at
+call 2,178 is discarded by the unchanged source startup state machine.
+All 66,560 priming-word/attachment cases and five corrupt-context controls
+pass after complete recording revalidation. Both uncatalogued words stay
+retained; channel 1 at call 94 remains unresolved. Native onset, handoff
+timing and whole-waveform acceptance remain open. Runtime is unchanged.
+See [startup-fetch evidence](../../analysis/native_original_audio_startup_fetch_milestone.md).
+
 Complete sound fetch contents (2026-10-10): all 21,069 original replay calls
 retain 2,939,342 actual DMA words, with complete PCM/RAM/state/register/video
 and the earlier event log unchanged. Every word matches retained original RAM;

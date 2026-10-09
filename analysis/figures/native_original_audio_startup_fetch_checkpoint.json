@@ -1,0 +1,113 @@
+{
+  "scope": "Recorded channel-2 idle startup old-pointer fetch is discarded by unchanged original functions. Ordered state/sample use only; beam-to-PCM timing, native onset/handoffs and the channel-1 call-94 zero word remain open.",
+  "authority": {
+    "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+    "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+    "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+    "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+  },
+  "dma_stream_sha256": "4f9913ae1b6199455f7c4db01f168eb495a7f14392d5f791d4ead022eba1f77e",
+  "event_log_sha256": "ceb40f89a5b175047fc7e9621d8c1ae2763580d64ae8146d4bcac90ad8a44bea",
+  "source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+  "extracted_header_sha256": "f44cf269fd99591c139d28b02607294317351d72edabc4333d2093e8f80e7026",
+  "extracted_functions": [
+    "STATIC_INLINE bool usehacks(",
+    "static void zerostate(",
+    "static void update_volume(",
+    "uae_u16 audio_dmal(",
+    "static int isirq(",
+    "static void setirq(",
+    "static void newsample(",
+    "void event_setdsr(",
+    "static void setdr(",
+    "static void loaddat (",
+    "static void loaddat_1 (",
+    "static void loadper1(",
+    "static void loadperm1(",
+    "static void loadper (",
+    "static bool audio_state_channel2 (",
+    "uaecptr audio_getpt("
+  ],
+  "harness_sha256": "d3c3cfd4b5843dc52b551b0ce5b525ea37930decb36f486268d3f822b7a3a7a5",
+  "reference_executable_sha256": "3260c4587b668156c1f3281d4259cf5b435ea7380d07d07ee826d26de6d0db46",
+  "compiler": "gcc.EXE (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r4) 16.1.0",
+  "actual_context": {
+    "channel": 2,
+    "dma_enable": {
+      "kind": "write",
+      "call": 2178,
+      "hardware_frame": 2178,
+      "vpos": 63,
+      "hpos": 8,
+      "address": 14676118,
+      "value": 33284,
+      "source": 12910856,
+      "copper": false
+    },
+    "first_fetch": {
+      "call": 2178,
+      "source_frame": 2178,
+      "address": 0,
+      "value": 0,
+      "hpos": 21,
+      "vpos": 64,
+      "grid_index": 18453,
+      "register": 202
+    },
+    "second_fetch": {
+      "call": 2178,
+      "source_frame": 2178,
+      "address": 108736,
+      "value": 8701,
+      "hpos": 21,
+      "vpos": 65,
+      "grid_index": 18741,
+      "register": 202
+    },
+    "published_pointer": 108736,
+    "published_words": 2062,
+    "published_period": 358,
+    "published_volume": 10
+  },
+  "source_oracle": {
+    "startup_states": [
+      0,
+      1,
+      5,
+      2,
+      3
+    ],
+    "startup_word_emitted": false,
+    "first_payload_bytes": [
+      33,
+      253
+    ],
+    "prefetch_poison_and_attachment_cases": 66560
+  },
+  "rejected_controls": [
+    "already-playing channel",
+    "lost old-pointer fetch",
+    "changed actual payload word",
+    "earlier DMA enable",
+    "manual data before first DMA"
+  ],
+  "classification": "startup prefetch, not a sample-buffer word",
+  "native_runtime_changed": false,
+  "native_waveform_accepted": false,
+  "remaining_uncatalogued_fetch": {
+    "channel": 1,
+    "call": 94,
+    "address": 154226,
+    "value": 0,
+    "beam": [
+      19,
+      277
+    ]
+  },
+  "evidence": {
+    "report": "build/native-audio/dma-complete-demo/startup-fetch.json",
+    "report_sha256": "16379fa99ee5a6639256a75cb05f5ad5b67761f55b57709a465f7d70a81861b5",
+    "tool_sha256": "df87a49501b63d23cc14490b64880ad7f3d60e7dff8e7c692e4e3b1fd1ed6b55"
+  }
+}

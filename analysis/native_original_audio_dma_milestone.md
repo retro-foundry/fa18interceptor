@@ -26,7 +26,10 @@ Two actual zero words remain outside the request catalogue: channel 1, call 94,
 address `025A72`, beam 19/277; and channel 2, call 2,178, address `000000`, beam
 21/64. Their exact beam positions are retained in the checkpoint. They are
 not discarded or treated as accepted native handoffs. Their source context
-still needs assessment during ordering/timing work.
+still needs assessment during ordering/timing work. The subsequent
+[startup check](native_original_audio_startup_fetch_milestone.md) classifies
+the channel-2 word as a discarded original startup prefetch using unchanged
+source functions. Channel 1 remains unresolved; both words stay retained.
 
 ## Connected capture and checks
 
