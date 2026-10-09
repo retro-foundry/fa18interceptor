@@ -1,5 +1,12 @@
 # Independent complete recorded demo trace
 
+2026-10-09 follow-up: V2 corrects the mislabeled V1 "selected_record" field
+(actually mouse coordinates) and adds true target selection and HUD gates.
+The complete selected-target episode now follows original timing/text rules;
+the reported ALT/HDG question is assessed under the cadence policy. Existing
+common fields, cores, pages, final RAM and counters remain identical. See
+`native_demo_hud_timing_milestone.md`. Other full-flight drawing remains open.
+
 2026-10-09. Both actual runners now produce bounded read-only JSONL diagnostics
 at their C0EFD4 pre-input boundary. This replaces one MiB of retained RAM per
 update without supplying native state, replaying clocks or masking HUD pixels.
@@ -63,6 +70,6 @@ flights and equivalent elapsed-time HUD assessment remain open. Restart evidence
 covers named gameplay fields, not every arena byte or strict pictures. Recorded
 audio/filter, visible performance and typed-state cleanup remain unfinished.
 
-Latest user report: plain Escape from Free Flight returns briefly to menu then
-reselects option two. The earlier return check used Shift+Escape. Investigation
-has reproduced the plain-Escape reentry through C0F992/C0FCB4 with mode one.
+Latest user direction: retain original plain-Escape restart through
+C0F992/C0FCB4. The proposed override was dropped; the earlier menu-return
+check used Shift+Escape. This is no longer an outstanding fix.

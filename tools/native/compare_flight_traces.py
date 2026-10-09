@@ -11,7 +11,8 @@ import json
 from pathlib import Path
 
 
-GAME_FIELDS = ('stage', 'game_tick', 'phase', 'selected_record', 'controls',
+GAME_FIELDS = ('stage', 'game_tick', 'phase', 'mouse_coordinates', 'selected_record',
+               'mode', 'target_record', 'controls',
                'observer', 'camera_matrix', 'view_matrix', 'view_pan_rotate',
                'view_attitude', 'view_side')
 
@@ -20,11 +21,22 @@ def read_trace(path):
     opener = gzip.open if path.suffix == '.gz' else open
     with opener(path, 'rt', encoding='ascii') as stream:
         header = json.loads(next(stream))
-        assert header['format'] == 'FA18_FLIGHT_TRACE_V1'
+        assert header['format'] in ('FA18_FLIGHT_TRACE_V1', 'FA18_FLIGHT_TRACE_V2')
         assert header['boundary'] == 'C0EFD4/pre-input'
         assert (header['record_address'], header['record_stride'], header['record_size'],
                 header['record_count'], header['plane_bytes']) == (0xC46184, 512, 164, 16, 8000)
         fields = header['fields']
+        if header['format'] == 'FA18_FLIGHT_TRACE_V1':
+            # V1's mislabeled field is INPUT_X/INPUT_Y, not SELECTED_RECORD.
+            # Keep the old bytes and their addresses; do not invent missing
+            # target-selection evidence when reading retained V1 recordings.
+            legacy = next(f for f in fields if f['name'] == 'selected_record')
+            assert (legacy['address'], legacy['size']) == (0xC45776, 4)
+            legacy['name'] = 'mouse_coordinates'
+        else:
+            contract = {f['name']: (f['address'], f['size']) for f in fields}
+            assert contract['mouse_coordinates'] == (0xC45776, 4)
+            assert contract['selected_record'] == (0xC459C0, 2)
         assert len({f['name'] for f in fields}) == len(fields)
         rows, ended, previous = {}, False, 0
         for line in stream:
@@ -56,16 +68,19 @@ def number(row, name):
 
 
 def compare(source, native, source_first, native_first, count):
+    assert source[source_first]['fields'].keys() == native[native_first]['fields'].keys()
+    game_fields = [name for name in GAME_FIELDS if name in source[source_first]['fields']]
     report = dict(compared=count, record_cores_compared=16 * count,
                   record_cores_matching=0, complete_record_boundaries_matching=0,
                   camera_and_controls_matching=0, complete_pages_matching=0,
                   timer_and_hud_matching=0, first_differences=[],
-                  first_record_difference=None, first_game_difference=None, first_page_difference=None)
+                  first_record_difference=None, first_game_difference=None, first_page_difference=None,
+                  game_fields_compared=game_fields)
     for offset in range(count):
         a, b = source[source_first + offset], native[native_first + offset]
         assert a['pages_valid'] and b['pages_valid'], 'missing complete drawing page evidence'
         record_changes = [i for i in range(16) if a['records'][i] != b['records'][i]]
-        game_changes = [name for name in GAME_FIELDS if a['fields'][name] != b['fields'][name]]
+        game_changes = [name for name in game_fields if a['fields'][name] != b['fields'][name]]
         timed_changes = [name for name in a['fields'] if name not in GAME_FIELDS and a['fields'][name] != b['fields'][name]]
         page_changes = [i for i in range(8) if a['pages'][i] != b['pages'][i]]
         report['record_cores_matching'] += 16 - len(record_changes)
@@ -121,7 +136,7 @@ def compare_stage_events(source, native, source_first, source_last, native_first
                 result.append(dict(stage=stage, first=i, last=i, states=[], changes=[]))
             run = result[-1]
             payload = b''.join(bytes.fromhex(v) for v in row['records']) + b''.join(
-                bytes.fromhex(row['fields'][name]) for name in GAME_FIELDS)
+                bytes.fromhex(row['fields'][name]) for name in GAME_FIELDS if name in row['fields'])
             digest = hashlib.sha256(payload).hexdigest()
             if not run['states'] or digest != run['states'][-1]:
                 run['states'].append(digest)

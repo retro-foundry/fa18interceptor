@@ -1,0 +1,561 @@
+{
+  "previous_execution_preserved": {
+    "source": 4892,
+    "native": 3330
+  },
+  "assets_sha256": "e914d47a2a77efa9fc75ce5285b1b3d68968847c421e54af78e1ce77b704592b",
+  "input_hashes": {
+    "captures\\native\\demo01\\input.fa18in": "91d0dd0defbace4253fb307e6c5bef458af4cf86defc850d13f19068b3159657",
+    "captures\\native\\demo01\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "local\\media\\fa18.adf": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "trace_sha256": {
+    "source": "4e73c29240172be97e946b4a174b39a72f24eb21db825b6f931fe705faa34827",
+    "native": "2911425a6fb9878c9844d0a6239fd4f3d48523c64f496e6c301309a6611aac8d"
+  },
+  "source": {
+    "first": 2444,
+    "last": 2817,
+    "transitions_checked": 374,
+    "sampled_second_changes": 66,
+    "fresh_lines_checked": 56,
+    "elapsed_intervals_checked": 374,
+    "cached_lines_checked": 318,
+    "context_suppressed": 46,
+    "redraw_events": [
+      2600,
+      2657,
+      2681,
+      2687,
+      2704,
+      2732,
+      2752,
+      2774,
+      2806
+    ],
+    "page_events": [
+      {
+        "iteration": 2444,
+        "tick": 265,
+        "page": 1,
+        "sampled_second_events_before_hud": 0,
+        "elapsed_ms": 0,
+        "prelude_seconds": 310986739,
+        "prelude_fraction": 162427,
+        "message": "    M1G-29   ALT:  5110   "
+      },
+      {
+        "iteration": 2452,
+        "tick": 273,
+        "page": 2,
+        "sampled_second_events_before_hud": 2,
+        "elapsed_ms": 1081,
+        "prelude_seconds": 310986740,
+        "prelude_fraction": 242444,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2466,
+        "tick": 287,
+        "page": 3,
+        "sampled_second_events_before_hud": 4,
+        "elapsed_ms": 3003,
+        "prelude_seconds": 310986742,
+        "prelude_fraction": 162474,
+        "message": "    M1G-29   SPD:  612    "
+      },
+      {
+        "iteration": 2481,
+        "tick": 302,
+        "page": 1,
+        "sampled_second_events_before_hud": 6,
+        "elapsed_ms": 4985,
+        "prelude_seconds": 310986744,
+        "prelude_fraction": 142506,
+        "message": "    M1G-29   ALT:  4985   "
+      },
+      {
+        "iteration": 2496,
+        "tick": 317,
+        "page": 2,
+        "sampled_second_events_before_hud": 8,
+        "elapsed_ms": 7067,
+        "prelude_seconds": 310986746,
+        "prelude_fraction": 222538,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2509,
+        "tick": 330,
+        "page": 3,
+        "sampled_second_events_before_hud": 10,
+        "elapsed_ms": 9009,
+        "prelude_seconds": 310986748,
+        "prelude_fraction": 162566,
+        "message": "    M1G-29   SPD:  443    "
+      },
+      {
+        "iteration": 2523,
+        "tick": 344,
+        "page": 1,
+        "sampled_second_events_before_hud": 12,
+        "elapsed_ms": 11111,
+        "prelude_seconds": 310986750,
+        "prelude_fraction": 262596,
+        "message": "    M1G-29   ALT:  4415   "
+      },
+      {
+        "iteration": 2538,
+        "tick": 359,
+        "page": 2,
+        "sampled_second_events_before_hud": 14,
+        "elapsed_ms": 13073,
+        "prelude_seconds": 310986752,
+        "prelude_fraction": 222628,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2553,
+        "tick": 374,
+        "page": 3,
+        "sampled_second_events_before_hud": 16,
+        "elapsed_ms": 15035,
+        "prelude_seconds": 310986754,
+        "prelude_fraction": 182660,
+        "message": "    M1G-29   SPD:  627    "
+      },
+      {
+        "iteration": 2569,
+        "tick": 390,
+        "page": 1,
+        "sampled_second_events_before_hud": 18,
+        "elapsed_ms": 17077,
+        "prelude_seconds": 310986756,
+        "prelude_fraction": 222694,
+        "message": "    M1G-29   ALT:  3840   "
+      },
+      {
+        "iteration": 2584,
+        "tick": 405,
+        "page": 2,
+        "sampled_second_events_before_hud": 20,
+        "elapsed_ms": 19159,
+        "prelude_seconds": 310986758,
+        "prelude_fraction": 302726,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2598,
+        "tick": 419,
+        "page": 3,
+        "sampled_second_events_before_hud": 22,
+        "elapsed_ms": 21041,
+        "prelude_seconds": 310986760,
+        "prelude_fraction": 182756,
+        "message": "    M1G-29   SPD:  541    "
+      },
+      {
+        "iteration": 2612,
+        "tick": 433,
+        "page": 1,
+        "sampled_second_events_before_hud": 24,
+        "elapsed_ms": 23083,
+        "prelude_seconds": 310986762,
+        "prelude_fraction": 222786,
+        "message": "    M1G-29   ALT:  3920   "
+      },
+      {
+        "iteration": 2625,
+        "tick": 446,
+        "page": 2,
+        "sampled_second_events_before_hud": 26,
+        "elapsed_ms": 25085,
+        "prelude_seconds": 310986764,
+        "prelude_fraction": 222814,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2639,
+        "tick": 460,
+        "page": 3,
+        "sampled_second_events_before_hud": 28,
+        "elapsed_ms": 27067,
+        "prelude_seconds": 310986766,
+        "prelude_fraction": 202844,
+        "message": "    M1G-29   SPD:  624    "
+      },
+      {
+        "iteration": 2653,
+        "tick": 474,
+        "page": 1,
+        "sampled_second_events_before_hud": 30,
+        "elapsed_ms": 29129,
+        "prelude_seconds": 310986768,
+        "prelude_fraction": 262874,
+        "message": "    M1G-29   ALT:  4205   "
+      },
+      {
+        "iteration": 2684,
+        "tick": 505,
+        "page": 2,
+        "sampled_second_events_before_hud": 36,
+        "elapsed_ms": 35455,
+        "prelude_seconds": 310986774,
+        "prelude_fraction": 582942,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2692,
+        "tick": 513,
+        "page": 3,
+        "sampled_second_events_before_hud": 38,
+        "elapsed_ms": 37217,
+        "prelude_seconds": 310986776,
+        "prelude_fraction": 342960,
+        "message": "    M1G-29   SPD:  618    "
+      },
+      {
+        "iteration": 2701,
+        "tick": 522,
+        "page": 1,
+        "sampled_second_events_before_hud": 40,
+        "elapsed_ms": 39159,
+        "prelude_seconds": 310986778,
+        "prelude_fraction": 282980,
+        "message": "    M1G-29   ALT:  4515   "
+      },
+      {
+        "iteration": 2712,
+        "tick": 533,
+        "page": 2,
+        "sampled_second_events_before_hud": 42,
+        "elapsed_ms": 42022,
+        "prelude_seconds": 310986781,
+        "prelude_fraction": 143005,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2717,
+        "tick": 538,
+        "page": 3,
+        "sampled_second_events_before_hud": 44,
+        "elapsed_ms": 43203,
+        "prelude_seconds": 310986782,
+        "prelude_fraction": 323016,
+        "message": "    M1G-29   SPD:  618    "
+      },
+      {
+        "iteration": 2726,
+        "tick": 547,
+        "page": 1,
+        "sampled_second_events_before_hud": 46,
+        "elapsed_ms": 45265,
+        "prelude_seconds": 310986784,
+        "prelude_fraction": 383036,
+        "message": "    M1G-29   ALT:  4630   "
+      },
+      {
+        "iteration": 2735,
+        "tick": 556,
+        "page": 2,
+        "sampled_second_events_before_hud": 48,
+        "elapsed_ms": 47447,
+        "prelude_seconds": 310986786,
+        "prelude_fraction": 563056,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2744,
+        "tick": 565,
+        "page": 3,
+        "sampled_second_events_before_hud": 50,
+        "elapsed_ms": 49609,
+        "prelude_seconds": 310986788,
+        "prelude_fraction": 723076,
+        "message": "    M1G-29   SPD:  668    "
+      },
+      {
+        "iteration": 2755,
+        "tick": 576,
+        "page": 1,
+        "sampled_second_events_before_hud": 52,
+        "elapsed_ms": 51952,
+        "prelude_seconds": 310986791,
+        "prelude_fraction": 63101,
+        "message": "    M1G-29   ALT:  4780   "
+      },
+      {
+        "iteration": 2761,
+        "tick": 582,
+        "page": 2,
+        "sampled_second_events_before_hud": 54,
+        "elapsed_ms": 53233,
+        "prelude_seconds": 310986792,
+        "prelude_fraction": 343114,
+        "message": "    M1G-29   HDG:  182    "
+      },
+      {
+        "iteration": 2770,
+        "tick": 591,
+        "page": 3,
+        "sampled_second_events_before_hud": 56,
+        "elapsed_ms": 55175,
+        "prelude_seconds": 310986794,
+        "prelude_fraction": 283134,
+        "message": "    M1G-29   SPD:  702    "
+      },
+      {
+        "iteration": 2809,
+        "tick": 630,
+        "page": 1,
+        "sampled_second_events_before_hud": 64,
+        "elapsed_ms": 63403,
+        "prelude_seconds": 310986802,
+        "prelude_fraction": 503220,
+        "message": "    M1G-29   ALT:  5050   "
+      },
+      {
+        "iteration": 2816,
+        "tick": 637,
+        "page": 65535,
+        "sampled_second_events_before_hud": 65,
+        "elapsed_ms": 64724,
+        "prelude_seconds": 310986803,
+        "prelude_fraction": 823235,
+        "message": "                          "
+      },
+      {
+        "iteration": 2817,
+        "tick": 638,
+        "page": 0,
+        "sampled_second_events_before_hud": 65,
+        "elapsed_ms": 64905,
+        "prelude_seconds": 310986804,
+        "prelude_fraction": 3238,
+        "message": "                          "
+      }
+    ],
+    "first_context": 2657,
+    "first_page_request": 0,
+    "initial_second_change": true,
+    "game_ticks": [
+      264,
+      638
+    ]
+  },
+  "native": {
+    "first": 2407,
+    "last": 2780,
+    "transitions_checked": 374,
+    "sampled_second_changes": 25,
+    "fresh_lines_checked": 52,
+    "elapsed_intervals_checked": 374,
+    "cached_lines_checked": 322,
+    "context_suppressed": 46,
+    "redraw_events": [
+      2563,
+      2620,
+      2644,
+      2667,
+      2695,
+      2737,
+      2769,
+      2770
+    ],
+    "page_events": [
+      {
+        "iteration": 2407,
+        "tick": 265,
+        "page": 1,
+        "sampled_second_events_before_hud": 0,
+        "elapsed_ms": 0,
+        "prelude_seconds": 106,
+        "prelude_fraction": 540000,
+        "message": "    M1G-29   ALT:  5110   "
+      },
+      {
+        "iteration": 2430,
+        "tick": 288,
+        "page": 2,
+        "sampled_second_events_before_hud": 2,
+        "elapsed_ms": 1560,
+        "prelude_seconds": 108,
+        "prelude_fraction": 100000,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2459,
+        "tick": 317,
+        "page": 3,
+        "sampled_second_events_before_hud": 4,
+        "elapsed_ms": 3520,
+        "prelude_seconds": 110,
+        "prelude_fraction": 60000,
+        "message": "    M1G-29   SPD:  498    "
+      },
+      {
+        "iteration": 2489,
+        "tick": 347,
+        "page": 1,
+        "sampled_second_events_before_hud": 6,
+        "elapsed_ms": 5540,
+        "prelude_seconds": 112,
+        "prelude_fraction": 80000,
+        "message": "    M1G-29   ALT:  4360   "
+      },
+      {
+        "iteration": 2519,
+        "tick": 377,
+        "page": 2,
+        "sampled_second_events_before_hud": 8,
+        "elapsed_ms": 7560,
+        "prelude_seconds": 114,
+        "prelude_fraction": 100000,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2548,
+        "tick": 406,
+        "page": 3,
+        "sampled_second_events_before_hud": 10,
+        "elapsed_ms": 9520,
+        "prelude_seconds": 116,
+        "prelude_fraction": 60000,
+        "message": "    M1G-29   SPD:  490    "
+      },
+      {
+        "iteration": 2579,
+        "tick": 437,
+        "page": 1,
+        "sampled_second_events_before_hud": 12,
+        "elapsed_ms": 11620,
+        "prelude_seconds": 118,
+        "prelude_fraction": 160000,
+        "message": "    M1G-29   ALT:  3940   "
+      },
+      {
+        "iteration": 2611,
+        "tick": 469,
+        "page": 2,
+        "sampled_second_events_before_hud": 14,
+        "elapsed_ms": 13780,
+        "prelude_seconds": 120,
+        "prelude_fraction": 320000,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2647,
+        "tick": 505,
+        "page": 3,
+        "sampled_second_events_before_hud": 16,
+        "elapsed_ms": 16200,
+        "prelude_seconds": 122,
+        "prelude_fraction": 740000,
+        "message": "    M1G-29   SPD:  626    "
+      },
+      {
+        "iteration": 2670,
+        "tick": 528,
+        "page": 1,
+        "sampled_second_events_before_hud": 18,
+        "elapsed_ms": 17760,
+        "prelude_seconds": 124,
+        "prelude_fraction": 300000,
+        "message": "    M1G-29   ALT:  4545   "
+      },
+      {
+        "iteration": 2698,
+        "tick": 556,
+        "page": 2,
+        "sampled_second_events_before_hud": 20,
+        "elapsed_ms": 19660,
+        "prelude_seconds": 126,
+        "prelude_fraction": 200000,
+        "message": "    M1G-29   HDG:  166    "
+      },
+      {
+        "iteration": 2726,
+        "tick": 584,
+        "page": 3,
+        "sampled_second_events_before_hud": 22,
+        "elapsed_ms": 21540,
+        "prelude_seconds": 128,
+        "prelude_fraction": 80000,
+        "message": "    M1G-29   SPD:  739    "
+      },
+      {
+        "iteration": 2773,
+        "tick": 631,
+        "page": 1,
+        "sampled_second_events_before_hud": 25,
+        "elapsed_ms": 24720,
+        "prelude_seconds": 131,
+        "prelude_fraction": 260000,
+        "message": "    M1G-29   ALT:  5055   "
+      },
+      {
+        "iteration": 2779,
+        "tick": 637,
+        "page": 65535,
+        "sampled_second_events_before_hud": 25,
+        "elapsed_ms": 25120,
+        "prelude_seconds": 131,
+        "prelude_fraction": 660000,
+        "message": "                          "
+      },
+      {
+        "iteration": 2780,
+        "tick": 638,
+        "page": 0,
+        "sampled_second_events_before_hud": 25,
+        "elapsed_ms": 25180,
+        "prelude_seconds": 131,
+        "prelude_fraction": 720000,
+        "message": "                          "
+      }
+    ],
+    "first_context": 2620,
+    "first_page_request": 1,
+    "initial_second_change": false,
+    "game_ticks": [
+      264,
+      638
+    ]
+  },
+  "equivalent_initial_countdown_events": 7,
+  "negative_controls_rejected": [
+    "premature_page",
+    "lost_second_event",
+    "wrong_refreshed_text",
+    "wrong_held_text"
+  ],
+  "strict_drawing": 1235,
+  "strict_drawing_boundaries": 2046,
+  "acceptance": "Mode-three recorded target-info episode follows original sampled-second, context, redraw and formatting rules. Initial ALT/HDG divergence is allowed cadence under the existing timing policy. Complete flight drawing and all missions remain separate.",
+  "validation": {
+    "release_ctests": [
+      "fa18_native_hud",
+      "fa18_native_clock",
+      "fa18_native_flight_trace",
+      "fa18_native_artifact_cleanup"
+    ],
+    "debug_ctests": [
+      "fa18_native_artifact_policy",
+      "fa18_native_frontend",
+      "fa18_native_frame_times",
+      "fa18_native_artifact_cleanup"
+    ],
+    "release_ctest_seconds": 62.07,
+    "debug_ctest_seconds": 26.57,
+    "release_debug_complete_trace_and_assessment_identical": true,
+    "reference_rejections": [
+      "input_hash",
+      "trace_hash"
+    ],
+    "live_ram_cross_checks": [
+      "source2452",
+      "native2415"
+    ]
+  }
+}

@@ -43,6 +43,8 @@ def main():
     parser.add_argument('--runner', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--assess-existing', action='store_true', help='reuse the already retained complete trace evidence')
+    parser.add_argument('--source-evidence', type=Path,
+                        help='reuse a sealed, hashed original trace while independently running this native build')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     if args.assess_existing:
@@ -63,15 +65,26 @@ def main():
     with tempfile.TemporaryDirectory(prefix='demo-flight-trace-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         source_path, native_path = work / 'source.jsonl', work / 'native.jsonl'
-        source = subprocess.run([str(ROOT / 'build/recomp/fa18_recomp.exe'),
-            '--state', str(recording.with_name('state.bin')), '--rom', str(ROOT / 'local/system/kick13.rom'),
-            '--ports', 'off', '--input', str(recording), '--to-end', '--frames', '40000',
-            '--game-input-out', str(work / 'consumed.fa18in'), '--ram-out', str(work / 'source.dat')],
-            cwd=ROOT, env=dict(env, FA18_LOOP_TRACE=str(source_path)),
-            check=True, capture_output=True, text=True, timeout=180)
-        source_stats = json.loads(source.stdout)
+        if args.source_evidence:
+            evidence = json.loads((args.source_evidence / 'report.json').read_text())
+            assert evidence['input_hashes'] == hashes, 'reference input/media changed'
+            source_data = gzip.decompress((args.source_evidence / 'source.jsonl.gz').read_bytes())
+            assert hashlib.sha256(source_data).hexdigest() == evidence['source_trace_sha256']
+            source_path.write_bytes(source_data)
+            source_stats = evidence['source_run']
+            source_ram_hash = evidence['source_final_ram_sha256']
+            consumed = (args.source_evidence / 'consumed.fa18in').read_text()
+        else:
+            source = subprocess.run([str(ROOT / 'build/recomp/fa18_recomp.exe'),
+                '--state', str(recording.with_name('state.bin')), '--rom', str(ROOT / 'local/system/kick13.rom'),
+                '--ports', 'off', '--input', str(recording), '--to-end', '--frames', '40000',
+                '--game-input-out', str(work / 'consumed.fa18in'), '--ram-out', str(work / 'source.dat')],
+                cwd=ROOT, env=dict(env, FA18_LOOP_TRACE=str(source_path)),
+                check=True, capture_output=True, text=True, timeout=180)
+            source_stats = json.loads(source.stdout)
+            source_ram_hash = hashlib.sha256((work / 'source.dat').read_bytes()).hexdigest()
+            consumed = (work / 'consumed.fa18in').read_text()
         assert source_stats['iterations'] == 4892, source_stats
-        consumed = (work / 'consumed.fa18in').read_text()
         (args.out / 'consumed.fa18in').write_text(consumed)
         # The established C10D8A flight transition supplies this alignment;
         # no frame/image search or original-state injection is used.
@@ -103,7 +116,9 @@ def main():
             data = path.read_bytes()
             (args.out / f'{name}.jsonl.gz').write_bytes(gzip.compress(data, mtime=0))
             report[f'{name}_trace_sha256'] = hashlib.sha256(data).hexdigest()
-            report[f'{name}_final_ram_sha256'] = hashlib.sha256((work / f'{name}.dat').read_bytes()).hexdigest()
+            report[f'{name}_final_ram_sha256'] = source_ram_hash if name == 'source' else hashlib.sha256((work / f'{name}.dat').read_bytes()).hexdigest()
+        if args.source_evidence:
+            report['source_evidence_reused'] = str(args.source_evidence.resolve())
         (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
         print(json.dumps({k: v for k, v in report.items() if k.endswith('matching') or k.startswith('first_') and k != 'first_differences'}))
     for path, digest in hashes.items():

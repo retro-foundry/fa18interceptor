@@ -1,5 +1,13 @@
 # Active port source ownership
 
+The independently recorded target-info episode now obeys original clock,
+countdown, context/redraw and complete-text rules across all 374 transitions.
+This assesses the reported ALT/HDG difference under the accepted cadence policy.
+V2 fixes a diagnostic mouse field label and observes true target selection;
+Release/Debug agree and eight selected CTests pass. Strict whole-flight drawing
+and all-mission comparisons remain open. See
+[HUD timing evidence](../analysis/native_demo_hud_timing_milestone.md).
+
 Initial startup and qualification-entry sorting are verified. The real C0F812
 caller frame and complete C08F26 bootstrap match native lists, retained output
 and compared RAM. Release/Debug agree on 22 combined intervals, 60 lists and

@@ -6,7 +6,12 @@ It shares the 512 MiB capture budget with requested raw RAM. Independent origina
 whole-demo evidence matches all32,736 cores of the first flight and its complete
 gameplay restart sequence; strict drawing and later fixed-offset failures remain
 explicit. See [trace evidence](../../analysis/native_independent_demo_trace_milestone.md).
-All-mission whole flights and equivalent elapsed-time HUD assessment remain open.
+The reported ALT/HDG timing is now assessed across all 374 transitions in the
+selected-target episode. Both runs obey original clock, countdown, context,
+redraw and full-text rules; Release/Debug agree and wrong results are rejected.
+V2 corrects V1's mouse field label and observes actual target selection and HUD
+gates. Strict drawing and all-mission whole flights remain open. See
+[HUD timing evidence](../../analysis/native_demo_hud_timing_milestone.md).
 
 Initial startup and qualification-entry sorting are verified through the actual
 connected frontend. The original C0F812 LINK -14 frame and complete C08F26 call

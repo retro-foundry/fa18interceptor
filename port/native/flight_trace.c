@@ -10,13 +10,19 @@
 typedef struct { const char *name; uint32_t address; size_t size; } TraceField;
 static const TraceField fields[]={
     {"stage",0xc1820c,4}, {"game_tick",0xc458da,2},
-    {"phase",0xc458de,2}, {"selected_record",0xc45776,4},
+    {"phase",0xc458de,2}, {"mouse_coordinates",0xc45776,4},
+    {"selected_record",0xc459c0,2},
+    {"mode",0xc458a6,1}, {"target_record",0xc458dc,2},
     {"controls",0xc4582e,3}, {"observer",0xc45c32,24},
     {"camera_matrix",0xc45c20,18}, {"view_matrix",0xc45bd8,18},
     {"view_pan_rotate",0xc45a94,4}, {"view_attitude",0xc45a88,12},
     {"view_side",0xc458b2,1}, {"message_line",0xc4580a,26},
     {"message_drawn",0xc45ae4,2}, {"info_request",0xc45886,1},
     {"info_redraws",0xc4583c,1}, {"info_page",0xc459c4,2},
+    {"info_delay",0xc45887,1}, {"cockpit_flags",0xc458cc,2},
+    {"post_input_aux",0xc45795,1}, {"update_hud_mode",0xc45836,1},
+    {"context_select",0xc45785,1},
+    {"origin_detail_mode",0xc458ae,1},
     {"view_hold",0xc45891,1}, {"gauge_refresh",0xc45837,1},
     {"timer_flags",0xc458ce,2}, {"sample_seconds",0xc45af2,4},
     {"sample_fraction",0xc45af6,4}, {"previous_seconds",0xc45b02,4},
@@ -67,7 +73,7 @@ int fa18_flight_trace_open(FA18FlightTrace *trace,const char *path,size_t budget
     trace->file=fopen(path,"wb");
     if(!trace->file) {perror(path);trace->failed=1;return 0;}
     TraceRow row={0};
-    append(&row,"{\"format\":\"FA18_FLIGHT_TRACE_V1\",\"boundary\":\"C0EFD4/pre-input\","
+    append(&row,"{\"format\":\"FA18_FLIGHT_TRACE_V2\",\"boundary\":\"C0EFD4/pre-input\","
                 "\"record_address\":%u,\"record_stride\":512,\"record_size\":164,"
                 "\"record_count\":16,\"plane_bytes\":8000,\"fields\":[",0xc46184u);
     for(size_t i=0;i<sizeof fields/sizeof fields[0];++i)

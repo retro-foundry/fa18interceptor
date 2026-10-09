@@ -7,7 +7,22 @@ automatic restart preserve all 2,062 distinct gameplay states. The viewport wait
 spans33 PAL ticks in both runs despite different loop counts. Strict drawing and
 fixed-offset failures remain reported. See
 `analysis/native_independent_demo_trace_milestone.md`. All-mission independent
-flights and equivalent elapsed-time HUD assessment remain open.
+flights and remaining drawing assessment remain open.
+
+Reported ALT/HDG timing (2026-10-09) is assessed under the agreed cadence policy.
+Both independent mode-three recordings obey every elapsed accumulator,
+request/page and complete message result across the 374-transition selected-target
+episode. Original/native format 56/52 new lines, preserve 318/322 cached or blank
+lines and suppress the owner on 46 map-context passes each. Both first HDG events
+follow two changed-second events; seven initial page transitions agree at equivalent
+countdown events. Four wrong-page/clock/text mutations are rejected. V2 fixes
+a diagnostic label: V1's "selected_record" was actually mouse coordinates.
+The actual selected-record word and HUD gates are now observed. All prior common
+trace bytes, final RAM and counters are preserved; Release/Debug full traces and
+assessments agree. Eight selected CTests pass. Strict drawing remains 1,235/2,046;
+all-mission whole flights, other drawing differences, recorded audio/filter,
+visible performance and typed-state cleanup stay open. See
+`analysis/native_demo_hud_timing_milestone.md` and its checkpoint.
 
 Escape behaviour (2026-10-09): the user confirmed that plain Escape restarting
 the selected Free Flight mode is original behaviour and requested keeping it.

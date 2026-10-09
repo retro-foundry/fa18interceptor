@@ -5,7 +5,19 @@ Independent whole demo recording: first flight matches 2,046 boundaries, all
 restart preserve all2,062 distinct gameplay states. Strict drawing remains
 1,235/2,046 and full fixed-offset failures remain reported. See
 `analysis/native_independent_demo_trace_milestone.md`. All-mission independent
-flights and equivalent elapsed-time HUD assessment remain open.
+flights and remaining drawing assessment remain open.
+
+Reported target-info timing is now assessed: all 374 transitions in the actual
+mode-three recording's selected-target episode obey source elapsed/countdown,
+context/redraw and full-text rules. Both first HDG events follow two sampled-second
+changes; seven initial page transitions agree at equivalent countdown events. Release/Debug
+full native trace hashes and assessments agree; eight selected CTests and four
+wrong-result mutations pass. V2 corrects the mouse field mislabeled "selected
+record" in V1 and adds the true selected-record word and HUD gates. All old
+common trace bytes, counters and final RAM remain unchanged. Strict first-flight
+drawing remains 1,235/2,046; other drawing, all-mission whole-flight, original
+audio/filter, visible performance and state cleanup work remains open. See
+`analysis/native_demo_hud_timing_milestone.md`.
 
 Latest control direction (2026-10-09): keep original plain-Escape restart
 behaviour. The user confirmed that automatic Free Flight reentry is expected

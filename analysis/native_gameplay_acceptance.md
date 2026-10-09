@@ -1,5 +1,15 @@
 # Native gameplay-frame acceptance
 
+2026-10-09 target-info update: the reported tick273 ALT/HDG mismatch is assessed
+under the cadence policy. Both independently started mode-three recordings
+obey the original elapsed/countdown, context/redraw and complete-text rules
+through all 374 transitions of their selected-target episode. Seven initial
+page transitions agree at equivalent second-countdown events; their actual timestamps
+remain reported. Release/Debug agree and four wrong results are rejected.
+See `native_demo_hud_timing_milestone.md`. This supersedes the unassessed
+target-info timing notes below, without accepting other drawing differences
+or full mission sequences.
+
 Current policy (2026-10-07): the user's later clarification accepts different
 native rendering/presentation cadence. Preserve gameplay physics, rules, input
 and source-defined timers; compare equivalent gameplay states/events. Exact

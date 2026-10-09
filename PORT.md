@@ -1,5 +1,13 @@
 # The C port
 
+The reported ALT/HDG timing difference is assessed under the accepted cadence
+policy. All 374 transitions of the independently recorded target-info episode
+obey original elapsed/countdown, context/redraw and complete-text rules.
+Release/Debug agree; eight selected CTests pass. V2 corrects a diagnostic mouse
+field label and adds true target selection. Strict full-flight drawing and
+all-mission whole-flight comparisons remain open. See
+[HUD timing evidence](analysis/native_demo_hud_timing_milestone.md).
+
 Initial startup and qualification-entry sorting now match the original callers.
 Release and Debug agree on 22 startup/menu/restart intervals, 60 sorted lists,
 40 incoming-factor probes and every compared RAM hash. No initial sorting fault
