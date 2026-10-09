@@ -823,6 +823,13 @@ full-width hash bands covering both complete pages. Full-page hashes remain
 unchanged and authoritative. `FA18_TRACE_MESSAGE_FIELDS=1` independently adds
 message-owner inputs. Both options are read-only diagnostics.
 
+Use `--recorded-input-only` for a windowed recording comparison to suppress
+physical gameplay controls while `--input` or `--replay` supplies them. SDL
+events are still polled every frame and window close still works. Without this
+option, physical input participates normally. The visible performance checker
+uses it for independently earned mission recordings; keep the window open
+through intermediate menus until it closes automatically and reports the result.
+
 Add `--frame-times PATH` to an ordinary windowed run to write per-frame timing
 CSV. The parent directory must already exist. Input, game, audio, conversion,
 presentation and host wait are separate columns. `--hidden` is an optional

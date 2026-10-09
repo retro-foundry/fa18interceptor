@@ -44,13 +44,15 @@ def main():
             for frame, key in ((1800, 32), (3000, 50), (4100, 13), (5000, 50), (5400, 49))))
         environment = dict(os.environ, SDL_VIDEODRIVER='dummy', SDL_AUDIODRIVER='dummy')
 
-        def run(name, measured=False, window=False):
+        def run(name, measured=False, window=False, recorded_only=False):
             command = [str(runner), '--adf', str(ROOT / 'local/media/fa18.adf'),
                        '--save-dir', str(work / name), '--frames', '8' if window else '6500',
                        '--data-out', str(work / f'{name}.dat'), '--ppm', str(work / f'{name}.ppm')]
             command += ['--hidden'] if window else ['--headless', '--replay', str(replay)]
             if measured:
                 command += ['--frame-times', str(work / f'{name}.csv')]
+            if recorded_only:
+                command += ['--recorded-input-only']
             result = subprocess.run(command, cwd=ROOT, env=environment, capture_output=True,
                                     text=True, check=True, timeout=25)
             return json.loads(result.stdout)
@@ -58,9 +60,12 @@ def main():
         baseline = run('baseline')
         measured = run('measured', measured=True)
         assert baseline == measured and measured['hud_frames'] > 0, (baseline, measured)
+        recorded = run('recorded', recorded_only=True)
+        assert recorded == baseline
         for suffix in ('dat', 'ppm'):
             digest = lambda name: hashlib.sha256((work / f'{name}.{suffix}').read_bytes()).digest()
             assert digest('baseline') == digest('measured'), f'Timing changed native {suffix}'
+            assert digest('baseline') == digest('recorded'), f'Recorded input mode changed native {suffix}'
         rows = validate(work / 'measured.csv', measured, 0)
         assert {row['renderer'] for row in rows} == {'headless'}
         assert all(float(row['convert_us']) == float(row['present_us']) == 0 for row in rows)
@@ -73,6 +78,9 @@ def main():
             '--frame-times', str(work / 'missing' / 'times.csv')], cwd=ROOT,
             capture_output=True, text=True, timeout=10)
         assert bad.returncode and 'Cannot create native frame timing report' in bad.stderr, bad.stderr
+        bad = subprocess.run([str(runner), '--headless', '--frames', '1', '--recorded-input-only'],
+            cwd=ROOT, capture_output=True, text=True, timeout=10)
+        assert bad.returncode and 'require --input or --replay' in bad.stderr
     print('6500 timed flight rows preserve complete native RAM, pixels and stats; all 8 SDL rows present; timing sums and write failure pass')
 
 

@@ -1,0 +1,255 @@
+{
+  "visible_performance_qualified": false,
+  "recorded_only_visible_result_pending": true,
+  "closed_attempt": {
+    "user_confirmed_window_close": true,
+    "observed_frames": 22648,
+    "expected_frames": 42706,
+    "all_observed_frames_presented": true,
+    "over_budget": 1,
+    "worst_work_ms": 65.4517,
+    "report_sha256": "657a05f64cd157479b215d5ce52addedd449591f4c913a753f558c9b1d1f1e5c",
+    "csv_sha256": "e745c4b5467d69d2443e99d2afbf78a4f25c0584e5b12bcb859880f197421906"
+  },
+  "completed_frames_failed_flight": {
+    "reason": "Frame limit reached before recorded input completed; unexpected gameplay reset; two SDL polling budget failures",
+    "canonical": {
+      "frame_owner_exit": false,
+      "frames": 42706,
+      "screen": "scene-setup",
+      "mode": 3,
+      "glyphs": 14848,
+      "record_updates": 5847,
+      "scene_frames": 5843,
+      "terrain_polygons": 19853,
+      "model_calls": 59516,
+      "hud_frames": 5843,
+      "control_frames": 15461,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 3815,
+      "timer_pending": true,
+      "timer_yields": 13699,
+      "display_publications": 15460,
+      "display_yields": 15645,
+      "display_pending": false,
+      "displayed_page": 1,
+      "postflight_callbacks": 1,
+      "postflight_resets": 1,
+      "input_passes": 15458,
+      "input_events": 1416,
+      "input_queued": 0,
+      "update_iterations": 26978,
+      "replay_iterations": 26502,
+      "replay_events": 1422,
+      "host_replay_events": 2,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 42706,
+      "voice_publications": 90469,
+      "voice_levels": [
+        [
+          753,
+          40
+        ],
+        [
+          755,
+          40
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 44275,
+      "sample_frames": 40997760,
+      "nonzero_sample_frames": 40152571,
+      "audio_device": true,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "csv_sha256": "306c823d5cf76889ed346a0f57555ba1461f1a602db1fdae2603890fea76c283",
+    "final_ram_retained": false,
+    "final_save_retained": false,
+    "live_input_isolated": false,
+    "timing": {
+      "frames": 42706,
+      "presented": 42706,
+      "over_work_budget": 2,
+      "phases": {
+        "input_us": {
+          "mean_ms": 0.0216,
+          "p95_ms": 0.0165,
+          "p99_ms": 0.1011,
+          "max_ms": 246.3285
+        },
+        "game_us": {
+          "mean_ms": 0.7076,
+          "p95_ms": 1.2757,
+          "p99_ms": 2.0577,
+          "max_ms": 8.7726
+        },
+        "audio_us": {
+          "mean_ms": 0.0107,
+          "p95_ms": 0.0175,
+          "p99_ms": 0.039,
+          "max_ms": 0.3498
+        },
+        "convert_us": {
+          "mean_ms": 0.0699,
+          "p95_ms": 0.1186,
+          "p99_ms": 0.2487,
+          "max_ms": 1.107
+        },
+        "present_us": {
+          "mean_ms": 0.4207,
+          "p95_ms": 0.7351,
+          "p99_ms": 1.1654,
+          "max_ms": 6.3126
+        },
+        "wait_us": {
+          "mean_ms": 18.7638,
+          "p95_ms": 20.0013,
+          "p99_ms": 20.3834,
+          "max_ms": 21.2832
+        },
+        "work_us": {
+          "mean_ms": 1.2305,
+          "p95_ms": 1.9864,
+          "p99_ms": 3.1388,
+          "max_ms": 247.5437
+        },
+        "total_us": {
+          "mean_ms": 19.9943,
+          "p95_ms": 21.0983,
+          "p99_ms": 21.3033,
+          "max_ms": 247.5438
+        },
+        "start_interval_us": {
+          "mean_ms": 20.006,
+          "p95_ms": 21.1103,
+          "p99_ms": 21.318,
+          "max_ms": 247.5535
+        }
+      },
+      "worst_work": [
+        {
+          "frame": "40333",
+          "iteration": "26275",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "246328.500",
+          "game_us": "735.400",
+          "audio_us": "8.000",
+          "convert_us": "51.500",
+          "present_us": "420.300",
+          "wait_us": "0.100",
+          "work_us": "247543.700",
+          "total_us": "247543.800",
+          "start_interval_us": "19748.600",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "41068",
+          "iteration": "26492",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "0",
+          "presented": "1",
+          "input_us": "79082.500",
+          "game_us": "622.300",
+          "audio_us": "7.200",
+          "convert_us": "55.600",
+          "present_us": "1631.900",
+          "wait_us": "0.100",
+          "work_us": "81399.500",
+          "total_us": "81399.600",
+          "start_interval_us": "20768.800",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "32887",
+          "iteration": "23729",
+          "mode": "3",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "0",
+          "presented": "1",
+          "input_us": "9631.400",
+          "game_us": "870.300",
+          "audio_us": "12.500",
+          "convert_us": "92.500",
+          "present_us": "866.700",
+          "wait_us": "8773.100",
+          "work_us": "11473.400",
+          "total_us": "20246.500",
+          "start_interval_us": "19745.200",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "11497",
+          "iteration": "6498",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "23.700",
+          "game_us": "8772.600",
+          "audio_us": "59.500",
+          "convert_us": "491.500",
+          "present_us": "1563.800",
+          "wait_us": "9807.900",
+          "work_us": "10911.100",
+          "total_us": "20719.000",
+          "start_interval_us": "19076.800",
+          "renderer": "direct3d"
+        },
+        {
+          "frame": "10681",
+          "iteration": "6256",
+          "mode": "9",
+          "stage": "C10DAE",
+          "view": "0",
+          "scene_updated": "1",
+          "presented": "1",
+          "input_us": "24.000",
+          "game_us": "7444.100",
+          "audio_us": "47.000",
+          "convert_us": "328.800",
+          "present_us": "1456.800",
+          "wait_us": "10629.700",
+          "work_us": "9300.700",
+          "total_us": "19930.400",
+          "start_interval_us": "19996.400",
+          "renderer": "direct3d"
+        }
+      ]
+    }
+  },
+  "validation": {
+    "configurations": [
+      "Release",
+      "Debug"
+    ],
+    "suppressed_control_events": 5,
+    "window_close_both_modes": true,
+    "original_input_entries": 26,
+    "original_frame_bodies": 52,
+    "preserved_timed_frames": 6500,
+    "dummy_presentations": 8
+  },
+  "current_release": "2f20d3a5caf1a0c8ddce85590ca408c96e4e35faf49e8b7e24cc8fb2e3a0411a"
+}

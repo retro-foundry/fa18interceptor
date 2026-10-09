@@ -4,8 +4,10 @@
 #include "../../port/native/host_input.h"
 #include "../../port/native/frame_capture.h"
 #include "globals.h"
+#include "player_input.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
     NativeFrameCapture entry,body;
@@ -25,8 +27,7 @@ static int key_event(NativeFrontend *game,int key,int down,unsigned modifiers,in
     event.key.keysym.scancode=SDL_GetScancodeFromKey(key);
     if(SDL_PushEvent(&event)!=1) return 0;
     while(SDL_PollEvent(&event))
-        if(event.type==SDL_KEYDOWN || event.type==SDL_KEYUP)
-            native_host_keyboard_event(game,&event.key);
+        if(!native_host_event(game,&event,0)) return 0;
     return 1;
 }
 static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint16_t saved_tick,void *context) {
@@ -78,6 +79,30 @@ static int mapping(void) {
         if(native_menu_raw_key(256+(int)i-2,1)!=raw[i]) return 0;
     return native_menu_raw_key(SDLK_UNKNOWN,1)==0xff;
 }
+static int recorded_input_boundary(NativeFrontend *game) {
+    NativeFrontend *before=malloc(sizeof *before);
+    if(!before) return 0;
+    memcpy(before,game,sizeof *before);
+    SDL_Event events[5]={{0}};
+    events[0].type=SDL_KEYDOWN;events[0].key.keysym.sym=SDLK_SPACE;
+    events[1].type=SDL_MOUSEMOTION;events[1].motion.xrel=5;events[1].motion.yrel=-7;
+    events[2].type=SDL_MOUSEBUTTONDOWN;events[2].button.button=SDL_BUTTON_LEFT;
+    events[3].type=SDL_MOUSEBUTTONDOWN;events[3].button.button=SDL_BUTTON_RIGHT;
+    events[4].type=SDL_KEYUP;events[4].key.keysym.sym=SDLK_SPACE;
+    for(unsigned i=0;i<5;++i)
+        if(!native_host_event(game,&events[i],1) || memcmp(before,game,sizeof *before)) {free(before);return 0;}
+    free(before);
+    SDL_Event quit={0};quit.type=SDL_QUIT;
+    if(native_host_event(game,&quit,0) || native_host_event(game,&quit,1)) return 0;
+    const uint8_t x=game->mouse_x_counter,y=game->mouse_y_counter;
+    const uint16_t buttons=game->mouse_buttons;
+    if(!native_host_event(game,&events[1],0) || game->mouse_x_counter!=(uint8_t)(x+5) ||
+       game->mouse_y_counter!=(uint8_t)(y-7)) return 0;
+    if(!native_host_event(game,&events[2],0) || !(game->mouse_buttons&MOUSE_LEFT) ||
+       !native_host_event(game,&events[3],0) || !(game->mouse_buttons&MOUSE_RIGHT)) return 0;
+    game->mouse_x_counter=x;game->mouse_y_counter=y;game->mouse_buttons=buttons;
+    return 1;
+}
 int main(int argc,char **argv) {
     if(argc!=4 || !mapping()) return 1;
     SDL_SetMainReady();
@@ -86,6 +111,7 @@ int main(int argc,char **argv) {
     HostKeysRun run={.prefix=argv[3]};
     if(!game) goto done;
     if(!native_frontend_open(game,argv[1],argv[2],error,sizeof error)) {fprintf(stderr,"%s\n",error);goto done;}
+    if(!recorded_input_boundary(game)) {fputs("Recorded input boundary failed\n",stderr);goto done;}
     game->observe_frame=observe;game->frame_context=&run;
     const unsigned startup[]={1800,3000,4100,5000,5400};
     const int menu_keys[]={SDLK_SPACE,SDLK_2,SDLK_RETURN,SDLK_2,SDLK_1};

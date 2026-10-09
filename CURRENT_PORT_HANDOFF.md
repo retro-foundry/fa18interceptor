@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Visible replay diagnostics (2026-10-09): the user-closed attempt and a complete-
+frame failed flight remain unaccepted. The latter reset unexpectedly and has
+two SDL poll-work failures, 247.5437/81.3995 ms. Recorded-input-only is now an
+opt-in comparison mode; window close and all poll/present costs remain checked.
+Normal SDL controls and 26 entries/52 bodies match original in Release/Debug.
+The rebuilt Release full flight preserves prior RAM, traces, counters and save.
+Another visible run is active; its result remains open. See
+[visible replay evidence](analysis/native_visible_replay_input_milestone.md).
+
 Complete mission-three drawing localization (2026-10-09): all 4,967 observations
 match rows 0..127 of both complete pages. Five adjoining diagnostic bands cover
 every page byte; strict pages remain 287/4,967 without exclusions. Release/Debug

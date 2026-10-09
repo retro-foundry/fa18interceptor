@@ -1,5 +1,16 @@
 /* SDL keyboard boundary shared by the playable entry and integration check. */
 #include "host_input.h"
+int native_host_event(NativeFrontend *game,const SDL_Event *event,int recorded_input_only) {
+    if(event->type==SDL_QUIT) return 0;
+    if(recorded_input_only) return 1;
+    if(event->type==SDL_MOUSEMOTION) native_frontend_mouse(game,event->motion.xrel,event->motion.yrel);
+    if((event->type==SDL_MOUSEBUTTONDOWN || event->type==SDL_MOUSEBUTTONUP) &&
+       (event->button.button==SDL_BUTTON_LEFT || event->button.button==SDL_BUTTON_RIGHT))
+        native_frontend_button(game,event->button.button==SDL_BUTTON_LEFT?0:1,event->type==SDL_MOUSEBUTTONDOWN);
+    if(event->type==SDL_KEYDOWN || event->type==SDL_KEYUP)
+        native_host_keyboard_event(game,&event->key);
+    return 1;
+}
 void native_host_keyboard_event(NativeFrontend *game,const SDL_KeyboardEvent *event) {
     if((event->type!=SDL_KEYDOWN && event->type!=SDL_KEYUP) || event->repeat) return;
     int key=event->keysym.sym;

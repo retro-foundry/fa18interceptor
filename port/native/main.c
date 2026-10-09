@@ -55,7 +55,7 @@ int main(int argc,char **argv) {
     size_t events=0,next=0,event_capacity=0; HostEvent *host_events=NULL; char error[256];
     const char *input=NULL;NativeReplay loop={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
-    const char *frame_times=NULL;FILE *timing=NULL;int hidden=0;
+    const char *frame_times=NULL;FILE *timing=NULL;int hidden=0,recorded_input_only=0;
     SDL_RendererInfo renderer_info={0};uint64_t previous_frame_start=0;
     NativeFrameCapture capture={0};capture.replay=&loop;capture.count=1;
     const char *flight_trace=NULL;FA18FlightTrace trace={0};FrameDiagnostics diagnostics={0};
@@ -63,7 +63,7 @@ int main(int argc,char **argv) {
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--hidden (window diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -76,6 +76,7 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--frame-times")) frame_times=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--flight-trace")) flight_trace=argv[++i];
         else if(!strcmp(argv[i],"--hidden")) hidden=1;
+        else if(!strcmp(argv[i],"--recorded-input-only")) recorded_input_only=1;
         else if(!strcmp(argv[i],"--frame-capture-entry-only")) capture.entry_only=1;
         else if(i+1<argc && !strcmp(argv[i],"--capture-budget-mib")) {
             char *end;unsigned long n=strtoul(argv[++i],&end,10);
@@ -96,6 +97,7 @@ int main(int argc,char **argv) {
     }
     if(headless && !frames) { fputs("Headless runs require --frames N\n",stderr); goto done; }
     if(hidden && headless) {fputs("Hidden window diagnostics require window presentation\n",stderr);goto done;}
+    if(recorded_input_only && !input && !replay) {fputs("Recorded-input-only diagnostics require --input or --replay\n",stderr);goto done;}
     if(iterations && !input) { fputs("Iteration limit requires --input\n",stderr);goto done; }
     if(capture.prefix && !input) {fputs("Frame capture requires recorded --input\n",stderr);goto done;}
     if(capture.entry_only && !capture.prefix) {fputs("Entry-only capture requires --frame-capture\n",stderr);goto done;}
@@ -173,15 +175,8 @@ int main(int argc,char **argv) {
         while(next<events && host_events[next].frame<=game->ticks) { deliver_event(game,&host_events[next]); ++next; }
         if(!headless) {
             SDL_Event event;
-            while(SDL_PollEvent(&event)) {
-                if(event.type==SDL_QUIT) running=0;
-                if(event.type==SDL_MOUSEMOTION) native_frontend_mouse(game,event.motion.xrel,event.motion.yrel);
-                if((event.type==SDL_MOUSEBUTTONDOWN || event.type==SDL_MOUSEBUTTONUP) &&
-                    (event.button.button==SDL_BUTTON_LEFT || event.button.button==SDL_BUTTON_RIGHT))
-                    native_frontend_button(game,event.button.button==SDL_BUTTON_LEFT?0:1,event.type==SDL_MOUSEBUTTONDOWN);
-                if(event.type==SDL_KEYDOWN || event.type==SDL_KEYUP)
-                    native_host_keyboard_event(game,&event.key);
-            }
+            while(SDL_PollEvent(&event))
+                if(!native_host_event(game,&event,recorded_input_only)) running=0;
         }
         if(timing) times[1]=SDL_GetPerformanceCounter();
         native_frontend_tick(game);
