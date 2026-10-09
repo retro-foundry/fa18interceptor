@@ -143,6 +143,7 @@ int native_frontend_open_observed(NativeFrontend *game,const char *path,const ch
     wr_u32(POLY_MASK_PLANE,0x30000); /* Separate 40-byte rows, host-owned mask. */
     wr_u32(CIRCLE_SPANS_PTR,0x33000); /* 127-radius symmetric span workspace. */
     native_menu_initialize();
+    native_model_prepare_ground_bounds(); /* Original C0F4D8 -> C2527C startup child. */
     /* C16518 reads the original flight-recorder byte and word buffers from
      * textply/textctl. Demonstration mode 3 consumes these through C1B27E;
      * they are disk assets, not RAM copied from a reference capture. Read's

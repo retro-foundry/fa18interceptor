@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Ground-strip startup fix (2026-10-09): native now calls original C2527C,
+generating all 40 disk-backed strip corner records before gameplay. Missing
+corners caused empty ground draws and later placement skips, consistent with
+the Free Flight disappearing-road report. Initializer RAM and all 240 corners
+match original instructions; the omitted-call regression is rejected.
+Release/Debug mission-three gameplay remains exact; first missing-ground-line
+pages now match and strict drawing improves 267 -> 287/4,967. The next strict
+difference is observation 22,303. Free Flight callback/restart, connected model,
+frontend and new CTests pass. Other drawing remains open; state cleanup stays
+outside this goal. See [ground evidence](analysis/native_ground_bounds_startup_milestone.md).
+
 Native raster addressing (2026-10-09): negative-X lines now use the original
 logical-shift starting offset and aligned word address. The connected raster
 checks pass all existing cases and 32 new negative-X cases per checkpoint.

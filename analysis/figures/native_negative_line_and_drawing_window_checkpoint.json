@@ -580,7 +580,13 @@
     ],
     "colour": 7,
     "return_pc": "C2F08E",
-    "cause_proven": false
+    "cause_proven": false,
+    "source_cached_result": 1,
+    "native_cached_result": -1,
+    "source_countdown": 3,
+    "source_visit_clock": 239,
+    "native_countdown": 5,
+    "native_visit_clock": 252
   },
   "drawing_window_current": {
     "source_trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",

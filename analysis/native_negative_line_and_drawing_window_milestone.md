@@ -62,7 +62,8 @@ Original line-call observation identifies a source-only colour-seven clipped
 segment from (8,89) to (0,90), returning to C2F08E. It clears the nine pixels
 that remain set in native. Source and native fixtures also differ in the
 alternate placement record at C4F1D2: descriptor C22A48 dispatches C096CA, and
-its cached result is source 03EF versus native FFFF. The placement traversal
+its cached result at +20 is source 0001 versus native FFFF. (The originally
+reported 03EF is the countdown/visit byte pair at +18, not that result.) The placement traversal
 uses the negative result to skip subsequent calls. This is an investigation
 lead; the reason for the earlier different result remains unproven. No cache
 value, placement gate or clock has been forced to make the pictures match.

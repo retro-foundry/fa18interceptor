@@ -1,0 +1,234 @@
+{
+  "scope": "Restored original startup ground corner generation. Full-flight drawing remains incomplete; state migration is outside this goal.",
+  "source_call": "C0F4D8/C0F50E -> C2527C -> C2574A",
+  "release_runner_sha256": "64cc3278ee928c352230574dba455e56ecfb62c6c787a90e877b45054c5686ee",
+  "debug_runner_sha256": "151b4e7d0c1c8a4c95a3e9d14f21df9eaf8caeb112877fdacbb2469aa83c7e48",
+  "release_debug_reports_equal_except_runner": true,
+  "native_trace_sha256": "62cb2077f31ba059dbd210ca0340cc57e40d7726d894a80af59e54bc95fa6a37",
+  "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+  "whole_successful_flight": {
+    "compared": 4967,
+    "record_cores_compared": 79472,
+    "record_cores_matching": 79472,
+    "complete_record_boundaries_matching": 4967,
+    "camera_and_controls_matching": 4967,
+    "complete_pages_matching": 287,
+    "timer_and_hud_matching": 0,
+    "first_record_difference": null,
+    "first_game_difference": null,
+    "first": 22142,
+    "last": 27108,
+    "complete_gameplay_matching_prefix": 4967,
+    "strict_gameplay_matching": true
+  },
+  "first_remaining_page_difference": {
+    "source_iteration": 22303,
+    "native_iteration": 22303,
+    "source_tick": 162,
+    "changes": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "startup": {
+    "runner_sha256": "64cc3278ee928c352230574dba455e56ecfb62c6c787a90e877b45054c5686ee",
+    "startup_ram_sha256": "b643a4f7976e1d5788ab6259d2fd9a3886914182757ef3802e6320cbab875892",
+    "native_run": {
+      "frame_owner_exit": false,
+      "frames": 1,
+      "screen": "splash",
+      "mode": 0,
+      "glyphs": 0,
+      "record_updates": 1,
+      "scene_frames": 0,
+      "terrain_polygons": 0,
+      "model_calls": 0,
+      "hud_frames": 0,
+      "control_frames": 0,
+      "scene_selected": false,
+      "stage": "000000",
+      "game_tick": 0,
+      "timer_pending": false,
+      "timer_yields": 0,
+      "display_publications": 0,
+      "display_yields": 0,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 0,
+      "input_events": 0,
+      "input_queued": 0,
+      "update_iterations": 0,
+      "replay_iterations": 0,
+      "replay_events": 0,
+      "host_replay_events": 0,
+      "host_replay_pending": 0,
+      "replay_started": false,
+      "voice_ticks": 1,
+      "voice_publications": 2,
+      "voice_levels": [
+        [
+          358,
+          63
+        ],
+        [
+          358,
+          63
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 6,
+      "sample_frames": 960,
+      "nonzero_sample_frames": 500,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "source_initializer": "C0F50E -> C2527C -> C2574A",
+    "records": [
+      "C44946",
+      "C4495A",
+      "C44EE0",
+      "C449FC",
+      "C44A10",
+      "C44A24",
+      "C44CCE",
+      "C44BE6",
+      "C44BFA",
+      "C44C64",
+      "C44D38",
+      "C44DA2",
+      "C44E0C",
+      "C44E76",
+      "C44F64",
+      "C44F78",
+      "C44A8E",
+      "C44AF8",
+      "C44B62",
+      "C44FFC",
+      "C45010",
+      "C4507A",
+      "C450FE",
+      "C45112",
+      "C4517C",
+      "C451E6",
+      "C4526A",
+      "C4527E",
+      "C45302",
+      "C45316",
+      "C4539A",
+      "C453AE",
+      "C45432",
+      "C45446",
+      "C454CA",
+      "C454DE",
+      "C455FA",
+      "C4560E",
+      "C45562",
+      "C45576"
+    ],
+    "corner_words_compared": 240,
+    "complete_non_stack_ram_matching": true,
+    "live_startup_corners_matching": true,
+    "omitted_initializer_rejected": true
+  },
+  "independent_original_corner_comparison": {
+    "records": 40,
+    "corner_words": 240,
+    "previously_wrong_words": 240,
+    "source_native_identical": true,
+    "corner_sha256": "369d428f8109badd163cfdb4decf51b129ab978339038dc927ac1f9bf5f29109"
+  },
+  "checks": {
+    "ground_bounds_ctest": [
+      "Release",
+      "Debug"
+    ],
+    "artifact_cleanup_ctest": [
+      "Release",
+      "Debug"
+    ],
+    "connected_models_checkpoints": [
+      4000,
+      5300,
+      6100
+    ],
+    "free_flight_mode": 125,
+    "free_flight_input_stage_intervals": 57,
+    "free_flight_complete_body_comparisons": 37,
+    "free_flight_body_comparison_has_existing_exclusions": true,
+    "frontend_title_save_presentation_passed": true
+  },
+  "diagnostic_fixture_hashes": {
+    "native-body.22284.after.dat": "6a0aa3a3a8acedeacad7675ab3f41b951f8a6c848f575df14bbe8e9d4d98a4c9",
+    "native-body.22284.before.dat": "b89ed525b00bfe573a506087871d47b1500df615f0931348f4f98c7d96163f72",
+    "native-descriptor.0.dat": "0605aa722aa86d0aa5686c62334e1fd15990b498ff9d5cd5d671473c31d06f3f",
+    "native.22285.before.dat": "66dc925d8b2cd4a529fe1050151c7d29d753ce7294a9d0236c5d53e70de62279",
+    "source-body.22284.after.dat": "a565863632203681013c0234465be578dfee94692b425997a5a65325030a22f0",
+    "source-body.22284.before.dat": "614648a1598c8b63cd2c3890281805c99342cbd07d06fb3ad6f859f0e7059828",
+    "source-body.22285.before.dat": "cbf1b538317dd11c5f4a63eec65bd50791141ea2a9ea2665e150d4c6189b7665",
+    "source-descriptor.0.dat": "19e9ff9164d86864cd3e816998395e903e7522fa22eb840d2e5d8bb3d874ac7b"
+  },
+  "resolved_drawing_window": {
+    "source_trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+    "native_trace_sha256": "62cb2077f31ba059dbd210ca0340cc57e40d7726d894a80af59e54bc95fa6a37",
+    "source_update_mapping_sha256": "45176e5a7d3c5b3f064d48adce0c8eb0c8115186550c4fb3bc64c6817edb9b4e",
+    "runner_sha256": "64cc3278ee928c352230574dba455e56ecfb62c6c787a90e877b45054c5686ee",
+    "first": 22285,
+    "last": 22288,
+    "scope": "Every captured field, core and complete page reproduces its live trace. All changed bytes are retained; this localizes differences without accepting them.",
+    "observations": [
+      {
+        "source_iteration": 22285,
+        "native_iteration": 22285,
+        "ram_sha256": {
+          "source": "c4a192f806e104b8e8f329fbcfffee3b88d3d4d870923087468fbec0096fb355",
+          "native": "004af42ab201b9a9ccefdf35e520491f5a84e769dfed5e5c56f1434b55910cc3"
+        },
+        "page_differences": []
+      },
+      {
+        "source_iteration": 22286,
+        "native_iteration": 22286,
+        "ram_sha256": {
+          "source": "5af1c665346b84e038a54fdac2634470fc319e7ad188773378dafcceb2a71855",
+          "native": "62e82072a4d201b0b387fc9ca8a51a57e43daf1cf7a58d61b199cde90ad8272a"
+        },
+        "page_differences": []
+      },
+      {
+        "source_iteration": 22287,
+        "native_iteration": 22287,
+        "ram_sha256": {
+          "source": "bb900268406866c318bdf418fcd0672ccc2c41610586b81400928111e3b7a3fe",
+          "native": "2e99e7cc572f2c120520b320c92631e4fb27798f0035889844f5a42aa836481c"
+        },
+        "page_differences": []
+      },
+      {
+        "source_iteration": 22288,
+        "native_iteration": 22288,
+        "ram_sha256": {
+          "source": "b38e77af1c81e6babb81d7c593b2b3a9c9959f90409594d3ed10baa5ed417d32",
+          "native": "631f9d54c1a69ba7bf25660b94bacf89640a4c204a8b191d0cad849974c75bd6"
+        },
+        "page_differences": []
+      }
+    ]
+  },
+  "canonical_release_sha256": "64cc3278ee928c352230574dba455e56ecfb62c6c787a90e877b45054c5686ee"
+}

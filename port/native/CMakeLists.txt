@@ -361,6 +361,10 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_models
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_models.py
                 --runner $<TARGET_FILE:fa18_native>)
+    add_test(NAME fa18_native_ground_bounds
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_ground_bounds.py
+                --runner $<TARGET_FILE:fa18_native>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/ground-bounds-check-$<CONFIG>)
     add_test(NAME fa18_native_hud
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_hud.py
                 --runner $<TARGET_FILE:fa18_native>)

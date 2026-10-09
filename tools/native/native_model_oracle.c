@@ -204,6 +204,7 @@ static int16_t projection_x,projection_y,projection_depth;
 static unsigned strip_groups;
 static unsigned interpolated_commands;
 static int original(uint32_t pc) {
+    const int trace_ground=getenv("FA18_MODEL_GROUND_TRACE")!=NULL && (pc==0xc096cau || pc==0xc096bcu);
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     REG_A[0]=oracle_parameters;
     if(pc==0xc22ac0u) REG_D[0]=(uint32_t)oracle_descriptor_input;
@@ -222,6 +223,11 @@ static int original(uint32_t pc) {
     fa18_next_event=INT64_MAX; SET_CYCLES(100000000);
     for(unsigned step=0;step<2000000;++step) {
         uint16_t opcode;
+        if(trace_ground && (REG_PC==0xc0984au || REG_PC==0xc098b8u))
+            fprintf(stderr,"ground command %06X stream %06X carry=%04X frame=%06X\n",
+                REG_A[0],REG_A[2],rd_u16(REG_A[6]-0x7c),REG_A[6]);
+        if(trace_ground && (REG_PC==0xc0984cu || REG_PC==0xc098bau || REG_PC==0xc09856u))
+            fprintf(stderr,"ground result pc=%06X D0=%04X carry=%04X\n",REG_PC,(uint16_t)REG_D[0],rd_u16(REG_A[6]-0x7c));
         if(REG_PC==0xc70000u && REG_A[7]==0xc7ff04u) { wait_blitter(); return 1; }
         if(REG_PC==0xc1f598u) ++strip_groups; /* Positive strip's initial point. */
         if(REG_PC==0xc206e4u) ++interpolated_commands;
@@ -775,12 +781,59 @@ int main(int argc,char **argv) {
     const int interpolation_only=argc==3 && !strcmp(argv[2],"--interpolation-only");
     const int require_aircraft=argc==3 && !strcmp(argv[2],"--require-aircraft");
     const int aircraft_record=argc==4 && !strcmp(argv[2],"--aircraft-record");
-    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || interpolation_only || require_aircraft || aircraft_record)?file_bytes(argv[1],&nd):NULL;
+    const int placements_only=argc==3 && !strcmp(argv[2],"--placements-only");
+    const int ground_only=argc==3 && !strcmp(argv[2],"--ground-only");
+    const int setup_bounds=argc==3 && !strcmp(argv[2],"--setup-bounds");
+    const int require_bounds=argc==3 && !strcmp(argv[2],"--require-setup-bounds");
+    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || interpolation_only || require_aircraft || aircraft_record || placements_only || ground_only || setup_bounds || require_bounds)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
     fa18_recomp_init(1);fa18_ports_init(FA18_PORTS_OFF,NULL);fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+    if(require_bounds) {
+        if(!original(0xc2527cu)) return 1;
+        unsigned records=0;
+        for(gaddr cursor=0xc44880u;rd_s16(cursor)>=0;cursor+=2)
+            for(gaddr record=0xc44880u+(gaddr)(int32_t)rd_s16(cursor);rd_s16(record)!=-1;record+=20) {
+                for(unsigned i=0;i<12;++i) if(rd_u8(record+8+i)!=data[0x80000+record+8+i-0xc00000u]) {
+                    fprintf(stderr,"Startup did not generate original ground corner at %06X\n",record+8+i);return 1;
+                }
+                ++records;
+            }
+        if(!records) return 1;
+        printf("Connected startup generated all %u ground strip corner records\n",records);return 0;
+    }
+    if(setup_bounds) {
+        FA18Machine *before=malloc(sizeof *before);
+        uint8_t *expected=malloc(0x100000);
+        if(!before || !expected) return 1;
+        memcpy(before,m,sizeof *before);
+        native_model_prepare_ground_bounds();
+        memcpy(expected,m->chip,0x80000);memcpy(expected+0x80000,m->slow,0x80000);
+        memcpy(m,before,sizeof *before);
+        if(!original(0xc2527cu)) return 1;
+        for(unsigned i=0;i<0xffc00;++i) {
+            uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                fprintf(stderr,"Ground setup RAM %06X: source %02X native %02X\n",i<0x80000?i:0xc00000+i-0x80000,actual,expected[i]);return 1;
+            }
+        }
+        free(expected);free(before);
+        puts("Complete C2527C/C2574A ground setup matches all non-stack RAM");return 0;
+    }
+    if(ground_only) {
+        const ScenePlacementCall call={.routine=0xc096ca,.parameters=rd_u32(0xc45a36u)};
+        compare_descriptor(NULL,&call);
+        printf("Captured ground descriptor compared, %u failures\n",failures);
+        return failures?1:0;
+    }
+    if(placements_only) {
+        const ScenePlacementHooks hooks={compare_descriptor,NULL,NULL};
+        visit_scene_placements(0,&hooks);visit_scene_placements(1,&hooks);
+        printf("%u captured placement descriptors compared, %u failures\n",calls,failures);
+        return failures?1:0;
+    }
     if(inactive_only) {
         for(unsigned slot=0;slot<16;++slot) {
             const gaddr descriptor=0xc22188u+20*slot;

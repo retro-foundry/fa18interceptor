@@ -7,6 +7,8 @@ enum { NATIVE_SCENE_MODEL_FRAME = 0x4200 };
  * Normalisation, depth sorting and map clipping publish actual source outputs. */
 uint16_t native_model_retained_result(void);
 void native_model_retain_result(uint16_t value);
+/* C0F4D8 -> C2527C: generate the disk-backed ground strip corner points once. */
+void native_model_prepare_ground_bounds(void);
 /* C1EE14/C096CA descriptor rendering. Scratch is ordinary host storage;
  * streams contain original model data, never executable instructions. */
 int native_model_draw(gaddr parameters, gaddr frame);

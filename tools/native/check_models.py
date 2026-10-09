@@ -38,6 +38,7 @@ def main():
             stats = json.loads(result.stdout)
             assert stats['stage'] == stage and stats['model_calls'] > 0, stats
             assert not stats['cpu_emulation'] and not stats['chipset_emulation'], stats
+            subprocess.run([str(oracle), str(checkpoint), '--require-setup-bounds'], cwd=ROOT, check=True, timeout=20)
             subprocess.run([str(oracle), str(checkpoint)], cwd=ROOT, check=True, timeout=20)
             if frames==6100:
                 # The corrected cold setup need not display an aircraft's

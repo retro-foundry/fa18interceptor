@@ -24,11 +24,39 @@
 #include "../render_line.h"
 #include "../context_publication.h"
 #include "../messages.h"
+#include "../main_loop_timers.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 enum { CONTROL_STREAM=0xC45A36, HEADER_BYTE=0xC4585B,
     DISTANCE_GATE=0xC45ABA, VISIT_CLOCK=0xC458BD };
+static void ground_bounds_input(void *context,enum MainTimerPhase phase,uint32_t value,uint32_t other) {
+    MainTimerBounds *bounds=context;
+    switch(phase) {
+    case MT_BOUNDS_OFFSET: bounds->cursor=other; break;
+    case MT_BOUNDS_LOAD: bounds->record=value; break;
+    case MT_BOUNDS_VECTOR: bounds->width=(int16_t)value; bounds->height=(int16_t)other; break;
+    default: break;
+    }
+}
+static MainTimerBounds ground_bounds_scale(void *context,enum MainTimerChild child) {
+    MainTimerBounds bounds=*(MainTimerBounds *)context;
+    if(child!=MT_SCALE_BOUNDS) abort();
+    /* C25298-C252A8 supply the endpoint delta as (D5,0,D7), with
+     * D0=46, to the existing C2574A register-entry normalization. */
+    NormalizedVectorState vector={.scale=46,.x=(uint32_t)(int32_t)bounds.width,
+        .z=(uint32_t)(int32_t)bounds.height};
+    vector=normalize_record_vector(vector,NULL,NULL);
+    bounds.width=(int16_t)vector.x; bounds.height=(int16_t)vector.z;
+    return bounds;
+}
+void native_model_prepare_ground_bounds(void) {
+    /* C0F50E executes this after hunk relocation, before the first scene.
+     * The hunk leaves the six derived corner words zero in every record. */
+    MainTimerBounds bounds={0};
+    const MainTimerHooks hooks={.consume=ground_bounds_scale,.observe=ground_bounds_input,.context=&bounds};
+    prepare_setup_bounds(&hooks);
+}
 static void missing(const char *part,gaddr at) {
     fprintf(stderr,"native model missing %s at %06X\n",part,at);
     fprintf(stderr,"native model player position x=%.3f y=%.3f z=%.3f; pose_index=%u mode=%u stage=%06X\n",
