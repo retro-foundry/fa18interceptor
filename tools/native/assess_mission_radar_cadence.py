@@ -61,6 +61,152 @@ def complete_page_delta(source, native, colour):
                 delta_sha256=digest(b''.join(actual)), colour=colour)
 
 
+def line_pixels(paint):
+    """C2FA7E line terms: omit the first row, step downward in 4x scale.
+
+    The bounded radar heads are inside the view, so no clipping or signed
+    overflow branch is inferred. Original instructions validate all output.
+    """
+    x0, y0, x1, y1 = (paint[n] for n in ('x', 'y', 'x1', 'y1'))
+    assert all(0 <= x < 320 for x in (x0, x1))
+    assert all(0 <= y < 199 for y in (y0, y1)), 'Clipped radar head needs its own assessment'
+    if y1 >= y0:
+        x, y, dx = x0, y0 + 1, x1 - x0
+    else:
+        x, y, dx = x1, y1 + 1, x0 - x1
+    rows = max(abs(y1 - y0) - 1, 0)
+    x_major = abs(dx) >= rows
+    major, minor = (abs(dx), rows) if x_major else (rows, abs(dx))
+    error = 4 * minor - 2 * major
+    direction = -1 if dx < 0 else 1
+    for _ in range(major + 1):
+        yield x, y
+        negative = error < 0
+        error += 4 * minor if negative else 4 * minor - 4 * major
+        if x_major:
+            x += direction
+            if not negative:
+                y += 1
+        else:
+            if not negative:
+                x += direction
+            y += 1
+
+
+def painted_pages(data, paints):
+    """Predict full pages from ordered original head/erase/marker operations.
+
+    Expected buffers are separate from the captured pages. In particular,
+    colour zero erases background bits too; a colour-one marker can erase
+    an existing colour-three crosshair's bit two until a later head redraw.
+    """
+    expected = [bytearray(page) for page in pages(data)]
+    apply_paints(expected, paints)
+    return expected
+
+
+def apply_paints(expected, paints):
+    for paint in paints:
+        if paint['kind'] == 'line':
+            pixels = line_pixels(paint)
+        else:
+            assert paint['kind'] in ('point', 'pair')
+            pixels = [(paint['x'], paint['y'])]
+            if paint['kind'] == 'pair':
+                pixels.append((paint['x'] - 1, paint['y']))
+        for x, y in pixels:
+            if y <= 0:  # C2F5F4/C2F60A no-draw return.
+                continue
+            assert 0 <= x < 320 and y < 200
+            offset, bit = y * 40 + x // 8, 0x80 >> (x & 7)
+            for plane in range(4):
+                if paint['colour'] & (1 << (3 - plane)):
+                    expected[plane][offset] |= bit
+                else:
+                    expected[plane][offset] &= 255 ^ bit
+
+
+def pixel_colour(data, x, y):
+    bit, offset = 0x80 >> (x & 7), y * 40 + x // 8
+    buffers = pages(data)
+    return [sum(1 << (3 - plane) for plane in range(4)
+                if buffers[4 * role + plane][offset] & bit)
+            for role in range(2)]
+
+
+def cross_paint_history(window_path, window, history, selected_planes, original_bodies, captures, body_rows,
+                        omit_panel_refresh=False):
+    """Predict complete requested-plane XOR from common initial pages and paints.
+
+    Other cockpit/message planes remain in the strict difference report. No
+    fitted phase, discarded pixel or altered captured page participates here.
+    """
+    events = {(row['iteration'], row['runtime']): row['paints'] for row in history}
+    expected, previous_draw, rows = {}, {}, []
+    panel_refreshes = []
+    body_hashes = {row['iteration']: row['native_body_input_sha256'] for row in body_rows}
+    planes = [4 * role + plane for role in range(2) for plane in selected_planes]
+    for observed in window['rows']:
+        i, j = observed['source_iteration'], observed['native_iteration']
+        live = {}
+        for name, index in (('source', i), ('native', j)):
+            path = window_path / f'{name}.{index}.dat.gz'
+            if not path.exists():
+                # Passing entry RAM is deliberately pruned. Require its
+                # actual retained body-begin pages to equal the complete
+                # source entry too; never synthesize missing/differing bytes.
+                assert name == 'native' and not observed['page_differences']
+                data = gzip.decompress((window_path / f'native.{index}.before.dat.gz').read_bytes())
+                assert pages(data) == live['source'], 'Retained body pages do not prove the passing entry'
+            else:
+                data = gzip.decompress(path.read_bytes())
+            live[name] = pages(data)
+            draw = integer(data, 0xC4566C, 2)
+            if name not in expected:
+                expected[name] = [bytearray(page) for page in live[name]]
+            elif previous_draw[name] != draw:
+                expected[name] = expected[name][4:] + expected[name][:4]
+            previous_draw[name] = draw
+        if not rows:
+            assert all(live['source'][plane] == live['native'][plane] for plane in planes), 'History must start at common requested planes'
+        actual_delta = []
+        for plane in planes:
+            actual = bytes(x ^ y for x, y in zip(live['source'][plane], live['native'][plane]))
+            predicted = bytes(x ^ y for x, y in zip(expected['source'][plane], expected['native'][plane]))
+            assert actual == predicted, (i, plane, 'Radar paint history does not explain complete plane difference')
+            actual_delta.append(actual)
+        rows.append(dict(iteration=i, planes=planes, compared_bytes=8000 * len(planes),
+            difference_bytes=[sum(bool(byte) for byte in page) for page in actual_delta],
+            delta_sha256=digest(b''.join(actual_delta))))
+        for name in ('source', 'native'):
+            if name == 'source':
+                body = gzip.decompress((original_bodies / f'source-body.{i}.before.dat.gz').read_bytes())
+                assert digest(body) == captures[i]['before']['ram_sha256']
+            else:
+                body = gzip.decompress((window_path / f'native.{j}.before.dat.gz').read_bytes())
+                assert digest(body) == body_hashes[i]
+            if 0 < integer(body, 0xC45836, 1) < 128:
+                # C30764 copies all 55 instrument rows on a frame redraw.
+                # This bounded route has no horizontal or vertical clipping;
+                # copy the actual immutable image, never a fitted pixel reset.
+                assert integer(body, 0xC45986, 2) == integer(body, 0xC458D8, 2) == 0
+                assert integer(body, 0xC45918, 4) == 0
+                images = []
+                for plane in range(4):
+                    pointer = integer(body, 0xC30752 + 4 * plane, 4)
+                    image = span(body, integer(body, pointer, 4), 2200)
+                    images.append(digest(image))
+                    if not omit_panel_refresh:
+                        expected[name][plane][5800:8000] = image
+                panel_refreshes.append(dict(iteration=i, runtime=name, image_sha256=images))
+            apply_paints(expected[name], events[i, name])
+    for iteration in {row['iteration'] for row in panel_refreshes}:
+        copies = [row for row in panel_refreshes if row['iteration'] == iteration]
+        assert {row['runtime'] for row in copies} == {'source', 'native'}
+        assert copies[0]['image_sha256'] == copies[1]['image_sha256'], 'Instrument bitmap bytes differ'
+    return dict(rows=rows, panel_refreshes=panel_refreshes)
+
+
 def verify(rows):
     phase_offset = None
     for i, row in enumerate(rows):
@@ -112,6 +258,10 @@ def main():
         help='Ordinary original recording required to bind optional trace fields')
     parser.add_argument('--complete-page-delta', action='store_true',
         help='Require every complete-page XOR byte to equal the observed cached selected-marker difference')
+    parser.add_argument('--paint-history', action='store_true',
+        help='Predict complete live owner pages from ordered crosshair/erase/marker operations')
+    parser.add_argument('--paint-planes', type=int, nargs='+', choices=range(4), default=[2],
+        help='Complete planes whose cross-runtime differences must follow the paint history (default: 2)')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
@@ -166,6 +316,8 @@ def main():
                 cwd=ROOT, stdout=log, stderr=subprocess.STDOUT, check=True)
     env = {k: v for k, v in os.environ.items() if not k.startswith('FA18_FRAME_')}
     rows = []
+    paint_history = []
+    paint_rejections = dict(lost_erase=False, wrong_marker_colour=False, wrong_head_slope=False)
     with tempfile.TemporaryDirectory(prefix='radar-cadence-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         for observed in window['rows']:
@@ -232,6 +384,31 @@ def main():
                         assert span(actual, 0xC4E2BC, 0x4B0) == span(observed_output, 0xC4E2BC, 0x4B0)
                         assert state['phase_after'] == integer(observed_output, 0xC45883, 1)
                         assert span(actual, 0xC4586D, 3) == span(observed_output, 0xC4586D, 3)
+                        if args.paint_history:
+                            expected = painted_pages(owner_input, state['paints'])
+                            assert expected == observed_pages, (i, name, 'Ordered radar paints do not predict every live page byte')
+                            paint_history.append(dict(iteration=i, runtime=name,
+                                owner_input_sha256=digest(owner_input), owner_output_sha256=digest(observed_output),
+                                predicted_pages_sha256=[digest(p) for p in expected], compared_bytes=64000,
+                                pixel_163_162_before=pixel_colour(owner_input, 163, 162),
+                                pixel_163_162_after=pixel_colour(observed_output, 163, 162),
+                                paints=state['paints']))
+                            for kind in paint_rejections:
+                                changed = copy.deepcopy(state['paints'])
+                                if kind == 'lost_erase':
+                                    changed = [p for p in changed if p['colour']]
+                                else:
+                                    target = next((p for p in changed if
+                                        (p['kind'] == 'line' if kind == 'wrong_head_slope' else
+                                         p['kind'] != 'line' and p['colour'] in (1, 8))), None)
+                                    if target is None:
+                                        continue
+                                    if kind == 'wrong_head_slope':
+                                        target['x1'] += 1
+                                    else:
+                                        target['colour'] = 1 if target['colour'] == 8 else 8
+                                if painted_pages(owner_input, changed) != observed_pages:
+                                    paint_rejections[kind] = True
                 if name == 'source':
                     body = gzip.decompress((args.original_bodies / f'source-body.{i}.before.dat.gz').read_bytes())
                     assert digest(body) == captures[i]['before']['ram_sha256']
@@ -291,6 +468,24 @@ def main():
     report['live_native_pages_matching'] = sum(row['native_live_pages_matching'] for row in rows)
     report['strict_live_owner_pages_matching'] = all(
         row[name + '_live_pages_matching'] for row in rows for name in ('source', 'native'))
+    if args.paint_history:
+        assert all(paint_rejections.values()), paint_rejections
+        report['paint_history'] = paint_history
+        report['paint_mutation_rejections'] = paint_rejections
+        history = cross_paint_history(args.window, window, paint_history, args.paint_planes,
+                                     args.original_bodies, captures, rows)
+        report['cross_paint_history'] = history
+        if history['panel_refreshes']:
+            try:
+                cross_paint_history(args.window, window, paint_history, args.paint_planes,
+                                    args.original_bodies, captures, rows, omit_panel_refresh=True)
+            except AssertionError as error:
+                assert error.args and error.args[0][-1] == 'Radar paint history does not explain complete plane difference', error
+                report['paint_mutation_rejections']['lost_panel_refresh'] = True
+            else:
+                report['unobservable_paint_mutations'] = ['lost_panel_refresh']
+        report['scope'] += ' Ordered radar crosshair, erase and marker writes predict every complete live owner page byte, including background-bit erasure.'
+        report['scope'] += ' Cross-runtime XOR is predicted for all bytes of the requested planes from a common initial state, including actual instrument bitmap redraws.'
     if page_deltas is not None:
         report['complete_page_delta'] = page_deltas
         report['scope'] += ' Every full-page XOR byte in this bounded window equals the retained radar point-cache delta; no pixels are excluded.'
@@ -299,6 +494,9 @@ def main():
           f'{len(rows)} native body comparisons; phase offset={phase_offset}; four mutations rejected')
     print(f"Live original owner pages: {report['live_original_pages_matching']}/{len(rows)} match; "
           f"native: {report['live_native_pages_matching']}/{len(rows)} match")
+    if args.paint_history:
+        print(f"Ordered paints predict {len(paint_history)} complete owner page sets; "
+              f"all requested-plane XOR bytes match across {len(history['rows'])} observations")
     subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
     return 0 if report['strict_live_owner_pages_matching'] else 1
 

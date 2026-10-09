@@ -1,5 +1,13 @@
 # The C port
 
+Bounded radar history (2026-10-09): ordered original crosshair, cache erasure
+and marker writes predict all 70 complete owner page sets across 35 observations.
+Actual instrument bitmap redraws explain all requested plane XOR bytes
+(944,000), including the later background-bit interaction. Negative controls
+and the existing five-frame delta check pass. Runtime is unchanged; complete
+flight drawing remains 287/4,967, with message differences still open. See
+[paint history evidence](analysis/native_radar_paint_history_milestone.md).
+
 Free Flight model crash fix (2026-10-09): valid command $90 at C3BA04
 now derives the original six-point block through C20F78; its shared $94
 entry is also connected. 184 complete command cases and 32 actual-model
@@ -12,8 +20,8 @@ preserve all qualification/mission-three traces, final RAM, counters and
 earned saves, with zero gameplay heap violations. Five bounded complete
 page deltas match selected-radar marker history. Corrected original owner
 returns match all pages in both bounded windows (5/5 and 11/11); the previous
-end address included the next HUD child and is now rejected. Later pixel
-interaction and broader drawing stay open. Runtime is unchanged. See
+end address included the next HUD child and is now rejected. Bounded pixel
+interaction is now explained above; broader drawing stays open. Runtime is unchanged. See
 [current evidence](analysis/native_cockpit_radar_milestone.md).
 
 Original voice ownership (2026-10-09): reference tracing now resolves the

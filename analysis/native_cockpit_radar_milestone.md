@@ -65,7 +65,11 @@ All 11 original and 11 native live owner-return pages match; 44 non-stack
 owner comparisons and 11 complete native body checks pass. The marker colour
 can interact with the underlying page, so this result does not generalize the
 five-observation colour-1 cache-delta rule to this window or the complete flight.
-Complete cross-runtime pixel interaction and message differences remain open.
+The later [paint-history check](native_radar_paint_history_milestone.md) now
+predicts every owner page byte and every plane-2 XOR byte in this window,
+including destructive background-bit erasure. It also explains the earlier
+24-observation plane-1/2 history through actual instrument bitmap redraws.
+Message differences and broader whole-flight drawing remain open.
 
 ## Reproduction and retained evidence
 
