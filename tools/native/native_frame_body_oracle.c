@@ -70,6 +70,9 @@ int main(int argc,char **argv) {
     const int trace_plot=getenv("FA18_FRAME_TRACE_PLOT")!=NULL;
     const char *radar_dump=getenv("FA18_FRAME_RADAR_DUMP");
     unsigned radar_exports=0;
+    const char *message_dump=getenv("FA18_FRAME_MESSAGE_DUMP");
+    unsigned message_exports=0;
+    gaddr message_return=0,message_stack=0;
     const char *descriptor_dump=getenv("FA18_FRAME_DESCRIPTOR_DUMP");
     const char *descriptor_stream=getenv("FA18_FRAME_DESCRIPTOR_STREAM");
     unsigned descriptor_exports=0;
@@ -83,6 +86,20 @@ int main(int argc,char **argv) {
     unsigned restore_first=0,restore_second=0;
     uint16_t context_factor=0;
     for(step=0;step<10000000;++step) {
+        if(message_dump && REG_PC==0xc322eeu && !message_exports) {
+            message_return=rd_u32(REG_A[7]);message_stack=REG_A[7]+4;
+            if(message_return!=0xc0f286u && message_return!=0xc0f2dcu) return 1;
+        }
+        if(message_dump && ((REG_PC==0xc322eeu && !message_exports) ||
+           (message_exports==1 && REG_PC==message_return && REG_A[7]==message_stack))) {
+            char path[4096];
+            if(snprintf(path,sizeof path,"%s.%s.dat",message_dump,
+                        message_exports?"after":"before")>=(int)sizeof path) return 1;
+            FILE *out=fopen(path,"wb");
+            if(!out || fwrite(m->chip,1,0x80000,out)!=0x80000 ||
+               fwrite(m->slow,1,0x80000,out)!=0x80000 || fclose(out)) return 1;
+            ++message_exports;
+        }
         if(radar_dump && ((REG_PC==0xc31226u && !(radar_exports&1u)) ||
                           (REG_PC==0xc0f18eu && !(radar_exports&2u)))) {
             const int after=REG_PC==0xc0f18eu;
@@ -199,6 +216,9 @@ int main(int argc,char **argv) {
                 pixel,previous_pixel,rd_u8(pixel),REG_PPC,REG_D[0],REG_D[1],REG_A[3],rd_u16(CURRENT_COLOUR),rd_u32(0xc18214));
     }
     if(step==10000000) {fprintf(stderr,"Frame body did not return at %06X\n",REG_PC);return 1;}
+    if(message_dump && message_exports!=2) {
+        fputs("Frame message owner did not produce both actual boundaries\n",stderr);return 1;
+    }
     printf("Frame input carry: %u\n",REG_D[4]);
     if(restore_first || restore_second)
         printf("Mode-five restoration: %u first-record calls, %u second-record calls\n",

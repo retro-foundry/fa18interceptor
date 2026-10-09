@@ -7,7 +7,8 @@ int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
-    uint8_t *data=argc==2?file_bytes(argv[1],&nd):NULL;
+    const int message_only=argc==3;
+    uint8_t *data=(argc==2 || message_only)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *machine=calloc(1,sizeof *machine);
     FA18Machine *before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x100000);
@@ -23,12 +24,17 @@ int main(int argc,char **argv) {
         {0xc322ee,check_message_return}
     };
     for(unsigned owner=0;owner<sizeof owners/sizeof owners[0];++owner) {
+        if(message_only && owner!=2) continue;
         /* Each owner gets the unmodified observed state. This is component
          * validation, not a fabricated full-frame execution order. */
         memcpy(machine->chip,data,0x80000);memcpy(machine->slow,data+0x80000,0x80000);
         memcpy(before,machine,sizeof *before);
         checked_return=(NativeInputReturn){0};
-        owners[owner].host();
+        TextDrawResult text={0};
+        if(message_only) {
+            text=host_draw_message_line();
+            checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},text);
+        } else owners[owner].host();
         memcpy(expected,machine->chip,0x80000);memcpy(expected+0x80000,machine->slow,0x80000);
         memcpy(machine,before,sizeof *before);
         if(!hud_original(owners[owner].entry)) return 1;
@@ -46,8 +52,16 @@ int main(int argc,char **argv) {
             }
         }
         if(differences) {fprintf(stderr,"%u non-stack byte differences\n",differences);return 1;}
+        if(message_only) {
+            FILE *out=fopen(argv[2],"wb");
+            if(!out || fwrite(expected,1,0x100000,out)!=0x100000 || fclose(out)) return 1;
+            printf("{\"complete_non_stack_ram_matching\":true,\"text_result\":%u,\"text_drawn\":%s,"
+                   "\"return_preserved\":%s,\"return_value\":%u}\n",
+                (unsigned)text.kind,(text.kind==TEXT_DRAW_GLYPH || text.kind==TEXT_DRAW_CHARACTER)?"true":"false",
+                text.kind==TEXT_DRAW_NONE?"true":"false",checked_return.value);
+        }
     }
-    puts("Three observed-state message owners match original non-stack RAM and defined text return");
+    if(!message_only) puts("Three observed-state message owners match original non-stack RAM and defined text return");
     free(expected);free(before);free(machine);free(data);free(rom);free(state);
     return 0;
 }

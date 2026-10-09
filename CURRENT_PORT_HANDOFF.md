@@ -1,5 +1,12 @@
 # Current playable port handoff
 
+Bounded message pages (2026-10-09): ten actual C322EE inputs/returns match
+original instructions; immutable glyphs and source colour/clear rules predict
+all 640,000 owner page bytes. Five native bodies and live original text returns
+pass. Current whole-flight message rules still pass all 4,964 transitions and
+nine controls. Runtime is unchanged; cross-runtime complete frame histories
+and broader drawing remain open. See [message evidence](analysis/native_message_owner_pages_milestone.md).
+
 Bounded radar history (2026-10-09): ordered original crosshair, cache erasure
 and marker writes predict all 70 complete owner page sets across 35 observations.
 Actual instrument bitmap redraws explain all requested plane XOR bytes
