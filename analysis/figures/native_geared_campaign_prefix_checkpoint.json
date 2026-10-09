@@ -165,5 +165,69 @@
   "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
   "complete_campaign_accepted": false,
   "independent_original_whole_flight_accepted": false,
-  "debug_prefix_replay_verified": false
+  "debug_prefix_replay_verified": true,
+  "debug_runner_sha256": "3c039eaf4a4d3d15b3ae690b17817381bd72e0de378e4f3ac0e472f92777c5c7",
+  "debug_canonical": {
+    "frame_owner_exit": false,
+    "frames": 125454,
+    "screen": "menu",
+    "mode": 0,
+    "glyphs": 31544,
+    "record_updates": 21750,
+    "scene_frames": 21739,
+    "terrain_polygons": 77150,
+    "model_calls": 144397,
+    "hud_frames": 21739,
+    "control_frames": 56751,
+    "scene_selected": true,
+    "stage": "C0FCB4",
+    "game_tick": 0,
+    "timer_pending": false,
+    "timer_yields": 51242,
+    "display_publications": 56751,
+    "display_yields": 56796,
+    "display_pending": false,
+    "displayed_page": 0,
+    "postflight_callbacks": 0,
+    "postflight_resets": 0,
+    "input_passes": 56745,
+    "input_events": 9084,
+    "input_queued": 0,
+    "update_iterations": 74011,
+    "replay_iterations": 0,
+    "replay_events": 0,
+    "host_replay_events": 9116,
+    "host_replay_pending": 0,
+    "replay_started": false,
+    "voice_ticks": 125454,
+    "voice_publications": 263450,
+    "voice_levels": [
+      [
+        358,
+        31
+      ],
+      [
+        358,
+        31
+      ],
+      [
+        124,
+        0
+      ],
+      [
+        300,
+        0
+      ]
+    ],
+    "sample_requests": 160463,
+    "sample_frames": 120435840,
+    "nonzero_sample_frames": 117887078,
+    "audio_device": false,
+    "frame_capture_complete": false,
+    "frame_before_tick": 0,
+    "frame_after_tick": 0,
+    "frame_saved_tick": 0,
+    "cpu_emulation": false,
+    "chipset_emulation": false
+  }
 }

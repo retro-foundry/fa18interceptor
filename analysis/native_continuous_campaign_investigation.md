@@ -169,7 +169,9 @@ with zero crash resets and no pending host/game input. All 78 saved bytes agree
 with the observing driver; completion count is four and the four earned grades
 are one. Driver observations require raised gear in flight and lowered gear
 before touchdown. This establishes playable integration for that prefix only.
-Debug replay and the six-mission campaign remain open.
+Debug independently replays this same prefix and matches every reported
+Release counter plus all 78 saved bytes. The compact proof now includes its
+runner hash and complete counter object. The six-mission campaign remains open.
 
 The compact verified checkpoint is
 `figures/native_geared_campaign_prefix_checkpoint.json`; local input/report/logs
@@ -185,6 +187,16 @@ cleanup pass in each (Release 24.85 s, Debug 49.89 s). Python syntax and both
 CLI help paths pass. This validates a diagnostic-tool checkpoint, not the full
 campaign or visible-performance workflow. Full Release/Debug campaign checks
 remain necessary before registering an accepted continuous-campaign gate.
+
+Cold suffix diagnostics can set `FA18_CAMPAIGN_START_MODE=7` and supply
+`saved-pilot` with the actual mode-six save from the compact checkpoint. They
+observe the normal loader and ordinary flight keys, emit a distinct
+`diagnostic_campaign_suffix` summary and cannot satisfy the full checker.
+The missile-retry suffix completes geared cruise interception, carrier wire,
+save and menu; final combat subsequently crashes without an aircraft expiry.
+It is not uninterrupted campaign evidence. The full Release rerun is
+`campaign-session-gear-missile-retry/`; see `campaign-suffix-missile-retry/`
+for the cold input diagnostics. No passing RAM is retained.
 
 ```powershell
 cmake --build build/native-cmake --config Release --target fa18_native_campaign_session_test --parallel 8

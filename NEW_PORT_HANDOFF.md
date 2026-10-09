@@ -43,13 +43,20 @@ The prefix through rescue now also passes in one actual Release `fa18_native`
 process. Qualification and four geared missions produce exactly the driver's
 78 saved bytes, menu C0FCB4/mode zero at tick 125454, with no crash reset or
 pending input. See `analysis/figures/native_geared_campaign_prefix_checkpoint.json`.
-This is partial playable integration, not six-mission or independent-original
+Debug now replays the same prefix with identical complete counters and saved
+bytes. This is partial playable integration, not six-mission or independent-original
 acceptance. The latest cruise gun approach earns the original objective at
 tick 138725, then crashes during the low-altitude return handoff; no saved
 cruise completion is claimed. Diagnostic targets build in Release/Debug and
 the existing mission-five success comparison passes in both. No test is
 currently running. See `campaign-session-gear-cruise-close-gun/` for that failure.
 No visible measurement process is running after the interrupted old route.
+
+The cold geared cruise diagnostic now earns interception, carrier wire,
+save and menu (`build/native-flight/campaign-suffix-missile-retry/`). Its initial
+save is the actual four-mission result. Final combat then crashes without an
+aircraft expiry. This cold suffix cannot qualify the uninterrupted campaign;
+the current full Release rerun is `campaign-session-gear-missile-retry/`.
 
 Visible measurement was run via `tools/native/measure_visible_performance.py`
 under `build/native-flight/visible-performance-20261009/`: demo and six actual
