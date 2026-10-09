@@ -1,0 +1,327 @@
+{
+  "scope": "Five native frame bodies compared with original instructions, seeded from native pre-body RAM; not an independent whole flight",
+  "runner_sha256": "585001610ed3e0c6383e8ed3718466deee855a6af88aa6367a631fc2463bbc3a",
+  "oracle_sha256": "fda1bf6281a5fc431f80584e9e0c23e09ffeb0e02481682497d12789662b4eb3",
+  "bodies": [
+    {
+      "iteration": 19332,
+      "timing": {
+        "iteration": 19332,
+        "before_tick": 35309,
+        "after_tick": 35311,
+        "saved_tick": 5628,
+        "owner_exit": false
+      },
+      "motion_flags_before": 0,
+      "motion_flags_after": 0,
+      "returncode": 0,
+      "stdout": "Frame input carry: 12835196\nFrame body: 0 gameplay differences, 0 display bytes; 79935 instructions, 2 timer samples; excluded scratch=46 voice=13 busy=6\n",
+      "stderr": "",
+      "before_sha256": "bed89b0a19ceaf6ac423e98a4f01c66df6a97026829a23a27fa0a94e787e98dd",
+      "after_sha256": "5c83680813d20318be00718a1be38f7fa11196fd22ff25092d05dc88495289cc"
+    },
+    {
+      "iteration": 19333,
+      "timing": {
+        "iteration": 19333,
+        "before_tick": 35312,
+        "after_tick": 35315,
+        "saved_tick": 5629,
+        "owner_exit": false
+      },
+      "motion_flags_before": 0,
+      "motion_flags_after": 0,
+      "returncode": 0,
+      "stdout": "Frame input carry: 12835196\nFrame body: 0 gameplay differences, 0 display bytes; 81705 instructions, 2 timer samples; excluded scratch=35 voice=15 busy=6\n",
+      "stderr": "",
+      "before_sha256": "4941c56e46a0e1c5f80c03212a8547785cd03e04142adeede208a7465bb8f2ba",
+      "after_sha256": "c7321da66595738ad3e89bb56cc67afa6f89fe0d6fbb661d898b0f34b9956081"
+    },
+    {
+      "iteration": 19334,
+      "timing": {
+        "iteration": 19334,
+        "before_tick": 35316,
+        "after_tick": 35318,
+        "saved_tick": 5630,
+        "owner_exit": false
+      },
+      "motion_flags_before": 0,
+      "motion_flags_after": 2,
+      "returncode": 0,
+      "stdout": "Frame input carry: 268780\nFrame body: 0 gameplay differences, 0 display bytes; 99301 instructions, 2 timer samples; excluded scratch=38 voice=16 busy=6\n",
+      "stderr": "word C461A4 0001 -> 0201 at C2613A frame=C7FF80 sp=C7FEF0 d0=00000040 d1=00000000 d2=000018E7 d3=00002E00\n",
+      "before_sha256": "ac48a7a711417c6f7819d201a628a8652e2bb4a5781b1321e38ebe6fdc8562ea",
+      "after_sha256": "ea8376c264754791a4fad8cb2ce01a10ba6c5f0a2212aec23fa90a1d9e9c3c6e"
+    },
+    {
+      "iteration": 19335,
+      "timing": {
+        "iteration": 19335,
+        "before_tick": 35319,
+        "after_tick": 35321,
+        "saved_tick": 5631,
+        "owner_exit": false
+      },
+      "motion_flags_before": 2,
+      "motion_flags_after": 2,
+      "returncode": 0,
+      "stdout": "Frame input carry: 219708\nFrame body: 0 gameplay differences, 0 display bytes; 108917 instructions, 2 timer samples; excluded scratch=49 voice=19 busy=5\n",
+      "stderr": "",
+      "before_sha256": "a13a80cf095a7f5eb8d1562c9cb540cba5b2e987e2a37e77582b7e6c222a9a2a",
+      "after_sha256": "bcbcfe05fd62b0098e86e79d7f69148a800b1df28e9555095c9febcd0aac8e74"
+    },
+    {
+      "iteration": 19336,
+      "timing": {
+        "iteration": 19336,
+        "before_tick": 35322,
+        "after_tick": 35325,
+        "saved_tick": 5632,
+        "owner_exit": false
+      },
+      "motion_flags_before": 2,
+      "motion_flags_after": 2,
+      "returncode": 0,
+      "stdout": "Frame input carry: 268820\nFrame body: 0 gameplay differences, 0 display bytes; 99202 instructions, 2 timer samples; excluded scratch=39 voice=20 busy=6\n",
+      "stderr": "",
+      "before_sha256": "07ae10062c652f88890005974969035ee08ece4a3d0f9d01f4a53fb0334aa6fd",
+      "after_sha256": "974cfcbead970f35ac760b9ee01f4a4d35057d50c6ac90bbe38a66cc804fe27b"
+    }
+  ],
+  "all_compared_bodies_match": true,
+  "date": "2026-10-09",
+  "complete_campaign_accepted": false,
+  "independent_original_whole_flight_accepted": false,
+  "native_runtime_changed": false,
+  "player_destroyed_tick": 35318,
+  "original_destroyed_flag_writer": "C2613A",
+  "component_damage": 0,
+  "earned_initial_save_sha256": "94ce2bc0faef4c0bfeecdd223a8a64e96759883546f5b18e1878ca29ed521e59",
+  "host_input_sha256_lf": "7584caaa2f38bd04ce395dc3b0ab638fcf14ff2c3791bb48fd7ad8ada1c156e9",
+  "retained_compressed_hit": {
+    "build\\native-flight\\campaign-suffix-final-destroyed\\hit-19334.after.dat.gz": {
+      "compressed_sha256": "1a54b9eb42302ac09b35ccea454666523f4afcd4c912c3ab3940614bec35a5d2",
+      "ram_sha256": "ea8376c264754791a4fad8cb2ce01a10ba6c5f0a2212aec23fa90a1d9e9c3c6e"
+    },
+    "build\\native-flight\\campaign-suffix-final-destroyed\\hit-19334.before.dat.gz": {
+      "compressed_sha256": "820b54799a204f9d67ffcc288da37eee8e2191e06ffbdd976a759d59366e81c3",
+      "ram_sha256": "ac48a7a711417c6f7819d201a628a8652e2bb4a5781b1321e38ebe6fdc8562ea"
+    },
+    "build\\native-flight\\campaign-suffix-final-destroyed\\hit-19334.source.dat.gz": {
+      "compressed_sha256": "5f4967b17503c7795e65a1007d2d5fcd6881a518058750b8d1927afc0b6e9c2d",
+      "ram_sha256": "a7cd0ff7e6eb6c25be76d6fa07d54eff0fb2e013170bfb2f4beb5e2db2e6406d"
+    }
+  },
+  "debug_diagnostic_matches_release": true,
+  "debug_destroyed_event": {
+    "player_destroyed": true,
+    "tick": 35318,
+    "mode": 8,
+    "motion_flags": 2,
+    "damage": 0,
+    "contact": 2,
+    "hit_source": 2048,
+    "fuel": 6054134,
+    "thrust": 106,
+    "height": 11850
+  },
+  "debug_driver_sha256": "777a91d59f06b81c7bb6f91238418a6bbdc917fed3a121b548c528688eebcb8e",
+  "debug_host_input_matches_release": true,
+  "failed_input_candidates": [
+    {
+      "directory": "build\\native-flight\\campaign-suffix-final-close-defense",
+      "description": "Approaching missiles within 3 km, existing decoy timers finish",
+      "retained_in_pilot": false,
+      "accepted": false,
+      "input_sha256_lf": "811769cd853a59a718fedbc1658791f890c65d4fa1552e6109c7d8fbfaa0c1b3",
+      "log_sha256": "a32ff7c2c814e111d99690a5c315735b6c1d9306e19bfbd3d5586188455d8401",
+      "destroyed_events": [
+        {
+          "player_destroyed": true,
+          "tick": 29378,
+          "mode": 8,
+          "motion_flags": 2,
+          "damage": 0,
+          "contact": 2,
+          "hit_source": 2048,
+          "fuel": 6139361,
+          "thrust": 102,
+          "height": 11827
+        }
+      ],
+      "launches": [
+        {
+          "pilot_fire": true,
+          "tick": 19634,
+          "target": 8,
+          "range": 14922.5,
+          "yaw_error": -0.00587,
+          "stock": 36,
+          "linked": 0
+        }
+      ],
+      "last_trace": {
+        "trace": true,
+        "tick": 29901,
+        "phase": 0,
+        "pilot_phase": 0,
+        "gate": 0,
+        "function_level": 84,
+        "controls": 102,
+        "thrust": 102,
+        "fuel": 6139361,
+        "admitted": 4,
+        "created": 3,
+        "aux": 0,
+        "gun_hits": 0,
+        "radar_hits": 2,
+        "weapon": 48,
+        "stock": 35,
+        "selected": 4096,
+        "pilot_target": 8,
+        "cockpit_flags": 2497,
+        "message_state": 8288,
+        "view_record": 0,
+        "context_select": 0,
+        "stream_mode": 0,
+        "input_queued": 0,
+        "block_flags": 224
+      }
+    },
+    {
+      "directory": "build\\native-flight\\campaign-suffix-final-radar-close-defense",
+      "description": "Radar first, minimum speed 125, decoys within 1 km, unrestricted radar alignment",
+      "retained_in_pilot": false,
+      "accepted": false,
+      "input_sha256_lf": "390a2954666bed25cd828f3ac24f34025b3c5db437700e8168831948e1880811",
+      "log_sha256": "23fdce95233763e5596431a4f15d745f45b47efcf7b29eac5fe5ab636af4bedf",
+      "destroyed_events": [],
+      "launches": [
+        {
+          "pilot_fire": true,
+          "tick": 19061,
+          "target": 8,
+          "range": 29839.825,
+          "yaw_error": -0.004646,
+          "stock": 36,
+          "linked": 0
+        },
+        {
+          "pilot_fire": true,
+          "tick": 19344,
+          "target": 10,
+          "range": 22183.605,
+          "yaw_error": 1.025249,
+          "stock": 20,
+          "linked": 0
+        }
+      ],
+      "last_trace": {
+        "trace": true,
+        "tick": 41400,
+        "phase": 0,
+        "pilot_phase": 0,
+        "gate": 0,
+        "function_level": 121,
+        "controls": 101,
+        "thrust": 0,
+        "fuel": 0,
+        "admitted": 4,
+        "created": 3,
+        "aux": 1,
+        "gun_hits": 0,
+        "radar_hits": 3,
+        "weapon": 48,
+        "stock": 4,
+        "selected": 5120,
+        "pilot_target": 10,
+        "cockpit_flags": 2240,
+        "message_state": 8256,
+        "view_record": 0,
+        "context_select": 0,
+        "stream_mode": 0,
+        "input_queued": 0,
+        "block_flags": 224
+      }
+    },
+    {
+      "directory": "build\\native-flight\\campaign-suffix-final-radar-cruise-defense",
+      "description": "Radar first, minimum speed 90, decoys within 1 km, wider launch alignment",
+      "retained_in_pilot": false,
+      "accepted": false,
+      "input_sha256_lf": "106d294f5de7bdff953757eb9f9f65b504545bf3d27146680c96096396eba3c7",
+      "log_sha256": "8c54c04b9ec113b8fc26a7fdcfa1430f85fe16124f2dc491044fa8082788dbf9",
+      "destroyed_events": [
+        {
+          "player_destroyed": true,
+          "tick": 42392,
+          "mode": 8,
+          "motion_flags": 2,
+          "damage": 0,
+          "contact": 2,
+          "hit_source": 2048,
+          "fuel": 5226981,
+          "thrust": 93,
+          "height": 10368
+        }
+      ],
+      "launches": [
+        {
+          "pilot_fire": true,
+          "tick": 19067,
+          "target": 8,
+          "range": 29761.591,
+          "yaw_error": -0.006059,
+          "stock": 36,
+          "linked": 0
+        },
+        {
+          "pilot_fire": true,
+          "tick": 19672,
+          "target": 8,
+          "range": 7658.903,
+          "yaw_error": -0.188374,
+          "stock": 20,
+          "linked": 0
+        },
+        {
+          "pilot_fire": true,
+          "tick": 20279,
+          "target": 8,
+          "range": 10651.937,
+          "yaw_error": 0.096663,
+          "stock": 4,
+          "linked": 0
+        }
+      ],
+      "last_trace": {
+        "trace": true,
+        "tick": 42902,
+        "phase": 0,
+        "pilot_phase": 0,
+        "gate": 0,
+        "function_level": 84,
+        "controls": 170,
+        "thrust": 93,
+        "fuel": 5226981,
+        "admitted": 4,
+        "created": 3,
+        "aux": 0,
+        "gun_hits": 0,
+        "radar_hits": 2,
+        "weapon": 48,
+        "stock": 3,
+        "selected": 4096,
+        "pilot_target": 8,
+        "cockpit_flags": 2497,
+        "message_state": 8288,
+        "view_record": 0,
+        "context_select": 0,
+        "stream_mode": 0,
+        "input_queued": 0,
+        "block_flags": 224
+      }
+    }
+  ]
+}

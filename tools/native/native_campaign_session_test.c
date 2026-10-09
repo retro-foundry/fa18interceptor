@@ -12,7 +12,7 @@
 #include <string.h>
 
 typedef struct { NativeReplay replay; FILE *keys; unsigned previous_stage; int code_pressed; } QualificationInput;
-typedef struct { int airborne, landed, wire, gear_raised, gear_lowered; } FlightEvidence;
+typedef struct { int airborne, landed, wire, gear_raised, gear_lowered; unsigned destroyed_tick; } FlightEvidence;
 
 static int failed(NativeFrontend *game,const char *operation) {
     fprintf(stderr,"Campaign %s failed at tick %u, screen %s, stage %06X, mode %u, phase %u, completions %u, resets %u\n",
@@ -32,6 +32,16 @@ static void observe(NativeFrontend *game,enum NativeFrameBoundary boundary,uint1
     FlightEvidence *flight=context;
     (void)game;(void)saved;
     if(boundary!=NATIVE_FRAME_BODY_END) return;
+    /* C13D84 treats record +32 bit 1 as destroyed independently of +60's
+     * component damage. Observe the first complete body that sets it. */
+    if(!flight->destroyed_tick && (rd_u8(CONTROL_RECORDS+32)&2)) {
+        flight->destroyed_tick=game->ticks;
+        printf("{\"player_destroyed\":true,\"tick\":%u,\"mode\":%u,\"motion_flags\":%u,\"damage\":%u,\"contact\":%u,\"hit_source\":%u,\"fuel\":%u,\"thrust\":%d,\"height\":%d}\n",
+            game->ticks,rd_u8(MODE_SELECT),rd_u8(CONTROL_RECORDS+32),rd_u8(CONTROL_RECORDS+60),
+            rd_u16(CONTROL_RECORDS+2),rd_u16(0xc4fdd2u),rd_u32(CONTROL_RECORDS+114),
+            rd_s8(CONTROL_RECORDS+43),rd_s32(CONTROL_RECORDS+24)/256);
+        fflush(stdout);
+    }
     unsigned contact=rd_u16(CONTROL_RECORDS+2);
     if(rd_u32(STAGE_CALLBACK)==0xc10dae && !(contact&0x80)) flight->airborne=1;
     if(flight->airborne && !(contact&0x80) && (rd_u8(COMMAND_BLOCK_FLAGS)&0x80)) flight->gear_raised=1;

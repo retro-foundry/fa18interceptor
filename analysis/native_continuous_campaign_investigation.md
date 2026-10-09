@@ -236,6 +236,63 @@ $env:FA18_MISSION_TRACE='1'
 python tools/native/check_campaign_session.py --runner build/native-cmake/native/Release/fa18_native.exe --out build/native-flight/campaign-session-legacy-five
 ```
 
+## Original destruction-frame diagnosis — 2026-10-09
+
+The connected continuous driver now observes the first complete body setting
+CONTROL_RECORDS +32 bit one, separately from component damage at +60. Its
+read-only mission trace also prints each record's motion flags. The actual
+earned five-mission saved file, SHA256
+`94ce2bc0faef4c0bfeecdd223a8a64e96759883546f5b18e1878ca29ed521e59`,
+starts the cold final-flight diagnostic in
+`build/native-flight/campaign-suffix-final-destroyed/`. No flight RAM or result
+state is seeded in that driver. It observes destruction at host tick 35318,
+height 11850, fuel 6054134, thrust 106 and component damage zero; the route
+crashes and returns to menu without a sixth saved result.
+
+The actual Release playable runner reproduces the emitted ordinary host keys.
+Raw replay iterations 19332..19336 export five complete before/after bodies;
+`native_frame_body_oracle` runs the original instructions for each body's
+observed timer interval. All five compare with zero gameplay and display-byte
+differences under the existing scratch/voice/blitter-busy exclusions. Iteration
+19334 changes player motion flags from 0 to 2. The original watch trace identifies
+`C2613A: bset #1, ($20,A1)`, with word C461A4 changing 0001 to 0201.
+C2612A-C26136 checks the original chaff/flare timers before this destruction;
+native `flight_dynamics.c`'s collision-speed branch has the same ownership.
+C13D84's destroyed branch explains the later thrust/fuel freeze. This hit is
+source-matching behavior, not evidence of a native motion defect.
+Release and Debug diagnostic targets build; the Debug cold suffix produces
+the identical ordinary host-input replay and the same destruction event at
+tick 35318, with all reported event fields matching Release. Both routes
+still fail the campaign objective, as expected for this diagnostic.
+
+The compact report and hashes are retained as
+`analysis/figures/native_final_mission_destroyed_body_comparison.json`.
+Only the hit's before/after/original RAM is kept compressed under the diagnostic
+directory; all other passing raw captures were temporary. This original oracle
+is seeded from native pre-body RAM and is **not** an independently started
+original whole flight. A cold earned suffix likewise does not qualify the
+uninterrupted campaign.
+
+Three ordinary-key pilot candidates were tried and reverted:
+
+- `campaign-suffix-final-close-defense/`: deploy on approaching missiles within
+  3 km while allowing existing decoy timers to finish; destroyed at tick 29378,
+  no aircraft expiry. Repeated close passes still drain flare stock.
+- `campaign-suffix-final-radar-close-defense/`: radar first, minimum combat
+  speed 125, decoys within 1 km; one aircraft expiry, then fuel exhausted and
+  crash/menu failure at tick 41639. The second radar shot was poorly aligned.
+- `campaign-suffix-final-radar-cruise-defense/`: normal minimum cruise speed 90,
+  radar first, wider launch alignment and decoys within 1 km; three launches,
+  no aircraft expiry, destroyed at tick 42392 and failure at tick 43084 with
+  fuel still available. This improves survival duration but does not complete
+  the objective.
+
+These failed candidates are not retained in either the game or the test pilot.
+Only read-only destruction telemetry is retained. Original game mechanics,
+the accepted five-mission input controller and canonical playable binary are
+unchanged. The next campaign work is a viable final-flight input route, followed
+by a complete qualification-to-sixth-menu rerun and actual playable replay.
+
 ## Visible performance
 
 The historical `measure_visible_performance.py` case obtains actual enlistment/qualification saves,

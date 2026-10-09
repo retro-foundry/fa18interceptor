@@ -529,9 +529,9 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
                rd_s16(VIEW_RECORD),rd_u8(CONTEXT_SELECT),rd_s16(STREAM_MODE),game->input_count,rd_u8(COMMAND_BLOCK_FLAGS));
         for(unsigned slot=0;slot<=(pilot->new_final_flight?15u:pilot->rescue_flight || pilot->cruise_flight?14u:12u);slot+=trace_interval==100 || pilot->campaign_flight || pilot->rescue_flight || pilot->cruise_flight || pilot->new_final_flight?1u:2u) {
             gaddr record=CONTROL_RECORDS+512*slot;
-            printf("%s{\"slot\":%u,\"flags\":%u,\"kind\":%u,\"contact\":%u,\"region\":%u,\"damage\":%u,"
+            printf("%s{\"slot\":%u,\"flags\":%u,\"kind\":%u,\"contact\":%u,\"region\":%u,\"damage\":%u,\"motion_flags\":%u,"
                    "\"speed\":[%d,%d],\"position\":[%d,%d,%d],\"angles\":[%d,%d,%d],\"linked\":%u,\"lifetime\":%d}",
-                   slot?",":"",slot,rd_u16(record),rd_u8(record+98),rd_u16(record+2),rd_u8(record+4),rd_u8(record+60),
+                   slot?",":"",slot,rd_u16(record),rd_u8(record+98),rd_u16(record+2),rd_u8(record+4),rd_u8(record+60),rd_u8(record+32),
                    rd_s16(record+108),rd_s16(record+110),rd_s32(record+20)/256,
                    rd_s32(record+24)/256,rd_s32(record+28)/256,
                    rd_s16(record+102),rd_s16(record+104),rd_s16(record+106),rd_u8(record+56),rd_s16(record+76));

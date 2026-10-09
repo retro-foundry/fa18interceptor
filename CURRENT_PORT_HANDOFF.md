@@ -17,6 +17,18 @@ This corrects the coalesced-stop assumption in the older PCM ownership note.
 Canonical Release is refreshed; running games need a restart to load it.
 Full original recording/filter fidelity remains open.
 
+Final-campaign diagnosis (2026-10-09): the earned five-mission cold suffix
+sets the player's destroyed bit at tick 35318 while component damage is zero.
+Five complete bodies around this hit match original instructions: zero gameplay
+or display-byte differences. Original C2613A sets record +32 bit one on the same
+body; C13D84 then freezes thrust/fuel as part of destruction. This resolves the
+suspected motion freeze for this route. It does not qualify an independently
+started original flight or an uninterrupted six-mission campaign. See
+`analysis/figures/native_final_mission_destroyed_body_comparison.json` and
+`analysis/native_continuous_campaign_investigation.md`. Three test-pilot input
+experiments also failed and were reverted; only read-only destruction telemetry
+is retained. The playable runtime and accepted gear-managed pilot are unchanged.
+
 User-requested native text customization (2026-10-09): message 71 now reads
 `SECURITY CLEARANCE GRANTED`. Its 34-character field and original descriptor
 remain intact. Release/Debug builds and the frontend check pass; qualification

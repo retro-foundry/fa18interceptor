@@ -15,6 +15,18 @@ frontend, menu start and PCM ownership; active mission flight is also checked.
 Canonical Release is refreshed. Complete original
 recorded-audio/filter acceptance remains open.
 
+Final-campaign diagnosis: an actual earned five-mission cold suffix first sets
+the player's destroyed bit at tick 35318 with component damage still zero.
+Five complete frame bodies around the hit match original instructions, including
+the C2613A flag write and drawing. The subsequent thrust/fuel freeze follows
+original C13D84's destruction branch. See
+`analysis/figures/native_final_mission_destroyed_body_comparison.json`.
+This is sampled, native-seeded source evidence; complete independent original
+flights and the uninterrupted sixth mission remain open. Three unsuccessful
+input-only defensive/radar experiments were reverted. Only read-only diagnostic
+telemetry is retained; playable runtime and accepted gear-managed inputs remain
+unchanged. Details are in `analysis/native_continuous_campaign_investigation.md`.
+
 Native message 71 now displays `SECURITY CLEARANCE GRANTED`, as requested.
 Release/Debug builds and the frontend check pass; the complete phrase is visible
 at qualification-entry tick 3420. The fixed-width field and descriptor are
