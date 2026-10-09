@@ -109,6 +109,10 @@ int native_frontend_open(NativeFrontend *game,const char *path,const char *save_
             wr_u32(base+reloc->offset,rd_u32(base+reloc->offset)+fa18_placements[reloc->target].payload_base);
         }
     }
+    /* Requested native wording for C10678's message 71. Keep the original
+     * 34-character field, terminator and descriptor so layout/timing stay fixed. */
+    static const char clearance[]="   SECURITY CLEARANCE GRANTED     ";
+    memcpy(native_storage_range(0xc3efb8u,sizeof clearance),clearance,sizeof clearance);
     bytes=amiga_ofs_read(&disk,"pix/splsh",&size);
     if(!bytes || !amiga_ilbm_decode(&game->splash,bytes,size,error,cap)) goto done;
     free(bytes); bytes=amiga_ofs_read(&disk,"config",&size);

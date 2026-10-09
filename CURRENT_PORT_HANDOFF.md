@@ -1,5 +1,11 @@
 # Current playable port handoff
 
+User-requested native text customization (2026-10-09): message 71 now reads
+`SECURITY CLEARANCE GRANTED`. Its 34-character field and original descriptor
+remain intact. Release/Debug builds and the frontend check pass; qualification
+entry at tick 3420 visibly displays the complete phrase. This banner is an
+intentional wording difference from original recordings.
+
 Active completion investigation (2026-10-09): qualification and the first five
 missions now complete with gear management in one actual Release playable
 process, saving five earned grades and returning to menu at tick 146862.

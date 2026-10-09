@@ -2,6 +2,11 @@
 
 ## Current restart summary — 2026-10-09
 
+Native message 71 now displays `SECURITY CLEARANCE GRANTED`, as requested.
+Release/Debug builds and the frontend check pass; the complete phrase is visible
+at qualification-entry tick 3420. The fixed-width field and descriptor are
+preserved; this wording intentionally differs from original recordings.
+
 Qualification and five geared missions now pass in one actual Release playable
 process. The final menu is C0FCB4/mode zero at tick 146862; all 78 earned saved
 bytes match the observing driver, with no crash reset or pending input.
