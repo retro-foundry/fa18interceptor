@@ -11,6 +11,18 @@ recorded audio/filter fidelity and visible gameplay performance. The earlier
 waiver of an uninterrupted campaign remains in effect; repeated individual
 mission testing is accepted instead. Do not begin state migration in this goal.
 
+Independent mission-three execution comparison (2026-10-09): the successful
+flight now passes complete gameplay-state parity in Release and Debug. All
+4,967 source observations match 79,472 complete record cores and camera/control/
+target state. The full original trace, final RAM and 1,426 consumed edges are
+unchanged: an instruction/entry probe proves two interrupt resumptions were
+extra recorder observations, not updates. All observations remain compared at
+their actual JSR/LINK call identities. Native traces, RAM, counters, grade and
+saves agree across builds; both return to the menu. Strict drawing matches
+267/4,967 and remains open. No runtime, clock, physics or Escape change. This
+resolves the gameplay-state discrepancy in the earlier success note below.
+See `analysis/native_independent_mission_execution_milestone.md`.
+
 Independent mission-three successful recording (2026-10-09): the original
 now earns its objective, geared runway landing, grade one and menu return. All
 27,110 trace boundaries, consumed controls and final RAM reproduce without

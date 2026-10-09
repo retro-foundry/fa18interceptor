@@ -6,6 +6,7 @@ timers remain strict diagnostics; a failed original flight is not mission succes
 """
 import argparse
 import copy
+import csv
 import gzip
 import hashlib
 import json
@@ -16,6 +17,7 @@ import tempfile
 
 from check_gameplay_checkpoint import ROOT, integer, span
 from compare_flight_traces import compare, number, read_trace
+from check_original_update_entries import content, update_map
 
 
 def digest(data):
@@ -32,7 +34,40 @@ def context(ram):
                 player_phase=integer(ram, 0xC45798, 1))
 
 
-def assess(source_path, native_path, success=False):
+def verified_update_mapping(path, source_path, original):
+    evidence = json.loads((path / 'report.json').read_text())
+    assert evidence['source_trace_sha256'] == original['driver_trace_sha256']
+    assert evidence['source_final_ram_sha256'] == original['driver_final_ram_sha256']
+    assert evidence['source_consumed_input_sha256'] == original['consumed_input_sha256']
+    for name, key in (('entries.csv', 'entries_sha256'),
+                      ('complete-boundary.csv', 'instruction_trace_sha256'),
+                      ('complete-source.jsonl', 'source_trace_sha256'),
+                      ('complete-source.dat', 'source_final_ram_sha256'),
+                      ('mapping.json', 'mapping_sha256'),
+                      ('update-consumed.fa18in', 'remapped_input_sha256')):
+        assert digest(content(path / name)) == evidence[key], f'update evidence changed: {name}'
+    _, source = read_trace(source_path)
+    mapping, repeats, updates = update_map(
+        list(csv.DictReader(content(path / 'entries.csv').decode('ascii').splitlines())),
+        list(csv.DictReader(content(path / 'complete-boundary.csv').decode('ascii').splitlines())), source)
+    assert mapping == {int(k): v for k, v in json.loads((path / 'mapping.json').read_text()).items()}
+    assert len(repeats) == evidence['duplicate_observations'] and updates == evidence['real_update_calls']
+    expected = ['FA18_GAME_INPUT_V1']
+    for line in content(path / 'complete-consumed.fa18in').decode('ascii').splitlines()[1:]:
+        parts = line.split()
+        if not parts:
+            continue
+        if parts[0] == 'end':
+            parts[1] = str(updates)
+        else:
+            parts[0] = str(mapping[int(parts[0])])
+        expected.append(' '.join(parts))
+    assert digest(content(path / 'complete-consumed.fa18in')) == original['consumed_input_sha256']
+    assert ('\n'.join(expected) + '\n').encode('ascii') == (path / 'update-consumed.fa18in').read_bytes()
+    return mapping, evidence
+
+
+def assess(source_path, native_path, success=False, mapping=None):
     sh, source = read_trace(source_path)
     nh, native = read_trace(native_path)
     assert sh == nh
@@ -40,17 +75,22 @@ def assess(source_path, native_path, success=False):
         return next(i for i, r in rows.items() if number(r, 'mode') == 3 and
                     number(r, 'stage') == 0xC10D8A and number(r, 'game_tick') == 1)
     sf, nf = first(source), first(native)
-    assert sf == nf, ('different initialization/input origins', sf, nf)
+    assert (mapping[sf] if mapping else sf) == nf, ('different initialization/input origins', sf, nf)
     def stop(rows, start):
         return next(i for i in range(start + 1, max(rows) + 1)
                     if number(rows[i], 'stage') == 0xC11788)
     if success:
         ss = next(i for i, r in source.items() if i > sf and number(r, 'mode') == 0) - 1
         ns = max(native)
-        assert ss == ns, 'different final observed flight boundary'
+        assert (mapping[ss] if mapping else ss) == ns, 'different final observed flight boundary'
     else:
         ss, ns = stop(source, sf), stop(native, nf)
-        assert ss == ns == max(source) == max(native), 'different crash callback or recording end'
+        assert (mapping[ss] if mapping else ss) == ns == max(native), 'different crash callback or recording end'
+        assert ss == max(source), 'original recording continues beyond crash callback'
+    actual_native = native
+    if mapping:
+        native = {i: actual_native[mapping[i]] for i in range(sf, ss + 1)}
+        nf = sf
     count = ss - sf + 1
     report = compare(source, native, sf, nf, count)
     report.update(first=sf, last=ss,
@@ -65,7 +105,13 @@ def assess(source_path, native_path, success=False):
         (report['first_record_difference'], report['first_game_difference']) if r), default=ss + 1)
     report['complete_gameplay_matching_prefix'] = first_difference - sf
     report['strict_gameplay_matching'] = first_difference == ss + 1
-    report['native_menu_observation_gaps'] = [i for i in range(ss + 1, max(source) + 1) if i not in native]
+    report['native_menu_observation_gaps'] = [i for i in range(ss + 1, max(source) + 1)
+        if (mapping[i] if mapping else i) not in actual_native]
+    if mapping:
+        report['execution_alignment'] = dict(first_native_update=mapping[sf], last_native_update=mapping[ss],
+            real_updates_compared=len({mapping[i] for i in range(sf, ss + 1)}),
+            duplicate_observations_preserved=[i for i in range(sf + 1, ss + 1) if mapping[i] == mapping[i - 1]],
+            basis='Original explicit JSR calls and executed LINK instructions; no state matching or frame search')
     # Ensure the diagnostic observes an NPC byte, controls and a full page.
     report['mutation_rejections'] = {}
     for kind in ('npc_core', 'controls', 'page'):
@@ -96,12 +142,18 @@ def main():
     parser.add_argument('--source-evidence', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--assess-existing', action='store_true')
+    parser.add_argument('--source-updates', type=Path,
+                        help='verified original JSR/LINK probe; retains every observed boundary')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     evidence = args.source_evidence
     original = json.loads((evidence / 'report.json').read_text())
     assert original['unmodified_replay_exact'], 'original recording has not reproduced independently'
     success = original['mission_success']
+    mapping, update_evidence = (verified_update_mapping(args.source_updates, evidence / 'driver.jsonl.gz', original)
+        if args.source_updates else (None, None))
+    input_path = (args.source_updates / 'update-consumed.fa18in') if mapping else evidence / 'consumed.fa18in'
+    iterations = update_evidence['real_update_calls'] if mapping else original['iterations']
     assert original['original_outcome'] == ('success' if success else 'crash/reset')
     for name, expected in original['input_hashes'].items():
         assert digest((ROOT / name).read_bytes()) == expected, f'original media changed: {name}'
@@ -124,6 +176,9 @@ def main():
         assert report['native_input_hashes'] == hashes
         assert report['source_trace_sha256'] == original['driver_trace_sha256']
         assert report['consumed_input_sha256'] == original['consumed_input_sha256']
+        assert report.get('source_update_evidence') == update_evidence
+        if mapping:
+            assert report['replay_input_sha256'] == digest(input_path.read_bytes())
         for name, key in (('native.jsonl.gz', 'native_trace_sha256'),
                           ('native.dat.gz', 'native_final_ram_sha256')):
             assert digest(gzip.decompress((args.out / name).read_bytes())) == report[key]
@@ -148,11 +203,11 @@ def main():
             warmup = work / 'intro.e9k'
             warmup.write_text('E9K_INPUT_V1\nF 1800 K 32 0 0 1\nF 1802 K 32 0 0 0\n')
             stats = run(['--frames', '100000', '--replay', str(warmup),
-                '--input', str(evidence.resolve() / 'consumed.fa18in'),
-                '--iterations', str(original['iterations']), '--save-dir', str(pilot),
+                '--input', str(input_path.resolve()),
+                '--iterations', str(iterations), '--save-dir', str(pilot),
                 '--flight-trace', str(work / 'native.jsonl'), '--data-out', str(work / 'native.dat')], 'native.log')
-            assert stats['replay_iterations'] == original['iterations']
-            events = sum(' K ' in line for line in (evidence / 'consumed.fa18in').read_text().splitlines())
+            assert stats['replay_iterations'] == iterations
+            events = sum(' K ' in line for line in input_path.read_text().splitlines())
             assert stats['replay_events'] == events and stats['input_queued'] == 0
             assert stats['postflight_resets'] == (0 if success else 1)
             if success:
@@ -163,6 +218,8 @@ def main():
             report = dict(native_input_hashes=hashes,
                 source_trace_sha256=original['driver_trace_sha256'],
                 consumed_input_sha256=original['consumed_input_sha256'],
+                source_update_evidence=update_evidence,
+                replay_input_sha256=digest(input_path.read_bytes()),
                 runner_sha256=digest(args.runner.read_bytes()),
                 enlisted_pilot=initial.hex(), enlisted_save_sha256=digest(initial),
                 enlist_run=enlist_stats, native_run=stats, native_context=context(ram),
@@ -180,13 +237,18 @@ def main():
     report['pilot_record_difference_offsets'] = [i for i, (x, y) in enumerate(
         zip(bytes.fromhex(a['pilot']), bytes.fromhex(b['pilot']))) if x != y]
     key = 'whole_successful_flight' if success else 'whole_failed_flight'
-    report[key] = assess(evidence / 'driver.jsonl.gz', args.out / 'native.jsonl.gz', success)
+    report[key] = assess(evidence / 'driver.jsonl.gz', args.out / 'native.jsonl.gz', success, mapping)
     report['mission_success'] = success
     report['scope'] = ('Independently started, equally qualified zero-grade pilots; complete mission-three '
-        + ('successful flight, grade and menu return. Raw fixed-offset state parity remains unaccepted '
-           'if a source update repeats. ' if success else 'failed flight through the first C11788 crash/reset boundary. ')
+        + ('successful flight, grade and menu return. Complete gameplay-state parity requires '
+           'every core and named game field to match at the declared execution alignment. '
+           if success else 'failed flight through the first C11788 crash/reset boundary. ')
         + 'No reference RAM supplied to native. Full pilot records differ in naming/date/history bytes. '
         'Strict drawing and clock differences remain unaccepted diagnostics.')
+    if mapping:
+        report['scope'] += (' Every source observation is compared at its proven original JSR/LINK call identity. '
+            'All consumed key edges retain their order and source PAL timestamps; only the '
+            'legacy recorder iteration is translated to the actual update call. No game state or clock is written.')
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     comparison = report[key]
     print(json.dumps({k: v for k, v in comparison.items() if k.endswith('matching') or k == 'compared'}))

@@ -8,6 +8,15 @@ older completion notes. Independent whole-flight comparisons, recorded
 audio/filter fidelity and visible gameplay performance remain in scope; the
 uninterrupted campaign requirement remains waived.
 
+The successful independent mission-three flight now passes complete gameplay
+state in Release/Debug: all 4,967 observations and 79,472 record cores match.
+An exact original probe proves two extra recorder observations were interrupt
+resumptions; every observation remains compared at its real update call. Both
+native builds agree on traces, RAM, counters and earned saves/menu return.
+Strict drawing matches 267/4,967 and remains open. This supersedes the earlier
+state-parity failure below; runtime and Escape are unchanged. See
+[execution evidence](../../analysis/native_independent_mission_execution_milestone.md).
+
 The original and independent native now complete mission three with gear
 raised after takeoff, lowered before runway landing, grade and menu return.
 The complete original recording reproduces without its controller; native
