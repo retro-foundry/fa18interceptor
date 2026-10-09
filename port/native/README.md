@@ -1,5 +1,13 @@
 # Native port runner
 
+Read-only `--flight-trace PATH` records all sixteen complete cores, camera/control
+state, HUD/clocks and both complete drawing-page hashes at C0EFD4 pre-input.
+It shares the 512 MiB capture budget with requested raw RAM. Independent original
+whole-demo evidence matches all32,736 cores of the first flight and its complete
+gameplay restart sequence; strict drawing and later fixed-offset failures remain
+explicit. See [trace evidence](../../analysis/native_independent_demo_trace_milestone.md).
+All-mission whole flights and equivalent elapsed-time HUD assessment remain open.
+
 Initial startup and qualification-entry sorting are verified through the actual
 connected frontend. The original C0F812 LINK -14 frame and complete C08F26 call
 match lists, retained output and compared RAM. Release/Debug agree on 22 combined

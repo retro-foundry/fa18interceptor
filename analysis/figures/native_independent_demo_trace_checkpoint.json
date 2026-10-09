@@ -1,0 +1,1816 @@
+{
+  "source_trace_sha256": "4cfce44f20a645edfeb251a58b7418bcd3b383c354c9dd2f8e033f3ea06f8fb3",
+  "native_trace_sha256": "d19fa2fb4a8de238ecd0b8075f514cc1174c36ed76841fb8912540f7dfaeb9b5",
+  "source_final_ram_sha256": "d28576a4f5718f2c190896529236be38c503e53e3c7446c5af733ee7cacec103",
+  "native_final_ram_sha256": "d47a023d89b4a25848344b26d3469416df979377ad70596161dfd8e9e2a521c9",
+  "source_run": {
+    "frames": 20833,
+    "recomp": 1,
+    "cpu_cycles": 2960410986,
+    "generated_cycles": 2267609094,
+    "generated_share": 0.766,
+    "dispatches": 8366721,
+    "interpreted_game_instructions": 24546536,
+    "code_writes": 0,
+    "disabled_functions": 0,
+    "blits": 555658,
+    "line_blits": 373770,
+    "nonblack_pixels": 55917,
+    "pc": "FE5894",
+    "iterations": 4892
+  },
+  "native_run": {
+    "frame_owner_exit": false,
+    "frames": 12556,
+    "screen": "scene-setup",
+    "mode": 3,
+    "glyphs": 3804,
+    "record_updates": 2302,
+    "scene_frames": 2300,
+    "terrain_polygons": 10819,
+    "model_calls": 47055,
+    "hud_frames": 2300,
+    "control_frames": 3331,
+    "scene_selected": true,
+    "stage": "C10DAE",
+    "game_tick": 227,
+    "timer_pending": true,
+    "timer_yields": 5403,
+    "display_publications": 3330,
+    "display_yields": 3343,
+    "display_pending": false,
+    "displayed_page": 1,
+    "postflight_callbacks": 0,
+    "postflight_resets": 0,
+    "input_passes": 3330,
+    "input_events": 1,
+    "input_queued": 0,
+    "update_iterations": 5319,
+    "replay_iterations": 4855,
+    "replay_events": 2,
+    "host_replay_events": 2,
+    "host_replay_pending": 0,
+    "replay_started": true,
+    "voice_ticks": 12556,
+    "voice_publications": 26452,
+    "voice_levels": [
+      [
+        529,
+        21
+      ],
+      [
+        531,
+        21
+      ],
+      [
+        124,
+        0
+      ],
+      [
+        124,
+        0
+      ]
+    ],
+    "sample_requests": 8203,
+    "sample_frames": 12053760,
+    "nonzero_sample_frames": 11694606,
+    "audio_device": false,
+    "frame_capture_complete": false,
+    "frame_before_tick": 0,
+    "frame_after_tick": 0,
+    "frame_saved_tick": 0,
+    "cpu_emulation": false,
+    "chipset_emulation": false
+  },
+  "input_hashes": {
+    "captures\\native\\demo01\\input.fa18in": "91d0dd0defbace4253fb307e6c5bef458af4cf86defc850d13f19068b3159657",
+    "captures\\native\\demo01\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+    "local\\media\\fa18.adf": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+  },
+  "first_flight": {
+    "compared": 2046,
+    "record_cores_compared": 32736,
+    "record_cores_matching": 32736,
+    "complete_record_boundaries_matching": 2046,
+    "camera_and_controls_matching": 2046,
+    "complete_pages_matching": 1235,
+    "timer_and_hud_matching": 0,
+    "first_differences": [
+      {
+        "source_iteration": 2180,
+        "native_iteration": 2143,
+        "source_tick": 1,
+        "native_tick": 1,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "sample_fraction": [
+            "0001dbd1",
+            "000aae60"
+          ],
+          "previous_seconds": [
+            "128947ba",
+            "00000051"
+          ],
+          "previous_fraction": [
+            "00075a0b",
+            "000afc80"
+          ],
+          "partial_total": [
+            "0000",
+            "0078"
+          ],
+          "poll_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "poll_fraction": [
+            "0001dbd1",
+            "000aae60"
+          ],
+          "primary_count": [
+            "fc",
+            "fe"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2181,
+        "native_iteration": 2144,
+        "source_tick": 2,
+        "native_tick": 2,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "sample_fraction": [
+            "0003fed6",
+            "000cd140"
+          ],
+          "previous_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "previous_fraction": [
+            "0003b092",
+            "000afc80"
+          ],
+          "elapsed_total": [
+            "000006e1",
+            "00001b58"
+          ],
+          "poll_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "poll_fraction": [
+            "0001dbd1",
+            "000aae60"
+          ],
+          "primary_count": [
+            "fb",
+            "fd"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2182,
+        "native_iteration": 2145,
+        "source_tick": 3,
+        "native_tick": 3,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "sample_fraction": [
+            "0005d398",
+            "000e09c0"
+          ],
+          "previous_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "previous_fraction": [
+            "0005d397",
+            "000d1f60"
+          ],
+          "elapsed_total": [
+            "0000076d",
+            "00001be4"
+          ],
+          "elapsed_sample": [
+            "00000104",
+            "000000dc"
+          ],
+          "poll_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "poll_fraction": [
+            "0001dbd1",
+            "000aae60"
+          ],
+          "primary_count": [
+            "fb",
+            "fd"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2183,
+        "native_iteration": 2146,
+        "source_tick": 4,
+        "native_tick": 4,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "sample_fraction": [
+            "0007a85a",
+            "000ef420"
+          ],
+          "previous_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "previous_fraction": [
+            "0007a859",
+            "000e57e0"
+          ],
+          "elapsed_total": [
+            "000007e5",
+            "00001c34"
+          ],
+          "partial_total": [
+            "0078",
+            "0050"
+          ],
+          "elapsed_sample": [
+            "0000017c",
+            "00000118"
+          ],
+          "poll_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "poll_fraction": [
+            "0001dbd1",
+            "000aae60"
+          ],
+          "primary_count": [
+            "fb",
+            "fd"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2184,
+        "native_iteration": 2147,
+        "source_tick": 5,
+        "native_tick": 5,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bc",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "0009cb3c",
+            "00009c40"
+          ],
+          "previous_seconds": [
+            "128947bc",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "0009cb3b",
+            "00000000"
+          ],
+          "elapsed_total": [
+            "00000871",
+            "00001c70"
+          ],
+          "elapsed_sample": [
+            "00000208",
+            "00000154"
+          ],
+          "poll_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "poll_fraction": [
+            "0001dbd1",
+            "000aae60"
+          ],
+          "primary_count": [
+            "fb",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2185,
+        "native_iteration": 2148,
+        "source_tick": 6,
+        "native_tick": 6,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bc",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "000bee1e",
+            "0001d4c0"
+          ],
+          "previous_seconds": [
+            "128947bc",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "000bee1d",
+            "0000ea60"
+          ],
+          "elapsed_total": [
+            "000008fd",
+            "00001cac"
+          ],
+          "partial_total": [
+            "0000",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "00000294",
+            "000001a4"
+          ],
+          "poll_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "poll_fraction": [
+            "0001dbd1",
+            "000aae60"
+          ],
+          "primary_count": [
+            "fb",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2186,
+        "native_iteration": 2149,
+        "source_tick": 7,
+        "native_tick": 7,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bc",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "000e1100",
+            "0002bf20"
+          ],
+          "previous_seconds": [
+            "128947bc",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "000e10ff",
+            "000222e0"
+          ],
+          "elapsed_total": [
+            "00000989",
+            "00001cfc"
+          ],
+          "elapsed_sample": [
+            "00000320",
+            "000001e0"
+          ],
+          "poll_seconds": [
+            "128947bc",
+            "00000058"
+          ],
+          "poll_fraction": [
+            "0001dbd1",
+            "000aae60"
+          ],
+          "primary_count": [
+            "fb",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2187,
+        "native_iteration": 2150,
+        "source_tick": 8,
+        "native_tick": 8,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "previous_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "0000f1a2",
+            "00030d40"
+          ],
+          "elapsed_total": [
+            "00000a16",
+            "00001d38"
+          ],
+          "partial_total": [
+            "0000",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "000003ad",
+            "0000021c"
+          ],
+          "poll_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "primary_count": [
+            "fa",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2188,
+        "native_iteration": 2151,
+        "source_tick": 9,
+        "native_tick": 9,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "00031485",
+            "0004e200"
+          ],
+          "previous_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "00031484",
+            "0003f7a0"
+          ],
+          "elapsed_total": [
+            "00000aa2",
+            "00001d74"
+          ],
+          "partial_total": [
+            "0000",
+            "0078"
+          ],
+          "elapsed_sample": [
+            "0000008c",
+            "00000050"
+          ],
+          "poll_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "primary_count": [
+            "fa",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2189,
+        "native_iteration": 2152,
+        "source_tick": 10,
+        "native_tick": 10,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "00053767",
+            "0005cc60"
+          ],
+          "previous_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "00053766",
+            "00053020"
+          ],
+          "elapsed_total": [
+            "00000b2e",
+            "00001dc4"
+          ],
+          "elapsed_sample": [
+            "00000118",
+            "0000008c"
+          ],
+          "poll_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "primary_count": [
+            "fa",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2190,
+        "native_iteration": 2153,
+        "source_tick": 11,
+        "native_tick": 11,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "00075a49",
+            "000704e0"
+          ],
+          "previous_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "00075a48",
+            "00061a80"
+          ],
+          "elapsed_total": [
+            "00000bba",
+            "00001e00"
+          ],
+          "partial_total": [
+            "0000",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "000001a4",
+            "000000dc"
+          ],
+          "poll_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "primary_count": [
+            "fa",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2191,
+        "native_iteration": 2154,
+        "source_tick": 12,
+        "native_tick": 12,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "00092f0b",
+            "0007ef40"
+          ],
+          "previous_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "00092f0a",
+            "00075300"
+          ],
+          "elapsed_total": [
+            "00000c32",
+            "00001e50"
+          ],
+          "partial_total": [
+            "0078",
+            "0000"
+          ],
+          "elapsed_sample": [
+            "0000021c",
+            "00000118"
+          ],
+          "poll_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "primary_count": [
+            "fa",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2192,
+        "native_iteration": 2155,
+        "source_tick": 13,
+        "native_tick": 13,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "000b51ed",
+            "0008d9a0"
+          ],
+          "previous_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "000b51ec",
+            "00083d60"
+          ],
+          "elapsed_total": [
+            "00000cbe",
+            "00001e8c"
+          ],
+          "partial_total": [
+            "0000",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "000002a8",
+            "00000154"
+          ],
+          "poll_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "primary_count": [
+            "fa",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2193,
+        "native_iteration": 2156,
+        "source_tick": 14,
+        "native_tick": 14,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "000d74cf",
+            "000a1220"
+          ],
+          "previous_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "000d26ae",
+            "000927c0"
+          ],
+          "elapsed_total": [
+            "00000d36",
+            "00001ec8"
+          ],
+          "elapsed_sample": [
+            "00000334",
+            "000001a4"
+          ],
+          "poll_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "primary_count": [
+            "fa",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2194,
+        "native_iteration": 2157,
+        "source_tick": 15,
+        "native_tick": 15,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947be",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "00022a32",
+            "000afc80"
+          ],
+          "previous_seconds": [
+            "128947be",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "00022a31",
+            "000a6040"
+          ],
+          "elapsed_total": [
+            "00000e4f",
+            "00001f18"
+          ],
+          "elapsed_sample": [
+            "00000438",
+            "000001e0"
+          ],
+          "poll_seconds": [
+            "128947bd",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "0000f1a3",
+            "0003a980"
+          ],
+          "primary_count": [
+            "f9",
+            "fc"
+          ]
+        }
+      },
+      {
+        "source_iteration": 2195,
+        "native_iteration": 2158,
+        "source_tick": 16,
+        "native_tick": 16,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "128947be",
+            "00000059"
+          ],
+          "sample_fraction": [
+            "00058594",
+            "000be6e0"
+          ],
+          "previous_seconds": [
+            "128947be",
+            "00000059"
+          ],
+          "previous_fraction": [
+            "00058593",
+            "000b4aa0"
+          ],
+          "elapsed_total": [
+            "00000f2b",
+            "00001f54"
+          ],
+          "partial_total": [
+            "0000",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "00000514",
+            "0000021c"
+          ],
+          "poll_seconds": [
+            "128947be",
+            "00000059"
+          ],
+          "poll_fraction": [
+            "00058594",
+            "000be6e0"
+          ],
+          "primary_count": [
+            "f9",
+            "fc"
+          ]
+        }
+      }
+    ],
+    "first_record_difference": null,
+    "first_game_difference": null,
+    "first_page_difference": {
+      "source_iteration": 2452,
+      "native_iteration": 2415,
+      "source_tick": 273,
+      "changes": [
+        7
+      ]
+    }
+  },
+  "flight_and_restart_events": {
+    "source_rows": 2701,
+    "native_rows": 2487,
+    "runs": [
+      {
+        "stage": "00c10d8a",
+        "source_first": 2180,
+        "source_last": 2183,
+        "native_first": 2143,
+        "native_last": 2146,
+        "source_rows": 4,
+        "native_rows": 4,
+        "source_distinct_states": 4,
+        "native_distinct_states": 4,
+        "matching": true,
+        "source_state_sequence_sha256": "135da45a3599e36b9ea7b775f03dbcb52c4ed645d58c63a17501ae638d5080a6",
+        "native_state_sequence_sha256": "135da45a3599e36b9ea7b775f03dbcb52c4ed645d58c63a17501ae638d5080a6",
+        "source_pal_interval": [
+          563,
+          582
+        ],
+        "native_pal_interval": [
+          4436,
+          4450
+        ]
+      },
+      {
+        "stage": "00c10dae",
+        "source_first": 2184,
+        "source_last": 4225,
+        "native_first": 2147,
+        "native_last": 4188,
+        "source_rows": 2042,
+        "native_rows": 2042,
+        "source_distinct_states": 2042,
+        "native_distinct_states": 2042,
+        "matching": true,
+        "source_state_sequence_sha256": "a094f91b2a7fc4b66658cb1de2055d394568b9f7f385e2c4c0261c1dfe2d9f17",
+        "native_state_sequence_sha256": "a094f91b2a7fc4b66658cb1de2055d394568b9f7f385e2c4c0261c1dfe2d9f17",
+        "source_pal_interval": [
+          589,
+          20523
+        ],
+        "native_pal_interval": [
+          4453,
+          11342
+        ]
+      },
+      {
+        "stage": "00c0f946",
+        "source_first": 4226,
+        "source_last": 4410,
+        "native_first": 4189,
+        "native_last": 4219,
+        "source_rows": 185,
+        "native_rows": 31,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "e9c71faf0e306845ab0f542a1fa5066bfb342eca3ac0bd4ab4e0edd00ca24dae",
+        "native_state_sequence_sha256": "e9c71faf0e306845ab0f542a1fa5066bfb342eca3ac0bd4ab4e0edd00ca24dae",
+        "source_pal_interval": [
+          20523,
+          20555
+        ],
+        "native_pal_interval": [
+          11343,
+          11374
+        ]
+      },
+      {
+        "stage": "00c0f974",
+        "source_first": 4411,
+        "source_last": 4413,
+        "native_first": 4220,
+        "native_last": 4222,
+        "source_rows": 3,
+        "native_rows": 3,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "f009e4ecfc914513025b33fe99f927c641365d15072b0b71596a9995fafc4ed0",
+        "native_state_sequence_sha256": "f009e4ecfc914513025b33fe99f927c641365d15072b0b71596a9995fafc4ed0",
+        "source_pal_interval": [
+          20556,
+          20557
+        ],
+        "native_pal_interval": [
+          11376,
+          11379
+        ]
+      },
+      {
+        "stage": "00c0f992",
+        "source_first": 4414,
+        "source_last": 4414,
+        "native_first": 4223,
+        "native_last": 4223,
+        "source_rows": 1,
+        "native_rows": 1,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "9a0858d3ecee76b4e41399242418234c97d65e264dcc4b39869f5e392514b2ba",
+        "native_state_sequence_sha256": "9a0858d3ecee76b4e41399242418234c97d65e264dcc4b39869f5e392514b2ba",
+        "source_pal_interval": [
+          20564,
+          20564
+        ],
+        "native_pal_interval": [
+          11380,
+          11380
+        ]
+      },
+      {
+        "stage": "00c0fa04",
+        "source_first": 4415,
+        "source_last": 4417,
+        "native_first": 4224,
+        "native_last": 4226,
+        "source_rows": 3,
+        "native_rows": 3,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "10de9774783a15daa4b06a4a1e243c508b0bcf52e96e1ad2e361ebe9ffb53c89",
+        "native_state_sequence_sha256": "10de9774783a15daa4b06a4a1e243c508b0bcf52e96e1ad2e361ebe9ffb53c89",
+        "source_pal_interval": [
+          20572,
+          20580
+        ],
+        "native_pal_interval": [
+          11381,
+          11383
+        ]
+      },
+      {
+        "stage": "00c0fa4c",
+        "source_first": 4418,
+        "source_last": 4521,
+        "native_first": 4227,
+        "native_last": 4270,
+        "source_rows": 104,
+        "native_rows": 44,
+        "source_distinct_states": 2,
+        "native_distinct_states": 2,
+        "matching": true,
+        "source_state_sequence_sha256": "c999a4198da2ee2d8d04c23e5896d2835a592abc0110a26c77e74d46b782f973",
+        "native_state_sequence_sha256": "c999a4198da2ee2d8d04c23e5896d2835a592abc0110a26c77e74d46b782f973",
+        "source_pal_interval": [
+          20590,
+          20626
+        ],
+        "native_pal_interval": [
+          11384,
+          11428
+        ]
+      },
+      {
+        "stage": "00c0fa80",
+        "source_first": 4522,
+        "source_last": 4524,
+        "native_first": 4271,
+        "native_last": 4273,
+        "source_rows": 3,
+        "native_rows": 3,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "0af4480d2df28ae21a261a3f7bdf20c0c6c8e2e04616f20165d9893948ea574f",
+        "native_state_sequence_sha256": "0af4480d2df28ae21a261a3f7bdf20c0c6c8e2e04616f20165d9893948ea574f",
+        "source_pal_interval": [
+          20627,
+          20628
+        ],
+        "native_pal_interval": [
+          11430,
+          11433
+        ]
+      },
+      {
+        "stage": "00c10c08",
+        "source_first": 4525,
+        "source_last": 4525,
+        "native_first": 4274,
+        "native_last": 4274,
+        "source_rows": 1,
+        "native_rows": 1,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "050f1028e184b37ef14bda817ebd74c001c0ee0de416feba914d9bd3805a7f1f",
+        "native_state_sequence_sha256": "050f1028e184b37ef14bda817ebd74c001c0ee0de416feba914d9bd3805a7f1f",
+        "source_pal_interval": [
+          20634,
+          20634
+        ],
+        "native_pal_interval": [
+          11434,
+          11434
+        ]
+      },
+      {
+        "stage": "00c10c68",
+        "source_first": 4526,
+        "source_last": 4531,
+        "native_first": 4275,
+        "native_last": 4280,
+        "source_rows": 6,
+        "native_rows": 6,
+        "source_distinct_states": 6,
+        "native_distinct_states": 6,
+        "matching": true,
+        "source_state_sequence_sha256": "51efd2482efa109c251192751cd7b534a5ec3e4e3b9ea9d17755a9e69571846e",
+        "native_state_sequence_sha256": "51efd2482efa109c251192751cd7b534a5ec3e4e3b9ea9d17755a9e69571846e",
+        "source_pal_interval": [
+          20640,
+          20670
+        ],
+        "native_pal_interval": [
+          11435,
+          11440
+        ]
+      },
+      {
+        "stage": "00c10cfe",
+        "source_first": 4532,
+        "source_last": 4879,
+        "native_first": 4281,
+        "native_last": 4628,
+        "source_rows": 348,
+        "native_rows": 348,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "5ef29e2afc023e61b0641b34339d3c2747c33d62491508c71f937bf4fba638c8",
+        "native_state_sequence_sha256": "5ef29e2afc023e61b0641b34339d3c2747c33d62491508c71f937bf4fba638c8",
+        "source_pal_interval": [
+          20671,
+          20746
+        ],
+        "native_pal_interval": [
+          11441,
+          11788
+        ]
+      },
+      {
+        "stage": "00c10d8a",
+        "source_first": 4880,
+        "source_last": 4880,
+        "native_first": 4629,
+        "native_last": 4629,
+        "source_rows": 1,
+        "native_rows": 1,
+        "source_distinct_states": 1,
+        "native_distinct_states": 1,
+        "matching": true,
+        "source_state_sequence_sha256": "0a66359bd668cdf4f128303d03a00375f841b64e23f418920141a32cab801571",
+        "native_state_sequence_sha256": "0a66359bd668cdf4f128303d03a00375f841b64e23f418920141a32cab801571",
+        "source_pal_interval": [
+          20752,
+          20752
+        ],
+        "native_pal_interval": [
+          11789,
+          11789
+        ]
+      }
+    ],
+    "matching_runs": 12,
+    "source_state_changes": 2062,
+    "native_state_changes": 2062
+  },
+  "second_flight_prefix": {
+    "compared": 13,
+    "record_cores_compared": 208,
+    "record_cores_matching": 208,
+    "complete_record_boundaries_matching": 13,
+    "camera_and_controls_matching": 13,
+    "complete_pages_matching": 13,
+    "timer_and_hud_matching": 0,
+    "first_differences": [
+      {
+        "source_iteration": 4880,
+        "native_iteration": 4629,
+        "source_tick": 1,
+        "native_tick": 1,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "1289494f",
+            "000000eb"
+          ],
+          "sample_fraction": [
+            "000dd47c",
+            "000b98c0"
+          ],
+          "previous_seconds": [
+            "1289494e",
+            "000000e4"
+          ],
+          "previous_fraction": [
+            "00041077",
+            "000be6e0"
+          ],
+          "partial_total": [
+            "0000",
+            "0078"
+          ],
+          "elapsed_sample": [
+            "000006b9",
+            "0000049c"
+          ],
+          "poll_seconds": [
+            "1289494f",
+            "000000eb"
+          ],
+          "poll_fraction": [
+            "000dd47c",
+            "000b98c0"
+          ],
+          "primary_count": [
+            "68",
+            "70"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4881,
+        "native_iteration": 4630,
+        "source_tick": 2,
+        "native_tick": 2,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894950",
+            "000000eb"
+          ],
+          "sample_fraction": [
+            "0000b531",
+            "000dbba0"
+          ],
+          "previous_seconds": [
+            "12894950",
+            "000000eb"
+          ],
+          "previous_fraction": [
+            "000066fe",
+            "000be6e0"
+          ],
+          "elapsed_total": [
+            "000006e1",
+            "00001b58"
+          ],
+          "elapsed_sample": [
+            "0000008d",
+            "0000008c"
+          ],
+          "poll_seconds": [
+            "1289494f",
+            "000000eb"
+          ],
+          "poll_fraction": [
+            "000dd47c",
+            "000b98c0"
+          ],
+          "primary_count": [
+            "67",
+            "6f"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4882,
+        "native_iteration": 4631,
+        "source_tick": 3,
+        "native_tick": 3,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894950",
+            "000000eb"
+          ],
+          "sample_fraction": [
+            "000289f3",
+            "000ef420"
+          ],
+          "previous_seconds": [
+            "12894950",
+            "000000eb"
+          ],
+          "previous_fraction": [
+            "000289f2",
+            "000e09c0"
+          ],
+          "elapsed_total": [
+            "0000076d",
+            "00001be4"
+          ],
+          "elapsed_sample": [
+            "00000105",
+            "000000dc"
+          ],
+          "poll_seconds": [
+            "1289494f",
+            "000000eb"
+          ],
+          "poll_fraction": [
+            "000dd47c",
+            "000b98c0"
+          ],
+          "primary_count": [
+            "67",
+            "6f"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4883,
+        "native_iteration": 4632,
+        "source_tick": 4,
+        "native_tick": 4,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "00045eb5",
+            "00009c40"
+          ],
+          "previous_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "00045eb4",
+            "00000000"
+          ],
+          "elapsed_total": [
+            "000007e5",
+            "00001c34"
+          ],
+          "partial_total": [
+            "0078",
+            "0050"
+          ],
+          "elapsed_sample": [
+            "0000017d",
+            "00000118"
+          ],
+          "poll_seconds": [
+            "1289494f",
+            "000000eb"
+          ],
+          "poll_fraction": [
+            "000dd47c",
+            "000b98c0"
+          ],
+          "primary_count": [
+            "67",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4884,
+        "native_iteration": 4633,
+        "source_tick": 5,
+        "native_tick": 5,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "00068197",
+            "000186a0"
+          ],
+          "previous_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "00068196",
+            "0000ea60"
+          ],
+          "elapsed_total": [
+            "00000871",
+            "00001c70"
+          ],
+          "elapsed_sample": [
+            "00000209",
+            "00000154"
+          ],
+          "poll_seconds": [
+            "1289494f",
+            "000000eb"
+          ],
+          "poll_fraction": [
+            "000dd47c",
+            "000b98c0"
+          ],
+          "primary_count": [
+            "67",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4885,
+        "native_iteration": 4634,
+        "source_tick": 6,
+        "native_tick": 6,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "0008a479",
+            "0002bf20"
+          ],
+          "previous_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "0008a478",
+            "0001d4c0"
+          ],
+          "elapsed_total": [
+            "000008fd",
+            "00001cac"
+          ],
+          "partial_total": [
+            "0000",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "00000295",
+            "000001a4"
+          ],
+          "poll_seconds": [
+            "1289494f",
+            "000000eb"
+          ],
+          "poll_fraction": [
+            "000dd47c",
+            "000b98c0"
+          ],
+          "primary_count": [
+            "67",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4886,
+        "native_iteration": 4635,
+        "source_tick": 7,
+        "native_tick": 7,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "000ac75b",
+            "0003a980"
+          ],
+          "previous_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "000ac75a",
+            "00030d40"
+          ],
+          "elapsed_total": [
+            "00000989",
+            "00001cfc"
+          ],
+          "elapsed_sample": [
+            "00000321",
+            "000001e0"
+          ],
+          "poll_seconds": [
+            "1289494f",
+            "000000eb"
+          ],
+          "poll_fraction": [
+            "000dd47c",
+            "000b98c0"
+          ],
+          "primary_count": [
+            "67",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4887,
+        "native_iteration": 4636,
+        "source_tick": 8,
+        "native_tick": 8,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "000c9c1d",
+            "000493e0"
+          ],
+          "previous_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "000c9c1c",
+            "0003f7a0"
+          ],
+          "elapsed_total": [
+            "00000a01",
+            "00001d38"
+          ],
+          "partial_total": [
+            "0078",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "00000399",
+            "0000021c"
+          ],
+          "poll_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "poll_fraction": [
+            "000c9c1d",
+            "000493e0"
+          ],
+          "primary_count": [
+            "67",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4888,
+        "native_iteration": 4637,
+        "source_tick": 9,
+        "native_tick": 9,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "000ebeff",
+            "0005cc60"
+          ],
+          "previous_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "000ebefe",
+            "0004e200"
+          ],
+          "elapsed_total": [
+            "00000a8d",
+            "00001d74"
+          ],
+          "partial_total": [
+            "0000",
+            "0078"
+          ],
+          "elapsed_sample": [
+            "0000008c",
+            "00000050"
+          ],
+          "poll_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "poll_fraction": [
+            "000c9c1d",
+            "000493e0"
+          ],
+          "primary_count": [
+            "67",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4889,
+        "native_iteration": 4638,
+        "source_tick": 10,
+        "native_tick": 10,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894951",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "00019fa2",
+            "0006b6c0"
+          ],
+          "previous_seconds": [
+            "12894951",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "00019fa1",
+            "00061a80"
+          ],
+          "elapsed_total": [
+            "00000b1a",
+            "00001dc4"
+          ],
+          "elapsed_sample": [
+            "00000119",
+            "0000008c"
+          ],
+          "poll_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "poll_fraction": [
+            "000c9c1d",
+            "000493e0"
+          ],
+          "primary_count": [
+            "66",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4890,
+        "native_iteration": 4639,
+        "source_tick": 11,
+        "native_tick": 11,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894951",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "0003c284",
+            "0007ef40"
+          ],
+          "previous_seconds": [
+            "12894951",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "0003c283",
+            "000704e0"
+          ],
+          "elapsed_total": [
+            "00000ba6",
+            "00001e00"
+          ],
+          "partial_total": [
+            "0000",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "000001a5",
+            "000000dc"
+          ],
+          "poll_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "poll_fraction": [
+            "000c9c1d",
+            "000493e0"
+          ],
+          "primary_count": [
+            "66",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4891,
+        "native_iteration": 4640,
+        "source_tick": 12,
+        "native_tick": 12,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894951",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "00059746",
+            "0008d9a0"
+          ],
+          "previous_seconds": [
+            "12894951",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "00059745",
+            "00083d60"
+          ],
+          "elapsed_total": [
+            "00000c1e",
+            "00001e50"
+          ],
+          "partial_total": [
+            "0078",
+            "0000"
+          ],
+          "elapsed_sample": [
+            "0000021d",
+            "00000118"
+          ],
+          "poll_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "poll_fraction": [
+            "000c9c1d",
+            "000493e0"
+          ],
+          "primary_count": [
+            "66",
+            "6e"
+          ]
+        }
+      },
+      {
+        "source_iteration": 4892,
+        "native_iteration": 4641,
+        "source_tick": 13,
+        "native_tick": 13,
+        "record_slots": [],
+        "game_fields": [],
+        "page_planes": [],
+        "timed_fields": {
+          "sample_seconds": [
+            "12894951",
+            "000000ec"
+          ],
+          "sample_fraction": [
+            "0007ba28",
+            "0009c400"
+          ],
+          "previous_seconds": [
+            "12894951",
+            "000000ec"
+          ],
+          "previous_fraction": [
+            "0007ba27",
+            "000927c0"
+          ],
+          "elapsed_total": [
+            "00000caa",
+            "00001e8c"
+          ],
+          "partial_total": [
+            "0000",
+            "003c"
+          ],
+          "elapsed_sample": [
+            "000002a9",
+            "00000154"
+          ],
+          "poll_seconds": [
+            "12894950",
+            "000000ec"
+          ],
+          "poll_fraction": [
+            "000c9c1d",
+            "000493e0"
+          ],
+          "primary_count": [
+            "66",
+            "6e"
+          ]
+        }
+      }
+    ],
+    "first_record_difference": null,
+    "first_game_difference": null,
+    "first_page_difference": null
+  },
+  "wait_state_mutation_rejected": true,
+  "acceptance": "Whole sealed recorded demo interval; flight remains active, timed rendering assessment remains separate"
+}

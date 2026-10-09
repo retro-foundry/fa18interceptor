@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "machine.h"
+#include "../native/flight_trace.h"
 
 typedef struct {
     long iteration;
@@ -17,6 +18,7 @@ static FILE *game_out;
 static LoopEvent *events;
 static int event_count, next_event;
 static long iteration, frame, recorded_end;
+static FA18FlightTrace flight_trace;
 
 /* Live input waiting for the next iteration. */
 static struct {
@@ -70,7 +72,7 @@ void fa18_loop_game_key(unsigned raw) {
 }
 
 int fa18_loop_finish(void) {
-    int ok = 1;
+    int ok = fa18_flight_trace_close(&flight_trace);
     FILE **outputs[] = {&record_out, &game_out};
     for (unsigned i = 0; i < sizeof outputs / sizeof outputs[0]; ++i) {
         FILE *out = *outputs[i];
@@ -169,10 +171,44 @@ static void dump_if_asked(FA18Machine *m) {
     }
 }
 
+static const uint8_t *trace_bytes(void *context,uint32_t address,size_t size) {
+    const FA18Machine *machine=context;
+    if(address<FA18_CHIP_SIZE && size<=FA18_CHIP_SIZE-address) return machine->chip+address;
+    if(address>=0xc00000u && address<0xc00000u+FA18_SLOW_SIZE &&
+       size<=0xc00000u+FA18_SLOW_SIZE-address) return machine->slow+address-0xc00000u;
+    return NULL;
+}
+static void trace_if_asked(FA18Machine *machine) {
+    static int initialized;
+    if(!initialized) {
+        initialized=1;
+        const char *path=getenv("FA18_LOOP_TRACE");
+        if(path) {
+            size_t budget=512u*1024u*1024u;
+            const char *value=getenv("FA18_LOOP_TRACE_BUDGET_MIB");
+            if(value) {
+                char *end;unsigned long mib=strtoul(value,&end,10);
+                budget=(size_t)mib*1024*1024;
+                if(*end || !mib || mib>10000000 || budget/1024/1024!=mib) {
+                    fputs("Invalid FA18_LOOP_TRACE_BUDGET_MIB\n",stderr);exit(2);
+                }
+            }
+            if(!fa18_flight_trace_open(&flight_trace,path,budget)) exit(2);
+        }
+    }
+    if(flight_trace.file) {
+        const uint8_t *viewport=trace_bytes(machine,0xc18242u,4);
+        const unsigned width=(unsigned)viewport[0]<<8|viewport[1];
+        const unsigned height=(unsigned)viewport[2]<<8|viewport[3];
+        if(!fa18_flight_trace_write(&flight_trace,(unsigned)iteration,(unsigned)frame,
+            width,height,trace_bytes,machine)) exit(2);
+    }
+}
 void fa18_loop_iteration(void) {
     FA18Machine *m = fa18_machine;
     iteration++;
     dump_if_asked(m);
+    trace_if_asked(m);
     if (record_out) {
         int i, dx = clamp127(held.dx), dy = clamp127(held.dy);
         for (i = 0; i < held.key_count; i++) emit(m, 'K', held.keys[i][0], held.keys[i][1], 0, 0);

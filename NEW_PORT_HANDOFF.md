@@ -1,5 +1,14 @@
 # Native port handoff — 2026-10-09
 
+Independent whole demo recording: first flight matches 2,046 boundaries, all
+32,736 cores and camera/control state. Twelve callback runs through automatic
+restart preserve all2,062 distinct gameplay states. Strict drawing remains
+1,235/2,046 and full fixed-offset failures remain reported. See
+`analysis/native_independent_demo_trace_milestone.md`. All-mission independent
+flights and equivalent elapsed-time HUD assessment remain open. Plain Escape
+from Free Flight now reproduces the user's automatic mode-one reentry; this
+has priority over further trace work. Existing return check used Shift+Escape.
+
 ## Current restart summary — 2026-10-09
 
 Latest acceptance direction (2026-10-09): the user waived the uninterrupted

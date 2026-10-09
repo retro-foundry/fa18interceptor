@@ -50,7 +50,7 @@ file(GLOB FA18_OS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../os/*.c)
 add_library(fa18_runtime STATIC
     ../romfree/media.c
     recomp_runtime.c recomp_ports.c
-    loop_input.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
+    loop_input.c ../native/flight_trace.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
     ${FA18_GAME} ${FA18_OS} ${FA18_GENERATED})
 target_include_directories(fa18_runtime PUBLIC . generated ../machine ../game ../game/glue ../os)
 target_compile_definitions(fa18_runtime PRIVATE _CRT_SECURE_NO_WARNINGS)

@@ -526,6 +526,10 @@ int main(int argc, char **argv) {
         fputs("--game-input-out requires --ports off for original game input evidence\n", stderr);
         return 2;
     }
+    if (getenv("FA18_LOOP_TRACE") && (!use_recomp || ports_mode != FA18_PORTS_OFF)) {
+        fputs("FA18_LOOP_TRACE requires translated main-loop boundaries and --ports off\n",stderr);
+        return 2;
+    }
     if (game_input_out) {
         FILE *out = fopen(game_input_out, "w");
         if (!out) { fprintf(stderr, "cannot write %s\n", game_input_out); return 1; }

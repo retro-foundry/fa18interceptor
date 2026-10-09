@@ -27,6 +27,7 @@ def source_files(main: Path) -> list[Path]:
         MUSASHI / "softfloat/softfloat.c", main,
         Path("port/recomp/recomp_runtime.c"), Path("port/recomp/recomp_ports.c"),
         Path("port/recomp/loop_input.c"), Path("port/machine/machine.c"),
+        Path("port/native/flight_trace.c"),
         Path("port/machine/bus.c"), Path("port/machine/blitter.c"),
         Path("port/machine/display.c"), Path("port/machine/input.c"),
         Path("port/amiga/rom_audit.c"),

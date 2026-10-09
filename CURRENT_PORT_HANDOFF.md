@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Independent whole demo recording now has bounded read-only traces. Its first
+flight's 2,046 boundaries match all 32,736 cores and camera/control state;
+1,235 complete drawing boundaries match. Twelve actual callback runs through
+automatic restart preserve all 2,062 distinct gameplay states. The viewport wait
+spans33 PAL ticks in both runs despite different loop counts. Strict drawing and
+fixed-offset failures remain reported. See
+`analysis/native_independent_demo_trace_milestone.md`. All-mission independent
+flights and equivalent elapsed-time HUD assessment remain open. Latest priority:
+plain Escape from Free Flight briefly returns to menu then reselects option two.
+This is reproduced; the earlier return check used Shift+Escape. No fix claimed yet.
+
 Initial startup sorting (2026-10-09) is now verified, completing that requested
 check together with qualification entry. The actual C0F812 stack frame and
 complete C08F26 bootstrap match native startup; all three lists and retained

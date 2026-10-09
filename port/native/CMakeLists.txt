@@ -1,4 +1,4 @@
-add_library(fa18_native_runtime OBJECT replay.c frame_capture.c ../game/native/files.c ../game/postflight_file_callers.c
+add_library(fa18_native_runtime OBJECT replay.c frame_capture.c flight_trace.c ../game/native/files.c ../game/postflight_file_callers.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/model_state.c ../game/native/display.c ../game/native/cockpit_assets.c
     ../game/native/audio_assets.c ../game/native/audio.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
@@ -400,6 +400,14 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         add_test(NAME fa18_native_game_input
             COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_game_input.py
                     --runner $<TARGET_FILE:fa18_native>)
+    endif()
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../captures/native/demo01/state.bin AND
+       EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/system/kick13.rom)
+        add_test(NAME fa18_native_flight_trace
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_flight_trace.py
+                    --runner $<TARGET_FILE:fa18_native>
+                    --out ${CMAKE_CURRENT_BINARY_DIR}/flight-trace-check-$<CONFIG>)
+        set_tests_properties(fa18_native_flight_trace PROPERTIES RUN_SERIAL TRUE)
     endif()
     add_test(NAME fa18_native_collision
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_collision.py
