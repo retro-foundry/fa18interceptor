@@ -15,6 +15,7 @@ import tempfile
 
 from check_original_audio_dma import validate_dma, frames, open_stream, FETCH
 from check_original_filter_response import function
+from check_original_audio_prefix import validate_prefix
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / 'tools/engine9000-src/ami9000/sources/src'
@@ -83,19 +84,22 @@ def main():
     parser.add_argument('--capture', type=Path, required=True)
     parser.add_argument('--baseline', type=Path, required=True)
     parser.add_argument('--pcm-reference', type=Path, required=True)
+    parser.add_argument('--entry-prefix', type=Path, required=True,
+                        help='Independent replay stopped after call 2177, before channel-2 startup')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     validation = validate_dma(args.capture, args.baseline, args.pcm_reference)
     checkpoint = json.loads((ROOT / 'analysis/figures/native_original_audio_dma_checkpoint.json').read_text())
     assert validation['audio_dma']['sha256'] == checkpoint['audio_dma']['sha256']
     assert validation['authority'] == checkpoint['authority']
-    initial, writes = None, []
-    for line in (args.capture / 'audio_events.jsonl').open():
-        row = json.loads(line)
-        if row['kind'] == 'initial':
-            initial = row
-        elif row['kind'] == 'write' and row['call'] <= 2178:
-            writes.append(row)
+    entry = validate_prefix(args.entry_prefix, args.capture, args.pcm_reference)
+    assert entry['calls'] == 2177 and entry['endpoint_voice_boundary']['voices'][2]['address'] == 0
+    initial, writes = entry['endpoint_hardware'], []
+    with (args.capture / 'audio_events.jsonl').open() as events:
+        for line in events:
+            row = json.loads(line)
+            if row['kind'] == 'write' and row['call'] <= 2178:
+                writes.append(row)
     fetched = []
     with open_stream(args.capture / 'audio_dma.bin') as file:
         for row, payload in frames(file, 1, 21069):
@@ -158,6 +162,7 @@ def main():
         harness_sha256=sha(harness.read_bytes()), reference_executable_sha256=executable_sha256,
         compiler=subprocess.run([compiler, '--version'], check=True, capture_output=True, text=True).stdout.splitlines()[0],
         actual_context=context, source_oracle=oracle, rejected_controls=controls,
+        actual_entry_prefix=entry,
         classification='startup prefetch, not a sample-buffer word',
         native_runtime_changed=False, native_waveform_accepted=False,
         remaining_uncatalogued_fetch=dict(channel=1, call=94, address=0x25a72, value=0, beam=[19, 277]))

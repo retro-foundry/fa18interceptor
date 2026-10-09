@@ -9,7 +9,9 @@ waveform acceptance remain open.
 
 The complete recording is revalidated first: all 21,069 original calls,
 2,939,342 actual DMA words, complete PCM and unchanged original execution.
-The initial retained channel-2 state is idle with a zero pointer. There is
+An independently stopped replay after call 2,177 retains the actual channel-2
+state: idle with a zero pointer. Its complete PCM, event log and DMA stream
+equal the corresponding prefix of the complete recording. There is
 no preceding channel-2 fetch, DMA enable or manual data write in the recorded
 history. The actual first enable writes `8204` to DMACON at beam 8/63. The
 published pointer is `01A8C0`, length 2,062 words, period 358 and volume 10.
@@ -50,6 +52,6 @@ and executable files are removed automatically; no duplicate recording or
 raw RAM is retained.
 
 ```powershell
-python tools/native/check_original_audio_startup_fetch.py --capture build/native-audio/dma-complete-demo --baseline build/native-audio/original-complete-demo-baseline --pcm-reference build/native-audio/original-complete-demo/original.wav --out build/native-audio/dma-complete-demo/startup-fetch.json
+python tools/native/check_original_audio_startup_fetch.py --capture build/native-audio/dma-complete-demo --baseline build/native-audio/original-complete-demo-baseline --pcm-reference build/native-audio/original-complete-demo/original.wav --entry-prefix build/native-audio/dma-before-startup-zero --out build/native-audio/dma-complete-demo/startup-fetch.json
 python scripts/prune_build_artifacts.py --quiet
 ```

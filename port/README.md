@@ -1,5 +1,13 @@
 # Active port source ownership
 
+Original audio endpoints (2026-10-10): stopped replays at calls 93 and
+2,177 exactly preserve all matching complete-recording PCM, events and DMA
+fetches. Actual channel-2 state is idle; the source startup check now requires
+that endpoint. Channel 1 is playing and its zero word remains unresolved.
+Seven prefix guards pass; duplicate PCM and raw RAM are removed after
+verified compressed retention. Native timing/waveform remains open. See
+[endpoint evidence](../analysis/native_original_audio_endpoint_milestone.md).
+
 Original startup audio fetch (2026-10-10): the channel-2 zero word at
 call 2,178 is discarded by the unchanged source startup state machine.
 All 66,560 priming-word/attachment cases and five corrupt-context controls

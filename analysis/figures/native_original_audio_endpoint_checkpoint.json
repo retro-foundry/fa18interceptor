@@ -1,0 +1,352 @@
+{
+  "scope": "Actual independently stopped original endpoints; full PCM/event/DMA prefixes exact. Native waveform remains open.",
+  "cases": [
+    {
+      "report": "build/native-audio/dma-before-loop-zero/comparison.json",
+      "report_sha256": "6b3e1d5682116bf5ef3dc69fe777d678b612c9e01982cdcab499be97c0a6a7db",
+      "result": {
+        "scope": "All stopped-replay PCM, chunks, events and actual DMA words equal the complete recording prefix. Final serialized hardware describes the actual post-call endpoint; requested restore hardware is an earlier context.",
+        "calls": 93,
+        "stereo_frames": 82026,
+        "actual_dma_words": 18455,
+        "authority": {
+          "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+          "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+          "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+          "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+          "snapshot_sha256": "419e701045281e3c43ba12b472abf2988661447d7167dbbc9df40cb070b04c9c"
+        },
+        "complete_authority": {
+          "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+          "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+          "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+          "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+          "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+        },
+        "prefix_snapshot_sha256": "4cd6fc2083ab3e54a296c0c85b93b2828509e1a21e237b777432e4950b87b1e0",
+        "complete_snapshot_sha256": "9baa0c609e44e422ef88e40114244bcb4c1fc04f0ef711220575389800f91a00",
+        "endpoint_hardware": {
+          "cia_pra": 192,
+          "cia_ddra": 3,
+          "led_pin_on": true,
+          "channels": [
+            {
+              "state": 3,
+              "volume": 31,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 16385,
+              "remaining_words": 78,
+              "period": 358,
+              "data_word": 3083,
+              "buffer": 121456,
+              "cursor": 154070,
+              "next_cycles": 54784,
+              "drhpos": 72
+            },
+            {
+              "state": 2,
+              "volume": 31,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 16385,
+              "remaining_words": 88,
+              "period": 358,
+              "data_word": 65535,
+              "buffer": 121456,
+              "cursor": 154054,
+              "next_cycles": 95744,
+              "drhpos": 56
+            },
+            {
+              "state": 0,
+              "volume": 0,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 0,
+              "remaining_words": 0,
+              "period": 124,
+              "data_word": 0,
+              "buffer": 0,
+              "cursor": 0,
+              "next_cycles": 4294967295,
+              "drhpos": 0
+            },
+            {
+              "state": 0,
+              "volume": 2,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 16,
+              "remaining_words": 5,
+              "period": 300,
+              "data_word": 33410,
+              "buffer": 41952,
+              "cursor": 41976,
+              "next_cycles": 4294967295,
+              "drhpos": 51
+            }
+          ]
+        },
+        "endpoint_voice_boundary": {
+          "kind": "boundary",
+          "call": 93,
+          "sample_frames": 82026,
+          "voices": [
+            {
+              "address": 12613240,
+              "record": "0001da708000800201660000003f00000000000000000002000000000000000000c076f800000000000000000000000000000000000000000000000000000000"
+            },
+            {
+              "address": 12613304,
+              "record": "0001da708000800201660000003f00000000000000000002000000000000000000c0773800000000000000000000000000000000000000000000000000000000"
+            },
+            {
+              "address": 0,
+              "record": null
+            },
+            {
+              "address": 0,
+              "record": null
+            }
+          ],
+          "master_volume": "001f0000",
+          "voice_layout": {
+            "hunk_74": 12910120,
+            "hunk_75": 12910392,
+            "hunk_76": 12910808,
+            "voice_slots": 12910136,
+            "master_volume": 12910374,
+            "verified_hunk_76_bytes": 420,
+            "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+          },
+          "led_states": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "prefix_pcm_sha256": "a52b95910e69606dc42c2aeda99f298bba8ec7412742250ccdc8de9248fdd0a1",
+        "prefix_events_sha256": "94d97dafe9618b82e4390da52cf7e993c62c952deefcb3d75677058e9e347fb4",
+        "prefix_dma_sha256": "035959426b5ac5d7a5f8725cb17759106c08c6fc21c611ac48433911bd91340e",
+        "completed_dma_grid_is_not_live_endpoint": true,
+        "native_waveform_accepted": false,
+        "retention": {
+          "files": [
+            {
+              "file": "state.dat.gz",
+              "decoded_sha256": "419e701045281e3c43ba12b472abf2988661447d7167dbbc9df40cb070b04c9c",
+              "decoded_bytes": 3145728,
+              "retained_sha256": "b7ab6250da600086ccb7efe57b807c9f1a7a5447f5dadb86e414eeb7f6bf443b",
+              "retained_bytes": 354491
+            },
+            {
+              "file": "chip.dat.gz",
+              "decoded_sha256": "c0387b6b573a5796c9dec28f0d578bb1d2ba4ee632032c3a989ae3ad24fa66e8",
+              "decoded_bytes": 524288,
+              "retained_sha256": "824d5ea2a9ac6e90f046fa658709ee5ae9da04254d1cdb4458ee6a246a25943f",
+              "retained_bytes": 199471
+            },
+            {
+              "file": "slow.dat.gz",
+              "decoded_sha256": "e3708d98217d2ad934cadb1e238b78cb48ede1912f31c35151dd96d2a22bf36a",
+              "decoded_bytes": 524288,
+              "retained_sha256": "4eb0856b7ca663b5dd2c075c15982a77ec73471514e42565ddfa12f9d9a6028e",
+              "retained_bytes": 141229
+            },
+            {
+              "file": "audio_dma.bin.gz",
+              "decoded_sha256": "035959426b5ac5d7a5f8725cb17759106c08c6fc21c611ac48433911bd91340e",
+              "decoded_bytes": 336415,
+              "retained_sha256": "753f42e6d870f42bfd3dbe199a8fe2d030c688c0e200cc2f785c6060182765be",
+              "retained_bytes": 105433
+            }
+          ],
+          "pcm_reference": "build\\native-audio\\original-complete-demo\\original.wav",
+          "duplicate_wav_removed": true
+        }
+      }
+    },
+    {
+      "report": "build/native-audio/dma-before-startup-zero/comparison.json",
+      "report_sha256": "d1769fe4de6f52207ddb1a90212a6d59ef18c9f9f31f9b6e900971e780bd8e0b",
+      "result": {
+        "scope": "All stopped-replay PCM, chunks, events and actual DMA words equal the complete recording prefix. Final serialized hardware describes the actual post-call endpoint; requested restore hardware is an earlier context.",
+        "calls": 2177,
+        "stereo_frames": 1920114,
+        "actual_dma_words": 318527,
+        "authority": {
+          "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+          "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+          "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+          "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+          "snapshot_sha256": "53ce4d568af2d72bf33dfc8067b2d7e07782545aceb7f86c6c03ea1182d915d5"
+        },
+        "complete_authority": {
+          "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+          "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+          "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+          "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+          "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+        },
+        "prefix_snapshot_sha256": "2785f4b89da2e089ad925486dcb5f8cd38c8421bee3779fc72f8e0da17e48136",
+        "complete_snapshot_sha256": "9baa0c609e44e422ef88e40114244bcb4c1fc04f0ef711220575389800f91a00",
+        "endpoint_hardware": {
+          "cia_pra": 192,
+          "cia_ddra": 3,
+          "led_pin_on": true,
+          "channels": [
+            {
+              "state": 2,
+              "volume": 22,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 6909,
+              "remaining_words": 3756,
+              "period": 511,
+              "data_word": 61958,
+              "buffer": 46056,
+              "cursor": 52362,
+              "next_cycles": 225792,
+              "drhpos": 157
+            },
+            {
+              "state": 2,
+              "volume": 22,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 6469,
+              "remaining_words": 2511,
+              "period": 513,
+              "data_word": 13618,
+              "buffer": 46936,
+              "cursor": 54852,
+              "next_cycles": 113664,
+              "drhpos": 163
+            },
+            {
+              "state": 0,
+              "volume": 0,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 0,
+              "remaining_words": 0,
+              "period": 124,
+              "data_word": 0,
+              "buffer": 0,
+              "cursor": 0,
+              "next_cycles": 4294967295,
+              "drhpos": 0
+            },
+            {
+              "state": 0,
+              "volume": 0,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 16,
+              "remaining_words": 13,
+              "period": 124,
+              "data_word": 32639,
+              "buffer": 41952,
+              "cursor": 41960,
+              "next_cycles": 4294967295,
+              "drhpos": 190
+            }
+          ]
+        },
+        "endpoint_voice_boundary": {
+          "kind": "boundary",
+          "call": 2177,
+          "sample_frames": 1920114,
+          "voices": [
+            {
+              "address": 12587912,
+              "record": "0000b3e8000035fa01ff900000160000ffffffff0000000000001000000000000000000000000000000000000000000000000000000000000000000700000007"
+            },
+            {
+              "address": 12587976,
+              "record": "0000b7588000328a0201900000160000ffffffff0000000000001000000000000000000000000000000000000000000000000000000000000000000700000007"
+            },
+            {
+              "address": 0,
+              "record": null
+            },
+            {
+              "address": 0,
+              "record": null
+            }
+          ],
+          "master_volume": "003f0000",
+          "voice_layout": {
+            "hunk_74": 12910120,
+            "hunk_75": 12910392,
+            "hunk_76": 12910808,
+            "voice_slots": 12910136,
+            "master_volume": 12910374,
+            "verified_hunk_76_bytes": 420,
+            "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+          },
+          "led_states": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "prefix_pcm_sha256": "349c37c3549b0c0faa424f28c6453e2ca7ecdfed98e67329205f1f941f5f6f81",
+        "prefix_events_sha256": "eac2ebfe721f7947a6ef61c9f7a978c003c27adf7cf6d5d7d6d9c25431f54587",
+        "prefix_dma_sha256": "73e8f4a962e1f2504cec6f35a6d3ddb1af2470340213ab1a33af884c5909bb57",
+        "completed_dma_grid_is_not_live_endpoint": true,
+        "native_waveform_accepted": false,
+        "retention": {
+          "files": [
+            {
+              "file": "state.dat.gz",
+              "decoded_sha256": "53ce4d568af2d72bf33dfc8067b2d7e07782545aceb7f86c6c03ea1182d915d5",
+              "decoded_bytes": 3145728,
+              "retained_sha256": "577e6dcf8916d290e4587913cf3002d9c5bbda9cf0b8c01799ee1b08aaf191e3",
+              "retained_bytes": 357134
+            },
+            {
+              "file": "chip.dat.gz",
+              "decoded_sha256": "14ce5db91d2de46300b00cc193a7616ed11f14d0d8a2558ff9dd22b30ca3672c",
+              "decoded_bytes": 524288,
+              "retained_sha256": "1fa8fec13e05391b98a3d5d6abebd901801f1a4be6309adfce3fe3ce5361fed2",
+              "retained_bytes": 199524
+            },
+            {
+              "file": "slow.dat.gz",
+              "decoded_sha256": "1864e0e84a08ea4066af8b0b78bccc5f003d1ab11b1e43edc841ac23c443187c",
+              "decoded_bytes": 524288,
+              "retained_sha256": "aa40266fe161adc351674463219da8cc8320b6654558ea423141f5659bd1a3c9",
+              "retained_bytes": 144129
+            },
+            {
+              "file": "audio_dma.bin.gz",
+              "decoded_sha256": "73e8f4a962e1f2504cec6f35a6d3ddb1af2470340213ab1a33af884c5909bb57",
+              "decoded_bytes": 5831491,
+              "retained_sha256": "e60565af63d1fc4c3804885c0abdf708762dfc9979b4bdf2bdf82440ff0431c5",
+              "retained_bytes": 2329759
+            }
+          ],
+          "pcm_reference": "build\\native-audio\\original-complete-demo\\original.wav",
+          "duplicate_wav_removed": true
+        }
+      }
+    }
+  ],
+  "guards_passed": 7,
+  "tool_sha256": "bdafb365cdeb4e48a1b2ba79020e703e9f9b1bd4b629f833bda604fb158ed37f",
+  "tests_sha256": "f5c4d2db4fce55db243e4158e4179fa55d64d1bb386e2562e33bfafc2e621366"
+}

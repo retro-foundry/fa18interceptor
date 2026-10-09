@@ -30,7 +30,7 @@
     "uaecptr audio_getpt("
   ],
   "harness_sha256": "d3c3cfd4b5843dc52b551b0ce5b525ea37930decb36f486268d3f822b7a3a7a5",
-  "reference_executable_sha256": "3260c4587b668156c1f3281d4259cf5b435ea7380d07d07ee826d26de6d0db46",
+  "reference_executable_sha256": "32d154005de2cdad35d4a7e026e81de70b879075bd946fa36e10d4265741e2a3",
   "compiler": "gcc.EXE (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r4) 16.1.0",
   "actual_context": {
     "channel": 2,
@@ -92,6 +92,140 @@
     "earlier DMA enable",
     "manual data before first DMA"
   ],
+  "actual_entry_prefix": {
+    "scope": "All stopped-replay PCM, chunks, events and actual DMA words equal the complete recording prefix. Final serialized hardware describes the actual post-call endpoint; requested restore hardware is an earlier context.",
+    "calls": 2177,
+    "stereo_frames": 1920114,
+    "actual_dma_words": 318527,
+    "authority": {
+      "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+      "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+      "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+      "snapshot_sha256": "53ce4d568af2d72bf33dfc8067b2d7e07782545aceb7f86c6c03ea1182d915d5"
+    },
+    "complete_authority": {
+      "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+      "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+      "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+      "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+    },
+    "prefix_snapshot_sha256": "2785f4b89da2e089ad925486dcb5f8cd38c8421bee3779fc72f8e0da17e48136",
+    "complete_snapshot_sha256": "9baa0c609e44e422ef88e40114244bcb4c1fc04f0ef711220575389800f91a00",
+    "endpoint_hardware": {
+      "cia_pra": 192,
+      "cia_ddra": 3,
+      "led_pin_on": true,
+      "channels": [
+        {
+          "state": 2,
+          "volume": 22,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 6909,
+          "remaining_words": 3756,
+          "period": 511,
+          "data_word": 61958,
+          "buffer": 46056,
+          "cursor": 52362,
+          "next_cycles": 225792,
+          "drhpos": 157
+        },
+        {
+          "state": 2,
+          "volume": 22,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 6469,
+          "remaining_words": 2511,
+          "period": 513,
+          "data_word": 13618,
+          "buffer": 46936,
+          "cursor": 54852,
+          "next_cycles": 113664,
+          "drhpos": 163
+        },
+        {
+          "state": 0,
+          "volume": 0,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 0,
+          "remaining_words": 0,
+          "period": 124,
+          "data_word": 0,
+          "buffer": 0,
+          "cursor": 0,
+          "next_cycles": 4294967295,
+          "drhpos": 0
+        },
+        {
+          "state": 0,
+          "volume": 0,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 16,
+          "remaining_words": 13,
+          "period": 124,
+          "data_word": 32639,
+          "buffer": 41952,
+          "cursor": 41960,
+          "next_cycles": 4294967295,
+          "drhpos": 190
+        }
+      ]
+    },
+    "endpoint_voice_boundary": {
+      "kind": "boundary",
+      "call": 2177,
+      "sample_frames": 1920114,
+      "voices": [
+        {
+          "address": 12587912,
+          "record": "0000b3e8000035fa01ff900000160000ffffffff0000000000001000000000000000000000000000000000000000000000000000000000000000000700000007"
+        },
+        {
+          "address": 12587976,
+          "record": "0000b7588000328a0201900000160000ffffffff0000000000001000000000000000000000000000000000000000000000000000000000000000000700000007"
+        },
+        {
+          "address": 0,
+          "record": null
+        },
+        {
+          "address": 0,
+          "record": null
+        }
+      ],
+      "master_volume": "003f0000",
+      "voice_layout": {
+        "hunk_74": 12910120,
+        "hunk_75": 12910392,
+        "hunk_76": 12910808,
+        "voice_slots": 12910136,
+        "master_volume": 12910374,
+        "verified_hunk_76_bytes": 420,
+        "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+      },
+      "led_states": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "prefix_pcm_sha256": "349c37c3549b0c0faa424f28c6453e2ca7ecdfed98e67329205f1f941f5f6f81",
+    "prefix_events_sha256": "eac2ebfe721f7947a6ef61c9f7a978c003c27adf7cf6d5d7d6d9c25431f54587",
+    "prefix_dma_sha256": "73e8f4a962e1f2504cec6f35a6d3ddb1af2470340213ab1a33af884c5909bb57",
+    "completed_dma_grid_is_not_live_endpoint": true,
+    "native_waveform_accepted": false
+  },
   "classification": "startup prefetch, not a sample-buffer word",
   "native_runtime_changed": false,
   "native_waveform_accepted": false,
@@ -107,7 +241,7 @@
   },
   "evidence": {
     "report": "build/native-audio/dma-complete-demo/startup-fetch.json",
-    "report_sha256": "16379fa99ee5a6639256a75cb05f5ad5b67761f55b57709a465f7d70a81861b5",
-    "tool_sha256": "df87a49501b63d23cc14490b64880ad7f3d60e7dff8e7c692e4e3b1fd1ed6b55"
+    "report_sha256": "6d50affc6e30aaf749f913724b0947f9176d22d32b71fa0e77a8fe1cfc9756d6",
+    "tool_sha256": "593a6226221bcd5b7b7fff1295cd7fa2b54a0e4207d9134361372cdcef5abc9b"
   }
 }
