@@ -2,6 +2,17 @@
 
 ## Current restart summary — 2026-10-09
 
+Latest acceptance direction (2026-10-09): the user waived the uninterrupted
+qualification-plus-six-mission requirement. Repeated individual mission tests
+with earned saves, objectives, landing, results and menu returns now qualify
+that part of completion; cold starts are allowed. The continuous-campaign
+driver and accepted five-mission prefix remain diagnostic evidence. Its final
+flight failure is no longer a completion blocker. This overrides every older
+uninterrupted-run requirement below. The latest failed bank/height input
+experiments were reverted. Independent original whole-flight comparisons,
+startup sorting, original recorded sound/filter fidelity, visible performance
+and named-state cleanup remain outstanding.
+
 Free Flight location-three renderer crash fixed: model C3AAC4's command 4018
 now dispatches the original C206E4 interpolated-segment routine. The model oracle
 compares 72 complete command cases and 16 actual-model poses (eight source calls),

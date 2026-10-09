@@ -1,5 +1,12 @@
 # The C port
 
+Current acceptance (2026-10-09): the user waived the uninterrupted campaign
+requirement. Repeated individual qualification/mission tests, with actual earned
+saves and checked objectives, landing, results and menu returns, are sufficient
+for campaign qualification. Cold starts are allowed. Older references to an
+uninterrupted tour as required work are superseded. Independent original whole
+flights and the other completion items remain open.
+
 Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry

@@ -1,5 +1,12 @@
 # Native port runner
 
+Current acceptance (2026-10-09): the user waived an uninterrupted campaign.
+Repeated individual qualification and mission tests, using actual earned saves
+and checking objectives, landing, results and menu return, replace that gate.
+Cold starts are allowed. The continuous-campaign driver remains optional
+diagnostic tooling; older references to its sixth flight as required work are
+superseded. Independent original whole flights and other completion work remain.
+
 Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry

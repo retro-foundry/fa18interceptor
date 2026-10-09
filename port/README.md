@@ -1,5 +1,12 @@
 # Active port source ownership
 
+Current acceptance (2026-10-09): repeated individual mission tests now replace
+the uninterrupted campaign gate by explicit user direction. Cold save/load
+boundaries are allowed; retain actual earned results and objective, landing,
+save and menu-return checks. Older uninterrupted-tour requirements below are
+superseded. Independent original whole-flight parity and other completion work
+remain open.
+
 Actual Demonstration drawing order now matches its original caller; its native
 menu transition sorts all three lists. Mode assertions corrected a fixture that
 had selected qualification under the Demonstration label. Qualification entry

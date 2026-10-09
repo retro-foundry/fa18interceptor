@@ -1,5 +1,29 @@
 # Continuous campaign and visible performance investigation - 2026-10-09
 
+## Superseding acceptance direction - 2026-10-09
+
+The user explicitly waived the uninterrupted campaign requirement, accepting
+repeated individual mission tests instead because final-mission spawn variation
+makes the continuous route difficult. Cold starts with actual earned saves are
+allowed. The completed five-mission single-process prefix remains useful
+evidence, but final-flight success in that same process is no longer required.
+This overrides the older campaign requirements and next steps below. Visible
+performance, independent original whole flights and other acceptance work remain.
+
+Two subsequent ordinary-key bank/height experiments were unsuccessful and were
+reverted. The banked-turn diagnostic reached two enemy expiries but touched down
+before completing combat and then exhausted fuel. Adding height control during
+turns instead ended in player destruction at tick 24046, fuel 6214047. These are
+test-pilot failures, not new evidence of a native runtime defect. Their bounded
+reports are in `build/native-flight/campaign-suffix-final-bank-turn/` and
+`build/native-flight/campaign-suffix-final-bank-height/`. No experimental control
+changes or early-failure changes remain in the test driver.
+
+The renewed individual qualification uses the existing Release/Debug mission
+sequence gates and earned cold tour, including original and newly enlisted
+pilot contexts where supported. Fixed-input repeats show reproducibility;
+they do not establish exhaustive coverage of random spawns.
+
 This is work in progress, not an acceptance milestone. Completed sort fix and
 its Release/Debug evidence are committed as `1dd08521`; all files described here
 remain uncommitted pending validation. The complete-port goal remains active.

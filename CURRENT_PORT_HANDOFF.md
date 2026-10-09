@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Latest acceptance direction (2026-10-09): the user explicitly waived an
+uninterrupted qualification-plus-six-mission run because the final mission's
+spawn variation makes that route difficult. Qualify missions individually with
+repeated tests instead, retaining actual earned saves, objectives, landing,
+results and menu-return checks. Cold starts between missions are allowed.
+The existing continuous-campaign tools and five-mission prefix remain diagnostic
+evidence; the unsuccessful sixth mission in that session is no longer a
+completion blocker. This supersedes every older uninterrupted-campaign
+requirement below. Failed bank/height test-pilot experiments were reverted.
+Independent original whole flights, startup sorting, recorded audio/filter
+fidelity, visible performance and named-state cleanup remain separate work.
+
 Free Flight renderer fix (2026-10-09): the user's location-three crash at
 model C3AAC4 / stream C3ABEA / command 4018 was a missing native command.
 Original table C1FCE8+$18 points to C206E4, now connected through the existing
