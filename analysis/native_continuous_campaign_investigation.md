@@ -162,6 +162,18 @@ No test is running now.
 
 ## Verified playable prefix
 
+The larger Release prefix now passes qualification and five geared missions in
+one actual `fa18_native` process. Ordinary radar/heat missile retries finish
+cruise interception, carrier wire, save and menu. At tick 146862, the complete
+78-byte saved result matches the observing driver, five grades/completions are
+earned, menu is C0FCB4/mode zero, and no crash reset or pending input exists.
+Evidence is `figures/native_geared_five_mission_prefix_checkpoint.json`, with
+inputs/logs under `campaign-session-gear-five-playable/`. The driver executable
+hash was not sealed before a later telemetry rebuild; it is deliberately not
+claimed in this checkpoint. Replay/runner/ADF/save hashes are sealed.
+Final combat still crashes before an aircraft expiry; full six-mission and
+five-mission Debug acceptance remain open.
+
 The existing recorded keys through rescue were independently replayed in one
 actual Release `fa18_native` process with an actual normally enlisted save.
 Qualification and missions 3..6 finish at tick 125454, menu C0FCB4/mode zero,
@@ -197,6 +209,15 @@ save and menu; final combat subsequently crashes without an aircraft expiry.
 It is not uninterrupted campaign evidence. The full Release rerun is
 `campaign-session-gear-missile-retry/`; see `campaign-suffix-missile-retry/`
 for the cold input diagnostics. No passing RAM is retained.
+
+Final-flight telemetry is in `campaign-suffix-final-view-trace/`. The pilot
+fires one heat missile and remains alive in combat for many updates, then fuel
+and thrust stop changing while pitch falls toward the ground. Player component
+damage remains zero, but that alone does not establish whether the original
+interception/destruction bit at record +32 is clear. Inspect that owner and
+compare the affected complete original body before changing game behavior.
+The current ordinary-key candidate tries radar first and retains more flying
+speed: `campaign-suffix-final-radar-speed/`. It has no accepted result yet.
 
 ```powershell
 cmake --build build/native-cmake --config Release --target fa18_native_campaign_session_test --parallel 8

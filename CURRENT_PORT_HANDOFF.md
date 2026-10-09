@@ -1,8 +1,11 @@
 # Current playable port handoff
 
-Active completion investigation (2026-10-09): one frontend earns
-qualification and the first four missions with gear control; the cruise-missile
-interception route is now under investigation.
+Active completion investigation (2026-10-09): qualification and the first five
+missions now complete with gear management in one actual Release playable
+process, saving five earned grades and returning to menu at tick 146862.
+All 78 saved bytes match the observing driver; no crash reset or pending input.
+See `analysis/figures/native_geared_five_mission_prefix_checkpoint.json`.
+Final combat remains unsuccessful; no six-mission acceptance is claimed.
 The continuous driver and playable-replay checker are under `tools/native/`;
 no passing whole-campaign result is claimed. Visible demo presents all 10,910
 frames, p99 work 4.0922 ms, but a 543.2488 ms SDL input stall gives maximum
@@ -38,11 +41,11 @@ completion. The diagnostic targets build in Release/Debug, and the existing
 mission-five success comparison passes in both. No failing full-campaign test
 is registered in default CTest.
 
-The cold geared cruise diagnostic now completes interception, carrier wire,
-save and menu using ordinary missile retries. It starts with the actual saved
-four-mission result, so it is a cold suffix, not continuous-campaign evidence.
-Final combat then crashes before an aircraft expiry. The uninterrupted Release
-rerun is `build/native-flight/campaign-session-gear-missile-retry/`.
+The uninterrupted Release driver and its actual playable five-mission replay
+now verify the cruise route, including carrier wire and saved grade. Current
+final-flight diagnostics use the actual earned mode-seven save. A cold suffix
+is diagnostic only and cannot replace the uninterrupted six-mission check.
+Five-mission Debug replay remains open; the four-mission prefix passes Debug.
 
 Latest mode-verified drawing-order audit (2026-10-09):
 

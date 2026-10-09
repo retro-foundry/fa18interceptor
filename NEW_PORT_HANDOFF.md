@@ -2,6 +2,14 @@
 
 ## Current restart summary — 2026-10-09
 
+Qualification and five geared missions now pass in one actual Release playable
+process. The final menu is C0FCB4/mode zero at tick 146862; all 78 earned saved
+bytes match the observing driver, with no crash reset or pending input.
+See `analysis/figures/native_geared_five_mission_prefix_checkpoint.json`.
+Final combat remains unsuccessful. Five-mission Debug replay remains open;
+the preceding four-mission prefix matches all counters and saved bytes in Debug.
+The complete-port goal remains active.
+
 Active completion work: the one-frontend campaign driver in
 `tools/native/native_campaign_session_test.c` and checker
 `tools/native/check_campaign_session.py` earn qualification, mission three
@@ -56,7 +64,9 @@ The cold geared cruise diagnostic now earns interception, carrier wire,
 save and menu (`build/native-flight/campaign-suffix-missile-retry/`). Its initial
 save is the actual four-mission result. Final combat then crashes without an
 aircraft expiry. This cold suffix cannot qualify the uninterrupted campaign;
-the current full Release rerun is `campaign-session-gear-missile-retry/`.
+the full Release rerun is `campaign-session-gear-missile-retry/`. That run now
+earns five missions before the final combat crash, and the five-mission prefix
+has also passed in the actual playable runner.
 
 Visible measurement was run via `tools/native/measure_visible_performance.py`
 under `build/native-flight/visible-performance-20261009/`: demo and six actual
