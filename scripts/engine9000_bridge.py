@@ -31,6 +31,11 @@ KEY = C.CFUNCTYPE(None, C.c_bool, U, C.c_uint32, C.c_uint16)
 LOG = C.CFUNCTYPE(None, C.c_int, C.c_char_p)
 VBLANK = C.CFUNCTYPE(None, P)
 CUSTOM_FRAME = C.CFUNCTYPE(None, P, S, U, C.c_uint64, P)
+LED = C.CFUNCTYPE(None, C.c_int, C.c_int)
+
+
+class LedInterface(C.Structure):
+    _fields_ = [('set_led_state', LED)]
 
 
 class CustomWrite(C.Structure):
@@ -84,7 +89,7 @@ def sha(data):
 
 
 class Engine:
-    def __init__(self, config, save_dir):
+    def __init__(self, config, save_dir, observe_led=False):
         self.options = {}
         self.overrides = {}
         for line in config.read_text().splitlines():
@@ -116,6 +121,14 @@ class Engine:
         self.audio_capture_call = 0
         self.audio_events = None
         self.audio_event_rows = 0
+        # The core's retro_led_state[] starts at zero and only publishes
+        # changes. Capture the interface from initialization, before restore.
+        # libretro-core.c:retro_led_interface publishes gui_data.powerled,
+        # which cia.c:led_vsync also passes to audio.c:led_filter_audio.
+        self.observe_led = observe_led
+        self.led_states = [0] * 9
+        self.led_callback = LED(self.on_led)
+        self.led_interface_available = False
         self.env_commands = set()
         # A Python host does not initialise the MinGW DLL's stderr. The callback
         # accepts the fixed prefix of libretro's printf ABI; unused varargs are
@@ -191,6 +204,17 @@ class Engine:
         fn.restype, fn.argtypes = result, list(args)
         return fn
 
+    def on_led(self, led, state):
+        try:
+            if not 0 <= led < len(self.led_states) or state < 0 or (led == 0 and state not in (0, 1)):
+                raise RuntimeError(f'Unsupported original LED notification: {led}/{state}')
+            self.led_states[led] = state
+            if self.audio_events is not None and not self.audio_capture_error:
+                self.write_audio_event({'kind': 'led', 'call': self.audio_capture_call,
+                    'sample_frames': self.audio_capture_frames, 'led': led, 'state': state})
+        except (OSError, RuntimeError) as error:
+            self.audio_capture_error = str(error)
+
     def write_audio_event(self, row):
         line = json.dumps(row) + '\n'
         size = len(line.encode('utf8'))
@@ -202,6 +226,10 @@ class Engine:
 
     def environment(self, cmd, data):
         self.env_commands.add(cmd)
+        if cmd == (46 | 0x10000) and self.observe_led:
+            C.cast(data, C.POINTER(LedInterface)).contents.set_led_state = self.led_callback
+            self.led_interface_available = True
+            return True
         if cmd == 27:
             C.cast(data, C.POINTER(P))[0] = C.cast(self.log_callback, P).value
             return True
@@ -352,7 +380,7 @@ def main():
                         help='Record Custom-register writes during ordinary full-frame replay')
     parser.add_argument('--wav', action='store_true', help='Capture complete reference PCM during the requested replay window')
     parser.add_argument('--audio-events', action='store_true',
-                        help='With --wav/--restore, record audio/control writes and safe voice RAM at every replay boundary')
+                        help='With --wav/--restore, record audio/control writes, safe voice RAM and published LED/filter state at every replay boundary')
     parser.add_argument('--capture-budget-mib', type=int, default=512)
     args = parser.parse_args()
     if args.trace_frames and args.normal_custom_log:
@@ -387,7 +415,7 @@ def main():
                 'The stepping frontend does not yet have validated held-input/autorepeat parity; '
                 'trace a no-input window or use a full-frame replay capture.')
     start = time.monotonic()
-    engine = Engine(args.config.resolve(), saves.resolve())
+    engine = Engine(args.config.resolve(), saves.resolve(), observe_led=args.audio_events)
     if args.restore:
         engine.core.retro_run()  # Initialise UAE before requesting its synchronous restore.
         payload = args.restore.read_bytes()
@@ -409,10 +437,12 @@ def main():
         engine.audio_capture_log = (args.output / 'audio_chunks.jsonl').open('w', encoding='utf8')
     if args.audio_events:
         from original_audio_events import audio_state, voice_state
+        if not engine.led_interface_available:
+            raise RuntimeError('Original core did not request the LED interface')
         engine.audio_events = (args.output / 'audio_events.jsonl').open('w', encoding='utf8')
         engine.write_audio_event({'kind': 'initial', 'call': args.start_frame,
                                  'sample_frames': 0, **audio_state(payload),
-                                 **voice_state(engine.memory)})
+                                 **voice_state(engine.memory), 'led_states': engine.led_states.copy()})
         engine.bind('e9k_debug_set_debug_option', None, U, U, P)(38, 1, None)
     samples = []
     normal_custom = None
@@ -433,7 +463,8 @@ def main():
                 raise RuntimeError(f'Expected video frame {frame}, actual {engine.frame}')
             if args.audio_events:
                 engine.write_audio_event({'kind': 'boundary', 'call': frame,
-                    'sample_frames': engine.audio_capture_frames, **voice_state(engine.memory)})
+                    'sample_frames': engine.audio_capture_frames, **voice_state(engine.memory),
+                    'led_states': engine.led_states.copy()})
             if frame % 100 == 0:
                 samples.append({'frame': frame, 'pc': engine.regs()['pc']})
     finally:
@@ -485,7 +516,9 @@ def main():
         report['audio_events'] = {'file': 'audio_events.jsonl',
             'rows': engine.audio_event_rows, 'sha256': event_hash,
             'final_hardware': audio_state((args.output / 'state.bin').read_bytes()),
-            'scope': 'All logged audio/control custom writes and safe voice RAM at every full-frame boundary; CIA/audio hardware sampled only from sealed initial and ordinary final state, not within-frame LED duty'}
+            'led_interface': True,
+            'final_led_states': engine.led_states.copy(),
+            'scope': 'All logged audio/control custom writes, safe voice RAM and published LED/filter state at every full-frame boundary; CIA pin/duty only known at retained endpoints'}
     (args.output / 'snapshot.json').write_text(json.dumps(report, indent=2) + '\n')
     if args.trace_frames:
         import capstone

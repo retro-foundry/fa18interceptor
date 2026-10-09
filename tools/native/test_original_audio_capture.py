@@ -32,15 +32,30 @@ def main():
         assert len([row for row in rows if row['kind'] == 'initial']) == 1
         assert [row['call'] for row in rows if row['kind'] == 'boundary'] == list(range(1,33))
         assert any(row['kind'] == 'write' and 0xdff0a0 <= row['address'] <= 0xdff0da for row in rows)
-        for change in ('missing-boundary', 'wrong-sample-boundary'):
+        assert events['audio_events']['led_interface']
+        assert sum(events['power_filter_boundary_counts'].values()) == 32
+        assert any(row['kind'] == 'led' and row['led'] == 0 for row in rows)
+        for change in ('missing-boundary', 'wrong-sample-boundary', 'wrong-led-boundary',
+                       'missing-led-state', 'missing-led-notification', 'wrong-led-sample-offset'):
             damaged = work/change
             shutil.copytree(work/'events', damaged)
             modified = [dict(row) for row in rows]
             index = next(i for i,row in enumerate(modified) if row['kind'] == 'boundary')
             if change == 'missing-boundary':
                 del modified[index]
-            else:
+            elif change == 'wrong-sample-boundary':
                 modified[index]['sample_frames'] += 1
+            elif change == 'wrong-led-boundary':
+                modified[index]['led_states'] = modified[index]['led_states'].copy()
+                modified[index]['led_states'][0] ^= 1
+            elif change == 'missing-led-state':
+                del modified[index]['led_states']
+            else:
+                index = next(i for i,row in enumerate(modified) if row['kind'] == 'led')
+                if change == 'missing-led-notification':
+                    del modified[index]
+                else:
+                    modified[index]['sample_frames'] += 1
             log = damaged/'audio_events.jsonl'
             log.write_text(''.join(json.dumps(row)+'\n' for row in modified), encoding='utf8')
             report_path = damaged/'snapshot.json'
@@ -50,7 +65,7 @@ def main():
             report_path.write_text(json.dumps(report))
             try:
                 validate_events(damaged, work/'baseline')
-            except AssertionError:
+            except (AssertionError, KeyError):
                 pass
             else:
                 raise AssertionError(f'Accepted damaged original events: {change}')
@@ -88,7 +103,7 @@ def main():
                                     capture_output=True,text=True,timeout=20)
             assert result.returncode and message in result.stderr, result.stderr
             assert not (work/name/'original.wav').exists()
-    print('Real 32-frame original PCM/event tracing preserves complete state; corrupt PCM/events/reference, missing boundaries, stepping and budget failures rejected')
+    print('Real 32-frame original PCM/event/LED tracing preserves complete state; corrupt PCM/events/LED boundaries/notifications/reference, stepping and budget failures rejected')
 
 
 if __name__ == '__main__':

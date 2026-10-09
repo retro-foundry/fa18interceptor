@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Original filter evidence (2026-10-09): the existing LED interface reports
+filter enabled at all 21,069 Demo boundaries, preserving complete original
+PCM/execution and every earlier event row. Two independent cold starts also
+produce 13,230,014 stereo frames matching unchanged A500/LED filter functions
+exactly, including the reference mixer gain; non-silent output and every
+sample are checked. Wrong filters and corrupted LED traces are rejected.
+Native executable is unchanged; filter integration, onset/handoff alignment
+and whole-flight sound acceptance remain open. See [filter evidence](analysis/native_original_filter_state_milestone.md).
+
 Native PCM averaging (2026-10-09): playable output now uses original source
 interval averaging instead of sample holding, with fixed integer storage.
 196,608 intervals match unchanged original accumulator functions in both

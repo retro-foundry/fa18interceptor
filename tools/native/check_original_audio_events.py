@@ -36,11 +36,27 @@ def validate_events(capture, baseline, pcm_reference=None):
     previous = None
     initial = None
     buffer_loads = [0] * 4
+    led_states, led_updates = None, []
+    power_boundaries = Counter()
+    led_capture = descriptor.get('led_interface', False)
     with path.open() as log:
         for line in log:
             row = json.loads(line)
             rows += 1
             kind = row['kind']
+            if kind == 'led':
+                assert led_capture and initial is not None and row['call'] == next_call
+                led, state = row['led'], row['state']
+                assert 0 <= led < 9 and isinstance(state, int) and state >= 0
+                assert led != 0 or state in (0, 1)
+                # libretro-core.c calls retro_led_interface before uploading
+                # the current call's batch PCM. This is publication time,
+                # not a fabricated within-block filter switch timestamp.
+                assert row['sample_frames'] == (sample_ends[next_call - 1] if next_call > first else 0)
+                assert state != led_states[led], 'Duplicate unchanged LED publication'
+                led_states[led] = state
+                led_updates.append(row)
+                continue
             if kind == 'write':
                 assert initial is not None and row['call'] == next_call
                 address = row['address']
@@ -55,11 +71,18 @@ def validate_events(capture, baseline, pcm_reference=None):
             if kind == 'initial':
                 assert rows == 1 and row['call'] == first - 1 and row['sample_frames'] == 0
                 initial = row
+                if led_capture:
+                    led_states = row['led_states'].copy()
+                    assert len(led_states) == 9 and all(isinstance(v, int) and v >= 0 for v in led_states)
+                    assert led_states[0] in (0, 1)
             else:
                 assert kind == 'boundary' and initial is not None
                 assert row['call'] == next_call and row['sample_frames'] == sample_ends[next_call]
                 boundaries += 1
                 next_call += 1
+                if led_capture:
+                    assert row['led_states'] == led_states, 'LED boundary differs from original notifications'
+                    power_boundaries[str(led_states[0])] += 1
             assert len(row['voices']) == 4 and len(bytes.fromhex(row['master_volume'])) == 4
             addresses = []
             for channel, voice in enumerate(row['voices']):
@@ -79,6 +102,8 @@ def validate_events(capture, baseline, pcm_reference=None):
     assert rows == descriptor['rows'] and boundaries == result['replay_calls']
     final = audio_state(recorded_bytes(capture, 'state.bin'))
     assert final == descriptor['final_hardware']
+    if led_capture:
+        assert descriptor['final_led_states'] == led_states
     result.update(audio_events=descriptor, event_rows=rows, boundary_rows=boundaries,
         register_writes=dict(sorted(register_counts.items())),
         source_writes=dict(sorted(source_counts.items())),
@@ -87,6 +112,11 @@ def validate_events(capture, baseline, pcm_reference=None):
         initial_hardware={key: initial[key] for key in final},
         filter_scope='LED pin on/off only at sealed initial and ordinary final endpoints; within-frame duty and intermediate CIA writes unproven',
         native_sound_acceptance=False)
+    if led_capture:
+        result.update(led_updates=led_updates,
+            power_filter_boundary_counts=dict(sorted(power_boundaries.items())),
+            initial_published_led_states=initial['led_states'], final_published_led_states=led_states,
+            filter_scope='Published gui_data.powerled/filter boolean at every replay boundary via original LED interface; no live CIA reads or repeated serialization; within-block transition sample unproven')
     return result
 
 
