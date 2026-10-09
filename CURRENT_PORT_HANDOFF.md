@@ -1,5 +1,17 @@
 # Current playable port handoff
 
+Independent mission-three recording (2026-10-09): a complete failed flight
+now matches all 5,216 record cores and camera/control/target state across 326
+boundaries through C11788 crash/reset. The generated ordinary-key recording
+reproduces all 22,467 original trace boundaries, consumed keys and final RAM
+without the validation controller. A native pilot is enlisted and qualifies
+through ordinary keys; both pilots have scene level zero. The bundled level-two
+pilot probe was rejected for parity. Release/Debug traces, RAM, counters and
+saves agree. Strict drawing matches 259/326; 67 differences remain unassessed.
+This failed route does not qualify a successful mission-three whole flight.
+Gameplay and original Escape restart are unchanged; broader completion stays
+open. See `analysis/native_independent_mission_recording_milestone.md`.
+
 Independent complete qualification flight (2026-10-09): Release/Debug agree
 through landing, results and the original restart callback. All 2,728 first-flight
 boundaries match 43,648 complete record cores and camera/control/target state;

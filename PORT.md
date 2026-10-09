@@ -1,5 +1,13 @@
 # The C port
 
+Independent mission-three failed flight now matches all 5,216 aircraft cores
+and camera/control/target state through its first crash/reset callback. The
+original recording reproduces all 22,467 boundaries without its input pilot.
+Native uses an ordinarily enlisted, earned pilot at the same scene level zero;
+Release/Debug agree. Drawing matches 259/326 and 67 failures remain unassessed.
+Successful all-mission whole flights and other completion work stay open.
+Gameplay and original Escape are unchanged. See [recording evidence](analysis/native_independent_mission_recording_milestone.md).
+
 Independent complete qualification now matches all 43,648 record cores and
 camera/control/target fields across 2,728 first-flight boundaries; 2,722
 complete drawings match. Nine result/restart callback runs preserve all
