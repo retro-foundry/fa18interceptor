@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Latest completion scope (2026-10-09): the user has moved internal state cleanup
+to a separate follow-up outside the active complete-C-port goal. Migrating the
+remaining byte-array state into named C structures is unfinished ownership and
+clarity work, not a completion requirement for this goal or evidence of a
+missing mission. The arrays are ordinary PC memory. This direction supersedes
+older notes that include state cleanup in the active completion criteria.
+Remaining acceptance work covers independent whole-flight comparisons,
+recorded audio/filter fidelity and visible gameplay performance. The earlier
+waiver of an uninterrupted campaign remains in effect; repeated individual
+mission testing is accepted instead. Do not begin state migration in this goal.
+
 Independent mission-three successful recording (2026-10-09): the original
 now earns its objective, geared runway landing, grade one and menu return. All
 27,110 trace boundaries, consumed controls and final RAM reproduce without

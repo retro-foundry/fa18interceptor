@@ -1,5 +1,13 @@
 # Active port source ownership
 
+User scope update (2026-10-09): migrating remaining byte-array state into named
+C structures is deferred to a separate follow-up outside the active
+complete-C-port goal. It improves ownership and clarity; the existing arrays
+are ordinary PC memory and do not establish a missing mission. This overrides
+older completion notes. Independent whole-flight comparisons, recorded
+audio/filter fidelity and visible gameplay performance remain in scope; the
+uninterrupted campaign requirement remains waived.
+
 The original and independent native now complete mission three with gear
 raised after takeoff, lowered before runway landing, grade and menu return.
 The complete original recording reproduces without its controller; native
