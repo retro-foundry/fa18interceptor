@@ -1,5 +1,11 @@
 # Native port runner
 
+Remaining drawing audit (2026-10-09): original radar writes explain the first
+17 differing plane-3 observations. Full-flight audits retain 1,911 unresolved
+observations for plane 0 and 2,785 for plane 3 and exit failure; whole-plane
+acceptance stays strict. Plane-1/2 reports remain identical. See
+[remaining drawing evidence](../../analysis/native_remaining_plane_audit.md).
+
 Complete mission-three plane histories (2026-10-09): all bytes of planes 1
 and 2 on both pages are accounted for across all 4,967 independent flight
 observations (79,472,000 bytes per plane). Every differing observation has a

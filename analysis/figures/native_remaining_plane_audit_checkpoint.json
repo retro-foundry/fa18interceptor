@@ -1,0 +1,3166 @@
+{
+  "date": "2026-10-09",
+  "native_runtime_changed": false,
+  "scope": "Full-flight diagnostic inventories retain all unresolved observations. Only the early plane-3 episode gains bounded original-write acceptance; whole planes 0 and 3 remain failed.",
+  "tools_sha256": {
+    "tools/native/assess_mission_plane_history.py": "8fc8d0b68d238ed56c4c16ddc159be9a1c10074171f06524fd480e9513bce39e",
+    "tools/native/test_mission_plane_history.py": "0acf9c2c693007f6e07de8df6be1430a0f4f1773206ddd2a4df1d9e09afb7f84",
+    "tools/native/assess_mission_radar_cadence.py": "dbc8e489067d63b909571c2115826c5329b0cff59179d9011332fbf474e90d79"
+  },
+  "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+  "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+  "runner_sha256": "8967d946ae2ad677810ae310cb132c7f376db964cb9b0b9d937872db48c5cdbb",
+  "whole_flight": {
+    "0": {
+      "report": "build/native-flight/mission-three-plane-zero-audit.json",
+      "report_sha256": "da114f1f121ab02943d427698d3b48e343634cc2852419dde14de877601b8759",
+      "observations": 4967,
+      "complete_plane_observations": 9934,
+      "strict_matching_by_role": {
+        "0": 3489,
+        "4": 3488
+      },
+      "explained_differing_observations": 0,
+      "unresolved_observations": 1911,
+      "unresolved_episodes": [
+        [
+          22303,
+          22340
+        ],
+        [
+          22354,
+          22401
+        ],
+        [
+          22428,
+          22478
+        ],
+        [
+          22491,
+          22529
+        ],
+        [
+          22535,
+          22564
+        ],
+        [
+          22566,
+          22592
+        ],
+        [
+          22594,
+          22605
+        ],
+        [
+          22618,
+          22670
+        ],
+        [
+          22696,
+          22750
+        ],
+        [
+          22764,
+          22772
+        ],
+        [
+          22778,
+          22835
+        ],
+        [
+          22848,
+          22861
+        ],
+        [
+          22863,
+          23311
+        ],
+        [
+          25694,
+          25710
+        ],
+        [
+          26098,
+          27108
+        ]
+      ],
+      "complete_plane_bytes_accounted": 55816000,
+      "complete_plane_history_matching": false,
+      "audit_exit_code": 1,
+      "missing_history_negative_control": false
+    },
+    "3": {
+      "report": "build/native-flight/mission-three-plane-three-audit.json",
+      "report_sha256": "96dc20f5126cee31b3100c3e79f4f2b192828ae7b57efb94daa22628a64ccfca",
+      "observations": 4967,
+      "complete_plane_observations": 9934,
+      "strict_matching_by_role": {
+        "3": 2182,
+        "7": 2182
+      },
+      "explained_differing_observations": 17,
+      "unresolved_observations": 2785,
+      "unresolved_episodes": [
+        [
+          23311,
+          25705
+        ],
+        [
+          25710,
+          26099
+        ]
+      ],
+      "complete_plane_bytes_accounted": 35152000,
+      "complete_plane_history_matching": false,
+      "audit_exit_code": 1,
+      "missing_history_negative_control": true
+    }
+  },
+  "all_plane_drawing_bands": {
+    "first": 22142,
+    "last": 27108,
+    "observations": 4967,
+    "complete_pages_matching": 287,
+    "bands": [
+      {
+        "y": 0,
+        "rows": 96,
+        "matching": 4967,
+        "compared": 4967,
+        "matching_planes": [
+          4967,
+          4967,
+          4967,
+          4967,
+          4967,
+          4967,
+          4967,
+          4967
+        ],
+        "first_difference": null
+      },
+      {
+        "y": 96,
+        "rows": 32,
+        "matching": 4967,
+        "compared": 4967,
+        "matching_planes": [
+          4967,
+          4967,
+          4967,
+          4967,
+          4967,
+          4967,
+          4967,
+          4967
+        ],
+        "first_difference": null
+      },
+      {
+        "y": 128,
+        "rows": 32,
+        "matching": 4501,
+        "compared": 4967,
+        "matching_planes": [
+          4546,
+          4959,
+          4952,
+          4929,
+          4546,
+          4959,
+          4952,
+          4929
+        ],
+        "first_difference": {
+          "source_iteration": 22303,
+          "native_iteration": 22303,
+          "game_tick": 162,
+          "planes": [
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      },
+      {
+        "y": 160,
+        "rows": 32,
+        "matching": 1222,
+        "compared": 4967,
+        "matching_planes": [
+          4358,
+          4967,
+          4959,
+          2325,
+          4357,
+          4967,
+          4959,
+          2325
+        ],
+        "first_difference": {
+          "source_iteration": 22442,
+          "native_iteration": 22442,
+          "game_tick": 301,
+          "planes": [
+            4
+          ]
+        }
+      },
+      {
+        "y": 192,
+        "rows": 8,
+        "matching": 1551,
+        "compared": 4967,
+        "matching_planes": [
+          4023,
+          4961,
+          4967,
+          2552,
+          4022,
+          4961,
+          4967,
+          2552
+        ],
+        "first_difference": {
+          "source_iteration": 22309,
+          "native_iteration": 22309,
+          "game_tick": 168,
+          "planes": [
+            4
+          ]
+        }
+      }
+    ],
+    "changed_band_patterns": {
+      "none": 287,
+      "2": 89,
+      "2,4": 376,
+      "4": 470,
+      "3,4": 2570,
+      "2,3": 1,
+      "3": 1174
+    }
+  },
+  "early_radar": {
+    "report": "build/native-flight/cockpit-early-three-plane-history/report.json",
+    "report_sha256": "050598f67ac2207f1657d41f6629787dcaa5f2205c9319fe2199a3b1550a8653",
+    "first": 22302,
+    "last": 22325,
+    "boundaries": 24,
+    "original_non_stack_comparisons": 96,
+    "native_body_comparisons": 24,
+    "complete_owner_pages": [
+      {
+        "iteration": 22302,
+        "runtime": "source",
+        "owner_input_sha256": "4c985811da5d3c43159dbf7760e6d31fc584c4223d55d81b60393736d5a18372",
+        "owner_output_sha256": "f14e69aadc1f00d51ce3eab6c6d6a918ce330dc763ab27c5ff602d3de40d8156",
+        "predicted_pages_sha256": [
+          "44a1759b3cf7d66e577d9d1d5072725933096ea39c5f553da34292e8aa69dea1",
+          "be74906bef002a684fbfbccf0c6776916c184e534849f55038b4cff37eab0e19",
+          "588ecfdee1f2cd45efeac580b0b07689e0ab58adbb1716ae52e76e665cdb297c",
+          "4254f49a210ed59b1f464fb16eb6dc4872e15b5f12acb54bb0951fd71c992256",
+          "c627428e3d083c6fcf1612f57ac181c23f3e14fccc08192bd5af4f2371cd9358",
+          "97325dbdfea397d2de02aababb50a4d175cddacab3f03d00c8f7fb039f7686f2",
+          "ccc247bb6c3e65a932de2d2e980a552d4e2dd17c57ccb4af8555b6c7aff8ed67",
+          "926584a4a36620ce1243703efa04b5b9556a2446d24e021745db09537eddf17d"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 150,
+            "y": 174,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 131,
+            "y": 157,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 149,
+            "y": 173,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22302,
+        "runtime": "native",
+        "owner_input_sha256": "d3322ac70b20c89723c76c3b9b7004d4732feddeb02ed69105dcd6287ab330bf",
+        "owner_output_sha256": "1b9f7105bfb7146ecc0b0ba6f8ba518c35c92fdf580b702b00bb6d35f26ecb7f",
+        "predicted_pages_sha256": [
+          "160d6b7b70c40a5da31dcbe67ae41b207b5386a0dd61fd9bb3923ddac8861789",
+          "0ead0d62b6d3060cdfef26ec034c68be8e640dbd276131e3727dd414de0dd9ed",
+          "4b1747fc7e940c2c2da618007f6a35d066c38ddffd33b376fb161bd6c9458752",
+          "bfb40a5c142d8bd2da683f9e48c50c262aa54e39e11bb1f492b71cd8b0e3c10b",
+          "c627428e3d083c6fcf1612f57ac181c23f3e14fccc08192bd5af4f2371cd9358",
+          "97325dbdfea397d2de02aababb50a4d175cddacab3f03d00c8f7fb039f7686f2",
+          "ccc247bb6c3e65a932de2d2e980a552d4e2dd17c57ccb4af8555b6c7aff8ed67",
+          "926584a4a36620ce1243703efa04b5b9556a2446d24e021745db09537eddf17d"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 150,
+            "y": 174,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 149,
+            "y": 173,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22303,
+        "runtime": "source",
+        "owner_input_sha256": "9b89ee820bc878d2e2764e9fad03b3df4902706d132f4bd79f3229272341fe04",
+        "owner_output_sha256": "215159bd7d2f6e7145969e4159b1db9acc44d7877b5463b00d6d285d88b2f3ec",
+        "predicted_pages_sha256": [
+          "e50206871560a372086436d16e517b1bfd32126414a8e473185e7737e8c71a4c",
+          "4a2ec82617d1dd666a33b01061159df8610fa714e4ae780c90f109a51cee4fdf",
+          "a9c58cde8b29c5fc29e5d4e794b04e1820ba6e49974336280ea779b4f8183a47",
+          "b3b55fe8a5fdd8b688146dfdd9d463d2b61df56083c7370b4e5bd28ef94ba7b9",
+          "2eb9b201b4e29d418baa17bfe565e8e8ac30a7572dc030b50419f6066c420915",
+          "bb654d044450c64296cc3801addc08dbca38ef6de8f20e678af52f3f40c39a9f",
+          "e8ad52c71e1462bf11395a9071061e3d57a57b34fff1b6208e61d012ef272d62",
+          "c8bc80359f72e42b738437b62045b1139a22b3c1645aa77c7d76c09517b9af4d"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22303,
+        "runtime": "native",
+        "owner_input_sha256": "817147aec25971c5df4866e186340a6221e3a8d7f48e34aad996e09098c3ec64",
+        "owner_output_sha256": "793a908d031fa17dd402bcf7c0e3104084d17a32d070932f0ab494684ab60682",
+        "predicted_pages_sha256": [
+          "e50206871560a372086436d16e517b1bfd32126414a8e473185e7737e8c71a4c",
+          "4a2ec82617d1dd666a33b01061159df8610fa714e4ae780c90f109a51cee4fdf",
+          "a9c58cde8b29c5fc29e5d4e794b04e1820ba6e49974336280ea779b4f8183a47",
+          "b3b55fe8a5fdd8b688146dfdd9d463d2b61df56083c7370b4e5bd28ef94ba7b9",
+          "9cea54aa26f8acb4bf5dd03cc355d2f611f285ebf0a525cd6d00492392ce1ad2",
+          "003cabee6aceb93cca9d2648c70f17da0542ee21a30802ea031c2c3912980c1a",
+          "82df537577a05f2f830794bb616de05b77171d8e85fbb1a9f218032f6287808c",
+          "62deb18cfa81fc8355ac864103f92c70116f16fbf820881c186cb856c9c90730"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22304,
+        "runtime": "source",
+        "owner_input_sha256": "caa3191d721b85066fd24e0e7f6e428dbbd6df3176d196b26086cba99e340237",
+        "owner_output_sha256": "32ff3731eb4e6531a43c9acc9d9b897a76be1d9c7145419ecf2ad67d4611f4ba",
+        "predicted_pages_sha256": [
+          "030c3f433c0379614ce2cdc394a958b212a6157ad950586df624f62662ec0e86",
+          "e66035b47b52900b2544af52ccb9461c2c80274c404186372299180112123fb1",
+          "45c7dfb980566e3f094a065bd8cb11c7136352d9f7b937e8a7e8ea566790f3f6",
+          "e88b8a6687fd1107b99e9cb3b8038a5f299e53c3d8fda63daa6fad7df675663f",
+          "9161ac91bfb1a63358632deee3d4ee480dc95882047a1ee9c02027709b6960e1",
+          "ab6ba2d6edec3848e23786eb4607edb7345b099fc13209d14e973484330e0682",
+          "08adf609470d0620fa6e6d09c028de55d080c165f18e3c8c26fc3553c21843aa",
+          "69295280d66facc8b0da34863e55066e6ad46bb7c5bd257c411cd2cd0b5643a0"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22304,
+        "runtime": "native",
+        "owner_input_sha256": "f9302d9d7f27e0a2e0bb98fa8dc7756cea07ccac87430856e28962a9ccec33a9",
+        "owner_output_sha256": "08ea6ea8ef13db21e331b42f7e7d8a05f46ed58f032d400826cae26f5f97bf3b",
+        "predicted_pages_sha256": [
+          "38214467ade28360dfffd599351974db89aa235bf687ece0e0ce56be2d0f0979",
+          "41635ce23b024092ecb7d5e0605c77c0991470cf707a2768a0061cea134bc9d6",
+          "25cafc1242de2417aa0e0949fd65d71175b6bc396f146178cc20c482fc38ca7c",
+          "0ca96a44a737962602953d7e2024f3ee1992ff33fe4ee0b8f29e2729abb4bd60",
+          "9161ac91bfb1a63358632deee3d4ee480dc95882047a1ee9c02027709b6960e1",
+          "ab6ba2d6edec3848e23786eb4607edb7345b099fc13209d14e973484330e0682",
+          "08adf609470d0620fa6e6d09c028de55d080c165f18e3c8c26fc3553c21843aa",
+          "69295280d66facc8b0da34863e55066e6ad46bb7c5bd257c411cd2cd0b5643a0"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22305,
+        "runtime": "source",
+        "owner_input_sha256": "6a7c616b210eb1b28a08cbe44c24026ef492868ed622b3f7b54bf86a09546c7c",
+        "owner_output_sha256": "c714cbd1714f11609b3b6b89567dd8ae3421769f5115a88431ca3f2404321f10",
+        "predicted_pages_sha256": [
+          "d629aa927d58d2dba5fc2770251356519aac0c7130440fdd359690e934112768",
+          "59a497016c20032e66ba2961201d11ebb31fd517f2c93eb17e77e1c517766913",
+          "73553be806cca78032c9e183f05cdf8847c2be58605ca7dd0021d7256eeee00d",
+          "b6f6e00974a0df09493f634fa89d0dc4657a90e5e2cecc5d34d8db894d8c5912",
+          "d9fe777bb330d25f3d3dd0b98e51e46c2700bfd16c268b1fd10a48c388aaedd2",
+          "14ac1169161738b8d63ef799e0e1d7cc1a4ad015204b300df8bbf9112d6d0085",
+          "776f02554e629b13816b3bbafa15bfd223a5fbd2b488e4c16d169255f245e509",
+          "1dc9b255fb1cb81ae1058c5d7565bdeb72dd122f3894c9d04fe92b9f1e9eea71"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "pair",
+            "x": 131,
+            "y": 157,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 149,
+            "y": 173,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 172,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22305,
+        "runtime": "native",
+        "owner_input_sha256": "96a587b1cb81171edd91a0f9f978311c3bec7df7e199271f5de2a00b53b7c913",
+        "owner_output_sha256": "81c4d0042b5e259350126c58f7235d3713bc8fc3687cb4017158cba732e87ae3",
+        "predicted_pages_sha256": [
+          "806ea774a2c27216f55817932a31a22826515405de542a900eb2e2a429437852",
+          "59a497016c20032e66ba2961201d11ebb31fd517f2c93eb17e77e1c517766913",
+          "48c6786fb9b4775de9ca4763a78cdd7b71cd2e6fe5299242e838c528802150d9",
+          "9acfa75fac1c50c561b6e2ade4fbbfeaf5bda73390685951228452e83039e7a1",
+          "4636493ad074afa71d4347ecb6f9b52efbfffe511772e4ee3e81961fc23bdda5",
+          "e10b87641b0b91b46b65efdb37856c69c45508f27f29017774e7ca74582f93e5",
+          "88435e669b0900ed1c59213a7d9326eb3128e6522ad583769d766ff7d81add42",
+          "d87164f8a6e84dd5a79496143835dbc596acfdcc5c47e64e26506f567f907de4"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "pair",
+            "x": 131,
+            "y": 157,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 149,
+            "y": 173,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 132,
+            "y": 154,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 172,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22306,
+        "runtime": "source",
+        "owner_input_sha256": "08a5c9bb2bcadc58ccf8f6960c16d13a8dd4aaf31fb0e6ddd426d26eb9365dae",
+        "owner_output_sha256": "0527d0c82a5fd72fae5b1012769287e8bb97959055eb6c0e145bcddc530c5017",
+        "predicted_pages_sha256": [
+          "cf7a60879818ca04d784e3176b04a9c5eb31eb019b5296b07278da35b0eaa1ff",
+          "cfac70af61a942f7fc7935c6b02594899fc7d5aac92be9e366f484315c405fdb",
+          "047ce5af1636775f221cc9102bc6ec552a35d1b511fd8530c48eec28541268df",
+          "e0f8287c44a4b7472fadc0dadcfeb4bc64886f0a728b95285d1a670c4893b966",
+          "650889fdfdc7e1645697b119f3b020229d4671448cfc5293ce1a0d5577d91e56",
+          "62169f2f905f74b36fd7d95a2b4ee7f9e9daedcb6ede453d42b76d7abcdc5858",
+          "cf403013fb1afea54eb940663c9bd31bb60c887eb896ab5e1d97a1148402aa94",
+          "a4806ba6aaeb8a2e06bf92e0ded5e9c7c7671743550767fc43bc6ece876f997c"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "pair",
+            "x": 131,
+            "y": 157,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 149,
+            "y": 173,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 132,
+            "y": 154,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 172,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22306,
+        "runtime": "native",
+        "owner_input_sha256": "16b67d921d29f803a696e3f6a9c268b71e0b608a149ac3a5c7ecf19d9b34b3cb",
+        "owner_output_sha256": "398301da80e2be2ff1b3c1118d201dc9a372e4f5e18d6faa3c2b3f79307a4a6a",
+        "predicted_pages_sha256": [
+          "d5ed941aaaee95054d61cb0e26129a69564e067788a27a9be9be5162a5155a86",
+          "90dffe1e0c8096cc1e306f254d84e79e5ec2b34e545126c0c5143d0b1e628ccb",
+          "a00d5e15c91d6d3e50cd43da2fc4d0368b6f7616c08fe5b24b706ee22e624f07",
+          "9709f7a8dad6778c60b1d094d67244d54cb20b04f8b81d4ca332977970179cde",
+          "4322771a4b82feed3abeb0e143d9747d4a0b33289fbae0c5956a9bd2d16a5464",
+          "62169f2f905f74b36fd7d95a2b4ee7f9e9daedcb6ede453d42b76d7abcdc5858",
+          "c2d7bfaf1ea011438c9c267bd66d70664e0e99a1b20c029a6c85f75044ab0b3f",
+          "ccec26b90f3e06ff412cdd04fbad27ab05125a1a05c6d4f1004f02474056ff1b"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 149,
+            "y": 173,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 172,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22307,
+        "runtime": "source",
+        "owner_input_sha256": "73f588f9bfc20021c8c85f09e0f3747f7ca80b0b646f382e17e4e9cc6762f2c6",
+        "owner_output_sha256": "132cfa0cf53ab43b0c48ea6b3b2ca1365adfd8fa74589313a4836bea028478e1",
+        "predicted_pages_sha256": [
+          "b33fd6fae97be1045571f091475d0d0cb7104db9c8f396fce78b4e1f3b547a9f",
+          "719165f51406936bebf8eaf786d82cdded7764c1280a1f8661e2b3d16862b039",
+          "9918af3bd414777f69cba17fbeb6e0aace5ce281ce1df1e9742930bce0f66f9c",
+          "5a868ac11c86aff5690d536c0cead5c7895a2e63dc943cfe04376854f733c695",
+          "3af21da7a2a4f57ac10cf78e4824d1c66eca837bed047da337b9388e88d545b5",
+          "5a5763eb4f9d28744334a053edf3f9a7a787883d781febc7efbc4fc924981dc0",
+          "11db98c62e9d9230b1463bdf3d0472791f214647af0e445855fbee9b84fe842e",
+          "2ec353dc17f32af97613dc5d3c1b7a0f959cd88bef30989db7a3e0c709157095"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22307,
+        "runtime": "native",
+        "owner_input_sha256": "4ba68839bbb0f121b011a8cd3cef046d76a3f5e3057c419491afd8ff2cab7659",
+        "owner_output_sha256": "ad4ea37ab7b084eb02b268170451146f3a3aaf10c63c36096854bae3eced8be2",
+        "predicted_pages_sha256": [
+          "5c2c54c6ac905d73535cfef39ae02277cc1c5da3c0c39938e5a6457f403168a9",
+          "719165f51406936bebf8eaf786d82cdded7764c1280a1f8661e2b3d16862b039",
+          "f55145c341f7760000dd7ec6fae8f8122aebe7445d0c9dceabf64e9f93ee0a74",
+          "9c12e271473133721160d036aa9cf7b7de1d8ee1b738e05a7fbec51685cd5b7c",
+          "434ac1834d1c3f0d2ddd2db146db47d8e72b3139408721755c82423ebd75791f",
+          "f9931dbe78714a0f7ea9d4093f1923e29594dd69730181414f7bda69e7611fa1",
+          "816efe2eed74d1a7069cb0832c1320aa3eb02ac5556343e7b5776c9952e4e9af",
+          "56c16287118c4e9dc4c807f38c0346eefbdfa709cdd7a2140f6ffc152ecc1698"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22308,
+        "runtime": "source",
+        "owner_input_sha256": "e893efcfa41e5a4de21e47caea0d0976466797ceb2e64397a7faa718763c8b8e",
+        "owner_output_sha256": "cd09297f48e992b4a5a892d8a41c41336d92a55e98bba6da9f8d3b145069e232",
+        "predicted_pages_sha256": [
+          "c1a31ec7333543e1a882bbdcb4b27e92467677dc24d429a735ddca26b1a7aa1c",
+          "597d3538efc7234d189ae4c19811d3ab51e423861c31115f83f607853401da52",
+          "f993d93112e3f35847054162b2a587e20c72e82ebe8ff35d24dfdcf24177edae",
+          "659fdf914e8a32696b57ebb537a5143cc7d1e5761541e3f59a9bc9612f25e0c2",
+          "67fb5ebd0979fd55bfbe933325914f4afb12e889539c8f2085e2497381696a33",
+          "785816d35480cea7e48a30214947c789c0ed21d2e85236865a7041477ec82682",
+          "1d19b06c0cc13dfe8a7bc3cd2559391bfe38f43195f812d00a763e50f5fe6cbc",
+          "64e9f25bb6a4949446327f31d44f17c8ada95fa906fa46f0b323ad59d2a4482b"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22308,
+        "runtime": "native",
+        "owner_input_sha256": "19efcb0c0867feae1f805007e5522c3c2acc125ec88b966561ba7a88c36ea42d",
+        "owner_output_sha256": "f9a2a5d62727334990e1d7b02ebed9c01a4e3f39dd006b416946b80a0a9cf73a",
+        "predicted_pages_sha256": [
+          "ec067948bb7e2f7cad71b1983eb6168a66aed4ccc0fbbe5ac23f213b454af9c7",
+          "8231aceb92b2397f2cad23926a6f0d98524d81e7bb05c8da5aa2afe7860c5f1e",
+          "27dfb9084fd9111deef848992c25c3d5ac349ffd61f7712acd947865eaa373e3",
+          "43a9932d9cc0348da1d089fb187cb59019c995baad6a3ab61ebd749156860a8c",
+          "274a2cf1ec136030ee2d57600f037c13f66348b2e129771d70e6dc2f7abdc510",
+          "785816d35480cea7e48a30214947c789c0ed21d2e85236865a7041477ec82682",
+          "e866fdb3b614576ca1d32955685093e4bdb17fc3ed08fd3fc3e9c043bfb035b3",
+          "e3e29f942e78e12f39aa457860e34ea7a385d7986712c9d4bb960dc33d0d1d9c"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22309,
+        "runtime": "source",
+        "owner_input_sha256": "cc1b2d49d870d69e1f6b0b82c0606caee90ffa5072270f09e894edcfaa563ce9",
+        "owner_output_sha256": "211d0d8cdffd7da72c0b81f1b5c1200c209f8a9c9efcf06deb447d7f5625c093",
+        "predicted_pages_sha256": [
+          "5d56117ebae88cf9e10602ffebe8a90d9429a252caf6e15264980ebf91a070d2",
+          "eba8b966cdc4b6c983d1d6981db3c1195e4786b4e1e624bccf30f83470f71767",
+          "8b317eced24cc6d54723dd4ff68f714fb29b3d7eac57287dd2c93d4e8923753d",
+          "935b200b759e4976ac66acfef925d3e974a43de0f5c15aa5e48c318e2111a130",
+          "ddeab952e2fd2f58a32f1ae9d72a756c05631ae2bba9b88a8a0065ac542c73ed",
+          "49294edba9d006ea4a4a14ad6713bdeaf2d325206375bef21dd2af094e28d6dc",
+          "cbdd0420fe8cc6732ac400cbf8238b15343eb748c9927143ddc4f513c4149fb6",
+          "fbca74d730264a1c24282f760023f2cc38c4ff791b4bc2bb9447f40581ea34e5"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 172,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 170,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22309,
+        "runtime": "native",
+        "owner_input_sha256": "6c229561956a87c19a0eabc05dbe7f3e5dafc4fe4e82329febdf33be524ca688",
+        "owner_output_sha256": "9f758f8a49eba40c70f88f85951f5125bb88956ddf1496da93273d959b9f07e3",
+        "predicted_pages_sha256": [
+          "5d56117ebae88cf9e10602ffebe8a90d9429a252caf6e15264980ebf91a070d2",
+          "eba8b966cdc4b6c983d1d6981db3c1195e4786b4e1e624bccf30f83470f71767",
+          "27b4b2b12cecda115223212326ff1e675963ebde8f2fa7baacc8350848cae325",
+          "4bfa414498dce61a88dfe62aa0c8abfffab1584613c6811bd997bfe3f3d9ab7d",
+          "1487693d2c734baeb1a60c0f7de555a56a52acba5a35aa8ce5c8afbec866167f",
+          "98486ed972cc96f01a7f42fd68a003e49576e03edf2fb8e1f246d6c1e3502a2b",
+          "4ed9b9e84d5c0fbe97a887d61c533d2ca4c31044018a19072da8acfc8967ce0c",
+          "94beea8f7a6c11fbc9e8e256a00ffa7766697433f67075c3522cc0a1a127c08e"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "pair",
+            "x": 132,
+            "y": 154,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 172,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 170,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22310,
+        "runtime": "source",
+        "owner_input_sha256": "1177b6a20a82f55b97f6f4750aa21e9dc536ba030be73dfbc53699fce56305a2",
+        "owner_output_sha256": "de20d786a89cf922d9c37d46275fbe9f588fb462daf139ca4a2471cfb0184d95",
+        "predicted_pages_sha256": [
+          "26b074597058ba78a94f97b33f5ef947f395d40683a8979894b1cc82680485e2",
+          "6eb9b79fb8f4f0b30d1c6fd80caab72939b256064886b86ed0889ff8f32c129c",
+          "1dd438cb289f6a842d598f78a8bece2bd1404003236d2f46cb93ed8c3ba3a16a",
+          "d080c0af6774efdbec67009a810b6fbd7c4edc876699903aa8361cb1f58aa750",
+          "5cb0bfb69e4097842a5b2890a29ff2bf97dfec3cd6148e377d70f016ee235632",
+          "7464407d41fc29fee8a3b3eb7c6aa7937375e8baa5d545631a7cea70422efc02",
+          "8d8e36783521035f07f7622d774804b6a791bf65f07f4dbee985f4be7c70cd88",
+          "bb794081b1d417d192374c5248123cf21b8c8d2edd17bc48323255781c604461"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "pair",
+            "x": 132,
+            "y": 154,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 172,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 170,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22310,
+        "runtime": "native",
+        "owner_input_sha256": "5de28d6dfdc4dafac8631e10e6e22fa105fff561966a68ffe9c2ba1d7914d8e7",
+        "owner_output_sha256": "1e5779c8981e1d9934d393355724f8a5b779874fa1aaf53ea3095b73318cca0b",
+        "predicted_pages_sha256": [
+          "eb941ab0f6c38beb57eefa3f627406525a1587783ba1535e863e56c5c9828369",
+          "867fb58018a363970658601ae76b8c267164a4d18c8c32a47ff8387566b556c2",
+          "eef6bb1fb910b0017bd53b9cf3e8c79a4be2c7d5608415fa562faaaaba21ef19",
+          "2faa62b596bee5ea16e796d3d285d82b29d1f9b949a67c4d4c34e6a6ecf246d4",
+          "ab36f1d321cd11153734c28b140fb56f8354898c29ec5ec66463eedd8fbd5aee",
+          "7464407d41fc29fee8a3b3eb7c6aa7937375e8baa5d545631a7cea70422efc02",
+          "a75c8b2d199690fe2c779bb45d779ab569a6e4d1dff88981327a5f612b163dbf",
+          "9af53b1008c508101bad0831cb70e54a2036f824f9a35ae11c55542f039a8a58"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 172,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 170,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22311,
+        "runtime": "source",
+        "owner_input_sha256": "d261b5e7df75b38a5117af70a14f40b527b368ca60f472fa1ab67e779ea5aa99",
+        "owner_output_sha256": "6f4a0bbef19b2320bd1784fad9d4943a9bc1f55e48de425150ffbae393eddfec",
+        "predicted_pages_sha256": [
+          "70214bb994b7f1b9736d10e585c53774845e09c069dda11dcb32e7ce29312981",
+          "4ac88c9e3dfbf3a55930905f92c94a4712408e19426a00dd4b6675dbe95b9772",
+          "45b7278af262c2c02da13e45f55ed7714042bd9901d1068885c781d1679653b8",
+          "c80c26b361fd9e89ba6e8293feb8d922ceab6adb2f840ea7fcb98ef5fdcfa27c",
+          "f53cd85fac7c65e020d798f33dcf52f8cf4a7233e3c5ec0b48f5b4ee4b7a1bad",
+          "4af38bf85c57709ad00271cd146558cd21d3b7afa6a2950ae908c4004006f038",
+          "d037ea3cd81da98fc6c12d4ec7e6a44c700704ccf6d7e428c6cb3f0ca3db2d7e",
+          "dff9526388f5b1f54da7297957938bbae684ebac09ac8d15bc07115f30924de2"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22311,
+        "runtime": "native",
+        "owner_input_sha256": "3bdfe91998aa2862950fc57803a7412269fea453295bb278be86718ed5bf49db",
+        "owner_output_sha256": "73a6dbc8a04ae4569a8f0af122edbd84c1b8e07f4a6715bf27b218decf3a932d",
+        "predicted_pages_sha256": [
+          "267339b0d4b65e187750015fc89cce194327bcf3e43337af27bcdcd0d58576e5",
+          "4ac88c9e3dfbf3a55930905f92c94a4712408e19426a00dd4b6675dbe95b9772",
+          "20e479baa3f8751ef35a33f79f103b1de1d89020d0d35e771033971cda61b3a3",
+          "9e91059440dd5dd877a4ebfab970c475d10a16d24d5ded348f6e363785fa4b36",
+          "df26620a4ecc7117e0d0fca11cef25386e07b14308994e30aaf1285c252a7831",
+          "bf0849014bf291da28dab0df2949bf6c87585901d04b2f91a179edc87dc645f7",
+          "4e724a637e71a7ddb439cb427cf91a6084888ef4fc0a1a514da50d328b12b349",
+          "472d1bb3dbe80577d556f8fdc3d2b636bf97eca3f5ce49cdef6b8afe76018815"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22312,
+        "runtime": "source",
+        "owner_input_sha256": "d1446fa1916f37f6d65ac7766746a02b19ea21b31f6e46fe23edf417369dea40",
+        "owner_output_sha256": "5ed9e20e7d4ff05dec0a21609ed4bb4d4c7f945c469fbe5bbba4b2bbbffc6e95",
+        "predicted_pages_sha256": [
+          "2e3f7c5524103c2dba95ab48e04ae16353e226d9b8200a905498f322ae3b690e",
+          "e9890e2b3c84a445d164731bbfb51e1c2854e04fd4d6ba7db92e987fe4d6faa9",
+          "a92e282eac9b418918a8c6b9c5b78529471d3934537ac05dd420c23b43d5ada4",
+          "7381b18e5278e5eba3eccc76e35a7f39c8e25fe6c3cac53d68714219985fd71b",
+          "1855adac56e04bc84185b43a2a24d48be4b4b098ab7aa5c77df864d7e19af6b8",
+          "e037fb68d5e3055fe634bea76f279ec8c8db79bc1c10ce742d8fd3c6e11437b6",
+          "8957d200f3135eb080d1e0878cf5d7ecd5ecb11a1529539bde12c37664e72445",
+          "326e100fcfe91bf86ea25c6333c9c52c42cbe93baeb2b60d1bd5886586f44067"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22312,
+        "runtime": "native",
+        "owner_input_sha256": "7265bfe2ff377d9749efa797beb457284e04a2a085292cd009510a08203b3c64",
+        "owner_output_sha256": "77b54f3d092fd6f8d32ee0fadc88fbce57d1bec04e1cb9e888cea2f370c0ef7b",
+        "predicted_pages_sha256": [
+          "1f5a99c1b4212c412907a7c3184914f4e8ecf4ec10d5559f57c43c61f37d3a19",
+          "097f3ea5a2845b1c428b20df977e2ddd705c2eae8a0d965e689c649d2ad94503",
+          "0487b64848c3c8f74f21cab7ce8231cf362f2c99eb3acf157ef0842fb4af3ea6",
+          "7126f1fa66cac35fc811d1b5cb0bbbefd7afe7c87d8abcc0c3bc132905dbc79e",
+          "0a3d5d1096490698fbfaea6b42e588c0bc6e359ad6c39e3d6fe963e715cdb72e",
+          "e037fb68d5e3055fe634bea76f279ec8c8db79bc1c10ce742d8fd3c6e11437b6",
+          "a6f780976c6fea0f18290c13e3027a91145c221055ba32bde3c2eac86592ebd8",
+          "fa1da0c3692a456b342aab245b81085feef89af3e334d59c605b504e36cac00e"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22313,
+        "runtime": "source",
+        "owner_input_sha256": "9ee371d438de7e91eb89d30a1edc44d997d544f3d0a0b34cfcd9773dc3aa0a0f",
+        "owner_output_sha256": "f63cd8a6dc35bfd71d8121e30a8dad8e90e202a756e7d65349f2742bcfd579cc",
+        "predicted_pages_sha256": [
+          "c7ff025022984b3ab85f81eac62d9c0bb814122208a1c7d536dd8142c1325f75",
+          "a6984c009c3de3dd78644ea219b8fb41a71fd1e57429eba4d2d410d662524f26",
+          "ef17f0b1a8171da231c2279bb8277bf3dd1af5131256ad7cfffbbc036ae197d7",
+          "cfe60b0532d639d7a92ef5d722650ad491a9b42da7386324676dde37b8526586",
+          "aaf2683c08fe346539ae68d7e6d9155f809b3e1484b93351bf4bef7fcd928388",
+          "a2827b55c9a102da37713b76e8dfc0aaccbd9172b0199339df68f3b37cccd58f",
+          "d108691d3832251be389cc728b0aab2eb46a072bede48826de28af6df07a646b",
+          "bce3ca303313c3bbeab094694e1aabe05691c836b35ba494e181cfc16b893246"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 170,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22313,
+        "runtime": "native",
+        "owner_input_sha256": "4479bb327d372711c1ab34bd99aec369f82d5ce67e2b7b5b95c099bc2d0b13af",
+        "owner_output_sha256": "1c7e8aeb763c603c9c5e468b67b5cff8bcf4b75aa64887a40c9e9a0fc55546a0",
+        "predicted_pages_sha256": [
+          "250f57ab183c26f9bf5d6e69dc281ff8bb91479b585afaca071d9e5104aa6537",
+          "a6984c009c3de3dd78644ea219b8fb41a71fd1e57429eba4d2d410d662524f26",
+          "e0c08b7cb4813c9e767f6c7b22a72f642055b218518b700e260b46f85e79769e",
+          "1733fc6d6c9f13d9b35c24f0ebc2af78d41c7e13e87eadc96292413b446b606c",
+          "12751ac337558d4b827fc17f858ac8fa4669bc2db836379222cf289d0c63205d",
+          "47b79f16246453e986101a6ebd80b97b041c8e94b3889f6d626cd206e46cec97",
+          "582cd7b01769e9eb3a4471c3aeb6135356c08d2271815f9469aca61d6cc578d1",
+          "22e73ee4ae9459bae69e735147a9879f9c97ad95c97dc636bfb2866246ee33a5"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 170,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22314,
+        "runtime": "source",
+        "owner_input_sha256": "bf5898c0da3f87d9bae9f7098dc143f6c565b3c1d91f20569fffbe116efff320",
+        "owner_output_sha256": "355e07cb547f1aae0ccbc7bc2f0cce732e6172860d3bee6d5494b2a198859229",
+        "predicted_pages_sha256": [
+          "4764288e7910ddc88977b4544cc1024ffbed302355bef5008bdee60af5b4c2b9",
+          "77ddfc1d9889a9331b958160a621763637b80954754547dd1e958a92ae89abdd",
+          "c2e755e6df221549d37d67dff390ed551a09de7c6bee00f6cba92dbde6e821c1",
+          "034858e042b8fc61006f8beeea9d69c8db17c6fc42cbf12360fce0bec50b016f",
+          "dd28caa7eb7e98d2cc52a3760ef7e04d6b7a308c9d85b48cb6d64bb5c8bd0bf5",
+          "e91c0ecb03bbce80afe408fa0daf3cc56736b6bfb28359dacaa90ceb57aeaacc",
+          "34996cc4c837597a4ee4a7ad4fe741218c215b343c23cc991d3e8a42f9d5a5a7",
+          "6e7bf478b526311db667594071d442afca35678ce3dbab9e872954ecf033c8aa"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 170,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22314,
+        "runtime": "native",
+        "owner_input_sha256": "4778eda026c4c85f6f392f2e2e0d232e09c94168b5f0bc28ec45020d340b15ba",
+        "owner_output_sha256": "0b472358ffa0c759b08724a0cd892b2bbf5da3c9fc31b458b757906c5eef82a3",
+        "predicted_pages_sha256": [
+          "09ad887ffaa095d4e875046269cefcf42bc118f9c9383e2f455641203d8e7265",
+          "ac96ee77eebfb1ed99284b2191d6fd04b1eb8a43f697701bfcd2f83e664fc3cd",
+          "8050f525b4fe285b96327be5714d2f67487c3e05e103a695c3b233f40b8f19e8",
+          "58a5ef7238fadcc6bd89bb0402aab9f0aa4a98f2b51b3cf1d14fc007a2f62c6f",
+          "cc0e760aedb2856ef34e4ec968326eb1c9273d84e78dac4988fed0550ac8be29",
+          "e91c0ecb03bbce80afe408fa0daf3cc56736b6bfb28359dacaa90ceb57aeaacc",
+          "9e66b4c549372e02d27f53c44c3758bfd1cf6670e986152951c478266cad1333",
+          "cbb8ee3035f921ae78b6de51bdcb1d7de29c646e1728890b31e1826ebbf3d905"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 170,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22315,
+        "runtime": "source",
+        "owner_input_sha256": "8e403a76e97f9cbcd3f972e87760ae13ba0a0b0e26b514d6228ba0071ed83b67",
+        "owner_output_sha256": "c4acac0f9acc9a86727f6a1bd679697d89a4e8621694fa6a38a5537e47656dd7",
+        "predicted_pages_sha256": [
+          "98f4613ca97d54f70e12f9271f15a27f488d708d5d1c1f1e0a6725a9752e699b",
+          "ddbc0c29f8891610e345831eb3313bf8ea5b907b1b08d488bfed6adcd2ef4ceb",
+          "c337eb1d8d409fbb96880bfb819584892e6f3e995e8921e52c1e6d07e5d09e63",
+          "216367cbf2bcee03441971ebffdb1259d5465408b17e3d2a96b9bea2d29a38b1",
+          "477a88726234e140ea5d00724c574cf752326f3b6d57ee1aa222f23a80e477dd",
+          "760a61276d53756a1479cd2ca247f732e6dc6cde01ad50262392fcb7d758c26d",
+          "b40e4c7530072dbd2f2eddaea9f64facb5e3f07b2cefa6c19ecb4c426837ddcc",
+          "15c4129aee7d4d2294489c5c32c216332e0211e0956aebe8bfbb290ff74504d5"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22315,
+        "runtime": "native",
+        "owner_input_sha256": "591e3780305ea6611260873677d0e18ee18dee264729116f21fa2721d580bf9a",
+        "owner_output_sha256": "5da668aa8f105dbd2f1835f08a61261c6558952d94e50d95b62b574eba39b443",
+        "predicted_pages_sha256": [
+          "ad79dff184f061e316c11db5e79d5ca68736e86f8038b047485405e8231689a0",
+          "ddbc0c29f8891610e345831eb3313bf8ea5b907b1b08d488bfed6adcd2ef4ceb",
+          "f0937cee74ade45aac0c228e479dfd8c0ebd5d95e54bece7348dc238b6aa3dff",
+          "32d4b9065649c87a3609040c946eb2c6406b4eb406e479d867dd30095a7ac5a4",
+          "0d343a5568f71739f220989386b4d68851bf7284f30760ee65a0265cc1ea4f80",
+          "86fd9a0439848bc0d2f8d42bd7604f2c69b988462caaa19d884a6649839ee8c6",
+          "330ae15496244d9e45962c9d4f464af63c57f0925b8321a2ef1d0f54011a6f7f",
+          "662d29d3c53969a97fe302473aeb73fb2b59cf630f6fe64276cf55b7bc87f26c"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22316,
+        "runtime": "source",
+        "owner_input_sha256": "4988a7d43f569125642bdb73d2ec30a949af8c7c2b92dc9e17e3bfb5a80f44ea",
+        "owner_output_sha256": "1d0b954ed61e733d1404cbf9d7a35ef1cd1fd4b9de7c434647ade29345401862",
+        "predicted_pages_sha256": [
+          "f82eb6a65148c9d286aba174963fd5f1d8cbc2b0d178bb94c3401c393603b209",
+          "2f36b58375b53938e6ab8df7529467b5d6548467292eceac25623a915775b883",
+          "10fc78b6800a95b642973d8a2cb3813352d89dc8e2ac4f958835bff9f02c68c2",
+          "22e8249b4cf38345ee022cf82da531bb57b2fbfb676bab32bf42b695f696beb4",
+          "2a65f57dd194a09ffceb665798b4b3eb5600e9024bcda3dc90504b6eb9a870a2",
+          "622bae9be275266dcbcb93126c652b91da6586ffc0a275a618833aff9ae0909d",
+          "06008495700474ee2223eb3c44207f44f992e134d68c2e6e0781f57eefc7e439",
+          "745f9e82b74d016b9dc4b1cf5e5b685ae5dc020723542b1d35b2f174d266728b"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22316,
+        "runtime": "native",
+        "owner_input_sha256": "9d17dde16a39fc08f365655d2ff91c4873d84f47675172823fdebbed26b0b23f",
+        "owner_output_sha256": "62f0150fa64aaf762d8bcc35cfd9015e0b99fd39d5cfb7fc9376de6379d4f135",
+        "predicted_pages_sha256": [
+          "80100ded267d7cf9147855f5d4f0ccebbf33cabc6301126b6a23295a4f41f61b",
+          "9c84bf93b90c44959f01410e2cefbe9a4af064585ed96f59e07c26047787d1f5",
+          "089a8e2b13a06652467a5029379a1e018c038520171ea267a940c2c5d4a58ee3",
+          "09d95d2013f5dbc32d54bb1e8db65222191d4f012620e27e343faabcb7fff880",
+          "6bd979d548f78aed00b65b2202e0020c3263b04e37ff9726d22adb83be6781f7",
+          "622bae9be275266dcbcb93126c652b91da6586ffc0a275a618833aff9ae0909d",
+          "2de32461a05cca2ab693acbf53694af58a7af4a37b5947269edd6e23be4fb8ee",
+          "563a0a9f2dbe49ec7d0b6c22cb89928f426902ec7ab5f4bbd8c91cf3bb4c65d2"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22317,
+        "runtime": "source",
+        "owner_input_sha256": "9c4846bc257e6866b7731c00d6934063de8388a872ce08c076da4c01e65fb55d",
+        "owner_output_sha256": "8e9a20f630d84829322dbeeada12efb3ed664e316b4764b5af22881785002b57",
+        "predicted_pages_sha256": [
+          "9936387994fa6aae98f64fca22f5832bc8d0ea208f7da6cca0739e55e69dcdbf",
+          "79b3b6f684ff02a8a7fcf418cfc12831a1f26eaa6bd81debcb4c84fd919d9bc1",
+          "17e0f9dd20479a7f4e66ba8f74764674742ac7b4af96bf220f943ee08d1320d0",
+          "8f13a64c2f828caa68bfdef9da58c02e15451afcf41ba47581fbb984194d29a0",
+          "1ab44751ae4bfe63fe7827b61aa297a336dd2f26e5657d2cba27f5f33e14201a",
+          "20eacdc6f8043fbca08509ba4c85f0beacae232937cf34063d57ea19ea291bbf",
+          "af88d20942573db4c45119fff245b23a8f286bb457ea21bedd65287c0eaa34d3",
+          "e667375b387fce769a4c1abb511aa3c93d5da84ec7ca46fbe78e08b137e5374d"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22317,
+        "runtime": "native",
+        "owner_input_sha256": "e1756d3ec2bfd03c687b8727e9a44d566d7ab95c9ab555a533f001506da033c0",
+        "owner_output_sha256": "38c50b28259c22a6599392976bce69f7ebb633d2959af94718e1ea6724a2cdd5",
+        "predicted_pages_sha256": [
+          "dbab13772d0884c7b0693c232233e523be815c52b4734c0cccdc03cf5dc25536",
+          "79b3b6f684ff02a8a7fcf418cfc12831a1f26eaa6bd81debcb4c84fd919d9bc1",
+          "f1f8421d3edab04c29a6b9b1b17b5904a9a3aa93fcbf164d85dbc0cac0b30d35",
+          "f3e0efdb90cfa7e8005c14e372644329ae113c6af7835f789f625335119cc150",
+          "00db3814b129077cd58e98a9692cfa8c5c4ff8f8f4c933ba1b51cf1118cf92bc",
+          "02949d1be291f96bb792e42e334b5cff76ae383c2f35547a16b83c9fcf475733",
+          "7d0ee86055b1943b15ca019b06019980a90c682e2d04c35dee0f32a1983bb172",
+          "dc18956da509b2fd74975bc517ec22cb02365fe71e9f335c1ddb40fcb82389b7"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22318,
+        "runtime": "source",
+        "owner_input_sha256": "e15a3e1108099b8c2ab18f00ea0bce4d342065e8be274120fc81bb732bb68d78",
+        "owner_output_sha256": "3010593434c650b015ec6dc6446e05dcdbbf46eeadd214c2a2de548725ada1c2",
+        "predicted_pages_sha256": [
+          "e1d7c48d8772a141aa21994e55962a258406b7b278603c623cfc3ced6e61fb5a",
+          "26da51dd908b6b27481c4356e96fef4ce5c70eeae1694eb8301bcf8ae516a2a5",
+          "6254df6909b190175c1afa5b58018d57ac7de7cedd3f3dd0fc7af78f8a7ede1d",
+          "748fa9d4fef6c824ba982999b39c973bae92fb8ab6f15fb9275d28ed3cd5ef3a",
+          "de76ee6b5a7c96b70e293e0b4faf4bc5d74e5bf92f0ac28a030a1cdf91066096",
+          "75823a021b716b754746d2f32163ff59b76946ea06e79d1b59450105e7ce66d0",
+          "206b3e78c5b129247222167253a7c5032b4eeefb479114d5da4b575c3e9e5abe",
+          "b5142d896eef527c10aa965f465f6819280356774c11ecfbcfe5f0a51c05ac02"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          0,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22318,
+        "runtime": "native",
+        "owner_input_sha256": "7ab516db0d59d3af325c3dc716dca40f636f836f1d01753ccb76283fc35ae383",
+        "owner_output_sha256": "1902d358e182fd4e909141394bd50c41c20d2e47c7906d6a4bed00079e9705a9",
+        "predicted_pages_sha256": [
+          "e1d7c48d8772a141aa21994e55962a258406b7b278603c623cfc3ced6e61fb5a",
+          "26da51dd908b6b27481c4356e96fef4ce5c70eeae1694eb8301bcf8ae516a2a5",
+          "6254df6909b190175c1afa5b58018d57ac7de7cedd3f3dd0fc7af78f8a7ede1d",
+          "748fa9d4fef6c824ba982999b39c973bae92fb8ab6f15fb9275d28ed3cd5ef3a",
+          "4a89d9398d0de01723f4f1f4509c98820c8f45cf380134da8c6a9fe27e161c86",
+          "75823a021b716b754746d2f32163ff59b76946ea06e79d1b59450105e7ce66d0",
+          "cab0fda01cc10a36184fd2a6ad773623635c81879ba6c406a595408b54cadaa1",
+          "ba93b6c4e49847a6d88bb2d7f7a12036a5a608426fa6f1be670606af119f297f"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          0,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22319,
+        "runtime": "source",
+        "owner_input_sha256": "18b3860ebaec5524132f06b638c772f6cbc4cb9171cc2ea36b9d2b1e6bd15d3b",
+        "owner_output_sha256": "10183616eabbdfa7737dc57cb42e645b497522da0f6c479c48e2a7bc5630473b",
+        "predicted_pages_sha256": [
+          "873a57bb1e94356b74568ce46929ac10d33000aaf964358d68d0cbbada253166",
+          "9a91cd79e98460e89a380d15fddffb58d4d0190567830388ca3fdbf03ef4f943",
+          "b658c9e6458e4c6f073d0a9e6a4a51a53919b83c58c16c862bd31191c52ed842",
+          "6f4937b9bffa235b4dbe349a9f024de128df5a4ff34ef9f41c37e78bd2980223",
+          "01b624ae2990a471bca7fac570695840d42925c72060179b018b70b0d9145774",
+          "806820e185785ceb60230be8ccad14dcbc2498664e99c58d87751be4e252ae60",
+          "7b13bb1f7c2a29cc525fa9be18a624ced4e6077c421889e189c6e2ed9c89646d",
+          "0d000077410788bf3e24d95f7ce07cfbbb8ee120a2455483ff0b7c947f56d787"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          0,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22319,
+        "runtime": "native",
+        "owner_input_sha256": "d4b1f9996a3e198ef967fd3f6669a2ae706b5d81aa2e51f31cbd1dd470f86f8b",
+        "owner_output_sha256": "0d235b3120f6892a090d368ab5b230ffdfd6f17074b09f05d9ec95e6a04e9b09",
+        "predicted_pages_sha256": [
+          "873a57bb1e94356b74568ce46929ac10d33000aaf964358d68d0cbbada253166",
+          "9a91cd79e98460e89a380d15fddffb58d4d0190567830388ca3fdbf03ef4f943",
+          "b658c9e6458e4c6f073d0a9e6a4a51a53919b83c58c16c862bd31191c52ed842",
+          "6f4937b9bffa235b4dbe349a9f024de128df5a4ff34ef9f41c37e78bd2980223",
+          "a1318f6357ca6b9fad81998ce51c2a6321c858e48025c752c801d3330aa88759",
+          "806820e185785ceb60230be8ccad14dcbc2498664e99c58d87751be4e252ae60",
+          "7b13bb1f7c2a29cc525fa9be18a624ced4e6077c421889e189c6e2ed9c89646d",
+          "0d000077410788bf3e24d95f7ce07cfbbb8ee120a2455483ff0b7c947f56d787"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          0,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22320,
+        "runtime": "source",
+        "owner_input_sha256": "e74745294fa4ee364a980b52bb138dad7cec598106319f86085e771b3475702f",
+        "owner_output_sha256": "069ffd1c028445a42988ac02cfc4c28273442ed689cf363c6ae843d439068a51",
+        "predicted_pages_sha256": [
+          "2f22f1afa47f68587d28e023de1410f7b68e14d9883cff7e40c3eb302fdde949",
+          "aecc2420b180802d8c1e89a2c6201b9e749cd4ae5506fa1d783a57e0e3509393",
+          "8047e10ca1238529588f1da7bb25d00358dca520c8483651d28b9bd036eafcae",
+          "df156ef9a1ebee19d9299f4a9fed855ed65cd2aadac2e4cd228d5d47de9fd2bd",
+          "e1aa31590a5bee057710f4b8819f40e7e8206493617f860a0e09bc08faf67d8b",
+          "6849c4e958e8519cc9109c2407d2256d75770266bb3ccdb9b9b6179139849788",
+          "8d80fd623fd8d72049d10daea0861c74fa8188cb2c2a24c9272c7acb07cd2638",
+          "7886b5b20ae90c859bf60ff0ed61b21606996431c29c26b9f6c200170b0b82d8"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          0,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          }
+        ]
+      },
+      {
+        "iteration": 22320,
+        "runtime": "native",
+        "owner_input_sha256": "1d3360cfa078c880da3192a0c7f5eae04a651f37284edfc7873aa72b8f5de206",
+        "owner_output_sha256": "d1c85197a95f419b7faab96ba143cb0128bbf353008c9f16011cdf6e1ba71497",
+        "predicted_pages_sha256": [
+          "2f22f1afa47f68587d28e023de1410f7b68e14d9883cff7e40c3eb302fdde949",
+          "aecc2420b180802d8c1e89a2c6201b9e749cd4ae5506fa1d783a57e0e3509393",
+          "8047e10ca1238529588f1da7bb25d00358dca520c8483651d28b9bd036eafcae",
+          "df156ef9a1ebee19d9299f4a9fed855ed65cd2aadac2e4cd228d5d47de9fd2bd",
+          "5351969246ed3c6670b89a2e279118c94be52cf923e01c5a91f0b197d57e534d",
+          "6849c4e958e8519cc9109c2407d2256d75770266bb3ccdb9b9b6179139849788",
+          "8d80fd623fd8d72049d10daea0861c74fa8188cb2c2a24c9272c7acb07cd2638",
+          "7886b5b20ae90c859bf60ff0ed61b21606996431c29c26b9f6c200170b0b82d8"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          0,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          }
+        ]
+      },
+      {
+        "iteration": 22321,
+        "runtime": "source",
+        "owner_input_sha256": "da31f013006af2f3126669b333c9d51ed8b07927f58e9f7906c6431a630ddbe7",
+        "owner_output_sha256": "edd413d3aef1f83e06cc5c326830624b35d6044efbadaf734c89b8bc7f9fa1cb",
+        "predicted_pages_sha256": [
+          "da8d08e5cb8ee61718c17473a397ed4705ec04ec55f07ee2d35921ffa18eb328",
+          "00f94eee7cf2cd0131d046a69fa1ae72352ea9154c779b55934be677402ff8c7",
+          "a0fcc2a43bcfc6255420a2c816e5698c1863a4bcd96680130d19b425f8c37b33",
+          "31ff31335ac63d23b5248c98bb335f151d4500e674b50263aff96d30cb55225c",
+          "c25bde941b0b26bae396af57cc62769f36ced384a23e67f9b37201175410eb75",
+          "45d8d333112522eecad17f84c4c7582d3a7291a5689e763201d1684e0c141e1d",
+          "eab8959697b8d11314c03c10eb64be9d72a01307343103b6bf253b805eaff16e",
+          "fcf742be9411365407fd287b0b71ba06b3ebf43a4df7aa6f09a44e6d5c675149"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 164,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22321,
+        "runtime": "native",
+        "owner_input_sha256": "3db1628404237510393da27fc34760b53a7113431b98bd9ae779badf70eafc21",
+        "owner_output_sha256": "a2f248a62a3a3caf1b9c1e4ec4abaf7c846395fadfe99971b43cfbd357c8e404",
+        "predicted_pages_sha256": [
+          "228725ec8e25b343412887e0f7b48817c10d989ed9e12be7ee2aeef3b8034395",
+          "00f94eee7cf2cd0131d046a69fa1ae72352ea9154c779b55934be677402ff8c7",
+          "a0fcc2a43bcfc6255420a2c816e5698c1863a4bcd96680130d19b425f8c37b33",
+          "31ff31335ac63d23b5248c98bb335f151d4500e674b50263aff96d30cb55225c",
+          "39808bf6e8a464e29529b340db635ffe8e2322a052aa257f9d7f348967f7c293",
+          "45d8d333112522eecad17f84c4c7582d3a7291a5689e763201d1684e0c141e1d",
+          "eab8959697b8d11314c03c10eb64be9d72a01307343103b6bf253b805eaff16e",
+          "fcf742be9411365407fd287b0b71ba06b3ebf43a4df7aa6f09a44e6d5c675149"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 147,
+            "y": 165,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 164,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22322,
+        "runtime": "source",
+        "owner_input_sha256": "ef9a1752730fb833f6118d6a8eeacccd527260fe3d0f548dbabcf31f7c1ad196",
+        "owner_output_sha256": "8ca8aea994747f1f56aace01c366e0d47a48ddfae5064c494ef51c91bc0e34f3",
+        "predicted_pages_sha256": [
+          "0d971b7ceb34262a5d00d2050b5aae8e1293360981dd5e371d0807a67d4fe9ee",
+          "04078d09578eafb19a350543e248ff440c586808589d38388f2f3de30c84e32c",
+          "2af173849acfd2e50d5a63077c4430246304112a3b51c718fec05ca25da1d6fe",
+          "c5697ff64bb14218e75878baeb2d5143a76fd99f3394bd8e11615d20e88265e2",
+          "6af122a9de1e5c2d83b2b4ed86c1ab817725b9fccc0a4377e7b7ee875bab63bf",
+          "c7952c9e2e4b62c9ba8a27282d04dabe68114f7a5c9843fb7a43793741331030",
+          "b99cd2b51ee2c7bb8b04e18805bb93bbd34a07ca9fd4221b42fd29545e3a0ab8",
+          "5028df42dadf2b2cde5c666f471b0437fe0b165b3c502ef02f4c411f06dc111a"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 164,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22322,
+        "runtime": "native",
+        "owner_input_sha256": "da8b6630495996c2ab222c5d4ad5ee300363a980a1c78b8f75d322011cd06e5f",
+        "owner_output_sha256": "77ab52e1e44dcc5f5795fb830d4697b6d3e612ba5e4daabc3cbba58e45f9e428",
+        "predicted_pages_sha256": [
+          "58c238d8850af16afa8f9bcbeb223c25b70118ffd2bd135b8e61fb6e4faf6bd6",
+          "04078d09578eafb19a350543e248ff440c586808589d38388f2f3de30c84e32c",
+          "2af173849acfd2e50d5a63077c4430246304112a3b51c718fec05ca25da1d6fe",
+          "c5697ff64bb14218e75878baeb2d5143a76fd99f3394bd8e11615d20e88265e2",
+          "5068c464c8a8fc6df36c8fc810f61c1331d341262d57d07f8cadadf6be77c0d3",
+          "c7952c9e2e4b62c9ba8a27282d04dabe68114f7a5c9843fb7a43793741331030",
+          "b99cd2b51ee2c7bb8b04e18805bb93bbd34a07ca9fd4221b42fd29545e3a0ab8",
+          "5028df42dadf2b2cde5c666f471b0437fe0b165b3c502ef02f4c411f06dc111a"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 164,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22323,
+        "runtime": "source",
+        "owner_input_sha256": "1ecb7ed3a64af2ae2a19a3cbbdc90a9c039856cc1afe79b3b143d8fe1b5f1b3d",
+        "owner_output_sha256": "65b3ce4ea0e4b7c738e550e2af6901554b13610b597ce1e45eb317adde78e282",
+        "predicted_pages_sha256": [
+          "dd8685aa9f27f80d0a9f58f15a061e7a2d9b33729a4fd7c8be11606d02a4ea4a",
+          "1bd1c47fc785dbec235676ed0ebe69794b9516317536d731ae3c01ed82700050",
+          "474b09d1c6c8b1d068a96d2c1d4452d826e3bfcf73e6e320a0054d0c8b27a69a",
+          "e9b330079ff6756ef05bd975c45a2c9667ab004867e1c00d0b639382bb8dbf7a",
+          "34a03ebdfecc8ebcbc2daf5d2dc91ed8d8e68c047b502475cf16b5244264ee98",
+          "3d9b1b573b08962d1210e1a9233c729bfca4a0f5c78cf7dddc624e64218705ef",
+          "ae23fbbe23ee49149b137f3dc53afc8c54813ec49a084253d24426f5b2b8dffd",
+          "e3a5c33a15d9febbbdec4d2ec076fd4901bf9f664e865ceb91acf89515537cc7"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22323,
+        "runtime": "native",
+        "owner_input_sha256": "582c6b1d06427f167f9ad64216a6d823938050a61a12346ad12f2187e11c1d1f",
+        "owner_output_sha256": "4ddf196b3c41cf4ac1517dad6ac498c0fe7058ceb43aef3610e3ada3681f40a0",
+        "predicted_pages_sha256": [
+          "0a9dca250f761fc2554e362f62005e7125ed02621f02e63f6a9a8c55106392d3",
+          "1bd1c47fc785dbec235676ed0ebe69794b9516317536d731ae3c01ed82700050",
+          "474b09d1c6c8b1d068a96d2c1d4452d826e3bfcf73e6e320a0054d0c8b27a69a",
+          "e9b330079ff6756ef05bd975c45a2c9667ab004867e1c00d0b639382bb8dbf7a",
+          "24d06f0da2f3f363668c01beaf64ca69d43fc80f746604a22d186fc58a03bc0c",
+          "3d9b1b573b08962d1210e1a9233c729bfca4a0f5c78cf7dddc624e64218705ef",
+          "ae23fbbe23ee49149b137f3dc53afc8c54813ec49a084253d24426f5b2b8dffd",
+          "e3a5c33a15d9febbbdec4d2ec076fd4901bf9f664e865ceb91acf89515537cc7"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22324,
+        "runtime": "source",
+        "owner_input_sha256": "969a7102b48bd37c26b701d6831abcb5209ca978d67bcfc47e8ae32158e51090",
+        "owner_output_sha256": "c18a516ce3e22f004ad18e0293a46734c7abc737378eab80aae5be786f5c9d4c",
+        "predicted_pages_sha256": [
+          "902573e470a0c123da44014b660efa8c8757fb03aed0193e302305900a94ef8d",
+          "393d3be2b7bf023be01a22af09ea8fe1001f2f9359f2d21385381c9398c154ed",
+          "80972812d41f1eeed62f5c8137426e4c16e9dd82d664ec564a68a3d64bfc8ccf",
+          "2578b9f73b8757565df8fa3637dcc07daea6dbd88254590441f6f4a9bcb788ba",
+          "c802d6af672bcf5d87dd41af04495f3fd60568f802b0abf404bcae2d972e07db",
+          "99122c6c9c839102b9e0c9d74bc4753936afdda35153a23474433b201b67fd50",
+          "52e0c1edf4313eb2ef018fcc805234d87594b052ea0553400d45548b5c437032",
+          "e91154aa17cf22b1b682ffda0b487bb173f7fb7f4b998df07b3c52f0a48f44cf"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22324,
+        "runtime": "native",
+        "owner_input_sha256": "75bba2a05be8074063b6c78870042fe8fcef6bde58466137caab7886a9198b76",
+        "owner_output_sha256": "6e73da15653d7905125ed8199000428cf0702c3c93ec669a630247651f0a4c1d",
+        "predicted_pages_sha256": [
+          "74a9f4cc6808a162a3c783aa809eb8212759c2cac2947e7cb0697cc198365cbb",
+          "393d3be2b7bf023be01a22af09ea8fe1001f2f9359f2d21385381c9398c154ed",
+          "80972812d41f1eeed62f5c8137426e4c16e9dd82d664ec564a68a3d64bfc8ccf",
+          "2578b9f73b8757565df8fa3637dcc07daea6dbd88254590441f6f4a9bcb788ba",
+          "db0a2c62cc3248828bc829cc205b74b19bfd969bfaf77767a0e33dddffe592f5",
+          "99122c6c9c839102b9e0c9d74bc4753936afdda35153a23474433b201b67fd50",
+          "52e0c1edf4313eb2ef018fcc805234d87594b052ea0553400d45548b5c437032",
+          "e91154aa17cf22b1b682ffda0b487bb173f7fb7f4b998df07b3c52f0a48f44cf"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": []
+      },
+      {
+        "iteration": 22325,
+        "runtime": "source",
+        "owner_input_sha256": "3997579c79558ab569808c3763c6ac4fccc482a328760141381850543b0b84cc",
+        "owner_output_sha256": "02b47228ac3adeb5a64c4bb613a04e1e8655cf0bc735a1410ed7f63c8b406a09",
+        "predicted_pages_sha256": [
+          "7c7a5342ef9a291769b6ae11a6d91530cb044c3aba0a71723f4bc07617dc286b",
+          "ab2b05961820c55b0b6b218ad6d43e1015f73af066aa1afd55d713a253e96e7a",
+          "eef19289f3ea1656eee65afb89da08b99fc38830d6308c1498524f422a2cc4cd",
+          "c2d7f32398b4510ff070b4b43b0bc2b8dd5d02e94c3c398920a807904f3b16ac",
+          "313c756abcc0e0921f8f886306bc0520b833176fce0666526ba1e93eb2b33481",
+          "fee1787a6dce8e812449be2c593fba893af67c539122a2d01a015a71db671890",
+          "9ede8d5856be08f9c61c8f33e025d7c7da2a4891bcb7405c6e3bc82ae36a9a35",
+          "a4ab8f079a9d062e6384f0d0851ced5ede09a0e231fe150ba5d8a94e67781bb3"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 164,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 163,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      },
+      {
+        "iteration": 22325,
+        "runtime": "native",
+        "owner_input_sha256": "f05898ecbf6f5700d23bd9f0d89eb503dd96cce032f6a6999023d582729fc080",
+        "owner_output_sha256": "7fe108714c4cbc09b0d658daf30bf1b0c7d57e0e7c51e235720fa00cb2ffd22f",
+        "predicted_pages_sha256": [
+          "68d2dcd290009bfb14be29ed30e6fbf02256686767f490e64ce164e773364289",
+          "ab2b05961820c55b0b6b218ad6d43e1015f73af066aa1afd55d713a253e96e7a",
+          "eef19289f3ea1656eee65afb89da08b99fc38830d6308c1498524f422a2cc4cd",
+          "c2d7f32398b4510ff070b4b43b0bc2b8dd5d02e94c3c398920a807904f3b16ac",
+          "935c9e99bc14a251e2db9ced9e0afa0e677ac107990ff172c9cb976801b19319",
+          "fee1787a6dce8e812449be2c593fba893af67c539122a2d01a015a71db671890",
+          "9ede8d5856be08f9c61c8f33e025d7c7da2a4891bcb7405c6e3bc82ae36a9a35",
+          "a4ab8f079a9d062e6384f0d0851ced5ede09a0e231fe150ba5d8a94e67781bb3"
+        ],
+        "compared_bytes": 64000,
+        "pixel_163_162_before": [
+          3,
+          3
+        ],
+        "pixel_163_162_after": [
+          3,
+          3
+        ],
+        "paints": [
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 164,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 148,
+            "y": 163,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ]
+      }
+    ],
+    "cross_paint_history": {
+      "rows": [
+        {
+          "iteration": 22302,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "bb918147fe10391b43adeba4bd21b9ef32e5bd6c5076c3517733a05ed6dd0569"
+        },
+        {
+          "iteration": 22303,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "delta_sha256": "5e651b6b2d1ef039b5557e1fad48a13c4d5a8b8fc9add9e098ccbe3d96255065"
+        },
+        {
+          "iteration": 22304,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            1,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "f7a4a8f95750189cb8e13af8b2bf68bf6660a3ef89c2e8ad2214ef55316b9c5f"
+        },
+        {
+          "iteration": 22305,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "delta_sha256": "5e651b6b2d1ef039b5557e1fad48a13c4d5a8b8fc9add9e098ccbe3d96255065"
+        },
+        {
+          "iteration": 22306,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            1,
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          "delta_sha256": "9a166d309abb05844ea1225dcc0a9f66266e234fdc955f8cb5370af6b39ce49b"
+        },
+        {
+          "iteration": 22307,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "delta_sha256": "e79f1343652948c1a51b6a3bcbd497572984d88601e40c1edfa3deb3628e7e44"
+        },
+        {
+          "iteration": 22308,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            1,
+            2,
+            2,
+            0,
+            1,
+            1
+          ],
+          "delta_sha256": "ca8fbfbc8ed2b13462f6e1d12bd6cf0afd846a426d27cc627d513157617bb5d9"
+        },
+        {
+          "iteration": 22309,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "delta_sha256": "e79f1343652948c1a51b6a3bcbd497572984d88601e40c1edfa3deb3628e7e44"
+        },
+        {
+          "iteration": 22310,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            1,
+            2,
+            2,
+            0,
+            1,
+            1
+          ],
+          "delta_sha256": "ca8fbfbc8ed2b13462f6e1d12bd6cf0afd846a426d27cc627d513157617bb5d9"
+        },
+        {
+          "iteration": 22311,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "delta_sha256": "e79f1343652948c1a51b6a3bcbd497572984d88601e40c1edfa3deb3628e7e44"
+        },
+        {
+          "iteration": 22312,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            1,
+            2,
+            2,
+            0,
+            1,
+            1
+          ],
+          "delta_sha256": "ca8fbfbc8ed2b13462f6e1d12bd6cf0afd846a426d27cc627d513157617bb5d9"
+        },
+        {
+          "iteration": 22313,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "delta_sha256": "e79f1343652948c1a51b6a3bcbd497572984d88601e40c1edfa3deb3628e7e44"
+        },
+        {
+          "iteration": 22314,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            1,
+            2,
+            2,
+            0,
+            1,
+            1
+          ],
+          "delta_sha256": "ca8fbfbc8ed2b13462f6e1d12bd6cf0afd846a426d27cc627d513157617bb5d9"
+        },
+        {
+          "iteration": 22315,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "delta_sha256": "e79f1343652948c1a51b6a3bcbd497572984d88601e40c1edfa3deb3628e7e44"
+        },
+        {
+          "iteration": 22316,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            1,
+            2,
+            2,
+            0,
+            1,
+            1
+          ],
+          "delta_sha256": "ca8fbfbc8ed2b13462f6e1d12bd6cf0afd846a426d27cc627d513157617bb5d9"
+        },
+        {
+          "iteration": 22317,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            1,
+            1,
+            1,
+            2,
+            2
+          ],
+          "delta_sha256": "e79f1343652948c1a51b6a3bcbd497572984d88601e40c1edfa3deb3628e7e44"
+        },
+        {
+          "iteration": 22318,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            1,
+            2,
+            2,
+            0,
+            1,
+            1
+          ],
+          "delta_sha256": "ca8fbfbc8ed2b13462f6e1d12bd6cf0afd846a426d27cc627d513157617bb5d9"
+        },
+        {
+          "iteration": 22319,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "6d959f5bca99a7dcf9a84f22d2a3e32ba65e5ef30d8efe5c3807f7d8274c93e4"
+        },
+        {
+          "iteration": 22320,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "bb918147fe10391b43adeba4bd21b9ef32e5bd6c5076c3517733a05ed6dd0569"
+        },
+        {
+          "iteration": 22321,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "bb918147fe10391b43adeba4bd21b9ef32e5bd6c5076c3517733a05ed6dd0569"
+        },
+        {
+          "iteration": 22322,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "bb918147fe10391b43adeba4bd21b9ef32e5bd6c5076c3517733a05ed6dd0569"
+        },
+        {
+          "iteration": 22323,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "bb918147fe10391b43adeba4bd21b9ef32e5bd6c5076c3517733a05ed6dd0569"
+        },
+        {
+          "iteration": 22324,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "bb918147fe10391b43adeba4bd21b9ef32e5bd6c5076c3517733a05ed6dd0569"
+        },
+        {
+          "iteration": 22325,
+          "planes": [
+            1,
+            2,
+            3,
+            5,
+            6,
+            7
+          ],
+          "compared_bytes": 48000,
+          "difference_bytes": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "delta_sha256": "bb918147fe10391b43adeba4bd21b9ef32e5bd6c5076c3517733a05ed6dd0569"
+        }
+      ],
+      "panel_refreshes": [
+        {
+          "iteration": 22318,
+          "runtime": "source",
+          "image_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        },
+        {
+          "iteration": 22318,
+          "runtime": "native",
+          "image_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        },
+        {
+          "iteration": 22319,
+          "runtime": "source",
+          "image_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        },
+        {
+          "iteration": 22319,
+          "runtime": "native",
+          "image_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        },
+        {
+          "iteration": 22320,
+          "runtime": "source",
+          "image_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        },
+        {
+          "iteration": 22320,
+          "runtime": "native",
+          "image_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        }
+      ]
+    },
+    "paint_mutation_rejections": {
+      "lost_erase": true,
+      "wrong_marker_colour": true,
+      "wrong_head_slope": true,
+      "lost_panel_refresh": true
+    },
+    "phase_mutation_rejections": {
+      "counter_increment": true,
+      "premature_marker": true,
+      "marker_coordinate": true,
+      "other_marker": true
+    },
+    "prior_gate_results_preserved": true,
+    "fixture_runner_sha256": "64cc3278ee928c352230574dba455e56ecfb62c6c787a90e877b45054c5686ee"
+  },
+  "first_plane_zero_unexplained_write": {
+    "source_iteration": 22309,
+    "plane": 4,
+    "reason": "Radar paint history does not explain complete plane difference"
+  },
+  "acceptance_controls": {
+    "unit_tests": 5,
+    "whole_planes_one_and_two_reports_identical": true,
+    "unexplained_audits_fail": true
+  }
+}
