@@ -6,6 +6,8 @@
 #include "polygon_clip.h"
 #include "render_line.h"
 #include "projection.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct { int16_t x, y, z; } Vertex;
 
@@ -16,6 +18,52 @@ static int16_t next_word(gaddr *stream) {
 }
 
 static gaddr vertex_at(int16_t offset) { return WORKSPACES + (gaddr)(int32_t)offset; }
+
+/* C206FE-C20798 store alternating lanes of fixed-point intermediate points.
+ * DIVS overflow preserves the dividend before EXT.L takes its low word. */
+static void interpolate_segment_lane(gaddr first,gaddr last,gaddr output,int16_t divisions) {
+    int32_t position[3],step[3];
+    if(!divisions) { /* Original DIVS divide-by-zero exception. */
+        fputs("model interpolation has a zero divisor\n",stderr);abort();
+    }
+    for(unsigned k=0;k<3;++k) {
+        position[k]=(int32_t)rd_s16(first+2*k)*16;
+        int32_t delta=(int32_t)rd_s16(last+2*k)*16-position[k];
+        int32_t quotient=delta/divisions;
+        step[k]=quotient<-32768 || quotient>32767?(int16_t)delta:(int16_t)quotient;
+    }
+    const unsigned count=(uint16_t)(divisions-2)+1u; /* Initial body, then DBRA. */
+    for(unsigned i=0;i<count;++i,output+=24) {
+        for(unsigned k=0;k<3;++k) {
+            position[k]=(int32_t)((uint32_t)position[k]+(uint32_t)step[k]);
+            wr_u32(output+4*k,(uint32_t)position[k]);
+        }
+    }
+}
+int draw_interpolated_segments(gaddr *stream,gaddr frame) {
+    const gaddr points=0xc4ad90u;
+    wr_u16(frame-0x7e,0);
+    const int16_t divisions=next_word(stream);
+    wr_s16(frame-0x30,divisions);
+    for(unsigned lane=0;lane<2;++lane) {
+        gaddr first=vertex_at(next_word(stream)),last=vertex_at(next_word(stream));
+        interpolate_segment_lane(first,last,points+12*lane,divisions);
+    }
+    wr_s16(CURRENT_COLOUR,next_word(stream));
+    gaddr point=points;
+    wr_u16(frame-0x30,(uint16_t)(rd_u16(frame-0x30)-1));
+    do {
+        for(unsigned k=0;k<6;++k) {
+            const int32_t value=rd_s32(point+4*k);
+            /* C207B4-C207D6 round the shifted low word using ASR's carry. */
+            wr_s16(SEGMENT_POINTS+2*k,(int16_t)((value>>4)+((uint32_t)value>>3&1u)));
+        }
+        point+=24;
+        wr_u16(frame-0x7e,(uint16_t)(rd_u16(frame-0x7e)|draw_clipped_segment()));
+        wr_u16(frame-0x30,(uint16_t)(rd_u16(frame-0x30)-1));
+    } while(rd_s16(frame-0x30)>0);
+    return rd_u16(frame-0x7e);
+}
 
 int draw_stream_circles(gaddr *stream,gaddr frame) {
     wr_u16(frame-0x7e,0); wr_u16(frame-0x6e,0);

@@ -75,6 +75,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #include "../../port/game/grid_projection_packet.c"
 #undef draw_filled_circle
 #define draw_selected_segment host_draw_selected_segment
+#define draw_interpolated_segments host_draw_interpolated_segments
 #define draw_selected_segment_clipped host_draw_selected_segment_clipped
 #define draw_selected_segment_near host_draw_selected_segment_near
 #define draw_segment_pairs host_draw_segment_pairs
@@ -122,6 +123,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #include "../../port/game/native/model_state.c"
 #include "../../port/game/native/model.c"
 #undef draw_selected_segment
+#undef draw_interpolated_segments
 #undef draw_selected_segment_clipped
 #undef draw_selected_segment_near
 #undef draw_segment_pairs
@@ -200,6 +202,7 @@ static int16_t circle_x,circle_y,circle_radius;
 static int16_t point_x,point_y;
 static int16_t projection_x,projection_y,projection_depth;
 static unsigned strip_groups;
+static unsigned interpolated_commands;
 static int original(uint32_t pc) {
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     REG_A[0]=oracle_parameters;
@@ -211,7 +214,7 @@ static int original(uint32_t pc) {
     if(pc==0xc21b38u || pc==0xc21c86u) REG_A[2]=0x4600;
     if(pc==0xc1fe68u) REG_A[2]=0x4600;
     if(pc==0xc0cfb6u) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
-    if(pc==0xc1ff0au || pc==0xc207feu) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
+    if(pc==0xc1ff0au || pc==0xc207feu || pc==0xc206e4u) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
     if(pc==0xc2f5f4u) {REG_D[0]=(uint32_t)(int32_t)point_x;REG_D[1]=(uint32_t)(int32_t)point_y;}
     if(pc==0xc2ec90u) {REG_D[0]=(uint32_t)(int32_t)projection_x;REG_D[1]=(uint32_t)(int32_t)projection_y;REG_D[2]=(uint32_t)(int32_t)projection_depth;}
@@ -221,6 +224,7 @@ static int original(uint32_t pc) {
         uint16_t opcode;
         if(REG_PC==0xc70000u && REG_A[7]==0xc7ff04u) { wait_blitter(); return 1; }
         if(REG_PC==0xc1f598u) ++strip_groups; /* Positive strip's initial point. */
+        if(REG_PC==0xc206e4u) ++interpolated_commands;
         int cycles_before=GET_CYCLES();
         opcode=rd_u16(REG_PC); REG_PPC=REG_PC; REG_IR=opcode; REG_PC+=2;
         m68ki_instruction_jump_table[opcode](); USE_CYCLES(CYC_INSTRUCTION[opcode]);
@@ -693,6 +697,73 @@ static int point_destinations(void) {
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
     puts("64 complete C2F5F4 point cases match destination and all non-stack RAM/display");return 1;
 }
+static int interpolated_model_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved);
+    if(!saved) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    const unsigned commands_before=interpolated_commands,failures_before=failures;
+    /* The user's actual disk model, through the scene descriptor and complete
+     * C1ED48 model owner. Camera poses are component inputs, not flight RAM. */
+    const ScenePlacementCall call={.routine=0xc1ed48,.parameters=0xc3aac4};
+    for(unsigned test=0;test<16;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        wr_u32(CONTROL_STREAM,call.parameters);wr_u16(SCRIPT_RECORD,0xb800);
+        wr_u16(BOUND_SHIFT,0);wr_u16(MAGNITUDE,200);wr_u16(ZOOM_SCALE,0x80);wr_u8(ZOOM_FLAGS,0x80);
+        wr_u8(CELL_CHECKS,1);wr_u8(HEADER_BYTE,0);wr_u8(ATTITUDE_NEAR,1);
+        for(unsigned k=0;k<3;++k) {
+            const int32_t position=k==0?(test&1?200:-200)*256:k==1?(test&2?40:-120)*256:(test&4?400:-400)*256;
+            wr_s32(TARGET_POINT+4*k,position);wr_u32(SHADOW_OFFSET_X+4*k,0);
+            for(unsigned j=0;j<3;++j) wr_s16(VIEW_ANGLE_MATRIX+6*k+2*j,(int16_t)(k==j?(test&8?-256:256):0));
+        }
+        compare_descriptor(NULL,&call);
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(saved);
+    printf("16 complete C3AAC4 scenery poses compared; %u original C206E4 commands, %u failures\n",
+        interpolated_commands-commands_before,failures-failures_before);
+    return interpolated_commands>commands_before && failures==failures_before;
+}
+static int interpolated_segment_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    /* Counts, clipping, signed rounding and DIVS overflow; run the native
+     * command dispatch and the entire original C206E4, including raster. */
+    for(unsigned test=0;test<72;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        const int16_t divisions=(int16_t)(2+test%6);
+        wr_s16(0x4600,divisions);
+        for(unsigned point=0;point<4;++point) {
+            wr_u16(0x4602+2*point,(uint16_t)(6*point));
+            for(unsigned axis=0;axis<3;++axis) {
+                int16_t value=(int16_t)((test*71+point*97+axis*137)%1000-500);
+                if(axis==2) value=(int16_t)(test<48?800+point*113:test<60?-800-point*37:value);
+                if(test>=66 && axis<2) value=point&1?32767:-32768;
+                wr_s16(WORKSPACES+6*point+2*axis,value);
+            }
+        }
+        wr_u16(0x460a,(uint16_t)(test&15));
+        wr_u32(LINE_STYLE,0x000fffffu);wr_u32(POLY_COMPLEMENT,0);
+        wr_u16(LINE_LAST_ROW,179);wr_u16(0x4200-0x30,0x1234);wr_u16(0x4200-0x7e,0x5678);
+        memcpy(before,fa18_machine,sizeof *before);
+        gaddr stream=0x4600;
+        int result=command(0x4018,&stream,0x4200);
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(0xc206e4u) || REG_A[2]!=stream || (int16_t)REG_D[0]!=result) {
+            fprintf(stderr,"interpolated segment case %u stream/result differs\n",test);return 0;
+        }
+        for(unsigned i=0;i<0xff000;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                fprintf(stderr,"interpolated segment case %u RAM %06X source %02X native %02X\n",
+                    test,i<0x80000?i:i-0x80000+0xc00000,actual,expected[i]);return 0;
+            }
+        }
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    puts("72 complete C206E4/4018 interpolation, clipping, rounding and overflow cases match non-stack RAM/display and stream/result");return 1;
+}
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
@@ -701,9 +772,10 @@ int main(int argc,char **argv) {
     const int tails_only=argc==3 && !strcmp(argv[2],"--tails-only");
     const int points_only=argc==3 && !strcmp(argv[2],"--points-only");
     const int projection_only=argc==3 && !strcmp(argv[2],"--projection-only");
+    const int interpolation_only=argc==3 && !strcmp(argv[2],"--interpolation-only");
     const int require_aircraft=argc==3 && !strcmp(argv[2],"--require-aircraft");
     const int aircraft_record=argc==4 && !strcmp(argv[2],"--aircraft-record");
-    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || require_aircraft || aircraft_record)?file_bytes(argv[1],&nd):NULL;
+    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || interpolation_only || require_aircraft || aircraft_record)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
@@ -727,6 +799,8 @@ int main(int argc,char **argv) {
     if(tails_only) return !derived_tails();
     if(points_only) return !point_destinations();
     if(projection_only) return !projection_results();
+    if(interpolation_only) return !(interpolated_segment_cases() && interpolated_model_cases());
+    if(!interpolated_segment_cases() || !interpolated_model_cases()) return 1;
     if(!projection_results()) return 1;
     if(!point_destinations()) return 1;
     if(!workspace_script_cases() || !stream_circle_cases()) return 1;

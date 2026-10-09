@@ -1,5 +1,21 @@
 # Current playable port handoff
 
+Free Flight renderer fix (2026-10-09): the user's location-three crash at
+model C3AAC4 / stream C3ABEA / command 4018 was a missing native command.
+Original table C1FCE8+$18 points to C206E4, now connected through the existing
+model dispatcher to `draw_interpolated_segments` in `draw_stream.c`. It retains
+the original fixed-point interpolation, DIVS overflow, rounding, clipped drawing
+and command return/countdown. Model errors now print player X/Y/Z in world units
+(stored coordinates /256), pose index, mode and stage before aborting.
+The model oracle compares 72 complete command cases and 16 complete C3AAC4
+poses, reaching eight original C206E4 calls with matching RAM/display/returns.
+The user also flew through the affected area again and reported no crash.
+The automated 50,000-tick location-three smoke passes; its straight flight
+already passed before the fix and is not an exact replay of the reported crash.
+See `analysis/native_free_flight_interpolation_fix.md` for validation scope.
+Renderer, Free Flight startup and cleanup checks pass in Release and Debug;
+both executables and canonical Release are refreshed, including diagnostics.
+
 Current title/music fix (2026-10-09): the title now waits for any key instead
 of advancing on a timer. Disk music starts at master 63, ducks to 31 on the
 acknowledging key, and stops before gameplay. Empty voice requests now clear

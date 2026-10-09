@@ -30,7 +30,11 @@
 enum { CONTROL_STREAM=0xC45A36, HEADER_BYTE=0xC4585B,
     DISTANCE_GATE=0xC45ABA, VISIT_CLOCK=0xC458BD };
 static void missing(const char *part,gaddr at) {
-    fprintf(stderr,"native model missing %s at %06X\n",part,at); abort();
+    fprintf(stderr,"native model missing %s at %06X\n",part,at);
+    fprintf(stderr,"native model player position x=%.3f y=%.3f z=%.3f; pose_index=%u mode=%u stage=%06X\n",
+        rd_s32(CONTROL_RECORDS+20)/256.0,rd_s32(CONTROL_RECORDS+24)/256.0,
+        rd_s32(CONTROL_RECORDS+28)/256.0,rd_u8(SCENE_POSE_ENTRY),rd_u8(MODE_SELECT),rd_u32(STAGE_CALLBACK));
+    fflush(stderr);abort();
 }
 static int16_t word(gaddr *p) { int16_t n=rd_s16(*p); *p+=2; return n; }
 static ReadoutState projection_child(void *context,enum ReadoutChild child) {
@@ -252,6 +256,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x008: return draw_selected_segment_clipped(stream);
     case 0x00c: return draw_tested_face(stream,frame);
     case 0x010: return draw_record_shadow(stream,frame);
+    case 0x018: return draw_interpolated_segments(stream,frame); /* C206E4. */
     case 0x01c: return draw_side_face(stream);
     case 0x020: return draw_side_triangle(stream);
     case 0x024: return draw_parallelogram_face_near(stream);

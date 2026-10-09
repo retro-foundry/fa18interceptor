@@ -2,6 +2,18 @@
 
 ## Current restart summary — 2026-10-09
 
+Free Flight location-three renderer crash fixed: model C3AAC4's command 4018
+now dispatches the original C206E4 interpolated-segment routine. The model oracle
+compares 72 complete command cases and 16 actual-model poses (eight source calls),
+matching RAM, drawing, stream advancement and results. The user flew through
+the affected area again and reported no crash. An automated 50,000-tick
+location-three smoke also passes, but its straight flight did not reproduce the
+original crash. Model error output now includes player X/Y/Z (stored coordinates
+/256), pose index, mode and stage. See
+`analysis/native_free_flight_interpolation_fix.md`.
+Renderer, Free Flight startup and cleanup checks pass in Release and Debug;
+both executables and canonical Release are refreshed, including diagnostics.
+
 Latest title/music direction: wait on the title until any key, then duck music
 in the pilot/menu flow; no music in gameplay. Startup now starts the original
 disk music at master 63; the key targets 31. Native empty-voice service discards
