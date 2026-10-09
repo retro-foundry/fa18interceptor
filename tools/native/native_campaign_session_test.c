@@ -168,6 +168,11 @@ static int mission(NativeFrontend *game,FILE *keys,unsigned mode) {
 }
 int main(int argc,char **argv) {
     if(argc!=6 && (argc!=7 || strcmp(argv[6],"saved-pilot"))) {fputs("Usage: campaign_session_test ADF save qualification-input enlist-input output-keys [saved-pilot]\n",stderr);return 1;}
+    const char *suffix=getenv("FA18_CAMPAIGN_START_MODE");
+    const unsigned start_mode=suffix?(unsigned)strtoul(suffix,NULL,10):3;
+    if(start_mode<3 || start_mode>8 || (suffix && argc!=7)) {
+        fputs("Diagnostic suffix requires saved-pilot and start mode 3..8\n",stderr);return 1;
+    }
     NativeFrontend *game=calloc(1,sizeof *game);QualificationInput input={0};
     MissionPilot keys={0};FlightEvidence qualification={0};char error[256];int result=1,opened=0;
     keys.keys=fopen(argv[5],"w");input.keys=keys.keys;
@@ -194,6 +199,13 @@ int main(int argc,char **argv) {
     if(fclose(enlist)) goto done;
     }
     while(game->ticks<9000) tick(game);
+    if(start_mode>3) {
+        if(game->screen!=NATIVE_MENU || !rd_u16(rd_u32(MODE_TABLE)) ||
+           rd_u16(rd_u32(MODE_TABLE)+56)!=start_mode-3 || !saved_log(game,0)) {
+            failed(game,"actual earned suffix save");goto done;
+        }
+        goto missions;
+    }
     if(game->screen!=NATIVE_MENU || rd_u16(rd_u32(MODE_TABLE)) || rd_u16(rd_u32(MODE_TABLE)+56) ||
        !saved_log(game,0)) {failed(game,"normal enlistment");goto done;}
     game->observe_frame=observe;game->frame_context=&qualification;
@@ -214,8 +226,11 @@ int main(int argc,char **argv) {
     unsigned escape=game->ticks;
     while(game->ticks<escape+5000 && !(game->screen==NATIVE_MENU && rd_u32(STAGE_CALLBACK)==0xc0fcb4)) tick(game);
     if(game->screen!=NATIVE_MENU || rd_u8(MODE_SELECT) || game->input_count || game->postflight_resets) {failed(game,"qualification menu return");goto done;}
-    for(unsigned mode=3;mode<=8;++mode) if(!mission(game,keys.keys,mode)) goto done;
-    printf("{\"continuous_campaign\":true,\"frontend_opens\":1,\"ticks\":%u,\"scene_frames\":%u,\"completions\":6,\"crash_resets\":0,\"menu\":true}\n",game->ticks,game->scene_frames);
+missions:
+    game->observe_frame=observe;
+    for(unsigned mode=start_mode;mode<=8;++mode) if(!mission(game,keys.keys,mode)) goto done;
+    printf("{\"%s\":true,\"start_mode\":%u,\"frontend_opens\":1,\"ticks\":%u,\"scene_frames\":%u,\"completions\":6,\"crash_resets\":0,\"menu\":true}\n",
+        start_mode>3?"diagnostic_campaign_suffix":"continuous_campaign",start_mode,game->ticks,game->scene_frames);
     result=0;
 done:
     if(keys.keys && fclose(keys.keys)) result=1;

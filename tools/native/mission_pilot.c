@@ -371,7 +371,8 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
          * land while retaining their active records. Descend to the normal
          * low attack height instead of orbiting above an unreachable aim. */
         const int landed_opponent=pilot->campaign_flight && pilot->mode==5 && (rd_u16(target+2)&0x80);
-        const double height=fmax(rd_s32(target+24)/256.0+400,pilot->home[1]+(landed_opponent?400:2000));
+        const int cruise_heat=pilot->campaign_flight && pilot->cruise_flight && (rd_u8(CONTROL_RECORDS+99)&0xf0u)==0x30u;
+        const double height=fmax(rd_s32(target+24)/256.0+400,pilot->home[1]+(landed_opponent || cruise_heat?400:2000));
         const double slope=fabs(yaw_error)>0.3 && !landed_opponent?0:
             clamp((height-rd_s32(CONTROL_RECORDS+24)/256.0)/6000-
                 rd_s32(CONTROL_RECORDS+66)/256.0/fmax(speed,30),-0.12,0.12);
@@ -380,7 +381,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     }
     pilot->previous_x=yaw;pilot->previous_y=pilot->new_final_flight || pilot->campaign_flight?attitude_pitch:y;
     double wanted_speed=pilot->new_final_flight && final_heat?100:
-        rd_s16(target+110)/64.0+clamp((range-1800)/100,-25,25);
+        rd_s16(target+110)/64.0+clamp((range-1800)/100,-25,pilot->campaign_flight && pilot->cruise_flight?5:25);
     /* Continuous-campaign pilot input must retain flying speed while a
      * higher-level enemy slows or reverses. This only chooses throttle keys. */
     if(pilot->campaign_flight) wanted_speed=fmax(wanted_speed,90);
@@ -403,7 +404,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     /* Escort validation fires earlier on the closing pass. These are pilot
      * input choices; original launch/tracking/damage rules decide the result. */
     const int close_aim=pilot->mode==4 && !pilot->escort_flight;
-    const double launch_range=pilot->new_final_flight && !final_heat?30000:close_aim?10000:20000;
+    const double launch_range=pilot->new_final_flight && !final_heat?30000:close_aim || (pilot->campaign_flight && pilot->cruise_flight && (rd_u8(CONTROL_RECORDS+99)&0xf0u)==0x30u)?10000:20000;
     const uint8_t weapon=rd_u8(CONTROL_RECORDS+99)&0xf0u,stock=rd_u8(CONTROL_RECORDS+95);
     const int final_ready=(!pilot->final_flight && !pilot->campaign_flight) || (weapon==0x20 && (stock&0xf0u)) ||
         (weapon==0x30 && (stock&15u));
@@ -415,7 +416,7 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
     double weapon_aim[3]={0};
     if(pilot->new_final_flight || pilot->campaign_flight) for(unsigned i=0;i<3;++i) for(unsigned j=0;j<3;++j)
         weapon_aim[i]+=delta[j]*rd_s16(CONTROL_RECORDS+146+6*j+2*i)/16384;
-    const int weapon_aligned=(!pilot->new_final_flight && (!pilot->campaign_flight || pilot->mode==5)) || (weapon_aim[2]>0 &&
+    const int weapon_aligned=(!pilot->new_final_flight && (!pilot->campaign_flight || pilot->mode==5 || pilot->cruise_flight)) || (weapon_aim[2]>0 &&
         fabs(atan2(weapon_aim[0],weapon_aim[2]))<(pilot->campaign_flight && pilot->cruise_flight?0.005:pilot->campaign_flight && pilot->mode==5?0.2:0.035) &&
         fabs(atan2(weapon_aim[1],hypot(weapon_aim[0],weapon_aim[2])))<(pilot->campaign_flight && pilot->mode==5?0.25:0.08));
     const int launch=final_ready && !projectile_active && !pilot->ground_breakaway && rd_s16(SELECTED_RECORD)==(int)(selected*512) && range<launch_range &&
@@ -519,12 +520,13 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         pilot->trace=game->ticks/trace_interval;
         printf("{\"trace\":true,\"tick\":%u,\"phase\":%u,\"pilot_phase\":%u,\"gate\":%d,"
                "\"function_level\":%u,\"controls\":%u,\"thrust\":%d,\"fuel\":%u,"
-               "\"admitted\":%u,\"created\":%u,\"aux\":%u,\"gun_hits\":%u,\"radar_hits\":%u,\"weapon\":%u,\"stock\":%u,\"selected\":%d,\"pilot_target\":%u,\"records\":[",
+               "\"admitted\":%u,\"created\":%u,\"aux\":%u,\"gun_hits\":%u,\"radar_hits\":%u,\"weapon\":%u,\"stock\":%u,\"selected\":%d,\"pilot_target\":%u,\"cockpit_flags\":%u,\"message_state\":%u,\"view_record\":%d,\"context_select\":%u,\"stream_mode\":%d,\"input_queued\":%u,\"block_flags\":%u,\"records\":[",
                game->ticks,rd_u8(PLAYER_PHASE),pilot->phase,rd_s16(SCENE_DISPATCH_GATE),
                rd_u8(FUNCTION_KEY_LEVEL),rd_u8(PLAYER_STICK),rd_s8(CONTROL_RECORDS+43),rd_u32(CONTROL_RECORDS+114),
                rd_u8(SCENE_DISPATCH_ADMITTED),rd_u8(SCENE_DISPATCH_CREATED),rd_u8(SCENE_DISPATCH_AUX),
                rd_u16(rd_u32(MODE_TABLE)+60),rd_u16(rd_u32(MODE_TABLE)+68),rd_u8(CONTROL_RECORDS+99)&0xf0,
-               rd_u8(CONTROL_RECORDS+95),rd_s16(SELECTED_RECORD),pilot->target);
+               rd_u8(CONTROL_RECORDS+95),rd_s16(SELECTED_RECORD),pilot->target,rd_u16(COCKPIT_FLAGS),rd_u16(MESSAGE_STATE),
+               rd_s16(VIEW_RECORD),rd_u8(CONTEXT_SELECT),rd_s16(STREAM_MODE),game->input_count,rd_u8(COMMAND_BLOCK_FLAGS));
         for(unsigned slot=0;slot<=(pilot->new_final_flight?15u:pilot->rescue_flight || pilot->cruise_flight?14u:12u);slot+=trace_interval==100 || pilot->campaign_flight || pilot->rescue_flight || pilot->cruise_flight || pilot->new_final_flight?1u:2u) {
             gaddr record=CONTROL_RECORDS+512*slot;
             printf("%s{\"slot\":%u,\"flags\":%u,\"kind\":%u,\"contact\":%u,\"region\":%u,\"damage\":%u,"
@@ -580,7 +582,7 @@ void mission_pilot_tick(MissionPilot *pilot,NativeFrontend *game) {
         const uint8_t stock=rd_u8(CONTROL_RECORDS+95);
         const gaddr target=CONTROL_RECORDS+512*pilot->target;
         int cruise_gun=0;
-        if(pilot->campaign_flight && pilot->cruise_flight && stock<36) {
+        if(pilot->campaign_flight && pilot->cruise_flight && !stock) {
             int active=0;
             for(unsigned slot=1;slot<=3;++slot) {
                 const gaddr projectile=CONTROL_RECORDS+512*slot;

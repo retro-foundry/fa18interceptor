@@ -216,8 +216,19 @@ and thrust stop changing while pitch falls toward the ground. Player component
 damage remains zero, but that alone does not establish whether the original
 interception/destruction bit at record +32 is clear. Inspect that owner and
 compare the affected complete original body before changing game behavior.
-The current ordinary-key candidate tries radar first and retains more flying
-speed: `campaign-suffix-final-radar-speed/`. It has no accepted result yet.
+The ordinary-key radar-first / higher-speed candidate
+(`campaign-suffix-final-radar-speed/`) earns one aircraft expiry, then crashes
+at tick 24629. Those three final-flight input changes were reverted for the
+validated cruise checkpoint. No test is currently running. Final guidance and
+the original destruction marker remain the next investigation.
+
+The cruise input checkpoint retains its slower closing speed, ordinary radar
+retries without the extra test-only alignment restriction, and heat missiles
+before gun fallback. Actual native runtime/physics are unchanged. Both fixture
+targets build in Release/Debug; invalid diagnostic suffix modes are rejected
+before opening either runtime. The full and cold cruise paths plus the actual
+playable five-mission replay exercise these connected input changes. The
+default six-mission acceptance test remains unregistered until it passes.
 
 ```powershell
 cmake --build build/native-cmake --config Release --target fa18_native_campaign_session_test --parallel 8
