@@ -2,6 +2,65 @@
 
 ## Current restart summary — 2026-10-09
 
+Active completion work (uncommitted): the one-frontend campaign driver in
+`tools/native/native_campaign_session_test.c` and checker
+`tools/native/check_campaign_session.py` earn qualification, mission three
+and mission four with real saved results and menu mode zero between missions.
+Mode five remains unsuccessful; its opponents can land while active, and its
+original failure phase F0 eventually returns to menu without a saved completion.
+Latest experiment uses the already accepted legacy mode-five pilot instead of
+the new-pilot controller; report directory is
+`build/native-flight/campaign-session-legacy-five/`. No uninterrupted six-mission
+pass or complete playable replay is accepted. The experimental executable target
+is available; no failing campaign gate is registered in default CTest yet.
+
+Later steering/evidence: the legacy mode-five controller completes the first
+five missions in one frontend (`campaign-session-legacy-five/`): modes five,
+six and seven save at ticks 100581, 123474 and 143480. Final combat crashes
+before any aircraft expiry. The user identified gear-down flight and directed
+gear up after takeoff, down before landing (also manually toggled gear in the
+visible mission-three run). The campaign pilot now sends original G commands
+and requires observed retracted gear in flight and lowered gear at landing.
+Qualification's sealed input already has the two original gear events.
+First geared attempt completes mission three, but misses the escort carrier
+approach. Current rerun lowers gear at return start to slow before approach:
+`build/native-flight/campaign-session-gear-return/`. The full goal remains open.
+
+That return-stage lowering passes escort, but the legacy geared mode-five input
+crashes on its attack. Current attempt uses the campaign's safer combat input,
+ordinary gear management. Ground kills cannot satisfy mode five's original
+airborne-expiry count. The radar interception attempt reaches both airborne
+kills and the objective; its return stalls because the pilot does not reapply
+controls after the source clears them for the result camera. Current attempt
+addresses this handoff: `build/native-flight/campaign-session-gear-return-handoff/`.
+That handoff passes mode five and rescue, saved/menu ticks 103321 and 125454.
+Qualification and four geared missions pass in one frontend. The cruise
+interception misses with fuel available. Latest attempt tightens radar launch
+alignment: `build/native-flight/campaign-session-gear-cruise-alignment/`.
+Full playable replay remains pending.
+
+The prefix through rescue now also passes in one actual Release `fa18_native`
+process. Qualification and four geared missions produce exactly the driver's
+78 saved bytes, menu C0FCB4/mode zero at tick 125454, with no crash reset or
+pending input. See `analysis/figures/native_geared_campaign_prefix_checkpoint.json`.
+This is partial playable integration, not six-mission or independent-original
+acceptance. Latest cruise gun diagnostics show ammunition being used without
+a hit; the original FE failure remains. No test is currently running.
+No visible measurement process is running after the interrupted old route.
+
+Visible measurement was run via `tools/native/measure_visible_performance.py`
+under `build/native-flight/visible-performance-20261009/`: demo and six actual
+earned cold mission routes, real window/audio and one CSV row per presentation.
+The completed demo presents all 10,910 frames, work p99 4.0922 ms, maximum
+544.8323 ms. Its worst frame (2322, C10CFE) spends 543.2488 ms in SDL input
+polling. The strict 20 ms maximum therefore fails; no frame or stall is excluded.
+Mission three later finishes with a crash/reset after live manual gear input,
+so the old fixed-key suite stops and has no accepted mission result. Generate
+new gear-managed routes before resuming visible mission measurements. SDL
+returns are counted; compositor
+scanout is not instrumented. See
+`analysis/native_continuous_campaign_investigation.md` for continuation details.
+
 Actual Demonstration entry now sorts all three display lists, matching the
 original caller. The preceding test's labelled Demonstration case selected
 qualification instead; mode assertions now prevent that mistake. The actual

@@ -1,0 +1,169 @@
+{
+  "scope": "Partial actual playable one-process qualification and first four missions; six-mission campaign remains open",
+  "tick": 125454,
+  "canonical": {
+    "frame_owner_exit": false,
+    "frames": 125454,
+    "screen": "menu",
+    "mode": 0,
+    "glyphs": 31544,
+    "record_updates": 21750,
+    "scene_frames": 21739,
+    "terrain_polygons": 77150,
+    "model_calls": 144397,
+    "hud_frames": 21739,
+    "control_frames": 56751,
+    "scene_selected": true,
+    "stage": "C0FCB4",
+    "game_tick": 0,
+    "timer_pending": false,
+    "timer_yields": 51242,
+    "display_publications": 56751,
+    "display_yields": 56796,
+    "display_pending": false,
+    "displayed_page": 0,
+    "postflight_callbacks": 0,
+    "postflight_resets": 0,
+    "input_passes": 56745,
+    "input_events": 9084,
+    "input_queued": 0,
+    "update_iterations": 74011,
+    "replay_iterations": 0,
+    "replay_events": 0,
+    "host_replay_events": 9116,
+    "host_replay_pending": 0,
+    "replay_started": false,
+    "voice_ticks": 125454,
+    "voice_publications": 263450,
+    "voice_levels": [
+      [
+        358,
+        31
+      ],
+      [
+        358,
+        31
+      ],
+      [
+        124,
+        0
+      ],
+      [
+        300,
+        0
+      ]
+    ],
+    "sample_requests": 160463,
+    "sample_frames": 120435840,
+    "nonzero_sample_frames": 117887078,
+    "audio_device": false,
+    "frame_capture_complete": false,
+    "frame_before_tick": 0,
+    "frame_after_tick": 0,
+    "frame_saved_tick": 0,
+    "cpu_emulation": false,
+    "chipset_emulation": false
+  },
+  "saved_config_matches_driver": true,
+  "saved_config_sha256": "cbd663f5ff691e33530b6f39482673f69885e62dda3a65199a6f6298629f28a0",
+  "input_sha256_lf": "7e2a5dd3c7830c03d01e542a87e979d2f6de6efb6fc3ae95c1406194018705af",
+  "date": "2026-10-09",
+  "driver_scope": "One frontend earns qualification and four missions; remaining cruise interception fails",
+  "runtime_changed": false,
+  "physics_rules_changed": false,
+  "checkpoints": [
+    {
+      "checkpoint": true,
+      "mode": 0,
+      "tick": 9000,
+      "stage": "C0FCB4",
+      "saved_config_hex": "0000000000010000000000000000000000000000000000000000000000004e4557000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "checkpoint": true,
+      "mode": 9,
+      "tick": 25726,
+      "stage": "C10DAE",
+      "saved_config_hex": "0001000000020000000000630000000000000000000000000000000000004e4557000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "checkpoint": true,
+      "mode": 3,
+      "tick": 50865,
+      "stage": "C0FCB4",
+      "saved_config_hex": "0001000000020300000000a90000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000"
+    },
+    {
+      "checkpoint": true,
+      "mode": 4,
+      "tick": 75334,
+      "stage": "C0FCB4",
+      "saved_config_hex": "0001000100020400000001370000000000000000000101000000000000004e4557000000000000000000000000000000000000000000000200020012000000000000000100010000000000000000"
+    },
+    {
+      "checkpoint": true,
+      "mode": 5,
+      "tick": 103321,
+      "stage": "C0FCB4",
+      "saved_config_hex": "0001000200020500000001d90000000000000000000101010000000000004e4557000000000000000000000000000000000000000000000300030027000000020001000300020000000300000000"
+    },
+    {
+      "checkpoint": true,
+      "mode": 6,
+      "tick": 125454,
+      "stage": "C0FCB4",
+      "saved_config_hex": "0001000300020600000002250000000000000000000101010100000000004e4557000000000000000000000000000000000000000000000400040039000000020001000300020000000600000000"
+    }
+  ],
+  "missions": [
+    {
+      "mission": 3,
+      "airborne": true,
+      "objective": true,
+      "landed": true,
+      "gear_raised_in_flight": true,
+      "gear_lowered_for_landing": true,
+      "wire": false,
+      "menu": true,
+      "completions": 1
+    },
+    {
+      "mission": 4,
+      "airborne": true,
+      "objective": true,
+      "landed": true,
+      "gear_raised_in_flight": true,
+      "gear_lowered_for_landing": true,
+      "wire": true,
+      "menu": true,
+      "completions": 2
+    },
+    {
+      "mission": 5,
+      "airborne": true,
+      "objective": true,
+      "landed": true,
+      "gear_raised_in_flight": true,
+      "gear_lowered_for_landing": true,
+      "wire": true,
+      "menu": true,
+      "completions": 3
+    },
+    {
+      "mission": 6,
+      "airborne": true,
+      "objective": true,
+      "landed": true,
+      "gear_raised_in_flight": true,
+      "gear_lowered_for_landing": true,
+      "wire": true,
+      "menu": true,
+      "completions": 4
+    }
+  ],
+  "runner_sha256": "2c742d378b0ada91fddcc566f4e43e6bddc0df9186be796f331e9c87b08c3fb1",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "complete_campaign_accepted": false,
+  "independent_original_whole_flight_accepted": false,
+  "debug_prefix_replay_verified": false
+}

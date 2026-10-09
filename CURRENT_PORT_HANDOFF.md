@@ -1,5 +1,39 @@
 # Current playable port handoff
 
+Active completion investigation (2026-10-09, uncommitted): one frontend earns
+qualification and the first four missions with gear control; the cruise-missile
+interception route is now under investigation.
+The continuous driver and playable-replay checker are under `tools/native/`;
+no passing whole-campaign result is claimed. Visible demo presents all 10,910
+frames, p99 work 4.0922 ms, but a 543.2488 ms SDL input stall gives maximum
+544.8323 ms and fails the 20 ms gate. The visible suite has ended; keep its
+CSV/report until the stall investigation is resolved.
+Continuation: `analysis/native_continuous_campaign_investigation.md`.
+
+Latest user steering: gear up after takeoff, down before landing. The user
+manually changed gear in visible mission three; that old fixed-key route later
+crashes, so the visible suite ends without an accepted mission result. Generate
+gear-managed routes before further visible mission measurements. The campaign
+pilot now records ordinary G commands and requires observed gear-up flight and
+gear-down before touchdown. Qualification and the first four missions pass with
+this control. A preceding gear-down legacy run completed five missions but
+crashed in final combat. Ground kills cannot satisfy mode five's required
+airborne-expiry count. Radar interception and the result-camera input handoff
+now pass mode five and rescue, saved/menu ticks 103321 and 125454. The cruise
+interception missed with fuel available; the current attempt tightens its radar
+launch alignment: `build/native-flight/campaign-session-gear-cruise-alignment/`.
+No six-mission pass
+or complete playable replay is accepted yet. The complete-port goal stays active.
+
+Actual Release playable integration now passes the prefix through rescue in
+one `fa18_native` process: qualification plus four missions, all 78 saved bytes
+agree with the driver, final menu C0FCB4/mode zero at tick 125454, no crash resets
+or pending input. The compact proof is
+`analysis/figures/native_geared_campaign_prefix_checkpoint.json`. Debug and the
+six-mission pass remain open. Latest cruise diagnostics show the gun fires and
+consumes ammunition but does not hit before the original failure; the next
+work is interception, not fuel deduction or a blocked fire key.
+
 Latest mode-verified drawing-order audit (2026-10-09):
 
 Actual Demonstration entry now sorts all three lists, matching original saved
