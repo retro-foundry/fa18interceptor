@@ -70,6 +70,13 @@ void extend_parallelograms(gaddr *stream);
  * extend_parallelograms ($C20EC4). */
 void extend_parallelograms_scaled(gaddr *stream);
 
+/* C20FC4: block offset; points 6-9 are points 2-5 moved by p0-p1,
+ * point 10 is p5+(p2-p1), and point 11 adds p0-p1 to point 10.
+ * C20F78 first consumes a shift and derives points 12-13 from p2-p4,
+ * then performs the same six-point extension. */
+void extend_six_point_block(gaddr *stream);
+void extend_six_point_block_scaled(gaddr *stream);
+
 /* Colour, a vertex offset, a row count, then each row's column count: a
  * grid of segments. With q the block's third vertex, u and v its first two
  * less q: row r's segments run from q_r + c*u/2 to that plus v, q_r

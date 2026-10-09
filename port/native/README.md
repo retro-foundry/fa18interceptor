@@ -1,5 +1,12 @@
 # Native port runner
 
+Free Flight model crash fix (2026-10-09): valid command $90 at C3BA04
+now derives the original six-point block through C20F78; its shared $94
+entry is also connected. 184 complete command cases and 32 actual-model
+camera poses match original instructions. Release/Debug model, flight-start
+and preallocation checks pass; canonical Release is refreshed. Precise
+reported flight route is unsealed. See [crash evidence](../../analysis/native_free_flight_six_point_block_fix.md).
+
 Current whole-flight allocation/cockpit check (2026-10-09): Release/Debug
 preserve all qualification/mission-three traces, final RAM, counters and
 earned saves, with zero gameplay heap violations. Five bounded complete

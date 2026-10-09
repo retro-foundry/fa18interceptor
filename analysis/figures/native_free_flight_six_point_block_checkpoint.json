@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-09",
+  "reported_mode": "Free Flight",
+  "reported_pose_index": 2,
+  "reported_position": {
+    "x": 1077241.25,
+    "y": 264.469,
+    "z": 1146902.141
+  },
+  "model": "C3B9BE",
+  "stream": "C3BA04",
+  "record": "6000",
+  "command": "8090",
+  "original_table_slots": [
+    "C1FD78",
+    "C1FD7C"
+  ],
+  "original_routines": [
+    "C20F78-C21050",
+    "C20FC4-C21050"
+  ],
+  "original_routine_sha256": "f6fb81b02e904af203f2825f07beeb9a40543843d3ea1be689236d4d8ac6ae86",
+  "original_command_sha256": "35dfb2e77ced162d57a574ce8510ade3da6744436f8b61d525bde78277b3de15",
+  "command_words": [
+    "8090",
+    "0000",
+    "0002"
+  ],
+  "component_fixture": "build/native-flight/cockpit-radar-correct-return/source-body.23334.owner.dat.gz",
+  "component_fixture_ram_sha256": "9d04daf2286c6d3663892e50d1895f1279304a16e479467997accac5c58df4db",
+  "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+  "command_cases_per_checkpoint": 184,
+  "model_pose_cases_per_checkpoint": 32,
+  "required_original_model_command_calls_per_checkpoint": 16,
+  "original_comparison_failures": 0,
+  "connected_setup_checkpoints": [
+    4000,
+    5300,
+    6100
+  ],
+  "selected_tests": [
+    "fa18_native_models",
+    "fa18_native_flight_start",
+    "fa18_native_preallocation",
+    "fa18_native_preallocation_output",
+    "fa18_native_artifact_cleanup"
+  ],
+  "release_pass": true,
+  "debug_pass": true,
+  "reported_flown_route_reproduced": false,
+  "gameplay_allocations_added": 0,
+  "unsupported_command_diagnostic_retained": true,
+  "release_runner_sha256": "8967d946ae2ad677810ae310cb132c7f376db964cb9b0b9d937872db48c5cdbb",
+  "debug_runner_sha256": "4b8e65472487fd720f2f793d3b02c52a110164cf5c14558b495ce30ea9c5ad94",
+  "oracle_sha256": "7e790e36d22cf9a76d06f066bc5bd006bb4cfa71c3e57d0429a9052fb0cfb740",
+  "whole_flight": {
+    "enlist_frames": 9000,
+    "qualification_mission_three_menu_frames": 42706,
+    "source_rows_preserved": 27110,
+    "native_rows_preserved": 16062,
+    "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+    "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+    "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+    "release_debug_traces_RAM_counters_saved_pilot_memory_equal": true,
+    "preceding_filtered_build_traces_RAM_counters_saved_pilot_memory_preserved": true,
+    "memory": {
+      "enlist": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      },
+      "flight": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    },
+    "strict_pages_matching": 287,
+    "observations": 4967
+  },
+  "scope": "Original model command and shared tail ported into the connected native renderer. Original command/model component checks and current ordinary gameplay preservation pass. Exact user flight route is unsealed. Broader drawing, original audio onset and visible performance remain open; named-state cleanup deferred."
+}

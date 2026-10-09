@@ -313,6 +313,8 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
         return 0;
     case 0x088: extend_parallelograms_scaled(stream); return 0;
     case 0x08c: extend_parallelograms(stream); return 0;
+    case 0x090: extend_six_point_block_scaled(stream); return 0; /* C20F78. */
+    case 0x094: extend_six_point_block(stream); return 0; /* C20FC4. */
     case 0x098: derive_workspace_extensions(); return 0;
     case 0x09c: return draw_square_faces(stream);
     case 0x0a0: return draw_split_square(stream);

@@ -89,6 +89,8 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #define draw_mixed_face host_draw_mixed_face
 #define extend_parallelograms host_extend_parallelograms
 #define extend_parallelograms_scaled host_extend_parallelograms_scaled
+#define extend_six_point_block host_extend_six_point_block
+#define extend_six_point_block_scaled host_extend_six_point_block_scaled
 #define draw_segment_grid host_draw_segment_grid
 #define draw_segment_lattice host_draw_segment_lattice
 #define offset_block_copies host_offset_block_copies
@@ -137,6 +139,8 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #undef draw_mixed_face
 #undef extend_parallelograms
 #undef extend_parallelograms_scaled
+#undef extend_six_point_block
+#undef extend_six_point_block_scaled
 #undef draw_segment_grid
 #undef draw_segment_lattice
 #undef offset_block_copies
@@ -203,6 +207,7 @@ static int16_t point_x,point_y;
 static int16_t projection_x,projection_y,projection_depth;
 static unsigned strip_groups;
 static unsigned interpolated_commands;
+static unsigned six_point_commands;
 static int original(uint32_t pc) {
     const int trace_ground=getenv("FA18_MODEL_GROUND_TRACE")!=NULL && (pc==0xc096cau || pc==0xc096bcu);
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
@@ -216,6 +221,7 @@ static int original(uint32_t pc) {
     if(pc==0xc1fe68u) REG_A[2]=0x4600;
     if(pc==0xc0cfb6u) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
     if(pc==0xc1ff0au || pc==0xc207feu || pc==0xc206e4u) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
+    if(pc==0xc20f78u || pc==0xc20fc4u) REG_A[2]=0x4600;
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
     if(pc==0xc2f5f4u) {REG_D[0]=(uint32_t)(int32_t)point_x;REG_D[1]=(uint32_t)(int32_t)point_y;}
     if(pc==0xc2ec90u) {REG_D[0]=(uint32_t)(int32_t)projection_x;REG_D[1]=(uint32_t)(int32_t)projection_y;REG_D[2]=(uint32_t)(int32_t)projection_depth;}
@@ -231,6 +237,7 @@ static int original(uint32_t pc) {
         if(REG_PC==0xc70000u && REG_A[7]==0xc7ff04u) { wait_blitter(); return 1; }
         if(REG_PC==0xc1f598u) ++strip_groups; /* Positive strip's initial point. */
         if(REG_PC==0xc206e4u) ++interpolated_commands;
+        if(REG_PC==0xc20f78u || REG_PC==0xc20fc4u) ++six_point_commands;
         int cycles_before=GET_CYCLES();
         opcode=rd_u16(REG_PC); REG_PPC=REG_PC; REG_IR=opcode; REG_PC+=2;
         m68ki_instruction_jump_table[opcode](); USE_CYCLES(CYC_INSTRUCTION[opcode]);
@@ -770,6 +777,68 @@ static int interpolated_segment_cases(void) {
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
     puts("72 complete C206E4/4018 interpolation, clipping, rounding and overflow cases match non-stack RAM/display and stream/result");return 1;
 }
+static int six_point_block_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    const int16_t shifts[]={-32768,-129,-65,-64,-63,-32,-17,-16,-15,-2,-1,0,1,2,15,16,17,32,63,64,65,129,32767};
+    const int16_t offsets[]={-84,0,6,240};
+    const int16_t values[]={-32768,-32767,-16385,-1,0,1,16384,32767};
+    unsigned cases=0;
+    /* Test the connected dispatcher against each complete original routine,
+     * including low-word overflow, ASR sign extension and 6-bit shift counts. */
+    for(unsigned scaled=0;scaled<2;++scaled) for(unsigned i=0;i<23;++i) for(unsigned j=0;j<4;++j) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        gaddr block=WORKSPACES+(gaddr)(int32_t)offsets[j];
+        wr_s16(0x4600,offsets[j]);wr_s16(0x4602,shifts[i]);
+        for(unsigned p=0;p<14;++p) for(unsigned axis=0;axis<3;++axis)
+            wr_s16(block+6*p+2*axis,values[(i+j+3*p+axis)&7]);
+        memcpy(before,fa18_machine,sizeof *before);
+        gaddr stream=0x4600;
+        int result=command(scaled?0x8090:0x8094,&stream,0x4200);
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(scaled?0xc20f78u:0xc20fc4u) || REG_A[2]!=stream || (int16_t)REG_D[0]!=result) {
+            fprintf(stderr,"six-point block case %u stream/result differs\n",cases);return 0;
+        }
+        for(unsigned k=0;k<0xff000;++k) {
+            uint8_t actual=k<0x80000?fa18_machine->chip[k]:fa18_machine->slow[k-0x80000];
+            if(actual!=expected[k]) {
+                fprintf(stderr,"six-point block case %u RAM %06X source %02X native %02X\n",
+                    cases,k<0x80000?k:k-0x80000+0xc00000,actual,expected[k]);return 0;
+            }
+        }
+        ++cases;
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    printf("%u complete C20F78/C20FC4 block cases match all non-stack RAM/display and stream/result\n",cases);return 1;
+}
+static int six_point_model_cases(void) {
+    FA18Machine *saved=malloc(sizeof *saved);
+    if(!saved) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    const unsigned commands_before=six_point_commands,failures_before=failures;
+    const ScenePlacementCall call={.routine=0xc1ed48,.parameters=0xc3b9be};
+    /* Actual disk model from the user's crash; camera poses are isolated
+     * oracle inputs and never injected into the playable runner. */
+    for(unsigned test=0;test<32;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        wr_u32(CONTROL_STREAM,call.parameters);wr_u16(SCRIPT_RECORD,0x6000);
+        wr_u16(BOUND_SHIFT,0);wr_u16(MAGNITUDE,test&16?64:20);wr_u16(ZOOM_SCALE,0x80);wr_u8(ZOOM_FLAGS,0x80);
+        wr_u8(CELL_CHECKS,1);wr_u8(HEADER_BYTE,0);wr_u8(ATTITUDE_NEAR,1);
+        for(unsigned k=0;k<3;++k) {
+            const int32_t position=k==0?(test&1?200:-200)*256:k==1?(test&2?40:-120)*256:(test&4?400:-400)*256;
+            wr_s32(TARGET_POINT+4*k,position);wr_u32(SHADOW_OFFSET_X+4*k,0);
+            for(unsigned j=0;j<3;++j) wr_s16(VIEW_ANGLE_MATRIX+6*k+2*j,(int16_t)(k==j?(test&8?-256:256):0));
+        }
+        compare_descriptor(NULL,&call);
+    }
+    memcpy(fa18_machine,saved,sizeof *saved);free(saved);
+    printf("32 complete C3B9BE scenery poses compared; %u original six-point commands, %u failures\n",
+        six_point_commands-commands_before,failures-failures_before);
+    return six_point_commands>commands_before && failures==failures_before;
+}
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
@@ -779,13 +848,14 @@ int main(int argc,char **argv) {
     const int points_only=argc==3 && !strcmp(argv[2],"--points-only");
     const int projection_only=argc==3 && !strcmp(argv[2],"--projection-only");
     const int interpolation_only=argc==3 && !strcmp(argv[2],"--interpolation-only");
+    const int six_point_only=argc==3 && !strcmp(argv[2],"--six-point-only");
     const int require_aircraft=argc==3 && !strcmp(argv[2],"--require-aircraft");
     const int aircraft_record=argc==4 && !strcmp(argv[2],"--aircraft-record");
     const int placements_only=argc==3 && !strcmp(argv[2],"--placements-only");
     const int ground_only=argc==3 && !strcmp(argv[2],"--ground-only");
     const int setup_bounds=argc==3 && !strcmp(argv[2],"--setup-bounds");
     const int require_bounds=argc==3 && !strcmp(argv[2],"--require-setup-bounds");
-    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || interpolation_only || require_aircraft || aircraft_record || placements_only || ground_only || setup_bounds || require_bounds)?file_bytes(argv[1],&nd):NULL;
+    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || interpolation_only || six_point_only || require_aircraft || aircraft_record || placements_only || ground_only || setup_bounds || require_bounds)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
@@ -853,6 +923,8 @@ int main(int argc,char **argv) {
     if(points_only) return !point_destinations();
     if(projection_only) return !projection_results();
     if(interpolation_only) return !(interpolated_segment_cases() && interpolated_model_cases());
+    if(six_point_only) return !(six_point_block_cases() && six_point_model_cases());
+    if(!six_point_block_cases() || !six_point_model_cases()) return 1;
     if(!interpolated_segment_cases() || !interpolated_model_cases()) return 1;
     if(!projection_results()) return 1;
     if(!point_destinations()) return 1;

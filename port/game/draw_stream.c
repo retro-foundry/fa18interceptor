@@ -318,11 +318,7 @@ static void parallelograms_at(gaddr v) {
 
 void extend_parallelograms(gaddr *stream) { parallelograms_at(vertex_at(next_word(stream))); }
 
-void extend_parallelograms_scaled(gaddr *stream) {
-    gaddr v = vertex_at(next_word(stream));
-    int16_t shift = next_word(stream);
-    Vertex q1 = get(v + 6), q2 = get(v + 12), q3 = get(v + 18);
-    Vertex a = minus(q1, q2), b = minus(q2, q3), p8;
+static Vertex scaled_edge(Vertex b, int16_t shift) {
     int s = shift < 0 ? (int16_t)-shift : shift;
     s &= 63;
     if (shift >= 0) {
@@ -334,10 +330,41 @@ void extend_parallelograms_scaled(gaddr *stream) {
         b.y = (int16_t)(s >= 16 ? (b.y < 0 ? -1 : 0) : b.y >> s);
         b.z = (int16_t)(s >= 16 ? (b.z < 0 ? -1 : 0) : b.z >> s);
     }
-    p8 = minus(q3, b);
+    return b;
+}
+
+void extend_parallelograms_scaled(gaddr *stream) {
+    gaddr v = vertex_at(next_word(stream));
+    int16_t shift = next_word(stream);
+    Vertex q1 = get(v + 6), q2 = get(v + 12), q3 = get(v + 18);
+    Vertex a = minus(q1, q2), b = scaled_edge(minus(q2, q3), shift);
+    Vertex p8 = minus(q3, b);
     put(v + 48, p8);
     put(v + 54, minus(p8, a));
     parallelograms_at(v);
+}
+
+static void six_point_block_at(gaddr v) {
+    Vertex p0 = get(v), p1 = get(v + 6), p2 = get(v + 12), p5 = get(v + 30);
+    Vertex edge = minus(p0, p1);
+    for(unsigned i = 0; i < 4; ++i) put(v + 36 + 6*i, plus(get(v + 12 + 6*i), edge));
+    Vertex p10 = plus(p5, minus(p2, p1));
+    put(v + 60, p10);
+    put(v + 66, plus(p10, edge));
+}
+
+void extend_six_point_block(gaddr *stream) {
+    six_point_block_at(vertex_at(next_word(stream))); /* C20FC4-C21050. */
+}
+
+void extend_six_point_block_scaled(gaddr *stream) {
+    gaddr v = vertex_at(next_word(stream));
+    int16_t shift = next_word(stream);
+    Vertex p2 = get(v + 12), p3 = get(v + 18), p4 = get(v + 24);
+    Vertex p12 = minus(p4, scaled_edge(minus(p3, p4), shift));
+    put(v + 72, p12);
+    put(v + 78, minus(p12, minus(p2, p3)));
+    six_point_block_at(v); /* C20F78-C20FC2 continues at C20FCC. */
 }
 
 /* ---- grids of segments ---------------------------------------------------- */
