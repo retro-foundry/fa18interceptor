@@ -60,7 +60,7 @@ add_library(fa18_native_runtime OBJECT replay.c frame_capture.c flight_trace.c a
 target_sources(fa18_native_runtime PRIVATE host_input.c ../amiga/host_keys.c)
 target_sources(fa18_native_runtime PRIVATE ../amiga/sdl_memory.c)
 target_sources(fa18_native_runtime PRIVATE ../amiga/runtime_memory.c)
-add_executable(fa18_native main.c)
+add_executable(fa18_native main.c frame_delta.c)
 # audio.c:filter uses ordered float operations, including its double denormal
 # offset. Avoid fused contraction or fast-math rewriting in the native mixer.
 if(MSVC)

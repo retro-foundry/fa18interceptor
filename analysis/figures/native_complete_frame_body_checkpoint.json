@@ -1,0 +1,193 @@
+{
+  "date": "2026-10-09",
+  "native_game_behavior_changed": false,
+  "runner_diagnostics_changed": true,
+  "canonical_release_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+  "files_sha256": {
+    "port/native/main.c": "e60d592a0bb0e3926d3d4d0da9d0abb3f2f7087a74d3292301747a54873ddcb2",
+    "port/native/frame_delta.c": "108466e25a6064a4042510b8dce5cc0630a5cccd350ab077931431017557698d",
+    "port/native/frame_delta.h": "aa689568d58ef8989b1b52bf0d55619444e2ab5f269dfc50a71674cb83b4dde1",
+    "port/native/CMakeLists.txt": "a24b5c726125083be965d286b24f46af178ee519736cf98bc3aca1df106179e9",
+    "tools/native/frame_delta.py": "9b5086f65d1d5a975841fbabe2e2f9be092b47e9081f31860301a0f6cea26902",
+    "tools/native/check_mission_frame_delta.py": "70b41b27b6e3539220ee30f463c80d9f22345cd2e4086e2686466d590fb088be",
+    "tools/native/test_frame_delta.py": "6fb9ba1df40bba9b06fc1885d29a7de08a229d3aaaa42b7f27ac167e3cac7505",
+    "tools/native/native_frame_body_oracle.c": "8d9195e50e78986ddd7502c8b900b55b3f4350848c6775feb64575573c7dc7cf"
+  },
+  "evidence": {
+    "complete_release": {
+      "first": 22142,
+      "last": 27108,
+      "native_first": 22142,
+      "native_last": 27106,
+      "bodies": 4965,
+      "runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+      "reference_report_sha256": "38694ff3358683187beee380dfccf5b367cc987aff5d2fa82a36efe3514cd48c",
+      "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+      "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+      "runtime_counters_preserved": true,
+      "final_ram_preserved": true,
+      "earned_save_preserved": true,
+      "original_body_failures": [],
+      "original_bodies_matching": true,
+      "stream_bytes": 31837416,
+      "stream_sha256": "8a82e347cf74881ebff102dda634104e0a7fe2a6cb898f4af9fe368cf21fea8e",
+      "compressed_bytes": 5605004,
+      "conventional_capture_bytes": 15618539520,
+      "snapshots": 14895,
+      "old_window_ram_and_metadata_identical": false,
+      "scope": "Complete actual native input/begin/end RAM with exact old input trace and complete final flight preservation. Every decoded native body executes original instructions under the existing explicit frame-body exclusions and supplied original API timer contract. Independent source-versus-native cache histories and other full flights remain separate.",
+      "report_path": "build/native-flight/frame-delta-complete-flight/Release/report.json",
+      "report_sha256": "45ff95379157e74c54b4a1dcca07f71f09632ef2981c30a4242a8cf4332f4baa",
+      "identity_count": 4965,
+      "identities_sha256": "864293eb48417a51b9512fe79a70e65a4d59ea0dd88b42f6d95a966957a72c28",
+      "compressed_sha256": "4fbadbec3685473ac483fc570696948d36528b3c10cdc59b0c0b21b93134cc61",
+      "memory": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    },
+    "window_release": {
+      "first": 22302,
+      "last": 22341,
+      "native_first": 22302,
+      "native_last": 22341,
+      "bodies": 40,
+      "runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+      "reference_report_sha256": "38694ff3358683187beee380dfccf5b367cc987aff5d2fa82a36efe3514cd48c",
+      "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+      "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+      "runtime_counters_preserved": true,
+      "final_ram_preserved": true,
+      "earned_save_preserved": true,
+      "original_body_failures": [],
+      "original_bodies_matching": true,
+      "stream_bytes": 1147616,
+      "stream_sha256": "1f704926a4054d11f461e00856e6c6a400d5344b73f9db62ec7aca6f98301b87",
+      "compressed_bytes": 448074,
+      "conventional_capture_bytes": 125829120,
+      "snapshots": 120,
+      "old_window_ram_and_metadata_identical": true,
+      "scope": "Complete actual native input/begin/end RAM with exact old input trace and complete final flight preservation. Every decoded native body executes original instructions under the existing explicit frame-body exclusions and supplied original API timer contract. Independent source-versus-native cache histories and other full flights remain separate.",
+      "report_path": "build/native-flight/frame-delta-first-window/Release/report.json",
+      "report_sha256": "fc33c3da16953809b84c3ec16cc748cc3c5f98e7d900744933d234b99e0ef83b",
+      "identity_count": 40,
+      "identities_sha256": "86accc2e4c1f1c9959c85c3546b1a5b50903575fbe1809b5949beb10a2807532",
+      "compressed_sha256": "a0355bfb0fc4b4b52403f884af18205a355454bd446b83af61b8f70d0be9d1cd",
+      "memory": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    },
+    "window_debug": {
+      "first": 22302,
+      "last": 22341,
+      "native_first": 22302,
+      "native_last": 22341,
+      "bodies": 40,
+      "runner_sha256": "c0ab882c7bf5d44a3c62a821eb6f2eaa0e176f7eb229f6c67e726e76babc8d07",
+      "reference_report_sha256": "e262d15b3c5b175326e9991c40f68b9b397073f5adba0c3a93667151119d9688",
+      "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+      "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+      "runtime_counters_preserved": true,
+      "final_ram_preserved": true,
+      "earned_save_preserved": true,
+      "original_body_failures": [],
+      "original_bodies_matching": true,
+      "stream_bytes": 1147616,
+      "stream_sha256": "1f704926a4054d11f461e00856e6c6a400d5344b73f9db62ec7aca6f98301b87",
+      "compressed_bytes": 448074,
+      "conventional_capture_bytes": 125829120,
+      "snapshots": 120,
+      "old_window_ram_and_metadata_identical": true,
+      "scope": "Complete actual native input/begin/end RAM with exact old input trace and complete final flight preservation. Every decoded native body executes original instructions under the existing explicit frame-body exclusions and supplied original API timer contract. Independent source-versus-native cache histories and other full flights remain separate.",
+      "report_path": "build/native-flight/frame-delta-first-window/Debug/report.json",
+      "report_sha256": "a6418dc9b60afb68c0a1d5f05b950fae3cc4fc9054225014a27f4819691a805c",
+      "identity_count": 40,
+      "identities_sha256": "86accc2e4c1f1c9959c85c3546b1a5b50903575fbe1809b5949beb10a2807532",
+      "compressed_sha256": "a0355bfb0fc4b4b52403f884af18205a355454bd446b83af61b8f70d0be9d1cd",
+      "memory": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    }
+  },
+  "live_negative_controls": [
+    {
+      "name": "invalid_range",
+      "returncode": 1,
+      "reason": "Invalid frame delta range (FIRST[+COUNT])",
+      "no_capture_created": true
+    },
+    {
+      "name": "missing_input",
+      "returncode": 1,
+      "reason": "Frame delta requires --input and a separate capture budget from flight/RAM traces",
+      "no_capture_created": true
+    },
+    {
+      "name": "mixed_capture",
+      "returncode": 1,
+      "reason": "Frame delta requires --input and a separate capture budget from flight/RAM traces",
+      "no_capture_created": true
+    },
+    {
+      "name": "outside_input",
+      "returncode": 1,
+      "reason": "Frame delta range exceeds the recorded iteration limit",
+      "no_capture_created": true
+    },
+    {
+      "name": "actual_flight_budget_exhaustion",
+      "returncode": 1,
+      "reason": "Frame delta exceeds capture budget; use a shorter range or explicit budget",
+      "bytes": 1048532,
+      "budget": 1048576,
+      "memory": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    }
+  ],
+  "live_negative_report_sha256": "f01907cee309dc8c228e51dd4842dfa06dfdd972fc9825860273de06a1556f43",
+  "decoder_tests": {
+    "passed": 6
+  },
+  "affected_ctests": {
+    "configurations": [
+      "Release",
+      "Debug"
+    ],
+    "tests": [
+      "fa18_native_preallocation",
+      "fa18_native_preallocation_output",
+      "fa18_native_flight_start",
+      "fa18_native_artifact_cleanup"
+    ],
+    "all_passed": true
+  },
+  "scope": "All 4965 unique native Mission 3 bodies execute original instructions from actual native inputs under the unchanged explicit scratch/audio/busy/ABI exclusions. Independent original/native accumulated drawing histories, other full flights, audio timing and visible performance remain open."
+}

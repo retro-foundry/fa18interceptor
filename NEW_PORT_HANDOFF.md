@@ -1,5 +1,14 @@
 # Native port handoff — 2026-10-09
 
+Complete mission-three bodies (2026-10-09): all 4,965 unique native bodies
+match original instructions with zero gameplay/display differences under
+the existing frame-body contract. Compact complete-RAM capture retains
+14,895 snapshots in 5.61 MB gzip, preserving the whole 42,706-frame run,
+final RAM and earned pilot with zero gameplay heap violations. Release/Debug
+reproduce the previous complete 40-body window; affected CTests pass.
+Independent drawing history, audio timing and visible performance remain
+open. See [frame-body evidence](analysis/native_complete_frame_body_milestone.md).
+
 Combined cockpit history (2026-10-09): all eight complete planes across the
 first 40-observation drawing episode follow actual radar, bitmap and message
 writes (2,560,000 XOR bytes). The first 38 differing plane-0 observations are

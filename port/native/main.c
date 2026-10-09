@@ -6,6 +6,7 @@
 #include "replay.h"
 #include "frame_capture.h"
 #include "flight_trace.h"
+#include "frame_delta.h"
 #include "audio_trace.h"
 #include "host_input.h"
 #include "../amiga/pcm_output.h"
@@ -20,6 +21,10 @@ typedef struct {
     NativeFrameCapture *capture;
     NativeReplay *replay;
     FA18FlightTrace *trace;
+    FA18FrameDelta *delta;
+    unsigned delta_first,delta_count;
+    unsigned delta_completed,delta_phase;
+    uint16_t delta_saved_tick;
 } FrameDiagnostics;
 static const uint8_t *trace_bytes(void *context,uint32_t address,size_t size) {
     NativeStorage *storage=context;
@@ -31,9 +36,31 @@ static const uint8_t *trace_bytes(void *context,uint32_t address,size_t size) {
 static void observe_frame(NativeFrontend *game,enum NativeFrameBoundary boundary,
                           uint16_t saved_tick,void *context) {
     FrameDiagnostics *diagnostics=context;
+    const unsigned iteration=diagnostics->replay?diagnostics->replay->iteration:game->update_iterations;
+    if(diagnostics->delta && iteration>=diagnostics->delta_first &&
+       iteration-diagnostics->delta_first<diagnostics->delta_count &&
+       (boundary==NATIVE_FRAME_INPUT_BEGIN || boundary==NATIVE_FRAME_BODY_BEGIN ||
+        boundary==NATIVE_FRAME_BODY_END || boundary==NATIVE_FRAME_OWNER_EXIT))
+    {
+        const int expected=iteration==diagnostics->delta_first+diagnostics->delta_completed &&
+            ((diagnostics->delta_phase==0 && boundary==NATIVE_FRAME_INPUT_BEGIN) ||
+             (diagnostics->delta_phase==1 && boundary==NATIVE_FRAME_BODY_BEGIN) ||
+             (diagnostics->delta_phase==2 && (boundary==NATIVE_FRAME_BODY_END || boundary==NATIVE_FRAME_OWNER_EXIT)));
+        if(!expected) {
+            fputs("Frame delta requires consecutive complete flight bodies\n",stderr);diagnostics->delta->failed=1;
+        } else {
+            if(boundary==NATIVE_FRAME_BODY_BEGIN) diagnostics->delta_saved_tick=saved_tick;
+            const uint16_t stamp=diagnostics->delta_phase==2?diagnostics->delta_saved_tick:saved_tick;
+            if(fa18_frame_delta_write(diagnostics->delta,iteration,game->ticks,(unsigned)boundary,
+                                     stamp,trace_bytes,&game->storage)) {
+                if(++diagnostics->delta_phase==3) {
+                    diagnostics->delta_phase=0;++diagnostics->delta_completed;
+                }
+            }
+        }
+    }
     if(diagnostics->capture) native_frame_capture(game,boundary,saved_tick,diagnostics->capture);
     if(diagnostics->trace && !diagnostics->trace->failed && boundary==NATIVE_FRAME_INPUT_BEGIN) {
-        const unsigned iteration=diagnostics->replay?diagnostics->replay->iteration:game->update_iterations;
         /* frontend.c PLANE_BYTES/display.c own the host's 320x200 bitmap;
          * the native runtime does not allocate an Amiga ViewPort structure. */
         if(iteration) fa18_flight_trace_write(diagnostics->trace,iteration,game->ticks,
@@ -64,12 +91,13 @@ int main(int argc,char **argv) {
     SDL_RendererInfo renderer_info={0};uint64_t previous_frame_start=0;
     NativeFrameCapture capture={0};capture.replay=&loop;capture.count=1;
     const char *flight_trace=NULL;FA18FlightTrace trace={0};FrameDiagnostics diagnostics={0};
+    const char *delta_path=NULL;FA18FrameDelta *delta=NULL;
     const char *audio_trace_path=NULL;NativeAudioTrace audio_trace={0};
     unsigned capture_budget_mib=512;
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--audio-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--frame-delta FIRST[+COUNT] PATH] [--audio-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -83,6 +111,14 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--memory-report")) memory_report=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--flight-trace")) flight_trace=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--audio-trace")) audio_trace_path=argv[++i];
+        else if(i+2<argc && !strcmp(argv[i],"--frame-delta")) {
+            char *end;unsigned long n=strtoul(argv[++i],&end,10),count=1;
+            if(*end=='+') count=strtoul(end+1,&end,10);
+            if(*end || !n || !count || n>10000000 || count>10000000-n+1) {
+                fputs("Invalid frame delta range (FIRST[+COUNT])\n",stderr);goto done;
+            }
+            diagnostics.delta_first=(unsigned)n;diagnostics.delta_count=(unsigned)count;delta_path=argv[++i];
+        }
         else if(!strcmp(argv[i],"--hidden")) hidden=1;
         else if(!strcmp(argv[i],"--recorded-input-only")) recorded_input_only=1;
         else if(!strcmp(argv[i],"--frame-capture-entry-only")) capture.entry_only=1;
@@ -108,7 +144,10 @@ int main(int argc,char **argv) {
     if(recorded_input_only && !input && !replay) {fputs("Recorded-input-only diagnostics require --input or --replay\n",stderr);goto done;}
     if(iterations && !input) { fputs("Iteration limit requires --input\n",stderr);goto done; }
     if(capture.prefix && !input) {fputs("Frame capture requires recorded --input\n",stderr);goto done;}
-    if(audio_trace_path && (flight_trace || capture.prefix)) {
+    if(delta_path && (!input || flight_trace || capture.prefix)) {
+        fputs("Frame delta requires --input and a separate capture budget from flight/RAM traces\n",stderr);goto done;
+    }
+    if(audio_trace_path && (flight_trace || capture.prefix || delta_path)) {
         fputs("Audio trace uses its own capture budget; run separately from flight/RAM captures\n",stderr);goto done;
     }
     if(capture.entry_only && !capture.prefix) {fputs("Entry-only capture requires --frame-capture\n",stderr);goto done;}
@@ -118,6 +157,9 @@ int main(int argc,char **argv) {
     if(input && !native_replay_load(&loop,input,error,sizeof error)) { fputs(error,stderr);goto done; }
     if(input && !iterations) iterations=loop.end;
     if(input && iterations>loop.end) { fputs("Iteration limit exceeds recorded end\n",stderr);goto done; }
+    if(delta_path && (diagnostics.delta_first>iterations || diagnostics.delta_count>iterations-diagnostics.delta_first+1)) {
+        fputs("Frame delta range exceeds the recorded iteration limit\n",stderr);goto done;
+    }
     if(replay) {
         FILE *file=fopen(replay,"r"); char line[128];
         if(!file) { fprintf(stderr,"Cannot open replay: %s\n",replay); goto done; }
@@ -159,9 +201,14 @@ int main(int argc,char **argv) {
         game->audio.observe=native_audio_trace_event;game->audio.observe_context=&audio_trace;
     }
     const size_t reserved_capture=capture.prefix?(size_t)capture.count*(capture.entry_only?1u:3u)*1024*1024:0;
+    if(delta_path) {
+        delta=calloc(1,sizeof *delta);
+        if(!delta || !fa18_frame_delta_open(delta,delta_path,(size_t)capture_budget_mib*1024*1024)) goto done;
+        diagnostics.delta=delta;
+    }
     if(flight_trace && !fa18_flight_trace_open(&trace,flight_trace,
         (size_t)capture_budget_mib*1024*1024-reserved_capture)) goto done;
-    if(capture.prefix || flight_trace) {
+    if(capture.prefix || flight_trace || delta_path) {
         diagnostics.capture=capture.prefix?&capture:NULL;diagnostics.replay=input?&loop:NULL;
         diagnostics.trace=flight_trace?&trace:NULL;
         game->observe_frame=observe_frame;game->frame_context=&diagnostics;
@@ -213,6 +260,7 @@ int main(int argc,char **argv) {
         native_frontend_tick(game);
         if(amiga_runtime_memory_violations()) goto memory_error;
         if(trace.failed) goto done;
+        if(delta && delta->failed) goto done;
         if(timing) times[2]=SDL_GetPerformanceCounter();
         native_audio_render(&game->audio,samples,960,48000);
         if(audio_trace.failed || (audio_trace_path && !native_audio_trace_boundary(&audio_trace,game,loop.iteration))) goto done;
@@ -263,6 +311,10 @@ int main(int argc,char **argv) {
                 capture.captured,capture.count,
                 capture.begun?" before the run ended":" on a connected flight frame");goto done;
     }
+    if(delta_path && (diagnostics.delta_completed!=diagnostics.delta_count || diagnostics.delta_phase)) {
+        fprintf(stderr,"Frame delta did not capture every requested body (%u/%u)\n",
+                diagnostics.delta_completed,diagnostics.delta_count);goto done;
+    }
     result=0; goto done;
 timing_error:
     fprintf(stderr,"Cannot write native frame timing report: %s\n",frame_times);
@@ -277,6 +329,8 @@ done:
     if(amiga_runtime_memory_violations()) result=1;
     free(host_events);
     if(!fa18_flight_trace_close(&trace)) result=1;
+    if(!fa18_frame_delta_close(delta)) result=1;
+    free(delta);
     if(!native_audio_trace_close(&audio_trace)) result=1;
     if(timing && fclose(timing)) {fprintf(stderr,"Cannot finish native frame timing report: %s\n",frame_times);result=1;}
     if(!amiga_pcm_close(&audio_output)) {fputs("Cannot finish native WAV capture\n",stderr);result=1;}
