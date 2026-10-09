@@ -1,0 +1,405 @@
+{
+  "runner_sha256": "0c282be9de93f6a20b9d09ea4630858518a0c50f094e9001bdb50d51154ccda9",
+  "baseline_sha256": "1684a3fcb297249f16880eb082403094a6a83f25784d6ab4890cf823fad0bfd2",
+  "scope": "Intentional original-derived interpolation change; unchanged native RAM/pixels/saves/non-PCM counters; zero gameplay heap violations",
+  "cases": {
+    "intro": {
+      "stats": {
+        "frame_owner_exit": false,
+        "frames": 3100,
+        "screen": "mode-intro",
+        "mode": 127,
+        "glyphs": 3260,
+        "record_updates": 1,
+        "scene_frames": 0,
+        "terrain_polygons": 0,
+        "model_calls": 0,
+        "hud_frames": 0,
+        "control_frames": 98,
+        "scene_selected": false,
+        "stage": "C0FECE",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 0,
+        "display_publications": 97,
+        "display_yields": 100,
+        "display_pending": true,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 97,
+        "input_events": 1,
+        "input_queued": 0,
+        "update_iterations": 1276,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 4,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 3100,
+        "voice_publications": 6430,
+        "voice_levels": [
+          [
+            358,
+            6
+          ],
+          [
+            358,
+            6
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 1902,
+        "sample_frames": 2976000,
+        "nonzero_sample_frames": 2788351,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "wav_sha256": "f64b15a6100d31ca024a2672163c96e8f00bffef43321d8ff5532dc74628256f",
+      "data_sha256": "f09f830b58916668c20636c4d7a782aef74c4621478262e0a2c0ef139b456899",
+      "ppm_sha256": "4db323fe48982af510b6589e020fe40f3c0099ed02b6827ed5a9f7da7e648fe8",
+      "save_sha256": null,
+      "memory": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    },
+    "free-flight": {
+      "stats": {
+        "frame_owner_exit": false,
+        "frames": 6500,
+        "screen": "scene-setup",
+        "mode": 1,
+        "glyphs": 4428,
+        "record_updates": 529,
+        "scene_frames": 527,
+        "terrain_polygons": 9060,
+        "model_calls": 8597,
+        "hud_frames": 527,
+        "control_frames": 2299,
+        "scene_selected": true,
+        "stage": "C10DAE",
+        "game_tick": 181,
+        "timer_pending": false,
+        "timer_yields": 1194,
+        "display_publications": 2298,
+        "display_yields": 2306,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 2298,
+        "input_events": 7,
+        "input_queued": 0,
+        "update_iterations": 3477,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 10,
+        "host_replay_pending": 0,
+        "replay_started": false,
+        "voice_ticks": 6500,
+        "voice_publications": 13658,
+        "voice_levels": [
+          [
+            764,
+            40
+          ],
+          [
+            766,
+            40
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 5387,
+        "sample_frames": 6240000,
+        "nonzero_sample_frames": 5962396,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "wav_sha256": "a892c811b7ac191fdf67810828ad4f1062d8c65abebda1e0a04a9f0988422b3b",
+      "data_sha256": "b238754b0a82d1cf503c18a61a95b7970b1fb4553b6e1f406390b9942224b38b",
+      "ppm_sha256": "ba7825bba0b480098f39c1cfed0c9526ef90af09bb0bbddafe28974bdec71bf0",
+      "save_sha256": null,
+      "memory": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    },
+    "final-combat": {
+      "stats": {
+        "frame_owner_exit": false,
+        "frames": 24200,
+        "screen": "scene-setup",
+        "mode": 8,
+        "glyphs": 8544,
+        "record_updates": 4224,
+        "scene_frames": 4222,
+        "terrain_polygons": 24956,
+        "model_calls": 18234,
+        "hud_frames": 4222,
+        "control_frames": 9727,
+        "scene_selected": true,
+        "stage": "C10DAE",
+        "game_tick": 4067,
+        "timer_pending": false,
+        "timer_yields": 9966,
+        "display_publications": 9726,
+        "display_yields": 9734,
+        "display_pending": true,
+        "displayed_page": 1,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 9726,
+        "input_events": 6004,
+        "input_queued": 0,
+        "update_iterations": 12405,
+        "replay_iterations": 0,
+        "replay_events": 0,
+        "host_replay_events": 6009,
+        "host_replay_pending": 576,
+        "replay_started": false,
+        "voice_ticks": 24200,
+        "voice_publications": 54366,
+        "voice_levels": [
+          [
+            594,
+            54
+          ],
+          [
+            596,
+            54
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            124,
+            0
+          ]
+        ],
+        "sample_requests": 51561,
+        "sample_frames": 23232000,
+        "nonzero_sample_frames": 22922068,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "wav_sha256": "dd53a03e3aa824e5629e317aa423b974887fbdae560257d8a1161ca4daba1098",
+      "data_sha256": "dd9e0ccd5597c8646e91b0ed2565ee1811d9753554dda4ee0248471327d76626",
+      "ppm_sha256": "ee7be643cf9aa3ac470d14345d374c0230fc62ba31e1f88036726d236d4c592c",
+      "save_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+      "memory": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    }
+  },
+  "pcm_change": {
+    "intro": {
+      "before_wav_sha256": "37f485c775f49f571bd20f44e66157d6e00bb05be224a9dd4d774b0a68bbfb2e",
+      "before_nonzero_sample_frames": 2774970,
+      "game_state_and_non_pcm_counters_unchanged": true
+    },
+    "free-flight": {
+      "before_wav_sha256": "247ec8b8be3e06cc82550aff386a0fde8375c62f867b8272e7c99fe5aa7fb963",
+      "before_nonzero_sample_frames": 5948647,
+      "game_state_and_non_pcm_counters_unchanged": true
+    },
+    "final-combat": {
+      "before_wav_sha256": "60dd7537aa3e1a64799a31c69240fc0fedffb079d178a730c46dd63de208f361",
+      "before_nonzero_sample_frames": 22901932,
+      "game_state_and_non_pcm_counters_unchanged": true
+    }
+  },
+  "date": "2026-10-09",
+  "original_source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+  "original_source_commit": "ace4c3a9553e7005ed32c6fee8817126a53a8887",
+  "component": {
+    "intervals": 196608,
+    "streams": 48,
+    "hold_differences_rejected": 2276,
+    "source_functions": [
+      "anti_prehandler",
+      "samplexx_anti_handler"
+    ],
+    "reference_function_bodies_unchanged": true,
+    "rate_hz": [
+      44100,
+      48000,
+      709379
+    ],
+    "source_periods": [
+      124,
+      300,
+      358,
+      32767
+    ],
+    "scope": "Pre-filter interval averaging using rational PAL time; not full Paula interrupt or filtered original recording acceptance"
+  },
+  "runtime_audio_change": "Exact per-channel signed signal interval averaging, followed by stereo sum and x2 scaling; no filter/LED default added",
+  "remaining_audio_gates": [
+    "Full original/native onset and handoff alignment",
+    "Amiga fixed/LED filtering and intermediate LED state",
+    "Complete filtered original waveform comparisons"
+  ],
+  "debug_runner_sha256": "c1067d47ce6fb34bcebafea5eba72899a8a2d7e9d383f072cb6bbbcfee217545",
+  "debug_release_full_pcm_state_pixels_saves_counters_identical": true,
+  "validation": {
+    "Release": [
+      "fa18_native_pcm_averaging",
+      "fa18_native_pcm_buffers",
+      "fa18_native_audio_trace",
+      "fa18_native_samples",
+      "direct check_preallocation.py --pcm-change against preserved preceding checkpoint"
+    ],
+    "Debug": [
+      "fa18_native_pcm_averaging",
+      "fa18_native_pcm_buffers",
+      "fa18_native_audio_trace",
+      "fa18_native_preallocation_output (strict complete WAV/state comparison against new Release checkpoint)"
+    ]
+  },
+  "complete_demo": {
+    "runner_sha256": "0c282be9de93f6a20b9d09ea4630858518a0c50f094e9001bdb50d51154ccda9",
+    "stats": {
+      "frame_owner_exit": false,
+      "frames": 12680,
+      "screen": "scene-setup",
+      "mode": 3,
+      "glyphs": 3804,
+      "record_updates": 2339,
+      "scene_frames": 2337,
+      "terrain_polygons": 10917,
+      "model_calls": 47353,
+      "hud_frames": 2337,
+      "control_frames": 3368,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 264,
+      "timer_pending": true,
+      "timer_yields": 5490,
+      "display_publications": 3367,
+      "display_yields": 3380,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 3367,
+      "input_events": 1,
+      "input_queued": 0,
+      "update_iterations": 5356,
+      "replay_iterations": 4892,
+      "replay_events": 2,
+      "host_replay_events": 2,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 12680,
+      "voice_publications": 26703,
+      "voice_levels": [
+        [
+          518,
+          22
+        ],
+        [
+          520,
+          22
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          4
+        ]
+      ],
+      "sample_requests": 8248,
+      "sample_frames": 12172800,
+      "nonzero_sample_frames": 11830047,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "all_requests_voices_stream_phases_and_stops_unchanged": true,
+    "complete_game_data_and_non_pcm_counters_unchanged": true,
+    "coverage": {
+      "boundaries": 12680,
+      "requests": 8248,
+      "stops": 554,
+      "active_requests": [
+        173,
+        217,
+        24,
+        7670
+      ]
+    },
+    "wav_sha256": "1c26fb385163faa3f1c83999d2d3d56d8b1052d16705f5a83fdd210a2eb0f389",
+    "before_nonzero_sample_frames": 11813640,
+    "memory": {
+      "sdl_arena_bytes": 33554432,
+      "sdl_startup_bytes": 0,
+      "sdl_peak_bytes": 96,
+      "sdl_gameplay_pool_requests": 0,
+      "sdl_failures": 0,
+      "project_gameplay_heap_violations": 0,
+      "pcm_ring_frames": 131072,
+      "os_driver_allocations_observed": false
+    },
+    "data_sha256": "4f0f6d334e716a6f915ced4a58b57b7287550bdf49b5dca233845194d791ce31",
+    "unchanged_trace_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415",
+    "unchanged_trace_path": "build/native-audio/native-complete-demo-events/audio.jsonl.gz",
+    "wav_path": "build/native-audio/pcm-averaging-demo/native.wav"
+  },
+  "preceding_canonical_sha256": "6666a1958ebf2028768a171a7406b716b0dec304f9456b308ea7d701c3bf9efe"
+}

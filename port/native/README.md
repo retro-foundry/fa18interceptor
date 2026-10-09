@@ -1,5 +1,15 @@
 # Native port runner
 
+Native PCM averaging (2026-10-09): playable output now uses original source
+interval averaging instead of sample holding, with fixed integer storage.
+196,608 intervals match unchanged original accumulator functions in both
+builds. Intro, Free Flight and final combat preserve complete game state;
+Debug/Release agree on the intentionally changed PCM. Complete Demo requests,
+stops, voices and stream phases remain exact, with zero heap violations.
+Canonical Release is refreshed. Original onset/handoff alignment and Amiga
+filter acceptance remain open; broader completion and state cleanup scopes
+are unchanged. See [averaging evidence](../../analysis/native_pcm_averaging_milestone.md).
+
 `--audio-trace PATH` records bounded sample/stop events and complete per-frame
 voice/stream state using preallocated buffers. Complete Demo PCM/RAM/counters
 and every trace row agree in Release/Debug, with zero heap violations; tracing

@@ -92,13 +92,28 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
     add_test(NAME fa18_native_preallocation_output
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_preallocation.py
                 --runner $<TARGET_FILE:fa18_native>
-                --reference ${CMAKE_CURRENT_SOURCE_DIR}/../../analysis/figures/native_preallocation_checkpoint.json
+                --reference ${CMAKE_CURRENT_SOURCE_DIR}/../../analysis/figures/native_pcm_averaging_checkpoint.json
                 --out ${CMAKE_CURRENT_BINARY_DIR}/preallocation-output-$<CONFIG>)
     set_tests_properties(fa18_native_preallocation_output PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_audio_trace
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_native_audio_trace.py
                 --runner $<TARGET_FILE:fa18_native>)
     set_tests_properties(fa18_native_audio_trace PROPERTIES RUN_SERIAL TRUE)
+    if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/engine9000-src/ami9000/sources/src/audio.c)
+        set(original_averaging ${CMAKE_CURRENT_BINARY_DIR}/original_pcm_averaging.h)
+        add_custom_command(OUTPUT ${original_averaging}
+            COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/extract_original_pcm_averaging.py
+                --source ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/engine9000-src/ami9000/sources/src/audio.c
+                --out ${original_averaging}
+            DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/extract_original_pcm_averaging.py
+                ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/engine9000-src/ami9000/sources/src/audio.c)
+        add_executable(fa18_native_pcm_averaging_test ../../tools/native/native_pcm_averaging_test.c ${original_averaging})
+        target_include_directories(fa18_native_pcm_averaging_test PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+        target_link_libraries(fa18_native_pcm_averaging_test PRIVATE fa18_native_runtime)
+        add_test(NAME fa18_native_pcm_averaging COMMAND fa18_native_pcm_averaging_test
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf
+            ${CMAKE_CURRENT_BINARY_DIR}/pcm-averaging-pilot-$<CONFIG>)
+    endif()
     add_test(NAME fa18_native_artifact_policy
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/test_prune_build_artifacts.py)
     add_test(NAME fa18_native_artifact_cleanup

@@ -28,12 +28,17 @@ def main():
     source.add_argument('--reference', type=Path)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--visible', action='store_true', help='also present the 6500-frame Free Flight with real audio')
+    parser.add_argument('--pcm-change', action='store_true',
+                        help='Assess intentional interpolation change: require all RAM/pixels/saves and non-PCM counters unchanged; retain new PCM hashes')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     reference = json.loads(args.reference.read_text()) if args.reference else None
     final_input = ROOT / load_tour_result()[1]['input']
     report = {'runner_sha256': sha(args.runner), 'baseline_sha256': sha(args.baseline) if args.baseline else reference['runner_sha256'],
               'scope': 'Native output preservation; project heap guard and fixed SDL/audio storage; OS/driver heaps unobserved', 'cases': {}}
+    if args.pcm_change:
+        report['scope'] = 'Intentional original-derived interpolation change; unchanged native RAM/pixels/saves/non-PCM counters; zero gameplay heap violations'
+        report['pcm_change'] = {}
     with tempfile.TemporaryDirectory(prefix='preallocation-', dir=args.out) as temporary:
         work = Path(temporary)
         intro = work / 'intro.e9k'
@@ -82,9 +87,20 @@ def main():
             before = run(args.baseline, 'baseline-' + name, frames, replay, False, pilot=pilot) if args.baseline else {
                 key: value for key, value in reference['cases'][name].items() if key != 'memory'}
             after = run(args.runner, name, frames, replay, True, pilot=pilot)
-            assert before == {key: value for key, value in after.items() if key != 'memory'}, name
+            comparable = {key: value for key, value in after.items() if key != 'memory'}
+            if args.pcm_change:
+                def state_only(value):
+                    return {key: ({k:v for k,v in item.items() if k != 'nonzero_sample_frames'} if key == 'stats' else item)
+                            for key,item in value.items() if key != 'wav_sha256'}
+                assert state_only(before) == state_only(comparable), name
+                assert before['wav_sha256'] != after['wav_sha256'], 'Expected an intentional PCM interpolation change'
+                report['pcm_change'][name] = {'before_wav_sha256': before['wav_sha256'],
+                    'before_nonzero_sample_frames': before['stats']['nonzero_sample_frames'],
+                    'game_state_and_non_pcm_counters_unchanged': True}
+            else:
+                assert before == comparable, name
             report['cases'][name] = after
-            print(f'{name}: complete WAV, RAM, pixels, save and counters preserved; zero gameplay heap violations', flush=True)
+            print(f'{name}: '+ ('interpolated PCM changed; complete RAM/pixels/save/non-PCM counters preserved' if args.pcm_change else 'complete WAV, RAM, pixels, save and counters preserved') + '; zero gameplay heap violations', flush=True)
         if args.visible:
             visible = run(args.runner, 'visible-free-flight', 6500, flight, True, visible=True)
             expected = report['cases']['free-flight']

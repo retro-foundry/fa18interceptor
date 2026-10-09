@@ -87,23 +87,29 @@ void native_audio_render(NativeAudio *audio,int16_t *stereo,unsigned frames,unsi
     if(!rate) { fputs("native sample rate must be nonzero\n",stderr);abort(); }
     for(unsigned c=0;c<4;++c) if(audio->pending & (1u<<c)) service(audio,c,audio->sample_frames);
     audio->pending=0;
-    /* Signed source PCM, PAL sample clock 3546895 / period. Integer hold
-     * resampling keeps phase across host blocks and observes live pitch.
+    /* Source reference audio.c anti_prehandler/samplexx_anti_handler average
+     * the signed, volume-scaled signal over each output interval. Integrate
+     * exactly in rational PAL clock units, including byte/buffer handoffs;
+     * truncate each channel before the original stereo sum and x2 gain.
      * Channel pairs 0/3 left and 1/2 right are the original stereo wiring. */
     for(unsigned frame=0;frame<frames;++frame) {
         int left=0,right=0;
         for(unsigned c=0;c<4;++c) {
             if(!audio->streams[c].playing) continue;
-            int value=audio->streams[c].current.data[audio->streams[c].cursor];
-            unsigned volume=(uint16_t)audio->channels[c].volume;
-            volume=volume&64u?64u:volume&63u;
-            int output=value*(int)volume*2; /* Two full-scale channels fit s16. */
-            if(c==0 || c==3) left+=output; else right+=output;
-            audio->streams[c].phase+=3546895u;
-            uint64_t duration=(uint64_t)audio->streams[c].period*rate;
-            if(!duration) duration=65536ull*rate;
-            while(audio->streams[c].playing && audio->streams[c].phase>=duration) {
-                audio->streams[c].phase-=duration;
+            uint64_t remaining=3546895u;
+            int64_t area=0;
+            while(remaining && audio->streams[c].playing) {
+                uint64_t duration=(uint64_t)audio->streams[c].period*rate;
+                if(!duration) duration=65536ull*rate;
+                uint64_t amount=duration-audio->streams[c].phase;
+                if(amount>remaining) amount=remaining;
+                unsigned volume=(uint16_t)audio->channels[c].volume;
+                volume=volume&64u?64u:volume&63u;
+                const int value=audio->streams[c].current.data[audio->streams[c].cursor];
+                area+=(int64_t)value*(int)volume*(int64_t)amount;
+                remaining-=amount;audio->streams[c].phase+=amount;
+                if(audio->streams[c].phase<duration) continue;
+                audio->streams[c].phase=0;
                 if(++audio->streams[c].cursor==audio->streams[c].current.bytes) {
                     audio->streams[c].current=audio->streams[c].next;
                     audio->streams[c].cursor=0;
@@ -111,9 +117,12 @@ void native_audio_render(NativeAudio *audio,int16_t *stereo,unsigned frames,unsi
                 }
                 /* Period writes take effect at the next source byte. */
                 audio->streams[c].period=(uint16_t)audio->channels[c].period;
-                duration=(uint64_t)audio->streams[c].period*rate;
-                if(!duration) duration=65536ull*rate;
             }
+            /* Preserve the existing stopped stream's carried byte phase;
+             * the unplayed remainder contributes silence to this average. */
+            if(!audio->streams[c].playing) audio->streams[c].phase+=remaining;
+            int output=(int)(area/3546895)*2;
+            if(c==0 || c==3) left+=output; else right+=output;
         }
         if(left || right) ++audio->nonzero_frames;
         stereo[2*frame]=(int16_t)left;stereo[2*frame+1]=(int16_t)right;

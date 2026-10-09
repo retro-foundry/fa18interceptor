@@ -69,7 +69,7 @@ int main(int argc,char **argv) {
         }
     }
     /* An actual loaded square wave: verify signed PCM, stereo routing and
-     * exact rational PAL pitch against an independent sample-index formula.
+     * exact rational PAL averaging against a periodic prefix-area formula.
      * Host chunk size must not change output, phase, requests or game RAM. */
     for(unsigned channel=0;channel<4;++channel) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
@@ -83,9 +83,19 @@ int main(int argc,char **argv) {
         int16_t first[1940],second[1940];
         memcpy(before,m,sizeof *m);native_audio_bind(&whole);native_audio_request_channel((int)channel);
         native_audio_render(&whole,first,970,48000);
+        int64_t prefix[33]={0};
+        for(unsigned i=0;i<32;++i) prefix[i+1]=prefix[i]+(int8_t)rd_u8(samples+i)*21;
+        const uint64_t byte_time=300u*48000u,loop_time=32*byte_time;
         for(unsigned frame=0;frame<970;++frame) {
-            unsigned index=(unsigned)((uint64_t)frame*3546895/(300u*48000))%32;
-            int16_t value=(int16_t)((int8_t)rd_u8(samples+index)*21*2);
+            int64_t areas[2];
+            for(unsigned edge=0;edge<2;++edge) {
+                uint64_t at=(uint64_t)(frame+edge)*3546895,remainder=at%loop_time;
+                unsigned index=(unsigned)(remainder/byte_time);
+                areas[edge]=(int64_t)(at/loop_time)*prefix[32]*(int64_t)byte_time+
+                    prefix[index]*(int64_t)byte_time+
+                    (int8_t)rd_u8(samples+index)*21*(int64_t)(remainder%byte_time);
+            }
+            int16_t value=(int16_t)((areas[1]-areas[0])/3546895*2);
             unsigned side=channel==0 || channel==3?0:1;
             if(first[2*frame+side]!=value || first[2*frame+1-side]!=0) {
                 fprintf(stderr,"PCM routing/pitch differs at channel %u frame %u\n",channel,frame);return 1;
