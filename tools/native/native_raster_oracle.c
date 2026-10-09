@@ -114,6 +114,20 @@ static int compare(const uint8_t *expected,unsigned test) {
     if(count) { fprintf(stderr,"%u plane/buffer differences\n",count); return 0; }
     return 1;
 }
+static int compare_pages(const uint8_t *expected) {
+    unsigned count=0;
+    for(unsigned plane=0;plane<8;++plane) {
+        const gaddr start=rd_u32(0xc4566eu+4*plane);
+        if(start>=0x80000u || start+8000>0x80000u) return 0;
+        for(unsigned i=0;i<8000;++i) if(fa18_machine->chip[start+i]!=expected[start+i]) {
+            if(count<8) fprintf(stderr,"page plane %u byte %u x%u/y%u: source %02X native %02X\n",
+                plane,i,i%40*8,i/40,expected[start+i],fa18_machine->chip[start+i]);
+            ++count;
+        }
+    }
+    if(count) fprintf(stderr,"%u complete-page byte differences\n",count);
+    return count==0;
+}
 static uint32_t random_state=0x18fa;
 static unsigned random_value(unsigned limit) {
     random_state=random_state*1664525u+1013904223u;
@@ -127,13 +141,52 @@ int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0; char error[256];
     uint8_t *state=file_bytes("captures/native/demo01/state.bin",&ns);
     uint8_t *rom=file_bytes("local/system/kick13.rom",&nr);
-    uint8_t *data=argc==2?file_bytes(argv[1],&nd):NULL;
+    const int active_only=argc==3 && !strcmp(argv[2],"--active-planes");
+    const int active_map=argc==3 && !strcmp(argv[2],"--active-map");
+    const int negative_lines=argc==3 && !strcmp(argv[2],"--negative-lines");
+    uint8_t *data=(argc==2 || active_only || active_map || negative_lines)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m),*before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x100000);
     if(!state || !rom || !data || nd!=0x100000 || !m || !before || !expected) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) { fputs(error,stderr); return 1; }
     fa18_recomp_init(1); fa18_ports_init(FA18_PORTS_OFF,NULL); fa18_bus_timing=0;
     memcpy(m->chip,data,0x80000); memcpy(m->slow,data+0x80000,0x80000);
+    if(negative_lines) {
+        static const int16_t points[][4]={
+            {-32,84,-1,85},{-1,85,-32,84},{-24,85,0,85},{-32,85,-32,90},
+            {-3,84,17,86},{17,86,-3,84},{-1,0,319,1},{319,1,-1,0}};
+        const unsigned point_count=sizeof points/sizeof points[0];
+        for(unsigned test=0;test<4*point_count;++test) {
+            const int16_t *point=points[test%point_count];
+            memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);
+            wr_u16(LINE_LAST_ROW,144);wr_u8(LINE_PLANES,(uint8_t[]){1,5,8,15}[test/point_count]);
+            wr_s16(LINE_COLOUR,-1);wr_u16(CURRENT_COLOUR,7);
+            memcpy(before,m,sizeof *m);
+            host_draw_line(point[0],point[1],point[2],point[3]);
+            memcpy(expected,m->chip,0x80000);memcpy(m,before,sizeof *m);
+            if(!original_arguments(0xc2fa7e,point) || !compare(expected,test)) return 1;
+        }
+        puts("32 negative-X source lines match complete buffers");return 0;
+    }
+    if(active_only || active_map) {
+        memcpy(before,m,sizeof *m);
+        if(!original(0xc2fd8cu)) return 1;
+        if(active_map && !original(0xc2aa9cu)) return 1;
+        memcpy(expected,m->chip,0x80000);memcpy(m,before,sizeof *m);
+        host_submit_active_planes(NULL);
+        if(active_map) {
+            FA18MapPacketDepthStageResult depth=host_prepare_map_packet_depth(0x4000);
+            const MapPacketHooks hooks={.host_draw_polygon=map_polygon};
+            for(int wide=0;wide<2;++wide) {
+                if(!wide && !depth.run_normal_pass) continue;
+                wr_u16(CURRENT_COLOUR,6);
+                if(host_run_map_packet_pass(0x4000,wide,&hooks)) return 1;
+            }
+        }
+        if(!compare_pages(expected)) return 1;
+        printf("Captured horizon%s matches original complete plane buffers\n",active_map?" and map":"");
+        return 0;
+    }
     unsigned retained_returns=0,retained_coordinates=0,retained_unchanged=0;
     for(unsigned test=0;test<256;++test) {
         memcpy(m->chip,data,0x80000);memcpy(m->slow,data+0x80000,0x80000);

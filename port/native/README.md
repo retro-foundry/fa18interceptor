@@ -1,5 +1,15 @@
 # Native port runner
 
+Native raster addressing (2026-10-09): negative-X lines now use the original
+logical-shift starting offset and aligned word address. The connected raster
+checks pass all existing cases and 32 new negative-X cases per checkpoint.
+Release/Debug complete mission-three gameplay, traces and RAM remain identical
+to the preceding evidence; strict drawing stays 267/4,967. A bounded capture
+localizes the first visible difference to a skipped ground segment and a
+different placement cache; its earlier cause remains open. Canonical Release
+is refreshed. State cleanup remains deferred outside this goal. See
+[drawing evidence](../../analysis/native_negative_line_and_drawing_window_milestone.md).
+
 User scope update (2026-10-09): migrating remaining byte-array state into named
 C structures is deferred to a separate follow-up outside the active
 complete-C-port goal. It improves ownership and clarity; the existing arrays

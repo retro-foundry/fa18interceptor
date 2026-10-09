@@ -3,13 +3,19 @@
 void native_raster_line(gaddr plane,const LineSetup *line,PlaneOp op,int one_dot) {
     int x=line->x,y=line->row,marked=0;
     int16_t error=line->error;
+    /* C2FAB2/C2FAD8 shift X logically before the signed word offset is
+     * extended. Preserve that starting address, including negative-X spill,
+     * rather than rebuilding it from signed screen coordinates. BLT pointers
+     * address words; an odd setup byte offset selects the same aligned word. */
+    const gaddr start=(plane+(gaddr)line->offset)&~1u;
+    const int first_word=line->x>>4;
     int negative=(line->con1 & 0x40u)!=0;
     int direction=(line->con1 & (line->x_major?0x04u:0x08u))?-1:1;
     unsigned dots=line->size>>6;
     if(!dots) dots=1024;
     for(unsigned i=0;i<dots;++i) {
         if(!one_dot || !marked) {
-            gaddr at=plane+(gaddr)(y*40+2*(x>>4));
+            gaddr at=start+(gaddr)((y-line->row)*40+2*((x>>4)-first_word));
             uint16_t value=rd_u16(at),bit=(uint16_t)(0x8000u>>(x&15));
             wr_u16(at,op==PLANE_SET?(uint16_t)(value|bit):
                 op==PLANE_CLEAR?(uint16_t)(value&~bit):(uint16_t)(value^bit));

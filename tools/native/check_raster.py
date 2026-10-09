@@ -44,6 +44,7 @@ def main():
             assert len(set(pixels)) >= 2, 'terrain preview is blank'
             outputs.append(pixels)
             subprocess.run([str(oracle), str(checkpoint)], cwd=ROOT, check=True, timeout=20)
+            subprocess.run([str(oracle), str(checkpoint), '--negative-lines'], cwd=ROOT, check=True, timeout=20)
         assert outputs[0] != outputs[1], 'camera/aircraft selection did not change the preview'
     print('Connected native setup terrain renders, changes with selection, and matches original raster buffers')
 

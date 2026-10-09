@@ -1,0 +1,1019 @@
+{
+  "scope": "Negative-X original raster parity; first independent mission-three drawing difference localized, not accepted. Internal state cleanup remains outside this goal.",
+  "runtime_original_routines": [
+    "C2FAB2",
+    "C2FAD8",
+    "C2FA7E"
+  ],
+  "release_runner_sha256": "c2e188fcfb95a664381b301ba547d674ed8b1adcf651ed9d0e1d61687234e0cc",
+  "debug_runner_sha256": "11eb0de1c728469ed4338de6f3ffce598a22e9f0b21ceaf3ccdf7e0a8e298069",
+  "canonical_runner_sha256": "c2e188fcfb95a664381b301ba547d674ed8b1adcf651ed9d0e1d61687234e0cc",
+  "release_debug_reports_agree_except_runner": true,
+  "whole_successful_flight": {
+    "compared": 4967,
+    "record_cores_compared": 79472,
+    "record_cores_matching": 79472,
+    "complete_record_boundaries_matching": 4967,
+    "camera_and_controls_matching": 4967,
+    "complete_pages_matching": 267,
+    "timer_and_hud_matching": 0,
+    "first_record_difference": null,
+    "first_game_difference": null,
+    "first": 22142,
+    "last": 27108,
+    "complete_gameplay_matching_prefix": 4967,
+    "strict_gameplay_matching": true
+  },
+  "native_trace_sha256": "b42cc48af617b7c5519070a2281b9228b0870cde1c03b234b3b426a8277073ff",
+  "native_final_ram_sha256": "5e89d6be852ea88c936da87d77214e8f57e510d41967ef27904d1efb68104d6b",
+  "raster_checks": {
+    "connected_checkpoints": [
+      5300,
+      6100
+    ],
+    "per_checkpoint": {
+      "clipping": 256,
+      "line_returns": 128,
+      "segment_returns": 128,
+      "polygons": 160,
+      "negative_x_lines": 32,
+      "horizon_pass": 1,
+      "map_pass": 1
+    },
+    "pre_fix_negative_line_changed_chip_bytes": 13
+  },
+  "drawing_window": {
+    "source_trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+    "native_trace_sha256": "b42cc48af617b7c5519070a2281b9228b0870cde1c03b234b3b426a8277073ff",
+    "source_update_mapping_sha256": "45176e5a7d3c5b3f064d48adce0c8eb0c8115186550c4fb3bc64c6817edb9b4e",
+    "runner_sha256": "55b2fd45a853fddf76d3aa35ad3632b45d796c06f3036c42f49ab829c59edc23",
+    "first": 22285,
+    "last": 22288,
+    "rows": [
+      {
+        "source_iteration": 22285,
+        "native_iteration": 22285,
+        "ram_sha256": {
+          "source": "c4a192f806e104b8e8f329fbcfffee3b88d3d4d870923087468fbec0096fb355",
+          "native": "3c348e5c25980a5dea76c22185f7882cc3ad0f7ed00a1200b449a88ee81f5743"
+        },
+        "page_differences": []
+      },
+      {
+        "source_iteration": 22286,
+        "native_iteration": 22286,
+        "ram_sha256": {
+          "source": "5af1c665346b84e038a54fdac2634470fc319e7ad188773378dafcceb2a71855",
+          "native": "bc739ff7fa959a05f7b5c3f6ac4942720874f38639ac1a0d6026bdae53f30659"
+        },
+        "page_differences": [
+          {
+            "plane": 4,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 0,
+                "native": 255
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 127,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 22287,
+        "native_iteration": 22287,
+        "ram_sha256": {
+          "source": "bb900268406866c318bdf418fcd0672ccc2c41610586b81400928111e3b7a3fe",
+          "native": "9a97f22ad9f446b196fe0fbfdafe9e54286c6c19d4645f8fe701c34ebc09815e"
+        },
+        "page_differences": [
+          {
+            "plane": 0,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 0,
+                "native": 255
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 127,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 2,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 4,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 0,
+                "native": 255
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 127,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 22288,
+        "native_iteration": 22288,
+        "ram_sha256": {
+          "source": "b38e77af1c81e6babb81d7c593b2b3a9c9959f90409594d3ed10baa5ed417d32",
+          "native": "88a3ba52ec7e2d6d4ecd8e16546287505dbeab4329780912359d07f0106ff4c8"
+        },
+        "page_differences": [
+          {
+            "plane": 0,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 0,
+                "native": 255
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 127,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 2,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 4,
+            "bytes": 1,
+            "bit_pixels": 8,
+            "byte_bbox": [
+              0,
+              92,
+              7,
+              92
+            ],
+            "changes": [
+              {
+                "byte": 3680,
+                "x": 0,
+                "y": 92,
+                "source": 0,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 8,
+            "byte_bbox": [
+              0,
+              92,
+              7,
+              92
+            ],
+            "changes": [
+              {
+                "byte": 3680,
+                "x": 0,
+                "y": 92,
+                "source": 255,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 1,
+            "bit_pixels": 8,
+            "byte_bbox": [
+              0,
+              92,
+              7,
+              92
+            ],
+            "changes": [
+              {
+                "byte": 3680,
+                "x": 0,
+                "y": 92,
+                "source": 255,
+                "native": 0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "scope": "Every captured field, core and complete page reproduces its live trace. All changed bytes are retained; this localizes differences without accepting them."
+  },
+  "original_body_probe": {
+    "source_trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+    "probe_trace_sha256": "e84256b70875b892bdd0d9d242e6598e392d3b1ed7a872cec6daa69f90f71a02",
+    "matching_observations": 22288,
+    "end_marker": {
+      "end": true,
+      "rows": 22288
+    },
+    "probe_source_sha256": "64f36c8c11ea9457ae0a66fe55cedfb783330db2312568500799356733103cde",
+    "probe_runner_sha256": "4f0bccd2ca4f422387553f3b54376ed9cc86e5593e7aa00478cd3eaecdd487ea",
+    "body_fixtures": {
+      "before": {
+        "ram_sha256": "cbf1b538317dd11c5f4a63eec65bd50791141ea2a9ea2665e150d4c6189b7665",
+        "boundary": {
+          "iteration": 22285,
+          "frame": 18233,
+          "pc": 12644330,
+          "ppc": 12646416,
+          "registers": [
+            255,
+            1,
+            30,
+            65534,
+            325536,
+            37,
+            4294902274,
+            0,
+            12651950,
+            12616018,
+            12867182,
+            325282,
+            2,
+            37,
+            12931156,
+            12931154
+          ],
+          "sr": 4
+        }
+      },
+      "after": {
+        "ram_sha256": "c2592d4c93bcc974964ab2bc76a3a79e6e74db2ffa4890d58d0447f42c205976",
+        "boundary": {
+          "iteration": 22285,
+          "frame": 18243,
+          "pc": 12645312,
+          "ppc": 12791020,
+          "registers": [
+            0,
+            0,
+            30,
+            65534,
+            3,
+            37,
+            4294902274,
+            0,
+            12867402,
+            12692356,
+            12867198,
+            83762,
+            2,
+            37,
+            12931156,
+            12931154
+          ],
+          "sr": 4
+        }
+      }
+    }
+  },
+  "body_owner_checks": {
+    "native_fixture": {
+      "gameplay_differences": 0,
+      "display_differences": 0,
+      "instructions": 94582,
+      "timer_samples": 2,
+      "excluded_scratch": 23,
+      "excluded_voice": 4,
+      "excluded_busy": 5
+    },
+    "source_fixture_with_native_pal_diagnostic": {
+      "gameplay_differences": 166,
+      "display_differences": 0,
+      "instructions": 95999,
+      "timer_samples": 2,
+      "excluded_scratch": 0,
+      "excluded_voice": 6,
+      "excluded_busy": 2,
+      "accepted_whole_body": false
+    }
+  },
+  "drawing_lead": {
+    "placement": "C4F1D2",
+    "descriptor": "C22A48",
+    "routine": "C096CA",
+    "source_record": "700100c22a481000000030000032414201a303ef00010000",
+    "native_record": "700100c22a481000000030000032414201a305fcffff0000",
+    "source_only_segment": [
+      8,
+      89,
+      0,
+      90
+    ],
+    "colour": 7,
+    "return_pc": "C2F08E",
+    "cause_proven": false
+  },
+  "drawing_window_current": {
+    "source_trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+    "native_trace_sha256": "b42cc48af617b7c5519070a2281b9228b0870cde1c03b234b3b426a8277073ff",
+    "source_update_mapping_sha256": "45176e5a7d3c5b3f064d48adce0c8eb0c8115186550c4fb3bc64c6817edb9b4e",
+    "runner_sha256": "c2e188fcfb95a664381b301ba547d674ed8b1adcf651ed9d0e1d61687234e0cc",
+    "first": 22285,
+    "last": 22288,
+    "rows": [
+      {
+        "source_iteration": 22285,
+        "native_iteration": 22285,
+        "ram_sha256": {
+          "source": "c4a192f806e104b8e8f329fbcfffee3b88d3d4d870923087468fbec0096fb355",
+          "native": "3c348e5c25980a5dea76c22185f7882cc3ad0f7ed00a1200b449a88ee81f5743"
+        },
+        "page_differences": []
+      },
+      {
+        "source_iteration": 22286,
+        "native_iteration": 22286,
+        "ram_sha256": {
+          "source": "5af1c665346b84e038a54fdac2634470fc319e7ad188773378dafcceb2a71855",
+          "native": "bc739ff7fa959a05f7b5c3f6ac4942720874f38639ac1a0d6026bdae53f30659"
+        },
+        "page_differences": [
+          {
+            "plane": 4,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 0,
+                "native": 255
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 127,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 22287,
+        "native_iteration": 22287,
+        "ram_sha256": {
+          "source": "bb900268406866c318bdf418fcd0672ccc2c41610586b81400928111e3b7a3fe",
+          "native": "9a97f22ad9f446b196fe0fbfdafe9e54286c6c19d4645f8fe701c34ebc09815e"
+        },
+        "page_differences": [
+          {
+            "plane": 0,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 0,
+                "native": 255
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 127,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 2,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              90,
+              15,
+              90
+            ],
+            "changes": [
+              {
+                "byte": 3600,
+                "x": 0,
+                "y": 90,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3601,
+                "x": 8,
+                "y": 90,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 4,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 0,
+                "native": 255
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 127,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "source_iteration": 22288,
+        "native_iteration": 22288,
+        "ram_sha256": {
+          "source": "b38e77af1c81e6babb81d7c593b2b3a9c9959f90409594d3ed10baa5ed417d32",
+          "native": "88a3ba52ec7e2d6d4ecd8e16546287505dbeab4329780912359d07f0106ff4c8"
+        },
+        "page_differences": [
+          {
+            "plane": 0,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 0,
+                "native": 255
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 127,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 2,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 3,
+            "bytes": 2,
+            "bit_pixels": 9,
+            "byte_bbox": [
+              0,
+              91,
+              15,
+              91
+            ],
+            "changes": [
+              {
+                "byte": 3640,
+                "x": 0,
+                "y": 91,
+                "source": 255,
+                "native": 0
+              },
+              {
+                "byte": 3641,
+                "x": 8,
+                "y": 91,
+                "source": 128,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 4,
+            "bytes": 1,
+            "bit_pixels": 8,
+            "byte_bbox": [
+              0,
+              92,
+              7,
+              92
+            ],
+            "changes": [
+              {
+                "byte": 3680,
+                "x": 0,
+                "y": 92,
+                "source": 0,
+                "native": 255
+              }
+            ]
+          },
+          {
+            "plane": 6,
+            "bytes": 1,
+            "bit_pixels": 8,
+            "byte_bbox": [
+              0,
+              92,
+              7,
+              92
+            ],
+            "changes": [
+              {
+                "byte": 3680,
+                "x": 0,
+                "y": 92,
+                "source": 255,
+                "native": 0
+              }
+            ]
+          },
+          {
+            "plane": 7,
+            "bytes": 1,
+            "bit_pixels": 8,
+            "byte_bbox": [
+              0,
+              92,
+              7,
+              92
+            ],
+            "changes": [
+              {
+                "byte": 3680,
+                "x": 0,
+                "y": 92,
+                "source": 255,
+                "native": 0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "scope": "Every captured field, core and complete page reproduces its live trace. All changed bytes are retained; this localizes differences without accepting them."
+  }
+}

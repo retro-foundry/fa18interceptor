@@ -66,6 +66,7 @@ int main(int argc,char **argv) {
     int in_matrix=0;
     const int trace_input_carry=getenv("FA18_FRAME_TRACE_INPUT_CARRY")!=NULL;
     const int trace_model=getenv("FA18_FRAME_TRACE_MODEL")!=NULL;
+    const int trace_line=getenv("FA18_FRAME_TRACE_LINE")!=NULL;
     const int trace_normalise=getenv("FA18_FRAME_TRACE_NORMALISE")!=NULL;
     const int trace_depth=getenv("FA18_FRAME_TRACE_DEPTH")!=NULL;
     const char *trace_word=getenv("FA18_FRAME_TRACE_WORD");
@@ -76,6 +77,10 @@ int main(int argc,char **argv) {
     unsigned restore_first=0,restore_second=0;
     uint16_t context_factor=0;
     for(step=0;step<10000000;++step) {
+        if(trace_line && REG_PC==0xc2fa7eu)
+            fprintf(stderr,"line %d,%d -> %d,%d colour=%u return=%06X\n",
+                (int16_t)REG_D[0],(int16_t)REG_D[1],(int16_t)REG_D[2],(int16_t)REG_D[3],
+                rd_u16(CURRENT_COLOUR),rd_u32(REG_A[7]));
         if(REG_PC==0xc0a12e && REG_A[1]==CONTROL_RECORDS+0x800) ++restore_first;
         if(REG_PC==0xc0a12e && REG_A[1]==CONTROL_RECORDS+0xc00) ++restore_second;
         if(REG_PC==0xc1e328 && rd_u8(CONTEXT_SELECT)) context_factor=(uint16_t)(REG_D[3]>>16);
