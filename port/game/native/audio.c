@@ -17,16 +17,27 @@ void native_audio_request_channel(int channel) {
     if(!rd_u32(VOICE_SLOTS+4u*(unsigned)channel)) {
         memset(&active_audio->streams[channel],0,sizeof active_audio->streams[channel]);
         active_audio->channels[channel]=(VoiceOutput){PAULA_MIN_PERIOD,0};
+        if(active_audio->observe) {
+            NativeAudioEvent event={0};event.kind=NATIVE_AUDIO_STOP;
+            event.channel=(unsigned)channel;event.tick=active_audio->ticks;
+            event.output_frame=active_audio->sample_frames;
+            active_audio->observe(active_audio->observe_context,&event);
+        }
     }
     active_audio->pending |= 1u << channel;
 }
 
-static void service(NativeAudio *audio,unsigned channel) {
+static void service(NativeAudio *audio,unsigned channel,uint64_t output_frame) {
+    const gaddr voice=audio->observe?rd_u32(rd_u32(rd_u32(VOICE_TABLE+4*channel)+4)):0;
     VoiceSample sample=request_voice_sample(channel);
     ++audio->sample_requests;
     audio->channels[channel]=sample.output;
     if(!sample.active) {
         audio->streams[channel].playing=0;
+        if(audio->observe) {
+            NativeAudioEvent event={NATIVE_AUDIO_REQUEST,channel,audio->ticks,output_frame,voice,sample,{0}};
+            audio->observe(audio->observe_context,&event);
+        }
         return;
     }
     if(!audio->resolve) {
@@ -34,6 +45,10 @@ static void service(NativeAudio *audio,unsigned channel) {
     }
     NativePcmBuffer buffer={audio->resolve(audio->sample_context,sample.samples&~1u,sample.bytes),sample.bytes};
     if(!buffer.data) { fputs("native PCM sample-buffer owner returned no bytes\n",stderr);abort(); }
+    if(audio->observe) {
+        NativeAudioEvent event={NATIVE_AUDIO_REQUEST,channel,audio->ticks,output_frame,voice,sample,buffer};
+        audio->observe(audio->observe_context,&event);
+    }
     if(!audio->streams[channel].playing) {
         audio->streams[channel].current=buffer;
         audio->streams[channel].cursor=0;
@@ -42,7 +57,7 @@ static void service(NativeAudio *audio,unsigned channel) {
         /* Original startup requests its next buffer as the initial buffer
          * is fetched (reference audio.c state 1 -> 5). Preserve this priming
          * request rather than counting it as a played loop. */
-        service(audio,channel);
+        service(audio,channel,output_frame);
         audio->streams[channel].period=(uint16_t)audio->channels[channel].period;
     } else audio->streams[channel].next=buffer;
 }
@@ -70,7 +85,7 @@ void native_audio_tick(NativeAudio *audio) {
 
 void native_audio_render(NativeAudio *audio,int16_t *stereo,unsigned frames,unsigned rate) {
     if(!rate) { fputs("native sample rate must be nonzero\n",stderr);abort(); }
-    for(unsigned c=0;c<4;++c) if(audio->pending & (1u<<c)) service(audio,c);
+    for(unsigned c=0;c<4;++c) if(audio->pending & (1u<<c)) service(audio,c,audio->sample_frames);
     audio->pending=0;
     /* Signed source PCM, PAL sample clock 3546895 / period. Integer hold
      * resampling keeps phase across host blocks and observes live pitch.
@@ -92,7 +107,7 @@ void native_audio_render(NativeAudio *audio,int16_t *stereo,unsigned frames,unsi
                 if(++audio->streams[c].cursor==audio->streams[c].current.bytes) {
                     audio->streams[c].current=audio->streams[c].next;
                     audio->streams[c].cursor=0;
-                    service(audio,c);
+                    service(audio,c,(uint64_t)audio->sample_frames+frame+1);
                 }
                 /* Period writes take effect at the next source byte. */
                 audio->streams[c].period=(uint16_t)audio->channels[c].period;

@@ -1,5 +1,10 @@
 # The C port
 
+The playable native audio trace now covers complete Demo requests/stops and
+per-frame voices, preserving all PCM/state/counters. Release/Debug rows agree
+with zero heap violations; tracing and preallocation checks pass. Source/native
+onset/handoffs and filtering remain open. See [trace evidence](analysis/native_audio_trace_milestone.md).
+
 The complete original demo now has a validated PCM recording: all 21,069
 reference calls preserve original execution and complete sample coverage.
 Their 406,753-row audio-write/voice trace also preserves full state and PCM.

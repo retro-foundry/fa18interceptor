@@ -1,0 +1,262 @@
+{
+  "date": "2026-10-09",
+  "scope": "Connected native sample/stop observer and complete PCM/state preservation; original/native onset/handoff/filter parity remains open",
+  "release_capture": {
+    "command": [
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-cmake\\native\\Release\\fa18_native.exe",
+      "--headless",
+      "--frames",
+      "30000",
+      "--input",
+      "captures/native/demo01/input.fa18in",
+      "--iterations",
+      "4892",
+      "--replay",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events\\intro.e9k",
+      "--save-dir",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events\\pilot",
+      "--wav",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events\\native.wav",
+      "--memory-report",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events\\memory.json",
+      "--data-out",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events\\final.dat",
+      "--audio-trace",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events\\audio.jsonl"
+    ],
+    "runner_sha256": "4e10ebd0d888e66c8d2870d2e337ebd04793e024b84680e56ad0bd64b643ce86",
+    "stats": {
+      "frame_owner_exit": false,
+      "frames": 12680,
+      "screen": "scene-setup",
+      "mode": 3,
+      "glyphs": 3804,
+      "record_updates": 2339,
+      "scene_frames": 2337,
+      "terrain_polygons": 10917,
+      "model_calls": 47353,
+      "hud_frames": 2337,
+      "control_frames": 3368,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 264,
+      "timer_pending": true,
+      "timer_yields": 5490,
+      "display_publications": 3367,
+      "display_yields": 3380,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 3367,
+      "input_events": 1,
+      "input_queued": 0,
+      "update_iterations": 5356,
+      "replay_iterations": 4892,
+      "replay_events": 2,
+      "host_replay_events": 2,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 12680,
+      "voice_publications": 26703,
+      "voice_levels": [
+        [
+          518,
+          22
+        ],
+        [
+          520,
+          22
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          4
+        ]
+      ],
+      "sample_requests": 8248,
+      "sample_frames": 12172800,
+      "nonzero_sample_frames": 11813640,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "complete_ram_and_stats_preserved": true,
+    "wav_sha256": "fcd5de5fccc639ce37b7934190c0c32716884ad911e381726705bfa0fa6e74f7",
+    "complete_wav_preserved": true,
+    "memory": {
+      "sdl_arena_bytes": 33554432,
+      "sdl_startup_bytes": 0,
+      "sdl_peak_bytes": 96,
+      "sdl_gameplay_pool_requests": 0,
+      "sdl_failures": 0,
+      "project_gameplay_heap_violations": 0,
+      "pcm_ring_frames": 131072,
+      "os_driver_allocations_observed": false
+    }
+  },
+  "debug_capture": {
+    "command": [
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-cmake\\native\\Debug\\fa18_native.exe",
+      "--headless",
+      "--frames",
+      "30000",
+      "--input",
+      "captures/native/demo01/input.fa18in",
+      "--iterations",
+      "4892",
+      "--replay",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events\\intro.e9k",
+      "--save-dir",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events-debug\\pilot",
+      "--wav",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events-debug\\native.wav",
+      "--memory-report",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events-debug\\memory.json",
+      "--data-out",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events-debug\\final.dat",
+      "--audio-trace",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events-debug\\audio.jsonl"
+    ],
+    "runner_sha256": "f07f485ead8134d5931db066560139b8606af81d8daae1cf2ca75319e862ede4",
+    "stats": {
+      "frame_owner_exit": false,
+      "frames": 12680,
+      "screen": "scene-setup",
+      "mode": 3,
+      "glyphs": 3804,
+      "record_updates": 2339,
+      "scene_frames": 2337,
+      "terrain_polygons": 10917,
+      "model_calls": 47353,
+      "hud_frames": 2337,
+      "control_frames": 3368,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 264,
+      "timer_pending": true,
+      "timer_yields": 5490,
+      "display_publications": 3367,
+      "display_yields": 3380,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 3367,
+      "input_events": 1,
+      "input_queued": 0,
+      "update_iterations": 5356,
+      "replay_iterations": 4892,
+      "replay_events": 2,
+      "host_replay_events": 2,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 12680,
+      "voice_publications": 26703,
+      "voice_levels": [
+        [
+          518,
+          22
+        ],
+        [
+          520,
+          22
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          4
+        ]
+      ],
+      "sample_requests": 8248,
+      "sample_frames": 12172800,
+      "nonzero_sample_frames": 11813640,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "complete_release_trace_pcm_ram_stats_match": true,
+    "coverage": {
+      "boundaries": 12680,
+      "requests": 8248,
+      "stops": 554,
+      "active_requests": [
+        173,
+        217,
+        24,
+        7670
+      ]
+    },
+    "memory": {
+      "sdl_arena_bytes": 33554432,
+      "sdl_startup_bytes": 0,
+      "sdl_peak_bytes": 96,
+      "sdl_gameplay_pool_requests": 0,
+      "sdl_failures": 0,
+      "project_gameplay_heap_violations": 0,
+      "pcm_ring_frames": 131072,
+      "os_driver_allocations_observed": false
+    }
+  },
+  "coverage": {
+    "boundaries": 12680,
+    "requests": 8248,
+    "stops": 554,
+    "active_requests": [
+      173,
+      217,
+      24,
+      7670
+    ]
+  },
+  "all_debug_release_trace_rows_match": true,
+  "trace_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415",
+  "native_before_observer_sha256": "1684a3fcb297249f16880eb082403094a6a83f25784d6ab4890cf823fad0bfd2",
+  "final_release_sha256": "6666a1958ebf2028768a171a7406b716b0dec304f9456b308ea7d701c3bf9efe",
+  "final_debug_sha256": "f07f485ead8134d5931db066560139b8606af81d8daae1cf2ca75319e862ede4",
+  "release_final_difference_from_capture_binary": "CLI help adds --audio-trace after the full Release capture; playable trace/PCM code unchanged",
+  "source_counts": {
+    "original_buffer_pointer_loads": [
+      254,
+      368,
+      19,
+      7640
+    ],
+    "original_voice_pcm_boundaries": 21069,
+    "native_boundaries": 12680,
+    "native_active_requests": [
+      173,
+      217,
+      24,
+      7670
+    ],
+    "aligned_or_accepted_original_native_audio": false,
+    "context": "Original sealed replay starts partway through menu music; native starts from ADF/title and consumed update inputs. Counts alone do not establish an audio fault or parity."
+  },
+  "validation": [
+    "Release and Debug audio trace CTest pass",
+    "Release and Debug preallocation, PCM buffers and complete preallocation output CTests pass",
+    "Complete 4892-iteration demo preserves previous native WAV/RAM/stats under tracing",
+    "Complete Debug demo agrees with every Release trace row and entire WAV/RAM/stats",
+    "Trace observer has zero gameplay heap violations or SDL pool failures",
+    "Payload bytes/hashes, contiguous PCM boundaries and counters checked",
+    "Truncated trace, exhausted budget and conflicting capture modes rejected"
+  ],
+  "capture_retention": "Release audio.jsonl.gz and verified compressed native data; passing Debug/Release duplicate WAVs and Debug trace removed after complete hashes; earlier native-complete-demo/native.wav retained as exact reusable PCM",
+  "release_saved_pilot": {},
+  "debug_saved_pilot": {}
+}

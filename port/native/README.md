@@ -1,5 +1,11 @@
 # Native port runner
 
+`--audio-trace PATH` records bounded sample/stop events and complete per-frame
+voice/stream state using preallocated buffers. Complete Demo PCM/RAM/counters
+and every trace row agree in Release/Debug, with zero heap violations; tracing
+and preallocation checks pass. Original onset/handoffs and filter acceptance
+remain open. See [trace evidence](../../analysis/native_audio_trace_milestone.md).
+
 The complete original demo now has a validated PCM recording: all 21,069
 reference calls preserve original execution and complete sample coverage.
 Their 406,753-row audio-write/voice trace also preserves full state and PCM.

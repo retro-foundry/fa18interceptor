@@ -6,6 +6,16 @@
  * once into an owned host span; PCM byte playback does not use game addresses. */
 typedef const int8_t *(*NativePcmResolve)(void *context,gaddr address,uint32_t bytes);
 typedef struct { const int8_t *data; uint32_t bytes; } NativePcmBuffer;
+enum NativeAudioEventKind { NATIVE_AUDIO_REQUEST, NATIVE_AUDIO_STOP };
+typedef struct {
+    enum NativeAudioEventKind kind;
+    unsigned channel,tick;
+    uint64_t output_frame;
+    gaddr voice;
+    VoiceSample sample;
+    NativePcmBuffer buffer;
+} NativeAudioEvent;
+typedef void (*NativeAudioObserver)(void *context,const NativeAudioEvent *event);
 
 typedef struct {
     VoiceOutput channels[4];
@@ -19,6 +29,8 @@ typedef struct {
     } streams[4];
     NativePcmResolve resolve;
     void *sample_context;
+    NativeAudioObserver observe;
+    void *observe_context;
     unsigned pending, sample_requests, sample_frames, nonzero_frames;
 } NativeAudio;
 

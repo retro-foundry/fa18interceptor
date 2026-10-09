@@ -1,4 +1,4 @@
-add_library(fa18_native_runtime OBJECT replay.c frame_capture.c flight_trace.c ../game/native/files.c ../game/postflight_file_callers.c
+add_library(fa18_native_runtime OBJECT replay.c frame_capture.c flight_trace.c audio_trace.c ../game/native/files.c ../game/postflight_file_callers.c
     ../game/native/frontend.c ../game/native/storage.c ../game/native/menu.c ../game/native/flight.c ../game/native/records.c ../game/native/setup.c
     ../game/native/raster.c ../game/native/scene.c ../game/native/model.c ../game/native/model_state.c ../game/native/display.c ../game/native/cockpit_assets.c
     ../game/native/audio_assets.c ../game/native/audio.c ../game/sound_resources.c ../game/native/menu_start.c ../game/native/viewport.c
@@ -95,6 +95,10 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
                 --reference ${CMAKE_CURRENT_SOURCE_DIR}/../../analysis/figures/native_preallocation_checkpoint.json
                 --out ${CMAKE_CURRENT_BINARY_DIR}/preallocation-output-$<CONFIG>)
     set_tests_properties(fa18_native_preallocation_output PROPERTIES RUN_SERIAL TRUE)
+    add_test(NAME fa18_native_audio_trace
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_native_audio_trace.py
+                --runner $<TARGET_FILE:fa18_native>)
+    set_tests_properties(fa18_native_audio_trace PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_artifact_policy
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/test_prune_build_artifacts.py)
     add_test(NAME fa18_native_artifact_cleanup

@@ -1,5 +1,13 @@
 # Native port handoff — 2026-10-09
 
+Native audio event comparison (2026-10-09): the playable optional trace records
+all 12,680 Demo boundaries, 8,248 requests and 554 stops. Release/Debug agree
+on every row and complete WAV/RAM/counters/save, with zero heap violations.
+Trace, preallocation/output and PCM ownership CTests pass in both builds.
+Native/source onset, handoffs and interpolation/filter acceptance remain open;
+different startup/timing contexts are not equated. Canonical Release refreshed.
+See [native audio trace evidence](analysis/native_audio_trace_milestone.md).
+
 Original complete demo audio (2026-10-09): all 21,069 ordinary reference calls
 and 18,582,858 stereo sample frames are recorded intact at 44.1 kHz. Their
 406,753-row audio-write/voice trace also preserves full execution and PCM.

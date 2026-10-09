@@ -6,6 +6,7 @@
 #include "replay.h"
 #include "frame_capture.h"
 #include "flight_trace.h"
+#include "audio_trace.h"
 #include "host_input.h"
 #include "../amiga/pcm_output.h"
 #include "../amiga/sdl_memory.h"
@@ -63,11 +64,12 @@ int main(int argc,char **argv) {
     SDL_RendererInfo renderer_info={0};uint64_t previous_frame_start=0;
     NativeFrameCapture capture={0};capture.replay=&loop;capture.count=1;
     const char *flight_trace=NULL;FA18FlightTrace trace={0};FrameDiagnostics diagnostics={0};
+    const char *audio_trace_path=NULL;NativeAudioTrace audio_trace={0};
     unsigned capture_budget_mib=512;
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--audio-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -80,6 +82,7 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--frame-times")) frame_times=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--memory-report")) memory_report=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--flight-trace")) flight_trace=argv[++i];
+        else if(i+1<argc && !strcmp(argv[i],"--audio-trace")) audio_trace_path=argv[++i];
         else if(!strcmp(argv[i],"--hidden")) hidden=1;
         else if(!strcmp(argv[i],"--recorded-input-only")) recorded_input_only=1;
         else if(!strcmp(argv[i],"--frame-capture-entry-only")) capture.entry_only=1;
@@ -105,6 +108,9 @@ int main(int argc,char **argv) {
     if(recorded_input_only && !input && !replay) {fputs("Recorded-input-only diagnostics require --input or --replay\n",stderr);goto done;}
     if(iterations && !input) { fputs("Iteration limit requires --input\n",stderr);goto done; }
     if(capture.prefix && !input) {fputs("Frame capture requires recorded --input\n",stderr);goto done;}
+    if(audio_trace_path && (flight_trace || capture.prefix)) {
+        fputs("Audio trace uses its own capture budget; run separately from flight/RAM captures\n",stderr);goto done;
+    }
     if(capture.entry_only && !capture.prefix) {fputs("Entry-only capture requires --frame-capture\n",stderr);goto done;}
     if(capture.prefix && capture.count>capture_budget_mib/(capture.entry_only?1u:3u)) {
         fputs("Frame capture exceeds --capture-budget-mib (default 512); use a smaller range or an explicit budget\n",stderr);goto done;
@@ -145,6 +151,10 @@ int main(int argc,char **argv) {
     }
     if(!game || !native_frontend_open(game,adf,save_dir,error,sizeof error)) { fprintf(stderr,"%s\n",game?error:"Allocation failed"); goto done; }
     if(input) { game->begin_update=native_replay_update;game->update_context=&loop; }
+    if(audio_trace_path) {
+        if(!native_audio_trace_open(&audio_trace,audio_trace_path,(size_t)capture_budget_mib*1024*1024)) goto done;
+        game->audio.observe=native_audio_trace_event;game->audio.observe_context=&audio_trace;
+    }
     const size_t reserved_capture=capture.prefix?(size_t)capture.count*(capture.entry_only?1u:3u)*1024*1024:0;
     if(flight_trace && !fa18_flight_trace_open(&trace,flight_trace,
         (size_t)capture_budget_mib*1024*1024-reserved_capture)) goto done;
@@ -202,6 +212,7 @@ int main(int argc,char **argv) {
         if(trace.failed) goto done;
         if(timing) times[2]=SDL_GetPerformanceCounter();
         native_audio_render(&game->audio,samples,960,48000);
+        if(audio_trace.failed || (audio_trace_path && !native_audio_trace_boundary(&audio_trace,game,loop.iteration))) goto done;
         if(!amiga_pcm_write(&audio_output,samples,960)) {
             fprintf(stderr,"Cannot publish native PCM audio: %s\n",audio_output.error?audio_output.error:SDL_GetError());goto done;
         }
@@ -263,6 +274,7 @@ done:
     if(amiga_runtime_memory_violations()) result=1;
     free(host_events);
     if(!fa18_flight_trace_close(&trace)) result=1;
+    if(!native_audio_trace_close(&audio_trace)) result=1;
     if(timing && fclose(timing)) {fprintf(stderr,"Cannot finish native frame timing report: %s\n",frame_times);result=1;}
     if(!amiga_pcm_close(&audio_output)) {fputs("Cannot finish native WAV capture\n",stderr);result=1;}
     native_replay_close(&loop);
