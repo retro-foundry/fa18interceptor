@@ -1,5 +1,12 @@
 # Active port source ownership
 
+Complete mission-three plane histories (2026-10-09): all bytes of planes 1
+and 2 on both pages are accounted for across all 4,967 independent flight
+observations (79,472,000 bytes per plane). Every differing observation has a
+validated actual-input radar/message paint history; a missing late history
+is rejected. Complete record cores stay exact. Runtime is unchanged; whole
+planes 0/3 and broader completion remain open. See [plane evidence](../analysis/native_complete_plane_history_milestone.md).
+
 Complete retained audio payloads (2026-10-09): all 8,281 original Demo handler
 requests resolve in final RAM to native payloads on the same channels (12
 original payloads). Full PCM/event coverage and native owned-span hashes pass;

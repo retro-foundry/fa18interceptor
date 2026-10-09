@@ -14,7 +14,7 @@ import sys
 import tempfile
 
 from check_gameplay_checkpoint import ROOT, integer, span
-from check_qualification_message_cadence import digest, pages, verify_trace
+from check_qualification_message_cadence import digest, pages, verify_trace, instrument_panel_refresh
 from compare_flight_traces import read_trace
 
 
@@ -185,19 +185,8 @@ def cross_paint_history(window_path, window, history, selected_planes, original_
             else:
                 body = gzip.decompress((window_path / f'native.{j}.before.dat.gz').read_bytes())
                 assert digest(body) == body_hashes[i]
-            if 0 < integer(body, 0xC45836, 1) < 128:
-                # C30764 copies all 55 instrument rows on a frame redraw.
-                # This bounded route has no horizontal or vertical clipping;
-                # copy the actual immutable image, never a fitted pixel reset.
-                assert integer(body, 0xC45986, 2) == integer(body, 0xC458D8, 2) == 0
-                assert integer(body, 0xC45918, 4) == 0
-                images = []
-                for plane in range(4):
-                    pointer = integer(body, 0xC30752 + 4 * plane, 4)
-                    image = span(body, integer(body, pointer, 4), 2200)
-                    images.append(digest(image))
-                    if not omit_panel_refresh:
-                        expected[name][plane][5800:8000] = image
+            images = instrument_panel_refresh(body, expected[name], apply=not omit_panel_refresh)
+            if images is not None:
                 panel_refreshes.append(dict(iteration=i, runtime=name, image_sha256=images))
             apply_paints(expected[name], events[i, name])
     for iteration in {row['iteration'] for row in panel_refreshes}:

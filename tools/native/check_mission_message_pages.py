@@ -13,13 +13,13 @@ import subprocess
 import tempfile
 
 from check_gameplay_checkpoint import ROOT, integer, span
-from check_qualification_message_cadence import digest, pages, verify_trace
+from check_qualification_message_cadence import digest, pages, verify_trace, instrument_panel_refresh
 from check_mission_message_trace import preserved
 from compare_flight_traces import read_trace
 
 
-def predicted_pages(before, after, drawn, mutation=None):
-    result = [bytearray(page) for page in pages(before)]
+def predicted_pages(before, after, drawn, mutation=None, base=None):
+    result = [bytearray(page) for page in (pages(before) if base is None else base)]
     if not drawn:
         return result
     # This bounded front-cockpit path has no clipping or odd-address glyph
@@ -59,6 +59,28 @@ def predicted_pages(before, after, drawn, mutation=None):
     return result
 
 
+def check_plane_history(entry, expected, previous_draw, first):
+    """Check complete plane-1 XOR in both roles, without fitting any pixels."""
+    live = {name: pages(data) for name, data in entry.items()}
+    for name, data in entry.items():
+        draw = integer(data, 0xC4566C, 2)
+        if first:
+            expected[name] = [bytearray(page) for page in live[name]]
+        elif previous_draw[name] != draw:
+            expected[name] = expected[name][4:] + expected[name][:4]
+        previous_draw[name] = draw
+    if first:
+        assert all(live['source'][p] == live['native'][p] for p in (1, 5)), 'Plane history must start at common complete planes'
+    deltas = []
+    for plane in (1, 5):
+        actual = bytes(a ^ b for a, b in zip(live['source'][plane], live['native'][plane]))
+        predicted = bytes(a ^ b for a, b in zip(expected['source'][plane], expected['native'][plane]))
+        assert actual == predicted, (plane, 'Message history does not explain complete plane difference')
+        deltas.append(actual)
+    return dict(planes=[1, 5], compared_bytes=16000,
+                difference_bytes=[sum(bool(b) for b in d) for d in deltas], delta_sha256=digest(b''.join(deltas)))
+
+
 def verify_return(data, snapshots):
     registers = snapshots['owner']['registers']
     assert registers['pc'] == 0xC322EE
@@ -71,6 +93,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('window', 'original-bodies', 'trace-evidence', 'source-evidence', 'out'):
         parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--plane-history', action='store_true',
+                        help='Predict every plane-1 XOR byte on both pages through the bounded window')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     window = json.loads((args.window / 'report.json').read_text())
@@ -103,14 +127,19 @@ def main():
                 cwd=ROOT, stdout=log, stderr=subprocess.STDOUT, check=True)
     env = {k: v for k, v in os.environ.items() if not k.startswith('FA18_FRAME_')}
     rows, rejections = [], dict(wrong_plane=False, lost_clear=False, wrong_glyph=False)
+    history, expected, previous_draw = [], {}, {}
     with tempfile.TemporaryDirectory(prefix='message-pages-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         for observed in window['rows']:
             i, j = observed['source_iteration'], observed['native_iteration']
+            entry = {}
             for name, index in (('source', i), ('native', j)):
                 data = gzip.decompress((args.window / f'{name}.{index}.dat.gz').read_bytes())
                 assert digest(data) == observed['ram_sha256'][name]
                 verify_trace(data, headers[name], traces[name][index])
+                entry[name] = data
+            if args.plane_history:
+                history.append(dict(iteration=i, **check_plane_history(entry, expected, previous_draw, not history)))
             timing = observed['body_timing']
             before, after, prefix = work / 'before.dat', work / 'after.dat', work / 'message'
             for suffix, path in (('before', before), ('after', after)):
@@ -124,6 +153,7 @@ def main():
             assert '0 gameplay differences, 0 display bytes' in log_path.read_text()
             row = dict(iteration=i, native_iteration=j, strict_page_differences=observed['page_differences'],
                        native_body_input_sha256=digest(before.read_bytes()), native_body_output_sha256=digest(after.read_bytes()))
+            refreshes = {}
             for name in ('source', 'native'):
                 if name == 'source':
                     owner_input, observed_output = [gzip.decompress((args.original_bodies / f'source-body.{i}.{suffix}.dat.gz').read_bytes()) for suffix in ('owner', 'owner-after')]
@@ -157,6 +187,14 @@ def main():
                                       (0xC45887, 1), (0xC459C4, 2), (0xC45ADE, 8)):
                     assert span(actual, address, size) == span(observed_output, address, size)
                 assert predicted_pages(owner_input, actual, state['text_drawn']) == pages(observed_output), (i, name, 'Glyph prediction differs')
+                if args.plane_history:
+                    if name == 'source':
+                        body = gzip.decompress((args.original_bodies / f'source-body.{i}.before.dat.gz').read_bytes())
+                        assert digest(body) == captures[i]['before']['ram_sha256']
+                    else:
+                        body = before.read_bytes()
+                    refreshes[name] = instrument_panel_refresh(body, expected[name])
+                    expected[name] = predicted_pages(owner_input, actual, state['text_drawn'], base=expected[name])
                 for mutation in rejections:
                     if predicted_pages(owner_input, actual, state['text_drawn'], mutation) != pages(observed_output):
                         rejections[mutation] = True
@@ -167,6 +205,9 @@ def main():
                     flags_before=integer(owner_input, 0xC45862, 1), flags_after=integer(actual, 0xC45862, 1),
                     redraws_before=integer(owner_input, 0xC45861, 1), redraws_after=integer(actual, 0xC45861, 1))
             assert row['source']['layout_sha256'] == row['native']['layout_sha256']
+            if args.plane_history:
+                assert refreshes['source'] == refreshes['native'], 'Instrument redraw events/images differ'
+                history[-1]['panel_refresh_sha256'] = refreshes['source']
             rows.append(row)
     assert all(rejections.values()), rejections
     report = dict(first=window['first'], last=window['last'], observations=len(rows), rows=rows,
@@ -178,6 +219,10 @@ def main():
         mutation_rejections=rejections, wrong_owner_return_capture_rejected=True,
         live_original_text_returns_matching=len(rows),
         scope='Bounded actual original and native owner inputs, full non-stack component comparisons and defined text returns; complete live owner page gates and independent immutable-glyph page prediction. Whole native bodies use their existing explicit scope. Cross-runtime message page history remains open; strict differences are retained.')
+    if args.plane_history:
+        report['complete_plane_history'] = history
+        report['scope'] = report['scope'].replace('Cross-runtime message page history remains open;',
+            'Every plane-1 XOR byte on both complete pages is predicted through this bounded window from common initial planes, actual message writes and instrument bitmap redraws; other cross-runtime planes remain open;')
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f"{len(rows)} native bodies, {2 * len(rows)} actual message owners and complete 64,000-byte page predictions pass; three drawing mutations rejected")
     subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)

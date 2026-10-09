@@ -42,6 +42,11 @@ executable is unchanged from the six-point scenery fix; Release/Debug full
 flight traces, complete cores/page hashes, final RAM, earned saves and memory
 reports remain preserved.
 
+The subsequent [whole-plane history check](native_complete_plane_history_milestone.md)
+now predicts all plane-1 XOR bytes in this window and the later colour window,
+and accounts for every plane-1/2 difference across the complete flight. The
+remaining wording below records this earlier owner-only scope.
+
 Strict complete page agreement remains **287/4,967**. This result proves
 message drawing on the bounded actual inputs; it does not yet carry a
 cross-runtime pixel-history prediction through these five complete frame

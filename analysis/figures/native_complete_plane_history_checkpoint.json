@@ -1,0 +1,1593 @@
+{
+  "date": "2026-10-09",
+  "native_runtime_changed": false,
+  "tools_sha256": {
+    "tools/native/assess_mission_plane_history.py": "8703ab196599bebabe026df2b04e72e1021ce4de1e20c06300c36dfe9b6f2ac1",
+    "tools/native/check_mission_message_pages.py": "b355de4d3ab9709b723eaecb29d00c64a8cf979e3526997ed877d5fc43783785",
+    "tools/native/check_qualification_message_cadence.py": "ea988fc18d0e94d85b1ecc944ac5679d0dcd827d34c7ff9a02568c139ea8e3a2",
+    "tools/native/assess_mission_radar_cadence.py": "dbc8e489067d63b909571c2115826c5329b0cff59179d9011332fbf474e90d79"
+  },
+  "whole_flight_planes": {
+    "1": {
+      "report_sha256": "d6e7228589fcbb9fb413b9782e93aa4ea3c63ee7a1ad393edcc414bf7bae56f0",
+      "strict_matching_by_role": {
+        "1": 4953,
+        "5": 4953
+      },
+      "different_observations": [
+        {
+          "iteration": 22303,
+          "native_iteration": 22303,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22304,
+          "native_iteration": 22304,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22305,
+          "native_iteration": 22305,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22306,
+          "native_iteration": 22306,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22307,
+          "native_iteration": 22307,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22308,
+          "native_iteration": 22308,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22309,
+          "native_iteration": 22309,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22310,
+          "native_iteration": 22310,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22311,
+          "native_iteration": 22311,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22312,
+          "native_iteration": 22312,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22313,
+          "native_iteration": 22313,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22314,
+          "native_iteration": 22314,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22315,
+          "native_iteration": 22315,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22316,
+          "native_iteration": 22316,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22317,
+          "native_iteration": 22317,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22318,
+          "native_iteration": 22318,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 25695,
+          "native_iteration": 25693,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-message-plane-one-history/report.json"
+        },
+        {
+          "iteration": 25696,
+          "native_iteration": 25694,
+          "planes": [
+            1,
+            5
+          ],
+          "history": "build/native-flight/cockpit-message-plane-one-history/report.json"
+        },
+        {
+          "iteration": 25697,
+          "native_iteration": 25695,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-message-plane-one-history/report.json"
+        },
+        {
+          "iteration": 26099,
+          "native_iteration": 26097,
+          "planes": [
+            5
+          ],
+          "history": "build/native-flight/cockpit-later-plane-one-history/report.json"
+        },
+        {
+          "iteration": 26100,
+          "native_iteration": 26098,
+          "planes": [
+            1,
+            5
+          ],
+          "history": "build/native-flight/cockpit-later-plane-one-history/report.json"
+        },
+        {
+          "iteration": 26101,
+          "native_iteration": 26099,
+          "planes": [
+            1,
+            5
+          ],
+          "history": "build/native-flight/cockpit-later-plane-one-history/report.json"
+        },
+        {
+          "iteration": 26102,
+          "native_iteration": 26100,
+          "planes": [
+            1,
+            5
+          ],
+          "history": "build/native-flight/cockpit-later-plane-one-history/report.json"
+        },
+        {
+          "iteration": 26103,
+          "native_iteration": 26101,
+          "planes": [
+            1
+          ],
+          "history": "build/native-flight/cockpit-later-plane-one-history/report.json"
+        }
+      ],
+      "bounded_history_observations": [
+        22302,
+        22303,
+        22304,
+        22305,
+        22306,
+        22307,
+        22308,
+        22309,
+        22310,
+        22311,
+        22312,
+        22313,
+        22314,
+        22315,
+        22316,
+        22317,
+        22318,
+        22319,
+        22320,
+        22321,
+        22322,
+        22323,
+        22324,
+        22325,
+        25694,
+        25695,
+        25696,
+        25697,
+        25698,
+        26098,
+        26099,
+        26100,
+        26101,
+        26102,
+        26103,
+        26104
+      ],
+      "observations": 4967,
+      "complete_plane_observations": 9934,
+      "complete_plane_bytes_accounted": 79472000,
+      "first": 22142,
+      "last": 27108,
+      "plane": 1,
+      "runner_sha256": "8967d946ae2ad677810ae310cb132c7f376db964cb9b0b9d937872db48c5cdbb",
+      "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+      "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+      "histories": [
+        {
+          "window": "build/native-flight/mission-three-second-drawing-review",
+          "report": "build/native-flight/cockpit-early-paint-history/report.json",
+          "report_sha256": "4d166b3e3bd7fea2ea93d0c66b2acbacf29c5c842237b7a4be7353df44ba95d6",
+          "first": 22302,
+          "last": 22325
+        },
+        {
+          "window": "build/native-flight/cockpit-message-colour-window",
+          "report": "build/native-flight/cockpit-message-plane-one-history/report.json",
+          "report_sha256": "c3db53c2e1808805ba5efe07811a1ca52f95c1b310870b291d1241f4171762f7",
+          "first": 25694,
+          "last": 25698
+        },
+        {
+          "window": "build/native-flight/cockpit-later-colour-window",
+          "report": "build/native-flight/cockpit-later-plane-one-history/report.json",
+          "report_sha256": "accee2a77a547ade6a14e1b11bbf8a8c627274dbe604df6cdb50a166044114cc",
+          "first": 26098,
+          "last": 26104
+        }
+      ],
+      "missing_late_history_rejected": true,
+      "strict_complete_pages_matching": 287,
+      "scope": "All complete plane-1 bytes on both pages across the recorded independent successful mission-three flight: exact matching hashes or actual validated bounded paint-history deltas. Source-defined cache/blink rules and complete record cores remain strict. Other planes, flights, recorded sound and performance remain open; no pixels or clocks are altered."
+    },
+    "2": {
+      "report_sha256": "dc02969ec8d04fe2c3c719052ed1f5f615bd6883bda99853cb2b33df1d86a98d",
+      "strict_matching_by_role": {
+        "2": 4944,
+        "6": 4944
+      },
+      "different_observations": [
+        {
+          "iteration": 22303,
+          "native_iteration": 22303,
+          "planes": [
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22304,
+          "native_iteration": 22304,
+          "planes": [
+            2
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22305,
+          "native_iteration": 22305,
+          "planes": [
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22306,
+          "native_iteration": 22306,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22307,
+          "native_iteration": 22307,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22308,
+          "native_iteration": 22308,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22309,
+          "native_iteration": 22309,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22310,
+          "native_iteration": 22310,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22311,
+          "native_iteration": 22311,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22312,
+          "native_iteration": 22312,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22313,
+          "native_iteration": 22313,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22314,
+          "native_iteration": 22314,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22315,
+          "native_iteration": 22315,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22316,
+          "native_iteration": 22316,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22317,
+          "native_iteration": 22317,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22318,
+          "native_iteration": 22318,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 22319,
+          "native_iteration": 22319,
+          "planes": [
+            2
+          ],
+          "history": "build/native-flight/cockpit-early-paint-history/report.json"
+        },
+        {
+          "iteration": 23945,
+          "native_iteration": 23944,
+          "planes": [
+            6
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        },
+        {
+          "iteration": 23946,
+          "native_iteration": 23945,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        },
+        {
+          "iteration": 23947,
+          "native_iteration": 23946,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        },
+        {
+          "iteration": 23948,
+          "native_iteration": 23947,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        },
+        {
+          "iteration": 23949,
+          "native_iteration": 23948,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        },
+        {
+          "iteration": 23950,
+          "native_iteration": 23949,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        },
+        {
+          "iteration": 23951,
+          "native_iteration": 23950,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        },
+        {
+          "iteration": 23952,
+          "native_iteration": 23951,
+          "planes": [
+            2,
+            6
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        },
+        {
+          "iteration": 23953,
+          "native_iteration": 23952,
+          "planes": [
+            2
+          ],
+          "history": "build/native-flight/cockpit-plane-two-paint-history/report.json"
+        }
+      ],
+      "bounded_history_observations": [
+        22302,
+        22303,
+        22304,
+        22305,
+        22306,
+        22307,
+        22308,
+        22309,
+        22310,
+        22311,
+        22312,
+        22313,
+        22314,
+        22315,
+        22316,
+        22317,
+        22318,
+        22319,
+        22320,
+        22321,
+        22322,
+        22323,
+        22324,
+        22325,
+        23944,
+        23945,
+        23946,
+        23947,
+        23948,
+        23949,
+        23950,
+        23951,
+        23952,
+        23953,
+        23954
+      ],
+      "observations": 4967,
+      "complete_plane_observations": 9934,
+      "complete_plane_bytes_accounted": 79472000,
+      "first": 22142,
+      "last": 27108,
+      "plane": 2,
+      "runner_sha256": "8967d946ae2ad677810ae310cb132c7f376db964cb9b0b9d937872db48c5cdbb",
+      "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+      "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+      "histories": [
+        {
+          "window": "build/native-flight/mission-three-second-drawing-review",
+          "report": "build/native-flight/cockpit-early-paint-history/report.json",
+          "report_sha256": "4d166b3e3bd7fea2ea93d0c66b2acbacf29c5c842237b7a4be7353df44ba95d6",
+          "first": 22302,
+          "last": 22325
+        },
+        {
+          "window": "build/native-flight/cockpit-plane-two-window",
+          "report": "build/native-flight/cockpit-plane-two-paint-history/report.json",
+          "report_sha256": "179ac33f72f00716a1e17d5fb0565610dd8e50bf127aa6a5e0d29eba070d0e06",
+          "first": 23944,
+          "last": 23954
+        }
+      ],
+      "missing_late_history_rejected": true,
+      "strict_complete_pages_matching": 287,
+      "scope": "All complete plane-2 bytes on both pages across the recorded independent successful mission-three flight: exact matching hashes or actual validated bounded paint-history deltas. Source-defined cache/blink rules and complete record cores remain strict. Other planes, flights, recorded sound and performance remain open; no pixels or clocks are altered."
+    }
+  },
+  "message_windows": [
+    {
+      "report_sha256": "c3db53c2e1808805ba5efe07811a1ca52f95c1b310870b291d1241f4171762f7",
+      "first": 25694,
+      "last": 25698,
+      "observations": 5,
+      "runner_sha256": "8967d946ae2ad677810ae310cb132c7f376db964cb9b0b9d937872db48c5cdbb",
+      "original_probe_sha256": "0365b82b05b5fe9aa827e6770069e6518f067aee82372aa5d0890d5426162e2b",
+      "original_unchanged_observations": 25699,
+      "native_complete_body_comparisons": 5,
+      "live_original_pages_matching": 5,
+      "live_native_pages_matching": 5,
+      "complete_owner_page_predictions": 10,
+      "predicted_bytes": 640000,
+      "mutation_rejections": {
+        "wrong_plane": true,
+        "lost_clear": true,
+        "wrong_glyph": true
+      },
+      "wrong_owner_return_capture_rejected": true,
+      "live_original_text_returns_matching": 5,
+      "complete_plane_history": [
+        {
+          "iteration": 25694,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            0,
+            0
+          ],
+          "delta_sha256": "f85f2c34eb2843d2aa5951ee6e8e76985655b2e3ae2cbdd76bdfd654ecf19997",
+          "panel_refresh_sha256": null
+        },
+        {
+          "iteration": 25695,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            0,
+            40
+          ],
+          "delta_sha256": "777a996471c63aa4bdbb90488385850dc2366f437bdfa7575384ec8ec0032c98",
+          "panel_refresh_sha256": null
+        },
+        {
+          "iteration": 25696,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            40,
+            40
+          ],
+          "delta_sha256": "6f05ccdf77dde0ffa10d2f4994049efb7ec2ea543477fa686f5b9593007b33d2",
+          "panel_refresh_sha256": null
+        },
+        {
+          "iteration": 25697,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            40,
+            0
+          ],
+          "delta_sha256": "d93a0157a97d9caf0271239d5fc836b0d1d8c2db9f25dd8538a7df96440d5176",
+          "panel_refresh_sha256": null
+        },
+        {
+          "iteration": 25698,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            0,
+            0
+          ],
+          "delta_sha256": "f85f2c34eb2843d2aa5951ee6e8e76985655b2e3ae2cbdd76bdfd654ecf19997",
+          "panel_refresh_sha256": null
+        }
+      ],
+      "scope": "Bounded actual original and native owner inputs, full non-stack component comparisons and defined text returns; complete live owner page gates and independent immutable-glyph page prediction. Whole native bodies use their existing explicit scope. Every plane-1 XOR byte on both complete pages is predicted through this bounded window from common initial planes, actual message writes and instrument bitmap redraws; other cross-runtime planes remain open; strict differences are retained.",
+      "owner_hashes_and_cache": [
+        {
+          "iteration": 25694,
+          "native_iteration": 25692,
+          "native_body_input_sha256": "44d492299a9035ee6db6c44d94284b1f03cbd193c276fec1691c33c3d1cf50c9",
+          "native_body_output_sha256": "a5f805153bc6207298a9b51a22e738fe23ca6d8f69a7c9a43afa75613690f89e",
+          "source": {
+            "owner_input_sha256": "ba51a91e4e117d630d964b459e28c70bdaaa264ebe273e09c327ae810c8e20f0",
+            "owner_output_sha256": "d9a7234984d578eeaddf1207b4ac910f5efe1495dd57674e401dea3cb51367ac",
+            "predicted_pages_sha256": [
+              "9ea4df9150ef006e5dc80c19cf203533136b670ba4e53a6f5ccd8a528941d8fc",
+              "de6a3af77fc55e87582b92b30c5e223de39657fdffcffcb5374605dbde103207",
+              "0f2ccb3c3f8675867f2c48d207204cd66f8fda64c4132ab4d563e5d7a708e89c",
+              "3fd65d16856869e9f041135688aa150afad8bacfc8534f1710840975337bf135",
+              "cb8a34a970174368c45806a0262485e594be945de406ec5922747fafe1c534f0",
+              "30d8b64583e74c2201f77084bf8ceabf66ef7971951be61535c1b8befaeba186",
+              "77fe0080e9cfed066a79a8dad972f19b7150e46073a98b7d2bdd4d3f45ad2fa3",
+              "3534783a17eb6f987f66fad6464c475880d974990119e1f39a4908d1894d7d37"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   HDG:  016    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 2,
+            "redraws_after": 1
+          },
+          "native": {
+            "owner_input_sha256": "6e05a69c92d7dacef5590a7ea5988067824c59ea56168a7176e1f7e3a5bb45d4",
+            "owner_output_sha256": "6e05a69c92d7dacef5590a7ea5988067824c59ea56168a7176e1f7e3a5bb45d4",
+            "predicted_pages_sha256": [
+              "ab6e23f432651f046fae1e46c943b1447403b05d2ee8fa6d0dcc58db9f5dd7a5",
+              "17746c22e93c8d2cb69d475852f93d66e0d68cf4bdc03ae96362d7b6aafac2c4",
+              "0f2ccb3c3f8675867f2c48d207204cd66f8fda64c4132ab4d563e5d7a708e89c",
+              "8250bd7f895404b634a65a490da43384fb531924c0a3467b6522ebcfcb3cee0b",
+              "ef63c4f03e626ee55e703273d2471eb03fec3490f6121aeb26dcbff3436c31ca",
+              "30d8b64583e74c2201f77084bf8ceabf66ef7971951be61535c1b8befaeba186",
+              "77fe0080e9cfed066a79a8dad972f19b7150e46073a98b7d2bdd4d3f45ad2fa3",
+              "4706b313e7403a437beea0f6917950c5f6ae32d8411ca34f05d68c6e39ca5a1d"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 0,
+            "text_drawn": false,
+            "return_preserved": true,
+            "return_value": 231,
+            "message_line": "    M1G-29   HDG:  014    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 2,
+            "redraws_after": 2
+          }
+        },
+        {
+          "iteration": 25695,
+          "native_iteration": 25693,
+          "native_body_input_sha256": "bbf02c104b96aedf66e10374ff1d6134a111d3a3a6c2756d48184191564fae3b",
+          "native_body_output_sha256": "60bc107dc207b8f824eb9a6636ac8e1a0e69a4bb6baae4ac5710dde094ef1d30",
+          "source": {
+            "owner_input_sha256": "6c3990f0918c49dd464abf734f91907be88448acd2f8cd0dcd9120cc32545019",
+            "owner_output_sha256": "0443adab9c392c96a3e645eea05cb114401d74c5d911d92b1cbcd0dafbfa0432",
+            "predicted_pages_sha256": [
+              "b703526caf29823bea8708ad248866868ceffe0f4b64f50f59daa1158f5375fd",
+              "a075a3d8d0e447cf46b9aa48274aa7c937b3bf179a391a4888b3a5bef983fe3c",
+              "50d1bb3a460fea7cbd3e136025b15319ea08767990ffc7ee4173b8c2a81cc178",
+              "2592af5fbfbb12ed528f6b19b1c3bc375f61a29086663aae86d690b7bcc42ba3",
+              "9ea4df9150ef006e5dc80c19cf203533136b670ba4e53a6f5ccd8a528941d8fc",
+              "de6a3af77fc55e87582b92b30c5e223de39657fdffcffcb5374605dbde103207",
+              "0f2ccb3c3f8675867f2c48d207204cd66f8fda64c4132ab4d563e5d7a708e89c",
+              "3fd65d16856869e9f041135688aa150afad8bacfc8534f1710840975337bf135"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   HDG:  016    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 1,
+            "redraws_after": 0
+          },
+          "native": {
+            "owner_input_sha256": "c43f3f70e29ce8baeb655b2abbfe6b70ecb9c9555f8c4411c056d25a57339322",
+            "owner_output_sha256": "c43f3f70e29ce8baeb655b2abbfe6b70ecb9c9555f8c4411c056d25a57339322",
+            "predicted_pages_sha256": [
+              "49550906d0a800f02cc77fd1fb7a32d2c9904017b1f0048ee28c4ef6f3e87399",
+              "481850bf5a81a3a45a9eac655225f68954ed914cf728e75a40cf929b49adfb77",
+              "50d1bb3a460fea7cbd3e136025b15319ea08767990ffc7ee4173b8c2a81cc178",
+              "4500968bde9f2389264bb26d7134ad568ddee18eefbbd7f89b4d1a84e10e1c0f",
+              "ab6e23f432651f046fae1e46c943b1447403b05d2ee8fa6d0dcc58db9f5dd7a5",
+              "17746c22e93c8d2cb69d475852f93d66e0d68cf4bdc03ae96362d7b6aafac2c4",
+              "0f2ccb3c3f8675867f2c48d207204cd66f8fda64c4132ab4d563e5d7a708e89c",
+              "8250bd7f895404b634a65a490da43384fb531924c0a3467b6522ebcfcb3cee0b"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 0,
+            "text_drawn": false,
+            "return_preserved": true,
+            "return_value": 231,
+            "message_line": "    M1G-29   HDG:  014    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 2,
+            "redraws_after": 2
+          }
+        },
+        {
+          "iteration": 25696,
+          "native_iteration": 25694,
+          "native_body_input_sha256": "91188e5f605c7cd32426a7fe9da3005083385117a2765c1f9085287c54c37dc2",
+          "native_body_output_sha256": "1fd931fee7b08e53177136935952b149591efdf0a4d9583052c96245cb112062",
+          "source": {
+            "owner_input_sha256": "8e82b9484766b9c912ddec7204529618983dc1273ed850acfaaac2edeb20d0fb",
+            "owner_output_sha256": "cf38deaa6b2fc27548a2f9c02e73186d1aecc96ece4b775e9a2bc69c39146dde",
+            "predicted_pages_sha256": [
+              "36135b83d24c544e8af0005f6db8515c9b0751ee9ed9ec69bbf478205da61e80",
+              "0e4022bdbcf4df7155f7a45108e774b652a72dbfbd41aef611d1e7945cad08d9",
+              "7175000c5223c3c3c44bbf8ff007ef838a447c0f03d74e0c0c03fc6f155a37f3",
+              "95c2befa98668fcdf369c50d39e908c6c6cc188918974c7e2f460ad600c1ac47",
+              "b703526caf29823bea8708ad248866868ceffe0f4b64f50f59daa1158f5375fd",
+              "a075a3d8d0e447cf46b9aa48274aa7c937b3bf179a391a4888b3a5bef983fe3c",
+              "50d1bb3a460fea7cbd3e136025b15319ea08767990ffc7ee4173b8c2a81cc178",
+              "2592af5fbfbb12ed528f6b19b1c3bc375f61a29086663aae86d690b7bcc42ba3"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   HDG:  018    ",
+            "flags_before": 64,
+            "flags_after": 0,
+            "redraws_before": 0,
+            "redraws_after": 255
+          },
+          "native": {
+            "owner_input_sha256": "6017979a41f9b4ffcfa7386337e4e0537fba820ae6cd7b6562eadbe05eaed9b1",
+            "owner_output_sha256": "6017979a41f9b4ffcfa7386337e4e0537fba820ae6cd7b6562eadbe05eaed9b1",
+            "predicted_pages_sha256": [
+              "30b16e7601cbc45b85d436847bf39bc50460942072f7ed559d35cd85b5baa866",
+              "0e4022bdbcf4df7155f7a45108e774b652a72dbfbd41aef611d1e7945cad08d9",
+              "7175000c5223c3c3c44bbf8ff007ef838a447c0f03d74e0c0c03fc6f155a37f3",
+              "9a09e3aaa5f25639374790bf3797eb8757e93ae07c8e104f3e02a0b732bc61c5",
+              "49550906d0a800f02cc77fd1fb7a32d2c9904017b1f0048ee28c4ef6f3e87399",
+              "481850bf5a81a3a45a9eac655225f68954ed914cf728e75a40cf929b49adfb77",
+              "50d1bb3a460fea7cbd3e136025b15319ea08767990ffc7ee4173b8c2a81cc178",
+              "4500968bde9f2389264bb26d7134ad568ddee18eefbbd7f89b4d1a84e10e1c0f"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 0,
+            "text_drawn": false,
+            "return_preserved": true,
+            "return_value": 231,
+            "message_line": "    M1G-29   HDG:  014    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 2,
+            "redraws_after": 2
+          }
+        },
+        {
+          "iteration": 25697,
+          "native_iteration": 25695,
+          "native_body_input_sha256": "cc10118e652a547989965ac54b277f392ba4ecc75a7b6d8a5c44d78afef8e381",
+          "native_body_output_sha256": "355048b1a3f747a8df805bbf4414d28b8ffda1eb31a471108afeed903238550c",
+          "source": {
+            "owner_input_sha256": "44b715f498fcc6839a0ed7c2f847dd5984160b0ec5913d0b649368271ed2891d",
+            "owner_output_sha256": "f2b3e3e21b21638327589aaad2f8cdcc9889b0e68b5c97a554c57e5285e363fc",
+            "predicted_pages_sha256": [
+              "c19c343daf359c4d60e663726d00a971c2c2ffddfb1f22fa123d74949a93f4ea",
+              "6549e26f4699f536c25e76855e654a401f75e28525ee82ab38165730bade8ef7",
+              "5c0b30cc9fd6de1c8d50cd438c27deb11df0e1b03c47df48815ebaadefa3f75f",
+              "557f35052ff7520d3659acc3a8ab8c20dc0a9226656cd86cf465958a04c082d4",
+              "36135b83d24c544e8af0005f6db8515c9b0751ee9ed9ec69bbf478205da61e80",
+              "0e4022bdbcf4df7155f7a45108e774b652a72dbfbd41aef611d1e7945cad08d9",
+              "7175000c5223c3c3c44bbf8ff007ef838a447c0f03d74e0c0c03fc6f155a37f3",
+              "95c2befa98668fcdf369c50d39e908c6c6cc188918974c7e2f460ad600c1ac47"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   HDG:  018    ",
+            "flags_before": 0,
+            "flags_after": 0,
+            "redraws_before": 2,
+            "redraws_after": 1
+          },
+          "native": {
+            "owner_input_sha256": "bd8a301121982916c1c32dd6a6deeaaf60631cfa3eb314371919de58848ab023",
+            "owner_output_sha256": "bd8a301121982916c1c32dd6a6deeaaf60631cfa3eb314371919de58848ab023",
+            "predicted_pages_sha256": [
+              "02718db7b213cba38f2408c1791d4164160d5c1b566ffbcbc46a878913fcdabc",
+              "6549e26f4699f536c25e76855e654a401f75e28525ee82ab38165730bade8ef7",
+              "5c0b30cc9fd6de1c8d50cd438c27deb11df0e1b03c47df48815ebaadefa3f75f",
+              "bdc89acfaa49893df706ad6c7ccd5d0aa15d54d52ab2ef5058223a1708c4e4cc",
+              "30b16e7601cbc45b85d436847bf39bc50460942072f7ed559d35cd85b5baa866",
+              "0e4022bdbcf4df7155f7a45108e774b652a72dbfbd41aef611d1e7945cad08d9",
+              "7175000c5223c3c3c44bbf8ff007ef838a447c0f03d74e0c0c03fc6f155a37f3",
+              "9a09e3aaa5f25639374790bf3797eb8757e93ae07c8e104f3e02a0b732bc61c5"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 0,
+            "text_drawn": false,
+            "return_preserved": true,
+            "return_value": 231,
+            "message_line": "    M1G-29   HDG:  014    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 2,
+            "redraws_after": 2
+          }
+        },
+        {
+          "iteration": 25698,
+          "native_iteration": 25696,
+          "native_body_input_sha256": "cbdead38602b802d204b1f7440bba2b5c7fc9b904ea704d913a5287bc33d0920",
+          "native_body_output_sha256": "08ba8229487872f352f87c41e0dbdcf89c0ef972c0d8550b3e608e462a9b1517",
+          "source": {
+            "owner_input_sha256": "d35257bb716135ea309a6bc34071cd033c3557da28f3b153579d7cfb2faf3b0e",
+            "owner_output_sha256": "781fcad77a769d72866677e3a5bbc313b8c16665864440b7aaff6ad9a295cf87",
+            "predicted_pages_sha256": [
+              "388668048f4e1264bc71468cc06e9f243e98816cb3e67f627814e5a101c3052b",
+              "d94c36335dc08b172e3a174e54903227a91090f00d54cef4fa3db07244ac638e",
+              "c29b1be2dfaef8ea9de3ea1d98063bb0ab239db063eb2197a0088d70428de60d",
+              "40c3bb234bb7b9f50df572d7f0e24dddcd254f3fa189421353303c95443395a2",
+              "c19c343daf359c4d60e663726d00a971c2c2ffddfb1f22fa123d74949a93f4ea",
+              "6549e26f4699f536c25e76855e654a401f75e28525ee82ab38165730bade8ef7",
+              "5c0b30cc9fd6de1c8d50cd438c27deb11df0e1b03c47df48815ebaadefa3f75f",
+              "557f35052ff7520d3659acc3a8ab8c20dc0a9226656cd86cf465958a04c082d4"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   HDG:  018    ",
+            "flags_before": 0,
+            "flags_after": 0,
+            "redraws_before": 1,
+            "redraws_after": 0
+          },
+          "native": {
+            "owner_input_sha256": "77fe597b2ec628860cc8d97c7c454ece2ae2136a9911fd695855ba50d10c3e01",
+            "owner_output_sha256": "77fe597b2ec628860cc8d97c7c454ece2ae2136a9911fd695855ba50d10c3e01",
+            "predicted_pages_sha256": [
+              "805da453d4b0e81acb7b3089c3a2997fe2b21084dfd23d83743e9e02450cca3a",
+              "d94c36335dc08b172e3a174e54903227a91090f00d54cef4fa3db07244ac638e",
+              "c29b1be2dfaef8ea9de3ea1d98063bb0ab239db063eb2197a0088d70428de60d",
+              "8f03fcb6b97d166fe09378aec994bf86cf50be3e2c4fa10e40873c937dfef9bf",
+              "02718db7b213cba38f2408c1791d4164160d5c1b566ffbcbc46a878913fcdabc",
+              "6549e26f4699f536c25e76855e654a401f75e28525ee82ab38165730bade8ef7",
+              "5c0b30cc9fd6de1c8d50cd438c27deb11df0e1b03c47df48815ebaadefa3f75f",
+              "bdc89acfaa49893df706ad6c7ccd5d0aa15d54d52ab2ef5058223a1708c4e4cc"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 0,
+            "text_drawn": false,
+            "return_preserved": true,
+            "return_value": 231,
+            "message_line": "    M1G-29   HDG:  014    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 2,
+            "redraws_after": 2
+          }
+        }
+      ]
+    },
+    {
+      "report_sha256": "accee2a77a547ade6a14e1b11bbf8a8c627274dbe604df6cdb50a166044114cc",
+      "first": 26098,
+      "last": 26104,
+      "observations": 7,
+      "runner_sha256": "8967d946ae2ad677810ae310cb132c7f376db964cb9b0b9d937872db48c5cdbb",
+      "original_probe_sha256": "0365b82b05b5fe9aa827e6770069e6518f067aee82372aa5d0890d5426162e2b",
+      "original_unchanged_observations": 26105,
+      "native_complete_body_comparisons": 7,
+      "live_original_pages_matching": 7,
+      "live_native_pages_matching": 7,
+      "complete_owner_page_predictions": 14,
+      "predicted_bytes": 896000,
+      "mutation_rejections": {
+        "wrong_plane": true,
+        "lost_clear": true,
+        "wrong_glyph": true
+      },
+      "wrong_owner_return_capture_rejected": true,
+      "live_original_text_returns_matching": 7,
+      "complete_plane_history": [
+        {
+          "iteration": 26098,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            0,
+            0
+          ],
+          "delta_sha256": "f85f2c34eb2843d2aa5951ee6e8e76985655b2e3ae2cbdd76bdfd654ecf19997",
+          "panel_refresh_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        },
+        {
+          "iteration": 26099,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            0,
+            17
+          ],
+          "delta_sha256": "301ab3d3b01bc569045550f17042c21f332a7795b820ea90d90610be00a58d96",
+          "panel_refresh_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        },
+        {
+          "iteration": 26100,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            17,
+            17
+          ],
+          "delta_sha256": "973cc51ac4f362e6938bc54fe0828980c639707f0be5ffba4643756c604c5630",
+          "panel_refresh_sha256": [
+            "b6f5f1444d00f2e6ec41b122deddfc3d387c7f021d5fbc0ea6409405fa28b54d",
+            "48d166a2fae512d6800474967853918844d34ccf36f088c800348f2e3dbde65b",
+            "38c642d104383ef77962e886604897d8fbcc296959683120e4c5962782f182c1",
+            "7fa31caa9661ac344ab5faa8fc65dc57c76eea635adf73c2cf03cf49dfce49af"
+          ]
+        },
+        {
+          "iteration": 26101,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            17,
+            17
+          ],
+          "delta_sha256": "973cc51ac4f362e6938bc54fe0828980c639707f0be5ffba4643756c604c5630",
+          "panel_refresh_sha256": null
+        },
+        {
+          "iteration": 26102,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            17,
+            17
+          ],
+          "delta_sha256": "973cc51ac4f362e6938bc54fe0828980c639707f0be5ffba4643756c604c5630",
+          "panel_refresh_sha256": null
+        },
+        {
+          "iteration": 26103,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            17,
+            0
+          ],
+          "delta_sha256": "dd75230e14abd0f74d3973acbc41198507af126c6133f2f17206b1aaae20da17",
+          "panel_refresh_sha256": null
+        },
+        {
+          "iteration": 26104,
+          "planes": [
+            1,
+            5
+          ],
+          "compared_bytes": 16000,
+          "difference_bytes": [
+            0,
+            0
+          ],
+          "delta_sha256": "f85f2c34eb2843d2aa5951ee6e8e76985655b2e3ae2cbdd76bdfd654ecf19997",
+          "panel_refresh_sha256": null
+        }
+      ],
+      "scope": "Bounded actual original and native owner inputs, full non-stack component comparisons and defined text returns; complete live owner page gates and independent immutable-glyph page prediction. Whole native bodies use their existing explicit scope. Every plane-1 XOR byte on both complete pages is predicted through this bounded window from common initial planes, actual message writes and instrument bitmap redraws; other cross-runtime planes remain open; strict differences are retained.",
+      "owner_hashes_and_cache": [
+        {
+          "iteration": 26098,
+          "native_iteration": 26096,
+          "native_body_input_sha256": "f7222904207dc3fff9d8be78b86bf90abea49938b2e9cf52c27a52ddd9a8410a",
+          "native_body_output_sha256": "6de2934a16cdd19526f2f531a97bafbb57fc2611bad23db6ced7e6f46fcf7919",
+          "source": {
+            "owner_input_sha256": "831d23889a9bd066566070eed68e6c8dca834ee2be47271f2e2fd1c6739b02f0",
+            "owner_output_sha256": "b0c80ff372e7ce3feae3853db7c9a7e83a91b66a64640e16af3bac261f34ea6a",
+            "predicted_pages_sha256": [
+              "cdad00c48bccb193810f2f62df26fc79517fa733477a11acfee66e11dd6f28a2",
+              "b0155162b84f0dbea3c4369df73b640ba4ec1e3841749ee6856972777af27600",
+              "05b44441f45d5a918a527de0ee88641c653e6892bdf7c395451255ec72e648ea",
+              "8f5ab1f24d84f06a05c5be45d8fe9e842786fb99af0790b7bf0764062f5a4d4b",
+              "5ac5e4d2e4162c2463644121cbf674b63fd5760e81f0c876c69095eabfad9604",
+              "fd114f3ef725c9c22194b7de76435ad909df6b698825fc4fce398c8446c3c961",
+              "2ab3f52254d881e431681fc9be15f07e78f04295b516a233f3cc423b431996ea",
+              "5c389b6e04c346e4792ff0019a138715ca166dac53a37f0a154f58ed7e40e363"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    M1G-29   HDG:  239    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 2,
+            "redraws_after": 1
+          },
+          "native": {
+            "owner_input_sha256": "053179f102f84db12ae625f8f3dd7774036161c260d98516ff69e6f4165876a6",
+            "owner_output_sha256": "b6a86a66a96d5bd5e0de504a73de68de5283cfd4322a05b51a3271a1ae59c892",
+            "predicted_pages_sha256": [
+              "50351863c45f060e47ca2919bc7856ff3d344f4b7082f04f21c84bd2977a31e1",
+              "e9a6c0280c07fd44d98f8b6229af5806529fd0bed93fd6639caa79e9e8bf89a8",
+              "05b44441f45d5a918a527de0ee88641c653e6892bdf7c395451255ec72e648ea",
+              "8f5ab1f24d84f06a05c5be45d8fe9e842786fb99af0790b7bf0764062f5a4d4b",
+              "2da32dc96fb20d6867a59d130ce751eedb0e58313dcab71a758ae9ac0dba3d45",
+              "fd114f3ef725c9c22194b7de76435ad909df6b698825fc4fce398c8446c3c961",
+              "2ab3f52254d881e431681fc9be15f07e78f04295b516a233f3cc423b431996ea",
+              "9b2add79b4f3c6c3a87a59d81dd45665d07474af14d19b37f1b8d103fee3f8a0"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    M1G-29   ALT:  5330   ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 2,
+            "redraws_after": 1
+          }
+        },
+        {
+          "iteration": 26099,
+          "native_iteration": 26097,
+          "native_body_input_sha256": "e7097384c136daedf692761cd4a4980cd98ee6fc8aed574e68251fe9cd18130b",
+          "native_body_output_sha256": "79cbbd13c04d81e11b8556581b8c649021b95a3b00110dfd93f32fdb678ebd76",
+          "source": {
+            "owner_input_sha256": "be8764cb9d57933b2534a717df152dc0b56ca4fc4309f6f59b81fc41bf9b83df",
+            "owner_output_sha256": "9dac472d4593602d51079087f6db5d414dbd0d06e799ab00417a8ed329696162",
+            "predicted_pages_sha256": [
+              "b496723b8652befcf8bf427797976a48c8144ed08c5c59819ff4056f6a025737",
+              "8d5f809e5b7ef68e7f75803854b029ac1beb2a0757a428b1bc38e4b5713570ae",
+              "fb3ba8d5a103a886c3003bb887fdf8c2c3a8b01161bc02b090b0635762887f7e",
+              "f36f2e8ad4b9d57e60ff0e2d1c037ccfdfa039d788ced30cb097717dffea5c49",
+              "cdad00c48bccb193810f2f62df26fc79517fa733477a11acfee66e11dd6f28a2",
+              "b0155162b84f0dbea3c4369df73b640ba4ec1e3841749ee6856972777af27600",
+              "05b44441f45d5a918a527de0ee88641c653e6892bdf7c395451255ec72e648ea",
+              "8f5ab1f24d84f06a05c5be45d8fe9e842786fb99af0790b7bf0764062f5a4d4b"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    M1G-29   HDG:  239    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 1,
+            "redraws_after": 0
+          },
+          "native": {
+            "owner_input_sha256": "8f934e15f367e08c7800866fff597a18f49685827ce3d1a9275fc46f11f6f8ea",
+            "owner_output_sha256": "6f574944fd571f100567f2ab69f2bb70fb7b61f2d488d79158f527200385d2c6",
+            "predicted_pages_sha256": [
+              "d06210806c65a7a671c8ebcaad5728e5c9704fcae8030c38cc491d32188b5cb2",
+              "70e887338a9ddc919415c2a391a4df4a86def027a6fe2ce728226b44fdf5e98d",
+              "fb3ba8d5a103a886c3003bb887fdf8c2c3a8b01161bc02b090b0635762887f7e",
+              "f36f2e8ad4b9d57e60ff0e2d1c037ccfdfa039d788ced30cb097717dffea5c49",
+              "50351863c45f060e47ca2919bc7856ff3d344f4b7082f04f21c84bd2977a31e1",
+              "e9a6c0280c07fd44d98f8b6229af5806529fd0bed93fd6639caa79e9e8bf89a8",
+              "05b44441f45d5a918a527de0ee88641c653e6892bdf7c395451255ec72e648ea",
+              "8f5ab1f24d84f06a05c5be45d8fe9e842786fb99af0790b7bf0764062f5a4d4b"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    M1G-29   ALT:  5330   ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 1,
+            "redraws_after": 0
+          }
+        },
+        {
+          "iteration": 26100,
+          "native_iteration": 26098,
+          "native_body_input_sha256": "65bcd2c45e870ef4e0910fb7c20afc5f56fcfb837155f12d7855a85e278b9e5b",
+          "native_body_output_sha256": "796331d700d4596b65ba35472cb1a278542dc677da96186855f767f72815869f",
+          "source": {
+            "owner_input_sha256": "ea6566a8932a8263b9034b2a3309bba120fe009456ecdfba2e9e8d074b1e6ba4",
+            "owner_output_sha256": "3c6d176a24cc698ac53c335d6c631785789fb5cf6788293e38b0c569e3f516d4",
+            "predicted_pages_sha256": [
+              "b496723b8652befcf8bf427797976a48c8144ed08c5c59819ff4056f6a025737",
+              "bd14ef19fe083c93200872ae0813dbc6eb67f6054e67834baa08caea38562975",
+              "f6074c54fe6449afd59369750b8ca1d3898fc69406299957b9c1da2edb5ed95b",
+              "17b1316fda3981fd30a06af2eb869e42ed0d22f3eb7bf912dec9f20f4ed19513",
+              "b496723b8652befcf8bf427797976a48c8144ed08c5c59819ff4056f6a025737",
+              "8d5f809e5b7ef68e7f75803854b029ac1beb2a0757a428b1bc38e4b5713570ae",
+              "fb3ba8d5a103a886c3003bb887fdf8c2c3a8b01161bc02b090b0635762887f7e",
+              "f36f2e8ad4b9d57e60ff0e2d1c037ccfdfa039d788ced30cb097717dffea5c49"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    M1G-29   HDG:  239    ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 0,
+            "redraws_after": 255
+          },
+          "native": {
+            "owner_input_sha256": "7dc3216ee2c3178be48ff3e9f2f49c0410cbf4b767f2fd705c4a2ccd6f68b6f6",
+            "owner_output_sha256": "4846e6e6c7ba39f6a3f42b73d71d11c72aaedc307cdc293cf89d8fc8ab664de9",
+            "predicted_pages_sha256": [
+              "b496723b8652befcf8bf427797976a48c8144ed08c5c59819ff4056f6a025737",
+              "725397445d79fa6352aaf92450f25268afcd4fcc6f30b64b5f7e3853bc6d5716",
+              "f6074c54fe6449afd59369750b8ca1d3898fc69406299957b9c1da2edb5ed95b",
+              "17b1316fda3981fd30a06af2eb869e42ed0d22f3eb7bf912dec9f20f4ed19513",
+              "d06210806c65a7a671c8ebcaad5728e5c9704fcae8030c38cc491d32188b5cb2",
+              "70e887338a9ddc919415c2a391a4df4a86def027a6fe2ce728226b44fdf5e98d",
+              "fb3ba8d5a103a886c3003bb887fdf8c2c3a8b01161bc02b090b0635762887f7e",
+              "f36f2e8ad4b9d57e60ff0e2d1c037ccfdfa039d788ced30cb097717dffea5c49"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    M1G-29   ALT:  5330   ",
+            "flags_before": 64,
+            "flags_after": 64,
+            "redraws_before": 0,
+            "redraws_after": 255
+          }
+        },
+        {
+          "iteration": 26101,
+          "native_iteration": 26099,
+          "native_body_input_sha256": "93e92df526cabca6027c2ae8d33328d907d4b2d258227462da174954e7be9572",
+          "native_body_output_sha256": "0bdb2be65e675c2184425738c2faa07627bc2db0afcbfae0a46dab572274c118",
+          "source": {
+            "owner_input_sha256": "d7840cbd2f3c0ea97f8483ce86a271d3ad7efdf1ec0c2f92ae8a35c746a5f551",
+            "owner_output_sha256": "cc204a3e6ffe96a748b411481628a3af303ee1d3264bad01d1f45c612d0c62a9",
+            "predicted_pages_sha256": [
+              "b07f2371ad92754525fb2b6d298591b55d7f798d800b7a5f222b8110a5bb3ffc",
+              "d555eb96ee0e2a74745f5fe1f8b884fc7e804642fce209c929cbe04e12cd4a47",
+              "0568ece70bac2ebf0b4e5fba25de2e840f178d39f530b4fe9013809d9f36de77",
+              "760136489fc261a412a4e4efe81c85ab2407440f906cd5039e302d046bd9e388",
+              "b496723b8652befcf8bf427797976a48c8144ed08c5c59819ff4056f6a025737",
+              "bd14ef19fe083c93200872ae0813dbc6eb67f6054e67834baa08caea38562975",
+              "f6074c54fe6449afd59369750b8ca1d3898fc69406299957b9c1da2edb5ed95b",
+              "17b1316fda3981fd30a06af2eb869e42ed0d22f3eb7bf912dec9f20f4ed19513"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   SPD:  469    ",
+            "flags_before": 64,
+            "flags_after": 0,
+            "redraws_before": 255,
+            "redraws_after": 255
+          },
+          "native": {
+            "owner_input_sha256": "e4362a2aabebceaac102dbf90b7f0719262f3b5eca399ee772f4d1bce72d79a4",
+            "owner_output_sha256": "f0a4ee607d1b0b13f9430aca525911afdcc6506de9ec5a94b408011677f1a507",
+            "predicted_pages_sha256": [
+              "02bd7c15ecc2bd6ccf6e6b26781915d5c8c7f033d34c875f8f061095890e7709",
+              "8ce7aaae271a7260488e749dde1687400d44c37993c88f9d61b8e06e23d76166",
+              "0568ece70bac2ebf0b4e5fba25de2e840f178d39f530b4fe9013809d9f36de77",
+              "760136489fc261a412a4e4efe81c85ab2407440f906cd5039e302d046bd9e388",
+              "b496723b8652befcf8bf427797976a48c8144ed08c5c59819ff4056f6a025737",
+              "725397445d79fa6352aaf92450f25268afcd4fcc6f30b64b5f7e3853bc6d5716",
+              "f6074c54fe6449afd59369750b8ca1d3898fc69406299957b9c1da2edb5ed95b",
+              "17b1316fda3981fd30a06af2eb869e42ed0d22f3eb7bf912dec9f20f4ed19513"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   ALT:  5510   ",
+            "flags_before": 64,
+            "flags_after": 0,
+            "redraws_before": 255,
+            "redraws_after": 255
+          }
+        },
+        {
+          "iteration": 26102,
+          "native_iteration": 26100,
+          "native_body_input_sha256": "59020c09a9d7408ae2feaa3260cc6a75187538fca13e7867b499a31ac7e45e07",
+          "native_body_output_sha256": "6fa1eb6b670c23951c6d6b0cefa3f461dcacff45a5bfe9e48582ca0f69ec2c1a",
+          "source": {
+            "owner_input_sha256": "c974715a6935adbc91626ca4956a4eaf91a80c4abb4c7d8a4a6f41fc81512364",
+            "owner_output_sha256": "644da2bd00fdf910cc37c453d99d9a7b60ac42f76bf6a6f03d1b9248693d9491",
+            "predicted_pages_sha256": [
+              "41fc9174e74f59c7a7d994faca2c6c3fe37490e30aebcddde12eca437d14bb15",
+              "b60d0ad58c3f4568613b53076dacaeb63adb1dd597c1307fe266343ecbd63496",
+              "9188364eb35f57fea4ba7957f2d45b232e233283ef4965d49015cf534f55d2e8",
+              "6070cea38758e1cbaef6af60321b21053ecc81c6a52d36cb4f762b73bbd58a17",
+              "b07f2371ad92754525fb2b6d298591b55d7f798d800b7a5f222b8110a5bb3ffc",
+              "d555eb96ee0e2a74745f5fe1f8b884fc7e804642fce209c929cbe04e12cd4a47",
+              "0568ece70bac2ebf0b4e5fba25de2e840f178d39f530b4fe9013809d9f36de77",
+              "760136489fc261a412a4e4efe81c85ab2407440f906cd5039e302d046bd9e388"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   SPD:  469    ",
+            "flags_before": 0,
+            "flags_after": 0,
+            "redraws_before": 2,
+            "redraws_after": 1
+          },
+          "native": {
+            "owner_input_sha256": "fa2b64bc308d567957d207eec0d0f2bf63980b76cbdf431e8f644491f160c8d3",
+            "owner_output_sha256": "bedfb19a838f9de0c37c4b74cca278ad807eb4e858165ab686a130e0c2e3cbfe",
+            "predicted_pages_sha256": [
+              "2ec6ac7c399a653574422e9e96fa4c468b9a9df9aeb694c94c9280c5a061a0d9",
+              "b60d0ad58c3f4568613b53076dacaeb63adb1dd597c1307fe266343ecbd63496",
+              "9188364eb35f57fea4ba7957f2d45b232e233283ef4965d49015cf534f55d2e8",
+              "6070cea38758e1cbaef6af60321b21053ecc81c6a52d36cb4f762b73bbd58a17",
+              "02bd7c15ecc2bd6ccf6e6b26781915d5c8c7f033d34c875f8f061095890e7709",
+              "8ce7aaae271a7260488e749dde1687400d44c37993c88f9d61b8e06e23d76166",
+              "0568ece70bac2ebf0b4e5fba25de2e840f178d39f530b4fe9013809d9f36de77",
+              "760136489fc261a412a4e4efe81c85ab2407440f906cd5039e302d046bd9e388"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   ALT:  5510   ",
+            "flags_before": 0,
+            "flags_after": 0,
+            "redraws_before": 2,
+            "redraws_after": 1
+          }
+        },
+        {
+          "iteration": 26103,
+          "native_iteration": 26101,
+          "native_body_input_sha256": "e32b27a1b9da1e613b82b7978ce4ec3af997dac116f1f312d839aa6468d9e4f6",
+          "native_body_output_sha256": "347ee012617f0bccb38910dfa9bfc42b8c07d4e107a7c4feeeadb505499699c4",
+          "source": {
+            "owner_input_sha256": "442315adbcccc06dc220b9ecb16e28f4c6c5f2106e863a40ece8d5625fabbed9",
+            "owner_output_sha256": "68356daed30a24572f49d94f24380fbba0b3513c300df9f18d2632bbfb1138e9",
+            "predicted_pages_sha256": [
+              "f709a6f7d889f3d6cec1dd6e8eb213150868fcf8de819158a7f043d5a2a6da82",
+              "47ba78264704b3e54b81c45e071f4a6f2e8172b6b0c33bd2accd2d4d0a819bcd",
+              "5df717a5beb010e09b4e26dc6a33ffc45502601aa805bf425f91f34d6e351671",
+              "b5bc5834a248f9d6bcf94e9d98caff97b659fe523c52f386502f3ba1d3b3418f",
+              "41fc9174e74f59c7a7d994faca2c6c3fe37490e30aebcddde12eca437d14bb15",
+              "b60d0ad58c3f4568613b53076dacaeb63adb1dd597c1307fe266343ecbd63496",
+              "9188364eb35f57fea4ba7957f2d45b232e233283ef4965d49015cf534f55d2e8",
+              "6070cea38758e1cbaef6af60321b21053ecc81c6a52d36cb4f762b73bbd58a17"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   SPD:  469    ",
+            "flags_before": 0,
+            "flags_after": 0,
+            "redraws_before": 1,
+            "redraws_after": 0
+          },
+          "native": {
+            "owner_input_sha256": "48608f2fe3388af5ebd2aadf8160165ece803ad66310891f6b39a13b4e2cfc8e",
+            "owner_output_sha256": "6e4e227abfd79da95557224009702ca9584d705d10e66602bb64409318af7839",
+            "predicted_pages_sha256": [
+              "457a8a1fae5b70dbb3a0fb74f681e79f26fa7f6c644c44da8bd51e37f3870968",
+              "47ba78264704b3e54b81c45e071f4a6f2e8172b6b0c33bd2accd2d4d0a819bcd",
+              "5df717a5beb010e09b4e26dc6a33ffc45502601aa805bf425f91f34d6e351671",
+              "b5bc5834a248f9d6bcf94e9d98caff97b659fe523c52f386502f3ba1d3b3418f",
+              "2ec6ac7c399a653574422e9e96fa4c468b9a9df9aeb694c94c9280c5a061a0d9",
+              "b60d0ad58c3f4568613b53076dacaeb63adb1dd597c1307fe266343ecbd63496",
+              "9188364eb35f57fea4ba7957f2d45b232e233283ef4965d49015cf534f55d2e8",
+              "6070cea38758e1cbaef6af60321b21053ecc81c6a52d36cb4f762b73bbd58a17"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 2,
+            "text_drawn": true,
+            "return_preserved": false,
+            "return_value": 124,
+            "message_line": "    NO SIG   ALT:  5510   ",
+            "flags_before": 0,
+            "flags_after": 0,
+            "redraws_before": 1,
+            "redraws_after": 0
+          }
+        },
+        {
+          "iteration": 26104,
+          "native_iteration": 26102,
+          "native_body_input_sha256": "9058bafe56fc91b976f62cfd49b1bfcbf90e5ed926fabf99930438f5b2da8e03",
+          "native_body_output_sha256": "3b7a9ed4fdc0e7a7df7a822e7e01c4cf745766d620ce89288c475e8291800616",
+          "source": {
+            "owner_input_sha256": "a9b98b68af0352a82977cecd0a351a7aac5cd2c348c4720af614b9a152ae0b41",
+            "owner_output_sha256": "a9b98b68af0352a82977cecd0a351a7aac5cd2c348c4720af614b9a152ae0b41",
+            "predicted_pages_sha256": [
+              "c7ef5d6d567911bb85bbd1a8f2c8c24511afbc4f0f1a40cab401a5f15f3dbd23",
+              "3349734e96879f60956f344f494b44b8d300e771310d4a5d9543e69236e0e8f9",
+              "bea66f87145402935ed8afc44fccc2b6985b47f79964e8201b50e15c32d12c8d",
+              "e368c721094a483cf2424ccfa1df259123b92833d846919c5f769c0b2188c27b",
+              "f709a6f7d889f3d6cec1dd6e8eb213150868fcf8de819158a7f043d5a2a6da82",
+              "47ba78264704b3e54b81c45e071f4a6f2e8172b6b0c33bd2accd2d4d0a819bcd",
+              "5df717a5beb010e09b4e26dc6a33ffc45502601aa805bf425f91f34d6e351671",
+              "b5bc5834a248f9d6bcf94e9d98caff97b659fe523c52f386502f3ba1d3b3418f"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 0,
+            "text_drawn": false,
+            "return_preserved": true,
+            "return_value": 231,
+            "message_line": "    NO SIG   SPD:  469    ",
+            "flags_before": 0,
+            "flags_after": 0,
+            "redraws_before": 0,
+            "redraws_after": 0
+          },
+          "native": {
+            "owner_input_sha256": "db611989ab90513e0aa47f18167f43f2c324d60454c6a3fd252175a4037cccf8",
+            "owner_output_sha256": "db611989ab90513e0aa47f18167f43f2c324d60454c6a3fd252175a4037cccf8",
+            "predicted_pages_sha256": [
+              "15194431ba7471e7f3c13423a4bf023fe05e523dba20c43b9e3efa03abbfb2b1",
+              "3349734e96879f60956f344f494b44b8d300e771310d4a5d9543e69236e0e8f9",
+              "bea66f87145402935ed8afc44fccc2b6985b47f79964e8201b50e15c32d12c8d",
+              "e368c721094a483cf2424ccfa1df259123b92833d846919c5f769c0b2188c27b",
+              "457a8a1fae5b70dbb3a0fb74f681e79f26fa7f6c644c44da8bd51e37f3870968",
+              "47ba78264704b3e54b81c45e071f4a6f2e8172b6b0c33bd2accd2d4d0a819bcd",
+              "5df717a5beb010e09b4e26dc6a33ffc45502601aa805bf425f91f34d6e351671",
+              "b5bc5834a248f9d6bcf94e9d98caff97b659fe523c52f386502f3ba1d3b3418f"
+            ],
+            "compared_bytes": 64000,
+            "layout_sha256": "b6360b6baad50586a5b5ba3999d5033304b8c31cb14ee0306d5ecf7b6cb4581b",
+            "complete_non_stack_ram_matching": true,
+            "text_result": 0,
+            "text_drawn": false,
+            "return_preserved": true,
+            "return_value": 231,
+            "message_line": "    NO SIG   ALT:  5510   ",
+            "flags_before": 0,
+            "flags_after": 0,
+            "redraws_before": 0,
+            "redraws_after": 0
+          }
+        }
+      ]
+    }
+  ],
+  "shared_instrument_bitmap_history_regressions": [
+    "cockpit-early-paint-history",
+    "cockpit-plane-two-paint-history"
+  ],
+  "current_build_binding": {
+    "Release": {
+      "report_sha256": "38694ff3358683187beee380dfccf5b367cc987aff5d2fa82a36efe3514cd48c",
+      "runner_sha256": "8967d946ae2ad677810ae310cb132c7f376db964cb9b0b9d937872db48c5cdbb",
+      "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+      "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+      "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+      "source_rows_preserved": 27110,
+      "native_rows_preserved": 16062,
+      "memory": {
+        "enlist": {
+          "sdl_arena_bytes": 33554432,
+          "sdl_startup_bytes": 0,
+          "sdl_peak_bytes": 96,
+          "sdl_gameplay_pool_requests": 0,
+          "sdl_failures": 0,
+          "project_gameplay_heap_violations": 0,
+          "pcm_ring_frames": 131072,
+          "os_driver_allocations_observed": false
+        },
+        "flight": {
+          "sdl_arena_bytes": 33554432,
+          "sdl_startup_bytes": 0,
+          "sdl_peak_bytes": 96,
+          "sdl_gameplay_pool_requests": 0,
+          "sdl_failures": 0,
+          "project_gameplay_heap_violations": 0,
+          "pcm_ring_frames": 131072,
+          "os_driver_allocations_observed": false
+        }
+      }
+    },
+    "Debug": {
+      "report_sha256": "e262d15b3c5b175326e9991c40f68b9b397073f5adba0c3a93667151119d9688",
+      "runner_sha256": "4b8e65472487fd720f2f793d3b02c52a110164cf5c14558b495ce30ea9c5ad94",
+      "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+      "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+      "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+      "source_rows_preserved": 27110,
+      "native_rows_preserved": 16062,
+      "memory": {
+        "enlist": {
+          "sdl_arena_bytes": 33554432,
+          "sdl_startup_bytes": 0,
+          "sdl_peak_bytes": 96,
+          "sdl_gameplay_pool_requests": 0,
+          "sdl_failures": 0,
+          "project_gameplay_heap_violations": 0,
+          "pcm_ring_frames": 131072,
+          "os_driver_allocations_observed": false
+        },
+        "flight": {
+          "sdl_arena_bytes": 33554432,
+          "sdl_startup_bytes": 0,
+          "sdl_peak_bytes": 96,
+          "sdl_gameplay_pool_requests": 0,
+          "sdl_failures": 0,
+          "project_gameplay_heap_violations": 0,
+          "pcm_ring_frames": 131072,
+          "os_driver_allocations_observed": false
+        }
+      }
+    }
+  }
+}

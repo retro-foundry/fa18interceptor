@@ -54,6 +54,26 @@ def pages(data):
             for role in range(2) for plane in range(4)]
 
 
+def instrument_panel_refresh(body, expected, apply=True):
+    """C30764's complete 55-row bitmap copy on an unclipped cockpit path.
+
+    Only independent expected buffers are written. Captured pages stay intact;
+    apply=False supports the lost-redraw negative control.
+    """
+    if not 0 < integer(body, 0xC45836, 1) < 128:
+        return None
+    assert integer(body, 0xC45986, 2) == integer(body, 0xC458D8, 2) == 0
+    assert integer(body, 0xC45918, 4) == 0
+    images = []
+    for plane in range(4):
+        pointer = integer(body, 0xC30752 + 4 * plane, 4)
+        image = span(body, integer(body, pointer, 4), 2200)
+        images.append(digest(image))
+        if apply:
+            expected[plane][5800:8000] = image
+    return images
+
+
 def assess(rows):
     indexed = {r['iteration']: r for r in rows}
     for first, count in WINDOWS:
