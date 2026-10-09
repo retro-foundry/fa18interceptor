@@ -1,5 +1,13 @@
 # Native port runner
 
+Gameplay storage is reserved before the playable frame loop. Project heap and
+buffered-file open/close calls are guarded; SDL uses a fixed 32 MiB startup arena,
+PCM a fixed 512 KiB ring, and pilot/capture I/O direct OS handles. Exhaustion
+fails explicitly. Use `--memory-report PATH` to record guard and arena evidence.
+Release/Debug preserve complete native PCM/state/saves. OS/driver heaps are
+outside the measured scope; original RNG/timing remain unchanged. See
+[evidence](../../analysis/native_preallocation_milestone.md).
+
 Visible qualification/mission-three playback now finishes with real audio,
 exact RAM/counters/earned save, no resets and all 42,706 frames presented.
 Recorded controls are isolated by an opt-in diagnostic. Two SDL poll stalls

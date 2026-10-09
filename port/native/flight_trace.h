@@ -9,6 +9,7 @@
 typedef const uint8_t *(*FA18FlightTraceReader)(void *context,uint32_t address,size_t size);
 typedef struct {
     FILE *file;
+    char file_buffer[4096];
     size_t bytes,budget;
     unsigned rows;
     int failed,message_fields,drawing_bands;

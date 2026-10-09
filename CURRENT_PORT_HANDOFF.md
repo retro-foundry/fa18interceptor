@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Gameplay preallocation (2026-10-09): project heap and buffered-file creation/
+closure are rejected inside the playable frame loop. SDL uses a fixed 32 MiB
+startup arena; PCM uses a fixed 512 KiB ring, with no growing audio queue.
+Pilot log and diagnostic capture I/O reuse owned storage/direct OS handles.
+Release/Debug preserve complete intro, Free Flight and final-combat PCM, RAM,
+pixels, saves and counters. Earned individual missions and the independent
+qualification/mission-three replay pass. OS/driver heaps are outside this
+measurement; original randomness/timing remain unchanged. Named-state cleanup
+is still deferred. See [preallocation evidence](analysis/native_preallocation_milestone.md).
+
 Finished visible recorded flight (2026-10-09): qualification and mission three
 complete with real audio, exact final RAM/counters/save, no resets and all
 42,706 frames presented. Two SDL polling stalls produce 86.0423/719.6773 ms

@@ -11,7 +11,12 @@ enum { AMIGA_HOST_EXEC,AMIGA_HOST_DOS,AMIGA_HOST_GRAPHICS,AMIGA_HOST_INTUITION,
        AMIGA_HOST_INPUT,AMIGA_HOST_GAMEPORT,AMIGA_HOST_KEYBOARD,AMIGA_HOST_AUDIO,
        AMIGA_HOST_LIBRARY_COUNT,AMIGA_HOST_SERVICE_BASE=0xEF0000 };
 typedef struct { uint32_t base,size,attributes; } AmigaHostRegion;
-typedef struct { uint8_t *data; size_t size,position; FILE *file; int active,read_only; char overlay_path[1024]; } AmigaHostFile;
+typedef struct {
+    uint8_t *data; size_t size,position; FILE *file;
+    int active,read_only,preallocated;
+    intptr_t os_file;
+    char overlay_path[1024];
+} AmigaHostFile;
 typedef struct {
     char path[256]; int active,enumerated;
     AmigaOfsEntry *entries; size_t entry_count,entry_next;
@@ -54,6 +59,14 @@ uint32_t amiga_host_library(AmigaHostCompat *,const char *name,uint32_t version)
 const char *amiga_host_library_name(unsigned id);
 int amiga_host_string(const AmigaHostCompat *,uint32_t address,char *out,size_t capacity);
 uint32_t amiga_host_open(AmigaHostCompat *,const char *path,int32_t mode);
+/* Fixed file profile: immutable original bytes are owned by the caller for
+ * the context lifetime. Runtime I/O uses OS handles, without CRT file buffers
+ * or OFS heap copies. The normalized name must match the declared binding. */
+uint32_t amiga_host_open_preallocated(AmigaHostCompat *,const char *path,int32_t mode,
+                                    const char *name,const uint8_t *original,size_t size);
+/* Bounded diagnostic export through OS I/O, without creating a CRT stream. */
+int amiga_host_write_file(const char *path,const void *first,size_t first_size,
+                          const void *second,size_t second_size);
 int amiga_host_file_close(AmigaHostCompat *,uint32_t handle);
 int32_t amiga_host_read(AmigaHostCompat *,uint32_t handle,void *,int32_t length);
 int32_t amiga_host_write(AmigaHostCompat *,uint32_t handle,const void *,int32_t length);

@@ -11,11 +11,7 @@ static void write_data(const NativeFrontend *game,const NativeFrameCapture *capt
     if(length<0 || length>=(int)sizeof path) {
         fputs("Native frame capture path is too long\n",stderr);abort();
     }
-    FILE *file=fopen(path,"wb");
-    if(!file) {perror(path);abort();}
-    int written=fwrite(game->storage.buffers,1,0x80000,file)==0x80000 &&
-                fwrite(game->storage.source,1,0x80000,file)==0x80000;
-    if(fclose(file) || !written) {
+    if(!amiga_host_write_file(path,game->storage.buffers,0x80000,game->storage.source,0x80000)) {
         fprintf(stderr,"Cannot write native frame capture: %s\n",path);abort();
     }
 }
@@ -30,13 +26,12 @@ static void write_timing(const NativeFrameCapture *capture) {
     if(length<0 || length>=(int)sizeof path) {
         fputs("Native frame timing path is too long\n",stderr);abort();
     }
-    FILE *file=fopen(path,"w");
-    if(!file) {perror(path);abort();}
-    const int written=fprintf(file,
+    char row[256];
+    const int written=snprintf(row,sizeof row,
         "{\"iteration\":%u,\"before_tick\":%u,\"after_tick\":%u,\"saved_tick\":%u,\"owner_exit\":%s}\n",
         iteration,capture->before_tick,capture->after_tick,capture->saved_tick,
-        capture->owner_exit?"true":"false")>0;
-    if(fclose(file) || !written) {
+        capture->owner_exit?"true":"false");
+    if(written<0 || written>=(int)sizeof row || !amiga_host_write_file(path,row,(size_t)written,NULL,0)) {
         fprintf(stderr,"Cannot write native frame timing: %s\n",path);abort();
     }
 }

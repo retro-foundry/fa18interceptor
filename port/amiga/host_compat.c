@@ -11,6 +11,7 @@
 #else
 #include <unistd.h>
 #include <dirent.h>
+#include <fcntl.h>
 #define make_directory(path) mkdir(path,0777)
 #endif
 static void word(uint8_t *p,uint16_t v) { p[0]=(uint8_t)(v>>8); p[1]=(uint8_t)v; }
@@ -158,6 +159,79 @@ static AmigaHostFile *file_handle(AmigaHostCompat *c,uint32_t handle) {
     if (!handle || handle>64 || !c->files[handle-1].active) { c->error=209; return NULL; }
     return &c->files[handle-1];
 }
+static intptr_t os_open(const char *path,int create) {
+#ifdef _WIN32
+    return (intptr_t)CreateFileA(path,GENERIC_READ|GENERIC_WRITE,
+        FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,create?CREATE_ALWAYS:OPEN_EXISTING,
+        FILE_ATTRIBUTE_NORMAL,NULL);
+#else
+    return open(path,O_RDWR|(create?O_CREAT|O_TRUNC:0),0666);
+#endif
+}
+static int os_close(intptr_t file) {
+#ifdef _WIN32
+    return CloseHandle((HANDLE)file)!=0;
+#else
+    return close((int)file)==0;
+#endif
+}
+static int32_t os_transfer(intptr_t file,void *bytes,int32_t length,int write_file) {
+#ifdef _WIN32
+    DWORD done=0;
+    int ok=write_file?WriteFile((HANDLE)file,bytes,(DWORD)length,&done,NULL):
+                      ReadFile((HANDLE)file,bytes,(DWORD)length,&done,NULL);
+    return ok?(int32_t)done:-1;
+#else
+    ssize_t done=write_file?write((int)file,bytes,(size_t)length):read((int)file,bytes,(size_t)length);
+    return (int32_t)done;
+#endif
+}
+static int64_t os_seek(intptr_t file,int32_t offset,int32_t mode) {
+#ifdef _WIN32
+    LARGE_INTEGER distance,result;distance.QuadPart=offset;
+    return SetFilePointerEx((HANDLE)file,distance,&result,
+        mode==-1?FILE_BEGIN:mode?FILE_END:FILE_CURRENT)?result.QuadPart:-1;
+#else
+    return lseek((int)file,offset,mode==-1?SEEK_SET:mode?SEEK_END:SEEK_CUR);
+#endif
+}
+static int materialize(AmigaHostFile *f) {
+    f->os_file=os_open(f->overlay_path,1);
+    if(f->os_file==-1) return 0;
+    if(f->size>INT32_MAX || os_transfer(f->os_file,f->data,(int32_t)f->size,1)!=(int32_t)f->size ||
+       f->position>INT32_MAX || os_seek(f->os_file,(int32_t)f->position,-1)<0) {
+        os_close(f->os_file);f->os_file=-1;return 0;
+    }
+    f->data=NULL;return 1;
+}
+int amiga_host_write_file(const char *path,const void *first,size_t first_size,
+                          const void *second,size_t second_size) {
+    if(first_size>INT32_MAX || second_size>INT32_MAX || (!first && first_size) || (!second && second_size)) return 0;
+    intptr_t file=os_open(path,1);if(file==-1) return 0;
+    int ok=os_transfer(file,(void *)first,(int32_t)first_size,1)==(int32_t)first_size;
+    if(ok && second_size) ok=os_transfer(file,(void *)second,(int32_t)second_size,1)==(int32_t)second_size;
+    if(!os_close(file)) ok=0;return ok;
+}
+uint32_t amiga_host_open_preallocated(AmigaHostCompat *c,const char *input,int32_t mode,
+                                    const char *binding,const uint8_t *original,size_t size) {
+    char name[256],host[1024];
+    if(!original || size>INT32_MAX || !path_name(c,input,name) || strcmp(name,binding) ||
+       !host_path(c,name,host,sizeof host)) {c->error=205;return 0;}
+    if(mode!=1004 && mode!=1005 && mode!=1006) {c->error=115;return 0;}
+    unsigned index;for(index=0;index<64 && c->files[index].active;++index) {}
+    if(index==64) {c->error=103;return 0;}
+    AmigaHostFile *f=&c->files[index];memset(f,0,sizeof *f);
+    f->preallocated=1;strcpy(f->overlay_path,host);
+    f->os_file=os_open(host,mode==1006);
+    if(f->os_file==-1) {
+        /* Match MODE_OLDFILE's existing ADF lookup; creation happens only on
+         * the original write path, never merely because a pilot starts. */
+        if(mode==1006) {c->error=205;return 0;}
+        f->data=(uint8_t *)original;f->size=size;
+        if(mode==1004 && !materialize(f)) {c->error=205;return 0;}
+    }
+    f->active=1;c->error=0;return index+1;
+}
 uint32_t amiga_host_open(AmigaHostCompat *c,const char *input,int32_t mode) {
     char name[256],host[1024];
     if (!path_name(c,input,name) || !*name || !host_path(c,name,host,sizeof host)) { c->error=205; return 0; }
@@ -191,10 +265,17 @@ uint32_t amiga_host_open(AmigaHostCompat *c,const char *input,int32_t mode) {
 }
 int amiga_host_file_close(AmigaHostCompat *c,uint32_t handle) {
     AmigaHostFile *f=file_handle(c,handle); if (!f) return 0;
+    if(f->preallocated) {
+        int ok=f->os_file==-1 || os_close(f->os_file);
+        memset(f,0,sizeof *f);c->error=ok?0:209;return ok;
+    }
     int ok=!f->file || fclose(f->file)==0; free(f->data); memset(f,0,sizeof *f); c->error=ok?0:209; return ok;
 }
 int32_t amiga_host_read(AmigaHostCompat *c,uint32_t h,void *buffer,int32_t length) {
     AmigaHostFile *f=file_handle(c,h); if (!f || length<0) { c->error=115; return -1; }
+    if(f->preallocated && f->os_file!=-1) {
+        int32_t n=os_transfer(f->os_file,buffer,length,0);if(n<0) c->error=209;return n;
+    }
     if (f->file) { size_t n=fread(buffer,1,(size_t)length,f->file); if (ferror(f->file)) { c->error=209; return -1; } return (int32_t)n; }
     size_t n=(size_t)length; if (n>f->size-f->position) n=f->size-f->position;
     if (n) memcpy(buffer,f->data+f->position,n);
@@ -204,6 +285,10 @@ int32_t amiga_host_write(AmigaHostCompat *c,uint32_t h,const void *buffer,int32_
     AmigaHostFile *f=file_handle(c,h); if (!f || length<0) { c->error=209; return -1; }
     if (!length) return 0;
     if (f->read_only) { c->error=223; return -1; }
+    if(f->preallocated) {
+        if(f->os_file==-1 && !materialize(f)) {c->error=209;return -1;}
+        int32_t n=os_transfer(f->os_file,(void *)buffer,length,1);if(n<0) c->error=209;return n;
+    }
     /* MODE_OLDFILE means an existing file, not a read-only handle. The game
      * opens its log with 1005 and writes it in place. Materialize ADF bytes
      * only at the first write, keeping reads and the original disk untouched. */
@@ -222,6 +307,11 @@ int32_t amiga_host_write(AmigaHostCompat *c,uint32_t h,const void *buffer,int32_
 }
 int32_t amiga_host_seek(AmigaHostCompat *c,uint32_t h,int32_t position,int32_t mode) {
     AmigaHostFile *f=file_handle(c,h); if (!f || mode<-1 || mode>1) { c->error=219; return -1; }
+    if(f->preallocated && f->os_file!=-1) {
+        int64_t old=os_seek(f->os_file,0,0);
+        if(old<0 || old>INT32_MAX || os_seek(f->os_file,position,mode)<0) {c->error=219;return -1;}
+        return (int32_t)old;
+    }
     if (f->file) { long old=ftell(f->file); if (old<0 || fseek(f->file,position,mode==-1?SEEK_SET:mode?SEEK_END:SEEK_CUR)) { c->error=219; return -1; } return (int32_t)old; }
     int64_t next=(mode==-1?0:mode?f->size:f->position)+(int64_t)position;
     if (next<0 || (uint64_t)next>f->size) { c->error=219; return -1; }

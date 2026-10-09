@@ -123,6 +123,7 @@ int native_frontend_open_observed(NativeFrontend *game,const char *path,const ch
     free(bytes); bytes=amiga_ofs_read(&disk,"config",&size);
     if(!bytes || size!=78) { fail(error,cap,"missing original 78-byte config"); goto done; }
     memcpy(native_storage_range(PLAYER_LOG,78),bytes,78);
+    memcpy(game->original_config,bytes,sizeof game->original_config);
     FILE *saved=fopen(game->config_path,"rb");
     if(saved) {
         int valid=fread(native_storage_range(PLAYER_LOG,78),1,78,saved)==78 && fgetc(saved)==EOF;

@@ -58,7 +58,16 @@ add_library(fa18_native_runtime OBJECT replay.c frame_capture.c flight_trace.c .
     ../game/disk.c ../game/hunk.c ../romfree/media.c ../amiga/sha256.c
     ../amiga/ilbm.c ../amiga/pcm_output.c ../amiga/host_compat.c ../amiga/guest_memory.c)
 target_sources(fa18_native_runtime PRIVATE host_input.c ../amiga/host_keys.c)
+target_sources(fa18_native_runtime PRIVATE ../amiga/sdl_memory.c)
+target_sources(fa18_native_runtime PRIVATE ../amiga/runtime_memory.c)
 add_executable(fa18_native main.c)
+foreach(native_target fa18_native_runtime fa18_native)
+    if(MSVC)
+        target_compile_options(${native_target} PRIVATE /FI${CMAKE_CURRENT_SOURCE_DIR}/../amiga/runtime_memory.h)
+    else()
+        target_compile_options(${native_target} PRIVATE -include ${CMAKE_CURRENT_SOURCE_DIR}/../amiga/runtime_memory.h)
+    endif()
+endforeach()
 target_include_directories(fa18_native_runtime PUBLIC ../game ../amiga ../romfree)
 target_compile_definitions(fa18_native_runtime PUBLIC FA18_NATIVE SDL_MAIN_HANDLED _CRT_SECURE_NO_WARNINGS)
 target_link_libraries(fa18_native_runtime PUBLIC SDL2-static)
@@ -76,6 +85,16 @@ else()
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_executable(fa18_native_preallocation_test ../../tools/native/native_preallocation_test.c)
+    target_link_libraries(fa18_native_preallocation_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_preallocation COMMAND fa18_native_preallocation_test)
+    set_tests_properties(fa18_native_preallocation PROPERTIES ENVIRONMENT "SDL_AUDIODRIVER=dummy")
+    add_test(NAME fa18_native_preallocation_output
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_preallocation.py
+                --runner $<TARGET_FILE:fa18_native>
+                --reference ${CMAKE_CURRENT_SOURCE_DIR}/../../analysis/figures/native_preallocation_checkpoint.json
+                --out ${CMAKE_CURRENT_BINARY_DIR}/preallocation-output-$<CONFIG>)
+    set_tests_properties(fa18_native_preallocation_output PROPERTIES RUN_SERIAL TRUE)
     add_test(NAME fa18_native_artifact_policy
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../scripts/test_prune_build_artifacts.py)
     add_test(NAME fa18_native_artifact_cleanup

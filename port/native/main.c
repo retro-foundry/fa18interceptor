@@ -8,6 +8,7 @@
 #include "flight_trace.h"
 #include "host_input.h"
 #include "../amiga/pcm_output.h"
+#include "../amiga/sdl_memory.h"
 #include <SDL.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -50,12 +51,15 @@ static int write_ppm(const char *path,NativeFrontend *game) {
     return fclose(file)==0;
 }
 int main(int argc,char **argv) {
+    if(!amiga_sdl_memory_install()) {fputs("Cannot install fixed SDL memory arena before startup\n",stderr);return 1;}
     const char *adf="local/media/fa18.adf",*save_dir="saves-native",*ppm=NULL,*replay=NULL,*data_out=NULL; int headless=0,running=1,result=1;
     unsigned frames=0,iterations=0;
     size_t events=0,next=0,event_capacity=0; HostEvent *host_events=NULL; char error[256];
     const char *input=NULL;NativeReplay loop={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
     const char *frame_times=NULL;FILE *timing=NULL;int hidden=0,recorded_input_only=0;
+    char timing_buffer[4096];
+    const char *memory_report=NULL;AmigaSdlMemoryStats startup_memory={0},gameplay_memory={0};
     SDL_RendererInfo renderer_info={0};uint64_t previous_frame_start=0;
     NativeFrameCapture capture={0};capture.replay=&loop;capture.count=1;
     const char *flight_trace=NULL;FA18FlightTrace trace={0};FrameDiagnostics diagnostics={0};
@@ -63,7 +67,7 @@ int main(int argc,char **argv) {
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -74,6 +78,7 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--data-out")) data_out=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--wav")) wave=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frame-times")) frame_times=argv[++i];
+        else if(i+1<argc && !strcmp(argv[i],"--memory-report")) memory_report=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--flight-trace")) flight_trace=argv[++i];
         else if(!strcmp(argv[i],"--hidden")) hidden=1;
         else if(!strcmp(argv[i],"--recorded-input-only")) recorded_input_only=1;
@@ -166,8 +171,21 @@ int main(int argc,char **argv) {
     if(frame_times) {
         timing=fopen(frame_times,"w");
         if(!timing) {fprintf(stderr,"Cannot create native frame timing report: %s\n",frame_times);goto done;}
+        if(setvbuf(timing,timing_buffer,_IOFBF,sizeof timing_buffer)) goto timing_error;
         if(fputs("frame,iteration,mode,stage,view,scene_updated,presented,input_us,game_us,audio_us,convert_us,present_us,wait_us,work_us,total_us,start_interval_us,renderer\n",timing)==EOF) goto timing_error;
     }
+    startup_memory=amiga_sdl_memory_stats();
+    if(!headless) {
+        /* Populate SDL's reusable render-command/vertex and initial event
+         * caches before gameplay. Pending real events remain queued. Flush
+         * executes the normal pipeline without presenting an extra frame. */
+        SDL_PumpEvents();
+        for(unsigned i=0;i<320*256;++i) {uint16_t c=game->palette[game->indices[i]];pixels[i]=0xff000000u|(((c>>8)&15)*17u<<16)|(((c>>4)&15)*17u<<8)|((c&15)*17u);}
+        if(SDL_UpdateTexture(texture,NULL,pixels,320*sizeof *pixels) || SDL_RenderClear(renderer) ||
+           SDL_RenderCopy(renderer,texture,NULL,NULL) || SDL_RenderFlush(renderer)) goto sdl_error;
+        startup_memory=amiga_sdl_memory_stats();
+    }
+    amiga_runtime_memory_lock(1);
     while(running && (!frames || game->ticks<frames) && (!iterations || loop.iteration<iterations)) {
         uint64_t times[7]={0};int presented=0;
         const unsigned previous_scene=game->scene_frames;
@@ -180,11 +198,12 @@ int main(int argc,char **argv) {
         }
         if(timing) times[1]=SDL_GetPerformanceCounter();
         native_frontend_tick(game);
+        if(amiga_runtime_memory_violations()) goto memory_error;
         if(trace.failed) goto done;
         if(timing) times[2]=SDL_GetPerformanceCounter();
         native_audio_render(&game->audio,samples,960,48000);
         if(!amiga_pcm_write(&audio_output,samples,960)) {
-            fprintf(stderr,"Cannot publish native PCM audio: %s\n",SDL_GetError());goto done;
+            fprintf(stderr,"Cannot publish native PCM audio: %s\n",audio_output.error?audio_output.error:SDL_GetError());goto done;
         }
         if(timing) times[3]=times[4]=times[5]=SDL_GetPerformanceCounter();
         if(!headless) {
@@ -209,7 +228,9 @@ int main(int argc,char **argv) {
                 renderer_info.name?renderer_info.name:"headless")<0) goto timing_error;
             previous_frame_start=times[0];
         }
+        if(amiga_runtime_memory_violations()) goto memory_error;
     }
+    amiga_runtime_memory_lock(0);gameplay_memory=amiga_sdl_memory_stats();
     if(ppm && !write_ppm(ppm,game)) { fprintf(stderr,"Cannot write PPM: %s\n",ppm); goto done; }
     if(data_out) {
         FILE *file=fopen(data_out,"wb");
@@ -232,14 +253,34 @@ int main(int argc,char **argv) {
 timing_error:
     fprintf(stderr,"Cannot write native frame timing report: %s\n",frame_times);
     goto done;
+memory_error:
+    fputs("Project heap allocation/free rejected during gameplay\n",stderr);
+    goto done;
 sdl_error:
     fprintf(stderr,"SDL: %s\n",SDL_GetError());
 done:
+    amiga_runtime_memory_lock(0);
+    if(amiga_runtime_memory_violations()) result=1;
     free(host_events);
     if(!fa18_flight_trace_close(&trace)) result=1;
     if(timing && fclose(timing)) {fprintf(stderr,"Cannot finish native frame timing report: %s\n",frame_times);result=1;}
     if(!amiga_pcm_close(&audio_output)) {fputs("Cannot finish native WAV capture\n",stderr);result=1;}
     native_replay_close(&loop);
     SDL_DestroyTexture(texture); SDL_DestroyRenderer(renderer); SDL_DestroyWindow(window); SDL_Quit();
+    if(amiga_sdl_memory_stats().failures) {
+        fputs("Fixed SDL memory arena exhausted; no host heap fallback is allowed\n",stderr);result=1;
+    }
+    if(memory_report) {
+        const AmigaSdlMemoryStats final_memory=amiga_sdl_memory_stats();
+        FILE *file=fopen(memory_report,"w");
+        if(!file) {fprintf(stderr,"Cannot write memory report: %s\n",memory_report);result=1;}
+        else {
+            int failed=fprintf(file,"{\"sdl_arena_bytes\":%u,\"sdl_startup_bytes\":%zu,\"sdl_peak_bytes\":%zu,\"sdl_gameplay_pool_requests\":%zu,\"sdl_failures\":%zu,\"project_gameplay_heap_violations\":%zu,\"pcm_ring_frames\":%u,\"os_driver_allocations_observed\":false}\n",
+                AMIGA_SDL_MEMORY_BYTES,startup_memory.used,final_memory.peak,
+                gameplay_memory.requests>=startup_memory.requests?gameplay_memory.requests-startup_memory.requests:0,
+                final_memory.failures,amiga_runtime_memory_violations(),AMIGA_PCM_RING_FRAMES)<0;
+            if(fclose(file) || failed) result=1;
+        }
+    }
     if(game) { native_frontend_close(game); free(game); } return result;
 }

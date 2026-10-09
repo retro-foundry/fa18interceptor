@@ -99,6 +99,9 @@ int fa18_flight_trace_open(FA18FlightTrace *trace,const char *path,size_t budget
     trace->drawing_bands=getenv("FA18_TRACE_DRAWING_BANDS")!=NULL;
     trace->file=fopen(path,"wb");
     if(!trace->file) {perror(path);trace->failed=1;return 0;}
+    if(setvbuf(trace->file,trace->file_buffer,_IOFBF,sizeof trace->file_buffer)) {
+        fputs("Cannot initialize preallocated flight trace buffer\n",stderr);trace->failed=1;return 0;
+    }
     TraceRow row={0};
     append(&row,"{\"format\":\"FA18_FLIGHT_TRACE_V2\",\"boundary\":\"C0EFD4/pre-input\","
                 "\"record_address\":%u,\"record_stride\":512,\"record_size\":164,"

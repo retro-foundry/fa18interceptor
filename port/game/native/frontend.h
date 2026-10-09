@@ -28,6 +28,7 @@ struct NativeFrontend {
     NativeStorage storage;
     AmigaOfs disk;
     AmigaHostCompat files;
+    uint8_t original_config[78]; /* Immutable startup-loaded ADF log. */
     AmigaIlbm splash;
     enum NativeScreen screen;
     unsigned ticks,screen_ticks;

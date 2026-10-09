@@ -17,7 +17,8 @@ static void filename(gaddr address,char path[256]) {
 }
 static uint32_t open_file(FileCalls *calls,gaddr address,int32_t mode) {
     char path[256];filename(address,path);
-    return amiga_host_open(&calls->game->files,path,mode);
+    return amiga_host_open_preallocated(&calls->game->files,path,mode,"config",
+        calls->game->original_config,sizeof calls->game->original_config);
 }
 static int32_t file_child(void *context,enum PostflightFileChild child) {
     FileCalls *calls=context;AmigaHostCompat *host=&calls->game->files;
