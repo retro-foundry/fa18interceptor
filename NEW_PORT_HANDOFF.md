@@ -1,12 +1,21 @@
 # Native port handoff — 2026-10-09
 
+Finished visible recorded flight (2026-10-09): qualification and mission three
+complete with real audio, exact final RAM/counters/save, no resets and all
+42,706 frames presented. Two SDL polling stalls produce 86.0423/719.6773 ms
+work, so the 20 ms performance gate remains failed; every row and compressed
+final RAM are retained. Both current builds preserve the full reference flight.
+Window position changed during measurement; the cause of each stall remains
+unproven. Other missions/views/combat and remaining completion work stay open.
+See [visible result](analysis/native_visible_replay_input_milestone.md).
+
 Visible replay diagnostics (2026-10-09): the user-closed attempt and a complete-
 frame failed flight remain unaccepted. The latter reset unexpectedly and has
 two SDL poll-work failures, 247.5437/81.3995 ms. Recorded-input-only is now an
 opt-in comparison mode; window close and all poll/present costs remain checked.
 Normal SDL controls and 26 entries/52 bodies match original in Release/Debug.
 The rebuilt Release full flight preserves prior RAM, traces, counters and save.
-Another visible run is active; its result remains open. See
+The finished recorded-input-only result is reported above. See
 [visible replay evidence](analysis/native_visible_replay_input_milestone.md).
 
 Complete mission-three drawing localization (2026-10-09): all 4,967 observations

@@ -1,5 +1,12 @@
 # The C port
 
+Visible qualification/mission-three playback now finishes with real audio,
+exact RAM/counters/earned save, no resets and all 42,706 frames presented.
+Recorded controls are isolated by an opt-in diagnostic. Two SDL poll stalls
+exceed the 20 ms work budget, so performance acceptance remains open. All rows
+remain counted. Other missions/views/combat are separate. See
+[visible evidence](analysis/native_visible_replay_input_milestone.md).
+
 Complete mission-three drawing localization (2026-10-09): all 4,967 observations
 match rows 0..127 of both complete pages. Optional adjoining bands preserve
 every earlier trace, page, final RAM byte, counter and save in Release/Debug.

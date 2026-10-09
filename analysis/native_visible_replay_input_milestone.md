@@ -1,6 +1,20 @@
 # Visible recorded-input comparisons — 2026-10-09
 
-Visible performance qualification is still open. A user-closed attempt ended
+The recorded-input-only visible run now completes qualification and mission
+three, lands, earns the intended save and returns to the menu without resets.
+Every one of its **42,706 frames** is presented with real audio. Complete final
+RAM, every existing runtime counter and the actual 78-byte save match the
+independent headless recording. There are 1,857 qualification scene updates
+and 3,770 mission-three scene updates, both in cockpit view zero.
+
+Performance qualification remains open: **two frames exceed 20 ms**, at
+86.0423 and 719.6773 ms. Their SDL polling portions are 84.7104 and 718.7189 ms.
+All rows remain included. Whole-run work mean/p95/p99 is 1.1217/1.6318/2.1825 ms.
+The native flight itself succeeds; the strict performance checker correctly
+rejects the budget and retains its full report, CSV, log and compressed final
+RAM. Other missions, camera views and visible combat are not covered here.
+
+A user-closed earlier attempt ended
 at 22,648 of 42,706 expected frames, before mission three began. Its complete
 CSV includes a 65.4517 ms quit/event-poll frame and is retained as a failure.
 
@@ -53,12 +67,20 @@ Their 6,500-frame timing checks preserve complete RAM, final pixels and counters
 with the new option. Invalid option use is rejected; all eight dummy-window
 frames are still presented. These dummy rows are integration evidence only.
 
-Current Release reproduces the independently started full flight: all 27,110
+Current Release and Debug reproduce the independently started full flight: all 27,110
 original and 16,062 native trace observations, complete final RAM, counters and
-earned save are preserved. A new paced visible run uses recorded-input-only;
-its final acceptance must be checked separately. Current Debug is also being
-checked against the full-flight recording. No passing result is inferred from
-the earlier attempts or from component tests.
+earned save are preserved. Their complete traces, RAM, counters and flight
+comparison agree. The current canonical Release is the same executable used
+by the finished visible run, SHA-256
+`2f20d3a5caf1a0c8ddce85590ca408c96e4e35faf49e8b7e24cc8fb2e3a0411a`.
+
+Two live window observations establish visibility without minimization. Its
+rectangle changed from (792,305)-(1768,1112) to (1438,319)-(2414,1126) during the
+measurement. Windows modal move/resize handling is a possible explanation for
+the polling stalls: the linked SDL's WIN_PumpEvents dispatches native window
+messages, including modal move/resize handling. Neither observation identifies
+the message active during each slow frame. No causal attribution or budget
+exception is established from these files.
 
 ```powershell
 python tools/native/measure_visible_performance.py --mission-report build/native-flight/mission-three-recorded-input-reference-final/Release/report.json --mission-input build/native-flight/patrol-entry-review/update-consumed.fa18in --runner build/native/fa18_native.exe --out build/native-flight/visible-independent-mission-three-recorded-only
