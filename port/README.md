@@ -1,5 +1,14 @@
 # Active port source ownership
 
+Complete original flight capture (2026-10-09): 4,967 independent input
+observations, 4,965 bodies and 3,602 actual radar/message calls each now
+retain complete RAM/registers in 23.71 MB gzip. All 27,110 source trace
+rows, counters and final RAM stay exact; 320 old snapshots match and all
+7,204 owner returns restore their caller stacks. Current native full traces
+are unchanged. The next 51-body message window passes, but its radar
+verifier assumes a selected marker despite NO SIG; drawing acceptance
+remains failed. See [full original capture evidence](../analysis/native_original_full_frame_capture_milestone.md).
+
 Complete mission-three bodies (2026-10-09): all 4,965 unique native bodies
 match original instructions with zero gameplay/display differences under
 the existing frame-body contract. Compact complete-RAM capture retains

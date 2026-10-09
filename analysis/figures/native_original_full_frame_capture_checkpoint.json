@@ -1,0 +1,209 @@
+{
+  "date": "2026-10-09",
+  "native_runtime_changed": false,
+  "runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+  "tools_sha256": {
+    "tools/native/original_frame_delta_probe.c": "5e129d7a9f04820a6f1289d7cf3d9e0ae10de152f7ee5cacc900449d3ffc6e23",
+    "tools/native/original_frame_delta_loop.c": "2cd5f36ccb335efc85d1ac84d0714039a3477627fa3cf1adc8d56a8797781600",
+    "tools/native/check_original_frame_delta.py": "f1aaa693f1b28df8ec01b46a766edab5298de83c58119477835ee6e7fd9751af",
+    "tools/native/extract_mission_delta_window.py": "25eb3d22ea9156ced7f1a8fb649a4d388fcfe8a6aa0a205104775b4359805b9b",
+    "tools/native/frame_delta.py": "1dad263b46357e1245ce9bc7556a9efb1fce9b76e181441bee32278132d4069f",
+    "tools/native/test_frame_delta.py": "2765a29af2af132e29a42d70470c861e52987137f2d91c50419417fef36d79bb"
+  },
+  "complete_original": {
+    "first": 22142,
+    "last": 27108,
+    "observations": 4967,
+    "snapshots": 29305,
+    "boundary_counts": {
+      "C0EFD4": 4967,
+      "C0EFEA": 4965,
+      "C0F3C0": 4965,
+      "C31226": 3602,
+      "C0F18E": 3602,
+      "C322EE": 3602,
+      "C0F286": 3602,
+      "C0F2DC": 0
+    },
+    "probe_sha256": "045f5c0fd2dc5dfb47c21b78b800b90628a063ecf89b4a42edd7aa0769f9763a",
+    "probe_source_sha256": "5e129d7a9f04820a6f1289d7cf3d9e0ae10de152f7ee5cacc900449d3ffc6e23",
+    "loop_source_sha256": "2cd5f36ccb335efc85d1ac84d0714039a3477627fa3cf1adc8d56a8797781600",
+    "capture_sources_sha256": {
+      "tools/native/original_frame_delta_probe.c": "5e129d7a9f04820a6f1289d7cf3d9e0ae10de152f7ee5cacc900449d3ffc6e23",
+      "tools/native/original_frame_delta_loop.c": "2cd5f36ccb335efc85d1ac84d0714039a3477627fa3cf1adc8d56a8797781600",
+      "port/native/frame_delta.c": "108466e25a6064a4042510b8dce5cc0630a5cccd350ab077931431017557698d",
+      "port/native/frame_delta.h": "aa689568d58ef8989b1b52bf0d55619444e2ab5f269dfc50a71674cb83b4dde1"
+    },
+    "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+    "source_input_sha256": "fa3ac6722fc0338d5b773b6c288e8ca095274ba64000cf0773aa4fbb8bd73b12",
+    "unchanged_observations": 27110,
+    "complete_trace_preserved": true,
+    "final_ram_preserved": true,
+    "runtime_counters_preserved": true,
+    "old_window_snapshots_identical": 320,
+    "stream_sha256": "877ca221b5ce864ac9d2086082ac74f3eec1ff497b5eb41223ee15c29a9c6f3a",
+    "metadata_sha256": "7a9a870731a50ba23edfd47c33733dec55e30c72ca4bcbc76382cc29dadfc684",
+    "stream_bytes": 139292052,
+    "metadata_bytes": 5527504,
+    "trace_bytes": 250829740,
+    "retained_bytes": 23706753,
+    "scope": "Complete independent original input and actual drawing-owner RAM/registers. Source replay, all trace rows, counters and final RAM remain exact. No original RAM supplies native gameplay. This captures evidence; drawing-history and complete sound acceptance remain separate.",
+    "report": {
+      "path": "build/native-flight/original-frame-delta-complete-flight/report.json",
+      "sha256": "07efde470c9536760aee5fe009700863813a6ea458474c79cd0bbfc35489e070"
+    },
+    "identities_sha256": "4ef64003b6f7cea12bd7e48d5fbb267fca044e43818ddf7e4f3b98e2bcb3f9bc",
+    "identity_count": 29305,
+    "stream": {
+      "path": "build/native-flight/original-frame-delta-complete-flight/frames.delta.gz",
+      "sha256": "33dcdfa3f48482cb7d9d4ba85012f127172379d730e6c956b60a757a01586941"
+    },
+    "registers": {
+      "path": "build/native-flight/original-frame-delta-complete-flight/registers.jsonl.gz",
+      "sha256": "d02b660b0e4341ac1700a62be931998b8e100f17185df272d32f8c754011f4dc"
+    }
+  },
+  "actual_owner_returns": {
+    "snapshots": 29305,
+    "actual_owner_returns_matching": 7204,
+    "wrong_caller_stack_rejected": true,
+    "source_report_sha256": "07efde470c9536760aee5fe009700863813a6ea458474c79cd0bbfc35489e070",
+    "metadata_sha256": "7a9a870731a50ba23edfd47c33733dec55e30c72ca4bcbc76382cc29dadfc684"
+  },
+  "current_native_preservation": {
+    "report": {
+      "path": "build/native-flight/frame-delta-trace-preservation/Release/report.json",
+      "sha256": "3f309e61ae320956f55d9319140ddf3908d847dcf00d6c78b43a5488d176917e"
+    },
+    "source_trace_sha256": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+    "native_trace_sha256": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e",
+    "source_rows_preserved": 27110,
+    "native_rows_preserved": 16062,
+    "native_final_ram_sha256": "40b200936b345ce0c4a547b1fbcf50678749283a5d5e739acfc1f39f1992bd3c",
+    "memory": {
+      "enlist": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      },
+      "flight": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    }
+  },
+  "exact_previous_window": {
+    "report": {
+      "path": "build/native-flight/compact-first-combined-window/window/report.json",
+      "sha256": "44bcf63e3736888b618de2bd5af9150ef473574b6da48ff64a969e6b5e1710aa"
+    },
+    "observations": 40,
+    "previous_window_identical": true,
+    "passing_extracted_ram_copies_removed": true
+  },
+  "pending_next_window": {
+    "first": 22353,
+    "last": 22403,
+    "observations": 51,
+    "window_report": {
+      "path": "build/native-flight/compact-second-combined-window/window/report.json",
+      "sha256": "6bed699d55f135df57c6af71e18e45adf35ad9fc9cbef943c38ea53690e82860"
+    },
+    "message_report": {
+      "path": "build/native-flight/compact-second-combined-message-pages/report.json",
+      "sha256": "ee28e39da51ac599873cc5164cd9eafa42b1fbfeed03d7a97bdaaa227b79e25a"
+    },
+    "message_owner_predictions": 102,
+    "predicted_bytes": 6528000,
+    "radar_report_published": false,
+    "combined_history_accepted": false,
+    "reason": "Radar selected-marker mutation setup raises StopIteration because no selected marker exists in this NO SIG window. No acceptance is granted.",
+    "first_actual_radar_owner": {
+      "selected_record": 4096,
+      "prefix_calls": 1,
+      "phase_before": 157,
+      "phase_after": 158,
+      "points": [
+        {
+          "record_offset": 7168,
+          "x": 149,
+          "y": 161,
+          "pair": 0,
+          "colour": 5,
+          "phase": 158
+        }
+      ],
+      "paints": [
+        {
+          "kind": "point",
+          "x": 149,
+          "y": 161,
+          "x1": 0,
+          "y1": 0,
+          "colour": 0
+        },
+        {
+          "kind": "point",
+          "x": 149,
+          "y": 161,
+          "x1": 0,
+          "y1": 0,
+          "colour": 5
+        }
+      ],
+      "complete_non_stack_ram_matching": true
+    },
+    "first_actual_radar_owner_report_sha256": "33294aa8169fd82fc089d8dc3167c417e8a37c8ad2ea8c3c34cf0f829ce7530d"
+  },
+  "decoder_tests_passed": 7,
+  "live_negative_controls": {
+    "producer": [
+      {
+        "name": "invalid_first",
+        "returncode": 2,
+        "rejected": true,
+        "no_capture_created": true
+      },
+      {
+        "name": "invalid_count",
+        "returncode": 2,
+        "rejected": true,
+        "no_capture_created": true
+      },
+      {
+        "name": "malformed_range",
+        "returncode": 2,
+        "rejected": true,
+        "no_capture_created": true
+      }
+    ],
+    "extraction": [
+      {
+        "name": "unpreserved_original_trace",
+        "rejected": true,
+        "returncode": 1,
+        "failed_gate": "source['complete_trace_preserved']"
+      },
+      {
+        "name": "corrupt_original_register_digest",
+        "rejected": true,
+        "returncode": 1,
+        "failed_gate": "digest(registers) == source['metadata_sha256']"
+      }
+    ]
+  },
+  "remaining_plane_zero_observations": 1873,
+  "remaining_plane_three_observations": 2785,
+  "scope": "Complete independent original actual input/body/drawing-owner RAM and registers with unchanged full replay, plus verified caller returns. Current native traces and prior exact forty-body window are preserved. Complete cross-runtime drawing, other full flights, sound timing and visible performance remain open."
+}

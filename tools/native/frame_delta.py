@@ -9,8 +9,12 @@ RAM_SIZE = 0x100000
 BLOCK_SIZE = 64
 
 
-def snapshots(path):
-    """Require ordered block offsets, full-MiB hashes and the terminal count."""
+def snapshots(path, boundaries=(0, 1, 2, 3)):
+    """Require ordered blocks, full-MiB hashes and a terminal count.
+
+    Native captures use frontend boundary enums. Reference-only instruction
+    probes must supply their exact allowed PCs explicitly.
+    """
     path = Path(path)
     opener = gzip.open if path.suffix == '.gz' else open
     with opener(path, 'rb') as file:
@@ -32,7 +36,7 @@ def snapshots(path):
                 return
             assert tag == 1, 'Unknown frame delta record'
             iteration, frame, boundary, saved_tick = (word() for _ in range(4))
-            assert iteration > 0 and boundary in (0, 1, 2, 3) and saved_tick <= 0xFFFF
+            assert iteration > 0 and boundary in boundaries and saved_tick <= 0xFFFF
             previous_offset = -BLOCK_SIZE
             while True:
                 offset = word()

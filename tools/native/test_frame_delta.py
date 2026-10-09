@@ -64,6 +64,18 @@ class FrameDeltaAcceptance(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'no input boundary'):
             self.decode(data)
 
+    def test_reference_instruction_marker_requires_explicit_allowed_pcs(self):
+        data = bytearray(fixture())
+        data[len(MAGIC) + 12:len(MAGIC) + 16] = word(0xC0EFD4)
+        with self.assertRaises(AssertionError):
+            self.decode(data, body=False)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'original.delta'
+            path.write_bytes(data)
+            decoded = list(snapshots(path, (0xC0EFD4, 0, 1)))
+            self.assertEqual(decoded[0]['boundary'], 0xC0EFD4)
+            self.assertEqual(len(decoded), 3)
+
 
 if __name__ == '__main__':
     unittest.main()
