@@ -47,6 +47,36 @@ def assess(source, native, mapping, bands, first, last):
                 complete_pages_matching=strict, bands=results, changed_band_patterns=patterns)
 
 
+def radar_sequence(source, native, mapping, first, last):
+    """Observe the complete retained phase, without changing any radar pixels.
+
+    C31392 increments once per active prefix; C31226 can submit two prefixes.
+    The bounded owner proof establishes incoming-phase tolerance separately.
+    This proves counter continuity and shared refresh state, not marker pixels.
+    """
+    offset = (number(native[mapping[first]], 'radar_phase') - number(source[first], 'radar_phase')) % 256
+    increments = {str(i): 0 for i in range(3)}
+    duplicates = 0
+    for i in range(first, last + 1):
+        a, b = source[i], native[mapping[i]]
+        assert a['fields']['gauge_refresh'] == b['fields']['gauge_refresh'], ('radar refresh', i)
+        assert (number(b, 'radar_phase') - number(a, 'radar_phase')) % 256 == offset, ('radar phase continuity', i)
+        if i == first:
+            continue
+        if mapping[i] == mapping[i - 1]:
+            assert a['fields']['radar_phase'] == source[i - 1]['fields']['radar_phase']
+            duplicates += 1
+            continue
+        delta = (number(a, 'radar_phase') - number(source[i - 1], 'radar_phase')) % 256
+        assert delta in (0, 1, 2), ('radar prefix count', i, delta)
+        assert delta == (number(b, 'radar_phase') - number(native[mapping[i - 1]], 'radar_phase')) % 256
+        increments[str(delta)] += 1
+    return dict(observations=last - first + 1, incoming_phase_offset=offset,
+        duplicate_observations=duplicates, real_transitions=sum(increments.values()),
+        prefix_increments=increments, refresh_state_equal=True,
+        scope='Observed retained counter continuity only. Full-flight marker pixels and owner gates remain separate.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--traces', type=Path, required=True)
@@ -73,6 +103,18 @@ def main():
     first, last = comparison['first'], comparison['last']
     bands = headers['source']['drawing_bands']
     result = assess(traces['source'], traces['native'], mapping, bands, first, last)
+    result['radar_counter'] = radar_sequence(traces['source'], traces['native'], mapping, first, last)
+    for field in ('radar_phase', 'gauge_refresh'):
+        wrong = dict(traces['native'])
+        j = mapping[first + 1]
+        wrong[j] = copy.deepcopy(wrong[j])
+        wrong[j]['fields'][field] = f"{number(wrong[j], field) ^ 1:02x}"
+        try:
+            radar_sequence(traces['source'], wrong, mapping, first, last)
+        except AssertionError:
+            result['radar_counter'][field + '_mutation_rejected'] = True
+        else:
+            raise AssertionError(f'{field} mutation accepted')
     assert result['complete_pages_matching'] == comparison['complete_pages_matching']
     corrupted = dict(traces['native'])
     j = mapping[first]

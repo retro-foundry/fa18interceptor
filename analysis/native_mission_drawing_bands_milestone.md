@@ -35,6 +35,15 @@ introduced. Both builds give identical band and complete message assessments.
 The whole-flight message assessment still checks all 4,964 real transitions,
 including nine rejected wrong results.
 
+The current runner also preserves radar-counter continuity for the complete
+flight. Across all 4,967 observations the incoming phase difference stays 123
+modulo 256 and gauge-refresh state agrees. All 4,964 real transitions have the
+same increment: 3,040 zero-prefix transitions, 1,669 one-prefix and 255 two-
+prefix transitions. Two instruction-proven duplicate observations do not
+advance either counter. Wrong counter and refresh values are rejected.
+Release/Debug agree. This extends the earlier bounded phase proof to complete
+observed counter continuity; it does not prove every marker pixel or gate.
+
 Default and enabled trace contracts both pass live RAM/core/page verification
 and their existing truncation/budget checks. Enabled hashes reproduce actual
 RAM slices. The parser rejects incomplete or overlapping geometry, missing

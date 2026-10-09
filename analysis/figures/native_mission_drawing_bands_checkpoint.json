@@ -273,5 +273,27 @@
         ]
       }
     ]
-  }
+  },
+  "complete_radar_counter": {
+    "observations": 4967,
+    "incoming_phase_offset": 123,
+    "duplicate_observations": 2,
+    "real_transitions": 4964,
+    "prefix_increments": {
+      "0": 3040,
+      "1": 1669,
+      "2": 255
+    },
+    "refresh_state_equal": true,
+    "scope": "Observed retained counter continuity only. Full-flight marker pixels and owner gates remain separate.",
+    "radar_phase_mutation_rejected": true,
+    "gauge_refresh_mutation_rejected": true
+  },
+  "current_runner_sha256": "2f20d3a5caf1a0c8ddce85590ca408c96e4e35faf49e8b7e24cc8fb2e3a0411a",
+  "current_debug_runner_sha256": "fd47103d82795263ae1b9e9913b940e3d3e79e39cab456166678b5b1e6b46b0f",
+  "current_trace_sha256": {
+    "source": "34fc66004a17c4628f9eba6ea5a924904660b2a21ccb50579ae5c1b292b2f300",
+    "native": "423862743fa62f28fd2575f6c9141388cfebaf29dc3b7ba622b680737d068b9e"
+  },
+  "current_release_debug_assessments_equal_except_runner": true
 }
