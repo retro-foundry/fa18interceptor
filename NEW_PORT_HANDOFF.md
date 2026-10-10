@@ -1,5 +1,13 @@
 # Native port handoff — 2026-10-09
 
+Complete native Demo at 44100/48000 Hz (2026-10-10): all 12680 boundaries,
+8802 ordered channel events and active byte phases match; silent sample tails
+are checked under their actual owner. The default complete recording is exact.
+All 48 original startup requests and 8281 original payloads pass their declared
+scope. Release/Debug rate checks and compressed controls pass. Onset, complete
+handoffs and original/native waveforms remain open; native sound is unchanged.
+See [common-rate Demo evidence](analysis/native_common_rate_demo_milestone.md).
+
 Startup presentation pacing (2026-10-10): deadlines now begin after device,
 renderer and event startup. Actual Release/Debug windows present every frame,
 retain exact PCM/RAM and report zero gameplay heap/pool requests. Both pass the

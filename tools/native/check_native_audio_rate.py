@@ -26,17 +26,36 @@ def sha(path):
         return hashlib.file_digest(file, 'sha256').hexdigest()
 
 
-def same_physical_sound(left, right):
+def same_physical_sound(left, right, idle_phase_report=None):
     assert len(left) == len(right), 'Sound event count changed with output rate'
     boundaries = [[row for row in rows if row['kind'] == 'boundary'] for rows in (left, right)]
     assert len(boundaries[0]) == len(boundaries[1])
+    idle = dict(rows=0, output_interval_tail_differences=0, subsequent_active_rows=0)
+    seen_idle_difference = set()
     for a, b in zip(*boundaries):
         aa, bb = dict(a), dict(b)
         del aa['sample_frames']; del bb['sample_frames']
         aa['channels'] = [dict(c) for c in a['channels']]
         bb['channels'] = [dict(c) for c in b['channels']]
-        for x, y in zip(aa['channels'], bb['channels']):
-            assert x.pop('phase') * 44100 == y.pop('phase') * 48000, 'Byte phase changed in physical time'
+        for channel, (x, y) in enumerate(zip(aa['channels'], bb['channels'])):
+            p48, p44 = x.pop('phase'), y.pop('phase')
+            assert x['playing'] == y['playing']
+            if x['playing']:
+                assert p48 * 44100 == p44 * 48000, 'Byte phase changed in physical time'
+                if channel in seen_idle_difference:
+                    idle['subsequent_active_rows'] += 1
+            else:
+                # native_audio_render retains the unplayed tail of the last
+                # enclosing output sample after a buffer ends. This is output
+                # grid bookkeeping, not an active byte age. service resets it
+                # before a future start. Preserve and bound both actual tails;
+                # silence and all other fields must still match exactly.
+                assert x['volume'] == y['volume'] == 0, 'Idle stream is not silent'
+                assert 0 <= p48 <= 3546895 and 0 <= p44 <= 3546895, 'Idle output tail exceeds its sample interval'
+                idle['rows'] += 1
+                if p48 * 44100 != p44 * 48000:
+                    idle['output_interval_tail_differences'] += 1
+                    seen_idle_difference.add(channel)
         assert aa == bb, 'Game/voice state changed with output rate'
     events = 0
     for channel in range(4):
@@ -55,6 +74,8 @@ def same_physical_sound(left, right):
             # times can differ by at most one sample at the lower rate.
             assert abs(t48 * 44100 - t44 * 48000) <= 48000, 'Sound handoff moved beyond its output interval'
             events += 1
+    if idle_phase_report is not None:
+        idle_phase_report.update(idle)
     return events
 
 
@@ -67,14 +88,19 @@ def controls(left, right):
     rejected = []
     boundary = next(i for i, row in enumerate(right) if row['kind'] == 'boundary')
     request = next(i for i, row in enumerate(right) if row['kind'] == 'request' and row['active'])
-    for change in ('phase', 'event_time', 'payload', 'channel', 'lost_event'):
+    idle_boundary = next(i for i, row in enumerate(right) if row['kind'] == 'boundary' and
+                         any(not c['playing'] for c in row['channels']))
+    idle_channel = next(i for i, c in enumerate(right[idle_boundary]['channels']) if not c['playing'])
+    for change in ('phase', 'event_time', 'payload', 'channel', 'lost_event', 'idle_tail', 'idle_volume'):
         damaged = list(right)
-        index = boundary if change == 'phase' else request
+        index = idle_boundary if change in ('idle_tail', 'idle_volume') else boundary if change == 'phase' else request
         damaged[index] = copy.deepcopy(damaged[index])
         if change == 'phase': damaged[index]['channels'][0]['phase'] += 1
         elif change == 'event_time': damaged[index]['sample_frame'] += 100
         elif change == 'payload': damaged[index]['sha256'] = '0' * 64
         elif change == 'channel': damaged[index]['channel'] ^= 1
+        elif change == 'idle_tail': damaged[index]['channels'][idle_channel]['phase'] = 3546896
+        elif change == 'idle_volume': damaged[index]['channels'][idle_channel]['volume'] = 1
         else: del damaged[index]
         try:
             same_physical_sound(left, damaged)

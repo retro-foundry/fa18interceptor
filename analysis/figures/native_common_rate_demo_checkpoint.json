@@ -1,0 +1,368 @@
+{
+  "scope": "Complete native Demo at 44100/48000, actual original startup request comparison and whole original payload coverage; onset/whole waveform remain unaccepted.",
+  "native_runtime_sound_changed": false,
+  "native_full_sound_accepted": false,
+  "reports": {
+    "native-rate-comparison.json": {
+      "file": "build/native-audio/common-rate-complete-demo/native-rate-comparison.json",
+      "sha256": "945f28e6bcce001ddb75e4857b00eb9973bd91b779ee818702cc12ab627337d8"
+    },
+    "retention.json": {
+      "file": "build/native-audio/common-rate-complete-demo/retention.json",
+      "sha256": "da602b811c2427e93fd82b3435c39e32c0322104cb158e9b182fcd5e22ca23c3"
+    },
+    "rate-contract-controls.json": {
+      "file": "build/native-audio/common-rate-complete-demo/rate-contract-controls.json",
+      "sha256": "8259c35fdc2fc09f91f9a7230ef80b4dabdebb54e21ca19abc8c2413581efcdd"
+    },
+    "compressed-recheck.json": {
+      "file": "build/native-audio/common-rate-complete-demo/compressed-recheck.json",
+      "sha256": "646875013d900a5e15216d0c78e810cc93af4fad865d6ada28e8b8df81604787"
+    },
+    "startup-44100.json": {
+      "file": "build/native-audio/common-rate-complete-demo/startup-44100.json",
+      "sha256": "ce2d9e95c12b307d51050e7bb761b7c89e0429d3640641d074d35a32c2310589"
+    },
+    "payloads-44100.json": {
+      "file": "build/native-audio/common-rate-complete-demo/payloads-44100.json",
+      "sha256": "2586edba1f841be05efb5bb10783f47e1edd31efa2b956f07527924da7f8f2c8"
+    },
+    "source-parameter-catalog-diagnostic.json": {
+      "file": "build/native-audio/common-rate-complete-demo/source-parameter-catalog-diagnostic.json",
+      "sha256": "8ad83afe4d5f0e1bbade5f694c4bd860d43df799f848b8279d64515f8b317161"
+    },
+    "rejected-inactive-phase-comparison.json": {
+      "file": "build/native-audio/common-rate-complete-demo/rejected-inactive-phase-comparison.json",
+      "sha256": "b328283444224a343699686c48eefbf3c532917b49a8dfaea5b78daf759cad69"
+    },
+    "ram-recorded-44100/report.json": {
+      "file": "build/native-audio/common-rate-complete-demo/ram-recorded-44100/report.json",
+      "sha256": "48a7dfadbcbb371d18d5d5558294147671bbd8646bf06e74ff31c3d1a01d2f7f"
+    },
+    "ram-recorded-48000/report.json": {
+      "file": "build/native-audio/common-rate-complete-demo/ram-recorded-48000/report.json",
+      "sha256": "967e51a49cccefe5e22dc7e927b60a03718cf54c2e1d1d9ca92be88f64b95449"
+    },
+    "Release_rates": {
+      "file": "build/native-cmake/native/audio-rate-Release/report.json",
+      "sha256": "fab29bef0a59e6ed429f6874054fc1c23e5625b6a4a5944bbeec21af0fb1b09e",
+      "runner_sha256": "d16050fa7dcf49d77753eee5b84f43cdc3b1f67ef6b2dfbacb26fb83b56bed99",
+      "cases": {
+        "intro": {
+          "matched_ordered_sound_events_per_channel": 2086,
+          "actual_observation_mutations_rejected": [
+            "phase",
+            "event_time",
+            "payload",
+            "channel",
+            "lost_event",
+            "idle_tail",
+            "idle_volume"
+          ]
+        },
+        "free-flight": {
+          "matched_ordered_sound_events_per_channel": 5890,
+          "actual_observation_mutations_rejected": [
+            "phase",
+            "event_time",
+            "payload",
+            "channel",
+            "lost_event",
+            "idle_tail",
+            "idle_volume"
+          ]
+        },
+        "final-combat": {
+          "matched_ordered_sound_events_per_channel": 55357,
+          "actual_observation_mutations_rejected": [
+            "phase",
+            "event_time",
+            "payload",
+            "channel",
+            "lost_event",
+            "idle_tail",
+            "idle_volume"
+          ]
+        }
+      }
+    },
+    "Release_ctest": {
+      "file": "build/native-audio/common-rate-complete-demo/release-ctest.log",
+      "sha256": "660b348de7fc176998c0c9a1852599e03aa1c7e35c687005a319f4d26487c392",
+      "tests_passed": 2,
+      "terminal_success": true
+    },
+    "Debug_rates": {
+      "file": "build/native-cmake/native/audio-rate-Debug/report.json",
+      "sha256": "f3454361bf7aff40541f60fd395a6cdc17b6704b7a851bcba7108271324cef1d",
+      "runner_sha256": "adf4ce7d66526f3893ad4435542041351e358d890fa3117f611fde5e673e2881",
+      "cases": {
+        "intro": {
+          "matched_ordered_sound_events_per_channel": 2086,
+          "actual_observation_mutations_rejected": [
+            "phase",
+            "event_time",
+            "payload",
+            "channel",
+            "lost_event",
+            "idle_tail",
+            "idle_volume"
+          ]
+        },
+        "free-flight": {
+          "matched_ordered_sound_events_per_channel": 5890,
+          "actual_observation_mutations_rejected": [
+            "phase",
+            "event_time",
+            "payload",
+            "channel",
+            "lost_event",
+            "idle_tail",
+            "idle_volume"
+          ]
+        },
+        "final-combat": {
+          "matched_ordered_sound_events_per_channel": 55357,
+          "actual_observation_mutations_rejected": [
+            "phase",
+            "event_time",
+            "payload",
+            "channel",
+            "lost_event",
+            "idle_tail",
+            "idle_volume"
+          ]
+        }
+      }
+    },
+    "Debug_ctest": {
+      "file": "build/native-audio/common-rate-complete-demo/debug-ctest.log",
+      "sha256": "2367a04d13e261bbfadaab35addf1f77f96b10513f14ad8b654396237dfb751f",
+      "tests_passed": 2,
+      "terminal_success": true
+    }
+  },
+  "source_files_sha256": {
+    "tools/native/check_native_audio_rate.py": "3d05995e85b565a574fdcc695ed7ea8d8ab9be33f76b83bbb228e0c83a999483",
+    "tools/native/check_music_handoffs.py": "d914aefa54146702ec0bb0719c017d2d670d51ef079565b7577bcb793c4cb2cd",
+    "port/game/native/audio.c": "38260d759852ca038e32dfa036253641bf95a9fa40d16e8312d9cf97f3f99e8a",
+    "port/game/audio.c": "8c4102300057e71ff303b988345c951b06296e5767489d723fcd1ab3d26c84a5",
+    "port/native/main.c": "ff8a276c53675f7ab97f18b975768a05cd6e923b6d64656320874ba47f89c4ef"
+  },
+  "complete_native_comparison": {
+    "complete_demo_4892_updates_and_12680_audio_boundaries": true,
+    "same_complete_final_RAM_and_non_PCM_counters": true,
+    "matched_per_channel_sound_events": 8802,
+    "active_physical_byte_phases_matching": true,
+    "idle_output_interval_tails": {
+      "rows": 23986,
+      "output_interval_tail_differences": 430,
+      "subsequent_active_rows": 89
+    },
+    "actual_record_mutations_rejected": [
+      "phase",
+      "event_time",
+      "payload",
+      "channel",
+      "lost_event",
+      "idle_tail",
+      "idle_volume"
+    ],
+    "default_complete_PCM_trace_RAM_and_all_counters_preserved": true,
+    "historical_runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+    "native_output_rates": [
+      44100,
+      48000
+    ],
+    "reports": {
+      "44100": {
+        "path": "build/native-audio/common-rate-complete-demo/ram-recorded-44100/report.json",
+        "sha256": "48a7dfadbcbb371d18d5d5558294147671bbd8646bf06e74ff31c3d1a01d2f7f"
+      },
+      "48000": {
+        "path": "build/native-audio/common-rate-complete-demo/ram-recorded-48000/report.json",
+        "sha256": "967e51a49cccefe5e22dc7e927b60a03718cf54c2e1d1d9ca92be88f64b95449"
+      }
+    },
+    "native_original_waveform_accepted": false
+  },
+  "startup_comparison": {
+    "native_output_rate_hz": 44100,
+    "original_onset": {
+      "rate_hz": 44100,
+      "first_nonzero_stereo_frame_by_channel": [
+        3370056,
+        3370123
+      ],
+      "right_minus_left_frames": 67
+    },
+    "native_onset": {
+      "rate_hz": 44100,
+      "first_nonzero_stereo_frame_by_channel": [
+        17,
+        17
+      ],
+      "right_minus_left_frames": 0
+    },
+    "requests_by_channel": [
+      24,
+      24,
+      0,
+      0
+    ]
+  },
+  "original_parameter_coverage_diagnostic": {
+    "scope": "Full original request parameter tuples versus same-channel native coverage; not ordinal or timing qualification.",
+    "fields": [
+      "bytes",
+      "sha256",
+      "period",
+      "volume"
+    ],
+    "channels": [
+      {
+        "channel": 0,
+        "requests": 254,
+        "missing_request_parameter_tuples": 165,
+        "unique_missing": 127,
+        "first_missing": [
+          [
+            1,
+            {
+              "call": 259,
+              "hardware_frame": 259,
+              "vpos": 287,
+              "hpos": 4,
+              "samples": 154232,
+              "bytes": 32786,
+              "sha256": "9b90b44e6b185554f19b33cc3a6d60f34f4d984578f978d92b7a10c10a89f6a2",
+              "period": 358,
+              "volume": 23
+            }
+          ],
+          [
+            10,
+            {
+              "call": 780,
+              "hardware_frame": 780,
+              "vpos": 280,
+              "hpos": 67,
+              "samples": 46056,
+              "bytes": 13818,
+              "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0",
+              "period": 568,
+              "volume": 31
+            }
+          ],
+          [
+            11,
+            {
+              "call": 888,
+              "hardware_frame": 888,
+              "vpos": 67,
+              "hpos": 25,
+              "samples": 46056,
+              "bytes": 13818,
+              "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0",
+              "period": 544,
+              "volume": 24
+            }
+          ]
+        ]
+      },
+      {
+        "channel": 1,
+        "requests": 368,
+        "missing_request_parameter_tuples": 216,
+        "unique_missing": 157,
+        "first_missing": [
+          [
+            1,
+            {
+              "call": 260,
+              "hardware_frame": 260,
+              "vpos": 4,
+              "hpos": 58,
+              "samples": 154232,
+              "bytes": 32786,
+              "sha256": "9b90b44e6b185554f19b33cc3a6d60f34f4d984578f978d92b7a10c10a89f6a2",
+              "period": 358,
+              "volume": 23
+            }
+          ],
+          [
+            10,
+            {
+              "call": 601,
+              "hardware_frame": 601,
+              "vpos": 91,
+              "hpos": 114,
+              "samples": 358568,
+              "bytes": 5580,
+              "sha256": "0b727aa172caac29e3ab4c92b401c780cc8b2b052604b38d172f19c6ad175c50",
+              "period": 758,
+              "volume": 40
+            }
+          ],
+          [
+            11,
+            {
+              "call": 658,
+              "hardware_frame": 658,
+              "vpos": 259,
+              "hpos": 86,
+              "samples": 358568,
+              "bytes": 5580,
+              "sha256": "0b727aa172caac29e3ab4c92b401c780cc8b2b052604b38d172f19c6ad175c50",
+              "period": 700,
+              "volume": 43
+            }
+          ]
+        ]
+      },
+      {
+        "channel": 2,
+        "requests": 19,
+        "missing_request_parameter_tuples": 2,
+        "unique_missing": 2,
+        "first_missing": [
+          [
+            6,
+            {
+              "call": 6251,
+              "hardware_frame": 6251,
+              "vpos": 37,
+              "hpos": 154,
+              "samples": 46056,
+              "bytes": 13818,
+              "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0",
+              "period": 145,
+              "volume": 40
+            }
+          ],
+          [
+            7,
+            {
+              "call": 6279,
+              "hardware_frame": 6279,
+              "vpos": 102,
+              "hpos": 208,
+              "samples": 46056,
+              "bytes": 13818,
+              "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0",
+              "period": 145,
+              "volume": 12
+            }
+          ]
+        ]
+      },
+      {
+        "channel": 3,
+        "requests": 7640,
+        "missing_request_parameter_tuples": 0,
+        "unique_missing": 0,
+        "first_missing": []
+      }
+    ]
+  }
+}

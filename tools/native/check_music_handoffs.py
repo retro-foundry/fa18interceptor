@@ -123,6 +123,20 @@ def onset(path):
             'right_minus_left_frames':first[1]-first[0]}
 
 
+def native_recording_rate(folder, report):
+    # The WAV is the actual host output contract. Bind the complete bytes and
+    # frame count before interpreting native trace timestamps at that rate.
+    with reference_file(folder/'native.wav') as file:
+        assert hashlib.file_digest(file, 'sha256').hexdigest() == report['wav_sha256'], 'Native PCM identity differs'
+    with reference_file(folder/'native.wav') as file, wave.open(file) as pcm:
+        rate = pcm.getframerate()
+        assert rate in (44100, 48000), 'Unqualified native output rate'
+        assert (pcm.getnchannels(), pcm.getsampwidth(), pcm.getnframes()) == (2, 2, report['stats']['sample_frames'])
+    assert report['stats']['sample_frames'] == report['stats']['frames'] * (rate//50), 'Native output duration differs'
+    assert report.get('sample_rate_hz', rate) == rate, 'Declared native output rate differs'
+    return rate
+
+
 def consumed_rows(folder):
     with open_stream(folder/'audio_samples.bin') as file:
         for (call, count, before, after, pcm_end), payload in frames(file, 5000):
@@ -349,7 +363,8 @@ def main():
         native_data=gzip.decompress(args.native_data.read_bytes()) if args.native_data.suffix=='.gz' else args.native_data.read_bytes()
         assert len(native_data)==0x100000
         assert digest(native_data)==report['final_data_retention']['decoded_sha256']
-    read_audio_trace(args.native_trace,report['stats'],native_data)
+    native_rate = native_recording_rate(args.native_report.parent, report)
+    read_audio_trace(args.native_trace,report['stats'],native_data, frames_per_tick=native_rate//50)
     native=[[] for _ in range(4)]
     for line in trace.splitlines():
         row=json.loads(line)
@@ -389,7 +404,7 @@ def main():
         native_error=[]
         for index in range(2,len(events)):
             expected=sum(event['bytes']*358 for event in events[:index-1])
-            actual=native[channel][index]['sample_frame']*3546895/48000
+            actual=native[channel][index]['sample_frame']*3546895/native_rate
             native_error.append(actual-expected)
         timing[str(channel)]={'beam_line_candidates':residuals,
             'native_refill_rounding_cycles':{'min':min(native_error),'max':max(native_error)},
@@ -398,6 +413,7 @@ def main():
     result={'scope':'Every original initial-music request in the separate 5000-call launch versus native ordered startup requests; onset and reference-clock differences reported, not accepted as identical WAVs',
         'original_validation':validation,'native_runner_sha256':report['runner_sha256'],
         'native_trace_sha256':digest(trace),'requests_by_channel':[len(channel) for channel in original],
+        'native_output_rate_hz':native_rate,
         'all_original_requests_match_ordered_native_payload_period_volume':True,
         'comparison_search_shift_trim_or_gain_conversion':False,
         'wrong_payload_length_period_volume_rejected':True,'timing':timing,
