@@ -213,6 +213,11 @@ int main(int argc,char **argv) {
         int cycles=GET_CYCLES();uint16_t opcode=rd_u16(REG_PC);
         const uint8_t previous_pixel=trace_pixel?rd_u8(pixel):0;
         const uint16_t previous_word=trace_word?rd_u16(watched_word):0;
+        if(trace_word && REG_PC==0xc1d3f4) {
+            fprintf(stderr,"template save sp=%06X frame=%06X",REG_A[7],REG_A[6]);
+            for(unsigned reg=0;reg<16;++reg) fprintf(stderr," %c%u=%08X",reg<8?'d':'a',reg&7,REG_DA[reg]);
+            fputc('\n',stderr);
+        }
         const uint32_t previous_carry=REG_D[4];
         const uint32_t previous_depth=REG_D[3];
         const gaddr previous_viewer=REG_A[3];

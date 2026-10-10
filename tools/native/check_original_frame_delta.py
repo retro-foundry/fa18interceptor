@@ -21,6 +21,29 @@ BOUNDARIES = (0xC0EFD4, 0xC0EFEA, 0xC0F3C0, 0xC30764, 0xC0F182,
               0xC31226, 0xC0F18E, 0xC322EE, 0xC0F286, 0xC0F2DC)
 
 
+def retain_failed_capture(work, output, reason):
+    """Preserve interrupted evidence before TemporaryDirectory cleans up."""
+    target = output / 'failure'
+    target.mkdir(parents=True, exist_ok=True)
+    retained = []
+    for name in ('frames.delta','registers.jsonl','trace.jsonl','final.dat','consumed.fa18in'):
+        raw = work / name
+        if not raw.exists():
+            continue
+        packed = target / (name+'.gz')
+        identity = hashlib.sha256()
+        with raw.open('rb') as source, gzip.GzipFile(filename=str(packed),mode='wb',mtime=0) as file:
+            while data := source.read(1024*1024):
+                identity.update(data)
+                file.write(data)
+        retained.append(dict(file=packed.name,decoded_bytes=raw.stat().st_size,
+            decoded_sha256=identity.hexdigest(),compressed_sha256=digest(packed.read_bytes())))
+    result = dict(accepted_evidence=False,reason=reason,retained=retained,
+        scope='Interrupted or rejected original capture. No complete footer, replay, final RAM or drawing acceptance is asserted.')
+    (output/'failure.json').write_text(json.dumps(result,indent=2)+'\n')
+    return result
+
+
 def verify_owner_return(snapshot, registers, pending):
     """Require actual call/return PCs and the restored caller stack pointer."""
     pc, iteration = snapshot['boundary'], snapshot['iteration']
@@ -83,14 +106,25 @@ def main():
     parser.add_argument('--window-message', type=Path)
     parser.add_argument('--verify-existing', type=Path, help='Verify all actual caller returns in a preserved stream without rerunning')
     parser.add_argument('--previous-stream', type=Path, help='Require every old RAM/register boundary to remain byte-identical')
+    parser.add_argument('--capture-budget-mib', type=int, default=512,
+                        help='Explicit diagnostic budget shared by complete trace, delta and registers; default 512')
+    parser.add_argument('--timeout-seconds', type=int, default=900,
+                        help='Explicit original replay process limit; default 900 seconds')
     args = parser.parse_args()
     assert (args.first is None) == (args.count is None)
+    assert 0 < args.capture_budget_mib <= 10000000
+    assert args.timeout_seconds > 0
     reference = json.loads((args.reference / 'report.json').read_text())
     source = json.loads((args.source_evidence / 'report.json').read_text())
     assert reference['baseline_source_trace_sha256'] == source['driver_trace_sha256']
     recorded = args.reference / 'source.jsonl.gz'
     assert digest(gzip.decompress(recorded.read_bytes())) == reference['source_trace_sha256']
     header, rows = read_trace(recorded)
+    with gzip.open(recorded, 'rb') as file:
+        expected_trace_bytes = sum(len(chunk) for chunk in iter(lambda: file.read(1024*1024), b''))
+    trace_budget_mib = (expected_trace_bytes + 1024*1024-1)//(1024*1024)
+    delta_budget_mib = args.capture_budget_mib-trace_budget_mib
+    assert delta_budget_mib > 0, 'Complete sealed trace leaves no budget for owner captures'
     for path, expected in reference['input_hashes'].items():
         assert digest((ROOT / path).read_bytes()) == expected, path
     input_path = args.source_evidence / 'input.fa18in'
@@ -121,6 +155,10 @@ def main():
     probe_hash = digest(probe.read_bytes())
     env = {k: v for k, v in os.environ.items() if not k.startswith(
         ('FA18_LOOP_', 'FA18_BOUNDARY_', 'FA18_UPDATE_ENTRY_', 'FA18_ORIGINAL_', 'FA18_TRACE_'))}
+    if 'message_shown' in {f['name'] for f in header['fields']}:
+        env['FA18_TRACE_MESSAGE_FIELDS'] = '1'
+    if 'drawing_bands' in rows[next(iter(rows))]:
+        env['FA18_TRACE_DRAWING_BANDS'] = '1'
     identities, counts = [], {f'{pc:06X}': 0 for pc in BOUNDARIES}
     windows = {}
     for name, directory in (('radar', args.window_radar), ('message', args.window_message)):
@@ -149,21 +187,32 @@ def main():
         stream, metadata, trace, final = [work / name for name in ('frames.delta', 'registers.jsonl', 'trace.jsonl', 'final.dat')]
         end = input_path.read_text().splitlines()[-1].split()
         assert end[0] == 'end'
+        arguments = [str(probe), '--state', str(ROOT / 'captures/native/qual_carrier_success/state.bin'),
+            '--rom', str(ROOT / 'local/system/kick13.rom'), '--ports', 'off', '--input', str(input_path.resolve()),
+            '--frames', end[2], '--ram-out', str(final)]
+        if source.get('mission_mode') == 5:
+            arguments += ['--to-end', '--game-input-out', str(work/'consumed.fa18in')]
         with (args.out / 'source.log').open('w') as log:
-            result = subprocess.run([str(probe), '--state', str(ROOT / 'captures/native/qual_carrier_success/state.bin'),
-                '--rom', str(ROOT / 'local/system/kick13.rom'), '--ports', 'off', '--input', str(input_path.resolve()),
-                '--frames', end[2], '--ram-out', str(final)], cwd=ROOT,
-                env=dict(env, FA18_ORIGINAL_DELTA_RANGE=f'{first}+{last-first+1}',
-                    FA18_ORIGINAL_DELTA_PATH=str(stream), FA18_ORIGINAL_DELTA_REGISTERS=str(metadata),
-                    FA18_LOOP_TRACE=str(trace), FA18_LOOP_TRACE_BUDGET_MIB='256',
-                    FA18_TRACE_MESSAGE_FIELDS='1', FA18_TRACE_DRAWING_BANDS='1'),
-                stdout=log, stderr=subprocess.STDOUT, timeout=900)
+            try:
+                result = subprocess.run(arguments, cwd=ROOT,
+                    env=dict(env, FA18_ORIGINAL_DELTA_RANGE=f'{first}+{last-first+1}',
+                        FA18_ORIGINAL_DELTA_PATH=str(stream), FA18_ORIGINAL_DELTA_REGISTERS=str(metadata),
+                        FA18_ORIGINAL_DELTA_BUDGET_MIB=str(delta_budget_mib),
+                        FA18_LOOP_TRACE=str(trace), FA18_LOOP_TRACE_BUDGET_MIB=str(trace_budget_mib)),
+                    stdout=log, stderr=subprocess.STDOUT, timeout=args.timeout_seconds)
+            except subprocess.TimeoutExpired:
+                retain_failed_capture(work,args.out,f'Original process exceeded {args.timeout_seconds} seconds')
+                raise
+        if result.returncode:
+            retain_failed_capture(work,args.out,f'Original probe failed with status {result.returncode}')
         assert result.returncode == 0, 'Original probe failed'
+        if source.get('mission_mode') == 5:
+            assert digest((work/'consumed.fa18in').read_bytes()) == source['consumed_input_sha256']
         actual_run, = [json.loads(line) for line in (args.out / 'source.log').read_text().splitlines() if line.startswith('{')]
         assert actual_run == reference['source_run'], 'Original runtime counters changed'
         assert digest(final.read_bytes()) == source['driver_final_ram_sha256'] == reference['source_final_ram_sha256']
         assert trace.read_bytes() == gzip.decompress(recorded.read_bytes()), 'Original trace changed'
-        assert stream.stat().st_size + metadata.stat().st_size + trace.stat().st_size <= 512 * 1024 * 1024
+        assert stream.stat().st_size + metadata.stat().st_size + trace.stat().st_size <= args.capture_budget_mib * 1024 * 1024
         entries, old_seen, pending = [], set(), {}
         owner_returns = 0
         with metadata.open() as registers_file:
@@ -230,6 +279,8 @@ def main():
         stream_sha256=stream_hash, metadata_sha256=metadata_hash,
         stream_bytes=stream_bytes, metadata_bytes=metadata_bytes, trace_bytes=trace_bytes,
         retained_bytes=sum((args.out / name).stat().st_size for name in ('frames.delta.gz', 'registers.jsonl.gz')),
+        capture_budget_mib=args.capture_budget_mib, trace_budget_mib=trace_budget_mib, delta_budget_mib=delta_budget_mib,
+        timeout_seconds=args.timeout_seconds,
         identities=identities, scope='Complete independent original input and actual drawing-owner RAM/registers. Source replay, all trace rows, counters and final RAM remain exact. No original RAM supplies native gameplay. This captures evidence; drawing-history and complete sound acceptance remain separate.')
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'{len(entries)} original observations / {len(identities)} snapshots; complete replay exact; {checked_old} previous snapshots identical')

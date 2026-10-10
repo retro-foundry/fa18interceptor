@@ -1,5 +1,16 @@
 # Native port handoff — 2026-10-09
 
+Complete mission-five body sweep (2026-10-10): 13,762 of 13,763 actual
+native bodies match original instructions; update 63,713 remains rejected
+for the C4F6DE placement-cache word. Its rendered pages match. Actual C1D3F4
+template saves overwrite the retained model word through saved D5; producer
+ownership still needs a native fix. A bounded original run preserves all
+75,573 observations, controls, final RAM and counters, retaining 72 snapshots
+and 24 verified drawing returns. Interrupted captures now survive cleanup;
+the cache pruner protects active comparison workspaces. Native gameplay is
+unchanged. Full drawing history, broader independent flights and sound
+matching remain open. See [body failure evidence](analysis/native_mission_five_complete_body_failure_milestone.md).
+
 Complete mission-five message timing (2026-10-10): both independent runs obey
 original elapsed/countdown, full text, delay/redraw and colour-cache rules through
 all 13,762 real transitions, retaining 12 duplicates and 1,129 paused periods.

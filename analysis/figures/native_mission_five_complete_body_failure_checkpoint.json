@@ -1,0 +1,339 @@
+{
+  "date": "2026-10-10",
+  "scope": "Complete native mission-five body comparison remains rejected at update 63713. Actual template-save writer traced; no gameplay fix, full cockpit acceptance or full original drawing capture is claimed.",
+  "result": {
+    "first": 61797,
+    "last": 75571,
+    "native_first": 61094,
+    "native_last": 74856,
+    "bodies": 13763,
+    "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+    "reference_report_sha256": "7f969e4bfc97b4ea995f5621b128f23088647f75037488da7eb3b88db2e2dadc",
+    "native_trace_sha256": "d8564d5cd71553acac4419383664571aaaff5e36ff0a2b1b3ac4f1cdd81d80cc",
+    "native_final_ram_sha256": "1f1381a5602e10c19d45ab024ef8d2c7f322eed288e1b605f1258259b4929737",
+    "native_owned_input_reference": false,
+    "runtime_counters_preserved": true,
+    "final_ram_preserved": true,
+    "earned_save_preserved": true,
+    "original_body_failures": [
+      63713
+    ],
+    "original_bodies_matching": false,
+    "stream_bytes": 124362700,
+    "stream_sha256": "76a90297a723943b03bcc662e429905c87ad3ddb6b2d1eeceb9c38b9b5d3cc58",
+    "compressed_bytes": 22235417,
+    "conventional_capture_bytes": 43294654464,
+    "snapshots": 41289,
+    "old_window_ram_and_metadata_identical": false,
+    "scope": "Complete actual native input/begin/end RAM with exact old input trace and complete final flight preservation. Every decoded native body executes original instructions under the existing explicit frame-body exclusions and supplied original API timer contract. Independent source-versus-native cache histories and other full flights remain separate.",
+    "input_segment": {
+      "first_source_observation": 47815,
+      "first_actual_source_update": 47800,
+      "input_sha256": "f4b8180c91364d8115a3b88acab92721344b14a25a1a130f01d92d4786a7079f",
+      "replay_source_end": 75342,
+      "native_prefix_source_end": 47595,
+      "ordinary_native_prefix_replayed": true
+    },
+    "ordinary_native_prefix_replayed": true
+  },
+  "failed_body": {
+    "iteration": 63713,
+    "entry_sha256": "fbd23be6a78f6452bfe7935f6a26e24441a694e1fa2fec6a7fa0a27391269d53",
+    "before_sha256": "00ce33881e3aecb400c41c4551bc5cb4585c293d23b30fd40c61a4da561bf58a",
+    "after_sha256": "4bc9b9ccdcbb739be6dafcd85f09efd8464861b61fbc6d747ccd884e4e4ab303",
+    "before_tick": 98500,
+    "after_tick": 98502,
+    "saved_tick": 2620,
+    "original_body_matching": false
+  },
+  "producer": {
+    "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+    "trace_oracle_sha256": "f87d575177e593721befda87cc35d2151c64168334d686538c58a5bbf84bb977",
+    "trace_source_sha256": "b7c2a817aad416a7ee8eba641ad8390be5803bde563665f0ac392667b9f8cb42",
+    "actual_iteration": 63713,
+    "before_tick": 98500,
+    "after_tick": 98502,
+    "saved_tick": 2620,
+    "gameplay_difference_addresses": [
+      "C4F6DE",
+      "C4F6DF"
+    ],
+    "display_difference_bytes": 0,
+    "actual_writer": "C1D3F4 MOVEM.L saves D5 upper word into C7FE78; later C1F8DE returns it and C1CFBA normalizes zero to FFFF",
+    "native_final_cache_word": "7786",
+    "original_final_cache_word": "FFFF",
+    "scope": "Rejected actual complete body; retained trace establishes missing native template-save producer. No native fix or full cockpit acceptance yet.",
+    "full_original_writer_traces_retained": true
+  },
+  "continuation_rejections": {
+    "wrong_runner": {
+      "rejected": true,
+      "reason": "recorded continuation differs"
+    },
+    "changed_trace": {
+      "rejected": true,
+      "reason": "recorded continuation differs"
+    },
+    "changed_ram": {
+      "rejected": true,
+      "reason": "recorded continuation differs"
+    },
+    "incomplete_comparison": {
+      "rejected": true,
+      "reason": "recorded continuation differs"
+    },
+    "unverified_prefix": {
+      "rejected": true,
+      "reason": "recorded continuation differs"
+    },
+    "changed_origin": {
+      "rejected": true,
+      "reason": "recorded continuation differs"
+    },
+    "changed_controls": {
+      "rejected": true,
+      "reason": "recorded continuation differs"
+    },
+    "changed_anchor_input": {
+      "rejected": true,
+      "reason": "recorded continuation differs"
+    }
+  },
+  "failed_original_full_capture": {
+    "accepted_evidence": false,
+    "reason": "Original full drawing capture exceeded its 900-second process limit; old wrapper deleted temporary partial data.",
+    "first": 61797,
+    "last": 75571,
+    "capture_budget_mib": 1024,
+    "last_verified_live_observation": 71050,
+    "last_verified_live_frame": 171178,
+    "last_verified_live_trace_bytes": 465014784,
+    "partial_capture_retained": false,
+    "scope": "Last verified live progress is recorded, not a final observation. No original replay or drawing comparison is accepted."
+  },
+  "actual_interrupted_capture": {
+    "accepted_evidence": false,
+    "reason": "Original process exceeded 1 seconds",
+    "retained": [
+      {
+        "file": "frames.delta.gz",
+        "decoded_bytes": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "compressed_sha256": "6b175796526e4b3f05f4f03a234527ec1a0344121621565ffe05edcf3ccc0618"
+      },
+      {
+        "file": "registers.jsonl.gz",
+        "decoded_bytes": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "compressed_sha256": "370a86a9045d1b2995a2452b4e5c7a1afbc1ee2604a26c0c753664b9a0c07219"
+      },
+      {
+        "file": "trace.jsonl.gz",
+        "decoded_bytes": 13664256,
+        "decoded_sha256": "e49784236c8d24df8ea394700498ccad36899ce4f9b3ee3054d24f25252d5aec",
+        "compressed_sha256": "668ba1451a94194efa00f033eaee8a73d5e7683ff9f34fab49e694a20d92d7f6"
+      },
+      {
+        "file": "consumed.fa18in.gz",
+        "decoded_bytes": 0,
+        "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "compressed_sha256": "23ce50e999132bd114d446eef08e7ff019097fc8559ac3012804c8c485124e07"
+      }
+    ],
+    "scope": "Interrupted or rejected original capture. No complete footer, replay, final RAM or drawing acceptance is asserted."
+  },
+  "files": {
+    "build/native-flight/mission-five-complete-body-delta/report.json": {
+      "bytes": 6080076,
+      "sha256": "721afd1862b9c3754d2f7390029c2f97ed871a90cf0b79942f0096ca0f5d22cf"
+    },
+    "build/native-flight/mission-five-complete-body-delta/frames.delta.gz": {
+      "bytes": 22235417,
+      "sha256": "11c65856d39ae0e0a5382e2928b61333a4669bff3a38fb6c6dba1d9fa455bde3"
+    },
+    "build/native-flight/mission-five-complete-body-delta/memory.json": {
+      "bytes": 221,
+      "sha256": "da69c49d614b3517361e3f4dcee72124490a912b269ba55850d5b664f8464e77"
+    },
+    "build/native-flight/mission-five-complete-body-delta/continuation-guards.json": {
+      "bytes": 1958,
+      "sha256": "33a5e0c22a1a4bca010e6d27ef269cb99ecc0a82a49b16e890336227385f98fa"
+    },
+    "build/native-flight/mission-five-complete-body-delta/original-bodies.log": {
+      "bytes": 2337279,
+      "sha256": "14be4f6be7d369c59c84203231a70c1376a37d08810518352d68d8772aa6a1f0"
+    },
+    "build/native-flight/mission-five-complete-body-delta/oracle-build.log": {
+      "bytes": 387,
+      "sha256": "33d126b0079dd95cc8f11aceb49456d8b8f39f3022aa7d0f287fb3eca670cb71"
+    },
+    "build/native-flight/mission-five-complete-body-delta/failed-63713.after.dat.gz": {
+      "bytes": 328156,
+      "sha256": "2d6ea0b15a56751e4837ddf36aded5db560c59a4991096e83171a28dfc97a7b8"
+    },
+    "build/native-flight/mission-five-complete-body-delta/failed-63713.before.dat.gz": {
+      "bytes": 328257,
+      "sha256": "86d98e0e21cead98511e25561f9b1f9aff4a64d2abfd4a6d7bdae0e4723017fa"
+    },
+    "build/native-flight/mission-five-complete-body-delta/failed-63713.entry.dat.gz": {
+      "bytes": 328257,
+      "sha256": "f845935390fbe405136cc2d662207d6c1af482a528e1921f7ac370448eb16d28"
+    },
+    "build/native-flight/mission-five-body-63713/trace-identities.json": {
+      "bytes": 905,
+      "sha256": "5c0f01a0bf94993b72d96f05f5c8d4df8ed0b3cdb4b70bb887c3171f08038e99"
+    },
+    "build/native-flight/mission-five-body-63713/writer.log": {
+      "bytes": 5150,
+      "sha256": "33cd56fd794874910299975241cae504daae48b13bdf2c0156f03143d28e4907"
+    },
+    "build/native-flight/mission-five-body-63713/template.log": {
+      "bytes": 5471,
+      "sha256": "ea5e639a5aec6e4bce20939ffa378080ba754687c5b08896ee782bc7c3528788"
+    },
+    "build/native-flight/mission-five-body-63713/template-trace-oracle.exe.gz": {
+      "bytes": 4984924,
+      "sha256": "5dfe0d333bb8557d8b4cc8ad6ea14b6db92c2954fd258378a9ed294cd5430361"
+    },
+    "build/native-flight/mission-five-body-63713/preceding-runner.exe.gz": {
+      "bytes": 992727,
+      "sha256": "1b9b1de462e05702bc50f3999078ac3632654e9d4d3157a51a4d5bb6034fc929"
+    },
+    "build/native-flight/mission-five-body-63713/build.log": {
+      "bytes": 1586,
+      "sha256": "3ab1a123e31f3ffe790adf5c54abed3e56d54b04bebe8bd154deb829b4016f32"
+    },
+    "build/native-flight/original-mission-five-frame-delta/failure.json": {
+      "bytes": 537,
+      "sha256": "81eca3177fcd9a33141f34edd7a5a475dbb8d96ee4e7eb232c66dc7f7681fccf"
+    },
+    "build/native-flight/original-mission-five-retention-control/failure.json": {
+      "bytes": 1308,
+      "sha256": "706b99ee9289bc4d7d3a7b65d87d41297f9f498882b277f06611834223d9aefb"
+    },
+    "build/native-flight/original-mission-five-retention-control/failure/frames.delta.gz": {
+      "bytes": 33,
+      "sha256": "6b175796526e4b3f05f4f03a234527ec1a0344121621565ffe05edcf3ccc0618"
+    },
+    "build/native-flight/original-mission-five-retention-control/failure/registers.jsonl.gz": {
+      "bytes": 36,
+      "sha256": "370a86a9045d1b2995a2452b4e5c7a1afbc1ee2604a26c0c753664b9a0c07219"
+    },
+    "build/native-flight/original-mission-five-retention-control/failure/trace.jsonl.gz": {
+      "bytes": 84791,
+      "sha256": "668ba1451a94194efa00f033eaee8a73d5e7683ff9f34fab49e694a20d92d7f6"
+    },
+    "build/native-flight/original-mission-five-retention-control/failure/consumed.fa18in.gz": {
+      "bytes": 36,
+      "sha256": "23ce50e999132bd114d446eef08e7ff019097fc8559ac3012804c8c485124e07"
+    },
+    "build/native-flight/original-mission-five-expiry-window/report.json": {
+      "bytes": 14959,
+      "sha256": "929082d70532741307658df648357f93d550b8a81c3aadd9f0b9149391f4795e"
+    },
+    "build/native-flight/original-mission-five-expiry-window/frames.delta.gz": {
+      "bytes": 448685,
+      "sha256": "ddebfcfd7195967ea8d0c25f5f98850d0ad9f7f6098f60994973f4e987a337ea"
+    },
+    "build/native-flight/original-mission-five-expiry-window/registers.jsonl.gz": {
+      "bytes": 1447,
+      "sha256": "d9cb7d114183631d8ded49740d476dbbee890d125f8a19f332cb08443db8ff8f"
+    },
+    "build/native-flight/original-mission-five-expiry-window/source.log": {
+      "bytes": 332,
+      "sha256": "12f0b7c08279824239e40dc76c455803eff160b3f4f1a56e485312decf651b8a"
+    },
+    "build/native-flight/original-mission-five-expiry-window/build.log": {
+      "bytes": 192,
+      "sha256": "7eb1e2d2f54f07ba5e690c2c85ae69113dee65776affa0823179947f9a85a8d3"
+    },
+    "build/native-flight/original-mission-five-expiry-owner-check/report.json": {
+      "bytes": 290,
+      "sha256": "39280d83124524c13178c21fadb0a41f7199ac25cd17510d6b3619c8899c1bfe"
+    }
+  },
+  "tool_sources_sha256": {
+    "scripts/prune_build_artifacts.py": "0c7d533958cdb01ee59b1fc866b6cf82e2d3dc868375c08a45096af3f28990ee",
+    "scripts/test_prune_build_artifacts.py": "b0bc48e923de6ddd17c884a871d3db374338a7af92d9333653b8b9367d461e75",
+    "tools/native/check_mission_frame_delta.py": "ea4cbe2e5baefa79ec87d2adbc040bf0a45fb0d20fe70b1cc3a38669a02d5f8b",
+    "tools/native/check_original_frame_delta.py": "24e1e63610934bc052fcb8241a646fb36d825beddd4f13dba8fe383fd22c5f1a",
+    "tools/native/check_recorded_original_mission_trace.py": "dcf1d6e647a623279cdc599af28292a7fba32938bedc2dd482a7817d2dc3d04e",
+    "tools/native/native_frame_body_oracle.c": "b7c2a817aad416a7ee8eba641ad8390be5803bde563665f0ac392667b9f8cb42",
+    "tools/native/original_frame_delta_probe.c": "eeafdb1988ea2751f6990bb6d38ca69237d645c2634edb171879e85222a03783",
+    "tools/native/test_native_continuation.py": "d57426f8e61badbed6b5a02397806082c89a176bf7232e5b3d8652a2f7c3bc77",
+    "tools/native/test_original_delta_retention.py": "453d986592e54e2e53e3ec762194723ca7e4ea3936ab2baa0a88d02c022658bd"
+  },
+  "original_sweep_oracle_binary_identity": "Not recorded before normal pruning; retained oracle-build.log documents compilation. Separately reproduced trace oracle has its own sealed identity.",
+  "native_gameplay_unchanged": true,
+  "open": [
+    "Missing native template-save publication",
+    "Complete mission-five cockpit drawing history",
+    "Broader independently started full flights",
+    "Complete original sound timing and filtering"
+  ],
+  "bounded_original_drawing_capture": {
+    "first": 64416,
+    "last": 64423,
+    "observations": 8,
+    "snapshots": 72,
+    "boundary_counts": {
+      "C0EFD4": 8,
+      "C0EFEA": 8,
+      "C0F3C0": 8,
+      "C30764": 8,
+      "C0F182": 8,
+      "C31226": 8,
+      "C0F18E": 8,
+      "C322EE": 8,
+      "C0F286": 8,
+      "C0F2DC": 0
+    },
+    "probe_sha256": "57f5e70404b16e72d91c9e71cec21333decc4274e7b16f573d85b09e8c2720e3",
+    "probe_source_sha256": "eeafdb1988ea2751f6990bb6d38ca69237d645c2634edb171879e85222a03783",
+    "loop_source_sha256": "2cd5f36ccb335efc85d1ac84d0714039a3477627fa3cf1adc8d56a8797781600",
+    "capture_sources_sha256": {
+      "tools/native/original_frame_delta_probe.c": "eeafdb1988ea2751f6990bb6d38ca69237d645c2634edb171879e85222a03783",
+      "tools/native/original_frame_delta_loop.c": "2cd5f36ccb335efc85d1ac84d0714039a3477627fa3cf1adc8d56a8797781600",
+      "port/native/frame_delta.c": "108466e25a6064a4042510b8dce5cc0630a5cccd350ab077931431017557698d",
+      "port/native/frame_delta.h": "aa689568d58ef8989b1b52bf0d55619444e2ab5f269dfc50a71674cb83b4dde1"
+    },
+    "source_trace_sha256": "c4c339bc882985b9731380624eea411560cc82d95e4562992372eee684163194",
+    "source_input_sha256": "48a9f15da683da1e05d647311f8ef5baf1f6610d41533090ffa1bb973f05a596",
+    "unchanged_observations": 75573,
+    "complete_trace_preserved": true,
+    "final_ram_preserved": true,
+    "runtime_counters_preserved": true,
+    "old_window_snapshots_identical": 0,
+    "previous_stream_snapshots_identical": 0,
+    "actual_owner_returns_matching": 24,
+    "stream_sha256": "b5cfb5825c32ef527c465ce32f4ba2398db7ed703c4c30148035a93905110050",
+    "metadata_sha256": "7ebcf47ba80d857349a49fd47ba87fab7495203eea7006a2758dd2d9c5333049",
+    "stream_bytes": 1060772,
+    "metadata_bytes": 13625,
+    "trace_bytes": 494619840,
+    "retained_bytes": 450132,
+    "capture_budget_mib": 512,
+    "trace_budget_mib": 472,
+    "delta_budget_mib": 40,
+    "timeout_seconds": 900,
+    "scope": "Complete independent original input and actual drawing-owner RAM/registers. Source replay, all trace rows, counters and final RAM remain exact. No original RAM supplies native gameplay. This captures evidence; drawing-history and complete sound acceptance remain separate."
+  },
+  "original_owner_return_verification": {
+    "snapshots": 72,
+    "actual_owner_returns_matching": 24,
+    "wrong_caller_stack_rejected": true,
+    "source_report_sha256": "929082d70532741307658df648357f93d550b8a81c3aadd9f0b9149391f4795e",
+    "metadata_sha256": "7ebcf47ba80d857349a49fd47ba87fab7495203eea7006a2758dd2d9c5333049"
+  },
+  "validation": {
+    "continuation_real_mutation_rejections": 8,
+    "cockpit_history_unit_checks": 10,
+    "delta_decoder_unit_checks": 7,
+    "interrupted_capture_unit_checks": 2,
+    "artifact_checks_passed": 4,
+    "artifact_checks_skipped": 1,
+    "actual_interrupt_seconds": 1,
+    "actual_original_caller_returns_verified": 24,
+    "wrong_original_return_stack_rejected": true
+  }
+}

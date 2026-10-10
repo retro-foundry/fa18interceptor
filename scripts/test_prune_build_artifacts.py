@@ -54,6 +54,26 @@ class ArtifactTests(unittest.TestCase):
                     self.assertEqual(prune.main(), 0)
             self.assertTrue(data.exists())
 
+    def test_active_flight_capture_workspaces_are_protected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            build = Path(directory) / 'build'
+            for name in ('mission-frame-delta-live', 'original-frame-delta-live'):
+                path = build / name / 'trace.jsonl'
+                path.parent.mkdir(parents=True)
+                path.write_bytes(bytes(1 << 20))
+                self.assertFalse(prune.is_disposable(path,path.relative_to(build),0))
+            ordinary = build / 'native-flight' / 'trace.jsonl'
+            ordinary.parent.mkdir()
+            ordinary.write_bytes(bytes(1 << 20))
+            self.assertTrue(prune.is_disposable(ordinary,ordinary.relative_to(build),0))
+            executable = build/'recomp/native_frame_body_oracle.exe'
+            executable.parent.mkdir()
+            executable.write_bytes(bytes(1 << 20))
+            self.assertFalse(prune.is_disposable(executable,executable.relative_to(build),0))
+            (build/'mission-frame-delta-live/trace.jsonl').unlink()
+            (build/'mission-frame-delta-live').rmdir()
+            self.assertTrue(prune.is_disposable(executable,executable.relative_to(build),0))
+
     def test_only_failed_case_survives_temporary_workspace(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)

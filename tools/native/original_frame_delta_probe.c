@@ -16,7 +16,7 @@ static void delta_error(unsigned line) {
 static FA18FrameDelta delta;
 static FILE *registers_out;
 static char registers_buffer[4096];
-/* The external checker reserves the other 256 MiB for its complete trace. */
+/* The checker explicitly reserves the complete trace's share of its budget. */
 static size_t metadata_bytes,shared_budget=256u*1024u*1024u;
 static long first,count,last_iteration;
 static unsigned exported;
@@ -46,6 +46,12 @@ static void initialize_delta(void) {
     const char *path=getenv("FA18_ORIGINAL_DELTA_PATH");
     const char *registers=getenv("FA18_ORIGINAL_DELTA_REGISTERS");
     char *end;
+    const char *budget=getenv("FA18_ORIGINAL_DELTA_BUDGET_MIB");
+    if(budget) {
+        unsigned long mib=strtoul(budget,&end,10);
+        shared_budget=(size_t)mib*1024*1024;
+        if(*end || !mib || mib>10000000 || shared_budget/1024/1024!=mib) abort();
+    }
     if(!range || !path || !registers) abort();
     first=strtol(range,&end,10);
     if(*end!='+') abort();

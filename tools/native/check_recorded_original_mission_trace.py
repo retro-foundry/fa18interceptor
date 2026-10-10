@@ -165,6 +165,53 @@ def verify_prefix_execution(prefix, current_path, anchors, prefix_record):
     return rows
 
 
+def verified_continuation(prefix, replay, runner, original, mapping, input_path, source_path, native_path):
+    """Bind later-mission body captures to the already earned ordinary replay.
+
+    Reconstruct the exact retained controls from real source update identities;
+    event anchors establish the flight origin. No saved progress is installed.
+    """
+    _, evidence = verified_native_prefix(prefix, runner)
+    preceding = json.loads((prefix / 'report.json').read_text())
+    continued = json.loads((replay / 'report.json').read_text())
+    assert continued['runner_sha256'] == digest(runner.read_bytes())
+    assert digest(content(replay / 'native.jsonl')) == continued['native_trace_sha256']
+    assert digest(content(replay / 'native.dat')) == continued['native_final_ram_sha256']
+    assert continued['mission_mode'] == original['mission_mode'] == 5
+    assert continued['native_prefix'] == evidence and continued['native_prefix_execution_exact']
+    assert continued['comparison_completed'] and continued['whole_successful_flight']['strict_gameplay_matching']
+    anchors = json.loads((replay / 'anchors.json').read_text())
+    assert anchors == continued['event_report']
+    assert verify_prefix_execution(prefix, replay / 'native.jsonl.gz', anchors, preceding) == continued['native_prefix_observations_exact']
+    start = original['source_prefix']['iterations'] + 1
+    local, segment, origin = source_input_segment(mapping, input_path.read_bytes(), start)
+    lines = (prefix / 'replay-prefix.fa18in').read_text().splitlines()
+    end = int(lines[-1].split()[1])
+    combined = lines[:-1]
+    for line in segment.decode('ascii').splitlines()[1:]:
+        parts = line.split()
+        at = 1 if parts[0] == 'end' else 0
+        parts[at] = str(int(parts[at]) + end)
+        combined.append(' '.join(parts))
+    encoded = ('\n'.join(combined) + '\n').encode('ascii')
+    assert (replay / 'input.segment.fa18in').read_bytes() == encoded
+    assert digest(encoded) == continued['replay_input_sha256']
+    assert continued['input_segment'] == dict(first_source_observation=start,
+        first_actual_source_update=origin, input_sha256=digest(encoded),
+        replay_source_end=max(local.values())+end, native_prefix_source_end=end,
+        ordinary_native_prefix_replayed=True)
+    plan = preceding['escort_anchors'] + [dict(p, source_first=p['source_first']+end)
+        for p in source_event_plan(source_path, local, 5, start)]
+    assert plan == continued['event_plan']
+    anchor_input = 'FA18_REPLAY_ANCHORS_V1\n'+''.join(
+        f'{p["source_first"]} {p["mode"]} {p["stage"]} {p["game_tick"]}\n' for p in plan)
+    assert (replay / 'input.anchors').read_text() == anchor_input
+    assert digest((replay / 'input.anchors').read_bytes()) == continued['anchor_input_sha256']
+    boundary = preceding['canonical']['replay_iterations'], preceding['canonical']['frames']
+    aligned = event_mapping(plan, anchors, {i:u+end for i,u in local.items()}, native_path, boundary)
+    return aligned, continued, evidence
+
+
 def verified_update_mapping(path, source_path, original):
     evidence = json.loads((path / 'report.json').read_text())
     assert evidence['source_trace_sha256'] == original['driver_trace_sha256']
