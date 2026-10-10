@@ -96,7 +96,7 @@ def main():
     # with band hashes. Optional message fields alone remain within that bound.
     assert not (mode == 5 and args.drawing_bands), 'mission-five full-prefix band capture exceeds the default budget; use bounded drawing-owner captures'
     executed_tool_sha = digest(Path(__file__).read_bytes())
-    with tempfile.TemporaryDirectory(prefix='mission-message-trace-', dir=ROOT / 'build') as directory:
+    with tempfile.TemporaryDirectory(prefix='ram-mission-message-trace-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         def retain_failure(reason):
             retained = {}

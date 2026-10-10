@@ -432,7 +432,7 @@ def main():
     else:
         env = {k: v for k, v in os.environ.items()
                if not k.startswith(('FA18_LOOP_', 'FA18_ORIGINAL_PILOT_'))}
-        with tempfile.TemporaryDirectory(prefix='recorded-mission-trace-', dir=ROOT / 'build') as directory:
+        with tempfile.TemporaryDirectory(prefix='ram-recorded-mission-trace-', dir=ROOT / 'build') as directory:
             work = Path(directory)
             pilot = work / 'pilot'
             def run(arguments, log_name):

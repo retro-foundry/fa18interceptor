@@ -68,7 +68,7 @@ def main():
     (args.out / 'prefix.fa18in').write_text('\n'.join(prefix + [f'end {first - 1} 0']) + '\n')
     env = {k: v for k, v in os.environ.items()
            if not k.startswith(('FA18_MISSION_', 'FA18_LOOP_', 'FA18_ORIGINAL_PILOT_'))}
-    with tempfile.TemporaryDirectory(prefix='recorded-patrol-input-', dir=ROOT / 'build') as directory:
+    with tempfile.TemporaryDirectory(prefix='ram-recorded-patrol-input-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         def run(name, command):
             result = subprocess.run(list(map(str, command)), cwd=ROOT, env=env,
