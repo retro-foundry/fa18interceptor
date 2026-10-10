@@ -1,0 +1,949 @@
+{
+  "date": "2026-10-10",
+  "production_gameplay_changed": false,
+  "runner": {
+    "path": "build/native/fa18_native.exe",
+    "file_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+    "bytes": 2446336
+  },
+  "source_updates": {
+    "source_trace_sha256": "b7582fd9ccd6975a0ea26c079b4d23ad50de70e8de02617f8f654de7e35c175b",
+    "source_final_ram_sha256": "40203abe0371c844ae96c7a56e7495cd693ccc9cd37e6543b844c212196bb54c",
+    "source_consumed_input_sha256": "5f1302d6fd8a4664233e91364762742edd32fd94810756eb63388803d45e7033",
+    "probe_runner_sha256": "acbd85e32c8243aa205b85fc9ba6a8df812e19089dbe792bf761df05458472f4",
+    "probe_source_sha256": "6cfdb219df9d51d8c9ca1ce630f33472e09b8e49431b02c3fa6430231b0c9a3c",
+    "observations": 75573,
+    "real_update_calls": 75546,
+    "executed_links": 75546,
+    "duplicate_observations": 27,
+    "input_edges_preserved": 25954,
+    "remapped_input_sha256": "ca9a6c3a67f99ff51557af4e5cc51be765aaa54fbd82eaed9931cb6e4a6c038e",
+    "mapping_sha256": "cfca96d96f3e9573b03823c48ec8624142160472e8f7d4de623493b76f7b4ca3",
+    "entries_sha256": "14e1c08d56c3d9f67d7a8bfcfe73d45356138ee3dd74a1d3f539ac3ac29855ea",
+    "instruction_trace_sha256": "5fd035de58e7874f58304669f7e767d7c8fd6c48f6701a00ca013474fb4d984b",
+    "mutation_rejections": {
+      "caller": true,
+      "executed_link": true,
+      "resume_stack": true,
+      "resume_stop": true
+    },
+    "scope": "Exact original execution and input retained; explicit JSR/LINK identities map every observation. No game tick, state or drawing equality is used to decide whether a boundary repeats. Native replay and complete gameplay/drawing parity remain separate acceptance checks.",
+    "snapshot": {
+      "observation": 74641,
+      "ram_sha256": "28d91433b035dacd6a18014999b66cfcd7c3096282c951cfeae1cbbfdc0e7f26",
+      "complete_cores_matching": 16,
+      "named_fields_matching": 42,
+      "complete_pages_matching": 8
+    }
+  },
+  "native_comparison": {
+    "native_input_hashes": {
+      "tools\\native\\fixtures\\region-pilot-enlist.e9k": "3c2a48da86432f2782ed6cb0036a9eb42fa08df4b6a64df75496e602530bff3a",
+      "local\\media\\fa18.adf": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2"
+    },
+    "mission_mode": 5,
+    "event_plan": [
+      {
+        "source_observation": 1,
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 40170,
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 40643,
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1
+      },
+      {
+        "source_observation": 47815,
+        "source_first": 47596,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 61333,
+        "source_first": 61114,
+        "mode": 5,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 61797,
+        "source_first": 61578,
+        "mode": 5,
+        "stage": "C10D8A",
+        "game_tick": 1
+      }
+    ],
+    "source_trace_sha256": "b7582fd9ccd6975a0ea26c079b4d23ad50de70e8de02617f8f654de7e35c175b",
+    "consumed_input_sha256": "5f1302d6fd8a4664233e91364762742edd32fd94810756eb63388803d45e7033",
+    "replay_input_sha256": "f4b8180c91364d8115a3b88acab92721344b14a25a1a130f01d92d4786a7079f",
+    "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+    "enlisted_pilot": "0000000000010000000000000000000000000000000000000000000000004e4557000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "enlisted_save_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+    "enlist_run": {
+      "frame_owner_exit": false,
+      "frames": 9000,
+      "screen": "menu",
+      "mode": 0,
+      "glyphs": 13256,
+      "record_updates": 1,
+      "scene_frames": 0,
+      "terrain_polygons": 0,
+      "model_calls": 0,
+      "hud_frames": 0,
+      "control_frames": 0,
+      "scene_selected": false,
+      "stage": "C0FCB4",
+      "game_tick": 0,
+      "timer_pending": false,
+      "timer_yields": 0,
+      "display_publications": 0,
+      "display_yields": 0,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 1,
+      "input_events": 1,
+      "input_queued": 0,
+      "update_iterations": 7156,
+      "replay_iterations": 0,
+      "replay_events": 0,
+      "host_replay_events": 18,
+      "host_replay_pending": 0,
+      "replay_started": false,
+      "voice_ticks": 9000,
+      "voice_publications": 18769,
+      "voice_levels": [
+        [
+          358,
+          31
+        ],
+        [
+          358,
+          31
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 6257,
+      "sample_frames": 8640000,
+      "nonzero_sample_frames": 8511816,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "native_run": {
+      "frame_owner_exit": false,
+      "frames": 133402,
+      "screen": "menu",
+      "mode": 0,
+      "glyphs": 32952,
+      "record_updates": 23779,
+      "scene_frames": 23770,
+      "terrain_polygons": 109529,
+      "model_calls": 146650,
+      "hud_frames": 23770,
+      "control_frames": 45575,
+      "scene_selected": true,
+      "stage": "C0FCB4",
+      "game_tick": 0,
+      "timer_pending": false,
+      "timer_yields": 56116,
+      "display_publications": 45575,
+      "display_yields": 45613,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 45571,
+      "input_events": 27472,
+      "input_queued": 0,
+      "update_iterations": 75334,
+      "replay_iterations": 74858,
+      "replay_events": 20413,
+      "host_replay_events": 7079,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 133402,
+      "voice_publications": 283573,
+      "voice_levels": [
+        [
+          358,
+          31
+        ],
+        [
+          358,
+          31
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          2
+        ]
+      ],
+      "sample_requests": 131369,
+      "sample_frames": 128065920,
+      "nonzero_sample_frames": 127360656,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "native_context": {
+      "pilot": "0001000200020500000002cb0000000000000000000101010000000000004e45570000000000000000000000000000000000000000000003000301b0000600040001000300010000000700000000",
+      "qualified": 1,
+      "saved_level": 2,
+      "grades": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "completions": 3,
+      "scene_level": 3,
+      "player_phase": 0
+    },
+    "final_saved_pilot": "0001000200020500000002cb0000000000000000000101010000000000004e45570000000000000000000000000000000000000000000003000301b0000600040001000300010000000700000000",
+    "native_prefix": {
+      "path": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\recorded-escort-ground-carry",
+      "report_sha256": "1cffa7818e8fb163fdbee2620eabd58ec2265183a0858517cf5bb290322641be",
+      "save_sha256": "bf391e322af0f3853b83156ef64e58ab30c935a2e5a1094fc30a3972dcf95ee6",
+      "trace_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c",
+      "ram_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec",
+      "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6"
+    },
+    "input_segment": {
+      "first_source_observation": 47815,
+      "first_actual_source_update": 47800,
+      "input_sha256": "f4b8180c91364d8115a3b88acab92721344b14a25a1a130f01d92d4786a7079f",
+      "replay_source_end": 75342,
+      "native_prefix_source_end": 47595,
+      "ordinary_native_prefix_replayed": true
+    },
+    "native_prefix_execution_exact": true,
+    "native_prefix_observations_exact": 27176,
+    "anchor_input_sha256": "323a08d810452499c550374ed4513df56d9475daccbcec3ec271c659f5227f96",
+    "anchor_report_sha256": "47ff081e75f49610c8707e73594669033d2db7f3cba9f1ab5f16936872985d7f",
+    "event_report": {
+      "format": "FA18_REPLAY_ANCHORS_V1",
+      "complete": true,
+      "failed": false,
+      "native_updates": 74858,
+      "source_position": 75342,
+      "keys_consumed": 20413,
+      "anchors": [
+        {
+          "source_first": 1,
+          "mode": 0,
+          "stage": "C0FCB4",
+          "game_tick": 0,
+          "native_first": 1,
+          "frame": 2299
+        },
+        {
+          "source_first": 40168,
+          "mode": 4,
+          "stage": "C10C08",
+          "game_tick": 36,
+          "native_first": 39931,
+          "frame": 55567
+        },
+        {
+          "source_first": 40641,
+          "mode": 4,
+          "stage": "C10D8A",
+          "game_tick": 1,
+          "native_first": 40395,
+          "frame": 56304
+        },
+        {
+          "source_first": 47596,
+          "mode": 0,
+          "stage": "C0FCB4",
+          "game_tick": 0,
+          "native_first": 47349,
+          "frame": 75601
+        },
+        {
+          "source_first": 61114,
+          "mode": 5,
+          "stage": "C10C08",
+          "game_tick": 36,
+          "native_first": 60630,
+          "frame": 88920
+        },
+        {
+          "source_first": 61578,
+          "mode": 5,
+          "stage": "C10D8A",
+          "game_tick": 1,
+          "native_first": 61094,
+          "frame": 89657
+        }
+      ]
+    },
+    "native_trace_sha256": "d5c1f5fd1a2447f3fc21d60744542a2c40b61dd45b0a06a385dfa3488c43db77",
+    "native_final_ram_sha256": "1f1381a5602e10c19d45ab024ef8d2c7f322eed288e1b605f1258259b4929737",
+    "source_context": {
+      "pilot": "0001000200000500000006850000000000000000000101010000000000000000000000000000000000000000000000000000000000000003000301b0000600040001000300010000000800000000",
+      "qualified": 1,
+      "saved_level": 2,
+      "grades": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "completions": 3,
+      "scene_level": 3,
+      "player_phase": 0
+    },
+    "context_differences": {},
+    "runtime_outcome_matches": true,
+    "pilot_record_difference_offsets": [
+      5,
+      10,
+      11,
+      30,
+      31,
+      32,
+      73
+    ],
+    "comparison_rejected": null,
+    "comparison_completed": true,
+    "mission_success": true,
+    "native_mission_success": true,
+    "scope": "Independent mode-5 flight after ordinary qualification and native preceding missions. All native preceding controls and observations reproduce the verified complete earlier replay. Next-mission source controls begin at the actual next menu JSR with no held keys, retaining every later key edge and source PAL timestamp. No original RAM, constructed saved progress, fitted world offset or clock enters native gameplay. Full history/state parity remains a strict diagnostic. Every source observation is compared at its proven original JSR/LINK call identity. All consumed key edges retain their order and source PAL timestamps; only the legacy recorder iteration is translated to the actual update call. No game state or clock is written. Source-declared C10C08 and C10D8A events own input segments. All native updates remain counted; flight observations retain their actual native indices and follow source JSR/LINK ordinals from the actual flight-start event; no state matching, frame search or fitted offset."
+  },
+  "complete_flight": {
+    "compared": 13775,
+    "record_cores_compared": 220400,
+    "record_cores_matching": 220400,
+    "complete_record_boundaries_matching": 13775,
+    "camera_and_controls_matching": 13775,
+    "complete_pages_matching": 8393,
+    "timer_and_hud_matching": 0,
+    "first_record_difference": null,
+    "first_game_difference": null,
+    "first_page_difference": {
+      "source_iteration": 61957,
+      "native_iteration": 61254,
+      "source_tick": 161,
+      "changes": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "game_fields_compared": [
+      "stage",
+      "game_tick",
+      "phase",
+      "mouse_coordinates",
+      "selected_record",
+      "mode",
+      "target_record",
+      "controls",
+      "observer",
+      "camera_matrix",
+      "view_matrix",
+      "view_pan_rotate",
+      "view_attitude",
+      "view_side"
+    ],
+    "first": 61797,
+    "last": 75571,
+    "records_matching_per_slot": [
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775
+    ],
+    "complete_gameplay_matching_prefix": 13775,
+    "strict_gameplay_matching": true,
+    "native_menu_observation_gaps": [
+      75572,
+      75573
+    ],
+    "execution_alignment": {
+      "first_native_update": 61094,
+      "last_native_update": 74856,
+      "real_updates_compared": 13763,
+      "duplicate_observations_preserved": [
+        63140,
+        63858,
+        66728,
+        67462,
+        67650,
+        71746,
+        72063,
+        72634,
+        72936,
+        73979,
+        74425,
+        74580
+      ],
+      "basis": "Original explicit JSR calls and executed LINK instructions; no state matching or frame search"
+    },
+    "mutation_rejections": {
+      "npc_core": true,
+      "controls": true,
+      "page": true
+    }
+  },
+  "first_differences": [
+    {
+      "source_iteration": 61797,
+      "native_iteration": 61094,
+      "source_tick": 1,
+      "native_tick": 1,
+      "record_slots": [],
+      "game_fields": [],
+      "page_planes": [],
+      "timed_fields": {
+        "sample_seconds": [
+          "12894f7e",
+          "00000701"
+        ],
+        "sample_fraction": [
+          "0005edf9",
+          "0001d4c0"
+        ],
+        "previous_seconds": [
+          "12894f7c",
+          "000006fa"
+        ],
+        "previous_fraction": [
+          "000b6c33",
+          "000186a0"
+        ],
+        "partial_total": [
+          "0064",
+          "0000"
+        ],
+        "elapsed_sample": [
+          "00000a51",
+          "00001d24"
+        ],
+        "poll_seconds": [
+          "12894f7e",
+          "00000701"
+        ],
+        "poll_fraction": [
+          "0005edf9",
+          "0001d4c0"
+        ],
+        "primary_count": [
+          "e9",
+          "fa"
+        ]
+      }
+    },
+    {
+      "source_iteration": 61798,
+      "native_iteration": 61095,
+      "source_tick": 2,
+      "native_tick": 2,
+      "record_slots": [],
+      "game_fields": [],
+      "page_planes": [],
+      "timed_fields": {
+        "sample_seconds": [
+          "12894f7e",
+          "00000701"
+        ],
+        "sample_fraction": [
+          "000810fc",
+          "0003f7a0"
+        ],
+        "previous_seconds": [
+          "12894f7e",
+          "00000701"
+        ],
+        "previous_fraction": [
+          "0007c2ba",
+          "000222e0"
+        ],
+        "elapsed_total": [
+          "000006e1",
+          "00001b80"
+        ],
+        "poll_seconds": [
+          "12894f7e",
+          "00000701"
+        ],
+        "poll_fraction": [
+          "0005edf9",
+          "0001d4c0"
+        ],
+        "primary_count": [
+          "e8",
+          "f9"
+        ]
+      }
+    }
+  ],
+  "guards": {
+    "actual_prefix_verified": true,
+    "evidence": {
+      "path": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\recorded-escort-ground-carry",
+      "report_sha256": "1cffa7818e8fb163fdbee2620eabd58ec2265183a0858517cf5bb290322641be",
+      "save_sha256": "bf391e322af0f3853b83156ef64e58ab30c935a2e5a1094fc30a3972dcf95ee6",
+      "trace_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c",
+      "ram_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec",
+      "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6"
+    },
+    "mutation_rejections": {
+      "unearned": "native prefix did not earn escort",
+      "seeded": "native prefix seeded gameplay state",
+      "wrong_runner": "native prefix belongs to a different runner",
+      "changed_capture": "native prefix capture changed",
+      "changed_controls": "native prefix controls changed",
+      "counterfeit_save": "native disk save differs from actual earned pilot",
+      "wrong_menu": "actual runtime evidence rejected",
+      "reset": "actual runtime evidence rejected",
+      "menu_native_first": "native preceding menu boundary changed",
+      "menu_frame": "native preceding menu boundary changed"
+    },
+    "continuation": {
+      "report_sha256": "b6ab82efc1a7c92c3bb322e39d2e7c03f631569e069070a39887a5a14e2a66a1",
+      "exact_prefix_observations": 27176
+    },
+    "retained_report_unchanged": true
+  },
+  "assessment": {
+    "escort_assessment_unchanged": true,
+    "mission_five_observations": 13775,
+    "complete_plane_hashes_matching": [
+      12141,
+      12148,
+      12148,
+      8445,
+      12141,
+      12148,
+      12148,
+      8445
+    ],
+    "drawing_band_hashes_recorded": false,
+    "menu_boundary_rejections": {
+      "missing_menu_proof": "missing verified preceding menu boundary",
+      "wrong_menu_proof": "missing verified preceding menu boundary"
+    },
+    "difference_field_counts": {
+      "sample_seconds": 5382,
+      "sample_fraction": 5382,
+      "previous_seconds": 5382,
+      "previous_fraction": 5382,
+      "elapsed_total": 5382,
+      "partial_total": 3389,
+      "notified_total": 5382,
+      "elapsed_sample": 5382,
+      "poll_seconds": 5382,
+      "poll_fraction": 5382,
+      "primary_count": 5364,
+      "secondary_count": 15,
+      "info_request": 2970,
+      "info_redraws": 2344,
+      "message_line": 4808,
+      "info_page": 3598
+    }
+  },
+  "rejected_cold_setup": {
+    "accepted_evidence": false,
+    "scope": "Cold setup differs from preceding-flight runtime state; no flight parity claim",
+    "actual": {
+      "context_request": 0,
+      "message_buffer_space": 0,
+      "message_mode": 3,
+      "stage": "C1075A"
+    },
+    "stats": {
+      "frame_owner_exit": false,
+      "frames": 20000,
+      "screen": "scene-setup",
+      "mode": 5,
+      "glyphs": 6520,
+      "record_updates": 25,
+      "scene_frames": 24,
+      "terrain_polygons": 1296,
+      "model_calls": 389,
+      "hud_frames": 24,
+      "control_frames": 8560,
+      "scene_selected": true,
+      "stage": "C1075A",
+      "game_tick": 24,
+      "timer_pending": false,
+      "timer_yields": 22,
+      "display_publications": 8559,
+      "display_yields": 8567,
+      "display_pending": true,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 8559,
+      "input_events": 1,
+      "input_queued": 0,
+      "update_iterations": 18149,
+      "replay_iterations": 17673,
+      "replay_events": 4,
+      "host_replay_events": 2,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 20000,
+      "voice_publications": 41449,
+      "voice_levels": [
+        [
+          179,
+          40
+        ],
+        [
+          181,
+          40
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 23372,
+      "sample_frames": 19200000,
+      "nonzero_sample_frames": 18977639,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "ram_sha256": "89b363ae0b8828601b765c4ad4accf79215b440d28d5b7c4584f295e11123ce4",
+    "initial_saved_pilot_sha256": "bf391e322af0f3853b83156ef64e58ab30c935a2e5a1094fc30a3972dcf95ee6",
+    "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6"
+  },
+  "rejected_warm_attempt": {
+    "accepted_evidence": false,
+    "reason": "Validation wrongly required a new update after the already-counted menu boundary; completed runner logs and anchors retained, full flight captures not retained",
+    "runner_counters_match_corrected_replay": true,
+    "actual_menu_update": 47349,
+    "actual_menu_frame": 75601
+  },
+  "artifacts": [
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/report.json",
+      "file_sha256": "bc1c4ef4f70854d6443dd32752261e09d95592cf9cdf1b8832085dcbaf6412e7",
+      "bytes": 22737
+    },
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/entries.csv.gz",
+      "file_sha256": "ee3afe5909fae88a9365673fb2854a3b3576074ee216123b7decbb545e2bbc5f",
+      "bytes": 834941
+    },
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/complete-boundary.csv.gz",
+      "file_sha256": "58cbc01b7b574043013b3314af4673f19bc55fc9cc1e63a5d0649ba69b60443b",
+      "bytes": 1226970
+    },
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/complete-source.jsonl.gz",
+      "file_sha256": "c1cf711e35c205b204aed99eebeb1e9699fdce3235a2ab6a6dcb4a786336b2c2",
+      "bytes": 12322896
+    },
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/complete-source.dat.gz",
+      "file_sha256": "3a641b2459fcdcc52f2eb9530d8cbc893b14da3973c52c9b63ac7badcd1152a7",
+      "bytes": 342722
+    },
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/complete-consumed.fa18in",
+      "file_sha256": "5f1302d6fd8a4664233e91364762742edd32fd94810756eb63388803d45e7033",
+      "bytes": 537056
+    },
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/mapping.json",
+      "file_sha256": "cfca96d96f3e9573b03823c48ec8624142160472e8f7d4de623493b76f7b4ca3",
+      "bytes": 1186958
+    },
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/update-consumed.fa18in",
+      "file_sha256": "ca9a6c3a67f99ff51557af4e5cc51be765aaa54fbd82eaed9931cb6e4a6c038e",
+      "bytes": 511100
+    },
+    {
+      "path": "build/native-flight/original-mission-five-touchdown-updates/source-snapshot.dat.gz",
+      "file_sha256": "87c673ac1cfc72333a5911a8ba00a9565a46f72b1b7351efb5f2e2dbf139668a",
+      "bytes": 353879
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-v2/report.json",
+      "file_sha256": "b6ab82efc1a7c92c3bb322e39d2e7c03f631569e069070a39887a5a14e2a66a1",
+      "bytes": 7973995
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-v2/native.jsonl.gz",
+      "file_sha256": "9dae98d835a37f307532dcdcc7799002d53c7a36921ce65290f831215599680a",
+      "bytes": 11126142
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-v2/native.dat.gz",
+      "file_sha256": "3f18ef1af537e1e4e3e8af886b674b310245c1c220d6677ec3dd929a9927ed3c",
+      "bytes": 318916
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-v2/native.log",
+      "file_sha256": "9494df7a363253316ee1bb083c535a2e69a9677f6316a121564d86833d2684f5",
+      "bytes": 1009
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-v2/enlist.log",
+      "file_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "bytes": 943
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-v2/input.segment.fa18in",
+      "file_sha256": "f4b8180c91364d8115a3b88acab92721344b14a25a1a130f01d92d4786a7079f",
+      "bytes": 405821
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-v2/input.anchors",
+      "file_sha256": "323a08d810452499c550374ed4513df56d9475daccbcec3ec271c659f5227f96",
+      "bytes": 130
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-v2/anchors.json",
+      "file_sha256": "47ff081e75f49610c8707e73594669033d2db7f3cba9f1ab5f16936872985d7f",
+      "bytes": 730
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/native.log",
+      "file_sha256": "60aabfa6f94b313eeceb938e7051b841e2ad33d3379ae4c44d656ff8c35af4bf",
+      "bytes": 78
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/native.jsonl.failed.gz",
+      "file_sha256": "b62e2c966a739cb7040b7cba7fbc3d20f3d7ebfff672d2f132a30279a2f2616d",
+      "bytes": 6484104
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/failed-menu-observations.json",
+      "file_sha256": "40f306059589aa9e678f2f8b0b4cc9d62264f56cbbc0a903a8620feed2d143af",
+      "bytes": 2681
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/cold-setup.log",
+      "file_sha256": "16d491e24422f3a62eb560057348ced99e5e1b34e24eadc96aba509d81d0fb9b",
+      "bytes": 1108
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/cold-setup.json",
+      "file_sha256": "ba9ff7f66ae26038e5696ef4c37914c48feec3234257cff395c5a2b2a1d147d3",
+      "bytes": 1982
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/cold-setup.dat.gz",
+      "file_sha256": "0f9fe49890fc5fac02a84eed52f5ed7c095a585ef842f4cf63586dbf0b994008",
+      "bytes": 319051
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/cold-setup-anchors.json",
+      "file_sha256": "6182ab8ca71dbcc5c35365920dd206ef146157d229a5bcfb0ea08d9e4c802e19",
+      "bytes": 416
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/cold-comparison-tool.py.gz",
+      "file_sha256": "b6430cdccdc2d8396a2f71ff7c7c3e49a0d33501caeb07e9f91c92df23d98f7a",
+      "bytes": 8296
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/input.segment.fa18in",
+      "file_sha256": "dc79dd489d912547c4b3fae7fb84507701a4e8ca6f20ef00e7fc935a0cb8ba38",
+      "bytes": 379639
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-touchdown-input/input.anchors",
+      "file_sha256": "1758e84db9f5fa35eb61158d83f7e9d829736493cf7e260e0be5436214171aa2",
+      "bytes": 75
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-input/rejection.json",
+      "file_sha256": "3f4b19c9fd24cf0b7ffb9cc8151bb1a3f3afc1112d3a76f31edc46176c466899",
+      "bytes": 326
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-input/native.log",
+      "file_sha256": "9494df7a363253316ee1bb083c535a2e69a9677f6316a121564d86833d2684f5",
+      "bytes": 1009
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-input/anchors.json",
+      "file_sha256": "47ff081e75f49610c8707e73594669033d2db7f3cba9f1ab5f16936872985d7f",
+      "bytes": 730
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-input/input.segment.fa18in",
+      "file_sha256": "f4b8180c91364d8115a3b88acab92721344b14a25a1a130f01d92d4786a7079f",
+      "bytes": 405821
+    },
+    {
+      "path": "build/native-flight/independent-mission-five-warm-prefix-input/input.anchors",
+      "file_sha256": "323a08d810452499c550374ed4513df56d9475daccbcec3ec271c659f5227f96",
+      "bytes": 130
+    },
+    {
+      "path": "build/native-flight/mission-five-comparison-guards/native-prefix.json",
+      "file_sha256": "261ef83b202f22f03b9dc5929a9886484cf6dfbf78ee82ff3c2650305f4ff887",
+      "bytes": 1461
+    },
+    {
+      "path": "build/native-flight/mission-five-comparison-guards/assessment.json",
+      "file_sha256": "dd30f706ddbf69e70c085dd33941d2de9a3650ec2d3d47918fb83fb3c0e01254",
+      "bytes": 931
+    },
+    {
+      "path": "build/native-flight/mission-five-comparison-guards/check_assessment.py",
+      "file_sha256": "a18fc61f0b56b277041d79e6b96dd56e39344d234fadadbde2f45cedac0197c0",
+      "bytes": 2728
+    },
+    {
+      "path": "build/native-flight/mission-five-comparison-guards/check_cold_setup.py",
+      "file_sha256": "3bf62de135e5351a75d1744e01e2c98e4d01888d90a812bda3dc0334dd1d672e",
+      "bytes": 2500
+    },
+    {
+      "path": "build/native-flight/mission-five-comparison-guards/inspect_failed_menu.py",
+      "file_sha256": "f8e58165235f8b2faf792098f7fb2f26638e79cee9a0f6f9559da86241da5885",
+      "bytes": 1152
+    }
+  ],
+  "source_code": [
+    {
+      "path": "tools/native/check_original_update_entries.py",
+      "file_sha256": "18b650367a032195122eca7d6f7bf18e19a6a63b725fa4b94f8738f0563f354c",
+      "bytes": 12475
+    },
+    {
+      "path": "tools/native/check_recorded_original_mission_trace.py",
+      "file_sha256": "86c1e3bc7a070bff5dc01be8d472aaa29d69c501eabf109ae6b5ab04cce1d684",
+      "bytes": 33579
+    },
+    {
+      "path": "tools/native/test_native_earned_prefix.py",
+      "file_sha256": "b45126c38a47cd1bace0c357b02865784a1bf377e1a6ef8d806686c019dd18a3",
+      "bytes": 4230
+    },
+    {
+      "path": "port/native/main.c",
+      "file_sha256": "839a2d6ef95af4c93f04339363c9fe9496c97b6d355563f762d458efee12d886",
+      "bytes": 28903
+    },
+    {
+      "path": "port/native/replay.c",
+      "file_sha256": "ff5b54fa82cbe6b90c0d34dd6c1be301b28b0b395b533d22accc1dd1891aed3f",
+      "bytes": 8695
+    },
+    {
+      "path": "port/game/native/frontend.c",
+      "file_sha256": "e4c410dad7ab6b501e81973bef5b44dcf5ef7d3a1babeba7b3665d462eef3ef7",
+      "bytes": 17818
+    },
+    {
+      "path": "port/game/native/flight.c",
+      "file_sha256": "aa1988b79207198acf133a15c58e4e84fbd464e7b5db774048feb63ee2ae1273",
+      "bytes": 22314
+    },
+    {
+      "path": "port/game/menu_outcome.c",
+      "file_sha256": "b0621cdae6849b5f4e4d1bdd5dc6686ecaadca4057478baadb28985da10868c1",
+      "bytes": 6864
+    },
+    {
+      "path": "port/game/main_loop_control_messages.c",
+      "file_sha256": "458f25133fecdcdb38374c496de8b166003451b72f95477cb9ffcfe7ce4bda56",
+      "bytes": 23676
+    },
+    {
+      "path": "port/game/control_input.c",
+      "file_sha256": "c457fc8d7a348dff9bffeb6beac3304eec175fc4a078f8d61976bdf4ef3ee712",
+      "bytes": 2661
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "file_sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd",
+      "bytes": 12687
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "file_sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c",
+      "bytes": 10306
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "file_sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e",
+      "bytes": 569
+    }
+  ],
+  "retention": {
+    "passing_captures_compressed": true,
+    "failed_attempts_retained": true,
+    "build_cache_gib": 3.84,
+    "budget_gib": 4
+  },
+  "scope": "Complete mission-five gameplay records and declared camera/control fields match at proven original update identities. Grade/completions/menu agree. Full drawing and timer/HUD cadence, broader independent flights and original sound timing remain separate open acceptance checks; no fitted clocks, offsets or original RAM enter native gameplay."
+}

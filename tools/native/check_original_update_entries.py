@@ -115,7 +115,8 @@ def main():
                 '--ports', 'off', '--input', str((evidence / 'input.fa18in').resolve()), '--to-end',
                 '--game-input-out', str((out / 'complete-consumed.fa18in').resolve()),
                 '--ram-out', str((out / 'complete-source.dat').resolve())],
-                cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, timeout=300)
+                cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT,
+                timeout={3: 300, 4: 600, 5: 900}[original.get('mission_mode', 3)])
         assert result.returncode == 0, 'original probe replay failed'
     for name, key in (('complete-source.jsonl', 'driver_trace_sha256'),
                       ('complete-source.dat', 'driver_final_ram_sha256'),

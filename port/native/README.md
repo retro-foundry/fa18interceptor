@@ -1,5 +1,14 @@
 # Native port runner
 
+Complete mission-five gameplay comparison (2026-10-10): all 13,775 original
+flight observations, 220,400 complete record cores and camera/control fields
+match the independent native replay. Both earn grade one, the third completion
+and menu return. The ordinary native prefix reproduces all 27,176 rows exactly;
+the original has verified identities for all 75,573 observations. Prefix,
+alignment and mutation guards pass, and the prior escort assessment is unchanged.
+Native gameplay is unchanged. Full drawing/HUD cadence, broader independent
+flights and sound timing remain open. See [complete-flight evidence](../../analysis/native_mission_five_full_flight_milestone.md).
+
 Complete escort bodies (2026-10-10): all 6,954 actual native bodies pass
 original instructions, including combat, carrier arrest and postflight.
 Ground rendering now publishes the source C09812/C09850 accumulator;

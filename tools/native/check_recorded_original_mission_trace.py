@@ -1,7 +1,8 @@
 """Compare recorded original flights from independent starts.
 
 Enlist a native pilot using ordinary keys, then cold-load its actual saved
-config. Original RAM never initializes the native game. Complete drawings and
+config. Later missions replay the verified ordinary preceding native flights.
+Original RAM never initializes the native game. Complete drawings and
 timers remain strict diagnostics; a failed original flight is not mission success.
 """
 import argparse
@@ -24,9 +25,12 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def source_event_plan(source_path, mapping, mode):
+def source_event_plan(source_path, mapping, mode, start=1):
     _, rows = read_trace(source_path)
-    observations = [1,
+    assert mapping[start] == 1
+    if start != 1:
+        assert (number(rows[start], 'mode'), number(rows[start], 'stage'), number(rows[start], 'game_tick')) == (0, 0xc0fcb4, 0), 'segment does not start at the actual source menu'
+    observations = [start,
         next(i for i, r in rows.items() if number(r, 'mode') == mode and number(r, 'stage') == 0xC10C08),
         next(i for i, r in rows.items() if number(r, 'mode') == mode and
              number(r, 'stage') == 0xC10D8A and number(r, 'game_tick') == 1)]
@@ -35,7 +39,7 @@ def source_event_plan(source_path, mapping, mode):
             for i in observations]
 
 
-def event_mapping(plan, evidence, mapping, native_path):
+def event_mapping(plan, evidence, mapping, native_path, menu_boundary=None):
     assert evidence['format'] == 'FA18_REPLAY_ANCHORS_V1'
     assert evidence['complete'] and not evidence['failed'], 'declared event replay incomplete'
     assert len(evidence['anchors']) == len(plan)
@@ -45,9 +49,15 @@ def event_mapping(plan, evidence, mapping, native_path):
         assert all(actual[k] == expected[k] for k in ('source_first', 'mode', 'stage', 'game_tick'))
         assert actual['native_first'] > previous and actual['frame'] > frame
         previous, frame = actual['native_first'], actual['frame']
-        if expected['source_observation'] == 1:
+        if expected['source_first'] == 1:
             assert actual['native_first'] == 1
         else:
+            if actual['native_first'] not in native:
+                # Flight traces omit menu-only updates. The preceding complete
+                # replay provides this exact menu ordinal/frame independently.
+                assert (expected['mode'], expected['stage'], expected['game_tick']) == (0, 'C0FCB4', 0), 'missing flight anchor observation'
+                assert menu_boundary == (actual['native_first'], actual['frame']), 'missing verified preceding menu boundary'
+                continue
             row = native[actual['native_first']]
             assert row['frame'] == actual['frame']
             assert (number(row, 'mode'), number(row, 'stage'), number(row, 'game_tick')) == (
@@ -70,6 +80,89 @@ def context(ram):
                 completions=int.from_bytes(pilot[56:58], 'big'),
                 scene_level=integer(ram, 0xC458A7, 1),
                 player_phase=integer(ram, 0xC45798, 1))
+
+
+def verified_native_prefix(path, runner):
+    """Verify an actual earned native disk save and its full replay evidence.
+
+    RAM is read only to check the retained disk export. Neither original RAM
+    nor constructed qualification/grade bytes initialize the native game.
+    """
+    report = json.loads((path / 'report.json').read_text())
+    assert report['mission_mode'] == 4, 'native prefix must finish escort'
+    assert report['mission_success'] and report['qualification_accepted'], 'native prefix did not earn escort'
+    assert report['canonical_complete_trace_and_ram_exact'] and report['canonical_earned_save_exact']
+    assert not report['flight_state_seeded'], 'native prefix seeded gameplay state'
+    assert report['runner_sha256'] == digest(runner.read_bytes()), 'native prefix belongs to a different runner'
+    assert report['adf_sha256'] == digest((ROOT / 'local/media/fa18.adf').read_bytes()), 'native prefix media changed'
+    for suffix in ('dat', 'jsonl'):
+        driven = content(path / ('driver.' + suffix))
+        canonical = content(path / ('native.' + suffix))
+        assert driven == canonical, 'native prefix canonical capture differs'
+        assert digest(canonical) == report['complete_native_artifacts'][suffix + '_sha256'], 'native prefix capture changed'
+    for name, key in (('physical.e9k', 'physical_input_sha256'),
+                      ('prefix.fa18in', 'prefix_sha256'),
+                      ('replay-prefix.fa18in', 'canonical_prefix_sha256')):
+        assert digest((path / name).read_bytes()) == report[key], 'native prefix controls changed'
+    saved = bytes.fromhex(report['earned_save_hex'])
+    assert len(saved) == 78 and digest(saved) == report['earned_save_sha256'], 'native earned disk save changed'
+    ram = content(path / 'native.dat')
+    assert len(ram) == 0x100000
+    actual = context(ram)
+    assert actual['pilot'] == saved.hex(), 'native disk save differs from actual earned pilot'
+    assert actual['qualified'] and actual['grades'][3:5] == [1, 1] and actual['completions'] == 2, 'native prefix lacks actual preceding grades'
+    assert (integer(ram, 0xc458a6, 1), actual['player_phase'], integer(ram, 0xc1820c, 4)) == (0, 0, 0xc0fcb4), 'native prefix did not return to the menu'
+    stats = report['canonical']
+    assert (stats['screen'], stats['mode'], stats['stage']) == ('menu', 0, 'C0FCB4')
+    assert not stats['cpu_emulation'] and not stats['chipset_emulation'] and not stats['postflight_resets']
+    evidence = dict(path=str(path.resolve()), report_sha256=digest((path / 'report.json').read_bytes()),
+        save_sha256=digest(saved), trace_sha256=report['complete_native_artifacts']['jsonl_sha256'],
+        ram_sha256=report['complete_native_artifacts']['dat_sha256'], runner_sha256=report['runner_sha256'])
+    return saved, evidence
+
+
+def source_input_segment(mapping, source_input, start):
+    """Use the proven next JSR as ordinal one; preserve every later key edge."""
+    origin = mapping[start]
+    assert origin > max(update for observation, update in mapping.items() if observation < start), 'source menu begins inside a pending update'
+    held, lines = {}, ['FA18_GAME_INPUT_V1']
+    source_lines = source_input.decode('ascii').splitlines()
+    assert source_lines[0] == lines[0]
+    for line in source_lines[1:]:
+        parts = line.split()
+        if not parts:
+            continue
+        if parts[0] == 'end':
+            assert int(parts[1]) == max(mapping.values())
+            parts[1] = str(int(parts[1]) - origin + 1)
+        elif int(parts[0]) < origin:
+            assert parts[2] == 'K'
+            held[int(parts[3])] = int(parts[4])
+            continue
+        else:
+            parts[0] = str(int(parts[0]) - origin + 1)
+        lines.append(' '.join(parts))
+    assert not any(held.values()), 'source menu inherits held keys'
+    localized = {i: update - origin + 1 for i, update in mapping.items() if i >= start}
+    return localized, ('\n'.join(lines) + '\n').encode('ascii'), origin
+
+
+def verify_prefix_execution(prefix, current_path, anchors, prefix_record):
+    """Check the whole frozen prefix before its already-counted menu boundary."""
+    opener = gzip.open if current_path.suffix == '.gz' else open
+    with gzip.open(prefix / 'native.jsonl.gz', 'rb') as previous, opener(current_path, 'rb') as current:
+        rows = 0
+        for line in previous:
+            row = json.loads(line)
+            if row.get('end'):
+                break
+            assert current.readline() == line, 'native preceding execution changed'
+            if 'iteration' in row:
+                rows += 1
+    menu = anchors['anchors'][len(prefix_record['escort_anchors'])]
+    canonical = prefix_record['canonical']
+    assert (menu['native_first'], menu['frame']) == (canonical['replay_iterations'], canonical['frames']), 'native preceding menu boundary changed'
+    return rows
 
 
 def verified_update_mapping(path, source_path, original):
@@ -190,17 +283,21 @@ def main():
     parser.add_argument('--source-updates', type=Path,
                         help='verified original JSR/LINK probe; retains every observed boundary')
     parser.add_argument('--event-anchors', action='store_true',
-                        help='bind escort context/flight controls to declared source callback entry events')
+                        help='bind carrier-mission context/flight controls to declared source callback entry events')
+    parser.add_argument('--native-prefix', type=Path,
+                        help='mode five: replay the verified ordinary native escort inputs before the next original flight')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     evidence = args.source_evidence
     original = json.loads((evidence / 'report.json').read_text())
     mode = original.get('mission_mode', 3)
-    assert mode in (3, 4)
-    if mode == 4:
+    assert mode in (3, 4, 5)
+    assert (mode == 5) == bool(args.native_prefix), 'mode five requires its actual earned native prefix'
+    assert mode != 5 or (args.source_updates and args.event_anchors), 'mode five requires verified update identities and declared events'
+    if mode > 3:
         from check_original_mission_recording import verified_prefix
         prefix = original['source_prefix']
-        checked, _, _ = verified_prefix(Path(prefix['path']), original['input_hashes'])
+        checked, _, _ = verified_prefix(Path(prefix['path']), original['input_hashes'], mode - 1)
         assert checked == prefix and original['source_prefix_execution_exact']
     assert original['unmodified_replay_exact'], 'original recording has not reproduced independently'
     success = original['mission_success']
@@ -208,8 +305,43 @@ def main():
         if args.source_updates else (None, None))
     input_path = (args.source_updates / 'update-consumed.fa18in') if mapping else evidence / 'consumed.fa18in'
     iterations = update_evidence['real_update_calls'] if mapping else original['iterations']
-    assert not args.event_anchors or (mode == 4 and mapping), 'event replay requires verified escort update identities'
-    plan = source_event_plan(evidence / 'driver.jsonl.gz', mapping, mode) if args.event_anchors else None
+    native_prefix, input_segment = None, None
+    prefix_record, prefix_end, plan = None, 0, None
+    start = 1
+    if args.native_prefix:
+        _, native_prefix = verified_native_prefix(args.native_prefix, args.runner)
+        prefix_record = json.loads((args.native_prefix / 'report.json').read_text())
+        prefix_lines = (args.native_prefix / 'replay-prefix.fa18in').read_text().splitlines()
+        assert prefix_lines[0] == 'FA18_GAME_INPUT_V1' and prefix_lines[-1].startswith('end ')
+        prefix_end = int(prefix_lines[-1].split()[1])
+        prefix_plan = prefix_record['escort_anchors']
+        expected_anchors = 'FA18_REPLAY_ANCHORS_V1\n' + ''.join(
+            f'{p["source_first"]} {p["mode"]} {p["stage"]} {p["game_tick"]}\n' for p in prefix_plan)
+        assert (args.native_prefix / 'input.anchors').read_text() == expected_anchors, 'native prefix anchors changed'
+        start = original['source_prefix']['iterations'] + 1
+        mapping, segment, origin = source_input_segment(mapping, input_path.read_bytes(), start)
+        plan = source_event_plan(evidence / 'driver.jsonl.gz', mapping, mode, start)
+        plan = prefix_plan + [dict(p, source_first=p['source_first'] + prefix_end) for p in plan]
+        mapping = {i: update + prefix_end for i, update in mapping.items()}
+        combined = prefix_lines[:-1]
+        for line in segment.decode('ascii').splitlines()[1:]:
+            parts = line.split()
+            at = 1 if parts[0] == 'end' else 0
+            parts[at] = str(int(parts[at]) + prefix_end)
+            combined.append(' '.join(parts))
+        segment = ('\n'.join(combined) + '\n').encode('ascii')
+        input_path = args.out / 'input.segment.fa18in'
+        if args.assess_existing:
+            assert input_path.read_bytes() == segment, 'retained source segment changed'
+        else:
+            input_path.write_bytes(segment)
+        iterations = max(mapping.values())
+        input_segment = dict(first_source_observation=start, first_actual_source_update=origin,
+                             input_sha256=digest(segment), replay_source_end=iterations,
+                             native_prefix_source_end=prefix_end, ordinary_native_prefix_replayed=True)
+    assert not args.event_anchors or (mode in (4, 5) and mapping), 'event replay requires verified carrier-mission update identities'
+    if args.event_anchors and plan is None:
+        plan = source_event_plan(evidence / 'driver.jsonl.gz', mapping, mode, start)
     outcome = original['original_outcome']
     expected_outcomes = ('success',) if success else ('crash/reset', 'mission failure')
     assert outcome in expected_outcomes
@@ -236,6 +368,7 @@ def main():
         assert report['consumed_input_sha256'] == original['consumed_input_sha256']
         assert report.get('source_update_evidence') == update_evidence
         assert report.get('event_plan') == plan
+        assert report.get('native_prefix') == native_prefix and report.get('input_segment') == input_segment
         if plan:
             assert digest((args.out / 'input.anchors').read_bytes()) == report['anchor_input_sha256']
             assert digest((args.out / 'anchors.json').read_bytes()) == report['anchor_report_sha256']
@@ -246,6 +379,9 @@ def main():
                           ('native.dat.gz', 'native_final_ram_sha256')):
             assert digest(gzip.decompress((args.out / name).read_bytes())) == report[key]
         assert context(gzip.decompress((args.out / 'native.dat.gz').read_bytes())) == report['native_context']
+        if args.native_prefix:
+            assert report['native_prefix_execution_exact']
+            assert verify_prefix_execution(args.native_prefix, args.out / 'native.jsonl.gz', report['event_report'], prefix_record) == report['native_prefix_observations_exact']
     else:
         env = {k: v for k, v in os.environ.items()
                if not k.startswith(('FA18_LOOP_', 'FA18_ORIGINAL_PILOT_'))}
@@ -268,23 +404,33 @@ def main():
             initial = (pilot / 'config').read_bytes()
             assert len(initial) == 78 and initial[:4] == bytes(4)
             assert initial[18:28] == bytes(10) and initial[56:58] == bytes(2)
+            if prefix_record:
+                assert digest(initial) == prefix_record['enlisted_save_sha256'], 'native prefix enlistment changed'
             warmup = work / 'intro.e9k'
             warmup.write_text('E9K_INPUT_V1\nF 1800 K 32 0 0 1\nF 1802 K 32 0 0 0\n')
+            if args.native_prefix:
+                warmup = args.native_prefix / 'physical.e9k'
             anchor_args = []
             if plan:
                 (args.out / 'input.anchors').write_text('FA18_REPLAY_ANCHORS_V1\n' + ''.join(
                     f'{p["source_first"]} {p["mode"]} {p["stage"]} {p["game_tick"]}\n' for p in plan))
                 anchor_args = ['--input-anchors', str((args.out / 'input.anchors').resolve()),
                                '--input-anchors-out', str((args.out / 'anchors.json').resolve())]
-            stats = run(['--frames', '100000', '--replay', str(warmup),
+            stats = run(['--frames', '180000' if native_prefix else '100000', '--replay', str(warmup),
                 '--input', str(input_path.resolve()),
                 '--iterations', str(iterations), '--save-dir', str(pilot),
                 '--flight-trace', str(work / 'native.jsonl'), '--data-out', str(work / 'native.dat'), *anchor_args], 'native.log')
+            # Retain completed runner output before any validation assertion.
+            # A rejected check must not discard the flight it was assessing.
+            for name in ('native.jsonl', 'native.dat'):
+                (args.out / (name + '.gz')).write_bytes(gzip.compress((work / name).read_bytes(), mtime=0))
             if plan:
                 anchors = json.loads((args.out / 'anchors.json').read_text())
                 assert anchors['complete'] and not anchors['failed'] and anchors['source_position'] == iterations
                 assert anchors['native_updates'] == stats['replay_iterations']
-            else:
+            if args.native_prefix:
+                prefix_rows = verify_prefix_execution(args.native_prefix, work / 'native.jsonl', anchors, prefix_record)
+            if not plan:
                 assert stats['replay_iterations'] == iterations
             events = sum(' K ' in line for line in input_path.read_text().splitlines())
             assert stats['replay_events'] == events and stats['input_queued'] == 0
@@ -300,13 +446,16 @@ def main():
                 enlisted_pilot=initial.hex(), enlisted_save_sha256=digest(initial),
                 enlist_run=enlist_stats, native_run=stats, native_context=context(ram),
                 final_saved_pilot=(pilot / 'config').read_bytes().hex())
+            if native_prefix:
+                report.update(native_prefix=native_prefix, input_segment=input_segment)
+                report['native_prefix_execution_exact'] = True
+                report['native_prefix_observations_exact'] = prefix_rows
             if plan:
                 assert anchors['keys_consumed'] == stats['replay_events']
                 report.update(anchor_input_sha256=digest((args.out / 'input.anchors').read_bytes()),
                     anchor_report_sha256=digest((args.out / 'anchors.json').read_bytes()), event_report=anchors)
             for name in ('native.jsonl', 'native.dat'):
                 data = (work / name).read_bytes()
-                (args.out / (name + '.gz')).write_bytes(gzip.compress(data, mtime=0))
                 key = 'native_trace_sha256' if name.endswith('jsonl') else 'native_final_ram_sha256'
                 report[key] = digest(data)
             (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
@@ -324,7 +473,8 @@ def main():
         zip(bytes.fromhex(a['pilot']), bytes.fromhex(b['pilot']))) if x != y]
     key = 'whole_successful_flight' if success else 'whole_failed_flight'
     try:
-        comparison_mapping = event_mapping(plan, report['event_report'], mapping, args.out / 'native.jsonl.gz') if plan else mapping
+        menu_boundary = (prefix_record['canonical']['replay_iterations'], prefix_record['canonical']['frames']) if prefix_record else None
+        comparison_mapping = event_mapping(plan, report['event_report'], mapping, args.out / 'native.jsonl.gz', menu_boundary) if plan else mapping
         report[key] = assess(evidence / 'driver.jsonl.gz', args.out / 'native.jsonl.gz', success, comparison_mapping, mode, outcome)
         report['comparison_rejected'] = None
     except AssertionError as error:
@@ -332,12 +482,20 @@ def main():
         report['comparison_rejected'] = str(error)
     report['comparison_completed'] = report[key] is not None
     report['mission_success'] = success
+    report['native_mission_success'] = bool(b['qualified'] and b['grades'][mode] == 1 and
+        b['completions'] == a['completions'] and report['runtime_outcome_matches'])
     report['scope'] = (f'Independently started pilots with no qualification or grades initially; complete mode-{mode} '
         + ('successful flight, grade and menu return. Complete gameplay-state parity requires '
            'every core and named game field to match at the declared execution alignment. '
            if success else f'failed flight through the first original {outcome} boundary. ')
         + 'No reference RAM supplied to native. Full pilot records differ in naming/date/history bytes. '
         'Strict drawing and clock differences remain unaccepted diagnostics.')
+    if native_prefix:
+        report['scope'] = (f'Independent mode-{mode} flight after ordinary qualification and native preceding missions. '
+            'All native preceding controls and observations reproduce the verified complete earlier replay. '
+            'Next-mission source controls begin at the actual next menu JSR with no held keys, '
+            'retaining every later key edge and source PAL timestamp. No original RAM, constructed saved progress, '
+            'fitted world offset or clock enters native gameplay. Full history/state parity remains a strict diagnostic.')
     if mode == 4:
         report['scope'] += (' Both games replay qualification and the complete preceding mission to earn '
             'their pilot progress normally before escort. The original prefix is independently verified; '
