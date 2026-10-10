@@ -1,0 +1,1135 @@
+{
+  "date": "2026-10-10",
+  "scope": "Full drawing gate remains rejected after a terminal radar-control assertion. Exact original/native failing inputs demonstrate a changing selection between two complete tails; no gameplay change.",
+  "failure": {
+    "full_run_out": "build/native-flight/mission-five-complete-headup-history",
+    "terminal": "phase_controls -> verify -> regular contact equality",
+    "complete_report_written": false,
+    "accepted": false
+  },
+  "prefix_selection": {
+    "row": {
+      "iteration": 62005,
+      "native_iteration": 61302,
+      "source": {
+        "phase_before": 12,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 2048,
+            "x": 168,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 13,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 3072,
+            "x": 169,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 13,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 4096,
+            "x": 164,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 13,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 5120,
+            "x": 162,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 13,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 7168,
+            "x": 158,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 13,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 2048,
+            "x": 168,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 14,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 3072,
+            "x": 169,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 14,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 4096,
+            "x": 164,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 14,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 7168,
+            "x": 158,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 14,
+            "prefix": 2,
+            "selected_record": 5120
+          }
+        ],
+        "phase_after": 14,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true,
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 164,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 164,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 164,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ],
+        "selected_record_after": 5120,
+        "prefix_selected_records": [
+          4096,
+          5120
+        ]
+      },
+      "source_flipped_phase": {
+        "phase_before": 13,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 2048,
+            "x": 168,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 14,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 3072,
+            "x": 169,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 14,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 5120,
+            "x": 162,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 14,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 7168,
+            "x": 158,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 14,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 2048,
+            "x": 168,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 15,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 3072,
+            "x": 169,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 15,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 4096,
+            "x": 164,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 15,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 5120,
+            "x": 162,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 15,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 7168,
+            "x": 158,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 15,
+            "prefix": 2,
+            "selected_record": 5120
+          }
+        ],
+        "phase_after": 15,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true,
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 164,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ],
+        "selected_record_after": 5120,
+        "prefix_selected_records": [
+          4096,
+          5120
+        ]
+      },
+      "native": {
+        "phase_before": 196,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 2048,
+            "x": 168,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 197,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 3072,
+            "x": 169,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 197,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 4096,
+            "x": 164,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 197,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 5120,
+            "x": 162,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 197,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 7168,
+            "x": 158,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 197,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 2048,
+            "x": 168,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 198,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 3072,
+            "x": 169,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 198,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 4096,
+            "x": 164,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 198,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 7168,
+            "x": 158,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 198,
+            "prefix": 2,
+            "selected_record": 5120
+          }
+        ],
+        "phase_after": 198,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true,
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 164,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 164,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 164,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ],
+        "selected_record_after": 5120,
+        "prefix_selected_records": [
+          4096,
+          5120
+        ]
+      },
+      "native_flipped_phase": {
+        "phase_before": 197,
+        "selected_record": 4096,
+        "points": [
+          {
+            "record_offset": 2048,
+            "x": 168,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 198,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 3072,
+            "x": 169,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 198,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 5120,
+            "x": 162,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 198,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 7168,
+            "x": 158,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 198,
+            "prefix": 1,
+            "selected_record": 4096
+          },
+          {
+            "record_offset": 2048,
+            "x": 168,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 199,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 3072,
+            "x": 169,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 199,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 4096,
+            "x": 164,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 199,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 5120,
+            "x": 162,
+            "y": 152,
+            "pair": 1,
+            "colour": 8,
+            "phase": 199,
+            "prefix": 2,
+            "selected_record": 5120
+          },
+          {
+            "record_offset": 7168,
+            "x": 158,
+            "y": 168,
+            "pair": 0,
+            "colour": 5,
+            "phase": 199,
+            "prefix": 2,
+            "selected_record": 5120
+          }
+        ],
+        "phase_after": 199,
+        "prefix_calls": 2,
+        "complete_non_stack_ram_matching": true,
+        "paints": [
+          {
+            "kind": "line",
+            "x": 154,
+            "y": 163,
+            "x1": 139,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "line",
+            "x": 162,
+            "y": 163,
+            "x1": 177,
+            "y1": 147,
+            "colour": 3
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          },
+          {
+            "kind": "point",
+            "x": 157,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 159,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 167,
+            "x1": 0,
+            "y1": 0,
+            "colour": 12
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 0
+          },
+          {
+            "kind": "pair",
+            "x": 168,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 169,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 164,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "pair",
+            "x": 162,
+            "y": 152,
+            "x1": 0,
+            "y1": 0,
+            "colour": 8
+          },
+          {
+            "kind": "point",
+            "x": 158,
+            "y": 168,
+            "x1": 0,
+            "y1": 0,
+            "colour": 5
+          }
+        ],
+        "selected_record_after": 5120,
+        "prefix_selected_records": [
+          4096,
+          5120
+        ]
+      }
+    },
+    "phase_mutation_rejections": {
+      "counter_increment": true,
+      "premature_marker": true,
+      "marker_coordinate": true,
+      "other_marker": true
+    },
+    "original_and_native_owner_outputs_unchanged": true,
+    "actual_native_body_matching": true,
+    "source_snapshot_sha256": "c457abd4b1e57841e258bfa20a78ccad50074f3c1ce9dfc7fe6e7ed8db7610ad",
+    "native_body_identity": {
+      "iteration": 61302,
+      "entry_sha256": "2ab08e691df1c3595a69e42611fba5289e734565aee235a32fb3585ef74462e8",
+      "before_sha256": "99cd2f414e6b96ee39967d5be27f258e88bb6effcbdc7db4e7b62d62a8c4dfd0",
+      "after_sha256": "d75d9bceb9ca910a29256c03fad46f3e5d4d1189803537fc306296cd9e1efe4c",
+      "before_tick": 90363,
+      "after_tick": 90365,
+      "saved_tick": 209,
+      "original_body_matching": true
+    },
+    "old_oracle_sha256": "5854a67041b97a6009524fbdcc5e071141a1330f5a66c4fddb0d12962d13a9cf",
+    "new_oracle_sha256": "bd645c1d66d9b0bcccf54201b249b77613a5226e1b71334ddf4b6b4df1b33cd6",
+    "baseline_body_oracle_sha256": "12b377eb3aa1f8b75dce2b543f570ca84f1c60f060e74f336dd11285be62506d"
+  },
+  "retained_executables": {
+    "build\\native-flight\\mission-five-complete-headup-history\\native_frame_body_oracle.exe.gz": {
+      "decoded_sha256": "12b377eb3aa1f8b75dce2b543f570ca84f1c60f060e74f336dd11285be62506d",
+      "encoded_sha256": "ac3d56d76cd2c35a5a5e2ab2cb13d01e7ca33160ebcae0e1ef67e14dc215b5eb"
+    },
+    "build\\native-flight\\mission-five-complete-headup-history\\native_headup_owner_oracle.exe.gz": {
+      "decoded_sha256": "8294e8e21527b48095a56867adbf3784af1f23387600fdc25d30ebb9771a1ff4",
+      "encoded_sha256": "8a8727cd7e47088bdfa902572c3357a546eabbfb9776fcf40d974cacf78cfd7d"
+    },
+    "build\\native-flight\\mission-five-complete-headup-history\\native_message_cadence_oracle.exe.gz": {
+      "decoded_sha256": "b14ff046971e5f69395b2c7f22afcd47f098063ae6122198cc32daafe798824b",
+      "encoded_sha256": "a4c05c8591ce73366d198da7c4046cee3ae1b67c94249e3016c87349aabdcdfe"
+    },
+    "build\\native-flight\\mission-five-complete-headup-history\\native_panel_frame_oracle.exe.gz": {
+      "decoded_sha256": "ec00b26e48629c6808cec317175e993f053e4cb7b2e2dfc8449a2bcd1f553de9",
+      "encoded_sha256": "a42159038859ceb8047e1910f7afcf9019983887255a0ecfb9d05fbf6c6bb878"
+    },
+    "build\\native-flight\\mission-five-complete-headup-history\\native_radar_cadence_oracle.exe.gz": {
+      "decoded_sha256": "5854a67041b97a6009524fbdcc5e071141a1330f5a66c4fddb0d12962d13a9cf",
+      "encoded_sha256": "b8346dd4b4f8db266e80e975ba1622c5a8cd3b0d9e362c21efb9779416419192"
+    },
+    "build\\native-flight\\mission-five-radar-prefix-selection\\native_radar_cadence_oracle.exe.gz": {
+      "decoded_sha256": "bd645c1d66d9b0bcccf54201b249b77613a5226e1b71334ddf4b6b4df1b33cd6",
+      "encoded_sha256": "150e560d186f715cd62ba2312aeea8826c22655eb9855e17810325179fa107c2"
+    }
+  },
+  "retained_evidence": {
+    "build\\native-flight\\mission-five-radar-phase-failure\\actual-after.dat.gz": "d14cb7af6623d935f33736ae52cb8448a4e039886b89f0725860118fcd793972",
+    "build\\native-flight\\mission-five-radar-phase-failure\\before.dat.gz": "3a3cd583ad26159cbfd1ee44a5066a89ffeee9c1c4cffcf9af41075b62b9d9ca",
+    "build\\native-flight\\mission-five-radar-phase-failure\\flipped-after.dat.gz": "24c947829b24493f3ef1fe8e4e19e5442a9ead994f261b864b0d29a403533a8a",
+    "build\\native-flight\\mission-five-radar-phase-failure\\regular-after.dat.gz": "c0e1b43ced9d2dee12e9d3b2274b5fe98826d945731aa77e06c4598d97ef0af4",
+    "build\\native-flight\\mission-five-radar-phase-failure\\report.json": "d10859a73dfb6dc0a9c0fe99c585c4727cf84e2ac554810b093da2f3990049c4",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\native-flipped.after.dat.gz": "650889adac09a45586249e81e6199ddd24d6c857c6ae7831d4a83dd3587fd5a5",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\native-flipped.before.dat.gz": "3470c1661a15bf0abd8d4a2323e49b6ef1c5332a6db5f11ed953b8fb426ed1a5",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\native.after.dat.gz": "28a01bb478697243ecdbc709132b79700798444a50e6ef62a89ddc478fc0eb6c",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\native.before.dat.gz": "baed075830c1c6e6376e3ae4842c551fbdea547a0cfbde8eeb9b188557677359",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\native_radar_cadence_oracle.exe.gz": "150e560d186f715cd62ba2312aeea8826c22655eb9855e17810325179fa107c2",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\report.json": "fabd728b55779230e88cc727811947b17bd67be025fc617c3bd8cc26f255f282",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\source-flipped.after.dat.gz": "24c947829b24493f3ef1fe8e4e19e5442a9ead994f261b864b0d29a403533a8a",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\source-flipped.before.dat.gz": "02ea3b5aefb43a234c5e28c89b8ae4d584f19eeef46bc7e30a4c2a4653e70df2",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\source.after.dat.gz": "c0e1b43ced9d2dee12e9d3b2274b5fe98826d945731aa77e06c4598d97ef0af4",
+    "build\\native-flight\\mission-five-radar-prefix-selection\\source.before.dat.gz": "3a3cd583ad26159cbfd1ee44a5066a89ffeee9c1c4cffcf9af41075b62b9d9ca"
+  },
+  "validation": {
+    "radar_control_tests": 15,
+    "complete_history_tests": 14,
+    "syntax": true,
+    "diff_check": true
+  }
+}

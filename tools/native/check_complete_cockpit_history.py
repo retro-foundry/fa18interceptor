@@ -15,6 +15,7 @@ import os
 from pathlib import Path
 import subprocess
 import tempfile
+import traceback
 
 from assess_mission_radar_cadence import apply_paints, painted_pages, changed_paints, phase_controls
 from check_gameplay_checkpoint import ROOT, integer, span
@@ -158,6 +159,19 @@ def run_oracle(executable, arguments, env):
     return result.stdout
 
 
+def retained_phase_controls(out, history, radar_rows):
+    """Keep completed evidence even when a terminal control rejects the run."""
+    payload = json.dumps(dict(history=history, radar_rows=radar_rows), separators=(',', ':')).encode()
+    path = out / 'completed-control-inputs.json.gz'
+    path.write_bytes(gzip.compress(payload, mtime=0))
+    identity = dict(path=str(path), sha256=digest(path.read_bytes()), decoded_sha256=digest(payload))
+    try:
+        rejected, inactive = phase_controls(radar_rows)
+        return rejected, inactive, None, identity
+    except AssertionError:
+        return {}, [], dict(kind='radar_phase_control', traceback=traceback.format_exc()), identity
+
+
 def owner_states(work, executables, env, before, after, kind, source_registers=None):
     fixture, output = work / 'owner.dat', work / 'output.dat'
     fixture.write_bytes(before)
@@ -283,7 +297,11 @@ def main():
     geometry_bodies, headup_counts, headup_rejected = 0, dict(source=0, native=0), {}
     current, native_iterator, count, executed = None, verified_native(args.native_delta, native), 0, 0
     previous_group = None
-    with tempfile.TemporaryDirectory(prefix='ram-complete-cockpit-', dir=ROOT / 'build') as directory:
+    with gzip.open(args.out / 'history-progress.jsonl.gz', 'wt', encoding='utf8') as journal, \
+            tempfile.TemporaryDirectory(prefix='ram-complete-cockpit-', dir=ROOT / 'build') as directory:
+        journal.write(json.dumps(dict(kind='inputs', reports=sealed, verifier=code_hashes,
+            oracles=executable_hashes, runner=reference['runner_sha256'])) + '\n')
+        journal.flush()
         work = Path(directory)
         for group in original_groups(args.source_delta, source):
             entry = group[0xC0EFD4]
@@ -343,6 +361,8 @@ def main():
                     rejected[name] = i
             history.append(dict(iteration=i, native_iteration=j, compared_bytes=64000,
                 difference_bytes=[sum(a != b for a, b in zip(x, y)) for x, y in zip(live['source'], live['native'])]))
+            journal.write(json.dumps(dict(kind='history', row=history[-1])) + '\n')
+            journal.flush()
             if 0xC0EFEA not in group:
                 continue
             previous_group = group
@@ -420,18 +440,23 @@ def main():
                     apply_owners(model, role, panel_in, radar, message_state, omitted, headup=headup)
             assert refreshed['source'] == refreshed['native'], 'Instrument images or redraw requests differ'
             radar_rows.append(row)
+            journal.write(json.dumps(dict(kind='owners', row=row)) + '\n')
+            journal.flush()
             if count % 100 == 0:
                 print(f'{count}/{last-first+1} independent entries / {executed} bodies / {len(radar_rows)} paired HUD owners predicted', flush=True)
         assert next(native_iterator, None) is None, 'Unconsumed native bodies'
+        journal.write(json.dumps(dict(kind='complete', observations=count, bodies=executed,
+            histories=len(history), owner_predictions=owner_counts, headup_predictions=headup_counts,
+            fresh_scene_bodies=geometry_bodies, first_unexplained=failed)) + '\n')
     assert count == last - first + 1
-    phase_rejected, inactive_phase = phase_controls(radar_rows)
+    phase_rejected, inactive_phase, phase_failure, control_inputs = retained_phase_controls(args.out, history, radar_rows)
     assert {path: digest(Path(path).read_bytes()) for path in sealed} == sealed, 'Evidence reports changed during verification'
     assert {path: digest(Path(path).read_bytes()) for path in executable_hashes} == executable_hashes, 'Reference executable changed'
     assert {name: digest((Path(__file__).parent / name).read_bytes()) for name in code_paths} == code_hashes, 'Verifier changed during execution'
     controls = len(rejected) == len(mutations) and len(paint_rejected) == 3 and len(glyph_rejected) == 3
     if args.headup:
         controls = controls and len(headup_rejected) == 2
-    matching = failed is None and controls and len(history) == count
+    matching = failed is None and phase_failure is None and controls and len(history) == count
     report = dict(first=first, last=last, observations=count, complete_trace_and_core_observations=count,
         strict_scene_bytes=count * 8 * 5120, strict_scene_matching=scene_matching == count,
         scene_boundaries_matching=scene_matching, history_observations=len(history), history_bytes=64000 * len(history),
@@ -442,6 +467,7 @@ def main():
         replayed_original_bodies_matching=executed, sealed_native_body_identities_matching=native['bodies'],
         sealed_source_snapshots_matching=source['snapshots'], live_owner_predictions=owner_counts, complete_plane_history=history,
         phase_mutation_rejections=phase_rejected, unobservable_phase_mutations=inactive_phase,
+        phase_control_failure=phase_failure, retained_control_inputs=control_inputs,
         paint_mutation_rejections=paint_rejected, glyph_mutation_rejections=glyph_rejected,
         source_omission_first_rejections=rejected, evidence_report_sha256=sealed,
         verifier_source_sha256=code_hashes,

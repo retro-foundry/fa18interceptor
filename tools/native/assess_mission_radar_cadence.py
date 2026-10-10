@@ -19,8 +19,45 @@ from compare_flight_traces import read_trace
 
 
 def points(row):
-    return sorted([{k:v for k,v in point.items() if k!='phase'} for point in row['points']],
+    return sorted([{k:v for k,v in point.items() if k not in ('phase', 'prefix', 'selected_record')} for point in row['points']],
                   key=lambda point: point['record_offset'])
+
+
+def selected_points(state):
+    return [point for point in state['points']
+            if point['record_offset'] == point.get('selected_record', state['selected_record'])]
+
+
+def verify_prefix_contacts(state, flipped, equivalent):
+    """Each complete tail can scan a new selection before the next tail."""
+    selectors = state['prefix_selected_records']
+    assert len(selectors) == state['prefix_calls']
+    assert selectors == flipped['prefix_selected_records'] == equivalent['prefix_selected_records']
+    assert state['selected_record_after'] == flipped['selected_record_after'] == equivalent['selected_record_after']
+    if selectors:
+        assert selectors[0] == state['selected_record']
+    for case in (state, flipped, equivalent):
+        assert len(case['prefix_selected_records']) == case['prefix_calls']
+        for point in case['points']:
+            prefix = point['prefix']
+            assert 1 <= prefix <= case['prefix_calls']
+            selected = case['prefix_selected_records'][prefix - 1]
+            assert point['selected_record'] == selected
+            assert point['phase'] == (case['phase_before'] + prefix) % 256
+            if point['record_offset'] == selected:
+                assert point['phase'] & 1
+    for prefix, selected in enumerate(selectors, 1):
+        regular, markers = [], []
+        for case in (state, flipped):
+            submitted = points(dict(points=[p for p in case['points'] if p['prefix'] == prefix]))
+            regular.append([p for p in submitted if p['record_offset'] != selected])
+            markers.append([p for p in submitted if p['record_offset'] == selected])
+        assert regular[0] == regular[1], 'Regular contacts differ within a radar prefix'
+        eligible = bool(markers[0] or markers[1])
+        for case, marker in zip((state, flipped), markers):
+            assert bool(marker) == (eligible and bool((case['phase_before'] + prefix) & 1))
+        assert points(dict(points=[p for p in state['points'] if p['prefix'] == prefix])) == points(
+            dict(points=[p for p in equivalent['points'] if p['prefix'] == prefix])), 'Equivalent radar prefix contacts differ'
 
 
 def cached_pixels(data, page):
@@ -215,6 +252,10 @@ def verify(rows):
             assert state['selected_record'] == row[other]['selected_record']
             if i:
                 assert state['phase_before'] == rows[i - 1][name]['phase_after']
+            equivalent = row[other] if offset % 2 == 0 else row[other + '_flipped_phase']
+            if 'prefix_selected_records' in state:
+                verify_prefix_contacts(state, flipped, equivalent)
+                continue
             selected = state['selected_record']
             regular = [p for p in points(state) if p['record_offset'] != selected]
             assert regular == [p for p in points(flipped) if p['record_offset'] != selected]
@@ -240,13 +281,12 @@ def verify(rows):
 def phase_controls(rows):
     """Test counters/regular contacts even when the selected contact is absent."""
     verify(rows)
-    selected = next((i for i, row in enumerate(rows) if any(
-        p['record_offset'] == row['source']['selected_record'] for p in row['source']['points'])), None)
+    selected = next((i for i, row in enumerate(rows) if selected_points(row['source'])), None)
     unobservable, rejections = [], {}
     for kind in ('counter_increment', 'premature_marker', 'marker_coordinate', 'other_marker'):
         changed = copy.deepcopy(rows)
         if kind in ('premature_marker', 'marker_coordinate') and selected is None:
-            assert all(not any(p['record_offset'] == row[name]['selected_record'] for p in row[name]['points'])
+            assert all(not selected_points(row[name])
                 for row in rows for name in ('source', 'native', 'source_flipped_phase', 'native_flipped_phase'))
             unobservable.append(kind)
             continue
@@ -258,9 +298,9 @@ def phase_controls(rows):
         if kind == 'counter_increment':
             state['phase_after'] += 1
         elif kind == 'other_marker':
-            state['points'] = [p for p in state['points'] if p['record_offset'] == state['selected_record']]
+            state['points'] = selected_points(state)
         else:
-            marker = next(p for p in state['points'] if p['record_offset'] == state['selected_record'])
+            marker = selected_points(state)[0]
             if kind == 'premature_marker':
                 changed[index]['source_flipped_phase']['points'].append(copy.deepcopy(marker))
             else:
@@ -315,7 +355,7 @@ def validate_controls(report):
     validate_control_summary(report['mutation_rejections'], report.get('unobservable_phase_mutations', []),
         report.get('paint_mutation_rejections'), report.get('unobservable_paint_mutations', []))
     if report.get('unobservable_phase_mutations'):
-        assert all(not any(p['record_offset'] == row[name]['selected_record'] for p in row[name]['points'])
+        assert all(not selected_points(row[name])
             for row in report['rows'] for name in ('source', 'native', 'source_flipped_phase', 'native_flipped_phase'))
 
 

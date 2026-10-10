@@ -25,6 +25,39 @@ class RadarControlObservability(unittest.TestCase):
         self.assertEqual(report['unobservable_phase_mutations'], [])
         validate_controls(report)
 
+    def prefix_row(self):
+        fixture = Path(__file__).parent / 'fixtures/radar_prefix_selection.json'
+        return json.loads(fixture.read_text())['row']
+
+    def test_actual_selection_change_between_prefixes_passes_all_controls(self):
+        row = self.prefix_row()
+        self.assertEqual(row['source']['prefix_selected_records'], [4096, 5120])
+        active, inactive = phase_controls([row])
+        self.assertEqual(len(active), 4)
+        self.assertEqual(inactive, [])
+
+    def test_prefix_identity_selection_and_phase_cannot_be_relabelled(self):
+        for key, value in (('prefix', 0), ('selected_record', 0), ('phase', 0)):
+            row = self.prefix_row()
+            row['source']['points'][0][key] = value
+            with self.subTest(key=key), self.assertRaises(AssertionError):
+                verify([row])
+
+    def test_each_prefix_keeps_regular_contact_coordinates_strict(self):
+        for prefix in (1, 2):
+            row = self.prefix_row()
+            point = next(p for p in row['source']['points']
+                         if p['prefix'] == prefix and p['record_offset'] != p['selected_record'])
+            point['x'] += 1
+            with self.subTest(prefix=prefix), self.assertRaises(AssertionError):
+                verify([row])
+
+    def test_second_selection_cannot_be_replaced_by_initial_selection(self):
+        row = self.prefix_row()
+        row['source']['prefix_selected_records'][1] = row['source']['selected_record']
+        with self.assertRaises(AssertionError):
+            verify([row])
+
     def test_actual_no_sig_keeps_counter_and_ordinary_contact_controls(self):
         report = self.report('no_selected_marker')
         self.assertEqual(report['mutation_rejections'], dict(counter_increment=True, other_marker=True))

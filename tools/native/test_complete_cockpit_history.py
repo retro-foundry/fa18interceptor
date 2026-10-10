@@ -1,11 +1,12 @@
 """Whole-flight drawing evidence must keep bytes, roles and identities strict."""
 import copy
 import gzip
+import json
 from pathlib import Path
 import tempfile
 import unittest
 
-from check_complete_cockpit_history import align_history, history_difference, verified_native, shared_scene_geometry
+from check_complete_cockpit_history import align_history, history_difference, verified_native, shared_scene_geometry, retained_phase_controls
 from check_mission_message_pages import predicted_pages
 from check_qualification_message_cadence import pages, instrument_panel_refresh
 from frame_delta import bodies
@@ -27,6 +28,19 @@ def screen():
 
 
 class CompleteCockpitAcceptance(unittest.TestCase):
+    def test_terminal_phase_failure_retains_completed_inputs_and_rejects(self):
+        fixture = Path(__file__).parent / 'fixtures/radar_control_observability.json'
+        rows = json.loads(fixture.read_text())['no_selected_marker']['rows']
+        rows[0]['source']['phase_after'] += 1
+        history = [dict(iteration=7, compared_bytes=64000)]
+        with tempfile.TemporaryDirectory() as directory:
+            rejected, inactive, failure, identity = retained_phase_controls(Path(directory), history, rows)
+            self.assertEqual((rejected, inactive), ({}, []))
+            self.assertEqual(failure['kind'], 'radar_phase_control')
+            self.assertIn('AssertionError', failure['traceback'])
+            retained = json.loads(gzip.decompress(Path(identity['path']).read_bytes()))
+            self.assertEqual(retained, dict(history=history, radar_rows=rows))
+
     def test_owned_scene_bits_are_not_repaired_from_input_pixels(self):
         data, expected, draw = screen(), {}, {}
         align_history(expected, draw, dict(source=data, native=data), True, copy_scene=False)

@@ -6,6 +6,7 @@
 
 static unsigned points;
 static unsigned prefixes;
+static uint16_t prefix_selected[2];
 typedef struct { const char *kind; int16_t x,y,x1,y1; uint16_t colour; } RadarPaint;
 static RadarPaint paints[64];
 static unsigned paint_count;
@@ -36,6 +37,8 @@ static void radar_head(void *context) {
 static void radar_prefix(const PostflightVariantWork *work,void *context) {
     (void)context;
     if(work->table) {
+        if(prefixes==2) abort();
+        prefix_selected[prefixes]=rd_u16(SELECTED_RECORD);
         ++prefixes;
         /* The prefix has cleared these pixels but has not overwritten the
          * retained table yet. Record the original ordered erase operations. */
@@ -50,9 +53,10 @@ static void radar_point(const PostflightVariantWork *work,int marked,void *conte
     (void)marked;(void)context;
     if(!work->submitted_point) return;
     radar_paint(work->submit_pair?"pair":"point",work->submit_x,work->submit_y,0,0,rd_u16(CURRENT_COLOUR));
-    printf("%s{\"record_offset\":%u,\"x\":%d,\"y\":%d,\"pair\":%d,\"colour\":%u,\"phase\":%u}",
+    printf("%s{\"record_offset\":%u,\"x\":%d,\"y\":%d,\"pair\":%d,\"colour\":%u,\"phase\":%u,\"prefix\":%u,\"selected_record\":%u}",
         points++?",":"",(uint16_t)(work->record-CONTROL_RECORDS),
-        work->submit_x,work->submit_y,work->submit_pair,rd_u16(CURRENT_COLOUR),rd_u8(0xc45883u));
+        work->submit_x,work->submit_y,work->submit_pair,rd_u16(CURRENT_COLOUR),rd_u8(0xc45883u),
+        prefixes,rd_u16(SELECTED_RECORD));
 }
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];
@@ -74,6 +78,7 @@ int main(int argc,char **argv) {
     printf("{\"phase_before\":%u,\"selected_record\":%u,\"points\":[",phase,selected);
     host_draw_postflight_renderer_dispatch_with_hooks(&hooks);
     const unsigned after=rd_u8(0xc45883u);
+    const unsigned selected_after=rd_u16(SELECTED_RECORD);
     memcpy(expected,machine->chip,0x80000);memcpy(expected+0x80000,machine->slow,0x80000);
     memcpy(machine,before,sizeof *before);
     if(!hud_original(0xc31226u)) return 1;
@@ -94,6 +99,8 @@ int main(int argc,char **argv) {
         printf("%s{\"kind\":\"%s\",\"x\":%d,\"y\":%d,\"x1\":%d,\"y1\":%d,\"colour\":%u}",
             i?",":"",p->kind,p->x,p->y,p->x1,p->y1,p->colour);
     }
+    printf("],\"selected_record_after\":%u,\"prefix_selected_records\":[",selected_after);
+    for(unsigned i=0;i<prefixes;++i) printf("%s%u",i?",":"",prefix_selected[i]);
     puts("]}");
     free(expected);free(before);free(machine);free(data);free(rom);free(state);
     return 0;

@@ -1,5 +1,14 @@
 # The C port
 
+Mission Five radar prefix selection (2026-10-10): the complete head-up run
+reached terminal controls, then rejected a checker assumption; no complete
+report was written and the full drawing gate remains unaccepted. Actual source
+62,005/native 61,302 inputs show selection changing between two complete radar
+tails. Per-prefix observation preserves every old event and output byte; all
+four phase mutations and 29 guard tests pass. Complete histories now retain a
+compressed progress journal and failing terminal-control report. Gameplay is
+unchanged. See [prefix-selection evidence](analysis/native_mission_five_radar_prefix_selection_milestone.md).
+
 Original warm audio restore (2026-10-10): all four actual restore assignments
 match the requested save. Channel 1's extra word is already encoded in this
 warm input and survives the pre-replay pointer/count advance. The read-only
