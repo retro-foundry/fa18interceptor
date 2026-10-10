@@ -70,3 +70,45 @@ the compressed retention manifest. Evidence is retained under
 `build/native-flight/model-directory-completion`; passing duplicate RAM is
 not accumulated. Complete native sound matching remains open, and named-state
 cleanup remains outside the current goal as requested.
+
+## Active build integration
+
+The validated batch is merged into `coverage-accounting`. All five affected
+Release and Debug CTests pass in the main build, including cleanup. Release
+models take 21.64 seconds; Debug models take 23.51 seconds. Complete intro,
+Free Flight and final combat output preservation and zero gameplay allocation
+checks pass again in both configurations.
+
+The new Release executable reproduces the accepted Mission Five recording
+from the actual ordinary enlisted save and all original earned-prefix controls.
+Two independently launched native runs obey the runner's separate flight-trace
+and frame-delta capture budgets. Their entire counters, final RAM, actual
+anchors, saved pilot and menu return agree with each other and the accepted
+recording. No captured RAM enters either game.
+
+The complete native trace is byte-identical. All **13,763 complete bodies** and
+**41,289 full-MiB snapshots**, including entry/begin/end timing, reproduce the
+accepted delta stream byte for byte. Its original execution and complete
+independent drawing assessment therefore extend to this executable for this
+recorded flight. The original reports remain bound to their original runner;
+they are not rewritten or relabelled. This also preserves the prior sampled
+clock explanation of the HUD change.
+
+The initial preservation invocation was rejected by the runner because it
+combined flight tracing and frame-delta capture. Its rejection log remains
+retained. The corrected checker uses separate complete runs and finishes
+successfully. Temporary capture storage stays within 512 MiB; passing raw
+trace/RAM/delta copies are removed. Reports and compressed executable witnesses
+remain. The isolated worktree is removed after its evidence is retained.
+
+The active `build/native/fa18_native.exe` now has SHA-256
+`b5eead9315fa4b13e8694d745e1d0ba3fd355513741acfeaecb982ac8d5e2a10`.
+The [integration checkpoint](figures/native_model_directory_integration_checkpoint.json)
+binds the actual main-build sources, both configurations, complete preservation
+report, allocation results and retained witnesses. Complete native sound
+matching remains open; the synthetic 014 non-owned-address limitation above
+is unchanged.
+
+```powershell
+python tools/native/check_qualified_mission_preservation.py --runner build/native/fa18_native.exe --reference build/native-flight/mission-five-template-carry-message-trace --replay-evidence build/native-flight/independent-mission-five-template-carry --body-evidence build/native-flight/mission-five-template-carry-complete-bodies --prefix build/native-flight/recorded-escort-template-carry-protected --drawing-evidence build/native-flight/mission-five-complete-prefix-headup-history --out build/native-flight/model-directory-completion/mission-five-preservation-recheck
+```

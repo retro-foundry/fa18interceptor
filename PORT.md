@@ -1,5 +1,15 @@
 # The C port
 
+Model directory integration (2026-10-10): the five remaining original
+command slots are implemented; all 78 directory entries now dispatch.
+The 917 component cases and connected flight/model/allocation checks pass
+in Release and Debug. The active build preserves the complete Mission Five
+trace and all 13,763 bodies/41,289 RAM snapshots, timing, counters, earned
+pilot and menu return. Project gameplay heap violations and SDL pool
+requests remain zero. Complete native sound matching remains open; actual
+014 asset reachability into non-owned addresses remains unverified.
+See [model command and integration evidence](analysis/native_model_directory_completion_milestone.md).
+
 Complete Mission Five drawing (2026-10-10): all 13,775 independent flight
 observations and 881,600,000 eight-plane history bytes pass prediction by
 original owners on actual recorded inputs. All 13,763 native body identities,

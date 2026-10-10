@@ -1,0 +1,311 @@
+{
+  "implementation_commit": "27704f95",
+  "merge_commit": "5828813a",
+  "production_source_sha256": {
+    "port/game/draw_stream.c": "9cf052b0a224eba2872c76b89b4c6e83f10fb94f1a32d52618b26acf00652122",
+    "port/game/draw_stream.h": "da0e1357c07fe8fb46a75b8f3f90e6d74d35f58e763f55f8049f466f9c1be78a",
+    "port/game/native/model.c": "0af18226a474c5f22bdc71d9b2f70b58134b46af071ddf5e9f38b66cd9718ba8",
+    "port/game/render_line.c": "c5ad0bfd1f78c1f22a3b4c1c0c64314d523274e7ad7d6af94d1560e92416f131",
+    "port/game/render_line.h": "32f76d6c1c121d62c1f9e2781db6dd2539b6ae0459977d545fda936d3a8d4d2e",
+    "tools/native/native_model_oracle.c": "bbabc9c6d0d78bbf3f264d5d9a17ee286590a2a7a33d6e36a3801c03922c556f",
+    "tools/native/check_models.py": "f62dca502ad1679810c5d6d1e480f6ca27de4fc3c3c7c8705aa8dec2b9f83bd9",
+    "tools/native/check_qualified_mission_preservation.py": "981a855aef0ebdad75aaefae4d6060c93db34c1f52ad8fb00c97151e8e6d46b9"
+  },
+  "qualification": {
+    "Release": {
+      "runner_sha256": "b5eead9315fa4b13e8694d745e1d0ba3fd355513741acfeaecb982ac8d5e2a10",
+      "ctest_log_sha256": "cacaa5f72b74e7974fd8364cdbdff9ec1489eeff1fbadbb9a13927c1ed84dd8b",
+      "terminal_passed": [
+        "preallocation",
+        "preallocation_output",
+        "flight_start",
+        "models",
+        "artifact_cleanup"
+      ],
+      "preallocation_report_sha256": "699dbd9249dad676458428f5563ebb66cd67a7b20cc3409c977b0047d0595464",
+      "outputs": {
+        "intro": {
+          "wav_sha256": "9cdd202837deac0b3dcf2468e75097dc6b5a8037badc5075af206ae5cda6b0e8",
+          "data_sha256": "f09f830b58916668c20636c4d7a782aef74c4621478262e0a2c0ef139b456899",
+          "ppm_sha256": "4db323fe48982af510b6589e020fe40f3c0099ed02b6827ed5a9f7da7e648fe8",
+          "save_sha256": null,
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        },
+        "free-flight": {
+          "wav_sha256": "bc90dde8c83e7caa981588161eeebcb3bec8294645e31be6d91d2fb67d293db8",
+          "data_sha256": "b238754b0a82d1cf503c18a61a95b7970b1fb4553b6e1f406390b9942224b38b",
+          "ppm_sha256": "ba7825bba0b480098f39c1cfed0c9526ef90af09bb0bbddafe28974bdec71bf0",
+          "save_sha256": null,
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        },
+        "final-combat": {
+          "wav_sha256": "f371c89d38e3da6efeb113d6767bb7e008250a541a955b5e614c990d4597173b",
+          "data_sha256": "dd9e0ccd5597c8646e91b0ed2565ee1811d9753554dda4ee0248471327d76626",
+          "ppm_sha256": "ee7be643cf9aa3ac470d14345d374c0230fc62ba31e1f88036726d236d4c592c",
+          "save_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        }
+      },
+      "retained_executable": {
+        "path": "build\\native-flight\\model-directory-completion\\main-Release.exe.gz",
+        "sha256": "012e537ea9562f6c17b3783c0d5908ae65f59e921be73022a3fa7234ab4a1e57",
+        "decoded_sha256": "b5eead9315fa4b13e8694d745e1d0ba3fd355513741acfeaecb982ac8d5e2a10"
+      }
+    },
+    "Debug": {
+      "runner_sha256": "4d79b43fe6a00745645da09924def620207622e382f3209e3610cbd8a2d50322",
+      "ctest_log_sha256": "9b91505b9d85b3eea774e8c8a793718ea7d556504c6605d68099c5d883d0144b",
+      "terminal_passed": [
+        "preallocation",
+        "preallocation_output",
+        "flight_start",
+        "models",
+        "artifact_cleanup"
+      ],
+      "preallocation_report_sha256": "fe4f41c535f92797acd73741e7fd0d553b87233dcd38f82ddbcb55c721f5587c",
+      "outputs": {
+        "intro": {
+          "wav_sha256": "9cdd202837deac0b3dcf2468e75097dc6b5a8037badc5075af206ae5cda6b0e8",
+          "data_sha256": "f09f830b58916668c20636c4d7a782aef74c4621478262e0a2c0ef139b456899",
+          "ppm_sha256": "4db323fe48982af510b6589e020fe40f3c0099ed02b6827ed5a9f7da7e648fe8",
+          "save_sha256": null,
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        },
+        "free-flight": {
+          "wav_sha256": "bc90dde8c83e7caa981588161eeebcb3bec8294645e31be6d91d2fb67d293db8",
+          "data_sha256": "b238754b0a82d1cf503c18a61a95b7970b1fb4553b6e1f406390b9942224b38b",
+          "ppm_sha256": "ba7825bba0b480098f39c1cfed0c9526ef90af09bb0bbddafe28974bdec71bf0",
+          "save_sha256": null,
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        },
+        "final-combat": {
+          "wav_sha256": "f371c89d38e3da6efeb113d6767bb7e008250a541a955b5e614c990d4597173b",
+          "data_sha256": "dd9e0ccd5597c8646e91b0ed2565ee1811d9753554dda4ee0248471327d76626",
+          "ppm_sha256": "ee7be643cf9aa3ac470d14345d374c0230fc62ba31e1f88036726d236d4c592c",
+          "save_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        }
+      },
+      "retained_executable": {
+        "path": "build\\native-flight\\model-directory-completion\\main-Debug.exe.gz",
+        "sha256": "498dd3531dd99cbcbbfd4fa451df343825c41a55b31a67f8558a0ea5cfa145f1",
+        "decoded_sha256": "4d79b43fe6a00745645da09924def620207622e382f3209e3610cbd8a2d50322"
+      }
+    }
+  },
+  "complete_mission_five_preservation": {
+    "runner_sha256": "b5eead9315fa4b13e8694d745e1d0ba3fd355513741acfeaecb982ac8d5e2a10",
+    "baseline_runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8",
+    "evidence_sha256": {
+      "reference": "2217f540dfbd9c1de60e56ec4c4c16343a3367218e9400e7ce705095c9787130",
+      "replay-evidence": "55b7d4f037dc56ea79ea31202440bd08b21851aca0da2e60fbb7a45edea2a70c",
+      "body-evidence": "fe43a05b33786076f3a107e6f5b37c9ae741111d0d5a48bf52d4f5c421db4498",
+      "prefix": "fd5da88ee636064154e1378606a4391cf8359fcb6108d4923587f74a1c622c98",
+      "drawing-evidence": "077459b02e3ce7f9474afcc0fcdfce9ff12606b7a21d3cc64f9912b9fbf725af"
+    },
+    "input_sha256": {
+      "build\\native-flight\\independent-mission-five-template-carry\\input.segment.fa18in": "f4b8180c91364d8115a3b88acab92721344b14a25a1a130f01d92d4786a7079f",
+      "build\\native-flight\\independent-mission-five-template-carry\\input.anchors": "323a08d810452499c550374ed4513df56d9475daccbcec3ec271c659f5227f96",
+      "build\\native-flight\\recorded-escort-template-carry-protected\\physical.e9k": "4828cb3b576f64ee62bdd8a0d7b193615c5ed1a274f639adcd2facb0e3a8d368"
+    },
+    "complete_preservation": true,
+    "actual": {
+      "native_run": {
+        "frame_owner_exit": false,
+        "frames": 133402,
+        "screen": "menu",
+        "mode": 0,
+        "glyphs": 32952,
+        "record_updates": 23779,
+        "scene_frames": 23770,
+        "terrain_polygons": 109529,
+        "model_calls": 146650,
+        "hud_frames": 23770,
+        "control_frames": 45575,
+        "scene_selected": true,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "timer_pending": false,
+        "timer_yields": 56116,
+        "display_publications": 45575,
+        "display_yields": 45613,
+        "display_pending": false,
+        "displayed_page": 0,
+        "postflight_callbacks": 0,
+        "postflight_resets": 0,
+        "input_passes": 45571,
+        "input_events": 27472,
+        "input_queued": 0,
+        "update_iterations": 75334,
+        "replay_iterations": 74858,
+        "replay_events": 20413,
+        "host_replay_events": 7079,
+        "host_replay_pending": 0,
+        "replay_started": true,
+        "voice_ticks": 133402,
+        "voice_publications": 283573,
+        "voice_levels": [
+          [
+            358,
+            31
+          ],
+          [
+            358,
+            31
+          ],
+          [
+            124,
+            0
+          ],
+          [
+            300,
+            2
+          ]
+        ],
+        "sample_requests": 131369,
+        "sample_frames": 128065920,
+        "nonzero_sample_frames": 127360656,
+        "audio_device": false,
+        "frame_capture_complete": false,
+        "frame_before_tick": 0,
+        "frame_after_tick": 0,
+        "frame_saved_tick": 0,
+        "cpu_emulation": false,
+        "chipset_emulation": false
+      },
+      "native_trace_sha256": "d8564d5cd71553acac4419383664571aaaff5e36ff0a2b1b3ac4f1cdd81d80cc",
+      "native_final_ram_sha256": "1f1381a5602e10c19d45ab024ef8d2c7f322eed288e1b605f1258259b4929737",
+      "stream_sha256": "114153552548351c3483f78f771645050e0b47174c52dafc6c1d4841f4a5b5a6",
+      "stream_bytes": 124362700,
+      "final_saved_pilot": "0001000200020500000002cb0000000000000000000101010000000000004e45570000000000000000000000000000000000000000000003000301b0000600040001000300010000000700000000",
+      "event_report": {
+        "format": "FA18_REPLAY_ANCHORS_V1",
+        "complete": true,
+        "failed": false,
+        "native_updates": 74858,
+        "source_position": 75342,
+        "keys_consumed": 20413,
+        "anchors": [
+          {
+            "source_first": 1,
+            "mode": 0,
+            "stage": "C0FCB4",
+            "game_tick": 0,
+            "native_first": 1,
+            "frame": 2299
+          },
+          {
+            "source_first": 40168,
+            "mode": 4,
+            "stage": "C10C08",
+            "game_tick": 36,
+            "native_first": 39931,
+            "frame": 55567
+          },
+          {
+            "source_first": 40641,
+            "mode": 4,
+            "stage": "C10D8A",
+            "game_tick": 1,
+            "native_first": 40395,
+            "frame": 56304
+          },
+          {
+            "source_first": 47596,
+            "mode": 0,
+            "stage": "C0FCB4",
+            "game_tick": 0,
+            "native_first": 47349,
+            "frame": 75601
+          },
+          {
+            "source_first": 61114,
+            "mode": 5,
+            "stage": "C10C08",
+            "game_tick": 36,
+            "native_first": 60630,
+            "frame": 88920
+          },
+          {
+            "source_first": 61578,
+            "mode": 5,
+            "stage": "C10D8A",
+            "game_tick": 1,
+            "native_first": 61094,
+            "frame": 89657
+          }
+        ]
+      }
+    },
+    "capture_bytes": 424721137,
+    "bodies": 13763,
+    "snapshots": 41289,
+    "memory": {
+      "sdl_arena_bytes": 33554432,
+      "sdl_startup_bytes": 0,
+      "sdl_peak_bytes": 96,
+      "sdl_gameplay_pool_requests": 0,
+      "sdl_failures": 0,
+      "project_gameplay_heap_violations": 0,
+      "pcm_ring_frames": 131072,
+      "os_driver_allocations_observed": false
+    },
+    "scope": "Complete native trace, body entry/begin/end RAM and timing, final RAM, earned pilot, anchors and counters reproduce the accepted Mission Five recording. Original instruction and drawing qualification remains bound to its prior report; exact native preservation extends that recorded scope to this executable. No recorded RAM enters gameplay; other routes and complete sound parity remain open."
+  },
+  "preservation_report_sha256": "350ec437557649e241e03f18eaef969ba77a3ac595bbfb6591bda9d18c1b0e10",
+  "remaining": "Complete native sound onset/scheduling and flight/combat waveform matching. Actual 014 asset reachability into non-owned addresses is unverified; no ROM/bus fallback. Named-state cleanup remains separate. Other unrecorded routes are not qualified by these recordings."
+}
