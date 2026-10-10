@@ -1,5 +1,12 @@
 # Active port source ownership
 
+Visible final combat/cameras (2026-10-10): all 21,550 presentations and
+all 14 source camera modes pass with sound and complete headless PCM/RAM/
+pixels/save/counter equality. Maximum frame work is 17.7416 ms; none exceed
+20 ms. Gear is raised after takeoff; project heap violations are zero.
+This covers a partial final-mission clip on this host. Other missions and
+sound timing remain open. See [camera performance evidence](../analysis/native_visible_combat_views_milestone.md).
+
 Current native sound (2026-10-10): a fresh complete Demo preserves all
 12,680 boundaries, 8,248 requests, 554 stops and every PCM/RAM/trace byte.
 All 8,281 original request payloads and 48 ordered startup-music requests
