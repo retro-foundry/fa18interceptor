@@ -1,5 +1,15 @@
 # Current playable port handoff
 
+Original warm audio boundary (2026-10-10): all 18,656 live word lifecycles
+pass through call 94, with complete paired PCM/DMA/RAM/video preservation.
+Channel 1 reads its zero word with one word remaining, resets the pointer,
+then reloads the count one chip clock later. Every preceding live read agrees
+with the boundary projected by the first observed state; its earlier origin
+remains unverified. Seventeen real-stream rejection controls, 32 audio unit
+checks and the real 32-call capture pass. Captures are compressed and failed
+attempts retained. Native gameplay is unchanged; complete sound acceptance
+and broader independent flight histories remain open. See [word lifecycle evidence](analysis/native_original_audio_word_lifecycle_milestone.md).
+
 Complete mission-five message timing (2026-10-10): both independent runs obey
 original elapsed/countdown, full text, delay/redraw and colour-cache rules through
 all 13,762 real transitions, retaining 12 duplicates and 1,129 paused periods.

@@ -77,7 +77,12 @@ def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None, 
     assert sha(probe.read_bytes()) == manifest['observer_include_sha256']
     generated_path = Path(manifest['compile'][-2])
     assert sha(generated_path.read_bytes()) == manifest['probe_source_sha256']
-    assert generated_path.read_text() == observer_source((SOURCE / 'sources/src/audio.c').read_text(), probe.read_text())
+    word_probe = None
+    if 'word_state_include_sha256' in manifest:
+        word_path = ROOT / 'tools/native/original_audio_word_probe.inc'
+        assert sha(word_path.read_bytes()) == manifest['word_state_include_sha256']
+        word_probe = word_path.read_text()
+    assert generated_path.read_text() == observer_source((SOURCE / 'sources/src/audio.c').read_text(), probe.read_text(), word_probe)
     assert execution(observed) == execution(original), 'Observer changed original execution'
     for name in ('state.bin', 'chip.bin', 'slow.bin'):
         assert recorded_bytes(capture, name) == recorded_bytes(baseline, name), name

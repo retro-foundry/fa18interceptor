@@ -22,7 +22,7 @@ def sha(path):
         return hashlib.file_digest(file, 'sha256').hexdigest()
 
 
-def observer_source(original, probe):
+def observer_source(original, probe, word_probe=None):
     declaration = 'static void newsample(int nr, sample8_t sample)'
     assert original.count(declaration) == 1
     modified = original.replace(declaration, probe + '\n' + declaration)
@@ -39,15 +39,28 @@ def observer_source(original, probe):
         'cdp->dat2 = cdp->dat;\n\t\tfa18_audio_dat2_addr[nr] = fa18_audio_dat_addr[nr];')
     declaration = 'void AUDxDAT_addr(int nr, uae_u16 v, uaecptr addr)\n{'
     assert modified.count(declaration) == 1
-    return modified.replace(declaration, declaration + '\n\tfa18_audio_dat_addr[nr] = addr;')
+    modified = modified.replace(declaration, declaration + '\n\tfa18_audio_dat_addr[nr] = addr;')
+    if word_probe is not None:
+        modified = modified.replace(probe, probe + '\n' + word_probe, 1)
+        replacements = (
+            ('uaecptr p = cdp->pt;', 'uaecptr p = cdp->pt;\n\tfa18_audio_word_observe(nr, 1, p, reset);'),
+            ('fa18_audio_dat_addr[nr] = addr;', 'fa18_audio_dat_addr[nr] = addr;\n\tfa18_audio_word_observe(nr, 2, addr, v);'),
+            ('cdp->dat_written = false;\n}\n\nvoid AUDxDAT_addr', 'cdp->dat_written = false;\n\tfa18_audio_word_observe(nr, 3, fa18_audio_dat_addr[nr], v >> 8);\n}\n\nvoid AUDxDAT_addr'),
+            ('cdp->len = v;', 'cdp->len = v;\n\tfa18_audio_word_observe(nr, 4, 0xffffffff, v);'))
+        for before, after in replacements:
+            assert modified.count(before) == 1, f'Word observer source site changed: {before}'
+            modified = modified.replace(before, after)
+    return modified
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-audio/sample-probe-engine')
     parser.add_argument('--rebuild', action='store_true')
+    parser.add_argument('--word-state', action='store_true', help='also observe actual pointer/length word lifecycle in a separate DLL')
     args = parser.parse_args()
     work = args.out.resolve()
+    assert not args.word_state or work != (ROOT / 'build/native-audio/sample-probe-engine').resolve(), 'Word observer requires a separate --out; preserve the existing sample observer'
     # The only source copy, object and DLL this tool writes belong to its
     # explicit diagnostic output. No Makefile all/copy target is invoked.
     assert work != SOURCE and work != BASELINE and not SOURCE.is_relative_to(work)
@@ -57,7 +70,8 @@ def main():
     (work / 'system').mkdir(exist_ok=True)
     original = SOURCE / 'sources/src/audio.c'
     probe = ROOT / 'tools/native/original_audio_sample_probe.inc'
-    generated = observer_source(original.read_text(), probe.read_text())
+    word_probe = ROOT / 'tools/native/original_audio_word_probe.inc' if args.word_state else None
+    generated = observer_source(original.read_text(), probe.read_text(), word_probe.read_text() if word_probe else None)
     copy, object_file, core = work / 'audio.c', work / 'audio.o', work / 'system/ami9000.dll'
     manifest_path = work / 'build.json'
     prior = json.loads(manifest_path.read_text()) if manifest_path.exists() else None
@@ -104,6 +118,11 @@ def main():
         compile=compile_command, link=link_command, record_bytes=20, ring_records=65536,
         timing_scope='newsample service cycle/beam; ordered consumed bytes. Not independently reconstructed logical mixer time.')
     manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+    if word_probe:
+        manifest.update(word_state_include_sha256=sha(word_probe), word_state_record_bytes=38,
+                        word_state_ring_records=65536,
+                        word_state_scope='Actual getpt, incoming DAT, processed DAT and LEN writes; original execution/PCM preservation required')
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
     print(f'{"Reused verified" if reusable else "Built isolated"} sample observer: {core}')
 
 

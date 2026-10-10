@@ -1,5 +1,11 @@
 # Actual original audio endpoints — 2026-10-10
 
+Later [live word-lifecycle evidence](native_original_audio_word_lifecycle_milestone.md)
+traces all 18,656 running word transitions through call 94. The channel-1
+pointer reset and remaining-length reload now explain the observed boundary;
+the origin of its initial live pointer/count relationship remains unverified.
+These independently stopped endpoints remain unchanged.
+
 Later [complete sample-consumption evidence](native_original_audio_sample_use_milestone.md)
 records both bytes of the channel-1 zero word and confirms no channel-2
 prefetch bytes are emitted. The earlier endpoint/startup results below

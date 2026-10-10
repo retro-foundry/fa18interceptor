@@ -8,11 +8,14 @@ import ctypes as C
 import hashlib
 import json
 import struct
+from pathlib import Path
 
 MAGIC = b'FA18_ORIGINAL_AUDIO_SAMPLES_V1\n'
 FRAME = struct.Struct('<IIQQQ')
 SAMPLE = struct.Struct('<QIHbBHH')
 FOOTER = struct.Struct('<IQ')
+WORD_MAGIC = b'FA18_ORIGINAL_AUDIO_WORD_STATES_V1\n'
+WORD = struct.Struct('<QIIIHHHHHHBBBBH')
 CYCLE_UNIT = 512  # sysdeps.h; e9k_debug_read_cycle_count returns get_cycles()/512.
 
 
@@ -57,6 +60,26 @@ class AudioSamplesWriter:
         self.previous_cycle = engine.core.e9k_debug_read_cycle_count()
         self.write(MAGIC)
         self.enable(1)
+        self.word_file = None
+        if 'word_state_include_sha256' in self.manifest:
+            if self.manifest['word_state_record_bytes'] != WORD.size or self.manifest['word_state_ring_records'] != 65536:
+                raise RuntimeError('Reference word-state observer ABI changed')
+            self.word_enable = engine.bind('e9k_debug_audio_word_enable', None, C.c_int)
+            self.word_take = engine.bind('e9k_debug_audio_word_take', C.c_uint, C.POINTER(C.c_void_p))
+            if engine.bind('e9k_debug_audio_word_record_size', C.c_uint)() != WORD.size:
+                raise RuntimeError('Reference word-state record size differs')
+            self.word_file = Path(file.name).with_name('audio_word_states.bin').open('wb')
+            self.word_digest = hashlib.sha256()
+            self.word_total = self.word_max = 0
+            self.write_word(WORD_MAGIC)
+            self.word_enable(1)
+
+    def write_word(self, data):
+        if self.engine.audio_capture_bytes + len(data) > self.engine.audio_capture_budget:
+            raise RuntimeError('Original word-state capture exceeds shared budget')
+        self.word_file.write(data)
+        self.word_digest.update(data)
+        self.engine.audio_capture_bytes += len(data)
 
     def write(self, data):
         if self.engine.audio_capture_bytes + len(data) > self.engine.audio_capture_budget:
@@ -77,6 +100,21 @@ class AudioSamplesWriter:
             self.unknown += address == 0xffffffff
         self.write(b'\1' + FRAME.pack(call, count, self.previous_cycle, after, self.engine.audio_capture_frames))
         self.write(payload)
+        if self.word_file:
+            word_pointer = C.c_void_p()
+            words = self.word_take(C.byref(word_pointer))
+            if words > 65536 or (words and not word_pointer.value):
+                raise RuntimeError('Reference word-state overflow or missing buffer')
+            word_data = C.string_at(word_pointer, words * WORD.size) if words else b''
+            previous = self.previous_cycle * CYCLE_UNIT
+            for row in WORD.iter_unpack(word_data):
+                if not previous <= row[0] < (after+1)*CYCLE_UNIT or row[10] > 3 or row[12] not in (1,2,3,4):
+                    raise RuntimeError('Invalid word-state cycle/channel/kind')
+                previous = row[0]
+            self.write_word(b'\1' + FRAME.pack(call, words, self.previous_cycle, after, self.engine.audio_capture_frames))
+            self.write_word(word_data)
+            self.word_total += words
+            self.word_max = max(self.word_max, words)
         self.previous_cycle = after
         self.calls += 1
         self.samples += count
@@ -84,10 +122,15 @@ class AudioSamplesWriter:
     def finish(self):
         try:
             self.write(b'\0' + FOOTER.pack(self.calls, self.samples))
+            if self.word_file:
+                self.write_word(b'\0' + FOOTER.pack(self.calls, self.word_total))
         finally:
             self.enable(0)
             self.file.close()
-        return dict(file='audio_samples.bin', sha256=self.digest.hexdigest(), calls=self.calls,
+            if self.word_file:
+                self.word_enable(0)
+                self.word_file.close()
+        report = dict(file='audio_samples.bin', sha256=self.digest.hexdigest(), calls=self.calls,
             consumed_bytes=self.samples, bytes_by_channel=self.channels,
             unknown_initial_provenance_bytes=self.unknown, record_bytes=SAMPLE.size,
             boundary_cycle_unit=CYCLE_UNIT,
@@ -97,3 +140,8 @@ class AudioSamplesWriter:
             scope='Every newsample byte during requested ordinary replay calls; service cycle/beam and actual '
                 'word provenance. Initial restored pipeline provenance is explicit unknown. Paired original '
                 'PCM/execution preservation is mandatory; native sound acceptance remains separate.')
+        if self.word_file:
+            report['word_states'] = dict(file='audio_word_states.bin', sha256=self.word_digest.hexdigest(),
+                calls=self.calls, records=self.word_total, max_records_per_call=self.word_max,
+                record_bytes=WORD.size, ring_records=65536)
+        return report

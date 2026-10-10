@@ -1,0 +1,916 @@
+{
+  "date": "2026-10-10",
+  "production_gameplay_changed": false,
+  "runner": {
+    "path": "build/native/fa18_native.exe",
+    "sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+    "bytes": 2446336
+  },
+  "original_reference": {
+    "path": "tools/engine9000/e9k-debugger/system/ami9000.dll",
+    "sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+    "bytes": 19902976
+  },
+  "preserved_sample_observer": {
+    "path": "build/native-audio/sample-probe-engine/system/ami9000.dll",
+    "sha256": "a4715a3cbe58e89c2f9de79aef7b0e194efb6dc50830305d54af1def81f2a0f7",
+    "bytes": 20262400
+  },
+  "word_lifecycle": {
+    "accepted_evidence": true,
+    "preserved_execution": {
+      "scope": "All observed original consumed sample bytes and actual word provenance; complete PCM, DMA, event log and execution preserved. Service timestamps are not an independent mixer-time reconstruction. Native onset/handoff/waveform remains open.",
+      "replay_calls": 94,
+      "stereo_pcm_frames": 82908,
+      "consumed_bytes": 37311,
+      "bytes_by_channel": [
+        18656,
+        18655,
+        0,
+        0
+      ],
+      "actual_fetch_word_differences": 0,
+      "explicit_initial_unknown_provenance": [
+        {
+          "index": 0,
+          "call": 1,
+          "cycle": 422048186368,
+          "address": 4294967295,
+          "word": 1282,
+          "value": 2,
+          "channel": 0,
+          "state": 3,
+          "beam": [
+            22,
+            4
+          ]
+        },
+        {
+          "index": 1,
+          "call": 1,
+          "cycle": 422048227328,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            102,
+            4
+          ]
+        },
+        {
+          "index": 3,
+          "call": 1,
+          "cycle": 422048410624,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 3,
+          "beam": [
+            6,
+            6
+          ]
+        }
+      ],
+      "first_samples_by_channel": [
+        {
+          "index": 0,
+          "call": 1,
+          "cycle": 422048186368,
+          "address": 4294967295,
+          "word": 1282,
+          "value": 2,
+          "channel": 0,
+          "state": 3,
+          "beam": [
+            22,
+            4
+          ]
+        },
+        {
+          "index": 1,
+          "call": 1,
+          "cycle": 422048227328,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            102,
+            4
+          ]
+        },
+        null,
+        null
+      ],
+      "authority": {
+        "core_sha256": "978f2e54205f695803018829724e3a25e43e3b8a1646dc1d4717ca2dae89a4ac",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+      },
+      "unmodified_authority": {
+        "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+      },
+      "observer_manifest_sha256": "1c60ebd95cda25da14f8fb8ba3cb77c4c3d0dbd6581215e489a3bf72c4532404",
+      "sample_stream_sha256": "4c6952cd479377cc60945a9b57c04439687b5a020bffe6f3e4cc17267f72db21",
+      "sample_stream_record_bytes": 20,
+      "pcm_sha256": "068bf398d6a3dd11819dd742fd00926accd3332c8602047328a7805ed71fa14b",
+      "dma_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+      "event_log_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+      "source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+      "fetch_content_witness": "build\\native-audio\\dma-complete-demo",
+      "fetch_witness_scope": "Same-channel address/word contents from actual DMA. Consumed-byte ordering is observed directly; this lookup does not infer DMA delivery time. A wider recording is explicit when supplied.",
+      "unchanged_snapshot_fields": true,
+      "unchanged_complete_ram_state": true,
+      "unchanged_video": true,
+      "all_pcm_chunks_and_samples_exact": true,
+      "actual_dma_stream_exact": true,
+      "max_samples_per_call": 398,
+      "native_runtime_changed": false,
+      "native_waveform_accepted": false,
+      "zero_word_samples": [
+        {
+          "index": 37265,
+          "call": 94,
+          "cycle": 425463398400,
+          "address": 154226,
+          "word": 0,
+          "value": 0,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            185,
+            279
+          ]
+        },
+        {
+          "index": 37267,
+          "call": 94,
+          "cycle": 425463581696,
+          "address": 154226,
+          "word": 0,
+          "value": 0,
+          "channel": 1,
+          "state": 3,
+          "beam": [
+            89,
+            281
+          ]
+        }
+      ],
+      "zero_word_classification": "Both bytes emitted during existing channel-1 playback",
+      "channel2_zero_prefetch_emitted_bytes": 0
+    },
+    "word_state_descriptor": {
+      "file": "audio_word_states.bin",
+      "sha256": "8dc8f9d79e4d9c1218cad15fa9ea2de9d9f15397109b1bf0db11ec388d7b690b",
+      "calls": 94,
+      "records": 55970,
+      "max_records_per_call": 599,
+      "record_bytes": 38,
+      "ring_records": 65536
+    },
+    "actual_running_counter_events_checked": 18656,
+    "initial_live_pointer_budgets": [
+      {
+        "channel": 0,
+        "first_actual_read": {
+          "call": 1,
+          "cycle": 422048067584,
+          "pt": 135612,
+          "lc": 121456,
+          "address": 135612,
+          "length": 16385,
+          "remaining": 9307,
+          "dat": 1282,
+          "dat2": 1282,
+          "beam": [
+            17,
+            3
+          ],
+          "channel": 0,
+          "state": 2,
+          "kind": 1,
+          "flags": 0,
+          "value": 0,
+          "pcm_end": 882
+        },
+        "reads_through_first_reset": 9307,
+        "projected_last_read": 154224,
+        "declared_last_word": 154224,
+        "actual_reset_read": {
+          "call": 94,
+          "cycle": 425459593216,
+          "pt": 154224,
+          "lc": 121456,
+          "address": 154224,
+          "length": 16385,
+          "remaining": 1,
+          "dat": 1024,
+          "dat2": 1024,
+          "beam": [
+            17,
+            247
+          ],
+          "channel": 0,
+          "state": 2,
+          "kind": 1,
+          "flags": 0,
+          "value": 1,
+          "pcm_end": 82908
+        }
+      },
+      {
+        "channel": 1,
+        "first_actual_read": {
+          "call": 1,
+          "cycle": 422048301056,
+          "pt": 135596,
+          "lc": 121456,
+          "address": 135596,
+          "length": 16385,
+          "remaining": 9316,
+          "dat": 65278,
+          "dat2": 65278,
+          "beam": [
+            19,
+            5
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 1,
+          "flags": 0,
+          "value": 0,
+          "pcm_end": 882
+        },
+        "reads_through_first_reset": 9316,
+        "projected_last_read": 154226,
+        "declared_last_word": 154224,
+        "actual_reset_read": {
+          "call": 94,
+          "cycle": 425463080960,
+          "pt": 154226,
+          "lc": 121456,
+          "address": 154226,
+          "length": 16385,
+          "remaining": 1,
+          "dat": 65020,
+          "dat2": 65020,
+          "beam": [
+            19,
+            277
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 1,
+          "flags": 0,
+          "value": 1,
+          "pcm_end": 82908
+        }
+      }
+    ],
+    "zero_word_lifecycle": [
+      {
+        "call": 94,
+        "cycle": 425463080960,
+        "pt": 154226,
+        "lc": 121456,
+        "address": 154226,
+        "length": 16385,
+        "remaining": 1,
+        "dat": 65020,
+        "dat2": 65020,
+        "beam": [
+          19,
+          277
+        ],
+        "channel": 1,
+        "state": 2,
+        "kind": 1,
+        "flags": 0,
+        "value": 1,
+        "pcm_end": 82908
+      },
+      {
+        "call": 94,
+        "cycle": 425463080960,
+        "pt": 121456,
+        "lc": 121456,
+        "address": 154226,
+        "length": 16385,
+        "remaining": 1,
+        "dat": 65020,
+        "dat2": 65020,
+        "beam": [
+          19,
+          277
+        ],
+        "channel": 1,
+        "state": 2,
+        "kind": 2,
+        "flags": 0,
+        "value": 0,
+        "pcm_end": 82908
+      },
+      {
+        "call": 94,
+        "cycle": 425463081472,
+        "pt": 121456,
+        "lc": 121456,
+        "address": 154226,
+        "length": 16385,
+        "remaining": 16385,
+        "dat": 0,
+        "dat2": 65020,
+        "beam": [
+          20,
+          277
+        ],
+        "channel": 1,
+        "state": 2,
+        "kind": 3,
+        "flags": 8,
+        "value": 0,
+        "pcm_end": 82908
+      }
+    ],
+    "preceding_counter_events": [
+      {
+        "call": 94,
+        "cycle": 425462035456,
+        "pt": 154222,
+        "lc": 121456,
+        "address": 154220,
+        "length": 16385,
+        "remaining": 3,
+        "dat": 1798,
+        "dat2": 2056,
+        "beam": [
+          20,
+          268
+        ],
+        "channel": 1,
+        "state": 2,
+        "kind": 3,
+        "flags": 0,
+        "value": 1798,
+        "pcm_end": 82908
+      },
+      {
+        "call": 94,
+        "cycle": 425462384128,
+        "pt": 154224,
+        "lc": 121456,
+        "address": 154222,
+        "length": 16385,
+        "remaining": 2,
+        "dat": 1024,
+        "dat2": 1798,
+        "beam": [
+          20,
+          271
+        ],
+        "channel": 1,
+        "state": 2,
+        "kind": 3,
+        "flags": 0,
+        "value": 1024,
+        "pcm_end": 82908
+      },
+      {
+        "call": 94,
+        "cycle": 425462732800,
+        "pt": 154226,
+        "lc": 121456,
+        "address": 154224,
+        "length": 16385,
+        "remaining": 1,
+        "dat": 65020,
+        "dat2": 1024,
+        "beam": [
+          20,
+          274
+        ],
+        "channel": 1,
+        "state": 2,
+        "kind": 3,
+        "flags": 0,
+        "value": 65020,
+        "pcm_end": 82908
+      }
+    ],
+    "following_pointer_read": {
+      "call": 94,
+      "cycle": 425463429632,
+      "pt": 121456,
+      "lc": 121456,
+      "address": 121456,
+      "length": 16385,
+      "remaining": 16385,
+      "dat": 0,
+      "dat2": 0,
+      "beam": [
+        19,
+        280
+      ],
+      "channel": 1,
+      "state": 2,
+      "kind": 1,
+      "flags": 0,
+      "value": 0,
+      "pcm_end": 82908
+    },
+    "source_rules": [
+      "audio_getpt",
+      "AUDxDAT_addr",
+      "event_audxdat_func"
+    ],
+    "scope": "Actual warm-reference last-word request, delivered zero and remaining-length reload. Full ordinary PCM/DMA/sample execution preserved. This does not accept native waveform timing or infer a cold-start padding/delay rule."
+  },
+  "guards": {
+    "real_stream_sha256": "8dc8f9d79e4d9c1218cad15fa9ea2de9d9f15397109b1bf0db11ec388d7b690b",
+    "actual_records": 55970,
+    "actual_running_counter_events": 18656,
+    "rejection_controls": [
+      {
+        "name": "truncated_footer",
+        "rejected": true,
+        "reason": "Truncated original audio DMA stream"
+      },
+      {
+        "name": "trailing_data",
+        "rejected": true,
+        "reason": "incomplete word-state footer"
+      },
+      {
+        "name": "missing_call",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "false_footer_count",
+        "rejected": true,
+        "reason": "incomplete word-state footer"
+      },
+      {
+        "name": "changed_pcm_boundary",
+        "rejected": true,
+        "reason": "word/sample replay boundary differs"
+      },
+      {
+        "name": "invalid_channel",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "invalid_beam",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "invalid_kind",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "invalid_flags",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "wrong_pointer_reset",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "wrong_pointer_destination",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "changed_delivered_address",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "changed_counter_reload",
+        "rejected": true,
+        "reason": "('actual counter event differs', {'call': 94, 'cycle': 425463081472, 'pt': 121456, 'lc': 121456, 'address': 154226, 'length': 16385, 'remaining': 16384, 'dat': 0, 'dat2': 65020, 'beam': [20, 277], 'channel': 1, 'state': 2, 'kind': 3, 'flags': 8, 'value': 0, 'pcm_end': 82908})"
+      },
+      {
+        "name": "changed_counter_state",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "changed_zero_word",
+        "rejected": true,
+        "reason": ""
+      },
+      {
+        "name": "missing_pointer_read",
+        "rejected": true,
+        "reason": "incoming DMA word has no actual pointer read"
+      },
+      {
+        "name": "missing_counter_event",
+        "rejected": true,
+        "reason": "new word arrived before the previous counter event"
+      }
+    ],
+    "controls_passed": 17,
+    "scope": "Mutations of the complete real 94-call word stream and live word lifecycle; local binary digests are recomputed. No synthetic original execution."
+  },
+  "preserved_full_prefix": {
+    "scope": "All stopped-replay PCM, chunks, events and actual DMA words equal the complete recording prefix. Final serialized hardware describes the actual post-call endpoint; requested restore hardware is an earlier context.",
+    "calls": 94,
+    "stereo_frames": 82908,
+    "actual_dma_words": 18654,
+    "authority": {
+      "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+      "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+      "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+      "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+    },
+    "complete_authority": {
+      "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+      "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+      "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+      "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+    },
+    "prefix_snapshot_sha256": "a1afedfbafd2099f846a0dde2679efc17ce2460ac93006aff3e7afdc499705a9",
+    "complete_snapshot_sha256": "9baa0c609e44e422ef88e40114244bcb4c1fc04f0ef711220575389800f91a00",
+    "endpoint_hardware": {
+      "cia_pra": 192,
+      "cia_ddra": 3,
+      "led_pin_on": true,
+      "channels": [
+        {
+          "state": 2,
+          "volume": 31,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 16385,
+          "remaining_words": 16364,
+          "period": 358,
+          "data_word": 1035,
+          "buffer": 121456,
+          "cursor": 121500,
+          "next_cycles": 152576,
+          "drhpos": 167
+        },
+        {
+          "state": 2,
+          "volume": 31,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 16385,
+          "remaining_words": 16373,
+          "period": 358,
+          "data_word": 64249,
+          "buffer": 121456,
+          "cursor": 121480,
+          "next_cycles": 10240,
+          "drhpos": 116
+        },
+        {
+          "state": 0,
+          "volume": 0,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 0,
+          "remaining_words": 0,
+          "period": 124,
+          "data_word": 0,
+          "buffer": 0,
+          "cursor": 0,
+          "next_cycles": 4294967295,
+          "drhpos": 0
+        },
+        {
+          "state": 0,
+          "volume": 2,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 16,
+          "remaining_words": 5,
+          "period": 300,
+          "data_word": 33410,
+          "buffer": 41952,
+          "cursor": 41976,
+          "next_cycles": 4294967295,
+          "drhpos": 51
+        }
+      ]
+    },
+    "endpoint_voice_boundary": {
+      "kind": "boundary",
+      "call": 94,
+      "sample_frames": 82908,
+      "voices": [
+        {
+          "address": 12613368,
+          "record": "00025a788000801201660000003f00000000000000000000000000000000000000c07c4000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "address": 12613432,
+          "record": "00025a788000801201660000003f00000000000000000000000000000000000000c07c8000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "address": 0,
+          "record": null
+        },
+        {
+          "address": 0,
+          "record": null
+        }
+      ],
+      "master_volume": "001f0000",
+      "voice_layout": {
+        "hunk_74": 12910120,
+        "hunk_75": 12910392,
+        "hunk_76": 12910808,
+        "voice_slots": 12910136,
+        "master_volume": 12910374,
+        "verified_hunk_76_bytes": 420,
+        "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+      },
+      "led_states": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "prefix_pcm_sha256": "068bf398d6a3dd11819dd742fd00926accd3332c8602047328a7805ed71fa14b",
+    "prefix_events_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+    "prefix_dma_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+    "completed_dma_grid_is_not_live_endpoint": true,
+    "native_waveform_accepted": false
+  },
+  "tests": {
+    "sample_unit_checks": 12,
+    "prefix_unit_checks": 7,
+    "dma_unit_checks": 13,
+    "real_capture": "Real 32-call original PCM/event/LED/voice/DMA state and PCM preservation passed",
+    "compressed_revalidation": true
+  },
+  "artifacts": {
+    "scripts/original_audio_samples.py": {
+      "path": "scripts/original_audio_samples.py",
+      "sha256": "77277d885438a4549b96ef61ce7ebfcf108bdbeaedf775ce0c9eb7dde61511ef",
+      "bytes": 7938
+    },
+    "tools/native/build_original_audio_probe.py": {
+      "path": "tools/native/build_original_audio_probe.py",
+      "sha256": "f90414fde6863cb14782bf9083d2d53ebda91318b2eb7ce14747b8ebcf83701e",
+      "bytes": 7646
+    },
+    "tools/native/check_original_audio_samples.py": {
+      "path": "tools/native/check_original_audio_samples.py",
+      "sha256": "6bbba3a23654a192aa169323e22f6703eda18dad61983049e09080d90253425b",
+      "bytes": 14645
+    },
+    "tools/native/check_original_audio_word_states.py": {
+      "path": "tools/native/check_original_audio_word_states.py",
+      "sha256": "2794726631fd84cad79c49ecf2b0dae480d00730e08dae02f43e9a38dddc1eaf",
+      "bytes": 8290
+    },
+    "tools/native/test_original_audio_word_states.py": {
+      "path": "tools/native/test_original_audio_word_states.py",
+      "sha256": "6e44b26eb8e1b690dedcf37ec0f7e1c2eba95193e6d9359e5e4186c0716be4f8",
+      "bytes": 4291
+    },
+    "tools/native/test_original_audio_samples.py": {
+      "path": "tools/native/test_original_audio_samples.py",
+      "sha256": "57057534c2fa420c0a5326c97711199a71a54106d39ec7a6d66e1b6452e79cc3",
+      "bytes": 6447
+    },
+    "tools/native/original_audio_word_probe.inc": {
+      "path": "tools/native/original_audio_word_probe.inc",
+      "sha256": "1852ef8047b57585894a4f476797f078f629082ab29c07833bc62358e8cc766a",
+      "bytes": 1792
+    },
+    "build/native-audio/word-state-loop-zero-complete/comparison.json": {
+      "path": "build/native-audio/word-state-loop-zero-complete/comparison.json",
+      "sha256": "f0a6ca73beb379baf1bbc24e39a5356db216642768d6400c5727d415b3278d84",
+      "bytes": 10583
+    },
+    "build/native-audio/word-state-loop-zero-complete/guards.json": {
+      "path": "build/native-audio/word-state-loop-zero-complete/guards.json",
+      "sha256": "c645c16d3b04ac11e230d2469846b84f1f22f1ebd69ca13a04b2eefe21cefb1c",
+      "bytes": 2528
+    },
+    "build/native-audio/word-state-loop-zero-complete/retention.json": {
+      "path": "build/native-audio/word-state-loop-zero-complete/retention.json",
+      "sha256": "4dffe0985a106e23084d9711996c7b7d3d072216fe1591adc9ba630dffb1ad44",
+      "bytes": 2839
+    },
+    "build/native-audio/word-state-loop-zero-complete/validation_attempts.json": {
+      "path": "build/native-audio/word-state-loop-zero-complete/validation_attempts.json",
+      "sha256": "5dae4311bfb056b26e0dad799291984ab0eab6f873488e96c2f52edca191523b",
+      "bytes": 697
+    },
+    "build/native-audio/word-state-loop-zero-complete/snapshot.json": {
+      "path": "build/native-audio/word-state-loop-zero-complete/snapshot.json",
+      "sha256": "5c0760d6b0306067cfd5d7f8db1a906aaf31e5c6d493c9a84bccd72cfd88a456",
+      "bytes": 53650
+    },
+    "build/native-audio/word-state-loop-zero-baseline/snapshot.json": {
+      "path": "build/native-audio/word-state-loop-zero-baseline/snapshot.json",
+      "sha256": "a1afedfbafd2099f846a0dde2679efc17ce2460ac93006aff3e7afdc499705a9",
+      "bytes": 9976
+    },
+    "build/native-audio/word-state-loop-zero-baseline/prefix-comparison.json": {
+      "path": "build/native-audio/word-state-loop-zero-baseline/prefix-comparison.json",
+      "sha256": "6d743834d93e73a66399bdc215ce0bab42f38fd18b1d15f348467a7323babc95",
+      "bytes": 4478
+    },
+    "build/native-audio/word-state-loop-zero-baseline/retention.json": {
+      "path": "build/native-audio/word-state-loop-zero-baseline/retention.json",
+      "sha256": "2d233edd41412399df905aef0216e7056e29664922d0ed6b6388dd9335c83e75",
+      "bytes": 2224
+    },
+    "build/native-audio/word-state-probe-engine/build.json": {
+      "path": "build/native-audio/word-state-probe-engine/build.json",
+      "sha256": "1c60ebd95cda25da14f8fb8ba3cb77c4c3d0dbd6581215e489a3bf72c4532404",
+      "bytes": 40223
+    },
+    "build/native-audio/word-state-probe-engine/audio.c": {
+      "path": "build/native-audio/word-state-probe-engine/audio.c",
+      "sha256": "a4e6f3db692c4f168950e4467a9f30c81dc9154a08578dda53be9a3e5e2aece9",
+      "bytes": 88222
+    },
+    "build/native-audio/word-state-probe-engine/audio.o": {
+      "path": "build/native-audio/word-state-probe-engine/audio.o",
+      "sha256": "2a6434a7a1b12004df6d2c945d59d4f841080726e3ca7a75426f3a689870fe53",
+      "bytes": 250857
+    },
+    "build/native-audio/word-state-probe-engine/system/ami9000.dll": {
+      "path": "build/native-audio/word-state-probe-engine/system/ami9000.dll",
+      "sha256": "978f2e54205f695803018829724e3a25e43e3b8a1646dc1d4717ca2dae89a4ac",
+      "bytes": 20263424
+    },
+    "build/native-audio/word-state-loop-zero/failure.json": {
+      "path": "build/native-audio/word-state-loop-zero/failure.json",
+      "sha256": "e68129bbad44f56c243906f615bf7f78e30d3b721f8729275f74be9a279ef88f",
+      "bytes": 254
+    },
+    "build/native-audio/sample-probe-engine/build.json": {
+      "path": "build/native-audio/sample-probe-engine/build.json",
+      "sha256": "237cdee040d68c935e3d16d495580a13f65ad433209fdbd2e9d52dd2fda93f31",
+      "bytes": 39907
+    },
+    "tools/engine9000-src/ami9000/sources/src/audio.c": {
+      "path": "tools/engine9000-src/ami9000/sources/src/audio.c",
+      "sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+      "bytes": 84306
+    }
+  },
+  "retention": {
+    "build/native-audio/word-state-loop-zero-complete": {
+      "files": [
+        {
+          "file": "audio_chunks.jsonl.gz",
+          "decoded_sha256": "7410c3de76096e8dccc43d8af42b551e34fa5b351d7863b629545eaa0d7c66a0",
+          "decoded_bytes": 15937,
+          "retained_sha256": "da96397a07e3f3cf54f7d9e8f65eb6b9c04e4bf42ae310b029fa86497eb7d89e",
+          "retained_bytes": 5107
+        },
+        {
+          "file": "audio_dma.bin.gz",
+          "decoded_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+          "decoded_bytes": 340042,
+          "retained_sha256": "8d3a9e18432206a5f5f699859eec83fe8415fe31946c67ada9035d4c78126e70",
+          "retained_bytes": 106552
+        },
+        {
+          "file": "audio_events.jsonl.gz",
+          "decoded_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+          "decoded_bytes": 739405,
+          "retained_sha256": "cf65c345bc6d9c724db15eff56399aaedc81f6b542a38e8db268826180723056",
+          "retained_bytes": 29444
+        },
+        {
+          "file": "audio_samples.bin.gz",
+          "decoded_sha256": "4c6952cd479377cc60945a9b57c04439687b5a020bffe6f3e4cc17267f72db21",
+          "decoded_bytes": 749366,
+          "retained_sha256": "caba3f11faecc21976adf748df48b211339cd1ca1ff408c3e5f6b93c4902a568",
+          "retained_bytes": 320422
+        },
+        {
+          "file": "audio_word_states.bin.gz",
+          "decoded_sha256": "8dc8f9d79e4d9c1218cad15fa9ea2de9d9f15397109b1bf0db11ec388d7b690b",
+          "decoded_bytes": 2130010,
+          "retained_sha256": "8b1e4ba9a95b60fda21063fc19c0236f9f13b7ddc229e8aad859c3e19ca79c07",
+          "retained_bytes": 570518
+        },
+        {
+          "file": "chip.dat.gz",
+          "decoded_sha256": "c0387b6b573a5796c9dec28f0d578bb1d2ba4ee632032c3a989ae3ad24fa66e8",
+          "decoded_bytes": 524288,
+          "retained_sha256": "824d5ea2a9ac6e90f046fa658709ee5ae9da04254d1cdb4458ee6a246a25943f",
+          "retained_bytes": 199471
+        },
+        {
+          "file": "original.wav.gz",
+          "decoded_sha256": "029779d8d91b402dbedc327548d16aeea9519cfb174c83a00223a620a8a779ca",
+          "decoded_bytes": 331676,
+          "retained_sha256": "746fedaa77033fe5a414929a88cc3bf688340af8c79a5979b0bdc40e788a1545",
+          "retained_bytes": 246839
+        },
+        {
+          "file": "slow.dat.gz",
+          "decoded_sha256": "396f461c4900a32b00b2d0bed81b7d911218d08270c983a2deca73f5c5b6bf8a",
+          "decoded_bytes": 524288,
+          "retained_sha256": "dbf44dcaf22d55e1639c103572ac54df840616298aeb9e9bb8b76dbe360d509e",
+          "retained_bytes": 141228
+        },
+        {
+          "file": "state.dat.gz",
+          "decoded_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b",
+          "decoded_bytes": 3145728,
+          "retained_sha256": "ffbf026f2d33a6de02e0eeef5adfd6369b27b72b73d8b9ebf486f7079e4429a8",
+          "retained_bytes": 354487
+        }
+      ],
+      "scope": "Lossless verified compression of paired original capture; passing raw copies removed."
+    },
+    "build/native-audio/word-state-loop-zero-baseline": {
+      "files": [
+        {
+          "file": "audio_chunks.jsonl.gz",
+          "decoded_sha256": "7410c3de76096e8dccc43d8af42b551e34fa5b351d7863b629545eaa0d7c66a0",
+          "decoded_bytes": 15937,
+          "retained_sha256": "da96397a07e3f3cf54f7d9e8f65eb6b9c04e4bf42ae310b029fa86497eb7d89e",
+          "retained_bytes": 5107
+        },
+        {
+          "file": "audio_dma.bin.gz",
+          "decoded_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+          "decoded_bytes": 340042,
+          "retained_sha256": "8d3a9e18432206a5f5f699859eec83fe8415fe31946c67ada9035d4c78126e70",
+          "retained_bytes": 106552
+        },
+        {
+          "file": "audio_events.jsonl.gz",
+          "decoded_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+          "decoded_bytes": 739405,
+          "retained_sha256": "cf65c345bc6d9c724db15eff56399aaedc81f6b542a38e8db268826180723056",
+          "retained_bytes": 29444
+        },
+        {
+          "file": "chip.dat.gz",
+          "decoded_sha256": "c0387b6b573a5796c9dec28f0d578bb1d2ba4ee632032c3a989ae3ad24fa66e8",
+          "decoded_bytes": 524288,
+          "retained_sha256": "824d5ea2a9ac6e90f046fa658709ee5ae9da04254d1cdb4458ee6a246a25943f",
+          "retained_bytes": 199471
+        },
+        {
+          "file": "original.wav.gz",
+          "decoded_sha256": "029779d8d91b402dbedc327548d16aeea9519cfb174c83a00223a620a8a779ca",
+          "decoded_bytes": 331676,
+          "retained_sha256": "746fedaa77033fe5a414929a88cc3bf688340af8c79a5979b0bdc40e788a1545",
+          "retained_bytes": 246839
+        },
+        {
+          "file": "slow.dat.gz",
+          "decoded_sha256": "396f461c4900a32b00b2d0bed81b7d911218d08270c983a2deca73f5c5b6bf8a",
+          "decoded_bytes": 524288,
+          "retained_sha256": "dbf44dcaf22d55e1639c103572ac54df840616298aeb9e9bb8b76dbe360d509e",
+          "retained_bytes": 141228
+        },
+        {
+          "file": "state.dat.gz",
+          "decoded_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b",
+          "decoded_bytes": 3145728,
+          "retained_sha256": "ffbf026f2d33a6de02e0eeef5adfd6369b27b72b73d8b9ebf486f7079e4429a8",
+          "retained_bytes": 354487
+        }
+      ],
+      "scope": "Lossless verified compression of paired original capture; passing raw copies removed."
+    }
+  },
+  "remaining": [
+    "Origin of initial live channel-1 pointer/count relationship",
+    "Native sound onset, sample handoffs and whole recorded filter output",
+    "Broader independent flights and remaining drawing histories"
+  ],
+  "scope": "Original live 94-call word lifecycle and paired execution preservation; no native waveform acceptance or inferred cold-start padding/delay"
+}

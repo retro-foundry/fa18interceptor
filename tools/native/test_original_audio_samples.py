@@ -1,6 +1,7 @@
 """Reject missing/corrupt consumed bytes, time units and observer overflow."""
 import ctypes as C
 import gzip
+import hashlib
 import io
 import json
 from pathlib import Path
@@ -100,6 +101,31 @@ class SampleObserverContract(unittest.TestCase):
             writer.finish()
         self.assertEqual(self.enabled, [1,0])
         self.assertTrue(output.closed)
+
+    def test_word_observer_cleanup_when_sample_footer_exceeds_budget(self):
+        writer, engine, output = self.writer()
+        writer.word_file = io.BytesIO()
+        disabled = []
+        writer.word_enable = disabled.append
+        engine.audio_capture_budget = engine.audio_capture_bytes
+        with self.assertRaisesRegex(RuntimeError, 'budget'):
+            writer.finish()
+        self.assertEqual(disabled, [0])
+        self.assertTrue(writer.word_file.closed)
+
+    def test_word_observer_cleanup_when_word_footer_exceeds_budget(self):
+        writer, engine, output = self.writer()
+        writer.word_file = io.BytesIO()
+        writer.word_total = 0
+        writer.word_digest = hashlib.sha256()
+        disabled = []
+        writer.word_enable = disabled.append
+        engine.audio_capture_budget = engine.audio_capture_bytes+1+FOOTER.size
+        with self.assertRaisesRegex(RuntimeError, 'budget'):
+            writer.finish()
+        self.assertEqual(self.enabled, [1,0])
+        self.assertEqual(disabled, [0])
+        self.assertTrue(output.closed and writer.word_file.closed)
 
     def test_omitted_record_bytes_rejected(self):
         with self.assertRaisesRegex(ValueError, 'Truncated'):

@@ -1,5 +1,12 @@
 # Complete original audio sample consumption - 2026-10-10
 
+Later [live word-lifecycle evidence](native_original_audio_word_lifecycle_milestone.md)
+traces the channel-1 zero through pointer reset and count reload, with complete
+94-call execution preservation. Its boundary follows the first observed live
+pointer/count relationship; the origin of that relationship remains unverified.
+The complete consumed-byte evidence below and native sound acceptance scope
+remain unchanged.
+
 The complete original Demo now retains **5,878,371 actual sample bytes**
 delivered to the original mixer across all **21,069 ordinary replay calls**.
 Complete PCM, DMA, RAM, serialized state, registers, video and event logs
