@@ -1,5 +1,15 @@
 # The C port
 
+Complete Mission Five drawing (2026-10-10): all 13,775 independent flight
+observations and 881,600,000 eight-plane history bytes pass prediction by
+original owners on actual recorded inputs. All 13,763 native body identities,
+117,099 source snapshots and 12,633 paired fresh scenes/owners are checked;
+there is no unexplained history or missing control. Raw scene identity remains
+false: head-up prefix state and sampled-clock HUD changes are assessed through
+their actual original producers. Gameplay is unchanged. Broader unrecorded
+paths and complete native sound matching remain open.
+See [complete drawing evidence](analysis/native_mission_five_complete_drawing_milestone.md).
+
 Original startup mixer (2026-10-10): the independent 5,000-call recording
 keeps all PCM and execution exact. Bounded observation checks 1,059,282 actual
 averages and all 468,007 consumed bytes. Every one of its 4,410,000 PCM frames

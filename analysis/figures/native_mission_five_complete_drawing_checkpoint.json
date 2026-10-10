@@ -1,0 +1,184 @@
+{
+  "scope": "Complete independent successful Mission Five gameplay and eight-plane drawing history assessed through original owners and actual prefix state; raw scene identity is false and explicitly separate.",
+  "complete_drawing_history": {
+    "first": 61797,
+    "last": 75571,
+    "observations": 13775,
+    "complete_trace_and_core_observations": 13775,
+    "strict_scene_bytes": 564224000,
+    "strict_scene_matching": false,
+    "scene_boundaries_matching": 12145,
+    "history_observations": 13775,
+    "history_bytes": 881600000,
+    "headup_writes_predicted": true,
+    "fresh_active_scene_bodies_matching": 12633,
+    "fresh_active_scene_bytes_matching": 258723840,
+    "headup_owner_predictions": {
+      "source": 12633,
+      "native": 12633
+    },
+    "headup_write_mutation_rejections": {
+      "source": {
+        "lost_set": {
+          "plane": 0,
+          "byte": 1491,
+          "bit": 1
+        },
+        "lost_clear": {
+          "plane": 0,
+          "byte": 3909,
+          "bit": 64
+        },
+        "wrong_page_role": true,
+        "omitted_owner": true
+      },
+      "native": {
+        "lost_set": {
+          "plane": 0,
+          "byte": 1491,
+          "bit": 1
+        },
+        "lost_clear": {
+          "plane": 0,
+          "byte": 3909,
+          "bit": 64
+        },
+        "wrong_page_role": true,
+        "omitted_owner": true
+      }
+    },
+    "complete_plane_history_matching": true,
+    "first_unexplained": null,
+    "no_body_dispatches": [
+      63139,
+      63857,
+      66727,
+      67461,
+      67649,
+      71745,
+      72062,
+      72633,
+      72935,
+      73978,
+      74424,
+      74579
+    ],
+    "replayed_original_bodies_matching": 13763,
+    "sealed_native_body_identities_matching": 13763,
+    "sealed_source_snapshots_matching": 117099,
+    "live_owner_predictions": {
+      "source": 12633,
+      "native": 12633
+    },
+    "phase_mutation_rejections": {
+      "counter_increment": true,
+      "premature_marker": true,
+      "marker_coordinate": true,
+      "other_marker": true
+    },
+    "unobservable_phase_mutations": [],
+    "phase_control_failure": null,
+    "retained_control_inputs": {
+      "path": "build\\native-flight\\mission-five-complete-prefix-headup-history\\completed-control-inputs.json.gz",
+      "sha256": "45f515f9157a1f34ef12cd6ab4ecb564befec2cf6526b9d805c48af72d1a45da",
+      "decoded_sha256": "ad7c06f7e7c878763983b0dd415760a206a744d63b5fbb88544d16865b52a9a1"
+    },
+    "paint_mutation_rejections": {
+      "wrong_marker_colour": true,
+      "wrong_head_slope": true,
+      "lost_erase": true
+    },
+    "glyph_mutation_rejections": {
+      "wrong_glyph": true,
+      "wrong_plane": true,
+      "lost_cell_clear": true
+    },
+    "source_omission_first_rejections": {
+      "headup": 61798,
+      "panel": 61814,
+      "radar": 61814,
+      "message": 61957
+    },
+    "evidence_report_sha256": {
+      "build\\native-flight\\original-mission-five-frame-delta-1800\\report.json": "e7b02306cccd47a02f2bf48fdf777e87808dcec4502367560dae7d823b3c1f29",
+      "build\\native-flight\\mission-five-template-carry-complete-bodies\\report.json": "fe43a05b33786076f3a107e6f5b37c9ae741111d0d5a48bf52d4f5c421db4498",
+      "build\\native-flight\\mission-five-template-carry-message-trace\\report.json": "2217f540dfbd9c1de60e56ec4c4c16343a3367218e9400e7ce705095c9787130",
+      "build\\native-flight\\original-mission-five-touchdown-approach\\report.json": "c2f0f6334adbd521349a88328f74813b4ecfd590c4090a7b6109e4e32dee251a"
+    },
+    "verifier_source_sha256": {
+      "check_complete_cockpit_history.py": "24622a6482fcadd2537ae9f868023ffcdc1cbf241cc47e760dcb291ecb1b06ed",
+      "frame_delta.py": "1dad263b46357e1245ce9bc7556a9efb1fce9b76e181441bee32278132d4069f",
+      "check_original_frame_delta.py": "24e1e63610934bc052fcb8241a646fb36d825beddd4f13dba8fe383fd22c5f1a",
+      "check_qualification_message_cadence.py": "d6423b3582ee233cac4aa5184abfcc6bd70f92ca93a88e88168e1da6695673eb",
+      "check_mission_message_pages.py": "56ab4bb44093e9010afe0b906afcd4584044782a2fccf14b6af09ec3f11d55b8",
+      "assess_mission_radar_cadence.py": "07bb98eeec7472051ca8632b95e4805bfe55486edd3198419c8c3c5b1497e12a",
+      "check_recorded_original_mission_trace.py": "d2cc3b35322e87226f9b4c192bfdd347e876b9f880d76f6285fa722a1a914633",
+      "compare_flight_traces.py": "b0eb6929ad8aa1c385b37082bc057a8f9ca32dda18be3ac06e3f66da5cd9e1f2",
+      "native_frame_body_oracle.c": "4fc9746ed9af76517bab03d1bc29ae60b45419463e9da00df25aee55b2c614be",
+      "native_radar_cadence_oracle.c": "a39e3d4439a4825decd5dfeca05435db462802ea45e41150be2ce98be0f712ea",
+      "native_message_cadence_oracle.c": "937e7c7d915fac929bf74cd3d5cbd2b8400ccdd290773e00f95946b0b7b8972b",
+      "native_panel_frame_oracle.c": "4469e50a3c300f5f95c52f0c5df72e1344325ae2105e25b3fe49e865e67812a1",
+      "native_hud_oracle.c": "020a608e2389eb650b0a135982beaee9bff58885baf4c35f3053c0f80441374a",
+      "native_records_oracle.c": "3b095e966ccd2d73e876d2f5aa09faea103b65686c57464ddf7296eedac0fdf6",
+      "native_headup_owner_oracle.c": "226cd9112cc0c01f5665db6d4885bcc46b0a0c991f863203fa04ae2f9634ee4b",
+      "check_headup_transfer.py": "960190617024eff7008220f1b89aced70ad78976c43768384ec3d0db1bff156d"
+    },
+    "oracle_sha256": {
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_frame_body_oracle.exe": "841a411e3eeb14301817817d24038ca036a74e43216be8960b4ae1898684a2d7",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_radar_cadence_oracle.exe": "68b7e7f76424544deca214fdd60b25e10675296003713682ef08d3b1fbb04064",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_message_cadence_oracle.exe": "b5e5f254adc61ead83b1b884ce5cffdc2de444a0340f793e712eb786fcc321de",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_panel_frame_oracle.exe": "1e32102124c3744df86f3fc6bce240df849a087cd2a92b317e918753cfd27746",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_headup_owner_oracle.exe": "656d3c25fbde8c7f2bc72494de679dd5f9d1d9652538234eef9441fab818ab23"
+    },
+    "runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8",
+    "source_trace_sha256": "c4c339bc882985b9731380624eea411560cc82d95e4562992372eee684163194",
+    "native_trace_sha256": "d8564d5cd71553acac4419383664571aaaff5e36ff0a2b1b3ac4f1cdd81d80cc"
+  },
+  "raw_scene_pixel_identity_accepted": false,
+  "all_observations_predicted": 13775,
+  "all_eight_plane_xor_bytes_predicted": 881600000,
+  "oracle_retention": {
+    "native_frame_body_oracle.exe": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_frame_body_oracle.exe.gz",
+      "decoded_sha256": "841a411e3eeb14301817817d24038ca036a74e43216be8960b4ae1898684a2d7",
+      "encoded_sha256": "4d9138d9acb3aa58e07a7db96e6b0ffd919b435373a28e1e5eb55534d119e001",
+      "stored_bytes": 4985064
+    },
+    "native_radar_cadence_oracle.exe": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_radar_cadence_oracle.exe.gz",
+      "decoded_sha256": "68b7e7f76424544deca214fdd60b25e10675296003713682ef08d3b1fbb04064",
+      "encoded_sha256": "d01bb5763b077840ef4a862848f3474be07f0aa930c8c35c671a7d48cf8431d9",
+      "stored_bytes": 5039987
+    },
+    "native_message_cadence_oracle.exe": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_message_cadence_oracle.exe.gz",
+      "decoded_sha256": "b5e5f254adc61ead83b1b884ce5cffdc2de444a0340f793e712eb786fcc321de",
+      "encoded_sha256": "4d3469c281ecec9237a7bacffb3a099234f2af0709422d925f676b10d7fdcabe",
+      "stored_bytes": 5039513
+    },
+    "native_panel_frame_oracle.exe": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_panel_frame_oracle.exe.gz",
+      "decoded_sha256": "1e32102124c3744df86f3fc6bce240df849a087cd2a92b317e918753cfd27746",
+      "encoded_sha256": "cb8595a8e7a850228baabff9ab01660cc27ac2598e2a39c42a51202203c7bca7",
+      "stored_bytes": 5039400
+    },
+    "native_headup_owner_oracle.exe": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-prefix-headup-history\\native_headup_owner_oracle.exe.gz",
+      "decoded_sha256": "656d3c25fbde8c7f2bc72494de679dd5f9d1d9652538234eef9441fab818ab23",
+      "encoded_sha256": "8e49e8edfe5d9c63d9633de320117ef430aaa4ed2a15b0d5bdc4a8aec8025757",
+      "stored_bytes": 5039722
+    }
+  },
+  "report_sha256": "077459b02e3ce7f9474afcc0fcdfce9ff12606b7a21d3cc64f9912b9fbf725af",
+  "evidence_sha256": {
+    "completed-control-inputs.json.gz": "45f515f9157a1f34ef12cd6ab4ecb564befec2cf6526b9d805c48af72d1a45da",
+    "history-progress.jsonl.gz": "3070b005f2633997316a5b347e46c9d4a5f4c7c84bb6b0fa9780f3535a061371",
+    "native_frame_body_oracle.exe.gz": "4d9138d9acb3aa58e07a7db96e6b0ffd919b435373a28e1e5eb55534d119e001",
+    "native_headup_owner_oracle.exe.gz": "8e49e8edfe5d9c63d9633de320117ef430aaa4ed2a15b0d5bdc4a8aec8025757",
+    "native_message_cadence_oracle.exe.gz": "4d3469c281ecec9237a7bacffb3a099234f2af0709422d925f676b10d7fdcabe",
+    "native_panel_frame_oracle.exe.gz": "cb8595a8e7a850228baabff9ab01660cc27ac2598e2a39c42a51202203c7bca7",
+    "native_radar_cadence_oracle.exe.gz": "d01bb5763b077840ef4a862848f3474be07f0aa930c8c35c671a7d48cf8431d9",
+    "oracle-retention.json": "0cd8b5b30568bad2bbe8cf866e5127fa52eadedfe06cc18876e5cede547c6ce3",
+    "report.json": "077459b02e3ce7f9474afcc0fcdfce9ff12606b7a21d3cc64f9912b9fbf725af"
+  }
+}
