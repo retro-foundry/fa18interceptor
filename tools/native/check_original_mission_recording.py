@@ -21,6 +21,51 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def verified_prefix(path, hashes):
+    report = json.loads((path / 'report.json').read_text())
+    assert report.get('mission_mode', 3) == 3
+    assert report['input_hashes'] == hashes, 'prefix started from different original media'
+    assert report['mission_success'] and report['original_outcome'] == 'success'
+    assert (report['final_mode'], report['final_phase'], report['final_completions']) == (0, 0, 1)
+    assert report['unmodified_replay_exact']
+    for name, key in (('driver.jsonl.gz', 'driver_trace_sha256'),
+                      ('driver.dat.gz', 'driver_final_ram_sha256'),
+                      ('input.fa18in', 'generated_input_sha256'),
+                      ('consumed.fa18in', 'consumed_input_sha256')):
+        data = (path / name).read_bytes()
+        if name.endswith('.gz'):
+            data = gzip.decompress(data)
+        assert digest(data) == report[key], f'prefix changed: {name}'
+    for replay_key, key in (('trace_sha256', 'driver_trace_sha256'),
+                            ('final_ram_sha256', 'driver_final_ram_sha256'),
+                            ('consumed_input_sha256', 'consumed_input_sha256')):
+        assert report['unmodified_replay'][replay_key] == report[key]
+    header, rows = read_trace(path / 'driver.jsonl.gz')
+    assert max(rows) == report['iterations']
+    end = (path / 'input.fa18in').read_text().splitlines()[-1].split()
+    assert end[0] == 'end' and int(end[1]) == max(rows)
+    ram = gzip.decompress((path / 'driver.dat.gz').read_bytes())
+    assert len(ram) == 0x100048, 'incomplete original prefix RAM/register export'
+    assert integer(ram, 0xC45798, 1) == report['final_phase']
+    assert integer(ram, 0xC458A6, 1) == report['final_mode']
+    pilot = integer(ram, 0xC1AB74, 4)
+    assert integer(ram, pilot, 2) and integer(ram, pilot + 21, 1)
+    assert integer(ram, pilot + 56, 2) == report['final_completions']
+    evidence = dict(path=str(path.resolve()), report_sha256=digest((path / 'report.json').read_bytes()),
+                    iterations=max(rows), trace_sha256=report['driver_trace_sha256'],
+                    input_sha256=report['generated_input_sha256'],
+                    consumed_sha256=report['consumed_input_sha256'],
+                    final_ram_sha256=report['driver_final_ram_sha256'])
+    return evidence, header, rows
+
+
+def consumed_keys(path, last):
+    lines = path.read_text().splitlines()
+    assert lines[0] == 'FA18_GAME_INPUT_V1'
+    return [line for line in lines[1:] if line and not line.startswith('end') and
+            int(line.split()[0]) <= last]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path, required=True)
@@ -28,7 +73,12 @@ def main():
     parser.add_argument('--pilot-ticks-per-update', type=int, choices=range(1, 17), default=4,
                         help='validation controller input timing; never changes a game clock')
     parser.add_argument('--patrol-input', action='store_true', help='ordinary approach/landing input without firing')
+    parser.add_argument('--mode', type=int, choices=(3, 4), default=3)
+    parser.add_argument('--source-prefix', type=Path,
+                        help='verified original qualification/mission-three recording required for escort')
     args = parser.parse_args()
+    assert bool(args.source_prefix) == (args.mode == 4), 'escort requires its verified original prefix'
+    assert not (args.mode == 4 and args.patrol_input), 'patrol input belongs to mission three'
     args.out.mkdir(parents=True, exist_ok=True)
     recording = ROOT / 'captures/native/qual_carrier_success/input.fa18in'
     media = (recording, recording.with_name('state.bin'), ROOT / 'local/system/kick13.rom')
@@ -37,26 +87,42 @@ def main():
     assert digest(recording.read_bytes()) == seal['input_sha256'], 'sealed input changed'
     assert digest(recording.with_name('state.bin').read_bytes()) == seal['start_state']['sha256']
     assert digest((ROOT / 'local/system/kick13.rom').read_bytes()) == seal['rom_sha256']
+    prefix = None
+    if args.source_prefix:
+        prefix, prefix_header, prefix_rows = verified_prefix(args.source_prefix, hashes)
+    driver_input = args.source_prefix / 'input.fa18in' if prefix else recording
     env = {k: v for k, v in os.environ.items() if not k.startswith(('FA18_LOOP_', 'FA18_ORIGINAL_PILOT_'))}
     with tempfile.TemporaryDirectory(prefix='original-mission-recording-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         def run(executable, input_path, log_path, trace_path, ram_path, consumed_path, extra_env=None):
-            with log_path.open('w') as log:
-                result = subprocess.run([str(executable), '--state', str(recording.with_name('state.bin')),
-                    '--rom', str(ROOT / 'local/system/kick13.rom'), '--ports', 'off', '--input', str(input_path),
-                    '--to-end', '--frames', '40000', '--game-input-out', str(consumed_path),
-                    '--ram-out', str(ram_path)], cwd=ROOT,
-                    env=dict(env, FA18_LOOP_TRACE=str(trace_path), **(extra_env or {})),
-                    stdout=log, stderr=subprocess.STDOUT, timeout=300)
+            try:
+                with log_path.open('w') as log:
+                    result = subprocess.run([str(executable), '--state', str(recording.with_name('state.bin')),
+                        '--rom', str(ROOT / 'local/system/kick13.rom'), '--ports', 'off', '--input', str(input_path),
+                        '--to-end', '--frames', str(65000 if prefix else 40000), '--game-input-out', str(consumed_path),
+                        '--ram-out', str(ram_path)], cwd=ROOT,
+                        env=dict(env, FA18_LOOP_TRACE=str(trace_path), **(extra_env or {})),
+                        stdout=log, stderr=subprocess.STDOUT, timeout=600 if prefix else 300)
+            except subprocess.TimeoutExpired:
+                for path in (trace_path, ram_path, consumed_path):
+                    if path.exists():
+                        (args.out / (path.name + '.partial.gz')).write_bytes(gzip.compress(path.read_bytes(), mtime=0))
+                (args.out / 'failure.json').write_text(json.dumps(dict(
+                    reason='Original recording timed out; partial data is not accepted evidence',
+                    executable=str(executable), input=str(input_path), mission_mode=args.mode), indent=2) + '\n')
+                subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+                raise
             return result.returncode
         if not args.reuse_driver:
             subprocess.run(['python', 'scripts/build_recomp.py', '--output', 'build/recomp/fa18_original_mission_pilot.exe',
                 '--replace-source', 'port/recomp/loop_input.c=tools/native/original_mission_pilot_loop.c'], cwd=ROOT, check=True)
-            code = run(ROOT / 'build/recomp/fa18_original_mission_pilot.exe', recording, args.out / 'driver.log',
+            code = run(ROOT / 'build/recomp/fa18_original_mission_pilot.exe', driver_input, args.out / 'driver.log',
                 work / 'driver.jsonl', work / 'driver.dat', args.out / 'consumed.fa18in',
                 dict(FA18_ORIGINAL_PILOT_INPUT=str((args.out / 'input.fa18in').resolve()),
                      FA18_ORIGINAL_PILOT_KEYS=str((args.out / 'controller-choices.e9k').resolve()),
                      FA18_ORIGINAL_PILOT_TICKS_PER_UPDATE=str(args.pilot_ticks_per_update),
+                     FA18_ORIGINAL_PILOT_MODE=str(args.mode),
+                     **({'FA18_ORIGINAL_PILOT_PREFIX_END': str(prefix['iterations'])} if prefix else {}),
                      **({'FA18_ORIGINAL_PILOT_PATROL': '1'} if args.patrol_input else {})))
             assert code in (0, 1), f'original pilot process failed: {code}'
             for name in ('driver.jsonl', 'driver.dat'):
@@ -67,44 +133,68 @@ def main():
             ram = (work / 'driver.dat').read_bytes()
             log = (args.out / 'driver.log').read_text()
             preliminary = dict(input_hashes=hashes, driver_returncode=code,
+                mission_mode=args.mode, source_prefix=prefix,
+                driver_executable_sha256=digest((ROOT / 'build/recomp/fa18_original_mission_pilot.exe').read_bytes()),
+                driver_source_sha256=digest((ROOT / 'tools/native/original_mission_pilot_loop.c').read_bytes()),
+                controller_source_sha256=digest((ROOT / 'tools/native/mission_pilot.c').read_bytes()),
                 controller_ticks_per_update=args.pilot_ticks_per_update,
                 patrol_input=args.patrol_input,
                 driver_trace_sha256=digest((work / 'driver.jsonl').read_bytes()),
                 driver_final_ram_sha256=digest(ram), generated_input_sha256=digest((args.out / 'input.fa18in').read_bytes()),
                 consumed_input_sha256=digest((args.out / 'consumed.fa18in').read_bytes()),
                 mission_success=code == 0 and 'complete and menu returned' in log,
-                original_outcome='crash/reset' if 'Original crash/reset outcome' in log else
+                original_outcome='mission failure' if 'Original mission failure outcome' in log else
+                                 'crash/reset' if 'Original crash/reset outcome' in log else
                                  'player destroyed' if 'Original player destroyed' in log else 'success' if code == 0 else 'incomplete',
                 final_phase=integer(ram, 0xC45798, 1), final_mode=integer(ram, 0xC458A6, 1),
                 final_completions=integer(ram, integer(ram, 0xC1AB74, 4) + 56, 2),
                 iterations=max(rows))
+            if preliminary['mission_success']:
+                pilot = integer(ram, 0xC1AB74, 4)
+                assert integer(ram, pilot + 18 + args.mode, 1), 'original did not earn the selected mission grade'
+                assert preliminary['final_completions'] == (2 if prefix else 1)
+                assert (preliminary['final_mode'], preliminary['final_phase']) == (0, 0)
             (args.out / 'report.json').write_text(json.dumps(preliminary, indent=2) + '\n')
             print(f'Original driver recording closed: {max(rows)} boundaries; outcome {preliminary["original_outcome"]}', flush=True)
         report = json.loads((args.out / 'report.json').read_text())
         assert report['input_hashes'] == hashes, 'original media changed'
+        assert report.get('mission_mode', 3) == args.mode, 'recording belongs to a different mission'
+        assert report.get('source_prefix') == prefix, 'recording belongs to a different prefix'
         data = gzip.decompress((args.out / 'driver.jsonl.gz').read_bytes())
         assert digest(data) == report['driver_trace_sha256']
         assert digest(gzip.decompress((args.out / 'driver.dat.gz').read_bytes())) == report['driver_final_ram_sha256']
         assert digest((args.out / 'input.fa18in').read_bytes()) == report['generated_input_sha256']
         assert digest((args.out / 'consumed.fa18in').read_bytes()) == report['consumed_input_sha256']
-        _, rows = read_trace(args.out / 'driver.jsonl.gz')
+        header, rows = read_trace(args.out / 'driver.jsonl.gz')
+        if prefix:
+            assert header == prefix_header, 'prefix trace contract changed'
+            assert {i: r for i, r in rows.items() if i <= prefix['iterations']} == prefix_rows, 'original prefix execution changed'
+            assert consumed_keys(args.out / 'consumed.fa18in', prefix['iterations']) == consumed_keys(
+                args.source_prefix / 'consumed.fa18in', prefix['iterations']), 'original prefix consumed keys changed'
+            report['source_prefix_execution_exact'] = True
         result = run(ROOT / 'build/recomp/fa18_recomp.exe', args.out / 'input.fa18in', args.out / 'replay.log',
             work / 'replay.jsonl', work / 'replay.dat', work / 'replay-consumed.fa18in')
         assert result == 0, 'unmodified original replay did not complete'
         replay_trace = (work / 'replay.jsonl').read_bytes()
         replay_ram = (work / 'replay.dat').read_bytes()
         report['unmodified_replay'] = dict(trace_sha256=digest(replay_trace), final_ram_sha256=digest(replay_ram),
+            executable_sha256=digest((ROOT / 'build/recomp/fa18_recomp.exe').read_bytes()),
             consumed_input_sha256=digest((work / 'replay-consumed.fa18in').read_bytes()))
         report['unmodified_replay_exact'] = (
             report['unmodified_replay']['trace_sha256'] == report['driver_trace_sha256'] and
             report['unmodified_replay']['final_ram_sha256'] == report['driver_final_ram_sha256'] and
             report['unmodified_replay']['consumed_input_sha256'] == report['consumed_input_sha256'])
-        starts = [i for i, r in rows.items() if number(r, 'mode') == 3 and
+        starts = [i for i, r in rows.items() if number(r, 'mode') == args.mode and
                   number(r, 'stage') == 0xC10D8A and number(r, 'game_tick') == 1]
-        report['mission_three_flight_start'] = starts[0] if starts else None
+        report['mission_flight_start'] = starts[0] if starts else None
+        if args.mode == 3:
+            report['mission_three_flight_start'] = report['mission_flight_start']
         report['scope'] = ('Physical-key original recording, independently replayed without the validation pilot. '
                            'Failed route outcomes are preserved. Native whole-flight comparison remains separate.')
         (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
+        if not report['unmodified_replay_exact']:
+            for name in ('replay.jsonl', 'replay.dat', 'replay-consumed.fa18in'):
+                (args.out / (name + '.gz')).write_bytes(gzip.compress((work / name).read_bytes(), mtime=0))
         assert report['unmodified_replay_exact'], 'pilot adapter changed original execution beyond its recorded keys'
         print(f'{len(rows)} complete original boundaries and consumed keys reproduce exactly without the pilot; '
               f'mission success {report["mission_success"]}', flush=True)

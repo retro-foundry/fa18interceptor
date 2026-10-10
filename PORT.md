@@ -1,5 +1,13 @@
 # The C port
 
+Earned original escort recording (2026-10-10): qualification and the complete
+first-mission prefix reproduce exactly before escort. All 44,458 observations,
+final RAM and consumed controls match an independent unmodified replay. The
+route ends in the original FE failure; it earns no escort grade. Eight prefix
+guards and the unchanged 4,967-observation assessment pass. Native escort
+comparison/successful coverage and sound timing remain open. See [escort
+recording evidence](analysis/native_earned_escort_recording_milestone.md).
+
 Visible final combat/cameras (2026-10-10): all 21,550 presentations and
 all 14 source camera modes pass with sound and complete headless PCM/RAM/
 pixels/save/counter equality. Maximum frame work is 17.7416 ms; none exceed
