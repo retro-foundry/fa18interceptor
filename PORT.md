@@ -1,5 +1,14 @@
 # The C port
 
+Original mixer timeline (2026-10-10): all 82,908 actual emitted averages,
+37,311 consumed bytes and 149,858 integration intervals pass through the
+complete 94-call warm reference. The final observer reads original outputs
+directly; PCM, existing sample/word telemetry and whole execution stay exact.
+Logical output time differs from service time, while consumed bytes coincide
+in this window. Seven real-record controls and 39 protocol tests pass; the
+compressed recheck is identical. Gameplay is unchanged; native onset, complete
+handoffs and waveforms remain open. See [mixer timeline evidence](analysis/native_original_audio_mixer_timeline_milestone.md).
+
 Mission Five radar prefix selection (2026-10-10): the complete head-up run
 reached terminal controls, then rejected a checker assumption; no complete
 report was written and the full drawing gate remains unaccepted. Actual source

@@ -22,7 +22,7 @@ def sha(path):
         return hashlib.file_digest(file, 'sha256').hexdigest()
 
 
-def observer_source(original, probe, word_probe=None, live_probe=None):
+def observer_source(original, probe, word_probe=None, live_probe=None, mixer_probe=None):
     declaration = 'static void newsample(int nr, sample8_t sample)'
     assert original.count(declaration) == 1
     modified = original.replace(declaration, probe + '\n' + (live_probe + '\n' if live_probe else '') + declaration)
@@ -54,6 +54,24 @@ def observer_source(original, probe, word_probe=None, live_probe=None):
         before = '\treturn src;\n}\n\nuae_u8 *save_audio'
         assert modified.count(before) == 1, 'Original restore return changed'
         modified = modified.replace(before, '\tfa18_audio_live_restored(nr);\n' + before)
+    if mixer_probe is not None:
+        replacements = (
+            ('static void anti_prehandler (unsigned long best_evtime)\n{', mixer_probe + '\nstatic void anti_prehandler (unsigned long best_evtime)\n{\n\tfa18_audio_mixer_observe(1, best_evtime, 0, 0);'),
+            ('static void samplexx_anti_handler (int *datasp, int ch_start, int ch_num)\n{',
+             'static void samplexx_anti_handler (int *datasp, int ch_start, int ch_num)\n{\n\tunsigned fa18_average_index=fa18_audio_mixer_count;\n\tif(ch_start==0 && ch_num==4) fa18_audio_mixer_observe(2, 0, 0, 0);'),
+            ('\t\tacd->sample_accum_time = 0;\n\t}\n}\n\nstatic void sinc_prehandler_paula',
+             '\t\tacd->sample_accum_time = 0;\n\t}\n\tif(ch_start==0 && ch_num==4) fa18_audio_mixer_average(fa18_average_index,datasp);\n}\n\nstatic void sinc_prehandler_paula'),
+            ('void update_audio (void)\n{\n\tint n_cycles = 0;',
+             'void update_audio (void)\n{\n\tuae_u64 fa18_previous_logical=fa18_audio_mixer_logical;\n\t++fa18_audio_mixer_depth;\n\tint n_cycles = 0;'),
+            ('\t\t/* Decrease time-to-wait counters */',
+             '\t\tfa18_audio_mixer_logical=get_cycles()-n_cycles+best_evtime;\n\t\t/* Decrease time-to-wait counters */'),
+            ('\tlast_cycles = get_cycles () - n_cycles;\n}',
+             '\tlast_cycles = get_cycles () - n_cycles;\n\t--fa18_audio_mixer_depth;\n\tfa18_audio_mixer_logical=fa18_previous_logical;\n}'),
+            ('\tfa18_audio_probe_sample(nr, sample);',
+             '\tfa18_audio_probe_sample(nr, sample);\n\tfa18_audio_mixer_observe(3+nr, 0, nr, sample);'))
+        for before, after in replacements:
+            assert modified.count(before) == 1, f'Mixer observer source site changed: {before}'
+            modified = modified.replace(before, after)
     return modified
 
 
@@ -63,11 +81,16 @@ def main():
     parser.add_argument('--rebuild', action='store_true')
     parser.add_argument('--word-state', action='store_true', help='also observe actual pointer/length word lifecycle in a separate DLL')
     parser.add_argument('--restore-state', action='store_true', help='also retain original restore assignments and read live state before ordinary replay')
+    parser.add_argument('--mixer-timeline', action='store_true', help='observe actual logical boundaries, accumulator intervals and Paula output averages')
+    parser.add_argument('--link-jobs', type=int, help='request LTO workers for this isolated DLL link')
     args = parser.parse_args()
+    assert args.link_jobs is None or args.link_jobs > 0
     assert not args.restore_state or args.word_state, '--restore-state requires --word-state'
     work = args.out.resolve()
     assert not args.word_state or work != (ROOT / 'build/native-audio/sample-probe-engine').resolve(), 'Word observer requires a separate --out; preserve the existing sample observer'
     assert not args.restore_state or work != (ROOT / 'build/native-audio/word-state-probe-engine').resolve(), 'Restore observer requires a separate --out; preserve the existing word observer'
+    assert not args.mixer_timeline or work not in {ROOT / 'build/native-audio' / name for name in
+        ('sample-probe-engine', 'word-state-probe-engine', 'restore-state-probe-engine')}, 'Mixer observer requires a separate --out'
     # The only source copy, object and DLL this tool writes belong to its
     # explicit diagnostic output. No Makefile all/copy target is invoked.
     assert work != SOURCE and work != BASELINE and not SOURCE.is_relative_to(work)
@@ -79,8 +102,9 @@ def main():
     probe = ROOT / 'tools/native/original_audio_sample_probe.inc'
     word_probe = ROOT / 'tools/native/original_audio_word_probe.inc' if args.word_state else None
     live_probe = ROOT / 'tools/native/original_audio_live_probe.inc' if args.restore_state else None
+    mixer_probe = ROOT / 'tools/native/original_audio_mixer_probe.inc' if args.mixer_timeline else None
     generated = observer_source(original.read_text(), probe.read_text(), word_probe.read_text() if word_probe else None,
-                                live_probe.read_text() if live_probe else None)
+                                live_probe.read_text() if live_probe else None, mixer_probe.read_text() if mixer_probe else None)
     copy, object_file, core = work / 'audio.c', work / 'audio.o', work / 'system/ami9000.dll'
     manifest_path = work / 'build.json'
     prior = json.loads(manifest_path.read_text()) if manifest_path.exists() else None
@@ -95,6 +119,8 @@ def main():
     commands = [shlex.split(line) for line in plan.splitlines() if line.startswith('gcc ')]
     assert len(commands) == 2, 'Original build plan changed'
     compile_command, link_command = commands
+    if args.link_jobs:
+        link_command.append(f'-flto={args.link_jobs}')
     compiler = shutil.which('gcc')
     assert compiler
     compile_command[0] = link_command[0] = compiler
@@ -108,6 +134,8 @@ def main():
     dependencies = {arg: sha(SOURCE / arg) for arg in link_command if arg.endswith('.o') and arg != str(object_file)}
     if reusable and 'original_objects_sha256' in prior:
         assert dependencies == prior['original_objects_sha256'], 'Original link objects changed; use --rebuild'
+    if reusable and (prior.get('compile') != compile_command or prior.get('link') != link_command):
+        reusable = False
     if not reusable:
         subprocess.run(compile_command, cwd=SOURCE, check=True)
         subprocess.run(link_command, cwd=SOURCE, check=True)
@@ -136,6 +164,10 @@ def main():
         manifest.update(live_state_include_sha256=sha(live_probe), live_state_record_bytes=39,
                         live_state_records=8,
                         live_state_scope='Actual original restore assignments and read-only post-restore/pre-replay channel snapshots; no intermediate serialization or audio advancement')
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+    if mixer_probe:
+        manifest.update(mixer_include_sha256=sha(mixer_probe), mixer_record_bytes=53, mixer_ring_records=65536,
+            mixer_scope='Actual update_audio logical boundaries and truncated prehandler durations; four Paula accumulator times/averages and newsample transitions. No native scheduling or waveform acceptance.')
         manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
     print(f'{"Reused verified" if reusable else "Built isolated"} sample observer: {core}')
 

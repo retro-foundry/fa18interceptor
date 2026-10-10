@@ -1,0 +1,435 @@
+{
+  "date": "2026-10-10",
+  "scope": "Actual original 94-call mixer logical boundaries and emitted Paula averages. Complete native onset/handoff/waveform acceptance remains open; gameplay unchanged.",
+  "comparison": {
+    "preserved_execution": {
+      "scope": "All observed original consumed sample bytes and actual word provenance; complete PCM, DMA, event log and execution preserved. Service timestamps are not an independent mixer-time reconstruction. Native onset/handoff/waveform remains open.",
+      "replay_calls": 94,
+      "stereo_pcm_frames": 82908,
+      "consumed_bytes": 37311,
+      "bytes_by_channel": [
+        18656,
+        18655,
+        0,
+        0
+      ],
+      "actual_fetch_word_differences": 0,
+      "explicit_initial_unknown_provenance": [
+        {
+          "index": 0,
+          "call": 1,
+          "cycle": 422048186368,
+          "address": 4294967295,
+          "word": 1282,
+          "value": 2,
+          "channel": 0,
+          "state": 3,
+          "beam": [
+            22,
+            4
+          ]
+        },
+        {
+          "index": 1,
+          "call": 1,
+          "cycle": 422048227328,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            102,
+            4
+          ]
+        },
+        {
+          "index": 3,
+          "call": 1,
+          "cycle": 422048410624,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 3,
+          "beam": [
+            6,
+            6
+          ]
+        }
+      ],
+      "first_samples_by_channel": [
+        {
+          "index": 0,
+          "call": 1,
+          "cycle": 422048186368,
+          "address": 4294967295,
+          "word": 1282,
+          "value": 2,
+          "channel": 0,
+          "state": 3,
+          "beam": [
+            22,
+            4
+          ]
+        },
+        {
+          "index": 1,
+          "call": 1,
+          "cycle": 422048227328,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            102,
+            4
+          ]
+        },
+        null,
+        null
+      ],
+      "authority": {
+        "core_sha256": "18b8ba5e247f5808bc3e0cbaff589783e2adaaf6bcd5c8cb72af60f596814e47",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+      },
+      "unmodified_authority": {
+        "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+      },
+      "observer_manifest_sha256": "608346d0e26757136ccbe47ccd48446ab7c5b9f86909c9e5b8c7187640193c0f",
+      "sample_stream_sha256": "4c6952cd479377cc60945a9b57c04439687b5a020bffe6f3e4cc17267f72db21",
+      "sample_stream_record_bytes": 20,
+      "pcm_sha256": "068bf398d6a3dd11819dd742fd00926accd3332c8602047328a7805ed71fa14b",
+      "dma_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+      "event_log_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+      "source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+      "fetch_content_witness": "build\\native-audio\\dma-complete-demo",
+      "fetch_witness_scope": "Same-channel address/word contents from actual DMA. Consumed-byte ordering is observed directly; this lookup does not infer DMA delivery time. A wider recording is explicit when supplied.",
+      "unchanged_snapshot_fields": true,
+      "unchanged_complete_ram_state": true,
+      "unchanged_video": true,
+      "all_pcm_chunks_and_samples_exact": true,
+      "actual_dma_stream_exact": true,
+      "max_samples_per_call": 398,
+      "native_runtime_changed": false,
+      "native_waveform_accepted": false,
+      "zero_word_samples": [
+        {
+          "index": 37265,
+          "call": 94,
+          "cycle": 425463398400,
+          "address": 154226,
+          "word": 0,
+          "value": 0,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            185,
+            279
+          ]
+        },
+        {
+          "index": 37267,
+          "call": 94,
+          "cycle": 425463581696,
+          "address": 154226,
+          "word": 0,
+          "value": 0,
+          "channel": 1,
+          "state": 3,
+          "beam": [
+            89,
+            281
+          ]
+        }
+      ],
+      "zero_word_classification": "Both bytes emitted during existing channel-1 playback",
+      "channel2_zero_prefetch_emitted_bytes": 0
+    },
+    "timeline": {
+      "records": 270078,
+      "records_by_kind": {
+        "0": 1,
+        "1": 149858,
+        "2": 82908,
+        "3": 18656,
+        "4": 18655
+      },
+      "exact_output_averages": 82908,
+      "exact_consumed_transitions": 37311,
+      "duration_counts": {
+        "44": 1446,
+        "80": 29903,
+        "21": 1741,
+        "22": 1743,
+        "36": 1543,
+        "43": 1460,
+        "37": 1537,
+        "7": 1914,
+        "73": 1096,
+        "79": 1011,
+        "0": 1652,
+        "6": 1932,
+        "1": 1986,
+        "58": 1267,
+        "34": 1565,
+        "45": 1424,
+        "46": 1417,
+        "70": 1123,
+        "9": 1881,
+        "29": 1631,
+        "41": 1424,
+        "10": 1879,
+        "14": 1820,
+        "66": 1170,
+        "25": 1682,
+        "54": 1324,
+        "55": 1308,
+        "61": 1230,
+        "4": 1959,
+        "19": 1773,
+        "50": 1360,
+        "16": 1811,
+        "63": 1210,
+        "20": 1755,
+        "8": 1898,
+        "3": 1971,
+        "76": 1067,
+        "31": 1618,
+        "32": 1602,
+        "28": 1642,
+        "65": 1204,
+        "5": 1935,
+        "69": 1138,
+        "11": 1866,
+        "40": 1525,
+        "60": 1256,
+        "56": 1301,
+        "64": 1202,
+        "57": 1284,
+        "52": 1336,
+        "51": 1369,
+        "13": 1837,
+        "42": 1459,
+        "78": 1013,
+        "30": 1622,
+        "33": 1583,
+        "2": 1974,
+        "49": 1389,
+        "74": 1072,
+        "47": 1408,
+        "24": 1708,
+        "12": 1842,
+        "15": 1815,
+        "35": 1573,
+        "38": 1526,
+        "23": 1717,
+        "67": 1164,
+        "59": 1265,
+        "27": 1663,
+        "77": 1041,
+        "75": 1075,
+        "72": 1097,
+        "68": 1143,
+        "18": 1771,
+        "48": 1400,
+        "39": 1464,
+        "26": 1648,
+        "17": 1792,
+        "62": 1219,
+        "53": 1271,
+        "71": 1116
+      },
+      "service_leads_by_kind": {
+        "0": {
+          "min": 0,
+          "max": 0,
+          "zero": 1,
+          "records": 1
+        },
+        "1": {
+          "min": 0,
+          "max": 116217,
+          "zero": 66951,
+          "records": 149858
+        },
+        "2": {
+          "min": 0,
+          "max": 116217,
+          "zero": 1,
+          "records": 82908
+        },
+        "3": {
+          "min": 0,
+          "max": 0,
+          "zero": 18656,
+          "records": 18656
+        },
+        "4": {
+          "min": 0,
+          "max": 0,
+          "zero": 18655,
+          "records": 18655
+        }
+      },
+      "logical_sample_gaps_by_channel": {
+        "0": {
+          "183296": 18655
+        },
+        "1": {
+          "183296": 18654
+        }
+      },
+      "discarded_prehandler_subcycle_units": 35662336,
+      "final_accumulators": [
+        16523,
+        5084,
+        0,
+        0
+      ],
+      "final_accumulator_times": [
+        41,
+        41,
+        41,
+        41
+      ],
+      "complete_actual_accumulators_and_logical_intervals_matching": true
+    },
+    "actual_record_mutations_rejected": {
+      "initial_area": true,
+      "interval": true,
+      "logical_time": true,
+      "average": true,
+      "budget": true,
+      "sample": true,
+      "missing_sample": true
+    },
+    "mixer_stream_sha256": "500e6896d43699da947570dad25f0877ca57d973199a9b23adfa416d610d9b7b",
+    "existing_original_telemetry_unchanged": true,
+    "reference_context": "demo",
+    "existing_telemetry_files_unchanged": [
+      "audio_samples.bin",
+      "audio_word_states.bin"
+    ],
+    "scope": "All observed original logical intervals, actual accumulator budgets, emitted Paula averages and consumed bytes. Paired PCM/RAM/state/video remain strict. No native latency constant or complete native waveform acceptance."
+  },
+  "observer": {
+    "core_sha256": "18b8ba5e247f5808bc3e0cbaff589783e2adaaf6bcd5c8cb72af60f596814e47",
+    "source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+    "probe_source_sha256": "18d0c32bd9d90c91a8114a74e2db417cbcc59a4857d9ecf3cc2f5a2556275e4d",
+    "manifest_sha256": "608346d0e26757136ccbe47ccd48446ab7c5b9f86909c9e5b8c7187640193c0f",
+    "manifest": "build\\native-audio\\mixer-output-probe-engine\\build.json"
+  },
+  "compressed_recheck_identical": false,
+  "retention": {
+    "original.wav": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\original.wav.gz",
+      "decoded_sha256": "029779d8d91b402dbedc327548d16aeea9519cfb174c83a00223a620a8a779ca",
+      "encoded_sha256": "746fedaa77033fe5a414929a88cc3bf688340af8c79a5979b0bdc40e788a1545",
+      "stored_bytes": 246839,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\original.wav.gz"
+    },
+    "audio_chunks.jsonl": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\audio_chunks.jsonl.gz",
+      "decoded_sha256": "7410c3de76096e8dccc43d8af42b551e34fa5b351d7863b629545eaa0d7c66a0",
+      "encoded_sha256": "da96397a07e3f3cf54f7d9e8f65eb6b9c04e4bf42ae310b029fa86497eb7d89e",
+      "stored_bytes": 5107,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\audio_chunks.jsonl.gz"
+    },
+    "audio_events.jsonl": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\audio_events.jsonl.gz",
+      "decoded_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+      "encoded_sha256": "cf65c345bc6d9c724db15eff56399aaedc81f6b542a38e8db268826180723056",
+      "stored_bytes": 29444,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\audio_events.jsonl.gz"
+    },
+    "audio_samples.bin": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\audio_samples.bin.gz",
+      "decoded_sha256": "4c6952cd479377cc60945a9b57c04439687b5a020bffe6f3e4cc17267f72db21",
+      "encoded_sha256": "caba3f11faecc21976adf748df48b211339cd1ca1ff408c3e5f6b93c4902a568",
+      "stored_bytes": 320422,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\audio_samples.bin.gz"
+    },
+    "audio_word_states.bin": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\audio_word_states.bin.gz",
+      "decoded_sha256": "8dc8f9d79e4d9c1218cad15fa9ea2de9d9f15397109b1bf0db11ec388d7b690b",
+      "encoded_sha256": "8b1e4ba9a95b60fda21063fc19c0236f9f13b7ddc229e8aad859c3e19ca79c07",
+      "stored_bytes": 570518,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\audio_word_states.bin.gz"
+    },
+    "audio_dma.bin": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\audio_dma.bin.gz",
+      "decoded_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+      "encoded_sha256": "8d3a9e18432206a5f5f699859eec83fe8415fe31946c67ada9035d4c78126e70",
+      "stored_bytes": 106552,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\audio_dma.bin.gz"
+    },
+    "state.bin": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\state.dat.gz",
+      "decoded_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b",
+      "encoded_sha256": "ffbf026f2d33a6de02e0eeef5adfd6369b27b72b73d8b9ebf486f7079e4429a8",
+      "stored_bytes": 354487,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\state.dat.gz"
+    },
+    "chip.bin": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\chip.dat.gz",
+      "decoded_sha256": "c0387b6b573a5796c9dec28f0d578bb1d2ba4ee632032c3a989ae3ad24fa66e8",
+      "encoded_sha256": "824d5ea2a9ac6e90f046fa658709ee5ae9da04254d1cdb4458ee6a246a25943f",
+      "stored_bytes": 199471,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\chip.dat.gz"
+    },
+    "slow.bin": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\slow.dat.gz",
+      "decoded_sha256": "396f461c4900a32b00b2d0bed81b7d911218d08270c983a2deca73f5c5b6bf8a",
+      "encoded_sha256": "dbf44dcaf22d55e1639c103572ac54df840616298aeb9e9bb8b76dbe360d509e",
+      "stored_bytes": 141228,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\restore-state-loop-zero\\slow.dat.gz"
+    },
+    "audio_mixer.bin": {
+      "file": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-output-loop-zero\\audio_mixer.bin.gz",
+      "decoded_sha256": "500e6896d43699da947570dad25f0877ca57d973199a9b23adfa416d610d9b7b",
+      "encoded_sha256": "49f136db86122298e64dfad69e438afcb622b8cb51a936f0cb5b4638a67ddd83",
+      "stored_bytes": 2167121,
+      "shared_exact_storage": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\mixer-timeline-loop-zero\\audio_mixer.bin.gz"
+    }
+  },
+  "validation": {
+    "audio_protocol_tests": 39,
+    "actual_record_rejection_controls": 7,
+    "python_compilation": true,
+    "diff_check": true
+  },
+  "native_runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8",
+  "tool_sha256": {
+    "scripts/original_audio_samples.py": "4d359fa25c069aa9144db9c9256b7f09e1b6552d59e36fc2d106ab3278431962",
+    "tools/native/build_original_audio_probe.py": "c16db4c51bd88c37e725a112411cd1af1269b91a4a775ed285a0d0440d14b224",
+    "tools/native/check_original_audio_samples.py": "37d4bffd6956a134260a6116be2d99f53940c5148edccba1a6bafe2378f3c32e",
+    "tools/native/check_original_audio_mixer.py": "3074dd19c5e4552733e537436e814a17a71c0d34e482bf69868de5f852297478",
+    "tools/native/original_audio_mixer_probe.inc": "fd465a7d32648572076647b0305b3cbd812dc06272eb7d94c883f368afb99cc3",
+    "tools/native/test_original_audio_mixer.py": "1f84a80c4dba65a0fe03171263014fd36d9c2bec109d87985c8886fd67c83d76"
+  },
+  "evidence_sha256": {
+    "build\\native-audio\\mixer-output-loop-zero\\comparison.json": "e1e48f8dd73c9c052e11cbf767cdf7880caf0a5633aa4325cce2dbe761a0ba10",
+    "build\\native-audio\\mixer-output-loop-zero\\compressed-recheck.json": "e1e48f8dd73c9c052e11cbf767cdf7880caf0a5633aa4325cce2dbe761a0ba10",
+    "build\\native-audio\\mixer-output-loop-zero\\snapshot.json": "ace67a38283ab36a58e3c3939c06d9d4f001281ff2a7c341ddde53c950fd9cdd",
+    "build\\native-audio\\mixer-output-loop-zero\\retention.json": "65bf35a429c3128fb2c933f75b54002fbfee5f0e81217b6a737e589f5c4adbc3",
+    "build\\native-audio\\mixer-output-loop-zero\\comparison-final.json": "e4990c1955c476797738515361beac17c930e4f8e2ef8294186a292a54618793"
+  },
+  "raw_and_compressed_validation_results_identical": true,
+  "report_metadata_added": {
+    "reference_context": "demo",
+    "existing_telemetry_files_unchanged": [
+      "audio_samples.bin",
+      "audio_word_states.bin"
+    ]
+  },
+  "compressed_recheck_identical_except_added_metadata": true
+}

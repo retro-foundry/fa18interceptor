@@ -87,7 +87,12 @@ def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None, 
         live_path = ROOT / 'tools/native/original_audio_live_probe.inc'
         assert sha(live_path.read_bytes()) == manifest['live_state_include_sha256']
         live_probe = live_path.read_text()
-    assert generated_path.read_text() == observer_source((SOURCE / 'sources/src/audio.c').read_text(), probe.read_text(), word_probe, live_probe)
+    mixer_probe = None
+    if 'mixer_include_sha256' in manifest:
+        mixer_path = ROOT / 'tools/native/original_audio_mixer_probe.inc'
+        assert sha(mixer_path.read_bytes()) == manifest['mixer_include_sha256']
+        mixer_probe = mixer_path.read_text()
+    assert generated_path.read_text() == observer_source((SOURCE / 'sources/src/audio.c').read_text(), probe.read_text(), word_probe, live_probe, mixer_probe)
     assert execution(observed) == execution(original), 'Observer changed original execution'
     for name in ('state.bin', 'chip.bin', 'slow.bin'):
         assert recorded_bytes(capture, name) == recorded_bytes(baseline, name), name

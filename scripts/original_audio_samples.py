@@ -17,7 +17,29 @@ FOOTER = struct.Struct('<IQ')
 WORD_MAGIC = b'FA18_ORIGINAL_AUDIO_WORD_STATES_V1\n'
 WORD = struct.Struct('<QIIIHHHHHHBBBBH')
 LIVE = struct.Struct('<QIIIIHHHHBBBBBBB')
+MIXER_MAGIC = b'FA18_ORIGINAL_AUDIO_MIXER_V1\n'
+MIXER = struct.Struct('<QQI4i4IB')
 CYCLE_UNIT = 512  # sysdeps.h; e9k_debug_read_cycle_count returns get_cycles()/512.
+
+
+def mixer_records(payload, before, after):
+    if len(payload) % MIXER.size:
+        raise ValueError('Truncated original mixer record')
+    previous = before * CYCLE_UNIT
+    for values in MIXER.iter_unpack(payload):
+        service, logical, duration, *rest = values
+        kind = rest[-1]
+        if not previous <= service < (after + 1) * CYCLE_UNIT or logical > service or kind > 6:
+            raise ValueError('Invalid original mixer cycle/kind')
+        if kind != 1 and duration:
+            raise ValueError('Non-accumulator mixer duration')
+        if kind >= 3:
+            channel = kind - 3
+            if not -128 <= rest[channel] <= 127 or any(rest[i] for i in range(4) if i != channel):
+                raise ValueError('Invalid original mixer sample transition')
+        previous = service
+        yield dict(service_cycle=service, logical_cycle=logical, duration=duration,
+                   values=rest[:4], times=rest[4:8], kind=kind)
 
 
 def live_records(payload):
@@ -101,6 +123,26 @@ class AudioSamplesWriter:
             self.word_total = self.word_max = 0
             self.write_word(WORD_MAGIC)
             self.word_enable(1)
+        self.mixer_file = None
+        if 'mixer_include_sha256' in self.manifest:
+            if self.manifest['mixer_record_bytes'] != MIXER.size or self.manifest['mixer_ring_records'] != 65536:
+                raise RuntimeError('Reference mixer observer ABI changed')
+            self.mixer_enable = engine.bind('e9k_debug_audio_mixer_enable', None, C.c_int)
+            self.mixer_take = engine.bind('e9k_debug_audio_mixer_take', C.c_uint, C.POINTER(C.c_void_p))
+            if engine.bind('e9k_debug_audio_mixer_record_size', C.c_uint)() != MIXER.size:
+                raise RuntimeError('Reference mixer observer record size differs')
+            self.mixer_file = Path(file.name).with_name('audio_mixer.bin').open('wb')
+            self.mixer_digest = hashlib.sha256()
+            self.mixer_total = self.mixer_max = 0
+            self.write_mixer(MIXER_MAGIC)
+            self.mixer_enable(1)
+
+    def write_mixer(self, data):
+        if self.engine.audio_capture_bytes + len(data) > self.engine.audio_capture_budget:
+            raise RuntimeError('Original mixer capture exceeds shared budget')
+        self.mixer_file.write(data)
+        self.mixer_digest.update(data)
+        self.engine.audio_capture_bytes += len(data)
 
     def write_word(self, data):
         if self.engine.audio_capture_bytes + len(data) > self.engine.audio_capture_budget:
@@ -143,6 +185,17 @@ class AudioSamplesWriter:
             self.write_word(word_data)
             self.word_total += words
             self.word_max = max(self.word_max, words)
+        if self.mixer_file:
+            mixer_pointer = C.c_void_p()
+            records = self.mixer_take(C.byref(mixer_pointer))
+            if records > 65536 or (records and not mixer_pointer.value):
+                raise RuntimeError('Reference mixer overflow or missing buffer')
+            data = C.string_at(mixer_pointer, records * MIXER.size) if records else b''
+            list(mixer_records(data, self.previous_cycle, after))
+            self.write_mixer(b'\1' + FRAME.pack(call, records, self.previous_cycle, after, self.engine.audio_capture_frames))
+            self.write_mixer(data)
+            self.mixer_total += records
+            self.mixer_max = max(self.mixer_max, records)
         self.previous_cycle = after
         self.calls += 1
         self.samples += count
@@ -152,12 +205,17 @@ class AudioSamplesWriter:
             self.write(b'\0' + FOOTER.pack(self.calls, self.samples))
             if self.word_file:
                 self.write_word(b'\0' + FOOTER.pack(self.calls, self.word_total))
+            if self.mixer_file:
+                self.write_mixer(b'\0' + FOOTER.pack(self.calls, self.mixer_total))
         finally:
             self.enable(0)
             self.file.close()
             if self.word_file:
                 self.word_enable(0)
                 self.word_file.close()
+            if self.mixer_file:
+                self.mixer_enable(0)
+                self.mixer_file.close()
         report = dict(file='audio_samples.bin', sha256=self.digest.hexdigest(), calls=self.calls,
             consumed_bytes=self.samples, bytes_by_channel=self.channels,
             unknown_initial_provenance_bytes=self.unknown, record_bytes=SAMPLE.size,
@@ -174,4 +232,8 @@ class AudioSamplesWriter:
                 record_bytes=WORD.size, ring_records=65536)
         if self.initial_live_state is not None:
             report['initial_live_state'] = self.initial_live_state
+        if self.mixer_file:
+            report['mixer_timeline'] = dict(file='audio_mixer.bin', sha256=self.mixer_digest.hexdigest(),
+                calls=self.calls, records=self.mixer_total, max_records_per_call=self.mixer_max,
+                record_bytes=MIXER.size, ring_records=65536)
         return report
