@@ -1,5 +1,13 @@
 # Native port handoff — 2026-10-09
 
+Original mission five (2026-10-10): all 72,650 observations, final RAM and
+consumed keys reproduce without the controller, including the earned
+47,814-observation prefix. Formation/combat finish, but the landing earns
+no grade and remains rejected. The prior budget failure is retained;
+27 rejection/retention checks pass. Native gameplay is unchanged.
+Successful carrier return, independent native comparisons and sound
+timing remain open. See [failed landing evidence](analysis/native_original_mission_five_failed_landing_milestone.md).
+
 Complete escort bodies (2026-10-10): all 6,954 actual native bodies pass
 original instructions, including combat, carrier arrest and postflight.
 Ground rendering now publishes the source C09812/C09850 accumulator;

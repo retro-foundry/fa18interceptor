@@ -1,0 +1,81 @@
+{
+  "scope": "Complete original failed flight; no earned mode-five grade or native whole-flight acceptance",
+  "original": {
+    "mission_mode": 5,
+    "outcome": "landing without earned result",
+    "mission_success": false,
+    "observations": 72650,
+    "flight_start": 61797,
+    "flight_observations": 10854,
+    "prefix_observations": 47814,
+    "prefix_execution_exact": true,
+    "unmodified_replay_exact": true,
+    "final_phase": 1,
+    "final_mode": 5,
+    "final_completions": 2,
+    "qualification": 1,
+    "grades": [
+      1,
+      1,
+      0
+    ],
+    "last_observed_player_position": [
+      1153076.125,
+      2.9296875,
+      1124495.015625
+    ],
+    "source_report_sha256": "8535fde909eeb4bb75fe4d1bb7396c32c87c3a2c4a7523dd7da803a32339ced5"
+  },
+  "original_gear_observations": {
+    "airborne": 61862,
+    "gear_up": 61946,
+    "gear_down": 68125,
+    "raised_after_takeoff": true,
+    "lowered_while_airborne_before_stop": true
+  },
+  "preceding_rejected_capture": {
+    "scope": "Incomplete original observation stream; no successful footer or final RAM, not accepted proof",
+    "bytes": 521916416,
+    "sha256": "2f5bee4ce63098cc3b8cc12e021c869bbe10f908f4427fb1d4a205b59664abef",
+    "driver_executable_sha256": "eda42789b55af8d7d2cdb27bca220fb484497193860eb517a196805dfaede498",
+    "original_outcome": "Capture budget exceeded after failed water landing",
+    "accepted_evidence": false,
+    "complete_rerun_prefix_bytes": 469963708,
+    "complete_rerun_prefix_sha256": "063cdcdb5b07021a455722c0f3bcddff135bbe9bdddef35d7f03a4fdf4712b79",
+    "original_capture_prefix_exact": true
+  },
+  "counterfeit_prefix_rejections": 20,
+  "external_driver_configuration_rejections": 6,
+  "actual_process_failure_retained": true,
+  "failed_flight_not_accepted_as_prefix": true,
+  "native_executable_unchanged_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+  "artifact_sha256": {
+    "build/native-flight/original-mission-five-water-landing/consumed.fa18in": "5fed0c7e0be3bd043780c6224fe0b3099f32a09bbe06ba4b3363ded302779610",
+    "build/native-flight/original-mission-five-water-landing/controller-choices.e9k": "fe967a42be103c5dc256fe51435ef1f9f90ce58a55f6b8f3421f236b6e396621",
+    "build/native-flight/original-mission-five-water-landing/driver-executable.exe.gz": "c60a1e9ab47b720c5f3c459c243e00bdf9ff26dac1985ae2de9b3c8985779742",
+    "build/native-flight/original-mission-five-water-landing/driver.dat.gz": "3b3bc5e2305dd5fefab120dbae8ad48205dc10f671269bcbb20aa3bd2d6f3e45",
+    "build/native-flight/original-mission-five-water-landing/driver.jsonl.gz": "a791a9a0a0af8ac077e4d833b169afa6c9e6fb85b538cde590217432481aad21",
+    "build/native-flight/original-mission-five-water-landing/driver.log": "9d863750068e6bf6259224bb88666b0a2251d20f7ee6ae4bb51c2ed05598287a",
+    "build/native-flight/original-mission-five-water-landing/input.fa18in": "58bb81882753b415d6ec4b0e07d358d9e1c37ed45b69633f5e5dbdcfcc0fd391",
+    "build/native-flight/original-mission-five-water-landing/replay.log": "f7c3120212617d58ca92124870373ccc4a531b06ee3b42f5796931d01b38811f",
+    "build/native-flight/original-mission-five-water-landing/report.json": "8535fde909eeb4bb75fe4d1bb7396c32c87c3a2c4a7523dd7da803a32339ced5",
+    "build/native-flight/original-mission-five-earned-prefix/consumed.fa18in": "b7d8c538853fd86120c9609e19370a2c7e5967b83cbf9fa43f1a8c4b01aba643",
+    "build/native-flight/original-mission-five-earned-prefix/controller-choices.e9k": "fe967a42be103c5dc256fe51435ef1f9f90ce58a55f6b8f3421f236b6e396621",
+    "build/native-flight/original-mission-five-earned-prefix/driver-executable.exe.gz": "2a0f6d71b57473e15b9f07373b112e6df87b62662ae5e2841f4dde9c87e8d75d",
+    "build/native-flight/original-mission-five-earned-prefix/driver.jsonl.partial.gz": "1286a712f8ac391d20b17c2cc385fc896b29d43eadb351dae5a8df78859593fb",
+    "build/native-flight/original-mission-five-earned-prefix/driver.log": "a01976f541e5c9d3508c7cc4f421d62fb4cd1133998b3d9cbe73c99d4a2b2633",
+    "build/native-flight/original-mission-five-earned-prefix/input.fa18in": "7a7859fade273f1c3932a093bdd853174f7e56c3e763030f2d8f4837a66f435f",
+    "build/native-flight/original-mission-five-earned-prefix/partial-capture.json": "60f7cad65ca45b6fb956f395fd18101085dc82f1d0a81942f35e3ed35b5e7734",
+    "build/native-flight/original-mission-five-prefix-guards/patrol.json": "4f382891a809a9774dd611bb53409d6421cd546b80c89b92a74f8c47586d483e",
+    "build/native-flight/original-mission-five-prefix-guards/escort.json": "0c1b8faa09090f299dff80f71cc978325280de4f08c21bac4e9f3f10a8b6a6ed",
+    "build/native-flight/original-mission-five-prefix-guards/driver.json": "4f6aa08edbd5d923a4e96d069cc5284fc3ae9f192b2d08c0cf167cc1042759b0",
+    "build/native-flight/original-mission-five-prefix-guards/retention.json": "1f43b39cab3786f8d05f0770dab0679ae7a50563193864e12fb89a250b10cf4c"
+  },
+  "source_sha256": {
+    "tools/native/check_original_mission_recording.py": "dae1ef0fbd37ac088872288a2d48b0b4fbd282235afc8353e019b031d6fb0aa2",
+    "tools/native/original_mission_pilot_loop.c": "0f3cba4c76a423d03bcd9ca2c6d00f28494b01c008c64e4f989fe0c4d9df8523",
+    "tools/native/test_original_mission_prefix.py": "87e461458438cfe76c21171c7c9f42cbd71c23e67b32c4674cb50682b52b6c92",
+    "tools/native/mission_pilot.c": "98cd7a2b12f4e1c9b80222c8308743f07888c1f05f8885587ea67910eae30e89",
+    "tools/native/mission_pilot.h": "c4bf55e3caf8b4e99c2102965ed6f8e28a3a3fc227ceeaf36077aabc35a84c82"
+  }
+}
