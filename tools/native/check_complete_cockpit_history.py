@@ -24,6 +24,7 @@ from check_qualification_message_cadence import digest, pages, verify_trace, ins
 from check_recorded_original_mission_trace import verified_update_mapping, verified_continuation
 from compare_flight_traces import read_trace, GAME_FIELDS
 from frame_delta import bodies, snapshots
+from check_headup_transfer import apply_transfer, reject_controls
 
 
 def file_hash(path, compressed=False):
@@ -91,7 +92,7 @@ def history_difference(live, expected):
     return differences
 
 
-def align_history(expected, previous_draw, entries, first):
+def align_history(expected, previous_draw, entries, first, copy_scene=True):
     live = {name: pages(data) for name, data in entries.items()}
     for name, data in entries.items():
         draw = integer(data, 0xC4566C, 2)
@@ -105,20 +106,49 @@ def align_history(expected, previous_draw, entries, first):
     # This is a separate, strict scene check, not a pixel mask: every scene
     # byte must match. Copying that shared value into both expected buffers
     # preserves its effect on any subsequent owner writes at the boundary.
-    for plane in range(8):
-        assert live['source'][plane][:5120] == live['native'][plane][:5120], 'Scene rows differ'
-        for name in ('source', 'native'):
-            expected[name][plane][:5120] = live[name][plane][:5120]
+    if copy_scene:
+        for plane in range(8):
+            assert live['source'][plane][:5120] == live['native'][plane][:5120], 'Scene rows differ'
+            for name in ('source', 'native'):
+                expected[name][plane][:5120] = live[name][plane][:5120]
     return live
 
 
-def apply_owners(expected, role, panel, radar, message, omitted=None):
+def shared_scene_geometry(expected, panel_inputs):
+    """Publish only the freshly drawn, strictly equal active scene band.
+
+    C30764 entries follow scene generation and precede HUD writes. The other
+    four planes retain their earlier predicted head-up writes, even where
+    they overlap the scene band. Input-boundary pixels never repair history.
+    """
+    actual = {role: pages(data) for role, data in panel_inputs.items()}
+    for plane in range(4):
+        assert actual['source'][plane][:5120] == actual['native'][plane][:5120], 'Fresh active scene geometry differs'
+    for role in ('source', 'native'):
+        for plane in range(4):
+            expected[role][plane][:5120] = actual[role][plane][:5120]
+
+
+def apply_owners(expected, role, panel, radar, message, omitted=None, headup=None):
     refresh = instrument_panel_refresh(panel, expected[role], apply=not (role == 'source' and omitted == 'panel'))
     if not (role == 'source' and omitted == 'radar'):
         apply_paints(expected[role], radar['paints'])
+    if headup is not None and not (role == 'source' and omitted == 'headup'):
+        expected[role] = [bytearray(p) for p in apply_transfer(expected[role], headup['operations'])]
     if not (role == 'source' and omitted == 'message'):
         expected[role] = predicted_pages(message['before'], message['after'], message['state']['text_drawn'], base=expected[role])
     return refresh
+
+
+def headup_state(work, executable, env, before, message_entry):
+    fixture, output, operations = (work / name for name in ('headup.before.dat', 'headup.after.dat', 'headup.operations.bin'))
+    fixture.write_bytes(before)
+    state = json.loads(run_oracle(executable, (fixture, output, operations), env))
+    assert state['complete_non_stack_ram_matching'] and state['complete_bit_transfer_matching']
+    actual, transfer = output.read_bytes(), operations.read_bytes()
+    assert apply_transfer(pages(before), transfer) == pages(actual), 'Complete head-up transfer differs'
+    assert all(a[:5120] == b[:5120] for a, b in zip(pages(actual), pages(message_entry))), 'Actual head-up caller scene differs'
+    return dict(state=state, operations=transfer, before=before, after=actual)
 
 
 def run_oracle(executable, arguments, env):
@@ -173,6 +203,7 @@ def main():
     parser.add_argument('--native-prefix', type=Path, help='Verified ordinary earned prefix for mission five')
     parser.add_argument('--replay-evidence', type=Path, help='Complete verified later-mission controls and event anchors')
     parser.add_argument('--runner', type=Path, help='Current native executable bound to the earned continuation')
+    parser.add_argument('--headup', action='store_true', help='Predict original C332BC writes and verify fresh scene geometry before HUD drawing')
     args = parser.parse_args()
     assert bool(args.native_prefix) == bool(args.replay_evidence) == bool(args.runner)
     args.out.mkdir(parents=True, exist_ok=True)
@@ -180,7 +211,8 @@ def main():
         'check_qualification_message_cadence.py', 'check_mission_message_pages.py',
         'assess_mission_radar_cadence.py', 'check_recorded_original_mission_trace.py', 'compare_flight_traces.py',
         'native_frame_body_oracle.c', 'native_radar_cadence_oracle.c', 'native_message_cadence_oracle.c',
-        'native_panel_frame_oracle.c', 'native_hud_oracle.c', 'native_records_oracle.c')
+        'native_panel_frame_oracle.c', 'native_hud_oracle.c', 'native_records_oracle.c',
+        'native_headup_owner_oracle.c', 'check_headup_transfer.py')
     code_hashes = {name: digest((Path(__file__).parent / name).read_bytes()) for name in code_paths}
     inputs = {name: json.loads((getattr(args, name) / 'report.json').read_text())
               for name in ('source_delta', 'native_delta', 'reference', 'source_evidence')}
@@ -228,19 +260,27 @@ def main():
     # cleaned by every build, and avoid overwriting another live comparison.
     executables = {name: args.out.resolve() / f'native_{name}_oracle.exe'
                    for name in ('frame_body', 'radar_cadence', 'message_cadence', 'panel_frame')}
+    if args.headup:
+        executables['headup_owner'] = args.out.resolve() / 'native_headup_owner_oracle.exe'
     for name, executable in executables.items():
         with (args.out / f'{name}.build.log').open('w') as log:
             subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(executable.relative_to(ROOT)),
                 '--main', f'tools/native/native_{name}_oracle.c'], cwd=ROOT, stdout=log, stderr=subprocess.STDOUT, check=True)
+    headup_executable = executables.get('headup_owner')
     executables = dict(body=executables['frame_body'], radar=executables['radar_cadence'],
         message=executables['message_cadence'], panel=executables['panel_frame'])
+    if headup_executable:
+        executables['headup'] = headup_executable
     executable_hashes = {str(path): digest(path.read_bytes()) for path in executables.values()}
     env = {k: v for k, v in os.environ.items() if not k.startswith(('FA18_FRAME_', 'FA18_TRACE_'))}
     expected, previous, history, radar_rows = {}, {}, [], []
     mutations = {name: ({}, {}) for name in ('panel', 'radar', 'message')}
+    if args.headup:
+        mutations['headup'] = {}, {}
     rejected, paint_rejected, glyph_rejected = {}, {}, {}
     failed, no_body, owner_counts = None, [], dict(source=0, native=0)
     scene_matching = 0
+    geometry_bodies, headup_counts, headup_rejected = 0, dict(source=0, native=0), {}
     current, native_iterator, count, executed = None, verified_native(args.native_delta, native), 0, 0
     previous_group = None
     with tempfile.TemporaryDirectory(prefix='ram-complete-cockpit-', dir=ROOT / 'build') as directory:
@@ -270,8 +310,8 @@ def main():
                 no_body.append(i)
             if failed is not None:
                 continue
-            if scene_equal:
-                align_history(expected, previous, entries, not history)
+            if scene_equal or args.headup:
+                align_history(expected, previous, entries, not history, copy_scene=not args.headup)
                 difference = history_difference(live, expected)
                 failure_kind = 'cockpit_history'
             else:
@@ -298,7 +338,7 @@ def main():
                 print(f'Whole-flight history FAILED at {i}: {difference}', flush=True)
                 continue
             for name, (model, draw) in mutations.items():
-                align_history(model, draw, entries, not history)
+                align_history(model, draw, entries, not history, copy_scene=not args.headup)
                 if name not in rejected and history_difference(live, model):
                     rejected[name] = i
             history.append(dict(iteration=i, native_iteration=j, compared_bytes=64000,
@@ -334,6 +374,12 @@ def main():
                 continue
             row = dict(iteration=i, native_iteration=j)
             refreshed = {}
+            if args.headup:
+                panel_inputs = dict(source=group[0xC30764]['data'], native=(work / 'panel.before.dat').read_bytes())
+                shared_scene_geometry(expected, panel_inputs)
+                for model, _ in mutations.values():
+                    shared_scene_geometry(model, panel_inputs)
+                geometry_bodies += 1
             for role in ('source', 'native'):
                 if role == 'source':
                     panel_in, panel_out = group[0xC30764]['data'], group[0xC0F182]['data']
@@ -360,9 +406,18 @@ def main():
                     if predicted_pages(message_in, message_out, message['text_drawn'], kind) != pages(message_out):
                         glyph_rejected[kind] = True
                 message_state = dict(before=message_in, after=message_out, state=message)
-                refreshed[role] = apply_owners(expected, role, panel_in, radar, message_state)
+                headup = headup_state(work, executables['headup'], env, radar_out, message_in) if args.headup else None
+                if headup is not None:
+                    headup_counts[role] += 1
+                    row[role + '_headup'] = headup['state']
+                    if role not in headup_rejected:
+                        try:
+                            headup_rejected[role] = reject_controls(pages(headup['before']), pages(headup['after']), headup['operations'])
+                        except AssertionError:
+                            pass  # A silent owner cannot exercise every write control.
+                refreshed[role] = apply_owners(expected, role, panel_in, radar, message_state, headup=headup)
                 for omitted, (model, _) in mutations.items():
-                    apply_owners(model, role, panel_in, radar, message_state, omitted)
+                    apply_owners(model, role, panel_in, radar, message_state, omitted, headup=headup)
             assert refreshed['source'] == refreshed['native'], 'Instrument images or redraw requests differ'
             radar_rows.append(row)
             if count % 100 == 0:
@@ -373,11 +428,16 @@ def main():
     assert {path: digest(Path(path).read_bytes()) for path in sealed} == sealed, 'Evidence reports changed during verification'
     assert {path: digest(Path(path).read_bytes()) for path in executable_hashes} == executable_hashes, 'Reference executable changed'
     assert {name: digest((Path(__file__).parent / name).read_bytes()) for name in code_paths} == code_hashes, 'Verifier changed during execution'
-    controls = len(rejected) == 3 and len(paint_rejected) == 3 and len(glyph_rejected) == 3
+    controls = len(rejected) == len(mutations) and len(paint_rejected) == 3 and len(glyph_rejected) == 3
+    if args.headup:
+        controls = controls and len(headup_rejected) == 2
     matching = failed is None and controls and len(history) == count
     report = dict(first=first, last=last, observations=count, complete_trace_and_core_observations=count,
         strict_scene_bytes=count * 8 * 5120, strict_scene_matching=scene_matching == count,
         scene_boundaries_matching=scene_matching, history_observations=len(history), history_bytes=64000 * len(history),
+        headup_writes_predicted=args.headup, fresh_active_scene_bodies_matching=geometry_bodies,
+        fresh_active_scene_bytes_matching=geometry_bodies * 4 * 5120,
+        headup_owner_predictions=headup_counts, headup_write_mutation_rejections=headup_rejected,
         complete_plane_history_matching=matching, first_unexplained=failed, no_body_dispatches=no_body,
         replayed_original_bodies_matching=executed, sealed_native_body_identities_matching=native['bodies'],
         sealed_source_snapshots_matching=source['snapshots'], live_owner_predictions=owner_counts, complete_plane_history=history,

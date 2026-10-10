@@ -5,7 +5,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from check_complete_cockpit_history import align_history, history_difference, verified_native
+from check_complete_cockpit_history import align_history, history_difference, verified_native, shared_scene_geometry
 from check_mission_message_pages import predicted_pages
 from check_qualification_message_cadence import pages, instrument_panel_refresh
 from frame_delta import bodies
@@ -27,6 +27,36 @@ def screen():
 
 
 class CompleteCockpitAcceptance(unittest.TestCase):
+    def test_owned_scene_bits_are_not_repaired_from_input_pixels(self):
+        data, expected, draw = screen(), {}, {}
+        align_history(expected, draw, dict(source=data, native=data), True, copy_scene=False)
+        changed = bytearray(data)
+        changed[0x10000 + 4 * 0x2000 + 5119] = 1
+        live = align_history(expected, draw, dict(source=data, native=changed), False, copy_scene=False)
+        difference, = history_difference(live, expected)
+        self.assertEqual((difference['plane'], difference['first_byte']), (4, 5119))
+
+    def test_fresh_geometry_requires_every_active_scene_byte_to_match(self):
+        data, expected, draw = screen(), {}, {}
+        align_history(expected, draw, dict(source=data, native=data), True, copy_scene=False)
+        changed = bytearray(data)
+        changed[0x10000 + 3 * 0x2000 + 5119] = 1
+        with self.assertRaisesRegex(AssertionError, 'Fresh active scene geometry differs'):
+            shared_scene_geometry(expected, dict(source=data, native=changed))
+
+    def test_fresh_geometry_preserves_inactive_headup_and_cockpit_history(self):
+        data, expected, draw = screen(), {}, {}
+        align_history(expected, draw, dict(source=data, native=data), True, copy_scene=False)
+        expected['source'][4][5119] = 3
+        expected['native'][4][5119] = 7
+        expected['source'][0][7900] = 5
+        changed = bytearray(data)
+        changed[0x10000 + 5119] = 9
+        shared_scene_geometry(expected, dict(source=changed, native=changed))
+        self.assertEqual((expected['source'][0][5119], expected['native'][0][5119]), (9, 9))
+        self.assertEqual((expected['source'][4][5119], expected['native'][4][5119]), (3, 7))
+        self.assertEqual(expected['source'][0][7900], 5)
+
     def test_display_cockpit_byte_cannot_be_masked(self):
         data, expected, draw = screen(), {}, {}
         align_history(expected, draw, dict(source=data, native=data), True)
