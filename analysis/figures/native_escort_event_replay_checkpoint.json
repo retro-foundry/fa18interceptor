@@ -1,0 +1,565 @@
+{
+  "scope": "Complete event-owned escort failure comparison runs; gameplay, drawing and final outcome fail parity. Initialization cause and successful escort coverage remain open.",
+  "event_plan": [
+    {
+      "source_observation": 1,
+      "source_first": 1,
+      "mode": 0,
+      "stage": "C0FCB4",
+      "game_tick": 0
+    },
+    {
+      "source_observation": 40170,
+      "source_first": 40168,
+      "mode": 4,
+      "stage": "C10C08",
+      "game_tick": 36
+    },
+    {
+      "source_observation": 40643,
+      "source_first": 40641,
+      "mode": 4,
+      "stage": "C10D8A",
+      "game_tick": 1
+    }
+  ],
+  "event_report": {
+    "format": "FA18_REPLAY_ANCHORS_V1",
+    "complete": true,
+    "failed": false,
+    "native_updates": 44209,
+    "source_position": 44455,
+    "keys_consumed": 2028,
+    "anchors": [
+      {
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0,
+        "native_first": 1,
+        "frame": 2299
+      },
+      {
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36,
+        "native_first": 39931,
+        "frame": 55567
+      },
+      {
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1,
+        "native_first": 40395,
+        "frame": 56304
+      }
+    ]
+  },
+  "identities": {
+    "source_trace_sha256": "bc6e451b76c03921b5eb4c383b2ab8332f41aa1da7d72e8a46bdfcae0b8921d7",
+    "consumed_input_sha256": "9f323fe6798553400698598e17d557a64173254e38d541a8b836d6f3c785bfcd",
+    "replay_input_sha256": "81bf04fa89dd5f85d6fca295daef95dd05362d8f1cf35bd895dc89919f4c9525",
+    "runner_sha256": "545fd59fb8211a27cad831f03fa60bd90915e5c0612a5a22f797c5af1052cba9",
+    "native_trace_sha256": "4261c1b85fc41b29be8c16562470934556ab451cc8543bb33aa0ada31bdee3b7",
+    "native_final_ram_sha256": "cadbc0d76c30bd2b28275995c2c1a62b87c04646b052d0166a0166929a384cbf",
+    "anchor_input_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c",
+    "anchor_report_sha256": "baea6771a9ae9a7ed97a2256a4daef832338f292c9e821bd20cc9ac666b1b955"
+  },
+  "final_runner_sha256": "918f633511a0661f32fa928ca85a1cfed16d9144681c904fdaabf34d8c65c8b4",
+  "baseline_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+  "comparison": {
+    "compared": 3816,
+    "record_cores_matching": 38175,
+    "complete_record_boundaries_matching": 0,
+    "camera_and_controls_matching": 0,
+    "complete_pages_matching": 0,
+    "timer_and_hud_matching": 0,
+    "strict_gameplay_matching": false,
+    "complete_gameplay_matching_prefix": 0,
+    "execution_alignment": {
+      "first_native_update": 40395,
+      "last_native_update": 44209,
+      "real_updates_compared": 3815,
+      "duplicate_observations_preserved": [
+        41226
+      ],
+      "basis": "Original explicit JSR calls and executed LINK instructions; no state matching or frame search"
+    },
+    "first_record_difference": {
+      "source_iteration": 40643,
+      "native_iteration": 40395,
+      "source_tick": 1,
+      "changes": [
+        0,
+        4,
+        8,
+        14
+      ]
+    },
+    "first_game_difference": {
+      "source_iteration": 40643,
+      "native_iteration": 40395,
+      "source_tick": 1,
+      "changes": [
+        "observer",
+        "view_pan_rotate"
+      ]
+    },
+    "records_matching_per_slot": [
+      0,
+      3816,
+      3816,
+      3816,
+      0,
+      3816,
+      3816,
+      3816,
+      0,
+      2233,
+      3816,
+      3816,
+      325,
+      1273,
+      0,
+      3816
+    ],
+    "mutation_rejections": {
+      "npc_core": true,
+      "controls": true,
+      "page": true
+    }
+  },
+  "comparison_completed": true,
+  "runtime_outcome_matches": false,
+  "context_differences": {
+    "player_phase": [
+      254,
+      4
+    ]
+  },
+  "native_postflight_resets": 2,
+  "default_replay_guards": {
+    "results": {
+      "cold_anchor_default_exact": true,
+      "previous_default_exact": true,
+      "skipped_key_rejected": true,
+      "unreached_event_rejected": true,
+      "malformed_anchors_rejected": 12
+    },
+    "default_fingerprints": {
+      "game.dat": "2a2347112397c716a11196d4625da0f89d867290d8b3a7c61a18c15ec180695f",
+      "game.ppm": "fdb2e96c4bc60781de37be46b98c5db4cf1993eee592ed8e1d1248e488088d86",
+      "game.wav": "bb181553ef492df2ab9f9ab261d9a44d74282641456de2150c325077cbd7fe6a"
+    },
+    "runner_sha256": "918f633511a0661f32fa928ca85a1cfed16d9144681c904fdaabf34d8c65c8b4",
+    "baseline_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0"
+  },
+  "event_evidence_guards": {
+    "source_trace_sha256": "bc6e451b76c03921b5eb4c383b2ab8332f41aa1da7d72e8a46bdfcae0b8921d7",
+    "native_trace_sha256": "4261c1b85fc41b29be8c16562470934556ab451cc8543bb33aa0ada31bdee3b7",
+    "anchor_report_sha256": "baea6771a9ae9a7ed97a2256a4daef832338f292c9e821bd20cc9ac666b1b955",
+    "flight_observations": 3816,
+    "real_flight_updates": 3815,
+    "event_plan": [
+      {
+        "source_observation": 1,
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 40170,
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 40643,
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1
+      }
+    ],
+    "mutation_rejections": {
+      "format": true,
+      "complete": true,
+      "failed": true,
+      "source_position": true,
+      "native_updates": true,
+      "source_first": true,
+      "mode": true,
+      "stage": true,
+      "game_tick": true,
+      "native_first": true,
+      "frame": true,
+      "missing_anchor": true
+    },
+    "scope": "Event ownership only; every native trace row remains unchanged. Gameplay parity is a separate check."
+  },
+  "preflight_first_states": [
+    {
+      "stage": "C0FECE",
+      "source_observation": 36237,
+      "native_update": 36235,
+      "source_tick": 0,
+      "native_tick": 0,
+      "changed_slots": [],
+      "ship_x": [
+        0.0,
+        0.0
+      ],
+      "ship_core_changes": []
+    },
+    {
+      "stage": "C103E4",
+      "source_observation": 36448,
+      "native_update": 36446,
+      "source_tick": 1,
+      "native_tick": 1,
+      "changed_slots": [
+        8,
+        14
+      ],
+      "ship_x": [
+        1136640.0,
+        1153024.0
+      ],
+      "ship_core_changes": [
+        7,
+        21
+      ]
+    },
+    {
+      "stage": "C10418",
+      "source_observation": 36453,
+      "native_update": 36451,
+      "source_tick": 5,
+      "native_tick": 5,
+      "changed_slots": [
+        8,
+        14
+      ],
+      "ship_x": [
+        1136640.0,
+        1153024.0
+      ],
+      "ship_core_changes": [
+        7,
+        21
+      ]
+    },
+    {
+      "stage": "C10458",
+      "source_observation": 36722,
+      "native_update": 36496,
+      "source_tick": 6,
+      "native_tick": 6,
+      "changed_slots": [
+        8,
+        14
+      ],
+      "ship_x": [
+        1136640.0,
+        1153024.0
+      ],
+      "ship_core_changes": [
+        7,
+        21
+      ]
+    },
+    {
+      "stage": "C10B1E",
+      "source_observation": 40167,
+      "native_update": 39928,
+      "source_tick": 33,
+      "native_tick": 33,
+      "changed_slots": [
+        8,
+        14
+      ],
+      "ship_x": [
+        1136640.0,
+        1153024.0
+      ],
+      "ship_core_changes": [
+        7,
+        21
+      ]
+    },
+    {
+      "stage": "C10C08",
+      "source_observation": 40170,
+      "native_update": 39931,
+      "source_tick": 36,
+      "native_tick": 36,
+      "changed_slots": [
+        0,
+        8,
+        14
+      ],
+      "ship_x": [
+        1136640.0,
+        1153024.0
+      ],
+      "ship_core_changes": [
+        7,
+        21
+      ]
+    },
+    {
+      "stage": "C10C68",
+      "source_observation": 40289,
+      "native_update": 40041,
+      "source_tick": 155,
+      "native_tick": 146,
+      "changed_slots": [
+        0,
+        4,
+        8,
+        14
+      ],
+      "ship_x": [
+        1136640.0,
+        1153024.0
+      ],
+      "ship_core_changes": [
+        7,
+        21
+      ]
+    },
+    {
+      "stage": "C10CFE",
+      "source_observation": 40295,
+      "native_update": 40047,
+      "source_tick": 160,
+      "native_tick": 151,
+      "changed_slots": [
+        0,
+        4,
+        8,
+        14
+      ],
+      "ship_x": [
+        1136640.0,
+        1153024.0
+      ],
+      "ship_core_changes": [
+        7,
+        21
+      ]
+    },
+    {
+      "stage": "C10D8A",
+      "source_observation": 40643,
+      "native_update": 40395,
+      "source_tick": 1,
+      "native_tick": 1,
+      "changed_slots": [
+        0,
+        4,
+        8,
+        14
+      ],
+      "ship_x": [
+        1136640.0,
+        1153024.0
+      ],
+      "ship_core_changes": [
+        7,
+        21
+      ]
+    }
+  ],
+  "initial_core_changes": [
+    {
+      "slot": 0,
+      "changes": [
+        {
+          "offset": 7,
+          "original": 69,
+          "native": 70
+        },
+        {
+          "offset": 11,
+          "original": 10,
+          "native": 9
+        },
+        {
+          "offset": 21,
+          "original": 88,
+          "native": 152
+        },
+        {
+          "offset": 77,
+          "original": 93,
+          "native": 102
+        }
+      ]
+    },
+    {
+      "slot": 4,
+      "changes": [
+        {
+          "offset": 57,
+          "original": 81,
+          "native": 33
+        },
+        {
+          "offset": 77,
+          "original": 94,
+          "native": 103
+        }
+      ]
+    },
+    {
+      "slot": 8,
+      "changes": [
+        {
+          "offset": 7,
+          "original": 75,
+          "native": 76
+        },
+        {
+          "offset": 20,
+          "original": 18,
+          "native": 19
+        },
+        {
+          "offset": 21,
+          "original": 247,
+          "native": 55
+        },
+        {
+          "offset": 23,
+          "original": 128,
+          "native": 100
+        },
+        {
+          "offset": 31,
+          "original": 156,
+          "native": 32
+        },
+        {
+          "offset": 57,
+          "original": 81,
+          "native": 33
+        },
+        {
+          "offset": 65,
+          "original": 128,
+          "native": 100
+        },
+        {
+          "offset": 73,
+          "original": 156,
+          "native": 32
+        },
+        {
+          "offset": 104,
+          "original": 23,
+          "native": 24
+        },
+        {
+          "offset": 105,
+          "original": 192,
+          "native": 8
+        },
+        {
+          "offset": 112,
+          "original": 47,
+          "native": 143
+        },
+        {
+          "offset": 128,
+          "original": 15,
+          "native": 14
+        },
+        {
+          "offset": 129,
+          "original": 124,
+          "native": 129
+        },
+        {
+          "offset": 133,
+          "original": 25,
+          "native": 86
+        },
+        {
+          "offset": 141,
+          "original": 231,
+          "native": 170
+        },
+        {
+          "offset": 144,
+          "original": 15,
+          "native": 14
+        },
+        {
+          "offset": 145,
+          "original": 124,
+          "native": 129
+        },
+        {
+          "offset": 146,
+          "original": 15,
+          "native": 14
+        },
+        {
+          "offset": 147,
+          "original": 124,
+          "native": 129
+        },
+        {
+          "offset": 151,
+          "original": 231,
+          "native": 170
+        },
+        {
+          "offset": 159,
+          "original": 25,
+          "native": 86
+        },
+        {
+          "offset": 162,
+          "original": 15,
+          "native": 14
+        },
+        {
+          "offset": 163,
+          "original": 124,
+          "native": 129
+        }
+      ]
+    },
+    {
+      "slot": 14,
+      "changes": [
+        {
+          "offset": 7,
+          "original": 69,
+          "native": 70
+        },
+        {
+          "offset": 21,
+          "original": 88,
+          "native": 152
+        }
+      ]
+    }
+  ],
+  "artifact_sha256": {
+    "build\\native-flight\\independent-escort-event-input\\report.json": "323c2efbcf821c68172dbe5de1237b04b3a47f2f11173e983df8d74b5e3980f8",
+    "build\\native-flight\\independent-escort-event-input\\native.dat.gz": "24b33a1e87acb5c7623f83654e87c277e518febe672a96cc5e4d203554305917",
+    "build\\native-flight\\independent-escort-event-input\\native.jsonl.gz": "550bcb18b7d09da664d04a5fe5a65e626b047e012851549e7d643d42ae38d784",
+    "build\\native-flight\\independent-escort-event-input\\runner.exe": "545fd59fb8211a27cad831f03fa60bd90915e5c0612a5a22f797c5af1052cba9",
+    "build\\native-flight\\independent-escort-event-input\\preflight-first-states.json": "dcf33132edcdf25c9e6d65d02e47e12d7631916271af825fc48dcf004041533e",
+    "build\\native-flight\\independent-escort-event-input\\initial-core-changes.json": "d0c2c450c4ad7f0dbb5f2ad950f164db07928a358c2baa72e913e04c76b9929e",
+    "build\\native-flight\\event-replay-final-guards.json": "9e5e5f47b07288e4e60b947198695c82b2b4b08cc7bb52bc13ee08bf25eb22ba",
+    "build\\native-flight\\event-replay-evidence-guards.json": "8651ce50bec46c716f3f09a0be1241763dcd7c48dc158023bba075f478e958df"
+  }
+}

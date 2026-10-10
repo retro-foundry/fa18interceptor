@@ -1,5 +1,13 @@
 # The C port
 
+Escort event replay (2026-10-10): source-declared setup/flight events now own
+all 2,028 recorded key edges while every actual native update remains counted.
+The complete 3,816-observation comparison runs and fails from initial state;
+the native outcome also differs. Twelve event-evidence guards and the replay
+CTest checks pass; default RAM/pixels/PCM/counters remain byte-identical to
+the previous executable. Initialization rules, successful escort coverage and
+sound timing remain open. See [event replay evidence](analysis/native_escort_event_replay_milestone.md).
+
 Escort comparison origin (2026-10-10): all 44,458 original observations map
 to 44,455 executed updates; three resumptions and 2,028 key edges are retained.
 The native replay is rejected before flight assessment: timed briefing paths
