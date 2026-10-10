@@ -436,6 +436,42 @@ static int combat_flight(MissionPilot *pilot,NativeFrontend *game) {
             pilot->escort_flight || pilot->final_flight || pilot->cruise_flight?12u:4u)?32:0);
     return 1;
 }
+static void carrier_wire_destination(MissionPilot *pilot) {
+    gaddr carrier=0;
+    unsigned slot=0,count=0;
+    /* C26EBE's carrier class and its three original arrestor vertices.
+     * Read the running game's geometry; no recorded coordinates are input. */
+    for(unsigned i=0;i<16;++i) {
+        const gaddr record=CONTROL_RECORDS+512*i;
+        if((rd_u16(record)&0x40) && rd_u8(record+98)==0x20) {
+            carrier=record;slot=i;++count;
+        }
+    }
+    if(count!=1 || rd_u8(SCENE_POSE_ENTRY)!=3) {
+        fprintf(stderr,"Carrier-wire validation requires one live carrier and carrier takeoff; found %u, pose %u\n",
+            count,rd_u8(SCENE_POSE_ENTRY));exit(2);
+    }
+    const unsigned scale=rd_u8(carrier+125)&15;
+    const double takeoff[3]={pilot->home[0],pilot->home[1],pilot->home[2]};
+    double vertices[3][3],centroid[3]={0};
+    for(unsigned vertex=0;vertex<3;++vertex) for(unsigned axis=0;axis<3;++axis) {
+        vertices[vertex][axis]=rd_s32(carrier+20+4*axis)/256.0+
+            (rd_s16(carrier+488+6*vertex+2*axis)>>scale);
+        centroid[axis]+=vertices[vertex][axis]/3;
+    }
+    const double area=(vertices[1][0]-vertices[0][0])*(vertices[2][2]-vertices[0][2])-
+        (vertices[1][2]-vertices[0][2])*(vertices[2][0]-vertices[0][0]);
+    if(!area) {fputs("Carrier-wire validation found degenerate arrestor geometry\n",stderr);exit(2);}
+    pilot->home[0]=centroid[0];pilot->home[2]=centroid[2];
+    /* This route starts on that carrier. Retain its observed aircraft
+     * touchdown height; the game owns gear clearance and ground contact. */
+    for(unsigned axis=0;axis<3;++axis)
+        pilot->forward[axis]=rd_s16(carrier+150+6*axis)/16384.0;
+    printf("{\"carrier_wire_target\":true,\"slot\":%u,\"takeoff_home\":[%.6f,%.6f,%.6f],"
+           "\"target\":[%.6f,%.6f,%.6f],\"wire_height\":%.6f,\"forward\":[%.6f,%.6f,%.6f]}\n",
+        slot,takeoff[0],takeoff[1],takeoff[2],pilot->home[0],pilot->home[1],pilot->home[2],
+        centroid[1],pilot->forward[0],pilot->forward[1],pilot->forward[2]);
+}
 /* Return flight input for the mode-five validation pilot. Keep heading
  * feedback in world coordinates across the combat/return handoff. */
 static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
@@ -452,6 +488,7 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
         printf("{\"objective\":true,\"tick\":%u,\"phase\":%u}\n",game->ticks,rd_u8(PLAYER_PHASE));
         pilot->objective=1;pilot->phase=1;
     }
+    if(pilot->carrier_wire_return && !pilot->return_started) carrier_wire_destination(pilot);
     double point[3],position[3],local[3]={0};
     const int high_return=pilot->rescue_flight || pilot->cruise_flight;
     for(unsigned i=0;i<3;++i) {

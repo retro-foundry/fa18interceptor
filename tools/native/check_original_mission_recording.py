@@ -75,8 +75,8 @@ def main():
     parser.add_argument('--patrol-input', action='store_true', help='ordinary approach/landing input without firing')
     parser.add_argument('--repeat-steering', action='store_true',
                         help='validation input: repeat unchanged held steering keys through the original physical keyboard queue')
-    parser.add_argument('--wait-for-approach-height', nargs='?', const='final', choices=('final', 'standoff'),
-                        help='validation escort input: wait for the final-mission gate (default), or the requested standoff height')
+    parser.add_argument('--wait-for-approach-height', nargs='?', const='final', choices=('final', 'standoff', 'wire'),
+                        help='validation escort input: final-mission gate (default), requested standoff height, or standoff height with live wire targeting')
     parser.add_argument('--mode', type=int, choices=(3, 4), default=3)
     parser.add_argument('--source-prefix', type=Path,
                         help='verified original qualification/mission-three recording required for escort')
@@ -138,7 +138,8 @@ def main():
                      **({'FA18_ORIGINAL_PILOT_PATROL': '1'} if args.patrol_input else {}),
                      **({'FA18_ORIGINAL_PILOT_REPEAT_STEERING': '1'} if args.repeat_steering else {}),
                      **({'FA18_ORIGINAL_PILOT_APPROACH_HEIGHT': '1'} if args.wait_for_approach_height else {}),
-                     **({'FA18_ORIGINAL_PILOT_APPROACH_STANDOFF': '1'} if args.wait_for_approach_height == 'standoff' else {})))
+                     **({'FA18_ORIGINAL_PILOT_APPROACH_STANDOFF': '1'} if args.wait_for_approach_height in ('standoff', 'wire') else {}),
+                     **({'FA18_ORIGINAL_PILOT_WIRE_APPROACH': '1'} if args.wait_for_approach_height == 'wire' else {})))
             assert code in (0, 1), f'original pilot process failed: {code}'
             for name in ('driver.jsonl', 'driver.dat'):
                 (args.out / f'{name}.gz').write_bytes(gzip.compress((work / name).read_bytes(), mtime=0))

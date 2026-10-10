@@ -92,6 +92,7 @@ void fa18_loop_iteration(void) {
         pilot.mode=mission_mode;pilot.manage_gear=1;
         pilot.wait_for_approach_height=getenv("FA18_ORIGINAL_PILOT_APPROACH_HEIGHT")!=NULL;
         pilot.approach_at_standoff_height=getenv("FA18_ORIGINAL_PILOT_APPROACH_STANDOFF")!=NULL;
+        pilot.carrier_wire_return=getenv("FA18_ORIGINAL_PILOT_WIRE_APPROACH")!=NULL;
         if(mission_mode==4) pilot.escort_flight=pilot.complete_flight=pilot.campaign_flight=1;
         if(getenv("FA18_ORIGINAL_PILOT_PATROL")) {
             /* Test input: use the existing level-turn/return controller to

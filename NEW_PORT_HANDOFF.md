@@ -1,5 +1,13 @@
 # Native port handoff — 2026-10-09
 
+Successful original escort (2026-10-10): targeting the live original
+arrestor geometry completes escort, earns the second mission completion
+and returns to the menu. All 47,814 observations, final RAM and consumed
+keys reproduce exactly without the controller, including the earned
+prefix. Two wrong-target guards reject. Native runtime is unchanged.
+The successful reference is ready for update-identity/native whole-flight
+comparison; sound timing remains open. See [escort success evidence](analysis/native_original_escort_wire_milestone.md).
+
 Original escort deck contact (2026-10-10): the validation standoff-height
 route reaches the original carrier deck with gear down and hook extended,
 but misses the arrestor and earns no escort grade. All 65,000 observations,

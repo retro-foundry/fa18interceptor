@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-10",
+  "report": {
+    "input_hashes": {
+      "captures\\native\\qual_carrier_success\\input.fa18in": "fe4ff3a4cac080a4534041eb42d84a9332916d7566336910d852f86cde070440",
+      "captures\\native\\qual_carrier_success\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    "driver_returncode": 0,
+    "mission_mode": 4,
+    "source_prefix": {
+      "path": "build/native-flight/original-mission-three-patrol-runway",
+      "report_sha256": "24fc36b952485b2d88359dcb62322e8921dc816bd5af8e475623540ef9c5fa5c",
+      "iterations": 27110,
+      "trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+      "input_sha256": "fa3ac6722fc0338d5b773b6c288e8ca095274ba64000cf0773aa4fbb8bd73b12",
+      "consumed_sha256": "7dd9daf5a9a9a38c5e85444c444de079591829cc567663a2054a77181f435192",
+      "final_ram_sha256": "dc670ce5e6983915463ca18f239253660a184c9212c9d8389383f8216d62f516"
+    },
+    "driver_executable_sha256": "7a982902c7016c5a0ab03eefe0fcf360edee3f74f5ce3cbfdd445074f1fd0eee",
+    "driver_source_sha256": "d6fb24487b62be499a8b6724177c47080cbc34254bb93aa4c941274374d76adc",
+    "controller_source_sha256": "98cd7a2b12f4e1c9b80222c8308743f07888c1f05f8885587ea67910eae30e89",
+    "controller_header_sha256": "c4bf55e3caf8b4e99c2102965ed6f8e28a3a3fc227ceeaf36077aabc35a84c82",
+    "controller_ticks_per_update": 4,
+    "patrol_input": false,
+    "repeat_steering": true,
+    "wait_for_approach_height": true,
+    "approach_height_target": "wire",
+    "driver_trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+    "driver_final_ram_sha256": "b2f55338d766629458ee868db4518c1f391896f53a960f6f5ea9cd35df09ffdf",
+    "generated_input_sha256": "7eadc1866543e748defcbb074e87258ed90f6cba21bca1158c72c07e88e19345",
+    "consumed_input_sha256": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+    "mission_success": true,
+    "original_outcome": "success",
+    "final_phase": 0,
+    "final_mode": 0,
+    "final_completions": 2,
+    "iterations": 47814,
+    "source_prefix_execution_exact": true,
+    "unmodified_replay": {
+      "trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+      "final_ram_sha256": "b2f55338d766629458ee868db4518c1f391896f53a960f6f5ea9cd35df09ffdf",
+      "executable_sha256": "9da30b7cd2d0776c2b016077e683b50e9687f5ad43ba5e75c1e69384058c91e7",
+      "consumed_input_sha256": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd"
+    },
+    "unmodified_replay_exact": true,
+    "mission_flight_start": 40643,
+    "scope": "Physical-key original recording, independently replayed without the validation pilot. Failed route outcomes are preserved. Native whole-flight comparison remains separate."
+  },
+  "assessment": {
+    "scope": "Complete successful original escort and earned prefix, independently replayed without the controller; native comparison remains separate",
+    "observations": 47814,
+    "unchanged_prefix_observations": 43853,
+    "first_different_observation": 43854,
+    "live_wire_target": {
+      "carrier_wire_target": true,
+      "slot": 14,
+      "takeoff_home": [
+        1136684.0,
+        119.03125,
+        1071520.0
+      ],
+      "target": [
+        1136616.0,
+        119.03125,
+        1070584.0
+      ],
+      "wire_height": 112.0,
+      "forward": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "approach_height_gate": {
+      "approach_height_ready": true,
+      "tick": 59988,
+      "height": 818.1875,
+      "home_height": 119.03125,
+      "height_limit": 819.03125,
+      "distance": 353.375165
+    },
+    "first_touchdown": {
+      "iteration": 46879,
+      "pal_frame": 94289,
+      "xyz": [
+        1136610.75,
+        119.03125,
+        1070395.703125
+      ],
+      "contact": "8082",
+      "region": 192,
+      "gear": 0,
+      "speed": 39.90625
+    },
+    "first_arrest": {
+      "iteration": 46885,
+      "pal_frame": 94356,
+      "xyz": [
+        1136610.75,
+        119.03125,
+        1070633.328125
+      ],
+      "contact": "c082",
+      "region": 192,
+      "gear": 0,
+      "speed": 39.296875
+    },
+    "first_arrested_stop": {
+      "iteration": 46934,
+      "pal_frame": 94778,
+      "xyz": [
+        1136610.75,
+        119.03125,
+        1070910.171875
+      ],
+      "contact": "c482",
+      "region": 192,
+      "gear": 0,
+      "speed": 0.0
+    },
+    "grade_earned": true,
+    "completions": 2,
+    "menu_returned": true
+  },
+  "profile_guards": {
+    "new_wrong_target": true,
+    "old_wrong_target": true
+  },
+  "files": {
+    "build/native/fa18_native.exe": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "build/recomp/fa18_original_mission_pilot.exe": "7a982902c7016c5a0ab03eefe0fcf360edee3f74f5ce3cbfdd445074f1fd0eee",
+    "build/recomp/fa18_recomp.exe": "9da30b7cd2d0776c2b016077e683b50e9687f5ad43ba5e75c1e69384058c91e7",
+    "build\\native-flight\\original-escort-wire-target\\assessment.json": "16e4a4ad024bfeeda56b61ac417a1583ec8075449891827060609bfc83396dbf",
+    "build\\native-flight\\original-escort-wire-target\\consumed.fa18in": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+    "build\\native-flight\\original-escort-wire-target\\controller-choices.e9k": "54a1b73ad0117eeb7c0b5119ea81ada266a63a8a63cffc42707c817b31b4a202",
+    "build\\native-flight\\original-escort-wire-target\\driver.dat.gz": "6f3e258403f79a615b130012e671a14ea503f7d17d87e75bc910e33ffb8ef59c",
+    "build\\native-flight\\original-escort-wire-target\\driver.jsonl.gz": "2133fd5825ec611da775957ab7c5e7e290fb38b5af966dcfa70422eff1ee4e31",
+    "build\\native-flight\\original-escort-wire-target\\driver.log": "275737f540a3b743af299572f2fb50b19df4eda1ea43e18859dfb7e5a51a27d0",
+    "build\\native-flight\\original-escort-wire-target\\input.fa18in": "7eadc1866543e748defcbb074e87258ed90f6cba21bca1158c72c07e88e19345",
+    "build\\native-flight\\original-escort-wire-target\\new_wrong_target.log": "d752613e5e28d336c8422fe626d1617ba535792be56791545d12a2c8211f87be",
+    "build\\native-flight\\original-escort-wire-target\\old_wrong_target.log": "d752613e5e28d336c8422fe626d1617ba535792be56791545d12a2c8211f87be",
+    "build\\native-flight\\original-escort-wire-target\\profile-guards.json": "1b0a0f694d43b592da3da0c7c89bf49c877637405b85bd6e4f1d886fdf7a980a",
+    "build\\native-flight\\original-escort-wire-target\\replay.log": "26568b80dcc5270a64e2eb1f1e77c4b7338b8ddb1b7eb1a666fcf52f977f76af",
+    "build\\native-flight\\original-escort-wire-target\\report.json": "bf7223ce2c9b9f4d4ee07ca7b5cdbecaf159a9a9d5e2c5145c56339fed0d1f55",
+    "port/game/flight_geometry.c": "91fc38b0e578b810f332c4fab802313037699b9f650ed3bd08dd8c5619ab29e1",
+    "tools/native/check_original_mission_recording.py": "004f836e63316e18025a7da83131b7d314846985ceca19688e5324bd386a2171",
+    "tools/native/mission_pilot.c": "98cd7a2b12f4e1c9b80222c8308743f07888c1f05f8885587ea67910eae30e89",
+    "tools/native/mission_pilot.h": "c4bf55e3caf8b4e99c2102965ed6f8e28a3a3fc227ceeaf36077aabc35a84c82",
+    "tools/native/original_mission_pilot_loop.c": "d6fb24487b62be499a8b6724177c47080cbc34254bb93aa4c941274374d76adc"
+  }
+}
