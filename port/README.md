@@ -1,5 +1,15 @@
 # Active port source ownership
 
+Original startup mixer (2026-10-10): the independent 5,000-call recording
+keeps all PCM and execution exact. Bounded observation checks 1,059,282 actual
+averages and all 468,007 consumed bytes. Every one of its 4,410,000 PCM frames
+matches through the linked native A500/LED filter with explicit original
+frontend mixing. The 67-frame stereo onset difference exists before filtering;
+all recorded byte intervals and handoffs stay at period 358. Seven record and
+two actual-average controls, 41 audio guards and compressed rechecks pass.
+Native gameplay is unchanged; native onset/scheduling and whole flight/combat
+sound matching remain open. See [startup mixer evidence](../analysis/native_original_audio_startup_mixer_milestone.md).
+
 Original mixer timeline (2026-10-10): all 82,908 actual emitted averages,
 37,311 consumed bytes and 149,858 integration intervals pass through the
 complete 94-call warm reference. The final observer reads original outputs

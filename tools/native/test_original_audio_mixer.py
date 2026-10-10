@@ -3,8 +3,8 @@ import copy
 import io
 import unittest
 
-from check_original_audio_mixer import verify_timeline, mixer_frames, rejection_controls
-from original_audio_samples import MIXER_MAGIC, MIXER, FRAME, FOOTER, mixer_records
+from check_original_audio_mixer import verify_timeline, mixer_frames, rejection_controls, paired_observations
+from original_audio_samples import MIXER_MAGIC, MIXER, FRAME, FOOTER, mixer_records, MAGIC, SAMPLE
 
 
 class MixerTimelineContract(unittest.TestCase):
@@ -64,6 +64,33 @@ class MixerTimelineContract(unittest.TestCase):
         self.assertEqual(len(list(mixer_frames(io.BytesIO(stream), 1))), 1)
         for changed in (stream[:-1], stream + b'x', stream[:-FOOTER.size] + FOOTER.pack(1, 3)):
             with self.assertRaises((AssertionError, ValueError)): list(mixer_frames(io.BytesIO(changed), 1))
+
+    def bounded_streams(self):
+        mix = MIXER_MAGIC
+        samples = MAGIC
+        for call, before, after, pcm_end in ((1, 0, 10, 3), (2, 10, 30, 4), (3, 30, 40, 7)):
+            mix += b'\1' + FRAME.pack(call, 4 if call == 2 else 0, before, after, pcm_end)
+            samples += b'\1' + FRAME.pack(call, 1 if call == 2 else 0, before, after, pcm_end)
+            if call == 2:
+                mix += self.payload()
+                samples += SAMPLE.pack(12000, 0x100, 0xfd, -3, 12, 0, 0)
+        return mix + b'\0' + FOOTER.pack(3, 4), samples + b'\0' + FOOTER.pack(3, 1)
+
+    def test_bounded_mixer_keeps_complete_call_framing_and_local_pcm_budget(self):
+        mix, samples = self.bounded_streams()
+        observations = lambda: paired_observations(io.BytesIO(mix), io.BytesIO(samples), 3, [2, 2])
+        self.assertEqual(verify_timeline(observations(), 2)['exact_output_averages'], 1)
+        self.assertEqual(len(rejection_controls(observations, 2)), 7)
+        with self.assertRaises(AssertionError): verify_timeline(observations())
+
+    def test_range_cannot_hide_records_or_claim_unobserved_outputs(self):
+        mix, samples = self.bounded_streams()
+        for bounds in ([1, 1], [3, 3], [1, 2], [2, 3], [0, 2], [2, 4], [3, 2]):
+            with self.subTest(bounds=bounds), self.assertRaises(AssertionError):
+                verify_timeline(paired_observations(io.BytesIO(mix), io.BytesIO(samples), 3, bounds), bounds[0])
+        for changed in (mix[:-1], mix + b'x'):
+            with self.assertRaises((AssertionError, ValueError)):
+                verify_timeline(paired_observations(io.BytesIO(changed), io.BytesIO(samples), 3, [2, 2]), 2)
 
 
 if __name__ == '__main__':

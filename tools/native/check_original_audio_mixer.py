@@ -43,7 +43,23 @@ def quotient(area, time):
     return (abs(area) // time) * (-1 if area < 0 else 1) if time else 0
 
 
-def verify_timeline(frames):
+def paired_observations(mix, samples, calls, observed_range):
+    assert len(observed_range) == 2 and 1 <= observed_range[0] <= observed_range[1] <= calls
+    other = iter(sample_frames(samples, calls))
+    pcm_end = 0
+    for header, rows in mixer_frames(mix, calls):
+        sample_header, payload = next(other)
+        assert header[0] == sample_header[0] and header[2:] == sample_header[2:]
+        consumed = list(sample_records(payload, header[2], header[3]))
+        if observed_range[0] <= header[0] <= observed_range[1]:
+            yield header[0], rows, consumed, header[4] - pcm_end
+        else:
+            assert not rows, 'Mixer records outside the declared call range'
+        pcm_end = header[4]
+    assert next(other, None) is None
+
+
+def verify_timeline(frames, first_call=1):
     areas = times = None
     logical = None
     counts, durations, leads = Counter(), Counter(), {}
@@ -56,7 +72,7 @@ def verify_timeline(frames):
             kind = row['kind']
             assert row['service_cycle'] >= row['logical_cycle'], 'Mixer logical event follows service time'
             if kind == 0:
-                assert areas is None and call == 1 and not counts, 'Repeated/missing initial mixer state'
+                assert areas is None and call == first_call and not counts, 'Repeated/missing initial mixer state'
                 areas, times = list(row['values']), list(row['times'])
                 logical = row['logical_cycle']
             else:
@@ -101,7 +117,7 @@ def verify_timeline(frames):
         complete_actual_accumulators_and_logical_intervals_matching=True)
 
 
-def rejection_controls(observations):
+def rejection_controls(observations, first_call=1):
     """Damage real records, preserving the complete unchanged remainder."""
     rejected = {}
     for change in ('initial_area', 'interval', 'logical_time', 'average', 'budget', 'sample', 'missing_sample'):
@@ -127,7 +143,7 @@ def rejection_controls(observations):
                     break
                 yield call, rows, samples, pcm_frames
         try:
-            verify_timeline(altered())
+            verify_timeline(altered(), first_call)
         except AssertionError:
             assert changed, 'Control never changed an actual record'
             rejected[change] = True
@@ -161,24 +177,19 @@ def main():
     raw = reference_bytes(args.capture / 'audio_mixer.bin')
     assert hashlib.sha256(raw).hexdigest() == descriptor['sha256']
     calls = descriptor['calls']
+    observed_range = descriptor.get('observed_call_range', [1, calls])
     def observations():
         with reference_file(args.capture / 'audio_mixer.bin') as mix, reference_file(args.capture / 'audio_samples.bin') as samples:
-            other = iter(sample_frames(samples, calls))
-            pcm_end = 0
-            for header, rows in mixer_frames(mix, calls):
-                sample_header, payload = next(other)
-                assert header[0] == sample_header[0] and header[2:] == sample_header[2:]
-                yield header[0], rows, list(sample_records(payload, header[2], header[3])), header[4] - pcm_end
-                pcm_end = header[4]
-            assert next(other, None) is None
-    timeline = verify_timeline(observations())
+            yield from paired_observations(mix, samples, calls, observed_range)
+    timeline = verify_timeline(observations(), observed_range[0])
     assert timeline['records'] == descriptor['records']
-    rejected = rejection_controls(observations)
+    rejected = rejection_controls(observations, observed_range[0])
     report = dict(preserved_execution=preserved, timeline=timeline,
         actual_record_mutations_rejected=rejected,
         mixer_stream_sha256=descriptor['sha256'], existing_original_telemetry_unchanged=True,
         reference_context=args.reference_context, existing_telemetry_files_unchanged=names,
-        scope='All observed original logical intervals, actual accumulator budgets, emitted Paula averages and consumed bytes. Paired PCM/RAM/state/video remain strict. No native latency constant or complete native waveform acceptance.')
+        observed_mixer_call_range=observed_range,
+        scope='All original logical intervals, actual accumulator budgets, emitted Paula averages and consumed bytes within the explicit mixer call range. Entire replay PCM/RAM/state/video remain strict. No native latency constant or complete native waveform acceptance.')
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps({key: timeline[key] for key in ('records', 'exact_output_averages',

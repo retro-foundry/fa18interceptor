@@ -75,8 +75,11 @@ def sample_records(payload, before, after):
 
 
 class AudioSamplesWriter:
-    def __init__(self, engine, file, engine_root):
+    def __init__(self, engine, file, engine_root, mixer_call_range=None):
         self.engine, self.file = engine, file
+        self.mixer_call_range = mixer_call_range
+        if mixer_call_range is not None and not (1 <= mixer_call_range[0] <= mixer_call_range[1]):
+            raise ValueError('Mixer call range must be positive and ordered')
         manifest = engine_root / 'build.json'
         self.manifest = json.loads(manifest.read_text())
         core = engine_root / 'system/ami9000.dll'
@@ -135,7 +138,18 @@ class AudioSamplesWriter:
             self.mixer_digest = hashlib.sha256()
             self.mixer_total = self.mixer_max = 0
             self.write_mixer(MIXER_MAGIC)
-            self.mixer_enable(1)
+            self.mixer_enable(mixer_call_range is None)
+        elif mixer_call_range is not None:
+            raise RuntimeError('Mixer call range requires a mixer observer DLL')
+
+    def before_call(self, call):
+        """Read current accumulators at the chosen ordinary replay boundary."""
+        if self.mixer_call_range is not None:
+            first, last = self.mixer_call_range
+            if call == first:
+                self.mixer_enable(1)
+            elif call == last + 1:
+                self.mixer_enable(0)
 
     def write_mixer(self, data):
         if self.engine.audio_capture_bytes + len(data) > self.engine.audio_capture_budget:
@@ -236,4 +250,6 @@ class AudioSamplesWriter:
             report['mixer_timeline'] = dict(file='audio_mixer.bin', sha256=self.mixer_digest.hexdigest(),
                 calls=self.calls, records=self.mixer_total, max_records_per_call=self.mixer_max,
                 record_bytes=MIXER.size, ring_records=65536)
+            if self.mixer_call_range is not None:
+                report['mixer_timeline']['observed_call_range'] = list(self.mixer_call_range)
         return report

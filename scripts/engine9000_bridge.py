@@ -389,6 +389,8 @@ def main():
                         help='With --audio-events, export actual fetched audio words from the existing DMA collector')
     parser.add_argument('--audio-samples', action='store_true',
                         help='With --audio-events and an explicitly selected isolated observer DLL, record consumed sample bytes')
+    parser.add_argument('--audio-mixer-call-range', nargs=2, type=int, metavar=('FIRST', 'LAST'),
+                        help='With --audio-samples and a mixer observer, limit logical mixer records to these replay calls; keep complete PCM/sample/execution output')
     parser.add_argument('--capture-budget-mib', type=int, default=512)
     args = parser.parse_args()
     if args.trace_frames and args.normal_custom_log:
@@ -401,6 +403,9 @@ def main():
         parser.error('--audio-dma requires --audio-events')
     if args.audio_samples and (not args.audio_events or 'FA18_ENGINE_ROOT' not in os.environ):
         parser.error('--audio-samples requires --audio-events and explicit FA18_ENGINE_ROOT observer selection')
+    if args.audio_mixer_call_range and (not args.audio_samples or args.start_frame != 0 or
+            not 1 <= args.audio_mixer_call_range[0] <= args.audio_mixer_call_range[1] <= args.frames):
+        parser.error('--audio-mixer-call-range requires --audio-samples, start frame zero and 1 <= FIRST <= LAST <= frames')
     if args.frames < 0 or (args.wav and (args.frames < 1 or args.capture_budget_mib < 8)):
         parser.error('PCM capture requires positive frames and at least 8 MiB capture budget')
     args.output.mkdir(parents=True, exist_ok=False)
@@ -473,10 +478,13 @@ def main():
     sample_observer = sample_report = None
     if args.audio_samples:
         from original_audio_samples import AudioSamplesWriter
-        sample_observer = AudioSamplesWriter(engine, (args.output / 'audio_samples.bin').open('wb'), ENGINE)
+        sample_observer = AudioSamplesWriter(engine, (args.output / 'audio_samples.bin').open('wb'), ENGINE,
+                                            args.audio_mixer_call_range)
     try:
         for frame in range(args.start_frame + 1, args.start_frame + args.frames + 1):
             engine.audio_capture_call = frame
+            if sample_observer is not None:
+                sample_observer.before_call(frame)
             for kind, values in events.get(frame, []):
                 engine.event(kind, values)
             engine.core.retro_run()
