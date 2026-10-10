@@ -10,7 +10,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def read_audio_trace(path, stats, data=None):
+def read_audio_trace(path, stats, data=None, *, frames_per_tick=960):
     with gzip.open(path, 'rt') if path.suffix == '.gz' else path.open() as log:
         rows = [json.loads(line) for line in log]
     assert rows[0] == {'format': 'FA18_NATIVE_AUDIO_V1'}
@@ -24,14 +24,14 @@ def read_audio_trace(path, stats, data=None):
         counts[kind] += 1
         if kind == 'boundary':
             assert row['tick'] == counts[kind]
-            assert row['sample_frames'] == 960 * row['tick']
+            assert row['sample_frames'] == frames_per_tick * row['tick']
             assert len(row['voices']) == len(row['channels']) == 4
             for voice in row['voices']:
                 assert (len(bytes.fromhex(voice['record'])) == 64) if voice['address'] else voice['record'] is None
             previous_sample = row['sample_frames']
             continue
         assert row['channel'] < 4
-        assert previous_sample <= row['sample_frame'] <= previous_sample + 960
+        assert previous_sample <= row['sample_frame'] <= previous_sample + frames_per_tick
         if kind == 'request' and row['active']:
             per_channel[row['channel']] += 1
             assert row['bytes'] > 0 and len(row['sha256']) == 64

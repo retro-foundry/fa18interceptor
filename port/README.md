@@ -1,5 +1,14 @@
 # Active port source ownership
 
+Native output rate and startup allocation (2026-10-10): the runner can
+record at 44100 or 48000 Hz, with the default preserved. Complete intro,
+Free Flight and final-combat state/physical byte phases and per-channel sound
+requests match at both rates in Release and Debug. Device conversion and
+polling caches now initialize before gameplay; real windows report zero
+heap/pool requests and present every frame. Startup presentation pacing and
+complete original/native sound matching remain open.
+See [output rate evidence](../analysis/native_audio_output_rate_milestone.md).
+
 Model directory integration (2026-10-10): the five remaining original
 command slots are implemented; all 78 directory entries now dispatch.
 The 917 component cases and connected flight/model/allocation checks pass

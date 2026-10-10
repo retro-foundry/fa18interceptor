@@ -18,6 +18,8 @@ static void consume(void *context,Uint8 *bytes,int length) {
     /* SDL serializes this callback with SDL_LockAudioDevice. Only copied PCM
      * crosses threads; the callback never executes game/sample sequencing. */
     amiga_pcm_consume(context,(int16_t *)bytes,(unsigned)length/4);
+    AmigaPcmOutput *output=context;
+    if(output->startup_callbacks<2) ++output->startup_callbacks;
 }
 
 static void little32(uint8_t *p,uint32_t n) {
@@ -57,6 +59,23 @@ int amiga_pcm_open(AmigaPcmOutput *output,unsigned rate,int audible,const char *
             amiga_pcm_close(output);return 0;
         }
         SDL_PauseAudioDevice(output->device,0);
+        /* SDL_audio.c converts after releasing the callback's mixer lock.
+         * Its second callback therefore proves the first complete conversion
+         * ran, including SDL_audiocvt.c's lazy EnsureStreamBufferSize storage.
+         * Warm with the empty ring before gameplay; no game/sample sequencing
+         * or captured WAV samples run on this startup handshake. */
+        const Uint64 deadline=SDL_GetTicks64()+5000;
+        for(;;) {
+            SDL_LockAudioDevice(output->device);
+            const unsigned callbacks=output->startup_callbacks;
+            SDL_UnlockAudioDevice(output->device);
+            if(callbacks>=2) break;
+            if(SDL_GetAudioDeviceStatus(output->device)!=SDL_AUDIO_PLAYING || SDL_GetTicks64()>=deadline) {
+                if(capacity) snprintf(error,capacity,"Cannot initialize PCM device callback buffers");
+                amiga_pcm_close(output);return 0;
+            }
+            SDL_Delay(1);
+        }
     }
     return 1;
 }

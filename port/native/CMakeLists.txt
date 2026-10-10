@@ -113,6 +113,11 @@ if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.a
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_native_audio_trace.py
                 --runner $<TARGET_FILE:fa18_native>)
     set_tests_properties(fa18_native_audio_trace PROPERTIES RUN_SERIAL TRUE)
+    add_test(NAME fa18_native_audio_rate
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_native_audio_rate.py
+                --runner $<TARGET_FILE:fa18_native>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/audio-rate-$<CONFIG>)
+    set_tests_properties(fa18_native_audio_rate PROPERTIES RUN_SERIAL TRUE)
     add_executable(fa18_native_pcm_filter_test ../../tools/native/native_pcm_filter_test.c)
     target_link_libraries(fa18_native_pcm_filter_test PRIVATE fa18_native_runtime)
     if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/engine9000-src/ami9000/sources/src/audio.c)

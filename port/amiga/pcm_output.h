@@ -11,6 +11,7 @@ typedef struct {
     char wave_buffer[4096];
     int16_t *ring;
     unsigned read_frame,queued_frames;
+    unsigned startup_callbacks;
     const char *error;
 } AmigaPcmOutput;
 /* Stereo signed 16-bit PCM. Headless callers may capture without a device. */

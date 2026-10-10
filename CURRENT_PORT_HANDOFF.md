@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Native output rate and startup allocation (2026-10-10): the runner can
+record at 44100 or 48000 Hz, with the default preserved. Complete intro,
+Free Flight and final-combat state/physical byte phases and per-channel sound
+requests match at both rates in Release and Debug. Device conversion and
+polling caches now initialize before gameplay; real windows report zero
+heap/pool requests and present every frame. Startup presentation pacing and
+complete original/native sound matching remain open.
+See [output rate evidence](analysis/native_audio_output_rate_milestone.md).
+
 Original output clock (2026-10-10): actual source countdowns and display/audio
 clock inputs predict all 1,059,282 startup and 29,988 restored output boundaries
 exactly, with complete original PCM/execution unchanged. Source scheduling and

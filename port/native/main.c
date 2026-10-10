@@ -96,6 +96,7 @@ int main(int argc,char **argv) {
     const char *clock_mode=NULL,*clock_report=NULL;
     HostClock host_clock={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
+    unsigned audio_rate=48000;
     const char *frame_times=NULL;FILE *timing=NULL;int hidden=0,recorded_input_only=0;
     char timing_buffer[4096];
     const char *memory_report=NULL;AmigaSdlMemoryStats startup_memory={0},gameplay_memory={0};
@@ -108,7 +109,7 @@ int main(int argc,char **argv) {
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--input-anchors FILE --input-anchors-out PATH (diagnostics)] [--clock host|pal (window default host; headless default pal)] [--clock-report PATH] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--frame-delta FIRST[+COUNT] PATH] [--audio-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--input-anchors FILE --input-anchors-out PATH (diagnostics)] [--clock host|pal (window default host; headless default pal)] [--clock-report PATH] [--ppm PATH] [--data-out PATH] [--wav PATH] [--audio-rate 44100|48000 (startup; default 48000)] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--frame-delta FIRST[+COUNT] PATH] [--audio-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -122,6 +123,12 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--iterations")) { char *end;unsigned long n=strtoul(argv[++i],&end,10);if(*end || !n || n>10000000) { fputs("Invalid iteration limit\n",stderr);goto done; } iterations=(unsigned)n; }
         else if(i+1<argc && !strcmp(argv[i],"--data-out")) data_out=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--wav")) wave=argv[++i];
+        else if(i+1<argc && !strcmp(argv[i],"--audio-rate")) {
+            const char *rate=argv[++i];
+            if(!strcmp(rate,"44100")) audio_rate=44100;
+            else if(!strcmp(rate,"48000")) audio_rate=48000;
+            else {fputs("Audio rate must be 44100 or 48000\n",stderr);goto done;}
+        }
         else if(i+1<argc && !strcmp(argv[i],"--frame-times")) frame_times=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--memory-report")) memory_report=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--flight-trace")) flight_trace=argv[++i];
@@ -218,7 +225,7 @@ int main(int argc,char **argv) {
         if(read_error || close_error) {fputs("Cannot finish reading replay\n",stderr);goto done;}
     }
     if(!game || !native_frontend_open(game,adf,save_dir,error,sizeof error)) { fprintf(stderr,"%s\n",game?error:"Allocation failed"); goto done; }
-    if(!native_pcm_filter_begin(&game->audio.output_filter,48000)) {
+    if(!native_pcm_filter_begin(&game->audio.output_filter,audio_rate)) {
         fputs("Cannot configure native A500 PCM output filter\n",stderr);goto done;
     }
     if(input) { game->begin_update=native_replay_update;game->update_context=&loop; }
@@ -252,7 +259,7 @@ int main(int argc,char **argv) {
     if(!frequency || frequency>UINT64_MAX/1000000u) {fputs("Unsupported host counter frequency\n",stderr);goto done;}
     const double microseconds_per_tick=1000000.0/(double)frequency;
     FA18FramePacer pacer; fa18_frame_pacer_init(&pacer,SDL_GetPerformanceCounter(),frequency);
-    if(!amiga_pcm_open(&audio_output,48000,!headless,wave,error,sizeof error)) {
+    if(!amiga_pcm_open(&audio_output,audio_rate,!headless,wave,error,sizeof error)) {
         fputs(error,stderr);goto done;
     }
     if(frame_times) {
@@ -266,7 +273,9 @@ int main(int argc,char **argv) {
         /* Populate SDL's reusable render-command/vertex and initial event
          * caches before gameplay. Pending real events remain queued. Flush
          * executes the normal pipeline without presenting an extra frame. */
-        SDL_PumpEvents();
+        /* SDL_events.c: polling also creates its sentinel queue entry.
+         * NULL warms that path while preserving every queued real event. */
+        SDL_PollEvent(NULL);
         for(unsigned i=0;i<320*256;++i) {uint16_t c=game->palette[game->indices[i]];pixels[i]=0xff000000u|(((c>>8)&15)*17u<<16)|(((c>>4)&15)*17u<<8)|((c&15)*17u);}
         if(SDL_UpdateTexture(texture,NULL,pixels,320*sizeof *pixels) || SDL_RenderClear(renderer) ||
            SDL_RenderCopy(renderer,texture,NULL,NULL) || SDL_RenderFlush(renderer)) goto sdl_error;
@@ -292,9 +301,12 @@ int main(int argc,char **argv) {
         if(trace.failed) goto done;
         if(delta && delta->failed) goto done;
         if(timing) times[2]=SDL_GetPerformanceCounter();
-        native_audio_render(&game->audio,samples,960,48000);
+        /* Both validated rates have an integral 20 ms block. Configure the
+         * device/filter once before gameplay; retain the fixed maximum span. */
+        const unsigned audio_frames=audio_rate/50;
+        native_audio_render(&game->audio,samples,audio_frames,audio_rate);
         if(audio_trace.failed || (audio_trace_path && !native_audio_trace_boundary(&audio_trace,game,loop.iteration))) goto done;
-        if(!amiga_pcm_write(&audio_output,samples,960)) {
+        if(!amiga_pcm_write(&audio_output,samples,audio_frames)) {
             fprintf(stderr,"Cannot publish native PCM audio: %s\n",audio_output.error?audio_output.error:SDL_GetError());goto done;
         }
         if(timing) times[3]=times[4]=times[5]=SDL_GetPerformanceCounter();
