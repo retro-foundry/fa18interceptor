@@ -1,4 +1,4 @@
-"""Compare recorded original mission-three flights from independent starts.
+"""Compare recorded original flights from independent starts.
 
 Enlist a native pilot using ordinary keys, then cold-load its actual saved
 config. Original RAM never initializes the native game. Complete drawings and
@@ -67,12 +67,12 @@ def verified_update_mapping(path, source_path, original):
     return mapping, evidence
 
 
-def assess(source_path, native_path, success=False, mapping=None):
+def assess(source_path, native_path, success=False, mapping=None, mode=3, outcome=None):
     sh, source = read_trace(source_path)
     nh, native = read_trace(native_path)
     assert sh == nh
     def first(rows):
-        return next(i for i, r in rows.items() if number(r, 'mode') == 3 and
+        return next(i for i, r in rows.items() if number(r, 'mode') == mode and
                     number(r, 'stage') == 0xC10D8A and number(r, 'game_tick') == 1)
     sf, nf = first(source), first(native)
     assert (mapping[sf] if mapping else sf) == nf, ('different initialization/input origins', sf, nf)
@@ -83,6 +83,10 @@ def assess(source_path, native_path, success=False, mapping=None):
         ss = next(i for i, r in source.items() if i > sf and number(r, 'mode') == 0) - 1
         ns = max(native)
         assert (mapping[ss] if mapping else ss) == ns, 'different final observed flight boundary'
+    elif outcome == 'mission failure':
+        ss, ns = max(source), max(native)
+        assert number(source[ss], 'mode') == mode
+        assert (mapping[ss] if mapping else ss) == ns, 'different final failure observation'
     else:
         ss, ns = stop(source, sf), stop(native, nf)
         assert (mapping[ss] if mapping else ss) == ns == max(native), 'different crash callback or recording end'
@@ -148,13 +152,22 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     evidence = args.source_evidence
     original = json.loads((evidence / 'report.json').read_text())
+    mode = original.get('mission_mode', 3)
+    assert mode in (3, 4)
+    if mode == 4:
+        from check_original_mission_recording import verified_prefix
+        prefix = original['source_prefix']
+        checked, _, _ = verified_prefix(Path(prefix['path']), original['input_hashes'])
+        assert checked == prefix and original['source_prefix_execution_exact']
     assert original['unmodified_replay_exact'], 'original recording has not reproduced independently'
     success = original['mission_success']
     mapping, update_evidence = (verified_update_mapping(args.source_updates, evidence / 'driver.jsonl.gz', original)
         if args.source_updates else (None, None))
     input_path = (args.source_updates / 'update-consumed.fa18in') if mapping else evidence / 'consumed.fa18in'
     iterations = update_evidence['real_update_calls'] if mapping else original['iterations']
-    assert original['original_outcome'] == ('success' if success else 'crash/reset')
+    outcome = original['original_outcome']
+    expected_outcomes = ('success',) if success else ('crash/reset', 'mission failure')
+    assert outcome in expected_outcomes
     for name, expected in original['input_hashes'].items():
         assert digest((ROOT / name).read_bytes()) == expected, f'original media changed: {name}'
     for name, key, compressed in (
@@ -209,13 +222,10 @@ def main():
             assert stats['replay_iterations'] == iterations
             events = sum(' K ' in line for line in input_path.read_text().splitlines())
             assert stats['replay_events'] == events and stats['input_queued'] == 0
-            assert stats['postflight_resets'] == (0 if success else 1)
-            if success:
-                assert stats['screen'] == 'menu' and stats['mode'] == 0 and stats['stage'] == 'C0FCB4'
             assert not stats['cpu_emulation'] and not stats['chipset_emulation']
             ram = (work / 'native.dat').read_bytes()
             assert len(ram) == 0x100000
-            report = dict(native_input_hashes=hashes,
+            report = dict(native_input_hashes=hashes, mission_mode=mode,
                 source_trace_sha256=original['driver_trace_sha256'],
                 consumed_input_sha256=original['consumed_input_sha256'],
                 source_update_evidence=update_evidence,
@@ -232,29 +242,53 @@ def main():
             (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     report['source_context'] = context(gzip.decompress((evidence / 'driver.dat.gz').read_bytes()))
     a, b = report['source_context'], report['native_context']
-    for field in ('qualified', 'saved_level', 'grades', 'completions', 'scene_level', 'player_phase'):
-        assert a[field] == b[field], f'unmatched earned-pilot context: {field}'
+    if outcome == 'mission failure':
+        assert a['player_phase'] in (0xfe, 2), 'original final RAM has no mission failure outcome'
+    report['context_differences'] = {field: [a[field], b[field]] for field in
+        ('qualified', 'saved_level', 'grades', 'completions', 'scene_level', 'player_phase') if a[field] != b[field]}
+    stats = report['native_run']
+    report['runtime_outcome_matches'] = (
+        stats['postflight_resets'] == (1 if outcome == 'crash/reset' else 0) and
+        (not success or (stats['screen'], stats['mode'], stats['stage']) == ('menu', 0, 'C0FCB4')))
     report['pilot_record_difference_offsets'] = [i for i, (x, y) in enumerate(
         zip(bytes.fromhex(a['pilot']), bytes.fromhex(b['pilot']))) if x != y]
     key = 'whole_successful_flight' if success else 'whole_failed_flight'
-    report[key] = assess(evidence / 'driver.jsonl.gz', args.out / 'native.jsonl.gz', success, mapping)
+    try:
+        report[key] = assess(evidence / 'driver.jsonl.gz', args.out / 'native.jsonl.gz', success, mapping, mode, outcome)
+        report['comparison_rejected'] = None
+    except AssertionError as error:
+        report[key] = None
+        report['comparison_rejected'] = str(error)
+    report['comparison_completed'] = report[key] is not None
     report['mission_success'] = success
-    report['scope'] = ('Independently started, equally qualified zero-grade pilots; complete mission-three '
+    report['scope'] = (f'Independently started pilots with no qualification or grades initially; complete mode-{mode} '
         + ('successful flight, grade and menu return. Complete gameplay-state parity requires '
            'every core and named game field to match at the declared execution alignment. '
-           if success else 'failed flight through the first C11788 crash/reset boundary. ')
+           if success else f'failed flight through the first original {outcome} boundary. ')
         + 'No reference RAM supplied to native. Full pilot records differ in naming/date/history bytes. '
         'Strict drawing and clock differences remain unaccepted diagnostics.')
+    if mode == 4:
+        report['scope'] += (' Both games replay qualification and the complete preceding mission to earn '
+            'their pilot progress normally before escort. The original prefix is independently verified; '
+            'neither saved pilot fields nor gameplay RAM are synthesized.')
     if mapping:
         report['scope'] += (' Every source observation is compared at its proven original JSR/LINK call identity. '
             'All consumed key edges retain their order and source PAL timestamps; only the '
             'legacy recorder iteration is translated to the actual update call. No game state or clock is written.')
+    if not report['comparison_completed']:
+        report['scope'] = ('Retained independent replay attempt; rejected before accepting flight parity: '
+            + report['comparison_rejected'] + '. No fitted alignment or native gameplay change. '
+            'The declared complete comparison has not run successfully.')
     (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     comparison = report[key]
-    print(json.dumps({k: v for k, v in comparison.items() if k.endswith('matching') or k == 'compared'}))
+    print(json.dumps({k: v for k, v in comparison.items() if k.endswith('matching') or k == 'compared'})
+          if comparison else json.dumps(dict(comparison_rejected=report['comparison_rejected'])))
     for name, expected in hashes.items():
         assert digest((ROOT / name).read_bytes()) == expected, f'native input changed: {name}'
     subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+    assert report['comparison_completed'], f'comparison rejected: {report["comparison_rejected"]}; captures retained'
+    assert report['runtime_outcome_matches'], 'native outcome differs; complete comparison retained'
+    assert not report['context_differences'], 'earned-pilot context differs; complete comparison retained'
     assert comparison['strict_gameplay_matching'], 'whole-flight state parity remains unaccepted; see retained report'
 
 

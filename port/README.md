@@ -1,5 +1,13 @@
 # Active port source ownership
 
+Escort comparison origin (2026-10-10): all 44,458 original observations map
+to 44,455 executed updates; three resumptions and 2,028 key edges are retained.
+The native replay is rejected before flight assessment: timed briefing paths
+enter flight 246 updates earlier than the shared global input schedule. Full
+failed captures remain retained; no offsets or runtime changes are applied.
+Mission-event input ownership/initialization, successful escort and sound
+timing remain open. See [escort origin review](../analysis/native_escort_initialization_review_milestone.md).
+
 Earned original escort recording (2026-10-10): qualification and the complete
 first-mission prefix reproduce exactly before escort. All 44,458 observations,
 final RAM and consumed controls match an independent unmodified replay. The

@@ -1,0 +1,990 @@
+{
+  "scope": "Original update identities verified; global input schedule comparison rejected before escort body assessment. Native gameplay parity and successful escort coverage remain open.",
+  "original_updates": {
+    "source_trace_sha256": "bc6e451b76c03921b5eb4c383b2ab8332f41aa1da7d72e8a46bdfcae0b8921d7",
+    "source_final_ram_sha256": "01b668845585f6984f1e79e26e19a6913ba0611a99ec8daad999333f2735b2b2",
+    "source_consumed_input_sha256": "9f323fe6798553400698598e17d557a64173254e38d541a8b836d6f3c785bfcd",
+    "probe_runner_sha256": "6019c97697dc40b76bbe60a199168ac0815561682308221fe3abe03171d2aa0f",
+    "probe_source_sha256": "6cfdb219df9d51d8c9ca1ce630f33472e09b8e49431b02c3fa6430231b0c9a3c",
+    "observations": 44458,
+    "real_update_calls": 44455,
+    "executed_links": 44455,
+    "duplicate_observations": 3,
+    "repeats": [
+      {
+        "iteration": 22502,
+        "update": 22501,
+        "frame": 20053,
+        "previous_entry": {
+          "kind": "after",
+          "iteration": "22501",
+          "frame": "20052",
+          "pc": "C0EFD4",
+          "ppc": "C15DA2",
+          "sp": "00C55058",
+          "stack_long": "00C15DA8",
+          "stop_pc": "C0EFD4",
+          "stop_sp": "00C55058",
+          "via_call": "1",
+          "result": "2"
+        },
+        "resumed_entry": {
+          "kind": "before",
+          "iteration": "22501",
+          "frame": "20053",
+          "pc": "C0EFD4",
+          "ppc": "FC0EC0",
+          "sp": "00C55058",
+          "stack_long": "00C15DA8",
+          "stop_pc": "C501D4",
+          "stop_sp": "00C7FF4C",
+          "via_call": "0",
+          "result": "0"
+        }
+      },
+      {
+        "iteration": 24008,
+        "update": 24006,
+        "frame": 27207,
+        "previous_entry": {
+          "kind": "after",
+          "iteration": "24007",
+          "frame": "27206",
+          "pc": "C0EFD4",
+          "ppc": "C15DA2",
+          "sp": "00C55058",
+          "stack_long": "00C15DA8",
+          "stop_pc": "C0EFD4",
+          "stop_sp": "00C55058",
+          "via_call": "1",
+          "result": "2"
+        },
+        "resumed_entry": {
+          "kind": "before",
+          "iteration": "24007",
+          "frame": "27207",
+          "pc": "C0EFD4",
+          "ppc": "FC0FF0",
+          "sp": "00C55058",
+          "stack_long": "00C15DA8",
+          "stop_pc": "C065A4",
+          "stop_sp": "00C00E54",
+          "via_call": "0",
+          "result": "0"
+        }
+      },
+      {
+        "iteration": 41226,
+        "update": 41223,
+        "frame": 54815,
+        "previous_entry": {
+          "kind": "after",
+          "iteration": "41225",
+          "frame": "54814",
+          "pc": "C0EFD4",
+          "ppc": "C15DA2",
+          "sp": "00C55058",
+          "stack_long": "00C15DA8",
+          "stop_pc": "C0EFD4",
+          "stop_sp": "00C55058",
+          "via_call": "1",
+          "result": "2"
+        },
+        "resumed_entry": {
+          "kind": "before",
+          "iteration": "41225",
+          "frame": "54815",
+          "pc": "C0EFD4",
+          "ppc": "FC0EC0",
+          "sp": "00C55058",
+          "stack_long": "00C15DA8",
+          "stop_pc": "C501CE",
+          "stop_sp": "00C7FFAC",
+          "via_call": "0",
+          "result": "0"
+        }
+      }
+    ],
+    "input_edges_preserved": 2028,
+    "remapped_input_sha256": "81bf04fa89dd5f85d6fca295daef95dd05362d8f1cf35bd895dc89919f4c9525",
+    "mapping_sha256": "cd2a5ea238825f9f957bc778c747f9437f54e58d8c6d28a4729ad889af7c8291",
+    "entries_sha256": "7fff4dad49f56dcafd82cd011085eb51990d733bd22ff10e505936f991b1dc69",
+    "instruction_trace_sha256": "c97054b0ae18d0e5f7e892ada70f33c39658e90f2a260005415424fac270d4df",
+    "mutation_rejections": {
+      "caller": true,
+      "executed_link": true,
+      "resume_stack": true,
+      "resume_stop": true
+    },
+    "scope": "Exact original execution and input retained; explicit JSR/LINK identities map every observation. No game tick, state or drawing equality is used to decide whether a boundary repeats. Native replay and complete gameplay/drawing parity remain separate acceptance checks."
+  },
+  "native_attempt": {
+    "native_input_hashes": {
+      "tools\\native\\fixtures\\region-pilot-enlist.e9k": "3c2a48da86432f2782ed6cb0036a9eb42fa08df4b6a64df75496e602530bff3a",
+      "local\\media\\fa18.adf": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2"
+    },
+    "mission_mode": 4,
+    "source_trace_sha256": "bc6e451b76c03921b5eb4c383b2ab8332f41aa1da7d72e8a46bdfcae0b8921d7",
+    "consumed_input_sha256": "9f323fe6798553400698598e17d557a64173254e38d541a8b836d6f3c785bfcd",
+    "source_update_evidence": {
+      "source_trace_sha256": "bc6e451b76c03921b5eb4c383b2ab8332f41aa1da7d72e8a46bdfcae0b8921d7",
+      "source_final_ram_sha256": "01b668845585f6984f1e79e26e19a6913ba0611a99ec8daad999333f2735b2b2",
+      "source_consumed_input_sha256": "9f323fe6798553400698598e17d557a64173254e38d541a8b836d6f3c785bfcd",
+      "probe_runner_sha256": "6019c97697dc40b76bbe60a199168ac0815561682308221fe3abe03171d2aa0f",
+      "probe_source_sha256": "6cfdb219df9d51d8c9ca1ce630f33472e09b8e49431b02c3fa6430231b0c9a3c",
+      "observations": 44458,
+      "real_update_calls": 44455,
+      "executed_links": 44455,
+      "duplicate_observations": 3,
+      "repeats": [
+        {
+          "iteration": 22502,
+          "update": 22501,
+          "frame": 20053,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "22501",
+            "frame": "20052",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "22501",
+            "frame": "20053",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D4",
+            "stop_sp": "00C7FF4C",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 24008,
+          "update": 24006,
+          "frame": 27207,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "24007",
+            "frame": "27206",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "24007",
+            "frame": "27207",
+            "pc": "C0EFD4",
+            "ppc": "FC0FF0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C065A4",
+            "stop_sp": "00C00E54",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 41226,
+          "update": 41223,
+          "frame": 54815,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "41225",
+            "frame": "54814",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "41225",
+            "frame": "54815",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FFAC",
+            "via_call": "0",
+            "result": "0"
+          }
+        }
+      ],
+      "input_edges_preserved": 2028,
+      "remapped_input_sha256": "81bf04fa89dd5f85d6fca295daef95dd05362d8f1cf35bd895dc89919f4c9525",
+      "mapping_sha256": "cd2a5ea238825f9f957bc778c747f9437f54e58d8c6d28a4729ad889af7c8291",
+      "entries_sha256": "7fff4dad49f56dcafd82cd011085eb51990d733bd22ff10e505936f991b1dc69",
+      "instruction_trace_sha256": "c97054b0ae18d0e5f7e892ada70f33c39658e90f2a260005415424fac270d4df",
+      "mutation_rejections": {
+        "caller": true,
+        "executed_link": true,
+        "resume_stack": true,
+        "resume_stop": true
+      },
+      "scope": "Exact original execution and input retained; explicit JSR/LINK identities map every observation. No game tick, state or drawing equality is used to decide whether a boundary repeats. Native replay and complete gameplay/drawing parity remain separate acceptance checks."
+    },
+    "replay_input_sha256": "81bf04fa89dd5f85d6fca295daef95dd05362d8f1cf35bd895dc89919f4c9525",
+    "runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+    "enlisted_pilot": "0000000000010000000000000000000000000000000000000000000000004e4557000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "enlisted_save_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+    "enlist_run": {
+      "frame_owner_exit": false,
+      "frames": 9000,
+      "screen": "menu",
+      "mode": 0,
+      "glyphs": 13256,
+      "record_updates": 1,
+      "scene_frames": 0,
+      "terrain_polygons": 0,
+      "model_calls": 0,
+      "hud_frames": 0,
+      "control_frames": 0,
+      "scene_selected": false,
+      "stage": "C0FCB4",
+      "game_tick": 0,
+      "timer_pending": false,
+      "timer_yields": 0,
+      "display_publications": 0,
+      "display_yields": 0,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 1,
+      "input_events": 1,
+      "input_queued": 0,
+      "update_iterations": 7156,
+      "replay_iterations": 0,
+      "replay_events": 0,
+      "host_replay_events": 18,
+      "host_replay_pending": 0,
+      "replay_started": false,
+      "voice_ticks": 9000,
+      "voice_publications": 18769,
+      "voice_levels": [
+        [
+          358,
+          31
+        ],
+        [
+          358,
+          31
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 6257,
+      "sample_frames": 8640000,
+      "nonzero_sample_frames": 8511816,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "native_run": {
+      "frame_owner_exit": false,
+      "frames": 70162,
+      "screen": "scene-setup",
+      "mode": 4,
+      "glyphs": 22544,
+      "record_updates": 9846,
+      "scene_frames": 9840,
+      "terrain_polygons": 35751,
+      "model_calls": 81933,
+      "hud_frames": 9840,
+      "control_frames": 24287,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 4061,
+      "timer_pending": true,
+      "timer_yields": 23172,
+      "display_publications": 24286,
+      "display_yields": 24478,
+      "display_pending": false,
+      "displayed_page": 1,
+      "postflight_callbacks": 1,
+      "postflight_resets": 1,
+      "input_passes": 24283,
+      "input_events": 2017,
+      "input_queued": 0,
+      "update_iterations": 44931,
+      "replay_iterations": 44455,
+      "replay_events": 2028,
+      "host_replay_events": 2,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 70162,
+      "voice_publications": 148419,
+      "voice_levels": [
+        [
+          764,
+          40
+        ],
+        [
+          766,
+          40
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 73285,
+      "sample_frames": 67355520,
+      "nonzero_sample_frames": 66729366,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "native_context": {
+      "pilot": "0001000000020300000000ad0000000000010000000100000000000000004e4557000000000000000000000000000000000000000000000200010036000000000000000000000002000100000000",
+      "qualified": 1,
+      "saved_level": 0,
+      "grades": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "completions": 1,
+      "scene_level": 1,
+      "player_phase": 4
+    },
+    "final_saved_pilot": "0001000000020300000000ad0000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+    "native_trace_sha256": "4a782bb703fc2fb26a6160a0653517dc81940fe4c3ecb8f895e49a304e815090",
+    "native_final_ram_sha256": "2a350592ca6dc518c20750ecb1c2e7cf1b3422a0394661d59eeb44d65bb7de0f",
+    "source_context": {
+      "pilot": "000100000000030000000168000000000000000000010000000000000000000000000000000000000000000000000000000000000000000200010036000000000000000000000000000800000000",
+      "qualified": 1,
+      "saved_level": 0,
+      "grades": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "completions": 1,
+      "scene_level": 1,
+      "player_phase": 254
+    },
+    "context_differences": {
+      "player_phase": [
+        254,
+        4
+      ]
+    },
+    "runtime_outcome_matches": false,
+    "pilot_record_difference_offsets": [
+      5,
+      10,
+      11,
+      17,
+      30,
+      31,
+      32,
+      71,
+      73
+    ],
+    "whole_failed_flight": null,
+    "comparison_rejected": "('different initialization/input origins', 40643, 40395)",
+    "comparison_completed": false,
+    "mission_success": false,
+    "scope": "Retained independent replay attempt; rejected before accepting flight parity: ('different initialization/input origins', 40643, 40395). No fitted alignment or native gameplay change. The declared complete comparison has not run successfully."
+  },
+  "initialization_review": {
+    "original": {
+      "first": 40643,
+      "events": [
+        {
+          "iteration": 27105,
+          "frame": 46377,
+          "stage": "00c10dae",
+          "mode": "03",
+          "game_tick": "0e0a"
+        },
+        {
+          "iteration": 27109,
+          "frame": 46413,
+          "stage": "00c0fbe0",
+          "mode": "00",
+          "game_tick": "0000"
+        },
+        {
+          "iteration": 27110,
+          "frame": 46451,
+          "stage": "00c0fcb4",
+          "mode": "00",
+          "game_tick": "0000"
+        },
+        {
+          "iteration": 27469,
+          "frame": 46556,
+          "stage": "00c1017e",
+          "mode": "00",
+          "game_tick": "0000"
+        },
+        {
+          "iteration": 27470,
+          "frame": 46561,
+          "stage": "00c0fcb4",
+          "mode": "00",
+          "game_tick": "0000"
+        },
+        {
+          "iteration": 36237,
+          "frame": 48056,
+          "stage": "00c0fece",
+          "mode": "04",
+          "game_tick": "0000"
+        },
+        {
+          "iteration": 36448,
+          "frame": 48111,
+          "stage": "00c103e4",
+          "mode": "04",
+          "game_tick": "0001"
+        },
+        {
+          "iteration": 36453,
+          "frame": 48175,
+          "stage": "00c10418",
+          "mode": "04",
+          "game_tick": "0005"
+        },
+        {
+          "iteration": 36722,
+          "frame": 48248,
+          "stage": "00c10458",
+          "mode": "04",
+          "game_tick": "0006"
+        },
+        {
+          "iteration": 36732,
+          "frame": 48407,
+          "stage": "00c104c2",
+          "mode": "04",
+          "game_tick": "0010"
+        },
+        {
+          "iteration": 36734,
+          "frame": 48423,
+          "stage": "00c105a6",
+          "mode": "04",
+          "game_tick": "0011"
+        },
+        {
+          "iteration": 38561,
+          "frame": 48816,
+          "stage": "00c105f4",
+          "mode": "04",
+          "game_tick": "0012"
+        },
+        {
+          "iteration": 38562,
+          "frame": 48832,
+          "stage": "00c10626",
+          "mode": "04",
+          "game_tick": "0013"
+        },
+        {
+          "iteration": 38564,
+          "frame": 48863,
+          "stage": "00c1064c",
+          "mode": "04",
+          "game_tick": "0015"
+        },
+        {
+          "iteration": 38565,
+          "frame": 48878,
+          "stage": "00c10678",
+          "mode": "04",
+          "game_tick": "0016"
+        },
+        {
+          "iteration": 38568,
+          "frame": 48910,
+          "stage": "00c1072e",
+          "mode": "04",
+          "game_tick": "0018"
+        },
+        {
+          "iteration": 38868,
+          "frame": 48971,
+          "stage": "00c1075a",
+          "mode": "04",
+          "game_tick": "0018"
+        },
+        {
+          "iteration": 38870,
+          "frame": 48971,
+          "stage": "00c1078a",
+          "mode": "04",
+          "game_tick": "0018"
+        },
+        {
+          "iteration": 38874,
+          "frame": 48972,
+          "stage": "00c10900",
+          "mode": "04",
+          "game_tick": "0018"
+        },
+        {
+          "iteration": 40158,
+          "frame": 49264,
+          "stage": "00c10942",
+          "mode": "04",
+          "game_tick": "0019"
+        },
+        {
+          "iteration": 40162,
+          "frame": 49326,
+          "stage": "00c10970",
+          "mode": "04",
+          "game_tick": "001d"
+        },
+        {
+          "iteration": 40163,
+          "frame": 49341,
+          "stage": "00c109ac",
+          "mode": "04",
+          "game_tick": "001e"
+        },
+        {
+          "iteration": 40166,
+          "frame": 49372,
+          "stage": "00c10a24",
+          "mode": "04",
+          "game_tick": "0020"
+        },
+        {
+          "iteration": 40167,
+          "frame": 49385,
+          "stage": "00c10b1e",
+          "mode": "04",
+          "game_tick": "0021"
+        },
+        {
+          "iteration": 40170,
+          "frame": 49432,
+          "stage": "00c10c08",
+          "mode": "04",
+          "game_tick": "0024"
+        },
+        {
+          "iteration": 40289,
+          "frame": 50682,
+          "stage": "00c10c68",
+          "mode": "04",
+          "game_tick": "009b"
+        },
+        {
+          "iteration": 40295,
+          "frame": 50713,
+          "stage": "00c10cfe",
+          "mode": "04",
+          "game_tick": "00a0"
+        },
+        {
+          "iteration": 40643,
+          "frame": 50794,
+          "stage": "00c10d8a",
+          "mode": "04",
+          "game_tick": "0001"
+        },
+        {
+          "iteration": 40647,
+          "frame": 50817,
+          "stage": "00c10dae",
+          "mode": "04",
+          "game_tick": "0005"
+        }
+      ]
+    },
+    "native": {
+      "first": 40395,
+      "events": [
+        {
+          "iteration": 27105,
+          "frame": 42678,
+          "stage": "00c10dae",
+          "mode": "03",
+          "game_tick": "0e0c"
+        },
+        {
+          "iteration": 36235,
+          "frame": 51834,
+          "stage": "00c0fece",
+          "mode": "04",
+          "game_tick": "0000"
+        },
+        {
+          "iteration": 36446,
+          "frame": 52047,
+          "stage": "00c103e4",
+          "mode": "04",
+          "game_tick": "0001"
+        },
+        {
+          "iteration": 36451,
+          "frame": 52053,
+          "stage": "00c10418",
+          "mode": "04",
+          "game_tick": "0005"
+        },
+        {
+          "iteration": 36496,
+          "frame": 52100,
+          "stage": "00c10458",
+          "mode": "04",
+          "game_tick": "0006"
+        },
+        {
+          "iteration": 36506,
+          "frame": 52130,
+          "stage": "00c104c2",
+          "mode": "04",
+          "game_tick": "0010"
+        },
+        {
+          "iteration": 36508,
+          "frame": 52135,
+          "stage": "00c105a6",
+          "mode": "04",
+          "game_tick": "0011"
+        },
+        {
+          "iteration": 38335,
+          "frame": 53962,
+          "stage": "00c105f4",
+          "mode": "04",
+          "game_tick": "0012"
+        },
+        {
+          "iteration": 38336,
+          "frame": 53963,
+          "stage": "00c10626",
+          "mode": "04",
+          "game_tick": "0013"
+        },
+        {
+          "iteration": 38338,
+          "frame": 53965,
+          "stage": "00c1064c",
+          "mode": "04",
+          "game_tick": "0015"
+        },
+        {
+          "iteration": 38339,
+          "frame": 53966,
+          "stage": "00c10678",
+          "mode": "04",
+          "game_tick": "0016"
+        },
+        {
+          "iteration": 38342,
+          "frame": 53969,
+          "stage": "00c1072e",
+          "mode": "04",
+          "game_tick": "0018"
+        },
+        {
+          "iteration": 38629,
+          "frame": 54256,
+          "stage": "00c1075a",
+          "mode": "04",
+          "game_tick": "0018"
+        },
+        {
+          "iteration": 38631,
+          "frame": 54258,
+          "stage": "00c1078a",
+          "mode": "04",
+          "game_tick": "0018"
+        },
+        {
+          "iteration": 38635,
+          "frame": 54262,
+          "stage": "00c10900",
+          "mode": "04",
+          "game_tick": "0018"
+        },
+        {
+          "iteration": 39919,
+          "frame": 55546,
+          "stage": "00c10942",
+          "mode": "04",
+          "game_tick": "0019"
+        },
+        {
+          "iteration": 39923,
+          "frame": 55550,
+          "stage": "00c10970",
+          "mode": "04",
+          "game_tick": "001d"
+        },
+        {
+          "iteration": 39924,
+          "frame": 55551,
+          "stage": "00c109ac",
+          "mode": "04",
+          "game_tick": "001e"
+        },
+        {
+          "iteration": 39927,
+          "frame": 55554,
+          "stage": "00c10a24",
+          "mode": "04",
+          "game_tick": "0020"
+        },
+        {
+          "iteration": 39928,
+          "frame": 55557,
+          "stage": "00c10b1e",
+          "mode": "04",
+          "game_tick": "0021"
+        },
+        {
+          "iteration": 39931,
+          "frame": 55567,
+          "stage": "00c10c08",
+          "mode": "04",
+          "game_tick": "0024"
+        },
+        {
+          "iteration": 40041,
+          "frame": 55938,
+          "stage": "00c10c68",
+          "mode": "04",
+          "game_tick": "0092"
+        },
+        {
+          "iteration": 40047,
+          "frame": 55956,
+          "stage": "00c10cfe",
+          "mode": "04",
+          "game_tick": "0097"
+        },
+        {
+          "iteration": 40395,
+          "frame": 56304,
+          "stage": "00c10d8a",
+          "mode": "04",
+          "game_tick": "0001"
+        },
+        {
+          "iteration": 40399,
+          "frame": 56321,
+          "stage": "00c10dae",
+          "mode": "04",
+          "game_tick": "0005"
+        },
+        {
+          "iteration": 42318,
+          "frame": 62959,
+          "stage": "00c11788",
+          "mode": "04",
+          "game_tick": "0784"
+        },
+        {
+          "iteration": 42319,
+          "frame": 62960,
+          "stage": "00c11830",
+          "mode": "04",
+          "game_tick": "0785"
+        },
+        {
+          "iteration": 42320,
+          "frame": 62961,
+          "stage": "00c11872",
+          "mode": "04",
+          "game_tick": "0786"
+        },
+        {
+          "iteration": 42326,
+          "frame": 62977,
+          "stage": "00c10dae",
+          "mode": "04",
+          "game_tick": "078c"
+        }
+      ]
+    },
+    "initial_core_changes": [
+      {
+        "slot": 0,
+        "bytes": [
+          7,
+          11,
+          21,
+          77,
+          99
+        ]
+      },
+      {
+        "slot": 4,
+        "bytes": [
+          57,
+          77
+        ]
+      },
+      {
+        "slot": 8,
+        "bytes": [
+          7,
+          20,
+          21,
+          23,
+          31,
+          57,
+          65,
+          73,
+          104,
+          105,
+          112,
+          128,
+          129,
+          133,
+          141,
+          144,
+          145,
+          146,
+          147,
+          151,
+          159,
+          162,
+          163
+        ]
+      },
+      {
+        "slot": 14,
+        "bytes": [
+          7,
+          21
+        ]
+      }
+    ],
+    "initial_game_field_changes": {
+      "observer": [
+        "ffe7ebc7ffff858fffe646bc1158143900007a711059b944",
+        "ffe7ebfaffff8507ffe647e81198140600007af91059b818"
+      ],
+      "view_pan_rotate": [
+        "048a56f3",
+        "047d571c"
+      ]
+    },
+    "scope": "Diagnostic comparison of declared first C10D8A/tick-one mission events; no offsets applied to controls or accepted flight assessment."
+  },
+  "original_first_flight_update": 40641,
+  "native_first_flight_update": 40395,
+  "replay_origin_difference": 246,
+  "offset_applied": false,
+  "native_runtime_changed": false,
+  "retained_files": {
+    "build/native-flight/escort-failure-update-entries/report.json": {
+      "bytes": 3786,
+      "sha256": "056eecb7dc5d242050ce03a94eabe445ae383e59f01258df233002589c67174d"
+    },
+    "build/native-flight/escort-failure-update-entries/mapping.json": {
+      "bytes": 689118,
+      "sha256": "cd2a5ea238825f9f957bc778c747f9437f54e58d8c6d28a4729ad889af7c8291"
+    },
+    "build/native-flight/escort-failure-update-entries/entries.csv.gz": {
+      "bytes": 484045,
+      "sha256": "3b24bcfa780ca911a5aa0ee88b0bf871a7fa2415fdc966f53dc908aa32735abd"
+    },
+    "build/native-flight/escort-failure-update-entries/complete-boundary.csv.gz": {
+      "bytes": 683018,
+      "sha256": "16051390d1c99784bc9846f5d32eba16c44d37e059d59f2e445cd2b52ca9b4df"
+    },
+    "build/native-flight/escort-failure-update-entries/complete-source.jsonl.gz": {
+      "bytes": 5185334,
+      "sha256": "a93d78f93254631f7edb2543dc37634e86f8b175f9ec4ad24d419c7fbff71686"
+    },
+    "build/native-flight/escort-failure-update-entries/complete-source.dat.gz": {
+      "bytes": 351408,
+      "sha256": "110424db79f9be5bccfd6bf65e2ec6f888fae694f35c273a666347071334b707"
+    },
+    "build/native-flight/escort-failure-update-entries/complete-consumed.fa18in": {
+      "bytes": 39565,
+      "sha256": "9f323fe6798553400698598e17d557a64173254e38d541a8b836d6f3c785bfcd"
+    },
+    "build/native-flight/escort-failure-update-entries/update-consumed.fa18in": {
+      "bytes": 37535,
+      "sha256": "81bf04fa89dd5f85d6fca295daef95dd05362d8f1cf35bd895dc89919f4c9525"
+    },
+    "build/native-flight/independent-escort-failure-retained/report.json": {
+      "bytes": 9828,
+      "sha256": "b75a8282aee5364ca98a8f89e2a619b08bfcdc48722430e08c19916d5c9d82e8"
+    },
+    "build/native-flight/independent-escort-failure-retained/native.jsonl.gz": {
+      "bytes": 4331922,
+      "sha256": "d82d9ac450b3b8b1dac2a5f4f506f77a07b966909b833c0bc54b90696273ef41"
+    },
+    "build/native-flight/independent-escort-failure-retained/native.dat.gz": {
+      "bytes": 326804,
+      "sha256": "c6bc50959c324377115b8ac2d173eb193676945c2bf791af50124f45e28d734f"
+    },
+    "build/native-flight/independent-escort-failure-retained/native.log": {
+      "bytes": 1003,
+      "sha256": "b950a30f6b847453c0bf3a349728c47a5b1eab9ddcae412ec01eb35d8d04c93d"
+    },
+    "build/native-flight/independent-escort-failure-retained/enlist.log": {
+      "bytes": 943,
+      "sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/independent-escort-failure-retained/initialization-review.json": {
+      "bytes": 10230,
+      "sha256": "f451b27ccf26581957c65ea3f804dbbf61c0abc6f49915bc5ca049e77b77034a"
+    }
+  }
+}
