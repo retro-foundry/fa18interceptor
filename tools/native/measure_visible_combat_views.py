@@ -5,6 +5,9 @@ events exercise gear and every source camera mode without changing game state
 directly. A fresh headless run supplies exact RAM/PCM/counter expectations for
 the visible replay. This is a performance check, not original whole-flight
 parity or mission-completion acceptance.
+
+--clock host measures actual default windowed acquisition independently.
+The strict PAL headless/window comparison remains the default diagnostic.
 """
 import argparse
 import csv
@@ -140,15 +143,104 @@ def retain(work, evidence):
     return result
 
 
+def measure_host(args):
+    """Actual windowed host time has independently acquired gameplay inputs.
+
+    Keep complete observations instead of treating a virtual-clock run as its
+    expected output. No original clock/RAM is supplied to the playable runner.
+    """
+    pilot_bytes, source = flight_route(args.mode)
+    work = args.out.resolve()
+    work.mkdir(parents=True, exist_ok=True)
+    folder = work / 'visible-host'
+    folder.mkdir(exist_ok=False)
+    (folder / 'config').write_bytes(pilot_bytes)
+    input_path = work / 'cameras.e9k'
+    input_path.write_text(camera_input(source, args.frames))
+    env = {k: v for k, v in os.environ.items() if not k.startswith(('FA18_LOOP_', 'FA18_ORIGINAL_',
+        'FA18_BOUNDARY_', 'FA18_UPDATE_ENTRY_', 'FA18_TRACE_', 'FA18_MISSION_', 'FA18_CAMPAIGN_'))}
+    assert env.get('SDL_VIDEODRIVER', '') not in ('dummy', 'offscreen')
+    assert env.get('SDL_AUDIODRIVER', '') != 'dummy'
+    # Omit --clock intentionally: qualify the actual windowed default.
+    command = [str(args.runner.resolve()), '--adf', str(ROOT / 'local/media/fa18.adf'),
+        '--save-dir', str(folder), '--frames', str(args.frames), '--replay', str(input_path),
+        '--recorded-input-only', '--data-out', str(folder / 'final.dat'),
+        '--flight-trace', str(folder / 'flight.jsonl'), '--ppm', str(folder / 'pixels.ppm'),
+        '--memory-report', str(folder / 'memory.json'), '--clock-report', str(folder / 'clock.json'),
+        '--frame-times', str(folder / 'times.csv')]
+    prepared = dict(mode=args.mode, frames=args.frames, runner_sha256=sha(args.runner),
+        source_input=str(source.relative_to(ROOT)), source_input_sha256=sha(source),
+        input_sha256=sha(input_path), initial_pilot_sha256=hashlib.sha256(pilot_bytes).hexdigest(),
+        adf_sha256=sha(ROOT / 'local/media/fa18.adf'), command=command,
+        clock='default windowed host', native_flight_state_seeded=False)
+    (work / 'prepared.json').write_text(json.dumps(prepared, indent=2)+'\n')
+    print(f'Opening default-host mission mode {args.mode} with sound: {args.frames*.02/60:.1f} minutes. '
+          'Leave the window open; it closes automatically.', flush=True)
+    with (folder / 'run.log').open('w') as log:
+        result = subprocess.run(command, cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT,
+            timeout=args.frames*.02+180)
+    stats, = [json.loads(line) for line in (folder / 'run.log').read_text().splitlines() if line.startswith('{')]
+    memory = json.loads((folder / 'memory.json').read_text())
+    clock = json.loads((folder / 'clock.json').read_text())
+    timing = report(folder / 'times.csv', 20000)
+    with (folder / 'times.csv').open(newline='') as file:
+        rows = list(csv.DictReader(file))
+    scenes = [row for row in rows if row['scene_updated'] == '1' and int(row['mode']) == args.mode]
+    by_view = {str(view): summarize([row for row in scenes if int(row['view']) == view], 20000) for view in range(14)}
+    scope_error = None
+    try:
+        scope = trace_scope(folder / 'flight.jsonl', args.mode)
+    except AssertionError as error:
+        scope, scope_error = None, str(error)
+    evidence = dict(scope='Actual default host-clock visible partial mission with live sound, earned saved pilot and ordinary keys. '
+        'Every timing/presentation and complete flight observation is retained. '
+        'Independent original full-flight, exact audio and mission outcome remain separate.',
+        prepared=prepared, returncode=result.returncode, stats=stats, memory=memory, clock=clock,
+        timing=timing, scene_work_by_view=by_view, flight_scope=scope, flight_scope_error=scope_error,
+        final_hashes={name: sha(folder / name) for name in ('final.dat', 'pixels.ppm', 'config')},
+        native_runtime_changed=False, headless_equality_claimed=False)
+    evidence['accepted_default_host_combat_views'] = bool(result.returncode == 0 and scope and
+        scope['active_missile_observations'] and scope['active_aircraft_observations'] and
+        all(item['frames'] for item in by_view.values()) and stats['frames'] == args.frames and
+        timing['all']['frames'] == timing['all']['presented'] == args.frames and not timing['all']['over_work_budget'] and
+        clock['clock'] == 'host' and clock['low_bits_seen'] == 0xffffffff and
+        not any(stats[key] for key in ('cpu_emulation', 'chipset_emulation', 'postflight_resets', 'host_replay_pending', 'input_queued')) and
+        not memory['project_gameplay_heap_violations'] and not memory['sdl_failures'] and
+        stats['audio_device'] and stats['nonzero_sample_frames'])
+    # Retain even a rejected clip: compress only after whole-file equality.
+    retained = []
+    for name in ('final.dat', 'flight.jsonl'):
+        path = folder / name
+        raw = path.read_bytes()
+        compressed = path.with_name(name+'.gz')
+        compressed.write_bytes(gzip.compress(raw, mtime=0))
+        assert gzip.decompress(compressed.read_bytes()) == raw
+        retained.append(dict(path=str(compressed), decoded_bytes=len(raw),
+            decoded_sha256=hashlib.sha256(raw).hexdigest(), retained_sha256=sha(compressed)))
+        path.unlink()
+    evidence['retention'] = retained
+    (work / 'comparison.json').write_text(json.dumps(evidence, indent=2)+'\n')
+    subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+    assert evidence['accepted_default_host_combat_views'], 'Inspect the complete retained host-clock clip; no exclusions applied'
+    print(f"{args.frames} default-host presentations; all 14 views; airborne raised gear and actual combat; "
+          f"maximum work {timing['all']['phases']['work_us']['max_ms']:.4f} ms", flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--mode', type=int, choices=(5, 6, 7, 8), default=8)
     parser.add_argument('--frames', type=int, default=21550)
     parser.add_argument('--runner', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native.exe')
     parser.add_argument('--out', type=Path, required=True)
+    parser.add_argument('--clock', choices=('pal', 'host'), default='pal',
+        help='PAL exact diagnostic comparison or actual default-host visible gameplay')
     parser.add_argument('--prepare-only', action='store_true', help='Validate the route headlessly and retain its expectation before opening a window')
     args = parser.parse_args()
     assert 21550 <= args.frames <= 24200, 'Bounded airborne combat/camera clip, before the landing approach'
+    if args.clock == 'host':
+        assert not args.prepare_only, 'Host acquisition is measured in the actual paced window'
+        measure_host(args)
+        return
     pilot_bytes, source = flight_route(args.mode)
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)

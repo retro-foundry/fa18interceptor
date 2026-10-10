@@ -1,5 +1,14 @@
 # Native port handoff — 2026-10-09
 
+Default-host final combat (2026-10-10): the playable windowed default passes
+all 21,550 presentations with sound, all 14 camera modes and airborne raised
+gear. Maximum work is 16.2690 ms, with no frame over 20 ms, no model fault,
+heap violation or pool failure. Actual clock inputs retain all 32 low-bit
+patterns. Every timing row and complete flight/RAM trace is retained;
+strict PAL diagnostic comparisons stay unchanged. Other host-clock missions,
+independent complete flights and original sound timing remain open.
+See [default-host combat evidence](analysis/native_host_combat_views_milestone.md).
+
 Interactive host clock (2026-10-10): windowed gameplay now acquires actual
 microseconds, preserving all scene-selection bits. Headless defaults retain
 PAL time; sealed visible comparisons explicitly select PAL diagnostics.
