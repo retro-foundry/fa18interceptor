@@ -16,6 +16,7 @@ import tempfile
 from check_original_audio_dma import validate_dma, frames, open_stream, FETCH
 from check_original_filter_response import function
 from check_original_audio_prefix import validate_prefix
+from check_original_audio_capture import reference_file, reference_bytes
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / 'tools/engine9000-src/ami9000/sources/src'
@@ -95,7 +96,7 @@ def main():
     entry = validate_prefix(args.entry_prefix, args.capture, args.pcm_reference)
     assert entry['calls'] == 2177 and entry['endpoint_voice_boundary']['voices'][2]['address'] == 0
     initial, writes = entry['endpoint_hardware'], []
-    with (args.capture / 'audio_events.jsonl').open() as events:
+    with reference_file(args.capture / 'audio_events.jsonl') as events:
         for line in events:
             row = json.loads(line)
             if row['kind'] == 'write' and row['call'] <= 2178:
@@ -156,7 +157,7 @@ def main():
         'original functions. Ordered state/sample use only; beam-to-PCM timing, native onset/handoffs '
         'and the channel-1 call-94 zero word remain open.',
         authority=validation['authority'], dma_stream_sha256=validation['audio_dma']['sha256'],
-        event_log_sha256=sha((args.capture / 'audio_events.jsonl').read_bytes()),
+        event_log_sha256=sha(reference_bytes(args.capture / 'audio_events.jsonl')),
         source_sha256=sha((SOURCE / 'audio.c').read_bytes()),
         extracted_header_sha256=sha(header.encode()), extracted_functions=list(declarations),
         harness_sha256=sha(harness.read_bytes()), reference_executable_sha256=executable_sha256,

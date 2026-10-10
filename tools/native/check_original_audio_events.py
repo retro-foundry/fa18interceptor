@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 import sys
 
-from check_original_audio_capture import recorded_bytes, validate
+from check_original_audio_capture import recorded_bytes, validate, reference_file, reference_bytes
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -22,10 +22,10 @@ def validate_events(capture, baseline, pcm_reference=None):
     report = json.loads((capture / 'snapshot.json').read_text())
     descriptor = report['audio_events']
     path = capture / descriptor['file']
-    with path.open('rb') as log:
+    with reference_file(path) as log:
         assert hashlib.file_digest(log, 'sha256').hexdigest() == descriptor['sha256']
     sample_ends = {}
-    for line in (capture / 'audio_chunks.jsonl').read_text().splitlines():
+    for line in reference_bytes(capture / 'audio_chunks.jsonl').splitlines():
         row = json.loads(line)
         sample_ends[row['call']] = row['first_sample'] + row['frames']
     first = report['recorded_audio']['first_replay_call']
@@ -55,7 +55,7 @@ def validate_events(capture, baseline, pcm_reference=None):
     else:
         assert actual_layout is not None and actual_layout['voice_slots'] == 0xc4fe38 and actual_layout['master_volume'] == 0xc4ff26, 'Legacy fixed voice addresses do not match the loaded original sound owner'
     owner_observed = False
-    with path.open() as log:
+    with reference_file(path) as log:
         for line in log:
             row = json.loads(line)
             rows += 1

@@ -15,7 +15,7 @@ import subprocess
 import tempfile
 import wave
 
-from check_original_audio_capture import recorded_bytes
+from check_original_audio_capture import recorded_bytes, reference_file, reference_bytes
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / 'tools/engine9000-src/ami9000/sources/src'
@@ -39,13 +39,14 @@ def function(source, declaration):
 def pcm(folder, report):
     descriptor = report['recorded_audio']
     path = folder / descriptor['file']
-    assert sha(path.read_bytes()) == descriptor['wav_sha256']
-    with wave.open(str(path)) as wav:
+    with reference_file(path) as file:
+        assert hashlib.file_digest(file, 'sha256').hexdigest() == descriptor['wav_sha256']
+    with reference_file(path) as file, wave.open(file) as wav:
         assert (wav.getnchannels(), wav.getsampwidth(), wav.getframerate()) == (2, 2, descriptor['sample_rate'])
         data = wav.readframes(wav.getnframes())
         assert len(data) == descriptor['sample_frames'] * 4
     covered, calls = 0, []
-    for line in (folder / 'audio_chunks.jsonl').read_text().splitlines():
+    for line in reference_bytes(folder / 'audio_chunks.jsonl').splitlines():
         row = json.loads(line)
         assert row['first_sample'] == covered and row['frames'] > 0
         end = covered + row['frames']

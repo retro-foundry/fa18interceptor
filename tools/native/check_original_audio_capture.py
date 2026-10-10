@@ -4,6 +4,7 @@ All chunks are checked; no alignment, trimming, resampling or filtering is
 applied. This validates the reference recording, not native sound acceptance.
 """
 import argparse
+from contextlib import contextmanager
 import gzip
 import hashlib
 import json
@@ -22,6 +23,19 @@ def recorded_bytes(folder, name):
     return gzip.decompress((folder / (path.stem + '.dat.gz')).read_bytes())
 
 
+@contextmanager
+def reference_file(path):
+    """Read exact recording bytes, allowing lossless .gz cache retention."""
+    compressed = path if path.suffix == '.gz' else Path(str(path)+'.gz')
+    with (path.open('rb') if path.exists() and path.suffix != '.gz' else gzip.open(compressed, 'rb')) as file:
+        yield file
+
+
+def reference_bytes(path):
+    with reference_file(path) as file:
+        return file.read()
+
+
 def validate(capture, baseline, pcm_reference=None):
     report = json.loads((capture / 'snapshot.json').read_text())
     prior = json.loads((baseline / 'snapshot.json').read_text())
@@ -37,7 +51,7 @@ def validate(capture, baseline, pcm_reference=None):
     pcm_hash = hashlib.sha256()
     covered, calls, chunks = 0, set(), 0
     wav_path = pcm_reference if pcm_reference is not None else capture / audio['file']
-    with wave.open(str(wav_path)) as wav, (capture / 'audio_chunks.jsonl').open() as log:
+    with reference_file(wav_path) as file, wave.open(file) as wav, reference_file(capture / 'audio_chunks.jsonl') as log:
         assert (wav.getnchannels(),wav.getsampwidth(),wav.getframerate()) == (2,2,audio['sample_rate'])
         for line in log:
             row = json.loads(line)
@@ -50,11 +64,11 @@ def validate(capture, baseline, pcm_reference=None):
         assert covered == wav.getnframes() == audio['sample_frames'] and not wav.readframes(1)
     assert calls == set(range(first_call,first_call+total_calls)), 'One or more original replay calls have no recorded PCM'
     assert pcm_hash.hexdigest() == audio['pcm_sha256']
-    with wav_path.open('rb') as file:
+    with reference_file(wav_path) as file:
         assert hashlib.file_digest(file,'sha256').hexdigest() == audio['wav_sha256']
     if 'recorded_audio' in prior:
         assert audio == prior['recorded_audio'], 'Complete original PCM differs from recorded baseline'
-        assert (capture/'audio_chunks.jsonl').read_bytes() == (baseline/'audio_chunks.jsonl').read_bytes()
+        assert reference_bytes(capture/'audio_chunks.jsonl') == reference_bytes(baseline/'audio_chunks.jsonl')
     return {'scope':'Complete original batch PCM coverage and unchanged emulator execution; native onset/handoffs/filter parity remains open',
         'capture':str(capture), 'baseline':str(baseline), 'pcm_file_checked':str(wav_path),
         'replay_calls':len(calls), 'chunks':chunks,

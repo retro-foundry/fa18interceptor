@@ -1,5 +1,10 @@
 # Complete original sound fetch contents - 2026-10-10
 
+Later [actual sample-consumption evidence](native_original_audio_sample_use_milestone.md)
+classifies both zero words across the full recording: channel 1 emits both
+bytes and channel 2 discards its prefetch. The channel-1 word's origin and
+native sound timing/waveform remain open; the fetch evidence below is unchanged.
+
 The complete original Demo now retains **2,939,342 actual DMA-fetched words**
 across all **21,069 completed core frames**. Every fetched word equals its
 retained original RAM bytes. The observer preserves complete original PCM,

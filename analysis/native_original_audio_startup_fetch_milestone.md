@@ -1,5 +1,10 @@
 # Original sound startup prefetch — 2026-10-10
 
+Later [complete sample-consumption evidence](native_original_audio_sample_use_milestone.md)
+records both bytes of the channel-1 zero word and confirms no channel-2
+prefetch bytes are emitted. The earlier endpoint/startup results below
+remain unchanged; native sound timing and waveform remain open.
+
 The channel-2 zero word at call 2,178 is an original DMA startup prefetch.
 The unchanged source state machine discards that word; it does not emit an
 extra silent sample. This closes the classification of one of the two

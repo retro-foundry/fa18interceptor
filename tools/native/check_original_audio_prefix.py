@@ -13,7 +13,7 @@ from pathlib import Path
 import wave
 
 from check_original_audio_dma import frames, open_stream
-from check_original_audio_capture import recorded_bytes
+from check_original_audio_capture import recorded_bytes, reference_file, reference_bytes
 from original_audio_events import audio_state
 
 
@@ -36,9 +36,9 @@ def validate_prefix(prefix, complete, pcm_reference):
     for mapping in small['memory']:
         assert sha(recorded_bytes(prefix, mapping['file'])) == mapping['sha256']
     # Bind the complete reference and its exact requested PCM window.
-    with pcm_reference.open('rb') as file:
+    with reference_file(pcm_reference) as file:
         assert hashlib.file_digest(file, 'sha256').hexdigest() == full['recorded_audio']['wav_sha256']
-    with wave.open(str(pcm_reference)) as file:
+    with reference_file(pcm_reference) as source, wave.open(source) as file:
         assert (file.getnchannels(), file.getsampwidth(), file.getframerate()) == (2, 2, 44100)
         pcm = file.readframes(small['recorded_audio']['sample_frames'])
     assert len(pcm) == small['recorded_audio']['sample_frames'] * 4
@@ -53,16 +53,16 @@ def validate_prefix(prefix, complete, pcm_reference):
     actual_wav = prefix / small['recorded_audio']['file']
     if actual_wav.exists():
         assert actual_wav.read_bytes() == expected.getvalue()
-    chunk_log = (prefix / 'audio_chunks.jsonl').read_bytes()
-    full_chunks = (complete / 'audio_chunks.jsonl').read_bytes().splitlines(keepends=True)
+    chunk_log = reference_bytes(prefix / 'audio_chunks.jsonl')
+    full_chunks = reference_bytes(complete / 'audio_chunks.jsonl').splitlines(keepends=True)
     assert chunk_log == b''.join(full_chunks[:count])
     for capture, descriptor in ((prefix, small), (complete, full)):
-        assert sha((capture / 'audio_events.jsonl').read_bytes()) == descriptor['audio_events']['sha256']
+        assert sha(reference_bytes(capture / 'audio_events.jsonl')) == descriptor['audio_events']['sha256']
         with open_stream(capture / descriptor['audio_dma']['file']) as file:
             assert hashlib.file_digest(file, 'sha256').hexdigest() == descriptor['audio_dma']['sha256']
     full_events = []
     last_boundary = None
-    with (complete / 'audio_events.jsonl').open('rb') as events:
+    with reference_file(complete / 'audio_events.jsonl') as events:
         for line in events:
             row = json.loads(line)
             if row['call'] > count:
@@ -70,7 +70,7 @@ def validate_prefix(prefix, complete, pcm_reference):
             full_events.append(line)
             if row['kind'] == 'boundary':
                 last_boundary = row
-    assert (prefix / 'audio_events.jsonl').read_bytes() == b''.join(full_events)
+    assert reference_bytes(prefix / 'audio_events.jsonl') == b''.join(full_events)
     assert last_boundary and last_boundary['call'] == count
     dma_calls, dma_words = 0, 0
     with open_stream(prefix / 'audio_dma.bin') as a, open_stream(complete / 'audio_dma.bin') as b:

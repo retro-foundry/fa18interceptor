@@ -1,5 +1,10 @@
 # Actual original audio endpoints — 2026-10-10
 
+Later [complete sample-consumption evidence](native_original_audio_sample_use_milestone.md)
+records both bytes of the channel-1 zero word and confirms no channel-2
+prefetch bytes are emitted. The earlier endpoint/startup results below
+remain unchanged; native sound timing and waveform remain open.
+
 Two independently stopped original replays now retain actual serialized audio
 state immediately before the calls containing the uncatalogued zero words.
 Every PCM byte, chunk row, event row and actual DMA record in each stopped

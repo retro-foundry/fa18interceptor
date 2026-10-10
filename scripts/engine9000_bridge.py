@@ -1,7 +1,9 @@
-"""Bounded headless host for the unmodified Engine9000 ami9000 DLL.
+"""Bounded headless host for the original Engine9000 ami9000 DLL.
 
 ABI authority: pinned engine9000-src/{ami9000/libretro,e9k-debugger/libretro_host.c}.
 This is an automation host, not an emulator implementation. One core per process.
+The default core is unmodified. --audio-samples requires an explicitly selected
+isolated observer DLL and separate paired PCM/execution preservation.
 """
 import argparse
 import ctypes as C
@@ -385,6 +387,8 @@ def main():
                         help='With --wav/--restore, record audio/control writes, safe voice RAM and published LED/filter state at every replay boundary')
     parser.add_argument('--audio-dma', action='store_true',
                         help='With --audio-events, export actual fetched audio words from the existing DMA collector')
+    parser.add_argument('--audio-samples', action='store_true',
+                        help='With --audio-dma and an explicitly selected isolated observer DLL, record consumed sample bytes')
     parser.add_argument('--capture-budget-mib', type=int, default=512)
     args = parser.parse_args()
     if args.trace_frames and args.normal_custom_log:
@@ -395,6 +399,8 @@ def main():
         parser.error('--audio-events requires --wav/--restore and its own filtered custom log')
     if args.audio_dma and not args.audio_events:
         parser.error('--audio-dma requires --audio-events')
+    if args.audio_samples and (not args.audio_dma or 'FA18_ENGINE_ROOT' not in os.environ):
+        parser.error('--audio-samples requires --audio-dma and explicit FA18_ENGINE_ROOT observer selection')
     if args.frames < 0 or (args.wav and (args.frames < 1 or args.capture_budget_mib < 8)):
         parser.error('PCM capture requires positive frames and at least 8 MiB capture budget')
     args.output.mkdir(parents=True, exist_ok=False)
@@ -464,6 +470,10 @@ def main():
     if args.audio_dma:
         from original_audio_dma import AudioDmaWriter
         dma = AudioDmaWriter(engine, (args.output / 'audio_dma.bin').open('wb'))
+    sample_observer = sample_report = None
+    if args.audio_samples:
+        from original_audio_samples import AudioSamplesWriter
+        sample_observer = AudioSamplesWriter(engine, (args.output / 'audio_samples.bin').open('wb'), ENGINE)
     try:
         for frame in range(args.start_frame + 1, args.start_frame + args.frames + 1):
             engine.audio_capture_call = frame
@@ -480,21 +490,27 @@ def main():
                     'led_states': engine.led_states.copy()})
             if dma is not None:
                 dma.boundary(frame)
+            if sample_observer is not None:
+                sample_observer.boundary(frame)
             if frame % 100 == 0:
                 samples.append({'frame': frame, 'pc': engine.regs()['pc']})
     finally:
-        if dma is not None:
-            dma_report = dma.finish()
-        if normal_custom is not None:
-            engine.custom_log = None
-            normal_custom.close()
-        if args.wav:
-            engine.audio_capture.close()
-            engine.audio_capture = None
-            engine.audio_capture_log.close()
-        if engine.audio_events is not None:
-            engine.audio_events.close()
-            engine.audio_events = None
+        try:
+            if sample_observer is not None:
+                sample_report = sample_observer.finish()
+        finally:
+            if dma is not None:
+                dma_report = dma.finish()
+            if normal_custom is not None:
+                engine.custom_log = None
+                normal_custom.close()
+            if args.wav:
+                engine.audio_capture.close()
+                engine.audio_capture = None
+                engine.audio_capture_log.close()
+            if engine.audio_events is not None:
+                engine.audio_events.close()
+                engine.audio_events = None
     if args.wav and not engine.audio_capture_frames:
         raise RuntimeError('Reference emulator emitted no PCM samples')
     (args.output / 'state.bin').write_bytes(engine.state())
@@ -541,6 +557,8 @@ def main():
             'scope': 'All logged audio/control custom writes, safe voice RAM and published LED/filter state at every full-frame boundary; CIA pin/duty only known at retained endpoints'}
     if dma_report is not None:
         report['audio_dma'] = dma_report
+    if sample_report is not None:
+        report['audio_samples'] = sample_report
     (args.output / 'snapshot.json').write_text(json.dumps(report, indent=2) + '\n')
     if args.trace_frames:
         import capstone

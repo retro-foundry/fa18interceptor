@@ -1,5 +1,13 @@
 # The C port
 
+Complete original sample use (2026-10-10): all 21,069 replay calls retain
+5,878,371 actual mixer bytes with complete PCM/execution unchanged. Channel 1
+emits both bytes of its extra zero word; channel 2 discards its startup word.
+Three initial byte addresses remain explicitly unknown. Thirty guards and
+the real original-audio CTest pass; full compressed retention revalidates.
+Native onset/handoff/waveform and the extra word's origin remain open. See
+[sample-use evidence](analysis/native_original_audio_sample_use_milestone.md).
+
 Original audio endpoints (2026-10-10): stopped replays at calls 93 and
 2,177 exactly preserve all matching complete-recording PCM, events and DMA
 fetches. Actual channel-2 state is idle; the source startup check now requires

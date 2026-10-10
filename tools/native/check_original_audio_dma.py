@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from original_audio_dma import MAGIC, FRAME, FETCH, FOOTER
 from check_original_audio_events import validate_events
-from check_original_audio_capture import recorded_bytes
+from check_original_audio_capture import recorded_bytes, reference_bytes
 
 
 def exact(file, size):
@@ -77,7 +77,7 @@ def validate_dma(capture, baseline, pcm_reference=None):
     audio = snapshot['recorded_audio']
     first, last = audio['first_replay_call'], audio['first_replay_call']+audio['replay_calls']-1
     ends = {}
-    for line in (capture / 'audio_chunks.jsonl').read_text().splitlines():
+    for line in reference_bytes(capture / 'audio_chunks.jsonl').splitlines():
         row = json.loads(line)
         ends[row['call']] = row['first_sample']+row['frames']
     chip = recorded_bytes(capture, 'chip.bin')
