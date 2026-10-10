@@ -26,14 +26,8 @@ FetchContent_Declare(SDL2
     GIT_SHALLOW TRUE)
 FetchContent_MakeAvailable(SDL2)
 
-# Native frontend explicitly requested 2026-10-06. Same game sources, independent
-# executable: its link has no Musashi, translation, glue or machine objects.
-option(FA18_NATIVE_ONLY "Build only the native intro/menu runner" OFF)
-add_subdirectory(../native ${CMAKE_CURRENT_BINARY_DIR}/native)
-if(FA18_NATIVE_ONLY)
-    return()
-endif()
-
+# The standalone native port moved to fa18-interceptor-decomp on 2026-10-10.
+# This project retains the original CPU/machine comparison runners only.
 set(MUSASHI ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/musashi)
 add_library(fa18_musashi STATIC
     ${MUSASHI}/m68kcpu.c ${MUSASHI}/m68kops.c ${MUSASHI}/m68kdasm.c ${MUSASHI}/softfloat/softfloat.c)
@@ -50,7 +44,7 @@ file(GLOB FA18_OS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/../os/*.c)
 add_library(fa18_runtime STATIC
     ../romfree/media.c
     recomp_runtime.c recomp_ports.c
-    loop_input.c ../native/flight_trace.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
+    loop_input.c flight_trace.c ../machine/machine.c ../machine/bus.c ../machine/blitter.c ../machine/display.c ../machine/input.c
     ${FA18_GAME} ${FA18_OS} ${FA18_GENERATED})
 target_include_directories(fa18_runtime PUBLIC . generated ../machine ../game ../game/glue ../os)
 target_compile_definitions(fa18_runtime PRIVATE _CRT_SECURE_NO_WARNINGS)

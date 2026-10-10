@@ -5,7 +5,7 @@
 #include <string.h>
 
 #include "machine.h"
-#include "../native/flight_trace.h"
+#include "flight_trace.h"
 
 typedef struct {
     long iteration;

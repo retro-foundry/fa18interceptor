@@ -1,5 +1,13 @@
 # F/A-18 Interceptor: recreated C source
 
+Native port moved (2026-10-10): the playable port is now maintained in
+[fa18-interceptor-decomp](https://github.com/retro-foundry/fa18-interceptor-decomp).
+Build and edit the native game there. This repository retains the decompilation
+framework, original comparison runners, shared reconstructed routines and sealed
+historical evidence. Its native entry/composition have been retired; the notes
+below describe historical qualification. `scripts/build_native.py` forwards to
+the standalone sibling checkout when present.
+
 Complete native Demo at 44100/48000 Hz (2026-10-10): all 12680 boundaries,
 8802 ordered channel events and active byte phases match; silent sample tails
 are checked under their actual owner. The default complete recording is exact.

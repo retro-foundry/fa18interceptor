@@ -3,24 +3,21 @@
 Read `CURRENT_PORT_HANDOFF.md`, `PORT.md` and `port/README.md` before work.
 The user's latest instructions override historical plans and proof notes.
 
-## Active port
+## Active reconstruction framework
 
-- Latest user direction (2026-10-06): `fa18_native` starts a native runtime
-  using the existing `port/game/` sources. First milestone is intro -> menu.
-  Native game composition belongs in `port/game/native/`; the entry/build in
-  `port/native/`; reusable asset loading stays in `port/amiga/`. This explicitly
-  supersedes the earlier prohibition against a new native runner below.
-  Emulator runners remain comparison references. See `port/native/README.md`.
-
-- Implement game behavior in `port/game/`; temporary CPU adapters belong in
-  `port/game/glue/`. The actual runners are `fa18_recomp` and `fa18_romfree`,
-  built by `port/recomp/CMakeLists.txt` and `scripts/build_recomp.py`.
-- Reusable host/loading code belongs in the existing `port/amiga/` facilities,
-  with game-specific launch configuration in `port/romfree/` and adapters in
-  `port/os/`. Preserve the existing ownership boundaries.
-- The abandoned top-level `fa18_port` and disconnected native gameplay modules
-  have been deleted. Do not recreate a parallel port, restore its work plan or
-  add C source/header files directly under `port/`.
+- User direction (2026-10-10): the playable native port moved to the standalone
+  `fa18-interceptor-decomp` repository. All new native port work belongs there.
+  This supersedes the historical native runtime directions in this repository.
+- Keep original CPU/machine comparison runners here: `fa18_recomp` and
+  `fa18_romfree`, built by `port/recomp/CMakeLists.txt` and
+  `scripts/build_recomp.py`.
+- Shared `port/game/` routines remain here for reconstruction/comparison use;
+  native entry/composition no longer belong in this repository. Do not recreate
+  a native runner or parallel port here.
+- The read-only flight trace reused by comparison runners now belongs to
+  `port/recomp/flight_trace.c`; reusable host facilities remain in `port/amiga/`.
+- `scripts/build_native.py` only forwards to the sibling standalone checkout;
+  no standalone build requires this framework.
 
 ## Integration and evidence
 
