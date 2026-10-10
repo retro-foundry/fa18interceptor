@@ -1,5 +1,6 @@
 #include "../game/native/frontend.h"
 #include "../game/native/menu.h"
+#include "../game/native/clock.h"
 #include "../game/globals.h"
 #include "../game/memory.h"
 #include "../recomp/frame_pacer.h"
@@ -17,6 +18,13 @@
 #include <stdlib.h>
 #include <string.h>
 typedef struct { unsigned frame; char kind; int a,b,c,d; } HostEvent;
+typedef struct { uint64_t origin,frequency; } HostClock;
+static uint64_t host_microseconds(void *context) {
+    const HostClock *clock=context;
+    const uint64_t elapsed=SDL_GetPerformanceCounter()-clock->origin;
+    return (elapsed/clock->frequency)*1000000u+
+        (elapsed%clock->frequency)*1000000u/clock->frequency;
+}
 typedef struct {
     NativeFrameCapture *capture;
     NativeReplay *replay;
@@ -85,6 +93,8 @@ int main(int argc,char **argv) {
     size_t events=0,next=0,event_capacity=0; HostEvent *host_events=NULL; char error[256];
     const char *input=NULL;NativeReplay loop={0};
     const char *input_anchors=NULL,*input_anchor_report=NULL;
+    const char *clock_mode=NULL,*clock_report=NULL;
+    HostClock host_clock={0};
     const char *wave=NULL;AmigaPcmOutput audio_output={0};int16_t samples[960*2];
     const char *frame_times=NULL;FILE *timing=NULL;int hidden=0,recorded_input_only=0;
     char timing_buffer[4096];
@@ -98,7 +108,7 @@ int main(int argc,char **argv) {
     NativeFrontend *game=calloc(1,sizeof *game); SDL_Window *window=NULL; SDL_Renderer *renderer=NULL; SDL_Texture *texture=NULL; uint32_t pixels[320*256];
     for(int i=1;i<argc;++i) {
         if(!strcmp(argv[i],"--headless")) headless=1;
-        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--input-anchors FILE --input-anchors-out PATH (diagnostics)] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--frame-delta FIRST[+COUNT] PATH] [--audio-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
+        else if(!strcmp(argv[i],"--help")) { puts("fa18_native [--adf PATH] [--save-dir PATH] [--headless --frames N] [--replay E9K] [--input FA18_LOOP_INPUT_V1|FA18_GAME_INPUT_V1 --iterations N] [--input-anchors FILE --input-anchors-out PATH (diagnostics)] [--clock host|pal (window default host; headless default pal)] [--clock-report PATH] [--ppm PATH] [--data-out PATH] [--wav PATH] [--frame-times PATH] [--memory-report PATH] [--hidden (window diagnostics)] [--recorded-input-only (replay diagnostics)] [--frame-capture FIRST[+COUNT] PREFIX] [--frame-capture-entry-only] [--flight-trace PATH] [--frame-delta FIRST[+COUNT] PATH] [--audio-trace PATH] [--capture-budget-mib N (default 512)]"); free(game); return 0; }
         else if(i+1<argc && !strcmp(argv[i],"--adf")) adf=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--save-dir")) save_dir=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--frames")) { char *end; unsigned long n=strtoul(argv[++i],&end,10); if(*end || n>10000000) { fputs("Invalid frame count\n",stderr); goto done; } frames=(unsigned)n; }
@@ -107,6 +117,8 @@ int main(int argc,char **argv) {
         else if(i+1<argc && !strcmp(argv[i],"--input")) input=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--input-anchors")) input_anchors=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--input-anchors-out")) input_anchor_report=argv[++i];
+        else if(i+1<argc && !strcmp(argv[i],"--clock")) clock_mode=argv[++i];
+        else if(i+1<argc && !strcmp(argv[i],"--clock-report")) clock_report=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--iterations")) { char *end;unsigned long n=strtoul(argv[++i],&end,10);if(*end || !n || n>10000000) { fputs("Invalid iteration limit\n",stderr);goto done; } iterations=(unsigned)n; }
         else if(i+1<argc && !strcmp(argv[i],"--data-out")) data_out=argv[++i];
         else if(i+1<argc && !strcmp(argv[i],"--wav")) wave=argv[++i];
@@ -143,6 +155,10 @@ int main(int argc,char **argv) {
         else { fprintf(stderr,"Unknown/incomplete option: %s\n",argv[i]); goto done; }
     }
     if(headless && !frames) { fputs("Headless runs require --frames N\n",stderr); goto done; }
+    if(!clock_mode) clock_mode=headless?"pal":"host";
+    if(strcmp(clock_mode,"pal") && strcmp(clock_mode,"host")) {
+        fputs("Clock must be host (microsecond acquisition) or pal (deterministic diagnostics)\n",stderr);goto done;
+    }
     if(hidden && headless) {fputs("Hidden window diagnostics require window presentation\n",stderr);goto done;}
     if(recorded_input_only && !input && !replay) {fputs("Recorded-input-only diagnostics require --input or --replay\n",stderr);goto done;}
     if(iterations && !input) { fputs("Iteration limit requires --input\n",stderr);goto done; }
@@ -233,6 +249,7 @@ int main(int argc,char **argv) {
         SDL_RenderSetLogicalSize(renderer,320,256); texture=SDL_CreateTexture(renderer,SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_STREAMING,320,256); if(!texture) goto sdl_error;
     }
     const uint64_t frequency=SDL_GetPerformanceFrequency();
+    if(!frequency || frequency>UINT64_MAX/1000000u) {fputs("Unsupported host counter frequency\n",stderr);goto done;}
     const double microseconds_per_tick=1000000.0/(double)frequency;
     FA18FramePacer pacer; fa18_frame_pacer_init(&pacer,SDL_GetPerformanceCounter(),frequency);
     if(!amiga_pcm_open(&audio_output,48000,!headless,wave,error,sizeof error)) {
@@ -255,6 +272,8 @@ int main(int argc,char **argv) {
            SDL_RenderCopy(renderer,texture,NULL,NULL) || SDL_RenderFlush(renderer)) goto sdl_error;
         startup_memory=amiga_sdl_memory_stats();
     }
+    host_clock=(HostClock){SDL_GetPerformanceCounter(),frequency};
+    native_clock_set_source(!strcmp(clock_mode,"host")?host_microseconds:NULL,&host_clock);
     amiga_runtime_memory_lock(1);
     while(running && (!frames || game->ticks<frames) &&
           (loop.anchor_count?(!loop.anchor_complete && !loop.anchor_failed):(!iterations || loop.iteration<iterations))) {
@@ -304,6 +323,15 @@ int main(int argc,char **argv) {
         if(amiga_runtime_memory_violations()) goto memory_error;
     }
     amiga_runtime_memory_lock(0);gameplay_memory=amiga_sdl_memory_stats();
+    if(clock_report) {
+        const NativeClockStats stats=native_clock_stats();
+        FILE *file=fopen(clock_report,"w");
+        if(!file) {fprintf(stderr,"Cannot create clock report: %s\n",clock_report);goto done;}
+        const int written=fprintf(file,"{\"clock\":\"%s\",\"counter_frequency\":%llu,\"requests\":%u,\"low_bits_seen\":%u,\"last_microseconds\":%llu}\n",
+            clock_mode,(unsigned long long)frequency,stats.requests,stats.low_bits_seen,
+            (unsigned long long)stats.last_microseconds)>=0;
+        if(fclose(file) || !written) {fprintf(stderr,"Cannot finish clock report: %s\n",clock_report);goto done;}
+    }
     if(input_anchor_report && !native_replay_write_anchors(&loop,input_anchor_report)) {
         fprintf(stderr,"Cannot write native input anchor report: %s\n",input_anchor_report);goto done;
     }
@@ -344,6 +372,7 @@ sdl_error:
     fprintf(stderr,"SDL: %s\n",SDL_GetError());
 done:
     amiga_runtime_memory_lock(0);
+    native_clock_set_source(NULL,NULL);
     if(amiga_runtime_memory_violations()) result=1;
     free(host_events);
     if(!fa18_flight_trace_close(&trace)) result=1;

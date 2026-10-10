@@ -168,7 +168,9 @@ def main():
         folder = work / name
         folder.mkdir(exist_ok=False)
         (folder / 'config').write_bytes(pilot_bytes)
-        command = [str(args.runner.resolve()), '--adf', str(ROOT / 'local/media/fa18.adf'),
+        # This comparison deliberately shares the historical virtual clock
+        # contract. Default interactive host-clock gameplay is a separate run.
+        command = [str(args.runner.resolve()), '--clock', 'pal', '--adf', str(ROOT / 'local/media/fa18.adf'),
             '--save-dir', str(folder), '--frames', str(args.frames), '--replay', str(input_path),
             '--recorded-input-only', '--data-out', str(folder / 'final.dat'),
             '--wav', str(folder / 'audio.wav'), '--ppm', str(folder / 'pixels.ppm'),

@@ -1,5 +1,16 @@
 # Current playable port handoff
 
+Interactive host clock (2026-10-10): windowed gameplay now acquires actual
+microseconds, preserving all scene-selection bits. Headless defaults retain
+PAL time; sealed visible comparisons explicitly select PAL diagnostics.
+Original timer checks pass 72 cases plus two record passes; the final focused
+CTest passes 5/5. A fresh default-host Free Flight run presents all 6,502 frames
+with live sound, maximum work 15.3594 ms and zero heap violations/pool failures.
+This grounded check does not establish default-host combat or full-flight
+parity. Independent whole flights and sound timing remain open; campaign
+continuity stays waived and named-state cleanup stays outside this goal.
+See [host clock evidence](analysis/native_host_clock_milestone.md).
+
 Escort scene clock (2026-10-10): the actual native C0FECE setup matches
 original instructions with its own inputs. A reference-only microsecond
 probe reproduces every byte of all 16 original cores; three wrong-clock

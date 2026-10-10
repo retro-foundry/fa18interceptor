@@ -53,7 +53,8 @@ def measure_mission(args):
     with tempfile.TemporaryDirectory(prefix='visible-mission-', dir=work) as temporary:
         pilot = Path(temporary) / 'pilot'
         enlist = ROOT / 'tools/native/fixtures/region-pilot-enlist.e9k'
-        base = [str(args.runner.resolve()), '--adf', str(adf), '--save-dir', str(pilot)]
+        # Exact comparison to this retained flight uses its PAL clock contract.
+        base = [str(args.runner.resolve()), '--clock', 'pal', '--adf', str(adf), '--save-dir', str(pilot)]
         with (work / 'enlist.log').open('w') as log:
             subprocess.run([*base, '--headless', '--frames', '9000', '--replay', str(enlist)],
                 cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT, check=True, timeout=60)
@@ -136,7 +137,7 @@ def measure_campaign(args):
     with tempfile.TemporaryDirectory(prefix='geared-pilot-', dir=work) as temporary:
         pilot = Path(temporary)
         enlist = pilot / 'enlist'
-        command = [args.runner.resolve(), '--adf', adf, '--save-dir', enlist,
+        command = [args.runner.resolve(), '--clock', 'pal', '--adf', adf, '--save-dir', enlist,
             '--headless', '--frames', '9000', '--replay', ROOT / 'tools/native/fixtures/region-pilot-enlist.e9k']
         with (work / 'enlist.log').open('w') as log:
             subprocess.run(list(map(str, command)), cwd=ROOT, stdout=log, stderr=subprocess.STDOUT, check=True, timeout=60)
@@ -147,7 +148,7 @@ def measure_campaign(args):
         if not reference['enlistment_inside_campaign_process']:
             shutil.copyfile(enlist / 'config', campaign / 'config')
         print(f'Opening visible gear-managed campaign with audio: approximately {frames * .02 / 60:.1f} minutes', flush=True)
-        command = [args.runner.resolve(), '--adf', adf, '--save-dir', campaign,
+        command = [args.runner.resolve(), '--clock', 'pal', '--adf', adf, '--save-dir', campaign,
             '--frames', frames, '--replay', replay, '--frame-times', timing_path]
         with (work / 'continuous-campaign.log').open('w') as log:
             subprocess.run(list(map(str, command)), cwd=ROOT, stdout=log, stderr=subprocess.STDOUT,
@@ -219,7 +220,9 @@ def main():
         'work_budget_ms': 20, 'cases': []}
 
     def run(name, pilot, frames, replay, extra=(), headless=False):
-        command = [str(args.runner.resolve()), '--adf', str(adf), '--save-dir', str(pilot),
+        # Keep these sealed routes on their explicit deterministic clock;
+        # check_host_clock.py exercises default host-clock windowed gameplay.
+        command = [str(args.runner.resolve()), '--clock', 'pal', '--adf', str(adf), '--save-dir', str(pilot),
                    '--frames', str(frames), '--replay', str(replay), *map(str, extra)]
         if headless:
             command += ['--headless']

@@ -41,8 +41,8 @@ static int32_t child(void *context,enum MenuContextChild which) {
         read_menu_time_sample(&hooks); return 0;
     }
     case MC_TIMER_REQUEST:
-        /* timer.device GetSysTime's seconds/microseconds result. The native
-         * replay clock advances at the runner's existing 50 Hz PAL cadence. */
+        /* timer.device GetSysTime's complete seconds/microseconds result.
+         * Acquisition belongs to the runner's active clock source. */
         native_clock_request(); return 0;
     case MC_EXPIRY_TONE: play_tone_2(); return 0;
     case MC_HEADING: return refresh_post_input_heading(); /* C25070 */

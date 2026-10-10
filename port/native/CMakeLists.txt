@@ -92,6 +92,13 @@ else()
     target_link_options(fa18_native PRIVATE -Wl,--gc-sections "-Wl,-Map,${CMAKE_CURRENT_BINARY_DIR}/fa18_native.map")
 endif()
 if(BUILD_TESTING AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/../../local/media/fa18.adf)
+    add_executable(fa18_native_clock_test ../../tools/native/native_clock_test.c)
+    target_link_libraries(fa18_native_clock_test PRIVATE fa18_native_runtime)
+    add_test(NAME fa18_native_clock_precision COMMAND fa18_native_clock_test)
+    add_test(NAME fa18_native_host_clock
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/../../tools/native/check_host_clock.py
+                --runner $<TARGET_FILE:fa18_native>
+                --out ${CMAKE_CURRENT_BINARY_DIR}/host-clock-$<CONFIG>)
     add_executable(fa18_native_preallocation_test ../../tools/native/native_preallocation_test.c)
     target_link_libraries(fa18_native_preallocation_test PRIVATE fa18_native_runtime)
     add_test(NAME fa18_native_preallocation COMMAND fa18_native_preallocation_test)

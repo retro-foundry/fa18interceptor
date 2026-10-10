@@ -1,0 +1,248 @@
+{
+  "date": "2026-10-10",
+  "scope": "Actual microsecond acquisition in windowed gameplay; deterministic PAL replay remains explicit. Whole-flight and audio parity remain open.",
+  "defaults": {
+    "window": "host",
+    "headless": "pal"
+  },
+  "visible": {
+    "command": [
+      "build/native-cmake/native/Release/fa18_native.exe",
+      "--frames",
+      "6502",
+      "--replay",
+      "build/native-flight/host-clock-visible/input.e9k",
+      "--save-dir",
+      "fresh temporary pilot directory",
+      "--recorded-input-only",
+      "--data-out",
+      "compressed after capture",
+      "--clock-report",
+      "build/native-flight/host-clock-visible/visible-host.clock.json",
+      "--memory-report",
+      "build/native-flight/host-clock-visible/visible-host.memory.json",
+      "--frame-times",
+      "build/native-flight/host-clock-visible/frames.csv",
+      "--flight-trace",
+      "compressed after capture"
+    ],
+    "stats": {
+      "frame_owner_exit": false,
+      "frames": 6502,
+      "screen": "scene-setup",
+      "mode": 1,
+      "glyphs": 4428,
+      "record_updates": 530,
+      "scene_frames": 528,
+      "terrain_polygons": 9062,
+      "model_calls": 8614,
+      "hud_frames": 528,
+      "control_frames": 2300,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 181,
+      "timer_pending": true,
+      "timer_yields": 1196,
+      "display_publications": 2299,
+      "display_yields": 2306,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 2299,
+      "input_events": 9,
+      "input_queued": 0,
+      "update_iterations": 3478,
+      "replay_iterations": 0,
+      "replay_events": 0,
+      "host_replay_events": 12,
+      "host_replay_pending": 0,
+      "replay_started": false,
+      "voice_ticks": 6502,
+      "voice_publications": 13671,
+      "voice_levels": [
+        [
+          764,
+          40
+        ],
+        [
+          766,
+          40
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 5456,
+      "sample_frames": 6241920,
+      "nonzero_sample_frames": 6035237,
+      "audio_device": true,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "clock": {
+      "clock": "host",
+      "counter_frequency": 10000000,
+      "requests": 2252,
+      "low_bits_seen": 4294967295,
+      "last_microseconds": 130003845
+    },
+    "memory": {
+      "sdl_arena_bytes": 33554432,
+      "sdl_startup_bytes": 71152,
+      "sdl_peak_bytes": 75392,
+      "sdl_gameplay_pool_requests": 2,
+      "sdl_failures": 0,
+      "project_gameplay_heap_violations": 0,
+      "pcm_ring_frames": 131072,
+      "os_driver_allocations_observed": false
+    },
+    "final_ram_sha256": "f92a668a7e22c762592a58fffa1036d2af6f355c92ff3c8b419e4aa771725b66"
+  },
+  "timing": {
+    "mean_ms": 1.58,
+    "p95_ms": 4.3277,
+    "p99_ms": 7.5795,
+    "max_ms": 15.3594
+  },
+  "presented": 6502,
+  "over_work_budget": 0,
+  "retained_flight_observations": 177,
+  "original_timer_check": {
+    "original_timer_cases": 72,
+    "periodic_record_passes": 2,
+    "actual_input_sha256": "f92a668a7e22c762592a58fffa1036d2af6f355c92ff3c8b419e4aa771725b66",
+    "oracle_sha256": "b71edd7ab6d9ebfc3d874edf03357e8b4ea3db941346bd2fc839f4c93c954350",
+    "oracle_source_sha256": "29a6148b19cdbe315c21d1bf39a9acb0db71f96552f329705dc0b6120e027b4e",
+    "stdout": "72 timer/readout cases, including precise acquisition, match original non-stack RAM and poll counts (49 yielded)\nTwo complete record passes with C28996 periodic region work match original non-stack RAM\n"
+  },
+  "final_ctest_passed": 5,
+  "files": {
+    "port/game/native/clock.c": {
+      "bytes": 1225,
+      "sha256": "7ba56daab141b4e559a8364c626e97034ef0abd73bcba5f06943c1fbaeb67a26"
+    },
+    "port/game/native/clock.h": {
+      "bytes": 629,
+      "sha256": "8020bc5ca174e1fc669e9dee5955dfea83aa0d89e0a0c06f354e2818fcdce5b0"
+    },
+    "port/game/native/setup.c": {
+      "bytes": 4046,
+      "sha256": "9576bf9adaa24c39a353645a61ae95f4d3a21672a355d7c687aa9e8ae1fecef4"
+    },
+    "port/native/main.c": {
+      "bytes": 28903,
+      "sha256": "839a2d6ef95af4c93f04339363c9fe9496c97b6d355563f762d458efee12d886"
+    },
+    "port/native/CMakeLists.txt": {
+      "bytes": 36018,
+      "sha256": "8de1d7ffd3ffd31fc5468eded148901e377519fd084270e28d9d4ed407b12e85"
+    },
+    "tools/native/native_clock_test.c": {
+      "bytes": 2243,
+      "sha256": "99dcfdbbf07db9eb13ed5f045b610c1d8e28485c591bd5e9eaae762dad15a08e"
+    },
+    "tools/native/native_clock_oracle.c": {
+      "bytes": 7245,
+      "sha256": "29a6148b19cdbe315c21d1bf39a9acb0db71f96552f329705dc0b6120e027b4e"
+    },
+    "tools/native/check_host_clock.py": {
+      "bytes": 5958,
+      "sha256": "cf46b0b6da1464b6011cc5e3ad5d18cf9a6d87440a3df685657c0d90f9915a3c"
+    },
+    "tools/native/measure_visible_performance.py": {
+      "bytes": 19742,
+      "sha256": "117ccff7043feb7c1754827f3b514963abe3c6bce600c7ab0b205b691e3f9bde"
+    },
+    "tools/native/measure_visible_combat_views.py": {
+      "bytes": 13269,
+      "sha256": "1da7982378946d200a5ccd4d72280ab2f93294dde578bbf80efd420620978658"
+    },
+    "build/native/fa18_native.exe": {
+      "bytes": 2446336,
+      "sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287"
+    },
+    "build/native-cmake/native/Release/fa18_native.exe": {
+      "bytes": 2446336,
+      "sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287"
+    },
+    "build/native-flight/host-clock-visible/runner.exe": {
+      "bytes": 2446336,
+      "sha256": "3a19e795bf743d119dd540023d83a8c26c1ab92446dffe16bd93fc1e8b5b86ed"
+    },
+    "build/native-flight/host-clock-final-default-guards.json": {
+      "bytes": 683,
+      "sha256": "85c50c31959b9c51659b3490395d7104301a85860302d1b25c760bc0d1feb979"
+    },
+    "build/native-flight/host-clock-build.log": {
+      "bytes": 7095,
+      "sha256": "9d1ac1640af62c216a81320f77652391b1268cbcfc1b541a61b615748e36351c"
+    },
+    "build/native-flight/host-clock-headless/report.json": {
+      "bytes": 10365,
+      "sha256": "42c6ea247a0be71e2096160bfc35cc4cdb7123b78e55d97b6e64ef8a5c85afcc"
+    },
+    "build/native-cmake/native/host-clock-Release/report.json": {
+      "bytes": 10419,
+      "sha256": "6e166dfe0b4297133b4e387055aef749c9264c39cb2e0be52b4ec41e7b689a11"
+    },
+    "build/native-flight/host-clock-visible/final-ctest.log": {
+      "bytes": 5489,
+      "sha256": "774d0cdf9359f746a333559853621c1686ebc5a4e28f8fde48299c5a6ccaa94e"
+    },
+    "build/native-flight/host-clock-visible/frames.csv": {
+      "bytes": 707467,
+      "sha256": "d377b3ac2799656394d3cb92009f10e8ccaf9f26f49b80b62b9528f32ca4b827"
+    },
+    "build/native-flight/host-clock-visible/input.e9k": {
+      "bytes": 242,
+      "sha256": "c977c658d5ae4c2b7dc483162b2cf134d9fdd58a64a12fab19ee925031760b76"
+    },
+    "build/native-flight/host-clock-visible/original-timers.json": {
+      "bytes": 566,
+      "sha256": "6c68f1ca349150f39dd05d90bdc48776be609f6c1d88f82d4d2a743f673863db"
+    },
+    "build/native-flight/host-clock-visible/original-timers.log": {
+      "bytes": 204,
+      "sha256": "f6b0093649254486b412bf6996612391f944f1027ffc48adc945d479ec97d2cf"
+    },
+    "build/native-flight/host-clock-visible/report.json": {
+      "bytes": 17695,
+      "sha256": "89c34fd8973c6518c622f13e2645f47ad249929d798b8b0a7b10db9a6746a3c3"
+    },
+    "build/native-flight/host-clock-visible/visible-host.clock.json": {
+      "bytes": 120,
+      "sha256": "020b33c280ce3b1bedeb80e8995865410254d806a4d47f5643bc0093372d6d7f"
+    },
+    "build/native-flight/host-clock-visible/visible-host.final.dat.gz": {
+      "bytes": 324998,
+      "sha256": "fa1c0a195caca9db3877b4b9625857f9294655cd20b3fb629a640363d162d07e"
+    },
+    "build/native-flight/host-clock-visible/visible-host.flight.jsonl.gz": {
+      "bytes": 157748,
+      "sha256": "6cbb13fb8536748ec39938778da42903a10ef4968e3b9936831e900d5ace5a0e"
+    },
+    "build/native-flight/host-clock-visible/visible-host.log": {
+      "bytes": 975,
+      "sha256": "8fd44a203028deb8948f872dad7a60f8ae103acc0175c1f1919658e63c981c59"
+    },
+    "build/native-flight/host-clock-visible/visible-host.memory.json": {
+      "bytes": 228,
+      "sha256": "1a9acd251c779bce68f3c93260bf8e1ef5125655b260c1e41d31911a00165890"
+    }
+  },
+  "retained_trace_observations": 2299,
+  "flight_frame_range": [
+    5914,
+    6501
+  ]
+}
