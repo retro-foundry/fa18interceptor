@@ -16,6 +16,9 @@ The user's latest instructions override historical plans and proof notes.
   a native runner or parallel port here.
 - The read-only flight trace reused by comparison runners now belongs to
   `port/recomp/flight_trace.c`; reusable host facilities remain in `port/amiga/`.
+- Native original-instruction probes in `tools/native/` read canonical sources
+  from the standalone sibling. This is a validation-only dependency; the native
+  port does not depend on this framework.
 - `scripts/build_native.py` only forwards to the sibling standalone checkout;
   no standalone build requires this framework.
 

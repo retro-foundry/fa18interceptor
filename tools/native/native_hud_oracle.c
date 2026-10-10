@@ -13,7 +13,7 @@
 #define draw_stores_icons host_draw_stores_icons
 #define draw_stores_icon_stream host_draw_stores_icon_stream
 #include "../../port/game/hud_stores.c"
-#include "../../port/game/native/stores.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/stores.c"
 #define draw_mark_polygon host_draw_mark_polygon
 #define put hud_text_put
 #define fill_bar host_fill_bar
@@ -118,7 +118,7 @@
 #undef divu_word
 #undef draw_line
 #define draw_line host_draw_line
-#include "../../port/game/native/hud.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/hud.c"
 static NativeInputReturn checked_return;
 static void check_speed_return(void) {
     checked_return=text_return((NativeInputReturn){0xe7,NATIVE_INPUT_RETURN_HUD_TEXT},host_draw_speed_readout());

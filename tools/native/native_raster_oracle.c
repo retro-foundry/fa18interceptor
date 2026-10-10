@@ -45,7 +45,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
     if(a<0xc00000u || a+n>0xc80000u) abort();
     return fa18_machine->slow+a-0xc00000u;
 }
-#include "../../port/game/native/raster.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/raster.c"
 #include "../../port/game/render_line.c"
 #include "../../port/game/render_buffers.c"
 #include "../../port/game/render_polygon.c"

@@ -2,7 +2,7 @@
 #define main records_fixture_main
 #include "native_records_oracle.c"
 #undef main
-#include "../../port/game/native/viewport.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/viewport.c"
 
 static uint16_t source_palette[32];
 static int source_call(gaddr entry) {

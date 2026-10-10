@@ -2,7 +2,7 @@
 #define main records_fixture_main
 #include "native_records_oracle.c"
 #undef main
-#include "../../port/game/native/menu_start.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/menu_start.c"
 
 static int source_menu(uint8_t *prefix) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;

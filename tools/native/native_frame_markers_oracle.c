@@ -1,10 +1,10 @@
 /* Complete C2B564 and its actual children, against native grid/marker rendering. */
 #define FA18_HUD_ORACLE_LIBRARY
 #include "native_hud_oracle.c"
-#include "../../port/game/native/frame_labels.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/frame_labels.c"
 #define draw_clipped_segment host_draw_clipped_segment
 #define draw_clipped_segment_result host_draw_clipped_segment_result
-#include "../../port/game/native/frame_markers.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/frame_markers.c"
 
 int main(int argc,char **argv) {
     size_t ns=0,nr=0,nd=0;char error[256];

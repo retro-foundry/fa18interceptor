@@ -1,7 +1,7 @@
 /* Full C2B3C2 with original scene data and the actual native projection/text. */
 #define FA18_HUD_ORACLE_LIBRARY
 #include "native_hud_oracle.c"
-#include "../../port/game/native/frame_labels.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/frame_labels.c"
 
 static uint32_t scene_axis(gaddr row,unsigned axis) {
     gaddr terrain=0xc1d7e2u+(gaddr)(int32_t)(int16_t)(rd_s16(row+4)*4);

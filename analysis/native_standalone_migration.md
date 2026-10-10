@@ -19,3 +19,11 @@ succeed, and its Release executable preserves the current runner's complete
 intro, Free Flight and final-combat WAV, RAM, pixels, saved pilot and counters.
 Standalone test completion and executable identities are recorded in its final
 migration validation report. Full original/native sound acceptance stays open.
+
+Original-instruction native probes now read the canonical source files from the
+standalone sibling. Only those validation mains receive its native header include
+path; ordinary comparison runners retain their original include set. The connected
+model comparison rebuilds and passes all three actual native startup checkpoints,
+including 917 model-directory cases against original non-stack RAM/display and
+cursor/results. This is a one-way validation dependency: the standalone runtime
+and build do not consume any reconstruction-framework file.

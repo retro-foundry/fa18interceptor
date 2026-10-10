@@ -4,7 +4,7 @@
 #define select_draw_page host_select_draw_page
 #define draw_page_debug_mark host_draw_page_debug_mark
 #include "../../port/game/render_page.c"
-#include "../../port/game/native/frame_tail.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/frame_tail.c"
 
 static int source_range(gaddr start,gaddr end) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[4]=rd_u16(LINE_LAST_ROW);

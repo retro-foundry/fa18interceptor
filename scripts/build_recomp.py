@@ -126,6 +126,12 @@ def main() -> int:
         "  command = gcc $cflags -MMD -MF $out.d -c $in -o $out",
         "  depfile = $out.d",
         "  deps = gcc",
+        # Validation-only native probes read canonical headers from the sibling
+        # port. Ordinary comparison runners retain their original include set.
+        "rule cc_native_oracle",
+        "  command = gcc $cflags -I../fa18-interceptor-decomp/port/game -MMD -MF $out.d -c $in -o $out",
+        "  depfile = $out.d",
+        "  deps = gcc",
         "rule cc_romfree",
         "  command = gcc $cflags -DFA18_ROMFREE_MAIN -MMD -MF $out.d -c $in -o $out",
         "  depfile = $out.d",
@@ -135,8 +141,14 @@ def main() -> int:
         "  rspfile = $out.rsp",
         "  rspfile_content = $in",
     ]
-    lines.extend(f"build {ninja_path(obj)}: {'cc_romfree' if args.romfree and source==args.main else 'cc'} {ninja_path(source)}"
-                 for source, obj in zip(sources, objects))
+    for source, obj in zip(sources, objects):
+        rule = "cc"
+        if source == args.main:
+            if args.romfree:
+                rule = "cc_romfree"
+            elif source.parent == Path("tools/native"):
+                rule = "cc_native_oracle"
+        lines.append(f"build {ninja_path(obj)}: {rule} {ninja_path(source)}")
     lines.append(f"build {ninja_path(args.output)}: link " +
                  " ".join(ninja_path(obj) for obj in objects))
     lines.append(f"default {ninja_path(args.output)}")

@@ -17,8 +17,8 @@
 #define main records_fixture_main
 #include "native_records_oracle.c"
 #undef main
-#include "../../port/game/native/flight.c"
-#include "../../port/game/native/setup.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/flight.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/setup.c"
 
 /* These runtime boundaries are outside the parent cases below. A reached
  * boundary fails the test; none supplies substitute game behavior. */

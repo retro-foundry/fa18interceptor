@@ -10,9 +10,9 @@
 #include "recomp_runtime.h"
 #include "recomp_ports.h"
 #include "memory.h"
-#include "../../port/game/native/clock.c"
-#include "../../port/game/native/model_state.c"
-#include "../../port/game/native/records.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/clock.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/model_state.c"
+#include "../../../fa18-interceptor-decomp/port/game/native/records.c"
 #include "stages.h"
 #include "matrix_route.h"
 extern int64_t fa18_next_event;
