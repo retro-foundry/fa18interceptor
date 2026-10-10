@@ -1,5 +1,13 @@
 # Native port handoff — 2026-10-09
 
+Successful original mission five (2026-10-10): a touchdown-height standoff
+approach completes formation/combat, arrests on the carrier, earns grade one
+and the third completion, then returns to the menu. All 75,573 observations,
+final RAM and consumed keys replay exactly without the controller, including
+the earned prefix. Gear/arrest checks and nine profile/driver guards pass.
+Native gameplay is unchanged. Actual update identities, independent native
+comparison and sound timing remain open. See [mission-five success evidence](analysis/native_original_mission_five_touchdown_milestone.md).
+
 Original mission-five wire approaches (2026-10-10): three complete recordings
 replay exactly, including the earned prefix. Descent input reaches the height
 gate, but both finals cross the wire too high; no mission-five grade is earned.

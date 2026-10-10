@@ -496,9 +496,15 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
         point[i]=pilot->home[i]-pilot->forward[i]*(high_return?24000:12000);
     }
     point[1]=pilot->home[1]+(high_return?2200:700);
+    const double approach_distance=hypot(point[0]-position[0],point[2]-position[2]);
+    if(pilot->touchdown_approach && pilot->phase==1 && approach_distance<1800)
+        pilot->touchdown_descent_started=1;
+    /* Validation input only: finish descent over the offshore standoff,
+     * using this flight's observed carrier takeoff height. The original
+     * game still owns the actual height, contact, arrest and result. */
+    if(pilot->touchdown_descent_started) point[1]=pilot->home[1];
     const double approach_height_limit=pilot->approach_at_standoff_height?
         point[1]:pilot->home[1]+1400;
-    const double approach_distance=hypot(point[0]-position[0],point[2]-position[2]);
     if(pilot->phase==1 && approach_distance<1800 &&
        (!(pilot->final_sequence || pilot->wait_for_approach_height) ||
         position[1]<approach_height_limit)) {
@@ -515,6 +521,7 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
         for(unsigned i=0;i<3;++i)
             point[i]=pilot->home[i]+pilot->forward[i]*(2000-before_home);
         point[1]=pilot->home[1]-(high_return?250:200)+fmax(before_home,0)*0.04;
+        if(pilot->touchdown_approach) point[1]=pilot->home[1];
         if(pilot->patrol_flight) {
             /* Validation runway approach: aim beyond the starting position
              * and descend to its observed height, not the carrier wire. */
@@ -534,7 +541,8 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
         clamp((point[1]-position[1])/3000-
               vertical_speed/fmax(speed,30),-descent,descent),cos(yaw)};
     const int carrier_turn_descent=pilot->mode==5 && pilot->carrier_wire_return &&
-        pilot->wait_for_approach_height && pilot->phase==1 && approach_distance<1800;
+        pilot->wait_for_approach_height && pilot->phase==1 &&
+        (approach_distance<1800 || pilot->touchdown_descent_started);
     if(pilot->patrol_flight || carrier_turn_descent) {
         /* The test pilot holds its approach height through the return turn.
          * The mode-five wire route must also descend during its standoff

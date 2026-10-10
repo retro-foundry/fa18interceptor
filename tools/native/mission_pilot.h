@@ -17,6 +17,8 @@ typedef struct {
     int wait_for_approach_height; /* Validation input: finish descent before final. */
     int approach_at_standoff_height; /* Use the requested approach point's height. */
     int carrier_wire_return; /* Validation destination from live arrestor geometry. */
+    int touchdown_approach; /* Optional input: settle at observed takeoff height before final. */
+    int touchdown_descent_started;
     unsigned gear_key_tick;
     unsigned ground_attack_target;
     double ground_attack_yaw;

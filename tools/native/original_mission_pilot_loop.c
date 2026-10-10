@@ -22,7 +22,7 @@ static uint32_t previous_stage;
 static unsigned controller_ticks_per_update=4;
 static unsigned mission_mode=3,weapon_initial_pressed,weapon_initial_released;
 static unsigned repeat_steering,repeated_steering_events;
-static unsigned level_final;
+static unsigned level_final,touchdown_approach;
 static long prefix_end=8038;
 
 void native_frontend_event(NativeFrontend *game,int code,int down) {
@@ -60,6 +60,7 @@ void fa18_loop_iteration(void) {
         const char *mode_text=getenv("FA18_ORIGINAL_PILOT_MODE");
         repeat_steering=getenv("FA18_ORIGINAL_PILOT_REPEAT_STEERING")!=NULL;
         level_final=getenv("FA18_ORIGINAL_PILOT_LEVEL_FINAL")!=NULL;
+        touchdown_approach=getenv("FA18_ORIGINAL_PILOT_TOUCHDOWN_APPROACH")!=NULL;
         if(mode_text) {
             char *end;unsigned long value=strtoul(mode_text,&end,10);
             if(*end || (value!=3 && value!=4 && value!=5)) {fputs("Original pilot mode requires 3, 4 or 5\n",stderr);exit(2);}
@@ -68,6 +69,12 @@ void fa18_loop_iteration(void) {
         if(level_final && (mission_mode!=5 || !getenv("FA18_ORIGINAL_PILOT_WIRE_APPROACH") ||
                           !getenv("FA18_ORIGINAL_PILOT_APPROACH_HEIGHT"))) {
             fputs("Level final input requires mode-five wire approach\n",stderr);exit(2);
+        }
+        if(touchdown_approach && (mission_mode!=5 || level_final ||
+            !getenv("FA18_ORIGINAL_PILOT_WIRE_APPROACH") ||
+            !getenv("FA18_ORIGINAL_PILOT_APPROACH_HEIGHT") ||
+            !getenv("FA18_ORIGINAL_PILOT_APPROACH_STANDOFF"))) {
+            fputs("Touchdown approach input requires mode-five wire approach without level-final override\n",stderr);exit(2);
         }
         if(mission_mode>3) {
             const char *prefix=getenv("FA18_ORIGINAL_PILOT_PREFIX_END");char *end;
@@ -99,6 +106,7 @@ void fa18_loop_iteration(void) {
         pilot.wait_for_approach_height=getenv("FA18_ORIGINAL_PILOT_APPROACH_HEIGHT")!=NULL;
         pilot.approach_at_standoff_height=getenv("FA18_ORIGINAL_PILOT_APPROACH_STANDOFF")!=NULL;
         pilot.carrier_wire_return=getenv("FA18_ORIGINAL_PILOT_WIRE_APPROACH")!=NULL;
+        pilot.touchdown_approach=touchdown_approach;
         if(mission_mode==4) pilot.escort_flight=pilot.complete_flight=pilot.campaign_flight=1;
         if(mission_mode==5) {
             /* Existing native 5-tour formation input with campaign combat;

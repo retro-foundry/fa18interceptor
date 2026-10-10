@@ -1,0 +1,271 @@
+{
+  "scope": "Successful complete original mission-five reference, independently replayed; native comparison remains separate",
+  "original": {
+    "mission_mode": 5,
+    "mission_success": true,
+    "outcome": "success",
+    "observations": 75573,
+    "flight_start": 61797,
+    "flight_observations": 13777,
+    "final_mode": 0,
+    "final_phase": 0,
+    "qualification": 1,
+    "grades": [
+      1,
+      1,
+      1
+    ],
+    "completions": 3,
+    "source_prefix_exact": true,
+    "unmodified_replay_exact": true,
+    "report_sha256": "c2f0f6334adbd521349a88328f74813b4ecfd590c4090a7b6109e4e32dee251a"
+  },
+  "landing_observations": {
+    "flight_start": {
+      "observation": 61797,
+      "frame": 99875,
+      "game_tick": 1,
+      "xyz": [
+        1153068.0,
+        119.03125,
+        1071520.0
+      ],
+      "contact": "0082",
+      "speed": 0
+    },
+    "airborne": {
+      "observation": 61862,
+      "frame": 100335,
+      "game_tick": 66,
+      "xyz": [
+        1153068.0,
+        118.4375,
+        1072159.390625
+      ],
+      "contact": "2002",
+      "speed": 2285
+    },
+    "gear_up": {
+      "observation": 61946,
+      "frame": 100865,
+      "game_tick": 150,
+      "xyz": [
+        1153068.0,
+        98.546875,
+        1077264.921875
+      ],
+      "contact": "2000",
+      "speed": 5147
+    },
+    "gear_down": {
+      "observation": 68125,
+      "frame": 149001,
+      "game_tick": 6010,
+      "xyz": [
+        1240341.09375,
+        29913.21875,
+        1229894.0625
+      ],
+      "contact": "0000",
+      "speed": 5697
+    },
+    "height_gate": {
+      "observation": 74401,
+      "frame": 192847,
+      "game_tick": 12281,
+      "xyz": [
+        1153568.828125,
+        119.015625,
+        1057347.109375
+      ],
+      "contact": "0000",
+      "speed": 3798
+    },
+    "deck_touchdown": {
+      "observation": 74635,
+      "frame": 194837,
+      "game_tick": 12513,
+      "xyz": [
+        1152994.828125,
+        119.03125,
+        1070318.546875
+      ],
+      "contact": "8082",
+      "speed": 3798
+    },
+    "first_wire_z_crossing": {
+      "before": {
+        "observation": 74639,
+        "frame": 194881,
+        "game_tick": 12517,
+        "xyz": [
+          1152993.953125,
+          119.03125,
+          1070555.234375
+        ],
+        "contact": "8082",
+        "speed": 3778
+      },
+      "after": {
+        "observation": 74640,
+        "frame": 194892,
+        "game_tick": 12518,
+        "xyz": [
+          1152993.734375,
+          119.03125,
+          1070614.109375
+        ],
+        "contact": "8082",
+        "speed": 3769
+      }
+    },
+    "arrest": {
+      "observation": 74641,
+      "frame": 194903,
+      "game_tick": 12519,
+      "xyz": [
+        1152993.515625,
+        119.03125,
+        1070672.796875
+      ],
+      "contact": "C082",
+      "speed": 3759
+    },
+    "arrested_stop": {
+      "observation": 74693,
+      "frame": 195307,
+      "game_tick": 12571,
+      "xyz": [
+        1152991.53125,
+        119.03125,
+        1071085.640625
+      ],
+      "contact": "C482",
+      "speed": 0
+    },
+    "logged_wire": {
+      "carrier_wire_target": true,
+      "slot": 14,
+      "takeoff_home": [
+        1153068.0,
+        119.03125,
+        1071520.0
+      ],
+      "target": [
+        1153000.0,
+        119.03125,
+        1070584.0
+      ],
+      "wire_height": 112.0,
+      "forward": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    "logged_height_gate": {
+      "approach_height_ready": true,
+      "tick": 89124,
+      "height": 119.015625,
+      "home_height": 119.03125,
+      "height_limit": 119.03125,
+      "distance": 1361.419793
+    },
+    "scope": "Actual original observations; grade and menu acceptance require final RAM and independent replay"
+  },
+  "preceding_input_prefix": {
+    "identical_observations": 70967,
+    "first_difference": 70968,
+    "identical_prefix_sha256": "e94b324244388e0081dae5cdbcde168b1defc1baa8ee12dac332c91245ad9984",
+    "preceding_frame": 170604,
+    "current_frame": 170604,
+    "preceding_report_sha256": "aefb115f847fd285a53114602e9c152c7b7b6e39b3692f15ad3d33d7e39ba144",
+    "scope": "Complete pre-input observation bytes; not a newly inferred body count or fitted alignment"
+  },
+  "guards": {
+    "rejections": {
+      "wrong_mode": {
+        "returncode": 1,
+        "expected_message": "touchdown approach requires mode-five wire input without level-final override",
+        "log_sha256": "99501ffa65e49bf7b9f38fa395647a6d241df6d6efa59cbdafefbcb8e991c4e9"
+      },
+      "missing_wire": {
+        "returncode": 1,
+        "expected_message": "touchdown approach requires mode-five wire input without level-final override",
+        "log_sha256": "99501ffa65e49bf7b9f38fa395647a6d241df6d6efa59cbdafefbcb8e991c4e9"
+      },
+      "conflicting_height": {
+        "returncode": 1,
+        "expected_message": "touchdown approach requires mode-five wire input without level-final override",
+        "log_sha256": "99501ffa65e49bf7b9f38fa395647a6d241df6d6efa59cbdafefbcb8e991c4e9"
+      },
+      "changed_retained_profile": {
+        "returncode": 1,
+        "expected_message": "recording uses different touchdown-approach input",
+        "log_sha256": "02ba273699d97eafd71d839f046bc3831b285224c7865dce36cdbedb996eb02b"
+      },
+      "driver_wrong_mode": {
+        "returncode": 2,
+        "expected_message": "Touchdown approach input requires mode-five wire approach without level-final override",
+        "log_sha256": "705f57f17ce7c55453a37f7c9d4fff4f916a0a15b6c13d2c25f9e561e0054f88"
+      },
+      "driver_missing_wire": {
+        "returncode": 2,
+        "expected_message": "Touchdown approach input requires mode-five wire approach without level-final override",
+        "log_sha256": "705f57f17ce7c55453a37f7c9d4fff4f916a0a15b6c13d2c25f9e561e0054f88"
+      },
+      "driver_missing_height": {
+        "returncode": 2,
+        "expected_message": "Touchdown approach input requires mode-five wire approach without level-final override",
+        "log_sha256": "705f57f17ce7c55453a37f7c9d4fff4f916a0a15b6c13d2c25f9e561e0054f88"
+      },
+      "driver_missing_standoff": {
+        "returncode": 2,
+        "expected_message": "Touchdown approach input requires mode-five wire approach without level-final override",
+        "log_sha256": "705f57f17ce7c55453a37f7c9d4fff4f916a0a15b6c13d2c25f9e561e0054f88"
+      },
+      "driver_conflicting_height": {
+        "returncode": 2,
+        "expected_message": "Touchdown approach input requires mode-five wire approach without level-final override",
+        "log_sha256": "705f57f17ce7c55453a37f7c9d4fff4f916a0a15b6c13d2c25f9e561e0054f88"
+      }
+    },
+    "retained_original_report_unchanged": true,
+    "retained_report_sha256": "aefb115f847fd285a53114602e9c152c7b7b6e39b3692f15ad3d33d7e39ba144",
+    "executable_sha256": "ca0b513fdc17242d56189b7c5ed6f3bc7c4d76d54dc51cac72357fc604c87f3d"
+  },
+  "source_identities": {
+    "driver_executable_sha256": "ca0b513fdc17242d56189b7c5ed6f3bc7c4d76d54dc51cac72357fc604c87f3d",
+    "driver_source_sha256": "ed24ec43dbddcb8bc1ec746d35d238e513c39f54e26f0fe53a00cb60d59b0295",
+    "controller_source_sha256": "e631aeb43cb05982c7f8d7b9bb4df91a1eeefd01b1a4388ab2800cfde176c5e5",
+    "controller_header_sha256": "8681596125ab593aa0f65f7a9b08d921520afd170bff81e02bc7666f2074078a"
+  },
+  "native_executable_unchanged_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+  "artifact_sha256": {
+    "build/native-flight/original-mission-five-touchdown-approach/archived-identities.json": "2ef15bdb410c3b4d844596aafe8077de22fb3c3dd8bbd88e9f3d583395a97c91",
+    "build/native-flight/original-mission-five-touchdown-approach/consumed.fa18in": "5f1302d6fd8a4664233e91364762742edd32fd94810756eb63388803d45e7033",
+    "build/native-flight/original-mission-five-touchdown-approach/controller-choices.e9k": "a6cd841f6ecfeab72355c1fcc1fac2c5dac8af2776147aa19c1c8d156c2f8919",
+    "build/native-flight/original-mission-five-touchdown-approach/driver-executable.exe.gz": "156018cf8033c73ad9516d12881680767b6d1261cbdcc56e76494247b9e1e5d0",
+    "build/native-flight/original-mission-five-touchdown-approach/driver.dat.gz": "3a641b2459fcdcc52f2eb9530d8cbc893b14da3973c52c9b63ac7badcd1152a7",
+    "build/native-flight/original-mission-five-touchdown-approach/driver.jsonl.gz": "c1cf711e35c205b204aed99eebeb1e9699fdce3235a2ab6a6dcb4a786336b2c2",
+    "build/native-flight/original-mission-five-touchdown-approach/driver.log": "8e696e17c5a2cf982e219b237bfd8fb6caa185ffb419a233d3c617fb947deadf",
+    "build/native-flight/original-mission-five-touchdown-approach/input.fa18in": "48a9f15da683da1e05d647311f8ef5baf1f6610d41533090ffa1bb973f05a596",
+    "build/native-flight/original-mission-five-touchdown-approach/landing-observations.json": "39c5ac822d02b9867441af8effb68e8462fdcbc05e7c8700fdf615cebfa9283d",
+    "build/native-flight/original-mission-five-touchdown-approach/mission_pilot.c.gz": "81f5cac842f660fa1637a7eb3e8bf04a797833b5d5a739b399de3867d2570a2a",
+    "build/native-flight/original-mission-five-touchdown-approach/mission_pilot.h.gz": "4e87f69d52185daf8f1545aa3bc4b764d86c961b5816f43ce013f8e14ad1c5ee",
+    "build/native-flight/original-mission-five-touchdown-approach/original_mission_pilot_loop.c.gz": "85d6c83f660e86c5ae7b4d72d1a1d77b11e35350fdc35c653281062eb745b7ff",
+    "build/native-flight/original-mission-five-touchdown-approach/preceding-input-prefix.json": "7541a39e5640ede9350920427a24b230fc8cf5f12dd5abb7baaa1cad458d8019",
+    "build/native-flight/original-mission-five-touchdown-approach/replay.log": "12f0b7c08279824239e40dc76c455803eff160b3f4f1a56e485312decf651b8a",
+    "build/native-flight/original-mission-five-touchdown-approach/report.json": "c2f0f6334adbd521349a88328f74813b4ecfd590c4090a7b6109e4e32dee251a",
+    "build/native-flight/original-mission-five-touchdown-guards/changed_retained_profile.log": "0df9de0d2dcbf6ab1fcfd62edae7164c268d8246f78b00c9ee17cd81018526bb",
+    "build/native-flight/original-mission-five-touchdown-guards/conflicting_height.log": "d022fffd239dbd3d6916abf752d1220618948ebe9b5923bc413ff3e3c71a511f",
+    "build/native-flight/original-mission-five-touchdown-guards/driver_conflicting_height.log": "5cef301a07a7cd96092ef6676b351b08e5edcb797cdbd2bd80c349b02c29ff2d",
+    "build/native-flight/original-mission-five-touchdown-guards/driver_missing_height.log": "5cef301a07a7cd96092ef6676b351b08e5edcb797cdbd2bd80c349b02c29ff2d",
+    "build/native-flight/original-mission-five-touchdown-guards/driver_missing_standoff.log": "5cef301a07a7cd96092ef6676b351b08e5edcb797cdbd2bd80c349b02c29ff2d",
+    "build/native-flight/original-mission-five-touchdown-guards/driver_missing_wire.log": "5cef301a07a7cd96092ef6676b351b08e5edcb797cdbd2bd80c349b02c29ff2d",
+    "build/native-flight/original-mission-five-touchdown-guards/driver_wrong_mode.log": "5cef301a07a7cd96092ef6676b351b08e5edcb797cdbd2bd80c349b02c29ff2d",
+    "build/native-flight/original-mission-five-touchdown-guards/missing_wire.log": "d022fffd239dbd3d6916abf752d1220618948ebe9b5923bc413ff3e3c71a511f",
+    "build/native-flight/original-mission-five-touchdown-guards/report.json": "980f1ac443d63ad5739d556a54f04b24ecde46ca11a629832db341318c11112d",
+    "build/native-flight/original-mission-five-touchdown-guards/wrong_mode.log": "d022fffd239dbd3d6916abf752d1220618948ebe9b5923bc413ff3e3c71a511f"
+  }
+}
