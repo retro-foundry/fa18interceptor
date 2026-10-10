@@ -88,14 +88,14 @@ def main():
     parser.add_argument('--repeat-steering', action='store_true',
                         help='validation input: repeat unchanged held steering keys through the original physical keyboard queue')
     parser.add_argument('--wait-for-approach-height', nargs='?', const='final', choices=('final', 'standoff', 'wire'),
-                        help='validation escort input: final-mission gate (default), requested standoff height, or standoff height with live wire targeting')
+                        help='validation carrier-return input: final-mission gate (default), requested standoff height, or standoff height with live wire targeting')
     parser.add_argument('--mode', type=int, choices=(3, 4, 5), default=3)
     parser.add_argument('--source-prefix', type=Path,
                         help='verified original recording through the preceding mission, required for modes four and five')
     args = parser.parse_args()
     assert bool(args.source_prefix) == (args.mode > 3), 'later missions require their verified original prefix'
     assert not (args.mode > 3 and args.patrol_input), 'patrol input belongs to mission three'
-    assert not (args.wait_for_approach_height and args.mode != 4), 'approach-height input belongs to escort'
+    assert not (args.wait_for_approach_height and args.mode not in (4, 5)), 'approach-height input requires a carrier-return mission'
     args.out.mkdir(parents=True, exist_ok=True)
     recording = ROOT / 'captures/native/qual_carrier_success/input.fa18in'
     media = (recording, recording.with_name('state.bin'), ROOT / 'local/system/kick13.rom')

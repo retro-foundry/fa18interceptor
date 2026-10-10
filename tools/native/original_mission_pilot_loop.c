@@ -221,9 +221,10 @@ void fa18_loop_iteration(void) {
                 rd_u16(rd_u32(MODE_TABLE)+56),rd_u8(COMMAND_BLOCK_FLAGS),rd_u16(CONTROL_RECORDS+110));
         }
         if(mission_mode==5 && menu_phase==4 && pilot.objective && airborne &&
-           (rd_u16(CONTROL_RECORDS+2)&0x80) && !rd_u16(CONTROL_RECORDS+110)) {
-            /* Stop this failed input route at its observed landing. No grade,
-             * result, coordinates or source clock are changed by the test. */
+           rd_u16(CONTROL_RECORDS+2)==0x8080 && !rd_u16(CONTROL_RECORDS+110)) {
+            /* Stop the observed failed water landing only. C482 carrier
+             * arrest reaches zero speed before the original awards its grade;
+             * retain that result sequence. No source state is changed here. */
             fprintf(stderr,"Original landing without earned result at loop %ld PAL %ld XYZ %d/%d/%d; gear up/down %u/%u\n",
                 iteration+1,frame,rd_s32(CONTROL_RECORDS+20)/256,rd_s32(CONTROL_RECORDS+24)/256,
                 rd_s32(CONTROL_RECORDS+28)/256,gear_raised,gear_lowered);
