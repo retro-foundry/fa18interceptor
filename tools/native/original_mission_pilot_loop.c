@@ -21,6 +21,7 @@ static unsigned airborne,gear_raised,gear_lowered;
 static uint32_t previous_stage;
 static unsigned controller_ticks_per_update=4;
 static unsigned mission_mode=3,weapon_initial_pressed,weapon_initial_released;
+static unsigned repeat_steering,repeated_steering_events;
 static long prefix_end=8038;
 
 void native_frontend_event(NativeFrontend *game,int code,int down) {
@@ -56,6 +57,7 @@ void fa18_loop_iteration(void) {
         const char *path=getenv("FA18_ORIGINAL_PILOT_INPUT");
         const char *log=getenv("FA18_ORIGINAL_PILOT_KEYS");
         const char *mode_text=getenv("FA18_ORIGINAL_PILOT_MODE");
+        repeat_steering=getenv("FA18_ORIGINAL_PILOT_REPEAT_STEERING")!=NULL;
         if(mode_text) {
             char *end;unsigned long value=strtoul(mode_text,&end,10);
             if(*end || (value!=3 && value!=4)) {fputs("Original pilot mode requires 3 or 4\n",stderr);exit(2);}
@@ -172,7 +174,18 @@ void fa18_loop_iteration(void) {
                     }
                 }
             }
+            const int previous_steering[]={pilot.rudder,pilot.pitch,pilot.roll};
             mission_pilot_tick(&pilot,&observation);
+            if(repeat_steering && stage==0xc10dae) {
+                /* Diagnostic keyboard input only. A retained make event is
+                 * repeated through the real IRQ queue, not applied to RAM.
+                 * Do not duplicate new choices or repeat toggle commands. */
+                const int steering[]={pilot.rudder,pilot.pitch,pilot.roll};
+                for(unsigned i=0;i<3;++i) if(steering[i] && steering[i]==previous_steering[i]) {
+                    mission_pilot_event(&pilot,&observation,steering[i],1);
+                    ++repeated_steering_events;
+                }
+            }
             observation.ticks=(unsigned)frame;
         }
         if(pilot.started && !(rd_u16(CONTROL_RECORDS+2)&0x80)) {
@@ -214,6 +227,7 @@ void fa18_loop_iteration(void) {
 int fa18_loop_finish(void) {
     int ok=original_loop_finish();
     if(pilot_record) {
+        fprintf(stderr,"Original validation repeated steering events: %u\n",repeated_steering_events);
         fprintf(pilot_record,"end %ld %ld\n",iteration,frame);
         if(fclose(pilot_record)) ok=0;
         if(fclose(pilot.keys)) ok=0;

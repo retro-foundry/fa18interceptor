@@ -1,5 +1,13 @@
 # Native port runner
 
+Original escort steering (2026-10-10): repeated ordinary steering inputs
+reach combat success in an independently started original game. All 65,000
+observations, final RAM and consumed keys reproduce exactly without the
+controller, including the complete earned prefix. The return stops beyond
+the carrier; no escort grade is earned. The input option is validation-only;
+native runtime is unchanged. Successful landing, independent whole-flight
+comparison and sound timing remain open. See [steering recording evidence](../../analysis/native_original_escort_steering_milestone.md).
+
 Default-host combat (2026-10-10): mission five and the final mission pass
 all 43,100 presentations with sound, all 14 camera modes in each mission,
 gear raised after takeoff and zero restarts. Maximum work is 16.2690 ms,

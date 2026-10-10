@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-10",
+  "report": {
+    "input_hashes": {
+      "captures\\native\\qual_carrier_success\\input.fa18in": "fe4ff3a4cac080a4534041eb42d84a9332916d7566336910d852f86cde070440",
+      "captures\\native\\qual_carrier_success\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    "driver_returncode": 1,
+    "mission_mode": 4,
+    "source_prefix": {
+      "path": "build/native-flight/original-mission-three-patrol-runway",
+      "report_sha256": "24fc36b952485b2d88359dcb62322e8921dc816bd5af8e475623540ef9c5fa5c",
+      "iterations": 27110,
+      "trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+      "input_sha256": "fa3ac6722fc0338d5b773b6c288e8ca095274ba64000cf0773aa4fbb8bd73b12",
+      "consumed_sha256": "7dd9daf5a9a9a38c5e85444c444de079591829cc567663a2054a77181f435192",
+      "final_ram_sha256": "dc670ce5e6983915463ca18f239253660a184c9212c9d8389383f8216d62f516"
+    },
+    "driver_executable_sha256": "29f2b3841067f03f2a5143cae11fd4643f72dea5476e487123e1a492e8c7df14",
+    "driver_source_sha256": "2b335a28bdd0b4a596e29a4e5817bdf378246b0247a7e539a9a88ba6a5229576",
+    "controller_source_sha256": "c77bd77f0a7804f229701eb011660cc99a93c661ff3267fd4e1fa16291a378db",
+    "controller_ticks_per_update": 4,
+    "patrol_input": false,
+    "repeat_steering": true,
+    "driver_trace_sha256": "370aadb1394a8be71e4cbf2531608db805806a1c91e783696c39fe60ea52db0f",
+    "driver_final_ram_sha256": "7ec0f5761b7f6db6268dd0da32db6d6305befb590549aeac186773baf5add311",
+    "generated_input_sha256": "6138e32d492920a77357a3e98740931ca170327db27cc85c69e066a64481ad9f",
+    "consumed_input_sha256": "e272f1ff1530bf4bf3f7ca33f7ba039d52d7b0258ce4ed9c113dcea1d9a363a5",
+    "mission_success": false,
+    "original_outcome": "incomplete",
+    "final_phase": 1,
+    "final_mode": 4,
+    "final_completions": 1,
+    "iterations": 65000,
+    "source_prefix_execution_exact": true,
+    "unmodified_replay": {
+      "trace_sha256": "370aadb1394a8be71e4cbf2531608db805806a1c91e783696c39fe60ea52db0f",
+      "final_ram_sha256": "7ec0f5761b7f6db6268dd0da32db6d6305befb590549aeac186773baf5add311",
+      "executable_sha256": "9da30b7cd2d0776c2b016077e683b50e9687f5ad43ba5e75c1e69384058c91e7",
+      "consumed_input_sha256": "e272f1ff1530bf4bf3f7ca33f7ba039d52d7b0258ce4ed9c113dcea1d9a363a5"
+    },
+    "unmodified_replay_exact": true,
+    "mission_flight_start": 40643,
+    "scope": "Physical-key original recording, independently replayed without the validation pilot. Failed route outcomes are preserved. Native whole-flight comparison remains separate."
+  },
+  "assessment": {
+    "scope": "Complete original physical-input recording and unmodified replay; no native-flight parity claim",
+    "previous": {
+      "yaw_values_41500_to_44458": 1,
+      "first_ammunition_change": null,
+      "first_combat_success_stage": null,
+      "final_iteration": 44458,
+      "final_player_xyz": [
+        1221334.921875,
+        6462.921875,
+        1418218.40625
+      ],
+      "final_carrier_xyz": [
+        1136640.0,
+        0.0,
+        1071104.0
+      ],
+      "final_speed": 82.0,
+      "final_contact": "0000"
+    },
+    "repeated_steering": {
+      "yaw_values_41500_to_44458": 633,
+      "first_ammunition_change": 42186,
+      "first_combat_success_stage": {
+        "iteration": 42816,
+        "pal_frame": 68379
+      },
+      "final_iteration": 65000,
+      "final_player_xyz": [
+        1136678.703125,
+        2.9296875,
+        1085906.65625
+      ],
+      "final_carrier_xyz": [
+        1136640.0,
+        0.0,
+        1071104.0
+      ],
+      "final_speed": 0.0,
+      "final_contact": "8080"
+    },
+    "repeated_make_events": 2433,
+    "landing_grade_earned": false,
+    "conclusion": "Repeated steering input reaches original combat success; return stops beyond carrier without a new grade"
+  },
+  "wrong_profile_rejected": true,
+  "files": {
+    "build/recomp/fa18_original_mission_pilot.exe": "29f2b3841067f03f2a5143cae11fd4643f72dea5476e487123e1a492e8c7df14",
+    "build/recomp/fa18_recomp.exe": "9da30b7cd2d0776c2b016077e683b50e9687f5ad43ba5e75c1e69384058c91e7",
+    "build\\native-flight\\original-escort-repeated-steering\\assessment.json": "78d2923a0b4448a209a014d2e1cd555a421a623c1f1af51dbffe9206114b09f7",
+    "build\\native-flight\\original-escort-repeated-steering\\consumed.fa18in": "e272f1ff1530bf4bf3f7ca33f7ba039d52d7b0258ce4ed9c113dcea1d9a363a5",
+    "build\\native-flight\\original-escort-repeated-steering\\controller-choices.e9k": "e7b06aa2d0aa15e0b9ce7ab39c6708d0796539a6b2a76fdf406b986a2b6ba520",
+    "build\\native-flight\\original-escort-repeated-steering\\driver.dat.gz": "4f731090a7a9475cb63d52e9874859084d0c557c00659b389a428bd9b638b187",
+    "build\\native-flight\\original-escort-repeated-steering\\driver.jsonl.gz": "d1c88ed30992d12ced80cde4b71194b36b8f7947c5d359221e984c5978b6dc57",
+    "build\\native-flight\\original-escort-repeated-steering\\driver.log": "87c8d3b2fa1a81525ee4da3cf1c71625d9a7173de82f765f3fc4e915f19dc05b",
+    "build\\native-flight\\original-escort-repeated-steering\\input.fa18in": "6138e32d492920a77357a3e98740931ca170327db27cc85c69e066a64481ad9f",
+    "build\\native-flight\\original-escort-repeated-steering\\replay.log": "0f0ca3cf35b528a86c0b7d0eea57a9a6cc09a14345fe2e62bf4c0213b8ad8d62",
+    "build\\native-flight\\original-escort-repeated-steering\\report.json": "53c3d341bcc3019f292f60752be4aedb8798a062aaf47e359ce608c6a698a81a",
+    "build\\native-flight\\original-escort-repeated-steering\\wrong-profile.log": "a6f6ee318a8a2a6f474c124d786b01c9d0316e4b984e13525c238b354f588e0b",
+    "tools/native/check_original_mission_recording.py": "618a48b025181330b92535d2b7a16037a03d981e3c2c33fc355376d036f54d6c",
+    "tools/native/mission_pilot.c": "c77bd77f0a7804f229701eb011660cc99a93c661ff3267fd4e1fa16291a378db",
+    "tools/native/original_mission_pilot_loop.c": "2b335a28bdd0b4a596e29a4e5817bdf378246b0247a7e539a9a88ba6a5229576"
+  }
+}
