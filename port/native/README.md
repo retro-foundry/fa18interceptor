@@ -1,5 +1,15 @@
 # Native port runner
 
+Complete mission-five message timing (2026-10-10): both independent runs obey
+original elapsed/countdown, full text, delay/redraw and colour-cache rules through
+all 13,762 real transitions, retaining 12 duplicates and 1,129 paused periods.
+Nine producer fields match at all 13,775 flight observations. First HDG occurs at
+source tick 173/native 181 after two sampled-second changes in each. Optional
+fields preserve both entire recordings, final RAM, counters and earned results;
+native gameplay heap violations are zero. Nine rejection controls and the exact
+prior mission-three assessment pass. Native gameplay is unchanged. Other drawing
+histories, broader independent flights and sound timing remain open. See [message timing evidence](../../analysis/native_mission_five_message_timing_milestone.md).
+
 Complete mission-five gameplay comparison (2026-10-10): all 13,775 original
 flight observations, 220,400 complete record cores and camera/control fields
 match the independent native replay. Both earn grade one, the third completion

@@ -1,5 +1,15 @@
 # Native gameplay-frame acceptance
 
+Complete mission-five message timing (2026-10-10): both independent runs obey
+original elapsed/countdown, full text, delay/redraw and colour-cache rules through
+all 13,762 real transitions, retaining 12 duplicates and 1,129 paused periods.
+Nine producer fields match at all 13,775 flight observations. First HDG occurs at
+source tick 173/native 181 after two sampled-second changes in each. Optional
+fields preserve both entire recordings, final RAM, counters and earned results;
+native gameplay heap violations are zero. Nine rejection controls and the exact
+prior mission-three assessment pass. Native gameplay is unchanged. Other drawing
+histories, broader independent flights and sound timing remain open. See [message timing evidence](native_mission_five_message_timing_milestone.md).
+
 Startup sample handoffs (2026-10-10): all 468,007 original consumed bytes
 follow published buffers, addresses, byte order and periods. All 48
 requests match the current native ordered payload/period/volume sequence;

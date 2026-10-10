@@ -1,0 +1,2029 @@
+{
+  "date": "2026-10-10",
+  "production_gameplay_changed": false,
+  "runner": {
+    "path": "build/native/fa18_native.exe",
+    "file_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+    "bytes": 2446336
+  },
+  "capture": {
+    "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+    "source_runner_sha256": "9da30b7cd2d0776c2b016077e683b50e9687f5ad43ba5e75c1e69384058c91e7",
+    "mission_mode": 5,
+    "executed_tool_sha256": "a9f32e56a1cf7d5a036740d525bcf1576c707dde44122effa12c02d2611bccb6",
+    "baseline_source_trace_sha256": "b7582fd9ccd6975a0ea26c079b4d23ad50de70e8de02617f8f654de7e35c175b",
+    "baseline_native_trace_sha256": "d5c1f5fd1a2447f3fc21d60744542a2c40b61dd45b0a06a385dfa3488c43db77",
+    "source_trace_sha256": "c4c339bc882985b9731380624eea411560cc82d95e4562992372eee684163194",
+    "native_trace_sha256": "d8564d5cd71553acac4419383664571aaaff5e36ff0a2b1b3ac4f1cdd81d80cc",
+    "source_final_ram_sha256": "40203abe0371c844ae96c7a56e7495cd693ccc9cd37e6543b844c212196bb54c",
+    "native_final_ram_sha256": "1f1381a5602e10c19d45ab024ef8d2c7f322eed288e1b605f1258259b4929737",
+    "source_run": {
+      "frames": 196010,
+      "recomp": 1,
+      "cpu_cycles": 27853413040,
+      "generated_cycles": 20666445584,
+      "generated_share": 0.742,
+      "dispatches": 85967671,
+      "interpreted_game_instructions": 250257620,
+      "code_writes": 0,
+      "disabled_functions": 0,
+      "blits": 3128980,
+      "line_blits": 2282575,
+      "nonblack_pixels": 17,
+      "pc": "FE5A7E",
+      "iterations": 75573
+    },
+    "native_run": {
+      "frame_owner_exit": false,
+      "frames": 133402,
+      "screen": "menu",
+      "mode": 0,
+      "glyphs": 32952,
+      "record_updates": 23779,
+      "scene_frames": 23770,
+      "terrain_polygons": 109529,
+      "model_calls": 146650,
+      "hud_frames": 23770,
+      "control_frames": 45575,
+      "scene_selected": true,
+      "stage": "C0FCB4",
+      "game_tick": 0,
+      "timer_pending": false,
+      "timer_yields": 56116,
+      "display_publications": 45575,
+      "display_yields": 45613,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 45571,
+      "input_events": 27472,
+      "input_queued": 0,
+      "update_iterations": 75334,
+      "replay_iterations": 74858,
+      "replay_events": 20413,
+      "host_replay_events": 7079,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 133402,
+      "voice_publications": 283573,
+      "voice_levels": [
+        [
+          358,
+          31
+        ],
+        [
+          358,
+          31
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          2
+        ]
+      ],
+      "sample_requests": 131369,
+      "sample_frames": 128065920,
+      "nonzero_sample_frames": 127360656,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "enlist_run": {
+      "frame_owner_exit": false,
+      "frames": 9000,
+      "screen": "menu",
+      "mode": 0,
+      "glyphs": 13256,
+      "record_updates": 1,
+      "scene_frames": 0,
+      "terrain_polygons": 0,
+      "model_calls": 0,
+      "hud_frames": 0,
+      "control_frames": 0,
+      "scene_selected": false,
+      "stage": "C0FCB4",
+      "game_tick": 0,
+      "timer_pending": false,
+      "timer_yields": 0,
+      "display_publications": 0,
+      "display_yields": 0,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 1,
+      "input_events": 1,
+      "input_queued": 0,
+      "update_iterations": 7156,
+      "replay_iterations": 0,
+      "replay_events": 0,
+      "host_replay_events": 18,
+      "host_replay_pending": 0,
+      "replay_started": false,
+      "voice_ticks": 9000,
+      "voice_publications": 18769,
+      "voice_levels": [
+        [
+          358,
+          31
+        ],
+        [
+          358,
+          31
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 6257,
+      "sample_frames": 8640000,
+      "nonzero_sample_frames": 8511816,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "memory": {
+      "enlist": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      },
+      "flight": {
+        "sdl_arena_bytes": 33554432,
+        "sdl_startup_bytes": 0,
+        "sdl_peak_bytes": 96,
+        "sdl_gameplay_pool_requests": 0,
+        "sdl_failures": 0,
+        "project_gameplay_heap_violations": 0,
+        "pcm_ring_frames": 131072,
+        "os_driver_allocations_observed": false
+      }
+    },
+    "source_update_evidence": {
+      "source_trace_sha256": "b7582fd9ccd6975a0ea26c079b4d23ad50de70e8de02617f8f654de7e35c175b",
+      "source_final_ram_sha256": "40203abe0371c844ae96c7a56e7495cd693ccc9cd37e6543b844c212196bb54c",
+      "source_consumed_input_sha256": "5f1302d6fd8a4664233e91364762742edd32fd94810756eb63388803d45e7033",
+      "probe_runner_sha256": "acbd85e32c8243aa205b85fc9ba6a8df812e19089dbe792bf761df05458472f4",
+      "probe_source_sha256": "6cfdb219df9d51d8c9ca1ce630f33472e09b8e49431b02c3fa6430231b0c9a3c",
+      "observations": 75573,
+      "real_update_calls": 75546,
+      "executed_links": 75546,
+      "duplicate_observations": 27,
+      "repeats": [
+        {
+          "iteration": 22502,
+          "update": 22501,
+          "frame": 20053,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "22501",
+            "frame": "20052",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "22501",
+            "frame": "20053",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D4",
+            "stop_sp": "00C7FF4C",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 24008,
+          "update": 24006,
+          "frame": 27207,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "24007",
+            "frame": "27206",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "24007",
+            "frame": "27207",
+            "pc": "C0EFD4",
+            "ppc": "FC0FF0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C065A4",
+            "stop_sp": "00C00E54",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 40930,
+          "update": 40927,
+          "frame": 52641,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "40929",
+            "frame": "52640",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "40929",
+            "frame": "52641",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D4",
+            "stop_sp": "00C7FF68",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 41996,
+          "update": 41992,
+          "frame": 61194,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "41995",
+            "frame": "61193",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "41995",
+            "frame": "61194",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FF4C",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 42697,
+          "update": 42692,
+          "frame": 67381,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "42696",
+            "frame": "67380",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "42696",
+            "frame": "67381",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CC",
+            "stop_sp": "00C7FF4E",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 42836,
+          "update": 42830,
+          "frame": 68457,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "42835",
+            "frame": "68456",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "42835",
+            "frame": "68457",
+            "pc": "C0EFD4",
+            "ppc": "FC0FF0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C065AC",
+            "stop_sp": "00C00E58",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 42907,
+          "update": 42900,
+          "frame": 68487,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "42906",
+            "frame": "68486",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "42906",
+            "frame": "68487",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D0",
+            "stop_sp": "00C7FF68",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 42915,
+          "update": 42907,
+          "frame": 68490,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "42914",
+            "frame": "68489",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "42914",
+            "frame": "68490",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D0",
+            "stop_sp": "00C7FF68",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 42944,
+          "update": 42935,
+          "frame": 68502,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "42943",
+            "frame": "68501",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "42943",
+            "frame": "68502",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D0",
+            "stop_sp": "00C7FF68",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 43157,
+          "update": 43147,
+          "frame": 68593,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "43156",
+            "frame": "68592",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "43156",
+            "frame": "68593",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D0",
+            "stop_sp": "00C7FF68",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 43311,
+          "update": 43300,
+          "frame": 68655,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "43310",
+            "frame": "68654",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "43310",
+            "frame": "68655",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FF64",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 43480,
+          "update": 43468,
+          "frame": 68723,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "43479",
+            "frame": "68722",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "43479",
+            "frame": "68723",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501BC",
+            "stop_sp": "00C7FF62",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 43598,
+          "update": 43585,
+          "frame": 68767,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "43597",
+            "frame": "68766",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "43597",
+            "frame": "68767",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D0",
+            "stop_sp": "00C7FF68",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 43669,
+          "update": 43655,
+          "frame": 68797,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "43668",
+            "frame": "68796",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "43668",
+            "frame": "68797",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501D0",
+            "stop_sp": "00C7FF68",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 45604,
+          "update": 45589,
+          "frame": 83734,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "45603",
+            "frame": "83733",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "45603",
+            "frame": "83734",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FF64",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 63140,
+          "update": 63124,
+          "frame": 109498,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "63139",
+            "frame": "109497",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "63139",
+            "frame": "109498",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C50164",
+            "stop_sp": "00C7FF40",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 63858,
+          "update": 63841,
+          "frame": 115481,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "63857",
+            "frame": "115480",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "63857",
+            "frame": "115481",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CC",
+            "stop_sp": "00C7FF62",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 66728,
+          "update": 66710,
+          "frame": 139612,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "66727",
+            "frame": "139611",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "66727",
+            "frame": "139612",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CC",
+            "stop_sp": "00C7FF62",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 67462,
+          "update": 67443,
+          "frame": 145774,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "67461",
+            "frame": "145773",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "67461",
+            "frame": "145774",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FF50",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 67650,
+          "update": 67630,
+          "frame": 147362,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "67649",
+            "frame": "147361",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "67649",
+            "frame": "147362",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501C2",
+            "stop_sp": "00C7FF8C",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 71746,
+          "update": 71725,
+          "frame": 176284,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "71745",
+            "frame": "176283",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "71745",
+            "frame": "176284",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FF78",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 72063,
+          "update": 72041,
+          "frame": 178450,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "72062",
+            "frame": "178449",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "72062",
+            "frame": "178450",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FF64",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 72634,
+          "update": 72611,
+          "frame": 182034,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "72633",
+            "frame": "182033",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "72633",
+            "frame": "182034",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FFAC",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 72936,
+          "update": 72912,
+          "frame": 183879,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "72935",
+            "frame": "183878",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "72935",
+            "frame": "183879",
+            "pc": "C0EFD4",
+            "ppc": "FC0FF0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C5016C",
+            "stop_sp": "00C7FF3A",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 73979,
+          "update": 73954,
+          "frame": 190271,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "73978",
+            "frame": "190270",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "73978",
+            "frame": "190271",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FF64",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 74425,
+          "update": 74399,
+          "frame": 192989,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "74424",
+            "frame": "192988",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "74424",
+            "frame": "192989",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CE",
+            "stop_sp": "00C7FF78",
+            "via_call": "0",
+            "result": "0"
+          }
+        },
+        {
+          "iteration": 74580,
+          "update": 74553,
+          "frame": 194316,
+          "previous_entry": {
+            "kind": "after",
+            "iteration": "74579",
+            "frame": "194315",
+            "pc": "C0EFD4",
+            "ppc": "C15DA2",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C0EFD4",
+            "stop_sp": "00C55058",
+            "via_call": "1",
+            "result": "2"
+          },
+          "resumed_entry": {
+            "kind": "before",
+            "iteration": "74579",
+            "frame": "194316",
+            "pc": "C0EFD4",
+            "ppc": "FC0EC0",
+            "sp": "00C55058",
+            "stack_long": "00C15DA8",
+            "stop_pc": "C501CC",
+            "stop_sp": "00C7FFAA",
+            "via_call": "0",
+            "result": "0"
+          }
+        }
+      ],
+      "input_edges_preserved": 25954,
+      "remapped_input_sha256": "ca9a6c3a67f99ff51557af4e5cc51be765aaa54fbd82eaed9931cb6e4a6c038e",
+      "mapping_sha256": "cfca96d96f3e9573b03823c48ec8624142160472e8f7d4de623493b76f7b4ca3",
+      "entries_sha256": "14e1c08d56c3d9f67d7a8bfcfe73d45356138ee3dd74a1d3f539ac3ac29855ea",
+      "instruction_trace_sha256": "5fd035de58e7874f58304669f7e767d7c8fd6c48f6701a00ca013474fb4d984b",
+      "mutation_rejections": {
+        "caller": true,
+        "executed_link": true,
+        "resume_stack": true,
+        "resume_stop": true
+      },
+      "scope": "Exact original execution and input retained; explicit JSR/LINK identities map every observation. No game tick, state or drawing equality is used to decide whether a boundary repeats. Native replay and complete gameplay/drawing parity remain separate acceptance checks.",
+      "snapshot": {
+        "observation": 74641,
+        "ram_sha256": "28d91433b035dacd6a18014999b66cfcd7c3096282c951cfeae1cbbfdc0e7f26",
+        "complete_cores_matching": 16,
+        "named_fields_matching": 42,
+        "complete_pages_matching": 8
+      }
+    },
+    "source_rows_preserved": 75573,
+    "native_rows_preserved": 45570,
+    "final_saved_pilot": "0001000200020500000002cb0000000000000000000101010000000000004e45570000000000000000000000000000000000000000000003000301b0000600040001000300010000000700000000",
+    "input_hashes": {
+      "captures\\native\\qual_carrier_success\\input.fa18in": "fe4ff3a4cac080a4534041eb42d84a9332916d7566336910d852f86cde070440",
+      "captures\\native\\qual_carrier_success\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+      "tools\\native\\fixtures\\region-pilot-enlist.e9k": "3c2a48da86432f2782ed6cb0036a9eb42fa08df4b6a64df75496e602530bff3a",
+      "local\\media\\fa18.adf": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2"
+    },
+    "scope": "Optional message fields leave every preceding trace field, complete core, page, final RAM byte, counter, outcome and save unchanged. Independently started full mode-5 flight; strict drawing remains open. Message timing is assessed separately.",
+    "native_prefix": {
+      "path": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\recorded-escort-ground-carry",
+      "report_sha256": "1cffa7818e8fb163fdbee2620eabd58ec2265183a0858517cf5bb290322641be",
+      "save_sha256": "bf391e322af0f3853b83156ef64e58ab30c935a2e5a1094fc30a3972dcf95ee6",
+      "trace_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c",
+      "ram_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec",
+      "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6"
+    },
+    "event_plan": [
+      {
+        "source_observation": 1,
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 40170,
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 40643,
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1
+      },
+      {
+        "source_observation": 47815,
+        "source_first": 47596,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 61333,
+        "source_first": 61114,
+        "mode": 5,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 61797,
+        "source_first": 61578,
+        "mode": 5,
+        "stage": "C10D8A",
+        "game_tick": 1
+      }
+    ],
+    "event_report": {
+      "format": "FA18_REPLAY_ANCHORS_V1",
+      "complete": true,
+      "failed": false,
+      "native_updates": 74858,
+      "source_position": 75342,
+      "keys_consumed": 20413,
+      "anchors": [
+        {
+          "source_first": 1,
+          "mode": 0,
+          "stage": "C0FCB4",
+          "game_tick": 0,
+          "native_first": 1,
+          "frame": 2299
+        },
+        {
+          "source_first": 40168,
+          "mode": 4,
+          "stage": "C10C08",
+          "game_tick": 36,
+          "native_first": 39931,
+          "frame": 55567
+        },
+        {
+          "source_first": 40641,
+          "mode": 4,
+          "stage": "C10D8A",
+          "game_tick": 1,
+          "native_first": 40395,
+          "frame": 56304
+        },
+        {
+          "source_first": 47596,
+          "mode": 0,
+          "stage": "C0FCB4",
+          "game_tick": 0,
+          "native_first": 47349,
+          "frame": 75601
+        },
+        {
+          "source_first": 61114,
+          "mode": 5,
+          "stage": "C10C08",
+          "game_tick": 36,
+          "native_first": 60630,
+          "frame": 88920
+        },
+        {
+          "source_first": 61578,
+          "mode": 5,
+          "stage": "C10D8A",
+          "game_tick": 1,
+          "native_first": 61094,
+          "frame": 89657
+        }
+      ]
+    },
+    "input_segment": {
+      "first_source_observation": 47815,
+      "first_actual_source_update": 47800,
+      "input_sha256": "f4b8180c91364d8115a3b88acab92721344b14a25a1a130f01d92d4786a7079f",
+      "replay_source_end": 75342,
+      "native_prefix_source_end": 47595,
+      "ordinary_native_prefix_replayed": true
+    }
+  },
+  "complete_message_assessment": {
+    "mission_mode": 5,
+    "first": 61797,
+    "last": 75571,
+    "observations": 13775,
+    "trace_sha256": {
+      "source": "c4c339bc882985b9731380624eea411560cc82d95e4562992372eee684163194",
+      "native": "d8564d5cd71553acac4419383664571aaaff5e36ff0a2b1b3ac4f1cdd81d80cc"
+    },
+    "preserved_observations": {
+      "source": 75573,
+      "native": 45570
+    },
+    "assets_sha256": "40203abe0371c844ae96c7a56e7495cd693ccc9cd37e6543b844c212196bb54c",
+    "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+    "native_prefix": {
+      "path": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\recorded-escort-ground-carry",
+      "report_sha256": "1cffa7818e8fb163fdbee2620eabd58ec2265183a0858517cf5bb290322641be",
+      "save_sha256": "bf391e322af0f3853b83156ef64e58ab30c935a2e5a1094fc30a3972dcf95ee6",
+      "trace_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c",
+      "ram_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec",
+      "runner_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6"
+    },
+    "execution_alignment": {
+      "first_native_update": 61094,
+      "last_native_update": 74856,
+      "real_updates_compared": 13763,
+      "duplicate_observations_preserved": [
+        63140,
+        63858,
+        66728,
+        67462,
+        67650,
+        71746,
+        72063,
+        72634,
+        72936,
+        73979,
+        74425,
+        74580
+      ],
+      "basis": "Original explicit JSR calls and executed LINK instructions; no state matching or frame search"
+    },
+    "strict_pages_matching": 8393,
+    "executed_tool_sha256": "7f1b9e6a31dbac6ad3f6c0eb6fa55c684775465086a858020434058cab4b7477",
+    "producer_fields": [
+      "notification_countdown",
+      "message_code",
+      "message_loaded",
+      "message_shown",
+      "message_countdown",
+      "message_time",
+      "cockpit_flags",
+      "threat_events",
+      "player_phase"
+    ],
+    "producer_boundaries_matching": 13775,
+    "equivalent_first_heading_event": {
+      "source": {
+        "acquisition_observation": 61957,
+        "acquisition_tick": 161,
+        "heading_observation": 61969,
+        "heading_tick": 173,
+        "sampled_second_changes_before_hud": 2,
+        "elapsed_ms": 1622,
+        "heading_text": "    NO SIG   HDG:  081    "
+      },
+      "native": {
+        "acquisition_observation": 61957,
+        "acquisition_tick": 161,
+        "heading_observation": 61977,
+        "heading_tick": 181,
+        "sampled_second_changes_before_hud": 2,
+        "elapsed_ms": 1360,
+        "heading_text": "    NO SIG   HDG:  081    "
+      }
+    },
+    "accepted_evidence": true,
+    "negative_controls_rejected": {
+      "wrong_notification": {
+        "iteration": 61798,
+        "reason": "('notification cadence', 61798)"
+      },
+      "lost_sampled_second": {
+        "iteration": 61798,
+        "reason": "('elapsed', 61798)"
+      },
+      "premature_info_page": {
+        "iteration": 61957,
+        "reason": "(61957, {'info_page': 1, 'info_request': 1, 'info_redraws': 2, 'info_delay': 255, 'message_drawn': 0, 'message_line': '202020204e4f20534947202020414c543a202035313030202020'}, {'info_page': 257, 'info_request': 1, 'info_redraws': 2, 'info_delay': 255, 'message_drawn': 0, 'message_line': '202020204e4f20534947202020414c543a202035313030202020'})"
+      },
+      "wrong_fresh_text": {
+        "iteration": 61957,
+        "reason": "(61957, {'info_page': 1, 'info_request': 1, 'info_redraws': 2, 'info_delay': 255, 'message_drawn': 0, 'message_line': '202020204e4f20534947202020414c543a202035313030202020'}, {'info_page': 1, 'info_request': 1, 'info_redraws': 2, 'info_delay': 255, 'message_drawn': 0, 'message_line': '212020204e4f20534947202020414c543a202035313030202020'})"
+      },
+      "changed_paused_text": {
+        "iteration": 67798,
+        "reason": "('idle cache changed', 67798)"
+      },
+      "lost_selection_page_reset": {
+        "iteration": 62057,
+        "reason": "(62057, {'info_page': 65535, 'info_request': 0, 'info_redraws': 0, 'info_delay': 255, 'message_drawn': 0, 'message_line': '2020202020202020202020202020202020202020202020202020'}, {'info_page': 65279, 'info_request': 0, 'info_redraws': 0, 'info_delay': 255, 'message_drawn': 0, 'message_line': '2020202020202020202020202020202020202020202020202020'})"
+      },
+      "wrong_selection_loss_blank": {
+        "iteration": 62057,
+        "reason": "(62057, {'info_page': 65535, 'info_request': 0, 'info_redraws': 0, 'info_delay': 255, 'message_drawn': 0, 'message_line': '2020202020202020202020202020202020202020202020202020'}, {'info_page': 65535, 'info_request': 0, 'info_redraws': 0, 'info_delay': 255, 'message_drawn': 0, 'message_line': '2120202020202020202020202020202020202020202020202020'})"
+      },
+      "wrong_message_colour": {
+        "iteration": 61798,
+        "reason": "('message kind/cache', 61798)"
+      },
+      "wrong_priority_producer": {
+        "iteration": 61798,
+        "reason": "('message producer differs', 61798)"
+      }
+    },
+    "scope": "Complete recorded flight: original elapsed/countdown, delay/redraw, full text cache/formatting and message-kind rules on each independent runtime. Every transition and duplicate identity remains represented. Priority producers agree. Strict full pages remain unchanged diagnostics; other cockpit drawing and original sound timing are not accepted by this check."
+  },
+  "transitions": {
+    "source": {
+      "transitions": 13762,
+      "duplicate_observations": 12,
+      "idle": 1129,
+      "fresh_information": 914,
+      "cached_information": 4471,
+      "blanking": 18,
+      "fresh_message": 27,
+      "cached_message": 7203,
+      "context_suppressed": 0,
+      "seconds_changed": 1917,
+      "notification_steps": 13762,
+      "message_kinds": 12633,
+      "delay_resets": [
+        62433
+      ],
+      "redraw_events": [
+        61829,
+        61830,
+        61831,
+        61832,
+        61833,
+        61862,
+        61863,
+        61864,
+        61865,
+        61866,
+        62010,
+        62011,
+        62012,
+        62013,
+        62014,
+        63600,
+        63601,
+        63602,
+        63603,
+        63604,
+        63645,
+        63646,
+        63647,
+        63648,
+        63649,
+        63695,
+        63696,
+        63697,
+        63698,
+        63699,
+        64318,
+        64319,
+        64320,
+        64321,
+        64322,
+        64527,
+        64528,
+        64529,
+        64530,
+        64531,
+        64797,
+        64798,
+        64799,
+        64800,
+        64801,
+        64806,
+        64807,
+        64808,
+        64809,
+        64810,
+        64955,
+        64956,
+        64957,
+        64958,
+        64959,
+        65170,
+        65171,
+        65172,
+        65173,
+        65174,
+        65378,
+        65379,
+        65380,
+        65381,
+        65382,
+        65617,
+        65618,
+        65619,
+        65620,
+        65621,
+        65874,
+        65875,
+        65876,
+        65877,
+        65878,
+        66012,
+        66013,
+        66014,
+        66015,
+        66016,
+        66074,
+        66075,
+        66076,
+        66077,
+        66078,
+        66621,
+        66622,
+        66623,
+        66624,
+        66625,
+        66858,
+        66859,
+        66860,
+        66861,
+        66862,
+        67385,
+        67386,
+        67387,
+        67388,
+        67389,
+        67703,
+        67704,
+        67705,
+        67706,
+        67707,
+        74635,
+        74636,
+        74637,
+        74638,
+        74639,
+        74693,
+        74694,
+        74695,
+        74696,
+        74697
+      ],
+      "selection_losses": [
+        62057,
+        64264,
+        67770
+      ]
+    },
+    "native": {
+      "transitions": 13762,
+      "duplicate_observations": 12,
+      "idle": 1129,
+      "fresh_information": 861,
+      "cached_information": 4524,
+      "blanking": 18,
+      "fresh_message": 27,
+      "cached_message": 7203,
+      "context_suppressed": 0,
+      "seconds_changed": 855,
+      "notification_steps": 13762,
+      "message_kinds": 12633,
+      "delay_resets": [
+        62433
+      ],
+      "redraw_events": [
+        61829,
+        61830,
+        61831,
+        61832,
+        61833,
+        61862,
+        61863,
+        61864,
+        61865,
+        61866,
+        62010,
+        62011,
+        62012,
+        62013,
+        62014,
+        63600,
+        63601,
+        63602,
+        63603,
+        63604,
+        63645,
+        63646,
+        63647,
+        63648,
+        63649,
+        63695,
+        63696,
+        63697,
+        63698,
+        63699,
+        64318,
+        64319,
+        64320,
+        64321,
+        64322,
+        64527,
+        64528,
+        64529,
+        64530,
+        64531,
+        64797,
+        64798,
+        64799,
+        64800,
+        64801,
+        64806,
+        64807,
+        64808,
+        64809,
+        64810,
+        64955,
+        64956,
+        64957,
+        64958,
+        64959,
+        65170,
+        65171,
+        65172,
+        65173,
+        65174,
+        65378,
+        65379,
+        65380,
+        65381,
+        65382,
+        65617,
+        65618,
+        65619,
+        65620,
+        65621,
+        65874,
+        65875,
+        65876,
+        65877,
+        65878,
+        66012,
+        66013,
+        66014,
+        66015,
+        66016,
+        66074,
+        66075,
+        66076,
+        66077,
+        66078,
+        66621,
+        66622,
+        66623,
+        66624,
+        66625,
+        66858,
+        66859,
+        66860,
+        66861,
+        66862,
+        67385,
+        67386,
+        67387,
+        67388,
+        67389,
+        67703,
+        67704,
+        67705,
+        67706,
+        67707,
+        74635,
+        74636,
+        74637,
+        74638,
+        74639,
+        74693,
+        74694,
+        74695,
+        74696,
+        74697
+      ],
+      "selection_losses": [
+        62057,
+        64264,
+        67770
+      ]
+    }
+  },
+  "page_events": {
+    "source": [
+      {
+        "iteration": 61957,
+        "tick": 161,
+        "page": 1,
+        "seconds_changed": 22,
+        "message": "    NO SIG   ALT:  5100   "
+      },
+      {
+        "iteration": 61969,
+        "tick": 173,
+        "page": 2,
+        "seconds_changed": 24,
+        "message": "    NO SIG   HDG:  081    "
+      },
+      {
+        "iteration": 61983,
+        "tick": 187,
+        "page": 3,
+        "seconds_changed": 26,
+        "message": "    NO SIG   SPD:  605    "
+      },
+      {
+        "iteration": 61997,
+        "tick": 201,
+        "page": 1,
+        "seconds_changed": 28,
+        "message": "    NO SIG   ALT:  5095   "
+      },
+      {
+        "iteration": 62017,
+        "tick": 221,
+        "page": 2,
+        "seconds_changed": 31,
+        "message": "    NO SIG   HDG:  083    "
+      },
+      {
+        "iteration": 62031,
+        "tick": 235,
+        "page": 3,
+        "seconds_changed": 33,
+        "message": "    NO SIG   SPD:  598    "
+      },
+      {
+        "iteration": 62044,
+        "tick": 248,
+        "page": 1,
+        "seconds_changed": 35,
+        "message": "    NO SIG   ALT:  5095   "
+      },
+      {
+        "iteration": 62057,
+        "tick": 261,
+        "page": 65535,
+        "seconds_changed": 37,
+        "message": "                          "
+      },
+      {
+        "iteration": 62058,
+        "tick": 262,
+        "page": 0,
+        "seconds_changed": 37,
+        "message": "                          "
+      },
+      {
+        "iteration": 62109,
+        "tick": 313,
+        "page": 1,
+        "seconds_changed": 44,
+        "message": "    NO SIG   ALT:  2850   "
+      }
+    ],
+    "native": [
+      {
+        "iteration": 61957,
+        "tick": 161,
+        "page": 1,
+        "seconds_changed": 11,
+        "message": "    NO SIG   ALT:  5100   "
+      },
+      {
+        "iteration": 61977,
+        "tick": 181,
+        "page": 2,
+        "seconds_changed": 13,
+        "message": "    NO SIG   HDG:  081    "
+      },
+      {
+        "iteration": 62004,
+        "tick": 208,
+        "page": 3,
+        "seconds_changed": 15,
+        "message": "    NO SIG   SPD:  624    "
+      },
+      {
+        "iteration": 62006,
+        "tick": 210,
+        "page": 1,
+        "seconds_changed": 15,
+        "message": "    NO SIG   SPD:  624    "
+      },
+      {
+        "iteration": 62033,
+        "tick": 237,
+        "page": 2,
+        "seconds_changed": 17,
+        "message": "    NO SIG   HDG:  083    "
+      },
+      {
+        "iteration": 62057,
+        "tick": 261,
+        "page": 65535,
+        "seconds_changed": 18,
+        "message": "                          "
+      },
+      {
+        "iteration": 62058,
+        "tick": 262,
+        "page": 0,
+        "seconds_changed": 18,
+        "message": "                          "
+      },
+      {
+        "iteration": 62109,
+        "tick": 313,
+        "page": 1,
+        "seconds_changed": 22,
+        "message": "    NO SIG   ALT:  2850   "
+      },
+      {
+        "iteration": 62137,
+        "tick": 341,
+        "page": 2,
+        "seconds_changed": 24,
+        "message": "    NO SIG   HDG:  270    "
+      },
+      {
+        "iteration": 62169,
+        "tick": 373,
+        "page": 3,
+        "seconds_changed": 26,
+        "message": "    NO SIG   SPD:  465    "
+      }
+    ]
+  },
+  "full_event_lists_retained_in_report": true,
+  "actual_arrest_owner": {
+    "snapshot_observation": 74641,
+    "actual_snapshot_sha256": "28d91433b035dacd6a18014999b66cfcd7c3096282c951cfeae1cbbfdc0e7f26",
+    "runner_sha256": "a18cfe98206fd92ae2c8abaec0102c6ff4ad3294668c0610e2ef4ffc6b8bf643",
+    "source_sha256": "937e7c7d915fac929bf74cd3d5cbd2b8400ccdd290773e00f95946b0b7b8972b",
+    "complete_observed_state_owners_matching": true,
+    "returncode": 0,
+    "owners": [
+      "C11B44",
+      "C11BFC",
+      "C322EE"
+    ],
+    "scope": "Actual original arrest snapshot component instruction comparisons; not full-flight native body/drawing integration"
+  },
+  "initial_model_rejection": {
+    "accepted_evidence": false,
+    "scope": "Existing mission-three diagnostic lacks selection-loss transitions; not a playable fault",
+    "source_observation": 62057,
+    "previous_selected_record": "1400",
+    "selected_record": "ffff",
+    "reason": "selection loss needs assessment",
+    "assessor_sha256": "c84127a89eb344e97de4ce8b23886e36f6b76fed0a2e938b00b67f31e9dc181e"
+  },
+  "patrol_assessment_exact": true,
+  "patrol_negative_controls": [
+    "premature_page",
+    "lost_second_event",
+    "wrong_refreshed_text",
+    "wrong_held_text",
+    "lost_vicinity_delay",
+    "wrong_notification_step",
+    "wrong_message_colour",
+    "wrong_warning_text",
+    "wrong_priority_message"
+  ],
+  "gameplay_comparison": {
+    "compared": 13775,
+    "record_cores_compared": 220400,
+    "record_cores_matching": 220400,
+    "complete_record_boundaries_matching": 13775,
+    "camera_and_controls_matching": 13775,
+    "complete_pages_matching": 8393,
+    "timer_and_hud_matching": 0,
+    "first_record_difference": null,
+    "first_game_difference": null,
+    "first_page_difference": {
+      "source_iteration": 61957,
+      "native_iteration": 61254,
+      "source_tick": 161,
+      "changes": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "game_fields_compared": [
+      "stage",
+      "game_tick",
+      "phase",
+      "mouse_coordinates",
+      "selected_record",
+      "mode",
+      "target_record",
+      "controls",
+      "observer",
+      "camera_matrix",
+      "view_matrix",
+      "view_pan_rotate",
+      "view_attitude",
+      "view_side"
+    ],
+    "first": 61797,
+    "last": 75571,
+    "records_matching_per_slot": [
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775,
+      13775
+    ],
+    "complete_gameplay_matching_prefix": 13775,
+    "strict_gameplay_matching": true,
+    "native_menu_observation_gaps": [
+      75572,
+      75573
+    ],
+    "execution_alignment": {
+      "first_native_update": 61094,
+      "last_native_update": 74856,
+      "real_updates_compared": 13763,
+      "duplicate_observations_preserved": [
+        63140,
+        63858,
+        66728,
+        67462,
+        67650,
+        71746,
+        72063,
+        72634,
+        72936,
+        73979,
+        74425,
+        74580
+      ],
+      "basis": "Original explicit JSR calls and executed LINK instructions; no state matching or frame search"
+    },
+    "mutation_rejections": {
+      "npc_core": true,
+      "controls": true,
+      "page": true
+    }
+  },
+  "artifacts": [
+    {
+      "path": "build/native-flight/mission-five-message-trace/report.json",
+      "file_sha256": "7f969e4bfc97b4ea995f5621b128f23088647f75037488da7eb3b88db2e2dadc",
+      "bytes": 8402943
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/source.jsonl.gz",
+      "file_sha256": "0882ae7fca60094fc4dd9b5bd2ba3d3942291507faba13fb8bcc67fa839a839a",
+      "bytes": 12624662
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/native.jsonl.gz",
+      "file_sha256": "d3ef9d026aa83a12cf4552376e47eb49034051986e0683d0582c4d534eeb544a",
+      "bytes": 11349516
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/source.log",
+      "file_sha256": "12f0b7c08279824239e40dc76c455803eff160b3f4f1a56e485312decf651b8a",
+      "bytes": 332
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/native.log",
+      "file_sha256": "9494df7a363253316ee1bb083c535a2e69a9677f6316a121564d86833d2684f5",
+      "bytes": 1009
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/enlist.log",
+      "file_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "bytes": 943
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/anchors.json",
+      "file_sha256": "47ff081e75f49610c8707e73594669033d2db7f3cba9f1ab5f16936872985d7f",
+      "bytes": 730
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/arrest-owner.json",
+      "file_sha256": "db191841153928391ce3c17abf9ffb188bc77d038b9186db927931a12a2f6f06",
+      "bytes": 579
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/arrest-owner.log",
+      "file_sha256": "fc84a72946f56e45a2d79a5465d2e9eb5589a32a03683d0de0b02e47a0386f7a",
+      "bytes": 90
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/check_arrest_owner.py",
+      "file_sha256": "039cbf21d7346a1771bd36bb8965eee5c95a0f1bc7076c03b3a090cb779fd49b",
+      "bytes": 1708
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/initial-model-rejection.json",
+      "file_sha256": "b21f29e2fb45df27b3c7bbab64a31618b5a05b2f31303abbb212430be20a1109",
+      "bytes": 377
+    },
+    {
+      "path": "build/native-flight/mission-five-message-trace/previous-message-assessor.py.gz",
+      "file_sha256": "a784846f81853c25a667337fdc813f0a55351de1b6adac73931e5ff9eacece7a",
+      "bytes": 4276
+    },
+    {
+      "path": "build/native-flight/mission-five-message-timing/report.json",
+      "file_sha256": "4c8931efc37dbcdfde8b8de640b81c56549e438d450f0d15f1d92e2dc30c59aa",
+      "bytes": 124456
+    },
+    {
+      "path": "build/native-flight/mission-five-message-timing/patrol-regression/report.json",
+      "file_sha256": "debc98de73f15422e35c0f104810df0457dc6a687af6e755735687e020a9045b",
+      "bytes": 72653
+    },
+    {
+      "path": "build/native-flight/mission-three-message-timing/Release/report.json",
+      "file_sha256": "debc98de73f15422e35c0f104810df0457dc6a687af6e755735687e020a9045b",
+      "bytes": 72653
+    }
+  ],
+  "code": [
+    {
+      "path": "tools/native/check_mission_message_trace.py",
+      "file_sha256": "a9f32e56a1cf7d5a036740d525bcf1576c707dde44122effa12c02d2611bccb6",
+      "bytes": 15608
+    },
+    {
+      "path": "tools/native/assess_complete_mission_messages.py",
+      "file_sha256": "7f1b9e6a31dbac6ad3f6c0eb6fa55c684775465086a858020434058cab4b7477",
+      "bytes": 9916
+    },
+    {
+      "path": "tools/native/assess_mission_message_timing.py",
+      "file_sha256": "34654f3da926caf96649f0787a1d65363e8f7aaa98f0fd311585705b990c9326",
+      "bytes": 14828
+    },
+    {
+      "path": "tools/native/assess_demo_hud_timing.py",
+      "file_sha256": "b9e99cf5a279a63c6730b22e367c3b9d8e276d694016b704c65a3d801fd5134e",
+      "bytes": 13502
+    },
+    {
+      "path": "tools/native/check_recorded_original_mission_trace.py",
+      "file_sha256": "86c1e3bc7a070bff5dc01be8d472aaa29d69c501eabf109ae6b5ab04cce1d684",
+      "bytes": 33579
+    },
+    {
+      "path": "tools/native/native_message_cadence_oracle.c",
+      "file_sha256": "937e7c7d915fac929bf74cd3d5cbd2b8400ccdd290773e00f95946b0b7b8972b",
+      "bytes": 3696
+    },
+    {
+      "path": "port/native/flight_trace.c",
+      "file_sha256": "5ac2efda25eaeb8e6d9925f701e9046eafaf1c2154583f9973c419f1ac6f5df6",
+      "bytes": 8819
+    },
+    {
+      "path": "port/game/native/flight.c",
+      "file_sha256": "aa1988b79207198acf133a15c58e4e84fbd464e7b5db774048feb63ee2ae1273",
+      "bytes": 22314
+    },
+    {
+      "path": "port/game/notify.c",
+      "file_sha256": "938924d98f32e8d2463658303513e753967f410b8942fff4e18382bef6afeb01",
+      "bytes": 625
+    },
+    {
+      "path": "port/game/messages.c",
+      "file_sha256": "df3293aa774ed4248da6885af051f97248f6b1ff396eff1c42583747e9630c5e",
+      "bytes": 5850
+    },
+    {
+      "path": "port/game/message_line.c",
+      "file_sha256": "e0e13dec312e03ee4a891127a31f5af65c2513c4c916f787250954d7ad3b8599",
+      "bytes": 6928
+    },
+    {
+      "path": "port/game/main_loop_timers.c",
+      "file_sha256": "c70554aba2d15f7c7043d8f69bc0307f88fcf0c9907d4623f657259aaa4b4881",
+      "bytes": 10152
+    },
+    {
+      "path": "port/game/postflight_variants.c",
+      "file_sha256": "85d680d325196c854099df21461d5d10ee18406d789200671878df727b53446e",
+      "bytes": 15799
+    },
+    {
+      "path": "port/game/control_records.c",
+      "file_sha256": "9b6009aa3258232933c33c9f412886ef99a11ac697920ad7bc9b43caebf22665",
+      "bytes": 41945
+    },
+    {
+      "path": "source_amiga/observed/scan_postflight_records.asm",
+      "file_sha256": "51820ce6e5d66a987d90942464daf0d513bd3f211834abacc536c0377a8ae0e7",
+      "bytes": 3215
+    },
+    {
+      "path": "scripts/check_native_build.py",
+      "file_sha256": "c48f38867fa0644badb47c159ce38cb26c1c75d914f345e1a17b7b14bdd4dbdd",
+      "bytes": 12687
+    },
+    {
+      "path": "scripts/native_frame_count.py",
+      "file_sha256": "bcc4fa3fc9a5a67389fb642764926c62f6d7e3e38003c5ad7ae1d7c9088a864c",
+      "bytes": 10306
+    },
+    {
+      "path": "port/native_data_allowlist.txt",
+      "file_sha256": "3ad8cb1877dfdf1d453d4a0b4afb118da3a81ccf6ebf1962e8ecb088cbeb248e",
+      "bytes": 569
+    }
+  ],
+  "retention": {
+    "passing_raw_captures_removed": true,
+    "source_capture_mib": 471.70623779296875,
+    "capture_budget_mib": 512,
+    "build_cache_gib": 3.8,
+    "build_budget_gib": 4
+  },
+  "scope": "Complete independently recorded mission-five message/timer rules accepted at every real transition; first heading follows two sampled-second events in both games. Priority producers, previous traces, actual RAM/counters/save and gameplay parity preserved. Full cockpit pixel history, broader independent mission comparisons and original sound timing remain open; campaign continuity waived and named-state cleanup deferred."
+}

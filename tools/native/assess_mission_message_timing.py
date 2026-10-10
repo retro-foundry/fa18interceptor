@@ -58,8 +58,14 @@ def assess_sequence(rows, first, last, assets, identities=None):
         page, request, redraws, delay, drawn = (number(a, n) for n in cache_names[:-1])
         selected = number(b, 'selected_record')
         if selected != number(a, 'selected_record'):
-            assert signed(selected, 16) >= 0, ('selection loss needs assessment', i)
-            page, request, delay = 1, 1, 255  # C3180C acquisition.
+            if signed(selected, 16) >= 0:
+                page, request, delay = 1, 1, 255  # C3180C acquisition.
+            else:
+                # C3180C's empty-list return and release_lost_selection only
+                # clear selection. C322EE owns subsequent page blanking; no
+                # acquisition stores to INFO_PAGE/REQUEST/DELAY occur here.
+                assert selected == 0xffff, ('invalid lost selection', i)
+                counts.setdefault('selection_losses', []).append(i)
         if delay_reset(number(b, 'threat_events'), number(a, 'threat_events')):
             delay = 24
             counts['delay_resets'].append(i)
