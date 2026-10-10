@@ -1,5 +1,13 @@
 # The C port
 
+Original escort deck contact (2026-10-10): the validation standoff-height
+route reaches the original carrier deck with gear down and hook extended,
+but misses the arrestor and earns no escort grade. All 65,000 observations,
+final RAM and consumed keys reproduce exactly; the first 46,126 equal the
+preceding route. Actual wire geometry is aft of the controller target.
+The playable runner is unchanged. Wire targeting, broader full flights
+and sound timing remain open. See [deck/wire evidence](analysis/native_original_escort_standoff_milestone.md).
+
 Original escort approach (2026-10-10): the existing validation height gate
 reduces landing overshoot, but the original still earns no escort grade.
 All 65,000 observations, final RAM and consumed keys reproduce exactly

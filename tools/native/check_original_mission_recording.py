@@ -75,8 +75,8 @@ def main():
     parser.add_argument('--patrol-input', action='store_true', help='ordinary approach/landing input without firing')
     parser.add_argument('--repeat-steering', action='store_true',
                         help='validation input: repeat unchanged held steering keys through the original physical keyboard queue')
-    parser.add_argument('--wait-for-approach-height', action='store_true',
-                        help='validation escort input: use the existing final-mission height gate before turning onto final')
+    parser.add_argument('--wait-for-approach-height', nargs='?', const='final', choices=('final', 'standoff'),
+                        help='validation escort input: wait for the final-mission gate (default), or the requested standoff height')
     parser.add_argument('--mode', type=int, choices=(3, 4), default=3)
     parser.add_argument('--source-prefix', type=Path,
                         help='verified original qualification/mission-three recording required for escort')
@@ -121,6 +121,13 @@ def main():
         if not args.reuse_driver:
             subprocess.run(['python', 'scripts/build_recomp.py', '--output', 'build/recomp/fa18_original_mission_pilot.exe',
                 '--replace-source', 'port/recomp/loop_input.c=tools/native/original_mission_pilot_loop.c'], cwd=ROOT, check=True)
+            # Bind the executable and included controller sources before the
+            # process starts; later workspace edits must not relabel a capture.
+            driver_identity = dict(
+                driver_executable_sha256=digest((ROOT / 'build/recomp/fa18_original_mission_pilot.exe').read_bytes()),
+                driver_source_sha256=digest((ROOT / 'tools/native/original_mission_pilot_loop.c').read_bytes()),
+                controller_source_sha256=digest((ROOT / 'tools/native/mission_pilot.c').read_bytes()),
+                controller_header_sha256=digest((ROOT / 'tools/native/mission_pilot.h').read_bytes()))
             code = run(ROOT / 'build/recomp/fa18_original_mission_pilot.exe', driver_input, args.out / 'driver.log',
                 work / 'driver.jsonl', work / 'driver.dat', args.out / 'consumed.fa18in',
                 dict(FA18_ORIGINAL_PILOT_INPUT=str((args.out / 'input.fa18in').resolve()),
@@ -130,7 +137,8 @@ def main():
                      **({'FA18_ORIGINAL_PILOT_PREFIX_END': str(prefix['iterations'])} if prefix else {}),
                      **({'FA18_ORIGINAL_PILOT_PATROL': '1'} if args.patrol_input else {}),
                      **({'FA18_ORIGINAL_PILOT_REPEAT_STEERING': '1'} if args.repeat_steering else {}),
-                     **({'FA18_ORIGINAL_PILOT_APPROACH_HEIGHT': '1'} if args.wait_for_approach_height else {})))
+                     **({'FA18_ORIGINAL_PILOT_APPROACH_HEIGHT': '1'} if args.wait_for_approach_height else {}),
+                     **({'FA18_ORIGINAL_PILOT_APPROACH_STANDOFF': '1'} if args.wait_for_approach_height == 'standoff' else {})))
             assert code in (0, 1), f'original pilot process failed: {code}'
             for name in ('driver.jsonl', 'driver.dat'):
                 (args.out / f'{name}.gz').write_bytes(gzip.compress((work / name).read_bytes(), mtime=0))
@@ -141,13 +149,12 @@ def main():
             log = (args.out / 'driver.log').read_text()
             preliminary = dict(input_hashes=hashes, driver_returncode=code,
                 mission_mode=args.mode, source_prefix=prefix,
-                driver_executable_sha256=digest((ROOT / 'build/recomp/fa18_original_mission_pilot.exe').read_bytes()),
-                driver_source_sha256=digest((ROOT / 'tools/native/original_mission_pilot_loop.c').read_bytes()),
-                controller_source_sha256=digest((ROOT / 'tools/native/mission_pilot.c').read_bytes()),
+                **driver_identity,
                 controller_ticks_per_update=args.pilot_ticks_per_update,
                 patrol_input=args.patrol_input,
                 repeat_steering=args.repeat_steering,
-                wait_for_approach_height=args.wait_for_approach_height,
+                wait_for_approach_height=bool(args.wait_for_approach_height),
+                approach_height_target=args.wait_for_approach_height or 'final',
                 driver_trace_sha256=digest((work / 'driver.jsonl').read_bytes()),
                 driver_final_ram_sha256=digest(ram), generated_input_sha256=digest((args.out / 'input.fa18in').read_bytes()),
                 consumed_input_sha256=digest((args.out / 'consumed.fa18in').read_bytes()),
@@ -169,7 +176,8 @@ def main():
         assert report['input_hashes'] == hashes, 'original media changed'
         assert report.get('mission_mode', 3) == args.mode, 'recording belongs to a different mission'
         assert report.get('repeat_steering', False) == args.repeat_steering, 'recording uses different steering inputs'
-        assert report.get('wait_for_approach_height', False) == args.wait_for_approach_height, 'recording uses different approach inputs'
+        assert report.get('wait_for_approach_height', False) == bool(args.wait_for_approach_height), 'recording uses different approach inputs'
+        assert report.get('approach_height_target', 'final') == (args.wait_for_approach_height or 'final'), 'recording uses a different approach height target'
         assert report.get('source_prefix') == prefix, 'recording belongs to a different prefix'
         data = gzip.decompress((args.out / 'driver.jsonl.gz').read_bytes())
         assert digest(data) == report['driver_trace_sha256']
