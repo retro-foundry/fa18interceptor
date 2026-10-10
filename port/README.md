@@ -1,5 +1,13 @@
 # Active port source ownership
 
+Escort scene clock (2026-10-10): the actual native C0FECE setup matches
+original instructions with its own inputs. A reference-only microsecond
+probe reproduces every byte of all 16 original cores; three wrong-clock
+probes reject. Native timer quantization zeroes the five bits used for
+source scene variation, so timer-resolution fidelity remains open. The
+whole native replay preserves counters/RAM/save; full escort parity and
+sound timing remain open. See [scene clock evidence](../analysis/native_escort_scene_clock_milestone.md).
+
 Escort event replay (2026-10-10): source-declared setup/flight events now own
 all 2,028 recorded key edges while every actual native update remains counted.
 The complete 3,816-observation comparison runs and fails from initial state;

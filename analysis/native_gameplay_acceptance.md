@@ -1,5 +1,13 @@
 # Native gameplay-frame acceptance
 
+Escort scene clock (2026-10-10): the actual native C0FECE setup matches
+original instructions with its own inputs. A reference-only microsecond
+probe reproduces every byte of all 16 original cores; three wrong-clock
+probes reject. Native timer quantization zeroes the five bits used for
+source scene variation, so timer-resolution fidelity remains open. The
+whole native replay preserves counters/RAM/save; full escort parity and
+sound timing remain open. See [scene clock evidence](native_escort_scene_clock_milestone.md).
+
 Complete mission-three message timing (2026-10-09): all 4,964 real transitions
 obey original elapsed/countdown, delay/redraw, full text and colour-cache rules,
 including 1,362 paused HUD periods. Nine priority-message producer fields match

@@ -79,6 +79,16 @@ int main(int argc,char **argv) {
     const gaddr stage=rd_u32(STAGE_CALLBACK);
     if(!file_oracle_reset(game)) return 1;
     if((!startup_scene && !original_input(game)) || !original_stage()) return 1;
+    /* Optional reference-only dependency evidence. The comparison below stays
+     * strict, including deliberate input probes whose outputs should differ. */
+    const char *source_output=getenv("FA18_MODE_SOURCE_OUTPUT");
+    if(source_output) {
+        FILE *file=fopen(source_output,"wb");
+        if(!file) return 1;
+        const int written=fwrite(m->chip,1,0x80000,file)==0x80000 &&
+            fwrite(m->slow,1,0x80000,file)==0x80000;
+        if(fclose(file) || !written) return 1;
+    }
     unsigned differences=0;
     for(unsigned i=0;i<0xff000;++i) {
         const uint8_t actual=i<0x80000?m->chip[i]:m->slow[i-0x80000];
