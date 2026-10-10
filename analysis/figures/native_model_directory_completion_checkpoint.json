@@ -1,0 +1,648 @@
+{
+  "isolated_worktree": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\model-command-worktree",
+  "branch": "model-command-completion",
+  "main_runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8",
+  "code_sha256": {
+    "port/game/draw_stream.c": "54c88e0393a432774d831e98a3220613f5a8943e78fcb4390db764da4f6c8c42",
+    "port/game/draw_stream.h": "3f3cb0e5b2c889a584810ff40ae8059aabbc47cd5dfd72144105b11315615b47",
+    "port/game/native/model.c": "895ad5bbb5bdce8e4332d5f576f389c276898bf58014375c7669250959dd06ec",
+    "port/game/render_line.c": "b0f19d4d6643736f4e657700a337acbcfe04ca11eb894917a82194c711918aed",
+    "port/game/render_line.h": "6e591a0d2c5c4cdcb4be5d355d21379407aee4785cae1b06326600bad98862b1",
+    "tools/native/native_model_oracle.c": "2297c0358a732fcfdff36ab379f04d9bc5ea76baf415b665c64ad439ded9a4c0",
+    "tools/native/check_models.py": "d6fb23793527143effc648b679d3c93b4912b19b3d4190232052b96e8d509e53"
+  },
+  "native_runners": {
+    "Release": "8b6e1a58203f76627ede0fabe91847e2d706fc3493f7f4d6be17a1cc4f2c91f1",
+    "Debug": "c2d2b5aec9e7688d5c096d2399ed6ae3747d07a4a415aa0cc67ef0974ee91e4e"
+  },
+  "oracle_sha256": "e4efff695790fda480b86634bb282c96179b5f2f05f7516d74d7cac871320eb8",
+  "source_rom_sha256": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53",
+  "directory": {
+    "source_directory_entries": 78,
+    "native_command_indices": 78,
+    "missing_original_directory_indices": [],
+    "all_original_directory_slots_dispatched": true,
+    "source_audit_sha256": "a184913fae10829cfe28b3cb68cc99fe0afcf800fb0f5ee47a02159c24fb1627",
+    "scope": "Directory coverage, distinct from component inputs and live model asset reachability"
+  },
+  "component_cases": 917,
+  "face_cases": 757,
+  "passing_faces": 159,
+  "rejected_faces": 598,
+  "validated_return_cursor_and_all_non_stack_ram": true,
+  "scope": "Original command component computations on controlled inputs with the oracle memory backend, and connected native ordinary startup/flight/allocation tests. The oracle may read original ROM for synthetic post-line pair bases; those inputs do not demonstrate native ROM-independent support or model asset reachability.",
+  "preallocation_outputs": {
+    "Release": {
+      "runner_sha256": "8b6e1a58203f76627ede0fabe91847e2d706fc3493f7f4d6be17a1cc4f2c91f1",
+      "baseline_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+      "scope": "Native output preservation; project heap guard and fixed SDL/audio storage; OS/driver heaps unobserved",
+      "cases": {
+        "intro": {
+          "stats": {
+            "frame_owner_exit": false,
+            "frames": 3100,
+            "screen": "mode-intro",
+            "mode": 127,
+            "glyphs": 3260,
+            "record_updates": 1,
+            "scene_frames": 0,
+            "terrain_polygons": 0,
+            "model_calls": 0,
+            "hud_frames": 0,
+            "control_frames": 98,
+            "scene_selected": false,
+            "stage": "C0FECE",
+            "game_tick": 0,
+            "timer_pending": false,
+            "timer_yields": 0,
+            "display_publications": 97,
+            "display_yields": 100,
+            "display_pending": true,
+            "displayed_page": 0,
+            "postflight_callbacks": 0,
+            "postflight_resets": 0,
+            "input_passes": 97,
+            "input_events": 1,
+            "input_queued": 0,
+            "update_iterations": 1276,
+            "replay_iterations": 0,
+            "replay_events": 0,
+            "host_replay_events": 4,
+            "host_replay_pending": 0,
+            "replay_started": false,
+            "voice_ticks": 3100,
+            "voice_publications": 6430,
+            "voice_levels": [
+              [
+                358,
+                6
+              ],
+              [
+                358,
+                6
+              ],
+              [
+                124,
+                0
+              ],
+              [
+                124,
+                0
+              ]
+            ],
+            "sample_requests": 1902,
+            "sample_frames": 2976000,
+            "nonzero_sample_frames": 2857790,
+            "audio_device": false,
+            "frame_capture_complete": false,
+            "frame_before_tick": 0,
+            "frame_after_tick": 0,
+            "frame_saved_tick": 0,
+            "cpu_emulation": false,
+            "chipset_emulation": false
+          },
+          "wav_sha256": "9cdd202837deac0b3dcf2468e75097dc6b5a8037badc5075af206ae5cda6b0e8",
+          "data_sha256": "f09f830b58916668c20636c4d7a782aef74c4621478262e0a2c0ef139b456899",
+          "ppm_sha256": "4db323fe48982af510b6589e020fe40f3c0099ed02b6827ed5a9f7da7e648fe8",
+          "save_sha256": null,
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        },
+        "free-flight": {
+          "stats": {
+            "frame_owner_exit": false,
+            "frames": 6500,
+            "screen": "scene-setup",
+            "mode": 1,
+            "glyphs": 4428,
+            "record_updates": 529,
+            "scene_frames": 527,
+            "terrain_polygons": 9060,
+            "model_calls": 8597,
+            "hud_frames": 527,
+            "control_frames": 2299,
+            "scene_selected": true,
+            "stage": "C10DAE",
+            "game_tick": 181,
+            "timer_pending": false,
+            "timer_yields": 1194,
+            "display_publications": 2298,
+            "display_yields": 2306,
+            "display_pending": true,
+            "displayed_page": 1,
+            "postflight_callbacks": 0,
+            "postflight_resets": 0,
+            "input_passes": 2298,
+            "input_events": 7,
+            "input_queued": 0,
+            "update_iterations": 3477,
+            "replay_iterations": 0,
+            "replay_events": 0,
+            "host_replay_events": 10,
+            "host_replay_pending": 0,
+            "replay_started": false,
+            "voice_ticks": 6500,
+            "voice_publications": 13658,
+            "voice_levels": [
+              [
+                764,
+                40
+              ],
+              [
+                766,
+                40
+              ],
+              [
+                124,
+                0
+              ],
+              [
+                124,
+                0
+              ]
+            ],
+            "sample_requests": 5387,
+            "sample_frames": 6240000,
+            "nonzero_sample_frames": 6033317,
+            "audio_device": false,
+            "frame_capture_complete": false,
+            "frame_before_tick": 0,
+            "frame_after_tick": 0,
+            "frame_saved_tick": 0,
+            "cpu_emulation": false,
+            "chipset_emulation": false
+          },
+          "wav_sha256": "bc90dde8c83e7caa981588161eeebcb3bec8294645e31be6d91d2fb67d293db8",
+          "data_sha256": "b238754b0a82d1cf503c18a61a95b7970b1fb4553b6e1f406390b9942224b38b",
+          "ppm_sha256": "ba7825bba0b480098f39c1cfed0c9526ef90af09bb0bbddafe28974bdec71bf0",
+          "save_sha256": null,
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        },
+        "final-combat": {
+          "stats": {
+            "frame_owner_exit": false,
+            "frames": 24200,
+            "screen": "scene-setup",
+            "mode": 8,
+            "glyphs": 8544,
+            "record_updates": 4224,
+            "scene_frames": 4222,
+            "terrain_polygons": 24956,
+            "model_calls": 18234,
+            "hud_frames": 4222,
+            "control_frames": 9727,
+            "scene_selected": true,
+            "stage": "C10DAE",
+            "game_tick": 4067,
+            "timer_pending": false,
+            "timer_yields": 9966,
+            "display_publications": 9726,
+            "display_yields": 9734,
+            "display_pending": true,
+            "displayed_page": 1,
+            "postflight_callbacks": 0,
+            "postflight_resets": 0,
+            "input_passes": 9726,
+            "input_events": 6004,
+            "input_queued": 0,
+            "update_iterations": 12405,
+            "replay_iterations": 0,
+            "replay_events": 0,
+            "host_replay_events": 6009,
+            "host_replay_pending": 576,
+            "replay_started": false,
+            "voice_ticks": 24200,
+            "voice_publications": 54366,
+            "voice_levels": [
+              [
+                594,
+                54
+              ],
+              [
+                596,
+                54
+              ],
+              [
+                124,
+                0
+              ],
+              [
+                124,
+                0
+              ]
+            ],
+            "sample_requests": 51561,
+            "sample_frames": 23232000,
+            "nonzero_sample_frames": 23022568,
+            "audio_device": false,
+            "frame_capture_complete": false,
+            "frame_before_tick": 0,
+            "frame_after_tick": 0,
+            "frame_saved_tick": 0,
+            "cpu_emulation": false,
+            "chipset_emulation": false
+          },
+          "wav_sha256": "f371c89d38e3da6efeb113d6767bb7e008250a541a955b5e614c990d4597173b",
+          "data_sha256": "dd9e0ccd5597c8646e91b0ed2565ee1811d9753554dda4ee0248471327d76626",
+          "ppm_sha256": "ee7be643cf9aa3ac470d14345d374c0230fc62ba31e1f88036726d236d4c592c",
+          "save_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        }
+      }
+    },
+    "Debug": {
+      "runner_sha256": "c2d2b5aec9e7688d5c096d2399ed6ae3747d07a4a415aa0cc67ef0974ee91e4e",
+      "baseline_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+      "scope": "Native output preservation; project heap guard and fixed SDL/audio storage; OS/driver heaps unobserved",
+      "cases": {
+        "intro": {
+          "stats": {
+            "frame_owner_exit": false,
+            "frames": 3100,
+            "screen": "mode-intro",
+            "mode": 127,
+            "glyphs": 3260,
+            "record_updates": 1,
+            "scene_frames": 0,
+            "terrain_polygons": 0,
+            "model_calls": 0,
+            "hud_frames": 0,
+            "control_frames": 98,
+            "scene_selected": false,
+            "stage": "C0FECE",
+            "game_tick": 0,
+            "timer_pending": false,
+            "timer_yields": 0,
+            "display_publications": 97,
+            "display_yields": 100,
+            "display_pending": true,
+            "displayed_page": 0,
+            "postflight_callbacks": 0,
+            "postflight_resets": 0,
+            "input_passes": 97,
+            "input_events": 1,
+            "input_queued": 0,
+            "update_iterations": 1276,
+            "replay_iterations": 0,
+            "replay_events": 0,
+            "host_replay_events": 4,
+            "host_replay_pending": 0,
+            "replay_started": false,
+            "voice_ticks": 3100,
+            "voice_publications": 6430,
+            "voice_levels": [
+              [
+                358,
+                6
+              ],
+              [
+                358,
+                6
+              ],
+              [
+                124,
+                0
+              ],
+              [
+                124,
+                0
+              ]
+            ],
+            "sample_requests": 1902,
+            "sample_frames": 2976000,
+            "nonzero_sample_frames": 2857790,
+            "audio_device": false,
+            "frame_capture_complete": false,
+            "frame_before_tick": 0,
+            "frame_after_tick": 0,
+            "frame_saved_tick": 0,
+            "cpu_emulation": false,
+            "chipset_emulation": false
+          },
+          "wav_sha256": "9cdd202837deac0b3dcf2468e75097dc6b5a8037badc5075af206ae5cda6b0e8",
+          "data_sha256": "f09f830b58916668c20636c4d7a782aef74c4621478262e0a2c0ef139b456899",
+          "ppm_sha256": "4db323fe48982af510b6589e020fe40f3c0099ed02b6827ed5a9f7da7e648fe8",
+          "save_sha256": null,
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        },
+        "free-flight": {
+          "stats": {
+            "frame_owner_exit": false,
+            "frames": 6500,
+            "screen": "scene-setup",
+            "mode": 1,
+            "glyphs": 4428,
+            "record_updates": 529,
+            "scene_frames": 527,
+            "terrain_polygons": 9060,
+            "model_calls": 8597,
+            "hud_frames": 527,
+            "control_frames": 2299,
+            "scene_selected": true,
+            "stage": "C10DAE",
+            "game_tick": 181,
+            "timer_pending": false,
+            "timer_yields": 1194,
+            "display_publications": 2298,
+            "display_yields": 2306,
+            "display_pending": true,
+            "displayed_page": 1,
+            "postflight_callbacks": 0,
+            "postflight_resets": 0,
+            "input_passes": 2298,
+            "input_events": 7,
+            "input_queued": 0,
+            "update_iterations": 3477,
+            "replay_iterations": 0,
+            "replay_events": 0,
+            "host_replay_events": 10,
+            "host_replay_pending": 0,
+            "replay_started": false,
+            "voice_ticks": 6500,
+            "voice_publications": 13658,
+            "voice_levels": [
+              [
+                764,
+                40
+              ],
+              [
+                766,
+                40
+              ],
+              [
+                124,
+                0
+              ],
+              [
+                124,
+                0
+              ]
+            ],
+            "sample_requests": 5387,
+            "sample_frames": 6240000,
+            "nonzero_sample_frames": 6033317,
+            "audio_device": false,
+            "frame_capture_complete": false,
+            "frame_before_tick": 0,
+            "frame_after_tick": 0,
+            "frame_saved_tick": 0,
+            "cpu_emulation": false,
+            "chipset_emulation": false
+          },
+          "wav_sha256": "bc90dde8c83e7caa981588161eeebcb3bec8294645e31be6d91d2fb67d293db8",
+          "data_sha256": "b238754b0a82d1cf503c18a61a95b7970b1fb4553b6e1f406390b9942224b38b",
+          "ppm_sha256": "ba7825bba0b480098f39c1cfed0c9526ef90af09bb0bbddafe28974bdec71bf0",
+          "save_sha256": null,
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        },
+        "final-combat": {
+          "stats": {
+            "frame_owner_exit": false,
+            "frames": 24200,
+            "screen": "scene-setup",
+            "mode": 8,
+            "glyphs": 8544,
+            "record_updates": 4224,
+            "scene_frames": 4222,
+            "terrain_polygons": 24956,
+            "model_calls": 18234,
+            "hud_frames": 4222,
+            "control_frames": 9727,
+            "scene_selected": true,
+            "stage": "C10DAE",
+            "game_tick": 4067,
+            "timer_pending": false,
+            "timer_yields": 9966,
+            "display_publications": 9726,
+            "display_yields": 9734,
+            "display_pending": true,
+            "displayed_page": 1,
+            "postflight_callbacks": 0,
+            "postflight_resets": 0,
+            "input_passes": 9726,
+            "input_events": 6004,
+            "input_queued": 0,
+            "update_iterations": 12405,
+            "replay_iterations": 0,
+            "replay_events": 0,
+            "host_replay_events": 6009,
+            "host_replay_pending": 576,
+            "replay_started": false,
+            "voice_ticks": 24200,
+            "voice_publications": 54366,
+            "voice_levels": [
+              [
+                594,
+                54
+              ],
+              [
+                596,
+                54
+              ],
+              [
+                124,
+                0
+              ],
+              [
+                124,
+                0
+              ]
+            ],
+            "sample_requests": 51561,
+            "sample_frames": 23232000,
+            "nonzero_sample_frames": 23022568,
+            "audio_device": false,
+            "frame_capture_complete": false,
+            "frame_before_tick": 0,
+            "frame_after_tick": 0,
+            "frame_saved_tick": 0,
+            "cpu_emulation": false,
+            "chipset_emulation": false
+          },
+          "wav_sha256": "f371c89d38e3da6efeb113d6767bb7e008250a541a955b5e614c990d4597173b",
+          "data_sha256": "dd9e0ccd5597c8646e91b0ed2565ee1811d9753554dda4ee0248471327d76626",
+          "ppm_sha256": "ee7be643cf9aa3ac470d14345d374c0230fc62ba31e1f88036726d236d4c592c",
+          "save_sha256": "d8f715378b939d2f69bd41e8e12be6cf622f4725af1ab193b0ecc644c8522ee8",
+          "memory": {
+            "sdl_arena_bytes": 33554432,
+            "sdl_startup_bytes": 0,
+            "sdl_peak_bytes": 96,
+            "sdl_gameplay_pool_requests": 0,
+            "sdl_failures": 0,
+            "project_gameplay_heap_violations": 0,
+            "pcm_ring_frames": 131072,
+            "os_driver_allocations_observed": false
+          }
+        }
+      }
+    }
+  },
+  "retention": {
+    "entry.bin": {
+      "file": "build/native-flight/model-directory-completion/entry.dat.gz",
+      "decoded_sha256": "b44fa0ad4d605289a6cf63faa9e123d3ed1fdd8151868b641b4295acbd3d3cd0",
+      "stored_bytes": 324902
+    },
+    "failed-entry.bin": {
+      "file": "build/native-flight/model-directory-completion/failed-entry.dat.gz",
+      "decoded_sha256": "19e412d9596977d36906932645f31246a96653de79f0d6757cf32a34a7652dce",
+      "stored_bytes": 324914
+    },
+    "failed-native.bin": {
+      "file": "build/native-flight/model-directory-completion/failed-native.dat.gz",
+      "decoded_sha256": "ac0fd54472eb1785126cf54890377240a3fbcb641842f23cd2bea16965ac0362",
+      "stored_bytes": 325192
+    },
+    "failed-original.bin": {
+      "file": "build/native-flight/model-directory-completion/failed-original.dat.gz",
+      "decoded_sha256": "feb34ad6326679f2e6472eb07d1d88369c78a887eeefd87e74724eeca5da6503",
+      "stored_bytes": 325242
+    }
+  },
+  "original_pair_base_failure": {
+    "case": 46,
+    "first_mismatch": "C4C592",
+    "source_byte": "02",
+    "old_native_byte": "00",
+    "source_returned_pair_base": "FFFFFE74",
+    "source_basis_owner": "C2FB4C MOVEA.W D5,A3",
+    "retained_source_trace_sha256": "deb739e89ec78ba8b64b6733764c17a81b7bb362ff40f0a5b68a154961792dc8"
+  },
+  "unverified": "Whether original model assets can select command 014 and address non-owned memory after a drawn pair. No bus/ROM fallback was added to the native runtime.",
+  "main_gameplay_updated": false,
+  "retained_evidence_root": "build/native-flight/model-directory-completion",
+  "retained_files": {
+    "baseline.exe.gz": {
+      "sha256": "918063b3f10778c8bc29d84c514e4c1f2e8985d5bea3b39c0fe4a16429e83671",
+      "bytes": 992710,
+      "decoded_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8"
+    },
+    "component.json": {
+      "sha256": "1695f9b3190c714fdc297c469052e6b82381e46194a7a4016e95ba7d1da0a8d8",
+      "bytes": 231
+    },
+    "debug-flight-models-LastTest.log": {
+      "sha256": "fc9e7be9fcf64acd416aff3c493090f0350b3decf2b552788f5618d35d11f42b",
+      "bytes": 8584
+    },
+    "Debug.exe.gz": {
+      "sha256": "4521e03ad5b4e3614acd01e588d5763cbfdb1ab76f9cfa1d4b945e37e9149016",
+      "bytes": 1052901,
+      "decoded_sha256": "c2d2b5aec9e7688d5c096d2399ed6ae3747d07a4a415aa0cc67ef0974ee91e4e"
+    },
+    "directory-coverage.json": {
+      "sha256": "3090638d2b2518a640b24c54b772e3f8b98a1b8d7ec2d7d35e54b6f1ea592318",
+      "bytes": 364
+    },
+    "entry.dat.gz": {
+      "sha256": "277168ff6e12821bec1d8ca2a50285e2147fb1d3aba45c5eb7f3f9e36c70ed18",
+      "bytes": 324902
+    },
+    "failed-entry.dat.gz": {
+      "sha256": "ac7a7b83d3abf405c740b5b2a930ecbf0c4a654ae79498bba8cec0bf927917d4",
+      "bytes": 324914
+    },
+    "failed-native.dat.gz": {
+      "sha256": "79b83fee9d1eba7eb92ca2e8842dce2288b26ab7df4956dc0ca51669651dff34",
+      "bytes": 325192
+    },
+    "failed-original.dat.gz": {
+      "sha256": "8e7cfd900c9913ca8a9af647c58ae13c34b1489b31a6eb6624034dbdb1cb4bad",
+      "bytes": 325242
+    },
+    "failed-trace.txt": {
+      "sha256": "deb739e89ec78ba8b64b6733764c17a81b7bb362ff40f0a5b68a154961792dc8",
+      "bytes": 2490
+    },
+    "historical-LastTestsFailed.log": {
+      "sha256": "89463540668c4004885d7bb84bee34a938874ff8a94d2c6b85583b7aedea388e",
+      "bytes": 23
+    },
+    "oracle.exe.gz": {
+      "sha256": "00ed84c254e026088764619e9607a2ab8844971c14cf7a8cdeb3832313d27595",
+      "bytes": 5023417,
+      "decoded_sha256": "e4efff695790fda480b86634bb282c96179b5f2f05f7516d74d7cac871320eb8"
+    },
+    "preallocation-output-Debug.json": {
+      "sha256": "bef5c52fc63293c927a2813bc4db9ee3e649c4867c50e4cf8c30e36a6ae2d766",
+      "bytes": 7453
+    },
+    "preallocation-output-Release.json": {
+      "sha256": "e819452e310f4a794fc5af8ebdbd96ec580234e540406406d9f51223ce9d45d8",
+      "bytes": 7453
+    },
+    "release-entry.json": {
+      "sha256": "a0ef03af47c3ab89ec665e13e4d69b1a38d9722afe902a6fbbce523b0ae84026",
+      "bytes": 974
+    },
+    "Release.exe.gz": {
+      "sha256": "3dc6e5186e61651fd9b44086c2096e182296c48dbbe45db9da31a6a096dd8f34",
+      "bytes": 993367,
+      "decoded_sha256": "8b6e1a58203f76627ede0fabe91847e2d706fc3493f7f4d6be17a1cc4f2c91f1"
+    },
+    "retention.json": {
+      "sha256": "f4bce78e445f5d6afb963d8048541d981aacae9152376a16dee29a2b45ab0b78",
+      "bytes": 1231
+    }
+  },
+  "qualification": {
+    "Release": {
+      "preallocation": "passed",
+      "preallocation_output": "passed (27.33 s)",
+      "flight_start": "passed (19.02 s)",
+      "models": "passed (19.00 s)"
+    },
+    "Debug": {
+      "preallocation": "passed",
+      "preallocation_output": "passed (50.49 s)",
+      "flight_start": "passed (36.66 s)",
+      "models": "passed (20.13 s)"
+    },
+    "terminal_runs": true,
+    "historical_timeout": "Before the final observer fix, getenv was evaluated per original instruction. It is now cached outside the instruction loop. Comparison checks and ordinary time limits are unchanged."
+  }
+}

@@ -146,7 +146,9 @@ LineDrawResult draw_line_to_row_result(int16_t x0, int16_t y0, int16_t x1, int16
         custom_write(BLTSIZE, line.size);
     }
 #endif
-    return (LineDrawResult){.kind=LINE_DRAW_SIZE,.size=line.size}; /* C2FB42-C2FB46. */
+    /* C2FB4C also returns the signed blitter stride. C20656 retains it as
+     * the base of subsequent vertex offsets after a clipped pair draws. */
+    return (LineDrawResult){.kind=LINE_DRAW_SIZE,.size=line.size,.step_both=line.step_both};
 }
 
 void reset_line_style(void) {

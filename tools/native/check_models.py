@@ -46,6 +46,10 @@ def main():
                 # using an actual disk-started aircraft/ship and descriptor.
                 subprocess.run([str(oracle), str(checkpoint), '--inactive-only'],
                                cwd=ROOT, check=True, timeout=20)
+                # Run the new 917-case full-RAM command matrix once on the
+                # actual flight input; ordinary scene comparisons stay separate.
+                subprocess.run([str(oracle), str(checkpoint), '--directory-only'],
+                               cwd=ROOT, check=True, timeout=60)
             print(f'{frames}: {stats["model_calls"]} connected descriptor calls; stage {stage}')
     print('Native setup scenery, aircraft and scene parents match focused original comparisons')
 

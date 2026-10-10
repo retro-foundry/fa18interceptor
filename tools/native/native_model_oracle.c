@@ -76,6 +76,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #undef draw_filled_circle
 #define draw_selected_segment host_draw_selected_segment
 #define draw_interpolated_segments host_draw_interpolated_segments
+#define draw_tested_segment_pairs host_draw_tested_segment_pairs
 #define draw_selected_segment_clipped host_draw_selected_segment_clipped
 #define draw_selected_segment_near host_draw_selected_segment_near
 #define draw_segment_pairs host_draw_segment_pairs
@@ -126,6 +127,7 @@ static uint8_t *oracle_storage_range(uint32_t a,size_t n) {
 #include "../../port/game/native/model.c"
 #undef draw_selected_segment
 #undef draw_interpolated_segments
+#undef draw_tested_segment_pairs
 #undef draw_selected_segment_clipped
 #undef draw_selected_segment_near
 #undef draw_segment_pairs
@@ -210,6 +212,7 @@ static unsigned interpolated_commands;
 static unsigned six_point_commands;
 static int original(uint32_t pc) {
     const int trace_ground=getenv("FA18_MODEL_GROUND_TRACE")!=NULL && (pc==0xc096cau || pc==0xc096bcu);
+    const int trace_directory=getenv("FA18_MODEL_DIRECTORY_TRACE")!=NULL;
     memset(REG_DA,0,sizeof REG_DA); REG_A[4]=rd_u16(LINE_LAST_ROW); REG_A[7]=0xc7ff00u; wr_u32(REG_A[7],0xc70000u);
     REG_A[0]=oracle_parameters;
     if(pc==0xc22ac0u) REG_D[0]=(uint32_t)oracle_descriptor_input;
@@ -220,7 +223,10 @@ static int original(uint32_t pc) {
     if(pc==0xc21b38u || pc==0xc21c86u) REG_A[2]=0x4600;
     if(pc==0xc1fe68u) REG_A[2]=0x4600;
     if(pc==0xc0cfb6u) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
-    if(pc==0xc1ff0au || pc==0xc207feu || pc==0xc206e4u) { REG_A[6]=0x4200;REG_A[2]=0x4600; }
+    if(pc==0xc1ff0au || pc==0xc207feu || pc==0xc206e4u || pc==0xc20656u ||
+       pc==0xc0d70cu || pc==0xc0d710u || pc==0xc21e08u || pc==0xc21ef8u) {
+        REG_A[6]=0x4200;REG_A[2]=0x4600;
+    }
     if(pc==0xc20f78u || pc==0xc20fc4u) REG_A[2]=0x4600;
     if(pc==0xc2f1c0u) {REG_D[0]=(uint32_t)(int32_t)circle_x;REG_D[1]=(uint32_t)(int32_t)circle_y;REG_D[6]=(uint32_t)(int32_t)circle_radius;}
     if(pc==0xc2f5f4u) {REG_D[0]=(uint32_t)(int32_t)point_x;REG_D[1]=(uint32_t)(int32_t)point_y;}
@@ -229,6 +235,9 @@ static int original(uint32_t pc) {
     fa18_next_event=INT64_MAX; SET_CYCLES(100000000);
     for(unsigned step=0;step<2000000;++step) {
         uint16_t opcode;
+        if(trace_directory && (REG_PC==0xc206b8u || REG_PC==0xc206c4u || REG_PC==0xc206d8u))
+            fprintf(stderr,"directory pc=%06X A3=%06X D1=%04X count=%04X points=%04X/%04X\n",
+                REG_PC,REG_A[3],(uint16_t)REG_D[1],rd_u16(REG_A[6]-0xa),rd_u16(SEGMENT_POINTS),rd_u16(SEGMENT_POINTS+6));
         if(trace_ground && (REG_PC==0xc0984au || REG_PC==0xc098b8u))
             fprintf(stderr,"ground command %06X stream %06X carry=%04X frame=%06X\n",
                 REG_A[0],REG_A[2],rd_u16(REG_A[6]-0x7c),REG_A[6]);
@@ -782,6 +791,101 @@ static int interpolated_segment_cases(void) {
     memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
     puts("72 complete C206E4/4018 interpolation, clipping, rounding and overflow cases match non-stack RAM/display and stream/result");return 1;
 }
+static int missing_directory_commands(void) {
+    FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
+    uint8_t *expected=malloc(0x100000);
+    if(!saved || !before || !expected) return 0;
+    memcpy(saved,fa18_machine,sizeof *saved);
+    const uint16_t kinds[]={0,0x80,0x100,0x380,0x1000,0x2000,0x3000,0x0400,0x0800,0x0c00,0x8400,0x9000};
+    const int16_t counts[]={-32768,-32767,-1,0,1,2,3};
+    const int16_t depths[][2]={{0,0},{0,512},{512,0},{512,1024},{1,2},{3,1},{-1,0},{-1,1},{-32768,32767}};
+    unsigned cases=0,passed=0,rejected=0;
+    for(unsigned test=0;test<757+160;++test) {
+        memcpy(fa18_machine,saved,sizeof *saved);
+        gaddr target=0xc20656u;uint16_t code=0x14;
+        if(test<757) {
+            const unsigned k=test<756?test/(7*9):0;
+            const int16_t count=test<756?counts[test/9%7]:32767;
+            const unsigned d=test<756?test%9:5;
+            const uint16_t kind=kinds[k];
+            for(unsigned p=0;p<3;++p) {
+                wr_u16(0x4600+2*p,(uint16_t)(6*p));
+                wr_s16(WORKSPACES+6*p,(int16_t)(p==0?-128:p==1?128:0));
+                wr_s16(WORKSPACES+6*p+2,(int16_t)(p==2?96:-96));
+                wr_s16(WORKSPACES+6*p+4,(int16_t)(test&1?-128:128));
+            }
+            wr_u32(0x4606,0x00180000u|kind);
+            gaddr cursor=0x460a;
+            if(!(kind&0x0c00) && kind&0x3000) {
+                wr_u16(cursor,32);cursor+=2;
+            }
+            wr_u16(cursor,(uint16_t)(test&15));cursor+=2;
+            wr_s16(cursor,count);cursor+=2;
+            for(int p=0;p<count;++p) {
+                wr_u16(cursor,18);wr_u16(cursor+2,24);cursor+=4;
+            }
+            for(unsigned p=0;p<2;++p) {
+                wr_s16(WORKSPACES+18+6*p,(int16_t)(p?200:-200));
+                wr_s16(WORKSPACES+20+6*p,(int16_t)(test&2?p?200:-200:0));
+                wr_s16(WORKSPACES+22+6*p,depths[d][p]);
+            }
+            wr_u32(0x4200-0x2c,0x60000);
+            for(unsigned p=0;p<3;++p) {
+                wr_s16(0x60020+2*p,(int16_t)(100+p*50));
+                wr_s16(0x60026+2*p,(int16_t)(p==2?(test&1?-256:256):0));
+                wr_s16(0x4200-0x26+2*p,(int16_t)(test&1?-300:300));
+            }
+            wr_u16(BOUND_SHIFT,0);wr_u32(BOUND_OFFSET_X,0);wr_u32(BOUND_OFFSET_Z,0);
+            wr_u16(0x4200-0x32,(uint16_t)(test&1?0xffff:0xfffe));
+            wr_u16(0x4200-0x34,0xffff);wr_u16(0x4200-0x7e,0x5678);
+            wr_u32(LINE_STYLE,0x000fffffu);wr_u32(POLY_COMPLEMENT,0);
+            wr_u16(LINE_LAST_ROW,179);
+            code|=(uint16_t)((test&3)*0x4000);
+        } else {
+            unsigned leaf=(test-757)/40;
+            const uint16_t codes[]={0x70,0x74,0xb8,0xbc};
+            const gaddr targets[]={0xc0d70c,0xc0d710,0xc21e08,0xc21ef8};
+            code=(uint16_t)(codes[leaf]|((test&3)*0x4000));target=targets[leaf];
+            for(unsigned word=0;word<64;++word)
+                wr_u16(WORKSPACES+2*word,(uint16_t)(test*8191u+word*10923u));
+            wr_u16(0x4200-0x32,0x1234);wr_u16(0x4200-0x34,0xabcd);
+        }
+        memcpy(before,fa18_machine,sizeof *before);
+        gaddr stream=0x4600;
+        int result=command(code,&stream,0x4200);
+        memcpy(expected,fa18_machine->chip,0x80000);memcpy(expected+0x80000,fa18_machine->slow,0x80000);
+        if(test<757) {
+            if(rd_u16(0x4200-0x34)==0) ++rejected;else ++passed;
+        }
+        memcpy(fa18_machine,before,sizeof *before);
+        if(!original(target) || REG_A[2]!=stream || (int32_t)REG_D[0]!=result) {
+            fprintf(stderr,"directory command %03X case %u cursor/result differs\n",code&0x3fff,test);return 0;
+        }
+        for(unsigned i=0;i<0xffc00;++i) {
+            uint8_t actual=i<0x80000?fa18_machine->chip[i]:fa18_machine->slow[i-0x80000];
+            if(actual!=expected[i]) {
+                const char *names[]={"failed-entry.bin","failed-native.bin","failed-original.bin"};
+                for(unsigned dump=0;dump<3;++dump) {
+                    char name[160];snprintf(name,sizeof name,"build/model-directory-validation/%s",names[dump]);
+                    FILE *file=fopen(name,"wb");if(!file) return 0;
+                    if(dump==1) fwrite(expected,1,0x100000,file);
+                    else {
+                        FA18Machine *input=dump==0?before:fa18_machine;
+                        fwrite(input->chip,1,0x80000,file);fwrite(input->slow,1,0x80000,file);
+                    }
+                    fclose(file);
+                }
+                fprintf(stderr,"directory command %03X case %u RAM %06X source %02X native %02X\n",
+                    code&0x3fff,test,i<0x80000?i:i-0x80000+0xc00000,actual,expected[i]);return 0;
+            }
+        }
+        ++cases;
+    }
+    if(!passed || !rejected) {fputs("Missing face predicate branch coverage\n",stderr);return 0;}
+    memcpy(fa18_machine,saved,sizeof *saved);free(expected);free(before);free(saved);
+    printf("%u missing-directory command cases match complete original non-stack RAM/display and cursor/result (%u passing, %u rejected faces)\n",cases,passed,rejected);
+    return 1;
+}
 static int six_point_block_cases(void) {
     FA18Machine *saved=malloc(sizeof *saved),*before=malloc(sizeof *before);
     uint8_t *expected=malloc(0x100000);
@@ -854,13 +958,14 @@ int main(int argc,char **argv) {
     const int projection_only=argc==3 && !strcmp(argv[2],"--projection-only");
     const int interpolation_only=argc==3 && !strcmp(argv[2],"--interpolation-only");
     const int six_point_only=argc==3 && !strcmp(argv[2],"--six-point-only");
+    const int directory_only=argc==3 && !strcmp(argv[2],"--directory-only");
     const int require_aircraft=argc==3 && !strcmp(argv[2],"--require-aircraft");
     const int aircraft_record=argc==4 && !strcmp(argv[2],"--aircraft-record");
     const int placements_only=argc==3 && !strcmp(argv[2],"--placements-only");
     const int ground_only=argc==3 && !strcmp(argv[2],"--ground-only");
     const int setup_bounds=argc==3 && !strcmp(argv[2],"--setup-bounds");
     const int require_bounds=argc==3 && !strcmp(argv[2],"--require-setup-bounds");
-    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || interpolation_only || six_point_only || require_aircraft || aircraft_record || placements_only || ground_only || setup_bounds || require_bounds)?file_bytes(argv[1],&nd):NULL;
+    uint8_t *data=(argc==2 || inactive_only || tails_only || points_only || projection_only || interpolation_only || six_point_only || directory_only || require_aircraft || aircraft_record || placements_only || ground_only || setup_bounds || require_bounds)?file_bytes(argv[1],&nd):NULL;
     FA18Machine *m=calloc(1,sizeof *m);
     if(!state||!rom||!data||nd!=0x100000||!m) return 1;
     if(!fa18_machine_load_state(m,state,ns,rom,nr,error,sizeof error)) {fputs(error,stderr);return 1;}
@@ -929,6 +1034,7 @@ int main(int argc,char **argv) {
     if(projection_only) return !projection_results();
     if(interpolation_only) return !(interpolated_segment_cases() && interpolated_model_cases());
     if(six_point_only) return !(six_point_block_cases() && six_point_model_cases());
+    if(directory_only) return !missing_directory_commands();
     if(!six_point_block_cases() || !six_point_model_cases()) return 1;
     if(!interpolated_segment_cases() || !interpolated_model_cases()) return 1;
     if(!projection_results()) return 1;

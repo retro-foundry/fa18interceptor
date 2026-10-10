@@ -23,6 +23,14 @@ int draw_selected_segment_near(gaddr *stream);
  * The caller's -$30 countdown and -$7E result belong to this command. */
 int draw_interpolated_segments(gaddr *stream,gaddr frame);
 
+/* C20656: three face offsets, packed bound-component offset/kind, optional
+ * stored-normal offset, colour/count, then count vertex pairs. Count the
+ * face test regardless of its result; draw pairs only when their z AND is
+ * zero. An accepted clipped line replaces the following pairs' base with
+ * its signed blitter stride (C2FB4C). Return 1 even when no pair draws,
+ * preserving frame-$7E. */
+int draw_tested_segment_pairs(gaddr *stream,gaddr frame);
+
 /* Colour, then vertex offset pairs, the second offset of the last pair
  * with bit 15 set: a segment for each pair not wholly behind the eye.
  * LINE_STYLE is cleared to "none given" ($C212B0). */

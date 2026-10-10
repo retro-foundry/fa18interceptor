@@ -37,9 +37,10 @@ void draw_line_to_row(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t la
 
 /* C2FA7E publishes its actual blit size even when no plane is enabled.
  * A rejected lower-end-first line has already computed its signed X delta;
- * the other rejected starts preserve the caller's preceding output. */
+ * the other rejected starts preserve the caller's preceding output.
+ * C2FB4C returns step_both as a signed base used by C20656's next pair. */
 enum LineDrawKind { LINE_DRAW_NONE, LINE_DRAW_X_DELTA, LINE_DRAW_SIZE };
-typedef struct { enum LineDrawKind kind; int16_t x_delta; uint16_t size; } LineDrawResult;
+typedef struct { enum LineDrawKind kind; int16_t x_delta; uint16_t size; int16_t step_both; } LineDrawResult;
 LineDrawResult draw_line_to_row_result(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t last_row);
 
 /* The two view-space points at SEGMENT_POINTS projected and joined by a
