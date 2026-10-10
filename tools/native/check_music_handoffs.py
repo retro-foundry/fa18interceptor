@@ -222,6 +222,104 @@ def assess_consumption(folder, baseline, pcm_reference, original):
     return report
 
 
+def startup_dispatch(slow, layout, writes, original, consumed, native):
+    """Observe startup dispatch latency; never turn it into a host delay.
+
+    All compared events are in one recorded hardware frame, so no frame-line
+    count, CPU cycle model, output resampling or fitted clock is required.
+    Caller/interrupt/bus work is not attributed to the empty-voice loop alone.
+    """
+    handler = layout['hunk_76']
+    empty_at = handler + 92 - 0xc00000
+    # MOVE.W #0,8(A0); MOVE.W #124,6(A0); DMA off via descriptor;
+    # MOVE.W #400,D0; SUBI.W #1,D0; BNE back to SUBI.
+    empty_code = bytes.fromhex('317c00000008317c007c000633e9001200dff096303c01900440000166fa')
+    assert slow[empty_at:empty_at+len(empty_code)] == empty_code, 'Different empty-voice ISR/wait'
+    trigger = layout['hunk_75'] + 136
+    channels = []
+    for channel in (0, 1):
+        first = consumed['first_samples_by_channel'][channel]
+        irq, dma = 0x80 << channel, 1 << channel
+        base = 0xdff0a0 + channel*16
+        rows = [row for row in writes if row['call'] == first['call'] and (
+            row['source'] == trigger and row['address'] == 0xdff09c and row['value'] == irq|0x8000 or
+            row['source'] == handler+4 and row['address'] == 0xdff09c and row['value'] == irq or
+            handler <= row['source'] < handler+420 and base <= row['address'] <= base+8 or
+            row['source'] in (handler+48, handler+104) and row['address'] == 0xdff096 and
+                row['value'] in (dma, dma|0x8200))]
+        enable = next(i for i, row in enumerate(rows) if row['source'] == handler+48)
+        assert enable >= 10, 'Missing empty/start interrupt prefix'
+        rows = rows[enable-10:]
+        request = original[channel][0]
+        assert original[channel][1]['samples'] == request['samples'], 'Different priming buffer'
+        assert all(request[k] == original[channel][1][k] for k in ('bytes', 'period', 'volume'))
+        publication = [(32, base, request['samples'] >> 16),
+            (32, base+2, request['samples'] & 65535), (44, base+4, request['bytes']//2),
+            (48, 0xdff096, dma|0x8200), (280, base+6, request['period']),
+            (308, base+8, request['volume'])]
+        expected = [(trigger-handler, 0xdff09c, irq|0x8000), (4, 0xdff09c, irq),
+            (92, base+8, 0), (98, base+6, 124), (104, 0xdff096, dma),
+            (trigger-handler, 0xdff09c, irq|0x8000), (4, 0xdff09c, irq),
+            *publication, (4, 0xdff09c, irq), *publication]
+        assert [(r['source']-handler, r['address'], r['value']) for r in rows] == expected, 'Different startup interrupt/write sequence'
+        assert len({r['hardware_frame'] for r in rows}) == 1, 'Startup dispatch spans hardware frames'
+        beam_clock = lambda r: r['vpos']*227 + r['hpos']
+        positions = [beam_clock(row) for row in rows]
+        assert all(b > a for a, b in zip(positions, positions[1:])), 'Nonmonotonic startup write beam'
+        first_clock = first['beam'][1]*227 + first['beam'][0]
+        assert positions[12] < first_clock < positions[14], 'Sample does not follow initial publication before priming pointer'
+        labels = ['empty_request', 'empty_ack', 'silence', 'minimum_period', 'dma_off',
+            'start_request', 'start_ack', 'pointer_high', 'pointer_low', 'length',
+            'dma_on', 'period', 'volume', 'prime_ack', 'prime_pointer_high',
+            'prime_pointer_low', 'prime_length', 'prime_dma_on', 'prime_period', 'prime_volume']
+        channels.append(dict(channel=channel, call=first['call'], hardware_frame=rows[0]['hardware_frame'],
+            writes=[dict(event=label, source=f"{row['source']:06X}", address=f"{row['address']:06X}",
+                value=row['value'], beam=[row['hpos'], row['vpos']]) for label, row in zip(labels, rows)],
+            first_sample=first, observed_chip_clocks=dict(
+                empty_dma_off_to_start_request=positions[5]-positions[4],
+                start_request_to_ack=positions[6]-positions[5],
+                start_ack_to_dma_on=positions[10]-positions[6],
+                dma_on_to_first_sample=first_clock-positions[10]),
+            dma_on_clock=positions[10], first_sample_clock=first_clock,
+            native_initial_output_frame=native[channel][0]['sample_frame']))
+    assert channels[0]['hardware_frame'] == channels[1]['hardware_frame'], 'Channels start in different frames'
+    dma_phase = channels[1]['dma_on_clock']-channels[0]['dma_on_clock']
+    fetch_phase = channels[1]['observed_chip_clocks']['dma_on_to_first_sample']-channels[0]['observed_chip_clocks']['dma_on_to_first_sample']
+    phase = channels[1]['first_sample_clock']-channels[0]['first_sample_clock']
+    assert dma_phase+fetch_phase == phase
+    assert set(consumed['right_minus_left_chip_clocks']) == {str(phase)}, 'Initial dispatch does not explain complete observed channel phase'
+    return dict(scope='Recorded empty/start/prime interrupt sequence and source wait instructions. Same-frame beam subtraction only; observed spans include caller, interrupt and bus work. No CPU-cycle attribution or portable delay is inferred.',
+        empty_voice_source=f'{handler+92:06X}', empty_voice_bytes=empty_code.hex(),
+        empty_voice_wait_iterations=400, channels=channels,
+        right_minus_left_chip_clocks=dict(dma_enable=dma_phase, following_fetch=fetch_phase, first_sample=phase),
+        native_right_minus_left_initial_output_frames=channels[1]['native_initial_output_frame']-channels[0]['native_initial_output_frame'],
+        runtime_delay_or_clock_change=False, whole_flight_sound_acceptance=False)
+
+
+def assess_startup_dispatch(folder, layout, original, consumed, native):
+    slow = recorded_bytes(folder, 'slow.bin')
+    with reference_file(folder/'audio_events.jsonl') as log:
+        writes = [row for line in log if (row := json.loads(line)).get('kind') == 'write']
+    report = startup_dispatch(slow, layout, writes, original, consumed, native)
+    rejected = []
+    for kind in ('wait_count', 'interrupt_source', 'dma_value', 'beam_order'):
+        changed_slow, changed_writes = slow, [dict(row) for row in writes]
+        if kind == 'wait_count':
+            data = bytearray(slow); data[layout['hunk_76']+115-0xc00000] ^= 1
+            changed_slow = bytes(data)
+        else:
+            at = next(i for i, r in enumerate(changed_writes) if r['source'] == layout['hunk_76']+48)
+            if kind == 'interrupt_source': changed_writes[at]['source'] += 2
+            elif kind == 'dma_value': changed_writes[at]['value'] ^= 1
+            else: changed_writes[at]['vpos'] -= 2
+        try:
+            startup_dispatch(changed_slow, layout, changed_writes, original, consumed, native)
+        except (AssertionError, StopIteration): rejected.append(kind)
+        else: raise AssertionError(f'Accepted altered startup dispatch: {kind}')
+    report['mutation_rejections'] = rejected
+    return report
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--original',type=Path,required=True)
@@ -309,6 +407,8 @@ def main():
     if args.consumed_samples:
         result['consumed_startup'] = assess_consumption(args.consumed_samples, args.original,
             args.pcm_reference, original)
+        result['startup_dispatch'] = assess_startup_dispatch(args.consumed_samples,
+            validation['resolved_voice_layout'], original, result['consumed_startup'], native)
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text(json.dumps(result,indent=2)+'\n')
     print(f"Every {sum(map(len,original))} original startup music request matches native bytes/order/period/volume; onset/timing differences retained")

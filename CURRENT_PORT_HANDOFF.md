@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Startup dispatch (2026-10-10): original empty-voice handling contains a
+400-iteration wait after DMA stop. The recorded channel gap is 5,438
+chip clocks at DMA enable plus 12 at the following fetch, agreeing with
+all startup consumed-byte phases. Source/write/timing mutations reject;
+previous handoff evidence is unchanged. These measurements are not a
+native delay constant; onset/waveform acceptance remains open.
+See [dispatch evidence](analysis/native_startup_dispatch_milestone.md).
+
 Startup sample handoffs (2026-10-10): all 468,007 original consumed bytes
 follow published buffers, addresses, byte order and periods. All 48
 requests match the current native ordered payload/period/volume sequence;

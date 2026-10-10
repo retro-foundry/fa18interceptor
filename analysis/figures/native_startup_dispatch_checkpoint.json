@@ -1,0 +1,554 @@
+{
+  "date": "2026-10-10",
+  "scope": "Recorded empty/start/prime interrupt sequence and source wait instructions. Same-frame beam subtraction only; observed spans include caller, interrupt and bus work. No CPU-cycle attribution or portable delay is inferred.",
+  "startup_dispatch": {
+    "scope": "Recorded empty/start/prime interrupt sequence and source wait instructions. Same-frame beam subtraction only; observed spans include caller, interrupt and bus work. No CPU-cycle attribution or portable delay is inferred.",
+    "empty_voice_source": "C50314",
+    "empty_voice_bytes": "317c00000008317c007c000633e9001200dff096303c01900440000166fa",
+    "empty_voice_wait_iterations": 400,
+    "channels": [
+      {
+        "channel": 0,
+        "call": 3821,
+        "hardware_frame": 3821,
+        "writes": [
+          {
+            "event": "empty_request",
+            "source": "C501A0",
+            "address": "DFF09C",
+            "value": 32896,
+            "beam": [
+              152,
+              264
+            ]
+          },
+          {
+            "event": "empty_ack",
+            "source": "C502BC",
+            "address": "DFF09C",
+            "value": 128,
+            "beam": [
+              123,
+              265
+            ]
+          },
+          {
+            "event": "silence",
+            "source": "C50314",
+            "address": "DFF0A8",
+            "value": 0,
+            "beam": [
+              169,
+              265
+            ]
+          },
+          {
+            "event": "minimum_period",
+            "source": "C5031A",
+            "address": "DFF0A6",
+            "value": 124,
+            "beam": [
+              177,
+              265
+            ]
+          },
+          {
+            "event": "dma_off",
+            "source": "C50320",
+            "address": "DFF096",
+            "value": 1,
+            "beam": [
+              187,
+              265
+            ]
+          },
+          {
+            "event": "start_request",
+            "source": "C501A0",
+            "address": "DFF09C",
+            "value": 32896,
+            "beam": [
+              117,
+              283
+            ]
+          },
+          {
+            "event": "start_ack",
+            "source": "C502BC",
+            "address": "DFF09C",
+            "value": 128,
+            "beam": [
+              88,
+              284
+            ]
+          },
+          {
+            "event": "pointer_high",
+            "source": "C502D8",
+            "address": "DFF0A0",
+            "value": 1,
+            "beam": [
+              137,
+              284
+            ]
+          },
+          {
+            "event": "pointer_low",
+            "source": "C502D8",
+            "address": "DFF0A2",
+            "value": 51856,
+            "beam": [
+              139,
+              284
+            ]
+          },
+          {
+            "event": "length",
+            "source": "C502E4",
+            "address": "DFF0A4",
+            "value": 1022,
+            "beam": [
+              158,
+              284
+            ]
+          },
+          {
+            "event": "dma_on",
+            "source": "C502E8",
+            "address": "DFF096",
+            "value": 33281,
+            "beam": [
+              168,
+              284
+            ]
+          },
+          {
+            "event": "period",
+            "source": "C503D0",
+            "address": "DFF0A6",
+            "value": 358,
+            "beam": [
+              205,
+              284
+            ]
+          },
+          {
+            "event": "volume",
+            "source": "C503EC",
+            "address": "DFF0A8",
+            "value": 63,
+            "beam": [
+              12,
+              285
+            ]
+          },
+          {
+            "event": "prime_ack",
+            "source": "C502BC",
+            "address": "DFF09C",
+            "value": 128,
+            "beam": [
+              20,
+              286
+            ]
+          },
+          {
+            "event": "prime_pointer_high",
+            "source": "C502D8",
+            "address": "DFF0A0",
+            "value": 1,
+            "beam": [
+              69,
+              286
+            ]
+          },
+          {
+            "event": "prime_pointer_low",
+            "source": "C502D8",
+            "address": "DFF0A2",
+            "value": 51856,
+            "beam": [
+              71,
+              286
+            ]
+          },
+          {
+            "event": "prime_length",
+            "source": "C502E4",
+            "address": "DFF0A4",
+            "value": 1022,
+            "beam": [
+              90,
+              286
+            ]
+          },
+          {
+            "event": "prime_dma_on",
+            "source": "C502E8",
+            "address": "DFF096",
+            "value": 33281,
+            "beam": [
+              100,
+              286
+            ]
+          },
+          {
+            "event": "prime_period",
+            "source": "C503D0",
+            "address": "DFF0A6",
+            "value": 358,
+            "beam": [
+              137,
+              286
+            ]
+          },
+          {
+            "event": "prime_volume",
+            "source": "C503EC",
+            "address": "DFF0A8",
+            "value": 63,
+            "beam": [
+              170,
+              286
+            ]
+          }
+        ],
+        "first_sample": {
+          "call": 3821,
+          "cycle": 430010688000,
+          "address": "01CA90",
+          "value": 0,
+          "beam": [
+            18,
+            286
+          ]
+        },
+        "observed_chip_clocks": {
+          "empty_dma_off_to_start_request": 4016,
+          "start_request_to_ack": 198,
+          "start_ack_to_dma_on": 80,
+          "dma_on_to_first_sample": 304
+        },
+        "dma_on_clock": 64636,
+        "first_sample_clock": 64940,
+        "native_initial_output_frame": 0
+      },
+      {
+        "channel": 1,
+        "call": 3821,
+        "hardware_frame": 3821,
+        "writes": [
+          {
+            "event": "empty_request",
+            "source": "C501A0",
+            "address": "DFF09C",
+            "value": 33024,
+            "beam": [
+              182,
+              288
+            ]
+          },
+          {
+            "event": "empty_ack",
+            "source": "C502BC",
+            "address": "DFF09C",
+            "value": 256,
+            "beam": [
+              134,
+              289
+            ]
+          },
+          {
+            "event": "silence",
+            "source": "C50314",
+            "address": "DFF0B8",
+            "value": 0,
+            "beam": [
+              180,
+              289
+            ]
+          },
+          {
+            "event": "minimum_period",
+            "source": "C5031A",
+            "address": "DFF0B6",
+            "value": 124,
+            "beam": [
+              188,
+              289
+            ]
+          },
+          {
+            "event": "dma_off",
+            "source": "C50320",
+            "address": "DFF096",
+            "value": 2,
+            "beam": [
+              198,
+              289
+            ]
+          },
+          {
+            "event": "start_request",
+            "source": "C501A0",
+            "address": "DFF09C",
+            "value": 33024,
+            "beam": [
+              126,
+              307
+            ]
+          },
+          {
+            "event": "start_ack",
+            "source": "C502BC",
+            "address": "DFF09C",
+            "value": 256,
+            "beam": [
+              78,
+              308
+            ]
+          },
+          {
+            "event": "pointer_high",
+            "source": "C502D8",
+            "address": "DFF0B0",
+            "value": 1,
+            "beam": [
+              127,
+              308
+            ]
+          },
+          {
+            "event": "pointer_low",
+            "source": "C502D8",
+            "address": "DFF0B2",
+            "value": 51856,
+            "beam": [
+              129,
+              308
+            ]
+          },
+          {
+            "event": "length",
+            "source": "C502E4",
+            "address": "DFF0B4",
+            "value": 1022,
+            "beam": [
+              148,
+              308
+            ]
+          },
+          {
+            "event": "dma_on",
+            "source": "C502E8",
+            "address": "DFF096",
+            "value": 33282,
+            "beam": [
+              158,
+              308
+            ]
+          },
+          {
+            "event": "period",
+            "source": "C503D0",
+            "address": "DFF0B6",
+            "value": 358,
+            "beam": [
+              195,
+              308
+            ]
+          },
+          {
+            "event": "volume",
+            "source": "C503EC",
+            "address": "DFF0B8",
+            "value": 63,
+            "beam": [
+              1,
+              309
+            ]
+          },
+          {
+            "event": "prime_ack",
+            "source": "C502BC",
+            "address": "DFF09C",
+            "value": 256,
+            "beam": [
+              217,
+              309
+            ]
+          },
+          {
+            "event": "prime_pointer_high",
+            "source": "C502D8",
+            "address": "DFF0B0",
+            "value": 1,
+            "beam": [
+              39,
+              310
+            ]
+          },
+          {
+            "event": "prime_pointer_low",
+            "source": "C502D8",
+            "address": "DFF0B2",
+            "value": 51856,
+            "beam": [
+              41,
+              310
+            ]
+          },
+          {
+            "event": "prime_length",
+            "source": "C502E4",
+            "address": "DFF0B4",
+            "value": 1022,
+            "beam": [
+              60,
+              310
+            ]
+          },
+          {
+            "event": "prime_dma_on",
+            "source": "C502E8",
+            "address": "DFF096",
+            "value": 33282,
+            "beam": [
+              70,
+              310
+            ]
+          },
+          {
+            "event": "prime_period",
+            "source": "C503D0",
+            "address": "DFF0B6",
+            "value": 358,
+            "beam": [
+              107,
+              310
+            ]
+          },
+          {
+            "event": "prime_volume",
+            "source": "C503EC",
+            "address": "DFF0B8",
+            "value": 63,
+            "beam": [
+              140,
+              310
+            ]
+          }
+        ],
+        "first_sample": {
+          "call": 3821,
+          "cycle": 430013478400,
+          "address": "01CA90",
+          "value": 0,
+          "beam": [
+            20,
+            310
+          ]
+        },
+        "observed_chip_clocks": {
+          "empty_dma_off_to_start_request": 4014,
+          "start_request_to_ack": 179,
+          "start_ack_to_dma_on": 80,
+          "dma_on_to_first_sample": 316
+        },
+        "dma_on_clock": 70074,
+        "first_sample_clock": 70390,
+        "native_initial_output_frame": 0
+      }
+    ],
+    "right_minus_left_chip_clocks": {
+      "dma_enable": 5438,
+      "following_fetch": 12,
+      "first_sample": 5450
+    },
+    "native_right_minus_left_initial_output_frames": 0,
+    "runtime_delay_or_clock_change": false,
+    "whole_flight_sound_acceptance": false,
+    "mutation_rejections": [
+      "wait_count",
+      "interrupt_source",
+      "dma_value",
+      "beam_order"
+    ]
+  },
+  "preceding_complete_handoff_evidence_exact": true,
+  "complete_reference_calls": 5000,
+  "consumed_bytes_by_channel": [
+    234011,
+    233996,
+    0,
+    0
+  ],
+  "complete_right_minus_left_chip_clocks": {
+    "5450": 233996
+  },
+  "source_authority": {
+    "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+    "config_sha256": "cde0af34ecb42f7d677d407231ac8560ce186411ef1fd2acf5b36e39ba0c1a2e",
+    "initial_state_sha256": "221b8ddc9b010c59a4cf45f4714a3456a383221f4b31fb5eabf64e091f25b0e2",
+    "recording_sha256": "8d689ce8862a17e0973d619d470fd8f3cff6048fbe5ab49717d9ce1de1f71931",
+    "snapshot_sha256": "310024a8d413175bed231d9e68d37273aa1006afb5dea59f054c04953bc7e59f"
+  },
+  "original_layout": {
+    "hunk_74": 12910600,
+    "hunk_75": 12910872,
+    "hunk_76": 12911288,
+    "voice_slots": 12910616,
+    "master_volume": 12910854,
+    "verified_hunk_76_bytes": 420,
+    "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+  },
+  "native_runner_sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+  "native_trace_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415",
+  "validation": {
+    "dispatch_mutations_rejected": 4,
+    "original_audio_protocol_guards": 30,
+    "python_compilation_passed": true,
+    "diff_check_passed": true
+  },
+  "artifact_hashes": {
+    "build/native-audio/startup-consumed/snapshot.json": {
+      "retained_sha256": "a631c6672c03dec758eb2f8799798e6e4cfcad4eb22d6be4356353a79d1d1bd8",
+      "decoded_sha256": "a631c6672c03dec758eb2f8799798e6e4cfcad4eb22d6be4356353a79d1d1bd8"
+    },
+    "build/native-audio/startup-consumed/slow.dat.gz": {
+      "retained_sha256": "86c194d7130f2aaee40e699c95e33ba2565727da14f4bd412a527dd9f432f99c",
+      "decoded_sha256": "34abf46a1ef4e5dfffb0cca12b6fd3b48787964d5bb8f310682fdebb9017d6ae"
+    },
+    "build/native-audio/startup-consumed/audio_events.jsonl.gz": {
+      "retained_sha256": "4e2597b522c577020c78026c04d3f39b857011cbab3367cd2e5d9003a2bbac00",
+      "decoded_sha256": "1f54e8ff04da88fdbc5c5b0d3270a5c2031406eee240aca9d771f5fa78ae2601"
+    },
+    "build/native-audio/startup-consumed/audio_samples.bin.gz": {
+      "retained_sha256": "955f103f78ea57dd586f462ce4b3c54ae5ab32438a46421c3e0567ffc03ede36",
+      "decoded_sha256": "f986d9f923255601bbc48829d52aef946861fc0596f7f56f9da88208ba896ace"
+    },
+    "build/native-audio/startup-consumed/handoffs-retained.json": {
+      "retained_sha256": "5d9e51a5edec712c66da127ff00f66a7779c6da1ae041045904dded0fb4766b1",
+      "decoded_sha256": "5d9e51a5edec712c66da127ff00f66a7779c6da1ae041045904dded0fb4766b1"
+    },
+    "build/native-audio/startup-consumed/dispatch-handoffs.json": {
+      "retained_sha256": "81aa9c95b95637085f8909e9909dc9ee8ec0207c30cf4f99c60b26bf6c4715e7",
+      "decoded_sha256": "81aa9c95b95637085f8909e9909dc9ee8ec0207c30cf4f99c60b26bf6c4715e7"
+    },
+    "build/native-audio/startup-current-native/report.json": {
+      "retained_sha256": "706dc42479ce5ce1158086e1eab6f0a73666943603855365d5f6f2ddc2548270",
+      "decoded_sha256": "706dc42479ce5ce1158086e1eab6f0a73666943603855365d5f6f2ddc2548270"
+    },
+    "build/native-audio/startup-current-native/audio.jsonl.gz": {
+      "retained_sha256": "0ddcc740e3ac0835776a3b7ce59c8b2bfe3e34ffb8188d77dc7979d92e7d9254",
+      "decoded_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415"
+    }
+  },
+  "helper_sha256": {
+    "tools/native/check_music_handoffs.py": "cbf4b8a655bd72cbbf3c6a3a058e4779424a2e73652eecc878b5ccfc0f096a20"
+  },
+  "playable_runtime_changed": false,
+  "native_waveform_accepted": false,
+  "captures_added": false,
+  "reference_compression_preserved": true
+}
