@@ -1,0 +1,435 @@
+{
+  "scope": "Original mission-five input diagnostics; no earned mission-five grade or new native whole-flight parity",
+  "routes": {
+    "wire-arrest-result": {
+      "observations": 80000,
+      "flight_start": 61797,
+      "flight_observations": 18204,
+      "outcome": "incomplete",
+      "mission_success": false,
+      "original_replay_exact": true,
+      "source_prefix_exact": true,
+      "final_mode": 5,
+      "final_phase": 1,
+      "qualification": 1,
+      "grades": [
+        1,
+        1,
+        0
+      ],
+      "completions": 2,
+      "final_player_position": [
+        1153002.78125,
+        9890.828125,
+        1057155.953125
+      ],
+      "source_identities": {
+        "driver_executable_sha256": "fddd9173e9b2f02a5b866f674e798444d99c0e338acbd680d1487f7978404507",
+        "driver_source_sha256": "f48f752986f76c8fd82961f703098a9111613e459901243061df8a69665f5d38",
+        "controller_source_sha256": "98cd7a2b12f4e1c9b80222c8308743f07888c1f05f8885587ea67910eae30e89",
+        "controller_header_sha256": "c4bf55e3caf8b4e99c2102965ed6f8e28a3a3fc227ceeaf36077aabc35a84c82"
+      },
+      "report_sha256": "bbe41e0790e6f94ef6f0bcf5c728e4d238214d6875441ece62af1c28f1fe8acd",
+      "approach": {
+        "logged_wire_z": 1070584.0,
+        "logged_height_gate": null,
+        "height_gate": null,
+        "first_wire_z_crossing": null,
+        "last": {
+          "observation": 80000,
+          "frame": 234833,
+          "game_tick": 17876,
+          "xyz": [
+            1153002.78125,
+            9890.828125,
+            1057155.953125
+          ],
+          "contact": "0000",
+          "speed": 3988
+        }
+      }
+    },
+    "wire-turn-descent": {
+      "observations": 74804,
+      "flight_start": 61797,
+      "flight_observations": 13008,
+      "outcome": "landing without earned result",
+      "mission_success": false,
+      "original_replay_exact": true,
+      "source_prefix_exact": true,
+      "final_mode": 5,
+      "final_phase": 1,
+      "qualification": 1,
+      "grades": [
+        1,
+        1,
+        0
+      ],
+      "completions": 2,
+      "final_player_position": [
+        1152994.390625,
+        2.9296875,
+        1077875.046875
+      ],
+      "source_identities": {
+        "driver_executable_sha256": "c634592b068b4421339382e93b7a5ff622370a68652ca51b1dfd2d6e478bbb22",
+        "driver_source_sha256": "f48f752986f76c8fd82961f703098a9111613e459901243061df8a69665f5d38",
+        "controller_source_sha256": "d15a507087b3b134e2354e2032be8e605d618aa583688cff8d3ed3b140da2b94",
+        "controller_header_sha256": "c4bf55e3caf8b4e99c2102965ed6f8e28a3a3fc227ceeaf36077aabc35a84c82"
+      },
+      "report_sha256": "aefb115f847fd285a53114602e9c152c7b7b6e39b3692f15ad3d33d7e39ba144",
+      "approach": {
+        "logged_wire_z": 1070584.0,
+        "logged_height_gate": {
+          "approach_height_ready": true,
+          "tick": 88996,
+          "height": 819.0,
+          "home_height": 119.03125,
+          "height_limit": 819.03125,
+          "distance": 1490.371481
+        },
+        "height_gate": {
+          "observation": 74369,
+          "frame": 194157,
+          "game_tick": 12249,
+          "xyz": [
+            1151780.34375,
+            819.0,
+            1059440.53125
+          ],
+          "contact": "0000",
+          "speed": 3818
+        },
+        "first_wire_z_crossing": {
+          "before": {
+            "observation": 74558,
+            "frame": 195918,
+            "game_tick": 12438,
+            "xyz": [
+              1152998.734375,
+              188.359375,
+              1070553.578125
+            ],
+            "contact": "8002",
+            "speed": 3885
+          },
+          "after": {
+            "observation": 74559,
+            "frame": 195928,
+            "game_tick": 12439,
+            "xyz": [
+              1152998.515625,
+              185.46875,
+              1070614.1875
+            ],
+            "contact": "8002",
+            "speed": 3885
+          }
+        },
+        "last": {
+          "observation": 74804,
+          "frame": 197453,
+          "game_tick": 12684,
+          "xyz": [
+            1152994.390625,
+            2.9296875,
+            1077875.046875
+          ],
+          "contact": "8080",
+          "speed": 0
+        }
+      }
+    },
+    "wire-level-final": {
+      "observations": 80000,
+      "flight_start": 61797,
+      "flight_observations": 18204,
+      "outcome": "incomplete",
+      "mission_success": false,
+      "original_replay_exact": true,
+      "source_prefix_exact": true,
+      "final_mode": 5,
+      "final_phase": 1,
+      "qualification": 1,
+      "grades": [
+        1,
+        1,
+        0
+      ],
+      "completions": 2,
+      "final_player_position": [
+        1153007.53125,
+        111.03125,
+        1393522.375
+      ],
+      "source_identities": {
+        "driver_executable_sha256": "1d2857571f1d1b5196a2f06db848b1de39cf6db74409deb773709e8f6514b548",
+        "driver_source_sha256": "3c16b7375436b53e1eef39a97b4486e2b7b62d6366ffe94f59d746a921deb6e0",
+        "controller_source_sha256": "d15a507087b3b134e2354e2032be8e605d618aa583688cff8d3ed3b140da2b94",
+        "controller_header_sha256": "c4bf55e3caf8b4e99c2102965ed6f8e28a3a3fc227ceeaf36077aabc35a84c82"
+      },
+      "report_sha256": "22e89b19439e2228828c773029217911736936302edf2dd1c2e4628b847fef9f",
+      "approach": {
+        "logged_wire_z": 1070584.0,
+        "logged_height_gate": {
+          "approach_height_ready": true,
+          "tick": 88996,
+          "height": 819.0,
+          "home_height": 119.03125,
+          "height_limit": 819.03125,
+          "distance": 1490.371481
+        },
+        "height_gate": {
+          "observation": 74369,
+          "frame": 194157,
+          "game_tick": 12249,
+          "xyz": [
+            1151780.34375,
+            819.0,
+            1059440.53125
+          ],
+          "contact": "0000",
+          "speed": 3818
+        },
+        "first_wire_z_crossing": {
+          "before": {
+            "observation": 74558,
+            "frame": 195923,
+            "game_tick": 12438,
+            "xyz": [
+              1153007.53125,
+              228.875,
+              1070533.90625
+            ],
+            "contact": "8002",
+            "speed": 3840
+          },
+          "after": {
+            "observation": 74559,
+            "frame": 195933,
+            "game_tick": 12439,
+            "xyz": [
+              1153007.53125,
+              227.828125,
+              1070593.890625
+            ],
+            "contact": "8002",
+            "speed": 3840
+          }
+        },
+        "last": {
+          "observation": 80000,
+          "frame": 223589,
+          "game_tick": 17879,
+          "xyz": [
+            1153007.53125,
+            111.0625,
+            1393463.0625
+          ],
+          "contact": "8000",
+          "speed": 3797
+        }
+      }
+    }
+  },
+  "guards": {
+    "landing_stop": {
+      "actual_original_cases": {
+        "failed_water": {
+          "contact": 32896,
+          "speed": 0,
+          "stop": 1
+        },
+        "earned_carrier": {
+          "observation": 46934,
+          "frame": 94778,
+          "contact": 50306,
+          "speed": 0,
+          "grade_frame": 94852,
+          "stop": 0
+        }
+      },
+      "current_gate_passes": true,
+      "preceding_gate_truncates_carrier_result": true,
+      "probes": {
+        "current": {
+          "condition": "mission_mode==5 && menu_phase==4 && pilot.objective && airborne &&\n           rd_u16(CONTROL_RECORDS+2)==0x8080 && !rd_u16(CONTROL_RECORDS+110)",
+          "source_sha256": "f48f752986f76c8fd82961f703098a9111613e459901243061df8a69665f5d38",
+          "cases": {
+            "failed_water": {
+              "actual": 1,
+              "expected": 1
+            },
+            "earned_carrier": {
+              "actual": 0,
+              "expected": 0
+            }
+          }
+        },
+        "preceding": {
+          "condition": "mission_mode==5 && menu_phase==4 && pilot.objective && airborne &&\n           (rd_u16(CONTROL_RECORDS+2)&0x80) && !rd_u16(CONTROL_RECORDS+110)",
+          "source_sha256": "0f3cba4c76a423d03bcd9ca2c6d00f28494b01c008c64e4f989fe0c4d9df8523",
+          "cases": {
+            "failed_water": {
+              "actual": 1,
+              "expected": 1
+            },
+            "earned_carrier": {
+              "actual": 1,
+              "expected": 0
+            }
+          }
+        }
+      },
+      "source_sha256": "f48f752986f76c8fd82961f703098a9111613e459901243061df8a69665f5d38",
+      "water_report_sha256": "8535fde909eeb4bb75fe4d1bb7396c32c87c3a2c4a7523dd7da803a32339ced5",
+      "escort_report_sha256": "bf7223ce2c9b9f4d4ee07ca7b5cdbecaf159a9a9d5e2c5145c56339fed0d1f55"
+    },
+    "external_driver": {
+      "executable_sha256": "1d2857571f1d1b5196a2f06db848b1de39cf6db74409deb773709e8f6514b548",
+      "rejections": {
+        "unsupported_mode": {
+          "returncode": 2,
+          "expected_message": "requires 3, 4 or 5",
+          "log_sha256": "6478a54420397375b77a15c9896df2856d5890de9693820bd43733eabe487007"
+        },
+        "missing_escort_prefix": {
+          "returncode": 2,
+          "expected_message": "independently verified",
+          "log_sha256": "c1cbaf71da77353a484d9706935f5b81816d3ec2b664978dc72aacbfd9197de4"
+        },
+        "missing_stolen_prefix": {
+          "returncode": 2,
+          "expected_message": "independently verified",
+          "log_sha256": "c1cbaf71da77353a484d9706935f5b81816d3ec2b664978dc72aacbfd9197de4"
+        },
+        "qualification_only_prefix": {
+          "returncode": 2,
+          "expected_message": "Invalid original mission prefix",
+          "log_sha256": "35f65eb1193f9cb47dae0082d01610d29d7a05e4d47b70238113c26abd485bf0"
+        },
+        "past_bound_prefix": {
+          "returncode": 2,
+          "expected_message": "Invalid original mission prefix",
+          "log_sha256": "35f65eb1193f9cb47dae0082d01610d29d7a05e4d47b70238113c26abd485bf0"
+        },
+        "different_input_footer": {
+          "returncode": 2,
+          "expected_message": "verified input prefix",
+          "log_sha256": "1bfc6e997dabaa35af762ce86c22097d344bd3d4cc6cebb5179e041370baafa5"
+        },
+        "level_wrong_mode": {
+          "returncode": 2,
+          "expected_message": "Level final input requires mode-five wire approach",
+          "log_sha256": "2ec2c8ba4f32a45295d54c2cdb78bc9b47e9089f9c9c44b5192b1f98ca87e08e"
+        },
+        "level_without_wire": {
+          "returncode": 2,
+          "expected_message": "Level final input requires mode-five wire approach",
+          "log_sha256": "2ec2c8ba4f32a45295d54c2cdb78bc9b47e9089f9c9c44b5192b1f98ca87e08e"
+        },
+        "level_without_height": {
+          "returncode": 2,
+          "expected_message": "Level final input requires mode-five wire approach",
+          "log_sha256": "2ec2c8ba4f32a45295d54c2cdb78bc9b47e9089f9c9c44b5192b1f98ca87e08e"
+        }
+      }
+    },
+    "level_profile": {
+      "rejections": {
+        "level_without_wire": {
+          "rejected": true,
+          "message": "level final requires mode-five wire input",
+          "returncode": 1,
+          "log_sha256": "e66254681d6ec8015c143601772b2c878ff7fff9553643960d29be07c318250b"
+        },
+        "level_wrong_mission": {
+          "rejected": true,
+          "message": "level final requires mode-five wire input",
+          "returncode": 1,
+          "log_sha256": "e66254681d6ec8015c143601772b2c878ff7fff9553643960d29be07c318250b"
+        },
+        "changed_retained_profile": {
+          "rejected": true,
+          "message": "recording uses different final-height input",
+          "returncode": 1,
+          "log_sha256": "a311e8a6d9f49b9b45b49da00441b0f1f231a728469cfcbb791bab03dc796540"
+        }
+      },
+      "retained_original_report_unchanged": true,
+      "report_sha256": "aefb115f847fd285a53114602e9c152c7b7b6e39b3692f15ad3d33d7e39ba144"
+    }
+  },
+  "native_executable_unchanged_sha256": "148d58e7d8821b1221ecdf42f1904398d52e32b401480252a78ed39d49b1dac6",
+  "artifact_sha256": {
+    "build/native-flight/original-mission-five-wire-arrest-result/consumed.fa18in": "9eb19fe69db90da39e0e6b17c85dec33b957ee824fe33ed53d6f8d672436c4ce",
+    "build/native-flight/original-mission-five-wire-arrest-result/controller-choices.e9k": "f996b71dda4b58acca499cfc238f48bcb5d3d002978462257db1ac53061b2ddd",
+    "build/native-flight/original-mission-five-wire-arrest-result/driver-executable.exe.gz": "cc01cad18dc62feb02e3e2307d11d7ebdf0943275a1a9ba2f0c37d6a4df4d927",
+    "build/native-flight/original-mission-five-wire-arrest-result/driver.dat.gz": "503d56191569cf6e6e1a94dba74a5a516d0c4a879c36d37ce4927863ddfee002",
+    "build/native-flight/original-mission-five-wire-arrest-result/driver.jsonl.gz": "4478b2dcb87413f0b357a06921aead1d803825e26d825da6a86e41aa214b3b91",
+    "build/native-flight/original-mission-five-wire-arrest-result/driver.log": "229239a4ef51d301b904453989abae9abfd2f49612148b0594dbf92df0e083a8",
+    "build/native-flight/original-mission-five-wire-arrest-result/input.fa18in": "084937caafae03f7c9d77db131f16717689f8ddd5181714c25e881aa4f90463d",
+    "build/native-flight/original-mission-five-wire-arrest-result/mission_pilot.c.gz": "a5a5a8ef404dd6e399fe597d97ff1dcf9ac674d5d5f95d9c7dcdbb624c04e1c2",
+    "build/native-flight/original-mission-five-wire-arrest-result/mission_pilot.h.gz": "e251cce628ecca1249e3028888133433a12d777bd69f4ad0631f620bcd47a24f",
+    "build/native-flight/original-mission-five-wire-arrest-result/original_mission_pilot_loop.c.gz": "35baed282056622f44ed2153819c5d14f2fa73956db55fb1cf8d34fbab7e8460",
+    "build/native-flight/original-mission-five-wire-arrest-result/replay.log": "759cdec65b0a3ef08addb479e597161c13e612bc131f029cea11a17788e0f30c",
+    "build/native-flight/original-mission-five-wire-arrest-result/report.json": "bbe41e0790e6f94ef6f0bcf5c728e4d238214d6875441ece62af1c28f1fe8acd",
+    "build/native-flight/original-mission-five-wire-arrest-result/wire-crossing.json": "ad6dd2e2abfd4400b14184fc568ab7e157d028e2724398abc02d92918ebae051",
+    "build/native-flight/original-mission-five-wire-turn-descent/consumed.fa18in": "1a0baf91ee654f437ed2334627e2337994e8893c12a54549cbebce3776aad45f",
+    "build/native-flight/original-mission-five-wire-turn-descent/controller-choices.e9k": "ae407558bfec44d3aae5b7c7d9d84767152470aefeb0373a4777f2d9c8547985",
+    "build/native-flight/original-mission-five-wire-turn-descent/driver.dat.gz": "c5e0a2b2f7cbd7bb3da621eb000b0a30bf808dc4c6f7093853cbc62c833dac0b",
+    "build/native-flight/original-mission-five-wire-turn-descent/driver.jsonl.gz": "548b94234c8d0d15e53de83b5249b9bf49c22191c67420d181d43574753e82f8",
+    "build/native-flight/original-mission-five-wire-turn-descent/driver.log": "7f7ad009940f01795fba947a9a39ac21c0355a78a5d4763b99fee6229022ebc2",
+    "build/native-flight/original-mission-five-wire-turn-descent/input.fa18in": "c9b102a8e81c438da2bce22efe7da205b4e200ff4f30376d1797609dd0b47c5e",
+    "build/native-flight/original-mission-five-wire-turn-descent/mission_pilot.c.gz": "f2453d588a70141ee01c54355b3de49f0323e5768dddf3273d44fe309c259789",
+    "build/native-flight/original-mission-five-wire-turn-descent/mission_pilot.h.gz": "e251cce628ecca1249e3028888133433a12d777bd69f4ad0631f620bcd47a24f",
+    "build/native-flight/original-mission-five-wire-turn-descent/original_mission_pilot_loop.c.gz": "35baed282056622f44ed2153819c5d14f2fa73956db55fb1cf8d34fbab7e8460",
+    "build/native-flight/original-mission-five-wire-turn-descent/replay.log": "22cef086062f8ac3af2286f385dc3c0ae4ad0c1fff04dfc9fb639c55ec192837",
+    "build/native-flight/original-mission-five-wire-turn-descent/report.json": "aefb115f847fd285a53114602e9c152c7b7b6e39b3692f15ad3d33d7e39ba144",
+    "build/native-flight/original-mission-five-wire-turn-descent/wire-crossing.json": "b06e0d013836486005aa0ef4a723b1dc0ecd0ae8a7143cb85f8518978d0d9e1e",
+    "build/native-flight/original-mission-five-wire-level-final/consumed.fa18in": "3c9a60a8da8a11116dc3c6589f85f0c9f55f26999e6f020dc97643f1c5be9955",
+    "build/native-flight/original-mission-five-wire-level-final/controller-choices.e9k": "834b9a1326709d0d0e809c62e8fd68cca013ee3a0a2ecf4ace9a4820fc3a2665",
+    "build/native-flight/original-mission-five-wire-level-final/driver-executable.exe.gz": "cecd838f945e4d3f72a79bd37ef877115fb96ebbb0065e26bb82c7b46421ad4c",
+    "build/native-flight/original-mission-five-wire-level-final/driver.dat.gz": "cc6e6dda6bc2ccb2e9c510abed2e93d8971c5eb9c86c086764499e99a64eca61",
+    "build/native-flight/original-mission-five-wire-level-final/driver.jsonl.gz": "58df9e4613df140410faa38e378f04526a178b4d595f11d21c9d0bc514a5aafd",
+    "build/native-flight/original-mission-five-wire-level-final/driver.log": "313c0e5f8b093ce2c0dd4d77b016ee6a6fde9a25825c9ebba8b689c5aacdbaa2",
+    "build/native-flight/original-mission-five-wire-level-final/input.fa18in": "357ccb724428979e7fd6472b3cff1d9d355171954ffa517c47bd6abbec2579c5",
+    "build/native-flight/original-mission-five-wire-level-final/mission_pilot.c.gz": "f2453d588a70141ee01c54355b3de49f0323e5768dddf3273d44fe309c259789",
+    "build/native-flight/original-mission-five-wire-level-final/mission_pilot.h.gz": "e251cce628ecca1249e3028888133433a12d777bd69f4ad0631f620bcd47a24f",
+    "build/native-flight/original-mission-five-wire-level-final/original_mission_pilot_loop.c.gz": "ea8eed877c0361eaaac0b0d8f0b551457b621c5967a91ee8322b8e3f80c40076",
+    "build/native-flight/original-mission-five-wire-level-final/replay.log": "a099e43d40e913205631ada5d46275451b751ad4beb0511a7f1ab1d66e82e38a",
+    "build/native-flight/original-mission-five-wire-level-final/report.json": "22e89b19439e2228828c773029217911736936302edf2dd1c2e4628b847fef9f",
+    "build/native-flight/original-mission-five-wire-level-final/wire-crossing.json": "abac7b6437a4803a220951dadf30eda2a93140ab79558523eb96cd26859a2a61",
+    "build/native-flight/original-mission-five-prefix-guards/landing-gate.json": "097e49dff343e5088a8df022c1164979dc03157b871dd95a6728eab9a73b27a6",
+    "build/native-flight/original-mission-five-prefix-guards/driver-level.json": "08f79af914eea343fe1867db139c0f1b0ca050612e4d845fa2c2e21945069cc9",
+    "build/native-flight/original-mission-five-prefix-guards/level-profiles.json": "f01cd3d8e1e9eea64977be6f3d6b23ef6283c856ab4f63b0fbf7dfbf283aeb21",
+    "build/native-flight/original-mission-five-wire-target/consumed.fa18in": "cd2367897d0c8f22cf54c4f96725be489b2eb82b10e4d67d65b58feff269653c",
+    "build/native-flight/original-mission-five-wire-target/consumed.fa18in.partial.gz": "97eb6f39f17c4259deeb73ddd004f09d417349552ebc9db2aa8b24287c4a414f",
+    "build/native-flight/original-mission-five-wire-target/controller-choices.e9k": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/native-flight/original-mission-five-wire-target/driver-executable.exe.gz": "c60a1e9ab47b720c5f3c459c243e00bdf9ff26dac1985ae2de9b3c8985779742",
+    "build/native-flight/original-mission-five-wire-target/driver.jsonl.partial.gz": "dec1c2e3cef0674e48366e8af4b43b8c90ca108901883295973230d475022af5",
+    "build/native-flight/original-mission-five-wire-target/driver.log": "5c571ce1faef5bfa85420b4036525081056e8f62a7aa3526de98cf907b0c058e",
+    "build/native-flight/original-mission-five-wire-target/failure.json": "c965939d6423b3d3e0224f22da5c25b508474fb0a703286f8f78c9003bb1960c",
+    "build/native-flight/original-mission-five-wire-target/input.fa18in": "0aa7d58d46b3f8075881a87e32d693a775508e64a5a3d28bda21c50c765488ee"
+  },
+  "interrupted_capture": {
+    "reason": "Original process failed; partial data is not accepted evidence",
+    "accepted_evidence": false,
+    "returncode": 4294967295,
+    "executable": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\recomp\\fa18_original_mission_pilot.exe",
+    "input": "build\\native-flight\\original-escort-wire-target\\input.fa18in",
+    "mission_mode": 5,
+    "retained": {
+      "driver.jsonl": {
+        "bytes": 301256704,
+        "sha256": "6681f1e71ffa4e90bb8eea96cc7fda292d8997b687c183c6d96af6d4843ee4d1"
+      },
+      "consumed.fa18in": {
+        "bytes": 129401,
+        "sha256": "cd2367897d0c8f22cf54c4f96725be489b2eb82b10e4d67d65b58feff269653c"
+      }
+    },
+    "investigation_reason": "Stopped owned diagnostic process after confirming its broad landing stop would truncate valid carrier result sequencing",
+    "driver_executable_sha256": "d79214e6776b535760ea7db633d64afeb85779f887cb73fc85f737ecd44aafe5"
+  }
+}

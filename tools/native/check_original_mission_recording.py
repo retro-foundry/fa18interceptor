@@ -89,6 +89,8 @@ def main():
                         help='validation input: repeat unchanged held steering keys through the original physical keyboard queue')
     parser.add_argument('--wait-for-approach-height', nargs='?', const='final', choices=('final', 'standoff', 'wire'),
                         help='validation carrier-return input: final-mission gate (default), requested standoff height, or standoff height with live wire targeting')
+    parser.add_argument('--level-final', action='store_true',
+                        help='mode-five wire input: aim at observed aircraft touchdown height during final')
     parser.add_argument('--mode', type=int, choices=(3, 4, 5), default=3)
     parser.add_argument('--source-prefix', type=Path,
                         help='verified original recording through the preceding mission, required for modes four and five')
@@ -96,6 +98,7 @@ def main():
     assert bool(args.source_prefix) == (args.mode > 3), 'later missions require their verified original prefix'
     assert not (args.mode > 3 and args.patrol_input), 'patrol input belongs to mission three'
     assert not (args.wait_for_approach_height and args.mode not in (4, 5)), 'approach-height input requires a carrier-return mission'
+    assert not args.level_final or (args.mode == 5 and args.wait_for_approach_height == 'wire'), 'level final requires mode-five wire input'
     args.out.mkdir(parents=True, exist_ok=True)
     recording = ROOT / 'captures/native/qual_carrier_success/input.fa18in'
     media = (recording, recording.with_name('state.bin'), ROOT / 'local/system/kick13.rom')
@@ -161,6 +164,7 @@ def main():
                      **({'FA18_ORIGINAL_PILOT_PREFIX_END': str(prefix['iterations'])} if prefix else {}),
                      **({'FA18_ORIGINAL_PILOT_PATROL': '1'} if args.patrol_input else {}),
                      **({'FA18_ORIGINAL_PILOT_REPEAT_STEERING': '1'} if args.repeat_steering else {}),
+                     **({'FA18_ORIGINAL_PILOT_LEVEL_FINAL': '1'} if args.level_final else {}),
                      **({'FA18_ORIGINAL_PILOT_APPROACH_HEIGHT': '1'} if args.wait_for_approach_height else {}),
                      **({'FA18_ORIGINAL_PILOT_APPROACH_STANDOFF': '1'} if args.wait_for_approach_height in ('standoff', 'wire') else {}),
                      **({'FA18_ORIGINAL_PILOT_WIRE_APPROACH': '1'} if args.wait_for_approach_height == 'wire' else {})),
@@ -179,6 +183,7 @@ def main():
                 controller_ticks_per_update=args.pilot_ticks_per_update,
                 patrol_input=args.patrol_input,
                 repeat_steering=args.repeat_steering,
+                level_final_input=args.level_final,
                 wait_for_approach_height=bool(args.wait_for_approach_height),
                 approach_height_target=args.wait_for_approach_height or 'final',
                 driver_trace_sha256=digest((work / 'driver.jsonl').read_bytes()),
@@ -203,6 +208,7 @@ def main():
         assert report['input_hashes'] == hashes, 'original media changed'
         assert report.get('mission_mode', 3) == args.mode, 'recording belongs to a different mission'
         assert report.get('repeat_steering', False) == args.repeat_steering, 'recording uses different steering inputs'
+        assert report.get('level_final_input', False) == args.level_final, 'recording uses different final-height input'
         assert report.get('wait_for_approach_height', False) == bool(args.wait_for_approach_height), 'recording uses different approach inputs'
         assert report.get('approach_height_target', 'final') == (args.wait_for_approach_height or 'final'), 'recording uses a different approach height target'
         assert report.get('source_prefix') == prefix, 'recording belongs to a different prefix'

@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Original mission-five wire approaches (2026-10-10): three complete recordings
+replay exactly, including the earned prefix. Descent input reaches the height
+gate, but both finals cross the wire too high; no mission-five grade is earned.
+The failed-water diagnostic now preserves valid carrier arrest/result timing.
+Two original landing-condition cases, nine driver guards and three profile
+guards pass. Source archives and rejected captures remain retained. Native
+gameplay is unchanged. Successful return, independent flight comparisons and
+sound timing remain open. See [wire approach evidence](analysis/native_original_mission_five_wire_milestone.md).
+
 Original mission five (2026-10-10): all 72,650 observations, final RAM and
 consumed keys reproduce without the controller, including the earned
 47,814-observation prefix. Formation/combat finish, but the landing earns

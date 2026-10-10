@@ -1,5 +1,14 @@
 # Active port source ownership
 
+Original mission-five wire approaches (2026-10-10): three complete recordings
+replay exactly, including the earned prefix. Descent input reaches the height
+gate, but both finals cross the wire too high; no mission-five grade is earned.
+The failed-water diagnostic now preserves valid carrier arrest/result timing.
+Two original landing-condition cases, nine driver guards and three profile
+guards pass. Source archives and rejected captures remain retained. Native
+gameplay is unchanged. Successful return, independent flight comparisons and
+sound timing remain open. See [wire approach evidence](../analysis/native_original_mission_five_wire_milestone.md).
+
 Complete escort bodies (2026-10-10): all 6,954 actual native bodies pass
 original instructions, including combat, carrier arrest and postflight.
 Ground rendering now publishes the source C09812/C09850 accumulator;
