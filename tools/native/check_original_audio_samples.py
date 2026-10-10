@@ -17,7 +17,7 @@ from check_original_audio_dma import frames as dma_frames, open_stream, FETCH, e
 from build_original_audio_probe import observer_source, SOURCE, ROOT
 
 sys.path.insert(0, str(ROOT / 'scripts'))
-from original_audio_samples import MAGIC, FRAME, SAMPLE, FOOTER, CYCLE_UNIT, sample_records
+from original_audio_samples import MAGIC, FRAME, SAMPLE, FOOTER, CYCLE_UNIT, CLOCK, sample_records
 
 
 def sha(data):
@@ -92,7 +92,13 @@ def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None, 
         mixer_path = ROOT / 'tools/native/original_audio_mixer_probe.inc'
         assert sha(mixer_path.read_bytes()) == manifest['mixer_include_sha256']
         mixer_probe = mixer_path.read_text()
-    assert generated_path.read_text() == observer_source((SOURCE / 'sources/src/audio.c').read_text(), probe.read_text(), word_probe, live_probe, mixer_probe)
+    clock_probe = None
+    if 'mixer_clock_include_sha256' in manifest:
+        clock_path = ROOT / 'tools/native/original_audio_clock_probe.inc'
+        assert mixer_probe is not None and manifest['mixer_clock_record_bytes'] == CLOCK.size
+        assert sha(clock_path.read_bytes()) == manifest['mixer_clock_include_sha256']
+        clock_probe = clock_path.read_text()
+    assert generated_path.read_text() == observer_source((SOURCE / 'sources/src/audio.c').read_text(), probe.read_text(), word_probe, live_probe, mixer_probe, clock_probe)
     assert execution(observed) == execution(original), 'Observer changed original execution'
     for name in ('state.bin', 'chip.bin', 'slow.bin'):
         assert recorded_bytes(capture, name) == recorded_bytes(baseline, name), name

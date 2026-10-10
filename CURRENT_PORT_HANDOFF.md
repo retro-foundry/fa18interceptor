@@ -1,5 +1,13 @@
 # Current playable port handoff
 
+Original output clock (2026-10-10): actual source countdowns and display/audio
+clock inputs predict all 1,059,282 startup and 29,988 restored output boundaries
+exactly, with complete original PCM/execution unchanged. Source scheduling and
+DMA timing account for the startup stereo byte gap; no fitted delay is added.
+All six mutation controls and 48 audio protocol tests pass. Native gameplay,
+clocks and scheduling are unchanged; full native sound matching remains open.
+See [original output clock evidence](analysis/native_original_audio_clock_milestone.md).
+
 Model directory integration (2026-10-10): the five remaining original
 command slots are implemented; all 78 directory entries now dispatch.
 The 917 component cases and connected flight/model/allocation checks pass

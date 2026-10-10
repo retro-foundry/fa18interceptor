@@ -22,7 +22,7 @@ def sha(path):
         return hashlib.file_digest(file, 'sha256').hexdigest()
 
 
-def observer_source(original, probe, word_probe=None, live_probe=None, mixer_probe=None):
+def observer_source(original, probe, word_probe=None, live_probe=None, mixer_probe=None, clock_probe=None):
     declaration = 'static void newsample(int nr, sample8_t sample)'
     assert original.count(declaration) == 1
     modified = original.replace(declaration, probe + '\n' + (live_probe + '\n' if live_probe else '') + declaration)
@@ -72,7 +72,7 @@ def observer_source(original, probe, word_probe=None, live_probe=None, mixer_pro
         for before, after in replacements:
             assert modified.count(before) == 1, f'Mixer observer source site changed: {before}'
             modified = modified.replace(before, after)
-    return modified
+    return modified + ('\n' + clock_probe if clock_probe is not None else '')
 
 
 def main():
@@ -82,15 +82,18 @@ def main():
     parser.add_argument('--word-state', action='store_true', help='also observe actual pointer/length word lifecycle in a separate DLL')
     parser.add_argument('--restore-state', action='store_true', help='also retain original restore assignments and read live state before ordinary replay')
     parser.add_argument('--mixer-timeline', action='store_true', help='observe actual logical boundaries, accumulator intervals and Paula output averages')
+    parser.add_argument('--mixer-clock', action='store_true', help='also expose read-only original output clock/countdown snapshots')
     parser.add_argument('--link-jobs', type=int, help='request LTO workers for this isolated DLL link')
     args = parser.parse_args()
     assert args.link_jobs is None or args.link_jobs > 0
     assert not args.restore_state or args.word_state, '--restore-state requires --word-state'
+    assert not args.mixer_clock or args.mixer_timeline, '--mixer-clock requires --mixer-timeline'
     work = args.out.resolve()
     assert not args.word_state or work != (ROOT / 'build/native-audio/sample-probe-engine').resolve(), 'Word observer requires a separate --out; preserve the existing sample observer'
     assert not args.restore_state or work != (ROOT / 'build/native-audio/word-state-probe-engine').resolve(), 'Restore observer requires a separate --out; preserve the existing word observer'
     assert not args.mixer_timeline or work not in {ROOT / 'build/native-audio' / name for name in
         ('sample-probe-engine', 'word-state-probe-engine', 'restore-state-probe-engine')}, 'Mixer observer requires a separate --out'
+    assert not args.mixer_clock or work != ROOT / 'build/native-audio/mixer-output-probe-engine', 'Clock observer requires a separate --out; preserve the accepted mixer core'
     # The only source copy, object and DLL this tool writes belong to its
     # explicit diagnostic output. No Makefile all/copy target is invoked.
     assert work != SOURCE and work != BASELINE and not SOURCE.is_relative_to(work)
@@ -103,8 +106,10 @@ def main():
     word_probe = ROOT / 'tools/native/original_audio_word_probe.inc' if args.word_state else None
     live_probe = ROOT / 'tools/native/original_audio_live_probe.inc' if args.restore_state else None
     mixer_probe = ROOT / 'tools/native/original_audio_mixer_probe.inc' if args.mixer_timeline else None
+    clock_probe = ROOT / 'tools/native/original_audio_clock_probe.inc' if args.mixer_clock else None
     generated = observer_source(original.read_text(), probe.read_text(), word_probe.read_text() if word_probe else None,
-                                live_probe.read_text() if live_probe else None, mixer_probe.read_text() if mixer_probe else None)
+                                live_probe.read_text() if live_probe else None, mixer_probe.read_text() if mixer_probe else None,
+                                clock_probe.read_text() if clock_probe else None)
     copy, object_file, core = work / 'audio.c', work / 'audio.o', work / 'system/ami9000.dll'
     manifest_path = work / 'build.json'
     prior = json.loads(manifest_path.read_text()) if manifest_path.exists() else None
@@ -168,6 +173,10 @@ def main():
     if mixer_probe:
         manifest.update(mixer_include_sha256=sha(mixer_probe), mixer_record_bytes=53, mixer_ring_records=65536,
             mixer_scope='Actual update_audio logical boundaries and truncated prehandler durations; four Paula accumulator times/averages and newsample transitions. No native scheduling or waveform acceptance.')
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+    if clock_probe:
+        manifest.update(mixer_clock_include_sha256=sha(clock_probe), mixer_clock_record_bytes=56,
+            mixer_clock_scope='Read-only original output interval/countdown, audio last-cycle and frontend clock inputs. No native clock or scheduling input.')
         manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
     print(f'{"Reused verified" if reusable else "Built isolated"} sample observer: {core}')
 

@@ -1,0 +1,1554 @@
+{
+  "scope": "Complete original execution/PCM preservation and source output clock prediction in bounded startup/restored windows; native sound scheduling and complete flight/combat waveform remain open.",
+  "native_runtime_changed": false,
+  "native_dependency_removed": false,
+  "native_waveform_accepted": false,
+  "native_runner_sha256": "b5eead9315fa4b13e8694d745e1d0ba3fd355513741acfeaecb982ac8d5e2a10",
+  "clock_observer_core_sha256": "2efa42e2b508619a2cd69cff1c6ec488ec51b8e9c803d3492cfa916b5009ded2",
+  "clock_free_core_sha256": "18b8ba5e247f5808bc3e0cbaff589783e2adaaf6bcd5c8cb72af60f596814e47",
+  "clock_observer_manifest_sha256": "b44f75e790a4df50e8d399c8daf2cb416962600c77e4f36ebad6c747ae05f562",
+  "original_dependency_objects_identical": true,
+  "original_dependency_object_count": 227,
+  "old_generated_source_prefix_identical": true,
+  "old_generated_source_sha256": "18d0c32bd9d90c91a8114a74e2db417cbcc59a4857d9ecf3cc2f5a2556275e4d",
+  "generated_source_sha256": "a5ba4f8948b600550db7546a51fb4bdaee67afa316ccd4c007c254c5346b1067",
+  "source_files_sha256": {
+    "scripts/original_audio_samples.py": "a9dec61f38069050a3b622071607b5c9ac16029c0ac0c79952adcc132ebf9b5a",
+    "tools/native/build_original_audio_probe.py": "10842ed80ada65ff6c47df38f83333d2048007ca0dbd910b3a60caa9d6d7e2f8",
+    "tools/native/check_original_audio_samples.py": "83b6e88505724476504dde5c3d375ce47e2c41fc067444508e0ed2dbcc3b0f40",
+    "tools/native/check_original_audio_clock.py": "924a480578464a26d3a8e61796ebb0f2cea0c3215bc093f80b3c4e7dbe746c3d",
+    "tools/native/test_original_audio_clock.py": "e2b2586cf17ecb9be94d5efdcad9cab8a8a8f6dd3cdca7bf482ef52df160da68",
+    "tools/native/original_audio_clock_probe.inc": "ad0332fa9805d661bbdd692db19c8c236211834f0b5eb649866d6300f8b1a238",
+    "tools/engine9000-src/ami9000/sources/src/custom.c": "1c562203f83d930c0a30dddeb57e5d317efd39ff59d70cca965d7321c764881b",
+    "tools/engine9000-src/ami9000/sources/src/audio.c": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+    "tools/engine9000-src/ami9000/retrodep/sounddep/sound.c": "be71665195fb55e4db7dcda2fdee01c50c190603cb63fe0ccaed101f0007f055"
+  },
+  "captures": {
+    "startup": {
+      "path": "build/native-audio/mixer-clock-startup/complete-capture",
+      "authority": {
+        "core_sha256": "2efa42e2b508619a2cd69cff1c6ec488ec51b8e9c803d3492cfa916b5009ded2",
+        "config_sha256": "cde0af34ecb42f7d677d407231ac8560ce186411ef1fd2acf5b36e39ba0c1a2e",
+        "initial_state_sha256": "221b8ddc9b010c59a4cf45f4714a3456a383221f4b31fb5eabf64e091f25b0e2",
+        "recording_sha256": "8d689ce8862a17e0973d619d470fd8f3cff6048fbe5ab49717d9ce1de1f71931",
+        "snapshot_sha256": "310024a8d413175bed231d9e68d37273aa1006afb5dea59f054c04953bc7e59f"
+      },
+      "observed_range": [
+        3800,
+        5000
+      ],
+      "clock": {
+        "clock": {
+          "observed_calls": 1201,
+          "exact_predicted_output_boundaries": 1059282,
+          "exact_observed_clock_snapshots": 1202,
+          "source_clock_hz": 3552550.0,
+          "source_output_interval_raw": 41245.0234375,
+          "output_raw_gaps": {
+            "41245": 1034454,
+            "41246": 24827
+          },
+          "final_countdown_bits": 1179143432,
+          "final_audio_last_cycle": 472903959552,
+          "actual_source_countdown_and_all_output_boundaries_matching": true
+        },
+        "actual_record_mutations_rejected": {
+          "initial_countdown": true,
+          "interval": true,
+          "geometry": true,
+          "endpoint_countdown": true,
+          "output_time": true,
+          "lost_output": true
+        },
+        "mixer_stream_sha256": "5329e72eda1dd3bab36a69a5cc1c57a63263cf17c8f77a14aa84b6a7092caced",
+        "unchanged_complete_mixer_stream": true,
+        "clock_free_baseline": "build\\native-audio\\mixer-startup-bounded",
+        "timeline_report_sha256": "376ae13e88cb848ecdc1c02d13bc078da330c674f4a79663022eebe0663f0a7a",
+        "observer_manifest_sha256": "b44f75e790a4df50e8d399c8daf2cb416962600c77e4f36ebad6c747ae05f562",
+        "scope": "Observed original clock inputs and exact initial countdown predict every output boundary and final countdown in the bounded complete mixer window. Existing complete execution/PCM preservation remains prerequisite. Native playback and its frequency are unchanged; no inferred phase or waveform alignment."
+      },
+      "complete_mixer_and_execution": {
+        "preserved_execution": {
+          "scope": "All observed original consumed sample bytes; complete PCM, event log and execution preserved. No separate DMA fetch-coverage witness. Service timestamps are not an independent mixer-time reconstruction. Native onset/handoff/waveform remains open.",
+          "replay_calls": 5000,
+          "stereo_pcm_frames": 4410000,
+          "consumed_bytes": 468007,
+          "bytes_by_channel": [
+            234011,
+            233996,
+            0,
+            0
+          ],
+          "actual_fetch_word_differences": null,
+          "explicit_initial_unknown_provenance": [],
+          "first_samples_by_channel": [
+            {
+              "index": 0,
+              "call": 3821,
+              "cycle": 430010688000,
+              "address": 117392,
+              "word": 0,
+              "value": 0,
+              "channel": 0,
+              "state": 2,
+              "beam": [
+                18,
+                286
+              ]
+            },
+            {
+              "index": 16,
+              "call": 3821,
+              "cycle": 430013478400,
+              "address": 117392,
+              "word": 0,
+              "value": 0,
+              "channel": 1,
+              "state": 2,
+              "beam": [
+                20,
+                310
+              ]
+            },
+            null,
+            null
+          ],
+          "authority": {
+            "core_sha256": "2efa42e2b508619a2cd69cff1c6ec488ec51b8e9c803d3492cfa916b5009ded2",
+            "config_sha256": "cde0af34ecb42f7d677d407231ac8560ce186411ef1fd2acf5b36e39ba0c1a2e",
+            "initial_state_sha256": "221b8ddc9b010c59a4cf45f4714a3456a383221f4b31fb5eabf64e091f25b0e2",
+            "recording_sha256": "8d689ce8862a17e0973d619d470fd8f3cff6048fbe5ab49717d9ce1de1f71931",
+            "snapshot_sha256": "310024a8d413175bed231d9e68d37273aa1006afb5dea59f054c04953bc7e59f"
+          },
+          "unmodified_authority": {
+            "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+            "config_sha256": "cde0af34ecb42f7d677d407231ac8560ce186411ef1fd2acf5b36e39ba0c1a2e",
+            "initial_state_sha256": "221b8ddc9b010c59a4cf45f4714a3456a383221f4b31fb5eabf64e091f25b0e2",
+            "recording_sha256": "8d689ce8862a17e0973d619d470fd8f3cff6048fbe5ab49717d9ce1de1f71931",
+            "snapshot_sha256": "310024a8d413175bed231d9e68d37273aa1006afb5dea59f054c04953bc7e59f"
+          },
+          "observer_manifest_sha256": "b44f75e790a4df50e8d399c8daf2cb416962600c77e4f36ebad6c747ae05f562",
+          "sample_stream_sha256": "f986d9f923255601bbc48829d52aef946861fc0596f7f56f9da88208ba896ace",
+          "sample_stream_record_bytes": 20,
+          "pcm_sha256": "d372bb3238e20f6b2ba8b4adb92ab0e1b1f02a59b73e26ed6d66702c6c614d01",
+          "dma_sha256": null,
+          "event_log_sha256": "1f54e8ff04da88fdbc5c5b0d3270a5c2031406eee240aca9d771f5fa78ae2601",
+          "source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+          "fetch_content_witness": null,
+          "fetch_witness_scope": "No separate DMA stream; consumed word/byte/address/state records are observed directly.",
+          "unchanged_snapshot_fields": true,
+          "unchanged_complete_ram_state": true,
+          "unchanged_video": true,
+          "all_pcm_chunks_and_samples_exact": true,
+          "actual_dma_stream_exact": false,
+          "max_samples_per_call": 398,
+          "native_runtime_changed": false,
+          "native_waveform_accepted": false,
+          "reference_context": "startup"
+        },
+        "timeline": {
+          "records": 3433326,
+          "records_by_kind": {
+            "0": 1,
+            "1": 1906036,
+            "2": 1059282,
+            "3": 234011,
+            "4": 233996
+          },
+          "exact_output_averages": 1059282,
+          "exact_consumed_transitions": 468007,
+          "duration_counts": {
+            "28": 20847,
+            "80": 387122,
+            "37": 19425,
+            "42": 18589,
+            "23": 21637,
+            "57": 16299,
+            "8": 24119,
+            "72": 14014,
+            "74": 13679,
+            "6": 24292,
+            "59": 16015,
+            "20": 22069,
+            "44": 18291,
+            "35": 19598,
+            "30": 20533,
+            "50": 17360,
+            "15": 22873,
+            "64": 15219,
+            "0": 20927,
+            "79": 12879,
+            "66": 14883,
+            "13": 23187,
+            "52": 17121,
+            "43": 18469,
+            "22": 21744,
+            "21": 21912,
+            "65": 15056,
+            "51": 17245,
+            "58": 16096,
+            "7": 24175,
+            "73": 13815,
+            "36": 19525,
+            "29": 20693,
+            "14": 22968,
+            "67": 14768,
+            "1": 25105,
+            "45": 18200,
+            "71": 14127,
+            "27": 21100,
+            "16": 22749,
+            "49": 17299,
+            "60": 15816,
+            "5": 24561,
+            "38": 19203,
+            "78": 13022,
+            "34": 19665,
+            "9": 23827,
+            "56": 16461,
+            "53": 16862,
+            "12": 23349,
+            "63": 15376,
+            "31": 20410,
+            "19": 22262,
+            "75": 13509,
+            "24": 21497,
+            "41": 18785,
+            "68": 14575,
+            "2": 24929,
+            "46": 17909,
+            "70": 14270,
+            "26": 21153,
+            "17": 22551,
+            "48": 17673,
+            "61": 15670,
+            "4": 24703,
+            "39": 19047,
+            "11": 23485,
+            "77": 13191,
+            "32": 20173,
+            "33": 20725,
+            "76": 13344,
+            "10": 23653,
+            "55": 16610,
+            "54": 16681,
+            "62": 15473,
+            "18": 22349,
+            "25": 21328,
+            "40": 18882,
+            "69": 14420,
+            "3": 24733,
+            "47": 17880
+          },
+          "service_leads_by_kind": {
+            "0": {
+              "min": 0,
+              "max": 0,
+              "zero": 1,
+              "records": 1
+            },
+            "1": {
+              "min": 0,
+              "max": 116223,
+              "zero": 846778,
+              "records": 1906036
+            },
+            "2": {
+              "min": 0,
+              "max": 116223,
+              "zero": 24,
+              "records": 1059282
+            },
+            "3": {
+              "min": 0,
+              "max": 0,
+              "zero": 234011,
+              "records": 234011
+            },
+            "4": {
+              "min": 0,
+              "max": 0,
+              "zero": 233996,
+              "records": 233996
+            }
+          },
+          "logical_sample_gaps_by_channel": {
+            "0": {
+              "183296": 234010
+            },
+            "1": {
+              "183296": 233995
+            }
+          },
+          "discarded_prehandler_subcycle_units": 454645760,
+          "final_accumulators": [
+            -27720,
+            10395,
+            0,
+            0
+          ],
+          "final_accumulator_times": [
+            55,
+            55,
+            55,
+            55
+          ],
+          "complete_actual_accumulators_and_logical_intervals_matching": true
+        },
+        "actual_record_mutations_rejected": {
+          "initial_area": true,
+          "interval": true,
+          "logical_time": true,
+          "average": true,
+          "budget": true,
+          "sample": true,
+          "missing_sample": true
+        },
+        "mixer_stream_sha256": "5329e72eda1dd3bab36a69a5cc1c57a63263cf17c8f77a14aa84b6a7092caced",
+        "existing_original_telemetry_unchanged": true,
+        "reference_context": "startup",
+        "existing_telemetry_files_unchanged": [
+          "audio_samples.bin"
+        ],
+        "observed_mixer_call_range": [
+          3800,
+          5000
+        ],
+        "scope": "All original logical intervals, actual accumulator budgets, emitted Paula averages and consumed bytes within the explicit mixer call range. Entire replay PCM/RAM/state/video remain strict. No native latency constant or complete native waveform acceptance."
+      },
+      "files": {
+        "snapshot.json": {
+          "path": "build/native-audio/mixer-clock-startup/complete-capture/snapshot.json",
+          "sha256": "08b2ea3df89e7ab399a8e4c57214f2781eca42686752966aab06356c1952d26a"
+        },
+        "clock.json": {
+          "path": "build/native-audio/mixer-clock-startup/complete-capture/clock.json",
+          "sha256": "191f838253e38d4642635bb26b4a74a3ccd8787f96ffaa61cd0a49aed6a155a5"
+        },
+        "comparison.json": {
+          "path": "build/native-audio/mixer-clock-startup/complete-capture/comparison.json",
+          "sha256": "376ae13e88cb848ecdc1c02d13bc078da330c674f4a79663022eebe0663f0a7a"
+        },
+        "retention.json": {
+          "path": "build/native-audio/mixer-clock-startup/complete-capture/retention.json",
+          "sha256": "506a20f4364acff7aa613fe65955416a8d0941ebd5165f1fb28faf8f3eb89eae"
+        }
+      },
+      "compressed_report_rechecks_identical": true
+    },
+    "warm_final_budget_guard": {
+      "path": "build/native-audio/ram-mixer-clock-budget-warm",
+      "authority": {
+        "core_sha256": "2efa42e2b508619a2cd69cff1c6ec488ec51b8e9c803d3492cfa916b5009ded2",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+      },
+      "observed_range": [
+        60,
+        93
+      ],
+      "clock": {
+        "clock": {
+          "observed_calls": 34,
+          "exact_predicted_output_boundaries": 29988,
+          "exact_observed_clock_snapshots": 35,
+          "source_clock_hz": 3552550.0,
+          "source_output_interval_raw": 41245.0234375,
+          "output_raw_gaps": {
+            "41245": 29285,
+            "41246": 702
+          },
+          "final_countdown_bits": 1184567484,
+          "final_audio_last_cycle": 425431225856,
+          "actual_source_countdown_and_all_output_boundaries_matching": true
+        },
+        "actual_record_mutations_rejected": {
+          "initial_countdown": true,
+          "interval": true,
+          "geometry": true,
+          "endpoint_countdown": true,
+          "output_time": true,
+          "lost_output": true
+        },
+        "mixer_stream_sha256": "f351e67d5c878fbb9c67e5d62e99cc0895891aa69bc134eecec5197f9f3b0075",
+        "unchanged_complete_mixer_stream": true,
+        "clock_free_baseline": "build\\native-audio\\mixer-bounded-warm",
+        "timeline_report_sha256": "c29a6c16102d9c73a16a9255bb86e1f68ad7f3d51ad7f5c191dcd297452bed12",
+        "observer_manifest_sha256": "b44f75e790a4df50e8d399c8daf2cb416962600c77e4f36ebad6c747ae05f562",
+        "scope": "Observed original clock inputs and exact initial countdown predict every output boundary and final countdown in the bounded complete mixer window. Existing complete execution/PCM preservation remains prerequisite. Native playback and its frequency are unchanged; no inferred phase or waveform alignment."
+      },
+      "complete_mixer_and_execution": {
+        "preserved_execution": {
+          "scope": "All observed original consumed sample bytes and actual word provenance; complete PCM, DMA, event log and execution preserved. Service timestamps are not an independent mixer-time reconstruction. Native onset/handoff/waveform remains open.",
+          "replay_calls": 94,
+          "stereo_pcm_frames": 82908,
+          "consumed_bytes": 37311,
+          "bytes_by_channel": [
+            18656,
+            18655,
+            0,
+            0
+          ],
+          "actual_fetch_word_differences": 0,
+          "explicit_initial_unknown_provenance": [
+            {
+              "index": 0,
+              "call": 1,
+              "cycle": 422048186368,
+              "address": 4294967295,
+              "word": 1282,
+              "value": 2,
+              "channel": 0,
+              "state": 3,
+              "beam": [
+                22,
+                4
+              ]
+            },
+            {
+              "index": 1,
+              "call": 1,
+              "cycle": 422048227328,
+              "address": 4294967295,
+              "word": 65278,
+              "value": -2,
+              "channel": 1,
+              "state": 2,
+              "beam": [
+                102,
+                4
+              ]
+            },
+            {
+              "index": 3,
+              "call": 1,
+              "cycle": 422048410624,
+              "address": 4294967295,
+              "word": 65278,
+              "value": -2,
+              "channel": 1,
+              "state": 3,
+              "beam": [
+                6,
+                6
+              ]
+            }
+          ],
+          "first_samples_by_channel": [
+            {
+              "index": 0,
+              "call": 1,
+              "cycle": 422048186368,
+              "address": 4294967295,
+              "word": 1282,
+              "value": 2,
+              "channel": 0,
+              "state": 3,
+              "beam": [
+                22,
+                4
+              ]
+            },
+            {
+              "index": 1,
+              "call": 1,
+              "cycle": 422048227328,
+              "address": 4294967295,
+              "word": 65278,
+              "value": -2,
+              "channel": 1,
+              "state": 2,
+              "beam": [
+                102,
+                4
+              ]
+            },
+            null,
+            null
+          ],
+          "authority": {
+            "core_sha256": "2efa42e2b508619a2cd69cff1c6ec488ec51b8e9c803d3492cfa916b5009ded2",
+            "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+            "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+            "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+            "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+          },
+          "unmodified_authority": {
+            "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+            "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+            "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+            "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+            "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+          },
+          "observer_manifest_sha256": "b44f75e790a4df50e8d399c8daf2cb416962600c77e4f36ebad6c747ae05f562",
+          "sample_stream_sha256": "4c6952cd479377cc60945a9b57c04439687b5a020bffe6f3e4cc17267f72db21",
+          "sample_stream_record_bytes": 20,
+          "pcm_sha256": "068bf398d6a3dd11819dd742fd00926accd3332c8602047328a7805ed71fa14b",
+          "dma_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+          "event_log_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+          "source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+          "fetch_content_witness": "build\\native-audio\\dma-complete-demo",
+          "fetch_witness_scope": "Same-channel address/word contents from actual DMA. Consumed-byte ordering is observed directly; this lookup does not infer DMA delivery time. A wider recording is explicit when supplied.",
+          "unchanged_snapshot_fields": true,
+          "unchanged_complete_ram_state": true,
+          "unchanged_video": true,
+          "all_pcm_chunks_and_samples_exact": true,
+          "actual_dma_stream_exact": true,
+          "max_samples_per_call": 398,
+          "native_runtime_changed": false,
+          "native_waveform_accepted": false,
+          "zero_word_samples": [
+            {
+              "index": 37265,
+              "call": 94,
+              "cycle": 425463398400,
+              "address": 154226,
+              "word": 0,
+              "value": 0,
+              "channel": 1,
+              "state": 2,
+              "beam": [
+                185,
+                279
+              ]
+            },
+            {
+              "index": 37267,
+              "call": 94,
+              "cycle": 425463581696,
+              "address": 154226,
+              "word": 0,
+              "value": 0,
+              "channel": 1,
+              "state": 3,
+              "beam": [
+                89,
+                281
+              ]
+            }
+          ],
+          "zero_word_classification": "Both bytes emitted during existing channel-1 playback",
+          "channel2_zero_prefetch_emitted_bytes": 0
+        },
+        "timeline": {
+          "records": 97687,
+          "records_by_kind": {
+            "0": 1,
+            "1": 54202,
+            "2": 29988,
+            "3": 6748,
+            "4": 6748
+          },
+          "exact_output_averages": 29988,
+          "exact_consumed_transitions": 13496,
+          "duration_counts": {
+            "38": 565,
+            "18": 644,
+            "62": 439,
+            "17": 657,
+            "27": 604,
+            "53": 464,
+            "80": 10826,
+            "26": 601,
+            "12": 674,
+            "41": 513,
+            "78": 368,
+            "2": 715,
+            "9": 678,
+            "71": 403,
+            "8": 696,
+            "55": 478,
+            "16": 657,
+            "44": 524,
+            "4": 705,
+            "31": 580,
+            "36": 548,
+            "34": 566,
+            "46": 513,
+            "0": 599,
+            "19": 641,
+            "60": 455,
+            "35": 576,
+            "45": 514,
+            "70": 409,
+            "56": 477,
+            "15": 657,
+            "20": 638,
+            "22": 630,
+            "39": 529,
+            "54": 475,
+            "7": 689,
+            "50": 492,
+            "77": 377,
+            "48": 506,
+            "5": 702,
+            "33": 564,
+            "11": 684,
+            "61": 448,
+            "40": 541,
+            "10": 670,
+            "24": 613,
+            "59": 465,
+            "37": 555,
+            "14": 656,
+            "49": 504,
+            "52": 488,
+            "47": 509,
+            "72": 390,
+            "43": 537,
+            "68": 405,
+            "3": 709,
+            "28": 590,
+            "23": 621,
+            "58": 443,
+            "25": 607,
+            "63": 442,
+            "69": 417,
+            "32": 581,
+            "79": 364,
+            "1": 715,
+            "67": 421,
+            "29": 598,
+            "6": 694,
+            "64": 434,
+            "76": 379,
+            "73": 404,
+            "51": 490,
+            "42": 523,
+            "75": 385,
+            "65": 437,
+            "74": 388,
+            "30": 586,
+            "21": 632,
+            "13": 653,
+            "66": 416,
+            "57": 460
+          },
+          "service_leads_by_kind": {
+            "0": {
+              "min": 1536,
+              "max": 1536,
+              "zero": 0,
+              "records": 1
+            },
+            "1": {
+              "min": 0,
+              "max": 116140,
+              "zero": 24214,
+              "records": 54202
+            },
+            "2": {
+              "min": 3,
+              "max": 116140,
+              "zero": 0,
+              "records": 29988
+            },
+            "3": {
+              "min": 0,
+              "max": 0,
+              "zero": 6748,
+              "records": 6748
+            },
+            "4": {
+              "min": 0,
+              "max": 0,
+              "zero": 6748,
+              "records": 6748
+            }
+          },
+          "logical_sample_gaps_by_channel": {
+            "0": {
+              "183296": 6747
+            },
+            "1": {
+              "183296": 6747
+            }
+          },
+          "discarded_prehandler_subcycle_units": 12896768,
+          "final_accumulators": [
+            13981,
+            -3813,
+            0,
+            0
+          ],
+          "final_accumulator_times": [
+            41,
+            41,
+            41,
+            41
+          ],
+          "complete_actual_accumulators_and_logical_intervals_matching": true
+        },
+        "actual_record_mutations_rejected": {
+          "initial_area": true,
+          "interval": true,
+          "logical_time": true,
+          "average": true,
+          "budget": true,
+          "sample": true,
+          "missing_sample": true
+        },
+        "mixer_stream_sha256": "f351e67d5c878fbb9c67e5d62e99cc0895891aa69bc134eecec5197f9f3b0075",
+        "existing_original_telemetry_unchanged": true,
+        "reference_context": "demo",
+        "existing_telemetry_files_unchanged": [
+          "audio_samples.bin",
+          "audio_word_states.bin"
+        ],
+        "observed_mixer_call_range": [
+          60,
+          93
+        ],
+        "scope": "All original logical intervals, actual accumulator budgets, emitted Paula averages and consumed bytes within the explicit mixer call range. Entire replay PCM/RAM/state/video remain strict. No native latency constant or complete native waveform acceptance."
+      },
+      "files": {
+        "snapshot.json": {
+          "path": "build/native-audio/ram-mixer-clock-budget-warm/snapshot.json",
+          "sha256": "9d11210242c78209857613884588ced5eded47cd7a508270b1e280e352cdfaec"
+        },
+        "clock.json": {
+          "path": "build/native-audio/ram-mixer-clock-budget-warm/clock.json",
+          "sha256": "24176f51b8215664e836b5e3fc08d163854837e0b459d84b6af7670092037d20"
+        },
+        "comparison.json": {
+          "path": "build/native-audio/ram-mixer-clock-budget-warm/comparison.json",
+          "sha256": "c29a6c16102d9c73a16a9255bb86e1f68ad7f3d51ad7f5c191dcd297452bed12"
+        },
+        "retention.json": {
+          "path": "build/native-audio/ram-mixer-clock-budget-warm/retention.json",
+          "sha256": "24991bfc2e57affdd726ead63853a2b2fd26b6d8b88c77de9cc818db65ec6fca"
+        }
+      },
+      "compressed_report_rechecks_identical": true
+    },
+    "warm_initial": {
+      "path": "build/native-audio/mixer-clock-warm",
+      "authority": {
+        "core_sha256": "2efa42e2b508619a2cd69cff1c6ec488ec51b8e9c803d3492cfa916b5009ded2",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+      },
+      "observed_range": [
+        60,
+        93
+      ],
+      "clock": {
+        "clock": {
+          "observed_calls": 34,
+          "exact_predicted_output_boundaries": 29988,
+          "exact_observed_clock_snapshots": 35,
+          "source_clock_hz": 3552550.0,
+          "source_output_interval_raw": 41245.0234375,
+          "output_raw_gaps": {
+            "41245": 29285,
+            "41246": 702
+          },
+          "final_countdown_bits": 1184567484,
+          "final_audio_last_cycle": 425431225856,
+          "actual_source_countdown_and_all_output_boundaries_matching": true
+        },
+        "actual_record_mutations_rejected": {
+          "initial_countdown": true,
+          "interval": true,
+          "geometry": true,
+          "endpoint_countdown": true,
+          "output_time": true,
+          "lost_output": true
+        },
+        "mixer_stream_sha256": "f351e67d5c878fbb9c67e5d62e99cc0895891aa69bc134eecec5197f9f3b0075",
+        "unchanged_complete_mixer_stream": true,
+        "clock_free_baseline": "build\\native-audio\\mixer-bounded-warm",
+        "timeline_report_sha256": "c29a6c16102d9c73a16a9255bb86e1f68ad7f3d51ad7f5c191dcd297452bed12",
+        "observer_manifest_sha256": "b44f75e790a4df50e8d399c8daf2cb416962600c77e4f36ebad6c747ae05f562",
+        "scope": "Observed original clock inputs and exact initial countdown predict every output boundary and final countdown in the bounded complete mixer window. Existing complete execution/PCM preservation remains prerequisite. Native playback and its frequency are unchanged; no inferred phase or waveform alignment."
+      },
+      "complete_mixer_and_execution": {
+        "preserved_execution": {
+          "scope": "All observed original consumed sample bytes and actual word provenance; complete PCM, DMA, event log and execution preserved. Service timestamps are not an independent mixer-time reconstruction. Native onset/handoff/waveform remains open.",
+          "replay_calls": 94,
+          "stereo_pcm_frames": 82908,
+          "consumed_bytes": 37311,
+          "bytes_by_channel": [
+            18656,
+            18655,
+            0,
+            0
+          ],
+          "actual_fetch_word_differences": 0,
+          "explicit_initial_unknown_provenance": [
+            {
+              "index": 0,
+              "call": 1,
+              "cycle": 422048186368,
+              "address": 4294967295,
+              "word": 1282,
+              "value": 2,
+              "channel": 0,
+              "state": 3,
+              "beam": [
+                22,
+                4
+              ]
+            },
+            {
+              "index": 1,
+              "call": 1,
+              "cycle": 422048227328,
+              "address": 4294967295,
+              "word": 65278,
+              "value": -2,
+              "channel": 1,
+              "state": 2,
+              "beam": [
+                102,
+                4
+              ]
+            },
+            {
+              "index": 3,
+              "call": 1,
+              "cycle": 422048410624,
+              "address": 4294967295,
+              "word": 65278,
+              "value": -2,
+              "channel": 1,
+              "state": 3,
+              "beam": [
+                6,
+                6
+              ]
+            }
+          ],
+          "first_samples_by_channel": [
+            {
+              "index": 0,
+              "call": 1,
+              "cycle": 422048186368,
+              "address": 4294967295,
+              "word": 1282,
+              "value": 2,
+              "channel": 0,
+              "state": 3,
+              "beam": [
+                22,
+                4
+              ]
+            },
+            {
+              "index": 1,
+              "call": 1,
+              "cycle": 422048227328,
+              "address": 4294967295,
+              "word": 65278,
+              "value": -2,
+              "channel": 1,
+              "state": 2,
+              "beam": [
+                102,
+                4
+              ]
+            },
+            null,
+            null
+          ],
+          "authority": {
+            "core_sha256": "2efa42e2b508619a2cd69cff1c6ec488ec51b8e9c803d3492cfa916b5009ded2",
+            "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+            "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+            "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+            "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+          },
+          "unmodified_authority": {
+            "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+            "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+            "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+            "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+            "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+          },
+          "observer_manifest_sha256": "b44f75e790a4df50e8d399c8daf2cb416962600c77e4f36ebad6c747ae05f562",
+          "sample_stream_sha256": "4c6952cd479377cc60945a9b57c04439687b5a020bffe6f3e4cc17267f72db21",
+          "sample_stream_record_bytes": 20,
+          "pcm_sha256": "068bf398d6a3dd11819dd742fd00926accd3332c8602047328a7805ed71fa14b",
+          "dma_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+          "event_log_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+          "source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+          "fetch_content_witness": "build\\native-audio\\dma-complete-demo",
+          "fetch_witness_scope": "Same-channel address/word contents from actual DMA. Consumed-byte ordering is observed directly; this lookup does not infer DMA delivery time. A wider recording is explicit when supplied.",
+          "unchanged_snapshot_fields": true,
+          "unchanged_complete_ram_state": true,
+          "unchanged_video": true,
+          "all_pcm_chunks_and_samples_exact": true,
+          "actual_dma_stream_exact": true,
+          "max_samples_per_call": 398,
+          "native_runtime_changed": false,
+          "native_waveform_accepted": false,
+          "zero_word_samples": [
+            {
+              "index": 37265,
+              "call": 94,
+              "cycle": 425463398400,
+              "address": 154226,
+              "word": 0,
+              "value": 0,
+              "channel": 1,
+              "state": 2,
+              "beam": [
+                185,
+                279
+              ]
+            },
+            {
+              "index": 37267,
+              "call": 94,
+              "cycle": 425463581696,
+              "address": 154226,
+              "word": 0,
+              "value": 0,
+              "channel": 1,
+              "state": 3,
+              "beam": [
+                89,
+                281
+              ]
+            }
+          ],
+          "zero_word_classification": "Both bytes emitted during existing channel-1 playback",
+          "channel2_zero_prefetch_emitted_bytes": 0
+        },
+        "timeline": {
+          "records": 97687,
+          "records_by_kind": {
+            "0": 1,
+            "1": 54202,
+            "2": 29988,
+            "3": 6748,
+            "4": 6748
+          },
+          "exact_output_averages": 29988,
+          "exact_consumed_transitions": 13496,
+          "duration_counts": {
+            "38": 565,
+            "18": 644,
+            "62": 439,
+            "17": 657,
+            "27": 604,
+            "53": 464,
+            "80": 10826,
+            "26": 601,
+            "12": 674,
+            "41": 513,
+            "78": 368,
+            "2": 715,
+            "9": 678,
+            "71": 403,
+            "8": 696,
+            "55": 478,
+            "16": 657,
+            "44": 524,
+            "4": 705,
+            "31": 580,
+            "36": 548,
+            "34": 566,
+            "46": 513,
+            "0": 599,
+            "19": 641,
+            "60": 455,
+            "35": 576,
+            "45": 514,
+            "70": 409,
+            "56": 477,
+            "15": 657,
+            "20": 638,
+            "22": 630,
+            "39": 529,
+            "54": 475,
+            "7": 689,
+            "50": 492,
+            "77": 377,
+            "48": 506,
+            "5": 702,
+            "33": 564,
+            "11": 684,
+            "61": 448,
+            "40": 541,
+            "10": 670,
+            "24": 613,
+            "59": 465,
+            "37": 555,
+            "14": 656,
+            "49": 504,
+            "52": 488,
+            "47": 509,
+            "72": 390,
+            "43": 537,
+            "68": 405,
+            "3": 709,
+            "28": 590,
+            "23": 621,
+            "58": 443,
+            "25": 607,
+            "63": 442,
+            "69": 417,
+            "32": 581,
+            "79": 364,
+            "1": 715,
+            "67": 421,
+            "29": 598,
+            "6": 694,
+            "64": 434,
+            "76": 379,
+            "73": 404,
+            "51": 490,
+            "42": 523,
+            "75": 385,
+            "65": 437,
+            "74": 388,
+            "30": 586,
+            "21": 632,
+            "13": 653,
+            "66": 416,
+            "57": 460
+          },
+          "service_leads_by_kind": {
+            "0": {
+              "min": 1536,
+              "max": 1536,
+              "zero": 0,
+              "records": 1
+            },
+            "1": {
+              "min": 0,
+              "max": 116140,
+              "zero": 24214,
+              "records": 54202
+            },
+            "2": {
+              "min": 3,
+              "max": 116140,
+              "zero": 0,
+              "records": 29988
+            },
+            "3": {
+              "min": 0,
+              "max": 0,
+              "zero": 6748,
+              "records": 6748
+            },
+            "4": {
+              "min": 0,
+              "max": 0,
+              "zero": 6748,
+              "records": 6748
+            }
+          },
+          "logical_sample_gaps_by_channel": {
+            "0": {
+              "183296": 6747
+            },
+            "1": {
+              "183296": 6747
+            }
+          },
+          "discarded_prehandler_subcycle_units": 12896768,
+          "final_accumulators": [
+            13981,
+            -3813,
+            0,
+            0
+          ],
+          "final_accumulator_times": [
+            41,
+            41,
+            41,
+            41
+          ],
+          "complete_actual_accumulators_and_logical_intervals_matching": true
+        },
+        "actual_record_mutations_rejected": {
+          "initial_area": true,
+          "interval": true,
+          "logical_time": true,
+          "average": true,
+          "budget": true,
+          "sample": true,
+          "missing_sample": true
+        },
+        "mixer_stream_sha256": "f351e67d5c878fbb9c67e5d62e99cc0895891aa69bc134eecec5197f9f3b0075",
+        "existing_original_telemetry_unchanged": true,
+        "reference_context": "demo",
+        "existing_telemetry_files_unchanged": [
+          "audio_samples.bin",
+          "audio_word_states.bin"
+        ],
+        "observed_mixer_call_range": [
+          60,
+          93
+        ],
+        "scope": "All original logical intervals, actual accumulator budgets, emitted Paula averages and consumed bytes within the explicit mixer call range. Entire replay PCM/RAM/state/video remain strict. No native latency constant or complete native waveform acceptance."
+      },
+      "files": {
+        "snapshot.json": {
+          "path": "build/native-audio/mixer-clock-warm/snapshot.json",
+          "sha256": "7e037b9967c382830b9ad78abee2eb8ce4e5bf4c424aa7b2a2735397c4d9a2f3"
+        },
+        "clock.json": {
+          "path": "build/native-audio/mixer-clock-warm/clock.json",
+          "sha256": "24176f51b8215664e836b5e3fc08d163854837e0b459d84b6af7670092037d20"
+        },
+        "comparison.json": {
+          "path": "build/native-audio/mixer-clock-warm/comparison.json",
+          "sha256": "c29a6c16102d9c73a16a9255bb86e1f68ad7f3d51ad7f5c191dcd297452bed12"
+        },
+        "retention.json": {
+          "path": "build/native-audio/mixer-clock-warm/retention.json",
+          "sha256": "ec99d9e0dc2325c29019f346f93688a195e108a5fb210437184553501a2025db"
+        }
+      },
+      "compressed_report_rechecks_identical": false
+    }
+  },
+  "startup_phase": {
+    "path": "build/native-audio/mixer-clock-startup/complete-capture/startup-phase-owners.json",
+    "sha256": "3072693297080140be708a2caa88ac763d390e80ea4c5faf5d6d1e632d66aedf",
+    "actual_source": {
+      "slow_ram_sha256": "34abf46a1ef4e5dfffb0cca12b6fd3b48787964d5bb8f310682fdebb9017d6ae",
+      "handler_start": "C502B8",
+      "canonical_handler_start": "C500D8",
+      "relocation_delta": "0001E0",
+      "handler_bytes_sha256": "9c667538c71a5fb5230ffba2e84e154abc76ac325340a48e8dd4077569a75f5e",
+      "instructions": [
+        {
+          "pc": "C502B8",
+          "bytes": "48e7f0f8",
+          "mnemonic": "movem.l",
+          "operands": "d0-d3/a0-a4, -(a7)"
+        },
+        {
+          "pc": "C502BC",
+          "bytes": "33e9001600dff09c",
+          "mnemonic": "move.w",
+          "operands": "$16(a1), $dff09c.l"
+        },
+        {
+          "pc": "C502C4",
+          "bytes": "20690000",
+          "mnemonic": "movea.l",
+          "operands": "$0(a1), a0"
+        },
+        {
+          "pc": "C502C8",
+          "bytes": "24690004",
+          "mnemonic": "movea.l",
+          "operands": "$4(a1), a2"
+        },
+        {
+          "pc": "C502CC",
+          "bytes": "266a0000",
+          "mnemonic": "movea.l",
+          "operands": "$0(a2), a3"
+        },
+        {
+          "pc": "C502D0",
+          "bytes": "b7fc00000000",
+          "mnemonic": "cmpa.l",
+          "operands": "#$0, a3"
+        },
+        {
+          "pc": "C502D6",
+          "bytes": "673c",
+          "mnemonic": "beq.b",
+          "operands": "$c50314"
+        },
+        {
+          "pc": "C502D8",
+          "bytes": "216b00000000",
+          "mnemonic": "move.l",
+          "operands": "$0(a3), $0(a0)"
+        },
+        {
+          "pc": "C502DE",
+          "bytes": "202b0004",
+          "mnemonic": "move.l",
+          "operands": "$4(a3), d0"
+        },
+        {
+          "pc": "C502E2",
+          "bytes": "e280",
+          "mnemonic": "asr.l",
+          "operands": "#$1, d0"
+        },
+        {
+          "pc": "C502E4",
+          "bytes": "31400004",
+          "mnemonic": "move.w",
+          "operands": "d0, $4(a0)"
+        },
+        {
+          "pc": "C502E8",
+          "bytes": "33e9001000dff096",
+          "mnemonic": "move.w",
+          "operands": "$10(a1), $dff096.l"
+        },
+        {
+          "pc": "C502F0",
+          "bytes": "4eb900c503c0",
+          "mnemonic": "jsr",
+          "operands": "$c503c0.l"
+        },
+        {
+          "pc": "C502F6",
+          "bytes": "0cabffffffff0010",
+          "mnemonic": "cmpi.l",
+          "operands": "#$ffffffff, $10(a3)"
+        },
+        {
+          "pc": "C502FE",
+          "bytes": "6732",
+          "mnemonic": "beq.b",
+          "operands": "$c50332"
+        },
+        {
+          "pc": "C50300",
+          "bytes": "53ab0010",
+          "mnemonic": "subq.l",
+          "operands": "#$1, $10(a3)"
+        },
+        {
+          "pc": "C50304",
+          "bytes": "6a2c",
+          "mnemonic": "bpl.b",
+          "operands": "$c50332"
+        },
+        {
+          "pc": "C50306",
+          "bytes": "256b00200000",
+          "mnemonic": "move.l",
+          "operands": "$20(a3), $0(a2)"
+        },
+        {
+          "pc": "C5030C",
+          "bytes": "276b00140010",
+          "mnemonic": "move.l",
+          "operands": "$14(a3), $10(a3)"
+        },
+        {
+          "pc": "C50312",
+          "bytes": "601e",
+          "mnemonic": "bra.b",
+          "operands": "$c50332"
+        },
+        {
+          "pc": "C50314",
+          "bytes": "317c00000008",
+          "mnemonic": "move.w",
+          "operands": "#$0, $8(a0)"
+        },
+        {
+          "pc": "C5031A",
+          "bytes": "317c007c0006",
+          "mnemonic": "move.w",
+          "operands": "#$7c, $6(a0)"
+        },
+        {
+          "pc": "C50320",
+          "bytes": "33e9001200dff096",
+          "mnemonic": "move.w",
+          "operands": "$12(a1), $dff096.l"
+        },
+        {
+          "pc": "C50328",
+          "bytes": "303c0190",
+          "mnemonic": "move.w",
+          "operands": "#$190, d0"
+        },
+        {
+          "pc": "C5032C",
+          "bytes": "04400001",
+          "mnemonic": "subi.w",
+          "operands": "#$1, d0"
+        },
+        {
+          "pc": "C50330",
+          "bytes": "66fa",
+          "mnemonic": "bne.b",
+          "operands": "$c5032c"
+        },
+        {
+          "pc": "C50332",
+          "bytes": "4cdf1f0f",
+          "mnemonic": "movem.l",
+          "operands": "(a7)+, d0-d3/a0-a4"
+        },
+        {
+          "pc": "C50336",
+          "bytes": "4e75",
+          "mnemonic": "rts",
+          "operands": ""
+        }
+      ],
+      "actual_stop_start_events": [
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 178,
+          "hpos": 156,
+          "address": 14676124,
+          "value": 32896,
+          "source": 12911008,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 180,
+          "hpos": 12,
+          "address": 14676118,
+          "value": 1,
+          "source": 12911392,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 201,
+          "hpos": 55,
+          "address": 14676124,
+          "value": 33024,
+          "source": 12911008,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 202,
+          "hpos": 108,
+          "address": 14676118,
+          "value": 2,
+          "source": 12911392,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 264,
+          "hpos": 152,
+          "address": 14676124,
+          "value": 32896,
+          "source": 12911008,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 265,
+          "hpos": 187,
+          "address": 14676118,
+          "value": 1,
+          "source": 12911392,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 283,
+          "hpos": 117,
+          "address": 14676124,
+          "value": 32896,
+          "source": 12911008,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 284,
+          "hpos": 168,
+          "address": 14676118,
+          "value": 33281,
+          "source": 12911336,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 286,
+          "hpos": 100,
+          "address": 14676118,
+          "value": 33281,
+          "source": 12911336,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 288,
+          "hpos": 182,
+          "address": 14676124,
+          "value": 33024,
+          "source": 12911008,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 289,
+          "hpos": 198,
+          "address": 14676118,
+          "value": 2,
+          "source": 12911392,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 307,
+          "hpos": 126,
+          "address": 14676124,
+          "value": 33024,
+          "source": 12911008,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 308,
+          "hpos": 158,
+          "address": 14676118,
+          "value": 33282,
+          "source": 12911336,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 310,
+          "hpos": 70,
+          "address": 14676118,
+          "value": 33282,
+          "source": 12911336,
+          "copper": false
+        }
+      ],
+      "first_dma_enable_by_channel": [
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 284,
+          "hpos": 168,
+          "address": 14676118,
+          "value": 33281,
+          "source": 12911336,
+          "copper": false
+        },
+        {
+          "kind": "write",
+          "call": 3821,
+          "hardware_frame": 3821,
+          "vpos": 308,
+          "hpos": 158,
+          "address": 14676118,
+          "value": 33282,
+          "source": 12911336,
+          "copper": false
+        }
+      ],
+      "first_consumed_bytes_by_channel": [
+        {
+          "index": 0,
+          "call": 3821,
+          "cycle": 430010688000,
+          "address": 117392,
+          "word": 0,
+          "value": 0,
+          "channel": 0,
+          "state": 2,
+          "beam": [
+            18,
+            286
+          ]
+        },
+        {
+          "index": 16,
+          "call": 3821,
+          "cycle": 430013478400,
+          "address": 117392,
+          "word": 0,
+          "value": 0,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            20,
+            310
+          ]
+        }
+      ],
+      "enable_gap_chip_clocks": 5438,
+      "enable_to_first_consumed_chip_clocks": [
+        304,
+        316
+      ],
+      "first_consumed_gap_chip_clocks": 5450,
+      "scope": "Actual relocated startup handler and published/consumed timing. Empty stop has a source 400-iteration wait. No guessed CPU charge, native delay or fitted phase offset."
+    }
+  },
+  "compressed_observer_witnesses": {
+    "audio.c": {
+      "file": "build/native-audio/mixer-clock-probe-engine/clock-witnesses/audio.c.gz",
+      "raw_bytes": 94127,
+      "stored_bytes": 19942,
+      "decoded_sha256": "a5ba4f8948b600550db7546a51fb4bdaee67afa316ccd4c007c254c5346b1067",
+      "encoded_sha256": "08137b97409dbb4f749a4e938788fe2ca970cecbf574d08a0e5ea46a7fb26220"
+    },
+    "audio.o": {
+      "file": "build/native-audio/mixer-clock-probe-engine/clock-witnesses/audio.o.gz",
+      "raw_bytes": 264901,
+      "stored_bytes": 245846,
+      "decoded_sha256": "818a65167777da7f9f8cf888d4ad4c3079224cf610ed92c0f7c51aa10914860a",
+      "encoded_sha256": "41c0d032e6c83aacb2259e5b7a260e1cf46c47da16b22f4220c1d8c240ec81a5"
+    },
+    "build.json": {
+      "file": "build/native-audio/mixer-clock-probe-engine/clock-witnesses/build.json.gz",
+      "raw_bytes": 41227,
+      "stored_bytes": 13755,
+      "decoded_sha256": "b44f75e790a4df50e8d399c8daf2cb416962600c77e4f36ebad6c747ae05f562",
+      "encoded_sha256": "252acf111cf0768a523a786a059cd6a771a63dec48ffd1dd7727f9c9fa137f04"
+    },
+    "system/ami9000.dll": {
+      "file": "build/native-audio/mixer-clock-probe-engine/clock-witnesses/ami9000.dll.gz",
+      "raw_bytes": 20273152,
+      "stored_bytes": 7556368,
+      "decoded_sha256": "2efa42e2b508619a2cd69cff1c6ec488ec51b8e9c803d3492cfa916b5009ded2",
+      "encoded_sha256": "f58c9dd86ed2b4e7317de6a62107407f91dc564e9da004afcfc6c7ea126cda58"
+    }
+  },
+  "protocol_tests": {
+    "command": "python -m unittest discover -s tools/native -p 'test_original_audio_*.py'",
+    "tests": 48,
+    "terminal_exit_code": 0
+  },
+  "retention_recovery": "First warm and startup passing raw streams were pruned after full validation. Exact clock-free compressed witnesses reused after encoded/decoded/declaration hash checks; unique clock metadata retained. Final fresh warm recording exercised metadata budget and verified fresh gzip encoded/decoded equality before hardlink sharing.",
+  "limits": [
+    "Observed profile is non-interlaced and without line toggling; unsupported interval profiles reject.",
+    "Measured channel gaps are not native delays; isolated busy-loop CPU/bus charge remains unqualified.",
+    "No native input clocks, frequency fitting, phase search, reference RAM or waveform shifts.",
+    "Named-state cleanup outside this goal; uninterrupted campaign waived."
+  ]
+}

@@ -7,6 +7,7 @@ PCM/execution preservation. This module never supplies native game state.
 import ctypes as C
 import hashlib
 import json
+import math
 import struct
 from pathlib import Path
 
@@ -19,6 +20,7 @@ WORD = struct.Struct('<QIIIHHHHHHBBBBH')
 LIVE = struct.Struct('<QIIIIHHHHBBBBBBB')
 MIXER_MAGIC = b'FA18_ORIGINAL_AUDIO_MIXER_V1\n'
 MIXER = struct.Struct('<QQI4i4IB')
+CLOCK = struct.Struct('<QQ5I3i2I')
 CYCLE_UNIT = 512  # sysdeps.h; e9k_debug_read_cycle_count returns get_cycles()/512.
 
 
@@ -40,6 +42,25 @@ def mixer_records(payload, before, after):
         previous = service
         yield dict(service_cycle=service, logical_cycle=logical, duration=duration,
                    values=rest[:4], times=rest[4:8], kind=kind)
+
+
+def clock_record(payload):
+    if len(payload) != CLOCK.size:
+        raise ValueError('Incomplete original audio clock snapshot')
+    names = ('service_cycle', 'last_cycle', 'scaled_original_bits', 'scaled_current_bits',
+             'next_output_bits', 'sync_multiplier_bits', 'output_rate', 'nominal_lines',
+             'short_line_clocks', 'long_field', 'fake_refresh_bits', 'configured_refresh_bits')
+    row = dict(zip(names, CLOCK.unpack(payload)))
+    if row['service_cycle'] < row['last_cycle'] or not row['output_rate'] or not (
+            0 < row['nominal_lines'] < 1000 and 0 < row['short_line_clocks'] < 1000 and
+            row['long_field'] in (0, 1)):
+        raise ValueError('Invalid original audio clock state')
+    floats = {name: struct.unpack('<f', struct.pack('<I', value))[0]
+              for name, value in row.items() if name.endswith('_bits')}
+    if not all(math.isfinite(value) for value in floats.values()) or any(
+            floats[name] <= 0 for name in ('scaled_original_bits', 'scaled_current_bits', 'sync_multiplier_bits')):
+        raise ValueError('Invalid original audio clock floats')
+    return row
 
 
 def live_records(payload):
@@ -141,6 +162,29 @@ class AudioSamplesWriter:
             self.mixer_enable(mixer_call_range is None)
         elif mixer_call_range is not None:
             raise RuntimeError('Mixer call range requires a mixer observer DLL')
+        self.clock_snapshots = None
+        if 'mixer_clock_include_sha256' in self.manifest:
+            if not self.mixer_file or self.manifest['mixer_clock_record_bytes'] != CLOCK.size:
+                raise RuntimeError('Reference audio clock observer ABI changed')
+            if engine.bind('e9k_debug_audio_clock_record_size', C.c_uint)() != CLOCK.size:
+                raise RuntimeError('Reference audio clock record size differs')
+            self.clock_read = engine.bind('e9k_debug_audio_clock_read', C.c_uint, C.POINTER(C.c_void_p))
+            self.clock_snapshots = []
+
+    def read_clock(self, call, boundary):
+        pointer = C.c_void_p()
+        if self.clock_read(C.byref(pointer)) != 1 or not pointer.value:
+            raise RuntimeError('Missing original audio clock snapshot')
+        row = clock_record(C.string_at(pointer, CLOCK.size))
+        snapshot = dict(call=call, boundary=boundary, **row)
+        # Include the pretty-printed metadata at its actual snapshot nesting,
+        # not just the smaller C wire record, in the shared diagnostic budget.
+        encoded = json.dumps(snapshot, indent=2).encode('utf8')
+        charge = len(encoded) + 8 * (len(snapshot) + 2) + 2
+        if self.engine.audio_capture_bytes + charge > self.engine.audio_capture_budget:
+            raise RuntimeError('Original audio clock capture exceeds shared budget')
+        self.engine.audio_capture_bytes += charge
+        self.clock_snapshots.append(snapshot)
 
     def before_call(self, call):
         """Read current accumulators at the chosen ordinary replay boundary."""
@@ -150,6 +194,8 @@ class AudioSamplesWriter:
                 self.mixer_enable(1)
             elif call == last + 1:
                 self.mixer_enable(0)
+        if self.clock_snapshots is not None and call == (self.mixer_call_range[0] if self.mixer_call_range else 1):
+            self.read_clock(call, 'before')
 
     def write_mixer(self, data):
         if self.engine.audio_capture_bytes + len(data) > self.engine.audio_capture_budget:
@@ -210,6 +256,9 @@ class AudioSamplesWriter:
             self.write_mixer(data)
             self.mixer_total += records
             self.mixer_max = max(self.mixer_max, records)
+            if self.clock_snapshots is not None and (self.mixer_call_range is None or
+                    self.mixer_call_range[0] <= call <= self.mixer_call_range[1]):
+                self.read_clock(call, 'after')
         self.previous_cycle = after
         self.calls += 1
         self.samples += count
@@ -252,4 +301,6 @@ class AudioSamplesWriter:
                 record_bytes=MIXER.size, ring_records=65536)
             if self.mixer_call_range is not None:
                 report['mixer_timeline']['observed_call_range'] = list(self.mixer_call_range)
+            if self.clock_snapshots is not None:
+                report['mixer_timeline']['clock_snapshots'] = self.clock_snapshots
         return report
