@@ -140,10 +140,13 @@ def main():
         sealed_window = json.loads((args.window / 'report.json').read_text())
         assert (sealed_window['first'], sealed_window['last']) == (first, last)
     oracle = ROOT / 'build/recomp/native_frame_body_oracle.exe'
+    oracle_sources = ('tools/native/native_frame_body_oracle.c', 'tools/native/native_records_oracle.c')
+    oracle_source_hashes = {name: digest((ROOT / name).read_bytes()) for name in oracle_sources}
     with (args.out / 'oracle-build.log').open('w') as log:
         subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(oracle.relative_to(ROOT)),
                         '--main', 'tools/native/native_frame_body_oracle.c'], cwd=ROOT, stdout=log,
                        stderr=subprocess.STDOUT, check=True)
+    oracle_hash = digest(oracle.read_bytes())
     env = {k: v for k, v in os.environ.items() if not k.startswith(('FA18_FRAME_', 'FA18_TRACE_', 'FA18_LOOP_', 'FA18_MISSION_', 'FA18_ORIGINAL_PILOT_'))}
     if 'message_shown' in {f['name'] for f in header['fields']}:
         env['FA18_TRACE_MESSAGE_FIELDS'] = '1'
@@ -231,9 +234,12 @@ def main():
         with stream.open('rb') as source, gzip.GzipFile(filename=str(retained), mode='wb', mtime=0) as target:
             while chunk := source.read(1024 * 1024):
                 target.write(chunk)
+        assert digest(oracle.read_bytes()) == oracle_hash, 'Original body oracle changed during comparison'
+        assert {name: digest((ROOT / name).read_bytes()) for name in oracle_sources} == oracle_source_hashes
     assert digest(args.runner.read_bytes()) == runner_hash, 'Runner changed during verification'
     report = dict(first=first, last=last, native_first=nf, native_last=nl, bodies=len(identities),
                   runner_sha256=runner_hash, reference_report_sha256=digest((args.reference / 'report.json').read_bytes()),
+                  original_body_oracle_sha256=oracle_hash, original_body_oracle_sources_sha256=oracle_source_hashes,
                   native_trace_sha256=trace_hash, native_final_ram_sha256=final_hash,
                   native_owned_input_reference=args.native_input_reference,
                   source_update_evidence=update,

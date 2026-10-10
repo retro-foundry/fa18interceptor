@@ -45,7 +45,13 @@
 #include <stdlib.h>
 
 static void refresh_child(void *context,enum ContextRefreshChild child);
-typedef struct { int all; DisplaySortResult sort; } ContextSort;
+typedef struct {
+    int all;
+    DisplaySortResult sort;
+    uint16_t template_translation_word;
+    int has_template_translation;
+    int retain_template_save;
+} ContextSort;
 static void refresh_native_context_sort(int sort_all,const uint32_t *projection_factor) {
     ContextSort context={.all=sort_all};
     /* C1C5F0/C1C5F4 leave the viewed record's masked Z in the ordinary
@@ -53,6 +59,16 @@ static void refresh_native_context_sort(int sort_all,const uint32_t *projection_
     if(projection_factor) {
         context.sort.planar_factor=*projection_factor;
         context.sort.has_factor=1;
+        /* C1C5D8 publishes the ordinary caller's D5 as projection-origin Z.
+         * Independent views preserve C2E5EE's signed last-row product's
+         * upper word through C2E346's word-only cosine operations and
+         * C1C2C8's save/restore. Two-angle coefficients and the source zoom
+         * limit ($80) bound it to a signed word, retained at matrix +16. */
+        context.template_translation_word=rd_u8(CONTEXT_SELECT)
+            ? (uint16_t)((int32_t)rd_s16(VIEW_ANGLE_MATRIX+16)>>16)
+            : (uint16_t)(rd_u32(PROJECTION_ORIGIN+8)>>16);
+        context.has_template_translation=1;
+        context.retain_template_save=1;
     } else if(!rd_u8(CONTEXT_SELECT)) {
         const gaddr record=CONTROL_RECORDS+(gaddr)(int32_t)rd_s16(VIEW_RECORD);
         context.sort.planar_factor=rd_u32(record+0x1c)&0x3fffffu;
@@ -109,6 +125,20 @@ void native_flight_initialize(NativeFrontend *game) {
 }
 static void template_sort_factor(void *context,const TemplatePlacementEvent *event) {
     ContextSort *sort=context;
+    if(event->phase==TEMPLATE_CELL) {
+        /* C1DCF6/C1DCFE replace D5 with the actual signed cell translation.
+         * It survives the rest of this template call and enters the next. */
+        sort->template_translation_word=(uint16_t)((uint32_t)event->y>>16);
+        sort->has_template_translation=1;
+    } else if(event->phase==TEMPLATE_EXPAND_BEGIN && sort->retain_template_save && sort->has_template_translation) {
+        /* C1D3F4 saves D2-D5/A0-A5 before each band expansion. Saved D5's
+         * upper word overlaps C1EE14's later retained model result. The
+         * child restores D5, so publish the incoming translation, not its
+         * internal bitset/count. This alias belongs to C0EFD4's ordinary
+         * projection caller. Startup/menu frames put the save elsewhere;
+         * their existing sort-output publication remains the owner. */
+        native_model_retain_result(sort->template_translation_word);
+    }
     if(event->phase==TEMPLATE_ORIGIN || event->phase==TEMPLATE_REVERSE_RECORD) {
         sort->sort.planar_factor=(uint32_t)event->y;
         sort->sort.has_factor=1;

@@ -1,5 +1,15 @@
 # Active port source ownership
 
+Complete native Mission Five bodies (2026-10-10): all 13,763 actual bodies
+now match original instructions. The template observer publishes the original
+incoming translation save in its ordinary caller frame; startup/menu owners
+remain verified. The exact failed body changes only its two placement-cache
+bytes to FFFF. Complete prefix/flight traces, RAM, counters and earned pilot
+remain unchanged. The independent original full capture preserves all 75,573
+observations, 117,099 snapshots and 37,899 drawing-owner returns. Complete
+cockpit drawing history, broader independent flights and sound matching
+remain open. See [template-save evidence](../analysis/native_mission_five_template_save_milestone.md).
+
 Complete mission-five body sweep (2026-10-10): 13,762 of 13,763 actual
 native bodies match original instructions; update 63,713 remains rejected
 for the C4F6DE placement-cache word. Its rendered pages match. Actual C1D3F4
