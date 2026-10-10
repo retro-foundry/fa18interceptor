@@ -1,0 +1,494 @@
+{
+  "date": "2026-10-10",
+  "scope": "The first independent mission-five drawing difference is explained by the original C332BC owner on actual earned-prefix state. Full independent flight drawing history remains open. No gameplay change or invented reset.",
+  "actual_owner": {
+    "actual_headup_components_match_original": true,
+    "owner": "C332BC",
+    "source_observation": 61956,
+    "native_update": 61253,
+    "states": {
+      "source": {
+        "complete_non_stack_ram_matching": true,
+        "selection_marker_before": 15007745,
+        "selection_marker_after": 15007745,
+        "projected_mark_before": 10682443,
+        "projected_mark_after": 10682443,
+        "range_rate_before": -112,
+        "range_rate_after": -112,
+        "previous_range_before": 4017,
+        "previous_range_after": 4017
+      },
+      "native": {
+        "complete_non_stack_ram_matching": true,
+        "selection_marker_before": 3660,
+        "selection_marker_after": 3660,
+        "projected_mark_before": 10682443,
+        "projected_mark_after": 10682443,
+        "range_rate_before": 252,
+        "range_rate_after": 252,
+        "previous_range_before": 5487,
+        "previous_range_after": 5487
+      }
+    },
+    "scene_difference_bytes_by_plane": [
+      103,
+      90,
+      101,
+      101,
+      0,
+      0,
+      0,
+      0
+    ],
+    "scene_differences_from_recorded_message_entry": {
+      "source": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "oracle_sha256": "615419d70a8296d00f3b67ac1a233bd4883f7176f49c2a27593f351bc5fd2432",
+    "input_encoded_sha256": {
+      "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C0F18E.dat.gz": "2e28eb2840caf89c5ac807181b8c2d8a37a5f715a34f2da42bd0429f49dbea38",
+      "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-radar.after.dat.gz": "36d63bca5480a0cfcf6118cc9835eb8c62babee049dde741c449c18ebe9c922a"
+    },
+    "scope": "Actual source/native radar-return inputs. Full independent drawing history and earlier marker/range producers remain separate."
+  },
+  "actual_input_probes": {
+    "scope": "Diagnostic-only substitution of actual retained source fields into actual native RAM; no gameplay substitution or full-flight acceptance.",
+    "cases": {
+      "range_rate": {
+        "component": {
+          "complete_non_stack_ram_matching": true,
+          "selection_marker_before": 3660,
+          "selection_marker_after": 3660,
+          "projected_mark_before": 10682443,
+          "projected_mark_after": 10682443,
+          "range_rate_before": -112,
+          "range_rate_after": -112,
+          "previous_range_before": 5487,
+          "previous_range_after": 5487
+        },
+        "actual_input_replacements": [
+          {
+            "address": "C45B46",
+            "size": 2
+          }
+        ],
+        "scene_difference_from_source": [
+          92,
+          90,
+          90,
+          90,
+          0,
+          0,
+          0,
+          0
+        ],
+        "scene_difference_from_native": [
+          11,
+          0,
+          11,
+          11,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "selection_marker": {
+        "component": {
+          "complete_non_stack_ram_matching": true,
+          "selection_marker_before": 15007745,
+          "selection_marker_after": 15007745,
+          "projected_mark_before": 10682443,
+          "projected_mark_after": 10682443,
+          "range_rate_before": 252,
+          "range_rate_after": 252,
+          "previous_range_before": 5487,
+          "previous_range_after": 5487
+        },
+        "actual_input_replacements": [
+          {
+            "address": "C4593A",
+            "size": 4
+          }
+        ],
+        "scene_difference_from_source": [
+          11,
+          0,
+          11,
+          11,
+          0,
+          0,
+          0,
+          0
+        ],
+        "scene_difference_from_native": [
+          92,
+          90,
+          90,
+          90,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "target_remnant": {
+        "component": {
+          "complete_non_stack_ram_matching": true,
+          "selection_marker_before": 3660,
+          "selection_marker_after": 3660,
+          "projected_mark_before": 10682443,
+          "projected_mark_after": 10682443,
+          "range_rate_before": 252,
+          "range_rate_after": 252,
+          "previous_range_before": 5487,
+          "previous_range_after": 5487
+        },
+        "actual_input_replacements": [
+          {
+            "address": "C45936",
+            "size": 4
+          }
+        ],
+        "scene_difference_from_source": [
+          103,
+          90,
+          101,
+          101,
+          0,
+          0,
+          0,
+          0
+        ],
+        "scene_difference_from_native": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "previous_range": {
+        "component": {
+          "complete_non_stack_ram_matching": true,
+          "selection_marker_before": 3660,
+          "selection_marker_after": 3660,
+          "projected_mark_before": 10682443,
+          "projected_mark_after": 10682443,
+          "range_rate_before": 252,
+          "range_rate_after": 252,
+          "previous_range_before": 4017,
+          "previous_range_after": 4017
+        },
+        "actual_input_replacements": [
+          {
+            "address": "C45B44",
+            "size": 2
+          }
+        ],
+        "scene_difference_from_source": [
+          103,
+          90,
+          101,
+          101,
+          0,
+          0,
+          0,
+          0
+        ],
+        "scene_difference_from_native": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "range_and_marker": {
+        "component": {
+          "complete_non_stack_ram_matching": true,
+          "selection_marker_before": 15007745,
+          "selection_marker_after": 15007745,
+          "projected_mark_before": 10682443,
+          "projected_mark_after": 10682443,
+          "range_rate_before": -112,
+          "range_rate_after": -112,
+          "previous_range_before": 5487,
+          "previous_range_after": 5487
+        },
+        "actual_input_replacements": [
+          {
+            "address": "C45B46",
+            "size": 2
+          },
+          {
+            "address": "C4593A",
+            "size": 4
+          }
+        ],
+        "scene_difference_from_source": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "scene_difference_from_native": [
+          103,
+          90,
+          101,
+          101,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "earned_prefix_carry": {
+    "source_prefix": {
+      "path": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\original-escort-wire-target",
+      "report_sha256": "bf7223ce2c9b9f4d4ee07ca7b5cdbecaf159a9a9d5e2c5145c56339fed0d1f55",
+      "iterations": 47814,
+      "trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+      "input_sha256": "7eadc1866543e748defcbb074e87258ed90f6cba21bca1158c72c07e88e19345",
+      "consumed_sha256": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+      "final_ram_sha256": "b2f55338d766629458ee868db4518c1f391896f53a960f6f5ea9cd35df09ffdf"
+    },
+    "native_prefix": {
+      "path": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\recorded-escort-template-carry-protected",
+      "report_sha256": "fd5da88ee636064154e1378606a4391cf8359fcb6108d4923587f74a1c622c98",
+      "save_sha256": "bf391e322af0f3853b83156ef64e58ab30c935a2e5a1094fc30a3972dcf95ee6",
+      "trace_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c",
+      "ram_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec",
+      "runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8"
+    },
+    "earned_prefix_final_fields": {
+      "source": {
+        "selection_marker": "00e50001",
+        "target_mark": "ffff0001",
+        "range_rate": "ff90",
+        "previous_range": "0fb1",
+        "selected_record": "ffff"
+      },
+      "native": {
+        "selection_marker": "00000645",
+        "target_mark": "00000e4c",
+        "range_rate": "00fc",
+        "previous_range": "156f",
+        "selected_record": "ffff"
+      }
+    },
+    "first_mission_five_fields": {
+      "source": {
+        "selection_marker": "00e50001",
+        "target_mark": "ffff0001",
+        "range_rate": "ff90",
+        "previous_range": "0fb1",
+        "selected_record": "ffff"
+      },
+      "native": {
+        "selection_marker": "00000645",
+        "target_mark": "00000e4c",
+        "range_rate": "00fc",
+        "previous_range": "156f",
+        "selected_record": "ffff"
+      }
+    },
+    "all_four_fields_preserved_from_actual_earned_prefix": true,
+    "scope": "Each independent game carries its own actual marker/range inputs from the previous completed flight. No claim that different escort routes have equal cached values, and no invented reset."
+  },
+  "early_input_history": {
+    "first": 61797,
+    "last": 61957,
+    "observations": 161,
+    "verified_continuation": {
+      "path": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\recorded-escort-template-carry-protected",
+      "report_sha256": "fd5da88ee636064154e1378606a4391cf8359fcb6108d4923587f74a1c622c98",
+      "save_sha256": "bf391e322af0f3853b83156ef64e58ab30c935a2e5a1094fc30a3972dcf95ee6",
+      "trace_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c",
+      "ram_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec",
+      "runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8"
+    }
+  },
+  "complete_bit_prediction": {
+    "states": {
+      "source": {
+        "complete_non_stack_ram_matching": true,
+        "selection_marker_before": 15007745,
+        "selection_marker_after": 15007745,
+        "projected_mark_before": 10682443,
+        "projected_mark_after": 10682443,
+        "range_rate_before": -112,
+        "range_rate_after": -112,
+        "previous_range_before": 4017,
+        "previous_range_after": 4017,
+        "complete_bit_transfer_matching": true,
+        "actual_all_plane_prediction_matching": true,
+        "predicted_bytes": 64000,
+        "complete_original_comparisons": 4,
+        "recorded_caller_scene_bytes_matching": 40960,
+        "mutation_rejections": {
+          "lost_set": {
+            "plane": 0,
+            "byte": 1491,
+            "bit": 1
+          },
+          "lost_clear": {
+            "plane": 0,
+            "byte": 5530,
+            "bit": 4
+          },
+          "wrong_page_role": true,
+          "omitted_owner": true
+        }
+      },
+      "native": {
+        "complete_non_stack_ram_matching": true,
+        "selection_marker_before": 3660,
+        "selection_marker_after": 3660,
+        "projected_mark_before": 10682443,
+        "projected_mark_after": 10682443,
+        "range_rate_before": 252,
+        "range_rate_after": 252,
+        "previous_range_before": 5487,
+        "previous_range_after": 5487,
+        "complete_bit_transfer_matching": true,
+        "actual_all_plane_prediction_matching": true,
+        "predicted_bytes": 64000,
+        "complete_original_comparisons": 4,
+        "recorded_caller_scene_bytes_matching": 40960,
+        "mutation_rejections": {
+          "lost_set": {
+            "plane": 0,
+            "byte": 1491,
+            "bit": 1
+          },
+          "lost_clear": {
+            "plane": 0,
+            "byte": 5530,
+            "bit": 4
+          },
+          "wrong_page_role": true,
+          "omitted_owner": true
+        }
+      }
+    },
+    "scene_difference_bytes_by_plane": [
+      103,
+      90,
+      101,
+      101,
+      0,
+      0,
+      0,
+      0
+    ],
+    "oracle_sha256": "58b255d6fdf0eb6c8a857e6952fba5b321f7c8e22ea5ce5d695f1e9d29598a3b",
+    "source_sha256": {
+      "check_headup_transfer.py": "960190617024eff7008220f1b89aced70ad78976c43768384ec3d0db1bff156d",
+      "native_headup_owner_oracle.c": "226cd9112cc0c01f5665db6d4885bcc46b0a0c991f863203fa04ae2f9634ee4b",
+      "native_hud_oracle.c": "020a608e2389eb650b0a135982beaee9bff58885baf4c35f3053c0f80441374a",
+      "native_model_oracle.c": "857efdf66b5cab4df540724ad04dcd4230571ffe9ea31a8eee756052448e6b80"
+    },
+    "evidence_sha256": "25e551fdf81f82a67f94d1125892793bf74fa8154e1a5f73dd242c0ec97341df",
+    "input_encoded_sha256": {
+      "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C0F18E.dat.gz": "2e28eb2840caf89c5ac807181b8c2d8a37a5f715a34f2da42bd0429f49dbea38",
+      "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-radar.after.dat.gz": "36d63bca5480a0cfcf6118cc9835eb8c62babee049dde741c449c18ebe9c922a",
+      "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C322EE.dat.gz": "921ee5b0a3e2f8c8f62f8d13a0e70e6d0e1b93321223701508abb2f6e75fa975",
+      "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-message.before.dat.gz": "9d8a10faf4611b99da44a729765fee713d839c96e08bc99e125b5722ed6ac93f"
+    },
+    "scope": "Every actual head-up output bit and actual caller scene byte is predicted; real set/clear/role/omission controls reject. No pixel mask, gameplay input substitution or complete independent flight acceptance."
+  },
+  "evidence_sha256": {
+    "build\\native-flight\\mission-five-headup-owner\\report.json": "3cd919d614243441bc0197a34f5a3113c6956dfb58681f2ce2da2890dbdf0f40",
+    "build\\native-flight\\mission-five-headup-owner\\input-probes.json": "d21a683a10960c6c1611ab55b37914090c94bae645bd3cf597e73a4186fd2605",
+    "build\\native-flight\\mission-five-headup-owner\\early-input-history.json": "4558258f4deaae57e790577db04c1370dea7efa329b59227f02b7d06a8ed9701",
+    "build\\native-flight\\mission-five-headup-owner\\earned-prefix-carry.json": "3c8a6c2bf1ce0367d3240c28d3d197686eeb8bd0f52c6d43fc52188087b9da78",
+    "build\\native-flight\\mission-five-headup-transfer\\report.json": "b8bff97cf075f9de48a852aa7cc8276f10145a3737cb0153422981dbf6260acd",
+    "build\\native-flight\\mission-five-headup-prediction\\report.json": "fae96d46bd94fe69a248b50e74a49f03b1df4251eb986077a73726eeca49f1d2",
+    "build\\native-flight\\mission-five-headup-owner\\native.after.dat.gz": "ab194bfdd0fefc04f6ba4b680037a68d2d0fdd5ed7dfcd2b5c98e149272ed920",
+    "build\\native-flight\\mission-five-headup-owner\\native.log": "7e23bc5d963688e2b3407b654c7661d9b50a8a2e5de3ff6e526e36494a4a991b",
+    "build\\native-flight\\mission-five-headup-owner\\native_headup_owner_oracle.exe.gz": "e4f7c417d9b8bcf4b540b725e3ae79aa03a25d191bfd74b4f64ff2bb922c71d8",
+    "build\\native-flight\\mission-five-headup-owner\\probe-previous_range.after.dat.gz": "4a5c166c2eaa14f533a0c2718341c0c0c55756db2fd3cb38033631e4a838dbd6",
+    "build\\native-flight\\mission-five-headup-owner\\probe-previous_range.before.dat.gz": "f23e5162d487ea197a85fe279ae742ebbed79dece4b95e02c9962544428a5944",
+    "build\\native-flight\\mission-five-headup-owner\\probe-range_and_marker.after.dat.gz": "ca997a152447db6fdb34dd44789c87a752f151c12be03325949f12633d3affaf",
+    "build\\native-flight\\mission-five-headup-owner\\probe-range_and_marker.before.dat.gz": "db0860811249659c42b757b4483af09fbcfdf7af7de1aa17c7135bfe7e851d73",
+    "build\\native-flight\\mission-five-headup-owner\\probe-range_rate.after.dat.gz": "aed0de00cf7f790c4167147e8800549c551c9a54b8e9be2bd682b4c4131d020e",
+    "build\\native-flight\\mission-five-headup-owner\\probe-range_rate.before.dat.gz": "08e93ee55993d116b39a08fe9e87d60e0e9285b44450d32e8059ce1830cd4e18",
+    "build\\native-flight\\mission-five-headup-owner\\probe-selection_marker.after.dat.gz": "d24426aee056dbb2b0628a1a5874c8da4201322bb87e3842a99c577a997bb041",
+    "build\\native-flight\\mission-five-headup-owner\\probe-selection_marker.before.dat.gz": "3b7c3026ed44a27270c75d8069c8b31007db5ac83175a324bb2307132e994d3f",
+    "build\\native-flight\\mission-five-headup-owner\\probe-target_remnant.after.dat.gz": "d8f29a053a84fb8236fef1ae8de5c824e09284f6435fc47319fdb5ad21f7b942",
+    "build\\native-flight\\mission-five-headup-owner\\probe-target_remnant.before.dat.gz": "eb4e9265407bd774860d76a420fddd792574145cee1afe87beebd6ec5d78df12",
+    "build\\native-flight\\mission-five-headup-owner\\source.after.dat.gz": "0f3187c5e68d975edea25c8e495f14a848b7df2375d36e5f3ec471a119c8cb65",
+    "build\\native-flight\\mission-five-headup-owner\\source.log": "3b55f17c205e6c1839754ac259317722d0ba1ad7f622e1e03bf2ede5edb14cfb",
+    "build\\native-flight\\mission-five-headup-transfer\\native.after.dat.gz": "ab194bfdd0fefc04f6ba4b680037a68d2d0fdd5ed7dfcd2b5c98e149272ed920",
+    "build\\native-flight\\mission-five-headup-transfer\\native.log": "5fae853c23ed7a86dac94c43a910a16ce9554490b37626ecc710bdcdad0da88b",
+    "build\\native-flight\\mission-five-headup-transfer\\native.transfer.bin.gz": "06079e91e97459911581305eb394dbeccc389c35d67e83de7af0d1a0f8b2cff9",
+    "build\\native-flight\\mission-five-headup-transfer\\native_headup_owner_oracle.exe.gz": "1248a171da4c9e4dd5dd446a4a1c3963376aa658e0aa8aa7d75bede046cc0d09",
+    "build\\native-flight\\mission-five-headup-transfer\\source.after.dat.gz": "0f3187c5e68d975edea25c8e495f14a848b7df2375d36e5f3ec471a119c8cb65",
+    "build\\native-flight\\mission-five-headup-transfer\\source.log": "fa7f3b850c5290b165922dd2c70666b6d6b296792456ff15a7ec7eb88b7ad7da",
+    "build\\native-flight\\mission-five-headup-transfer\\source.transfer.bin.gz": "3b21bd158eda95f4e3e248caa5f33a198979a566dc1e001be5e5773b2462626f",
+    "build\\native-flight\\mission-five-headup-prediction\\native.after.dat.gz": "ab194bfdd0fefc04f6ba4b680037a68d2d0fdd5ed7dfcd2b5c98e149272ed920",
+    "build\\native-flight\\mission-five-headup-prediction\\native.log": "5fae853c23ed7a86dac94c43a910a16ce9554490b37626ecc710bdcdad0da88b",
+    "build\\native-flight\\mission-five-headup-prediction\\native.transfer.bin.gz": "06079e91e97459911581305eb394dbeccc389c35d67e83de7af0d1a0f8b2cff9",
+    "build\\native-flight\\mission-five-headup-prediction\\source.after.dat.gz": "0f3187c5e68d975edea25c8e495f14a848b7df2375d36e5f3ec471a119c8cb65",
+    "build\\native-flight\\mission-five-headup-prediction\\source.log": "fa7f3b850c5290b165922dd2c70666b6d6b296792456ff15a7ec7eb88b7ad7da",
+    "build\\native-flight\\mission-five-headup-prediction\\source.transfer.bin.gz": "3b21bd158eda95f4e3e248caa5f33a198979a566dc1e001be5e5773b2462626f"
+  },
+  "source_sha256": {
+    "tools/native/native_headup_owner_oracle.c": "226cd9112cc0c01f5665db6d4885bcc46b0a0c991f863203fa04ae2f9634ee4b",
+    "tools/native/check_headup_transfer.py": "960190617024eff7008220f1b89aced70ad78976c43768384ec3d0db1bff156d",
+    "tools/native/native_hud_oracle.c": "020a608e2389eb650b0a135982beaee9bff58885baf4c35f3053c0f80441374a",
+    "tools/native/native_model_oracle.c": "857efdf66b5cab4df540724ad04dcd4230571ffe9ea31a8eee756052448e6b80",
+    "port/game/postflight_hud.c": "5818bcb254573caba519613086d68da1b1e346b86940ecf4640e12a4c0cd9d0a",
+    "port/game/hud_marks.c": "6be298b289b268450627af5b59df13523a3e6ce470feb4d665602b3e94fff25c",
+    "port/game/hud_readouts.c": "31d5a2264dfa9b57b6d04acdd3f3150928b0e0fc210ea9f01c4c18d5a8e29c30",
+    "port/game/native/hud.c": "cd7dd39a69d6a3e11381e65562fa73219d5dc44467a4a1bccefc25ebdc7be8d5",
+    "port/game/native/raster.c": "527038ddf883dbaccfea5f4911abc9b3813e6cc883c4cd7f0236b259a847687a",
+    "port/game/globals.h": "ebd4fae42b77c49d51b5d914057c94376155e0e2d2706b66ffa3e7856e6e6608"
+  },
+  "native_runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8",
+  "validation": {
+    "actual_input_owner_matches": 2,
+    "diagnostic_field_replacements": 5,
+    "complete_original_transfer_comparisons": 8,
+    "all_plane_output_bytes_predicted": 128000,
+    "actual_caller_scene_bytes_matching": 81920,
+    "real_write_mutation_rejections": 8,
+    "early_actual_update_identities": 161
+  },
+  "remaining": [
+    "Integrate head-up writes and shared scene generation into complete independent drawing history",
+    "Broader independent flights",
+    "Complete original sound timing and filtering"
+  ]
+}

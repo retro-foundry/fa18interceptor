@@ -1,5 +1,13 @@
 # Native port handoff — 2026-10-09
 
+Mission Five head-up owner (2026-10-10): original C332BC explains all 395
+first differing scene bytes. Both actual owner inputs match original non-stack
+RAM, and the marker/range values are carried from each actual earned escort
+prefix. Every head-up output bit is predicted on these inputs; eight write
+mutations are rejected. Gameplay is unchanged. Full-flight drawing prediction
+must now include this owner and the preceding shared scene generation.
+See [head-up owner evidence](analysis/native_mission_five_headup_owner_milestone.md).
+
 Complete Mission Five drawing gate (2026-10-10): every original/native stream
 identity and all 13,775 gameplay observations are verified. The first raw
 scene-band difference occurs at target acquisition after 160 predicted
