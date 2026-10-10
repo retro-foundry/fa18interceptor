@@ -1,0 +1,1669 @@
+{
+  "runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+  "stats": {
+    "frame_owner_exit": false,
+    "frames": 12680,
+    "screen": "scene-setup",
+    "mode": 3,
+    "glyphs": 3804,
+    "record_updates": 2339,
+    "scene_frames": 2337,
+    "terrain_polygons": 10917,
+    "model_calls": 47353,
+    "hud_frames": 2337,
+    "control_frames": 3368,
+    "scene_selected": true,
+    "stage": "C10DAE",
+    "game_tick": 264,
+    "timer_pending": true,
+    "timer_yields": 5490,
+    "display_publications": 3367,
+    "display_yields": 3380,
+    "display_pending": false,
+    "displayed_page": 0,
+    "postflight_callbacks": 0,
+    "postflight_resets": 0,
+    "input_passes": 3367,
+    "input_events": 1,
+    "input_queued": 0,
+    "update_iterations": 5356,
+    "replay_iterations": 4892,
+    "replay_events": 2,
+    "host_replay_events": 2,
+    "host_replay_pending": 0,
+    "replay_started": true,
+    "voice_ticks": 12680,
+    "voice_publications": 26703,
+    "voice_levels": [
+      [
+        518,
+        22
+      ],
+      [
+        520,
+        22
+      ],
+      [
+        124,
+        0
+      ],
+      [
+        300,
+        4
+      ]
+    ],
+    "sample_requests": 8248,
+    "sample_frames": 12172800,
+    "nonzero_sample_frames": 11913907,
+    "audio_device": false,
+    "frame_capture_complete": false,
+    "frame_before_tick": 0,
+    "frame_after_tick": 0,
+    "frame_saved_tick": 0,
+    "cpu_emulation": false,
+    "chipset_emulation": false
+  },
+  "memory": {
+    "sdl_arena_bytes": 33554432,
+    "sdl_startup_bytes": 0,
+    "sdl_peak_bytes": 96,
+    "sdl_gameplay_pool_requests": 0,
+    "sdl_failures": 0,
+    "project_gameplay_heap_violations": 0,
+    "pcm_ring_frames": 131072,
+    "os_driver_allocations_observed": false
+  },
+  "coverage": {
+    "boundaries": 12680,
+    "requests": 8248,
+    "stops": 554,
+    "active_requests": [
+      173,
+      217,
+      24,
+      7670
+    ]
+  },
+  "complete_audio_trace_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415",
+  "final_data_retention": {
+    "path": "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\current-native-complete-demo\\final.dat.gz",
+    "decoded_sha256": "4f0f6d334e716a6f915ced4a58b57b7287550bdf49b5dca233845194d791ce31"
+  },
+  "wav_sha256": "feeea779226c51b9ca416753b5ed08ce26ad03f5236ebb8fce5ff7ba265d3e04",
+  "historical_runner_sha256": "f085a617509d218decd742dca0a2594e6498d0dbf0545045d9f152d380d95480",
+  "complete_native_pcm_trace_ram_counters_preserved": true,
+  "native_original_waveform_acceptance": false,
+  "date": "2026-10-10",
+  "scope": "Current native complete Demo PCM/trace/state preservation, whole original retained-payload coverage and ordered startup-music requests. Full original/native onset/handoff/waveform acceptance remains open.",
+  "command": [
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-cmake\\native\\Release\\fa18_native.exe",
+    "--headless",
+    "--frames",
+    "30000",
+    "--input",
+    "captures/native/demo01/input.fa18in",
+    "--iterations",
+    "4892",
+    "--replay",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\native-complete-demo-events\\intro.e9k",
+    "--save-dir",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\current-native-complete-demo\\pilot",
+    "--wav",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\current-native-complete-demo\\native.wav",
+    "--memory-report",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\current-native-complete-demo\\memory.json",
+    "--data-out",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\current-native-complete-demo\\final.dat",
+    "--audio-trace",
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-audio\\current-native-complete-demo\\audio.jsonl"
+  ],
+  "original_complete_payload_check": {
+    "scope": "Every complete original recorded handler request resolves in retained final RAM to a native-owned payload on the same channel. No fetched-sample lifetime, ordered handoff, repetition, level, pitch, onset or waveform parity is inferred.",
+    "original_validation": {
+      "scope": "Complete original batch PCM coverage and unchanged emulator execution; native onset/handoffs/filter parity remains open",
+      "capture": "build\\native-audio\\dma-complete-demo",
+      "baseline": "build\\native-audio\\original-complete-demo-baseline",
+      "pcm_file_checked": "build\\native-audio\\original-complete-demo\\original.wav",
+      "replay_calls": 21069,
+      "chunks": 21069,
+      "recorded_audio": {
+        "file": "original.wav",
+        "channels": 2,
+        "sample_bits": 16,
+        "first_replay_call": 1,
+        "replay_calls": 21069,
+        "sample_rate": 44100,
+        "reported_fps": 50.0,
+        "sample_frames": 18582858,
+        "pcm_sha256": "76ffa4bef9b203c84e67565b41685b1e62d66c0710fa0c318d264fa2d8c2b3c0",
+        "wav_sha256": "db14f6340ca2464d6f2fd441b8f007bc2eb21d4eac7d39990befcb0d37816745",
+        "capture_scope": "All batch PCM from requested ordinary retro_run calls; startup/restore initialization excluded",
+        "capture_budget_mib": 512
+      },
+      "authority": {
+        "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "22bbf2aa0917ea598e471e17dcd739854bcca91e50d580c58fe0a9f54e0b77f3"
+      },
+      "core_options": {
+        "puae_model": "auto",
+        "puae_model_options_display": "disabled",
+        "puae_model_fd": "A500",
+        "puae_model_hd": "A1200",
+        "puae_model_cd": "CD32",
+        "puae_kickstart": "kick13.rom",
+        "puae_chipmem_size": "auto",
+        "puae_bogomem_size": "auto",
+        "puae_fastmem_size": "auto",
+        "puae_z3mem_size": "auto",
+        "puae_cpu_model": "auto",
+        "puae_fpu_model": "auto",
+        "puae_cpu_throttle": "0.0",
+        "puae_cpu_multiplier": "0",
+        "puae_cpu_compatibility": "exact",
+        "puae_autoloadfastforward": "disabled",
+        "puae_floppy_speed": "100",
+        "puae_floppy_multidrive": "enabled",
+        "puae_floppy_write_protection": "enabled",
+        "puae_floppy_write_redirect": "disabled",
+        "puae_cd_speed": "100",
+        "puae_cd_startup_delayed_insert": "disabled",
+        "puae_shared_nvram": "disabled",
+        "puae_use_whdload": "files",
+        "puae_use_whdload_theme": "default",
+        "puae_use_whdload_prefs": "disabled",
+        "puae_use_whdload_buttonwait": "enabled",
+        "puae_use_whdload_nowritecache": "disabled",
+        "puae_use_boot_hd": "disabled",
+        "puae_cart_file": "none",
+        "puae_video_options_display": "disabled",
+        "puae_video_allow_hz_change": "locked",
+        "puae_video_standard": "PAL auto",
+        "puae_video_aspect": "auto",
+        "puae_video_resolution": "auto",
+        "puae_video_vresolution": "auto",
+        "puae_crop": "disabled",
+        "puae_crop_delay": "enabled",
+        "puae_crop_mode": "both",
+        "puae_vertical_pos": "auto",
+        "puae_horizontal_pos": "auto",
+        "puae_video_winuae_window_positioning": "disabled",
+        "puae_immediate_blits": "waiting",
+        "puae_collision_level": "playfields",
+        "puae_gfx_flickerfixer": "disabled",
+        "puae_gfx_framerate": "disabled",
+        "puae_gfx_gamma": "0",
+        "puae_gfx_colors": "24bit",
+        "puae_vkbd_theme": "auto",
+        "puae_vkbd_transparency": "25%",
+        "puae_vkbd_dimming": "25%",
+        "puae_statusbar": "bottom",
+        "puae_statusbar_startup": "disabled",
+        "puae_statusbar_messages": "disabled",
+        "puae_joyport_pointer_color": "blue",
+        "puae_audio_options_display": "disabled",
+        "puae_sound_stereo_separation": "100%",
+        "puae_sound_interpol": "anti",
+        "puae_sound_filter": "emulated",
+        "puae_sound_filter_type": "auto",
+        "puae_floppy_sound": "80",
+        "puae_floppy_sound_empty_mute": "enabled",
+        "puae_floppy_sound_type": "internal",
+        "puae_sound_volume_cd": "100%",
+        "puae_analogmouse": "both",
+        "puae_analogmouse_deadzone": "20",
+        "puae_analogmouse_speed": "1.0",
+        "puae_analogmouse_speed_right": "1.0",
+        "puae_dpadmouse_speed": "6",
+        "puae_mouse_speed": "100",
+        "puae_physicalmouse": "enabled",
+        "puae_physical_keyboard_pass_through": "disabled",
+        "puae_keyrah_keypad_mappings": "disabled",
+        "puae_mapping_options_display": "enabled",
+        "puae_mapper_vkbd": "---",
+        "puae_mapper_statusbar": "RETROK_F12",
+        "puae_mapper_mouse_toggle": "RETROK_RCTRL",
+        "puae_mapper_turbo_fire_toggle": "---",
+        "puae_mapper_save_disk_toggle": "---",
+        "puae_mapper_aspect_ratio_toggle": "---",
+        "puae_mapper_crop_toggle": "---",
+        "puae_mapper_reset": "---",
+        "puae_mapper_up": "---",
+        "puae_mapper_down": "---",
+        "puae_mapper_left": "---",
+        "puae_mapper_right": "---",
+        "puae_mapper_b": "---",
+        "puae_mapper_a": "---",
+        "puae_mapper_y": "---",
+        "puae_mapper_x": "RETROK_SPACE",
+        "puae_mapper_select": "TOGGLE_VKBD",
+        "puae_mapper_start": "---",
+        "puae_mapper_l": "---",
+        "puae_mapper_r": "---",
+        "puae_mapper_l2": "MOUSE_LEFT_BUTTON",
+        "puae_mapper_r2": "MOUSE_RIGHT_BUTTON",
+        "puae_mapper_l3": "---",
+        "puae_mapper_r3": "---",
+        "puae_mapper_lu": "---",
+        "puae_mapper_ld": "---",
+        "puae_mapper_ll": "---",
+        "puae_mapper_lr": "---",
+        "puae_mapper_ru": "---",
+        "puae_mapper_rd": "---",
+        "puae_mapper_rl": "---",
+        "puae_mapper_rr": "---",
+        "puae_turbo_fire": "disabled",
+        "puae_turbo_fire_button": "B",
+        "puae_turbo_pulse": "6",
+        "puae_joyport": "joystick",
+        "puae_joyport_order": "1234",
+        "puae_retropad_options": "disabled",
+        "puae_cd32pad_options": "disabled"
+      },
+      "final_original_audio_hash": "92ea13cab2907710eb9e9b984e2ed8681f0a35269de48cd2b35b7243262618a9",
+      "registers_unchanged": true,
+      "complete_ram_state_unchanged": true,
+      "video_unchanged": true,
+      "no_samples_removed_or_rewritten": true,
+      "audio_events": {
+        "file": "audio_events.jsonl",
+        "rows": 406754,
+        "sha256": "ceb40f89a5b175047fc7e9621d8c1ae2763580d64ae8146d4bcac90ad8a44bea",
+        "final_hardware": {
+          "cia_pra": 192,
+          "cia_ddra": 3,
+          "led_pin_on": true,
+          "channels": [
+            {
+              "state": 3,
+              "volume": 27,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 6909,
+              "remaining_words": 3374,
+              "period": 634,
+              "data_word": 59626,
+              "buffer": 46056,
+              "cursor": 53126,
+              "next_cycles": 7680,
+              "drhpos": 109
+            },
+            {
+              "state": 3,
+              "volume": 27,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 6469,
+              "remaining_words": 2952,
+              "period": 636,
+              "data_word": 10235,
+              "buffer": 46936,
+              "cursor": 53970,
+              "next_cycles": 323584,
+              "drhpos": 41
+            },
+            {
+              "state": 0,
+              "volume": 0,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 1731,
+              "remaining_words": 1730,
+              "period": 124,
+              "data_word": 62970,
+              "buffer": 61928,
+              "cursor": 61930,
+              "next_cycles": 4294967295,
+              "drhpos": 47
+            },
+            {
+              "state": 0,
+              "volume": 0,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 16,
+              "remaining_words": 9,
+              "period": 124,
+              "data_word": 32639,
+              "buffer": 41952,
+              "cursor": 41968,
+              "next_cycles": 4294967295,
+              "drhpos": 35
+            }
+          ]
+        },
+        "led_interface": true,
+        "final_led_states": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "voice_hunk_layout": true,
+        "resolved_voice_layout": {
+          "hunk_74": 12910120,
+          "hunk_75": 12910392,
+          "hunk_76": 12910808,
+          "voice_slots": 12910136,
+          "master_volume": 12910374,
+          "verified_hunk_76_bytes": 420,
+          "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+        },
+        "voice_source_executable_sha256": "d7301e20958548f9b5f1ba744f8ff91fef476306c220eb886e7c90bac2802ffa",
+        "scope": "All logged audio/control custom writes, safe voice RAM and published LED/filter state at every full-frame boundary; CIA pin/duty only known at retained endpoints"
+      },
+      "event_rows": 406754,
+      "boundary_rows": 21069,
+      "register_writes": {
+        "DFF096": 78383,
+        "DFF09A": 145572,
+        "DFF09C": 32969,
+        "DFF0A0": 254,
+        "DFF0A2": 254,
+        "DFF0A4": 254,
+        "DFF0A6": 21315,
+        "DFF0A8": 21315,
+        "DFF0B0": 368,
+        "DFF0B2": 368,
+        "DFF0B4": 368,
+        "DFF0B6": 21431,
+        "DFF0B8": 21431,
+        "DFF0C0": 19,
+        "DFF0C2": 19,
+        "DFF0C4": 19,
+        "DFF0C6": 524,
+        "DFF0C8": 524,
+        "DFF0D0": 7640,
+        "DFF0D2": 7640,
+        "DFF0D4": 7640,
+        "DFF0D6": 8688,
+        "DFF0D8": 8688
+      },
+      "source_writes": {
+        "C2FF4A": 38443,
+        "C3002E": 31195,
+        "C4FFC0": 455,
+        "C500DC": 8745,
+        "C500F8": 16562,
+        "C50104": 8281,
+        "C50108": 8281,
+        "C50134": 464,
+        "C5013A": 464,
+        "C50140": 464,
+        "C501F0": 51494,
+        "C5020C": 51494,
+        "FC0F36": 2698,
+        "FC0FC4": 1349,
+        "FC1354": 21071,
+        "FC13BC": 1349,
+        "FC1428": 21092,
+        "FC143C": 21092,
+        "FC1B7C": 1354,
+        "FC1BE0": 1349,
+        "FC1BEE": 12368,
+        "FC1C0E": 12368,
+        "FC1E68": 422,
+        "FC1E88": 1352,
+        "FC1F00": 422,
+        "FC1F14": 1349,
+        "FC1F68": 1349,
+        "FC1F8C": 1349,
+        "FC4A02": 843,
+        "FC4A6C": 843,
+        "FC4A7A": 843,
+        "FC4AAE": 843,
+        "FCD5AC": 4749,
+        "FCD5FA": 4749,
+        "FE9118": 4651,
+        "FE9150": 4651,
+        "FE91DC": 1349,
+        "FE92C8": 1349,
+        "FE9368": 21069,
+        "FE93DC": 21069
+      },
+      "buffer_pointer_low_writes": [
+        254,
+        368,
+        19,
+        7640
+      ],
+      "voice_slot_changes": [
+        37,
+        34,
+        10,
+        160
+      ],
+      "first_slot_changes": [
+        {
+          "call": 94,
+          "channel": 0,
+          "before": "C07678",
+          "after": "C076F8"
+        },
+        {
+          "call": 94,
+          "channel": 1,
+          "before": "C076B8",
+          "after": "C07738"
+        },
+        {
+          "call": 230,
+          "channel": 3,
+          "before": "000000",
+          "after": "C01408"
+        },
+        {
+          "call": 238,
+          "channel": 3,
+          "before": "C01408",
+          "after": "000000"
+        },
+        {
+          "call": 259,
+          "channel": 0,
+          "before": "C076F8",
+          "after": "C07C40"
+        },
+        {
+          "call": 260,
+          "channel": 1,
+          "before": "C07738",
+          "after": "C07C80"
+        },
+        {
+          "call": 270,
+          "channel": 0,
+          "before": "C07C40",
+          "after": "000000"
+        },
+        {
+          "call": 271,
+          "channel": 0,
+          "before": "000000",
+          "after": "C06A18"
+        },
+        {
+          "call": 271,
+          "channel": 1,
+          "before": "C07C80",
+          "after": "C06A58"
+        },
+        {
+          "call": 420,
+          "channel": 0,
+          "before": "C06A18",
+          "after": "C06998"
+        },
+        {
+          "call": 420,
+          "channel": 1,
+          "before": "C06A58",
+          "after": "C069D8"
+        },
+        {
+          "call": 458,
+          "channel": 3,
+          "before": "000000",
+          "after": "C01408"
+        },
+        {
+          "call": 459,
+          "channel": 3,
+          "before": "C01408",
+          "after": "000000"
+        },
+        {
+          "call": 460,
+          "channel": 3,
+          "before": "000000",
+          "after": "C01408"
+        },
+        {
+          "call": 461,
+          "channel": 3,
+          "before": "C01408",
+          "after": "000000"
+        },
+        {
+          "call": 462,
+          "channel": 3,
+          "before": "000000",
+          "after": "C01408"
+        }
+      ],
+      "initial_hardware": {
+        "cia_pra": 192,
+        "cia_ddra": 3,
+        "led_pin_on": true,
+        "channels": [
+          {
+            "state": 3,
+            "volume": 31,
+            "interrupt_pending": false,
+            "flags": 128,
+            "length_words": 16385,
+            "remaining_words": 9407,
+            "period": 358,
+            "data_word": 65279,
+            "buffer": 121456,
+            "cursor": 135412,
+            "next_cycles": 11776,
+            "drhpos": 215
+          },
+          {
+            "state": 2,
+            "volume": 31,
+            "interrupt_pending": false,
+            "flags": 128,
+            "length_words": 16385,
+            "remaining_words": 9416,
+            "period": 358,
+            "data_word": 254,
+            "buffer": 121456,
+            "cursor": 135396,
+            "next_cycles": 52736,
+            "drhpos": 199
+          },
+          {
+            "state": 0,
+            "volume": 0,
+            "interrupt_pending": false,
+            "flags": 128,
+            "length_words": 0,
+            "remaining_words": 0,
+            "period": 124,
+            "data_word": 0,
+            "buffer": 0,
+            "cursor": 0,
+            "next_cycles": 4294967295,
+            "drhpos": 0
+          },
+          {
+            "state": 0,
+            "volume": 2,
+            "interrupt_pending": false,
+            "flags": 128,
+            "length_words": 16,
+            "remaining_words": 5,
+            "period": 300,
+            "data_word": 33410,
+            "buffer": 41952,
+            "cursor": 41976,
+            "next_cycles": 4294967295,
+            "drhpos": 51
+          }
+        ]
+      },
+      "filter_scope": "Published gui_data.powerled/filter boolean at every replay boundary via original LED interface; no live CIA reads or repeated serialization; within-block transition sample unproven",
+      "native_sound_acceptance": false,
+      "led_updates": [
+        {
+          "kind": "led",
+          "call": 1,
+          "sample_frames": 0,
+          "led": 0,
+          "state": 1
+        }
+      ],
+      "power_filter_boundary_counts": {
+        "1": 21069
+      },
+      "initial_published_led_states": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_published_led_states": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "resolved_voice_layout": {
+        "hunk_74": 12910120,
+        "hunk_75": 12910392,
+        "hunk_76": 12910808,
+        "voice_slots": 12910136,
+        "master_volume": 12910374,
+        "verified_hunk_76_bytes": 420,
+        "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+      },
+      "known_voice_boundaries": 21069,
+      "unknown_voice_boundaries": 0,
+      "voice_layout_scope": "Immutable original Hunk 76 and all relocation equations identify loaded Hunk 74 ownership; unresolved game voices are unknown, not empty"
+    },
+    "native_runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+    "native_trace_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415",
+    "native_final_ram_sha256": "4f0f6d334e716a6f915ced4a58b57b7287550bdf49b5dca233845194d791ce31",
+    "original_requests_by_channel": [
+      254,
+      368,
+      19,
+      7640
+    ],
+    "native_active_requests_by_channel": [
+      173,
+      217,
+      24,
+      7670
+    ],
+    "original_total_requests": 8281,
+    "original_unique_payloads": 12,
+    "native_unique_payloads": 17,
+    "all_retained_original_requested_payloads_match_native_on_same_channel": true,
+    "payload_catalog_by_channel": [
+      [
+        {
+          "bytes": 13202,
+          "sha256": "ca7a3d917c8c4a7b9145f8c98bcbee3741127a04470c481eb586f1d94e668ad7",
+          "original_requests": 92,
+          "native_requests": 49,
+          "original_sample_addresses": [
+            358568
+          ],
+          "native_sample_addresses": [
+            447392
+          ]
+        },
+        {
+          "bytes": 13818,
+          "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0",
+          "original_requests": 151,
+          "native_requests": 79,
+          "original_sample_addresses": [
+            46056
+          ],
+          "native_sample_addresses": [
+            425984
+          ]
+        },
+        {
+          "bytes": 20000,
+          "sha256": "518bf5f40c1228eb6ea1b9b98ac00836682682ffad0d4d49e1c0ca5ab213111f",
+          "original_requests": 9,
+          "native_requests": 8,
+          "original_sample_addresses": [
+            371776
+          ],
+          "native_sample_addresses": [
+            460596
+          ]
+        },
+        {
+          "bytes": 32770,
+          "sha256": "4cb22150b61d37935cb3a0c7ad0688b3a82fbc2cd59ffe143fa4e24290223a1e",
+          "original_requests": 1,
+          "native_requests": 7,
+          "original_sample_addresses": [
+            121456
+          ],
+          "native_sample_addresses": [
+            37840
+          ]
+        },
+        {
+          "bytes": 32786,
+          "sha256": "9b90b44e6b185554f19b33cc3a6d60f34f4d984578f978d92b7a10c10a89f6a2",
+          "original_requests": 1,
+          "native_requests": 2,
+          "original_sample_addresses": [
+            154232
+          ],
+          "native_sample_addresses": [
+            12931072
+          ]
+        }
+      ],
+      [
+        {
+          "bytes": 5580,
+          "sha256": "0b727aa172caac29e3ab4c92b401c780cc8b2b052604b38d172f19c6ad175c50",
+          "original_requests": 197,
+          "native_requests": 91,
+          "original_sample_addresses": [
+            358568
+          ],
+          "native_sample_addresses": [
+            447392
+          ]
+        },
+        {
+          "bytes": 11000,
+          "sha256": "7eff289fbf0bb7eb971e994117c33005bdf27a1c02042ee3b1e766b570aaab5d",
+          "original_requests": 10,
+          "native_requests": 8,
+          "original_sample_addresses": [
+            373714
+          ],
+          "native_sample_addresses": [
+            462534
+          ]
+        },
+        {
+          "bytes": 12938,
+          "sha256": "6879acace7594c437dcb900845aa9de3e54cb2cbad149ea7c363ef0d45aafb3e",
+          "original_requests": 159,
+          "native_requests": 81,
+          "original_sample_addresses": [
+            46936
+          ],
+          "native_sample_addresses": [
+            426864
+          ]
+        },
+        {
+          "bytes": 32770,
+          "sha256": "4cb22150b61d37935cb3a0c7ad0688b3a82fbc2cd59ffe143fa4e24290223a1e",
+          "original_requests": 1,
+          "native_requests": 7,
+          "original_sample_addresses": [
+            121456
+          ],
+          "native_sample_addresses": [
+            37840
+          ]
+        },
+        {
+          "bytes": 32786,
+          "sha256": "9b90b44e6b185554f19b33cc3a6d60f34f4d984578f978d92b7a10c10a89f6a2",
+          "original_requests": 1,
+          "native_requests": 2,
+          "original_sample_addresses": [
+            154232
+          ],
+          "native_sample_addresses": [
+            12931072
+          ]
+        }
+      ],
+      [
+        {
+          "bytes": 2048,
+          "sha256": "1ccad9c6250d0e5fbef84dccaf135f2018f3c793a97e0102f92af5e6aef6d4fa",
+          "original_requests": 4,
+          "native_requests": 4,
+          "original_sample_addresses": [
+            59880
+          ],
+          "native_sample_addresses": [
+            13095088
+          ]
+        },
+        {
+          "bytes": 3462,
+          "sha256": "86e1ce8814647948d4a6b245a46eb0eab35bf73cf68bf2c6ad9041219e0c7c0a",
+          "original_requests": 4,
+          "native_requests": 4,
+          "original_sample_addresses": [
+            61928
+          ],
+          "native_sample_addresses": [
+            439804
+          ]
+        },
+        {
+          "bytes": 4124,
+          "sha256": "ab4352391a8f282bc93e9a6b1ae267e27d253b545c4e5daab99992484d7166b8",
+          "original_requests": 7,
+          "native_requests": 12,
+          "original_sample_addresses": [
+            108736
+          ],
+          "native_sample_addresses": [
+            443268
+          ]
+        },
+        {
+          "bytes": 13818,
+          "sha256": "894561be833fb4e4c03a4461574a87d7d4f5c9a54d6a5cafab8807f4bdfa97a0",
+          "original_requests": 4,
+          "native_requests": 4,
+          "original_sample_addresses": [
+            46056
+          ],
+          "native_sample_addresses": [
+            425984
+          ]
+        }
+      ],
+      [
+        {
+          "bytes": 32,
+          "sha256": "d2202673dc258127ea0a6aa9e81cd276c935fef7daababa333a729e5851c188d",
+          "original_requests": 7640,
+          "native_requests": 7670,
+          "original_sample_addresses": [
+            41952
+          ],
+          "native_sample_addresses": [
+            71892
+          ]
+        }
+      ]
+    ],
+    "negative_controls_rejected": [
+      "length",
+      "payload",
+      "channel",
+      "missing-request"
+    ],
+    "alignment_search_shift_trim_gain_or_clock_change": false,
+    "whole_flight_sound_acceptance": false
+  },
+  "original_startup_check": {
+    "scope": "Every original initial-music request in the separate 5000-call launch versus native ordered startup requests; onset and reference-clock differences reported, not accepted as identical WAVs",
+    "original_validation": {
+      "scope": "Complete original batch PCM coverage and unchanged emulator execution; native onset/handoffs/filter parity remains open",
+      "capture": "build\\native-audio\\voice-layout\\ready-capture",
+      "baseline": "build\\native-audio\\filter-response-cold\\ready-filtered",
+      "pcm_file_checked": "build\\native-audio\\filter-response-cold\\ready-filtered\\original.wav",
+      "replay_calls": 5000,
+      "chunks": 5000,
+      "recorded_audio": {
+        "file": "original.wav",
+        "channels": 2,
+        "sample_bits": 16,
+        "first_replay_call": 1,
+        "replay_calls": 5000,
+        "sample_rate": 44100,
+        "reported_fps": 50.0,
+        "sample_frames": 4410000,
+        "pcm_sha256": "d372bb3238e20f6b2ba8b4adb92ab0e1b1f02a59b73e26ed6d66702c6c614d01",
+        "wav_sha256": "679663513713d3cea4a4a308de348fcb2c2b6e6ba069aa64092b6f3f428e8824",
+        "capture_scope": "All batch PCM from requested ordinary retro_run calls; startup/restore initialization excluded",
+        "capture_budget_mib": 512
+      },
+      "authority": {
+        "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+        "config_sha256": "cde0af34ecb42f7d677d407231ac8560ce186411ef1fd2acf5b36e39ba0c1a2e",
+        "initial_state_sha256": "221b8ddc9b010c59a4cf45f4714a3456a383221f4b31fb5eabf64e091f25b0e2",
+        "recording_sha256": "8d689ce8862a17e0973d619d470fd8f3cff6048fbe5ab49717d9ce1de1f71931",
+        "snapshot_sha256": "310024a8d413175bed231d9e68d37273aa1006afb5dea59f054c04953bc7e59f"
+      },
+      "core_options": {
+        "puae_model": "auto",
+        "puae_model_options_display": "disabled",
+        "puae_model_fd": "A500",
+        "puae_model_hd": "A1200",
+        "puae_model_cd": "CD32",
+        "puae_kickstart": "kick13.rom",
+        "puae_chipmem_size": "auto",
+        "puae_bogomem_size": "auto",
+        "puae_fastmem_size": "auto",
+        "puae_z3mem_size": "auto",
+        "puae_cpu_model": "auto",
+        "puae_fpu_model": "auto",
+        "puae_cpu_throttle": "0.0",
+        "puae_cpu_multiplier": "0",
+        "puae_cpu_compatibility": "exact",
+        "puae_autoloadfastforward": "disabled",
+        "puae_floppy_speed": "100",
+        "puae_floppy_multidrive": "enabled",
+        "puae_floppy_write_protection": "enabled",
+        "puae_floppy_write_redirect": "disabled",
+        "puae_cd_speed": "100",
+        "puae_cd_startup_delayed_insert": "disabled",
+        "puae_shared_nvram": "disabled",
+        "puae_use_whdload": "files",
+        "puae_use_whdload_theme": "default",
+        "puae_use_whdload_prefs": "disabled",
+        "puae_use_whdload_buttonwait": "enabled",
+        "puae_use_whdload_nowritecache": "disabled",
+        "puae_use_boot_hd": "disabled",
+        "puae_cart_file": "none",
+        "puae_video_options_display": "disabled",
+        "puae_video_allow_hz_change": "locked",
+        "puae_video_standard": "PAL auto",
+        "puae_video_aspect": "auto",
+        "puae_video_resolution": "auto",
+        "puae_video_vresolution": "auto",
+        "puae_crop": "disabled",
+        "puae_crop_delay": "enabled",
+        "puae_crop_mode": "both",
+        "puae_vertical_pos": "auto",
+        "puae_horizontal_pos": "auto",
+        "puae_video_winuae_window_positioning": "disabled",
+        "puae_immediate_blits": "waiting",
+        "puae_collision_level": "playfields",
+        "puae_gfx_flickerfixer": "disabled",
+        "puae_gfx_framerate": "disabled",
+        "puae_gfx_gamma": "0",
+        "puae_gfx_colors": "24bit",
+        "puae_vkbd_theme": "auto",
+        "puae_vkbd_transparency": "25%",
+        "puae_vkbd_dimming": "25%",
+        "puae_statusbar": "bottom",
+        "puae_statusbar_startup": "disabled",
+        "puae_statusbar_messages": "disabled",
+        "puae_joyport_pointer_color": "blue",
+        "puae_audio_options_display": "disabled",
+        "puae_sound_stereo_separation": "100%",
+        "puae_sound_interpol": "anti",
+        "puae_sound_filter": "emulated",
+        "puae_sound_filter_type": "auto",
+        "puae_floppy_sound": "100",
+        "puae_floppy_sound_empty_mute": "enabled",
+        "puae_floppy_sound_type": "internal",
+        "puae_sound_volume_cd": "100%",
+        "puae_analogmouse": "both",
+        "puae_analogmouse_deadzone": "20",
+        "puae_analogmouse_speed": "1.0",
+        "puae_analogmouse_speed_right": "1.0",
+        "puae_dpadmouse_speed": "6",
+        "puae_mouse_speed": "100",
+        "puae_physicalmouse": "enabled",
+        "puae_physical_keyboard_pass_through": "disabled",
+        "puae_keyrah_keypad_mappings": "disabled",
+        "puae_mapping_options_display": "enabled",
+        "puae_mapper_vkbd": "---",
+        "puae_mapper_statusbar": "RETROK_F12",
+        "puae_mapper_mouse_toggle": "RETROK_RCTRL",
+        "puae_mapper_turbo_fire_toggle": "---",
+        "puae_mapper_save_disk_toggle": "---",
+        "puae_mapper_aspect_ratio_toggle": "---",
+        "puae_mapper_crop_toggle": "---",
+        "puae_mapper_reset": "---",
+        "puae_mapper_up": "---",
+        "puae_mapper_down": "---",
+        "puae_mapper_left": "---",
+        "puae_mapper_right": "---",
+        "puae_mapper_b": "---",
+        "puae_mapper_a": "---",
+        "puae_mapper_y": "---",
+        "puae_mapper_x": "RETROK_SPACE",
+        "puae_mapper_select": "TOGGLE_VKBD",
+        "puae_mapper_start": "---",
+        "puae_mapper_l": "---",
+        "puae_mapper_r": "---",
+        "puae_mapper_l2": "MOUSE_LEFT_BUTTON",
+        "puae_mapper_r2": "MOUSE_RIGHT_BUTTON",
+        "puae_mapper_l3": "---",
+        "puae_mapper_r3": "---",
+        "puae_mapper_lu": "---",
+        "puae_mapper_ld": "---",
+        "puae_mapper_ll": "---",
+        "puae_mapper_lr": "---",
+        "puae_mapper_ru": "---",
+        "puae_mapper_rd": "---",
+        "puae_mapper_rl": "---",
+        "puae_mapper_rr": "---",
+        "puae_turbo_fire": "disabled",
+        "puae_turbo_fire_button": "B",
+        "puae_turbo_pulse": "6",
+        "puae_joyport": "joystick",
+        "puae_joyport_order": "1234",
+        "puae_retropad_options": "disabled",
+        "puae_cd32pad_options": "disabled"
+      },
+      "final_original_audio_hash": "aae38ced87b40603a7965d48da650a64237dd643d7e92ed4c6ce8e1073fbf71b",
+      "registers_unchanged": true,
+      "complete_ram_state_unchanged": true,
+      "video_unchanged": true,
+      "no_samples_removed_or_rewritten": true,
+      "audio_events": {
+        "file": "audio_events.jsonl",
+        "rows": 222435,
+        "sha256": "1f54e8ff04da88fdbc5c5b0d3270a5c2031406eee240aca9d771f5fa78ae2601",
+        "final_hardware": {
+          "cia_pra": 192,
+          "cia_ddra": 3,
+          "led_pin_on": true,
+          "channels": [
+            {
+              "state": 2,
+              "volume": 63,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 16393,
+              "remaining_words": 14016,
+              "period": 358,
+              "data_word": 63480,
+              "buffer": 154232,
+              "cursor": 126194,
+              "next_cycles": 8704,
+              "drhpos": 113
+            },
+            {
+              "state": 3,
+              "volume": 63,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 16393,
+              "remaining_words": 14024,
+              "period": 358,
+              "data_word": 2314,
+              "buffer": 154232,
+              "cursor": 126178,
+              "next_cycles": 49664,
+              "drhpos": 62
+            },
+            {
+              "state": 0,
+              "volume": 0,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 0,
+              "remaining_words": 0,
+              "period": 124,
+              "data_word": 0,
+              "buffer": 0,
+              "cursor": 0,
+              "next_cycles": 4294967295,
+              "drhpos": 0
+            },
+            {
+              "state": 0,
+              "volume": 0,
+              "interrupt_pending": false,
+              "flags": 128,
+              "length_words": 0,
+              "remaining_words": 0,
+              "period": 124,
+              "data_word": 0,
+              "buffer": 0,
+              "cursor": 0,
+              "next_cycles": 4294967295,
+              "drhpos": 0
+            }
+          ]
+        },
+        "led_interface": true,
+        "final_led_states": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "voice_hunk_layout": true,
+        "resolved_voice_layout": {
+          "hunk_74": 12910600,
+          "hunk_75": 12910872,
+          "hunk_76": 12911288,
+          "voice_slots": 12910616,
+          "master_volume": 12910854,
+          "verified_hunk_76_bytes": 420,
+          "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+        },
+        "voice_source_executable_sha256": "d7301e20958548f9b5f1ba744f8ff91fef476306c220eb886e7c90bac2802ffa",
+        "scope": "All logged audio/control custom writes, safe voice RAM and published LED/filter state at every full-frame boundary; CIA pin/duty only known at retained endpoints"
+      },
+      "event_rows": 222435,
+      "boundary_rows": 5000,
+      "register_writes": {
+        "DFF096": 58,
+        "DFF09A": 193984,
+        "DFF09C": 18405,
+        "DFF09E": 4,
+        "DFF0A0": 24,
+        "DFF0A2": 24,
+        "DFF0A4": 24,
+        "DFF0A6": 1206,
+        "DFF0A8": 1206,
+        "DFF0B0": 24,
+        "DFF0B2": 24,
+        "DFF0B4": 24,
+        "DFF0B6": 1206,
+        "DFF0B8": 1206,
+        "DFF0C6": 2,
+        "DFF0C8": 2,
+        "DFF0D6": 2,
+        "DFF0D8": 2
+      },
+      "source_writes": {
+        "C5015C": 4,
+        "C50164": 4,
+        "C5017E": 4,
+        "C50186": 4,
+        "C501A0": 8,
+        "C502BC": 54,
+        "C502D8": 96,
+        "C502E4": 48,
+        "C502E8": 48,
+        "C50314": 6,
+        "C5031A": 6,
+        "C50320": 6,
+        "C503D0": 2406,
+        "C503EC": 2406,
+        "FC0746": 1519,
+        "FC0774": 1519,
+        "FC0F36": 13008,
+        "FC0FC4": 10364,
+        "FC11D2": 8,
+        "FC1206": 8,
+        "FC1222": 2,
+        "FC1238": 2,
+        "FC1244": 2,
+        "FC1354": 6528,
+        "FC13BC": 4022,
+        "FC1428": 6745,
+        "FC143C": 6736,
+        "FC1B7C": 12017,
+        "FC1BE0": 12006,
+        "FC1BEE": 19567,
+        "FC1C0E": 19567,
+        "FC1CF6": 1,
+        "FC1D16": 1,
+        "FC1DBE": 8,
+        "FC1DFA": 8,
+        "FC1E04": 1,
+        "FC1E46": 1,
+        "FC1E68": 6123,
+        "FC1E88": 13348,
+        "FC1EDC": 3,
+        "FC1F00": 7457,
+        "FC1F14": 11687,
+        "FC1F68": 10165,
+        "FC1F8C": 4022,
+        "FC3690": 4,
+        "FC3696": 4,
+        "FC3C28": 8,
+        "FC3C40": 4,
+        "FC4776": 2,
+        "FC4794": 1,
+        "FC47EC": 1,
+        "FC4A02": 4420,
+        "FC4A6C": 4420,
+        "FC4A7A": 4419,
+        "FC4AAE": 4419,
+        "FC4AE8": 190,
+        "FC588A": 1684,
+        "FC5916": 1686,
+        "FC6500": 2,
+        "FC6508": 2,
+        "FC6DE8": 1,
+        "FC6DF0": 1,
+        "FC6DFA": 1695,
+        "FC6E76": 1687,
+        "FCD5AC": 1,
+        "FCD5FA": 1,
+        "FE9118": 1056,
+        "FE9150": 1056,
+        "FE91DC": 2746,
+        "FE92C8": 2746,
+        "FE9368": 5000,
+        "FE93AA": 1527,
+        "FE93DC": 6527,
+        "FEA1D8": 191,
+        "FEA1DE": 191,
+        "FEA206": 190
+      },
+      "buffer_pointer_low_writes": [
+        24,
+        24,
+        0,
+        0
+      ],
+      "voice_slot_changes": [
+        6,
+        6,
+        0,
+        0
+      ],
+      "first_slot_changes": [
+        {
+          "call": 3945,
+          "channel": 0,
+          "before": "C075F8",
+          "after": "C07678"
+        },
+        {
+          "call": 3945,
+          "channel": 1,
+          "before": "C07638",
+          "after": "C076B8"
+        },
+        {
+          "call": 3966,
+          "channel": 0,
+          "before": "C07678",
+          "after": "C076F8"
+        },
+        {
+          "call": 3966,
+          "channel": 1,
+          "before": "C076B8",
+          "after": "C07738"
+        },
+        {
+          "call": 4151,
+          "channel": 0,
+          "before": "C076F8",
+          "after": "C07778"
+        },
+        {
+          "call": 4151,
+          "channel": 1,
+          "before": "C07738",
+          "after": "C077B8"
+        },
+        {
+          "call": 4316,
+          "channel": 0,
+          "before": "C07778",
+          "after": "C077F8"
+        },
+        {
+          "call": 4316,
+          "channel": 1,
+          "before": "C077B8",
+          "after": "C07838"
+        },
+        {
+          "call": 4812,
+          "channel": 0,
+          "before": "C077F8",
+          "after": "C07878"
+        },
+        {
+          "call": 4812,
+          "channel": 1,
+          "before": "C07838",
+          "after": "C078B8"
+        },
+        {
+          "call": 4977,
+          "channel": 0,
+          "before": "C07878",
+          "after": "C07C40"
+        },
+        {
+          "call": 4977,
+          "channel": 1,
+          "before": "C078B8",
+          "after": "C07C80"
+        }
+      ],
+      "initial_hardware": {
+        "cia_pra": 192,
+        "cia_ddra": 3,
+        "led_pin_on": true,
+        "channels": [
+          {
+            "state": 0,
+            "volume": 0,
+            "interrupt_pending": false,
+            "flags": 128,
+            "length_words": 0,
+            "remaining_words": 0,
+            "period": 1,
+            "data_word": 0,
+            "buffer": 0,
+            "cursor": 0,
+            "next_cycles": 4294967295,
+            "drhpos": 0
+          },
+          {
+            "state": 0,
+            "volume": 0,
+            "interrupt_pending": false,
+            "flags": 128,
+            "length_words": 0,
+            "remaining_words": 0,
+            "period": 1,
+            "data_word": 0,
+            "buffer": 0,
+            "cursor": 0,
+            "next_cycles": 4294967295,
+            "drhpos": 0
+          },
+          {
+            "state": 0,
+            "volume": 0,
+            "interrupt_pending": false,
+            "flags": 128,
+            "length_words": 0,
+            "remaining_words": 0,
+            "period": 1,
+            "data_word": 0,
+            "buffer": 0,
+            "cursor": 0,
+            "next_cycles": 4294967295,
+            "drhpos": 0
+          },
+          {
+            "state": 0,
+            "volume": 0,
+            "interrupt_pending": false,
+            "flags": 128,
+            "length_words": 0,
+            "remaining_words": 0,
+            "period": 1,
+            "data_word": 0,
+            "buffer": 0,
+            "cursor": 0,
+            "next_cycles": 4294967295,
+            "drhpos": 0
+          }
+        ]
+      },
+      "filter_scope": "Published gui_data.powerled/filter boolean at every replay boundary via original LED interface; no live CIA reads or repeated serialization; within-block transition sample unproven",
+      "native_sound_acceptance": false,
+      "led_updates": [
+        {
+          "kind": "led",
+          "call": 1,
+          "sample_frames": 0,
+          "led": 0,
+          "state": 1
+        },
+        {
+          "kind": "led",
+          "call": 122,
+          "sample_frames": 106722,
+          "led": 1,
+          "state": 1
+        },
+        {
+          "kind": "led",
+          "call": 122,
+          "sample_frames": 106722,
+          "led": 3,
+          "state": 1
+        },
+        {
+          "kind": "led",
+          "call": 3859,
+          "sample_frames": 3402756,
+          "led": 1,
+          "state": 0
+        },
+        {
+          "kind": "led",
+          "call": 3859,
+          "sample_frames": 3402756,
+          "led": 3,
+          "state": 0
+        },
+        {
+          "kind": "led",
+          "call": 4094,
+          "sample_frames": 3610026,
+          "led": 1,
+          "state": 1
+        },
+        {
+          "kind": "led",
+          "call": 4094,
+          "sample_frames": 3610026,
+          "led": 3,
+          "state": 1
+        }
+      ],
+      "power_filter_boundary_counts": {
+        "1": 5000
+      },
+      "initial_published_led_states": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_published_led_states": [
+        1,
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "resolved_voice_layout": {
+        "hunk_74": 12910600,
+        "hunk_75": 12910872,
+        "hunk_76": 12911288,
+        "voice_slots": 12910616,
+        "master_volume": 12910854,
+        "verified_hunk_76_bytes": 420,
+        "disk_hunk_76_sha256": "ee2e47870bb7d698441f797a2a6bc38ede72e3e6f88d39eadd3fd0ee19ffd01c"
+      },
+      "known_voice_boundaries": 1180,
+      "unknown_voice_boundaries": 3820,
+      "voice_layout_scope": "Immutable original Hunk 76 and all relocation equations identify loaded Hunk 74 ownership; unresolved game voices are unknown, not empty"
+    },
+    "native_runner_sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0",
+    "native_trace_sha256": "7e7caada6b4a05bfcc2d2636665ee755bda9af60d3f4ec36ae13e66a5c2db415",
+    "requests_by_channel": [
+      24,
+      24,
+      0,
+      0
+    ],
+    "all_original_requests_match_ordered_native_payload_period_volume": true,
+    "comparison_search_shift_trim_or_gain_conversion": false,
+    "wrong_payload_length_period_volume_rejected": true,
+    "timing": {
+      "0": {
+        "beam_line_candidates": {
+          "312": {
+            "intervals": 21,
+            "min_cycles": -37600,
+            "max_cycles": -2228
+          },
+          "313": {
+            "intervals": 21,
+            "min_cycles": -145,
+            "max_cycles": 196
+          },
+          "314": {
+            "intervals": 21,
+            "min_cycles": 2230,
+            "max_cycles": 37878
+          }
+        },
+        "native_refill_rounding_cycles": {
+          "min": 3.1848958330228925,
+          "max": 70.28364583291113
+        },
+        "original_initial_and_prime": [
+          {
+            "call": 3821,
+            "hardware_frame": 3821,
+            "vpos": 284,
+            "hpos": 158,
+            "samples": 117392,
+            "bytes": 2044,
+            "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565",
+            "period": 358,
+            "volume": 63
+          },
+          {
+            "call": 3821,
+            "hardware_frame": 3821,
+            "vpos": 286,
+            "hpos": 90,
+            "samples": 117392,
+            "bytes": 2044,
+            "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565",
+            "period": 358,
+            "volume": 63
+          }
+        ],
+        "native_initial_and_prime_output_frames": [
+          0,
+          0
+        ]
+      },
+      "1": {
+        "beam_line_candidates": {
+          "312": {
+            "intervals": 21,
+            "min_cycles": -37675,
+            "max_cycles": -2212
+          },
+          "313": {
+            "intervals": 21,
+            "min_cycles": -38,
+            "max_cycles": 58
+          },
+          "314": {
+            "intervals": 21,
+            "min_cycles": 2232,
+            "max_cycles": 37689
+          }
+        },
+        "native_refill_rounding_cycles": {
+          "min": 3.1848958330228925,
+          "max": 70.28364583291113
+        },
+        "original_initial_and_prime": [
+          {
+            "call": 3821,
+            "hardware_frame": 3821,
+            "vpos": 308,
+            "hpos": 148,
+            "samples": 117392,
+            "bytes": 2044,
+            "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565",
+            "period": 358,
+            "volume": 63
+          },
+          {
+            "call": 3821,
+            "hardware_frame": 3821,
+            "vpos": 310,
+            "hpos": 60,
+            "samples": 117392,
+            "bytes": 2044,
+            "sha256": "e22ee6afadb6c7825456db3a8ea2640a7ddfae796779298a45b86b9b0f282565",
+            "period": 358,
+            "volume": 63
+          }
+        ],
+        "native_initial_and_prime_output_frames": [
+          0,
+          0
+        ]
+      }
+    },
+    "original_onset": {
+      "rate_hz": 44100,
+      "first_nonzero_stereo_frame_by_channel": [
+        3370056,
+        3370123
+      ],
+      "right_minus_left_frames": 67
+    },
+    "native_onset": {
+      "rate_hz": 48000,
+      "first_nonzero_stereo_frame_by_channel": [
+        19,
+        19
+      ],
+      "right_minus_left_frames": 0
+    },
+    "whole_flight_sound_acceptance": false
+  },
+  "lossless_retention": {
+    "scope": "Whole WAV bytes verified before removing raw passing copies; no resampling, normalization or sample omission",
+    "files": [
+      {
+        "path": "build\\native-audio\\current-native-complete-demo\\native.wav.gz",
+        "decoded_sha256": "feeea779226c51b9ca416753b5ed08ce26ad03f5236ebb8fce5ff7ba265d3e04",
+        "decoded_bytes": 48691244,
+        "retained_sha256": "a69eb3b98bea01d75b7d4d6edc4a629e0855b573a9739b01b73da0c12bb329be",
+        "retained_bytes": 37027379
+      },
+      {
+        "path": "build\\native-audio\\filter-response-cold\\ready-filtered\\original.wav.gz",
+        "decoded_sha256": "679663513713d3cea4a4a308de348fcb2c2b6e6ba069aa64092b6f3f428e8824",
+        "decoded_bytes": 17640044,
+        "retained_sha256": "87021dc867e62d67da4e5a62e8272a178acf7c1cb087c3796d1f1c8763c44736",
+        "retained_bytes": 3132267
+      }
+    ]
+  },
+  "evidence_files": {
+    "build/native-audio/current-native-complete-demo/audio.jsonl.gz": {
+      "bytes": 568852,
+      "sha256": "0ddcc740e3ac0835776a3b7ce59c8b2bfe3e34ffb8188d77dc7979d92e7d9254"
+    },
+    "build/native-audio/current-native-complete-demo/command.json": {
+      "bytes": 1241,
+      "sha256": "9f6f0a7f74becd781099d7af5ebb277c3a0b86d9f1c5628aaa762f5478e387f6"
+    },
+    "build/native-audio/current-native-complete-demo/final.dat.gz": {
+      "bytes": 326811,
+      "sha256": "fe7c9287acb8ca7b7a85e7f5a501dcdeab60182b7a1fe3cc879e065b70b0cb5c"
+    },
+    "build/native-audio/current-native-complete-demo/memory.json": {
+      "bytes": 221,
+      "sha256": "da69c49d614b3517361e3f4dcee72124490a912b269ba55850d5b664f8464e77"
+    },
+    "build/native-audio/current-native-complete-demo/native.log": {
+      "bytes": 986,
+      "sha256": "6f8ff7404c643b238a04903a25eb5f0ce923a2636e03e83d0471fed28780c277"
+    },
+    "build/native-audio/current-native-complete-demo/native.wav.gz": {
+      "bytes": 37027379,
+      "sha256": "a69eb3b98bea01d75b7d4d6edc4a629e0855b573a9739b01b73da0c12bb329be"
+    },
+    "build/native-audio/current-native-complete-demo/original-payload-comparison.json": {
+      "bytes": 21852,
+      "sha256": "8749019d5fa0b3f44202152fa5613b90d7d602d7935ee7e1f1327e43673f5611"
+    },
+    "build/native-audio/current-native-complete-demo/report.json": {
+      "bytes": 2675,
+      "sha256": "37bb3a84cbe5456d5933031f99c7ccbd99b44fccc07a4ad3809e09ad0322f4ee"
+    },
+    "build/native-audio/current-native-complete-demo/retention.json": {
+      "bytes": 863,
+      "sha256": "9360926aca9a6407624a320dde056c76d897340e44cf8afe62bc9a40582fe119"
+    },
+    "build/native-audio/current-native-complete-demo/startup-handoffs.json": {
+      "bytes": 20249,
+      "sha256": "9aba2a1d97f6df0f9920717234116b908cbdd39e023a30f1b28ffe7585f4e509"
+    },
+    "tools/native/check_music_handoffs.py": {
+      "bytes": 12504,
+      "sha256": "7c625bcf25444cb726b36b61d04f5879b2f6c31c9b9f2a2c1da8cb27ce09bd3b"
+    },
+    "tools/native/check_original_audio_capture.py": {
+      "bytes": 4859,
+      "sha256": "67ebad8dd4d56f0969bbf7fa4c0f39ad02c4a8fd701d253ba1a4b764198d462e"
+    },
+    "tools/native/check_original_audio_events.py": {
+      "bytes": 9255,
+      "sha256": "efc0f3cddd3f640d09b7e2146bdd09dce549204bfdc8ce0c7ebeb4e2a949957f"
+    },
+    "tools/native/check_native_audio_trace.py": {
+      "bytes": 4898,
+      "sha256": "ae49021d64201b81476366fd3cd659ee6f7ebf2239ad4170538cb29a9b6ffcbb"
+    },
+    "build/native-cmake/native/Release/fa18_native.exe": {
+      "bytes": 2441728,
+      "sha256": "7ebadbd5cb2ac17df99751dda3dc3f804f57792d0762b0a32f7accac08a815a0"
+    }
+  },
+  "source_reference_pcm_sha256": "76ffa4bef9b203c84e67565b41685b1e62d66c0710fa0c318d264fa2d8c2b3c0",
+  "native_runtime_changed": false
+}

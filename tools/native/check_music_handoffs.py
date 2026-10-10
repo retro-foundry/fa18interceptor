@@ -15,7 +15,7 @@ import wave
 
 from check_native_audio_trace import read_audio_trace
 from check_original_audio_events import validate_events
-from check_original_audio_capture import recorded_bytes
+from check_original_audio_capture import recorded_bytes, reference_file
 
 
 def digest(data):
@@ -27,27 +27,28 @@ def requests(folder,layout):
     registers=[{} for _ in range(4)]
     pending=[None]*4
     result=[[] for _ in range(4)]
-    for line in (folder/'audio_events.jsonl').open():
-        row=json.loads(line)
-        if row.get('kind')!='write' or not 0xdff0a0<=row['address']<=0xdff0da:
-            continue
-        channel,register=divmod(row['address']-0xdff0a0,16)
-        registers[channel][register]=row['value']
-        offset=row['source']-layout['hunk_76']
-        if offset==44:
-            assert register==4 and pending[channel] is None
-            pointer=(registers[channel][0]<<16|registers[channel][2])&~1
-            size=2*(row['value'] or 65536)
-            bank,at=(banks[0],pointer) if pointer<0x80000 else (banks[1],pointer-0xc00000)
-            payload=bank[at:at+size]
-            assert at>=0 and len(payload)==size
-            pending[channel]={'call':row['call'],'hardware_frame':row['hardware_frame'],
-                'vpos':row['vpos'],'hpos':row['hpos'],'samples':pointer,
-                'bytes':size,'sha256':digest(payload)}
-        elif offset==308 and pending[channel] is not None:
-            assert register==8
-            pending[channel].update(period=registers[channel][6],volume=row['value'])
-            result[channel].append(pending[channel]);pending[channel]=None
+    with reference_file(folder/'audio_events.jsonl') as log:
+        for line in log:
+            row = json.loads(line)
+            if row.get('kind')!='write' or not 0xdff0a0<=row['address']<=0xdff0da:
+                continue
+            channel,register=divmod(row['address']-0xdff0a0,16)
+            registers[channel][register]=row['value']
+            offset=row['source']-layout['hunk_76']
+            if offset==44:
+                assert register==4 and pending[channel] is None
+                pointer=(registers[channel][0]<<16|registers[channel][2])&~1
+                size=2*(row['value'] or 65536)
+                bank,at=(banks[0],pointer) if pointer<0x80000 else (banks[1],pointer-0xc00000)
+                payload=bank[at:at+size]
+                assert at>=0 and len(payload)==size
+                pending[channel]={'call':row['call'],'hardware_frame':row['hardware_frame'],
+                    'vpos':row['vpos'],'hpos':row['hpos'],'samples':pointer,
+                    'bytes':size,'sha256':digest(payload)}
+            elif offset==308 and pending[channel] is not None:
+                assert register==8
+                pending[channel].update(period=registers[channel][6],volume=row['value'])
+                result[channel].append(pending[channel]);pending[channel]=None
     assert all(item is None for item in pending)
     return result
 
@@ -110,7 +111,7 @@ def complete_payload_catalog(original,native,validation,report,native_data):
 
 
 def onset(path):
-    with wave.open(str(path)) as wav:
+    with reference_file(path) as file, wave.open(file) as wav:
         rate=wav.getframerate()
         samples=array.array('h',wav.readframes(wav.getnframes()))
     first=[next((i//2 for i,value in enumerate(samples) if i%2==channel and value),None)

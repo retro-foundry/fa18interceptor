@@ -1,5 +1,11 @@
 # Current playable port handoff
 
+Current native sound (2026-10-10): a fresh complete Demo preserves all
+12,680 boundaries, 8,248 requests, 554 stops and every PCM/RAM/trace byte.
+All 8,281 original request payloads and 48 ordered startup-music requests
+match current native assets. Original/native onset and handoff timing
+remain open. See [current audio evidence](analysis/native_current_audio_recording_milestone.md).
+
 Complete original sample use (2026-10-10): all 21,069 replay calls retain
 5,878,371 actual mixer bytes with complete PCM/execution unchanged. Channel 1
 emits both bytes of its extra zero word; channel 2 discards its startup word.
