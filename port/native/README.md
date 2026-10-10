@@ -1,5 +1,15 @@
 # Native port runner
 
+Live native escort (2026-10-10): ordinary qualification and mission-three
+controls earn the prefix, then live-carrier controls earn escort, wire
+landing, the second completion and menu return. The playable runner
+reproduces all 27,176 trace rows, final RAM and saved pilot exactly with
+zero resets. Three original instruction bodies around the first motion
+difference pass; failed approaches remain rejected and retained. Patrol
+regression passes. Original/native whole-flight and sound timing
+acceptance remain open. No playable change.
+See [live escort evidence](../../analysis/native_live_escort_input_milestone.md).
+
 Startup dispatch (2026-10-10): original empty-voice handling contains a
 400-iteration wait after DMA stop. The recorded channel gap is 5,438
 chip clocks at DMA enable plus 12 at the following fetch, agreeing with

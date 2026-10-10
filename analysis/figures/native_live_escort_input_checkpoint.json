@@ -1,0 +1,2383 @@
+{
+  "date": "2026-10-10",
+  "scope": "Complete independently started native escort control recording reproduced by the actual playable runner; separate first-motion original instruction window. Original/native whole-flight and sound timing acceptance remain open.",
+  "accepted_native_escort": {
+    "scope": "Native mode-4 live-state input qualification; independent original flight remains separate",
+    "mission_success": true,
+    "qualification_accepted": true,
+    "native_level_final_input": true,
+    "input_profile": "wire_level_height",
+    "mission_mode": 4,
+    "escort_anchors": [
+      {
+        "source_observation": 1,
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 40170,
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 40643,
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1
+      }
+    ],
+    "canonical_complete_trace_and_ram_exact": true,
+    "complete_native_artifacts": {
+      "jsonl_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c",
+      "dat_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec"
+    },
+    "source_prefix_last": 40644,
+    "source_trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+    "source_consumed_input_sha256": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+    "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "runner_sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "test_sha256": "77e73fb491c0c46ffac78c48792d62622d67fd2b98a50e1e3e89a3ed9b286ca0",
+    "controller_ticks_per_update": 4,
+    "driver": {
+      "patrol_input_result": true,
+      "tick": 75601,
+      "iteration": 47349,
+      "game_tick": 0,
+      "phase": 0,
+      "completions": 2,
+      "grade": 1,
+      "objective": 1,
+      "airborne": 1,
+      "gear_up": 1,
+      "gear_down": 1,
+      "landed": 1,
+      "region": 0,
+      "speed": 0,
+      "resets": 0,
+      "xyz": [
+        1070169,
+        7,
+        1090564
+      ],
+      "mode": 4,
+      "wire": 1,
+      "menu": 1,
+      "earned_tick": 74601,
+      "prefix_native_end": 40398,
+      "prefix_source_end": 40644,
+      "prefix_keys": 1432,
+      "anchor_failed": 0
+    },
+    "canonical": {
+      "frame_owner_exit": false,
+      "frames": 75601,
+      "screen": "menu",
+      "mode": 0,
+      "glyphs": 24012,
+      "record_updates": 10992,
+      "scene_frames": 10985,
+      "terrain_polygons": 45159,
+      "model_calls": 91586,
+      "hud_frames": 10985,
+      "control_frames": 27180,
+      "scene_selected": true,
+      "stage": "C0FCB4",
+      "game_tick": 0,
+      "timer_pending": false,
+      "timer_yields": 25854,
+      "display_publications": 27180,
+      "display_yields": 27211,
+      "display_pending": false,
+      "displayed_page": 1,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 27177,
+      "input_events": 8496,
+      "input_queued": 0,
+      "update_iterations": 47825,
+      "replay_iterations": 47349,
+      "replay_events": 1432,
+      "host_replay_events": 7079,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 75601,
+      "voice_publications": 160856,
+      "voice_levels": [
+        [
+          358,
+          31
+        ],
+        [
+          358,
+          31
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          0
+        ]
+      ],
+      "sample_requests": 87305,
+      "sample_frames": 72576960,
+      "nonzero_sample_frames": 71986047,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "enlisted_save_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+    "earned_save_sha256": "bf391e322af0f3853b83156ef64e58ab30c935a2e5a1094fc30a3972dcf95ee6",
+    "earned_save_hex": "00010001000204000000013b0000000000000000000101000000000000004e4557000000000000000000000000000000000000000000000200020018000000000000000100010000000300000000",
+    "physical_input_sha256": "4828cb3b576f64ee62bdd8a0d7b193615c5ed1a274f639adcd2facb0e3a8d368",
+    "prefix_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719",
+    "canonical_prefix_sha256": "5ade3435f3477375bc15bb7b153e496bcc797dc3b3aee72ff773e545523cd9ab",
+    "canonical_earned_save_exact": true,
+    "flight_state_seeded": false
+  },
+  "native_landing_observations": {
+    "carrier_touchdown": {
+      "update": 46422,
+      "frame": 74413,
+      "game_tick": 5093,
+      "contact": "C082",
+      "speed": 2470,
+      "xyz": [
+        1153010.46875,
+        119.03125,
+        1070779.75
+      ]
+    },
+    "first_arrest": {
+      "update": 46422,
+      "frame": 74413,
+      "game_tick": 5093,
+      "contact": "C082",
+      "speed": 2470,
+      "xyz": [
+        1153010.46875,
+        119.03125,
+        1070779.75
+      ]
+    },
+    "arrest_stop": {
+      "update": 46471,
+      "frame": 74579,
+      "game_tick": 5142,
+      "contact": "C482",
+      "speed": 0,
+      "xyz": [
+        1153010.46875,
+        119.03125,
+        1071051.59375
+      ]
+    }
+  },
+  "rejected_curved_final": {
+    "scope": "Native mode-4 live-state input qualification; independent original flight remains separate",
+    "mission_success": false,
+    "qualification_accepted": false,
+    "mission_mode": 4,
+    "escort_anchors": [
+      {
+        "source_observation": 1,
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 40170,
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 40643,
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1
+      }
+    ],
+    "canonical_complete_trace_and_ram_exact": true,
+    "complete_native_artifacts": {
+      "jsonl_sha256": "576eccab77ce06f594d3595dbce6fc531578887f35d869144490c0a26f11847f",
+      "dat_sha256": "3fce79875dde14ee9f11b2b0dddf08fd9d9f56f42ae44e3bc90ff17862613374"
+    },
+    "source_prefix_last": 40644,
+    "source_trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+    "source_consumed_input_sha256": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+    "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "runner_sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "test_sha256": "2bf6328eaa78cf2d030b2ffc74ec351caffbb369da107514265d06d71dfcca9b",
+    "controller_ticks_per_update": 4,
+    "driver": {
+      "patrol_input_result": true,
+      "tick": 74527,
+      "iteration": 46408,
+      "game_tick": 5080,
+      "phase": 4,
+      "completions": 1,
+      "grade": 0,
+      "objective": 1,
+      "airborne": 1,
+      "gear_up": 1,
+      "gear_down": 1,
+      "landed": 0,
+      "region": 200,
+      "speed": 0,
+      "resets": 1,
+      "xyz": [
+        1153068,
+        119,
+        1071520
+      ],
+      "mode": 4,
+      "wire": 0,
+      "menu": 0,
+      "earned_tick": 0,
+      "prefix_native_end": 40398,
+      "prefix_source_end": 40644,
+      "prefix_keys": 1432,
+      "anchor_failed": 0
+    },
+    "canonical": {
+      "frame_owner_exit": false,
+      "frames": 74527,
+      "screen": "scene-setup",
+      "mode": 4,
+      "glyphs": 23344,
+      "record_updates": 10871,
+      "scene_frames": 10865,
+      "terrain_polygons": 45159,
+      "model_calls": 90987,
+      "hud_frames": 10865,
+      "control_frames": 26240,
+      "scene_selected": true,
+      "stage": "C11830",
+      "game_tick": 5080,
+      "timer_pending": false,
+      "timer_yields": 25583,
+      "display_publications": 26239,
+      "display_yields": 26432,
+      "display_pending": true,
+      "displayed_page": 0,
+      "postflight_callbacks": 1,
+      "postflight_resets": 1,
+      "input_passes": 26236,
+      "input_events": 8445,
+      "input_queued": 0,
+      "update_iterations": 46884,
+      "replay_iterations": 46408,
+      "replay_events": 1432,
+      "host_replay_events": 7026,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 74527,
+      "voice_publications": 158169,
+      "voice_levels": [
+        [
+          764,
+          40
+        ],
+        [
+          766,
+          40
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 84544,
+      "sample_frames": 71545920,
+      "nonzero_sample_frames": 70919704,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "enlisted_save_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+    "earned_save_sha256": "d7f555168575dcc7c9f8d41217ce3dbd59a5d892c641f19942a309f8db0dc354",
+    "earned_save_hex": "0001000000020300000000ad0000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+    "physical_input_sha256": "ab62e98a3b70af3173d2abe38a347dece98511c3823c65fd8a9a4c352522ad38",
+    "prefix_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719",
+    "canonical_prefix_sha256": "9601e317d318656ff0ea80614cfca172ea8a84863aaa56f4b06222030d9ad9af",
+    "canonical_earned_save_exact": true,
+    "flight_state_seeded": false
+  },
+  "rejected_runway_style_final": {
+    "scope": "Native mode-4 live-state input qualification; independent original flight remains separate",
+    "mission_success": false,
+    "qualification_accepted": false,
+    "native_level_final_input": true,
+    "mission_mode": 4,
+    "escort_anchors": [
+      {
+        "source_observation": 1,
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 40170,
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 40643,
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1
+      }
+    ],
+    "canonical_complete_trace_and_ram_exact": true,
+    "complete_native_artifacts": {
+      "jsonl_sha256": "07009d2a8f69591a447dacf4fcbfb1a7128495fe7b4004bdfa9cc4f1244095fc",
+      "dat_sha256": "f6821aa7ddff7256c4e4e53544921bf426185d0bb5cbf451cd31352f0d5c23bd"
+    },
+    "source_prefix_last": 40644,
+    "source_trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+    "source_consumed_input_sha256": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+    "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "runner_sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "test_sha256": "7ac431e162d1161cc19707e876187f04ca25cf56cf746164113afba709f6fe6b",
+    "controller_ticks_per_update": 4,
+    "driver": {
+      "patrol_input_result": true,
+      "tick": 75807,
+      "iteration": 46835,
+      "game_tick": 5506,
+      "phase": 1,
+      "completions": 1,
+      "grade": 0,
+      "objective": 1,
+      "airborne": 1,
+      "gear_up": 1,
+      "gear_down": 1,
+      "landed": 1,
+      "region": 2,
+      "speed": 0,
+      "resets": 0,
+      "xyz": [
+        1153724,
+        2,
+        1073754
+      ],
+      "mode": 4,
+      "wire": 0,
+      "menu": 0,
+      "earned_tick": 0,
+      "prefix_native_end": 40398,
+      "prefix_source_end": 40644,
+      "prefix_keys": 1432,
+      "anchor_failed": 0
+    },
+    "canonical": {
+      "frame_owner_exit": false,
+      "frames": 75807,
+      "screen": "scene-setup",
+      "mode": 4,
+      "glyphs": 23344,
+      "record_updates": 11298,
+      "scene_frames": 11292,
+      "terrain_polygons": 45159,
+      "model_calls": 93055,
+      "hud_frames": 11292,
+      "control_frames": 26667,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 5506,
+      "timer_pending": true,
+      "timer_yields": 26598,
+      "display_publications": 26666,
+      "display_yields": 26697,
+      "display_pending": false,
+      "displayed_page": 1,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 26663,
+      "input_events": 8817,
+      "input_queued": 0,
+      "update_iterations": 47311,
+      "replay_iterations": 46835,
+      "replay_events": 1432,
+      "host_replay_events": 7398,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 75807,
+      "voice_publications": 161440,
+      "voice_levels": [
+        [
+          649,
+          48
+        ],
+        [
+          651,
+          48
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 88047,
+      "sample_frames": 72774720,
+      "nonzero_sample_frames": 72192461,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "enlisted_save_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+    "earned_save_sha256": "d7f555168575dcc7c9f8d41217ce3dbd59a5d892c641f19942a309f8db0dc354",
+    "earned_save_hex": "0001000000020300000000ad0000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+    "physical_input_sha256": "98204c5e8db3042b061ba34acaa0131d0d81fc2ada6d109d9f9cd39b1c647abf",
+    "prefix_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719",
+    "canonical_prefix_sha256": "7f16d00636a4d6a2ed07acbe5f4269285c18d4759df302ba92e743e1761fb398",
+    "canonical_earned_save_exact": true,
+    "flight_state_seeded": false
+  },
+  "rejected_invalid_height_profile": {
+    "scope": "Native mode-4 live-state input qualification; independent original flight remains separate",
+    "mission_success": false,
+    "qualification_accepted": false,
+    "native_level_final_input": true,
+    "input_profile": "wire_level_height",
+    "mission_mode": 4,
+    "escort_anchors": [
+      {
+        "source_observation": 1,
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 40170,
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 40643,
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1
+      }
+    ],
+    "canonical_complete_trace_and_ram_exact": true,
+    "complete_native_artifacts": {
+      "jsonl_sha256": "c33db0017ad4d7e8bc1c5d839ca6dbc46890d947c4d4f389fb39a9f082a29124",
+      "dat_sha256": "149693e942aeada07e2952113038f2ef0b0c1641ef53fb1d372a6804cde6fff7"
+    },
+    "source_prefix_last": 40644,
+    "source_trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+    "source_consumed_input_sha256": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+    "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "runner_sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "test_sha256": "c4185cb6465405407ad64b6117188c8b1e215b50b5b4693e8c155d048dcfdd64",
+    "controller_ticks_per_update": 4,
+    "driver": {
+      "patrol_input_result": true,
+      "tick": 74537,
+      "iteration": 46411,
+      "game_tick": 5083,
+      "phase": 4,
+      "completions": 1,
+      "grade": 0,
+      "objective": 1,
+      "airborne": 1,
+      "gear_up": 1,
+      "gear_down": 1,
+      "landed": 0,
+      "region": 200,
+      "speed": 0,
+      "resets": 1,
+      "xyz": [
+        1153068,
+        119,
+        1071520
+      ],
+      "mode": 4,
+      "wire": 0,
+      "menu": 0,
+      "earned_tick": 0,
+      "prefix_native_end": 40398,
+      "prefix_source_end": 40644,
+      "prefix_keys": 1432,
+      "anchor_failed": 0
+    },
+    "canonical": {
+      "frame_owner_exit": false,
+      "frames": 74537,
+      "screen": "scene-setup",
+      "mode": 4,
+      "glyphs": 23344,
+      "record_updates": 10874,
+      "scene_frames": 10868,
+      "terrain_polygons": 45097,
+      "model_calls": 90124,
+      "hud_frames": 10868,
+      "control_frames": 26243,
+      "scene_selected": true,
+      "stage": "C11830",
+      "game_tick": 5083,
+      "timer_pending": false,
+      "timer_yields": 25590,
+      "display_publications": 26242,
+      "display_yields": 26435,
+      "display_pending": true,
+      "displayed_page": 1,
+      "postflight_callbacks": 1,
+      "postflight_resets": 1,
+      "input_passes": 26239,
+      "input_events": 8514,
+      "input_queued": 0,
+      "update_iterations": 46887,
+      "replay_iterations": 46411,
+      "replay_events": 1432,
+      "host_replay_events": 7095,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 74537,
+      "voice_publications": 158620,
+      "voice_levels": [
+        [
+          764,
+          40
+        ],
+        [
+          766,
+          40
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          124,
+          0
+        ]
+      ],
+      "sample_requests": 86562,
+      "sample_frames": 71555520,
+      "nonzero_sample_frames": 70929188,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "enlisted_save_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+    "earned_save_sha256": "d7f555168575dcc7c9f8d41217ce3dbd59a5d892c641f19942a309f8db0dc354",
+    "earned_save_hex": "0001000000020300000000ad0000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+    "physical_input_sha256": "1fcfcf14b828a842454415f25ee2765e46da1e86ed0150f5ab76ee48a6d14c76",
+    "prefix_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719",
+    "canonical_prefix_sha256": "3ab42cd33a2b9d5b3ded90e6febbab0cd3462d1c5b043c5d80025655579ea7ee",
+    "canonical_earned_save_exact": true,
+    "flight_state_seeded": false,
+    "intended_input_profile_valid": false,
+    "controller_error": "Temporary validation goal restoration overwrote its first initialization; takeoff height became zero. These controls are reproduced by the canonical runner but do not qualify the intended approach."
+  },
+  "original_failed_flight_overlap": {
+    "scope": "Complete native failed flight through reset-entry versus corresponding original observations at declared flight entry/JSR identities. The original successful flight continues beyond this interval. No fitted state, coordinate translation or masked acceptance.",
+    "original_first": 40643,
+    "original_last_compared": 46669,
+    "original_observations_compared": 6027,
+    "original_successful_flight_last": 47812,
+    "original_flight_observations_not_compared": 1143,
+    "native_first": 40395,
+    "native_last": 46408,
+    "distinct_updates": 6014,
+    "duplicates": 13,
+    "strict_comparison": {
+      "compared": 6027,
+      "record_cores_compared": 96432,
+      "record_cores_matching": 59071,
+      "complete_record_boundaries_matching": 0,
+      "camera_and_controls_matching": 0,
+      "complete_pages_matching": 949,
+      "timer_and_hud_matching": 0,
+      "first_differences": [
+        {
+          "source_iteration": 40643,
+          "native_iteration": 40395,
+          "source_tick": 1,
+          "native_tick": 1,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba8",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "000b8b0e",
+              "0000ea60"
+            ],
+            "previous_seconds": [
+              "12894ba7",
+              "0000045f"
+            ],
+            "previous_fraction": [
+              "000178e9",
+              "00009c40"
+            ],
+            "elapsed_sample": [
+              "0000067c",
+              "00001d24"
+            ],
+            "poll_seconds": [
+              "12894ba7",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "000178ea",
+              "0000ea60"
+            ],
+            "primary_count": [
+              "81",
+              "69"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40644,
+          "native_iteration": 40396,
+          "source_tick": 2,
+          "native_tick": 2,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba8",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "000d5fd0",
+              "00030d40"
+            ],
+            "previous_seconds": [
+              "12894ba8",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "000d5fcf",
+              "00013880"
+            ],
+            "elapsed_total": [
+              "000006f4",
+              "00001b80"
+            ],
+            "elapsed_sample": [
+              "000006f4",
+              "0000008c"
+            ],
+            "poll_seconds": [
+              "12894ba7",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "000178ea",
+              "0000ea60"
+            ],
+            "primary_count": [
+              "80",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40645,
+          "native_iteration": 40397,
+          "source_tick": 3,
+          "native_tick": 3,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba8",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "000ee672",
+              "000445c0"
+            ],
+            "previous_seconds": [
+              "12894ba8",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "000ee671",
+              "00035b60"
+            ],
+            "elapsed_total": [
+              "00000758",
+              "00001c0c"
+            ],
+            "partial_total": [
+              "0064",
+              "0000"
+            ],
+            "elapsed_sample": [
+              "00000758",
+              "000000dc"
+            ],
+            "poll_seconds": [
+              "12894ba7",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "000178ea",
+              "0000ea60"
+            ],
+            "primary_count": [
+              "80",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40646,
+          "native_iteration": 40398,
+          "source_tick": 4,
+          "native_tick": 4,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "000178f5",
+              "00053020"
+            ],
+            "previous_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "000178f4",
+              "000493e0"
+            ],
+            "elapsed_total": [
+              "000007d1",
+              "00001c5c"
+            ],
+            "partial_total": [
+              "0000",
+              "0050"
+            ],
+            "elapsed_sample": [
+              "000007d0",
+              "00000118"
+            ],
+            "poll_seconds": [
+              "12894ba7",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "000178ea",
+              "0000ea60"
+            ],
+            "primary_count": [
+              "7f",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40647,
+          "native_iteration": 40399,
+          "source_tick": 5,
+          "native_tick": 5,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "00034db7",
+              "00061a80"
+            ],
+            "previous_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "00034db6",
+              "00057e40"
+            ],
+            "elapsed_total": [
+              "00000849",
+              "00001c98"
+            ],
+            "partial_total": [
+              "0078",
+              "0000"
+            ],
+            "elapsed_sample": [
+              "00000848",
+              "00000154"
+            ],
+            "poll_seconds": [
+              "12894ba7",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "000178ea",
+              "0000ea60"
+            ],
+            "primary_count": [
+              "7f",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40648,
+          "native_iteration": 40400,
+          "source_tick": 6,
+          "native_tick": 6,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "00057099",
+              "00075300"
+            ],
+            "previous_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "00057098",
+              "000668a0"
+            ],
+            "elapsed_total": [
+              "000008d5",
+              "00001cd4"
+            ],
+            "partial_total": [
+              "0000",
+              "003c"
+            ],
+            "elapsed_sample": [
+              "000008d4",
+              "000001a4"
+            ],
+            "poll_seconds": [
+              "12894ba7",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "000178ea",
+              "0000ea60"
+            ],
+            "primary_count": [
+              "7f",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40649,
+          "native_iteration": 40401,
+          "source_tick": 7,
+          "native_tick": 7,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "0007455b",
+              "00083d60"
+            ],
+            "previous_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "0007455a",
+              "0007a120"
+            ],
+            "elapsed_total": [
+              "0000094d",
+              "00001d24"
+            ],
+            "partial_total": [
+              "0078",
+              "0000"
+            ],
+            "elapsed_sample": [
+              "0000094c",
+              "000001e0"
+            ],
+            "poll_seconds": [
+              "12894ba7",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "000178ea",
+              "0000ea60"
+            ],
+            "primary_count": [
+              "7f",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40650,
+          "native_iteration": 40402,
+          "source_tick": 8,
+          "native_tick": 8,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "previous_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "00091a1c",
+              "00088b80"
+            ],
+            "elapsed_total": [
+              "000009c5",
+              "00001d60"
+            ],
+            "partial_total": [
+              "0000",
+              "003c"
+            ],
+            "elapsed_sample": [
+              "000009c4",
+              "0000021c"
+            ],
+            "poll_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "primary_count": [
+              "7f",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40651,
+          "native_iteration": 40403,
+          "source_tick": 9,
+          "native_tick": 9,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "000aeedf",
+              "000a6040"
+            ],
+            "previous_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "000aeede",
+              "000975e0"
+            ],
+            "elapsed_total": [
+              "00000a3d",
+              "00001d9c"
+            ],
+            "elapsed_sample": [
+              "00000078",
+              "00000050"
+            ],
+            "poll_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "primary_count": [
+              "7f",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40652,
+          "native_iteration": 40404,
+          "source_tick": 10,
+          "native_tick": 10,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "000d11c1",
+              "000b4aa0"
+            ],
+            "previous_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "000d11c0",
+              "000aae60"
+            ],
+            "elapsed_total": [
+              "00000ac9",
+              "00001dec"
+            ],
+            "elapsed_sample": [
+              "00000104",
+              "0000008c"
+            ],
+            "poll_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "primary_count": [
+              "7f",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40653,
+          "native_iteration": 40405,
+          "source_tick": 11,
+          "native_tick": 11,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "000ee683",
+              "000c8320"
+            ],
+            "previous_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "000ee682",
+              "000b98c0"
+            ],
+            "elapsed_total": [
+              "00000b41",
+              "00001e28"
+            ],
+            "partial_total": [
+              "0078",
+              "003c"
+            ],
+            "elapsed_sample": [
+              "0000017c",
+              "000000dc"
+            ],
+            "poll_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "primary_count": [
+              "7f",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40654,
+          "native_iteration": 40406,
+          "source_tick": 12,
+          "native_tick": 12,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894baa",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "00017906",
+              "000d6d80"
+            ],
+            "previous_seconds": [
+              "12894baa",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "00017905",
+              "000cd140"
+            ],
+            "elapsed_total": [
+              "00000bba",
+              "00001e78"
+            ],
+            "elapsed_sample": [
+              "000001f5",
+              "00000118"
+            ],
+            "poll_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "primary_count": [
+              "7e",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40655,
+          "native_iteration": 40407,
+          "source_tick": 13,
+          "native_tick": 13,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894baa",
+              "00000466"
+            ],
+            "sample_fraction": [
+              "00034dc8",
+              "000e57e0"
+            ],
+            "previous_seconds": [
+              "12894baa",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "00034dc7",
+              "000dbba0"
+            ],
+            "elapsed_total": [
+              "00000c32",
+              "00001eb4"
+            ],
+            "partial_total": [
+              "0078",
+              "003c"
+            ],
+            "elapsed_sample": [
+              "0000026d",
+              "00000154"
+            ],
+            "poll_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "primary_count": [
+              "7e",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40656,
+          "native_iteration": 40408,
+          "source_tick": 14,
+          "native_tick": 14,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894baa",
+              "00000467"
+            ],
+            "sample_fraction": [
+              "000570aa",
+              "00004e20"
+            ],
+            "previous_seconds": [
+              "12894baa",
+              "00000466"
+            ],
+            "previous_fraction": [
+              "000570a9",
+              "000ea600"
+            ],
+            "elapsed_total": [
+              "00000cbe",
+              "00001ef0"
+            ],
+            "partial_total": [
+              "0000",
+              "0078"
+            ],
+            "elapsed_sample": [
+              "000002f9",
+              "000001a4"
+            ],
+            "poll_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "primary_count": [
+              "7e",
+              "68"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40657,
+          "native_iteration": 40409,
+          "source_tick": 15,
+          "native_tick": 15,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894baa",
+              "00000467"
+            ],
+            "sample_fraction": [
+              "0007456c",
+              "00013880"
+            ],
+            "previous_seconds": [
+              "12894baa",
+              "00000467"
+            ],
+            "previous_fraction": [
+              "0007456b",
+              "00009c40"
+            ],
+            "elapsed_total": [
+              "00000d36",
+              "00001f40"
+            ],
+            "partial_total": [
+              "0078",
+              "0000"
+            ],
+            "elapsed_sample": [
+              "00000371",
+              "000001e0"
+            ],
+            "poll_seconds": [
+              "12894ba9",
+              "00000466"
+            ],
+            "poll_fraction": [
+              "00091a1d",
+              "000927c0"
+            ],
+            "primary_count": [
+              "7e",
+              "67"
+            ]
+          }
+        },
+        {
+          "source_iteration": 40658,
+          "native_iteration": 40410,
+          "source_tick": 16,
+          "native_tick": 16,
+          "record_slots": [
+            0,
+            4,
+            8,
+            14
+          ],
+          "game_fields": [
+            "observer",
+            "view_pan_rotate"
+          ],
+          "page_planes": [
+            1,
+            3,
+            5,
+            7
+          ],
+          "timed_fields": {
+            "sample_seconds": [
+              "12894baa",
+              "00000467"
+            ],
+            "sample_fraction": [
+              "00091a2e",
+              "000222e0"
+            ],
+            "previous_seconds": [
+              "12894baa",
+              "00000467"
+            ],
+            "previous_fraction": [
+              "00091a2d",
+              "000186a0"
+            ],
+            "elapsed_total": [
+              "00000dae",
+              "00001f7c"
+            ],
+            "partial_total": [
+              "0000",
+              "003c"
+            ],
+            "elapsed_sample": [
+              "000003e8",
+              "0000021c"
+            ],
+            "poll_seconds": [
+              "12894baa",
+              "00000467"
+            ],
+            "poll_fraction": [
+              "00091a2e",
+              "000222e0"
+            ],
+            "primary_count": [
+              "7e",
+              "67"
+            ]
+          }
+        }
+      ],
+      "first_record_difference": {
+        "source_iteration": 40643,
+        "native_iteration": 40395,
+        "source_tick": 1,
+        "changes": [
+          0,
+          4,
+          8,
+          14
+        ]
+      },
+      "first_game_difference": {
+        "source_iteration": 40643,
+        "native_iteration": 40395,
+        "source_tick": 1,
+        "changes": [
+          "observer",
+          "view_pan_rotate"
+        ]
+      },
+      "first_page_difference": {
+        "source_iteration": 40643,
+        "native_iteration": 40395,
+        "source_tick": 1,
+        "changes": [
+          1,
+          3,
+          5,
+          7
+        ]
+      },
+      "game_fields_compared": [
+        "stage",
+        "game_tick",
+        "phase",
+        "mouse_coordinates",
+        "selected_record",
+        "mode",
+        "target_record",
+        "controls",
+        "observer",
+        "camera_matrix",
+        "view_matrix",
+        "view_pan_rotate",
+        "view_attitude",
+        "view_side"
+      ]
+    },
+    "selected_player_motion_fields_first_differences": {
+      "contact": {
+        "source_observation": 40792,
+        "native_update": 40544,
+        "game_tick": 150,
+        "source_hex": "2000",
+        "native_hex": "2008",
+        "source_frame": 51698,
+        "native_frame": 56811
+      },
+      "velocity": {
+        "source_observation": 40792,
+        "native_update": 40544,
+        "game_tick": 150,
+        "source_hex": "000000000000030800005000",
+        "native_hex": "00000000000002cc00005030",
+        "source_frame": 51698,
+        "native_frame": 56811
+      },
+      "angles": {
+        "source_observation": 40792,
+        "native_update": 40544,
+        "game_tick": 150,
+        "source_hex": "6f1800000000",
+        "native_hex": "6f5000000000",
+        "source_frame": 51698,
+        "native_frame": 56811
+      },
+      "speed": {
+        "source_observation": 40792,
+        "native_update": 40544,
+        "game_tick": 150,
+        "source_hex": "141b141b",
+        "native_hex": "144c144c",
+        "source_frame": 51698,
+        "native_frame": 56811
+      },
+      "fuel": {
+        "source_observation": 40792,
+        "native_update": 40544,
+        "game_tick": 150,
+        "source_hex": "00618986",
+        "native_hex": "006183c2",
+        "source_frame": 51698,
+        "native_frame": 56811
+      },
+      "matrix": {
+        "source_observation": 40792,
+        "native_update": 40544,
+        "game_tick": 150,
+        "source_hex": "40000000000000003fcd05050000fafb3fcd",
+        "native_hex": "40000000000000003fdc043e0000fbc23fdc",
+        "source_frame": 51698,
+        "native_frame": 56811
+      },
+      "position_yz": {
+        "source_observation": 40792,
+        "native_update": 40544,
+        "game_tick": 150,
+        "source_hex": "0000628c107010ec",
+        "native_hex": "000062501070111c",
+        "source_frame": 51698,
+        "native_frame": 56811
+      },
+      "flags": {
+        "source_observation": 44088,
+        "native_update": 43828,
+        "game_tick": 2499,
+        "source_hex": "91c8",
+        "native_hex": "11c8",
+        "source_frame": 71566,
+        "native_frame": 65659
+      }
+    },
+    "selected_field_scope": "Diagnostic localization only. Full cores/pages/fields remain strict above; X and other omitted fields are never excluded from acceptance.",
+    "input_boundary": {
+      "source_at_149": "200000",
+      "source_at_150": "200000",
+      "native_at_149": "200000",
+      "native_at_150": "108000"
+    },
+    "whole_original_native_flight_accepted": false
+  },
+  "original_first_motion_bodies": {
+    "scope": "Actual independently started native bodies immediately around first escort motion difference. Only the external instruction oracle receives native before/after RAM and its original API timer contract; its existing explicit exclusions remain in force.",
+    "native_runner_sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "reference_report_sha256": "8e1d5a476409651d60507f2163a2ec479fc68ccd979ad04a217c8b921163aefc",
+    "oracle_sha256": "0db9597221af550586041969259f6aba2efb2f287f4bb5a6e5ee21ac40ea532b",
+    "oracle_source_sha256": "1bdea2ea1ae3223b6e41c856479082e272c211e7710be19505978c233fde9442",
+    "rows": [
+      {
+        "iteration": 40542,
+        "timing": {
+          "iteration": 40542,
+          "before_tick": 56804,
+          "after_tick": 56806,
+          "saved_tick": 148,
+          "owner_exit": false
+        },
+        "original_body_matching": true,
+        "artifact_decoded_sha256": {
+          "entry": "9d6d7e23ae52c84b1b9b4b8cedb9a35814a13f895c79b1098a9ea5fe883c71bf",
+          "before": "76eb1b4d499da7d899a7cda7f928d939c70d1e16116c1b725608e09dd6c142b2",
+          "after": "35aa190d6e8f99fe4a072dead4e404e4222a3f8c77092dbf4f6e0a0bad59e4b6",
+          "prediction": "732e46909f076a8f02929dc57a4cc3add0ae3795a075e1b11fe06163c1cd5f51"
+        },
+        "oracle_exit": 0
+      },
+      {
+        "iteration": 40543,
+        "timing": {
+          "iteration": 40543,
+          "before_tick": 56807,
+          "after_tick": 56810,
+          "saved_tick": 149,
+          "owner_exit": false
+        },
+        "original_body_matching": true,
+        "artifact_decoded_sha256": {
+          "entry": "0400d80d08f3969de9a54509a32ac3b130228ca04497737014735c354c91f4f4",
+          "before": "dbfd8368d43b6900a1e92eb1d528dc38a7fb9c3390456d54613ea888bcb513d1",
+          "after": "b1ae89b9ada641c4088f8369b77ad97878d1ee5ae74bd5643aeb7013d87b506f",
+          "prediction": "29d14cbba04f34df3a614d83370454ad292185a7ba4f9ceeb9ff42956ccfb724"
+        },
+        "oracle_exit": 0
+      },
+      {
+        "iteration": 40544,
+        "timing": {
+          "iteration": 40544,
+          "before_tick": 56811,
+          "after_tick": 56813,
+          "saved_tick": 150,
+          "owner_exit": false
+        },
+        "original_body_matching": true,
+        "artifact_decoded_sha256": {
+          "entry": "c74bf03ea6e4e52fc3aa1a668908f959c8b29b7b67a73b3998f974dec6329bda",
+          "before": "8463d544d4a63ccafe3ae41a0d89a3372376a22109b9708c91138a5e91d48f95",
+          "after": "f36c92cc3be49462049831ec1b0d82da3256ed42eebbad05c4fac86e576b4464",
+          "prediction": "3e5923bb368dc2d875acf6e0e565a5dd0a59176411eb98e344b866a8350add8e"
+        },
+        "oracle_exit": 0
+      }
+    ],
+    "complete_final_ram_and_earned_save_preserved": true,
+    "runtime_counters_preserved": true,
+    "all_original_bodies_matching": true,
+    "whole_flight_acceptance": false
+  },
+  "default_patrol_final_driver_regression": {
+    "scope": "Native mode-3 live-state input qualification; independent original flight remains separate",
+    "mission_success": true,
+    "qualification_accepted": true,
+    "native_level_final_input": false,
+    "input_profile": "patrol_runway",
+    "mission_mode": 3,
+    "escort_anchors": null,
+    "canonical_complete_trace_and_ram_exact": false,
+    "complete_native_artifacts": {},
+    "source_prefix_last": 22145,
+    "source_trace_sha256": "1f99295bbae7c794c600f7fe2f4514966e24ffae2a8dbe9e697db96db08b95c0",
+    "source_consumed_input_sha256": "90f9c50956a89365e5febf5deb89b2206a3e26fb4d819f8c670624da4049b69b",
+    "adf_sha256": "e28e94698d68d0d2d3f009a67597a6bb70083e3ff2e4aea6c79369b76f93bfa2",
+    "runner_sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "test_sha256": "77e73fb491c0c46ffac78c48792d62622d67fd2b98a50e1e3e89a3ed9b286ca0",
+    "controller_ticks_per_update": 4,
+    "driver": {
+      "patrol_input_result": true,
+      "tick": 41339,
+      "iteration": 26148,
+      "game_tick": 3458,
+      "phase": 252,
+      "completions": 1,
+      "grade": 1,
+      "objective": 1,
+      "airborne": 1,
+      "gear_up": 1,
+      "gear_down": 1,
+      "landed": 1,
+      "region": 4,
+      "speed": 0,
+      "resets": 0,
+      "xyz": [
+        1067587,
+        7,
+        1095391
+      ],
+      "mode": 3,
+      "wire": 0,
+      "menu": 0,
+      "earned_tick": 0,
+      "prefix_native_end": 22145,
+      "prefix_source_end": 22145,
+      "prefix_keys": 566,
+      "anchor_failed": 0
+    },
+    "canonical": {
+      "frame_owner_exit": false,
+      "frames": 41339,
+      "screen": "scene-setup",
+      "mode": 3,
+      "glyphs": 14852,
+      "record_updates": 5492,
+      "scene_frames": 5488,
+      "terrain_polygons": 23641,
+      "model_calls": 66689,
+      "hud_frames": 5488,
+      "control_frames": 15107,
+      "scene_selected": true,
+      "stage": "C10DAE",
+      "game_tick": 3458,
+      "timer_pending": false,
+      "timer_yields": 12846,
+      "display_publications": 15106,
+      "display_yields": 15131,
+      "display_pending": true,
+      "displayed_page": 1,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 15104,
+      "input_events": 2146,
+      "input_queued": 0,
+      "update_iterations": 26624,
+      "replay_iterations": 26148,
+      "replay_events": 566,
+      "host_replay_events": 1588,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 41339,
+      "voice_publications": 87127,
+      "voice_levels": [
+        [
+          410,
+          1
+        ],
+        [
+          412,
+          1
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          0
+        ]
+      ],
+      "sample_requests": 42360,
+      "sample_frames": 39685440,
+      "nonzero_sample_frames": 39217985,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "enlisted_save_sha256": "74d706979232e4f48053f00feb851e13cc1a8a868d5e00dc1eab2711bb540db9",
+    "earned_save_sha256": "f570ab47b45354d110109867d7e8109f7bc400d75954d0c4075e906666529777",
+    "earned_save_hex": "0001000000020300000000a30000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000100010000000000000000000000000000000000000000",
+    "physical_input_sha256": "1c68cf99aec1b0d5d8ad9679d4bc1b3d994ee311dccd403a9089f0b78d044849",
+    "prefix_sha256": "32944648796bb2ff69c51260f12821ed6f7ad192e5e12758e5818a83031e41a1",
+    "canonical_prefix_sha256": "775650e1fd26ece901cf5b33835044fa090aee5b2c5d166e5f31ddb03d84551f",
+    "canonical_earned_save_exact": true,
+    "flight_state_seeded": false
+  },
+  "current_patrol_controls_save_and_counters_preserved": true,
+  "older_patrol_controls_and_save_preserved": true,
+  "older_patrol_runtime_counter_differences": {
+    "model_calls": [
+      66361,
+      66689
+    ],
+    "nonzero_sample_frames": [
+      38885129,
+      39217985
+    ]
+  },
+  "compression_retention": [
+    {
+      "shared": "build\\native-flight\\recorded-escort-wire-input\\native.jsonl.gz",
+      "with_file": "build\\native-flight\\recorded-escort-wire-input\\driver.jsonl.gz",
+      "retained_sha256": "839f910dddae035b95b3da7c5063570434c2ab7b1589bb0e72a82c5d906ff376"
+    },
+    {
+      "shared": "build\\native-flight\\recorded-escort-wire-input\\native.dat.gz",
+      "with_file": "build\\native-flight\\recorded-escort-wire-input\\driver.dat.gz",
+      "retained_sha256": "5d399aa3d5f1a6625f920ec27062bc5dbdc731b9927cc2c73c7d41bce39c5eee"
+    },
+    {
+      "shared": "build\\native-flight\\recorded-escort-level-input\\native.jsonl.gz",
+      "with_file": "build\\native-flight\\recorded-escort-level-input\\driver.jsonl.gz",
+      "retained_sha256": "69a2b64b25abc0f70e65de5e2d2b30497221aef7f7d2abf6b01a5304c4076a90"
+    },
+    {
+      "shared": "build\\native-flight\\recorded-escort-level-input\\native.dat.gz",
+      "with_file": "build\\native-flight\\recorded-escort-level-input\\driver.dat.gz",
+      "retained_sha256": "46865d0ab0b32b7c8b3e3cdd46ddd155462b77d52dd2e50884ee9be1d61584b0"
+    },
+    {
+      "shared": "build\\native-flight\\recorded-escort-height-input\\native.jsonl.gz",
+      "with_file": "build\\native-flight\\recorded-escort-height-input\\driver.jsonl.gz",
+      "retained_sha256": "3256ff460f76a075d6fd0ffa75a6738bec474c8778a4b1614428ca0a0f0c302b"
+    },
+    {
+      "shared": "build\\native-flight\\recorded-escort-height-input\\native.dat.gz",
+      "with_file": "build\\native-flight\\recorded-escort-height-input\\driver.dat.gz",
+      "retained_sha256": "36da450a0463ad4a738d0f8ab9da4689ff8befeb059573053a6c4b57a0ee764e"
+    },
+    {
+      "shared": "build\\native-flight\\recorded-escort-height-corrected\\native.jsonl.gz",
+      "with_file": "build\\native-flight\\recorded-escort-height-corrected\\driver.jsonl.gz",
+      "retained_sha256": "2859e3f012b894b8f7f477902cb2fb2d6f223a8226edd856f811181eddb689de"
+    },
+    {
+      "shared": "build\\native-flight\\recorded-escort-height-corrected\\native.dat.gz",
+      "with_file": "build\\native-flight\\recorded-escort-height-corrected\\driver.dat.gz",
+      "retained_sha256": "889ab892942272d144d4d68e205f580cee5cc64ed1e8b614f613fccc2ebc7567"
+    }
+  ],
+  "artifact_hashes": {
+    "build/native-flight/recorded-escort-wire-input/anchors.json": {
+      "retained_sha256": "6323c0914532dc4c73bd1d59b97ceea57c167aa9753bedd37d9a230b2e60b818",
+      "decoded_sha256": "6323c0914532dc4c73bd1d59b97ceea57c167aa9753bedd37d9a230b2e60b818"
+    },
+    "build/native-flight/recorded-escort-wire-input/driver-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/recorded-escort-wire-input/driver.dat.gz": {
+      "retained_sha256": "5d399aa3d5f1a6625f920ec27062bc5dbdc731b9927cc2c73c7d41bce39c5eee",
+      "decoded_sha256": "3fce79875dde14ee9f11b2b0dddf08fd9d9f56f42ae44e3bc90ff17862613374"
+    },
+    "build/native-flight/recorded-escort-wire-input/driver.jsonl.gz": {
+      "retained_sha256": "839f910dddae035b95b3da7c5063570434c2ab7b1589bb0e72a82c5d906ff376",
+      "decoded_sha256": "576eccab77ce06f594d3595dbce6fc531578887f35d869144490c0a26f11847f"
+    },
+    "build/native-flight/recorded-escort-wire-input/driver.log": {
+      "retained_sha256": "acbd4b71b3271a59166595a429a4f6350029776bd7a87b1f447d6750497013e2",
+      "decoded_sha256": "acbd4b71b3271a59166595a429a4f6350029776bd7a87b1f447d6750497013e2"
+    },
+    "build/native-flight/recorded-escort-wire-input/input.anchors": {
+      "retained_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c",
+      "decoded_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c"
+    },
+    "build/native-flight/recorded-escort-wire-input/native.dat.gz": {
+      "retained_sha256": "5d399aa3d5f1a6625f920ec27062bc5dbdc731b9927cc2c73c7d41bce39c5eee",
+      "decoded_sha256": "3fce79875dde14ee9f11b2b0dddf08fd9d9f56f42ae44e3bc90ff17862613374"
+    },
+    "build/native-flight/recorded-escort-wire-input/native.jsonl.gz": {
+      "retained_sha256": "839f910dddae035b95b3da7c5063570434c2ab7b1589bb0e72a82c5d906ff376",
+      "decoded_sha256": "576eccab77ce06f594d3595dbce6fc531578887f35d869144490c0a26f11847f"
+    },
+    "build/native-flight/recorded-escort-wire-input/physical.e9k": {
+      "retained_sha256": "ab62e98a3b70af3173d2abe38a347dece98511c3823c65fd8a9a4c352522ad38",
+      "decoded_sha256": "ab62e98a3b70af3173d2abe38a347dece98511c3823c65fd8a9a4c352522ad38"
+    },
+    "build/native-flight/recorded-escort-wire-input/prefix.fa18in": {
+      "retained_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719",
+      "decoded_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719"
+    },
+    "build/native-flight/recorded-escort-wire-input/replay-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/recorded-escort-wire-input/replay-prefix.fa18in": {
+      "retained_sha256": "9601e317d318656ff0ea80614cfca172ea8a84863aaa56f4b06222030d9ad9af",
+      "decoded_sha256": "9601e317d318656ff0ea80614cfca172ea8a84863aaa56f4b06222030d9ad9af"
+    },
+    "build/native-flight/recorded-escort-wire-input/replay.log": {
+      "retained_sha256": "c305c349bc37d50d04c55fa653a3a6b800adf62e56e3c2d7d7ddb2808ddea39b",
+      "decoded_sha256": "c305c349bc37d50d04c55fa653a3a6b800adf62e56e3c2d7d7ddb2808ddea39b"
+    },
+    "build/native-flight/recorded-escort-wire-input/report.json": {
+      "retained_sha256": "8e1d5a476409651d60507f2163a2ec479fc68ccd979ad04a217c8b921163aefc",
+      "decoded_sha256": "8e1d5a476409651d60507f2163a2ec479fc68ccd979ad04a217c8b921163aefc"
+    },
+    "build/native-flight/recorded-escort-wire-input/source-overlap.json": {
+      "retained_sha256": "f74bf2bec1ac70f566eee3bbd7df191bebb55345a955513ad4fb5c698b73c7e9",
+      "decoded_sha256": "f74bf2bec1ac70f566eee3bbd7df191bebb55345a955513ad4fb5c698b73c7e9"
+    },
+    "build/native-flight/recorded-escort-level-input/anchors.json": {
+      "retained_sha256": "72862a253e4957c33dd0f152e686c2247ce56a91c3f716fa523fad73b899e6de",
+      "decoded_sha256": "72862a253e4957c33dd0f152e686c2247ce56a91c3f716fa523fad73b899e6de"
+    },
+    "build/native-flight/recorded-escort-level-input/driver-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/recorded-escort-level-input/driver.dat.gz": {
+      "retained_sha256": "46865d0ab0b32b7c8b3e3cdd46ddd155462b77d52dd2e50884ee9be1d61584b0",
+      "decoded_sha256": "f6821aa7ddff7256c4e4e53544921bf426185d0bb5cbf451cd31352f0d5c23bd"
+    },
+    "build/native-flight/recorded-escort-level-input/driver.jsonl.gz": {
+      "retained_sha256": "69a2b64b25abc0f70e65de5e2d2b30497221aef7f7d2abf6b01a5304c4076a90",
+      "decoded_sha256": "07009d2a8f69591a447dacf4fcbfb1a7128495fe7b4004bdfa9cc4f1244095fc"
+    },
+    "build/native-flight/recorded-escort-level-input/driver.log": {
+      "retained_sha256": "2188bcdaec30663a06d86e1fd6d2a6a49c68b13d6a87b868398a0bebcaf39080",
+      "decoded_sha256": "2188bcdaec30663a06d86e1fd6d2a6a49c68b13d6a87b868398a0bebcaf39080"
+    },
+    "build/native-flight/recorded-escort-level-input/input-driver.c.gz": {
+      "retained_sha256": "80050199b11eea4b51e4b47d4faddc0f534d114250aae176baaf5c0eb1549822",
+      "decoded_sha256": "d7c08a4c71cb61a5ea73cb45efdc6007c1ea43c1598a0b2682cef6e8d87aa41f"
+    },
+    "build/native-flight/recorded-escort-level-input/input-driver.exe.gz": {
+      "retained_sha256": "ad727c4e34a9c9bbb9bd90ecc7ad8951fdfaf92c83abdeddbedf4650a5c99ffe",
+      "decoded_sha256": "7ac431e162d1161cc19707e876187f04ca25cf56cf746164113afba709f6fe6b"
+    },
+    "build/native-flight/recorded-escort-level-input/input.anchors": {
+      "retained_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c",
+      "decoded_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c"
+    },
+    "build/native-flight/recorded-escort-level-input/native.dat.gz": {
+      "retained_sha256": "46865d0ab0b32b7c8b3e3cdd46ddd155462b77d52dd2e50884ee9be1d61584b0",
+      "decoded_sha256": "f6821aa7ddff7256c4e4e53544921bf426185d0bb5cbf451cd31352f0d5c23bd"
+    },
+    "build/native-flight/recorded-escort-level-input/native.jsonl.gz": {
+      "retained_sha256": "69a2b64b25abc0f70e65de5e2d2b30497221aef7f7d2abf6b01a5304c4076a90",
+      "decoded_sha256": "07009d2a8f69591a447dacf4fcbfb1a7128495fe7b4004bdfa9cc4f1244095fc"
+    },
+    "build/native-flight/recorded-escort-level-input/physical.e9k": {
+      "retained_sha256": "98204c5e8db3042b061ba34acaa0131d0d81fc2ada6d109d9f9cd39b1c647abf",
+      "decoded_sha256": "98204c5e8db3042b061ba34acaa0131d0d81fc2ada6d109d9f9cd39b1c647abf"
+    },
+    "build/native-flight/recorded-escort-level-input/prefix.fa18in": {
+      "retained_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719",
+      "decoded_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719"
+    },
+    "build/native-flight/recorded-escort-level-input/replay-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/recorded-escort-level-input/replay-prefix.fa18in": {
+      "retained_sha256": "7f16d00636a4d6a2ed07acbe5f4269285c18d4759df302ba92e743e1761fb398",
+      "decoded_sha256": "7f16d00636a4d6a2ed07acbe5f4269285c18d4759df302ba92e743e1761fb398"
+    },
+    "build/native-flight/recorded-escort-level-input/replay.log": {
+      "retained_sha256": "e4de4c4f58ad0dcb409cc1290f3614905219d9fd5c5614e310003718e9dc01c3",
+      "decoded_sha256": "e4de4c4f58ad0dcb409cc1290f3614905219d9fd5c5614e310003718e9dc01c3"
+    },
+    "build/native-flight/recorded-escort-level-input/report.json": {
+      "retained_sha256": "dc266dbf801081bf80cb0a6d74befa14c06d570a2600779f5a3a85cc3adf8da9",
+      "decoded_sha256": "dc266dbf801081bf80cb0a6d74befa14c06d570a2600779f5a3a85cc3adf8da9"
+    },
+    "build/native-flight/recorded-escort-height-input/anchors.json": {
+      "retained_sha256": "a5252673c0c48b22d9636bd7c3e83967c81d1b692053c6bcda46ca7d49f16318",
+      "decoded_sha256": "a5252673c0c48b22d9636bd7c3e83967c81d1b692053c6bcda46ca7d49f16318"
+    },
+    "build/native-flight/recorded-escort-height-input/driver-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/recorded-escort-height-input/driver.dat.gz": {
+      "retained_sha256": "36da450a0463ad4a738d0f8ab9da4689ff8befeb059573053a6c4b57a0ee764e",
+      "decoded_sha256": "149693e942aeada07e2952113038f2ef0b0c1641ef53fb1d372a6804cde6fff7"
+    },
+    "build/native-flight/recorded-escort-height-input/driver.jsonl.gz": {
+      "retained_sha256": "3256ff460f76a075d6fd0ffa75a6738bec474c8778a4b1614428ca0a0f0c302b",
+      "decoded_sha256": "c33db0017ad4d7e8bc1c5d839ca6dbc46890d947c4d4f389fb39a9f082a29124"
+    },
+    "build/native-flight/recorded-escort-height-input/driver.log": {
+      "retained_sha256": "34b7911b2c0d84cdcdd968f660967acc92b8badb54946f68ca357194d27444ca",
+      "decoded_sha256": "34b7911b2c0d84cdcdd968f660967acc92b8badb54946f68ca357194d27444ca"
+    },
+    "build/native-flight/recorded-escort-height-input/input-driver.c.gz": {
+      "retained_sha256": "dd941c5e4e130838bc7827a5c1b686fff1e7fd4a85da3e8ccd4e23569df18fb4",
+      "decoded_sha256": "196c8aad5fa990d3a909efac7f69737cc8a5ff66bc0f67ac23e5144a2460bb26"
+    },
+    "build/native-flight/recorded-escort-height-input/input-driver.exe.gz": {
+      "retained_sha256": "e743c5b8c97b16e0b40eab31780473a28f24f84e1273f084138d641340c5c798",
+      "decoded_sha256": "c4185cb6465405407ad64b6117188c8b1e215b50b5b4693e8c155d048dcfdd64"
+    },
+    "build/native-flight/recorded-escort-height-input/input.anchors": {
+      "retained_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c",
+      "decoded_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c"
+    },
+    "build/native-flight/recorded-escort-height-input/native.dat.gz": {
+      "retained_sha256": "36da450a0463ad4a738d0f8ab9da4689ff8befeb059573053a6c4b57a0ee764e",
+      "decoded_sha256": "149693e942aeada07e2952113038f2ef0b0c1641ef53fb1d372a6804cde6fff7"
+    },
+    "build/native-flight/recorded-escort-height-input/native.jsonl.gz": {
+      "retained_sha256": "3256ff460f76a075d6fd0ffa75a6738bec474c8778a4b1614428ca0a0f0c302b",
+      "decoded_sha256": "c33db0017ad4d7e8bc1c5d839ca6dbc46890d947c4d4f389fb39a9f082a29124"
+    },
+    "build/native-flight/recorded-escort-height-input/physical.e9k": {
+      "retained_sha256": "1fcfcf14b828a842454415f25ee2765e46da1e86ed0150f5ab76ee48a6d14c76",
+      "decoded_sha256": "1fcfcf14b828a842454415f25ee2765e46da1e86ed0150f5ab76ee48a6d14c76"
+    },
+    "build/native-flight/recorded-escort-height-input/prefix.fa18in": {
+      "retained_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719",
+      "decoded_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719"
+    },
+    "build/native-flight/recorded-escort-height-input/replay-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/recorded-escort-height-input/replay-prefix.fa18in": {
+      "retained_sha256": "3ab42cd33a2b9d5b3ded90e6febbab0cd3462d1c5b043c5d80025655579ea7ee",
+      "decoded_sha256": "3ab42cd33a2b9d5b3ded90e6febbab0cd3462d1c5b043c5d80025655579ea7ee"
+    },
+    "build/native-flight/recorded-escort-height-input/replay.log": {
+      "retained_sha256": "35f2432bf16282337ea66a8f011373e44aa1d1c9b1848f29b8933835c4e6b991",
+      "decoded_sha256": "35f2432bf16282337ea66a8f011373e44aa1d1c9b1848f29b8933835c4e6b991"
+    },
+    "build/native-flight/recorded-escort-height-input/report.json": {
+      "retained_sha256": "78fcf5592f48854af07425c90eb5dcc1c092b303be0d6309f136884820565498",
+      "decoded_sha256": "78fcf5592f48854af07425c90eb5dcc1c092b303be0d6309f136884820565498"
+    },
+    "build/native-flight/recorded-escort-height-corrected/anchors.json": {
+      "retained_sha256": "5479eae7e52c5e9abde62cbdcec551fefc53547ed4c043c4333cc4540afb171c",
+      "decoded_sha256": "5479eae7e52c5e9abde62cbdcec551fefc53547ed4c043c4333cc4540afb171c"
+    },
+    "build/native-flight/recorded-escort-height-corrected/driver-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/recorded-escort-height-corrected/driver.dat.gz": {
+      "retained_sha256": "889ab892942272d144d4d68e205f580cee5cc64ed1e8b614f613fccc2ebc7567",
+      "decoded_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec"
+    },
+    "build/native-flight/recorded-escort-height-corrected/driver.jsonl.gz": {
+      "retained_sha256": "2859e3f012b894b8f7f477902cb2fb2d6f223a8226edd856f811181eddb689de",
+      "decoded_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c"
+    },
+    "build/native-flight/recorded-escort-height-corrected/driver.log": {
+      "retained_sha256": "a3e8b14ca2c1670c9a96f4767a8b115f40c858622c96c8d304d58e7a509b0d45",
+      "decoded_sha256": "a3e8b14ca2c1670c9a96f4767a8b115f40c858622c96c8d304d58e7a509b0d45"
+    },
+    "build/native-flight/recorded-escort-height-corrected/input.anchors": {
+      "retained_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c",
+      "decoded_sha256": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c"
+    },
+    "build/native-flight/recorded-escort-height-corrected/landing.json": {
+      "retained_sha256": "e5d8de6f998458d8a4476f27485792fa06380aa7ddb6339bc2063449b7b8f089",
+      "decoded_sha256": "e5d8de6f998458d8a4476f27485792fa06380aa7ddb6339bc2063449b7b8f089"
+    },
+    "build/native-flight/recorded-escort-height-corrected/native.dat.gz": {
+      "retained_sha256": "889ab892942272d144d4d68e205f580cee5cc64ed1e8b614f613fccc2ebc7567",
+      "decoded_sha256": "5a787dc2c12cae220561051b498bbc91d9e55f03e513844d4470643b834c5dec"
+    },
+    "build/native-flight/recorded-escort-height-corrected/native.jsonl.gz": {
+      "retained_sha256": "2859e3f012b894b8f7f477902cb2fb2d6f223a8226edd856f811181eddb689de",
+      "decoded_sha256": "31f68f5b466b02b7f31860e20d173853df54affaf37ac25a310fb8f5cb895e1c"
+    },
+    "build/native-flight/recorded-escort-height-corrected/physical.e9k": {
+      "retained_sha256": "4828cb3b576f64ee62bdd8a0d7b193615c5ed1a274f639adcd2facb0e3a8d368",
+      "decoded_sha256": "4828cb3b576f64ee62bdd8a0d7b193615c5ed1a274f639adcd2facb0e3a8d368"
+    },
+    "build/native-flight/recorded-escort-height-corrected/prefix.fa18in": {
+      "retained_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719",
+      "decoded_sha256": "7afed00a61ce51cd4d012afe292c89897f439c4537c9144f10735ff28b8c4719"
+    },
+    "build/native-flight/recorded-escort-height-corrected/replay-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/recorded-escort-height-corrected/replay-prefix.fa18in": {
+      "retained_sha256": "5ade3435f3477375bc15bb7b153e496bcc797dc3b3aee72ff773e545523cd9ab",
+      "decoded_sha256": "5ade3435f3477375bc15bb7b153e496bcc797dc3b3aee72ff773e545523cd9ab"
+    },
+    "build/native-flight/recorded-escort-height-corrected/replay.log": {
+      "retained_sha256": "75aa047928ff2fbd8a6d0ce13298ece68e8e433d9903e2c07f744ec60bcc3e28",
+      "decoded_sha256": "75aa047928ff2fbd8a6d0ce13298ece68e8e433d9903e2c07f744ec60bcc3e28"
+    },
+    "build/native-flight/recorded-escort-height-corrected/report.json": {
+      "retained_sha256": "c8c639760c4cef3cee61fcbcbcd38cbdd8932f4de03b432378796faca62411c1",
+      "decoded_sha256": "c8c639760c4cef3cee61fcbcbcd38cbdd8932f4de03b432378796faca62411c1"
+    },
+    "build/native-flight/patrol-final-regression-after-escort/driver-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/patrol-final-regression-after-escort/driver.log": {
+      "retained_sha256": "5fbca14960fcdfe1769904185861c1546b934459e033c87a2a427fc5d0704f96",
+      "decoded_sha256": "5fbca14960fcdfe1769904185861c1546b934459e033c87a2a427fc5d0704f96"
+    },
+    "build/native-flight/patrol-final-regression-after-escort/physical.e9k": {
+      "retained_sha256": "1c68cf99aec1b0d5d8ad9679d4bc1b3d994ee311dccd403a9089f0b78d044849",
+      "decoded_sha256": "1c68cf99aec1b0d5d8ad9679d4bc1b3d994ee311dccd403a9089f0b78d044849"
+    },
+    "build/native-flight/patrol-final-regression-after-escort/prefix.fa18in": {
+      "retained_sha256": "32944648796bb2ff69c51260f12821ed6f7ad192e5e12758e5818a83031e41a1",
+      "decoded_sha256": "32944648796bb2ff69c51260f12821ed6f7ad192e5e12758e5818a83031e41a1"
+    },
+    "build/native-flight/patrol-final-regression-after-escort/replay-enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/patrol-final-regression-after-escort/replay-prefix.fa18in": {
+      "retained_sha256": "775650e1fd26ece901cf5b33835044fa090aee5b2c5d166e5f31ddb03d84551f",
+      "decoded_sha256": "775650e1fd26ece901cf5b33835044fa090aee5b2c5d166e5f31ddb03d84551f"
+    },
+    "build/native-flight/patrol-final-regression-after-escort/replay.log": {
+      "retained_sha256": "22d639e9dfd111ba606d9048cb6b28e659e76c64c8e77c8c4fbebe6ab1d3f736",
+      "decoded_sha256": "22d639e9dfd111ba606d9048cb6b28e659e76c64c8e77c8c4fbebe6ab1d3f736"
+    },
+    "build/native-flight/patrol-final-regression-after-escort/report.json": {
+      "retained_sha256": "a6890f15021ab992b5d51f9672840e50642751a31f6441e18a3188bbcd6609c2",
+      "decoded_sha256": "a6890f15021ab992b5d51f9672840e50642751a31f6441e18a3188bbcd6609c2"
+    },
+    "build/native-flight/escort-first-motion/40542.after.dat.gz": {
+      "retained_sha256": "d0e2e47322f4b4332a0042046ce2ea0b8fde23d60970a006a7173a838ff726bb",
+      "decoded_sha256": "35aa190d6e8f99fe4a072dead4e404e4222a3f8c77092dbf4f6e0a0bad59e4b6"
+    },
+    "build/native-flight/escort-first-motion/40542.before.dat.gz": {
+      "retained_sha256": "5fa6bba7861f28efaa285bd0371e18a9f45bd525f024842792a7e12787de47bb",
+      "decoded_sha256": "76eb1b4d499da7d899a7cda7f928d939c70d1e16116c1b725608e09dd6c142b2"
+    },
+    "build/native-flight/escort-first-motion/40542.entry.dat.gz": {
+      "retained_sha256": "ba3ea749d5d143cdd31dd08050deb51dbec6574d5857625aee14247e84e5f713",
+      "decoded_sha256": "9d6d7e23ae52c84b1b9b4b8cedb9a35814a13f895c79b1098a9ea5fe883c71bf"
+    },
+    "build/native-flight/escort-first-motion/40542.prediction.dat.gz": {
+      "retained_sha256": "8b5447c5fec08db2ac4a6db6b7e37fbc43ce01e5a1ce24418f217d8d1b857118",
+      "decoded_sha256": "732e46909f076a8f02929dc57a4cc3add0ae3795a075e1b11fe06163c1cd5f51"
+    },
+    "build/native-flight/escort-first-motion/40543.after.dat.gz": {
+      "retained_sha256": "30d7795229a1bfe71e97ad3ba5a975035091b5cb6271f5b1debefc873d6584c2",
+      "decoded_sha256": "b1ae89b9ada641c4088f8369b77ad97878d1ee5ae74bd5643aeb7013d87b506f"
+    },
+    "build/native-flight/escort-first-motion/40543.before.dat.gz": {
+      "retained_sha256": "b58d5983e09c61f6962ab26785f1370b8f085817e5872c8274f3a69f0ea992b7",
+      "decoded_sha256": "dbfd8368d43b6900a1e92eb1d528dc38a7fb9c3390456d54613ea888bcb513d1"
+    },
+    "build/native-flight/escort-first-motion/40543.entry.dat.gz": {
+      "retained_sha256": "9958221c9ae8b104dc5b15b36ffb0b2fd8653ec04325d7d74238f3fabd92ee48",
+      "decoded_sha256": "0400d80d08f3969de9a54509a32ac3b130228ca04497737014735c354c91f4f4"
+    },
+    "build/native-flight/escort-first-motion/40543.prediction.dat.gz": {
+      "retained_sha256": "537ad159d4c4c370439721642ae6f482e879901c81377b9c80cef07c27fb8085",
+      "decoded_sha256": "29d14cbba04f34df3a614d83370454ad292185a7ba4f9ceeb9ff42956ccfb724"
+    },
+    "build/native-flight/escort-first-motion/40544.after.dat.gz": {
+      "retained_sha256": "62fa4c7025a23c973f2175ae13ffa4c8fff4b04e46418f32937fbe8e7a0ac5b9",
+      "decoded_sha256": "f36c92cc3be49462049831ec1b0d82da3256ed42eebbad05c4fac86e576b4464"
+    },
+    "build/native-flight/escort-first-motion/40544.before.dat.gz": {
+      "retained_sha256": "453f6186adee4ee4e66bd6f0ddd970558e9ce54a70d284e0deb2cafa1391424f",
+      "decoded_sha256": "8463d544d4a63ccafe3ae41a0d89a3372376a22109b9708c91138a5e91d48f95"
+    },
+    "build/native-flight/escort-first-motion/40544.entry.dat.gz": {
+      "retained_sha256": "bbfebd880a2207dc3b8e1a199e4da272c64be6e7dd3aa4947c8cedff95b0970f",
+      "decoded_sha256": "c74bf03ea6e4e52fc3aa1a668908f959c8b29b7b67a73b3998f974dec6329bda"
+    },
+    "build/native-flight/escort-first-motion/40544.prediction.dat.gz": {
+      "retained_sha256": "83f14bd19188e491884641d9786907072c12e27545776daa4d80ff5f4fa30662",
+      "decoded_sha256": "3e5923bb368dc2d875acf6e0e565a5dd0a59176411eb98e344b866a8350add8e"
+    },
+    "build/native-flight/escort-first-motion/enlist.log": {
+      "retained_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+      "decoded_sha256": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0"
+    },
+    "build/native-flight/escort-first-motion/native.log": {
+      "retained_sha256": "f78c9dfbf54363df94794ce92d2c5779d7c92da8441ae2093de5426e8a73756b",
+      "decoded_sha256": "f78c9dfbf54363df94794ce92d2c5779d7c92da8441ae2093de5426e8a73756b"
+    },
+    "build/native-flight/escort-first-motion/original-40542.log": {
+      "retained_sha256": "32f98235ce8df8fa5d0ec65ce1453172dd83ead4ee99ae2c76e0e49ec4452b11",
+      "decoded_sha256": "32f98235ce8df8fa5d0ec65ce1453172dd83ead4ee99ae2c76e0e49ec4452b11"
+    },
+    "build/native-flight/escort-first-motion/original-40543.log": {
+      "retained_sha256": "fd0303af14ee23520301354cd73cec2eb7b5ff8c2db4dc6dee62dea8a17c8c03",
+      "decoded_sha256": "fd0303af14ee23520301354cd73cec2eb7b5ff8c2db4dc6dee62dea8a17c8c03"
+    },
+    "build/native-flight/escort-first-motion/original-40544.log": {
+      "retained_sha256": "bda05f6d5eca69eaa3a58cf19a597ff8565e0b936f9806fccc11466366aa4499",
+      "decoded_sha256": "bda05f6d5eca69eaa3a58cf19a597ff8565e0b936f9806fccc11466366aa4499"
+    },
+    "build/native-flight/escort-first-motion/report.json": {
+      "retained_sha256": "71d531ed2e302c270e9863e27f9930b207c3b170db4b3cc02936c7fdee7bdd3c",
+      "decoded_sha256": "71d531ed2e302c270e9863e27f9930b207c3b170db4b3cc02936c7fdee7bdd3c"
+    }
+  },
+  "helper_sha256": {
+    "tools/native/check_recorded_patrol_input.py": "4b70bc20d3204f0eca6bed9c18ae31e10d061fca610aec696b791c56c6216fbe",
+    "tools/native/native_recorded_patrol_input_test.c": "541d86fbd9f77b8c5831a1086221afac3d6ae3dadb9927ab08cb975bea144a90",
+    "tools/native/mission_pilot.c": "98cd7a2b12f4e1c9b80222c8308743f07888c1f05f8885587ea67910eae30e89",
+    "tools/native/mission_pilot.h": "c4bf55e3caf8b4e99c2102965ed6f8e28a3a3fc227ceeaf36077aabc35a84c82"
+  },
+  "validation": {
+    "release_build_passed": true,
+    "python_compilation_passed": true,
+    "diff_check_passed": true,
+    "successful_escort_and_patrol_exercised_in_playable_runner": true,
+    "failed_escort_replays_exact": true,
+    "original_instruction_body_windows_passed": 3
+  },
+  "playable_code_changed": false,
+  "source_clock_or_ram_supplied_to_native": false,
+  "original_native_whole_flight_accepted": false,
+  "sound_timing_accepted": false,
+  "continuity_waived": true,
+  "named_state_cleanup_outside_goal": true
+}
