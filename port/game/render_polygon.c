@@ -14,7 +14,7 @@
 #include "render_buffers.h"
 #include "render_line.h"
 #ifdef FA18_NATIVE
-#include "native/raster.h"
+#include "render/raster.h"
 #endif
 
 /* Mask (A) combined with the page plane (B) into the plane (D). */

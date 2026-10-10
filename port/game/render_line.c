@@ -6,7 +6,7 @@
 #include "hardware.h"
 #include "memory.h"
 #ifdef FA18_NATIVE
-#include "native/raster.h"
+#include "render/raster.h"
 #endif
 
 #define ROW_BYTES 40

@@ -1,7 +1,7 @@
 /* Execute complete original file owners; intercept only actual OS services.
  * The writable overlay and volume metadata use the same port/amiga backend.
  * No game routine (including C0EF08, C162E4 or C1643A) is bypassed. */
-#include "../../../fa18-interceptor-decomp/port/game/native/files.h"
+#include "../../../fa18-interceptor-decomp/src/menu/files.h"
 #include "../../port/amiga/hunk.h"
 #include <sys/stat.h>
 #ifdef _WIN32
@@ -24,7 +24,7 @@ uint8_t *native_storage_range(uint32_t address,size_t bytes) {
         return fa18_machine->slow+address-0xc00000;
     abort();
 }
-#include "../../../fa18-interceptor-decomp/port/game/native/files.c"
+#include "../../../fa18-interceptor-decomp/src/menu/files.c"
 #endif
 static int file_oracle_reset(NativeFrontend *game) {
     file_oracle_game=game;file_oracle_writes=0;

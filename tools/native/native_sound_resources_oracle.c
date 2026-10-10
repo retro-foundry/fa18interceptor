@@ -9,7 +9,7 @@
 #include "m68kops.h"
 #include "recomp_runtime.h"
 #include "recomp_ports.h"
-#include "../../../fa18-interceptor-decomp/port/game/native/audio_assets.c"
+#include "../../../fa18-interceptor-decomp/src/audio/audio_assets.c"
 extern int64_t fa18_next_event;
 uint8_t *native_storage_range(uint32_t address,size_t bytes) {
     if(address<0x80000 && bytes<=0x80000-address) return fa18_machine->chip+address;

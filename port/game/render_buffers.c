@@ -3,7 +3,7 @@
 #include "globals.h"
 #include "hardware.h"
 #ifdef FA18_NATIVE
-#include "native/raster.h"
+#include "render/raster.h"
 #endif
 
 static void clear_longs(gaddr buffer, int count) {

@@ -3,7 +3,7 @@
 #include "native_records_oracle.c"
 #undef main
 #include "audio.h"
-#include "../../../fa18-interceptor-decomp/port/game/native/audio.c"
+#include "../../../fa18-interceptor-decomp/src/audio/mixer.c"
 
 typedef struct { FA18Machine *machine; unsigned resolutions; } SampleOwner;
 static const int8_t *sample_bytes(void *context,gaddr address,uint32_t bytes) {

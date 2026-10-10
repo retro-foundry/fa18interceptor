@@ -12,9 +12,9 @@
 #include "recomp_ports.h"
 #include "memory.h"
 #include "globals.h"
-#include "../../../fa18-interceptor-decomp/port/game/native/menu.c"
-#include "../../../fa18-interceptor-decomp/port/game/native/input.c"
-#include "../../../fa18-interceptor-decomp/port/game/native/viewport.c"
+#include "../../../fa18-interceptor-decomp/src/menu/menu.c"
+#include "../../../fa18-interceptor-decomp/src/input/input.c"
+#include "../../../fa18-interceptor-decomp/src/render/viewport.c"
 extern int64_t fa18_next_event;
 
 /* Top-level menu composition is outside this input-only comparison. */

@@ -3,7 +3,7 @@
 #define main records_fixture_main
 #include "native_records_oracle.c"
 #undef main
-#include "../../../fa18-interceptor-decomp/port/game/native/audio.c"
+#include "../../../fa18-interceptor-decomp/src/audio/mixer.c"
 
 static int source_voice_tick(void) {
     memset(REG_DA,0,sizeof REG_DA);REG_A[7]=0xc7ff00;

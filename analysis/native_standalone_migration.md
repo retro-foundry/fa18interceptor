@@ -1,5 +1,13 @@
 # Native port moved to its own repository
 
+Source organization update (2026-10-10): the standalone checkout now groups
+game systems under `src/`, with composition beside the recovered routines.
+Native validation probes and their include root follow those canonical paths.
+The three shared renderer includes select `render/raster.h` only in their
+existing `FA18_NATIVE` branch; ordinary framework execution is unchanged.
+The rebuilt model oracle passes 917 directory cases and all three startup
+checkpoints. See the standalone `src/README.md` and source move manifest.
+
 On 2026-10-10 the user requested the playable port move into
 [retro-foundry/fa18-interceptor-decomp](https://github.com/retro-foundry/fa18-interceptor-decomp).
 The extraction starts at `ffcd1e6300724fcb20d186f67eeead4bd5c37f43`, with file

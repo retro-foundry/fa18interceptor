@@ -4,7 +4,7 @@
 #include "native_input_oracle.c"
 #undef main
 #include "hardware.h"
-#include "../../../fa18-interceptor-decomp/port/game/native/control_effects.c"
+#include "../../../fa18-interceptor-decomp/src/flight/control_effects.c"
 
 static unsigned component_calls,face_calls,plane_calls,collision_hits,collision_misses;
 static int scratch(unsigned i) {

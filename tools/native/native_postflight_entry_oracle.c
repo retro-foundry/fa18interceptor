@@ -5,7 +5,7 @@
 #define main records_fixture_main
 #include "native_records_oracle.c"
 #undef main
-#include "../../../fa18-interceptor-decomp/port/game/native/setup.c"
+#include "../../../fa18-interceptor-decomp/src/game/setup.c"
 #include "postflight_completion.h"
 
 /* Aircraft selection is outside these three bounded entry/reset cases.

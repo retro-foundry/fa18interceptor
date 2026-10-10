@@ -129,7 +129,7 @@ def main() -> int:
         # Validation-only native probes read canonical headers from the sibling
         # port. Ordinary comparison runners retain their original include set.
         "rule cc_native_oracle",
-        "  command = gcc $cflags -I../fa18-interceptor-decomp/port/game -MMD -MF $out.d -c $in -o $out",
+        "  command = gcc $cflags -I../fa18-interceptor-decomp/src -MMD -MF $out.d -c $in -o $out",
         "  depfile = $out.d",
         "  deps = gcc",
         "rule cc_romfree",
