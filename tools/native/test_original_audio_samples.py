@@ -10,11 +10,26 @@ from types import SimpleNamespace
 import unittest
 
 from check_original_audio_samples import frames, sample_records, MAGIC, FRAME, SAMPLE, FOOTER
-from original_audio_samples import AudioSamplesWriter
+from original_audio_samples import AudioSamplesWriter, LIVE, live_records
 from check_original_audio_capture import sha, reference_file
 
 
 class SampleObserverContract(unittest.TestCase):
+    def test_live_snapshots_require_complete_ordered_restore_and_current_channels(self):
+        snapshots = [LIVE.pack(5376, 0x100, 0x80, 358*512, 512, 16, 8, 0x21fd, 0x21fd,
+                               index%4, 2, 10, 0, 0, 19, index//4) for index in range(8)]
+        data = b''.join(snapshots)
+        self.assertEqual(len(live_records(data)), 8)
+        for changed in (data[:-1], data+b'x', b''.join(snapshots[4:]+snapshots[:4]),
+                        b''.join(snapshots[:4]+[snapshots[0]]+snapshots[5:])):
+            with self.assertRaises(ValueError):
+                live_records(changed)
+        for field, value in ((12, 2), (13, 8)):
+            changed = list(LIVE.unpack(snapshots[0]))
+            changed[field] = value
+            with self.assertRaises(ValueError):
+                live_records(LIVE.pack(*changed) + b''.join(snapshots[1:]))
+
     def records(self):
         return SAMPLE.pack(10*512+256, 0x100, 0x21fd, 33, 8, 19, 277)
 

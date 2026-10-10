@@ -22,10 +22,10 @@ def sha(path):
         return hashlib.file_digest(file, 'sha256').hexdigest()
 
 
-def observer_source(original, probe, word_probe=None):
+def observer_source(original, probe, word_probe=None, live_probe=None):
     declaration = 'static void newsample(int nr, sample8_t sample)'
     assert original.count(declaration) == 1
-    modified = original.replace(declaration, probe + '\n' + declaration)
+    modified = original.replace(declaration, probe + '\n' + (live_probe + '\n' if live_probe else '') + declaration)
     begin = modified.index(declaration)
     start = modified.index('{', begin)
     depth, end = 1, start + 1
@@ -50,6 +50,10 @@ def observer_source(original, probe, word_probe=None):
         for before, after in replacements:
             assert modified.count(before) == 1, f'Word observer source site changed: {before}'
             modified = modified.replace(before, after)
+    if live_probe is not None:
+        before = '\treturn src;\n}\n\nuae_u8 *save_audio'
+        assert modified.count(before) == 1, 'Original restore return changed'
+        modified = modified.replace(before, '\tfa18_audio_live_restored(nr);\n' + before)
     return modified
 
 
@@ -58,9 +62,12 @@ def main():
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-audio/sample-probe-engine')
     parser.add_argument('--rebuild', action='store_true')
     parser.add_argument('--word-state', action='store_true', help='also observe actual pointer/length word lifecycle in a separate DLL')
+    parser.add_argument('--restore-state', action='store_true', help='also retain original restore assignments and read live state before ordinary replay')
     args = parser.parse_args()
+    assert not args.restore_state or args.word_state, '--restore-state requires --word-state'
     work = args.out.resolve()
     assert not args.word_state or work != (ROOT / 'build/native-audio/sample-probe-engine').resolve(), 'Word observer requires a separate --out; preserve the existing sample observer'
+    assert not args.restore_state or work != (ROOT / 'build/native-audio/word-state-probe-engine').resolve(), 'Restore observer requires a separate --out; preserve the existing word observer'
     # The only source copy, object and DLL this tool writes belong to its
     # explicit diagnostic output. No Makefile all/copy target is invoked.
     assert work != SOURCE and work != BASELINE and not SOURCE.is_relative_to(work)
@@ -71,7 +78,9 @@ def main():
     original = SOURCE / 'sources/src/audio.c'
     probe = ROOT / 'tools/native/original_audio_sample_probe.inc'
     word_probe = ROOT / 'tools/native/original_audio_word_probe.inc' if args.word_state else None
-    generated = observer_source(original.read_text(), probe.read_text(), word_probe.read_text() if word_probe else None)
+    live_probe = ROOT / 'tools/native/original_audio_live_probe.inc' if args.restore_state else None
+    generated = observer_source(original.read_text(), probe.read_text(), word_probe.read_text() if word_probe else None,
+                                live_probe.read_text() if live_probe else None)
     copy, object_file, core = work / 'audio.c', work / 'audio.o', work / 'system/ami9000.dll'
     manifest_path = work / 'build.json'
     prior = json.loads(manifest_path.read_text()) if manifest_path.exists() else None
@@ -122,6 +131,11 @@ def main():
         manifest.update(word_state_include_sha256=sha(word_probe), word_state_record_bytes=38,
                         word_state_ring_records=65536,
                         word_state_scope='Actual getpt, incoming DAT, processed DAT and LEN writes; original execution/PCM preservation required')
+        manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
+    if live_probe:
+        manifest.update(live_state_include_sha256=sha(live_probe), live_state_record_bytes=39,
+                        live_state_records=8,
+                        live_state_scope='Actual original restore assignments and read-only post-restore/pre-replay channel snapshots; no intermediate serialization or audio advancement')
         manifest_path.write_text(json.dumps(manifest, indent=2)+'\n')
     print(f'{"Reused verified" if reusable else "Built isolated"} sample observer: {core}')
 

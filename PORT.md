@@ -1,5 +1,14 @@
 # The C port
 
+Original warm audio restore (2026-10-10): all four actual restore assignments
+match the requested save. Channel 1's extra word is already encoded in this
+warm input and survives the pre-replay pointer/count advance. The read-only
+snapshot leaves execution unchanged; complete 94-call PCM/DMA/sample/word/RAM
+and video outputs remain exact. Six actual-snapshot mutations and thirteen
+sample guards pass; compressed artifacts reuse exact prior storage. Native
+gameplay is unchanged. Full-flight drawing and complete sound acceptance
+remain open. See [restore-state evidence](analysis/native_original_audio_restore_state_milestone.md).
+
 Mission Five head-up owner (2026-10-10): original C332BC explains all 395
 first differing scene bytes. Both actual owner inputs match original non-stack
 RAM, and the marker/range values are carried from each actual earned escort

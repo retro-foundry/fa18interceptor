@@ -1,0 +1,809 @@
+{
+  "date": "2026-10-10",
+  "production_gameplay_changed": false,
+  "runner": {
+    "path": "build/native/fa18_native.exe",
+    "sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8",
+    "bytes": 2446848
+  },
+  "original_reference": {
+    "path": "tools/engine9000/e9k-debugger/system/ami9000.dll",
+    "sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+    "bytes": 19902976
+  },
+  "preserved_word_observer": {
+    "path": "build/native-audio/word-state-probe-engine/system/ami9000.dll",
+    "sha256": "978f2e54205f695803018829724e3a25e43e3b8a1646dc1d4717ca2dae89a4ac",
+    "bytes": 20263424
+  },
+  "restore_observer": {
+    "path": "build/native-audio/restore-state-probe-engine/system/ami9000.dll",
+    "sha256": "2b2386adccc45749ca709a6751c1aa57a245c828e4a754caaf67b0ad36d249d6",
+    "bytes": 20264448
+  },
+  "actual_restore_assessment": {
+    "accepted_evidence": true,
+    "preserved_execution": {
+      "scope": "All observed original consumed sample bytes and actual word provenance; complete PCM, DMA, event log and execution preserved. Service timestamps are not an independent mixer-time reconstruction. Native onset/handoff/waveform remains open.",
+      "replay_calls": 94,
+      "stereo_pcm_frames": 82908,
+      "consumed_bytes": 37311,
+      "bytes_by_channel": [
+        18656,
+        18655,
+        0,
+        0
+      ],
+      "actual_fetch_word_differences": 0,
+      "explicit_initial_unknown_provenance": [
+        {
+          "index": 0,
+          "call": 1,
+          "cycle": 422048186368,
+          "address": 4294967295,
+          "word": 1282,
+          "value": 2,
+          "channel": 0,
+          "state": 3,
+          "beam": [
+            22,
+            4
+          ]
+        },
+        {
+          "index": 1,
+          "call": 1,
+          "cycle": 422048227328,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            102,
+            4
+          ]
+        },
+        {
+          "index": 3,
+          "call": 1,
+          "cycle": 422048410624,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 3,
+          "beam": [
+            6,
+            6
+          ]
+        }
+      ],
+      "first_samples_by_channel": [
+        {
+          "index": 0,
+          "call": 1,
+          "cycle": 422048186368,
+          "address": 4294967295,
+          "word": 1282,
+          "value": 2,
+          "channel": 0,
+          "state": 3,
+          "beam": [
+            22,
+            4
+          ]
+        },
+        {
+          "index": 1,
+          "call": 1,
+          "cycle": 422048227328,
+          "address": 4294967295,
+          "word": 65278,
+          "value": -2,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            102,
+            4
+          ]
+        },
+        null,
+        null
+      ],
+      "authority": {
+        "core_sha256": "2b2386adccc45749ca709a6751c1aa57a245c828e4a754caaf67b0ad36d249d6",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+      },
+      "unmodified_authority": {
+        "core_sha256": "5750be527458423407ec293c43cdf312cfd2248a3f06fcfb70c43561cb5549f1",
+        "config_sha256": "1db7a42a96ee97bd86f5196741511cffc2c209e9b81a2445e20a292040d53afb",
+        "initial_state_sha256": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+        "recording_sha256": "e321c9c62ccd8828129b864cdf6f16d9bc4124629a2c22f2b86ac85cde56f777",
+        "snapshot_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b"
+      },
+      "observer_manifest_sha256": "b839dd8c6634d024120b2efa55f7799f16a31876b7141d22f98f65193181b934",
+      "sample_stream_sha256": "4c6952cd479377cc60945a9b57c04439687b5a020bffe6f3e4cc17267f72db21",
+      "sample_stream_record_bytes": 20,
+      "pcm_sha256": "068bf398d6a3dd11819dd742fd00926accd3332c8602047328a7805ed71fa14b",
+      "dma_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+      "event_log_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+      "source_sha256": "d9371ba84ce7b42aea93ae3da10f648bc7b919e61a9f3e60b66de11d62a92390",
+      "fetch_content_witness": "build\\native-audio\\dma-complete-demo",
+      "fetch_witness_scope": "Same-channel address/word contents from actual DMA. Consumed-byte ordering is observed directly; this lookup does not infer DMA delivery time. A wider recording is explicit when supplied.",
+      "unchanged_snapshot_fields": true,
+      "unchanged_complete_ram_state": true,
+      "unchanged_video": true,
+      "all_pcm_chunks_and_samples_exact": true,
+      "actual_dma_stream_exact": true,
+      "max_samples_per_call": 398,
+      "native_runtime_changed": false,
+      "native_waveform_accepted": false,
+      "zero_word_samples": [
+        {
+          "index": 37265,
+          "call": 94,
+          "cycle": 425463398400,
+          "address": 154226,
+          "word": 0,
+          "value": 0,
+          "channel": 1,
+          "state": 2,
+          "beam": [
+            185,
+            279
+          ]
+        },
+        {
+          "index": 37267,
+          "call": 94,
+          "cycle": 425463581696,
+          "address": 154226,
+          "word": 0,
+          "value": 0,
+          "channel": 1,
+          "state": 3,
+          "beam": [
+            89,
+            281
+          ]
+        }
+      ],
+      "zero_word_classification": "Both bytes emitted during existing channel-1 playback",
+      "channel2_zero_prefetch_emitted_bytes": 0
+    },
+    "actual_word_stream_unchanged": true,
+    "word_state_descriptor": {
+      "file": "audio_word_states.bin",
+      "sha256": "8dc8f9d79e4d9c1218cad15fa9ea2de9d9f15397109b1bf0db11ec388d7b690b",
+      "calls": 94,
+      "records": 55970,
+      "max_records_per_call": 599,
+      "record_bytes": 38,
+      "ring_records": 65536
+    },
+    "word_assessment": {
+      "actual_running_counter_events_checked": 18656,
+      "initial_live_pointer_budgets": [
+        {
+          "channel": 0,
+          "first_actual_read": {
+            "call": 1,
+            "cycle": 422048067584,
+            "pt": 135612,
+            "lc": 121456,
+            "address": 135612,
+            "length": 16385,
+            "remaining": 9307,
+            "dat": 1282,
+            "dat2": 1282,
+            "beam": [
+              17,
+              3
+            ],
+            "channel": 0,
+            "state": 2,
+            "kind": 1,
+            "flags": 0,
+            "value": 0,
+            "pcm_end": 882
+          },
+          "reads_through_first_reset": 9307,
+          "projected_last_read": 154224,
+          "declared_last_word": 154224,
+          "actual_reset_read": {
+            "call": 94,
+            "cycle": 425459593216,
+            "pt": 154224,
+            "lc": 121456,
+            "address": 154224,
+            "length": 16385,
+            "remaining": 1,
+            "dat": 1024,
+            "dat2": 1024,
+            "beam": [
+              17,
+              247
+            ],
+            "channel": 0,
+            "state": 2,
+            "kind": 1,
+            "flags": 0,
+            "value": 1,
+            "pcm_end": 82908
+          }
+        },
+        {
+          "channel": 1,
+          "first_actual_read": {
+            "call": 1,
+            "cycle": 422048301056,
+            "pt": 135596,
+            "lc": 121456,
+            "address": 135596,
+            "length": 16385,
+            "remaining": 9316,
+            "dat": 65278,
+            "dat2": 65278,
+            "beam": [
+              19,
+              5
+            ],
+            "channel": 1,
+            "state": 2,
+            "kind": 1,
+            "flags": 0,
+            "value": 0,
+            "pcm_end": 882
+          },
+          "reads_through_first_reset": 9316,
+          "projected_last_read": 154226,
+          "declared_last_word": 154224,
+          "actual_reset_read": {
+            "call": 94,
+            "cycle": 425463080960,
+            "pt": 154226,
+            "lc": 121456,
+            "address": 154226,
+            "length": 16385,
+            "remaining": 1,
+            "dat": 65020,
+            "dat2": 65020,
+            "beam": [
+              19,
+              277
+            ],
+            "channel": 1,
+            "state": 2,
+            "kind": 1,
+            "flags": 0,
+            "value": 1,
+            "pcm_end": 82908
+          }
+        }
+      ],
+      "zero_word_lifecycle": [
+        {
+          "call": 94,
+          "cycle": 425463080960,
+          "pt": 154226,
+          "lc": 121456,
+          "address": 154226,
+          "length": 16385,
+          "remaining": 1,
+          "dat": 65020,
+          "dat2": 65020,
+          "beam": [
+            19,
+            277
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 1,
+          "flags": 0,
+          "value": 1,
+          "pcm_end": 82908
+        },
+        {
+          "call": 94,
+          "cycle": 425463080960,
+          "pt": 121456,
+          "lc": 121456,
+          "address": 154226,
+          "length": 16385,
+          "remaining": 1,
+          "dat": 65020,
+          "dat2": 65020,
+          "beam": [
+            19,
+            277
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 2,
+          "flags": 0,
+          "value": 0,
+          "pcm_end": 82908
+        },
+        {
+          "call": 94,
+          "cycle": 425463081472,
+          "pt": 121456,
+          "lc": 121456,
+          "address": 154226,
+          "length": 16385,
+          "remaining": 16385,
+          "dat": 0,
+          "dat2": 65020,
+          "beam": [
+            20,
+            277
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 3,
+          "flags": 8,
+          "value": 0,
+          "pcm_end": 82908
+        }
+      ],
+      "preceding_counter_events": [
+        {
+          "call": 94,
+          "cycle": 425462035456,
+          "pt": 154222,
+          "lc": 121456,
+          "address": 154220,
+          "length": 16385,
+          "remaining": 3,
+          "dat": 1798,
+          "dat2": 2056,
+          "beam": [
+            20,
+            268
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 3,
+          "flags": 0,
+          "value": 1798,
+          "pcm_end": 82908
+        },
+        {
+          "call": 94,
+          "cycle": 425462384128,
+          "pt": 154224,
+          "lc": 121456,
+          "address": 154222,
+          "length": 16385,
+          "remaining": 2,
+          "dat": 1024,
+          "dat2": 1798,
+          "beam": [
+            20,
+            271
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 3,
+          "flags": 0,
+          "value": 1024,
+          "pcm_end": 82908
+        },
+        {
+          "call": 94,
+          "cycle": 425462732800,
+          "pt": 154226,
+          "lc": 121456,
+          "address": 154224,
+          "length": 16385,
+          "remaining": 1,
+          "dat": 65020,
+          "dat2": 1024,
+          "beam": [
+            20,
+            274
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 3,
+          "flags": 0,
+          "value": 65020,
+          "pcm_end": 82908
+        }
+      ],
+      "following_pointer_read": {
+        "call": 94,
+        "cycle": 425463429632,
+        "pt": 121456,
+        "lc": 121456,
+        "address": 121456,
+        "length": 16385,
+        "remaining": 16385,
+        "dat": 0,
+        "dat2": 0,
+        "beam": [
+          19,
+          280
+        ],
+        "channel": 1,
+        "state": 2,
+        "kind": 1,
+        "flags": 0,
+        "value": 0,
+        "pcm_end": 82908
+      }
+    },
+    "requested_state": {
+      "cia_pra": 192,
+      "cia_ddra": 3,
+      "led_pin_on": true,
+      "channels": [
+        {
+          "state": 3,
+          "volume": 31,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 16385,
+          "remaining_words": 9407,
+          "period": 358,
+          "data_word": 65279,
+          "buffer": 121456,
+          "cursor": 135412,
+          "next_cycles": 11776,
+          "drhpos": 215
+        },
+        {
+          "state": 2,
+          "volume": 31,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 16385,
+          "remaining_words": 9416,
+          "period": 358,
+          "data_word": 254,
+          "buffer": 121456,
+          "cursor": 135396,
+          "next_cycles": 52736,
+          "drhpos": 199
+        },
+        {
+          "state": 0,
+          "volume": 0,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 0,
+          "remaining_words": 0,
+          "period": 124,
+          "data_word": 0,
+          "buffer": 0,
+          "cursor": 0,
+          "next_cycles": 4294967295,
+          "drhpos": 0
+        },
+        {
+          "state": 0,
+          "volume": 2,
+          "interrupt_pending": false,
+          "flags": 128,
+          "length_words": 16,
+          "remaining_words": 5,
+          "period": 300,
+          "data_word": 33410,
+          "buffer": 41952,
+          "cursor": 41976,
+          "next_cycles": 4294967295,
+          "drhpos": 51
+        }
+      ]
+    },
+    "all_four_original_restore_assignments_match_requested_state": true,
+    "snapshot_read_does_not_advance_original_time": true,
+    "initial_word_budgets": [
+      {
+        "channel": 0,
+        "original_restore_assignment": {
+          "cycle": 422011332096,
+          "pt": 135412,
+          "lc": 121456,
+          "period_cycles": 183296,
+          "next_cycles": 11776,
+          "length": 16385,
+          "remaining": 9407,
+          "dat": 65279,
+          "dat2": 65279,
+          "channel": 0,
+          "state": 3,
+          "volume": 31,
+          "interrupt_pending": 0,
+          "flags": 0,
+          "drhpos": 215,
+          "phase": 0
+        },
+        "before_first_ordinary_call": {
+          "cycle": 422048058880,
+          "pt": 135612,
+          "lc": 121456,
+          "period_cycles": 183296,
+          "next_cycles": 127488,
+          "length": 16385,
+          "remaining": 9307,
+          "dat": 1282,
+          "dat2": 1282,
+          "channel": 0,
+          "state": 2,
+          "volume": 31,
+          "interrupt_pending": 0,
+          "flags": 1,
+          "drhpos": 118,
+          "phase": 1
+        },
+        "first_actual_pointer_read": {
+          "call": 1,
+          "cycle": 422048067584,
+          "pt": 135612,
+          "lc": 121456,
+          "address": 135612,
+          "length": 16385,
+          "remaining": 9307,
+          "dat": 1282,
+          "dat2": 1282,
+          "beam": [
+            17,
+            3
+          ],
+          "channel": 0,
+          "state": 2,
+          "kind": 1,
+          "flags": 0,
+          "value": 0,
+          "pcm_end": 882
+        },
+        "projected_last_word": 154224,
+        "declared_last_word": 154224,
+        "extra_words_already_in_requested_state": 0,
+        "pointer_words_between_restore_and_observer": 100,
+        "pointer_words_between_observer_and_first_read": 0,
+        "intervening_execution_not_observed": true
+      },
+      {
+        "channel": 1,
+        "original_restore_assignment": {
+          "cycle": 422011332096,
+          "pt": 135396,
+          "lc": 121456,
+          "period_cycles": 183296,
+          "next_cycles": 52736,
+          "length": 16385,
+          "remaining": 9416,
+          "dat": 254,
+          "dat2": 254,
+          "channel": 1,
+          "state": 2,
+          "volume": 31,
+          "interrupt_pending": 0,
+          "flags": 0,
+          "drhpos": 199,
+          "phase": 0
+        },
+        "before_first_ordinary_call": {
+          "cycle": 422048058880,
+          "pt": 135596,
+          "lc": 121456,
+          "period_cycles": 183296,
+          "next_cycles": 168448,
+          "length": 16385,
+          "remaining": 9316,
+          "dat": 65278,
+          "dat2": 65278,
+          "channel": 1,
+          "state": 3,
+          "volume": 31,
+          "interrupt_pending": 0,
+          "flags": 0,
+          "drhpos": 67,
+          "phase": 1
+        },
+        "first_actual_pointer_read": {
+          "call": 1,
+          "cycle": 422048301056,
+          "pt": 135596,
+          "lc": 121456,
+          "address": 135596,
+          "length": 16385,
+          "remaining": 9316,
+          "dat": 65278,
+          "dat2": 65278,
+          "beam": [
+            19,
+            5
+          ],
+          "channel": 1,
+          "state": 2,
+          "kind": 1,
+          "flags": 0,
+          "value": 0,
+          "pcm_end": 882
+        },
+        "projected_last_word": 154226,
+        "declared_last_word": 154224,
+        "extra_words_already_in_requested_state": 1,
+        "pointer_words_between_restore_and_observer": 100,
+        "pointer_words_between_observer_and_first_read": 0,
+        "intervening_execution_not_observed": true
+      }
+    ],
+    "damaged_actual_snapshot_controls_rejected": [
+      "changed-original-restore-pointer",
+      "changed-original-restore-count",
+      "changed-pre-replay-pointer",
+      "changed-pre-replay-count",
+      "advanced-snapshot-time",
+      "swapped-snapshot-role"
+    ],
+    "scope": "Actual original restore assignments and read-only pre-replay state agree with the requested warm save and preserve the first live projected word boundary. Execution between snapshots is not observed. The extra channel-1 word is already encoded in this warm input, not a new cold sample-length or padding rule. Native onset, handoffs and whole PCM acceptance remain open.",
+    "native_runtime_changed": false,
+    "native_waveform_accepted": false
+  },
+  "retention": {
+    "files": [
+      {
+        "path": "state.dat.gz",
+        "decoded_sha256": "8bcf7f577322695a61e759f678335d56e28b824dffb98706927341f8ab11134b",
+        "decoded_bytes": 3145728,
+        "retained_sha256": "ffbf026f2d33a6de02e0eeef5adfd6369b27b72b73d8b9ebf486f7079e4429a8",
+        "retained_bytes": 354487,
+        "shared_exact_existing_storage": true
+      },
+      {
+        "path": "chip.dat.gz",
+        "decoded_sha256": "c0387b6b573a5796c9dec28f0d578bb1d2ba4ee632032c3a989ae3ad24fa66e8",
+        "decoded_bytes": 524288,
+        "retained_sha256": "824d5ea2a9ac6e90f046fa658709ee5ae9da04254d1cdb4458ee6a246a25943f",
+        "retained_bytes": 199471,
+        "shared_exact_existing_storage": true
+      },
+      {
+        "path": "slow.dat.gz",
+        "decoded_sha256": "396f461c4900a32b00b2d0bed81b7d911218d08270c983a2deca73f5c5b6bf8a",
+        "decoded_bytes": 524288,
+        "retained_sha256": "dbf44dcaf22d55e1639c103572ac54df840616298aeb9e9bb8b76dbe360d509e",
+        "retained_bytes": 141228,
+        "shared_exact_existing_storage": true
+      },
+      {
+        "path": "audio_dma.bin.gz",
+        "decoded_sha256": "b794f40f9aba9b98975a8f46c0582a715f92b7d3ddea7fed7b32ba2f3eda436e",
+        "decoded_bytes": 340042,
+        "retained_sha256": "8d3a9e18432206a5f5f699859eec83fe8415fe31946c67ada9035d4c78126e70",
+        "retained_bytes": 106552,
+        "shared_exact_existing_storage": true
+      },
+      {
+        "path": "audio_samples.bin.gz",
+        "decoded_sha256": "4c6952cd479377cc60945a9b57c04439687b5a020bffe6f3e4cc17267f72db21",
+        "decoded_bytes": 749366,
+        "retained_sha256": "caba3f11faecc21976adf748df48b211339cd1ca1ff408c3e5f6b93c4902a568",
+        "retained_bytes": 320422,
+        "shared_exact_existing_storage": true
+      },
+      {
+        "path": "audio_word_states.bin.gz",
+        "decoded_sha256": "8dc8f9d79e4d9c1218cad15fa9ea2de9d9f15397109b1bf0db11ec388d7b690b",
+        "decoded_bytes": 2130010,
+        "retained_sha256": "8b1e4ba9a95b60fda21063fc19c0236f9f13b7ddc229e8aad859c3e19ca79c07",
+        "retained_bytes": 570518,
+        "shared_exact_existing_storage": true
+      },
+      {
+        "path": "original.wav.gz",
+        "decoded_sha256": "029779d8d91b402dbedc327548d16aeea9519cfb174c83a00223a620a8a779ca",
+        "decoded_bytes": 331676,
+        "retained_sha256": "746fedaa77033fe5a414929a88cc3bf688340af8c79a5979b0bdc40e788a1545",
+        "retained_bytes": 246839,
+        "shared_exact_existing_storage": true
+      },
+      {
+        "path": "audio_chunks.jsonl.gz",
+        "decoded_sha256": "7410c3de76096e8dccc43d8af42b551e34fa5b351d7863b629545eaa0d7c66a0",
+        "decoded_bytes": 15937,
+        "retained_sha256": "da96397a07e3f3cf54f7d9e8f65eb6b9c04e4bf42ae310b029fa86497eb7d89e",
+        "retained_bytes": 5107,
+        "shared_exact_existing_storage": true
+      },
+      {
+        "path": "audio_events.jsonl.gz",
+        "decoded_sha256": "ad504052eca02fff8135915e319d99eb589b68c2fdd44f10cf6655c02905ab41",
+        "decoded_bytes": 739405,
+        "retained_sha256": "cf65c345bc6d9c724db15eff56399aaedc81f6b542a38e8db268826180723056",
+        "retained_bytes": 29444,
+        "shared_exact_existing_storage": true
+      }
+    ],
+    "raw_passing_copies_removed": true
+  },
+  "reports": [
+    {
+      "path": "build/native-audio/restore-state-loop-zero/comparison.json",
+      "sha256": "bdb07a767b9052de838f315e0edeef1b61c009588796adef460d3ac36b48f8b5",
+      "bytes": 16620
+    },
+    {
+      "path": "build/native-audio/restore-state-loop-zero/compressed-recheck.json",
+      "sha256": "bdb07a767b9052de838f315e0edeef1b61c009588796adef460d3ac36b48f8b5",
+      "bytes": 16620
+    },
+    {
+      "path": "build/native-audio/restore-state-loop-zero/snapshot.json",
+      "sha256": "5e57da4e9a343e9af5e74433985670bd179f38e33a0ff96deca0ddd8257727cd",
+      "bytes": 57410
+    },
+    {
+      "path": "build/native-audio/restore-state-loop-zero/retention.json",
+      "sha256": "cb6bcacaf8e045da7610f2398a537ecc58a64cf09ecbb956b8a71c4436111e4e",
+      "bytes": 3191
+    }
+  ],
+  "build_manifest": {
+    "path": "build/native-audio/restore-state-probe-engine/build.json",
+    "sha256": "b839dd8c6634d024120b2efa55f7799f16a31876b7141d22f98f65193181b934",
+    "bytes": 40567
+  },
+  "tools": [
+    {
+      "path": "tools/native/build_original_audio_probe.py",
+      "sha256": "7dcc3db85cf520d3a0c511f3a6054f6a787ab95b90578cc4d1e7b9d17d7d0a63",
+      "bytes": 9005
+    },
+    {
+      "path": "tools/native/original_audio_live_probe.inc",
+      "sha256": "71ff2faee8fd5fec7090ad2c9a9e611170582ca73ff38db97f8fc3cc73a9c4d0",
+      "bytes": 1513
+    },
+    {
+      "path": "scripts/original_audio_samples.py",
+      "sha256": "ac30168f73a8a7bfa5878a3df6a650e5bb7a7b978e3783e2319b58a8a5696f92",
+      "bytes": 9779
+    },
+    {
+      "path": "tools/native/check_original_audio_samples.py",
+      "sha256": "ad50fe53283a53c4d2ac3a7a935e41fc0ea8f4c24e1efc7f56aae67fb1a0bdfb",
+      "bytes": 14926
+    },
+    {
+      "path": "tools/native/check_original_audio_restore_state.py",
+      "sha256": "3b511df9b2be5e1d981cd87797ed7aeb2349cb7a9d3950ae8eaae419db158b69",
+      "bytes": 7073
+    },
+    {
+      "path": "tools/native/test_original_audio_samples.py",
+      "sha256": "a7d494844216e047190a28fd255a136e7cf82095a99e689f938f93dd00e58325",
+      "bytes": 7333
+    },
+    {
+      "path": "scripts/engine9000_bridge.py",
+      "sha256": "3ac03f714d0517334a96ad3e184acb3df4292bef8fd67f1e67190407a79935bf",
+      "bytes": 32074
+    }
+  ],
+  "preserved_prior_assessment": {
+    "path": "build/native-audio/word-state-loop-zero-complete/comparison.json",
+    "sha256": "f0a6ca73beb379baf1bbc24e39a5356db216642768d6400c5727d415b3278d84",
+    "bytes": 10583
+  },
+  "regression_assessment": {
+    "path": "build/native-audio/word-state-loop-zero-complete/restore-tool-regression.json",
+    "sha256": "f0a6ca73beb379baf1bbc24e39a5356db216642768d6400c5727d415b3278d84",
+    "bytes": 10583
+  },
+  "validation": {
+    "sample_contract_tests": 13,
+    "actual_snapshot_mutation_controls": 6,
+    "compressed_recheck_identical": true,
+    "old_word_assessment_identical": true
+  },
+  "remaining": "Complete native sound onset/handoff/waveform acceptance and broader independent flight drawing remain open. Campaign continuity is waived and named-state cleanup is separate."
+}

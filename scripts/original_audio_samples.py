@@ -16,7 +16,22 @@ SAMPLE = struct.Struct('<QIHbBHH')
 FOOTER = struct.Struct('<IQ')
 WORD_MAGIC = b'FA18_ORIGINAL_AUDIO_WORD_STATES_V1\n'
 WORD = struct.Struct('<QIIIHHHHHHBBBBH')
+LIVE = struct.Struct('<QIIIIHHHHBBBBBBB')
 CYCLE_UNIT = 512  # sysdeps.h; e9k_debug_read_cycle_count returns get_cycles()/512.
+
+
+def live_records(payload):
+    if len(payload) != 8 * LIVE.size:
+        raise ValueError('Incomplete live audio snapshots')
+    names = ('cycle', 'pt', 'lc', 'period_cycles', 'next_cycles', 'length', 'remaining', 'dat', 'dat2',
+             'channel', 'state', 'volume', 'interrupt_pending', 'flags', 'drhpos', 'phase')
+    result = []
+    for index, values in enumerate(LIVE.iter_unpack(payload)):
+        row = dict(zip(names, values))
+        if (row['channel'], row['phase']) != (index % 4, index // 4) or row['flags'] > 7 or row['interrupt_pending'] > 1:
+            raise ValueError('Invalid live audio snapshot order/flags')
+        result.append(row)
+    return result
 
 
 def sample_records(payload, before, after):
@@ -58,6 +73,19 @@ class AudioSamplesWriter:
         self.calls = self.samples = self.unknown = 0
         self.channels = [0] * 4
         self.previous_cycle = engine.core.e9k_debug_read_cycle_count()
+        self.initial_live_state = None
+        if 'live_state_include_sha256' in self.manifest:
+            if self.manifest['live_state_record_bytes'] != LIVE.size or self.manifest['live_state_records'] != 8:
+                raise RuntimeError('Reference live-state observer ABI changed')
+            if engine.bind('e9k_debug_audio_live_record_size', C.c_uint)() != LIVE.size:
+                raise RuntimeError('Reference live-state record size differs')
+            read_live = engine.bind('e9k_debug_audio_live_read', C.c_uint, C.POINTER(C.c_void_p))
+            live_pointer = C.c_void_p()
+            if read_live(C.byref(live_pointer)) != 8 or not live_pointer.value:
+                raise RuntimeError('Original restore snapshots missing')
+            self.initial_live_state = live_records(C.string_at(live_pointer, 8 * LIVE.size))
+            if engine.core.e9k_debug_read_cycle_count() != self.previous_cycle:
+                raise RuntimeError('Live-state read advanced original execution')
         self.write(MAGIC)
         self.enable(1)
         self.word_file = None
@@ -144,4 +172,6 @@ class AudioSamplesWriter:
             report['word_states'] = dict(file='audio_word_states.bin', sha256=self.word_digest.hexdigest(),
                 calls=self.calls, records=self.word_total, max_records_per_call=self.word_max,
                 record_bytes=WORD.size, ring_records=65536)
+        if self.initial_live_state is not None:
+            report['initial_live_state'] = self.initial_live_state
         return report
