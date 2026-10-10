@@ -1,5 +1,14 @@
 # Active port source ownership
 
+Complete escort comparison (2026-10-10): the successful original recording
+has exact JSR/LINK identities for all 47,814 observations and a verified
+arrest snapshot. Native consumes every key and reaches the menu without
+a reset, but earns no escort grade. All 7,170 flight observations are
+compared; strict parity remains rejected and retained. Different clock
+inputs already select different initial carrier positions. No playable
+change or fitted clock is introduced. Sound timing remains open.
+See [complete comparison evidence](../analysis/native_escort_wire_full_flight_milestone.md).
+
 Successful original escort (2026-10-10): targeting the live original
 arrestor geometry completes escort, earns the second mission completion
 and returns to the menu. All 47,814 observations, final RAM and consumed

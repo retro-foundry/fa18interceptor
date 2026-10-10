@@ -1,0 +1,538 @@
+{
+  "date": "2026-10-10",
+  "source_updates": {
+    "source_trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+    "source_final_ram_sha256": "b2f55338d766629458ee868db4518c1f391896f53a960f6f5ea9cd35df09ffdf",
+    "source_consumed_input_sha256": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+    "probe_runner_sha256": "6019c97697dc40b76bbe60a199168ac0815561682308221fe3abe03171d2aa0f",
+    "probe_source_sha256": "6cfdb219df9d51d8c9ca1ce630f33472e09b8e49431b02c3fa6430231b0c9a3c",
+    "observations": 47814,
+    "real_update_calls": 47799,
+    "executed_links": 47799,
+    "duplicate_observations": 15,
+    "input_edges_preserved": 6973,
+    "remapped_input_sha256": "af646592ed64f8b46ac4e32945a0578494f5aa21c06f79e669cd93f6105ea5ae",
+    "mapping_sha256": "4b1f3ec186815c75b8bdef5394061cf5310bea4955ad4292ce9a4e7f899418b4",
+    "entries_sha256": "3f348016bc25a0411d1dd1d992ced966d0bec0faee10b573a75660f3eef6102e",
+    "instruction_trace_sha256": "fe6447a00e627fa6dd7839ff4962a0636f6d738da24d83ba58f53a106666a91a",
+    "mutation_rejections": {
+      "caller": true,
+      "executed_link": true,
+      "resume_stack": true,
+      "resume_stop": true
+    },
+    "scope": "Exact original execution and input retained; explicit JSR/LINK identities map every observation. No game tick, state or drawing equality is used to decide whether a boundary repeats. Native replay and complete gameplay/drawing parity remain separate acceptance checks.",
+    "snapshot": {
+      "observation": 46885,
+      "ram_sha256": "0992bb2afa0a237a32bc5452b13653bd27b8e9f448a5a5602aba4eb115d497a9",
+      "complete_cores_matching": 16,
+      "named_fields_matching": 42,
+      "complete_pages_matching": 8
+    }
+  },
+  "snapshot_guards": {
+    "different_snapshot_request": true,
+    "changed_player_position": true
+  },
+  "geometry": {
+    "snapshot_observation": 46885,
+    "carrier_slot": 14,
+    "carrier_position": [
+      1136640.0,
+      0.0,
+      1071104.0
+    ],
+    "carrier_scale": 3,
+    "wire_vertices": [
+      [
+        1136584.0,
+        112.0,
+        1070684.0
+      ],
+      [
+        1136704.0,
+        112.0,
+        1070520.0
+      ],
+      [
+        1136560.0,
+        112.0,
+        1070548.0
+      ]
+    ],
+    "player_position": [
+      1136610.75,
+      119.03125,
+      1070633.328125
+    ],
+    "player_contact": "C082",
+    "cached_second_probe_world": [
+      1136614.75,
+      119.03125,
+      1070610.328125
+    ]
+  },
+  "native_comparison": {
+    "runner_sha256": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "source_trace_sha256": "d4cf4cb02b71adf742120166f5195e1765a3ed80ad73ffb3c969d66e71bba5bb",
+    "event_plan": [
+      {
+        "source_observation": 1,
+        "source_first": 1,
+        "mode": 0,
+        "stage": "C0FCB4",
+        "game_tick": 0
+      },
+      {
+        "source_observation": 40170,
+        "source_first": 40168,
+        "mode": 4,
+        "stage": "C10C08",
+        "game_tick": 36
+      },
+      {
+        "source_observation": 40643,
+        "source_first": 40641,
+        "mode": 4,
+        "stage": "C10D8A",
+        "game_tick": 1
+      }
+    ],
+    "event_report": {
+      "format": "FA18_REPLAY_ANCHORS_V1",
+      "complete": true,
+      "failed": false,
+      "native_updates": 47553,
+      "source_position": 47799,
+      "keys_consumed": 6973,
+      "anchors": [
+        {
+          "source_first": 1,
+          "mode": 0,
+          "stage": "C0FCB4",
+          "game_tick": 0,
+          "native_first": 1,
+          "frame": 2299
+        },
+        {
+          "source_first": 40168,
+          "mode": 4,
+          "stage": "C10C08",
+          "game_tick": 36,
+          "native_first": 39931,
+          "frame": 55567
+        },
+        {
+          "source_first": 40641,
+          "mode": 4,
+          "stage": "C10D8A",
+          "game_tick": 1,
+          "native_first": 40395,
+          "frame": 56304
+        }
+      ]
+    },
+    "runtime_outcome_matches": true,
+    "comparison_completed": true,
+    "comparison_rejected": null,
+    "context_differences": {
+      "saved_level": [
+        1,
+        0
+      ],
+      "grades": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "completions": [
+        2,
+        1
+      ],
+      "scene_level": [
+        2,
+        1
+      ]
+    },
+    "native_run": {
+      "frame_owner_exit": false,
+      "frames": 80484,
+      "screen": "menu",
+      "mode": 0,
+      "glyphs": 22552,
+      "record_updates": 12942,
+      "scene_frames": 12935,
+      "terrain_polygons": 59614,
+      "model_calls": 113551,
+      "hud_frames": 12935,
+      "control_frames": 27383,
+      "scene_selected": true,
+      "stage": "C0FCB4",
+      "game_tick": 0,
+      "timer_pending": false,
+      "timer_yields": 30533,
+      "display_publications": 27383,
+      "display_yields": 27414,
+      "display_pending": false,
+      "displayed_page": 0,
+      "postflight_callbacks": 0,
+      "postflight_resets": 0,
+      "input_passes": 27379,
+      "input_events": 6960,
+      "input_queued": 0,
+      "update_iterations": 48029,
+      "replay_iterations": 47553,
+      "replay_events": 6973,
+      "host_replay_events": 2,
+      "host_replay_pending": 0,
+      "replay_started": true,
+      "voice_ticks": 80484,
+      "voice_publications": 168868,
+      "voice_levels": [
+        [
+          358,
+          31
+        ],
+        [
+          358,
+          31
+        ],
+        [
+          124,
+          0
+        ],
+        [
+          300,
+          2
+        ]
+      ],
+      "sample_requests": 71140,
+      "sample_frames": 77264640,
+      "nonzero_sample_frames": 76672110,
+      "audio_device": false,
+      "frame_capture_complete": false,
+      "frame_before_tick": 0,
+      "frame_after_tick": 0,
+      "frame_saved_tick": 0,
+      "cpu_emulation": false,
+      "chipset_emulation": false
+    },
+    "source_context": {
+      "pilot": "0001000100000400000002bf000000000000000000010100000000000000000000000000000000000000000000000000000000000000000200020018000000000000000100010000000400000000",
+      "qualified": 1,
+      "saved_level": 1,
+      "grades": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "completions": 2,
+      "scene_level": 2,
+      "player_phase": 0
+    },
+    "native_context": {
+      "pilot": "0001000000020300000001d70000000000000000000100000000000000004e4557000000000000000000000000000000000000000000000200010018000000000000000100000000000000000000",
+      "qualified": 1,
+      "saved_level": 0,
+      "grades": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "completions": 1,
+      "scene_level": 1,
+      "player_phase": 0
+    }
+  },
+  "whole_successful_flight": {
+    "compared": 7170,
+    "record_cores_compared": 114720,
+    "record_cores_matching": 66038,
+    "complete_record_boundaries_matching": 0,
+    "camera_and_controls_matching": 0,
+    "complete_pages_matching": 0,
+    "timer_and_hud_matching": 0,
+    "first_record_difference": {
+      "source_iteration": 40643,
+      "native_iteration": 40395,
+      "source_tick": 1,
+      "changes": [
+        0,
+        4,
+        8,
+        14
+      ]
+    },
+    "first_game_difference": {
+      "source_iteration": 40643,
+      "native_iteration": 40395,
+      "source_tick": 1,
+      "changes": [
+        "observer",
+        "view_pan_rotate"
+      ]
+    },
+    "first_page_difference": {
+      "source_iteration": 40643,
+      "native_iteration": 40395,
+      "source_tick": 1,
+      "changes": [
+        1,
+        3,
+        5,
+        7
+      ]
+    },
+    "game_fields_compared": [
+      "stage",
+      "game_tick",
+      "phase",
+      "mouse_coordinates",
+      "selected_record",
+      "mode",
+      "target_record",
+      "controls",
+      "observer",
+      "camera_matrix",
+      "view_matrix",
+      "view_pan_rotate",
+      "view_attitude",
+      "view_side"
+    ],
+    "first": 40643,
+    "last": 47812,
+    "records_matching_per_slot": [
+      0,
+      1543,
+      6342,
+      6342,
+      0,
+      7170,
+      7170,
+      7170,
+      0,
+      5045,
+      7170,
+      7170,
+      343,
+      3403,
+      0,
+      7170
+    ],
+    "complete_gameplay_matching_prefix": 0,
+    "strict_gameplay_matching": false,
+    "native_menu_observation_gaps": [
+      47813,
+      47814
+    ],
+    "execution_alignment": {
+      "first_native_update": 40395,
+      "last_native_update": 47551,
+      "real_updates_compared": 7157,
+      "duplicate_observations_preserved": [
+        40930,
+        41996,
+        42697,
+        42836,
+        42907,
+        42915,
+        42944,
+        43157,
+        43311,
+        43480,
+        43598,
+        43669,
+        45604
+      ],
+      "basis": "Original explicit JSR calls and executed LINK instructions; no state matching or frame search"
+    },
+    "mutation_rejections": {
+      "npc_core": true,
+      "controls": true,
+      "page": true
+    }
+  },
+  "initial_clock_observations": [
+    {
+      "runtime": "original",
+      "observation": 36237,
+      "stored_microseconds": 976083
+    },
+    {
+      "runtime": "native",
+      "observation": 36235,
+      "stored_microseconds": 600000
+    }
+  ],
+  "actual_aligned_points": [
+    {
+      "source_observation": 40643,
+      "native_update": 40395,
+      "source_xyz": [
+        1136684.0,
+        119.03125,
+        1071520.0
+      ],
+      "native_xyz": [
+        1153068.0,
+        119.03125,
+        1071520.0
+      ],
+      "source_contact": "0082",
+      "native_contact": "0082"
+    },
+    {
+      "source_observation": 42816,
+      "native_update": 42565,
+      "source_xyz": [
+        1112473.6875,
+        15709.1875,
+        1166200.0
+      ],
+      "native_xyz": [
+        1128654.359375,
+        15710.3125,
+        1166478.78125
+      ],
+      "source_contact": "0000",
+      "native_contact": "0000"
+    },
+    {
+      "source_observation": 46879,
+      "native_update": 46618,
+      "source_xyz": [
+        1136610.75,
+        119.03125,
+        1070395.703125
+      ],
+      "native_xyz": [
+        1190968.171875,
+        2.9296875,
+        1289743.140625
+      ],
+      "source_contact": "8082",
+      "native_contact": "8080"
+    },
+    {
+      "source_observation": 46885,
+      "native_update": 46624,
+      "source_xyz": [
+        1136610.75,
+        119.03125,
+        1070633.328125
+      ],
+      "native_xyz": [
+        1190968.171875,
+        2.9296875,
+        1289743.140625
+      ],
+      "source_contact": "c082",
+      "native_contact": "8080"
+    },
+    {
+      "source_observation": 46934,
+      "native_update": 46673,
+      "source_xyz": [
+        1136610.75,
+        119.03125,
+        1070910.171875
+      ],
+      "native_xyz": [
+        1190968.171875,
+        2.9296875,
+        1289743.140625
+      ],
+      "source_contact": "c482",
+      "native_contact": "8480"
+    },
+    {
+      "source_observation": 46943,
+      "native_update": 46682,
+      "source_xyz": [
+        1136610.75,
+        119.03125,
+        1070910.171875
+      ],
+      "native_xyz": [
+        1190968.171875,
+        2.9296875,
+        1289743.140625
+      ],
+      "source_contact": "c482",
+      "native_contact": "8480"
+    },
+    {
+      "source_observation": 47812,
+      "native_update": 47551,
+      "source_xyz": [
+        1136610.75,
+        119.03125,
+        1070910.171875
+      ],
+      "native_xyz": [
+        1190968.171875,
+        2.9296875,
+        1289743.140625
+      ],
+      "source_contact": "c482",
+      "native_contact": "8480"
+    }
+  ],
+  "scope": "Successful original reference and its exact update/snapshot proof; independently started native complete flight comparison rejected. Native reaches menu without escort grade. Every genuine difference is retained; no reference RAM or fitted clocks enter native gameplay.",
+  "artifact_sha256": {
+    "build\\native-flight\\original-escort-wire-updates\\complete-boundary.csv.gz": "03e199396bf1142c6b9bb48f880defe743e89fb5ff89e2ef3573911386bc5cd2",
+    "build\\native-flight\\original-escort-wire-updates\\complete-consumed.fa18in": "7b5b9f5cf34d0e7b917e5658ebb075f9e0130e34ee4d256e9f592f7872652fcd",
+    "build\\native-flight\\original-escort-wire-updates\\complete-source.dat.gz": "6f3e258403f79a615b130012e671a14ea503f7d17d87e75bc910e33ffb8ef59c",
+    "build\\native-flight\\original-escort-wire-updates\\complete-source.jsonl.gz": "2133fd5825ec611da775957ab7c5e7e290fb38b5af966dcfa70422eff1ee4e31",
+    "build\\native-flight\\original-escort-wire-updates\\complete-source.log": "26568b80dcc5270a64e2eb1f1e77c4b7338b8ddb1b7eb1a666fcf52f977f76af",
+    "build\\native-flight\\original-escort-wire-updates\\entries.csv.gz": "c6b8bfc04cc26b510f2596a66b527a33731698e862d2c5428c5b627839e5e4a4",
+    "build\\native-flight\\original-escort-wire-updates\\mapping.json": "4b1f3ec186815c75b8bdef5394061cf5310bea4955ad4292ce9a4e7f899418b4",
+    "build\\native-flight\\original-escort-wire-updates\\report.json": "b5294e67aa7b3bb2379c986005fad170ef9b7986ee0a4bce75e74440a694f650",
+    "build\\native-flight\\original-escort-wire-updates\\snapshot-guards.json": "e58b2cc6cb3bd8ec2ba8084d358d13d740d0b4ea464ad074f63a0f42e2d70bf2",
+    "build\\native-flight\\original-escort-wire-updates\\source-snapshot.dat.gz": "716fb35ab1afbd3b78fdd4f54a2bea18faf5658bf5d5c61b5aa919eb433f85c8",
+    "build\\native-flight\\original-escort-wire-updates\\update-consumed.fa18in": "af646592ed64f8b46ac4e32945a0578494f5aa21c06f79e669cd93f6105ea5ae",
+    "build\\native-flight\\independent-escort-wire-input\\anchors.json": "522640561449803536e4850d0ad3790205062537ab2427233cf8af9bcdc04a16",
+    "build\\native-flight\\independent-escort-wire-input\\enlist.log": "c9825e8ab37a7db3d41577641ef33974a1130b01d99e742bec037ed1061cf5c0",
+    "build\\native-flight\\independent-escort-wire-input\\input.anchors": "4d770e3c14f39c7c853fe5028cdefdb9f01194fa8b9ceaa1164e82b8c2f3058c",
+    "build\\native-flight\\independent-escort-wire-input\\native.dat.gz": "745cd68fad28e2644564352277737f5ac530b0647f6dbecc6c6a1e848349f0f4",
+    "build\\native-flight\\independent-escort-wire-input\\native.jsonl.gz": "d96ccd5550c2e099ca8c7fa9d60ef14b1e486398d7037c324c2838c14c73fd70",
+    "build\\native-flight\\independent-escort-wire-input\\native.log": "1a0470085046b845cea28c8c202e621ed8cc446b891275a5e34ba2e76952ea2d",
+    "build\\native-flight\\independent-escort-wire-input\\report.json": "6589ad9d325fd17900246759ff7be781dfdeb7d1fda145a65d3eaf6972d6ca62"
+  },
+  "helper_sha256": "374fbeed204fc9ee5e88238e0085c13895f6ba7a847fe569e8510c9c1a3d0f5e"
+}

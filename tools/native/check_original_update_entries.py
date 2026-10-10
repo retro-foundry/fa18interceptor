@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 import subprocess
 
-from check_gameplay_checkpoint import ROOT
+from check_gameplay_checkpoint import ROOT, integer, span
 from compare_flight_traces import read_trace
 
 
@@ -76,13 +76,18 @@ def main():
     parser.add_argument('--source-evidence', type=Path, required=True)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--assess-existing', action='store_true')
+    parser.add_argument('--snapshot-observation', type=int,
+                        help='retain one original pre-input RAM snapshot, checked against the complete trace')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     evidence, out = args.source_evidence, args.out
     original = json.loads((evidence / 'report.json').read_text())
     assert original['unmodified_replay_exact']
+    if args.snapshot_observation is not None:
+        assert 1 <= args.snapshot_observation <= original['iterations'], 'snapshot outside original recording'
     if args.assess_existing and (out / 'report.json').exists():
         retained = json.loads((out / 'report.json').read_text())
+        assert retained.get('snapshot', {}).get('observation') == args.snapshot_observation, 'different snapshot request'
         for name, key in (('entries.csv', 'entries_sha256'),
                           ('complete-boundary.csv', 'instruction_trace_sha256'),
                           ('mapping.json', 'mapping_sha256'),
@@ -102,6 +107,8 @@ def main():
             FA18_BOUNDARY_TRACE=str((out / 'complete-boundary.csv').resolve()),
             FA18_BOUNDARY_RANGE='c0efd4-c0efd8', FA18_BOUNDARY_TRACE_MAX_MIB='32',
             FA18_LOOP_TRACE=str((out / 'complete-source.jsonl').resolve()))
+        if args.snapshot_observation is not None:
+            env['FA18_LOOP_DUMP'] = f'{args.snapshot_observation}:{(out / "source-snapshot.dat").resolve()}'
         with (out / 'complete-source.log').open('w') as log:
             result = subprocess.run([str(args.probe.resolve()), '--state',
                 'captures/native/qual_carrier_success/state.bin', '--rom', 'local/system/kick13.rom',
@@ -121,7 +128,32 @@ def main():
         path.with_suffix(path.suffix + '.gz').write_bytes(gzip.compress(data, mtime=0))
         if path.exists():
             path.unlink()
-    _, source = read_trace(out / 'complete-source.jsonl.gz')
+    header, source = read_trace(out / 'complete-source.jsonl.gz')
+    snapshot = None
+    if args.snapshot_observation is not None:
+        path = out / 'source-snapshot.dat'
+        data = content(path)
+        assert len(data) == 0x100000, 'incomplete original snapshot'
+        row = source[args.snapshot_observation]
+        for slot in range(16):
+            assert span(data, 0xC46184 + 512 * slot, 164).hex() == row['records'][slot], 'snapshot core differs from trace'
+        for field in header['fields']:
+            assert span(data, field['address'], field['size']).hex() == row['fields'][field['name']], 'snapshot field differs from trace'
+        if row['pages_valid']:
+            for role in range(2):
+                for plane in range(4):
+                    pointer = integer(data, 0xC4566E + 16 * (row['draw_page'] ^ role) + 4 * plane, 4)
+                    assert digest(span(data, pointer, 8000)) == row['pages'][role * 4 + plane], 'snapshot page differs from trace'
+        snapshot = dict(observation=args.snapshot_observation, ram_sha256=digest(data),
+                        complete_cores_matching=16, named_fields_matching=len(header['fields']),
+                        complete_pages_matching=len(row['pages']))
+        if args.assess_existing:
+            assert snapshot == retained['snapshot'], 'snapshot evidence changed'
+        compressed = gzip.compress(data, mtime=0)
+        assert gzip.decompress(compressed) == data
+        path.with_suffix('.dat.gz').write_bytes(compressed)
+        if path.exists():
+            path.unlink()
     entries = list(csv.DictReader(content(out / 'entries.csv').decode('ascii').splitlines()))
     instructions = list(csv.DictReader(content(out / 'complete-boundary.csv').decode('ascii').splitlines()))
     mapping, repeated, updates = update_map(entries, instructions, source)
@@ -176,6 +208,8 @@ def main():
         scope='Exact original execution and input retained; explicit JSR/LINK identities map every observation. '
               'No game tick, state or drawing equality is used to decide whether a boundary repeats. '
               'Native replay and complete gameplay/drawing parity remain separate acceptance checks.')
+    if snapshot is not None:
+        report['snapshot'] = snapshot
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps({k: report[k] for k in ('observations', 'real_update_calls',
         'duplicate_observations', 'input_edges_preserved', 'mutation_rejections')}))
