@@ -60,14 +60,14 @@ void fa18_loop_iteration(void) {
         repeat_steering=getenv("FA18_ORIGINAL_PILOT_REPEAT_STEERING")!=NULL;
         if(mode_text) {
             char *end;unsigned long value=strtoul(mode_text,&end,10);
-            if(*end || (value!=3 && value!=4)) {fputs("Original pilot mode requires 3 or 4\n",stderr);exit(2);}
+            if(*end || (value!=3 && value!=4 && value!=5)) {fputs("Original pilot mode requires 3, 4 or 5\n",stderr);exit(2);}
             mission_mode=(unsigned)value;
         }
-        if(mission_mode==4) {
+        if(mission_mode>3) {
             const char *prefix=getenv("FA18_ORIGINAL_PILOT_PREFIX_END");char *end;
-            if(!prefix) {fputs("Escort requires the independently verified mission-three prefix\n",stderr);exit(2);}
+            if(!prefix) {fputs("Mission requires the independently verified preceding-mission prefix\n",stderr);exit(2);}
             prefix_end=strtol(prefix,&end,10);
-            if(*end || prefix_end<=8038 || prefix_end>=65000) {fputs("Invalid original escort prefix end\n",stderr);exit(2);}
+            if(*end || prefix_end<=8038 || prefix_end>=(mission_mode==5?80000:65000)) {fputs("Invalid original mission prefix end\n",stderr);exit(2);}
         }
         if(!path || !log || !events || recorded_end!=prefix_end) {
             fputs("Original pilot requires its verified input prefix and two output paths\n",stderr);exit(2);
@@ -94,13 +94,21 @@ void fa18_loop_iteration(void) {
         pilot.approach_at_standoff_height=getenv("FA18_ORIGINAL_PILOT_APPROACH_STANDOFF")!=NULL;
         pilot.carrier_wire_return=getenv("FA18_ORIGINAL_PILOT_WIRE_APPROACH")!=NULL;
         if(mission_mode==4) pilot.escort_flight=pilot.complete_flight=pilot.campaign_flight=1;
+        if(mission_mode==5) {
+            /* Existing native 5-tour formation input with campaign combat;
+             * every choice is a physical key, no source state is seeded. */
+            pilot.force_return=pilot.complete_flight=pilot.campaign_flight=1;
+            pilot.tour_flight=1;
+        }
         if(getenv("FA18_ORIGINAL_PILOT_PATROL")) {
             /* Test input: use the existing level-turn/return controller to
              * approach the normally spawned aircraft without firing. */
             pilot.patrol_flight=pilot.complete_flight=pilot.campaign_flight=1;
         }
         /* Diagnostic end bound only; the source game state is untouched. */
-        recorded_end=mission_mode==4?65000:40000;
+        /* Eighty thousand default V2 observations fit the 512 MiB capture
+         * budget, including the complete earned escort prefix. */
+        recorded_end=mission_mode==5?80000:mission_mode==4?65000:40000;
     }
     observation.ticks=(unsigned)frame;
     observation.scene_frames=rd_u16(UPDATE_TICK);
@@ -116,22 +124,23 @@ void fa18_loop_iteration(void) {
             rd_s32(CONTROL_RECORDS+28)/256,airborne,gear_raised,gear_lowered);
         recorded_end=iteration+1;menu_phase=10;
     }
-    if(pilot.started && mission_mode==4 && menu_phase==4 &&
+    if(pilot.started && mission_mode>3 && menu_phase==4 &&
        (rd_u8(PLAYER_PHASE)==0xfe || rd_u8(PLAYER_PHASE)==2)) {
         fprintf(stderr,"Original mission failure outcome at loop %ld PAL %ld phase %u\n",
             iteration+1,frame,rd_u8(PLAYER_PHASE));
         recorded_end=iteration+1;menu_phase=10;
     }
     if(iteration>=prefix_end && !menu_phase) {
-        if(mission_mode==4) {
+        if(mission_mode>3) {
             const gaddr log=rd_u32(MODE_TABLE);
             if(rd_u8(MODE_SELECT) || stage!=0xc0fcb4 || !rd_u16(log) ||
-               !rd_u8(log+21) || rd_u16(log+56)!=1) {
-                fputs("Original escort prefix did not earn the actual mission-three result/menu\n",stderr);exit(2);
+               !rd_u8(log+21) || (mission_mode==5 && !rd_u8(log+22)) ||
+               rd_u16(log+56)!=mission_mode-3) {
+                fputs("Original prefix did not earn the actual preceding mission results/menu\n",stderr);exit(2);
             }
             started_menu=observation.ticks;menu_phase=4;
-            fprintf(stderr,"Original earned escort prefix: PAL %u loop %ld grade %u count %u\n",
-                started_menu,iteration,rd_u8(log+21),rd_u16(log+56));
+            fprintf(stderr,"Original earned mission %u prefix: PAL %u loop %ld grade %u count %u\n",
+                mission_mode,started_menu,iteration,rd_u8(log+17+mission_mode),rd_u16(log+56));
         } else {
             mission_pilot_event(&pilot,&observation,304,1);escape_tick=observation.ticks;
             menu_phase=1;
@@ -164,7 +173,7 @@ void fa18_loop_iteration(void) {
             observation.ticks=40000u+controller_ticks_per_update*rd_u16(UPDATE_TICK);
             release_once(pilot.target_press,&releases[0],116);
             release_once(pilot.gear_key_tick,&releases[1],103);
-            if(mission_mode==4) {
+            if(mission_mode>3) {
                 release_once(pilot.weapon_press,&releases[3],13);
                 release_once(pilot.defense_tick,&releases[4],pilot.defense_key);
                 if(pilot.started) for(unsigned i=0;i<2;++i) {
@@ -210,6 +219,15 @@ void fa18_loop_iteration(void) {
             fprintf(stderr,"Original mission %u result: PAL %u phase %u grade %u count %u gear %u speed %u\n",
                 mission_mode,completed,rd_u8(PLAYER_PHASE),rd_u8(rd_u32(MODE_TABLE)+18+mission_mode),
                 rd_u16(rd_u32(MODE_TABLE)+56),rd_u8(COMMAND_BLOCK_FLAGS),rd_u16(CONTROL_RECORDS+110));
+        }
+        if(mission_mode==5 && menu_phase==4 && pilot.objective && airborne &&
+           (rd_u16(CONTROL_RECORDS+2)&0x80) && !rd_u16(CONTROL_RECORDS+110)) {
+            /* Stop this failed input route at its observed landing. No grade,
+             * result, coordinates or source clock are changed by the test. */
+            fprintf(stderr,"Original landing without earned result at loop %ld PAL %ld XYZ %d/%d/%d; gear up/down %u/%u\n",
+                iteration+1,frame,rd_s32(CONTROL_RECORDS+20)/256,rd_s32(CONTROL_RECORDS+24)/256,
+                rd_s32(CONTROL_RECORDS+28)/256,gear_raised,gear_lowered);
+            recorded_end=iteration+1;menu_phase=10;
         }
     }
     if(menu_phase==5 && rd_u8(PLAYER_PHASE)==4 && rd_s8(MESSAGE_STATE_C)<0) {

@@ -1,4 +1,4 @@
-"""Reject counterfeit escort prefixes using the retained complete original flight."""
+"""Reject counterfeit earned prefixes using retained complete original flights."""
 import argparse
 import copy
 import gzip
@@ -14,22 +14,33 @@ from check_gameplay_checkpoint import ROOT, integer
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--prefix', type=Path, required=True)
+    parser.add_argument('--mode', type=int, choices=(3, 4), default=3,
+                        help='required final mission of the earned prefix')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     baseline = json.loads((args.prefix / 'report.json').read_text())
     hashes = {p: digest((ROOT / p).read_bytes()) for p in baseline['input_hashes']}
-    evidence, _, _ = verified_prefix(args.prefix, hashes)
+    evidence, _, _ = verified_prefix(args.prefix, hashes, args.mode)
     results = {}
     with tempfile.TemporaryDirectory(prefix='escort-prefix-guards-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         for name in ('report.json', 'driver.jsonl.gz', 'driver.dat.gz', 'input.fa18in', 'consumed.fa18in'):
             shutil.copy2(args.prefix / name, work / name)
-        for case in ('unverified_replay', 'different_replay', 'changed_controls', 'truncated_input',
-                     'missing_qualification', 'missing_grade', 'false_menu', 'changed_trace'):
+        cases = ['unverified_replay', 'different_replay', 'changed_controls', 'truncated_input',
+                 'missing_qualification', 'missing_grade', 'false_menu', 'changed_trace']
+        if args.mode == 4:
+            cases += ['missing_prior_grade', 'unverified_parent', 'changed_parent', 'wrong_completion_count']
+        for case in cases:
             report = copy.deepcopy(baseline)
             modified = None
             if case == 'unverified_replay':
                 report['unmodified_replay_exact'] = False
+            elif case == 'unverified_parent':
+                report['source_prefix_execution_exact'] = False
+            elif case == 'changed_parent':
+                report['source_prefix']['trace_sha256'] = '0' * 64
+            elif case == 'wrong_completion_count':
+                report['final_completions'] = 1
             elif case == 'different_replay':
                 report['unmodified_replay']['trace_sha256'] = '0' * 64
             elif case == 'changed_controls':
@@ -53,7 +64,8 @@ def main():
                 # Retag the altered RAM and its replay fingerprint too: the
                 # live qualification/grade/menu checks must still reject it.
                 address, size = ((pilot, 2) if case == 'missing_qualification' else
-                                 (pilot + 21, 1) if case == 'missing_grade' else (0xC458A6, 1))
+                                 (pilot + 18 + args.mode, 1) if case == 'missing_grade' else
+                                 (pilot + 21, 1) if case == 'missing_prior_grade' else (0xC458A6, 1))
                 offset = 0x80000 + address - 0xC00000
                 ram[offset:offset + size] = bytes([4] if case == 'false_menu' else size)
                 (work / modified).write_bytes(gzip.compress(ram, mtime=0))
@@ -61,7 +73,7 @@ def main():
                 report['unmodified_replay']['final_ram_sha256'] = digest(ram)
             (work / 'report.json').write_text(json.dumps(report))
             try:
-                verified_prefix(work, hashes)
+                verified_prefix(work, hashes, args.mode)
             except AssertionError:
                 results[case] = True
             else:

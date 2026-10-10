@@ -21,12 +21,13 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def verified_prefix(path, hashes):
+def verified_prefix(path, hashes, expected_mode=3):
+    assert expected_mode in (3, 4), 'unsupported earned original prefix'
     report = json.loads((path / 'report.json').read_text())
-    assert report.get('mission_mode', 3) == 3
+    assert report.get('mission_mode', 3) == expected_mode
     assert report['input_hashes'] == hashes, 'prefix started from different original media'
     assert report['mission_success'] and report['original_outcome'] == 'success'
-    assert (report['final_mode'], report['final_phase'], report['final_completions']) == (0, 0, 1)
+    assert (report['final_mode'], report['final_phase'], report['final_completions']) == (0, 0, expected_mode - 2)
     assert report['unmodified_replay_exact']
     for name, key in (('driver.jsonl.gz', 'driver_trace_sha256'),
                       ('driver.dat.gz', 'driver_final_ram_sha256'),
@@ -49,8 +50,19 @@ def verified_prefix(path, hashes):
     assert integer(ram, 0xC45798, 1) == report['final_phase']
     assert integer(ram, 0xC458A6, 1) == report['final_mode']
     pilot = integer(ram, 0xC1AB74, 4)
-    assert integer(ram, pilot, 2) and integer(ram, pilot + 21, 1)
+    assert integer(ram, pilot, 2), 'prefix did not earn qualification'
+    for mode in range(3, expected_mode + 1):
+        assert integer(ram, pilot + 18 + mode, 1), f'prefix did not earn mission {mode}'
     assert integer(ram, pilot + 56, 2) == report['final_completions']
+    if expected_mode == 4:
+        assert report['source_prefix_execution_exact'], 'escort prefix execution was not verified'
+        parent_path = Path(report['source_prefix']['path'])
+        parent, parent_header, parent_rows = verified_prefix(parent_path, hashes)
+        assert report['source_prefix'] == parent, 'escort parent evidence changed'
+        assert header == parent_header
+        assert {i: r for i, r in rows.items() if i <= parent['iterations']} == parent_rows
+        assert consumed_keys(path / 'consumed.fa18in', parent['iterations']) == consumed_keys(
+            parent_path / 'consumed.fa18in', parent['iterations'])
     evidence = dict(path=str(path.resolve()), report_sha256=digest((path / 'report.json').read_bytes()),
                     iterations=max(rows), trace_sha256=report['driver_trace_sha256'],
                     input_sha256=report['generated_input_sha256'],
@@ -77,12 +89,12 @@ def main():
                         help='validation input: repeat unchanged held steering keys through the original physical keyboard queue')
     parser.add_argument('--wait-for-approach-height', nargs='?', const='final', choices=('final', 'standoff', 'wire'),
                         help='validation escort input: final-mission gate (default), requested standoff height, or standoff height with live wire targeting')
-    parser.add_argument('--mode', type=int, choices=(3, 4), default=3)
+    parser.add_argument('--mode', type=int, choices=(3, 4, 5), default=3)
     parser.add_argument('--source-prefix', type=Path,
-                        help='verified original qualification/mission-three recording required for escort')
+                        help='verified original recording through the preceding mission, required for modes four and five')
     args = parser.parse_args()
-    assert bool(args.source_prefix) == (args.mode == 4), 'escort requires its verified original prefix'
-    assert not (args.mode == 4 and args.patrol_input), 'patrol input belongs to mission three'
+    assert bool(args.source_prefix) == (args.mode > 3), 'later missions require their verified original prefix'
+    assert not (args.mode > 3 and args.patrol_input), 'patrol input belongs to mission three'
     assert not (args.wait_for_approach_height and args.mode != 4), 'approach-height input belongs to escort'
     args.out.mkdir(parents=True, exist_ok=True)
     recording = ROOT / 'captures/native/qual_carrier_success/input.fa18in'
@@ -94,29 +106,41 @@ def main():
     assert digest((ROOT / 'local/system/kick13.rom').read_bytes()) == seal['rom_sha256']
     prefix = None
     if args.source_prefix:
-        prefix, prefix_header, prefix_rows = verified_prefix(args.source_prefix, hashes)
+        prefix, prefix_header, prefix_rows = verified_prefix(args.source_prefix, hashes, args.mode - 1)
     driver_input = args.source_prefix / 'input.fa18in' if prefix else recording
     env = {k: v for k, v in os.environ.items() if not k.startswith(('FA18_LOOP_', 'FA18_ORIGINAL_PILOT_'))}
     with tempfile.TemporaryDirectory(prefix='original-mission-recording-', dir=ROOT / 'build') as directory:
         work = Path(directory)
-        def run(executable, input_path, log_path, trace_path, ram_path, consumed_path, extra_env=None):
+        def retain_failure(reason, executable, input_path, paths, returncode=None):
+            retained = {}
+            for path in paths:
+                if path.exists():
+                    data = path.read_bytes()
+                    (args.out / (path.name + '.partial.gz')).write_bytes(gzip.compress(data, mtime=0))
+                    retained[path.name] = dict(bytes=len(data), sha256=digest(data))
+            (args.out / 'failure.json').write_text(json.dumps(dict(
+                reason=reason, accepted_evidence=False, returncode=returncode,
+                executable=str(executable), input=str(input_path), mission_mode=args.mode,
+                retained=retained), indent=2) + '\n')
+            subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+
+        def run(executable, input_path, log_path, trace_path, ram_path, consumed_path, extra_env=None,
+                accepted_codes=(0,)):
             try:
                 with log_path.open('w') as log:
                     result = subprocess.run([str(executable), '--state', str(recording.with_name('state.bin')),
                         '--rom', str(ROOT / 'local/system/kick13.rom'), '--ports', 'off', '--input', str(input_path),
-                        '--to-end', '--frames', str(65000 if prefix else 40000), '--game-input-out', str(consumed_path),
+                        '--to-end', '--frames', str({3: 40000, 4: 65000, 5: 80000}[args.mode]), '--game-input-out', str(consumed_path),
                         '--ram-out', str(ram_path)], cwd=ROOT,
                         env=dict(env, FA18_LOOP_TRACE=str(trace_path), **(extra_env or {})),
-                        stdout=log, stderr=subprocess.STDOUT, timeout=600 if prefix else 300)
+                        stdout=log, stderr=subprocess.STDOUT, timeout={3: 300, 4: 600, 5: 900}[args.mode])
             except subprocess.TimeoutExpired:
-                for path in (trace_path, ram_path, consumed_path):
-                    if path.exists():
-                        (args.out / (path.name + '.partial.gz')).write_bytes(gzip.compress(path.read_bytes(), mtime=0))
-                (args.out / 'failure.json').write_text(json.dumps(dict(
-                    reason='Original recording timed out; partial data is not accepted evidence',
-                    executable=str(executable), input=str(input_path), mission_mode=args.mode), indent=2) + '\n')
-                subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+                retain_failure('Original recording timed out; partial data is not accepted evidence',
+                               executable, input_path, (trace_path, ram_path, consumed_path))
                 raise
+            if result.returncode not in accepted_codes:
+                retain_failure('Original process failed; partial data is not accepted evidence',
+                               executable, input_path, (trace_path, ram_path, consumed_path), result.returncode)
             return result.returncode
         if not args.reuse_driver:
             subprocess.run(['python', 'scripts/build_recomp.py', '--output', 'build/recomp/fa18_original_mission_pilot.exe',
@@ -139,7 +163,8 @@ def main():
                      **({'FA18_ORIGINAL_PILOT_REPEAT_STEERING': '1'} if args.repeat_steering else {}),
                      **({'FA18_ORIGINAL_PILOT_APPROACH_HEIGHT': '1'} if args.wait_for_approach_height else {}),
                      **({'FA18_ORIGINAL_PILOT_APPROACH_STANDOFF': '1'} if args.wait_for_approach_height in ('standoff', 'wire') else {}),
-                     **({'FA18_ORIGINAL_PILOT_WIRE_APPROACH': '1'} if args.wait_for_approach_height == 'wire' else {})))
+                     **({'FA18_ORIGINAL_PILOT_WIRE_APPROACH': '1'} if args.wait_for_approach_height == 'wire' else {})),
+                accepted_codes=(0, 1))
             assert code in (0, 1), f'original pilot process failed: {code}'
             for name in ('driver.jsonl', 'driver.dat'):
                 (args.out / f'{name}.gz').write_bytes(gzip.compress((work / name).read_bytes(), mtime=0))
@@ -161,6 +186,7 @@ def main():
                 consumed_input_sha256=digest((args.out / 'consumed.fa18in').read_bytes()),
                 mission_success=code == 0 and 'complete and menu returned' in log,
                 original_outcome='mission failure' if 'Original mission failure outcome' in log else
+                                 'landing without earned result' if 'Original landing without earned result' in log else
                                  'crash/reset' if 'Original crash/reset outcome' in log else
                                  'player destroyed' if 'Original player destroyed' in log else 'success' if code == 0 else 'incomplete',
                 final_phase=integer(ram, 0xC45798, 1), final_mode=integer(ram, 0xC458A6, 1),
@@ -169,7 +195,7 @@ def main():
             if preliminary['mission_success']:
                 pilot = integer(ram, 0xC1AB74, 4)
                 assert integer(ram, pilot + 18 + args.mode, 1), 'original did not earn the selected mission grade'
-                assert preliminary['final_completions'] == (2 if prefix else 1)
+                assert preliminary['final_completions'] == args.mode - 2
                 assert (preliminary['final_mode'], preliminary['final_phase']) == (0, 0)
             (args.out / 'report.json').write_text(json.dumps(preliminary, indent=2) + '\n')
             print(f'Original driver recording closed: {max(rows)} boundaries; outcome {preliminary["original_outcome"]}', flush=True)
