@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-10",
+  "report": {
+    "input_hashes": {
+      "captures\\native\\qual_carrier_success\\input.fa18in": "fe4ff3a4cac080a4534041eb42d84a9332916d7566336910d852f86cde070440",
+      "captures\\native\\qual_carrier_success\\state.bin": "760d729341bebb9d6aa49450e7c7a6b760fd2d35321e9bc1e4c5f09c4015a4f4",
+      "local\\system\\kick13.rom": "ee05862d8102a08436ac4056da7d549db31625c7d47b24dfb7b3c9a5c113ca53"
+    },
+    "driver_returncode": 1,
+    "mission_mode": 4,
+    "source_prefix": {
+      "path": "build/native-flight/original-mission-three-patrol-runway",
+      "report_sha256": "24fc36b952485b2d88359dcb62322e8921dc816bd5af8e475623540ef9c5fa5c",
+      "iterations": 27110,
+      "trace_sha256": "0459a21d6ccb6631fd033c1ace4fadf3b2e4811d42030d5666630678e62702c7",
+      "input_sha256": "fa3ac6722fc0338d5b773b6c288e8ca095274ba64000cf0773aa4fbb8bd73b12",
+      "consumed_sha256": "7dd9daf5a9a9a38c5e85444c444de079591829cc567663a2054a77181f435192",
+      "final_ram_sha256": "dc670ce5e6983915463ca18f239253660a184c9212c9d8389383f8216d62f516"
+    },
+    "driver_executable_sha256": "c16da33f353ec2c5589a0d8aa2f5d340a8ad7b07ca24723ee74ac3fdee833535",
+    "driver_source_sha256": "47438b41dfd9601a6f605e288383933b3ad2c7f9be5a74aa1658aed1d6f1b42d",
+    "controller_source_sha256": "2b65102e3043e6a2474f9f58ab4cafeb4e8556e81a2de1e233c447ea9974a525",
+    "controller_ticks_per_update": 4,
+    "patrol_input": false,
+    "repeat_steering": true,
+    "wait_for_approach_height": true,
+    "driver_trace_sha256": "56a1774facdb81b765c2359808659c4f8a04273f976fe9983f74ee2c81c929cc",
+    "driver_final_ram_sha256": "69e8c9baf701806c068d13a29f6ec390806e0f1e29d2851a0c3ae9c94e760f6f",
+    "generated_input_sha256": "bdd7f9ad369b3488c06f11add682f4ba2d7e1850b16a7a6f61fcb50d1325025d",
+    "consumed_input_sha256": "31c7138ded84c2df332c4758d6e43ce441426bdfa99a97a883a64450e3ce8b36",
+    "mission_success": false,
+    "original_outcome": "incomplete",
+    "final_phase": 1,
+    "final_mode": 4,
+    "final_completions": 1,
+    "iterations": 65000,
+    "source_prefix_execution_exact": true,
+    "unmodified_replay": {
+      "trace_sha256": "56a1774facdb81b765c2359808659c4f8a04273f976fe9983f74ee2c81c929cc",
+      "final_ram_sha256": "69e8c9baf701806c068d13a29f6ec390806e0f1e29d2851a0c3ae9c94e760f6f",
+      "executable_sha256": "9da30b7cd2d0776c2b016077e683b50e9687f5ad43ba5e75c1e69384058c91e7",
+      "consumed_input_sha256": "31c7138ded84c2df332c4758d6e43ce441426bdfa99a97a883a64450e3ce8b36"
+    },
+    "unmodified_replay_exact": true,
+    "mission_flight_start": 40643,
+    "scope": "Physical-key original recording, independently replayed without the validation pilot. Failed route outcomes are preserved. Native whole-flight comparison remains separate."
+  },
+  "assessment": {
+    "scope": "Original validation-controller input only; successful mission and native parity remain unproved",
+    "observations": 65000,
+    "unchanged_observations_before_first_difference": 45254,
+    "first_different_observation": 45255,
+    "first_combat_success": {
+      "iteration": 42816,
+      "pal_frame": 68379
+    },
+    "approach_height_gate": {
+      "approach_height_ready": true,
+      "tick": 58132,
+      "height": 1518.015625,
+      "home_height": 119.03125,
+      "distance": 1008.354871
+    },
+    "gate_observation": {
+      "iteration": 46126,
+      "pal_frame": 88277
+    },
+    "first_return_surface_contact": 46585,
+    "closest_final_approach_to_carrier": {
+      "iteration": 46462,
+      "position": [
+        1136678.859375,
+        249.890625,
+        1071086.984375
+      ],
+      "horizontal_distance": 42.42148653137051
+    },
+    "repeated_steering_events": 3275,
+    "final_player_xyz": [
+      1136678.765625,
+      2.9296875,
+      1076518.34375
+    ],
+    "final_carrier_xyz": [
+      1136640.0,
+      0.0,
+      1071104.0
+    ],
+    "final_contact": "8080",
+    "final_speed": 0.0,
+    "landing_grade_earned": false
+  },
+  "profile_guards": {
+    "previous_recording_wrong_height": true,
+    "current_recording_wrong_height": true,
+    "wrong_mission": true
+  },
+  "files": {
+    "build/native-cmake/native/Release/fa18_native.exe": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "build/native/fa18_native.exe": "36cad74383f5beaad810378f03a973b8a93a9778b906655de112ffad39f80287",
+    "build/recomp/fa18_original_mission_pilot.exe": "c16da33f353ec2c5589a0d8aa2f5d340a8ad7b07ca24723ee74ac3fdee833535",
+    "build/recomp/fa18_recomp.exe": "9da30b7cd2d0776c2b016077e683b50e9687f5ad43ba5e75c1e69384058c91e7",
+    "build\\native-flight\\original-escort-approach-height\\assessment.json": "962d85b1fc2e5cc23ce45b8e5c965bf42904dc8d557842442a1ad3f920f6a766",
+    "build\\native-flight\\original-escort-approach-height\\consumed.fa18in": "31c7138ded84c2df332c4758d6e43ce441426bdfa99a97a883a64450e3ce8b36",
+    "build\\native-flight\\original-escort-approach-height\\controller-choices.e9k": "0c27160dae8a07559088612d82ada0c2c9269e9f56503839631f2716b3c48f82",
+    "build\\native-flight\\original-escort-approach-height\\current_recording_wrong_height.log": "00b886fab4031b70c20bdc53c728c572030936eeb49a81d552b56dc85526c9cf",
+    "build\\native-flight\\original-escort-approach-height\\driver.dat.gz": "dc462b683ec6f0a58f3426895312e63a9267ff0b3444a4e431d925fc3e22b8dc",
+    "build\\native-flight\\original-escort-approach-height\\driver.jsonl.gz": "6d32d2139e7bfd347608e9192136992b058b1593ece9544e72f349dca94fec25",
+    "build\\native-flight\\original-escort-approach-height\\driver.log": "651ebde70872ff7c3402c9b74763cb2ba59ca6d14c12517644faf9e6d84dd18d",
+    "build\\native-flight\\original-escort-approach-height\\input.fa18in": "bdd7f9ad369b3488c06f11add682f4ba2d7e1850b16a7a6f61fcb50d1325025d",
+    "build\\native-flight\\original-escort-approach-height\\previous_recording_wrong_height.log": "00b886fab4031b70c20bdc53c728c572030936eeb49a81d552b56dc85526c9cf",
+    "build\\native-flight\\original-escort-approach-height\\profile-guards.json": "f293690de0acfa4962bf77fc84dd30c8cd81c019549ab7ef622c4680b3f03ec2",
+    "build\\native-flight\\original-escort-approach-height\\replay.log": "447b2486ae65c991ed4c2dd18efbf89a64ec5467b7ca91d765d60060af3e5f60",
+    "build\\native-flight\\original-escort-approach-height\\report.json": "25f12f4d0e80ab7af4e4050bc5a3e02c566f9b20c269fc3f33d81f0183e2aac0",
+    "build\\native-flight\\original-escort-approach-height\\wrong_mission.log": "7cd7389f79ea77062840197516c9ed94770f54142b41d889a6ee2e4a951513ba",
+    "tools/native/check_original_mission_recording.py": "25cab8b7f9a3fc8346e4322a458c4959648cb344803f93291090674532d871cb",
+    "tools/native/mission_pilot.c": "2b65102e3043e6a2474f9f58ab4cafeb4e8556e81a2de1e233c447ea9974a525",
+    "tools/native/mission_pilot.h": "703ece38b4815e1072d1cb295036c137f082d50764b150f4777c02f56e71c2a3",
+    "tools/native/original_mission_pilot_loop.c": "47438b41dfd9601a6f605e288383933b3ad2c7f9be5a74aa1658aed1d6f1b42d"
+  }
+}

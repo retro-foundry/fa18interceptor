@@ -14,6 +14,7 @@ typedef struct {
     int campaign_flight;
     int patrol_flight; /* Validation approach only: observe aircraft, do not fire. */
     int manage_gear;
+    int wait_for_approach_height; /* Validation input: finish descent before final. */
     unsigned gear_key_tick;
     unsigned ground_attack_target;
     double ground_attack_yaw;

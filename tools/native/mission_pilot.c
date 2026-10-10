@@ -461,7 +461,13 @@ static int return_flight(MissionPilot *pilot,NativeFrontend *game) {
     point[1]=pilot->home[1]+(high_return?2200:700);
     const double approach_distance=hypot(point[0]-position[0],point[2]-position[2]);
     if(pilot->phase==1 && approach_distance<1800 &&
-       (!pilot->final_sequence || position[1]<pilot->home[1]+1400)) pilot->phase=2;
+       (!(pilot->final_sequence || pilot->wait_for_approach_height) ||
+        position[1]<pilot->home[1]+1400)) {
+        pilot->phase=2;
+        if(pilot->wait_for_approach_height)
+            printf("{\"approach_height_ready\":true,\"tick\":%u,\"height\":%.6f,\"home_height\":%.6f,\"distance\":%.6f}\n",
+                game->ticks,position[1],pilot->home[1],approach_distance);
+    }
     if(pilot->phase>=2) {
         /* Pilot input: intercept the centerline and descend onto the wire
          * region before the starting pose, rather than flying past it. */

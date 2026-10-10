@@ -1,5 +1,13 @@
 # The C port
 
+Original escort approach (2026-10-10): the existing validation height gate
+reduces landing overshoot, but the original still earns no escort grade.
+All 65,000 observations, final RAM and consumed keys reproduce exactly
+without the controller; all 45,254 observations before the approach change
+equal the preceding recording. Three profile guards reject. The playable
+runner is unchanged. Successful escort landing, broader independent flights
+and sound timing remain open. See [approach evidence](analysis/native_original_escort_approach_milestone.md).
+
 Original escort steering (2026-10-10): repeated ordinary steering inputs
 reach combat success in an independently started original game. All 65,000
 observations, final RAM and consumed keys reproduce exactly without the
