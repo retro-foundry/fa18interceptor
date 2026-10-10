@@ -1,12 +1,14 @@
 # Native port runner
 
-Default-host final combat (2026-10-10): the playable windowed default passes
-all 21,550 presentations with sound, all 14 camera modes and airborne raised
-gear. Maximum work is 16.2690 ms, with no frame over 20 ms, no model fault,
-heap violation or pool failure. Actual clock inputs retain all 32 low-bit
-patterns. Every timing row and complete flight/RAM trace is retained;
-strict PAL diagnostic comparisons stay unchanged. Other host-clock missions,
-independent complete flights and original sound timing remain open.
+Default-host combat (2026-10-10): mission five and the final mission pass
+all 43,100 presentations with sound, all 14 camera modes in each mission,
+gear raised after takeoff and zero restarts. Maximum work is 16.2690 ms,
+with no frame over 20 ms, model fault, heap violation or pool failure.
+The earlier mission-five clip with premature G remains rejected and fully
+retained; both PAL controls survive, so its two host restarts are not
+attributed solely to gear. The checker now verifies the G press follows
+takeoff. Strict PAL comparisons stay unchanged. Independent complete flights,
+original sound timing and broader default-host outcomes remain open.
 See [default-host combat evidence](../../analysis/native_host_combat_views_milestone.md).
 
 Interactive host clock (2026-10-10): windowed gameplay now acquires actual

@@ -37,7 +37,7 @@ def flight_route(mode):
     return load_tour_pilot(mode), source
 
 
-def camera_input(source, frames):
+def camera_input(source, frames, gear_frame=10700):
     lines = source.read_text().splitlines()
     assert lines[0] == 'E9K_INPUT_V1'
     events = []
@@ -48,7 +48,8 @@ def camera_input(source, frames):
             events.append((int(fields[1]), line))
     # Key identities come from host_keys.c and command_selection.c. KP6
     # increments 0..11, KP7 selects 12, KP1 selects 13, KP8 returns to 0.
-    extra = [(10700, 103)]
+    assert 0 <= gear_frame < frames - 2
+    extra = [(gear_frame, 103)]
     target_presses = [tick for tick, line in events if line.split()[3:] == ['116', '0', '0', '1']]
     for view in range(1, 12):
         start = 11000 + 800*(view-1)
@@ -68,12 +69,13 @@ def camera_input(source, frames):
     return 'E9K_INPUT_V1\n' + '\n'.join(line for _, line in events) + '\n'
 
 
-def trace_scope(path, mode):
-    with path.open() as file:
+def trace_scope(path, mode, gear_frame=None):
+    with gzip.open(path, 'rt') if path.suffix == '.gz' else path.open() as file:
         header = json.loads(next(file))
         assert header['format'] == 'FA18_FLIGHT_TRACE_V2'
         names = {field['name']: i for i, field in enumerate(header['fields'])}
         views, first_raised, last_lowered, airborne, missiles, aircraft = {}, None, None, 0, 0, 0
+        first_airborne = None
         rows, last_frame = 0, 0
         for line in file:
             row = json.loads(line)
@@ -94,8 +96,12 @@ def trace_scope(path, mode):
             stage = int(row['fields'][names['stage']], 16)
             if stage == 0xc10dae and not contact & 0x80:
                 airborne += 1
+                first_airborne = first_airborne or row['frame']
                 if records[0][124] & 0x80:
-                    first_raised = first_raised or row['frame']
+                    # flight_dynamics.c also sets bit 7 during contact work.
+                    # A destroyed aircraft is not a valid gear-up flight.
+                    if not int.from_bytes(records[0][:2], 'big') & 0x400:
+                        first_raised = first_raised or row['frame']
                 elif first_raised is not None:
                     last_lowered = row['frame']
             active = [record for record in records[1:] if int.from_bytes(record[:2], 'big') & 0x40]
@@ -105,7 +111,10 @@ def trace_scope(path, mode):
             raise AssertionError('Missing flight trace footer')
     assert airborne and first_raised and last_lowered is None, 'The combat clip must fly with gear raised'
     assert set(views) == {str(view) for view in range(14)}, views
-    return dict(rows=rows, views=views, airborne_observations=airborne,
+    assert first_airborne < first_raised, 'Gear must raise after observed takeoff'
+    if gear_frame is not None:
+        assert first_airborne < gear_frame <= first_raised, 'G must follow observed takeoff and precede gear retraction'
+    return dict(rows=rows, views=views, airborne_observations=airborne, first_airborne_frame=first_airborne,
                 first_raised_gear_frame=first_raised, airborne_gear_lowered_after_raise=last_lowered,
                 active_missile_observations=missiles, active_aircraft_observations=aircraft)
 
@@ -156,7 +165,7 @@ def measure_host(args):
     folder.mkdir(exist_ok=False)
     (folder / 'config').write_bytes(pilot_bytes)
     input_path = work / 'cameras.e9k'
-    input_path.write_text(camera_input(source, args.frames))
+    input_path.write_text(camera_input(source, args.frames, args.gear_frame))
     env = {k: v for k, v in os.environ.items() if not k.startswith(('FA18_LOOP_', 'FA18_ORIGINAL_',
         'FA18_BOUNDARY_', 'FA18_UPDATE_ENTRY_', 'FA18_TRACE_', 'FA18_MISSION_', 'FA18_CAMPAIGN_'))}
     assert env.get('SDL_VIDEODRIVER', '') not in ('dummy', 'offscreen')
@@ -172,7 +181,7 @@ def measure_host(args):
         source_input=str(source.relative_to(ROOT)), source_input_sha256=sha(source),
         input_sha256=sha(input_path), initial_pilot_sha256=hashlib.sha256(pilot_bytes).hexdigest(),
         adf_sha256=sha(ROOT / 'local/media/fa18.adf'), command=command,
-        clock='default windowed host', native_flight_state_seeded=False)
+        clock='default windowed host', gear_input_frame=args.gear_frame, native_flight_state_seeded=False)
     (work / 'prepared.json').write_text(json.dumps(prepared, indent=2)+'\n')
     print(f'Opening default-host mission mode {args.mode} with sound: {args.frames*.02/60:.1f} minutes. '
           'Leave the window open; it closes automatically.', flush=True)
@@ -189,7 +198,7 @@ def measure_host(args):
     by_view = {str(view): summarize([row for row in scenes if int(row['view']) == view], 20000) for view in range(14)}
     scope_error = None
     try:
-        scope = trace_scope(folder / 'flight.jsonl', args.mode)
+        scope = trace_scope(folder / 'flight.jsonl', args.mode, args.gear_frame)
     except AssertionError as error:
         scope, scope_error = None, str(error)
     evidence = dict(scope='Actual default host-clock visible partial mission with live sound, earned saved pilot and ordinary keys. '
@@ -234,6 +243,8 @@ def main():
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--clock', choices=('pal', 'host'), default='pal',
         help='PAL exact diagnostic comparison or actual default-host visible gameplay')
+    parser.add_argument('--gear-frame', type=int, default=10700,
+        help='Ordinary G key frame; the trace must independently prove gear raises after takeoff')
     parser.add_argument('--prepare-only', action='store_true', help='Validate the route headlessly and retain its expectation before opening a window')
     args = parser.parse_args()
     assert 21550 <= args.frames <= 24200, 'Bounded airborne combat/camera clip, before the landing approach'
@@ -245,7 +256,7 @@ def main():
     work = args.out.resolve()
     work.mkdir(parents=True, exist_ok=True)
     input_path = work / 'cameras.e9k'
-    replay = camera_input(source, args.frames)
+    replay = camera_input(source, args.frames, args.gear_frame)
     if input_path.exists():
         assert input_path.read_text() == replay
     else:
@@ -292,11 +303,12 @@ def main():
         assert prepared['initial_pilot_sha256'] == hashlib.sha256(pilot_bytes).hexdigest()
     else:
         before = run('headless')
-        scope = trace_scope(work / 'headless/flight.jsonl', args.mode)
+        scope = trace_scope(work / 'headless/flight.jsonl', args.mode, args.gear_frame)
         prepared = dict(mode=args.mode, frames=args.frames, runner_sha256=sha(args.runner),
             source_input=str(source.relative_to(ROOT)), source_input_sha256=sha(source),
             input_sha256=sha(input_path), initial_pilot_sha256=hashlib.sha256(pilot_bytes).hexdigest(),
-            adf_sha256=sha(ROOT / 'local/media/fa18.adf'), commands=commands, flight_scope=scope)
+            adf_sha256=sha(ROOT / 'local/media/fa18.adf'), commands=commands, flight_scope=scope,
+            gear_input_frame=args.gear_frame)
         (work / 'prepared.json').write_text(json.dumps(prepared, indent=2)+'\n')
     if args.prepare_only:
         print(json.dumps(prepared['flight_scope']), flush=True)
