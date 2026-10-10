@@ -1,5 +1,15 @@
 # The C port
 
+Startup sample handoffs (2026-10-10): all 468,007 original consumed bytes
+follow published buffers, addresses, byte order and periods. All 48
+requests match the current native ordered payload/period/volume sequence;
+the complete native Demo also preserves PCM/RAM/trace/counters exactly.
+Original right-channel phase stays 5,450 chip clocks behind left, while
+native starts both together. Onset/waveform acceptance remains open.
+A conflicting startup DMA grid is retained as failed; the independent
+byte observer passes without claiming separate DMA coverage. No playable
+change. See [startup sound evidence](analysis/native_startup_sample_handoffs_milestone.md).
+
 Complete escort comparison (2026-10-10): the successful original recording
 has exact JSR/LINK identities for all 47,814 observations and a verified
 arrest snapshot. Native consumes every key and reaches the menu without

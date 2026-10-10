@@ -7,6 +7,7 @@ fetch-time contents or ordered handoffs. Neither mode accepts complete sound.
 """
 import argparse
 import array
+from collections import Counter
 import gzip
 import hashlib
 import json
@@ -16,6 +17,7 @@ import wave
 from check_native_audio_trace import read_audio_trace
 from check_original_audio_events import validate_events
 from check_original_audio_capture import recorded_bytes, reference_file
+from check_original_audio_samples import validate_samples, frames, sample_records, open_stream, CYCLE_UNIT
 
 
 def digest(data):
@@ -121,6 +123,105 @@ def onset(path):
             'right_minus_left_frames':first[1]-first[0]}
 
 
+def consumed_rows(folder):
+    with open_stream(folder/'audio_samples.bin') as file:
+        for (call, count, before, after, pcm_end), payload in frames(file, 5000):
+            for row in sample_records(payload, before, after):
+                yield (call, *row)
+
+
+def consume_requests(original, chip, rows):
+    """Check every observed byte against published buffers, without alignment."""
+    positions = [[0, 0] for _ in range(4)]
+    buffers = [[] for _ in range(4)]
+    cycles = [[] for _ in range(4)]
+    first = [None]*4
+    first_nonzero = [None]*4
+    previous = [None]*4
+    for row in rows:
+        call, cycle, address, word, value, channel, state, hpos, vpos = row
+        index, cursor = positions[channel]
+        assert index < len(original[channel]), 'Consumed byte has no published buffer'
+        request = original[channel][index]
+        expected_address = request['samples'] + (cursor & ~1)
+        assert address == expected_address, 'Consumed word address differs from published buffer'
+        assert word == int.from_bytes(chip[address:address+2], 'big'), 'Consumed word differs from published payload'
+        assert value & 255 == chip[request['samples']+cursor], 'Consumed byte differs from published payload'
+        assert state == (3 if cursor & 1 else 2), 'Consumed high/low-byte order differs'
+        if previous[channel] is not None:
+            before, period = previous[channel]
+            assert cycle-before == period*CYCLE_UNIT, 'Consumed byte interval differs from published period'
+        previous[channel] = cycle, request['period']
+        cycles[channel].append(cycle)
+        observed = dict(call=call, cycle=cycle, address=f'{address:06X}', value=value, beam=[hpos, vpos])
+        if first[channel] is None:
+            first[channel] = observed
+        if value and first_nonzero[channel] is None:
+            first_nonzero[channel] = observed
+        if not cursor:
+            buffers[channel].append(dict(request=index, bytes=request['bytes'], consumed=0,
+                first_call=call, first_cycle=cycle, complete=False))
+        buffers[channel][-1]['consumed'] += 1
+        cursor += 1
+        if cursor == request['bytes']:
+            buffers[channel][-1]['complete'] = True
+            index, cursor = index+1, 0
+        positions[channel] = index, cursor
+    assert cycles[0] and cycles[1] and not cycles[2] and not cycles[3], 'Different startup channel coverage'
+    phases = Counter(b-a for a, b in zip(cycles[0], cycles[1]))
+    assert all(phase % CYCLE_UNIT == 0 for phase in phases), 'Nonintegral recorded chip-clock phase'
+    return dict(bytes_by_channel=[len(c) for c in cycles], first_samples_by_channel=first,
+        first_nonzero_samples_by_channel=first_nonzero, consumed_buffers_by_channel=buffers,
+        complete_buffers_by_channel=[sum(b['complete'] for b in channel) for channel in buffers],
+        right_minus_left_chip_clocks={str(phase//CYCLE_UNIT):count for phase, count in phases.items()},
+        all_consumed_bytes_addresses_order_and_periods_match_published_buffers=True,
+        scope='Complete observed startup byte sequence against original published buffers and periods. '
+            'Relative channel phase is observed, never supplied to native playback. '
+            'No separate DMA coverage or complete native waveform acceptance.')
+
+
+def assess_consumption(folder, baseline, pcm_reference, original):
+    validation = validate_samples(folder, baseline, pcm_reference, reference_context='startup')
+    chip = recorded_bytes(folder, 'chip.bin')
+    report = consume_requests(original, chip, consumed_rows(folder))
+    assert report['bytes_by_channel'] == validation['bytes_by_channel']
+    # Change actual source records. Rehashing a descriptor must not excuse a
+    # word/address/period error, nor omission of a byte at a buffer handoff.
+    prefix, channel_zero_bytes, handoff_index = [], 0, None
+    for row in consumed_rows(folder):
+        if row[5] == 0:
+            channel_zero_bytes += 1
+            if channel_zero_bytes == original[0][0]['bytes']+1:
+                handoff_index = len(prefix)
+        prefix.append(row)
+        if channel_zero_bytes == original[0][0]['bytes']+3:
+            break
+    assert handoff_index is not None, 'No actual startup buffer handoff'
+    guards = {}
+    for kind in ('word_and_byte', 'word_address', 'byte_interval', 'missing_handoff_byte'):
+        changed = list(prefix)
+        if kind == 'missing_handoff_byte':
+            changed.pop(handoff_index)
+        else:
+            position = 1 if kind == 'byte_interval' else 0
+            row = list(changed[position])
+            if kind == 'word_and_byte':
+                row[3] ^= 0x100; row[4] ^= 1
+            elif kind == 'word_address':
+                row[2] += 2
+            else:
+                row[1] += CYCLE_UNIT
+            changed[position] = tuple(row)
+        try:
+            consume_requests(original, chip, changed)
+        except AssertionError:
+            guards[kind] = True
+        else:
+            raise AssertionError(f'Accepted altered consumed sample: {kind}')
+    report.update(validation=validation, mutation_rejections=guards)
+    return report
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--original',type=Path,required=True)
@@ -133,10 +234,14 @@ def main():
                         help='Verified native final RAM required for the complete payload catalog')
     parser.add_argument('--pcm-reference',type=Path,
                         help='Explicit reusable original WAV; still checked against every original PCM block/hash')
+    parser.add_argument('--consumed-samples', type=Path,
+                        help='Verified independent startup observer; compare every consumed byte and buffer handoff')
     parser.add_argument('--out',type=Path,required=True)
     args=parser.parse_args()
     if args.complete_payload_catalog != (args.native_data is not None):
         parser.error('--complete-payload-catalog requires --native-data; native data is only used with that mode')
+    if args.complete_payload_catalog and args.consumed_samples:
+        parser.error('--consumed-samples requires the ordered startup comparison')
     validation=validate_events(args.original,args.baseline,args.pcm_reference)
     report=json.loads(args.native_report.read_text())
     trace=gzip.decompress(args.native_trace.read_bytes()) if args.native_trace.suffix=='.gz' else args.native_trace.read_bytes()
@@ -201,6 +306,9 @@ def main():
         'original_onset':onset(args.pcm_reference or args.original/'original.wav'),
         'native_onset':onset(args.native_report.parent/'native.wav'),
         'whole_flight_sound_acceptance':False}
+    if args.consumed_samples:
+        result['consumed_startup'] = assess_consumption(args.consumed_samples, args.original,
+            args.pcm_reference, original)
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text(json.dumps(result,indent=2)+'\n')
     print(f"Every {sum(map(len,original))} original startup music request matches native bytes/order/period/volume; onset/timing differences retained")

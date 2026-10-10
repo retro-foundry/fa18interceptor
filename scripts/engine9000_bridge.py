@@ -388,7 +388,7 @@ def main():
     parser.add_argument('--audio-dma', action='store_true',
                         help='With --audio-events, export actual fetched audio words from the existing DMA collector')
     parser.add_argument('--audio-samples', action='store_true',
-                        help='With --audio-dma and an explicitly selected isolated observer DLL, record consumed sample bytes')
+                        help='With --audio-events and an explicitly selected isolated observer DLL, record consumed sample bytes')
     parser.add_argument('--capture-budget-mib', type=int, default=512)
     args = parser.parse_args()
     if args.trace_frames and args.normal_custom_log:
@@ -399,8 +399,8 @@ def main():
         parser.error('--audio-events requires --wav/--restore and its own filtered custom log')
     if args.audio_dma and not args.audio_events:
         parser.error('--audio-dma requires --audio-events')
-    if args.audio_samples and (not args.audio_dma or 'FA18_ENGINE_ROOT' not in os.environ):
-        parser.error('--audio-samples requires --audio-dma and explicit FA18_ENGINE_ROOT observer selection')
+    if args.audio_samples and (not args.audio_events or 'FA18_ENGINE_ROOT' not in os.environ):
+        parser.error('--audio-samples requires --audio-events and explicit FA18_ENGINE_ROOT observer selection')
     if args.frames < 0 or (args.wav and (args.frames < 1 or args.capture_budget_mib < 8)):
         parser.error('PCM capture requires positive frames and at least 8 MiB capture budget')
     args.output.mkdir(parents=True, exist_ok=False)

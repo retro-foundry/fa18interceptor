@@ -49,7 +49,7 @@ def execution(report):
         for key, value in report.items() if key not in ('audio_samples', 'wall_seconds')}
 
 
-def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None):
+def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None, reference_context='demo'):
     observed = json.loads((capture / 'snapshot.json').read_text())
     original = json.loads((baseline / 'snapshot.json').read_text())
     descriptor = observed['audio_samples']
@@ -57,7 +57,13 @@ def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None):
     manifest_path = Path(descriptor.get('observer_manifest_file', str(Path(manifest['compile'][-2]).parent / 'build.json')))
     assert json.loads(manifest_path.read_text()) == manifest
     assert sha(manifest_path.read_bytes()) == descriptor['observer_manifest_sha256']
-    trusted = json.loads((ROOT / 'analysis/figures/native_original_audio_dma_checkpoint.json').read_text())
+    assert reference_context in ('demo', 'startup'), 'unknown reference context'
+    assert dma_reference is None or reference_context == 'demo', 'Wider DMA witness is only pinned for the Demo context'
+    if reference_context == 'startup':
+        trusted = json.loads((ROOT / 'analysis/figures/native_original_voice_layout_checkpoint.json').read_text())['separate_launch']
+        assert original['recorded_audio']['replay_calls'] == trusted['replay_calls'], 'different startup recording coverage'
+    else:
+        trusted = json.loads((ROOT / 'analysis/figures/native_original_audio_dma_checkpoint.json').read_text())
     assert {k:v for k,v in original['authority'].items() if k != 'snapshot_sha256'} == {
         k:v for k,v in trusted['authority'].items() if k != 'snapshot_sha256'}
     assert observed['authority']['core_sha256'] == manifest['core_sha256']
@@ -99,21 +105,26 @@ def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None):
         assert not wav.readframes(1) and covered == observed['recorded_audio']['sample_frames']
     assert pcm_hash.hexdigest() == observed['recorded_audio']['pcm_sha256']
     assert calls == descriptor['calls'] == observed['recorded_audio']['replay_calls']
-    fetched = [dict() for _ in range(4)]
-    with open_stream(capture / 'audio_dma.bin') as a, open_stream(baseline / 'audio_dma.bin') as b:
-        assert hashlib.file_digest(a, 'sha256').hexdigest() == observed['audio_dma']['sha256']
-        assert hashlib.file_digest(b, 'sha256').hexdigest() == original['audio_dma']['sha256']
-        a.seek(0); b.seek(0)
-        prior = dma_frames(b, 1, calls)
-        for row, payload in dma_frames(a, 1, calls):
-            assert (row, payload) == next(prior), 'Observer changed actual DMA fetches'
-            assert row[-1] == ends[row[0]]
-            for index, address, value, register, hpos, vpos, channel in FETCH.iter_unpack(payload):
-                if address in fetched[channel]:
-                    assert fetched[channel][address] == value, 'Changing sample RAM needs a time-specific witness'
-                fetched[channel][address] = value
-        assert next(prior, None) is None
+    dma_available = 'audio_dma' in observed
+    assert dma_available == ('audio_dma' in original), 'Different DMA capture contracts'
+    assert dma_available or reference_context == 'startup', 'Demo comparison requires complete DMA evidence'
+    fetched = [dict() for _ in range(4)] if dma_available else None
+    if dma_available:
+        with open_stream(capture / 'audio_dma.bin') as a, open_stream(baseline / 'audio_dma.bin') as b:
+            assert hashlib.file_digest(a, 'sha256').hexdigest() == observed['audio_dma']['sha256']
+            assert hashlib.file_digest(b, 'sha256').hexdigest() == original['audio_dma']['sha256']
+            a.seek(0); b.seek(0)
+            prior = dma_frames(b, 1, calls)
+            for row, payload in dma_frames(a, 1, calls):
+                assert (row, payload) == next(prior), 'Observer changed actual DMA fetches'
+                assert row[-1] == ends[row[0]]
+                for index, address, value, register, hpos, vpos, channel in FETCH.iter_unpack(payload):
+                    if address in fetched[channel]:
+                        assert fetched[channel][address] == value, 'Changing sample RAM needs a time-specific witness'
+                    fetched[channel][address] = value
+            assert next(prior, None) is None
     if dma_reference is not None:
+        assert dma_available, 'Wider fetch witness requires paired DMA capture'
         witness = json.loads((dma_reference / 'snapshot.json').read_text())
         assert witness['authority'] == trusted['authority'] and witness['audio_dma']['sha256'] == trusted['audio_dma']['sha256']
         assert {k:v for k,v in witness['authority'].items() if k != 'snapshot_sha256'} == {
@@ -148,7 +159,7 @@ def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None):
                 channels[channel] += 1
                 if address == 0xffffffff:
                     unknown.append(row)
-                elif fetched[channel].get(address) != word:
+                elif fetched is not None and fetched[channel].get(address) != word:
                     different.append(row)
                 if channel == 1 and address == 0x25a72:
                     zero_word.append(row)
@@ -158,29 +169,40 @@ def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None):
     assert not different, 'Consumed word differs from actual retained DMA words'
     assert total == descriptor['consumed_bytes'] and channels == descriptor['bytes_by_channel']
     assert len(unknown) == descriptor['unknown_initial_provenance_bytes']
-    assert [row['state'] for row in zero_word] == [2, 3]
-    assert all(row['call'] == 94 and row['word'] == row['value'] == 0 for row in zero_word)
-    assert zero_word[1]['cycle']-zero_word[0]['cycle'] == 358*CYCLE_UNIT
-    assert channel2_zero == 0, 'Original channel-2 startup prefetch reached a sample'
-    return dict(scope='All observed original consumed sample bytes and actual word provenance; complete PCM, '
+    if reference_context == 'demo':
+        assert [row['state'] for row in zero_word] == [2, 3]
+        assert all(row['call'] == 94 and row['word'] == row['value'] == 0 for row in zero_word)
+        assert zero_word[1]['cycle']-zero_word[0]['cycle'] == 358*CYCLE_UNIT
+        assert channel2_zero == 0, 'Original channel-2 startup prefetch reached a sample'
+    report = dict(scope='All observed original consumed sample bytes and actual word provenance; complete PCM, '
         'DMA, event log and execution preserved. Service timestamps are not an independent mixer-time reconstruction. '
         'Native onset/handoff/waveform remains open.',
         replay_calls=calls, stereo_pcm_frames=covered, consumed_bytes=total,
-        bytes_by_channel=channels, actual_fetch_word_differences=0,
+        bytes_by_channel=channels, actual_fetch_word_differences=0 if dma_available else None,
         explicit_initial_unknown_provenance=unknown, first_samples_by_channel=first,
-        zero_word_samples=zero_word, zero_word_classification='Both bytes emitted during existing channel-1 playback',
-        channel2_zero_prefetch_emitted_bytes=channel2_zero,
         authority=observed['authority'], unmodified_authority=original['authority'],
         observer_manifest_sha256=descriptor['observer_manifest_sha256'],
         sample_stream_sha256=descriptor['sha256'], sample_stream_record_bytes=SAMPLE.size,
-        pcm_sha256=observed['recorded_audio']['pcm_sha256'], dma_sha256=observed['audio_dma']['sha256'],
+        pcm_sha256=observed['recorded_audio']['pcm_sha256'], dma_sha256=observed['audio_dma']['sha256'] if dma_available else None,
         event_log_sha256=observed['audio_events']['sha256'], source_sha256=manifest['source_sha256'],
-        fetch_content_witness=str(dma_reference or baseline),
+        fetch_content_witness=str(dma_reference or baseline) if dma_available else None,
         fetch_witness_scope='Same-channel address/word contents from actual DMA. Consumed-byte ordering is observed '
             'directly; this lookup does not infer DMA delivery time. A wider recording is explicit when supplied.',
         unchanged_snapshot_fields=True, unchanged_complete_ram_state=True, unchanged_video=True,
-        all_pcm_chunks_and_samples_exact=True, actual_dma_stream_exact=True,
+        all_pcm_chunks_and_samples_exact=True, actual_dma_stream_exact=dma_available,
         max_samples_per_call=max(frame_counts), native_runtime_changed=False, native_waveform_accepted=False)
+    if reference_context == 'demo':
+        report.update(zero_word_samples=zero_word,
+            zero_word_classification='Both bytes emitted during existing channel-1 playback',
+            channel2_zero_prefetch_emitted_bytes=channel2_zero)
+    else:
+        report['reference_context'] = reference_context
+        if not dma_available:
+            report['scope'] = ('All observed original consumed sample bytes; complete PCM, event log and execution preserved. '
+                'No separate DMA fetch-coverage witness. Service timestamps are not an independent mixer-time reconstruction. '
+                'Native onset/handoff/waveform remains open.')
+            report['fetch_witness_scope'] = 'No separate DMA stream; consumed word/byte/address/state records are observed directly.'
+    return report
 
 
 def main():
@@ -190,12 +212,14 @@ def main():
     parser.add_argument('--pcm-reference', type=Path)
     parser.add_argument('--dma-reference', type=Path,
                         help='Explicit wider original fetch recording for words outside the stopped completed grids')
+    parser.add_argument('--reference-context', choices=('demo', 'startup'), default='demo',
+                        help='Pinned original Demo or independent 5000-call startup recording; never interchangeable')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
-    report = validate_samples(args.capture, args.baseline, args.pcm_reference, args.dma_reference)
+    report = validate_samples(args.capture, args.baseline, args.pcm_reference, args.dma_reference, args.reference_context)
     args.out.write_text(json.dumps(report, indent=2)+'\n')
     print(f"All {report['replay_calls']} source calls / {report['consumed_bytes']} consumed bytes: "
-          'PCM/execution exact; channel-1 zero word emits both bytes')
+          'PCM/execution exact; actual consumed-byte provenance retained')
 
 
 if __name__ == '__main__':
