@@ -1,5 +1,14 @@
 # Current playable port handoff
 
+Complete Mission Five drawing gate (2026-10-10): every original/native stream
+identity and all 13,775 gameplay observations are verified. The first raw
+scene-band difference occurs at target acquisition after 160 predicted
+histories. Actual pixels match through the radar return and differ before
+message drawing; head-up writes and earlier retained marker/range inputs
+need assessment. The gate stays rejected and preserves the complete reports
+and first differing states. The accepted 13,763-body native fix is unchanged.
+See [drawing-history evidence](analysis/native_mission_five_headup_history_milestone.md).
+
 Complete native Mission Five bodies (2026-10-10): all 13,763 actual bodies
 now match original instructions. The template observer publishes the original
 incoming translation save in its ordinary caller frame; startup/menu owners

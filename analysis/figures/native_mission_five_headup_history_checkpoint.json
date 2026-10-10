@@ -1,0 +1,388 @@
+{
+  "date": "2026-10-10",
+  "scope": "Complete independent mission-five drawing history remains rejected. Every sealed original/native snapshot, complete gameplay core and camera/control observation is verified; raw scene-band differences first appear after 160 predicted owner histories. Native gameplay unchanged from 9404b928.",
+  "result": {
+    "first": 61797,
+    "last": 75571,
+    "observations": 13775,
+    "complete_trace_and_core_observations": 13775,
+    "strict_scene_bytes": 564224000,
+    "strict_scene_matching": false,
+    "scene_boundaries_matching": 12145,
+    "history_observations": 160,
+    "history_bytes": 10240000,
+    "complete_plane_history_matching": false,
+    "first_unexplained": {
+      "iteration": 61957,
+      "native_iteration": 61254,
+      "kind": "scene_history",
+      "differences": [
+        {
+          "plane": 4,
+          "bytes": 103,
+          "first_byte": 2540,
+          "x": 160,
+          "y": 63,
+          "source": 255,
+          "native": 0
+        },
+        {
+          "plane": 5,
+          "bytes": 90,
+          "first_byte": 2539,
+          "x": 152,
+          "y": 63,
+          "source": 254,
+          "native": 255
+        },
+        {
+          "plane": 6,
+          "bytes": 101,
+          "first_byte": 2539,
+          "x": 152,
+          "y": 63,
+          "source": 1,
+          "native": 0
+        },
+        {
+          "plane": 7,
+          "bytes": 101,
+          "first_byte": 2539,
+          "x": 152,
+          "y": 63,
+          "source": 254,
+          "native": 255
+        }
+      ]
+    },
+    "no_body_dispatches": [
+      63139,
+      63857,
+      66727,
+      67461,
+      67649,
+      71745,
+      72062,
+      72633,
+      72935,
+      73978,
+      74424,
+      74579
+    ],
+    "replayed_original_bodies_matching": 160,
+    "sealed_native_body_identities_matching": 13763,
+    "sealed_source_snapshots_matching": 117099,
+    "live_owner_predictions": {
+      "source": 160,
+      "native": 160
+    },
+    "phase_mutation_rejections": {
+      "counter_increment": true,
+      "other_marker": true
+    },
+    "unobservable_phase_mutations": [
+      "premature_marker",
+      "marker_coordinate"
+    ],
+    "paint_mutation_rejections": {
+      "wrong_marker_colour": true,
+      "wrong_head_slope": true,
+      "lost_erase": true
+    },
+    "glyph_mutation_rejections": {
+      "wrong_glyph": true,
+      "wrong_plane": true
+    },
+    "source_omission_first_rejections": {
+      "panel": 61814,
+      "radar": 61814
+    },
+    "evidence_report_sha256": {
+      "build\\native-flight\\original-mission-five-frame-delta-1800\\report.json": "e7b02306cccd47a02f2bf48fdf777e87808dcec4502367560dae7d823b3c1f29",
+      "build\\native-flight\\mission-five-template-carry-complete-bodies\\report.json": "fe43a05b33786076f3a107e6f5b37c9ae741111d0d5a48bf52d4f5c421db4498",
+      "build\\native-flight\\mission-five-template-carry-message-trace\\report.json": "2217f540dfbd9c1de60e56ec4c4c16343a3367218e9400e7ce705095c9787130",
+      "build\\native-flight\\original-mission-five-touchdown-approach\\report.json": "c2f0f6334adbd521349a88328f74813b4ecfd590c4090a7b6109e4e32dee251a"
+    },
+    "verifier_source_sha256": {
+      "check_complete_cockpit_history.py": "0a8181a25df1f7c929bd4c1c1e3d0d0313418680016c31d46f1eb95bd9e8d806",
+      "frame_delta.py": "1dad263b46357e1245ce9bc7556a9efb1fce9b76e181441bee32278132d4069f",
+      "check_original_frame_delta.py": "24e1e63610934bc052fcb8241a646fb36d825beddd4f13dba8fe383fd22c5f1a",
+      "check_qualification_message_cadence.py": "d6423b3582ee233cac4aa5184abfcc6bd70f92ca93a88e88168e1da6695673eb",
+      "check_mission_message_pages.py": "56ab4bb44093e9010afe0b906afcd4584044782a2fccf14b6af09ec3f11d55b8",
+      "assess_mission_radar_cadence.py": "a33f0f9fc2064516ba2d138a01c62474fbc24eaa0f430624a0f8475211fffb6b",
+      "check_recorded_original_mission_trace.py": "d2cc3b35322e87226f9b4c192bfdd347e876b9f880d76f6285fa722a1a914633",
+      "compare_flight_traces.py": "b0eb6929ad8aa1c385b37082bc057a8f9ca32dda18be3ac06e3f66da5cd9e1f2",
+      "native_frame_body_oracle.c": "4fc9746ed9af76517bab03d1bc29ae60b45419463e9da00df25aee55b2c614be",
+      "native_radar_cadence_oracle.c": "79aea7905f016ad4cd7b9e0610c83400fe57074209047101eb98bb880b9fea32",
+      "native_message_cadence_oracle.c": "937e7c7d915fac929bf74cd3d5cbd2b8400ccdd290773e00f95946b0b7b8972b",
+      "native_panel_frame_oracle.c": "4469e50a3c300f5f95c52f0c5df72e1344325ae2105e25b3fe49e865e67812a1",
+      "native_hud_oracle.c": "020a608e2389eb650b0a135982beaee9bff58885baf4c35f3053c0f80441374a",
+      "native_records_oracle.c": "3b095e966ccd2d73e876d2f5aa09faea103b65686c57464ddf7296eedac0fdf6"
+    },
+    "oracle_sha256": {
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_frame_body_oracle.exe": "c292de5799c09e6e743e0c380596e179cf7484fbbf084e22a7620b4c3f0c54ce",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_radar_cadence_oracle.exe": "ed0be63dcae171867394ee7b1163d3bb27022aec13b5737cabdd485f2d7b4118",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_message_cadence_oracle.exe": "fac79e6b5d5604412db4fe79c3c8f91c427adf2150db2a29b29c623541113694",
+      "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_panel_frame_oracle.exe": "8ade370455522e6b70ba95ca065e6e24b691c11020c9049da2d30ef56da9c0af"
+    },
+    "runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8",
+    "source_trace_sha256": "c4c339bc882985b9731380624eea411560cc82d95e4562992372eee684163194",
+    "native_trace_sha256": "d8564d5cd71553acac4419383664571aaaff5e36ff0a2b1b3ac4f1cdd81d80cc",
+    "scope": "Complete independent streams and all cores/scene rows are checked. Known cockpit owner writes predict every eight-plane XOR byte only up to the first unexplained observation. Any unresolved history or missing negative control fails the whole-flight gate. No alignment offsets, pixel masks, game changes or reference RAM in gameplay."
+  },
+  "actual_owner_boundary": {
+    "accepted": false,
+    "source_iteration": 61956,
+    "native_iteration": 61253,
+    "source_owner_pixels_vs_original_instructions_on_actual_native_state": {
+      "panel.before": {
+        "source_boundary": "C30764",
+        "scene_difference_bytes_by_plane": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "native_ram_sha256": "dff35fe2fc2001fd73ae89331fc32f533d3cf536534166c1b1abb65ca8049b65"
+      },
+      "panel.after": {
+        "source_boundary": "C0F182",
+        "scene_difference_bytes_by_plane": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "native_ram_sha256": "dff35fe2fc2001fd73ae89331fc32f533d3cf536534166c1b1abb65ca8049b65"
+      },
+      "radar.before": {
+        "source_boundary": "C31226",
+        "scene_difference_bytes_by_plane": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "native_ram_sha256": "ca46c7ed28b421df6c7471f5132e05413fee1ea3b4d770d02e21e7614f54ef38"
+      },
+      "radar.after": {
+        "source_boundary": "C0F18E",
+        "scene_difference_bytes_by_plane": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "native_ram_sha256": "3df54102ff9137e1c79487f62a55b63aa3760062171c8da89613844d366f73c0"
+      },
+      "message.before": {
+        "source_boundary": "C322EE",
+        "scene_difference_bytes_by_plane": [
+          103,
+          90,
+          101,
+          101,
+          0,
+          0,
+          0,
+          0
+        ],
+        "native_ram_sha256": "4ed76b0889d87c52f79d6a35d27db2ec07ce55f1d8ade40ab526d9c6c0af26a7"
+      },
+      "message.after": {
+        "source_boundary": "C0F286",
+        "scene_difference_bytes_by_plane": [
+          103,
+          90,
+          101,
+          101,
+          0,
+          0,
+          0,
+          0
+        ],
+        "native_ram_sha256": "2b4e65448209b9ee3c2b458596ec57320d669c434b038d0a9895ec3fb3753439"
+      }
+    },
+    "complete_native_body_matching": true,
+    "actual_body_stdout_exact": "Frame input carry: 12780162\nFrame body: 0 gameplay differences, 0 display bytes; 68530 instructions, 2 timer samples; excluded scratch=27 voice=20 busy=6\n",
+    "oracle_sha256": "c158bb164d7624601758661ff193dcccc0f3903cf64fba9a3213b0c902adc4d7",
+    "preceding_sweep_oracle_sha256": "633a18cf896d389177b79c96f39a9c3c21a5b11cfe5923756ae4a0a0591914e2",
+    "oracle_sources_sha256": {
+      "tools/native/native_frame_body_oracle.c": "4fc9746ed9af76517bab03d1bc29ae60b45419463e9da00df25aee55b2c614be",
+      "tools/native/native_records_oracle.c": "3b095e966ccd2d73e876d2f5aa09faea103b65686c57464ddf7296eedac0fdf6"
+    },
+    "scope": "External original execution observes actual native owner states; rebuilt executable is separately bound. This does not supply gameplay RAM or accept independent drawing history."
+  },
+  "actual_headup_inputs": {
+    "source_iteration": 61956,
+    "native_iteration": 61253,
+    "fields": {
+      "TARGET_MARK": {
+        "address": "C45936",
+        "source": "ffff0001",
+        "native": "ffff0e4c"
+      },
+      "SELECTION_MARKER": {
+        "address": "C4593A",
+        "source": "00e50001",
+        "native": "00000e4c"
+      },
+      "POSTFLIGHT_MARK": {
+        "address": "C4593E",
+        "source": "00a3004b",
+        "native": "00a3004b"
+      },
+      "RANGE_RATE": {
+        "address": "C45B46",
+        "source": "ff90",
+        "native": "00fc"
+      },
+      "POSTFLIGHT_RANGE_LAST": {
+        "address": "C45B44",
+        "source": "0fb1",
+        "native": "156f"
+      },
+      "POSTFLIGHT_VECTOR_CURRENT": {
+        "address": "C45716",
+        "source": "119bf124000e1a7810b20b9c",
+        "native": "119bf124000e1a7810b20b9c"
+      },
+      "POSTFLIGHT_VECTOR_PREVIOUS": {
+        "address": "C45722",
+        "source": "119b61bc000dd8b810b1ca1c",
+        "native": "119b61bc000dd8b810b1ca1c"
+      },
+      "POST_INPUT_EXPIRED": {
+        "address": "C457A1",
+        "source": "01",
+        "native": "01"
+      }
+    },
+    "scope": "Actual source/native RAM at radar return before C332BC. These fields describe the retained difference; its earlier producer and full drawing prediction remain unverified."
+  },
+  "bounded_rejection": {
+    "bounded_capture_rejected": true,
+    "returncode": 1,
+    "original_first": 64416,
+    "original_last": 64423,
+    "complete_first": 61797,
+    "complete_last": 75571
+  },
+  "evidence_sha256": {
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\report.json": "bfb7441df0a11b14a8fa68bb867431e39aa5214ab15af97b47665e6422b2bb79",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\bounded-rejection.json": "ed16e959afe3facd124cc56fa1cb0334ae9724118035776afd471f24b2e73741",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\bounded-rejection.log": "fe6d33db0f4d9206f60e522a1b0abd8b6a12fd31fc421c80bb786771f61f3c9b",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\failure.json": "7d53cc80e5e80cd1c852a50391652473520f69dbe481a7bbb63f6eea225c9450",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\actual-owner-pixels.json": "2be344ba7262039e738d5d4eb7b00b4e53977292d713764ecd6fe170bbec4e52",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\actual-native-owner-dump.log": "54bde31f5830116072392f74e709afd6e2d3e55671602ca726c97612879a584e",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\headup-input-fields.json": "59dc1bf5a8bf6f4ea62ae47442b895b50d3e8dee17ba6e5cbd1b65635764b4bb",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-message.after.dat.gz": "a160a5d1d6e8bfa8dad640356fb326c695ad69a4b69ec6e76414894059922443",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-message.before.dat.gz": "9d8a10faf4611b99da44a729765fee713d839c96e08bc99e125b5722ed6ac93f",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-panel.after.dat.gz": "90013a7df29abfd12468c1d26a2dc71b4b0543489b0c4467faeaafd261d2ea3f",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-panel.before.dat.gz": "90013a7df29abfd12468c1d26a2dc71b4b0543489b0c4467faeaafd261d2ea3f",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-radar.after.dat.gz": "36d63bca5480a0cfcf6118cc9835eb8c62babee049dde741c449c18ebe9c922a",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\actual-61253.native-radar.before.dat.gz": "b9a003b1d8b4a2fa7ca36ad02db815843dfb648ea7b11404c69b7f312af579fc",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\native_frame_body_oracle.exe.gz": "c7b13a23b2b294b141f82b0d55036ae9c7de4a57540e67bdd4aaaba0faca4251",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\native_message_cadence_oracle.exe.gz": "efe22501005285b943d8270a34b3ac1cf5188b74fcb0a33bb6d33e63fd01c14c",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\native_panel_frame_oracle.exe.gz": "291367642ad43f62d1dd4411a72bb7e3f8864c2bd78800ea5265525115da9fae",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\native_radar_cadence_oracle.exe.gz": "3e0b4a5e9cf9df542acdb6f40da1071f097d7c57fda15b290adcda7336cd1dfd",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61253.native-after.dat.gz": "d1977f9769471f9b2759dd258a7414a778080bb2974992a641c35f41b8b6c532",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61253.native-before.dat.gz": "4ff8b4de0e9eb5318e6320be331c78834c91e1e66e924312c0e086e263259ecc",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61253.native-entry.dat.gz": "43196e414cbc616245ecd1463dfa44ae1a5df5ef2aca04785ddb367427f55034",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61254.native-after.dat.gz": "ecbfc4de7d36d33972ddb2b4a1dcfe05ee9f4165e9e115be6985e039125d8644",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61254.native-before.dat.gz": "ab9f59f34b2f98a147c8dc840aa2ccb7df8635fded62151d7ccf2e64f2b5309d",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61254.native-entry.dat.gz": "4692f9836209822c72e3bad8d0d2b2e4363b5cfe708332d9fbf014ac7269e367",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C0EFD4.dat.gz": "09d1e8740d7eb3adfd45d29eb0d20ce16912c2782476cd5e9b82e432271efa1c",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C0EFEA.dat.gz": "15b76265c609bae5b26e15668b33494eced8766b5a7a27fa23bd872851fdadeb",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C0F182.dat.gz": "cd68e1fa8bfe1dd7a30211325a0ee0ea62c63852aede384f9103a668b8ad1e26",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C0F18E.dat.gz": "2e28eb2840caf89c5ac807181b8c2d8a37a5f715a34f2da42bd0429f49dbea38",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C0F286.dat.gz": "e9ac72dd5ef57e74a0608a641207d4f19596de9a4087355595771d42f1fcfefb",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C0F3C0.dat.gz": "8394a4d48b777befbf6ff6f50e2773988db5ca0f98717fa097ad3092a3602f23",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C30764.dat.gz": "cd68e1fa8bfe1dd7a30211325a0ee0ea62c63852aede384f9103a668b8ad1e26",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C31226.dat.gz": "6b578425532410e53f1adcb3e199687fb1da63d29f47c956f7666135659e4ec7",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-C322EE.dat.gz": "921ee5b0a3e2f8c8f62f8d13a0e70e6d0e1b93321223701508abb2f6e75fa975",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61956.source-metadata.json": "9a5755a6d8fd39495c0f051671529a502c3751c75e8d4b1cfff9b9f2be9d2ab1",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C0EFD4.dat.gz": "58580c7daf0053a6e892d2b24b6ce5f83ba4adf40e2332046a299998f004e64e",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C0EFEA.dat.gz": "e1a6787daed71eaf5a62ae1ca67abee8a1f2c2a28e009d7c8af60b824c69ea1f",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C0F182.dat.gz": "ba094095606a97b015147e65b967098a0d4dc34ac3a423e08e9edc09b27a87b7",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C0F18E.dat.gz": "cd1945262cd0967918ea2b2aa6b09a789cb15338fb45678215ffe6cd9a4b8994",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C0F286.dat.gz": "dd98bf0828c2875b8cee165b77b9c40f1f1ffd787f3443381ea6f19ba6549f55",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C0F3C0.dat.gz": "d66564a13eab28317b63a4a1da64f09cb10bfc8fbd499a7ec4f1e42edb3a898d",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C30764.dat.gz": "ba094095606a97b015147e65b967098a0d4dc34ac3a423e08e9edc09b27a87b7",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C31226.dat.gz": "a544a5af7a40548a8e1cf6211136c35731eb7e8e5be64fd1e92d3774cb1997bc",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-C322EE.dat.gz": "3f314acba0f60e5a04dde4d3d8a2d1629149c1b5d84f222be05ed127a1a0a7d3",
+    "build\\native-flight\\mission-five-complete-cockpit-history\\rejected-61957.source-metadata.json": "7aae7fc54aabeddad489acd91e517adc1db51726d1cc4e392502f941763d1402",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-61957.native.dat.gz": "4692f9836209822c72e3bad8d0d2b2e4363b5cfe708332d9fbf014ac7269e367",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-61957.source.dat.gz": "58580c7daf0053a6e892d2b24b6ce5f83ba4adf40e2332046a299998f004e64e",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-after.dat.gz": "d1977f9769471f9b2759dd258a7414a778080bb2974992a641c35f41b8b6c532",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-before.dat.gz": "4ff8b4de0e9eb5318e6320be331c78834c91e1e66e924312c0e086e263259ecc",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-message.after.dat.gz": "a160a5d1d6e8bfa8dad640356fb326c695ad69a4b69ec6e76414894059922443",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-message.before.dat.gz": "9d8a10faf4611b99da44a729765fee713d839c96e08bc99e125b5722ed6ac93f",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-output.dat.gz": "9e8f3f9e0e677d81242472427798389e2d9d03618c5d08b88cf2fc6a389c628a",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-owner.dat.gz": "9d8a10faf4611b99da44a729765fee713d839c96e08bc99e125b5722ed6ac93f",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-panel.after.dat.gz": "90013a7df29abfd12468c1d26a2dc71b4b0543489b0c4467faeaafd261d2ea3f",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-panel.before.dat.gz": "90013a7df29abfd12468c1d26a2dc71b4b0543489b0c4467faeaafd261d2ea3f",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-radar.after.dat.gz": "36d63bca5480a0cfcf6118cc9835eb8c62babee049dde741c449c18ebe9c922a",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-native-radar.before.dat.gz": "b9a003b1d8b4a2fa7ca36ad02db815843dfb648ea7b11404c69b7f312af579fc",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C0EFD4.dat.gz": "09d1e8740d7eb3adfd45d29eb0d20ce16912c2782476cd5e9b82e432271efa1c",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C0EFEA.dat.gz": "15b76265c609bae5b26e15668b33494eced8766b5a7a27fa23bd872851fdadeb",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C0F182.dat.gz": "cd68e1fa8bfe1dd7a30211325a0ee0ea62c63852aede384f9103a668b8ad1e26",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C0F18E.dat.gz": "2e28eb2840caf89c5ac807181b8c2d8a37a5f715a34f2da42bd0429f49dbea38",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C0F286.dat.gz": "e9ac72dd5ef57e74a0608a641207d4f19596de9a4087355595771d42f1fcfefb",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C0F3C0.dat.gz": "8394a4d48b777befbf6ff6f50e2773988db5ca0f98717fa097ad3092a3602f23",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C30764.dat.gz": "cd68e1fa8bfe1dd7a30211325a0ee0ea62c63852aede384f9103a668b8ad1e26",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C31226.dat.gz": "6b578425532410e53f1adcb3e199687fb1da63d29f47c956f7666135659e4ec7",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\failed-previous-source-C322EE.dat.gz": "921ee5b0a3e2f8c8f62f8d13a0e70e6d0e1b93321223701508abb2f6e75fa975",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_frame_body_oracle.exe.gz": "f1f75a8ba9fce724f56ee62f52d94d62e30633613e435478268f3f1d4c1a267d",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_message_cadence_oracle.exe.gz": "4828be1b86f7e795562c32fe6d538a62b5e4e7c50eac6c5555269f591d969762",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_panel_frame_oracle.exe.gz": "5aaa943d730febdef34755c43c8474397cae4e8cfdeae2b086194a5f08505d92",
+    "build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_radar_cadence_oracle.exe.gz": "1b89c1bf894fa51ba5993c7e9d79e574883c76e8e21194367d6d4f3fb77f539d"
+  },
+  "validation": {
+    "complete_stream_observations": 13775,
+    "complete_source_snapshots": 117099,
+    "complete_native_bodies": 13763,
+    "initial_predicted_histories": 160,
+    "cockpit_history_unit_checks": 10,
+    "actual_bounded_capture_rejected": true
+  },
+  "remaining": "Classify actual head-up owner writes and their earlier retained marker/range producers before accepting independent drawing history; no pixel masks or clock changes.",
+  "compressed_oracle_bindings": {
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_frame_body_oracle.exe.gz": {
+      "decoded_sha256": "c292de5799c09e6e743e0c380596e179cf7484fbbf084e22a7620b4c3f0c54ce",
+      "encoded_sha256": "f1f75a8ba9fce724f56ee62f52d94d62e30633613e435478268f3f1d4c1a267d"
+    },
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_radar_cadence_oracle.exe.gz": {
+      "decoded_sha256": "ed0be63dcae171867394ee7b1163d3bb27022aec13b5737cabdd485f2d7b4118",
+      "encoded_sha256": "1b89c1bf894fa51ba5993c7e9d79e574883c76e8e21194367d6d4f3fb77f539d"
+    },
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_message_cadence_oracle.exe.gz": {
+      "decoded_sha256": "fac79e6b5d5604412db4fe79c3c8f91c427adf2150db2a29b29c623541113694",
+      "encoded_sha256": "4828be1b86f7e795562c32fe6d538a62b5e4e7c50eac6c5555269f591d969762"
+    },
+    "C:\\Users\\paula\\Documents\\Projects\\fa18interceptor\\build\\native-flight\\mission-five-complete-cockpit-history-retained\\native_panel_frame_oracle.exe.gz": {
+      "decoded_sha256": "8ade370455522e6b70ba95ca065e6e24b691c11020c9049da2d30ef56da9c0af",
+      "encoded_sha256": "5aaa943d730febdef34755c43c8474397cae4e8cfdeae2b086194a5f08505d92"
+    }
+  },
+  "test_source_sha256": {
+    "tools/native/test_complete_cockpit_history.py": "748deb1397cb4ce9f2038b2f762e0b0bced04dc4e8d00162012a8bab38429c7c"
+  }
+}

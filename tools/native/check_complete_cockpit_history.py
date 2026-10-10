@@ -1,6 +1,6 @@
-"""Follow complete independent M3 RAM streams through actual drawing owners.
+"""Follow complete independent flight RAM streams through actual drawing owners.
 
-The two source dispatches without a body do not advance native drawing history.
+Source dispatches without a body do not advance native drawing history.
 Scene rows must match byte for byte. The cockpit history starts on identical
 pages and uses original bitmap, radar and glyph writes in separate expected
 buffers. A first unexplained byte fails the whole-flight gate; the rest of both
@@ -21,7 +21,7 @@ from check_gameplay_checkpoint import ROOT, integer, span
 from check_mission_message_pages import predicted_pages
 from check_original_frame_delta import BOUNDARIES, verify_owner_return
 from check_qualification_message_cadence import digest, pages, verify_trace, instrument_panel_refresh
-from check_recorded_original_mission_trace import verified_update_mapping
+from check_recorded_original_mission_trace import verified_update_mapping, verified_continuation
 from compare_flight_traces import read_trace, GAME_FIELDS
 from frame_delta import bodies, snapshots
 
@@ -170,7 +170,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('source-delta', 'native-delta', 'reference', 'source-evidence', 'source-updates', 'out'):
         parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--native-prefix', type=Path, help='Verified ordinary earned prefix for mission five')
+    parser.add_argument('--replay-evidence', type=Path, help='Complete verified later-mission controls and event anchors')
+    parser.add_argument('--runner', type=Path, help='Current native executable bound to the earned continuation')
     args = parser.parse_args()
+    assert bool(args.native_prefix) == bool(args.replay_evidence) == bool(args.runner)
     args.out.mkdir(parents=True, exist_ok=True)
     code_paths = ('check_complete_cockpit_history.py', 'frame_delta.py', 'check_original_frame_delta.py',
         'check_qualification_message_cadence.py', 'check_mission_message_pages.py',
@@ -193,7 +197,19 @@ def main():
     assert file_hash(args.source_evidence / 'driver.jsonl.gz', True) == original['driver_trace_sha256'] == reference['baseline_source_trace_sha256']
     mapping, updates = verified_update_mapping(args.source_updates, args.source_evidence / 'driver.jsonl.gz', original)
     assert updates == reference['source_update_evidence']
+    if args.native_prefix:
+        mapping, continuation, prefix = verified_continuation(args.native_prefix,
+            args.replay_evidence, args.runner, original, mapping,
+            args.source_updates / 'update-consumed.fa18in', args.source_evidence / 'driver.jsonl.gz',
+            args.reference / 'native.jsonl.gz')
+        assert reference['native_prefix'] == native['native_prefix'] == prefix
+        assert reference.get('baseline_native_trace_sha256', reference['native_trace_sha256']) == continuation['native_trace_sha256']
+        assert reference['event_report'] == native['event_report'] == continuation['event_report']
+    else:
+        assert original.get('mission_mode', 3) == 3 and not reference.get('native_prefix'), 'Later flights require their actual earned continuation'
     first, last = source['first'], source['last']
+    assert (first, last) == (reference['whole_successful_flight']['first'],
+                             reference['whole_successful_flight']['last']), 'Whole-flight gate requires the complete accepted flight'
     assert first == native['first'] and last == native['last']
     assert set(mapping[i] for i in range(first, last + 1)) == set(range(native['native_first'], native['native_last'] + 1))
     sealed = {str(getattr(args, name) / 'report.json'): digest((getattr(args, name) / 'report.json').read_bytes()) for name in inputs}
@@ -207,7 +223,10 @@ def main():
         assert file_hash(path, True) == reference[name + '_trace_sha256']
         headers[name], traces[name] = read_trace(path)
     assert headers['source'] == headers['native']
-    executables = {name: ROOT / f'build/recomp/native_{name}_oracle.exe'
+    # These probes remain live across thousands of owner calls. Keep this
+    # run's binaries beside its evidence, outside the obsolete-oracle cache
+    # cleaned by every build, and avoid overwriting another live comparison.
+    executables = {name: args.out.resolve() / f'native_{name}_oracle.exe'
                    for name in ('frame_body', 'radar_cadence', 'message_cadence', 'panel_frame')}
     for name, executable in executables.items():
         with (args.out / f'{name}.build.log').open('w') as log:
@@ -221,9 +240,10 @@ def main():
     mutations = {name: ({}, {}) for name in ('panel', 'radar', 'message')}
     rejected, paint_rejected, glyph_rejected = {}, {}, {}
     failed, no_body, owner_counts = None, [], dict(source=0, native=0)
+    scene_matching = 0
     current, native_iterator, count, executed = None, verified_native(args.native_delta, native), 0, 0
     previous_group = None
-    with tempfile.TemporaryDirectory(prefix='complete-cockpit-', dir=ROOT / 'build') as directory:
+    with tempfile.TemporaryDirectory(prefix='ram-complete-cockpit-', dir=ROOT / 'build') as directory:
         work = Path(directory)
         for group in original_groups(args.source_delta, source):
             entry = group[0xC0EFD4]
@@ -242,17 +262,29 @@ def main():
             # Continue checking complete trace and scene evidence after failure,
             # without restarting a model at a conveniently matching later page.
             live = {name: pages(data) for name, data in entries.items()}
-            assert all(live['source'][p][:5120] == live['native'][p][:5120] for p in range(8)), (i, 'Complete scene band differs')
+            scene_equal = all(live['source'][p][:5120] == live['native'][p][:5120] for p in range(8))
+            scene_matching += int(scene_equal)
             count += 1
             if 0xC0EFEA not in group:
                 assert set(group) == {0xC0EFD4} and mapping[i] == mapping[i + 1]
                 no_body.append(i)
             if failed is not None:
                 continue
-            align_history(expected, previous, entries, not history)
-            difference = history_difference(live, expected)
+            if scene_equal:
+                align_history(expected, previous, entries, not history)
+                difference = history_difference(live, expected)
+                failure_kind = 'cockpit_history'
+            else:
+                difference = []
+                for plane in range(8):
+                    changed = [k for k, (a, b) in enumerate(zip(live['source'][plane][:5120], live['native'][plane][:5120])) if a != b]
+                    if changed:
+                        k = changed[0]
+                        difference.append(dict(plane=plane, bytes=len(changed), first_byte=k,
+                            x=k % 40 * 8, y=k // 40, source=live['source'][plane][k], native=live['native'][plane][k]))
+                failure_kind = 'scene_history'
             if difference:
-                failed = dict(iteration=i, native_iteration=j, differences=difference)
+                failed = dict(iteration=i, native_iteration=j, kind=failure_kind, differences=difference)
                 for name, data in entries.items():
                     (args.out / f'failed-{i}.{name}.dat.gz').write_bytes(gzip.compress(data, mtime=0))
                 if previous_group:
@@ -344,7 +376,8 @@ def main():
     controls = len(rejected) == 3 and len(paint_rejected) == 3 and len(glyph_rejected) == 3
     matching = failed is None and controls and len(history) == count
     report = dict(first=first, last=last, observations=count, complete_trace_and_core_observations=count,
-        strict_scene_bytes=count * 8 * 5120, history_observations=len(history), history_bytes=64000 * len(history),
+        strict_scene_bytes=count * 8 * 5120, strict_scene_matching=scene_matching == count,
+        scene_boundaries_matching=scene_matching, history_observations=len(history), history_bytes=64000 * len(history),
         complete_plane_history_matching=matching, first_unexplained=failed, no_body_dispatches=no_body,
         replayed_original_bodies_matching=executed, sealed_native_body_identities_matching=native['bodies'],
         sealed_source_snapshots_matching=source['snapshots'], live_owner_predictions=owner_counts, complete_plane_history=history,
