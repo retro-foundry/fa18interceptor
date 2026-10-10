@@ -284,6 +284,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x008: return draw_selected_segment_clipped(stream);
     case 0x00c: return draw_tested_face(stream,frame);
     case 0x010: return draw_record_shadow(stream,frame);
+    case 0x014: return draw_tested_segment_pairs(stream,frame); /* C20656. */
     case 0x018: return draw_interpolated_segments(stream,frame); /* C206E4. */
     case 0x01c: return draw_side_face(stream);
     case 0x020: return draw_side_triangle(stream);
@@ -303,6 +304,7 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x05c: return draw_quad_strip(stream);
     case 0x060: case 0x064: case 0x068: return ground_face(stream,index);
     case 0x06c: return draw_parallelogram_face_2(stream);
+    case 0x070: case 0x074: return 0; /* C0D70C/C0D710: MOVEQ 0; RTS. */
     case 0x078: return draw_parallelogram_face(stream);
     case 0x07c: return edge_alignment_test(stream,eye_x,eye_z,rd_s16(frame-0x28));
     case 0x080: return draw_face_lattice_plain(stream);
@@ -315,14 +317,14 @@ static int command(uint16_t code,gaddr *stream,gaddr frame) {
     case 0x08c: extend_parallelograms(stream); return 0;
     case 0x090: extend_six_point_block_scaled(stream); return 0; /* C20F78. */
     case 0x094: extend_six_point_block(stream); return 0; /* C20FC4. */
-    case 0x098: derive_workspace_extensions(); return 0;
+    case 0x098: case 0x0b8: derive_workspace_extensions(); return 0; /* C21E08 alias. */
     case 0x09c: return draw_square_faces(stream);
     case 0x0a0: return draw_split_square(stream);
     case 0x0a4: extend_block_scaled(stream); return 0;
     case 0x0a8: *stream=derive_extended_shown_vertices(*stream); return 0;
     case 0x0ac: *stream=derive_compact_shown_vertices(*stream); return 0;
     case 0x0b0: split_record_and_stream_edges(stream); return 0;
-    case 0x0b4: derive_workspace_midpoint_extensions(); return 0;
+    case 0x0b4: case 0x0bc: derive_workspace_midpoint_extensions(); return 0; /* C21EF8 alias. */
     case 0x0c0: return draw_selected_segment(stream);
     case 0x0c4: {
         /* C1FF46: project the first face vertex when its side test rejects. */

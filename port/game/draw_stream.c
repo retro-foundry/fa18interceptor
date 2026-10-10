@@ -112,6 +112,38 @@ static Vertex plus(Vertex a, Vertex b) {
  * the one after it. */
 static Vertex edge_after(gaddr a) { return minus(get(a + 6), get(a)); }
 
+/* C20656-C206E2. The face predicate counts rejection but never suppresses
+ * the following pairs. Their depth gate is zero AND, not a sign test. */
+int draw_tested_segment_pairs(gaddr *stream,gaddr frame) {
+    for(unsigned point=0;point<3;++point)
+        put(CLIP_INPUT+4+6*point,get(vertex_at(next_word(stream))));
+    wr_u16(frame-0x32,(uint16_t)(rd_u16(frame-0x32)+1));
+    const uint16_t kind=(uint16_t)rd_u32(*stream);
+    *stream+=4;
+    int16_t eye[3];
+    for(unsigned axis=0;axis<3;++axis) eye[axis]=rd_s16(frame-0x26+2*axis);
+    if(!face_test_passes(kind,rd_u32(frame-0x2c),stream,eye))
+        wr_u16(frame-0x34,(uint16_t)(rd_u16(frame-0x34)+1));
+    wr_s16(CURRENT_COLOUR,next_word(stream));
+    wr_s16(frame-0x0a,next_word(stream));
+    gaddr pair_base=WORKSPACES;
+    for(;;) {
+        const int16_t count=rd_s16(frame-0x0a);
+        wr_u16(frame-0x0a,(uint16_t)(count-1));
+        /* SUBQ/BLT uses signed overflow: 8000 -> 7FFF still exits. */
+        if(count<=0) break;
+        const Vertex first=get(pair_base+(gaddr)(int32_t)next_word(stream));
+        const Vertex second=get(pair_base+(gaddr)(int32_t)next_word(stream));
+        put(SEGMENT_POINTS,first);put(SEGMENT_POINTS+6,second);
+        if(!((uint16_t)first.z & (uint16_t)second.z)) {
+            SegmentDrawResult result=draw_clipped_segment_result();
+            if(result.line.kind==LINE_DRAW_SIZE)
+                pair_base=(gaddr)(int32_t)result.line.step_both;
+        }
+    }
+    return 1;
+}
+
 /* ---- segments ------------------------------------------------------------ */
 
 static int selected_segment(gaddr *stream, int clipped) {
