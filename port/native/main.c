@@ -258,7 +258,7 @@ int main(int argc,char **argv) {
     const uint64_t frequency=SDL_GetPerformanceFrequency();
     if(!frequency || frequency>UINT64_MAX/1000000u) {fputs("Unsupported host counter frequency\n",stderr);goto done;}
     const double microseconds_per_tick=1000000.0/(double)frequency;
-    FA18FramePacer pacer; fa18_frame_pacer_init(&pacer,SDL_GetPerformanceCounter(),frequency);
+    FA18FramePacer pacer;
     if(!amiga_pcm_open(&audio_output,audio_rate,!headless,wave,error,sizeof error)) {
         fputs(error,stderr);goto done;
     }
@@ -282,6 +282,10 @@ int main(int argc,char **argv) {
         startup_memory=amiga_sdl_memory_stats();
     }
     host_clock=(HostClock){SDL_GetPerformanceCounter(),frequency};
+    /* Device callbacks and renderer/event cache initialization are startup.
+     * Begin the presentation deadlines with the gameplay clock, so that work
+     * cannot create pacing debt before the first game frame. */
+    fa18_frame_pacer_init(&pacer,host_clock.origin,frequency);
     native_clock_set_source(!strcmp(clock_mode,"host")?host_microseconds:NULL,&host_clock);
     amiga_runtime_memory_lock(1);
     while(running && (!frames || game->ticks<frames) &&

@@ -79,12 +79,14 @@ final RAM, earned pilot and menu return remain exact. This extends the existing
 original body/drawing qualification to the current executable without rewriting
 the original reports or supplying captured RAM to gameplay.
 
-The presentation pacer is currently initialized before device startup. The
+At this milestone, the presentation pacer was initialized before device startup. The
 new callback readiness wait exposes initial presentation debt: the first few
 window frames can arrive close together before normal 20 ms pacing resumes.
 Move that pacer's origin to the completed startup boundary in a follow-up and
 verify visible presentation again. This is separate from the PCM/state and
-zero-allocation results above.
+zero-allocation results above. That follow-up is now completed in the
+[startup pacing evidence](native_startup_pacing_milestone.md), with its own
+current executable identities and complete Mission Five preservation.
 
 See the [checkpoint](figures/native_audio_output_rate_checkpoint.json) for
 executable/source identities, complete reports, terminal tests, retained

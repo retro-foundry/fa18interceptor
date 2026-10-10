@@ -1,5 +1,12 @@
 # Native port runner
 
+Startup presentation pacing (2026-10-10): deadlines now begin after device,
+renderer and event startup. Actual Release/Debug windows present every frame,
+retain exact PCM/RAM and report zero gameplay heap/pool requests. Both pass the
+four affected CTests; the current Release runner preserves all 13763 qualified
+Mission Five bodies and complete outputs. Full original/native sound remains open.
+See [startup pacing evidence](../../analysis/native_startup_pacing_milestone.md).
+
 Native output rate and startup allocation (2026-10-10): the runner can
 record at 44100 or 48000 Hz, with the default preserved. Complete intro,
 Free Flight and final-combat state/physical byte phases and per-channel sound

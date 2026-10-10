@@ -1,0 +1,356 @@
+{
+  "scope": "Startup presentation origin after device/render/input initialization; complete current M5 preservation. Native sound onset and full original waveform remain unaccepted.",
+  "native_full_sound_accepted": false,
+  "runner_witnesses": {
+    "Release": {
+      "file": "build/native-audio/startup-pacing/release.exe.gz",
+      "decoded_sha256": "d16050fa7dcf49d77753eee5b84f43cdc3b1f67ef6b2dfbacb26fb83b56bed99",
+      "encoded_sha256": "8bd80197ec982c14fb5701774fb88510563e6aefc013a526667ba94f6ceaf34b",
+      "stored_bytes": 993655
+    },
+    "Debug": {
+      "file": "build/native-audio/startup-pacing/debug.exe.gz",
+      "decoded_sha256": "adf4ce7d66526f3893ad4435542041351e358d890fa3117f611fde5e673e2881",
+      "encoded_sha256": "07f61d2fee048513b734e1633b884b72c549f38f989f7e2eff69339dc475bda9",
+      "stored_bytes": 1052963
+    }
+  },
+  "reports": {
+    "Release_ctest": {
+      "file": "build/native-audio/startup-pacing/release-ctest.log",
+      "sha256": "ca20aee7e46194b2b82670ba14571a200db34e0885f812f3bfce49cbc3a36dde",
+      "terminal_success": true,
+      "tests_passed": 4
+    },
+    "Release_visible": {
+      "file": "build/native-audio/startup-pacing/ram-visible-release/report.json",
+      "sha256": "5a3e5ae756c08c39d9b9b59be39cf015f8b0f6355f3b88b1bbcdbd3e6a6d7883",
+      "report": {
+        "configuration": "Release",
+        "frames": 180,
+        "audio_rate": 44100,
+        "all_frames_presented": true,
+        "whole_pcm_and_ram_unchanged": true,
+        "zero_gameplay_allocations": true,
+        "memory": {
+          "sdl_arena_bytes": 33554432,
+          "sdl_startup_bytes": 75184,
+          "sdl_peak_bytes": 75184,
+          "sdl_gameplay_pool_requests": 0,
+          "sdl_failures": 0,
+          "project_gameplay_heap_violations": 0,
+          "pcm_ring_frames": 131072,
+          "os_driver_allocations_observed": false
+        },
+        "first_six_frames": [
+          {
+            "work_us": 3948.6,
+            "wait_us": 16150.7,
+            "total_us": 20099.3,
+            "start_interval_us": 0.0
+          },
+          {
+            "work_us": 1773.0,
+            "wait_us": 18640.7,
+            "total_us": 20413.7,
+            "start_interval_us": 20118.9
+          },
+          {
+            "work_us": 611.9,
+            "wait_us": 18026.5,
+            "total_us": 18638.4,
+            "start_interval_us": 20422.9
+          },
+          {
+            "work_us": 1246.5,
+            "wait_us": 19793.2,
+            "total_us": 21039.7,
+            "start_interval_us": 18648.0
+          },
+          {
+            "work_us": 2019.5,
+            "wait_us": 17905.0,
+            "total_us": 19924.5,
+            "start_interval_us": 21072.6
+          },
+          {
+            "work_us": 549.4,
+            "wait_us": 19497.6,
+            "total_us": 20047.0,
+            "start_interval_us": 19934.0
+          }
+        ],
+        "maximum_work_us": 4481.1,
+        "scope": "Measured visible startup pacing from completed startup boundary; no fitted gameplay clock or audio shift.",
+        "retained_files": {
+          "native.wav": {
+            "file": "build/native-audio/startup-pacing/ram-visible-release/native.wav.gz",
+            "decoded_sha256": "fe94da80a5b9617f2c0835ea9feb608ffdc37e1a94a872c7dfa872ea1b126493",
+            "encoded_sha256": "7a8301db6d066c6084183e6680b0971b0eea33e88377f5398870895f93d30cd6",
+            "raw_bytes": 635084,
+            "stored_bytes": 104099
+          },
+          "native.dat": {
+            "file": "build/native-audio/startup-pacing/ram-visible-release/native.dat.gz",
+            "decoded_sha256": "38ea39ff122a57c2325833146fc4aef1b9b86bb07318dbd3849137927bf5d546",
+            "encoded_sha256": "28a881d1158ff7fd6279e5bf4497bc8c1fcaf0ef5eafd4f64900a8b1e2be6c8f",
+            "raw_bytes": 1048576,
+            "stored_bytes": 313635
+          }
+        }
+      }
+    },
+    "Debug_ctest": {
+      "file": "build/native-audio/startup-pacing/debug-ctest.log",
+      "sha256": "19ef60a19a40c851dde981290bbd8b6ac2ffa424a71526825a3e05847ba217c8",
+      "terminal_success": true,
+      "tests_passed": 4
+    },
+    "Debug_visible": {
+      "file": "build/native-audio/startup-pacing/ram-visible-debug/report.json",
+      "sha256": "ea8a3dbd460e440e2d908a6ee4c0c4ff463c22b9d041d3c758c8c47b6960850e",
+      "report": {
+        "configuration": "Debug",
+        "frames": 180,
+        "audio_rate": 44100,
+        "all_frames_presented": true,
+        "whole_pcm_and_ram_unchanged": true,
+        "zero_gameplay_allocations": true,
+        "memory": {
+          "sdl_arena_bytes": 33554432,
+          "sdl_startup_bytes": 75184,
+          "sdl_peak_bytes": 75184,
+          "sdl_gameplay_pool_requests": 0,
+          "sdl_failures": 0,
+          "project_gameplay_heap_violations": 0,
+          "pcm_ring_frames": 131072,
+          "os_driver_allocations_observed": false
+        },
+        "first_six_frames": [
+          {
+            "work_us": 3337.0,
+            "wait_us": 16856.1,
+            "total_us": 20193.1,
+            "start_interval_us": 0.0
+          },
+          {
+            "work_us": 2824.3,
+            "wait_us": 16542.8,
+            "total_us": 19367.1,
+            "start_interval_us": 20267.3
+          },
+          {
+            "work_us": 932.6,
+            "wait_us": 19796.3,
+            "total_us": 20728.9,
+            "start_interval_us": 19396.1
+          },
+          {
+            "work_us": 636.2,
+            "wait_us": 18188.7,
+            "total_us": 18824.9,
+            "start_interval_us": 20759.0
+          },
+          {
+            "work_us": 574.3,
+            "wait_us": 20865.3,
+            "total_us": 21439.6,
+            "start_interval_us": 18853.3
+          },
+          {
+            "work_us": 739.0,
+            "wait_us": 18569.2,
+            "total_us": 19308.2,
+            "start_interval_us": 21468.4
+          }
+        ],
+        "maximum_work_us": 6402.0,
+        "scope": "Measured visible startup pacing from completed startup boundary; no fitted gameplay clock or audio shift.",
+        "retained_files": {
+          "native.wav": {
+            "file": "build/native-audio/startup-pacing/ram-visible-debug/native.wav.gz",
+            "decoded_sha256": "fe94da80a5b9617f2c0835ea9feb608ffdc37e1a94a872c7dfa872ea1b126493",
+            "encoded_sha256": "7a8301db6d066c6084183e6680b0971b0eea33e88377f5398870895f93d30cd6",
+            "raw_bytes": 635084,
+            "stored_bytes": 104099
+          },
+          "native.dat": {
+            "file": "build/native-audio/startup-pacing/ram-visible-debug/native.dat.gz",
+            "decoded_sha256": "38ea39ff122a57c2325833146fc4aef1b9b86bb07318dbd3849137927bf5d546",
+            "encoded_sha256": "28a881d1158ff7fd6279e5bf4497bc8c1fcaf0ef5eafd4f64900a8b1e2be6c8f",
+            "raw_bytes": 1048576,
+            "stored_bytes": 313635
+          }
+        }
+      }
+    },
+    "complete_mission_five": {
+      "file": "build/native-audio/startup-pacing/mission-five-preservation/report.json",
+      "sha256": "cd835768b986927e6ad9a8b8fbd4dba28836225f87244277598ce8d0eb8fd45d",
+      "report": {
+        "runner_sha256": "d16050fa7dcf49d77753eee5b84f43cdc3b1f67ef6b2dfbacb26fb83b56bed99",
+        "baseline_runner_sha256": "544bb244eb048b65436382a755cbf9bd9abd29f1337aec849967ef157fac3bd8",
+        "evidence_sha256": {
+          "reference": "2217f540dfbd9c1de60e56ec4c4c16343a3367218e9400e7ce705095c9787130",
+          "replay-evidence": "55b7d4f037dc56ea79ea31202440bd08b21851aca0da2e60fbb7a45edea2a70c",
+          "body-evidence": "fe43a05b33786076f3a107e6f5b37c9ae741111d0d5a48bf52d4f5c421db4498",
+          "prefix": "fd5da88ee636064154e1378606a4391cf8359fcb6108d4923587f74a1c622c98",
+          "drawing-evidence": "077459b02e3ce7f9474afcc0fcdfce9ff12606b7a21d3cc64f9912b9fbf725af"
+        },
+        "input_sha256": {
+          "build\\native-flight\\independent-mission-five-template-carry\\input.segment.fa18in": "f4b8180c91364d8115a3b88acab92721344b14a25a1a130f01d92d4786a7079f",
+          "build\\native-flight\\independent-mission-five-template-carry\\input.anchors": "323a08d810452499c550374ed4513df56d9475daccbcec3ec271c659f5227f96",
+          "build\\native-flight\\recorded-escort-template-carry-protected\\physical.e9k": "4828cb3b576f64ee62bdd8a0d7b193615c5ed1a274f639adcd2facb0e3a8d368"
+        },
+        "complete_preservation": true,
+        "actual": {
+          "native_run": {
+            "frame_owner_exit": false,
+            "frames": 133402,
+            "screen": "menu",
+            "mode": 0,
+            "glyphs": 32952,
+            "record_updates": 23779,
+            "scene_frames": 23770,
+            "terrain_polygons": 109529,
+            "model_calls": 146650,
+            "hud_frames": 23770,
+            "control_frames": 45575,
+            "scene_selected": true,
+            "stage": "C0FCB4",
+            "game_tick": 0,
+            "timer_pending": false,
+            "timer_yields": 56116,
+            "display_publications": 45575,
+            "display_yields": 45613,
+            "display_pending": false,
+            "displayed_page": 0,
+            "postflight_callbacks": 0,
+            "postflight_resets": 0,
+            "input_passes": 45571,
+            "input_events": 27472,
+            "input_queued": 0,
+            "update_iterations": 75334,
+            "replay_iterations": 74858,
+            "replay_events": 20413,
+            "host_replay_events": 7079,
+            "host_replay_pending": 0,
+            "replay_started": true,
+            "voice_ticks": 133402,
+            "voice_publications": 283573,
+            "voice_levels": [
+              [
+                358,
+                31
+              ],
+              [
+                358,
+                31
+              ],
+              [
+                124,
+                0
+              ],
+              [
+                300,
+                2
+              ]
+            ],
+            "sample_requests": 131369,
+            "sample_frames": 128065920,
+            "nonzero_sample_frames": 127360656,
+            "audio_device": false,
+            "frame_capture_complete": false,
+            "frame_before_tick": 0,
+            "frame_after_tick": 0,
+            "frame_saved_tick": 0,
+            "cpu_emulation": false,
+            "chipset_emulation": false
+          },
+          "native_trace_sha256": "d8564d5cd71553acac4419383664571aaaff5e36ff0a2b1b3ac4f1cdd81d80cc",
+          "native_final_ram_sha256": "1f1381a5602e10c19d45ab024ef8d2c7f322eed288e1b605f1258259b4929737",
+          "stream_sha256": "114153552548351c3483f78f771645050e0b47174c52dafc6c1d4841f4a5b5a6",
+          "stream_bytes": 124362700,
+          "final_saved_pilot": "0001000200020500000002cb0000000000000000000101010000000000004e45570000000000000000000000000000000000000000000003000301b0000600040001000300010000000700000000",
+          "event_report": {
+            "format": "FA18_REPLAY_ANCHORS_V1",
+            "complete": true,
+            "failed": false,
+            "native_updates": 74858,
+            "source_position": 75342,
+            "keys_consumed": 20413,
+            "anchors": [
+              {
+                "source_first": 1,
+                "mode": 0,
+                "stage": "C0FCB4",
+                "game_tick": 0,
+                "native_first": 1,
+                "frame": 2299
+              },
+              {
+                "source_first": 40168,
+                "mode": 4,
+                "stage": "C10C08",
+                "game_tick": 36,
+                "native_first": 39931,
+                "frame": 55567
+              },
+              {
+                "source_first": 40641,
+                "mode": 4,
+                "stage": "C10D8A",
+                "game_tick": 1,
+                "native_first": 40395,
+                "frame": 56304
+              },
+              {
+                "source_first": 47596,
+                "mode": 0,
+                "stage": "C0FCB4",
+                "game_tick": 0,
+                "native_first": 47349,
+                "frame": 75601
+              },
+              {
+                "source_first": 61114,
+                "mode": 5,
+                "stage": "C10C08",
+                "game_tick": 36,
+                "native_first": 60630,
+                "frame": 88920
+              },
+              {
+                "source_first": 61578,
+                "mode": 5,
+                "stage": "C10D8A",
+                "game_tick": 1,
+                "native_first": 61094,
+                "frame": 89657
+              }
+            ]
+          }
+        },
+        "capture_bytes": 424721137,
+        "bodies": 13763,
+        "snapshots": 41289,
+        "memory": {
+          "sdl_arena_bytes": 33554432,
+          "sdl_startup_bytes": 0,
+          "sdl_peak_bytes": 96,
+          "sdl_gameplay_pool_requests": 0,
+          "sdl_failures": 0,
+          "project_gameplay_heap_violations": 0,
+          "pcm_ring_frames": 131072,
+          "os_driver_allocations_observed": false
+        },
+        "scope": "Complete native trace, body entry/begin/end RAM and timing, final RAM, earned pilot, anchors and counters reproduce the accepted Mission Five recording. Original instruction and drawing qualification remains bound to its prior report; exact native preservation extends that recorded scope to this executable. No recorded RAM enters gameplay; other routes and complete sound parity remain open."
+      }
+    }
+  },
+  "source_files_sha256": {
+    "port/native/main.c": "ff8a276c53675f7ab97f18b975768a05cd6e923b6d64656320874ba47f89c4ef",
+    "port/game/native/audio.c": "38260d759852ca038e32dfa036253641bf95a9fa40d16e8312d9cf97f3f99e8a",
+    "tools/native/check_qualified_mission_preservation.py": "981a855aef0ebdad75aaefae4d6060c93db34c1f52ad8fb00c97151e8e6d46b9"
+  }
+}
