@@ -470,6 +470,7 @@ static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) 
      * input as the original below. Full-body tests prove its real producers. */
     native_model_retain_result(rd_u16(NATIVE_SCENE_MODEL_FRAME-0x7c));
     int result=native_scene_placement(NULL,call);
+    const uint16_t native_retained=native_model_retained_result();
     memcpy(expected,fa18_machine->chip,0x80000);
     memcpy(vertices,fa18_machine->slow+0x48390,0x2000);
     memcpy(records,fa18_machine->slow+0x46184,0x2000);
@@ -494,7 +495,11 @@ static int32_t compare_descriptor(void *context,const ScenePlacementCall *call) 
         if(slow_diffs<8) fprintf(stderr,"descriptor %06X data %06X: source %02X native %02X\n",call->routine,0xc00000+i,fa18_machine->slow[i],slow[i]);
         ++slow_diffs;
     }
-    int okay=compare(expected,calls) && result==original_result && !vertex_diffs && !record_diffs && !slow_diffs;
+    /* C09812/C09850's ground accumulator is also a later C1F074 input.
+     * Drawing/return equality alone misses its publication to that owner. */
+    const int ground_carry_ok=(call->routine!=0xc096ca && call->routine!=0xc096bc) ||
+        native_retained==rd_u16(0xc7fefc-0x7c);
+    int okay=compare(expected,calls) && result==original_result && !vertex_diffs && !record_diffs && !slow_diffs && ground_carry_ok;
     if(!okay) {
         fprintf(stderr,"descriptor %06X parameters %06X: return source=%d native=%d vertex differences=%u record differences=%u scratch source=%04X native=%04X\n",
             call->routine,call->parameters,original_result,result,vertex_diffs,record_diffs,

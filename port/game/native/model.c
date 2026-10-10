@@ -586,6 +586,9 @@ static int ground_draw(gaddr frame,int32_t minimum_height) {
         rd_s16(frame-0x78),rd_s16(frame-0x76),rd_s16(frame-0x74)};
     /* transform_ground_points adds the placement displacement itself. */
     transform_ground_points(bound+6,rd_s16(bound),(int16_t)shift,offset,WORKSPACES);
+    /* C09812/C09850 share the later model's retained -$7C word.
+     * C1F074 expiry can consume it before C1F712 initializes a model. */
+    wr_u16(frame-0x7c,0);
     int drawn=0;
     for(;;) {
         code=word(&stream);if(code==-1) return drawn;
@@ -607,7 +610,9 @@ static int ground_draw(gaddr frame,int32_t minimum_height) {
             code=word(&stream);
         }
         int result=command((uint16_t)code,&stream,frame);if(result<0) return 0;
-        drawn|=result;if(code&0x4000) return drawn;
+        drawn|=result;
+        wr_u16(frame-0x7c,(uint16_t)(rd_u16(frame-0x7c)|result));
+        if(code&0x4000) return drawn;
     }
 }
 static ContextPublicationResult expiry_selection_child(void *context,enum ContextPublicationChild child) {

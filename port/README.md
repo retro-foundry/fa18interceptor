@@ -1,5 +1,15 @@
 # Active port source ownership
 
+Complete escort bodies (2026-10-10): all 6,954 actual native bodies pass
+original instructions, including combat, carrier arrest and postflight.
+Ground rendering now publishes the source C09812/C09850 accumulator;
+the preceding sweep's 18 cache-word failures remain retained. A new
+independent playable replay preserves the complete successful recording,
+RAM, pilot and counters exactly. Release/Debug affected checks and the
+preceding-code rejection guard pass. Broader independent flight histories
+and original sound timing remain open.
+See [complete body evidence](../analysis/native_escort_complete_bodies_milestone.md).
+
 Live native escort (2026-10-10): ordinary qualification and mission-three
 controls earn the prefix, then live-carrier controls earn escort, wire
 landing, the second completion and menu return. The playable runner

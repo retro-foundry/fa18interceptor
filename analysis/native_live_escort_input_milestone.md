@@ -1,5 +1,10 @@
 # Live-carrier escort input — 2026-10-10
 
+Follow-up: [the complete escort body sweep](native_escort_complete_bodies_milestone.md)
+now passes all 6,954 actual native bodies after correcting the ground
+accumulator producer. The original recording, final RAM, pilot and counters
+remain exact. The three-body scope below describes this earlier milestone.
+
 An independently started native game now replays qualification and the complete
 preceding mission, completes escort, lands on its live carrier, catches the
 wire, earns the second mission completion and returns to the menu. A second

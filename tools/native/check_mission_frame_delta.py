@@ -15,8 +15,63 @@ import tempfile
 from check_gameplay_checkpoint import ROOT
 from check_qualification_message_cadence import digest, verify_trace
 from check_recorded_original_mission_trace import verified_update_mapping
-from compare_flight_traces import read_trace
+from compare_flight_traces import read_trace, number
 from frame_delta import bodies
+
+
+def native_recording_plan(args, reference, original, rows):
+    """Verify a native-owned control recording without weakening old parity.
+
+    The successful original flight still authorizes/proves the ordinary
+    earned prefix. Its later controls and world are not declared equal to
+    this native flight. Only the external body oracle receives native RAM.
+    """
+    assert reference['mission_mode'] == original['mission_mode'] == 4
+    assert reference['mission_success'] and reference['qualification_accepted']
+    assert reference['canonical_complete_trace_and_ram_exact']
+    assert reference['runner_sha256'] == digest(args.runner.read_bytes())
+    assert reference['source_trace_sha256'] == original['driver_trace_sha256']
+    assert reference['source_consumed_input_sha256'] == original['consumed_input_sha256']
+    assert reference['adf_sha256'] == digest((ROOT/'local/media/fa18.adf').read_bytes())
+    from check_original_mission_recording import verified_prefix
+    checked, _, _ = verified_prefix(Path(original['source_prefix']['path']), original['input_hashes'])
+    assert checked == original['source_prefix'] and original['source_prefix_execution_exact']
+    mapping, update = verified_update_mapping(args.source_updates, args.source_evidence/'driver.jsonl.gz', original)
+    from check_recorded_original_mission_trace import source_event_plan
+    plan = source_event_plan(args.source_evidence/'driver.jsonl.gz', mapping, 4)
+    assert reference['escort_anchors'] == plan
+    anchors = json.loads((args.reference/'anchors.json').read_text())
+    assert anchors['complete'] and not anchors['failed']
+    assert len(anchors['anchors']) == len(plan)
+    for expected, actual in zip(plan, anchors['anchors']):
+        assert all(expected[k] == actual[k] for k in ('source_first','mode','stage','game_tick'))
+        if actual['native_first'] != 1:
+            row = rows[actual['native_first']]
+            assert row['frame'] == actual['frame']
+            assert (number(row,'mode'),number(row,'stage'),number(row,'game_tick')) == (
+                expected['mode'],int(expected['stage'],16),expected['game_tick'])
+    for name, key in (('physical.e9k','physical_input_sha256'),
+                      ('prefix.fa18in','prefix_sha256'),('replay-prefix.fa18in','canonical_prefix_sha256')):
+        assert digest((args.reference/name).read_bytes()) == reference[key], f'Native controls changed: {name}'
+    prefix = (args.reference/'prefix.fa18in').read_text().splitlines()
+    replay = (args.reference/'replay-prefix.fa18in').read_text().splitlines()
+    end = reference['source_prefix_last']
+    expected = ['FA18_GAME_INPUT_V1']+[line for line in (args.source_updates/'update-consumed.fa18in').read_text().splitlines()[1:]
+        if ' K ' in line and int(line.split()[0]) <= end]+[f'end {end} 0']
+    assert prefix == expected and prefix[:-1] == replay[:-1], 'Original prefix keys changed'
+    assert (args.reference/'input.anchors').read_text() == 'FA18_REPLAY_ANCHORS_V1\n'+''.join(
+        f'{p["source_first"]} {p["mode"]} {p["stage"]} {p["game_tick"]}\n' for p in plan)
+    assert anchors['source_position'] == int(replay[-1].split()[1])
+    assert anchors['native_updates'] == reference['canonical']['replay_iterations']
+    assert anchors['keys_consumed'] == reference['driver']['prefix_keys'] == reference['canonical']['replay_events']
+    for suffix in ('jsonl','dat'):
+        actual, driver = (gzip.decompress((args.reference/f'{name}.{suffix}.gz').read_bytes()) for name in ('native','driver'))
+        assert actual == driver and digest(actual) == reference['complete_native_artifacts'][suffix+'_sha256']
+    nf, nl = anchors['anchors'][-1]['native_first'], max(rows)
+    assert set(range(nf,nl+1)) <= set(rows), 'Native flight trace has missing updates'
+    assert reference['canonical']['screen'] == 'menu' and reference['canonical']['stage'] == 'C0FCB4'
+    assert not reference['canonical']['postflight_resets']
+    return nf, nl, update
 
 
 def main():
@@ -26,25 +81,43 @@ def main():
     parser.add_argument('--first', type=int, help='Original flight observation; defaults to entire accepted flight')
     parser.add_argument('--count', type=int, help='Original observations, including real duplicate dispatch entries')
     parser.add_argument('--window', type=Path, help='Additionally require exact old entry/body RAM and metadata')
+    parser.add_argument('--native-input-reference', action='store_true',
+                        help='Check a qualified native-owned escort recording; first/count name native updates. Independent original histories remain separate')
     args = parser.parse_args()
     assert (args.first is None) == (args.count is None)
     runner_hash = digest(args.runner.read_bytes())
     args.out.mkdir(parents=True, exist_ok=True)
     reference = json.loads((args.reference / 'report.json').read_text())
     original = json.loads((args.source_evidence / 'report.json').read_text())
-    assert reference['whole_successful_flight']['strict_gameplay_matching']
-    for path, expected in reference['input_hashes'].items():
+    if not args.native_input_reference:
+        assert reference['whole_successful_flight']['strict_gameplay_matching']
+    for path, expected in (original if args.native_input_reference else reference)['input_hashes'].items():
         assert digest((ROOT / path).read_bytes()) == expected, path
-    mapping, update = verified_update_mapping(args.source_updates, args.source_evidence / 'driver.jsonl.gz', original)
-    assert update == reference['source_update_evidence']
     trace_path = args.reference / 'native.jsonl.gz'
-    assert digest(gzip.decompress(trace_path.read_bytes())) == reference['native_trace_sha256']
+    trace_hash = reference['complete_native_artifacts']['jsonl_sha256'] if args.native_input_reference else reference['native_trace_sha256']
+    assert digest(gzip.decompress(trace_path.read_bytes())) == trace_hash
     header, rows = read_trace(trace_path)
-    first = args.first if args.first is not None else reference['whole_successful_flight']['first']
-    last = first + args.count - 1 if args.count is not None else reference['whole_successful_flight']['last']
-    assert reference['whole_successful_flight']['first'] <= first <= last <= reference['whole_successful_flight']['last']
-    nf, nl = mapping[first], mapping[last]
-    assert set(mapping[i] for i in range(first, last + 1)) == set(range(nf, nl + 1))
+    if args.native_input_reference:
+        assert not args.window, 'Original-aligned window is only supported by the original-input mode'
+        lower, upper, update = native_recording_plan(args, reference, original, rows)
+        first = args.first if args.first is not None else lower
+        last = first+args.count-1 if args.count is not None else upper
+        assert lower <= first <= last <= upper
+        nf, nl = first, last
+        baseline = reference['canonical']
+        final_hash = reference['complete_native_artifacts']['dat_sha256']
+        saved_pilot = reference['earned_save_hex']
+    else:
+        mapping, update = verified_update_mapping(args.source_updates, args.source_evidence / 'driver.jsonl.gz', original)
+        assert update == reference['source_update_evidence']
+        first = args.first if args.first is not None else reference['whole_successful_flight']['first']
+        last = first + args.count - 1 if args.count is not None else reference['whole_successful_flight']['last']
+        assert reference['whole_successful_flight']['first'] <= first <= last <= reference['whole_successful_flight']['last']
+        nf, nl = mapping[first], mapping[last]
+        assert set(mapping[i] for i in range(first, last + 1)) == set(range(nf, nl + 1))
+        baseline = reference['native_run']
+        final_hash = reference['native_final_ram_sha256']
+        saved_pilot = reference['final_saved_pilot']
     sealed_window = None
     if args.window:
         sealed_window = json.loads((args.window / 'report.json').read_text())
@@ -54,7 +127,7 @@ def main():
         subprocess.run(['python', 'scripts/build_recomp.py', '--output', str(oracle.relative_to(ROOT)),
                         '--main', 'tools/native/native_frame_body_oracle.c'], cwd=ROOT, stdout=log,
                        stderr=subprocess.STDOUT, check=True)
-    env = {k: v for k, v in os.environ.items() if not k.startswith(('FA18_FRAME_', 'FA18_TRACE_'))}
+    env = {k: v for k, v in os.environ.items() if not k.startswith(('FA18_FRAME_', 'FA18_TRACE_', 'FA18_LOOP_', 'FA18_MISSION_', 'FA18_ORIGINAL_PILOT_'))}
     identities, failures = [], []
     with tempfile.TemporaryDirectory(prefix='mission-frame-delta-', dir=ROOT / 'build') as directory:
         work = Path(directory)
@@ -67,20 +140,31 @@ def main():
             return json.loads(result.stdout)
         enlist = run(['--frames', '9000', '--replay', str(ROOT / 'tools/native/fixtures/region-pilot-enlist.e9k'),
                       '--save-dir', str(pilot)], 'enlist.log')
-        assert enlist == reference['enlist_run'], 'Enlistment counters changed'
+        if not args.native_input_reference:
+            assert enlist == reference['enlist_run'], 'Enlistment counters changed'
         initial = (pilot / 'config').read_bytes()
         assert len(initial) == 78 and initial[:4] == bytes(4)
         assert initial[18:28] == bytes(10) and initial[56:58] == bytes(2), 'Pilot was not newly enlisted'
+        if args.native_input_reference:
+            assert digest(initial) == reference['enlisted_save_sha256'], 'Ordinarily enlisted pilot changed'
         intro = work / 'intro.e9k'
         intro.write_text('E9K_INPUT_V1\nF 1800 K 32 0 0 1\nF 1802 K 32 0 0 0\n')
-        summary = run(['--frames', str(reference['native_run']['frames']), '--replay', str(intro),
-                       '--input', str((args.source_updates / 'update-consumed.fa18in').resolve()),
-                       '--iterations', str(update['real_update_calls']), '--save-dir', str(pilot),
+        replay_arguments = ['--replay', str(intro), '--input', str((args.source_updates/'update-consumed.fa18in').resolve()),
+                            '--iterations', str(update['real_update_calls'])]
+        if args.native_input_reference:
+            end = int((args.reference/'replay-prefix.fa18in').read_text().splitlines()[-1].split()[1])
+            replay_arguments = ['--replay', str((args.reference/'physical.e9k').resolve()),
+                '--input', str((args.reference/'replay-prefix.fa18in').resolve()), '--iterations', str(end),
+                '--input-anchors', str((args.reference/'input.anchors').resolve()),
+                '--input-anchors-out', str(work/'anchors.json')]
+        summary = run(['--frames', str(baseline['frames']), *replay_arguments, '--save-dir', str(pilot),
                        '--frame-delta', f'{nf}+{nl - nf + 1}', str(stream), '--data-out', str(final),
                        '--memory-report', str(args.out.resolve() / 'memory.json')], 'flight.log')
-        assert summary == reference['native_run'], 'Diagnostic changed runtime counters'
-        assert digest(final.read_bytes()) == reference['native_final_ram_sha256']
-        assert (pilot / 'config').read_bytes().hex() == reference['final_saved_pilot']
+        assert summary == baseline, 'Diagnostic changed runtime counters'
+        assert digest(final.read_bytes()) == final_hash
+        assert (pilot / 'config').read_bytes().hex() == saved_pilot
+        if args.native_input_reference:
+            assert json.loads((work/'anchors.json').read_text()) == json.loads((args.reference/'anchors.json').read_text())
         stream_bytes, stream_hash = stream.stat().st_size, digest(stream.read_bytes())
         old = {row['native_iteration']: row for row in sealed_window['rows']} if sealed_window else {}
         with (args.out / 'original-bodies.log').open('w') as log:
@@ -123,7 +207,9 @@ def main():
     assert digest(args.runner.read_bytes()) == runner_hash, 'Runner changed during verification'
     report = dict(first=first, last=last, native_first=nf, native_last=nl, bodies=len(identities),
                   runner_sha256=runner_hash, reference_report_sha256=digest((args.reference / 'report.json').read_bytes()),
-                  native_trace_sha256=reference['native_trace_sha256'], native_final_ram_sha256=reference['native_final_ram_sha256'],
+                  native_trace_sha256=trace_hash, native_final_ram_sha256=final_hash,
+                  native_owned_input_reference=args.native_input_reference,
+                  source_update_evidence=update,
                   runtime_counters_preserved=True, final_ram_preserved=True, earned_save_preserved=True,
                   original_body_failures=failures, original_bodies_matching=not failures,
                   stream_bytes=stream_bytes, stream_sha256=stream_hash, compressed_bytes=retained.stat().st_size,
