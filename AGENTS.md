@@ -5,6 +5,15 @@ The user's latest instructions override historical plans and proof notes.
 For analysis/reconstruction, follow the current [process manual](REVERSE_ENGINEERING.md);
 keep reusable methods there and case results in the selected project.
 
+- User direction: future game work starts with static recompilation and an
+  executable baseline, then semantic decompilation. Follow the
+  [recomp-first guide](docs/recomp/porting_game.md); original bytes/execution still
+  determine correctness. Report development interpretation and chipset/runtime
+  dependencies separately from readable source and original parity.
+- Shared recompiler/runtime/ABI/tests live in `tools/arecomp`, `runtime`,
+  `include/amiga_recomp` and `tests/recomp`. Keep game TOML, observed targets and
+  hooks under its project. Generated game code belongs in ignored build storage.
+
 - Shared Python tools, Amiga hardware support and Ghidra integration belong at
   framework level. Game addresses, names, routines, data, media, reports and
   game-specific emulator forks belong under `projects/<id>/`.

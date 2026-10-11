@@ -17,6 +17,7 @@ measurements and unresolved questions belong under `projects/<id>/`.
 | `analysis/` | Reviewed contracts, mappings, coverage reports, experiment results and open questions. |
 | `pcode/raw/` | Scoped structural exports and their capture provenance. |
 | `source_amiga/` | Exact assembly reconstructions and authority-linked slices. |
+| `recomp/` | Game TOML, observed targets and project-owned hook source. |
 | Project scripts/tests | Game-aware observers, invariants and acceptance scenarios. |
 | Root scripts/tools/tests | Reusable analysis, hardware support and configuration-independent checks. |
 

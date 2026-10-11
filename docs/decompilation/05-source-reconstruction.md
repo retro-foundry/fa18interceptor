@@ -6,6 +6,11 @@ Reconstruction has two products: source that reproduces authoritative bytes,
 and source that expresses demonstrated behavior. Their evidence and completion
 claims differ. Keep both useful while progressing toward the intended port.
 
+Begin this semantic phase with the [recompiled baseline](../recomp/porting_game.md)
+and its original comparison evidence. Generated C++ remains reproducible while
+connected, contract-backed routines replace it. Exact assembly and semantic
+meaning are still separate measurements.
+
 ## Begin with a byte-exact view
 
 A whole-bank `incbin` scaffold preserves a captured memory image, including
@@ -81,11 +86,11 @@ Do not merge visual and collision records without a traced handoff.
 
 ## Choose an implementation path explicitly
 
-Projects can reconstruct incrementally from byte-exact assembly, use a
-mechanical whole-program translation as temporary execution support, or port
-bounded routines directly into an existing runtime. This framework currently
-ships none of those game runtimes/translators; project tools and their evidence
-must establish what is available.
+The default path uses the shared literal translator and machine runtime to
+establish executable behavior, then replaces related routines with readable
+source. Projects can also reconstruct exact assembly or use their existing
+native runtime where the accepted task calls for it. The
+[recompiler guide](../recomp/README.md) records implemented capabilities and gaps.
 
 With temporary translation or emulation, mark each remaining dependency:
 generated instruction helper, shared register state, guest-bus access, chipset

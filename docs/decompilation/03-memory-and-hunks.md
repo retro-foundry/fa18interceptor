@@ -120,3 +120,8 @@ storage may have several meanings. Keep unresolved offsets structural
 
 Acceptance: later trace addresses correspond to preserved bytes, verified
 placements and named time windows. Rejected/unknown bases remain explicit.
+
+Use that verified image/state for the [recompilation baseline](../recomp/porting_game.md)
+before broad semantic reconstruction. The TOML input loader's placements and
+snapshot format need their own compatibility checks; mapping a bank does not
+automatically create a correct machine resume.

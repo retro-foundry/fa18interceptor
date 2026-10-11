@@ -14,6 +14,8 @@ documents observer and service contracts, and the
 
 | Task | Framework tools |
 | --- | --- |
+| Static recompilation | `recompile` project wrapper; C++ `arecomp` (`analyze`, `recompile`, `disasm`, `bootblock`, `diskcheck`) |
+| Recompiler discovery/fixtures | `tools/converge.py` (reviewed targets, bank base, derived manifest), `tools/asm68k.py` (synthetic fixture assembler) |
 | Reference execution | `engine9000_bridge`, `profile_window`, `capture_run_checkpoint` |
 | Sealed recording/replay | `record_run`, `finalize_run`, `playback_run`, `probe_replay_state`, `render_run` |
 | Replay editing | `append_replay_events`, `clip_replay`, `replace_replay_key`, `slice_playback` |
@@ -32,6 +34,14 @@ documents observer and service contracts, and the
 Use `--help` for argument-based tools. A few small offline tools take positional
 arguments and print their usage when invoked without them. `reconstruction_coverage`
 is an importable helper used by the two source-evidence commands.
+
+Build the C++ translator/runtime from the framework root with
+`cmake -S . -B build/recomp -G Ninja`, then `cmake --build build/recomp`.
+Run `ctest --test-dir build/recomp --output-on-failure`. The
+[recomp-first guide](../docs/recomp/porting_game.md) documents the executable
+baseline, convergence and subsequent semantic replacement. The JSON project's
+optional `recomp_manifest` selects game TOML; the wrapper keeps generated code
+in that project's build roots and passes the shared runtime source explicitly.
 
 The shared Engine9000 submodule remains pinned to the observer-compatible fork
 revision; its branch name records provenance. Initialize it with

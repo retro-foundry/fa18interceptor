@@ -87,6 +87,7 @@ existence of every media file or optional tool.
 | `audio_observers` | Modules for `events`, `dma`, `samples`; voice ownership is a project hook. |
 | `artifact_policy` | Project build roots and retention exceptions; [chapter 8](08-evidence-and-maintenance.md). |
 | `native_checkout` | Used by a project's build forwarding script; not needed for generic analysis. |
+| `recomp_manifest` | Game TOML for the shared recompiler wrapper; [recomp-first workflow](../recomp/porting_game.md). |
 
 ```console
 python -m amiga_decomp --project your-game info
@@ -107,6 +108,10 @@ scripts/                        shared analysis/capture commands
 tools/amiga/                    OS and hardware observer tools
 tools/engine9000-src/            pinned reusable source submodule
 patches/                        version-specific reusable host patches
+runtime/                        shared recompiled CPU and machine runtime
+include/amiga_recomp/            ABI used by translated blocks
+tools/arecomp/                  shared build-time translator
+tests/recomp/                   synthetic and differential C++ checks
 docs/decompilation/             this process
 projects/your-game/
   project.json                  machine/tools and game-specific policy
@@ -115,6 +120,7 @@ projects/your-game/
   analysis/                     contracts, inventories and reports
   pcode/raw/                    retained structural exports
   source_amiga/                  exact and symbolic source
+  recomp/                        game TOML and observed targets/hook ownership
   local/                        ignored media, ROM and private installations
   captures/                     ignored immutable recordings
   build/                        ignored bounded diagnostics

@@ -1,9 +1,14 @@
 # Amiga decompilation framework
 
-Tools for capturing original Amiga execution, validating instruction bytes,
-importing observed RAM into Ghidra and recording reconstruction evidence.
+Tools for static recompilation, original-execution capture, instruction-byte
+validation, Ghidra analysis and readable source reconstruction.
 Game-specific work lives in `projects/<id>/`; shared tools do not select a game
 implicitly. The existing case study is [F/A-18 Interceptor](projects/fa18-interceptor/README.md).
+
+The default workflow is **recompile first, then decompile**: get an executable
+baseline, qualify its observed behavior, then replace translated routines with
+meaning-backed source. Start with the [recomp-first guide](docs/recomp/porting_game.md)
+and [build/integration instructions](docs/recomp/README.md).
 
 The [decompilation process manual](REVERSE_ENGINEERING.md) documents the full
 workflow in eight chapters: authority/setup, recording/replay, loaded memory
@@ -69,7 +74,15 @@ headers in copied saves and retain all serialized core bytes. The original
 recordings are never rewritten. The framework retains its replay-host patch in `patches/`;
 its ignored `build/engine9000-replay/` executable must be supplied locally.
 
-The shared layer includes bounded capture, replay/checkpoint rendering, input
+The shared layer includes a 68000-to-C++ translator, guest machine runtime,
+SDL display/input support and synthetic/differential tests imported from
+`amiga-recomp`. [Current capabilities and limits](docs/recomp/README.md) distinguish
+implemented features from the inherited [design specification](AMIGA_RECOMP.md).
+Game TOML metadata stays under `projects/<id>/recomp/`; generated translations
+stay in ignored project build storage. Optional `recomp_manifest` selects the
+TOML used by `python -m amiga_decomp --project <id> run recompile`.
+
+The shared layer also includes bounded capture, replay/checkpoint rendering, input
 editing, instruction-write tracing, snapshot validation, DOS segment inspection,
 Ghidra import/P-code export and cache pruning. Ghidra imports only validated
 observed instruction starts; structural functions do not establish behavior.

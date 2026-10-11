@@ -1,0 +1,315 @@
+// arecomp: the static recompiler command line (AMIGA_RECOMP.md 3, 44).
+
+#include <cstdio>
+#include <cstring>
+#include <filesystem>
+#include <string>
+#include <vector>
+
+#include "amiga_recomp/decoder.hpp"
+#include "analyzer.hpp"
+#include "bootblock.hpp"
+#include "diskcheck.hpp"
+#include "codegen.hpp"
+#include "image.hpp"
+#include "manifest.hpp"
+#include "project.hpp"
+
+namespace {
+
+using namespace arecomp;
+
+constexpr const char* kVersion = "0.1.0";
+
+void print_usage() {
+    std::printf(
+        "arecomp %s - static recompiler for Amiga 68000 code\n"
+        "\n"
+        "usage:\n"
+        "  arecomp recompile <manifest.toml> -o <dir>   translate into a native project\n"
+        "  arecomp analyze   <manifest.toml>            report discovery without emitting\n"
+        "  arecomp disasm    <manifest.toml> [options]  disassemble discovered blocks\n"
+        "  arecomp bootblock <disk.adf> [--disasm]     inspect boot loader reads\n"
+        "  arecomp diskcheck <disk.adf> [--from <n>]  inspect disk sectors\n"
+        "  arecomp version\n"
+        "\n"
+        "options:\n"
+        "  -o, --output <dir>    output directory (default: build/recomp/<id>)\n"
+        "      --framework-root <dir>  runtime/include source root for generated builds\n"
+        "      --from <addr>     disasm: first address\n"
+        "      --count <n>       disasm: number of instructions\n"
+        "\n"
+        "Generated ports belong in ignored project build storage.\n"
+        "No game data is embedded in the shared recompiler or runtime.\n",
+        kVersion);
+}
+
+u32 parse_address(const char* text) {
+    return static_cast<u32>(std::strtoul(text, nullptr, 0));
+}
+
+bool load_inputs(const std::string& manifest_path, Manifest& manifest, Image& image) {
+    std::string error;
+    if (!Manifest::load(manifest_path, manifest, error)) {
+        std::fprintf(stderr, "arecomp: %s\n", error.c_str());
+        return false;
+    }
+    if (!Image::load(manifest, image, error)) {
+        std::fprintf(stderr, "arecomp: %s\n", error.c_str());
+        return false;
+    }
+    return true;
+}
+
+void report_analysis(const AnalysisResult& analysis) {
+    std::printf("  blocks                : %zu\n", analysis.blocks.size());
+    std::printf("  instructions          : %u\n", analysis.instruction_count);
+    std::printf("  code bytes            : %u\n", analysis.byte_coverage());
+    std::printf("  call targets          : %zu\n", analysis.call_targets.size());
+    std::printf("  unresolved indirects  : %zu\n",
+                analysis.unresolved_indirect_sites.size());
+
+    u32 warnings = 0, errors = 0;
+    for (const Diagnostic& d : analysis.diagnostics) {
+        if (d.severity == Severity::Error) ++errors;
+        else if (d.severity == Severity::Warning) ++warnings;
+    }
+    std::printf("  diagnostics           : %u warning(s), %u error(s)\n", warnings, errors);
+
+    for (const Diagnostic& d : analysis.diagnostics) {
+        if (d.severity == Severity::Note) continue;
+        std::fprintf(stderr, "  %s $%08x: %s\n",
+                     d.severity == Severity::Error ? "error  " : "warning",
+                     d.address, d.message.c_str());
+    }
+}
+
+int command_analyze(const std::string& manifest_path) {
+    Manifest manifest;
+    Image image;
+    if (!load_inputs(manifest_path, manifest, image)) return 1;
+
+    Analyzer analyzer(image, manifest);
+    const AnalysisResult analysis = analyzer.run();
+
+    std::printf("%s (%s)\n", manifest.name.c_str(), manifest.id.c_str());
+    report_analysis(analysis);
+
+    if (!analysis.unresolved_indirect_sites.empty()) {
+        std::printf("\nunresolved indirect transfer sites:\n");
+        for (u32 site : analysis.unresolved_indirect_sites)
+            std::printf("  $%08x\n", site);
+        std::printf(
+            "\nAdd these to the manifest as [[indirect_target]] entries once a\n"
+            "trace run has observed their targets (AMIGA_RECOMP.md 26.2).\n");
+    }
+    return analysis.has_errors() ? 1 : 0;
+}
+
+int command_disasm(const std::string& manifest_path, u32 from, u32 count) {
+    Manifest manifest;
+    Image image;
+    if (!load_inputs(manifest_path, manifest, image)) return 1;
+
+    Analyzer analyzer(image, manifest);
+    const AnalysisResult analysis = analyzer.run();
+
+    u32 printed = 0;
+    for (const auto& [start, block] : analysis.blocks) {
+        if (from && block.end <= from) continue;
+        std::printf("\n%s:\n", block_symbol(start).c_str());
+        for (const DecodedInstruction& insn : block.instructions) {
+            if (from && insn.pc < from) continue;
+            std::printf("  %08x  %-40s ; %u cycles\n", insn.pc,
+                        disassemble(insn).c_str(), insn.base_cycles);
+            if (count && ++printed >= count) return 0;
+        }
+    }
+    return 0;
+}
+
+int command_bootblock(const std::string& path, bool show_disassembly) {
+    std::vector<u8> disk;
+    std::string error;
+    if (!read_file(path, disk, error)) {
+        std::fprintf(stderr, "arecomp: %s\n", error.c_str());
+        return 1;
+    }
+
+    BootblockReport report;
+    if (!analyse_bootblock(disk, report, error)) {
+        std::fprintf(stderr, "arecomp: %s\n", error.c_str());
+        return 1;
+    }
+
+    std::printf("boot block of %s\n", path.c_str());
+    std::printf("  signature : %s%s\n", report.signature.c_str(),
+                report.has_dos_signature ? "" : "   (not a DOS boot block)");
+    std::printf("  checksum  : %s\n", report.checksum_valid ? "valid" : "INVALID");
+
+    if (show_disassembly) {
+        std::printf("\ndisassembly:\n");
+        for (const std::string& line : report.disassembly)
+            std::printf("  %s\n", line.c_str());
+    }
+
+    if (!report.note.empty()) std::printf("\nnote: %s\n", report.note.c_str());
+
+    if (report.loads.empty()) {
+        std::printf(
+            "\nNothing to put in a manifest. Either disassemble the boot block\n"
+            "yourself (--disasm), or capture a snapshot after the loader has\n"
+            "run (docs/decrunching.md).\n");
+        return 0;
+    }
+
+    std::printf("\n%zu disk read(s) recognised:\n", report.loads.size());
+    for (const BootLoad& load : report.loads) {
+        std::printf("  $%08x bytes from disk $%08x -> memory $%08x  (issued at $%03x)\n",
+                    load.length, load.offset, load.address, load.site);
+    }
+    if (report.found_entry_jump)
+        std::printf("  then jumps to $%08x\n", report.entry);
+
+    std::printf("\nManifest fragment:\n\n");
+    std::printf("[input]\ntype = \"adf\"\npath = \"%s\"\n\n", path.c_str());
+    if (report.found_entry_jump)
+        std::printf("[cpu]\nentry = 0x%08x\nsr = 0x2700\n\n", report.entry);
+    for (const BootLoad& load : report.loads) {
+        std::printf("[[adf.load]]\noffset = 0x%08x\nlength = 0x%08x\naddress = 0x%08x\n\n",
+                    load.offset, load.length, load.address);
+    }
+    std::printf("Check these against the disassembly before trusting them.\n");
+    return 0;
+}
+
+int command_recompile(const std::string& manifest_path, std::string output_dir,
+                      const std::string& framework_root) {
+    Manifest manifest;
+    Image image;
+    if (!load_inputs(manifest_path, manifest, image)) return 1;
+    if (manifest.input_mode == InputMode::Hunk) {
+        std::fprintf(stderr,
+                     "arecomp: Hunk analysis is available, but generated Hunk loading/relocation\n"
+                     "         is not implemented. Supply a verified relocated flat/snapshot\n"
+                     "         image before generating an executable. Nothing was emitted.\n");
+        return 1;
+    }
+
+    if (output_dir.empty()) output_dir = "build/recomp/" + manifest.id;
+
+    Analyzer analyzer(image, manifest);
+    const AnalysisResult analysis = analyzer.run();
+
+    std::printf("%s (%s)\n", manifest.name.c_str(), manifest.id.c_str());
+    report_analysis(analysis);
+
+    if (analysis.has_errors()) {
+        std::fprintf(stderr, "arecomp: discovery failed; nothing was emitted\n");
+        return 1;
+    }
+    if (analysis.blocks.empty()) {
+        std::fprintf(stderr,
+                     "arecomp: no code discovered from entry $%08x. Check the entry\n"
+                     "         address, the load address, and the code ranges.\n",
+                     manifest.cpu.entry);
+        return 1;
+    }
+
+    std::error_code ec;
+    std::filesystem::create_directories(output_dir + "/generated", ec);
+
+    CodeGenerator generator(analysis, manifest);
+    std::string error;
+    if (!generator.emit(output_dir, error)) {
+        std::fprintf(stderr, "arecomp: %s\n", error.c_str());
+        return 1;
+    }
+
+    ProjectOptions options;
+    options.output_dir = output_dir;
+    // Project-scoped launches run in the game directory, not the source root.
+    options.framework_root = std::filesystem::absolute(framework_root).lexically_normal().string();
+
+    if (!write_project(manifest, analysis, options, error)) {
+        std::fprintf(stderr, "arecomp: %s\n", error.c_str());
+        return 1;
+    }
+    if (!write_build_report(manifest, analysis, generator.stats(),
+                            output_dir + "/build_report.txt", error)) {
+        std::fprintf(stderr, "arecomp: %s\n", error.c_str());
+        return 1;
+    }
+
+    if (!generator.stats().unsupported.empty()) {
+        std::fprintf(stderr,
+                     "arecomp: %zu instruction(s) have no translation; see %s\n",
+                     generator.stats().unsupported.size(),
+                     (output_dir + "/build_report.txt").c_str());
+        return 1;
+    }
+
+    std::printf("\nwrote %u block(s) in %u file(s) to %s\n", generator.stats().blocks,
+                generator.stats().files, output_dir.c_str());
+    std::printf("build it with:\n"
+                "  cmake -S %s -B %s/build -G Ninja\n"
+                "  cmake --build %s/build\n",
+                output_dir.c_str(), output_dir.c_str(), output_dir.c_str());
+    return 0;
+}
+
+} // namespace
+
+int main(int argc, char** argv) {
+    if (argc < 2) {
+        print_usage();
+        return 1;
+    }
+
+    const std::string command = argv[1];
+    if (command == "version" || command == "--version") {
+        std::printf("arecomp %s\n", kVersion);
+        return 0;
+    }
+    if (command == "help" || command == "--help" || command == "-h") {
+        print_usage();
+        return 0;
+    }
+
+    if (argc < 3) {
+        std::fprintf(stderr, "arecomp: %s needs a manifest path\n", command.c_str());
+        return 1;
+    }
+    const std::string manifest_path = argv[2];
+
+    std::string output_dir;
+    std::string framework_root = ARECOMP_FRAMEWORK_ROOT;
+    u32 from = 0;
+    u32 count = 0;
+    bool show_disassembly = false;
+    for (int i = 3; i < argc; ++i) {
+        const std::string arg = argv[i];
+        const bool has_value = i + 1 < argc;
+        if ((arg == "-o" || arg == "--output") && has_value) output_dir = argv[++i];
+        else if (arg == "--framework-root" && has_value) framework_root = argv[++i];
+        else if (arg == "--from" && has_value) from = parse_address(argv[++i]);
+        else if (arg == "--count" && has_value) count = parse_address(argv[++i]);
+        else if (arg == "--disasm") show_disassembly = true;
+        else {
+            std::fprintf(stderr, "arecomp: unknown option %s\n", arg.c_str());
+            return 1;
+        }
+    }
+
+    if (command == "bootblock") return command_bootblock(manifest_path, show_disassembly);
+    if (command == "diskcheck")
+        return disk_check(manifest_path, from ? static_cast<int>(from) : -1,
+                          show_disassembly);
+    if (command == "recompile") return command_recompile(manifest_path, output_dir, framework_root);
+    if (command == "analyze") return command_analyze(manifest_path);
+    if (command == "disasm") return command_disasm(manifest_path, from, count);
+
+    std::fprintf(stderr, "arecomp: unknown command %s\n", command.c_str());
+    print_usage();
+    return 1;
+}

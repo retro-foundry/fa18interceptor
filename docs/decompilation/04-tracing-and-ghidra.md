@@ -6,6 +6,11 @@ Choose a question before collecting instructions. A useful investigation
 connects a trigger, producer, state change and consumer; a long listing alone
 does not explain a game mechanic.
 
+In the default workflow, the [recompiled baseline](../recomp/porting_game.md)
+already supplies executable behavior. Use this chapter to close observed
+dispatch/loader gaps and then recover semantics for readable replacements.
+Ghidra import and broad naming do not gate the first recompilation.
+
 Choose the evidence path by coupling. Stable local math, clear calls and tables
 can start with static analysis and an exact slice. Stateful physics, collision,
 projection, dispatch or runtime mutation usually need an early recorded trigger

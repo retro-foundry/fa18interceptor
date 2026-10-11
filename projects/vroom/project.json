@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "id": "vroom",
+  "title": "Vroom",
+  "config": "local/vroom.uae",
+  "engine_root": "../../tools/engine9000/e9k-debugger",
+  "replay_engine": "build/engine9000-replay/e9k-debugger.exe",
+  "system_dir": "local/system",
+  "memory": [
+    {
+      "name": "chip",
+      "start": 0,
+      "size": 1048576
+    }
+  ],
+  "recomp_manifest": "recomp/vroom-game.toml"
+}

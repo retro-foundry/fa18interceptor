@@ -12,3 +12,24 @@ projects/*/tools/engine9000-public/
 
 tools/engine9000/
 tools/engine9000-public/
+
+# Recompiler builds and generated game translations are local artifacts.
+build-*/
+cmake-build-*/
+_deps/
+*.o
+*.obj
+*.a
+*.lib
+*.exe
+*.pdb
+*.ilk
+*.ppm
+*.hdf
+*.ipf
+*.dms
+*.uss
+*.snapshot
+*.fd
+*.FD
+compile_commands.json

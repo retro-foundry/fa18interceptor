@@ -7,6 +7,10 @@ The user's latest directions override archived plans and proof notes.
 - This project owns F/A-18 addresses, records, scenarios, interpretations,
   original media/recordings and game-specific observers. Shared Amiga methods,
   hardware support and analysis tools belong at framework level.
+- The new shared recomp-first workflow applies to future game bring-up. F/A-18
+  already has its native baseline; continue implementation in its submodule.
+  The shared `runtime/` and `tools/arecomp` are general framework components,
+  not restoration of this project's retired runtime/comparison runners.
 - All new playable native implementation and gameplay qualification belongs in
   `native/`, the `fa18-interceptor-decomp` submodule. Commit/push it first, then
   update the framework pointer. `scripts/build_native.py` forwards to its
