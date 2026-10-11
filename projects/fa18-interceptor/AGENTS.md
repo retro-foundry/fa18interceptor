@@ -6,7 +6,8 @@ The user's latest instructions override historical plans and proof notes.
 ## Active reverse-engineering framework
 
 - User direction (2026-10-10): the playable native port moved to the standalone
-  `fa18-interceptor-decomp` repository. All new native port work belongs there.
+  `fa18-interceptor-decomp` repository. Its working checkout is now the
+  `native/` submodule within this project; all new native port work belongs there.
   This supersedes the historical native runtime directions in this repository.
 - User direction (2026-10-11): remove the original CPU/machine comparison
   runners and remaining port code here. This supersedes the earlier direction
@@ -16,8 +17,10 @@ The user's latest instructions override historical plans and proof notes.
   Musashi dependency and its runtime test harness do not belong here.
 - `port/` retains historical metadata only. Do not recreate a native runner,
   comparison runner or parallel port in this repository.
-- `scripts/build_native.py` only forwards to the sibling standalone checkout;
+- `scripts/build_native.py` forwards to the manifest's `native_checkout` submodule;
   no standalone build requires this framework.
+- Commit and push changes inside `native/` first, then commit the updated
+  submodule pointer in the framework. Do not recreate a parallel native runtime.
 
 ## Analysis and evidence
 

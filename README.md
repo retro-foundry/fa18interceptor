@@ -67,3 +67,15 @@ observed instruction starts; structural functions do not establish behavior.
 See [AMIGA.md](AMIGA.md) for hardware guidance. Historical game commands are
 relative to their project directory; their archived runtime proofs require the
 commit recorded in those notes. The playable native port is a separate repository.
+
+The F/A-18 project's playable port is checked out as the
+[`projects/fa18-interceptor/native`](projects/fa18-interceptor/native/README.md)
+submodule. Initialize and build it from the framework root:
+
+```console
+git submodule update --init projects/fa18-interceptor/native
+python -m amiga_decomp --project fa18-interceptor run build_native
+```
+
+Commit and push changes within the submodule first, then commit its updated
+pointer in this framework. The native repository also builds on its own.

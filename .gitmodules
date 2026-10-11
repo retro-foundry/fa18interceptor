@@ -2,3 +2,7 @@
 	path = projects/fa18-interceptor/tools/engine9000-src
 	url = git@github.com:retro-foundry/engine9000-public.git
 	branch = fa18-interceptor
+[submodule "projects/fa18-interceptor/native"]
+	path = projects/fa18-interceptor/native
+	url = git@github.com:retro-foundry/fa18-interceptor-decomp.git
+	branch = main

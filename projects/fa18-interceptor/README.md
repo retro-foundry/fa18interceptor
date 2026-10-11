@@ -8,9 +8,21 @@ run <tool> <arguments>`. Local disks, ROMs, sealed recordings, the pinned emulat
 fork and caches were moved with the project. Their original bytes are retained.
 The manifest derives relocated runtime configs from the sealed configuration.
 
-The playable native port remains in the separate
-[fa18-interceptor-decomp](https://github.com/retro-foundry/fa18-interceptor-decomp)
-repository. Historical runtime proofs below describe archived commits.
+The playable native port is the [native](native/README.md) submodule, backed by
+the separate [fa18-interceptor-decomp](https://github.com/retro-foundry/fa18-interceptor-decomp)
+repository. It builds independently and its changes are committed and pushed
+inside that repository before updating the framework's submodule pointer.
+
+From the framework root:
+
+```console
+git submodule update --init projects/fa18-interceptor/native
+python -m amiga_decomp --project fa18-interceptor run build_native
+```
+
+Continue native development in `projects/fa18-interceptor/native/`; initialize a
+clone with `git submodule update --init`, then use `git switch main` inside the
+submodule when making changes. Historical runtime proofs below describe archived commits.
 See [Amiga findings](AMIGA_FINDINGS.md) for hardware observations from this game.
 
 ---

@@ -1,15 +1,14 @@
-"""Compatibility entry for the moved standalone native port."""
-from pathlib import Path
+"""Build the project's native-port submodule through its standalone entry."""
 import subprocess
 import sys
+from amiga_decomp.project import selected_project
 
-ROOT = Path(__file__).resolve().parents[1]
-STANDALONE = ROOT.parents[2] / "fa18-interceptor-decomp"
+STANDALONE = selected_project().path('native_checkout')
 
 def main():
     script = STANDALONE / "scripts/build_native.py"
     if not script.is_file():
-        raise SystemExit("Native port moved to https://github.com/retro-foundry/fa18-interceptor-decomp; build it from that repository")
+        raise SystemExit("Native submodule is missing; run git submodule update --init projects/fa18-interceptor/native from the framework root")
     subprocess.run([sys.executable, str(script)], cwd=STANDALONE, check=True)
 
 if __name__ == "__main__":

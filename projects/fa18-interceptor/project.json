@@ -6,7 +6,7 @@
   "engine_root": "tools/engine9000/e9k-debugger",
   "replay_engine": "build/engine9000-replay/e9k-debugger.exe",
   "system_dir": "local/system",
-  "native_checkout": "../../../fa18-interceptor-decomp",
+  "native_checkout": "native",
   "python_paths": ["scripts", "tools/native"],
   "former_roots": ["C:/Users/paula/Documents/Projects/fa18interceptor"],
   "memory": [
