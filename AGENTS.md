@@ -2,6 +2,8 @@
 
 Read `README.md` and the selected project's `AGENTS.md` before work.
 The user's latest instructions override historical plans and proof notes.
+For analysis/reconstruction, follow the current [process manual](REVERSE_ENGINEERING.md);
+keep reusable methods there and case results in the selected project.
 
 - Shared Python tools, Amiga hardware support and Ghidra integration belong at
   framework level. Game addresses, names, routines, data, media, reports and

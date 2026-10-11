@@ -5,6 +5,13 @@ inputs and output paths are interpreted inside the selected project. Shared
 Python import paths also reach child processes; project modules supply only
 game-specific observers and analysis policy.
 
+For ordered procedures, required artifacts and acceptance limits, use the
+[process manual](../REVERSE_ENGINEERING.md). In particular, the
+[tracing guide](../docs/decompilation/04-tracing-and-ghidra.md) explains the
+Ghidra packet schemas, the [hardware/audio guide](../docs/decompilation/07-hardware-os-and-audio.md)
+documents observer and service contracts, and the
+[maintenance guide](../docs/decompilation/08-evidence-and-maintenance.md) explains retention.
+
 | Task | Framework tools |
 | --- | --- |
 | Reference execution | `engine9000_bridge`, `profile_window`, `capture_run_checkpoint` |

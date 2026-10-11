@@ -5,6 +5,12 @@ importing observed RAM into Ghidra and recording reconstruction evidence.
 Game-specific work lives in `projects/<id>/`; shared tools do not select a game
 implicitly. The existing case study is [F/A-18 Interceptor](projects/fa18-interceptor/README.md).
 
+The [decompilation process manual](REVERSE_ENGINEERING.md) documents the full
+workflow in eight chapters: authority/setup, recording/replay, loaded memory
+and Hunks, tracing/Ghidra, source reconstruction, validation, hardware/OS/audio,
+and evidence maintenance. Each stage specifies inputs, commands, expected
+artifacts, acceptance evidence and the limits of the current tools.
+
 Python 3.11 or newer is required. Install `capstone` for 68000 instruction tracing
 and disassembly, `numpy` for DMA/raster analysis, and `Pillow` for image tools.
 The Engine9000 ctypes host currently uses the Windows DLL ABI;
@@ -48,7 +54,9 @@ externally installed emulator or ROM directory.
 ```
 
 Configure memory regions from the actual machine setup. Keep its analyses,
-source reconstruction, project scripts in that project. Shared Engine9000 source and patches live under `tools/` and `patches/`; select installations through the manifest.
+source reconstruction and project scripts in that project. Shared Engine9000
+source and patches live under `tools/` and `patches/`; select installations
+through the manifest.
 Optional `python_paths` exposes project analysis modules. `former_roots` lets
 the host derive relocated UAE path values without changing sealed configs.
 Game audio observers and artifact retention exceptions are optional project

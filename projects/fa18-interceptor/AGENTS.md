@@ -1,60 +1,32 @@
-# Repository instructions
+# F/A-18 project instructions
 
-Read the framework `../../AGENTS.md`, `CURRENT_PORT_HANDOFF.md`, `PORT.md` and `port/README.md` before work.
-The user's latest instructions override historical plans and proof notes.
+Read [the framework instructions](../../AGENTS.md), [project README](README.md)
+and [framework process manual](../../REVERSE_ENGINEERING.md) before analysis.
+The user's latest directions override archived plans and proof notes.
 
-## Active reverse-engineering framework
-
-- User direction (2026-10-10): the playable native port moved to the standalone
-  `fa18-interceptor-decomp` repository. Its working checkout is now the
-  `native/` submodule within this project; all new native port work belongs there.
-  This supersedes the historical native runtime directions in this repository.
-- User direction (2026-10-11): remove the original CPU/machine comparison
-  runners and remaining port code here. This supersedes the earlier direction
-  to keep `fa18_recomp`, `fa18_romfree` and shared `port/game/` routines.
-- Keep the original disk, sealed recordings, analysis, P-code/Ghidra work and
-  Engine9000 capture/instrumentation tools. The retired port runtime, its
-  Musashi dependency and its runtime test harness do not belong here.
-- `port/` retains historical metadata only. Do not recreate a native runner,
-  comparison runner or parallel port in this repository.
-- `scripts/build_native.py` forwards to the manifest's `native_checkout` submodule;
-  no standalone build requires this framework.
-- Commit and push changes inside `native/` first, then commit the updated
-  submodule pointer in the framework. Do not recreate a parallel native runtime.
-
-## Analysis and evidence
-
-- Native implementation and gameplay validation belong in the standalone
-  checkout. This repository supports original-byte analysis and recordings.
-- Keep original source/disk behavior authoritative. Emulator/ROM runs, captures
-  and historical proofs are reference evidence, not replacement game behavior.
-- Report component correctness and runtime integration separately. Claim
-  emulation independence only for the scope actually demonstrated; do not label
-  ROM independence or static opcode helpers as CPU/chipset independence.
-- The 614/699 readable-entry count measures known routine reconstruction only.
-  It does not measure emulation-removal effort or whole-game completeness.
-  Give estimates only with their scope, assumptions and supporting evidence.
-- Use the retained analysis/capture tools and their affected tests. Historical
-  port proofs require the pre-retirement checkout (`b04eaa35`); references in
-  archived reports are provenance, not instructions to restore the runtime.
-
-## Preserve
-
+- This project owns F/A-18 addresses, records, scenarios, interpretations,
+  original media/recordings and game-specific observers. Shared Amiga methods,
+  hardware support and analysis tools belong at framework level.
+- All new playable native implementation and gameplay qualification belongs in
+  `native/`, the `fa18-interceptor-decomp` submodule. Commit/push it first, then
+  update the framework pointer. `scripts/build_native.py` forwards to its
+  standalone build script.
+- The original CPU/machine comparison runners, port runtime and Musashi
+  dependency were removed at the user's request on 2026-10-11. Do not recreate
+  a parallel native runtime or comparison runner here. `port/` contains
+  historical metadata only.
+- Original bytes and observed behavior remain authoritative. Routine counts,
+  structural P-code and historical milestones do not establish whole-game
+  completeness or runtime independence. Keep the original evidence scope.
+- Historical port reports require their recorded checkout, often `b04eaa35`.
+  `PORT.md`, the port handoffs, `STATUS.md` and the `.history.md` files are
+  archives; their commands are provenance rather than current build directions.
+- The user waived the uninterrupted campaign requirement in favor of repeated
+  individual mission tests. Residual internal-state cleanup is separately
+  deferred outside the playable-completion goal.
 - Do not modify `scripts/check_native_build.py`, `scripts/native_frame_count.py`
-  or `port/native_data_allowlist.txt`.
-- Preserve unrelated user changes, including `.vscode/`, and sealed recordings.
-- Commit completed validated batches as the user previously requested.
-
-## Build artifact retention
-
-- User direction (2026-10-07): keep workspace disk use bounded with
-  `python -m amiga_decomp run prune_build_artifacts` and its 4 GiB build-cache budget.
-  Do not disable retained cleanup hooks or accumulate raw passing RAM.
-- Native mode/postflight/window comparisons use temporary capture storage by
-  default and retain reports plus the failing case. Use `--keep-captures` only
-  for a concrete unresolved investigation; remove passing copies afterwards.
-- Manual diagnostic captures default to 512 MiB. Use bounded ranges; increasing
-  `--capture-budget-mib` is an explicit diagnostic choice, not a new default.
-- Retain reusable original RAM compressed as `.dat.gz`, with hashes/reports.
-  Run the pruner after direct emulator capture commands as well. Preserve
-  canonical `captures/`, media, active build dependencies and user settings.
+  or `port/native_data_allowlist.txt`. Preserve sealed recordings and unrelated
+  user settings, including `.vscode/`.
+- Follow the shared 4 GiB build-cache and 512 MiB diagnostic capture defaults;
+  select this project explicitly when pruning. Retain reports, compressed
+  reusable authority and failing cases; do not rewrite original configs.

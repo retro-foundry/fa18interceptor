@@ -5,6 +5,51 @@ execution are the authority. The framework supplies capture, replay, Hunk and
 trace analysis, hardware observers and Ghidra integration. A game's reconstructed
 source and playable port belong to its own project or repository.
 
+## Process manual
+
+The chapters below document the complete investigation and reconstruction
+process, including exact tool inputs, evidence requirements and current limits.
+Read them in order for a new game; use them as references during ongoing work.
+
+| Stage | Guide | Required result |
+| --- | --- | --- |
+| Authority and setup | [1. Project and authority](docs/decompilation/01-project-and-authority.md) | Original hashes, machine configuration and pinned tools. |
+| Recording | [2. Capture and replay](docs/decompilation/02-capture-and-replay.md) | Preserved input/state/config and an understood restore boundary. |
+| Loaded program | [3. Memory and Hunks](docs/decompilation/03-memory-and-hunks.md) | Verified placements, relocation formulas and code/data hypotheses. |
+| Investigation | [4. Tracing and Ghidra](docs/decompilation/04-tracing-and-ghidra.md) | Observed bytes, caller/state/consumer evidence and bounded exports. |
+| Reconstruction | [5. Source reconstruction](docs/decompilation/05-source-reconstruction.md) | Byte-exact assembly, routine contracts and connected C changes. |
+| Qualification | [6. Validation and divergence](docs/decompilation/06-validation-and-divergence.md) | Scoped comparisons and an explicit timing policy. |
+| Platform | [7. Hardware, OS and audio](docs/decompilation/07-hardware-os-and-audio.md) | Observed DMA/service contracts and qualified sound output. |
+| Maintenance | [8. Evidence and handoff](docs/decompilation/08-evidence-and-maintenance.md) | Reproducible reports, bounded caches and current next steps. |
+
+```mermaid
+flowchart LR
+    A[Original media and machine] --> B[Recorded scenarios]
+    B --> C[Verified loaded bytes]
+    C --> D[Focused traces and structural analysis]
+    D --> E[Exact source and routine contracts]
+    E --> F[Connected implementation and comparisons]
+    F -->|Divergence or missing scenario| D
+    F --> G[Qualified results with stated scope]
+```
+
+These stages are dependencies rather than a one-way waterfall. A trace can
+reveal a relocated overlay; a source comparison can invalidate a boundary;
+a rendering mismatch can require another scenario. Update the evidence rather
+than forcing a discovery into an earlier assumption.
+
+The framework does not currently ship a general disk extraction/decrunching
+pipeline, whole-program translator, CPU interpreter, replacement chipset
+runtime, general C shadow harness or automatic semantic discovery. Chapters
+describe these methods where useful without presenting historical project
+commands as implemented framework features.
+
+Chapter examples use `your-game` as a replaceable project ID. Uppercase tokens
+such as `ENTRY_PC`, `FRAME` and `GHIDRA_HEADLESS` must be replaced with measured
+addresses/counts or installed paths; they are not literal arguments or defaults.
+Run the launcher from the framework root. Relative tool paths and artifact
+arguments then resolve from the selected project root.
+
 The method grew out of F/A-18 Interceptor. Its historical results and estimates
 are [project evidence](projects/fa18-interceptor/analysis/reconstruction_history.md),
 and do not describe every game's hardware configuration or prove a new port.
