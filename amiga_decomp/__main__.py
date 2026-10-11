@@ -44,9 +44,9 @@ def main() -> int:
         environment['AMIGA_DECOMP_PROJECT'] = str(project.manifest)
         paths = [FRAMEWORK_ROOT, FRAMEWORK_ROOT / 'scripts']
         paths += [project.root / p for p in project.settings.get('python_paths', ['scripts'])]
-        if environment.get('PYTHONPATH'):
-            paths.append(Path(environment['PYTHONPATH']))
         environment['PYTHONPATH'] = os.pathsep.join(map(str, paths))
+        if os.environ.get('PYTHONPATH'):
+            environment['PYTHONPATH'] += os.pathsep + os.environ['PYTHONPATH']
         return subprocess.run([sys.executable, str(scripts[0]), *args.arguments],
                               cwd=project.root, env=environment, check=False).returncode
     except (ValueError, FileNotFoundError, KeyError) as error:

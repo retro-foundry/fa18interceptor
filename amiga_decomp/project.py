@@ -71,6 +71,10 @@ def load_project(selection: str | Path) -> Project:
     for key in ('title', 'config', 'engine_root', 'replay_engine', 'system_dir'):
         if not isinstance(settings.get(key), str) or not settings[key]:
             raise ValueError(f'Project requires {key}: {manifest}')
+    for directory in settings.get('artifact_policy', {}).get('build_roots', ['build']):
+        path = Path(directory)
+        if path.is_absolute() or '..' in path.parts or 'build' not in path.parts or 'captures' in path.parts:
+            raise ValueError(f'Artifact roots must be project-local build directories: {directory}')
     regions = settings.get('memory')
     if not isinstance(regions, list) or not regions:
         raise ValueError('Project requires captured memory regions')
@@ -78,7 +82,7 @@ def load_project(selection: str | Path) -> Project:
     intervals = []
     for region in regions:
         name, start, size = region['name'], region['start'], region['size']
-        if not re.fullmatch(r'[a-z][a-z0-9_]*', name) or name in names:
+        if not isinstance(name, str) or not re.fullmatch(r'[a-z][a-z0-9_]*', name) or name in names:
             raise ValueError(f'Invalid or duplicate memory region: {name}')
         if type(start) is not int or type(size) is not int or not 0 <= start < start + size <= 0x1000000:
             raise ValueError(f'Invalid Amiga memory interval: {region}')

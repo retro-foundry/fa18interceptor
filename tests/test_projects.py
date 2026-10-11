@@ -103,6 +103,14 @@ class Projects(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_project(project.manifest)
 
+    def test_manifest_cannot_designate_sealed_or_external_data_as_build_cache(self):
+        project = self.project('invalid-cache')
+        for directory in ('captures', 'captures/build', '../other-game/build', str(self.root / 'build')):
+            project.settings['artifact_policy'] = {'build_roots': [directory]}
+            project.manifest.write_text(json.dumps(project.settings))
+            with self.assertRaisesRegex(ValueError, 'project-local build'):
+                load_project(project.manifest)
+
     def test_snapshot_relocation_changes_only_checked_config_identity(self):
         before, after = b'floppy0=C:/old/disk.adf', b'floppy0=C:/new/disk.adf'
         raw = struct.pack('<8sIQQIQ', b'E9KSNAP\0', 8, 13, checksum(before), 6, 1) + bytes(range(256))

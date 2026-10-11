@@ -399,6 +399,10 @@ def main():
                         help='With --audio-samples and a mixer observer, limit logical mixer records to these replay calls; keep complete PCM/sample/execution output')
     parser.add_argument('--capture-budget-mib', type=int, default=512)
     args = parser.parse_args()
+    for enabled, name in ((args.audio_events, 'events'), (args.audio_dma, 'dma'),
+                          (args.audio_samples, 'samples')):
+        if enabled and name not in PROJECT.settings.get('audio_observers', {}):
+            parser.error(f'The selected project does not define its {name} audio observer')
     if args.trace_frames and args.normal_custom_log:
         parser.error('--normal-custom-log cannot be combined with --trace-frames')
     if args.wav and args.trace_frames:

@@ -14,7 +14,7 @@ their hashes. The emulator submodule remains clean at
 
 Shared tool validation:
 
-- Seven framework tests pass with two separate temporary project manifests,
+- Eight framework tests pass with two separate temporary project manifests,
   propagated child context, a non-A500 memory map, isolated artifact pruning,
   rejected changed instruction bytes and checked config/snapshot relocation.
 - A real five-frame power-on capture before and after relocation matches CPU
