@@ -4,7 +4,7 @@
 #include "../../port/machine/bus.c"
 #undef fa18_bus_begin
 #include "../../port/recomp/loop_input.h"
-#include "../../port/native/frame_delta.c"
+#include "../../../fa18-interceptor-decomp/src/diagnostics/frame_delta.c"
 
 static void delta_error(unsigned line) {
     fprintf(stderr,"Original frame delta rejected at line %u, iteration %ld, PC %06X\n",

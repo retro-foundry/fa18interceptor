@@ -9,7 +9,7 @@
 #undef fa18_loop_finish
 #undef fa18_loop_iteration
 #include "../../port/amiga/host_keys.h"
-#include "mission_pilot.h"
+#include "../../../fa18-interceptor-decomp/tools/native/mission_pilot.h"
 
 static FILE *pilot_record;
 static NativeFrontend observation;
@@ -34,7 +34,7 @@ void native_frontend_event(NativeFrontend *game,int code,int down) {
     fprintf(pilot_record,"%ld %ld K %d %d\n",iteration+1,frame,raw,down);
     fflush(pilot_record);
 }
-#include "mission_pilot.c"
+#include "../../../fa18-interceptor-decomp/tools/native/mission_pilot.c"
 
 static void release_once(unsigned stamp,unsigned *released,int key) {
     if(stamp && stamp!=*released && observation.ticks>=stamp+2) {

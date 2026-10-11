@@ -16,6 +16,8 @@ import tempfile
 from check_gameplay_checkpoint import ROOT, integer
 from compare_flight_traces import read_trace, number
 
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
+
 
 def digest(data):
     return hashlib.sha256(data).hexdigest()
@@ -156,8 +158,8 @@ def main():
             driver_identity = dict(
                 driver_executable_sha256=digest((ROOT / 'build/recomp/fa18_original_mission_pilot.exe').read_bytes()),
                 driver_source_sha256=digest((ROOT / 'tools/native/original_mission_pilot_loop.c').read_bytes()),
-                controller_source_sha256=digest((ROOT / 'tools/native/mission_pilot.c').read_bytes()),
-                controller_header_sha256=digest((ROOT / 'tools/native/mission_pilot.h').read_bytes()))
+                controller_source_sha256=digest((STANDALONE / 'tools/native/mission_pilot.c').read_bytes()),
+                controller_header_sha256=digest((STANDALONE / 'tools/native/mission_pilot.h').read_bytes()))
             code = run(ROOT / 'build/recomp/fa18_original_mission_pilot.exe', driver_input, args.out / 'driver.log',
                 work / 'driver.jsonl', work / 'driver.dat', args.out / 'consumed.fa18in',
                 dict(FA18_ORIGINAL_PILOT_INPUT=str((args.out / 'input.fa18in').resolve()),

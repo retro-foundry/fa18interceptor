@@ -9,12 +9,13 @@ from pathlib import Path
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--runner', type=Path,
-                        default=ROOT / 'build/native-cmake/native/Release/fa18_native_scene_exit_test.exe')
+                        default=STANDALONE / 'build/native-cmake/native/Release/fa18_native_scene_exit_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/scene-exit-check')
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)

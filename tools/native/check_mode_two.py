@@ -13,11 +13,12 @@ from capture_workspace import CaptureWorkspace, retain_failure
 from region_pilot_fixture import load_region_pilot
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_mode_two_test.exe')
+    parser.add_argument('--test', type=Path, default=STANDALONE / 'build/native-cmake/native/Release/fa18_native_mode_two_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mode-check')
     parser.add_argument('--mode', type=int, choices=(2,3,4,5,6,7,8,125), default=2)
     parser.add_argument('--aircraft', type=int, choices=(1,2), default=1)

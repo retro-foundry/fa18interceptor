@@ -22,6 +22,7 @@ from report_frame_times import report, summarize
 from tour_pilot_fixture import load_tour_pilot, load_tour_result, tour_input
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 
 
 def sha(path):
@@ -239,7 +240,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--mode', type=int, choices=(5, 6, 7, 8), default=8)
     parser.add_argument('--frames', type=int, default=21550)
-    parser.add_argument('--runner', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native.exe')
+    parser.add_argument('--runner', type=Path, default=STANDALONE / 'build/native-cmake/native/Release/fa18_native.exe')
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--clock', choices=('pal', 'host'), default='pal',
         help='PAL exact diagnostic comparison or actual default-host visible gameplay')

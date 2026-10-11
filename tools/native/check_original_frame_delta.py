@@ -143,7 +143,8 @@ def main():
         print(f"{result['actual_owner_returns_matching']} actual original caller returns verified; wrong caller rejected")
         return
     probe_sources = ('tools/native/original_frame_delta_probe.c', 'tools/native/original_frame_delta_loop.c',
-                     'port/native/frame_delta.c', 'port/native/frame_delta.h')
+                     '../fa18-interceptor-decomp/src/diagnostics/frame_delta.c',
+                     '../fa18-interceptor-decomp/src/diagnostics/frame_delta.h')
     source_hashes = {path: digest((ROOT / path).read_bytes()) for path in probe_sources}
     args.out.mkdir(parents=True, exist_ok=True)
     probe = ROOT / 'build/recomp/fa18_original_frame_delta_probe.exe'

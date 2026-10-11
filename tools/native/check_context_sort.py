@@ -17,6 +17,7 @@ from capture_workspace import CaptureWorkspace, retain_failure
 from tour_pilot_fixture import load_tour_pilot
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 
 
 def verify_sort_coverage(cases):
@@ -33,7 +34,7 @@ def verify_sort_coverage(cases):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_context_sort_test.exe')
+    parser.add_argument('--test', type=Path, default=STANDALONE / 'build/native-cmake/native/Release/fa18_native_context_sort_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/context-sort-check')
     args = parser.parse_args()
     work = args.out.resolve()

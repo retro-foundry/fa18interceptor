@@ -13,11 +13,12 @@ import sys
 from capture_workspace import CaptureWorkspace, retain_failure
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_qualification_sequence_test.exe')
+    parser.add_argument('--test', type=Path, default=STANDALONE / 'build/native-cmake/native/Release/fa18_native_qualification_sequence_test.exe')
     parser.add_argument('--game-input', type=Path, default=ROOT / 'tools/native/fixtures/carrier_qualification_game_input.fa18in')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/qualification-sequence')
     parser.add_argument('--new-pilot', action='store_true', help='Reopen a validation-only saved pilot with qualification word zero')

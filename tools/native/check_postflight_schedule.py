@@ -12,11 +12,12 @@ import sys
 from capture_workspace import CaptureWorkspace, retain_failure
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_postflight_schedule_test.exe')
+    parser.add_argument('--test', type=Path, default=STANDALONE / 'build/native-cmake/native/Release/fa18_native_postflight_schedule_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/postflight-schedule/original-check')
     parser.add_argument('--keep-captures', action='store_true', help='Retain all raw RAM for deliberate debugging')
     args = parser.parse_args()

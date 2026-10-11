@@ -9,7 +9,7 @@
 #include "m68kops.h"
 #include "recomp_runtime.h"
 #include "recomp_ports.h"
-#include "../../port/amiga/ilbm.c"
+#include "../../../fa18-interceptor-decomp/src/assets/ilbm.c"
 #include "../../../fa18-interceptor-decomp/src/cockpit/cockpit_assets.c"
 extern int64_t fa18_next_event;
 uint8_t *native_storage_range(uint32_t address,size_t bytes) {

@@ -15,6 +15,7 @@ from capture_workspace import CaptureWorkspace
 from mission_source_comparison import compare_mission_boundaries
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 END_TICK = 19500
 
 
@@ -60,7 +61,7 @@ def objective_evidence(exports, formation_length, expected_hit_slots=(8, 10)):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_mission_success_test.exe')
+    parser.add_argument('--test', type=Path, default=STANDALONE / 'build/native-cmake/native/Release/fa18_native_mission_success_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mission-five-objective')
     args = parser.parse_args()
     work = args.out.resolve()

@@ -21,6 +21,7 @@ from tour_pilot_fixture import load_tour_pilot, tour_input, load_tour_result
 from final_sequence_capture import collect_final_sequence
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 
 
 def rescue_evidence(exports, bodies, entries, objective):
@@ -68,10 +69,10 @@ def cruise_evidence(exports, bodies, objective):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_mission_success_test.exe')
+    parser.add_argument('--test', type=Path, default=STANDALONE / 'build/native-cmake/native/Release/fa18_native_mission_success_test.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/mission-success-check')
     parser.add_argument('--mode', type=int, choices=(3, 4, 5, 6, 7, 8), default=3)
-    parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe',
+    parser.add_argument('--runner', type=Path, default=STANDALONE / 'build/native/fa18_native.exe',
                         help='Playable runner for escort, rescue, cruise and final-mission replays')
     parser.add_argument('--sequence', action='store_true', help='Finish result messages and press Escape to restart into the menu')
     parser.add_argument('--new-pilot', action='store_true', help='Run a later mission sequence from its actual newly enlisted pilot save chain')

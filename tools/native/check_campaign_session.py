@@ -14,6 +14,7 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
+STANDALONE = ROOT.parent / 'fa18-interceptor-decomp'
 
 
 def sha(data):
@@ -22,8 +23,8 @@ def sha(data):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--test', type=Path, default=ROOT / 'build/native-cmake/native/Release/fa18_native_campaign_session_test.exe')
-    parser.add_argument('--runner', type=Path, default=ROOT / 'build/native/fa18_native.exe')
+    parser.add_argument('--test', type=Path, default=STANDALONE / 'build/native-cmake/native/Release/fa18_native_campaign_session_test.exe')
+    parser.add_argument('--runner', type=Path, default=STANDALONE / 'build/native/fa18_native.exe')
     parser.add_argument('--out', type=Path, default=ROOT / 'build/native-flight/campaign-session')
     parser.add_argument('--timeout', type=float, default=600, help='Deadline for each complete continuous run, seconds')
     parser.add_argument('--live-enlistment', action='store_true', help='Enlist inside the campaign process, retaining the original ADF startup difficulty')

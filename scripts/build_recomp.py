@@ -142,12 +142,10 @@ def main() -> int:
         "  rspfile_content = $in",
     ]
     for source, obj in zip(sources, objects):
-        rule = "cc"
+        rule = "cc_native_oracle" if source.parent == Path("tools/native") else "cc"
         if source == args.main:
             if args.romfree:
                 rule = "cc_romfree"
-            elif source.parent == Path("tools/native"):
-                rule = "cc_native_oracle"
         lines.append(f"build {ninja_path(obj)}: {rule} {ninja_path(source)}")
     lines.append(f"build {ninja_path(args.output)}: link " +
                  " ".join(ninja_path(obj) for obj in objects))

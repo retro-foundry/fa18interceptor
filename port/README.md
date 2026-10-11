@@ -1,5 +1,11 @@
 # Active port source ownership
 
+`port/game/` now contains reconstruction routines used by `fa18_recomp` and
+`fa18_romfree`, including their CPU comparison glue. The playable native game,
+its component test sources and its private SDL/PCM allocation code live only
+in the standalone repository. Original-instruction probes remain here and read
+the standalone sources when comparing native behavior.
+
 Native port moved (2026-10-10): the playable port is now maintained in
 [fa18-interceptor-decomp](https://github.com/retro-foundry/fa18-interceptor-decomp).
 Build and edit the native game there. This repository retains the decompilation
