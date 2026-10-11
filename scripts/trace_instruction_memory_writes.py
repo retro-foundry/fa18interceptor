@@ -8,7 +8,7 @@ from collections import deque
 
 import capstone
 
-from engine9000_bridge import Engine, ROOT
+from engine9000_bridge import Engine, ROOT, PROJECT
 from profile_window import read_events
 
 
@@ -36,7 +36,7 @@ def main() -> None:
     parser.add_argument("--context-instructions", type=int, default=0,
                         help="attach this many preceding stepped instructions to each write")
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--config", type=Path, default=ROOT / "local" / "fa18.uae")
+    parser.add_argument("--config", type=Path, default=PROJECT.path('config'))
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
     if args.start_immediately:

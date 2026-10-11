@@ -28,7 +28,7 @@ def main():
     if capture.exists():
         raise FileExistsError(capture)
     recording = ROOT / 'local' / 'start_demo.e9k'
-    command = ['python', str(ROOT / 'scripts' / 'engine9000_bridge.py'),
+    command = ['python', '-m', 'amiga_decomp', 'run', 'engine9000_bridge',
                '--restore', str(BASE / 'state.bin'), '--config', str(ROOT / 'local' / 'fa18.uae'),
                '--playback', str(recording), '--frames', str(args.frames), '--output', str(capture)]
     subprocess.run(command, check=True)

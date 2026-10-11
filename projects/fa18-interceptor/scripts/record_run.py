@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import time
 from make_gui_snapshot import package
+from amiga_decomp.project import selected_project
 
 ROOT = Path(__file__).resolve().parents[1]
 ENGINE = ROOT / 'build/engine9000-replay'
@@ -103,9 +104,10 @@ def main():
     (run / 'toolchain.json').write_text(json.dumps(toolchain, indent=2) + '\n', encoding='utf-8')
     config = ROOT / 'local/fa18.uae'
     shutil.copyfile(config, run / 'config.uae')
-    (run / 'saves/fa18.uae.e9k-save').write_bytes(package(initial_state.read_bytes(), config.read_bytes(), 0))
+    runtime_config = selected_project().runtime_config(config)
+    (run / 'saves/fa18.uae.e9k-save').write_bytes(package(initial_state.read_bytes(), runtime_config.read_bytes(), 0))
     restore_marker = run / 'boot-restore.json'
-    command = [str(engine), '--amiga', '--uae', str(config),
+    command = [str(engine), '--amiga', '--uae', str(runtime_config),
                '--system-dir', str(ROOT / 'local/system'), '--save-dir', str(run / 'saves'),
                '--record', str(run / 'inputs.e9k'), '--window-size', '1400x900']
     # Engine9000 selects its preferences through APPDATA. Isolate only this child
@@ -121,6 +123,7 @@ def main():
                 'initial_frame': 0, 'recording': 'inputs.e9k', 'status': 'starting',
                 'baseline': str(initial_state.relative_to(ROOT)), 'created': datetime.datetime.now().isoformat(),
                 'recording_protocol': 'engine9000-boot-restore-v1',
+                'runtime_config_sha256': hashlib.sha256(runtime_config.read_bytes()).hexdigest(),
                 'restore_frame': args.restore_frame}
     (run / 'run.json').write_text(json.dumps(manifest, indent=2) + '\n')
     hwnd = window(process.pid)

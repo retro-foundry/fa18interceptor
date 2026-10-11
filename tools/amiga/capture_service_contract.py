@@ -11,8 +11,12 @@ import json
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "scripts"))
+FRAMEWORK_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(FRAMEWORK_ROOT))
+from amiga_decomp.project import selected_project
+PROJECT = selected_project()
+ROOT = PROJECT.root
+sys.path.insert(0, str(FRAMEWORK_ROOT / 'scripts'))
 from engine9000_bridge import Engine, ENGINE, U, P
 
 
@@ -22,9 +26,9 @@ def sha(path):
 
 def snapshot(engine, output, label):
     files = {}
-    for name, address in (("chip", 0), ("slow", 0xC00000)):
+    for name, address, size in PROJECT.memory_regions:
         path = output / f"{label}_{name}.bin"
-        path.write_bytes(engine.memory(address, 0x80000))
+        path.write_bytes(engine.memory(address, size))
         files[path.name] = sha(path)
     state = output / f"{label}_state.bin"
     state.write_bytes(engine.state())

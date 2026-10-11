@@ -6,6 +6,8 @@ The default core is unmodified. --audio-samples requires an explicitly selected
 isolated observer DLL and separate paired PCM/execution preservation.
 """
 import argparse
+import importlib
+import sys
 import ctypes as C
 import hashlib
 import json
@@ -14,12 +16,15 @@ import time
 import wave
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from amiga_decomp.project import selected_project
+PROJECT = selected_project()
+ROOT = PROJECT.root
 # Captures may be sealed with the standalone replay runner. Keep the tools
 # core as the default, but allow a caller to select the exact recorded engine
 # root for instruction-faithful traces.
-ENGINE = Path(os.environ.get('FA18_ENGINE_ROOT',
-                            str(ROOT / 'tools/engine9000/e9k-debugger')))
+ENGINE = Path(os.environ.get('AMIGA_DECOMP_ENGINE_ROOT',
+                            str(PROJECT.path('engine_root'))))
 U = C.c_uint
 P = C.c_void_p
 S = C.c_size_t
@@ -98,7 +103,7 @@ class Engine:
             if line.startswith('puae_'):
                 key, val = line.split('=', 1)
                 self.overrides[key.encode()] = val.encode()
-        self.paths = {9: str(ROOT / 'local/system').encode(), 31: str(save_dir).encode()}
+        self.paths = {9: str(PROJECT.path('system_dir')).encode(), 31: str(save_dir).encode()}
         self.keyboard = None
         self.keys = {}
         self.joy = {}
@@ -159,7 +164,8 @@ class Engine:
         self.bind('e9k_debug_add_breakpoint', None, U)
         self.bind('e9k_debug_remove_breakpoint', None, U)
         self.core.retro_init()
-        game = Game(str(config).encode(), None, 0, None)
+        self.runtime_config = PROJECT.runtime_config(config)
+        game = Game(str(self.runtime_config).encode(), None, 0, None)
         if not self.core.retro_load_game(C.byref(game)):
             raise RuntimeError('Engine9000 failed to load UAE config')
         # Same automatic controller devices and reset as the stock frontend.
@@ -376,7 +382,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--playback', type=Path)
     parser.add_argument('--restore', type=Path)
-    parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
+    parser.add_argument('--config', type=Path, default=PROJECT.path('config'))
     parser.add_argument('--start-frame', type=int, default=0)
     parser.add_argument('--trace-frames', type=int, default=0,
                         help='Single-step this many video frames after the normal replay window')
@@ -401,8 +407,8 @@ def main():
         parser.error('--audio-events requires --wav/--restore and its own filtered custom log')
     if args.audio_dma and not args.audio_events:
         parser.error('--audio-dma requires --audio-events')
-    if args.audio_samples and (not args.audio_events or 'FA18_ENGINE_ROOT' not in os.environ):
-        parser.error('--audio-samples requires --audio-events and explicit FA18_ENGINE_ROOT observer selection')
+    if args.audio_samples and (not args.audio_events or 'AMIGA_DECOMP_ENGINE_ROOT' not in os.environ):
+        parser.error('--audio-samples requires --audio-events and explicit AMIGA_DECOMP_ENGINE_ROOT observer selection')
     if args.audio_mixer_call_range and (not args.audio_samples or args.start_frame != 0 or
             not 1 <= args.audio_mixer_call_range[0] <= args.audio_mixer_call_range[1] <= args.frames):
         parser.error('--audio-mixer-call-range requires --audio-samples, start frame zero and 1 <= FIRST <= LAST <= frames')
@@ -453,7 +459,8 @@ def main():
         engine.audio_capture.setparams((2, 2, int(rate), 0, 'NONE', 'not compressed'))
         engine.audio_capture_log = (args.output / 'audio_chunks.jsonl').open('w', encoding='utf8')
     if args.audio_events:
-        from original_audio_events import audio_state, VoiceReader
+        observer = importlib.import_module(PROJECT.settings['audio_observers']['events'])
+        audio_state, VoiceReader = observer.audio_state, observer.VoiceReader
         if not engine.led_interface_available:
             raise RuntimeError('Original core did not request the LED interface')
         engine.audio_events = (args.output / 'audio_events.jsonl').open('w', encoding='utf8')
@@ -473,11 +480,11 @@ def main():
     dma = None
     dma_report = None
     if args.audio_dma:
-        from original_audio_dma import AudioDmaWriter
+        AudioDmaWriter = importlib.import_module(PROJECT.settings['audio_observers']['dma']).AudioDmaWriter
         dma = AudioDmaWriter(engine, (args.output / 'audio_dma.bin').open('wb'))
     sample_observer = sample_report = None
     if args.audio_samples:
-        from original_audio_samples import AudioSamplesWriter
+        AudioSamplesWriter = importlib.import_module(PROJECT.settings['audio_observers']['samples']).AudioSamplesWriter
         sample_observer = AudioSamplesWriter(engine, (args.output / 'audio_samples.bin').open('wb'), ENGINE,
                                             args.audio_mixer_call_range)
     try:
@@ -523,7 +530,7 @@ def main():
         raise RuntimeError('Reference emulator emitted no PCM samples')
     (args.output / 'state.bin').write_bytes(engine.state())
     maps = []
-    for name, address, size in [('chip', 0, 0x80000), ('slow', 0xc00000, 0x80000)]:
+    for name, address, size in PROJECT.memory_regions:
         payload = engine.memory(address, size)
         (args.output / f'{name}.bin').write_bytes(payload)
         maps.append({'name': name, 'start': address, 'size': size, 'file': f'{name}.bin', 'sha256': sha(payload)})
@@ -532,6 +539,7 @@ def main():
               'hardware_frame': engine.hardware_frame,
               'authority': {'core_sha256': sha((ENGINE / 'system/ami9000.dll').read_bytes()),
                             'config_sha256': sha(args.config.read_bytes()),
+                            'runtime_config_sha256': sha(engine.runtime_config.read_bytes()),
                             'initial_state_sha256': sha(args.restore.read_bytes()) if args.restore else None,
                             'recording_sha256': sha(args.playback.read_bytes()) if args.playback else None,
                             'snapshot_sha256': sha((args.output / 'state.bin').read_bytes())},
@@ -617,7 +625,7 @@ def main():
             'limitation': 'Single-stepping calls retro_run repeatedly; held-input/autorepeat equivalence needs separate verification.'
         }, indent=2)+'\n')
         trace_final = {}
-        for name, address, size in [('chip', 0, 0x80000), ('slow', 0xc00000, 0x80000)]:
+        for name, address, size in PROJECT.memory_regions:
             payload = engine.memory(address, size)
             (args.output / f'trace_final_{name}.bin').write_bytes(payload)
             trace_final[f'{name}_sha256'] = sha(payload)

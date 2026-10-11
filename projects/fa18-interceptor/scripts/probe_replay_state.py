@@ -11,7 +11,7 @@ from pathlib import Path
 import subprocess
 import time
 
-from playback_run import ENGINE, ROOT, working_copy
+from playback_run import ENGINE, ROOT, PROJECT, working_copy
 from record_run import key, window
 
 
@@ -27,7 +27,7 @@ def probe(run: Path) -> dict[str, object]:
     if not isinstance(restore_frame, int) or restore_frame < 0:
         raise ValueError("capture lacks an explicit boot restore frame")
     dump = work / "restored-state.bin"
-    command = [str(ENGINE / "e9k-debugger.exe"), "--amiga", "--uae", str(ROOT / "local" / "fa18.uae"),
+    command = [str(ENGINE / "e9k-debugger.exe"), "--amiga", "--uae", str(PROJECT.runtime_config(PROJECT.path('config'))),
                "--system-dir", str(ROOT / "local" / "system"), "--save-dir", str(work / "saves"),
                "--playback", str(playback), "--headless"]
     environment = os.environ.copy()
@@ -56,7 +56,7 @@ def probe_gui_restore(run: Path) -> dict[str, object]:
     """Run the same visible Ctrl+Alt+R path used while recording."""
     work = working_copy(run)
     dump = work / "restored-state.bin"
-    command = [str(ENGINE / "e9k-debugger.exe"), "--amiga", "--uae", str(ROOT / "local" / "fa18.uae"),
+    command = [str(ENGINE / "e9k-debugger.exe"), "--amiga", "--uae", str(PROJECT.runtime_config(PROJECT.path('config'))),
                "--system-dir", str(ROOT / "local" / "system"), "--save-dir", str(work / "saves")]
     environment = os.environ.copy()
     environment["APPDATA"] = str(work / "appdata")

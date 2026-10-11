@@ -9,8 +9,9 @@ from pathlib import Path
 import shutil
 import subprocess
 
-from render_run import ENGINE, ROOT, load_run, sha256
+from render_run import ENGINE, ROOT, PROJECT, load_run, sha256
 from profile_window import read_events
+from amiga_decomp.snapshots import prepare_replay_saves
 
 
 def main() -> None:
@@ -37,6 +38,7 @@ def main() -> None:
     output.mkdir(parents=True)
     shutil.copyfile(run / "playback.e9k", output / "smoketest.inp")
     shutil.copytree(run / "saves", output / "saves")
+    relocation = prepare_replay_saves(output, PROJECT.path('config'), config)
     shutil.copytree(run / "appdata", output / "appdata")
     checkpoint = output / f"frame_{args.frame:05d}_state.bin"
     restored = output / "restored-state.bin"
@@ -48,7 +50,7 @@ def main() -> None:
     environment["E9K_REPLAY_FRAME_DUMP_FRAME"] = str(args.frame)
     environment["E9K_FRAME_CAPTURE_STEP"] = str(last_input + 1)
     command = [str(engine), "--amiga", "--uae", str(config),
-               "--system-dir", str(ROOT / "local" / "system"),
+               "--system-dir", str(PROJECT.path('system_dir')),
                "--save-dir", str(output / "saves"), "--remake-smoke", str(output),
                "--headless", "--warp"]
     completed = subprocess.run(command, cwd=engine.parent, env=environment,
@@ -63,7 +65,8 @@ def main() -> None:
         raise RuntimeError(f"Engine9000 did not write checkpoint for frame {args.frame}")
     result = {"run": str(run), "frame": args.frame, "checkpoint": str(checkpoint),
               "checkpoint_sha256": sha256(checkpoint), "checkpoint_size": checkpoint.stat().st_size,
-              "restored_state_sha256": sha256(restored), "last_input_frame": last_input}
+              "restored_state_sha256": sha256(restored), "last_input_frame": last_input,
+              "relocation": relocation}
     (output / "checkpoint.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
 

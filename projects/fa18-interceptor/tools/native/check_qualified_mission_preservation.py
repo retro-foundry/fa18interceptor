@@ -133,7 +133,7 @@ def main():
         report.update(complete_preservation=True, bodies=body['bodies'], snapshots=body['snapshots'],
                       memory=memory, scope='Complete native trace, body entry/begin/end RAM and timing, final RAM, earned pilot, anchors and counters reproduce the accepted Mission Five recording. Original instruction and drawing qualification remains bound to its prior report; exact native preservation extends that recorded scope to this executable. No recorded RAM enters gameplay; other routes and complete sound parity remain open.')
         (args.out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
-    subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+    subprocess.run(['python', '-m', 'amiga_decomp', 'run', 'prune_build_artifacts', '--quiet'], cwd=ROOT, check=True)
     print(f'{body["bodies"]} complete bodies and all recorded flight outputs preserved; zero project gameplay heap violations')
 
 

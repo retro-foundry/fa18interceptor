@@ -10,10 +10,15 @@ from __future__ import annotations
 
 import argparse
 import os
+import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from amiga_decomp.project import selected_project
+PROJECT = selected_project()
+ROOT = PROJECT.root
+POLICY = PROJECT.settings.get('artifact_policy', {})
 PROTECTED_DIRS = {"obj", "CMakeFiles", "_deps", "Testing"}
 PROTECTED_SUFFIXES = {
     ".a", ".dll", ".exe", ".exp", ".ilk", ".lib", ".ninja_deps",
@@ -21,7 +26,7 @@ PROTECTED_SUFFIXES = {
 }
 DISPOSABLE_SUFFIXES = {".dat", ".rgb", ".idx", ".index8", ".rgb444",
                        ".ram", ".bin", ".jsonl", ".wav", ".ppm", ".png"}
-BUILD_ROOTS = (ROOT / "build", ROOT / "port/build")
+BUILD_ROOTS = tuple(ROOT / name for name in POLICY.get('build_roots', ['build']))
 
 
 def is_disposable(path: Path, relative: Path, minimum: int) -> bool:
@@ -29,14 +34,13 @@ def is_disposable(path: Path, relative: Path, minimum: int) -> bool:
         return False
     if any(part in PROTECTED_DIRS for part in relative.parts[:-1]):
         return False
-    if any(part.startswith(("ram-", "mission-frame-delta-", "original-frame-delta-"))
+    if any(part.startswith(tuple(POLICY.get('live_prefixes', ['ram-'])))
            for part in relative.parts[:-1]):
         return False  # A comparison may be consuming this live temporary run.
     # Hundreds of separately linked historical GNU probes can consume GiB.
     # CMake executables remain protected; all retired GNU probes/runners can go.
-    if relative.parent == Path("recomp") and path.suffix.lower() == ".exe":
-        active_prefix = {"native_frame_body_oracle.exe": "mission-frame-delta-",
-                         "fa18_original_frame_delta_probe.exe": "original-frame-delta-"}.get(path.name)
+    if relative.parent.as_posix() in POLICY.get('disposable_executable_dirs', []) and path.suffix.lower() == '.exe':
+        active_prefix = POLICY.get('live_executables', {}).get(path.name)
         if active_prefix and any(p.is_dir() for p in path.parent.parent.glob(active_prefix + "*")):
             return False
         return True
@@ -69,7 +73,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-dir", type=Path, default=ROOT / "build")
     parser.add_argument("--max-gib", type=float,
-                        default=float(os.environ.get("FA18_BUILD_MAX_GIB", "4")))
+                        default=float(os.environ.get("AMIGA_DECOMP_BUILD_MAX_GIB", "4")))
     parser.add_argument("--min-file-mib", type=float, default=0.5)
     parser.add_argument("--keep", type=Path, action="append", default=[],
                         help="protect a currently used file or directory")
@@ -79,7 +83,7 @@ def main() -> int:
 
     build = args.build_dir.resolve()
     if build not in [path.absolute() for path in BUILD_ROOTS]:
-        parser.error("--build-dir must be this repository's build or port/build directory")
+        parser.error("--build-dir must be a configured project build root")
     if not build.is_dir():
         return 0
     if is_link(build):
@@ -106,9 +110,8 @@ def main() -> int:
         except OSError:
             continue
         if disposable:
-            canonical = (relative.parent == Path("recomp") and
-                         relative.name.startswith("frames_shadow_") and
-                         relative.suffix == ".bin")
+            canonical = any(relative.as_posix().startswith(prefix)
+                            for prefix in POLICY.get('canonical_prefixes', []))
             candidates.append((1 if canonical else 0, stat.st_mtime_ns,
                                relative.as_posix(), path, stat.st_size))
 

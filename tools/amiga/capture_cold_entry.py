@@ -9,8 +9,12 @@ import json
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "scripts"))
+FRAMEWORK_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(FRAMEWORK_ROOT))
+from amiga_decomp.project import selected_project
+PROJECT = selected_project()
+ROOT = PROJECT.root
+sys.path.insert(0, str(FRAMEWORK_ROOT / 'scripts'))
 from engine9000_bridge import Engine, ENGINE
 
 
@@ -57,8 +61,8 @@ def main():
                     raise RuntimeError(f"unexpected paused PC {regs['pc']:06X}")
                 state = engine.state()
                 (output / "state.bin").write_bytes(state)
-                (output / "chip.bin").write_bytes(engine.memory(0, 0x80000))
-                (output / "slow.bin").write_bytes(engine.memory(0xC00000, 0x80000))
+                for name, address, size in PROJECT.memory_regions:
+                    (output / f'{name}.bin').write_bytes(engine.memory(address, size))
                 manifest = {
                     "schema": "amiga.cold_entry.v1", "power_on": True, "restored_state": False,
                     "host_runs": frame + 1, "engine_frames": engine.frame,
@@ -69,7 +73,7 @@ def main():
                     "engine_sha256": sha(ENGINE / "system/ami9000.dll"),
                     "playback_sha256": sha(args.playback) if args.playback else None,
                     "input_offset": args.input_offset,
-                    "files": {p: sha(output / p) for p in ("state.bin", "chip.bin", "slow.bin")},
+                    "files": {p: sha(output / p) for p in ['state.bin', *[f'{name}.bin' for name, _, _ in PROJECT.memory_regions]]},
                 }
                 (output / "entry.json").write_text(json.dumps(manifest, indent=2) + "\n")
                 print(json.dumps(manifest), flush=True)

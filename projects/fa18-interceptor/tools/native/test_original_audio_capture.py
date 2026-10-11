@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def main():
     with tempfile.TemporaryDirectory(prefix='original-pcm-',dir=ROOT/'build') as temporary:
         work = Path(temporary)
-        base = [sys.executable,str(ROOT/'scripts/engine9000_bridge.py'),
+        base = [sys.executable,'-m', 'amiga_decomp', 'run', 'engine9000_bridge',
                 '--frames','32','--restore',str(ROOT/'captures/native/demo01/state.bin')]
         for name, extra in (('baseline',[]),('capture',['--wav']),
                             ('events',['--wav','--audio-events']),
@@ -159,4 +159,4 @@ if __name__ == '__main__':
     try:
         main()
     finally:
-        subprocess.run([sys.executable,str(ROOT/'scripts/prune_build_artifacts.py'),'--quiet'],cwd=ROOT,check=True)
+        subprocess.run([sys.executable, '-m', 'amiga_decomp', 'run', 'prune_build_artifacts', '--quiet'],cwd=ROOT,check=True)

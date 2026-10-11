@@ -9,19 +9,26 @@ import ghidra.program.model.symbol.SourceType;
 import java.nio.file.*;
 import java.io.*;
 import java.util.*;
+import com.google.gson.*;
 
-public class ImportFa18 extends GhidraScript {
+public class ImportAmiga extends GhidraScript {
     public void run() throws Exception {
         Path dir = Paths.get(getScriptArgs()[0]);
-        MemoryBlock chip = currentProgram.getMemory().getBlock(toAddr(0));
-        chip.setName("chip_ram");
-        chip.setWrite(true);
-        chip.setExecute(true);
-        if (currentProgram.getMemory().getBlock(toAddr(0xc00000)) == null) {
-            byte[] slow = Files.readAllBytes(dir.resolve("slow.bin"));
-            MemoryBlock b = currentProgram.getMemory().createInitializedBlock("slow_ram", toAddr(0xc00000),
-                new ByteArrayInputStream(slow), slow.length, monitor, false);
-            b.setRead(true); b.setWrite(true); b.setExecute(true);
+        JsonObject snapshot = JsonParser.parseString(Files.readString(dir.resolve("snapshot.json"))).getAsJsonObject();
+        for (JsonElement element : snapshot.getAsJsonArray("memory")) {
+            JsonObject region = element.getAsJsonObject();
+            Address start = toAddr(region.get("start").getAsLong());
+            byte[] data = Files.readAllBytes(dir.resolve(region.get("file").getAsString()));
+            MemoryBlock block = currentProgram.getMemory().getBlock(start);
+            if (block == null) {
+                block = currentProgram.getMemory().createInitializedBlock(region.get("name").getAsString(), start,
+                    new ByteArrayInputStream(data), data.length, monitor, false);
+            } else {
+                if (!block.getStart().equals(start) || block.getSize() != data.length)
+                    throw new IOException("Imported memory region does not match snapshot: " + start);
+                block.setName(region.get("name").getAsString());
+            }
+            block.setRead(true); block.setWrite(true); block.setExecute(true);
         }
         if (currentProgram.getMemory().getBlock(toAddr(0xdff000)) == null) {
             MemoryBlock b = currentProgram.getMemory().createUninitializedBlock("custom_mmio", toAddr(0xdff000), 0x200, false);

@@ -9,6 +9,14 @@ p.add_argument('capture', type=Path)
 a = p.parse_args()
 manifest = json.loads((a.capture / 'snapshot.json').read_text())
 banks = [(b, (a.capture / b['file']).read_bytes()) for b in manifest['memory']]
+for index, (bank, data) in enumerate(banks):
+    if len(data) != bank['size'] or bank['size'] <= 0:
+        raise ValueError(f"Memory size differs from snapshot: {bank['file']}")
+    if not 0 <= bank['start'] < bank['start'] + bank['size'] <= 0x1000000:
+        raise ValueError(f"Invalid Amiga memory interval: {bank}")
+    for previous, _ in banks[:index]:
+        if bank['start'] < previous['start'] + previous['size'] and previous['start'] < bank['start'] + bank['size']:
+            raise ValueError('Overlapping snapshot memory regions')
 rows = [json.loads(line) for line in (a.capture / 'trace.jsonl').read_text().splitlines()]
 instructions = {}
 targets = set()

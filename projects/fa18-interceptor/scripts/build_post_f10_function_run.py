@@ -45,7 +45,7 @@ def main():
                    for name in ('initial_state.bin', 'config.uae', 'playback.e9k')},
     }
     (run / 'run.json').write_text(json.dumps(manifest, indent=2) + '\n')
-    subprocess.run([sys.executable, str(ROOT / 'scripts/engine9000_bridge.py'),
+    subprocess.run([sys.executable, '-m', 'amiga_decomp', 'run', 'engine9000_bridge',
                     '--restore', str(run / 'initial_state.bin'), '--config', str(run / 'config.uae'),
                     '--playback', str(run / 'playback.e9k'), '--start-frame', str(START_FRAME),
                     '--frames', str(final_frame - START_FRAME), '--output', str(run / 'end_state')],

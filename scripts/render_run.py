@@ -11,10 +11,13 @@ import shutil
 import subprocess
 
 from profile_window import read_events
+from amiga_decomp.project import selected_project
+from amiga_decomp.snapshots import prepare_replay_saves
 
 
-ROOT = Path(__file__).resolve().parents[1]
-ENGINE = ROOT / "build" / "engine9000-replay" / "e9k-debugger.exe"
+PROJECT = selected_project()
+ROOT = PROJECT.root
+ENGINE = PROJECT.path('replay_engine')
 
 
 def sha256(path: Path) -> str:
@@ -38,10 +41,10 @@ def load_run(run: Path) -> tuple[dict, Path, Path]:
         raise ValueError("capture lacks canonical restore-state evidence")
     if sha256(restored_state) != restored_hash:
         raise ValueError("canonical restore-state evidence hash does not match run.json")
-    config = ROOT / "local" / "fa18.uae"
+    config = PROJECT.path('config')
     if not config.is_file() or config.read_bytes() != (run / "config.uae").read_bytes():
-        raise ValueError("sealed config differs from local/fa18.uae")
-    return metadata, restored_state, config
+        raise ValueError("sealed config differs from the selected project config")
+    return metadata, restored_state, PROJECT.runtime_config(config)
 
 
 def capture_frames(output: Path, every: int) -> list[int]:
@@ -81,6 +84,7 @@ def main() -> None:
     output.mkdir(parents=True)
     shutil.copyfile(run / "playback.e9k", output / "smoketest.inp")
     shutil.copytree(run / "saves", output / "saves")
+    relocation = prepare_replay_saves(output, PROJECT.path('config'), config)
     shutil.copytree(run / "appdata", output / "appdata")
     environment = os.environ.copy()
     environment["APPDATA"] = str(output / "appdata")
@@ -88,7 +92,7 @@ def main() -> None:
     environment["E9K_REPLAY_STATE_DUMP"] = str(output / "restored-state.bin")
     environment["E9K_FRAME_CAPTURE_STEP"] = str(args.every)
     command = [str(engine), "--amiga", "--uae", str(config),
-               "--system-dir", str(ROOT / "local" / "system"),
+               "--system-dir", str(PROJECT.path('system_dir')),
                "--save-dir", str(output / "saves"), "--remake-smoke", str(output),
                "--headless", "--warp"]
     completed = subprocess.run(command, cwd=engine.parent, env=environment,
@@ -110,6 +114,7 @@ def main() -> None:
         "restored_state_sha256": sha256(restored), "frame_count": len(frames),
         "first_frame": frames[0], "last_frame": frames[-1],
         "last_input_frame": last_event,
+        "relocation": relocation,
     }
     (output / "render.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))

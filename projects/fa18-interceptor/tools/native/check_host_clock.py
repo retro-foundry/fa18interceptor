@@ -99,7 +99,7 @@ def main():
         assert timing['frames'] == timing['presented'] == 6502
         assert not timing['over_work_budget'], 'Visible host-clock gameplay exceeds the 20 ms work budget'
     (args.out / 'report.json').write_text(json.dumps(evidence, indent=2) + '\n')
-    subprocess.run(['python', 'scripts/prune_build_artifacts.py', '--quiet'], cwd=ROOT, check=True)
+    subprocess.run(['python', '-m', 'amiga_decomp', 'run', 'prune_build_artifacts', '--quiet'], cwd=ROOT, check=True)
     print(json.dumps({name: dict(clock=case['clock'], stage=case['stats']['stage']) for name, case in cases.items()}))
 
 

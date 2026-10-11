@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-STANDALONE = ROOT.parent / "fa18-interceptor-decomp"
+STANDALONE = ROOT.parents[2] / "fa18-interceptor-decomp"
 
 def main():
     script = STANDALONE / "scripts/build_native.py"

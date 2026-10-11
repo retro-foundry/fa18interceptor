@@ -7,7 +7,7 @@ import com.google.gson.*;
 import java.nio.file.*;
 import java.io.*;
 
-public class ExportFa18Pcode extends GhidraScript {
+public class ExportPcode extends GhidraScript {
     JsonElement varnode(Varnode v) {
         if (v==null) return JsonNull.INSTANCE;
         JsonObject o = new JsonObject();
@@ -27,8 +27,9 @@ public class ExportFa18Pcode extends GhidraScript {
                 JsonObject row=new JsonObject();
                 long pc=ins.getAddress().getOffset();
                 row.addProperty("address",pc);
-                row.addProperty("bank",pc<0x80000?"chip":"slow");
-                row.addProperty("file_offset",pc<0x80000?pc:pc-0xc00000);
+                var block = currentProgram.getMemory().getBlock(ins.getAddress());
+                row.addProperty("bank",block.getName());
+                row.addProperty("file_offset",pc-block.getStart().getOffset());
                 StringBuilder hex=new StringBuilder(); for(byte b:ins.getBytes())hex.append(String.format("%02x",b&255));
                 row.addProperty("bytes",hex.toString()); row.addProperty("assembly",ins.toString());
                 Function fn=getFunctionContaining(ins.getAddress());

@@ -58,7 +58,7 @@ def main() -> None:
         shutil.copytree(run / "saves", work / "saves")
         shutil.copytree(run / "appdata", work / "appdata")
         (work / "playback.e9k").write_text("\n".join(kept) + "\n", encoding="ascii")
-        subprocess.run([sys.executable, str(ROOT / "scripts/render_run.py"),
+        subprocess.run([sys.executable, '-m', 'amiga_decomp', 'run', 'render_run',
                         "--run", str(work), "--output", str(output),
                         "--every", "1"], check=True)
         (output / "port_oracle.json").write_text(json.dumps({

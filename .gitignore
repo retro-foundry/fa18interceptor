@@ -1,11 +1,11 @@
-tools/engine9000/
-tools/engine9000-public/
-runtime_project/
+__pycache__/
 build/
 local/
 captures/
+runtime_project/
+saves-native/
 *.adf
 *.rom
-__pycache__/
-saves-native/
 E9K_INPUT_V1
+projects/*/tools/engine9000/
+projects/*/tools/engine9000-public/

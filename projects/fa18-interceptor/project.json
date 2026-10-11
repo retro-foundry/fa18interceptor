@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "id": "fa18-interceptor",
+  "title": "F/A-18 Interceptor",
+  "config": "local/fa18.uae",
+  "engine_root": "tools/engine9000/e9k-debugger",
+  "replay_engine": "build/engine9000-replay/e9k-debugger.exe",
+  "system_dir": "local/system",
+  "native_checkout": "../../../fa18-interceptor-decomp",
+  "python_paths": ["scripts", "tools/native"],
+  "former_roots": ["C:/Users/paula/Documents/Projects/fa18interceptor"],
+  "memory": [
+    {"name": "chip", "start": 0, "size": 524288},
+    {"name": "slow", "start": 12582912, "size": 524288}
+  ],
+  "audio_observers": {
+    "events": "original_audio_events",
+    "dma": "original_audio_dma",
+    "samples": "original_audio_samples"
+  },
+  "artifact_policy": {
+    "build_roots": ["build", "port/build"],
+    "live_prefixes": ["ram-", "mission-frame-delta-", "original-frame-delta-"],
+    "disposable_executable_dirs": ["recomp"],
+    "canonical_prefixes": ["recomp/frames_shadow_"],
+    "live_executables": {
+      "native_frame_body_oracle.exe": "mission-frame-delta-",
+      "fa18_original_frame_delta_probe.exe": "original-frame-delta-"
+    }
+  }
+}

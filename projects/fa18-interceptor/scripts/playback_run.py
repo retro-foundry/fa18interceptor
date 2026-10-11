@@ -13,9 +13,13 @@ import shutil
 import subprocess
 import tempfile
 import time
+from amiga_decomp.project import selected_project
+from amiga_decomp.snapshots import prepare_replay_saves
+from render_run import load_run
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PROJECT = selected_project()
 ENGINE = ROOT / "build" / "engine9000-replay"
 
 
@@ -51,6 +55,8 @@ def working_copy(run: Path) -> Path:
     work = Path(tempfile.mkdtemp(prefix=f"{run.name}_", dir=work_root))
     shutil.copytree(run / "saves", work / "saves")
     shutil.copytree(run / "appdata", work / "appdata")
+    _, _, config = load_run(run)
+    prepare_replay_saves(work, PROJECT.path('config'), config)
     return work
 
 
@@ -90,7 +96,8 @@ def main() -> None:
         raise FileNotFoundError(engine)
     work = working_copy(run)
     playback = run / "playback.e9k"
-    command = [str(engine), "--amiga", "--uae", str(original_config),
+    runtime_config = PROJECT.runtime_config(original_config)
+    command = [str(engine), "--amiga", "--uae", str(runtime_config),
                "--system-dir", str(ROOT / "local" / "system"), "--save-dir", str(work / "saves"),
                "--playback", str(playback), "--window-size", args.window_size]
     environment = os.environ.copy()

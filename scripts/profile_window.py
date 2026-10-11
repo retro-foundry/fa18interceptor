@@ -4,7 +4,7 @@ import ctypes as C
 import json
 from pathlib import Path
 
-from engine9000_bridge import Engine, ROOT
+from engine9000_bridge import Engine, ROOT, PROJECT
 
 
 def read_events(path):
@@ -32,7 +32,7 @@ def main():
     parser.add_argument('--frame-offset', type=int, default=0,
                         help='Replay-frame label immediately before the first executed frame.')
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--config', type=Path, default=ROOT / 'local/fa18.uae')
+    parser.add_argument('--config', type=Path, default=PROJECT.path('config'))
     args = parser.parse_args()
     first_executed_frame = args.frame_offset + 1
     if (args.frame_offset < 0 or args.first_frame < first_executed_frame or
