@@ -1,5 +1,9 @@
 # Status
 
+The port runtime and its CPU comparison harness were retired here on 2026-10-11.
+Runtime source paths and qualification steps below are historical; the playable
+game is maintained in the standalone `fa18-interceptor-decomp` repository.
+
 Updated 2026-10-04.
 
 The active objective is complete ROM independence: a separate `fa18_romfree`

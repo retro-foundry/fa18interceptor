@@ -3,32 +3,26 @@
 Read `CURRENT_PORT_HANDOFF.md`, `PORT.md` and `port/README.md` before work.
 The user's latest instructions override historical plans and proof notes.
 
-## Active reconstruction framework
+## Active reverse-engineering framework
 
 - User direction (2026-10-10): the playable native port moved to the standalone
   `fa18-interceptor-decomp` repository. All new native port work belongs there.
   This supersedes the historical native runtime directions in this repository.
-- Keep original CPU/machine comparison runners here: `fa18_recomp` and
-  `fa18_romfree`, built by `port/recomp/CMakeLists.txt` and
-  `scripts/build_recomp.py`.
-- Shared `port/game/` routines remain here for reconstruction/comparison use;
-  native entry/composition no longer belong in this repository. Do not recreate
-  a native runner or parallel port here.
-- The read-only flight trace reused by comparison runners now belongs to
-  `port/recomp/flight_trace.c`; reusable host facilities remain in `port/amiga/`.
-- Native original-instruction probes in `tools/native/` read canonical sources
-  from the standalone sibling. This is a validation-only dependency; the native
-  port does not depend on this framework.
+- User direction (2026-10-11): remove the original CPU/machine comparison
+  runners and remaining port code here. This supersedes the earlier direction
+  to keep `fa18_recomp`, `fa18_romfree` and shared `port/game/` routines.
+- Keep the original disk, sealed recordings, analysis, P-code/Ghidra work and
+  Engine9000 capture/instrumentation tools. The retired port runtime, its
+  Musashi dependency and its runtime test harness do not belong here.
+- `port/` retains historical metadata only. Do not recreate a native runner,
+  comparison runner or parallel port in this repository.
 - `scripts/build_native.py` only forwards to the sibling standalone checkout;
   no standalone build requires this framework.
 
-## Integration and evidence
+## Analysis and evidence
 
-- Before substantial implementation, identify the active build, trace the real
-  caller from the runner entry and name the dependency the change removes.
-  Being linked into a library is insufficient evidence of runtime use.
-- Implement connected changes in the playable runner. Exercise the changed path
-  before accumulating further modules or extensive standalone proof work.
+- Native implementation and gameplay validation belong in the standalone
+  checkout. This repository supports original-byte analysis and recordings.
 - Keep original source/disk behavior authoritative. Emulator/ROM runs, captures
   and historical proofs are reference evidence, not replacement game behavior.
 - Report component correctness and runtime integration separately. Claim
@@ -37,9 +31,9 @@ The user's latest instructions override historical plans and proof notes.
 - The 614/699 readable-entry count measures known routine reconstruction only.
   It does not measure emulation-removal effort or whole-game completeness.
   Give estimates only with their scope, assumptions and supporting evidence.
-- Use the active build's tests and affected gameplay comparisons. Avoid repeated
-  expensive checks without a new change, failure or unresolved concern. Retired
-  component tools can reference removed sources; inspect dependencies first.
+- Use the retained analysis/capture tools and their affected tests. Historical
+  port proofs require the pre-retirement checkout (`b04eaa35`); references in
+  archived reports are provenance, not instructions to restore the runtime.
 
 ## Preserve
 
@@ -50,9 +44,9 @@ The user's latest instructions override historical plans and proof notes.
 
 ## Build artifact retention
 
-- User direction (2026-10-07): keep workspace disk use bounded. Builds and
-  native CTest runs invoke `scripts/prune_build_artifacts.py` with a 4 GiB
-  build-cache budget. Do not disable those hooks or accumulate raw passing RAM.
+- User direction (2026-10-07): keep workspace disk use bounded with
+  `scripts/prune_build_artifacts.py` and its 4 GiB build-cache budget.
+  Do not disable retained cleanup hooks or accumulate raw passing RAM.
 - Native mode/postflight/window comparisons use temporary capture storage by
   default and retain reports plus the failing case. Use `--keep-captures` only
   for a concrete unresolved investigation; remove passing copies afterwards.

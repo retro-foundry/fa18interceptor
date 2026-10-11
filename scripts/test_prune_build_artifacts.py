@@ -26,6 +26,8 @@ class ArtifactTests(unittest.TestCase):
                 return path
             old = create('native-flight/frame.1.before.dat')
             oracle = create('recomp/old_oracle.exe', 1)
+            retired_runners = [create(name, 1) for name in (
+                'recomp/fa18_recomp.exe', 'recomp/fa18_romfree.exe')]
             protected = [create(name, 2) for name in (
                 'native-cmake/native/Release/fa18_native.exe', 'recomp/obj/game.o',
                 'native-cmake/_deps/sdl/data.bin', 'native-flight/source.dat.gz',
@@ -36,6 +38,7 @@ class ArtifactTests(unittest.TestCase):
                 self.assertEqual(prune.main(), 0)
             self.assertFalse(old.exists())
             self.assertFalse(oracle.exists())
+            self.assertTrue(all(not path.exists() for path in retired_runners))
             self.assertTrue(all(path.exists() for path in protected))
 
     def test_refuses_foreign_directory_and_dry_run_preserves_files(self):

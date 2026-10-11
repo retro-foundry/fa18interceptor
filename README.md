@@ -1,12 +1,13 @@
-# F/A-18 Interceptor: recreated C source
+# F/A-18 Interceptor reverse engineering
 
-Native port moved (2026-10-10): the playable port is now maintained in
+Port runtime retired (2026-10-11): the playable native C game is maintained in
 [fa18-interceptor-decomp](https://github.com/retro-foundry/fa18-interceptor-decomp).
-Build and edit the native game there. This repository retains the decompilation
-framework, original comparison runners, shared reconstructed routines and sealed
-historical evidence. Its native entry/composition have been retired; the notes
-below describe historical qualification. `scripts/build_native.py` forwards to
-the standalone sibling checkout when present.
+This repository retains reverse-engineering analyses, original emulator capture
+tools and recorded evidence. The port sources, CPU/machine comparison runners
+and their runtime test harness have been removed at the user's request.
+The notes below describe historical qualification; their source and comparison
+commands belong to the pre-retirement commit `b04eaa35`.
+`scripts/build_native.py` forwards to the standalone sibling checkout.
 
 Complete native Demo at 44100/48000 Hz (2026-10-10): all 12680 boundaries,
 8802 ordered channel events and active byte phases match; silent sample tails
@@ -31,6 +32,8 @@ polling caches now initialize before gameplay; real windows report zero
 heap/pool requests and present every frame. Startup presentation pacing and
 complete original/native sound matching remain open.
 See [output rate evidence](analysis/native_audio_output_rate_milestone.md).
+
+## Historical reconstruction notes
 
 Recreating the source code of *F/A-18 Interceptor* (Intellisoft / Electronic
 Arts, Amiga, 1988) as readable C, proven against the original.

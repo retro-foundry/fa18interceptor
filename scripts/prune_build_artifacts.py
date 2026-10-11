@@ -33,13 +33,13 @@ def is_disposable(path: Path, relative: Path, minimum: int) -> bool:
            for part in relative.parts[:-1]):
         return False  # A comparison may be consuming this live temporary run.
     # Hundreds of separately linked historical GNU probes can consume GiB.
-    # CMake executables and the playable reference runners remain protected.
+    # CMake executables remain protected; all retired GNU probes/runners can go.
     if relative.parent == Path("recomp") and path.suffix.lower() == ".exe":
         active_prefix = {"native_frame_body_oracle.exe": "mission-frame-delta-",
                          "fa18_original_frame_delta_probe.exe": "original-frame-delta-"}.get(path.name)
         if active_prefix and any(p.is_dir() for p in path.parent.parent.glob(active_prefix + "*")):
             return False
-        return path.stem not in {"fa18_recomp", "fa18_romfree"}
+        return True
     if path.suffix.lower() in PROTECTED_SUFFIXES:
         return False
     return path.suffix.lower() in DISPOSABLE_SUFFIXES
