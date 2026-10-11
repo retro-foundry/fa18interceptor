@@ -5,7 +5,8 @@ The user's latest instructions override historical plans and proof notes.
 
 - Shared Python tools, Amiga hardware support and Ghidra integration belong at
   framework level. Game addresses, names, routines, data, media, reports and
-  emulator forks belong under `projects/<id>/`.
+  game-specific emulator forks belong under `projects/<id>/`.
+  Reusable Engine9000 observer support belongs under `tools/`.
 - Select projects explicitly through `python -m amiga_decomp --project <id>`.
   Do not add a default game or dependencies on another project's layout.
 - Original bytes and observed execution remain authoritative. Preserve calling

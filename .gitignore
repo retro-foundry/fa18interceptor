@@ -9,3 +9,6 @@ saves-native/
 E9K_INPUT_V1
 projects/*/tools/engine9000/
 projects/*/tools/engine9000-public/
+
+tools/engine9000/
+tools/engine9000-public/

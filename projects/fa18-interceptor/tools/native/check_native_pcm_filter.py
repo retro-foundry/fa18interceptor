@@ -4,6 +4,7 @@ Signed impulses, DC, full-scale alternation, deterministic component vectors
 and silence exercise history and truncation. An explicit retained cold-start
 case also compares every original recorded sample through the native filter.
 """
+from amiga_decomp.project import FRAMEWORK_ROOT
 import argparse
 import array
 import hashlib
@@ -42,7 +43,7 @@ def main():
         (work/'original_pcm_filter.h').write_text('\n\n'.join(bodies)+'\n')
         reference=work/'reference.exe'
         subprocess.run([compiler,'-O3','-I'+str(work),'-I'+str(SOURCE),'-I'+str(SOURCE/'include'),
-            str(ROOT/'tools/native/original_pcm_filter.c'),str(SOURCE/'softfloat/softfloat.c'),
+            str(FRAMEWORK_ROOT / 'tools/amiga/audio/original_pcm_filter.c'),str(SOURCE/'softfloat/softfloat.c'),
             str(SOURCE/'softfloat/softfloat_fpsp.c'),'-o',str(reference)],check=True,capture_output=True)
         samples=array.array('h');state=0x13579bdf
         for frame in range(32768):

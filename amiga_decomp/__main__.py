@@ -42,7 +42,8 @@ def main() -> int:
             parser.error(f'Tool {args.tool!r} must identify exactly one script: {candidates}')
         environment = os.environ.copy()
         environment['AMIGA_DECOMP_PROJECT'] = str(project.manifest)
-        paths = [FRAMEWORK_ROOT, FRAMEWORK_ROOT / 'scripts']
+        paths = [FRAMEWORK_ROOT, FRAMEWORK_ROOT / 'scripts',
+                 FRAMEWORK_ROOT / 'tools/amiga/audio']
         paths += [project.root / p for p in project.settings.get('python_paths', ['scripts'])]
         environment['PYTHONPATH'] = os.pathsep.join(map(str, paths))
         if os.environ.get('PYTHONPATH'):

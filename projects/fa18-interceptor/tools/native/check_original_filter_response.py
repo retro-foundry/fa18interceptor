@@ -4,6 +4,7 @@ The controlled recordings differ only in sound_filter=off/emulated, with
 floppy clicks muted at 100 in both. No shift, trimming or normalization.
 This is original reference-path validation, not native audio acceptance.
 """
+from amiga_decomp.project import FRAMEWORK_ROOT, selected_project
 import argparse
 import array
 from collections import deque
@@ -18,7 +19,7 @@ import wave
 from check_original_audio_capture import recorded_bytes, reference_file, reference_bytes
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / 'tools/engine9000-src/ami9000/sources/src'
+SOURCE = selected_project().path('engine_source') / 'ami9000/sources/src'
 
 
 def sha(data):
@@ -92,7 +93,7 @@ def main():
         (work/'original_pcm_filter.h').write_text('\n\n'.join(bodies)+'\n')
         executable = work/'filter.exe'
         subprocess.run([compiler,'-O3','-I'+str(work),'-I'+str(SOURCE),'-I'+str(SOURCE/'include'),
-            str(ROOT/'tools/native/original_pcm_filter.c'),str(SOURCE/'softfloat/softfloat.c'),
+            str(FRAMEWORK_ROOT / 'tools/amiga/audio/original_pcm_filter.c'),str(SOURCE/'softfloat/softfloat.c'),
             str(SOURCE/'softfloat/softfloat_fpsp.c'),'-o',str(executable)],check=True,capture_output=True)
         input_path, output_path = work/'input.pcm',work/'output.pcm'
         input_path.write_bytes(raw_pcm)

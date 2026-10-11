@@ -23,7 +23,7 @@ python -m amiga_decomp --project fa18-interceptor run build_native
 Continue native development in `projects/fa18-interceptor/native/`; initialize a
 clone with `git submodule update --init`, then use `git switch main` inside the
 submodule when making changes. Historical runtime proofs below describe archived commits.
-See [Amiga findings](AMIGA_FINDINGS.md) for hardware observations from this game.
+See [Amiga findings](../../AMIGA_FINDINGS.md) for hardware observations from this game.
 
 ---
 
@@ -564,7 +564,7 @@ recordings) are not in git.
 | [RE_COMPLETION_PLAN.md](RE_COMPLETION_PLAN.md) | Analysis plan and how it feeds the C source |
 | [GAME.md](GAME.md) | Game dossier: history, controls, landmarks, experiments |
 | [AMIGA.md](AMIGA.md) | Amiga hardware and OS guide for reverse engineering |
-| [REVERSE_ENGINEERING.md](REVERSE_ENGINEERING.md) | The reverse-engineering process, end to end, and its lessons |
+| [REVERSE_ENGINEERING.md](../../REVERSE_ENGINEERING.md) | The reverse-engineering process, end to end, and its lessons |
 
 ## Recording new scenarios
 

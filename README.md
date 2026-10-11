@@ -6,7 +6,8 @@ Game-specific work lives in `projects/<id>/`; shared tools do not select a game
 implicitly. The existing case study is [F/A-18 Interceptor](projects/fa18-interceptor/README.md).
 
 Python 3.11 or newer is required. Install `capstone` for 68000 instruction tracing
-and disassembly. The Engine9000 ctypes host currently uses the Windows DLL ABI;
+and disassembly, `numpy` for DMA/raster analysis, and `Pillow` for image tools.
+The Engine9000 ctypes host currently uses the Windows DLL ABI;
 offline analysis and the Ghidra launcher also work on Linux with matching tools.
 Supply your own game media, Kickstart ROM and compatible Engine9000 installation.
 Original media, recordings and local build caches are ignored by Git.
@@ -47,7 +48,7 @@ externally installed emulator or ROM directory.
 ```
 
 Configure memory regions from the actual machine setup. Keep its analyses,
-source reconstruction, project scripts and pinned emulator fork in that project.
+source reconstruction, project scripts in that project. Shared Engine9000 source and patches live under `tools/` and `patches/`; select installations through the manifest.
 Optional `python_paths` exposes project analysis modules. `former_roots` lets
 the host derive relocated UAE path values without changing sealed configs.
 Game audio observers and artifact retention exceptions are optional project
@@ -57,14 +58,16 @@ Sealed GUI replay requires an Engine9000 executable with the recording's boot
 restore protocol, selected by `replay_engine` or the tool's `--engine` option.
 When relocating a recorded config, the tools derive matching snapshot identity
 headers in copied saves and retain all serialized core bytes. The original
-recordings are never rewritten. The F/A-18 project retains its replay-host patch;
+recordings are never rewritten. The framework retains its replay-host patch in `patches/`;
 its ignored `build/engine9000-replay/` executable must be supplied locally.
 
 The shared layer includes bounded capture, replay/checkpoint rendering, input
 editing, instruction-write tracing, snapshot validation, DOS segment inspection,
 Ghidra import/P-code export and cache pruning. Ghidra imports only validated
 observed instruction starts; structural functions do not establish behavior.
-See [AMIGA.md](AMIGA.md) for hardware guidance. Historical game commands are
+See [REVERSE_ENGINEERING.md](REVERSE_ENGINEERING.md) for the reusable workflow,
+[AMIGA.md](AMIGA.md) and [AMIGA_FINDINGS.md](AMIGA_FINDINGS.md) for hardware guidance,
+and [the shared tool catalog](tools/README.md) for analysis tools. Historical game commands are
 relative to their project directory; their archived runtime proofs require the
 commit recorded in those notes. The playable native port is a separate repository.
 

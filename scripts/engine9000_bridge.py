@@ -483,14 +483,19 @@ def main():
         engine.custom_log = normal_custom
     dma = None
     dma_report = None
+    if args.audio_dma or args.audio_samples:
+        chip = next((r for r in PROJECT.memory_regions if r[0] == 'chip'), None)
+        if chip is None or chip[1] != 0:
+            raise ValueError('Audio provenance requires a configured Chip RAM region starting at zero')
+        chip_size = chip[2]
     if args.audio_dma:
         AudioDmaWriter = importlib.import_module(PROJECT.settings['audio_observers']['dma']).AudioDmaWriter
-        dma = AudioDmaWriter(engine, (args.output / 'audio_dma.bin').open('wb'))
+        dma = AudioDmaWriter(engine, (args.output / 'audio_dma.bin').open('wb'), chip_size=chip_size)
     sample_observer = sample_report = None
     if args.audio_samples:
         AudioSamplesWriter = importlib.import_module(PROJECT.settings['audio_observers']['samples']).AudioSamplesWriter
         sample_observer = AudioSamplesWriter(engine, (args.output / 'audio_samples.bin').open('wb'), ENGINE,
-                                            args.audio_mixer_call_range)
+                                            args.audio_mixer_call_range, chip_size=chip_size)
     try:
         for frame in range(args.start_frame + 1, args.start_frame + args.frames + 1):
             engine.audio_capture_call = frame

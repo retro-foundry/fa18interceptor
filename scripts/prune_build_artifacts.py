@@ -16,9 +16,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from amiga_decomp.project import selected_project
-PROJECT = selected_project()
-ROOT = PROJECT.root
-POLICY = PROJECT.settings.get('artifact_policy', {})
 PROTECTED_DIRS = {"obj", "CMakeFiles", "_deps", "Testing"}
 PROTECTED_SUFFIXES = {
     ".a", ".dll", ".exe", ".exp", ".ilk", ".lib", ".ninja_deps",
@@ -26,21 +23,21 @@ PROTECTED_SUFFIXES = {
 }
 DISPOSABLE_SUFFIXES = {".dat", ".rgb", ".idx", ".index8", ".rgb444",
                        ".ram", ".bin", ".jsonl", ".wav", ".ppm", ".png"}
-BUILD_ROOTS = tuple(ROOT / name for name in POLICY.get('build_roots', ['build']))
 
 
-def is_disposable(path: Path, relative: Path, minimum: int) -> bool:
+def is_disposable(path: Path, relative: Path, minimum: int, policy=None) -> bool:
+    policy = {} if policy is None else policy
     if path.stat().st_size < minimum:
         return False
     if any(part in PROTECTED_DIRS for part in relative.parts[:-1]):
         return False
-    if any(part.startswith(tuple(POLICY.get('live_prefixes', ['ram-'])))
+    if any(part.startswith(tuple(policy.get('live_prefixes', ['ram-'])))
            for part in relative.parts[:-1]):
         return False  # A comparison may be consuming this live temporary run.
     # Hundreds of separately linked historical GNU probes can consume GiB.
     # CMake executables remain protected; all retired GNU probes/runners can go.
-    if relative.parent.as_posix() in POLICY.get('disposable_executable_dirs', []) and path.suffix.lower() == '.exe':
-        active_prefix = POLICY.get('live_executables', {}).get(path.name)
+    if relative.parent.as_posix() in policy.get('disposable_executable_dirs', []) and path.suffix.lower() == '.exe':
+        active_prefix = policy.get('live_executables', {}).get(path.name)
         if active_prefix and any(p.is_dir() for p in path.parent.parent.glob(active_prefix + "*")):
             return False
         return True
@@ -70,6 +67,10 @@ def is_link(path: Path) -> bool:
 
 
 def main() -> int:
+    project = selected_project()
+    ROOT = project.root
+    POLICY = project.settings.get("artifact_policy", {})
+    BUILD_ROOTS = tuple(ROOT / name for name in POLICY.get("build_roots", ["build"]))
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build-dir", type=Path, default=ROOT / "build")
     parser.add_argument("--max-gib", type=float,
@@ -106,7 +107,7 @@ def main() -> int:
         if any(path == keep or keep in path.parents for keep in keeps):
             continue
         try:
-            disposable = is_disposable(path, relative, minimum)
+            disposable = is_disposable(path, relative, minimum, POLICY)
         except OSError:
             continue
         if disposable:

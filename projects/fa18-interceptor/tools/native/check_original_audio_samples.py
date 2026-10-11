@@ -4,6 +4,7 @@ The observer DLL's declared identity is the only execution identity allowed to
 differ. Every remaining snapshot field, PCM byte, event, DMA word, RAM/state
 byte and video byte stays strict. This is not native waveform acceptance.
 """
+from amiga_decomp.project import FRAMEWORK_ROOT
 import argparse
 from collections import Counter
 import hashlib
@@ -24,24 +25,7 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
-def frames(file, calls):
-    assert exact(file, len(MAGIC)) == MAGIC, 'Invalid consumed-sample stream header'
-    next_call, previous_cycle, total = 1, None, 0
-    while True:
-        tag = exact(file, 1)
-        if tag == b'\0':
-            footer_calls, samples = FOOTER.unpack(exact(file, FOOTER.size))
-            assert next_call == calls+1 and footer_calls == calls and samples == total and not file.read(1), 'Incomplete consumed-sample footer'
-            return
-        assert tag == b'\1'
-        call, count, before, after, pcm_end = FRAME.unpack(exact(file, FRAME.size))
-        assert call == next_call and call <= calls and count <= 65536 and after >= before, 'Lost sample call/coverage'
-        assert previous_cycle is None or before == previous_cycle, 'Lost consumed-sample cycle boundary'
-        payload = exact(file, count*SAMPLE.size)
-        yield (call, count, before, after, pcm_end), payload
-        next_call += 1
-        previous_cycle = after
-        total += count
+from audio_sample_stream import frames
 
 
 def execution(report):
@@ -73,28 +57,28 @@ def validate_samples(capture, baseline, pcm_reference=None, dma_reference=None, 
     assert descriptor['ring_records'] == manifest['ring_records'] == 65536
     assert descriptor['boundary_cycle_unit'] == CYCLE_UNIT == 512
     assert sha((SOURCE / 'sources/src/audio.c').read_bytes()) == manifest['source_sha256']
-    probe = ROOT / 'tools/native/original_audio_sample_probe.inc'
+    probe = FRAMEWORK_ROOT / 'tools/amiga/audio/original_audio_sample_probe.inc'
     assert sha(probe.read_bytes()) == manifest['observer_include_sha256']
     generated_path = Path(manifest['compile'][-2])
     assert sha(generated_path.read_bytes()) == manifest['probe_source_sha256']
     word_probe = None
     if 'word_state_include_sha256' in manifest:
-        word_path = ROOT / 'tools/native/original_audio_word_probe.inc'
+        word_path = FRAMEWORK_ROOT / 'tools/amiga/audio/original_audio_word_probe.inc'
         assert sha(word_path.read_bytes()) == manifest['word_state_include_sha256']
         word_probe = word_path.read_text()
     live_probe = None
     if 'live_state_include_sha256' in manifest:
-        live_path = ROOT / 'tools/native/original_audio_live_probe.inc'
+        live_path = FRAMEWORK_ROOT / 'tools/amiga/audio/original_audio_live_probe.inc'
         assert sha(live_path.read_bytes()) == manifest['live_state_include_sha256']
         live_probe = live_path.read_text()
     mixer_probe = None
     if 'mixer_include_sha256' in manifest:
-        mixer_path = ROOT / 'tools/native/original_audio_mixer_probe.inc'
+        mixer_path = FRAMEWORK_ROOT / 'tools/amiga/audio/original_audio_mixer_probe.inc'
         assert sha(mixer_path.read_bytes()) == manifest['mixer_include_sha256']
         mixer_probe = mixer_path.read_text()
     clock_probe = None
     if 'mixer_clock_include_sha256' in manifest:
-        clock_path = ROOT / 'tools/native/original_audio_clock_probe.inc'
+        clock_path = FRAMEWORK_ROOT / 'tools/amiga/audio/original_audio_clock_probe.inc'
         assert mixer_probe is not None and manifest['mixer_clock_record_bytes'] == CLOCK.size
         assert sha(clock_path.read_bytes()) == manifest['mixer_clock_include_sha256']
         clock_probe = clock_path.read_text()

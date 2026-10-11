@@ -6,7 +6,8 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ENGINE = ROOT / 'tools/engine9000/e9k-debugger'
+from amiga_decomp.project import selected_project
+ENGINE = selected_project().path('engine_root')
 ENGINE_SOURCE_REMOTE = 'git@github.com:retro-foundry/engine9000-public.git'
 ENGINE_SOURCE_BRANCH = 'fa18-interceptor'
 ENGINE_SOURCE_COMMIT = 'ace4c3a9553e7005ed32c6fee8817126a53a8887'

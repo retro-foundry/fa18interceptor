@@ -3,15 +3,28 @@
   "id": "fa18-interceptor",
   "title": "F/A-18 Interceptor",
   "config": "local/fa18.uae",
-  "engine_root": "tools/engine9000/e9k-debugger",
+  "engine_root": "../../tools/engine9000/e9k-debugger",
   "replay_engine": "build/engine9000-replay/e9k-debugger.exe",
   "system_dir": "local/system",
   "native_checkout": "native",
-  "python_paths": ["scripts", "tools/native"],
-  "former_roots": ["C:/Users/paula/Documents/Projects/fa18interceptor"],
+  "python_paths": [
+    "scripts",
+    "tools/native"
+  ],
+  "former_roots": [
+    "C:/Users/paula/Documents/Projects/fa18interceptor"
+  ],
   "memory": [
-    {"name": "chip", "start": 0, "size": 524288},
-    {"name": "slow", "start": 12582912, "size": 524288}
+    {
+      "name": "chip",
+      "start": 0,
+      "size": 524288
+    },
+    {
+      "name": "slow",
+      "start": 12582912,
+      "size": 524288
+    }
   ],
   "audio_observers": {
     "events": "original_audio_events",
@@ -19,13 +32,65 @@
     "samples": "original_audio_samples"
   },
   "artifact_policy": {
-    "build_roots": ["build", "port/build"],
-    "live_prefixes": ["ram-", "mission-frame-delta-", "original-frame-delta-"],
-    "disposable_executable_dirs": ["recomp"],
-    "canonical_prefixes": ["recomp/frames_shadow_"],
+    "build_roots": [
+      "build",
+      "port/build"
+    ],
+    "live_prefixes": [
+      "ram-",
+      "mission-frame-delta-",
+      "original-frame-delta-"
+    ],
+    "disposable_executable_dirs": [
+      "recomp"
+    ],
+    "canonical_prefixes": [
+      "recomp/frames_shadow_"
+    ],
     "live_executables": {
       "native_frame_body_oracle.exe": "mission-frame-delta-",
       "fa18_original_frame_delta_probe.exe": "original-frame-delta-"
     }
+  },
+  "toolchain": "local/toolchain.json",
+  "engine_source": "../../tools/engine9000-src",
+  "dma_capture_ranges": [
+    [
+      12780720,
+      12780801
+    ],
+    [
+      76736,
+      108736
+    ],
+    [
+      30446,
+      30447
+    ],
+    [
+      82534,
+      82535
+    ],
+    [
+      76736,
+      76737
+    ],
+    [
+      65574,
+      65575
+    ],
+    [
+      55,
+      56
+    ]
+  ],
+  "executable": "local/extracted/f18_interceptor",
+  "hunk_runtime_map": "analysis/hunk_runtime_resolved.json",
+  "disassembly_synthetic_base": 13107200,
+  "candidate_data_segments": {
+    "41": "analysis/model_geometry_boundaries.md",
+    "42": "analysis/model_geometry_boundaries.md",
+    "43": "analysis/model_geometry_boundaries.md",
+    "44": "analysis/model_geometry_boundaries.md"
   }
 }

@@ -3,6 +3,7 @@
 This checks ordered pointer/state/sample use, not beam-to-PCM timing or native
 handoff parity. Complete recording validation remains a prerequisite.
 """
+from amiga_decomp.project import FRAMEWORK_ROOT, selected_project
 import argparse
 import copy
 import hashlib
@@ -19,7 +20,7 @@ from check_original_audio_prefix import validate_prefix
 from check_original_audio_capture import reference_file, reference_bytes
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / 'tools/engine9000-src/ami9000/sources/src'
+SOURCE = selected_project().path('engine_source') / 'ami9000/sources/src'
 
 
 def sha(data):
@@ -140,7 +141,7 @@ def main():
     compiler = shutil.which('gcc')
     assert compiler
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    harness = ROOT / 'tools/native/original_audio_startup_fetch.c'
+    harness = FRAMEWORK_ROOT / 'tools/amiga/audio/original_audio_startup_fetch.c'
     with tempfile.TemporaryDirectory(prefix='original-startup-', dir=args.out.parent) as directory:
         work = Path(directory)
         (work / 'original_audio_startup.h').write_text(header)

@@ -13,7 +13,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-import coverage as cov
+import reconstruction_coverage as cov
 
 
 ROOT = Path(__file__).resolve().parents[1]
